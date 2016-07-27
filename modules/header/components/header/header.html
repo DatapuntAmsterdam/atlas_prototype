@@ -14,8 +14,11 @@
                     <div class="grid">
                         <div class="row">
                             <div class="col-sm-4">
-                                <button class="site-header__navigation__item">
+                                <button ng-if="!vm.userService.user.username"  class="site-header__navigation__item" ng-click="vm.showPage('login')">
                                     Inloggen
+                                </button>
+                                <button ng-if="vm.userService.user.username" class="site-header__navigation__item" ng-click="vm.showPage('login')">
+                                    {{vm.userService.user.username}}
                                 </button>
                             </div>
                             <div class="col-sm-4">

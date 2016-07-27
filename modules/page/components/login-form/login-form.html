@@ -1,0 +1,15 @@
+<p ng-if="vm.errorMessage">{{vm.errorMessage}}</p>
+
+<form ng-submit="vm.login()">
+    <fieldset>
+        <label>
+            Gebruikersnaam:
+            <input ng-model="vm.username" required>
+        </label>
+        <label>
+            Wachtwoord:
+            <input ng-model="vm.password" type="password" required>
+        </label>
+        <button type="submit">Inloggen</button>
+    </fieldset>
+</form>
