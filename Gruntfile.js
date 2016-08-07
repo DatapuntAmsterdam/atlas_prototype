@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
     grunt.initConfig({
-        babel: require('./grunt/babel'),
+        babel: require('./grunt/babel')(grunt),
         bower_concat: require('./grunt/bower-concat'),
         clean: require('./grunt/clean'),
         concat: require('./grunt/concat'),
