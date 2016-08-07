@@ -1,8 +1,5 @@
 var jsFiles = require('./grunt/config/js-files'),
-    jsKarmaFiles = [];
-
-jsKarmaFiles = jsKarmaFiles.concat(jsFiles.vendor);
-jsKarmaFiles = jsKarmaFiles.concat(jsFiles.atlas);
+    jsKarmaFiles = ['build/atlas.js'];
 
 jsKarmaFiles.push('bower_components/angular-mocks/angular-mocks.js');
 jsKarmaFiles.push('modules/**/*.test.js');
