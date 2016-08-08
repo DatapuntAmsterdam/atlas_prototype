@@ -8,6 +8,7 @@
     reducerFactory.$inject = [
         'urlReducers',
         'detailReducers',
+        'homeReducers',
         'layerSelectionReducers',
         'mapReducers',
         'pageReducers',
@@ -17,6 +18,7 @@
 
     function reducerFactory (urlReducers,
         detailReducers,
+        homeReducers,
         layerSelectionReducers,
         mapReducers,
         pageReducers,
@@ -27,6 +29,7 @@
             var actions = angular.merge(
                 urlReducers,
                 detailReducers,
+                homeReducers,
                 layerSelectionReducers,
                 mapReducers,
                 pageReducers,

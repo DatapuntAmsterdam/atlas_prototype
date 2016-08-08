@@ -10,6 +10,7 @@ module.exports = function (grunt) {
         jshint: require('./grunt/jshint'),
         karma: require('./grunt/karma'),
         ngtemplates: require('./grunt/angular-templates'),
+        postcss: require('./grunt/postcss'),
         sass: require('./grunt/sass'),
         sasslint: require('./grunt/sasslint'),
         tags: require('./grunt/script-link-tags'),
@@ -69,6 +70,7 @@ module.exports = function (grunt) {
         'bower_concat:css',
         'sass',
         'concat:css',
+        'postcss',
         'tags:css'
     ]);
 
@@ -102,6 +104,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-sass-lint');
     grunt.loadNpmTasks('grunt-script-link-tags');

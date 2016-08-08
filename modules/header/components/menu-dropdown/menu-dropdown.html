@@ -1,0 +1,30 @@
+<button class="site-header__menu__item site-header__menu__item--toggle" ng-click="toggleDropdown()" ng-class="{
+    'site-header__menu__item--toggle--active': isVisible
+    }">
+    Menu
+</button>
+
+<nav ng-if="isVisible" class="menu-dropdown">
+    <ul>
+        <li>
+            <atlas-print-button>
+                Printen
+            </atlas-print-button>
+        </li>
+        <li>
+            <atlas-terugmelden-button>
+                Terugmelden
+            </atlas-terugmelden-button>
+        </li>
+        <li>
+            <dp-link type="SHOW_PAGE" payload="'help'" class-name="site-header__menu__subitem">
+                Help
+            </dp-link>
+        </li>
+        <li>
+            <dp-link type="SHOW_PAGE" payload="'over-atlas'" class-name="site-header__menu__subitem">
+                Over Atlas
+            </dp-link>
+        </li>
+    </ul>
+</nav>

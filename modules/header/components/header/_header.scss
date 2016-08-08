@@ -1,18 +1,64 @@
+%menu-item {
+  padding-right: $base-whitespace * 2;
+  padding-left: $base-whitespace * 2;
+
+  background-color: inherit;
+  color: $primary-light;
+  font-size: $base-font-size;
+  line-height: $site-header-height;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .site-header {
   height: $site-header-height;
   background-color: $secondary-gray80;
 }
 
-.site-header__navigation {
-  text-align: center;
+.site-header__logo {
+  display: block;
+  cursor: pointer;
 }
 
-.site-header__navigation__item {
+.site-header__menu {
   height: $site-header-height;
-  background-color: inherit;
-  color: $primary-light;
-  font-family: $base-font-family;
-  font-size: $base-font-size;
-  text-decoration: underline;
-  cursor: pointer;
+  float: right;
+  font-size: 0;
+}
+
+.site-header__menu__item {
+  @extend %menu-item;
+  display: inline-block;
+
+  &:hover {
+    background-color: $secondary-gray60;
+  }
+}
+
+.site-header__menu__item--toggle {
+  &::after {
+    display: inline-block;
+    padding-left: $base-whitespace / 2;
+    transform: rotate(90deg); //Point downwards
+    content: "›";
+  }
+
+  &.site-header__menu__item--toggle--active {
+    background-color: $secondary-gray60;
+
+    &::after {
+      transform: rotate(-90deg); //Point upwards
+    }
+  }
+}
+
+.site-header__menu__subitem {
+  @extend %menu-item;
+  display: block;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background-color: $secondary-gray40;
+  }
 }

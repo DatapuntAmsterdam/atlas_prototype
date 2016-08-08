@@ -36,52 +36,58 @@
                 zoom: scope.mapState.zoom
             });
 
-            leafletMap = L.map(container, options);
+            /**
+             * [tg-937] Wait for the next digest cycle to ensure this directive is appended to the DOM. Without being
+             * added to the DOM it will have a width of 0 (zero) and that causes issues with centering the map.
+             */
+            scope.$applyAsync(function () {
+                leafletMap = L.map(container, options);
 
-            panning.initialize(leafletMap);
-            zoom.initialize(leafletMap);
-            variableWidth.initialize(container, leafletMap);
-            searchByClick.initialize(leafletMap);
+                panning.initialize(leafletMap);
+                zoom.initialize(leafletMap);
+                variableWidth.initialize(container, leafletMap);
+                searchByClick.initialize(leafletMap);
 
-            scope.$watch('mapState.viewCenter', function (viewCenter) {
-                panning.panTo(leafletMap, viewCenter);
-            });
-
-            scope.$watch('mapState.zoom', function (zoomLevel) {
-                zoom.setZoom(leafletMap, zoomLevel);
-            });
-
-            scope.$watch('mapState.baseLayer', function (baseLayer) {
-                layers.setBaseLayer(leafletMap, baseLayer);
-            });
-
-            scope.$watch('mapState.overlays', function (newOverlays, oldOverlays) {
-                getRemovedOverlays(newOverlays, oldOverlays).forEach(function (overlay) {
-                    layers.removeOverlay(leafletMap, overlay);
+                scope.$watch('mapState.viewCenter', function (viewCenter) {
+                    panning.panTo(leafletMap, viewCenter);
                 });
 
-                getAddedOverlays(newOverlays, oldOverlays).forEach(function (overlay) {
-                    layers.addOverlay(leafletMap, overlay);
+                scope.$watch('mapState.zoom', function (zoomLevel) {
+                    zoom.setZoom(leafletMap, zoomLevel);
                 });
+
+                scope.$watch('mapState.baseLayer', function (baseLayer) {
+                    layers.setBaseLayer(leafletMap, baseLayer);
+                });
+
+                scope.$watch('mapState.overlays', function (newOverlays, oldOverlays) {
+                    getRemovedOverlays(newOverlays, oldOverlays).forEach(function (overlay) {
+                        layers.removeOverlay(leafletMap, overlay);
+                    });
+
+                    getAddedOverlays(newOverlays, oldOverlays).forEach(function (overlay) {
+                        layers.addOverlay(leafletMap, overlay);
+                    });
+                });
+
+                scope.$watch('markers', function (newCollection, oldCollection) {
+                    if (angular.equals(newCollection, oldCollection)) {
+                        //Initialisation
+                        newCollection.forEach(function (item) {
+                            highlight.add(leafletMap, item);
+                        });
+                    } else {
+                        //Change detected
+                        getRemovedGeojson(newCollection, oldCollection).forEach(function (item) {
+                            highlight.remove(leafletMap, item);
+                        });
+
+                        getAddedGeojson(newCollection, oldCollection).forEach(function (item) {
+                            highlight.add(leafletMap, item);
+                        });
+                    }
+                }, true);
             });
-
-            scope.$watch('markers', function (newCollection, oldCollection) {
-                if (angular.equals(newCollection, oldCollection)) {
-                    //Initialisation
-                    newCollection.forEach(function (item) {
-                        highlight.add(leafletMap, item);
-                    });
-                } else {
-                    //Change detected
-                    getRemovedGeojson(newCollection, oldCollection).forEach(function (item) {
-                        highlight.remove(leafletMap, item);
-                    });
-
-                    getAddedGeojson(newCollection, oldCollection).forEach(function (item) {
-                        highlight.add(leafletMap, item);
-                    });
-                }
-            }, true);
         }
 
         function getAddedOverlays (newOverlays, oldOverlays) {

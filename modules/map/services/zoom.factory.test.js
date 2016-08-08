@@ -4,10 +4,12 @@ describe('The zoom factory', function () {
         zoom,
         store,
         ACTIONS,
+        panning,
         mockedLeafletMap,
         mockedScaleControl,
         mockedZoomControl,
-        moveEndCallback;
+        moveEndCallback,
+        mockedLocation;
 
     beforeEach(function () {
         angular.mock.module(
@@ -28,12 +30,13 @@ describe('The zoom factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _L_, _zoom_, _store_, _ACTIONS_) {
+        angular.mock.inject(function (_$rootScope_, _L_, _zoom_, _store_, _ACTIONS_, _panning_) {
             $rootScope = _$rootScope_;
             L = _L_;
             zoom = _zoom_;
             store = _store_;
             ACTIONS = _ACTIONS_;
+            panning = _panning_;
         });
 
         mockedLeafletMap = {
@@ -54,6 +57,8 @@ describe('The zoom factory', function () {
             addTo: function () {}
         };
 
+        mockedLocation = [50.789, 4.987];
+
         spyOn(L.control, 'scale').and.returnValue(mockedScaleControl);
         spyOn(mockedScaleControl, 'addTo');
 
@@ -63,6 +68,8 @@ describe('The zoom factory', function () {
         spyOn(mockedLeafletMap, 'on').and.callThrough();
         spyOn(mockedLeafletMap, 'setZoom');
         spyOn(store, 'dispatch');
+
+        spyOn(panning, 'getCurrentLocation').and.returnValue(mockedLocation);
     });
 
     it('adds a scale to the map', function () {
@@ -117,9 +124,16 @@ describe('The zoom factory', function () {
 
         //But store.dispatch is triggered during the next digest cycle
         $rootScope.$apply();
+
+        //The viewCenter will change when zooming in
+        expect(panning.getCurrentLocation).toHaveBeenCalledWith(mockedLeafletMap);
+
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.MAP_ZOOM,
-            payload: 6
+            payload: {
+                viewCenter: [50.789, 4.987],
+                zoom: 6
+            }
         });
     });
 });

@@ -159,14 +159,14 @@ describe('The atlas-search directive', function () {
             directive.find('.js-search-input').trigger('change');
 
             expect(directive.find('.search-form__autocomplete').length).toBe(1);
-            expect(directive.find('.search-form__autocomplete div:nth-child(1) h4').text()).toBe('Category A');
-            expect(directive.find('.search-form__autocomplete div:nth-child(1) li:nth-child(1)').text().trim())
+            expect(directive.find('.search-form__autocomplete div:nth-of-type(1) h4').text()).toBe('Category A');
+            expect(directive.find('.search-form__autocomplete div:nth-of-type(1) li:nth-child(1)').text().trim())
                 .toBe('Suggestion A1');
-            expect(directive.find('.search-form__autocomplete div:nth-child(1) li:nth-child(2)').text().trim())
+            expect(directive.find('.search-form__autocomplete div:nth-of-type(1) li:nth-child(2)').text().trim())
                 .toBe('Suggestion A2');
 
-            expect(directive.find('.search-form__autocomplete div:nth-child(2) h4').text()).toBe('Category B');
-            expect(directive.find('.search-form__autocomplete div:nth-child(2) li:nth-child(1)').text().trim())
+            expect(directive.find('.search-form__autocomplete div:nth-of-type(2) h4').text()).toBe('Category B');
+            expect(directive.find('.search-form__autocomplete div:nth-of-type(2) li:nth-child(1)').text().trim())
                 .toBe('Suggestion B1');
         });
 

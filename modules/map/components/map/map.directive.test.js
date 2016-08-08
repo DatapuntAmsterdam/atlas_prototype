@@ -77,7 +77,7 @@ describe('The dp-map directive', function () {
         };
     });
 
-    function getDirective (mapState, markers) {
+    function getDirective (mapState, markers, useRootScopeApply) {
         var directive,
             element,
             scope;
@@ -93,8 +93,24 @@ describe('The dp-map directive', function () {
         directive = $compile(element)(scope);
         scope.$apply();
 
+        if (angular.isUndefined(useRootScopeApply) || useRootScopeApply) {
+            $rootScope.$apply();
+        }
+
         return directive;
     }
+
+    it('doesn\'t initialize until the next digest cycle', function () {
+        /**
+         * This is needed to ensure that the map has a width. To have a width it needs to be appended to the DOM. And
+         * adding to the DOM happens the next digest cycle.
+         */
+        getDirective(mockedMapState, [], false);
+        expect(L.map).not.toHaveBeenCalled();
+
+        $rootScope.$apply();
+        expect(L.map).toHaveBeenCalled();
+    });
 
     it('creates a Leaflet map with options based on both the map state and mapConfig', function () {
         var directive,

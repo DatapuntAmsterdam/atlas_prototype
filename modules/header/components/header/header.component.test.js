@@ -1,8 +1,7 @@
 describe('The atlas-header component', function () {
     var $compile,
         $rootScope,
-        store,
-        ACTIONS;
+        user;
 
     beforeEach(function () {
         angular.mock.module(
@@ -11,17 +10,25 @@ describe('The atlas-header component', function () {
                 store: {
                     dispatch: function () {}
                 }
+            },
+            function ($provide) {
+                $provide.factory('dpLinkDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('atlasMenuDropdownDirective', function () {
+                    return {};
+                });
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _user_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
-            store = _store_;
-            ACTIONS = _ACTIONS_;
+            user = _user_;
         });
 
-        spyOn(store, 'dispatch');
+        spyOn(user, 'logout');
     });
 
     function getComponent (query) {
@@ -50,5 +57,38 @@ describe('The atlas-header component', function () {
         //With a query
         component = getComponent('I_AM_A_FAKE_QUERY');
         expect(component.find('atlas-search')[0].getAttribute('query')).toBe('I_AM_A_FAKE_QUERY');
+    });
+
+    describe('user state', function () {
+        it('when not logged in', function () {
+            var component;
+
+            spyOn(user, 'getStatus').and.returnValue({isLoggedIn: false});
+
+            component = getComponent('');
+
+            //Show the login button
+            expect(component.find('.site-header__menu dp-link').length).toBe(1);
+            expect(component.find('.site-header__menu dp-link').attr('type')).toBe('SHOW_PAGE');
+            expect(component.find('.site-header__menu dp-link').attr('payload')).toBe('\'login\'');
+            expect(component.find('.site-header__menu dp-link').attr('class-name')).toBe('site-header__menu__item');
+
+            //Hide the logout button
+            expect(component.find('.site-header__menu button.site-header__menu__item').length).toBe(0);
+        });
+
+        it('when logged in', function () {
+            var component;
+
+            spyOn(user, 'getStatus').and.returnValue({isLoggedIn: true});
+
+            component = getComponent('');
+
+            //Hide the login button
+            expect(component.find('.site-header__menu dp-link').length).toBe(0);
+
+            //Show the logout button
+            expect(component.find('.site-header__menu button.site-header__menu__item').length).toBe(1);
+        });
     });
 });

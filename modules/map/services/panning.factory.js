@@ -10,7 +10,8 @@
     function panningFactory ($rootScope, store, ACTIONS) {
         return {
             initialize: initialize,
-            panTo: panTo
+            panTo: panTo,
+            getCurrentLocation: getCurrentLocation
         };
 
         function initialize (leafletMap) {

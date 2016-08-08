@@ -1,55 +1,27 @@
 <header class="site-header">
     <div class="u-grid">
         <div class="u-row">
-            <div class="u-col-sm--4 u-pl-0">
-                <div class="site-header__logo">
+            <div class="u-col-sm--2 u-pl-0">
+                <dp-link type="SHOW_HOME" class-name="site-header__logo">
                     <img class="u-block" src="assets/atlas_logo.png" alt="Atlas logo">
-                </div>
+                </dp-link>
             </div>
-            <div class="u-col-sm--4">
+            <div class="u-col-sm--6">
                 <atlas-search query="{{vm.query}}"></atlas-search>
             </div>
-            <div class="u-col-sm--4">
+            <div class="u-col-sm--4 u-pr-2">
+                <nav class="site-header__menu">
+                    <dp-link ng-if="!vm.isLoggedIn()"
+                        type="SHOW_PAGE" payload="'login'" class-name="site-header__menu__item">
 
-                <nav>
-                    <div class="u-col-sm--4">
-                        <dp-link ng-if="!vm.isLoggedIn()"
-                            type="SHOW_PAGE" payload="'login'" class-name="site-header__navigation__item">
+                        Inloggen
+                    </dp-link>
 
-                            Inloggen
-                        </dp-link>
+                    <button ng-if="vm.isLoggedIn()" ng-click="vm.logout()" class="site-header__menu__item">
+                        Uitloggen
+                    </button>
 
-                        <div ng-if="vm.isLoggedIn()">
-                            <button ng-click="vm.logout()">Uitloggen</button>
-                        </div>
-                    </div>
-
-                    <div class="u-col-sm-4">
-                        <atlas-dropdown-menu label="Menu">
-                            <ul class="dropdown-menu">
-                                <li class="shareandextras__menu-item">
-                                    <atlas-print-button>
-                                        Printen
-                                    </atlas-print-button>
-                                </li>
-                                <li class="shareandextras__menu-item">
-                                    <atlas-terugmelden-button>
-                                        Terugmelden
-                                    </atlas-terugmelden-button>
-                                </li>
-                                <li class="shareandextras__menu-item">
-                                    <dp-link type="SHOW_PAGE" payload="'help'">
-                                        Help
-                                    </dp-link>
-                                </li>
-                                <li class="shareandextras__menu-item">
-                                    <dp-link type="SHOW_PAGE" payload="'over-atlas'">
-                                        Over Atlas
-                                    </dp-link>
-                                </li>
-                            </ul>
-                        </atlas-dropdown-menu>
-                    </div>
+                    <atlas-menu-dropdown></atlas-menu-dropdown>
                 </nav>
             </div>
         </div>

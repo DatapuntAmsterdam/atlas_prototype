@@ -24,5 +24,3 @@
         vm.logout = user.logout;
     }
 })();
-
-

@@ -15,7 +15,8 @@
             /*
             search: {
                 query: 'linnaeus',
-                location: [52.123, 4.789]
+                location: [52.123, 4.789],
+                category: null
             }
             */
             page: 'welkom',

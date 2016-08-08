@@ -75,4 +75,8 @@ describe('The panning factory', function () {
             payload: [52.123, 4.789]
         });
     });
+
+    it('exposes the getCurrentLocation function', function () {
+        expect(panning.getCurrentLocation(mockedLeafletMap)).toEqual([52.123, 4.789]);
+    });
 });

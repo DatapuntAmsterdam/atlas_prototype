@@ -85,7 +85,8 @@
         function mapZoomReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
-            newState.map.zoom = payload;
+            newState.map.viewCenter = payload.viewCenter;
+            newState.map.zoom = payload.zoom;
 
             return newState;
         }

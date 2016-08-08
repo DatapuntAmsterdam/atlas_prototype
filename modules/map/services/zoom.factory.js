@@ -3,9 +3,9 @@
         .module('dpMap')
         .factory('zoom', zoomFactory);
 
-    zoomFactory.$inject = ['$rootScope', 'L', 'store', 'ACTIONS', 'mapConfig'];
+    zoomFactory.$inject = ['$rootScope', 'L', 'store', 'ACTIONS', 'mapConfig', 'panning'];
 
-    function zoomFactory ($rootScope, L, store, ACTIONS, mapConfig) {
+    function zoomFactory ($rootScope, L, store, ACTIONS, mapConfig, panning) {
         return {
             initialize: initialize,
             setZoom: setZoom
@@ -19,7 +19,10 @@
                 $rootScope.$applyAsync(function () {
                     store.dispatch({
                         type: ACTIONS.MAP_ZOOM,
-                        payload: leafletMap.getZoom()
+                        payload: {
+                            viewCenter: panning.getCurrentLocation(leafletMap),
+                            zoom: leafletMap.getZoom()
+                        }
                     });
                 });
             });

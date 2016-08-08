@@ -1,20 +1,25 @@
 <form class="search-form" ng-submit="formSubmit($event)">
     <fieldset>
-        <div class="search-form__input">
-            <input
-                class="js-search-input"
-                type="text"
-                ng-model="query"
-                autocapitalize="off"
-                autocorrect="off"
-                autocomplete="off"
-                spellcheck="false"
-                ng-change="getSuggestions()"
-                ng-keydown="navigateSuggestions($event)"
-                ng-blur="removeSuggestions($event)">
-        </div>
+        <input
+            class="search-form__input js-search-input"
+            type="text"
+            ng-model="query"
+            autocapitalize="off"
+            autocorrect="off"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Zoek naar adressen, objecten enz..."
+            ng-change="getSuggestions()"
+            ng-keydown="navigateSuggestions($event)"
+            ng-blur="removeSuggestions($event)">
+
+        <button class="search-form__submit" type="submit">
+            <span class="u-sr-only">Zoek</span>
+        </button>
 
         <div ng-if="numberOfSuggestions" class="search-form__autocomplete">
+            <h3 class="search-form__autocomplete__tip">Enkele suggesties</h3>
+
             <div class="search-form__autocomplete__category" ng-repeat="category in suggestions">
                 <h4>{{category.label}}</h4>
                 <ul>
@@ -30,9 +35,5 @@
                 </ul>
             </div>
         </div>
-
-        <button class="search-form__submit" type="submit">
-            Zoek
-        </button>
     </fieldset>
 </form>

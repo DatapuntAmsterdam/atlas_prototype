@@ -25,6 +25,7 @@
             SHOW_LAYER_SELECTION: 'SHOW_LAYER_SELECTION',
             HIDE_LAYER_SELECTION: 'HIDE_LAYER_SELECTION',
 
+            SHOW_HOME: 'SHOW_HOME',
             SHOW_PAGE: 'SHOW_PAGE'
         });
 })();

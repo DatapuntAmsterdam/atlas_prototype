@@ -6,5 +6,5 @@ $site-header-height: 50px;
 $search-form-height: $site-header-height - $base-whitespace * 2;
 
 @import "components/header/header";
-@import "components/dropdown-menu/menu";
+@import "components/menu-dropdown/menu-dropdown";
 @import "components/search/search";

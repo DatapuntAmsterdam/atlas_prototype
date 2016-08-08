@@ -1,6 +1,6 @@
 @import "autocomplete/autocomplete";
 
-$submit-button-width: 60px;
+$submit-button-width: 30px;
 
 .search-form {
   padding-top: $base-whitespace;
@@ -8,21 +8,24 @@ $submit-button-width: 60px;
 }
 
 .search-form__input {
+  display: block;
   width: calc(100% - #{$submit-button-width});
+  height: $search-form-height;
+  padding-right: $base-whitespace;
+  padding-left: $base-whitespace;
   float: left;
+  outline: none;
+  background-color: $secondary-gray40;
+  color: $primary-light;
+  font-size: $base-font-size;
 
-  input {
-    display: block;
-    width: 100%;
-    height: $search-form-height;
-    padding-right: $base-whitespace / 2;
-    padding-left: $base-whitespace / 2;
-    outline: none;
-    background-color: $secondary-gray10;
-    font-size: $base-font-size;
+  &::placeholder {
+    color: $primary-light;
+  }
 
-    &:focus {
-      background-color: $primary-light;
+  &:focus {
+    & + .search-form__submit {
+      background-color: $primary-contrast;
     }
   }
 }
@@ -31,8 +34,14 @@ $submit-button-width: 60px;
   width: $submit-button-width;
   height: $search-form-height;
   float: left;
-  background-color: $primary-contrast;
+  background-color: $secondary-gray40;
+  background-image: url("assets/icon-search-submit.png");
+  background-repeat: no-repeat;
+  background-position: 5px 5px;
   color: $primary-light;
   font-size: $base-font-size;
-  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-contrast;
+  }
 }
