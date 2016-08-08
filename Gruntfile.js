@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
-    grunt.initConfig({
-        babel: require('./grunt/babel')(grunt),
+    var config = {
+        babel: require('./grunt/babel'),
         bower_concat: require('./grunt/bower-concat'),
         clean: require('./grunt/clean'),
         concat: require('./grunt/concat'),
@@ -14,7 +14,7 @@ module.exports = function (grunt) {
         sasslint: require('./grunt/sasslint'),
         tags: require('./grunt/script-link-tags'),
         watch: require('./grunt/watch')
-    });
+    };
 
     grunt.registerTask('build-develop', [
         'clean:build',
@@ -49,10 +49,17 @@ module.exports = function (grunt) {
         'bower_concat:js',
         'ngtemplates',
         'concat:jsAtlas',
+        'configureBabel',
         'babel',
         'concat:jsAll',
         'tags:js'
     ]);
+
+    grunt.registerTask('configureBabel', 'configures babel options', function () {
+        //This option has to be added after the source map generation (by concat:jsAtlas)
+        config.babel.options.inputSourceMap = grunt.file.readJSON('build/temp/concat-atlas.js.map');
+    });
+
 
 
     /**
@@ -80,6 +87,9 @@ module.exports = function (grunt) {
         'test-js',
         'test-css'
     ]);
+
+
+    grunt.initConfig(config);
 
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-babel');
