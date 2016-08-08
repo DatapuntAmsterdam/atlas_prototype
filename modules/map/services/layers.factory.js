@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-console.log('hoi');
+
     angular
         .module('dpMap')
         .factory('layers', layersFactory);
