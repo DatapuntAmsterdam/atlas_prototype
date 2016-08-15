@@ -1,0 +1,21 @@
+.c-loading-indicator--box {
+  position: absolute;
+  top: $base-whitespace * 2;
+  left: $base-whitespace;
+  padding: $base-whitespace / 2;
+  border: 1px solid $secondary-gray40;
+  background-color: $primary-light;
+  z-index: 2;
+}
+
+.c-loading-indicator__icon {
+  width: 20px;
+  height: 20px;
+  margin-right: $base-whitespace / 2;
+  vertical-align: middle;
+}
+
+.c-loading-indicator__text {
+  //Overruling side-effects from the base font settings here
+  line-height: 1 !important;
+}

@@ -6,7 +6,7 @@ describe('The geojson factory', function () {
         mockedMultiPolygon;
 
     beforeEach(function () {
-        angular.mock.module('atlasDetail');
+        angular.mock.module('dpMap');
 
         angular.mock.inject(function (_geojson_) {
             geojson = _geojson_;

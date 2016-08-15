@@ -9,6 +9,7 @@
                 zoom: 9,
                 highlight: null,
                 showLayerSelection: false,
+                isFullscreen: false,
                 isLoading: false
             },
             search: null,

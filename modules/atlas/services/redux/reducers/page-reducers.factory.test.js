@@ -55,5 +55,12 @@ describe('The pageReducers factory', function () {
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
         });
+
+        it('disables the full screen mode of the map', function () {
+            mockedState.map.isFullscreen = true;
+
+            output = pageReducers.SHOW_PAGE(mockedState, 'goodbye');
+            expect(output.map.isFullscreen).toBe(false);
+        });
     });
 });

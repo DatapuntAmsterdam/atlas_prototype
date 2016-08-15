@@ -35,11 +35,11 @@ $submit-button-width: 30px;
   height: $search-form-height;
   float: left;
   background-color: $secondary-gray40;
-  background-image: url("assets/icon-search-submit.png");
+  background-image: url("assets/icons/search.svg");
   background-repeat: no-repeat;
-  background-position: 5px 5px;
   color: $primary-light;
   font-size: $base-font-size;
+  cursor: pointer;
 
   &:hover {
     background-color: $primary-contrast;

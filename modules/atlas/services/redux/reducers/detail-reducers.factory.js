@@ -32,6 +32,7 @@
             newState.map.isLoading = true;
             newState.map.highlight = null;
             newState.map.showLayerSelection = false;
+            newState.map.isFullscreen = false;
 
             newState.search = null;
             newState.page = null;
@@ -49,11 +50,7 @@
         function showDetailReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
-            if (payload.location) {
-                newState.map.viewCenter = payload.location;
-            }
-
-            newState.detail.geometry = payload.geometry;
+            newState.detail.geometry = payload;
 
             newState.map.isLoading = false;
             newState.detail.isLoading = false;

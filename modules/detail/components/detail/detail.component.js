@@ -17,9 +17,7 @@
         'ACTIONS',
         'api',
         'endpointParser',
-        'geometry',
-        'geojson',
-        'crsConverter'
+        'geometry'
     ];
 
     function AtlasDetailController (
@@ -28,9 +26,7 @@
         ACTIONS,
         api,
         endpointParser,
-        geometry,
-        geojson,
-        crsConverter) {
+        geometry) {
 
         var vm = this;
 
@@ -43,18 +39,9 @@
                 vm.includeSrc = endpointParser.getTemplateUrl(endpoint);
 
                 geometry.getGeoJSON(endpoint).then(function (geometry) {
-                    if (angular.isObject(geometry)) {
-                        vm.location = crsConverter.rdToWgs84(geojson.getCenter(geometry));
-                    } else {
-                        vm.location = null;
-                    }
-
                     store.dispatch({
                         type: ACTIONS.SHOW_DETAIL,
-                        payload: {
-                            location: vm.location,
-                            geometry: geometry
-                        }
+                        payload: geometry
                     });
                 });
             });

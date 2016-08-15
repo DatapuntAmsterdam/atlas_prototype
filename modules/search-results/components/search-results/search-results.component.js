@@ -14,9 +14,9 @@
             controllerAs: 'vm'
         });
 
-    AtlasSearchResultsController.$inject = ['$scope', 'SEARCH_CONFIG', 'search', 'geosearch'];
+    AtlasSearchResultsController.$inject = ['$scope', 'SEARCH_CONFIG', 'search', 'geosearch', 'store', 'ACTIONS'];
 
-    function AtlasSearchResultsController ($scope, SEARCH_CONFIG, search, geosearch) {
+    function AtlasSearchResultsController ($scope, SEARCH_CONFIG, search, geosearch, store, ACTIONS) {
         var vm = this;
 
         /**
@@ -56,6 +56,11 @@
                 vm.isLoading = true;
 
                 geosearch.search(location).then(setSearchResults);
+
+                store.dispatch({
+                    type: ACTIONS.MAP_FULLSCREEN,
+                    payload: false
+                });
             }
         });
 

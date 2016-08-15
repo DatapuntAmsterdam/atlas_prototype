@@ -1,5 +1,8 @@
 <div class="js-leaflet-map leaflet-map"></div>
 
-<div style="position:absolute; z-index:1000;">
+<dp-loading-indicator is-loading="mapState.isLoading" use-delay="true" show-inline="false"></dp-loading-indicator>
+<dp-toggle-fullscreen is-fullscreen="mapState.isFullscreen"></dp-toggle-fullscreen>
+
+<div style="position:absolute; top:150px; z-index:1000;">
     <dp-link type="SHOW_LAYER_SELECTION">Toon kaartlagen</dp-link>
 </div>

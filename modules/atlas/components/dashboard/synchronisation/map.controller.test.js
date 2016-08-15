@@ -197,5 +197,47 @@ describe('The map controller', function () {
                 orientation: Math.PI
             }));
         });
+
+        it('sets useAutoFocus to true for detail page geometry (and false for everything else)', function () {
+            mockedState = {
+                search: {
+                    location: [52.1, 4.1]
+                },
+                detail: {
+                    geometry: 'FAKE_RD_GEOMETRY'
+                },
+                straatbeeld: {
+                    car: {
+                        location: [52.2, 4.2]
+                    },
+                    camera: {
+                        heading: Math.PI
+                    }
+                }
+            };
+
+            spyOn(store, 'getState').and.returnValue(mockedState);
+            controller = getController();
+
+            expect(controller.markers).toContain(jasmine.objectContaining({
+                id: 'search',
+                useAutoFocus: false
+            }));
+
+            expect(controller.markers).toContain(jasmine.objectContaining({
+                id: 'detail',
+                useAutoFocus: true
+            }));
+
+            expect(controller.markers).toContain(jasmine.objectContaining({
+                id: 'straatbeeld_orientation',
+                useAutoFocus: false
+            }));
+
+            expect(controller.markers).toContain(jasmine.objectContaining({
+                id: 'straatbeeld_person',
+                useAutoFocus: false
+            }));
+        });
     });
 });

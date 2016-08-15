@@ -59,6 +59,18 @@ describe('The detailReducers factory', function () {
             expect(output.page).toBeNull();
             expect(output.straatbeeld).toBeNull();
         });
+
+        it('disables the fullscreen mode off the map', function () {
+            var payload = 'bag/thing/123/',
+                inputState = angular.copy(defaultState),
+                output;
+
+            inputState.map.isFullscreen = true;
+
+            output = detailReducers.FETCH_DETAIL(inputState, payload);
+
+            expect(output.map.isFullscreen).toBe(false);
+        });
     });
 
     describe('SHOW_DETAIL', function () {
@@ -80,28 +92,7 @@ describe('The detailReducers factory', function () {
                 },
                 straatbeeld: null
             },
-            payload = {
-                location: [52.52, 4.4],
-                geometry: {some: 'object'}
-            };
-
-        it('centers the map', function () {
-            var output = detailReducers.SHOW_DETAIL(stateAfterFetchDetail, payload);
-
-            expect(output.map.viewCenter).toEqual([52.52, 4.4]);
-        });
-
-        it('keeps the old center of the map if the location is null', function () {
-            var output,
-                payloadWithoutLocation;
-
-            payloadWithoutLocation = angular.copy(payload);
-            payloadWithoutLocation.location = null;
-
-            output = detailReducers.SHOW_DETAIL(stateAfterFetchDetail, payloadWithoutLocation);
-
-            expect(output.map.viewCenter).toEqual([52.3719, 4.9012]);
-        });
+            payload = {some: 'object'};
 
         it('stores the geometry in the detail state', function () {
             var output = detailReducers.SHOW_DETAIL(stateAfterFetchDetail, payload);

@@ -17,6 +17,16 @@ describe('The detailReducers factory', function () {
 
             expect(output.map.showLayerSelection).toBe(true);
         });
+
+        it('disables the fullscreen mode', function () {
+            var output,
+                inputState = angular.copy(defaultState);
+
+            inputState.map.isFullscreen = true;
+            output = layerSelectionReducers.SHOW_LAYER_SELECTION(defaultState);
+
+            expect(output.map.isFullscreen).toBe(false);
+        });
     });
 
     describe('HIDE_LAYER_SELECTION', function () {

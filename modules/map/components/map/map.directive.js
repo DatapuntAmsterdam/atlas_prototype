@@ -44,9 +44,12 @@
                 leafletMap = L.map(container, options);
 
                 panning.initialize(leafletMap);
+                highlight.initialize();
                 zoom.initialize(leafletMap);
                 variableWidth.initialize(container, leafletMap);
                 searchByClick.initialize(leafletMap);
+
+                scope.leafletMap = leafletMap;
 
                 scope.$watch('mapState.viewCenter', function (viewCenter) {
                     panning.panTo(leafletMap, viewCenter);

@@ -1,8 +1,11 @@
 .marzipano-viewer {
   position: absolute;
-  top: 0;
+  top: $base-whitespace * 2;
   right: 0;
   bottom: 40px;
-  left: 0;
+  left: $base-whitespace;
+  border-width: 1px 1px 0;
+  border-style: solid;
+  border-color: $secondary-gray40;
   z-index: 1;
 }

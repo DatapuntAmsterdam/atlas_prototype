@@ -20,9 +20,15 @@ describe('The dp-map directive', function () {
                         someVariable: 4
                     }
                 },
+                highlight: {
+                    initialize: function () {},
+                    add: function () {},
+                    remove: function () {}
+                },
                 panning: {
                     initialize: function () {},
-                    panTo: function () {}
+                    panTo: function () {},
+                    setOption: function () {}
                 },
                 zoom: {
                     initialize: function () {},
@@ -34,6 +40,10 @@ describe('The dp-map directive', function () {
             },
             function ($provide) {
                 $provide.factory('dpLinkDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpToggleFullscreenDirective', function () {
                     return {};
                 });
             }
@@ -59,11 +69,13 @@ describe('The dp-map directive', function () {
         spyOn(layers, 'addOverlay');
         spyOn(layers, 'removeOverlay');
 
+        spyOn(highlight, 'initialize');
         spyOn(highlight, 'add');
         spyOn(highlight, 'remove');
 
         spyOn(panning, 'initialize');
         spyOn(panning, 'panTo');
+        spyOn(panning, 'setOption');
         spyOn(zoom, 'initialize');
         spyOn(zoom, 'setZoom');
         spyOn(variableWidth, 'initialize');
@@ -73,6 +85,7 @@ describe('The dp-map directive', function () {
             baseLayer: 'topografie',
             overlays: [],
             viewCenter: [52.789, 4.123],
+            isFullscreen: false,
             zoom: 12
         };
     });
@@ -178,7 +191,14 @@ describe('The dp-map directive', function () {
         });
     });
 
-    describe('has markers which', function () {
+    describe('has highlight options', function () {
+        it('that gets a call to .initialize() so it can configure Leaflet variables', function () {
+            expect(highlight.initialize).not.toHaveBeenCalled();
+
+            getDirective(mockedMapState, []);
+            expect(highlight.initialize).toHaveBeenCalled();
+        });
+
         it('can be added on initialisation', function () {
             getDirective(mockedMapState, [{id: 'FAKE_HIGHLIGHT_ITEM_A'}, {id: 'FAKE_HIGHLIGHT_ITEM_B'}]);
 
@@ -206,7 +226,6 @@ describe('The dp-map directive', function () {
             $rootScope.$apply();
 
             expect(highlight.remove).toHaveBeenCalledWith('I_AM_A_FAKE_LEAFLET_MAP', {id: 'FAKE_HIGHLIGHT_ITEM_B'});
-
         });
 
         it('deletes and re-adds changed icons', function () {
@@ -222,7 +241,11 @@ describe('The dp-map directive', function () {
             expect(highlight.remove).not.toHaveBeenCalled();
 
             //Change the marker
-            highlightItems[0].geometry = 'FAKE_GEOMETRY_B';
+            highlightItems.length = 0;
+            highlightItems.push({
+                id: 'FAKE_HIGHLIGHT_ITEM_A',
+                geometry: 'FAKE_GEOMETRY_B'
+            });
             $rootScope.$apply();
 
             expect(highlight.remove).toHaveBeenCalledWith('I_AM_A_FAKE_LEAFLET_MAP', {

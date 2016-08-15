@@ -13,6 +13,7 @@
             MAP_REMOVE_OVERLAY: 'MAP_REMOVE_OVERLAY',
             MAP_PAN: 'MAP_PAN',
             MAP_ZOOM: 'MAP_ZOOM',
+            MAP_FULLSCREEN: 'MAP_FULLSCREEN',
 
             FETCH_DETAIL: 'FETCH_DETAIL',
             SHOW_DETAIL: 'SHOW_DETAIL',

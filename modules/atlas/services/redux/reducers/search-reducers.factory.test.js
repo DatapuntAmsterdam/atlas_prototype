@@ -56,6 +56,17 @@ describe('The search-reducers factory', function () {
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
         });
+
+        it('disables the fullscreen mode of the map', function () {
+            var inputState = angular.copy(defaultState),
+                output;
+
+            inputState.map.isFullscreen = true;
+
+            output = searchReducers.SHOW_SEARCH_RESULTS_BY_QUERY(inputState, 'linnaeus');
+
+            expect(output.map.isFullscreen).toBe(false);
+        });
     });
 
     describe('SHOW_SEARCH_RESULTS_BY_CLICK', function () {
@@ -102,6 +113,35 @@ describe('The search-reducers factory', function () {
             expect(output.page).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
+        });
+
+        it('changes the viewCenter (only when) fullscreen mode is enabled', function () {
+            var inputState = angular.copy(defaultState),
+                output;
+
+            //With fullscreen disabled, it doesn't change the viewCenter
+            inputState.map.viewCenter = [52.123, 4.789];
+            inputState.map.isFullscreen = false;
+            output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
+
+            expect(output.map.viewCenter).toEqual([52.123, 4.789]);
+
+            //With fullscreen enabled, it changes the viewCenter
+            inputState.map.isFullscreen = true;
+            output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
+
+            expect(output.map.viewCenter).toEqual([52.001, 4.002]);
+        });
+
+        it('disables the fullscreen mode of the map', function () {
+            var inputState = angular.copy(defaultState),
+                output;
+
+            inputState.map.isFullscreen = true;
+
+            output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
+
+            expect(output.map.isFullscreen).toBe(false);
         });
     });
 

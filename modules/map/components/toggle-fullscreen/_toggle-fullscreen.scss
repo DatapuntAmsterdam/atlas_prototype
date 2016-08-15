@@ -1,0 +1,16 @@
+.toggle-fullscreen {
+  position: absolute;
+  top: $base-whitespace * 2;
+  right: $base-whitespace;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.toggle-fullscreen__icon {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

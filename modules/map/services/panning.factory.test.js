@@ -47,7 +47,7 @@ describe('The panning factory', function () {
     it('can pan to a location', function () {
         panning.panTo(mockedLeafletMap, mockedLocation);
 
-        expect(mockedLeafletMap.panTo).toHaveBeenCalledWith(mockedLocation);
+        expect(mockedLeafletMap.panTo).toHaveBeenCalledWith(mockedLocation, jasmine.any(Object));
     });
 
     it('prevents infinite loops; it won\'t fire if the new location is equal to the current location', function () {
@@ -74,6 +74,12 @@ describe('The panning factory', function () {
             type: ACTIONS.MAP_PAN,
             payload: [52.123, 4.789]
         });
+    });
+
+    it('has disabled animations', function () {
+        //By default animations are disabled
+        panning.panTo(mockedLeafletMap, [52.1, 4.1]);
+        expect(mockedLeafletMap.panTo).toHaveBeenCalledWith([52.1, 4.1], {animate: false});
     });
 
     it('exposes the getCurrentLocation function', function () {

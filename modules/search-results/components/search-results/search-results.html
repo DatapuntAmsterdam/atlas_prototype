@@ -1,3 +1,5 @@
+<dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
+
 <div ng-if="!vm.isLoading" class="u-row">
     <div class="u-pt-2 u-pb-2" ng-class="{
         'u-col-sm--12': !vm.location,
@@ -64,7 +66,8 @@
                     Toon meer
                 </button>
 
-                <span ng-if="vm.isLoadMoreLoading">HIER KOMT OOK EEN LOADING INDICATOR</span>
+                <dp-loading-indicator is-loading="vm.isLoadMoreLoading" use-delay="true" show-inline="true">
+                </dp-loading-indicator>
             </div>
         </div>
 
@@ -78,3 +81,4 @@
         <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
     </div>
 </div>
+

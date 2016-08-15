@@ -1,14 +1,18 @@
-<div class="dashboard">
-    <div class="dashboard__heading">
+<div class="c-dashboard">
+    <div class="c-dashboard__heading">
         <div ng-controller="HeaderController as vm">
             <atlas-header query="{{vm.query}}"></atlas-header>
         </div>
     </div>
-    <div class="dashboard__content">
+    <div class="c-dashboard__content u-pl-1"
+        ng-class="{
+            'u-pr-2': !vm.isRightColumnScrollable
+        }">
+
         <div class="u-grid u-height-100">
             <div class="u-row u-height-100">
                 <div ng-if="vm.sizeLeftColumn"
-                    class="u-col-sm--{{vm.sizeLeftColumn}} dashboard__content__scrollable u-height-100">
+                    class="u-col-sm--{{vm.sizeLeftColumn}} c-dashboard__content--scrollable u-height-100">
 
                     <div ng-controller="LayerSelectionController as vm">
                         <atlas-layer-selection
@@ -31,7 +35,10 @@
                 </div>
 
                 <div ng-if="vm.sizeRightColumn"
-                    class="u-col-sm--{{vm.sizeRightColumn}} dashboard__content__scrollable u-height-100">
+                    class="u-col-sm--{{vm.sizeRightColumn}} u-height-100"
+                    ng-class="{
+                        'c-dashboard__content--scrollable u-pr-2': vm.isRightColumnScrollable
+                    }">
 
                     <div ng-if="vm.showDetail" ng-controller="DetailController as vm">
                         <atlas-detail

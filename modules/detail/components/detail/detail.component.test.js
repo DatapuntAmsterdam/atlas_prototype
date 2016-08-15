@@ -7,8 +7,6 @@ describe('the atlas-detail component', function() {
         api,
         endpointParser,
         geometry,
-        geojson,
-        crsConverter,
         mockedGeometryPoint = {type: 'Point', coordinates: 'FAKE_NUMMERAANDUIDING_POINT'},
         mockedGeometryMultiPolygon = {type: 'MultiPolygon', coordinates: 'FAKE_KADASTRAAL_OBJECT_MULTIPOLYGON'};
 
@@ -74,32 +72,6 @@ describe('the atlas-detail component', function() {
 
                         return q.promise;
                     }
-                },
-                geojson: {
-                    getCenter: function (geometry) {
-                        var center;
-
-                        if (geometry.type === 'Point') {
-                            center = 'FAKE_NUMMERAANDUIDING_CENTER';
-                        } else if (geometry.type === 'MultiPolygon') {
-                            center = 'FAKE_KADASTRAAL_OBJECT_CENTER';
-                        }
-
-                        return center;
-                    }
-                },
-                crsConverter: {
-                    rdToWgs84: function (rdCoordinates) {
-                        var wgs84Coordinates;
-
-                        if (rdCoordinates === 'FAKE_NUMMERAANDUIDING_CENTER') {
-                            wgs84Coordinates = [52.741, 4.852];
-                        } else if (rdCoordinates === 'FAKE_KADASTRAAL_OBJECT_CENTER') {
-                            wgs84Coordinates = [52.852, 4.741];
-                        }
-
-                        return wgs84Coordinates;
-                    }
                 }
             },
             function ($provide) {
@@ -117,9 +89,7 @@ describe('the atlas-detail component', function() {
             _ACTIONS_,
             _api_,
             _endpointParser_,
-            _geometry_,
-            _geojson_,
-            _crsConverter_) {
+            _geometry_) {
                 $compile = _$compile_;
                 $rootScope = _$rootScope_;
                 $q = _$q_;
@@ -128,8 +98,6 @@ describe('the atlas-detail component', function() {
                 api = _api_;
                 endpointParser = _endpointParser_;
                 geometry = _geometry_;
-                geojson = _geojson_;
-                crsConverter = _crsConverter_;
             }
         );
 
@@ -170,15 +138,12 @@ describe('the atlas-detail component', function() {
         });
     });
 
-    it('triggers the SHOW_DETAIL action with a location and geometry', function () {
+    it('triggers the SHOW_DETAIL action with the geometry as it\'s payload', function () {
         getComponent('http://www.fake-endpoint.com/bag/nummeraanduiding/123/', false);
 
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_DETAIL,
-            payload: {
-                location: [52.741, 4.852],
-                geometry: mockedGeometryPoint
-            }
+            payload: mockedGeometryPoint
         });
     });
 
@@ -203,10 +168,7 @@ describe('the atlas-detail component', function() {
         expect(store.dispatch).toHaveBeenCalledTimes(1);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_DETAIL,
-            payload: {
-                location: [52.741, 4.852],
-                geometry: mockedGeometryPoint
-            }
+            payload: mockedGeometryPoint
         });
 
         //Change the endpoint
@@ -222,10 +184,7 @@ describe('the atlas-detail component', function() {
         expect(store.dispatch).toHaveBeenCalledTimes(2);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_DETAIL,
-            payload: {
-                location: [52.852, 4.741],
-                geometry: mockedGeometryMultiPolygon
-            }
+            payload: mockedGeometryMultiPolygon
         });
     });
 
@@ -236,10 +195,7 @@ describe('the atlas-detail component', function() {
 
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_DETAIL,
-            payload: {
-                location: null,
-                geometry: null
-            }
+            payload: null
         });
     });
 });

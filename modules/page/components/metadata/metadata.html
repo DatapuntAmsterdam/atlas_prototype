@@ -1,0 +1,21 @@
+<dp-loading-indicator is-loading="vm.isLoading" use-delay="false" show-inline="true"></dp-loading-indicator>
+
+<table ng-if="vm.sources" class="o-table">
+    <thead>
+        <tr>
+            <th scope="col">Thema</th>
+            <th scope="col">Actualisatie (aanmaak producten)</th>
+            <th scope="col">Versie datum gegevens (peildatum verwerkt product)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="source in vm.sources" ng-if="source.title">
+            <td>
+                <span ng-if="source.group">{{source.group}} -</span>
+                {{source.title}}
+            </td>
+            <td>{{source.update_frequency}}</td>
+            <td>{{source.data_modified_date}}</td>
+        </tr>
+    </tbody>
+</table>

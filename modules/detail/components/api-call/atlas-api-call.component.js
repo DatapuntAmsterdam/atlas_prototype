@@ -19,6 +19,9 @@
     function AtlasApiCallController ($scope, api) {
         var vm = this;
 
+        vm.isLoading = true;
+        vm.useLoadingIndicatorDelay = false;
+
         $scope.$watch('vm.endpoint', function (endpoint) {
             if (endpoint) {
                 if (vm.useBrkObjectExpanded) {
@@ -26,12 +29,15 @@
                 }
 
                 vm.apiData = {};
+                vm.isLoading = true;
 
                 //Load the first page
                 loadData(endpoint);
 
                 //Load pages 2-n
                 vm.loadMore = function () {
+                    vm.isLoading = true;
+
                     loadData(vm.apiData.next);
                 };
             }
@@ -52,6 +58,9 @@
                 } else {
                     vm.apiData.results = response;
                 }
+
+                vm.isLoading = false;
+                vm.useLoadingIndicatorDelay = true;
             });
         }
     }
