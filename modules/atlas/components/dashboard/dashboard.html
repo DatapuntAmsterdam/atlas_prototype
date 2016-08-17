@@ -1,7 +1,7 @@
 <div class="c-dashboard">
     <div class="c-dashboard__heading">
-        <div ng-controller="HeaderController as vm">
-            <atlas-header query="{{vm.query}}"></atlas-header>
+        <div ng-controller="HeaderController as header">
+            <atlas-header query="{{header.query}}" is-print-mode="vm.isPrintMode"></atlas-header>
         </div>
     </div>
     <div class="c-dashboard__content u-padding__left--1"

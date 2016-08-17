@@ -44,6 +44,7 @@
             }
 
             vm.sizeRightColumn = 12 - vm.sizeLeftColumn - vm.sizeMiddleColumn;
+            vm.isPrintMode = state.isPrintMode;
         }
     }
 })();
