@@ -22,55 +22,63 @@
         function setLayout () {
             var state = store.getState();
 
-            vm.showLayerSelection = state.map.showLayerSelection;
-            vm.showPage = !vm.showLayerSelection && angular.isString(state.page);
-            vm.showDetail = angular.isObject(state.detail);
-            vm.showStraatbeeld = angular.isObject(state.straatbeeld);
-            vm.showSearchResults = angular.isObject(state.search) &&
-                (angular.isString(state.search.query) || angular.isArray(state.search.location));
-
-            vm.isRightColumnScrollable = !state.map.isFullscreen &&
-                (vm.showPage || vm.showDetail || vm.showSearchResults);
-
             vm.isPrintMode = state.isPrintMode;
-            console.log('isPrintMode', vm.isPrintMode);
-            if (!vm.isPrintMode) {
-                if (state.map.isFullscreen) {
-                    vm.sizeLeftColumn = 0;
-                    vm.sizeMiddleColumn = 12;
-                } else if (vm.showLayerSelection) {
-                    vm.sizeLeftColumn = 8;
-                    vm.sizeMiddleColumn = 4;
+            vm.visibility = determineVisibility(state);
+            
+            vm.isRightColumnScrollable = !vm.isPrintMode && !state.map.isFullscreen &&
+                (vm.visibility.page || vm.visibility.detail || vm.visibility.searchResults);
+
+            vm.columnSizes = determineColumnSizes(vm.visibility, state.map.isFullscreen, vm.isPrintMode);
+        }
+        
+        function determineVisibility (state) {
+            return {
+                layerSelection: state.map.showLayerSelection,
+                page: !vm.showLayerSelection && angular.isString(state.page),
+                detail: angular.isObject(state.detail),
+                straatbeeld: angular.isObject(state.straatbeeld),
+                searchResults: angular.isObject(state.search) &&
+                    (angular.isString(state.search.query) || angular.isArray(state.search.location))
+            };
+        }
+        
+        function determineColumnSizes (visibility, hasFullscreenMap, isPrintMode) {
+            var columnSizes = {};
+            
+            if (!isPrintMode) {
+                if (hasFullscreenMap) {
+                    columnSizes.left = 0;
+                    columnSizes.middle = 12;
+                } else if (visibility.layerSelection) {
+                    columnSizes.left = 8;
+                    columnSizes.middle = 4;
                 } else {
-                    vm.sizeLeftColumn = 0;
-                    vm.sizeMiddleColumn = 4;
+                    columnSizes.left = 0;
+                    columnSizes.middle = 4;
                 }
 
-                vm.sizeRightColumn = 12 - vm.sizeLeftColumn - vm.sizeMiddleColumn;
+                columnSizes.right = 12 - columnSizes.left - columnSizes.middle;
             } else {
-                //Column widths in print mode
-                if (state.map.isFullscreen) {
-                    vm.sizeLeftColumn = 0;
-                    vm.sizeMiddleColumn = 12;
-                    vm.sizeRightColumn = 0;
-                } else if (vm.showPage || vm.showSearchResults) {
-                    vm.sizeLeftColumn = 0;
-                    vm.sizeMiddleColumn = 0;
-                    vm.sizeRightColumn = 12;
-                } else if (vm.showLayerSelection) {
-                    vm.sizeLeftColumn = 12;
-                    vm.sizeMiddleColumn = 0;
-                    vm.sizeRightColumn = 0;
+                if (hasFullscreenMap) {
+                    columnSizes.left = 0;
+                    columnSizes.middle = 12;
+                    columnSizes.right = 0;
+                } else if (visibility.page || visibility.searchResults) {
+                    columnSizes.left = 0;
+                    columnSizes.middle = 0;
+                    columnSizes.right = 12;
+                } else if (visibility.layerSelection) {
+                    columnSizes.left = 12;
+                    columnSizes.middle = 0;
+                    columnSizes.right = 0;
                 } else {
-                    vm.sizeLeftColumn = 0;
-                    vm.sizeMiddleColumn = 12;
-                    vm.sizeRightColumn = 12;
+                    columnSizes.left = 0;
+                    columnSizes.middle = 12;
+                    columnSizes.right = 12;
                 }
             }
 
-            console.log('left', vm.sizeLeftColumn);
-            console.log('middle', vm.sizeMiddleColumn);
-            console.log('right', vm.sizeRightColumn);
+            return columnSizes;
         }
     }
 })();

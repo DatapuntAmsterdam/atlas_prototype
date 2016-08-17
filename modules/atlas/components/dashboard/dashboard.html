@@ -12,8 +12,8 @@
 
         <div class="u-grid" ng-class="{'u-height-100': !vm.isPrintMode}">
             <div class="u-row" ng-class="{'u-height-100': !vm.isPrintMode}">
-                <div ng-if="vm.sizeLeftColumn"
-                    class="u-col-sm--{{vm.sizeLeftColumn}} qa-dashboard__content__column--left"
+                <div ng-if="vm.columnSizes.left"
+                    class="u-col-sm--{{vm.columnSizes.left}} qa-dashboard__content__column--left"
                     ng-class="{
                         'u-padding__right--0 u-padding__left--0': vm.isPrintMode,
                         'u-height-100': !vm.isPrintMode
@@ -32,8 +32,8 @@
                     </div>
                 </div>
 
-                <div ng-if="vm.sizeMiddleColumn"
-                    class="u-col-sm--{{vm.sizeMiddleColumn}} u-padding__left--0 qa-dashboard__content__column--middle"
+                <div ng-if="vm.columnSizes.middle"
+                    class="u-col-sm--{{vm.columnSizes.middle}} u-padding__left--0 qa-dashboard__content__column--middle"
                     ng-class="{
                         'u-padding__right--0': vm.isPrintMode,
                         'u-height-100': !vm.isPrintMode
@@ -48,26 +48,26 @@
                     </div>
                 </div>
 
-                <div ng-if="vm.sizeRightColumn"
-                    class="u-col-sm--{{vm.sizeRightColumn}} qa-dashboard__content__column--right"
+                <div ng-if="vm.columnSizes.right"
+                    class="u-col-sm--{{vm.columnSizes.right}} qa-dashboard__content__column--right"
                     ng-class="{
                         'u-height-100': !vm.isPrintMode,
                         'c-dashboard__content--scrollable u-padding__right--2': !vm.isPrintMode && vm.isRightColumnScrollable,
                         'u-padding__right--0 u-padding__left--0': vm.isPrintMode
                     }">
 
-                    <div ng-if="vm.showDetail" ng-controller="DetailController as vm">
+                    <div ng-if="vm.visibility.detail" ng-controller="DetailController as vm">
                         <atlas-detail
                             endpoint="{{vm.endpoint}}"
                             is-loading="vm.isLoading">
                         </atlas-detail>
                     </div>
 
-                    <div ng-if="vm.showPage" ng-controller="PageController as vm">
+                    <div ng-if="vm.visibility.page" ng-controller="PageController as vm">
                         <atlas-page name="{{vm.pageName}}"></atlas-page>
                     </div>
 
-                    <div ng-if="vm.showSearchResults" ng-controller="SearchResultsController as vm">
+                    <div ng-if="vm.visibility.searchResults" ng-controller="SearchResultsController as vm">
                         <atlas-search-results
                             query="{{vm.query}}"
                             location="vm.location"
@@ -76,7 +76,7 @@
                         </atlas-search-results>
                     </div>
 
-                    <div ng-if="vm.showStraatbeeld" ng-controller="StraatbeeldController as vm">
+                    <div ng-if="vm.visibility.straatbeeld" ng-controller="StraatbeeldController as vm">
                         <dp-straatbeeld state="vm.straatbeeld"></dp-straatbeeld>
                     </div>
                 </div>
