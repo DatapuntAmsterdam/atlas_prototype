@@ -3,9 +3,9 @@
         .module('atlas')
         .directive('atlasPrintState', AtlasPrintStateDirective);
 
-    AtlasPrintStateDirective.$inject = ['$rootScope', '$window'];
+    AtlasPrintStateDirective.$inject = ['$timeout', '$window', '$document'];
 
-    function AtlasPrintStateDirective ($rootScope, $window) {
+    function AtlasPrintStateDirective ($timeout, $window, $document) {
         return {
             restrict: 'A',
             scope: {
@@ -14,16 +14,14 @@
             link: linkFunction
         };
 
-        function linkFunction (scope, element) {
+        function linkFunction (scope) {
             scope.$watch('isPrintMode', function (isPrintMode) {
-                if (isPrintMode) {
-                    element.addClass('is-print-mode');
+                var html = angular.element($document[0].querySelector('html'));
 
-                    $rootScope.$applyAsync(function () {
-                        //$window.print();
-                    });
+                if (isPrintMode) {
+                    html.addClass('is-print-mode');
                 } else {
-                    element.removeClass('is-print-mode');
+                    html.removeClass('is-print-mode');
                 }
             });
         }

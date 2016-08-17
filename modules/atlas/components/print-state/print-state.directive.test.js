@@ -33,40 +33,31 @@ describe('The atlas-print-state directive', function () {
         return directive;
     }
 
-    it('adds a class when atlas-print-state becomes true', function () {
+    it('adds a class to the <html> element when atlas-print-state becomes true', function () {
         var directive = getDirective(false),
+            htmlElement = angular.element(document.querySelector('html')),
             scope = directive.isolateScope();
 
-        expect(directive.hasClass('is-print-mode')).toBe(false);
+        expect(htmlElement.hasClass('is-print-mode')).toBe(false);
 
         //Trigger the watch
         scope.isPrintMode = true;
         scope.$apply();
 
-        expect(directive.hasClass('is-print-mode')).toBe(true);
+        expect(htmlElement.hasClass('is-print-mode')).toBe(true);
     });
 
-    it('removes a class when atlas-print-state becomes false', function () {
+    it('removes a class from the <html> element when atlas-print-state becomes false', function () {
         var directive = getDirective(true),
+            htmlElement = angular.element(document.querySelector('html')),
             scope = directive.isolateScope();
 
-        expect(directive.hasClass('is-print-mode')).toBe(true);
+        expect(htmlElement.hasClass('is-print-mode')).toBe(true);
 
         //Trigger the watch
         scope.isPrintMode = false;
         scope.$apply();
 
-        expect(directive.hasClass('is-print-mode')).toBe(false);
-    });
-
-    it('triggers a call to window.print() when the print mode is enabled', function () {
-        getDirective(true);
-
-        //Not directly
-        expect($window.print).not.toHaveBeenCalled();
-
-        //But after the next digest cycle to make sure the state class has been added first
-        $rootScope.$apply();
-        expect($window.print).toHaveBeenCalled();
+        expect(htmlElement.hasClass('is-print-mode')).toBe(false);
     });
 });
