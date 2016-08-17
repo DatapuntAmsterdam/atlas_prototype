@@ -28,6 +28,6 @@
 @import "components/loading-indicator/loading-indicator";
 @import "components/panel/panel";
 
-//@media ("print") {
-@import "styles/base/reset-print";
-//}
+.is-print-mode {
+  @import "styles/base/reset-print";
+}
