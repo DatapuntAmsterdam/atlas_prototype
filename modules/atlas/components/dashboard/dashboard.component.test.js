@@ -27,6 +27,9 @@ describe('The dashboard component', function () {
             $provide.factory('dpStraatbeeldDirective', function(){
                 return {};
             });
+            $provide.factory('atlasPrintStateDirective', function(){
+                return {};
+            });
         });
 
         angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _DEFAULT_STATE_) {
@@ -298,6 +301,40 @@ describe('The dashboard component', function () {
 
             //It is not scrollable
             expect(columns[0].getAttribute('class')).not.toContain('c-dashboard__content--scrollable');
+        });
+    });
+
+    describe('the print state is communicated to atlas-print-state', function () {
+        var component,
+            scope,
+            mockedState;
+
+        beforeEach(function () {
+            mockedState = angular.copy(defaultState);
+        });
+
+        it('can be disabled', function () {
+            mockedState.isPrintMode = false;
+            spyOn(store, 'getState').and.returnValue(mockedState);
+
+            component = getComponent();
+            scope = component.isolateScope();
+
+            expect(component.find('.c-dashboard').attr('atlas-print-state')).toBeDefined();
+            expect(component.find('.c-dashboard').attr('is-print-mode')).toBe('vm.isPrintMode');
+            expect(scope.vm.isPrintMode).toBe(false);
+        });
+
+        it('can be enabled', function () {
+            mockedState.isPrintMode = true;
+            spyOn(store, 'getState').and.returnValue(mockedState);
+
+            component = getComponent();
+            scope = component.isolateScope();
+
+            expect(component.find('.c-dashboard').attr('atlas-print-state')).toBeDefined();
+            expect(component.find('.c-dashboard').attr('is-print-mode')).toBe('vm.isPrintMode');
+            expect(scope.vm.isPrintMode).toBe(true);
         });
     });
 });
