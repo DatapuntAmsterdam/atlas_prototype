@@ -1,5 +1,10 @@
 html,
 body {
   height: auto;
-  background-color: $primary-contrast;
+}
+
+body {
+  width: 800px;
+  margin-right: auto;
+  margin-left: auto;
 }

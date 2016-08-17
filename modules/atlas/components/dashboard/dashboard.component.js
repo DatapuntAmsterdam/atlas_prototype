@@ -33,7 +33,7 @@
                 (vm.showPage || vm.showDetail || vm.showSearchResults);
 
             vm.isPrintMode = state.isPrintMode;
-
+            console.log('isPrintMode', vm.isPrintMode);
             if (!vm.isPrintMode) {
                 if (state.map.isFullscreen) {
                     vm.sizeLeftColumn = 0;
@@ -59,14 +59,18 @@
                     vm.sizeRightColumn = 12;
                 } else if (vm.showLayerSelection) {
                     vm.sizeLeftColumn = 12;
-                    vm.sideMiddleColumn = 0;
+                    vm.sizeMiddleColumn = 0;
                     vm.sizeRightColumn = 0;
                 } else {
                     vm.sizeLeftColumn = 0;
-                    vm.sideMiddleColumn = 12;
+                    vm.sizeMiddleColumn = 12;
                     vm.sizeRightColumn = 12;
                 }
             }
+
+            console.log('left', vm.sizeLeftColumn);
+            console.log('middle', vm.sizeMiddleColumn);
+            console.log('right', vm.sizeRightColumn);
         }
     }
 })();

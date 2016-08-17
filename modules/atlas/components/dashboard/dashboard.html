@@ -4,14 +4,16 @@
             <atlas-header query="{{header.query}}" is-print-mode="vm.isPrintMode"></atlas-header>
         </div>
     </div>
-    <div class="c-dashboard__content u-padding__left--1"
+    <div class="c-dashboard__content"
         ng-class="{
-            'u-padding__right--2': !vm.isRightColumnScrollable
+            'u-padding__right--2': !vm.isPrintMode && !vm.isRightColumnScrollable,
+            'u-padding__left--1': !vm.isPrintMode
         }">
 
         <div class="u-grid" ng-class="{'u-height-100': !vm.isPrintMode}">
             <div class="u-row" ng-class="{'u-height-100': !vm.isPrintMode}">
                 <div ng-if="vm.sizeLeftColumn" class="u-col-sm--{{vm.sizeLeftColumn}}" ng-class="{
+                        'u-padding__right--0 u-padding__left--0': vm.isPrintMode,
                         'u-height-100': !vm.isPrintMode
                     }">
 
@@ -31,6 +33,7 @@
                 <div ng-if="vm.sizeMiddleColumn"
                     class="u-col-sm--{{vm.sizeMiddleColumn}} u-padding__left--0"
                     ng-class="{
+                        'u-padding__right--0': vm.isPrintMode,
                         'u-height-100': !vm.isPrintMode
                     }">
 
@@ -47,7 +50,8 @@
                     class="u-col-sm--{{vm.sizeRightColumn}}"
                     ng-class="{
                         'u-height-100': !vm.isPrintMode,
-                        'c-dashboard__content--scrollable u-padding__right--2': vm.isRightColumnScrollable
+                        'c-dashboard__content--scrollable u-padding__right--2': !vm.isPrintMode && vm.isRightColumnScrollable,
+                        'u-padding__right--0 u-padding__left--0': vm.isPrintMode
                     }">
 
                     <div ng-if="vm.showDetail" ng-controller="DetailController as vm">
