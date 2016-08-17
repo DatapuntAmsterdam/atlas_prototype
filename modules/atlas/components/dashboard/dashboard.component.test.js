@@ -337,4 +337,61 @@ describe('The dashboard component', function () {
             expect(scope.vm.isPrintMode).toBe(true);
         });
     });
+
+    describe('the print mode has no u-height-100 helper classes', function () {
+        var component,
+            mockedState;
+
+        beforeEach(function () {
+            mockedState = angular.copy(defaultState);
+        });
+
+        it('uses a maximum height in non-print mode', function () {
+            mockedState.isPrintMode = false;
+            spyOn(store, 'getState').and.returnValue(mockedState);
+
+            //Default 'screen' mode
+            component = getComponent();
+
+            expect(component.find('.u-grid').hasClass('u-height-100')).toBe(true);
+            expect(component.find('.u-row').hasClass('u-height-100')).toBe(true);
+
+            //Middle column
+            expect(component.find('.u-col-sm--4').hasClass('u-height-100')).toBe(true);
+
+            //Right column
+            expect(component.find('.u-col-sm--8').hasClass('u-height-100')).toBe(true);
+
+            //Open the left column
+            mockedState.map.showLayerSelection = true;
+            component = getComponent();
+
+            //Check the left column
+            expect(component.find('.u-col-sm--8').hasClass('u-height-100')).toBe(true);
+        });
+
+        it('uses the default (auto) height in print mode', function () {
+            mockedState.isPrintMode = true;
+            spyOn(store, 'getState').and.returnValue(mockedState);
+
+            //Default 'screen' mode
+            component = getComponent();
+
+            expect(component.find('.u-grid').hasClass('u-height-100')).toBe(false);
+            expect(component.find('.u-row').hasClass('u-height-100')).toBe(false);
+
+            //Middle column
+            expect(component.find('.u-col-sm--4').hasClass('u-height-100')).toBe(false);
+
+            //Right column
+            expect(component.find('.u-col-sm--8').hasClass('u-height-100')).toBe(false);
+
+            //Open the left column
+            mockedState.map.showLayerSelection = true;
+            component = getComponent();
+
+            //Check the left column
+            expect(component.find('.u-col-sm--8').hasClass('u-height-100')).toBe(false);
+        });
+    });
 });
