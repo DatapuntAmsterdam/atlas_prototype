@@ -6,7 +6,7 @@
     </div>
     <div class="c-dashboard__content"
         ng-class="{
-            'u-padding__right--2': !vm.isPrintMode && !vm.isRightColumnScrollable,
+            'u-padding__right--1': !vm.isPrintMode && !vm.isRightColumnScrollable,
             'u-padding__left--1': !vm.isPrintMode
         }">
 
@@ -15,8 +15,7 @@
                 <div ng-if="vm.columnSizes.left"
                     class="u-col-sm--{{vm.columnSizes.left}} qa-dashboard__content__column--left"
                     ng-class="{
-                        'u-padding__right--0 u-padding__left--0': vm.isPrintMode,
-                        'u-height-100': !vm.isPrintMode
+                        'u-padding__right--1 u-padding__left--1 u-height-100': !vm.isPrintMode
                     }">
 
                     <div ng-controller="LayerSelectionController as vm" class="u-padding__top--2" ng-class="{
@@ -33,10 +32,9 @@
                 </div>
 
                 <div ng-if="vm.columnSizes.middle"
-                    class="u-col-sm--{{vm.columnSizes.middle}} u-padding__left--0 qa-dashboard__content__column--middle"
+                    class="u-col-sm--{{vm.columnSizes.middle}} qa-dashboard__content__column--middle"
                     ng-class="{
-                        'u-padding__right--0': vm.isPrintMode,
-                        'u-height-100': !vm.isPrintMode
+                        'u-padding__right--1 u-padding__left--1 u-height-100': !vm.isPrintMode
                     }">
 
                     <div ng-controller="MapController as vm">
@@ -51,9 +49,9 @@
                 <div ng-if="vm.columnSizes.right"
                     class="u-col-sm--{{vm.columnSizes.right}} qa-dashboard__content__column--right"
                     ng-class="{
-                        'u-height-100': !vm.isPrintMode,
-                        'c-dashboard__content--scrollable u-padding__right--2': !vm.isPrintMode && vm.isRightColumnScrollable,
-                        'u-padding__right--0 u-padding__left--0': vm.isPrintMode
+                        'u-padding__left--1 u-height-100': !vm.isPrintMode,
+                        'u-padding__right--1': !vm.isRightColumnScrollable,
+                        'c-dashboard__content--scrollable u-padding__right--2': vm.isRightColumnScrollable
                     }">
 
                     <div ng-if="vm.visibility.detail" ng-controller="DetailController as vm">
