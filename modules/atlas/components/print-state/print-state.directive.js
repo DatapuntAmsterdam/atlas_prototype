@@ -13,8 +13,8 @@
         };
 
         function linkFunction (scope, element) {
-            scope.$watch('isPrintMode', function () {
-                if (scope.isPrintMode) {
+            scope.$watch('isPrintMode', function (isPrintMode) {
+                if (isPrintMode) {
                     element.addClass('is-print-mode');
                 } else {
                     element.removeClass('is-print-mode');
