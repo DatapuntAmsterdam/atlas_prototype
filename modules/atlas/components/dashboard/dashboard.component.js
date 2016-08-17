@@ -22,31 +22,51 @@
         function setLayout () {
             var state = store.getState();
 
-            vm.panelVisibility = {
-                layerSelection: state.map.showLayerSelection,
-                page: !vm.showLayerSelection && angular.isString(state.page),
-                detail: angular.isObject(state.detail),
-                straatbeeld: angular.isObject(state.straatbeeld),
-                searchResults: angular.isObject(state.search) &&
-                    (angular.isString(state.search.query) || angular.isArray(state.search.location))
-            };
+            vm.showLayerSelection = state.map.showLayerSelection;
+            vm.showPage = !vm.showLayerSelection && angular.isString(state.page);
+            vm.showDetail = angular.isObject(state.detail);
+            vm.showStraatbeeld = angular.isObject(state.straatbeeld);
+            vm.showSearchResults = angular.isObject(state.search) &&
+                (angular.isString(state.search.query) || angular.isArray(state.search.location));
 
             vm.isRightColumnScrollable = !state.map.isFullscreen &&
-                (vm.panelVisibility.page || vm.panelVisibility.detail || vm.panelVisibility.searchResults);
+                (vm.showPage || vm.showDetail || vm.showSearchResults);
 
-            if (state.map.isFullscreen) {
-                vm.sizeLeftColumn = 0;
-                vm.sizeMiddleColumn = 12;
-            } else if (vm.panelVisibility.layerSelection) {
-                vm.sizeLeftColumn = 8;
-                vm.sizeMiddleColumn = 4;
-            } else {
-                vm.sizeLeftColumn = 0;
-                vm.sizeMiddleColumn = 4;
-            }
-
-            vm.sizeRightColumn = 12 - vm.sizeLeftColumn - vm.sizeMiddleColumn;
             vm.isPrintMode = state.isPrintMode;
+
+            if (!vm.isPrintMode) {
+                if (state.map.isFullscreen) {
+                    vm.sizeLeftColumn = 0;
+                    vm.sizeMiddleColumn = 12;
+                } else if (vm.showLayerSelection) {
+                    vm.sizeLeftColumn = 8;
+                    vm.sizeMiddleColumn = 4;
+                } else {
+                    vm.sizeLeftColumn = 0;
+                    vm.sizeMiddleColumn = 4;
+                }
+
+                vm.sizeRightColumn = 12 - vm.sizeLeftColumn - vm.sizeMiddleColumn;
+            } else {
+                //Column widths in print mode
+                if (state.map.isFullscreen) {
+                    vm.sizeLeftColumn = 0;
+                    vm.sizeMiddleColumn = 12;
+                    vm.sizeRightColumn = 0;
+                } else if (vm.showPage || vm.showSearchResults) {
+                    vm.sizeLeftColumn = 0;
+                    vm.sizeMiddleColumn = 0;
+                    vm.sizeRightColumn = 12;
+                } else if (vm.showLayerSelection) {
+                    vm.sizeLeftColumn = 12;
+                    vm.sideMiddleColumn = 0;
+                    vm.sizeRightColumn = 0;
+                } else {
+                    vm.sizeLeftColumn = 0;
+                    vm.sideMiddleColumn = 12;
+                    vm.sizeRightColumn = 12;
+                }
+            }
         }
     }
 })();
