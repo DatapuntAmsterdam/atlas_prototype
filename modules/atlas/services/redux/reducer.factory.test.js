@@ -92,7 +92,7 @@ describe('The reducer factory', function () {
         reducer(inputState, {type: 'ACTION_F'});
         reducer(inputState, {type: 'ACTION_G'});
         reducer(inputState, {type: 'ACTION_H'});
-        reducer(inputState, {type: 'ACTION_i'});
+        reducer(inputState, {type: 'ACTION_I'});
 
         expect(urlReducers.ACTION_A).toHaveBeenCalled();
         expect(detailReducers.ACTION_B).toHaveBeenCalled();
