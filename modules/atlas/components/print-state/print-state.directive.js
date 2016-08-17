@@ -3,7 +3,9 @@
         .module('atlas')
         .directive('atlasPrintState', AtlasPrintStateDirective);
 
-    function AtlasPrintStateDirective () {
+    AtlasPrintStateDirective.$inject = ['$rootScope', '$window'];
+
+    function AtlasPrintStateDirective ($rootScope, $window) {
         return {
             restrict: 'A',
             scope: {
@@ -16,6 +18,10 @@
             scope.$watch('isPrintMode', function (isPrintMode) {
                 if (isPrintMode) {
                     element.addClass('is-print-mode');
+
+                    $rootScope.$applyAsync(function () {
+                        $window.print();
+                    });
                 } else {
                     element.removeClass('is-print-mode');
                 }

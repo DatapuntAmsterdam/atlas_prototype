@@ -1,14 +1,18 @@
 describe('The atlas-print-state directive', function () {
     var $compile,
-        $rootScope;
+        $rootScope,
+        $window;
 
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
+            $window = _$window_;
         });
+
+        spyOn($window, 'print');
     });
 
     function getDirective (isPrintMode) {
@@ -53,5 +57,16 @@ describe('The atlas-print-state directive', function () {
         scope.$apply();
 
         expect(directive.hasClass('is-print-mode')).toBe(false);
+    });
+
+    it('triggers a call to window.print() when the print mode is enabled', function () {
+        getDirective(true);
+
+        //Not directly
+        expect($window.print).not.toHaveBeenCalled();
+
+        //But after the next digest cycle to make sure the state class has been added first
+        $rootScope.$apply();
+        expect($window.print).toHaveBeenCalled();
     });
 });
