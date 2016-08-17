@@ -323,13 +323,13 @@ describe('The urlReducers factory', function () {
             it('sets whether or not print mode is enabled', function () {
                 var output;
 
-                //With full print mode enabled
+                //With print mode enabled
                 mockedState.isPrintMode = false;
                 mockedSearchParams['print-versie'] = 'aan';
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
                 expect(output.isPrintMode).toBe(true);
 
-                //With full screen disabled
+                //With print mode disabled
                 mockedState.isPrintMode = true;
                 delete mockedSearchParams['print-versie'];
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
