@@ -22,20 +22,22 @@
         function setLayout () {
             var state = store.getState();
 
-            vm.showLayerSelection = state.map.showLayerSelection;
-            vm.showPage = !vm.showLayerSelection && angular.isString(state.page);
-            vm.showDetail = angular.isObject(state.detail);
-            vm.showStraatbeeld = angular.isObject(state.straatbeeld);
-            vm.showSearchResults = angular.isObject(state.search) &&
-                (angular.isString(state.search.query) || angular.isArray(state.search.location));
+            vm.panelVisibility = {
+                layerSelection: state.map.showLayerSelection,
+                page: !vm.showLayerSelection && angular.isString(state.page),
+                detail: angular.isObject(state.detail),
+                straatbeeld: angular.isObject(state.straatbeeld),
+                searchResults: angular.isObject(state.search) &&
+                    (angular.isString(state.search.query) || angular.isArray(state.search.location))
+            };
 
             vm.isRightColumnScrollable = !state.map.isFullscreen &&
-                (vm.showPage || vm.showDetail || vm.showSearchResults);
+                (vm.panelVisibility.page || vm.panelVisibility.detail || vm.panelVisibility.searchResults);
 
             if (state.map.isFullscreen) {
                 vm.sizeLeftColumn = 0;
                 vm.sizeMiddleColumn = 12;
-            } else if (vm.showLayerSelection) {
+            } else if (vm.panelVisibility.layerSelection) {
                 vm.sizeLeftColumn = 8;
                 vm.sizeMiddleColumn = 4;
             } else {

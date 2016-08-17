@@ -29,3 +29,12 @@
         }
     }
 })();
+/*
+ Kaart en infopagina getoond: print infopagina (geldt ook voor login :-S)
+ Kaart en (zoek)resultaten: print resultaten
+ Kaart en detailpagina: print detailpagina (met kaart erboven als het kan)
+ Kaart en panorama: print melding (met kaart erboven als het kan).
+ Melding: “Het is momenteel niet mogelijk een panoramafoto af te drukken. Raadpleeg de Help in het Menu voor advies omtrent printen.”
+ Kaartlagen en kaart: print kaartlagen (zal niet veel gebruikt worden maar vooral voor consistentie)
+ Kaart full-screen: print kaart
+ */
