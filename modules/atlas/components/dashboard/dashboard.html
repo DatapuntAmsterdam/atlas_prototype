@@ -10,16 +10,19 @@
             'u-padding__left--1': !vm.isPrintMode
         }">
 
-        <div class="u-grid" ng-class="{'u-height-100': !vm.isPrintMode}">
-            <div class="u-row" ng-class="{'u-height-100': !vm.isPrintMode}">
+        <div class="u-grid u-height--100" ng-class="{'u-height--auto': vm.isPrintMode}">
+            <div class="u-row u-height--100" ng-class="{'u-height--auto': vm.isPrintMode}">
                 <div ng-if="vm.columnSizes.left"
-                    class="u-col-sm--{{vm.columnSizes.left}} qa-dashboard__content__column--left"
+                    class="u-col-sm--{{vm.columnSizes.left}} qa-dashboard__content__column--left u-height--100"
                     ng-class="{
-                        'u-padding__right--1 u-padding__left--1 u-height-100': !vm.isPrintMode
+                        'u-padding__right--1 u-padding__left--1': !vm.isPrintMode,
+                        'u-height--auto': vm.isPrintMode
                     }">
 
-                    <div ng-controller="LayerSelectionController as vm" class="u-padding__top--2" ng-class="{
-                            'u-height-100': !vm.isPrintMode
+                    <div ng-controller="LayerSelectionController as vm"
+                        class="u-padding__top--2 u-height--100"
+                        ng-class="{
+                            'u-height--auto': vm.isPrintMode
                         }">
 
                         <atlas-layer-selection
@@ -32,9 +35,10 @@
                 </div>
 
                 <div ng-if="vm.columnSizes.middle"
-                    class="u-col-sm--{{vm.columnSizes.middle}} qa-dashboard__content__column--middle"
+                    class="u-col-sm--{{vm.columnSizes.middle}} qa-dashboard__content__column--middle u-height--100"
                     ng-class="{
-                        'u-padding__right--1 u-padding__left--1 u-height-100': !vm.isPrintMode
+                        'u-padding__right--1 u-padding__left--1': !vm.isPrintMode,
+                        'u-height--auto': vm.isPrintMode
                     }">
 
                     <div ng-controller="MapController as vm">
@@ -47,11 +51,12 @@
                 </div>
 
                 <div ng-if="vm.columnSizes.right"
-                    class="u-col-sm--{{vm.columnSizes.right}} qa-dashboard__content__column--right"
+                    class="u-col-sm--{{vm.columnSizes.right}} qa-dashboard__content__column--right u-height--100 u-height--100"
                     ng-class="{
-                        'u-padding__left--1 u-height-100': !vm.isPrintMode,
+                        'u-padding__left--1': !vm.isPrintMode,
                         'u-padding__right--1': !vm.isRightColumnScrollable,
-                        'c-dashboard__content--scrollable u-padding__right--2': vm.isRightColumnScrollable
+                        'c-dashboard__content--scrollable u-padding__right--2': vm.isRightColumnScrollable,
+                        'u-height--auto': vm.isPrintMode
                     }">
 
                     <div ng-if="vm.visibility.detail" ng-controller="DetailController as vm">

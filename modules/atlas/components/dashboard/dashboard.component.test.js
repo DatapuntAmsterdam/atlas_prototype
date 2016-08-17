@@ -550,7 +550,7 @@ describe('The dashboard component', function () {
         });
     });
 
-    describe('the print mode has no u-height-100 helper classes', function () {
+    describe('the print mode has variable height', function () {
         var component,
             mockedState;
 
@@ -565,21 +565,27 @@ describe('The dashboard component', function () {
             //Default 'screen' mode
             component = getComponent();
 
-            expect(component.find('.u-grid').hasClass('u-height-100')).toBe(true);
-            expect(component.find('.u-row').hasClass('u-height-100')).toBe(true);
+            expect(component.find('.u-grid').hasClass('u-height--100')).toBe(true);
+            expect(component.find('.u-grid').hasClass('u-height--auto')).toBe(false);
+
+            expect(component.find('.u-row').hasClass('u-height--100')).toBe(true);
+            expect(component.find('.u-row').hasClass('u-height--false')).toBe(false);
 
             //Middle column
-            expect(component.find('.u-col-sm--4').hasClass('u-height-100')).toBe(true);
+            expect(component.find('.u-col-sm--4').hasClass('u-height--100')).toBe(true);
+            expect(component.find('.u-col-sm--4').hasClass('u-height--auto')).toBe(false);
 
             //Right column
-            expect(component.find('.u-col-sm--8').hasClass('u-height-100')).toBe(true);
+            expect(component.find('.u-col-sm--8').hasClass('u-height--100')).toBe(true);
+            expect(component.find('.u-col-sm--8').hasClass('u-height--auto')).toBe(false);
 
             //Open the left column
             mockedState.map.showLayerSelection = true;
             component = getComponent();
 
             //Check the left column
-            expect(component.find('.u-col-sm--8').hasClass('u-height-100')).toBe(true);
+            expect(component.find('.u-col-sm--8').hasClass('u-height--100')).toBe(true);
+            expect(component.find('.u-col-sm--8').hasClass('u-height--auto')).toBe(false);
         });
 
         it('uses the default (auto) height in print mode', function () {
@@ -589,21 +595,21 @@ describe('The dashboard component', function () {
             //Default 'screen' mode
             component = getComponent();
 
-            expect(component.find('.u-grid').hasClass('u-height-100')).toBe(false);
-            expect(component.find('.u-row').hasClass('u-height-100')).toBe(false);
+            expect(component.find('.u-grid').hasClass('u-height--auto')).toBe(true);
+            expect(component.find('.u-row').hasClass('u-height--auto')).toBe(true);
 
             //Middle column
-            expect(component.find('.u-col-sm--4').hasClass('u-height-100')).toBe(false);
+            expect(component.find('.u-col-sm--4').hasClass('u-height--auto')).toBe(true);
 
             //Right column
-            expect(component.find('.u-col-sm--8').hasClass('u-height-100')).toBe(false);
+            expect(component.find('.u-col-sm--8').hasClass('u-height--auto')).toBe(true);
 
             //Open the left column
             mockedState.map.showLayerSelection = true;
             component = getComponent();
 
             //Check the left column
-            expect(component.find('.u-col-sm--8').hasClass('u-height-100')).toBe(false);
+            expect(component.find('.u-col-sm--8').hasClass('u-height--auto')).toBe(true);
         });
     });
 });
