@@ -62,244 +62,459 @@ describe('The dashboard component', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    describe('by default', function () {
-        var component;
+    describe('visible panels and column sizes', function () {
+        describe('by default (non print version)', function () {
+            describe('when visiting a page', function () {
+                var component;
 
-        beforeEach(function () {
-            spyOn(store, 'getState').and.returnValue(defaultState);
+                beforeEach(function () {
+                    spyOn(store, 'getState').and.returnValue(defaultState);
 
-            component = getComponent();
-        });
+                    component = getComponent();
+                });
 
-        it('has no the left column', function () {
-            expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
-        });
+                it('has no the left column', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                });
 
-        it('shows a small map (1/3) in the middle column', function () {
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).toContain('u-col-sm--4');
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).not.toContain('u-col-sm--8');
+                it('shows a small map (1/3) in the middle column', function () {
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .toContain('u-col-sm--4');
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .not.toContain('u-col-sm--8');
 
-            expect(component.find('.qa-dashboard__content__column--middle dp-map')).not.toBeNull();
-        });
+                    expect(component.find('.qa-dashboard__content__column--middle dp-map')).not.toBeNull();
+                });
 
-        it('shows a large page (2/3) in the right column', function () {
-            expect(component.find('.qa-dashboard__content__column--right').attr('class')).toContain('u-col-sm--8');
-            expect(component.find('.qa-dashboard__content__column--right').attr('class')).not.toContain('u-col-sm--4');
+                it('shows a large page (2/3) in the right column', function () {
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .toContain('u-col-sm--8');
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .not.toContain('u-col-sm--4');
 
-            //It is scrollable
-            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                .toContain('c-dashboard__content--scrollable');
+                    //It is scrollable
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .toContain('c-dashboard__content--scrollable');
 
-            expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(1);
-            expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(0);
-            expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length).toBe(0);
-            expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(0);
-        });
-    });
+                    expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(1);
+                    expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(0);
+                });
+            });
 
-    ['query', 'location'].forEach(function (searchInput) {
-        describe('after searching by ' + searchInput, function () {
-            var component;
+            ['query', 'location'].forEach(function (searchInput) {
+                describe('after searching by ' + searchInput, function () {
+                    var component;
 
-            beforeEach(function () {
-                var mockedState = angular.copy(defaultState);
+                    beforeEach(function () {
+                        var mockedState = angular.copy(defaultState);
 
-                mockedState.page = null;
+                        mockedState.page = null;
 
-                if (searchInput === 'query') {
-                    mockedState.search = {
-                        query: 'this is a search query',
-                        location: null
+                        if (searchInput === 'query') {
+                            mockedState.search = {
+                                query: 'this is a search query',
+                                location: null
+                            };
+                        } else {
+                            mockedState.search = {
+                                query: null,
+                                location: [52.123, 4789]
+                            };
+                        }
+
+                        spyOn(store, 'getState').and.returnValue(mockedState);
+
+                        component = getComponent();
+                    });
+
+                    it('shows no left column', function () {
+                        expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                    });
+
+                    it('shows a small map (1/3) in the middle column', function () {
+                        expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                            .toContain('u-col-sm--4');
+                        expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                            .not.toContain('u-col-sm--8');
+
+                        expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
+                    });
+
+                    it('shows search results in a large (2/3) right column', function () {
+                        expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                            .toContain('u-col-sm--8');
+                        expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                            .not.toContain('u-col-sm--4');
+
+                        //It is scrollable
+                        expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                            .toContain('c-dashboard__content--scrollable');
+
+                        expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length)
+                            .toBe(1);
+                        expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(0);
+                        expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(0);
+                        expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(0);
+                    });
+                });
+            });
+
+            describe('when visiting a detail page', function () {
+                var component;
+
+                beforeEach(function () {
+                    var mockedState = angular.copy(defaultState);
+
+                    mockedState.detail = {};
+                    mockedState.page = null;
+
+                    spyOn(store, 'getState').and.returnValue(mockedState);
+
+                    component = getComponent();
+                });
+
+                it('shows no left column', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                });
+
+                it('shows a small map (1/3) in the middle column', function () {
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .toContain('u-col-sm--4');
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .not.toContain('u-col-sm--8');
+
+                    expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
+                });
+
+                it('shows a large detail page (2/3) in the right column', function () {
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .toContain('u-col-sm--8');
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .not.toContain('u-col-sm--4');
+
+                    //It is scrollable
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .toContain('c-dashboard__content--scrollable');
+
+                    expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(1);
+                    expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(0);
+                });
+            });
+
+            describe('when visiting straatbeeld', function () {
+                var component;
+
+                beforeEach(function () {
+                    var mockedState = angular.copy(defaultState);
+
+                    mockedState.straatbeeld = {};
+                    mockedState.page = null;
+
+                    spyOn(store, 'getState').and.returnValue(mockedState);
+
+                    component = getComponent();
+                });
+
+                it('shows no left column', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                });
+
+                it('shows a small map (1/3) in the middle column', function () {
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .toContain('u-col-sm--4');
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .not.toContain('u-col-sm--8');
+
+                    expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
+                });
+
+                it('shows a large straatbeeld (2/3) in the right column', function () {
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .toContain('u-col-sm--8');
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .not.toContain('u-col-sm--4');
+
+                    //It is not scrollable
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .not.toContain('c-dashboard__content--scrollable');
+
+                    expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(1);
+                    expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(0);
+                });
+            });
+
+            describe('when using layer selection', function () {
+                var component;
+
+                beforeEach(function () {
+                    var mockedState = angular.copy(defaultState);
+
+                    mockedState.map.showLayerSelection = true;
+                    mockedState.detail = {
+                        uri: 'blah/blah/123',
+                        isLoading: false
                     };
-                } else {
-                    mockedState.search = {
-                        query: null,
-                        location: [52.123, 4789]
+
+                    spyOn(store, 'getState').and.returnValue(mockedState);
+
+                    component = getComponent();
+                });
+
+                it('shows layer selection in a large (2/3) left column', function () {
+                    expect(component.find('.qa-dashboard__content__column--left atlas-layer-selection').length).toBe(1);
+                    expect(component.find('.qa-dashboard__content__column--left').attr('class'))
+                        .toContain('u-col-sm--8');
+
+                    expect(component.find('.qa-dashboard__content__column--left').attr('class'))
+                        .not.toContain('u-col-sm--4');
+
+                    //It has a 100% height
+                    expect(component.find('.qa-dashboard__content__column--left').attr('class'))
+                        .toContain('u-height-100');
+                });
+
+                it('shows a small map (1/3) in the middle column', function () {
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .toContain('u-col-sm--4');
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .not.toContain('u-col-sm--8');
+
+                    expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
+                });
+
+                it('shows no right column', function () {
+                    expect(component.find('.qa-dashboard__content__column--right').length).toBe(0);
+                });
+            });
+
+            describe('when using a fullscreen map', function () {
+                var component;
+
+                beforeEach(function () {
+                    var mockedState = angular.copy(defaultState);
+
+                    mockedState.map.isFullscreen = true;
+
+                    spyOn(store, 'getState').and.returnValue(mockedState);
+
+                    component = getComponent();
+                });
+
+                it('only shows one full-width column (3/3) with the map', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--middle').length).toBe(1);
+                    expect(component.find('.qa-dashboard__content__column--right').length).toBe(0);
+
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .toContain('u-col-sm--12');
+                    expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
+
+                    //It is not scrollable
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .not.toContain('c-dashboard__content--scrollable');
+                });
+            });
+        });
+
+        describe('when viewing the print version', function () {
+            describe('when visiting a page', function () {
+                var component;
+
+                beforeEach(function () {
+                    defaultState.isPrintMode = true;
+                    spyOn(store, 'getState').and.returnValue(defaultState);
+
+                    component = getComponent();
+                });
+
+                it('hides the left and middle column', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--middle').length).toBe(0);
+                });
+
+                it('shows the right column, full width, with a page', function () {
+                    expect(component.find('.qa-dashboard__content__column--right').length).toBe(1);
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .toContain('u-col-sm--12');
+                    expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(1);
+                });
+            });
+
+            ['query', 'location'].forEach(function (searchInput) {
+                describe('after searching by ' + searchInput, function () {
+                    var component;
+
+                    beforeEach(function () {
+                        var mockedState = angular.copy(defaultState);
+
+                        mockedState.page = null;
+
+                        if (searchInput === 'query') {
+                            mockedState.search = {
+                                query: 'this is a search query',
+                                location: null
+                            };
+                        } else {
+                            mockedState.search = {
+                                query: null,
+                                location: [52.123, 4789]
+                            };
+                        }
+
+                        mockedState.isPrintMode = true;
+
+                        spyOn(store, 'getState').and.returnValue(mockedState);
+
+                        component = getComponent();
+                    });
+
+                    it('hides the left and middle column', function () {
+                        expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                        expect(component.find('.qa-dashboard__content__column--middle').length).toBe(0);
+                    });
+
+                    it('shows the right column, full width, with search results', function () {
+                        expect(component.find('.qa-dashboard__content__column--right').length).toBe(1);
+                        expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                            .toContain('u-col-sm--12');
+                        expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length)
+                            .toBe(1);
+                    });
+                });
+            });
+
+            describe('when visiting a detail page', function () {
+                var component;
+
+                beforeEach(function () {
+                    var mockedState = angular.copy(defaultState);
+
+                    mockedState.detail = {};
+                    mockedState.page = null;
+                    mockedState.isPrintMode = true;
+
+                    spyOn(store, 'getState').and.returnValue(mockedState);
+
+                    component = getComponent();
+                });
+
+                it('shows no left column', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                });
+
+                it('shows a full-width map in the middle column', function () {
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .toContain('u-col-sm--12');
+
+                    expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
+                });
+
+                it('shows a full-width detail page in the right column', function () {
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .toContain('u-col-sm--12');
+
+                    expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(1);
+                });
+            });
+
+            describe('when visiting straatbeeld', function () {
+                var component;
+
+                beforeEach(function () {
+                    var mockedState = angular.copy(defaultState);
+
+                    mockedState.straatbeeld = {};
+                    mockedState.page = null;
+                    mockedState.isPrintMode = true;
+
+                    spyOn(store, 'getState').and.returnValue(mockedState);
+
+                    component = getComponent();
+                });
+
+                it('shows no left column', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                });
+
+                it('shows a full-width map in the middle column', function () {
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .toContain('u-col-sm--12');
+
+                    expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
+                });
+
+                it('shows a full-width straatbeeld in the right column', function () {
+                    expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                        .toContain('u-col-sm--12');
+
+                    expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(1);
+                });
+            });
+
+            describe('when using layer selection', function () {
+                var component;
+
+                beforeEach(function () {
+                    var mockedState = angular.copy(defaultState);
+
+                    mockedState.map.showLayerSelection = true;
+                    mockedState.detail = {
+                        uri: 'blah/blah/123',
+                        isLoading: false
                     };
-                }
+                    mockedState.isPrintMode = true;
 
-                spyOn(store, 'getState').and.returnValue(mockedState);
+                    spyOn(store, 'getState').and.returnValue(mockedState);
 
-                component = getComponent();
+                    component = getComponent();
+                });
+
+                it('shows the left column, full width, with layer selection', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(1);
+                    expect(component.find('.qa-dashboard__content__column--left').attr('class'))
+                        .toContain('u-col-sm--12');
+                    expect(component.find('.qa-dashboard__content__column--left atlas-layer-selection').length).toBe(1);
+                });
+
+                it('shows no middle and right column', function () {
+                    expect(component.find('.qa-dashboard__content__column--middle').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--right').length).toBe(0);
+                });
             });
 
-            it('shows no left column', function () {
-                expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
-            });
+            describe('when using a fullscreen map', function () {
+                var component;
 
-            it('shows a small map (1/3) in the middle column', function () {
-                expect(component.find('.qa-dashboard__content__column--middle').attr('class')).toContain('u-col-sm--4');
-                expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
-                    .not.toContain('u-col-sm--8');
+                beforeEach(function () {
+                    var mockedState = angular.copy(defaultState);
 
-                expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
-            });
+                    mockedState.map.isFullscreen = true;
+                    mockedState.isPrintMode = true;
 
-            it('shows search results in a large (2/3) right column', function () {
-                expect(component.find('.qa-dashboard__content__column--right').attr('class')).toContain('u-col-sm--8');
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .not.toContain('u-col-sm--4');
+                    spyOn(store, 'getState').and.returnValue(mockedState);
 
-                //It is scrollable
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .toContain('c-dashboard__content--scrollable');
+                    component = getComponent();
+                });
 
-                expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length).toBe(1);
-                expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(0);
-                expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(0);
-                expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(0);
+                it('only shows one full-width column with the map', function () {
+                    expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
+                    expect(component.find('.qa-dashboard__content__column--middle').length).toBe(1);
+                    expect(component.find('.qa-dashboard__content__column--right').length).toBe(0);
+
+                    expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
+                        .toContain('u-col-sm--12');
+                    expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
+                });
             });
         });
     });
 
-    describe('when visiting a detail page', function () {
-        var component;
-
-        beforeEach(function () {
-            var mockedState = angular.copy(defaultState);
-
-            mockedState.detail = {};
-            mockedState.page = null;
-
-            spyOn(store, 'getState').and.returnValue(mockedState);
-
-            component = getComponent();
-        });
-
-        it('shows no left column', function () {
-            expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
-        });
-
-        it('shows a small map (1/3) in the middle column', function () {
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).toContain('u-col-sm--4');
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).not.toContain('u-col-sm--8');
-
-            expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
-        });
-
-        it('shows a large detail page (2/3) in the right column', function () {
-            expect(component.find('.qa-dashboard__content__column--right').attr('class')).toContain('u-col-sm--8');
-            expect(component.find('.qa-dashboard__content__column--right').attr('class')).not.toContain('u-col-sm--4');
-
-            //It is scrollable
-            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                .toContain('c-dashboard__content--scrollable');
-
-            expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(1);
-            expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length).toBe(0);
-            expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(0);
-            expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(0);
-        });
-    });
-
-    describe('when visiting straatbeeld', function () {
-        var component;
-
-        beforeEach(function () {
-            var mockedState = angular.copy(defaultState);
-
-            mockedState.straatbeeld = {};
-            mockedState.page = null;
-
-            spyOn(store, 'getState').and.returnValue(mockedState);
-
-            component = getComponent();
-        });
-
-        it('shows no left column', function () {
-            expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
-        });
-
-        it('shows a small map (1/3) in the middle column', function () {
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).toContain('u-col-sm--4');
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).not.toContain('u-col-sm--8');
-
-            expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
-        });
-
-        it('shows a large straatbeeld (2/3) in the right column', function () {
-            expect(component.find('.qa-dashboard__content__column--right').attr('class')).toContain('u-col-sm--8');
-            expect(component.find('.qa-dashboard__content__column--right').attr('class')).not.toContain('u-col-sm--4');
-
-            //It is not scrollable
-            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                .not.toContain('c-dashboard__content--scrollable');
-
-            expect(component.find('.qa-dashboard__content__column--right dp-straatbeeld').length).toBe(1);
-            expect(component.find('.qa-dashboard__content__column--right atlas-detail').length).toBe(0);
-            expect(component.find('.qa-dashboard__content__column--right atlas-search-results').length).toBe(0);
-            expect(component.find('.qa-dashboard__content__column--right atlas-page').length).toBe(0);
-        });
-    });
-
-    describe('when using layer selection', function () {
-        var component;
-
-        beforeEach(function () {
-            var mockedState = angular.copy(defaultState);
-
-            mockedState.map.showLayerSelection = true;
-            mockedState.detail = {
-                uri: 'blah/blah/123',
-                isLoading: false
-            };
-
-            spyOn(store, 'getState').and.returnValue(mockedState);
-
-            component = getComponent();
-        });
-
-        it('shows layer selection in a large (2/3) left column', function () {
-            expect(component.find('.qa-dashboard__content__column--left atlas-layer-selection').length).toBe(1);
-            expect(component.find('.qa-dashboard__content__column--left').attr('class'))
-                .toContain('u-col-sm--8');
-
-            expect(component.find('.qa-dashboard__content__column--left').attr('class'))
-                .not.toContain('u-col-sm--4');
-
-            //It has a 100% height
-            expect(component.find('.qa-dashboard__content__column--left').attr('class'))
-                .toContain('u-height-100');
-        });
-
-        it('shows a small map (1/3) in the middle column', function () {
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).toContain('u-col-sm--4');
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).not.toContain('u-col-sm--8');
-
-            expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
-        });
-
-        it('shows no right column', function () {
-            expect(component.find('.qa-dashboard__content__column--right').length).toBe(0);
-        });
-    });
-
-    describe('when using a fullscreen map', function () {
-        var component;
-
-        beforeEach(function () {
-            var mockedState = angular.copy(defaultState);
-
-            mockedState.map.isFullscreen = true;
-
-            spyOn(store, 'getState').and.returnValue(mockedState);
-
-            component = getComponent();
-        });
-
-        it('only shows one full-width column (3/3) with the map', function () {
-            expect(component.find('.qa-dashboard__content__column--left').length).toBe(0);
-            expect(component.find('.qa-dashboard__content__column--middle').length).toBe(1);
-            expect(component.find('.qa-dashboard__content__column--right').length).toBe(0);
-
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class')).toContain('u-col-sm--12');
-            expect(component.find('.qa-dashboard__content__column--middle dp-map').length).toBe(1);
-
-            //It is not scrollable
-            expect(component.find('.qa-dashboard__content__column--middle').attr('class'))
-                .not.toContain('c-dashboard__content--scrollable');
-        });
-    });
 
     describe('the print state is communicated to atlas-print-state', function () {
         var component,

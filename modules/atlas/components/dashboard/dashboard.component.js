@@ -63,14 +63,14 @@
                     columnSizes.left = 0;
                     columnSizes.middle = 12;
                     columnSizes.right = 0;
-                } else if (visibility.page || visibility.searchResults) {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 0;
-                    columnSizes.right = 12;
                 } else if (visibility.layerSelection) {
                     columnSizes.left = 12;
                     columnSizes.middle = 0;
                     columnSizes.right = 0;
+                } else if (visibility.page || visibility.searchResults) {
+                    columnSizes.left = 0;
+                    columnSizes.middle = 0;
+                    columnSizes.right = 12;
                 } else {
                     columnSizes.left = 0;
                     columnSizes.middle = 12;
