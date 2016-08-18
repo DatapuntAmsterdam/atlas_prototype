@@ -75,7 +75,15 @@ describe('the atlas-detail component', function() {
                 },
                 geojson: {
                     getCenter: function () {
-                        return 'FAKE_LOCATION';
+                        return [52.123, 4.123];
+                    }
+                },
+                crsConverter: {
+                    rdToWgs84: function (rdLocation) {
+                        return [
+                            --rdLocation[0],
+                            --rdLocation[1]
+                        ];
                     }
                 }
             },
@@ -208,10 +216,10 @@ describe('the atlas-detail component', function() {
         var component,
             scope;
 
-        //Something with geometry
+        //Something with geometry (converted from RD to WGS84)
         component = getComponent('http://www.fake-endpoint.com/bag/nummeraanduiding/123/');
         scope = component.isolateScope();
-        expect(scope.vm.location).toBe('FAKE_LOCATION');
+        expect(scope.vm.location).toEqual([51.123, 3.123]);
 
         //Something without geometry
         scope.vm.endpoint = 'http://www.fake-endpoint.com/brk/subject/123/';

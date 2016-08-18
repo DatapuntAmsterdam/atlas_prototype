@@ -400,10 +400,10 @@ describe('The atlas-search-results component', function () {
             expect(removeWhitespace(component.find('p').text())).toBe('1 resultaat met "Weesperstraat"');
         });
 
-        it('doesn\'t show the dp-straatbeeld-thumbnail component', function () {
+        it('doesn\'t show the atlas-straatbeeld-thumbnail component', function () {
             var component = getComponent('Weesperstraat');
 
-            expect(component.find('dp-straatbeeld-thumbnail').length).toBe(0);
+            expect(component.find('atlas-straatbeeld-thumbnail').length).toBe(0);
         });
 
         describe('has category support', function () {
@@ -659,8 +659,8 @@ describe('The atlas-search-results component', function () {
             expect(component.find('dp-link').length).toBe(numberOfDpLinks - 1);
         });
 
-        it('shows the dp-straatbeeld-thumbnail component', function () {
-            expect(component.find('dp-straatbeeld-thumbnail').length).toBe(1);
+        it('shows the atlas-straatbeeld-thumbnail component', function () {
+            expect(component.find('atlas-straatbeeld-thumbnail').length).toBe(1);
         });
     });
 
