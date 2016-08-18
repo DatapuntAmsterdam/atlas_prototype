@@ -22,7 +22,10 @@
          */
         function initialize (domElement) {
             viewer = new Marzipano.Viewer(domElement, {
-                stageType: 'css'
+                stageType: 'webgl',
+                stage: {
+                    preserveDrawingBuffer: true
+                }
             });
 
             return viewer;

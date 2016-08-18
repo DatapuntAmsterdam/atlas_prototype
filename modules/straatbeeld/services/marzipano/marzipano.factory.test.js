@@ -119,15 +119,17 @@ describe('The marzipanoService factory', function () {
         expect(viewer).toEqual(fakeViewer);
     });
 
-    it('uses the CSS stageType to enable print in Firefox and Safari', function () {
+    it('uses the extra settings to enable print in Firefox and Safari', function () {
         var fakeDomElement;
 
         fakeDomElement = document.createElement('div');
         marzipanoService.initialize(fakeDomElement);
 
-        //Note the default stageType is 'webgl' and that won't print in Firefox and Safari
         expect(Marzipano.Viewer).toHaveBeenCalledWith(jasmine.anything(), {
-            stageType: 'css'
+            stageType: 'webgl',
+            stage: {
+                preserveDrawingBuffer: true
+            }
         });
     });
 
