@@ -7,7 +7,9 @@ describe('The dp-straatbeeld directive', function () {
         marzipanoService,
         earthmine,
         orientation,
-        mockedMarzipanoViewer = 'I_AM_A_MOCKED_MARZIPANO_VIEWER',
+        mockedMarzipanoViewer = {
+            updateSize: function () {}
+        },
         mockedEarthmineData = {
             id: 123,
             date: new Date(2016, 6, 8),
@@ -63,6 +65,8 @@ describe('The dp-straatbeeld directive', function () {
         spyOn(marzipanoService, 'initialize').and.returnValue(mockedMarzipanoViewer);
         spyOn(marzipanoService, 'loadScene');
 
+        spyOn(mockedMarzipanoViewer, 'updateSize');
+
         spyOn(earthmine, 'getImageDataById').and.callThrough();
         spyOn(earthmine, 'getImageDataByCoordinates').and.callThrough();
 
@@ -71,16 +75,18 @@ describe('The dp-straatbeeld directive', function () {
         spyOn(store, 'dispatch');
     });
 
-    function getDirective (state) {
+    function getDirective (state, isPrintMode) {
         var directive,
             element,
             scope;
 
         element = document.createElement('dp-straatbeeld');
         element.setAttribute('state', 'state');
+        element.setAttribute('is-print-mode', 'isPrintMode');
 
         scope = $rootScope.$new();
         scope.state = state;
+        scope.isPrintMode = isPrintMode;
 
         directive = $compile(element)(scope);
         scope.$apply();
@@ -100,7 +106,7 @@ describe('The dp-straatbeeld directive', function () {
         var directive,
             container;
 
-        directive = getDirective({id: 123});
+        directive = getDirective({id: 123}, false);
         container = directive.find('.js-marzipano-viewer')[0];
 
         expect(marzipanoService.initialize).toHaveBeenCalledWith(container);
@@ -109,14 +115,14 @@ describe('The dp-straatbeeld directive', function () {
     describe('it loads data from earthmine', function () {
         describe('the initial panorama scene', function () {
             it('loads the data based on coordinates', function () {
-                getDirective({id: null, searchLocation: [52.123, 4.789]});
+                getDirective({id: null, searchLocation: [52.123, 4.789]}, false);
 
                 expect(earthmine.getImageDataById).not.toHaveBeenCalled();
                 expect(earthmine.getImageDataByCoordinates).toHaveBeenCalledWith(52.123, 4.789);
             });
 
             it('triggers SHOW_STRAATBEELD_INITIAL when the earthmineData is resvoled', function () {
-                getDirective({id: null, searchLocation: [52.123, 4.789]});
+                getDirective({id: null, searchLocation: [52.123, 4.789]}, false);
 
                 expect(store.dispatch).toHaveBeenCalledWith({
                     type: ACTIONS.SHOW_STRAATBEELD_INITIAL,
@@ -136,14 +142,14 @@ describe('The dp-straatbeeld directive', function () {
 
         describe('subsequent panorama scenes', function () {
             it('loads the data based on ID', function () {
-                getDirective({id: 123});
+                getDirective({id: 123}, false);
 
                 expect(earthmine.getImageDataById).toHaveBeenCalledWith(123);
                 expect(earthmine.getImageDataByCoordinates).not.toHaveBeenCalled();
             });
 
             it('triggers SHOW_STRAATBEELD_SUBSEQUENT when the earthmineData is resvoled', function () {
-                getDirective({id: 123});
+                getDirective({id: 123}, false);
 
                 expect(store.dispatch).toHaveBeenCalledWith({
                     type: ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT,
@@ -163,10 +169,10 @@ describe('The dp-straatbeeld directive', function () {
 
         it('doesn\'t directly load a scene when earthmineData is resolved', function () {
             //Loading the scene should only be triggered by a Redux state change, not some internal API call
-            getDirective({id: 123});
+            getDirective({id: 123}, false);
             expect(marzipanoService.loadScene).not.toHaveBeenCalled();
 
-            getDirective({id: null, searchLocation: [52.123, 4.789]});
+            getDirective({id: null, searchLocation: [52.123, 4.789]}, false);
             expect(marzipanoService.loadScene).not.toHaveBeenCalled();
         });
     });
@@ -183,7 +189,7 @@ describe('The dp-straatbeeld directive', function () {
                     pitch: 0.8
                 },
                 isLoading: false
-            }
+            }, false
         );
         expect(orientation.update).not.toHaveBeenCalled();
 
@@ -212,7 +218,7 @@ describe('The dp-straatbeeld directive', function () {
                 pitch: 0.01
             },
             hotspots: ['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y']
-        });
+        }, false);
 
         expect(marzipanoService.loadScene).toHaveBeenCalledWith(
             123,
@@ -227,5 +233,23 @@ describe('The dp-straatbeeld directive', function () {
             },
             ['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y']
         );
+    });
+
+    it('re-renders the viewer when isPrintMode changes (and thus the size of the viewer changes)', function () {
+        var directive,
+            scope;
+
+        directive = getDirective({id: 123}, false);
+        scope = directive.isolateScope();
+
+        expect(mockedMarzipanoViewer.updateSize).not.toHaveBeenCalled();
+
+        scope.isPrintMode = true;
+        scope.$apply();
+        expect(mockedMarzipanoViewer.updateSize).toHaveBeenCalledTimes(1);
+
+        scope.isPrintMode = false;
+        scope.$apply();
+        expect(mockedMarzipanoViewer.updateSize).toHaveBeenCalledTimes(2);
     });
 });

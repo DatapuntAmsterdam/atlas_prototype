@@ -79,8 +79,8 @@
                         </atlas-search-results>
                     </div>
 
-                    <div ng-if="vm.visibility.straatbeeld" ng-controller="StraatbeeldController as vm">
-                        <dp-straatbeeld state="vm.straatbeeld"></dp-straatbeeld>
+                    <div ng-if="vm.visibility.straatbeeld" ng-controller="StraatbeeldController as straatbeeld">
+                        <dp-straatbeeld state="straatbeeld.straatbeeldState" is-print-mode="vm.isPrintMode"></dp-straatbeeld>
                     </div>
                 </div>
             </div>

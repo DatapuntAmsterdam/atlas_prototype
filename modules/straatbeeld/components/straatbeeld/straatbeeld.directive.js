@@ -5,13 +5,14 @@
         .module('dpStraatbeeld')
         .directive('dpStraatbeeld', dpStraatbeeldDirective);
 
-    dpStraatbeeldDirective.$inject = ['store', 'ACTIONS', 'marzipanoService', 'earthmine', 'orientation'];
+    dpStraatbeeldDirective.$inject = ['$rootScope', 'store', 'ACTIONS', 'marzipanoService', 'earthmine', 'orientation'];
 
-    function dpStraatbeeldDirective (store, ACTIONS, marzipanoService, earthmine, orientation) {
+    function dpStraatbeeldDirective ($rootScope, store, ACTIONS, marzipanoService, earthmine, orientation) {
         return {
             restrict: 'E',
             scope: {
-                state: '='
+                state: '=',
+                isPrintMode: '='
             },
             templateUrl: 'modules/straatbeeld/components/straatbeeld/straatbeeld.html',
             link: linkFunction
@@ -65,6 +66,11 @@
                         scope.state.hotspots
                     );
                 }
+            });
+
+            //Re-render the Marzipano viewer if the size changes
+            scope.$watch('isPrintMode', function () {
+                $rootScope.$applyAsync(viewer.updateSize);
             });
         }
     }
