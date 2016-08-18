@@ -54,8 +54,8 @@
                     class="u-col-sm--{{vm.columnSizes.right}} qa-dashboard__content__column--right u-height--100 u-height--100"
                     ng-class="{
                         'u-padding__left--1': !vm.isPrintMode,
-                        'u-padding__right--1': !vm.isRightColumnScrollable,
-                        'c-dashboard__content--scrollable u-padding__right--2': vm.isRightColumnScrollable,
+                        'u-padding__right--1': !vm.isPrintMode && !vm.isRightColumnScrollable,
+                        'c-dashboard__content--scrollable u-padding__right--2': !vm.isPrintMode && vm.isRightColumnScrollable,
                         'u-height--auto': vm.isPrintMode
                     }">
 

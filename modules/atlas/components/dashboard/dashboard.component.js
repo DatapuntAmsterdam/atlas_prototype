@@ -25,7 +25,7 @@
             vm.isPrintMode = state.isPrintMode;
             vm.visibility = determineVisibility(state);
             
-            vm.isRightColumnScrollable = !vm.isPrintMode && !state.map.isFullscreen &&
+            vm.isRightColumnScrollable = !state.map.isFullscreen &&
                 (vm.visibility.page || vm.visibility.detail || vm.visibility.searchResults);
 
             vm.columnSizes = determineColumnSizes(vm.visibility, state.map.isFullscreen, vm.isPrintMode);
