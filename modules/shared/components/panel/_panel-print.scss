@@ -1,0 +1,20 @@
+.o-panel__heading {
+  @include font-size($m-header-font);
+  position: relative;
+  height: auto;
+  padding-top: 0 !important;
+  padding-right: 0;
+  padding-left: 0;
+  background-color: inherit;
+  color: inherit;
+}
+
+.o-panel__heading__icon {
+  display: none;
+}
+
+.o-panel__content {
+  padding-right: 0;
+  //A padding-left of zero partially hides the radio buttons on a Mac.
+  padding-left: 1px;
+}

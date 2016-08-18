@@ -30,4 +30,5 @@
 
 .is-print-mode {
   @import "styles/base/reset-print";
+  @import "components/panel/panel-print";
 }
