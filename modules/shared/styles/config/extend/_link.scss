@@ -1,6 +1,6 @@
 //This is an extend so it can be used by both the anchor tag as well as buttons with .btn--link
 
-$link-offset: 8px;
+$link-offset: $base-font-size;
 
 %link--arrow {
   display: inline-block;

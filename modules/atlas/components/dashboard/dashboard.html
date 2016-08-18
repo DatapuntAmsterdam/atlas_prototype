@@ -4,17 +4,15 @@
             <atlas-header query="{{vm.query}}"></atlas-header>
         </div>
     </div>
-    <div class="c-dashboard__content u-pl-1"
+    <div class="c-dashboard__content u-padding__left--1"
         ng-class="{
-            'u-pr-2': !vm.isRightColumnScrollable
+            'u-padding__right--2': !vm.isRightColumnScrollable
         }">
 
         <div class="u-grid u-height-100">
             <div class="u-row u-height-100">
-                <div ng-if="vm.sizeLeftColumn"
-                    class="u-col-sm--{{vm.sizeLeftColumn}} c-dashboard__content--scrollable u-height-100">
-
-                    <div ng-controller="LayerSelectionController as vm">
+                <div ng-if="vm.sizeLeftColumn" class="u-col-sm--{{vm.sizeLeftColumn}} u-height-100">
+                    <div ng-controller="LayerSelectionController as vm" class="u-height-100 u-padding__top--2">
                         <atlas-layer-selection
                             base-layer="{{vm.baseLayer}}"
                             overlays="vm.overlays"
@@ -25,6 +23,7 @@
                 </div>
 
                 <div class="u-col-sm--{{vm.sizeMiddleColumn}} u-height-100">
+
                     <div ng-controller="MapController as vm">
                         <dp-map
                             map-state="vm.mapState"
@@ -35,9 +34,9 @@
                 </div>
 
                 <div ng-if="vm.sizeRightColumn"
-                    class="u-col-sm--{{vm.sizeRightColumn}} u-height-100"
+                    class="u-col-sm--{{vm.sizeRightColumn}} u-height-100 u-padding__left--1 u-padding__bottom--2"
                     ng-class="{
-                        'c-dashboard__content--scrollable u-pr-2': vm.isRightColumnScrollable
+                        'c-dashboard__content--scrollable u-padding__right--2': vm.isRightColumnScrollable
                     }">
 
                     <div ng-if="vm.showDetail" ng-controller="DetailController as vm">

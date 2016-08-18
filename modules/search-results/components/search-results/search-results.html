@@ -1,7 +1,7 @@
 <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
 
 <div ng-if="!vm.isLoading" class="u-row">
-    <div class="u-pt-2 u-pb-2" ng-class="{
+    <div class="u-padding__top-2 u-padding__bottom--2" ng-class="{
         'u-col-sm--12': !vm.location,
         'u-col-sm--8': vm.location
         }">
@@ -18,8 +18,8 @@
 
                 <div ng-repeat="category in vm.searchResults"
                     ng-class="{
-                        'u-mt-1 u-ml-3': category.useIndenting,
-                        'u-mt-3': !category.useIndenting
+                        'u-margin__top--1 u-margin__left--3': category.useIndenting,
+                        'u-margin__top--3': !category.useIndenting
                     }">
 
                     <h2 class="u-color__primary--contrast u-font--m">
@@ -31,7 +31,7 @@
 
                     <div ng-if="category.count > 10">
                         <dp-link ng-if="category.more"
-                            class-name="btn btn--link u-color__primary--contrast u-mt-05"
+                            class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
                             type="FETCH_DETAIL"
                             payload="category.more.endpoint">
 
@@ -39,7 +39,7 @@
                         </dp-link>
 
                         <dp-link ng-if="!category.more"
-                            class-name="btn btn--link u-color__primary--contrast u-mt-05"
+                            class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
                             type="SHOW_SEARCH_RESULTS_CATEGORY"
                             payload="category.slug">
 
@@ -60,7 +60,7 @@
 
                 <button
                     ng-if="vm.searchResults[0].count > vm.searchResults[0].results.length && !vm.isLoadMoreLoading"
-                    class="btn btn--link u-color__primary--contrast u-mt-05"
+                    class="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
                     ng-click="vm.loadMore()">
 
                     Toon meer

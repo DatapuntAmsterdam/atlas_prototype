@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('dpMap')
+        .module('dpShared')
         .factory('geojson', geojsonFactory);
 
     function geojsonFactory () {

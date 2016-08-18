@@ -79,8 +79,8 @@ describe('The atlas-nummeraanduiding-header directive', function () {
 
             //Status 'Verblijfsobject gevormd', show a badge
             directive = getDirective('http://www.example-endpoint.com/18/', true);
-            expect(directive.find('.badge.badge--red').length).toBe(1);
-            expect(directive.find('.badge.badge--red').text()).toBe('Verblijfsobject gevormd');
+            expect(directive.find('.c-nummeraanduiding--gevormd').length).toBe(1);
+            expect(directive.find('.c-nummeraanduiding--gevormd').text()).toBe('Verblijfsobject gevormd');
         });
 
         it('adds a blue badge if it\'s a nevenadres', function () {
@@ -92,8 +92,8 @@ describe('The atlas-nummeraanduiding-header directive', function () {
 
             //Nevenadres
             directive = getDirective('http://www.example-endpoint.com/21/', false);
-            expect(directive.find('.badge.badge--blue').length).toBe(1);
-            expect(directive.find('.badge.badge--blue').text()).toBe('Dit is een nevenadres');
+            expect(directive.find('.c-nummeraanduiding--nevenadres').length).toBe(1);
+            expect(directive.find('.c-nummeraanduiding--nevenadres').text()).toBe('Dit is een nevenadres');
         });
     });
 

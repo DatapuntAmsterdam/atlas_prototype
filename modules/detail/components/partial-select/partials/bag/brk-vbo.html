@@ -1,16 +1,19 @@
 <div>
   <h4 ng-if="apiData.count >= 2" class="paginering">1-{{ apiData.results.length }} van {{ apiData.count }}</h4>
-  <div class="list" ng-repeat="object in apiData.results">
 
-    <dp-link type="FETCH_DETAIL" payload="object._links.self.href">
-      <i class="fa fa-chevron-right link"></i>{{ object._display}}
-    </dp-link>
+  <ul class="o-list">
+    <li ng-repeat="object in apiData.results">
+        <dp-link type="FETCH_DETAIL" payload="object._links.self.href" class-name="o-btn o-btn--link o-btn--contrast">
+          {{ object._display}}
+        </dp-link>
 
-    <atlas-partial-select partial="brk" api-data="{results:object}"></atlas-partial-select>
+        <div class="s-indented-list">
+            <atlas-partial-select partial="brk" api-data="{results:object}"></atlas-partial-select>
+        </div>
+    </li>
+  </ul>
 
-  </div>
-
-  <a class="loadmore" ng-click="loadMore()" ng-if="next">
-    <i class="fa fa-plus fa-2x link"></i>Meer
+  <a class="loadmore" ng-click="loadMore()" ng-if="apiData.next">
+    Meer
   </a>
 </div>

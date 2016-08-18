@@ -1,52 +1,43 @@
-<div class="stelselpedia-header">
-    <h2 class="stelselpedia-header__title">
-        <span ng-class="{
-            'stelselpedia-header__subtitle': vm.heading
-            }">
-            {{vm.stelselpedia.label}}
-        </span>
-        <span ng-if="vm.heading"><span ng-bind-html="vm.htmlHeading"></span></span>
+<div class="o-header">
+    <h3 class="o-header__subtitle">
+        {{vm.stelselpedia.label}}
+    </h3>
+    <h2 ng-if="vm.heading" class="o-header__title">
+        <span ng-bind-html="vm.htmlHeading"></span>
     </h2>
 
-    <button class="stelselpedia-header__button" ng-click="vm.toggle('help')">
-        <i class="fa fa-question-circle"></i>
+    <div class="o-header__buttongroup">
+        <button ng-click="vm.toggle('help')" class="o-header__button">
+            <span ng-if="!vm.isVisible('help')" class="o-header__button--image c-stelselpedia__button"><span class="u-sr-only">toon uitleg</span></span>
+            <span ng-if="vm.isVisible('help')" class="o-header__button--image is-stelselpedia--active"><span class="u-sr-only">verberg uitleg</span></span>
+        </button>
 
-        <span ng-if="!vm.isVisible('help')">toon uitleg</span>
-        <span ng-if="vm.isVisible('help')">verberg uitleg</span>
-    </button>
+        <button ng-if="vm.hasMetaData" ng-click="vm.toggle('meta')" class="o-header__button">
+            <span ng-if="!vm.isVisible('meta')" class="o-header__button--image c-metadata__button"><span class="u-sr-only">toon metadata</span></span>
+            <span ng-if="vm.isVisible('meta')" class="o-header__button--image is-metadata--active"><span class="u-sr-only">verberg metadata</span></span>
+        </button>
 
-    <button ng-if="vm.hasMetaData" class="stelselpedia-header__button" ng-click="vm.toggle('meta')">
-        <i class="fa fa-info-circle"></i>
+        <atlas-wkpb-link ng-if="vm.brk" brk-id="{{vm.brk.id}}"></atlas-wkpb-link>
+    </div>
 
-        <span ng-if="!vm.isVisible('meta')">toon metadata</span>
-        <span ng-if="vm.isVisible('meta')">verberg metadata</span>
-    </button>
-
-    <atlas-wkpb-link ng-if="vm.brk" brk-object="vm.brk.id"></atlas-wkpb-link>
-
-    <div ng-if="vm.isVisible('help')" class="stelselpedia-header__content">
-        <h3>Uitleg over {{vm.stelselpedia.label | lowercase}}</h3>
+    <div ng-if="vm.isVisible('help')" class="c-stelselpedia">
+        <h4>Uitleg over {{vm.stelselpedia.label | lowercase}}</h4>
         <p>{{vm.stelselpedia.description}}</p>
 
-        <p>
-            <a class="stelselpedia-header__external-link" ng-href="{{vm.stelselpedia.url}}" target="_blank">
-                <i class="fa fa-external-link"></i>
-                Lees verder op stelselpedia
-            </a>
-        </p>
+        <a class="o-link--arrow" ng-href="{{vm.stelselpedia.url}}" target="_blank">
+            Lees verder op stelselpedia
+        </a>
 
-        <button class="stelselpedia-header__button" ng-click="vm.toggle('help')">
-            <i class="fa fa-times"></i>
+        <button class="o-button--close" ng-click="vm.toggle('help')">
         </button>
     </div>
 
-    <div ng-if="vm.hasMetaData && vm.isVisible('meta')" class="stelselpedia-header__content">
-        <h3>Metadata van {{vm.stelselpedia.label | lowercase}}</h3>
+    <div ng-if="vm.hasMetaData && vm.isVisible('meta')" class="c-metadata">
+        <h4>Metadata van {{vm.stelselpedia.label | lowercase}}</h4>
 
         <atlas-stelselpedia-meta definition="{{vm.definition}}" api-data="vm.metaData"></atlas-stelselpedia-meta>
 
-        <button class="stelselpedia-header__button" ng-click="vm.toggle('meta')">
-            <i class="fa fa-times"></i>
+        <button class="o-button--close" ng-click="vm.toggle('meta')">
         </button>
     </div>
 </div>

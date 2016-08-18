@@ -260,8 +260,8 @@ describe('The dashboard component', function () {
             expect(columns[0].getAttribute('class')).toContain('u-col-sm--8');
             expect(columns[0].getAttribute('class')).not.toContain('u-col-sm--4');
 
-            //It is scrollable
-            expect(columns[0].getAttribute('class')).toContain('c-dashboard__content--scrollable');
+            //It has a 100% height
+            expect(columns[0].getAttribute('class')).toContain('u-height-100');
         });
 
         it('shows a small map (1/3) in the middle column', function () {

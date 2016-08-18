@@ -4,33 +4,33 @@
   <div class="u-grid">
     <div class="u-row">
       <div class="u-col-sm--6">
-        <p class=".u-background-u-color__secondary--gray10 u-p-1">.u-col-sm--6</p>
+        <p class=".u-background-u-color__secondary--gray10 u-padding--1">.u-col-sm--6</p>
       </div>
       <div class="u-col-sm--6">
-        <p class=".u-background-u-color__secondary--gray10 u-p-1">.u-col-sm--6</p>
+        <p class=".u-background-u-color__secondary--gray10 u-padding--1">.u-col-sm--6</p>
       </div>
     </div>
     <div class="row">
       <div class="u-col-sm--8">
-        <p class=".u-background-u-color__secondary--gray10 u-p-1">.u-col-sm--8</p>
+        <p class=".u-background-u-color__secondary--gray10 u-padding--1">.u-col-sm--8</p>
       </div>
       <div class="u-col-sm--4">
-        <p class=".u-background-u-color__secondary--gray10 u-p-1">.u-col-sm--4</p>
+        <p class=".u-background-u-color__secondary--gray10 u-padding--1">.u-col-sm--4</p>
       </div>
     </div>
     <div class="row">
       <div class="u-col-sm--8">
         <div class="row">
           <div class="u-col-sm--12 u-col-md--6">
-            <p class=".u-background-u-color__secondary--gray10 u-p-1">.u-col-md--6 (nested)</p>
+            <p class=".u-background-u-color__secondary--gray10 u-padding--1">.u-col-md--6 (nested)</p>
           </div>
           <div class="u-col-sm--12 u-col-md--6">
-            <p class=".u-background-u-color__secondary--gray10 u-p-1">.u-col-md--6 (nested)</p>
+            <p class=".u-background-u-color__secondary--gray10 u-padding--1">.u-col-md--6 (nested)</p>
           </div>
         </div>
       </div>
       <div class="u-col-sm--4">
-        <p class=".u-background-u-color__secondary--gray10 u-p-1">.u-col-sm--4</p>
+        <p class=".u-background-u-color__secondary--gray10 u-padding--1">.u-col-sm--4</p>
       </div>
     </div>
   </div>
@@ -44,8 +44,6 @@
     [class*="u-col-"] {
       position: relative;
       min-height: 1px;
-      padding-right: $base-whitespace;
-      padding-left: $base-whitespace;
       float: left;
     }
 

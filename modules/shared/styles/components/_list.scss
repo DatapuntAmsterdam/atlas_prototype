@@ -1,36 +1,27 @@
-/*
-@Name List
-@markup
-  <ul class="list-inline">
-    <li>Item #1</li>
-    <li>Item #2</li>
-    <li>Item #3</li>
-  </ul>
-*/
-.list {
-  border-top: 1px solid $secondary-gray60;
+%list {
 
   li {
-    border-bottom: 1px solid $secondary-gray60;
-    line-height: 22px;
+    line-height: 28px;
   }
 }
 
+.o-list {
+  @extend %list;
+}
 
-/*
-@Name List inline (horizontal)
-@markup
-  <ul class="list-inline">
-    <li>Item #1</li>
-    <li>Item #2</li>
-    <li>Item #3</li>
-  </ul>
-*/
-.list-inline {
-  font-size: 0;
+.o-list__bulleted {
+  @extend %list;
 
   li {
     display: inline-block;
-    font-size: $base-font-size;
+    position: relative;
+    margin-left: $base-font-size;
+
+    &::before {
+      display: inline-block;
+      position: absolute;
+      left: -$base-font-size;
+      content: "▪";
+    }
   }
 }

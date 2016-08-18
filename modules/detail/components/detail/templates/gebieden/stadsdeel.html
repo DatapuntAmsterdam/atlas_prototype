@@ -1,6 +1,6 @@
 <div class="detail-page__content">
   <div class="detail-page__content--main">
-    <div class="default-box">
+    <div class="u-row">
       <atlas-stelselpedia-header
         heading="{{vm.apiData.results.naam}}"
         definition="STADSDEEL"
@@ -8,7 +8,7 @@
 
       </atlas-stelselpedia-header>
 
-      <dl class="key-value-list">
+      <dl class="c-key-value-list">
         <dt>Code</dt>
         <dd>{{ vm.apiData.results.code }}</dd>
         <dt>Gemeente</dt>
@@ -17,13 +17,13 @@
 
     </div>
 
-    <div class="list-box" ng-if="vm.apiData.results.buurtcombinaties.count">
+    <div ng-if="vm.apiData.results.buurtcombinaties.count">
       <atlas-stelselpedia-header definition="BUURTCOMBINATIE" use-plural="true"></atlas-stelselpedia-header>
 
       <atlas-api-call endpoint="{{vm.apiData.results.buurtcombinaties.href}}" partial="lijst"></atlas-api-call>
     </div>
 
-    <div class="list-box" ng-if="vm.apiData.results.gebiedsgerichtwerken.count">
+    <div ng-if="vm.apiData.results.gebiedsgerichtwerken.count">
       <atlas-stelselpedia-header definition="GEBIEDSGERICHTWERKEN" use-plural="true"></atlas-stelselpedia-header>
 
       <atlas-api-call endpoint="{{vm.apiData.results.gebiedsgerichtwerken.href}}" partial="lijst"></atlas-api-call>

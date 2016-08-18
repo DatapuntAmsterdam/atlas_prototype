@@ -133,7 +133,7 @@ describe('The atlas-search directive', function () {
         directive.find('.js-search-input').trigger('change');
 
         //Submit the form
-        directive.find('.search-form').trigger('submit');
+        directive.find('.c-search-form').trigger('submit');
 
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_SEARCH_RESULTS_BY_QUERY,
@@ -146,27 +146,27 @@ describe('The atlas-search directive', function () {
             var directive = getDirective('');
 
             //No query and no suggestions
-            expect(directive.find('.search-form__autocomplete').length).toBe(0);
+            expect(directive.find('.c-autocomplete').length).toBe(0);
 
             //A query without suggestions
             directive.find('.js-search-input')[0].value = 'query without suggestions';
             directive.find('.js-search-input').trigger('change');
 
-            expect(directive.find('.search-form__autocomplete').length).toBe(0);
+            expect(directive.find('.c-autocomplete').length).toBe(0);
 
             //A query with suggestions
             directive.find('.js-search-input')[0].value = 'query with suggestions';
             directive.find('.js-search-input').trigger('change');
 
-            expect(directive.find('.search-form__autocomplete').length).toBe(1);
-            expect(directive.find('.search-form__autocomplete div:nth-of-type(1) h4').text()).toBe('Category A');
-            expect(directive.find('.search-form__autocomplete div:nth-of-type(1) li:nth-child(1)').text().trim())
+            expect(directive.find('.c-autocomplete').length).toBe(1);
+            expect(directive.find('.c-autocomplete div:nth-of-type(1) h4').text()).toBe('Category A');
+            expect(directive.find('.c-autocomplete div:nth-of-type(1) li:nth-child(1)').text().trim())
                 .toBe('Suggestion A1');
-            expect(directive.find('.search-form__autocomplete div:nth-of-type(1) li:nth-child(2)').text().trim())
+            expect(directive.find('.c-autocomplete div:nth-of-type(1) li:nth-child(2)').text().trim())
                 .toBe('Suggestion A2');
 
-            expect(directive.find('.search-form__autocomplete div:nth-of-type(2) h4').text()).toBe('Category B');
-            expect(directive.find('.search-form__autocomplete div:nth-of-type(2) li:nth-child(1)').text().trim())
+            expect(directive.find('.c-autocomplete div:nth-of-type(2) h4').text()).toBe('Category B');
+            expect(directive.find('.c-autocomplete div:nth-of-type(2) li:nth-child(1)').text().trim())
                 .toBe('Suggestion B1');
         });
 
@@ -200,7 +200,7 @@ describe('The atlas-search directive', function () {
                 spyOn(store, 'dispatch');
 
                 //First suggestion
-                directive.find('.search-form__autocomplete button').eq(0).click();
+                directive.find('.c-autocomplete button').eq(0).click();
 
                 expect(store.dispatch).toHaveBeenCalledWith({
                     type: ACTIONS.FETCH_DETAIL,
@@ -208,7 +208,7 @@ describe('The atlas-search directive', function () {
                 });
 
                 //Second suggestion
-                directive.find('.search-form__autocomplete button').eq(1).click();
+                directive.find('.c-autocomplete button').eq(1).click();
 
                 expect(store.dispatch).toHaveBeenCalledWith({
                     type: ACTIONS.FETCH_DETAIL,
@@ -216,7 +216,7 @@ describe('The atlas-search directive', function () {
                 });
 
                 //Third suggestion
-                directive.find('.search-form__autocomplete button').eq(2).click();
+                directive.find('.c-autocomplete button').eq(2).click();
 
                 expect(store.dispatch).toHaveBeenCalledWith({
                     type: ACTIONS.FETCH_DETAIL,
@@ -234,14 +234,14 @@ describe('The atlas-search directive', function () {
                 directive.find('.js-search-input')[0].value = 'query with suggestions';
                 directive.find('.js-search-input').trigger('change');
 
-                expect(directive.find('.search-form__autocomplete').length).toBe(1);
+                expect(directive.find('.c-autocomplete').length).toBe(1);
 
                 //Click a suggestion
-                directive.find('.search-form__autocomplete button').eq(0).click();
+                directive.find('.c-autocomplete button').eq(0).click();
                 directive.find('.js-search-input').trigger('blur');
                 $timeout.flush();
 
-                expect(directive.find('.search-form__autocomplete').length).toBe(0);
+                expect(directive.find('.c-autocomplete').length).toBe(0);
             });
 
             it('clears the input when clicking a suggestion', function () {
@@ -252,7 +252,7 @@ describe('The atlas-search directive', function () {
                 directive.find('.js-search-input').trigger('change');
 
                 //First suggestion
-                directive.find('.search-form__autocomplete button').eq(0).click();
+                directive.find('.c-autocomplete button').eq(0).click();
 
                 expect(directive.find('.js-search-input')[0].value).toBe('');
             });
@@ -276,11 +276,14 @@ describe('The atlas-search directive', function () {
                 directive.find('.js-search-input').trigger('change');
 
                 //Make sure no suggestion is highlighted by default
-                expect(directive.find('.search-form__autocomplete li').eq(0).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(0).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
-                expect(directive.find('.search-form__autocomplete li').eq(1).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(1).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
-                expect(directive.find('.search-form__autocomplete li').eq(2).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(2).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
 
 
@@ -291,11 +294,14 @@ describe('The atlas-search directive', function () {
                 $rootScope.$apply();
 
                 //Highlight the active suggestion in the list with suggestions
-                expect(directive.find('.search-form__autocomplete li').eq(0).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(0).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(true);
-                expect(directive.find('.search-form__autocomplete li').eq(1).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(1).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
-                expect(directive.find('.search-form__autocomplete li').eq(2).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(2).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
 
                 //Show the highlighted suggestion in the searchbox
@@ -308,11 +314,14 @@ describe('The atlas-search directive', function () {
                 triggerKeyDownEvent(directive.find('.js-search-input'), 40);
                 $rootScope.$apply();
 
-                expect(directive.find('.search-form__autocomplete li').eq(0).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(0).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
-                expect(directive.find('.search-form__autocomplete li').eq(1).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(1).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(true);
-                expect(directive.find('.search-form__autocomplete li').eq(2).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(2).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
 
                 expect(directive.find('.js-search-input')[0].value).toBe('Suggestion A2');
@@ -324,11 +333,14 @@ describe('The atlas-search directive', function () {
                 triggerKeyDownEvent(directive.find('.js-search-input'), 40);
                 $rootScope.$apply();
 
-                expect(directive.find('.search-form__autocomplete li').eq(0).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(0).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
-                expect(directive.find('.search-form__autocomplete li').eq(1).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(1).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
-                expect(directive.find('.search-form__autocomplete li').eq(2).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(2).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(true);
 
                 expect(directive.find('.js-search-input')[0].value).toBe('Suggestion B1');
@@ -340,11 +352,14 @@ describe('The atlas-search directive', function () {
                 triggerKeyDownEvent(directive.find('.js-search-input'), 38);
                 $rootScope.$apply();
 
-                expect(directive.find('.search-form__autocomplete li').eq(0).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(0).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
-                expect(directive.find('.search-form__autocomplete li').eq(1).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(1).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(true);
-                expect(directive.find('.search-form__autocomplete li').eq(2).find('button').hasClass('active'))
+                expect(directive.find('.c-autocomplete li').eq(2).find('button')
+                    .hasClass('c-autocomplete__category__suggestion--active'))
                     .toBe(false);
 
                 expect(directive.find('.js-search-input')[0].value).toBe('Suggestion A2');
@@ -384,13 +399,13 @@ describe('The atlas-search directive', function () {
                 $rootScope.$apply();
 
                 expect(directive.find('.js-search-input')[0].value).toBe('Suggestion B1');
-                expect(directive.find('.search-form__autocomplete').length).toBe(1);
+                expect(directive.find('.c-autocomplete').length).toBe(1);
 
                 //Press ESCAPE
                 triggerKeyDownEvent(directive.find('.js-search-input'), 27);
 
                 expect(directive.find('.js-search-input')[0].value).toBe('query with suggestions');
-                expect(directive.find('.search-form__autocomplete').length).toBe(0);
+                expect(directive.find('.c-autocomplete').length).toBe(0);
             });
 
             describe('submitting the form (triggered by ENTER) with a highlighted suggestion', function () {
@@ -411,7 +426,7 @@ describe('The atlas-search directive', function () {
                     $rootScope.$apply();
 
                     //Trigger the submit
-                    directive.find('.search-form').trigger('submit');
+                    directive.find('.c-search-form').trigger('submit');
                 });
 
                 it('opens the selected suggestion', function () {
@@ -426,7 +441,7 @@ describe('The atlas-search directive', function () {
                 });
 
                 it('hides the suggestions when submitting the form', function () {
-                    expect(directive.find('.search-form__autocomplete').length).toBe(0);
+                    expect(directive.find('.c-autocomplete').length).toBe(0);
                 });
             });
         });
@@ -438,13 +453,13 @@ describe('The atlas-search directive', function () {
             directive.find('.js-search-input')[0].value = 'query with suggestions';
             directive.find('.js-search-input').trigger('change');
 
-            expect(directive.find('.search-form__autocomplete').length).toBe(1);
+            expect(directive.find('.c-autocomplete').length).toBe(1);
 
             //Lose focus
             directive.find('.js-search-input').trigger('blur');
             $timeout.flush();
 
-            expect(directive.find('.search-form__autocomplete').length).toBe(0);
+            expect(directive.find('.c-autocomplete').length).toBe(0);
         });
     });
 });

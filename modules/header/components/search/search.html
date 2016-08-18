@@ -1,7 +1,7 @@
-<form class="search-form" ng-submit="formSubmit($event)">
+<form class="c-search-form" ng-submit="formSubmit($event)">
     <fieldset>
         <input
-            class="search-form__input js-search-input"
+            class="c-search-form__input js-search-input"
             type="text"
             ng-model="query"
             autocapitalize="off"
@@ -13,19 +13,19 @@
             ng-keydown="navigateSuggestions($event)"
             ng-blur="removeSuggestions($event)">
 
-        <button class="search-form__submit" type="submit">
+        <button class="c-search-form__submit" type="submit">
             <span class="u-sr-only">Zoek</span>
         </button>
 
-        <div ng-if="numberOfSuggestions" class="search-form__autocomplete">
-            <h3 class="search-form__autocomplete__tip">Enkele suggesties</h3>
+        <div ng-if="numberOfSuggestions" class="c-autocomplete">
+            <h3 class="c-autocomplete__tip">Enkele suggesties</h3>
 
-            <div class="search-form__autocomplete__category" ng-repeat="category in suggestions">
-                <h4>{{category.label}}</h4>
+            <div class="c-autocomplete__category" ng-repeat="category in suggestions">
+                <h4 class="c-autocomplete__category__heading">{{category.label}}</h4>
                 <ul>
                     <li ng-repeat="suggestion in category.content">
-                        <button type="button" ng-class="{
-                                active: activeSuggestionIndex === suggestion.index
+                        <button type="button" class="c-autocomplete__category__suggestion" ng-class="{
+                                'c-autocomplete__category__suggestion--active': activeSuggestionIndex === suggestion.index
                             }"
                             ng-click="goToDetail(suggestion.uri); setFocus()"
                             ng-bind-html="suggestion._display | longNameShortener | suggestionHighlight : (originalQuery || query)">

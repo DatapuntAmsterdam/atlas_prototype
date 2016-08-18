@@ -72,7 +72,7 @@ describe('The dp-toggle-fullscreen component', function () {
         it('shows a minimize icon', function () {
             expect(component.find('button img').length).toBe(1);
 
-            expect(component.find('button img').attr('src')).toContain('assets/icons/min.svg');
+            expect(component.find('button img').attr('src')).toContain('assets/icons/minimize.svg');
             expect(component.find('button img').attr('alt')).toBe('Kaart verkleinen');
         });
 

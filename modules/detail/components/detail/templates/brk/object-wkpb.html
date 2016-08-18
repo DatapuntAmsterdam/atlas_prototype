@@ -9,9 +9,9 @@
 
     <div class="clearfix"></div>
 
-    <div class="default-box">
+    <div class="u-row">
       <h2>Opgegeven zoekcriteria</h2>
-      <dl class="key-value-list">
+      <dl class="c-key-value-list">
         <dt>Datum rapport</dt>
         <dd>
           <atlas-current-date></atlas-current-date>
@@ -29,7 +29,7 @@
 
     <div class="default-box">
       <h2 class="default-box__header">Kadastraal object</h2>
-      <dl class="key-value-list">
+      <dl class="c-key-value-list">
         <dt>Gemeentecode</dt>
         <dd>{{vm.apiData.results.kadastrale_gemeente._display}}</dd>
         <dt>Sectie</dt>
@@ -56,7 +56,7 @@
     <div ng-if="vm.apiData.results.beperkingen">
       <div class="default-box" ng-repeat="beperking in vm.apiData.results.beperkingen">
         <h2 class="default-box__header">Gemeentelijke publiekrechtelijke beperking<sup>*</sup></h2>
-        <dl class="key-value-list">
+        <dl class="c-key-value-list">
           <dt>Inschrijfnummer</dt>
           <dd>{{beperking.inschrijfnummer}}</dd>
           <dt>Beperkingcode</dt>
