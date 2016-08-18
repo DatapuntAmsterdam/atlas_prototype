@@ -70,7 +70,9 @@
 
             //Re-render the Marzipano viewer if the size changes
             scope.$watch('isPrintMode', function () {
-                $rootScope.$applyAsync(viewer.updateSize);
+                $rootScope.$applyAsync(function () {
+                    viewer.updateSize();
+                });
             });
         }
     }
