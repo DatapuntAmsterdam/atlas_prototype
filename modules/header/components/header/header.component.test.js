@@ -115,7 +115,7 @@ describe('The atlas-header component', function () {
         });
 
         it('shows a link to leave the print mode', function () {
-            expect(component.text().toLowerCase()).toContain('verlaat print versie');
+            expect(component.text().toLowerCase()).toContain('verlaat printversie');
         });
     });
 
