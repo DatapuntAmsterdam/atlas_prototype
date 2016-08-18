@@ -119,7 +119,7 @@ describe('The marzipanoService factory', function () {
         expect(viewer).toEqual(fakeViewer);
     });
 
-    it('uses the CSS stagetype to enable print in Firefox and Safari', function () {
+    it('uses the CSS stageType to enable print in Firefox and Safari', function () {
         var fakeDomElement;
 
         fakeDomElement = document.createElement('div');
