@@ -3,3 +3,8 @@
 @import "components/hotspot/hotspot";
 @import "components/straatbeeld/straatbeeld";
 @import "components/metadata/metadata";
+
+.is-print-mode {
+  @import "components/straatbeeld/straatbeeld-print";
+  @import "components/metadata/metadata-print";
+}
