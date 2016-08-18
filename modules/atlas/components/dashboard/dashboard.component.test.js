@@ -276,7 +276,7 @@ describe('The dashboard component', function () {
 
                     //It has a 100% height
                     expect(component.find('.qa-dashboard__content__column--left').attr('class'))
-                        .toContain('u-height-100');
+                        .toContain('u-height--100');
                 });
 
                 it('shows a small map (1/3) in the middle column', function () {
@@ -572,23 +572,25 @@ describe('The dashboard component', function () {
             expect(component.find('.u-row').hasClass('u-height--false')).toBe(false);
 
             //Middle column
-            expect(component.find('.u-col-sm--4').hasClass('u-height--100')).toBe(true);
-            expect(component.find('.u-col-sm--4').hasClass('u-height--auto')).toBe(false);
+            expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--100')).toBe(true);
+            expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--auto')).toBe(false);
 
             //Right column
-            expect(component.find('.u-col-sm--8').hasClass('u-height--100')).toBe(true);
-            expect(component.find('.u-col-sm--8').hasClass('u-height--auto')).toBe(false);
+            expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--100')).toBe(true);
+            expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--auto')).toBe(false);
 
             //Open the left column
             mockedState.map.showLayerSelection = true;
             component = getComponent();
 
             //Check the left column
-            expect(component.find('.u-col-sm--8').hasClass('u-height--100')).toBe(true);
-            expect(component.find('.u-col-sm--8').hasClass('u-height--auto')).toBe(false);
+            expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--100')).toBe(true);
+            expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--auto')).toBe(false);
         });
 
         it('uses the default (auto) height in print mode', function () {
+            mockedState.detail = {};
+            mockedState.page = null;
             mockedState.isPrintMode = true;
             spyOn(store, 'getState').and.returnValue(mockedState);
 
@@ -599,17 +601,17 @@ describe('The dashboard component', function () {
             expect(component.find('.u-row').hasClass('u-height--auto')).toBe(true);
 
             //Middle column
-            expect(component.find('.u-col-sm--4').hasClass('u-height--auto')).toBe(true);
+            expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--auto')).toBe(true);
 
             //Right column
-            expect(component.find('.u-col-sm--8').hasClass('u-height--auto')).toBe(true);
+            expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--auto')).toBe(true);
 
             //Open the left column
             mockedState.map.showLayerSelection = true;
             component = getComponent();
 
             //Check the left column
-            expect(component.find('.u-col-sm--8').hasClass('u-height--auto')).toBe(true);
+            expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--auto')).toBe(true);
         });
     });
 });
