@@ -115,8 +115,20 @@ describe('The marzipanoService factory', function () {
         fakeDomElement = document.createElement('div');
         viewer = marzipanoService.initialize(fakeDomElement);
 
-        expect(Marzipano.Viewer).toHaveBeenCalledWith(fakeDomElement);
+        expect(Marzipano.Viewer).toHaveBeenCalledWith(fakeDomElement, jasmine.anything());
         expect(viewer).toEqual(fakeViewer);
+    });
+
+    it('uses the CSS stagetype to enable print in Firefox and Safari', function () {
+        var fakeDomElement;
+
+        fakeDomElement = document.createElement('div');
+        marzipanoService.initialize(fakeDomElement);
+
+        //Note the default stageType is 'webgl' and that won't print in Firefox and Safari
+        expect(Marzipano.Viewer).toHaveBeenCalledWith(jasmine.anything(), {
+            stageType: 'css'
+        });
     });
 
     describe('it has a loadScene function', function () {
