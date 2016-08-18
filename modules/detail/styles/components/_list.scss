@@ -46,6 +46,10 @@
   dd {
     width: 100% / 6 * 4; //4 van 6 kolommen
   }
+
+  &::after {
+    @extend %clearfix;
+  }
 }
 
 .c-parent-relations {

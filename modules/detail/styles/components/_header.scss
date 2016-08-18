@@ -8,10 +8,11 @@
 
 .o-header__subtitle {
   display: block;
-  padding-top: $base-whitespace * 2;
+  padding-top: $base-whitespace * 2 !important;
   color: $primary-contrast;
 
   .s-indented-list & {
+    @include font-size($s-header-font);
     color: $primary-dark;
   }
 }
@@ -31,6 +32,6 @@
 
 .o-header__button--image {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: $button-size;
+  height: $button-size;
 }

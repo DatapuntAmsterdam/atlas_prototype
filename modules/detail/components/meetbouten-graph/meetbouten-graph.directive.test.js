@@ -116,8 +116,8 @@ describe('The atlas-meetbout-graph directive', function () {
                 var svgContainer = directive.find('svg');
 
                 expect(svgContainer).toExist();
-                expect(svgContainer.attr('class')).toBe('detail-page__grafiek');
-                expect(svgContainer.attr('width')).toBe('714');
+                expect(svgContainer.attr('class')).toBe('c-meetbout');
+                expect(svgContainer.attr('width')).toBe('750');
                 expect(svgContainer.attr('height')).toBe('400');
             });
 
@@ -127,7 +127,7 @@ describe('The atlas-meetbout-graph directive', function () {
                 var gContainer = directive.find('svg > g');
 
                 expect(gContainer).toExist();
-                expect(gContainer.attr('transform')).toBe('translate(40,10)');
+                expect(gContainer.attr('transform')).toBe('translate(60,10)');
             });
 
         });
@@ -140,7 +140,7 @@ describe('The atlas-meetbout-graph directive', function () {
                 var xAs = directive.find('svg > g > g:nth-of-type(1)');
 
                 expect(xAs).toExist();
-                expect(xAs.attr('class')).toBe('x axis');
+                expect(xAs.attr('class')).toBe('c-meetbout__axis');
                 expect(xAs.attr('transform')).toBe('translate(0,360)');
             });
 
@@ -154,7 +154,7 @@ describe('The atlas-meetbout-graph directive', function () {
                 var yZakking = directive.find('svg > g > g:nth-of-type(2)');
 
                 expect(yZakking).toExist();
-                expect(yZakking.attr('class')).toBe('axis y-zakking-axis');
+                expect(yZakking.attr('class')).toBe('c-meetbout__axis c-meetbout__axis--y-zakking');
             });
 
             it('should append a text to the yZakking axis', function(){
@@ -181,8 +181,8 @@ describe('The atlas-meetbout-graph directive', function () {
                 var yZakkingssnelheid = directive.find('svg > g > g:nth-of-type(3)');
 
                 expect(yZakkingssnelheid).toExist();
-                expect(yZakkingssnelheid.attr('class')).toBe('axis y-zakkingssnelheid-axis');
-                expect(yZakkingssnelheid.attr('transform')).toBe('translate(614,0)');
+                expect(yZakkingssnelheid.attr('class')).toBe('c-meetbout__axis c-meetbout__axis--y-zakkingssnelheid');
+                expect(yZakkingssnelheid.attr('transform')).toBe('translate(630,0)');
             });
 
             it('should append a text to the yZakking axis', function(){
@@ -209,7 +209,7 @@ describe('The atlas-meetbout-graph directive', function () {
                 var line = directive.find('svg > g > path:nth-of-type(1)');
 
                 expect(line).toExist();
-                expect(line.attr('class')).toBe('line zakking');
+                expect(line.attr('class')).toBe('c-meetbout__line c-meetbout__line--zakking');
             });
 
         });
@@ -222,7 +222,7 @@ describe('The atlas-meetbout-graph directive', function () {
                 var line = directive.find('svg > g > path:nth-of-type(2)');
 
                 expect(line).toExist();
-                expect(line.attr('class')).toBe('line zakkingssnelheid');
+                expect(line.attr('class')).toBe('c-meetbout__line c-meetbout__line--zakkingssnelheid');
             });
 
         });
