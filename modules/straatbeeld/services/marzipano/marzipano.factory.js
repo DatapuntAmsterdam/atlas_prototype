@@ -21,7 +21,9 @@
          * @returns {Object} - A Marzipano Viewer instance
          */
         function initialize (domElement) {
-            viewer = new Marzipano.Viewer(domElement);
+            viewer = new Marzipano.Viewer(domElement, {
+                stageType: 'css'
+            });
 
             return viewer;
         }
