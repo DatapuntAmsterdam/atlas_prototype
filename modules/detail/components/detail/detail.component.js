@@ -18,7 +18,8 @@
         'api',
         'endpointParser',
         'geometry',
-        'geojson'
+        'geojson',
+        'crsConverter'
     ];
 
     function AtlasDetailController (
@@ -28,7 +29,8 @@
         api,
         endpointParser,
         geometry,
-        geojson) {
+        geojson,
+        crsConverter) {
 
         var vm = this;
 
@@ -44,7 +46,7 @@
 
                 geometry.getGeoJSON(endpoint).then(function (geometry) {
                     if (geometry !== null) {
-                        vm.location = geojson.getCenter(geometry);
+                        vm.location = crsConverter.rdToWgs84(geojson.getCenter(geometry));
                     }
 
                     store.dispatch({
