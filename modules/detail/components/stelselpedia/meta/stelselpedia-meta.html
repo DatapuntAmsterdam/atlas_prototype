@@ -1,5 +1,7 @@
-<dl class="stacked-key-value-list muted" ng-if="vm.metaFields">
-  <dt ng-repeat-start="metaField in vm.metaFields">{{metaField.label}}</dt>
-  <dd ng-if="metaField.type !== 'date'">{{metaField.value}}</dd>
-  <dd ng-repeat-end ng-if="metaField.type === 'date'">{{metaField.value | date: "dd-MM-yyyy"}}</dd>
-</dl>
+<div class="u-row">
+    <dl class="c-key-value-list" ng-if="vm.metaFields">
+        <dt ng-repeat-start="metaField in vm.metaFields">{{metaField.label}}</dt>
+        <dd ng-if="metaField.type !== 'date'">{{metaField.value}}</dd>
+        <dd ng-repeat-end ng-if="metaField.type === 'date'">{{metaField.value | date: "dd-MM-yyyy"}}</dd>
+    </dl>
+</div>

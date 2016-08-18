@@ -43,3 +43,16 @@
     }
   }
 }
+
+.o-button--close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: $button-size;
+  height: $button-size;
+  background-image: url("assets/icons/close.svg");
+
+  &:hover {
+    background-image: url("assets/icons/close-hover.svg");
+  }
+}

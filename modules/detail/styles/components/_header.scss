@@ -1,0 +1,36 @@
+.o-header {
+  position: relative;
+}
+
+.o-header__title {
+  padding-top: 0;
+}
+
+.o-header__subtitle {
+  display: block;
+  padding-top: $base-whitespace * 2;
+  color: $primary-contrast;
+
+  .s-indented-list & {
+    color: $primary-dark;
+  }
+}
+
+.o-header__buttongroup {
+  position: absolute;
+  top: $base-whitespace * 2;
+  right: 0;
+}
+
+.o-header__button {
+  width: $button-size;
+  height: $button-size;
+  margin-left: $base-whitespace;
+  float: right;
+}
+
+.o-header__button--image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

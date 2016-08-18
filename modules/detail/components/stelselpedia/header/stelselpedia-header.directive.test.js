@@ -80,49 +80,46 @@ describe('The atlas-stelselpedia-header directive', function () {
     it('always shows the Stelselpedia label w/ an button to toggle more information', function () {
         var directive = getDirective(null, 'BOUWBLOK', false, null, null);
 
-        expect(directive.find('.stelselpedia-header__title span').text().trim()).toBe('Bouwblok');
-        expect(directive.find('.stelselpedia-header__button:nth-of-type(1)').text().trim()).toBe('toon uitleg');
+        expect(directive.find('.o-header__subtitle').text().trim()).toBe('Bouwblok');
+        expect(directive.find('.o-header__button:nth-of-type(1)').text().trim()).toBe('toon uitleg');
     });
 
     it('has support for plurals in the Stelselpedia label', function () {
         var directive;
 
         directive = getDirective(null, 'BOUWBLOK', false, null, null);
-        expect(directive.find('.stelselpedia-header__title').text().trim()).toBe('Bouwblok');
+        expect(directive.find('.o-header__subtitle').text().trim()).toBe('Bouwblok');
 
         directive = getDirective(null, 'BOUWBLOK', true, null, null);
-        expect(directive.find('.stelselpedia-header__title').text().trim()).toBe('Bouwblokken');
+        expect(directive.find('.o-header__subtitle').text().trim()).toBe('Bouwblokken');
     });
 
     it('has an optional heading that can be placed in front of the Stelselpedia label', function () {
         var directive = getDirective('Ik ben een hele specifieke titel', 'BOUWBLOK', false, null);
 
-        expect(directive.find('.stelselpedia-header__title span').eq(1).text())
+        expect(directive.find('.o-header__title').text().trim())
             .toBe('Ik ben een hele specifieke titel');
 
-        expect(directive.find('.stelselpedia-header__title span').eq(0).attr('class'))
-            .toContain('stelselpedia-header__subtitle');
-
-        expect(directive.find('.stelselpedia-header__title span').eq(0).text().trim()).toBe('Bouwblok');
+        expect(directive.find('.o-header__subtitle').text().trim()).toBe('Bouwblok');
     });
 
     it('always has a Stelselpedia panel', function () {
         var directive = getDirective(null, 'BOUWBLOK', false, null, null);
 
         //The panel is hidden by default
-        expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+        expect(directive.find('.c-stelselpedia').length).toBe(0);
 
         //The panel can be opened by clicking the 'toon uitleg' button
-        directive.find('.stelselpedia-header__button:nth-of-type(1)').click();
-        expect(directive.find('.stelselpedia-header__content').length).toBe(1);
+        directive.find('.o-header__button:nth-of-type(1)').click();
+        expect(directive.find('.c-stelselpedia').length).toBe(1);
 
         //Inside the content of the panel
-        expect(directive.find('.stelselpedia-header__content h3').text()).toBe('Uitleg over bouwblok');
-        expect(directive.find('.stelselpedia-header__content p:nth-of-type(1)')
+        expect(directive.find('.c-stelselpedia h4').text()).toBe('Uitleg over bouwblok');
+        expect(directive.find('.c-stelselpedia p:nth-of-type(1)')
             .text()).toBe('Verhaaltje over bouwblokken');
-        expect(directive.find('.stelselpedia-header__content p:nth-of-type(2) a').attr('href'))
+        expect(directive.find('.c-stelselpedia a').attr('href'))
             .toBe('http://www.example.com/bouwblok/');
-        expect(directive.find('.stelselpedia-header__content p:nth-of-type(2) a').text().trim())
+        expect(directive.find('.c-stelselpedia a').text().trim())
             .toBe('Lees verder op stelselpedia');
     });
 
@@ -142,26 +139,26 @@ describe('The atlas-stelselpedia-header directive', function () {
             //BRONDOCUMENT has no meta data
             directive = getDirective(null, 'BRONDOCUMENT', false, null, null);
 
-            expect(directive.find('.stelselpedia-header__button:nth-of-type(2)').length).toBe(0);
+            expect(directive.find('.o-header__button:nth-of-type(2)').length).toBe(0);
 
             //BOUWBLOK has metadata
             directive = getDirective(null, 'BOUWBLOK', false, metaData, null);
-            expect(directive.find('.stelselpedia-header__button:nth-of-type(2)').length).toBe(1);
-            expect(directive.find('.stelselpedia-header__button:nth-of-type(2)').text().trim()).toBe('toon metadata');
+            expect(directive.find('.o-header__button:nth-of-type(2)').length).toBe(1);
+            expect(directive.find('.o-header__button:nth-of-type(2)').text().trim()).toBe('toon metadata');
         });
 
         it('can open a panel that loads the atlas-stelselpedia-meta directive', function () {
             var directive = getDirective(null, 'BOUWBLOK', false, metaData, null);
 
             //The panel is hidden by default
-            expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+            expect(directive.find('.c-metadata').length).toBe(0);
 
             //Open the panel
-            directive.find('.stelselpedia-header__button:nth-of-type(2)').click();
+            directive.find('.o-header__button:nth-of-type(2)').click();
 
-            expect(directive.find('.stelselpedia-header__content').length).toBe(1);
-            expect(directive.find('.stelselpedia-header__content h3').text().trim()).toBe('Metadata van bouwblok');
-            expect(directive.find('.stelselpedia-header__content atlas-stelselpedia-meta').length).toBe(1);
+            expect(directive.find('.c-metadata').length).toBe(1);
+            expect(directive.find('.c-metadata h4').text().trim()).toBe('Metadata van bouwblok');
+            expect(directive.find('.c-metadata atlas-stelselpedia-meta').length).toBe(1);
         });
     });
 
@@ -179,7 +176,7 @@ describe('The atlas-stelselpedia-header directive', function () {
             directive = getDirective(null, 'BRONDOCUMENT', false, null, null);
 
 
-            expect(directive.find('.stelselpedia-header__button:nth-of-type(2)').length).toBe(0);
+            expect(directive.find('atlas-wkpb-link').length).toBe(0);
 
             //GEMEENTELIJKE_BEPERKING enige met wkpb uittreksel
             directive = getDirective(null, 'GEMEENTELIJKE_BEPERKING', false, null, brk);
@@ -201,55 +198,56 @@ describe('The atlas-stelselpedia-header directive', function () {
         });
 
         it('can be opened and closed with the button in the header', function () {
-            expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+            expect(directive.find('.c-stelselpedia').length).toBe(0);
 
             //Open uitleg
-            directive.find('.stelselpedia-header__button:nth-of-type(1)').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(1);
+            directive.find('.o-header__button:nth-of-type(1)').click();
+            expect(directive.find('.c-stelselpedia').length).toBe(1);
 
             //Close uitleg with the button in the header
-            directive.find('.stelselpedia-header__button:nth-of-type(1)').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+            directive.find('.o-header__button:nth-of-type(1)').click();
+            expect(directive.find('.c-stelselpedia').length).toBe(0);
 
             //Open metadata
-            directive.find('.stelselpedia-header__button:nth-of-type(2)').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(1);
+            directive.find('.o-header__button:nth-of-type(2)').click();
+            expect(directive.find('.c-metadata').length).toBe(1);
 
             //Close metadata with the button in the header
-            directive.find('.stelselpedia-header__button:nth-of-type(2)').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+            directive.find('.o-header__button:nth-of-type(2)').click();
+            expect(directive.find('.c-metadata').length).toBe(0);
         });
 
         it('can be closed with the button (cross) in the panel', function () {
-            expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+            expect(directive.find('.c-stelselpedia').length).toBe(0);
 
             //Open uitleg
-            directive.find('.stelselpedia-header__button:nth-of-type(1)').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(1);
+            directive.find('.o-header__button:nth-of-type(1)').click();
+            expect(directive.find('.c-stelselpedia').length).toBe(1);
 
             //Close uitleg with the cross
-            directive.find('.stelselpedia-header__content .stelselpedia-header__button').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+            directive.find('.o-button--close').click();
+            expect(directive.find('.c-stelselpedia').length).toBe(0);
 
             //Open metadata
-            directive.find('.stelselpedia-header__button:nth-of-type(2)').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(1);
+            directive.find('.o-header__button:nth-of-type(2)').click();
+            expect(directive.find('.c-metadata').length).toBe(1);
 
             //Close metadata with the cross
-            directive.find('.stelselpedia-header__content .stelselpedia-header__button').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+            directive.find('.o-button--close').click();
+            expect(directive.find('.c-metadatat').length).toBe(0);
         });
 
         it('can open uitleg and metadata at the same time', function () {
-            expect(directive.find('.stelselpedia-header__content').length).toBe(0);
+            expect(directive.find('.c-stelselpedia').length).toBe(0);
 
             //Open uitleg
-            directive.find('.stelselpedia-header__button:nth-of-type(1)').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(1);
+            directive.find('.o-header__button:nth-of-type(1)').click();
+            expect(directive.find('.c-stelselpedia').length).toBe(1);
 
             //Open metadata
-            directive.find('.stelselpedia-header__button:nth-of-type(2)').click();
-            expect(directive.find('.stelselpedia-header__content').length).toBe(2);
+            directive.find('.o-header__button:nth-of-type(2)').click();
+            expect(directive.find('.c-metadata').length).toBe(1);
+            expect(directive.find('.c-stelselpedia').length).toBe(1);
         });
     });
 });
