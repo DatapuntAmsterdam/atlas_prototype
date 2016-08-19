@@ -1,93 +1,95 @@
-<dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
+<div class="u-margin__top--2">
+    <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
 
-<div ng-if="!vm.isLoading" class="u-row">
-    <div class="u-padding__top-2 u-padding__bottom--2" ng-class="{
-        'u-col-sm--12': !vm.location,
-        'u-col-sm--8': vm.location
-        }">
+    <div ng-if="!vm.isLoading" class="u-row">
+        <div class="u-padding__top-2 u-padding__bottom--2" ng-class="{
+                'u-col-sm--12': !vm.location,
+                'u-col-sm--8': vm.location
+            }">
 
-        <div ng-if="vm.numberOfResults">
-            <div ng-if="!vm.category">
-                <div class="o-header">
-                    <div class="o-header__subtitle">
-                        Zoekresultaten
+            <div ng-if="vm.numberOfResults">
+                <div ng-if="!vm.category">
+                    <div class="o-header">
+                        <h1 class="o-header__title">
+                            Zoekresultaten
+                        </h1>
                     </div>
-                    <div class="o-header__title">
-                        <span ng-if="vm.query">"{{vm.query}}"</span>
-                        <span ng-if="vm.location">{{vm.location | coordinates}}</span>
-                    </div>
-                </div>
-                <p>
-                    {{vm.numberOfResults | number}}
-                    {{vm.numberOfResults === 1 ? 'resultaat' : 'resultaten'}}
-                    met
-                    <span ng-if="vm.query">"<strong>{{vm.query}}</strong>"</span>
-                    <span ng-if="vm.location">locatie <strong>{{vm.location | coordinates}}</strong></span>
-                </p>
+                    <p>
+                        {{vm.numberOfResults | number}}
+                        {{vm.numberOfResults === 1 ? 'resultaat' : 'resultaten'}}
+                        met
+                        <span ng-if="vm.query">"<strong>{{vm.query}}</strong>"</span>
+                        <span ng-if="vm.location">locatie <strong>{{vm.location | coordinates}}</strong></span>
+                    </p>
 
-                <div ng-repeat="category in vm.searchResults"
-                    ng-class="{
-                        'u-margin__top--1 u-margin__left--3': category.useIndenting,
-                        'u-margin__top--3': !category.useIndenting
-                    }">
+                    <div ng-repeat="category in vm.searchResults"
+                         ng-class="{
+                            'u-margin__top--1 u-margin__left--3': category.useIndenting,
+                            'u-margin__top--3': !category.useIndenting
+                        }">
 
-                    <h2 class="u-color__primary--contrast u-font--m">
-                        <span ng-if="category.count > 1">{{category.label_plural}} ({{category.count | number}})</span>
-                        <span ng-if="category.count === 1">{{category.label_singular}}</span>
-                    </h2>
+                        <h1 class="u-color__primary--contrast u-font--m">
+                            <span ng-if="category.count > 1">{{category.label_plural}} ({{category.count | number}})</span>
+                            <span ng-if="category.count === 1">{{category.label_singular}}</span>
+                        </h1>
 
-                    <atlas-search-results-list category="category" limit-results="true"></atlas-search-results-list>
+                        <atlas-search-results-list category="category" limit-results="true"></atlas-search-results-list>
 
-                    <div ng-if="category.count > 10">
-                        <dp-link ng-if="category.more"
-                            class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
-                            type="FETCH_DETAIL"
-                            payload="category.more.endpoint">
+                        <div ng-if="category.count > 10">
+                            <dp-link ng-if="category.more"
+                                     class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
+                                     type="FETCH_DETAIL"
+                                     payload="category.more.endpoint">
 
-                            {{category.more.label}}
-                        </dp-link>
+                                {{category.more.label}}
+                            </dp-link>
 
-                        <dp-link ng-if="!category.more"
-                            class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
-                            type="SHOW_SEARCH_RESULTS_CATEGORY"
-                            payload="category.slug">
+                            <dp-link ng-if="!category.more"
+                                     class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
+                                     type="SHOW_SEARCH_RESULTS_CATEGORY"
+                                     payload="category.slug">
 
-                            Toon alle {{category.count | number}}
-                        </dp-link>
+                                Toon alle {{category.count | number}}
+                            </dp-link>
+                        </div>
                     </div>
                 </div>
+                <div ng-if="vm.category">
+                    <div class="o-header">
+                        <h2 class="o-header__title">
+                            Zoekresultaten: {{vm.categoryName}}
+                        </h2>
+                    </div>
+                    <p>
+                        {{vm.numberOfResults | number}}
+                        <strong>{{vm.categoryName | lowercase}}</strong>
+                        met
+                        <span ng-if="vm.query">"<strong>{{vm.query}}</strong>"</span>
+                    </p>
+
+                    <atlas-search-results-list category="vm.searchResults[0]"></atlas-search-results-list>
+
+                    <button
+                        ng-if="vm.searchResults[0].count > vm.searchResults[0].results.length && !vm.isLoadMoreLoading"
+                        class="o-loadmore"
+                        ng-click="vm.loadMore()">
+
+                        Toon meer
+                    </button>
+
+                    <dp-loading-indicator is-loading="vm.isLoadMoreLoading" use-delay="true" show-inline="true">
+                    </dp-loading-indicator>
+                </div>
             </div>
-            <div ng-if="vm.category">
-                <p>
-                    {{vm.numberOfResults | number}}
-                    <strong>{{vm.categoryName | lowercase}}</strong>
-                    met
-                    <span ng-if="vm.query">"<strong>{{vm.query}}</strong>"</span>
-                </p>
 
-                <atlas-search-results-list category="vm.searchResults[0]"></atlas-search-results-list>
-
-                <button
-                    ng-if="vm.searchResults[0].count > vm.searchResults[0].results.length && !vm.isLoadMoreLoading"
-                    class="o-loadmore"
-                    ng-click="vm.loadMore()">
-
-                    Toon meer
-                </button>
-
-                <dp-loading-indicator is-loading="vm.isLoadMoreLoading" use-delay="true" show-inline="true">
-                </dp-loading-indicator>
+            <div ng-if="!vm.numberOfResults">
+                <h2 class="u-color__primary--contrast u-font--m">Geen resultaten gevonden</h2>
+                <p>Tip: maak de criteria minder specifiek (bijv. een straat i.p.v. specifiek adres)</p>
             </div>
-        </div>
 
-        <div ng-if="!vm.numberOfResults">
-            <h2 class="u-color__primary--contrast u-font--m">Geen resultaten gevonden</h2>
-            <p>Tip: maak de criteria minder specifiek (bijv. een straat i.p.v. specifiek adres)</p>
         </div>
-
-    </div>
-    <div ng-if="vm.location" class="u-col-sm--4">
-        <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
+        <div ng-if="vm.location" class="u-col-sm--4">
+            <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
+        </div>
     </div>
 </div>
-
