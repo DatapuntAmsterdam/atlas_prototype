@@ -1,7 +1,7 @@
 <div>
   <h4 ng-if="apiData.count >= 5" class="paginering">1-{{ apiData.results.length }} van {{apiDatacount}}</h4>
 
-  <ul class="o-list__bulleted">
+  <ul class="o-list--bulleted">
     <li ng-repeat="object in apiData.results"><span>
       {{object._display}}<span ng-if="object.opgelegd_door._display">, opgelegd door {{ object.opgelegd_door._display }}</span></span>
     </li>
