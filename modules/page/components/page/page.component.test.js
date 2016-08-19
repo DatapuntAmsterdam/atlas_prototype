@@ -37,10 +37,10 @@ describe('The page component', function () {
 
         //Welcome page
         component = getComponent('welcome');
-        expect(component.text()).toBe('THIS_IS_WELCOME');
+        expect(component.text()).toContain('THIS_IS_WELCOME');
 
         //About page
         component = getComponent('about');
-        expect(component.text()).toBe('THIS_IS_ABOUT');
+        expect(component.text()).toContain('THIS_IS_ABOUT');
     });
 });

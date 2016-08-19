@@ -1,11 +1,14 @@
 //Shared variables & mixins
 @import "../shared/styles/config";
 
+@import "styles/config/extend/description-list";
+
 @import "components/meetbouten-graph/meetbouten-graph";
 @import "components/nummeraanduiding-header/nummeraanduiding-header";
+@import "components/parent-relations/parent-relations";
 @import "components/stelselpedia/stelselpedia";
 @import "components/wkpb-link/wkpb-link";
 
 @import "styles/components/header";
-@import "styles/components/list";
-@import "styles/components/loadmore";
+@import "styles/components/indented-list";
+@import "styles/components/key-value-list";
