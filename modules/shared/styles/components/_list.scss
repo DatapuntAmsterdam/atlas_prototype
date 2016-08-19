@@ -1,26 +1,3 @@
-%list {
-
-  li {
-    line-height: 28px;
-  }
-}
-
 .o-list {
   @extend %list;
-}
-
-.o-list__bulleted {
-  @extend %list;
-
-  li {
-    position: relative;
-    margin-left: $base-font-size;
-
-    &::before {
-      display: inline-block;
-      position: absolute;
-      left: -$base-font-size;
-      content: "▪";
-    }
-  }
 }
