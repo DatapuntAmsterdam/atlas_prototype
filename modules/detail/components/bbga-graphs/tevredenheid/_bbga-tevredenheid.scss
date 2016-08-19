@@ -1,5 +1,3 @@
-$square-size: 20px;
-
 .bbga-tevredenheid__value {
   display: inline-block;
   padding-right: $base-whitespace / 2;
@@ -19,13 +17,13 @@ $square-size: 20px;
 
 .bbga-tevredenheid__legend {
   margin-bottom: $base-whitespace * 2;
-  line-height: $square-size;
+  line-height: $button-size;
 }
 
 .bbga-tevredenheid__legend__square {
   display: inline-block;
-  width: $square-size;
-  height: $square-size;
-  margin-right: $base-whitespace / 2;
+  width: $button-size;
+  height: $button-size;
+  margin-right: $base-whitespace;
   vertical-align: middle;
 }
