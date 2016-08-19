@@ -172,7 +172,6 @@ describe('The urlReducers factory', function () {
                 delete mockedSearchParams['volledig-scherm'];
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
                 expect(output.map.isFullscreen).toBe(false);
-
             });
         });
 
@@ -317,6 +316,24 @@ describe('The urlReducers factory', function () {
                 expect(output.straatbeeld.camera.heading).toBe(7);
                 expect(output.straatbeeld.camera.pitch).toBe(8);
                 expect(output.straatbeeld.camera.fov).toBe(9);
+            });
+        });
+
+        describe('print', function () {
+            it('sets whether or not print mode is enabled', function () {
+                var output;
+
+                //With print mode enabled
+                mockedState.isPrintMode = false;
+                mockedSearchParams['print-versie'] = 'aan';
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
+                expect(output.isPrintMode).toBe(true);
+
+                //With print mode disabled
+                mockedState.isPrintMode = true;
+                delete mockedSearchParams['print-versie'];
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
+                expect(output.isPrintMode).toBe(false);
             });
         });
 

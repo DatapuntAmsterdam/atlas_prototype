@@ -348,6 +348,25 @@ describe('The stateToUrl factory', function () {
         });
     });
 
+    describe('Print', function () {
+        it('keeps track of the document mode (web vs. print)', function () {
+            //Regular, non-print
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                'print-versie': jasmine.anything()
+            }));
+
+            //Print version
+            mockedState.isPrintMode = true;
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'print-versie': 'aan'
+            }));
+        });
+    });
+
     it('has the option to replace the URL', function () {
         //Without replace
         stateToUrl.update(mockedState, false);

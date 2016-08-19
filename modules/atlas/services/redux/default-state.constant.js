@@ -29,7 +29,7 @@
                 isLoading: false
             }
             */
-            straatbeeld: null
+            straatbeeld: null,
             /*
             straatbeeld: {
                 id: 1,
@@ -48,5 +48,6 @@
                 isLoading: false
             }
             */
+            isPrintMode: false
         });
 })();

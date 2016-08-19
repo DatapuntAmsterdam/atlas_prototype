@@ -115,8 +115,22 @@ describe('The marzipanoService factory', function () {
         fakeDomElement = document.createElement('div');
         viewer = marzipanoService.initialize(fakeDomElement);
 
-        expect(Marzipano.Viewer).toHaveBeenCalledWith(fakeDomElement);
+        expect(Marzipano.Viewer).toHaveBeenCalledWith(fakeDomElement, jasmine.anything());
         expect(viewer).toEqual(fakeViewer);
+    });
+
+    it('uses the extra settings to enable print in Firefox and Safari', function () {
+        var fakeDomElement;
+
+        fakeDomElement = document.createElement('div');
+        marzipanoService.initialize(fakeDomElement);
+
+        expect(Marzipano.Viewer).toHaveBeenCalledWith(jasmine.anything(), {
+            stageType: 'webgl',
+            stage: {
+                preserveDrawingBuffer: true
+            }
+        });
     });
 
     describe('it has a loadScene function', function () {
