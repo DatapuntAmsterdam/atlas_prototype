@@ -50,8 +50,8 @@ $m-header-font: (
 );
 
 $s-header-font: (
-  null: ($header-font-family, $base-font-size * 1.125, 1.11111111, $base-font-size * 1.125 / 2),
-  m: ($header-font-family, $base-font-size * 1.125, 1.22222222, $base-font-size * 1.125 / 2),
-  l: ($header-font-family, $base-font-size * 1.125, 1.22222222, $base-font-size * 1.125 / 2),
-  xl: ($header-font-family, $base-font-size * 1.125, 1.22222222, $base-font-size * 1.125 / 2)
+  null: ($header-font-family, $base-font-size * 1.25, 1.11111111, $base-font-size * 1.25 / 2),
+  m: ($header-font-family, $base-font-size * 1.25, 1.22222222, $base-font-size * 1.25 / 2),
+  l: ($header-font-family, $base-font-size * 1.25, 1.22222222, $base-font-size * 1.25 / 2),
+  xl: ($header-font-family, $base-font-size * 1.25, 1.22222222, $base-font-size * 1.25 / 2)
 );

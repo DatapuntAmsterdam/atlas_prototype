@@ -31,8 +31,8 @@
 
                 //variabelen
                 //global
-                var margin = {top: 10, right: 60, bottom: 30, left: 40},
-                    width = 714 - margin.left - margin.right,
+                var margin = {top: 10, right: 60, bottom: 30, left: 60},
+                    width = 750 - margin.left - margin.right,
                     height = 400 - margin.top - margin.bottom;
 
                 //x scale min-max
@@ -89,7 +89,7 @@
                 //Initieren svg voor grafiek
                 var svg = d3.select(element[0])
                     .append('svg')
-                    .attr('class', 'detail-page__grafiek')
+                    .attr('class', 'c-meetbout')
                     .attr('width', width + margin.left + margin.right)
                     .attr('height', height + margin.top + margin.bottom)
                     .append('g')
@@ -97,16 +97,16 @@
 
                 //intekenen x as
                 svg.append('g')
-                    .attr('class', 'x axis')
+                    .attr('class', 'c-meetbout__axis')
                     .attr('transform', 'translate(0,' + height + ')')
                     .call(xAxis);
 
                 //intekenen y as zakking
                 svg.append('g')
-                    .attr('class', 'axis y-zakking-axis')
+                    .attr('class', 'c-meetbout__axis c-meetbout__axis--y-zakking')
                     .call(yZakkingAxis)
                     .append('text')
-                    .attr('transform', d3.transform('rotate(-90) translate(-185, -40)'))
+                    .attr('transform', d3.transform('rotate(-90) translate(-185, -60)'))
                     .attr('y', 6)
                     .attr('dy', '.71em')
                     .style('text-anchor', 'middle')
@@ -114,7 +114,7 @@
 
                 //intekenen y as zakkingssnelheid
                 svg.append('g')
-                    .attr('class', 'axis y-zakkingssnelheid-axis')
+                    .attr('class', 'c-meetbout__axis c-meetbout__axis--y-zakkingssnelheid')
                     .attr('transform', 'translate(' + width + ',0)')
                     .call(yzakkingssnelheidAxis)
                     .append('text')
@@ -126,12 +126,12 @@
 
                 //tekenen grafiek 1 zakking
                 svg.append('path')
-                    .attr('class', 'line zakking')
+                    .attr('class', 'c-meetbout__line c-meetbout__line--zakking')
                     .attr('d', zakkingLine(scope.objects));
 
                 //tekenen grafiek 2 zakkingssnelheid
                 svg.append('path')
-                    .attr('class', 'line zakkingssnelheid')
+                    .attr('class', 'c-meetbout__line c-meetbout__line--zakkingssnelheid')
                     .attr('d', zakkingssnelheidLine(scope.objects));
 
             });
