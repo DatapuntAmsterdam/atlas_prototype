@@ -20,7 +20,7 @@
                 category: null
             }
             */
-            page: 'welkom',
+            page: 'home',
             detail: null,
             /*
             detail: {

@@ -1,0 +1,11 @@
+.c-parent-relations {
+  @extend %description-list;
+
+  dt {
+    width: 100% / 3;
+  }
+
+  dd {
+    width: 100% / 3 * 2;
+  }
+}

@@ -1,0 +1,15 @@
+.o-list--bulleted {
+  @extend %list;
+
+  li {
+    position: relative;
+    margin-left: $base-font-size;
+
+    &::before {
+      display: inline-block;
+      position: absolute;
+      left: -$base-font-size;
+      content: "▪";
+    }
+  }
+}
