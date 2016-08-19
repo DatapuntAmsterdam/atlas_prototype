@@ -1,20 +1,19 @@
 <header class="site-header">
     <div class="u-grid">
         <div class="u-row">
-            <div class="u-col-sm--2 u-pl-0">
+            <div class="u-col-sm--2">
                 <dp-link type="SHOW_HOME" class-name="site-header__logo">
-                    <img class="u-block site-header__logo" src="assets/andreas.svg" alt="Gemeente Amsterdam">
+                    <img class="u-block site-header__logo" src="assets/images/andreas.svg" alt="Gemeente Amsterdam">
                     Atlas
                 </dp-link>
             </div>
             <div class="u-col-sm--6">
                 <atlas-search query="{{vm.query}}"></atlas-search>
             </div>
-            <div class="u-col-sm--4 u-pr-2">
+            <div class="u-col-sm--4 u-padding__right--2">
                 <nav class="site-header__menu">
                     <dp-link ng-if="!vm.isLoggedIn()"
                         type="SHOW_PAGE" payload="'login'" class-name="site-header__menu__item">
-
                         Inloggen
                     </dp-link>
 

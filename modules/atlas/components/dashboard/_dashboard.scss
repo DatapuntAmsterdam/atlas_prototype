@@ -1,23 +1,23 @@
 $dashboard-heading-height: 50px;
 
-.dashboard {
+.c-dashboard {
   height: 100%;
   overflow: hidden;
 }
 
-.dashboard__heading {
+.c-dashboard__heading {
   position: relative;
   height: $dashboard-heading-height;
   z-index: 2;
 }
 
-.dashboard__content {
+.c-dashboard__content {
   position: relative;
   height: calc(100% - #{$dashboard-heading-height});
   z-index: 1;
   overflow-y: hidden;
 }
 
-.dashboard__content__scrollable {
-  overflow-y: scroll;
+.c-dashboard__content--scrollable {
+  overflow-y: auto;
 }

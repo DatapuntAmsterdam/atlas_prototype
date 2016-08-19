@@ -6,14 +6,16 @@
         .constant('OVERLAYS', {
             SOURCES: {
                 kadaster: {
-                    label: 'Kadastrale perceelgrenzen',
+                    label_short: 'Kadastrale perceelgrenzen',
+                    label_long: 'Kadastrale perceelgrenzen',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/lki.map&service=wms',
                     layers: ['kadaster'],
                     minZoom: 8,
                     maxZoom: 16
                 },
                 gemeentelijke_beperkingen: {
-                    label: 'Gemeentelijke beperkingen',
+                    label_short: 'Gemeentelijke beperkingen',
+                    label_long: 'Gemeentelijke beperkingen',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/wkpb.map&service=wms',
                     layers: ['wkpb'],
                     minZoom: 12,
@@ -22,49 +24,56 @@
                         'Graphic&sld_version=1.1.0&layer=wkpb&format=image/png&STYLE=default'
                 },
                 stadsdeel: {
-                    label: 'Stadsdelen',
+                    label_short: 'Stadsdelen',
+                    label_long: 'Stadsdelen',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/gebieden.map&service=wms',
                     layers: ['stadsdeel', 'stadsdeel_label'],
                     minZoom: 8,
                     maxZoom: 16
                 },
                 buurtcombinatie: {
-                    label: 'Buurtcombinaties',
+                    label_short: 'Buurtcombinaties',
+                    label_long: 'Buurtcombinaties',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/gebieden.map&service=wms',
                     layers: ['buurtcombinatie', 'buurtcombinatie_label'],
                     minZoom: 8,
                     maxZoom: 16
                 },
                 buurt: {
-                    label: 'Buurten',
+                    label_short: 'Buurten',
+                    label_long: 'Buurten',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/gebieden.map&service=wms',
                     layers: ['buurt', 'buurt_label'],
                     minZoom: 10,
                     maxZoom: 16
                 },
                 gebiedsgericht_werken: {
-                    label: 'Gebiedsgerichtwerken gebieden',
+                    label_short: 'Gebiedsgerichtwerken gebieden',
+                    label_long: 'Gebiedsgerichtwerken gebieden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/gebieden.map&service=wms',
                     layers: ['gebiedsgerichtwerken', 'gebiedsgerichtwerken_label'],
                     minZoom: 8,
                     maxZoom: 16
                 },
                 grootstedelijkgebied: {
-                    label: 'Grootstedelijke gebieden',
+                    label_short: 'Grootstedelijke gebieden',
+                    label_long: 'Grootstedelijke gebieden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/gebieden.map&service=wms',
                     layers: ['grootstedelijkgebied', 'grootstedelijkgebied_label'],
                     minZoom: 8,
                     maxZoom: 16
                 },
                 bouwblokken: {
-                    label: 'Bouwblokken',
+                    label_short: 'Bouwblokken',
+                    label_long: 'Bouwblokken',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/gebieden.map&service=wms',
                     layers: ['bouwblok', 'bouwblok_label'],
                     minZoom: 11,
                     maxZoom: 16
                 },
                 unesco: {
-                    label: 'Unesco werelderfgoed',
+                    label_short: 'Unesco werelderfgoed',
+                    label_long: 'Unesco werelderfgoed',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/gebieden.map&service=wms',
                     layers: ['unesco', 'unesco_label'],
                     minZoom: 9,
@@ -73,7 +82,8 @@
                         'ge=ndGraphic&sld_version=1.1.0&layer=unesco&format=image/png&STYLE=default'
                 },
                 dsm: {
-                    label: 'Terreinmodel (DSM AHN)',
+                    label_short: 'Terreinmodel (DSM AHN)',
+                    label_long: 'Terreinmodel (DSM AHN)',
                     url: 'https://geodata.nationaalgeoregister.nl/ahn3/wms?',
                     layers: ['ahn3_05m_dsm'],
                     minZoom: 10,
@@ -83,7 +93,8 @@
                     external: true
                 },
                 dtm: {
-                    label: 'Oppervlaktemodel (DTM AHN)',
+                    label_short: 'Oppervlaktemodel (DTM AHN)',
+                    label_long: 'Oppervlaktemodel (DTM AHN)',
                     url: 'https://geodata.nationaalgeoregister.nl/ahn3/wms?',
                     layers: ['ahn3_05m_dtm'],
                     minZoom: 10,
@@ -93,7 +104,8 @@
                     external: true
                 },
                 bestemmingsplannen: {
-                    label: 'Bestemmingsplannen',
+                    label_short: 'Bestemmingsplannen',
+                    label_long: 'Bestemmingsplannen',
                     url: 'http://afnemers.ruimtelijkeplannen.nl/afnemers/services',
                     layers: ['BP:HuidigeBestemming'],
                     minZoom: 8,
@@ -102,7 +114,8 @@
                     external: true
                 },
                 nap: {
-                    label: 'Normaal Amsterdams Peil (NAP)',
+                    label_short: 'Normaal Amsterdams Peil (NAP)',
+                    label_long: 'Normaal Amsterdams Peil (NAP)',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/nap.map&service=wms',
                     layers: ['peilmerk_hoogte', 'peilmerk_label'],
                     minZoom: 10,
@@ -111,7 +124,8 @@
                         'raphic&sld_version=1.1.0&layer=NAP&format=image/png&STYLE=default'
                 },
                 meetbouten_status: {
-                    label: 'Meetbouten - Status',
+                    label_short: 'Meetbouten - Status',
+                    label_long: 'Meetbouten - Status',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/meetbouten.map&service=wms',
                     layers: ['meetbouten_status', 'meetbouten_labels'],
                     minZoom: 11,
@@ -120,7 +134,8 @@
                         'LegendGraphic&sld_version=1.1.0&layer=meetbouten_status&format=image/png&STYLE=default'
                 },
                 meetbouten_zaksnelheid: {
-                    label: 'Meetbouten - Zaksnelheid',
+                    label_short: 'Meetbouten - Zaksnelheid',
+                    label_long: 'Meetbouten - Zaksnelheid',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/meetbouten.map&service=wms',
                     layers: ['meetbouten_zaksnelheid', 'meetbouten_labels'],
                     minZoom: 11,
@@ -129,7 +144,8 @@
                         'LegendGraphic&sld_version=1.1.0&layer=meetbouten_zaksnelheid&format=image/png&STYLE=default'
                 },
                 meetbouten_referentiepunten: {
-                    label: 'Meetbouten - Referentiepunten',
+                    label_short: 'Meetbouten - Referentiepunten',
+                    label_long: 'Meetbouten - Referentiepunten',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/meetbouten.map&service=wms',
                     layers: ['referentiepunten'],
                     minZoom: 11,
@@ -138,7 +154,8 @@
                         'LegendGraphic&sld_version=1.1.0&layer=referentiepunten&format=image/png&STYLE=default'
                 },
                 panorama_rijlijnen_2012: {
-                    label: 'panorama rijlijnen 2012',
+                    label_short: 'Straatbeeld rijlijnen 2012',
+                    label_long: 'Straatbeeld rijlijnen 2012',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/panorama.map&service=wms',
                     layers: ['panorama'],
                     minZoom: 11,
@@ -147,7 +164,8 @@
                         'gendGraphic&sld_version=1.1.0&layer=panorama_punt&format=image/png&STYLE=default'
                 },
                 milieu_bodem_grondmonsters: {
-                    label: 'Grondmonster',
+                    label_short: 'Grondmonster',
+                    label_long: 'Grondmonster',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/bodem.map&service=wms',
                     layers: ['grondmonsters'],
                     minZoom: 10,
@@ -156,7 +174,8 @@
                         'dGraphic&sld_version=1.1.0&layer=grondmonsters&format=image/png&STYLE=default'
                 },
                 milieu_bodem_grondwatermonsters: {
-                    label: 'Grondwatermonster',
+                    label_short: 'Grondwatermonster',
+                    label_long: 'Grondwatermonster',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/bodem.map&service=wms',
                     layers: ['grondwatermonsters'],
                     minZoom: 8,
@@ -165,7 +184,8 @@
                         'dGraphic&sld_version=1.1.0&layer=grondwatermonsters&format=image/png&STYLE=default'
                 },
                 milieu_bodem_asbest_in_grond: {
-                    label: 'Asbest in grond',
+                    label_short: 'Asbest in grond',
+                    label_long: 'Asbest in grond',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/bodem.map&service=wms',
                     layers: ['asbest'],
                     minZoom: 10,
@@ -174,7 +194,8 @@
                         'dGraphic&sld_version=1.1.0&layer=asbest&format=image/png&STYLE=default'
                 },
                 milieu_veiligheid_lpg_vulpunt: {
-                    label: 'LPG-vulpunt - Risicozones',
+                    label_short: 'LPG-vulpunt - Risicozones',
+                    label_long: 'LPG-vulpunt - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: [
                         'lpgvulpuntinvloedsgebied',
@@ -189,7 +210,8 @@
                         'STYLE=default'
                 },
                 milieu_veiligheid_lpg_afleverzuil: {
-                    label: 'LPG-afleverzuil - Risicozones',
+                    label_short: 'LPG-afleverzuil - Risicozones',
+                    label_long: 'LPG-afleverzuil - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_lpg_afleverzuil'],
                     minZoom: 8,
@@ -199,7 +221,8 @@
                         'png&STYLE=default'
                 },
                 milieu_veiligheid_lpg_tank: {
-                    label: 'LPG-tank - Risicozones',
+                    label_short: 'LPG-tank - Risicozones',
+                    label_long: 'LPG-tank - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['lpgtankinvloedsgebied', 'lpgtankplaatsgebondenrisico', 'lpgtankligging'],
                     minZoom: 8,
@@ -209,7 +232,8 @@
                         'LE=default'
                 },
                 milieu_veiligheid_lpg_station: {
-                    label: 'LPG-station - Risicozones',
+                    label_short: 'LPG-station - Risicozones',
+                    label_long: 'LPG-station - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['lpgstationcontouren', 'lpgstationslocaties'],
                     minZoom: 8,
@@ -219,7 +243,8 @@
                         'STYLE=default'
                 },
                 milieu_veiligheid_bron: {
-                    label: 'Bron - Risicozones',
+                    label_short: 'Bron - Risicozones',
+                    label_long: 'Bron - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['overigerisicobedrijven'],
                     minZoom: 8,
@@ -229,7 +254,8 @@
                         'efault'
                 },
                 milieu_veiligheid_bedrijf: {
-                    label: 'Bedrijf - Risicozones',
+                    label_short: 'Bedrijf - Risicozones',
+                    label_long: 'Bedrijf - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_bedrijf'],
                     minZoom: 8,
@@ -239,7 +265,8 @@
                         'E=default'
                 },
                 milieu_veiligheid_aardgasbuisleidingen: {
-                    label: 'Aardgasbuisleid. - Risicozones',
+                    label_short: 'Aardgasbuisleid. - Risicozones',
+                    label_long: 'Aardgasbuisleidingen - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_aardgasbuisleidingen'],
                     minZoom: 8,
@@ -249,7 +276,8 @@
                         'mage/png&STYLE=default'
                 },
                 milieu_veiligheid_spoorwegen: {
-                    label: 'Spoorwegen - Risicozones',
+                    label_short: 'Spoorwegen - Risicozones',
+                    label_long: 'Spoorwegen - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['risicozonesspoorweg'],
                     minZoom: 8,
@@ -259,7 +287,8 @@
                         'ult'
                 },
                 milieu_veiligheid_vaarwegen: {
-                    label: 'Vaarwegen - Risicozones',
+                    label_short: 'Vaarwegen - Risicozones',
+                    label_long: 'Vaarwegen - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['risicozonesvaarweg'],
                     minZoom: 8,
@@ -268,7 +297,8 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=risicozonesvaarweg&format=image/png&STYLE=default'
                 },
                 milieu_veiligheid_wegen: {
-                    label: 'Wegen - Risicozones',
+                    label_short: 'Wegen - Risicozones',
+                    label_long: 'Wegen - Risicozones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['risicozonesweg'],
                     minZoom: 8,
@@ -277,7 +307,8 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=risicozonesweg&format=image/png&STYLE=default'
                 },
                 milieu_veiligheid_vuurwerkopslag: {
-                    label: 'Vuurwerkopslag - Veilig.afst.',
+                    label_short: 'Vuurwerkopslag - Veilig.afst.',
+                    label_long: 'Vuurwerkopslag - Veiligheidsafstanden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_vuurwerk'],
                     minZoom: 8,
@@ -287,7 +318,8 @@
                         'LE=default'
                 },
                 milieu_veiligheid_munitieopslag: {
-                    label: 'Munitieopslag - Veilig.afst.',
+                    label_short: 'Munitieopslag - Veilig.afst.',
+                    label_long: 'Munitieopslag - Veiligheidsafstanden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_munitie'],
                     minZoom: 8,
@@ -297,7 +329,8 @@
                         'E=default'
                 },
                 milieu_veiligheid_gasdrukregel_en_meetstations: {
-                    label: 'Gasdruk...stations - Veilig.afst.',
+                    label_short: 'Gasdruk...stations - Veilig.afst.',
+                    label_long: 'Gasdrukregel- en meetstation - Veiligheidsafstanden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_gasdrukregel_meetstation'],
                     minZoom: 8,
@@ -307,7 +340,8 @@
                         'at=image/png&STYLE=default'
                 },
                 milieu_veiligheid_sluis: {
-                    label: 'Sluis - Veilig.afst.',
+                    label_short: 'Sluis - Veilig.afst.',
+                    label_long: 'Sluis - Veiligheidsafstanden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_sluis'],
                     minZoom: 8,
@@ -317,7 +351,8 @@
                         'default'
                 },
                 milieu_veiligheid_wachtplaatsen: {
-                    label: 'Wachtplaatsen - Veilig.afst.',
+                    label_short: 'Wachtplaatsen - Veilig.afst.',
+                    label_long: 'Wachtplaatsen - Veiligheidsafstanden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_wachtplaats'],
                     minZoom: 8,
@@ -327,7 +362,8 @@
                         'STYLE=default'
                 },
                 milieu_veiligheid_bunkerschepen: {
-                    label: 'Bunkerschepen - Veilig.afst.',
+                    label_short: 'Bunkerschepen - Veilig.afst.',
+                    label_long: 'Bunkerschepen - Veiligheidsafstanden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/externeveiligheid.map&service=wms',
                     layers: ['milieu_veiligheid_bunkerschepen'],
                     minZoom: 8,
@@ -337,7 +373,8 @@
                         'g&STYLE=default'
                 },
                 milieu_veiligheid_vogelvrijwaringsgebied_schiphol: {
-                    label: 'Schiphol - Vogelvrijwaring',
+                    label_short: 'Schiphol - Vogelvrijwaring',
+                    label_long: 'Schiphol - Vogelvrijwaring',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/planologischezonesschiphol.map&service=wms',
                     layers: ['vogelvrijwaringsgebiedschiphol'],
                     minZoom: 8,
@@ -347,7 +384,8 @@
                         'image/png&STYLE=default'
                 },
                 milieu_geluid_planologisch_schiphol: {
-                    label: 'Schiphol',
+                    label_short: 'Schiphol',
+                    label_long: 'Schiphol',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/planologischezonesschiphol.map&service=wms',
                     layers: ['geluidszoneschiphol'],
                     minZoom: 8,
@@ -357,7 +395,8 @@
                         'TYLE=default'
                 },
                 milieu_hoogtebeperkende_vlakken: {
-                    label: 'Schiphol - Hoogtebeperking',
+                    label_short: 'Schiphol - Hoogtebeperking',
+                    label_long: 'Schiphol - Hoogtebeperking',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/planologischezonesschiphol.map&service=wms',
                     layers: ['hoogtebeperkingschiphol'],
                     minZoom: 8,
@@ -367,7 +406,8 @@
                         'ng&STYLE=default'
                 },
                 milieu_geluid_planologisch_spoorwegen: {
-                    label: 'Spoorwegen - Geluidszones',
+                    label_short: 'Spoorwegen - Geluidszones',
+                    label_long: 'Spoorwegen - Geluidszones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/planologischegeluidszones.map&service=wms',
                     layers: ['spoorwegen'],
                     minZoom: 8,
@@ -376,7 +416,8 @@
                         'WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=spoorwegen&format=image/png&STYLE=default'
                 },
                 milieu_geluid_planologisch_metro: {
-                    label: 'Metro - Geluidszones',
+                    label_short: 'Metro - Geluidszones',
+                    label_long: 'Metro - Geluidszones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/planologischegeluidszones.map&service=wms',
                     layers: ['metro'],
                     minZoom: 8,
@@ -385,7 +426,8 @@
                         'WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=metro&format=image/png&STYLE=default'
                 },
                 milieu_geluid_planologisch_industrie: {
-                    label: 'Industrie - Geluidszones',
+                    label_short: 'Industrie - Geluidszones',
+                    label_long: 'Industrie - Geluidszones',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/planologischegeluidszones.map&service=wms',
                     layers: [
                         'gezoneerdindustrieterrein',
@@ -399,21 +441,24 @@
                         'rmat=image/png&STYLE=default'
                 },
                 parkeervakken: {
-                    label: 'Parkeervakken',
+                    label_short: 'Parkeervakken',
+                    label_long: 'Parkeervakken',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/parkeervakken.map&service=wms',
                     layers: ['alle_parkeervakken', 'parkeervakken_label'],
                     minZoom: 10,
                     maxZoom: 16
                 },
                 parkeervakken_bord: {
-                    label: 'Parkeervakken - Borden',
+                    label_short: 'Parkeervakken - Borden',
+                    label_long: 'Parkeervakken - Borden',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/parkeervakken.map&service=wms',
                     layers: ['alle_parkeervakken', 'parkeervakken_bord'],
                     minZoom: 10,
                     maxZoom: 16
                 },
                 parkeervakken_reservering: {
-                    label: 'Parkeervakken - Gereserveerd',
+                    label_short: 'Parkeervakken - Gereserveerd',
+                    label_long: 'Parkeervakken - Gereserveerd',
                     url: 'cgi-bin/mapserv?map=/srv/mapserver/parkeervakken.map&service=wms',
                     layers: ['parkeervakken_reservering', 'parkeervakken_reservering_label'],
                     minZoom: 11,

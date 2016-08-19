@@ -8,13 +8,13 @@
                 location: '='
             },
             templateUrl: 'modules/shared/components/straatbeeld-thumbnail/straatbeeld-thumbnail.html',
-            controller: DpStraatbeeldThumbnailController,
+            controller: AtlasStraatbeeldThumbnailController,
             controllerAs: 'vm'
         });
 
-    DpStraatbeeldThumbnailController.$inject = ['detailConfig', 'store', 'ACTIONS'];
+    AtlasStraatbeeldThumbnailController.$inject = ['detailConfig', 'store', 'ACTIONS'];
 
-    function DpStraatbeeldThumbnailController (detailConfig, store, ACTIONS) {
+    function AtlasStraatbeeldThumbnailController (detailConfig, store, ACTIONS) {
         var vm = this;
 
         vm.imageUrl = detailConfig.STRAATBEELD_THUMB_URL +

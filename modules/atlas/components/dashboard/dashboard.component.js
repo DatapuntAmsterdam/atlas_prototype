@@ -29,6 +29,9 @@
             vm.showSearchResults = angular.isObject(state.search) &&
                 (angular.isString(state.search.query) || angular.isArray(state.search.location));
 
+            vm.isRightColumnScrollable = !state.map.isFullscreen &&
+                (vm.showPage || vm.showDetail || vm.showSearchResults);
+
             if (state.map.isFullscreen) {
                 vm.sizeLeftColumn = 0;
                 vm.sizeMiddleColumn = 12;

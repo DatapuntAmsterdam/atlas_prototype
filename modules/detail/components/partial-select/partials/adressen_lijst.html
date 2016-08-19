@@ -1,15 +1,15 @@
 <div>
   <h4 ng-if="apiData.count >= 5" class="paginering">1-{{ apiData.results.length }} van {{apiData.count}}</h4>
-  <ul class="list">
+  <ul class="o-list">
     <li ng-repeat="object in apiData.results">
       <dp-link type="FETCH_DETAIL" payload="object._links.self.href">
-        <i class="fa fa-chevron-right link"></i>{{ object._display }}
+        {{ object._display }}
       </dp-link>
       <span class="muted" ng-if="object.hoofdadres !== undefined">{{ object.hoofdadres ? "" : "(nevenadres)" }}</span>
     </li>
   </ul>
 
-  <button class="loadmore" ng-click="loadMore()" ng-if="apiData.next">
-    <i class="fa fa-plus fa-2x link"></i>Meer
+  <button class="o-loadmore" ng-click="loadMore()" ng-if="apiData.next">
+    Meer
   </button>
 </div>

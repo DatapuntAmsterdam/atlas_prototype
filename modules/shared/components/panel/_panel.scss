@@ -1,0 +1,29 @@
+$panel-heading-height: 30px;
+
+.o-panel {
+  height: 100%;
+}
+
+.o-panel__heading {
+  position: relative;
+  height: $panel-heading-height;
+  padding-right: $base-whitespace;
+  padding-left: $base-whitespace;
+  background-color: $secondary-gray40;
+  color: $primary-light;
+  line-height: $panel-heading-height;
+}
+
+.o-panel__heading__icon {
+  position: absolute;
+  top: - $base-whitespace / 2;
+  right: $base-whitespace / 2;
+}
+
+.o-panel__content {
+  height: calc(100% - #{$panel-heading-height});
+  padding-right: $base-whitespace;
+  padding-left: $base-whitespace;
+  background-color: $primary-light;
+  overflow-y: auto;
+}

@@ -1,20 +1,16 @@
-<div class="detail-page__content">
-  <div class="detail-page__content--main">
-    <div class="default-box">
-      <atlas-stelselpedia-header heading="{{vm.apiData.results.naam}}" definition="GEBIEDSGERICHTWERKEN">
-      </atlas-stelselpedia-header>
+<div class="u-row">
+  <atlas-stelselpedia-header heading="{{vm.apiData.results.naam}}" definition="GEBIEDSGERICHTWERKEN">
+  </atlas-stelselpedia-header>
 
-      <dl class="key-value-list">
-        <dt>Code</dt>
-        <dd>{{ vm.apiData.results.code }}</dd>
-        <dt>Stadsdeel</dt>
-        <dd><dp-link type="FETCH_DETAIL" payload="vm.apiData.results.stadsdeel._links.self.href">{{ vm.apiData.results.stadsdeel._display }}</dp-link></dd>
-      </dl>
+  <dl class="c-key-value-list">
+    <dt>Code</dt>
+    <dd>{{ vm.apiData.results.code }}</dd>
+    <dt>Stadsdeel</dt>
+    <dd><dp-link type="FETCH_DETAIL" payload="vm.apiData.results.stadsdeel._links.self.href">{{ vm.apiData.results.stadsdeel._display }}</dp-link></dd>
+  </dl>
 
-      <atlas-bbga-graphs
-        gebied-heading="{{vm.apiData.results.naam}}"
-        gebied-code="{{vm.apiData.results.code}}">
-      </atlas-bbga-graphs>
-    </div>
-  </div>
+  <atlas-bbga-graphs
+    gebied-heading="{{vm.apiData.results.naam}}"
+    gebied-code="{{vm.apiData.results.code}}">
+  </atlas-bbga-graphs>
 </div>

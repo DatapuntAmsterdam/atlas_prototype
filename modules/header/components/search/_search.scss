@@ -2,12 +2,12 @@
 
 $submit-button-width: 30px;
 
-.search-form {
+.c-search-form {
   padding-top: $base-whitespace;
   padding-bottom: $base-whitespace;
 }
 
-.search-form__input {
+.c-search-form__input {
   display: block;
   width: calc(100% - #{$submit-button-width});
   height: $search-form-height;
@@ -24,18 +24,18 @@ $submit-button-width: 30px;
   }
 
   &:focus {
-    & + .search-form__submit {
+    & + .c-search-form__submit {
       background-color: $primary-contrast;
     }
   }
 }
 
-.search-form__submit {
+.c-search-form__submit {
   width: $submit-button-width;
   height: $search-form-height;
   float: left;
   background-color: $secondary-gray40;
-  background-image: url("assets/search.svg");
+  background-image: url("assets/icons/search.svg");
   background-repeat: no-repeat;
   color: $primary-light;
   font-size: $base-font-size;

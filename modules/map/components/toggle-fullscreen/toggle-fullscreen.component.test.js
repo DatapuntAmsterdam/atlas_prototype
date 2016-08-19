@@ -50,7 +50,7 @@ describe('The dp-toggle-fullscreen component', function () {
         it('shows a maximize icon', function () {
             expect(component.find('button img').length).toBe(1);
 
-            expect(component.find('button img').attr('src')).toContain('assets/fullscreen.svg');
+            expect(component.find('button img').attr('src')).toContain('assets/icons/fullscreen.svg');
             expect(component.find('button img').attr('alt')).toBe('Kaart vergroten');
         });
 
@@ -72,7 +72,7 @@ describe('The dp-toggle-fullscreen component', function () {
         it('shows a minimize icon', function () {
             expect(component.find('button img').length).toBe(1);
 
-            expect(component.find('button img').attr('src')).toContain('assets/min.svg');
+            expect(component.find('button img').attr('src')).toContain('assets/icons/minimize.svg');
             expect(component.find('button img').attr('alt')).toBe('Kaart verkleinen');
         });
 

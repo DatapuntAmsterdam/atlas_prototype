@@ -1,37 +1,35 @@
-<div class="detail-page__content">
-  <div class="detail-page__content--main">
-    <div class="default-box">
-      <atlas-stelselpedia-header
-        heading="{{ vm.apiData.results.inschrijfnummer }}"
-        definition="GEMEENTELIJKE_BEPERKING"
-        meta-data="vm.apiData">
-      </atlas-stelselpedia-header>
+<div>
+<div class="u-row">
+  <atlas-stelselpedia-header
+    heading="{{ vm.apiData.results.inschrijfnummer }}"
+    definition="GEMEENTELIJKE_BEPERKING"
+    meta-data="vm.apiData">
+  </atlas-stelselpedia-header>
 
-      <dl class="key-value-list">
-        <dt>Beperkingcode</dt>
-        <dd><a target="_blank" href="https://www.amsterdam.nl/stelselpedia/wkpb-index/handboek-inwinnen/codes-wetten/">{{ vm.apiData.results.beperkingcode.code}}</a></dd>
-        <dt>Omschrijving</dt>
-        <dd>{{ vm.apiData.results.beperkingcode.omschrijving }}</dd>
-      </dl>
+  <dl class="c-key-value-list">
+    <dt>Beperkingcode</dt>
+    <dd><a target="_blank" href="https://www.amsterdam.nl/stelselpedia/wkpb-index/handboek-inwinnen/codes-wetten/" class="o-btn o-btn--link">{{ vm.apiData.results.beperkingcode.code}}</a></dd>
+    <dt>Omschrijving</dt>
+    <dd>{{ vm.apiData.results.beperkingcode.omschrijving }}</dd>
+  </dl>
 
-    </div>
+</div>
 
-    <div class="default-box" ng-if="vm.apiData.results.documenten.count === 1">
-      <atlas-stelselpedia-header definition="BRONDOCUMENT"></atlas-stelselpedia-header>
+<div class="u-row" ng-if="vm.apiData.results.documenten.count === 1">
+  <atlas-stelselpedia-header definition="BRONDOCUMENT"></atlas-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.documenten.href}}" partial="wkpb/brondocument"></atlas-api-call>
-    </div>
+  <atlas-api-call endpoint="{{vm.apiData.results.documenten.href}}" partial="wkpb/brondocument"></atlas-api-call>
+</div>
 
-    <div class="default-box" ng-if="vm.apiData.results.documenten.count > 1">
-      <atlas-stelselpedia-header definition="BRONDOCUMENT" use-plural="true"></atlas-stelselpedia-header>
+<div class="u-row" ng-if="vm.apiData.results.documenten.count > 1">
+  <atlas-stelselpedia-header definition="BRONDOCUMENT" use-plural="true"></atlas-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.documenten.href}}" partial="lijst"></atlas-api-call>
-    </div>
+  <atlas-api-call endpoint="{{vm.apiData.results.documenten.href}}" partial="lijst"></atlas-api-call>
+</div>
 
-    <div class="default-box" ng-if=" vm.apiData.results.kadastrale_objecten.count">
-      <atlas-stelselpedia-header definition="KADASTRAAL_OBJECT" use-plural="true"></atlas-stelselpedia-header>
+<div class="u-row" ng-if=" vm.apiData.results.kadastrale_objecten.count">
+  <atlas-stelselpedia-header definition="KADASTRAAL_OBJECT" use-plural="true"></atlas-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.kadastrale_objecten.href}}" partial="lijst"></atlas-api-call>
-    </div>
-  </div>
+  <atlas-api-call endpoint="{{vm.apiData.results.kadastrale_objecten.href}}" partial="lijst"></atlas-api-call>
+</div>
 </div>

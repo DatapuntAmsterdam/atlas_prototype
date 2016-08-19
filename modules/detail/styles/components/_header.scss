@@ -1,0 +1,37 @@
+.o-header {
+  position: relative;
+}
+
+.o-header__title {
+  padding-top: 0;
+}
+
+.o-header__subtitle {
+  display: block;
+  padding-top: $base-whitespace * 2 !important;
+  color: $primary-contrast;
+
+  .s-indented-list & {
+    @include font-size($s-header-font);
+    color: $primary-dark;
+  }
+}
+
+.o-header__buttongroup {
+  position: absolute;
+  top: $base-whitespace * 2;
+  right: 0;
+}
+
+.o-header__button {
+  width: $button-size;
+  height: $button-size;
+  margin-left: $base-whitespace;
+  float: right;
+}
+
+.o-header__button--image {
+  display: block;
+  width: $button-size;
+  height: $button-size;
+}

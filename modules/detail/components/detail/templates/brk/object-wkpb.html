@@ -1,35 +1,26 @@
-<div class="detail-page__content">
-  <div class="detail-page__content--main">
+<div class="u-padding__top--2">
+    <img class="u-pull--left" width="160" height="72" src="assets/images/gemeente-amsterdam.png" alt="Gemeente Amsterdam">
+    <img class="u-pull--right" width="180" height="60" src="assets/images/atlas-logo-wkpb.png" alt="Atlas">
+    <div class="u-clearfix"></div>
 
-    <img class="u-pull--left" width="160" height="72" src="assets/gemeente-amsterdam.png" alt="Gemeente Amsterdam">
-
-    <a ui-sref="app">
-      <img class="u-pull--right" width="180" height="60" src="assets/atlas-logo-wkpb.png" alt="Atlas">
-    </a>
-
-    <div class="clearfix"></div>
-
-    <div class="default-box">
-      <h2>Opgegeven zoekcriteria</h2>
-      <dl class="key-value-list">
+    <h3 class="o-header__subtitle">Opgegeven zoekcriteria</h3>
+    <dl class="c-key-value-list">
         <dt>Datum rapport</dt>
         <dd>
-          <atlas-current-date></atlas-current-date>
+            <atlas-current-date></atlas-current-date>
         </dd>
         <dt>Adres</dt>
         <dd>
-          <span ng-repeat="verblijfsobject in vm.apiData.results.verblijfsobjecten">
-            {{verblijfsobject._display}}<span ng-if="!$last">,&nbsp;</span>
-          </span>
+            <span ng-repeat="verblijfsobject in vm.apiData.results.verblijfsobjecten">
+                {{verblijfsobject._display}}<span ng-if="!$last">,&nbsp;</span>
+            </span>
         </dd>
         <dt>Kadaster</dt>
         <dd>{{vm.apiData.results._display}}</dd>
-      </dl>
-    </div>
+    </dl>
 
-    <div class="default-box">
-      <h2 class="default-box__header">Kadastraal object</h2>
-      <dl class="key-value-list">
+    <h3 class="o-header__subtitle">Kadastraal object</h3>
+    <dl class="c-key-value-list">
         <dt>Gemeentecode</dt>
         <dd>{{vm.apiData.results.kadastrale_gemeente._display}}</dd>
         <dt>Sectie</dt>
@@ -42,38 +33,34 @@
         <dd>{{vm.apiData.results.indexnummer}}</dd>
         <dt>Perceeloppervlakte</dt>
         <dd>
-          <span ng-if="vm.apiData.results.grootte">
-            {{vm.apiData.results.grootte}} m<sup>2</sup>
-          </span>
+            <span ng-if="vm.apiData.results.grootte">
+                {{vm.apiData.results.grootte}} m<sup>2</sup>
+            </span>
         </dd>
         <dt>Vestigingsdatum</dt>
         <dd>{{vm.apiData.results.toestandsdatum | date:'dd-MM-yyyy'}}</dd>
         <dt>Coordinaten</dt>
         <dd>{{vm.apiData.results.geometrie.coordinates[0][0][0].join(', ')}}</dd>
-      </dl>
-    </div>
+    </dl>
 
     <div ng-if="vm.apiData.results.beperkingen">
-      <div class="default-box" ng-repeat="beperking in vm.apiData.results.beperkingen">
-        <h2 class="default-box__header">Gemeentelijke publiekrechtelijke beperking<sup>*</sup></h2>
-        <dl class="key-value-list">
-          <dt>Inschrijfnummer</dt>
-          <dd>{{beperking.inschrijfnummer}}</dd>
-          <dt>Beperkingcode</dt>
-          <dd>{{beperking.beperkingcode.code}}</dd>
-          <dt>Korte omschrijving</dt>
-          <dd>{{beperking.beperkingcode.omschrijving}}</dd>
-          <dt>Datum in werking</dt>
-          <dd>{{beperking.datum_in_werking | date:'dd-MM-yyyy'}}</dd>
-        </dl>
-      </div>
+        <div ng-repeat="beperking in vm.apiData.results.beperkingen">
+            <h3 class="o-header__subtitle">Gemeentelijke publiekrechtelijke beperking<sup>*</sup></h3>
+            <dl class="c-key-value-list">
+                <dt>Inschrijfnummer</dt>
+                <dd>{{beperking.inschrijfnummer}}</dd>
+                <dt>Beperkingcode</dt>
+                <dd>{{beperking.beperkingcode.code}}</dd>
+                <dt>Korte omschrijving</dt>
+                <dd>{{beperking.beperkingcode.omschrijving}}</dd>
+                <dt>Datum in werking</dt>
+                <dd>{{beperking.datum_in_werking | date:'dd-MM-yyyy'}}</dd>
+            </dl>
+        </div>
 
-      <div class="default-box">
-        <p>
-          * Alleen de gemeentelijke publiekrechtelijke beperkingen worden getoond. Voor een volledig overzicht van alle
-          publiekrechtelijke beperkingen bij dit kadastraal object wordt u verzocht Kadaster Online te raadplegen.
+        <p class="u-padding__top--2">
+            * Alleen de gemeentelijke publiekrechtelijke beperkingen worden getoond. Voor een volledig overzicht van alle
+            publiekrechtelijke beperkingen bij dit kadastraal object wordt u verzocht Kadaster Online te raadplegen.
         </p>
-      </div>
     </div>
-  </div>
 </div>

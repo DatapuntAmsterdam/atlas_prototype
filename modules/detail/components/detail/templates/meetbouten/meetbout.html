@@ -1,68 +1,70 @@
-<div class="detail-page__content">
-    <div class="detail-page__content--main">
-        <div class="default-box">
-            <atlas-stelselpedia-header heading="{{vm.apiData.results.id}}" definition="MEETBOUT">
-            </atlas-stelselpedia-header>
+<div class="detail-page__content--main">
+    <div class="u-row">
+        <atlas-stelselpedia-header heading="{{vm.apiData.results.id}}" definition="MEETBOUT">
+        </atlas-stelselpedia-header>
 
-            <dl class="key-value-list">
-                <dt>Status</dt>
-                <dd>{{ vm.apiData.results.status }}</dd>
-                <dt>Adres</dt>
-                <dd>{{ vm.apiData.results.adres }}</dd>
-                <dt>Locatie</dt>
-                <dd>{{ vm.apiData.results.locatie }}</dd>
-                <dt>Coördinaten</dt>
-                <dd>
-                    {{ vm.apiData.results.geometrie.coordinates[0] }}, {{ vm.apiData.results.geometrie.coordinates[1] }}
-                </dd>
-                <dt>Bouwblok</dt>
-                <dd>
-                    <dp-link type="FETCH_DETAIL" payload="vm.apiData.results.bouwblok_link">
-                        {{ vm.apiData.results.bouwblok }}
-                    </dp-link>
-                </dd>
-                <dt>Bouwblokzijde</dt>
-                <dd>{{ vm.apiData.results.bouwblokzijde }}</dd>
-                <dt>Bouwblokeenheid</dt>
-                <dd>{{ vm.apiData.results.blokeenheid }}</dd>
-                <dt>Stadsdeel</dt>
-                <dd>
-                    <dp-link type="FETCH_DETAIL" payload="vm.apiData.results.stadsdeel_link">
-                        {{ vm.apiData.results.stadsdeel }}
-                    </dp-link>
-                </dd>
-                <dt>Indicatie beveiligd</dt>
-                <dd>{{ vm.apiData.results.beveiligd | yesNo }}</dd>
-            </dl>
+        <dl class="c-key-value-list">
+            <dt>Status</dt>
+            <dd>{{ vm.apiData.results.status }}</dd>
+            <dt>Adres</dt>
+            <dd>{{ vm.apiData.results.adres }}</dd>
+            <dt>Locatie</dt>
+            <dd>{{ vm.apiData.results.locatie }}</dd>
+            <dt>Coördinaten</dt>
+            <dd>
+                {{ vm.apiData.results.geometrie.coordinates[0] }}, {{ vm.apiData.results.geometrie.coordinates[1] }}
+            </dd>
+            <dt>Bouwblok</dt>
+            <dd>
+                <dp-link type="FETCH_DETAIL" payload="vm.apiData.results.bouwblok_link">
+                    {{ vm.apiData.results.bouwblok }}
+                </dp-link>
+            </dd>
+            <dt>Bouwblokzijde</dt>
+            <dd>{{ vm.apiData.results.bouwblokzijde }}</dd>
+            <dt>Bouwblokeenheid</dt>
+            <dd>{{ vm.apiData.results.blokeenheid }}</dd>
+            <dt>Stadsdeel</dt>
+            <dd>
+                <dp-link type="FETCH_DETAIL" payload="vm.apiData.results.stadsdeel_link">
+                    {{ vm.apiData.results.stadsdeel }}
+                </dp-link>
+            </dd>
+            <dt>Indicatie beveiligd</dt>
+            <dd>{{ vm.apiData.results.beveiligd | yesNo }}</dd>
+        </dl>
+    </div>
+
+    <div class="u-row">
+        <div class="u-col-sm--6 u-padding__right--2">
+            <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
         </div>
+    </div>
 
-        <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
+    <div>
+        <atlas-stelselpedia-header definition="METING" use-plural="true"></atlas-stelselpedia-header>
 
-        <div class="list-box">
-            <atlas-stelselpedia-header definition="METING" use-plural="true"></atlas-stelselpedia-header>
+        <p ng-if="!vm.apiData.results.metingen.href">Geen metingen beschikbaar</p>
 
-            <p ng-if="!vm.apiData.results.metingen.href">Geen metingen beschikbaar</p>
+        <atlas-api-call ng-if="vm.apiData.results.metingen.href"
+            endpoint="{{vm.apiData.results.metingen.href}}"
+            partial="meetbouten/metingen-tabel">
+        </atlas-api-call>
 
-            <atlas-api-call ng-if="vm.apiData.results.metingen.href"
-                endpoint="{{vm.apiData.results.metingen.href}}"
-                partial="meetbouten/metingen-tabel">
-            </atlas-api-call>
+        <atlas-meetbout-graph
+            page-size="vm.apiData.results.metingen.count"
+            href="{{vm.apiData.results.metingen.href}}">
+        </atlas-meetbout-graph>
+    </div>
 
-            <atlas-meetbout-graph
-                page-size="vm.apiData.results.metingen.count"
-                href="{{vm.apiData.results.metingen.href}}">
-            </atlas-meetbout-graph>
-        </div>
+    <div>
+        <atlas-stelselpedia-header definition="ROLLAAG" use-plural="true"></atlas-stelselpedia-header>
 
-        <div>
-            <atlas-stelselpedia-header definition="ROLLAAG" use-plural="true"></atlas-stelselpedia-header>
+        <p ng-if="!vm.apiData.results.rollaag">Geen rollaag tekening beschikbaar</p>
 
-            <p ng-if="!vm.apiData.results.rollaag">Geen rollaag tekening beschikbaar</p>
-
-            <atlas-api-call ng-if="vm.apiData.results.rollaag"
-                endpoint="{{vm.apiData.results.rollaag}}"
-                partial="meetbouten/rollaag">
-            </atlas-api-call>
-        </div>
+        <atlas-api-call ng-if="vm.apiData.results.rollaag"
+            endpoint="{{vm.apiData.results.rollaag}}"
+            partial="meetbouten/rollaag">
+        </atlas-api-call>
     </div>
 </div>

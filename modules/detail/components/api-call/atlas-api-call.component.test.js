@@ -2,7 +2,8 @@ describe('The atlas-api-call component', function () {
     var $compile,
         $rootScope,
         $q,
-        api;
+        api,
+        finishApiRequest;
 
     beforeEach(function () {
         angular.mock.module(
@@ -57,7 +58,9 @@ describe('The atlas-api-call component', function () {
                                 break;
                         }
 
-                        q.resolve(mockedResponse);
+                        finishApiRequest = function () {
+                            q.resolve(mockedResponse);
+                        };
 
                         return q.promise;
                     }
@@ -65,6 +68,10 @@ describe('The atlas-api-call component', function () {
             },
             function ($provide) {
                 $provide.factory('atlasPartialSelectDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpLoadingIndicatorDirective', function () {
                     return {};
                 });
             }
@@ -76,6 +83,8 @@ describe('The atlas-api-call component', function () {
             $q = _$q_;
             api = _api_;
         });
+
+        finishApiRequest = null;
 
         spyOn(api, 'getByUrl').and.callThrough();
     });
@@ -114,6 +123,9 @@ describe('The atlas-api-call component', function () {
             component = getComponent('http://www.some-domain.com/without-pagination/123/', 'some-partial', false);
             scope = component.isolateScope();
 
+            finishApiRequest();
+            scope.$apply();
+
             expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/without-pagination/123/');
 
             expect(component.find('atlas-partial-select').length).toBe(1);
@@ -136,6 +148,9 @@ describe('The atlas-api-call component', function () {
             component = getComponent('http://www.some-domain.com/with-pagination/456/', 'some-partial', false);
             scope = component.isolateScope();
 
+            finishApiRequest();
+            scope.$apply();
+
             expect(scope.vm.apiData).toEqual(jasmine.objectContaining({
                 next: 'http://www.some-domain.com/with-pagination/456/?page=2'
             }));
@@ -148,6 +163,9 @@ describe('The atlas-api-call component', function () {
             component = getComponent('http://www.some-domain.com/with-pagination/456/', 'some-partial', false);
             scope = component.isolateScope();
 
+            finishApiRequest();
+            scope.$apply();
+
             expect(api.getByUrl).toHaveBeenCalledTimes(1);
             expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/with-pagination/456/');
             expect(scope.vm.apiData.count).toBe(5);
@@ -155,7 +173,8 @@ describe('The atlas-api-call component', function () {
             expect(scope.vm.apiData.next).toBe('http://www.some-domain.com/with-pagination/456/?page=2');
 
             scope.vm.loadMore();
-            $rootScope.$apply();
+            finishApiRequest();
+            scope.$apply();
 
             expect(api.getByUrl).toHaveBeenCalledTimes(2);
             expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/with-pagination/456/?page=2');
@@ -186,5 +205,56 @@ describe('The atlas-api-call component', function () {
         //It replaced the endpoint for brk-object when it is set to true
         getComponent('http://www.some-domain.com/brk/object/123/', 'some-partial', true);
         expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/brk/object-expand/123/');
+    });
+
+    describe('a loading indicator', function () {
+        it('will be shown, without delay, when fetching the initial data', function () {
+            var component,
+                scope;
+
+            component = getComponent('http://www.some-domain.com/with-pagination/456/', 'some-partial', false);
+            scope = component.isolateScope();
+
+            expect(component.find('dp-loading-indicator').length).toBe(1);
+            expect(component.find('dp-loading-indicator').attr('is-loading')).toBe('vm.isLoading');
+            expect(scope.vm.isLoading).toBe(true);
+
+            expect(component.find('dp-loading-indicator').attr('use-delay')).toBe('vm.useLoadingIndicatorDelay');
+            expect(scope.vm.useLoadingIndicatorDelay).toBe(false);
+
+            finishApiRequest();
+            scope.$apply();
+
+            expect(scope.vm.isLoading).toBe(false);
+        });
+
+        it('will be shown, with delay, when fetching pages (2-n)', function () {
+            var component,
+                scope;
+
+            component = getComponent('http://www.some-domain.com/with-pagination/456/', 'some-partial', false);
+            scope = component.isolateScope();
+
+            //Finish the initial request
+            finishApiRequest();
+            scope.$apply();
+
+            //Fire a load more request
+            scope.vm.loadMore();
+            scope.$apply();
+
+            expect(component.find('dp-loading-indicator').length).toBe(1);
+            expect(component.find('dp-loading-indicator').attr('is-loading')).toBe('vm.isLoading');
+            expect(scope.vm.isLoading).toBe(true);
+
+            expect(component.find('dp-loading-indicator').attr('use-delay')).toBe('vm.useLoadingIndicatorDelay');
+            expect(scope.vm.useLoadingIndicatorDelay).toBe(true);
+
+            //Finish the load more request
+            finishApiRequest();
+            scope.$apply();
+
+            expect(scope.vm.isLoading).toBe(false);
+        });
     });
 });

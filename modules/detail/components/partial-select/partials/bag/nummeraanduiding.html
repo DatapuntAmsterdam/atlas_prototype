@@ -1,5 +1,5 @@
-<div class="detail-page__content--main">
-    <div class="default-box" ng-if="apiData.results._display">
+<div>
+    <div ng-if="apiData.results._display">
 
         <atlas-nummeraanduiding-header ng-if="apiData.results.verblijfsobject"
             heading="{{apiData.results._display}}"
@@ -15,7 +15,7 @@
         </atlas-stelselpedia-header>
 
 
-        <dl class="key-value-list">
+        <dl class="c-key-value-list">
             <dt>Naam openbare ruimte</dt>
             <dd ng-if="apiData.results.openbare_ruimte">
                 <dp-link type="FETCH_DETAIL" payload="apiData.results.openbare_ruimte._links.self.href">

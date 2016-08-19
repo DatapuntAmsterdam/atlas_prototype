@@ -12,6 +12,7 @@
 @import "styles/components/link-arrow";
 @import "styles/components/list";
 @import "styles/components/paragraph";
+@import "styles/components/table";
 
 @import "styles/utilities/aspect-ratio";
 @import "styles/utilities/clearfix";
@@ -21,5 +22,9 @@
 @import "styles/utilities/margin";
 @import "styles/utilities/padding";
 @import "styles/utilities/screen-reader";
+@import "styles/utilities/text-align";
 @import "styles/utilities/typography";
 @import "styles/utilities/width";
+
+@import "components/loading-indicator/loading-indicator";
+@import "components/panel/panel";

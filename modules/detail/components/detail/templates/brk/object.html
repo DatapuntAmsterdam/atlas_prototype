@@ -1,53 +1,55 @@
-<div class="detail-page__content">
-    <div class="detail-page__content--main">
-        <div class="default-box">
-            <atlas-stelselpedia-header
-                heading="{{vm.apiData.results._display}}"
-                definition="KADASTRAAL_OBJECT"
-                meta-data="vm.apiData">
-            </atlas-stelselpedia-header>
+<div>
+    <div class="u-row">
+        <atlas-stelselpedia-header
+            heading="{{vm.apiData.results._display}}"
+            definition="KADASTRAAL_OBJECT"
+            meta-data="vm.apiData">
+        </atlas-stelselpedia-header>
 
-            <dl class="key-value-list">
-                <dt>Kadastrale gemeentecode</dt>
-                <dd>{{ vm.apiData.results.kadastrale_gemeente._display }}</dd>
-                <dt>Sectie</dt>
-                <dd>{{ vm.apiData.results.sectie.sectie }}</dd>
-                <dt>Objectnummer</dt>
-                <dd>{{ vm.apiData.results.objectnummer    }}</dd>
-                <dt>Indexletter</dt>
-                <dd>{{ vm.apiData.results.indexletter }}</dd>
-                <dt>Indexnummer</dt>
-                <dd>{{ vm.apiData.results.indexnummer }}</dd>
-                <dt>Kadastrale gemeente</dt>
-                <dd>{{ vm.apiData.results.kadastrale_gemeente.naam }}</dd>
-                <dt>Gemeente</dt>
-                <dd>{{ vm.apiData.results.kadastrale_gemeente.gemeente._display }}</dd>
-                <dt>Koopsom</dt>
-                <dd>{{ vm.apiData.results.koopsom }}</dd>
-                <dt>Koopjaar</dt>
-                <dd>{{ vm.apiData.results.koopjaar }}</dd>
-                <dt>Grootte</dt>
-                <dd>{{ vm.apiData.results.grootte }} <span ng-if="vm.apiData.results.grootte">m<sup>2</sup></span></dd>
-                <dt>Cultuur bebouwd</dt>
-                <dd>{{ vm.apiData.results.cultuur_bebouwd }}</dd>
-                <dt>Cultuur onbebouwd</dt>
-                <dd>{{ vm.apiData.results.cultuur_onbebouwd }}</dd>
-            </dl>
+        <dl class="c-key-value-list">
+            <dt>Kadastrale gemeentecode</dt>
+            <dd>{{ vm.apiData.results.kadastrale_gemeente._display }}</dd>
+            <dt>Sectie</dt>
+            <dd>{{ vm.apiData.results.sectie.sectie }}</dd>
+            <dt>Objectnummer</dt>
+            <dd>{{ vm.apiData.results.objectnummer    }}</dd>
+            <dt>Indexletter</dt>
+            <dd>{{ vm.apiData.results.indexletter }}</dd>
+            <dt>Indexnummer</dt>
+            <dd>{{ vm.apiData.results.indexnummer }}</dd>
+            <dt>Kadastrale gemeente</dt>
+            <dd>{{ vm.apiData.results.kadastrale_gemeente.naam }}</dd>
+            <dt>Gemeente</dt>
+            <dd>{{ vm.apiData.results.kadastrale_gemeente.gemeente._display }}</dd>
+            <dt>Koopsom</dt>
+            <dd>{{ vm.apiData.results.koopsom }}</dd>
+            <dt>Koopjaar</dt>
+            <dd>{{ vm.apiData.results.koopjaar }}</dd>
+            <dt>Grootte</dt>
+            <dd>{{ vm.apiData.results.grootte }} <span ng-if="vm.apiData.results.grootte">m<sup>2</sup></span></dd>
+            <dt>Cultuur bebouwd</dt>
+            <dd>{{ vm.apiData.results.cultuur_bebouwd }}</dd>
+            <dt>Cultuur onbebouwd</dt>
+            <dd>{{ vm.apiData.results.cultuur_onbebouwd }}</dd>
+        </dl>
+    </div>
+
+    <div class="u-row">
+        <div class="u-col-sm--6 u-padding__right--2">
+            <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
         </div>
+    </div>
 
-        <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
+    <atlas-api-call
+        endpoint="{{vm.apiData.results._links.self.href}}"
+        partial="brk"
+        use-brk-object-expanded="true">
+    </atlas-api-call>
 
-        <atlas-api-call
-            endpoint="{{vm.apiData.results._links.self.href}}"
-            partial="brk"
-            use-brk-object-expanded="true">
+    <div ng-if="vm.apiData.results.verblijfsobjecten.count">
+        <atlas-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></atlas-stelselpedia-header>
+
+        <atlas-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst">
         </atlas-api-call>
-
-        <div class="list-box" ng-if="vm.apiData.results.verblijfsobjecten.count">
-            <atlas-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></atlas-stelselpedia-header>
-
-            <atlas-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst">
-            </atlas-api-call>
-        </div>
     </div>
 </div>

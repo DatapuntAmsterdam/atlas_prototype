@@ -1,10 +1,12 @@
 .leaflet-map {
   position: absolute;
   top: $base-whitespace * 2;
-  right: $base-whitespace * 2;
-  bottom: $base-whitespace * 2;
-  left: $base-whitespace * 2;
-  border: 1px solid $secondary-gray40;
+  right: $base-whitespace;
+  bottom: 0;
+  left: $base-whitespace;
+  border-width: 1px 1px 0;
+  border-style: solid;
+  border-color: $secondary-gray40;
   cursor: default;
   z-index: 1;
 }

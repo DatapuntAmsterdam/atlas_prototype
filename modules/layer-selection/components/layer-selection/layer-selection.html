@@ -1,45 +1,52 @@
-<div class="u-mb-2">
-    <button class="btn btn-white"
-        ng-click="vm.hideLayerSelection()">
+<dp-panel heading="Kaartlagen">
+    <dp-panel-icon>
+        <dp-link type="HIDE_LAYER_SELECTION" class-name="">
+            <img width="26" height="26" src="assets/icons/minimize.svg" alt="Minimaliseren">
+        </dp-link>
+    </dp-panel-icon>
+    <dp-panel-body>
+        <div class="u-margin-bottom--1">
+            <h2 class="u-font--base u-color__primary--contrast">Ondergrond</h2>
+            <ul>
+                <li ng-repeat="baseLayer in vm.allBaseLayers">
+                    <label>
+                        <input
+                            ng-model="vm.activeBaseLayer"
+                            ng-change="vm.setBaseLayer(vm.activeBaseLayer)"
+                            type="radio"
+                            value="{{baseLayer.slug}}">
 
-        Hide layer selection
-    </button>
-</div>
+                        {{baseLayer.label}}
+                    </label>
+                </li>
+            </ul>
+        </div>
 
-<div class="u-mb-2">
-    <h2 class="h3">Ondergrond</h2>
-    <ul>
-        <li ng-repeat="baseLayer in vm.allBaseLayers">
-            <label>
-                <input
-                    ng-model="vm.activeBaseLayer"
-                    ng-change="vm.setBaseLayer(vm.activeBaseLayer)"
-                    type="radio"
-                    value="{{baseLayer.slug}}">
+        <div class="u-margin-bottom--1" ng-repeat="category in vm.allOverlays">
+            <h2 class="u-font--base u-color__primary--contrast">{{category.heading}}</h2>
+            <ul>
+                <li ng-repeat="overlay in category.overlays">
+                    <label>
+                        <input
+                            type="checkbox"
+                            ng-checked="vm.isOverlayActive(overlay.slug)"
+                            ng-click="vm.toggleOverlay(overlay.slug)"
+                            value="{{overlay.slug}}">
 
-                {{baseLayer.label}}
-            </label>
-        </li>
-    </ul>
-</div>
+                        <strong ng-if="vm.isOverlayActive(overlay.slug)">
+                            {{overlay.label}}
+                        </strong>
 
-<div class="u-mb-2" ng-repeat="category in vm.allOverlays">
-    <h2 class="h3">{{category.heading}}</h2>
-    <ul>
-        <li ng-repeat="overlay in category.overlays">
-            <label>
-                <input
-                    type="checkbox"
-                    ng-checked="vm.isOverlayActive(overlay.slug)"
-                    ng-click="vm.toggleOverlay(overlay.slug)"
-                    value="{{overlay.slug}}">
+                        <span ng-if="!vm.isOverlayActive(overlay.slug)">
+                            {{overlay.label}}
+                        </span>
 
-                {{overlay.label}}
-
-                <span ng-if="vm.isOverlayActive(overlay.slug) && !vm.isOverlayVisible(overlay.slug)">
-                    (<strong>deze kaartlaag is niet zichtbaar op dit zoomniveau</strong>)
-                </span>
-            </label>
-        </li>
-    </ul>
-</div>
+                        <span ng-if="vm.isOverlayActive(overlay.slug) && !vm.isOverlayVisible(overlay.slug)">
+                            (deze kaartlaag is niet zichtbaar op dit zoomniveau)
+                        </span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </dp-panel-body>
+</dp-panel>

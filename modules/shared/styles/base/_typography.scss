@@ -1,11 +1,7 @@
-body {
-  @include font-size($body-font);
-  font-family: $base-font-family;
-}
-
-p,
+body,
 button {
   @include font-size($body-font);
+  font-family: $base-font-family;
 }
 
 h1 {

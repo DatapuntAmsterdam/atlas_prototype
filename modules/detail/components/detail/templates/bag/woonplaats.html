@@ -1,13 +1,12 @@
-<div class="detail-page__content">
-  <div class="detail-page__content--main">
-    <div class="default-box">
+<div class="detail-page__content--main">
+    <div class="u-row">
       <atlas-stelselpedia-header
         heading="{{vm.apiData.results.naam}}"
         definition="WOONPLAATS"
         meta-data="vm.apiData">
       </atlas-stelselpedia-header>
 
-      <dl class="key-value-list">
+      <dl class="c-key-value-list">
           <dt>Naam 17-posities (post)</dt>
           <dd>{{ vm.apiData.results.naam_17_posities}}</dd>
           <dt>Gemeente</dt>
@@ -15,11 +14,10 @@
       </dl>
     </div>
 
-    <div class="list-box" ng-if="vm.apiData.results.openbare_ruimtes.count">
+    <div ng-if="vm.apiData.results.openbare_ruimtes.count">
       <atlas-stelselpedia-header definition="OPENBARE_RUIMTE" use-plural="true"></atlas-stelselpedia-header>
 
       <atlas-api-call endpoint="{{vm.apiData.results.openbare_ruimtes.href}}" partial="adressen_lijst"></atlas-api-call>
     </div>
-  </div>
 </div>
 

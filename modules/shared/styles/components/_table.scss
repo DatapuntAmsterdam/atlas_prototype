@@ -1,7 +1,7 @@
 /*
 @name Table
 @markup
-<table class="table">
+<table class="o-table">
   <tbody>
     <tr>
       <th scope="row">Naam 24-posities (NEN)</th>
@@ -18,9 +18,9 @@
   </tbody>
 </table>
 */
-.table {
+.o-table {
   width: 100%;
-  margin-bottom: 2 * $base-whitespace;
+  margin-bottom: $base-whitespace;
   border-spacing: 0;
 
   th {
@@ -31,6 +31,10 @@
   td {
     padding-top: $base-whitespace / 2;
     padding-bottom: $base-whitespace / 2;
-    border-top: 1px solid $secondary-gray10;
+    border-bottom: 1px solid $secondary-gray10;
+
+    &:not(:last-child) {
+      padding-right: $base-whitespace * 2;
+    }
   }
 }

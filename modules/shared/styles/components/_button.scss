@@ -1,4 +1,4 @@
-.btn {
+.o-btn {
   /*
   @name Button - white
   @markup
@@ -26,13 +26,33 @@
   @markup
     <button class="btn btn--link">Lorem ipsum</button>
   */
-  &.btn--link {
+  &.o-btn--link {
     @extend %link--arrow;
 
     background-color: transparent;
     font-family: inherit;
     font-size: inherit;
     text-align: left;
-    cursor: pointer;
+  }
+
+  &.o-btn--contrast {
+    color: $primary-contrast;
+
+    &:hover {
+      color: $secondary-gray60;
+    }
+  }
+}
+
+.o-button--close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: $button-size;
+  height: $button-size;
+  background-image: url("assets/icons/close.svg");
+
+  &:hover {
+    background-image: url("assets/icons/close-hover.svg");
   }
 }

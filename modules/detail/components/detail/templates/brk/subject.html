@@ -1,6 +1,5 @@
-<div class="detail-page__content">
-  <div class="detail-page__content--main">
-    <div class="default-box">
+<div>
+    <div class="u-row">
       <atlas-stelselpedia-header
         heading="{{vm.apiData.results._display}}"
         definition="KADASTRAAL_SUBJECT"
@@ -8,7 +7,7 @@
       </atlas-stelselpedia-header>
 
       <!-- niet natuurlijke persoon -->
-      <dl class="key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === false">
+      <dl class="c-key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === false">
         <dt>Statutaire zetel</dt>
         <dd>{{ vm.apiData.results.statutaire_zetel }}</dd>
         <dt>Rechtsvorm</dt>
@@ -40,7 +39,7 @@
       </dl>
 
       <!-- natuurlijke persoon -->
-      <dl class="key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === true">
+      <dl class="c-key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === true">
         <dt>Voornamen</dt>
         <dd>{{ vm.apiData.results.voornamen }}</dd>
         <dt>Voorvoegsels</dt>
@@ -85,5 +84,5 @@
 
       <atlas-api-call endpoint="{{vm.apiData.results.rechten.href}}" partial="brk/subject-rechten"></atlas-api-call>
     </div>
-  </div>
 </div>
+

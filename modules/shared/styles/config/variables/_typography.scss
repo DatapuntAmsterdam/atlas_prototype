@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Avenir";
-  src: url("assets/Avenir-Heavy.ttf") format("truetype");
+  src: url("assets/fonts/Avenir-Heavy.ttf") format("truetype");
 }
 
 $base-font-family: Verdana, sans-serif;
@@ -22,7 +22,7 @@ $breakpoints: (
 // typografie gebasseerd op http://typecast.com/blog/a-more-modern-scale-for-web-typography
 
 $body-font: (
-  null: ($base-font-family, $base-font-size, 1.25),
+  null: ($base-font-family, $base-font-size, 1.375),
   m: ($base-font-family, $base-font-size, 1.375),
   l: ($base-font-family, $base-font-size, 1.375),
   xl: ($base-font-family, $base-font-size, 1.375)
@@ -50,8 +50,8 @@ $m-header-font: (
 );
 
 $s-header-font: (
-  null: ($header-font-family, $base-font-size * 1.125, 1.11111111, $base-font-size * 1.125 / 2),
-  m: ($header-font-family, $base-font-size * 1.125, 1.22222222, $base-font-size * 1.125 / 2),
-  l: ($header-font-family, $base-font-size * 1.125, 1.22222222, $base-font-size * 1.125 / 2),
-  xl: ($header-font-family, $base-font-size * 1.125, 1.22222222, $base-font-size * 1.125 / 2)
+  null: ($header-font-family, $base-font-size * 1.25, 1.11111111, $base-font-size * 1.25 / 2),
+  m: ($header-font-family, $base-font-size * 1.25, 1.22222222, $base-font-size * 1.25 / 2),
+  l: ($header-font-family, $base-font-size * 1.25, 1.22222222, $base-font-size * 1.25 / 2),
+  xl: ($header-font-family, $base-font-size * 1.25, 1.22222222, $base-font-size * 1.25 / 2)
 );

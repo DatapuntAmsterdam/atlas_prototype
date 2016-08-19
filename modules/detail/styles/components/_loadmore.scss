@@ -1,0 +1,28 @@
+.o-loadmore {
+  display: inline-block;
+  position: relative;
+  margin-left: $link-offset * 2.5;
+  color: $primary-contrast;
+  font-weight: 700;
+  line-height: 40px;
+  text-decoration: none;
+
+  &::before {
+    display: inline-block;
+    position: absolute;
+    top: -2px;
+    left: -$link-offset * 2.5;
+    width: $link-offset * 2.5;
+    font-size: 36px;
+    text-align: left;
+    content: "+";
+  }
+
+  &:hover {
+    color: $secondary-gray60;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

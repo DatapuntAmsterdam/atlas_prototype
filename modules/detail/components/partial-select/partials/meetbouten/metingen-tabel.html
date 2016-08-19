@@ -1,27 +1,26 @@
-<div class="detail-page__table">
-
-  <table ng-if="apiData.results">
+<div class="u-padding__bottom--2">
+  <table class="o-table" ng-if="apiData.results">
     <thead>
       <tr>
         <th>Datum</th>
-        <th class="util__align-right">Hoogte NAP</th>
-        <th class="util__align-right">Zakking (mm)</th>
-        <th class="util__align-right">Zaksnelheid (mm/j)</th>
-        <th class="util__align-right">Zakking cum. (mm)</th>
+        <th class="u-align--right">Hoogte NAP</th>
+        <th class="u-align--right">Zakking (mm)</th>
+        <th class="u-align--right">Zaksnelheid (mm/j)</th>
+        <th class="u-align--right">Zakking cum. (mm)</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="detail-page__table--body" ng-repeat="object in apiData.results">
+      <tr ng-repeat="object in apiData.results">
         <td>{{ object.datum }}</td>
-        <td class="util__align-right">{{object.hoogte_nap >= 0 ? '+' : ''}}{{ object.hoogte_nap | number:3}}</td>
-        <td class="util__align-right">{{object.zakking >= 0 ? '+' : ''}}{{ object.zakking | number:3}}</td>
-        <td class="util__align-right">{{object.zakkingssnelheid >= 0 ? '+' : ''}}{{ object.zakkingssnelheid | number:3}}</td>
-        <td class="util__align-right">{{object.zakking_cumulatief >= 0 ? '+' : ''}}{{ object.zakking_cumulatief | number:3}}</td>
+        <td class="u-align--right">{{object.hoogte_nap >= 0 ? '+' : ''}}{{ object.hoogte_nap | number:3}}</td>
+        <td class="u-align--right">{{object.zakking >= 0 ? '+' : ''}}{{ object.zakking | number:3}}</td>
+        <td class="u-align--right">{{object.zakkingssnelheid >= 0 ? '+' : ''}}{{ object.zakkingssnelheid | number:3}}</td>
+        <td class="u-align--right">{{object.zakking_cumulatief >= 0 ? '+' : ''}}{{ object.zakking_cumulatief | number:3}}</td>
       </tr>
     </tbody>
   </table>
 
-  <a class="loadmore" ng-click="loadMore()" ng-if="apiData.next">
-    <i class="fa fa-plus fa-2x link"></i>Meer
-  </a>
+  <button class="o-loadmore" ng-click="loadMore()" ng-if="apiData.next">
+    Meer
+  </button>
 </div>

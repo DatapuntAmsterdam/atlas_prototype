@@ -1,0 +1,71 @@
+%description-list {
+  margin: 5px 0;
+  line-height: 2;
+
+  dt {
+    padding-right: $base-whitespace;
+    float: left;
+    clear: both;
+    border-top: 1px solid $secondary-gray20;
+    color: $secondary-gray60;
+    word-wrap: break-word;
+
+
+    &:first-of-type {
+      border-top: 1px solid transparent;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid $secondary-gray20;
+    }
+  }
+
+  dd {
+    margin: 0;
+    float: right;
+    border-top: 1px solid $secondary-gray20;
+
+    &:first-of-type {
+      border-top: 1px solid transparent;
+    }
+
+    &:last-of-type {
+      min-height: 30px; //anders klapt de hoogte in (lineheight x font-size + border)
+      border-bottom: 1px solid $secondary-gray20;
+    }
+  }
+}
+
+.c-key-value-list {
+  @extend %description-list;
+
+  dt {
+    width: 100% / 6 * 2; //2 van 6 kolommen
+  }
+
+  dd {
+    width: 100% / 6 * 4; //4 van 6 kolommen
+  }
+
+  &::after {
+    @extend %clearfix;
+  }
+}
+
+.c-parent-relations {
+  @extend %description-list;
+
+  dt {
+    width: 100% / 3 * 1; //1 van 3 kolommen
+  }
+
+  dd {
+    width: 100% / 3 * 2; //3 van 5 kolommen
+  }
+}
+
+.s-indented-list {
+  margin-left: $base-font-size;
+  padding: 0 0 $base-font-size $base-font-size;
+  border-left: 1px solid $secondary-gray20;
+}

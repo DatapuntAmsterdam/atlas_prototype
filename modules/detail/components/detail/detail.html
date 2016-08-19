@@ -1,4 +1,6 @@
-<div ng-if="vm.apiData"
+<dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
+
+<div ng-if="!vm.isLoading && vm.apiData"
     ng-include="vm.includeSrc"
     onload="apiData = vm.apiData">
 
