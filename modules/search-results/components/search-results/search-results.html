@@ -25,13 +25,13 @@
                     <div ng-repeat="category in vm.searchResults"
                          ng-class="{
                             'u-margin__top--1 u-margin__left--3': category.useIndenting,
-                            'u-margin__top--3': !category.useIndenting
+                            'u-margin__top--2': !category.useIndenting
                         }">
 
-                        <h1 class="u-color__primary--contrast u-font--m">
+                        <h2 class="o-header__subtitle">
                             <span ng-if="category.count > 1">{{category.label_plural}} ({{category.count | number}})</span>
                             <span ng-if="category.count === 1">{{category.label_singular}}</span>
-                        </h1>
+                        </h2>
 
                         <atlas-search-results-list category="category" limit-results="true"></atlas-search-results-list>
 
@@ -56,9 +56,9 @@
                 </div>
                 <div ng-if="vm.category">
                     <div class="o-header">
-                        <h2 class="o-header__title">
+                        <h1 class="o-header__title">
                             Zoekresultaten: {{vm.categoryName}}
-                        </h2>
+                        </h1>
                     </div>
                     <p>
                         {{vm.numberOfResults | number}}
