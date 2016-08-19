@@ -8,6 +8,15 @@
 
         <div ng-if="vm.numberOfResults">
             <div ng-if="!vm.category">
+                <div class="o-header">
+                    <div class="o-header__subtitle">
+                        Zoekresultaten
+                    </div>
+                    <div class="o-header__title">
+                        <span ng-if="vm.query">"{{vm.query}}"</span>
+                        <span ng-if="vm.location">{{vm.location | coordinates}}</span>
+                    </div>
+                </div>
                 <p>
                     {{vm.numberOfResults | number}}
                     {{vm.numberOfResults === 1 ? 'resultaat' : 'resultaten'}}
