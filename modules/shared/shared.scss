@@ -30,5 +30,6 @@
 
 .is-print-mode {
   @import "styles/base/reset-print";
+  @import "components/loading-indicator/loading-indicator-print";
   @import "components/panel/panel-print";
 }
