@@ -2,6 +2,7 @@ describe('The dashboard component', function () {
     var $compile,
         $rootScope,
         store,
+        dashboardColumns,
         defaultState;
 
     beforeEach(function () {
@@ -32,10 +33,11 @@ describe('The dashboard component', function () {
             });
         });
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _dashboardColumns_, _DEFAULT_STATE_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
+            dashboardColumns = _dashboardColumns_;
             defaultState = angular.copy(_DEFAULT_STATE_);
         });
     });
@@ -160,6 +162,65 @@ describe('The dashboard component', function () {
             expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--auto')).toBe(true);
         });
     });
+
+    ['page', 'detail', 'searchResults'].forEach(function (panel) {
+        describe('use scrollable content for ' + panel, function () {
+            var component,
+                mockedVisibility = {};
+
+            beforeEach(function () {
+                mockedVisibility[panel] = true;
+
+                spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
+
+                component = getComponent();
+            });
+
+            it('removes padding from the c-dashboard__content container', function () {
+                expect(component.find('.c-dashboard__content').attr('class')).not.toContain('u-padding__right--1');
+            });
+
+            it('adds extra padding to the right panel and makes it scrollable', function () {
+                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                    .not.toContain('u-padding__right--1');
+
+                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                    .toContain('u-padding__right--2');
+                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                    .toContain('c-dashboard__content--scrollable');
+            });
+        });
+    });
+
+    describe('do not use scrollable content for straatbeeld', function () {
+        var component,
+            mockedVisibility = {};
+
+        beforeEach(function () {
+            mockedVisibility['straatbeeld'] = true;
+
+            spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
+
+            component = getComponent();
+        });
+
+        it('does not touch padding on the c-dashboard__content container', function () {
+            expect(component.find('.c-dashboard__content').attr('class')).toContain('u-padding__right--1');
+        });
+
+        it('does not touch the classes on the right panel', function () {
+            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                .toContain('u-padding__right--1');
+
+            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                .not.toContain('u-padding__right--2');
+            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                .not.toContain('c-dashboard__content--scrollable');
+        });
+
+    });
+
+
 
     //scrollable?
 });
