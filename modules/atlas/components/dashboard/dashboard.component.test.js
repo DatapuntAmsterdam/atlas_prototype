@@ -217,10 +217,69 @@ describe('The dashboard component', function () {
             expect(component.find('.qa-dashboard__content__column--right').attr('class'))
                 .not.toContain('c-dashboard__content--scrollable');
         });
-
     });
 
+    ['page', 'detail', 'searchResults'].forEach(function (panel) {
+        describe('don\'t add scrolling when viewing the fullscreen map (on top of ' + panel + ')', function () {
+            var component,
+                mockedState,
+                mockedVisibility = {};
 
+            beforeEach(function () {
+                mockedState = angular.copy(defaultState);
+                mockedState.map.isFullscreen = true;
+                spyOn(store, 'getState').and.returnValue(mockedState);
 
-    //scrollable?
+                mockedVisibility[panel] = true;
+                spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
+
+                component = getComponent();
+            });
+
+            it('does not remove whitespace from .c-dashboard__content' + panel, function () {
+                expect(component.find('.c-dashboard__content').attr('class')).toContain('u-padding__right--1');
+            });
+        });
+    });
+
+    ['page', 'detail', 'searchResults'].forEach(function (panel) {
+        describe('when printing ' + panel, function () {
+            var component,
+                mockedState,
+                mockedVisibility = {};
+
+            beforeEach(function () {
+                mockedState = angular.copy(defaultState);
+                mockedState.isPrintMode = true;
+                spyOn(store, 'getState').and.returnValue(mockedState);
+
+                mockedVisibility[panel] = true;
+                spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
+
+                component = getComponent();
+            });
+
+            it('doesn\'t add any padding on c-dashboard__content', function () {
+                expect(component.find('.c-dashboard__content').attr('class')).not.toContain('u-padding__right--1');
+                expect(component.find('.c-dashboard__content').attr('class')).not.toContain('u-padding__right--2');
+                expect(component.find('.c-dashboard__content').attr('class')).not.toContain('u-padding__left--1');
+            });
+
+            it('does not touch the classes on the right panel', function () {
+                //No padding on the right
+                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                    .not.toContain('u-padding__right--1');
+                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                    .not.toContain('u-padding__right--2');
+
+                //No padding on the left
+                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                    .not.toContain('u-padding__left--1');
+
+                //Not scrollable
+                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
+                    .not.toContain('c-dashboard__content--scrollable');
+            });
+        });
+    });
 });
