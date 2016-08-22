@@ -1,33 +1,37 @@
-<div class="default-box">
-	<hr>
-  <h2 class="bbga__heading">Bewoners</h2>
-  <p class="bbga__intro">Bevolking naar gezinssamenstelling, leeftijd en herkomst (percentage)</p>
-  <div class="js-personen-graph"></div>
+<h3 class="o-header__subtitle">Bewoners</h3>
+<p>Bevolking naar gezinssamenstelling, leeftijd en herkomst (percentage).</p>
+<div class="u-margin__bottom--2">
+    <div class="js-personen-graph"></div>
 </div>
 
-<div class="default-box">
-<hr>
-  <h2 class="bbga__heading">Woningvoorraad</h2>
-  <p class="bbga__intro">Woningvoorraad naar eigendomsverhouding (percentage) en gemiddelde WOZ-waarde (euro's)</p>
-  <div class="js-huizen-graph"></div>
+<h3 class="o-header__subtitle">Woningvoorraad</h3>
+<p>Woningvoorraad naar eigendomsverhouding (percentage) en gemiddelde WOZ-waarde (euro's).</p>
+<div class="u-margin__bottom--2">
+    <div class="js-huizen-graph"></div>
 </div>
 
-<div class="default-box">
-  <hr>
-  <atlas-bbga-tevredenheid gebied-heading="{{gebiedHeading}}" gebied-code="{{gebiedCode}}"></atlas-bbga-tevredenheid>
+<div class="u-margin__bottom--2">
+    <atlas-bbga-tevredenheid gebied-heading="{{gebiedHeading}}" gebied-code="{{gebiedCode}}"></atlas-bbga-tevredenheid>
 </div>
 
-<div class="default-box ois">
-  <p class="u-pull--left ois__paragraph">
-    Alle gegevens in de figuren zijn afkomstig uit het Basisbestand Gebieden Amsterdam (BBGA) van de RVE Onderzoek,
-    Informatie en Statistiek (OIS) van de gemeente Amsterdam.
-  </p>
-  <p class="u-pull--right ois__paragraph">
-    Het BBGA bevat nog veel meer indicatoren, peildata en gebiedsindelingen. Op de site van OIS is het volledige bestand
-    te bekijken en te downloaden (Excel, CSV, API).
-  </p>
-
-  <a class="ois__link" href="http://www.ois.amsterdam.nl/visualisatie/dashboard_kerncijfers.html">
-    Ga naar de website <img class="ois__img" src="assets/icons/link-button.svg" alt="linkbutton">
-  </a>
+<div class="u-grid">
+    <div class="u-row">
+        <div class="u-col-sm--6 u-padding__right--1">
+            <p>
+                Alle gegevens in de figuren zijn afkomstig uit het Basisbestand Gebieden Amsterdam (BBGA) van de RVE
+                Onderzoek, Informatie en Statistiek (OIS) van de gemeente Amsterdam.
+            </p>
+        </div>
+        <div class="u-col-sm--6 u-padding__left--1">
+            <p>
+                Het BBGA bevat nog veel meer indicatoren, peildata en gebiedsindelingen. Op de site van OIS is het
+                volledige bestand te bekijken en te downloaden (Excel, CSV, API).
+            </p>
+            <p>
+                <a class="o-link--arrow" href="http://www.ois.amsterdam.nl/visualisatie/dashboard_kerncijfers.html">
+                    Ga naar de website
+                </a>
+            </p>
+        </div>
+    </div>
 </div>
