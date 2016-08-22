@@ -37,4 +37,10 @@
       padding-right: $base-whitespace * 2;
     }
   }
+
+  tbody {
+    th {
+      font-weight: 400;
+    }
+  }
 }
