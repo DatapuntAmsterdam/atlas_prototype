@@ -1,31 +1,27 @@
 describe('The atlas-print-state directive', function () {
     var $compile,
         $rootScope,
-        $window;
+        store;
 
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _store_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
-            $window = _$window_;
+            store = _store_;
         });
-
-        spyOn($window, 'print');
     });
 
-    function getDirective (isPrintMode) {
+    function getDirective () {
         var directive,
             element,
             scope;
 
         element = document.createElement('div');
         element.setAttribute('atlas-print-state', '');
-        element.setAttribute('is-print-mode', 'isPrintMode');
 
         scope = $rootScope.$new();
-        scope.isPrintMode = isPrintMode;
 
         directive = $compile(element)(scope);
         scope.$apply();
@@ -33,31 +29,23 @@ describe('The atlas-print-state directive', function () {
         return directive;
     }
 
-    it('adds a class to the <html> element when atlas-print-state becomes true', function () {
-        var directive = getDirective(false),
-            htmlElement = angular.element(document.querySelector('html')),
-            scope = directive.isolateScope();
+    it('adds a class to the element when isPrintMode is true', function () {
+        var directive;
 
-        expect(htmlElement.hasClass('is-print-mode')).toBe(false);
+        spyOn(store, 'getState').and.returnValue({isPrintMode: true});
 
-        //Trigger the watch
-        scope.isPrintMode = true;
-        scope.$apply();
+        directive = getDirective();
 
-        expect(htmlElement.hasClass('is-print-mode')).toBe(true);
+        expect(directive.hasClass('is-print-mode')).toBe(true);
     });
 
-    it('removes a class from the <html> element when atlas-print-state becomes false', function () {
-        var directive = getDirective(true),
-            htmlElement = angular.element(document.querySelector('html')),
-            scope = directive.isolateScope();
+    it('does not add a class to the element when isPrintMode is false', function () {
+        var directive;
 
-        expect(htmlElement.hasClass('is-print-mode')).toBe(true);
+        spyOn(store, 'getState').and.returnValue({isPrintMode: false});
 
-        //Trigger the watch
-        scope.isPrintMode = false;
-        scope.$apply();
+        directive = getDirective();
 
-        expect(htmlElement.hasClass('is-print-mode')).toBe(false);
+        expect(directive.hasClass('is-print-mode')).toBe(false);
     });
 });
