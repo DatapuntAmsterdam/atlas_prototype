@@ -13,5 +13,22 @@ module.exports = {
                 flatten: false
             }
         ]
+    },
+    bower_fonts: {
+        files: [
+            {
+                cwd: 'bower_components/',
+                src: [
+                    '**/*.eot',
+                    '**/*.svg',
+                    '**/*.ttf',
+                    '**/*.woff',
+                    '**/*.woff2',
+                ],
+                dest: 'build/',
+                expand: true,
+                flatten: true
+            }
+        ]
     }
 };
