@@ -24,8 +24,6 @@
 
             vm.visibility = dashboardColumns.determineVisibility(state);
 
-            console.log(vm.visibility);
-
             vm.isPrintMode = state.isPrintMode;
 
             vm.isRightColumnScrollable = !state.map.isFullscreen &&
