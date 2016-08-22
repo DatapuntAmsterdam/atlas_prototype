@@ -1,27 +1,33 @@
-<div ng-if="vm.tableData.length" class="tevredenheid">
-  <h2 class="bbga__heading">Tevredenheid</h2>
-  <p class="tevredenheid__subtitle">Gemiddeld rapportcijfer dat bewoners geven aan hun woonomgeving</p>
-  <img class="tevredenheid__img" src="assets/images/tevredenheid.svg" alt="Tevredenheid raportcijfers">
+<div class="u-grid" ng-if="vm.tableData.length">
+    <div class="u-row">
+        <div class="u-col-md--8 col-lg--6">
+            <h3 class="o-header__subtitle">Tevredenheid cijfers {{vm.year}}</h3>
+            <p>Gemiddeld rapportcijfer dat bewoners geven aan hun woonomgeving</p>
 
-  <h3 class="tevredenheid__header">Rapportcijfers {{vm.year}}</h3>
+            <table class="o-table">
+                <tr ng-repeat="row in vm.tableData">
+                    <th scope="row">{{row.label}}</th>
+                    <td>
+                        <span class="bbga-tevredenheid__value u-background-color__thema--9">
+                            {{row.data[0].waarde | number : 1}}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="bbga-tevredenheid__value u-background-color__primary--contrast">
+                            {{row.data[1].waarde | number : 1}}
+                        </span>
+                    </td>
+                </tr>
+            </table>
 
-  <table class="bbga-table">
-    <tr ng-repeat="row in vm.tableData">
-      <th scope="row" class="roman">{{row.label}}</th>
-      <td><span class="badge badge--gray">{{row.data[0].waarde | number : 1}}</span></td>
-      <td><span class="badge badge--red">{{row.data[1].waarde | number : 1}}</span></td>
-    </tr>
-  </table>
-
-  <div class="tevredenheid__legend">
-    <div class="legend__gebied">
-      <span class="legend__label">{{vm.gebiedHeading}}</span>
-      <span class="badge badge--gray"></span>
+            <ul class="o-list">
+                <li class="bbga-tevredenheid__legend">
+                    <span class="bbga-tevredenheid__legend__square u-background-color__thema--9"></span>{{vm.gebiedHeading}}
+                </li>
+                <li class="bbga-tevredenheid__legend">
+                    <span class="bbga-tevredenheid__legend__square u-background-color__primary--contrast"></span>Amsterdam
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="legend__amsterdam">
-      <span class="badge badge--red"></span>
-      <span class="legend__label">Amsterdam</span>
-    </div>
-  </div>
-
 </div>
