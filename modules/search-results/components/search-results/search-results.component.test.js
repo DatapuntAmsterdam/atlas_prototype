@@ -412,7 +412,7 @@ describe('The atlas-search-results component', function () {
 
                 //A category with 11 search results uses the plural form and it shows the number of results in brackets
                 component = getComponent('Weesperstraat');
-                expect(component.find('.o-header__subtitle').eq(0).text().trim()).toBe('Adressen (11)');
+                expect(component.find('.qa-search-header').eq(0).text().trim()).toBe('Adressen (11)');
 
                 //A category with 1 search result uses the singular form and doesn't show the number or results
                 mockedSearchResults[0].count = 1;
