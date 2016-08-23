@@ -68,7 +68,7 @@
                 }
             });
 
-            //Re-render the Marzipano viewer if the size changes
+            //Re-render the Marzipano viewer if the size changes (through an added parent CSS class)
             scope.$watch('isPrintMode', function () {
                 $rootScope.$applyAsync(function () {
                     viewer.updateSize();
