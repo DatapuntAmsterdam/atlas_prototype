@@ -81,5 +81,15 @@ describe('The homeReducers factory', function () {
                 expect(homeReducers.SHOW_HOME(inputState)).toEqual(expectedState);
             });
         });
+
+        it('keeps the isPrintMode setting', function () {
+            mockedStates.forEach(function (inputState) {
+                inputState.isPrintMode = false;
+                expect(homeReducers.SHOW_HOME(inputState).isPrintMode).toBe(false);
+
+                inputState.isPrintMode = true;
+                expect(homeReducers.SHOW_HOME(inputState).isPrintMode).toBe(true);
+            });
+        });
     });
 });

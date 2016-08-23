@@ -25,6 +25,7 @@
                 newState.page = payload.pagina || null;
                 newState.detail = getDetailState(oldState, payload);
                 newState.straatbeeld = getStraatbeeldState(oldState, payload);
+                newState.isPrintMode = getPrintState(payload);
 
                 return newState;
             }
@@ -150,6 +151,10 @@
                 function hasSearchLocation (payload) {
                     return payload.plat && payload.plon;
                 }
+            }
+
+            function getPrintState (payload) {
+                return angular.isString(payload['print-versie']);
             }
         }
     }

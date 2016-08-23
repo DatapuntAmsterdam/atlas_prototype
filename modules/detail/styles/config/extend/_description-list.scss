@@ -35,33 +35,3 @@
     }
   }
 }
-
-.c-key-value-list {
-  @extend %description-list;
-
-  dt {
-    width: 100% / 6 * 2; //2 van 6 kolommen
-  }
-
-  dd {
-    width: 100% / 6 * 4; //4 van 6 kolommen
-  }
-}
-
-.c-parent-relations {
-  @extend %description-list;
-
-  dt {
-    width: 100% / 3 * 1; //1 van 3 kolommen
-  }
-
-  dd {
-    width: 100% / 3 * 2; //3 van 5 kolommen
-  }
-}
-
-.s-indented-list {
-  margin-left: $base-font-size;
-  padding: 0 0 $base-font-size $base-font-size;
-  border-left: 1px solid $secondary-gray20;
-}

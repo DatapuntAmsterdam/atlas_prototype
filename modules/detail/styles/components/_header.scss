@@ -3,17 +3,16 @@
 }
 
 .o-header__title {
-  padding-top: 0;
+  @include font-size($l-header-font);
+  padding-top: 0 !important;
 }
 
 .o-header__subtitle {
-  display: block;
-  padding-top: $base-whitespace * 2;
-  color: $primary-contrast;
+  @include font-size($m-header-font);
 
-  .s-indented-list & {
-    color: $primary-dark;
-  }
+  display: block;
+  padding-top: $base-whitespace * 2 !important;
+  color: $primary-contrast;
 }
 
 .o-header__buttongroup {
@@ -31,6 +30,6 @@
 
 .o-header__button--image {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: $button-size;
+  height: $button-size;
 }

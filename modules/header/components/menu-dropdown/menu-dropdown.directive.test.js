@@ -59,7 +59,6 @@ describe('The atlas-menu-dropdown directive', function () {
 
         //It should be openend
         expect(directive.find('.menu-dropdown').length).toBe(1);
-        expect(directive.find('atlas-print-button').length).toBe(1);
         expect(directive.find('atlas-terugmelden-button').length).toBe(1);
         expect(directive.find('dp-link').length).toBe(2);
 

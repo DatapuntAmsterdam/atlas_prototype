@@ -5,7 +5,8 @@
         .module('atlasHeader')
         .component('atlasHeader', {
             bindings: {
-                query: '@'
+                query: '@',
+                isPrintMode: '='
             },
             templateUrl: 'modules/header/components/header/header.html',
             controller: AtlasHeaderController,

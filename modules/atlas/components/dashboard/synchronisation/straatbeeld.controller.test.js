@@ -53,14 +53,14 @@ describe('The straatbeeld controller', function () {
 
         controller = getController();
 
-        expect(controller.straatbeeld.id).toBe(7);
-        expect(controller.straatbeeld.searchLocation).toBeNull();
-        expect(controller.straatbeeld.date).toEqual(new Date(2016, 6, 8));
-        expect(controller.straatbeeld.camera).toEqual({
+        expect(controller.straatbeeldState.id).toBe(7);
+        expect(controller.straatbeeldState.searchLocation).toBeNull();
+        expect(controller.straatbeeldState.date).toEqual(new Date(2016, 6, 8));
+        expect(controller.straatbeeldState.camera).toEqual({
             location: [52.741, 4.852]
         });
-        expect(controller.straatbeeld.hotspots).toEqual(['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y', 'FAKE_HOTSPOT_Z']);
-        expect(controller.straatbeeld.isLoading).toBe(false);
+        expect(controller.straatbeeldState.hotspots).toEqual(['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y', 'FAKE_HOTSPOT_Z']);
+        expect(controller.straatbeeldState.isLoading).toBe(false);
     });
 
     it('can have a location instead of an ID', function () {
@@ -81,7 +81,7 @@ describe('The straatbeeld controller', function () {
 
         controller = getController();
 
-        expect(controller.straatbeeld.id).toBeNull();
-        expect(controller.straatbeeld.searchLocation).toEqual([52.456, 4.321]);
+        expect(controller.straatbeeldState.id).toBeNull();
+        expect(controller.straatbeeldState.searchLocation).toEqual([52.456, 4.321]);
     });
 });

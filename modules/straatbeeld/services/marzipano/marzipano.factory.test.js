@@ -115,8 +115,27 @@ describe('The marzipanoService factory', function () {
         fakeDomElement = document.createElement('div');
         viewer = marzipanoService.initialize(fakeDomElement);
 
-        expect(Marzipano.Viewer).toHaveBeenCalledWith(fakeDomElement);
+        expect(Marzipano.Viewer).toHaveBeenCalledWith(fakeDomElement, jasmine.anything());
         expect(viewer).toEqual(fakeViewer);
+    });
+
+    it('uses the extra settings to enable print in Firefox and Safari', function () {
+        var fakeDomElement;
+
+        fakeDomElement = document.createElement('div');
+        marzipanoService.initialize(fakeDomElement);
+
+        //Use webgl as the context for the HTML canvas
+        expect(Marzipano.Viewer).toHaveBeenCalledWith(jasmine.anything(), jasmine.objectContaining({
+            stageType: 'webgl'
+        }));
+
+        //Don't clear the webgl buffer. Firefox and Safari clear this buffer by default when opening the print dialog
+        expect(Marzipano.Viewer).toHaveBeenCalledWith(jasmine.anything(), jasmine.objectContaining({
+            stage: {
+                preserveDrawingBuffer: true
+            }
+        }));
     });
 
     describe('it has a loadScene function', function () {

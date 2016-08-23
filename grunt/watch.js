@@ -23,7 +23,7 @@ module.exports = {
             'index.html'
         ],
         tasks: [
-            'build'
+            'build-develop'
         ]
     },
     assets: {
@@ -39,5 +39,4 @@ module.exports = {
             '!build/temp/**/*'
         ]
     }
-
 };

@@ -20,7 +20,7 @@
 */
 .o-table {
   width: 100%;
-  margin-bottom: 2 * $base-whitespace;
+  margin-bottom: $base-whitespace;
   border-spacing: 0;
 
   th {
@@ -35,6 +35,12 @@
 
     &:not(:last-child) {
       padding-right: $base-whitespace * 2;
+    }
+  }
+
+  tbody {
+    th {
+      font-weight: 400;
     }
   }
 }

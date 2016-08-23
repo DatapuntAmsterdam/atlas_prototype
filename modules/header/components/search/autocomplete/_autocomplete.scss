@@ -3,8 +3,8 @@ $suggestion-offset: $base-font-size;
 .c-autocomplete {
   position: absolute;
   top: $search-form-height + $base-whitespace;
-  right: $base-whitespace - 1;
-  left: $base-whitespace - 1;
+  right: -1px;
+  left: -1px;
   border-width: 0 1px 1px;
   border-style: solid;
   border-color: $secondary-gray60;

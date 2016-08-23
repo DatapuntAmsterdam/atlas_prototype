@@ -9,9 +9,9 @@
             controllerAs: 'vm'
         });
 
-    AtlasDashboardController.$inject = ['store'];
+    AtlasDashboardController.$inject = ['store', 'dashboardColumns'];
 
-    function AtlasDashboardController (store) {
+    function AtlasDashboardController (store, dashboardColumns) {
         var vm = this;
 
         vm.store = store;
@@ -22,28 +22,18 @@
         function setLayout () {
             var state = store.getState();
 
-            vm.showLayerSelection = state.map.showLayerSelection;
-            vm.showPage = !vm.showLayerSelection && angular.isString(state.page);
-            vm.showDetail = angular.isObject(state.detail);
-            vm.showStraatbeeld = angular.isObject(state.straatbeeld);
-            vm.showSearchResults = angular.isObject(state.search) &&
-                (angular.isString(state.search.query) || angular.isArray(state.search.location));
+            vm.visibility = dashboardColumns.determineVisibility(state);
+
+            vm.isPrintMode = state.isPrintMode;
 
             vm.isRightColumnScrollable = !state.map.isFullscreen &&
-                (vm.showPage || vm.showDetail || vm.showSearchResults);
+                (vm.visibility.page || vm.visibility.detail || vm.visibility.searchResults);
 
-            if (state.map.isFullscreen) {
-                vm.sizeLeftColumn = 0;
-                vm.sizeMiddleColumn = 12;
-            } else if (vm.showLayerSelection) {
-                vm.sizeLeftColumn = 8;
-                vm.sizeMiddleColumn = 4;
-            } else {
-                vm.sizeLeftColumn = 0;
-                vm.sizeMiddleColumn = 4;
-            }
-
-            vm.sizeRightColumn = 12 - vm.sizeLeftColumn - vm.sizeMiddleColumn;
+            vm.columnSizes = dashboardColumns.determineColumnSizes(
+                vm.visibility,
+                state.map.isFullscreen,
+                vm.isPrintMode
+            );
         }
     }
 })();

@@ -1,11 +1,19 @@
-.marzipano-viewer {
+.c-straatbeeld {
   position: absolute;
   top: $base-whitespace * 2;
-  right: 0;
+  right: $base-whitespace;
   bottom: 40px;
   left: $base-whitespace;
   border-width: 1px 1px 0;
   border-style: solid;
   border-color: $secondary-gray40;
   z-index: 1;
+}
+
+.c-straatbeeld__marzipano {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
