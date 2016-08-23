@@ -1,7 +1,8 @@
-var jsFiles = require('./grunt/config/js-files');
+var jsFiles = require('./grunt/config/js-files'),
+    jsKarmaFiles = ['build/atlas.js'];
 
-jsFiles.push('bower_components/angular-mocks/angular-mocks.js');
-jsFiles.push('modules/**/*.test.js');
+jsKarmaFiles.push('bower_components/angular-mocks/angular-mocks.js');
+jsKarmaFiles.push('modules/**/*.test.js');
 
 module.exports = function (config) {
     config.set({
@@ -9,7 +10,7 @@ module.exports = function (config) {
         frameworks: ['jasmine-jquery', 'jasmine'],
 
         // list of files / patterns to load in the browser
-        files: jsFiles,
+        files: jsKarmaFiles,
 
         plugins: [
             'karma-jasmine-jquery',
