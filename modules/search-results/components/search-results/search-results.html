@@ -70,7 +70,7 @@
                     <atlas-search-results-list category="vm.searchResults[0]"></atlas-search-results-list>
 
                     <button
-                        ng-if="vm.searchResults[0].count > vm.searchResults[0].results.length && !vm.isLoadMoreLoading"
+                        ng-if="vm.hasLoadMore()"
                         class="o-loadmore"
                         ng-click="vm.loadMore()">
 
