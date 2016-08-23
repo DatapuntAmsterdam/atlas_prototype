@@ -78,6 +78,12 @@
                 .reduce(function (previous, current) {
                     return previous + current;
                 }, 0);
+
+            vm.hasLoadMore = function () {
+                return angular.isString(vm.category) &&
+                    vm.searchResults[0].count > vm.searchResults[0].results.length &&
+                    !vm.isLoadMoreLoading;
+            };
         }
     }
 })();

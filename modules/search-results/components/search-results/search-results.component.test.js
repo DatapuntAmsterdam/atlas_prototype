@@ -412,7 +412,7 @@ describe('The atlas-search-results component', function () {
 
                 //A category with 11 search results uses the plural form and it shows the number of results in brackets
                 component = getComponent('Weesperstraat');
-                expect(component.find('h2').eq(0).text().trim()).toBe('Adressen (11)');
+                expect(component.find('.qa-search-header').eq(0).text().trim()).toBe('Adressen (11)');
 
                 //A category with 1 search result uses the singular form and doesn't show the number or results
                 mockedSearchResults[0].count = 1;
@@ -614,7 +614,7 @@ describe('The atlas-search-results component', function () {
             //Without indenting
             [0, 2, 3, 4].forEach(function (categoryIndex) {
                 expect(component.find('[ng-repeat="category in vm.searchResults"]').eq(categoryIndex).attr('class'))
-                    .toContain('u-margin__top--3');
+                    .toContain('u-margin__top--2');
 
                 expect(component.find('[ng-repeat="category in vm.searchResults"]').eq(categoryIndex).attr('class'))
                     .not.toContain('u-margin__top--1');
@@ -631,7 +631,7 @@ describe('The atlas-search-results component', function () {
                 .toContain('u-margin__top--1');
 
             expect(component.find('[ng-repeat="category in vm.searchResults"]').eq(1).attr('class'))
-                .not.toContain('u-margin__top--3');
+                .not.toContain('u-margin__top--2');
         });
 
         it('has more link support', function () {
