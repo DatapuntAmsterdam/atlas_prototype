@@ -6,7 +6,7 @@
     "angular-i18n": "^1.5.7",
     "angular-sanitize": "^1.5.7",
     "bbga_visualisatie_d3": "https://github.com/DatapuntAmsterdam/bbga_visualisatie_d3.git",
-    "d3": "^3.5.16",
+    "d3": "^3.5.17",
     "leaflet": "https://github.com/DatapuntAmsterdam/datapunt_leaflet.git#master",
     "leaflet.wms": "~0.1.0",
     "leaflet-measure": "^2.0.2",
