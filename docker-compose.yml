@@ -1,6 +1,6 @@
 atlas:
   build: .
   ports:
-    - "8098:80"
+    - "8099:80"
   volumes:
     - "./reports:/app/reports"

@@ -73,7 +73,7 @@
                     getAddedOverlays(newOverlays, oldOverlays).forEach(function (overlay) {
                         layers.addOverlay(leafletMap, overlay);
                     });
-                });
+                }, true);
 
                 scope.$watch('markers', function (newCollection, oldCollection) {
                     if (angular.equals(newCollection, oldCollection)) {
@@ -95,21 +95,45 @@
             });
         }
 
-        function getAddedOverlays (newOverlays, oldOverlays) {
-            if (newOverlays === oldOverlays) {
-                //scope.$watch is triggered on initialization with the new value equal to the old value
-                return newOverlays;
-            } else {
-                return newOverlays.filter(function (overlay) {
-                    return oldOverlays.indexOf(overlay) === -1;
-                });
+        function getDiffFromOverlays(over1, over2) {
+            // Finds all the keys for items in over1 that
+            // are not in over2
+            // Or if visibility was changed.
+            var keys = [], add;
+            for (var i = 0;i < over1.length;i++) {
+                add = true;
+                for (var j = 0;j < over2.length;j++) {
+                    if (over2[j].id === over1[i].id) {
+                        // Checking visibility change
+                        if (over2[j].isVisible !== over1[i].isVisible) {
+                            // Making sure visibility was changed to what we expect
+                            if (over2[j].isVisible) {
+                                add = false;
+                            }
+                        } else {
+                            // No change was made
+                            add = false; // Exists in both overlays    
+                        }
+                        break;
+                    }
+                }
+                if (add) {
+                    keys.push(over1[i].id);
+                }
             }
+            return keys;
+        }
+
+        function getAddedOverlays (newOverlays, oldOverlays) {
+            // checking for init state when both are the same
+            if (angular.equals(newOverlays, oldOverlays)) {
+                oldOverlays = [];
+            }
+            return getDiffFromOverlays(newOverlays, oldOverlays);
         }
 
         function getRemovedOverlays (newOverlays, oldOverlays) {
-            return oldOverlays.filter(function (overlay) {
-                return newOverlays.indexOf(overlay) === -1;
-            });
+            return getDiffFromOverlays(oldOverlays, newOverlays);   
         }
 
         function getAddedGeojson (newCollection, oldCollection) {

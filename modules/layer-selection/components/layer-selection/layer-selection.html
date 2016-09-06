@@ -1,7 +1,7 @@
 <dp-panel heading="Kaartlagen">
     <dp-panel-icon>
         <dp-link type="HIDE_LAYER_SELECTION" class-name="">
-            <img width="26" height="26" src="assets/icons/minimize.svg" alt="Minimaliseren">
+            <img width="26" height="26" src="assets/icons/minimize.svg" alt="Minimaliseren" title="Minimaliseren">
         </dp-link>
     </dp-panel-icon>
     <dp-panel-body>
@@ -41,7 +41,7 @@
                             {{overlay.label}}
                         </span>
 
-                        <span ng-if="vm.isOverlayActive(overlay.slug) && !vm.isOverlayVisible(overlay.slug)">
+                        <span ng-if="vm.isOverlayActive(overlay.slug) && !vm.isOverlayVisible(overlay.slug)" class="qa-show-invisble-by-zoom">
                             (deze kaartlaag is niet zichtbaar op dit zoomniveau)
                         </span>
                     </label>

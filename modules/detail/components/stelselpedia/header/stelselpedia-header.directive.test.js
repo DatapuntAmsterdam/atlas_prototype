@@ -81,7 +81,7 @@ describe('The atlas-stelselpedia-header directive', function () {
         var directive = getDirective(null, 'BOUWBLOK', false, null, null);
 
         expect(directive.find('.o-header__subtitle').text().trim()).toBe('Bouwblok');
-        expect(directive.find('.o-header__button:nth-of-type(1)').text().trim()).toBe('toon uitleg');
+        expect(directive.find('.o-header__button:nth-of-type(1)').text().trim()).toBe('Toon uitleg');
     });
 
     it('has support for plurals in the Stelselpedia label', function () {
@@ -144,7 +144,7 @@ describe('The atlas-stelselpedia-header directive', function () {
             //BOUWBLOK has metadata
             directive = getDirective(null, 'BOUWBLOK', false, metaData, null);
             expect(directive.find('.o-header__button:nth-of-type(2)').length).toBe(1);
-            expect(directive.find('.o-header__button:nth-of-type(2)').text().trim()).toBe('toon metadata');
+            expect(directive.find('.o-header__button:nth-of-type(2)').text().trim()).toBe('Toon metadata');
         });
 
         it('can open a panel that loads the atlas-stelselpedia-meta directive', function () {
@@ -225,7 +225,7 @@ describe('The atlas-stelselpedia-header directive', function () {
             expect(directive.find('.c-stelselpedia').length).toBe(1);
 
             //Close uitleg with the cross
-            directive.find('.o-button--close').click();
+            directive.find('.o-btn--close').click();
             expect(directive.find('.c-stelselpedia').length).toBe(0);
 
             //Open metadata
@@ -233,7 +233,7 @@ describe('The atlas-stelselpedia-header directive', function () {
             expect(directive.find('.c-metadata').length).toBe(1);
 
             //Close metadata with the cross
-            directive.find('.o-button--close').click();
+            directive.find('.o-btn--close').click();
             expect(directive.find('.c-metadatat').length).toBe(0);
         });
 

@@ -1,0 +1,20 @@
+<div class="c-overlay-legend" ng-class="{'c-overlay-legend--shown': vm.isLegendOpen, 'c-overlay-legend--hidden': !vm.isLegendOpen}">
+    <button class="c-overlay-legend__header" ng-click="vm.switchLegendPane()">
+        <div class="c-overlay-legend__icon" >
+            <img ng-src="/assets/icons/plus.svg" alt="Open legenda" ng-if="!vm.isLegendOpen">
+            <img ng-src="/assets/icons/minimize.svg" alt="Sluit legenda" ng-if="vm.isLegendOpen">
+        </div>
+        <span class="c-overlay-legend__title">Kaartlagen<span>
+        <span ng-if="vm.activeLayerCount > 0" class="qa-show-layers-count">
+            (<span ng-if="vm.visibleLayersCount != vm.activeLayerCount" class="qa-show-visible-layers-count">{{ vm.visibleLayersCount }}/</span><span class="qa-show-active-layers-count">{{ vm.activeLayerCount }}</span>)
+        </span>
+    </button>
+    <ul class="c-overlay-legend__overlays">
+    	<li>
+    		<dp-legend-item ng-repeat="overlay in vm.overlays | orderBy:'-' track by overlay.id" overlay="overlay" zoom="vm.zoom"></dp-legend-item>
+    	</li>
+    </ul>
+    <div class="c-overlay-legend__edit-overlays">
+        <dp-link type="SHOW_LAYER_SELECTION" class-name="c-overlay-legend__edit-overlays__link">&gt; Toevoegen / verwijderen</dp-link>
+    </div>
+</div>

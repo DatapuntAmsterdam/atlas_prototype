@@ -105,7 +105,7 @@ describe('The atlas-login-form component', function () {
             expect(component.find('form').length).toBe(1);
 
             //An error message is shown
-            expect(component.find('p').eq(0).text()).toBe('I_AM_AN_ERROR_MESSAGE');
+            expect(component.find('.qa-error-message').text()).toBe('I_AM_AN_ERROR_MESSAGE');
         });
     });
 });

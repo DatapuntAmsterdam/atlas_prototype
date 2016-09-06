@@ -78,14 +78,14 @@ describe('The dp-parent-relations directive', function () {
         expect(directive.find('dt').length).toBe(3);
         expect(directive.find('dd').length).toBe(3);
 
-        expect(directive.find('dt:nth-of-type(1)').text()).toBe('Universe');
-        expect(directive.find('dd:nth-of-type(1)').text()).toBe('Het allerhoogste niveau');
+        expect(directive.find('dt:nth-of-type(1)').text().trim()).toBe('Universe');
+        expect(directive.find('dd:nth-of-type(1)').text().trim()).toBe('Het allerhoogste niveau');
 
-        expect(directive.find('dt:nth-of-type(2)').text()).toBe('Planet');
-        expect(directive.find('dd:nth-of-type(2)').text()).toBe('Aarde');
+        expect(directive.find('dt:nth-of-type(2)').text().trim()).toBe('Planet');
+        expect(directive.find('dd:nth-of-type(2)').text().trim()).toBe('Aarde');
 
-        expect(directive.find('dt:nth-of-type(3)').text()).toBe('Verblijfsobject');
-        expect(directive.find('dd:nth-of-type(3)').text()).toBe('Weesperstraat 113');
+        expect(directive.find('dt:nth-of-type(3)').text().trim()).toBe('Verblijfsobject');
+        expect(directive.find('dd:nth-of-type(3)').text().trim()).toBe('Weesperstraat 113');
     });
 
     it('doesn\'t show missing relations', function () {
@@ -113,7 +113,7 @@ describe('The dp-parent-relations directive', function () {
         expect(directive.find('dt').length).toBe(3);
         expect(directive.find('dd').length).toBe(3);
 
-        expect(directive.find('dt:nth-of-type(3)').text()).toBe('Verblijfsobject');
-        expect(directive.find('dd:nth-of-type(3)').text()).toBe('Weesperstraat 113');
+        expect(directive.find('dt:nth-of-type(3)').text().trim()).toBe('Verblijfsobject');
+        expect(directive.find('dd:nth-of-type(3)').text().trim()).toBe('Weesperstraat 113');
     });
 });

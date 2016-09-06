@@ -66,7 +66,6 @@
 
             if (angular.isUndefined(wmsLayers[overlayName])) {
                 wmsLayers[overlayName] = [];
-
                 wmsUrl = OVERLAYS.SOURCES[overlayName].url;
 
                 if (!OVERLAYS.SOURCES[overlayName].external) {

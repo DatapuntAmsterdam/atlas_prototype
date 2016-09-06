@@ -1,0 +1,81 @@
+$layers-label-height: 35rem;
+
+.c-overlay-legend {
+  position: relative;
+  width: 25rem;
+  height: $layers-label-height;
+
+  float: left;
+  transition: .25s ease-in-out;
+
+  color: $primary-light;
+
+  font-family: $header-font-family;
+  font-weight: bold;
+
+  text-align: center;
+  z-index: 4;
+
+  &.c-overlay-legend--shown {
+    bottom: $layers-label-height + $statusbar-height + $statusbar-height / 5;
+  }
+
+  &.c-overlay-legend--hidden {
+    bottom: $statusbar-height / 5;
+  }
+}
+
+.c-overlay-legend__overlays {
+  height: 100%;
+  padding-left: $base-whitespace;
+  background-color: $primary-light;
+  color: $primary-dark;
+  font-weight: normal;
+  text-align: left;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.c-overlay-legend__header {
+  display: block;
+  width: 100%;
+  height: $statusbar-height;
+  padding-left: $base-whitespace;
+  background-color: $secondary-gray60;
+  font-size: .8rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.c-overlay-legend__title {
+  position: relative;
+  top: -.2rem;
+  margin-left: $base-whitespace;
+  color: $primary-light;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+.c-overlay-legend__icon {
+  display: inline-block;
+  position: relative;
+  top: -.7rem;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.c-overlay-legend__edit-overlays {
+  position: relative;
+  top: .8rem;
+  margin-left: $base-whitespace;
+  float: left;
+  background-color: $secondary-gray60;
+  color: $primary-light;
+  cursor: pointer;
+}
+
+.c-overlay-legend__edit-overlays__link {
+  color: $primary-light;
+  font-size: .9rem;
+  font-weight: bold;
+}

@@ -1,17 +1,30 @@
-<p ng-if="vm.errorMessage">{{vm.errorMessage}}</p>
+<div class="u-grid">
+    <div class="u-row">
+        <div class="u-col-sm--12 u-col-md--10 u-col-lg--6">
+            <p>Leuk verhaaltje over inloggen. Waarom zou je eigenlijk inloggen? Hoe kom je aan een account?</p>
 
-<form ng-submit="vm.login($event)">
-    <fieldset>
-        <label>
-            Gebruikersnaam:
-            <input ng-model="vm.username" type="text" required>
-        </label>
-        <label>
-            Wachtwoord:
-            <input ng-model="vm.password" type="password" required>
-        </label>
-        <button type="submit">Inloggen</button>
-    </fieldset>
-</form>
+            <p ng-if="vm.errorMessage" class="u-color__primary--contrast qa-error-message">{{vm.errorMessage}}</p>
 
-<p>Leuk verhaaltje over inloggen. Waarom zou je eigenlijk inloggen? Hoe kom je aan een account?</p>
+            <form class="c-login-form" ng-submit="vm.login($event)">
+                <fieldset>
+                    <div class="c-login-form__row">
+                        <label>
+                            <span class="c-login-form__label">Gebruikersnaam:</span>
+                            <input class="c-login-form__input" ng-model="vm.username" type="text" required>
+                        </label>
+                    </div>
+                    <div class="c-login-form__row">
+                        <label>
+                            <span class="c-login-form__label">Wachtwoord:</span>
+                            <input class="c-login-form__input" ng-model="vm.password" type="password" required>
+                        </label>
+                    </div>
+                    <div class="c-login-form__row">
+                        <button class="c-login-form__button" type="submit">Inloggen</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>

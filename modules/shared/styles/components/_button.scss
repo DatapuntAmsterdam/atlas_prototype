@@ -1,27 +1,5 @@
 .o-btn {
   /*
-  @name Button - white
-  @markup
-    <button class="btn btn-white">A white button</button>
-  */
-  &.btn--white {
-    padding: $base-whitespace / 2;
-    border: 1px solid $primary-dark;
-    border-radius: 6px;
-    background-color: $primary-light;
-    color: $primary-dark;
-    font-size: inherit;
-
-    &:hover {
-      background-color: $secondary-gray10;
-    }
-
-    &[disabled] {
-      color: $primary-contrast;
-    }
-  }
-
-  /*
   @name Button w/ link styling
   @markup
     <button class="btn btn--link">Lorem ipsum</button>
@@ -44,7 +22,7 @@
   }
 }
 
-.o-button--close {
+.o-btn--close {
   position: absolute;
   top: 0;
   right: 0;

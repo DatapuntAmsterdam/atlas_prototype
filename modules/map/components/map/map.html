@@ -1,14 +1,10 @@
 <div class="c-map">
     <div class="c-map__leaflet js-leaflet-map"></div>
-
     <dp-status-bar>
-        <div class="js-leaflet-measure"></div>
+    	<dp-overlay-legend overlays="mapState.overlays" zoom="mapState.zoom"></dp-overlay-legend>
+    	<div class="js-leaflet-measure"></div>
     </dp-status-bar>
 </div>
-
 <dp-loading-indicator is-loading="mapState.isLoading" use-delay="true" show-inline="false"></dp-loading-indicator>
 <dp-toggle-fullscreen is-fullscreen="mapState.isFullscreen"></dp-toggle-fullscreen>
 
-<div style="position:absolute; top:150px; z-index:1000;">
-    <dp-link type="SHOW_LAYER_SELECTION">Toon kaartlagen</dp-link>
-</div>

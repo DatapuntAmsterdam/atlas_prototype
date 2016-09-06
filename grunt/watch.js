@@ -5,6 +5,7 @@ module.exports = {
             'modules/**/*.html'
         ],
         tasks: [
+            'clean:js',
             'build-js',
             'test-js'
         ]
@@ -14,6 +15,7 @@ module.exports = {
             'modules/**/*.scss'
         ],
         tasks: [
+            'clean:css',
             'build-css',
             'test-css'
         ]

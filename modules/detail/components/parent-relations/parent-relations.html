@@ -1,5 +1,5 @@
 <h3 class="o-header__subtitle">Onderdeel van:</h3>
 <dl class="c-parent-relations">
   <dt ng-repeat-start="parent in vm.parentRelations" class="parent-relations__variable">{{parent.variable | atlasUppercaseFirstLetter}}</dt>
-  <dd ng-repeat-end class="parent-relations__value"><dp-link type="FETCH_DETAIL" payload="parent.data._links.self.href">{{parent.data._display}}</dp-link></dd>
+  <dd ng-repeat-end class="parent-relations__value"><dp-link type="FETCH_DETAIL" payload="parent.data._links.self.href" class-name="o-btn o-btn--link s-btn--wordwrap">{{parent.data._display}} </dp-link></dd>
 </dl>

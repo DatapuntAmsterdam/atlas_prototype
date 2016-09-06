@@ -1,0 +1,21 @@
+.legend-item {
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+}
+
+.legend-visibility-icon {
+  width: 1.5em;
+}
+
+.legend-item__toggle {
+  margin-right: .5rem;
+  padding-top: .25rem;
+
+  .legend-item__toggle__button {
+    background-color: inherit;
+  }
+}
+
+.legend-item__title {
+  padding-bottom: .1rem;
+}

@@ -3,10 +3,10 @@
   right: 0;
   bottom: 0;
   left: 0;
-  height: 40px;
+  height: $statusbar-height;
   padding: $base-whitespace;
   background-color: $secondary-gray60;
   color: $primary-light;
-  line-height: 20px;
+  line-height: $statusbar-height / 2;
   z-index: 2;
 }

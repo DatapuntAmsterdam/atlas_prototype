@@ -38,7 +38,15 @@ describe('The layerSelection controller', function () {
         var mockedState = {
                 map: {
                     baseLayer: 'topografie',
-                    overlays: ['layer_1', 'layer_3'],
+                    overlays: [
+                        {
+                            id: 'layer_1',
+                            isVisible: true
+                        }, {
+                            id: 'layer_3',
+                            isVisible: true
+                        }
+                    ],
                     zoom: 10
                 }
             },
@@ -49,7 +57,10 @@ describe('The layerSelection controller', function () {
         controller = getController();
 
         expect(controller.baseLayer).toBe('topografie');
-        expect(controller.overlays).toEqual(['layer_1', 'layer_3']);
+        expect(controller.overlays).toEqual([
+                        {id: 'layer_1', isVisible: true},
+                        {id: 'layer_3', isVisible: true}
+                    ]);
         expect(controller.zoom).toBe(10);
     });
 });

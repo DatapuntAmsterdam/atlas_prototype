@@ -1,5 +1,6 @@
 %description-list {
   margin: 5px 0;
+  border-bottom: 1px solid $secondary-gray20;
   line-height: 2;
 
   dt {
@@ -10,14 +11,10 @@
     color: $secondary-gray60;
     word-wrap: break-word;
 
-
     &:first-of-type {
       border-top: 1px solid transparent;
     }
 
-    &:last-of-type {
-      border-bottom: 1px solid $secondary-gray20;
-    }
   }
 
   dd {
@@ -31,7 +28,10 @@
 
     &:last-of-type {
       min-height: 30px; //anders klapt de hoogte in (lineheight x font-size + border)
-      border-bottom: 1px solid $secondary-gray20;
     }
+  }
+
+  &::after {
+    @extend %clearfix;
   }
 }

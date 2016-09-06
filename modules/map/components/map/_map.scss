@@ -2,15 +2,16 @@
   position: absolute;
   top: $base-whitespace * 2;
   right: $base-whitespace;
-  bottom: 0;
+  bottom: $base-whitespace * 2;
   left: $base-whitespace;
+  overflow: hidden;
 }
 
 .c-map__leaflet {
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 40px;
+  bottom: $statusbar-height;
   left: 0;
   border-width: 1px 1px 0;
   border-style: solid;

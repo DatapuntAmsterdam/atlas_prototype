@@ -28,7 +28,8 @@
                                 'c-autocomplete__category__suggestion--active': activeSuggestionIndex === suggestion.index
                             }"
                             ng-click="goToDetail(suggestion.uri); setFocus()"
-                            ng-bind-html="suggestion._display | longNameShortener | suggestionHighlight : (originalQuery || query)">
+                            ng-bind-html="suggestion._display | longNameShortener | suggestionHighlight : (originalQuery || query)"
+                            alt="zoeken" title="zoeken">
 
                         </button>
                     </li>

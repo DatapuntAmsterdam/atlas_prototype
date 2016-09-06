@@ -2,7 +2,7 @@
   position: absolute;
   top: $base-whitespace * 2;
   right: $base-whitespace;
-  bottom: 0;
+  bottom: $base-whitespace * 2;
   left: $base-whitespace;
   z-index: 1;
 }

@@ -8,13 +8,13 @@
 
     <div class="o-header__buttongroup">
         <button ng-click="vm.toggle('help')" class="o-header__button">
-            <span ng-if="!vm.isVisible('help')" class="o-header__button--image c-stelselpedia__button"><span class="u-sr-only">toon uitleg</span></span>
-            <span ng-if="vm.isVisible('help')" class="o-header__button--image is-stelselpedia--active"><span class="u-sr-only">verberg uitleg</span></span>
+            <span ng-if="!vm.isVisible('help')" class="o-header__button--image c-stelselpedia__button" title="Toon uitleg"><span class="u-sr-only">Toon uitleg</span></span>
+            <span ng-if="vm.isVisible('help')" class="o-header__button--image is-stelselpedia--active" title="Verberg uitleg"><span class="u-sr-only">Verberg uitleg</span></span>
         </button>
 
         <button ng-if="vm.hasMetaData" ng-click="vm.toggle('meta')" class="o-header__button">
-            <span ng-if="!vm.isVisible('meta')" class="o-header__button--image c-metadata__button"><span class="u-sr-only">toon metadata</span></span>
-            <span ng-if="vm.isVisible('meta')" class="o-header__button--image is-metadata--active"><span class="u-sr-only">verberg metadata</span></span>
+            <span ng-if="!vm.isVisible('meta')" class="o-header__button--image c-metadata__button" title="Toon metadata"><span class="u-sr-only">Toon metadata</span></span>
+            <span ng-if="vm.isVisible('meta')" class="o-header__button--image is-metadata--active" title="Verberg metadata"><span class="u-sr-only">Verberg metadata</span></span>
         </button>
 
         <atlas-wkpb-link ng-if="vm.brk" brk-id="{{vm.brk.id}}"></atlas-wkpb-link>
@@ -28,7 +28,7 @@
             Lees verder op stelselpedia
         </a>
 
-        <button class="o-button--close" ng-click="vm.toggle('help')">
+        <button class="o-btn--close" ng-click="vm.toggle('help')" title="Verberg uitleg"><span class="u-sr-only">Verberg uitleg</span>
         </button>
     </div>
 
@@ -37,7 +37,7 @@
 
         <atlas-stelselpedia-meta definition="{{vm.definition}}" api-data="vm.metaData"></atlas-stelselpedia-meta>
 
-        <button class="o-button--close" ng-click="vm.toggle('meta')">
+        <button class="o-btn--close" ng-click="vm.toggle('meta')" title="Verberg metadata"><span class="u-sr-only">Verberg metadata</span>
         </button>
     </div>
 </div>
