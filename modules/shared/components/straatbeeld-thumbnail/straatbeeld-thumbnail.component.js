@@ -12,20 +12,35 @@
             controllerAs: 'vm'
         });
 
-    AtlasStraatbeeldThumbnailController.$inject = ['detailConfig', 'store', 'ACTIONS'];
+    AtlasStraatbeeldThumbnailController.$inject = ['sharedConfig', 'api', 'store', 'ACTIONS'];
 
-    function AtlasStraatbeeldThumbnailController (detailConfig, store, ACTIONS) {
-        var vm = this;
+    function AtlasStraatbeeldThumbnailController (sharedConfig, api, store, ACTIONS) {
+        var vm = this,
+            url, 
+            heading;
 
-        vm.imageUrl = detailConfig.STRAATBEELD_THUMB_URL +
+        vm.isLoading = true;
+        
+        url = sharedConfig.STRAATBEELD_THUMB_URL +
             '?lat=' + vm.location[0] +
             '&lon=' + vm.location[1] +
-            '&width=240&height=135';
+            '&width=400' +
+            '&radius=' + sharedConfig.STRAATBEELD_SEARCH_RADIUS;
 
-        vm.openStraatbeeld = function () {
+        api.getByUrl(url).then(function (thumbnailData) {
+            heading = thumbnailData.heading; 
+            
+            if (angular.isString(thumbnailData.url)) {
+                vm.imageUrl = thumbnailData.url;
+            }
+
+            vm.isLoading = false;
+        });
+         
+        vm.openStraatbeeld = function () { 
             store.dispatch({
                 type: ACTIONS.FETCH_STRAATBEELD,
-                payload: vm.location
+                payload: { id: vm.location, heading: heading }   
             });
         };
     }

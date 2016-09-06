@@ -30,19 +30,18 @@
             }
             */
             straatbeeld: null,
+            
             /*
             straatbeeld: {
                 id: 1,
                 searchLocation: null,
                 date: null,
                 car: {
-                    location: [52.789, 4.123],
-                    heading: 20,
-                    pitch: 0.1
+                    location: [52.789, 4.123]
                 },
                 camera: {
                     heading: 180,
-                    pitch: 0.5
+                    pitch: 0
                 },
                 hotspots: [],
                 isLoading: false
