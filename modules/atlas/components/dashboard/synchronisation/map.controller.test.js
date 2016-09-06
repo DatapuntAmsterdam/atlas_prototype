@@ -180,21 +180,21 @@ describe('The map controller', function () {
             }));
         });
 
-        it('The straatbeeld_orientation icon will have a extra variable for leaflet-rotatedmarker', function () {
+       it('The straatbeeld_orientation icon will have a extra variable for leaflet-rotatedmarker', function () {
             mockedState = {
                 straatbeeld: {
                     car: {
                         location: [52.2, 4.2]
                     },
-                    camera: {
-                        heading: Math.PI
-                    }
+                    heading: 180
                 }
             };
 
+            spyOn(store, 'getState').and.returnValue(mockedState);
+            controller = getController();
             expect(controller.markers).toContain(jasmine.objectContaining({
                 id: 'straatbeeld_orientation',
-                orientation: Math.PI
+                orientation: 180
             }));
         });
 

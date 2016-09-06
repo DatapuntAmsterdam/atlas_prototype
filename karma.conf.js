@@ -33,7 +33,7 @@ module.exports = function (config) {
         // - growl
         // - coverage
         reporters: ['coverage'],
-
+       
         preprocessors: {
             // source files, that you wanna generate coverage for
             // do not include tests or libraries

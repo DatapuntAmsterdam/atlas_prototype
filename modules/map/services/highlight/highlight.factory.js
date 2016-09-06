@@ -75,7 +75,7 @@
 
                     return L.marker(latLng, {
                         icon: icon,
-                        rotationAngle: angleConversion.radiansToDegrees(rotationAngle)
+                        rotationAngle: rotationAngle
                     });
                 }
             });
