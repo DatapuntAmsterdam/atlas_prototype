@@ -13,6 +13,9 @@
   right: 0;
   bottom: $statusbar-height;
   left: 0;
+
+  //translateZ(0) is needed to fix a Firefox bug, see tg-1306 (black screen when scrolling)
+  transform: translateZ(0);
   border-width: 1px 1px 0;
   border-style: solid;
   border-color: $secondary-gray40;
