@@ -1,0 +1,16 @@
+<table class="o-table">
+    <thead>
+        <tr>
+            <th ng-repeat="field in vm.content.head track by $index">{{field}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in vm.content.body track by $index">
+            <td ng-repeat="field in row track by $index">
+                {{field}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<dp-data-selection-pagination current-page="vm.currentPage" number-of-pages="112"></dp-data-selection-pagination>

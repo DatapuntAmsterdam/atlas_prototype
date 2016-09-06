@@ -8,10 +8,9 @@
             'atlasDetail',
             'atlasSearchResults',
             'atlasLayerSelection',
-
-            //Todo: Move dp (datapunt) modules to their own repositories
             'dpMap',
             'dpStraatbeeld',
+            'dpDataSelection',
 
             'dpShared'
         ]);

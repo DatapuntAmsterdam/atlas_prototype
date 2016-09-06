@@ -29,7 +29,7 @@ describe('The pageReducers factory', function () {
             expect(output.map.highlight).toBeNull();
         });
 
-        it('disables the layer selection, search, detail and straatbeeld', function () {
+        it('disables the layer selection, search, detail, straatbeeld and dataSelection', function () {
             mockedState.search = {
                 query: 'SOME_QUERY',
                 location: null
@@ -48,12 +48,17 @@ describe('The pageReducers factory', function () {
                 isLoading: false
             };
 
+            mockedState.dataSelection = {
+                some: 'object'
+            };
+
             output = pageReducers.SHOW_PAGE(mockedState, 'goodbye');
 
             expect(output.search).toBeNull();
             expect(output.map.showLayerSelection).toBe(false);
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
+            expect(output.dataSelection).toBeNull();
         });
 
         it('disables the full screen mode of the map', function () {

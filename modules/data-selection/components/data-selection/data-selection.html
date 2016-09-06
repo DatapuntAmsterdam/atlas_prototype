@@ -1,0 +1,22 @@
+<div class="u-grid">
+    <div class="u-row">
+        <div class="u-col-sm--2">
+            <dp-data-selection-filters
+                dataset="{{vm.state.dataset}}"
+                available-filters="vm.availableFilters"
+                active-filters="vm.state.filters"
+                is-loading="vm.isLoading">
+
+            </dp-data-selection-filters>
+        </div>
+        <div class="u-col-sm--10">
+            <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
+
+            <dp-data-selection-table ng-if="!vm.isLoading"
+                content="vm.tableData"
+                current-page="vm.currentPage">
+
+            </dp-data-selection-table>
+        </div>
+    </div>
+</div>

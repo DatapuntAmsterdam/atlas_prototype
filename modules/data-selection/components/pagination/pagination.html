@@ -1,0 +1,19 @@
+<div ng-if="vm.showPagination">
+    <dp-data-selection-pagination-link link="vm.firstPage"></dp-data-selection-pagination-link>
+    <dp-data-selection-pagination-link link="vm.previousPage"></dp-data-selection-pagination-link>
+
+    <form ng-submit="vm.goToPage($event)">
+        <fieldset>
+            <label>
+                <span class="u-sr-only">Paginanummer</span>
+                <input ng-model="vm.targetPage" type="number">
+            </label>
+            <button type="submit">
+                Ga
+            </button>
+        </fieldset>
+    </form>
+
+    <dp-data-selection-pagination-link link="vm.nextPage"></dp-data-selection-pagination-link>
+    <dp-data-selection-pagination-link link="vm.lastPage"></dp-data-selection-pagination-link>
+</div>

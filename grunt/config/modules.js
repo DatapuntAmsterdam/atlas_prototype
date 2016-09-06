@@ -30,6 +30,10 @@ module.exports = [
         slug: 'search-results'
     },
     {
+        name: 'dpDataSelection',
+        slug: 'data-selection'
+    },
+    {
         name: 'dpStraatbeeld',
         slug: 'straatbeeld'
     },

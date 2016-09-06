@@ -351,6 +351,67 @@ describe('The stateToUrl factory', function () {
         });
     });
 
+    describe('Data selection', function () {
+        it('does nothing if there is no active dataset', function () {
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                dataset: jasmine.Any(String)
+            }));
+
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                'dataset-filters': jasmine.Any(String)
+            }));
+
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                'dataset-pagina': jasmine.Any(String)
+            }));
+        });
+
+        it('can set a dataset with (URL encoded) filters and a page number', function () {
+            mockedState.dataSelection = {
+                dataset: 'bag',
+                filters: {},
+                page: 5
+            };
+
+            //Without any filters
+            stateToUrl.update(mockedState, false);
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                dataset: 'bag'
+            }));
+
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                'dataset-filters': jasmine.any(String)
+            }));
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'dataset-pagina': '5' //The page is converted to a string
+            }));
+
+
+            //With one filter
+            mockedState.dataSelection.filters = {
+                buurt: 'Mijn buurt'
+            };
+
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'dataset-filters': 'buurt:Mijn%20buurt'
+            }));
+
+            //With two filters
+            mockedState.dataSelection.filters.buurtcombinatie = 'Mijn buurtcombinatie';
+
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'dataset-filters': 'buurt:Mijn%20buurt,buurtcombinatie:Mijn%20buurtcombinatie'
+            }));
+        });
+    });
+
     describe('Print', function () {
         it('keeps track of the document mode (web vs. print)', function () {
             //Regular, non-print

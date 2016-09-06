@@ -14,6 +14,7 @@
         'pageReducers',
         'searchReducers',
         'straatbeeldReducers',
+        'dataSelectionReducers',
         'printReducers'
     ];
 
@@ -25,6 +26,7 @@
         pageReducers,
         searchReducers,
         straatbeeldReducers,
+        dataSelectionReducers,
         printReducers) {
 
         return function (oldState, action) {
@@ -37,6 +39,7 @@
                 pageReducers,
                 searchReducers,
                 straatbeeldReducers,
+                dataSelectionReducers,
                 printReducers
             );
 

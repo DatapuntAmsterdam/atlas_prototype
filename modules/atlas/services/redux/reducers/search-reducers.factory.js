@@ -37,6 +37,7 @@
             newState.page = null;
             newState.detail = null;
             newState.straatbeeld = null;
+            newState.dataSelection = null;
 
             return newState;
         }
@@ -66,6 +67,7 @@
             newState.page = null;
             newState.detail = null;
             newState.straatbeeld = null;
+            newState.dataSelection = null;
 
             return newState;
         }

@@ -46,7 +46,18 @@
                 },
                 hotspots: [],
                 isLoading: false
-            }
+            },
+            */
+            dataSelection: null,
+            /*
+            dataSelection: {
+                dataset: 'bag',
+                filters: {
+                    buurtcombinatie: 'Geuzenbuurt',
+                    buurt: 'Trompbuurt'
+                },
+                page: 1
+            },
             */
             isPrintMode: false
         });

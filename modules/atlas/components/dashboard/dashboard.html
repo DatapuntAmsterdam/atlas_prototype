@@ -41,7 +41,7 @@
                         'u-height--auto': vm.isPrintMode
                     }">
 
-                    <div ng-controller="MapController as vm">
+                    <div ng-if="vm.visibility.map" ng-controller="MapController as vm">
                         <dp-map
                             map-state="vm.mapState"
                             markers="vm.markers">
@@ -81,6 +81,10 @@
 
                     <div ng-if="vm.visibility.straatbeeld" ng-controller="StraatbeeldController as straatbeeld">
                         <dp-straatbeeld state="straatbeeld.straatbeeldState" is-print-mode="vm.isPrintMode"></dp-straatbeeld>
+                    </div>
+
+                    <div ng-if="vm.visibility.dataSelection" ng-controller="DataSelectionController as vm">
+                        <dp-data-selection state="vm.dataSelectionState"></dp-data-selection>
                     </div>
                 </div>
             </div>

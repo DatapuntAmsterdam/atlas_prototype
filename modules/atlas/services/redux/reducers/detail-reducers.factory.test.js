@@ -42,7 +42,7 @@ describe('The detailReducers factory', function () {
             expect(output.map.highlight).toBeNull();
         });
 
-        it('disables layer selection, search, page and straatbeeld', function () {
+        it('disables layer selection, search, page, straatbeeld and dataSelection', function () {
             var payload = 'bag/thing/123/',
                 inputState = angular.copy(defaultState),
                 output;
@@ -51,6 +51,7 @@ describe('The detailReducers factory', function () {
             inputState.search = {some: 'object'};
             inputState.page = 'somePage';
             inputState.straatbeeld = {some: 'object'};
+            inputState.dataSelection = {some: 'object'};
 
             output = detailReducers.FETCH_DETAIL(inputState, payload);
 
@@ -58,6 +59,7 @@ describe('The detailReducers factory', function () {
             expect(output.search).toBeNull();
             expect(output.page).toBeNull();
             expect(output.straatbeeld).toBeNull();
+            expect(output.dataSelection).toBeNull();
         });
 
         it('disables the fullscreen mode off the map', function () {

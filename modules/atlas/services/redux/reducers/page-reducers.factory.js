@@ -32,6 +32,7 @@
             newState.search = null;
             newState.detail = null;
             newState.straatbeeld = null;
+            newState.dataSelection = null;
 
             return newState;
         }

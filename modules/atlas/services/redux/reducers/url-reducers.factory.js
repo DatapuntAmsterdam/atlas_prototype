@@ -5,9 +5,9 @@
         .module('atlas')
         .factory('urlReducers', urlReducersFactory);
 
-    urlReducersFactory.$inject = ['ACTIONS', 'DEFAULT_STATE'];
+    urlReducersFactory.$inject = ['$window', 'ACTIONS', 'DEFAULT_STATE'];
 
-    function urlReducersFactory (ACTIONS, DEFAULT_STATE) {
+    function urlReducersFactory ($window, ACTIONS, DEFAULT_STATE) {
         var reducers = {};
 
         reducers[ACTIONS.URL_CHANGE] = urlChangeReducer;
@@ -25,6 +25,7 @@
                 newState.page = payload.pagina || null;
                 newState.detail = getDetailState(oldState, payload);
                 newState.straatbeeld = getStraatbeeldState(oldState, payload);
+                newState.dataSelection = getDataSelectionState(payload);
                 newState.isPrintMode = getPrintState(payload);
 
                 return newState;
@@ -166,6 +167,28 @@
                  */
                 function hasSearchLocation (payload) {
                     return payload.plat && payload.plon;
+                }
+            }
+
+            function getDataSelectionState (payload) {
+                var filters = {};
+
+                if (angular.isString(payload.dataset)) {
+                    if (angular.isString(payload['dataset-filters'])) {
+                        payload['dataset-filters'].split(',').forEach(function (filterFromUrl) {
+                            var keyValueArray = filterFromUrl.split(':');
+
+                            filters[keyValueArray[0]] = $window.decodeURIComponent(keyValueArray[1]);
+                        });
+                    }
+
+                    return {
+                        dataset: payload.dataset,
+                        filters: filters,
+                        page: Number(payload['dataset-pagina'])
+                    };
+                } else {
+                    return null;
                 }
             }
 

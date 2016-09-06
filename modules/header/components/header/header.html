@@ -19,6 +19,13 @@
                         Inloggen
                     </dp-link>
 
+                    <dp-link
+                        type="SHOW_DATA_SELECTION" payload="{dataset: 'bag', filters: {}, page: 1}"
+                        class-name="site-header__menu__item">
+
+                        BAG
+                    </dp-link>
+
                     <button ng-if="vm.isLoggedIn()" ng-click="vm.logout()" class="site-header__menu__item">
                         Uitloggen
                     </button>

@@ -322,6 +322,71 @@ describe('The urlReducers factory', function () {
             });
         });
 
+        describe('dataSelection', function () {
+            var mockedSearchParamsWithDataSelection,
+                output;
+
+            beforeEach(function () {
+                mockedSearchParamsWithDataSelection = angular.copy(mockedSearchParams);
+
+                mockedSearchParamsWithDataSelection.dataset = 'bag';
+                mockedSearchParamsWithDataSelection['dataset-filters'] = 'buurtcombinatie:Geuzenbuurt,buurt:Trompbuurt';
+                mockedSearchParamsWithDataSelection['dataset-pagina'] = '4';
+            });
+
+            it('optionally has a dataset with filters and page numbers', function () {
+                //Without an active dataSelection
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
+                expect(output.dataSelection).toBeNull();
+
+                //With an active dataSelection
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection).toEqual({
+                    dataset: 'bag',
+                    filters: jasmine.any(Object),
+                    page: jasmine.anything()
+                });
+            });
+
+            it('maps the filters to an object', function () {
+                //With two filters
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection.filters).toEqual({
+                    buurtcombinatie: 'Geuzenbuurt',
+                    buurt: 'Trompbuurt'
+                });
+
+                //With one filter
+                mockedSearchParamsWithDataSelection['dataset-filters'] = 'buurtcombinatie:Geuzenbuurt';
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection.filters).toEqual({
+                    buurtcombinatie: 'Geuzenbuurt'
+                });
+
+                //Without filters return an emtpy object
+                mockedSearchParamsWithDataSelection['dataset-filters'] = null;
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection.filters).toEqual({});
+            });
+
+            it('converts the page to a Number', function () {
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection.page).not.toBe('4');
+                expect(output.dataSelection.page).toBe(4);
+            });
+
+            it('decodes the names of active filters', function () {
+                mockedSearchParamsWithDataSelection['dataset-filters'] =
+                    'buurtcombinatie:Bijlmeer%20Oost%20(D%2CF%2CH),buurt:Belgi%C3%ABplein%20e.o.';
+
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection.filters).toEqual({
+                    buurtcombinatie: 'Bijlmeer Oost (D,F,H)',
+                    buurt: 'Belgiëplein e.o.'
+                });
+            });
+        });
+
         describe('print', function () {
             it('sets whether or not print mode is enabled', function () {
                 var output;

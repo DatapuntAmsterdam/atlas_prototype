@@ -106,19 +106,21 @@ describe('The straatbeeldReducers factory', function () {
             expect(output.map.highlight).toBeNull();
         });
 
-        it('resets search, detail and page', function () {
+        it('resets search, detail, page and dataSelection', function () {
             var inputState = angular.copy(defaultState),
                 output;
 
             inputState.search = {some: 'object'};
             inputState.detail = {some: 'object'};
             inputState.page = 'somePage';
+            inputState.dataSelection = {some: 'object'};
 
             output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, 123);
 
             expect(output.search).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.page).toBeNull();
+            expect(output.dataSelection).toBeNull();
         });
     });
 

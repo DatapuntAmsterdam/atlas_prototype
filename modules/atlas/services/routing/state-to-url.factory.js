@@ -5,9 +5,9 @@
         .module('atlas')
         .service('stateToUrl', stateToUrlFactory);
 
-    stateToUrlFactory.$inject = ['$location'];
+    stateToUrlFactory.$inject = ['$location', '$window'];
 
-    function stateToUrlFactory ($location) {
+    function stateToUrlFactory ($location, $window) {
         return {
             update: update
         };
@@ -19,6 +19,7 @@
                 getPageParams(state),
                 getDetailParams(state),
                 getStraatbeeldParams(state),
+                getDataSelectionParams(state),
                 getPrintParams(state)
             );
 
@@ -98,6 +99,27 @@
                     params.plat = String(state.straatbeeld.searchLocation[0]);
                     params.plon = String(state.straatbeeld.searchLocation[1]);
                 }
+            }
+
+            return params;
+        }
+
+        function getDataSelectionParams (state) {
+            var params = {},
+                datasetFilters = [];
+
+            if (angular.isObject(state.dataSelection)) {
+                params.dataset = state.dataSelection.dataset;
+
+                angular.forEach(state.dataSelection.filters, function(value, key) {
+                    datasetFilters.push(key + ':' + $window.encodeURIComponent(value));
+                });
+
+                if (datasetFilters.length) {
+                    params['dataset-filters'] = datasetFilters.join(',');
+                }
+
+                params['dataset-pagina'] = String(state.dataSelection.page);
             }
 
             return params;

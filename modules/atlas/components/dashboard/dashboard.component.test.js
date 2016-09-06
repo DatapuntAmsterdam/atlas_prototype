@@ -28,7 +28,7 @@ describe('The dashboard component', function () {
             $provide.factory('dpStraatbeeldDirective', function(){
                 return {};
             });
-            $provide.factory('atlasPrintStateDirective', function(){
+            $provide.factory('dpDataSelectionDirective', function(){
                 return {};
             });
         });
@@ -129,7 +129,7 @@ describe('The dashboard component', function () {
         });
     });
 
-    ['page', 'detail', 'searchResults'].forEach(function (panel) {
+    ['page', 'detail', 'searchResults', 'dataSelection'].forEach(function (panel) {
         describe('use scrollable content for ' + panel, function () {
             var component,
                 mockedVisibility = {};
@@ -208,7 +208,7 @@ describe('The dashboard component', function () {
         });
     });
 
-    ['page', 'detail', 'searchResults'].forEach(function (panel) {
+    ['page', 'detail', 'searchResults', 'dataSelection'].forEach(function (panel) {
         describe('when printing ' + panel, function () {
             var component,
                 mockedState,

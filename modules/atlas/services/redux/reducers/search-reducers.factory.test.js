@@ -40,7 +40,7 @@ describe('The search-reducers factory', function () {
             expect(output.map.highlight).toBeNull();
         });
 
-        it('hides the layer selection, page, detail and straatbeeld', function () {
+        it('hides the layer selection, page, detail, straatbeeld and dataSelection', function () {
             var inputState = angular.copy(defaultState),
                 output;
 
@@ -48,6 +48,7 @@ describe('The search-reducers factory', function () {
             inputState.page = 'somePage';
             inputState.detail = {some: 'object'};
             inputState.staatbeeld = {some: 'object'};
+            inputState.dataSelection = {some: 'object'};
 
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_QUERY(inputState, 'linnaeus');
 
@@ -55,6 +56,7 @@ describe('The search-reducers factory', function () {
             expect(output.page).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
+            expect(output.dataSelection).toBeNull();
         });
 
         it('disables the fullscreen mode of the map', function () {
@@ -98,7 +100,7 @@ describe('The search-reducers factory', function () {
             expect(output.map.highlight).toBeNull();
         });
 
-        it('hides the layer selection, page, detail and straatbeeld', function () {
+        it('hides the layer selection, page, detail, straatbeeld and dataSelection', function () {
             var inputState = angular.copy(defaultState),
                 output;
 
@@ -106,6 +108,7 @@ describe('The search-reducers factory', function () {
             inputState.page = 'somePage';
             inputState.detail = {some: 'object'};
             inputState.staatbeeld = {some: 'object'};
+            inputState.dataSelection = {some: 'object'};
 
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
 
@@ -113,6 +116,7 @@ describe('The search-reducers factory', function () {
             expect(output.page).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
+            expect(output.dataSelection).toBeNull();
         });
 
         it('changes the viewCenter (only when) fullscreen mode is enabled', function () {

@@ -8,6 +8,7 @@ describe('The reducer factory', function () {
         pageReducers,
         searchReducers,
         straatbeeldReducers,
+        dataSelectionReducers,
         printReducers,
         inputState;
 
@@ -39,8 +40,11 @@ describe('The reducer factory', function () {
                 straatbeeldReducers: {
                     ACTION_H: function () {}
                 },
-                printReducers: {
+                dataSelectionReducers: {
                     ACTION_I: function () {}
+                },
+                printReducers: {
+                    ACTION_J: function () {}
                 }
             }
         );
@@ -54,6 +58,7 @@ describe('The reducer factory', function () {
             _pageReducers_,
             _searchReducers_,
             _straatbeeldReducers_,
+            _dataSelectionReducers_,
             _printReducers_) {
 
             urlReducers = _urlReducers_;
@@ -64,6 +69,7 @@ describe('The reducer factory', function () {
             pageReducers = _pageReducers_;
             searchReducers = _searchReducers_;
             straatbeeldReducers = _straatbeeldReducers_;
+            dataSelectionReducers = _dataSelectionReducers_;
             printReducers = _printReducers_;
         });
 
@@ -82,7 +88,8 @@ describe('The reducer factory', function () {
         spyOn(pageReducers, 'ACTION_F').and.callThrough();
         spyOn(searchReducers, 'ACTION_G').and.callThrough();
         spyOn(straatbeeldReducers, 'ACTION_H').and.callThrough();
-        spyOn(printReducers, 'ACTION_I').and.callThrough();
+        spyOn(dataSelectionReducers, 'ACTION_I').and.callThrough();
+        spyOn(printReducers, 'ACTION_J').and.callThrough();
 
         reducer(inputState, {type: 'ACTION_A'});
         reducer(inputState, {type: 'ACTION_B'});
@@ -93,6 +100,7 @@ describe('The reducer factory', function () {
         reducer(inputState, {type: 'ACTION_G'});
         reducer(inputState, {type: 'ACTION_H'});
         reducer(inputState, {type: 'ACTION_I'});
+        reducer(inputState, {type: 'ACTION_J'});
 
         expect(urlReducers.ACTION_A).toHaveBeenCalled();
         expect(detailReducers.ACTION_B).toHaveBeenCalled();
@@ -102,12 +110,13 @@ describe('The reducer factory', function () {
         expect(pageReducers.ACTION_F).toHaveBeenCalled();
         expect(searchReducers.ACTION_G).toHaveBeenCalled();
         expect(straatbeeldReducers.ACTION_H).toHaveBeenCalled();
-        expect(printReducers.ACTION_I).toHaveBeenCalled();
+        expect(dataSelectionReducers.ACTION_I).toHaveBeenCalled();
+        expect(printReducers.ACTION_J).toHaveBeenCalled();
     });
 
     it('returns the oldState if the specified action type has no separate reducer', function () {
         //Note redux has some built-in action types that we can safely ignore.
-        var output = reducer(inputState, {type: 'ACTION_J'});
+        var output = reducer(inputState, {type: 'ACTION_K'});
 
         expect(output).toBe(inputState);
     });
