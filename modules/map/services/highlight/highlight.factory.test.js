@@ -54,6 +54,7 @@ describe('The highlight factory', function () {
                     type: 'Point',
                     coordinates: [100.0, 0.0]
                 },
+                orientation: 180, 
                 useAutoFocus: false
             }
         },
@@ -68,11 +69,6 @@ describe('The highlight factory', function () {
         angular.mock.module(
             'dpMap',
             {
-                angleConversion: {
-                    radiansToDegrees: function () {
-                        return 180;
-                    }
-                },
                 mapConfig: {
                     DEFAULT_ZOOM_HIGHLIGHT: 14
                 },
@@ -124,7 +120,7 @@ describe('The highlight factory', function () {
                     },
                     item_rotated_marker: {
                         foo: 'd',
-                        orientation: Math.PI
+                        orientation: 180
                     }
                 });
             }

@@ -18,7 +18,6 @@
                 date: parseDate(earthmineData.timestamp),
                 car: {
                     location: [earthmineData.location.lat, earthmineData.location.lon],
-                    heading: angleConversion.degreesToRadians(earthmineData['pano-orientation'].yaw),
                     pitch: angleConversion.degreesToRadians(earthmineData['pano-orientation'].pitch)
                 },
                 hotspots: earthmineData.connections.map(function (connection) {

@@ -33,20 +33,23 @@
                 newState.straatbeeld = {};
             }
 
-            if (angular.isNumber(payload)) {
-                newState.straatbeeld.id = payload;
+            if (angular.isNumber(payload.id)) {
+                newState.straatbeeld.id = payload.id;
                 newState.straatbeeld.searchLocation = null;
             } else {
                 newState.straatbeeld.id = null;
-                newState.straatbeeld.searchLocation = payload;
+                newState.straatbeeld.searchLocation = payload.id;
             }
 
             newState.straatbeeld.date = null;
             newState.straatbeeld.car = null;
+
+            newState.straatbeeld.car = {};
+            newState.straatbeeld.car.heading = payload.heading;
             newState.straatbeeld.camera = oldState.straatbeeld && oldState.straatbeeld.camera || null;
             newState.straatbeeld.hotspots = [];
             newState.straatbeeld.isLoading = true;
-
+ 
             newState.map.highlight = null;
             newState.map.isLoading = true;
             newState.search = null;
@@ -65,25 +68,23 @@
         function showStraatbeeldReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
-            //Straatbeeld can be null if another action gets triggered between FETCH_STRAATBEELD and SHOW_STRAATBEELD
-            if (angular.isObject(newState.straatbeeld)) {
-                newState.straatbeeld.id = payload.id;
-                newState.straatbeeld.searchLocation = null;
-                newState.straatbeeld.date = payload.date;
-                newState.straatbeeld.car = payload.car;
-                newState.straatbeeld.hotspots = payload.hotspots;
-                newState.straatbeeld.isLoading = false;
+            //als bekend niet overschrijven
+            newState.straatbeeld.id = payload.id;
+            newState.straatbeeld.searchLocation = null;
+            newState.straatbeeld.date = payload.date;
+            newState.straatbeeld.car = payload.car;
+            newState.straatbeeld.car.heading = oldState.straatbeeld.car.heading;
+            newState.straatbeeld.hotspots = payload.hotspots;
+            newState.straatbeeld.isLoading = false;
 
-                if (oldState.straatbeeld.camera === null) {
-                    newState.straatbeeld.camera = {
-                        heading: newState.straatbeeld.car.heading,
-                        pitch: newState.straatbeeld.car.pitch
-                    };
-                }
-
-                newState.map.isLoading = false;
+            if (oldState.straatbeeld.camera === null) {
+                newState.straatbeeld.camera = {
+                    heading: oldState.straatbeeld.car.heading,
+                    pitch: newState.straatbeeld.car.pitch
+                };
             }
-
+            
+            newState.map.isLoading = false;
             return newState;
         }
 
@@ -91,7 +92,6 @@
             var newState = angular.copy(oldState);
 
             newState.straatbeeld.camera = payload;
-
             return newState;
         }
     }
