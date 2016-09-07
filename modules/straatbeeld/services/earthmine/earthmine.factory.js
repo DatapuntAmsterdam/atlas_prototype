@@ -41,4 +41,4 @@
             return straatbeeldConfig.TILE_ENDPOINT + '?id=' + sceneId + '&f={f}&z={z}&x={x}&y={y}';
         }
     }
-})();
+})(); 

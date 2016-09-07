@@ -12,7 +12,7 @@
             update: update
         };
 
-        function update (viewer, car) {
+        function update (viewer, straatbeeld) {
             var cameraHeading,
                 cameraYaw,
                 cameraPitch,
@@ -22,8 +22,8 @@
             cameraPitch = viewer.view().pitch();
             cameraFov = viewer.view().fov();
 
-            cameraHeading = car.heading + cameraYaw;
-
+            cameraHeading = straatbeeld.heading + cameraYaw;
+             
             store.dispatch({
                 type: ACTIONS.STRAATBEELD_SET_ORIENTATION,
                 payload: {

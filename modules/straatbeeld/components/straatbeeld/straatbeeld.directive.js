@@ -33,7 +33,7 @@
 
             //Fetch the first scene (always based on location)
             scope.$watchCollection('state.searchLocation', function (location) {
-                if (angular.isArray(location)) {
+                if (angular.isArray(location)) { 
                     earthmine.getImageDataByCoordinates(
                         location[0],
                         location[1]

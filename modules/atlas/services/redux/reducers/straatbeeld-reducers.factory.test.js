@@ -38,7 +38,7 @@ describe('The straatbeeldReducers factory', function () {
                 var inputState = angular.copy(defaultState),
                     output;
 
-                output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, 123);
+                output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, {id: 123, heading: 180 });
 
                 expect(output.straatbeeld.id).toBe(123);
                 expect(output.straatbeeld.searchLocation).toBeNull();
@@ -48,7 +48,7 @@ describe('The straatbeeldReducers factory', function () {
                 var inputState = angular.copy(defaultState),
                     output;
 
-                output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, [52.987, 4.321]);
+                output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, {id: [52.987, 4.321], heading: 180});
 
                 expect(output.straatbeeld.id).toBeNull();
                 expect(output.straatbeeld.searchLocation).toEqual([52.987, 4.321]);
@@ -59,20 +59,19 @@ describe('The straatbeeldReducers factory', function () {
             var inputState = angular.copy(inputStateWithStraatbeeld),
                 output;
 
-            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, 123);
+            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, {id: 123, heading: 180 });
 
             expect(output.straatbeeld.date).toBeNull();
-            expect(output.straatbeeld.car).toBeNull();
             expect(angular.isArray(output.straatbeeld.hotspots)).toBe(true);
             expect(output.straatbeeld.hotspots.length).toBe(0);
         });
 
-        it('remembers the previous camera state (if any)', function () {
+       it('remembers the previous camera state (if any)', function () {
             var inputState = angular.copy(inputStateWithStraatbeeld),
                 output;
 
             //With a known previous camera orientation
-            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState);
+            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, {id: 123, heading: 180 });
             expect(output.straatbeeld.camera).toEqual({
                 heading: 90,
                 pitch: 0.5,
@@ -81,15 +80,15 @@ describe('The straatbeeldReducers factory', function () {
 
             //Without a known camera orientation
             inputState = angular.copy(defaultState);
-            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState);
+            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, { id: 123, heading: 180 });
             expect(output.straatbeeld.camera).toBeNull();
         });
 
-        it('sets a loading indicator for straatbeeld and the map', function () {
+       it('sets a loading indicator for straatbeeld and the map', function () {
             var inputState = angular.copy(defaultState),
                 output;
 
-            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, 123);
+            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, {id: 123, heading: 180 });
 
             expect(output.straatbeeld.isLoading).toBe(true);
             expect(output.map.isLoading).toBe(true);
@@ -205,10 +204,13 @@ describe('The straatbeeldReducers factory', function () {
              * This can happen when a user triggers another action after FETCH_STRAATBEELD and before
              * SHOW_STRAATBEELD_INITIAL OR SHOW_STRAATBEELD_SUBSEQUENT
              */
-            var output;
+            var inputState = angular.copy(defaultState),
+                output;
 
-            expect(defaultState.straatbeeld).toBeNull();
-            output = straatbeeldReducers.SHOW_STRAATBEELD_INITIAL(defaultState, showStraatbeeldPayload);
+     
+            expect(inputState.straatbeeld).toBeNull();
+            output = straatbeeldReducers.SHOW_STRAATBEELD_INITIAL(inputState, showStraatbeeldPayload);
+ 
             expect(output.straatbeeld).toBeNull();
         });
     });
@@ -233,3 +235,4 @@ describe('The straatbeeldReducers factory', function () {
         });
     });
 });
+ 

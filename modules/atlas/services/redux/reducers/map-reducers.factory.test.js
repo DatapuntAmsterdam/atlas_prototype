@@ -190,4 +190,4 @@ describe('The map reducers', function () {
             expect(output.map.isFullscreen).toBe(false);
         });
     });
-});
+}); 

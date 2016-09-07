@@ -60,5 +60,6 @@ describe('The header controller', function () {
         controller = getController();
 
         expect(controller.query).toBeNull();
+        
     });
 });
