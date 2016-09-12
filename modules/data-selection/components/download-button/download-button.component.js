@@ -13,15 +13,15 @@
             controllerAs: 'vm'
         });
 
-    DpDataSelectionDownloadButtonController.$inject = ['$scope', '$window', 'DATA_SELECTION_CONFIG'];
+    DpDataSelectionDownloadButtonController.$inject = ['$scope', '$window', 'dpDataSelectionConfig'];
 
-    function DpDataSelectionDownloadButtonController ($scope, $window, DATA_SELECTION_CONFIG) {
+    function DpDataSelectionDownloadButtonController ($scope, $window, dpDataSelectionConfig) {
         var vm = this,
             filterParams = [];
 
-        vm.downloadUrl = DATA_SELECTION_CONFIG[vm.dataset].ENDPOINT_EXPORT;
+        vm.downloadUrl = dpDataSelectionConfig[vm.dataset].ENDPOINT_EXPORT;
 
-        DATA_SELECTION_CONFIG[vm.dataset].FILTERS.forEach(function (filter) {
+        dpDataSelectionConfig[vm.dataset].FILTERS.forEach(function (filter) {
             if (angular.isString(vm.activeFilters[filter.slug])) {
                 filterParams.push(filter.slug + '=' + $window.encodeURIComponent(vm.activeFilters[filter.slug]));
             }

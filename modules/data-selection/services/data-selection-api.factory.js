@@ -3,9 +3,9 @@
         .module('dpDataSelection')
         .factory('dataSelectionApi', dataSelectionApiFactory);
 
-    dataSelectionApiFactory.$inject = ['DATA_SELECTION_CONFIG', 'api'];
+    dataSelectionApiFactory.$inject = ['dpDataSelectionConfig', 'api'];
 
-    function dataSelectionApiFactory (DATA_SELECTION_CONFIG, api) {
+    function dataSelectionApiFactory (dpDataSelectionConfig, api) {
         return {
             query: query
         };
@@ -18,7 +18,7 @@
                 activeFilters
             );
 
-            return api.getByUrl(DATA_SELECTION_CONFIG[dataset].ENDPOINT, searchParams).then(function (data) {
+            return api.getByUrl(dpDataSelectionConfig[dataset].ENDPOINT, searchParams).then(function (data) {
                 return {
                     number_of_pages: data.page_count,
                     filters: formatFilters(dataset, data.aggs_list),
@@ -28,7 +28,7 @@
         }
 
         function formatFilters (dataset, rawData) {
-            var formattedFilters = angular.copy(DATA_SELECTION_CONFIG[dataset].FILTERS);
+            var formattedFilters = angular.copy(dpDataSelectionConfig[dataset].FILTERS);
 
             return formattedFilters.filter(function (filter) {
                 //Only show the filters that are returned by the API
@@ -53,18 +53,25 @@
             var tableHead,
                 tableBody = [];
 
-            tableHead = DATA_SELECTION_CONFIG[dataset].FIELDS.map(function (field) {
+            tableHead = dpDataSelectionConfig[dataset].FIELDS.map(function (field) {
                 return field.label;
             });
 
             rawData.forEach(function (rawDataRow) {
-                var formattedRow;
+                var link,
+                    data;
 
-                formattedRow = DATA_SELECTION_CONFIG[dataset].FIELDS.map(function (field) {
+                // Generating a link
+                link = dpDataSelectionConfig[dataset].ENDPOINT_API + 
+                                    rawDataRow[dpDataSelectionConfig[dataset].ITEM_ID];
+                // Saving the fields
+                data = dpDataSelectionConfig[dataset].FIELDS.map(function (field) {
+                //formattedRow = DATA_SELECTION_CONFIG[dataset].FIELDS.map(function (field) {
                     return rawDataRow[field.slug];
                 });
 
-                tableBody.push(formattedRow);
+                tableBody.push({link: link, data: data});
+                //tableBody.push(formattedRow);
             });
 
             return {

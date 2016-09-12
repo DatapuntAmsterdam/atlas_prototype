@@ -6,7 +6,7 @@ describe('The dp-data-selection-download-button component', function () {
         angular.mock.module(
             'dpDataSelection',
             function ($provide) {
-                $provide.constant('DATA_SELECTION_CONFIG', {
+                $provide.constant('dpDataSelectionConfig', {
                     dataset_a: {
                         ENDPOINT: 'http://www.example.com/datasets/a/',
                         ENDPOINT_EXPORT: 'http://www.example.com/datasets/a/download/',
@@ -82,6 +82,9 @@ describe('The dp-data-selection-download-button component', function () {
             filter_b: 'Waarde met spaties'
         });
 
+        expect(component.find('a').attr('href'))
+            .toBe('http://www.example.com/datasets/a/download/?filter_a=%C3%A4%C3%A9%C3%AB&' +
+                'filter_b=Waarde%20met%20spaties');
         expect(component.find('a').attr('href')).toContain('filter_a=%C3%A4%C3%A9%C3%AB');
         expect(component.find('a').attr('href')).toContain('filter_b=Waarde%20met%20spaties');
     });

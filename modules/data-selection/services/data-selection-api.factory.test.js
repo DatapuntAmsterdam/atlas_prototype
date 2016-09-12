@@ -20,9 +20,10 @@ describe('The dataSelectionApi factory', function () {
                 }
             },
             function ($provide) {
-                $provide.constant('DATA_SELECTION_CONFIG', {
+                $provide.constant('dpDataSelectionConfig', {
                     zwembaden: {
                         ENDPOINT: 'https://api.amsterdam.nl/zwembaden/',
+                        ENDPOINT_API: 'https://amsterdam.nl/api_endpoint/zwembaden/',
                         FILTERS: [
                             {
                                 slug: 'type',
@@ -40,7 +41,8 @@ describe('The dataSelectionApi factory', function () {
                                 slug: 'openingstijden',
                                 label: 'Openingstijden'
                             }
-                        ]
+                        ],
+                        ITEM_ID: 'id'
                     }
                 });
             }
@@ -87,10 +89,12 @@ describe('The dataSelectionApi factory', function () {
             object_list: [
                 {
                     openingstijden: 'Alleen op dinsdag',
-                    adres: 'Sneeuwbalweg 24'
+                    adres: 'Sneeuwbalweg 24',
+                    id: '1'
                 }, {
                     adres: 'Marnixstraat 1',
-                    openingstijden: 'Ligt er een beetje aan'
+                    openingstijden: 'Ligt er een beetje aan',
+                    id: '2'
                 }
             ],
             page_count: 2
@@ -226,8 +230,14 @@ describe('The dataSelectionApi factory', function () {
             $rootScope.$apply();
 
             expect(output.tableData.body.length).toBe(2);
-            expect(output.tableData.body[0]).toEqual(['Sneeuwbalweg 24', 'Alleen op dinsdag']);
-            expect(output.tableData.body[1]).toEqual(['Marnixstraat 1', 'Ligt er een beetje aan']);
+            expect(output.tableData.body[0]).toEqual({
+                link: 'https://amsterdam.nl/api_endpoint/zwembaden/1',
+                data: [ 'Sneeuwbalweg 24', 'Alleen op dinsdag' ]
+            });
+            expect(output.tableData.body[1]).toEqual({
+                link: 'https://amsterdam.nl/api_endpoint/zwembaden/2',
+                data: [ 'Marnixstraat 1', 'Ligt er een beetje aan' ]
+            });
         });
 
         it('only shows content that is part of the configuration, additional API content will be ignored', function () {
@@ -240,10 +250,9 @@ describe('The dataSelectionApi factory', function () {
                 output = _output_;
             });
             $rootScope.$apply();
-
             expect(output.tableData.body.length).toBe(2);
-            expect(output.tableData.body[0].length).toBe(2);
-            expect(output.tableData.body[1].length).toBe(2);
+            expect(output.tableData.body[0].data.length).toBe(2);
+            expect(output.tableData.body[1].data.length).toBe(2);
 
             expect(JSON.stringify(output.tableData.body)).not.toContain('whatever');
             expect(JSON.stringify(output.tableData.body)).not.toContain('sure');

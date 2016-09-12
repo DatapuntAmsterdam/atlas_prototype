@@ -1,13 +1,24 @@
 describe('The dp-data-selection-table component', function () {
     var $compile,
-        $rootScope;
+        $rootScope,
+        store,
+        ACTIONS;
 
     beforeEach(function () {
-        angular.mock.module('dpDataSelection');
+        angular.mock.module(
+            'dpDataSelection',
+            {
+                store: {
+                    dispatch: function () {}
+                }
+            }
+        );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
+            store = _store_;
+            ACTIONS = _ACTIONS_;
         });
     });
 
@@ -37,9 +48,9 @@ describe('The dp-data-selection-table component', function () {
         content = {
             head: ['Field A', 'Field B'],
             body: [
-                ['Cell A1', 'Cell B1'],
-                ['Cell A2', 'Cell B2'],
-                ['Cell A3', 'Cell B3']
+                {data: ['Cell A1', 'Cell B1'], link: '1'},
+                {data: ['Cell A2', 'Cell B2'], link: '2'},
+                {data: ['Cell A3', 'Cell B3'], link: '3'}
             ]
         };
 
@@ -52,12 +63,15 @@ describe('The dp-data-selection-table component', function () {
         expect(component.find('thead tr th').eq(1).text()).toContain('Field B');
 
         expect(component.find('tbody tr').length).toBe(3);
+        expect(component.find('tbody tr:nth-child(1)').attr('ng-click')).toBe('vm.dpGotoItem(row.link)');
         expect(component.find('tbody tr:nth-child(1) td:nth-child(1)').text()).toContain('Cell A1');
         expect(component.find('tbody tr:nth-child(1) td:nth-child(2)').text()).toContain('Cell B1');
 
+        expect(component.find('tbody tr:nth-child(2)').attr('ng-click')).toBe('vm.dpGotoItem(row.link)');
         expect(component.find('tbody tr:nth-child(2) td:nth-child(1)').text()).toContain('Cell A2');
         expect(component.find('tbody tr:nth-child(2) td:nth-child(2)').text()).toContain('Cell B2');
 
+        expect(component.find('tbody tr:nth-child(3)').attr('ng-click')).toBe('vm.dpGotoItem(row.link)');
         expect(component.find('tbody tr:nth-child(3) td:nth-child(1)').text()).toContain('Cell A3');
         expect(component.find('tbody tr:nth-child(3) td:nth-child(2)').text()).toContain('Cell B3');
     });
