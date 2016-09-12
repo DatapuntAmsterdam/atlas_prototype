@@ -10,11 +10,11 @@
     "leaflet": "https://github.com/DatapuntAmsterdam/datapunt_leaflet.git#master",
     "leaflet.wms": "~0.1.0",
     "leaflet-measure": "^2.0.2",
-    "leaflet-rotatedmarker": "https://npmcdn.com/leaflet-rotatedmarker/leaflet.rotatedMarker.js",
+    "leaflet-rotatedmarker": "https://unpkg.com/leaflet-rotatedmarker/leaflet.rotatedMarker.js",
     "marzipano": "https://github.com/DatapuntAmsterdam/marzipano.git#master",
     "proj4": "*",
     "proj4leaflet": "https://github.com/DatapuntAmsterdam/proj4leaflet.git#master",
-    "redux": "https://npmcdn.com/redux/dist/redux.js"
+    "redux": "https://unpkg.com/redux/dist/redux.js"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.7"
