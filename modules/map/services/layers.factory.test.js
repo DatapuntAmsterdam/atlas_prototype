@@ -187,16 +187,5 @@ describe('The layers factory', function () {
             expect(mockedLeafletMap.removeLayer).toHaveBeenCalledWith('FAKE_SUBLAYER_1');
             expect(mockedLeafletMap.removeLayer).toHaveBeenCalledWith('FAKE_SUBLAYER_2');
         });
-
-        it('caches the result of L.WMS.source', function () {
-            expect(L.WMS.source).not.toHaveBeenCalled();
-
-            layers.addOverlay(mockedLeafletMap, 'overlay_a');
-            expect(L.WMS.source).toHaveBeenCalledTimes(1);
-
-            layers.removeOverlay(mockedLeafletMap, 'overlay_a');
-            layers.addOverlay(mockedLeafletMap, 'overlay_a');
-            expect(L.WMS.source).toHaveBeenCalledTimes(1);
-        });
     });
 });

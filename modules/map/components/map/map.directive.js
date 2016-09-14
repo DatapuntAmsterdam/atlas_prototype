@@ -131,6 +131,7 @@
             if (angular.equals(newOverlays, oldOverlays)) {
                 oldOverlays = [];
             }
+
             return getDiffFromOverlays(newOverlays, oldOverlays);
         }
 

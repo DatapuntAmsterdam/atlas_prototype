@@ -8,8 +8,7 @@
         layersFactory.$inject = ['L', 'mapConfig', 'BASE_LAYERS', 'OVERLAYS'];
 
     function layersFactory (L, mapConfig, BASE_LAYERS, OVERLAYS) {
-        var baseLayer,
-            wmsLayers = {};
+        var baseLayer;
 
         return {
             setBaseLayer: setBaseLayer,
@@ -61,25 +60,23 @@
         }
 
         function getSubLayers (overlayName) {
-            var wmsUrl,
+            var wmsLayers = [],
+                wmsUrl,
                 wmsSource;
 
-            if (angular.isUndefined(wmsLayers[overlayName])) {
-                wmsLayers[overlayName] = [];
-                wmsUrl = OVERLAYS.SOURCES[overlayName].url;
+            wmsUrl = OVERLAYS.SOURCES[overlayName].url;
 
-                if (!OVERLAYS.SOURCES[overlayName].external) {
-                    wmsUrl = mapConfig.OVERLAY_ROOT + wmsUrl;
-                }
-
-                wmsSource = L.WMS.source(wmsUrl, mapConfig.OVERLAY_OPTIONS);
-
-                OVERLAYS.SOURCES[overlayName].layers.forEach(function (layerName) {
-                    wmsLayers[overlayName].push(wmsSource.getLayer(layerName));
-                });
+            if (!OVERLAYS.SOURCES[overlayName].external) {
+                wmsUrl = mapConfig.OVERLAY_ROOT + wmsUrl;
             }
 
-            return wmsLayers[overlayName];
+            wmsSource = L.WMS.source(wmsUrl, mapConfig.OVERLAY_OPTIONS);
+
+            OVERLAYS.SOURCES[overlayName].layers.forEach(function (layerName) {
+                wmsLayers.push(wmsSource.getLayer(layerName));
+            });
+
+            return wmsLayers;
         }
     }
 })();
