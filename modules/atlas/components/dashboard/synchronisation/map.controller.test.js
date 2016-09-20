@@ -43,7 +43,8 @@ describe('The map controller', function () {
                 map: {
                     var_1: 'a',
                     var_2: 'b'
-                }
+                },
+                stackedPanels: []
             },
             controller;
 
@@ -62,7 +63,9 @@ describe('The map controller', function () {
             controller;
 
         it('can work without any markers', function () {
-            mockedState = {};
+            mockedState = {
+                stackedPanels: []
+            };
 
             spyOn(store, 'getState').and.returnValue(mockedState);
             controller = getController();
@@ -74,7 +77,8 @@ describe('The map controller', function () {
             mockedState = {
                 search: {
                     location: [52.1, 4.1]
-                }
+                },
+                stackedPanels: []
             };
 
             spyOn(store, 'getState').and.returnValue(mockedState);
@@ -89,7 +93,8 @@ describe('The map controller', function () {
             mockedState = {
                 detail: {
                     geometry: 'FAKE_GEOMETRY'
-                }
+                },
+                stackedPanels: []
             };
 
             spyOn(store, 'getState').and.returnValue(mockedState);
@@ -109,7 +114,8 @@ describe('The map controller', function () {
                     camera: {
                         heading: Math.PI
                     }
-                }
+                },
+                stackedPanels: []
             };
 
             spyOn(store, 'getState').and.returnValue(mockedState);
@@ -140,7 +146,8 @@ describe('The map controller', function () {
                     camera: {
                         heading: Math.PI
                     }
-                }
+                },
+                stackedPanels: []
             };
 
             spyOn(store, 'getState').and.returnValue(mockedState);
@@ -189,7 +196,8 @@ describe('The map controller', function () {
                     camera: {
                         heading: Math.PI
                     }
-                }
+                },
+                stackedPanels: []
             };
 
             expect(controller.markers).toContain(jasmine.objectContaining({
@@ -213,7 +221,8 @@ describe('The map controller', function () {
                     camera: {
                         heading: Math.PI
                     }
-                }
+                },
+                stackedPanels: []
             };
 
             spyOn(store, 'getState').and.returnValue(mockedState);
@@ -238,6 +247,59 @@ describe('The map controller', function () {
                 id: 'straatbeeld_person',
                 useAutoFocus: false
             }));
+        });
+    });
+
+    describe('sets the isFullscreen and showLayerSelection variables based on the stackedPanels state', function () {
+        var controller ,
+            mockedState;
+
+        it('when there are no stackedPanels', function () {
+            mockedState = {
+                stackedPanels: []
+            };
+
+            spyOn(store, 'getState').and.returnValue(mockedState);
+            controller = getController();
+
+            expect(controller.isFullscreen).toBe(false);
+            expect(controller.showLayerSelection).toBe(false);
+        });
+
+        it('when the active stackedPanel is the map (fullscreen)', function () {
+            mockedState = {
+                stackedPanels: ['fullscreen']
+            };
+
+            spyOn(store, 'getState').and.returnValue(mockedState);
+            controller = getController();
+
+            expect(controller.isFullscreen).toBe(true);
+            expect(controller.showLayerSelection).toBe(false);
+        });
+
+        it('when the active stackedPanel is layer-selection', function () {
+            mockedState = {
+                stackedPanels: ['layer-selection']
+            };
+
+            spyOn(store, 'getState').and.returnValue(mockedState);
+            controller = getController();
+
+            expect(controller.isFullscreen).toBe(false);
+            expect(controller.showLayerSelection).toBe(true);
+        });
+
+        it('when layer-selection is on top of the map (fullscreen)', function () {
+            mockedState = {
+                stackedPanels: ['fullscreen', 'layer-selection']
+            };
+
+            spyOn(store, 'getState').and.returnValue(mockedState);
+            controller = getController();
+
+            expect(controller.isFullscreen).toBe(false);
+            expect(controller.showLayerSelection).toBe(true);
         });
     });
 });

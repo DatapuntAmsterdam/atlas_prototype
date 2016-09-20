@@ -20,7 +20,9 @@
             restrict: 'E',
             scope: {
                 mapState: '=',
-                markers: '='
+                markers: '=',
+                isFullscreen: '=',
+                showLayerSelection: '='
             },
             templateUrl: 'modules/map/components/map/map.html',
             link: linkFunction

@@ -44,8 +44,8 @@ describe('The stateToUrlMiddleware factory', function () {
         expect(stateToUrl.update).toHaveBeenCalledWith('FAKE_STATE', jasmine.anything());
     });
 
-    it('doesn\'t call stateToUrl.update for URL_CHANGE, FETCH_DETAIL, FETCH_STRAATBEELD, SHOW_LAYER_SELECTION and ' +
-        'HIDE_LAYER_SELECTION', function () {
+    it('doesn\'t call stateToUrl.update for URL_CHANGE, FETCH_DETAIL, FETCH_STRAATBEELD, ' +
+        'STACKED_PANELS_SHOW_LAYER_SELECTION and STACKED_PANELS_HIDE_LAYER_SELECTION', function () {
 
         var actionWithoutUrlUpdate = [
             ACTIONS.URL_CHANGE,
@@ -74,17 +74,18 @@ describe('The stateToUrlMiddleware factory', function () {
             ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY,
             ACTIONS.MAP_PAN,
             ACTIONS.MAP_ZOOM,
-            ACTIONS.MAP_FULLSCREEN,
             ACTIONS.SHOW_DETAIL,
             ACTIONS.SHOW_STRAATBEELD_INITIAL,
             ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT,
             ACTIONS.STRAATBEELD_SET_ORIENTATION,
-            ACTIONS.SHOW_LAYER_SELECTION,
-            ACTIONS.HIDE_LAYER_SELECTION,
-            ACTIONS.SHOW_ACTIVE_OVERLAYS,
-            ACTIONS.HIDE_ACTIVE_OVERLAYS,
+            ACTIONS.MAP_SHOW_ACTIVE_OVERLAYS,
+            ACTIONS.MAP_HIDE_ACTIVE_OVERLAYS,
             ACTIONS.SHOW_HOME,
             ACTIONS.SHOW_PAGE,
+            ACTIONS.STACKED_PANELS_SHOW_FULLSCREEN_MAP,
+            ACTIONS.STACKED_PANELS_HIDE_FULLSCREEN_MAP,
+            ACTIONS.STACKED_PANELS_SHOW_LAYER_SELECTION,
+            ACTIONS.STACKED_PANELS_HIDE_LAYER_SELECTION,
             ACTIONS.SHOW_PRINT,
             ACTIONS.HIDE_PRINT
         ];
@@ -108,21 +109,22 @@ describe('The stateToUrlMiddleware factory', function () {
                 ACTIONS.MAP_PAN,
                 ACTIONS.MAP_ZOOM,
                 ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT,
-                ACTIONS.SHOW_ACTIVE_OVERLAYS,
-                ACTIONS.HIDE_ACTIVE_OVERLAYS
+                ACTIONS.MAP_SHOW_ACTIVE_OVERLAYS,
+                ACTIONS.MAP_HIDE_ACTIVE_OVERLAYS
             ],
             shouldNotUseReplace = [
                 ACTIONS.SHOW_SEARCH_RESULTS_BY_QUERY,
                 ACTIONS.SHOW_SEARCH_RESULTS_BY_CLICK,
                 ACTIONS.SHOW_SEARCH_RESULTS_CATEGORY,
-                ACTIONS.MAP_FULLSCREEN,
                 ACTIONS.SHOW_DETAIL,
                 ACTIONS.SHOW_STRAATBEELD_INITIAL,
                 ACTIONS.STRAATBEELD_SET_ORIENTATION,
-                ACTIONS.SHOW_LAYER_SELECTION,
-                ACTIONS.HIDE_LAYER_SELECTION,
                 ACTIONS.SHOW_HOME,
                 ACTIONS.SHOW_PAGE,
+                ACTIONS.STACKED_PANELS_SHOW_FULLSCREEN_MAP,
+                ACTIONS.STACKED_PANELS_HIDE_FULLSCREEN_MAP,
+                ACTIONS.STACKED_PANELS_SHOW_LAYER_SELECTION,
+                ACTIONS.STACKED_PANELS_HIDE_LAYER_SELECTION,
                 ACTIONS.SHOW_PRINT,
                 ACTIONS.HIDE_PRINT
             ];

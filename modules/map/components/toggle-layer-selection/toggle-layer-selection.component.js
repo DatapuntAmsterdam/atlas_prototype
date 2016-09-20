@@ -20,7 +20,11 @@
 
         vm.toggle = function () {
             store.dispatch({
-                type: ACTIONS[vm.showLayerSelection ? 'HIDE_LAYER_SELECTION' : 'SHOW_LAYER_SELECTION']
+                type: ACTIONS[
+                    vm.showLayerSelection ?
+                        'STACKED_PANELS_HIDE_LAYER_SELECTION' :
+                        'STACKED_PANELS_SHOW_LAYER_SELECTION'
+                    ]
             });
         };
     }

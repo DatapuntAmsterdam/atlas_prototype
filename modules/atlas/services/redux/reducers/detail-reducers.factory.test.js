@@ -42,36 +42,24 @@ describe('The detailReducers factory', function () {
             expect(output.map.highlight).toBeNull();
         });
 
-        it('disables layer selection, search, page, straatbeeld and dataSelection', function () {
+        it('disables search, page, straatbeeld, dataSelection and stackedPanels', function () {
             var payload = 'bag/thing/123/',
                 inputState = angular.copy(defaultState),
                 output;
 
-            inputState.map.showLayerSelection = true;
             inputState.search = {some: 'object'};
             inputState.page = 'somePage';
             inputState.straatbeeld = {some: 'object'};
             inputState.dataSelection = {some: 'object'};
+            inputState.stackedPanels = ['layer-selection', 'fullscreen'];
 
             output = detailReducers.FETCH_DETAIL(inputState, payload);
 
-            expect(output.map.showLayerSelection).toBe(false);
             expect(output.search).toBeNull();
             expect(output.page).toBeNull();
             expect(output.straatbeeld).toBeNull();
             expect(output.dataSelection).toBeNull();
-        });
-
-        it('disables the fullscreen mode off the map', function () {
-            var payload = 'bag/thing/123/',
-                inputState = angular.copy(defaultState),
-                output;
-
-            inputState.map.isFullscreen = true;
-
-            output = detailReducers.FETCH_DETAIL(inputState, payload);
-
-            expect(output.map.isFullscreen).toBe(false);
+            expect(output.stackedPanels).toEqual([]);
         });
     });
 

@@ -43,27 +43,29 @@ describe('The dp-toggle-layer-selection component', function () {
         return component;
     }
 
-    it('has a toggle that can trigger both SHOW_LAYER_SELECTION and HIDE_LAYER_SELECTION', function () {
-        var component;
+    it('has a toggle that can trigger both STACKED_PANELS_SHOW_LAYER_SELECTION and STACKED_PANELS_HIDE_LAYER_SELECTION',
+        function () {
+            var component;
 
-        //When showActiveOverlays is false
-        component = getComponent([], false);
-        component.find('button').click();
+            //When showActiveOverlays is false
+            component = getComponent([], false);
+            component.find('button').click();
 
-        expect(store.dispatch).toHaveBeenCalledTimes(1);
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.SHOW_LAYER_SELECTION
-        });
+            expect(store.dispatch).toHaveBeenCalledTimes(1);
+            expect(store.dispatch).toHaveBeenCalledWith({
+                type: ACTIONS.STACKED_PANELS_SHOW_LAYER_SELECTION
+            });
 
-        //When showActiveOverlays is true
-        component = getComponent([], true);
-        component.find('button').click();
+            //When showActiveOverlays is true
+            component = getComponent([], true);
+            component.find('button').click();
 
-        expect(store.dispatch).toHaveBeenCalledTimes(2);
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.HIDE_LAYER_SELECTION
-        });
-    });
+            expect(store.dispatch).toHaveBeenCalledTimes(2);
+            expect(store.dispatch).toHaveBeenCalledWith({
+                type: ACTIONS.STACKED_PANELS_HIDE_LAYER_SELECTION
+            });
+        }
+    );
 
     it('has different styling depending on showLayerSelection', function () {
         var component;

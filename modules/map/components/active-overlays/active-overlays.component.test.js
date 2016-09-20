@@ -77,7 +77,7 @@ describe('The dp-active-overlays component', function () {
         expect(component.find('.c-active-overlays').length).toBe(1);
     });
 
-    it('toggles between SHOW_ACTIVE_OVERLAYS and HIDE_ACTIVE_OVERLAYS', function () {
+    it('toggles between MAP_SHOW_ACTIVE_OVERLAYS and MAP_HIDE_ACTIVE_OVERLAYS', function () {
         var component;
 
         //With showActiveOverlays is false
@@ -85,7 +85,7 @@ describe('The dp-active-overlays component', function () {
         component.find('.c-toggle-active-overlays').click();
         expect(store.dispatch).toHaveBeenCalledTimes(1);
         expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.SHOW_ACTIVE_OVERLAYS
+            type: ACTIONS.MAP_SHOW_ACTIVE_OVERLAYS
         });
 
         //With showActiveOverlays is true
@@ -93,7 +93,7 @@ describe('The dp-active-overlays component', function () {
         component.find('.c-toggle-active-overlays').click();
         expect(store.dispatch).toHaveBeenCalledTimes(2);
         expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.HIDE_ACTIVE_OVERLAYS
+            type: ACTIONS.MAP_HIDE_ACTIVE_OVERLAYS
         });
     });
 

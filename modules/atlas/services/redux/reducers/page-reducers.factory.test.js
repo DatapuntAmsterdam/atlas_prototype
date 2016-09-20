@@ -29,13 +29,11 @@ describe('The pageReducers factory', function () {
             expect(output.map.highlight).toBeNull();
         });
 
-        it('disables the layer selection, search, detail, straatbeeld and dataSelection', function () {
+        it('disables search, detail, straatbeeld, dataSelection and stackedPanels', function () {
             mockedState.search = {
                 query: 'SOME_QUERY',
                 location: null
             };
-
-            mockedState.map.showLayerSelection = true;
 
             mockedState.detail = {
                 endpoint: 'http://some-endpoint/path/123',
@@ -52,20 +50,15 @@ describe('The pageReducers factory', function () {
                 some: 'object'
             };
 
+            mockedState.stackedPanels = ['fullscreen'];
+
             output = pageReducers.SHOW_PAGE(mockedState, 'goodbye');
 
             expect(output.search).toBeNull();
-            expect(output.map.showLayerSelection).toBe(false);
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
             expect(output.dataSelection).toBeNull();
-        });
-
-        it('disables the full screen mode of the map', function () {
-            mockedState.map.isFullscreen = true;
-
-            output = pageReducers.SHOW_PAGE(mockedState, 'goodbye');
-            expect(output.map.isFullscreen).toBe(false);
+            expect(output.stackedPanels).toEqual([]);
         });
     });
 });

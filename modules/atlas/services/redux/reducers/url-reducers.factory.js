@@ -20,12 +20,14 @@
             } else {
                 var newState = {};
 
+
                 newState.search = getSearchState(payload);
                 newState.map = getMapState(payload);
                 newState.page = payload.pagina || null;
                 newState.detail = getDetailState(oldState, payload);
                 newState.straatbeeld = getStraatbeeldState(oldState, payload);
                 newState.dataSelection = getDataSelectionState(payload);
+                newState.stackedPanels = getStackedPanelsState(payload);
                 newState.isPrintMode = getPrintState(payload);
 
                 return newState;
@@ -92,9 +94,7 @@
                     ],
                     zoom: Number(payload.zoom),
                     highlight: payload.selectie || null,
-                    showLayerSelection: angular.isString(payload['kaartlagen-selectie']),
                     showActiveOverlays: angular.isString(payload['actieve-kaartlagen']),
-                    isFullscreen: angular.isString(payload['volledig-scherm']),
                     isLoading: false
                 };
             }
@@ -191,6 +191,22 @@
                 } else {
                     return null;
                 }
+            }
+
+            function getStackedPanelsState () {
+                var stackedPanels = [],
+                    translationsDutchToEnglish = {
+                        'volledig-scherm': 'fullscreen',
+                        'kaartlaag-selectie': 'layer-selection'
+                    };
+
+                if (angular.isString(payload.vensters)) {
+                    stackedPanels = payload.vensters.split(',').map(function (panelNameDutch) {
+                        return translationsDutchToEnglish[panelNameDutch];
+                    });
+                }
+
+                return stackedPanels;
             }
 
             function getPrintState (payload) {

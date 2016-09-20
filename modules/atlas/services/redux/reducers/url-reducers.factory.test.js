@@ -145,22 +145,6 @@ describe('The urlReducers factory', function () {
                 expect(output.map.highlight).toBe('I_AM_A_FAKE_GEOJSON_OBJECT');
             });
 
-            it('sets the showLayerSelection status', function () {
-                var output;
-
-                //With layer selection
-                mockedState.map.showLayerSelection = false;
-                mockedSearchParams['kaartlagen-selectie'] = 'aan';
-                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-                expect(output.map.showLayerSelection).toBe(true);
-
-                //Without layer selection
-                mockedState.map.showLayerSelection = true;
-                delete mockedSearchParams['kaartlagen-selectie'];
-                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-                expect(output.map.showLayerSelection).toBe(false);
-            });
-
             it('sets the showActiveOverlays status', function () {
                 var output;
 
@@ -175,22 +159,6 @@ describe('The urlReducers factory', function () {
                 delete mockedSearchParams['actieve-kaartlagen'];
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
                 expect(output.map.showActiveOverlays).toBe(false);
-            });
-
-            it('sets the isFullscreen status', function () {
-                var output;
-
-                //With full screen enabled
-                mockedState.map.isFullscreen = false;
-                mockedSearchParams['volledig-scherm'] = 'aan';
-                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-                expect(output.map.isFullscreen).toBe(true);
-
-                //With full screen disabled
-                mockedState.map.isFullscreen = true;
-                delete mockedSearchParams['volledig-scherm'];
-                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-                expect(output.map.isFullscreen).toBe(false);
             });
         });
 
@@ -400,6 +368,39 @@ describe('The urlReducers factory', function () {
                     buurtcombinatie: 'Bijlmeer Oost (D,F,H)',
                     buurt: 'Belgiëplein e.o.'
                 });
+            });
+        });
+
+        describe('stackedPanels', function () {
+            it('returns an empty array when there is no stacked panel', function () {
+                var output;
+
+                mockedState.stackedPanels = ['fullscreen'];
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
+                expect(output.stackedPanels).toEqual([]);
+            });
+
+            it('can have one stacked panel', function () {
+                var output;
+
+                mockedState.stackedPanels = [];
+                mockedSearchParams['vensters'] = 'volledig-scherm';
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
+                expect(output.stackedPanels).toEqual(['fullscreen']);
+            });
+
+            it('can have multiple stacked panels', function () {
+                var output;
+
+                mockedState.stackedPanels = [];
+                mockedSearchParams['vensters'] = 'volledig-scherm,kaartlaag-selectie';
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
+                expect(output.stackedPanels).toEqual(['fullscreen', 'layer-selection']);
+
+                //The order in the URL is respected here
+                mockedSearchParams['vensters'] = 'kaartlaag-selectie,volledig-scherm';
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
+                expect(output.stackedPanels).toEqual(['layer-selection', 'fullscreen']);
             });
         });
 

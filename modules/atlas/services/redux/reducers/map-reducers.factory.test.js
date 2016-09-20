@@ -92,7 +92,8 @@ describe('The map reducers', function () {
             expect(output.map.overlays).toEqual([]);
         });
     });
-    describe('MAP_TOGGILE_VISIBILITY', function() {
+
+    describe('MAP_TOGGLE_VISIBILITY', function() {
         it('hides an overlay', function() {
             var inputState = angular.copy(defaultState),
                 output;
@@ -116,6 +117,7 @@ describe('The map reducers', function () {
                 {id: 'overlay_3', isVisible: true}
             ]);
         });
+
         it('hides an overlay', function() {
             var inputState = angular.copy(defaultState),
                 output;
@@ -140,6 +142,7 @@ describe('The map reducers', function () {
             ]);
         });
     });
+
     describe('MAP_PAN', function () {
         it('updates the viewCenter', function () {
             var inputState = angular.copy(defaultState),
@@ -192,29 +195,24 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_FULLSCREEN', function () {
-        it('can toggle the fullscreen mode', function () {
+    describe('MAP_SHOW_ACTIVE_OVERLAYS', function () {
+        it('sets the variable to true', function () {
             var inputState = angular.copy(defaultState),
                 output;
 
-            //Enable fullscreen
-            output = mapReducers.MAP_FULLSCREEN(inputState, true);
-            expect(output.map.isFullscreen).toBe(true);
-
-            //Disable fullscreen
-            output = mapReducers.MAP_FULLSCREEN(inputState, false);
-            expect(output.map.isFullscreen).toBe(false);
+            output = mapReducers.MAP_SHOW_ACTIVE_OVERLAYS(inputState);
+            expect(output.map.showActiveOverlays).toBe(true);
         });
+    });
 
-        it('when enabling fullscreen, the layer selection will be disabled', function () {
-            var inputState = angular.copy(defaultState),
-                output;
+    describe('MAP_HIDE_ACTIVE_OVERLAYS', function () {
+        it('sets the variable to false', function () {
+            var output,
+                inputState = angular.copy(defaultState);
 
-            inputState.map.showLayerSelection = true;
-
-            //Enable fullscreen
-            output = mapReducers.MAP_FULLSCREEN(inputState, true);
-            expect(output.map.showLayerSelection).toBe(false);
+            inputState.map.showActiveOverlays = true;
+            output = mapReducers.MAP_HIDE_ACTIVE_OVERLAYS(inputState);
+            expect(output.map.showActiveOverlays).toBe(false);
         });
     });
 });

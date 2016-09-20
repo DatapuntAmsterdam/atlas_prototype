@@ -49,7 +49,7 @@ describe('The measure factory', function () {
         expect(mockedMeasureControl.addTo).toHaveBeenCalledWith(mockedLeafletMap);
     });
 
-    it('dispatches HIDE_ACTIVE_OVERLAYS when starting to measure', function () {
+    it('dispatches MAP_HIDE_ACTIVE_OVERLAYS when starting to measure', function () {
         var domElement,
             mockedLeafletMap;
 
@@ -62,7 +62,7 @@ describe('The measure factory', function () {
         $rootScope.$apply();
 
         expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.HIDE_ACTIVE_OVERLAYS
+            type: ACTIONS.MAP_HIDE_ACTIVE_OVERLAYS
         });
     });
 });

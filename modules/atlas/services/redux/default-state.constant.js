@@ -2,17 +2,6 @@
     angular
         .module('atlas')
         .constant('DEFAULT_STATE', {
-            map: {
-                baseLayer: 'topografie',
-                overlays: [],
-                viewCenter: [52.3719, 4.9012],
-                zoom: 9,
-                highlight: null,
-                showLayerSelection: false,
-                showActiveOverlays: false,
-                isFullscreen: false,
-                isLoading: false
-            },
             search: null,
             /*
             search: {
@@ -21,6 +10,15 @@
                 category: null
             }
             */
+            map: {
+                baseLayer: 'topografie',
+                overlays: [],
+                viewCenter: [52.3719, 4.9012],
+                zoom: 9,
+                highlight: null,
+                showActiveOverlays: false,
+                isLoading: false
+            },
             page: 'home',
             detail: null,
             /*
@@ -60,6 +58,8 @@
                 page: 1
             },
             */
+            stackedPanels: [],
+            //stackedPanels: ['fullscreen', 'layer-selection'],
             isPrintMode: false
         });
 })();

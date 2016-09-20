@@ -144,24 +144,6 @@ describe('The stateToUrl factory', function () {
             }));
         });
 
-        it('keeps track of the state of the layer selection (opened or closed)', function () {
-            //Closed
-            mockedState.map.showLayerSelection = false;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'kaartlagen-selectie': jasmine.anything()
-            }));
-
-            //Opened
-            mockedState.map.showLayerSelection = true;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'kaartlagen-selectie': 'aan'
-            }));
-        });
-
         it('keeps track of the active overlays (opened or closed', function () {
             //Closed
             mockedState.map.showActiveOverlays = false;
@@ -180,21 +162,40 @@ describe('The stateToUrl factory', function () {
             }));
         });
 
-        it('keeps track of the isFullscreen state', function () {
-            //Closed
-            mockedState.map.isFullscreen = false;
+        it('keeps track of stacked panels (a fullscreen map and layer-selection)', function () {
+            //No stacked panels
+            mockedState.stackedPanels = [];
             stateToUrl.update(mockedState, false);
-
             expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'volledig-scherm': jasmine.anything()
+                'vensters': jasmine.anything()
             }));
 
-            //Opened
-            mockedState.map.isFullscreen = true;
+            //One stacked panel (fullscreen)
+            mockedState.stackedPanels = ['fullscreen'];
             stateToUrl.update(mockedState, false);
-
             expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'volledig-scherm': 'aan'
+                'vensters': 'volledig-scherm'
+            }));
+
+            //One stacked panel (layer-selection)
+            mockedState.stackedPanels = ['layer-selection'];
+            stateToUrl.update(mockedState, false);
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'vensters': 'kaartlaag-selectie'
+            }));
+
+            //Two stacked panels (fullscreen, layer-selection)
+            mockedState.stackedPanels = ['fullscreen', 'layer-selection'];
+            stateToUrl.update(mockedState, false);
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'vensters': 'volledig-scherm,kaartlaag-selectie'
+            }));
+
+            //Two stacked panels in reverse (layer-selection, fullscreen)
+            mockedState.stackedPanels = ['layer-selection', 'fullscreen'];
+            stateToUrl.update(mockedState, false);
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'vensters': 'kaartlaag-selectie,volledig-scherm'
             }));
         });
     });

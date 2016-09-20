@@ -27,12 +27,11 @@
             newState.page = payload;
 
             newState.map.highlight = null;
-            newState.map.showLayerSelection = false;
-            newState.map.isFullscreen = false;
             newState.search = null;
             newState.detail = null;
             newState.straatbeeld = null;
             newState.dataSelection = null;
+            newState.stackedPanels.length = 0;
 
             return newState;
         }

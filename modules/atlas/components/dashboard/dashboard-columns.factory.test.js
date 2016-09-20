@@ -263,7 +263,7 @@ describe('The dashboardColumns factory', function () {
                 uri: 'blah/blah/123',
                 isLoading: false
             };
-            mockedState.map.showLayerSelection = true;
+            mockedState.stackedPanels = ['layer-selection'];
         });
 
         describe('the default non-print version', function () {
@@ -322,7 +322,7 @@ describe('The dashboardColumns factory', function () {
 
     describe('when using a fullscreen map', function () {
         beforeEach(function () {
-            mockedState.map.isFullscreen = true;
+            mockedState.stackedPanels = ['fullscreen'];
         });
 
         describe('the default non-print version', function () {

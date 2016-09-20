@@ -94,7 +94,7 @@ describe('The dashboard component', function () {
             expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--auto')).toBe(false);
 
             //Open the left column
-            mockedState.map.showLayerSelection = true;
+            mockedState.stackedPanels = ['layer-selection'];
             component = getComponent();
 
             //Check the left column
@@ -121,7 +121,7 @@ describe('The dashboard component', function () {
             expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--auto')).toBe(true);
 
             //Open the left column
-            mockedState.map.showLayerSelection = true;
+            mockedState.stackedPanels = ['layer-selection'];
             component = getComponent();
 
             //Check the left column
@@ -193,7 +193,7 @@ describe('The dashboard component', function () {
 
             beforeEach(function () {
                 mockedState = angular.copy(defaultState);
-                mockedState.map.isFullscreen = true;
+                mockedState.stackedPanels = ['fullscreen'];
                 spyOn(store, 'getState').and.returnValue(mockedState);
 
                 mockedVisibility[panel] = true;

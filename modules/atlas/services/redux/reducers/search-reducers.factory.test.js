@@ -40,7 +40,7 @@ describe('The search-reducers factory', function () {
             expect(output.map.highlight).toBeNull();
         });
 
-        it('hides the layer selection, page, detail, straatbeeld and dataSelection', function () {
+        it('hides the page, detail, straatbeeld, dataSelection and stackedPanels', function () {
             var inputState = angular.copy(defaultState),
                 output;
 
@@ -49,25 +49,15 @@ describe('The search-reducers factory', function () {
             inputState.detail = {some: 'object'};
             inputState.staatbeeld = {some: 'object'};
             inputState.dataSelection = {some: 'object'};
+            inputState.stackedPanels = ['layer-selection', 'fullscreen'];
 
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_QUERY(inputState, 'linnaeus');
 
-            expect(output.map.showLayerSelection).toBe(false);
             expect(output.page).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
             expect(output.dataSelection).toBeNull();
-        });
-
-        it('disables the fullscreen mode of the map', function () {
-            var inputState = angular.copy(defaultState),
-                output;
-
-            inputState.map.isFullscreen = true;
-
-            output = searchReducers.SHOW_SEARCH_RESULTS_BY_QUERY(inputState, 'linnaeus');
-
-            expect(output.map.isFullscreen).toBe(false);
+            expect(output.stackedPanels).toEqual([]);
         });
     });
 
@@ -104,21 +94,19 @@ describe('The search-reducers factory', function () {
             var inputState = angular.copy(defaultState),
                 output;
 
-            inputState.map.showLayerSelection = true;
-            inputState.map.showActiveOverlays = true;
             inputState.page = 'somePage';
             inputState.detail = {some: 'object'};
             inputState.staatbeeld = {some: 'object'};
             inputState.dataSelection = {some: 'object'};
+            inputState.stackedPanels = ['fullscreen', 'layer-selection'];
 
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
 
-            expect(output.map.showLayerSelection).toBe(false);
-            expect(output.map.showActiveOverlays).toBe(false);
             expect(output.page).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
             expect(output.dataSelection).toBeNull();
+            expect(output.stackedPanels).toEqual([]);
         });
 
         it('changes the viewCenter when showLayerSelection or fullscreen mode is enabled', function () {
@@ -127,32 +115,21 @@ describe('The search-reducers factory', function () {
 
             //With fullscreen disabled, it doesn't change the viewCenter
             inputState.map.viewCenter = [52.123, 4.789];
-            inputState.map.isFullscreen = false;
+            inputState.stackedPanels = [];
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
 
             expect(output.map.viewCenter).toEqual([52.123, 4.789]);
 
             //With fullscreen enabled, it changes the viewCenter
-            inputState.map.isFullscreen = true;
+            inputState.stackedPanels = ['fullscreen'];
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
 
             expect(output.map.viewCenter).toEqual([52.001, 4.002]);
 
-            //With layer selection enabled
-            inputState.map.showLayerSelection = true;
+            //With layer selection enabled, it also changes the viewCenter
+            inputState.stackedPanels = ['layer-selection'];
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
             expect(output.map.viewCenter).toEqual([52.001, 4.002]);
-        });
-
-        it('disables the fullscreen mode of the map', function () {
-            var inputState = angular.copy(defaultState),
-                output;
-
-            inputState.map.isFullscreen = true;
-
-            output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
-
-            expect(output.map.isFullscreen).toBe(false);
         });
     });
 

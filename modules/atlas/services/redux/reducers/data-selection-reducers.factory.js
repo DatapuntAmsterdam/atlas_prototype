@@ -27,8 +27,6 @@
             newState.map.viewCenter = DEFAULT_STATE.map.viewCenter;
             newState.map.zoom = DEFAULT_STATE.map.zoom;
             newState.map.highlight = null;
-            newState.map.showLayerSelection = false;
-            newState.map.isFullscreen = false;
             newState.map.isLoading = false;
 
             newState.search = null;
@@ -37,6 +35,7 @@
             newState.straatbeeld = null;
 
             newState.dataSelection = payload;
+            newState.stackedPanels.length = 0;
 
             return newState;
         }

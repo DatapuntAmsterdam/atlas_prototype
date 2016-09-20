@@ -32,12 +32,11 @@
             };
 
             newState.map.highlight = null;
-            newState.map.showLayerSelection = false;
-            newState.map.isFullscreen = false;
             newState.page = null;
             newState.detail = null;
             newState.straatbeeld = null;
             newState.dataSelection = null;
+            newState.stackedPanels.length = 0;
 
             return newState;
         }
@@ -57,18 +56,17 @@
                 category: null
             };
 
-            if (oldState.map.showLayerSelection || oldState.map.isFullscreen) {
+            if (oldState.stackedPanels.length) {
                 newState.map.viewCenter = payload;
             }
 
             newState.map.highlight = null;
-            newState.map.showLayerSelection = false;
             newState.map.showActiveOverlays = false;
-            newState.map.isFullscreen = false;
             newState.page = null;
             newState.detail = null;
             newState.straatbeeld = null;
             newState.dataSelection = null;
+            newState.stackedPanels.length = 0;
 
             return newState;
         }

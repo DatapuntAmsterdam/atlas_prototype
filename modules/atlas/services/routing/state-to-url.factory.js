@@ -20,6 +20,7 @@
                 getDetailParams(state),
                 getStraatbeeldParams(state),
                 getDataSelectionParams(state),
+                getStackedPanelsParams(state),
                 getPrintParams(state)
             );
 
@@ -63,9 +64,7 @@
                 lagen: lagen.join(',') || null,
                 zoom: String(state.map.zoom),
                 selectie: state.map.highlight,
-                'kaartlagen-selectie': state.map.showLayerSelection ? 'aan' : null,
-                'actieve-kaartlagen': state.map.showActiveOverlays ? 'aan' : null,
-                'volledig-scherm': state.map.isFullscreen ? 'aan' : null
+                'actieve-kaartlagen': state.map.showActiveOverlays ? 'aan' : null
             };
         }
 
@@ -121,6 +120,22 @@
                 }
 
                 params['dataset-pagina'] = String(state.dataSelection.page);
+            }
+
+            return params;
+        }
+
+        function getStackedPanelsParams (state) {
+            var params = {},
+                translationsEnglishToDutch = {
+                    'fullscreen': 'volledig-scherm',
+                    'layer-selection': 'kaartlaag-selectie'
+                };
+
+            if (angular.isArray(state.stackedPanels) && state.stackedPanels.length) {
+                params.vensters = state.stackedPanels.map(function (panelNameEnglish) {
+                    return translationsEnglishToDutch[panelNameEnglish];
+                }).join(',');
             }
 
             return params;

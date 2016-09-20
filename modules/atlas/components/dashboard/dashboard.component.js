@@ -25,8 +25,9 @@
             vm.visibility = dashboardColumns.determineVisibility(state);
 
             vm.isPrintMode = state.isPrintMode;
+            vm.isMapFullscreen = state.stackedPanels[state.stackedPanels.length - 1] === 'fullscreen';
 
-            vm.isRightColumnScrollable = !state.map.isFullscreen &&
+            vm.isRightColumnScrollable = !vm.isMapFullscreen &&
                 (
                     vm.visibility.page ||
                     vm.visibility.detail ||
@@ -36,7 +37,7 @@
 
             vm.columnSizes = dashboardColumns.determineColumnSizes(
                 vm.visibility,
-                state.map.isFullscreen,
+                vm.isMapFullscreen,
                 vm.isPrintMode
             );
         }

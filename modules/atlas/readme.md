@@ -7,9 +7,7 @@
 | lagen               | map.overlays                    | no, []                 |
 | zoom                | map.zoom                        | yes, see DEFAULT_STATE |
 | selectie            | map.highlight                   | no, null               |
-| kaartlagen-selectie | map.showLayerSelection          | false                  |
 | actieve-kaartlagen  | map.showActiveOverlays          | false                  |
-| volledig-scherm     | map.isFullScreen                | false                  |
 |                     | map.isLoading                   | no                     |
 | pagina              | page                            | yes, see DEFAULT_STATE |
 | detail              | detail.uri                      | no, detail is null     |
@@ -24,3 +22,5 @@
 | fov                 | straatbeeld.camera.fov          | no                     |
 |                     | straatbeeld.hotspots            | no, []                 |
 |                     | straatbeeld.isLoading           | no                     |
+| vensters            | stackedPanels                   | []                     |
+| print-versie        | isPrintMode                     | false                  |

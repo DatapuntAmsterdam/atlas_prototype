@@ -12,9 +12,28 @@
         };
 
         function determineVisibility (state) {
-            var visibility = {};
+            var visibility = {},
+                stackedPanel = state.stackedPanels[state.stackedPanels.length - 1];
 
-            if (angular.isObject(state.dataSelection)) {
+            if (stackedPanel === 'fullscreen') {
+                visibility.map = true;
+
+                visibility.layerSelection = false;
+                visibility.detail = false;
+                visibility.page = false;
+                visibility.searchResults = false;
+                visibility.straatbeeld = false;
+                visibility.dataSelection = false;
+            } else if (stackedPanel === 'layer-selection') {
+                visibility.map = true;
+                visibility.layerSelection = true;
+
+                visibility.detail = false;
+                visibility.page = false;
+                visibility.searchResults = false;
+                visibility.straatbeeld = false;
+                visibility.dataSelection = false;
+            } else if (angular.isObject(state.dataSelection)) {
                 visibility.dataSelection = true;
 
                 visibility.map = false;
@@ -24,32 +43,19 @@
                 visibility.searchResults = false;
                 visibility.straatbeeld = false;
             } else {
-                if (!state.isPrintMode) {
-                    visibility.map = true;
-                } else {
-                    visibility.map = state.map.isFullscreen ||
-                        (
-                            !state.map.showLayerSelection &&
-                            (angular.isObject(state.detail) || angular.isObject(state.straatbeeld))
-                        );
-                }
+                visibility.map = true;
+                visibility.layerSelection = false;
 
-                visibility.layerSelection = state.map.showLayerSelection;
-
-                if (state.map.showLayerSelection || state.map.isFullscreen) {
-                    visibility.detail = false;
-                    visibility.page = false;
-                    visibility.searchResults = false;
-                    visibility.straatbeeld = false;
-                } else {
-                    visibility.detail = angular.isObject(state.detail);
-                    visibility.page = angular.isString(state.page);
-                    visibility.searchResults = angular.isObject(state.search) &&
-                        (angular.isString(state.search.query) || angular.isArray(state.search.location));
-                    visibility.straatbeeld = angular.isObject(state.straatbeeld);
-                }
-
+                visibility.detail = angular.isObject(state.detail);
+                visibility.page = angular.isString(state.page);
+                visibility.searchResults = angular.isObject(state.search) &&
+                    (angular.isString(state.search.query) || angular.isArray(state.search.location));
+                visibility.straatbeeld = angular.isObject(state.straatbeeld);
                 visibility.dataSelection = false;
+            }
+
+            if (state.isPrintMode && (visibility.page || visibility.searchResults || visibility.layerSelection)) {
+                visibility.map = false;
             }
 
             return visibility;

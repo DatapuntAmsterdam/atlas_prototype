@@ -44,7 +44,9 @@
                     <div ng-if="vm.visibility.map" ng-controller="MapController as vm">
                         <dp-map
                             map-state="vm.mapState"
-                            markers="vm.markers">
+                            markers="vm.markers"
+                            is-fullscreen="vm.isFullscreen"
+                            show-layer-selection="vm.showLayerSelection">
 
                         </dp-map>
                     </div>
