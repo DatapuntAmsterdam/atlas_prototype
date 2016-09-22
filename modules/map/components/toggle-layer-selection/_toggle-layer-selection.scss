@@ -6,6 +6,15 @@
   height: $button-size;
   cursor: pointer;
   z-index: 3;
+
+  &:hover ,
+  &:active {
+    color: inherit;
+
+    .c-toggle-layer-selection__icon {
+      background-image: url("assets/icons/link-active.svg");
+    }
+  }
 }
 
 .c-toggle-layer-selection__icon {
@@ -15,6 +24,7 @@
   left: 0;
   width: $button-size;
   height: $button-size;
+  background-image: url("assets/icons/link-hover.svg");
 }
 
 .c-toggle-layer-selection__icon--mirrored {

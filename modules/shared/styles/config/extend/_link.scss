@@ -19,6 +19,7 @@ $link-offset: $base-font-size;
 
   &:hover {
     color: $primary-contrast;
+    text-decoration: underline;
   }
 
   &:active {

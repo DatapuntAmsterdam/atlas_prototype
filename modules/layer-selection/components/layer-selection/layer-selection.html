@@ -2,13 +2,15 @@
     <div class="c-layer-selection__heading">
         Selecteer kaartlagen
 
-        <dp-link type="HIDE_LAYER_SELECTION" class-name="c-layer-selection__heading__close" hover-text="Sluiten">
-            <img class="c-layer-selection__heading__icon" width="26" height="26" src="assets/icons/close-hover.svg" alt="Sluiten">
+        <dp-link type="HIDE_LAYER_SELECTION" 
+                class-name="c-layer-selection__close" 
+                hover-text="Sluiten">
+            <span class="u-sr-only">sluiten</span>
         </dp-link>
     </div>
     <div class="c-layer-selection__content">
         <div class="u-margin__bottom--1">
-            <h2 class="o-header__subtitle u-margin__bottom--2-5 u-margin__top--2-5">Ondergrond</h2>
+            <h2 class="o-header__subtitle u-margin__bottom--1 u-margin__top--2-5">Ondergrond</h2>
             <ul class="u-margin__bottom--4">
                 <li ng-repeat="baseLayer in vm.allBaseLayers" class="c-layer-selection__item">
                     <label>
@@ -25,7 +27,7 @@
         </div>
 
         <div class="u-margin__bottom--1" ng-repeat="category in vm.allOverlays">
-            <h2 class="o-header__subtitle u-margin__bottom--2-5">{{category.heading}}</h2>
+            <h2 class="o-header__subtitle u-margin__bottom--1">{{category.heading}}</h2>
             <ul class="u-margin__bottom--4">
                 <li ng-repeat="overlay in category.overlays" class="c-layer-selection__item">
                     <label>

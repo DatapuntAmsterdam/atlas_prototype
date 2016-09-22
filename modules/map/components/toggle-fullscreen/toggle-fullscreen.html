@@ -1,3 +1,9 @@
-<button class="c-toggle-fullscreen" ng-click="vm.toggle()" title="{{vm.buttonText}}">
-    <img class="c-toggle-fullscreen__icon" ng-src="assets/icons/{{vm.buttonIcon}}.svg" alt="{{vm.buttonText}}">
+<button class="c-toggle-fullscreen"
+        ng-class="{
+            'c-toggle-fullscreen__icon--fullscreen': !vm.isFullscreen,
+            'c-toggle-fullscreen__icon--minimize': vm.isFullscreen
+        }"
+        ng-click="vm.toggle()"
+        title="{{vm.buttonText}}">
+    <span class="u-sr-only">{{vm.buttonText}}</span>
 </button>

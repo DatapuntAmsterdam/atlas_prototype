@@ -16,19 +16,19 @@
   line-height: $button-size;
 }
 
-.c-layer-selection__heading__close {
+.c-layer-selection__close {
   position: absolute;
   top: 0;
   right: -1px;
   width: $button-size;
   height: $button-size;
+  background-image: url("assets/icons/close-hover.svg");
+
+  &:hover {
+    background-image: url("assets/icons/close-active.svg");
+  }
 }
 
-.c-layer-selection__heading__icon {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
 
 .c-layer-selection__content {
   height: calc(100% - #{$button-size});

@@ -88,17 +88,10 @@ describe('The dp-toggle-layer-selection component', function () {
         expect(component.find('button').attr('title'))
             .not.toContain('Meer kaartlagen');
 
-        expect(component.find('img').attr('alt'))
-            .not.toContain('Meer kaartlagen');
-
-
         //When showActiveOverlays is true
         component = getComponent([], true);
 
         expect(component.find('button').attr('title'))
-            .toContain('Sluit paneel voor selecteren kaartlagen');
-
-        expect(component.find('img').attr('alt'))
             .toContain('Sluit paneel voor selecteren kaartlagen');
     });
 });

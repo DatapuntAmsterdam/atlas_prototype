@@ -354,18 +354,5 @@ describe('The atlas-layer-selection component', function () {
             expect(contentDiv.find('div').eq(2).find('li').eq(1).find('.qa-show-invisble-by-zoom').length).toBe(0);
             expect(contentDiv.find('div').eq(2).find('li').eq(2).find('.qa-show-invisble-by-zoom').length).toBe(0);
         });
-
-        it('has a button to close the layer selection sidebar', function () {
-            var component = getComponent('base_layer_a', [], 8),
-                contentDiv = component.find('.c-layer-selection__content');
-
-            //overlay_2_b
-            expect(contentDiv.find('div').eq(2).find('li').eq(1).text())
-                .not.toContain('(deze kaartlaag is niet zichtbaar op dit zoomniveau)');
-
-            //overlay_2_c
-            expect(contentDiv.find('div').eq(2).find('li').eq(2).text())
-                .not.toContain('(deze kaartlaag is niet zichtbaar op dit zoomniveau)');
-        });
     });
 });

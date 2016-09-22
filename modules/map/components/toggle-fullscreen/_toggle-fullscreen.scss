@@ -14,3 +14,19 @@
   top: 0;
   right: 0;
 }
+
+.c-toggle-fullscreen__icon--fullscreen {
+  background-image: url("assets/icons/fullscreen.svg");
+
+  &:hover {
+    background-image: url("assets/icons/fullscreen-active.svg");
+  }
+}
+
+.c-toggle-fullscreen__icon--minimize {
+  background-image: url("assets/icons/minimize.svg");
+
+  &:hover {
+    background-image: url("assets/icons/minimize-active.svg");
+  }
+}
