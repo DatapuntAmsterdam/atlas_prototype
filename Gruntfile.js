@@ -17,6 +17,7 @@ module.exports = function (grunt) {
         copy: require('./grunt/copy'),
         jshint: require('./grunt/jshint'),
         karma: require('./grunt/karma'),
+        ngdocs: require('./grunt/ngdocs'),
         ngtemplates: require('./grunt/angular-templates'),
         postcss: require('./grunt/postcss')(grunt),
         sass: require('./grunt/sass'),
@@ -105,4 +106,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-sass-lint');
     grunt.loadNpmTasks('grunt-script-link-tags');
+    grunt.loadNpmTasks('grunt-ngdocs');
 };

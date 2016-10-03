@@ -28,7 +28,8 @@
     "karma-mocha-reporter": "^2.0.3",
     "karma-phantomjs-launcher": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.7",
-    "shortid": "^2.2.6"
+    "shortid": "^2.2.6",
+    "grunt-ngdocs": "^0.2.10"
   },
   "scripts": {
     "postinstall": "bower install",
