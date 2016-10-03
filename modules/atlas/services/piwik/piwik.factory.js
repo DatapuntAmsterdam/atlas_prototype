@@ -1,3 +1,13 @@
+/*
+ * @ngdoc service
+ * @name atlas.factory: piwik
+ * @requires $window, $document, environment, PIWIK_CONFIG
+ * @returns
+ * An object containing a single item, the initialize function with 'initialize' as key
+ * @description
+ * Factory function used to generate a piwik init call. The init call is used to add piwik
+ * to the atlas application
+*/
 (function () {
     'use strict';
 

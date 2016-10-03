@@ -1,7 +1,5 @@
-module.export = {
+module.exports = {
 	all: [
-		'Gruntfile.js',
-        'grunt/**/*.js',
-        'modules/**/*.js'
+        'modules/**/*.js',
 	]
 };
