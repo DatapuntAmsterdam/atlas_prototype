@@ -99,41 +99,6 @@ describe('The autocompleteData factory', function () {
         expect(suggestions.data[1].content[1].index).toBe(2);
     });
 
-    it('can cancel outstanding search requests', function () {
-        var hasBeenCancelled = false;
-
-        autocompleteData.search('linnae').catch(function (reason) {
-            hasBeenCancelled = true;
-
-            expect(reason).toBe('cancelled');
-        });
-
-        autocompleteData.cancel();
-        $rootScope.$apply();
-
-        expect(hasBeenCancelled).toBe(true);
-    });
-
-    it('won\'t cancel anything if there is no search request pending', function () {
-        var cancelCounter = 0;
-
-        autocompleteData.cancel();
-        autocompleteData.search('linnae').catch(function () {
-            cancelCounter++;
-        });
-
-        //Make sure the request is done and thus no longer pending
-        autocompleteData.cancel();
-        $rootScope.$apply();
-        expect(cancelCounter).toBe(1);
-
-        //There is nothing to cancel right now
-        autocompleteData.cancel();
-        $rootScope.$apply();
-
-        expect(cancelCounter).toBe(1);
-    });
-
     it('can get the active search suggestion', function () {
         var mockedFormattedSearchResults = [
             {
