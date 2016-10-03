@@ -15,7 +15,7 @@
         var vm = this;
 
         vm.isLoading = true;
-
+        
         api.getByUri('metadata/').then(function (data) {
             vm.isLoading = false;
 

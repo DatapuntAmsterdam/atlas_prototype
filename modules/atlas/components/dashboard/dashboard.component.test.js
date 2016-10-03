@@ -25,7 +25,7 @@ describe('The dashboard component', function () {
             $provide.factory('dpMapDirective', function(){
                 return {};
             });
-            $provide.factory('dpStraatbeeldDirective', function(){
+            $provide.factory('dpPanoramaDirective', function(){
                 return {};
             });
             $provide.factory('dpDataSelectionDirective', function(){
@@ -158,12 +158,12 @@ describe('The dashboard component', function () {
         });
     });
 
-    describe('do not use scrollable content for straatbeeld', function () {
+    describe('do not use scrollable content for panorama', function () {
         var component,
             mockedVisibility = {};
 
         beforeEach(function () {
-            mockedVisibility['straatbeeld'] = true;
+            mockedVisibility['panorama'] = true;
 
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
 

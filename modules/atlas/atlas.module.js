@@ -9,7 +9,7 @@
             'atlasSearchResults',
             'atlasLayerSelection',
             'dpMap',
-            'dpStraatbeeld',
+            'dpPanorama',
             'dpDataSelection',
 
             'dpShared'

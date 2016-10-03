@@ -72,10 +72,9 @@
 
                     icon = L.icon(ICON_CONFIG[item.id]);
                     rotationAngle = item.orientation || 0;
-
                     return L.marker(latLng, {
                         icon: icon,
-                        rotationAngle: angleConversion.radiansToDegrees(rotationAngle)
+                        rotationAngle: rotationAngle
                     });
                 }
             });

@@ -28,7 +28,7 @@ describe('The dashboardColumns factory', function () {
 
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
@@ -54,7 +54,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
                 expect(visibility.map).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
@@ -100,7 +100,7 @@ describe('The dashboardColumns factory', function () {
                     expect(visibility.layerSelection).toBe(false);
                     expect(visibility.detail).toBe(false);
                     expect(visibility.page).toBe(false);
-                    expect(visibility.straatbeeld).toBe(false);
+                    expect(visibility.panorama).toBe(false);
                     expect(visibility.dataSelection).toBe(false);
                 });
 
@@ -126,7 +126,7 @@ describe('The dashboardColumns factory', function () {
                     expect(visibility.detail).toBe(false);
                     expect(visibility.map).toBe(false);
                     expect(visibility.page).toBe(false);
-                    expect(visibility.straatbeeld).toBe(false);
+                    expect(visibility.panorama).toBe(false);
                     expect(visibility.dataSelection).toBe(false);
                 });
 
@@ -159,7 +159,7 @@ describe('The dashboardColumns factory', function () {
 
                 expect(visibility.layerSelection).toBe(false);
                 expect(visibility.page).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
@@ -185,7 +185,7 @@ describe('The dashboardColumns factory', function () {
 
                 expect(visibility.layerSelection).toBe(false);
                 expect(visibility.page).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
@@ -198,9 +198,9 @@ describe('The dashboardColumns factory', function () {
         });
     });
 
-    describe('when visiting straatbeeld', function () {
+    describe('when visiting panorama', function () {
         beforeEach(function () {
-            mockedState.straatbeeld = {};
+            mockedState.panorama = {};
             mockedState.page = null;
         });
 
@@ -212,9 +212,9 @@ describe('The dashboardColumns factory', function () {
                 columnSizes = dashboardColumns.determineColumnSizes(visibility, false, false);
             });
 
-            it('makes the map and straatbeeld visibile', function () {
+            it('makes the map and panorama visibile', function () {
                 expect(visibility.map).toBe(true);
-                expect(visibility.straatbeeld).toBe(true);
+                expect(visibility.panorama).toBe(true);
 
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
@@ -238,9 +238,9 @@ describe('The dashboardColumns factory', function () {
                 columnSizes = dashboardColumns.determineColumnSizes(visibility, false, true);
             });
 
-            it('makes the map and straatbeeld visibile', function () {
+            it('makes the map and panorama visibile', function () {
                 expect(visibility.map).toBe(true);
-                expect(visibility.straatbeeld).toBe(true);
+                expect(visibility.panorama).toBe(true);
 
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
@@ -280,7 +280,7 @@ describe('The dashboardColumns factory', function () {
 
                 expect(visibility.detail).toBe(false);
                 expect(visibility.page).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
@@ -306,7 +306,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.detail).toBe(false);
                 expect(visibility.map).toBe(false);
                 expect(visibility.page).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
@@ -339,7 +339,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
                 expect(visibility.page).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
@@ -365,7 +365,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
                 expect(visibility.page).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
@@ -408,7 +408,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.layerSelection).toBe(false);
                 expect(visibility.page).toBe(false);
                 expect(visibility.searchResults).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
             });
 
             it('left column: 0/3, middle column: 0/3, right column 3/3', function () {
@@ -433,7 +433,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.layerSelection).toBe(false);
                 expect(visibility.page).toBe(false);
                 expect(visibility.searchResults).toBe(false);
-                expect(visibility.straatbeeld).toBe(false);
+                expect(visibility.panorama).toBe(false);
             });
 
             it('left column: 0/3, middle column: 0/3, right column 3/3', function () {

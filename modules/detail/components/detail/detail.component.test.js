@@ -212,7 +212,7 @@ describe('the atlas-detail component', function() {
         });
     });
 
-    it('sets the center location of the geometry on the scope (for the straatbeeld thumbnail)', function () {
+    it('sets the center location of the geometry on the scope (for the panorama thumbnail)', function () {
         var component,
             scope;
 

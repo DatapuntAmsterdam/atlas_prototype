@@ -54,7 +54,8 @@ describe('The highlight factory', function () {
                     type: 'Point',
                     coordinates: [100.0, 0.0]
                 },
-                useAutoFocus: false
+                useAutoFocus: false,
+                orientation: 179
             }
         },
         mockedLayer = {
@@ -123,8 +124,7 @@ describe('The highlight factory', function () {
                         foo: 'c'
                     },
                     item_rotated_marker: {
-                        foo: 'd',
-                        orientation: Math.PI
+                        foo: 'd'
                     }
                 });
             }
@@ -138,7 +138,7 @@ describe('The highlight factory', function () {
             geojson = _geojson_;
             store = _store_;
             ACTIONS = _ACTIONS_;
-        });
+        }); 
 
         mockedLeafletMap = {
             addLayer: function () {},
@@ -250,7 +250,7 @@ describe('The highlight factory', function () {
 
         expect(L.marker).toHaveBeenCalledWith('FAKE_LATLNG', {
             icon: 'FAKE_ICON',
-            rotationAngle: 180
+            rotationAngle: 179
         });
     });
 

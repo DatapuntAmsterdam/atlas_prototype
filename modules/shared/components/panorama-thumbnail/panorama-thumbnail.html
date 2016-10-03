@@ -1,0 +1,9 @@
+<h3 class="o-header__subtitle u-margin__bottom--2-5">Panorama</h3>
+
+<button ng-if="vm.hasThumbnail" class="u-block u-width-100 u-margin__bottom--4" ng-click="vm.openPanorama()" title="Panorama preview">
+    <div class="u-aspect-ratio u-aspect-ratio--16-9">
+        <img ng-src="{{vm.imageUrl}}" alt="Panorama preview">
+    </div>
+</button>
+<div class="qa-found-no-panorama" ng-if="!vm.isLoading && !vm.hasThumbnail">Op deze locatie is binnen {{ vm.radius }} meter geen panorama gevonden.</div>
+<dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>

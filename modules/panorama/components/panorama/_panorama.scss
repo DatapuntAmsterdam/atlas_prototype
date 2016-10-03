@@ -1,0 +1,32 @@
+.c-panorama {
+  position: absolute;
+  top: $base-whitespace * 2;
+  right: $base-whitespace;
+  bottom: $base-whitespace * 2;
+  left: $base-whitespace;
+  z-index: 1;
+}
+
+.c-panorama__marzipano {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: $button-size;
+  left: 0;
+  border-width: 1px 1px 0;
+  border-style: solid;
+  border-color: $secondary-gray40;
+}
+
+.c-panorama__status-bar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: $button-size;
+  padding-right: $base-whitespace;
+  background-color: $secondary-gray60;
+  color: $primary-light;
+  line-height: $button-size;
+  z-index: 2;
+}

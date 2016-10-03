@@ -70,7 +70,7 @@ describe('The atlas-search-results component', function () {
                     ]
                 });
 
-                $provide.factory('dpStraatbeeldThumbnailDirective', function () {
+                $provide.factory('dpPanoramaThumbnailDirective', function () {
                     return {};
                 });
 
@@ -385,10 +385,10 @@ describe('The atlas-search-results component', function () {
             });
         });
 
-        it('doesn\'t show the dp-straatbeeld-thumbnail component', function () {
+        it('doesn\'t show the dp-panorama-thumbnail component', function () {
             var component = getComponent('Weesperstraat');
 
-            expect(component.find('dp-straatbeeld-thumbnail').length).toBe(0);
+            expect(component.find('dp-panorama-thumbnail').length).toBe(0);
         });
 
         describe('has category support', function () {
@@ -610,8 +610,8 @@ describe('The atlas-search-results component', function () {
             expect(component.find('dp-link').length).toBe(numberOfDpLinks - 1);
         });
 
-        it('shows the dp-straatbeeld-thumbnail component', function () {
-            expect(component.find('dp-straatbeeld-thumbnail').length).toBe(1);
+        it('shows the dp-panorama-thumbnail component', function () {
+            expect(component.find('dp-panorama-thumbnail').length).toBe(1);
         });
     });
 

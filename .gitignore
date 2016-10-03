@@ -6,3 +6,4 @@ docs
 node_modules
 reports
 *.iml
+.vscode

@@ -1,0 +1,9 @@
+<div class="c-panorama">
+    <div class="c-panorama__marzipano js-marzipano-viewer" ng-mousemove="updateOrientation()"></div>
+
+    <div class="c-panorama__status-bar">
+        <dp-panorama-metadata date="state.date" location="state.location"></dp-panorama-metadata>
+    </div>
+</div>
+
+<dp-loading-indicator is-loading="state.isLoading" use-delay="true" show-inline="false"></dp-loading-indicator>

@@ -1,0 +1,9 @@
+@import "../shared/styles/config";
+
+@import "components/hotspot/hotspot";
+@import "components/panorama/panorama";
+
+.is-print-mode {
+  @import "components/panorama/panorama-print";
+  @import "components/metadata/metadata-print";
+}

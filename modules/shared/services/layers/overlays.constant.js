@@ -155,8 +155,8 @@
                 },
                 panorama_rijlijnen_2012: {
                     url: 'maps/panorama',
-                    label_short: 'Straatbeeld rijlijnen 2012',
-                    label_long: 'Straatbeeld rijlijnen 2012',
+                    label_short: 'Panorama rijlijnen 2012',
+                    label_long: 'Panorama rijlijnen 2012',
                     layers: ['panorama'],
                     minZoom: 11,
                     maxZoom: 16,
