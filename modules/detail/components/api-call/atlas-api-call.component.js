@@ -16,13 +16,13 @@
 
     AtlasApiCallController.$inject = ['$scope', 'api'];
 
-    /*
-    * @ngdoc controller
-    * @name detail.controller:AtlasApiCallController
-    *
-    * @description
-    * Dit is een test
-    */
+/**
+* @ngdoc controller
+* @name detail.controller:AtlasApiCallController
+* @description
+* Dit is een test
+*/
+
     function AtlasApiCallController ($scope, api) {
         var vm = this;
 

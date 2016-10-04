@@ -1,5 +1,5 @@
 module.exports = {
 	all: [
-        'modules/**/*.js',
+        	'modules/**/*.js',
 	]
 };
