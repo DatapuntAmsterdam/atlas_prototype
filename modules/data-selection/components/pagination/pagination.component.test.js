@@ -72,12 +72,14 @@ describe('The dp-data-selection-pagination component', function () {
 
         expect(scope.vm.firstPage).toEqual({
             label: 'Eerste',
+            class_name: 'c-data-selection-pagination-link--first',
             page: 1,
             enabled: false
         });
 
         expect(scope.vm.previousPage).toEqual({
             label: 'Vorige',
+            class_name: 'c-data-selection-pagination-link--previous',
             page: null,
             enabled: false
         });
@@ -88,12 +90,14 @@ describe('The dp-data-selection-pagination component', function () {
 
         expect(scope.vm.firstPage).toEqual({
             label: 'Eerste',
+            class_name: 'c-data-selection-pagination-link--first',
             page: 1,
             enabled: true
         });
 
         expect(scope.vm.previousPage).toEqual({
             label: 'Vorige',
+            class_name: 'c-data-selection-pagination-link--previous',
             page: 12,
             enabled: true
         });
@@ -109,12 +113,14 @@ describe('The dp-data-selection-pagination component', function () {
 
         expect(scope.vm.nextPage).toEqual({
             label: 'Volgende',
+            class_name: 'c-data-selection-pagination-link--next',
             page: null,
             enabled: false
         });
 
         expect(scope.vm.lastPage).toEqual({
             label: 'Laatste',
+            class_name: 'c-data-selection-pagination-link--last',
             page: 14,
             enabled: false
         });
@@ -125,12 +131,14 @@ describe('The dp-data-selection-pagination component', function () {
 
         expect(scope.vm.nextPage).toEqual({
             label: 'Volgende',
+            class_name: 'c-data-selection-pagination-link--next',
             page: 14,
             enabled: true
         });
 
         expect(scope.vm.lastPage).toEqual({
             label: 'Laatste',
+            class_name: 'c-data-selection-pagination-link--last',
             page: 14,
             enabled: true
         });

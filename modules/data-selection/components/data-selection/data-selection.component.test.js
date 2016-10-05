@@ -59,7 +59,8 @@ describe('The dp-data-selection component', function () {
         };
 
         mockedApiData = {
-            number_of_pages: 7,
+            number_of_pages: 107,
+            number_of_records: 77,
             filters: 'MOCKED_FILTER_DATA',
             tableData: 'MOCKED_TABLE_DATA'
         };
@@ -106,7 +107,9 @@ describe('The dp-data-selection component', function () {
         expect(component.find('dp-data-selection-pagination').attr('current-page')).toBe('vm.currentPage');
         expect(component.find('dp-data-selection-pagination').attr('number-of-pages')).toBe('vm.numberOfPages');
         expect(scope.vm.currentPage).toBe(2);
-        expect(scope.vm.numberOfPages).toBe(7);
+        expect(scope.vm.numberOfPages).toBe(107);
+        expect(scope.vm.numberOfRecords).toBe(77);
+        expect(scope.vm.noDataToDisplay).toBe(false);
     });
 
     it('retrieves new data when the state changes', function () {
@@ -123,4 +126,17 @@ describe('The dp-data-selection component', function () {
         expect(dataSelectionApi.query).toHaveBeenCalledTimes(2);
         expect(scope.vm.currentPage).toBe(3);
     });
+
+    it('cannot show more than 100 pages', function () {
+        var component = getComponent(mockedState),
+            scope = component.isolateScope();
+
+        //Change the state
+        scope.vm.state.page = 101;
+        $rootScope.$apply();
+
+        expect(scope.vm.currentPage).toBe(101);
+        expect(scope.vm.noDataToDisplay).toBe(true);
+    });
+
 });

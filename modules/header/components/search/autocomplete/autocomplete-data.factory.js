@@ -8,32 +8,25 @@
     autocompleteDataService.$inject = ['$q', '$http', 'environment', 'HEADER_CONFIG'];
 
     function autocompleteDataService ($q, $http, environment, HEADER_CONFIG) {
-        var request;
 
         return {
             search: search,
-            cancel: cancel,
             getSuggestionByIndex: getSuggestionByIndex
         };
 
         function search (query) {
-            //An $http call can't be aborted, hence the $q promise and it's reject method
-            request = $q.defer();
-
-            $http({
+            return $http({
                 method: 'GET',
                 url: environment.API_ROOT + HEADER_CONFIG.AUTOCOMPLETE_ENDPOINT,
                 params: {
                     q: query
                 }
             }).then(function (response) {
-                request.resolve(formatData(response.data));
+                return formatData(response.data, query);
             });
-
-            return request.promise;
         }
 
-        function formatData (categories) {
+        function formatData (categories, query) {
             var suggestionIndex = 0,
                 numberOfResults = 0;
 
@@ -48,14 +41,9 @@
 
             return {
                 count: numberOfResults,
-                data: categories
+                data: categories,
+                query: query
             };
-        }
-
-        function cancel () {
-            if (angular.isDefined(request)) {
-                request.reject('cancelled');
-            }
         }
 
         function getSuggestionByIndex (searchResults, index) {

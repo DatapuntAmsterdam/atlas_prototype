@@ -34,7 +34,7 @@ module.exports = {
     bower_leaflet_images: {
         files: [
             {
-                cwd: 'bower_components/leaflet/images',
+                cwd: 'bower_components/leaflet/dist/images',
                 src: [
                     '**/*.png'
                 ],

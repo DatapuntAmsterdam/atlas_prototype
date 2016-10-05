@@ -1,13 +1,25 @@
-<table class="o-table">
+<table class="o-table c-data-selection-table__table">
     <thead>
         <tr>
-            <th ng-repeat="field in vm.content.head track by $index">{{field}}</th>
+            <th ng-class="vm.classForField(vm.content.format[$index])"
+                ng-repeat="field in vm.content.head track by $index">
+                <dp-data-selection-formatted-value
+                    value="field"
+                    format="vm.content.format[$index]">
+
+                </dp-data-selection-formatted-value>
+            </th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="row in vm.content.body track by $index" ng-click="vm.followLink(row.detailEndpoint)">
-            <td ng-repeat="field in row.fields track by $index">
-                {{field}}
+            <td ng-class="vm.classForField(vm.content.format[$index])"
+                ng-repeat="field in row.fields track by $index">
+                <dp-data-selection-formatted-value
+                    value="field"
+                    format="vm.content.format[$index]">
+
+                </dp-data-selection-formatted-value>
             </td>
         </tr>
     </tbody>

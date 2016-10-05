@@ -1,10 +1,6 @@
 <div class="o-header">
-    <h3 class="o-header__subtitle" 
-        ng-class="{
-            'u-margin__bottom--2-5': !vm.heading,
-            'u-margin__bottom--1': vm-heading
-        }">
-        {{vm.stelselpedia.label}}
+    <h3 class="o-header__subtitle">
+        {{vm.stelselpediaLabel}}
     </h3>
     <h2 ng-if="vm.heading" class="o-header__title u-margin__bottom--3">
         <span ng-bind-html="vm.htmlHeading"></span>
@@ -40,10 +36,10 @@
     </div>
 
     <div ng-if="vm.isVisible('help')" class="c-stelselpedia">
-        <h4>Uitleg over {{vm.stelselpedia.label | lowercase}}</h4>
-        <p>{{vm.stelselpedia.description}}</p>
+        <h4>Uitleg over {{vm.stelselpediaLabel | lowercase}}</h4>
+        <p>{{vm.stelselpediaDescription}}</p>
 
-        <a class="o-link--arrow" ng-href="{{vm.stelselpedia.url}}" target="_blank">
+        <a class="o-link--arrow" ng-href="{{vm.stelselpediaUrl}}" target="_blank">
             Lees verder op stelselpedia
         </a>
 
@@ -53,7 +49,7 @@
     </div>
 
     <div ng-if="vm.hasMetaData && vm.isVisible('meta')" class="c-metadata">
-        <h4>Metadata van {{vm.stelselpedia.label | lowercase}}</h4>
+        <h4>Metadata van {{vm.stelselpediaLabel | lowercase}}</h4>
 
         <atlas-stelselpedia-meta definition="{{vm.definition}}" api-data="vm.metaData"></atlas-stelselpedia-meta>
 

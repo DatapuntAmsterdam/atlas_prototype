@@ -20,7 +20,6 @@
         function showLayerSelectionReducer (oldState) {
             var newState = angular.copy(oldState);
 
-            newState.map.isFullscreen = false;
             newState.map.showLayerSelection = true;
 
             return newState;

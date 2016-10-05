@@ -12,10 +12,19 @@
             controllerAs: 'vm'
         });
 
-    DpDataSelectionTableController.$inject = ['store', 'ACTIONS'];
+    DpDataSelectionTableController.$inject = ['store', '$filter', 'ACTIONS'];
 
-    function DpDataSelectionTableController (store, ACTIONS) {
+    function DpDataSelectionTableController (store, $filter, ACTIONS) {
         var vm = this;
+
+        vm.classForField = function (format) {
+            switch(format && format.align) {
+                case 'right':
+                    return 'u-align--right';
+                default:
+                    return '';
+            }
+        };
 
         vm.followLink = function (endpoint) {
             store.dispatch({

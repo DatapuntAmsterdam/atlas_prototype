@@ -27,12 +27,20 @@ describe('The dp-data-selection-table component', function () {
                 'Field A',
                 'Field B'
             ],
+            format: [
+                {
+                    align: 'right'
+                },
+                {
+                    filters: ['postcode']
+                }
+            ],
             body: [
                 {
                     detailEndpoint: 'http://www.example.com/detail/123/',
                     fields: [
                         'Cell A1',
-                        'Cell B1'
+                        '1234AB'
                     ]
                 },
                 {
@@ -72,7 +80,7 @@ describe('The dp-data-selection-table component', function () {
         return component;
     }
 
-    it('renders an HTML table', function () {
+    it('renders an HTML table and applies any filters and formats', function () {
         var component;
 
         component = getComponent(mockedContent);
@@ -89,7 +97,11 @@ describe('The dp-data-selection-table component', function () {
 
         expect(component.find('tbody tr:nth-child(1) td').length).toBe(2);
         expect(component.find('tbody tr:nth-child(1) td:nth-child(1)').text()).toContain('Cell A1');
-        expect(component.find('tbody tr:nth-child(1) td:nth-child(2)').text()).toContain('Cell B1');
+        expect(component.find('tbody tr:nth-child(1) td:nth-child(1)').attr('class'))
+            .toContain('u-align--right');
+        expect(component.find('tbody tr:nth-child(1) td:nth-child(2)').text()).toContain('1234 AB');
+        expect(component.find('tbody tr:nth-child(1) td:nth-child(2)').attr('class'))
+            .not.toContain('data-selection__align__right');
 
         expect(component.find('tbody tr:nth-child(2) td').length).toBe(2);
         expect(component.find('tbody tr:nth-child(2) td:nth-child(1)').text()).toContain('Cell A2');

@@ -151,10 +151,12 @@ describe('The dataSelectionApi factory', function () {
                     options: [
                         {
                             label: 'Buitenbad',
+                            format: undefined,
                             count: 4
                         },
                         {
                             label: 'Overdekt',
+                            format: undefined,
                             count: 2
                         }
                     ]
@@ -165,12 +167,15 @@ describe('The dataSelectionApi factory', function () {
                     options: [
                         {
                             label: 'Tropisch',
+                            format: undefined,
                             count: 1
                         }, {
                             label: 'Verwarmd',
+                            format: undefined,
                             count: 4
                         }, {
                             label: 'Koud',
+                            format: undefined,
                             count: 1
                         }
                     ]

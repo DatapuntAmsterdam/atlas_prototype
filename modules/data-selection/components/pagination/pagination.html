@@ -1,19 +1,17 @@
-<div ng-if="vm.showPagination">
-    <dp-data-selection-pagination-link link="vm.firstPage"></dp-data-selection-pagination-link>
-    <dp-data-selection-pagination-link link="vm.previousPage"></dp-data-selection-pagination-link>
-
-    <form ng-submit="vm.goToPage($event)">
-        <fieldset>
-            <label>
-                <span class="u-sr-only">Paginanummer</span>
-                <input ng-model="vm.targetPage" type="number">
-            </label>
-            <button type="submit">
-                Ga
-            </button>
-        </fieldset>
+<div class="c-data-selection-pagination" ng-if="vm.showPagination">
+    <hr>
+    <div class="u-pull--left c-data-selection-page__form__links">
+        <dp-data-selection-pagination-link link="vm.firstPage"></dp-data-selection-pagination-link>
+        <dp-data-selection-pagination-link link="vm.previousPage"></dp-data-selection-pagination-link>
+    </div>
+    <form class="u-inline-block" ng-submit="vm.goToPage($event)">
+        <strong>Ga naar pagina</strong>
+        <input ng-model="vm.currentPage" type="number" class="c-data-selection-pagination__input" pattern="\d*" size="4">
+        <button type="submit" class="c-data-selection-pagination__button" ></button>
+        <strong class="u-margin__left--1">van {{ vm.numberOfPages }}</strong>
     </form>
-
-    <dp-data-selection-pagination-link link="vm.nextPage"></dp-data-selection-pagination-link>
-    <dp-data-selection-pagination-link link="vm.lastPage"></dp-data-selection-pagination-link>
+    <div class="u-pull--right c-data-selection-page__form__links">
+        <dp-data-selection-pagination-link link="vm.nextPage"></dp-data-selection-pagination-link>
+        <dp-data-selection-pagination-link link="vm.lastPage"></dp-data-selection-pagination-link>
+    </div>
 </div>

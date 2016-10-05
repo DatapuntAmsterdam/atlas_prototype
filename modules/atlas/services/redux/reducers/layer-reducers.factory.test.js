@@ -20,14 +20,14 @@ describe('The layerReducers factory', function () {
             expect(output.map.showLayerSelection).toBe(true);
         });
 
-        it('disables the fullscreen mode', function () {
+        it('leaves the fullscreen mode as is', function () {
             var output,
                 inputState = angular.copy(DEFAULT_STATE);
 
             inputState.map.isFullscreen = true;
-            output = layerReducers[ACTIONS.SHOW_LAYER_SELECTION](DEFAULT_STATE);
+            output = layerReducers[ACTIONS.SHOW_LAYER_SELECTION](inputState);
 
-            expect(output.map.isFullscreen).toBe(false);
+            expect(output.map.isFullscreen).toBe(true);
         });
     });
 

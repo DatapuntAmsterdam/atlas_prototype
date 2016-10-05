@@ -123,27 +123,27 @@ describe('The dp-data-selection-filters component', function () {
         var component = getComponent({}, false);
 
         expect(component.find('.qa-available-filters').length).toBe(1);
-        expect(component.find('.qa-available-filters h2').text()).toBe('Beschikbare filters');
+        expect(component.find('.qa-available-filters h2').text()).toBe('');
 
         //The first filter
         expect(component.find('.qa-available-filters h3').eq(0).text()).toBe('Filter A');
         expect(component.find('.qa-available-filters ul').eq(0).find('li').length).toBe(10);
 
         expect(component.find('.qa-available-filters ul').eq(0).find('li button').eq(0).text()).toContain('Optie A-1');
-        expect(component.find('.qa-available-filters ul').eq(0).find('li').eq(0).text()).toContain('(11)');
+        expect(component.find('.qa-available-filters ul').eq(0).find('li').eq(0).text()).not.toContain('(11)');
 
         expect(component.find('.qa-available-filters ul').eq(0).find('li button').eq(9).text()).toContain('Optie A-10');
-        expect(component.find('.qa-available-filters ul').eq(0).find('li').eq(9).text()).toContain('(20)');
+        expect(component.find('.qa-available-filters ul').eq(0).find('li').eq(9).text()).not.toContain('(20)');
 
         //The second filter
         expect(component.find('.qa-available-filters h3').eq(1).text()).toBe('Filter B');
         expect(component.find('.qa-available-filters ul').eq(1).find('li').length).toBe(3);
 
         expect(component.find('.qa-available-filters ul').eq(1).find('li button').eq(0).text()).toContain('Optie B-1');
-        expect(component.find('.qa-available-filters ul').eq(1).find('li').eq(0).text()).toContain('(4)');
+        expect(component.find('.qa-available-filters ul').eq(1).find('li').eq(0).text()).not.toContain('(4)');
 
         expect(component.find('.qa-available-filters ul').eq(1).find('li button').eq(2).text()).toContain('Optie B-3');
-        expect(component.find('.qa-available-filters ul').eq(1).find('li').eq(2).text()).toContain('(6)');
+        expect(component.find('.qa-available-filters ul').eq(1).find('li').eq(2).text()).not.toContain('(6)');
     });
 
     describe('it dispatches an action when a filter has been added', function () {
@@ -287,7 +287,7 @@ describe('The dp-data-selection-filters component', function () {
         });
     });
 
-    it('shows a maximum of 10 options per category, it can expand when it has more than 10 results', function () {
+    it('shows maximum of 10 options per category, it can expand/implode when it has more than 10 results', function () {
         var component;
 
         //When there are 10 or less available options
@@ -326,6 +326,17 @@ describe('The dp-data-selection-filters component', function () {
 
         //Make sure the show more button is gone now
         expect(component.find('.qa-available-filters > div').eq(0).text()).not.toContain('Toon meer');
+        //Make sure the show less button is shown
+        expect(component.find('.qa-available-filters > div').eq(0).text()).toContain('Toon minder');
+
+        //Click the show less button
+        component.find('.qa-available-filters > div').eq(0).find('button').click();
+        $rootScope.$apply();
+
+        //Make sure the show less button is gone now
+        expect(component.find('.qa-available-filters > div').eq(0).text()).not.toContain('Toon minder');
+        //Make sure the show more button is shown
+        expect(component.find('.qa-available-filters > div').eq(0).text()).toContain('Toon meer');
     });
 
     it('expanded categories have a message when there are more options that 100', function () {

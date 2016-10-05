@@ -10,59 +10,11 @@ describe('The atlas-api-call component', function () {
             'atlasDetail',
             {
                 api: {
-                    getByUrl: function (endpoint) {
-                        var q = $q.defer(),
-                            mockedResponse;
-
-                        switch (endpoint) {
-                            case 'http://www.some-domain.com/without-pagination/123/':
-                                mockedResponse = {
-                                    var_a: 'foo',
-                                    var_b: 'bar'
-                                };
-
-                                break;
-
-                            case 'http://www.some-domain.com/with-pagination/456/':
-                                mockedResponse = {
-                                    count: 5,
-                                    results: ['ITEM_1', 'ITEM_2', 'ITEM_3'],
-                                    _links: {
-                                        next: {
-                                            href: 'http://www.some-domain.com/with-pagination/456/?page=2'
-                                        }
-                                    }
-                                };
-
-                                break;
-
-
-                            case 'http://www.some-domain.com/with-pagination/456/?page=2':
-                                mockedResponse = {
-                                    count: 5,
-                                    results: ['ITEM_4', 'ITEM_5'],
-                                    _links: {
-                                        next: null
-                                    }
-                                };
-
-                                break;
-
-                            case 'http://www.some-domain.com/something/123/':
-                            case 'http://www.some-domain.com/brk/object/123/':
-                            case 'http://www.some-domain.com/brk/object-expand/123/':
-                                mockedResponse = {
-                                    var_c: 'baz'
-                                };
-
-                                break;
-                        }
-
-                        finishApiRequest = function () {
-                            q.resolve(mockedResponse);
-                        };
-
-                        return q.promise;
+                    getByUrl: function(endpoint) {
+                        return getByUrlMock(endpoint);
+                    },
+                    getByUri: function(endpoint) {
+                        return getByUrlMock('http://www.some-domain.com/' + endpoint);
                     }
                 }
             },
@@ -87,9 +39,65 @@ describe('The atlas-api-call component', function () {
         finishApiRequest = null;
 
         spyOn(api, 'getByUrl').and.callThrough();
+        spyOn(api, 'getByUri').and.callThrough();
     });
 
-    function getComponent (endpoint, partial, useBrkObjectExpanded) {
+    function getByUrlMock(endpoint) {
+        var q = $q.defer(),
+        mockedResponse;
+
+        switch (endpoint) {
+            case 'http://www.some-domain.com/without-pagination/123/':
+                mockedResponse = {
+                    var_a: 'foo',
+                    var_b: 'bar'
+                };
+
+                break;
+
+            case 'http://www.some-domain.com/with-pagination/456/':
+                mockedResponse = {
+                    count: 5,
+                    results: ['ITEM_1', 'ITEM_2', 'ITEM_3'],
+                    _links: {
+                        next: {
+                            href: 'http://www.some-domain.com/with-pagination/456/?page=2'
+                        }
+                    }
+                };
+
+                break;
+
+
+            case 'http://www.some-domain.com/with-pagination/456/?page=2':
+                mockedResponse = {
+                    count: 5,
+                    results: ['ITEM_4', 'ITEM_5'],
+                    _links: {
+                        next: null
+                    }
+                };
+
+                break;
+
+            case 'http://www.some-domain.com/something/123/':
+            case 'http://www.some-domain.com/brk/object/123/':
+            case 'http://www.some-domain.com/brk/object-expand/123/':
+                mockedResponse = {
+                    var_c: 'baz'
+                };
+
+                break;
+        }
+
+        finishApiRequest = function () {
+            q.resolve(mockedResponse);
+        };
+
+        return q.promise;
+    }
+
+    function getComponent (endpoint, partial, useBrkObjectExpanded, addApiRoot) {
         var component,
             element,
             scope;
@@ -98,9 +106,11 @@ describe('The atlas-api-call component', function () {
         element.setAttribute('endpoint', endpoint);
         element.setAttribute('partial', partial);
         element.setAttribute('use-brk-object-expanded', 'useBrkObjectExpanded');
+        element.setAttribute('add-api-root', 'addApiRoot');
 
         scope = $rootScope.$new();
         scope.useBrkObjectExpanded = useBrkObjectExpanded;
+        scope.addApiRoot = addApiRoot;
 
         component = $compile(element)(scope);
         scope.$apply();
@@ -205,6 +215,20 @@ describe('The atlas-api-call component', function () {
         //It replaced the endpoint for brk-object when it is set to true
         getComponent('http://www.some-domain.com/brk/object/123/', 'some-partial', true);
         expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/brk/object-expand/123/');
+    });
+
+    describe('the add-api-root attribute', function () {
+        it('calls the url method of the api module as usual, when set to false', function() {
+            getComponent('http://www.some-domain.com/something/123/', 'some-partial', false, false);
+            expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/something/123/');
+            expect(api.getByUri.calls.any()).toEqual(false);
+        });
+
+        it('calls the uri method of the api module when set to true', function() {
+            getComponent('something/123/', 'some-partial', false, true);
+            expect(api.getByUrl.calls.any()).toEqual(false);
+            expect(api.getByUri).toHaveBeenCalledWith('something/123/');
+        });
     });
 
     describe('a loading indicator', function () {

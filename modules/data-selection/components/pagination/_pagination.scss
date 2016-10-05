@@ -1,0 +1,83 @@
+$pagination-line-color: #e4e4e4;
+
+.c-data-selection-pagination {
+  text-align: center;
+
+  .c-data-selection-pagination__input {
+    width: 3rem;
+    height: $button-size;
+    border: 1px solid $secondary-gray20;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .c-data-selection-pagination__button {
+    width: $button-size;
+    height: $button-size;
+    background-image: url("assets/icons/link-active.svg");
+    vertical-align: middle;
+  }
+
+  hr {
+    width: auto;
+    height: 5px;
+    margin: {
+      top: 2 * $base-whitespace;
+      right: - 2 * $base-whitespace;
+      bottom: 2 * $base-whitespace;
+      left: - 2 * $base-whitespace;
+    }
+    border: none;
+    background: $pagination-line-color;
+  }
+}
+
+.c-data-selection-page__form__links {
+  margin-top: -.55rem;
+}
+
+.c-data-selection-pagination-link {
+  margin-left: .2rem;
+  font-weight: bold;
+
+  &::before {
+    display: inline-block;
+    position: relative;
+    top: .5rem;
+    width: $button-size;
+    height: $button-size;
+  }
+}
+
+.c-data-selection-pagination-link--first {
+  &::before {
+    transform: scaleX(-1);
+    content: url("assets/icons/icon-last.svg");
+    filter: FlipH;
+  }
+}
+
+.c-data-selection-pagination-link--last {
+  &::before {
+    content: url("assets/icons/icon-last.svg");
+  }
+}
+
+.c-data-selection-pagination-link--previous {
+  margin-left: $base-whitespace;
+
+  &::before {
+    transform: scaleX(-1);
+    content: url("assets/icons/icon-next.svg");
+    filter: FlipH;
+  }
+}
+
+.c-data-selection-pagination-link--next {
+  margin-right: $base-whitespace;
+
+  &::before {
+    content: url("assets/icons/icon-next.svg");
+  }
+}

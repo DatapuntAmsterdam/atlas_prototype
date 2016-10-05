@@ -17,3 +17,7 @@
 .u-font--s {
   @include font-size($s-header-font);
 }
+
+.u-line-height-base {
+  line-height: $base-line-height !important;
+}

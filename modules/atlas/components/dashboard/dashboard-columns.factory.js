@@ -27,11 +27,10 @@
                 if (!state.isPrintMode) {
                     visibility.map = true;
                 } else {
-                    visibility.map = state.map.isFullscreen ||
-                        (
-                            !state.map.showLayerSelection &&
-                            (angular.isObject(state.detail) || angular.isObject(state.straatbeeld))
-                        );
+                    visibility.map = !state.map.showLayerSelection && (
+                        state.map.isFullscreen ||
+                        angular.isObject(state.detail) ||
+                        angular.isObject(state.straatbeeld));
                 }
 
                 visibility.layerSelection = state.map.showLayerSelection;
@@ -65,12 +64,12 @@
             function determineColumnSizesDefault (visibility, hasFullscreenMap) {
                 var columnSizes = {};
 
-                if (hasFullscreenMap) {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 12;
-                } else if (visibility.layerSelection) {
+                if (visibility.layerSelection) {
                     columnSizes.left = 4;
                     columnSizes.middle = 8;
+                } else if (hasFullscreenMap) {
+                    columnSizes.left = 0;
+                    columnSizes.middle = 12;
                 } else if (visibility.dataSelection) {
                     columnSizes.left = 0;
                     columnSizes.middle = 0;
@@ -87,13 +86,13 @@
             function determineColumnSizesPrint (visibility, hasFullscreenMap) {
                 var columnSizes = {};
 
-                if (hasFullscreenMap) {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 12;
-                    columnSizes.right = 0;
-                } else if (visibility.layerSelection) {
+                if (visibility.layerSelection) {
                     columnSizes.left = 12;
                     columnSizes.middle = 0;
+                    columnSizes.right = 0;
+                } else if (hasFullscreenMap) {
+                    columnSizes.left = 0;
+                    columnSizes.middle = 12;
                     columnSizes.right = 0;
                 } else if (visibility.page || visibility.searchResults || visibility.dataSelection) {
                     columnSizes.left = 0;

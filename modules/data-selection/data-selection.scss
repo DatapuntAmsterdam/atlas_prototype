@@ -1,0 +1,37 @@
+@import "../shared/styles/config";
+
+@mixin data-selection-button($url, $urlhover: $url) {
+  margin-right: $base-whitespace;
+  margin-left: $base-whitespace;
+  color: inherit;
+  font-family: $header-font-family;
+  font-size: $base-font-size;
+  font-weight: lighter;
+  line-height: $button-size;
+  text-decoration: none;
+
+  &::after {
+    display: inline-block;
+    width: $button-size;
+    height: $button-size;
+    margin-left: $base-whitespace / 2;
+    background-image: url($url);
+    content: "";
+    vertical-align: middle;
+  }
+
+  &:hover {
+    color: $primary-contrast;
+    text-decoration: underline;
+
+    &::after {
+      background-image: url($urlhover);
+    }
+  }
+}
+
+@import "components/pagination/pagination";
+@import "components/data-selection/data-selection";
+@import "components/filters/filters";
+@import "components/header/header";
+@import "components/table/table";

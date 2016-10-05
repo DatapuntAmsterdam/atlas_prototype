@@ -71,6 +71,14 @@
                         'buurtcombinatie_identificatie'
                     ]
                 },
+                FUNCTIEVERVULLING: {
+                    label_singular: 'Functievervulling',
+                    label_plural: 'Functievervullingen',
+                    description: 'Een FunctieVervulling geeft de relatie weer van de Persoon als functionaris ' +
+                        'en de Persoon als eigenaar van de Onderneming of MaatschappelijkeActiviteit.',
+                    url: 'https://www.amsterdam.nl/stelselpedia/hr-index/catalogus/functie-vervulling/',
+                    meta: []
+                },
                 G_PERCEEL: {
                     label_singular: 'G-perceel',
                     label_plural: 'G-percelen',
@@ -115,8 +123,8 @@
                 KADASTRAAL_SUBJECT: {
                     label_singular: 'Kadastraal subject',
                     label_plural: 'Kadastrale subjecten',
-                    description: 'Een Kadastraal Subject is een persoon die in de kadastrale registratie ' +
-                        'voorkomt. Het betreft hier zowel natuurlijk- als niet natuurlijk personen.',
+                    description: 'Een Kadastraal subject is een persoon die in de kadastrale registratie voorkomt. ' +
+                        'Het kan hier gaan om een natuurlijk of een niet-natuurlijk persoon.',
                     url: 'https://www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/kadastraal-subject/',
                     meta: ['id']
                 },
@@ -143,6 +151,15 @@
                         'in Amsterdam. De meetbouten zijn op ongeveer een halve meter van het maaiveld geplaatst in d' +
                         'e gevel.',
                     url: 'https://www.amsterdam.nl/stelselpedia/meetbouten-index/catalogus-amsterdams/meetbout/',
+                    meta: []
+                },
+                MAC: {
+                    label_singular: 'Maatschappelijke activiteit',
+                    label_plural: 'Maatschappelijke activiteiten',
+                    description: 'De Maatschappelijke Activiteit is het totaal van alle activiteiten uitgeoefend ' +
+                        'door een Natuurlijk Persoon of een Niet-natuurlijk Persoon. Een Maatschappelijke Activiteit ' +
+                        'kan ook als Onderneming voorkomen.',
+                    url: 'https://www.amsterdam.nl/stelselpedia/hr-index/catalogus/maatschappelijke/',
                     meta: []
                 },
                 METING: {
@@ -284,6 +301,14 @@
                         'verblijfsobjectidentificatie',
                         'sleutelverzendend'
                     ]
+                },
+                VESTIGING: {
+                    label_singular: 'Vestiging',
+                    label_plural: 'Vestigingen',
+                    description: 'Een Vestiging is gebouw of een complex van gebouwen waar duurzame uitoefening ' +
+                        'van activiteiten van een Onderneming of Rechtspersoon plaatsvindt.',
+                    url: 'https://www.amsterdam.nl/stelselpedia/hr-index/catalogus/vestiging/',
+                    meta: []
                 },
                 WOONPLAATS: {
                     label_singular: 'Woonplaats',

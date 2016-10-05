@@ -3,7 +3,7 @@
 
   <p ng-if="!apiData.results.length">Geen resultaten gevonden</p>
 
-  <ul class="o-list">
+  <ul ng-if="apiData.results.length" class="o-list">
     <li ng-repeat="object in apiData.results">
       <dp-link type="FETCH_DETAIL" payload="object._links.self.href">
         {{ object._display}}

@@ -51,15 +51,16 @@
                  * Cancel the last request (if any), this way we ensure that a resolved autocompleteData.search() call
                  * always has the latest data.
                  */
-                autocompleteData.cancel();
-
                 scope.activeSuggestionIndex = -1;
                 scope.originalQuery = scope.query;
 
                 if (angular.isString(scope.query) && scope.query.length) {
                     autocompleteData.search(scope.query).then(function (suggestions) {
-                        scope.suggestions = suggestions.data;
-                        scope.numberOfSuggestions = suggestions.count;
+                        // Only load suggestions if they are still relevant.
+                        if (suggestions.query === scope.query) {
+                            scope.suggestions = suggestions.data;
+                            scope.numberOfSuggestions = suggestions.count;    
+                        }
                     });
                 } else {
                     scope.suggestions = [];
@@ -69,8 +70,6 @@
 
             scope.navigateSuggestions = function (event) {
                 //Cancel outstanding requests, we don't want suggestions to 'refresh' while navigating.
-                autocompleteData.cancel();
-
                 switch (event.keyCode) {
                     //Arrow up
                     case 38:

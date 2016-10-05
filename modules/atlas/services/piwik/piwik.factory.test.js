@@ -42,7 +42,7 @@ describe('The piwik service', function () {
 
         expect(getScripts().length).toBe(numberOfScripts + 1);
         expect(piwikScript.getAttribute('type')).toBe('text/javascript');
-        expect(piwikScript.getAttribute('src')).toBe('https://atlas.amsterdam.nl/piwik/piwik.js');
+        expect(piwikScript.getAttribute('src')).toBe('//admin.datapunt.amsterdam.nl/piwik/piwik.js');
     });
 
     it('creates a global variable with specific instructions per environment', function () {

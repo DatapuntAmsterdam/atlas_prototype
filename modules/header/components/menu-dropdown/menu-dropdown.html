@@ -7,6 +7,13 @@
 <nav ng-if="isVisible" class="menu-dropdown">
     <ul>
         <li>
+            <dp-link type="SHOW_DATA_SELECTION"
+                    payload="{dataset: 'bag', filters: {}, page: 1}"
+                    class-name="site-header__menu__subitem">
+                Selectie adressen
+            </dp-link>
+        </li>
+        <li>
             <dp-link type="SHOW_PRINT" class-name="site-header__menu__subitem">
                 Printversie
             </dp-link>

@@ -33,8 +33,11 @@
             vm.htmlHeading = $sce.trustAsHtml(heading);
         });
 
-        vm.stelselpedia = STELSELPEDIA.DEFINITIONS[vm.definition];
-        vm.stelselpedia.label = vm.usePlural ? vm.stelselpedia.label_plural : vm.stelselpedia.label_singular;
+        vm.stelselpediaLabel = vm.usePlural ?
+            STELSELPEDIA.DEFINITIONS[vm.definition].label_plural :
+            STELSELPEDIA.DEFINITIONS[vm.definition].label_singular;
+        vm.stelselpediaDescription = STELSELPEDIA.DEFINITIONS[vm.definition].description;
+        vm.stelselpediaUrl = STELSELPEDIA.DEFINITIONS[vm.definition].url;
 
         vm.hasMetaData = angular.isDefined(vm.metaData);
 

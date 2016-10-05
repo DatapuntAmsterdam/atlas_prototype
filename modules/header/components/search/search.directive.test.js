@@ -6,7 +6,9 @@ describe('The atlas-search directive', function () {
         store,
         ACTIONS,
         autocompleteData,
-        fakeAutocompleteData;
+        fakeAutocompleteData,
+        finishApiCall,
+        promises = [];
 
     beforeEach(function () {
         angular.mock.module(
@@ -18,8 +20,14 @@ describe('The atlas-search directive', function () {
                 autocompleteData: {
                     search: function (query) {
                         var q = $q.defer();
-
-                        q.resolve(fakeAutocompleteData[query]);
+                        promises.push({query: query, q: q});
+                        finishApiCall = function() {
+                            var prom = promises.shift();
+                            if (prom) {
+                                prom.q.resolve(fakeAutocompleteData[prom.query]);
+                                $rootScope.$apply();
+                            }
+                        };
 
                         return q.promise;
                     },
@@ -43,7 +51,7 @@ describe('The atlas-search directive', function () {
                 },
                 environment: {
                     API_ROOT: 'http://api.example.com/'
-                }
+                 }
             }
         );
 
@@ -62,7 +70,8 @@ describe('The atlas-search directive', function () {
         fakeAutocompleteData = {
             'query without suggestions': {
                 count: 0,
-                data: []
+                data: [],
+                query: 'query without suggestions'
             },
             'query with suggestions': {
                 count: 3,
@@ -90,9 +99,12 @@ describe('The atlas-search directive', function () {
                             }
                         ]
                     }
-                ]
+                ],
+                query: 'query with suggestions'
             }
         };
+
+        promises = [];
     });
 
     function getDirective (query) {
@@ -158,13 +170,13 @@ describe('The atlas-search directive', function () {
             //A query without suggestions
             directive.find('.js-search-input')[0].value = 'query without suggestions';
             directive.find('.js-search-input').trigger('change');
-
+            finishApiCall();
             expect(directive.find('.c-autocomplete').length).toBe(0);
 
             //A query with suggestions
             directive.find('.js-search-input')[0].value = 'query with suggestions';
             directive.find('.js-search-input').trigger('change');
-
+            finishApiCall();
             expect(directive.find('.c-autocomplete').length).toBe(1);
             expect(directive.find('.c-autocomplete div:nth-of-type(1) h4').text()).toBe('Category A');
             expect(directive.find('.c-autocomplete div:nth-of-type(1) li:nth-child(1)').text().trim())
@@ -185,15 +197,28 @@ describe('The atlas-search directive', function () {
             //With a query
             directive.find('.js-search-input')[0].value = 'query without suggestions';
             directive.find('.js-search-input').trigger('change');
-
+            finishApiCall();
             expect(autocompleteData.search).toHaveBeenCalledTimes(1);
             expect(autocompleteData.search).toHaveBeenCalledWith('query without suggestions');
 
             //Without a query;
             directive.find('.js-search-input')[0].value = '';
             directive.find('.js-search-input').trigger('change');
-
+            finishApiCall();
             expect(autocompleteData.search).toHaveBeenCalledTimes(1);
+        });
+
+        it('Only show relevat autocomplete suggestions', function() {
+            var directive = getDirective('');
+
+            directive.find('.js-search-input')[0].value = 'query with suggestions';
+            directive.find('.js-search-input').trigger('change');
+
+            directive.find('.js-search-input')[0].value = 'query without suggestions';
+            directive.find('.js-search-input').trigger('change');
+
+            finishApiCall();
+            expect(directive.find('.c-autocomplete').length).toBe(0);
         });
 
         describe('with mouse support', function () {
@@ -203,6 +228,7 @@ describe('The atlas-search directive', function () {
                 //Load suggestions
                 directive.find('.js-search-input')[0].value = 'query with suggestions';
                 directive.find('.js-search-input').trigger('change');
+                finishApiCall();
 
                 spyOn(store, 'dispatch');
 
@@ -240,6 +266,7 @@ describe('The atlas-search directive', function () {
                 //Load suggestions
                 directive.find('.js-search-input')[0].value = 'query with suggestions';
                 directive.find('.js-search-input').trigger('change');
+                finishApiCall();
 
                 expect(directive.find('.c-autocomplete').length).toBe(1);
 
@@ -257,6 +284,7 @@ describe('The atlas-search directive', function () {
                 //Load suggestions
                 directive.find('.js-search-input')[0].value = 'query with suggestions';
                 directive.find('.js-search-input').trigger('change');
+                finishApiCall();
 
                 //First suggestion
                 directive.find('.c-autocomplete button').eq(0).click();
@@ -281,6 +309,7 @@ describe('The atlas-search directive', function () {
                 //Load suggestions
                 directive.find('.js-search-input')[0].value = 'query with suggestions';
                 directive.find('.js-search-input').trigger('change');
+                finishApiCall();
 
                 //Make sure no suggestion is highlighted by default
                 expect(directive.find('.c-autocomplete li').eq(0).find('button')
@@ -378,6 +407,7 @@ describe('The atlas-search directive', function () {
                 //Load suggestions
                 directive.find('.js-search-input')[0].value = 'query with suggestions';
                 directive.find('.js-search-input').trigger('change');
+                finishApiCall();
 
                 //Navigate to a suggestion
                 triggerKeyDownEvent(directive.find('.js-search-input'), 40);
@@ -398,6 +428,7 @@ describe('The atlas-search directive', function () {
                 //Load suggestions
                 directive.find('.js-search-input')[0].value = 'query with suggestions';
                 directive.find('.js-search-input').trigger('change');
+                finishApiCall();
 
                 //Navigate to the third suggestion
                 triggerKeyDownEvent(directive.find('.js-search-input'), 40);
@@ -426,6 +457,7 @@ describe('The atlas-search directive', function () {
                     //Load suggestions
                     directive.find('.js-search-input')[0].value = 'query with suggestions';
                     directive.find('.js-search-input').trigger('change');
+                    finishApiCall();
 
                     //Navigate to the second suggestion
                     triggerKeyDownEvent(directive.find('.js-search-input'), 40);
@@ -459,6 +491,7 @@ describe('The atlas-search directive', function () {
             //Load suggestions
             directive.find('.js-search-input')[0].value = 'query with suggestions';
             directive.find('.js-search-input').trigger('change');
+            finishApiCall();
 
             expect(directive.find('.c-autocomplete').length).toBe(1);
 

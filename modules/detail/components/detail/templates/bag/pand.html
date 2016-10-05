@@ -31,4 +31,10 @@
 
         <atlas-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst"></atlas-api-call>
     </div>
+
+    <div>
+        <atlas-stelselpedia-header definition="VESTIGING" use-plural="true"></atlas-stelselpedia-header>
+
+        <atlas-api-call endpoint="handelsregister/vestiging/?pand={{ vm.apiData.results.pandidentificatie }}" add-api-root="true" partial="lijst"></atlas-api-call>
+    </div>
 </div>

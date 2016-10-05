@@ -24,9 +24,9 @@
 }
 
 .c-toggle-fullscreen__icon--minimize {
-  background-image: url("assets/icons/minimize.svg");
+  background-image: url("assets/icons/close-hover.svg");
 
   &:hover {
-    background-image: url("assets/icons/minimize-active.svg");
+    background-image: url("assets/icons/close-active.svg");
   }
 }

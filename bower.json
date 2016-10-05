@@ -8,9 +8,9 @@
     "angular-sanitize": "^1.5.7",
     "bbga_visualisatie_d3": "https://github.com/DatapuntAmsterdam/bbga_visualisatie_d3.git",
     "d3": "^3.5.17",
-    "leaflet": "https://github.com/DatapuntAmsterdam/datapunt_leaflet.git#master",
+    "leaflet": "^1.0.0",
     "leaflet.wms": "~0.1.0",
-    "leaflet-measure": "^2.0.2",
+    "leaflet-measure": "^2.0.5",
     "leaflet-rotatedmarker": "https://unpkg.com/leaflet-rotatedmarker/leaflet.rotatedMarker.js",
     "marzipano": "https://github.com/DatapuntAmsterdam/marzipano.git#master",
     "proj4": "*",
@@ -19,5 +19,8 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.5.7"
+  },
+  "resolutions": {
+    "leaflet": "^1.0.0"
   }
 }

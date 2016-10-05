@@ -1,5 +1,8 @@
+.c-layer-selection {
+  border-width: 1px;
+}
+
 .c-layer-selection__heading {
-  @include font-size($m-header-font);
   position: relative;
   height: auto;
   padding-top: 0 !important;

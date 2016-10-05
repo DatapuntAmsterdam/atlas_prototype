@@ -132,7 +132,7 @@ describe('The dp-map directive', function () {
         directive = $compile(element)(scope);
 
         scope.$apply();    
-        
+
         if (angular.isUndefined(useRootScopeApply) || useRootScopeApply) {
             $rootScope.$apply();
         }
@@ -368,5 +368,48 @@ describe('The dp-map directive', function () {
         getDirective(mockedMapState, []);
 
         expect(searchByClick.initialize).toHaveBeenCalledWith('I_AM_A_FAKE_LEAFLET_MAP');
+    });
+
+    describe('fullscreen state', function() {
+        var directive,
+            vm;
+
+        it('is true when fullscreen is set and layers is not', function() {
+            mockedMapState.isFullscreen = true;
+            mockedMapState.showLayerSelection = false;
+            directive = getDirective(mockedMapState, []);
+            vm = directive.isolateScope().vm;
+            expect(vm.isFullscreen).toEqual(true);
+        });
+        it('is false when fullscreen is set and layers is too', function() {
+            mockedMapState.isFullscreen = true;
+            mockedMapState.showLayerSelection = true;
+            directive = getDirective(mockedMapState, []);
+            vm = directive.isolateScope().vm;
+            expect(vm.isFullscreen).toEqual(false);
+        });
+        it('is false when fullscreen is not set', function() {
+            mockedMapState.isFullscreen = false;
+            mockedMapState.showLayerSelection = false;
+            directive = getDirective(mockedMapState, []);
+            vm = directive.isolateScope().vm;
+            expect(vm.isFullscreen).toEqual(false);
+
+            mockedMapState.isFullscreen = false;
+            mockedMapState.showLayerSelection = true;
+            $rootScope.$apply();
+            expect(vm.isFullscreen).toEqual(false);
+        });
+        it('updates on the fly', function() {
+            mockedMapState.isFullscreen = true;
+            mockedMapState.showLayerSelection = false;
+            directive = getDirective(mockedMapState, []);
+            vm = directive.isolateScope().vm;
+
+            mockedMapState.isFullscreen = false;
+            mockedMapState.showLayerSelection = false;
+            $rootScope.$digest();
+            expect(vm.isFullscreen).toEqual(false);
+        });
     });
 });
