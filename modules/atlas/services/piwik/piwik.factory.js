@@ -20,7 +20,7 @@
             $window._paq.push(['trackPageView']);
             $window._paq.push(['enableLinkTracking']);
 
-            u = '//admin.datapunt.amsterdam.nl/piwik/';
+            u = 'https://atlas.amsterdam.nl/piwik/';
 
             $window._paq.push(['setTrackerUrl', u + 'piwik.php']);
             $window._paq.push(['setSiteId', PIWIK_CONFIG[environment.NAME].SITE_ID]);
