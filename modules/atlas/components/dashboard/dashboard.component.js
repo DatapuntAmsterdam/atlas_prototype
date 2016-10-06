@@ -1,3 +1,11 @@
+/**
+ * @ngdoc directive
+ * @name atlas.component:atlasDashboard
+ * @restrict 'E'
+ * @description
+ * The atlas dashboard component
+ */
+
 (function () {
     'use strict';
 
