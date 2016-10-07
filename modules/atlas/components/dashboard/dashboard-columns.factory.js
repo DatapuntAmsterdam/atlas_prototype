@@ -1,6 +1,7 @@
 /**
  * @ngdoc service
  * @name atlas.dashboardColumns
+ * @link atlas.dashboardColumns dashboardColumns
  * @description
  * A factory used to determine the colum layout of the application for a given state
  */

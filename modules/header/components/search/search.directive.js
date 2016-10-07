@@ -43,8 +43,8 @@
              * - Actual form submittion for a complete search
              *
              * The function triggers the appropriate action based on the value of
-             * the <code>activeSuggestionIndex</code> scope variable. If it is set
-             * to <code>-1</code>, the function will trigger a full search. Otherwise
+             * the `activeSuggestionIndex` scope variable. If it is set
+             * to `-1`, the function will trigger a full search. Otherwise
              * autocomplete is triggered.
              */
             scope.formSubmit = function (event) {

@@ -22,8 +22,8 @@
     /**
      * @ngdoc controller
      * @name atlas.controller:AtlasDashboardController
-     * @param {object} store The state store object
-     * @param {object} dashboardColumns The dashboard column service
+     * @requires atlas.dashboardColumns
+     * @requires store
      * @description
      * The controller for the atlas dashboard. It is in this controller that
      * state changes are linked to visiblity and column changes in the application.
