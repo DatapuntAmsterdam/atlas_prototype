@@ -19,6 +19,15 @@
 
     AtlasDashboardController.$inject = ['store', 'dashboardColumns'];
 
+    /**
+     * @ngdoc controller
+     * @name atlas.controller:AtlasDashboardController
+     * @param {object} store The state store object
+     * @param {object} dashboardColumns The dashboard column service
+     * @description
+     * The controller for the atlas dashboard. It is in this controller that
+     * state changes are linked to visiblity and column changes in the application.
+     */
     function AtlasDashboardController (store, dashboardColumns) {
         var vm = this;
 

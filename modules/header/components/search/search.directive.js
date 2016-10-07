@@ -7,6 +7,14 @@
 
         atlasSearchDirective.$inject = ['$timeout', 'autocompleteData', 'environment', 'store', 'ACTIONS'];
 
+    /**
+     * @ngdoc directive
+     * @name atlasHeader.directive:atlasSearchDirective
+     * @restrict 'E'
+     * @scope
+     * @description
+     * Creates the search bar for the header. 
+     */
     function atlasSearchDirective ($timeout, autocompleteData, environment, store, ACTIONS) {
         return {
             restrict: 'E',
@@ -23,6 +31,22 @@
             scope.activeSuggestionIndex = -1;
             scope.originalQuery = scope.query;
 
+            /**
+             * @ngdoc function
+             * @name formSubmit
+             * @methodOf atlasHeader.directive:atlasSearchDirective
+             * @description
+             * Prevents the defualt form submits and replaces it with the
+             * custom js app handling. There are two routes to form submittion.
+             *
+             * - Autocomplete, triggered by text input
+             * - Actual form submittion for a complete search
+             *
+             * The function triggers the appropriate action based on the value of
+             * the <code>activeSuggestionIndex</code> scope variable. If it is set
+             * to <code>-1</code>, the function will trigger a full search. Otherwise
+             * autocomplete is triggered.
+             */
             scope.formSubmit = function (event) {
                 var activeSuggestion;
 
