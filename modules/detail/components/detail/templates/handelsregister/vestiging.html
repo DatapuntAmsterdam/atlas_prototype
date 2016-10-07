@@ -1,0 +1,53 @@
+<div class="u-row">
+    <atlas-stelselpedia-header
+        heading="{{vm.apiData.results._display}}"
+        definition="VESTIGING">
+    </atlas-stelselpedia-header>
+
+    <dl class="c-key-value-list">
+        <dt>Eerste handelsnaam</dt>
+        <dd> {{ vm.apiData.results.naam }} </dd>
+        <dt>Postadres</dt>
+        <dd> {{ vm.apiData.results.postadres.volledig_adres }} </dd>
+        <dt>Bezoekadres</dt>
+        <dd> {{ vm.apiData.results.bezoekadres.volledig_adres }} </dd>
+        <dt>Type vestiging</dt>
+        <dd>
+            {{ vm.apiData.results.hoofdvestiging ? "Hoofdvestiging" : vm.apiData.results.hoofdvestiging === false ? "Nevenvestiging" : "" }}
+        </dd>
+        <dt>SBI-activiteiten</dt>
+        <dd ng-if="!vm.apiData.results.activiteiten[0]"></dd>
+        <dd ng-if="vm.apiData.results.activiteiten[0]" class="c-key-value-list--multiple-values" ng-repeat="object in vm.apiData.results.activiteiten" ng-class="{'c-key-value-list--border-top': $first}">
+            <span class="u-line-height-base u-margin--0">
+                {{ object.sbi_code }}: {{ object.sbi_omschrijving }}
+            </span>
+        </dd>
+        <dt>Vestigingsnummer</dt>
+        <dd> {{  vm.apiData.results.vestigingsnummer }} </dd>
+        <dt>Datum aanvang</dt>
+        <dd> {{ vm.apiData.results.datum_aanvang | date:'dd-MM-yyyy' }} </dd>
+        <dt>Coördinaten</dt>
+        <dd ng-if="apiData.results.bezoekadres.geometrie.coordinates[0]">
+            {{ apiData.results.bezoekadres.geometrie.coordinates[0] }}, {{ apiData.results.bezoekadres.geometrie.coordinates[1] }}
+        </dd>
+        <dd ng-if="!apiData.results.bezoekadres.geometrie.coordinates[0]"></dd>
+    </dl>
+
+    <dp-panel is-panel-visible="true" type="warning" can-close="true">
+        <h3 class="u-margin__bottom--1">Disclaimer</h3>
+        <p>
+            De gegevens uit het Handelsregister (HR) in Atlas zijn afkomstig van een lokale gemeentelijke kopie van de Kamer van Koophandel (KvK). Basisinformatie vult deze lokale kopie op dit moment voor het eerst.        </p>
+
+        <p>
+            De gegevens over vestigingen, die onder meer in de kaart worden getoond, zijn 100% dekkend en zijn van juni 2016. De overige gegevens, zoals personen en maatschappelijke activiteiten (bijvoorbeeld ondernemingen) worden op dit moment gevuld. Meer dan 60% daarvan is reeds gevuld.
+        <p>
+            De verwachting is dat de gegevens medio december volledig gevuld en geactualiseerd zijn.
+        </p>
+
+        <p class="u-margin__bottom--0">
+            Raadpleeg voor de meest actuele gegevens de raadpleegvoorziening van de KvK: <a class="o-link-inline o-link-inline--light" target="_blank" href="https://www.kvk.nl/zoeken/">https://www.kvk.nl/zoeken/</a>.
+        </p>
+    </dp-panel>
+
+    <atlas-api-call endpoint="{{vm.apiData.results.maatschappelijke_activiteit}}" partial="handelsregister/mac"></atlas-api-call>
+</div>

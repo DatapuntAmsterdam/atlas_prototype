@@ -82,6 +82,40 @@ describe('The geometry factory', function () {
                 //Kadastraal subject
                 url: 'http://www.api-root.nl/brk/subject/NL.KAD.Persoon.123456/',
                 response: {}
+            }, {
+                //Kadastraal subject
+                url: 'http://www.api-root.nl/brk/subject/NL.KAD.Persoon.123456/',
+                response: {}
+            }, {
+                //vestiging in Amsterdam
+                url: 'https://www.api-root.nl/handelsregister/vestiging/123/',
+                response: {
+                    bezoekadres: {
+                        geometrie: {
+                            coordinates: [119695.616, 483365.537]
+                        }
+                    }
+                }
+            }, {
+                //vestiging Rotterdam (zowel x als y buiten range)
+                url: 'https://www.api-root.nl/handelsregister/vestiging/456/',
+                response: {
+                    bezoekadres: {
+                        geometrie: {
+                            coordinates: [91860.717, 437504.737]
+                        }
+                    }
+                }
+            }, {
+                //vestiging hoofddorp (een van de waardes x/y buiten range)
+                url: 'https://www.api-root.nl/handelsregister/vestiging/789/',
+                response: {
+                    bezoekadres: {
+                        geometrie: {
+                            coordinates: [108173.02, 478466.281]
+                        }
+                    }
+                }
             }
         ];
 
@@ -124,6 +158,51 @@ describe('The geometry factory', function () {
 
         expect(response).toEqual({
             FAKE_GEOJSON: 'G_PERCEEL'
+        });
+    });
+
+    describe('when searching for the geometry of a vestiging', function () {
+        it('returns the GeoJSON of the bezoekadres if it falls within the bounding box of the map', function () {
+            var response;
+
+            geometry
+                .getGeoJSON('https://www.api-root.nl/handelsregister/vestiging/123/')
+                .then(function (data) {
+                    response = data;
+                });
+
+            $rootScope.$apply();
+
+            expect(response).toEqual({
+                coordinates: [119695.616, 483365.537]
+            });
+
+        });
+        it('returns the Null if it does not fall within the bounding box of the map', function () {
+            var response;
+
+            //BOTH x and y
+            geometry
+                .getGeoJSON('https://www.api-root.nl/handelsregister/vestiging/456/')
+                .then(function (data) {
+                    response = data;
+                });
+
+            $rootScope.$apply();
+
+            expect(response).toBeNull();
+
+            //Either x or y
+            geometry
+                .getGeoJSON('https://www.api-root.nl/handelsregister/vestiging/789/')
+                .then(function (data) {
+                    response = data;
+                });
+
+            $rootScope.$apply();
+
+            expect(response).toBeNull();
+
         });
     });
 

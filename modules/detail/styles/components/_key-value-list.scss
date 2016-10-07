@@ -12,4 +12,16 @@
   &::after {
     @extend %clearfix;
   }
+
+  .c-key-value-list--border-top {
+    border-top: 1px solid $secondary-gray20 !important;
+  }
+
+  .c-key-value-list--multiple-values {
+    padding: 4.375px 0; //(2 * $base-font-size - $base-line-height) / 2
+    border: none;
+    line-height: $base-line-height;
+  }
 }
+
+

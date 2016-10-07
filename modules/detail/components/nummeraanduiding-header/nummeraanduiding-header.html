@@ -6,8 +6,12 @@
     </atlas-stelselpedia-header>
 
     <div ng-if="!vm.hoofdadres || vm.isGevormd">
-        <div ng-if="!vm.hoofdadres" class="c-nummeraanduiding c-nummeraanduiding--nevenadres">Dit is een nevenadres</div>
+        <dp-panel ng-if="!vm.hoofdadres" is-panel-visible="true" type="warning" class-name="c-nummeraanduiding">
+            Dit is een nevenadres
+        </dp-panel>
 
-        <div ng-if="vm.isGevormd" class="c-nummeraanduiding c-nummeraanduiding--gevormd">{{vm.statusOmschrijving}}</div>
+        <dp-panel ng-if="vm.isGevormd" is-panel-visible="true" type="danger" class-name="c-nummeraanduiding">
+            {{vm.statusOmschrijving}}
+        </dp-panel>
     </div>
 <div>

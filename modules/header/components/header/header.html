@@ -1,7 +1,7 @@
 <header class="site-header">
     <div class="u-grid">
         <div class="u-row">
-            <div class="u-col-sm--2">
+            <div class="u-col-sm--3">
                 <dp-link type="SHOW_HOME" class-name="site-header__logo" hover-text="Naar Atlas home">
                     <img class="u-block site-header__logo" src="assets/images/andreas.svg" alt="Logo Gemeente Amsterdam" >
                     Atlas
@@ -9,26 +9,28 @@
             </div>
 
             <!-- Default -->
-            <div ng-if="!vm.isPrintMode" class="u-col-sm--6">
-                <atlas-search query="{{vm.query}}"></atlas-search>
-            </div>
-            <div ng-if="!vm.isPrintMode" class="u-col-sm--4 u-padding__right--2">
-                <nav class="site-header__menu">
-                    <dp-link ng-if="!vm.isLoggedIn()"
-                        type="SHOW_PAGE" payload="'login'" class-name="site-header__menu__item">
-                        Inloggen
-                    </dp-link>
+            <div ng-if="!vm.isPrintMode" class="u-col-sm--9 u-padding__left--1">
+                <div class="u-col-sm--7" class="site-header__search">
+                    <atlas-search query="{{vm.query}}"></atlas-search>
+                </div>
+                <div class="u-col-sm--5 u-padding__right--2">
+                    <nav class="site-header__menu">
+                        <dp-link ng-if="!vm.isLoggedIn()"
+                            type="SHOW_PAGE" payload="'login'" class-name="site-header__menu__item">
+                            Inloggen
+                        </dp-link>
 
-                    <button ng-if="vm.isLoggedIn()" ng-click="vm.logout()" class="site-header__menu__item">
-                        Uitloggen
-                    </button>
+                        <button ng-if="vm.isLoggedIn()" ng-click="vm.logout()" class="site-header__menu__item">
+                            Uitloggen
+                        </button>
 
-                    <atlas-menu-dropdown></atlas-menu-dropdown>
-                </nav>
+                        <atlas-menu-dropdown></atlas-menu-dropdown>
+                    </nav>
+                </div>
             </div>
 
             <!-- When printing -->
-            <div ng-if="vm.isPrintMode" class="u-col-sm--10">
+            <div ng-if="vm.isPrintMode" class="u-col-sm--9">
                 <nav class="site-header__menu">
                     <atlas-print-button>
                         Printen

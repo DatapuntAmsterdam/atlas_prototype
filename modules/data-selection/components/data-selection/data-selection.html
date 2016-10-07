@@ -1,6 +1,6 @@
 <div class="u-grid">
-    <div class="u-row">
-        <div class="u-col-sm--2">
+    <div class="u-row c-data-selection__grid">
+        <div class="u-col-sm--3">
             <dp-data-selection-filters
                 dataset="{{vm.state.dataset}}"
                 available-filters="vm.availableFilters"
@@ -9,21 +9,27 @@
 
             </dp-data-selection-filters>
         </div>
-        <div class="u-col-sm--10">
+        <div class="u-col-sm--9">
             <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
 
-            <div ng-if="!vm.isLoading">
-                <dp-data-selection-download-button
-                    dataset="{{vm.state.dataset}}"
-                    active-filters="vm.state.filters">
 
-                </dp-data-selection-download-button>
+            <div ng-if="!vm.isLoading">
+
+                <dp-data-selection-header
+                    state="vm.state" number-of-records="vm.numberOfRecords">
+
+                </dp-data-selection-header>
 
                 <dp-data-selection-table
                     content="vm.tableData">
 
                 </dp-data-selection-table>
 
+                <div ng-if="vm.noDataToDisplay">
+                    <h3 class="o-header__subtitle">Deze pagina kan niet worden getoond.</h3>
+                    <p>Alleen de eerste 100 pagina's kunnen worden weergegeven (om technische redenen). Bij downloaden worden wel alle resultaten opgenomen.</p>
+                    <p>Tip: Gebruik de download-knop om alle resultaten te bekijken. Of voeg meer filtercriteria toe voor specifiekere resultaten.</p>
+                </div>
                 <dp-data-selection-pagination current-page="vm.currentPage" number-of-pages="vm.numberOfPages">
 
                 </dp-data-selection-pagination>

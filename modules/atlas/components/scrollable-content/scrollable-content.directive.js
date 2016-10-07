@@ -13,28 +13,39 @@
         return {
             restrict: 'A',
             scope: {
-                visibility: '='
+                visibility: '=',
+                pageName: '@'
             },
             link: linkFunction
         };
 
         function linkFunction (scope, element) {
             var rightColumnContent = null;
-            scope.$watch('visibility', function (visibility) {
-                if (rightColumnContent !== checkRightColumnContent(visibility)) {
+
+            scope.$watchGroup(['visibility', 'pageName'], function () {
+                var newRightColumnContent = checkRightColumnContent(scope.visibility, scope.pageName);
+
+                if (rightColumnContent !== newRightColumnContent) {
                     element[0].scrollTop = 0;
 
-                    rightColumnContent = checkRightColumnContent(visibility);
+                    rightColumnContent = newRightColumnContent;
                 }
-            }, true);
+            });
 
-            function checkRightColumnContent (visibility) {
+            function checkRightColumnContent (visibility, pageName) {
                 var components = ['page', 'detail', 'searchResults', 'dataSelection'],
+                    activeComponent,
                     i;
 
                 for (i = 0; i < components.length; i++) {
                     if (visibility[components[i]]) {
-                        return components[i];
+                        activeComponent = components[i];
+
+                        if (activeComponent === 'page') {
+                            return 'page_' + pageName;
+                        } else {
+                            return activeComponent;
+                        }
                     }
                 }
 

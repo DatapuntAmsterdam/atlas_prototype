@@ -70,7 +70,7 @@ describe('The dp-data-selection-pagination-link component', function () {
         });
     });
 
-    it('shows a span instead of a button if the link is disabled', function () {
+    it('hides the button if the link is disabled', function () {
         var component = getComponent({
             label: 'Ik ben een knopske',
             page: 27,
@@ -79,7 +79,5 @@ describe('The dp-data-selection-pagination-link component', function () {
 
         expect(component.find('button').length).toBe(0);
 
-        expect(component.find('span').length).toBe(1);
-        expect(component.find('span').text()).toContain('Ik ben een knopske');
     });
 });

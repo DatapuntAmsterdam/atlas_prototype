@@ -56,6 +56,9 @@
                 state.map.isFullscreen,
                 vm.isPrintMode
             );
+
+            //Needed for the atlas-scrollable-content directive
+            vm.pageName = state.page;
         }
     }
 })();

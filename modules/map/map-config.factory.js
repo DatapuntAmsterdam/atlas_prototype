@@ -5,9 +5,9 @@
         .module('dpMap')
         .factory('mapConfig', mapConfigFactory);
 
-    mapConfigFactory.$inject = ['environment', 'crsService'];
+    mapConfigFactory.$inject = ['environment', 'crsService', 'BOUNDING_BOX'];
 
-    function mapConfigFactory (environment, crsService) {
+    function mapConfigFactory (environment, crsService, BOUNDING_BOX) {
         var globalConfig,
             environmentConfig;
 
@@ -20,8 +20,8 @@
             MAP_OPTIONS: {
                 crs: crsService.getRd(),
                 maxBounds: [
-                    [52.269470, 4.72876], //south west
-                    [52.4322, 5.07916] //north east
+                    BOUNDING_BOX.COORDINATES.southWest,
+                    BOUNDING_BOX.COORDINATES.northEast
                 ],
                 attributionControl: false,
                 zoomControl: false

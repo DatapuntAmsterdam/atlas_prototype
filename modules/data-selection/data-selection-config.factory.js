@@ -28,81 +28,97 @@
             }
         };
         globalConfig = {
+            MAX_AVAILABLE_PAGES: 100,
             bag: {
                 PRIMARY_KEY: 'id',
                 FILTERS: [
                     {
                         slug: 'stadsdeel_naam',
-                        label: 'Stadsdelen'
-                    }, {
-                        slug: 'buurtcombinatie_naam',
-                        label: 'Buurtcombinaties'
-                    }, {
-                        slug: 'buurt_naam',
-                        label: 'Buurten'
-                    }, {
-                        slug: 'naam',
-                        label: 'Straatnamen'
-                    }, {
-                        slug: 'postcode',
-                        label: 'Postcode'
+                        label: 'Stadsdeel'
                     }, {
                         slug: 'ggw_naam',
-                        label: 'Gebiedsgerichtwerken gebieden'
+                        label: 'GGW-gebied'
+                    }, {
+                        slug: 'buurtcombinatie_naam',
+                        label: 'Buurtcombinatie'
+                    }, {
+                        slug: 'buurt_naam',
+                        label: 'Buurt'
+                    }, {
+                        slug: 'naam',
+                        label: 'Openbare ruimte'
+                    }, {
+                        slug: 'postcode',
+                        label: 'Postcode',
+                        format: {
+                            filters: ['postcode']
+                        }
                     }
                 ],
                 FIELDS: [
                     {
-                        slug: 'stadsdeel_naam',
-                        label: 'Stadsdeel naam'
-                    },
-                    {
-                        slug: 'stadsdeel_code',
-                        label: 'Stadsdeel code'
-                    },
-                    {
-                        slug: 'ggw_naam',
-                        label: 'Gebiedsnaam (gebiedsgerichtwerken)'
-                    },
-                    {
-                        slug: 'ggw_code',
-                        label: 'Gebiedsnaam code'
-                    },
-                    {
-                        slug: 'buurtcombinatie_naam',
-                        label: 'Wijknaam (buurtcombinatie)'
-                    },
-                    {
-                        slug: 'buurtcombinatie_code',
-                        label: 'Wijk volledige code'
-                    },
-                    {
-                        slug: 'buurt_naam',
-                        label: 'Buurtnaam'
-                    },
-                    {
-                        slug: 'buurt_code',
-                        label: 'Buurt volledige code'
-                    },
-                    {
                         slug: '_openbare_ruimte_naam',
-                        label: 'Straatnaam (openbare ruimte naam)'
+                        label: 'Naam openbare ruimte'
                     },
                     {
                         slug: 'huisnummer',
-                        label: 'Huisnummer'
-                    },
-                    {
-                        slug: 'huisnummer_toevoeging',
-                        label: 'Huisnummer Toevoeging'
+                        label: 'Num.',
+                        format: {
+                            align: 'right'
+                        }
                     },
                     {
                         slug: 'huisletter',
-                        label: 'Huisnummer letter'
+                        label: 'Let.',
+                        format: {
+                            align: 'right'
+                        }
+                    },
+                    {
+                        slug: 'huisnummer_toevoeging',
+                        label: 'Toev.',
+                        format: {
+                            align: 'right'
+                        }
                     },
                     {
                         slug: 'postcode',
-                        label: 'Postcode'
+                        label: 'Postcode',
+                        format: {
+                            filters: ['postcode']
+                        }
+                    },
+                    {
+                        slug: 'stadsdeel_naam',
+                        label: 'Stadsdeel'
+                    },
+                    {
+                        slug: 'stadsdeel_code',
+                        label: '-code'
+                    },
+                    {
+                        slug: 'ggw_naam',
+                        label: 'GGW-gebied'
+                    },
+                    {
+                        slug: 'ggw_code',
+                        label: '-code'
+                    },
+                    {
+                        slug: 'buurtcombinatie_naam',
+                        label: 'Buurtcombinatie'
+                    },
+                    {
+                        slug: 'buurtcombinatie_code',
+                        label: '-code'
+                    },
+                    {
+                        slug: 'buurt_naam',
+                        label: 'Buurt'
+                    },
+                    {
+                        slug: 'buurt_code',
+                        label: '-code'
                     }
                 ]
             }

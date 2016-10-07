@@ -28,11 +28,19 @@
   right: 0;
   width: $button-size;
   height: $button-size;
-  background-image: url("assets/icons/close.svg");
+  background-image: url("assets/icons/close-default.svg");
 
   &:hover {
-    background-image: url("assets/icons/close-hover.svg");
+    background-image: url("assets/icons/close-active.svg");
   }
+}
+
+.o-btn--close--warning {
+  background-image: url("assets/icons/close-warning.svg");
+}
+
+.o-btn--close--danger {
+  background-image: url("assets/icons/close-hover.svg");
 }
 
 .s-btn--nested {

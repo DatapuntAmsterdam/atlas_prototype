@@ -3,7 +3,7 @@
 }
 
 .c-active-overlays__item__header {
-  @include font-size($s-header-font);
+  @include font-size($m-header-font);
 }
 
 .c-active-overlays__item__legend {

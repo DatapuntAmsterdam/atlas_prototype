@@ -1,0 +1,15 @@
+<div class="u-margin__bottom--4">
+  <h4 ng-if="apiData.count >= 5" class="c-paginering">1-{{ apiData.results.length }} van {{apiData.count}}</h4>
+
+  <p ng-if="!apiData.results.length">Op dit moment geen gegevens beschikbaar.</p>
+
+  <ul ng-if="apiData.results.length" class="o-list--bulleted">
+    <li ng-repeat="object in apiData.results">
+        {{ object._display}}
+    </li>
+  </ul>
+
+  <button class="o-loadmore" ng-click="loadMore()" ng-if="apiData.next">
+    Meer
+  </button>
+</div>

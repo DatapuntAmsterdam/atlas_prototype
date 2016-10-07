@@ -6,3 +6,11 @@
     color: $primary-contrast;
   }
 }
+
+.o-link-inline--light {
+  color: $primary-light;
+
+  &:hover {
+    color: $primary-light;
+  }
+}

@@ -1,8 +1,17 @@
-<div class="u-row">
-    <atlas-stelselpedia-header definition="STANDPLAATS" meta-data="apiData"></atlas-stelselpedia-header>
+<div>
+    <div class="u-row">
+        <atlas-stelselpedia-header definition="STANDPLAATS" meta-data="apiData"></atlas-stelselpedia-header>
 
-    <dl class="c-key-value-list u-margin__bottom--4">
-        <dt>Status</dt>
-        <dd>{{ apiData.results.status.omschrijving }}</dd>
-    </dl>
+        <dl class="c-key-value-list u-margin__bottom--4">
+            <dt>Status</dt>
+            <dd>{{ apiData.results.status.omschrijving }}</dd>
+        </dl>
+    </div>
+
+    <!-- Vestiging -->
+    <div>
+        <atlas-stelselpedia-header definition="VESTIGING" use-plural="true"></atlas-stelselpedia-header>
+
+        <atlas-api-call endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}" add-api-root="true" partial="lijst"></atlas-api-call>
+    </div>
 </div>

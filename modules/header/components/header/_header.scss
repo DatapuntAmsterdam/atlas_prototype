@@ -43,6 +43,10 @@
   }
 }
 
+.site-header__search {
+  padding-left: $base-whitespace * 2;
+}
+
 .site-header__menu {
   height: $site-header-height;
   float: right;

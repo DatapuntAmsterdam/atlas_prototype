@@ -6,13 +6,13 @@
 }
 
 .c-layer-selection__heading {
+  @include font-size($m-header-font);
   position: relative;
   height: $button-size;
   padding-right: $base-whitespace;
   padding-left: $base-whitespace;
   background-color: $secondary-gray40;
   color: $primary-light;
-  font-family: $header-font-family;
   line-height: $button-size;
 }
 

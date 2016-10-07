@@ -30,38 +30,26 @@ describe('The piwik service', function () {
         });
     });
 
+
     it('inserts a script tag into the DOM', function () {
         var numberOfScripts,
             piwikScript;
 
         numberOfScripts = getScripts().length;
 
-        piwik.initialize();
-
-        piwikScript = getScripts()[0];
-
-        expect(getScripts().length).toBe(numberOfScripts + 1);
-        expect(piwikScript.getAttribute('type')).toBe('text/javascript');
-        expect(piwikScript.getAttribute('src')).toBe('//admin.datapunt.amsterdam.nl/piwik/piwik.js');
-    });
-
-    it('creates a global variable with specific instructions per environment', function () {
-        /*
-         * Please note that $window._paq is already created by piwik.run.js before this unit test is run, the
-         * initialize() function calls in this file have no effect, but they are added for clarity. Running initialize
-         * twice will never happen in the 'real world'.
-         *
-         * Note: we can't test window.Piwik.getTracker().getSiteId() because Piwik's script is loaded asynchronously and
-         * Karma won't wait for that.
-         */
-        var numberOfInstructions;
-
+        $window._paq = [];
         spyOn($window._paq, 'push');
 
-        piwik.initialize();
-        numberOfInstructions = $window._paq.length;
-
+        piwik.initialize(); 
+        // Checking values
         expect($window._paq.push).toHaveBeenCalledWith(['setSiteId', 300]);
+
+        piwikScript = getScripts()[0];
+        // Checking script
+        expect(getScripts().length).toBe(numberOfScripts + 1);
+        expect(piwikScript.getAttribute('type')).toBe('text/javascript');
+        expect(piwikScript.getAttribute('src')).toBe('https://atlas.amsterdam.nl/piwik/piwik.js');
+
     });
 
     function getScripts () {

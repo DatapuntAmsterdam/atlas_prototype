@@ -5,9 +5,9 @@
         .module('atlasDetail')
         .factory('geometry', geometryFactory);
 
-        geometryFactory.$inject = ['api'];
+        geometryFactory.$inject = ['api', 'crsConverter', 'BOUNDING_BOX'];
 
-        function geometryFactory (api) {
+        function geometryFactory (api, crsConverter, BOUNDING_BOX) {
             return {
                 getGeoJSON: getGeoJSON
             };
@@ -23,6 +23,8 @@
                 function getGeometry (data) {
                     if (angular.isObject(data.geometrie)) {
                         return data.geometrie;
+                    } else if (isVestigingAmsterdam(data)) {
+                        return data.bezoekadres.geometrie;
                     } else if (isAPerceel(url, data)) {
                         return getGPerceel(data).then(getGeometry);
                     } else if (isNummeraanduiding(url)) {
@@ -30,6 +32,22 @@
                     } else {
                         return null;
                     }
+                }
+
+                function isVestigingAmsterdam (data) {
+                    var isVestigingAmsterdam = false;
+                    var southWest = crsConverter.wgs84ToRd(BOUNDING_BOX.COORDINATES.southWest);
+                    var northEast = crsConverter.wgs84ToRd(BOUNDING_BOX.COORDINATES.northEast);
+
+                    if (angular.isObject(data.bezoekadres) &&
+                        angular.isObject(data.bezoekadres.geometrie) &&
+                        data.bezoekadres.geometrie.coordinates[0] > southWest[0] &&
+                        data.bezoekadres.geometrie.coordinates[0] < northEast[0] &&
+                        data.bezoekadres.geometrie.coordinates[1] > southWest[1] &&
+                        data.bezoekadres.geometrie.coordinates[1] < northEast[1]) {
+                        isVestigingAmsterdam = true;
+                    }
+                    return isVestigingAmsterdam;
                 }
 
                 function isAPerceel (url, data) {

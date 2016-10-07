@@ -7,6 +7,7 @@
             bindings: {
                 endpoint: '@',
                 partial: '@',
+                addApiRoot: '=',
                 useBrkObjectExpanded: '='
             },
             templateUrl: 'modules/detail/components/api-call/atlas-api-call.html',
@@ -39,7 +40,7 @@
                 vm.isLoading = true;
 
                 //Load the first page
-                loadData(endpoint);
+                loadData(endpoint, vm.addApiRoot);
 
                 //Load pages 2-n
                 vm.loadMore = function () {
@@ -50,8 +51,9 @@
             }
         });
 
-        function loadData (endpoint) {
-            api.getByUrl(endpoint).then(function (response) {
+        function loadData (endpoint, addApiRoot) {
+            var callEndpointFn = addApiRoot ? api.getByUri : api.getByUrl;
+            callEndpointFn(endpoint).then(function(response) {
                 var hasPagination = angular.isArray(response.results);
 
                 if (hasPagination) {
