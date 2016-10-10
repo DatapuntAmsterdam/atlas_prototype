@@ -22,11 +22,16 @@
   font-size: inherit;
 }
 
+.c-login-form__error {
+  margin-bottom: 20px;
+  padding: 0 $base-whitespace;
+  line-height: $button-size;
+}
+
 .c-login-form__button {
   float: right;
   font-weight: 700;
   line-height: $button-size;
-  text-transform: lowercase;
 
   &::after {
     display: inline-block;
