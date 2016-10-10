@@ -21,9 +21,7 @@
             maximumSize = 60;
 
         vm.size = Math.max(Math.round(maximumSize - vm.distance), minimumSize);
-        console.log('in controller');
         vm.loadScene = function () {
-            console.log('loadscene');
             store.dispatch({
                 type: ACTIONS.FETCH_STRAATBEELD,
                 payload: vm.sceneId
