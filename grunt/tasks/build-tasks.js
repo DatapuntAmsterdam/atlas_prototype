@@ -9,12 +9,15 @@ module.exports = function (grunt) {
         'copy:bower_leaflet_images',
         'copy:bower_leaflet_measure_images',
 
+       
         'build-js',
-        'build-css'
+        'build-css',
+         'ngdocs'
     ]);
 
     grunt.registerTask('build-release', [
         'build-develop',
         'clean:temp'
     ]);
+
 };

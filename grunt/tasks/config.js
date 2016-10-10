@@ -28,6 +28,7 @@ module.exports = function (grunt) {
         eslint: require(gruntDir + 'eslint'),
         jshint: require(gruntDir + 'jshint'),
         karma: require(gruntDir + 'karma'),
+        ngdocs: require(gruntDir + 'ngdocs'),
         ngtemplates: require(gruntDir + 'angular-templates'),
         npmcopy: require(gruntDir + 'npmcopy'),
         postcss: require(gruntDir + 'postcss')(grunt),
@@ -50,6 +51,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-newer');
+    grunt.loadNpmTasks('grunt-ngdocs');
     grunt.loadNpmTasks('grunt-npmcopy');
     grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-sass');
