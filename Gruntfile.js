@@ -35,6 +35,8 @@ module.exports = function (grunt) {
         'copy:bower_leaflet_images',
         'copy:bower_leaflet_measure_images',
 
+        'ngdocs',
+
         'build-js',
         'build-css'
     ]);
