@@ -32,6 +32,14 @@
                 slug: 'luchtfoto_2011',
                 label: 'Luchtfoto 2011',
                 urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2011_RD/{z}/{x}/{y}.jpeg'
+            }, {
+                slug: 'luchtfoto_2007',
+                label: 'Luchtfoto 2007',
+                urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2007_RD/{z}/{x}/{y}.jpeg'
+            }, {
+                slug: 'luchtfoto_2006',
+                label: 'Luchtfoto 2006',
+                urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2006_RD/{z}/{x}/{y}.jpeg'
             }
         ]);
 })();

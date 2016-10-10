@@ -5,7 +5,7 @@ module.exports = {
             leaflet: ['dist/leaflet.js', 'dist/leaflet.css']
         },
         dest: {
-            js: 'build/temp/bower_components.js'
+            js: 'build/temp/bower_components/bower_components.js'
         },
         dependencies: {
             'angular-i18n': 'angular',
@@ -20,7 +20,7 @@ module.exports = {
     },
     css: {
         dest: {
-            css: 'build/temp/bower_components.css'
+            css: 'build/temp/bower_components/bower_components.css'
         }
     }
 };

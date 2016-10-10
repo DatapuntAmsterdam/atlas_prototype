@@ -15,7 +15,8 @@
     DpDataSelectionController.$inject = ['$scope', 'dataSelectionApi', 'dataSelectionConfig'];
 
     function DpDataSelectionController ($scope, dataSelectionApi, dataSelectionConfig) {
-        var vm = this;
+        // Test for ES6
+        let vm = this;
 
         $scope.$watch('vm.state', fetchData, true);
 
@@ -24,8 +25,9 @@
 
             vm.currentPage = vm.state.page;
 
-            dataSelectionApi.query(vm.state.dataset, vm.state.filters, vm.currentPage).then(function (data) {
+            dataSelectionApi.query(vm.state.dataset, vm.state.filters, vm.currentPage).then((data) => {
 
+                vm.title = dataSelectionConfig.bag.TITLE;
                 vm.availableFilters = data.filters;
                 vm.tableData = data.tableData;
                 vm.numberOfRecords = data.number_of_records;

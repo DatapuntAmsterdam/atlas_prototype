@@ -7,7 +7,7 @@
     </div>
     <form class="u-inline-block" ng-submit="vm.goToPage($event)">
         <span>Ga naar pagina</span>
-        <input ng-model="vm.currentPage" type="number" class="c-data-selection-pagination__input" pattern="\d*" size="4">
+        <input ng-model="vm.currentPage" type="number" class="c-data-selection-pagination__input" pattern="\d*" size="4" maxlength="4">
         <button type="submit" class="c-data-selection-pagination__button" title="Ga naar ingevoerde pagina" >
             <span class="u-sr-only">Ga naar ingevoerde pagina</span>
         </button>

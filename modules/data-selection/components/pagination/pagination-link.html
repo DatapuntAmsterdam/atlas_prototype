@@ -2,6 +2,7 @@
 	ng-if="vm.link.enabled"
 	class-name="{{ vm.link.class_name }} c-data-selection-pagination-link"
 	type="NAVIGATE_DATA_SELECTION"
+    hover-text="{{vm.link.label}}"
 	payload="vm.link.page">
     <span class="c-data-selection-pagination-link-text">{{vm.link.label}}</span>
 </dp-link>
