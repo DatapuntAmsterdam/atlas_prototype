@@ -6,6 +6,6 @@ module.exports = {
 		startPage: 'api/atlas.module:atlas'
 	},
 	all: [
-        	'modules/**/*.js',
+		'modules/**/*.js'
 	]
 };
