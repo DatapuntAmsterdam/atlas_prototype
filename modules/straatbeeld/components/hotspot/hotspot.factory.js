@@ -30,7 +30,7 @@
             scope.distance = distance;
 
             html = $compile(element)(scope)[0];
-           
+
             scope.$applyAsync(function () {
                 q.resolve(html);
             });
@@ -44,6 +44,6 @@
                 yaw: hotspot.relativeLocation.yaw - camera.heading,
                 pitch: hotspot.relativeLocation.pitch + camera.pitch
             };
-        } 
+        }
     }
 })();

@@ -7,7 +7,7 @@
 
     marzipanoService.$inject = ['Marzipano', 'straatbeeldConfig', 'earthmine', 'angleConversion', 'hotspotService'];
 
-    function marzipanoService(Marzipano, straatbeeldConfig, earthmine, angleConversion, hotspotService) {
+    function marzipanoService (Marzipano, straatbeeldConfig, earthmine, angleConversion, hotspotService) {
         var viewer;
 
         return {
@@ -20,7 +20,7 @@
          *
          * @returns {Object} - A Marzipano Viewer instance
          */
-        function initialize(domElement) {
+        function initialize (domElement) {
             viewer = new Marzipano.Viewer(domElement, {
                 stageType: null,
                 stage: {
@@ -31,7 +31,7 @@
             return viewer;
         }
 
-        function loadScene(sceneId, car, camera, hotspots) {
+        function loadScene (sceneId, car, camera, hotspots) {
             var view,
                 viewLimiter,
                 scene,
