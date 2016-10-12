@@ -15,7 +15,7 @@
 
     DpHotspotController.$inject = ['store', 'ACTIONS'];
 
-    function DpHotspotController (store, ACTIONS) {
+    function DpHotspotController(store, ACTIONS) {
         var vm = this,
             minimumSize = 30,
             maximumSize = 60;
@@ -28,5 +28,8 @@
                 payload: vm.sceneId
             });
         };
+
+
     }
 })();
+
