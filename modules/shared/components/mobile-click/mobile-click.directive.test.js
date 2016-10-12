@@ -34,7 +34,7 @@ describe('Mobile click directive', function () {
         return component;
     }
 
-    fit('checks for response on element on click and touch events', function () {
+    it('checks for response on element on click and touch events', function () {
         var directive;
 
         directive = getComponent();
