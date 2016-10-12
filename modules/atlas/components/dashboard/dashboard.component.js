@@ -28,7 +28,7 @@
      * The controller for the atlas dashboard. It is in this controller that
      * state changes are linked to visiblity and column changes in the application.
      */
-    function AtlasDashboardController (store, dashboardColumns) {
+    function AtlasDashboardController(store, dashboardColumns) {
         var vm = this;
 
         vm.store = store;
@@ -36,7 +36,7 @@
         store.subscribe(setLayout);
         setLayout();
 
-        function setLayout () {
+        function setLayout() {
             var state = store.getState();
 
             vm.visibility = dashboardColumns.determineVisibility(state);

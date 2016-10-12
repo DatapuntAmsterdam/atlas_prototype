@@ -8,11 +8,9 @@ module.exports = function (grunt) {
         'copy:bower_bbga_fonts',
         'copy:bower_leaflet_images',
         'copy:bower_leaflet_measure_images',
-
-       
         'build-js',
         'build-css',
-         'ngdocs'
+        'ngdocs'
     ]);
 
     grunt.registerTask('build-release', [

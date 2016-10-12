@@ -24,9 +24,11 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-docular": "^0.2.4",
     "grunt-eslint": "^19.0.0",
     "grunt-karma": "^2.0.0",
     "grunt-newer": "^1.2.0",
+    "grunt-ngdocs": "^0.2.10",
     "grunt-npmcopy": "^0.1.0",
     "grunt-postcss": "^0.8.0",
     "grunt-sass": "^1.2.1",
@@ -44,7 +46,6 @@
     "karma-sourcemap-loader": "^0.3.7",
     "phantomjs-prebuilt": "^2.1.7",
     "shortid": "^2.2.6",
-    "grunt-ngdocs": "^0.2.10",
     "time-grunt": "^1.4.0"
   },
   "scripts": {

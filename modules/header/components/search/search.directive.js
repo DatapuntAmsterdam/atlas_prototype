@@ -5,7 +5,7 @@
         .module('atlasHeader')
         .directive('atlasSearch', atlasSearchDirective);
 
-        atlasSearchDirective.$inject = ['$timeout', 'autocompleteData', 'environment', 'store', 'ACTIONS'];
+    atlasSearchDirective.$inject = ['$timeout', 'autocompleteData', 'environment', 'store', 'ACTIONS'];
 
     /**
      * @ngdoc directive
@@ -15,7 +15,7 @@
      * @description
      * Creates the search bar for the header. 
      */
-    function atlasSearchDirective ($timeout, autocompleteData, environment, store, ACTIONS) {
+    function atlasSearchDirective($timeout, autocompleteData, environment, store, ACTIONS) {
         return {
             restrict: 'E',
             scope: {
@@ -25,7 +25,7 @@
             link: linkFunction
         };
 
-        function linkFunction (scope, element) {
+        function linkFunction(scope, element) {
             var searchbox = element[0].querySelector('.js-search-input');
 
             scope.activeSuggestionIndex = -1;
@@ -83,7 +83,7 @@
                         // Only load suggestions if they are still relevant.
                         if (suggestions.query === scope.query) {
                             scope.suggestions = suggestions.data;
-                            scope.numberOfSuggestions = suggestions.count;    
+                            scope.numberOfSuggestions = suggestions.count;
                         }
                     });
                 } else {
@@ -147,7 +147,7 @@
 
             scope.removeSuggestions = removeSuggestions;
 
-            function removeSuggestions (event) {
+            function removeSuggestions(event) {
                 if (angular.isDefined(event) && event.type === 'blur') {
                     /**
                      * Clicking a suggestion link, which is outside the search box, triggers the blur event on the
@@ -160,7 +160,7 @@
                     removeSuggestionFromScope();
                 }
 
-                function removeSuggestionFromScope () {
+                function removeSuggestionFromScope() {
                     scope.suggestions = [];
                     scope.numberOfSuggestions = 0;
                     scope.activeSuggestionIndex = -1;
@@ -168,7 +168,7 @@
                 }
             }
 
-            function setSuggestedQuery () {
+            function setSuggestedQuery() {
                 scope.query = autocompleteData.getSuggestionByIndex(
                     scope.suggestions,
                     scope.activeSuggestionIndex

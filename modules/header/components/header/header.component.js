@@ -39,7 +39,7 @@
      * Controller definition of the atlasHeader componnent. It reacts to changes in the 
      * the user service.
      */
-    function AtlasHeaderController (user) {
+    function AtlasHeaderController(user) {
         var vm = this;
 
         vm.isLoggedIn = function () {
