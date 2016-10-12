@@ -33,5 +33,21 @@
         <dd ng-if="!apiData.results.bezoekadres.geometrie.coordinates[0]"></dd>
     </dl>
 
+    <dp-panel is-panel-visible="true" type="warning" can-close="true">
+        <h3 class="u-margin__bottom--1">Disclaimer</h3>
+        <p>
+            De gegevens uit het Handelsregister (HR) in Atlas zijn afkomstig van een lokale gemeentelijke kopie van de Kamer van Koophandel (KvK). Basisinformatie vult deze lokale kopie op dit moment voor het eerst.        </p>
+
+        <p>
+            De gegevens over vestigingen, die onder meer in de kaart worden getoond, zijn 100% dekkend en zijn van juni 2016. De overige gegevens, zoals personen en maatschappelijke activiteiten (bijvoorbeeld ondernemingen) worden op dit moment gevuld. Meer dan 60% daarvan is reeds gevuld.
+        <p>
+            De verwachting is dat de gegevens medio december volledig gevuld en geactualiseerd zijn.
+        </p>
+
+        <p class="u-margin__bottom--0">
+            Raadpleeg voor de meest actuele gegevens de raadpleegvoorziening van de KvK: <a class="o-link-inline o-link-inline--light" target="_blank" href="https://www.kvk.nl/zoeken/">https://www.kvk.nl/zoeken/</a>.
+        </p>
+    </dp-panel>
+
     <atlas-api-call endpoint="{{vm.apiData.results.maatschappelijke_activiteit}}" partial="handelsregister/mac"></atlas-api-call>
 </div>

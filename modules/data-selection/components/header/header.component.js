@@ -6,7 +6,8 @@
         .component('dpDataSelectionHeader', {
             bindings: {
                 state: '=',
-                numberOfRecords: '='
+                numberOfRecords: '=',
+                headerTitle: '<'
             },
             templateUrl: 'modules/data-selection/components/header/header.html',
             controllerAs: 'vm'

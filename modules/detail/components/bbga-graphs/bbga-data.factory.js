@@ -3,7 +3,7 @@
 
     angular
         .module('atlasDetail')
-        .service('bbgaDataService', bbgaDataService);
+        .factory('bbgaDataService', bbgaDataService);
 
     bbgaDataService.$inject = ['$q', '$http', 'BBGA_CONFIG', 'environment'];
 
@@ -82,12 +82,12 @@
             });
         }
 
-        //We're assuming that all data for a variable gets updated at the same time
+        // We're assuming that all data for a variable gets updated at the same time
         function setYearMetaData (variableData) {
-            //Make the jaar part of the meta data
+            // Make the jaar part of the meta data
             variableData.meta.jaar = variableData.data[0].jaar;
 
-            //Remove the jaar from it's old position
+            // Remove the jaar from it's old position
             variableData.data.map(function (data) {
                 delete data.jaar;
 

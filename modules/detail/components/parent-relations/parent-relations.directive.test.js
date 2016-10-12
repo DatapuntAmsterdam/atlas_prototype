@@ -12,7 +12,7 @@ describe('The dp-parent-relations directive', function () {
                     'planet',
                     'verblijfsobject'
                 ]);
-                $provide.factory('dpLinkDirective', function(){
+                $provide.factory('dpLinkDirective', function () {
                     return {};
                 });
             }

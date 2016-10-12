@@ -45,10 +45,9 @@ describe('The atlas-search-results component', function () {
                         }
 
                         return q.promise;
-
                     }
                 },
-                //Store is used in the non-mocked child directive dp-link
+                // Store is used in the non-mocked child directive dp-link
                 store: {
                     dispatch: function () {}
                 }
@@ -357,10 +356,10 @@ describe('The atlas-search-results component', function () {
         it('shows search results', function () {
             var component = getComponent('Weesperstraat');
 
-            //It shows 10 results from the first category and 1 results from the second category
+            // It shows 10 results from the first category and 1 results from the second category
             expect(component.find('ul dp-link').length).toBe(11);
 
-            //The first result
+            // The first result
             expect(component.find('ul dp-link').eq(0).text().trim()).toBe('Weesperstraat 101');
             component.find('ul dp-link').eq(0).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -368,7 +367,7 @@ describe('The atlas-search-results component', function () {
                 payload: 'https://some-domain/bag/verblijfsobject/03630000864309/'
             });
 
-            //The last results from the first category
+            // The last results from the first category
             expect(component.find('ul dp-link').eq(9).text().trim()).toBe('Weesperstraat 116');
             component.find('ul dp-link').eq(9).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -376,7 +375,7 @@ describe('The atlas-search-results component', function () {
                 payload: 'https://some-domain/bag/verblijfsobject/03630000919584/'
             });
 
-            //The last (and only) result from the second category
+            // The last (and only) result from the second category
             expect(component.find('ul dp-link').eq(10).text().trim()).toBe('Weesperstraat');
             component.find('ul dp-link').eq(10).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -395,11 +394,11 @@ describe('The atlas-search-results component', function () {
             it('has both singular and plural variations for the headings of categories', function () {
                 var component;
 
-                //A category with 11 search results uses the plural form and it shows the number of results in brackets
+                // A category with 11 search results uses the plural form and it shows the number of results in brackets
                 component = getComponent('Weesperstraat');
                 expect(component.find('.qa-search-header').eq(0).text().trim()).toBe('Adressen (11)');
 
-                //A category with 1 search result uses the singular form and doesn't show the number or results
+                // A category with 1 search result uses the singular form and doesn't show the number or results
                 mockedSearchResults[0].count = 1;
                 mockedSearchResults[0].results.length = 1;
                 component = getComponent('Weesperstraat');
@@ -409,7 +408,7 @@ describe('The atlas-search-results component', function () {
             it('categories with more than 10 results show a link to the category', function () {
                 var component;
 
-                //A category with 11 search results uses the plural form and it shows the number of results in brackets
+                // A category with 11 search results uses the plural form and it shows the number of results in brackets
                 component = getComponent('Weesperstraat');
                 expect(removeWhitespace(component.find('dp-link').eq(10).text())).toBe('Toon alle 11');
                 component.find('dp-link button').click();
@@ -418,7 +417,7 @@ describe('The atlas-search-results component', function () {
                     payload: 'adres'
                 });
 
-                //This link shows numbers with a thousand separator
+                // This link shows numbers with a thousand separator
                 mockedSearchResults[0].count = 1234;
                 component = getComponent('Weesperstraat');
                 expect(removeWhitespace(component.find('dp-link').eq(10).text())).toBe('Toon alle 1.234');
@@ -436,7 +435,7 @@ describe('The atlas-search-results component', function () {
                 it('shows all links from the search API (instead of just the first 10)', function () {
                     expect(component.find('dp-link').length).toBe(11);
 
-                    //The first link
+                    // The first link
                     expect(removeWhitespace(component.find('dp-link').eq(0).text())).toBe('Weesperstraat 101');
                     component.find('dp-link button').click();
                     expect(store.dispatch).toHaveBeenCalledWith({
@@ -444,7 +443,7 @@ describe('The atlas-search-results component', function () {
                         payload: 'https://some-domain/bag/verblijfsobject/03630000864309/'
                     });
 
-                    //The last link
+                    // The last link
                     expect(removeWhitespace(component.find('dp-link').eq(10).text())).toBe('Weesperstraat 117');
                     component.find('dp-link button').click();
                     expect(store.dispatch).toHaveBeenCalledWith({
@@ -456,33 +455,33 @@ describe('The atlas-search-results component', function () {
                 it('can have a show more link inside the category', function () {
                     mockedSearchResults[0].count = 30;
 
-                    //Making sure the mockedSearchResults have 25 results for the first page
+                    // Making sure the mockedSearchResults have 25 results for the first page
                     while (mockedSearchResults[0].results.length < 25) {
                         mockedSearchResults[0].results.push(angular.copy(mockedSearchResults[0].results[0]));
                     }
 
                     mockedSearchResultsNextPage = angular.copy(mockedSearchResults[0]);
 
-                    //Add 5 extra search results
-                    for (i = 0; i < 5; i ++) {
+                    // Add 5 extra search results
+                    for (i = 0; i < 5; i++) {
                         mockedSearchResultsNextPage.results.push(angular.copy(mockedSearchResults[0].results[0]));
                     }
 
                     component = getComponent('Weesperstraat', null, 'adres');
 
-                    //It only shows the first 25 results
+                    // It only shows the first 25 results
                     expect(component.find('dp-link').length).toBe(25);
                     expect(component.find('button').eq(25).text().trim()).toBe('Toon meer');
 
-                    //Click the 'Toon meer' button
+                    // Click the 'Toon meer' button
                     component.find('button').eq(25).click();
                     $rootScope.$apply();
 
-                    //Now it shows all 30 search results
+                    // Now it shows all 30 search results
                     expect(component.find('dp-link').length).toBe(30);
 
-                    //And it no longer shows a 'Toon meer' button
-                    expect(component.find('button').length).toBe(30); //Instead of 31 (30 dp-link + 1 'Toon meer')
+                    // And it no longer shows a 'Toon meer' button
+                    expect(component.find('button').length).toBe(30); // Instead of 31 (30 dp-link + 1 'Toon meer')
                 });
             });
         });
@@ -498,11 +497,11 @@ describe('The atlas-search-results component', function () {
         it('shows search results from the geosearch API on the scope', function () {
             expect(component.find('h2').length).toBe(5);
 
-            //21 Links include an additional 'show more' link to the Pand and it includes only 10 adressen instead of 12
+            // 21 Links include an additional 'show more' link to the Pand,  it includes only 10 adressen instead of 12
             expect(component.find('dp-link').length).toBe(21);
 
-            //First category
-            expect(component.find('h2').eq(0).text().trim()).toBe('Pand'); //Singular, no number of results shown
+            // First category
+            expect(component.find('h2').eq(0).text().trim()).toBe('Pand'); // Singular, no number of results shown
 
             expect(removeWhitespace(component.find('dp-link').eq(0).text())).toBe('03630013054429');
             component.find('dp-link').eq(0).find('button').click();
@@ -511,8 +510,8 @@ describe('The atlas-search-results component', function () {
                 payload: 'https://api.datapunt.amsterdam.nl/bag/pand/03630013054429/'
             });
 
-            //Second category
-            expect(component.find('h2').eq(1).text().trim()).toBe('Adressen (12)'); //Plural, with number of results
+            // Second category
+            expect(component.find('h2').eq(1).text().trim()).toBe('Adressen (12)'); // Plural, with number of results
 
             expect(removeWhitespace(component.find('dp-link').eq(1).text())).toBe('Lumièrestraat 6');
             component.find('dp-link').eq(1).find('button').click();
@@ -528,8 +527,8 @@ describe('The atlas-search-results component', function () {
                 payload: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023962/'
             });
 
-            //Third category
-            expect(component.find('h2').eq(2).text().trim()).toBe('Openbare ruimtes (3)'); //Plural
+            // Third category
+            expect(component.find('h2').eq(2).text().trim()).toBe('Openbare ruimtes (3)'); // Plural
 
             expect(removeWhitespace(component.find('dp-link').eq(12).text())).toBe('Test OR #1');
             component.find('dp-link').eq(12).find('button').click();
@@ -545,8 +544,8 @@ describe('The atlas-search-results component', function () {
                 payload: 'https://api.datapunt.amsterdam.nl/bag/openbareruimte/789/'
             });
 
-            //Fourth category
-            expect(component.find('h2').eq(3).text().trim()).toBe('Kadastraal object'); //Singular
+            // Fourth category
+            expect(component.find('h2').eq(3).text().trim()).toBe('Kadastraal object'); // Singular
 
             expect(removeWhitespace(component.find('dp-link').eq(15).text())).toBe('ASD41AU00154G0000');
             component.find('dp-link').eq(15).find('button').click();
@@ -555,8 +554,8 @@ describe('The atlas-search-results component', function () {
                 payload: 'https://api.datapunt.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11820015470000/'
             });
 
-            //Fifth category
-            expect(component.find('h2').eq(4).text().trim()).toBe('Gebieden (5)'); //Plural
+            // Fifth category
+            expect(component.find('h2').eq(4).text().trim()).toBe('Gebieden (5)'); // Plural
 
             expect(removeWhitespace(component.find('dp-link').eq(16).text())).toBe('Haveneiland Noordoost');
             component.find('dp-link').eq(16).find('button').click();
@@ -574,13 +573,13 @@ describe('The atlas-search-results component', function () {
         });
 
         it('has indenting for certain \'related\' categories', function () {
-            //Without indenting
+            // Without indenting
             [0, 2, 3, 4].forEach(function (categoryIndex) {
                 expect(component.find('[ng-repeat="category in vm.searchResults"]').eq(categoryIndex).attr('class'))
                     .not.toContain('s-indented-result');
             });
 
-            //With indenting
+            // With indenting
             expect(component.find('[ng-repeat="category in vm.searchResults"]').eq(1).attr('class'))
                 .toContain('s-indented-result');
         });
@@ -588,7 +587,7 @@ describe('The atlas-search-results component', function () {
         it('has more link support', function () {
             var numberOfDpLinks;
 
-            //When there are more than 10 adressen
+            // When there are more than 10 adressen
             expect(component.find('dp-link').eq(11).find('button').text().trim())
                 .toBe('Bekijk alle 12 adressen binnen dit pand');
 
@@ -600,7 +599,7 @@ describe('The atlas-search-results component', function () {
 
             numberOfDpLinks = component.find('dp-link').length;
 
-            //When there are 10 or less adressen
+            // When there are 10 or less adressen
             mockedGeosearchResults[1].count = 10;
             mockedGeosearchResults[1].results.length = 10;
 
@@ -618,9 +617,9 @@ describe('The atlas-search-results component', function () {
     function removeWhitespace (input) {
         return input
             .trim()
-            //Remove new line characters
+            // Remove new line characters
             .replace(/\n/g, '')
-            //Replace 2 or more spaces with a single space
+            // Replace 2 or more spaces with a single space
             .replace(/\s{2,}/g, ' ');
     }
 });

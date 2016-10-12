@@ -1,18 +1,16 @@
 describe('The atlas-terugmelden-button component', function () {
     var $compile,
         $rootScope,
-        $window,
         $location,
         currentUrl = 'http://www.example.com/path/filename.html?foo=bar#baz';
 
     beforeEach(function () {
         angular.mock.module('atlasHeader');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$location_, _$window_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$location_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $location = _$location_;
-            $window = _$window_;
         });
 
         spyOn($location, 'absUrl').and.returnValue(currentUrl);

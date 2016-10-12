@@ -52,5 +52,4 @@ describe('The DataSelectionController', function () {
             some: 'setting'
         });
     });
-
 });

@@ -52,11 +52,11 @@ describe('The atlas-header component', function () {
     it('inserts the atlas-search component and passes down a query string', function () {
         var component;
 
-        //Without a query
+        // Without a query
         component = getComponent('', false);
         expect(component.find('atlas-search')[0].getAttribute('query')).toBe('');
 
-        //With a query
+        // With a query
         component = getComponent('I_AM_A_FAKE_QUERY', false);
         expect(component.find('atlas-search')[0].getAttribute('query')).toBe('I_AM_A_FAKE_QUERY');
     });
@@ -71,13 +71,13 @@ describe('The atlas-header component', function () {
 
             expect(component.find('.site-header__menu dp-link').length).toBe(1);
 
-            //Show the login button
+            // Show the login button
             expect(component.find('.site-header__menu dp-link').eq(0).attr('type')).toBe('SHOW_PAGE');
             expect(component.find('.site-header__menu dp-link').eq(0).attr('payload')).toBe('\'login\'');
             expect(component.find('.site-header__menu dp-link').eq(0).attr('class-name'))
                 .toBe('site-header__menu__item');
 
-            //Hide the logout button
+            // Hide the logout button
             expect(component.find('.site-header__menu button.site-header__menu__item').length).toBe(0);
         });
 
@@ -88,11 +88,11 @@ describe('The atlas-header component', function () {
 
             component = getComponent('', false);
 
-            //Hide the login button
+            // Hide the login button
             expect(component.find('.site-header__menu dp-link').length).toBe(0);
             expect(component.find('.site-header__menu dp-link').eq(0).attr('payload')).not.toBe('\'login\'');
 
-            //Show the logout button
+            // Show the logout button
             expect(component.find('.site-header__menu button.site-header__menu__item').length).toBe(1);
         });
     });

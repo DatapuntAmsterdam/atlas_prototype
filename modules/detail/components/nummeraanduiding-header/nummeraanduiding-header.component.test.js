@@ -71,29 +71,29 @@ describe('The atlas-nummeraanduiding-header directive', function () {
         it('adds a red badge if the status of the verblijfsobject is \'Verblijfsobject gevormd\'', function () {
             var directive;
 
-            //Status 'Verblijfsobject in gebruik', don't show a badge
+            // Status 'Verblijfsobject in gebruik', don't show a badge
             directive = getDirective('http://www.example-endpoint.com/21/', true);
 
             expect(directive.find('.badge.badge--red').length).toBe(0);
             expect(directive.text()).not.toContain('Verblijfsobject in gebruik');
 
-            //Status 'Verblijfsobject gevormd', show a badge
+            // Status 'Verblijfsobject gevormd', show a badge
             directive = getDirective('http://www.example-endpoint.com/18/', true);
-            expect(directive.find('.c-nummeraanduiding--gevormd').length).toBe(1);
-            expect(directive.find('.c-nummeraanduiding--gevormd').text()).toBe('Verblijfsobject gevormd');
+            expect(directive.find('.c-panel--danger').length).toBe(1);
+            expect(directive.find('.c-panel--danger').text().trim()).toBe('Verblijfsobject gevormd');
         });
 
         it('adds a blue badge if it\'s a nevenadres', function () {
             var directive;
 
-            //Hoofdadres
+            // Hoofdadres
             directive = getDirective('http://www.example-endpoint.com/21/', true);
             expect(directive.find('.badge.badge--blue').length).toBe(0);
 
-            //Nevenadres
+            // Nevenadres
             directive = getDirective('http://www.example-endpoint.com/21/', false);
-            expect(directive.find('.c-nummeraanduiding--nevenadres').length).toBe(1);
-            expect(directive.find('.c-nummeraanduiding--nevenadres').text()).toBe('Dit is een nevenadres');
+            expect(directive.find('.c-panel--warning').length).toBe(1);
+            expect(directive.find('.c-panel--warning').text().trim()).toBe('Dit is een nevenadres');
         });
     });
 
@@ -109,11 +109,11 @@ describe('The atlas-nummeraanduiding-header directive', function () {
     it('makes the header italic is the verblijfsobject status is \'Verblijfsobject gevormd\'', function () {
         var directive;
 
-        //Status 'Verblijfsobject in gebruik', use a roman font
+        // Status 'Verblijfsobject in gebruik', use a roman font
         directive = getDirective('http://www.example-endpoint.com/21/', true);
         expect(directive.find('atlas-stelselpedia-header').attr('heading')).toBe('Maria Austriastraat 730');
 
-        //Status 'Verblijfsobject gevormd', use an italic font
+        // Status 'Verblijfsobject gevormd', use an italic font
         directive = getDirective('http://www.example-endpoint.com/18/', true);
         expect(directive.find('atlas-stelselpedia-header').attr('heading')).toBe('<em>Maria Austriastraat 730</em>');
     });

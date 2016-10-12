@@ -113,7 +113,7 @@ describe('The geosearchFormatter factory', function () {
                 results: [
                     {
                         label: 'Amstel',
-                        subtype: 'water', //Converted to lowercase
+                        subtype: 'water', // Converted to lowercase
                         endpoint: 'https://api.datapunt.amsterdam.nl/bag/openbareruimte/03630011950509/'
                     }
                 ],
@@ -123,7 +123,7 @@ describe('The geosearchFormatter factory', function () {
                 label_singular: 'Gebied',
                 label_plural: 'Gebieden',
                 count: 2,
-                //These two results are sorted by the geosearchFormatter, the API results are in a different order
+                // These two results are sorted by the geosearchFormatter, the API results are in a different order
                 results: [
                     {
                         label: 'Zuid',

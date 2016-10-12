@@ -1,0 +1,8 @@
+<div ng-if="vm.isPanelVisible" class="c-panel {{vm.className}}" ng-class="{'c-panel--{{vm.type}}': vm.type}">
+
+    <ng-transclude></ng-transclude>
+
+    <button ng-if="vm.canClose" class="o-btn--close" ng-class="{'o-btn--close--{{vm.type}}': vm.type}" ng-click="vm.close()" title="Verbergen">
+        <span class="u-sr-only">Verbergen</span>
+    </button>
+</div>

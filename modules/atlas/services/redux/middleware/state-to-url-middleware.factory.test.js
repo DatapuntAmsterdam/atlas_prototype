@@ -46,7 +46,6 @@ describe('The stateToUrlMiddleware factory', function () {
 
     it('doesn\'t call stateToUrl.update for URL_CHANGE, FETCH_DETAIL, FETCH_STRAATBEELD, SHOW_LAYER_SELECTION and ' +
         'HIDE_LAYER_SELECTION', function () {
-
         var actionWithoutUrlUpdate = [
             ACTIONS.URL_CHANGE,
             ACTIONS.FETCH_DETAIL,

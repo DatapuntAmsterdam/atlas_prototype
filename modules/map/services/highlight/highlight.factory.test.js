@@ -96,7 +96,6 @@ describe('The highlight factory', function () {
                         } else if (geometry.type === 'MultiPolygon') {
                             return 'FAKE_MULTIPOLYGON_CENTER_RD';
                         }
-
                     }
                 },
                 panning: {
@@ -209,7 +208,7 @@ describe('The highlight factory', function () {
     it('has custom styling for MultiPolygons', function () {
         highlight.add(mockedLeafletMap, mockedItems.item_multipolygon);
 
-        //In the real world Leaflet calls the style function
+        // In the real world Leaflet calls the style function
         expect(projGeoJsonArguments[1].style()).toEqual({
             color: 'red',
             fillColor: 'red',
@@ -231,7 +230,7 @@ describe('The highlight factory', function () {
         highlight.add(mockedLeafletMap, mockedItems.item_marker);
 
         expect(L.Proj.geoJson).toHaveBeenCalledWith(jasmine.objectContaining(item.geometry), jasmine.any(Object));
-        projGeoJsonArguments[1].pointToLayer(null, 'FAKE_LATLNG'); //In the real world Leaflet calls this function
+        projGeoJsonArguments[1].pointToLayer(null, 'FAKE_LATLNG'); // In the real world Leaflet calls this function
 
         expect(L.icon).toHaveBeenCalledWith({
             foo: 'c'
@@ -246,7 +245,7 @@ describe('The highlight factory', function () {
 
     it('can add rotated markers to the map', function () {
         highlight.add(mockedLeafletMap, mockedItems.item_rotated_marker);
-        projGeoJsonArguments[1].pointToLayer(null, 'FAKE_LATLNG'); //In the real world Leaflet calls this function
+        projGeoJsonArguments[1].pointToLayer(null, 'FAKE_LATLNG'); // In the real world Leaflet calls this function
 
         expect(L.marker).toHaveBeenCalledWith('FAKE_LATLNG', {
             icon: 'FAKE_ICON',
@@ -287,7 +286,7 @@ describe('The highlight factory', function () {
             highlight.add(mockedLeafletMap, mockedItems.item_point);
             expect(mockedLeafletMap.fitBounds).not.toHaveBeenCalled();
 
-            //14 is the fallback zoom level defined in mapConfig.DEFAULT_ZOOM_HIGHLIGHT
+            // 14 is the fallback zoom level defined in mapConfig.DEFAULT_ZOOM_HIGHLIGHT
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.MAP_ZOOM,
                 payload: {
@@ -304,7 +303,7 @@ describe('The highlight factory', function () {
             highlight.add(mockedLeafletMap, mockedItems.item_point);
             expect(mockedLeafletMap.fitBounds).not.toHaveBeenCalled();
 
-            //14 is the fallback zoom level defined in mapConfig.DEFAULT_ZOOM_HIGHLIGHT
+            // 14 is the fallback zoom level defined in mapConfig.DEFAULT_ZOOM_HIGHLIGHT
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.MAP_ZOOM,
                 payload: {

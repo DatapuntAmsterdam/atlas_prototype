@@ -82,7 +82,7 @@ describe('The atlas-search-results-list component', function () {
         spyOn(store, 'dispatch');
     });
 
-    function getComponent(category, limitResults) {
+    function getComponent (category, limitResults) {
         var component,
             element,
             scope;
@@ -124,11 +124,11 @@ describe('The atlas-search-results-list component', function () {
     it('optionally limits the number of search results', function () {
         var component;
 
-        //Without the limiter
+        // Without the limiter
         component = getComponent(mockedCategory, false);
         expect(component.find('dp-link').length).toBe(11);
 
-        //With the limiter
+        // With the limiter
         component = getComponent(mockedCategory, true);
         expect(component.find('dp-link').length).toBe(10);
     });
@@ -143,15 +143,15 @@ describe('The atlas-search-results-list component', function () {
     it('shows the type of openbare ruimte when it\'s something else than \'Weg\'', function () {
         var component = getComponent(mockedCategory);
 
-        //Wegen
+        // Wegen
         [0, 1, 2, 5, 6, 7, 8, 9, 10, 11].forEach(function (index) {
             expect(component.find('li').eq(index).text()).not.toContain('(weg)');
         });
 
-        //Water
+        // Water
         expect(component.find('li').eq(3).text()).toContain('(water)');
 
-        //Kunstwerk
+        // Kunstwerk
         expect(component.find('li').eq(4).text()).toContain('(kunstwerk)');
     });
 

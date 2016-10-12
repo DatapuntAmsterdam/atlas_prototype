@@ -46,15 +46,15 @@ describe('The dataSelectionReducers factory', function () {
 
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
 
-            //It keeps the active layers
+            // It keeps the active layers
             expect(output.map.baseLayer).toBe('luchtfoto_1914');
             expect(output.map.overlays).toEqual(['OVERLAY_1', 'OVERLAY_2']);
 
-            //It resets view and zoom to the default state
+            // It resets view and zoom to the default state
             expect(output.map.viewCenter).toEqual(DEFAULT_STATE.map.viewCenter);
             expect(output.map.zoom).toBe(DEFAULT_STATE.map.zoom);
 
-            //It disables the rest
+            // It disables the rest
             expect(output.map.highlight).toBeNull();
             expect(output.map.showLayerSelection).toBe(false);
             expect(output.map.isFullscreen).toBe(false);
@@ -103,12 +103,12 @@ describe('The dataSelectionReducers factory', function () {
 
             mockedState = angular.copy(DEFAULT_STATE);
 
-            //With print mode enabled
+            // With print mode enabled
             mockedState.isPrintMode = true;
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
             expect(output.isPrintMode).toBe(true);
 
-            //With print mode disabled
+            // With print mode disabled
             mockedState.isPrintMode = false;
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
             expect(output.isPrintMode).toBe(false);

@@ -24,7 +24,7 @@ describe('The atlas-scrollable-content directive', function () {
         element.setAttribute('page-name', pageName || '');
         element.setAttribute('style', 'height: 100px; overflow-y: scroll;');
 
-        //Insert a lot of dummy content to enable scrolling
+        // Insert a lot of dummy content to enable scrolling
         for (i = 0; i < 100; i++) {
             paragraph = document.createElement('p');
             paragraph.innerText = 'I am a paragraph.';
@@ -58,17 +58,17 @@ describe('The atlas-scrollable-content directive', function () {
         directive = getDirective(visibility);
         expect(directive[0].scrollTop).toBe(0);
 
-        //Now scroll down
+        // Now scroll down
         directive[0].scrollTop = 100;
 
-        //Show another component
+        // Show another component
         scope = directive.isolateScope();
         scope.visibility.detail = false;
         scope.visibility.page = true;
         scope.pageName = 'home';
         scope.$apply();
 
-        //Make sure the scrollTop has been reset
+        // Make sure the scrollTop has been reset
         expect(directive[0].scrollTop).toBe(0);
     });
 
@@ -84,19 +84,19 @@ describe('The atlas-scrollable-content directive', function () {
             dataSelection: false
         };
 
-        //Open the 'home' page
+        // Open the 'home' page
         directive = getDirective(visibility, 'home');
         expect(directive[0].scrollTop).toBe(0);
 
-        //Now scroll down
+        // Now scroll down
         directive[0].scrollTop = 100;
 
-        //Open the 'about-us' page
+        // Open the 'about-us' page
         scope = directive.isolateScope();
         scope.pageName = 'about-us';
         scope.$apply();
 
-        //Make sure the scrollTop has been reset
+        // Make sure the scrollTop has been reset
         expect(directive[0].scrollTop).toBe(0);
     });
 });

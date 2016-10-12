@@ -125,20 +125,20 @@ describe('The search-reducers factory', function () {
             var inputState = angular.copy(defaultState),
                 output;
 
-            //With fullscreen disabled, it doesn't change the viewCenter
+            // With fullscreen disabled, it doesn't change the viewCenter
             inputState.map.viewCenter = [52.123, 4.789];
             inputState.map.isFullscreen = false;
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
 
             expect(output.map.viewCenter).toEqual([52.123, 4.789]);
 
-            //With fullscreen enabled, it changes the viewCenter
+            // With fullscreen enabled, it changes the viewCenter
             inputState.map.isFullscreen = true;
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
 
             expect(output.map.viewCenter).toEqual([52.001, 4.002]);
 
-            //With layer selection enabled
+            // With layer selection enabled
             inputState.map.showLayerSelection = true;
             output = searchReducers.SHOW_SEARCH_RESULTS_BY_CLICK(inputState, [52.001, 4.002]);
             expect(output.map.viewCenter).toEqual([52.001, 4.002]);

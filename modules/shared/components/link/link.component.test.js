@@ -44,7 +44,7 @@ describe('The dp-link component', function () {
 
         spyOn(store, 'dispatch');
 
-        //Scenario A
+        // Scenario A
         component = getComponent('SHOW_PAGE', 'welkom');
         component.find('button')[0].click();
 
@@ -53,7 +53,7 @@ describe('The dp-link component', function () {
             payload: 'welkom'
         });
 
-        //Scenario B
+        // Scenario B
         component = getComponent('MAP_PAN', [101, 102]);
         component.find('button')[0].click();
 

@@ -3,6 +3,7 @@
 
     angular
         .module('atlas', [
+            // Atlas modules
             'atlasHeader',
             'atlasPage',
             'atlasDetail',
@@ -11,7 +12,10 @@
             'dpMap',
             'dpStraatbeeld',
             'dpDataSelection',
-
-            'dpShared'
+            // Shared modules
+            'dpShared',
+            // External
+            'angulartics',
+            'angulartics.piwik'
         ]);
 })();

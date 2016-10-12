@@ -2,7 +2,7 @@ describe('The atlas-menu-dropdown directive', function () {
     var $compile,
         $rootScope;
 
-    beforeEach(function(){
+    beforeEach(function () {
         angular.mock.module(
             'atlasHeader',
             function ($provide) {
@@ -54,33 +54,32 @@ describe('The atlas-menu-dropdown directive', function () {
     it('should toggle the visibility of the menu items when you click menu button', function () {
         var directive = getDirective();
 
-        //Click it once
+        // Click it once
         directive.find('.site-header__menu__item--toggle').eq(0).click();
 
-        //It should be openend
+        // It should be openend
         expect(directive.find('.menu-dropdown').length).toBe(1);
         expect(directive.find('atlas-terugmelden-button').length).toBe(1);
-        expect(directive.find('dp-link').length).toBe(3);
+        expect(directive.find('dp-link').length).toBe(2);
 
-        //Click it again
+        // Click it again
         directive.find('.site-header__menu__item--toggle').eq(0).click();
 
-        //It should be closed again
+        // It should be closed again
         expect(directive.find('.menu-dropdown').length).toBe(0);
         expect(directive.find('atlas-print-button').length).toBe(0);
         expect(directive.find('atlas-terugmelden-button').length).toBe(0);
         expect(directive.find('dp-link').length).toBe(0);
-
     });
 
     it('changes the styling of the toggle button depending on the state of the dropdown', function () {
         var directive = getDirective();
 
-        //When closed
+        // When closed
         expect(directive.find('.site-header__menu__item--toggle').attr('class'))
             .not.toContain('site-header__menu__item--toggle--active');
 
-        //When openend
+        // When openend
         directive.find('.site-header__menu__item--toggle').eq(0).click();
 
         expect(directive.find('.site-header__menu__item--toggle').attr('class'))
@@ -90,11 +89,11 @@ describe('The atlas-menu-dropdown directive', function () {
     it('should hide the menu items if you click elsewhere on the page', function () {
         var directive = getDirective('dropdown-menu');
 
-        //Open the dropdown
+        // Open the dropdown
         directive.find('.site-header__menu__item--toggle').eq(0).click();
         expect(directive.find('.menu-dropdown').length).toBe(1);
 
-        //Click anywhere but the toggle button
+        // Click anywhere but the toggle button
         angular.element(document.body).click();
         expect(directive.find('.menu-dropdown').length).toBe(0);
     });
@@ -113,6 +112,5 @@ describe('The atlas-menu-dropdown directive', function () {
         directive2.find('.site-header__menu__item--toggle').eq(0).click();
         expect(directive1.find('.menu-dropdown').length).toBe(0);
         expect(directive2.find('.menu-dropdown').length).toBe(1);
-
     });
 });

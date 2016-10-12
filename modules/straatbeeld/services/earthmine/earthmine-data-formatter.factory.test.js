@@ -8,8 +8,8 @@ describe('The earthmine-data-formatter service', function () {
             'dpStraatbeeld',
             {
                 angleConversion: {
-                    degreesToRadians: function (input) {
-                        return input - 1;
+                    degreesToRadians: function (someInput) {
+                        return someInput - 1;
                     }
                 }
             }

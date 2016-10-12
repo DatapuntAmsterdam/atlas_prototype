@@ -32,10 +32,10 @@
                 vm.apiData = {};
                 vm.isLoading = true;
 
-                //Load the first page
+                // Load the first page
                 loadData(endpoint, vm.addApiRoot);
 
-                //Load pages 2-n
+                // Load pages 2-n
                 vm.loadMore = function () {
                     vm.isLoading = true;
 
@@ -46,7 +46,7 @@
 
         function loadData (endpoint, addApiRoot) {
             var callEndpointFn = addApiRoot ? api.getByUri : api.getByUrl;
-            callEndpointFn(endpoint).then(function(response) {
+            callEndpointFn(endpoint).then(function (response) {
                 var hasPagination = angular.isArray(response.results);
 
                 if (hasPagination) {

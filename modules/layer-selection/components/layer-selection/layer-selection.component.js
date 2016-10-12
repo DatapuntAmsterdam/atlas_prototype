@@ -56,7 +56,7 @@
         };
 
         vm.isOverlayActive = function (overlay) {
-            for(var i = 0;i < vm.activeOverlays.length;i++) {
+            for (var i = 0; i < vm.activeOverlays.length; i++) {
                 if (vm.activeOverlays[i].id === overlay) {
                     return true;
                 }

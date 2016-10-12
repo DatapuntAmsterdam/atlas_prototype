@@ -5,7 +5,7 @@
         .module('dpMap')
         .factory('layers', layersFactory);
 
-        layersFactory.$inject = ['L', 'mapConfig', 'BASE_LAYERS', 'OVERLAYS'];
+    layersFactory.$inject = ['L', 'mapConfig', 'BASE_LAYERS', 'OVERLAYS'];
 
     function layersFactory (L, mapConfig, BASE_LAYERS, OVERLAYS) {
         var baseLayer,
@@ -16,6 +16,16 @@
             addOverlay: addOverlay,
             removeOverlay: removeOverlay
         };
+
+        function getBaseLayerTemplate (layerName) {
+            var baseLayerTemplate;
+
+            baseLayerTemplate = BASE_LAYERS.filter(function (layer) {
+                return layerName === layer.slug;
+            })[0];
+
+            return baseLayerTemplate.urlTemplate;
+        }
 
         /*
          * @param {Object} map - A Leaflet map instance
@@ -36,16 +46,6 @@
             );
 
             leafletMap.addLayer(baseLayer);
-
-            function getBaseLayerTemplate (layerName) {
-                var baseLayer;
-
-                baseLayer = BASE_LAYERS.filter(function (baseLayer) {
-                    return layerName === baseLayer.slug;
-                })[0];
-
-                return baseLayer.urlTemplate;
-            }
         }
 
         function addOverlay (leafletMap, layerName) {

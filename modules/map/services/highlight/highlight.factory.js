@@ -29,7 +29,6 @@
         panning,
         store,
         ACTIONS) {
-
         var layers = {};
 
         return {
@@ -87,14 +86,14 @@
                 zoomLevel = leafletMap.getBoundsZoom(bounds);
 
                 if (!isNaN(zoomLevel)) {
-                    //A valid zoom level has been determined
+                    // A valid zoom level has been determined
                     leafletMap.fitBounds(bounds, {
                         animate: false
                     });
 
                     location = panning.getCurrentLocation(leafletMap);
                 } else {
-                    //Set the location and zoomLevel manually
+                    // Set the location and zoomLevel manually
                     location = crsConverter.rdToWgs84(geojson.getCenter(item.geometry));
                     zoomLevel = Math.max(leafletMap.getZoom(), mapConfig.DEFAULT_ZOOM_HIGHLIGHT);
                 }

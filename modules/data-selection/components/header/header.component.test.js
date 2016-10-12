@@ -95,7 +95,6 @@ describe('The dp-data-selection-header component', function () {
         expect(component.find('.qa-data-selection-header__with-records').length).toBe(1);
         expect(component.find('.qa-data-selection-header__with-records').text()).toContain('10');
         expect(component.find('dp-data-selection-download-button').length).toBe(1);
-
     });
 
     it('shows an error message when no records are present', function () {
@@ -105,5 +104,4 @@ describe('The dp-data-selection-header component', function () {
 
         expect(component.find('.qa-data-selection-header__with-records').length).toBe(0);
     });
-
 });

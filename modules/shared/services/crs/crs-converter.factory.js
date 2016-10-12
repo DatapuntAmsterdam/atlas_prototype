@@ -8,7 +8,7 @@
     crsConverterFactory.$inject = ['CRS_CONFIG', 'proj4'];
 
     function crsConverterFactory (CRS_CONFIG, proj4) {
-        return{
+        return {
             wgs84ToRd: wgs84ToRd,
             rdToWgs84: rdToWgs84
         };
@@ -19,10 +19,10 @@
          *
          * @returns {Array} - RD - An array with this structure: [x, y]
          */
-        function wgs84ToRd (wgs84Coordinates){
+        function wgs84ToRd (wgs84Coordinates) {
             return proj4(CRS_CONFIG.RD.projection, angular.copy(wgs84Coordinates).reverse());
 
-            //return [Math.round(rd[0]), Math.round(rd[1])];
+            // return [Math.round(rd[0]), Math.round(rd[1])];
         }
 
         /*
@@ -30,7 +30,7 @@
          *
          * @returns {Array} wgs84 - An An array with this structure: [lat, lon]
          */
-        function rdToWgs84 (rdCoordinates){
+        function rdToWgs84 (rdCoordinates) {
             return proj4(CRS_CONFIG.RD.projection, CRS_CONFIG.WGS84.projection, rdCoordinates).reverse();
         }
     }

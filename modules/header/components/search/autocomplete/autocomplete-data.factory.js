@@ -8,7 +8,6 @@
     autocompleteDataService.$inject = ['$q', '$http', 'environment', 'HEADER_CONFIG'];
 
     function autocompleteDataService ($q, $http, environment, HEADER_CONFIG) {
-
         return {
             search: search,
             getSuggestionByIndex: getSuggestionByIndex

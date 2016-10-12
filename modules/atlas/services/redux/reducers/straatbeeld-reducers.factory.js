@@ -66,7 +66,7 @@
         function showStraatbeeldReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
-            //Straatbeeld can be null if another action gets triggered between FETCH_STRAATBEELD and SHOW_STRAATBEELD
+            // Straatbeeld can be null if another action gets triggered between FETCH_STRAATBEELD and SHOW_STRAATBEELD
             if (angular.isObject(newState.straatbeeld)) {
                 newState.straatbeeld.id = payload.id;
                 newState.straatbeeld.searchLocation = null;

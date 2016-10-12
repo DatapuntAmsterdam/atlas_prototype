@@ -32,7 +32,7 @@ describe('The searchByClick factory', function () {
 
         spyOn(store, 'dispatch');
 
-        //Mock the Leaflet click event
+        // Mock the Leaflet click event
         mockedLeafletMap.fireEvent('click', {
             latlng: {
                 lat: 52.124,

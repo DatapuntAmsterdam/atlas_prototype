@@ -26,7 +26,7 @@ describe('The crsService', function () {
     });
 
     it('may not alter the configuration source', function () {
-        //This specification solves ATLAS-1101
+        // This specification solves ATLAS-1101
         var originalConfig = angular.copy(CRS_CONFIG);
 
         crsService.getRd();

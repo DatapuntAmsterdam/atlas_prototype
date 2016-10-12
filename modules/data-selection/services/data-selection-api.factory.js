@@ -46,10 +46,10 @@
             var formattedFilters = angular.copy(dataSelectionConfig[dataset].FILTERS);
 
             return formattedFilters.filter(function (filter) {
-                //Only show the filters that are returned by the API
+                // Only show the filters that are returned by the API
                 return angular.isObject(rawData[filter.slug]);
             }).map(function (filter) {
-                //Add all the available options for each filter
+                // Add all the available options for each filter
                 filter.options = rawData[filter.slug].buckets.map(function (option) {
                     return {
                         label: option.key,
@@ -58,7 +58,7 @@
                     };
                 });
 
-                //Note: filter.options is limited to 100 results
+                // Note: filter.options is limited to 100 results
                 filter.numberOfOptions = rawData[filter.slug].doc_count;
 
                 return filter;

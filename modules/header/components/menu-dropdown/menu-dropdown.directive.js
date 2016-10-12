@@ -5,7 +5,7 @@
         .module('atlasHeader')
         .directive('atlasMenuDropdown', atlasMenuDropdownDirective);
 
-    function atlasMenuDropdownDirective() {
+    function atlasMenuDropdownDirective () {
         return {
             restrict: 'E',
             transclude: true,

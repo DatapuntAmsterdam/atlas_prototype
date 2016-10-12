@@ -110,7 +110,7 @@ describe('The detailReducers factory', function () {
         });
 
         it('does nothing when detail is null', function () {
-            //This can happen when a user triggers another action after FETCH_DETAIL and before SHOW_DETAIL
+            // This can happen when a user triggers another action after FETCH_DETAIL and before SHOW_DETAIL
             var output;
 
             expect(defaultState.detail).toBeNull();

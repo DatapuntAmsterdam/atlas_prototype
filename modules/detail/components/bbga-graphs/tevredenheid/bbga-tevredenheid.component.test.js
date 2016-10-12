@@ -141,11 +141,11 @@ describe('The atlas-bbga-tevredenheid component', function () {
     it('formats the grades in the Dutch locale with one decimal', function () {
         var component = getComponent();
 
-        //Variabele A
+        // Variabele A
         expect(component.find('.o-table tr:nth-child(1) td:nth-of-type(1)').text().trim()).toBe('7,0');
         expect(component.find('.o-table tr:nth-child(1) td:nth-of-type(2)').text().trim()).toBe('7,4');
 
-        //Variabele B
+        // Variabele B
         expect(component.find('.o-table tr:nth-child(2) td:nth-of-type(1)').text().trim()).toBe('6,5');
         expect(component.find('.o-table tr:nth-child(2) td:nth-of-type(2)').text().trim()).toBe('6,3');
     });

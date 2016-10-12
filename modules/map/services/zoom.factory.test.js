@@ -94,17 +94,17 @@ describe('The zoom factory', function () {
     });
 
     it('can zoom in and out', function () {
-        //Set a initial zoom
+        // Set a initial zoom
         zoom.setZoom(mockedLeafletMap, 12);
         expect(mockedLeafletMap.setZoom).toHaveBeenCalledTimes(1);
         expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(12);
 
-        //Zoom in
+        // Zoom in
         zoom.setZoom(mockedLeafletMap, 16);
         expect(mockedLeafletMap.setZoom).toHaveBeenCalledTimes(2);
         expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(16);
 
-        //Zoom out
+        // Zoom out
         zoom.setZoom(mockedLeafletMap, 8);
         expect(mockedLeafletMap.setZoom).toHaveBeenCalledTimes(3);
         expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(8);
@@ -116,16 +116,16 @@ describe('The zoom factory', function () {
         expect(mockedLeafletMap.on).toHaveBeenCalledWith('zoomend', jasmine.any(Function));
         expect(moveEndCallback).toBeDefined();
 
-        //Trigger the moveend callback manually
+        // Trigger the moveend callback manually
         moveEndCallback();
 
-        //Nothing happens directly
+        // Nothing happens directly
         expect(store.dispatch).not.toHaveBeenCalled();
 
-        //But store.dispatch is triggered during the next digest cycle
+        // But store.dispatch is triggered during the next digest cycle
         $rootScope.$apply();
 
-        //The viewCenter will change when zooming in
+        // The viewCenter will change when zooming in
         expect(panning.getCurrentLocation).toHaveBeenCalledWith(mockedLeafletMap);
 
         expect(store.dispatch).toHaveBeenCalledWith({

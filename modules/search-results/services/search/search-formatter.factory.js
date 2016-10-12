@@ -19,7 +19,7 @@
                 .map(function (endpointSearchResults, index) {
                     return formatCategory(SEARCH_CONFIG.QUERY_ENDPOINTS[index].slug, endpointSearchResults);
                 })
-                //Remove 'empty' categories with no search results
+                // Remove 'empty' categories with no search results
                 .filter(function (endpointSearchResults) {
                     return endpointSearchResults.count;
                 });

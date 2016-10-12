@@ -93,7 +93,7 @@ describe('The stateToUrl factory', function () {
         });
 
         it('can contain one of more overlays', function () {
-            //No overlays, no parameter
+            // No overlays, no parameter
             mockedState.map.overlays = [];
 
             stateToUrl.update(mockedState, false);
@@ -102,7 +102,7 @@ describe('The stateToUrl factory', function () {
                 lagen: jasmine.any(String)
             }));
 
-            //One overlay
+            // One overlay
             mockedState.map.overlays = [{id: 'overlay_x', isVisible: true}];
 
             stateToUrl.update(mockedState, false);
@@ -111,7 +111,7 @@ describe('The stateToUrl factory', function () {
                 lagen: 'overlay_x:zichtbaar'
             }));
 
-            //Two overlays
+            // Two overlays
             mockedState.map.overlays = [
                 {id: 'overlay_x', isVisible: true},
                 {id: 'overlay_y', isVisible: false}
@@ -145,7 +145,7 @@ describe('The stateToUrl factory', function () {
         });
 
         it('keeps track of the state of the layer selection (opened or closed)', function () {
-            //Closed
+            // Closed
             mockedState.map.showLayerSelection = false;
             stateToUrl.update(mockedState, false);
 
@@ -153,7 +153,7 @@ describe('The stateToUrl factory', function () {
                 'kaartlagen-selectie': jasmine.anything()
             }));
 
-            //Opened
+            // Opened
             mockedState.map.showLayerSelection = true;
             stateToUrl.update(mockedState, false);
 
@@ -163,7 +163,7 @@ describe('The stateToUrl factory', function () {
         });
 
         it('keeps track of the active overlays (opened or closed', function () {
-            //Closed
+            // Closed
             mockedState.map.showActiveOverlays = false;
             stateToUrl.update(mockedState, false);
 
@@ -171,7 +171,7 @@ describe('The stateToUrl factory', function () {
                 'actieve-kaartlagen': jasmine.anything()
             }));
 
-            //Opened
+            // Opened
             mockedState.map.showActiveOverlays = true;
             stateToUrl.update(mockedState, false);
 
@@ -181,7 +181,7 @@ describe('The stateToUrl factory', function () {
         });
 
         it('keeps track of the isFullscreen state', function () {
-            //Closed
+            // Closed
             mockedState.map.isFullscreen = false;
             stateToUrl.update(mockedState, false);
 
@@ -189,7 +189,7 @@ describe('The stateToUrl factory', function () {
                 'volledig-scherm': jasmine.anything()
             }));
 
-            //Opened
+            // Opened
             mockedState.map.isFullscreen = true;
             stateToUrl.update(mockedState, false);
 
@@ -201,15 +201,14 @@ describe('The stateToUrl factory', function () {
 
     describe('Page', function () {
         it('can store the name of the page', function () {
-            //No page, no parameter
+            // No page, no parameter
             stateToUrl.update(mockedState, false);
 
             expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
                 pagina: jasmine.Any(String)
             }));
 
-
-            //With a page
+            // With a page
             mockedState.page = 'welkom';
 
             stateToUrl.update(mockedState, false);
@@ -222,15 +221,14 @@ describe('The stateToUrl factory', function () {
 
     describe('Detail', function () {
         it('can store the api endpoint of the detail page', function () {
-            //No detail, no parameter
+            // No detail, no parameter
             stateToUrl.update(mockedState, false);
 
             expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
                 detail: jasmine.Any(String)
             }));
 
-
-            //With a detail page
+            // With a detail page
             mockedState.detail = {
                 endpoint: 'https://api-acc.datapunt.amsterdam.nl/bag/verblijfsobject/123/'
             };
@@ -301,7 +299,7 @@ describe('The stateToUrl factory', function () {
 
         describe('camera orientation', function () {
             it('without orientation', function () {
-                //Without a camera orientation
+                // Without a camera orientation
                 mockedState.straatbeeld = {
                     id: 123,
                     searchLocation: null,
@@ -393,7 +391,7 @@ describe('The stateToUrl factory', function () {
                 page: 5
             };
 
-            //Without any filters
+            // Without any filters
             stateToUrl.update(mockedState, false);
             expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
                 dataset: 'bag'
@@ -404,11 +402,10 @@ describe('The stateToUrl factory', function () {
             }));
 
             expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-pagina': '5' //The page is converted to a string
+                'dataset-pagina': '5' // The page is converted to a string
             }));
 
-
-            //With one filter
+            // With one filter
             mockedState.dataSelection.filters = {
                 buurt: 'Mijn buurt'
             };
@@ -419,7 +416,7 @@ describe('The stateToUrl factory', function () {
                 'dataset-filters': 'buurt:Mijn%20buurt'
             }));
 
-            //With two filters
+            // With two filters
             mockedState.dataSelection.filters.buurtcombinatie = 'Mijn buurtcombinatie';
 
             stateToUrl.update(mockedState, false);
@@ -432,14 +429,14 @@ describe('The stateToUrl factory', function () {
 
     describe('Print', function () {
         it('keeps track of the document mode (web vs. print)', function () {
-            //Regular, non-print
+            // Regular, non-print
             stateToUrl.update(mockedState, false);
 
             expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
                 'print-versie': jasmine.anything()
             }));
 
-            //Print version
+            // Print version
             mockedState.isPrintMode = true;
             stateToUrl.update(mockedState, false);
 
@@ -450,11 +447,11 @@ describe('The stateToUrl factory', function () {
     });
 
     it('has the option to replace the URL', function () {
-        //Without replace
+        // Without replace
         stateToUrl.update(mockedState, false);
         expect($location.replace).not.toHaveBeenCalled();
 
-        //With replace
+        // With replace
         stateToUrl.update(mockedState, true);
         expect($location.replace).toHaveBeenCalled();
     });

@@ -83,9 +83,7 @@ describe('The atlas-bbga-graphs directive', function () {
     });
 
     it('retrieves data for each visualisation based on the gebied-heading and gebied-code', function () {
-        var directive;
-
-        directive = getDirective('Haveneiland Noordoost', 'M35f');
+        getDirective('Haveneiland Noordoost', 'M35f');
 
         expect(bbgaDataService.getGraphData).toHaveBeenCalledTimes(2);
         expect(bbgaDataService.getGraphData).toHaveBeenCalledWith('PERSONEN', 'Haveneiland Noordoost', 'M35f');

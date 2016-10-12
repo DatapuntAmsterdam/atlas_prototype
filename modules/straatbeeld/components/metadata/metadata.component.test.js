@@ -52,7 +52,7 @@ describe('The dp-straatbeeld-metadata component', function () {
             date = new Date(2016, 7, 1);
 
         component = getComponent(date, [52.123, 4.789]);
-        expect(component.text()).toContain('01-08-2016'); //With leading zeros
+        expect(component.text()).toContain('01-08-2016'); // With leading zeros
     });
 
     it('it uses a filter to display both the RD and the WGS84 coordinates', function () {

@@ -316,7 +316,6 @@ describe('The dashboardColumns factory', function () {
                 expect(columnSizes.middle).toBe(0);
                 expect(columnSizes.right).toBe(0);
             });
-
         });
     });
 
@@ -438,7 +437,6 @@ describe('The dashboardColumns factory', function () {
                 expect(columnSizes.middle).toBe(0);
                 expect(columnSizes.right).toBe(0);
             });
-
         });
     });
 

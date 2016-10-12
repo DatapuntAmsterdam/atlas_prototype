@@ -44,7 +44,7 @@ describe('The dp-loading-indicator', function () {
 
         expect(component.find('.c-loading-indicator').length).toBe(1);
         expect(component.find('.c-loading-indicator img').attr('src')).toBe('assets/icons/icon-spinner.gif');
-        //It's empty by design! The relevant text is shown right after the icon. Don't repeat the same text.
+        // It's empty by design! The relevant text is shown right after the icon. Don't repeat the same text.
         expect(component.find('.c-loading-indicator img').attr('alt')).toBe('');
         expect(component.find('.c-loading-indicator').text()).toContain('Bezig met laden');
     });
@@ -56,11 +56,11 @@ describe('The dp-loading-indicator', function () {
         isLoading = true;
         component = getComponent(isLoading, true, true);
 
-        //Not enough time has passed
+        // Not enough time has passed
         $timeout.flush(399);
         expect(component.find('.c-loading-indicator').length).toBe(0);
 
-        //Enough time has passed
+        // Enough time has passed
         $timeout.flush(1);
         expect(component.find('.c-loading-indicator').length).toBe(1);
     });
@@ -72,15 +72,15 @@ describe('The dp-loading-indicator', function () {
         component = getComponent(true, true, true);
         scope = component.isolateScope();
 
-        //Not enough time has passed
+        // Not enough time has passed
         $timeout.flush(200);
         expect(component.find('.c-loading-indicator').length).toBe(0);
 
-        //The loading finishes
+        // The loading finishes
         scope.vm.isLoading = false;
         $rootScope.$apply();
 
-        //More time passes, but the loading indicator will never be shown
+        // More time passes, but the loading indicator will never be shown
         $timeout.flush(5000);
         expect(component.find('.c-loading-indicator').length).toBe(0);
     });

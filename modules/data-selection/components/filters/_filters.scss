@@ -1,25 +1,23 @@
-.c-data-selection-filters__filters {
+.c-data-selection-filters {
   margin-right: $base-whitespace * 2;
 
-  h3 {
-    margin-top: $base-whitespace;
-    color: $primary-contrast;
-  }
+  .c-data-selection-filters__list {
 
-  ul {
-
-    li {
+    .c-data-selection-filters__listitem {
       overflow: hidden;
     }
   }
 }
 
-.c-data-selection-header__close-filter__button {
-  @include data-selection-button("assets/icons/close-active.svg", "assets/icons/close-hover.svg")
+.c-data-selection-filters--remove-filter {
+  @include data-selection-button("assets/icons/close-active.svg", "assets/icons/close-hover.svg");
   margin-top: - $base-whitespace;
+  margin-right: 0;
+  color: $primary-light;
+  font-weight: bolder;
 }
 
-.c-data-selection-filters__empty__value {
+.c-data-selection-filters--empty-value {
   font-style: italic;
 
   &::before {
@@ -28,39 +26,48 @@
   }
 }
 
-.c-data-selection-filters__active__filters {
+.c-data-selection-filters--toon-meerminder {
+  margin-top: $base-whitespace;
+  margin-bottom: $base-whitespace;
+}
 
-  ul {
+.c-data-selection-filters--hidden-options {
+  margin-bottom: $base-whitespace / 2;
+  color: $secondary-gray40;
+}
 
-    li {
+.c-data-selection-filters--active-filters {
+
+  .c-data-selection-filters__active-filter {
+    vertical-align: middle;
+  }
+
+  .c-data-selection-filters__list {
+
+    .c-data-selection-filters__listitem {
       margin-bottom: $base-whitespace / 2;
-      padding-top: $base-whitespace / 2;
-      padding-bottom: $base-whitespace / 2;
       padding-left: $base-whitespace;
       background-color: $secondary-gray60;
       color: $primary-light;
 
+      &:last-child {
+        margin-bottom: $base-whitespace * 2.5;
+      }
     }
-  }
 
-  button {
-    margin-right: $base-whitespace;
-    color: $primary-light;
-    font-weight: bolder;
   }
 }
 
-.c-data-selection-filters__available__filters {
-  margin-top: 2 * $base-whitespace;
+.c-data-selection-filters--available-filters {
   padding-right: $base-whitespace;
   padding-left: $base-whitespace;
   background-color: $secondary-gray4;
 
-  .c-data-selection-filters__available__filter {
+  .c-data-selection-filters__available-filter {
     padding-bottom: 1.5 * $base-whitespace;
   }
 
-  hr {
+  .c-data-selection-filters__separator {
     width: auto;
     height: 1px;
     margin: {
@@ -72,24 +79,16 @@
     background: $secondary-gray40;
   }
 
-  h3 {
+  .c-data-selection-filters__available-filter-label {
     margin-bottom: $base-whitespace;
+    padding-top: $base-whitespace;
+    color: $primary-contrast;
   }
 
-  ul {
+  .c-data-selection-filters__list {
 
-    li {
+    .c-data-selection-filters__listitem {
       margin-bottom: $base-whitespace;
     }
   }
-}
-
-.c-data-selection-filters__toon__meerminder {
-  margin-top: $base-whitespace;
-  margin-bottom: $base-whitespace;
-}
-
-.c-data-selection-filters__hidden__options {
-  margin-bottom: $base-whitespace / 2;
-  color: $secondary-gray40;
 }

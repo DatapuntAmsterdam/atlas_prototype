@@ -22,10 +22,10 @@ describe('The mapConfig factory', function () {
         it('development', function () {
             var mapConfig = prepareMocks('DEVELOPMENT');
 
-            //Global config
+            // Global config
             expect(mapConfig.BASE_LAYER_OPTIONS.minZoom).toBe(8);
 
-            //Environment config
+            // Environment config
             expect(mapConfig.OVERLAY_ROOT)
                 .toBe('https://map-acc.datapunt.amsterdam.nl/');
         });
@@ -33,10 +33,10 @@ describe('The mapConfig factory', function () {
         it('production', function () {
             var mapConfig = prepareMocks('PRODUCTION');
 
-            //Global config
+            // Global config
             expect(mapConfig.BASE_LAYER_OPTIONS.minZoom).toBe(8);
 
-            //Environment config
+            // Environment config
             expect(mapConfig.OVERLAY_ROOT)
                 .toBe('https://map.datapunt.amsterdam.nl/');
         });

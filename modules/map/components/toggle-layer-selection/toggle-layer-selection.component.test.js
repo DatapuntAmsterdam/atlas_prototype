@@ -46,7 +46,7 @@ describe('The dp-toggle-layer-selection component', function () {
     it('has a toggle that can trigger both SHOW_LAYER_SELECTION and HIDE_LAYER_SELECTION', function () {
         var component;
 
-        //When showActiveOverlays is false
+        // When showActiveOverlays is false
         component = getComponent([], false);
         component.find('button').click();
 
@@ -55,7 +55,7 @@ describe('The dp-toggle-layer-selection component', function () {
             type: ACTIONS.SHOW_LAYER_SELECTION
         });
 
-        //When showActiveOverlays is true
+        // When showActiveOverlays is true
         component = getComponent([], true);
         component.find('button').click();
 
@@ -68,12 +68,12 @@ describe('The dp-toggle-layer-selection component', function () {
     it('has different styling depending on showLayerSelection', function () {
         var component;
 
-        //When showActiveOverlays is false
+        // When showActiveOverlays is false
         component = getComponent([], false);
         expect(component.find('.c-toggle-layer-selection__icon').attr('class'))
             .not.toContain('c-toggle-layer-selection__icon--mirrored');
 
-        //When showActiveOverlays is true
+        // When showActiveOverlays is true
         component = getComponent([], true);
         expect(component.find('.c-toggle-layer-selection__icon').attr('class'))
             .toContain('c-toggle-layer-selection__icon--mirrored');
@@ -82,13 +82,13 @@ describe('The dp-toggle-layer-selection component', function () {
     it('has a different title and alt attribute depending on showLayerSelection', function () {
         var component;
 
-        //When showActiveOverlays is false
+        // When showActiveOverlays is false
         component = getComponent([], false);
 
         expect(component.find('button').attr('title'))
             .not.toContain('Meer kaartlagen');
 
-        //When showActiveOverlays is true
+        // When showActiveOverlays is true
         component = getComponent([], true);
 
         expect(component.find('button').attr('title'))

@@ -10,10 +10,10 @@ describe('The atlas-api-call component', function () {
             'atlasDetail',
             {
                 api: {
-                    getByUrl: function(endpoint) {
+                    getByUrl: function (endpoint) {
                         return getByUrlMock(endpoint);
                     },
-                    getByUri: function(endpoint) {
+                    getByUri: function (endpoint) {
                         return getByUrlMock('http://www.some-domain.com/' + endpoint);
                     }
                 }
@@ -42,9 +42,9 @@ describe('The atlas-api-call component', function () {
         spyOn(api, 'getByUri').and.callThrough();
     });
 
-    function getByUrlMock(endpoint) {
+    function getByUrlMock (endpoint) {
         var q = $q.defer(),
-        mockedResponse;
+            mockedResponse;
 
         switch (endpoint) {
             case 'http://www.some-domain.com/without-pagination/123/':
@@ -67,7 +67,6 @@ describe('The atlas-api-call component', function () {
                 };
 
                 break;
-
 
             case 'http://www.some-domain.com/with-pagination/456/?page=2':
                 mockedResponse = {
@@ -147,7 +146,6 @@ describe('The atlas-api-call component', function () {
                 }
             });
         });
-
     });
 
     describe('content with pagination', function () {
@@ -204,27 +202,27 @@ describe('The atlas-api-call component', function () {
     });
 
     it('overrides the brk/object endpoint based on the useBrkObjectExpanded variable', function () {
-        //It does nothing when the endpoint doesn't match brk/object
+        // It does nothing when the endpoint doesn't match brk/object
         getComponent('http://www.some-domain.com/something/123/', 'some-partial', true);
         expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/something/123/');
 
-        //It does nothing when the variable is set to false
+        // It does nothing when the variable is set to false
         getComponent('http://www.some-domain.com/brk/object/123/', 'some-partial', false);
         expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/brk/object/123/');
 
-        //It replaced the endpoint for brk-object when it is set to true
+        // It replaced the endpoint for brk-object when it is set to true
         getComponent('http://www.some-domain.com/brk/object/123/', 'some-partial', true);
         expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/brk/object-expand/123/');
     });
 
     describe('the add-api-root attribute', function () {
-        it('calls the url method of the api module as usual, when set to false', function() {
+        it('calls the url method of the api module as usual, when set to false', function () {
             getComponent('http://www.some-domain.com/something/123/', 'some-partial', false, false);
             expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/something/123/');
             expect(api.getByUri.calls.any()).toEqual(false);
         });
 
-        it('calls the uri method of the api module when set to true', function() {
+        it('calls the uri method of the api module when set to true', function () {
             getComponent('something/123/', 'some-partial', false, true);
             expect(api.getByUrl.calls.any()).toEqual(false);
             expect(api.getByUri).toHaveBeenCalledWith('something/123/');
@@ -259,11 +257,11 @@ describe('The atlas-api-call component', function () {
             component = getComponent('http://www.some-domain.com/with-pagination/456/', 'some-partial', false);
             scope = component.isolateScope();
 
-            //Finish the initial request
+            // Finish the initial request
             finishApiRequest();
             scope.$apply();
 
-            //Fire a load more request
+            // Fire a load more request
             scope.vm.loadMore();
             scope.$apply();
 
@@ -274,7 +272,7 @@ describe('The atlas-api-call component', function () {
             expect(component.find('dp-loading-indicator').attr('use-delay')).toBe('vm.useLoadingIndicatorDelay');
             expect(scope.vm.useLoadingIndicatorDelay).toBe(true);
 
-            //Finish the load more request
+            // Finish the load more request
             finishApiRequest();
             scope.$apply();
 

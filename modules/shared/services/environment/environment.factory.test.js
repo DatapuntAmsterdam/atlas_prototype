@@ -1,6 +1,5 @@
 describe('The environment factory', function () {
-    var $location,
-        mockedHostname;
+    var mockedHostname;
 
     beforeEach(function () {
         angular.mock.module(
@@ -25,10 +24,6 @@ describe('The environment factory', function () {
                 });
             }
         );
-
-        angular.mock.inject(function (_$location_) {
-            $location = _$location_;
-        });
     });
 
     describe('returns different configuration based on the hostname', function () {

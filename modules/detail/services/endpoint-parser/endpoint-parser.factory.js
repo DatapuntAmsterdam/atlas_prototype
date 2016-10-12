@@ -16,18 +16,16 @@
                 uriParts,
                 template;
 
-
-
-            //Transform http://www.api-root.com/this/that/123 to ['this', 'that', '123']
+            // Transform http://www.api-root.com/this/that/123 to ['this', 'that', '123']
             anchor = document.createElement('a');
             anchor.href = endpoint;
 
             pathname = anchor.pathname;
 
-            //Strip leading slash
+            // Strip leading slash
             pathname = pathname.replace(/^\//, '');
 
-            //Strip trailing slash
+            // Strip trailing slash
             pathname = pathname.replace(/\/$/, '');
 
             uriParts = pathname.split('/');
@@ -40,10 +38,10 @@
 
             return 'modules/detail/components/detail/templates/' + template;
 
-            function isZakelijkRecht (uriParts) {
-                return uriParts[0] === 'brk' &&
-                    uriParts[1] === 'zakelijk-recht' &&
-                    uriParts[uriParts.length - 1] === 'subject';
+            function isZakelijkRecht (someUriParts) {
+                return someUriParts[0] === 'brk' &&
+                    someUriParts[1] === 'zakelijk-recht' &&
+                    someUriParts[someUriParts.length - 1] === 'subject';
             }
         }
     }

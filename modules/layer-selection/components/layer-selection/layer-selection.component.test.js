@@ -145,7 +145,7 @@ describe('The atlas-layer-selection component', function () {
             var component = getComponent('base_layer_a', [], 8),
                 scope = component.isolateScope();
 
-            //Choose another base layer
+            // Choose another base layer
             scope.vm.setBaseLayer('base_layer_b');
 
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -153,7 +153,7 @@ describe('The atlas-layer-selection component', function () {
                 payload: 'base_layer_b'
             });
 
-            //Put the default base layer back
+            // Put the default base layer back
             scope.vm.setBaseLayer('base_layer_a');
 
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -197,7 +197,7 @@ describe('The atlas-layer-selection component', function () {
             var component,
                 contentDiv;
 
-            //Nothing is checked if there are no overlays
+            // Nothing is checked if there are no overlays
             component = getComponent('base_layer_a', [], 8);
             contentDiv = component.find('.c-layer-selection__content');
 
@@ -207,7 +207,7 @@ describe('The atlas-layer-selection component', function () {
             expect(contentDiv.find('div').eq(2).find('li').eq(1).find('input').attr('checked')).toBeUndefined();
             expect(contentDiv.find('div').eq(2).find('li').eq(2).find('input').attr('checked')).toBeUndefined();
 
-            //With active overlays
+            // With active overlays
             component = getComponent('base_layer_a',
                 [{id: 'overlay_1_a', isVisible: true}, {id: 'overlay_2_b', isVisible: true}], 8);
             contentDiv = component.find('.c-layer-selection__content');
@@ -223,7 +223,7 @@ describe('The atlas-layer-selection component', function () {
             var component = getComponent('base_layer_a', [{id: 'overlay_1_a', isVisible: true}], 8),
                 scope = component.isolateScope();
 
-            //Add one
+            // Add one
             scope.vm.toggleOverlay('overlay_1_b');
 
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -231,7 +231,7 @@ describe('The atlas-layer-selection component', function () {
                 payload: 'overlay_1_b'
             });
 
-            //Remove one
+            // Remove one
             scope.vm.toggleOverlay('overlay_1_a');
 
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -261,21 +261,21 @@ describe('The atlas-layer-selection component', function () {
                 component = getComponent('base_layer_a', allOverlays, zoom);
                 contentDiv = component.find('.c-layer-selection__content');
 
-                //overlay_1_a
+                // overlay_1_a
                 expect(contentDiv.find('div').eq(1).find('li').eq(0).find('.qa-show-invisble-by-zoom').length).toBe(0);
 
-                //overlay_1_b
+                // overlay_1_b
                 expect(contentDiv.find('div').eq(1).find('li').eq(1).find('.qa-show-invisble-by-zoom').length).toBe(0);
 
-                //overlay_2_a
+                // overlay_2_a
                 expect(contentDiv.find('div').eq(2).find('li').eq(0).find('.qa-show-invisble-by-zoom').length).toBe(0);
 
-                //overlay_2_b
+                // overlay_2_b
                 expect(contentDiv.find('div').eq(2).find('li').eq(1).find('.qa-show-invisble-by-zoom').length).toBe(1);
                 expect(contentDiv.find('div').eq(2).find('li').eq(1).find('.qa-show-invisble-by-zoom').text())
                     .toContain(expectedZoomIndicatorText);
 
-                //overlay_2_c
+                // overlay_2_c
                 expect(contentDiv.find('div').eq(2).find('li').eq(2).find('.qa-show-invisble-by-zoom').length).toBe(1);
                 expect(contentDiv.find('div').eq(2).find('li').eq(2).find('.qa-show-invisble-by-zoom').text())
                     .toContain(expectedZoomIndicatorText);
@@ -285,21 +285,21 @@ describe('The atlas-layer-selection component', function () {
                 component = getComponent('base_layer_a', allOverlays, zoom);
                 contentDiv = component.find('.c-layer-selection__content');
 
-                //overlay_1_a
+                // overlay_1_a
                 expect(contentDiv.find('div').eq(1).find('li').eq(0).find('.qa-show-invisble-by-zoom').length);
 
-                //overlay_1_b
+                // overlay_1_b
                 expect(contentDiv.find('div').eq(1).find('li').eq(1).find('.qa-show-invisble-by-zoom').length).toBe(0);
 
-                //overlay_2_a
+                // overlay_2_a
                 expect(contentDiv.find('div').eq(2).find('li').eq(0).find('.qa-show-invisble-by-zoom').length).toBe(1);
                 expect(contentDiv.find('div').eq(2).find('li').eq(0).find('.qa-show-invisble-by-zoom').text())
                     .toContain(expectedZoomIndicatorText);
 
-                //overlay_2_b
+                // overlay_2_b
                 expect(contentDiv.find('div').eq(2).find('li').eq(1).find('.qa-show-invisble-by-zoom').length).toBe(0);
 
-                //overlay_2_c
+                // overlay_2_c
                 expect(contentDiv.find('div').eq(2).find('li').eq(2).find('.qa-show-invisble-by-zoom').length).toBe(1);
                 expect(contentDiv.find('div').eq(2).find('li').eq(2).find('.qa-show-invisble-by-zoom').text())
                     .toContain(expectedZoomIndicatorText);
@@ -309,23 +309,23 @@ describe('The atlas-layer-selection component', function () {
                 component = getComponent('base_layer_a', allOverlays, zoom);
                 contentDiv = component.find('.c-layer-selection__content');
 
-                //overlay_1_a
+                // overlay_1_a
                 expect(contentDiv.find('div').eq(1).find('li').eq(0).find('.qa-show-invisble-by-zoom').length).toBe(0);
 
-                //overlay_1_b
+                // overlay_1_b
                 expect(contentDiv.find('div').eq(1).find('li').eq(1).find('.qa-show-invisble-by-zoom').length).toBe(0);
 
-                //overlay_2_a
+                // overlay_2_a
                 expect(contentDiv.find('div').eq(2).find('li').eq(0).find('.qa-show-invisble-by-zoom').length).toBe(1);
                 expect(contentDiv.find('div').eq(2).find('li').eq(0).find('.qa-show-invisble-by-zoom').text())
                     .toContain(expectedZoomIndicatorText);
 
-                //overlay_2_b
+                // overlay_2_b
                 expect(contentDiv.find('div').eq(2).find('li').eq(1).find('.qa-show-invisble-by-zoom').length).toBe(1);
                 expect(contentDiv.find('div').eq(2).find('li').eq(1).find('.qa-show-invisble-by-zoom').text())
                     .toContain(expectedZoomIndicatorText);
 
-                //overlay_2_c
+                // overlay_2_c
                 expect(contentDiv.find('div').eq(2).find('li').eq(2).find('.qa-show-invisble-by-zoom').length).toBe(0);
             }
         });
@@ -334,21 +334,19 @@ describe('The atlas-layer-selection component', function () {
             var component,
                 contentDiv;
 
-            //Active and visible
+            // Active and visible
             component = getComponent('base_layer_a', [{id: 'overlay_2_a', isVisible: true}], 8);
             contentDiv = component.find('.c-layer-selection__content');
 
             expect(contentDiv.find('div').eq(2).find('li').eq(0).find('strong').text()).toContain('Overlay 2a');
 
-
-            //Active and invisible
+            // Active and invisible
             component = getComponent('base_layer_a', [{id: 'overlay_2_a', isVisible: true}], 16);
             contentDiv = component.find('.c-layer-selection__content');
 
             expect(contentDiv.find('div').eq(2).find('li').eq(0).find('strong').text()).toContain('Overlay 2a');
 
-
-            //Non-active (still using strong)
+            // Non-active (still using strong)
             component = getComponent('base_layer_a', [], 16);
             contentDiv = component.find('.c-layer-selection__content');
 
@@ -360,7 +358,7 @@ describe('The atlas-layer-selection component', function () {
             var component,
                 contentDiv;
 
-            //When the overlays are active
+            // When the overlays are active
             component = getComponent('base_layer_a',
                 [{id: 'overlay_2_b', isVisible: true}, {id: 'overlay_2_c', isVisible: true}], 8);
             contentDiv = component.find('.c-layer-selection__content');
@@ -368,7 +366,7 @@ describe('The atlas-layer-selection component', function () {
             expect(contentDiv.find('div').eq(2).find('li').eq(1).find('.qa-show-invisble-by-zoom').length).toBe(1);
             expect(contentDiv.find('div').eq(2).find('li').eq(2).find('.qa-show-invisble-by-zoom').length).toBe(1);
 
-            //When the overlays are not active
+            // When the overlays are not active
             component = getComponent('base_layer_a', [], 8);
             contentDiv = component.find('.c-layer-selection__content');
 

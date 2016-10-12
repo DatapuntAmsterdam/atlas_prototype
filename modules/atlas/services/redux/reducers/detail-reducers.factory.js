@@ -51,7 +51,7 @@
         function showDetailReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
-            //Detail can be null if another action gets triggered between FETCH_DETAIL and SHOW_DETAIL
+            // Detail can be null if another action gets triggered between FETCH_DETAIL and SHOW_DETAIL
             if (angular.isObject(newState.detail)) {
                 newState.detail.geometry = payload;
 

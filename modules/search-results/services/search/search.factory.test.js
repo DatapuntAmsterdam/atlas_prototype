@@ -115,12 +115,12 @@ describe('The search factory', function () {
 
         $rootScope.$apply();
 
-        //There have been 2 API calls
+        // There have been 2 API calls
         expect(api.getByUri).toHaveBeenCalledTimes(2);
         expect(api.getByUri).toHaveBeenCalledWith('path/to/adres/', {q: 'Waterlooplein'});
         expect(api.getByUri).toHaveBeenCalledWith('path/to/openbare_ruimte/', {q: 'Waterlooplein'});
 
-        //The searchFormatter has ben called once
+        // The searchFormatter has ben called once
         expect(searchFormatter.formatCategories).toHaveBeenCalledTimes(1);
         expect(searchFormatter.formatCategories).toHaveBeenCalledWith(['FAKE_RAW_RESULTS', 'FAKE_RAW_RESULTS']);
 
@@ -136,15 +136,15 @@ describe('The search factory', function () {
 
         $rootScope.$apply();
 
-        //There has been 1 API call
+        // There has been 1 API call
         expect(api.getByUri).toHaveBeenCalledTimes(1);
         expect(api.getByUri).toHaveBeenCalledWith('path/to/openbare_ruimte/', {q: 'Waterlooplein'});
 
-        //The searchFormatter has ben called once
+        // The searchFormatter has ben called once
         expect(searchFormatter.formatCategory).toHaveBeenCalledTimes(1);
         expect(searchFormatter.formatCategory).toHaveBeenCalledWith('openbare_ruimte', 'FAKE_RAW_RESULTS');
 
-        //It gets converted to an Array (with one element) to keep the search-results.component consistent
+        // It gets converted to an Array (with one element) to keep the search-results.component consistent
         expect(searchResults).toEqual(['FAKE_FORMATTED_CATEGORY_RESULT']);
     });
 
@@ -206,7 +206,7 @@ describe('The search factory', function () {
             },
             searchResultsOutput;
 
-        //Load the second page
+        // Load the second page
         search.loadMore(searchResultsInput).then(function (_searchResultsOutput_) {
             searchResultsOutput = _searchResultsOutput_;
         });
@@ -216,7 +216,7 @@ describe('The search factory', function () {
         expect(searchResultsOutput.next).toBe('http://some-domain/path/to/slug/?q=waterloo&page=3&page_size=5');
         expect(searchResultsOutput.results.length).toBe(10);
 
-        //Load the third (and last) page
+        // Load the third (and last) page
         search.loadMore(searchResultsOutput).then(function (_searchResultsOutput_) {
             searchResultsOutput = _searchResultsOutput_;
         });

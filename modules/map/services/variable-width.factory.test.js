@@ -39,7 +39,6 @@ describe('The variableWidth factory', function () {
         variableWidth.initialize(mockedContainer, mockedLeafletMap);
         $rootScope.$apply();
 
-
         expect(mockedLeafletMap.invalidateSize).toHaveBeenCalledTimes(1);
     });
 });

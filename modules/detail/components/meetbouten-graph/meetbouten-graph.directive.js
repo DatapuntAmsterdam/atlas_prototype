@@ -17,25 +17,25 @@
             link: linkFunction
         };
 
-        function linkFunction(scope, element) {
-            //Alleen een grafiek tonen als we 2 of meer metingen hebben
+        function linkFunction (scope, element) {
+            // Alleen een grafiek tonen als we 2 of meer metingen hebben
             if (scope.pageSize <= 1) {
                 return;
             }
 
-            //parse url om alle metingen te krijgen voor de meetbout
+            // parse url om alle metingen te krijgen voor de meetbout
             var href = scope.href + '&page_size=' + scope.pageSize;
             api.getByUrl(href).then(function (response) {
-                //data laden
+                // data laden
                 scope.objects = response.results;
 
-                //variabelen
-                //global
+                // variabelen
+                // global
                 var margin = {top: 10, right: 60, bottom: 30, left: 60},
                     width = 750 - margin.left - margin.right,
                     height = 400 - margin.top - margin.bottom;
 
-                //x scale min-max
+                // x scale min-max
                 var xAs = d3.time.scale()
                     .domain(d3.extent(scope.objects, function (d) {
                         return dateConverter.ymdToDate(d.datum);
@@ -46,7 +46,7 @@
                     .scale(xAs)
                     .orient('bottom');
 
-                //Y as 1, zakking
+                // Y as 1, zakking
                 var yZakking = d3.scale.linear()
                     .domain(d3.extent(scope.objects, function (d) {
                         return d.zakking;
@@ -57,7 +57,7 @@
                     .scale(yZakking)
                     .orient('left');
 
-                //y as 2, zakkingsnelheid
+                // y as 2, zakkingsnelheid
                 var yzakkingssnelheid = d3.scale.linear()
                     .domain(d3.extent(scope.objects, function (d) {
                         return d.zakkingssnelheid;
@@ -85,8 +85,8 @@
                         return yzakkingssnelheid(d.zakkingssnelheid);
                     });
 
-                //Dom manipulatie
-                //Initieren svg voor grafiek
+                // Dom manipulatie
+                // Initieren svg voor grafiek
                 var svg = d3.select(element[0])
                     .append('svg')
                     .attr('class', 'c-meetbout')
@@ -95,13 +95,13 @@
                     .append('g')
                     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-                //intekenen x as
+                // intekenen x as
                 svg.append('g')
                     .attr('class', 'c-meetbout__axis')
                     .attr('transform', 'translate(0,' + height + ')')
                     .call(xAxis);
 
-                //intekenen y as zakking
+                // intekenen y as zakking
                 svg.append('g')
                     .attr('class', 'c-meetbout__axis c-meetbout__axis--y-zakking')
                     .call(yZakkingAxis)
@@ -112,7 +112,7 @@
                     .style('text-anchor', 'middle')
                     .text('Zakking (mm)');
 
-                //intekenen y as zakkingssnelheid
+                // intekenen y as zakkingssnelheid
                 svg.append('g')
                     .attr('class', 'c-meetbout__axis c-meetbout__axis--y-zakkingssnelheid')
                     .attr('transform', 'translate(' + width + ',0)')
@@ -124,16 +124,15 @@
                     .style('text-anchor', 'middle')
                     .text('Zakkingssnelheid (mm/j)');
 
-                //tekenen grafiek 1 zakking
+                // tekenen grafiek 1 zakking
                 svg.append('path')
                     .attr('class', 'c-meetbout__line c-meetbout__line--zakking')
                     .attr('d', zakkingLine(scope.objects));
 
-                //tekenen grafiek 2 zakkingssnelheid
+                // tekenen grafiek 2 zakkingssnelheid
                 svg.append('path')
                     .attr('class', 'c-meetbout__line c-meetbout__line--zakkingssnelheid')
                     .attr('d', zakkingssnelheidLine(scope.objects));
-
             });
         }
     }

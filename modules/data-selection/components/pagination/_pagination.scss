@@ -1,6 +1,41 @@
 $pagination-line-color: #e4e4e4;
 
+@mixin data-selection-pagination-button($icon) {
+  $iconplain: $icon + ".svg";
+  $iconhover: $icon + "-hover.svg";
+
+  &::before {
+    content: url($iconplain);
+  }
+
+  &:hover {
+    color: $primary-contrast;
+    text-decoration: none;
+
+    .c-data-selection-pagination-link-text {
+      text-decoration: underline;
+    }
+
+    &::before {
+      content: url($iconhover);
+    }
+  }
+}
+
+@mixin data-selection-pagination-button-flip($icon) {
+  transform: scaleX(-1);
+  content: url($icon);
+  filter: FlipH;
+}
+
+@mixin data-selection-pagination-font {
+  font-family: $header-font-family;
+  font-size: $base-font-size;
+  font-weight: lighter;
+}
+
 .c-data-selection-pagination {
+  @include data-selection-pagination-font;
   text-align: center;
 
   .c-data-selection-pagination__input {
@@ -17,29 +52,32 @@ $pagination-line-color: #e4e4e4;
     height: $button-size;
     background-image: url("assets/icons/link-active.svg");
     vertical-align: middle;
-  }
 
-  hr {
-    width: auto;
-    height: 5px;
-    margin: {
-      top: 2 * $base-whitespace;
-      right: - 2 * $base-whitespace;
-      bottom: 2 * $base-whitespace;
-      left: - 2 * $base-whitespace;
+    &:hover {
+      background-image: url("assets/icons/link-hover.svg");
     }
-    border: none;
-    background: $pagination-line-color;
   }
 }
 
-.c-data-selection-page__form__links {
+.c-data-selection-pagination--separator {
+  width: auto;
+  height: 1px;
+  margin: {
+    top: 2 * $base-whitespace;
+    right: - 2 * $base-whitespace;
+    bottom: 2 * $base-whitespace;
+    left: - 2 * $base-whitespace;
+  }
+  border: none;
+  background: $pagination-line-color;
+}
+
+.c-data-selection-page--form-links {
   margin-top: -.55rem;
 }
 
 .c-data-selection-pagination-link {
   margin-left: .2rem;
-  font-weight: bold;
 
   &::before {
     display: inline-block;
@@ -50,34 +88,37 @@ $pagination-line-color: #e4e4e4;
   }
 }
 
+.c-data-selection-pagination-link-text {
+  @include data-selection-pagination-font;
+
+  &:hover {
+    color: $primary-contrast;
+    text-decoration: underline;
+  }
+}
+
 .c-data-selection-pagination-link--first {
+  @include data-selection-pagination-button("assets/icons/icon-last");
+
   &::before {
-    transform: scaleX(-1);
-    content: url("assets/icons/icon-last.svg");
-    filter: FlipH;
+    @include data-selection-pagination-button-flip("assets/icons/icon-last.svg");
   }
 }
 
 .c-data-selection-pagination-link--last {
-  &::before {
-    content: url("assets/icons/icon-last.svg");
-  }
+  @include data-selection-pagination-button("assets/icons/icon-last");
 }
 
 .c-data-selection-pagination-link--previous {
+  @include data-selection-pagination-button("assets/icons/icon-next");
   margin-left: $base-whitespace;
 
   &::before {
-    transform: scaleX(-1);
-    content: url("assets/icons/icon-next.svg");
-    filter: FlipH;
+    @include data-selection-pagination-button-flip("assets/icons/icon-next.svg");
   }
 }
 
 .c-data-selection-pagination-link--next {
+  @include data-selection-pagination-button("assets/icons/icon-next");
   margin-right: $base-whitespace;
-
-  &::before {
-    content: url("assets/icons/icon-next.svg");
-  }
 }

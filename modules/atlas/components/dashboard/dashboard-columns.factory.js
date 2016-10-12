@@ -54,57 +54,57 @@
             return visibility;
         }
 
+        function determineColumnSizesDefault (visibility, hasFullscreenMap) {
+            var columnSizes = {};
+
+            if (visibility.layerSelection) {
+                columnSizes.left = 4;
+                columnSizes.middle = 8;
+            } else if (hasFullscreenMap) {
+                columnSizes.left = 0;
+                columnSizes.middle = 12;
+            } else if (visibility.dataSelection) {
+                columnSizes.left = 0;
+                columnSizes.middle = 0;
+            } else {
+                columnSizes.left = 0;
+                columnSizes.middle = 4;
+            }
+
+            columnSizes.right = 12 - columnSizes.left - columnSizes.middle;
+
+            return columnSizes;
+        }
+
+        function determineColumnSizesPrint (visibility, hasFullscreenMap) {
+            var columnSizes = {};
+
+            if (visibility.layerSelection) {
+                columnSizes.left = 12;
+                columnSizes.middle = 0;
+                columnSizes.right = 0;
+            } else if (hasFullscreenMap) {
+                columnSizes.left = 0;
+                columnSizes.middle = 12;
+                columnSizes.right = 0;
+            } else if (visibility.page || visibility.searchResults || visibility.dataSelection) {
+                columnSizes.left = 0;
+                columnSizes.middle = 0;
+                columnSizes.right = 12;
+            } else {
+                columnSizes.left = 0;
+                columnSizes.middle = 12;
+                columnSizes.right = 12;
+            }
+
+            return columnSizes;
+        }
+
         function determineColumnSizes (visibility, hasFullscreenMap, isPrintMode) {
             if (!isPrintMode) {
                 return determineColumnSizesDefault(visibility, hasFullscreenMap);
             } else {
                 return determineColumnSizesPrint(visibility, hasFullscreenMap);
-            }
-
-            function determineColumnSizesDefault (visibility, hasFullscreenMap) {
-                var columnSizes = {};
-
-                if (visibility.layerSelection) {
-                    columnSizes.left = 4;
-                    columnSizes.middle = 8;
-                } else if (hasFullscreenMap) {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 12;
-                } else if (visibility.dataSelection) {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 0;
-                } else {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 4;
-                }
-
-                columnSizes.right = 12 - columnSizes.left - columnSizes.middle;
-
-                return columnSizes;
-            }
-
-            function determineColumnSizesPrint (visibility, hasFullscreenMap) {
-                var columnSizes = {};
-
-                if (visibility.layerSelection) {
-                    columnSizes.left = 12;
-                    columnSizes.middle = 0;
-                    columnSizes.right = 0;
-                } else if (hasFullscreenMap) {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 12;
-                    columnSizes.right = 0;
-                } else if (visibility.page || visibility.searchResults || visibility.dataSelection) {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 0;
-                    columnSizes.right = 12;
-                } else {
-                    columnSizes.left = 0;
-                    columnSizes.middle = 12;
-                    columnSizes.right = 12;
-                }
-
-                return columnSizes;
             }
         }
     }

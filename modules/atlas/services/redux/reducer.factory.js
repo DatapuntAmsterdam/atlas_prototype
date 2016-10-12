@@ -19,16 +19,15 @@
     ];
 
     function reducerFactory (urlReducers,
-        detailReducers,
-        homeReducers,
-        layerReducers,
-        mapReducers,
-        pageReducers,
-        searchReducers,
-        straatbeeldReducers,
-        dataSelectionReducers,
-        printReducers) {
-
+                             detailReducers,
+                             homeReducers,
+                             layerReducers,
+                             mapReducers,
+                             pageReducers,
+                             searchReducers,
+                             straatbeeldReducers,
+                             dataSelectionReducers,
+                             printReducers) {
         return function (oldState, action) {
             var actions = angular.merge(
                 urlReducers,

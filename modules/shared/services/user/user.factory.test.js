@@ -11,7 +11,7 @@ describe('The user factory', function () {
 
     beforeEach(function () {
         dummyPromise = 'dummyPromise';
-        $intervalSpy = jasmine.createSpy('$interval', {cancel:function(){}}).and.returnValue(dummyPromise);
+        $intervalSpy = jasmine.createSpy('$interval', {cancel: function () {}}).and.returnValue(dummyPromise);
 
         angular.mock.module(
             'dpShared',
@@ -212,7 +212,7 @@ describe('The user factory', function () {
     });
 
     it('can logout', function () {
-        //Login first
+        // Login first
         $httpBackend.expectPOST('http://atlas.amsterdam.nl/authenticatie/token/', httpPostLoginData, httpPostHeaders)
             .respond({token: 'ERIKS_ACCESS_TOKEN'});
 
@@ -226,7 +226,7 @@ describe('The user factory', function () {
             keepLoggedIn: true
         });
 
-        //Now logout
+        // Now logout
         user.logout();
 
         expect(user.getStatus()).toEqual({

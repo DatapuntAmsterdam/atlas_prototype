@@ -32,7 +32,7 @@ describe('The measure factory', function () {
         mockedLeafletMap = {
             on: function () {}
         };
-        
+
         mockedMeasureControl = {
             addTo: function () {}
         };
@@ -51,14 +51,14 @@ describe('The measure factory', function () {
 
     it('dispatches HIDE_ACTIVE_OVERLAYS when starting to measure', function () {
         var domElement,
-            mockedLeafletMap;
+            mockedMap;
 
         domElement = document.createElement('div');
-        mockedLeafletMap = L.map(domElement);
+        mockedMap = L.map(domElement);
 
-        measure.initialize(mockedLeafletMap);
+        measure.initialize(mockedMap);
 
-        mockedLeafletMap.fireEvent('measurestart');
+        mockedMap.fireEvent('measurestart');
         $rootScope.$apply();
 
         expect(store.dispatch).toHaveBeenCalledWith({

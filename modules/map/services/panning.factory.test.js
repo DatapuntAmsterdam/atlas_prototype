@@ -62,13 +62,13 @@ describe('The panning factory', function () {
         expect(mockedLeafletMap.on).toHaveBeenCalledWith('dragend', jasmine.any(Function));
         expect(moveEndCallback).toBeDefined();
 
-        //Trigger the moveend callback manually
+        // Trigger the moveend callback manually
         moveEndCallback();
 
-        //Nothing happens directly
+        // Nothing happens directly
         expect(store.dispatch).not.toHaveBeenCalled();
 
-        //But store.dispatch is triggered during the next digest cycle
+        // But store.dispatch is triggered during the next digest cycle
         $rootScope.$apply();
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.MAP_PAN,
@@ -77,7 +77,7 @@ describe('The panning factory', function () {
     });
 
     it('has disabled animations', function () {
-        //By default animations are disabled
+        // By default animations are disabled
         panning.panTo(mockedLeafletMap, [52.1, 4.1]);
         expect(mockedLeafletMap.panTo).toHaveBeenCalledWith([52.1, 4.1], {animate: false});
     });

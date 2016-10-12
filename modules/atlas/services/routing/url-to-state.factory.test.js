@@ -49,13 +49,13 @@ describe('The urlToState factory', function () {
         $location.search(changedSearchParams);
         $rootScope.$apply();
 
-        //Initial parameters
+        // Initial parameters
         expect(store.dispatch).toHaveBeenCalledWith({
             type: 'URL_CHANGE',
             payload: changedSearchParams
         });
 
-        //Changes parameters
+        // Changes parameters
         expect(store.dispatch).toHaveBeenCalledWith({
             type: 'URL_CHANGE',
             payload: changedSearchParams

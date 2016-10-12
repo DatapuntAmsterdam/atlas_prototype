@@ -71,9 +71,9 @@ describe('The searchFormatter factory', function () {
                     }
                 }
             }, [
-                //Some endpoints return an empty array when there are no search results
+                // Some endpoints return an empty array when there are no search results
             ], {
-                //Others with an object with count set to 0
+                // Others with an object with count set to 0
                 count: 0,
                 results: []
             }

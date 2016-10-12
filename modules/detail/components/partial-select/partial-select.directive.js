@@ -5,7 +5,7 @@
         .module('atlasDetail')
         .directive('atlasPartialSelect', atlasPartialSelectDirective);
 
-    atlasPartialSelectDirective.$inject = [ 'partialCompiler'];
+    atlasPartialSelectDirective.$inject = ['partialCompiler'];
 
     function atlasPartialSelectDirective (partialCompiler) {
         return {

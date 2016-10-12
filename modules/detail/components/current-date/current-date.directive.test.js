@@ -12,7 +12,7 @@ describe('The atlas-current-date directive', function () {
     });
 
     afterEach(function () {
-        //Reset the mocked date
+        // Reset the mocked date
         jasmine.clock().uninstall();
     });
 

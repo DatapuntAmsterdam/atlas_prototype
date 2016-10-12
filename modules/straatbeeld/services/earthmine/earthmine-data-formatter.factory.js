@@ -42,7 +42,7 @@
                 month = Number(dateString.substr(5, 2));
                 day = Number(dateString.substr(8, 2));
 
-                //Months are zero-based in JavaScript
+                // Months are zero-based in JavaScript
                 month--;
 
                 return new Date(year, month, day);

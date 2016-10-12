@@ -27,7 +27,7 @@
             if (isLoading) {
                 timer = $timeout(function () {
                     vm.showLoadingIndicator = true;
-                }, vm.useDelay? threshold : 0);
+                }, vm.useDelay ? threshold : 0);
             } else {
                 $timeout.cancel(timer);
 

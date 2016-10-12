@@ -66,7 +66,7 @@ describe('The dp-data-selection-pagination component', function () {
         var component,
             scope;
 
-        //When on the first page
+        // When on the first page
         component = getComponent(1, 14);
         scope = component.isolateScope();
 
@@ -84,7 +84,7 @@ describe('The dp-data-selection-pagination component', function () {
             enabled: false
         });
 
-        //When not on the first page
+        // When not on the first page
         component = getComponent(13, 14);
         scope = component.isolateScope();
 
@@ -107,7 +107,7 @@ describe('The dp-data-selection-pagination component', function () {
         var component,
             scope;
 
-        //When on the last page
+        // When on the last page
         component = getComponent(14, 14);
         scope = component.isolateScope();
 
@@ -125,7 +125,7 @@ describe('The dp-data-selection-pagination component', function () {
             enabled: false
         });
 
-        //When not on the first page
+        // When not on the first page
         component = getComponent(13, 14);
         scope = component.isolateScope();
 
@@ -147,11 +147,11 @@ describe('The dp-data-selection-pagination component', function () {
     it('has a form that navigates directly to a specific page', function () {
         var component = getComponent(1, 2);
 
-        //Enter a value
+        // Enter a value
         component.find('input')[0].value = '2';
         component.find('input').trigger('change');
 
-        //Submit the form
+        // Submit the form
         component.find('form').trigger('submit');
 
         expect(store.dispatch).toHaveBeenCalledWith({
@@ -163,23 +163,21 @@ describe('The dp-data-selection-pagination component', function () {
     it('won\'t try to navigate to unexisting pages', function () {
         var component = getComponent(1, 2);
 
-        //Zero
+        // Zero
         component.find('input')[0].value = '0';
         component.find('input').trigger('change');
         component.find('form').trigger('submit');
 
         expect(store.dispatch).not.toHaveBeenCalled();
 
-
-        //Negative numbers
+        // Negative numbers
         component.find('input')[0].value = '-1';
         component.find('input').trigger('change');
         component.find('form').trigger('submit');
 
         expect(store.dispatch).not.toHaveBeenCalled();
 
-
-        //Number larger than the total number of pages
+        // Number larger than the total number of pages
         component.find('input')[0].value = '3';
         component.find('input').trigger('change');
         component.find('form').trigger('submit');

@@ -62,7 +62,7 @@
             var newState = angular.copy(oldState),
                 i;
             // finding the id of the payload
-            for (i = 0;i < newState.map.overlays.length; i++) {
+            for (i = 0; i < newState.map.overlays.length; i++) {
                 if (newState.map.overlays[i].id === payload) {
                     break;
                 }
@@ -81,7 +81,7 @@
         function mapToggleVisibilityOverlay (oldState, payload) {
             var newState = angular.copy(oldState);
             // Looking for the overlay to switch its isVisible
-            for(var i = 0;i< newState.map.overlays.length;i++) {
+            for (var i = 0; i < newState.map.overlays.length; i++) {
                 if (newState.map.overlays[i].id === payload) {
                     newState.map.overlays[i].isVisible = !newState.map.overlays[i].isVisible;
                     break;

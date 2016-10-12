@@ -24,14 +24,12 @@
         });
 
         vm.class = '';
-        switch(vm.format && vm.format.align) {
+        switch (vm.format && vm.format.align) {
             case 'right':
                 vm.class = 'u-align--right';
                 break;
             default:
                 break;
         }
-
-
     }
 })();

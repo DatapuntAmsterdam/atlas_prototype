@@ -3,7 +3,7 @@
 
     angular
         .module('atlas')
-        .service('piwik', piwikFactory);
+        .factory('piwik', piwikFactory);
 
     piwikFactory.$inject = ['$window', '$document', 'environment', 'PIWIK_CONFIG'];
 
@@ -13,28 +13,29 @@
         };
 
         function initialize () {
-            var u, d, g, s;
+            var urlBase = 'https://atlas.amsterdam.nl/piwik/',
+                doc,
+                piwik,
+                scripts;
 
             $window._paq = $window._paq || [];
 
             $window._paq.push(['trackPageView']);
             $window._paq.push(['enableLinkTracking']);
 
-            u = '//admin.datapunt.amsterdam.nl/piwik/';
-
-            $window._paq.push(['setTrackerUrl', u + 'piwik.php']);
+            $window._paq.push(['setTrackerUrl', urlBase + 'piwik.php']);
             $window._paq.push(['setSiteId', PIWIK_CONFIG[environment.NAME].SITE_ID]);
 
-            d = $document[0];
-            g = d.createElement('script');
-            s = d.getElementsByTagName('script')[0];
+            doc = $document[0];
+            piwik = doc.createElement('script');
+            scripts = doc.getElementsByTagName('script')[0];
 
-            g.type = 'text/javascript';
-            g.async = false;
-            g.defer = false;
-            g.src = u + 'piwik.js';
+            piwik.type = 'text/javascript';
+            piwik.async = true;
+            piwik.defer = true;
+            piwik.src = urlBase + 'piwik.js';
 
-            s.parentNode.insertBefore(g, s);
+            scripts.parentNode.insertBefore(piwik, scripts);
         }
     }
 })();

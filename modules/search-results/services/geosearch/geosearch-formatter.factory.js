@@ -44,10 +44,10 @@
                                 var subtype;
 
                                 if (feature.opr_type) {
-                                    //Openbare ruimtes
+                                    // Openbare ruimtes
                                     subtype = feature.opr_type.toLowerCase();
                                 } else if (feature.type.match(/^gebieden\//)) {
-                                    //Gebieden
+                                    // Gebieden
                                     subtype = feature.type.replace(/^gebieden\//, '');
                                 } else {
                                     subtype = null;
@@ -67,7 +67,7 @@
                     return formattedCategory;
                 })
                 .filter(function (category) {
-                    //Remove empty categories
+                    // Remove empty categories
                     return category.count > 0;
                 });
         }

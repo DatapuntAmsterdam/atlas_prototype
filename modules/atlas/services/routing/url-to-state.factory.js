@@ -13,7 +13,7 @@
         };
 
         function initialize () {
-            $rootScope.$watch(function () {
+            var unwatch = $rootScope.$watch(function () {
                 return $location.search();
             }, function () {
                 store.dispatch({
@@ -21,6 +21,8 @@
                     payload: $location.search()
                 });
             });
+
+            $rootScope.$on('$destroy', unwatch);
         }
     }
 })();

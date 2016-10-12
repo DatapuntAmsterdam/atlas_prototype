@@ -35,11 +35,11 @@ describe('The page component', function () {
     it('loads an HTML page based on the name binding', function () {
         var component;
 
-        //Welcome page
+        // Welcome page
         component = getComponent('welcome');
         expect(component.text()).toContain('THIS_IS_WELCOME');
 
-        //About page
+        // About page
         component = getComponent('about');
         expect(component.text()).toContain('THIS_IS_ABOUT');
     });
