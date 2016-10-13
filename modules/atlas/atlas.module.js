@@ -1,6 +1,6 @@
 /**
  * @ngdoc overview
- * @name atlas.module:atlas
+ * @name atlas
  * @description
  *
  * The main module for the atlas application. This module contains the controllers

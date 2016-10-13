@@ -1,5 +1,5 @@
 /**
- * @ngdoc directive
+ * @ngdoc component
  * @name atlas.component:atlasDashboard
  * @restrict 'E'
  * @description

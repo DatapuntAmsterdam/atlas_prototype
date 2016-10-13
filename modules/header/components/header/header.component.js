@@ -33,7 +33,7 @@
     /**
      * @ngdoc controller
      * @name atlasHeader.controller:AtlasHeaderController
-     * @link atlasHeader.controller:AtlasHeaderController AtlasHeaderController
+
      * @requires user
      * @description
      * Controller definition of the atlasHeader componnent. It reacts to changes in the 

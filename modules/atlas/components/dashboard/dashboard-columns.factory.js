@@ -1,7 +1,6 @@
 /**
  * @ngdoc service
  * @name atlas.dashboardColumns
- * @link atlas.dashboardColumns dashboardColumns
  * @description
  * A factory used to determine the colum layout of the application for a given state
  */
@@ -20,7 +19,7 @@
         };
 
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name determineVisibility
          * @methodOf atlas.dashboardColumns
          * @param {object} state The state for which to determine the visibility.
@@ -80,7 +79,7 @@
             return visibility;
         }
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name determineColumnSizes
          * @methodOf atlas.dashboardColumns
          * @param {object} visibility The visibility for which to set the columns
