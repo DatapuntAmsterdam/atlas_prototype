@@ -1,12 +1,10 @@
 /**
  * @ngdoc directive
- * @name atlas.directive:scrollableContent
- * @restrict 'A'
+ * @name atlas.directive:atlasScrollableContent
+ * @restrict: 'A'
  * @description
- * The atlas scrollableContent component
- */
-
-
+ * A description
+*/
 (function () {
     'use strict';
 

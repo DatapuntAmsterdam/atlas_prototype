@@ -1,8 +1,3 @@
-/**
- * @ngdoc service
- * @name dpshared.applicationState
- * @link dpshared.applicationState applicationState
- */
 (function () {
     angular
         .module('dpShared')

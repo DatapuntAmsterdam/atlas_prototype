@@ -1,9 +1,9 @@
 /**
  * @ngdoc service
- * @name atlas.dashboardColumns
+ * @name atlas.service:dashboardColumns
  * @description
- * A factory used to determine the colum layout of the application for a given state
- */
+ * A description of the service
+*/
 
 (function () {
     'use strict';
@@ -18,24 +18,6 @@
             determineColumnSizes: determineColumnSizes
         };
 
-        /**
-         * @ngdoc method
-         * @name determineVisibility
-         * @methodOf atlas.dashboardColumns
-         * @param {object} state The state for which to determine the visibility.
-         * @returns {object} An object contains the visibility of the modules in atlas
-         * using the module name as key with a boolean value to denote the visibility
-         * @description
-         * Determines the visibility of the different modules in the application
-         * given a specific state. These are the attributes of the visibility object:
-         * - dataSelection
-         * - map
-         * - layerSelection
-         * - detail
-         * - page
-         * - searchResults
-         * - pano
-         */
         function determineVisibility (state) {
             var visibility = {};
 
@@ -78,23 +60,7 @@
 
             return visibility;
         }
-        /**
-         * @ngdoc method
-         * @name determineColumnSizes
-         * @methodOf atlas.dashboardColumns
-         * @param {object} visibility The visibility for which to set the columns
-         * @param {boolean} hasFullscreenMap Indicating if full screen map is active
-         * @param {boolean} isPrintMode Indicatiing if print mode is active
-         * @returns {object} An object containg three values: left, middle and right.
-         * each of which has a numerical value representing the amount of grind columns
-         * the have in the current state.
-         * @description
-         * The atlas app has a 3 column, **left, middle, and right**. At any given time at
-         * least one column is visible and at most 2. The grid has itself 12 columns.
-         *
-         * Using the determined visibility,the print mode flag and full screen map flag,
-         * the function determines what columns are visible and the column sizes.
-         */
+
         function determineColumnSizes (visibility, hasFullscreenMap, isPrintMode) {
             if (!isPrintMode) {
                 return determineColumnSizesDefault(visibility, hasFullscreenMap);

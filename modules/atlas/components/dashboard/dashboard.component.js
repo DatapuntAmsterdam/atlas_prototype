@@ -1,10 +1,9 @@
 /**
- * @ngdoc component
+ * @ngdoc directive
  * @name atlas.component:atlasDashboard
- * @restrict 'E'
  * @description
- * The atlas dashboard component
- */
+ * A description
+*/
 
 (function () {
     'use strict';
@@ -19,15 +18,6 @@
 
     AtlasDashboardController.$inject = ['store', 'dashboardColumns'];
 
-    /**
-     * @ngdoc controller
-     * @name atlas.controller:AtlasDashboardController
-     * @requires atlas.dashboardColumns
-     * @requires store
-     * @description
-     * The controller for the atlas dashboard. It is in this controller that
-     * state changes are linked to visiblity and column changes in the application.
-     */
     function AtlasDashboardController(store, dashboardColumns) {
         var vm = this;
 

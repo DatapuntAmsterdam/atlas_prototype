@@ -1,3 +1,10 @@
+/**
+ * @ngdoc service
+ * @name atlas.factory:pageReducers
+ * @description
+ * A description of the factory
+*/
+ 
 (function () {
     'use strict';
 

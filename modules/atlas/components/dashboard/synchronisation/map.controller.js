@@ -1,3 +1,9 @@
+/**
+ * @ngdoc controller
+ * @name atlas.controller:MapController
+ * @description
+ * Controller definition
+*/
 (function () {
     'use strict';
 

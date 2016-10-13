@@ -1,12 +1,8 @@
 /**
  * @ngdoc service
- * @name atlas.factory: piwik
- * @requires $window, $document, environment, PIWIK_CONFIG
+ * @name atlas.service:piwik
  * @description
- * Factory function used to generate a piwik init call. The init call is used to add piwik
- * to the atlas application
- * @returns {object}
- * An object containing a single item, the initialize function with 'initialize' as key
+ * A description of the service
 */
 
 (function () {
@@ -33,8 +29,6 @@
 
             $window._paq.push(['trackPageView']);
             $window._paq.push(['enableLinkTracking']);
-
-
 
             $window._paq.push(['setTrackerUrl', url_base + 'piwik.php']);
             $window._paq.push(['setSiteId', PIWIK_CONFIG[environment.NAME].SITE_ID]);
