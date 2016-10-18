@@ -1,5 +1,4 @@
 module.exports = function (grunt) {
-
     const gruntDir = '../';
     const timeGrunt = false;
 

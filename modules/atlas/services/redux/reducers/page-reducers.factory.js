@@ -4,7 +4,6 @@
  * @description
  * A description of the factory
 */
- 
 (function () {
     'use strict';
 
