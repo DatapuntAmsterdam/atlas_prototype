@@ -21,7 +21,6 @@
             maximumSize = 60;
 
         vm.size = Math.max(Math.round(maximumSize - vm.distance), minimumSize);
-
         vm.loadScene = function () {
             store.dispatch({
                 type: ACTIONS.FETCH_STRAATBEELD,

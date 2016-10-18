@@ -1,3 +1,10 @@
+/**
+ * @ngdoc service
+ * @name atlas.service:dashboardColumns
+ * @description
+ * A description of the service
+*/
+
 (function () {
     'use strict';
 

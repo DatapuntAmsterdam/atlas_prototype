@@ -1,3 +1,9 @@
+/**
+ * @ngdoc service
+ * @name atlas.factory:searchReducers
+ * @description
+ * A description of the factory
+*/
 (function () {
     'use strict';
 

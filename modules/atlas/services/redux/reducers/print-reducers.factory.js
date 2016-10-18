@@ -1,3 +1,9 @@
+/**
+ * @ngdoc service
+ * @name atlas.factory:printReducers
+ * @description
+ * A description of the factory
+*/
 (function () {
     'use strict';
 

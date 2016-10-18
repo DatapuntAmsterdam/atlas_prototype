@@ -1,3 +1,10 @@
+/**
+ * @ngdoc service
+ * @name atlas.service:piwik
+ * @description
+ * A description of the service
+*/
+
 (function () {
     'use strict';
 

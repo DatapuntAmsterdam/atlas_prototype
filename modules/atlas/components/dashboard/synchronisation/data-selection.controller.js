@@ -1,3 +1,9 @@
+/**
+ * @ngdoc controller
+ * @name atlas.controller:DataSelectionController
+ * @description
+ * Controller definition
+*/
 (function () {
     'use strict';
 

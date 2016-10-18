@@ -1,3 +1,11 @@
+/**
+ * @ngdoc directive
+ * @name atlas.directive:atlasPrintState
+ * @restrict: 'A'
+ * @description
+ * A description
+*/
+
 (function () {
     angular
         .module('atlas')
