@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('atlasHeader')
-        .directive('atlasSearch', atlasSearchDirective);
+        .module('dpHeader')
+        .directive('dpSearch', dpSearchDirective);
 
-    atlasSearchDirective.$inject = ['$timeout', 'autocompleteData', 'environment', 'store', 'ACTIONS'];
+    dpSearchDirective.$inject = ['$timeout', 'autocompleteData', 'environment', 'store', 'ACTIONS'];
 
-    function atlasSearchDirective($timeout, autocompleteData, environment, store, ACTIONS) {
+    function dpSearchDirective ($timeout, autocompleteData, environment, store, ACTIONS) {
         return {
             restrict: 'E',
             scope: {
@@ -17,7 +17,7 @@
             link: linkFunction
         };
 
-        function linkFunction(scope, element) {
+        function linkFunction (scope, element) {
             var searchbox = element[0].querySelector('.js-search-input');
 
             scope.activeSuggestionIndex = -1;
@@ -29,9 +29,9 @@
                 event.preventDefault();
 
                 if (scope.activeSuggestionIndex === -1) {
-                    //Load the search results
+                    // Load the search results
                     store.dispatch({
-                        type: ACTIONS.SHOW_SEARCH_RESULTS_BY_QUERY,
+                        type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
                         payload: scope.query
                     });
                 } else {
@@ -69,11 +69,11 @@
             };
 
             scope.navigateSuggestions = function (event) {
-                //Cancel outstanding requests, we don't want suggestions to 'refresh' while navigating.
+                // Cancel outstanding requests, we don't want suggestions to 'refresh' while navigating.
                 switch (event.keyCode) {
-                    //Arrow up
+                    // Arrow up
                     case 38:
-                        //By default the up arrow puts the cursor at the beginning of the input, we don't want that!
+                        // By default the up arrow puts the cursor at the beginning of the input, we don't want that!
                         event.preventDefault();
 
                         scope.activeSuggestionIndex = Math.max(scope.activeSuggestionIndex - 1, -1);
@@ -86,7 +86,7 @@
 
                         break;
 
-                    //Arrow down
+                    // Arrow down
                     case 40:
                         scope.activeSuggestionIndex = Math.min(
                             scope.activeSuggestionIndex + 1,
@@ -96,7 +96,7 @@
                         setSuggestedQuery();
                         break;
 
-                    //Escape
+                    // Escape
                     case 27:
                         scope.query = scope.originalQuery;
                         removeSuggestions();
@@ -123,7 +123,7 @@
 
             scope.removeSuggestions = removeSuggestions;
 
-            function removeSuggestions(event) {
+            function removeSuggestions (event) {
                 if (angular.isDefined(event) && event.type === 'blur') {
                     /**
                      * Clicking a suggestion link, which is outside the search box, triggers the blur event on the
@@ -136,7 +136,7 @@
                     removeSuggestionFromScope();
                 }
 
-                function removeSuggestionFromScope() {
+                function removeSuggestionFromScope () {
                     scope.suggestions = [];
                     scope.numberOfSuggestions = 0;
                     scope.activeSuggestionIndex = -1;
@@ -144,7 +144,7 @@
                 }
             }
 
-            function setSuggestedQuery() {
+            function setSuggestedQuery () {
                 scope.query = autocompleteData.getSuggestionByIndex(
                     scope.suggestions,
                     scope.activeSuggestionIndex

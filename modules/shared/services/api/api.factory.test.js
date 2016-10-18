@@ -76,7 +76,7 @@ describe('The api factory', function () {
     });
 
     it('adds an Authorization header if the user is logged in', function () {
-        //Not logged in
+        // Not logged in
         isLoggedIn = false;
 
         $httpBackend.expectGET(
@@ -86,7 +86,7 @@ describe('The api factory', function () {
         api.getByUrl('http://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/');
         $httpBackend.flush();
 
-        //Logged in
+        // Logged in
         isLoggedIn = true;
 
         $httpBackend.expectGET(

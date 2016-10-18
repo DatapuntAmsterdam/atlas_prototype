@@ -1,10 +1,10 @@
 <div>
     <div class="u-row">
-        <atlas-stelselpedia-header
+        <dp-stelselpedia-header
             heading="{{vm.apiData.results._display}}"
             definition="PAND"
             meta-data="vm.apiData">
-        </atlas-stelselpedia-header>
+        </dp-stelselpedia-header>
 
         <dl class="c-key-value-list">
             <dt>Oorspronkelijk bouwjaar</dt>
@@ -19,7 +19,7 @@
 
     <div ng-if="vm.apiData.results" class="u-row">
         <div class="u-col-sm--6 u-padding__right--2">
-            <atlas-parent-relations content="vm.apiData.results"></atlas-parent-relations>
+            <dp-parent-relations content="vm.apiData.results"></dp-parent-relations>
         </div>
         <div class="u-col-sm--6">
             <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
@@ -27,14 +27,14 @@
     </div>
 
     <div ng-if="vm.apiData.results.verblijfsobjecten.count">
-        <atlas-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst"></atlas-api-call>
+        <dp-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst"></dp-api-call>
     </div>
 
     <div>
-        <atlas-stelselpedia-header definition="VESTIGING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="VESTIGING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="handelsregister/vestiging/?pand={{ vm.apiData.results.pandidentificatie }}" add-api-root="true" partial="lijst"></atlas-api-call>
+        <dp-api-call endpoint="handelsregister/vestiging/?pand={{ vm.apiData.results.pandidentificatie }}" add-api-root="true" partial="lijst"></dp-api-call>
     </div>
 </div>

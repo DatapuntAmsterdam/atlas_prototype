@@ -18,7 +18,7 @@
         var vm = this;
 
         vm.classForField = function (format) {
-            switch(format && format.align) {
+            switch (format && format.align) {
                 case 'right':
                     return 'u-align--right';
                 default:

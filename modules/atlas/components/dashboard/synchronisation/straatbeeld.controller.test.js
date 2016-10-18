@@ -1,16 +1,44 @@
 describe('The straatbeeld controller', function () {
     var $controller,
         $rootScope,
-        store;
+        store,
+        mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            }
+        );
 
         angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
         });
+
+        mockedState = {
+            straatbeeld: {
+                id: 7,
+                searchLocation: null,
+                date: new Date(2016, 6, 8),
+                camera: {
+                    location: [52.741, 4.852]
+                },
+                hotspots: ['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y', 'FAKE_HOTSPOT_Z'],
+                isLoading: false
+            }
+        };
+
+        spyOn(store, 'getState').and.callThrough();
     });
 
     function getController () {
@@ -35,21 +63,7 @@ describe('The straatbeeld controller', function () {
     });
 
     it('sets the id, date, camera, hotspots and isLoading indicator based on the state', function () {
-        var mockedState = {
-                straatbeeld: {
-                    id: 7,
-                    searchLocation: null,
-                    date: new Date(2016, 6, 8),
-                    camera: {
-                        location: [52.741, 4.852]
-                    },
-                    hotspots: ['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y', 'FAKE_HOTSPOT_Z'],
-                    isLoading: false
-                }
-            },
-            controller;
-
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        var controller;
 
         controller = getController();
 
@@ -64,20 +78,19 @@ describe('The straatbeeld controller', function () {
     });
 
     it('can have a location instead of an ID', function () {
-        var mockedState = {
-                straatbeeld: {
-                    id: null,
-                    searchLocation: [52.456, 4.321],
-                    date: new Date(2016, 6, 8),
-                    camera: {
-                        location: [52.741, 4.852]
-                    },
-                    isLoading: false
-                }
-            },
-            controller;
+        var controller;
 
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        mockedState = {
+            straatbeeld: {
+                id: null,
+                searchLocation: [52.456, 4.321],
+                date: new Date(2016, 6, 8),
+                camera: {
+                    location: [52.741, 4.852]
+                },
+                isLoading: false
+            }
+        };
 
         controller = getController();
 

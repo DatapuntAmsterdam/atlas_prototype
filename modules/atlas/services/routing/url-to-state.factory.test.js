@@ -6,7 +6,14 @@ describe('The urlToState factory', function () {
         mockedSearchParams;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    dispatch: function () {}
+                }
+            }
+        );
 
         angular.mock.inject(function (_$location_, _$rootScope_, _urlToState_, _store_) {
             $location = _$location_;
@@ -49,13 +56,13 @@ describe('The urlToState factory', function () {
         $location.search(changedSearchParams);
         $rootScope.$apply();
 
-        //Initial parameters
+        // Initial parameters
         expect(store.dispatch).toHaveBeenCalledWith({
             type: 'URL_CHANGE',
             payload: changedSearchParams
         });
 
-        //Changes parameters
+        // Changes parameters
         expect(store.dispatch).toHaveBeenCalledWith({
             type: 'URL_CHANGE',
             payload: changedSearchParams

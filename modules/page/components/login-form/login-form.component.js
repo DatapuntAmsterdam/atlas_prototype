@@ -2,16 +2,16 @@
     'use strict';
 
     angular
-        .module('atlasPage')
-        .component('atlasLoginForm', {
+        .module('dpPage')
+        .component('dpLoginForm', {
             templateUrl: 'modules/page/components/login-form/login-form.html',
-            controller: AtlasLoginFormController,
+            controller: DpLoginFormController,
             controllerAs: 'vm'
         });
 
-    AtlasLoginFormController.$inject = ['$window', 'user'];
+    DpLoginFormController.$inject = ['$window', 'user'];
 
-    function AtlasLoginFormController ($window, user) {
+    function DpLoginFormController ($window, user) {
         var vm = this;
 
         vm.errorMessage = null;

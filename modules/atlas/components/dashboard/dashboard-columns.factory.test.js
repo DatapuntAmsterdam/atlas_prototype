@@ -141,7 +141,9 @@ describe('The dashboardColumns factory', function () {
 
     describe('when visiting a detail page', function () {
         beforeEach(function () {
-            mockedState.detail = {};
+            mockedState.detail = {
+                geometry: {fake: 'GEOMETRY'}
+            };
             mockedState.page = null;
         });
 
@@ -174,12 +176,11 @@ describe('The dashboardColumns factory', function () {
         describe('the print version', function () {
             beforeEach(function () {
                 mockedState.isPrintMode = true;
-
-                visibility = dashboardColumns.determineVisibility(mockedState);
-                columnSizes = dashboardColumns.determineColumnSizes(visibility, false, true);
             });
 
             it('makes the map and detail page visibile', function () {
+                visibility = dashboardColumns.determineVisibility(mockedState);
+
                 expect(visibility.map).toBe(true);
                 expect(visibility.detail).toBe(true);
 
@@ -191,9 +192,19 @@ describe('The dashboardColumns factory', function () {
             });
 
             it('left column: 0/3, middle column: 3/3, right column 3/3', function () {
+                visibility = dashboardColumns.determineVisibility(mockedState);
+                columnSizes = dashboardColumns.determineColumnSizes(visibility, false, true);
+
                 expect(columnSizes.left).toBe(0);
                 expect(columnSizes.middle).toBe(12);
                 expect(columnSizes.right).toBe(12);
+            });
+
+            it('doesn\'t show the map when there is no geometry', function () {
+                mockedState.detail.geometry = null;
+
+                visibility = dashboardColumns.determineVisibility(mockedState);
+                expect(visibility.map).toBe(false);
             });
         });
     });
@@ -263,7 +274,7 @@ describe('The dashboardColumns factory', function () {
                 uri: 'blah/blah/123',
                 isLoading: false
             };
-            mockedState.map.showLayerSelection = true;
+            mockedState.layerSelection = true;
         });
 
         describe('the default non-print version', function () {
@@ -316,7 +327,6 @@ describe('The dashboardColumns factory', function () {
                 expect(columnSizes.middle).toBe(0);
                 expect(columnSizes.right).toBe(0);
             });
-
         });
     });
 
@@ -384,7 +394,7 @@ describe('The dashboardColumns factory', function () {
                 uri: 'blah/blah/123',
                 isLoading: false
             };
-            mockedState.map.showLayerSelection = true;
+            mockedState.layerSelection = true;
             mockedState.map.isFullscreen = true;
         });
 
@@ -438,7 +448,6 @@ describe('The dashboardColumns factory', function () {
                 expect(columnSizes.middle).toBe(0);
                 expect(columnSizes.right).toBe(0);
             });
-
         });
     });
 

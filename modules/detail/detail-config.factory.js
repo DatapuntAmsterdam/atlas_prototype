@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
+        .module('dpDetail')
         .factory('detailConfig', detailConfigFactory);
 
     detailConfigFactory.$inject = ['environment'];

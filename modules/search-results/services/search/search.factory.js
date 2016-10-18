@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasSearchResults')
+        .module('dpSearchResults')
         .factory('search', searchFactory);
 
     searchFactory.$inject = ['$q', 'SEARCH_CONFIG', 'api', 'searchFormatter'];
@@ -28,12 +28,12 @@
             });
 
             if (angular.isString(categorySlug)) {
-                //A single category
+                // A single category
                 return $q.all(queries).then(function (searchResults) {
                     return [searchFormatter.formatCategory(categorySlug, searchResults[0])];
                 });
             } else {
-                //All search results
+                // All search results
                 return $q.all(queries).then(searchFormatter.formatCategories);
             }
         }
@@ -41,7 +41,7 @@
         function loadMore (category) {
             return api.getByUrl(category.next)
                 .then(function (nextPageData) {
-                    //Don't change the input, create a new variable
+                    // Don't change the input, create a new variable
                     var output = {};
 
                     output.count = nextPageData.count;

@@ -119,7 +119,7 @@ describe('The dp-data-selection component', function () {
         expect(dataSelectionApi.query).toHaveBeenCalledTimes(1);
         expect(scope.vm.currentPage).toBe(2);
 
-        //Change the state
+        // Change the state
         scope.vm.state.page = 3;
         $rootScope.$apply();
 
@@ -131,12 +131,11 @@ describe('The dp-data-selection component', function () {
         var component = getComponent(mockedState),
             scope = component.isolateScope();
 
-        //Change the state
+        // Change the state
         scope.vm.state.page = 101;
         $rootScope.$apply();
 
         expect(scope.vm.currentPage).toBe(101);
         expect(scope.vm.noDataToDisplay).toBe(true);
     });
-
 });

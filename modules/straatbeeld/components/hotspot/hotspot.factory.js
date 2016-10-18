@@ -38,7 +38,7 @@
             return q.promise;
         }
 
-        //HELP: ik snap dit niet!
+        // HELP: ik snap dit niet!
         function calculateHotspotPosition (camera, hotspot) {
             return {
                 yaw: hotspot.relativeLocation.yaw - camera.heading,

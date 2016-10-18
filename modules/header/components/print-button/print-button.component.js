@@ -2,17 +2,17 @@
     'use strict';
 
     angular
-        .module('atlasHeader')
-        .component('atlasPrintButton', {
+        .module('dpHeader')
+        .component('dpPrintButton', {
             transclude: true,
             templateUrl: 'modules/header/components/print-button/print-button.html',
-            controller: AtlasPrintButtonController,
+            controller: DpPrintButtonController,
             controllerAs: 'vm'
         });
 
-    AtlasPrintButtonController.$inject = ['$window'];
+    DpPrintButtonController.$inject = ['$window'];
 
-    function AtlasPrintButtonController ($window) {
+    function DpPrintButtonController ($window) {
         var vm = this;
 
         vm.print = function () {

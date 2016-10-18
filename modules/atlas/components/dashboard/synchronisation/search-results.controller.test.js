@@ -1,16 +1,38 @@
 describe('The searchResults controller', function () {
     var $controller,
         $rootScope,
-        store;
+        store,
+        mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            }
+        );
 
         angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
         });
+
+        mockedState = {
+            search: {
+                query: 'i am a search query',
+                location: null
+            }
+        };
+
+        spyOn(store, 'getState').and.callThrough();
     });
 
     function getController () {
@@ -35,15 +57,7 @@ describe('The searchResults controller', function () {
     });
 
     it('sets the query string based on the state', function () {
-        var mockedState = {
-                search: {
-                    query: 'i am a search query',
-                    location: null
-                }
-            },
-            controller;
-
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        var controller;
 
         controller = getController();
 
@@ -52,15 +66,14 @@ describe('The searchResults controller', function () {
     });
 
     it('sets the location based on the state', function () {
-        var mockedState = {
-                search: {
-                    query: null,
-                    location: [52.123, 4.789]
-                }
-            },
-            controller;
+        var controller;
 
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        mockedState = {
+            search: {
+                query: null,
+                location: [52.123, 4.789]
+            }
+        };
 
         controller = getController();
 
@@ -69,33 +82,54 @@ describe('The searchResults controller', function () {
     });
 
     it('sets the category based on the state', function () {
-        var mockedState = {
-                search: {
-                    query: 'i am a search query',
-                    location: null,
-                    category: 'adres'
-                }
-            },
-            controller;
+        var controller;
 
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        mockedState = {
+            search: {
+                query: 'i am a search query',
+                location: null,
+                category: 'adres'
+            }
+        };
 
         controller = getController();
 
         expect(controller.category).toBe('adres');
     });
 
-    it('doesn\'t break if search is null', function () {
-        var mockedState = {
-                search: null
-            },
-            controller;
+    it('sets isLoading based on the state', function () {
+        var controller;
 
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        mockedState.search.isLoading = true;
 
         controller = getController();
 
-        expect(controller.query).toBeNull();
-        expect(controller.location).toBeNull();
+        expect(controller.isLoading).toBe(true);
+    });
+
+    it('sets the number of results based on the state', function () {
+        var controller;
+
+        mockedState.search.numberOfResults = 23;
+
+        controller = getController();
+
+        expect(controller.numberOfResults).toBe(23);
+    });
+
+    it('doesn\'t break if search is null', function () {
+        var controller;
+
+        mockedState = {
+            search: null
+        };
+
+        controller = getController();
+
+        expect(controller.isLoading).toBeUndefined();
+        expect(controller.query).toBeUndefined();
+        expect(controller.location).toBeUndefined();
+        expect(controller.category).toBeUndefined();
+        expect(controller.numberOfResults).toBeUndefined();
     });
 });

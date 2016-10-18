@@ -5,19 +5,19 @@
         .module('dpMap')
         .constant('MEASURE_CONFIG', {
             position: 'topleft',
-            primaryLengthUnit: 'atlasMeters',
+            primaryLengthUnit: 'dpMeters',
             secondaryLengthUnit: null,
-            primaryAreaUnit: 'atlasVierkanteMeters',
+            primaryAreaUnit: 'dpSquareMeters',
             activeColor: '#333',
             completedColor: '#333',
             localization: 'nl',
             units: {
-                atlasMeters: {
+                dpMeters: {
                     factor: 1,
                     display: 'm',
                     decimals: 2
                 },
-                atlasVierkanteMeters: {
+                dpSquareMeters: {
                     factor: 1,
                     display: 'm2',
                     decimals: 2

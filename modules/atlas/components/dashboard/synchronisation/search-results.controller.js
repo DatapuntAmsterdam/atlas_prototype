@@ -22,9 +22,13 @@
         function update () {
             var state = store.getState();
 
-            vm.query = state.search && state.search.query;
-            vm.location = state.search && state.search.location;
-            vm.category = state.search && state.search.category;
+            if (state.search) {
+                vm.isLoading = state.search.isLoading;
+                vm.query = state.search.query;
+                vm.location = state.search.location;
+                vm.category = state.search.category;
+                vm.numberOfResults = state.search.numberOfResults;
+            }
         }
     }
 })();

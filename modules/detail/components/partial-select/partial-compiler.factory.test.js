@@ -1,16 +1,14 @@
 describe('The partialCompiler factory', function () {
     var $rootScope,
         $templateCache,
-        $httpBackend,
         partialCompiler;
 
     beforeEach(function () {
-        angular.mock.module('atlasDetail');
+        angular.mock.module('dpDetail');
 
-        angular.mock.inject(function (_$rootScope_, _$templateCache_, _$httpBackend_, _partialCompiler_) {
+        angular.mock.inject(function (_$rootScope_, _$templateCache_, _partialCompiler_) {
             $rootScope = _$rootScope_;
             $templateCache = _$templateCache_;
-            $httpBackend = _$httpBackend_;
             partialCompiler = _partialCompiler_;
         });
 
@@ -29,7 +27,7 @@ describe('The partialCompiler factory', function () {
             output = _output_;
         });
 
-        //$templateRequest needs an extra digest cycle
+        // $templateRequest needs an extra digest cycle
         $rootScope.$apply();
         $rootScope.$apply();
 
@@ -49,7 +47,7 @@ describe('The partialCompiler factory', function () {
             output = _output_;
         });
 
-        //$templateRequest needs an extra digest cycle
+        // $templateRequest needs an extra digest cycle
         $rootScope.$apply();
         $rootScope.$apply();
 

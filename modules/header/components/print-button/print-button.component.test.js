@@ -1,10 +1,10 @@
-describe('The atlas-print-button component', function () {
+describe('The dp-print-button component', function () {
     var $compile,
         $rootScope,
         $window;
 
     beforeEach(function () {
-        angular.mock.module('atlasHeader');
+        angular.mock.module('dpHeader');
 
         angular.mock.inject(function (_$compile_, _$rootScope_, _$window_) {
             $compile = _$compile_;
@@ -18,7 +18,7 @@ describe('The atlas-print-button component', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-print-button');
+        element = document.createElement('dp-print-button');
 
         if (angular.isString(html)) {
             element.innerHTML = html;

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasHeader')
+        .module('dpHeader')
         .constant('HEADER_CONFIG', {
             AUTOCOMPLETE_ENDPOINT: 'atlas/typeahead/'
         });

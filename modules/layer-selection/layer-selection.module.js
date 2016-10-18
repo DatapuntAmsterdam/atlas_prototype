@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasLayerSelection', [
+        .module('dpLayerSelection', [
             'dpShared'
         ]);
 })();

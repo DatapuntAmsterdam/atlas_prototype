@@ -1,9 +1,9 @@
-describe('The atlas-current-date directive', function () {
+describe('The dp-current-date directive', function () {
     var $compile,
         $rootScope;
 
     beforeEach(function () {
-        angular.mock.module('atlasDetail');
+        angular.mock.module('dpDetail');
 
         angular.mock.inject(function (_$compile_, _$rootScope_) {
             $compile = _$compile_;
@@ -12,7 +12,7 @@ describe('The atlas-current-date directive', function () {
     });
 
     afterEach(function () {
-        //Reset the mocked date
+        // Reset the mocked date
         jasmine.clock().uninstall();
     });
 
@@ -21,7 +21,7 @@ describe('The atlas-current-date directive', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-current-date');
+        element = document.createElement('dp-current-date');
         scope = $rootScope.$new();
 
         directive = $compile(element)(scope);

@@ -1,19 +1,19 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('dpShared')
-        .service('user', userFactory);
+        .factory('user', userFactory);
 
     userFactory.$inject = ['$http', '$httpParamSerializer', '$q', '$interval', 'environment'];
 
     function userFactory ($http, $httpParamSerializer, $q, $interval, environment) {
         var userState = {
-                username: null,
-                accessToken: null,
-                isLoggedIn: false,
-                keepLoggedIn: false
-            };
+            username: null,
+            accessToken: null,
+            isLoggedIn: false,
+            keepLoggedIn: false
+        };
 
         //  Refresh the succesfully obtained token every 4 and a half minutes (token expires in 5 minutes)
         var intervalDuration = 270000;
@@ -28,22 +28,22 @@
 
         function login (username, password) {
             return $http({
-                    method: 'POST',
-                    url: environment.AUTH_ROOT + 'token/',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    data: $httpParamSerializer(
-                        {
-                            username: username,
-                            password: password
-                        }
-                    )
-                })
+                method: 'POST',
+                url: environment.AUTH_ROOT + 'token/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: $httpParamSerializer(
+                    {
+                        username: username,
+                        password: password
+                    }
+                )
+            })
                 .then(loginSuccess, loginError);
 
             function loginSuccess (response) {
-                //This is the username as entered by the user in the login form, the backend doesn't return the username
+                // This is the username as entered by the user in the login form, backend doesn't return the username
                 userState.username = username;
                 userState.accessToken = response.data.token;
                 userState.isLoggedIn = true;
@@ -74,17 +74,17 @@
 
         function refreshToken () {
             return $http({
-                    method: 'POST',
-                    url: environment.AUTH_ROOT + 'refresh/',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    data: $httpParamSerializer(
-                        {
-                            token: userState.accessToken
-                        }
+                method: 'POST',
+                url: environment.AUTH_ROOT + 'refresh/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: $httpParamSerializer(
+                    {
+                        token: userState.accessToken
+                    }
                     )
-                })
+            })
                 .then(refreshSuccess, logout);
 
             function refreshSuccess (response) {

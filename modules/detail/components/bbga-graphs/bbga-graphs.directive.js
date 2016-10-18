@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
-        .directive('atlasBbgaGraphs', atlasBbgaGraphsDirective);
+        .module('dpDetail')
+        .directive('dpBbgaGraphs', dpBbgaGraphsDirective);
 
-    atlasBbgaGraphsDirective.$inject = ['BBGA', 'bbgaDataService'];
+    dpBbgaGraphsDirective.$inject = ['BBGA', 'bbgaDataService'];
 
-    function atlasBbgaGraphsDirective (BBGA, bbgaDataService) {
+    function dpBbgaGraphsDirective (BBGA, bbgaDataService) {
         return {
             restrict: 'E',
             scope: {

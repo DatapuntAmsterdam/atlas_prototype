@@ -50,7 +50,7 @@
                     xValues.push(coordinates[0]);
                     yValues.push(coordinates[1]);
                 } else {
-                    //We have to go deeper recursively; two levels for Polygons, three levels for MultiPolygons
+                    // We have to go deeper recursively; two levels for Polygons, three levels for MultiPolygons
                     coordinates.forEach(getCoordinates);
                 }
             }

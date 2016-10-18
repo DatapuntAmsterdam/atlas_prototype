@@ -31,7 +31,7 @@
                 }
             };
 
-            //Fetch the first scene (always based on location)
+            // Fetch the first scene (always based on location)
             scope.$watchCollection('state.searchLocation', function (location) {
                 if (angular.isArray(location)) {
                     earthmine.getImageDataByCoordinates(
@@ -46,7 +46,7 @@
                 }
             });
 
-            //Fetch scene #2-n
+            // Fetch scene #2-n
             scope.$watchCollection('state.id', function (id) {
                 if (angular.isNumber(id)) {
                     earthmine.getImageDataById(id).then(function (earthmineData) {
@@ -58,7 +58,7 @@
                 }
             });
 
-            //Show new scene
+            // Show new scene
             scope.$watchCollection('state.car.location', function (location) {
                 if (angular.isArray(location)) {
                     marzipanoService.loadScene(
@@ -70,7 +70,7 @@
                 }
             });
 
-            //Re-render the Marzipano viewer if the size changes (through an added parent CSS class)
+            // Re-render the Marzipano viewer if the size changes (through an added parent CSS class)
             scope.$watch('isPrintMode', function () {
                 $rootScope.$applyAsync(function () {
                     viewer.updateSize();

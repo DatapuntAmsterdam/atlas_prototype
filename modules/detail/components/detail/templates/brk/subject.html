@@ -1,10 +1,10 @@
 <div>
     <div class="u-row">
-      <atlas-stelselpedia-header
+      <dp-stelselpedia-header
         heading="{{vm.apiData.results._display}}"
-        definition="KADASTRAAL_SUBJECT"
+        definition="SUBJECT"
         meta-data="vm.apiData">
-      </atlas-stelselpedia-header>
+      </dp-stelselpedia-header>
 
       <!-- niet natuurlijke persoon -->
       <dl class="c-key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === false">
@@ -81,9 +81,9 @@
     </div>
 
     <div class="default-box" ng-if="vm.apiData.results.rechten.count">
-      <atlas-stelselpedia-header definition="ZAKELIJK_RECHT" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="ZAKELIJK_RECHT" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.rechten.href}}" partial="brk/subject-rechten"></atlas-api-call>
+      <dp-api-call endpoint="{{vm.apiData.results.rechten.href}}" partial="brk/subject-rechten"></dp-api-call>
     </div>
 </div>
 

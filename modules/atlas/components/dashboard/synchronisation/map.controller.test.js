@@ -2,10 +2,23 @@ describe('The map controller', function () {
     var $controller,
         $rootScope,
         store,
-        crsConverter;
+        crsConverter,
+        mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            }
+        );
 
         angular.mock.inject(function (_$controller_, _$rootScope_, _store_, _crsConverter_) {
             $controller = _$controller_;
@@ -14,6 +27,14 @@ describe('The map controller', function () {
             crsConverter = _crsConverter_;
         });
 
+        mockedState = {
+            map: {
+                var_1: 'a',
+                var_2: 'b'
+            }
+        };
+
+        spyOn(store, 'getState').and.callThrough();
         spyOn(crsConverter, 'wgs84ToRd').and.returnValue('FAKE_RD_COORDINATES');
     });
 
@@ -39,15 +60,7 @@ describe('The map controller', function () {
     });
 
     it('sets the mapState based on the Redux state', function () {
-        var mockedState = {
-                map: {
-                    var_1: 'a',
-                    var_2: 'b'
-                }
-            },
-            controller;
-
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        var controller;
 
         controller = getController();
 
@@ -57,14 +70,23 @@ describe('The map controller', function () {
         });
     });
 
+    it('sets the showLayerSelection based on the Redux state', function () {
+        var controller;
+
+        controller = getController();
+        expect(controller.showLayerSelection).not.toEqual(true);
+
+        mockedState.layerSelection = true;
+        controller = getController();
+        expect(controller.showLayerSelection).toEqual(true);
+    });
+
     describe('optionally adds marker data for search by location, detail and straatbeeld', function () {
-        var mockedState,
-            controller;
+        var controller;
 
         it('can work without any markers', function () {
             mockedState = {};
 
-            spyOn(store, 'getState').and.returnValue(mockedState);
             controller = getController();
 
             expect(controller.markers).toEqual([]);
@@ -77,7 +99,6 @@ describe('The map controller', function () {
                 }
             };
 
-            spyOn(store, 'getState').and.returnValue(mockedState);
             controller = getController();
 
             expect(controller.markers).toContain(jasmine.objectContaining({
@@ -92,7 +113,6 @@ describe('The map controller', function () {
                 }
             };
 
-            spyOn(store, 'getState').and.returnValue(mockedState);
             controller = getController();
 
             expect(controller.markers).toContain(jasmine.objectContaining({
@@ -112,10 +132,9 @@ describe('The map controller', function () {
                 }
             };
 
-            spyOn(store, 'getState').and.returnValue(mockedState);
             controller = getController();
 
-            //Straatbeeld is secretly made using two icons
+            // Straatbeeld is secretly made using two icons
             expect(controller.markers).toContain(jasmine.objectContaining({
                 id: 'straatbeeld_orientation'
             }));
@@ -143,12 +162,11 @@ describe('The map controller', function () {
                 }
             };
 
-            spyOn(store, 'getState').and.returnValue(mockedState);
             controller = getController();
 
-            //Straatbeeld is secretly made using two icons
+            // Straatbeeld is secretly made using two icons
 
-            //Search and straatbeeld are in WGS84 and will be converted to RD
+            // Search and straatbeeld are in WGS84 and will be converted to RD
             expect(controller.markers).toContain(jasmine.objectContaining({
                 id: 'search',
                 geometry: {
@@ -173,7 +191,7 @@ describe('The map controller', function () {
                 }
             }));
 
-            //Detail already is in RD and won't be converted
+            // Detail already is in RD and won't be converted
             expect(controller.markers).toContain(jasmine.objectContaining({
                 id: 'detail',
                 geometry: 'FAKE_RD_GEOMETRY'
@@ -216,7 +234,6 @@ describe('The map controller', function () {
                 }
             };
 
-            spyOn(store, 'getState').and.returnValue(mockedState);
             controller = getController();
 
             expect(controller.markers).toContain(jasmine.objectContaining({

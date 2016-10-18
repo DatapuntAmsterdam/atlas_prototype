@@ -75,15 +75,15 @@ describe('The dp-active-overlays-item component', function () {
     it('has an optional legend image', function () {
         var component;
 
-        //No legend
+        // No legend
         component = getComponent('overlay_without_legend', true, 10);
         expect(component.find('img').length).toBe(0);
 
-        //A self-hosted legend
+        // A self-hosted legend
         component = getComponent('overlay_with_internal_legend', true, 10);
         expect(component.find('img').length).toBe(1);
 
-        //An externally hosted legend
+        // An externally hosted legend
         component = getComponent('overlay_with_external_legend', true, 10);
         expect(component.find('img').length).toBe(1);
     });
@@ -92,15 +92,15 @@ describe('The dp-active-overlays-item component', function () {
         var component,
             expectedMessage = '(geen legenda)';
 
-        //Invisible manually: don't show the message
+        // Invisible manually: don't show the message
         component = getComponent('overlay_without_legend', false, 8);
         expect(component.text()).not.toContain(expectedMessage);
 
-        //Invisible through zoom: don't show the message
+        // Invisible through zoom: don't show the message
         component = getComponent('overlay_without_legend', true, 11);
         expect(component.text()).not.toContain(expectedMessage);
 
-        //Visible overlay; show the message
+        // Visible overlay; show the message
         component = getComponent('overlay_without_legend', true, 8);
         expect(component.text()).toContain(expectedMessage);
     });
@@ -109,13 +109,13 @@ describe('The dp-active-overlays-item component', function () {
         var component,
             i;
 
-        //When visible
+        // When visible
         for (i = 8; i <= 10; i++) {
             component = getComponent('overlay_without_legend', true, i);
             expect(component.text()).not.toContain('Zichtbaar bij verder zoomen');
         }
 
-        //When invisible
+        // When invisible
         for (i = 11; i <= 16; i++) {
             component = getComponent('overlay_without_legend', true, i);
             expect(component.text()).toContain('Zichtbaar bij verder zoomen');
@@ -126,7 +126,7 @@ describe('The dp-active-overlays-item component', function () {
         var component,
             i;
 
-        //When invisible
+        // When invisible
         for (i = 8; i <= 16; i++) {
             component = getComponent('overlay_with_internal_legend', false, i);
             expect(component.text()).not.toContain('Zichtbaar bij verder zoomen');
@@ -136,12 +136,12 @@ describe('The dp-active-overlays-item component', function () {
     it('has a button to hide the overlay, even if it\'s already hidden because of the zoom level', function () {
         var component;
 
-        //With a supported zoom level
+        // With a supported zoom level
         component = getComponent('overlay_without_legend', true, 10);
         expect(component.find('dp-link').length).toBe(1);
         expect(component.find('dp-link').text()).toContain('Verbergen');
 
-        //With an unsupported zoom level
+        // With an unsupported zoom level
         component = getComponent('overlay_without_legend', true, 9);
         expect(component.find('dp-link').length).toBe(1);
         expect(component.find('dp-link').text()).toContain('Verbergen');
@@ -150,12 +150,12 @@ describe('The dp-active-overlays-item component', function () {
     it('has a button to show the overlay, even if it can\'t be shown on the current zoom level', function () {
         var component;
 
-        //With a supported zoom level
+        // With a supported zoom level
         component = getComponent('overlay_without_legend', true, 10);
         expect(component.find('dp-link').length).toBe(1);
         expect(component.find('dp-link').text()).toContain('Verbergen');
 
-        //With an unsupported zoom level
+        // With an unsupported zoom level
         component = getComponent('overlay_without_legend', true, 9);
         expect(component.find('dp-link').length).toBe(1);
         expect(component.find('dp-link').text()).toContain('Verbergen');

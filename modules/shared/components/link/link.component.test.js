@@ -4,7 +4,14 @@ describe('The dp-link component', function () {
         store;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'dpShared',
+            {
+                store: {
+                    dispatch: angular.noop
+                }
+            }
+        );
 
         angular.mock.inject(function (_$compile_, _$rootScope_, _store_) {
             $compile = _$compile_;
@@ -44,7 +51,7 @@ describe('The dp-link component', function () {
 
         spyOn(store, 'dispatch');
 
-        //Scenario A
+        // Scenario A
         component = getComponent('SHOW_PAGE', 'welkom');
         component.find('button')[0].click();
 
@@ -53,7 +60,7 @@ describe('The dp-link component', function () {
             payload: 'welkom'
         });
 
-        //Scenario B
+        // Scenario B
         component = getComponent('MAP_PAN', [101, 102]);
         component.find('button')[0].click();
 

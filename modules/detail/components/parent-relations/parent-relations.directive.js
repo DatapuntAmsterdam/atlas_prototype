@@ -2,25 +2,25 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
-        .directive('atlasParentRelations', atlasParentRelationsDirective);
+        .module('dpDetail')
+        .directive('dpParentRelations', dpParentRelationsDirective);
 
-    function atlasParentRelationsDirective () {
+    function dpParentRelationsDirective () {
         return {
             restrict: 'E',
             scope: {
                 content: '='
             },
             templateUrl: 'modules/detail/components/parent-relations/parent-relations.html',
-            controller: AtlasParentRelationsController,
+            controller: DpParentRelationsController,
             controllerAs: 'vm',
             bindToController: true
         };
     }
 
-    AtlasParentRelationsController.$inject = ['PARENT_RELATIONS_CONFIG'];
+    DpParentRelationsController.$inject = ['PARENT_RELATIONS_CONFIG'];
 
-    function AtlasParentRelationsController (PARENT_RELATIONS_CONFIG) {
+    function DpParentRelationsController (PARENT_RELATIONS_CONFIG) {
         var vm = this;
 
         vm.parentRelations = PARENT_RELATIONS_CONFIG

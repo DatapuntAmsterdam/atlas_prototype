@@ -3,7 +3,6 @@ describe('The dp-data-selection-download-button component', function () {
         $rootScope;
 
     beforeEach(function () {
-
         function postcodeFilter () {
             return 'filteredValue';
         }

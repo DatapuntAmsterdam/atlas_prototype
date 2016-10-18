@@ -1,16 +1,45 @@
 describe('The layerSelection controller', function () {
     var $controller,
         $rootScope,
-        store;
+        store,
+        mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            }
+        );
 
         angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
         });
+
+        mockedState = {
+            map: {
+                baseLayer: 'topografie',
+                overlays: [
+                    {
+                        id: 'layer_1',
+                        isVisible: true
+                    }, {
+                        id: 'layer_3',
+                        isVisible: true
+                    }
+                ],
+                zoom: 10
+            }
+        };
     });
 
     function getController () {
@@ -35,22 +64,7 @@ describe('The layerSelection controller', function () {
     });
 
     it('sets the baseLayer, overlays and zoom level based on the state', function () {
-        var mockedState = {
-                map: {
-                    baseLayer: 'topografie',
-                    overlays: [
-                        {
-                            id: 'layer_1',
-                            isVisible: true
-                        }, {
-                            id: 'layer_3',
-                            isVisible: true
-                        }
-                    ],
-                    zoom: 10
-                }
-            },
-            controller;
+        var controller;
 
         spyOn(store, 'getState').and.returnValue(mockedState);
 
@@ -60,7 +74,7 @@ describe('The layerSelection controller', function () {
         expect(controller.overlays).toEqual([
                         {id: 'layer_1', isVisible: true},
                         {id: 'layer_3', isVisible: true}
-                    ]);
+        ]);
         expect(controller.zoom).toBe(10);
     });
 });

@@ -30,7 +30,6 @@ describe('The piwik service', function () {
         });
     });
 
-
     it('inserts a script tag into the DOM', function () {
         var numberOfScripts,
             piwikScript;
@@ -40,7 +39,7 @@ describe('The piwik service', function () {
         $window._paq = [];
         spyOn($window._paq, 'push');
 
-        piwik.initialize(); 
+        piwik.initialize();
         // Checking values
         expect($window._paq.push).toHaveBeenCalledWith(['setSiteId', 300]);
 
@@ -49,7 +48,6 @@ describe('The piwik service', function () {
         expect(getScripts().length).toBe(numberOfScripts + 1);
         expect(piwikScript.getAttribute('type')).toBe('text/javascript');
         expect(piwikScript.getAttribute('src')).toBe('https://atlas.amsterdam.nl/piwik/piwik.js');
-
     });
 
     function getScripts () {

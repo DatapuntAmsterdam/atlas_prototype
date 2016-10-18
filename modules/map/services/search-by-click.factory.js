@@ -19,7 +19,7 @@
         function searchByClick (event) {
             $rootScope.$applyAsync(function () {
                 store.dispatch({
-                    type: ACTIONS.SHOW_SEARCH_RESULTS_BY_CLICK,
+                    type: ACTIONS.FETCH_SEARCH_RESULTS_BY_CLICK,
                     payload: [
                         event.latlng.lat,
                         event.latlng.lng

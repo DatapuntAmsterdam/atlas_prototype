@@ -23,11 +23,10 @@ module.exports = function (grunt) {
         clean: require(gruntDir + 'clean'),
         concat: require(gruntDir + 'concat')(grunt),
         connect: require(gruntDir + 'connect'),
-        'console-log-test': require(gruntDir + 'console-log-test'),
+        'console-log-test': require(gruntDir + 'lint')('console-log-test'),
         copy: require(gruntDir + 'copy')(grunt),
-        eslint: require(gruntDir + 'eslint'),
-        jshint: require(gruntDir + 'jshint'),
-        karma: require(gruntDir + 'karma'),
+        eslint: require(gruntDir + 'lint')('eslint'),
+        karma: require(gruntDir + 'karma')(grunt),
         ngdocs: require(gruntDir + 'ngdocs'),
         ngtemplates: require(gruntDir + 'angular-templates'),
         npmcopy: require(gruntDir + 'npmcopy'),
@@ -46,7 +45,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-karma');

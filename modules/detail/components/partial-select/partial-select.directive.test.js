@@ -1,13 +1,13 @@
-describe('The atlas-partial-select directive', function () {
+describe('The dp-partial-select directive', function () {
     var $compile,
         $rootScope,
         $q,
         partialCompiler,
         api;
 
-    beforeEach(function() {
+    beforeEach(function () {
         angular.mock.module(
-            'atlasDetail',
+            'dpDetail',
             {
                 partialCompiler: {
                     getHtml: function () {
@@ -58,7 +58,7 @@ describe('The atlas-partial-select directive', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-partial-select');
+        element = document.createElement('dp-partial-select');
         element.setAttribute('api-data', 'apiData');
         element.setAttribute('partial', partial);
         element.setAttribute('load-more-fn', 'loadMoreFn');
@@ -78,7 +78,7 @@ describe('The atlas-partial-select directive', function () {
 
         expect(partialCompiler.getHtml).toHaveBeenCalledWith(
             'modules/detail/components/partial-select/partials/my-template.html',
-            jasmine.any(Object) //This is a Angular scope
+            jasmine.any(Object) // This is a Angular scope
         );
 
         expect(directive.find('div')[0].outerHTML).toBe('<div>This is a compiled template!</div>');

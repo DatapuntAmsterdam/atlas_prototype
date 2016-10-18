@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasDetail', [
+        .module('dpDetail', [
             'ngSanitize',
             'dpShared'
         ]);

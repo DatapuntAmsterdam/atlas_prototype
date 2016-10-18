@@ -2,17 +2,17 @@
     'use strict';
 
     angular
-        .module('atlasHeader')
-        .component('atlasTerugmeldenButton', {
+        .module('dpHeader')
+        .component('dpTerugmeldenButton', {
             transclude: true,
             templateUrl: 'modules/header/components/terugmelden-button/terugmelden-button.html',
-            controller: AtlasTerugmeldenButtonController,
+            controller: DpTerugmeldenButtonController,
             controllerAs: 'vm'
         });
 
-    AtlasTerugmeldenButtonController.$inject = ['$window', '$location'];
+    DpTerugmeldenButtonController.$inject = ['$window', '$location'];
 
-    function AtlasTerugmeldenButtonController ($window, $location) {
+    function DpTerugmeldenButtonController ($window, $location) {
         var vm = this,
             recipient,
             subject,

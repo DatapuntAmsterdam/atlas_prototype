@@ -1,4 +1,4 @@
-describe('The atlas-metadata component', function () {
+describe('The dp-metadata component', function () {
     var $compile,
         $rootScope,
         $q,
@@ -7,7 +7,7 @@ describe('The atlas-metadata component', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasPage',
+            'dpPage',
             {
                 api: {
                     getByUri: function () {
@@ -40,12 +40,12 @@ describe('The atlas-metadata component', function () {
                 group: '',
                 title: 'FAKE_TITLE_1',
                 update_frequency: 'FAKE_UPDATE_FREQUENCY_1',
-                data_modified_date: 'FAKE_MODIFIED_DATE_1',
+                data_modified_date: 'FAKE_MODIFIED_DATE_1'
             }, {
                 group: '',
                 title: 'FAKE_TITLE_2',
                 update_frequency: 'FAKE_UPDATE_FREQUENCY_2',
-                data_modified_date: 'FAKE_MODIFIED_DATE_2',
+                data_modified_date: 'FAKE_MODIFIED_DATE_2'
             }
         ];
     });
@@ -59,7 +59,7 @@ describe('The atlas-metadata component', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-metadata');
+        element = document.createElement('dp-metadata');
         scope = $rootScope.$new();
 
         component = $compile(element)(scope);
@@ -75,12 +75,12 @@ describe('The atlas-metadata component', function () {
         component = getComponent();
         scope = component.isolateScope();
 
-        //It shows a loading indicator on initialization
+        // It shows a loading indicator on initialization
         expect(component.find('dp-loading-indicator').length).toBe(1);
         expect(component.find('dp-loading-indicator').attr('is-loading')).toBe('vm.isLoading');
         expect(scope.vm.isLoading).toBe(true);
 
-        //It hides the loading indicator when the API is done
+        // It hides the loading indicator when the API is done
         finishApiCall(mockedApiData);
 
         expect(scope.vm.isLoading).toBe(false);

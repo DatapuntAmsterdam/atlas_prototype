@@ -55,7 +55,7 @@ describe('The dp-data-selection-download-button component', function () {
     it('will filters as parameters to the download link', function () {
         var component;
 
-        //With one active filter
+        // With one active filter
         component = getComponent('dataset_a', {
             filter_b: 'eenofanderewaarde'
         });
@@ -63,7 +63,7 @@ describe('The dp-data-selection-download-button component', function () {
         expect(component.find('a').attr('href'))
             .toBe('http://www.example.com/datasets/a/download/?filter_b=eenofanderewaarde');
 
-        //With two active filters
+        // With two active filters
         component = getComponent('dataset_a', {
             filter_a: 'ingeschakeld',
             filter_b: 'eenofanderewaarde'
@@ -76,7 +76,7 @@ describe('The dp-data-selection-download-button component', function () {
     it('uses URL encoding for the values of the active filters', function () {
         var component;
 
-        //With one active filter
+        // With one active filter
         component = getComponent('dataset_a', {
             filter_a: 'äéë',
             filter_b: 'Waarde met spaties'

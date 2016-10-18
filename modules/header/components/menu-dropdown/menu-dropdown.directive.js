@@ -2,12 +2,15 @@
     'use strict';
 
     angular
-        .module('atlasHeader')
-        .directive('atlasMenuDropdown', atlasMenuDropdownDirective);
+        .module('dpHeader')
+        .directive('dpMenuDropdown', dpMenuDropdownDirective);
 
-    function atlasMenuDropdownDirective() {
+    function dpMenuDropdownDirective () {
         return {
             restrict: 'E',
+            scope: {
+                hasPrintButton: '<'
+            },
             transclude: true,
             templateUrl: 'modules/header/components/menu-dropdown/menu-dropdown.html',
             link: linkFunction

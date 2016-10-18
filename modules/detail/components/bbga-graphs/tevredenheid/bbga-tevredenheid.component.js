@@ -2,20 +2,20 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
-        .component('atlasBbgaTevredenheid', {
+        .module('dpDetail')
+        .component('dpBbgaTevredenheid', {
             templateUrl: 'modules/detail/components/bbga-graphs/tevredenheid/bbga-tevredenheid.html',
             bindings: {
                 gebiedHeading: '@',
                 gebiedCode: '@'
             },
-            controller: AtlasBbgaTevredenheid,
+            controller: DpBbgaTevredenheid,
             controllerAs: 'vm'
         });
 
-    AtlasBbgaTevredenheid.$inject = ['BBGA_TEVREDENHEID_CONFIG', 'bbgaDataService'];
+    DpBbgaTevredenheid.$inject = ['BBGA_TEVREDENHEID_CONFIG', 'bbgaDataService'];
 
-    function AtlasBbgaTevredenheid (BBGA_TEVREDENHEID_CONFIG, bbgaDataService) {
+    function DpBbgaTevredenheid (BBGA_TEVREDENHEID_CONFIG, bbgaDataService) {
         var vm = this;
 
         bbgaDataService.getGraphData('TEVREDENHEID', vm.gebiedHeading, vm.gebiedCode).then(function (bbgaData) {

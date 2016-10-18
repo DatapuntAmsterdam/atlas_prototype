@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasHeader', [
+        .module('dpHeader', [
             'ngSanitize',
             'dpShared'
         ]);

@@ -9,11 +9,11 @@
 (function () {
     angular
         .module('atlas')
-        .directive('atlasPrintState', AtlasPrintStateDirective);
+        .directive('dpPrintState', DpPrintStateDirective);
 
-    AtlasPrintStateDirective.$inject = ['store'];
+    DpPrintStateDirective.$inject = ['store'];
 
-    function AtlasPrintStateDirective (store) {
+    function DpPrintStateDirective (store) {
         return {
             restrict: 'A',
             link: linkFunction

@@ -2,20 +2,21 @@
     'use strict';
 
     angular
-        .module('atlasHeader')
-        .component('atlasHeader', {
+        .module('dpHeader')
+        .component('dpHeader', {
             bindings: {
                 query: '@',
+                hasPrintButton: '<',
                 isPrintMode: '='
             },
             templateUrl: 'modules/header/components/header/header.html',
-            controller: AtlasHeaderController,
+            controller: DpHeaderController,
             controllerAs: 'vm'
         });
 
-    AtlasHeaderController.$inject = ['user'];
+    DpHeaderController.$inject = ['user'];
 
-    function AtlasHeaderController(user) {
+    function DpHeaderController (user) {
         var vm = this;
 
         vm.isLoggedIn = function () {

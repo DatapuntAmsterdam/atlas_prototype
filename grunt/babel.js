@@ -1,43 +1,95 @@
 module.exports = function (grunt) {
+    var files = require('./config/js-files');
 
-    var uniqueIdJs = grunt.config.get('uniqueIdJs');
-
-    grunt.registerTask('babel-tests-configure', 'Configure babel tests options', function() {
-        // Inject the source maps from the teste concat operation in the new babel sourcemap
-        grunt.config.set('babel.tests.options.inputSourceMap',
-            grunt.file.readJSON('build/temp/babel/atlas.tests.es6.js.map'));
-    });
-
-    grunt.registerTask('babel-modules-configure', 'Configure babel options', function() {
-        // Inject the source maps from the modules concat operation in the new babel sourcemap
-        grunt.config.set('babel.modules.options.inputSourceMap',
-            grunt.file.readJSON('build/temp/babel/atlas.' + uniqueIdJs + '.js.map'));
-    });
-
-    return {
+    var targets = {
         options: {
             sourceMap: true,
             compact: false,
+            minified: false,
             presets: ['es2015']
-        },
-        tests: {
+        }
+        //
+        // The code below generates targets as follows
+        // `transpile_module_${module.slug}`:_{
+        //     options: {
+        //         inputSourceMap: grunt.file.readJSON(`build/temp/babel/es6/atlas.${module.slug}.js.map`),
+        //     },
+        //     files: [{
+        //         expand: true,
+        //         flatten: true,
+        //         src: `build/temp/babel/es6/atlas.${module.slug}.js`,
+        //         dest: 'build/temp/babel/es5/'
+        //     }]
+        // },
+        // `transpile_test_${module.slug}`:_{
+        //     options: {
+        //         inputSourceMap: grunt.file.readJSON(`build/temp/babel/es6tests/atlas.${module.slug}.js.map`),
+        //     },
+        //     files: [{
+        //         expand: true,
+        //         flatten: true,
+        //         src: `build/temp/babel/es6tests/atlas.${module.slug}.js`,
+        //         dest: 'build/temp/babel/es5tests/'
+        //     }]
+        // }
+        //
+        // As well as the tasks babel-modules and babel-tests to run the group of targets
+        //
+    };
+
+    var moduleTarget = module => {
+        return {
+            name: `transpile_module_${module.slug}`,
+            task: `babel-module-${module.slug}`,
+            src: `build/temp/babel/es6/atlas.${module.slug}.js`,
+            dest: 'build/temp/babel/es5/'
+        };
+    };
+
+    var testTarget = module => {
+        return {
+            name: `transpile_test_${module.slug}`,
+            task: `babel-test-${module.slug}`,
+            src: `build/temp/babel/es6tests/atlas.${module.slug}.js`,
+            dest: 'build/temp/babel/es5tests/'
+        };
+    };
+
+    var setTarget = target => {
+        targets[target.name] = {
             options: {
-                // inputSourceMap: this file is not yet available, inject name after babel task has finished,
-            },
-            files: {
-                'build/temp/babel/atlas.tests.es5.js': 'build/temp/babel/atlas.tests.es6.js'
-            }
-        },
-        modules: {
-            options: {
-                // inputSourceMap: this file is not yet available, inject name after babel task has finished,
             },
             files: [{
                 expand: true,
                 flatten: true,
-                src: ['build/temp/babel/atlas.' + uniqueIdJs + '.js'],
-                dest: 'build/'
+                src: target.src,
+                dest: target.dest
             }]
-        }
+        };
+        return target;
     };
+
+    var setTask = target => {
+        grunt.registerTask(target.task, 'Configure babel module and run', function () {
+            // Inject the source maps from the modules concat operation in the new babel sourcemap
+            grunt.config.set(`babel.${target.name}.options.inputSourceMap`,
+                grunt.file.readJSON(`${target.src}.map`));
+            // Then run the target
+            grunt.task.run(`babel:${target.name}`);
+        });
+        return target;
+    };
+
+    [
+        { name: 'babel-modules', target: moduleTarget },
+        { name: 'babel-tests', target: testTarget }
+    ].forEach(task =>
+        grunt.registerTask(task.name,
+            files.modules
+                .map(module => task.target(module))
+                .map(target => setTarget(target))
+                .map(target => setTask(target))
+                .map(target => target.task)));
+
+    return targets;
 };

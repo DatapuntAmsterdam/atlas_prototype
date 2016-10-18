@@ -10,13 +10,13 @@
 
     angular
         .module('atlas')
-        .directive('atlasScrollableContent', atlasScrollableContentDirective);
+        .directive('dpScrollableContent', dpScrollableContentDirective);
 
     /**
-     * @description This will reset the scroll position whenever the active component (e.g. atlas-detail, atlas-page,
-     * atlas-search-results) changes.
+     * @description This will reset the scroll position whenever the active component (e.g. dp-detail, dp-page,
+     * dp-search-results) changes.
      */
-    function atlasScrollableContentDirective () {
+    function dpScrollableContentDirective () {
         return {
             restrict: 'A',
             scope: {

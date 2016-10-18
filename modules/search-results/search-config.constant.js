@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasSearchResults')
+        .module('dpSearchResults')
         .constant('SEARCH_CONFIG', {
             QUERY_ENDPOINTS: [
                 {
@@ -53,7 +53,7 @@
                     label_plural: 'Openbare ruimtes',
                     features: ['bag/openbareruimte']
                 }, {
-                    //The slug variable is used to indentify this category in geosearch.factory.js
+                    // The slug variable is used to indentify this category in geosearch.factory.js
                     slug: 'pand',
                     label_singular: 'Pand',
                     label_plural: 'Panden',

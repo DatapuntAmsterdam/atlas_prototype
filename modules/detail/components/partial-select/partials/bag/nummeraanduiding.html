@@ -1,18 +1,18 @@
 <div>
     <div ng-if="apiData.results._display">
 
-        <atlas-nummeraanduiding-header ng-if="apiData.results.verblijfsobject"
+        <dp-nummeraanduiding-header ng-if="apiData.results.verblijfsobject"
             heading="{{apiData.results._display}}"
             hoofdadres="apiData.results.hoofdadres"
             verblijfsobject-endpoint="{{apiData.results.verblijfsobject}}"
             meta-data="apiData">
-        </atlas-nummeraanduiding-header>
+        </dp-nummeraanduiding-header>
 
-        <atlas-stelselpedia-header ng-if="!apiData.results.verblijfsobject"
+        <dp-stelselpedia-header ng-if="!apiData.results.verblijfsobject"
             heading="{{apiData.results._display}}"
             definition="NUMMERAANDUIDING"
             meta-data="apiData">
-        </atlas-stelselpedia-header>
+        </dp-stelselpedia-header>
 
 
         <dl class="c-key-value-list u-margin__bottom--4">

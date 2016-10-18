@@ -5,14 +5,14 @@ describe('The dp-parent-relations directive', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasDetail',
+            'dpDetail',
             function ($provide) {
                 $provide.constant('PARENT_RELATIONS_CONFIG', [
                     'universe',
                     'planet',
                     'verblijfsobject'
                 ]);
-                $provide.factory('dpLinkDirective', function(){
+                $provide.factory('dpLinkDirective', function () {
                     return {};
                 });
             }
@@ -56,7 +56,7 @@ describe('The dp-parent-relations directive', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-parent-relations');
+        element = document.createElement('dp-parent-relations');
         element.setAttribute('content', 'content');
 
         scope = $rootScope.$new();

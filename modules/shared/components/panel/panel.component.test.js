@@ -78,7 +78,6 @@ describe('The dp-panel component', function () {
             expect(component.find('div.c-panel').length).toBe(0);
             expect(component.find('button.o-btn--close').length).toBe(0);
         });
-
     });
 
     describe('Styling', function () {
@@ -112,6 +111,4 @@ describe('The dp-panel component', function () {
             expect(component.find('div').attr('class')).toContain('my-class an-other-class');
         });
     });
-
-
 });

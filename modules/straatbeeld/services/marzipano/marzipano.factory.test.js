@@ -133,7 +133,7 @@ describe('The marzipanoService factory', function () {
             stageType: null
         }));
 
-        //Don't clear the webgl buffer. Firefox and Safari clear this buffer by default when opening the print dialog
+        // Don't clear the webgl buffer. Firefox and Safari clear this buffer by default when opening the print dialog
         expect(Marzipano.Viewer).toHaveBeenCalledWith(jasmine.anything(), jasmine.objectContaining({
             stage: {
                 preserveDrawingBuffer: true
@@ -178,7 +178,7 @@ describe('The marzipanoService factory', function () {
                 }, {
                     id: 2,
                     distance: 80,
-                    heading:79,
+                    heading: 79,
                     pitch: 0.15
                 }
             ];

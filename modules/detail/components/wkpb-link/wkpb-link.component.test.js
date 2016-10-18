@@ -4,7 +4,7 @@ describe('The dp-wkpb-link directive', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasDetail',
+            'dpDetail',
             {
                 environment: {
                     API_ROOT: 'http://www.api-root.com/'
@@ -28,7 +28,7 @@ describe('The dp-wkpb-link directive', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-wkpb-link');
+        element = document.createElement('dp-wkpb-link');
         element.setAttribute('brk-id', brkId);
 
         scope = $rootScope.$new();
@@ -46,5 +46,12 @@ describe('The dp-wkpb-link directive', function () {
         expect(component.find('dp-link').attr('type')).toBe('FETCH_DETAIL');
         expect(component.find('dp-link').attr('payload')).toBe('vm.wkpbEndpoint');
         expect(scope.vm.wkpbEndpoint).toBe('http://www.api-root.com/brk/object-wkpb/abc789/');
+    });
+
+    it('is spelled WKPB-uittreksel', function () {
+        var component = getComponent('abc789');
+
+        expect(component.text()).toContain('WKPB-uittreksel');
+        expect(component.text()).not.toContain('WKPB uittreksel');
     });
 });

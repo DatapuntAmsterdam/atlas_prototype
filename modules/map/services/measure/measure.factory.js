@@ -20,7 +20,7 @@
             leafletMap.on('measurestart', function () {
                 $rootScope.$applyAsync(function () {
                     store.dispatch({
-                        type: ACTIONS.HIDE_ACTIVE_OVERLAYS
+                        type: ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS
                     });
                 });
             });

@@ -9,11 +9,11 @@
 
             <div ng-if="vm.numberOfResults">
                 <div ng-if="!vm.category">
-                    <atlas-search-results-header
+                    <dp-search-results-header
                         number-of-results="vm.numberOfResults"
                         query="{{vm.query}}"
                         location="vm.location">
-                    </atlas-search-results-header>
+                    </dp-search-results-header>
 
                     <div ng-repeat="category in vm.searchResults"
                          class="u-margin__bottom--4"
@@ -26,7 +26,7 @@
                             <span ng-if="category.count === 1">{{category.label_singular}}</span>
                         </h2>
 
-                        <atlas-search-results-list category="category" limit-results="true"></atlas-search-results-list>
+                        <dp-search-results-list category="category" limit-results="true"></dp-search-results-list>
 
                         <div ng-if="category.count > 10">
                             <dp-link ng-if="category.more"
@@ -39,7 +39,7 @@
 
                             <dp-link ng-if="!category.more"
                                 class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
-                                type="SHOW_SEARCH_RESULTS_CATEGORY"
+                                type="FETCH_SEARCH_RESULTS_CATEGORY"
                                 payload="category.slug">
 
                                 Toon alle {{category.count | number}}
@@ -48,13 +48,13 @@
                     </div>
                 </div>
                 <div ng-if="vm.category">
-                    <atlas-search-results-header
+                    <dp-search-results-header
                         number-of-results="vm.numberOfResults"
                         query="{{vm.query}}"
                         category="{{vm.categoryName}}">
-                    </atlas-search-results-header>
+                    </dp-search-results-header>
 
-                    <atlas-search-results-list category="vm.searchResults[0]"></atlas-search-results-list>
+                    <dp-search-results-list category="vm.searchResults[0]"></dp-search-results-list>
 
                     <button
                         ng-if="vm.hasLoadMore()"
@@ -70,11 +70,11 @@
             </div>
 
             <div ng-if="!vm.numberOfResults">
-                <atlas-search-results-header
+                <dp-search-results-header
                     number-of-results="vm.numberOfResults"
                     query="{{vm.query}}"
                     location="vm.location">
-                </atlas-search-results-header>
+                </dp-search-results-header>
                 <p>Tip: maak de criteria minder specifiek (bijv. een straat i.p.v. specifiek adres)</p>
             </div>
 

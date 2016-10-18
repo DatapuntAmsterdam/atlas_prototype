@@ -17,7 +17,7 @@ describe('The geosearch factory', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasSearchResults',
+            'dpSearchResults',
             {
                 api: {
                     getByUri: function (endpoint) {
@@ -30,21 +30,20 @@ describe('The geosearch factory', function () {
                         } else {
                             q.resolve(mockedEmptySearchResults);
                         }
-                        
+
                         return q.promise;
                     },
                     getByUrl: function (endpoint) {
-                        //Used to retrieve the pand data and related verblijfsobjecten
+                        // Used to retrieve the pand data and related verblijfsobjecten
                         var q = $q.defer();
-                        
+
                         if (endpoint === 'https://api.datapunt.amsterdam.nl/bag/pand/0456789/') {
                             q.resolve(mockedPandApiResults);
                         } else if (endpoint === 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/?panden__id=04' +
                             '56789') {
-
                             q.resolve(mockedVerblijfsobjectenApiResults);
                         }
-                        
+
                         return q.promise;
                     }
                 }
@@ -75,7 +74,7 @@ describe('The geosearch factory', function () {
             geosearchFormatter = _geosearchFormatter_;
             searchFormatter = _searchFormatter_;
         });
-        
+
         mockedEmptySearchResults = {
             type: 'FeatureCollection',
             features: []
@@ -189,7 +188,7 @@ describe('The geosearch factory', function () {
                 }
             ]
         };
-        
+
         mockedPandApiResults = {
             _links: {
                 self: {
@@ -236,7 +235,7 @@ describe('The geosearch factory', function () {
             useIndenting: false,
             next: null
         };
-        
+
         spyOn(api, 'getByUri').and.callThrough();
         spyOn(api, 'getByUrl').and.callThrough();
         spyOn(geosearchFormatter, 'format').and.returnValue(mockedFormattedSearchResults);
@@ -254,7 +253,7 @@ describe('The geosearch factory', function () {
 
         expect(api.getByUri).toHaveBeenCalledTimes(3);
 
-        expect(api.getByUri).toHaveBeenCalledWith('endpoint/with-radius/', { lat: 52.789, lon: 4.987, radius: 50 } );
+        expect(api.getByUri).toHaveBeenCalledWith('endpoint/with-radius/', { lat: 52.789, lon: 4.987, radius: 50 });
         expect(api.getByUri).toHaveBeenCalledWith('other/endpoint/', { lat: 52.789, lon: 4.987 });
         expect(api.getByUri).toHaveBeenCalledWith('endpoint-with-no-results/', { lat: 52.789, lon: 4.987 });
 
@@ -271,7 +270,7 @@ describe('The geosearch factory', function () {
         var searchResults,
             expectedSearchResults;
 
-        //Insert a pand into the mocked result set
+        // Insert a pand into the mocked result set
         mockedSearchResultsWithoutRadius.features.splice(4, 0, mockedPandSearchResult);
         mockedFormattedSearchResults.splice(1, 0, mockedFormattedPandSearchResult);
 
@@ -308,7 +307,7 @@ describe('The geosearch factory', function () {
             results: []
         };
 
-        //Insert a pand into the mocked result set
+        // Insert a pand into the mocked result set
         mockedSearchResultsWithoutRadius.features.splice(4, 0, mockedPandSearchResult);
         mockedFormattedSearchResults.splice(1, 0, mockedFormattedPandSearchResult);
 

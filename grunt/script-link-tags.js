@@ -1,4 +1,6 @@
 module.exports = function (grunt) {
+    var files = require('./config/js-files');
+
     var uniqueIdJs = grunt.config.get('uniqueIdJs'),
         uniqueIdCss = grunt.config.get('uniqueIdCss');
 
@@ -7,12 +9,14 @@ module.exports = function (grunt) {
             scriptTemplate: '<script src="{{path}}"></script>',
             linkTemplate: '<link rel="stylesheet" href="{{path}}">'
         },
-        js: {
+        jsModules: {
             options: {
                 openTag: '<!-- SCRIPTS_START -->',
                 closeTag: '<!-- SCRIPTS_END -->'
             },
-            src: ['build/atlas.libs.' + uniqueIdJs + '.js', 'build/atlas.' + uniqueIdJs + '.js'],
+            src: [`build/atlas.${uniqueIdJs}.libs.js`]
+                .concat(files.modules
+                    .map(module => `build/atlas.${uniqueIdJs}.${module.slug}.js`)),
             dest: 'build/index.html'
         },
         css: {

@@ -1,6 +1,6 @@
 <div>
     <div class="u-row">
-        <atlas-stelselpedia-header definition="STANDPLAATS" meta-data="apiData"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="STANDPLAATS" meta-data="apiData"></dp-stelselpedia-header>
 
         <dl class="c-key-value-list u-margin__bottom--4">
             <dt>Status</dt>
@@ -10,8 +10,8 @@
 
     <!-- Vestiging -->
     <div>
-        <atlas-stelselpedia-header definition="VESTIGING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="VESTIGING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}" add-api-root="true" partial="lijst"></atlas-api-call>
+        <dp-api-call endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}" add-api-root="true" partial="lijst"></dp-api-call>
     </div>
 </div>

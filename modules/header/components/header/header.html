@@ -11,7 +11,7 @@
             <!-- Default -->
             <div ng-if="!vm.isPrintMode" class="u-col-sm--9 u-padding__left--1">
                 <div class="u-col-sm--7" class="site-header__search">
-                    <atlas-search query="{{vm.query}}"></atlas-search>
+                    <dp-search query="{{vm.query}}"></dp-search>
                 </div>
                 <div class="u-col-sm--5 u-padding__right--2">
                     <nav class="site-header__menu">
@@ -24,7 +24,7 @@
                             Uitloggen
                         </button>
 
-                        <atlas-menu-dropdown></atlas-menu-dropdown>
+                        <dp-menu-dropdown has-print-button="vm.hasPrintButton"></dp-menu-dropdown>
                     </nav>
                 </div>
             </div>
@@ -32,9 +32,9 @@
             <!-- When printing -->
             <div ng-if="vm.isPrintMode" class="u-col-sm--9">
                 <nav class="site-header__menu">
-                    <atlas-print-button>
+                    <dp-print-button>
                         Printen
-                    </atlas-print-button>
+                    </dp-print-button>
                     <dp-link type="HIDE_PRINT" class-name="site-header__menu__item">
                         Verlaat printversie
                     </dp-link>

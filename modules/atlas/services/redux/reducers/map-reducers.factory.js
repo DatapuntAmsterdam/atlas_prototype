@@ -23,6 +23,8 @@
         reducers[ACTIONS.MAP_PAN] = mapPanReducer;
         reducers[ACTIONS.MAP_ZOOM] = mapZoomReducer;
         reducers[ACTIONS.MAP_FULLSCREEN] = mapFullscreenReducer;
+        reducers[ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS] = showActiveOverlaysReducer;
+        reducers[ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS] = hideActiveOverlaysReducer;
 
         return reducers;
 
@@ -68,7 +70,7 @@
             var newState = angular.copy(oldState),
                 i;
             // finding the id of the payload
-            for (i = 0;i < newState.map.overlays.length; i++) {
+            for (i = 0; i < newState.map.overlays.length; i++) {
                 if (newState.map.overlays[i].id === payload) {
                     break;
                 }
@@ -87,7 +89,7 @@
         function mapToggleVisibilityOverlay (oldState, payload) {
             var newState = angular.copy(oldState);
             // Looking for the overlay to switch its isVisible
-            for(var i = 0;i< newState.map.overlays.length;i++) {
+            for (var i = 0; i < newState.map.overlays.length; i++) {
                 if (newState.map.overlays[i].id === payload) {
                     newState.map.overlays[i].isVisible = !newState.map.overlays[i].isVisible;
                     break;
@@ -137,10 +139,26 @@
             var newState = angular.copy(oldState);
 
             if (payload) {
-                newState.map.showLayerSelection = false;
+                newState.layerSelection = false;
             }
 
             newState.map.isFullscreen = payload;
+
+            return newState;
+        }
+
+        function showActiveOverlaysReducer (oldState) {
+            var newState = angular.copy(oldState);
+
+            newState.map.showActiveOverlays = true;
+
+            return newState;
+        }
+
+        function hideActiveOverlaysReducer (oldState) {
+            var newState = angular.copy(oldState);
+
+            newState.map.showActiveOverlays = false;
 
             return newState;
         }

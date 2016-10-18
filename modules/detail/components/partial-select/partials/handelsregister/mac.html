@@ -1,8 +1,8 @@
 <div>
     <div class="u-row">
-        <atlas-stelselpedia-header
+        <dp-stelselpedia-header
             definition="MAC">
-        </atlas-stelselpedia-header>
+        </dp-stelselpedia-header>
 
         <dl class="c-key-value-list">
             <dt class="c-key-value-list--border-top">Handelsnamen</dt>
@@ -22,14 +22,14 @@
     </div>
 
     <div>
-        <atlas-stelselpedia-header definition="FUNCTIEVERVULLING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="FUNCTIEVERVULLING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{apiData.results.eigenaar}}" partial="handelsregister/functievervullingen"></atlas-api-call>
+        <dp-api-call endpoint="{{apiData.results.eigenaar}}" partial="handelsregister/functievervullingen"></dp-api-call>
     </div>
 
     <div ng-if="apiData.results.vestigingen.count > 1">
-        <atlas-stelselpedia-header definition="VESTIGING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="VESTIGING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{apiData.results.vestigingen.href}}" partial="lijst"></atlas-api-call>
+        <dp-api-call endpoint="{{apiData.results.vestigingen.href}}" partial="lijst"></dp-api-call>
     </div>
 </div>

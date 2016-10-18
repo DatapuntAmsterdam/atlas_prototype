@@ -199,10 +199,10 @@ describe('The layers factory', function () {
             layers.addOverlay(mockedLeafletMap, 'overlay_a');
             expect(L.WMS.source).toHaveBeenCalledTimes(1);
 
-            //Change the L.map instance
+            // Change the L.map instance
             mockedLeafletMap._leaflet_id = 2;
 
-            //Add the same layer again, expect a new call
+            // Add the same layer again, expect a new call
             layers.addOverlay(mockedLeafletMap, 'overlay_a');
             expect(L.WMS.source).toHaveBeenCalledTimes(2);
 

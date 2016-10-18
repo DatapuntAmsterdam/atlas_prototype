@@ -4,7 +4,7 @@ describe('The geometry factory', function () {
         geometry,
         mockedData = [
             {
-                //G Perceel
+                // G Perceel
                 url: 'http://www.api-root.nl/brk/object/NL.KAD.OnroerendeZaak.123456/',
                 response: {
                     geometrie: {
@@ -12,7 +12,7 @@ describe('The geometry factory', function () {
                     }
                 }
             }, {
-                //A Perceel
+                // A Perceel
                 url: 'http://www.api-root.nl/brk/object/NL.KAD.OnroerendeZaak.456789/',
                 response: {
                     index_letter: 'A',
@@ -22,7 +22,7 @@ describe('The geometry factory', function () {
                     }
                 }
             }, {
-                //G Percelen (meervoud)
+                // G Percelen (meervoud)
                 url: 'http://mocked-atlas-api.amsterdam.nl/brk/object/?a_percelen__id=NL.KAD.OnroerendeZaak.123456',
                 response: {
                     results: [{
@@ -34,14 +34,14 @@ describe('The geometry factory', function () {
                     }]
                 }
             }, {
-                //Nummeraanduiding - verblijfsobject
+                // Nummeraanduiding - verblijfsobject
                 url: 'http://www.api-root.nl/bag/nummeraanduiding/10000001/',
                 response: {
                     type: 'Verblijfsobject',
                     verblijfsobject: 'http://mocked-atlas-api.amsterdam.nl/bag/verblijfsobject/20000001/'
                 }
             }, {
-                //Verblijfsobject
+                // Verblijfsobject
                 url: 'http://mocked-atlas-api.amsterdam.nl/bag/verblijfsobject/20000001/',
                 response: {
                     geometrie: {
@@ -49,14 +49,14 @@ describe('The geometry factory', function () {
                     }
                 }
             }, {
-                //Nummeraanduiding - ligplaats
+                // Nummeraanduiding - ligplaats
                 url: 'http://www.api-root.nl/bag/nummeraanduiding/10000002/',
                 response: {
                     type: 'Ligplaats',
                     ligplaats: 'http://mocked-atlas-api.amsterdam.nl/bag/ligplaats/20000002/'
                 }
             }, {
-                //Ligplaats
+                // Ligplaats
                 url: 'http://mocked-atlas-api.amsterdam.nl/bag/ligplaats/20000002/',
                 response: {
                     geometrie: {
@@ -64,14 +64,14 @@ describe('The geometry factory', function () {
                     }
                 }
             }, {
-                //Nummeraanduiding - standplaats
+                // Nummeraanduiding - standplaats
                 url: 'http://www.api-root.nl/bag/nummeraanduiding/10000003/',
                 response: {
                     type: 'Standplaats',
                     standplaats: 'http://mocked-atlas-api.amsterdam.nl/bag/standplaats/20000001/'
                 }
             }, {
-                //Standplaats
+                // Standplaats
                 url: 'http://mocked-atlas-api.amsterdam.nl/bag/standplaats/20000001/',
                 response: {
                     geometrie: {
@@ -79,15 +79,15 @@ describe('The geometry factory', function () {
                     }
                 }
             }, {
-                //Kadastraal subject
+                // Kadastraal subject
                 url: 'http://www.api-root.nl/brk/subject/NL.KAD.Persoon.123456/',
                 response: {}
             }, {
-                //Kadastraal subject
+                // Kadastraal subject
                 url: 'http://www.api-root.nl/brk/subject/NL.KAD.Persoon.123456/',
                 response: {}
             }, {
-                //vestiging in Amsterdam
+                // vestiging in Amsterdam
                 url: 'https://www.api-root.nl/handelsregister/vestiging/123/',
                 response: {
                     bezoekadres: {
@@ -97,7 +97,7 @@ describe('The geometry factory', function () {
                     }
                 }
             }, {
-                //vestiging Rotterdam (zowel x als y buiten range)
+                // vestiging Rotterdam (zowel x als y buiten range)
                 url: 'https://www.api-root.nl/handelsregister/vestiging/456/',
                 response: {
                     bezoekadres: {
@@ -107,7 +107,7 @@ describe('The geometry factory', function () {
                     }
                 }
             }, {
-                //vestiging hoofddorp (een van de waardes x/y buiten range)
+                // vestiging hoofddorp (een van de waardes x/y buiten range)
                 url: 'https://www.api-root.nl/handelsregister/vestiging/789/',
                 response: {
                     bezoekadres: {
@@ -121,7 +121,7 @@ describe('The geometry factory', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasDetail',
+            'dpDetail',
             {
                 api: {
                     getByUrl: function (url) {
@@ -176,12 +176,11 @@ describe('The geometry factory', function () {
             expect(response).toEqual({
                 coordinates: [119695.616, 483365.537]
             });
-
         });
         it('returns the Null if it does not fall within the bounding box of the map', function () {
             var response;
 
-            //BOTH x and y
+            // BOTH x and y
             geometry
                 .getGeoJSON('https://www.api-root.nl/handelsregister/vestiging/456/')
                 .then(function (data) {
@@ -192,7 +191,7 @@ describe('The geometry factory', function () {
 
             expect(response).toBeNull();
 
-            //Either x or y
+            // Either x or y
             geometry
                 .getGeoJSON('https://www.api-root.nl/handelsregister/vestiging/789/')
                 .then(function (data) {
@@ -202,7 +201,6 @@ describe('The geometry factory', function () {
             $rootScope.$apply();
 
             expect(response).toBeNull();
-
         });
     });
 
@@ -225,7 +223,7 @@ describe('The geometry factory', function () {
     });
 
     describe('when searching for the geometry of a nummeraanduiding', function () {
-        describe('returns the GeoJSON of the parent adressseerbaar object', function(){
+        describe('returns the GeoJSON of the parent adressseerbaar object', function () {
             it('should return the verblijfsobject geometry when the type of nummeraanduiding is verblijfsobject',
                 function () {
                     var response;
@@ -256,7 +254,7 @@ describe('The geometry factory', function () {
                 });
             });
 
-            it('should return the standplaats geometry when the type of nummeraanduiding is Standplaats', function(){
+            it('should return the standplaats geometry when the type of nummeraanduiding is Standplaats', function () {
                 var response;
 
                 geometry.getGeoJSON('http://www.api-root.nl/bag/nummeraanduiding/10000003/').then(function (data) {
@@ -269,9 +267,7 @@ describe('The geometry factory', function () {
                     FAKE_GEOJSON: 'STANDPLAATS'
                 });
             });
-
         });
-
     });
 
     it('will return null if there is no geometry available', function () {

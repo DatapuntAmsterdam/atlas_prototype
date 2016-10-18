@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
+        .module('dpDetail')
         .filter('yesNo', yesNoFilter);
 
     function yesNoFilter () {

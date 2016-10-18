@@ -1,10 +1,10 @@
 <div>
     <!-- nummeraanduiding -->
-    <atlas-partial-select partial="bag/nummeraanduiding" api-data="vm.apiData"></atlas-partial-select>
+    <dp-partial-select partial="bag/nummeraanduiding" api-data="vm.apiData"></dp-partial-select>
 
     <div ng-if="vm.apiData.results" class="u-row">
         <div class="u-col-sm--6 u-padding__right--2">
-            <atlas-parent-relations content="vm.apiData.results"></atlas-parent-relations>
+            <dp-parent-relations content="vm.apiData.results"></dp-parent-relations>
         </div>
         <div class="u-col-sm--6">
             <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
@@ -12,23 +12,23 @@
     </div>
 
     <!-- verblijfsobject -->
-    <atlas-api-call
+    <dp-api-call
         ng-if="vm.apiData.results.type === 'Verblijfsobject'"
         endpoint="{{vm.apiData.results.verblijfsobject}}"
         partial="bag/verblijfsobject">
-    </atlas-api-call>
+    </dp-api-call>
 
     <!-- standplaats -->
-    <atlas-api-call
+    <dp-api-call
         ng-if="vm.apiData.results.type === 'Standplaats'"
         endpoint="{{vm.apiData.results.standplaats}}"
         partial="bag/standplaats">
-    </atlas-api-call>
+    </dp-api-call>
 
     <!-- ligplaats -->
-    <atlas-api-call
+    <dp-api-call
         ng-if="vm.apiData.results.type === 'Ligplaats'"
         endpoint="{{vm.apiData.results.ligplaats}}"
         partial="bag/ligplaats">
-    </atlas-api-call>
+    </dp-api-call>
 </div>

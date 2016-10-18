@@ -1,16 +1,35 @@
 describe('The page controller', function () {
     var $controller,
         $rootScope,
-        store;
+        store,
+        mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            }
+        );
 
         angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
         });
+
+        mockedState = {
+            page: 'about-atlas'
+        };
+
+        spyOn(store, 'getState').and.callThrough();
     });
 
     function getController () {
@@ -35,12 +54,7 @@ describe('The page controller', function () {
     });
 
     it('sets the pageName based on the state', function () {
-        var mockedState = {
-                page: 'about-atlas'
-            },
-            controller;
-
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        var controller;
 
         controller = getController();
 

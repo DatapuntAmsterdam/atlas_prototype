@@ -1,4 +1,5 @@
-//The order of this array is respected when loading the JavaScript files
+// The order of this array is respected when loading the JavaScript files
+// Module dependencies are maintained in js-files
 
 module.exports = [
     {
@@ -6,15 +7,15 @@ module.exports = [
         slug: 'shared'
     },
     {
-        name: 'atlasDetail',
+        name: 'dpDetail',
         slug: 'detail'
     },
     {
-        name: 'atlasHeader',
+        name: 'dpHeader',
         slug: 'header'
     },
     {
-        name: 'atlasLayerSelection',
+        name: 'dpLayerSelection',
         slug: 'layer-selection'
     },
     {
@@ -22,11 +23,11 @@ module.exports = [
         slug: 'map'
     },
     {
-        name: 'atlasPage',
+        name: 'dpPage',
         slug: 'page'
     },
     {
-        name: 'atlasSearchResults',
+        name: 'dpSearchResults',
         slug: 'search-results'
     },
     {

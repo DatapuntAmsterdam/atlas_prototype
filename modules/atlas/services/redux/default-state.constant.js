@@ -7,25 +7,27 @@
                 overlays: [],
                 viewCenter: [52.3719, 4.9012],
                 zoom: 9,
-                highlight: null,
-                showLayerSelection: false,
                 showActiveOverlays: false,
                 isFullscreen: false,
                 isLoading: false
             },
+            layerSelection: false,
             search: null,
             /*
             search: {
+                isLoading: false,
                 query: 'linnaeus',
                 location: [52.123, 4.789],
-                category: null
+                category: null,
+                numberOfResults: null
             }
             */
             page: 'home',
             detail: null,
             /*
             detail: {
-                endpoint: 'bag/verblijfsobject/123/',
+                endpoint: 'http://api.example.com/bag/verblijfsobject/123/',
+                display: 'This is the _display variable as available in each endpoint',
                 geometry: null,
                 isLoading: false
             }

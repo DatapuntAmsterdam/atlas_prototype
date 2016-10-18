@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
+        .module('dpDetail')
         .factory('partialCompiler', partialCompilerFactory);
 
     partialCompilerFactory.$inject = ['$q', '$compile', '$rootScope', '$templateRequest'];

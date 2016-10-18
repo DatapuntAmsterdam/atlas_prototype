@@ -1,16 +1,36 @@
 describe('The detail controller', function () {
     var $controller,
         $rootScope,
-        store;
+        store,
+        mockedState = {
+            detail: {
+                endpoint: 'https://api-acc.datapunt.amsterdam.nl/bag/verblijfsobject/123/',
+                isLoading: false
+            }
+        };
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            }
+        );
 
         angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
         });
+
+        spyOn(store, 'getState').and.callThrough();
     });
 
     function getController () {
@@ -35,15 +55,7 @@ describe('The detail controller', function () {
     });
 
     it('sets the api endpoint and isLoading variables on the scope based on the state', function () {
-        var mockedState = {
-                detail: {
-                    endpoint: 'https://api-acc.datapunt.amsterdam.nl/bag/verblijfsobject/123/',
-                    isLoading: false
-                }
-            },
-            controller;
-
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        var controller;
 
         controller = getController();
 
@@ -52,12 +64,11 @@ describe('The detail controller', function () {
     });
 
     it('doesn\'t break when detail is null', function () {
-        var mockedState = {
-                detail: null
-            },
-            controller;
+        var controller;
 
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        mockedState = {
+            detail: null
+        };
 
         controller = getController();
 

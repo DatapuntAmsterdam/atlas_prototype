@@ -1,10 +1,10 @@
 <div>
     <div class="u-row">
-        <atlas-stelselpedia-header
+        <dp-stelselpedia-header
             heading="{{vm.apiData.results._display}}"
-            definition="KADASTRAAL_OBJECT"
+            definition="OBJECT"
             meta-data="vm.apiData">
-        </atlas-stelselpedia-header>
+        </dp-stelselpedia-header>
 
         <dl class="c-key-value-list">
             <dt>Kadastrale gemeentecode</dt>
@@ -40,16 +40,16 @@
         </div>
     </div>
 
-    <atlas-api-call
+    <dp-api-call
         endpoint="{{vm.apiData.results._links.self.href}}"
         partial="brk"
         use-brk-object-expanded="true">
-    </atlas-api-call>
+    </dp-api-call>
 
     <div ng-if="vm.apiData.results.verblijfsobjecten.count">
-        <atlas-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst">
-        </atlas-api-call>
+        <dp-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst">
+        </dp-api-call>
     </div>
 </div>

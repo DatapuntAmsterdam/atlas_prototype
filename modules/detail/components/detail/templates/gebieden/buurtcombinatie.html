@@ -1,10 +1,10 @@
 <div>
     <div class="u-row">
-      <atlas-stelselpedia-header
+      <dp-stelselpedia-header
         heading="{{vm.apiData.results.naam}}"
         definition="BUURTCOMBINATIE"
         meta-data="vm.apiData">
-      </atlas-stelselpedia-header>
+      </dp-stelselpedia-header>
 
       <dl class="c-key-value-list">
         <dt>Volledige code</dt>
@@ -14,18 +14,18 @@
 
     <div ng-if="vm.apiData.results" class="u-row">
         <div class="u-col-sm--6 u-padding__right--2">
-            <atlas-parent-relations content="vm.apiData.results"></atlas-parent-relations>
+            <dp-parent-relations content="vm.apiData.results"></dp-parent-relations>
         </div>
     </div>
 
     <div ng-if="vm.apiData.results.buurten.count">
-      <atlas-stelselpedia-header definition="BUURT" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="BUURT" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.buurten.href}}" partial="lijst"></atlas-api-call>
+      <dp-api-call endpoint="{{vm.apiData.results.buurten.href}}" partial="lijst"></dp-api-call>
     </div>
 
-    <atlas-bbga-graphs
+    <dp-bbga-graphs
       gebied-heading="{{vm.apiData.results.naam}}"
       gebied-code="{{vm.apiData.results.volledige_code}}">
-    </atlas-bbga-graphs>
+    </dp-bbga-graphs>
 </div>

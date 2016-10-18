@@ -4,7 +4,7 @@ describe('The page component', function () {
         $templateCache;
 
     beforeEach(function () {
-        angular.mock.module('atlasPage');
+        angular.mock.module('dpPage');
 
         angular.mock.inject(function (_$compile_, _$rootScope_, _$templateCache_) {
             $compile = _$compile_;
@@ -21,7 +21,7 @@ describe('The page component', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-page');
+        element = document.createElement('dp-page');
         element.setAttribute('name', name);
 
         scope = $rootScope.$new();
@@ -35,11 +35,11 @@ describe('The page component', function () {
     it('loads an HTML page based on the name binding', function () {
         var component;
 
-        //Welcome page
+        // Welcome page
         component = getComponent('welcome');
         expect(component.text()).toContain('THIS_IS_WELCOME');
 
-        //About page
+        // About page
         component = getComponent('about');
         expect(component.text()).toContain('THIS_IS_ABOUT');
     });

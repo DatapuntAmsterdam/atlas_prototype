@@ -21,7 +21,7 @@
 
         vm.toggle = function () {
             store.dispatch({
-                type: ACTIONS[!vm.showActiveOverlays ? 'SHOW_ACTIVE_OVERLAYS' : 'HIDE_ACTIVE_OVERLAYS']
+                type: ACTIONS[!vm.showActiveOverlays ? 'SHOW_MAP_ACTIVE_OVERLAYS' : 'HIDE_MAP_ACTIVE_OVERLAYS']
             });
         };
 

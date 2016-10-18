@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasPage', [
+        .module('dpPage', [
             'dpShared'
         ]);
 })();

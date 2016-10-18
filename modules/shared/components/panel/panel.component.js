@@ -21,7 +21,7 @@
     // Warning (blauwe vormgeving)
     // Default (grijze vormgeving) als niet wordt toegevoegd
 
-    function DpPanelController() {
+    function DpPanelController () {
         var vm = this;
 
         vm.close = function () {

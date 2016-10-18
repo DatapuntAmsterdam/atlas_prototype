@@ -1,7 +1,7 @@
 <div>
     <div class="u-row">
-      <atlas-stelselpedia-header heading="{{vm.apiData.results.naam}}" definition="BUURT" meta-data="vm.apiData">
-      </atlas-stelselpedia-header>
+      <dp-stelselpedia-header heading="{{vm.apiData.results.naam}}" definition="BUURT" meta-data="vm.apiData">
+      </dp-stelselpedia-header>
 
       <dl class="c-key-value-list">
         <dt>Volledige code</dt>
@@ -11,36 +11,36 @@
 
     <div ng-if="vm.apiData.results" class="u-row">
         <div class="u-col-sm--6 u-padding__right--2">
-            <atlas-parent-relations content="vm.apiData.results"></atlas-parent-relations>
+            <dp-parent-relations content="vm.apiData.results"></dp-parent-relations>
         </div>
     </div>
 
     <div ng-if="vm.apiData.results.bouwblokken.count">
-      <atlas-stelselpedia-header definition="BOUWBLOK" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="BOUWBLOK" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.bouwblokken.href}}" partial="lijst"></atlas-api-call>
+      <dp-api-call endpoint="{{vm.apiData.results.bouwblokken.href}}" partial="lijst"></dp-api-call>
     </div>
 
     <div ng-if="vm.apiData.results.ligplaatsen.count">
-      <atlas-stelselpedia-header definition="LIGPLAATS" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="LIGPLAATS" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.ligplaatsen.href}}" partial="adressen_lijst"></atlas-api-call>
+      <dp-api-call endpoint="{{vm.apiData.results.ligplaatsen.href}}" partial="adressen_lijst"></dp-api-call>
     </div>
 
     <div ng-if="vm.apiData.results.standplaatsen.count">
-      <atlas-stelselpedia-header definition="STANDPLAATS" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="STANDPLAATS" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.standplaatsen.href}}" partial="adressen_lijst"></atlas-api-call>
+      <dp-api-call endpoint="{{vm.apiData.results.standplaatsen.href}}" partial="adressen_lijst"></dp-api-call>
     </div>
 
     <div ng-if="vm.apiData.results.verblijfsobjecten.count">
-      <atlas-stelselpedia-header definition="VERBLIJFSOBJECT" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="VERBLIJFSOBJECT" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst"></atlas-api-call>
+      <dp-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst"></dp-api-call>
     </div>
 
-    <atlas-bbga-graphs
+    <dp-bbga-graphs
       gebied-heading="{{vm.apiData.results.naam}}"
       gebied-code="{{vm.apiData.results.volledige_code}}">
-    </atlas-bbga-graphs>
+    </dp-bbga-graphs>
 </div>

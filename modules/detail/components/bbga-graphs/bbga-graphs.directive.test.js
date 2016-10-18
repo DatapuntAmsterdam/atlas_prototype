@@ -1,4 +1,4 @@
-describe('The atlas-bbga-graphs directive', function () {
+describe('The dp-bbga-graphs directive', function () {
     var $compile,
         $rootScope,
         $q,
@@ -9,9 +9,9 @@ describe('The atlas-bbga-graphs directive', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasDetail',
+            'dpDetail',
             function ($provide) {
-                $provide.factory('atlasBbgaTevredenheidDirective', function () {
+                $provide.factory('dpBbgaTevredenheidDirective', function () {
                     return {};
                 });
             }
@@ -57,7 +57,7 @@ describe('The atlas-bbga-graphs directive', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-bbga-graphs');
+        element = document.createElement('dp-bbga-graphs');
         element.setAttribute('gebied-heading', heading);
         element.setAttribute('gebied-code', code);
 
@@ -83,9 +83,7 @@ describe('The atlas-bbga-graphs directive', function () {
     });
 
     it('retrieves data for each visualisation based on the gebied-heading and gebied-code', function () {
-        var directive;
-
-        directive = getDirective('Haveneiland Noordoost', 'M35f');
+        getDirective('Haveneiland Noordoost', 'M35f');
 
         expect(bbgaDataService.getGraphData).toHaveBeenCalledTimes(2);
         expect(bbgaDataService.getGraphData).toHaveBeenCalledWith('PERSONEN', 'Haveneiland Noordoost', 'M35f');

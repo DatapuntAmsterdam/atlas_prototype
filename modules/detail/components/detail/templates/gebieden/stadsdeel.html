@@ -1,37 +1,37 @@
 <div class="detail-page__content">
-  <div class="detail-page__content--main">
-    <div class="u-row">
-      <atlas-stelselpedia-header
-        heading="{{vm.apiData.results.naam}}"
-        definition="STADSDEEL"
-        meta-data="vm.apiData">
+    <div class="detail-page__content--main">
+        <div class="u-row">
+            <dp-stelselpedia-header
+                heading="{{vm.apiData.results.naam}}"
+                definition="STADSDEEL"
+                meta-data="vm.apiData">
 
-      </atlas-stelselpedia-header>
+            </dp-stelselpedia-header>
 
-      <dl class="c-key-value-list">
-        <dt>Code</dt>
-        <dd>{{ vm.apiData.results.code }}</dd>
-        <dt>Gemeente</dt>
-        <dd>{{ vm.apiData.results.gemeente._display }}</dd>
-      </dl>
+            <dl class="c-key-value-list">
+                <dt>Code</dt>
+                <dd>{{ vm.apiData.results.code }}</dd>
+                <dt>Gemeente</dt>
+                <dd>{{ vm.apiData.results.gemeente._display }}</dd>
+            </dl>
 
+        </div>
+
+        <div ng-if="vm.apiData.results.buurtcombinaties.count">
+            <dp-stelselpedia-header definition="BUURTCOMBINATIE" use-plural="true"></dp-stelselpedia-header>
+
+            <dp-api-call endpoint="{{vm.apiData.results.buurtcombinaties.href}}" partial="lijst"></dp-api-call>
+        </div>
+
+        <div ng-if="vm.apiData.results.gebiedsgerichtwerken.count">
+            <dp-stelselpedia-header definition="GEBIEDSGERICHTWERKEN" use-plural="true"></dp-stelselpedia-header>
+
+            <dp-api-call endpoint="{{vm.apiData.results.gebiedsgerichtwerken.href}}" partial="lijst"></dp-api-call>
+        </div>
+
+        <dp-bbga-graphs
+            gebied-heading="{{vm.apiData.results.naam}}"
+            gebied-code="{{vm.apiData.results.code}}">
+        </dp-bbga-graphs>
     </div>
-
-    <div ng-if="vm.apiData.results.buurtcombinaties.count">
-      <atlas-stelselpedia-header definition="BUURTCOMBINATIE" use-plural="true"></atlas-stelselpedia-header>
-
-      <atlas-api-call endpoint="{{vm.apiData.results.buurtcombinaties.href}}" partial="lijst"></atlas-api-call>
-    </div>
-
-    <div ng-if="vm.apiData.results.gebiedsgerichtwerken.count">
-      <atlas-stelselpedia-header definition="GEBIEDSGERICHTWERKEN" use-plural="true"></atlas-stelselpedia-header>
-
-      <atlas-api-call endpoint="{{vm.apiData.results.gebiedsgerichtwerken.href}}" partial="lijst"></atlas-api-call>
-    </div>
-
-    <atlas-bbga-graphs
-      gebied-heading="{{vm.apiData.results.naam}}"
-      gebied-code="{{vm.apiData.results.code}}">
-    </atlas-bbga-graphs>
-  </div>
 </div>

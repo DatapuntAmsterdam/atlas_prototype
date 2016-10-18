@@ -3,7 +3,7 @@
 
     angular
         .module('atlas')
-        .service('stateToUrl', stateToUrlFactory);
+        .factory('stateToUrl', stateToUrlFactory);
 
     stateToUrlFactory.$inject = ['$location', '$window'];
 
@@ -16,6 +16,7 @@
             var searchParams = angular.merge(
                 getSearchParams(state),
                 getMapParams(state),
+                getLayerSelectionParams(state),
                 getPageParams(state),
                 getDetailParams(state),
                 getStraatbeeldParams(state),
@@ -47,8 +48,9 @@
         }
 
         function getMapParams (state) {
-            var lagen = [], isVisible;
-            for (var i = 0;i < state.map.overlays.length;i++) {
+            var lagen = [],
+                isVisible;
+            for (var i = 0; i < state.map.overlays.length; i++) {
                 if (state.map.overlays[i].isVisible) {
                     isVisible = 'zichtbaar';
                 } else {
@@ -62,10 +64,14 @@
                 basiskaart: state.map.baseLayer,
                 lagen: lagen.join(',') || null,
                 zoom: String(state.map.zoom),
-                selectie: state.map.highlight,
-                'kaartlagen-selectie': state.map.showLayerSelection ? 'aan' : null,
                 'actieve-kaartlagen': state.map.showActiveOverlays ? 'aan' : null,
                 'volledig-scherm': state.map.isFullscreen ? 'aan' : null
+            };
+        }
+
+        function getLayerSelectionParams (state) {
+            return {
+                'kaartlagen-selectie': state.layerSelection ? 'aan' : null
             };
         }
 
@@ -112,7 +118,7 @@
             if (angular.isObject(state.dataSelection)) {
                 params.dataset = state.dataSelection.dataset;
 
-                angular.forEach(state.dataSelection.filters, function(value, key) {
+                angular.forEach(state.dataSelection.filters, function (value, key) {
                     datasetFilters.push(key + ':' + $window.encodeURIComponent(value));
                 });
 

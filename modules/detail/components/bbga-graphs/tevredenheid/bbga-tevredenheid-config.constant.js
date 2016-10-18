@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
+        .module('dpDetail')
         .constant('BBGA_TEVREDENHEID_CONFIG', [
             {
                 label: 'Tevredenheid met buurt',

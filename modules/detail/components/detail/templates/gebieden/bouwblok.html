@@ -1,15 +1,15 @@
 <div>
     <div class="default-box">
-        <atlas-stelselpedia-header
+        <dp-stelselpedia-header
             heading="{{vm.apiData.results.code}}"
             definition="BOUWBLOK"
             meta-data="vm.apiData">
-        </atlas-stelselpedia-header>
+        </dp-stelselpedia-header>
     </div>
 
     <div ng-if="vm.apiData.results" class="u-row">
         <div class="u-col-sm--6 u-padding__right--2">
-            <atlas-parent-relations content="vm.apiData.results"></atlas-parent-relations>
+            <dp-parent-relations content="vm.apiData.results"></dp-parent-relations>
         </div>
         <div class="u-col-sm--6">
             <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
@@ -17,15 +17,15 @@
     </div>
 
     <div class="list-box" ng-if="vm.apiData.results.panden.count">
-        <atlas-stelselpedia-header definition="PAND" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="PAND" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{vm.apiData.results.panden.href}}" partial="lijst"></atlas-api-call>
+        <dp-api-call endpoint="{{vm.apiData.results.panden.href}}" partial="lijst"></dp-api-call>
     </div>
 
     <div ng-if="vm.apiData.results.meetbouten">
-        <atlas-stelselpedia-header definition="MEETBOUT" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="MEETBOUT" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{vm.apiData.results.meetbouten}}" partial="lijst"></atlas-api-call>
+        <dp-api-call endpoint="{{vm.apiData.results.meetbouten}}" partial="lijst"></dp-api-call>
     </div>
 </div>
 

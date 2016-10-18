@@ -1,16 +1,34 @@
 describe('The DataSelectionController', function () {
     var $controller,
         $rootScope,
-        store;
+        store,
+        mockedState = {
+            dataSelection: {
+                mocked: 'things',
+                some: 'setting'
+            }
+        };
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {}
+                }
+            }
+        );
 
         angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
         });
+
+        spyOn(store, 'getState').and.returnValue(mockedState);
     });
 
     function getController () {
@@ -35,15 +53,7 @@ describe('The DataSelectionController', function () {
     });
 
     it('sets the dataSelection based on the state', function () {
-        var mockedState = {
-                dataSelection: {
-                    mocked: 'things',
-                    some: 'setting'
-                }
-            },
-            controller;
-
-        spyOn(store, 'getState').and.returnValue(mockedState);
+        var controller;
 
         controller = getController();
 
@@ -52,5 +62,4 @@ describe('The DataSelectionController', function () {
             some: 'setting'
         });
     });
-
 });

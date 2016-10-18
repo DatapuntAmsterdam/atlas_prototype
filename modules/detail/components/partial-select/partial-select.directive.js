@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
-        .directive('atlasPartialSelect', atlasPartialSelectDirective);
+        .module('dpDetail')
+        .directive('dpPartialSelect', dpPartialSelectDirective);
 
-    atlasPartialSelectDirective.$inject = [ 'partialCompiler'];
+    dpPartialSelectDirective.$inject = ['partialCompiler'];
 
-    function atlasPartialSelectDirective (partialCompiler) {
+    function dpPartialSelectDirective (partialCompiler) {
         return {
             restrict: 'E',
             scope: {

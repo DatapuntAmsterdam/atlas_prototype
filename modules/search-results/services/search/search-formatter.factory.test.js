@@ -71,9 +71,9 @@ describe('The searchFormatter factory', function () {
                     }
                 }
             }, [
-                //Some endpoints return an empty array when there are no search results
+                // Some endpoints return an empty array when there are no search results
             ], {
-                //Others with an object with count set to 0
+                // Others with an object with count set to 0
                 count: 0,
                 results: []
             }
@@ -107,7 +107,7 @@ describe('The searchFormatter factory', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasSearchResults',
+            'dpSearchResults',
             function ($provide) {
                 $provide.constant('SEARCH_CONFIG', {
                     QUERY_ENDPOINTS: [

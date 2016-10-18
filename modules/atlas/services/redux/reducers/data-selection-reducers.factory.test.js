@@ -38,27 +38,25 @@ describe('The dataSelectionReducers factory', function () {
                 overlays: ['OVERLAY_1', 'OVERLAY_2'],
                 viewCenter: [52.52, 4.4],
                 zoom: 16,
-                highlight: {some: 'object'},
-                showLayerSelection: true,
                 isFullscreen: true,
                 isLoading: true
             };
+            mockedState.layerSelection = true;
 
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
 
-            //It keeps the active layers
+            // It keeps the active layers
             expect(output.map.baseLayer).toBe('luchtfoto_1914');
             expect(output.map.overlays).toEqual(['OVERLAY_1', 'OVERLAY_2']);
 
-            //It resets view and zoom to the default state
+            // It resets view and zoom to the default state
             expect(output.map.viewCenter).toEqual(DEFAULT_STATE.map.viewCenter);
             expect(output.map.zoom).toBe(DEFAULT_STATE.map.zoom);
 
-            //It disables the rest
-            expect(output.map.highlight).toBeNull();
-            expect(output.map.showLayerSelection).toBe(false);
+            // It disables the rest
             expect(output.map.isFullscreen).toBe(false);
             expect(output.map.isLoading).toBe(false);
+            expect(output.layerSelection).toBe(false);
         });
 
         it('sets the dataSelection state', function () {
@@ -103,12 +101,12 @@ describe('The dataSelectionReducers factory', function () {
 
             mockedState = angular.copy(DEFAULT_STATE);
 
-            //With print mode enabled
+            // With print mode enabled
             mockedState.isPrintMode = true;
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
             expect(output.isPrintMode).toBe(true);
 
-            //With print mode disabled
+            // With print mode disabled
             mockedState.isPrintMode = false;
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
             expect(output.isPrintMode).toBe(false);

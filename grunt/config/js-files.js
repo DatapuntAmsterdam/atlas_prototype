@@ -1,15 +1,42 @@
-var modules = require('./modules'),
-    jsFiles = [];
+var modules = require('./modules');
 
-modules.forEach(function (module) {
-    //Add the main .module.js file first
-    jsFiles.push('modules/' + module.slug + '/' + module.slug + '.module.js');
+var jsModuleFiles = module => [
+    `modules/${module.slug}/${module.slug}.module.js`,
+    `modules/${module.slug}/**/!(*.test).js`,
+    `build/temp/${module.slug}.ngtemplates.js`
+];
 
-    //Then load the rest of the module, but don't include the .test.js files.
-    jsFiles.push('modules/' + module.slug + '/**/!(*.test).js');
+var cssModuleFiles = module => [
+    `build/temp/${module.slug}.css`
+];
 
-    //And finally add the output of ngtemplates
-    jsFiles.push('build/temp/' + module.slug + '.ngtemplates.js');
-});
+var jsFiles = modules
+    .map(module => jsModuleFiles(module))
+    .reduce((result, files) => result.concat(files), []);
 
-module.exports = jsFiles;
+var cssFiles = modules
+    .map(module => cssModuleFiles(module))
+    .reduce((result, files) => result.concat(files), ['build/temp/bower_components/bower_components.css']);
+
+var moduleDependencies = (module) => {
+    switch (module.slug) {
+        case 'atlas':
+            // Atlas depends on all modules
+            return modules;
+        case 'shared':
+            // Shared is independent
+            return modules.filter(mod => mod.slug === 'shared');
+        default:
+            // All other modules depend on shared and the module itself
+            return modules.filter(mod => mod.slug === 'shared' || mod.slug === module.slug);
+    }
+};
+
+module.exports = {
+    modules,
+    jsModuleFiles,
+    moduleDependencies,
+    jsFiles,
+    cssModuleFiles,
+    cssFiles
+};

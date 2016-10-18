@@ -11,11 +11,8 @@ describe('The dp-data-selection-filters component', function () {
             {
                 store: {
                     dispatch: function () {}
-                }
-            },
-            function ($provide) {
-                //This configuration is only used here for mapping labels to the activeFilters
-                $provide.constant('dataSelectionConfig', {
+                },
+                dataSelectionConfig: {
                     my_special_dataset: {
                         FILTERS: [
                             {
@@ -25,7 +22,7 @@ describe('The dp-data-selection-filters component', function () {
                             }
                         ]
                     }
-                });
+                }
             }
         );
 
@@ -125,7 +122,7 @@ describe('The dp-data-selection-filters component', function () {
         expect(component.find('.qa-available-filters').length).toBe(1);
         expect(component.find('.qa-available-filters h2').text()).toBe('');
 
-        //The first filter
+        // The first filter
         expect(component.find('.qa-available-filters h3').eq(0).text()).toBe('Filter A');
         expect(component.find('.qa-available-filters ul').eq(0).find('li').length).toBe(10);
 
@@ -135,7 +132,7 @@ describe('The dp-data-selection-filters component', function () {
         expect(component.find('.qa-available-filters ul').eq(0).find('li button').eq(9).text()).toContain('Optie A-10');
         expect(component.find('.qa-available-filters ul').eq(0).find('li').eq(9).text()).not.toContain('(20)');
 
-        //The second filter
+        // The second filter
         expect(component.find('.qa-available-filters h3').eq(1).text()).toBe('Filter B');
         expect(component.find('.qa-available-filters ul').eq(1).find('li').length).toBe(3);
 
@@ -204,7 +201,7 @@ describe('The dp-data-selection-filters component', function () {
                     dataset: 'my_special_dataset',
                     filters: {
                         filter_a_new: 'Optie A-2',
-                        //filterb: 'Optie B-1' is no longer active now
+                        // filterb: 'Optie B-1' is no longer active now
                         filterb: 'Optie B-2'
                     },
                     page: 1
@@ -217,12 +214,12 @@ describe('The dp-data-selection-filters component', function () {
         var component,
             activeFilters;
 
-        //Without any active filters
+        // Without any active filters
         activeFilters = {};
         component = getComponent(activeFilters, false);
         expect(component.find('.qa-active-filters').length).toBe(0);
 
-        //With active filters
+        // With active filters
         activeFilters = {
             filterb: 'Optie B-3',
             filter_a_new: 'Optie A-7'
@@ -231,7 +228,7 @@ describe('The dp-data-selection-filters component', function () {
         component = getComponent(activeFilters, false);
         expect(component.find('.qa-active-filters').length).toBe(1);
 
-        //The configured order is respected here
+        // The configured order is respected here
         expect(component.find('.qa-active-filters li').length).toBe(2);
         expect(component.find('.qa-active-filters li').eq(0).text()).toContain('Optie A-7');
         expect(component.find('.qa-active-filters li').eq(1).text()).toContain('Optie B-3');
@@ -241,21 +238,21 @@ describe('The dp-data-selection-filters component', function () {
         var component,
             activeFilters;
 
-        //Without any active filters
+        // Without any active filters
         activeFilters = {
             filterb: 'Optie B-2'
         };
 
         component = getComponent(activeFilters, false);
 
-        //Regular styling for 'Optie B-1' & 'Optie B-3'
+        // Regular styling for 'Optie B-1' & 'Optie B-3'
         expect(component.find('.qa-available-filters ul').eq(1).find('li').eq(0).find('button').attr('class'))
             .not.toContain('u-color__primary--dark');
 
         expect(component.find('.qa-available-filters ul').eq(1).find('li').eq(2).find('button').attr('class'))
             .not.toContain('u-color__primary--dark');
 
-        //Custom styling for 'Optie B-2'
+        // Custom styling for 'Optie B-2'
         expect(component.find('.qa-available-filters ul').eq(1).find('li').eq(1).find('button').attr('class'))
             .toContain('u-color__primary--dark');
     });
@@ -264,7 +261,7 @@ describe('The dp-data-selection-filters component', function () {
         var component,
             activeFilters;
 
-        //Without any active filters
+        // Without any active filters
         activeFilters = {
             filter_a_new: 'Optie A-2',
             filterb: 'Optie B-2'
@@ -272,7 +269,7 @@ describe('The dp-data-selection-filters component', function () {
 
         component = getComponent(activeFilters, false);
 
-        //Remove 'Optie B2' (filterb)
+        // Remove 'Optie B2' (filterb)
         component.find('.qa-active-filters li').eq(1).find('button').click();
 
         expect(store.dispatch).toHaveBeenCalledWith({
@@ -290,13 +287,13 @@ describe('The dp-data-selection-filters component', function () {
     it('shows maximum of 10 options per category, it can expand/implode when it has more than 10 results', function () {
         var component;
 
-        //When there are 10 or less available options
+        // When there are 10 or less available options
         component = getComponent({}, false);
         expect(component.find('.qa-available-filters > div').eq(0).find('li').length).toBe(10);
         expect(component.find('.qa-available-filters > div').eq(0).find('button').length).toBe(10);
         expect(component.text()).not.toContain('Toon meer');
 
-        //When there are more than 10 options
+        // When there are more than 10 options
         availableFilters[0].options.push({
             count: 117,
             label: 'Optie A-11'
@@ -314,7 +311,7 @@ describe('The dp-data-selection-filters component', function () {
         expect(component.find('.qa-available-filters > div').eq(0).find('button').length).toBe(11);
         expect(component.find('.qa-available-filters > div').eq(0).find('button').eq(10).text()).toContain('Toon meer');
 
-        //Click the show more button
+        // Click the show more button
         component.find('.qa-available-filters > div').eq(0).find('button').click();
         $rootScope.$apply();
 
@@ -324,39 +321,38 @@ describe('The dp-data-selection-filters component', function () {
         expect(component.find('.qa-available-filters > div').eq(0).find('li button').eq(11).text())
             .toContain('Optie A-12');
 
-        //Make sure the show more button is gone now
+        // Make sure the show more button is gone now
         expect(component.find('.qa-available-filters > div').eq(0).text()).not.toContain('Toon meer');
-        //Make sure the show less button is shown
+        // Make sure the show less button is shown
         expect(component.find('.qa-available-filters > div').eq(0).text()).toContain('Toon minder');
 
-        //Click the show less button
+        // Click the show less button
         component.find('.qa-available-filters > div').eq(0).find('button').click();
         $rootScope.$apply();
 
-        //Make sure the show less button is gone now
+        // Make sure the show less button is gone now
         expect(component.find('.qa-available-filters > div').eq(0).text()).not.toContain('Toon minder');
-        //Make sure the show more button is shown
+        // Make sure the show more button is shown
         expect(component.find('.qa-available-filters > div').eq(0).text()).toContain('Toon meer');
     });
 
     it('expanded categories have a message when there are more options that 100', function () {
-        //When there are less than 100 options
+        // When there are less than 100 options
         var component;
 
-        //Making sure the mocked category has more than 10 options
+        // Making sure the mocked category has more than 10 options
         availableFilters[0].options.push({
             count: 4,
             label: 'Optie A-11'
         });
 
-        //When there are 100 or less available options
+        // When there are 100 or less available options
         component = getComponent({}, false);
         expect(component.find('.qa-available-filters > div').eq(0).find('.qa-hidden-options').length).toBe(0);
         component.find('.qa-available-filters > div').eq(0).find('.qa-show-more-button').click();
         expect(component.find('.qa-available-filters > div').eq(0).find('.qa-hidden-options').length).toBe(0);
 
-
-        //When there are more then 100 available options: show the message after expanding the category
+        // When there are more then 100 available options: show the message after expanding the category
         availableFilters[0].numberOfOptions = 101;
         component = getComponent({}, false);
         expect(component.find('.qa-available-filters > div').eq(0).find('.qa-hidden-options').length).toBe(0);

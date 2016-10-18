@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('atlasPage')
-        .component('atlasPage', {
+        .module('dpPage')
+        .component('dpPage', {
             bindings: {
                 name: '@'
             },

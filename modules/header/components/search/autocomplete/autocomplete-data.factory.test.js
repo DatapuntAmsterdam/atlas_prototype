@@ -7,7 +7,7 @@ describe('The autocompleteData factory', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasHeader',
+            'dpHeader',
             {
                 environment: {
                     API_ROOT: 'http://api-domain.com/'

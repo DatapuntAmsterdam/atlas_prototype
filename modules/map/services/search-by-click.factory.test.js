@@ -32,7 +32,7 @@ describe('The searchByClick factory', function () {
 
         spyOn(store, 'dispatch');
 
-        //Mock the Leaflet click event
+        // Mock the Leaflet click event
         mockedLeafletMap.fireEvent('click', {
             latlng: {
                 lat: 52.124,
@@ -43,7 +43,7 @@ describe('The searchByClick factory', function () {
         $rootScope.$apply();
 
         expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.SHOW_SEARCH_RESULTS_BY_CLICK,
+            type: ACTIONS.FETCH_SEARCH_RESULTS_BY_CLICK,
             payload: [52.124, 4.788]
         });
     });

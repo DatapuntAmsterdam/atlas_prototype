@@ -26,7 +26,7 @@
         }
 
         function panTo (leafletMap, location) {
-            //Prevent infinite loop; the 'moveend' event triggers panTo, and panning always triggers a 'moveend' event.
+            // Prevent infinite loop; the 'moveend' event triggers panTo, and panning always triggers a 'moveend' event.
             if (!angular.equals(location, getCurrentLocation(leafletMap))) {
                 leafletMap.panTo(location, {animate: false});
             }

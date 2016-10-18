@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
-        .component('atlasNummeraanduidingHeader', {
+        .module('dpDetail')
+        .component('dpNummeraanduidingHeader', {
             bindings: {
                 heading: '@',
                 metaData: '=',
@@ -11,13 +11,13 @@
                 verblijfsobjectEndpoint: '@'
             },
             templateUrl: 'modules/detail/components/nummeraanduiding-header/nummeraanduiding-header.html',
-            controller: AtlasNummeraanduidingHeaderController,
+            controller: DpNummeraanduidingHeaderController,
             controllerAs: 'vm'
         });
 
-    AtlasNummeraanduidingHeaderController.$inject = ['api'];
+    DpNummeraanduidingHeaderController.$inject = ['api'];
 
-    function AtlasNummeraanduidingHeaderController (api) {
+    function DpNummeraanduidingHeaderController (api) {
         var vm = this;
 
         api.getByUrl(vm.verblijfsobjectEndpoint).then(function (vboData) {

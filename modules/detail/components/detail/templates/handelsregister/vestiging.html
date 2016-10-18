@@ -1,8 +1,8 @@
 <div class="u-row">
-    <atlas-stelselpedia-header
+    <dp-stelselpedia-header
         heading="{{vm.apiData.results._display}}"
         definition="VESTIGING">
-    </atlas-stelselpedia-header>
+    </dp-stelselpedia-header>
 
     <dl class="c-key-value-list">
         <dt>Eerste handelsnaam</dt>
@@ -49,5 +49,5 @@
         </p>
     </dp-panel>
 
-    <atlas-api-call endpoint="{{vm.apiData.results.maatschappelijke_activiteit}}" partial="handelsregister/mac"></atlas-api-call>
+    <dp-api-call endpoint="{{vm.apiData.results.maatschappelijke_activiteit}}" partial="handelsregister/mac"></dp-api-call>
 </div>

@@ -26,7 +26,6 @@
             vm.currentPage = vm.state.page;
 
             dataSelectionApi.query(vm.state.dataset, vm.state.filters, vm.currentPage).then((data) => {
-
                 vm.title = dataSelectionConfig.bag.TITLE;
                 vm.availableFilters = data.filters;
                 vm.tableData = data.tableData;

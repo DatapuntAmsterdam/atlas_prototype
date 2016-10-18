@@ -1,4 +1,4 @@
-describe('The atlas-nummeraanduiding-header directive', function () {
+describe('The dp-nummeraanduiding-header directive', function () {
     var $compile,
         $rootScope,
         $q,
@@ -19,7 +19,7 @@ describe('The atlas-nummeraanduiding-header directive', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasDetail',
+            'dpDetail',
             'ngSanitize',
             {
                 api: {
@@ -51,7 +51,7 @@ describe('The atlas-nummeraanduiding-header directive', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-nummeraanduiding-header');
+        element = document.createElement('dp-nummeraanduiding-header');
         element.setAttribute('heading', 'Maria Austriastraat 730');
         element.setAttribute('meta-data', 'metaData');
         element.setAttribute('verblijfsobject-endpoint', verblijfsobjectEndpoint);
@@ -71,13 +71,13 @@ describe('The atlas-nummeraanduiding-header directive', function () {
         it('adds a red badge if the status of the verblijfsobject is \'Verblijfsobject gevormd\'', function () {
             var directive;
 
-            //Status 'Verblijfsobject in gebruik', don't show a badge
+            // Status 'Verblijfsobject in gebruik', don't show a badge
             directive = getDirective('http://www.example-endpoint.com/21/', true);
 
             expect(directive.find('.badge.badge--red').length).toBe(0);
             expect(directive.text()).not.toContain('Verblijfsobject in gebruik');
 
-            //Status 'Verblijfsobject gevormd', show a badge
+            // Status 'Verblijfsobject gevormd', show a badge
             directive = getDirective('http://www.example-endpoint.com/18/', true);
             expect(directive.find('.c-panel--danger').length).toBe(1);
             expect(directive.find('.c-panel--danger').text().trim()).toBe('Verblijfsobject gevormd');
@@ -86,35 +86,35 @@ describe('The atlas-nummeraanduiding-header directive', function () {
         it('adds a blue badge if it\'s a nevenadres', function () {
             var directive;
 
-            //Hoofdadres
+            // Hoofdadres
             directive = getDirective('http://www.example-endpoint.com/21/', true);
             expect(directive.find('.badge.badge--blue').length).toBe(0);
 
-            //Nevenadres
+            // Nevenadres
             directive = getDirective('http://www.example-endpoint.com/21/', false);
             expect(directive.find('.c-panel--warning').length).toBe(1);
             expect(directive.find('.c-panel--warning').text().trim()).toBe('Dit is een nevenadres');
         });
     });
 
-    it('loads the atlas-stelselpedia-header directive', function () {
+    it('loads the dp-stelselpedia-header directive', function () {
         var directive = getDirective('http://www.example-endpoint.com/21/', true);
 
-        expect(directive.find('atlas-stelselpedia-header').length).toBe(1);
-        expect(directive.find('atlas-stelselpedia-header').attr('heading')).toBe('Maria Austriastraat 730');
-        expect(directive.find('atlas-stelselpedia-header').attr('definition')).toBe('NUMMERAANDUIDING');
-        expect(directive.find('atlas-stelselpedia-header').attr('meta-data')).toBe('vm.metaData');
+        expect(directive.find('dp-stelselpedia-header').length).toBe(1);
+        expect(directive.find('dp-stelselpedia-header').attr('heading')).toBe('Maria Austriastraat 730');
+        expect(directive.find('dp-stelselpedia-header').attr('definition')).toBe('NUMMERAANDUIDING');
+        expect(directive.find('dp-stelselpedia-header').attr('meta-data')).toBe('vm.metaData');
     });
 
     it('makes the header italic is the verblijfsobject status is \'Verblijfsobject gevormd\'', function () {
         var directive;
 
-        //Status 'Verblijfsobject in gebruik', use a roman font
+        // Status 'Verblijfsobject in gebruik', use a roman font
         directive = getDirective('http://www.example-endpoint.com/21/', true);
-        expect(directive.find('atlas-stelselpedia-header').attr('heading')).toBe('Maria Austriastraat 730');
+        expect(directive.find('dp-stelselpedia-header').attr('heading')).toBe('Maria Austriastraat 730');
 
-        //Status 'Verblijfsobject gevormd', use an italic font
+        // Status 'Verblijfsobject gevormd', use an italic font
         directive = getDirective('http://www.example-endpoint.com/18/', true);
-        expect(directive.find('atlas-stelselpedia-header').attr('heading')).toBe('<em>Maria Austriastraat 730</em>');
+        expect(directive.find('dp-stelselpedia-header').attr('heading')).toBe('<em>Maria Austriastraat 730</em>');
     });
 });

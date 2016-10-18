@@ -1,10 +1,10 @@
 <div>
     <div class="u-row">
-        <atlas-stelselpedia-header
+        <dp-stelselpedia-header
             heading="{{vm.apiData.results.naam}}"
-            definition="OPENBARE_RUIMTE"
+            definition="OPENBARERUIMTE"
             meta-data="vm.apiData">
-        </atlas-stelselpedia-header>
+        </dp-stelselpedia-header>
 
         <dl class="c-key-value-list">
             <dt>Naam 24-posities (NEN)</dt>
@@ -27,8 +27,8 @@
     </div>
 
     <div ng-if="vm.apiData.results.adressen.count" class="u-row">
-        <atlas-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{vm.apiData.results.adressen.href}}" partial="adressen_lijst"></atlas-api-call>
+        <dp-api-call endpoint="{{vm.apiData.results.adressen.href}}" partial="adressen_lijst"></dp-api-call>
     </div>
 </div>

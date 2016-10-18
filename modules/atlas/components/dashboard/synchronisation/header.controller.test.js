@@ -1,16 +1,37 @@
 describe('The header controller', function () {
     var $controller,
         $rootScope,
-        store;
+        store,
+        mockedState,
+        DEFAULT_STATE;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            }
+        );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
+        angular.mock.inject(function (_$controller_, _$rootScope_, _store_, _DEFAULT_STATE_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
+            DEFAULT_STATE = _DEFAULT_STATE_;
         });
+
+        mockedState = {
+            search: {
+                query: 'i am a search query'
+            }
+        };
     });
 
     function getController () {
@@ -35,12 +56,7 @@ describe('The header controller', function () {
     });
 
     it('sets the query string based on the state', function () {
-        var mockedState = {
-                search: {
-                    query: 'i am a search query'
-                }
-            },
-            controller;
+        var controller;
 
         spyOn(store, 'getState').and.returnValue(mockedState);
 
@@ -50,15 +66,38 @@ describe('The header controller', function () {
     });
 
     it('doesn\'t break when search is null', function () {
-        var mockedState = {
-                search: null
-            },
-            controller;
+        var controller;
+
+        mockedState = {
+            search: null
+        };
 
         spyOn(store, 'getState').and.returnValue(mockedState);
 
         controller = getController();
 
         expect(controller.query).toBeNull();
+    });
+
+    describe('not all states have a print version', function () {
+        it('there is no print button when dataSelection is active', function () {
+            var controller;
+
+            mockedState.dataSelection = {};
+
+            spyOn(store, 'getState').and.returnValue(mockedState);
+            controller = getController();
+
+            expect(controller.hasPrintButton).toBe(false);
+        });
+
+        it('all non dataSelection modules have a printButton', function () {
+            var controller;
+
+            spyOn(store, 'getState').and.returnValue(DEFAULT_STATE);
+            controller = getController();
+
+            expect(controller.hasPrintButton).toBe(true);
+        });
     });
 });

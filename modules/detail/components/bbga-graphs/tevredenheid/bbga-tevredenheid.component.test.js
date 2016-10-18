@@ -1,4 +1,4 @@
-describe('The atlas-bbga-tevredenheid component', function () {
+describe('The dp-bbga-tevredenheid component', function () {
     var $compile,
         $rootScope,
         $q,
@@ -56,7 +56,7 @@ describe('The atlas-bbga-tevredenheid component', function () {
         mockedBbgaMissingData.VAR_B.data[0].waarde = null;
 
         angular.mock.module(
-            'atlasDetail',
+            'dpDetail',
             {
                 bbgaDataService: {
                     getGraphData: function () {
@@ -99,7 +99,7 @@ describe('The atlas-bbga-tevredenheid component', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-bbga-tevredenheid');
+        element = document.createElement('dp-bbga-tevredenheid');
         element.setAttribute('gebied-heading', gebiedHeading);
         element.setAttribute('gebied-code', gebiedCode);
 
@@ -141,11 +141,11 @@ describe('The atlas-bbga-tevredenheid component', function () {
     it('formats the grades in the Dutch locale with one decimal', function () {
         var component = getComponent();
 
-        //Variabele A
+        // Variabele A
         expect(component.find('.o-table tr:nth-child(1) td:nth-of-type(1)').text().trim()).toBe('7,0');
         expect(component.find('.o-table tr:nth-child(1) td:nth-of-type(2)').text().trim()).toBe('7,4');
 
-        //Variabele B
+        // Variabele B
         expect(component.find('.o-table tr:nth-child(2) td:nth-of-type(1)').text().trim()).toBe('6,5');
         expect(component.find('.o-table tr:nth-child(2) td:nth-of-type(2)').text().trim()).toBe('6,3');
     });

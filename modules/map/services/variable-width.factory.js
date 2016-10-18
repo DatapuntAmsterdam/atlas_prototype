@@ -13,13 +13,15 @@
         };
 
         function initialize (container, leafletMap) {
-            $rootScope.$watch(function () {
+            var unwatch = $rootScope.$watch(function () {
                 return container.clientWidth;
             }, function (newWidth, oldWidth) {
                 if (newWidth !== oldWidth) {
                     leafletMap.invalidateSize();
                 }
             });
+
+            $rootScope.$on('$destroy', unwatch);
         }
     }
 })();

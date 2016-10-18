@@ -1,7 +1,7 @@
 <div class="c-dashboard">
     <div class="c-dashboard__heading">
         <div ng-controller="HeaderController as header">
-            <atlas-header query="{{header.query}}" is-print-mode="vm.isPrintMode"></atlas-header>
+            <dp-header query="{{header.query}}" has-print-button="header.hasPrintButton" is-print-mode="vm.isPrintMode"></dp-header>
         </div>
     </div>
     <div class="c-dashboard__content"
@@ -25,12 +25,12 @@
                             'u-height--auto': vm.isPrintMode
                         }">
 
-                        <atlas-layer-selection
+                        <dp-layer-selection
                             base-layer="{{vm.baseLayer}}"
                             overlays="vm.overlays"
                             zoom="vm.zoom">
 
-                        </atlas-layer-selection>
+                        </dp-layer-selection>
                     </div>
                 </div>
 
@@ -44,6 +44,7 @@
                     <div ng-if="vm.visibility.map" ng-controller="MapController as vm">
                         <dp-map
                             map-state="vm.mapState"
+                            show-layer-selection="vm.showLayerSelection"
                             markers="vm.markers">
 
                         </dp-map>
@@ -51,7 +52,7 @@
                 </div>
 
                 <div ng-if="vm.columnSizes.right"
-                    atlas-scrollable-content visibility="vm.visibility" page-name="{{vm.pageName}}"
+                    dp-scrollable-content visibility="vm.visibility" page-name="{{vm.pageName}}"
                     class="u-col-sm--{{vm.columnSizes.right}} qa-dashboard__content__column--right u-height--100 u-height--100"
                     ng-class="{
                         'u-padding__left--1': !vm.isPrintMode,
@@ -61,23 +62,25 @@
                     }">
 
                     <div ng-if="vm.visibility.detail" ng-controller="DetailController as vm">
-                        <atlas-detail
+                        <dp-detail
                             endpoint="{{vm.endpoint}}"
                             is-loading="vm.isLoading">
-                        </atlas-detail>
+                        </dp-detail>
                     </div>
 
                     <div ng-if="vm.visibility.page" ng-controller="PageController as vm">
-                        <atlas-page name="{{vm.pageName}}"></atlas-page>
+                        <dp-page name="{{vm.pageName}}"></dp-page>
                     </div>
 
                     <div ng-if="vm.visibility.searchResults" ng-controller="SearchResultsController as vm">
-                        <atlas-search-results
+                        <dp-search-results
+                            is-loading="vm.isLoading"
                             query="{{vm.query}}"
                             location="vm.location"
-                            category="{{vm.category}}">
+                            category="{{vm.category}}"
+                            number-of-results="vm.numberOfResults">
 
-                        </atlas-search-results>
+                        </dp-search-results>
                     </div>
 
                     <div ng-if="vm.visibility.straatbeeld" ng-controller="StraatbeeldController as straatbeeld">

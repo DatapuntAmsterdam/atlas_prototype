@@ -2,48 +2,42 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
+        .module('dpDetail')
         .factory('endpointParser', endpointParserFactory);
 
     function endpointParserFactory () {
         return {
-            getTemplateUrl: getTemplateUrl
+            getTemplateUrl,
+            getStelselpediaKey
         };
 
         function getTemplateUrl (endpoint) {
-            var anchor,
-                pathname,
-                uriParts,
-                template;
+            const [category, subject] = getParts(endpoint);
+            return `modules/detail/components/detail/templates/${category}/${subject}.html`;
+        }
 
+        function getStelselpediaKey (endpoint) {
+            const [, subject] = getParts(endpoint);
+            return subject.toUpperCase().replace(/-/g, '_');
+        }
 
-
-            //Transform http://www.api-root.com/this/that/123 to ['this', 'that', '123']
-            anchor = document.createElement('a');
+        function getParts (endpoint) {
+            const anchor = document.createElement('a');
             anchor.href = endpoint;
 
-            pathname = anchor.pathname;
+            // Transform http://www.api-root.com/this/that/123 to ['this', 'that', '123']
+            const uriParts = anchor.pathname
+                    .replace(/^\//, '') // Strip leading slash
+                    .replace(/\/$/, '') // Strip trailing slash
+                    .split('/'),
+                zakelijkRecht = isZakelijkRecht(uriParts);
 
-            //Strip leading slash
-            pathname = pathname.replace(/^\//, '');
+            return zakelijkRecht ? ['brk', 'subject'] : [uriParts[0], uriParts[1]];
 
-            //Strip trailing slash
-            pathname = pathname.replace(/\/$/, '');
-
-            uriParts = pathname.split('/');
-
-            if (isZakelijkRecht(uriParts)) {
-                template = 'brk/subject.html';
-            } else {
-                template = uriParts[0] + '/' + uriParts[1] + '.html';
-            }
-
-            return 'modules/detail/components/detail/templates/' + template;
-
-            function isZakelijkRecht (uriParts) {
-                return uriParts[0] === 'brk' &&
-                    uriParts[1] === 'zakelijk-recht' &&
-                    uriParts[uriParts.length - 1] === 'subject';
+            function isZakelijkRecht (someUriParts) {
+                return someUriParts[0] === 'brk' &&
+                    someUriParts[1] === 'zakelijk-recht' &&
+                    someUriParts[someUriParts.length - 1] === 'subject';
             }
         }
     }

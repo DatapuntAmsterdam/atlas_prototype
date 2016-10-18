@@ -36,10 +36,14 @@ describe('The detailReducers factory', function () {
                 inputState = angular.copy(defaultState),
                 output;
 
-            inputState.map.highlight = {some: 'object'};
+            inputState.detail = {
+                geometry: {
+                    some: 'object'
+                }
+            };
 
             output = detailReducers.FETCH_DETAIL(inputState, payload);
-            expect(output.map.highlight).toBeNull();
+            expect(output.detail.geometry).toBeUndefined();
         });
 
         it('disables layer selection, search, page, straatbeeld and dataSelection', function () {
@@ -47,7 +51,7 @@ describe('The detailReducers factory', function () {
                 inputState = angular.copy(defaultState),
                 output;
 
-            inputState.map.showLayerSelection = true;
+            inputState.layerSelection = true;
             inputState.search = {some: 'object'};
             inputState.page = 'somePage';
             inputState.straatbeeld = {some: 'object'};
@@ -55,7 +59,7 @@ describe('The detailReducers factory', function () {
 
             output = detailReducers.FETCH_DETAIL(inputState, payload);
 
-            expect(output.map.showLayerSelection).toBe(false);
+            expect(output.layerSelection).toBe(false);
             expect(output.search).toBeNull();
             expect(output.page).toBeNull();
             expect(output.straatbeeld).toBeNull();
@@ -82,23 +86,28 @@ describe('The detailReducers factory', function () {
                     overlays: [],
                     viewCenter: [52.3719, 4.9012],
                     zoom: 12,
-                    showLayerSelection: false,
                     isLoading: true
                 },
+                layerSelection: false,
                 search: null,
                 page: null,
                 detail: {
-                    uri: 'bag/thing/123/',
-                    geometry: null,
+                    endpoint: 'bag/thing/123/',
                     isLoading: true
                 },
                 straatbeeld: null
             },
-            payload = {some: 'object'};
+            payload = {
+                display: 'My detail page',
+                geometry: {
+                    some: 'object'
+                }
+            };
 
-        it('stores the geometry in the detail state', function () {
+        it('stores the display and geometry in the detail state', function () {
             var output = detailReducers.SHOW_DETAIL(stateAfterFetchDetail, payload);
 
+            expect(output.detail.display).toBe('My detail page');
             expect(output.detail.geometry).toEqual({some: 'object'});
         });
 
@@ -110,7 +119,7 @@ describe('The detailReducers factory', function () {
         });
 
         it('does nothing when detail is null', function () {
-            //This can happen when a user triggers another action after FETCH_DETAIL and before SHOW_DETAIL
+            // This can happen when a user triggers another action after FETCH_DETAIL and before SHOW_DETAIL
             var output;
 
             expect(defaultState.detail).toBeNull();

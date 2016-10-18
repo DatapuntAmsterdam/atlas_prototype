@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('atlasSearchResults')
+        .module('dpSearchResults')
         .factory('geosearch', geosearchFactory);
 
     geosearchFactory.$inject = ['$q', 'SEARCH_CONFIG', 'api', 'geosearchFormatter', 'searchFormatter'];
@@ -63,7 +63,7 @@
                                 endpoint: pand._links.self.href
                             };
 
-                            //Splice modifies the existing Array, we don't want our input to change hence the copy
+                            // Splice modifies the existing Array, we don't want our input to change hence the copy
                             geosearchResultsCopy.splice(
                                 pandCategoryIndex + 1,
                                 0,

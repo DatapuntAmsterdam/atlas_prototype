@@ -1,4 +1,5 @@
 module.exports = function (grunt) {
+    var files = require('./config/js-files');
     var uniqueIdJs = grunt.config.get('uniqueIdJs');
 
     return {
@@ -23,7 +24,16 @@ module.exports = function (grunt) {
             expand: true,
             flatten: true,
             rename: function (dest, src) {
-                return dest + src.replace(/bower_components/g, 'atlas.libs.' + uniqueIdJs);
+                return dest + src.replace(/bower_components/g, `atlas.${uniqueIdJs}.libs`);
+            }
+        },
+        app: {
+            src: files.modules.map(module => `build/temp/babel/es5/atlas.${module.slug}.*`),
+            dest: 'build/',
+            expand: true,
+            flatten: true,
+            rename: function (dest, src) {
+                return dest + src.replace(/atlas\./, `atlas.${uniqueIdJs}.`);
             }
         },
         bower_bbga_fonts: {

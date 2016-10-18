@@ -2,21 +2,21 @@
     'use strict';
 
     angular
-        .module('atlasLayerSelection')
-        .component('atlasLayerSelection', {
+        .module('dpLayerSelection')
+        .component('dpLayerSelection', {
             bindings: {
                 activeBaseLayer: '@baseLayer',
                 activeOverlays: '=overlays',
                 zoom: '='
             },
             templateUrl: 'modules/layer-selection/components/layer-selection/layer-selection.html',
-            controller: AtlasLayerSelectionController,
+            controller: DpLayerSelectionController,
             controllerAs: 'vm'
         });
 
-    AtlasLayerSelectionController.$inject = ['BASE_LAYERS', 'OVERLAYS', 'store', 'ACTIONS'];
+    DpLayerSelectionController.$inject = ['BASE_LAYERS', 'OVERLAYS', 'store', 'ACTIONS'];
 
-    function AtlasLayerSelectionController (BASE_LAYERS, OVERLAYS, store, ACTIONS) {
+    function DpLayerSelectionController (BASE_LAYERS, OVERLAYS, store, ACTIONS) {
         var vm = this;
 
         vm.allBaseLayers = BASE_LAYERS;
@@ -56,7 +56,7 @@
         };
 
         vm.isOverlayActive = function (overlay) {
-            for(var i = 0;i < vm.activeOverlays.length;i++) {
+            for (var i = 0; i < vm.activeOverlays.length; i++) {
                 if (vm.activeOverlays[i].id === overlay) {
                     return true;
                 }

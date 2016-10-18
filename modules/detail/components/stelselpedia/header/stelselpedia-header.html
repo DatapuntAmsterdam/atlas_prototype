@@ -35,7 +35,7 @@
             </span>
         </button>
 
-        <atlas-wkpb-link ng-if="vm.brk" brk-id="{{vm.brk.id}}"></atlas-wkpb-link>
+        <dp-wkpb-link ng-if="vm.brk" brk-id="{{vm.brk.id}}"></dp-wkpb-link>
     </div>
 
     <dp-panel is-panel-visible="vm.isVisible.help" can-close="true" class-name="qa-stelselpedia">
@@ -50,7 +50,7 @@
     <dp-panel ng-if="vm.hasMetaData" is-panel-visible="vm.isVisible.meta" can-close="true" class-name="qa-metadata">
         <h3 class="u-margin__bottom--1">Metadata van {{vm.stelselpediaLabel | lowercase}}</h3>
 
-        <atlas-stelselpedia-meta definition="{{vm.definition}}" api-data="vm.metaData"></atlas-stelselpedia-meta>
+        <dp-stelselpedia-meta definition="{{vm.definition}}" api-data="vm.metaData"></dp-stelselpedia-meta>
     </dp-panel>
 </div>
 

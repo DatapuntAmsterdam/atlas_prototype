@@ -16,9 +16,10 @@
     function searchReducersFactory (ACTIONS) {
         var reducers = {};
 
-        reducers[ACTIONS.SHOW_SEARCH_RESULTS_BY_QUERY] = showSearchResultsByQueryReducer;
-        reducers[ACTIONS.SHOW_SEARCH_RESULTS_BY_CLICK] = showSearchResultsByClickReducer;
-        reducers[ACTIONS.SHOW_SEARCH_RESULTS_CATEGORY] = showSearchResultsCategoryReducer;
+        reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY] = fetchSearchResultsByQueryReducer;
+        reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_CLICK] = fetchSearchResultsByClickReducer;
+        reducers[ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY] = fetchSearchResultsCategoryReducer;
+        reducers[ACTIONS.SHOW_SEARCH_RESULTS] = showSearchResultsReducer;
 
         return reducers;
 
@@ -28,18 +29,20 @@
          *
          * @returns {Object} newState
          */
-        function showSearchResultsByQueryReducer (oldState, payload) {
+        function fetchSearchResultsByQueryReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
             newState.search = {
+                isLoading: true,
                 query: payload,
                 location: null,
-                category: null
+                category: null,
+                numberOfResults: null
             };
 
-            newState.map.highlight = null;
-            newState.map.showLayerSelection = false;
             newState.map.isFullscreen = false;
+
+            newState.layerSelection = false;
             newState.page = null;
             newState.detail = null;
             newState.straatbeeld = null;
@@ -54,21 +57,22 @@
          *
          * @returns {Object} newState
          */
-        function showSearchResultsByClickReducer (oldState, payload) {
+        function fetchSearchResultsByClickReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
             newState.search = {
+                isLoading: true,
                 query: null,
                 location: payload,
-                category: null
+                category: null,
+                numberOfResults: null
             };
 
-            if (oldState.map.showLayerSelection || oldState.map.isFullscreen) {
+            if (oldState.layerSelection || oldState.map.isFullscreen) {
                 newState.map.viewCenter = payload;
             }
 
-            newState.map.highlight = null;
-            newState.map.showLayerSelection = false;
+            newState.layerSelection = false;
             newState.map.showActiveOverlays = false;
             newState.map.isFullscreen = false;
             newState.page = null;
@@ -85,10 +89,27 @@
          *
          * @returns {Object} newState
          */
-        function showSearchResultsCategoryReducer (oldState, payload) {
+        function fetchSearchResultsCategoryReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
+            newState.search.isLoading = true;
             newState.search.category = payload;
+            newState.search.numberOfResults = null;
+
+            return newState;
+        }
+
+        /**
+         * @param {Object} oldState
+         * @param {String} payload - The number of search results
+         *
+         * @returns {Object} newState
+         */
+        function showSearchResultsReducer (oldState, payload) {
+            var newState = angular.copy(oldState);
+
+            newState.search.isLoading = false;
+            newState.search.numberOfResults = payload;
 
             return newState;
         }

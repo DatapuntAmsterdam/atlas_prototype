@@ -1,6 +1,6 @@
 <div>
     <div class="u-row">
-        <atlas-stelselpedia-header definition="VERBLIJFSOBJECT" meta-data="apiData"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="VERBLIJFSOBJECT" meta-data="apiData"></dp-stelselpedia-header>
         <dl class="c-key-value-list u-margin__bottom--4">
             <dt>Gebruiksdoel</dt>
             <dd>{{ apiData.results.gebruiksdoel.omschrijving }}</dd>
@@ -42,33 +42,33 @@
 
     <!-- Adres -->
     <div ng-if="apiData.results.adressen.count > 1">
-        <atlas-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{apiData.results.adressen.href}}" partial="adressen_lijst"></atlas-api-call>
+        <dp-api-call endpoint="{{apiData.results.adressen.href}}" partial="adressen_lijst"></dp-api-call>
     </div>
 
     <!-- Pand -->
     <div ng-if="apiData.results.panden.count">
-        <atlas-stelselpedia-header definition="PAND" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="PAND" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="{{apiData.results.panden.href}}" partial="lijst"></atlas-api-call>
+        <dp-api-call endpoint="{{apiData.results.panden.href}}" partial="lijst"></dp-api-call>
     </div>
 
     <!-- Vestiging -->
     <div>
-        <atlas-stelselpedia-header definition="VESTIGING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="VESTIGING" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}" add-api-root="true" partial="lijst"></atlas-api-call>
+        <dp-api-call endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}" add-api-root="true" partial="lijst"></dp-api-call>
     </div>
 
     <!-- Kadastraal apiData -->
     <div ng-if="apiData.results.kadastrale_objecten.count">
-        <atlas-stelselpedia-header definition="KADASTRAAL_OBJECT" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="OBJECT" use-plural="true"></dp-stelselpedia-header>
 
-        <atlas-api-call
+        <dp-api-call
             endpoint="{{apiData.results.kadastrale_objecten.href}}"
             partial="bag/brk-vbo"
             use-brk-object-expanded="true">
-        </atlas-api-call>
+        </dp-api-call>
     </div>
 </div>

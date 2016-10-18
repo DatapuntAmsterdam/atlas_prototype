@@ -23,6 +23,7 @@
             var state = store.getState();
 
             vm.query = state.search && state.search.query;
+            vm.hasPrintButton = !angular.isObject(state.dataSelection);
         }
     }
 })();

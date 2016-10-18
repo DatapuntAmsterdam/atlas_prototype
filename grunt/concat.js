@@ -1,35 +1,70 @@
 module.exports = function (grunt) {
-    var jsFiles = require('./config/js-files'),
+    var files = require('./config/js-files'),
         cssFiles = require('./config/css-files'),
-        uniqueIdJs,
         uniqueIdCss;
 
-    uniqueIdJs = grunt.config.get('uniqueIdJs');
     uniqueIdCss = grunt.config.get('uniqueIdCss');
 
-    return {
+    var targets = {
         options: {
             sourceMap: true
         },
         npm_bower: {
             options: {
-                sourceMap: false    // Generating source maps is an expensive operation...
+                sourceMap: true
             },
             // Treat npm "bower" components as regular bower components...
             src: ['build/temp/npm_components/**/*.js', 'build/temp/bower_components/bower_components.js'],
             dest: 'build/temp/bower_components.js'
         },
-        tests: {
-            src: ['modules/**/*.test.js'],
-            dest: 'build/temp/babel/atlas.tests.es6.js'
-        },
-        modules: {
-            src: jsFiles,
-            dest: 'build/temp/babel/atlas.' + uniqueIdJs + '.js'
-        },
         css: {
             src: cssFiles,
             dest: 'build/atlas.' + uniqueIdCss + '.css'
         }
+        //
+        // The code below generates targets as follows
+        // `module_${module.slug}`:_{
+        //     src: files.jsModuleFiles(module),
+        //     dest: `build/temp/babel/es6/atlas.${module.slug}.js`
+        // }
+        // `test_${module.slug}`:_{
+        //     src: files.jsModuleFiles(module),
+        //     dest: `build/temp/babel/es6tests/atlas.${module.slug}.js`
+        // }
+        //
+        // As well as the tasks concat-modules and concat-tests to run the group of targets
     };
+
+    var moduleTarget = module => {
+        return {
+            name: `module_${module.slug}`,
+            src: files.jsModuleFiles(module),
+            dest: `build/temp/babel/es6/atlas.${module.slug}.js`
+        };
+    };
+
+    var testTarget = module => {
+        return {
+            name: `test_${module.slug}`,
+            src: [`modules/${module.slug}/**/*.test.js`],
+            dest: `build/temp/babel/es6tests/atlas.${module.slug}.js`
+        };
+    };
+
+    var setTarget = target => {
+        targets[target.name] = { src: target.src, dest: target.dest };
+        return target;
+    };
+
+    [
+        { name: 'concat-modules', target: moduleTarget },
+        { name: 'concat-tests', target: testTarget }
+    ].forEach(task =>
+        grunt.registerTask(task.name,
+            files.modules
+                .map(module => task.target(module))
+                .map(target => setTarget(target))
+                .map(target => `${task.newer ? 'newer:' : ''}concat:${target.name}`)));
+
+    return targets;
 };

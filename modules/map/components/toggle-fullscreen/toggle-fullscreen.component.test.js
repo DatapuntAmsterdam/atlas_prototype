@@ -26,7 +26,7 @@ describe('The dp-toggle-fullscreen component', function () {
     });
 
     function getComponent (isFullscreen) {
-        var component,
+        var result,
             element,
             scope;
 
@@ -36,10 +36,10 @@ describe('The dp-toggle-fullscreen component', function () {
         scope = $rootScope.$new();
         scope.isFullscreen = isFullscreen;
 
-        component = $compile(element)(scope);
+        result = $compile(element)(scope);
         scope.$apply();
 
-        return component;
+        return result;
     }
 
     describe('when minimized', function () {

@@ -1,4 +1,4 @@
-describe('The atlas-login-form component', function () {
+describe('The dp-login-form component', function () {
     var $compile,
         $rootScope,
         $q,
@@ -8,7 +8,7 @@ describe('The atlas-login-form component', function () {
 
     beforeEach(function () {
         angular.mock.module(
-            'atlasPage',
+            'dpPage',
             {
                 user: {
                     login: function (username, password) {
@@ -51,7 +51,7 @@ describe('The atlas-login-form component', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-login-form');
+        element = document.createElement('dp-login-form');
         scope = $rootScope.$new();
 
         component = $compile(element)(scope);
@@ -87,7 +87,7 @@ describe('The atlas-login-form component', function () {
 
             expect(user.login).toHaveBeenCalledWith('Erik', 'myinsecurepwd');
 
-            //Redirect to the previous page
+            // Redirect to the previous page
             expect($window.history.back).toHaveBeenCalled();
         });
 
@@ -101,11 +101,11 @@ describe('The atlas-login-form component', function () {
 
             expect(user.login).toHaveBeenCalledWith('Erik', 'incorrect_password');
 
-            //The form is still visible
+            // The form is still visible
             expect(component.find('form').length).toBe(1);
 
-            //An error message is shown
-           expect(component.find('.qa-error-message').text()).toContain('I_AM_AN_ERROR_MESSAGE');
+            // An error message is shown
+            expect(component.find('.qa-error-message').text()).toContain('I_AM_AN_ERROR_MESSAGE');
         });
     });
 });

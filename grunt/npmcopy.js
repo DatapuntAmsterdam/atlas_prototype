@@ -5,6 +5,6 @@ module.exports = {
     polyfill: {
         files: {
             'polyfill': ['babel-polyfill/dist/!(*.min).js']
-        },
-    },
+        }
+    }
 };

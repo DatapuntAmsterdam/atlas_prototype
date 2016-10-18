@@ -22,23 +22,23 @@ describe('The dataSelectionConfig factory', function () {
         it('development', function () {
             var dataSelectionConfig = prepareMocks('DEVELOPMENT');
 
-            //Global config
+            // Global config
             expect(dataSelectionConfig.bag.PRIMARY_KEY).toBe('id');
 
-            //Environment config
+            // Environment config
             expect(dataSelectionConfig.bag.ENDPOINT_PREVIEW)
-                .toBe('https://api-acc.datapunt.amsterdam.nl/zelfbediening/bag/');
+                .toBe('https://api-acc.datapunt.amsterdam.nl/dataselectie/bag/');
         });
 
         it('production', function () {
             var dataSelectionConfig = prepareMocks('PRODUCTION');
 
-            //Global config
+            // Global config
             expect(dataSelectionConfig.bag.PRIMARY_KEY).toBe('id');
 
-            //Environment config
+            // Environment config
             expect(dataSelectionConfig.bag.ENDPOINT_PREVIEW)
-                .toBe('https://api.datapunt.amsterdam.nl/zelfbediening/bag/');
+                .toBe('https://api.datapunt.amsterdam.nl/dataselectie/bag/');
         });
     });
 });

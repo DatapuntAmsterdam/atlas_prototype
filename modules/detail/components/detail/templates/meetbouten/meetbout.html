@@ -1,7 +1,7 @@
 <div class="detail-page__content--main">
     <div class="u-row">
-        <atlas-stelselpedia-header heading="{{vm.apiData.results.id}}" definition="MEETBOUT">
-        </atlas-stelselpedia-header>
+        <dp-stelselpedia-header heading="{{vm.apiData.results.id}}" definition="MEETBOUT">
+        </dp-stelselpedia-header>
 
         <dl class="c-key-value-list">
             <dt>Status</dt>
@@ -42,29 +42,29 @@
     </div>
 
     <div>
-        <atlas-stelselpedia-header definition="METING" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="METING" use-plural="true"></dp-stelselpedia-header>
 
         <p ng-if="!vm.apiData.results.metingen.href">Geen metingen beschikbaar</p>
 
-        <atlas-api-call ng-if="vm.apiData.results.metingen.href"
+        <dp-api-call ng-if="vm.apiData.results.metingen.href"
             endpoint="{{vm.apiData.results.metingen.href}}"
             partial="meetbouten/metingen-tabel">
-        </atlas-api-call>
+        </dp-api-call>
 
-        <atlas-meetbout-graph
+        <dp-meetbout-graph
             page-size="vm.apiData.results.metingen.count"
             href="{{vm.apiData.results.metingen.href}}">
-        </atlas-meetbout-graph>
+        </dp-meetbout-graph>
     </div>
 
     <div>
-        <atlas-stelselpedia-header definition="ROLLAAG" use-plural="true"></atlas-stelselpedia-header>
+        <dp-stelselpedia-header definition="ROLLAAG" use-plural="true"></dp-stelselpedia-header>
 
         <p ng-if="!vm.apiData.results.rollaag">Geen rollaag tekening beschikbaar</p>
 
-        <atlas-api-call ng-if="vm.apiData.results.rollaag"
+        <dp-api-call ng-if="vm.apiData.results.rollaag"
             endpoint="{{vm.apiData.results.rollaag}}"
             partial="meetbouten/rollaag">
-        </atlas-api-call>
+        </dp-api-call>
     </div>
 </div>

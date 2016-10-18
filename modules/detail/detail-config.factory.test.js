@@ -3,7 +3,7 @@ describe('The detailConfig factory', function () {
         var detailConfig;
 
         angular.mock.module(
-            'atlasDetail',
+            'dpDetail',
             function ($provide) {
                 $provide.value('environment', {
                     NAME: environmentName

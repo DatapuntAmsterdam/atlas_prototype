@@ -1,31 +1,31 @@
 <div>
     <div ng-if="apiData.results.rechten[0]">
-      <atlas-stelselpedia-header definition="ZAKELIJK_RECHT" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="ZAKELIJK_RECHT" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-partial-select partial="rechten" api-data="{results:apiData.results.rechten}"></atlas-partial-select>
+      <dp-partial-select partial="rechten" api-data="{results:apiData.results.rechten}"></dp-partial-select>
     </div>
 
     <div ng-if="apiData.results.beperkingen[0]">
-      <atlas-stelselpedia-header definition="GEMEENTELIJKE_BEPERKING" use-plural="true" brk="apiData.results"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="BEPERKING" use-plural="true" brk="apiData.results"></dp-stelselpedia-header>
 
-      <atlas-partial-select partial="beperking" api-data="{results:apiData.results.beperkingen}"></atlas-partial-select>
+      <dp-partial-select partial="beperking" api-data="{results:apiData.results.beperkingen}"></dp-partial-select>
     </div>
 
     <div ng-if="apiData.results.aantekeningen[0]">
-      <atlas-stelselpedia-header definition="AANTEKENING" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="AANTEKENING" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-partial-select partial="aantekening" api-data="{results:apiData.results.aantekeningen}"></atlas-partial-select>
+      <dp-partial-select partial="aantekening" api-data="{results:apiData.results.aantekeningen}"></dp-partial-select>
     </div>
 
     <div ng-if="apiData.results.ontstaan_uit[0]">
-      <atlas-stelselpedia-header definition="ONTSTAAN_UIT" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="ONTSTAAN_UIT" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-partial-select partial="lijst" api-data="{results:apiData.results.ontstaan_uit}"></atlas-partial-select>
+      <dp-partial-select partial="lijst" api-data="{results:apiData.results.ontstaan_uit}"></dp-partial-select>
     </div>
 
     <div ng-if="apiData.results.betrokken_bij[0]">
-      <atlas-stelselpedia-header definition="BETROKKEN_BIJ" use-plural="true"></atlas-stelselpedia-header>
+      <dp-stelselpedia-header definition="BETROKKEN_BIJ" use-plural="true"></dp-stelselpedia-header>
 
-      <atlas-partial-select partial="lijst" api-data="{results:apiData.results.betrokken_bij}"></atlas-partial-select>
+      <dp-partial-select partial="lijst" api-data="{results:apiData.results.betrokken_bij}"></dp-partial-select>
     </div>
 </div>

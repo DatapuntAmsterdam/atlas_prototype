@@ -1,15 +1,26 @@
-describe('The atlas-print-state directive', function () {
+describe('The dp-print-state directive', function () {
     var $compile,
         $rootScope,
-        store;
+        mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: function (callbackFn) {
+                        callbackFn();
+                    },
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            }
+        );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
-            store = _store_;
         });
     });
 
@@ -19,7 +30,7 @@ describe('The atlas-print-state directive', function () {
             scope;
 
         element = document.createElement('div');
-        element.setAttribute('atlas-print-state', '');
+        element.setAttribute('dp-print-state', '');
 
         scope = $rootScope.$new();
 
@@ -32,7 +43,7 @@ describe('The atlas-print-state directive', function () {
     it('adds a class to the element when isPrintMode is true', function () {
         var directive;
 
-        spyOn(store, 'getState').and.returnValue({isPrintMode: true});
+        mockedState = {isPrintMode: true};
 
         directive = getDirective();
 
@@ -42,7 +53,7 @@ describe('The atlas-print-state directive', function () {
     it('does not add a class to the element when isPrintMode is false', function () {
         var directive;
 
-        spyOn(store, 'getState').and.returnValue({isPrintMode: false});
+        mockedState = {isPrintMode: false};
 
         directive = getDirective();
 

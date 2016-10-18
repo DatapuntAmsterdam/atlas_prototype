@@ -1,15 +1,6 @@
-module.exports = {
-    js_app: {
-        files: [
-            'modules/**/!(*.test).js',
-            'modules/**/*.html'
-        ],
-        tasks: [
-            'clean:js',
-            'update-build-js',
-            'test-js'
-        ]
-    },
+var files = require('./config/js-files');
+
+var targets = {
     css: {
         files: [
             'modules/**/*.scss'
@@ -18,14 +9,6 @@ module.exports = {
             'clean:css',
             'update-build-css',
             'test-css'
-        ]
-    },
-    js_tests: {
-        files: [
-            'modules/**/*.test.js'
-        ],
-        tasks: [
-            'test-js'
         ]
     },
     static: {
@@ -49,4 +32,56 @@ module.exports = {
             '!build/temp/**/*'
         ]
     }
+    //
+    // The code below generates targets as follows
+    // `module_${module.slug}`:_{
+    //     files: [
+    //         `modules/${module.slug}/**/!(*.test).js`,
+    //         `modules/${module.slug}/**/*.html`
+    //     ],
+    //     tasks: [
+    //         'clean:js',
+    //         `build-js-module-${module.slug}`,
+    //         'update-build-js',
+    //         `test-js-module-${module.slug}`
+    //     ]
+    // }
+    // `test_${module.slug}` = {
+    //     files: [
+    //         `modules/${module.slug}/**/*.test.js`
+    //     ],
+    //     tasks: [
+    //         `test-js-module-${module.slug}`
+    //     ]
+    // }
+    //
 };
+
+files.modules
+    .forEach(module => {
+        // Module js or html has changed
+        targets[`module_${module.slug}`] = {
+            files: [
+                `modules/${module.slug}/**/!(*.test).js`,
+                `modules/${module.slug}/**/*.html`
+            ],
+            tasks: [
+                'clean:js',
+                `build-js-module-${module.slug}`,
+                'update-build-js',
+                `test-js-module-${module.slug}`
+            ]
+        };
+
+        // Module test has changed
+        targets[`test_${module.slug}`] = {
+            files: [
+                `modules/${module.slug}/**/*.test.js`
+            ],
+            tasks: [
+                `test-js-module-${module.slug}`
+            ]
+        };
+    });
+
+module.exports = targets;

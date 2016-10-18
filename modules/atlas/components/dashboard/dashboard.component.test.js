@@ -3,35 +3,54 @@ describe('The dashboard component', function () {
         $rootScope,
         store,
         dashboardColumns,
-        defaultState;
+        defaultState,
+        mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas', function($provide){
-            $provide.factory('atlasHeaderDirective', function(){
-                return {};
-            });
-            $provide.factory('atlasPageDirective', function(){
-                return {};
-            });
-            $provide.factory('atlasDetailDirective', function(){
-                return {};
-            });
-            $provide.factory('atlasSearchResultsDirective', function(){
-                return {};
-            });
-            $provide.factory('atlasLayerSelectionDirective', function(){
-                return {};
-            });
-            $provide.factory('dpMapDirective', function(){
-                return {};
-            });
-            $provide.factory('dpStraatbeeldDirective', function(){
-                return {};
-            });
-            $provide.factory('dpDataSelectionDirective', function(){
-                return {};
-            });
-        });
+        angular.mock.module(
+            'atlas',
+            {
+                store: {
+                    subscribe: angular.noop,
+                    getState: function () {
+                        return mockedState;
+                    }
+                }
+            },
+            function ($provide) {
+                $provide.factory('dpHeaderDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpPageDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpDetailDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpSearchResultsDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpLayerSelectionDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpMapDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpStraatbeeldDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpDataSelectionDirective', function () {
+                    return {};
+                });
+            }
+        );
 
         angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _dashboardColumns_, _DEFAULT_STATE_) {
             $compile = _$compile_;
@@ -40,6 +59,10 @@ describe('The dashboard component', function () {
             dashboardColumns = _dashboardColumns_;
             defaultState = angular.copy(_DEFAULT_STATE_);
         });
+
+        mockedState = angular.copy(defaultState);
+
+        spyOn(store, 'getState').and.callThrough();
     });
 
     function getComponent () {
@@ -47,7 +70,7 @@ describe('The dashboard component', function () {
             element,
             scope;
 
-        element = document.createElement('atlas-dashboard');
+        element = document.createElement('dp-dashboard');
         scope = $rootScope.$new();
 
         component = $compile(element)(scope);
@@ -65,18 +88,12 @@ describe('The dashboard component', function () {
     });
 
     describe('the print mode has variable height', function () {
-        var component,
-            mockedState;
-
-        beforeEach(function () {
-            mockedState = angular.copy(defaultState);
-        });
+        var component;
 
         it('uses a maximum height in non-print mode', function () {
             mockedState.isPrintMode = false;
-            spyOn(store, 'getState').and.returnValue(mockedState);
 
-            //Default 'screen' mode
+            // Default 'screen' mode
             component = getComponent();
 
             expect(component.find('.u-grid').hasClass('u-height--100')).toBe(true);
@@ -85,19 +102,19 @@ describe('The dashboard component', function () {
             expect(component.find('.u-row').hasClass('u-height--100')).toBe(true);
             expect(component.find('.u-row').hasClass('u-height--false')).toBe(false);
 
-            //Middle column
+            // Middle column
             expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--100')).toBe(true);
             expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--auto')).toBe(false);
 
-            //Right column
+            // Right column
             expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--100')).toBe(true);
             expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--auto')).toBe(false);
 
-            //Open the left column
-            mockedState.map.showLayerSelection = true;
+            // Open the left column
+            mockedState.layerSelection = true;
             component = getComponent();
 
-            //Check the left column
+            // Check the left column
             expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--100')).toBe(true);
             expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--auto')).toBe(false);
         });
@@ -106,25 +123,24 @@ describe('The dashboard component', function () {
             mockedState.detail = {};
             mockedState.page = null;
             mockedState.isPrintMode = true;
-            spyOn(store, 'getState').and.returnValue(mockedState);
 
-            //Default 'screen' mode
+            // Default 'screen' mode
             component = getComponent();
 
             expect(component.find('.u-grid').hasClass('u-height--auto')).toBe(true);
             expect(component.find('.u-row').hasClass('u-height--auto')).toBe(true);
 
-            //Middle column
+            // Middle column
             expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--auto')).toBe(true);
 
-            //Right column
+            // Right column
             expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--auto')).toBe(true);
 
-            //Open the left column
-            mockedState.map.showLayerSelection = true;
+            // Open the left column
+            mockedState.layerSelection = true;
             component = getComponent();
 
-            //Check the left column
+            // Check the left column
             expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--auto')).toBe(true);
         });
     });
@@ -163,7 +179,7 @@ describe('The dashboard component', function () {
             mockedVisibility = {};
 
         beforeEach(function () {
-            mockedVisibility['straatbeeld'] = true;
+            mockedVisibility.straatbeeld = true;
 
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
 
@@ -188,13 +204,10 @@ describe('The dashboard component', function () {
     ['page', 'detail', 'searchResults'].forEach(function (panel) {
         describe('don\'t add scrolling when viewing the fullscreen map (on top of ' + panel + ')', function () {
             var component,
-                mockedState,
                 mockedVisibility = {};
 
             beforeEach(function () {
-                mockedState = angular.copy(defaultState);
                 mockedState.map.isFullscreen = true;
-                spyOn(store, 'getState').and.returnValue(mockedState);
 
                 mockedVisibility[panel] = true;
                 spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
@@ -211,13 +224,10 @@ describe('The dashboard component', function () {
     ['page', 'detail', 'searchResults', 'dataSelection'].forEach(function (panel) {
         describe('when printing ' + panel, function () {
             var component,
-                mockedState,
                 mockedVisibility = {};
 
             beforeEach(function () {
-                mockedState = angular.copy(defaultState);
                 mockedState.isPrintMode = true;
-                spyOn(store, 'getState').and.returnValue(mockedState);
 
                 mockedVisibility[panel] = true;
                 spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
@@ -232,17 +242,17 @@ describe('The dashboard component', function () {
             });
 
             it('does not touch the classes on the right panel', function () {
-                //No padding on the right
+                // No padding on the right
                 expect(component.find('.qa-dashboard__content__column--right').attr('class'))
                     .not.toContain('u-padding__right--1');
                 expect(component.find('.qa-dashboard__content__column--right').attr('class'))
                     .not.toContain('u-padding__right--2');
 
-                //No padding on the left
+                // No padding on the left
                 expect(component.find('.qa-dashboard__content__column--right').attr('class'))
                     .not.toContain('u-padding__left--1');
 
-                //Not scrollable
+                // Not scrollable
                 expect(component.find('.qa-dashboard__content__column--right').attr('class'))
                     .not.toContain('c-dashboard__content--scrollable');
             });

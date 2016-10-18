@@ -27,7 +27,6 @@ describe('The longNameShortener filter', function () {
         });
     });
 
-
     it('replaces long names with abbreviations', function () {
         expect(longNameShortener('Vereniging van Eigenaren blok 35')).toBe('VvE blok 35');
         expect(longNameShortener('Vereniging van Ijgenaren blok 35')).toBe('VvE blok 35');

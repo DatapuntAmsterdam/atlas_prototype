@@ -16,7 +16,7 @@ describe('The straatbeeldReducers factory', function () {
         inputStateWithStraatbeeld.straatbeeld = {
             id: 1,
             location: null,
-            date: new Date(2016, 6 , 12),
+            date: new Date(2016, 6, 12),
             car: {
                 location: [51.0, 4.0],
                 heading: 180,
@@ -71,7 +71,7 @@ describe('The straatbeeldReducers factory', function () {
             var inputState = angular.copy(inputStateWithStraatbeeld),
                 output;
 
-            //With a known previous camera orientation
+            // With a known previous camera orientation
             output = straatbeeldReducers.FETCH_STRAATBEELD(inputState);
             expect(output.straatbeeld.camera).toEqual({
                 heading: 90,
@@ -79,7 +79,7 @@ describe('The straatbeeldReducers factory', function () {
                 fov: 75
             });
 
-            //Without a known camera orientation
+            // Without a known camera orientation
             inputState = angular.copy(defaultState);
             output = straatbeeldReducers.FETCH_STRAATBEELD(inputState);
             expect(output.straatbeeld.camera).toBeNull();
@@ -93,17 +93,6 @@ describe('The straatbeeldReducers factory', function () {
 
             expect(output.straatbeeld.isLoading).toBe(true);
             expect(output.map.isLoading).toBe(true);
-        });
-
-        it('removes the highlighted object from the map', function () {
-            var inputState = angular.copy(defaultState),
-                output;
-
-            inputState.map.highlight = {some: 'object'};
-
-            output = straatbeeldReducers.FETCH_STRAATBEELD(inputState, 123);
-
-            expect(output.map.highlight).toBeNull();
         });
 
         it('resets search, detail, page and dataSelection', function () {
@@ -172,7 +161,7 @@ describe('The straatbeeldReducers factory', function () {
             var inputState = angular.copy(inputStateWithStraatbeeld),
                 output;
 
-            //It keeps the previous camera orientation
+            // It keeps the previous camera orientation
             output = straatbeeldReducers.SHOW_STRAATBEELD_INITIAL(inputState, showStraatbeeldPayload);
             expect(output.straatbeeld.camera).toEqual({
                 heading: 90,
@@ -180,7 +169,7 @@ describe('The straatbeeldReducers factory', function () {
                 fov: 75
             });
 
-            //Or it copies the values from the car orientation if there is no previous camera orientation
+            // Or it copies the values from the car orientation if there is no previous camera orientation
             inputState.straatbeeld.camera = null;
             output = straatbeeldReducers.SHOW_STRAATBEELD_INITIAL(inputState, showStraatbeeldPayload);
             expect(output.straatbeeld.camera).toEqual({
@@ -216,7 +205,7 @@ describe('The straatbeeldReducers factory', function () {
     });
 
     it('STRAATBEELD_SHOW_SUBSEQUENT calls the same reducer as STRAATBEELD_SHOW_INITIAL', function () {
-        //The distinction between these actions lies in the routing middleware, the actual reducer is the same
+        // The distinction between these actions lies in the routing middleware, the actual reducer is the same
         expect(straatbeeldReducers.SHOW_STRAATBEELD_INITIAL).toEqual(straatbeeldReducers.SHOW_STRAATBEELD_SUBSEQUENT);
     });
 

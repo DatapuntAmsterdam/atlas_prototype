@@ -4,7 +4,7 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
+        .module('dpDetail')
         .config(configuration);
 
     configuration.$inject = ['$provide'];

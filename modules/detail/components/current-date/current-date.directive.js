@@ -2,20 +2,20 @@
     'use strict';
 
     angular
-        .module('atlasDetail')
-        .directive('atlasCurrentDate', atlasCurrentDateDirective);
+        .module('dpDetail')
+        .directive('dpCurrentDate', dpCurrentDateDirective);
 
-    function atlasCurrentDateDirective () {
+    function dpCurrentDateDirective () {
         return {
             restrict: 'E',
             scope: true,
             templateUrl: 'modules/detail/components/current-date/current-date.html',
-            controller: AtlasCurrentDateController,
+            controller: DpCurrentDateController,
             controllerAs: 'vm'
         };
     }
 
-    function AtlasCurrentDateController () {
+    function DpCurrentDateController () {
         var vm = this;
 
         vm.currentDate = new Date();

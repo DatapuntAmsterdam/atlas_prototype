@@ -43,15 +43,15 @@ describe('The dp-data-selection-pagination-link component', function () {
 
     it('shows a button for each enabled link', function () {
         var component = getComponent({
-                label: 'Ik ben een knopske',
-                page: 27,
-                enabled: true
-            });
+            label: 'Ik ben een knopske',
+            page: 27,
+            enabled: true
+        });
 
         expect(component.find('button').length).toBe(1);
         expect(component.find('button').text()).toContain('Ik ben een knopske');
 
-        //The direct descendant selector is needed because Angular adds others <span>'s when transcluding dp-link.
+        // The direct descendant selector is needed because Angular adds others <span>'s when transcluding dp-link.
         expect(component.find('> span').length).toBe(0);
     });
 
@@ -78,6 +78,5 @@ describe('The dp-data-selection-pagination-link component', function () {
         });
 
         expect(component.find('button').length).toBe(0);
-
     });
 });
