@@ -44,16 +44,37 @@ describe('The dp-hotspot directive', function () {
     it('creates a button with dimensions based on the distance', function () {
         var directive;
 
-        directive = getComponent(1, 5);
-        expect(directive.find('button').attr('style')).toContain('width: 55px; height: 55px;');
+        directive = getComponent('ABC', 4);
+        expect(directive.find('button').attr('style')).toContain('width: 51px; height: 51px;');
 
-        directive = getComponent(1, 10);
-        expect(directive.find('button').attr('style')).toContain('width: 50px; height: 50px;');
+        directive = getComponent('ABC', 10);
+        expect(directive.find('button').attr('style')).toContain('width: 21px; height: 21px;');
+
+        directive = getComponent('ABC', 15);
+        expect(directive.find('button').attr('style')).toContain('width: 14px; height: 14px;');
+
+        directive = getComponent('ABC', 21);
+        expect(directive.find('button').attr('style')).toContain('width: 10px; height: 10px;');
     });
 
-    it('buttons have a minimum size regardless of the distance', function () {
-        var directive = getComponent(1, 1000);
-        expect(directive.find('button').attr('style')).toContain('width: 30px; height: 30px;');
+    it('hotspots have a minimum and maximum size as if they in the 4-21 meter range', function () {
+        var directive,
+            minimumStyle,
+            maximumStyle;
+
+        // Minimum size
+        directive = getComponent('ABC', 4);
+        minimumStyle = directive.find('button').attr('style');
+
+        directive = getComponent('ABC', 3);
+        expect(minimumStyle).toBe(directive.find('button').attr('style'));
+
+        // Maximum size
+        directive = getComponent('ABC', 21);
+        maximumStyle = directive.find('button').attr('style');
+
+        directive = getComponent('ABC', 22);
+        expect(maximumStyle).toBe(directive.find('button').attr('style'));
     });
 
     it('clicking the hotspot will trigger the FETCH_STRAATBEELD action', function () {
@@ -61,19 +82,22 @@ describe('The dp-hotspot directive', function () {
 
         spyOn(store, 'dispatch');
 
-        directive = getComponent(12589, 20);
+        directive = getComponent('ABC', 20);
         directive.find('button').click();
 
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_STRAATBEELD,
-            payload: 12589
+            payload: {
+                id: 'ABC',
+                isInitial: false
+            }
         });
     });
 
     it('has a screen reader fallback text', function () {
         var directive;
 
-        directive = getComponent(1, 5);
+        directive = getComponent('ABC', 5);
         expect(directive.find('button .u-sr-only').text()).toContain('Navigeer naar deze locatie');
     });
 });

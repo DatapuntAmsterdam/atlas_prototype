@@ -5,9 +5,16 @@
         .module('dpStraatbeeld')
         .directive('dpStraatbeeld', dpStraatbeeldDirective);
 
-    dpStraatbeeldDirective.$inject = ['$rootScope', 'store', 'ACTIONS', 'marzipanoService', 'earthmine', 'orientation'];
+    dpStraatbeeldDirective.$inject = [
+        '$rootScope',
+        'store',
+        'ACTIONS',
+        'marzipanoService',
+        'straatbeeldApi',
+        'orientation'
+    ];
 
-    function dpStraatbeeldDirective ($rootScope, store, ACTIONS, marzipanoService, earthmine, orientation) {
+    function dpStraatbeeldDirective ($rootScope, store, ACTIONS, marzipanoService, straatbeeldApi, orientation) {
         return {
             restrict: 'E',
             scope: {
@@ -27,44 +34,32 @@
 
             scope.updateOrientation = function () {
                 if (!scope.state.isLoading) {
-                    orientation.update(viewer, scope.state.car);
+                    orientation.update(viewer);
                 }
             };
 
-            // Fetch the first scene (always based on location)
-            scope.$watchCollection('state.searchLocation', function (location) {
-                if (angular.isArray(location)) {
-                    earthmine.getImageDataByCoordinates(
-                        location[0],
-                        location[1]
-                    ).then(function (earthmineData) {
+            // Fetch scene
+            scope.$watch('state.id', function (id) {
+                if (angular.isString(id)) {
+                    straatbeeldApi.getImageDataById(id).then(function (straatbeeldData) {
+                        var type = scope.state.isInitial ? ACTIONS.SHOW_STRAATBEELD_INITIAL
+                            : ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT;
+
                         store.dispatch({
-                            type: ACTIONS.SHOW_STRAATBEELD_INITIAL,
-                            payload: earthmineData
+                            type: type,
+                            payload: straatbeeldData
                         });
                     });
                 }
             });
 
-            // Fetch scene #2-n
-            scope.$watchCollection('state.id', function (id) {
-                if (angular.isNumber(id)) {
-                    earthmine.getImageDataById(id).then(function (earthmineData) {
-                        store.dispatch({
-                            type: ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT,
-                            payload: earthmineData
-                        });
-                    });
-                }
-            });
-
-            // Show new scene
-            scope.$watchCollection('state.car.location', function (location) {
-                if (angular.isArray(location)) {
+            scope.$watchCollection('state.image', function () {
+                if (angular.isObject(scope.state.image)) {
                     marzipanoService.loadScene(
-                        scope.state.id,
-                        scope.state.car,
-                        scope.state.camera,
+                        scope.state.image,
+                        scope.state.heading,
+                        scope.state.pitch,
+                        scope.state.fov,
                         scope.state.hotspots
                     );
                 }

@@ -33,19 +33,6 @@
             }
         }
 
-        function hasStraatbeeld (payload) {
-            return payload.id || hasSearchLocation(payload);
-        }
-
-        /**
-         * @description This is a 'search nearest straatbeeld' location, not the location of the camera of a
-         * found panorama scene. The actual location is not stored in the URL, this is implicitly accessible
-         * through the ID.
-         */
-        function hasSearchLocation (payload) {
-            return payload.plat && payload.plon;
-        }
-
         function getSearchState (oldState, payload) {
             if (angular.isString(payload.zoek)) {
                 var searchState = angular.copy(oldState.search) || {};
@@ -140,40 +127,31 @@
         }
 
         function getStraatbeeldState (oldState, payload) {
-            if (hasStraatbeeld(payload)) {
-                var date = null,
-                    car = null,
-                    camera,
-                    hotspots = [],
-                    isLoading = true;
-
-                if (oldState.straatbeeld && oldState.straatbeeld.id === Number(payload.id)) {
-                    // Stuff that isn't in the URL but implicitly linked through the ID
-                    date = oldState.straatbeeld.date;
-                    car = oldState.straatbeeld.car || null;
-                    hotspots = oldState.straatbeeld.hotspots;
-                    isLoading = oldState.straatbeeld.isLoading;
-                }
-
-                camera = {
-                    heading: Number(payload.heading),
-                    pitch: Number(payload.pitch)
+            if (payload.id) {
+                var newStraatbeeld = {
+                    pitch: Number(payload.pitch),
+                    fov: Number(payload.fov),
+                    id: payload.id,
+                    heading: Number(payload.heading)
                 };
 
-                if (payload.fov) {
-                    camera.fov = Number(payload.fov);
+                if (oldState.straatbeeld && oldState.straatbeeld.id === payload.id) {
+                    newStraatbeeld.image = oldState.straatbeeld.image;
+                    newStraatbeeld.hotspots = oldState.straatbeeld.hotspots;
+                    newStraatbeeld.date = oldState.straatbeeld.date;
+                    newStraatbeeld.location = oldState.straatbeeld.location;
+                    newStraatbeeld.isInitial = false;
+                    newStraatbeeld.isLoading = oldState.straatbeeld.isLoading;
+                } else {
+                    newStraatbeeld.image = null;
+                    newStraatbeeld.hotspots = [];
+                    newStraatbeeld.date = null;
+                    newStraatbeeld.location = null;
+                    newStraatbeeld.isInitial = true;
+                    newStraatbeeld.isLoading = true;
                 }
 
-                return {
-                    id: Number(payload.id) || null,
-                    searchLocation:
-                        hasSearchLocation(payload) ? [Number(payload.plat), Number(payload.plon)] : null,
-                    date: date,
-                    car: car,
-                    camera: camera,
-                    hotspots: hotspots,
-                    isLoading: isLoading
-                };
+                return newStraatbeeld;
             } else {
                 return null;
             }

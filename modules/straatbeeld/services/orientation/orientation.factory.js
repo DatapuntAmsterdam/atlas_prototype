@@ -5,31 +5,28 @@
         .module('dpStraatbeeld')
         .factory('orientation', orientationFactory);
 
-    orientationFactory.$inject = ['store', 'ACTIONS'];
+    orientationFactory.$inject = ['store', 'ACTIONS', 'angleConversion'];
 
-    function orientationFactory (store, ACTIONS) {
+    function orientationFactory (store, ACTIONS, angleConversion) {
         return {
             update: update
         };
 
-        function update (viewer, car) {
-            var cameraHeading,
-                cameraYaw,
-                cameraPitch,
-                cameraFov;
+        function update (viewer) {
+            var pitch,
+                fov,
+                heading;
 
-            cameraYaw = viewer.view().yaw();
-            cameraPitch = viewer.view().pitch();
-            cameraFov = viewer.view().fov();
-
-            cameraHeading = car.heading + cameraYaw;
+            pitch = angleConversion.radiansToDegrees(viewer.view().pitch());
+            fov = angleConversion.radiansToDegrees(viewer.view().fov());
+            heading = angleConversion.radiansToDegrees(viewer.view().yaw());
 
             store.dispatch({
-                type: ACTIONS.STRAATBEELD_SET_ORIENTATION,
+                type: ACTIONS.SET_STRAATBEELD_ORIENTATION,
                 payload: {
-                    heading: cameraHeading,
-                    pitch: cameraPitch,
-                    fov: cameraFov
+                    heading: heading,
+                    pitch: pitch,
+                    fov: fov
                 }
             });
         }

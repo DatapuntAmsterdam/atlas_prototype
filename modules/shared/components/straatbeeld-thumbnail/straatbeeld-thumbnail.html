@@ -1,6 +1,15 @@
-<h3 class="o-header__subtitle u-margin__bottom--1-5">Panorama</h3>
-<button class="u-block u-width-100 u-margin__bottom--4" ng-click="vm.openStraatbeeld()" title="Straatbeeld preview">
+<h3 class="o-header__subtitle u-margin__bottom--2-5">Straatbeeld</h3>
+
+<button ng-if="vm.hasThumbnail" class="u-block u-width-100 u-margin__bottom--4" ng-click="vm.openStraatbeeld()" title="Straatbeeld preview">
     <div class="u-aspect-ratio u-aspect-ratio--16-9">
         <img ng-src="{{vm.imageUrl}}" alt="Straatbeeld preview">
     </div>
 </button>
+
+<div ng-if="!vm.isLoading && !vm.hasThumbnail">
+	<dp-panel is-panel-visible="true" type="warning">
+		<div class="qa-found-no-straatbeeld">
+			Geen panorama beschikbaar (binnen {{ vm.radius }}m van deze locatie). Tip: kies via de kaart een nabije locatie.</div>
+	</dp-panel>
+</div>
+<dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>

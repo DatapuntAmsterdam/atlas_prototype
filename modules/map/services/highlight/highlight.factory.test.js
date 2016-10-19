@@ -54,6 +54,7 @@ describe('The highlight factory', function () {
                     type: 'Point',
                     coordinates: [100.0, 0.0]
                 },
+                orientation: 145,
                 useAutoFocus: false
             }
         },
@@ -68,11 +69,6 @@ describe('The highlight factory', function () {
         angular.mock.module(
             'dpMap',
             {
-                angleConversion: {
-                    radiansToDegrees: function () {
-                        return 180;
-                    }
-                },
                 mapConfig: {
                     DEFAULT_ZOOM_HIGHLIGHT: 14
                 },
@@ -122,8 +118,7 @@ describe('The highlight factory', function () {
                         foo: 'c'
                     },
                     item_rotated_marker: {
-                        foo: 'd',
-                        orientation: Math.PI
+                        foo: 'd'
                     }
                 });
             }
@@ -249,7 +244,7 @@ describe('The highlight factory', function () {
 
         expect(L.marker).toHaveBeenCalledWith('FAKE_LATLNG', {
             icon: 'FAKE_ICON',
-            rotationAngle: 180
+            rotationAngle: 145
         });
     });
 

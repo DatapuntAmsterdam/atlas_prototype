@@ -29,6 +29,7 @@ module.exports = {
         "eol-last": "error",            //require or disallow newline at the end of files
         "no-shadow": "error",           // disallow variable declarations shadowing outer scope variables
         "angular/json-functions": "error",    // use angular.fromJson/toJson instead of JSON.parse and JSON.stringify
+        "angular/log": 0,
         "spaced-comment": "error",      // enforce consistent spacing after the // or /* in a comment
         "indent": [                     // enforce consistent indentation
             "error",
@@ -138,7 +139,9 @@ module.exports = {
         "no-new-func": "error",             // disallow new operators with the Function object
         "no-new-wrappers": "error",         // disallow new operators with the String, Number, and Boolean objects
         "no-invalid-this": "error",         // disallow this keywords outside of classes or class-like objects
-        "require-yield": "error"            // require generator functions to contain yield
+        "require-yield": "error",            // require generator functions to contain yield
+        "no-console": ["error", { allow: ["warn", "log"] }],
+
     },
     "plugins": [
         "standard",                         // Shareable config for JavaScript Standard Style

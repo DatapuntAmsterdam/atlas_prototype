@@ -13,36 +13,36 @@
 
         globalConfig = {
             DEFAULT_FOV: 80,
-            MAX_FOV: 120,
-            MAX_RESOLUTION: 16 * 1024,
-            RESOLUTION_LEVELS: [
+            MAX_FOV: 100,
+            MAX_RESOLUTION: 2 * 1024,
+            CAMERA_HEIGHT: 1.8,
+            LEVEL_PROPERTIES_LIST: [
+                {
+                    tileSize: 256,
+                    size: 256,
+                    fallbackOnly: true
+                },
                 {
                     tileSize: 512,
                     size: 512
-                }, {
+                },
+                {
                     tileSize: 512,
                     size: 1024
-                }, {
+                },
+                {
                     tileSize: 512,
                     size: 2048
                 }
-            ],
-            HOTSPOT_PERSPECTIVE: {
-                perspective: {
-                    radius: 750,
-                    extraRotations: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
-                }
-            }
+            ]
         };
 
         environmentConfig = {
             DEVELOPMENT: {
-                DATA_ENDPOINT: 'https://map-acc.datapunt.amsterdam.nl/earthmine/get_panos.php',
-                TILE_ENDPOINT: 'https://map-acc.datapunt.amsterdam.nl/earthmine/tile_proxy.php'
+                STRAATBEELD_ENDPOINT: 'https://api-acc.datapunt.amsterdam.nl/panorama/opnamelocatie/'
             },
             PRODUCTION: {
-                DATA_ENDPOINT: 'https://map.datapunt.amsterdam.nl/earthmine/get_panos.php',
-                TILE_ENDPOINT: 'https://map.datapunt.amsterdam.nl/earthmine/tile_proxy.php'
+                STRAATBEELD_ENDPOINT: 'https://api.datapunt.amsterdam.nl/panorama/opnamelocatie/'
             }
         };
 

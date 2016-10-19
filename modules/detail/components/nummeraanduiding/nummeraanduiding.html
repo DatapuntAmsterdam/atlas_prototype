@@ -1,0 +1,16 @@
+<div class="o-header">
+	<dp-stelselpedia-header heading="{{vm.isGevormd ? vm.headingHtml : vm.heading}}" definition="NUMMERAANDUIDING" meta-data="vm.metaData">
+	</dp-stelselpedia-header>
+
+	<div ng-if="!vm.hoofdadres || vm.isGevormd">
+		<div class="c-nummeraanduiding">
+			<dp-panel ng-if="!vm.hoofdadres" is-panel-visible="true" type="warning">
+				Dit is een nevenadres
+			</dp-panel>
+
+			<dp-panel ng-if="vm.isGevormd" is-panel-visible="true" type="danger" class-name="c-nummeraanduiding">
+				{{vm.statusOmschrijving}}
+			</dp-panel>
+		</div>
+	</div>
+<div>

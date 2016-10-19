@@ -15,7 +15,6 @@
 @import "styles/components/list";
 @import "styles/components/list-bulleted";
 @import "styles/components/loadmore";
-@import "styles/components/panel";
 @import "styles/components/paragraph";
 @import "styles/components/table";
 
@@ -32,6 +31,9 @@
 @import "styles/utilities/width";
 
 @import "components/loading-indicator/loading-indicator";
+@import "components/panel/panel";
+
+
 
 .is-print-mode {
   @import "styles/base/reset-print";

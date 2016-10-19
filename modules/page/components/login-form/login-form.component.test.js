@@ -105,7 +105,7 @@ describe('The dp-login-form component', function () {
             expect(component.find('form').length).toBe(1);
 
             // An error message is shown
-            expect(component.find('.qa-error-message').text()).toContain('I_AM_AN_ERROR_MESSAGE');
+            expect(component.find('.c-panel--danger').text()).toContain('I_AM_AN_ERROR_MESSAGE');
         });
     });
 });

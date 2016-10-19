@@ -13,8 +13,8 @@ module.exports = function (grunt) {
     grunt.registerTask('lint', linttasks);
 
     grunt.registerTask('test-js', [
-        'lint',
-        'test-js-modules'
+        'test-js-modules',
+        'lint'
     ]);
 
     grunt.registerTask('test-css', [
