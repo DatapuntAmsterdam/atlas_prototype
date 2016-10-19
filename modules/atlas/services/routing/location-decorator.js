@@ -17,24 +17,31 @@
 
             let dictionary = urlAbbreviations.abbreviations;
 
-            // Compose a variable name by placing a _ before and set to uppercase
-            let varName = name => `_${name.toUpperCase()}`;
+            // Compose a variable name by uppercasing the name
+            let variable = name => `_${name.toUpperCase()}_`;
 
-            // Transform any input string to a regular expression, escaping some meta characters
-            let toRegExp = s => new RegExp(s.replace(/([\.\^\$])/, '\\$1'), 'g');
+            let abbreviateValue = (value, variableName, variableValue) => value.replace(
+                // Replace variable value by the variable name
+                new RegExp(variableValue.replace(/([\.\^\$])/, '\\$1'), 'g'),   // escape meta charactere
+                variable(variableName));    // variables are uppercase
+
+            let restoreValue = (value, variableName, variableValue) => value.replace(
+                // Replace variable name by the variable value
+                new RegExp(variable(variableName), 'g'),
+                `${variableValue}`);
 
             // Provide for a compress and uncompress method (mirror methods)
             let [compress, uncompress] = [
-                {io: (val, key) => [toRegExp(key), varName(val)]},  // key maps to short value
-                {io: (val, key) => [toRegExp(varName(val)), key]}   // short value maps to key
+                {replace: abbreviateValue},
+                {replace: restoreValue}
             ].map(abbreviator => {
                 return obj => {
-                    dictionary.forEach((val, key) => {
-                        let [input, output] = abbreviator.io(val, key);
+                    dictionary.forEach((variableValue, variableName) => {
                         Object.entries(obj)
-                            .map(entry => { return {prop: entry[0], value: entry[1]};})
+                            .map(entry => { return {key: entry[0], value: entry[1]};})
                             .filter(entry => angular.isString(entry.value))  // filter only truthy values
-                            .forEach(entry => obj[entry.prop] = entry.value.replace(input, output));
+                            .forEach(entry =>
+                                obj[entry.key] = abbreviator.replace(entry.value, variableName, variableValue));
                     });
                     return obj;
                 };

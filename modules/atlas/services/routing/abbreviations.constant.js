@@ -2,11 +2,16 @@
     angular
         .module('atlas')
         .constant('ABBREVIATIONS', {
-            akl: 'actieve-kaartlagen',
+            // key (unique variableName): value (arbitrary variableValue)
             api: 'api.datapunt.amsterdam.nl',
-            bk: 'basiskaart',
-            kls: 'kaartlagen-selectie',
+            fdvrog: 'financiële_dienstverlening_verhuur_van_roerend_en_onroerend_goed',
+            gb: 'gebied',
+            hc: 'horeca',
+            hvo: 'handel_vervoer_opslag',
             l: 'lagen',
+            lb: 'landbouw',
+            lf: 'luchtfoto',
+            sd: 'stadsdeel',
             tg: 'topografie',
             zb: 'zichtbaar'
         });

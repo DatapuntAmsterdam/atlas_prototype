@@ -12,8 +12,8 @@
 
         // Construct a map from the ABBREVIATIONS oobject
         // Reason: Maps do not prevent duplicate keys
-        Object.keys(ABBREVIATIONS).forEach(key => {
-            abbreviations.set(ABBREVIATIONS[key], key);
+        Object.keys(ABBREVIATIONS).forEach(variableName => {
+            abbreviations.set(variableName, ABBREVIATIONS[variableName]);
         });
 
         return {
