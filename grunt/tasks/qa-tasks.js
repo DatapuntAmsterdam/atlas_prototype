@@ -33,14 +33,13 @@ module.exports = function (grunt) {
     // The tasks are a per-module version of the test-js task
     // A Taiga task has been made to have all modules tested with full coverage
     files.modules.forEach(module => {
+        // Run the plain tests
+        grunt.registerTask(`plain-test-js-module-${module.slug}`,
+            [`concat:test_${module.slug}`, `babel-test-${module.slug}`, `karma:${module.slug}_all`]);
+        // Lint the tests before running the tests
         grunt.registerTask(`test-js-module-${module.slug}`,
-            linters
-                .map(linter => `newer:${linter}:module_${module.slug}`)
-                .concat([
-                    `concat:test_${module.slug}`,
-                    `babel-test-${module.slug}`,
-                    `karma:${module.slug}_all`
-                ])
+            linters.map(linter => `newer:${linter}:module_${module.slug}`)
+                   .concat(`plain-test-js-module-${module.slug}`)
         );
     });
 };
