@@ -69,6 +69,7 @@
                     <div ng-if="vm.visibility.detail" ng-controller="DetailController as vm">
                         <dp-detail
                             endpoint="{{vm.endpoint}}"
+                            reload="vm.reload"
                             is-loading="vm.isLoading">
                         </dp-detail>
                     </div>

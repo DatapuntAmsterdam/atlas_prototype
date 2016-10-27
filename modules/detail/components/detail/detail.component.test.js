@@ -160,10 +160,12 @@ describe('the dp-detail component', function () {
         element = document.createElement('dp-detail');
         element.setAttribute('endpoint', '{{endpoint}}');
         element.setAttribute('is-loading', 'isLoading');
+        element.setAttribute('reload', 'reload');
 
         scope = $rootScope.$new();
         scope.endpoint = endpoint;
         scope.isLoading = isLoading;
+        scope.reload = false;
 
         component = $compile(element)(scope);
         scope.$apply();
@@ -268,6 +270,40 @@ describe('the dp-detail component', function () {
             payload: {
                 display: 'Een of ander kadastraal object',
                 geometry: mockedGeometryMultiPolygon
+            }
+        });
+    });
+
+    it('loads new API data and triggers a new SHOW_DETAIL action when the reload flag has been set', function () {
+        var component,
+            scope,
+            endpoint;
+
+        expect(store.dispatch).not.toHaveBeenCalled();
+
+        // Set an initial endpoint
+        endpoint = 'http://www.fake-endpoint.com/bag/nummeraanduiding/123/';
+        component = getComponent(endpoint, false);
+        scope = component.isolateScope();
+
+        // Turn on the reload flag
+        scope.vm.reload = true;
+        $rootScope.$apply();
+
+        expect(scope.vm.apiData).toEqual({
+            results: {
+                _display: 'Adresstraat 1A',
+                dummy: 'A',
+                something: 3,
+                naam: 'naam'
+            }
+        });
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: ACTIONS.SHOW_DETAIL,
+            payload: {
+                display: 'Adresstraat 1A',
+                geometry: mockedGeometryPoint
             }
         });
     });

@@ -4,6 +4,7 @@
         .component('dpDetail', {
             bindings: {
                 endpoint: '@',
+                reload: '=',
                 isLoading: '='
             },
             templateUrl: 'modules/detail/components/detail/detail.html',
@@ -24,16 +25,24 @@
     ];
 
     function DpDetailController (
-        $scope,
-        store,
-        ACTIONS,
-        api,
-        endpointParser,
-        user,
-        geometry,
-        geojson,
-        crsConverter) {
+            $scope,
+            store,
+            ACTIONS,
+            api,
+            endpointParser,
+            user,
+            geometry,
+            geojson,
+            crsConverter) {
         var vm = this;
+
+        // Reload the data when the reload flag has been set (endpoint has not
+        // changed)
+        $scope.$watch('vm.reload', reload => {
+            if (reload) {
+                getData(vm.endpoint);
+            }
+        });
 
         // (Re)load the data when the endpoint is set or gets changed
         $scope.$watch('vm.endpoint', getData);
