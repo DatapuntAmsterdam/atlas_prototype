@@ -1,7 +1,5 @@
 module.exports = function (grunt) {
-    var uniqueIdCss;
-
-    uniqueIdCss = grunt.config.get('uniqueIdCss');
+    var uniqueIdCss = grunt.config.get('uniqueIdCss');
 
     return {
         options: {

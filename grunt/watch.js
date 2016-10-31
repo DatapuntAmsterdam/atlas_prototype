@@ -23,6 +23,13 @@ var targets = {
         files: 'modules/shared/assets/**/*',
         tasks: ['copy:assets']
     },
+    grunt: {
+        files: ['Gruntfile.js', 'grunt/**/*'],
+        tasks: ['eslint:grunt'],
+        options: {
+            reload: true
+        }
+    },
     livereload: {
         options: {
             livereload: true
@@ -79,8 +86,11 @@ files.modules
                 `modules/${module.slug}/**/*.test.js`
             ],
             tasks: [
-                `test-js-module-${module.slug}`
-            ]
+                `plain-test-js-module-${module.slug}`
+            ],
+            options: {
+                'spawn': false
+            }
         };
     });
 
