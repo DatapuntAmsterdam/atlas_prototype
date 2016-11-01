@@ -10,7 +10,7 @@
                 hoofdadres: '=',
                 verblijfsobjectEndpoint: '@'
             },
-            templateUrl: 'modules/detail/components/nummeraanduiding-header/nummeraanduiding-header.html',
+            templateUrl: 'modules/detail/components/nummeraanduiding/nummeraanduiding.html',
             controller: DpNummeraanduidingHeaderController,
             controllerAs: 'vm'
         });

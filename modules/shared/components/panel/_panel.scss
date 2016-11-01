@@ -2,6 +2,7 @@
   position: relative;
   margin-bottom: $base-whitespace * 4;
   padding: $base-whitespace;
+  padding-right: $button-size;
   background-color: $secondary-gray10;
 
   &.c-panel--warning {
@@ -13,4 +14,12 @@
     background-color: $primary-contrast;
     color: $primary-light;
   }
+}
+
+.c-panel--header {
+  position: absolute;
+  top: 0;
+  right: ($button-size + $base-whitespace) * 2; //afstand berekend mbt metadata en stelselpedia buttons
+  padding: 0 $base-whitespace;
+  line-height: $button-size;
 }

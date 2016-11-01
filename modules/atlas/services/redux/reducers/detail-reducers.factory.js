@@ -26,6 +26,7 @@
 
             newState.detail = {
                 endpoint: payload,
+                reload: Boolean(oldState.detail && oldState.detail.endpoint === payload),
                 isLoading: true
             };
 
@@ -57,6 +58,7 @@
 
                 newState.map.isLoading = false;
                 newState.detail.isLoading = false;
+                newState.detail.reload = false;
             }
 
             return newState;

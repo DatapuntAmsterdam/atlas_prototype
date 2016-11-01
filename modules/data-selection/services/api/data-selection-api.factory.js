@@ -37,13 +37,14 @@
                     number_of_pages: data.page_count,
                     number_of_records: data.object_count,
                     filters: formatFilters(dataset, data.aggs_list),
-                    tableData: formatTableData(dataset, data.object_list)
+                    tableData: formatTableData(dataset, data.object_list),
+                    listData: formatListData(dataset, data.object_list)
                 };
             });
         }
 
         function formatFilters (dataset, rawData) {
-            var formattedFilters = angular.copy(dataSelectionConfig[dataset].FILTERS);
+            const formattedFilters = angular.copy(dataSelectionConfig[dataset].FILTERS);
 
             return formattedFilters.filter(function (filter) {
                 // Only show the filters that are returned by the API
@@ -66,38 +67,40 @@
         }
 
         function formatTableData (dataset, rawData) {
-            var tableHead,
-                tableFormat,
-                tableBody;
+            return {
+                head: dataSelectionConfig[dataset].FIELDS
+                    .map(field => field.label),
 
-            tableHead = dataSelectionConfig[dataset].FIELDS.map(function (field) {
-                return field.label;
-            });
+                format: dataSelectionConfig[dataset].FIELDS
+                    .map(field => field.format),
 
-            tableFormat = dataSelectionConfig[dataset].FIELDS.map(function (field) {
-                return field.format;
-            });
+                body: rawData.map(rawDataRow => {
+                    return {
+                        detailEndpoint: getDetailEndpoint(dataset, rawDataRow),
+                        fields: dataSelectionConfig[dataset].FIELDS
+                            .map(field => rawDataRow[field.slug])
+                    };
+                })
+            };
+        }
 
-            tableBody = rawData.map(function (rawDataRow) {
-                var detailEndpoint;
-
-                detailEndpoint = dataSelectionConfig[dataset].ENDPOINT_DETAIL;
-                detailEndpoint += rawDataRow[dataSelectionConfig[dataset].PRIMARY_KEY];
-                detailEndpoint += '/';
+        function formatListData (dataset, rawData) {
+            return rawData.map(row => {
+                const nummer = ' ' + row.huisnummer + row.huisletter,
+                    fullNummer = row.huisnummer_toevoeging ? nummer + '-' + row.huisnummer_toevoeging : nummer;
 
                 return {
-                    detailEndpoint: detailEndpoint,
-                    fields: dataSelectionConfig[dataset].FIELDS.map(function (field) {
-                        return rawDataRow[field.slug];
-                    })
+                    adres: row._openbare_ruimte_naam + fullNummer,
+                    ligplaats: Boolean(row.ligplaats_id),
+                    standplaats: Boolean(row.standplaats_id),
+                    detailEndpoint: getDetailEndpoint(dataset, row)
                 };
             });
+        }
 
-            return {
-                head: tableHead,
-                format: tableFormat,
-                body: tableBody
-            };
+        function getDetailEndpoint (dataset, rawDataRow) {
+            return dataSelectionConfig[dataset].ENDPOINT_DETAIL +
+                rawDataRow[dataSelectionConfig[dataset].PRIMARY_KEY] + '/';
         }
     }
 })();

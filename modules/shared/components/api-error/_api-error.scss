@@ -1,0 +1,9 @@
+.c-api-error__panel {
+  .c-panel {
+    margin-top: 2 * $base-whitespace;
+    margin-bottom: 0;
+    padding-top: $base-whitespace * .3;
+    padding-bottom: $base-whitespace * .4;
+    padding-left: $base-whitespace;
+  }
+}

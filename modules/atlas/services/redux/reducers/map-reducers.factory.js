@@ -15,6 +15,7 @@
         reducers[ACTIONS.MAP_REMOVE_OVERLAY] = mapRemoveOverlayReducer;
         reducers[ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY] = mapToggleVisibilityOverlay;
         reducers[ACTIONS.MAP_PAN] = mapPanReducer;
+        reducers[ACTIONS.LOCATION_CHANGE] = locationChangeReducer;
         reducers[ACTIONS.MAP_ZOOM] = mapZoomReducer;
         reducers[ACTIONS.MAP_FULLSCREEN] = mapFullscreenReducer;
         reducers[ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS] = showActiveOverlaysReducer;
@@ -91,6 +92,21 @@
             }
             return newState;
         }
+
+        /**
+         * @param {Object} oldState
+         * @param {Array} payload - The new position in Array format, e.g. [52.123, 4.789]
+         *
+         * @returns {Object} newState
+         */
+        function locationChangeReducer (oldState, payload) {
+            var newState = angular.copy(oldState);
+
+            newState.map.viewCenter = payload;
+
+            return newState;
+        }
+
         /**
          * @param {Object} oldState
          * @param {Array} payload - The new position in Array format, e.g. [52.123, 4.789]
@@ -98,11 +114,8 @@
          * @returns {Object} newState
          */
         function mapPanReducer (oldState, payload) {
-            var newState = angular.copy(oldState);
-
-            newState.map.viewCenter = payload;
-
-            return newState;
+            // Currently map panning is equal to simply changing the location (lat,lon)
+            return locationChangeReducer(oldState, payload);
         }
 
         /**

@@ -88,10 +88,22 @@ describe('The dataSelectionApi factory', function () {
             },
             object_list: [
                 {
+                    _openbare_ruimte_naam: 'Binnenkant',
+                    huisletter: 'A',
+                    huisnummer: '1',
+                    huisnummer_toevoeging: '2',
+                    ligplaats_id: '',
+                    standplaats_id: '0123456',
                     openingstijden: 'Alleen op dinsdag',
                     adres: 'Sneeuwbalweg 24',
                     id: '1'
                 }, {
+                    _openbare_ruimte_naam: 'Binnenkant',
+                    huisletter: 'B',
+                    huisnummer: '1',
+                    huisnummer_toevoeging: '',
+                    ligplaats_id: '0123456',
+                    standplaats_id: '',
                     adres: 'Marnixstraat 1',
                     openingstijden: 'Ligt er een beetje aan',
                     id: '2'
@@ -260,6 +272,29 @@ describe('The dataSelectionApi factory', function () {
 
             expect(angular.toJson(output.tableData.body)).not.toContain('whatever');
             expect(angular.toJson(output.tableData.body)).not.toContain('sure');
+        });
+    });
+
+    describe('formatListData', function () {
+        it('returns the data needed for list view', function () {
+            var output = {};
+
+            dataSelectionApi.query('zwembaden', {}, 1).then(function (_output_) {
+                output = _output_;
+            });
+            $rootScope.$apply();
+
+            expect(output.listData).toEqual([{
+                adres: 'Binnenkant 1A-2',
+                ligplaats: false,
+                standplaats: true,
+                detailEndpoint: 'https://amsterdam.nl/api_endpoint/zwembaden/1/'
+            }, {
+                adres: 'Binnenkant 1B',
+                ligplaats: true,
+                standplaats: false,
+                detailEndpoint: 'https://amsterdam.nl/api_endpoint/zwembaden/2/'
+            }]);
         });
     });
 });

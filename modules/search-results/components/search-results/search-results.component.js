@@ -16,9 +16,9 @@
             controllerAs: 'vm'
         });
 
-    DpSearchResultsController.$inject = ['$scope', 'SEARCH_CONFIG', 'search', 'geosearch', 'store'];
+    DpSearchResultsController.$inject = ['$scope', 'search', 'geosearch', 'store'];
 
-    function DpSearchResultsController ($scope, SEARCH_CONFIG, search, geosearch, store) {
+    function DpSearchResultsController ($scope, search, geosearch, store) {
         var vm = this;
 
         /**
@@ -27,10 +27,6 @@
         $scope.$watchGroup(['vm.query', 'vm.category'], function () {
             if (angular.isString(vm.query) && vm.query.length) {
                 if (angular.isString(vm.category) && vm.category.length) {
-                    vm.categoryName = SEARCH_CONFIG.QUERY_ENDPOINTS.filter(function (endpoint) {
-                        return endpoint.slug === vm.category;
-                    })[0].label_plural;
-
                     search.search(vm.query, vm.category).then(setSearchResults);
                 } else {
                     search.search(vm.query).then(setSearchResults);

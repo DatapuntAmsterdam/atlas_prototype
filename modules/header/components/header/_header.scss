@@ -18,13 +18,13 @@
 }
 
 .site-header__logo {
+  @include font-size($xl-header-font);
   display: block;
   height: $site-header-height;
-  padding-left: 25px;
+  padding-left: $base-whitespace * 2.5;
   background-color: $secondary-gray80;
   color: $primary-light;
   font-family: $header-font-family;
-  font-size: 35px;
   cursor: pointer;
 
   img {
@@ -86,5 +86,58 @@
 
   &:hover {
     background-color: $secondary-gray40;
+  }
+}
+
+.c-exit-print-mode {
+  position: absolute;
+  top: -41px;
+  right: -21px;
+}
+
+.c-exit-print-mode__button {
+  width: $button-size;
+  height: $button-size;
+  background-image: url("assets/icons/close-hover.svg");
+}
+
+.c-print-button {
+  float: right;
+  font-family: $header-font-family;
+  font-weight: 500;
+  line-height: $button-size;
+
+  &::after {
+    display: inline-block;
+    width: $button-size;
+    height: $button-size;
+    margin-left: $base-whitespace / 2;
+    background-image: url("assets/icons/print-icoon.svg");
+    content: "";
+    vertical-align: middle;
+  }
+
+  &:hover {
+    color: $primary-contrast;
+    text-decoration: underline;
+
+    &::after {
+      background-image: url("assets/icons/print-icoon-hover.svg");
+    }
+  }
+}
+
+/* SASSLint enforces merging of selectors */
+.is-print-mode {
+  .site-header {
+    background-color: transparent;
+  }
+
+  .site-header__menu__item {
+    color: $secondary-gray60;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
 }

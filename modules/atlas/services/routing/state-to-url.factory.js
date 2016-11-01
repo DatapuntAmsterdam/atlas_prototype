@@ -122,21 +122,10 @@
             var params = {};
 
             if (state.straatbeeld) {
-                if (state.straatbeeld.id) {
-                    params.id = String(state.straatbeeld.id);
-
-                    if (state.straatbeeld.camera) {
-                        params.heading = String(state.straatbeeld.camera.heading);
-                        params.pitch = String(state.straatbeeld.camera.pitch);
-
-                        if (state.straatbeeld.camera.fov) {
-                            params.fov = String(state.straatbeeld.camera.fov);
-                        }
-                    }
-                } else {
-                    params.plat = String(state.straatbeeld.searchLocation[0]);
-                    params.plon = String(state.straatbeeld.searchLocation[1]);
-                }
+                params.id = state.straatbeeld.id;
+                params.heading = String(state.straatbeeld.heading);
+                params.pitch = String(state.straatbeeld.pitch);
+                params.fov = String(state.straatbeeld.fov);
             }
 
             return params;
@@ -147,6 +136,9 @@
                 datasetFilters = [];
 
             if (angular.isObject(state.dataSelection)) {
+                if (state.dataSelection.listView) {
+                    params['list-view'] = state.dataSelection.listView;
+                }
                 params.dataset = state.dataSelection.dataset;
 
                 angular.forEach(state.dataSelection.filters, function (value, key) {

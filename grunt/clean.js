@@ -8,7 +8,8 @@ module.exports = {
     js: {
         src: [
             'build/atlas.*.js',
-            'build/atlas.*.js.map'
+            'build/atlas.*.js.map',
+            'build/temp/es6'
         ]
     },
     css: {

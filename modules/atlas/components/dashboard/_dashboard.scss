@@ -1,3 +1,5 @@
+@import "modules/shared/styles/config";
+
 $dashboard-heading-height: 50px;
 
 .c-dashboard {
@@ -22,3 +24,37 @@ $dashboard-heading-height: 50px;
   overflow-y: auto;
 }
 
+.is-print-mode {
+  .c-dashboard {
+    padding: $base-whitespace * 2 0;
+    border-right: solid $secondary-gray40 1px;
+    border-left: solid $secondary-gray40 1px;
+    overflow: visible;
+  }
+
+  .c-dashboard__heading {
+    position: relative;
+    height: $dashboard-heading-height * 2;
+    padding: $base-whitespace * 2;
+    z-index: 2;
+  }
+
+  .c-dashboard__content {
+    padding: $base-whitespace $base-whitespace * 2;
+    box-shadow: 0 0 4px $secondary-gray40;
+  }
+}
+
+@media print {
+  .is-print-mode {
+    .c-dashboard {
+      padding: 0;
+      border: none;
+      overflow: visible;
+    }
+
+    .c-dashboard__heading {
+      height: 0;
+    }
+  }
+}

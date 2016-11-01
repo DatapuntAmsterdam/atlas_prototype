@@ -29,6 +29,13 @@
             <dp-api-call endpoint="{{vm.apiData.results.gebiedsgerichtwerken.href}}" partial="lijst"></dp-api-call>
         </div>
 
+        <div>
+            <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
+            <div class="u-margin__bottom--4">
+                <dp-link type="SHOW_SELECTION_LIST" payload="vm.filterSelection">Toon alle adressen</dp-link>
+            </div>
+        </div>
+
         <dp-bbga-graphs
             gebied-heading="{{vm.apiData.results.naam}}"
             gebied-code="{{vm.apiData.results.code}}">

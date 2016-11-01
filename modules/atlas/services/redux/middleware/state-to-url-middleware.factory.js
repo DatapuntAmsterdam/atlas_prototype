@@ -23,10 +23,10 @@
                 ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY,
                 ACTIONS.MAP_PAN,
                 ACTIONS.MAP_ZOOM,
-                ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT,
-                ACTIONS.STRAATBEELD_SET_ORIENTATION,
                 ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS,
-                ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS
+                ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS,
+                ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT,
+                ACTIONS.SET_STRAATBEELD_ORIENTATION
             ];
 
         return function (store) {

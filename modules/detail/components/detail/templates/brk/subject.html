@@ -80,10 +80,16 @@
       </dl>
     </div>
 
-    <div class="default-box" ng-if="vm.apiData.results.rechten.count">
-      <dp-stelselpedia-header definition="ZAKELIJK_RECHT" use-plural="true"></dp-stelselpedia-header>
+    <div class="default-box">
+        <dp-stelselpedia-header definition="ZAKELIJK_RECHT" use-plural="true"></dp-stelselpedia-header>
 
-      <dp-api-call endpoint="{{vm.apiData.results.rechten.href}}" partial="brk/subject-rechten"></dp-api-call>
+        <dp-panel is-panel-visible="vm.isMoreInfoAvailable" type="warning" can-close="true" class-name="c-kadastraal-subject__warning">
+            <dp-link type="SHOW_PAGE" payload="'login'" class-name="o-btn o-btn--link c-kadastraal-subject__login-link">
+                Log in om alle gegevens (ook zakelijke rechten) te kunnen zien.
+            </dp-link>
+        </dp-panel>
+
+        <dp-api-call ng-if="vm.apiData.results.rechten.count" endpoint="{{vm.apiData.results.rechten.href}}" partial="brk/subject-rechten"></dp-api-call>
     </div>
 </div>
 

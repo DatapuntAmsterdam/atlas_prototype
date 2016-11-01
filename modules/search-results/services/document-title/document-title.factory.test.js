@@ -41,11 +41,11 @@ describe('The dpSearchResultsDocumentTitle factory', function () {
         expect(documentTitle.getTitle({})).toBe('title');
     });
 
-    it('returns both the title and the sub title with an n-dash in between', () => {
+    it('returns both the title and the sub title with a space in between', () => {
         searchTitle.getTitleData.and.returnValue({
             title: 'title',
             subTitle: 'sub title'
         });
-        expect(documentTitle.getTitle({})).toBe('title – sub title');
+        expect(documentTitle.getTitle({})).toBe('title sub title');
     });
 });

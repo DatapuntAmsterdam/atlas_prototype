@@ -107,9 +107,9 @@ describe('The stateToUrlMiddleware factory', function () {
                 ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY,
                 ACTIONS.MAP_PAN,
                 ACTIONS.MAP_ZOOM,
-                ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT,
                 ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS,
-                ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS
+                ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS,
+                ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT
             ],
             shouldNotUseReplace = [
                 ACTIONS.SHOW_SEARCH_RESULTS,

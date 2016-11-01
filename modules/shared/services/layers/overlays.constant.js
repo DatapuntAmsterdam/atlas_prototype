@@ -160,7 +160,49 @@
                     label_long: 'Kadastrale perceelgrenzen',
                     layers: ['kadaster'],
                     minZoom: 8,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=kadaster&format=image/png&STYLE=default'
+                },
+                burgerlijke_gemeente: {
+                    url: 'maps/lki?service=wms',
+                    label_short: 'Burgerlijke gemeenten',
+                    label_long: 'Burgerlijke gemeenten',
+                    layers: ['burgerlijke_gemeente', 'burgerlijke_gemeente_label'],
+                    minZoom: 8,
+                    maxZoom: 16,
+                    legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=burgerlijke_gemeente&format=image/png&STYLE=default'
+                },
+                kadastrale_gemeente: {
+                    url: 'maps/lki?service=wms',
+                    label_short: 'Kadastrale gemeenten',
+                    label_long: 'Kadastrale gemeenten',
+                    layers: ['kadastrale_gemeente', 'kadastrale_gemeente_label'],
+                    minZoom: 8,
+                    maxZoom: 16,
+                    legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=kadastrale_gemeente&format=image/png&STYLE=default'
+                },
+                kadastrale_sectie: {
+                    url: 'maps/lki?service=wms',
+                    label_short: 'Kadastrale secties',
+                    label_long: 'Kadastrale secties',
+                    layers: ['kadastrale_sectie', 'kadastrale_sectie_label'],
+                    minZoom: 10,
+                    maxZoom: 16,
+                    legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=kadastrale_sectie&format=image/png&STYLE=default'
+                },
+                kadastraal_object: {
+                    url: 'maps/lki?service=wms',
+                    label_short: 'Kadastrale objecten',
+                    label_long: 'Kadastrale objecten',
+                    layers: ['kadastraal_object', 'kadastraal_object_label'],
+                    minZoom: 12,
+                    maxZoom: 16,
+                    legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=kadastraal_object&format=image/png&STYLE=default'
                 },
                 gemeentelijke_beperkingen: {
                     url: 'maps/wkpb',
@@ -180,7 +222,9 @@
                     label_long: 'Grootstedelijke gebieden',
                     layers: ['grootstedelijkgebied', 'grootstedelijkgebied_label'],
                     minZoom: 8,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=grootstedelijkgebied&format=image/png&STYLE=default'
                 },
                 unesco: {
                     url: 'maps/gebieden?service=wms',
@@ -198,7 +242,9 @@
                     label_long: 'Stadsdelen',
                     layers: ['stadsdeel', 'stadsdeel_label'],
                     minZoom: 8,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=stadsdeel&format=image/png&STYLE=default'
                 },
                 gebiedsgericht_werken: {
                     url: 'maps/gebieden?service=wms',
@@ -206,7 +252,9 @@
                     label_long: 'Gebiedsgerichtwerken gebieden',
                     layers: ['gebiedsgerichtwerken', 'gebiedsgerichtwerken_label'],
                     minZoom: 8,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=gebiedsgerichtwerken&format=image/png&STYLE=default'
                 },
                 buurtcombinatie: {
                     url: 'maps/gebieden?service=wms',
@@ -214,7 +262,9 @@
                     label_long: 'Buurtcombinaties',
                     layers: ['buurtcombinatie', 'buurtcombinatie_label'],
                     minZoom: 8,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=buurtcombinatie&format=image/png&STYLE=default'
                 },
                 buurt: {
                     url: 'maps/gebieden?service=wms',
@@ -222,7 +272,9 @@
                     label_long: 'Buurten',
                     layers: ['buurt', 'buurt_label'],
                     minZoom: 10,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=buurt&format=image/png&STYLE=default'
                 },
                 bouwblokken: {
                     url: 'maps/gebieden?service=wms',
@@ -230,7 +282,9 @@
                     label_long: 'Bouwblokken',
                     layers: ['bouwblok', 'bouwblok_label'],
                     minZoom: 11,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
+                        'Graphic&sld_version=1.1.0&layer=bouwblok&format=image/png&STYLE=default'
                 },
 
                 // geografie: hoogte
@@ -381,8 +435,8 @@
                 },
                 milieu_veiligheid_bron: {
                     url: 'maps/externeveiligheid',
-                    label_short: 'Bron - Risicozones',
-                    label_long: 'Bron - Risicozones',
+                    label_short: 'Bedrijf - bronnen en risicozones',
+                    label_long: 'Bedrijf - bronnen en risicozones',
                     layers: ['overigerisicobedrijven'],
                     minZoom: 8,
                     maxZoom: 16,
@@ -392,8 +446,8 @@
                 },
                 milieu_veiligheid_bedrijf: {
                     url: 'maps/externeveiligheid',
-                    label_short: 'Bedrijf - Risicozones',
-                    label_long: 'Bedrijf - Risicozones',
+                    label_short: 'Bedrijf - Terreingrens',
+                    label_long: 'Bedrijf - Terreingrens',
                     layers: ['milieu_veiligheid_bedrijf'],
                     minZoom: 8,
                     maxZoom: 16,
@@ -587,7 +641,10 @@
                     label_long: 'Parkeervakken',
                     layers: ['alle_parkeervakken', 'parkeervakken_label'],
                     minZoom: 10,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/parkeervakken?version=1.3.0&service=WMS&request=' +
+                        'GetLegendGraphic&sld_version=1.1.0&layer=alle_parkeervakken&format=image/png&STYLE=de' +
+                        'fault'
                 },
                 parkeervakken_bord: {
                     url: 'maps/parkeervakken',
@@ -595,7 +652,10 @@
                     label_long: 'Parkeervakken - Borden',
                     layers: ['alle_parkeervakken', 'parkeervakken_bord'],
                     minZoom: 10,
-                    maxZoom: 16
+                    maxZoom: 16,
+                    legend: '/maps/parkeervakken?version=1.3.0&service=WMS&request=' +
+                        'GetLegendGraphic&sld_version=1.1.0&layer=parkeervakken_bord&format=image/png&STYLE=de' +
+                        'fault'
                 },
                 parkeervakken_reservering: {
                     url: 'maps/parkeervakken',
@@ -629,7 +689,10 @@
                 }, {
                     heading: 'Onroerende zaken',
                     overlays: [
-                        'kadaster',
+                        'burgerlijke_gemeente',
+                        'kadastrale_gemeente',
+                        'kadastrale_sectie',
+                        'kadastraal_object',
                         'gemeentelijke_beperkingen'
                     ]
                 }, {
@@ -661,7 +724,7 @@
                         'milieu_bodem_asbest_in_grond'
                     ]
                 }, {
-                    heading: 'Milieu: veiligheid',
+                    heading: 'Milieu: externe veiligheid',
                     overlays: [
                         'milieu_veiligheid_lpg_vulpunt',
                         'milieu_veiligheid_lpg_afleverzuil',

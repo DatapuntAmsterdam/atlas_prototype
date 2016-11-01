@@ -1,5 +1,5 @@
 module.exports = function (config) {
-    var jsFiles = ['build/temp/bower_components.js'];
+    var jsFiles = ['build/temp/atlas.libs.js'];
     jsFiles = jsFiles.concat(require('./grunt/config/js-files').jsFiles);
     jsFiles.push('bower_components/angular-mocks/angular-mocks.js');
     jsFiles.push('build/temp/babel/es5tests/*.js');
@@ -22,14 +22,8 @@ module.exports = function (config) {
         // possible values: OFF, ERROR, WARN, INFO, DEBUG
         logLevel: 'ERROR',
         preprocessors: {
-            'modules/**/!(*.test).js': ['babel', 'coverage'],
+            'modules/**/!(*.test).js': ['coverage', 'babel'],
             'build/temp/babel/es5tests/*.js': ['sourcemap']
-        },
-        babelPreprocessor: {
-            options: {
-                presets: ['es2015'],
-                compact: false
-            }
         },
         mochaReporter: {
             output: 'minimal'
@@ -39,10 +33,10 @@ module.exports = function (config) {
             dir: 'reports/coverage/',
             check: {
                 global: {
-                    statements: 95,
-                    branches: 95,
-                    functions: 95,
-                    lines: 95
+                    statements: 90,
+                    branches: 90,
+                    functions: 90,
+                    lines: 90
                 }
             }
         },

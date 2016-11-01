@@ -14,12 +14,12 @@
 | detail              | detail.uri                      | no, detail is null     |
 |                     | detail.isLoading                | no, detail is null     |
 | id                  | straatbeeld.id                  | no                     |
-| plat                | straatbeeld.searchLocation[0]   | no                     |
-| plon                | straatbeeld.searchLocation[1]   | no                     |
 |                     | straatbeeld.date                | no                     |
-|                     | straatbeeld.camera.location     | no                     |
-| heading             | straatbeeld.camera.heading      | no                     |
-| pitch               | straatbeeld.camera.pitch        | no                     |
-| fov                 | straatbeeld.camera.fov          | no                     |
+|                     | straatbeeld.location            | no                     |
+| heading             | straatbeeld.heading             | no                     |
+| pitch               | straatbeeld.pitch               | no                     |
+| fov                 | straatbeeld.fov                 | no                     |
 |                     | straatbeeld.hotspots            | no, []                 |
 |                     | straatbeeld.isLoading           | no                     |
+|                     | straatbeeld.image               | no                     |
+|                     | straatbeeld.isInitial           | no                     |

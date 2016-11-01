@@ -158,6 +158,19 @@ describe('The map reducers', function () {
         });
     });
 
+    describe('LOCATION_CHANGE', function () {
+        it('updates the location', function () {
+            var inputState = angular.copy(DEFAULT_STATE),
+                output;
+
+            output = mapReducers[ACTIONS.LOCATION_CHANGE](inputState, [51.1, 4.1]);
+            expect(output.map.viewCenter).toEqual([51.1, 4.1]);
+
+            output = mapReducers[ACTIONS.LOCATION_CHANGE](inputState, [51.2, 4.2]);
+            expect(output.map.viewCenter).toEqual([51.2, 4.2]);
+        });
+    });
+
     describe('MAP_ZOOM', function () {
         it('can update the zoom and viewCenter property', function () {
             var inputState = angular.copy(DEFAULT_STATE),

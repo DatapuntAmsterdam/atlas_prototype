@@ -373,153 +373,83 @@ describe('The urlReducers factory', function () {
         });
 
         describe('straatbeeld', function () {
-            it('can set a straatbeeld by ID', function () {
+            it('can be unknown', function () {
                 var output;
 
-                // Without straatbeeld
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
                 expect(output.straatbeeld).toBeNull();
-
-                // With straatbeeld
-                mockedSearchParams.id = '12345';
-
-                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-                expect(output.straatbeeld.id).toBe(12345);
-                expect(output.straatbeeld.searchLocation).toBeNull();
             });
 
-            it('can set a straatbeeld by searchLocation', function () {
+            it('can be initialized', function () {
                 var output;
 
-                // Without straatbeeld
-                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-                expect(output.straatbeeld).toBeNull();
-
-                // With straatbeeld
-                mockedSearchParams.plat = '52.963';
-                mockedSearchParams.plon = '4.741';
+                mockedSearchParams.id = 'ABC';
+                mockedSearchParams.heading = '179';
+                mockedSearchParams.pitch = '1';
+                mockedSearchParams.fov = '2';
 
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
 
-                expect(output.straatbeeld.id).toBeNull();
-                expect(output.straatbeeld.searchLocation).toEqual([52.963, 4.741]);
+                expect(output.straatbeeld.id).toBe('ABC');
+                expect(output.straatbeeld.heading).toBe(179);
+                expect(output.straatbeeld.pitch).toBe(1);
+                expect(output.straatbeeld.fov).toBe(2);
             });
 
-            it('will remember the date, car and hotspots if the ID stays the same', function () {
-                // Note: these two variables are not part of the URL
+            it('remembers parts of the state that aren\'t in the URL when the ID stays the same', function () {
+                var output;
+                mockedState.straatbeeld = {};
+                mockedState.straatbeeld.id = 'ABC';
+                mockedState.straatbeeld.date = new Date('Thu Sep 22 2016 12:10:37 GMT+0200 (CEST)');
+                mockedState.straatbeeld.hotspots = [{
+                    a: 'a',
+                    b: 'b'
+                }];
+                mockedState.straatbeeld.image = 'http://example.com/example.png';
+                mockedState.straatbeeld.location = ['lat', 'lon'];
+                mockedState.straatbeeld.isInitial = false;
+                mockedState.straatbeeld.isLoading = true;
+
+                mockedSearchParams.id = 'ABC';
+                mockedSearchParams.heading = '179';
+                mockedSearchParams.pitch = '1';
+                mockedSearchParams.fov = '2';
+
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
+
+                expect(output.straatbeeld.date).toEqual(new Date('Thu Sep 22 2016 12:10:37 GMT+0200 (CEST)'));
+                expect(output.straatbeeld.hotspots).toEqual([{
+                    a: 'a',
+                    b: 'b'
+                }]);
+                expect(output.straatbeeld.isLoading).toBe(true);
+                expect(output.straatbeeld.isInitial).toBe(false);
+                expect(output.straatbeeld.location).toEqual(['lat', 'lon']);
+                expect(output.straatbeeld.image).toEqual('http://example.com/example.png');
+            });
+
+            it('resets all the date and hotspots when the old straatbeeld ID is different than payload', function () {
                 var output;
 
-                mockedState.straatbeeld = {
-                    id: 67890,
-                    searchLocation: null,
-                    date: new Date(1982, 8, 7),
-                    car: {
-                        location: [52.987, 4.321]
-                    },
-                    hotspots: ['FAKE_HOTSPOT_A', 'FAKE_HOTSPOT_Z']
-                };
+                mockedState.date = new Date('Thu Sep 22 2016 12:10:37 GMT+0200 (CEST)');
+                mockedState.hotspots = [{
+                    a: 'a',
+                    b: 'b',
+                    c: 'c',
+                    d: 'd'
+                }];
 
-                mockedSearchParams.id = 67890;
-                mockedSearchParams.pagina = null;
-
-                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-
-                expect(output.straatbeeld.date).toEqual(new Date(1982, 8, 7));
-                expect(output.straatbeeld.car.location).toEqual([52.987, 4.321]);
-                expect(output.straatbeeld.hotspots).toEqual(['FAKE_HOTSPOT_A', 'FAKE_HOTSPOT_Z']);
-            });
-
-            it('can read the heading, pitch and fov from the URL', function () {
-                var output;
-
-                mockedState.straatbeeld = {
-                    id: 67890,
-                    searchLocation: null,
-                    date: new Date(1982, 8, 7),
-                    car: {
-                        location: [52.987, 4.321]
-                    },
-                    camera: {
-                        heading: 1,
-                        pitch: 2,
-                        fov: 3
-                    },
-                    hotspots: ['FAKE_HOTSPOT_A', 'FAKE_HOTSPOT_Z']
-                };
-
-                mockedSearchParams.id = '67890';
-                mockedSearchParams.heading = '7';
-                mockedSearchParams.pitch = '8';
-                mockedSearchParams.fov = '9';
+                mockedSearchParams.id = 'ABC';
+                mockedSearchParams.heading = '179';
+                mockedSearchParams.pitch = '1';
+                mockedSearchParams.fov = '2';
 
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
 
-                expect(output.straatbeeld.camera.heading).toBe(7);
-                expect(output.straatbeeld.camera.pitch).toBe(8);
-                expect(output.straatbeeld.camera.fov).toBe(9);
-            });
-
-            describe('isLoading', () => {
-                it('is true when the endpoint changes', () => {
-                    var output;
-
-                    mockedState.straatbeeld = {
-                        id: 67890,
-                        searchLocation: null,
-                        date: new Date(1982, 8, 7),
-                        car: {
-                            location: [52.987, 4.321]
-                        },
-                        hotspots: ['FAKE_HOTSPOT_A', 'FAKE_HOTSPOT_Z'],
-                        isLoading: false
-                    };
-
-                    mockedSearchParams.id = 67891;
-                    mockedSearchParams.pagina = null;
-
-                    output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-
-                    expect(output.straatbeeld.isLoading).toBe(true);
-                });
-
-                it('is unchanged when the the endpoint stays the same', () => {
-                    var output;
-
-                    mockedSearchParams.id = 67890;
-                    mockedSearchParams.pagina = null;
-
-                    // isLoading is false and should stay false
-                    mockedState.straatbeeld = {
-                        id: 67890,
-                        searchLocation: null,
-                        date: new Date(1982, 8, 7),
-                        car: {
-                            location: [52.987, 4.321]
-                        },
-                        hotspots: ['FAKE_HOTSPOT_A', 'FAKE_HOTSPOT_Z'],
-                        isLoading: false
-                    };
-
-                    output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-
-                    expect(output.straatbeeld.isLoading).not.toBe(true);
-
-                    // isLoading is true and should stay true
-                    mockedState.straatbeeld = {
-                        id: 67890,
-                        searchLocation: null,
-                        date: new Date(1982, 8, 7),
-                        car: {
-                            location: [52.987, 4.321]
-                        },
-                        hotspots: ['FAKE_HOTSPOT_A', 'FAKE_HOTSPOT_Z'],
-                        isLoading: true
-                    };
-
-                    output = urlReducers.URL_CHANGE(mockedState, mockedSearchParams);
-
-                    expect(output.straatbeeld.isLoading).toBe(true);
-                });
+                expect(output.straatbeeld.date).toBeNull();
+                expect(output.straatbeeld.hotspots).toEqual([]);
+                expect(output.straatbeeld.isLoading).toBe(true);
+                expect(output.straatbeeld.isInitial).toBe(true);
             });
         });
 
@@ -543,6 +473,7 @@ describe('The urlReducers factory', function () {
                 // With an active dataSelection
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
                 expect(output.dataSelection).toEqual({
+                    listView: false,
                     dataset: 'bag',
                     filters: jasmine.any(Object),
                     page: jasmine.anything()
@@ -585,6 +516,12 @@ describe('The urlReducers factory', function () {
                     buurtcombinatie: 'Bijlmeer Oost (D,F,H)',
                     buurt: 'Belgiëplein e.o.'
                 });
+            });
+
+            it('enables list view', function () {
+                mockedSearchParamsWithDataSelection['list-view'] = true;
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection.listView).toBe(true);
             });
         });
 

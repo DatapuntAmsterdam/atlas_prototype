@@ -1,6 +1,6 @@
 <div class="detail-page__content--main">
     <div class="u-row">
-        <dp-stelselpedia-header heading="{{vm.apiData.results.id}}" definition="MEETBOUT">
+        <dp-stelselpedia-header heading="{{vm.apiData.results.meetboutidentificatie}}" definition="MEETBOUT">
         </dp-stelselpedia-header>
 
         <dl class="c-key-value-list">
@@ -37,7 +37,7 @@
 
     <div class="u-row">
         <div class="u-col-sm--6 u-padding__right--2">
-            <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
+            <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
         </div>
     </div>
 

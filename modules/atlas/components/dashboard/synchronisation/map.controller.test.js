@@ -123,12 +123,8 @@ describe('The map controller', function () {
         it('supports a straatbeeld marker', function () {
             mockedState = {
                 straatbeeld: {
-                    car: {
-                        location: [52.2, 4.2]
-                    },
-                    camera: {
-                        heading: Math.PI
-                    }
+                    location: [52.2, 4.2],
+                    heading: 179
                 }
             };
 
@@ -153,12 +149,8 @@ describe('The map controller', function () {
                     geometry: 'FAKE_RD_GEOMETRY'
                 },
                 straatbeeld: {
-                    car: {
-                        location: [52.2, 4.2]
-                    },
-                    camera: {
-                        heading: Math.PI
-                    }
+                    location: [52.2, 4.2],
+                    heading: 179
                 }
             };
 
@@ -201,18 +193,14 @@ describe('The map controller', function () {
         it('The straatbeeld_orientation icon will have a extra variable for leaflet-rotatedmarker', function () {
             mockedState = {
                 straatbeeld: {
-                    car: {
-                        location: [52.2, 4.2]
-                    },
-                    camera: {
-                        heading: Math.PI
-                    }
+                    location: [52.2, 4.2],
+                    heading: 179
                 }
             };
 
             expect(controller.markers).toContain(jasmine.objectContaining({
                 id: 'straatbeeld_orientation',
-                orientation: Math.PI
+                orientation: 179
             }));
         });
 
@@ -225,12 +213,8 @@ describe('The map controller', function () {
                     geometry: 'FAKE_RD_GEOMETRY'
                 },
                 straatbeeld: {
-                    car: {
-                        location: [52.2, 4.2]
-                    },
-                    camera: {
-                        heading: Math.PI
-                    }
+                    location: [52.2, 4.2],
+                    heading: 179
                 }
             };
 

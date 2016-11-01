@@ -1,21 +1,24 @@
 describe('The dpPageDocumentTitle factory', function () {
-    var documentTitle;
+    var documentTitle,
+        mocks = {
+            pageName: angular.noop
+        };
 
     beforeEach(function () {
-        angular.mock.module('dpPage');
+        spyOn(mocks, 'pageName');
+
+        angular.mock.module('dpPage', mocks);
 
         angular.mock.inject(function (dpPageDocumentTitle) {
             documentTitle = dpPageDocumentTitle;
         });
     });
 
-    it('replaces dashes and makes the first letter of each word uppercase', function () {
-        expect(documentTitle.getTitle('naamloos')).toBe('Naamloos');
-        expect(documentTitle.getTitle('snel-wegwijs')).toBe('Snel Wegwijs');
-        expect(documentTitle.getTitle('versie-historie')).toBe('Versie Historie');
-    });
+    it('uses the pageName service', function () {
+        documentTitle.getTitle('pageA');
+        documentTitle.getTitle('page-b');
 
-    it('returns null when the active page is \'home\'', function () {
-        expect(documentTitle.getTitle('home')).toBeNull();
+        expect(mocks.pageName).toHaveBeenCalledWith('pageA');
+        expect(mocks.pageName).toHaveBeenCalledWith('page-b');
     });
 });

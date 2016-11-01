@@ -1,3 +1,7 @@
 .o-list {
   @extend %list;
 }
+
+.o-list__separate-item {
+  @extend %list-item;
+}

@@ -139,6 +139,8 @@ module.exports = {
         "no-new-wrappers": "error",         // disallow new operators with the String, Number, and Boolean objects
         "no-invalid-this": "error",         // disallow this keywords outside of classes or class-like objects
         "require-yield": "error"            // require generator functions to contain yield
+
+
     },
     "plugins": [
         "standard",                         // Shareable config for JavaScript Standard Style

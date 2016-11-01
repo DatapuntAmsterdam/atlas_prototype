@@ -26,6 +26,12 @@
   }
 }
 
+.is-print-mode {
+  .c-toggle-active-overlays {
+    display: none;
+  }
+}
+
 .c-toggle-active-overlays__icon {
   display: block;
   position: absolute;

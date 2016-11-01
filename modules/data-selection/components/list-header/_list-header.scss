@@ -1,0 +1,4 @@
+.c-data-selection-header__switch-view-button {
+  @include data-selection-button("assets/icons/link-active.svg", "assets/icons/link-hover.svg")
+  margin-right: 0;
+}

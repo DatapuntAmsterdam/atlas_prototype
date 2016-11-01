@@ -31,6 +31,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
@@ -57,6 +58,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 0/3, right column 3/3', function () {
@@ -102,6 +104,7 @@ describe('The dashboardColumns factory', function () {
                     expect(visibility.page).toBe(false);
                     expect(visibility.straatbeeld).toBe(false);
                     expect(visibility.dataSelection).toBe(false);
+                    expect(visibility.dataSelectionList).toBe(false);
                 });
 
                 it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
@@ -128,6 +131,7 @@ describe('The dashboardColumns factory', function () {
                     expect(visibility.page).toBe(false);
                     expect(visibility.straatbeeld).toBe(false);
                     expect(visibility.dataSelection).toBe(false);
+                    expect(visibility.dataSelectionList).toBe(false);
                 });
 
                 it('left column: 0/3, middle column: 0/3, right column 3/3', function () {
@@ -164,6 +168,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
@@ -189,6 +194,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 3/3, right column 3/3', function () {
@@ -232,6 +238,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.page).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
@@ -258,6 +265,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.page).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 3/3, right column 3/3', function () {
@@ -294,6 +302,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 1/3, middle column: 2/3, right column 0/3', function () {
@@ -320,6 +329,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 2/3, middle column: 1/3, right column 0/3', function () {
@@ -352,6 +362,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 3/3, right column 0/3', function () {
@@ -378,6 +389,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 3/3, right column 0/3', function () {
@@ -415,6 +427,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 1/3, middle column: 2/3, right column 0/3', function () {
@@ -441,6 +454,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 2/3, middle column: 1/3, right column 0/3', function () {
@@ -454,6 +468,7 @@ describe('The dashboardColumns factory', function () {
     describe('when visiting dataSelection', function () {
         beforeEach(function () {
             mockedState.dataSelection = {
+                listView: false,
                 dataset: 'bag',
                 filters: {
                     buurt: 'Trompbuurt'
@@ -462,13 +477,13 @@ describe('The dashboardColumns factory', function () {
             };
 
             mockedState.page = null;
-
-            visibility = dashboardColumns.determineVisibility(mockedState);
         });
 
         describe('the default non-print version', function () {
             beforeEach(function () {
                 mockedState.isPrintMode = false;
+
+                visibility = dashboardColumns.determineVisibility(mockedState);
 
                 columnSizes = dashboardColumns.determineColumnSizes(visibility, false, false);
             });
@@ -491,9 +506,39 @@ describe('The dashboardColumns factory', function () {
             });
         });
 
+        describe('the list view version', function () {
+            beforeEach(function () {
+                mockedState.dataSelection.listView = true;
+
+                visibility = dashboardColumns.determineVisibility(mockedState);
+
+                columnSizes = dashboardColumns.determineColumnSizes(visibility, false, false);
+            });
+
+            it('shows dataSelectionList and map', function () {
+                expect(visibility.dataSelection).toBe(true);
+                expect(visibility.dataSelectionList).toBe(true);
+                expect(visibility.map).toBe(true);
+
+                expect(visibility.detail).toBe(false);
+                expect(visibility.layerSelection).toBe(false);
+                expect(visibility.page).toBe(false);
+                expect(visibility.searchResults).toBe(false);
+                expect(visibility.straatbeeld).toBe(false);
+            });
+
+            it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
+                expect(columnSizes.left).toBe(0);
+                expect(columnSizes.middle).toBe(4);
+                expect(columnSizes.right).toBe(8);
+            });
+        });
+
         describe('the print version', function () {
             beforeEach(function () {
                 mockedState.isPrintMode = true;
+
+                visibility = dashboardColumns.determineVisibility(mockedState);
 
                 columnSizes = dashboardColumns.determineColumnSizes(visibility, false, true);
             });

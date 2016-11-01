@@ -2,18 +2,18 @@
     <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
 
     <div ng-if="!vm.isLoading" class="u-row">
-        <div class="u-padding__top-2 u-padding__bottom--2" ng-class="{
-                'u-col-sm--12': !vm.location,
-                'u-col-sm--8': vm.location
-            }">
+        <div ng-if="vm.numberOfResults">
+            <div ng-if="!vm.category">
+                <dp-search-results-header
+                    number-of-results="vm.numberOfResults"
+                    query="{{vm.query}}"
+                    location="vm.location">
+                </dp-search-results-header>
 
-            <div ng-if="vm.numberOfResults">
-                <div ng-if="!vm.category">
-                    <dp-search-results-header
-                        number-of-results="vm.numberOfResults"
-                        query="{{vm.query}}"
-                        location="vm.location">
-                    </dp-search-results-header>
+                <div class="u-padding__top-2 u-padding__bottom--2" ng-class="{
+                        'u-col-sm--12': !vm.location,
+                        'u-col-sm--8': vm.location
+                    }">
 
                     <div ng-repeat="category in vm.searchResults"
                          class="u-margin__bottom--4"
@@ -30,7 +30,7 @@
 
                         <div ng-if="category.count > 10">
                             <dp-link ng-if="category.more"
-                                class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
+                                class-name="o-list__separate-item o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
                                 type="FETCH_DETAIL"
                                 payload="category.more.endpoint">
 
@@ -38,7 +38,7 @@
                             </dp-link>
 
                             <dp-link ng-if="!category.more"
-                                class-name="o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
+                                class-name="o-list__separate-item o-btn o-btn--link u-color__primary--contrast u-margin__top-05"
                                 type="FETCH_SEARCH_RESULTS_CATEGORY"
                                 payload="category.slug">
 
@@ -47,12 +47,22 @@
                         </div>
                     </div>
                 </div>
-                <div ng-if="vm.category">
-                    <dp-search-results-header
-                        number-of-results="vm.numberOfResults"
-                        query="{{vm.query}}"
-                        category="{{vm.categoryName}}">
-                    </dp-search-results-header>
+
+                <div ng-if="vm.location" class="u-col-sm--4">
+                    <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
+                </div>
+            </div>
+            <div ng-if="vm.category">
+                <dp-search-results-header
+                    number-of-results="vm.numberOfResults"
+                    query="{{vm.query}}"
+                    category="{{vm.category}}">
+                </dp-search-results-header>
+
+                <div class="u-padding__top-2 u-padding__bottom--2" ng-class="{
+                        'u-col-sm--12': !vm.location,
+                        'u-col-sm--8': vm.location
+                    }">
 
                     <dp-search-results-list category="vm.searchResults[0]"></dp-search-results-list>
 
@@ -67,20 +77,31 @@
                     <dp-loading-indicator is-loading="vm.isLoadMoreLoading" use-delay="true" show-inline="true">
                     </dp-loading-indicator>
                 </div>
-            </div>
 
-            <div ng-if="!vm.numberOfResults">
-                <dp-search-results-header
-                    number-of-results="vm.numberOfResults"
-                    query="{{vm.query}}"
-                    location="vm.location">
-                </dp-search-results-header>
+                <div ng-if="vm.location" class="u-col-sm--4">
+                    <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="!vm.numberOfResults">
+            <dp-search-results-header
+                number-of-results="vm.numberOfResults"
+                query="{{vm.query}}"
+                location="vm.location">
+            </dp-search-results-header>
+
+            <div class="u-padding__top-2 u-padding__bottom--2" ng-class="{
+                    'u-col-sm--12': !vm.location,
+                    'u-col-sm--8': vm.location
+                }">
+
                 <p>Tip: maak de criteria minder specifiek (bijv. een straat i.p.v. specifiek adres)</p>
             </div>
 
-        </div>
-        <div ng-if="vm.location" class="u-col-sm--4">
-            <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
+            <div ng-if="vm.location" class="u-col-sm--4">
+                <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
+            </div>
         </div>
     </div>
 </div>

@@ -4,6 +4,7 @@
         .component('dpDetail', {
             bindings: {
                 endpoint: '@',
+                reload: '=',
                 isLoading: '='
             },
             templateUrl: 'modules/detail/components/detail/detail.html',
@@ -17,23 +18,43 @@
         'ACTIONS',
         'api',
         'endpointParser',
+        'user',
         'geometry',
         'geojson',
         'crsConverter'
     ];
 
     function DpDetailController (
-        $scope,
-        store,
-        ACTIONS,
-        api,
-        endpointParser,
-        geometry,
-        geojson,
-        crsConverter) {
+            $scope,
+            store,
+            ACTIONS,
+            api,
+            endpointParser,
+            user,
+            geometry,
+            geojson,
+            crsConverter) {
         var vm = this;
 
-        $scope.$watch('vm.endpoint', function (endpoint) {
+        // Reload the data when the reload flag has been set (endpoint has not
+        // changed)
+        $scope.$watch('vm.reload', reload => {
+            if (reload) {
+                getData(vm.endpoint);
+            }
+        });
+
+        // (Re)load the data when the endpoint is set or gets changed
+        $scope.$watch('vm.endpoint', getData);
+
+        // (Re)load the data when the user logs in or out
+        $scope.$watch(() => user.getStatus().isLoggedIn, (newValue, oldValue) => {
+            if (newValue !== oldValue) {
+                getData(vm.endpoint);
+            }
+        });
+
+        function getData (endpoint) {
             vm.location = null;
 
             api.getByUrl(endpoint).then(function (data) {
@@ -41,7 +62,14 @@
                     results: data
                 };
 
+                // Derive whether more info is available if the user would login
+                vm.isMoreInfoAvailable = vm.apiData.results.is_natuurlijk_persoon && !user.getStatus().isLoggedIn;
+
                 vm.includeSrc = endpointParser.getTemplateUrl(endpoint);
+
+                vm.filterSelection = {
+                    [endpointParser.getSubject(endpoint)]: vm.apiData.results.naam
+                };
 
                 geometry.getGeoJSON(endpoint).then(function (geoJSON) {
                     if (geoJSON !== null) {
@@ -57,6 +85,6 @@
                     });
                 });
             });
-        });
+        }
     }
 })();

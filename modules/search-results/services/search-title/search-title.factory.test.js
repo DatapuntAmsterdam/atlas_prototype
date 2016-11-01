@@ -5,6 +5,22 @@ describe('The search title factory', function () {
         angular.mock.module(
             'dpSearchResults',
             function ($provide) {
+                $provide.constant('SEARCH_CONFIG', {
+                    QUERY_ENDPOINTS: [
+                        {
+                            slug: 'openbare_ruimte',
+                            label_singular: 'Openbare ruimte',
+                            label_plural: 'Openbare ruimtes',
+                            uri: 'path/to/openbare_ruimte/'
+                        }, {
+                            slug: 'adres',
+                            label_singular: 'Adres',
+                            label_plural: 'Adressen',
+                            uri: 'path/to/adres/'
+                        }
+                    ]
+                });
+
                 $provide.value('coordinatesFilter', function (input) {
                     return 'X, Y (' + input.join(', ') + ')';
                 });
@@ -31,7 +47,7 @@ describe('The search title factory', function () {
     });
 
     it('can show the number of search results for a specific category (query search only)', function () {
-        var titleData = searchTitle.getTitleData(47, 'westerpark', null, 'Adressen');
+        var titleData = searchTitle.getTitleData(47, 'westerpark', null, 'adres');
 
         // The category name will be converted to lowercase
         expect(titleData.title).toContain('47 adressen');
@@ -86,7 +102,7 @@ describe('The search title factory', function () {
         expect(titleData.title).toContain('1.000');
 
         // When viewing a category of search results
-        titleData = searchTitle.getTitleData(1000, 'zuiderpark', null, 'Adressen');
+        titleData = searchTitle.getTitleData(1000, 'zuiderpark', null, 'adres');
         expect(titleData.title).not.toContain('1000');
         expect(titleData.title).toContain('1.000');
     });

@@ -15,7 +15,6 @@
 
         function update () {
             var state = store.getState();
-
             vm.straatbeeldState = state.straatbeeld;
         }
     }

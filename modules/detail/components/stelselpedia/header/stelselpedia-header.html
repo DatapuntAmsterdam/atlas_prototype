@@ -37,20 +37,15 @@
 
         <dp-wkpb-link ng-if="vm.brk" brk-id="{{vm.brk.id}}"></dp-wkpb-link>
     </div>
-
-    <dp-panel is-panel-visible="vm.isVisible.help" can-close="true" class-name="qa-stelselpedia">
-        <h3 class="u-margin__bottom--1">Uitleg over {{vm.stelselpediaLabel | lowercase}}</h3>
-        <p>{{vm.stelselpediaDescription}}</p>
-
-        <a class="o-link--arrow" ng-href="{{vm.stelselpediaUrl}}" target="_blank">
-            Lees verder op stelselpedia
-        </a>
-    </dp-panel>
-
-    <dp-panel ng-if="vm.hasMetaData" is-panel-visible="vm.isVisible.meta" can-close="true" class-name="qa-metadata">
-        <h3 class="u-margin__bottom--1">Metadata van {{vm.stelselpediaLabel | lowercase}}</h3>
-
-        <dp-stelselpedia-meta definition="{{vm.definition}}" api-data="vm.metaData"></dp-stelselpedia-meta>
-    </dp-panel>
+        <dp-panel is-panel-visible="vm.isVisible.help" can-close="true" class-name="qa-stelselpedia">
+            <h3 class="u-margin__bottom--1">Uitleg over {{vm.stelselpediaLabel | lowercase}}</h3>
+            <p>{{vm.stelselpediaDescription}}</p>
+            <a class="o-link--arrow" ng-href="{{vm.stelselpediaUrl}}" target="_blank">
+                Lees verder op stelselpedia
+            </a>
+        </dp-panel>
+        <dp-panel ng-if="vm.hasMetaData" is-panel-visible="vm.isVisible.meta" can-close="true" class-name="qa-metadata">
+            <h3 class="u-margin__bottom--1">Metadata van {{vm.stelselpediaLabel | lowercase}}</h3>
+            <dp-stelselpedia-meta definition="{{vm.definition}}" api-data="vm.metaData"></dp-stelselpedia-meta>
+        </dp-panel>
 </div>
-

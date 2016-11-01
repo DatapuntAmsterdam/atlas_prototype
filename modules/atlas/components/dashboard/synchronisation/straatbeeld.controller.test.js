@@ -28,11 +28,8 @@ describe('The straatbeeld controller', function () {
         mockedState = {
             straatbeeld: {
                 id: 7,
-                searchLocation: null,
+                location: [52.741, 4.852],
                 date: new Date(2016, 6, 8),
-                camera: {
-                    location: [52.741, 4.852]
-                },
                 hotspots: ['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y', 'FAKE_HOTSPOT_Z'],
                 isLoading: false
             }
@@ -62,17 +59,14 @@ describe('The straatbeeld controller', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the id, date, camera, hotspots and isLoading indicator based on the state', function () {
+    it('sets the straatbeeldState on the state', function () {
         var controller;
 
         controller = getController();
 
         expect(controller.straatbeeldState.id).toBe(7);
-        expect(controller.straatbeeldState.searchLocation).toBeNull();
         expect(controller.straatbeeldState.date).toEqual(new Date(2016, 6, 8));
-        expect(controller.straatbeeldState.camera).toEqual({
-            location: [52.741, 4.852]
-        });
+        expect(controller.straatbeeldState.location).toEqual([52.741, 4.852]);
         expect(controller.straatbeeldState.hotspots).toEqual(['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y', 'FAKE_HOTSPOT_Z']);
         expect(controller.straatbeeldState.isLoading).toBe(false);
     });
@@ -82,19 +76,14 @@ describe('The straatbeeld controller', function () {
 
         mockedState = {
             straatbeeld: {
-                id: null,
-                searchLocation: [52.456, 4.321],
-                date: new Date(2016, 6, 8),
-                camera: {
-                    location: [52.741, 4.852]
-                },
+                id: 'ABC',
                 isLoading: false
             }
         };
 
         controller = getController();
 
-        expect(controller.straatbeeldState.id).toBeNull();
-        expect(controller.straatbeeldState.searchLocation).toEqual([52.456, 4.321]);
+        expect(controller.straatbeeldState.id).toBe('ABC');
+        expect(controller.straatbeeldState.isLoading).toBe(false);
     });
 });

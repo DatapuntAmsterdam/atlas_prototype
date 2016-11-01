@@ -1,5 +1,13 @@
 module.exports = function (grunt) {
-    var files = require('./config/js-files');
+    var files = require('./config/js-files'),
+        uniqueIdJs = grunt.config.get('uniqueIdJs');
+
+    grunt.registerTask('babel-concat-modules', 'Configure babel options', function () {
+        // Inject the source maps from the modules concat operation in the new babel sourcemap
+        grunt.config.set('babel.modules.options.inputSourceMap',
+            grunt.file.readJSON('build/temp/es6/atlas.' + uniqueIdJs + '.js.map'));
+        grunt.task.run('babel:modules');
+    });
 
     var targets = {
         options: {
@@ -7,6 +15,17 @@ module.exports = function (grunt) {
             compact: false,
             minified: false,
             presets: ['es2015']
+        },
+        modules: {
+            options: {
+                // This option will be set by the babel-concat-modules task
+            },
+            files: [{
+                expand: true,
+                flatten: true,
+                src: ['build/temp/es6/atlas.' + uniqueIdJs + '.js'],
+                dest: 'build/'
+            }]
         }
         //
         // The code below generates targets as follows
@@ -41,8 +60,8 @@ module.exports = function (grunt) {
         return {
             name: `transpile_module_${module.slug}`,
             task: `babel-module-${module.slug}`,
-            src: `build/temp/babel/es6/atlas.${module.slug}.js`,
-            dest: 'build/temp/babel/es5/'
+            src: `build/temp/es6/atlas.${module.slug}.js`,
+            dest: `build/atlas.${uniqueIdJs}.${module.slug}.js`
         };
     };
 

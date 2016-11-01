@@ -17,6 +17,12 @@
   }
 }
 
+.is-print-mode {
+  .c-toggle-layer-selection {
+    display: none;
+  }
+}
+
 .c-toggle-layer-selection__icon {
   display: block;
   position: absolute;

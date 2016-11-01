@@ -53,22 +53,6 @@ describe('The dp-search-results component', function () {
                 }
             },
             function ($provide) {
-                $provide.constant('SEARCH_CONFIG', {
-                    QUERY_ENDPOINTS: [
-                        {
-                            slug: 'openbare_ruimte',
-                            label_singular: 'Openbare ruimte',
-                            label_plural: 'Openbare ruimtes',
-                            uri: 'path/to/openbare_ruimte/'
-                        }, {
-                            slug: 'adres',
-                            label_singular: 'Adres',
-                            label_plural: 'Adressen',
-                            uri: 'path/to/adres/'
-                        }
-                    ]
-                });
-
                 $provide.factory('dpStraatbeeldThumbnailDirective', function () {
                     return {};
                 });

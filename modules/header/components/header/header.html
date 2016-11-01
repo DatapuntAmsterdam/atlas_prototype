@@ -1,11 +1,16 @@
-<header class="site-header">
+<header class="site-header u-hide-on-print">
     <div class="u-grid">
         <div class="u-row">
             <div class="u-col-sm--3">
-                <dp-link type="SHOW_HOME" class-name="site-header__logo" hover-text="Naar Atlas home">
-                    <img class="u-block site-header__logo" src="assets/images/andreas.svg" alt="Logo Gemeente Amsterdam" >
-                    Atlas
-                </dp-link>
+                <div ng-if="!vm.isPrintMode">
+                    <dp-link type="SHOW_HOME" class-name="site-header__logo" hover-text="Naar Atlas home">
+                        <img class="u-block site-header__logo" src="assets/images/andreas.svg" alt="Logo Gemeente Amsterdam" >
+                        Atlas
+                    </dp-link>
+                </div>
+                <div ng-if="vm.isPrintMode">
+                    <h1>Printversie</h1>
+                </div>
             </div>
 
             <!-- Default -->
@@ -32,12 +37,14 @@
             <!-- When printing -->
             <div ng-if="vm.isPrintMode" class="u-col-sm--9">
                 <nav class="site-header__menu">
-                    <dp-print-button>
-                        Printen
-                    </dp-print-button>
-                    <dp-link type="HIDE_PRINT" class-name="site-header__menu__item">
-                        Verlaat printversie
-                    </dp-link>
+                    <div class="u-margin__top--05">
+                        <dp-print-button>
+                            Printen
+                        </dp-print-button>
+                    </div>
+                    <div class="c-exit-print-mode">
+                        <dp-link type="HIDE_PRINT" class-name="o-btn--close o-btn--close--danger"></dp-link>
+                    </div>
                 </nav>
             </div>
         </div>

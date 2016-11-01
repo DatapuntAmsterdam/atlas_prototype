@@ -12,3 +12,9 @@
 .leaflet-measure-resultpopup {
   @include font-size($body-font);
 }
+
+.is-print-mode {
+  .leaflet-control-measure {
+    display: none;
+  }
+}

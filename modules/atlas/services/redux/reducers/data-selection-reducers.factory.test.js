@@ -4,7 +4,11 @@ describe('The dataSelectionReducers factory', function () {
         ACTIONS;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module('atlas', {
+            dataSelectionFilterNames: {
+                getSlugFor: angular.identity
+            }
+        });
 
         angular.mock.inject(function (_dataSelectionReducers_, _DEFAULT_STATE_, _ACTIONS_) {
             dataSelectionReducers = _dataSelectionReducers_;
@@ -137,6 +141,58 @@ describe('The dataSelectionReducers factory', function () {
                 },
                 page: 4
             });
+        });
+    });
+
+    describe('SHOW_SELECTION_LIST', () => {
+        var mockedState,
+            payload,
+            output;
+
+        beforeEach(function () {
+            mockedState = angular.copy(DEFAULT_STATE);
+            payload = {
+                buurt: 'Centrum'
+            };
+        });
+
+        it('sets the dataSelection state', function () {
+            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST](mockedState, payload);
+
+            expect(output.dataSelection).toEqual({
+                listView: true,
+                dataset: 'bag',
+                filters: {
+                    buurt: 'Centrum'
+                },
+                page: 1
+            });
+        });
+
+        it('disables search, page, detail and straatbeeld', function () {
+            mockedState.search = {some: 'object'};
+            mockedState.page = 'somePage';
+            mockedState.detail = {some: 'object'};
+            mockedState.straatbeeld = {some: 'object'};
+
+            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST](mockedState, payload);
+
+            expect(output.search).toBeNull();
+            expect(output.page).toBeNull();
+            expect(output.detail).toBeNull();
+            expect(output.straatbeeld).toBeNull();
+        });
+
+        it('preserves the isPrintMode variable', function () {
+            // With print mode enabled
+            mockedState.isPrintMode = true;
+            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST](mockedState, payload);
+            expect(output.isPrintMode).toBe(true);
+
+            // With print mode disabled
+            mockedState.isPrintMode = false;
+            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST](mockedState, payload);
+            expect(output.isPrintMode).toBe(false);
         });
     });
 });

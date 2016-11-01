@@ -6,27 +6,11 @@
         .module('dpPage')
         .factory('dpPageDocumentTitle', dpPageDocumentTitleFactory);
 
-    dpPageDocumentTitleFactory.$inject = ['dpUppercaseFirstLetterFilter'];
+    dpPageDocumentTitleFactory.$inject = ['pageName'];
 
-    function dpPageDocumentTitleFactory (dpUppercaseFirstLetterFilter) {
+    function dpPageDocumentTitleFactory (pageName) {
         return {
-            getTitle: getTitle
+            getTitle: name => pageName(name)
         };
-
-        function getTitle (pageName) {
-            var output;
-
-            if (pageName === 'home') {
-                output = null;
-            } else {
-                output = pageName
-                // Make the first letter of each word uppercase
-                    .split('-').map(word => dpUppercaseFirstLetterFilter(word))
-                    // Replace dashed (-) with spaces
-                    .join(' ');
-            }
-
-            return output;
-        }
     }
 })();
