@@ -1,9 +1,3 @@
-/**
- * @ngdoc service
- * @name atlas.factory:homeReducers
- * @description
- * A description of the factory
-*/
 (function () {
     'use strict';
 

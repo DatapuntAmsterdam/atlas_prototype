@@ -1,9 +1,3 @@
-/**
- * @ngdoc service
- * @name atlas.factory:mapReducers
- * @description
- * A description of the factory
-*/
 (function () {
     'use strict';
 

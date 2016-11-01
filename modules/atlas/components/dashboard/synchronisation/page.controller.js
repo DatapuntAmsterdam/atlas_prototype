@@ -1,9 +1,3 @@
-/**
- * @ngdoc controller
- * @name atlas.controller:PageController
- * @description
- * Controller definition
-*/
 (function () {
     'use strict';
 

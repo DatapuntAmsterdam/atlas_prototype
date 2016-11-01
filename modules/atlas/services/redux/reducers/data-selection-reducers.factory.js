@@ -1,10 +1,3 @@
-/**
- * @ngdoc service
- * @name atlas.factory:dataSelectionReducers
- * @description
- * A description of the factory
-*/
-
 (function () {
     'use strict';
 

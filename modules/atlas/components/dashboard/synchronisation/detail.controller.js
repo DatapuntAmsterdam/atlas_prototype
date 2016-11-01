@@ -1,9 +1,3 @@
-/**
- * @ngdoc controller
- * @name atlas.controller:DetailController
- * @description
- * Controller definition of the atlasHeader component
-*/
 (function () {
     'use strict';
 

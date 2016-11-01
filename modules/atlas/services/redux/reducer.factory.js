@@ -1,9 +1,3 @@
-/**
- * @ngdoc service
- * @name atlas.service:reducer
- * @description
- * A description of the service
-*/
 (function () {
     'use strict';
 

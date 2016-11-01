@@ -1,8 +1,10 @@
 /**
  * @ngdoc controller
  * @name atlas.controller:DataSelectionController
+ * @requires store
  * @description
  * Controller definition
+ * @property {string} vm.dataSelectionState This is some example of how a vm could be used
 */
 (function () {
     'use strict';

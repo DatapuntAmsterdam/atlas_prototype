@@ -1,9 +1,3 @@
-/**
- * @ngdoc controller
- * @name atlas.controller:SearchResultsController
- * @description
- * Controller definition
-*/
 (function () {
     'use strict';
 

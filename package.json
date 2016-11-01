@@ -53,6 +53,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DatapuntAmsterdam/atlas_prototype.git"
+    "url": "https://github.com/DatapuntAmsterdam/atlas.git"
   }
 }
