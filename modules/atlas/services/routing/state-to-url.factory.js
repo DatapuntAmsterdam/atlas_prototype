@@ -1,6 +1,6 @@
 /**
  * @ngdoc service
- * @name atlas.stateToUrl
+ * @name atlas.service:stateToUrl
  * @description
  * Determines visibility of certain elements on a page
 **/
@@ -21,7 +21,7 @@
         /**
          * @ngdoc method
          * @name update
-         * @methodOf atlas.stateToUrl
+         * @methodOf atlas.service:stateToUrl
          * @description
          * Updates the URL based on state
          *
@@ -66,7 +66,7 @@
         /**
          * @ngdoc method
          * @name _getMapParams
-         * @methodOf atlas.stateToUrl
+         * @methodOf atlas.service:stateToUrl
          * @description
          * Get map parameters
          *

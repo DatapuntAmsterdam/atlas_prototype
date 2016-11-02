@@ -1,6 +1,6 @@
 /**
  * @ngdoc directive
- * @name atlas.component:atlasDashboard
+ * @name atlas.directive:dpDashboard
  * @requires store
  * @requires dashboardColumns
  * @description

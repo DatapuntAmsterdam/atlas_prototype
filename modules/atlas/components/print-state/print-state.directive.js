@@ -1,6 +1,6 @@
 /**
  * @ngdoc directive
- * @name atlas.directive:atlasPrintState
+ * @name atlas.directive:dpPrintState
  * @restrict: 'A'
  * @description
  * Directive to add the ```is-print-mode``` class to the element on which it is included, based on the state.

@@ -1,6 +1,6 @@
 /**
  * @ngdoc service
- * @name atlas.dashboardColumns
+ * @name atlas.service:dashboardColumns
  * @description
  * Determines visibility of certain elements on a page
 **/
@@ -20,7 +20,7 @@
         /**
          * @ngdoc method
          * @name determineVisibility
-         * @methodOf atlas.dashboardColumns
+         * @methodOf atlas.service:dashboardColumns
          * @description
          * Determines the visibility.
          *
@@ -74,7 +74,7 @@
         /**
          * @ngdoc method
          * @name determineColumnSizesDefault
-         * @methodOf atlas.dashboardColumns
+         * @methodOf atlas.service:dashboardColumns
          * @description
          * Determines default column size
          *
