@@ -1,3 +1,10 @@
+/**
+ * @ngdoc directive
+ * @name atlas.directive:atlasScrollableContent
+ * @restrict: 'A'
+ * @description
+ * A description
+*/
 (function () {
     'use strict';
 

@@ -23,9 +23,11 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-docular": "^0.2.4",
     "grunt-eslint": "^19.0.0",
     "grunt-karma": "^2.0.0",
     "grunt-newer": "^1.2.0",
+    "grunt-ngdocs": "^0.2.10",
     "grunt-npmcopy": "^0.1.0",
     "grunt-postcss": "^0.8.0",
     "grunt-sass": "^1.2.1",
@@ -55,6 +57,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DatapuntAmsterdam/atlas_prototype.git"
+    "url": "https://github.com/DatapuntAmsterdam/atlas.git"
   }
 }

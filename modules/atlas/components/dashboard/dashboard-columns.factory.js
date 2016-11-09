@@ -1,3 +1,10 @@
+/**
+ * @ngdoc service
+ * @name atlas.service:dashboardColumns
+ * @description
+ * Determines visibility of certain elements on a page
+**/
+
 (function () {
     'use strict';
 
@@ -10,7 +17,16 @@
             determineVisibility: determineVisibility,
             determineColumnSizes: determineColumnSizes
         };
-
+        /**
+         * @ngdoc method
+         * @name determineVisibility
+         * @methodOf atlas.service:dashboardColumns
+         * @description
+         * Determines the visibility.
+         *
+         * @param {object} state description
+         * @returns {object} visibility An object with visibility data
+        */
         function determineVisibility (state) {
             var visibility = {};
 
@@ -55,7 +71,17 @@
 
             return visibility;
         }
-
+        /**
+         * @ngdoc method
+         * @name determineColumnSizesDefault
+         * @methodOf atlas.service:dashboardColumns
+         * @description
+         * Determines default column size
+         *
+         * @param {object} visibility description
+         * @param {boolean} hasFullscreenMap description
+         * @returns {object} columnSizes an object with column sizes
+        */
         function determineColumnSizesDefault (visibility, hasFullscreenMap) {
             var columnSizes = {};
 

@@ -1,3 +1,19 @@
+/**
+ * @ngdoc directive
+ * @name atlas.directive:dpDocumentTitle
+ * @restrict: 'A'
+ * @description
+ * Directive to add document title's based on state
+ * @requires $document
+ * @requires store
+ * @requires dashboardColumns
+ * @requires dpDataSelectionDocumentTitle
+ * @requires dpDetailDocumentTitle
+ * @requires dpMapDocumentTitle
+ * @requires dpPageDocumentTitle
+ * @requires dpSearchResultsDocumentTitle
+ * @requires dpStraatbeeldDocumentTitle
+*/
 (function () {
     angular
         .module('atlas')

@@ -1,3 +1,16 @@
+/**
+ * @ngdoc directive
+ * @name atlas.directive:dpDashboard
+ * @requires store
+ * @requires dashboardColumns
+ * @description
+ * The atlas dashboard is the main component of atlas.
+ * It is used in the index.html as follows:
+ * <pre>
+ * <dp-dashboard></dp-dashboard>
+ * </pre>
+ * from within this component all atlas functionality is accessible
+*/
 (function () {
     'use strict';
 

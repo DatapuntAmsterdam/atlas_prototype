@@ -1,3 +1,9 @@
+/**
+ * @ngdoc service
+ * @name atlas.service:stateToUrl
+ * @description
+ * Determines visibility of certain elements on a page
+**/
 (function () {
     'use strict';
 
@@ -12,6 +18,16 @@
             update: update
         };
 
+        /**
+         * @ngdoc method
+         * @name update
+         * @methodOf atlas.service:stateToUrl
+         * @description
+         * Updates the URL based on state
+         *
+         * @param {object} state current state
+         * @param {boolean} useReplace replace the entire url
+        */
         function update (state, useReplace) {
             var searchParams = angular.merge(
                 getSearchParams(state),
@@ -47,6 +63,21 @@
             return params;
         }
 
+        /**
+         * @ngdoc method
+         * @name _getMapParams
+         * @methodOf atlas.service:stateToUrl
+         * @description
+         * Get map parameters
+         *
+         * @param {object} state current state
+         * @returns {object} state-object <pre>{
+         *     lat: lat,
+         *     lon: lon,
+         *     basiskaart: basiskaart,
+         *     zoom: zoom
+         * }</pre>
+        */
         function getMapParams (state) {
             var lagen = [],
                 isVisible;
