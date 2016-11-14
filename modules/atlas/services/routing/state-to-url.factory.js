@@ -5,9 +5,9 @@
         .module('atlas')
         .factory('stateToUrl', stateToUrlFactory);
 
-    stateToUrlFactory.$inject = ['$location', '$window'];
+    stateToUrlFactory.$inject = ['$location', '$window', 'coordinateCompression'];
 
-    function stateToUrlFactory ($location, $window) {
+    function stateToUrlFactory ($location, $window, coordinateCompression) {
         return {
             update: update
         };
