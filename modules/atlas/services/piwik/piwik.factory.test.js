@@ -36,12 +36,14 @@ describe('The piwik service', function () {
 
         numberOfScripts = getScripts().length;
 
-        $window._paq = [];
-        spyOn($window._paq, 'push');
-
         piwik.initialize();
+
         // Checking values
-        expect($window._paq.push).toHaveBeenCalledWith(['setSiteId', 300]);
+        expect($window._paq.length).toBe(3);
+        expect($window._paq).toEqual(
+            [['enableLinkTracking'],
+             ['setTrackerUrl', 'https://atlas.amsterdam.nl/piwik/piwik.php'],
+             ['setSiteId', 300]]);
 
         piwikScript = getScripts()[0];
         // Checking script

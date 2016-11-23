@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-sluit-lichtergrijs</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-sluit-lichtergrijs">
+            <rect id="Rectangle-2" fill="#EEEEEE" x="0" y="0" width="26" height="26"></rect>
+            <polygon id="Fill-1" fill="#000000" points="8.18618947 5.10913704 4.99966316 8.20051096 9.92766316 12.9838849 4.99966316 17.7672588 8.18618947 20.8602675 13.1141895 16.0752588 16.2973474 12.9838849 13.1141895 9.89414574"></polygon>
+            <polygon id="Fill-2" fill="#000000" points="17.7872 5.10913704 12.8575158 9.89414574 9.67435789 12.9838849 12.8575158 16.0752588 17.7872 20.8602675 20.9720421 17.7672588 16.0440421 12.9838849 20.9720421 8.20051096"></polygon>
+        </g>
+    </g>
+</svg>

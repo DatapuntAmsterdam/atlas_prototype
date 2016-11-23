@@ -1,0 +1,148 @@
+@mixin icon-button($icon, $state: "", $hover-state: "red") {
+  @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
+
+  width: $button-size;
+  height: $button-size;
+
+  &:hover,
+  &:active {
+    @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
+  }
+}
+
+%icon-button-text {
+  @extend %link;
+  height: $button-size;
+  margin-right: $base-whitespace;
+  margin-left: $base-whitespace;
+  color: inherit;
+  font-family: $header-font-family;
+  font-size: $base-font-size;
+  font-weight: lighter;
+}
+
+%icon-button-text-extra {
+  display: inline-block;
+  width: $button-size;
+  height: $button-size;
+  content: "";
+  vertical-align: middle;
+}
+
+@mixin icon-button-text-left($icon, $state: "", $hover-state: "red") {
+  @extend %icon-button-text;
+
+  &::after {
+    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
+    @extend %icon-button-text-extra;
+
+    margin-left: $base-whitespace / 2;
+  }
+
+  &:hover,
+  &:active {
+    &::after {
+      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
+    }
+  }
+}
+
+@mixin icon-button-text-right($icon, $state: "", $hover-state: "red") {
+  @extend %icon-button-text;
+
+  &::before {
+    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
+    @extend %icon-button-text-extra;
+
+    margin-right: $base-whitespace / 2;
+  }
+
+  &:hover,
+  &:active {
+    &::before {
+      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
+    }
+  }
+}
+
+
+
+%icon-button-text-box {
+  display: block;
+  position: relative;
+  height: $button-size;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: 1px solid $secondary-gray40;
+  background-color: $primary-light;
+  line-height: $button-size - 2;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+
+  span {
+    display: block;
+    position: absolute;
+    top: 0;
+  }
+}
+
+%icon-button-text-box-extra {
+  position: absolute;
+  top: -1px;
+  width: $button-size;
+  height: $button-size;
+  content: "";
+  vertical-align: middle;
+}
+
+%icon-button-text-box-hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+@mixin icon-button-text-box-left($icon, $state: "", $hover-state: "red") {
+  @extend %icon-button-text-box;
+
+  padding-right: 10px + $button-size;
+  border-right: none;
+
+  &::after {
+    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
+    @extend %icon-button-text-box-extra;
+
+    right: 0;
+  }
+
+  &:hover,
+  &:active {
+    @extend %icon-button-text-box-hover;
+
+    &::after {
+      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
+    }
+  }
+}
+
+@mixin icon-button-text-box-right($icon, $state: "", $hover-state: "red") {
+  @extend %icon-button-text-box;
+
+  padding-left: 10px + $button-size;
+  border-left: none;
+
+  &::before {
+    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
+    @extend %icon-button-text-box-extra;
+
+    left: 0;
+  }
+
+  &:hover,
+  &:active {
+    @extend %icon-button-text-box-hover;
+
+    &::before {
+      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
+    }
+  }
+}

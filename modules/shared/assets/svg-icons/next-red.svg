@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-volgende-rood</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-volgende-rood">
+            <polygon id="Fill-1" fill="#FF0000" points="7.10542736e-15 26 26 26 26 0 0 7.10542736e-15 7.10542736e-15 26"></polygon>
+            <polygon id="Fill-2" fill="#FFFFFF" points="10.6200333 10.2731 6.34693333 6 4 8.34693333 8.2731 12.6200333 8.57946667 12.9264 8.2731 13.2327667 4 17.5058667 6.34693333 19.8528 10.6200333 15.5797 13.2733333 12.9264 10.6200333 10.2731"></polygon>
+            <polygon id="Fill-3" fill="#FFFFFF" points="19.6200333 10.2731 15.3469333 6 13 8.34693333 17.2731 12.6200333 17.5794667 12.9264 17.2731 13.2327667 13 17.5058667 15.3469333 19.8528 19.6200333 15.5797 22.2733333 12.9264 19.6200333 10.2731"></polygon>
+        </g>
+    </g>
+</svg>

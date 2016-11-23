@@ -12,26 +12,13 @@
             controllerAs: 'vm'
         });
 
-    DpToggleFullscreenController.$inject = ['$scope', 'store', 'ACTIONS'];
+    DpToggleFullscreenController.$inject = ['$scope'];
 
-    function DpToggleFullscreenController ($scope, store, ACTIONS) {
+    function DpToggleFullscreenController ($scope) {
         var vm = this;
 
-        vm.toggle = function () {
-            store.dispatch({
-                type: ACTIONS.MAP_FULLSCREEN,
-                payload: !vm.isFullscreen
-            });
-        };
-
         $scope.$watch('vm.isFullscreen', function () {
-            if (vm.isFullscreen) {
-                vm.buttonIcon = 'minimize';
-                vm.buttonText = 'Kaart verkleinen';
-            } else {
-                vm.buttonIcon = 'fullscreen';
-                vm.buttonText = 'Kaart vergroten';
-            }
+            vm.buttonText = `Kaart ${vm.isFullscreen ? 'verkleinen' : 'vergroten'}`;
         });
     }
 })();

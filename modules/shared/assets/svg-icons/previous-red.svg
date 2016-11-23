@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-vorige-rood</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-vorige-rood">
+            <polygon id="Fill-1" fill="#FF0000" points="26 0 0 3.55271368e-15 3.55271368e-15 26 26 26"></polygon>
+            <polygon id="Fill-2" fill="#FFFFFF" points="6.6533 15.5797 10.9264 19.8528 13.2733333 17.5058667 9.00023333 13.2327667 8.69386667 12.9264 9.00023333 12.6200333 13.2733333 8.34693333 10.9264 6 6.6533 10.2731 4 12.9264"></polygon>
+            <polygon id="Fill-3" fill="#FFFFFF" points="15.6533 15.5797 19.9264 19.8528 22.2733333 17.5058667 18.0002333 13.2327667 17.6938667 12.9264 18.0002333 12.6200333 22.2733333 8.34693333 19.9264 6 15.6533 10.2731 13 12.9264"></polygon>
+        </g>
+    </g>
+</svg>

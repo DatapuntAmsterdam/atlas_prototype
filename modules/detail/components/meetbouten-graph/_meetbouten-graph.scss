@@ -3,13 +3,20 @@
 }
 
 .c-meetbout__axis {
-  fill: none;
-  stroke: $primary-dark;
-  stroke-width: 1.5px;
+  fill: $primary-dark;
+  stroke: none;
+
+  path,
+  line {
+    fill: none;
+    stroke: $primary-dark;
+    stroke-width: 1px;
+  }
 }
 
 .c-meetbout__line {
   fill: none;
+  stroke-width: 2px;
 }
 
 .c-meetbout__line--zakking,
@@ -17,7 +24,7 @@
   stroke: $primary-contrast;
 }
 
-.c-meetbout__line--zakkingssnelheid,
-.c-meetbout__axis--y-zakkingssnelheid {
+.c-meetbout__line--zakking-cum,
+.c-meetbout__axis--y-zakking-c {
   stroke: $thema-10;
 }

@@ -10,10 +10,10 @@
     function searchReducersFactory (ACTIONS) {
         var reducers = {};
 
-        reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY] = fetchSearchResultsByQueryReducer;
-        reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_CLICK] = fetchSearchResultsByClickReducer;
-        reducers[ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY] = fetchSearchResultsCategoryReducer;
-        reducers[ACTIONS.SHOW_SEARCH_RESULTS] = showSearchResultsReducer;
+        reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY.id] = fetchSearchResultsByQueryReducer;
+        reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION.id] = fetchSearchResultsByLocationReducer;
+        reducers[ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY.id] = fetchSearchResultsCategoryReducer;
+        reducers[ACTIONS.SHOW_SEARCH_RESULTS.id] = showSearchResultsReducer;
 
         return reducers;
 
@@ -51,7 +51,7 @@
          *
          * @returns {Object} newState
          */
-        function fetchSearchResultsByClickReducer (oldState, payload) {
+        function fetchSearchResultsByLocationReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
             newState.search = {
@@ -62,13 +62,15 @@
                 numberOfResults: null
             };
 
-            if (oldState.layerSelection || oldState.map.isFullscreen) {
+            if (oldState.layerSelection || (oldState.map && oldState.map.isFullscreen)) {
                 newState.map.viewCenter = payload;
             }
 
             newState.layerSelection = false;
-            newState.map.showActiveOverlays = false;
-            newState.map.isFullscreen = false;
+            if (newState.map) {
+                newState.map.showActiveOverlays = false;
+                newState.map.isFullscreen = false;
+            }
             newState.page = null;
             newState.detail = null;
             newState.straatbeeld = null;

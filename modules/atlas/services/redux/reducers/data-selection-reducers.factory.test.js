@@ -4,7 +4,11 @@ describe('The dataSelectionReducers factory', function () {
         ACTIONS;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module('atlas', {
+            dataSelectionFilterNames: {
+                getSlugFor: angular.identity
+            }
+        });
 
         angular.mock.inject(function (_dataSelectionReducers_, _DEFAULT_STATE_, _ACTIONS_) {
             dataSelectionReducers = _dataSelectionReducers_;
@@ -43,7 +47,7 @@ describe('The dataSelectionReducers factory', function () {
             };
             mockedState.layerSelection = true;
 
-            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
+            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
 
             // It keeps the active layers
             expect(output.map.baseLayer).toBe('luchtfoto_1914');
@@ -65,7 +69,7 @@ describe('The dataSelectionReducers factory', function () {
 
             mockedState = angular.copy(DEFAULT_STATE);
 
-            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
+            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.dataSelection).toEqual({
                 dataset: 'bag',
@@ -87,7 +91,7 @@ describe('The dataSelectionReducers factory', function () {
             mockedState.detail = {some: 'object'};
             mockedState.straatbeeld = {some: 'object'};
 
-            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
+            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.search).toBeNull();
             expect(output.page).toBeNull();
@@ -103,12 +107,12 @@ describe('The dataSelectionReducers factory', function () {
 
             // With print mode enabled
             mockedState.isPrintMode = true;
-            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
+            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
             expect(output.isPrintMode).toBe(true);
 
             // With print mode disabled
             mockedState.isPrintMode = false;
-            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
+            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
             expect(output.isPrintMode).toBe(false);
         });
     });
@@ -127,7 +131,7 @@ describe('The dataSelectionReducers factory', function () {
                 page: 1
             };
 
-            output = dataSelectionReducers[ACTIONS.NAVIGATE_DATA_SELECTION](mockedState, 4);
+            output = dataSelectionReducers[ACTIONS.NAVIGATE_DATA_SELECTION.id](mockedState, 4);
 
             expect(output.dataSelection).toEqual({
                 dataset: 'bag',
@@ -137,6 +141,58 @@ describe('The dataSelectionReducers factory', function () {
                 },
                 page: 4
             });
+        });
+    });
+
+    describe('SHOW_SELECTION_LIST', () => {
+        var mockedState,
+            payload,
+            output;
+
+        beforeEach(function () {
+            mockedState = angular.copy(DEFAULT_STATE);
+            payload = {
+                buurt: 'Centrum'
+            };
+        });
+
+        it('sets the dataSelection state', function () {
+            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST.id](mockedState, payload);
+
+            expect(output.dataSelection).toEqual({
+                listView: true,
+                dataset: 'bag',
+                filters: {
+                    buurt: 'Centrum'
+                },
+                page: 1
+            });
+        });
+
+        it('disables search, page, detail and straatbeeld', function () {
+            mockedState.search = {some: 'object'};
+            mockedState.page = 'somePage';
+            mockedState.detail = {some: 'object'};
+            mockedState.straatbeeld = {some: 'object'};
+
+            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST.id](mockedState, payload);
+
+            expect(output.search).toBeNull();
+            expect(output.page).toBeNull();
+            expect(output.detail).toBeNull();
+            expect(output.straatbeeld).toBeNull();
+        });
+
+        it('preserves the isPrintMode variable', function () {
+            // With print mode enabled
+            mockedState.isPrintMode = true;
+            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST.id](mockedState, payload);
+            expect(output.isPrintMode).toBe(true);
+
+            // With print mode disabled
+            mockedState.isPrintMode = false;
+            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST.id](mockedState, payload);
+            expect(output.isPrintMode).toBe(false);
         });
     });
 });

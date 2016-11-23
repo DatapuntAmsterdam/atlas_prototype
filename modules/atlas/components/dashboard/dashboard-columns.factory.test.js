@@ -31,6 +31,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
@@ -57,6 +58,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 0/3, right column 3/3', function () {
@@ -102,6 +104,7 @@ describe('The dashboardColumns factory', function () {
                     expect(visibility.page).toBe(false);
                     expect(visibility.straatbeeld).toBe(false);
                     expect(visibility.dataSelection).toBe(false);
+                    expect(visibility.dataSelectionList).toBe(false);
                 });
 
                 it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
@@ -128,6 +131,7 @@ describe('The dashboardColumns factory', function () {
                     expect(visibility.page).toBe(false);
                     expect(visibility.straatbeeld).toBe(false);
                     expect(visibility.dataSelection).toBe(false);
+                    expect(visibility.dataSelectionList).toBe(false);
                 });
 
                 it('left column: 0/3, middle column: 0/3, right column 3/3', function () {
@@ -164,6 +168,25 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
+            });
+
+            it('hides the straatbeeld page when the straatbeeld is set invisible', function () {
+                mockedState.straatbeeld = {
+                    id: 'aap',
+                    isInvisible: true
+                };
+                visibility = dashboardColumns.determineVisibility(mockedState);
+                expect(visibility.straatbeeld).toBe(false);
+            });
+
+            it('hides the detail page when the detail is set invisible', function () {
+                mockedState.detail = {
+                    endpoint: [1, 2],
+                    isInvisible: true
+                };
+                visibility = dashboardColumns.determineVisibility(mockedState);
+                expect(visibility.detail).toBe(false);
             });
 
             it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
@@ -189,6 +212,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 3/3, right column 3/3', function () {
@@ -211,7 +235,7 @@ describe('The dashboardColumns factory', function () {
 
     describe('when visiting straatbeeld', function () {
         beforeEach(function () {
-            mockedState.straatbeeld = {};
+            mockedState.straatbeeld = {id: 'xyz'};
             mockedState.page = null;
         });
 
@@ -232,6 +256,19 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.page).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
+            });
+
+            it('has the straatbeeld visibile when it has an id', function () {
+                mockedState.straatbeeld = {id: '123'};
+                visibility = dashboardColumns.determineVisibility(mockedState);
+                expect(visibility.straatbeeld).toBe(true);
+            });
+
+            it('has the straatbeeld visibile when it has a location', function () {
+                mockedState.straatbeeld = {location: [1, 5]};
+                visibility = dashboardColumns.determineVisibility(mockedState);
+                expect(visibility.straatbeeld).toBe(true);
             });
 
             it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
@@ -258,6 +295,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.page).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 3/3, right column 3/3', function () {
@@ -294,6 +332,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 1/3, middle column: 2/3, right column 0/3', function () {
@@ -320,6 +359,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 2/3, middle column: 1/3, right column 0/3', function () {
@@ -352,6 +392,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 3/3, right column 0/3', function () {
@@ -378,6 +419,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 0/3, middle column: 3/3, right column 0/3', function () {
@@ -415,6 +457,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 1/3, middle column: 2/3, right column 0/3', function () {
@@ -441,6 +484,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
+                expect(visibility.dataSelectionList).toBe(false);
             });
 
             it('left column: 2/3, middle column: 1/3, right column 0/3', function () {
@@ -454,6 +498,7 @@ describe('The dashboardColumns factory', function () {
     describe('when visiting dataSelection', function () {
         beforeEach(function () {
             mockedState.dataSelection = {
+                listView: false,
                 dataset: 'bag',
                 filters: {
                     buurt: 'Trompbuurt'
@@ -462,13 +507,13 @@ describe('The dashboardColumns factory', function () {
             };
 
             mockedState.page = null;
-
-            visibility = dashboardColumns.determineVisibility(mockedState);
         });
 
         describe('the default non-print version', function () {
             beforeEach(function () {
                 mockedState.isPrintMode = false;
+
+                visibility = dashboardColumns.determineVisibility(mockedState);
 
                 columnSizes = dashboardColumns.determineColumnSizes(visibility, false, false);
             });
@@ -491,9 +536,39 @@ describe('The dashboardColumns factory', function () {
             });
         });
 
+        describe('the list view version', function () {
+            beforeEach(function () {
+                mockedState.dataSelection.listView = true;
+
+                visibility = dashboardColumns.determineVisibility(mockedState);
+
+                columnSizes = dashboardColumns.determineColumnSizes(visibility, false, false);
+            });
+
+            it('shows dataSelectionList and map', function () {
+                expect(visibility.dataSelection).toBe(true);
+                expect(visibility.dataSelectionList).toBe(true);
+                expect(visibility.map).toBe(true);
+
+                expect(visibility.detail).toBe(false);
+                expect(visibility.layerSelection).toBe(false);
+                expect(visibility.page).toBe(false);
+                expect(visibility.searchResults).toBe(false);
+                expect(visibility.straatbeeld).toBe(false);
+            });
+
+            it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
+                expect(columnSizes.left).toBe(0);
+                expect(columnSizes.middle).toBe(4);
+                expect(columnSizes.right).toBe(8);
+            });
+        });
+
         describe('the print version', function () {
             beforeEach(function () {
                 mockedState.isPrintMode = true;
+
+                visibility = dashboardColumns.determineVisibility(mockedState);
 
                 columnSizes = dashboardColumns.determineColumnSizes(visibility, false, true);
             });

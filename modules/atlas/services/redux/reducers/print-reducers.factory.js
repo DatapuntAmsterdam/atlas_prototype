@@ -10,8 +10,8 @@
     function printReducersFactory (ACTIONS) {
         var reducers = {};
 
-        reducers[ACTIONS.SHOW_PRINT] = showPrintReducer;
-        reducers[ACTIONS.HIDE_PRINT] = hidePrintReducer;
+        reducers[ACTIONS.SHOW_PRINT.id] = showPrintReducer;
+        reducers[ACTIONS.HIDE_PRINT.id] = hidePrintReducer;
 
         return reducers;
 

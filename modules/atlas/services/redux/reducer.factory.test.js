@@ -90,16 +90,16 @@ describe('The reducer factory', function () {
         spyOn(dataSelectionReducers, 'ACTION_I').and.callThrough();
         spyOn(printReducers, 'ACTION_J').and.callThrough();
 
-        reducer(inputState, {type: 'ACTION_A'});
-        reducer(inputState, {type: 'ACTION_B'});
-        reducer(inputState, {type: 'ACTION_C'});
-        reducer(inputState, {type: 'ACTION_D'});
-        reducer(inputState, {type: 'ACTION_E'});
-        reducer(inputState, {type: 'ACTION_F'});
-        reducer(inputState, {type: 'ACTION_G'});
-        reducer(inputState, {type: 'ACTION_H'});
-        reducer(inputState, {type: 'ACTION_I'});
-        reducer(inputState, {type: 'ACTION_J'});
+        reducer(inputState, {type: {id: 'ACTION_A'}});
+        reducer(inputState, {type: {id: 'ACTION_B'}});
+        reducer(inputState, {type: {id: 'ACTION_C'}});
+        reducer(inputState, {type: {id: 'ACTION_D'}});
+        reducer(inputState, {type: {id: 'ACTION_E'}});
+        reducer(inputState, {type: {id: 'ACTION_F'}});
+        reducer(inputState, {type: {id: 'ACTION_G'}});
+        reducer(inputState, {type: {id: 'ACTION_H'}});
+        reducer(inputState, {type: {id: 'ACTION_I'}});
+        reducer(inputState, {type: {id: 'ACTION_J'}});
 
         expect(urlReducers.ACTION_A).toHaveBeenCalled();
         expect(detailReducers.ACTION_B).toHaveBeenCalled();

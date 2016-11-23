@@ -1,0 +1,4 @@
+.c-data-selection-header__switch-view-button {
+  @include data-selection-button("forward");
+  margin-right: 0;
+}

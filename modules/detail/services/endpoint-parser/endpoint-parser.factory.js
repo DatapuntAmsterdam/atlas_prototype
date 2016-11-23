@@ -8,12 +8,18 @@
     function endpointParserFactory () {
         return {
             getTemplateUrl,
+            getSubject,
             getStelselpediaKey
         };
 
         function getTemplateUrl (endpoint) {
             const [category, subject] = getParts(endpoint);
             return `modules/detail/components/detail/templates/${category}/${subject}.html`;
+        }
+
+        function getSubject (endpoint) {
+            const [, subject] = getParts(endpoint);
+            return subject;
         }
 
         function getStelselpediaKey (endpoint) {

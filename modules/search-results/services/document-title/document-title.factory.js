@@ -21,7 +21,7 @@
                         searchState.category) : null,
                 baseTitle = (titleData && titleData.title) ? titleData.title : '';
 
-            return (baseTitle && titleData.subTitle) ? baseTitle + ' – ' + titleData.subTitle : baseTitle;
+            return (baseTitle && titleData.subTitle) ? `${baseTitle} ${titleData.subTitle}` : baseTitle;
         }
     }
 })();

@@ -10,15 +10,15 @@
     function mapReducersFactory (ACTIONS) {
         var reducers = {};
 
-        reducers[ACTIONS.MAP_SET_BASELAYER] = mapSetBaselayerReducer;
-        reducers[ACTIONS.MAP_ADD_OVERLAY] = mapAddOverlayReducer;
-        reducers[ACTIONS.MAP_REMOVE_OVERLAY] = mapRemoveOverlayReducer;
-        reducers[ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY] = mapToggleVisibilityOverlay;
-        reducers[ACTIONS.MAP_PAN] = mapPanReducer;
-        reducers[ACTIONS.MAP_ZOOM] = mapZoomReducer;
-        reducers[ACTIONS.MAP_FULLSCREEN] = mapFullscreenReducer;
-        reducers[ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS] = showActiveOverlaysReducer;
-        reducers[ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS] = hideActiveOverlaysReducer;
+        reducers[ACTIONS.MAP_SET_BASELAYER.id] = mapSetBaselayerReducer;
+        reducers[ACTIONS.MAP_ADD_OVERLAY.id] = mapAddOverlayReducer;
+        reducers[ACTIONS.MAP_REMOVE_OVERLAY.id] = mapRemoveOverlayReducer;
+        reducers[ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY.id] = mapToggleVisibilityOverlay;
+        reducers[ACTIONS.MAP_PAN.id] = mapPanReducer;
+        reducers[ACTIONS.MAP_ZOOM.id] = mapZoomReducer;
+        reducers[ACTIONS.MAP_FULLSCREEN.id] = mapFullscreenReducer;
+        reducers[ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS.id] = showActiveOverlaysReducer;
+        reducers[ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS.id] = hideActiveOverlaysReducer;
 
         return reducers;
 
@@ -91,6 +91,7 @@
             }
             return newState;
         }
+
         /**
          * @param {Object} oldState
          * @param {Array} payload - The new position in Array format, e.g. [52.123, 4.789]
@@ -133,7 +134,20 @@
             var newState = angular.copy(oldState);
 
             if (payload) {
+                // Set map to full screen
                 newState.layerSelection = false;
+                if (angular.isObject(newState.straatbeeld)) {
+                    // If the map is maximized when a straatbeeld is active
+                    // then inactivate straatbeeld
+                    newState.straatbeeld.isInvisible = true;
+                }
+            } else {
+                // Set map back to column view
+                if (angular.isObject(newState.straatbeeld)) {
+                    // If the map is minimized when a straatbeeld is inactive
+                    // then reactivate straatbeeld
+                    newState.straatbeeld.isInvisible = false;
+                }
             }
 
             newState.map.isFullscreen = payload;

@@ -31,6 +31,7 @@ module.exports = function (grunt) {
         postcss: require(gruntDir + 'postcss')(grunt),
         sass: require(gruntDir + 'sass'),
         sasslint: require(gruntDir + 'sasslint'),
+        svg_sprite: require(gruntDir + 'svg-sprite'),
         tags: require(gruntDir + 'script-link-tags')(grunt),
         watch: require(gruntDir + 'watch')
     });
@@ -49,6 +50,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-npmcopy');
     grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-svg-sprite');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-sass-lint');
     grunt.loadNpmTasks('grunt-script-link-tags');

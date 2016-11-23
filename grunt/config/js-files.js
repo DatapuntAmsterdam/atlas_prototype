@@ -6,6 +6,12 @@ var jsModuleFiles = module => [
     `build/temp/${module.slug}.ngtemplates.js`
 ];
 
+var jsTestModuleFiles = module => [
+    `modules/${module.slug}/${module.slug}.module.js`,
+    `modules/${module.slug}/**/!(*.test|*.run).js`,
+    `build/temp/${module.slug}.ngtemplates.js`
+];
+
 var cssModuleFiles = module => [
     `build/temp/${module.slug}.css`
 ];
@@ -35,6 +41,7 @@ var moduleDependencies = (module) => {
 module.exports = {
     modules,
     jsModuleFiles,
+    jsTestModuleFiles,
     moduleDependencies,
     jsFiles,
     cssModuleFiles,

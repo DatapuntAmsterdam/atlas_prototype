@@ -1,10 +1,5 @@
 .o-link-inline {
-  color: $primary-dark;
-  text-decoration: underline;
-
-  &:hover {
-    color: $primary-contrast;
-  }
+  @extend %link--inline;
 }
 
 .o-link-inline--light {

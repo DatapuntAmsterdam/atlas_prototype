@@ -17,7 +17,6 @@
             'dpShared',
 
             // Third party modules
-            'angulartics',
             'angulartics.piwik'
         ]);
 })();

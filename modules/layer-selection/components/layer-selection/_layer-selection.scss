@@ -1,5 +1,5 @@
 .c-layer-selection {
-  height: calc(100% - #{$base-whitespace * 2});
+  height: 100%;
   border-width: 0 1px 1px;
   border-style: solid;
   border-color: $secondary-gray40;
@@ -17,16 +17,11 @@
 }
 
 .c-layer-selection__close {
+  @include icon-button("close", "red", "");
+
   position: absolute;
   top: 0;
   right: -1px;
-  width: $button-size;
-  height: $button-size;
-  background-image: url("assets/icons/close-hover.svg");
-
-  &:hover {
-    background-image: url("assets/icons/close-active.svg");
-  }
 }
 
 

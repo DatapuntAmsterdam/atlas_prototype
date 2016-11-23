@@ -240,7 +240,7 @@ describe('The dp-stelselpedia-header directive', function () {
             expect(directive.find('.qa-stelselpedia').length).toBe(1);
 
             // Close uitleg with the cross
-            directive.find('.o-btn--close').click();
+            directive.find('.o-btn--close--info').click();
             expect(directive.find('.qa-stelselpedia').length).toBe(0);
 
             // Open metadata
@@ -248,7 +248,7 @@ describe('The dp-stelselpedia-header directive', function () {
             expect(directive.find('.qa-metadata').length).toBe(1);
 
             // Close metadata with the cross
-            directive.find('.o-btn--close').click();
+            directive.find('.o-btn--close--info').click();
             expect(directive.find('.qa-metadatat').length).toBe(0);
         });
 

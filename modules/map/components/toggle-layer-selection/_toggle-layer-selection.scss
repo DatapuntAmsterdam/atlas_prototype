@@ -1,45 +1,23 @@
-.c-toggle-layer-selection {
+%toggle-layer-selection {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 162px;
-  height: $button-size;
-  cursor: pointer;
+  min-width: 162px;
   z-index: 3;
+}
 
-  &:hover ,
-  &:active {
-    color: inherit;
+.c-toggle-layer-selection {
+  @extend %toggle-layer-selection;
+  @include icon-button-text-box-right("forward", "red", "");
 
-    .c-toggle-layer-selection__icon {
-      background-image: url("assets/icons/link-active.svg");
-    }
+  &.c-toggle-layer-selection--mirrored {
+    @extend %toggle-layer-selection;
+    @include icon-button-text-box-right("back");
   }
 }
 
-.c-toggle-layer-selection__icon {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: $button-size;
-  height: $button-size;
-  background-image: url("assets/icons/link-hover.svg");
-}
-
-.c-toggle-layer-selection__icon--mirrored {
-  transform: rotate(180deg);
-}
-
-.c-toggle-layer-selection__text {
-  position: absolute;
-  top: 0;
-  left: $button-size;
-  width: 162px - $button-size;
-  height: $button-size;
-  border-width: 1px 1px 1px 0;
-  border-style: solid;
-  border-color: $secondary-gray40;
-  background-color: $primary-light;
-  line-height: 24px;
+.is-print-mode {
+  .c-toggle-layer-selection {
+    display: none;
+  }
 }

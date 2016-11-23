@@ -16,6 +16,16 @@
                     label_plural: 'Adressen',
                     uri: 'atlas/search/adres/'
                 }, {
+                    slug: 'vestiging',
+                    label_singular: 'Vestiging',
+                    label_plural: 'Vestigingen',
+                    uri: 'handelsregister/search/vestiging/'
+                }, {
+                    slug: 'mac',
+                    label_singular: 'Maatschappelijke activiteit',
+                    label_plural: 'Maatschappelijke activiteiten',
+                    uri: 'handelsregister/search/maatschappelijkeactiviteit/'
+                }, {
                     slug: 'object',
                     label_singular: 'Kadastraal object',
                     label_plural: 'Kadastrale objecten',
@@ -59,10 +69,12 @@
                     label_plural: 'Panden',
                     features: ['bag/pand']
                 }, {
+                    slug: 'plaats',
                     label_singular: 'Standplaats',
                     label_plural: 'Standplaatsen',
                     features: ['bag/standplaats']
                 }, {
+                    slug: 'plaats',
                     label_singular: 'Ligplaats',
                     label_plural: 'Ligplaatsen',
                     features: ['bag/ligplaats']

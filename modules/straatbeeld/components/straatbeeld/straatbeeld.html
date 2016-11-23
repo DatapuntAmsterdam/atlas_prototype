@@ -1,8 +1,10 @@
 <div class="c-straatbeeld">
+    <dp-link type="HIDE_STRAATBEELD" class-name="c-straatbeeld__close" hover-text="Sluiten"></dp-link>
+
     <div class="c-straatbeeld__marzipano js-marzipano-viewer" ng-mousemove="updateOrientation()"></div>
 
     <div class="c-straatbeeld__status-bar">
-        <dp-straatbeeld-metadata date="state.date" location="state.car.location"></dp-straatbeeld-metadata>
+        <dp-straatbeeld-metadata date="state.date" location="state.location"></dp-straatbeeld-metadata>
     </div>
 </div>
 

@@ -13,14 +13,13 @@
         };
 
         function initialize () {
-            var urlBase = 'https://atlas.amsterdam.nl/piwik/',
+            let urlBase = 'https://atlas.amsterdam.nl/piwik/',
                 doc,
                 piwik,
                 scripts;
 
             $window._paq = $window._paq || [];
 
-            $window._paq.push(['trackPageView']);
             $window._paq.push(['enableLinkTracking']);
 
             $window._paq.push(['setTrackerUrl', urlBase + 'piwik.php']);

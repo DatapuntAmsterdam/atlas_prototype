@@ -5,9 +5,9 @@
         .module('dpStraatbeeld')
         .factory('marzipanoService', marzipanoService);
 
-    marzipanoService.$inject = ['Marzipano', 'straatbeeldConfig', 'earthmine', 'angleConversion', 'hotspotService'];
+    marzipanoService.$inject = ['Marzipano', 'straatbeeldConfig', 'angleConversion', 'hotspotService'];
 
-    function marzipanoService (Marzipano, straatbeeldConfig, earthmine, angleConversion, hotspotService) {
+    function marzipanoService (Marzipano, straatbeeldConfig, angleConversion, hotspotService) {
         var viewer;
 
         return {
@@ -27,17 +27,21 @@
                     preserveDrawingBuffer: true
                 }
             });
-
             return viewer;
         }
 
-        function loadScene (sceneId, car, camera, hotspots) {
-            var view,
+        function loadScene (image, heading, pitch, fov, hotspots) {
+            var source,
+                view,
                 viewLimiter,
-                scene,
-                imageSourceUrl;
+                scene;
 
-            imageSourceUrl = earthmine.getImageSourceUrl(sceneId);
+            source = Marzipano.ImageUrlSource.fromString(
+                image.pattern,
+                {
+                    cubeMapPreviewUrl: image.preview
+                }
+            );
 
             viewLimiter = Marzipano.RectilinearView.limit.traditional(
                 straatbeeldConfig.MAX_RESOLUTION,
@@ -47,30 +51,37 @@
             view = new Marzipano.RectilinearView({}, viewLimiter);
 
             scene = viewer.createScene({
-                source: Marzipano.ImageUrlSource.fromString(imageSourceUrl),
-                geometry: new Marzipano.CubeGeometry(straatbeeldConfig.RESOLUTION_LEVELS),
+                source: source,
+                geometry: new Marzipano.CubeGeometry(straatbeeldConfig.LEVEL_PROPERTIES_LIST),
                 view: view,
                 pinFirstLevel: true
             });
 
-            hotspots.forEach(function (hotspot) {
+            hotspots.sort(function (hotspotA, hotspotB) {
+                return hotspotB.distance - hotspotA.distance;
+            }).forEach(function (hotspot) {
                 hotspotService.createHotspotTemplate(hotspot.id, hotspot.distance).then(function (template) {
-                    var position = hotspotService.calculateHotspotPosition(car, hotspot);
+                    var position = {
+                        yaw: angleConversion.degreesToRadians(hotspot.heading),
+                        pitch: calculateHotspotPitch(straatbeeldConfig.CAMERA_HEIGHT, hotspot.distance)
+                    };
 
                     scene.hotspotContainer().createHotspot(
                         template,
-                        position,
-                        straatbeeldConfig.HOTSPOT_PERSPECTIVE
+                        position
                     );
                 });
             });
 
-            // Set orientation
-            view.setYaw(camera.heading - car.heading);
-            view.setPitch(camera.pitch);
-            view.setFov(camera.fov || straatbeeldConfig.DEFAULT_FOV);
+            view.setYaw(angleConversion.degreesToRadians(heading));
+            view.setPitch(angleConversion.degreesToRadians(pitch));
+            view.setFov(angleConversion.degreesToRadians(fov));
 
             scene.switchTo();
+
+            function calculateHotspotPitch (height, distance) {
+                return Math.atan(height / distance);
+            }
         }
     }
 })();

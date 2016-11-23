@@ -1,0 +1,9 @@
+<ul class="o-list u-padding__top--1-5">
+    <li ng-repeat="row in vm.data track by $index">
+        <dp-link type="FETCH_DETAIL" payload="row.detailEndpoint">{{row.adres}}</dp-link>
+        <span ng-show="row.standplaats">(standplaats)</span>
+        <span ng-show="row.ligplaats">(ligplaats)</span>
+        <span ng-show="row.nevenadres">(nevenadres)</span>
+        <span ng-show="row.gevormd">(verblijfsobject gevormd)</span>
+    </li>
+</ul>

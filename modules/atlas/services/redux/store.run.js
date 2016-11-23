@@ -3,9 +3,27 @@
         .module('atlas')
         .run(runBlock);
 
-    runBlock.$inject = ['applicationState', 'reducer', 'DEFAULT_STATE', 'stateToUrlMiddleware'];
+    runBlock.$inject = [
+        'applicationState',
+        'reducer',
+        'stateToUrl',
+        'DEFAULT_STATE',
+        'contextMiddleware',
+        'stateToUrlMiddleware'
+    ];
 
-    function runBlock (applicationState, reducer, DEFAULT_STATE, stateToUrlMiddleware) {
-        applicationState.initialize(reducer, DEFAULT_STATE, stateToUrlMiddleware);
+    function runBlock (
+            applicationState,
+            reducer,
+            stateToUrl,
+            DEFAULT_STATE,
+            contextMiddleware,
+            stateToUrlMiddleware) {
+        applicationState.initialize(
+            reducer,
+            stateToUrl,
+            DEFAULT_STATE,
+            contextMiddleware,
+            stateToUrlMiddleware);
     }
 })();

@@ -1,3 +1,8 @@
-.c-data-selection__grid {
+.c-data-selection__no-data-panel {
   margin-top: $base-whitespace * 2;
+  margin-bottom: $base-whitespace * 2;
+}
+
+.c-data-selection__no-data-header {
+  margin-bottom: $base-whitespace * 1.5;
 }

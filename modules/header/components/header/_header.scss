@@ -18,13 +18,14 @@
 }
 
 .site-header__logo {
+  @include font-size($xl-header-font);
   display: block;
   height: $site-header-height;
-  padding-left: 25px;
+  padding-left: $base-whitespace * 3;
   background-color: $secondary-gray80;
   color: $primary-light;
   font-family: $header-font-family;
-  font-size: 35px;
+  text-decoration: none;
   cursor: pointer;
 
   img {
@@ -40,6 +41,7 @@
 
   span {
     background-color: $secondary-gray80;
+    line-height: 50px;
   }
 }
 
@@ -48,6 +50,7 @@
 }
 
 .site-header__menu {
+  position: relative;
   height: $site-header-height;
   float: right;
 }
@@ -86,5 +89,35 @@
 
   &:hover {
     background-color: $secondary-gray40;
+  }
+}
+
+.c-exit-print-mode {
+  @include icon-button("close", "red", "");
+
+  position: absolute;
+  top: -35px;
+  right: -21px;
+}
+
+.c-print-button {
+  @include icon-button-text-left("print");
+
+  margin-right: 4px;
+  float: right;
+}
+
+/* SASSLint enforces merging of selectors */
+.is-print-mode {
+  .site-header {
+    background-color: transparent;
+  }
+
+  .site-header__menu__item {
+    color: $secondary-gray60;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
 }

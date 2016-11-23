@@ -6,6 +6,11 @@ describe('The searchFormatter factory', function () {
                 results: [
                     {
                         _display: 'FAKE_LINK_A',
+                        hoofdadres: true,
+                        vbo_status: [{
+                            code: '18',
+                            omschrijving: 'verblijfsobject gevormd'
+                        }],
                         _links: {
                             self: {
                                 href: 'http://www.example.com/path/to/1'
@@ -13,6 +18,7 @@ describe('The searchFormatter factory', function () {
                         }
                     }, {
                         _display: 'FAKE_LINK_B',
+                        hoofdadres: false,
                         _links: {
                             self: {
                                 href: 'http://www.example.com/path/to/2'
@@ -156,10 +162,17 @@ describe('The searchFormatter factory', function () {
                 results: [
                     {
                         label: 'FAKE_LINK_A',
+                        hoofdadres: true,
+                        vbo_status: {
+                            code: '18',
+                            omschrijving: 'verblijfsobject gevormd'
+                        },
                         endpoint: 'http://www.example.com/path/to/1',
                         subtype: null
                     }, {
                         label: 'FAKE_LINK_B',
+                        hoofdadres: false,
+                        vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/2',
                         subtype: null
                     }
@@ -174,22 +187,32 @@ describe('The searchFormatter factory', function () {
                 results: [
                     {
                         label: 'FAKE_LINK_1',
+                        hoofdadres: undefined,
+                        vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/101',
                         subtype: null
                     }, {
                         label: 'FAKE_LINK_2',
+                        hoofdadres: undefined,
+                        vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/102',
                         subtype: null
                     }, {
                         label: 'FAKE_LINK_3',
+                        hoofdadres: undefined,
+                        vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/103',
                         subtype: 'water'
                     }, {
                         label: 'FAKE_LINK_4',
+                        hoofdadres: undefined,
+                        vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/104',
                         subtype: null
                     }, {
                         label: 'FAKE_LINK_5',
+                        hoofdadres: undefined,
+                        vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/105',
                         subtype: null
                     }
@@ -213,10 +236,17 @@ describe('The searchFormatter factory', function () {
             results: [
                 {
                     label: 'FAKE_LINK_A',
+                    hoofdadres: true,
+                    vbo_status: {
+                        code: '18',
+                        omschrijving: 'verblijfsobject gevormd'
+                    },
                     endpoint: 'http://www.example.com/path/to/1',
                     subtype: null
                 }, {
                     label: 'FAKE_LINK_B',
+                    hoofdadres: false,
+                    vbo_status: undefined,
                     endpoint: 'http://www.example.com/path/to/2',
                     subtype: null
                 }
@@ -232,14 +262,20 @@ describe('The searchFormatter factory', function () {
         expect(output).toEqual([
             {
                 label: 'Linnaeusstraat 2',
+                hoofdadres: undefined,
+                vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/123',
                 subtype: null
             }, {
                 label: 'Linnaeusstraat',
+                hoofdadres: undefined,
+                vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/124',
                 subtype: 'weg'
             }, {
                 label: 'Waterslootplas',
+                hoofdadres: undefined,
+                vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/125',
                 subtype: 'water'
             }

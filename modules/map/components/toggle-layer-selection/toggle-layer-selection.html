@@ -1,13 +1,5 @@
-<button class="c-toggle-layer-selection"
-        ng-click="vm.toggle()"
-        title="{{vm.buttonTitle}}">
-
-    <div class="c-toggle-layer-selection__text">
-        Meer kaartlagen
-    </div>
-    <span class="c-toggle-layer-selection__icon"
-        ng-class="{
-            'c-toggle-layer-selection__icon--mirrored': vm.showLayerSelection
-        }">
-    </span>
-</button>
+<dp-link type="{{vm.action}}"
+         class-name="{{'c-toggle-layer-selection' + (vm.showLayerSelection ? ' c-toggle-layer-selection--mirrored' : '')}}"
+         hover-text="{{vm.buttonTitle}}">
+    <span>Meer kaartlagen</span>
+</dp-link>

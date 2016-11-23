@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-mini-rood</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-mini-rood">
+            <polygon id="Fill-1" fill="#FF0000" points="0 26 26 26 26 0 0 0"></polygon>
+            <polygon id="Fill-2" fill="#FEFEFE" points="9.144 18.1582 9.144 21.3842 11.088 21.3842 11.089 14.9112 4.617 14.9112 4.617 16.8562 7.697 16.8562 5.069 19.5222 6.445 20.8972"></polygon>
+            <polygon id="Fill-3" fill="#FEFEFE" points="21.3828 11.0894 21.3828 9.1454 18.3028 9.1454 20.9308 6.4794 19.5548 5.1044 16.8558 7.8424 16.8558 4.6174 14.9108 4.6174 14.9108 11.0894"></polygon>
+        </g>
+    </g>
+</svg>

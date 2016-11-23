@@ -14,7 +14,11 @@
         };
 
         function getTitle (straatbeeldState) {
-            return 'Panorama ' + coordinatesFilter(straatbeeldState.car.location);
+            let title = 'Panorama';
+            if (angular.isArray(straatbeeldState.location)) {
+                title += ` ${coordinatesFilter(straatbeeldState.location)}`;
+            }
+            return title;
         }
     }
 })();

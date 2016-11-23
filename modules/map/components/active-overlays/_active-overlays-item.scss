@@ -14,9 +14,8 @@
 }
 
 .c-active-overlays__item__link {
+  @extend %link--inline;
   margin-left: $base-whitespace;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .c-active-overlays__item__message {

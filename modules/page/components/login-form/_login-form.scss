@@ -10,6 +10,7 @@
 .c-login-form__label {
   width: percentage(1 / 3);
   float: left;
+  font-weight: bold;
 }
 
 .c-login-form__input {
@@ -20,34 +21,25 @@
   float: left;
   border: 1px solid $secondary-gray40;
   font-size: inherit;
+  box-shadow: inset 0 1px 3px 0 $secondary-gray20;
+
+  &:focus {
+    border: solid $primary-dark 1px;
+  }
 }
 
-.c-login-form__error {
-  margin-bottom: 20px;
-  padding: 0 $base-whitespace;
-  line-height: $button-size;
+.c-login-form__error-panel {
+  margin-top: 0;
+  margin-bottom: 2 * $base-whitespace;
+  padding-top: $base-whitespace * .3;
+  padding-bottom: $base-whitespace * .4;
+  padding-left: $base-whitespace;
+  line-height: 26 - ($base-whitespace * .3) - ($base-whitespace * .4);
 }
 
 .c-login-form__button {
+  @include icon-button-text-left("forward");
+
+  margin-right: 0;
   float: right;
-  font-weight: 700;
-  line-height: $button-size;
-
-  &::after {
-    display: inline-block;
-    width: $button-size;
-    height: $button-size;
-    margin-left: $base-whitespace / 2;
-    background-image: url("assets/icons/link-active.svg");
-    content: "";
-    vertical-align: middle;
-  }
-
-  &:hover {
-    color: $primary-contrast;
-
-    &::after {
-      background-image: url("assets/icons/link-hover.svg");
-    }
-  }
 }

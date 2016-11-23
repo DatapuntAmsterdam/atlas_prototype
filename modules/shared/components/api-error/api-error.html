@@ -1,0 +1,14 @@
+<div class="c-api-error__panel">
+    <dp-panel is-panel-visible="vm.httpStatus.hasErrors"
+              type="danger" can-close="true" class="qa-api-error">
+        <div class="c-api-error__panel__text">
+            <span ng-if="vm.showNotFoundError" class="qa-api-not-found-error">
+                Deze informatie is niet beschikbaar. Dit is reeds teruggemeld.
+            </span>
+            <span ng-if="vm.showServerError" class="qa-api-server-error">
+                Momenteel wordt niet alle informatie getoond. Aan deze technische storing wordt gewerkt.
+                Probeer het zodadelijk nog eens…
+            </span>
+        </div>
+    </dp-panel>
+</div>

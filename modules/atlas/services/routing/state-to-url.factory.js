@@ -9,11 +9,37 @@
 
     function stateToUrlFactory ($location, $window, coordinateCompression) {
         return {
-            update: update
+            create,
+            update
         };
 
+        function create (state) {
+            const params = getParams(state);
+            let key,
+                queryString = '';
+
+            for (key in params) {
+                if (params.hasOwnProperty(key) && params[key] !== null) {
+                    queryString += queryString ? '&' : '?';
+                    queryString += `${key}=${params[key]}`;
+                }
+            }
+
+            return '#' + queryString;
+        }
+
         function update (state, useReplace) {
-            var searchParams = angular.merge(
+            const params = getParams(state);
+
+            if (useReplace) {
+                $location.replace();
+            }
+
+            $location.search(params);
+        }
+
+        function getParams (state) {
+            return angular.merge(
                 getSearchParams(state),
                 getMapParams(state),
                 getLayerSelectionParams(state),
@@ -23,12 +49,6 @@
                 getDataSelectionParams(state),
                 getPrintParams(state)
             );
-
-            if (useReplace) {
-                $location.replace();
-            }
-
-            $location.search(searchParams);
         }
 
         function getSearchParams (state) {
@@ -82,30 +102,32 @@
         }
 
         function getDetailParams (state) {
-            return {
-                detail: state.detail && state.detail.endpoint || null
-            };
+            var params = {};
+
+            if (state.detail) {
+                params.detail = state.detail.endpoint || null;
+                if (state.detail.isInvisible) {
+                    params.detailInvisible = true;  // Only store in url on truthy value
+                }
+            }
+
+            return params;
         }
 
         function getStraatbeeldParams (state) {
             var params = {};
 
             if (state.straatbeeld) {
-                if (state.straatbeeld.id) {
-                    params.id = String(state.straatbeeld.id);
-
-                    if (state.straatbeeld.camera) {
-                        params.heading = String(state.straatbeeld.camera.heading);
-                        params.pitch = String(state.straatbeeld.camera.pitch);
-
-                        if (state.straatbeeld.camera.fov) {
-                            params.fov = String(state.straatbeeld.camera.fov);
-                        }
-                    }
-                } else {
-                    params.plat = String(state.straatbeeld.searchLocation[0]);
-                    params.plon = String(state.straatbeeld.searchLocation[1]);
+                params.id = state.straatbeeld.id;
+                if (angular.isArray(state.straatbeeld.location)) {
+                    params.straatbeeld = state.straatbeeld.location.join(',');
                 }
+                if (state.straatbeeld.isInvisible) {
+                    params.straatbeeldInvisible = true;  // Only store in url on truthy value
+                }
+                params.heading = String(state.straatbeeld.heading);
+                params.pitch = String(state.straatbeeld.pitch);
+                params.fov = String(state.straatbeeld.fov);
             }
 
             return params;
@@ -116,6 +138,9 @@
                 datasetFilters = [];
 
             if (angular.isObject(state.dataSelection)) {
+                if (state.dataSelection.listView) {
+                    params['list-view'] = state.dataSelection.listView;
+                }
                 params.dataset = state.dataSelection.dataset;
 
                 angular.forEach(state.dataSelection.filters, function (value, key) {

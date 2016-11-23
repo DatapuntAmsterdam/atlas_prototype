@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     // Configure lint tasks
     const linters = ['eslint', 'console-log-test'];
     const tasks = ['grunt', 'tests', 'modules'];
-
+    const fs = require('fs');
     const linttasks = linters
         .map(linter => tasks
             .map(task => `${linter}:${task}`))
@@ -13,18 +13,32 @@ module.exports = function (grunt) {
     grunt.registerTask('lint', linttasks);
 
     grunt.registerTask('test-js', [
-        'lint',
-        'test-js-modules'
+        'test-js-modules',
+        'lint'
+    ]);
+
+    grunt.registerTask('test-js-full', [
+        'test-js-modules-full',
+        'lint'
     ]);
 
     grunt.registerTask('test-css', [
         'sasslint'
     ]);
 
-    grunt.registerTask('test-js-modules', [
+    grunt.registerTask('build-test', [
         'concat-tests',
-        'babel-tests',
-        'karma:coverage'
+        'babel-tests'
+    ]);
+
+    grunt.registerTask('test-js-modules', [
+        'build-test',
+        'karma-modules-coverage'
+    ]);
+
+    grunt.registerTask('test-js-modules-full', [
+        'build-test',
+        'karma-modules-fullcoverage'
     ]);
 
     // Test a single module by concatenate the test files
@@ -34,13 +48,27 @@ module.exports = function (grunt) {
     // A Taiga task has been made to have all modules tested with full coverage
     files.modules.forEach(module => {
         grunt.registerTask(`test-js-module-${module.slug}`,
-            linters
-                .map(linter => `newer:${linter}:module_${module.slug}`)
-                .concat([
-                    `concat:test_${module.slug}`,
-                    `babel-test-${module.slug}`,
-                    `karma:${module.slug}_all`
-                ])
+            [
+                `concat:test_${module.slug}`,
+                `babel-test-${module.slug}`,
+                `karma:${module.slug}_all`
+            ].concat(linters.map(linter => `newer:${linter}:module_${module.slug}`))
         );
     });
+
+    grunt.registerTask('create-hooks', copyHooks);
+
+    grunt.registerTask('pre-commit', [
+        'test'
+    ]);
+
+    function copyHooks () {
+        // Copy all hooks from /hooks into .git/hooks
+        grunt.task.run('newer:copy:githooks');
+
+        // Make hooks executable
+        grunt.file.recurse('.git/hooks', path => {
+            fs.chmodSync(path, '755');
+        });
+    }
 };

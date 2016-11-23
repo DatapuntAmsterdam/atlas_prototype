@@ -10,7 +10,7 @@
     function homeReducersFactory (ACTIONS, DEFAULT_STATE) {
         var reducers = {};
 
-        reducers[ACTIONS.SHOW_HOME] = showHomeReducer;
+        reducers[ACTIONS.SHOW_HOME.id] = showHomeReducer;
 
         return reducers;
 

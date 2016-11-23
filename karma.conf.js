@@ -1,5 +1,5 @@
 module.exports = function (config) {
-    var jsFiles = ['build/temp/bower_components.js'];
+    var jsFiles = ['build/temp/atlas.libs.js'];
     jsFiles = jsFiles.concat(require('./grunt/config/js-files').jsFiles);
     jsFiles.push('bower_components/angular-mocks/angular-mocks.js');
     jsFiles.push('build/temp/babel/es5tests/*.js');
@@ -7,9 +7,7 @@ module.exports = function (config) {
     config.set({
         frameworks: ['jasmine-jquery', 'jasmine'],
         files: jsFiles,
-        exclude: [
-            'modules/**/*.run.js'
-        ],
+        exclude: ['modules/**/*.run.js'],
         plugins: [
             'karma-jasmine-jquery',
             'karma-jasmine',
@@ -22,14 +20,8 @@ module.exports = function (config) {
         // possible values: OFF, ERROR, WARN, INFO, DEBUG
         logLevel: 'ERROR',
         preprocessors: {
-            'modules/**/!(*.test).js': ['babel', 'coverage'],
+            'modules/**/!(*.test).js': ['coverage', 'babel'],
             'build/temp/babel/es5tests/*.js': ['sourcemap']
-        },
-        babelPreprocessor: {
-            options: {
-                presets: ['es2015'],
-                compact: false
-            }
         },
         mochaReporter: {
             output: 'minimal'

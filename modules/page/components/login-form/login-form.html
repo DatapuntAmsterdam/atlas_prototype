@@ -1,12 +1,12 @@
 <div class="u-grid">
     <div class="u-row">
-        <div class="u-col-sm--12 u-col-md--10 u-col-lg--6">
-            <p>Dit inlogscherm is bedoeld voor ambtenaren die natuurlijke personen als zoekterm willen gebruiken (om bijvoorbeeld al het eigendom van een persoon te zoeken) voor de uitoefening van een taak. Je kunt een account krijgen voor de toegang tot deze functie door middel van een verklaring van uw leidinggevende. Deze is aan te vragen bij de helpdesk <a class="o-link-inline" href="mailto: atlas.basisinformatie@amsterdam.nl">atlas.basisinformatie@amsterdam.nl</a>.</p>
+        <div class="u-col-sm--12 u-col-md--12 u-col-lg--12">
+            <p class="u-margin__bottom--4">Dit inlogscherm is bedoeld voor ambtenaren die natuurlijke personen als zoekterm willen gebruiken (om bijvoorbeeld al het eigendom van een persoon te zoeken) voor de uitoefening van een taak. Je kunt een account krijgen voor de toegang tot deze functie door middel van een verklaring van uw leidinggevende. Deze is aan te vragen bij de helpdesk <a class="o-link-inline" href="mailto: atlas.basisinformatie@amsterdam.nl">atlas.basisinformatie@amsterdam.nl</a>.</p>
 
             <dp-panel is-panel-visible="vm.errorMessage"
                       type="danger"
                       can-close="true"
-                      class-name="c-login-form__error qa-error-message">
+                      class-name="c-login-form__error-panel qa-error-message">
                 {{vm.errorMessage}}
             </dp-panel>
 
@@ -14,13 +14,13 @@
                 <fieldset>
                     <div class="c-login-form__row">
                         <label>
-                            <span class="c-login-form__label">Gebruikersnaam:</span>
+                            <span class="c-login-form__label">Gebruikersnaam</span>
                             <input class="c-login-form__input" ng-model="vm.username" type="text" required>
                         </label>
                     </div>
                     <div class="c-login-form__row">
                         <label>
-                            <span class="c-login-form__label">Wachtwoord:</span>
+                            <span class="c-login-form__label">Wachtwoord</span>
                             <input class="c-login-form__input" ng-model="vm.password" type="password" required>
                         </label>
                     </div>

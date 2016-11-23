@@ -66,7 +66,7 @@ describe('The detailReducers factory', function () {
             expect(output.dataSelection).toBeNull();
         });
 
-        it('disables the fullscreen mode off the map', function () {
+        it('disables the fullscreen mode of the map', function () {
             var payload = 'bag/thing/123/',
                 inputState = angular.copy(defaultState),
                 output;
@@ -76,6 +76,22 @@ describe('The detailReducers factory', function () {
             output = detailReducers.FETCH_DETAIL(inputState, payload);
 
             expect(output.map.isFullscreen).toBe(false);
+        });
+        it('sets the reload flag in case the endpoint stays the same', function () {
+            var payload = 'bag/thing/123/',
+                inputState = angular.copy(defaultState),
+                output;
+
+            output = detailReducers.FETCH_DETAIL(inputState, payload);
+
+            expect(output.detail.reload).toBe(false);
+
+            inputState.detail = {
+                endpoint: 'bag/thing/123/'
+            };
+            output = detailReducers.FETCH_DETAIL(inputState, payload);
+            expect(output.detail.reload).toBe(true);
+            expect(output.detail.endpoint).toBe('bag/thing/123/');
         });
     });
 
@@ -116,6 +132,13 @@ describe('The detailReducers factory', function () {
 
             expect(output.map.isLoading).toBe(false);
             expect(output.detail.isLoading).toBe(false);
+        });
+
+        it('turns the reload flag off', function () {
+            stateAfterFetchDetail.detail.reload = true;
+            var output = detailReducers.SHOW_DETAIL(stateAfterFetchDetail, payload);
+
+            expect(output.detail.reload).toBe(false);
         });
 
         it('does nothing when detail is null', function () {

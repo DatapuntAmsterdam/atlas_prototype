@@ -1,10 +1,18 @@
 <div>
     <div class="u-row">
-        <dp-stelselpedia-header
-            heading="{{vm.apiData.results._display}}"
-            definition="PAND"
-            meta-data="vm.apiData">
-        </dp-stelselpedia-header>
+        <div class="o-header">
+            <dp-stelselpedia-header
+                heading="{{vm.apiData.results._display}}"
+                definition="PAND"
+                meta-data="vm.apiData">
+            </dp-stelselpedia-header>
+
+            <div ng-if="vm.apiData.results.status.code != 30 && vm.apiData.results.status.code != 31">
+                <dp-panel is-panel-visible="true" type="warning" class-name="c-panel--header">
+                    {{vm.apiData.results.status.omschrijving}}
+                </dp-panel>
+            </div>
+        </div>
 
         <dl class="c-key-value-list">
             <dt>Oorspronkelijk bouwjaar</dt>
@@ -22,7 +30,7 @@
             <dp-parent-relations content="vm.apiData.results"></dp-parent-relations>
         </div>
         <div class="u-col-sm--6">
-            <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
+            <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
         </div>
     </div>
 

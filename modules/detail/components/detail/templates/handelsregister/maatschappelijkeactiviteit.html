@@ -1,0 +1,49 @@
+<div>
+    <div class="u-row">
+        <dp-stelselpedia-header
+            heading="{{vm.apiData.results._display}}"
+            definition="MAATSCHAPPELIJKEACTIVITEIT">
+        </dp-stelselpedia-header>
+        <dl class="c-key-value-list">
+            <dt class="c-key-value-list--border-top">Handelsnamen</dt>
+            <dd ng-if="!vm.apiData.results.onderneming.handelsnamen[0]"></dd>
+            <dd class="c-key-value-list--multiple-values" ng-repeat="object in vm.apiData.results.onderneming.handelsnamen" ng-class="{'c-key-value-list--border-top': $first}">
+                    {{ object.handelsnaam }}
+            </dd>
+            <dt>KvK-nummer</dt>
+            <dd> {{ vm.apiData.results.kvk_nummer }} </dd>
+            <dt>Bezoekadres</dt>
+            <dd> {{ vm.apiData.results.bezoekadres.volledig_adres }} </dd>
+            <dt>Datum aanvang</dt>
+            <dd> {{ vm.apiData.results.datum_aanvang | date:'dd-MM-yyyy' }} </dd>
+            <dt>Soort bijzondere rechtstoestand</dt>
+            <dd>Op dit moment geen gegevens beschikbaar.</dd>
+        </dl>
+    </div>
+
+    <div>
+        <dp-stelselpedia-header definition="FUNCTIEVERVULLING" use-plural="true"></dp-stelselpedia-header>
+
+        <dp-api-call endpoint="{{vm.apiData.results.eigenaar}}" partial="handelsregister/functievervullingen"></dp-api-call>
+    </div>
+
+    <dp-panel is-panel-visible="true" type="warning" can-close="true">
+        <h3 class="u-margin__bottom--1">Disclaimer</h3>
+        <p>
+            De gegevens uit het Handelsregister (HR) in Atlas zijn afkomstig van een lokale gemeentelijke kopie van de Kamer van Koophandel (KvK). Basisinformatie heeft deze lokale kopie van juni t/m oktober initieel gevuld. </p>
+
+        <p>
+            Op dit moment worden deze gegevens geactualiseerd. De verwachting is dat de gegevens medio december geactualiseerd zijn.
+        </p>
+
+        <p class="u-margin__bottom--0">
+            Raadpleeg voor de meest actuele gegevens de raadpleegvoorziening van de KvK: <a class="o-link-inline o-link-inline--light" target="_blank" href="https://www.kvk.nl/zoeken/">https://www.kvk.nl/zoeken/</a>.
+        </p>
+    </dp-panel>
+
+    <div ng-if="vm.apiData.results.vestigingen.count >= 1">
+        <dp-stelselpedia-header definition="VESTIGING" use-plural="true"></dp-stelselpedia-header>
+
+        <dp-api-call endpoint="{{vm.apiData.results.vestigingen.href}}" partial="lijst"></dp-api-call>
+    </div>
+</div>

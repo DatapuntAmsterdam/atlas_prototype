@@ -16,6 +16,18 @@ describe('The stateToUrl factory', function () {
         spyOn($location, 'search');
     });
 
+    describe('create', function () {
+        it('creates a query string', function () {
+            expect(stateToUrl.create(mockedState)).toBe([
+                '#?lat=', mockedState.map.viewCenter[0],
+                '&lon=', mockedState.map.viewCenter[1],
+                '&basiskaart=', mockedState.map.baseLayer,
+                '&zoom=', mockedState.map.zoom,
+                '&pagina=', mockedState.page
+            ].join(''));
+        });
+    });
+
     describe('Search', function () {
         it('can contain a query', function () {
             mockedState.search = {
@@ -231,6 +243,48 @@ describe('The stateToUrl factory', function () {
                 detail: 'https://api-acc.datapunt.amsterdam.nl/bag/verblijfsobject/123/'
             }));
         });
+
+        it('can set the invisibility of the detail', function () {
+            mockedState.detail = {
+                endpoint: 'ABC',
+                isInvisible: true
+            };
+
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                detail: 'ABC',
+                detailInvisible: true
+            }));
+        });
+
+        it('can unset the invisibility of the detail', function () {
+            mockedState.detail = {
+                endpoint: 'ABC',
+                isInvisible: false
+            };
+
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                detailInvisible: true
+            }));
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                detailInvisible: false
+            }));
+        });
+
+        it('can set the invisibility of the detail, even without endpoint', function () {
+            mockedState.detail = {
+                isInvisible: true
+            };
+
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                detailInvisible: true
+            }));
+        });
     });
 
     describe('Straatbeeld', function () {
@@ -249,113 +303,75 @@ describe('The stateToUrl factory', function () {
 
         it('can set the straatbeeld id if it\'s known', function () {
             mockedState.straatbeeld = {
-                id: 67890,
-                searchLocation: null,
-                car: {
-                    location: null
-                }
+                id: 'ABC'
             };
 
             stateToUrl.update(mockedState, false);
 
             expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                id: '67890'
-            }));
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                plat: jasmine.any(String),
-                plon: jasmine.any(String)
+                id: 'ABC'
             }));
         });
 
-        it('can set the straatbeelds searchLocation (plat & plon)', function () {
+        it('Has orientation with heading, pitch and fov', function () {
             mockedState.straatbeeld = {
-                id: null,
-                searchLocation: [52.852, 4.258],
-                car: {
-                    location: null
-                }
+                id: 'ABC',
+                heading: 270,
+                pitch: 10.4,
+                fov: 20
+            };
+
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                heading: '270',
+                pitch: '10.4',
+                fov: '20'
+            }));
+        });
+
+        it('can set the straatbeeld invisibility', function () {
+            mockedState.straatbeeld = {
+                id: 'ABC',
+                isInvisible: true
+            };
+
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                id: 'ABC',
+                straatbeeldInvisible: true
+            }));
+        });
+
+        it('can unset the straatbeeld invisibility', function () {
+            mockedState.straatbeeld = {
+                id: 'ABC',
+                isInvisible: false
             };
 
             stateToUrl.update(mockedState, false);
 
             expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                id: jasmine.any(String)
+                straatbeeldInvisible: false
             }));
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                plat: '52.852',
-                plon: '4.258'
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                straatbeeldInvisible: true
             }));
         });
 
-        describe('camera orientation', function () {
-            it('without orientation', function () {
-                // Without a camera orientation
-                mockedState.straatbeeld = {
-                    id: 123,
-                    searchLocation: null,
-                    car: {
-                        location: null
-                    }
-                };
+        it('can set the straatbeeld location if it\'s known', function () {
+            mockedState.straatbeeld = {
+                id: 'ABC',
+                location: [1, 2]
+            };
 
-                stateToUrl.update(mockedState, false);
+            stateToUrl.update(mockedState, false);
 
-                expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                    heading: jasmine.any(String),
-                    pitch: jasmine.any(String),
-                    fov: jasmine.any(String)
-                }));
-            });
-
-            it('with heading and pitch', function () {
-                mockedState.straatbeeld = {
-                    id: 123,
-                    searchLocation: null,
-                    car: {
-                        location: null
-                    },
-                    camera: {
-                        heading: 2,
-                        pitch: 0.123
-                    }
-                };
-
-                stateToUrl.update(mockedState, false);
-
-                expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                    heading: '2',
-                    pitch: '0.123'
-                }));
-
-                expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                    fov: jasmine.any(String)
-                }));
-            });
-
-            it('with heading, pitch & fov', function () {
-                mockedState.straatbeeld = {
-                    id: 123,
-                    searchLocation: null,
-                    car: {
-                        location: null
-                    },
-                    camera: {
-                        heading: 2,
-                        pitch: 0.123,
-                        fov: 3
-                    }
-                };
-
-                stateToUrl.update(mockedState, false);
-
-                expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                    heading: '2',
-                    pitch: '0.123',
-                    fov: '3'
-                }));
-            });
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                id: 'ABC',
+                straatbeeld: '1,2'
+            }));
         });
     });
 
@@ -415,6 +431,15 @@ describe('The stateToUrl factory', function () {
 
             expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
                 'dataset-filters': 'buurt:Mijn%20buurt,buurtcombinatie:Mijn%20buurtcombinatie'
+            }));
+
+            // Enable the list view
+            mockedState.dataSelection.listView = true;
+
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'list-view': true
             }));
         });
     });

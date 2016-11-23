@@ -1,46 +1,27 @@
 @import "active-overlays-item";
 
-.c-toggle-active-overlays {
+%toggle-active-overlays {
   position: absolute;
   bottom: 0;
-  left: 172px;
+  left: 180px;
   min-width: $button-size + 81px;
-  height: $button-size;
-  padding-right: $button-size + 10px;
-  padding-left: 10px;
-  border-width: 1px 0 1px 1px;
-  border-style: solid;
-  border-color: $secondary-gray40;
-  background-color: $primary-light;
-  text-align: left;
-  cursor: pointer;
   z-index: 3;
+}
 
-  &:hover ,
-  &:active {
-    color: inherit;
+.c-toggle-active-overlays {
+  @extend %toggle-active-overlays;
+  @include icon-button-text-box-left("down", "red", "");
 
-    .c-toggle-active-overlays__icon {
-      background-image: url("assets/icons/link-active.svg");
-    }
+  &.c-toggle-active-overlays--mirrored {
+    @extend %toggle-active-overlays;
+    @include icon-button-text-box-left("up");
   }
 }
 
-.c-toggle-active-overlays__icon {
-  display: block;
-  position: absolute;
-  top: -1px;
-  right: 0;
-  width: $button-size;
-  height: $button-size;
-  transform: rotate(270deg);
-  background-image: url("assets/icons/link-hover.svg");
-
-
-}
-
-.c-toggle-active-overlays__icon--mirrored {
-  transform: rotate(90deg);
+.is-print-mode {
+  .c-toggle-active-overlays {
+    display: none;
+  }
 }
 
 .c-active-overlays {
@@ -59,16 +40,11 @@
 }
 
 .c-active-overlays__close {
+  @include icon-button("close", "red", "");
+
   position: absolute;
   top: -1px;
   right: -1px;
-  width: $button-size;
-  height: $button-size;
-  background-image: url("assets/icons/close-hover.svg");
-
-  &:hover {
-    background-image: url("assets/icons/close-active.svg");
-  }
 }
 
 .c-active-overlays__scrollable {

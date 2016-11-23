@@ -3,12 +3,22 @@ var files = require('./config/js-files');
 var targets = {
     css: {
         files: [
-            'modules/**/*.scss'
+            'modules/**/*.scss',
+            '!modules/shared/styles/config/mixins/_icons.scss'
         ],
         tasks: [
             'clean:css',
             'update-build-css',
             'test-css'
+        ]
+    },
+    icons: {
+        files: 'modules/shared/assets/svg-icons/**/*',
+        tasks: [
+            'clean:css',
+            'clean:icons',
+            'svg_sprite',
+            'update-build-css'
         ]
     },
     static: {
@@ -20,7 +30,10 @@ var targets = {
         ]
     },
     assets: {
-        files: 'modules/shared/assets/**/*',
+        files: [
+            'modules/shared/assets/**/*',
+            '!modules/shared/assets/svg-icons/**/*'
+        ],
         tasks: ['copy:assets']
     },
     livereload: {

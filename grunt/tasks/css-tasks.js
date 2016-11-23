@@ -4,6 +4,7 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('build-css', [
         'bower_concat:css',
+        'svg_sprite',
         'update-build-css'
     ]);
 

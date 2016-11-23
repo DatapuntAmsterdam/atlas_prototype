@@ -44,6 +44,10 @@
                 slug: 'luchtfoto_2004',
                 label: 'Luchtfoto 2004',
                 urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2004_RD/{z}/{x}/{y}.jpeg'
+            }, {
+                slug: 'luchtfoto_2003',
+                label: 'Luchtfoto 2003',
+                urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2003_RD/{z}/{x}/{y}.jpeg'
             }
         ]);
 })();

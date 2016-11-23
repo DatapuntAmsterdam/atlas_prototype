@@ -15,7 +15,6 @@
 @import "styles/components/list";
 @import "styles/components/list-bulleted";
 @import "styles/components/loadmore";
-@import "styles/components/panel";
 @import "styles/components/paragraph";
 @import "styles/components/table";
 
@@ -27,11 +26,15 @@
 @import "styles/utilities/margin";
 @import "styles/utilities/padding";
 @import "styles/utilities/screen-reader";
+@import "styles/utilities/print";
 @import "styles/utilities/text-align";
 @import "styles/utilities/typography";
 @import "styles/utilities/width";
 
+@import "components/api-error/api-error";
 @import "components/loading-indicator/loading-indicator";
+@import "components/message/message";
+@import "components/panel/panel";
 
 .is-print-mode {
   @import "styles/base/reset-print";

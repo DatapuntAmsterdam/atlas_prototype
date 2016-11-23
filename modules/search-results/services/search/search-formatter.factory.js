@@ -52,6 +52,8 @@
             return links.map(function (item) {
                 return {
                     label: item._display,
+                    hoofdadres: item.hoofdadres,
+                    vbo_status: angular.isArray(item.vbo_status) ? item.vbo_status[0] : item.vbo_status,
                     endpoint: item._links.self.href,
                     subtype: item.subtype || null
                 };

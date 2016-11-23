@@ -120,7 +120,7 @@ describe('The dp-header component', function () {
         });
 
         it('shows a link to leave the print mode', function () {
-            expect(component.text().toLowerCase()).toContain('verlaat printversie');
+            expect(component.find('.c-exit-print-mode').length).toBe(1);
         });
     });
 
@@ -132,7 +132,7 @@ describe('The dp-header component', function () {
         });
 
         it('doesn\'t show the link to leave print mode', function () {
-            expect(component.text().toLowerCase()).not.toContain('verlaat print versie');
+            expect(component.find('.c-exit-print-mode').length).toBe(0);
         });
     });
 });

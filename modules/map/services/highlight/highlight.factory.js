@@ -9,7 +9,6 @@
         'L',
         'crsService',
         'ICON_CONFIG',
-        'angleConversion',
         'geojson',
         'crsConverter',
         'mapConfig',
@@ -22,7 +21,6 @@
         L,
         crsService,
         ICON_CONFIG,
-        angleConversion,
         geojson,
         crsConverter,
         mapConfig,
@@ -74,7 +72,7 @@
 
                     return L.marker(latLng, {
                         icon: icon,
-                        rotationAngle: angleConversion.radiansToDegrees(rotationAngle)
+                        rotationAngle: rotationAngle
                     });
                 }
             });

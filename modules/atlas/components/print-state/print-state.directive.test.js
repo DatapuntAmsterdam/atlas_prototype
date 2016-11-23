@@ -40,7 +40,7 @@ describe('The dp-print-state directive', function () {
         return directive;
     }
 
-    it('adds a class to the element when isPrintMode is true', function () {
+    it('adds a printmode class to the element when isPrintMode is true', function () {
         var directive;
 
         mockedState = {isPrintMode: true};
@@ -58,5 +58,25 @@ describe('The dp-print-state directive', function () {
         directive = getDirective();
 
         expect(directive.hasClass('is-print-mode')).toBe(false);
+    });
+
+    it('adds a print-landscape class to the element when map or panorama or fullscreen map is visible', function () {
+        var directive;
+
+        mockedState = { isPrintMode: true, map: { isFullscreen: true } };
+
+        directive = getDirective();
+
+        expect(directive.hasClass('print-landscape')).toBe(true);
+    });
+
+    it('Do not add a print-landscape class when we are on a page, detail or results view', function () {
+        var directive;
+
+        mockedState = { isPrintMode: true, straatbeeld: null, map: { isFullscreen: false } };
+
+        directive = getDirective();
+
+        expect(directive.hasClass('print-landscape')).toBe(false);
     });
 });

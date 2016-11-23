@@ -1,42 +1,147 @@
 (function () {
+    //
+    // ACTIONS are identified by their id
+    // Optionally an action can specify:
+    // - ignore: true
+    //   The action will not change the url
+    // - replace: true
+    //   The action will replace the url (not adding a new entry in the browser history)
+    // - isButton: true
+    //   The action will be triggered by a button instead of a link
+    //
     angular
         .module('dpShared')
         .constant('ACTIONS', {
-            URL_CHANGE: 'URL_CHANGE',
+            URL_CHANGE: {
+                id: 'URL_CHANGE',
+                ignore: true
+            },
 
-            FETCH_SEARCH_RESULTS_BY_QUERY: 'FETCH_SEARCH_RESULTS_BY_QUERY',
-            FETCH_SEARCH_RESULTS_BY_CLICK: 'FETCH_SEARCH_RESULTS_BY_CLICK',
-            FETCH_SEARCH_RESULTS_CATEGORY: 'FETCH_SEARCH_RESULTS_CATEGORY',
-            SHOW_SEARCH_RESULTS: 'SHOW_SEARCH_RESULTS',
+            FETCH_SEARCH_RESULTS_BY_QUERY: {
+                id: 'FETCH_SEARCH_RESULTS_BY_QUERY',
+                ignore: true
+            },
+            FETCH_SEARCH_RESULTS_BY_LOCATION: {
+                id: 'FETCH_SEARCH_RESULTS_BY_LOCATION',
+                ignore: true
+            },
+            FETCH_SEARCH_RESULTS_CATEGORY: {
+                id: 'FETCH_SEARCH_RESULTS_CATEGORY',
+                ignore: true
+            },
+            SHOW_SEARCH_RESULTS: {
+                id: 'SHOW_SEARCH_RESULTS'
+            },
 
-            MAP_SET_BASELAYER: 'MAP_SET_BASELAYER',
-            MAP_ADD_OVERLAY: 'MAP_ADD_OVERLAY',
-            MAP_REMOVE_OVERLAY: 'MAP_REMOVE_OVERLAY',
-            MAP_TOGGLE_VISIBILITY_OVERLAY: 'MAP_TOGGLE_VISIBILITY_OVERLAY',
-            MAP_PAN: 'MAP_PAN',
-            MAP_ZOOM: 'MAP_ZOOM',
-            MAP_FULLSCREEN: 'MAP_FULLSCREEN',
+            MAP_SET_BASELAYER: {
+                id: 'MAP_SET_BASELAYER',
+                replace: true
+            },
+            MAP_ADD_OVERLAY: {
+                id: 'MAP_ADD_OVERLAY',
+                replace: true
+            },
+            MAP_REMOVE_OVERLAY: {
+                id: 'MAP_REMOVE_OVERLAY',
+                replace: true
+            },
+            MAP_TOGGLE_VISIBILITY_OVERLAY: {
+                id: 'MAP_TOGGLE_VISIBILITY_OVERLAY',
+                replace: true
+            },
+            MAP_CLICK: {
+                id: 'MAP_CLICK',
+                ignore: true
+            },
+            MAP_PAN: {
+                id: 'MAP_PAN',
+                replace: true
+            },
+            MAP_ZOOM: {
+                id: 'MAP_ZOOM',
+                replace: true
+            },
+            MAP_FULLSCREEN: {
+                id: 'MAP_FULLSCREEN',
+                isButton: true
+            },
+            SHOW_MAP_ACTIVE_OVERLAYS: {
+                id: 'SHOW_MAP_ACTIVE_OVERLAYS',
+                replace: true
+            },
+            HIDE_MAP_ACTIVE_OVERLAYS: {
+                id: 'HIDE_MAP_ACTIVE_OVERLAYS',
+                replace: true
+            },
 
-            FETCH_DETAIL: 'FETCH_DETAIL',
-            SHOW_DETAIL: 'SHOW_DETAIL',
+            FETCH_DETAIL: {
+                id: 'FETCH_DETAIL',
+                ignore: true
+            },
+            SHOW_DETAIL: {
+                id: 'SHOW_DETAIL'
+            },
 
-            FETCH_STRAATBEELD: 'FETCH_STRAATBEELD',
-            SHOW_STRAATBEELD_INITIAL: 'SHOW_STRAATBEELD_INITIAL',
-            SHOW_STRAATBEELD_SUBSEQUENT: 'SHOW_STRAATBEELD_SUBSEQUENT',
-            STRAATBEELD_SET_ORIENTATION: 'STRAATBEELD_SET_ORIENTATION',
+            FETCH_STRAATBEELD: {
+                id: 'FETCH_STRAATBEELD',
+                ignore: true
+            },
+            FETCH_STRAATBEELD_BY_LOCATION: {
+                id: 'FETCH_STRAATBEELD_BY_LOCATION',
+                ignore: true
+            },
+            SHOW_STRAATBEELD_INITIAL: {
+                id: 'SHOW_STRAATBEELD_INITIAL'
+            },
+            SHOW_STRAATBEELD_SUBSEQUENT: {
+                id: 'SHOW_STRAATBEELD_SUBSEQUENT',
+                replace: true
+            },
+            HIDE_STRAATBEELD: {
+                id: 'HIDE_STRAATBEELD',
+                ignore: true,
+                isButton: true
+            },
+            SET_STRAATBEELD_ORIENTATION: {
+                id: 'SET_STRAATBEELD_ORIENTATION',
+                replace: true
+            },
 
-            SHOW_DATA_SELECTION: 'SHOW_DATA_SELECTION',
-            NAVIGATE_DATA_SELECTION: 'NAVIGATE_DATA_SELECTION',
+            SHOW_DATA_SELECTION: {
+                id: 'SHOW_DATA_SELECTION'
+            },
+            SHOW_SELECTION_LIST: {
+                id: 'SHOW_SELECTION_LIST'
+            },
+            NAVIGATE_DATA_SELECTION: {
+                id: 'NAVIGATE_DATA_SELECTION'
+            },
+            TOGGLE_DATA_SELECTION_LIST_VIEW: {
+                id: 'TOGGLE_DATA_SELECTION_LIST_VIEW'
+            },
 
-            SHOW_LAYER_SELECTION: 'SHOW_LAYER_SELECTION',
-            HIDE_LAYER_SELECTION: 'HIDE_LAYER_SELECTION',
-            SHOW_MAP_ACTIVE_OVERLAYS: 'SHOW_MAP_ACTIVE_OVERLAYS',
-            HIDE_MAP_ACTIVE_OVERLAYS: 'HIDE_MAP_ACTIVE_OVERLAYS',
+            SHOW_LAYER_SELECTION: {
+                id: 'SHOW_LAYER_SELECTION',
+                isButton: true
+            },
+            HIDE_LAYER_SELECTION: {
+                id: 'HIDE_LAYER_SELECTION',
+                isButton: true
+            },
 
-            SHOW_HOME: 'SHOW_HOME',
-            SHOW_PAGE: 'SHOW_PAGE',
+            SHOW_HOME: {
+                id: 'SHOW_HOME'
+            },
+            SHOW_PAGE: {
+                id: 'SHOW_PAGE'
+            },
 
-            SHOW_PRINT: 'SHOW_PRINT',
-            HIDE_PRINT: 'HIDE_PRINT'
+            SHOW_PRINT: {
+                id: 'SHOW_PRINT'
+            },
+            HIDE_PRINT: {
+                id: 'HIDE_PRINT',
+                isButton: true
+            }
         });
 })();

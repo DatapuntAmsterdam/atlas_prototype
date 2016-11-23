@@ -1,9 +1,9 @@
 .c-straatbeeld {
   position: absolute;
-  top: $base-whitespace * 2;
-  right: $base-whitespace;
-  bottom: $base-whitespace * 2;
-  left: $base-whitespace;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 1;
 }
 
@@ -28,5 +28,14 @@
   background-color: $secondary-gray60;
   color: $primary-light;
   line-height: $button-size;
+  z-index: 2;
+}
+
+.c-straatbeeld__close {
+  @include icon-button("close", "red", "");
+
+  position: absolute;
+  top: 0;
+  right: 0;
   z-index: 2;
 }

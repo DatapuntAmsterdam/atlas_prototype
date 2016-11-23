@@ -1,7 +1,7 @@
 <div class="u-margin__bottom--4">
   <h4 ng-if="apiData.count >= 5" class="c-paginering">1-{{ apiData.results.length }} van {{ apiData.count }}</h4>
 
-  <p ng-if="!apiData.results.length">Geen rechten gevonden</p>
+  <p ng-if="!apiData.results.length"><dp-message>Geen rechten gevonden</dp-message></p>
 
   <ul class="o-list">
     <li ng-repeat="object in apiData.results">

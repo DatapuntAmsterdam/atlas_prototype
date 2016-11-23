@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-informatie-metadata</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-informatie-metadata">
+            <polygon id="Fill-4" fill="#666666" points="0 26 26 26 26 0 0 0"></polygon>
+            <path d="M11.3152335,20 L14.1024496,20 L14.1024496,10.7066261 L11.3152335,10.7066261 L11.3152335,20 Z M11,7.80377721 C11,6.80441741 11.7610183,6 12.7077802,6 C13.6566649,6 14.4166217,6.80441741 14.4166217,7.80377721 C14.4166217,8.80537772 13.6566649,9.60867478 12.7077802,9.60867478 C11.7610183,9.60867478 11,8.80537772 11,7.80377721 L11,7.80377721 Z" id="Fill-6" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

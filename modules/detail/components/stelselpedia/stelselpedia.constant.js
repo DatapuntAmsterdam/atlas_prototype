@@ -136,7 +136,7 @@
                     url: 'https://www.amsterdam.nl/stelselpedia/meetbouten-index/catalogus-amsterdams/meetbout/',
                     meta: []
                 },
-                MAC: {
+                MAATSCHAPPELIJKEACTIVITEIT: {
                     label_singular: 'Maatschappelijke activiteit',
                     label_plural: 'Maatschappelijke activiteiten',
                     description: 'De Maatschappelijke Activiteit is het totaal van alle activiteiten uitgeoefend ' +

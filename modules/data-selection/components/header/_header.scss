@@ -1,5 +1,5 @@
 .c-data-selection-header {
-  padding-bottom: $base-whitespace;
+  padding-bottom: 1.5 * $base-whitespace;
 
   p {
     margin-top: $base-whitespace;
@@ -7,9 +7,9 @@
 }
 
 .c-data-selection-header__kaartweergave__button {
-  @include data-selection-button("assets/icons/link-active.svg", "assets/icons/link-hover.svg")
+  @include data-selection-button("forward")
 }
 
 .c-data-selection-header__download__button {
-  @include data-selection-button("assets/icons/download-active.svg", "assets/icons/download-hover.svg")
+  @include data-selection-button("download")
 }

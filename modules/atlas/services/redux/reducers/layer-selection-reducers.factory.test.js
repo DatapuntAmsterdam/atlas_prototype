@@ -15,7 +15,7 @@ describe('The layerSelectionReducers factory', function () {
 
     describe('SHOW_LAYER_SELECTION', function () {
         it('sets the variable to true', function () {
-            var output = layerSelectionReducers[ACTIONS.SHOW_LAYER_SELECTION](DEFAULT_STATE);
+            var output = layerSelectionReducers[ACTIONS.SHOW_LAYER_SELECTION.id](DEFAULT_STATE);
 
             expect(output.layerSelection).toBe(true);
         });
@@ -25,7 +25,7 @@ describe('The layerSelectionReducers factory', function () {
                 inputState = angular.copy(DEFAULT_STATE);
 
             inputState.map.isFullscreen = true;
-            output = layerSelectionReducers[ACTIONS.SHOW_LAYER_SELECTION](inputState);
+            output = layerSelectionReducers[ACTIONS.SHOW_LAYER_SELECTION.id](inputState);
 
             expect(output.map.isFullscreen).toBe(true);
         });
@@ -39,7 +39,7 @@ describe('The layerSelectionReducers factory', function () {
             inputState = angular.copy(DEFAULT_STATE);
             inputState.layerSelection = true;
 
-            output = layerSelectionReducers[ACTIONS.HIDE_LAYER_SELECTION](inputState);
+            output = layerSelectionReducers[ACTIONS.HIDE_LAYER_SELECTION.id](inputState);
 
             expect(output.layerSelection).toBe(false);
         });

@@ -20,7 +20,8 @@
                 };
 
             SEARCH_CONFIG.QUERY_ENDPOINTS.forEach(function (endpoint) {
-                if (!angular.isString(categorySlug) || categorySlug === endpoint.slug) {
+                if ((!angular.isString(categorySlug) || categorySlug === endpoint.slug) &&
+                        endpoint.uri) {
                     queries.push(
                         api.getByUri(endpoint.uri, params)
                     );

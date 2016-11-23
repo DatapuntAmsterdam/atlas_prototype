@@ -12,21 +12,48 @@
             controllerAs: 'vm'
         });
 
-    DpStraatbeeldThumbnailController.$inject = ['detailConfig', 'store', 'ACTIONS'];
+    DpStraatbeeldThumbnailController.$inject = ['$scope', 'sharedConfig', 'api', 'store', 'ACTIONS'];
 
-    function DpStraatbeeldThumbnailController (detailConfig, store, ACTIONS) {
-        var vm = this;
+    function DpStraatbeeldThumbnailController ($scope, sharedConfig, api, store, ACTIONS) {
+        var vm = this,
+            imageUrl,
+            heading,
+            id;
 
-        vm.imageUrl = detailConfig.STRAATBEELD_THUMB_URL +
-            '?lat=' + vm.location[0] +
-            '&lon=' + vm.location[1] +
-            '&width=240&height=135';
+        $scope.$watchCollection('vm.location', loc => {
+            if (angular.isArray(loc)) {
+                loadThumbnail();
+            }
+        });
 
-        vm.openStraatbeeld = function () {
-            store.dispatch({
-                type: ACTIONS.FETCH_STRAATBEELD,
-                payload: vm.location
+        function loadThumbnail () {
+            imageUrl = sharedConfig.STRAATBEELD_THUMB_URL +
+                '?lat=' + vm.location[0] +
+                '&lon=' + vm.location[1] +
+                '&width=' + sharedConfig.THUMBNAIL_WIDTH +
+                '&radius=' + sharedConfig.RADIUS;
+
+            vm.isLoading = true;
+            vm.radius = sharedConfig.RADIUS;
+
+            api.getByUrl(imageUrl).then(function (thumbnailData) {
+                heading = thumbnailData.heading;
+                id = thumbnailData.pano_id;
+
+                if (!angular.isArray(thumbnailData)) {
+                    vm.imageUrl = thumbnailData.url;
+                    vm.hasThumbnail = true;
+                    vm.payload = {
+                        id: id,
+                        heading: heading,
+                        isInitial: true
+                    };
+                } else {
+                    vm.hasThumbnail = false;
+                }
+
+                vm.isLoading = false;
             });
-        };
+        }
     }
 })();

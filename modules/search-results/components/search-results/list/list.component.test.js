@@ -15,7 +15,7 @@ describe('The dp-search-results-list component', function () {
             },
             function ($provide) {
                 $provide.value('longNameShortenerFilter', function (input) {
-                    return input.replace('Vereniging van Eigenaren', 'VVE');
+                    return input && input.replace('Vereniging van Eigenaren', 'VVE');
                 });
             }
         );
@@ -34,17 +34,28 @@ describe('The dp-search-results-list component', function () {
                 {
                     label: 'Link #1',
                     endpoint: 'http://www.example.com/bag/or/1/',
+                    hoofdadres: false,
                     subtype: 'weg'
                 }, {
                     label: 'Link #2',
                     endpoint: 'http://www.example.com/bag/or/2/',
+                    hoofdadres: true,
+                    vbo_status: {
+                        code: '18',
+                        omschrijving: 'verblijfsobject gevormd'
+                    },
                     subtype: 'weg'
                 }, {
                     label: 'Link #3',
                     endpoint: 'http://www.example.com/bag/or/3/',
+                    hoofdadres: false,
+                    vbo_status: {
+                        code: '18',
+                        omschrijving: 'verblijfsobject gevormd'
+                    },
                     subtype: 'weg'
                 }, {
-                    label: 'Link #4',
+                    label: '',
                     endpoint: 'http://www.example.com/bag/or/4/',
                     subtype: 'water'
                 }, {
@@ -75,7 +86,7 @@ describe('The dp-search-results-list component', function () {
                     label: 'Link #11',
                     endpoint: 'http://www.example.com/bag/or/11/',
                     subtype: 'weg'
-                }
+                }, 'not an object link'
             ]
         };
 
@@ -104,15 +115,27 @@ describe('The dp-search-results-list component', function () {
     it('lists search results', function () {
         var component = getComponent(mockedCategory, false);
 
-        expect(component.find('dp-link').length).toBe(11);
+        expect(component.find('dp-link').length).toBe(12);
 
         expect(component.find('dp-link').eq(0).find('button').text().trim()).toBe('Link #1');
+        expect(component.find('.qa-search-results__link-extra-info').eq(0).text().trim()).toBe('(nevenadres)');
         component.find('dp-link').eq(0).find('button').click();
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_DETAIL,
             payload: 'http://www.example.com/bag/or/1/'
         });
 
+        expect(component.find('dp-link').eq(1).find('button').text().trim())
+            .toBe('Link #2');
+        expect(component.find('.qa-search-results__link-extra-info').eq(1).text().trim())
+            .toBe('(verblijfsobject gevormd)');
+
+        expect(component.find('dp-link').eq(2).find('button').text().trim())
+            .toBe('Link #3');
+        expect(component.find('.qa-search-results__link-extra-info').eq(2).text().trim())
+            .toBe('(nevenadres) (verblijfsobject gevormd)');
+
+        expect(component.find('dp-link').eq(3).find('button').text().trim()).toBe('');
         expect(component.find('dp-link').eq(10).find('button').text().trim()).toBe('Link #11');
         component.find('dp-link').eq(10).find('button').click();
         expect(store.dispatch).toHaveBeenCalledWith({
@@ -126,7 +149,7 @@ describe('The dp-search-results-list component', function () {
 
         // Without the limiter
         component = getComponent(mockedCategory, false);
-        expect(component.find('dp-link').length).toBe(11);
+        expect(component.find('dp-link').length).toBe(12);
 
         // With the limiter
         component = getComponent(mockedCategory, true);

@@ -5,7 +5,9 @@
         .module('atlas')
         .factory('dashboardColumns', dashboardColumnsFactory);
 
-    function dashboardColumnsFactory () {
+    dashboardColumnsFactory.$inject = ['httpStatus'];
+
+    function dashboardColumnsFactory (httpStatus) {
         return {
             determineVisibility: determineVisibility,
             determineColumnSizes: determineColumnSizes
@@ -14,10 +16,13 @@
         function determineVisibility (state) {
             var visibility = {};
 
+            visibility.httpStatus = httpStatus.getStatus();
+
             if (angular.isObject(state.dataSelection)) {
                 visibility.dataSelection = true;
+                visibility.dataSelectionList = state.dataSelection.listView;
 
-                visibility.map = false;
+                visibility.map = visibility.dataSelectionList;
                 visibility.layerSelection = false;
                 visibility.detail = false;
                 visibility.page = false;
@@ -29,8 +34,8 @@
                 } else {
                     visibility.map = !state.layerSelection && (
                         state.map.isFullscreen ||
-                        (angular.isObject(state.detail) && angular.isObject(state.detail.geometry)) ||
-                        angular.isObject(state.straatbeeld));
+                        (isDetailVisible(state) && angular.isObject(state.detail.geometry)) ||
+                        isStraatbeeldVisible(state));
                 }
 
                 visibility.layerSelection = state.layerSelection;
@@ -41,17 +46,26 @@
                     visibility.searchResults = false;
                     visibility.straatbeeld = false;
                 } else {
-                    visibility.detail = angular.isObject(state.detail);
+                    visibility.detail = isDetailVisible(state);
                     visibility.page = angular.isString(state.page);
                     visibility.searchResults = angular.isObject(state.search) &&
                         (angular.isString(state.search.query) || angular.isArray(state.search.location));
-                    visibility.straatbeeld = angular.isObject(state.straatbeeld);
+                    visibility.straatbeeld = isStraatbeeldVisible(state);
                 }
 
                 visibility.dataSelection = false;
+                visibility.dataSelectionList = false;
             }
 
             return visibility;
+        }
+
+        function isStraatbeeldVisible (state) {
+            return angular.isObject(state.straatbeeld) && !(state.straatbeeld.isInvisible);
+        }
+
+        function isDetailVisible (state) {
+            return angular.isObject(state.detail) && !(state.detail.isInvisible);
         }
 
         function determineColumnSizesDefault (visibility, hasFullscreenMap) {
@@ -63,7 +77,7 @@
             } else if (hasFullscreenMap) {
                 columnSizes.left = 0;
                 columnSizes.middle = 12;
-            } else if (visibility.dataSelection) {
+            } else if (visibility.dataSelection && !visibility.dataSelectionList) {
                 columnSizes.left = 0;
                 columnSizes.middle = 0;
             } else {

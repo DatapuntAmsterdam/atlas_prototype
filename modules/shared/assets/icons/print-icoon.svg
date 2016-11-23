@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>print icoon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-20.000000, -20.000000)" id="print-icoon">
+            <g transform="translate(20.000000, 20.000000)">
+                <polygon id="Fill-1" fill="#666666" points="0 25.91092 25.9108 25.91092 25.9108 0.00012 0 0.00012"></polygon>
+                <path d="M8.71132,5.78984 L17.19932,5.78984 L17.19932,9.54824 L17.19932,11.31624 L8.71132,11.31624 L8.71132,9.54824 L8.71132,5.78984 Z M18.30412,9.54824 L18.30412,4.68464 L7.60612,4.68464 L7.60612,9.54824 L4.55532,9.54824 L4.55532,18.00944 L7.53932,18.00944 L7.53932,15.84824 L7.53932,14.74304 L8.64452,14.74304 L17.26612,14.74304 L18.37092,14.74304 L18.37092,15.84824 L18.37092,18.00944 L21.35532,18.00944 L21.35532,9.54824 L18.30412,9.54824 Z" id="Fill-2" fill="#FFFFFF"></path>
+                <polygon id="Fill-3" fill="#FFFFFF" points="8.49376 15.70036 8.49376 15.70036 8.49376 17.86116 8.49376 21.22636 17.11536 21.22636 17.11536 17.86116 17.11536 15.70036"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,6 +1,7 @@
 describe('The api factory', function () {
     var $http,
         $httpBackend,
+        $q,
         api,
         mockedApiData,
         isLoggedIn;
@@ -30,9 +31,10 @@ describe('The api factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$http_, _$httpBackend_, _api_) {
+        angular.mock.inject(function (_$http_, _$httpBackend_, _$q_, _api_) {
             $http = _$http_;
             $httpBackend = _$httpBackend_;
+            $q = _$q_;
             api = _api_;
         });
 
@@ -61,6 +63,18 @@ describe('The api factory', function () {
         $httpBackend.flush();
 
         expect(returnValue).toEqual(mockedApiData);
+    });
+
+    it('getByUrl optionally accepts a promise to allow for cancelling the request', function () {
+        let cancel = $q.defer();
+
+        api.getByUrl('http://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/', undefined, cancel)
+            .then(function (data) {
+                fail();   // Should never be resolved
+            });
+
+        cancel.resolve();
+        $httpBackend.verifyNoOutstandingRequest();
     });
 
     it('getByUri can be used when the environment.API_ROOT is unknown', function () {

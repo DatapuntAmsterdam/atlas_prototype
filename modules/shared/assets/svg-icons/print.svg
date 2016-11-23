@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-print</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-print">
+            <polygon id="Fill-1" fill="#666666" points="0 26 26 26 26 0 0 0"></polygon>
+            <path d="M8.7412,5.8096 L17.2592,5.8096 L17.2592,9.5806 L17.2592,11.3546 L8.7412,11.3546 L8.7412,9.5806 L8.7412,5.8096 Z M18.3672,9.5806 L18.3672,4.7016 L7.6322,4.7016 L7.6322,9.5806 L4.5712,9.5806 L4.5712,18.0716 L7.5652,18.0716 L7.5652,15.9036 L7.5652,14.7926 L8.6742,14.7926 L17.3252,14.7926 L18.4342,14.7926 L18.4342,15.9036 L18.4342,18.0716 L21.4292,18.0716 L21.4292,9.5806 L18.3672,9.5806 Z" id="Fill-2" fill="#FFFFFF"></path>
+            <polygon id="Fill-3" fill="#FFFFFF" points="8.5229 15.7549 8.5229 15.7549 8.5229 17.9229 8.5229 21.2999 17.5069 21.2999 17.5069 17.9229 17.5069 15.7549"></polygon>
+        </g>
+    </g>
+</svg>

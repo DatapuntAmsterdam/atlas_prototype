@@ -16,6 +16,23 @@ describe('The endpointParser factory', function () {
         });
     });
 
+    describe('getSubject', () => {
+        it('returns the subject based on an endpoint', () => {
+            expect(endpointParser.getSubject('http://www.api-root.com/bag/nummeraanduiding/123456/'))
+                .toBe('nummeraanduiding');
+
+            expect(endpointParser.getSubject('http://www.api-root.com/brk/object/789/'))
+                .toBe('object');
+
+            expect(endpointParser.getSubject('http://www.api-root.com/meetbouten/meetbout/654/'))
+                .toBe('meetbout');
+
+            expect(endpointParser.getSubject('http://www.api-root.com/brk/object-wkpb/' +
+                    'NL.KAD.OnroerendeZaak.123456/'))
+                .toBe('object-wkpb');
+        });
+    });
+
     describe('getTemplateUrl', () => {
         it('returns a template URL based on an endpoint', () => {
             expect(endpointParser.getTemplateUrl('http://www.api-root.com/bag/nummeraanduiding/123456/'))

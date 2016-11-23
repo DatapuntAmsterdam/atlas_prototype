@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('dpShared', []);
+        .module('dpShared', ['rt.debounce']);
 })();

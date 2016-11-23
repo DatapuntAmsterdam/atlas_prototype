@@ -29,6 +29,7 @@
                 vm.title = dataSelectionConfig.bag.TITLE;
                 vm.availableFilters = data.filters;
                 vm.tableData = data.tableData;
+                vm.listData = data.listData;
                 vm.numberOfRecords = data.number_of_records;
                 vm.numberOfPages = data.number_of_pages;
                 vm.noDataToDisplay = vm.currentPage > dataSelectionConfig.MAX_AVAILABLE_PAGES;

@@ -18,10 +18,10 @@ describe('The map reducers', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
-            output = mapReducers[ACTIONS.MAP_SET_BASELAYER](inputState, 'luchtfoto_1915');
+            output = mapReducers[ACTIONS.MAP_SET_BASELAYER.id](inputState, 'luchtfoto_1915');
             expect(output.map.baseLayer).toBe('luchtfoto_1915');
 
-            output = mapReducers[ACTIONS.MAP_SET_BASELAYER](inputState, 'topografie');
+            output = mapReducers[ACTIONS.MAP_SET_BASELAYER.id](inputState, 'topografie');
             expect(output.map.baseLayer).toBe('topografie');
         });
     });
@@ -31,12 +31,12 @@ describe('The map reducers', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
-            output = mapReducers[ACTIONS.MAP_ADD_OVERLAY](inputState, 'meetbouten');
+            output = mapReducers[ACTIONS.MAP_ADD_OVERLAY.id](inputState, 'meetbouten');
             expect(output.map.overlays.length).toBe(1);
             expect(output.map.overlays[0].isVisible).toBe(true);
             expect(output.map.overlays[0].id).toBe('meetbouten');
 
-            output = mapReducers[ACTIONS.MAP_ADD_OVERLAY](output, 'parkeren');
+            output = mapReducers[ACTIONS.MAP_ADD_OVERLAY.id](output, 'parkeren');
             expect(output.map.overlays[1].isVisible).toBe(true);
             expect(output.map.overlays[1].id).toBe('parkeren');
 
@@ -49,13 +49,13 @@ describe('The map reducers', function () {
 
             // When there were no active overlays; open the active overlays panel
             inputState.map.showActiveOverlays = false;
-            output = mapReducers[ACTIONS.MAP_ADD_OVERLAY](inputState, 'meetbouten');
+            output = mapReducers[ACTIONS.MAP_ADD_OVERLAY.id](inputState, 'meetbouten');
             expect(output.map.showActiveOverlays).toBe(true);
 
             // When there already were active overlays; do nothing
             inputState.map.showActiveOverlays = false;
             inputState.map.overlays = [{id: 'nap', isVisible: true}];
-            output = mapReducers[ACTIONS.MAP_ADD_OVERLAY](inputState, 'meetbouten');
+            output = mapReducers[ACTIONS.MAP_ADD_OVERLAY.id](inputState, 'meetbouten');
             expect(output.map.showActiveOverlays).toBe(false);
         });
     });
@@ -77,7 +77,7 @@ describe('The map reducers', function () {
                     isVisible: true
                 }];
 
-            output = mapReducers[ACTIONS.MAP_REMOVE_OVERLAY](inputState, 'overlay_2');
+            output = mapReducers[ACTIONS.MAP_REMOVE_OVERLAY.id](inputState, 'overlay_2');
             expect(output.map.overlays).toEqual([
                 {id: 'overlay_1', isVisible: true},
                 {id: 'overlay_3', isVisible: true}
@@ -90,7 +90,7 @@ describe('The map reducers', function () {
 
             inputState.map.overlays = [{id: 'parkeren', isVisible: true}];
 
-            output = mapReducers[ACTIONS.MAP_REMOVE_OVERLAY](inputState, 'parkeren');
+            output = mapReducers[ACTIONS.MAP_REMOVE_OVERLAY.id](inputState, 'parkeren');
             expect(output.map.overlays).toEqual([]);
         });
     });
@@ -112,7 +112,7 @@ describe('The map reducers', function () {
                     isVisible: true
                 }];
 
-            output = mapReducers[ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY](inputState, 'overlay_2');
+            output = mapReducers[ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY.id](inputState, 'overlay_2');
             expect(output.map.overlays).toEqual([
                 {id: 'overlay_1', isVisible: true},
                 {id: 'overlay_2', isVisible: false},
@@ -136,7 +136,7 @@ describe('The map reducers', function () {
                     isVisible: true
                 }];
 
-            output = mapReducers[ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY](inputState, 'overlay_1');
+            output = mapReducers[ACTIONS.MAP_TOGGLE_VISIBILITY_OVERLAY.id](inputState, 'overlay_1');
             expect(output.map.overlays).toEqual([
                 {id: 'overlay_1', isVisible: true},
                 {id: 'overlay_2', isVisible: true},
@@ -150,10 +150,10 @@ describe('The map reducers', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
-            output = mapReducers[ACTIONS.MAP_PAN](inputState, [51.1, 4.1]);
+            output = mapReducers[ACTIONS.MAP_PAN.id](inputState, [51.1, 4.1]);
             expect(output.map.viewCenter).toEqual([51.1, 4.1]);
 
-            output = mapReducers[ACTIONS.MAP_PAN](inputState, [51.2, 4.2]);
+            output = mapReducers[ACTIONS.MAP_PAN.id](inputState, [51.2, 4.2]);
             expect(output.map.viewCenter).toEqual([51.2, 4.2]);
         });
     });
@@ -163,21 +163,21 @@ describe('The map reducers', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
-            output = mapReducers[ACTIONS.MAP_ZOOM](inputState, {
+            output = mapReducers[ACTIONS.MAP_ZOOM.id](inputState, {
                 viewCenter: [4.9012, 52.3719],
                 zoom: 8
             });
             expect(output.map.viewCenter).toEqual([4.9012, 52.3719]);
             expect(output.map.zoom).toBe(8);
 
-            output = mapReducers[ACTIONS.MAP_ZOOM](inputState, {
+            output = mapReducers[ACTIONS.MAP_ZOOM.id](inputState, {
                 viewCenter: [52.3719, 4.9012],
                 zoom: 15
             });
             expect(output.map.viewCenter).toEqual([52.3719, 4.9012]);
             expect(output.map.zoom).toBe(15);
 
-            output = mapReducers[ACTIONS.MAP_ZOOM](inputState, {
+            output = mapReducers[ACTIONS.MAP_ZOOM.id](inputState, {
                 viewCenter: [53, 5],
                 zoom: 16
             });
@@ -189,7 +189,7 @@ describe('The map reducers', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
-            output = mapReducers[ACTIONS.MAP_ZOOM](inputState, {
+            output = mapReducers[ACTIONS.MAP_ZOOM.id](inputState, {
                 zoom: 8
             });
             expect(output.map.viewCenter).toEqual([52.3719, 4.9012]);
@@ -203,11 +203,11 @@ describe('The map reducers', function () {
                 output;
 
             // Enable fullscreen
-            output = mapReducers[ACTIONS.MAP_FULLSCREEN](inputState, true);
+            output = mapReducers[ACTIONS.MAP_FULLSCREEN.id](inputState, true);
             expect(output.map.isFullscreen).toBe(true);
 
             // Disable fullscreen
-            output = mapReducers[ACTIONS.MAP_FULLSCREEN](inputState, false);
+            output = mapReducers[ACTIONS.MAP_FULLSCREEN.id](inputState, false);
             expect(output.map.isFullscreen).toBe(false);
         });
 
@@ -218,8 +218,33 @@ describe('The map reducers', function () {
             inputState.layerSelection = true;
 
             // Enable fullscreen
-            output = mapReducers[ACTIONS.MAP_FULLSCREEN](inputState, true);
+            output = mapReducers[ACTIONS.MAP_FULLSCREEN.id](inputState, true);
             expect(output.layerSelection).toBe(false);
+        });
+
+        it('when straatbeeld exists, reactivates it on minimize', function () {
+            var inputState = angular.copy(DEFAULT_STATE),
+                output;
+
+            inputState.straatbeeld = {
+                id: 'abc',
+                isInvisible: true
+            };
+
+            output = mapReducers[ACTIONS.MAP_FULLSCREEN.id](inputState, false);
+            expect(output.straatbeeld.isInvisible).toBe(false);
+        });
+
+        it('when straatbeeld exists, hide it on maximize', function () {
+            var inputState = angular.copy(DEFAULT_STATE),
+                output;
+
+            inputState.straatbeeld = {
+                id: 'abc'
+            };
+
+            output = mapReducers[ACTIONS.MAP_FULLSCREEN.id](inputState, true);
+            expect(output.straatbeeld.isInvisible).toBe(true);
         });
     });
 
@@ -227,7 +252,7 @@ describe('The map reducers', function () {
         it('sets the variable to true', function () {
             var output;
 
-            output = mapReducers[ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS](DEFAULT_STATE);
+            output = mapReducers[ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS.id](DEFAULT_STATE);
             expect(output.map.showActiveOverlays).toBe(true);
         });
     });
@@ -238,7 +263,7 @@ describe('The map reducers', function () {
                 inputState = angular.copy(DEFAULT_STATE);
 
             inputState.map.showActiveOverlays = true;
-            output = mapReducers[ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS](DEFAULT_STATE);
+            output = mapReducers[ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS.id](DEFAULT_STATE);
             expect(output.map.showActiveOverlays).toBe(false);
         });
     });

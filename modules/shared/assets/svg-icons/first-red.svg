@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-eerste-rood</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-eerste-rood">
+            <polygon id="Fill-1" fill="#FF0000" points="0 26 26.001 26 26.001 0 0 0"></polygon>
+            <polygon id="Fill-2" fill="#FFFFFF" points="13.6797546 10.3187297 11 12.9994948 13.6797546 15.6812703 17.9974738 20 20.3700469 17.6264165 16.0523277 13.3097077 15.7421148 12.9994948 16.0523277 12.6892818 20.3700469 8.37257308 17.9974738 6"></polygon>
+            <polygon id="Fill-3" fill="#FFFFFF" points="6 20 9.00954085 20 9.00954085 6 6 6"></polygon>
+        </g>
+    </g>
+</svg>

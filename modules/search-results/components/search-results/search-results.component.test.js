@@ -53,22 +53,6 @@ describe('The dp-search-results component', function () {
                 }
             },
             function ($provide) {
-                $provide.constant('SEARCH_CONFIG', {
-                    QUERY_ENDPOINTS: [
-                        {
-                            slug: 'openbare_ruimte',
-                            label_singular: 'Openbare ruimte',
-                            label_plural: 'Openbare ruimtes',
-                            uri: 'path/to/openbare_ruimte/'
-                        }, {
-                            slug: 'adres',
-                            label_singular: 'Adres',
-                            label_plural: 'Adressen',
-                            uri: 'path/to/adres/'
-                        }
-                    ]
-                });
-
                 $provide.factory('dpStraatbeeldThumbnailDirective', function () {
                     return {};
                 });
@@ -398,7 +382,7 @@ describe('The dp-search-results component', function () {
             getComponent(12, 'Weesperstraat');
 
             expect(store.dispatch).toHaveBeenCalledWith({
-                type: 'SHOW_SEARCH_RESULTS',
+                type: ACTIONS.SHOW_SEARCH_RESULTS,
                 payload: 12
             });
         });
@@ -630,7 +614,7 @@ describe('The dp-search-results component', function () {
 
         it('calls dispatch with the number of search results', function () {
             expect(store.dispatch).toHaveBeenCalledWith({
-                type: 'SHOW_SEARCH_RESULTS',
+                type: ACTIONS.SHOW_SEARCH_RESULTS,
                 payload: 22
             });
         });

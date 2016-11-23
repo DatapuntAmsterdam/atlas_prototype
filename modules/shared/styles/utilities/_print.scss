@@ -1,0 +1,18 @@
+.u-visible-on-print-block,
+.u-visible-on-print-inline {
+  display: none !important;
+}
+
+@media print {
+  .u-hide-on-print {
+    display: none !important;
+  }
+
+  .u-visible-on-print-block {
+    display: block !important;
+  }
+
+  .u-visible-on-print-inline {
+    display: inline !important;
+  }
+}

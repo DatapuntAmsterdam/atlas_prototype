@@ -18,18 +18,18 @@
     function DpToggleLayerSelectionController ($scope, store, ACTIONS) {
         var vm = this;
 
-        $scope.$watch('vm.showLayerSelection', function () {
-            if (!vm.showLayerSelection) {
-                vm.buttonTitle = 'Kaartlagen selecteren';
-            } else {
-                vm.buttonTitle = 'Sluit paneel voor selecteren kaartlagen';
-            }
-        });
+        $scope.$watch('vm.showLayerSelection', () => setStatus());
 
-        vm.toggle = function () {
-            store.dispatch({
-                type: ACTIONS[vm.showLayerSelection ? 'HIDE_LAYER_SELECTION' : 'SHOW_LAYER_SELECTION']
-            });
-        };
+        setStatus();
+
+        function setStatus () {
+            if (vm.showLayerSelection) {
+                vm.buttonTitle = 'Sluit paneel voor selecteren kaartlagen';
+                vm.action = 'HIDE_LAYER_SELECTION';
+            } else {
+                vm.buttonTitle = 'Kaartlagen selecteren';
+                vm.action = 'SHOW_LAYER_SELECTION';
+            }
+        }
     }
 })();

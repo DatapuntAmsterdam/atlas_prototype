@@ -22,13 +22,14 @@
 
     <div class="u-row">
         <div class="u-col-sm--6 u-padding__right--2">
-            <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
+            <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
         </div>
     </div>
 
     <div ng-if="vm.apiData.results.adressen.count" class="u-row">
         <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
-
-        <dp-api-call endpoint="{{vm.apiData.results.adressen.href}}" partial="adressen_lijst"></dp-api-call>
+        <div class="u-margin__bottom--4">
+            <dp-link type="SHOW_DATA_SELECTION" payload="{dataset: 'bag', filters: {'naam': vm.filterSelection.openbareruimte}, page: 1}">Toon alle adressen</dp-link>
+        </div>
     </div>
 </div>

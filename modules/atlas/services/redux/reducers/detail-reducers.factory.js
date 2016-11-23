@@ -10,8 +10,8 @@
     function detailReducersFactory (ACTIONS) {
         var reducers = {};
 
-        reducers[ACTIONS.FETCH_DETAIL] = fetchDetailReducer;
-        reducers[ACTIONS.SHOW_DETAIL] = showDetailReducer;
+        reducers[ACTIONS.FETCH_DETAIL.id] = fetchDetailReducer;
+        reducers[ACTIONS.SHOW_DETAIL.id] = showDetailReducer;
 
         return reducers;
 
@@ -26,6 +26,7 @@
 
             newState.detail = {
                 endpoint: payload,
+                reload: Boolean(oldState.detail && oldState.detail.endpoint === payload),
                 isLoading: true
             };
 
@@ -52,11 +53,14 @@
 
             // Detail can be null if another action gets triggered between FETCH_DETAIL and SHOW_DETAIL
             if (angular.isObject(newState.detail)) {
+                newState.detail.isInvisible = false;
+
                 newState.detail.display = payload.display;
                 newState.detail.geometry = payload.geometry;
 
                 newState.map.isLoading = false;
                 newState.detail.isLoading = false;
+                newState.detail.reload = false;
             }
 
             return newState;

@@ -10,7 +10,7 @@
     function pageReducersFactory (ACTIONS) {
         var reducers = {};
 
-        reducers[ACTIONS.SHOW_PAGE] = showPageReducer;
+        reducers[ACTIONS.SHOW_PAGE.id] = showPageReducer;
 
         return reducers;
 

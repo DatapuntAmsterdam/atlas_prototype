@@ -135,14 +135,14 @@ describe('The dp-meetbout-graph directive', function () {
             });
         });
 
-        describe('y as links zakking', function () {
-            it('should have appended a y axis on the left for zakking to the svg g:transform element ', function () {
+        describe('y as links zakking cumulatief', function () {
+            it('should have appended a y axis for zakking cumulatief to the svg g:transform element ', function () {
                 var directive = getGraphDirective('https://api-acc.datapunt.amsterdam.nl' +
                     '/meetbouten/meting/?meetbout=10581097', 3);
-                var yZakking = directive.find('svg > g > g:nth-of-type(2)');
+                var yZakkingCum = directive.find('svg > g > g:nth-of-type(2)');
 
-                expect(yZakking).toExist();
-                expect(yZakking.attr('class')).toBe('c-meetbout__axis c-meetbout__axis--y-zakking');
+                expect(yZakkingCum).toExist();
+                expect(yZakkingCum.attr('class')).toBe('c-meetbout__axis');
             });
 
             it('should append a text to the yZakking axis', function () {
@@ -155,54 +155,18 @@ describe('The dp-meetbout-graph directive', function () {
                 expect(text.attr('y')).toBe('6');
                 expect(text.attr('dy')).toBe('.71em');
                 expect(text.attr('style')).toContain('text-anchor: middle;');
-                expect(text.text()).toBe('Zakking (mm)');
+                expect(text.text()).toBe('Zakking cumulatief (mm)');
             });
         });
 
-        describe('y as rechts zakkingssnelheid', function () {
-            it('should have appended a y axis on the right to the svg g:transform element ', function () {
-                var directive = getGraphDirective('https://api-acc.datapunt.amsterdam.nl' +
-                    '/meetbouten/meting/?meetbout=10581097', 3);
-                var yZakkingssnelheid = directive.find('svg > g > g:nth-of-type(3)');
-
-                expect(yZakkingssnelheid).toExist();
-                expect(yZakkingssnelheid.attr('class')).toBe('c-meetbout__axis c-meetbout__axis--y-zakkingssnelheid');
-                expect(yZakkingssnelheid.attr('transform')).toBe('translate(630,0)');
-            });
-
-            it('should append a text to the yZakking axis', function () {
-                var directive = getGraphDirective('https://api-acc.datapunt.amsterdam.nl' +
-                    '/meetbouten/meting/?meetbout=10581097', 3);
-                var text = directive.find('svg > g > g:nth-of-type(3) > text');
-
-                expect(text).toExist();
-                // transform werkt niet, d3 bakt er uit eigen beweging dingen bij
-                expect(text.attr('y')).toBe('6');
-                expect(text.attr('dy')).toBe('.71em');
-                expect(text.attr('style')).toContain('text-anchor: middle;');
-                expect(text.text()).toBe('Zakkingssnelheid (mm/j)');
-            });
-        });
-
-        describe('lijn voor grafiek zakking', function () {
-            it('should plot a line to represent the zakking per meting of the meetbout', function () {
+        describe('lijn voor grafiek zakking cumulatief', function () {
+            it('should plot a line to represent the zakking cumulatief of the meetbout', function () {
                 var directive = getGraphDirective('https://api-acc.datapunt.amsterdam.nl' +
                     '/meetbouten/meting/?meetbout=10581097', 3);
                 var line = directive.find('svg > g > path:nth-of-type(1)');
 
                 expect(line).toExist();
-                expect(line.attr('class')).toBe('c-meetbout__line c-meetbout__line--zakking');
-            });
-        });
-
-        describe('lijn voor grafiek zakkingssnelheid', function () {
-            it('should plot a line to represent the zakkingssnelheid na elke meting of the meetbout', function () {
-                var directive = getGraphDirective('https://api-acc.datapunt.amsterdam.nl' +
-                    '/meetbouten/meting/?meetbout=10581097', 3);
-                var line = directive.find('svg > g > path:nth-of-type(2)');
-
-                expect(line).toExist();
-                expect(line.attr('class')).toBe('c-meetbout__line c-meetbout__line--zakkingssnelheid');
+                expect(line.attr('class')).toBe('c-meetbout__line c-meetbout__line--zakking-cum');
             });
         });
     });

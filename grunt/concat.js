@@ -1,25 +1,28 @@
 module.exports = function (grunt) {
     var files = require('./config/js-files'),
         cssFiles = require('./config/css-files'),
-        uniqueIdCss;
-
-    uniqueIdCss = grunt.config.get('uniqueIdCss');
+        uniqueIdJs = grunt.config.get('uniqueIdJs'),
+        uniqueIdCss = grunt.config.get('uniqueIdCss');
 
     var targets = {
         options: {
             sourceMap: true
         },
-        npm_bower: {
+        libs: {
             options: {
-                sourceMap: true
+                sourceMap: false
             },
             // Treat npm "bower" components as regular bower components...
             src: ['build/temp/npm_components/**/*.js', 'build/temp/bower_components/bower_components.js'],
-            dest: 'build/temp/bower_components.js'
+            dest: 'build/temp/atlas.libs.js'
         },
         css: {
             src: cssFiles,
             dest: 'build/atlas.' + uniqueIdCss + '.css'
+        },
+        modules: {
+            src: files.jsFiles,
+            dest: 'build/temp/es6/atlas.' + uniqueIdJs + '.js'
         }
         //
         // The code below generates targets as follows
@@ -39,7 +42,7 @@ module.exports = function (grunt) {
         return {
             name: `module_${module.slug}`,
             src: files.jsModuleFiles(module),
-            dest: `build/temp/babel/es6/atlas.${module.slug}.js`
+            dest: `build/temp/es6/atlas.${module.slug}.js`
         };
     };
 

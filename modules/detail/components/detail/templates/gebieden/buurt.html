@@ -21,22 +21,11 @@
       <dp-api-call endpoint="{{vm.apiData.results.bouwblokken.href}}" partial="lijst"></dp-api-call>
     </div>
 
-    <div ng-if="vm.apiData.results.ligplaatsen.count">
-      <dp-stelselpedia-header definition="LIGPLAATS" use-plural="true"></dp-stelselpedia-header>
-
-      <dp-api-call endpoint="{{vm.apiData.results.ligplaatsen.href}}" partial="adressen_lijst"></dp-api-call>
-    </div>
-
-    <div ng-if="vm.apiData.results.standplaatsen.count">
-      <dp-stelselpedia-header definition="STANDPLAATS" use-plural="true"></dp-stelselpedia-header>
-
-      <dp-api-call endpoint="{{vm.apiData.results.standplaatsen.href}}" partial="adressen_lijst"></dp-api-call>
-    </div>
-
-    <div ng-if="vm.apiData.results.verblijfsobjecten.count">
-      <dp-stelselpedia-header definition="VERBLIJFSOBJECT" use-plural="true"></dp-stelselpedia-header>
-
-      <dp-api-call endpoint="{{vm.apiData.results.verblijfsobjecten.href}}" partial="adressen_lijst"></dp-api-call>
+    <div>
+        <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
+        <div class="u-margin__bottom--4">
+            <dp-link type="SHOW_DATA_SELECTION" payload="{dataset: 'bag', filters: {'buurt_naam': vm.filterSelection.buurt}, page: 1}">Toon alle adressen</dp-link>
+        </div>
     </div>
 
     <dp-bbga-graphs

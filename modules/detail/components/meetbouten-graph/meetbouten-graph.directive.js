@@ -46,43 +46,24 @@
                     .scale(xAs)
                     .orient('bottom');
 
-                // Y as 1, zakking
-                var yZakking = d3.scale.linear()
+                // Y as 1, zakking cumulatief
+                var yZakkingCum = d3.scale.linear()
                     .domain(d3.extent(scope.objects, function (d) {
-                        return d.zakking;
+                        return d.zakking_cumulatief;
                     }))
                     .range([0, height]);
 
-                var yZakkingAxis = d3.svg.axis()
-                    .scale(yZakking)
+                var yZakkingCumAxis = d3.svg.axis()
+                    .scale(yZakkingCum)
                     .orient('left');
 
-                // y as 2, zakkingsnelheid
-                var yzakkingssnelheid = d3.scale.linear()
-                    .domain(d3.extent(scope.objects, function (d) {
-                        return d.zakkingssnelheid;
-                    }))
-                    .range([height, 0]);
-
-                var yzakkingssnelheidAxis = d3.svg.axis()
-                    .scale(yzakkingssnelheid)
-                    .orient('right');
-
                 // definieren grafiek lijnen
-                var zakkingLine = d3.svg.line()
+                var zakkingCumLine = d3.svg.line()
                     .x(function (d) {
                         return xAs(dateConverter.ymdToDate(d.datum));
                     })
                     .y(function (d) {
-                        return yZakking(d.zakking);
-                    });
-
-                var zakkingssnelheidLine = d3.svg.line()
-                    .x(function (d) {
-                        return xAs(dateConverter.ymdToDate(d.datum));
-                    })
-                    .y(function (d) {
-                        return yzakkingssnelheid(d.zakkingssnelheid);
+                        return yZakkingCum(d.zakking_cumulatief);
                     });
 
                 // Dom manipulatie
@@ -103,36 +84,19 @@
 
                 // intekenen y as zakking
                 svg.append('g')
-                    .attr('class', 'c-meetbout__axis c-meetbout__axis--y-zakking')
-                    .call(yZakkingAxis)
+                    .attr('class', 'c-meetbout__axis')
+                    .call(yZakkingCumAxis)
                     .append('text')
                     .attr('transform', d3.transform('rotate(-90) translate(-185, -60)'))
                     .attr('y', 6)
                     .attr('dy', '.71em')
                     .style('text-anchor', 'middle')
-                    .text('Zakking (mm)');
+                    .text('Zakking cumulatief (mm)');
 
-                // intekenen y as zakkingssnelheid
-                svg.append('g')
-                    .attr('class', 'c-meetbout__axis c-meetbout__axis--y-zakkingssnelheid')
-                    .attr('transform', 'translate(' + width + ',0)')
-                    .call(yzakkingssnelheidAxis)
-                    .append('text')
-                    .attr('transform', d3.transform('rotate(-90) translate(-185, 35)'))
-                    .attr('y', 6)
-                    .attr('dy', '.71em')
-                    .style('text-anchor', 'middle')
-                    .text('Zakkingssnelheid (mm/j)');
-
-                // tekenen grafiek 1 zakking
+                // tekenen grafiek zakking cumulatief
                 svg.append('path')
-                    .attr('class', 'c-meetbout__line c-meetbout__line--zakking')
-                    .attr('d', zakkingLine(scope.objects));
-
-                // tekenen grafiek 2 zakkingssnelheid
-                svg.append('path')
-                    .attr('class', 'c-meetbout__line c-meetbout__line--zakkingssnelheid')
-                    .attr('d', zakkingssnelheidLine(scope.objects));
+                    .attr('class', 'c-meetbout__line c-meetbout__line--zakking-cum')
+                    .attr('d', zakkingCumLine(scope.objects));
             });
         }
     }

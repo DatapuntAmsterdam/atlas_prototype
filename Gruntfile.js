@@ -9,6 +9,7 @@ module.exports = function (grunt) {
      * 'default' formerly known as 'grunt serve'
      */
     grunt.registerTask('default', [
+        'create-hooks',
         'build-develop',
         'connect:build',
         'watch'
@@ -17,6 +18,12 @@ module.exports = function (grunt) {
     grunt.registerTask('test', [
         'build-develop',
         'test-js',
+        'test-css'
+    ]);
+
+    grunt.registerTask('fulltest', [
+        'build-develop',
+        'test-js-full',
         'test-css'
     ]);
 };

@@ -8,7 +8,7 @@ describe('The dp-map directive', function () {
         zoom,
         measure,
         variableWidth,
-        searchByClick,
+        onMapClick,
         mockedMapState;
 
     beforeEach(function () {
@@ -41,7 +41,7 @@ describe('The dp-map directive', function () {
                 measure: {
                     initialize: function () {}
                 },
-                searchByClick: {
+                onMapClick: {
                     initialize: function () {}
                 }
             },
@@ -75,7 +75,7 @@ describe('The dp-map directive', function () {
             _zoom_,
             _measure_,
             _variableWidth_,
-            _searchByClick_) {
+            _onMapClick_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             L = _L_;
@@ -85,7 +85,7 @@ describe('The dp-map directive', function () {
             zoom = _zoom_;
             measure = _measure_;
             variableWidth = _variableWidth_;
-            searchByClick = _searchByClick_;
+            onMapClick = _onMapClick_;
         });
 
         spyOn(L, 'map').and.returnValue('I_AM_A_FAKE_LEAFLET_MAP');
@@ -104,7 +104,7 @@ describe('The dp-map directive', function () {
         spyOn(zoom, 'setZoom');
         spyOn(measure, 'initialize');
         spyOn(variableWidth, 'initialize');
-        spyOn(searchByClick, 'initialize');
+        spyOn(onMapClick, 'initialize');
 
         mockedMapState = {
             baseLayer: 'topografie',
@@ -369,10 +369,10 @@ describe('The dp-map directive', function () {
         expect(variableWidth.initialize).toHaveBeenCalledWith(container, 'I_AM_A_FAKE_LEAFLET_MAP');
     });
 
-    it('initializes the searchByClick factory', function () {
+    it('initializes the onMapClick factory', function () {
         getDirective(mockedMapState, false, []);
 
-        expect(searchByClick.initialize).toHaveBeenCalledWith('I_AM_A_FAKE_LEAFLET_MAP');
+        expect(onMapClick.initialize).toHaveBeenCalledWith('I_AM_A_FAKE_LEAFLET_MAP');
     });
 
     describe('fullscreen state', function () {

@@ -284,6 +284,18 @@ describe('The dp-data-selection-filters component', function () {
         });
     });
 
+    it('can implode both known and unknown categories', function () {
+        var component = getComponent({}, false);
+        var scope = component.isolateScope();
+
+        scope.vm.expandCategory('xyz');
+        scope.vm.implodeCategory('xyz');
+        expect(scope.vm.isExpandedCategory('xyz')).toBe(false);
+
+        scope.vm.implodeCategory('abc');
+        expect(scope.vm.isExpandedCategory('abc')).toBe(false);
+    });
+
     it('shows maximum of 10 options per category, it can expand/implode when it has more than 10 results', function () {
         var component;
 

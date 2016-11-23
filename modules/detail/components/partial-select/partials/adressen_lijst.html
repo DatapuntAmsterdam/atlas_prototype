@@ -5,7 +5,12 @@
       <dp-link type="FETCH_DETAIL" payload="object._links.self.href">
         {{ object._display }}
       </dp-link>
-      <span class="muted" ng-if="object.hoofdadres !== undefined">{{ object.hoofdadres ? "" : "(nevenadres)" }}</span>
+      <span class="muted" ng-if="object.hoofdadres === false">
+          (nevenadres)
+      </span>
+      <span class="muted" ng-if="object.status.code === '18'">
+          ({{object.status.omschrijving.toLowerCase()}})
+      </span>
     </li>
   </ul>
 

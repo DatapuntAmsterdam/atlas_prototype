@@ -5,6 +5,22 @@ describe('The search title factory', function () {
         angular.mock.module(
             'dpSearchResults',
             function ($provide) {
+                $provide.constant('SEARCH_CONFIG', {
+                    QUERY_ENDPOINTS: [
+                        {
+                            slug: 'openbare_ruimte',
+                            label_singular: 'Openbare ruimte',
+                            label_plural: 'Openbare ruimtes',
+                            uri: 'path/to/openbare_ruimte/'
+                        }, {
+                            slug: 'adres',
+                            label_singular: 'Adres',
+                            label_plural: 'Adressen',
+                            uri: 'path/to/adres/'
+                        }
+                    ]
+                });
+
                 $provide.value('coordinatesFilter', function (input) {
                     return 'X, Y (' + input.join(', ') + ')';
                 });
@@ -23,6 +39,20 @@ describe('The search title factory', function () {
         expect(titleData.subTitle).toContain('"westerpark"');
     });
 
+    it('returns an empty title and empty subtitle on a negative search result', function () {
+        var titleData = searchTitle.getTitleData(-1, 'westerpark', null, null);
+
+        expect(titleData.title).toBe('');
+        expect(titleData.subTitle).toBe('');
+    });
+
+    it('returns an empty title and subtitle when no query or location is specified', function () {
+        var titleData = searchTitle.getTitleData(-1, null, null, null);
+
+        expect(titleData.title).toBe('');
+        expect(titleData.subTitle).toBe('');
+    });
+
     it('can show the number of search results when searching by location', function () {
         var titleData = searchTitle.getTitleData(46, null, [52.123, 4.789], null);
 
@@ -31,7 +61,7 @@ describe('The search title factory', function () {
     });
 
     it('can show the number of search results for a specific category (query search only)', function () {
-        var titleData = searchTitle.getTitleData(47, 'westerpark', null, 'Adressen');
+        var titleData = searchTitle.getTitleData(47, 'westerpark', null, 'adres');
 
         // The category name will be converted to lowercase
         expect(titleData.title).toContain('47 adressen');
@@ -86,7 +116,7 @@ describe('The search title factory', function () {
         expect(titleData.title).toContain('1.000');
 
         // When viewing a category of search results
-        titleData = searchTitle.getTitleData(1000, 'zuiderpark', null, 'Adressen');
+        titleData = searchTitle.getTitleData(1000, 'zuiderpark', null, 'adres');
         expect(titleData.title).not.toContain('1000');
         expect(titleData.title).toContain('1.000');
     });

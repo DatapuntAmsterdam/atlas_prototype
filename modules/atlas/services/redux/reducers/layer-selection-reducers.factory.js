@@ -10,8 +10,8 @@
     function layerSelectionReducersFactory (ACTIONS) {
         var reducers = {};
 
-        reducers[ACTIONS.SHOW_LAYER_SELECTION] = showLayerSelectionReducer;
-        reducers[ACTIONS.HIDE_LAYER_SELECTION] = hideLayerSelectionReducer;
+        reducers[ACTIONS.SHOW_LAYER_SELECTION.id] = showLayerSelectionReducer;
+        reducers[ACTIONS.HIDE_LAYER_SELECTION.id] = hideLayerSelectionReducer;
 
         return reducers;
 

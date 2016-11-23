@@ -6,11 +6,11 @@
     </dp-stelselpedia-header>
 
     <div ng-if="!vm.hoofdadres || vm.isGevormd">
-        <dp-panel ng-if="!vm.hoofdadres" is-panel-visible="true" type="warning" class-name="c-nummeraanduiding">
+        <dp-panel ng-if="!vm.hoofdadres" is-panel-visible="true" type="warning" class-name="c-panel--header">
             Dit is een nevenadres
         </dp-panel>
 
-        <dp-panel ng-if="vm.isGevormd" is-panel-visible="true" type="danger" class-name="c-nummeraanduiding">
+        <dp-panel ng-if="vm.isGevormd" is-panel-visible="true" type="danger" class-name="c-panel--header">
             {{vm.statusOmschrijving}}
         </dp-panel>
     </div>

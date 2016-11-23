@@ -22,25 +22,30 @@
   }
 }
 
-.o-btn--close {
+%btn-close {
   position: absolute;
   top: 0;
   right: 0;
-  width: $button-size;
-  height: $button-size;
-  background-image: url("assets/icons/close-default.svg");
+}
 
-  &:hover {
-    background-image: url("assets/icons/close-active.svg");
-  }
+.o-btn--close {
+  @extend %btn-close;
+  @include icon-button("close");
+}
+
+.o-btn--close--info {
+  @extend %btn-close;
+  @include icon-button("close", "info", "");
 }
 
 .o-btn--close--warning {
-  background-image: url("assets/icons/close-warning.svg");
+  @extend %btn-close;
+  @include icon-button("close", "warning", "");
 }
 
 .o-btn--close--danger {
-  background-image: url("assets/icons/close-hover.svg");
+  @extend %btn-close;
+  @include icon-button("close", "danger", "");
 }
 
 .s-btn--nested {

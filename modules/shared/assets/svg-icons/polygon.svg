@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-polygoon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-polygoon">
+            <rect id="Rectangle-6" fill="#666666" x="0" y="0" width="26" height="26"></rect>
+            <polygon id="Polygon" fill="#FFFFFF" transform="translate(12.582257, 12.308656) rotate(-15.000000) translate(-12.582257, -12.308656) " points="12.5822568 4.78993812 20.4879046 10.5337275 17.4682158 19.8273738 7.69629772 19.8273738 4.67660896 10.5337275"></polygon>
+        </g>
+    </g>
+</svg>

@@ -114,7 +114,9 @@ describe('The dp-layer-selection component', function () {
         });
 
         it('that triggers HIDE_LAYER_SELECTION', function () {
-            component.find('.c-layer-selection__heading button').click();
+            component.find('.c-layer-selection__close').click();
+
+            $rootScope.$apply();
 
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.HIDE_LAYER_SELECTION

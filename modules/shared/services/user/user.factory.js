@@ -5,17 +5,22 @@
         .module('dpShared')
         .factory('user', userFactory);
 
-    userFactory.$inject = ['$http', '$httpParamSerializer', '$q', '$interval', 'environment'];
+    userFactory.$inject = ['$http', '$httpParamSerializer', '$q', '$timeout', 'environment', 'storage'];
 
-    function userFactory ($http, $httpParamSerializer, $q, $interval, environment) {
-        var userState = {
-            username: null,
-            accessToken: null,
-            isLoggedIn: false,
-            keepLoggedIn: false
-        };
+    function userFactory ($http, $httpParamSerializer, $q, $timeout, environment, storage) {
+        var userState = {},
+            accessToken = storage.getItem('token');
 
-        //  Refresh the succesfully obtained token every 4 and a half minutes (token expires in 5 minutes)
+        // if sessionStorage is available use the refreshToken function to check if a token is available and valid
+        if (accessToken) {
+            refreshToken();
+        } else {
+            userState.username = null;
+            userState.accessToken = null;
+            userState.isLoggedIn = false;
+        }
+
+        //  Refresh the successfully obtained token every 4 and a half minutes (token expires in 5 minutes)
         var intervalDuration = 270000;
         var intervalPromise = null;
 
@@ -47,9 +52,11 @@
                 userState.username = username;
                 userState.accessToken = response.data.token;
                 userState.isLoggedIn = true;
-                userState.keepLoggedIn = true;
 
-                intervalPromise = $interval(refreshToken, intervalDuration);
+                storage.setItem('token', userState.accessToken);
+                accessToken = response.data.token;
+
+                intervalPromise = $timeout(refreshToken, intervalDuration);
             }
 
             function loginError (response) {
@@ -81,7 +88,7 @@
                 },
                 data: $httpParamSerializer(
                     {
-                        token: userState.accessToken
+                        token: accessToken
                     }
                     )
             })
@@ -89,17 +96,23 @@
 
             function refreshSuccess (response) {
                 userState.accessToken = response.data.token;
+                storage.setItem('token', userState.accessToken);
+                accessToken = response.data.token;
+                userState.isLoggedIn = true;
+
+                intervalPromise = $timeout(refreshToken, intervalDuration);
             }
         }
 
         function logout () {
             if (intervalPromise) {
-                $interval.cancel(intervalPromise);
+                $timeout.cancel(intervalPromise);
             }
+            storage.removeItem('token');
+
             userState.username = null;
             userState.accessToken = null;
             userState.isLoggedIn = false;
-            userState.keepLoggedIn = false;
         }
 
         function getStatus () {

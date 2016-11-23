@@ -2,31 +2,13 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: $button-size;
-  height: $button-size;
-  cursor: pointer;
   z-index: 2;
 }
 
-.c-toggle-fullscreen__icon {
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
 .c-toggle-fullscreen__icon--fullscreen {
-  background-image: url("assets/icons/fullscreen.svg");
-
-  &:hover {
-    background-image: url("assets/icons/fullscreen-active.svg");
-  }
+  @include icon-button("fullscreen", "red", "");
 }
 
 .c-toggle-fullscreen__icon--minimize {
-  background-image: url("assets/icons/close-hover.svg");
-
-  &:hover {
-    background-image: url("assets/icons/close-active.svg");
-  }
+  @include icon-button("close", "red", "");
 }

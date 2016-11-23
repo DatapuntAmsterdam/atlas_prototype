@@ -1,9 +1,5 @@
-<button class="c-toggle-fullscreen"
-        ng-class="{
-            'c-toggle-fullscreen__icon--fullscreen': !vm.isFullscreen,
-            'c-toggle-fullscreen__icon--minimize': vm.isFullscreen
-        }"
-        ng-click="vm.toggle()"
-        title="{{vm.buttonText}}">
-    <span class="u-sr-only">{{vm.buttonText}}</span>
-</button>
+<dp-link type="MAP_FULLSCREEN"
+         payload="!vm.isFullscreen"
+         class-name="{{'c-toggle-fullscreen c-toggle-fullscreen__icon--' + (vm.isFullscreen ? 'minimize' : 'fullscreen')}}"
+         hover-text="{{vm.buttonText}}">
+</dp-link>

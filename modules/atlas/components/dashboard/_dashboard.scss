@@ -1,4 +1,16 @@
+@import "modules/shared/styles/config";
+
 $dashboard-heading-height: 50px;
+$dashboard-heading-height-printversion: 42px;
+$dashboard-error-height: $button-size + 2 * $base-whitespace;
+
+%full-height {
+  height: 100%;
+}
+
+.u-dashboard--full-height {
+  @extend %full-height;
+}
 
 .c-dashboard {
   height: 100%;
@@ -11,14 +23,111 @@ $dashboard-heading-height: 50px;
   z-index: 2;
 }
 
-.c-dashboard__content {
+.c-dashboard__body {
   position: relative;
   height: calc(100% - #{$dashboard-heading-height});
+  padding-left: $base-whitespace * 2;
   z-index: 1;
   overflow-y: hidden;
+
+  & .u-grid,
+  & .u-row {
+    @extend %full-height;
+  }
 }
 
-.c-dashboard__content--scrollable {
+.c-dashboard__body--error {
+  .u-row {
+    height: calc(100% - #{$dashboard-error-height});
+  }
+}
+
+.c-dashboard__error {
+  margin-top: $base-whitespace * 2;
+  margin-right: $base-whitespace * 2;
+}
+
+.c-dashboard__layer-selection,
+.c-dashboard__map,
+.c-dashboard__content {
+  @extend %full-height;
+
+  padding: $base-whitespace * 2;
+  padding-left: 0;
   overflow-y: auto;
+
+  &>div {
+    @extend %full-height;
+
+    position: relative;
+  }
 }
 
+.is-print-mode {
+  %full-height {
+    height: auto;
+  }
+
+  .c-dashboard {
+    padding: 0;
+    padding-top: $base-whitespace * 2;
+    border: solid $secondary-gray20 1px;
+    border-top: none;
+    overflow: visible;
+  }
+
+  .c-dashboard__heading {
+    height: $dashboard-heading-height-printversion * 2;
+    padding: $base-whitespace * 1.5 $base-whitespace * 2;
+  }
+
+  .c-dashboard__body {
+    padding: $base-whitespace * 2;
+    padding-bottom: 0;
+    box-shadow: 0 0 5px $secondary-gray40;
+  }
+
+  .c-dashboard__error {
+    margin: 0;
+    margin-bottom: $base-whitespace * 2;
+  }
+
+  .c-dashboard__layer-selection,
+  .c-dashboard__map,
+  .c-dashboard__content {
+    margin: 0;
+    margin-bottom: $base-whitespace * 2;
+    padding: 0;
+  }
+
+  .c-dashboard__content {
+    page-break-before: always;
+  }
+
+  &.print-landscape {
+    body {
+      width: 1280px;
+    }
+  }
+
+  .c-map {
+    height: 700px;
+  }
+}
+
+@media print {
+  .is-print-mode {
+    .c-dashboard {
+      border: none;
+    }
+
+    .c-dashboard__heading,
+    .c-dashboard__error {
+      display: none;
+    }
+
+    .c-dashboard__body {
+      box-shadow: none;
+    }
+  }
+}

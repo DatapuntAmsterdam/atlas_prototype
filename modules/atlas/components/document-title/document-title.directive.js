@@ -77,7 +77,8 @@
                 const state = store.getState(),
                     visibility = dashboardColumns.determineVisibility(state),
                     filtered = mapping.filter(item => visibility[item.visibility]),
-                    current = filtered ? filtered[0] : null,
+                    // mapping.filter returns an array, possibly empty
+                    current = filtered[0],
                     stateData = current ? state[current.state] : null,
                     displayNewTitle = current && stateData && !stateData.isLoading,
                     getTitle = displayNewTitle ? current.documentTitle.getTitle : null,

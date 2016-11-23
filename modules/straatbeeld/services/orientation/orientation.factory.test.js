@@ -2,17 +2,21 @@ describe('The orientation factory', function () {
     var orientation,
         store,
         ACTIONS,
-        mockedViewer,
-        mockedCamera;
+        mockedViewer;
 
     beforeEach(function () {
         angular.mock.module(
             'dpStraatbeeld',
             {
                 store: {
-                    dispatch: function () {}
+                    dispatch: function () { }
+                },
+
+                angleConversion: {
+                    radiansToDegrees: function (val) { return val * 2; }
                 }
             }
+
         );
 
         angular.mock.inject(function (_orientation_, _store_, _ACTIONS_) {
@@ -25,34 +29,30 @@ describe('The orientation factory', function () {
             view: function () {
                 return {
                     yaw: function () {
-                        return 100;
+                        return 0.1;
                     },
                     pitch: function () {
-                        return 1;
+                        return 0.2;
                     },
                     fov: function () {
-                        return 50;
+                        return 0.3;
                     }
                 };
             }
-        };
-
-        mockedCamera = {
-            heading: 180
         };
 
         spyOn(store, 'dispatch');
     });
 
     it('dispatches an ACTION based on orientation from the Marzipano viewer', function () {
-        orientation.update(mockedViewer, mockedCamera, false);
+        orientation.update(mockedViewer);
 
         expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.STRAATBEELD_SET_ORIENTATION,
+            type: ACTIONS.SET_STRAATBEELD_ORIENTATION,
             payload: {
-                heading: 280,
-                pitch: 1,
-                fov: 50
+                heading: 0.2,
+                pitch: 0.4,
+                fov: 0.6
             }
         });
     });

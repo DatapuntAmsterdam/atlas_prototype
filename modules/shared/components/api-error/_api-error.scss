@@ -1,0 +1,26 @@
+.c-api-error__panel {
+  height: $button-size;
+
+  .c-panel {
+    padding-top: $base-whitespace * .3;
+    padding-bottom: $base-whitespace * .4;
+    padding-left: $base-whitespace;
+    line-height: $button-size - ($base-whitespace * .3) - ($base-whitespace * .4);
+  }
+
+  .c-api-error__panel__text {
+    padding-right: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &:hover {
+    .c-api-error__panel__text {
+      padding-right: 0;
+      text-overflow: inherit;
+      white-space: inherit;
+      overflow: inherit;
+    }
+  }
+}

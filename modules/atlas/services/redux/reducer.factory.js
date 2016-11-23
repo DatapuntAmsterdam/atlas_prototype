@@ -42,8 +42,10 @@
                 printReducers
             );
 
-            if (angular.isDefined(action) && angular.isDefined(actions[action.type])) {
-                return actions[action.type](oldState, action.payload);
+            if (angular.isObject(action) &&
+                angular.isObject(action.type) &&
+                angular.isFunction(actions[action.type.id])) {
+                return actions[action.type.id](oldState, action.payload);
             } else {
                 return oldState;
             }

@@ -6,21 +6,22 @@
     applicationStateFactory.$inject = ['Redux'];
 
     function applicationStateFactory (Redux) {
-        var store;
+        let store,
+            reducer,
+            stateToUrl;
 
         return {
-            initialize: initialize,
-            getStore: getStore
+            initialize,
+            getStore: () => store,
+            getReducer: () => reducer,
+            getStateToUrl: () => stateToUrl
         };
 
-        function initialize (reducer, defaultState, middleware) {
-            var enhancer = Redux.applyMiddleware(middleware);
-
+        function initialize (_reducer_, _stateToUrl_, defaultState, ...middleware) {
+            var enhancer = Redux.applyMiddleware(...middleware);
+            reducer = _reducer_;
+            stateToUrl = _stateToUrl_;
             store = Redux.createStore(reducer, defaultState, enhancer);
-        }
-
-        function getStore () {
-            return store;
         }
     }
 })();

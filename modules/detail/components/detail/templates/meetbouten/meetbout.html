@@ -1,6 +1,6 @@
 <div class="detail-page__content--main">
     <div class="u-row">
-        <dp-stelselpedia-header heading="{{vm.apiData.results.id}}" definition="MEETBOUT">
+        <dp-stelselpedia-header heading="{{vm.apiData.results.meetboutidentificatie}}" definition="MEETBOUT">
         </dp-stelselpedia-header>
 
         <dl class="c-key-value-list">
@@ -37,14 +37,14 @@
 
     <div class="u-row">
         <div class="u-col-sm--6 u-padding__right--2">
-            <dp-straatbeeld-thumbnail ng-if="vm.location" location="vm.location"></dp-straatbeeld-thumbnail>
+            <dp-straatbeeld-thumbnail location="vm.location"></dp-straatbeeld-thumbnail>
         </div>
     </div>
 
     <div>
         <dp-stelselpedia-header definition="METING" use-plural="true"></dp-stelselpedia-header>
 
-        <p ng-if="!vm.apiData.results.metingen.href">Geen metingen beschikbaar</p>
+        <p ng-if="!vm.apiData.results.metingen.href"><dp-message>Geen metingen beschikbaar</dp-message></p>
 
         <dp-api-call ng-if="vm.apiData.results.metingen.href"
             endpoint="{{vm.apiData.results.metingen.href}}"
@@ -60,7 +60,7 @@
     <div>
         <dp-stelselpedia-header definition="ROLLAAG" use-plural="true"></dp-stelselpedia-header>
 
-        <p ng-if="!vm.apiData.results.rollaag">Geen rollaag tekening beschikbaar</p>
+        <p ng-if="!vm.apiData.results.rollaag"><dp-message>Geen rollaagtekening beschikbaar</dp-message></p>
 
         <dp-api-call ng-if="vm.apiData.results.rollaag"
             endpoint="{{vm.apiData.results.rollaag}}"

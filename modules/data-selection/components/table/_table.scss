@@ -41,8 +41,8 @@ $hover-table-color: #eee;
 
     .c-data-selection-table__content-field {
       padding: {
-        top: $base-whitespace;
-        bottom: $base-whitespace;
+        top: .8 * $base-whitespace;
+        bottom: .8 * $base-whitespace;
       }
 
       &:hover {

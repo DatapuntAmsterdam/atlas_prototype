@@ -6,3 +6,4 @@ docs
 node_modules
 reports
 *.iml
+modules/shared/styles/config/mixins/_icons.scss

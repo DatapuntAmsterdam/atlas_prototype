@@ -21,6 +21,7 @@ describe('The dataSelectionApi factory', function () {
             },
             function ($provide) {
                 $provide.constant('dataSelectionConfig', {
+                    MAX_AVAILABLE_PAGES: 100,
                     zwembaden: {
                         ENDPOINT_PREVIEW: 'https://api.amsterdam.nl/zwembaden/',
                         ENDPOINT_DETAIL: 'https://amsterdam.nl/api_endpoint/zwembaden/',
@@ -88,13 +89,39 @@ describe('The dataSelectionApi factory', function () {
             },
             object_list: [
                 {
+                    _openbare_ruimte_naam: 'Binnenkant',
+                    huisletter: 'A',
+                    huisnummer: '1',
+                    huisnummer_toevoeging: '2',
+                    ligplaats_id: '',
+                    standplaats_id: '0123456',
                     openingstijden: 'Alleen op dinsdag',
                     adres: 'Sneeuwbalweg 24',
                     id: '1'
                 }, {
+                    _openbare_ruimte_naam: 'Binnenkant',
+                    huisletter: 'B',
+                    huisnummer: '1',
+                    huisnummer_toevoeging: '',
+                    ligplaats_id: '0123456',
+                    standplaats_id: '',
+                    hoofdadres: 'False',
+                    status_id: '18',
                     adres: 'Marnixstraat 1',
                     openingstijden: 'Ligt er een beetje aan',
                     id: '2'
+                }, {
+                    _openbare_ruimte_naam: 'Binnenkant',
+                    huisletter: 'C',
+                    huisnummer: '1',
+                    huisnummer_toevoeging: '2',
+                    ligplaats_id: '',
+                    standplaats_id: '0123456',
+                    hoofdadres: 'True',
+                    status_id: '16',
+                    openingstijden: 'Alleen op dinsdag',
+                    adres: 'Sneeuwbalweg 24',
+                    id: '1'
                 }
             ],
             page_count: 2
@@ -121,6 +148,14 @@ describe('The dataSelectionApi factory', function () {
             water: 'Verwarmd',
             page: 27
         });
+
+        // With yet another page
+        let output;
+        dataSelectionApi.query('zwembaden', {}, 9999).then(function (_output_) {
+            output = _output_;
+        });
+        $rootScope.$apply();
+        expect(output.tableData.body.length).toBe(0);
     });
 
     it('returns the total number of pages', function () {
@@ -233,7 +268,7 @@ describe('The dataSelectionApi factory', function () {
             });
             $rootScope.$apply();
 
-            expect(output.tableData.body.length).toBe(2);
+            expect(output.tableData.body.length).toBe(3);
             expect(output.tableData.body[0]).toEqual({
                 detailEndpoint: 'https://amsterdam.nl/api_endpoint/zwembaden/1/',
                 fields: ['Sneeuwbalweg 24', 'Alleen op dinsdag']
@@ -254,12 +289,46 @@ describe('The dataSelectionApi factory', function () {
                 output = _output_;
             });
             $rootScope.$apply();
-            expect(output.tableData.body.length).toBe(2);
+            expect(output.tableData.body.length).toBe(3);
             expect(output.tableData.body[0].fields.length).toBe(2);
             expect(output.tableData.body[1].fields.length).toBe(2);
 
             expect(angular.toJson(output.tableData.body)).not.toContain('whatever');
             expect(angular.toJson(output.tableData.body)).not.toContain('sure');
+        });
+    });
+
+    describe('formatListData', function () {
+        it('returns the data needed for list view', function () {
+            var output = {};
+
+            dataSelectionApi.query('zwembaden', {}, 1).then(function (_output_) {
+                output = _output_;
+            });
+            $rootScope.$apply();
+
+            expect(output.listData).toEqual([{
+                adres: 'Binnenkant 1A-2',
+                ligplaats: false,
+                standplaats: true,
+                nevenadres: false,
+                gevormd: false,
+                detailEndpoint: 'https://amsterdam.nl/api_endpoint/zwembaden/1/'
+            }, {
+                adres: 'Binnenkant 1B',
+                ligplaats: true,
+                standplaats: false,
+                nevenadres: true,
+                gevormd: true,
+                detailEndpoint: 'https://amsterdam.nl/api_endpoint/zwembaden/2/'
+            }, {
+                adres: 'Binnenkant 1C-2',
+                ligplaats: false,
+                standplaats: true,
+                nevenadres: false,
+                gevormd: false,
+                detailEndpoint: 'https://amsterdam.nl/api_endpoint/zwembaden/1/'
+            }]);
         });
     });
 });

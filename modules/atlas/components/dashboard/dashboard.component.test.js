@@ -87,175 +87,87 @@ describe('The dashboard component', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    describe('the print mode has variable height', function () {
-        var component;
-
-        it('uses a maximum height in non-print mode', function () {
-            mockedState.isPrintMode = false;
-
-            // Default 'screen' mode
-            component = getComponent();
-
-            expect(component.find('.u-grid').hasClass('u-height--100')).toBe(true);
-            expect(component.find('.u-grid').hasClass('u-height--auto')).toBe(false);
-
-            expect(component.find('.u-row').hasClass('u-height--100')).toBe(true);
-            expect(component.find('.u-row').hasClass('u-height--false')).toBe(false);
-
-            // Middle column
-            expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--100')).toBe(true);
-            expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--auto')).toBe(false);
-
-            // Right column
-            expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--100')).toBe(true);
-            expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--auto')).toBe(false);
-
-            // Open the left column
-            mockedState.layerSelection = true;
-            component = getComponent();
-
-            // Check the left column
-            expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--100')).toBe(true);
-            expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--auto')).toBe(false);
-        });
-
-        it('uses the default (auto) height in print mode', function () {
-            mockedState.detail = {};
-            mockedState.page = null;
-            mockedState.isPrintMode = true;
-
-            // Default 'screen' mode
-            component = getComponent();
-
-            expect(component.find('.u-grid').hasClass('u-height--auto')).toBe(true);
-            expect(component.find('.u-row').hasClass('u-height--auto')).toBe(true);
-
-            // Middle column
-            expect(component.find('.qa-dashboard__content__column--middle').hasClass('u-height--auto')).toBe(true);
-
-            // Right column
-            expect(component.find('.qa-dashboard__content__column--right').hasClass('u-height--auto')).toBe(true);
-
-            // Open the left column
-            mockedState.layerSelection = true;
-            component = getComponent();
-
-            // Check the left column
-            expect(component.find('.qa-dashboard__content__column--left').hasClass('u-height--auto')).toBe(true);
-        });
-    });
-
-    ['page', 'detail', 'searchResults', 'dataSelection'].forEach(function (panel) {
-        describe('use scrollable content for ' + panel, function () {
-            var component,
-                mockedVisibility = {};
-
-            beforeEach(function () {
-                mockedVisibility[panel] = true;
-
-                spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
-
-                component = getComponent();
-            });
-
-            it('removes padding from the c-dashboard__content container', function () {
-                expect(component.find('.c-dashboard__content').attr('class')).not.toContain('u-padding__right--1');
-            });
-
-            it('adds extra padding to the right panel and makes it scrollable', function () {
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .not.toContain('u-padding__right--1');
-
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .toContain('u-padding__right--2');
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .toContain('c-dashboard__content--scrollable');
-            });
-        });
-    });
-
-    describe('do not use scrollable content for straatbeeld', function () {
+    describe('error message', function () {
         var component,
-            mockedVisibility = {};
+            mockedVisibility = {
+                httpStatus: {
+                    hasErrors: false
+                }
+            };
 
         beforeEach(function () {
-            mockedVisibility.straatbeeld = true;
+            spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
+        });
+
+        it('when not shown, does not flags the dashboard body', function () {
+            component = getComponent();
+
+            expect(component.find('.c-dashboard__body').attr('class')).not.toContain('c-dashboard__body--error');
+        });
+
+        it('when shown, flags the dashboard body', function () {
+            mockedVisibility.httpStatus.hasErrors = true;
+            component = getComponent();
+
+            expect(component.find('.c-dashboard__body').attr('class')).toContain('c-dashboard__body--error');
+        });
+    });
+
+    describe('column sizes', function () {
+        var component,
+            mockedVisibility,
+            mockedColumnSizes;
+
+        beforeEach(function () {
+            mockedVisibility = {
+                httpStatus: {
+                    hasErrors: false
+                }
+            };
+            mockedColumnSizes = {
+                left: 1,
+                middle: 2,
+                right: 3
+            };
 
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
+            spyOn(dashboardColumns, 'determineColumnSizes').and.returnValue(mockedColumnSizes);
+        });
 
+        it('displays the columns according to the column size', function () {
             component = getComponent();
+
+            expect(component.find('.c-dashboard__layer-selection').length).toBe(1);
+            expect(component.find('.c-dashboard__map').length).toBe(1);
+            expect(component.find('.c-dashboard__content').length).toBe(1);
         });
 
-        it('does not touch padding on the c-dashboard__content container', function () {
-            expect(component.find('.c-dashboard__content').attr('class')).toContain('u-padding__right--1');
+        it('does not display a column on zero size', function () {
+            mockedColumnSizes.left = 0;
+            component = getComponent();
+
+            expect(component.find('.c-dashboard__layer-selection').length).toBe(0);
+            expect(component.find('.c-dashboard__map').length).toBe(1);
+            expect(component.find('.c-dashboard__content').length).toBe(1);
         });
 
-        it('does not touch the classes on the right panel', function () {
-            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                .toContain('u-padding__right--1');
+        it('does not display a column on missing size', function () {
+            delete mockedColumnSizes.left;
+            delete mockedColumnSizes.middle;
+            delete mockedColumnSizes.right;
+            component = getComponent();
 
-            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                .not.toContain('u-padding__right--2');
-            expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                .not.toContain('c-dashboard__content--scrollable');
+            expect(component.find('.c-dashboard__layer-selection').length).toBe(0);
+            expect(component.find('.c-dashboard__map').length).toBe(0);
+            expect(component.find('.c-dashboard__content').length).toBe(0);
         });
-    });
 
-    ['page', 'detail', 'searchResults'].forEach(function (panel) {
-        describe('don\'t add scrolling when viewing the fullscreen map (on top of ' + panel + ')', function () {
-            var component,
-                mockedVisibility = {};
+        it('adds the correct class according to the column size', function () {
+            component = getComponent();
 
-            beforeEach(function () {
-                mockedState.map.isFullscreen = true;
-
-                mockedVisibility[panel] = true;
-                spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
-
-                component = getComponent();
-            });
-
-            it('does not remove whitespace from .c-dashboard__content' + panel, function () {
-                expect(component.find('.c-dashboard__content').attr('class')).toContain('u-padding__right--1');
-            });
-        });
-    });
-
-    ['page', 'detail', 'searchResults', 'dataSelection'].forEach(function (panel) {
-        describe('when printing ' + panel, function () {
-            var component,
-                mockedVisibility = {};
-
-            beforeEach(function () {
-                mockedState.isPrintMode = true;
-
-                mockedVisibility[panel] = true;
-                spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
-
-                component = getComponent();
-            });
-
-            it('doesn\'t add any padding on c-dashboard__content', function () {
-                expect(component.find('.c-dashboard__content').attr('class')).not.toContain('u-padding__right--1');
-                expect(component.find('.c-dashboard__content').attr('class')).not.toContain('u-padding__right--2');
-                expect(component.find('.c-dashboard__content').attr('class')).not.toContain('u-padding__left--1');
-            });
-
-            it('does not touch the classes on the right panel', function () {
-                // No padding on the right
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .not.toContain('u-padding__right--1');
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .not.toContain('u-padding__right--2');
-
-                // No padding on the left
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .not.toContain('u-padding__left--1');
-
-                // Not scrollable
-                expect(component.find('.qa-dashboard__content__column--right').attr('class'))
-                    .not.toContain('c-dashboard__content--scrollable');
-            });
+            expect(component.find('.c-dashboard__layer-selection').attr('class')).toContain('u-col-sm--1');
+            expect(component.find('.c-dashboard__map').attr('class')).toContain('u-col-sm--2');
+            expect(component.find('.c-dashboard__content').attr('class')).toContain('u-col-sm--3');
         });
     });
 });

@@ -10,11 +10,11 @@
 }
 
 .c-data-selection-filters--remove-filter {
-  @include data-selection-button("assets/icons/close-active.svg", "assets/icons/close-hover.svg");
-  margin-top: - $base-whitespace;
-  margin-right: 0;
-  color: $primary-light;
-  font-weight: bolder;
+  @include icon-button("close");
+
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .c-data-selection-filters--empty-value {
@@ -38,23 +38,20 @@
 
 .c-data-selection-filters--active-filters {
 
-  .c-data-selection-filters__active-filter {
-    vertical-align: middle;
-  }
+  line-height: $button-size;
+  text-decoration: none;
 
-  .c-data-selection-filters__list {
+  .c-data-selection-filters__listitem {
+    position: relative;
+    margin-bottom: $base-whitespace / 2;
+    padding-right: $base-whitespace + $button-size;
+    padding-left: $base-whitespace;
+    background-color: $secondary-gray60;
+    color: $primary-light;
 
-    .c-data-selection-filters__listitem {
-      margin-bottom: $base-whitespace / 2;
-      padding-left: $base-whitespace;
-      background-color: $secondary-gray60;
-      color: $primary-light;
-
-      &:last-child {
-        margin-bottom: $base-whitespace * 2.5;
-      }
+    &:last-child {
+      margin-bottom: $base-whitespace * 2.5;
     }
-
   }
 }
 

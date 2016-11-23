@@ -1,25 +1,7 @@
 $pagination-line-color: #e4e4e4;
 
 @mixin data-selection-pagination-button($icon) {
-  $iconplain: $icon + ".svg";
-  $iconhover: $icon + "-hover.svg";
-
-  &::before {
-    content: url($iconplain);
-  }
-
-  &:hover {
-    color: $primary-contrast;
-    text-decoration: none;
-
-    .c-data-selection-pagination-link-text {
-      text-decoration: underline;
-    }
-
-    &::before {
-      content: url($iconhover);
-    }
-  }
+  @include icon-button-text-right($icon);
 }
 
 @mixin data-selection-pagination-button-flip($icon) {
@@ -48,14 +30,9 @@ $pagination-line-color: #e4e4e4;
   }
 
   .c-data-selection-pagination__button {
-    width: $button-size;
-    height: $button-size;
-    background-image: url("assets/icons/link-active.svg");
-    vertical-align: middle;
+    @include icon-button("forward");
 
-    &:hover {
-      background-image: url("assets/icons/link-hover.svg");
-    }
+    vertical-align: middle;
   }
 }
 
@@ -72,20 +49,8 @@ $pagination-line-color: #e4e4e4;
   background: $pagination-line-color;
 }
 
-.c-data-selection-page--form-links {
-  margin-top: -.55rem;
-}
-
 .c-data-selection-pagination-link {
   margin-left: .2rem;
-
-  &::before {
-    display: inline-block;
-    position: relative;
-    top: .5rem;
-    width: $button-size;
-    height: $button-size;
-  }
 }
 
 .c-data-selection-pagination-link-text {
@@ -98,27 +63,19 @@ $pagination-line-color: #e4e4e4;
 }
 
 .c-data-selection-pagination-link--first {
-  @include data-selection-pagination-button("assets/icons/icon-last");
-
-  &::before {
-    @include data-selection-pagination-button-flip("assets/icons/icon-last.svg");
-  }
+  @include data-selection-pagination-button("first");
 }
 
 .c-data-selection-pagination-link--last {
-  @include data-selection-pagination-button("assets/icons/icon-last");
+  @include data-selection-pagination-button("last");
 }
 
 .c-data-selection-pagination-link--previous {
-  @include data-selection-pagination-button("assets/icons/icon-next");
+  @include data-selection-pagination-button("previous");
   margin-left: $base-whitespace;
-
-  &::before {
-    @include data-selection-pagination-button-flip("assets/icons/icon-next.svg");
-  }
 }
 
 .c-data-selection-pagination-link--next {
-  @include data-selection-pagination-button("assets/icons/icon-next");
+  @include data-selection-pagination-button("next");
   margin-right: $base-whitespace;
 }
