@@ -20,9 +20,7 @@
         <dt>SBI-activiteiten</dt>
         <dd ng-if="!vm.apiData.results.activiteiten[0]"></dd>
         <dd ng-if="vm.apiData.results.activiteiten[0]" class="c-key-value-list--multiple-values" ng-repeat="object in vm.apiData.results.activiteiten" ng-class="{'c-key-value-list--border-top': $first}">
-            <span class="u-line-height-base u-margin--0">
-                {{ object.sbi_code }}: {{ object.sbi_omschrijving }}
-            </span>
+            {{ object.sbi_code }}: {{ object.sbi_omschrijving }}
         </dd>
         <dt>Vestigingsnummer</dt>
         <dd> {{  vm.apiData.results.vestigingsnummer }} </dd>
