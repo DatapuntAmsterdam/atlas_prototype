@@ -10,9 +10,19 @@
         <dt>KvK-nummer</dt>
         <dp-api-call endpoint="{{vm.apiData.results.maatschappelijke_activiteit}}" partial="handelsregister/kvk-nummer"></dp-api-call>
         <dt>Postadres</dt>
-        <dd> {{ vm.apiData.results.postadres.volledig_adres }} </dd>
+        <dd>
+            {{ vm.apiData.results.postadres.volledig_adres }}
+            <dp-message ng-if="vm.apiData.results.postadres.correctie">
+                <span class="u-nowrap">Adres bij benadering</span>
+            </dp-message>
+        </dd>
         <dt>Bezoekadres</dt>
-        <dd> {{ vm.apiData.results.bezoekadres.volledig_adres }} </dd>
+        <dd>
+            {{ vm.apiData.results.bezoekadres.volledig_adres }}
+            <dp-message ng-if="vm.apiData.results.bezoekadres.correctie">
+                <span class="u-nowrap">Adres bij benadering</span>
+            </dp-message>
+        </dd>
         <dt>Type vestiging</dt>
         <dd>
             {{ vm.apiData.results.hoofdvestiging ? "Hoofdvestiging" : vm.apiData.results.hoofdvestiging === false ? "Nevenvestiging" : "" }}
