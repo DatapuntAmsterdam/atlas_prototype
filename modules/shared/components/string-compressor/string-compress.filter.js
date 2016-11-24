@@ -6,17 +6,17 @@
         .filter('dpStringCompress', dpStringCompress)
         .filter('dpStringDecompress', dpStringDecompress);
 
-    [dpStringCompress, dpStringDecompress].map(f => f.$inject = ['LZString']);
+    [dpStringCompress, dpStringDecompress].map(f => f.$inject = ['dpStringCompressor']);
 
-    function dpStringCompress (LZString) {
+    function dpStringCompress (dpStringCompressor) {
         return function (input) {
-            return LZString.compressToBase64(input);
+            return dpStringCompressor.compress(input);
         };
     }
 
-    function dpStringDecompress (LZString) {
+    function dpStringDecompress (dpStringCompressor) {
         return function (input) {
-            return LZString.decompressFromBase64(input);
+            return dpStringCompressor.decompress(input);
         };
     }
 })();

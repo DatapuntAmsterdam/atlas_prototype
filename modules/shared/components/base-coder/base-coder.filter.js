@@ -42,20 +42,42 @@
             }
         }
 
+        encodeNumber (n) {
+            if (n >= this._base) {
+                let quotient = Math.trunc(n / this._base);
+                let remainder = n % this._base;
+                return this.encodeNumber(quotient) +
+                    this.encodeNumber(remainder);
+            } else {
+                return this.CHARSET[n];
+            }
+        }
+
+        decodeString (s, len = s.length) {
+            if (len > 1) {
+                let quotient = s.substr(0, len - 1);
+                let remainder = s.charAt(len - 1);
+                return this._base *
+                    this.decodeString(quotient, len - 1) +
+                    this.decodeString(remainder, 1);
+            } else {
+                return this.characterValue(s);
+            }
+        }
+
         encode (expr, precision = 0) {
             if (angular.isNumber(expr)) {
-                if (precision !== 0) {
+                if (precision === 0 && !this.isInt(expr)) {
+                    return undefined;
+                } else if (precision !== 0) {
                     expr = Math.round(expr * this.precisionFactor(precision));
                 }
-                let sign = expr >= 0 ? '' : '-';
-                expr = Math.abs(expr);
-                if (expr >= this._base) {
-                    let quotient = Math.trunc(expr / this._base);
-                    let remainder = expr % this._base;
-                    return sign + this.encode(quotient) + this.CHARSET[remainder];
-                } else {
-                    return sign + this.CHARSET[expr];
+                let sign = '';
+                if (expr < 0) {
+                    sign = '-';
+                    expr = -expr;
                 }
+                return sign + this.encodeNumber(expr);
             } else if (angular.isArray(expr)) {
                 return expr.map(e => this.encode(e, precision));
             }
@@ -64,19 +86,11 @@
         decode (expr, precision = 0) {
             if (angular.isString(expr)) {
                 let sign = 1;
-                let result;
                 if (expr.charAt(0) === '-') {
                     sign = -1;
                     expr = expr.substr(1);
                 }
-                let exprLength = expr.length;
-                if (exprLength > 1) {
-                    let quotient = expr.substr(0, exprLength - 1);
-                    let remainder = expr.charAt(exprLength - 1);
-                    result = sign * (this._base * this.decode(quotient) + this.characterValue(remainder));
-                } else {
-                    result = sign * this.characterValue(expr);
-                }
+                let result = sign * this.decodeString(expr);
                 if (precision !== 0) {
                     result = Number((result / this.precisionFactor(precision)).toPrecision(precision));
                 }

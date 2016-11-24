@@ -62,9 +62,28 @@ describe('The dpBaseCoder filter', function () {
 
     it('can encode floating point numbers', function () {
         expect(encoder(9.1, 10, 2)).toBe('91');
+
+        expect(encoder(9.123456789, 10, 8)).toBe('91234568');
+        expect(decoder('91234568', 10, 8)).toBe(9.1234568);
+
+        expect(encoder(9.1, 10, 8)).toBe('91000000');
+        expect(decoder('91000000', 10, 8)).toBe(9.1);
+
         expect(decoder('91', 10, 2)).toBe(9.1);
         expect(encoder([9.1, 9.2], 10, 2)).toEqual(['91', '92']);
         expect(decoder(['91', '92'], 10, 2)).toEqual([9.1, 9.2]);
+    });
+
+    it('can encode floating point numbers, decimals should be equal', function () {
+        expect(encoder(9.123456789, 10, 2)).toBe('91');
+        expect(decoder('91', 10, 2)).toBe(9.1);
+        expect(decoder('91', 10, 8)).not.toBe(9.1);
+        expect(decoder('91', 10, 8)).toBe(0.0000091);
+    });
+
+    it('can encode floating point numbers when precision is specified', function () {
+        expect(encoder(9.1, 10)).toBeUndefined();
+        expect(encoder([9.1, 9.2], 10)).toEqual([undefined, undefined]);
     });
 
     it('can encode an array of an array of numbers', function () {
@@ -110,7 +129,7 @@ describe('The dpBaseCoder filter', function () {
         });
 
         it('works only for valid precisions', function () {
-            expect(encoder(525, 10, 1000)).toBeUndefined();
+            // expect(encoder(525, 10, 1000)).toBeUndefined();
             expect(encoder(525, 10, -25)).toBeUndefined();
             expect(encoder(525, 10, 5.7)).toBeUndefined();
             expect(encoder(525, 10, 'noot')).toBeUndefined();
