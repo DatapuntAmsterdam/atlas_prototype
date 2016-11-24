@@ -14,11 +14,20 @@ describe('The dpAbbreviator filter', function () {
         });
     });
 
-    it('abbreviates and deabbreviates a string', function () {
+    it('copies the string if no dictionary is present', function () {
         let abbreviated = abbreviate('');
         expect(deabbreviate(abbreviated)).toBe('');
 
-        abbreviated = abbreviate('aap noot');
-        expect(deabbreviate(abbreviated)).toBe('aap noot');
+        abbreviated = abbreviate('aap');
+        expect(deabbreviate(abbreviated)).toBe('aap');
     });
+
+    // it('abbreviates part of the string if a dictionary is present', function () {
+    //     let map = new Map();
+    //     map.set('long string', 'ls');
+    //
+    //     let abbreviated = abbreviate('This is ls a long string in a string.', map);
+    //     expect(deabbreviate(abbreviated)).toBe('');
+    //
+    // });
 });
