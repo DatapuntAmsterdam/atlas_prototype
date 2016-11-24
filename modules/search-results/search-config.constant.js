@@ -36,10 +36,10 @@
                     label_plural: 'Kadastrale subjecten',
                     uri: 'atlas/search/kadastraalsubject/'
                 }, {
-                    slug: 'bouwblokken',
-                    label_singular: 'Bouwblok',
-                    label_plural: 'Bouwblokken',
-                    uri: 'atlas/search/bouwblok/'
+                    slug: 'gebieden',
+                    label_singular: 'Gebied',
+                    label_plural: 'Gebieden',
+                    uri: 'atlas/search/gebied/'
                 }, {
                     slug: 'meetbouten',
                     label_singular: 'Meetbout',
