@@ -59,7 +59,6 @@ module.exports = function (grunt) {
     grunt.registerTask('create-hooks', copyHooks);
 
     grunt.registerTask('pre-commit', [
-        'test'
     ]);
 
     function copyHooks () {
