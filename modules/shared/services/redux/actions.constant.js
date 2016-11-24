@@ -110,14 +110,11 @@
             SHOW_DATA_SELECTION: {
                 id: 'SHOW_DATA_SELECTION'
             },
-            SHOW_SELECTION_LIST: {
-                id: 'SHOW_SELECTION_LIST'
-            },
             NAVIGATE_DATA_SELECTION: {
                 id: 'NAVIGATE_DATA_SELECTION'
             },
-            TOGGLE_DATA_SELECTION_LIST_VIEW: {
-                id: 'TOGGLE_DATA_SELECTION_LIST_VIEW'
+            SET_DATA_SELECTION_VIEW: {
+                id: 'SET_DATA_SELECTION_VIEW'
             },
 
             SHOW_LAYER_SELECTION: {

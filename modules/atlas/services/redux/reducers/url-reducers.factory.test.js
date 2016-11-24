@@ -1,15 +1,17 @@
 describe('The urlReducers factory', function () {
     var urlReducers,
         mockedState,
-        mockedSearchParams;
+        mockedSearchParams,
+        DATA_SELECTION;
 
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_urlReducers_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_urlReducers_, _DEFAULT_STATE_, _DATA_SELECTION_) {
             urlReducers = _urlReducers_;
 
             mockedState = angular.copy(_DEFAULT_STATE_);
+            DATA_SELECTION = _DATA_SELECTION_;
         });
 
         mockedSearchParams = {
@@ -526,7 +528,7 @@ describe('The urlReducers factory', function () {
                 // With an active dataSelection
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
                 expect(output.dataSelection).toEqual({
-                    listView: false,
+                    view: undefined,
                     dataset: 'bag',
                     filters: jasmine.any(Object),
                     page: jasmine.anything()
@@ -572,9 +574,21 @@ describe('The urlReducers factory', function () {
             });
 
             it('enables list view', function () {
-                mockedSearchParamsWithDataSelection['list-view'] = true;
+                mockedSearchParamsWithDataSelection.view = DATA_SELECTION.VIEW_LIST;
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
-                expect(output.dataSelection.listView).toBe(true);
+                expect(output.dataSelection.view).toBe(DATA_SELECTION.VIEW_LIST);
+            });
+
+            it('enables table view', function () {
+                mockedSearchParamsWithDataSelection.view = DATA_SELECTION.VIEW_TABLE;
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection.view).toBe(DATA_SELECTION.VIEW_TABLE);
+            });
+
+            it('enables default view', function () {
+                delete mockedSearchParamsWithDataSelection.view;
+                output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
+                expect(output.dataSelection.view).toBeUndefined();
             });
         });
 

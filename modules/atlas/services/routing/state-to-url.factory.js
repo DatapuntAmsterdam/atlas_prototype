@@ -138,9 +138,7 @@
                 datasetFilters = [];
 
             if (angular.isObject(state.dataSelection)) {
-                if (state.dataSelection.listView) {
-                    params['list-view'] = state.dataSelection.listView;
-                }
+                params.view = state.dataSelection.view;
                 params.dataset = state.dataSelection.dataset;
 
                 angular.forEach(state.dataSelection.filters, function (value, key) {

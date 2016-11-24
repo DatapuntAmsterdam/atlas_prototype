@@ -57,7 +57,7 @@
             dataSelection: null,
             /*
             dataSelection: {
-                listView: false,
+                view: 'TABLE',
                 dataset: 'bag',
                 filters: {
                     buurtcombinatie: 'Geuzenbuurt',
