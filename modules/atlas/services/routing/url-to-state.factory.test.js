@@ -16,6 +16,10 @@ describe('The urlToState factory', function () {
             }
         );
 
+        angular.mock.module('atlas', function ($provide) {
+            $provide.constant('URL_COMPRESSION', []);
+        });
+
         angular.mock.inject(function (_$location_, _$rootScope_, _urlToState_, _store_, _ACTIONS_) {
             $location = _$location_;
             $rootScope = _$rootScope_;

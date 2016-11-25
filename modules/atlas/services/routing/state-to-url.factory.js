@@ -8,6 +8,9 @@
     stateToUrlFactory.$inject = ['$location', '$window'];
 
     function stateToUrlFactory ($location, $window) {
+        const PRECISION = 7;    // decimals
+        const PRECISION_FACTOR = Math.pow(10, PRECISION);
+
         return {
             create,
             update
@@ -51,6 +54,18 @@
             );
         }
 
+        function degreesAsString (d) {
+            return String(Math.round(d * 10) / 10);
+        }
+
+        function coordinateAsString (c) {
+            return String(Math.round(c * PRECISION_FACTOR) / PRECISION_FACTOR);
+        }
+
+        function locationAsString (loc) {
+            return loc.map(c => coordinateAsString(c)).join(',');
+        }
+
         function getSearchParams (state) {
             var params = {};
 
@@ -58,7 +73,7 @@
                 if (angular.isString(state.search.query)) {
                     params.zoek = state.search.query;
                 } else {
-                    params.zoek = state.search.location.join(',');
+                    params.zoek = locationAsString(state.search.location);
                 }
 
                 params.categorie = state.search.category;
@@ -79,8 +94,8 @@
                 lagen.push(state.map.overlays[i].id + ':' + isVisible);
             }
             return {
-                lat: String(state.map.viewCenter[0]),
-                lon: String(state.map.viewCenter[1]),
+                lat: coordinateAsString(state.map.viewCenter[0]),
+                lon: coordinateAsString(state.map.viewCenter[1]),
                 basiskaart: state.map.baseLayer,
                 lagen: lagen.join(',') || null,
                 zoom: String(state.map.zoom),
@@ -120,14 +135,14 @@
             if (state.straatbeeld) {
                 params.id = state.straatbeeld.id;
                 if (angular.isArray(state.straatbeeld.location)) {
-                    params.straatbeeld = state.straatbeeld.location.join(',');
+                    params.straatbeeld = locationAsString(state.straatbeeld.location);
                 }
                 if (state.straatbeeld.isInvisible) {
                     params.straatbeeldInvisible = true;  // Only store in url on truthy value
                 }
-                params.heading = String(state.straatbeeld.heading);
-                params.pitch = String(state.straatbeeld.pitch);
-                params.fov = String(state.straatbeeld.fov);
+                params.heading = degreesAsString(state.straatbeeld.heading);
+                params.pitch = degreesAsString(state.straatbeeld.pitch);
+                params.fov = degreesAsString(state.straatbeeld.fov);
             }
 
             return params;

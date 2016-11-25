@@ -3,55 +3,122 @@
 
     angular
         .module('atlas')
-        .config(locationDecorator);
+        .config(locationDecorator)
+        .constant('URL_COMPRESSION', ['ABR', 'B62']);    // ['ABR', 'B62', 'LZS']
 
     locationDecorator.$inject = ['$provide'];
 
     function locationDecorator ($provide) {
         $provide.decorator('$location', urlCompressor);
 
-        urlCompressor.$inject = ['$delegate', 'urlAbbreviations'];
+        urlCompressor.$inject = [
+            '$delegate',
+            'URL_COMPRESSION',
+            'dpStringCompressor',
+            'dpBaseCoder',
+            'dpAbbreviator',
+            'urlAbbreviations'];
 
-        function urlCompressor ($delegate, urlAbbreviations) {
+        function urlCompressor (
+            $delegate,
+            URL_COMPRESSION,
+            dpStringCompressor,
+            dpBaseCoder,
+            dpAbbreviator,
+            urlAbbreviations) {
             let orgSearch = $delegate.search;
 
-            let dictionary = urlAbbreviations.abbreviations;
+            const LOCATION_PRECISION = 7;
 
-            // Compose a variable name by uppercasing the name
-            let variable = name => `_${name.toUpperCase()}_`;
+            let base62Coder = dpBaseCoder.getCoderForBase(62);
+            let abbreviator = dpAbbreviator.getAbbreviatorForAbbreviations(urlAbbreviations.abbreviations);
 
-            let abbreviateValue = (value, variableName, variableValue) => value.replace(
-                // Replace variable value by the variable name
-                new RegExp(variableValue.replace(/([\.\^\$])/, '\\$1'), 'g'),   // escape meta charactere
-                variable(variableName));    // variables are uppercase
-
-            let restoreValue = (value, variableName, variableValue) => value.replace(
-                // Replace variable name by the variable value
-                new RegExp(variable(variableName), 'g'),
-                `${variableValue}`);
-
-            // Provide for a compress and uncompress method (mirror methods)
-            let [compress, uncompress] = [
-                {replace: abbreviateValue},
-                {replace: restoreValue}
-            ].map(abbreviator => {
-                return obj => {
-                    dictionary.forEach((variableValue, variableName) => {
-                        Object.entries(obj)
-                            .map(entry => { return {key: entry[0], value: entry[1]};})
-                            .filter(entry => angular.isString(entry.value))  // filter only truthy values
-                            .forEach(entry =>
-                                obj[entry.key] = abbreviator.replace(entry.value, variableName, variableValue));
+            function compressUrl (params) {
+                if (URL_COMPRESSION.length > 0) {
+                    URL_COMPRESSION.forEach(compressor => {
+                        let C;
+                        switch (compressor) {
+                            case 'LZS':
+                                Object.keys(params).forEach(key => {
+                                    let val = params[key];
+                                    if (angular.isUndefined(val) || val === null) {
+                                        delete params[key];
+                                    }
+                                });
+                                C = dpStringCompressor.compressFromObject(params);
+                                Object.keys(params).forEach(key => delete params[key]);
+                                params.C = C;
+                                break;
+                            case 'B62':
+                                ['lat', 'lon'].forEach(key => {
+                                    if (params[key]) {
+                                        params[key] = base62Coder.encodeFromString(params[key], LOCATION_PRECISION);
+                                    }
+                                });
+                                ['straatbeeld'].forEach(key => {
+                                    if (params[key]) {
+                                        params.straatbeeld = params.straatbeeld
+                                            .split(',')
+                                            .map(c => base62Coder.encodeFromString(c, LOCATION_PRECISION))
+                                            .join(',');
+                                    }
+                                });
+                                break;
+                            case 'ABR':
+                                abbreviator.abbreviate(params);
+                                break;
+                            default:
+                                break;
+                        }
                     });
-                    return obj;
-                };
-            });
+                    params.V = URL_COMPRESSION.join(',');
+                }
+                return params;
+            }
+
+            function uncompressUrl (params) {
+                if (params.V) {
+                    let urlCompression = params.V.split(',');
+                    urlCompression.forEach(compressor => {
+                        let C;
+                        switch (compressor) {
+                            case 'LZS':
+                                C = dpStringCompressor.decompressToObject(params.C);
+                                Object.keys(C).forEach(key => params[key] = C[key]);
+                                delete params.C;
+                                break;
+                            case 'B62':
+                                ['lat', 'lon'].forEach(key => {
+                                    if (params[key]) {
+                                        params[key] = base62Coder.decode(params[key], LOCATION_PRECISION);
+                                    }
+                                });
+                                ['straatbeeld'].forEach(key => {
+                                    if (params[key]) {
+                                        params.straatbeeld = params.straatbeeld
+                                            .split(',')
+                                            .map(s => base62Coder.decode(s, LOCATION_PRECISION))
+                                            .join(',');
+                                    }
+                                });
+                                break;
+                            case 'ABR':
+                                abbreviator.deabbreviate(params);
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+                    delete params.V;
+                }
+                return params;
+            }
 
             $delegate.search = function mySearch (...a) {
                 if (a.length === 0) {
-                    return uncompress(orgSearch.apply($delegate, a));
+                    return uncompressUrl(orgSearch.apply($delegate, a));
                 } else {
-                    compress(a[0]);
+                    compressUrl(a[0]);
                     return orgSearch.apply($delegate, a);
                 }
             };

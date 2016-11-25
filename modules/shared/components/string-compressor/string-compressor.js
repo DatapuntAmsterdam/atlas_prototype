@@ -44,11 +44,11 @@
         }
 
         function compress (s) {
-            return LZString.compressToBase64(s);
+            return LZString.compressToEncodedURIComponent(s);
         }
 
         function decompress (s) {
-            return LZString.decompressFromBase64(s);
+            return LZString.decompressFromEncodedURIComponent(s);
         }
     }
 })();
