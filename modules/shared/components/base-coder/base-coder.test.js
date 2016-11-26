@@ -122,7 +122,7 @@ describe('The dpBaseCoder', function () {
             [['F', 16, 1000], ['F', 16, -1], ['F', 16, 1.5], ['F', 16, 'aap'], ['F', 16, true]].forEach(a => {
                 let f = () => decoder(...a);
                 expect(f).toThrow();
-            })
+            });
         });
     });
 
@@ -144,7 +144,7 @@ describe('The dpBaseCoder', function () {
             [[525, 10, 1000], [525, 10, -25], [525, 10, 5.7], [525, 10, 'noot'], [525, 10, false]].forEach(a => {
                 let f = () => encoder(...a);
                 expect(f).toThrow();
-            })
+            });
         });
     });
 });

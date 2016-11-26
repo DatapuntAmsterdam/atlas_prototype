@@ -5,9 +5,9 @@
         .module('atlas')
         .factory('stateToUrl', stateToUrlFactory);
 
-    stateToUrlFactory.$inject = ['$location', '$window'];
+    stateToUrlFactory.$inject = ['$location', '$window', 'urlComposer'];
 
-    function stateToUrlFactory ($location, $window) {
+    function stateToUrlFactory ($location, $window, urlComposer) {
         const PRECISION = 7;    // decimals
         const PRECISION_FACTOR = Math.pow(10, PRECISION);
 
@@ -17,18 +17,7 @@
         };
 
         function create (state) {
-            const params = getParams(state);
-            let key,
-                queryString = '';
-
-            for (key in params) {
-                if (params.hasOwnProperty(key) && params[key] !== null) {
-                    queryString += queryString ? '&' : '?';
-                    queryString += `${key}=${params[key]}`;
-                }
-            }
-
-            return '#' + queryString;
+            return urlComposer.getUrl(getParams(state));
         }
 
         function update (state, useReplace) {
