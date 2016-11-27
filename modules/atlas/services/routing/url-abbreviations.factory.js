@@ -8,6 +8,10 @@
     urlAbbreviationsFactory.$inject = ['ABBREVIATIONS'];
 
     function urlAbbreviationsFactory (ABBREVIATIONS) {
+        /**
+         * Map to store the abbreviations (key, value)
+         * @type {Map}
+         */
         const abbreviations = new Map();
 
         /**

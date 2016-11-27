@@ -83,6 +83,7 @@
          */
         function compressParams (params) {
             if (URL_COMPRESSION.length > 0) {
+                let urlCompression = URL_COMPRESSION;
                 URL_COMPRESSION.forEach(compressor => {
                     let C;
                     switch (compressor) {
@@ -116,10 +117,13 @@
                             abbreviator.abbreviate(params);
                             break;
                         default:
+                            urlCompression = urlCompression.filter(c => c !== compressor);
                             break;
                     }
                 });
-                params.V = URL_COMPRESSION.join(',');
+                if (urlCompression.length > 0) {
+                    params.V = urlCompression.join(',');
+                }
             }
             return params;
         }
@@ -132,7 +136,7 @@
          */
         function decompressParams (params) {
             if (params.V) {
-                let urlCompression = params.V.split(',');
+                let urlCompression = params.V.split(',').reverse();
                 urlCompression.forEach(compressor => {
                     let contents;
                     switch (compressor) {
