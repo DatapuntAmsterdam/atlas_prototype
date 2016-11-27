@@ -43,6 +43,14 @@ describe('The dpBaseCoder', function () {
                 let enc = encoder(n, base);
                 expect(decoder(enc, base)).toBe(n);
             }
+
+            [999, 12345, 9999, 123456, 99999, 1234567890]
+                .map(n => [n, -n])
+                .reduce((r, n) => r.concat(n), [])
+                .forEach(n => {
+                    let enc = encoder(n, base);
+                    expect(decoder(enc, base)).toBe(n);
+                });
         }
     });
 

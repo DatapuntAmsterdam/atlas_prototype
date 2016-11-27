@@ -7,30 +7,53 @@
 
     class BaseCoder {
         constructor (base) {
-            this.CHARSET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+            this._CHARSET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
 
-            if (this.isInt(base) && 2 <= base && base <= this.CHARSET.length) {
+            if (BaseCoder.isInt(base) && 2 <= base && base <= this._CHARSET.length) {
                 this._base = base;
             } else {
-                throw `BaseCoder: base ${base} not within 2 and ${this.CHARSET.length}`;
+                throw `BaseCoder: base ${base} not within 2 and ${this._CHARSET.length}`;
             }
+
+            this._characterValue = function (c) {
+                let i = this._CHARSET.indexOf(c);
+                if (0 <= i && i < this._base) {
+                    return i;
+                } else {
+                    throw `BaseCoder: illegal character ${c} for base ${this._base}`;
+                }
+            };
+
+            this._encodeNumber = function (n) {
+                if (n >= this._base) {
+                    let quotient = Math.trunc(n / this._base);
+                    let remainder = n % this._base;
+                    return this._encodeNumber(quotient) +
+                        this._encodeNumber(remainder);
+                } else {
+                    return this._CHARSET[n];
+                }
+            };
+
+            this._decodeString = function (s, len = s.length) {
+                if (len > 1) {
+                    let quotient = s.substr(0, len - 1);
+                    let remainder = s.charAt(len - 1);
+                    return this._base *
+                        this._decodeString(quotient, len - 1) +
+                        this._decodeString(remainder, 1);
+                } else {
+                    return this._characterValue(s);
+                }
+            };
         }
 
-        isInt (n) {
+        static isInt (n) {
             return angular.isNumber(n) && n % 1 === 0;
         }
 
-        characterValue (c) {
-            let i = this.CHARSET.indexOf(c);
-            if (0 <= i && i < this._base) {
-                return i;
-            } else {
-                throw `BaseCoder: illegal character ${c} for base ${this._base}`;
-            }
-        }
-
-        precisionFactor (nDecimals) {
-            if (this.isInt(nDecimals) && nDecimals !== 0) {
+        static precisionFactor (nDecimals) {
+            if (BaseCoder.isInt(nDecimals) && nDecimals !== 0) {
                 if (nDecimals > 0) {
                     return Math.pow(10, nDecimals);
                 } else {
@@ -41,46 +64,23 @@
             }
         }
 
-        encodeNumber (n) {
-            if (n >= this._base) {
-                let quotient = Math.trunc(n / this._base);
-                let remainder = n % this._base;
-                return this.encodeNumber(quotient) +
-                    this.encodeNumber(remainder);
-            } else {
-                return this.CHARSET[n];
-            }
-        }
-
-        decodeString (s, len = s.length) {
-            if (len > 1) {
-                let quotient = s.substr(0, len - 1);
-                let remainder = s.charAt(len - 1);
-                return this._base *
-                    this.decodeString(quotient, len - 1) +
-                    this.decodeString(remainder, 1);
-            } else {
-                return this.characterValue(s);
-            }
-        }
-
         encodeFromString (expr, nDecimals = 0) {
             return this.encode(Number(expr), nDecimals);
         }
 
         encode (expr, nDecimals = 0) {
             if (angular.isNumber(expr)) {
-                if (nDecimals === 0 && !this.isInt(expr)) {
+                if (nDecimals === 0 && !BaseCoder.isInt(expr)) {
                     return undefined;
                 } else if (nDecimals !== 0) {
-                    expr = Math.round(expr * this.precisionFactor(nDecimals));
+                    expr = Math.round(expr * BaseCoder.precisionFactor(nDecimals));
                 }
                 let sign = '';
                 if (expr < 0) {
                     sign = '-';
                     expr = -expr;
                 }
-                return sign + this.encodeNumber(expr);
+                return sign + this._encodeNumber(expr);
             } else if (angular.isArray(expr)) {
                 return expr.map(e => this.encode(e, nDecimals));
             }
@@ -93,9 +93,9 @@
                     sign = -1;
                     expr = expr.substr(1);
                 }
-                let result = sign * this.decodeString(expr);
+                let result = sign * this._decodeString(expr);
                 if (nDecimals !== 0) {
-                    result = Number((result / this.precisionFactor(nDecimals)).toFixed(nDecimals));
+                    result = Number((result / BaseCoder.precisionFactor(nDecimals)).toFixed(nDecimals));
                 }
                 return result;
             } else if (angular.isArray(expr)) {

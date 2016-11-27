@@ -8,7 +8,16 @@
     stateToUrlFactory.$inject = ['$location', '$window', 'urlComposer'];
 
     function stateToUrlFactory ($location, $window, urlComposer) {
+        /**
+         * The number of decimals to use for coordinates when transforming them into params
+         * @type {number}
+         */
         const PRECISION = 7;    // decimals
+
+        /**
+         * The factor to divide or multiply with to get to the desired number of decimals
+         * @type {number}
+         */
         const PRECISION_FACTOR = Math.pow(10, PRECISION);
 
         return {
@@ -16,8 +25,13 @@
             update
         };
 
+        /**
+         * Creates a query string for the state
+         * @param state
+         * @returns {*} the query string
+         */
         function create (state) {
-            return urlComposer.getUrl(getParams(state));
+            return urlComposer.getQueryString(getParams(state));
         }
 
         function update (state, useReplace) {
