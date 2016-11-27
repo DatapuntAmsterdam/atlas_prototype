@@ -1,6 +1,6 @@
 <div class="u-grid">
     <div class="u-row">
-        <div ng-if="!vm.state.listView" class="u-col-sm--3">
+        <div ng-if="vm.isTableView()" class="u-col-sm--3">
             <dp-data-selection-filters
                 dataset="{{vm.state.dataset}}"
                 available-filters="vm.availableFilters"
@@ -9,19 +9,19 @@
 
             </dp-data-selection-filters>
         </div>
-        <div ng-class="{'u-col-sm--12': vm.state.listView, 'u-col-sm--9': !vm.state.listView}">
+        <div ng-class="{'u-col-sm--12': vm.isListView(), 'u-col-sm--9': vm.isTableView()}">
             <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
 
             <div ng-if="!vm.isLoading">
                 <dp-data-selection-header
-                    ng-if="!vm.state.listView"
+                    ng-if="vm.isTableView()"
                     state="vm.state"
                     number-of-records="vm.numberOfRecords"
                     header-title="vm.title">
                 </dp-data-selection-header>
 
                 <dp-data-selection-list-header
-                    ng-if="vm.state.listView"
+                    ng-if="vm.isListView()"
                     state="vm.state"
                     number-of-records="vm.numberOfRecords"
                     header-title="vm.title">
@@ -29,12 +29,12 @@
 
                 <div ng-if="vm.numberOfRecords > 0">
                     <dp-data-selection-table
-                        ng-if="!vm.state.listView"
+                        ng-if="vm.isTableView()"
                         content="vm.tableData">
                     </dp-data-selection-table>
 
                     <dp-data-selection-list
-                        ng-if="vm.state.listView"
+                        ng-if="vm.isListView()"
                         data="vm.listData">
                     </dp-data-selection-list>
                 </div>

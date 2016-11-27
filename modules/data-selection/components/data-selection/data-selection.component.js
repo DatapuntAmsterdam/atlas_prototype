@@ -12,11 +12,19 @@
             controllerAs: 'vm'
         });
 
-    DpDataSelectionController.$inject = ['$scope', 'dataSelectionApi', 'dataSelectionConfig'];
+    DpDataSelectionController.$inject = ['$scope', 'dataSelectionApi', 'dataSelectionConfig', 'DATA_SELECTION'];
 
-    function DpDataSelectionController ($scope, dataSelectionApi, dataSelectionConfig) {
+    function DpDataSelectionController ($scope, dataSelectionApi, dataSelectionConfig, DATA_SELECTION) {
         // Test for ES6
         let vm = this;
+
+        vm.isTableView = function () {
+            return vm.state.view === DATA_SELECTION.VIEW_TABLE;
+        };
+
+        vm.isListView = function () {
+            return vm.state.view === DATA_SELECTION.VIEW_LIST;
+        };
 
         $scope.$watch('vm.state', fetchData, true);
 

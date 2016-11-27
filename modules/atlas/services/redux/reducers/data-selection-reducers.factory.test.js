@@ -1,7 +1,8 @@
 describe('The dataSelectionReducers factory', function () {
     var dataSelectionReducers,
         DEFAULT_STATE,
-        ACTIONS;
+        ACTIONS,
+        constants;
 
     beforeEach(function () {
         angular.mock.module('atlas', {
@@ -10,10 +11,11 @@ describe('The dataSelectionReducers factory', function () {
             }
         });
 
-        angular.mock.inject(function (_dataSelectionReducers_, _DEFAULT_STATE_, _ACTIONS_) {
+        angular.mock.inject(function (_dataSelectionReducers_, _DEFAULT_STATE_, _ACTIONS_, _DATA_SELECTION_) {
             dataSelectionReducers = _dataSelectionReducers_;
             DEFAULT_STATE = _DEFAULT_STATE_;
             ACTIONS = _ACTIONS_;
+            constants = _DATA_SELECTION_;
         });
     });
 
@@ -63,6 +65,45 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.layerSelection).toBe(false);
         });
 
+        it('has a default table view', function () {
+            var mockedState,
+                output;
+
+            mockedState = angular.copy(DEFAULT_STATE);
+
+            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
+
+            expect(output.dataSelection).toEqual({
+                dataset: 'bag',
+                filters: {
+                    buurtcombinatie: 'Geuzenbuurt',
+                    buurt: 'Trompbuurt'
+                },
+                page: 1,
+                view: constants.VIEW_TABLE
+            });
+        });
+
+        it('can display in list view', function () {
+            var mockedState,
+                output;
+
+            mockedState = angular.copy(DEFAULT_STATE);
+            payload.view = constants.VIEW_LIST;
+
+            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
+
+            expect(output.dataSelection).toEqual({
+                dataset: 'bag',
+                filters: {
+                    buurtcombinatie: 'Geuzenbuurt',
+                    buurt: 'Trompbuurt'
+                },
+                page: 1,
+                view: constants.VIEW_LIST
+            });
+        });
+
         it('sets the dataSelection state', function () {
             var mockedState,
                 output;
@@ -77,7 +118,8 @@ describe('The dataSelectionReducers factory', function () {
                     buurtcombinatie: 'Geuzenbuurt',
                     buurt: 'Trompbuurt'
                 },
-                page: 1
+                page: 1,
+                view: constants.VIEW_TABLE
             });
         });
 
@@ -114,6 +156,35 @@ describe('The dataSelectionReducers factory', function () {
             mockedState.isPrintMode = false;
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
             expect(output.isPrintMode).toBe(false);
+        });
+    });
+
+    describe('SET_DATA_SELECTION_VIEW', function () {
+        it('can set the view to list view', function () {
+            let output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](
+                {dataSelection: {}},
+                constants.VIEW_LIST
+            );
+
+            expect(output.dataSelection.view).toBe(constants.VIEW_LIST);
+        });
+
+        it('can set the view to table view', function () {
+            let output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](
+                {dataSelection: {}},
+                constants.VIEW_TABLE
+            );
+
+            expect(output.dataSelection.view).toBe(constants.VIEW_TABLE);
+        });
+
+        it('refuses to set the view to an unknown view', function () {
+            let output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](
+                {dataSelection: {}},
+                'aap'
+            );
+
+            expect(output.dataSelection.view).toBeUndefined();
         });
     });
 
@@ -141,58 +212,6 @@ describe('The dataSelectionReducers factory', function () {
                 },
                 page: 4
             });
-        });
-    });
-
-    describe('SHOW_SELECTION_LIST', () => {
-        var mockedState,
-            payload,
-            output;
-
-        beforeEach(function () {
-            mockedState = angular.copy(DEFAULT_STATE);
-            payload = {
-                buurt: 'Centrum'
-            };
-        });
-
-        it('sets the dataSelection state', function () {
-            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST.id](mockedState, payload);
-
-            expect(output.dataSelection).toEqual({
-                listView: true,
-                dataset: 'bag',
-                filters: {
-                    buurt: 'Centrum'
-                },
-                page: 1
-            });
-        });
-
-        it('disables search, page, detail and straatbeeld', function () {
-            mockedState.search = {some: 'object'};
-            mockedState.page = 'somePage';
-            mockedState.detail = {some: 'object'};
-            mockedState.straatbeeld = {some: 'object'};
-
-            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST.id](mockedState, payload);
-
-            expect(output.search).toBeNull();
-            expect(output.page).toBeNull();
-            expect(output.detail).toBeNull();
-            expect(output.straatbeeld).toBeNull();
-        });
-
-        it('preserves the isPrintMode variable', function () {
-            // With print mode enabled
-            mockedState.isPrintMode = true;
-            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST.id](mockedState, payload);
-            expect(output.isPrintMode).toBe(true);
-
-            // With print mode disabled
-            mockedState.isPrintMode = false;
-            output = dataSelectionReducers[ACTIONS.SHOW_SELECTION_LIST.id](mockedState, payload);
-            expect(output.isPrintMode).toBe(false);
         });
     });
 });

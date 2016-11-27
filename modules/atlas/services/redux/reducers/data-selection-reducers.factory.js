@@ -5,15 +5,19 @@
         .module('atlas')
         .factory('dataSelectionReducers', dataSelectionReducersFactory);
 
-    dataSelectionReducersFactory.$inject = ['ACTIONS', 'DEFAULT_STATE', 'dataSelectionFilterNames'];
+    dataSelectionReducersFactory.$inject = [
+        'ACTIONS',
+        'DEFAULT_STATE',
+        'dataSelectionFilterNames',
+        'DATA_SELECTION'
+    ];
 
-    function dataSelectionReducersFactory (ACTIONS, DEFAULT_STATE, filterNames) {
+    function dataSelectionReducersFactory (ACTIONS, DEFAULT_STATE, filterNames, DATA_SELECTION) {
         var reducers = {};
 
         reducers[ACTIONS.SHOW_DATA_SELECTION.id] = showDataSelectionReducer;
-        reducers[ACTIONS.SHOW_SELECTION_LIST.id] = showSelectionListReducer;
         reducers[ACTIONS.NAVIGATE_DATA_SELECTION.id] = navigateDataSelectionReducer;
-        reducers[ACTIONS.TOGGLE_DATA_SELECTION_LIST_VIEW.id] = toggleDataSelectionListViewReducer;
+        reducers[ACTIONS.SET_DATA_SELECTION_VIEW.id] = setDataSelectionViewReducer;
 
         return reducers;
 
@@ -24,7 +28,7 @@
          * @returns {Object} newState
          */
         function showDataSelectionReducer (oldState, payload) {
-            var newState = angular.copy(oldState);
+            let newState = angular.copy(oldState);
 
             newState.map.viewCenter = DEFAULT_STATE.map.viewCenter;
             newState.map.zoom = DEFAULT_STATE.map.zoom;
@@ -37,25 +41,14 @@
             newState.detail = null;
             newState.straatbeeld = null;
 
-            newState.dataSelection = payload;
+            newState.dataSelection = angular.copy(payload);
+
+            if (!newState.dataSelection.view) {
+                // Default view is table view
+                newState.dataSelection.view = DATA_SELECTION.VIEW_TABLE;
+            }
 
             return newState;
-        }
-
-        function showSelectionListReducer (oldState, payload) {
-            const filters = Object.keys(payload).reduce(
-                (result, key) => angular.extend(result, {
-                    [filterNames.getSlugFor(key)]: payload[key]
-                }), {});
-
-            let newState = showDataSelectionReducer(
-                oldState, {
-                    dataset: 'bag',
-                    filters: filters,
-                    page: 1
-                });
-
-            return toggleDataSelectionListViewReducer(newState);
         }
 
         /**
@@ -65,7 +58,7 @@
          * @returns {Object} newState
          */
         function navigateDataSelectionReducer (oldState, payload) {
-            var newState = angular.copy(oldState);
+            let newState = angular.copy(oldState);
 
             newState.dataSelection.page = payload;
 
@@ -77,10 +70,14 @@
          *
          * @returns {Object} newState
          */
-        function toggleDataSelectionListViewReducer (oldState) {
-            var newState = angular.copy(oldState);
+        function setDataSelectionViewReducer (oldState, payload) {
+            let newState = angular.copy(oldState);
 
-            newState.dataSelection.listView = !newState.dataSelection.listView;
+            [DATA_SELECTION.VIEW_LIST, DATA_SELECTION.VIEW_TABLE].forEach(legalValue => {
+                if (payload === legalValue) {
+                    newState.dataSelection.view = payload;
+                }
+            });
 
             return newState;
         }

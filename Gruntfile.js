@@ -9,7 +9,6 @@ module.exports = function (grunt) {
      * 'default' formerly known as 'grunt serve'
      */
     grunt.registerTask('default', [
-        'create-hooks',
         'build-develop',
         'connect:build',
         'watch'

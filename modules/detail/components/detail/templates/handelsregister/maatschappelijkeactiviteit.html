@@ -6,14 +6,19 @@
         </dp-stelselpedia-header>
         <dl class="c-key-value-list">
             <dt class="c-key-value-list--border-top">Handelsnamen</dt>
-            <dd ng-if="!vm.apiData.results.onderneming.handelsnamen[0]"></dd>
+            <dd ng-if="!vm.apiData.results.onderneming.handelsnamen[0]" class="c-key-value-list--border-top"></dd>
             <dd class="c-key-value-list--multiple-values" ng-repeat="object in vm.apiData.results.onderneming.handelsnamen" ng-class="{'c-key-value-list--border-top': $first}">
                     {{ object.handelsnaam }}
             </dd>
             <dt>KvK-nummer</dt>
             <dd> {{ vm.apiData.results.kvk_nummer }} </dd>
             <dt>Bezoekadres</dt>
-            <dd> {{ vm.apiData.results.bezoekadres.volledig_adres }} </dd>
+            <dd>
+                {{ vm.apiData.results.bezoekadres.volledig_adres }}
+                <dp-message ng-if="vm.apiData.results.bezoekadres.correctie">
+                    <span class="u-nowrap">Adres bij benadering</span>
+                </dp-message>
+            </dd>
             <dt>Datum aanvang</dt>
             <dd> {{ vm.apiData.results.datum_aanvang | date:'dd-MM-yyyy' }} </dd>
             <dt>Soort bijzondere rechtstoestand</dt>
