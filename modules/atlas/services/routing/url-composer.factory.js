@@ -153,7 +153,7 @@
                             });
                             LOCATIONS.forEach(key => {
                                 if (angular.isString(params[key])) {
-                                    params[key]
+                                    params[key] = params[key]
                                         .split(',')
                                         .map(s => base62Coder.decode(s, LOCATION_PRECISION))
                                         .join(',');

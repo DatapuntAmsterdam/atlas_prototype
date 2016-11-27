@@ -73,14 +73,14 @@ describe('The URL Composer factory', function () {
                 });
         });
 
-        xit('decodes straatbeeld', function () {
+        it('decodes straatbeeld', function () {
             expect(urlComposer
                 .decompressParams({
                     straatbeeld: 'ZH2vA,2n0zg',
                     V: '62'
                 }))
                 .toEqual({
-                    straatbeeld: '52.12345678,4.123456789'
+                    straatbeeld: '52.1234568,4.1234568'
                 });
         });
     });
