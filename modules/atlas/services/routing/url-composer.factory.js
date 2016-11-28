@@ -8,17 +8,17 @@
 
     urlComposerFactory.$inject = [
         'URL_COMPRESSION',
+        'URL_ABBREVIATIONS',
         'dpStringCompressor',
         'dpBaseCoder',
-        'dpAbbreviator',
-        'urlAbbreviations'];
+        'dpAbbreviator'];
 
     function urlComposerFactory (
         URL_COMPRESSION,
+        URL_ABBREVIATIONS,
         dpStringCompressor,
         dpBaseCoder,
-        dpAbbreviator,
-        urlAbbreviations) {
+        dpAbbreviator) {
         /**
          * the names of the object propertis that may contain a coordinate "x.n"
          * @type {[*]}
@@ -43,9 +43,9 @@
         let base62Coder = dpBaseCoder.getCoderForBase(62);
 
         /**
-         * Object abbreviator using the abbreviations as specified by urlAbbreviations
+         * Object abbreviator using the abbreviations as specified by URL_ABBREVIATIONS
          */
-        let abbreviator = dpAbbreviator.getAbbreviatorForAbbreviations(urlAbbreviations.abbreviations);
+        let abbreviator = dpAbbreviator.getAbbreviatorForAbbreviations(URL_ABBREVIATIONS);
 
         return {
             getQueryString,

@@ -91,4 +91,32 @@ describe('The dpAbbreviator', function () {
         deabbreviated = deabbreviate(abbreviated, map);
         expect(deabbreviated).toEqual({id: 'lslslsslslslsllslslsls'});
     });
+
+    it('handles abbreviations so that new abbreviations at the end do not influence the result', function () {
+        let map,
+            abbreviated;
+
+        map = new Map();
+        map.set('a', 'a');
+        abbreviated = abbreviate({id: 'aaaaa'}, map);
+        expect(deabbreviate(abbreviated)).toEqual({id: '_A__A__A__A__A_'});
+
+        map = new Map();
+        map.set('a', 'a');
+        map.set('aa', 'a');
+        abbreviated = abbreviate({id: 'aaaaa'}, map);
+        expect(deabbreviate(abbreviated)).toEqual({id: '_A__A__A__A__A_'});
+
+        map = new Map();
+        map.set('b', 'a');
+        map.set('a', 'a');
+        abbreviated = abbreviate({id: 'aaaaa'}, map);
+        expect(deabbreviate(abbreviated)).toEqual({id: '_B__B__B__B__B_'});
+
+        map = new Map();
+        map.set('aa', 'a');
+        map.set('a', 'a');
+        abbreviated = abbreviate({id: 'aaaaa'}, map);
+        expect(deabbreviate(abbreviated)).toEqual({id: '_AA__AA__AA__AA__AA_'});
+    });
 });

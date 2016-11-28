@@ -89,9 +89,9 @@ describe('The URL Composer factory', function () {
         beforeEach(function () {
             angular.mock.module('atlas', function ($provide) {
                 $provide.constant('URL_COMPRESSION', ['AB']);
-                $provide.constant('ABBREVIATIONS', {
-                    a: 'aap'
-                });
+                $provide.constant('URL_ABBREVIATIONS', new Map([
+                    ['a', 'aap']
+                ]));
             });
 
             angular.mock.inject(function (_urlComposer_) {
@@ -161,9 +161,9 @@ describe('The URL Composer factory', function () {
         beforeEach(function () {
             angular.mock.module('atlas', function ($provide) {
                 $provide.constant('URL_COMPRESSION', ['AB', '62', 'LZ']);
-                $provide.constant('ABBREVIATIONS', {
-                    a: 'aap'
-                });
+                $provide.constant('URL_ABBREVIATIONS', new Map([
+                    ['a', 'aap']
+                ]));
             });
 
             angular.mock.inject(function (_urlComposer_) {
@@ -200,7 +200,7 @@ describe('The URL Composer factory', function () {
         beforeEach(function () {
             angular.mock.module('atlas', function ($provide) {
                 $provide.constant('URL_COMPRESSION', []);
-                $provide.constant('ABBREVIATIONS', {
+                $provide.constant('URL_ABBREVIATIONS', {
                     a: 'aap'
                 });
             });
@@ -239,7 +239,7 @@ describe('The URL Composer factory', function () {
         beforeEach(function () {
             angular.mock.module('atlas', function ($provide) {
                 $provide.constant('URL_COMPRESSION', ['AX']);
-                $provide.constant('ABBREVIATIONS', {
+                $provide.constant('URL_ABBREVIATIONS', {
                     a: 'aap'
                 });
             });
