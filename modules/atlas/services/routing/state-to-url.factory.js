@@ -12,13 +12,25 @@
          * The number of decimals to use for coordinates when transforming them into params
          * @type {number}
          */
-        const PRECISION = 7;    // decimals
+        const COORDINATE_PRECISION = 7;    // decimals
 
         /**
-         * The factor to divide or multiply with to get to the desired number of decimals
+         * The factor to divide or multiply with to get to the desired number of decimals for coordinates
          * @type {number}
          */
-        const PRECISION_FACTOR = Math.pow(10, PRECISION);
+        const COORDINATE_PRECISION_FACTOR = Math.pow(10, COORDINATE_PRECISION);
+
+        /**
+         * The number of decimals to use for degrees (heading, pitch, fov) when transforming them into params
+         * @type {number}
+         */
+        const DEGREE_PRECISION = 1;    // decimals
+
+        /**
+         * The factor to divide or multiply with to get to the desired number of decimals for degrees
+         * @type {number}
+         */
+        const DEGREE_PRECISION_FACTOR = Math.pow(10, DEGREE_PRECISION);
 
         return {
             create,
@@ -57,14 +69,39 @@
             );
         }
 
+        /**
+         * Transform a number into a number
+         * @param n
+         * @param precisionFactor
+         * @returns {number}
+         */
+        function toPrecision (n, precisionFactor) {
+            return Math.round(n * precisionFactor) / precisionFactor;
+        }
+
+        /**
+         * Transforms a degree into a string, using the degree precision for the number of decimals
+         * @param d
+         * @returns {string}
+         */
         function degreesAsString (d) {
-            return String(Math.round(d * 10) / 10);
+            return String(toPrecision(d, DEGREE_PRECISION_FACTOR));
         }
 
+        /**
+         * Transforms a coordinate into a string, using the coordinate precision for the number of decimals
+         * @param c
+         * @returns {string}
+         */
         function coordinateAsString (c) {
-            return String(Math.round(c * PRECISION_FACTOR) / PRECISION_FACTOR);
+            return String(toPrecision(c, COORDINATE_PRECISION_FACTOR));
         }
 
+        /**
+         * Transforms a location (array of coordinates) into an array of coordinate strings
+         * @param loc
+         * @returns {*|string}
+         */
         function locationAsString (loc) {
             return loc.map(c => coordinateAsString(c)).join(',');
         }

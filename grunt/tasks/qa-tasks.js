@@ -56,5 +56,6 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('pre-commit', [
+        'test'
     ]);
 };
