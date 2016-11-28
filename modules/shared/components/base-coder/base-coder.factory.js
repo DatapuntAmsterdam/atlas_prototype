@@ -25,7 +25,7 @@
             if (BaseCoder.isInt(base) && 2 <= base && base <= this._CHARSET.length) {
                 this._base = base;
             } else {
-                throw `BaseCoder: base ${base} not within 2 and ${this._CHARSET.length}`;
+                throw new RangeError(`Base ${base} not within 2 and ${this._CHARSET.length}`);
             }
 
             /**
@@ -39,7 +39,7 @@
                 if (0 <= i && i < this._base) {
                     return i;
                 } else {
-                    throw `BaseCoder: illegal character ${c} for base ${this._base}`;
+                    throw new TypeError(`Illegal character ${c} for base ${this._base}`);
                 }
             };
 
@@ -101,10 +101,10 @@
                 if (nDecimals > 0) {
                     return Math.pow(10, nDecimals);
                 } else {
-                    throw `BaseCoder: negative decimals ${nDecimals} not allowed`;
+                    throw new RangeError(`Negative decimals ${nDecimals} not allowed`);
                 }
             } else {
-                throw `BaseCoder: non integer decimals ${nDecimals} not allowed`;
+                throw new RangeError(`Non integer decimals ${nDecimals} not allowed`);
             }
         }
 

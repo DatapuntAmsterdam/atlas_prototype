@@ -133,19 +133,19 @@ describe('The dpBaseCoder', function () {
         it('works only for integer base', function () {
             [[525, 'aap'], [525, 10.1]].forEach(a => {
                 let f = () => decoder(...a);
-                expect(f).toThrow();
+                expect(f).toThrowError(RangeError);
             });
         });
 
         it('works only for valid strings', function () {
             let f = () => decoder('G', 16);
-            expect(f).toThrow();
+            expect(f).toThrowError(TypeError);
         });
 
         it('works only for valid precisions', function () {
             [['F', 16, 1000], ['F', 16, -1], ['F', 16, 1.5], ['F', 16, 'aap'], ['F', 16, true]].forEach(a => {
                 let f = () => decoder(...a);
-                expect(f).toThrow();
+                expect(f).toThrowError(RangeError);
             });
         });
     });
@@ -160,14 +160,14 @@ describe('The dpBaseCoder', function () {
         it('works only for integer base', function () {
             [[525, 'aap'], [525, 10.1]].forEach(a => {
                 let f = () => encoder(...a);
-                expect(f).toThrow();
+                expect(f).toThrowError(RangeError);
             });
         });
 
         it('works only for valid precisions', function () {
             [[525, 10, 1000], [525, 10, -25], [525, 10, 5.7], [525, 10, 'noot'], [525, 10, false]].forEach(a => {
                 let f = () => encoder(...a);
-                expect(f).toThrow();
+                expect(f).toThrowError(RangeError);
             });
         });
     });
