@@ -4,7 +4,6 @@ module.exports = function (grunt) {
     // Configure lint tasks
     const linters = ['eslint', 'console-log-test'];
     const tasks = ['grunt', 'tests', 'modules'];
-    const fs = require('fs');
     const linttasks = linters
         .map(linter => tasks
             .map(task => `${linter}:${task}`))
@@ -56,19 +55,5 @@ module.exports = function (grunt) {
         );
     });
 
-    grunt.registerTask('create-hooks', copyHooks);
-
-    grunt.registerTask('pre-commit', [
-        'test'
-    ]);
-
-    function copyHooks () {
-        // Copy all hooks from /hooks into .git/hooks
-        grunt.task.run('newer:copy:githooks');
-
-        // Make hooks executable
-        grunt.file.recurse('.git/hooks', path => {
-            fs.chmodSync(path, '755');
-        });
-    }
+    grunt.registerTask('pre-commit', []);
 };
