@@ -40,13 +40,9 @@
          * @returns {*}
          */
         function string2Obj (s) {
-            if (angular.isString(s)) {
-                try {
-                    return angular.fromJson(s);
-                } catch (e) {
-                    return {};
-                }
-            } else {
+            try {
+                return angular.fromJson(s);
+            } catch (e) {
                 return {};
             }
         }

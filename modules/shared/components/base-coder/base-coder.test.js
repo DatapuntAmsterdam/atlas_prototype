@@ -17,6 +17,11 @@ describe('The dpBaseCoder', function () {
         return coder.encode(e, ndecimals);
     }
 
+    function stringEncoder (e, base, ndecimals) {
+        let coder = baseCoder.getCoderForBase(base);
+        return coder.encodeFromString(e, ndecimals);
+    }
+
     function decoder (e, base, ndecimals) {
         let coder = baseCoder.getCoderForBase(base);
         return coder.decode(e, ndecimals);
@@ -74,6 +79,17 @@ describe('The dpBaseCoder', function () {
         expect(decoder(['Z', '-Z'], 36)).toEqual([35, -35]);
         expect(encoder([61, -61], 62)).toEqual(['z', '-z']);
         expect(decoder(['z', '-z'], 62)).toEqual([61, -61]);
+    });
+
+    it('can encode from strings', function () {
+        expect(stringEncoder('9', 10)).toBe('9');
+        expect(stringEncoder('-9', 10)).toBe('-9');
+        expect(stringEncoder('15', 16)).toBe('F');
+        expect(stringEncoder('-15', 16)).toBe('-F');
+        expect(stringEncoder('35', 36)).toBe('Z');
+        expect(stringEncoder('-35', 36)).toBe('-Z');
+        expect(stringEncoder('61', 62)).toBe('z');
+        expect(stringEncoder('-61', 62)).toBe('-z');
     });
 
     it('can encode floating point numbers', function () {

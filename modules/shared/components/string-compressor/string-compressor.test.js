@@ -41,6 +41,14 @@ describe('The dpStringCompressor', function () {
         expect(decompressToObject(compressed)).toEqual({id: 'a String'.repeat(50), x: 50});
     });
 
+    it('object compression and decompression returns an empty string when called with no object', function () {
+        [5, true, 'string'].forEach(e => {
+            let compressed = compressFromObject(e);
+            expect(compress('')).toEqual(compressed);
+            expect(decompressToObject(compressed)).toEqual({});
+        });
+    });
+
     it('compresses and decompresses only strings', function () {
         let compressed = compress(525);
         expect(decompress(compressed)).toBe('');
