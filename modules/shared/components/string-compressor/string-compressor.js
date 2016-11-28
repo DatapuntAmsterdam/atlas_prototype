@@ -43,7 +43,7 @@
             try {
                 return angular.fromJson(s);
             } catch (e) {
-                return {};
+                return null;
             }
         }
 
@@ -62,7 +62,7 @@
          * @returns {{}|*}
          */
         function decompressToObject (s) {
-            return string2Obj(decompress(s));
+            return string2Obj(decompress(s)) || {};
         }
 
         /**

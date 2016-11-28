@@ -155,6 +155,15 @@ describe('The URL Composer factory', function () {
                     y: 'aap'
                 });
         });
+
+        it('deabbreviates only valid string values', function () {
+            expect(urlComposer
+                .decompressParams({
+                    C: 'N4IgniBcIIaapYwDiAvkA',
+                    V: 'LZ'
+                }))
+                .toEqual({});
+        });
     });
 
     describe('Implements combinations of compressions', function () {

@@ -4,7 +4,7 @@
     angular
         .module('atlas')
         .factory('urlComposer', urlComposerFactory)
-        .constant('URL_COMPRESSION', ['AB', '62']);    // ['AB', '62', 'LZ']
+        .constant('URL_COMPRESSION', ['AB', '62', 'LZ']);    // ['AB', '62', 'LZ']
 
     urlComposerFactory.$inject = [
         'URL_COMPRESSION',
