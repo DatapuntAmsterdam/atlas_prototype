@@ -108,6 +108,24 @@ describe('The searchFormatter factory', function () {
                     }
                 },
                 subtype: 'water'
+            }, {
+                _display: 'Centrum (gebied)',
+                _links: {
+                    self: {
+                        href: 'http://www.example.com/path/to/125'
+                    }
+                },
+                type: 'gebied',
+                naam: 'Centrum'
+            }, {
+                _display: 'YG32 (bouwblok)',
+                _links: {
+                    self: {
+                        href: 'http://www.example.com/path/to/125'
+                    }
+                },
+                type: 'bouwblok',
+                code: 'YG32'
             }
         ];
 
@@ -278,6 +296,18 @@ describe('The searchFormatter factory', function () {
                 vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/125',
                 subtype: 'water'
+            }, {
+                label: 'Centrum',
+                hoofdadres: undefined,
+                vbo_status: undefined,
+                endpoint: 'http://www.example.com/path/to/125',
+                subtype: null
+            }, {
+                label: 'YG32',
+                hoofdadres: undefined,
+                vbo_status: undefined,
+                endpoint: 'http://www.example.com/path/to/125',
+                subtype: null
             }
         ]);
     });
