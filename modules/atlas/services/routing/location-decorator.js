@@ -13,7 +13,7 @@
         urlCompressor.$inject = ['$delegate', 'urlComposer'];
 
         /**
-         * Decorates to search method of the $location service to allow for compressed urls
+         * Decorates the search method of the $location service to allow for compressed urls
          * The urlCompressor is used for compressing and decompressing states (params)
          * @param $delegate
          * @param urlComposer

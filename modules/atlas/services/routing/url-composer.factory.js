@@ -60,16 +60,15 @@
          * @returns {string} the query string
          */
         function getQueryString (params) {
-            let key,
-                queryString = '';
+            let queryString = '';
 
             compressParams(params);
-            for (key in params) {
-                if (params.hasOwnProperty(key) && params[key] !== null) {
+            Object.keys(params).forEach(key => {
+                if (angular.isDefined(params[key]) && params[key] !== null) {
                     queryString += queryString ? '&' : '?';
                     queryString += `${key}=${params[key]}`;
                 }
-            }
+            });
 
             return '#' + queryString;
         }
@@ -77,7 +76,9 @@
         /**
          * Compresses the state parameters. The properties and keys of the params object are changed or compressed
          * as specified by the URL_COMPRESSION constant. The V property of the params object is set to allow for
-         * future decompression
+         * future decompression.
+         * NOTE: the manipulation of the params object instead of returning a new params object is necessary
+         * to prevent endless $location.search loops.
          * @param params the state parameters to be compressed
          * @returns {*}  the updated params object is returned
          */
@@ -136,7 +137,7 @@
          */
         function decompressParams (params) {
             if (params.V) {
-                let urlCompression = params.V.split(',').reverse();
+                let urlCompression = params.V.split(',').reverse(); // decompress in reverse order
                 urlCompression.forEach(compressor => {
                     let contents;
                     switch (compressor) {

@@ -70,7 +70,7 @@
         }
 
         /**
-         * Transform a number into a number
+         * Transform a number into a number with the number of decimals implied by the given precision factor
          * @param n
          * @param precisionFactor
          * @returns {number}
@@ -99,6 +99,7 @@
 
         /**
          * Transforms a location (array of coordinates) into an array of coordinate strings
+         * using the coordinate precision for the number of decimals
          * @param loc
          * @returns {*|string}
          */
