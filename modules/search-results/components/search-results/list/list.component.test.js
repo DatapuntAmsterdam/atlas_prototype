@@ -181,7 +181,7 @@ describe('The dp-search-results-list component', function () {
     it('shows the type of gebied', function () {
         var component,
             mockedGebiedenCategory = {
-                slug: 'gebied',
+                slug: 'gebieden',
                 count: 2,
                 results: [
                     {
