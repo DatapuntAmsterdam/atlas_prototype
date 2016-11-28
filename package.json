@@ -47,7 +47,7 @@
     "time-grunt": "^1.4.0"
   },
   "scripts": {
-    "postinstall": "bower install && grunt create-hooks",
+    "postinstall": "bower install",
     "test": "grunt test",
     "start": "grunt",
     "clean-dirs": "rimraf ./bower_components ./node_modules ./reports ./build",

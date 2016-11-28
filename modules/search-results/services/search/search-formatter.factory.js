@@ -51,13 +51,25 @@
         function formatLinks (links) {
             return links.map(function (item) {
                 return {
-                    label: item._display,
+                    label: formatLabel(item),
                     hoofdadres: item.hoofdadres,
                     vbo_status: angular.isArray(item.vbo_status) ? item.vbo_status[0] : item.vbo_status,
                     endpoint: item._links.self.href,
                     subtype: item.subtype || null
                 };
             });
+        }
+
+        function formatLabel (item) {
+            let label = item._display;
+
+            if (item.type === 'gebied') {
+                label = item.naam;
+            } else if (item.type === 'bouwblok') {
+                label = item.code;
+            }
+
+            return label;
         }
     }
 })();
