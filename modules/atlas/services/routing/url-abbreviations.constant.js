@@ -4,16 +4,33 @@
         .constant('URL_ABBREVIATIONS', new Map([
             // key (unique variableName): value (arbitrary variableValue)
             // WARNING: For compatibility reasons always add new variables at the end!
-            ['api', 'api.datapunt.amsterdam.nl'],
-            ['fdvrog', 'financiële_dienstverlening_verhuur_van_roerend_en_onroerend_goed'],
-            ['gb', 'gebied'],
-            ['hc', 'horeca'],
-            ['hvo', 'handel_vervoer_opslag'],
+            // NOTE: abbreviations are case sensitive
+            // RECOMMENDATION: Use abbreviations only for large strings or heavily used strings
+            ['@', 'api.datapunt.amsterdam.nl'],
+            ['b', 'burger'],
+            ['bs', 'bestemming'],
+            ['bp', 'beperking'],
+            ['cb', 'combinatie'],
+            ['dv', 'dienstverlening'],
+            ['fc', 'financiële'],
+            ['g', 'gemeente'],
+            ['gs', 'grootstedelijk'],
+            ['gg', 'gebiedsgericht'],
+            ['ks', 'kadastra'],
             ['l', 'lagen'],
             ['lb', 'landbouw'],
             ['lf', 'luchtfoto'],
-            ['sd', 'stadsdeel'],
+            ['mb', 'meetbout'],
+            ['o', 'overheid'],
+            ['pr', 'productie'],
+            ['pv', 'Parkeervak'],
+            ['r', 'roerend'],
+            ['sb', 'Straatbeeld'],
+            ['sd', 'stadsde'],
+            ['tc', 'telecommunicatie'],
             ['tg', 'topografie'],
-            ['zb', 'zichtbaar']
+            ['vh', 'verhuur'],
+            ['zb', 'zichtbaar'],
+            ['zk', 'zakelijk']
         ]));
 })();

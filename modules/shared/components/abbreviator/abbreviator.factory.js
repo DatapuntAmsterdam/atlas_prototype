@@ -25,13 +25,28 @@
              * @private
              */
             this._engine = function (obj, replace) {
-                this._dictionary.forEach((variableValue, variableName) => {
-                    Object.entries(obj)
-                        .map(entry => { return {key: entry[0], value: entry[1]};})
-                        .filter(entry => angular.isString(entry.value))  // filter only truthy values
-                        .forEach(entry =>
-                            obj[entry.key] = replace(entry.value, variableName, variableValue));
-                });
+                const SEPARATOR = String.fromCharCode(0);   // Prevent conflicts with existing string characters
+
+                let keys = Object
+                        .keys(obj)
+                        .filter(key => angular.isString(obj[key])),
+                    values = keys
+                        .map(key => obj[key])
+                        .join(SEPARATOR);
+
+                this._dictionary
+                    .forEach((variableValue, variableName) => {
+                        values = replace(values, variableName, variableValue);
+                    });
+
+                values = values
+                    .split(SEPARATOR);
+
+                keys
+                    .forEach((key, i) => {
+                        obj[key] = values[i];
+                    });
+
                 return obj;
             };
         }
