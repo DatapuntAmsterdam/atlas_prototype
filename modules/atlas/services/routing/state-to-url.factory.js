@@ -15,22 +15,10 @@
         const COORDINATE_PRECISION = 7;    // decimals
 
         /**
-         * The factor to divide or multiply with to get to the desired number of decimals for coordinates
-         * @type {number}
-         */
-        const COORDINATE_PRECISION_FACTOR = Math.pow(10, COORDINATE_PRECISION);
-
-        /**
          * The number of decimals to use for degrees (heading, pitch, fov) when transforming them into params
          * @type {number}
          */
         const DEGREE_PRECISION = 1;    // decimals
-
-        /**
-         * The factor to divide or multiply with to get to the desired number of decimals for degrees
-         * @type {number}
-         */
-        const DEGREE_PRECISION_FACTOR = Math.pow(10, DEGREE_PRECISION);
 
         return {
             create,
@@ -39,8 +27,8 @@
 
         /**
          * Creates a query string for the state
-         * @param state
-         * @returns {*} the query string
+         * @param {Object} state
+         * @returns {string} the query string
          */
         function create (state) {
             return urlComposer.getQueryString(getParams(state));
@@ -70,38 +58,38 @@
         }
 
         /**
-         * Transform a number into a number with the number of decimals implied by the given precision factor
-         * @param n
-         * @param precisionFactor
+         * Reduces the number of decimals by the given precision factor
+         * @param {number} n
+         * @param {number} precisionFactor
          * @returns {number}
          */
-        function toPrecision (n, precisionFactor) {
-            return Math.round(n * precisionFactor) / precisionFactor;
+        function toPrecision (n, decimals) {
+            return Number(Math.round(n + `e${decimals}`) + `e-${decimals}`);
         }
 
         /**
          * Transforms a degree into a string, using the degree precision for the number of decimals
-         * @param d
+         * @param {number} d degrees
          * @returns {string}
          */
         function degreesAsString (d) {
-            return String(toPrecision(d, DEGREE_PRECISION_FACTOR));
+            return String(toPrecision(d, DEGREE_PRECISION));
         }
 
         /**
          * Transforms a coordinate into a string, using the coordinate precision for the number of decimals
-         * @param c
+         * @param {number} c coordinate
          * @returns {string}
          */
         function coordinateAsString (c) {
-            return String(toPrecision(c, COORDINATE_PRECISION_FACTOR));
+            return String(toPrecision(c, COORDINATE_PRECISION));
         }
 
         /**
          * Transforms a location (array of coordinates) into an array of coordinate strings
          * using the coordinate precision for the number of decimals
-         * @param loc
-         * @returns {*|string}
+         * @param {number[2]} loc location
+         * @returns {string}
          */
         function locationAsString (loc) {
             return loc.map(c => coordinateAsString(c)).join(',');

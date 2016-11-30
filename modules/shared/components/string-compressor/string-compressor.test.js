@@ -19,26 +19,22 @@ describe('The dpStringCompressor', function () {
         });
     });
 
+    function testCompress (value, result = value) {
+        let compressed = compress(value);
+        expect(decompress(compressed)).toBe(result);
+    }
+
+    function testCompressObject (value, result = value) {
+        let compressed = compressFromObject(value);
+        expect(decompressToObject(compressed)).toEqual(result);
+    }
+
     it('compresses and decompresses strings', function () {
-        let compressed = compress('');
-        expect(decompress(compressed)).toBe('');
-
-        compressed = compress('a String');
-        expect(decompress(compressed)).toBe('a String');
-
-        compressed = compress('a String'.repeat(50));
-        expect(decompress(compressed)).toBe('a String'.repeat(50));
+        ['', 'a String', 'a String'.repeat(50)].forEach(s => testCompress(s));
     });
 
     it('compresses and decompresses objects', function () {
-        let compressed = compressFromObject({});
-        expect(decompressToObject(compressed)).toEqual({});
-
-        compressed = compressFromObject({id: 'a String'});
-        expect(decompressToObject(compressed)).toEqual({id: 'a String'});
-
-        compressed = compressFromObject({id: 'a String'.repeat(50), x: 50});
-        expect(decompressToObject(compressed)).toEqual({id: 'a String'.repeat(50), x: 50});
+        [{}, {id: 'a String'}, {id: 'a String'.repeat(50), x: 50}].forEach(o => testCompressObject(o));
     });
 
     it('object compression and decompression returns an empty string when called with no object', function () {
@@ -50,16 +46,7 @@ describe('The dpStringCompressor', function () {
     });
 
     it('compresses and decompresses only strings', function () {
-        let compressed = compress(525);
-        expect(decompress(compressed)).toBe('');
-
-        compressed = compress(true);
-        expect(decompress(compressed)).toBe('');
-
-        compressed = compress(null);
-        expect(decompress(compressed)).toBe(null);
-
-        compressed = compress();
-        expect(decompress(compressed)).toBe(null);
+        [525, true].forEach(e => testCompress(e, ''));
+        [null, undefined].forEach(e => testCompress(e, null));
     });
 });

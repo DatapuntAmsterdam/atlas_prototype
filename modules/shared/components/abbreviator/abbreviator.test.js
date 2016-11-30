@@ -55,6 +55,32 @@ describe('The dpAbbreviator', function () {
         expect(deabbreviated).toEqual({id: 'b', x: 'b'});
     });
 
+    it('abbreviates values in the object that contain regex reserved characters', function () {
+        let map = new Map();
+        map.set('ls', 'long string');
+
+        let abbreviated,
+            deabbreviated;
+
+        abbreviated = abbreviate({id: 'This is a .?*[| long string'}, map);
+        expect(abbreviated).toEqual({id: 'This is a .?*[| _LS_'});
+        deabbreviated = deabbreviate(abbreviated, map);
+        expect(deabbreviated).toEqual({id: 'This is a .?*[| long string'});
+    });
+
+    it('does not support escaping of variables', function () {
+        let map = new Map();
+        map.set('ls', 'long string');
+
+        let abbreviated,
+            deabbreviated;
+
+        abbreviated = abbreviate({id: 'This is a _LS_'}, map);
+        expect(abbreviated).toEqual({id: 'This is a _LS_'});
+        deabbreviated = deabbreviate(abbreviated, map);
+        expect(deabbreviated).toEqual({id: 'This is a long string'});
+    });
+
     it('only abbreviates strings', function () {
         let map = new Map();
         map.set(1, 100);

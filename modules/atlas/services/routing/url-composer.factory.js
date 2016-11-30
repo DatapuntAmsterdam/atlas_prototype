@@ -21,13 +21,13 @@
         dpAbbreviator) {
         /**
          * the names of the object propertis that may contain a coordinate "x.n"
-         * @type {[*]}
+         * @type {string[]}
          */
         const COORDINATES = ['lat', 'lon'];
 
         /**
          * The object properties that may contain locations "x.n,y.m"
-         * @type {[*]}
+         * @type {string[]}
          */
         const LOCATIONS = ['straatbeeld'];
 
@@ -56,7 +56,7 @@
         /**
          * Returns the url query string for a specific state.
          *
-         * @param params     the state parameters to be transformed
+         * @param {Object} params     the state parameters to be transformed
          * @returns {string} the query string
          */
         function getQueryString (params) {
@@ -79,8 +79,10 @@
          * future decompression.
          * NOTE: the manipulation of the params object instead of returning a new params object is necessary
          * to prevent endless $location.search loops.
-         * @param params the state parameters to be compressed
-         * @returns {*}  the updated params object is returned
+         * This can be reproduced by hevaing compressParams return a angular.copy and decompress also
+         * This no-op behaviour results in an endless loop. No further research why.
+         * @param {Object} params the state parameters to be compressed
+         * @returns {Object}  the updated params object is returned
          */
         function compressParams (params) {
             if (URL_COMPRESSION.length > 0) {
@@ -132,19 +134,20 @@
         /**
          * Decompresses the state parameters. The properties and keys of the params object are decompressed
          * as specified by the V property of the params object.
-         * @param params
-         * @returns {*}
+         * @param {Object} params the state parameters to be decompressed
+         * @returns {Object}  the decompressed params object is returned
          */
         function decompressParams (params) {
             if (params.V) {
                 let urlCompression = params.V.split(',').reverse(); // decompress in reverse order
+                delete params.V;
                 urlCompression.forEach(compressor => {
                     let contents;
                     switch (compressor) {
                         case 'LZ':
                             contents = dpStringCompressor.decompressToObject(params.C);
-                            Object.keys(contents).forEach(key => params[key] = contents[key]);
                             delete params.C;
+                            Object.keys(contents).forEach(key => params[key] = contents[key]);
                             break;
                         case '62':
                             COORDINATES.forEach(key => {
@@ -168,7 +171,6 @@
                             break;
                     }
                 });
-                delete params.V;
             }
             return params;
         }

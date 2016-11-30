@@ -5,28 +5,27 @@
         .module('dpShared')
         .factory('dpAbbreviator', dpAbbreviator);
 
-    /**
-     * Abbreviator class
-     */
+    const SEPARATOR = String.fromCharCode(0);   // Prevent conflicts with existing string characters
+    const SURROUND_BY_CHAR = '_';               // Surrounc variable names by _ character
+
     class Abbreviator {
         /**
          * Initializes an instance of the Abbreviator class using the abbreviations as specified by the dictionary
          * The abbreviator is able to abbreviate the string values in any object
-         * @param dictionary
+         * @param {Map} dictionary, defaults to new Map()
          */
         constructor (dictionary = new Map()) {
             this._dictionary = dictionary;
 
             /**
              * The abbreviation engine that implements the abbreviation and deabbreviation routines
-             * @param obj the object for which to abbreviate its string values
-             * @param replace the method to replace a string by its abbreviation or vice vera
-             * @returns {*} the abbreviated object
+             * @param {Object} obj the object for which to abbreviate its string values
+             * @param {function(string, string, string)} replace the method to replace a string by its abbreviation
+             * or vice versa
+             * @returns {Object} the abbreviated object
              * @private
              */
-            this._engine = function (obj, replace) {
-                const SEPARATOR = String.fromCharCode(0);   // Prevent conflicts with existing string characters
-
+            this._processAbbreviations = function (obj, replace) {
                 let keys = Object
                         .keys(obj)
                         .filter(key => angular.isString(obj[key])),
@@ -54,58 +53,57 @@
         /**
          * Given a name return its variable representation
          * Example x returns _X_
-         * @param name
+         * @param {string} name
          * @returns {string}
          */
-        static variableName (name) {
-            const SURROUND_BY_CHAR = '_';
+        static getVariableNameFor (name) {
             return `${SURROUND_BY_CHAR}${name.toUpperCase()}${SURROUND_BY_CHAR}`;
         }
 
         /**
          * Given a string value replace its contents by the corresponding abbreviations
-         * Example x = aap will translate "This is an aap" to "This is an _X_"
-         * @param value The string to handle
-         * @param variableName The name of the variable
-         * @param variableValue The value of the variable
+         * Example: when x = aap, the string "This is an aap" will be translated to "This is an X"'
+         * @param {string} value The string to handle
+         * @param {string} variable The name of the variable
+         * @param {string} variableValue The value of the variable
          */
-        static abbreviateValue (value, variableName, variableValue) {
+        static abbreviateValue (value, variable, variableValue) {
             return value.replace(
                 // Replace variable value by the variable name
-                new RegExp(variableValue.replace(/([\.\^\$])/, '\\$1'), 'g'),   // escape meta charactere
-                Abbreviator.variableName(variableName));    // variables are uppercase
+                new RegExp(variableValue.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'),   // escape meta characters
+                Abbreviator.getVariableNameFor(variable));    // variables are uppercase
         }
 
         /**
-         * Given an string with abbreviations, return its orginal value
-         * Example x = aap will translate "This is an _X_" to "This is an aap"
-         * @param value The string containing abbreviations
-         * @param variableName The name of the variable
-         * @param variableValue The value of the variable
+         * Given a string with abbreviations, return its orginal value
+         * Example: when x = aap, the string "This is an X" will be translated to "This is an aap"'
+         * @param {string} value The string containing abbreviations
+         * @param {string} variable The name of the variable
+         * @param {string} variableValue The value of the variable
          */
-        static restoreValue (value, variableName, variableValue) {
+        static restoreValue (value, variable, variableValue) {
             return value.replace(
                 // Replace variable name by the variable value
-                new RegExp(Abbreviator.variableName(variableName), 'g'),
-                `${variableValue}`);
+                new RegExp(Abbreviator.getVariableNameFor(variable), 'g'),
+                variableValue);
         }
 
         /**
          * Abbreviates the string values of an object
-         * @param obj
-         * @returns {*}
+         * @param {Object} obj
+         * @returns {Object}
          */
         abbreviate (obj) {
-            return this._engine(obj, Abbreviator.abbreviateValue);
+            return this._processAbbreviations(obj, Abbreviator.abbreviateValue);
         }
 
         /**
          * Deabbereviates the string values of an object
-         * @param obj
-         * @returns {*}
+         * @param {Object} obj
+         * @returns {Object}
          */
         deabbreviate (obj) {
-            return this._engine(obj, Abbreviator.restoreValue);
+            return this._processAbbreviations(obj, Abbreviator.restoreValue);
         }
     }
 
@@ -120,7 +118,7 @@
 
         /**
          * Returns an instance of the Abbreviator class for the specified dictionary
-         * @param abbreviations
+         * @param {Map} abbreviations
          * @returns {Abbreviator}
          */
         function getAbbreviatorForAbbreviations (abbreviations) {

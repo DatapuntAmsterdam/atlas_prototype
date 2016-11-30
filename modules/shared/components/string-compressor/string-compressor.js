@@ -23,43 +23,41 @@
 
         /**
          * Converts an arbitray object to a string by converting it to JSON
-         * @param obj an arbitrary object
-         * @returns {*}
+         * @param {Object} obj an arbitrary object
+         * @returns {string|undefined}
          */
         function obj2String (obj) {
             if (angular.isObject(obj)) {
                 return angular.toJson(obj);
-            } else {
-                return '';
             }
         }
 
         /**
          * Converts a string JSON format to an object
-         * @param s JSON string
-         * @returns {*}
+         * @param {string} s JSON string
+         * @returns {Object|undefined}
          */
         function string2Obj (s) {
             try {
                 return angular.fromJson(s);
             } catch (e) {
-                return null;
+                return;
             }
         }
 
         /**
          * Compresses an object into a string
-         * @param obj
-         * @returns {*}
+         * @param {Object} obj
+         * @returns {string}
          */
         function compressFromObject (obj) {
-            return compress(obj2String(obj));
+            return compress(obj2String(obj) || '');
         }
 
         /**
          * Decompresses a string into an object
-         * @param s
-         * @returns {{}|*}
+         * @param {string} s
+         * @returns {Object}
          */
         function decompressToObject (s) {
             return string2Obj(decompress(s)) || {};
@@ -67,7 +65,7 @@
 
         /**
          * Compresses a string
-         * @param s the original string to compress
+         * @param {string} s the original string to compress
          * @returns {string} the compressed version of the string
          */
         function compress (s) {
@@ -76,7 +74,7 @@
 
         /**
          * Decompresses a string that was earlier compressed using the compress method
-         * @param s the compressed string
+         * @param {string} s the compressed string
          * @returns {string} the original uncompressed version of the string
          */
         function decompress (s) {
