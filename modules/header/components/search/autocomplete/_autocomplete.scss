@@ -12,6 +12,7 @@ $suggestion-offset: $base-font-size;
 
   .c-autocomplete__tip {
     @include font-size($body-font);
+    margin-top: $base-whitespace * .5;
     color: $secondary-gray40;
     font-style: italic;
     font-weight: 400;
@@ -20,15 +21,19 @@ $suggestion-offset: $base-font-size;
 
   .c-autocomplete__category {
     &:not(:first-of-type) {
-      margin-top: $base-whitespace;
+      margin-top: $base-whitespace * .5;
+      padding-top: $base-whitespace;
       border-top: 1px solid $secondary-gray60;
     }
   }
 
   .c-autocomplete__category__heading {
-    padding-top: $base-whitespace;
-    padding-right: $base-whitespace;
-    padding-left: $base-whitespace;
+    margin: {
+      top: 0;
+      right: $base-whitespace;
+      bottom: $base-whitespace * .5;
+      left: $base-whitespace;
+    };
     color: $secondary-gray40;
   }
 

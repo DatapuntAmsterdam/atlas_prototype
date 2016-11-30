@@ -4,6 +4,6 @@
     angular
         .module('dpHeader')
         .constant('HEADER_CONFIG', {
-            AUTOCOMPLETE_ENDPOINT: 'atlas/typeahead/'
+            AUTOCOMPLETE_ENDPOINT: 'typeahead'
         });
 })();
