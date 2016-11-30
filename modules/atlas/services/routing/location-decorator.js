@@ -15,9 +15,9 @@
         /**
          * Decorates the search method of the $location service to allow for compressed urls
          * The urlCompressor is used for compressing and decompressing states (params)
-         * @param {Function} $delegate
+         * @param {Object} $delegate
          * @param {urlComposer} urlComposer
-         * @returns {Function}
+         * @returns {Object} $delegate
          */
         function urlCompressor ($delegate, urlComposer) {
             /**
@@ -32,7 +32,7 @@
              *     This method is getter / setter.
              *     Return search part (as object) of current URL when called without any parameter.
              *     Change search part when called with parameter and return $location.
-             * @param {Object[]} search
+             * @param {...Object} search
              * @returns {Object}
              */
             $delegate.search = function mySearch (...search) {

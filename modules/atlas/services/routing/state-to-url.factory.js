@@ -60,7 +60,7 @@
         /**
          * Reduces the number of decimals by the given precision factor
          * @param {number} n
-         * @param {number} precisionFactor
+         * @param {number} decimals
          * @returns {number}
          */
         function toPrecision (n, decimals) {

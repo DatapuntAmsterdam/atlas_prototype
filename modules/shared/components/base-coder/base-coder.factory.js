@@ -108,7 +108,7 @@
         /**
          * Reduces the number of decimals by the given precision factor
          * @param {number} n
-         * @param {number} precisionFactor
+         * @param {number} decimals
          * @returns {number}
          */
         static toPrecision (n, decimals) {
@@ -174,7 +174,7 @@
                 if (nDecimals !== 0) {
                     let precisionFactor = BaseCoder.precisionFactor(nDecimals);
                     if (isFinite(precisionFactor)) {
-                        result = result / BaseCoder.precisionFactor(nDecimals);
+                        result = result / precisionFactor;
                     } else {
                         result = Number.NaN;
                     }
