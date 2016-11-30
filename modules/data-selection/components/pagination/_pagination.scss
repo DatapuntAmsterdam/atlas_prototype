@@ -24,15 +24,23 @@ $pagination-line-color: #e4e4e4;
     width: 3rem;
     height: $button-size;
     border: 1px solid $secondary-gray20;
-    font-weight: bold;
+    font-weight: 400;
     text-align: center;
     vertical-align: middle;
   }
 
   .c-data-selection-pagination__button {
-    @include icon-button("forward");
-
+    @include data-selection-pagination-font;
+    width: 29px;
+    height: $button-size;
+    background-color: $secondary-gray60;
+    color: $primary-light;
+    line-height: 1;
     vertical-align: middle;
+
+    &:hover {
+      background-color: $primary-contrast;
+    }
   }
 }
 
@@ -55,6 +63,9 @@ $pagination-line-color: #e4e4e4;
 
 .c-data-selection-pagination-link-text {
   @include data-selection-pagination-font;
+  display: inline-block;
+  height: $base-whitespace * 2;
+  vertical-align: middle;
 
   &:hover {
     color: $primary-contrast;
