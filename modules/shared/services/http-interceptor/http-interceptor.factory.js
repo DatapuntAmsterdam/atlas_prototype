@@ -15,7 +15,7 @@
 
         function responseError (response) {
             // register server errors (5xx) and client errors (4xx)
-            let isServerError = 500 <= response.status && response.status <= 599,
+            let isServerError = response.status <= 0 || (500 <= response.status && response.status <= 599),
                 isClientError = 400 <= response.status && response.status <= 499;
 
             if (isServerError) {
