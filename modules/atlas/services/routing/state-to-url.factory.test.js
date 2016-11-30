@@ -1,19 +1,17 @@
 describe('The stateToUrl factory', function () {
     var $location,
         stateToUrl,
-        mockedState,
-        DATA_SELECTION;
+        mockedState;
 
     beforeEach(function () {
         angular.mock.module('atlas', function ($provide) {
             $provide.constant('URL_COMPRESSION', []);
         });
 
-        angular.mock.inject(function (_$location_, _stateToUrl_, _DEFAULT_STATE_, _DATA_SELECTION_) {
+        angular.mock.inject(function (_$location_, _stateToUrl_, _DEFAULT_STATE_) {
             $location = _$location_;
             stateToUrl = _stateToUrl_;
             mockedState = angular.copy(_DEFAULT_STATE_);
-            DATA_SELECTION = _DATA_SELECTION_;
         });
 
         spyOn($location, 'replace');
@@ -438,23 +436,23 @@ describe('The stateToUrl factory', function () {
             }));
 
             // Enable the list view
-            mockedState.dataSelection.view = DATA_SELECTION.VIEW_LIST;
+            mockedState.dataSelection.view = 'LIST';
             $location.search.calls.reset();
 
             stateToUrl.update(mockedState, false);
 
             expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                view: DATA_SELECTION.VIEW_LIST
+                view: 'LIST'
             }));
 
             // Enable the table view
-            mockedState.dataSelection.view = DATA_SELECTION.VIEW_TABLE;
+            mockedState.dataSelection.view = 'TABLE';
             $location.search.calls.reset();
 
             stateToUrl.update(mockedState, false);
 
             expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                view: DATA_SELECTION.VIEW_TABLE
+                view: 'TABLE'
             }));
 
             // Enable the default view (left to the reducer)

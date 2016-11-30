@@ -1,21 +1,15 @@
 describe('The dataSelectionReducers factory', function () {
     var dataSelectionReducers,
         DEFAULT_STATE,
-        ACTIONS,
-        constants;
+        ACTIONS;
 
     beforeEach(function () {
-        angular.mock.module('atlas', {
-            dataSelectionFilterNames: {
-                getSlugFor: angular.identity
-            }
-        });
+        angular.mock.module('atlas');
 
-        angular.mock.inject(function (_dataSelectionReducers_, _DEFAULT_STATE_, _ACTIONS_, _DATA_SELECTION_) {
+        angular.mock.inject(function (_dataSelectionReducers_, _DEFAULT_STATE_, _ACTIONS_) {
             dataSelectionReducers = _dataSelectionReducers_;
             DEFAULT_STATE = _DEFAULT_STATE_;
             ACTIONS = _ACTIONS_;
-            constants = _DATA_SELECTION_;
         });
     });
 
@@ -80,7 +74,7 @@ describe('The dataSelectionReducers factory', function () {
                     buurt: 'Trompbuurt'
                 },
                 page: 1,
-                view: constants.VIEW_TABLE
+                view: 'TABLE'
             });
         });
 
@@ -89,7 +83,7 @@ describe('The dataSelectionReducers factory', function () {
                 output;
 
             mockedState = angular.copy(DEFAULT_STATE);
-            payload.view = constants.VIEW_LIST;
+            payload.view = 'LIST';
 
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
 
@@ -100,7 +94,7 @@ describe('The dataSelectionReducers factory', function () {
                     buurt: 'Trompbuurt'
                 },
                 page: 1,
-                view: constants.VIEW_LIST
+                view: 'LIST'
             });
         });
 
@@ -119,7 +113,7 @@ describe('The dataSelectionReducers factory', function () {
                     buurt: 'Trompbuurt'
                 },
                 page: 1,
-                view: constants.VIEW_TABLE
+                view: 'TABLE'
             });
         });
 
@@ -163,19 +157,19 @@ describe('The dataSelectionReducers factory', function () {
         it('can set the view to list view', function () {
             let output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](
                 {dataSelection: {}},
-                constants.VIEW_LIST
+                'LIST'
             );
 
-            expect(output.dataSelection.view).toBe(constants.VIEW_LIST);
+            expect(output.dataSelection.view).toBe('LIST');
         });
 
         it('can set the view to table view', function () {
             let output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](
                 {dataSelection: {}},
-                constants.VIEW_TABLE
+                'TABLE'
             );
 
-            expect(output.dataSelection.view).toBe(constants.VIEW_TABLE);
+            expect(output.dataSelection.view).toBe('TABLE');
         });
 
         it('refuses to set the view to an unknown view', function () {

@@ -5,8 +5,8 @@
         .module('dpDataSelection')
         .component('dpDataSelectionPagination', {
             bindings: {
-                currentPage: '=',
-                numberOfPages: '='
+                currentPage: '<',
+                numberOfPages: '<'
             },
             templateUrl: 'modules/data-selection/components/pagination/pagination.html',
             controller: DpDataSelectionPaginationController,

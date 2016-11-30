@@ -1,5 +1,5 @@
 describe('The dpDataSelectionDocumentTitle factory', function () {
-    var dpDataSelectionDocumentTitle,
+    let dpDataSelectionDocumentTitle,
         mockedBagState,
         mockedHrState;
 
@@ -35,13 +35,22 @@ describe('The dpDataSelectionDocumentTitle factory', function () {
 
         mockedBagState = {
             dataset: 'bag',
+            view: 'TABLE',
             filters: {}
         };
 
         mockedHrState = {
             dataset: 'hr',
+            view: 'TABLE',
             filters: {}
         };
+    });
+
+    it('shows a different title based on the active view', function () {
+        expect(dpDataSelectionDocumentTitle.getTitle(mockedBagState)).toMatch(/^Tabel/);
+
+        mockedBagState.view = 'LIST';
+        expect(dpDataSelectionDocumentTitle.getTitle(mockedBagState)).toMatch(/^Lijst/);
     });
 
     it('shows the title of the current dataset', function () {

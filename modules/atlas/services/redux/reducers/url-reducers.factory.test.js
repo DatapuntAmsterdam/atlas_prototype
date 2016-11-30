@@ -1,17 +1,15 @@
 describe('The urlReducers factory', function () {
     var urlReducers,
         mockedState,
-        mockedSearchParams,
-        DATA_SELECTION;
+        mockedSearchParams;
 
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_urlReducers_, _DEFAULT_STATE_, _DATA_SELECTION_) {
+        angular.mock.inject(function (_urlReducers_, _DEFAULT_STATE_) {
             urlReducers = _urlReducers_;
 
             mockedState = angular.copy(_DEFAULT_STATE_);
-            DATA_SELECTION = _DATA_SELECTION_;
         });
 
         mockedSearchParams = {
@@ -574,15 +572,15 @@ describe('The urlReducers factory', function () {
             });
 
             it('enables list view', function () {
-                mockedSearchParamsWithDataSelection.view = DATA_SELECTION.VIEW_LIST;
+                mockedSearchParamsWithDataSelection.view = 'LIST';
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
-                expect(output.dataSelection.view).toBe(DATA_SELECTION.VIEW_LIST);
+                expect(output.dataSelection.view).toBe('LIST');
             });
 
             it('enables table view', function () {
-                mockedSearchParamsWithDataSelection.view = DATA_SELECTION.VIEW_TABLE;
+                mockedSearchParamsWithDataSelection.view = 'TABLE';
                 output = urlReducers.URL_CHANGE(mockedState, mockedSearchParamsWithDataSelection);
-                expect(output.dataSelection.view).toBe(DATA_SELECTION.VIEW_TABLE);
+                expect(output.dataSelection.view).toBe('TABLE');
             });
 
             it('enables default view', function () {

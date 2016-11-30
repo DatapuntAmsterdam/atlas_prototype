@@ -4,8 +4,7 @@ describe('The dp-data-selection component', function () {
         $q,
         dataSelectionApi,
         mockedState,
-        mockedApiData,
-        DATA_SELECTION;
+        mockedApiData;
 
     beforeEach(function () {
         angular.mock.module(
@@ -13,16 +12,22 @@ describe('The dp-data-selection component', function () {
             {
                 dataSelectionApi: {
                     query: function () {
-                        var q = $q.defer();
+                        let q = $q.defer();
 
                         q.resolve(mockedApiData);
 
                         return q.promise;
                     }
+                },
+                dataSelectionConfig: {
+                    MAX_AVAILABLE_PAGES: 5,
+                    zwembaden: {
+                        TITLE: 'Zwembaden'
+                    }
                 }
             },
             function ($provide) {
-                $provide.factory('dpLoadingIdicatorDirective', function () {
+                $provide.factory('dpLoadingIndicatorDirective', function () {
                     return {};
                 });
 
@@ -30,11 +35,15 @@ describe('The dp-data-selection component', function () {
                     return {};
                 });
 
-                $provide.factory('dpDataSelectionDownloadButtonDirective', function () {
+                $provide.factory('dpDataSelectionHeaderDirective', function () {
                     return {};
                 });
 
                 $provide.factory('dpDataSelectionTableDirective', function () {
+                    return {};
+                });
+
+                $provide.factory('dpPanelDirective', function () {
                     return {};
                 });
 
@@ -44,16 +53,15 @@ describe('The dp-data-selection component', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$compile_, _$q_, _dataSelectionApi_, _DATA_SELECTION_) {
+        angular.mock.inject(function (_$rootScope_, _$compile_, _$q_, _dataSelectionApi_) {
             $rootScope = _$rootScope_;
             $compile = _$compile_;
             $q = _$q_;
             dataSelectionApi = _dataSelectionApi_;
-            DATA_SELECTION = _DATA_SELECTION_;
         });
 
         mockedState = {
-            view: DATA_SELECTION.VIEW_TABLE,
+            view: 'TABLE',
             dataset: 'zwembaden',
             filters: {
                 type: 'Buitenbad'
@@ -88,34 +96,6 @@ describe('The dp-data-selection component', function () {
         return component;
     }
 
-    it('retieves the filter and table data and passes it to it\'s child directives', function () {
-        var component = getComponent(mockedState),
-            scope = component.isolateScope();
-
-        expect(component.find('dp-data-selection-filters').length).toBe(1);
-        expect(component.find('dp-data-selection-filters').attr('dataset')).toBe('zwembaden');
-        expect(component.find('dp-data-selection-filters').attr('available-filters')).toBe('vm.availableFilters');
-        expect(component.find('dp-data-selection-filters').attr('active-filters')).toBe('vm.state.filters');
-        expect(scope.vm.availableFilters).toBe('MOCKED_FILTER_DATA');
-        expect(scope.vm.state.filters).toEqual({
-            type: 'Buitenbad'
-        });
-        expect(scope.vm.isTableView()).toBe(true);
-
-        expect(component.find('dp-data-selection-table').length).toBe(1);
-        expect(component.find('dp-data-selection-table').attr('content')).toBe('vm.tableData');
-        expect(scope.vm.tableData).toBe('MOCKED_TABLE_DATA');
-        expect(scope.vm.currentPage).toBe(2);
-
-        expect(component.find('dp-data-selection-pagination').length).toBe(1);
-        expect(component.find('dp-data-selection-pagination').attr('current-page')).toBe('vm.currentPage');
-        expect(component.find('dp-data-selection-pagination').attr('number-of-pages')).toBe('vm.numberOfPages');
-        expect(scope.vm.currentPage).toBe(2);
-        expect(scope.vm.numberOfPages).toBe(107);
-        expect(scope.vm.numberOfRecords).toBe(77);
-        expect(scope.vm.noDataToDisplay).toBe(false);
-    });
-
     it('retrieves new data when the state changes', function () {
         var component = getComponent(mockedState),
             scope = component.isolateScope();
@@ -129,17 +109,5 @@ describe('The dp-data-selection component', function () {
 
         expect(dataSelectionApi.query).toHaveBeenCalledTimes(2);
         expect(scope.vm.currentPage).toBe(3);
-    });
-
-    it('cannot show more than 100 pages', function () {
-        var component = getComponent(mockedState),
-            scope = component.isolateScope();
-
-        // Change the state
-        scope.vm.state.page = 101;
-        $rootScope.$apply();
-
-        expect(scope.vm.currentPage).toBe(101);
-        expect(scope.vm.noDataToDisplay).toBe(true);
     });
 });

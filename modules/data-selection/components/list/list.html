@@ -1,9 +1,17 @@
-<ul class="o-list u-padding__top--1-5">
-    <li ng-repeat="row in vm.data track by $index">
-        <dp-link type="FETCH_DETAIL" payload="row.detailEndpoint">{{row.adres}}</dp-link>
-        <span ng-show="row.standplaats">(standplaats)</span>
-        <span ng-show="row.ligplaats">(ligplaats)</span>
-        <span ng-show="row.nevenadres">(nevenadres)</span>
-        <span ng-show="row.gevormd">(verblijfsobject gevormd)</span>
+<ul class="o-list">
+    <li ng-repeat="row in vm.content.body">
+        <dp-link type="FETCH_DETAIL" PAYLOAD="row.detailEndpoint">
+            <dp-data-selection-formatter
+                variables="row.content[0]"
+                formatter="{{vm.content.formatters[0]}}"
+                use-inline="true">
+            </dp-data-selection-formatter>
+        </dp-link>
+
+        <dp-data-selection-formatter ng-if="!$first" ng-repeat="variables in row.content track by $index"
+             variables="variables"
+             formatter="{{vm.content.formatters[$index]}}"
+             use-inline="true">
+        </dp-data-selection-formatter>
     </li>
 </ul>

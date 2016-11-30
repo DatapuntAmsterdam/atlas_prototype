@@ -1,16 +1,19 @@
 describe('The dp-data-selection-table component', function () {
-    var $compile,
+    let $compile,
         $rootScope,
+        mockedContent,
         store,
-        ACTIONS,
-        mockedContent;
+        ACTIONS;
 
     beforeEach(function () {
         angular.mock.module(
             'dpDataSelection',
             {
+                makeBoldFormatterFilter: function (input) {
+                    return '<strong>' + input + '</strong>';
+                },
                 store: {
-                    dispatch: function () {}
+                    dispatch: angular.noop
                 }
             }
         );
@@ -23,48 +26,46 @@ describe('The dp-data-selection-table component', function () {
         });
 
         mockedContent = {
-            head: [
-                'Field A',
-                'Field B'
-            ],
-            format: [
-                {
-                    align: 'right'
-                },
-                {
-                    filters: ['postcode']
-                }
-            ],
+            head: ['Column A', 'Column B', 'Column C'],
             body: [
                 {
-                    detailEndpoint: 'http://www.example.com/detail/123/',
-                    fields: [
-                        'Cell A1',
-                        '1234AB'
+                    detailEndpoint: 'https://www.example.com/path/to/1/',
+                    content: [
+                        [{
+                            key: 'var_a',
+                            value: '1A'
+                        }], [{
+                            key: 'var_b',
+                            value: '1B'
+                        }], [{
+                            key: 'var_c',
+                            value: '1C'
+                        }]
                     ]
-                },
-                {
-                    detailEndpoint: 'http://www.example.com/detail/124/',
-                    fields: [
-                        'Cell A2',
-                        'Cell B2'
-                    ]
-                },
-                {
-                    detailEndpoint: 'http://www.example.com/detail/126/',
-                    fields: [
-                        'Cell A3',
-                        'Cell B3'
+                }, {
+                    detailEndpoint: 'https://www.example.com/path/to/2/',
+                    content: [
+                        [{
+                            key: 'var_a',
+                            value: '2A'
+                        }], [{
+                            key: 'var_b',
+                            value: '2B'
+                        }], [{
+                            key: 'var_c',
+                            value: '2C'
+                        }]
                     ]
                 }
-            ]
+            ],
+            formatters: [null, null, 'makeBoldFormatter']
         };
 
         spyOn(store, 'dispatch');
     });
 
-    function getComponent (content) {
-        var component,
+    function getComponent () {
+        let component,
             element,
             scope;
 
@@ -72,7 +73,7 @@ describe('The dp-data-selection-table component', function () {
         element.setAttribute('content', 'content');
 
         scope = $rootScope.$new();
-        scope.content = content;
+        scope.content = mockedContent;
 
         component = $compile(element)(scope);
         scope.$apply();
@@ -80,62 +81,57 @@ describe('The dp-data-selection-table component', function () {
         return component;
     }
 
-    it('renders an HTML table and applies any filters and formats', function () {
-        var component;
+    it('renders a <thead> with all the column names', function () {
+        const component = getComponent();
 
-        component = getComponent(mockedContent);
-
-        expect(component.find('table').length).toBe(1);
-
-        expect(component.find('thead tr').length).toBe(1);
-
-        expect(component.find('thead tr th').length).toBe(2);
-        expect(component.find('thead tr th').eq(0).text()).toContain('Field A');
-        expect(component.find('thead tr th').eq(1).text()).toContain('Field B');
-
-        expect(component.find('tbody tr').length).toBe(3);
-
-        expect(component.find('tbody tr:nth-child(1) td').length).toBe(2);
-        expect(component.find('tbody tr:nth-child(1) td:nth-child(1)').text()).toContain('Cell A1');
-        expect(component.find('tbody tr:nth-child(1) td:nth-child(1)').attr('class'))
-            .toContain('u-align--right');
-        expect(component.find('tbody tr:nth-child(1) td:nth-child(2)').text()).toContain('1234 AB');
-        expect(component.find('tbody tr:nth-child(1) td:nth-child(2)').attr('class'))
-            .not.toContain('data-selection__align__right');
-
-        expect(component.find('tbody tr:nth-child(2) td').length).toBe(2);
-        expect(component.find('tbody tr:nth-child(2) td:nth-child(1)').text()).toContain('Cell A2');
-        expect(component.find('tbody tr:nth-child(2) td:nth-child(2)').text()).toContain('Cell B2');
-
-        expect(component.find('tbody tr:nth-child(3) td').length).toBe(2);
-        expect(component.find('tbody tr:nth-child(3) td:nth-child(1)').text()).toContain('Cell A3');
-        expect(component.find('tbody tr:nth-child(3) td:nth-child(2)').text()).toContain('Cell B3');
+        expect(component.find('table thead').length).toBe(1);
+        expect(component.find('table thead tr').length).toBe(1);
+        expect(component.find('table thead tr th').length).toBe(3);
+        expect(component.find('table thead th').eq(0).text().trim()).toBe('Column A');
+        expect(component.find('table thead th').eq(1).text().trim()).toBe('Column B');
+        expect(component.find('table thead th').eq(2).text().trim()).toBe('Column C');
     });
 
-    it('has clickable rows', function () {
-        var component;
+    it('renders <tr>\'s inside <tbody> for each row', function () {
+        const component = getComponent();
 
-        component = getComponent(mockedContent);
+        expect(component.find('table tbody').length).toBe(1);
+        expect(component.find('table tbody tr').length).toBe(2);
+    });
 
+    it('applies dp-data-selection-formatter to each <td> inside <tbody>', function () {
+        const component = getComponent();
+
+        // The first two columns have no formatters
+        expect(component.find('tbody tr:nth-child(1) td:nth-child(1)').text().trim()).toBe('1A');
+        expect(component.find('tbody tr:nth-child(1) td:nth-child(2)').text().trim()).toBe('1B');
+        expect(component.find('tbody tr:nth-child(2) td:nth-child(1)').text().trim()).toBe('2A');
+        expect(component.find('tbody tr:nth-child(2) td:nth-child(2)').text().trim()).toBe('2B');
+
+        // The third column does use a formatter
+        expect(component.find('tbody tr:nth-child(1) td:nth-child(3)').html().trim()).toContain('<strong>1C</strong>');
+        expect(component.find('tbody tr:nth-child(2) td:nth-child(3)').html().trim()).toContain('<strong>2C</strong>');
+    });
+
+    it('makes each <tr> clickable (will FETCH_DETAIL)', function () {
+        const component = getComponent();
+
+        expect(store.dispatch).not.toHaveBeenCalled();
+
+        // The first row
         component.find('tbody tr:nth-child(1)').click();
         expect(store.dispatch).toHaveBeenCalledTimes(1);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_DETAIL,
-            payload: 'http://www.example.com/detail/123/'
+            payload: 'https://www.example.com/path/to/1/'
         });
 
+        // The second row
         component.find('tbody tr:nth-child(2)').click();
         expect(store.dispatch).toHaveBeenCalledTimes(2);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_DETAIL,
-            payload: 'http://www.example.com/detail/124/'
-        });
-
-        component.find('tbody tr:nth-child(3)').click();
-        expect(store.dispatch).toHaveBeenCalledTimes(3);
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_DETAIL,
-            payload: 'http://www.example.com/detail/126/'
+            payload: 'https://www.example.com/path/to/2/'
         });
     });
 });

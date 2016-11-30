@@ -8,7 +8,7 @@
     dataSelectionConfigFactory.$inject = ['environment'];
 
     function dataSelectionConfigFactory (environment) {
-        var globalConfig,
+        let globalConfig,
             envConfig;
 
         envConfig = {
@@ -34,101 +34,117 @@
                 TITLE: 'Adressen',
                 FILTERS: [
                     {
-                        canonical: 'stadsdeel',
                         slug: 'stadsdeel_naam',
                         label: 'Stadsdeel'
                     }, {
-                        canonical: 'gebiedsgerichtwerken',
                         slug: 'ggw_naam',
                         label: 'GGW-gebied'
                     }, {
-                        canonical: 'buurtcombinatie',
                         slug: 'buurtcombinatie_naam',
                         label: 'Buurtcombinatie'
                     }, {
-                        canonical: 'buurt',
                         slug: 'buurt_naam',
                         label: 'Buurt'
                     }, {
-                        canonical: 'openbareruimte',
                         slug: 'naam',
                         label: 'Openbare ruimte'
                     }, {
                         slug: 'postcode',
-                        label: 'Postcode',
-                        format: {
-                            filters: ['postcode']
-                        }
+                        label: 'Postcode'
                     }
                 ],
-                FIELDS: [
-                    {
-                        slug: '_openbare_ruimte_naam',
-                        label: 'Naam openbare ruimte'
-                    },
-                    {
-                        slug: 'huisnummer',
-                        label: 'Num.',
-                        format: {
-                            align: 'right'
+                CONTENT: {
+                    TABLE: [
+                        {
+                            label: 'Naam openbare ruimte',
+                            variables: ['_openbare_ruimte_naam']
+                        },
+                        {
+                            label: 'Num.',
+                            variables: ['huisnummer'],
+                            formatter: 'alignRight'
+                        },
+                        {
+                            label: 'Let.',
+                            variables: ['huisletter'],
+                            formatter: 'alignRight'
+                        },
+                        {
+                            label: 'Toev.',
+                            variables: ['huisnummer_toevoeging'],
+                            formatter: 'alignRight'
+                        },
+                        {
+                            label: 'Postcode',
+                            variables: ['postcode']
+                        },
+                        {
+                            label: 'Stadsdeel',
+                            variables: ['stadsdeel_naam']
+                        },
+                        {
+                            label: '-code',
+                            variables: ['stadsdeel_code']
+                        },
+                        {
+                            label: 'GGW-gebied',
+                            variables: ['ggw_naam']
+                        },
+                        {
+                            label: '-code',
+                            variables: ['ggw_code']
+                        },
+                        {
+                            label: 'Buurtcombinatie',
+                            variables: ['buurtcombinatie_naam']
+                        },
+                        {
+                            label: '-code',
+                            variables: ['buurtcombinatie_code']
+                        },
+                        {
+                            label: 'Buurt',
+                            variables: ['buurt_naam']
+                        },
+                        {
+                            label: '-code',
+                            variables: ['buurt_code']
                         }
-                    },
-                    {
-                        slug: 'huisletter',
-                        label: 'Let.',
-                        format: {
-                            align: 'right'
+                    ],
+                    LIST: [
+                        {
+                            variables: [
+                                '_openbare_ruimte_naam',
+                                'huisnummer',
+                                'huisletter',
+                                'huisnummer_toevoeging'
+                            ],
+                            formatter: 'bagAddress'
+                        },
+                        {
+                            variables: [
+                                'ligplaats_id',
+                                'standplaats_id'
+                            ],
+                            formatter: 'nummeraanduidingType'
+                        },
+                        {
+                            variables: [
+                                'hoofdadres'
+                            ],
+                            formatter: 'nevenadres'
+                        },
+                        {
+                            variables: [
+                                'status_id'
+                            ],
+                            formatter: 'verblijfsobjectGevormd'
                         }
-                    },
-                    {
-                        slug: 'huisnummer_toevoeging',
-                        label: 'Toev.',
-                        format: {
-                            align: 'right'
-                        }
-                    },
-                    {
-                        slug: 'postcode',
-                        label: 'Postcode',
-                        format: {
-                            filters: ['postcode']
-                        }
-                    },
-                    {
-                        slug: 'stadsdeel_naam',
-                        label: 'Stadsdeel'
-                    },
-                    {
-                        slug: 'stadsdeel_code',
-                        label: '-code'
-                    },
-                    {
-                        slug: 'ggw_naam',
-                        label: 'GGW-gebied'
-                    },
-                    {
-                        slug: 'ggw_code',
-                        label: '-code'
-                    },
-                    {
-                        slug: 'buurtcombinatie_naam',
-                        label: 'Buurtcombinatie'
-                    },
-                    {
-                        slug: 'buurtcombinatie_code',
-                        label: '-code'
-                    },
-                    {
-                        slug: 'buurt_naam',
-                        label: 'Buurt'
-                    },
-                    {
-                        slug: 'buurt_code',
-                        label: '-code'
-                    }
-                ]
+                    ]
+                }
             }
         };
+
         return angular.merge(globalConfig, envConfig[environment.NAME]);
     }
 })();

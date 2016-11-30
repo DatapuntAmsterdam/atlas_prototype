@@ -1,10 +1,4 @@
 <div class="c-data-selection-header">
-    <div ng-if="vm.numberOfRecords <= 0" class="qa-data-selection-header__no-records">
-        <h2>Geen resultaten gevonden</h2>
-        <p>Tip: verwijder één of meer filtercriteria</p>
-
-    </div>
-
     <div ng-if="vm.numberOfRecords > 0" class="qa-data-selection-header__with-records">
         <div class="u-row">
             <div class="u-pull--right">
@@ -13,12 +7,14 @@
                     active-filters="vm.state.filters">
 
                 </dp-data-selection-download-button>
-
             </div>
 
             <h2>{{vm.headerTitle}} ({{vm.numberOfRecords | number}})</h2>
-
         </div>
     </div>
 
+    <div ng-if="vm.numberOfRecords <= 0" class="qa-data-selection-header__no-records">
+        <h2>Geen resultaten gevonden</h2>
+        <p>Tip: verwijder één of meer filtercriteria</p>
+    </div>
 </div>

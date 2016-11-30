@@ -1,6 +1,6 @@
 <div class="u-grid">
     <div class="u-row">
-        <div ng-if="vm.isTableView()" class="u-col-sm--3">
+        <div ng-if="vm.showFilters" class="u-col-sm--3">
             <dp-data-selection-filters
                 dataset="{{vm.state.dataset}}"
                 available-filters="vm.availableFilters"
@@ -9,43 +9,39 @@
 
             </dp-data-selection-filters>
         </div>
-        <div ng-class="{'u-col-sm--12': vm.isListView(), 'u-col-sm--9': vm.isTableView()}">
+        <div ng-class="{
+            'u-col-sm--12': !vm.showFilters,
+            'u-col-sm--9': vm.showFilters}">
+
             <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
 
             <div ng-if="!vm.isLoading">
                 <dp-data-selection-header
-                    ng-if="vm.isTableView()"
                     state="vm.state"
                     number-of-records="vm.numberOfRecords"
                     header-title="vm.title">
                 </dp-data-selection-header>
 
-                <dp-data-selection-list-header
-                    ng-if="vm.isListView()"
-                    state="vm.state"
-                    number-of-records="vm.numberOfRecords"
-                    header-title="vm.title">
-                </dp-data-selection-list-header>
-
-                <div ng-if="vm.numberOfRecords > 0">
-                    <dp-data-selection-table
-                        ng-if="vm.isTableView()"
-                        content="vm.tableData">
-                    </dp-data-selection-table>
-
-                    <dp-data-selection-list
-                        ng-if="vm.isListView()"
-                        data="vm.listData">
-                    </dp-data-selection-list>
+                <div ng-if="vm.numberOfRecords">
+                    <dp-data-selection-table ng-if="vm.view === 'TABLE'" content="vm.data"></dp-data-selection-table>
+                    <dp-data-selection-list ng-if="vm.view === 'LIST'" content="vm.data"></dp-data-selection-list>
                 </div>
 
-                <dp-panel is-panel-visible="vm.noDataToDisplay"
-                          type="warning"
-                          can-close="false"
-                          class-name="c-data-selection__no-data-panel">
+                <dp-panel
+                    is-panel-visible="!vm.isPageAvailable"
+                    type="warning"
+                    can-close="false"
+                    class-name="c-data-selection__no-data-panel">
+
                     <h3 class="c-data-selection__no-data-header">Deze pagina kan niet worden getoond</h3>
-                    <p>Alleen de eerste 100 pagina's kunnen worden weergegeven (om technische redenen). Bij downloaden worden wel alle resultaten opgenomen.</p>
-                    <div>Tip: Gebruik de download-knop om alle resultaten te bekijken. Of voeg meer filtercriteria toe voor specifiekere resultaten.</div>
+                    <p>
+                        Alleen de eerste 100 pagina's kunnen worden weergegeven (om technische redenen). Bij downloaden
+                        worden wel alle resultaten opgenomen.
+                    </p>
+                    <p class="u-margin__bottom--0">
+                        Tip: Gebruik de download-knop om alle resultaten te bekijken. Of voeg meer filtercriteria toe
+                        voor specifiekere resultaten.
+                    </p>
                 </dp-panel>
 
                 <dp-data-selection-pagination

@@ -14,24 +14,21 @@
         };
 
         function getTitle (dataSelectionState) {
-            var output,
+            let output,
+                view,
                 variant,
                 criteria;
 
+            view = dataSelectionState.view === 'TABLE' ? 'Tabel' : 'Lijst';
             variant = dataSelectionConfig[dataSelectionState.dataset].TITLE;
-
             criteria = dataSelectionConfig[dataSelectionState.dataset].FILTERS
                 // Retrieve all the active filters
-                .filter(function (availableFilter) {
-                    return angular.isDefined(dataSelectionState.filters[availableFilter.slug]);
-                })
+                .filter(availableFilter => angular.isDefined(dataSelectionState.filters[availableFilter.slug]))
                 // Show the value of each active filter
-                .map(function (activeFilter) {
-                    return dataSelectionState.filters[activeFilter.slug];
-                })
+                .map(activeFilter => dataSelectionState.filters[activeFilter.slug])
                 .join(', ');
 
-            output = 'Tabel ' + variant;
+            output = view + ' ' + variant;
 
             if (criteria.length) {
                 output += ' met ' + criteria;

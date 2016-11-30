@@ -2,13 +2,9 @@
     <thead class="c-data-selection-table__header">
         <tr class="c-data-selection-table__header-row">
             <th class="c-data-selection-table__field c-data-selection-table__header-field"
-                ng-class="vm.classForField(vm.content.format[$index])"
                 ng-repeat="field in vm.content.head track by $index">
-                <dp-data-selection-formatted-value
-                    value="field"
-                    format="vm.content.format[$index]">
 
-                </dp-data-selection-formatted-value>
+                {{field}}
             </th>
         </tr>
     </thead>
@@ -16,13 +12,13 @@
         <tr class="c-data-selection-table__content-row"
             ng-repeat="row in vm.content.body track by $index" ng-click="vm.followLink(row.detailEndpoint)">
             <td class="c-data-selection-table__field c-data-selection-table__content-field"
-                ng-class="vm.classForField(vm.content.format[$index])"
-                ng-repeat="field in row.fields track by $index">
-                <dp-data-selection-formatted-value
-                    value="field"
-                    format="vm.content.format[$index]">
+                ng-repeat="variables in row.content track by $index">
 
-                </dp-data-selection-formatted-value>
+                <dp-data-selection-formatter
+                    variables="variables"
+                    formatter="{{vm.content.formatters[$index]}}">
+
+                </dp-data-selection-formatter>
             </td>
         </tr>
     </tbody>

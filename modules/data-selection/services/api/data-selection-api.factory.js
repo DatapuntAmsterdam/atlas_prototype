@@ -10,8 +10,8 @@
             query: query
         };
 
-        function query (dataset, activeFilters, page) {
-            var searchParams,
+        function query (dataset, view, activeFilters, page) {
+            let searchParams,
                 searchPage = page;
 
             // Making sure to not request pages higher then max allowed.
@@ -33,12 +33,12 @@
                     // and saving only the filters
                     data.object_list = [];
                 }
+
                 return {
                     number_of_pages: data.page_count,
                     number_of_records: data.object_count,
                     filters: formatFilters(dataset, data.aggs_list),
-                    tableData: formatTableData(dataset, data.object_list),
-                    listData: formatListData(dataset, data.object_list)
+                    data: formatData(dataset, view, data.object_list)
                 };
             });
         }
@@ -54,7 +54,6 @@
                 filter.options = rawData[filter.slug].buckets.map(function (option) {
                     return {
                         label: option.key,
-                        format: option.format,
                         count: option.doc_count
                     };
                 });
@@ -66,40 +65,27 @@
             });
         }
 
-        function formatTableData (dataset, rawData) {
+        function formatData (dataset, view, rawData) {
             return {
-                head: dataSelectionConfig[dataset].FIELDS
-                    .map(field => field.label),
-
-                format: dataSelectionConfig[dataset].FIELDS
-                    .map(field => field.format),
+                head: dataSelectionConfig[dataset].CONTENT[view]
+                    .map(item => item.label),
 
                 body: rawData.map(rawDataRow => {
                     return {
                         detailEndpoint: getDetailEndpoint(dataset, rawDataRow),
-                        fields: dataSelectionConfig[dataset].FIELDS
-                            .map(field => rawDataRow[field.slug])
+                        content: dataSelectionConfig[dataset].CONTENT[view].map(item => {
+                            return item.variables.map(variable => {
+                                return {
+                                    key: variable,
+                                    value: rawDataRow[variable]
+                                };
+                            });
+                        })
                     };
-                })
+                }),
+
+                formatters: dataSelectionConfig[dataset].CONTENT[view].map(item => item.formatter)
             };
-        }
-
-        function formatListData (dataset, rawData) {
-            return rawData.map(row => {
-                const nummer = ' ' + row.huisnummer + row.huisletter,
-                    fullNummer = row.huisnummer_toevoeging ? nummer + '-' + row.huisnummer_toevoeging : nummer;
-
-                const VERBLIJFSOBJECT_GEVORMD = 18;
-
-                return {
-                    adres: row._openbare_ruimte_naam + fullNummer,
-                    ligplaats: Boolean(row.ligplaats_id),
-                    standplaats: Boolean(row.standplaats_id),
-                    nevenadres: String(row.hoofdadres).toLowerCase() === 'false',
-                    gevormd: Number(row.status_id) === VERBLIJFSOBJECT_GEVORMD,
-                    detailEndpoint: getDetailEndpoint(dataset, row)
-                };
-            });
         }
 
         function getDetailEndpoint (dataset, rawDataRow) {

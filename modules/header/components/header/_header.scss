@@ -57,7 +57,8 @@
 
 .site-header__menu__item {
   @extend %menu-item;
-  display: inline-block;
+  display: block;
+  float: left;
 
   &:hover {
     background-color: $secondary-gray60;

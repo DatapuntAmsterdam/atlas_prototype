@@ -2,7 +2,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: -$base-whitespace * 2;
   left: 0;
   z-index: 1;
 }
@@ -11,24 +11,24 @@
   position: absolute;
   top: 0;
   right: 0;
-  bottom: $button-size;
+  bottom:  $base-whitespace * 2;
   left: 0;
-  border-width: 1px 1px 0;
-  border-style: solid;
-  border-color: $secondary-gray40;
+  border: solid $secondary-gray40 1px;
 }
 
 .c-straatbeeld__status-bar {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: $base-whitespace * 2;
   left: 0;
   height: $button-size;
-  padding-right: $base-whitespace;
-  background-color: $secondary-gray60;
+  padding-right: $base-whitespace / 2;
+  background-color: $primary-dark-alpha33;
   color: $primary-light;
+  font-size: $base-font-size - 2;
   line-height: $button-size;
   z-index: 2;
+
 }
 
 .c-straatbeeld__close {
@@ -39,3 +39,21 @@
   right: 0;
   z-index: 2;
 }
+
+.c-straatbeeld__streetview-history-icon {
+  @include icon-button-text-left("klok", "", "red");
+  margin-left: $base-whitespace / 2;
+  font-family: $base-font-family;
+  font-size: $base-font-size - 2;
+  z-index: 2;
+
+  &:hover {
+    color: $primary-light;
+    text-decoration: underline;
+  }
+
+  &::after {
+    position: absolute;
+  }
+}
+

@@ -5,26 +5,17 @@
         .module('dpDataSelection')
         .component('dpDataSelectionTable', {
             bindings: {
-                content: '='
+                content: '<'
             },
             templateUrl: 'modules/data-selection/components/table/table.html',
             controller: DpDataSelectionTableController,
             controllerAs: 'vm'
         });
 
-    DpDataSelectionTableController.$inject = ['store', '$filter', 'ACTIONS'];
+    DpDataSelectionTableController.$inject = ['store', 'ACTIONS'];
 
-    function DpDataSelectionTableController (store, $filter, ACTIONS) {
-        var vm = this;
-
-        vm.classForField = function (format) {
-            switch (format && format.align) {
-                case 'right':
-                    return 'u-align--right';
-                default:
-                    return '';
-            }
-        };
+    function DpDataSelectionTableController (store, ACTIONS) {
+        let vm = this;
 
         vm.followLink = function (endpoint) {
             store.dispatch({

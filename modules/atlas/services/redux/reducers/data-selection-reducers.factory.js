@@ -7,12 +7,10 @@
 
     dataSelectionReducersFactory.$inject = [
         'ACTIONS',
-        'DEFAULT_STATE',
-        'dataSelectionFilterNames',
-        'DATA_SELECTION'
+        'DEFAULT_STATE'
     ];
 
-    function dataSelectionReducersFactory (ACTIONS, DEFAULT_STATE, filterNames, DATA_SELECTION) {
+    function dataSelectionReducersFactory (ACTIONS, DEFAULT_STATE) {
         var reducers = {};
 
         reducers[ACTIONS.SHOW_DATA_SELECTION.id] = showDataSelectionReducer;
@@ -45,7 +43,7 @@
 
             if (!newState.dataSelection.view) {
                 // Default view is table view
-                newState.dataSelection.view = DATA_SELECTION.VIEW_TABLE;
+                newState.dataSelection.view = 'TABLE';
             }
 
             return newState;
@@ -67,13 +65,14 @@
 
         /**
          * @param {Object} oldState
+         * @param {String} payload
          *
          * @returns {Object} newState
          */
         function setDataSelectionViewReducer (oldState, payload) {
             let newState = angular.copy(oldState);
 
-            [DATA_SELECTION.VIEW_LIST, DATA_SELECTION.VIEW_TABLE].forEach(legalValue => {
+            ['LIST', 'TABLE'].forEach(legalValue => {
                 if (payload === legalValue) {
                     newState.dataSelection.view = payload;
                 }

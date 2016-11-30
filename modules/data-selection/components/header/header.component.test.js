@@ -21,23 +21,11 @@ describe('The dp-data-selection-header component', function () {
                 }
             },
             function ($provide) {
-                $provide.factory('dpLoadingIdicatorDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpDataSelectionFiltersDirective', function () {
+                $provide.factory('dpDataSelectionToggleViewButtonDirective', function () {
                     return {};
                 });
 
                 $provide.factory('dpDataSelectionDownloadButtonDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpDataSelectionTableDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpDataSelectionPaginationDirective', function () {
                     return {};
                 });
             }

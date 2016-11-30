@@ -1,12 +1,7 @@
 @import "../shared/styles/config";
 
-@mixin data-selection-button($icon) {
-  @include icon-button-text-left($icon);
-}
-
 @import "components/pagination/pagination";
 @import "components/data-selection/data-selection";
 @import "components/filters/filters";
 @import "components/header/header";
-@import "components/list-header/list-header";
 @import "components/table/table";

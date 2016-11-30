@@ -4,10 +4,10 @@
     angular
         .module('dpDataSelection')
         .component('dpDataSelectionList', {
-            templateUrl: 'modules/data-selection/components/list/list.html',
             bindings: {
-                data: '='
+                content: '<'
             },
+            templateUrl: 'modules/data-selection/components/list/list.html',
             controllerAs: 'vm'
         });
 })();

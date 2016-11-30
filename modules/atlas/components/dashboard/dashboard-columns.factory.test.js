@@ -2,16 +2,14 @@ describe('The dashboardColumns factory', function () {
     var dashboardColumns,
         mockedState,
         visibility,
-        columnSizes,
-        DATA_SELECTION;
+        columnSizes;
 
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_dashboardColumns_, _DEFAULT_STATE_, _DATA_SELECTION_) {
+        angular.mock.inject(function (_dashboardColumns_, _DEFAULT_STATE_) {
             dashboardColumns = _dashboardColumns_;
             mockedState = angular.copy(_DEFAULT_STATE_);
-            DATA_SELECTION = _DATA_SELECTION_;
         });
     });
 
@@ -500,7 +498,7 @@ describe('The dashboardColumns factory', function () {
     describe('when visiting dataSelection', function () {
         beforeEach(function () {
             mockedState.dataSelection = {
-                view: DATA_SELECTION.VIEW_TABLE,
+                view: 'TABLE',
                 dataset: 'bag',
                 filters: {
                     buurt: 'Trompbuurt'
@@ -540,7 +538,7 @@ describe('The dashboardColumns factory', function () {
 
         describe('the list view version', function () {
             beforeEach(function () {
-                mockedState.dataSelection.view = DATA_SELECTION.VIEW_LIST;
+                mockedState.dataSelection.view = 'LIST';
 
                 visibility = dashboardColumns.determineVisibility(mockedState);
 
