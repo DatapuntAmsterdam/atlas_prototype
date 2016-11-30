@@ -5,12 +5,12 @@
         .module('dpShared')
         .factory('api', apiFactory);
 
-    apiFactory.$inject = ['$http', 'user', 'environment'];
+    apiFactory.$inject = ['$http', 'httpStatus', 'user', 'environment'];
 
-    function apiFactory ($http, user, environment) {
+    function apiFactory ($http, httpStatus, user, environment) {
         return {
-            getByUrl: getByUrl,
-            getByUri: getByUri
+            getByUrl,
+            getByUri
         };
 
         /**
@@ -43,6 +43,7 @@
 
             if (angular.isObject(cancel) && cancel.promise) {
                 options.timeout = cancel.promise;
+                options.timeout.finally(() => httpStatus.registerCancel(options));
             }
 
             return $http(options).then(response => response.data);
