@@ -62,10 +62,10 @@ describe('The dpAbbreviator', function () {
         let abbreviated,
             deabbreviated;
 
-        abbreviated = abbreviate({id: 'This is a .?*[| long string'}, map);
-        expect(abbreviated).toEqual({id: 'This is a .?*[| _LS_'});
+        abbreviated = abbreviate({id: 'This is a .?*[| long string .?*[|'}, map);
+        expect(abbreviated).toEqual({id: 'This is a .?*[| _LS_ .?*[|'});
         deabbreviated = deabbreviate(abbreviated, map);
-        expect(deabbreviated).toEqual({id: 'This is a .?*[| long string'});
+        expect(deabbreviated).toEqual({id: 'This is a .?*[| long string .?*[|'});
     });
 
     it('does not support escaping of variables', function () {

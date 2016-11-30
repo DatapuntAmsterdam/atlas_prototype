@@ -150,7 +150,7 @@
                     sign = '-';
                     expr = -expr;
                 }
-                return isNaN(expr) ? expr : sign + this._encodeNumber(expr);
+                return sign + this._encodeNumber(expr);
             } else if (angular.isArray(expr)) {
                 return expr.map(e => this.encode(e, nDecimals));
             }
