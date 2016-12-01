@@ -1,13 +1,7 @@
-@font-face {
-  font-family: "Montserrat";
-  src: url("assets/fonts/Montserrat-Regular.ttf") format("truetype");
-}
-
 $base-font-family: Verdana, sans-serif;
-$header-font-family: Montserrat, Arial, Verdana, sans-serif;
+$header-font-family: "Avenir Heavy", Arial, Verdana, sans-serif;
 
 $base-font-size: 14px;
-$base-line-height: 1.375;
 
 $breakpoints: (
   m: 1024px,
@@ -15,44 +9,37 @@ $breakpoints: (
   xl: 1680px
 );
 
-// per breakpoint (font-family, font-size, line-height)
-// te gebruiken met de font-size mixin
-// p {
-//  @include font-size($body-font);
-// }
-// typografie gebasseerd op http://typecast.com/blog/a-more-modern-scale-for-web-typography
-
 $body-font: (
-  null: ($base-font-family, $base-font-size, $base-line-height),
-  m: ($base-font-family, $base-font-size, $base-line-height),
-  l: ($base-font-family, $base-font-size, $base-line-height),
-  xl: ($base-font-family, $base-font-size, $base-line-height)
+  null: ($base-font-family, $base-font-size),
+  m: ($base-font-family, $base-font-size),
+  l: ($base-font-family, $base-font-size),
+  xl: ($base-font-family, $base-font-size)
 );
 
 $xl-header-font: (
-  null: ($header-font-family, $base-font-size * 1.625, 1.25),
-  m: ($header-font-family, $base-font-size * 2, 1.25),
-  l: ($header-font-family, $base-font-size * 2.25, 1.25),
-  xl: ($header-font-family, $base-font-size * 2.25, 1.25)
+  null: ($header-font-family, $base-font-size * 1.625),
+  m: ($header-font-family, $base-font-size * 2),
+  l: ($header-font-family, $base-font-size * 2.25),
+  xl: ($header-font-family, $base-font-size * 2.25)
 );
 
 $l-header-font: (
-  null: ($header-font-family, $base-font-size * 1.375, 1.25),
-  m: ($header-font-family, $base-font-size * 1.6, 1.25),
-  l: ($header-font-family, $base-font-size * 1.85, 1.25),
-  xl: ($header-font-family, $base-font-size * 1.85, 1.25)
+  null: ($header-font-family, $base-font-size * 1.375),
+  m: ($header-font-family, $base-font-size * 1.6),
+  l: ($header-font-family, $base-font-size * 1.85),
+  xl: ($header-font-family, $base-font-size * 1.85)
 );
 
 $m-header-font: (
-  null: ($header-font-family, $base-font-size * 1.25, 1.11111111),
-  m: ($header-font-family, $base-font-size * 1.25, 1.22222222),
-  l: ($header-font-family, $base-font-size * 1.25, 1.22222222),
-  xl: ($header-font-family, $base-font-size * 1.25, 1.22222222)
+  null: ($header-font-family, $base-font-size * 1.25),
+  m: ($header-font-family, $base-font-size * 1.25),
+  l: ($header-font-family, $base-font-size * 1.25),
+  xl: ($header-font-family, $base-font-size * 1.25)
 );
 
 $s-header-font: (
-  null: ($header-font-family, $base-font-size * 1, 1.11111111),
-  m: ($header-font-family, $base-font-size * 1, 1.22222222),
-  l: ($header-font-family, $base-font-size * 1, 1.22222222),
-  xl: ($header-font-family, $base-font-size * 1, 1.22222222)
+  null: ($header-font-family, $base-font-size * 1),
+  m: ($header-font-family, $base-font-size * 1),
+  l: ($header-font-family, $base-font-size * 1),
+  xl: ($header-font-family, $base-font-size * 1)
 );

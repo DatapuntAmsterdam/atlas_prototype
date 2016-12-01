@@ -23,9 +23,6 @@
     font-family: nth($fs-font-size, 1);
     @if (length($fs-font-size) > 1) {
       font-size: nth($fs-font-size, 2);
-      @if (length($fs-font-size) > 2) {
-        line-height: nth($fs-font-size, 3);
-      }
     }
   } @else {
     font-size: $fs-font-size;
