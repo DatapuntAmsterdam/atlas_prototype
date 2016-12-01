@@ -41,7 +41,8 @@
                                 return indexA - indexB;
                             })
                             .map(function (feature) {
-                                var subtype;
+                                var subtype,
+                                    subtypeLabel;
 
                                 if (feature.opr_type) {
                                     // Openbare ruimtes
@@ -53,9 +54,15 @@
                                     subtype = null;
                                 }
 
+                                subtypeLabel = subtype;
+                                if (subtype && rawCategory.subtypes) {
+                                    subtypeLabel = rawCategory.subtypes[subtype] || subtype;
+                                }
+
                                 return {
                                     label: feature.display,
                                     subtype: subtype,
+                                    subtypeLabel: subtypeLabel,
                                     endpoint: feature.uri
                                 };
                             }),

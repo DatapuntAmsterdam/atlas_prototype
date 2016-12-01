@@ -45,9 +45,10 @@
                     // Don't change the input, create a new variable
                     var output = {};
 
+                    output.slug = category.slug;
                     output.count = nextPageData.count;
                     output.results = category.results.concat(
-                        searchFormatter.formatLinks(nextPageData.results)
+                        searchFormatter.formatLinks(category.slug, nextPageData.results)
                     );
 
                     if (output.count > output.results.length) {

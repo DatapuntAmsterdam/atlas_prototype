@@ -26,21 +26,15 @@
         }
 
         function formatCategory (slug, endpointSearchResults) {
-            var endpointConfig,
-                links;
-
-            endpointConfig = SEARCH_CONFIG.QUERY_ENDPOINTS.filter(function (endpoint) {
-                return endpoint.slug === slug;
-            })[0];
-
-            links = angular.isObject(endpointSearchResults) && endpointSearchResults.results || [];
+            const endpointConfig = SEARCH_CONFIG.QUERY_ENDPOINTS.filter(endpoint => endpoint.slug === slug)[0],
+                links = angular.isObject(endpointSearchResults) && endpointSearchResults.results || [];
 
             return {
                 label_singular: endpointConfig.label_singular,
                 label_plural: endpointConfig.label_plural,
                 slug: endpointConfig.slug,
                 count: angular.isObject(endpointSearchResults) && endpointSearchResults.count || 0,
-                results: formatLinks(links),
+                results: formatLinks(slug, links),
                 useIndenting: false,
                 next: angular.isObject(endpointSearchResults) &&
                 endpointSearchResults._links &&
@@ -48,14 +42,24 @@
             };
         }
 
-        function formatLinks (links) {
+        function formatLinks (slug, links) {
+            const endpointConfig = SEARCH_CONFIG.QUERY_ENDPOINTS.filter(endpoint => endpoint.slug === slug)[0];
+
             return links.map(function (item) {
+                let subtype = item.subtype || null,
+                    subtypeLabel = subtype;
+
+                if (item.subtype && endpointConfig.subtypes) {
+                    subtypeLabel = endpointConfig.subtypes[item.subtype] || item.subtype;
+                }
+
                 return {
                     label: formatLabel(item),
                     hoofdadres: item.hoofdadres,
                     vbo_status: angular.isArray(item.vbo_status) ? item.vbo_status[0] : item.vbo_status,
                     endpoint: item._links.self.href,
-                    subtype: item.subtype || null
+                    subtype,
+                    subtypeLabel
                 };
             });
         }

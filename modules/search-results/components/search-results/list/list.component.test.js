@@ -35,7 +35,8 @@ describe('The dp-search-results-list component', function () {
                     label: 'Link #1',
                     endpoint: 'http://www.example.com/bag/or/1/',
                     hoofdadres: false,
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, {
                     label: 'Link #2',
                     endpoint: 'http://www.example.com/bag/or/2/',
@@ -44,7 +45,8 @@ describe('The dp-search-results-list component', function () {
                         code: '18',
                         omschrijving: 'verblijfsobject gevormd'
                     },
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, {
                     label: 'Link #3',
                     endpoint: 'http://www.example.com/bag/or/3/',
@@ -53,39 +55,48 @@ describe('The dp-search-results-list component', function () {
                         code: '18',
                         omschrijving: 'verblijfsobject gevormd'
                     },
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, {
                     label: '',
                     endpoint: 'http://www.example.com/bag/or/4/',
-                    subtype: 'water'
+                    subtype: 'water',
+                    subtypeLabel: 'water'
                 }, {
                     label: 'Link #5',
                     endpoint: 'http://www.example.com/bag/or/5/',
-                    subtype: 'kunstwerk'
+                    subtype: 'gebiedsgerichtwerken',
+                    subtypeLabel: 'gebiedsgericht werken'
                 }, {
                     label: 'Link #6',
                     endpoint: 'http://www.example.com/bag/or/6/',
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, {
                     label: 'Link #7',
                     endpoint: 'http://www.example.com/bag/or/7/',
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, {
                     label: 'Link #8',
                     endpoint: 'http://www.example.com/bag/or/8/',
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, {
                     label: 'Link #9',
                     endpoint: 'http://www.example.com/bag/or/9/',
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, {
                     label: 'Link #10 - Vereniging van Eigenaren',
                     endpoint: 'http://www.example.com/bag/or/10/',
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, {
                     label: 'Link #11',
                     endpoint: 'http://www.example.com/bag/or/11/',
-                    subtype: 'weg'
+                    subtype: 'weg',
+                    subtypeLabel: 'weg'
                 }, 'not an object link'
             ]
         };
@@ -175,23 +186,25 @@ describe('The dp-search-results-list component', function () {
         expect(component.find('li').eq(3).text()).toContain('(water)');
 
         // Kunstwerk
-        expect(component.find('li').eq(4).text()).toContain('(kunstwerk)');
+        expect(component.find('li').eq(4).text()).toContain('(gebiedsgericht werken)');
     });
 
     it('shows the type of gebied', function () {
         var component,
             mockedGebiedenCategory = {
-                slug: 'gebieden',
+                slug: 'gebied',
                 count: 2,
                 results: [
                     {
                         label: 'Link #1',
                         endpoint: 'http://www.example.com/gebied/1/',
-                        subtype: 'buurt'
+                        subtype: 'buurt',
+                        subtypeLabel: 'buurt'
                     }, {
                         label: 'Link #2',
                         endpoint: 'http://www.example.com/gebied/2/',
-                        subtype: 'bouwblok'
+                        subtype: 'bouwblok',
+                        subtypeLabel: 'bouwblok'
                     }
                 ]
             };
@@ -211,15 +224,18 @@ describe('The dp-search-results-list component', function () {
                     {
                         label: 'Link #1',
                         endpoint: 'http://www.example.com/gebied/1/',
-                        subtype: 'verblijfsobject'
+                        subtype: 'verblijfsobject',
+                        subtypeLabel: 'verblijfsobject'
                     }, {
                         label: 'Link #2',
                         endpoint: 'http://www.example.com/gebied/2/',
-                        subtype: 'standplaats'
+                        subtype: 'standplaats',
+                        subtypeLabel: 'standplaats'
                     }, {
                         label: 'Link #3',
                         endpoint: 'http://www.example.com/gebied/3/',
-                        subtype: 'ligplaats'
+                        subtype: 'ligplaats',
+                        subtypeLabel: 'ligplaats'
                     }
                 ]
             };
@@ -240,7 +256,8 @@ describe('The dp-search-results-list component', function () {
                     {
                         label: 'Link #1',
                         endpoint: 'http://www.example.com/gebied/1/',
-                        subtype: null
+                        subtype: null,
+                        subtypeLabel: null
                     }
                 ]
             };

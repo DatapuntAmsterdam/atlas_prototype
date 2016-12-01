@@ -54,7 +54,7 @@ describe('The searchFormatter factory', function () {
                                 href: 'http://www.example.com/path/to/103'
                             }
                         },
-                        subtype: 'water'
+                        subtype: 'gebiedsgerichtwerken'
                     }, {
                         _display: 'FAKE_LINK_4',
                         _links: {
@@ -68,7 +68,8 @@ describe('The searchFormatter factory', function () {
                             self: {
                                 href: 'http://www.example.com/path/to/105'
                             }
-                        }
+                        },
+                        subtype: 'buurt'
                     }
                 ],
                 _links: {
@@ -144,7 +145,10 @@ describe('The searchFormatter factory', function () {
                             slug: 'meetbouten',
                             label_singular: 'Meetbout',
                             label_plural: 'Meetbouten',
-                            uri: 'path/to/meetbouten/'
+                            uri: 'path/to/meetbouten/',
+                            subtypes: {
+                                gebiedsgerichtwerken: 'gebiedsgericht werken'
+                            }
                         }, {
                             slug: 'bouwblokken',
                             label_singular: 'Bouwblok',
@@ -186,13 +190,15 @@ describe('The searchFormatter factory', function () {
                             omschrijving: 'verblijfsobject gevormd'
                         },
                         endpoint: 'http://www.example.com/path/to/1',
-                        subtype: null
+                        subtype: null,
+                        subtypeLabel: null
                     }, {
                         label: 'FAKE_LINK_B',
                         hoofdadres: false,
                         vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/2',
-                        subtype: null
+                        subtype: null,
+                        subtypeLabel: null
                     }
                 ],
                 useIndenting: false,
@@ -208,31 +214,36 @@ describe('The searchFormatter factory', function () {
                         hoofdadres: undefined,
                         vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/101',
-                        subtype: null
+                        subtype: null,
+                        subtypeLabel: null
                     }, {
                         label: 'FAKE_LINK_2',
                         hoofdadres: undefined,
                         vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/102',
-                        subtype: null
+                        subtype: null,
+                        subtypeLabel: null
                     }, {
                         label: 'FAKE_LINK_3',
                         hoofdadres: undefined,
                         vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/103',
-                        subtype: 'water'
+                        subtype: 'gebiedsgerichtwerken',
+                        subtypeLabel: 'gebiedsgericht werken'
                     }, {
                         label: 'FAKE_LINK_4',
                         hoofdadres: undefined,
                         vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/104',
-                        subtype: null
+                        subtype: null,
+                        subtypeLabel: null
                     }, {
                         label: 'FAKE_LINK_5',
                         hoofdadres: undefined,
                         vbo_status: undefined,
                         endpoint: 'http://www.example.com/path/to/105',
-                        subtype: null
+                        subtype: 'buurt',
+                        subtypeLabel: 'buurt'
                     }
                 ],
                 useIndenting: false,
@@ -260,13 +271,15 @@ describe('The searchFormatter factory', function () {
                         omschrijving: 'verblijfsobject gevormd'
                     },
                     endpoint: 'http://www.example.com/path/to/1',
-                    subtype: null
+                    subtype: null,
+                    subtypeLabel: null
                 }, {
                     label: 'FAKE_LINK_B',
                     hoofdadres: false,
                     vbo_status: undefined,
                     endpoint: 'http://www.example.com/path/to/2',
-                    subtype: null
+                    subtype: null,
+                    subtypeLabel: null
                 }
             ],
             useIndenting: false,
@@ -275,7 +288,7 @@ describe('The searchFormatter factory', function () {
     });
 
     it('has a formatLinks function', function () {
-        var output = searchFormatter.formatLinks(mockedInputLinks);
+        var output = searchFormatter.formatLinks('adres', mockedInputLinks);
 
         expect(output).toEqual([
             {
@@ -283,31 +296,36 @@ describe('The searchFormatter factory', function () {
                 hoofdadres: undefined,
                 vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/123',
-                subtype: null
+                subtype: null,
+                subtypeLabel: null
             }, {
                 label: 'Linnaeusstraat',
                 hoofdadres: undefined,
                 vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/124',
-                subtype: 'weg'
+                subtype: 'weg',
+                subtypeLabel: 'weg'
             }, {
                 label: 'Waterslootplas',
                 hoofdadres: undefined,
                 vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/125',
-                subtype: 'water'
+                subtype: 'water',
+                subtypeLabel: 'water'
             }, {
                 label: 'Centrum',
                 hoofdadres: undefined,
                 vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/125',
-                subtype: null
+                subtype: null,
+                subtypeLabel: null
             }, {
                 label: 'YG32',
                 hoofdadres: undefined,
                 vbo_status: undefined,
                 endpoint: 'http://www.example.com/path/to/125',
-                subtype: null
+                subtype: null,
+                subtypeLabel: null
             }
         ]);
     });

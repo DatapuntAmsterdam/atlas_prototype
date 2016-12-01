@@ -1,6 +1,7 @@
 describe('The dp-link component', function () {
     let $compile,
         $rootScope,
+        $location,
         store,
         updateFn,
         reducer = {
@@ -63,9 +64,10 @@ describe('The dp-link component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_) {
+        angular.mock.inject(function (_$location_, _$compile_, _$rootScope_, _store_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
+            $location = _$location_;
             store = _store_;
         });
 
@@ -129,6 +131,18 @@ describe('The dp-link component', function () {
             },
             payload: 'payload'
         });
+    });
+
+    it('is always a button when the href url is equal to the current url', function () {
+        const url = '#123';
+
+        stateToUrl.create.and.returnValue(url);
+        spyOn($location, 'absUrl').and.returnValue(url);
+
+        let component = getComponent('SHOW_PAGE', 'welkom');
+
+        expect(component.find('a').length).toBe(0);
+        expect(component.find('button').length).toBe(1);
     });
 
     describe('update', () => {

@@ -1,8 +1,9 @@
 describe('The dp-search-results component', function () {
-    var $compile,
+    let $compile,
         $rootScope,
         $q,
         store,
+        scope,
         ACTIONS,
         mockedSearchResults,
         mockedSearchResultsNextPage,
@@ -16,18 +17,18 @@ describe('The dp-search-results component', function () {
             {
                 search: {
                     search: function (query) {
-                        var q = $q.defer();
+                        let q = $q.defer();
 
                         if (query === 'QUERY_WITHOUT_RESULTS') {
                             q.resolve(mockedNoResults);
                         } else {
                             q.resolve(mockedSearchResults);
                         }
-
+                        scope.isLoading = false;
                         return q.promise;
                     },
                     loadMore: function () {
-                        var q = $q.defer();
+                        let q = $q.defer();
 
                         q.resolve(mockedSearchResultsNextPage);
 
@@ -36,14 +37,14 @@ describe('The dp-search-results component', function () {
                 },
                 geosearch: {
                     search: function (location) {
-                        var q = $q.defer();
+                        let q = $q.defer();
 
                         if (location[0] === 52.999 && location[1] === 4.999) {
                             q.resolve(mockedNoResults);
                         } else {
                             q.resolve(mockedGeosearchResults);
                         }
-
+                        scope.isLoading = false;
                         return q.promise;
                     }
                 },
@@ -309,10 +310,9 @@ describe('The dp-search-results component', function () {
         spyOn(store, 'dispatch');
     });
 
-    function getComponent (numberOfResults, query, location, category, isLoading) {
-        var component,
-            element,
-            scope;
+    function getComponent (numberOfResults, query, location, category) {
+        let component,
+            element;
 
         element = document.createElement('dp-search-results');
         scope = $rootScope.$new();
@@ -335,10 +335,8 @@ describe('The dp-search-results component', function () {
             scope.numberOfResults = numberOfResults;
         }
 
-        if (angular.isDefined(isLoading)) {
-            element.setAttribute('is-loading', 'isLoading');
-            scope.isLoading = isLoading;
-        }
+        element.setAttribute('is-loading', 'isLoading');
+        scope.isLoading = true;
 
         component = $compile(element)(scope);
         scope.$apply();
@@ -348,7 +346,7 @@ describe('The dp-search-results component', function () {
 
     describe('search by query', function () {
         it('shows search results', function () {
-            var component = getComponent(12, 'Weesperstraat');
+            let component = getComponent(12, 'Weesperstraat');
 
             // It shows 10 results from the first category and 1 results from the second category
             expect(component.find('ul dp-link').length).toBe(11);
@@ -378,6 +376,12 @@ describe('The dp-search-results component', function () {
             });
         });
 
+        it('does nothing when no query and no location are specified', function () {
+            let component = getComponent(12);
+
+            expect(component.find('ul dp-link').length).toBe(0);
+        });
+
         it('calls dispatch with the number of search results', function () {
             getComponent(12, 'Weesperstraat');
 
@@ -388,14 +392,14 @@ describe('The dp-search-results component', function () {
         });
 
         it('doesn\'t show the dp-straatbeeld-thumbnail component', function () {
-            var component = getComponent(12, 'Weesperstraat');
+            let component = getComponent(12, 'Weesperstraat');
 
             expect(component.find('dp-straatbeeld-thumbnail').length).toBe(0);
         });
 
         describe('has category support', function () {
             it('has both singular and plural variations for the headings of categories', function () {
-                var component;
+                let component;
 
                 // A category with 11 search results uses the plural form and it shows the number of results in brackets
                 component = getComponent(12, 'Weesperstraat');
@@ -409,7 +413,7 @@ describe('The dp-search-results component', function () {
             });
 
             it('categories with more than 10 results show a link to the category', function () {
-                var component;
+                let component;
 
                 // A category with 11 search results uses the plural form and it shows the number of results in brackets
                 component = getComponent(12, 'Weesperstraat');
@@ -427,7 +431,7 @@ describe('The dp-search-results component', function () {
             });
 
             describe('the category page', function () {
-                var component;
+                let component;
 
                 beforeEach(function () {
                     mockedSearchResults.length = 1;
@@ -491,7 +495,7 @@ describe('The dp-search-results component', function () {
     });
 
     describe('search by location', function () {
-        var component;
+        let component;
 
         beforeEach(function () {
             component = getComponent(22, null, [51.123, 4.789]);
@@ -588,7 +592,7 @@ describe('The dp-search-results component', function () {
         });
 
         it('has more link support', function () {
-            var numberOfDpLinks;
+            let numberOfDpLinks;
 
             // When there are more than 10 adressen
             expect(component.find('dp-link').eq(11).find('button').text().trim())

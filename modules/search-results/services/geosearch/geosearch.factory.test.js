@@ -229,7 +229,7 @@ describe('The geosearch factory', function () {
         };
 
         mockedFormattedStandplaatsSearchResult = {
-            slug: 'plaats',
+            slug: 'standplaats',
             count: 1,
             results: [
                 {
@@ -586,7 +586,7 @@ describe('The geosearch factory', function () {
 
             expect(searchResults.length).toBe(3);
             expect(searchResults[0].slug).toBe(null);
-            expect(searchResults[1].slug).toBe('plaats');
+            expect(searchResults[1].slug).toBe('standplaats');
             expect(searchResults[2].slug).toBe(null);
             expect(searchResults[0].label_singular).toBe(undefined);
             expect(searchResults[1].label_singular).toBe(undefined);

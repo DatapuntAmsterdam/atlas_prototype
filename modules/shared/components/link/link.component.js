@@ -5,9 +5,9 @@
         .module('dpShared')
         .directive('dpLink', DpLinkDirective);
 
-    DpLinkDirective.$inject = ['store', 'ACTIONS', 'applicationState', 'debounce'];
+    DpLinkDirective.$inject = ['$location', 'store', 'ACTIONS', 'applicationState', 'debounce'];
 
-    function DpLinkDirective (store, ACTIONS, applicationState, debounce) {
+    function DpLinkDirective ($location, store, ACTIONS, applicationState, debounce) {
         const reducer = applicationState.getReducer(),
             stateToUrl = applicationState.getStateToUrl();
 
@@ -30,12 +30,11 @@
 
             scope.isButton = Boolean(ACTIONS[scope.type].isButton);
 
-            if (scope.isButton) {
-                // Provide for button click method
-                scope.go = function () {
-                    store.dispatch(getAction());
-                };
-            } else {
+            scope.go = function () {
+                store.dispatch(getAction());
+            };
+
+            if (!scope.isButton) {
                 // Update url on change of state
                 let debounced = debounce(DEBOUNCE_WAIT_TIME, update),
                     unsubscribe = store.subscribe(debounced);
@@ -65,7 +64,14 @@
                     action = getAction(),
                     newState = reducer(oldState, action);
 
-                scope.url = stateToUrl.create(newState);
+                let currentUrl = '#' + decodeURIComponent($location.absUrl().split('#')[1]);
+                let newUrl = stateToUrl.create(newState);
+
+                if (newUrl === currentUrl) {
+                    scope.isButton = true;
+                } else {
+                    scope.url = newUrl;
+                }
             }
         }
     }

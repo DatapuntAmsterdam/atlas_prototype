@@ -22,7 +22,7 @@
             return angular.isString(link.subtype) &&
                 ((categorySlug === 'openbareruimte' && link.subtype !== 'weg') ||
                 (categorySlug === 'adres' && link.subtype !== 'verblijfsobject') ||
-                categorySlug === 'gebieden');
+                categorySlug === 'gebied');
         };
 
         vm.getExtraInfo = function (link) {

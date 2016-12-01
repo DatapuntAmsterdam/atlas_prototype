@@ -58,7 +58,7 @@ describe('The search factory', function () {
                     formatCategory: function () {
                         return 'FAKE_FORMATTED_CATEGORY_RESULT';
                     },
-                    formatLinks: function (links) {
+                    formatLinks: function (slug, links) {
                         if (links[0] === 'FAKE_LINK_F') {
                             return [
                                 'FAKE_FORMATTED_LINK_F',
@@ -150,6 +150,7 @@ describe('The search factory', function () {
 
     it('has a load more function that returns a new set of search results', function () {
         var searchResultsInput = {
+                slug: 'adres',
                 next: 'http://some-domain/path/to/slug/?q=waterloo&page=2&page_size=5',
                 count: 11,
                 results: [
@@ -168,7 +169,7 @@ describe('The search factory', function () {
 
         $rootScope.$apply();
 
-        expect(searchFormatter.formatLinks).toHaveBeenCalledWith([
+        expect(searchFormatter.formatLinks).toHaveBeenCalledWith('adres', [
             'FAKE_LINK_F',
             'FAKE_LINK_G',
             'FAKE_LINK_H',
@@ -176,6 +177,7 @@ describe('The search factory', function () {
             'FAKE_LINK_J'
         ]);
 
+        expect(searchResultsOutput.slug).toBe('adres');
         expect(searchResultsOutput.next).toBe('http://some-domain/path/to/slug/?q=waterloo&page=3&page_size=5');
         expect(searchResultsOutput.count).toBe(11);
         expect(searchResultsOutput.results).toEqual([

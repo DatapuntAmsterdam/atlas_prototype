@@ -140,7 +140,8 @@
         }
 
         function getPlaatsData (geosearchResults) {
-            const plaatsCategories = geosearchResults.filter(category => category.slug === 'plaats'),
+            const plaatsCategories = geosearchResults.filter(
+                    category => ['standplaats', 'ligplaats'].indexOf(category.slug) > -1),
                 plaatsCategory = plaatsCategories.length ? plaatsCategories[0] : null,
                 plaatsCategoryIndex = plaatsCategory ? geosearchResults.indexOf(plaatsCategory) : null,
                 plaatsEndpoint = plaatsCategory ? plaatsCategory.results[0].endpoint : null;

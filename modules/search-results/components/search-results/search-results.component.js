@@ -19,17 +19,20 @@
     DpSearchResultsController.$inject = ['$scope', 'search', 'geosearch', 'store', 'ACTIONS'];
 
     function DpSearchResultsController ($scope, search, geosearch, store, ACTIONS) {
-        var vm = this;
+        let vm = this;
 
         /**
-         * SEARCH BY QUERY
+         * watch isLoading and the query and location parameters of the state
+         * if isLoading becomes true then find out what has te be loaded and get it
          */
-        $scope.$watchGroup(['vm.query', 'vm.category'], function () {
-            if (angular.isString(vm.query) && vm.query.length) {
-                if (angular.isString(vm.category) && vm.category.length) {
-                    search.search(vm.query, vm.category).then(setSearchResults);
-                } else {
-                    search.search(vm.query).then(setSearchResults);
+        $scope.$watchGroup(['vm.isLoading', 'vm.query', 'vm.category', 'vm.location'], () => {
+            if (vm.isLoading) {
+                if (angular.isString(vm.query) && vm.query.length) {
+                     // SEARCH BY QUERY
+                    searchByQuery(vm.query, vm.category);
+                } else if (angular.isArray(vm.location)) {
+                     // GEOSEARCH
+                    searchByLocation(vm.location);
                 }
             }
         });
@@ -44,20 +47,23 @@
             });
         };
 
-        /**
-         * GEOSEARCH
-         */
-        $scope.$watchCollection('vm.location', function (location) {
-            if (angular.isArray(location)) {
-                geosearch.search(location).then(setSearchResults);
+        function searchByQuery (query, category) {
+            if (angular.isString(category) && category.length) {
+                search.search(query, category).then(setSearchResults);
+            } else {
+                search.search(query).then(setSearchResults);
             }
-        });
+        }
+
+        function searchByLocation (location) {
+            geosearch.search(location).then(setSearchResults);
+        }
 
         /**
          * For both SEARCH BY QUERY (with and without category) and GEOSEARCH
          */
         function setSearchResults (searchResults) {
-            var numberOfResults = searchResults.reduce(function (previous, current) {
+            let numberOfResults = searchResults.reduce(function (previous, current) {
                 return previous + current.count;
             }, 0);
 
