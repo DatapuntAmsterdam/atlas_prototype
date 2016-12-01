@@ -4,7 +4,9 @@ describe('The stateToUrl factory', function () {
         mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module('atlas', function ($provide) {
+            $provide.constant('URL_COMPRESSION', []);
+        });
 
         angular.mock.inject(function (_$location_, _stateToUrl_, _DEFAULT_STATE_) {
             $location = _$location_;

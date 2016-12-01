@@ -17,7 +17,8 @@
     "proj4": "*",
     "proj4leaflet": "https://github.com/DatapuntAmsterdam/proj4leaflet.git#master",
     "redux": "https://unpkg.com/redux/dist/redux.js",
-    "angular-debounce": "^1.1.0"
+    "angular-debounce": "^1.1.0",
+    "lz-string": "^1.4.4"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.7"

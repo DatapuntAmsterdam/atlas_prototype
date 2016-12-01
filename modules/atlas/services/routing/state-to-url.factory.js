@@ -5,27 +5,33 @@
         .module('atlas')
         .factory('stateToUrl', stateToUrlFactory);
 
-    stateToUrlFactory.$inject = ['$location', '$window'];
+    stateToUrlFactory.$inject = ['$location', '$window', 'urlComposer'];
 
-    function stateToUrlFactory ($location, $window) {
+    function stateToUrlFactory ($location, $window, urlComposer) {
+        /**
+         * The number of decimals to use for coordinates when transforming them into params
+         * @type {number}
+         */
+        const COORDINATE_PRECISION = 7;    // decimals
+
+        /**
+         * The number of decimals to use for degrees (heading, pitch, fov) when transforming them into params
+         * @type {number}
+         */
+        const DEGREE_PRECISION = 1;    // decimals
+
         return {
             create,
             update
         };
 
+        /**
+         * Creates a query string for the state
+         * @param {Object} state
+         * @returns {string} the query string
+         */
         function create (state) {
-            const params = getParams(state);
-            let key,
-                queryString = '';
-
-            for (key in params) {
-                if (params.hasOwnProperty(key) && params[key] !== null) {
-                    queryString += queryString ? '&' : '?';
-                    queryString += `${key}=${params[key]}`;
-                }
-            }
-
-            return '#' + queryString;
+            return urlComposer.getQueryString(getParams(state));
         }
 
         function update (state, useReplace) {
@@ -51,6 +57,44 @@
             );
         }
 
+        /**
+         * Reduces the number of decimals by the given precision factor
+         * @param {number} n
+         * @param {number} decimals
+         * @returns {number}
+         */
+        function toPrecision (n, decimals) {
+            return Number(Math.round(n + `e${decimals}`) + `e-${decimals}`);
+        }
+
+        /**
+         * Transforms a degree into a string, using the degree precision for the number of decimals
+         * @param {number} d degrees
+         * @returns {string}
+         */
+        function degreesAsString (d) {
+            return String(toPrecision(d, DEGREE_PRECISION));
+        }
+
+        /**
+         * Transforms a coordinate into a string, using the coordinate precision for the number of decimals
+         * @param {number} c coordinate
+         * @returns {string}
+         */
+        function coordinateAsString (c) {
+            return String(toPrecision(c, COORDINATE_PRECISION));
+        }
+
+        /**
+         * Transforms a location (array of coordinates) into an array of coordinate strings
+         * using the coordinate precision for the number of decimals
+         * @param {number[2]} loc location
+         * @returns {string}
+         */
+        function locationAsString (loc) {
+            return loc.map(c => coordinateAsString(c)).join(',');
+        }
+
         function getSearchParams (state) {
             var params = {};
 
@@ -58,7 +102,7 @@
                 if (angular.isString(state.search.query)) {
                     params.zoek = state.search.query;
                 } else {
-                    params.zoek = state.search.location.join(',');
+                    params.zoek = locationAsString(state.search.location);
                 }
 
                 params.categorie = state.search.category;
@@ -79,8 +123,8 @@
                 lagen.push(state.map.overlays[i].id + ':' + isVisible);
             }
             return {
-                lat: String(state.map.viewCenter[0]),
-                lon: String(state.map.viewCenter[1]),
+                lat: coordinateAsString(state.map.viewCenter[0]),
+                lon: coordinateAsString(state.map.viewCenter[1]),
                 basiskaart: state.map.baseLayer,
                 lagen: lagen.join(',') || null,
                 zoom: String(state.map.zoom),
@@ -120,14 +164,14 @@
             if (state.straatbeeld) {
                 params.id = state.straatbeeld.id;
                 if (angular.isArray(state.straatbeeld.location)) {
-                    params.straatbeeld = state.straatbeeld.location.join(',');
+                    params.straatbeeld = locationAsString(state.straatbeeld.location);
                 }
                 if (state.straatbeeld.isInvisible) {
                     params.straatbeeldInvisible = true;  // Only store in url on truthy value
                 }
-                params.heading = String(state.straatbeeld.heading);
-                params.pitch = String(state.straatbeeld.pitch);
-                params.fov = String(state.straatbeeld.fov);
+                params.heading = degreesAsString(state.straatbeeld.heading);
+                params.pitch = degreesAsString(state.straatbeeld.pitch);
+                params.fov = degreesAsString(state.straatbeeld.fov);
             }
 
             return params;
