@@ -1,0 +1,91 @@
+.c-data-selection-filters {
+  margin-right: $base-whitespace * 2;
+
+  .c-data-selection-filters__list {
+
+    .c-data-selection-filters__listitem {
+      overflow: hidden;
+    }
+  }
+}
+
+.c-data-selection-filters--remove-filter {
+  @include icon-button("close");
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.c-data-selection-filters--empty-value {
+  font-style: italic;
+
+  &::before {
+    display: inline-block;
+    content: "(geen)";
+  }
+}
+
+.c-data-selection-filters--toon-meerminder {
+  margin-top: $base-whitespace;
+  margin-bottom: $base-whitespace;
+}
+
+.c-data-selection-filters--hidden-options {
+  margin-bottom: $base-whitespace / 2;
+  color: $secondary-gray40;
+}
+
+.c-data-selection-filters--active-filters {
+
+  line-height: $button-size;
+  text-decoration: none;
+
+  .c-data-selection-filters__listitem {
+    position: relative;
+    margin-bottom: $base-whitespace / 2;
+    padding-right: $base-whitespace + $button-size;
+    padding-left: $base-whitespace;
+    background-color: $secondary-gray60;
+    color: $primary-light;
+
+    &:last-child {
+      margin-bottom: $base-whitespace * 2.5;
+    }
+  }
+}
+
+.c-data-selection-filters--available-filters {
+  padding-right: $base-whitespace;
+  padding-left: $base-whitespace;
+  background-color: $secondary-gray4;
+
+  .c-data-selection-filters__available-filter {
+    padding-bottom: 1.5 * $base-whitespace;
+  }
+
+  .c-data-selection-filters__separator {
+    width: auto;
+    height: 1px;
+    margin: {
+      top: $base-whitespace / 2 ;
+      right: - $base-whitespace;
+      bottom: $base-whitespace / 2;
+      left: - $base-whitespace;
+    }
+    background: $secondary-gray40;
+  }
+
+  .c-data-selection-filters__available-filter-label {
+    margin-bottom: $base-whitespace;
+    padding-top: $base-whitespace;
+    color: $primary-contrast;
+  }
+
+  .c-data-selection-filters__list {
+
+    .c-data-selection-filters__listitem {
+      margin-bottom: $base-whitespace;
+    }
+  }
+}
