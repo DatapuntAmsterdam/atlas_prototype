@@ -1,0 +1,96 @@
+$pagination-line-color: #e4e4e4;
+
+@mixin data-shared-pagination-button($icon) {
+  @include icon-button-text-right($icon);
+}
+
+@mixin data-shared-pagination-button-flip($icon) {
+  transform: scaleX(-1);
+  content: url($icon);
+  filter: FlipH;
+}
+
+@mixin data-shared-pagination-font {
+  font-family: $header-font-family;
+  font-size: $base-font-size;
+  font-weight: lighter;
+}
+
+.c-data-shared-pagination {
+  @include data-shared-pagination-font;
+  padding-bottom: $base-whitespace * 2;
+  text-align: center;
+
+  .c-data-shared-pagination__input {
+    width: 3rem;
+    height: $button-size;
+    border: 1px solid $secondary-gray20;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .c-data-shared-pagination__button {
+    @include data-shared-pagination-font;
+    width: 29px;
+    height: $button-size;
+    background-color: $secondary-gray60;
+    color: $primary-light;
+    line-height: 1;
+    vertical-align: middle;
+
+    &:hover {
+      background-color: $primary-contrast;
+    }
+  }
+}
+
+.c-data-shared-pagination--separator {
+  width: auto;
+  height: 1px;
+  margin: {
+    top: 2 * $base-whitespace;
+    right: - 2 * $base-whitespace;
+    bottom: 2 * $base-whitespace;
+    left: - 2 * $base-whitespace;
+  }
+  border: none;
+  background: $pagination-line-color;
+}
+
+.c-data-shared-pagination-link {
+  margin-left: .2rem;
+}
+
+.c-data-shared-pagination-link-text {
+  display: inline-block;
+  height: $base-whitespace * 2;
+  vertical-align: middle;
+}
+
+.c-data-shared-pagination-link-label {
+  @include data-shared-pagination-font;
+
+  &:hover {
+    color: $primary-contrast;
+    text-decoration: underline;
+  }
+}
+
+.c-data-shared-pagination-link--first {
+  @include data-shared-pagination-button("first");
+}
+
+.c-data-shared-pagination-link--last {
+  @include data-shared-pagination-button("last");
+}
+
+.c-data-shared-pagination-link--previous {
+  @include data-shared-pagination-button("previous");
+  margin-left: $base-whitespace;
+}
+
+.c-data-shared-pagination-link--next {
+  @include data-shared-pagination-button("next");
+  margin-right: $base-whitespace;
+}

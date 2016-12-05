@@ -1,0 +1,7 @@
+<dp-link
+	ng-if="vm.link.enabled"
+	class-name="{{ vm.link.class_name }} c-data-shared-pagination-link"
+    type="{{ vm.action }}"
+    hover-text="{{vm.link.label}}"
+	payload="vm.link.page"
+ ><span class="c-data-shared-pagination-link-label">{{vm.link.label}}</span></dp-link>
