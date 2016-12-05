@@ -1,15 +1,15 @@
-.c-data-selection-filters {
+.c-data-shared-filters {
   margin-right: $base-whitespace * 2;
 
-  .c-data-selection-filters__list {
+  .c-data-shared-filters__list {
 
-    .c-data-selection-filters__listitem {
+    .c-data-shared-filters__listitem {
       overflow: hidden;
     }
   }
 }
 
-.c-data-selection-filters--remove-filter {
+.c-data-shared-filters--remove-filter {
   @include icon-button("close");
 
   position: absolute;
@@ -17,7 +17,7 @@
   right: 0;
 }
 
-.c-data-selection-filters--empty-value {
+.c-data-shared-filters--empty-value {
   font-style: italic;
 
   &::before {
@@ -26,22 +26,22 @@
   }
 }
 
-.c-data-selection-filters--toon-meerminder {
+.c-data-shared-filters--toon-meerminder {
   margin-top: $base-whitespace;
   margin-bottom: $base-whitespace;
 }
 
-.c-data-selection-filters--hidden-options {
+.c-data-shared-filters--hidden-options {
   margin-bottom: $base-whitespace / 2;
   color: $secondary-gray40;
 }
 
-.c-data-selection-filters--active-filters {
+.c-data-shared-filters--active-filters {
 
   line-height: $button-size;
   text-decoration: none;
 
-  .c-data-selection-filters__listitem {
+  .c-data-shared-filters__listitem {
     position: relative;
     margin-bottom: $base-whitespace / 2;
     padding-right: $base-whitespace + $button-size;
@@ -55,16 +55,16 @@
   }
 }
 
-.c-data-selection-filters--available-filters {
+.c-data-shared-filters--available-filters {
   padding-right: $base-whitespace;
   padding-left: $base-whitespace;
   background-color: $secondary-gray4;
 
-  .c-data-selection-filters__available-filter {
+  .c-data-shared-filters__available-filter {
     padding-bottom: 1.5 * $base-whitespace;
   }
 
-  .c-data-selection-filters__separator {
+  .c-data-shared-filters__separator {
     width: auto;
     height: 1px;
     margin: {
@@ -76,15 +76,15 @@
     background: $secondary-gray40;
   }
 
-  .c-data-selection-filters__available-filter-label {
+  .c-data-shared-filters__available-filter-label {
     margin-bottom: $base-whitespace;
     padding-top: $base-whitespace;
     color: $primary-contrast;
   }
 
-  .c-data-selection-filters__list {
+  .c-data-shared-filters__list {
 
-    .c-data-selection-filters__listitem {
+    .c-data-shared-filters__listitem {
       margin-bottom: $base-whitespace;
     }
   }

@@ -1,20 +1,20 @@
-<div class="c-data-selection-filters">
+<div class="c-data-shared-filters">
 
-    <div ng-if="vm.formattedActiveFilters.length" class="qa-active-filters c-data-selection-filters--active-filters">
-        <ul class="c-data-selection-filters__list">
-            <li class="c-data-selection-filters__listitem"
+    <div ng-if="vm.formattedActiveFilters.length" class="qa-active-filters c-data-shared-filters--active-filters">
+        <ul class="c-data-shared-filters__list">
+            <li class="c-data-shared-filters__listitem"
                 ng-repeat="filter in vm.formattedActiveFilters">
                 <span class="u-pull--right">
                     <button ng-click="vm.removeFilter(filter.categorySlug)"
-                       class="c-data-selection-filters--remove-filter o-btn"
+                       class="c-data-shared-filters--remove-filter o-btn"
                        title="Filter verwijderen">
                         <span class="u-sr-only">Filter verwijderen</span>
                     </button>
 
                 </span>
-                <span class="c-data-selection-filters__active-filter">
+                <span class="c-data-shared-filters__active-filter">
                     {{filter.categoryLabel}}:
-                    <span ng-class="{'c-data-selection-filters--empty-value': !filter.option}">
+                    <span ng-class="{'c-data-shared-filters--empty-value': !filter.option}">
                         {{filter.option}}
                     </span>
                 </span>
@@ -25,12 +25,12 @@
 
     <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
 
-    <div class="qa-available-filters c-data-selection-filters--available-filters">
+    <div class="qa-available-filters c-data-shared-filters--available-filters">
         <div ng-if="!vm.isLoading" ng-show="vm.hasSelectableValues(category)" ng-repeat="category in vm.availableFilters">
-            <div class="c-data-selection-filters__available-filter">
-                <h3 class="c-data-selection-filters__available-filter-label">{{category.label}}</h3>
-                <ul class="c-data-selection-filters__list">
-                    <li class="c-data-selection-filters__listitem"
+            <div class="c-data-shared-filters__available-filter">
+                <h3 class="c-data-shared-filters__available-filter-label">{{category.label}}</h3>
+                <ul class="c-data-shared-filters__list">
+                    <li class="c-data-shared-filters__listitem"
                         ng-repeat="option in category.options | limitTo : vm.isExpandedCategory(category.slug) ? undefined : vm.showMoreThreshold">
                         <button
                             class="o-btn o-btn--link"
@@ -39,27 +39,27 @@
                             }"
                             ng-click="vm.addFilter(category.slug, option.label)">
 
-                            <span ng-class="{'c-data-selection-filters--empty-value': !option.label}">
+                            <span ng-class="{'c-data-shared-filters--empty-value': !option.label}">
                                 {{option.label}}
                             </span>
                         </button>
                     </li>
                 </ul>
 
-                <div class="c-data-selection-filters--toon-meerminder" ng-if="vm.showExpandButton(category.slug)">
-                    <div class="c-data-selection-filters__separator"></div>
+                <div class="c-data-shared-filters--toon-meerminder" ng-if="vm.showExpandButton(category.slug)">
+                    <div class="c-data-shared-filters__separator"></div>
                     <button class="o-btn o-btn--link qa-show-more-button"
                             ng-click="vm.expandCategory(category.slug)">
 
                         <strong>Toon meer</strong>
                     </button>
-                    <div class="c-data-selection-filters__separator"></div>
+                    <div class="c-data-shared-filters__separator"></div>
                 </div>
 
-                <div class="c-data-selection-filters--toon-meerminder" ng-if="vm.isExpandedCategory(category.slug)">
-                    <div class="c-data-selection-filters__separator"></div>
+                <div class="c-data-shared-filters--toon-meerminder" ng-if="vm.isExpandedCategory(category.slug)">
+                    <div class="c-data-shared-filters__separator"></div>
 
-                    <div ng-if="vm.nrHiddenOptions(category) > 0" class="qa-hidden-options c-data-selection-filters--hidden-options">
+                    <div ng-if="vm.nrHiddenOptions(category) > 0" class="qa-hidden-options c-data-shared-filters--hidden-options">
                         ...nog {{vm.nrHiddenOptions(category) | number}} waarden
                     </div>
 
@@ -69,7 +69,7 @@
                         <strong>Toon minder</strong>
                     </button>
 
-                    <div class="c-data-selection-filters__separator"></div>
+                    <div class="c-data-shared-filters__separator"></div>
                 </div>
             </div>
 
