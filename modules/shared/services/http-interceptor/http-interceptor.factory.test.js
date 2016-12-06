@@ -38,6 +38,10 @@ describe('The http interceptor', function () {
             .whenGET('http://api-domain.amsterdam.nl/500')
             .respond(500, mockedData);
 
+        $httpBackend
+            .whenGET('http://api-domain.amsterdam.nl/-1')
+            .respond(-1, mockedData);
+
         spyOn(httpStatus, 'registerError');
     });
 
@@ -134,6 +138,38 @@ describe('The http interceptor', function () {
                 expect(httpStatus.registerError).toHaveBeenCalledWith(httpStatus.SERVER_ERROR);
                 callbackCalled = true;
             });
+
+        $httpBackend.flush();
+        expect(callbackCalled).toBe(true);
+    });
+
+    it('registers http server error -1 responses, leaves content untouched', function () {
+        $http
+            .get('http://api-domain.amsterdam.nl/-1')
+            .catch(data => {
+                expect(data.data).toEqual(mockedData);
+                expect(data.status).toBe(-1);
+                expect(httpStatus.registerError).toHaveBeenCalledWith(httpStatus.SERVER_ERROR);
+                callbackCalled = true;
+            });
+
+        $httpBackend.flush();
+        expect(callbackCalled).toBe(true);
+    });
+
+    it('skips http error -1 responses when due to cancellation of request', function () {
+        $http({
+            method: 'GET',
+            url: 'http://api-domain.amsterdam.nl/-1',
+            isCancelled: function () {
+                return true;
+            }
+        }).catch(data => {
+            expect(data.data).toEqual(mockedData);
+            expect(data.status).toBe(-1);
+            expect(httpStatus.registerError).not.toHaveBeenCalled();
+            callbackCalled = true;
+        });
 
         $httpBackend.flush();
         expect(callbackCalled).toBe(true);

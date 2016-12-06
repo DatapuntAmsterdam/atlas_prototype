@@ -18,6 +18,11 @@
             let isServerError = 500 <= response.status && response.status <= 599,
                 isClientError = 400 <= response.status && response.status <= 499;
 
+            if (response.status <= 0) {
+                // Check if the error is due to a cancelled http request
+                isServerError = !(angular.isFunction(response.config.isCancelled) && response.config.isCancelled());
+            }
+
             if (isServerError) {
                 httpStatus.registerError(httpStatus.SERVER_ERROR);
             } else if (isClientError && response && response.data && response.data.detail === 'Not found.') {

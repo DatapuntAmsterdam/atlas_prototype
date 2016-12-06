@@ -9,8 +9,8 @@
 
     function apiFactory ($http, user, environment) {
         return {
-            getByUrl: getByUrl,
-            getByUri: getByUri
+            getByUrl,
+            getByUri
         };
 
         /**
@@ -42,7 +42,10 @@
             };
 
             if (angular.isObject(cancel) && cancel.promise) {
+                let isCancelled = false;
                 options.timeout = cancel.promise;
+                options.isCancelled = () => isCancelled;
+                options.timeout.finally(() => isCancelled = true);
             }
 
             return $http(options).then(response => response.data);
