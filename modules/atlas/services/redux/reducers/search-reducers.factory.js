@@ -88,9 +88,11 @@
         function fetchSearchResultsCategoryReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
-            newState.search.isLoading = true;
-            newState.search.category = payload;
-            newState.search.numberOfResults = null;
+            if (angular.isObject(newState.search)) {
+                newState.search.isLoading = true;
+                newState.search.category = payload;
+                newState.search.numberOfResults = null;
+            }
 
             return newState;
         }
@@ -104,8 +106,10 @@
         function showSearchResultsReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
-            newState.search.isLoading = false;
-            newState.search.numberOfResults = payload;
+            if (angular.isObject(newState.search)) {
+                newState.search.isLoading = false;
+                newState.search.numberOfResults = payload;
+            }
 
             return newState;
         }

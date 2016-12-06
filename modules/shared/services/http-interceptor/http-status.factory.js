@@ -10,7 +10,8 @@
         const errorTypes = ['SERVER_ERROR', 'NOT_FOUND_ERROR'],
             exportObject = exportErrorTypes({
                 getStatus,
-                registerError
+                registerError,
+                registerCancel
             });
 
         let currentStatus = {
@@ -35,6 +36,10 @@
 
             currentStatus[key] = true;
             currentStatus.hasErrors = true;
+        }
+
+        function registerCancel (request) {
+            currentStatus.cancelled = request;
         }
 
         function resetTypeFlags () {
