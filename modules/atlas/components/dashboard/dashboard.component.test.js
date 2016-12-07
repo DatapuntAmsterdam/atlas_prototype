@@ -18,37 +18,18 @@ describe('The dashboard component', function () {
                 }
             },
             function ($provide) {
-                $provide.factory('dpHeaderDirective', function () {
+                [
+                    'dpHeaderDirective',
+                    'dpPageDirective',
+                    'dpDetailDirective',
+                    'dpSearchResultsDirective',
+                    'dpLayerSelectionDirective',
+                    'dpMapDirective',
+                    'dpStraatbeeldDirective',
+                    'dpDataSelectionDirective'
+                ].forEach(d => $provide.factory(d, () => {
                     return {};
-                });
-
-                $provide.factory('dpPageDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpDetailDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpSearchResultsDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpLayerSelectionDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpMapDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpStraatbeeldDirective', function () {
-                    return {};
-                });
-
-                $provide.factory('dpDataSelectionDirective', function () {
-                    return {};
-                });
+                }));
             }
         );
 
@@ -61,8 +42,6 @@ describe('The dashboard component', function () {
         });
 
         mockedState = angular.copy(defaultState);
-
-        spyOn(store, 'getState').and.callThrough();
     });
 
     function getComponent () {
@@ -122,7 +101,8 @@ describe('The dashboard component', function () {
             mockedVisibility = {
                 httpStatus: {
                     hasErrors: false
-                }
+                },
+                map: true
             };
             mockedColumnSizes = {
                 left: 1,
@@ -168,6 +148,62 @@ describe('The dashboard component', function () {
             expect(component.find('.c-dashboard__layer-selection').attr('class')).toContain('u-col-sm--1');
             expect(component.find('.c-dashboard__map').attr('class')).toContain('u-col-sm--2');
             expect(component.find('.c-dashboard__content').attr('class')).toContain('u-col-sm--3');
+        });
+    });
+
+    describe('straatbeeld', function () {
+        var component,
+            mockedVisibility,
+            mockedColumnSizes;
+
+        beforeEach(function () {
+            mockedVisibility = {
+                httpStatus: {
+                    hasErrors: false
+                },
+                map: false,
+                straatbeeld: true
+            };
+            mockedColumnSizes = {
+                left: 1,
+                middle: 2,
+                right: 3
+            };
+
+            spyOn(dashboardColumns, 'determineVisibility').and.returnValue(mockedVisibility);
+            spyOn(dashboardColumns, 'determineColumnSizes').and.returnValue(mockedColumnSizes);
+        });
+
+        it('displays a fullscreen straatbeeld on straatbeeld.isFullscreen = true', function () {
+            spyOn(store, 'getState').and.returnValue({
+                straatbeeld: {
+                    isFullscreen: true
+                },
+                map: {
+                }
+            });
+            component = getComponent();
+
+            expect(component.find('.c-dashboard__layer-selection').length).toBe(1);
+            expect(component.find('.c-dashboard__map').length).toBe(0);
+            expect(component.find('.c-dashboard__straatbeeld').length).toBe(1);
+            expect(component.find('.c-dashboard__content').length).toBe(1);
+        });
+
+        it('displays a normal straatbeeld on straatbeeld.isFullscreen = false', function () {
+            spyOn(store, 'getState').and.returnValue({
+                straatbeeld: {
+                    isFullscreen: false
+                },
+                map: {
+                }
+            });
+            component = getComponent();
+
+            expect(component.find('.c-dashboard__layer-selection').length).toBe(1);
+            expect(component.find('.c-dashboard__map').length).toBe(0);
+            expect(component.find('.c-dashboard__straatbeeld').length).toBe(0);
+            expect(component.find('.c-dashboard__content').length).toBe(1);
         });
     });
 });

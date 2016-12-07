@@ -39,7 +39,7 @@
                 </div>
 
                 <!-- Map -->
-                <div ng-if="vm.columnSizes.middle"
+                <div ng-if="vm.columnSizes.middle && vm.visibility.map"
                      class="c-dashboard__map"
                      ng-class="'u-col-sm--' + vm.columnSizes.middle">
 
@@ -49,6 +49,17 @@
                             map-state="vm.mapState"
                             show-layer-selection="vm.showLayerSelection"
                             markers="vm.markers"></dp-map>
+                    </div>
+                </div>
+
+                <!-- Fullscreen Straatbeeld -->
+                <div ng-if="vm.columnSizes.middle && vm.visibility.straatbeeld && vm.isFullscreen"
+                     class="c-dashboard__straatbeeld"
+                     ng-class="'u-col-sm--' + vm.columnSizes.middle">
+
+                    <div ng-controller="StraatbeeldController as straatbeeld"
+                         class="u-dashboard--full-height">
+                        <dp-straatbeeld state="straatbeeld.straatbeeldState" is-print-mode="vm.isPrintMode"></dp-straatbeeld>
                     </div>
                 </div>
 
@@ -84,7 +95,8 @@
                     </div>
 
                     <!-- Straatbeeld -->
-                    <div ng-if="vm.visibility.straatbeeld" ng-controller="StraatbeeldController as straatbeeld"
+                    <div ng-if="vm.visibility.straatbeeld && !vm.isFullscreen"
+                         ng-controller="StraatbeeldController as straatbeeld"
                        class="u-dashboard--full-height">
 
                         <dp-straatbeeld state="straatbeeld.straatbeeldState" is-print-mode="vm.isPrintMode"></dp-straatbeeld>

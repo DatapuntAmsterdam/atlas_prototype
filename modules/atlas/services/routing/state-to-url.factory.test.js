@@ -313,6 +313,27 @@ describe('The stateToUrl factory', function () {
             }));
         });
 
+        it('keeps track of the isFullscreen state', function () {
+            // Closed
+            mockedState.straatbeeld = {
+                id: 'ABC',
+                isFullscreen: false
+            };
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
+                'volledig-straatbeeld': jasmine.anything()
+            }));
+
+            // Opened
+            mockedState.straatbeeld.isFullscreen = true;
+            stateToUrl.update(mockedState, false);
+
+            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
+                'volledig-straatbeeld': 'aan'
+            }));
+        });
+
         it('Has orientation with heading, pitch and fov', function () {
             mockedState.straatbeeld = {
                 id: 'ABC',

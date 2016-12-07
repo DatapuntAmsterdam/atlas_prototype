@@ -49,6 +49,7 @@ $dashboard-error-height: $button-size + 2 * $base-whitespace;
 
 .c-dashboard__layer-selection,
 .c-dashboard__map,
+.c-dashboard__straatbeeld,
 .c-dashboard__content {
   @extend %full-height;
 
@@ -94,6 +95,7 @@ $dashboard-error-height: $button-size + 2 * $base-whitespace;
 
   .c-dashboard__layer-selection,
   .c-dashboard__map,
+  .c-dashboard__straatbeeld,
   .c-dashboard__content {
     margin: 0;
     margin-bottom: $base-whitespace * 2;

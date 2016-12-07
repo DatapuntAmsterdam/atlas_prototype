@@ -142,6 +142,7 @@
 
                 // restore invisibility from url payload
                 newStraatbeeld.isInvisible = Boolean(payload.straatbeeldInvisible);
+                newStraatbeeld.isFullscreen = angular.isString(payload['volledig-straatbeeld']);
 
                 if (oldState.straatbeeld && oldState.straatbeeld.id === payload.id) {
                     newStraatbeeld.image = oldState.straatbeeld.image;

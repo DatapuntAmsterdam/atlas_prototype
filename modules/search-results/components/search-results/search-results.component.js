@@ -25,15 +25,23 @@
          * watch isLoading and the query and location parameters of the state
          * if isLoading becomes true then find out what has te be loaded and get it
          */
-        $scope.$watchGroup(['vm.isLoading', 'vm.query', 'vm.category', 'vm.location'], () => {
+        $scope.$watch('vm.isLoading', () => {
             if (vm.isLoading) {
-                if (angular.isString(vm.query) && vm.query.length) {
-                     // SEARCH BY QUERY
-                    searchByQuery(vm.query, vm.category);
-                } else if (angular.isArray(vm.location)) {
-                     // GEOSEARCH
+                if (!searchByQuery(vm.query, vm.category)) {
                     searchByLocation(vm.location);
                 }
+            }
+        });
+
+        $scope.$watchGroup(['vm.query', 'vm.category'], () => {
+            if (!vm.isLoading) {
+                searchByQuery(vm.query, vm.category);
+            }
+        });
+
+        $scope.$watchCollection('vm.location', () => {
+            if (!vm.isLoading) {
+                searchByLocation(vm.location);
             }
         });
 
@@ -48,15 +56,23 @@
         };
 
         function searchByQuery (query, category) {
-            if (angular.isString(category) && category.length) {
-                search.search(query, category).then(setSearchResults);
-            } else {
-                search.search(query).then(setSearchResults);
+            let isQuery = angular.isString(query) && query.length;
+            if (isQuery) {
+                if (angular.isString(category) && category.length) {
+                    search.search(query, category).then(setSearchResults);
+                } else {
+                    search.search(query).then(setSearchResults);
+                }
             }
+            return isQuery;
         }
 
         function searchByLocation (location) {
-            geosearch.search(location).then(setSearchResults);
+            let isLocation = angular.isArray(location);
+            if (isLocation) {
+                geosearch.search(location).then(setSearchResults);
+            }
+            return isLocation;
         }
 
         /**

@@ -171,6 +171,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
         finishApiCall();
 
         expect(component.find('a').attr('ng-href')).toEqual(
-            '{"type":{"id":"FETCH_STRAATBEELD","ignore":true},"payload":{"id":"ABC","heading":179,"isInitial":true}}');
+            '{"type":{"id":"FETCH_STRAATBEELD","ignore":true},' +
+            '"payload":{"id":"ABC","heading":179,"isInitial":true,"isFullscreen":true}}');
     });
 });
