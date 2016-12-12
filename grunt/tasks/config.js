@@ -31,6 +31,7 @@ module.exports = function (grunt) {
         postcss: require(gruntDir + 'postcss')(grunt),
         sass: require(gruntDir + 'sass'),
         sasslint: require(gruntDir + 'sasslint'),
+        'string-replace': require(gruntDir + 'string-replace')(grunt),
         svg_sprite: require(gruntDir + 'svg-sprite'),
         tags: require(gruntDir + 'script-link-tags')(grunt),
         watch: require(gruntDir + 'watch')
@@ -54,4 +55,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-sass-lint');
     grunt.loadNpmTasks('grunt-script-link-tags');
+    grunt.loadNpmTasks('grunt-string-replace');
 };

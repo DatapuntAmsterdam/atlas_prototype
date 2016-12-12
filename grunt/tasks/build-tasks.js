@@ -18,4 +18,12 @@ module.exports = function (grunt) {
         'karma-modules-fullcoverage',
         'clean:temp'
     ]);
+
+    grunt.registerTask('set-build-id', function () {
+        if (grunt.option('buildid')) {
+            grunt.task.run(['string-replace']);
+        } else {
+            grunt.log.error('Usage: grunt set-build-id --buildid=<buildid>');
+        }
+    });
 };
