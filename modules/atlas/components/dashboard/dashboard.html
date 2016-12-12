@@ -26,7 +26,7 @@
 
                 <!-- Layer selection -->
                 <div ng-if="vm.columnSizes.left"
-                    class="c-dashboard__layer-selection"
+                    class="qa-dashboard__layer-selection c-dashboard__column"
                     ng-class="'u-col-sm--' + vm.columnSizes.left">
 
                     <div ng-controller="LayerSelectionController as vm">
@@ -39,8 +39,8 @@
                 </div>
 
                 <!-- Map -->
-                <div ng-if="vm.columnSizes.middle"
-                     class="c-dashboard__map"
+                <div ng-if="vm.columnSizes.middle && vm.visibility.map"
+                     class="qa-dashboard__map c-dashboard__column"
                      ng-class="'u-col-sm--' + vm.columnSizes.middle">
 
                     <div ng-controller="MapController as vm">
@@ -52,12 +52,23 @@
                     </div>
                 </div>
 
+                <!-- Fullscreen Straatbeeld -->
+                <div ng-if="vm.columnSizes.middle && vm.visibility.straatbeeld && vm.isFullscreen"
+                     class="qa-dashboard__straatbeeld c-dashboard__column"
+                     ng-class="'u-col-sm--' + vm.columnSizes.middle">
+
+                    <div ng-controller="StraatbeeldController as straatbeeld"
+                         class="u-dashboard--full-height">
+                        <dp-straatbeeld state="straatbeeld.straatbeeldState" is-print-mode="vm.isPrintMode"></dp-straatbeeld>
+                    </div>
+                </div>
+
                 <!-- Content -->
                 <div ng-if="vm.columnSizes.right"
                     dp-scrollable-content
                     visibility="vm.visibility"
                     page-name="{{vm.pageName}}"
-                    class="c-dashboard__content"
+                    class="qa-dashboard__content c-dashboard__column c-dashboard__content"
                     ng-class="'u-col-sm--' + vm.columnSizes.right">
 
                     <!-- Detail -->
@@ -84,7 +95,8 @@
                     </div>
 
                     <!-- Straatbeeld -->
-                    <div ng-if="vm.visibility.straatbeeld" ng-controller="StraatbeeldController as straatbeeld"
+                    <div ng-if="vm.visibility.straatbeeld && !vm.isFullscreen"
+                         ng-controller="StraatbeeldController as straatbeeld"
                        class="u-dashboard--full-height">
 
                         <dp-straatbeeld state="straatbeeld.straatbeeldState" is-print-mode="vm.isPrintMode"></dp-straatbeeld>

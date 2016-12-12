@@ -38,6 +38,10 @@
                 0;
             newState.straatbeeld.isInitial = payload.isInitial;
 
+            if (angular.isDefined(payload.isFullscreen)) {
+                newState.straatbeeld.isFullscreen = payload.isFullscreen;
+            }
+
             // If a straatbeeld is loaded by it's id
             // and detail is active
             // then inactivate detail

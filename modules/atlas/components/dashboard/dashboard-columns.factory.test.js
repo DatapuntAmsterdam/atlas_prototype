@@ -271,6 +271,16 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.straatbeeld).toBe(true);
             });
 
+            it('has the straatbeeld solely visibile when it is fullscreen', function () {
+                mockedState.straatbeeld = {location: [1, 5], isFullscreen: true};
+                visibility = dashboardColumns.determineVisibility(mockedState);
+                expect(visibility.straatbeeld).toBe(true);
+                expect(visibility.detail).toBe(false);
+                expect(visibility.page).toBe(false);
+                expect(visibility.searchResults).toBe(false);
+                expect(visibility.map).toBe(false);
+            });
+
             it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
                 expect(columnSizes.left).toBe(0);
                 expect(columnSizes.middle).toBe(4);

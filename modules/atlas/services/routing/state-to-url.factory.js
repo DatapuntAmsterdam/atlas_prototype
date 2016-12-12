@@ -128,6 +128,7 @@
                 params.heading = String(state.straatbeeld.heading);
                 params.pitch = String(state.straatbeeld.pitch);
                 params.fov = String(state.straatbeeld.fov);
+                params['volledig-straatbeeld'] = state.straatbeeld.isFullscreen ? 'aan' : null;
             }
 
             return params;

@@ -1,6 +1,7 @@
 describe('The dp-link component', function () {
     let $compile,
         $rootScope,
+        ACTIONS,
         $location,
         store,
         updateFn,
@@ -59,12 +60,17 @@ describe('The dp-link component', function () {
                     SHOW_LAYER_SELECTION: 'show-layer-selection',
                     IS_BUTTON: {
                         isButton: true
-                    }
+                    },
+                    IGNORE_ME: {
+                        ignore: true
+                    },
+                    FOLLOW_ME: 'follow the url'
                 });
             }
         );
 
-        angular.mock.inject(function (_$location_, _$compile_, _$rootScope_, _store_) {
+        angular.mock.inject(function (_ACTIONS_, _$location_, _$compile_, _$rootScope_, _store_) {
+            ACTIONS = _ACTIONS_;
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $location = _$location_;
@@ -143,6 +149,45 @@ describe('The dp-link component', function () {
 
         expect(component.find('a').length).toBe(0);
         expect(component.find('button').length).toBe(1);
+    });
+
+    describe('The dp-link hyperlink', function () {
+        let defaultPrevented = false;
+        let event = {
+            preventDefault: () => defaultPrevented = true
+        };
+
+        beforeEach(function () {
+            defaultPrevented = false;
+        });
+
+        it('displays an action as a link with a click handler', function () {
+            let component = getComponent('FOLLOW_ME', 'Follow the url');
+
+            let hyperlink = component.find('a');
+            expect(hyperlink.attr('ng-click')).toBe('go($event)');
+        });
+
+        it('treats a link as a button when its action should be ignored', function () {
+            let component = getComponent('IGNORE_ME', 'Ignore me');
+
+            component.isolateScope().go(event);
+
+            expect(defaultPrevented).toBe(true);
+            expect(store.dispatch).toHaveBeenCalledWith({
+                type: ACTIONS.IGNORE_ME,
+                payload: 'Ignore me'
+            });
+        });
+
+        it('follows the url when the action is not to be ignored', function () {
+            let component = getComponent('FOLLOW_ME', 'Follow the url');
+
+            component.isolateScope().go(event);
+
+            expect(defaultPrevented).toBe(false);
+            expect(store.dispatch).not.toHaveBeenCalled();
+        });
     });
 
     describe('update', () => {
