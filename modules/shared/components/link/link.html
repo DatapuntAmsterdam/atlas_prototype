@@ -2,5 +2,5 @@
         ng-click="go()" class="{{className}}" title="{{hoverText}}"><ng-transclude></ng-transclude>
     <span class="u-sr-only">{{hoverText}}</span>
 </button>
-<a ng-if="!isButton"
+<a ng-if="!isButton" ng-click="go($event)"
    ng-href="{{url}}" class="{{className}}" title="{{hoverText}}"><ng-transclude></ng-transclude></a>

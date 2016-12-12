@@ -180,7 +180,8 @@ describe('The dp-straatbeeld-thumbnail component', function () {
             payload: {
                 id: 'ABC',
                 heading: 179,
-                isInitial: true
+                isInitial: true,
+                isFullscreen: true
             }
         });
     });

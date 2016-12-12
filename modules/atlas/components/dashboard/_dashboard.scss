@@ -47,9 +47,7 @@ $dashboard-error-height: $button-size + 2 * $base-whitespace;
   margin-right: $base-whitespace * 2;
 }
 
-.c-dashboard__layer-selection,
-.c-dashboard__map,
-.c-dashboard__content {
+.c-dashboard__column {
   @extend %full-height;
 
   padding: $base-whitespace * 2;
@@ -92,9 +90,7 @@ $dashboard-error-height: $button-size + 2 * $base-whitespace;
     margin-bottom: $base-whitespace * 2;
   }
 
-  .c-dashboard__layer-selection,
-  .c-dashboard__map,
-  .c-dashboard__content {
+  .c-dashboard__column {
     margin: 0;
     margin-bottom: $base-whitespace * 2;
     padding: 0;

@@ -46,7 +46,8 @@
                     vm.payload = {
                         id: id,
                         heading: heading,
-                        isInitial: true
+                        isInitial: true,
+                        isFullscreen: true
                     };
                 } else {
                     vm.hasThumbnail = false;

@@ -30,7 +30,22 @@
 
             scope.isButton = Boolean(ACTIONS[scope.type].isButton);
 
-            scope.go = function () {
+            /**
+             * Execute the link action, either by dispatching the action or by following the link url
+             * @param event
+             */
+            scope.go = function (event) {
+                if (event) {
+                    // Click on link
+                    if (ACTIONS[scope.type].ignore) {
+                        // The action should be ignored for the browser history, prevent the link being followed
+                        // and execute action as if it was a button
+                        // Righ-click, open in new tab will still work, ctrl-click not
+                        event.preventDefault();
+                    } else {
+                        return;
+                    }
+                }
                 store.dispatch(getAction());
             };
 

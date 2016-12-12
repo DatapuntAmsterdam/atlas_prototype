@@ -64,6 +64,14 @@
                 });
             }
 
+            scope.toggleFullscreen = function () {
+                // Dispatch an action to change the pano
+                store.dispatch({
+                    type: ACTIONS.STRAATBEELD_FULLSCREEN,
+                    payload: !scope.state.isFullscreen
+                });
+            };
+
             scope.$watchCollection('state.image', function () {
                 if (angular.isObject(scope.state.image)) {
                     marzipanoService.loadScene(

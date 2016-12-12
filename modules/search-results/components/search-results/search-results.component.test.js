@@ -4,6 +4,9 @@ describe('The dp-search-results component', function () {
         $q,
         store,
         scope,
+        element,
+        search,
+        geosearch,
         ACTIONS,
         mockedSearchResults,
         mockedSearchResultsNextPage,
@@ -68,11 +71,13 @@ describe('The dp-search-results component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _store_, _ACTIONS_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _store_, _search_, _geosearch_, _ACTIONS_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
             store = _store_;
+            search = _search_;
+            geosearch = _geosearch_;
             ACTIONS = _ACTIONS_;
         });
 
@@ -311,8 +316,7 @@ describe('The dp-search-results component', function () {
     });
 
     function getComponent (numberOfResults, query, location, category) {
-        let component,
-            element;
+        let component;
 
         element = document.createElement('dp-search-results');
         scope = $rootScope.$new();
@@ -374,6 +378,18 @@ describe('The dp-search-results component', function () {
                 type: ACTIONS.FETCH_DETAIL,
                 payload: 'https://some-domain/bag/openbareruimte/03630000004835/'
             });
+        });
+
+        it('search on change of query', function () {
+            getComponent(5, 'query');
+            spyOn(search, 'search').and.callThrough();
+            expect(search.search).not.toHaveBeenCalled();
+
+            element.setAttribute('query', 'aap');
+            $compile(element)(scope);
+            scope.$apply();
+
+            expect(search.search).toHaveBeenCalled();
         });
 
         it('does nothing when no query and no location are specified', function () {
@@ -577,6 +593,15 @@ describe('The dp-search-results component', function () {
                 type: ACTIONS.FETCH_DETAIL,
                 payload: 'https://api.datapunt.amsterdam.nl/gebieden/stadsdeel/03630011872039/'
             });
+        });
+
+        it('search on change of location', function () {
+            expect(scope.isLoading).toBe(false);
+            spyOn(geosearch, 'search').and.callThrough();
+            expect(geosearch.search).not.toHaveBeenCalled();
+            scope.location = [9, 10];
+            $rootScope.$digest();
+            expect(geosearch.search).toHaveBeenCalled();
         });
 
         it('has indenting for certain \'related\' categories', function () {

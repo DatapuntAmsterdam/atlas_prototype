@@ -97,6 +97,10 @@
                 id: 'SHOW_STRAATBEELD_SUBSEQUENT',
                 replace: true
             },
+            STRAATBEELD_FULLSCREEN: {
+                id: 'STRAATBEELD_FULLSCREEN',
+                isButton: true
+            },
             HIDE_STRAATBEELD: {
                 id: 'HIDE_STRAATBEELD',
                 ignore: true,

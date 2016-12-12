@@ -51,7 +51,8 @@
                     distance: 18
                 }],
                 isLoading: false,
-                isInitial: true
+                isInitial: true,
+                isFullscreen: true
             },
             */
             dataSelection: null,
