@@ -30,6 +30,7 @@ describe('The dp-data-selection component', function () {
                     }
                 },
                 dataSelectionConfig: {
+                    HAS_PAGE_LIMIT: true,
                     MAX_AVAILABLE_PAGES: 5,
                     zwembaden: {
                         TITLE: 'Zwembaden'
@@ -90,8 +91,8 @@ describe('The dp-data-selection component', function () {
         };
 
         mockedApiPreviewData = {
-            number_of_pages: 107,
-            number_of_records: 77,
+            numberOfPages: 107,
+            numberOfRecords: 77,
             filters: 'MOCKED_FILTER_DATA',
             data: 'MOCKED_PREVIEW_DATA'
         };
@@ -196,7 +197,7 @@ describe('The dp-data-selection component', function () {
             mockedState.view = 'LIST';
 
             // It should still send data with 10000 records
-            mockedApiPreviewData.number_of_records = 10000;
+            mockedApiPreviewData.numberOfRecords = 10000;
 
             getComponent(mockedState);
 
@@ -210,7 +211,7 @@ describe('The dp-data-selection component', function () {
             });
 
             // It should send an empty Array with more than 10000
-            mockedApiPreviewData.number_of_records = 10001;
+            mockedApiPreviewData.numberOfRecords = 10001;
 
             getComponent(mockedState);
 
@@ -223,7 +224,7 @@ describe('The dp-data-selection component', function () {
         it('shows a message in the LIST view when there are too many records', function () {
             let component;
 
-            mockedApiPreviewData.number_of_records = 10001;
+            mockedApiPreviewData.numberOfRecords = 10001;
 
             // The message is not shown in the TABLE view
             mockedState.view = 'TABLE';

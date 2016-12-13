@@ -22,23 +22,21 @@ describe('The dataSelectionConfig factory', function () {
         it('development', function () {
             var dataSelectionConfig = prepareMocks('DEVELOPMENT');
 
-            // Global config
-            expect(dataSelectionConfig.bag.PRIMARY_KEY).toBe('id');
-
             // Environment config
-            expect(dataSelectionConfig.bag.ENDPOINT_PREVIEW)
-                .toBe('https://api-acc.datapunt.amsterdam.nl/dataselectie/bag/');
+            expect(dataSelectionConfig.bag.ENDPOINT_EXPORT)
+                .toBe('https://api-acc.datapunt.amsterdam.nl/dataselectie/bag/export/');
+            expect(dataSelectionConfig.bag.ENDPOINT_DETAIL)
+                .toBe('https://api-acc.datapunt.amsterdam.nl/bag/nummeraanduiding/');
         });
 
         it('production', function () {
             var dataSelectionConfig = prepareMocks('PRODUCTION');
 
-            // Global config
-            expect(dataSelectionConfig.bag.PRIMARY_KEY).toBe('id');
-
             // Environment config
-            expect(dataSelectionConfig.bag.ENDPOINT_PREVIEW)
-                .toBe('https://api.datapunt.amsterdam.nl/dataselectie/bag/');
+            expect(dataSelectionConfig.bag.ENDPOINT_EXPORT)
+                .toBe('https://api.datapunt.amsterdam.nl/dataselectie/bag/export/');
+            expect(dataSelectionConfig.bag.ENDPOINT_DETAIL)
+                .toBe('https://api.datapunt.amsterdam.nl/bag/nummeraanduiding/');
         });
     });
 });

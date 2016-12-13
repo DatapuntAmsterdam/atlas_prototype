@@ -40,34 +40,44 @@ describe('The dp-data-selection-filters component', function () {
                 options: [
                     {
                         count: 11,
-                        label: 'Optie A-1'
+                        label: 'Optie A-1',
+                        id: 'optie-a-1'
                     }, {
                         count: 18,
-                        label: 'Optie A-2'
+                        label: 'Optie A-2',
+                        id: 'optie-a-2'
                     }, {
                         count: 13,
-                        label: 'Optie A-3'
+                        label: 'Optie A-3',
+                        id: 'optie-a-3'
                     }, {
                         count: 14,
-                        label: 'Optie A-4'
+                        label: 'Optie A-4',
+                        id: 'optie-a-4'
                     }, {
                         count: 15,
-                        label: 'Optie A-5'
+                        label: 'Optie A-5',
+                        id: 'optie-a-5'
                     }, {
                         count: 16,
-                        label: 'Optie A-6'
+                        label: 'Optie A-6',
+                        id: 'optie-a-6'
                     }, {
                         count: 17,
-                        label: 'Optie A-7'
+                        label: 'Optie A-7',
+                        id: 'optie-a-7'
                     }, {
                         count: 18,
-                        label: 'Optie A-8'
+                        label: 'Optie A-8',
+                        id: 'optie-a-8'
                     }, {
                         count: 19,
-                        label: 'Optie A-9'
+                        label: 'Optie A-9',
+                        id: 'optie-a-9'
                     }, {
                         count: 20,
-                        label: 'Optie A-10'
+                        label: 'Optie A-10',
+                        id: 'optie-a-10'
                     }
                 ],
                 numberOfOptions: 10
@@ -77,13 +87,16 @@ describe('The dp-data-selection-filters component', function () {
                 options: [
                     {
                         count: 4,
-                        label: 'Optie B-1'
+                        label: 'Optie B-1',
+                        id: 'optie-b-1'
                     }, {
                         count: 5,
-                        label: 'Optie B-2'
+                        label: 'Optie B-2',
+                        id: 'optie-b-2'
                     }, {
                         count: 6,
-                        label: 'Optie B-3'
+                        label: 'Optie B-3',
+                        id: 'optie-b-3'
                     }
                 ],
                 numberOfOptions: 3
@@ -156,7 +169,7 @@ describe('The dp-data-selection-filters component', function () {
                 payload: {
                     dataset: 'my_special_dataset',
                     filters: {
-                        filter_a_new: 'Optie A-2'
+                        filter_a_new: 'optie-a-2'
                     },
                     page: 1
                 }
@@ -166,7 +179,7 @@ describe('The dp-data-selection-filters component', function () {
         it('when adding another filter; all filters are communicated', function () {
             var component,
                 activeFilters = {
-                    filter_a_new: 'Optie A-2'
+                    filter_a_new: 'optie-a-2'
                 };
 
             component = getComponent(activeFilters, false);
@@ -177,19 +190,19 @@ describe('The dp-data-selection-filters component', function () {
                 payload: {
                     dataset: 'my_special_dataset',
                     filters: {
-                        filter_a_new: 'Optie A-2',
-                        filterb: 'Optie B-1'
+                        filter_a_new: 'optie-a-2',
+                        filterb: 'optie-b-1'
                     },
                     page: 1
                 }
             });
         });
 
-        it('can only have one option per category', function () {
+        it('can only have one option per filter', function () {
             var component,
                 activeFilters = {
-                    filter_a_new: 'Optie A-2',
-                    filterb: 'Optie B-1'
+                    filter_a_new: 'optie-a-2',
+                    filterb: 'optie-b-1'
                 };
 
             component = getComponent(activeFilters, false);
@@ -200,9 +213,9 @@ describe('The dp-data-selection-filters component', function () {
                 payload: {
                     dataset: 'my_special_dataset',
                     filters: {
-                        filter_a_new: 'Optie A-2',
+                        filter_a_new: 'optie-a-2',
                         // filterb: 'Optie B-1' is no longer active now
-                        filterb: 'Optie B-2'
+                        filterb: 'optie-b-2'
                     },
                     page: 1
                 }
@@ -221,8 +234,8 @@ describe('The dp-data-selection-filters component', function () {
 
         // With active filters
         activeFilters = {
-            filterb: 'Optie B-3',
-            filter_a_new: 'Optie A-7'
+            filterb: 'optie-b-3',
+            filter_a_new: 'optie-a-7'
         };
 
         component = getComponent(activeFilters, false);
@@ -240,7 +253,7 @@ describe('The dp-data-selection-filters component', function () {
 
         // Without any active filters
         activeFilters = {
-            filterb: 'Optie B-2'
+            filterb: 'optie-b-2'
         };
 
         component = getComponent(activeFilters, false);
@@ -263,8 +276,8 @@ describe('The dp-data-selection-filters component', function () {
 
         // Without any active filters
         activeFilters = {
-            filter_a_new: 'Optie A-2',
-            filterb: 'Optie B-2'
+            filter_a_new: 'optie-a-2',
+            filterb: 'optie-b-2'
         };
 
         component = getComponent(activeFilters, false);
@@ -277,26 +290,26 @@ describe('The dp-data-selection-filters component', function () {
             payload: {
                 dataset: 'my_special_dataset',
                 filters: {
-                    filter_a_new: 'Optie A-2'
+                    filter_a_new: 'optie-a-2'
                 },
                 page: 1
             }
         });
     });
 
-    it('can implode both known and unknown categories', function () {
+    it('can implode both known and unknown filters', function () {
         var component = getComponent({}, false);
         var scope = component.isolateScope();
 
-        scope.vm.expandCategory('xyz');
-        scope.vm.implodeCategory('xyz');
-        expect(scope.vm.isExpandedCategory('xyz')).toBe(false);
+        scope.vm.expandFilter('xyz');
+        scope.vm.implodeFilter('xyz');
+        expect(scope.vm.isExpandedFilter('xyz')).toBe(false);
 
-        scope.vm.implodeCategory('abc');
-        expect(scope.vm.isExpandedCategory('abc')).toBe(false);
+        scope.vm.implodeFilter('abc');
+        expect(scope.vm.isExpandedFilter('abc')).toBe(false);
     });
 
-    it('shows maximum of 10 options per category, it can expand/implode when it has more than 10 results', function () {
+    it('shows maximum of 10 options per filter, it can expand/implode when it has more than 10 results', function () {
         var component;
 
         // When there are 10 or less available options
@@ -348,11 +361,11 @@ describe('The dp-data-selection-filters component', function () {
         expect(component.find('.qa-available-filters > div').eq(0).text()).toContain('Toon meer');
     });
 
-    it('expanded categories have a message when there are more options that 100', function () {
+    it('expanded filters have a message when there are more options that 100', function () {
         // When there are less than 100 options
         var component;
 
-        // Making sure the mocked category has more than 10 options
+        // Making sure the mocked filter has more than 10 options
         availableFilters[0].options.push({
             count: 4,
             label: 'Optie A-11'
@@ -364,7 +377,7 @@ describe('The dp-data-selection-filters component', function () {
         component.find('.qa-available-filters > div').eq(0).find('.qa-show-more-button').click();
         expect(component.find('.qa-available-filters > div').eq(0).find('.qa-hidden-options').length).toBe(0);
 
-        // When there are more then 100 available options: show the message after expanding the category
+        // When there are more then 100 available options: show the message after expanding the filter
         availableFilters[0].numberOfOptions = 101;
         component = getComponent({}, false);
         expect(component.find('.qa-available-filters > div').eq(0).find('.qa-hidden-options').length).toBe(0);
