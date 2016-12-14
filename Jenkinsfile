@@ -31,7 +31,7 @@ node {
 
     stage("Build develop image") {
         tryStep "build", {
-            def image = docker.build("--build-arg build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}" )
+            def image = docker.build("--build-arg BUILD_ID=BUILD_ID" , "build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}")
             image.push()
             image.push("acceptance")
         }
