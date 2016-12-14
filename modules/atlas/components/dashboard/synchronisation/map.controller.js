@@ -55,8 +55,6 @@
 
             if (angular.isObject(state.dataSelection)) {
                 vm.markers.clustered = state.dataSelection.markers;
-                state.map.isLoading = state.map.isLoading ||
-                    (state.dataSelection.view === 'LIST' && state.dataSelection.isLoading);
             } else {
                 vm.markers.clustered = [];
             }
