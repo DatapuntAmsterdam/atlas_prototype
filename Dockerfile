@@ -19,7 +19,9 @@ RUN npm cache clean \
  && bower install --allow-root
 
 COPY . /app/
-
+ARG BUILD_ID
+ENV BUILD_ID=$BUILD_ID
+RUN grunt set-build-id --buildid=${BUILD_ID}
 RUN grunt build-release \
  && cp -r /app/build/. /var/www/html/
 
