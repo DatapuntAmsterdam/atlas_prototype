@@ -1,0 +1,9 @@
+.c-toggle-straatbeeld-fullscreen--minimize {
+  @include icon-button-text-right("forwardb", "", "white");
+  float: left;
+}
+
+.c-toggle-straatbeeld-fullscreen--maximize {
+  @include icon-button-text-right("backb", "", "white");
+  float: left;
+}

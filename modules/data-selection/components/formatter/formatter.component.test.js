@@ -1,6 +1,7 @@
 describe('The dp-data-selection-formatter component', function () {
     let $compile,
         $rootScope,
+        $httpBackend,
         singleParamFormatterFilter,
         doubleParamFormatterFilter;
 
@@ -17,16 +18,21 @@ describe('The dp-data-selection-formatter component', function () {
         );
 
         angular.mock.inject(
-            function (_$compile_, _$rootScope_, _singleParamFormatterFilter_, _doubleParamFormatterFilter_) {
+            function (_$compile_,
+                      _$rootScope_,
+                      _$httpBackend_,
+                      _singleParamFormatterFilter_,
+                      _doubleParamFormatterFilter_) {
                 $compile = _$compile_;
                 $rootScope = _$rootScope_;
+                $httpBackend = _$httpBackend_;
                 singleParamFormatterFilter = _singleParamFormatterFilter_;
                 doubleParamFormatterFilter = _doubleParamFormatterFilter_;
             }
         );
     });
 
-    function getComponent (variables, formatter, useInline) {
+    function getComponent (variables, formatter, useInline, template) {
         let component,
             element,
             scope;
@@ -38,11 +44,16 @@ describe('The dp-data-selection-formatter component', function () {
             element.setAttribute('formatter', formatter);
         }
 
+        if (angular.isString(template)) {
+            element.setAttribute('template', template);
+        }
+
         element.setAttribute('use-inline', 'useInline');
 
         scope = $rootScope.$new();
         scope.variables = variables;
         scope.useInline = useInline;
+        scope.template = template;
 
         component = $compile(element)(scope);
         scope.$apply();
@@ -121,6 +132,25 @@ describe('The dp-data-selection-formatter component', function () {
         expect(component.find('div').length).toBe(0);
         expect(component.find('span').length).toBe(1);
         expect(component.find('span').text()).toBe('my_first_value');
+    });
+
+    it('sets a template path if a template is specified', function () {
+        $httpBackend
+            .whenGET('modules/data-selection/components/formatter/templates/templatePath.html')
+            .respond(200, 'aap');
+
+        getComponent(
+            [{
+                key: 'my_var_1',
+                value: 'my_first_value'
+            }],
+            undefined,
+            false,
+            'templatePath'
+        );
+        $httpBackend.flush();
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
     });
 
     describe('when there is a formatter it calls the appropriate filter', function () {

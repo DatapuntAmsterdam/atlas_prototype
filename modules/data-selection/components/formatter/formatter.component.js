@@ -7,6 +7,7 @@
             bindings: {
                 variables: '<',
                 formatter: '@',
+                template: '@',
                 useInline: '<'
             },
             templateUrl: 'modules/data-selection/components/formatter/formatter.html',
@@ -35,6 +36,10 @@
             vm.formattedValue = vm.variables.map(variable => {
                 return variable.value;
             }).join(' ');
+        }
+
+        if (vm.template) {
+            vm.templatePath = `modules/data-selection/components/formatter/templates/${vm.template}.html`;
         }
     }
 })();

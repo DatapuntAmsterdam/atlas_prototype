@@ -20,10 +20,9 @@
 
             if (angular.isObject(state.dataSelection)) {
                 visibility.dataSelection = true;
-                visibility.dataSelectionList = state.dataSelection.view === 'LIST';
 
-                visibility.map = visibility.dataSelectionList;
-                visibility.layerSelection = visibility.dataSelectionList && state.layerSelection;
+                visibility.map = !state.dataSelection.isFullscreen;
+                visibility.layerSelection = !state.dataSelection.isFullscreen && state.layerSelection;
                 visibility.detail = false;
                 visibility.page = false;
                 visibility.searchResults = false;
@@ -55,7 +54,6 @@
                 }
 
                 visibility.dataSelection = false;
-                visibility.dataSelectionList = false;
             }
 
             return visibility;
@@ -82,7 +80,7 @@
                 (angular.isString(state.search.query) || angular.isArray(state.search.location));
         }
 
-        function determineColumnSizesDefault (visibility, hasFullscreenElement) {
+        function determineColumnSizesDefault (state, visibility, hasFullscreenElement) {
             var columnSizes = {};
 
             if (visibility.layerSelection) {
@@ -91,7 +89,8 @@
             } else if (hasFullscreenElement) {
                 columnSizes.left = 0;
                 columnSizes.middle = 12;
-            } else if (visibility.dataSelection && !visibility.dataSelectionList) {
+            } else if ((visibility.detail && state.detail.isFullscreen) ||
+                (visibility.dataSelection && state.dataSelection.isFullscreen)) {
                 columnSizes.left = 0;
                 columnSizes.middle = 0;
             } else {
@@ -104,7 +103,7 @@
             return columnSizes;
         }
 
-        function determineColumnSizesPrint (visibility, hasFullscreenElement) {
+        function determineColumnSizesPrint (state, visibility, hasFullscreenElement) {
             var columnSizes = {};
 
             if (visibility.layerSelection) {
@@ -115,7 +114,10 @@
                 columnSizes.left = 0;
                 columnSizes.middle = 12;
                 columnSizes.right = 0;
-            } else if (visibility.page || visibility.searchResults || visibility.dataSelection) {
+            } else if ((visibility.detail && state.detail.isFullscreen) ||
+                visibility.page ||
+                visibility.searchResults ||
+                visibility.dataSelection && state.dataSelection.isFullscreen) {
                 columnSizes.left = 0;
                 columnSizes.middle = 0;
                 columnSizes.right = 12;
@@ -128,11 +130,11 @@
             return columnSizes;
         }
 
-        function determineColumnSizes (visibility, hasFullscreenElement, isPrintMode) {
+        function determineColumnSizes (state, visibility, hasFullscreenElement, isPrintMode) {
             if (!isPrintMode) {
-                return determineColumnSizesDefault(visibility, hasFullscreenElement);
+                return determineColumnSizesDefault(state, visibility, hasFullscreenElement);
             } else {
-                return determineColumnSizesPrint(visibility, hasFullscreenElement);
+                return determineColumnSizesPrint(state, visibility, hasFullscreenElement);
             }
         }
     }

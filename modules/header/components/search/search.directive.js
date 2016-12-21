@@ -11,7 +11,11 @@
         return {
             restrict: 'E',
             scope: {
-                query: '@'
+                query: '@',
+                placeholder: '@',
+                type: '@',
+                payload: '<',
+                searchOnly: '<'
             },
             templateUrl: 'modules/header/components/search/search.html',
             link: linkFunction
@@ -24,24 +28,9 @@
             scope.originalQuery = scope.query;
 
             scope.formSubmit = function (event) {
-                var activeSuggestion;
-
                 event.preventDefault();
 
-                if (scope.activeSuggestionIndex === -1) {
-                    // Load the search results
-                    store.dispatch({
-                        type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
-                        payload: scope.query
-                    });
-                } else {
-                    activeSuggestion = autocompleteData.getSuggestionByIndex(
-                        scope.suggestions,
-                        scope.activeSuggestionIndex
-                    );
-
-                    scope.goToDetail(activeSuggestion.uri);
-                }
+                search();
 
                 removeSuggestions();
             };
@@ -51,20 +40,26 @@
                  * Cancel the last request (if any), this way we ensure that a resolved autocompleteData.search() call
                  * always has the latest data.
                  */
-                scope.activeSuggestionIndex = -1;
-                scope.originalQuery = scope.query;
-
-                if (angular.isString(scope.query) && scope.query.length) {
-                    autocompleteData.search(scope.query).then(function (suggestions) {
-                        // Only load suggestions if they are still relevant.
-                        if (suggestions.query === scope.query) {
-                            scope.suggestions = suggestions.data;
-                            scope.numberOfSuggestions = suggestions.count;
-                        }
-                    });
+                if (scope.searchOnly) {
+                    if (scope.query.trim() === '') {
+                        search();
+                    }
                 } else {
-                    scope.suggestions = [];
-                    scope.numberOfSuggestions = 0;
+                    scope.activeSuggestionIndex = -1;
+                    scope.originalQuery = scope.query;
+
+                    if (angular.isString(scope.query) && scope.query.length) {
+                        autocompleteData.search(scope.query).then(function (suggestions) {
+                            // Only load suggestions if they are still relevant.
+                            if (suggestions.query === scope.query) {
+                                scope.suggestions = suggestions.data;
+                                scope.numberOfSuggestions = suggestions.count;
+                            }
+                        });
+                    } else {
+                        scope.suggestions = [];
+                        scope.numberOfSuggestions = 0;
+                    }
                 }
             };
 
@@ -122,6 +117,29 @@
             };
 
             scope.removeSuggestions = removeSuggestions;
+
+            function search () {
+                if (scope.activeSuggestionIndex === -1) {
+                    // Load the search results
+                    let payload = scope.query;
+                    if (angular.isObject(scope.payload)) {
+                        payload = angular.merge({}, scope.payload, {
+                            query: scope.query
+                        });
+                    }
+                    store.dispatch({
+                        type: ACTIONS[scope.type],
+                        payload: payload
+                    });
+                } else {
+                    let activeSuggestion = autocompleteData.getSuggestionByIndex(
+                        scope.suggestions,
+                        scope.activeSuggestionIndex
+                    );
+
+                    scope.goToDetail(activeSuggestion.uri);
+                }
+            }
 
             function removeSuggestions (event) {
                 if (angular.isDefined(event) && event.type === 'blur') {

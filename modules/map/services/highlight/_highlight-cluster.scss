@@ -1,0 +1,15 @@
+.o-highlight-cluster {
+  position: absolute;
+  background-image: url("assets/icons/icon-cluster.svg");
+  background-size: 100%;
+  color: $primary-light;
+
+  font-family: $header-font-family;
+  text-align: center;
+}
+
+.o-highlight-cluster__text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}

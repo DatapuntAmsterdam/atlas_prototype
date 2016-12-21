@@ -1,13 +1,18 @@
 <div class="c-dashboard">
 
     <!-- Header -->
-    <div class="c-dashboard__heading"
+    <div ng-if="!vm.isCatalogus" class="qa-dashboard__default-header c-dashboard__heading"
         ng-controller="HeaderController as header">
 
         <dp-header
             query="{{header.query}}"
             has-print-button="header.hasPrintButton"
             is-print-mode="vm.isPrintMode"></dp-header>
+    </div>
+
+    <!-- Header -->
+    <div ng-if="vm.isCatalogus" class="qa-dashboard__catalogus-header c-dashboard__heading">
+        <dp-cards-header query="{{vm.dataSelectionState.query}}"></dp-cards-header>
     </div>
 
     <!-- Body -->
@@ -59,7 +64,10 @@
 
                     <div ng-controller="StraatbeeldController as straatbeeld"
                          class="u-dashboard--full-height">
-                        <dp-straatbeeld state="straatbeeld.straatbeeldState" is-print-mode="vm.isPrintMode"></dp-straatbeeld>
+                        <dp-straatbeeld
+                            state="straatbeeld.straatbeeldState"
+                            resize="[vm.isPrintMode, vm.visibility.httpStatus.hasErrors]">
+                        </dp-straatbeeld>
                     </div>
                 </div>
 
@@ -100,8 +108,10 @@
                        class="u-dashboard--full-height">
 
                         <!--Resize straatbeeld when any of printMode or errorMode changes-->
-                        <dp-straatbeeld state="straatbeeld.straatbeeldState"
-                                        resize="[vm.isPrintMode, vm.visibility.httpStatus.hasErrors]"></dp-straatbeeld>
+                        <dp-straatbeeld
+                            state="straatbeeld.straatbeeldState"
+                            resize="[vm.isPrintMode, vm.visibility.httpStatus.hasErrors]">
+                        </dp-straatbeeld>
                     </div>
 
                     <!-- Data selection -->

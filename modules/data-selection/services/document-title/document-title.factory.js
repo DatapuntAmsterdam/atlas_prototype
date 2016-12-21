@@ -19,7 +19,13 @@
                 variant,
                 criteria;
 
-            view = dataSelectionState.view === 'TABLE' ? 'Tabel' : 'Lijst';
+            const VIEW_NAMES = {
+                TABLE: 'Tabel',
+                LIST: 'Lijst',
+                CARDS: 'Dataset'
+            };
+
+            view = VIEW_NAMES[dataSelectionState.view];
             variant = DATA_SELECTION_CONFIG[dataSelectionState.dataset].TITLE;
             criteria = DATA_SELECTION_CONFIG[dataSelectionState.dataset].FILTERS
                 // Retrieve all the active filters

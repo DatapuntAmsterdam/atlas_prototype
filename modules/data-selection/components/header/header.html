@@ -2,16 +2,20 @@
     <div ng-if="vm.numberOfRecords > 0" class="qa-data-selection-header__with-records">
         <div class="u-row">
             <div class="u-pull--right">
-                <!--dp-data-selection-toggle-view-button view="vm.state.view"></dp-data-selection-toggle-view-button-->
+                <dp-data-selection-toggle-view-button
+                    ng-if="vm.state.view !== 'CARDS'"
+                    view="vm.state.view"></dp-data-selection-toggle-view-button>
 
                 <dp-data-selection-download-button
+                    ng-if="vm.state.view !== 'CARDS'"
                     dataset="{{vm.state.dataset}}"
                     active-filters="vm.state.filters">
 
                 </dp-data-selection-download-button>
             </div>
 
-            <h2>{{vm.headerTitle}} ({{vm.numberOfRecords | number}})</h2>
+            <h2 ng-if="vm.state.view !== 'CARDS'">{{vm.headerTitle}} ({{vm.numberOfRecords | number}})</h2>
+            <h2 ng-if="vm.state.view === 'CARDS'">{{vm.numberOfRecords | number}} datasets</h2>
         </div>
     </div>
 

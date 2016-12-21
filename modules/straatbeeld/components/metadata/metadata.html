@@ -1,7 +1,7 @@
 <div ng-if="vm.showMetaInfo()">
-    <div class="c-straatbeeld__streetview-history">
-      <a ng-href="{{vm.streetviewUrl}}" target="_blank" class="c-straatbeeld__streetview-history-icon u-pull--left">{{vm.date | date : 'dd-MM-yyyy'}}</a>
-    </div>
-    <div class="u-pull--right">{{vm.location | coordinates: 'WGS84'}}</div>
+   
+      <a ng-href="{{vm.streetviewUrl}}" target="_blank" class="c-straatbeeld__streetview-history-icon u-pull--left u-small-icon-text">{{vm.date | date : 'dd-MM-yyyy'}}</a>
+   
+    <div class="c-straatbeeld__coordinates u-pull--right">{{vm.location | coordinates: 'WGS84'}}</div>
     <div class="u-clearfix"></div>
 </div>

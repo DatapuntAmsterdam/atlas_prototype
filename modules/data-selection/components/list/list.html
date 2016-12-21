@@ -1,6 +1,6 @@
 <ul class="o-list">
     <li ng-repeat="row in vm.content.body">
-        <dp-link type="FETCH_DETAIL" PAYLOAD="row.detailEndpoint">
+        <dp-link type="FETCH_DETAIL" payload="row.detailEndpoint">
             <dp-data-selection-formatter
                 variables="row.content[0]"
                 formatter="{{vm.content.formatters[0]}}"

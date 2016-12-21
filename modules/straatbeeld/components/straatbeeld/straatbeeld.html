@@ -4,11 +4,7 @@
     <div class="c-straatbeeld__marzipano js-marzipano-viewer" ng-mousemove="updateOrientation()"></div>
 
     <div class="c-straatbeeld__status-bar">
-        <button ng-click="toggleFullscreen()"
-                class="qa-straatbeeld-streetview-map-button"
-                ng-class="'c-straatbeeld__streetview-map-icon--' + (state.isFullscreen ? 'minimize' : 'maximize') + ' u-pull--left'">
-            Kaart
-        </button>
+        <dp-straatbeeld-fullscreen state="state"></dp-straatbeeld-fullscreen>
         <dp-straatbeeld-metadata
             date="state.date"
             location="state.location"

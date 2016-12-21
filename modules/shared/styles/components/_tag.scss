@@ -1,0 +1,37 @@
+.o-tag {
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  margin: 0 10px 10px 0;
+  padding: 0 20px 0 23px;
+  border-radius: 3px 0 0 3px;
+  background: $secondary-gray10;
+  color: $secondary-gray80;
+  line-height: 26px;
+  text-decoration: none;
+  text-transform: capitalize;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 13px solid transparent;
+    border-right: 10px solid $secondary-gray10 ;
+    border-bottom: 13px solid transparent;
+    background: $primary-light;
+    content: "";
+  }
+}
+
+.o-tag--small {
+  height: 16px;
+  padding: 0 5px 0 13px;
+  font-size: $base-font-size - 2;
+  line-height: 17px;
+
+  &::before {
+    border-top: 8px solid transparent;
+    border-right: 8px solid $secondary-gray10;
+    border-bottom: 8px solid transparent;
+  }
+}

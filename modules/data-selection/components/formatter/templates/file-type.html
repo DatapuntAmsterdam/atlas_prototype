@@ -1,0 +1,5 @@
+<div ng-repeat="fileType in vm.formattedValue" class="c-data-selection-file-type">
+  <span class="c-data-selection-file-type__name c-data-selection-file-type__format-{{fileType.name | lowercase }}">{{fileType.name}}</span>
+  <span class="c-data-selection-file-type__x">x</span>
+  <span class="c-data-selection-file-type__count">{{fileType.count}}</span>
+</div>

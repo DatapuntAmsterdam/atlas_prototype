@@ -21,7 +21,8 @@
         'user',
         'geometry',
         'geojson',
-        'crsConverter'
+        'crsConverter',
+        'dataFormatter'
     ];
 
     function DpDetailController (
@@ -33,7 +34,8 @@
             user,
             geometry,
             geojson,
-            crsConverter) {
+            crsConverter,
+            dataFormatter) {
         var vm = this;
 
         // Reload the data when the reload flag has been set (endpoint has not
@@ -58,6 +60,12 @@
             vm.location = null;
 
             api.getByUrl(endpoint).then(function (data) {
+                vm.includeSrc = endpointParser.getTemplateUrl(endpoint);
+
+                let subject = endpointParser.getSubject(endpoint);
+
+                data = dataFormatter.formatData(data, subject);
+
                 vm.apiData = {
                     results: data
                 };
@@ -65,10 +73,8 @@
                 // Derive whether more info is available if the user would login
                 vm.isMoreInfoAvailable = vm.apiData.results.is_natuurlijk_persoon && !user.getStatus().isLoggedIn;
 
-                vm.includeSrc = endpointParser.getTemplateUrl(endpoint);
-
                 vm.filterSelection = {
-                    [endpointParser.getSubject(endpoint)]: vm.apiData.results.naam
+                    [subject]: vm.apiData.results.naam
                 };
 
                 geometry.getGeoJSON(endpoint).then(function (geoJSON) {
@@ -80,7 +86,8 @@
                         type: ACTIONS.SHOW_DETAIL,
                         payload: {
                             display: data._display,
-                            geometry: geoJSON
+                            geometry: geoJSON,
+                            isFullscreen: subject === 'api'
                         }
                     });
                 }, errorHandler);

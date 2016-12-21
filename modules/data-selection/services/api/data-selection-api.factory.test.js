@@ -2,116 +2,135 @@ describe('The dataSelectionApi factory', function () {
     let $rootScope,
         $q,
         dataSelectionApi,
-        api,
         mockedApiPreviewResponse,
-        mockedApiMarkersResponse;
+        mockedApiMarkersResponse,
+        mockedApiService = {
+            query: function () {
+                let q = $q.defer();
+
+                q.resolve(mockedApiPreviewResponse);
+
+                return q.promise;
+            }
+        },
+        mockedConfig,
+        api = {
+            getByUrl: function (url) {
+                let q = $q.defer();
+
+                q.resolve(mockedApiMarkersResponse);
+
+                return q.promise;
+            }
+        };
 
     beforeEach(function () {
+        mockedConfig = {
+            zwembaden: {
+                ENDPOINT_MARKERS: 'https://api.amsterdam.nl/zwembaden/markers/',
+                CUSTOM_API: 'mockedApiService',
+                FILTERS: [
+                    {
+                        slug: 'type',
+                        label: 'Type accomodatie'
+                    }, {
+                        slug: 'water',
+                        label: 'Watersoort'
+                    }
+                ],
+                CONTENT: {
+                    TABLE: [
+                        {
+                            label: 'Adres',
+                            variables: ['adres']
+                        },
+                        {
+                            label: 'Openingstijden',
+                            variables: ['openingstijden'],
+                            formatter: 'openingstijdenFormatter'
+                        }
+                    ],
+                    LIST: [
+                        {
+                            variables: ['openbare_ruimte', 'huisnummer'],
+                            formatter: 'adres'
+                        }, {
+                            variables: ['buurtnaam']
+                        }
+                    ],
+                    CARDS: [
+                        {
+                            variables: ['adres.openbare_ruimte', 'huisnummer'],
+                            formatter: 'adres'
+                        }, {
+                            variables: ['buurtnaam']
+                        }
+                    ]
+                }
+            }
+        };
+
         angular.mock.module(
             'dpDataSelection',
             {
-                api: {
-                    getByUrl: function (url) {
-                        let q = $q.defer();
-
-                        if (url.match(/^https:\/\/api.amsterdam.nl\/zwembaden\/markers\//)) {
-                            q.resolve(mockedApiMarkersResponse);
-                        } else {
-                            q.resolve(mockedApiPreviewResponse);
-                        }
-
-                        return q.promise;
-                    }
-                }
+                api,
+                mockedApiService
             },
             function ($provide) {
-                $provide.constant('DATA_SELECTION_CONFIG', {
-                    MAX_AVAILABLE_PAGES: 100,
-                    zwembaden: {
-                        ENDPOINT_PREVIEW: 'https://api.amsterdam.nl/zwembaden/',
-                        ENDPOINT_MARKERS: 'https://api.amsterdam.nl/zwembaden/markers/',
-                        ENDPOINT_DETAIL: 'https://amsterdam.nl/api_endpoint/zwembaden/',
-                        PRIMARY_KEY: 'id',
-                        FILTERS: [
-                            {
-                                slug: 'type',
-                                label: 'Type accomodatie'
-                            }, {
-                                slug: 'water',
-                                label: 'Watersoort'
-                            }
-                        ],
-                        CONTENT: {
-                            TABLE: [
-                                {
-                                    label: 'Adres',
-                                    variables: ['adres']
-                                },
-                                {
-                                    label: 'Openingstijden',
-                                    variables: ['openingstijden'],
-                                    formatter: 'openingstijdenFormatter'
-                                }
-                            ],
-                            LIST: [
-                                {
-                                    variables: ['openbare_ruimte', 'huisnummer'],
-                                    formatter: 'adres'
-                                }, {
-                                    variables: ['buurtnaam']
-                                }
-                            ]
-                        }
-                    }
-                });
+                $provide.constant('DATA_SELECTION_CONFIG', mockedConfig);
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$q_, _dataSelectionApi_, _api_) {
+        angular.mock.inject(function (_$rootScope_, _$q_, _dataSelectionApi_) {
             $rootScope = _$rootScope_;
             $q = _$q_;
             dataSelectionApi = _dataSelectionApi_;
-            api = _api_;
         });
 
+        spyOn(mockedApiService, 'query').and.callThrough();
         spyOn(api, 'getByUrl').and.callThrough();
     });
 
     describe('the query function', function () {
         beforeEach(function () {
             mockedApiPreviewResponse = {
-                aggs_list: {
+                filters: {
                     water: {
-                        doc_count: 3,
-                        buckets: [
+                        numberOfOptions: 3,
+                        options: [
                             {
-                                doc_count: 1,
-                                key: 'Tropisch'
+                                count: 1,
+                                label: 'Tropisch'
                             }, {
-                                doc_count: 4,
-                                key: 'Verwarmd'
+                                count: 4,
+                                label: 'Verwarmd'
                             }, {
-                                doc_count: 1,
-                                key: 'Koud'
+                                count: 1,
+                                label: 'Koud'
                             }
                         ]
                     },
                     type: {
-                        doc_count: 2,
-                        buckets: [
+                        numberOfOptions: 2,
+                        options: [
                             {
-                                doc_count: 4,
-                                key: 'Buitenbad'
+                                count: 4,
+                                label: 'Buitenbad'
                             },
                             {
-                                doc_count: 2,
-                                key: 'Overdekt'
+                                count: 2,
+                                label: 'Overdekt'
                             }
                         ]
                     }
                 },
-                object_list: [
+                data: [
                     {
+                        _links: {
+                            self: {
+                                href: 'https://amsterdam.nl/api_endpoint/zwembaden/1/'
+                            }
+                        },
                         _openbare_ruimte_naam: 'Binnenkant',
                         huisletter: 'A',
                         huisnummer: '1',
@@ -122,6 +141,11 @@ describe('The dataSelectionApi factory', function () {
                         adres: 'Sneeuwbalweg 24',
                         id: '1'
                     }, {
+                        _links: {
+                            self: {
+                                href: 'https://amsterdam.nl/api_endpoint/zwembaden/2/'
+                            }
+                        },
                         _openbare_ruimte_naam: 'Binnenkant',
                         huisletter: 'B',
                         huisnummer: '1',
@@ -134,6 +158,11 @@ describe('The dataSelectionApi factory', function () {
                         openingstijden: 'Ligt er een beetje aan',
                         id: '2'
                     }, {
+                        _links: {
+                            self: {
+                                href: 'https://amsterdam.nl/api_endpoint/zwembaden/3/'
+                            }
+                        },
                         _openbare_ruimte_naam: 'Binnenkant',
                         huisletter: 'C',
                         huisnummer: '1',
@@ -147,36 +176,27 @@ describe('The dataSelectionApi factory', function () {
                         id: '1'
                     }
                 ],
-                page_count: 2
+                numberOfPages: 2,
+                numberOfRecords: 3
             };
         });
 
-        it('calls the api factory with the active filters and page as searchParams', function () {
+        it('calls the api factory with the configuration, active filters and page', function () {
             // Without active filters
             dataSelectionApi.query('zwembaden', 'TABLE', {}, 1);
-            expect(api.getByUrl).toHaveBeenCalledWith('https://api.amsterdam.nl/zwembaden/', {page: 1});
+            expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.zwembaden, {}, 1, undefined);
 
             // With active filters
-            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 1);
-            expect(api.getByUrl).toHaveBeenCalledWith('https://api.amsterdam.nl/zwembaden/', {
-                water: 'Verwarmd',
-                page: 1
-            });
+            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 1, 'searchText');
+            expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.zwembaden, {
+                water: 'Verwarmd'
+            }, 1, 'searchText');
 
             // With another page
-            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 27);
-            expect(api.getByUrl).toHaveBeenCalledWith('https://api.amsterdam.nl/zwembaden/', {
-                water: 'Verwarmd',
-                page: 27
-            });
-
-            // With yet another page
-            let output;
-            dataSelectionApi.query('zwembaden', 'TABLE', {}, 9999).then(function (_output_) {
-                output = _output_;
-            });
-            $rootScope.$apply();
-            expect(output.data.body.length).toBe(0);
+            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 2);
+            expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.zwembaden, {
+                water: 'Verwarmd'
+            }, 2, undefined);
         });
 
         it('returns the total number of pages', function () {
@@ -187,7 +207,41 @@ describe('The dataSelectionApi factory', function () {
             });
             $rootScope.$apply();
 
-            expect(output.number_of_pages).toBe(2);
+            expect(output.numberOfPages).toBe(2);
+        });
+
+        it('does something that nobody understands, unless it is provided with some comment', function () {
+            let output;
+
+            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(function (_output_) {
+                output = _output_;
+            });
+            $rootScope.$apply();
+            expect(output.numberOfPages).toBe(2);
+
+            mockedConfig.zwembaden.CONTENT.CARDS = [
+                {
+                    variables: ['huisnummer']
+                }
+            ];
+            mockedApiPreviewResponse.data[0].huisnummer = [1, 2];
+            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(function (_output_) {
+                output = _output_;
+            });
+            $rootScope.$apply();
+            expect(output.data.body[0].content[0][0].value).toEqual([1, 2]);
+
+            mockedConfig.zwembaden.CONTENT.CARDS = [
+                {
+                    variables: ['huisnummer.adres']
+                }
+            ];
+            mockedApiPreviewResponse.data[0].huisnummer = [1, 2];
+            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(function (_output_) {
+                output = _output_;
+            });
+            $rootScope.$apply();
+            expect(output.numberOfPages).toBe(2);
         });
 
         describe('it returns all available filters', function () {
@@ -237,26 +291,33 @@ describe('The dataSelectionApi factory', function () {
             it('won\'t return filters from the configuration that are not part of the API\'s response', function () {
                 let output = {};
 
-                // With both filters in the response
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
-                    output = _output_;
-                });
-                $rootScope.$apply();
-
-                expect(output.filters.length).toBe(2);
-                expect(output.filters[0].slug).toBe('type');
-                expect(output.filters[1].slug).toBe('water');
-
                 // With only one filter in the API response
-                delete mockedApiPreviewResponse.aggs_list.type;
+                delete mockedApiPreviewResponse.filters.type;
 
                 dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
                     output = _output_;
                 });
                 $rootScope.$apply();
 
-                expect(output.filters.length).toBe(1);
-                expect(output.filters[0].slug).toBe('water');
+                expect(output.filters).toEqual([
+                    {
+                        slug: 'water',
+                        label: 'Watersoort',
+                        numberOfOptions: 3,
+                        options: [
+                            {
+                                count: 1,
+                                label: 'Tropisch'
+                            }, {
+                                count: 4,
+                                label: 'Verwarmd'
+                            }, {
+                                count: 1,
+                                label: 'Koud'
+                            }
+                        ]
+                    }
+                ]);
             });
 
             it('returns the number of results per category (e.g. there a 12 buurten)', function () {

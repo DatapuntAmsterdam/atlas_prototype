@@ -28,6 +28,10 @@
 
             vm.isPrintMode = state.isPrintMode;
 
+            vm.isCatalogus = (state.dataSelection && state.dataSelection.view === 'CARDS') ||
+                (state.detail && state.detail.endpoint.includes('/catalogus/api/'));
+            vm.dataSelectionState = state.dataSelection;
+
             vm.isRightColumnScrollable = !vm.isFullscreen &&
                 (
                     vm.visibility.page ||
@@ -37,6 +41,7 @@
                 );
 
             vm.columnSizes = dashboardColumns.determineColumnSizes(
+                state,
                 vm.visibility,
                 vm.isFullscreen,
                 vm.isPrintMode

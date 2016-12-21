@@ -33,6 +33,18 @@
                 label: 'Luchtfoto 2011',
                 urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2011_RD/{z}/{x}/{y}.jpeg'
             }, {
+                slug: 'luchtfoto_2010',
+                label: 'Luchtfoto 2010',
+                urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2010_RD/{z}/{x}/{y}.jpeg'
+            }, {
+                slug: 'luchtfoto_2009',
+                label: 'Luchtfoto 2009',
+                urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2009_RD/{z}/{x}/{y}.jpeg'
+            }, {
+                slug: 'luchtfoto_2008',
+                label: 'Luchtfoto 2008',
+                urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2008_RD/{z}/{x}/{y}.jpeg'
+            }, {
                 slug: 'luchtfoto_2007',
                 label: 'Luchtfoto 2007',
                 urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2007_RD/{z}/{x}/{y}.jpeg'
@@ -40,6 +52,10 @@
                 slug: 'luchtfoto_2006',
                 label: 'Luchtfoto 2006',
                 urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2006_RD/{z}/{x}/{y}.jpeg'
+            }, {
+                slug: 'luchtfoto_2005',
+                label: 'Luchtfoto 2005',
+                urlTemplate: 'https://{s}.datapunt.amsterdam.nl/lufo2005_RD/{z}/{x}/{y}.jpeg'
             }, {
                 slug: 'luchtfoto_2004',
                 label: 'Luchtfoto 2004',

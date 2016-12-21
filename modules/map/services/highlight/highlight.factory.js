@@ -15,7 +15,7 @@
         'panning',
         'store',
         'ACTIONS',
-        'CLUSTERED_MARKERS_CONFIG'
+        'clusteredMarkersConfig'
     ];
 
     function highlightFactory (
@@ -28,7 +28,7 @@
         panning,
         store,
         ACTIONS,
-        CLUSTERED_MARKERS_CONFIG) {
+        clusteredMarkersConfig) {
         let layers = {},
             clusteredLayer;
 
@@ -93,7 +93,7 @@
         }
 
         function setCluster (leafletMap, markers, onReady) {
-            clusteredLayer = L.markerClusterGroup(CLUSTERED_MARKERS_CONFIG);
+            clusteredLayer = L.markerClusterGroup(clusteredMarkersConfig);
 
             markers.forEach(marker => {
                 clusteredLayer.addLayer(

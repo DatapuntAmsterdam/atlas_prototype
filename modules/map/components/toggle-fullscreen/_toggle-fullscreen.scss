@@ -1,12 +1,12 @@
 .c-toggle-fullscreen {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -1px;
+  right: -1px;
   z-index: 2;
 }
 
 .c-toggle-fullscreen__icon--fullscreen {
-  @include icon-button("fullscreen", "red", "");
+  @include icon-button("maximize", "", "red");
 }
 
 .c-toggle-fullscreen__icon--minimize {

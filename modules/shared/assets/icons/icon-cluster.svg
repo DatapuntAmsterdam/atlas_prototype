@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="39px" height="39px" viewBox="0 0 39 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-cluster</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="17" cy="17" r="16"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-3" y="-3" width="38" height="38">
+            <rect x="-2" y="-2" width="38" height="38" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+        <circle id="path-3" cx="16" cy="16" r="16"></circle>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-3" y="-3" width="38" height="38">
+            <rect x="-3" y="-3" width="38" height="38" fill="white"></rect>
+            <use xlink:href="#path-3" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-cluster">
+            <g id="cluster-icoon" transform="translate(3.000000, 3.000000)">
+                <use id="Oval" stroke="#666666" mask="url(#mask-2)" stroke-width="6" xlink:href="#path-1"></use>
+                <use id="Oval" stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="6" xlink:href="#path-3"></use>
+                <circle id="Oval" fill="#FF0000" cx="16" cy="16" r="16"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

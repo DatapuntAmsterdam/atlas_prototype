@@ -27,7 +27,8 @@
             newState.detail = {
                 endpoint: payload,
                 reload: Boolean(oldState.detail && oldState.detail.endpoint === payload),
-                isLoading: true
+                isLoading: true,
+                isFullscreen: payload.includes('catalogus/api')
             };
 
             newState.map.isLoading = true;
@@ -57,6 +58,7 @@
 
                 newState.detail.display = payload.display;
                 newState.detail.geometry = payload.geometry;
+                newState.detail.isFullscreen = payload.isFullscreen;
 
                 newState.map.isLoading = false;
                 newState.detail.isLoading = false;

@@ -20,6 +20,16 @@
       color: $secondary-gray60;
     }
   }
+
+  &.o-btn--link--inverse {
+    color: $primary-light;
+
+    &:hover,
+    &:visited,
+    &:active {
+      color: $primary-light;
+    }
+  }
 }
 
 %btn-close {

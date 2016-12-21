@@ -1,0 +1,25 @@
+
+.u-small-icon-text {
+  padding-right: $base-whitespace;
+  border-right: solid $secondary-gray20 1px;
+  font-family: $header-font-family;
+  font-size: $base-font-size - 2 !important;
+  z-index: 2;
+
+  &:hover {
+    background-color: $primary-contrast;
+    color: $primary-light !important;
+    text-decoration: none !important;
+  }
+
+  &:active,
+  &:focus {
+    color: $primary-light;
+  }
+
+  &::before {
+    margin-top: -2px;
+    margin-right: -$base-whitespace / 2;
+    margin-left: 0;
+  }
+}

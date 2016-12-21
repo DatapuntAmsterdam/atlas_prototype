@@ -1,0 +1,29 @@
+<header class="site-header u-hide-on-print">
+    <div class="u-grid">
+        <div class="u-row">
+            <div class="u-col-sm--3">
+                <dp-link type="FETCH_DATA_SELECTION"
+                         payload="{dataset: 'catalogus', view: 'CARDS', filters: {}, page: 1}"
+                         class-name="site-header__logo site-header__logo--small"
+                         hover-text="Naar Amsterdam data home">
+                    <img class="u-block site-header__logo" src="assets/images/andreas.svg" alt="Logo Gemeente Amsterdam" >
+                    data.amsterdam.nl
+                </dp-link>
+            </div>
+
+            <!-- Default -->
+            <div class="u-col-sm--9 u-padding__left--1">
+                <div class="u-col-sm--7" class="site-header__search">
+                    <dp-search
+                        query="{{vm.query}}"
+                        placeholder="Zoek op thema, trefwoord..."
+                        type="FETCH_DATA_SELECTION"
+                        payload="{dataset: 'catalogus', view: 'CARDS', filters: {}, page: 1}"
+                        search-only="true"
+                    ></dp-search>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>

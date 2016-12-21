@@ -107,6 +107,10 @@ describe('The highlight factory', function () {
                 },
                 store: {
                     dispatch: angular.noop
+                },
+                clusteredMarkersConfig: {
+                    looksGoodToMe: true,
+                    optimizationLevel: 999
                 }
             },
             function ($provide) {
@@ -129,11 +133,6 @@ describe('The highlight factory', function () {
                     detail: {
                         foo: 'e'
                     }
-                });
-
-                $provide.constant('CLUSTERED_MARKERS_CONFIG', {
-                    looksGoodToMe: true,
-                    optimizationLevel: 999
                 });
             }
         );

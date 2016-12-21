@@ -27,6 +27,13 @@
                     url: 'https://www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-aant/',
                     meta: []
                 },
+                API: {
+                    label_singular: 'Dataset',
+                    label_plural: 'Datasets',
+                    description: '',
+                    url: '',
+                    meta: []
+                },
                 BEPERKING: {
                     label_singular: 'Gemeentelijke beperking',
                     label_plural: 'Gemeentelijke beperkingen',

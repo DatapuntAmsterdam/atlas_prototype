@@ -2,7 +2,6 @@ describe('The dp-straatbeeld directive', function () {
     var $compile,
         $rootScope,
         $store,
-        userSettings,
         scope,
         ACTIONS,
         $q,
@@ -42,7 +41,6 @@ describe('The dp-straatbeeld directive', function () {
             _$compile_,
             _$rootScope_,
             _store_,
-            _userSettings_,
             _ACTIONS_,
             _$q_,
             _marzipanoService_,
@@ -51,7 +49,6 @@ describe('The dp-straatbeeld directive', function () {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $store = _store_;
-            userSettings = _userSettings_;
             ACTIONS = _ACTIONS_;
             $q = _$q_;
             marzipanoService = _marzipanoService_;
@@ -102,50 +99,6 @@ describe('The dp-straatbeeld directive', function () {
 
             expect($store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.HIDE_STRAATBEELD
-            });
-        });
-    });
-
-    describe('The kaart button', function () {
-        let directive,
-            toggle;
-
-        beforeEach(function () {
-            directive = getDirective({}, false);
-            toggle = directive.find('.qa-straatbeeld-streetview-map-button');
-        });
-
-        it('can change a window-view straatbeeld to fullscreen', function () {
-            scope.state.isFullscreen = false;
-            $rootScope.$apply();
-            expect(toggle.attr('class')).toContain('c-straatbeeld__streetview-map-icon--maximize');
-            toggle.click();
-            $rootScope.$apply();
-            expect($store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: true
-            });
-        });
-
-        it('can change a fullscreen straatbeeld to window-view', function () {
-            scope.state.isFullscreen = true;
-            $rootScope.$apply();
-            expect(toggle.attr('class')).toContain('c-straatbeeld__streetview-map-icon--minimize');
-            toggle.click();
-            $rootScope.$apply();
-            expect($store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: false
-            });
-        });
-
-        it('stores the fullsreem state of the straatbeeld in the user settings', function () {
-            [true, false, true].forEach(b => {
-                scope.state.isFullscreen = b;
-                $rootScope.$apply();
-                toggle.click();
-                $rootScope.$apply();
-                expect(userSettings.fullscreenStraatbeeld.value).toBe((!b).toString());
             });
         });
     });

@@ -4,12 +4,61 @@
     angular
         .module('dpDataSelection')
         .constant('DATA_SELECTION_CONFIG', {
-            MAX_AVAILABLE_PAGES: 100,
+            catalogus: {
+                MAX_ITEMS_PER_PAGE: 10,
+                CUSTOM_API: 'dataSelectionApiCkan',
+                ENDPOINT_PREVIEW: 'catalogus/api/3/action/package_search',
+                ENDPOINT_DETAIL: 'catalogus/api/3/action/package_show',
+                PRIMARY_KEY: 'id',
+                TITLE: 'Catalogus',
+                SHOW_FILTER_OPTION_COUNTS: false,
+                FILTERS: [
+                    {
+                        slug: 'groups',
+                        label: 'Thema\'s'
+                    }, {
+                        slug: 'res_format',
+                        label: 'Formaten'
+                    }, {
+                        slug: 'organization',
+                        label: 'Gepubliceerd door'
+                    }
+                ],
+                CONTENT: {
+                    CARDS: [
+                        {
+                            label: 'Naam',
+                            variables: ['title']
+                        }, {
+                            label: 'Datum',
+                            variables: ['metadata_created', 'metadata_modified'],
+                            formatter: 'modificationDate'
+                        }, {
+                            label: 'Formaten',
+                            variables: ['resources.format'],
+                            formatter: 'aggregate',
+                            template: 'file-type'
+                        }, {
+                            label: 'Labels',
+                            variables: ['tags.display_name'],
+                            formatter: 'aggregate',
+                            template: 'tags'
+                        }, {
+                            label: 'Omschrijving',
+                            formatter: 'truncateHtmlAsText',
+                            variables: ['notes']
+                        }
+                    ]
+                }
+            },
             bag: {
-                ENDPOINT_PREVIEW: 'https://api.datapunt.amsterdam.nl/dataselectie/bag/',
+                ENDPOINT_PREVIEW: 'dataselectie/bag/',
                 ENDPOINT_MARKERS: 'https://api.datapunt.amsterdam.nl/dataselectie/bag/geolocation/',
                 ENDPOINT_EXPORT: 'https://api.datapunt.amsterdam.nl/dataselectie/bag/export/',
                 ENDPOINT_DETAIL: 'https://api.datapunt.amsterdam.nl/bag/nummeraanduiding/',
+                MAX_AVAILABLE_PAGES: 100,
+                HAS_PAGE_LIMIT: true,
+                CUSTOM_API: 'dataSelectionApiDataSelection',
                 PRIMARY_KEY: 'id',
                 TITLE: 'Adressen',
                 FILTERS: [

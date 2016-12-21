@@ -1,0 +1,13 @@
+.c-data-selection-tag {
+  float: left;
+  font-size: $base-font-size * .8;
+}
+
+.c-data-selection-tag__name {
+  display: inline-block;
+  margin-right: $base-whitespace;
+  padding: 0 $base-whitespace * .5;
+  background-color: $secondary-gray20;
+  color: $secondary-gray80;
+  text-transform: lowercase;
+}

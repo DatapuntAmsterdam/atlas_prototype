@@ -1,7 +1,8 @@
 .c-panel {
   position: relative;
   margin-bottom: $base-whitespace * 4;
-  padding: $base-whitespace;
+  padding: $base-whitespace / 2;
+  padding-left: $base-whitespace;
   background-color: $secondary-gray10;
 
   &.c-panel--can-close {

@@ -265,42 +265,4 @@ describe('The map controller', function () {
             [51.1, 4.2]
         ]);
     });
-
-    it('sets loading indicator when dataselection listview is loading', function () {
-        let controller = getController();
-        expect(controller.mapState.isLoading).toBeUndefined();
-
-        // With dataselection list loading
-        mockedState = {
-            dataSelection: {
-                view: 'LIST',
-                isLoading: true
-            },
-            map: {}
-        };
-        controller = getController();
-        expect(controller.mapState.isLoading).toBe(true);
-
-        // With dataselection list not loading
-        mockedState = {
-            dataSelection: {
-                view: 'LIST',
-                isLoading: false
-            },
-            map: {}
-        };
-        controller = getController();
-        expect(controller.mapState.isLoading).toBe(false);
-
-        // With dataselection table loading
-        mockedState = {
-            dataSelection: {
-                view: 'TABLE',
-                isLoading: true
-            },
-            map: {}
-        };
-        controller = getController();
-        expect(controller.mapState.isLoading).toBe(false);
-    });
 });

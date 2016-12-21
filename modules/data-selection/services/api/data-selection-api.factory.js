@@ -3,45 +3,27 @@
         .module('dpDataSelection')
         .factory('dataSelectionApi', dataSelectionApiFactory);
 
-    dataSelectionApiFactory.$inject = ['DATA_SELECTION_CONFIG', 'api'];
+    dataSelectionApiFactory.$inject = ['$injector', 'DATA_SELECTION_CONFIG', 'api'];
 
-    function dataSelectionApiFactory (DATA_SELECTION_CONFIG, api) {
+    function dataSelectionApiFactory ($injector, DATA_SELECTION_CONFIG, api) {
         return {
             query: query,
             getMarkers: getMarkers
         };
 
-        function query (dataset, view, activeFilters, page) {
-            let searchParams,
-                searchPage = page;
+        function query (dataset, view, activeFilters, page, searchText) {
+            const customApi = DATA_SELECTION_CONFIG[dataset].CUSTOM_API,
+                apiService = $injector.get(customApi);
 
-            // Making sure to not request pages higher then max allowed.
-            // If that is the case requesting for page 1, to obtain filters.
-            // In the response the data will be dumped.
-            if (page > DATA_SELECTION_CONFIG.MAX_AVAILABLE_PAGES) {
-                searchPage = 1;
-            }
-            searchParams = angular.merge(
-                {
-                    page: searchPage
-                },
-                activeFilters
-            );
-
-            return api.getByUrl(DATA_SELECTION_CONFIG[dataset].ENDPOINT_PREVIEW, searchParams).then(function (data) {
-                if (searchPage !== page) {
-                    // Requested page was out of api reach, dumping data
-                    // and saving only the filters
-                    data.object_list = [];
-                }
-
-                return {
-                    number_of_pages: data.page_count,
-                    number_of_records: data.object_count,
-                    filters: formatFilters(dataset, data.aggs_list),
-                    data: formatData(dataset, view, data.object_list)
-                };
-            });
+            return apiService.query(DATA_SELECTION_CONFIG[dataset], activeFilters, page, searchText)
+                .then(function (data) {
+                    return {
+                        numberOfPages: data.numberOfPages,
+                        numberOfRecords: data.numberOfRecords,
+                        filters: formatFilters(dataset, data.filters),
+                        data: formatData(dataset, view, data.data)
+                    };
+                });
         }
 
         function formatFilters (dataset, rawData) {
@@ -51,18 +33,7 @@
                 // Only show the filters that are returned by the API
                 return angular.isObject(rawData[filter.slug]);
             }).map(function (filter) {
-                // Add all the available options for each filter
-                filter.options = rawData[filter.slug].buckets.map(function (option) {
-                    return {
-                        label: option.key,
-                        count: option.doc_count
-                    };
-                });
-
-                // Note: filter.options is limited to 100 results
-                filter.numberOfOptions = rawData[filter.slug].doc_count;
-
-                return filter;
+                return angular.extend({}, filter, rawData[filter.slug]);
             });
         }
 
@@ -73,25 +44,41 @@
 
                 body: rawData.map(rawDataRow => {
                     return {
-                        detailEndpoint: getDetailEndpoint(dataset, rawDataRow),
+                        detailEndpoint: rawDataRow._links.self.href,
                         content: DATA_SELECTION_CONFIG[dataset].CONTENT[view].map(item => {
                             return item.variables.map(variable => {
+                                const path = variable.split('.');
                                 return {
                                     key: variable,
-                                    value: rawDataRow[variable]
+                                    value: recurGetContent(path, rawDataRow)
                                 };
                             });
                         })
                     };
                 }),
 
-                formatters: DATA_SELECTION_CONFIG[dataset].CONTENT[view].map(item => item.formatter)
+                formatters: DATA_SELECTION_CONFIG[dataset].CONTENT[view].map(item => item.formatter),
+                templates: DATA_SELECTION_CONFIG[dataset].CONTENT[view].map(item => item.template)
             };
         }
 
-        function getDetailEndpoint (dataset, rawDataRow) {
-            return DATA_SELECTION_CONFIG[dataset].ENDPOINT_DETAIL +
-                rawDataRow[DATA_SELECTION_CONFIG[dataset].PRIMARY_KEY] + '/';
+        function recurGetContent (path, rawData) {
+            if (path.length === 1) {
+                const key = path[0],
+                    rawValue = rawData[key];
+
+                return angular.isArray(rawValue)
+                    ? rawValue.map(value => value)
+                    : rawValue;
+            } else {
+                const key = path[0],
+                    rawValue = rawData[key],
+                    remainingPath = path.splice(1);
+
+                return angular.isArray(rawValue)
+                    ? rawValue.map(value => recurGetContent(remainingPath, value))
+                    : recurGetContent(remainingPath, rawValue);
+            }
         }
 
         function getMarkers (dataset, activeFilters) {

@@ -109,6 +109,8 @@
                 if (state.detail.isInvisible) {
                     params.detailInvisible = true;  // Only store in url on truthy value
                 }
+
+                params['volledig-detail'] = state.detail.isFullscreen ? 'aan' : null;
             }
 
             return params;
@@ -148,6 +150,10 @@
 
                 if (datasetFilters.length) {
                     params['dataset-filters'] = datasetFilters.join('::');
+                }
+
+                if (state.dataSelection.query) {
+                    params['dataset-zoek'] = state.dataSelection.query;
                 }
 
                 params['dataset-pagina'] = String(state.dataSelection.page);

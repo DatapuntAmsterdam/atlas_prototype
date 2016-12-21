@@ -1,33 +1,9 @@
 @import "active-overlays-item";
 
-%toggle-active-overlays {
-  position: absolute;
-  bottom: 0;
-  left: 180px;
-  min-width: $button-size + 81px;
-  z-index: 3;
-}
-
-.c-toggle-active-overlays {
-  @extend %toggle-active-overlays;
-  @include icon-button-text-box-left("down", "red", "");
-
-  &.c-toggle-active-overlays--mirrored {
-    @extend %toggle-active-overlays;
-    @include icon-button-text-box-left("up");
-  }
-}
-
-.is-print-mode {
-  .c-toggle-active-overlays {
-    display: none;
-  }
-}
-
 .c-active-overlays {
   position: absolute;
-  bottom: 1px;
-  left: 1px;
+  bottom: 0;
+  left: 0;
   width: 305px;
   height: 80%;
   border-width: 1px 1px $button-size 0;
@@ -37,6 +13,28 @@
   border-bottom-color: $primary-light;
   background-color: $primary-light;
   z-index: 2;
+}
+
+.c-toggle-active-overlays {
+  @include icon-button-text-box-right("up", "", "red");
+  position: absolute;
+  bottom: 0;
+  left: 149px;
+  min-width: 94px;
+  border-bottom: none;
+  z-index: 3;
+
+  &.c-toggle-active-overlays--mirrored {
+    @include icon-button-text-box-right("down");
+    position: absolute;
+    border-bottom: none;
+  }
+}
+
+.is-print-mode {
+  .c-toggle-active-overlays {
+    display: none;
+  }
 }
 
 .c-active-overlays__close {

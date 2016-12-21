@@ -109,16 +109,27 @@ describe('The dp-search directive', function () {
         promises = [];
     });
 
-    function getDirective (query) {
+    function getDirective (query,
+                           placeholder = 'placeholder',
+                           type = 'FETCH_SEARCH_RESULTS_BY_QUERY',
+                           searchOnly = false,
+                           payload) {
         var directive,
             element,
             scope;
 
         element = document.createElement('dp-search');
         element.setAttribute('query', query);
+        element.setAttribute('placeholder', placeholder);
+        element.setAttribute('type', type);
+        if (payload) {
+            element.setAttribute('payload', payload);
+        }
+        element.setAttribute('search-only', searchOnly);
 
         scope = $rootScope.$new();
 
+        scope.searchOnly = searchOnly;
         directive = $compile(element)(scope);
         scope.$apply();
 
@@ -135,6 +146,27 @@ describe('The dp-search directive', function () {
         // With a query
         directive = getDirective('query without suggestions');
         expect(directive.find('.js-search-input')[0].value).toBe('query without suggestions');
+    });
+
+    it('optionally accepts a payload to include the query', function () {
+        let directive = getDirective('q', 'ph', 'FETCH_SEARCH_RESULTS_BY_QUERY', true, '{aap: "noot"}');
+
+        spyOn(store, 'dispatch');
+
+        // Set a query
+        directive.find('.js-search-input')[0].value = 'query';
+        directive.find('.js-search-input').trigger('change');
+
+        // Submit the form
+        directive.find('.c-search-form').trigger('submit');
+
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
+            payload: {
+                aap: 'noot',
+                query: 'query'
+            }
+        });
     });
 
     it('can search (without using a suggestion from autocomplete)', function () {
@@ -160,6 +192,33 @@ describe('The dp-search directive', function () {
 
         expect(directive.find('.c-search-form__submit').attr('title')).toBe('Zoeken');
         expect(directive.find('.c-search-form__submit .u-sr-only').text()).toBe('Zoeken');
+    });
+
+    describe('the autocomplete function', function () {
+        it('can be disabled', function () {
+            var directive = getDirective('', 'placeholder', 'FETCH', true);
+
+            // A query with suggestions
+            directive.find('.js-search-input')[0].value = 'query with suggestions';
+            directive.find('.js-search-input').trigger('change');
+            finishApiCall();
+            expect(directive.find('.c-autocomplete').length).toBe(0);
+        });
+
+        it('calls search when no search text is detected', function () {
+            spyOn(store, 'dispatch');
+            var directive = getDirective('', 'placeholder', 'FETCH_SEARCH_RESULTS_BY_QUERY', true);
+
+            // A query with suggestions
+            directive.find('.js-search-input')[0].value = 'aap';
+            directive.find('.js-search-input').trigger('change');
+            directive.find('.js-search-input')[0].value = '';
+            directive.find('.js-search-input').trigger('change');
+            expect(store.dispatch).toHaveBeenCalledWith({
+                type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
+                payload: ''
+            });
+        });
     });
 
     describe('has autocomplete suggestions', function () {

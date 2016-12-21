@@ -1,0 +1,51 @@
+.c-data-selection-cards {
+  position: relative;
+  margin-bottom: $base-whitespace * 2;
+  border-bottom: 1px solid $secondary-gray40;
+}
+
+.c-data-selection-cards__header {
+  margin-bottom: $base-whitespace * .5;
+  line-height: $base-font-size * 1.2;
+}
+
+.c-data-selection-cards__header-link {
+  color: $primary-dark;
+  font-size: $base-font-size * 1.2;
+  text-decoration: none;
+}
+
+.c-data-selection-cards__date {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: $secondary-gray40;
+  font-size: $base-font-size * .9;
+  line-height: $base-font-size * 1.2;
+}
+
+.c-data-selection-cards__formats {
+  display: inline-block;
+  margin: {
+    right: $base-whitespace;
+    left: 0;
+  };
+}
+
+.c-data-selection-cards__tags {
+  display: inline-block;
+  position: relative;
+  top: -3px; // TODO: fix weird positioning
+  margin: {
+    top: 0;
+    left: 0;
+  };
+}
+
+.c-data-selection-cards__description {
+  margin-bottom: $base-whitespace;
+
+  & p {
+    margin-bottom: $base-whitespace;
+  }
+}

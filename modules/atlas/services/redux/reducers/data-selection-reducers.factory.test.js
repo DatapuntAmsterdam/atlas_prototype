@@ -104,6 +104,21 @@ describe('The dataSelectionReducers factory', function () {
             }));
         });
 
+        it('sets the dataSelection query', function () {
+            let mockedState,
+                output;
+
+            mockedState = angular.copy(DEFAULT_STATE);
+
+            payload = 'zoek';
+
+            output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+
+            expect(output.dataSelection).toEqual(jasmine.objectContaining({
+                query: 'zoek'
+            }));
+        });
+
         it('makes the Array of markers empty', function () {
             let mockedState,
                 output;

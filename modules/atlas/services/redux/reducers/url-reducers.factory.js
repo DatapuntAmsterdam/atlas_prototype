@@ -118,6 +118,9 @@
                     newDetailState.display = oldState.detail.display;
                     newDetailState.geometry = oldState.detail.geometry;
                     newDetailState.isLoading = oldState.detail.isLoading;
+                    newDetailState.isFullscreen = oldState.detail.isFullscreen;
+                } else {
+                    newDetailState.isFullscreen = angular.isString(payload['volledig-detail']);
                 }
 
                 // restore invisibility from url payload
@@ -177,13 +180,17 @@
                     });
                 }
 
+                let view = payload.view && String(payload.view);
+
                 return {
-                    view: payload.view && String(payload.view),
+                    view,
                     dataset: payload.dataset,
                     filters: filters,
+                    query: payload['dataset-zoek'],
                     page: Number(payload['dataset-pagina']),
                     markers: oldState.dataSelection && oldState.dataSelection.markers || [],
-                    isLoading: angular.isObject(oldState.dataSelection) ? oldState.dataSelection.isLoading : true
+                    isLoading: angular.isObject(oldState.dataSelection) ? oldState.dataSelection.isLoading : true,
+                    isFullscreen: view !== 'LIST'
                 };
             } else {
                 return null;

@@ -1,2 +1,3 @@
-<div ng-if="!vm.useInline" ng-bind-html="vm.formattedValue"></div>
-<span ng-if="vm.useInline" ng-bind-html="vm.formattedValue"></span>
+<div ng-if="vm.template" ng-include="vm.templatePath"></div>
+<div ng-if="!vm.template && !vm.useInline" ng-bind-html="vm.formattedValue"></div>
+<span ng-if="!vm.template && vm.useInline" ng-bind-html="vm.formattedValue"></span>

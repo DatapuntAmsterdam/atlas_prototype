@@ -8,7 +8,7 @@
             autocorrect="off"
             autocomplete="off"
             spellcheck="false"
-            placeholder="Zoek op adres of postcode, kadastrale aanduiding, etc."
+            placeholder="{{placeholder}}"
             ng-change="getSuggestions()"
             ng-keydown="navigateSuggestions($event)"
             ng-blur="removeSuggestions($event)">
@@ -17,7 +17,7 @@
             <span class="u-sr-only">Zoeken</span>
         </button>
 
-        <div ng-if="numberOfSuggestions" class="c-autocomplete">
+        <div ng-if="!searchOnly && numberOfSuggestions" class="c-autocomplete">
             <h3 class="c-autocomplete__tip">Enkele suggesties</h3>
 
             <div class="c-autocomplete__category" ng-repeat="category in suggestions">

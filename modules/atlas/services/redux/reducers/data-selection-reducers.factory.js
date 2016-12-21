@@ -39,7 +39,12 @@
             newState.detail = null;
             newState.straatbeeld = null;
 
-            newState.dataSelection = angular.copy(payload);
+            let mergeInto = angular.isString(payload) ? {query: payload} : payload;
+
+            newState.dataSelection = Object.keys(mergeInto).reduce((result, key) => {
+                result[key] = mergeInto[key];
+                return result;
+            }, newState.dataSelection || {});
 
             if (!newState.dataSelection.view) {
                 // Default view is table view
@@ -50,6 +55,7 @@
 
             newState.dataSelection.markers = [];
             newState.dataSelection.isLoading = true;
+            newState.dataSelection.isFullscreen = newState.dataSelection.view !== 'LIST';
 
             return newState;
         }
@@ -68,6 +74,7 @@
                 newState.dataSelection.isLoading = false;
                 // Set map loading if any markers need to be shown
                 newState.map.isLoading = newState.dataSelection.markers.length > 0;
+                newState.dataSelection.isFullscreen = newState.dataSelection.view !== 'LIST';
             }
 
             return newState;
@@ -96,7 +103,7 @@
         function setDataSelectionViewReducer (oldState, payload) {
             let newState = angular.copy(oldState);
 
-            ['LIST', 'TABLE'].forEach(legalValue => {
+            ['LIST', 'TABLE', 'CARDS'].forEach(legalValue => {
                 if (payload === legalValue) {
                     newState.dataSelection.view = payload;
                     newState.dataSelection.isLoading = true;

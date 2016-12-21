@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <title>icoon-omlaag</title>
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-omlaag-transparant</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icoon-omlaag">
-            <polygon id="Fill-1" fill="#666666" points="0 1.59204084e-15 0 26 26 26 26 0"></polygon>
-            <polygon id="Fill-2" fill="#FFFFFF" points="13 17.7477124 15.7481481 14.9995643 20 10.7477124 17.2518519 8 13 12.2518519 8.74814815 8 6 10.7477124 10.2518519 14.9995643 13 17.7477124 13 17.7477124"></polygon>
+        <g id="icoon-omlaag-transparant" fill="#666666">
+            <polygon id="Fill-2" points="13 17.7477124 15.7481481 14.9995643 20 10.7477124 17.2518519 8 13 12.2518519 8.74814815 8 6 10.7477124 10.2518519 14.9995643 13 17.7477124 13 17.7477124"></polygon>
         </g>
     </g>
 </svg>

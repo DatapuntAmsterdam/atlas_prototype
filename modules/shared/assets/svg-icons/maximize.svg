@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-maxi-wit</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 25.9881545 26 25.9881545 26 0 0 0"></polygon>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="26" height="25.9881545" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-maxi-wit">
+            <use id="Fill-1" stroke="#CCCCCC" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+            <polygon id="Fill-2" fill="#666666" points="6.5581535 18.1277262 6.5581535 14.9044828 4.61454979 14.9044828 4.61454979 21.3741077 11.0841748 21.3741077 11.0841748 19.429498 8.00479021 19.429498 10.631472 16.765594 9.25626175 15.3893777"></polygon>
+            <polygon id="Fill-3" fill="#666666" points="14.9043822 4.61495219 14.9043822 6.5585559 17.9837667 6.5585559 15.3560789 9.22346595 16.7312892 10.5986762 19.4293974 7.86032774 19.4293974 11.0845772 21.3730011 11.0845772 21.3730011 4.61495219"></polygon>
+        </g>
+    </g>
+</svg>

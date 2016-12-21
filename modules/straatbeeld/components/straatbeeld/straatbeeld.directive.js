@@ -72,17 +72,6 @@
                 });
             }
 
-            scope.toggleFullscreen = function () {
-                // Dispatch an action to change the pano
-                let isFullscreen = !scope.state.isFullscreen;
-                // Save the new state of the straatbeeld as a user setting
-                userSettings.fullscreenStraatbeeld.value = isFullscreen.toString();
-                store.dispatch({
-                    type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                    payload: isFullscreen
-                });
-            };
-
             scope.$watchCollection('state.image', function () {
                 if (angular.isObject(scope.state.image)) {
                     marzipanoService.loadScene(

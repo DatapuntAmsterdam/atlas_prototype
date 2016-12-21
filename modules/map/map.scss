@@ -4,6 +4,7 @@
 @import "components/map/map";
 @import "components/toggle-fullscreen/toggle-fullscreen";
 @import "components/toggle-layer-selection/toggle-layer-selection";
+@import "services/highlight/highlight-cluster";
 @import "services/measure/measure";
 
 .is-print-mode {

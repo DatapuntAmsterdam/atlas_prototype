@@ -11,10 +11,9 @@
                 iconAnchor: [15, 51]
             },
             detail: {
-                iconUrl: 'assets/icons/icon-detail.png',
-                iconRetinaUrl: 'assets/icons/icon-detail-retina.png',
-                iconSize: [16, 16],
-                iconAnchor: [8, 8]
+                iconUrl: 'assets/icons/icon-detail.svg',
+                iconSize: [21, 21],
+                iconAnchor: [10, 10]
             },
             straatbeeld_orientation: {
                 iconUrl: 'assets/icons/icon-straatbeeld-orientation.png',

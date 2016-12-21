@@ -43,7 +43,13 @@
     background-color: $secondary-gray80;
     line-height: 50px;
   }
+
+  &.site-header__logo--small {
+    font-size: 24px;
+  }
 }
+
+
 
 .site-header__search {
   padding-left: $base-whitespace * 2;
