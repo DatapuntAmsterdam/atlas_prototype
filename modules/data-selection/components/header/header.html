@@ -15,7 +15,7 @@
             </div>
 
             <h2 ng-if="vm.state.view !== 'CARDS'">{{vm.headerTitle}} ({{vm.numberOfRecords | number}})</h2>
-            <h2 ng-if="vm.state.view === 'CARDS'">{{vm.numberOfRecords | number}} datasets</h2>
+            <h2 ng-if="vm.state.view === 'CARDS'">{{vm.numberOfRecords | number}} dataset<span ng-if="vm.numberOfRecords !== 1">s</span></h2>
         </div>
     </div>
 
