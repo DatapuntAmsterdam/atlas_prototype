@@ -4,6 +4,9 @@ MAINTAINER datapunt.ois@amsterdam.nl
 
 EXPOSE 80
 
+ARG BUILD_NUMBER
+ENV BUILD_NUMBER=$BUILD_NUMBER
+
 RUN apt-get update \
  && apt-get install -y git nginx build-essential \
  && apt-get clean \
@@ -19,11 +22,6 @@ RUN npm cache clean \
  && bower install --allow-root
 
 COPY . /app/
-
-ARG BUILD_NUMBER
-ENV BUILD_NUMBER=$BUILD_NUMBER
-
-RUN grunt set-build-id --buildid=${BUILD_NUMBER}
 
 RUN grunt build-release \
  && cp -r /app/build/. /var/www/html/
