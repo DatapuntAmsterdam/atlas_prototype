@@ -20,10 +20,10 @@ RUN npm cache clean \
 
 COPY . /app/
 
-ARG BUILD_NR
-ENV BUILD_NR=$BUILD_NR
+ARG BUILD_NUMBER
+ENV BUILD_NUMBER=$BUILD_NUMBER
 
-RUN grunt set-build-id --buildid=${BUILD_NR}
+RUN grunt set-build-id --buildid=${BUILD_NUMBER}
 
 RUN grunt build-release \
  && cp -r /app/build/. /var/www/html/
