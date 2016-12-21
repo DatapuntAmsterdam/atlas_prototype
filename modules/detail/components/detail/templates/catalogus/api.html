@@ -1,9 +1,10 @@
 <div class="u-grid">
     <div class="u-row">
         <div class="u-col-md--12">
-            <h3 class="o-header__subtitle">Dataset</h3>
-            <h2 class="o-header__title u-margin__bottom--3">{{vm.apiData.results.title}}</h2>
-
+            <div class="o-header">
+                <h3 class="o-header__subtitle u-margin__bottom--05">Dataset</h3>
+                <h2 class="o-header__title u-margin__bottom--3">{{vm.apiData.results.title}}</h2>
+            </div>
             <dl class="c-key-value-list">
                 <dt>Aangemaakt</dt>
                 <dd>{{ { metadata_created: vm.apiData.results.metadata_created, metadata_compact: true } | modificationDate }} ({{vm.apiData.results.metadata_created | date:'dd MMMM yyyy'}})</dd>
@@ -26,7 +27,6 @@
            <span ng-bind-html="vm.apiData.results.notes"> </span>
         </div>
     </div>
-
     <div class="u-row u-margin__bottom--2">
         <div class="u-col-md--12">
             <h3 class="o-header__subtitle">Data</h3>
@@ -35,9 +35,15 @@
                 <tbody class="c-data-selection-table__content">
                     <tr class="c-data-selection-table__content-row" ng-repeat="resource in vm.apiData.results.resources">
                         <td>
-                            <div class="c-data-selection-file-type c-data-selection-file-type__name c-data-selection-file-type__format-{{resource.format | lowercase }}">{{resource.format}}</div>
+                            <div class="c-data-selection-file-type c-data-selection-file-type__name c-data-selection-file-type__format-{{resource.format | lowercase }}"><span ng-if="resource.format">{{resource.format}}</span>
+                            <span ng-if="!resource.format"> ? </span></div>
+                            
                         </td>
-                        <td>{{resource.name}}</td>
+                        <td> <span class="c-data-selection-file__name">{{resource.name}} </span></td>
+                        <td>
+                            <span ng-if="resource.description">{{resource.description}} </span>
+                            <span ng-if="!resource.description">{{resource.url}} </span> 
+                        </td>
                         <td class="u-align--right">
                             <a ng-href="{{resource.url}}" class="c-download-button o-btn" title="Downloaden dataset">{{resource.size / 1024 | number:0}} KB</a>
                         </td>

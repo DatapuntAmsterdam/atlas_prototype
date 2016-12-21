@@ -14,6 +14,7 @@
                 query: '@',
                 placeholder: '@',
                 type: '@',
+                payload: '<',
                 searchOnly: '<'
             },
             templateUrl: 'modules/header/components/search/search.html',
@@ -120,9 +121,15 @@
             function search () {
                 if (scope.activeSuggestionIndex === -1) {
                     // Load the search results
+                    let payload = scope.query;
+                    if (angular.isObject(scope.payload)) {
+                        payload = angular.merge({}, scope.payload, {
+                            query: scope.query
+                        });
+                    }
                     store.dispatch({
                         type: ACTIONS[scope.type],
-                        payload: scope.query
+                        payload: payload
                     });
                 } else {
                     let activeSuggestion = autocompleteData.getSuggestionByIndex(

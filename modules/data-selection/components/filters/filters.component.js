@@ -80,6 +80,13 @@
             return expandedFilters.indexOf(filterSlug) !== -1;
         };
 
+        vm.canExpandImplode = function (filterSlug) {
+            let availableFilters = vm.availableFilters.filter(function (availableFilter) {
+                return availableFilter.slug === filterSlug;
+            });
+            return availableFilters && availableFilters[0].options.length > vm.showMoreThreshold;
+        };
+
         function updateFilters () {
             if (angular.isObject(vm.availableFilters)) {
                 vm.showOptionCounts = DATA_SELECTION_CONFIG[vm.dataset].SHOW_FILTER_OPTION_COUNTS;
