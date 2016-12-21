@@ -18,7 +18,8 @@
                         label: 'Thema\'s'
                     }, {
                         slug: 'res_format',
-                        label: 'Formaten'
+                        label: 'Formaten',
+                        formatter: 'lowercase'
                     }, {
                         slug: 'organization',
                         label: 'Gepubliceerd door'

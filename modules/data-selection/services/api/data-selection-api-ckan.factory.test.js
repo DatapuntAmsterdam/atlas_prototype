@@ -267,6 +267,53 @@ describe('The dataSelectionApiCkan factory', function () {
             });
         });
 
+        it('optionally applies a formatter to the display value', function () {
+            let output = {};
+
+            config.FILTERS[0].formatter = 'lowercase';
+            dataSelectionApiCkan.query(config, {}, 1).then(function (_output_) {
+                output = _output_;
+            });
+            $rootScope.$apply();
+
+            expect(output.filters).toEqual({
+                type: {
+                    numberOfOptions: 2,
+                    options: [
+                        {
+                            id: 'buitenbad',
+                            label: 'Buitenbad'.toLowerCase(),
+                            count: 4
+                        },
+                        {
+                            id: 'overdekt',
+                            label: 'Overdekt'.toLowerCase(),
+                            count: 2
+                        }
+                    ]
+                },
+                water: {
+                    numberOfOptions: 3,
+                    options: [
+                        {
+                            id: 'extra-koud',
+                            label: 'Extra koud',
+                            count: 1
+                        },
+                        {
+                            id: 'tropisch',
+                            label: 'Tropisch',
+                            count: 1
+                        }, {
+                            id: 'verwarmd',
+                            label: 'Verwarmd',
+                            count: 4
+                        }
+                    ]
+                }
+            });
+        });
+
         it('won\'t return filters from the configuration that are not part of the API\'s response', function () {
             let output = {};
 

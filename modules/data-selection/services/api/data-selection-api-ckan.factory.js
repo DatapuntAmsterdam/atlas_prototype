@@ -3,9 +3,9 @@
         .module('dpDataSelection')
         .factory('dataSelectionApiCkan', dataSelectionApiCkanFactory);
 
-    dataSelectionApiCkanFactory.$inject = ['$q', 'api'];
+    dataSelectionApiCkanFactory.$inject = ['$q', '$filter', 'api'];
 
-    function dataSelectionApiCkanFactory ($q, api) {
+    function dataSelectionApiCkanFactory ($q, $filter, api) {
         return {
             query: query
         };
@@ -29,7 +29,7 @@
                     deferred.resolve({
                         numberOfPages: Math.ceil(data.result.count / config.MAX_ITEMS_PER_PAGE),
                         numberOfRecords: data.result.count,
-                        filters: formatFilters(data.result.search_facets),
+                        filters: formatFilters(data.result.search_facets, config.FILTERS),
                         data: formatData(config, data.result.results)
                     });
                 } else {
@@ -52,10 +52,14 @@
             }, '');
         }
 
-        function formatFilters (rawData) {
+        function formatFilters (rawData, filtersConfig) {
             return Object.keys(rawData).reduce((filters, key) => {
                 let items = rawData[key].items;
-                items.sort((a, b) => a.name.localeCompare(b.name));
+                let filterConfig = filtersConfig.find(config => config.slug === key);
+                if (filterConfig && filterConfig.formatter) {
+                    items.forEach(item => item.display_name = $filter(filterConfig.formatter)(item.display_name));
+                }
+                items.sort((a, b) => a.display_name.localeCompare(b.display_name));
                 filters[key] = {
                     numberOfOptions: rawData[key].items.length,
                     options: items.map(option => {
