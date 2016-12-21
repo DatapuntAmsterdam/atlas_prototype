@@ -23,7 +23,7 @@ RUN npm cache clean \
 
 COPY . /app/
 
-RUN grunt set-build-id --buildid=${BUILD_ID }
+RUN grunt set-build-id --buildid=${BUILD_ID}
 
 RUN grunt build-release \
  && cp -r /app/build/. /var/www/html/
