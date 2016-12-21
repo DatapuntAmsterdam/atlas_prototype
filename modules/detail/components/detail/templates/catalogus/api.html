@@ -1,9 +1,10 @@
 <div class="u-grid">
     <div class="u-row">
         <div class="u-col-md--12">
-            <h3 class="o-header__subtitle">Dataset</h3>
-            <h2 class="o-header__title u-margin__bottom--3">{{vm.apiData.results.title}}</h2>
-
+            <div class="o-header">
+                <h3 class="o-header__subtitle u-margin__bottom--05">Dataset</h3>
+                <h2 class="o-header__title u-margin__bottom--3">{{vm.apiData.results.title}}</h2>
+            </div>
             <dl class="c-key-value-list">
                 <dt>Aangemaakt</dt>
                 <dd>{{ { metadata_created: vm.apiData.results.metadata_created, metadata_compact: true } | modificationDate }} ({{vm.apiData.results.metadata_created | date:'dd MMMM yyyy'}})</dd>
@@ -26,7 +27,6 @@
            <span ng-bind-html="vm.apiData.results.notes"> </span>
         </div>
     </div>
-
     <div class="u-row u-margin__bottom--2">
         <div class="u-col-md--12">
             <h3 class="o-header__subtitle">Data</h3>
