@@ -15,7 +15,7 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
         }
     }
 }
-String BUILD_ID = "${env.BUILD_NUMBER}"
+String BUILD_NUMBER = "${env.BUILD_NUMBER}"
 node {
 
     stage("Checkout") {
