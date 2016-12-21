@@ -9,6 +9,7 @@ $link-offset: $base-font-size;
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
+  overflow: visible;
 
   &:hover {
     color: $primary-contrast;
