@@ -15,7 +15,7 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
         }
     }
 }
-String BUILD_ID = "${env.GIT_COMMIT}"
+String BUILD_ID = "${env.BUILD_NUMBER}"
 node {
 
     stage("Checkout") {
@@ -31,7 +31,7 @@ node {
 
     stage("Build develop image") {
         tryStep "build", {
-            def image = docker.build( "build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}" , "--build-arg $BUILD_ID")
+            def image = docker.build( "build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}" , "--build-arg $BUILD_NUMBER")
             image.push()
             image.push("acceptance")
         }
