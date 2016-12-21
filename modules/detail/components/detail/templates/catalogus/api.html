@@ -37,7 +37,11 @@
                         <td>
                             <div class="c-data-selection-file-type c-data-selection-file-type__name c-data-selection-file-type__format-{{resource.format | lowercase }}">{{resource.format}}</div>
                         </td>
-                        <td>{{resource.name}}</td>
+                        <td> <span class="c-data-selection-file__name">{{resource.name}} </span></td>
+                        <td>
+                            <span ng-if="resource.description">{{resource.description}} </span>
+                            <span ng-if="!resource.description">{{resource.url}} </span> 
+                        </td>
                         <td class="u-align--right">
                             <a ng-href="{{resource.url}}" class="c-download-button o-btn" title="Downloaden dataset">{{resource.size / 1024 | number:0}} KB</a>
                         </td>
