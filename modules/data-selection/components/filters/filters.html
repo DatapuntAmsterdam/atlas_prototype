@@ -47,7 +47,7 @@
                     </li>
                 </ul>
 
-                <div class="c-data-selection-filters--toon-meerminder" ng-if="vm.showExpandButton(filter.slug)">
+                <div class="c-data-selection-filters--toon-meerminder" ng-if="vm.canExpandImplode(filter.slug) && vm.showExpandButton(filter.slug)">
                     <div class="c-data-selection-filters__separator"></div>
                     <button class="o-btn o-btn--link qa-show-more-button"
                             ng-click="vm.expandFilter(filter.slug)">
@@ -57,7 +57,7 @@
                     <div class="c-data-selection-filters__separator"></div>
                 </div>
 
-                <div class="c-data-selection-filters--toon-meerminder" ng-if="vm.isExpandedFilter(filter.slug)">
+                <div class="c-data-selection-filters--toon-meerminder" ng-if="vm.canExpandImplode(filter.slug) && vm.isExpandedFilter(filter.slug)">
                     <div class="c-data-selection-filters__separator"></div>
 
                     <div ng-if="vm.nrHiddenOptions(filter) > 0" class="qa-hidden-options c-data-selection-filters--hidden-options">
