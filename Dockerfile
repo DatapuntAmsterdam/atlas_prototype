@@ -4,9 +4,6 @@ MAINTAINER datapunt.ois@amsterdam.nl
 
 EXPOSE 80
 
-ARG GIT_COMMIT
-ENV GIT_COMMIT=$GIT_COMMIT
-
 RUN apt-get update \
  && apt-get install -y git nginx build-essential \
  && apt-get clean \
@@ -22,7 +19,12 @@ RUN npm cache clean \
  && bower install --allow-root
 
 COPY . /app/
-RUN grunt set-build-id --buildid=${BUILD_ID}
+
+ARG BUILD_NR
+ENV BUILD_NR=$BUILD_NR
+
+RUN grunt set-build-id --buildid=${BUILD_NR}
+
 RUN grunt build-release \
  && cp -r /app/build/. /var/www/html/
 
