@@ -35,7 +35,9 @@
                 <tbody class="c-data-selection-table__content">
                     <tr class="c-data-selection-table__content-row" ng-repeat="resource in vm.apiData.results.resources">
                         <td>
-                            <div class="c-data-selection-file-type c-data-selection-file-type__name c-data-selection-file-type__format-{{resource.format | lowercase }}">{{resource.format}}</div>
+                            <div class="c-data-selection-file-type c-data-selection-file-type__name c-data-selection-file-type__format-{{resource.format | lowercase }}"><span ng-if="resource.format">{{resource.format}}</span>
+                            <span ng-if="!resource.format"> ? </span></div>
+                            
                         </td>
                         <td>{{resource.name}}</td>
                         <td class="u-align--right">
