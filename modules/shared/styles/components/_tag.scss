@@ -2,10 +2,10 @@
   display: inline-block;
   position: relative;
   height: 26px;
-  margin: 0 10px 10px 0;
+  margin: 0 0 $base-whitespace;
   padding: 0 20px 0 23px;
   border-radius: 3px 0 0 3px;
-  background: $secondary-gray10;
+  background: $secondary-gray30;
   color: $secondary-gray80;
   line-height: 26px;
   text-decoration: none;
@@ -16,7 +16,7 @@
     top: 0;
     left: 0;
     border-top: 13px solid transparent;
-    border-right: 10px solid $secondary-gray10 ;
+    border-right: 10px solid $secondary-gray30 ;
     border-bottom: 13px solid transparent;
     background: $primary-light;
     content: "";
@@ -31,7 +31,7 @@
 
   &::before {
     border-top: 8px solid transparent;
-    border-right: 8px solid $secondary-gray10;
+    border-right: 8px solid $secondary-gray30;
     border-bottom: 8px solid transparent;
   }
 }

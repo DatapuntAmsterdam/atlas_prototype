@@ -1,7 +1,23 @@
+
+@mixin o-tag {
+  .o-tag {
+    &::before {
+      border-top: 8px solid $secondary-gray10;
+      border-right: 8px solid $secondary-gray30;
+      border-bottom: 8px solid $secondary-gray10;
+    }
+  }
+}
+
 .c-data-selection-cards {
   position: relative;
-  margin-bottom: $base-whitespace * 2;
-  border-bottom: 1px solid $secondary-gray40;
+  padding-top: $base-whitespace;
+  border-bottom: 1px solid $secondary-gray20;
+
+  &:hover {
+    @include o-tag;
+    background-color: $secondary-gray10;
+  }
 }
 
 .c-data-selection-cards__header {
@@ -17,7 +33,7 @@
 
 .c-data-selection-cards__date {
   position: absolute;
-  top: 0;
+  top: $base-whitespace;
   right: 0;
   color: $secondary-gray40;
   font-size: $base-font-size * .9;
