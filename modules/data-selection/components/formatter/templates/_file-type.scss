@@ -8,7 +8,7 @@
 .c-data-selection-file-type__name {
   display: inline-block;
   padding: 0 $base-whitespace * .5;
-  background-color: $thema-7;
+  background-color: $secondary-gray40;
   color: $primary-light;
   text-transform: lowercase;
 }
@@ -18,7 +18,7 @@
 }
 
 .c-data-selection-file-type__format-xls {
-  background-color: $thema-1;
+  background-color: $thema-6;
 }
 
 .c-data-selection-file-type__format-json {
@@ -26,23 +26,27 @@
 }
 
 .c-data-selection-file-type__format-xml {
-  background-color: $thema-5;
+  background-color: $thema-4;
 }
 
 .c-data-selection-file-type__format-html {
-  background-color: $thema-10;
+  background-color: $thema-9;
 }
 
 .c-data-selection-file-type__format-csv {
-  background-color: $thema-10;
+  background-color: $thema-2;
 }
 
 .c-data-selection-file-type__format-zip {
-  background-color: $thema-12;
+  background-color: $secondary-gray60;
 }
 
 .c-data-selection-file-type__format-pdf {
-  background-color: $thema-11;
+  background-color: $primary-contrast;
+}
+
+.c-data-selection-file-type__format-api {
+  background-color: $thema-15;
 }
 
 .c-data-selection-file-type__count {

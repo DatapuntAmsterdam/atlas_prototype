@@ -1,6 +1,6 @@
 <div ng-repeat="row in vm.content.body" class="c-data-selection-cards">
+   <button ng-click="vm.fetch_detail(row.detailEndpoint)" class="qa-cards-fetch-detail u-no-presentation">
     <h3 class="c-data-selection-cards__header">
-        <dp-link type="FETCH_DETAIL" payload="row.detailEndpoint" class-name="u-font--m">
             <dp-data-selection-formatter
                 variables="row.content[0]"
                 formatter="{{vm.content.formatters[0]}}"
@@ -40,6 +40,7 @@
              variables="row.content[4]"
              formatter="{{vm.content.formatters[4]}}"
              use-inline="true">
-        </dp-data-selection-formatter> 
+        </dp-data-selection-formatter>
     </div>
+    </button>
 </div>
