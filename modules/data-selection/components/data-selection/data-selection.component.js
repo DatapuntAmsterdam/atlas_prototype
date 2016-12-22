@@ -12,11 +12,23 @@
             controllerAs: 'vm'
         });
 
-    DpDataSelectionController.$inject = ['$scope', 'dataSelectionApi', 'DATA_SELECTION_CONFIG', 'store', 'ACTIONS'];
+    DpDataSelectionController.$inject = [
+        '$scope',
+        'userSettings',
+        'dataSelectionApi',
+        'DATA_SELECTION_CONFIG',
+        'store',
+        'ACTIONS'
+    ];
 
-    function DpDataSelectionController ($scope, dataSelectionApi, DATA_SELECTION_CONFIG, store, ACTIONS) {
+    function DpDataSelectionController ($scope, userSettings, dataSelectionApi, DATA_SELECTION_CONFIG, store, ACTIONS) {
         let vm = this;
         const MAXIMUM_NUMBER_OF_MARKERS = 10000;
+
+        vm.cards2atlasLink = userSettings.cards2atlasLink.value === true.toString();
+        $scope.$watch('vm.cards2atlasLink', function () {
+            userSettings.cards2atlasLink.value = vm.cards2atlasLink.toString();
+        });
 
         $scope.$watch(function () {
             // Watching all state variables except markers and isLoading

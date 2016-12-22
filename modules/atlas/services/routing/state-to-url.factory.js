@@ -3,7 +3,17 @@
 
     angular
         .module('atlas')
-        .factory('stateToUrl', stateToUrlFactory);
+        .factory('stateToUrl', stateToUrlFactory)
+        .config(html5mode);
+
+    html5mode.$inject = ['$locationProvider'];
+
+    function html5mode ($locationProvider) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+    }
 
     stateToUrlFactory.$inject = ['$location', '$window'];
 
@@ -25,7 +35,7 @@
                 }
             }
 
-            return '#' + queryString;
+            return queryString;
         }
 
         function update (state, useReplace) {

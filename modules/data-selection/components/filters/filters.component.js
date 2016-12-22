@@ -26,9 +26,7 @@
         vm.showMoreThreshold = 10;
 
         vm.hasInactiveFilterOptions = function (filter) {
-            return filter.options.some(option => {
-                return !vm.isFilterOptionActive(filter.slug, option.label);
-            });
+            return filter.options.some(option => !vm.isFilterOptionActive(filter.slug, option.label));
         };
 
         vm.isFilterOptionActive = function (filterSlug, optionId) {
@@ -52,13 +50,7 @@
         };
 
         vm.showExpandButton = function (filterSlug) {
-            var numberOfOptions;
-
-            numberOfOptions = vm.availableFilters.filter(function (availableFilter) {
-                return availableFilter.slug === filterSlug;
-            })[0].options.length;
-
-            return !vm.isExpandedFilter(filterSlug) && numberOfOptions > vm.showMoreThreshold;
+            return !vm.isExpandedFilter(filterSlug) && getAvailableOptions(filterSlug).length > vm.showMoreThreshold;
         };
 
         vm.nrHiddenOptions = function (filter) {
@@ -81,11 +73,16 @@
         };
 
         vm.canExpandImplode = function (filterSlug) {
-            let availableFilters = vm.availableFilters.filter(function (availableFilter) {
-                return availableFilter.slug === filterSlug;
-            });
-            return availableFilters && availableFilters[0].options.length > vm.showMoreThreshold;
+            return getAvailableOptions(filterSlug).length > vm.showMoreThreshold;
         };
+
+        function getAvailableOptions (filterSlug) {
+            return getAvailableFilters(filterSlug)[0].options;
+        }
+
+        function getAvailableFilters (filterSlug) {
+            return vm.availableFilters.filter(filter => filter.slug === filterSlug);
+        }
 
         function updateFilters () {
             if (angular.isObject(vm.availableFilters)) {

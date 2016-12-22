@@ -44,7 +44,7 @@
          * @returns {String} Either 'button' or 'a'
          */
         function getTagName (type, payload) {
-            let currentPath = '#' + decodeURIComponent($location.url());
+            let currentPath = decodeURIComponent($location.url());
             let targetPath = getHref(type, payload);
 
             if (currentPath === targetPath) {

@@ -10,6 +10,10 @@
             fullscreenStraatbeeld: {
                 storage: 'local',
                 default: true.toString()
+            },
+            cards2atlasLink: {
+                storage: 'session',
+                default: true.toString()
             }
         });
 })();

@@ -19,7 +19,7 @@ describe('The stateToUrl factory', function () {
     describe('create', function () {
         it('creates a query string', function () {
             expect(stateToUrl.create(mockedState)).toBe([
-                '#?lat=', mockedState.map.viewCenter[0],
+                '?lat=', mockedState.map.viewCenter[0],
                 '&lon=', mockedState.map.viewCenter[1],
                 '&basiskaart=', mockedState.map.baseLayer,
                 '&zoom=', mockedState.map.zoom,

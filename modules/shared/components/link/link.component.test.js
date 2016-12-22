@@ -78,7 +78,7 @@ describe('The dp-link component', function () {
         };
 
         mockedCurrentPath = 'this=that'; // Angular's $location.url() returns everything after the hash
-        mockedTargetPath = '#this=something-else';
+        mockedTargetPath = 'this=something-else';
 
         spyOn(store, 'dispatch');
 
