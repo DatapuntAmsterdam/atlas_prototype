@@ -29,9 +29,7 @@ describe('The dp-map directive', function () {
                     initialize: angular.noop,
                     addMarker: angular.noop,
                     removeMarker: angular.noop,
-                    setCluster: function (map, collection, endLoading) {
-                        endLoading();
-                    },
+                    setCluster: angular.noop,
                     clearCluster: angular.noop
                 },
                 panning: {
@@ -372,11 +370,11 @@ describe('The dp-map directive', function () {
                     [
                         [52.1, 4.1],
                         [52.2, 4.1]
-                    ], jasmine.any(Function)
+                    ]
                 );
             });
 
-            it('can add a group of clustered markers, accepting a method to end the loading indicator', function () {
+            it('can add a group of clustered markers', function () {
                 // Start without any clustered markers
                 let highlightItems = {
                     regular: [],
@@ -396,10 +394,8 @@ describe('The dp-map directive', function () {
                     [
                         [52.1, 4.1],
                         [52.2, 4.1]
-                    ], jasmine.any(Function)
+                    ]
                 );
-                $rootScope.$apply();
-                expect(directive.isolateScope().mapState.isLoading).toBe(false);
             });
 
             it('can remove a group of clustered markers', function () {

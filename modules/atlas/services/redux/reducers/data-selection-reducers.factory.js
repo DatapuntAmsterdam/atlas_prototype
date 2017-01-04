@@ -50,6 +50,7 @@
                 // Default view is table view
                 newState.dataSelection.view = 'TABLE';
             }
+
             // LIST loading might include markers => set map loading accordingly
             newState.map.isLoading = newState.dataSelection.view === 'LIST';
 
@@ -72,8 +73,8 @@
             if (newState.dataSelection) {
                 newState.dataSelection.markers = payload;
                 newState.dataSelection.isLoading = false;
-                // Set map loading if any markers need to be shown
-                newState.map.isLoading = newState.dataSelection.markers.length > 0;
+
+                newState.map.isLoading = false;
                 newState.dataSelection.isFullscreen = newState.dataSelection.view !== 'LIST';
             }
 

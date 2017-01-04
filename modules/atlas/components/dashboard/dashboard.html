@@ -17,106 +17,103 @@
 
     <!-- Body -->
     <div class="c-dashboard__body"
-        ng-class="{ 'c-dashboard__body--error': vm.visibility.httpStatus.hasErrors }">
-
+        ng-class="{ 'c-dashboard__body--error': vm.visibility.httpStatus }">
         <div class="u-grid">
 
             <!-- Error message -->
-            <div ng-if="vm.visibility.httpStatus.hasErrors" class="c-dashboard__error">
+            <div ng-if="vm.visibility.httpStatus" class="c-dashboard__error">
                 <dp-api-error></dp-api-error>
             </div>
 
             <!-- Columns -->
             <div class="u-row">
-
-                <!-- Layer selection -->
-                <div ng-if="vm.columnSizes.left"
-                    class="qa-dashboard__layer-selection c-dashboard__column"
+                <!-- Left column -->
+                <div ng-show="vm.columnSizes.left"
+                    class="qa-dashboard__column--left c-dashboard__column"
                     ng-class="'u-col-sm--' + vm.columnSizes.left">
 
-                    <div ng-controller="LayerSelectionController as vm">
-
+                    <!-- Layer selection -->
+                    <div ng-if="vm.activity.layerSelection" ng-controller="LayerSelectionController as layerSelection">
                         <dp-layer-selection
-                            base-layer="{{vm.baseLayer}}"
-                            overlays="vm.overlays"
-                            zoom="vm.zoom"></dp-layer-selection>
+                            ng-show="vm.visibility.layerSelection"
+                            base-layer="{{layerSelection.baseLayer}}"
+                            overlays="layerSelection.overlays"
+                            zoom="layerSelection.zoom">
+                        </dp-layer-selection>
                     </div>
                 </div>
 
-                <!-- Map -->
-                <div ng-if="vm.columnSizes.middle && vm.visibility.map"
-                     class="qa-dashboard__map c-dashboard__column"
-                     ng-class="'u-col-sm--' + vm.columnSizes.middle">
+                <!-- Middle column -->
+                <div ng-show="vm.columnSizes.middle"
+                    class="c-dashboard__column u-col-sm--{{vm.columnSizes.middle}} qa-dashboard__column--middle">
 
-                    <div ng-controller="MapController as vm">
-                        <!-- ng-if="vm.visibility.map" -->
+                    <!-- Map -->
+                    <div ng-if="vm.activity.map" ng-controller="MapController as map">
                         <dp-map
-                            map-state="vm.mapState"
-                            show-layer-selection="vm.showLayerSelection"
-                            markers="vm.markers"></dp-map>
+                            ng-show="vm.visibility.map"
+                            map-state="map.mapState"
+                            show-layer-selection="map.showLayerSelection"
+                            markers="map.markers">
+                        </dp-map>
                     </div>
                 </div>
 
-                <!-- Fullscreen Straatbeeld -->
-                <div ng-if="vm.columnSizes.middle && vm.visibility.straatbeeld && vm.isFullscreen"
-                     class="qa-dashboard__straatbeeld c-dashboard__column"
-                     ng-class="'u-col-sm--' + vm.columnSizes.middle">
-
-                    <div ng-controller="StraatbeeldController as straatbeeld"
-                         class="u-dashboard--full-height">
-                        <dp-straatbeeld
-                            state="straatbeeld.straatbeeldState"
-                            resize="[vm.isPrintMode, vm.visibility.httpStatus.hasErrors]">
-                        </dp-straatbeeld>
-                    </div>
-                </div>
-
-                <!-- Content -->
-                <div ng-if="vm.columnSizes.right"
+                <!-- Right column -->
+                <div ng-show="vm.columnSizes.right"
                     dp-scrollable-content
                     visibility="vm.visibility"
                     page-name="{{vm.pageName}}"
-                    class="qa-dashboard__content c-dashboard__column c-dashboard__content"
-                    ng-class="'u-col-sm--' + vm.columnSizes.right">
+                    class="c-dashboard__column c-dashboard__content u-col-sm--{{vm.columnSizes.right}} qa-dashboard__column--right">
 
                     <!-- Detail -->
-                    <div ng-if="vm.visibility.detail" ng-controller="DetailController as vm">
+                    <div ng-if="vm.activity.detail" ng-controller="DetailController as detail">
                         <dp-detail
-                            endpoint="{{vm.endpoint}}"
-                            reload="vm.reload"
-                            is-loading="vm.isLoading"></dp-detail>
+                            ng-show="vm.visibility.detail"
+                            endpoint="{{detail.endpoint}}"
+                            reload="detail.reload"
+                            is-loading="detail.isLoading">
+                        </dp-detail>
                     </div>
 
                     <!-- Page -->
-                    <div ng-if="vm.visibility.page" ng-controller="PageController as vm">
-                        <dp-page name="{{vm.pageName}}"></dp-page>
+                    <div ng-if="vm.activity.page" ng-controller="PageController as page">
+                        <dp-page
+                            ng-show="vm.visibility.page"
+                            name="{{page.pageName}}">
+                        </dp-page>
                     </div>
 
                     <!-- Search results -->
-                    <div ng-if="vm.visibility.searchResults" ng-controller="SearchResultsController as vm">
+                    <div ng-if="vm.activity.searchResults" ng-controller="SearchResultsController as searchResults">
                         <dp-search-results
-                            is-loading="vm.isLoading"
-                            query="{{vm.query}}"
-                            location="vm.location"
-                            category="{{vm.category}}"
-                            number-of-results="vm.numberOfResults"></dp-search-results>
+                            ng-show="vm.visibility.searchResults"
+                            is-loading="searchResults.isLoading"
+                            query="{{searchResults.query}}"
+                            location="searchResults.location"
+                            category="{{searchResults.category}}"
+                            number-of-results="searchResults.numberOfResults">
+                        </dp-search-results>
                     </div>
 
                     <!-- Straatbeeld -->
-                    <div ng-if="vm.visibility.straatbeeld && !vm.isFullscreen"
-                         ng-controller="StraatbeeldController as straatbeeld"
-                       class="u-dashboard--full-height">
+                    <div ng-if="vm.activity.straatbeeld"
+                        ng-controller="StraatbeeldController as straatbeeld"
+                        class="u-dashboard--full-height">
 
-                        <!--Resize straatbeeld when any of printMode or errorMode changes-->
+                        <!--Resize straatbeeld when any of printMode, errorMode or fullscreen changes-->
                         <dp-straatbeeld
+                            ng-show="vm.visibility.straatbeeld"
                             state="straatbeeld.straatbeeldState"
-                            resize="[vm.isPrintMode, vm.visibility.httpStatus.hasErrors]">
+                            resize="[vm.isPrintMode, vm.visibility.httpStatus, straatbeeld.straatbeeldState.isFullscreen]">
                         </dp-straatbeeld>
                     </div>
 
                     <!-- Data selection -->
-                    <div ng-if="vm.visibility.dataSelection" ng-controller="DataSelectionController as vm">
-                        <dp-data-selection state="vm.dataSelectionState"></dp-data-selection>
+                    <div ng-if="vm.activity.dataSelection" ng-controller="DataSelectionController as dataSelection">
+                        <dp-data-selection
+                            ng-show="vm.visibility.dataSelection"
+                            state="dataSelection.dataSelectionState">
+                        </dp-data-selection>
                     </div>
                 </div>
             </div>

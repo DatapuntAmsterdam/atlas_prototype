@@ -12,7 +12,7 @@
     DpDashboardController.$inject = ['store', 'dashboardColumns'];
 
     function DpDashboardController (store, dashboardColumns) {
-        var vm = this;
+        let vm = this;
 
         vm.store = store;
 
@@ -20,10 +20,9 @@
         setLayout();
 
         function setLayout () {
-            var state = store.getState();
+            const state = store.getState();
 
-            vm.isFullscreen = state.map.isFullscreen || (state.straatbeeld && state.straatbeeld.isFullscreen);
-
+            vm.activity = dashboardColumns.determineVisibility(state);
             vm.visibility = dashboardColumns.determineVisibility(state);
 
             vm.isPrintMode = state.isPrintMode;
@@ -43,7 +42,6 @@
             vm.columnSizes = dashboardColumns.determineColumnSizes(
                 state,
                 vm.visibility,
-                vm.isFullscreen,
                 vm.isPrintMode
             );
 

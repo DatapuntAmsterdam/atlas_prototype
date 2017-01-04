@@ -23,7 +23,7 @@
             'u-col-sm--12': !vm.showFilters,
             'u-col-sm--9': vm.showFilters}">
 
-            <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
+            <dp-loading-indicator is-loading="vm.isLoading" use-delay="false" show-inline="true"></dp-loading-indicator>
 
             <div ng-if="!vm.isLoading">
                 <dp-data-selection-header

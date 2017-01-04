@@ -213,14 +213,6 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.dataSelection.isLoading).toEqual(false);
         });
 
-        it('sets map.isLoading to true when any markers are added to the state', function () {
-            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
-            expect(output.map.isLoading).toBe(true);
-
-            output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, []);
-            expect(output.map.isLoading).toBe(false);
-        });
-
         it('does nothing if the user has navigated away from dataSelection before the API is finished', function () {
             mockedState.dataSelection = null;
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
