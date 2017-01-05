@@ -40,7 +40,7 @@ node {
 
 String BRANCH = "${env.BRANCH_NAME}"
 
-if (BRANCH == "catalogus-redirect-release") {
+if (BRANCH == "master") {
 
 node {
     stage("Deploy to ACC") {
