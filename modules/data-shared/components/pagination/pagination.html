@@ -1,0 +1,20 @@
+<div class="c-data-shared-pagination" ng-if="vm.showPagination">
+    <div class="c-data-shared-pagination--separator"></div>
+
+    <div class="u-pull--left c-data-shared-page--form-links">
+        <dp-data-shared-pagination-link link="vm.firstPage" action="{{ vm.updateAction }}"></dp-data-shared-pagination-link>
+        <dp-data-shared-pagination-link link="vm.previousPage" action="{{ vm.updateAction }}"></dp-data-shared-pagination-link>
+    </div>
+    <form class="u-inline-block" ng-submit="vm.goToPage($event)">
+        <span class="u-margin__right--1 c-data-shared-pagination-link-text">Ga naar pagina</span>
+        <input ng-model="vm.currentPage" type="number" class="c-data-shared-pagination__input" pattern="\d*" size="4" maxlength="4">
+        <button type="submit" class="c-data-shared-pagination__button" title="Ga naar ingevoerde pagina">Ga
+            <span class="u-sr-only">Ga naar ingevoerde pagina</span>
+        </button>
+        <span class="u-margin__left--1 c-data-shared-pagination-link-text">van {{ vm.numberOfPages }}</span>
+    </form>
+    <div class="u-pull--right c-data-shared-page--form-links">
+        <dp-data-shared-pagination-link link="vm.nextPage" action="{{ vm.updateAction }}"></dp-data-shared-pagination-link>
+        <dp-data-shared-pagination-link link="vm.lastPage" action="{{ vm.updateAction }}"></dp-data-shared-pagination-link>
+    </div>
+</div>
