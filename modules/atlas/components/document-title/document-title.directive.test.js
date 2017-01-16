@@ -135,7 +135,7 @@ describe('The dp-document-title directive', function () {
 
         var component = getComponent();
 
-        expect(component.text()).toBe('Item title – Atlas');
+        expect(component.text()).toBe('Item title - Atlas');
     });
 
     it('simply displays the base title when the item title is empty', function () {
@@ -156,7 +156,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Data selection title – Atlas');
+            expect(component.text()).toBe('Data selection title - Atlas');
         });
 
         it('has precedence over the map module', function () {
@@ -166,7 +166,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Data selection title – Atlas');
+            expect(component.text()).toBe('Data selection title - Atlas');
         });
     });
 
@@ -178,7 +178,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Detail title – Atlas');
+            expect(component.text()).toBe('Detail title - Atlas');
         });
 
         it('has precedence over the map module', function () {
@@ -188,7 +188,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Detail title – Atlas');
+            expect(component.text()).toBe('Detail title - Atlas');
         });
     });
 
@@ -200,7 +200,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Layer selection title – Atlas');
+            expect(component.text()).toBe('Layer selection title - Atlas');
         });
 
         it('has precedence over the map module', function () {
@@ -210,7 +210,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Layer selection title – Atlas');
+            expect(component.text()).toBe('Layer selection title - Atlas');
         });
     });
 
@@ -222,7 +222,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Map title – Atlas');
+            expect(component.text()).toBe('Map title - Atlas');
         });
     });
 
@@ -234,7 +234,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Page title – Atlas');
+            expect(component.text()).toBe('Page title - Atlas');
         });
 
         it('has precedence over the map module', function () {
@@ -244,7 +244,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Page title – Atlas');
+            expect(component.text()).toBe('Page title - Atlas');
         });
     });
 
@@ -256,7 +256,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Search results title – Atlas');
+            expect(component.text()).toBe('Search results title - Atlas');
         });
 
         it('has precedence over the map module', function () {
@@ -266,7 +266,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Search results title – Atlas');
+            expect(component.text()).toBe('Search results title - Atlas');
         });
     });
 
@@ -278,7 +278,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Straatbeeld title – Atlas');
+            expect(component.text()).toBe('Straatbeeld title - Atlas');
         });
 
         it('has precedence over the map module', function () {
@@ -288,7 +288,7 @@ describe('The dp-document-title directive', function () {
 
             var component = getComponent();
 
-            expect(component.text()).toBe('Straatbeeld title – Atlas');
+            expect(component.text()).toBe('Straatbeeld title - Atlas');
         });
     });
 });

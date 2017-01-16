@@ -75,7 +75,7 @@ files.modules
         // Module js or html has changed
         targets[`module_${module.slug}`] = {
             files: [
-                `modules/${module.slug}/**/!(*.test).js`,
+                `modules/${module.slug}/**/!(*.test|*.page-objects).js`,
                 `modules/${module.slug}/**/*.html`
             ],
             tasks: [

@@ -29,6 +29,7 @@ module.exports = function (grunt) {
         ngtemplates: require(gruntDir + 'angular-templates'),
         npmcopy: require(gruntDir + 'npmcopy'),
         postcss: require(gruntDir + 'postcss')(grunt),
+        protractor: require(gruntDir + 'protractor'),
         sass: require(gruntDir + 'sass'),
         sasslint: require(gruntDir + 'sasslint'),
         'string-replace': require(gruntDir + 'string-replace')(grunt),
@@ -51,6 +52,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-npmcopy');
     grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-protractor-runner');
     grunt.loadNpmTasks('grunt-svg-sprite');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-sass-lint');

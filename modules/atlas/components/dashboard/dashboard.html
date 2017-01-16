@@ -33,7 +33,7 @@
                     ng-class="'u-col-sm--' + vm.columnSizes.left">
 
                     <!-- Layer selection -->
-                    <div ng-if="vm.activity.layerSelection" ng-show="vm.visibility.layerSelection" ng-controller="LayerSelectionController as layerSelection">
+                    <div ng-if="vm.activity.layerSelection" ng-show="vm.visibility.layerSelection" ng-controller="LayerSelectionController as layerSelection" class="qa-layer-selection">
                         <dp-layer-selection
                             base-layer="{{layerSelection.baseLayer}}"
                             overlays="layerSelection.overlays"
@@ -47,7 +47,7 @@
                     class="c-dashboard__column u-col-sm--{{vm.columnSizes.middle}} qa-dashboard__column--middle">
 
                     <!-- Map -->
-                    <div ng-if="vm.activity.map" ng-show="vm.visibility.map" ng-controller="MapController as map">
+                    <div ng-if="vm.activity.map" ng-show="vm.visibility.map" ng-controller="MapController as map" class="qa-map">
                         <dp-map
                             map-state="map.mapState"
                             show-layer-selection="map.showLayerSelection"
@@ -65,7 +65,7 @@
                     class="c-dashboard__column c-dashboard__content u-col-sm--{{vm.columnSizes.right}} qa-dashboard__column--right">
 
                     <!-- Detail -->
-                    <div ng-if="vm.activity.detail" ng-show="vm.visibility.detail" ng-controller="DetailController as detail">
+                    <div ng-if="vm.activity.detail" ng-show="vm.visibility.detail" ng-controller="DetailController as detail" class="qa-detail">
                         <dp-detail
                             endpoint="{{detail.endpoint}}"
                             reload="detail.reload"
@@ -74,12 +74,12 @@
                     </div>
 
                     <!-- Page -->
-                    <div ng-if="vm.activity.page" ng-show="vm.visibility.page" ng-controller="PageController as page">
+                    <div ng-if="vm.activity.page" ng-show="vm.visibility.page" ng-controller="PageController as page" class="qa-page">
                         <dp-page name="{{page.pageName}}"></dp-page>
                     </div>
 
                     <!-- Search results -->
-                    <div ng-if="vm.activity.searchResults" ng-show="vm.visibility.searchResults" ng-controller="SearchResultsController as searchResults">
+                    <div ng-if="vm.activity.searchResults" ng-show="vm.visibility.searchResults" ng-controller="SearchResultsController as searchResults" class="qa-search-results">
                         <dp-search-results
                             is-loading="searchResults.isLoading"
                             query="{{searchResults.query}}"
@@ -92,7 +92,7 @@
                     <!-- Straatbeeld -->
                     <div ng-if="vm.activity.straatbeeld" ng-show="vm.visibility.straatbeeld"
                         ng-controller="StraatbeeldController as straatbeeld"
-                        class="u-dashboard--full-height">
+                        class="u-dashboard--full-height qa-straatbeeld">
 
                         <!--Resize straatbeeld when any of printMode, errorMode or fullscreen changes-->
                         <dp-straatbeeld
@@ -102,7 +102,7 @@
                     </div>
 
                     <!-- Data selection -->
-                    <div ng-if="vm.activity.dataSelection" ng-show="vm.visibility.dataSelection" ng-controller="DataSelectionController as dataSelection">
+                    <div ng-if="vm.activity.dataSelection" ng-show="vm.visibility.dataSelection" ng-controller="DataSelectionController as dataSelection" class="qa-data-selection">
                         <dp-data-selection state="dataSelection.dataSelectionState"></dp-data-selection>
                     </div>
                 </div>

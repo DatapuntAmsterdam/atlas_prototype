@@ -6,7 +6,8 @@ module.exports = {
     "env": {
         "browser": true,        // browser global variables
         "es6": true,            // enable all ECMAScript 6 features except for modules, ecmaVersion parser option to 6
-        "jasmine": true         // adds all of the Jasmine testing global variables for version 1.3 and 2.0
+        "jasmine": true,        // adds all of the Jasmine testing global variables for version 1.3 and 2.0,
+        "protractor": true
     },
     "extends": [
         "standard",             // Shareable config for JavaScript Standard Style

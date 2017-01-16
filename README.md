@@ -5,6 +5,7 @@ Requirements
 - NPM
 - Bower
 - Grunt
+- Java JRE (needed to run protractor)
 
 Installation
 - npm install

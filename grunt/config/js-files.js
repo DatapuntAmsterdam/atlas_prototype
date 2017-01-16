@@ -2,13 +2,13 @@ var modules = require('./modules');
 
 var jsModuleFiles = module => [
     `modules/${module.slug}/${module.slug}.module.js`,
-    `modules/${module.slug}/**/!(*.test).js`,
+    `modules/${module.slug}/**/!(*.test|*.page-objects).js`,
     `build/temp/${module.slug}.ngtemplates.js`
 ];
 
 var jsTestModuleFiles = module => [
     `modules/${module.slug}/${module.slug}.module.js`,
-    `modules/${module.slug}/**/!(*.test|*.run).js`,
+    `modules/${module.slug}/**/!(*.test|*.page-objects|*.run).js`,
     `build/temp/${module.slug}.ngtemplates.js`
 ];
 

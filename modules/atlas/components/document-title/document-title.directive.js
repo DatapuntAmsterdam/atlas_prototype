@@ -83,7 +83,7 @@
                     displayNewTitle = current && stateData && !stateData.isLoading,
                     getTitle = displayNewTitle ? current.documentTitle.getTitle : null,
                     titleData = getTitle ? getTitle(stateData) : null,
-                    title = (titleData ? titleData + ' – ' : '') + baseTitle;
+                    title = (titleData ? titleData + ' - ' : '') + baseTitle;
 
                 if (displayNewTitle) {
                     scope.title = title;

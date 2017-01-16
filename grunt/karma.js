@@ -113,7 +113,7 @@ module.exports = function (grunt) {
                                 files: allFiles,
                                 exclude: allExclude,
                                 preprocessors: {
-                                    ['modules/' + module.slug + '/**/!(*.test).js']: ['coverage'],
+                                    ['modules/' + module.slug + '/**/!(*.test|*.page-objects).js']: ['coverage'],
                                     'modules/**/*.js': ['babel'],
                                     'build/temp/babel/es5tests/*.js': ['sourcemap']
                                 }
