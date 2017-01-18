@@ -6,7 +6,7 @@ describe('The dp-map directive', function () {
         highlight,
         panning,
         zoom,
-        measure,
+        drawTool,
         onMapClick,
         mockedMapState,
         mockedLeafletMap,
@@ -17,7 +17,7 @@ describe('The dp-map directive', function () {
             'dpMap',
             {
                 store: {
-                    dispatch: function () {}
+                    dispatch: angular.noop
                 },
                 leafletMap: {
                     invalidateSize: angular.noop
@@ -36,19 +36,19 @@ describe('The dp-map directive', function () {
                     clearCluster: angular.noop
                 },
                 panning: {
-                    initialize: function () {},
-                    panTo: function () {},
-                    setOption: function () {}
+                    initialize: angular.noop,
+                    panTo: angular.noop,
+                    setOption: angular.noop
                 },
                 zoom: {
-                    initialize: function () {},
-                    setZoom: function () {}
+                    initialize: angular.noop,
+                    setZoom: angular.noop
                 },
-                measure: {
-                    initialize: function () {}
+                drawTool: {
+                    initialize: angular.noop
                 },
                 onMapClick: {
-                    initialize: function () {}
+                    initialize: angular.noop
                 }
             },
 
@@ -82,7 +82,7 @@ describe('The dp-map directive', function () {
             _highlight_,
             _panning_,
             _zoom_,
-            _measure_,
+            _drawTool_,
             _onMapClick_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
@@ -91,7 +91,7 @@ describe('The dp-map directive', function () {
             highlight = _highlight_;
             panning = _panning_;
             zoom = _zoom_;
-            measure = _measure_;
+            drawTool = _drawTool_;
             onMapClick = _onMapClick_;
         });
         spyOn(L, 'map').and.returnValue(mockedLeafletMap);
@@ -111,7 +111,7 @@ describe('The dp-map directive', function () {
         spyOn(panning, 'setOption');
         spyOn(zoom, 'initialize');
         spyOn(zoom, 'setZoom');
-        spyOn(measure, 'initialize');
+        spyOn(drawTool, 'initialize');
         spyOn(onMapClick, 'initialize');
 
         mockedMapState = {
@@ -466,10 +466,10 @@ describe('The dp-map directive', function () {
         });
     });
 
-    it('initializes the measure factory', function () {
+    it('initializes the drawTool factory', function () {
         getDirective(mockedMapState, false, mockedMarkers);
 
-        expect(measure.initialize).toHaveBeenCalledWith(mockedLeafletMap);
+        expect(drawTool.initialize).toHaveBeenCalledWith(mockedLeafletMap);
     });
 
     it('initializes the onMapClick factory', function () {

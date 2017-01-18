@@ -9,7 +9,9 @@
                 zoom: 9,
                 showActiveOverlays: false,
                 isFullscreen: false,
-                isLoading: false
+                isLoading: false,
+                drawingMode: null,
+                pointsDrawn: 0
             },
             layerSelection: false,
             search: null,
@@ -61,7 +63,7 @@
             dataSelection: {
                 view: 'TABLE',
                 dataset: 'bag',
-                filters: {
+                filters: { (OR :String)
                     buurtcombinatie: 'Geuzenbuurt',
                     buurt: 'Trompbuurt'
                 },
@@ -72,7 +74,12 @@
                     [52.2, 4.0]
                 ],
                 isFullscreen: true,
-                isLoading: false
+                isLoading: false,
+                shape: [
+                    [52.1, 4.1],
+                    [52.2, 4.0],
+                    [52.3, 4.2]
+                ]
             },
             */
             isPrintMode: false

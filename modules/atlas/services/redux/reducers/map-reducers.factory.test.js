@@ -223,6 +223,40 @@ describe('The map reducers', function () {
         });
     });
 
+    describe('MAP_SET_DRAWING_MODE', function () {
+        it('can set the drawing mode', function () {
+            var inputState = angular.copy(DEFAULT_STATE),
+                output;
+
+            // Enable
+            output = mapReducers[ACTIONS.MAP_SET_DRAWING_MODE.id](inputState, true);
+            expect(output.map.drawingMode).toBe(true);
+
+            // Set to DRAW
+            output = mapReducers[ACTIONS.MAP_SET_DRAWING_MODE.id](inputState, 'DRAW');
+            expect(output.map.drawingMode).toBe('DRAW');
+
+            // Set to EDIT
+            output = mapReducers[ACTIONS.MAP_SET_DRAWING_MODE.id](inputState, 'EDIT');
+            expect(output.map.drawingMode).toBe('EDIT');
+
+            // Disabling
+            inputState.map.drawingMode = 'DRAW';
+
+            // Disable with false
+            output = mapReducers[ACTIONS.MAP_SET_DRAWING_MODE.id](inputState, false);
+            expect(output.map.drawingMode).toBe(null);
+
+            // Disable with null
+            output = mapReducers[ACTIONS.MAP_SET_DRAWING_MODE.id](inputState, false);
+            expect(output.map.drawingMode).toBe(null);
+
+            // Disable with undefined
+            output = mapReducers[ACTIONS.MAP_SET_DRAWING_MODE.id](inputState);
+            expect(output.map.drawingMode).toBe(null);
+        });
+    });
+
     describe('SHOW_MAP_ACTIVE_OVERLAYS', function () {
         it('sets the variable to true', function () {
             var output;

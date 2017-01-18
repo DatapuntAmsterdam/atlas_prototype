@@ -10,11 +10,11 @@
         'highlight',
         'panning',
         'zoom',
-        'measure',
+        'drawTool',
         'onMapClick'
     ];
 
-    function dpMapDirective (L, mapConfig, layers, highlight, panning, zoom, measure, onMapClick) {
+    function dpMapDirective (L, mapConfig, layers, highlight, panning, zoom, drawTool, onMapClick) {
         return {
             restrict: 'E',
             scope: {
@@ -28,7 +28,7 @@
         };
 
         function linkFunction (scope, element) {
-            var leafletMap,
+            let leafletMap,
                 container,
                 options;
 
@@ -52,7 +52,7 @@
                 panning.initialize(leafletMap);
                 highlight.initialize();
                 zoom.initialize(leafletMap);
-                measure.initialize(leafletMap);
+                drawTool.initialize(leafletMap);
                 onMapClick.initialize(leafletMap);
 
                 scope.leafletMap = leafletMap;

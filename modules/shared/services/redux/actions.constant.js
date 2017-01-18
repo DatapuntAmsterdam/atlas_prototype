@@ -66,6 +66,15 @@
                 id: 'MAP_FULLSCREEN',
                 isButton: true
             },
+            MAP_SET_POINTS: {
+                id: 'MAP_SET_POINTS',
+                ignore: true
+            },
+            MAP_SET_DRAWING_MODE: {
+                id: 'MAP_SET_DRAWING_MODE',
+                ignore: true,
+                isButton: true
+            },
             SHOW_MAP_ACTIVE_OVERLAYS: {
                 id: 'SHOW_MAP_ACTIVE_OVERLAYS',
                 replace: true,

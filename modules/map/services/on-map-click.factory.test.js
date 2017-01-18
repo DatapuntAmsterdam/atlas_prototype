@@ -1,4 +1,4 @@
-describe('The onMapClick factory', function () {
+describe('The onMapClick factory', () => {
     var $rootScope,
         L,
         onMapClick,
@@ -6,17 +6,19 @@ describe('The onMapClick factory', function () {
         ACTIONS,
         mockedLeafletMap;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
                 store: {
-                    dispatch: function () {}
+                    getState: angular.noop,
+                    subscribe: angular.noop,
+                    dispatch: angular.noop
                 }
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _L_, _onMapClick_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$rootScope_, _L_, _onMapClick_, _store_, _ACTIONS_) => {
             $rootScope = _$rootScope_;
             L = _L_;
             onMapClick = _onMapClick_;
@@ -25,14 +27,16 @@ describe('The onMapClick factory', function () {
         });
 
         mockedLeafletMap = L.map(document.createElement('div'));
-    });
-
-    it('dispatches an action when the map is clicked', function () {
-        onMapClick.initialize(mockedLeafletMap);
 
         spyOn(store, 'dispatch');
+        spyOn(store, 'getState');
+        spyOn(store, 'subscribe');
 
-        // Mock the Leaflet click event
+        onMapClick.initialize(mockedLeafletMap);
+    });
+
+    // Mock the Leaflet click event
+    function click () {
         mockedLeafletMap.fireEvent('click', {
             latlng: {
                 lat: 52.124,
@@ -41,10 +45,64 @@ describe('The onMapClick factory', function () {
         });
 
         $rootScope.$apply();
+    }
+
+    it('dispatches an action when the map is clicked', () => {
+        click();
 
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.MAP_CLICK,
             payload: [52.124, 4.788]
+        });
+    });
+
+    describe('drawing mode state', () => {
+        let handler;
+
+        beforeEach(() => {
+            handler = store.subscribe.calls.first().args[0];
+        });
+
+        it('keeps onMapClick from dispatching an action when set to DRAW', () => {
+            store.getState.and.returnValue({ map: { drawingMode: 'DRAW' } });
+            handler();
+
+            click();
+
+            expect(store.dispatch).not.toHaveBeenCalled();
+        });
+
+        it('keeps onMapClick from dispatching an action when set to DRAW after an action has been dispatched', () => {
+            click();
+
+            store.dispatch.calls.reset();
+
+            store.getState.and.returnValue({ map: { drawingMode: 'DRAW' } });
+            handler();
+
+            click();
+
+            expect(store.dispatch).not.toHaveBeenCalled();
+        });
+
+        it('does not keep onMapClick from dispatching an action when set to anything but DRAW', () => {
+            // EDIT
+            store.getState.and.returnValue({ map: { drawingMode: 'EDIT' } });
+            handler();
+
+            click();
+
+            expect(store.dispatch).toHaveBeenCalled();
+
+            // null
+            store.dispatch.calls.reset();
+
+            store.getState.and.returnValue({ map: { drawingMode: null } });
+            handler();
+
+            click();
+
+            expect(store.dispatch).toHaveBeenCalled();
         });
     });
 });
