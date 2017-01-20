@@ -94,7 +94,10 @@ describe('The dp-data-selection component', function () {
         mockedApiPreviewData = {
             numberOfPages: 107,
             numberOfRecords: 77,
-            filters: 'MOCKED_FILTER_DATA',
+            filters: [{
+                slug: 'type',
+                options: ['zwembaden']
+            }],
             data: 'MOCKED_PREVIEW_DATA'
         };
 
@@ -130,11 +133,12 @@ describe('The dp-data-selection component', function () {
         const component = getComponent(mockedState);
         let scope = component.isolateScope();
 
-        expect(component.find('dp-data-selection-filters').length).toBe(1);
-        expect(component.find('dp-data-selection-filters').attr('dataset')).toBe('zwembaden');
-        expect(component.find('dp-data-selection-filters').attr('available-filters')).toBe('vm.availableFilters');
-        expect(component.find('dp-data-selection-filters').attr('active-filters')).toBe('vm.state.filters');
-        expect(scope.vm.availableFilters).toBe('MOCKED_FILTER_DATA');
+        expect(component.find('dp-data-selection-available-filters').length).toBe(1);
+        expect(component.find('dp-data-selection-available-filters').attr('dataset')).toBe('zwembaden');
+        expect(component.find('dp-data-selection-available-filters').attr('available-filters'))
+            .toBe('vm.availableFilters');
+        expect(component.find('dp-data-selection-available-filters').attr('active-filters')).toBe('vm.state.filters');
+        expect(scope.vm.availableFilters).toBe(mockedApiPreviewData.filters);
         expect(scope.vm.state.filters).toEqual({
             type: 'Buitenbad'
         });

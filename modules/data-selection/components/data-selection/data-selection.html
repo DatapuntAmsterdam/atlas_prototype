@@ -30,13 +30,12 @@
 <div class="u-grid">
     <div class="u-row">
         <div ng-if="vm.showFilters" class="u-col-sm--3">
-            <dp-data-selection-filters
+            <dp-data-selection-available-filters
                 dataset="{{vm.state.dataset}}"
                 available-filters="vm.availableFilters"
                 active-filters="vm.state.filters"
                 is-loading="vm.isLoading">
-
-            </dp-data-selection-filters>
+            </dp-data-selection-available-filters>
         </div>
         <div ng-class="{
             'u-col-sm--12': !vm.showFilters,
@@ -50,6 +49,12 @@
                     number-of-records="vm.numberOfRecords"
                     header-title="vm.title">
                 </dp-data-selection-header>
+
+                <dp-data-selection-active-filters
+                    dataset="{{vm.state.dataset}}"
+                    available-filters="vm.availableFilters"
+                    active-filters="vm.state.filters">
+                </dp-data-selection-active-filters>
 
                 <div ng-if="vm.numberOfRecords">
                     <dp-panel ng-if="!vm.isPageAvailable" is-panel-visible="true" type="warning" can-close="true">
