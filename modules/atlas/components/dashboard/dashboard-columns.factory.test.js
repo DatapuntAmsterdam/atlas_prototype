@@ -1,56 +1,68 @@
 describe('The dashboardColumns factory', function () {
     var dashboardColumns,
         mockedState,
+        activity,
         visibility,
-        columnSizes;
+        columnSizes,
+        DEFAULT_STATE = {
+            map: {
+                baseLayer: 'topografie',
+                overlays: [],
+                viewCenter: [52.3719, 4.9012],
+                zoom: 9,
+                showActiveOverlays: false,
+                isFullscreen: false,
+                isLoading: false
+            },
+            layerSelection: {
+                isEnabled: false
+            },
+            search: null,
+            page: {
+                name: 'home'
+            },
+            detail: null,
+            straatbeeld: null,
+            dataSelection: null,
+            atlas: {
+                isPrintMode: false
+            }
+        };
 
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_dashboardColumns_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_dashboardColumns_) {
             dashboardColumns = _dashboardColumns_;
-            mockedState = angular.copy(_DEFAULT_STATE_);
+            mockedState = angular.copy(DEFAULT_STATE);
         });
     });
 
     describe('when determining component activity', function () {
-        it('the map is always active, regardless of input', function () {
-            let activity;
-
-            activity = dashboardColumns.determineActivity(mockedState);
-            expect(activity.map).toBe(true);
-
-            delete mockedState.map;
-            activity = dashboardColumns.determineActivity(mockedState);
-            expect(activity.map).toBe(true);
-        });
-
+        /**
+         * Note; test-cases for map activity are listed below, map activity equals map visibility, all available
+         * scenarios are only listed once (at the visibility describe block)
+         */
         it('checks if map.layerSelection is true in the state', function () {
-            let activity;
-
-            mockedState.layerSelection = true;
+            mockedState.layerSelection.isEnabled = true;
             activity = dashboardColumns.determineActivity(mockedState);
             expect(activity.layerSelection).toBe(true);
 
-            mockedState.layerSelection = false;
+            mockedState.layerSelection.isEnabled = false;
             activity = dashboardColumns.determineActivity(mockedState);
             expect(activity.layerSelection).toBe(false);
         });
 
         it('checks if page is a string', function () {
-            let activity;
-
             activity = dashboardColumns.determineActivity(mockedState);
             expect(activity.page).toBe(true);
 
-            mockedState.page = null;
+            mockedState.page.name = null;
             activity = dashboardColumns.determineActivity(mockedState);
             expect(activity.page).toBe(false);
         });
 
         it('checks if search, detail, straatbeeld and dataSelection are objects', function () {
-            let activity;
-
             // Search
             activity = dashboardColumns.determineActivity(mockedState);
             expect(activity.searchResults).toBe(false);
@@ -88,13 +100,15 @@ describe('The dashboardColumns factory', function () {
     describe('when visiting a page', function () {
         describe('the default non-print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = false;
+                mockedState.atlas.isPrintMode = false;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('makes the map and page visibile', function () {
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
                 expect(visibility.page).toBe(true);
 
@@ -114,8 +128,9 @@ describe('The dashboardColumns factory', function () {
 
         describe('the print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = true;
+                mockedState.atlas.isPrintMode = true;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
@@ -125,6 +140,7 @@ describe('The dashboardColumns factory', function () {
 
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
+                expect(activity.map).toBe(false);
                 expect(visibility.map).toBe(false);
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
@@ -142,7 +158,7 @@ describe('The dashboardColumns factory', function () {
     ['query', 'location'].forEach(function (searchInput) {
         describe('when searching by ' + searchInput, function () {
             beforeEach(function () {
-                mockedState.page = null;
+                mockedState.page.name = null;
 
                 if (searchInput === 'query') {
                     mockedState.search = {
@@ -159,13 +175,15 @@ describe('The dashboardColumns factory', function () {
 
             describe('the default non-print version', function () {
                 beforeEach(function () {
-                    mockedState.isPrintMode = false;
+                    mockedState.atlas.isPrintMode = false;
 
+                    activity = dashboardColumns.determineActivity(mockedState);
                     visibility = dashboardColumns.determineVisibility(mockedState);
                     columnSizes = dashboardColumns.determineColumnSizes(mockedState);
                 });
 
                 it('makes the map and searchResults visibile', function () {
+                    expect(activity.map).toBe(true);
                     expect(visibility.map).toBe(true);
                     expect(visibility.searchResults).toBe(true);
 
@@ -185,8 +203,9 @@ describe('The dashboardColumns factory', function () {
 
             describe('the print version', function () {
                 beforeEach(function () {
-                    mockedState.isPrintMode = true;
+                    mockedState.atlas.isPrintMode = true;
 
+                    activity = dashboardColumns.determineActivity(mockedState);
                     visibility = dashboardColumns.determineVisibility(mockedState);
                     columnSizes = dashboardColumns.determineColumnSizes(mockedState);
                 });
@@ -196,6 +215,7 @@ describe('The dashboardColumns factory', function () {
 
                     expect(visibility.layerSelection).toBe(false);
                     expect(visibility.detail).toBe(false);
+                    expect(activity.map).toBe(false);
                     expect(visibility.map).toBe(false);
                     expect(visibility.page).toBe(false);
                     expect(visibility.straatbeeld).toBe(false);
@@ -216,18 +236,20 @@ describe('The dashboardColumns factory', function () {
             mockedState.detail = {
                 geometry: {fake: 'GEOMETRY'}
             };
-            mockedState.page = null;
+            mockedState.page.name = null;
         });
 
         describe('the default non-print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = false;
+                mockedState.atlas.isPrintMode = false;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('makes the map and detail page visibile', function () {
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
                 expect(visibility.detail).toBe(true);
 
@@ -247,6 +269,7 @@ describe('The dashboardColumns factory', function () {
             it('can be shown fullscreen', function () {
                 mockedState.detail.isFullscreen = true;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
 
@@ -258,12 +281,14 @@ describe('The dashboardColumns factory', function () {
 
         describe('the print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = true;
+                mockedState.atlas.isPrintMode = true;
             });
 
             it('makes the map and detail page visibile', function () {
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
 
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
                 expect(visibility.detail).toBe(true);
 
@@ -285,7 +310,9 @@ describe('The dashboardColumns factory', function () {
             it('doesn\'t show the map when there is no geometry', function () {
                 mockedState.detail.geometry = null;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
+                expect(activity.map).toBe(false);
                 expect(visibility.map).toBe(false);
             });
         });
@@ -294,18 +321,20 @@ describe('The dashboardColumns factory', function () {
     describe('when visiting straatbeeld', function () {
         beforeEach(function () {
             mockedState.straatbeeld = {id: 'xyz'};
-            mockedState.page = null;
+            mockedState.page.name = null;
         });
 
         describe('the default non-print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = false;
+                mockedState.atlas.isPrintMode = false;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('makes the map and straatbeeld visibile', function () {
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
                 expect(visibility.straatbeeld).toBe(true);
 
@@ -369,13 +398,15 @@ describe('The dashboardColumns factory', function () {
 
         describe('the print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = true;
+                mockedState.atlas.isPrintMode = true;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('makes the map and straatbeeld visibile', function () {
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
                 expect(visibility.straatbeeld).toBe(true);
 
@@ -400,19 +431,21 @@ describe('The dashboardColumns factory', function () {
                 uri: 'blah/blah/123',
                 isLoading: false
             };
-            mockedState.layerSelection = true;
+            mockedState.layerSelection.isEnabled = true;
         });
 
         describe('the default non-print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = false;
+                mockedState.atlas.isPrintMode = false;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('makes the layerSelection and map visibile', function () {
                 expect(visibility.layerSelection).toBe(true);
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
 
                 expect(visibility.detail).toBe(false);
@@ -431,8 +464,9 @@ describe('The dashboardColumns factory', function () {
 
         describe('the print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = true;
+                mockedState.atlas.isPrintMode = true;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
@@ -441,6 +475,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.layerSelection).toBe(true);
 
                 expect(visibility.detail).toBe(false);
+                expect(activity.map).toBe(false);
                 expect(visibility.map).toBe(false);
                 expect(visibility.page).toBe(false);
                 expect(visibility.straatbeeld).toBe(false);
@@ -463,13 +498,15 @@ describe('The dashboardColumns factory', function () {
 
         describe('the default non-print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = false;
+                mockedState.atlas.isPrintMode = false;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('makes the map visibile', function () {
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
 
                 expect(visibility.detail).toBe(false);
@@ -489,13 +526,15 @@ describe('The dashboardColumns factory', function () {
 
         describe('the print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = true;
+                mockedState.atlas.isPrintMode = true;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('makes the map visibile', function () {
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
 
                 expect(visibility.detail).toBe(false);
@@ -520,20 +559,22 @@ describe('The dashboardColumns factory', function () {
                 uri: 'blah/blah/123',
                 isLoading: false
             };
-            mockedState.layerSelection = true;
+            mockedState.layerSelection.isEnabled = true;
             mockedState.map.isFullscreen = true;
         });
 
         describe('the default non-print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = false;
+                mockedState.atlas.isPrintMode = false;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('makes the layerSelection and map visibile', function () {
                 expect(visibility.layerSelection).toBe(true);
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
 
                 expect(visibility.detail).toBe(false);
@@ -552,8 +593,9 @@ describe('The dashboardColumns factory', function () {
 
         describe('the print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = true;
+                mockedState.atlas.isPrintMode = true;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
@@ -562,6 +604,7 @@ describe('The dashboardColumns factory', function () {
                 expect(visibility.layerSelection).toBe(true);
 
                 expect(visibility.detail).toBe(false);
+                expect(activity.map).toBe(false);
                 expect(visibility.map).toBe(false);
                 expect(visibility.page).toBe(false);
                 expect(visibility.straatbeeld).toBe(false);
@@ -589,13 +632,14 @@ describe('The dashboardColumns factory', function () {
                 page: 7
             };
 
-            mockedState.page = null;
+            mockedState.page.name = null;
         });
 
         describe('the default non-print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = false;
+                mockedState.atlas.isPrintMode = false;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
@@ -603,6 +647,7 @@ describe('The dashboardColumns factory', function () {
             it('only shows dataSelection', function () {
                 expect(visibility.dataSelection).toBe(true);
 
+                expect(activity.map).toBe(false);
                 expect(visibility.map).toBe(false);
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
@@ -623,13 +668,14 @@ describe('The dashboardColumns factory', function () {
                 mockedState.dataSelection.view = 'LIST';
                 mockedState.dataSelection.isFullscreen = false;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
-
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
             it('shows dataSelectionList and map', function () {
                 expect(visibility.dataSelection).toBe(true);
+                expect(activity.map).toBe(true);
                 expect(visibility.map).toBe(true);
 
                 expect(visibility.detail).toBe(false);
@@ -648,8 +694,9 @@ describe('The dashboardColumns factory', function () {
 
         describe('the print version', function () {
             beforeEach(function () {
-                mockedState.isPrintMode = true;
+                mockedState.atlas.isPrintMode = true;
 
+                activity = dashboardColumns.determineActivity(mockedState);
                 visibility = dashboardColumns.determineVisibility(mockedState);
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
@@ -657,6 +704,7 @@ describe('The dashboardColumns factory', function () {
             it('only shows dataSelection', function () {
                 expect(visibility.dataSelection).toBe(true);
 
+                expect(activity.map).toBe(false);
                 expect(visibility.map).toBe(false);
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);

@@ -27,7 +27,7 @@
             vm.activity = dashboardColumns.determineActivity(state);
             vm.visibility = dashboardColumns.determineVisibility(state);
 
-            vm.isPrintMode = state.isPrintMode;
+            vm.isPrintMode = state.atlas.isPrintMode;
 
             vm.isCatalogus = (state.dataSelection && state.dataSelection.view === 'CARDS') ||
                 (state.detail && state.detail.endpoint.includes('/catalogus/api/'));
@@ -44,7 +44,7 @@
             vm.columnSizes = dashboardColumns.determineColumnSizes(state);
 
             // Needed for the dp-scrollable-content directive
-            vm.pageName = state.page;
+            vm.pageName = state.page.name;
         }
     }
 })();

@@ -16,7 +16,7 @@
         function update () {
             var state = store.getState();
 
-            vm.pageName = state.page;
+            vm.pageName = state.page.name;
         }
     }
 })();

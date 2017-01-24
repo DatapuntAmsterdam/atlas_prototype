@@ -10,29 +10,35 @@ describe('The homeReducers factory', function () {
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_homeReducers_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_homeReducers_, _stateUrlConverter_) {
             homeReducers = _homeReducers_;
-            DEFAULT_STATE = _DEFAULT_STATE_;
+            DEFAULT_STATE = _stateUrlConverter_.getDefaultState();
         });
 
         mockedSearchState = angular.copy(DEFAULT_STATE);
         mockedSearchState.search = {
             query: 'I AM A QUERY',
             location: null,
-            category: null
+            category: null,
+            page: {
+                name: null
+            }
         };
-        mockedSearchState.page = null;
 
         mockedPageState = angular.copy(DEFAULT_STATE);
-        mockedPageState.page = 'over-atlas';
+        mockedPageState.page = {
+            name: 'over-atlas'
+        };
 
         mockedDetailState = angular.copy(DEFAULT_STATE);
         mockedDetailState.detail = {
             endpoint: 'http://www.example.com/whatever/123/',
             geometry: null,
-            isLoading: false
+            isLoading: false,
+            page: {
+                name: null
+            }
         };
-        mockedDetailState.page = null;
 
         mockedStraatbeeldState = angular.copy(DEFAULT_STATE);
         mockedStraatbeeldState.straatbeeld = {
@@ -49,9 +55,11 @@ describe('The homeReducers factory', function () {
                 pitch: 0
             },
             hotspots: [],
-            isLoading: false
+            isLoading: false,
+            page: {
+                name: null
+            }
         };
-        mockedStraatbeeldState.page = null;
 
         mockedStates.push(
             mockedSearchState,
@@ -70,11 +78,11 @@ describe('The homeReducers factory', function () {
 
         it('keeps the isPrintMode setting', function () {
             mockedStates.forEach(function (inputState) {
-                inputState.isPrintMode = false;
-                expect(homeReducers.SHOW_HOME(inputState).isPrintMode).toBe(false);
+                inputState.atlas.isPrintMode = false;
+                expect(homeReducers.SHOW_HOME(inputState).atlas.isPrintMode).toBe(false);
 
-                inputState.isPrintMode = true;
-                expect(homeReducers.SHOW_HOME(inputState).isPrintMode).toBe(true);
+                inputState.atlas.isPrintMode = true;
+                expect(homeReducers.SHOW_HOME(inputState).atlas.isPrintMode).toBe(true);
             });
         });
     });

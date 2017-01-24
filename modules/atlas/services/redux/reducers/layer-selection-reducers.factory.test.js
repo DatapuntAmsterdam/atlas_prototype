@@ -3,12 +3,36 @@ describe('The layerSelectionReducers factory', function () {
         DEFAULT_STATE,
         ACTIONS;
 
+    DEFAULT_STATE = {
+        map: {
+            baseLayer: 'topografie',
+            overlays: [],
+            viewCenter: [52.3719, 4.9012],
+            zoom: 9,
+            showActiveOverlays: false,
+            isFullscreen: false,
+            isLoading: false
+        },
+        layerSelection: {
+            isEnabled: false
+        },
+        search: null,
+        page: {
+            name: 'home'
+        },
+        detail: null,
+        straatbeeld: null,
+        dataSelection: null,
+        atlas: {
+            isPrintMode: false
+        }
+    };
+
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_layerSelectionReducers_, _DEFAULT_STATE_, _ACTIONS_) {
+        angular.mock.inject(function (_layerSelectionReducers_, _ACTIONS_) {
             layerSelectionReducers = _layerSelectionReducers_;
-            DEFAULT_STATE = _DEFAULT_STATE_;
             ACTIONS = _ACTIONS_;
         });
     });
@@ -17,7 +41,7 @@ describe('The layerSelectionReducers factory', function () {
         it('sets the variable to true', function () {
             var output = layerSelectionReducers[ACTIONS.SHOW_LAYER_SELECTION.id](DEFAULT_STATE);
 
-            expect(output.layerSelection).toBe(true);
+            expect(output.layerSelection.isEnabled).toBe(true);
         });
 
         it('leaves the fullscreen mode as is', function () {
@@ -37,11 +61,11 @@ describe('The layerSelectionReducers factory', function () {
                 output;
 
             inputState = angular.copy(DEFAULT_STATE);
-            inputState.layerSelection = true;
+            inputState.layerSelection.isEnabled = true;
 
             output = layerSelectionReducers[ACTIONS.HIDE_LAYER_SELECTION.id](inputState);
 
-            expect(output.layerSelection).toBe(false);
+            expect(output.layerSelection.isEnabled).toBe(false);
         });
     });
 });

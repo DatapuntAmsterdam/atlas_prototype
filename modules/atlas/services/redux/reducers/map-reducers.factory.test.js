@@ -3,13 +3,37 @@ describe('The map reducers', function () {
         ACTIONS,
         DEFAULT_STATE;
 
+    DEFAULT_STATE = {
+        map: {
+            baseLayer: 'topografie',
+            overlays: [],
+            viewCenter: [52.3719, 4.9012],
+            zoom: 9,
+            showActiveOverlays: false,
+            isFullscreen: false,
+            isLoading: false
+        },
+        layerSelection: {
+            isEnabled: false
+        },
+        search: null,
+        page: {
+            name: 'home'
+        },
+        detail: null,
+        straatbeeld: null,
+        dataSelection: null,
+        atlas: {
+            isPrintMode: false
+        }
+    };
+
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_mapReducers_, _ACTIONS_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_mapReducers_, _ACTIONS_) {
             mapReducers = _mapReducers_;
             ACTIONS = _ACTIONS_;
-            DEFAULT_STATE = _DEFAULT_STATE_;
         });
     });
 
@@ -215,11 +239,11 @@ describe('The map reducers', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
-            inputState.layerSelection = true;
+            inputState.layerSelection.isEnabled = true;
 
             // Enable fullscreen
             output = mapReducers[ACTIONS.MAP_FULLSCREEN.id](inputState, true);
-            expect(output.layerSelection).toBe(false);
+            expect(output.layerSelection.isEnabled).toBe(false);
         });
     });
 

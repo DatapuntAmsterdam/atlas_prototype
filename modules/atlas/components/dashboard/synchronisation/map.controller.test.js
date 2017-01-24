@@ -31,7 +31,8 @@ describe('The map controller', function () {
             map: {
                 var_1: 'a',
                 var_2: 'b'
-            }
+            },
+            layerSelection: {}
         };
 
         spyOn(store, 'getState').and.callThrough();
@@ -76,7 +77,7 @@ describe('The map controller', function () {
         controller = getController();
         expect(controller.showLayerSelection).not.toEqual(true);
 
-        mockedState.layerSelection = true;
+        mockedState.layerSelection.isEnabled = true;
         controller = getController();
         expect(controller.showLayerSelection).toEqual(true);
     });
@@ -216,7 +217,8 @@ describe('The map controller', function () {
                 straatbeeld: {
                     location: [52.2, 4.2],
                     heading: 179
-                }
+                },
+                layerSelection: {}
             };
 
             controller = getController();

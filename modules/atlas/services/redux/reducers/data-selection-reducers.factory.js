@@ -7,10 +7,12 @@
 
     dataSelectionReducersFactory.$inject = [
         'ACTIONS',
-        'DEFAULT_STATE'
+        'stateUrlConverter'
     ];
 
-    function dataSelectionReducersFactory (ACTIONS, DEFAULT_STATE) {
+    function dataSelectionReducersFactory (ACTIONS, stateUrlConverter) {
+        const DEFAULT_STATE = stateUrlConverter.getDefaultState();
+
         let reducers = {};
 
         reducers[ACTIONS.FETCH_DATA_SELECTION.id] = fetchDataSelectionReducer;
@@ -33,9 +35,9 @@
             newState.map.zoom = DEFAULT_STATE.map.zoom;
             newState.map.isFullscreen = false;
 
-            newState.layerSelection = false;
+            newState.layerSelection.isEnabled = null;
             newState.search = null;
-            newState.page = null;
+            newState.page.name = null;
             newState.detail = null;
             newState.straatbeeld = null;
 

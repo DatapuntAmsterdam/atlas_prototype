@@ -38,7 +38,7 @@
             function setPrintMode () {
                 var state = store.getState();
 
-                if (state.isPrintMode) {
+                if (state.atlas.isPrintMode) {
                     element.addClass('is-print-mode');
 
                     // Check if we are not on a detail page or search result page. Only add the class

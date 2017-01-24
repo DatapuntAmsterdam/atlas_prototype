@@ -7,7 +7,7 @@
         'applicationState',
         'reducer',
         'stateToUrl',
-        'DEFAULT_STATE',
+        'stateUrlConverter',
         'contextMiddleware',
         'stateToUrlMiddleware'
     ];
@@ -16,13 +16,13 @@
             applicationState,
             reducer,
             stateToUrl,
-            DEFAULT_STATE,
+            stateUrlConverter,
             contextMiddleware,
             stateToUrlMiddleware) {
         applicationState.initialize(
             reducer,
             stateToUrl,
-            DEFAULT_STATE,
+            stateUrlConverter.getDefaultState(),
             contextMiddleware,
             stateToUrlMiddleware);
     }

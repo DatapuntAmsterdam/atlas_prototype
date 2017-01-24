@@ -3,13 +3,37 @@ describe('The printReducers factory', function () {
         ACTIONS,
         defaultState;
 
+    defaultState = {
+        map: {
+            baseLayer: 'topografie',
+            overlays: [],
+            viewCenter: [52.3719, 4.9012],
+            zoom: 9,
+            showActiveOverlays: false,
+            isFullscreen: false,
+            isLoading: false
+        },
+        layerSelection: {
+            isEnabled: false
+        },
+        search: null,
+        page: {
+            name: 'home'
+        },
+        detail: null,
+        straatbeeld: null,
+        dataSelection: null,
+        atlas: {
+            isPrintMode: false
+        }
+    };
+
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_printReducers_, _ACTIONS_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_printReducers_, _ACTIONS_) {
             printReducers = _printReducers_;
             ACTIONS = _ACTIONS_;
-            defaultState = _DEFAULT_STATE_;
         });
     });
 
@@ -17,7 +41,7 @@ describe('The printReducers factory', function () {
         it('sets the isPrintMode variable to true', function () {
             var output = printReducers[ACTIONS.SHOW_PRINT.id](defaultState);
 
-            expect(output.isPrintMode).toBe(true);
+            expect(output.atlas.isPrintMode).toBe(true);
         });
     });
 
@@ -27,11 +51,11 @@ describe('The printReducers factory', function () {
                 output;
 
             inputState = angular.copy(defaultState);
-            inputState.isPrintMode = true;
+            inputState.atlas.isPrintMode = true;
 
             output = printReducers[ACTIONS.HIDE_PRINT.id](inputState);
 
-            expect(output.isPrintMode).toBe(false);
+            expect(output.atlas.isPrintMode).toBe(false);
         });
     });
 });

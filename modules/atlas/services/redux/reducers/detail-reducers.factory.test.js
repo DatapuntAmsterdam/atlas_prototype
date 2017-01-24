@@ -2,12 +2,36 @@ describe('The detailReducers factory', function () {
     var detailReducers,
         defaultState;
 
+    defaultState = {
+        map: {
+            baseLayer: 'topografie',
+            overlays: [],
+            viewCenter: [52.3719, 4.9012],
+            zoom: 9,
+            showActiveOverlays: false,
+            isFullscreen: false,
+            isLoading: false
+        },
+        layerSelection: {
+            isEnabled: false
+        },
+        search: null,
+        page: {
+            name: 'home'
+        },
+        detail: null,
+        straatbeeld: null,
+        dataSelection: null,
+        atlas: {
+            isPrintMode: false
+        }
+    };
+
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_detailReducers_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_detailReducers_) {
             detailReducers = _detailReducers_;
-            defaultState = _DEFAULT_STATE_;
         });
     });
 
@@ -51,17 +75,17 @@ describe('The detailReducers factory', function () {
                 inputState = angular.copy(defaultState),
                 output;
 
-            inputState.layerSelection = true;
+            inputState.layerSelection.isEnabled = true;
             inputState.search = {some: 'object'};
-            inputState.page = 'somePage';
+            inputState.page.name = 'somePage';
             inputState.straatbeeld = {some: 'object'};
             inputState.dataSelection = {some: 'object'};
 
             output = detailReducers.FETCH_DETAIL(inputState, payload);
 
-            expect(output.layerSelection).toBe(false);
+            expect(output.layerSelection.isEnabled).toBe(false);
             expect(output.search).toBeNull();
-            expect(output.page).toBeNull();
+            expect(output.page.name).toBeNull();
             expect(output.straatbeeld).toBeNull();
             expect(output.dataSelection).toBeNull();
         });
@@ -104,9 +128,13 @@ describe('The detailReducers factory', function () {
                     zoom: 12,
                     isLoading: true
                 },
-                layerSelection: false,
+                layerSelection: {
+                    isEnabled: false
+                },
                 search: null,
-                page: null,
+                page: {
+                    name: null
+                },
                 detail: {
                     endpoint: 'bag/thing/123/',
                     isLoading: true

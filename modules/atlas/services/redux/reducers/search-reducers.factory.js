@@ -36,8 +36,8 @@
 
             newState.map.isFullscreen = false;
 
-            newState.layerSelection = false;
-            newState.page = null;
+            newState.layerSelection.isEnabled = false;
+            newState.page.name = null;
             newState.detail = null;
             newState.straatbeeld = null;
             newState.dataSelection = null;
@@ -62,16 +62,16 @@
                 numberOfResults: null
             };
 
-            if (oldState.layerSelection || (oldState.map && oldState.map.isFullscreen)) {
+            if (oldState.layerSelection.isEnabled || (oldState.map && oldState.map.isFullscreen)) {
                 newState.map.viewCenter = payload;
             }
 
-            newState.layerSelection = false;
+            newState.layerSelection.isEnabled = false;
             if (newState.map) {
                 newState.map.showActiveOverlays = false;
                 newState.map.isFullscreen = false;
             }
-            newState.page = null;
+            newState.page.name = null;
             newState.detail = null;
             newState.straatbeeld = null;
             newState.dataSelection = null;

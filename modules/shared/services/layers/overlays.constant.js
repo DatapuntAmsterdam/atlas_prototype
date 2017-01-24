@@ -28,7 +28,7 @@
                 },
 
                 // economie
-                handel_vervoer_opslag: {
+                hvo: {
                     url: 'maps/handelsregister',
                     label_short: 'Handel, vervoer, opslag',
                     label_long: 'Handel, vervoer, opslag',
@@ -38,7 +38,7 @@
                     legend: '/maps/handelsregister?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=handel_vervoer_opslag&format=image/png&STYLE=default'
                 },
-                productie_installatie_reparatie: {
+                pir: {
                     url: 'maps/handelsregister',
                     label_short: 'Productie, install., repar.',
                     label_long: 'Productie installatie reparatie',
@@ -59,7 +59,7 @@
                     legend: '/maps/handelsregister?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=bouw&format=image/png&STYLE=default'
                 },
-                landbouw: {
+                lb: {
                     url: 'maps/handelsregister',
                     label_short: 'Landbouw',
                     label_long: 'Landbouw',
@@ -69,7 +69,7 @@
                     legend: '/maps/handelsregister?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=landbouw&format=image/png&STYLE=default'
                 },
-                horeca: {
+                hrc: {
                     url: 'maps/handelsregister',
                     label_short: 'Horeca',
                     label_long: 'Horeca',
@@ -79,7 +79,7 @@
                     legend: '/maps/handelsregister?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=horeca&format=image/png&STYLE=default'
                 },
-                informatie_telecommunicatie: {
+                itc: {
                     url: 'maps/handelsregister',
                     label_short: 'Inform., telecom.',
                     label_long: 'Informatie telecommunicatie',
@@ -89,7 +89,7 @@
                     legend: '/maps/handelsregister?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=telecommunicatie&format=image/png&STYLE=default'
                 },
-                financiele_dienstverlening_verhuur_van_roerend_en_onroerend_goed: {
+                fdvrog: {
                     url: 'maps/handelsregister',
                     label_short: 'Financ. dienstverl., verhuur',
                     label_long: 'financiële_dienstverlening_verhuur_van_roerend_en_onroerend_goed',
@@ -101,7 +101,7 @@
                         'layer=financiele_dienstverlening_verhuur' +
                         '&format=image/png&STYLE=default'
                 },
-                zakelijke_dienstverlening: {
+                zd: {
                     url: 'maps/handelsregister',
                     label_short: 'Zakelijke dienstverl.',
                     label_long: 'Zakelijke dienstverlening',
@@ -111,7 +111,7 @@
                     legend: '/maps/handelsregister?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=zakelijke_dienstverlening&format=image/png&STYLE=default'
                 },
-                overheid_onderwijs_zorg: {
+                ooz: {
                     url: 'maps/handelsregister',
                     label_short: 'Overheid, onderwijs, zorg',
                     label_long: 'Overheid, onderwijs, zorg',
@@ -121,7 +121,7 @@
                     legend: '/maps/handelsregister?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=overheid_onderwijs_zorg&format=image/png&STYLE=default'
                 },
-                cultuur_sport_recreatie: {
+                csr: {
                     url: 'maps/handelsregister',
                     label_short: 'Cultuur, sport, recreatie',
                     label_long: 'Cultuur, sport, recreatie',
@@ -131,7 +131,7 @@
                     legend: '/maps/handelsregister?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=cultuur_sport_recreatie&format=image/png&STYLE=default'
                 },
-                persoonlijke_dienstverlening: {
+                pd: {
                     url: 'maps/handelsregister',
                     label_short: 'Persoonl. dienstverl.',
                     label_long: 'Persoonlijke dienstverlening',
@@ -142,7 +142,7 @@
                         'gendGraphic&sld_version=1.1.0&' +
                         'layer=persoonlijke_dienstverlening&format=image/png&STYLE=default'
                 },
-                overige_niet_hierboven_genoemd: {
+                ovrg: {
                     url: 'maps/handelsregister',
                     label_short: 'Overige',
                     label_long: 'Overige niet hierboven genoemd',
@@ -164,7 +164,7 @@
                     legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
                         'Graphic&sld_version=1.1.0&layer=kadaster&format=image/png&STYLE=default'
                 },
-                burgerlijke_gemeente: {
+                bgem: {
                     url: 'maps/lki?service=wms',
                     label_short: 'Burgerlijke gemeenten',
                     label_long: 'Burgerlijke gemeenten',
@@ -174,7 +174,7 @@
                     legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
                         'Graphic&sld_version=1.1.0&layer=burgerlijke_gemeente&format=image/png&STYLE=default'
                 },
-                kadastrale_gemeente: {
+                kgem: {
                     url: 'maps/lki?service=wms',
                     label_short: 'Kadastrale gemeenten',
                     label_long: 'Kadastrale gemeenten',
@@ -184,7 +184,7 @@
                     legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
                         'Graphic&sld_version=1.1.0&layer=kadastrale_gemeente&format=image/png&STYLE=default'
                 },
-                kadastrale_sectie: {
+                ksec: {
                     url: 'maps/lki?service=wms',
                     label_short: 'Kadastrale secties',
                     label_long: 'Kadastrale secties',
@@ -194,7 +194,7 @@
                     legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
                         'Graphic&sld_version=1.1.0&layer=kadastrale_sectie&format=image/png&STYLE=default'
                 },
-                kadastraal_object: {
+                kot: {
                     url: 'maps/lki?service=wms',
                     label_short: 'Kadastrale objecten',
                     label_long: 'Kadastrale objecten',
@@ -204,7 +204,7 @@
                     legend: '/maps/lki?version=1.3.0&service=WMS&request=GetLegend' +
                         'Graphic&sld_version=1.1.0&layer=kadastraal_object&format=image/png&STYLE=default'
                 },
-                gemeentelijke_beperkingen: {
+                gbep: {
                     url: 'maps/wkpb',
                     label_short: 'Gemeentelijke beperkingen',
                     label_long: 'Gemeentelijke beperkingen',
@@ -216,7 +216,7 @@
                 },
 
                 // geografie: gebieden
-                grootstedelijkgebied: {
+                gsg: {
                     url: 'maps/gebieden?service=wms',
                     label_short: 'Grootstedelijke gebieden',
                     label_long: 'Grootstedelijke gebieden',
@@ -236,7 +236,7 @@
                     legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLe' +
                         'gendGraphic&sld_version=1.1.0&layer=unesco&format=image/png&STYLE=default'
                 },
-                stadsdeel: {
+                sd: {
                     url: 'maps/gebieden?service=wms',
                     label_short: 'Stadsdelen',
                     label_long: 'Stadsdelen',
@@ -246,7 +246,7 @@
                     legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
                         'Graphic&sld_version=1.1.0&layer=stadsdeel&format=image/png&STYLE=default'
                 },
-                gebiedsgericht_werken: {
+                ggw: {
                     url: 'maps/gebieden?service=wms',
                     label_short: 'Gebiedsgerichtwerken gebieden',
                     label_long: 'Gebiedsgerichtwerken gebieden',
@@ -256,7 +256,7 @@
                     legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
                         'Graphic&sld_version=1.1.0&layer=gebiedsgerichtwerken&format=image/png&STYLE=default'
                 },
-                buurtcombinatie: {
+                bc: {
                     url: 'maps/gebieden?service=wms',
                     label_short: 'Buurtcombinaties',
                     label_long: 'Buurtcombinaties',
@@ -276,7 +276,7 @@
                     legend: '/maps/gebieden?version=1.3.0&service=WMS&request=GetLegend' +
                         'Graphic&sld_version=1.1.0&layer=buurt&format=image/png&STYLE=default'
                 },
-                bouwblokken: {
+                bbn: {
                     url: 'maps/gebieden?service=wms',
                     label_short: 'Bouwblokken',
                     label_long: 'Bouwblokken',
@@ -320,7 +320,7 @@
                     legend: '/maps/nap?version=1.3.0&service=WMS&request=GetLegendG' +
                         'raphic&sld_version=1.1.0&layer=NAP&format=image/png&STYLE=default'
                 },
-                meetbouten_status: {
+                mbs: {
                     url: 'maps/meetbouten?service=wms',
                     label_short: 'Meetbouten - Status',
                     label_long: 'Meetbouten - Status',
@@ -330,7 +330,7 @@
                     legend: '/maps/meetbouten?version=1.3.0&service=WMS&request=Get' +
                         'LegendGraphic&sld_version=1.1.0&layer=meetbouten_status&format=image/png&STYLE=default'
                 },
-                meetbouten_zaksnelheid: {
+                mbz: {
                     url: 'maps/meetbouten?service=wms',
                     label_short: 'Meetbouten - Zaksnelheid',
                     label_long: 'Meetbouten - Zaksnelheid',
@@ -340,7 +340,7 @@
                     legend: '/maps/meetbouten?version=1.3.0&service=WMS&request=Get' +
                         'LegendGraphic&sld_version=1.1.0&layer=meetbouten_zaksnelheid&format=image/png&STYLE=default'
                 },
-                meetbouten_referentiepunten: {
+                mbr: {
                     url: 'maps/meetbouten',
                     label_short: 'Meetbouten - Referentiepunten',
                     label_long: 'Meetbouten - Referentiepunten',
@@ -352,7 +352,7 @@
                 },
 
                 // milieu bodem
-                milieu_bodem_grondmonsters: {
+                mbgm: {
                     url: 'maps/bodem',
                     label_short: 'Grondmonster',
                     label_long: 'Grondmonster',
@@ -362,7 +362,7 @@
                     legend: '/maps/bodem?version=1.3.0&service=WMS&request=GetLegen' +
                         'dGraphic&sld_version=1.1.0&layer=grondmonsters&format=image/png&STYLE=default'
                 },
-                milieu_bodem_grondwatermonsters: {
+                mbgwm: {
                     url: 'maps/bodem',
                     label_short: 'Grondwatermonster',
                     label_long: 'Grondwatermonster',
@@ -372,7 +372,7 @@
                     legend: '/maps/bodem?version=1.3.0&service=WMS&request=GetLegen' +
                         'dGraphic&sld_version=1.1.0&layer=grondwatermonsters&format=image/png&STYLE=default'
                 },
-                milieu_bodem_asbest_in_grond: {
+                mbaig: {
                     url: 'maps/bodem',
                     label_short: 'Asbest in grond',
                     label_long: 'Asbest in grond',
@@ -382,7 +382,7 @@
                     legend: '/maps/bodem?version=1.3.0&service=WMS&request=GetLegen' +
                         'dGraphic&sld_version=1.1.0&layer=asbest&format=image/png&STYLE=default'
                 },
-                explosieven_inslagen: {
+                exin: {
                     url: 'maps/bommenkaart',
                     label_short: 'Explosieven - Inslagen',
                     label_long: 'Explosieven - Inslagen',
@@ -392,7 +392,7 @@
                     legend: 'maps/bommenkaart?version=1.3.0&service=WMS&request=GetLegendGraphic&sld_version=1.1.0&la' +
                     'yer=inslagen&format=image/png&STYLE=default'
                 },
-                explosieven_verdachte_gebieden: {
+                exvg: {
                     url: 'maps/bommenkaart',
                     label_short: 'Explosieven - Verdachte gebieden',
                     label_long: 'Explosieven - Verdachte gebieden',
@@ -402,7 +402,7 @@
                     legend: 'maps/bommenkaart?version=1.3.0&service=WMS&request=GetLegendGraphic&sld_version=1.1.0&la' +
                     'yer=verdachte_gebieden&format=image/png&STYLE=default'
                 },
-                explosieven_gevrijwaarde_gebieden: {
+                exgg: {
                     url: 'maps/bommenkaart',
                     label_short: 'Explosieven - Gevrijwaarde gebieden',
                     label_long: 'Explosieven - Gevrijwaarde gebieden',
@@ -412,7 +412,7 @@
                     legend: 'maps/bommenkaart?version=1.3.0&service=WMS&request=GetLegendGraphic&sld_version=1.1.0&la' +
                         'yer=gevrijwaarde_gebieden&format=image/png&STYLE=default'
                 },
-                explosieven_uitgevoerde_onderzoeken: {
+                exuo: {
                     url: 'maps/bommenkaart',
                     label_short: 'Explosieven - Uitgevoerde onderzoeken',
                     label_long: 'Explosieven - Uitgevoerde onderzoeken',
@@ -424,7 +424,7 @@
                 },
 
                 // milieu: veiligheid
-                milieu_veiligheid_lpg_vulpunt: {
+                mvlpgv: {
                     url: 'maps/externeveiligheid',
                     label_short: 'LPG-vulpunt - Risicozones',
                     label_long: 'LPG-vulpunt - Risicozones',
@@ -440,7 +440,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_lpg_vulpunt&format=image/png&' +
                         'STYLE=default'
                 },
-                milieu_veiligheid_lpg_afleverzuil: {
+                mvlpga: {
                     url: 'maps/externeveiligheid',
                     label_short: 'LPG-afleverzuil - Risicozones',
                     label_long: 'LPG-afleverzuil - Risicozones',
@@ -451,7 +451,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_lpg_afleverzuil&format=image/' +
                         'png&STYLE=default'
                 },
-                milieu_veiligheid_lpg_tank: {
+                mvlpgt: {
                     url: 'maps/externeveiligheid',
                     label_short: 'LPG-tank - Risicozones',
                     label_long: 'LPG-tank - Risicozones',
@@ -462,7 +462,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_lpg_tank&format=image/png&STY' +
                         'LE=default'
                 },
-                milieu_veiligheid_lpg_station: {
+                mvlpgs: {
                     url: 'maps/externeveiligheid',
                     label_short: 'LPG-station - Risicozones',
                     label_long: 'LPG-station - Risicozones',
@@ -473,7 +473,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_lpg_station&format=image/png&' +
                         'STYLE=default'
                 },
-                milieu_veiligheid_bron: {
+                mvbr: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Bedrijf - bronnen en risicozones',
                     label_long: 'Bedrijf - bronnen en risicozones',
@@ -484,7 +484,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=overigerisicobedrijven&format=image/png&STYLE=d' +
                         'efault'
                 },
-                milieu_veiligheid_bedrijf: {
+                mvbd: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Bedrijf - Terreingrens',
                     label_long: 'Bedrijf - Terreingrens',
@@ -495,7 +495,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_bedrijf&format=image/png&STYL' +
                         'E=default'
                 },
-                milieu_veiligheid_aardgasbuisleidingen: {
+                mvabl: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Aardgasbuisleid. - Risicozones',
                     label_long: 'Aardgasbuisleidingen - Risicozones',
@@ -506,7 +506,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_aardgasbuisleidingen&format=i' +
                         'mage/png&STYLE=default'
                 },
-                milieu_veiligheid_spoorwegen: {
+                mvsw: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Spoorwegen - Risicozones',
                     label_long: 'Spoorwegen - Risicozones',
@@ -517,7 +517,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=risicozonesspoorweg&format=image/png&STYLE=defa' +
                         'ult'
                 },
-                milieu_veiligheid_vaarwegen: {
+                mvvw: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Vaarwegen - Risicozones',
                     label_long: 'Vaarwegen - Risicozones',
@@ -527,7 +527,7 @@
                     legend: '/maps/externeveiligheid?version=1.3.0&service=WMS&requ' +
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=risicozonesvaarweg&format=image/png&STYLE=default'
                 },
-                milieu_veiligheid_wegen: {
+                mvw: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Wegen - Risicozones',
                     label_long: 'Wegen - Risicozones',
@@ -537,7 +537,7 @@
                     legend: '/maps/externeveiligheid?version=1.3.0&service=WMS&requ' +
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=risicozonesweg&format=image/png&STYLE=default'
                 },
-                milieu_veiligheid_vuurwerkopslag: {
+                mvvo: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Vuurwerkopslag - Veilig.afst.',
                     label_long: 'Vuurwerkopslag - Veiligheidsafstanden',
@@ -548,7 +548,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_vuurwerk&format=image/png&STY' +
                         'LE=default'
                 },
-                milieu_veiligheid_munitieopslag: {
+                mvmo: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Munitieopslag - Veilig.afst.',
                     label_long: 'Munitieopslag - Veiligheidsafstanden',
@@ -559,7 +559,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_munitie&format=image/png&STYL' +
                         'E=default'
                 },
-                milieu_veiligheid_gasdrukregel_en_meetstations: {
+                mvgms: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Gasdruk...stations - Veilig.afst.',
                     label_long: 'Gasdrukregel- en meetstation - Veiligheidsafstanden',
@@ -570,7 +570,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_gasdrukregel_meetstation&form' +
                         'at=image/png&STYLE=default'
                 },
-                milieu_veiligheid_sluis: {
+                mvsls: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Sluis - Veilig.afst.',
                     label_long: 'Sluis - Veiligheidsafstanden',
@@ -581,7 +581,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_sluis&format=image/png&STYLE=' +
                         'default'
                 },
-                milieu_veiligheid_wachtplaatsen: {
+                mvwp: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Wachtplaatsen - Veilig.afst.',
                     label_long: 'Wachtplaatsen - Veiligheidsafstanden',
@@ -592,7 +592,7 @@
                         'est=GetLegendGraphic&sld_version=1.1.0&layer=milieu_veiligheid_wachtplaats&format=image/png&' +
                         'STYLE=default'
                 },
-                milieu_veiligheid_bunkerschepen: {
+                mvbs: {
                     url: 'maps/externeveiligheid',
                     label_short: 'Bunkerschepen - Veilig.afst.',
                     label_long: 'Bunkerschepen - Veiligheidsafstanden',
@@ -605,7 +605,7 @@
                 },
 
                 // milieu zones
-                milieu_geluid_planologisch_industrie: {
+                mgpind: {
                     url: 'maps/planologischegeluidszones',
                     label_short: 'Industrie - Geluidszones',
                     label_long: 'Industrie - Geluidszones',
@@ -620,7 +620,7 @@
                         'WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=milieu_geluid_planologisch_industrie&fo' +
                         'rmat=image/png&STYLE=default'
                 },
-                milieu_geluid_planologisch_spoorwegen: {
+                mgsw: {
                     url: 'maps/planologischegeluidszones',
                     label_short: 'Spoorwegen - Geluidszones',
                     label_long: 'Spoorwegen - Geluidszones',
@@ -630,7 +630,7 @@
                     legend: '/maps/planologischegeluidszones?version=1.3.0&service=' +
                         'WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=spoorwegen&format=image/png&STYLE=default'
                 },
-                milieu_geluid_planologisch_metro: {
+                mgpm: {
                     url: 'maps/planologischegeluidszones',
                     label_short: 'Metro - Geluidszones',
                     label_long: 'Metro - Geluidszones',
@@ -640,7 +640,7 @@
                     legend: '/maps/planologischegeluidszones?version=1.3.0&service=' +
                         'WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=metro&format=image/png&STYLE=default'
                 },
-                milieu_geluid_planologisch_schiphol: {
+                mgpsh: {
                     url: 'maps/planologischezonesschiphol',
                     label_short: 'Schiphol - Ruimtelijke beperkingen',
                     label_long: 'Schiphol - Ruimtelijke beperkingen',
@@ -651,7 +651,7 @@
                         '=WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=geluidszoneschiphol&format=image/png&S' +
                         'TYLE=default'
                 },
-                milieu_hoogtebeperkende_vlakken: {
+                mghv: {
                     url: 'maps/planologischezonesschiphol',
                     label_short: 'Schiphol - Hoogtebeperking',
                     label_long: 'Schiphol - Hoogtebeperking',
@@ -662,7 +662,7 @@
                         '=WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=hoogtebeperkingschiphol&format=image/p' +
                         'ng&STYLE=default'
                 },
-                milieu_veiligheid_vogelvrijwaringsgebied_schiphol: {
+                mgvvgsh: {
                     url: 'maps/planologischezonesschiphol',
                     label_short: 'Schiphol - Vogelvrijwaring',
                     label_long: 'Schiphol - Vogelvrijwaring',
@@ -675,7 +675,7 @@
                 },
 
                 // Verkeer
-                parkeervakken: {
+                pv: {
                     url: 'maps/parkeervakken',
                     label_short: 'Parkeervakken',
                     label_long: 'Parkeervakken',
@@ -686,7 +686,7 @@
                         'GetLegendGraphic&sld_version=1.1.0&layer=alle_parkeervakken&format=image/png&STYLE=de' +
                         'fault'
                 },
-                parkeervakken_bord: {
+                pvb: {
                     url: 'maps/parkeervakken',
                     label_short: 'Parkeervakken - Borden',
                     label_long: 'Parkeervakken - Borden',
@@ -697,7 +697,7 @@
                         'GetLegendGraphic&sld_version=1.1.0&layer=parkeervakken_bord&format=image/png&STYLE=de' +
                         'fault'
                 },
-                parkeervakken_reservering: {
+                pvr: {
                     url: 'maps/parkeervakken',
                     label_short: 'Parkeervakken - Gereserveerd',
                     label_long: 'Parkeervakken - Gereserveerd',
@@ -713,38 +713,38 @@
                 {
                     heading: 'Economie',
                     overlays: [
-                        'handel_vervoer_opslag',
-                        'productie_installatie_reparatie',
+                        'hvo',
+                        'pir',
                         'bouw',
-                        'landbouw',
-                        'horeca',
-                        'informatie_telecommunicatie',
-                        'financiele_dienstverlening_verhuur_van_roerend_en_onroerend_goed',
-                        'zakelijke_dienstverlening',
-                        'overheid_onderwijs_zorg',
-                        'cultuur_sport_recreatie',
-                        'persoonlijke_dienstverlening',
-                        'overige_niet_hierboven_genoemd'
+                        'lb',
+                        'hrc',
+                        'itc',
+                        'fdvrog',
+                        'zd',
+                        'ooz',
+                        'csr',
+                        'pd',
+                        'ovrg'
                     ]
                 }, {
                     heading: 'Onroerende zaken',
                     overlays: [
-                        'burgerlijke_gemeente',
-                        'kadastrale_gemeente',
-                        'kadastrale_sectie',
-                        'kadastraal_object',
-                        'gemeentelijke_beperkingen'
+                        'bgem',
+                        'kgem',
+                        'ksec',
+                        'kot',
+                        'gbep'
                     ]
                 }, {
                     heading: 'Geografie: gebieden',
                     overlays: [
-                        'grootstedelijkgebied',
+                        'gsg',
                         'unesco',
-                        'stadsdeel',
-                        'gebiedsgericht_werken',
-                        'buurtcombinatie',
+                        'sd',
+                        'ggw',
+                        'bc',
                         'buurt',
-                        'bouwblokken'
+                        'bbn'
                     ]
                 }, {
                     heading: 'Geografie: hoogte',
@@ -752,57 +752,57 @@
                         'dsm',
                         'dtm',
                         'nap',
-                        'meetbouten_status',
-                        'meetbouten_zaksnelheid',
-                        'meetbouten_referentiepunten'
+                        'mbs',
+                        'mbz',
+                        'mbr'
                     ]
                 }, {
                     heading: 'Milieu: bodem',
                     overlays: [
-                        'milieu_bodem_grondmonsters',
-                        'milieu_bodem_grondwatermonsters',
-                        'milieu_bodem_asbest_in_grond',
-                        'explosieven_inslagen',
-                        'explosieven_verdachte_gebieden',
-                        'explosieven_gevrijwaarde_gebieden',
-                        'explosieven_uitgevoerde_onderzoeken'
+                        'mbgm',
+                        'mbgwm',
+                        'mbaig',
+                        'exin',
+                        'exvg',
+                        'exgg',
+                        'exuo'
                     ]
                 }, {
                     heading: 'Milieu: externe veiligheid',
                     overlays: [
-                        'milieu_veiligheid_lpg_vulpunt',
-                        'milieu_veiligheid_lpg_afleverzuil',
-                        'milieu_veiligheid_lpg_tank',
-                        'milieu_veiligheid_lpg_station',
-                        'milieu_veiligheid_bron',
-                        'milieu_veiligheid_bedrijf',
-                        'milieu_veiligheid_aardgasbuisleidingen',
-                        'milieu_veiligheid_spoorwegen',
-                        'milieu_veiligheid_vaarwegen',
-                        'milieu_veiligheid_wegen',
-                        'milieu_veiligheid_vuurwerkopslag',
-                        'milieu_veiligheid_munitieopslag',
-                        'milieu_veiligheid_gasdrukregel_en_meetstations',
-                        'milieu_veiligheid_sluis',
-                        'milieu_veiligheid_wachtplaatsen',
-                        'milieu_veiligheid_bunkerschepen'
+                        'mvlpgv',
+                        'mvlpga',
+                        'mvlpgt',
+                        'mvlpgs',
+                        'mvbr',
+                        'mvbd',
+                        'mvabl',
+                        'mvsw',
+                        'mvvw',
+                        'mvw',
+                        'mvvo',
+                        'mvmo',
+                        'mvgms',
+                        'mvsls',
+                        'mvwp',
+                        'mvbs'
                     ]
                 }, {
                     heading: 'Milieu: zones',
                     overlays: [
-                        'milieu_geluid_planologisch_industrie',
-                        'milieu_geluid_planologisch_spoorwegen',
-                        'milieu_geluid_planologisch_metro',
-                        'milieu_geluid_planologisch_schiphol',
-                        'milieu_hoogtebeperkende_vlakken',
-                        'milieu_veiligheid_vogelvrijwaringsgebied_schiphol'
+                        'mgpind',
+                        'mgsw',
+                        'mgpm',
+                        'mgpsh',
+                        'mghv',
+                        'mgvvgsh'
                     ]
                 }, {
                     heading: 'Verkeer',
                     overlays: [
-                        'parkeervakken',
-                        'parkeervakken_bord',
-                        'parkeervakken_reservering'
+                        'pv',
+                        'pvb',
+                        'pvr'
                     ]
                 }
             ]

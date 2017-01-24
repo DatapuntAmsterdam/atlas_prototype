@@ -88,7 +88,7 @@ describe('The cards component', function () {
     it('can load a detail page for a card', function () {
         let component = getComponent();
 
-        component.find('.qa-cards-fetch-detail')[0].click();
+        component.find('.qa-card-fetch-detail')[0].click();
 
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_DETAIL,

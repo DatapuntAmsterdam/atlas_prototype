@@ -60,7 +60,7 @@
             }
 
             vm.mapState = state.map;
-            vm.showLayerSelection = state.layerSelection;
+            vm.showLayerSelection = state.layerSelection && state.layerSelection.isEnabled;
         }
 
         function convertLocationToGeoJSON (location) {

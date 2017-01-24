@@ -46,7 +46,7 @@
             newState.map.highlight = null;
 
             newState.search = null;
-            newState.page = null;
+            newState.page.name = null;
 
             newState.dataSelection = null;
 
@@ -70,17 +70,22 @@
             newState.straatbeeld.location = payload;
             newState.straatbeeld.targetLocation = payload;
 
-            if (oldState.layerSelection || (oldState.map && oldState.map.isFullscreen)) {
+            if ((oldState.layerSelection && oldState.layerSelection.isEnabled) ||
+                (oldState.map && oldState.map.isFullscreen)) {
                 newState.map.viewCenter = payload;
             }
 
-            newState.layerSelection = false;
+            if (newState.layerSelection) {
+                newState.layerSelection.isEnabled = false;
+            }
             if (newState.map) {
                 newState.map.showActiveOverlays = false;
                 newState.map.isFullscreen = false;
             }
             newState.search = null;
-            newState.page = null;
+            if (newState.page) {
+                newState.page.name = null;
+            }
 
             // If a straatbeeld is loaded by it's location
             // then clear any active detail

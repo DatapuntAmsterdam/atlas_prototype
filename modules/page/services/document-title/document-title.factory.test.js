@@ -15,8 +15,8 @@ describe('The dpPageDocumentTitle factory', function () {
     });
 
     it('uses the pageName service', function () {
-        documentTitle.getTitle('pageA');
-        documentTitle.getTitle('page-b');
+        documentTitle.getTitle({ name: 'pageA' });
+        documentTitle.getTitle({ name: 'page-b' });
 
         expect(mocks.pageName).toHaveBeenCalledWith('pageA');
         expect(mocks.pageName).toHaveBeenCalledWith('page-b');

@@ -1,485 +1,58 @@
 describe('The stateToUrl factory', function () {
     var $location,
         stateToUrl,
+        stateUrlConverter,
         mockedState;
 
     beforeEach(function () {
-        angular.mock.module('atlas');
+        angular.mock.module('atlas', {
+            stateUrlConverter: {
+                state2params: state => angular.merge({}, state, {convert: true}),
+                state2url: angular.noop
+            }
+        });
 
-        angular.mock.inject(function (_$location_, _stateToUrl_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_$location_, _stateToUrl_, _stateUrlConverter_) {
             $location = _$location_;
             stateToUrl = _stateToUrl_;
-            mockedState = angular.copy(_DEFAULT_STATE_);
+            stateUrlConverter = _stateUrlConverter_;
+            mockedState = {
+                aap: 'noot',
+                mies: 'teun'
+            };
         });
 
         spyOn($location, 'replace');
         spyOn($location, 'search');
+        spyOn(stateUrlConverter, 'state2url');
     });
 
-    describe('create', function () {
-        it('creates a query string', function () {
-            expect(stateToUrl.create(mockedState)).toBe([
-                '#?lat=', mockedState.map.viewCenter[0],
-                '&lon=', mockedState.map.viewCenter[1],
-                '&basiskaart=', mockedState.map.baseLayer,
-                '&zoom=', mockedState.map.zoom,
-                '&pagina=', mockedState.page
-            ].join(''));
+    describe('can convert a state to an hyperlink', function () {
+        it('returns a url string for the converted state', function () {
+            stateToUrl.create(mockedState);
+            expect(stateUrlConverter.state2url).toHaveBeenCalledWith(mockedState);
         });
     });
 
-    describe('Search', function () {
-        it('can contain a query', function () {
-            mockedState.search = {
-                query: 'i_am_a_query',
-                location: null,
-                category: null
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                zoek: 'i_am_a_query'
-            }));
+    describe('can update the url to reflect the state', function () {
+        it('by calling $location.search', function () {
+            stateToUrl.update(mockedState);
+            expect($location.search).toHaveBeenCalledWith(stateUrlConverter.state2params(mockedState));
         });
 
-        it('can contain a location', function () {
-            mockedState.search = {
-                query: null,
-                location: [52.123, 4.789],
-                category: null
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                zoek: '52.123,4.789'
-            }));
-        });
-
-        it('can have an active category', function () {
-            mockedState.search = {
-                query: 'i_am_a_query',
-                location: null,
-                category: 'adres'
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                categorie: 'adres'
-            }));
-        });
-
-        it('can be omitted', function () {
-            mockedState.search = null;
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                zoek: jasmine.any(String)
-            }));
-        });
-    });
-
-    describe('Map', function () {
-        it('updates the location', function () {
-            mockedState.map.viewCenter = [52.789, 4.123];
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                lat: '52.789',
-                lon: '4.123'
-            }));
-        });
-
-        it('updates the baseLayer', function () {
-            mockedState.map.baseLayer = 'historische_luchtfoto_1825';
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                basiskaart: 'historische_luchtfoto_1825'
-            }));
-        });
-
-        it('can contain one of more overlays', function () {
-            // No overlays, no parameter
-            mockedState.map.overlays = [];
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                lagen: jasmine.any(String)
-            }));
-
-            // One overlay
-            mockedState.map.overlays = [{id: 'overlay_x', isVisible: true}];
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                lagen: 'overlay_x:zichtbaar'
-            }));
-
-            // Two overlays
-            mockedState.map.overlays = [
-                {id: 'overlay_x', isVisible: true},
-                {id: 'overlay_y', isVisible: false}
-            ];
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                lagen: 'overlay_x:zichtbaar,overlay_y:onzichtbaar'
-            }));
-        });
-
-        it('keeps track of the zoom level', function () {
-            mockedState.map.zoom = 8;
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                zoom: '8'
-            }));
-        });
-
-        it('keeps track of the state of the layer selection (opened or closed)', function () {
-            // Closed
-            mockedState.map.showActiveOverlays = false;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'actieve-kaartlagen': jasmine.anything()
-            }));
-
-            // Opened
-            mockedState.map.showActiveOverlays = true;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'actieve-kaartlagen': 'aan'
-            }));
-        });
-
-        it('keeps track of the isFullscreen state', function () {
-            // Closed
-            mockedState.map.isFullscreen = false;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'volledig-scherm': jasmine.anything()
-            }));
-
-            // Opened
-            mockedState.map.isFullscreen = true;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'volledig-scherm': 'aan'
-            }));
-        });
-    });
-
-    describe('Layer selection', function () {
-        it('keeps track of the state of the layer selection (opened or closed)', function () {
-            // Closed
-            mockedState.layerSelection = false;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'kaartlagen-selectie': jasmine.anything()
-            }));
-
-            // Opened
-            mockedState.layerSelection = true;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'kaartlagen-selectie': 'aan'
-            }));
-        });
-    });
-
-    describe('Page', function () {
-        it('can store the name of the page', function () {
-            // No page, no parameter
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                pagina: jasmine.Any(String)
-            }));
-
-            // With a page
-            mockedState.page = 'welkom';
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                pagina: 'welkom'
-            }));
-        });
-    });
-
-    describe('Detail', function () {
-        it('can store the api endpoint of the detail page', function () {
-            // No detail, no parameter
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                detail: jasmine.Any(String)
-            }));
-
-            // With a detail page
-            mockedState.detail = {
-                endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/123/'
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                detail: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/123/'
-            }));
-        });
-
-        it('can set the fullscreen of detail', function () {
-            mockedState.detail = {
-                endpoint: 'ABC',
-                isFullscreen: true
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                detail: 'ABC',
-                'volledig-detail': 'aan'
-            }));
-        });
-    });
-
-    describe('Straatbeeld', function () {
-        it('does nothing is there is no active straatbeeld', function () {
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                id: jasmine.Any(String)
-            }));
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                plat: jasmine.Any(String),
-                plon: jasmine.Any(String)
-            }));
-        });
-
-        it('can set the straatbeeld id if it\'s known', function () {
-            mockedState.straatbeeld = {
-                id: 'ABC'
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                id: 'ABC'
-            }));
-        });
-
-        it('keeps track of the isFullscreen state', function () {
-            // Closed
-            mockedState.straatbeeld = {
-                id: 'ABC',
-                isFullscreen: false
-            };
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'volledig-straatbeeld': jasmine.anything()
-            }));
-
-            // Opened
-            mockedState.straatbeeld.isFullscreen = true;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'volledig-straatbeeld': 'aan'
-            }));
-        });
-
-        it('Has orientation with heading, pitch and fov', function () {
-            mockedState.straatbeeld = {
-                id: 'ABC',
-                heading: 270,
-                pitch: 10.4,
-                fov: 20
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                heading: '270',
-                pitch: '10.4',
-                fov: '20'
-            }));
-        });
-
-        it('can set the straatbeeld location if it\'s known', function () {
-            mockedState.straatbeeld = {
-                id: 'ABC',
-                location: [1, 2]
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                id: 'ABC',
-                straatbeeld: '1,2'
-            }));
-        });
-    });
-
-    describe('The data selection url conversion', function () {
-        it('does nothing if there is no active dataset', function () {
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                dataset: jasmine.Any(String)
-            }));
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-filters': jasmine.Any(String)
-            }));
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-pagina': jasmine.Any(String)
-            }));
-        });
-
-        it('adds the query to the url when set', function () {
-            mockedState.dataSelection = {
-            };
-
-            // With a query
-            mockedState.dataSelection.query = 'aap';
-            stateToUrl.update(mockedState, false);
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-zoek': 'aap'
-            }));
-
-            // Without any query
-            $location.search.calls.reset();
-            delete mockedState.dataSelection.query;
-            stateToUrl.update(mockedState, false);
+        it('has the option to replace the URL by setting useReplace flag to true', function () {
+            // regular call
+            stateToUrl.update(mockedState);
+            expect($location.replace).not.toHaveBeenCalled();
             expect($location.search).toHaveBeenCalled();
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-zoek': jasmine.any(String)
-            }));
-        });
 
-        it('can set a dataset with (URL encoded) filters and a page number', function () {
-            mockedState.dataSelection = {
-                dataset: 'bag',
-                filters: {},
-                query: 'zoek',
-                page: 5
-            };
-
-            // Without any filters
-            stateToUrl.update(mockedState, false);
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                dataset: 'bag'
-            }));
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-filters': jasmine.any(String)
-            }));
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-pagina': '5' // The page is converted to a string
-            }));
-
-            // With one filter
-            mockedState.dataSelection.filters = {
-                buurt: 'Mijn buurt'
-            };
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-filters': 'buurt:Mijn%20buurt'
-            }));
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-zoek': 'zoek'
-            }));
-
-            // With two filters
-            mockedState.dataSelection.filters.buurtcombinatie = 'Mijn buurtcombinatie';
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'dataset-filters': 'buurt:Mijn%20buurt::buurtcombinatie:Mijn%20buurtcombinatie'
-            }));
-
-            // Enable the list view
-            mockedState.dataSelection.view = 'LIST';
+            $location.replace.calls.reset();
             $location.search.calls.reset();
 
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                view: 'LIST'
-            }));
-
-            // Enable the table view
-            mockedState.dataSelection.view = 'TABLE';
-            $location.search.calls.reset();
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                view: 'TABLE'
-            }));
-
-            // Enable the default view (left to the reducer)
-            delete mockedState.dataSelection.view;
-            $location.search.calls.reset();
-
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                view: undefined
-            }));
+            // call with useReplace flag set
+            stateToUrl.update(mockedState, true);
+            expect($location.replace).toHaveBeenCalled();
+            expect($location.search).toHaveBeenCalled();
         });
-    });
-
-    describe('Print', function () {
-        it('keeps track of the document mode (web vs. print)', function () {
-            // Regular, non-print
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).not.toHaveBeenCalledWith(jasmine.objectContaining({
-                'print-versie': jasmine.anything()
-            }));
-
-            // Print version
-            mockedState.isPrintMode = true;
-            stateToUrl.update(mockedState, false);
-
-            expect($location.search).toHaveBeenCalledWith(jasmine.objectContaining({
-                'print-versie': 'aan'
-            }));
-        });
-    });
-
-    it('has the option to replace the URL', function () {
-        // Without replace
-        stateToUrl.update(mockedState, false);
-        expect($location.replace).not.toHaveBeenCalled();
-
-        // With replace
-        stateToUrl.update(mockedState, true);
-        expect($location.replace).toHaveBeenCalled();
     });
 });

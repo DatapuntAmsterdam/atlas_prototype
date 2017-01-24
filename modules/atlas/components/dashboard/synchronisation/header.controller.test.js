@@ -5,6 +5,31 @@ describe('The header controller', function () {
         mockedState,
         DEFAULT_STATE;
 
+    DEFAULT_STATE = {
+        map: {
+            baseLayer: 'topografie',
+            overlays: [],
+            viewCenter: [52.3719, 4.9012],
+            zoom: 9,
+            showActiveOverlays: false,
+            isFullscreen: false,
+            isLoading: false
+        },
+        layerSelection: {
+            isEnabled: false
+        },
+        search: null,
+        page: {
+            name: 'home'
+        },
+        detail: null,
+        straatbeeld: null,
+        dataSelection: null,
+        atlas: {
+            isPrintMode: false
+        }
+    };
+
     beforeEach(function () {
         angular.mock.module(
             'atlas',
@@ -20,11 +45,10 @@ describe('The header controller', function () {
             }
         );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_, _DEFAULT_STATE_) {
+        angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
-            DEFAULT_STATE = _DEFAULT_STATE_;
         });
 
         mockedState = {

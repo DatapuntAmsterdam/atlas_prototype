@@ -26,7 +26,9 @@ describe('The page controller', function () {
         });
 
         mockedState = {
-            page: 'about-atlas'
+            page: {
+                name: 'about-atlas'
+            }
         };
 
         spyOn(store, 'getState').and.callThrough();

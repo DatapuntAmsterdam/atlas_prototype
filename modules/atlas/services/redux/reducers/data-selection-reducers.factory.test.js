@@ -3,12 +3,36 @@ describe('The dataSelectionReducers factory', function () {
         DEFAULT_STATE,
         ACTIONS;
 
+    DEFAULT_STATE = {
+        map: {
+            baseLayer: 'topografie',
+            overlays: [],
+            viewCenter: [52.3719, 4.9012],
+            zoom: 9,
+            showActiveOverlays: false,
+            isFullscreen: false,
+            isLoading: false
+        },
+        layerSelection: {
+            isEnabled: false
+        },
+        search: null,
+        page: {
+            name: 'home'
+        },
+        detail: null,
+        straatbeeld: null,
+        dataSelection: null,
+        atlas: {
+            isPrintMode: false
+        }
+    };
+
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_dataSelectionReducers_, _DEFAULT_STATE_, _ACTIONS_) {
+        angular.mock.inject(function (_dataSelectionReducers_, _ACTIONS_) {
             dataSelectionReducers = _dataSelectionReducers_;
-            DEFAULT_STATE = _DEFAULT_STATE_;
             ACTIONS = _ACTIONS_;
         });
     });
@@ -41,7 +65,7 @@ describe('The dataSelectionReducers factory', function () {
                 isFullscreen: true,
                 isLoading: true
             };
-            mockedState.layerSelection = true;
+            mockedState.layerSelection.isEnabled = true;
 
             output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
 
@@ -56,7 +80,7 @@ describe('The dataSelectionReducers factory', function () {
             // It disables the rest
             expect(output.map.isFullscreen).toBe(false);
             expect(output.map.isLoading).toBe(false);
-            expect(output.layerSelection).toBe(false);
+            expect(output.layerSelection.isEnabled).toBe(null);
         });
 
         it('has a default table view', function () {
@@ -149,14 +173,14 @@ describe('The dataSelectionReducers factory', function () {
 
             mockedState = angular.copy(DEFAULT_STATE);
             mockedState.search = {some: 'object'};
-            mockedState.page = 'somePage';
+            mockedState.page.name = 'somePage';
             mockedState.detail = {some: 'object'};
             mockedState.straatbeeld = {some: 'object'};
 
             output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.search).toBeNull();
-            expect(output.page).toBeNull();
+            expect(output.page.name).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
         });
@@ -168,14 +192,14 @@ describe('The dataSelectionReducers factory', function () {
             mockedState = angular.copy(DEFAULT_STATE);
 
             // With print mode enabled
-            mockedState.isPrintMode = true;
+            mockedState.atlas.isPrintMode = true;
             output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
-            expect(output.isPrintMode).toBe(true);
+            expect(output.atlas.isPrintMode).toBe(true);
 
             // With print mode disabled
-            mockedState.isPrintMode = false;
+            mockedState.atlas.isPrintMode = false;
             output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
-            expect(output.isPrintMode).toBe(false);
+            expect(output.atlas.isPrintMode).toBe(false);
         });
     });
 

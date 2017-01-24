@@ -72,9 +72,34 @@ describe('The reducer factory', function () {
             printReducers = _printReducers_;
         });
 
-        angular.mock.inject(function (_reducer_, _DEFAULT_STATE_) {
+        let DEFAULT_STATE = {
+            map: {
+                baseLayer: 'topografie',
+                overlays: [],
+                viewCenter: [52.3719, 4.9012],
+                zoom: 9,
+                showActiveOverlays: false,
+                isFullscreen: false,
+                isLoading: false
+            },
+            layerSelection: {
+                isEnabled: false
+            },
+            search: null,
+            page: {
+                name: 'home'
+            },
+            detail: null,
+            straatbeeld: null,
+            dataSelection: null,
+            atlas: {
+                isPrintMode: false
+            }
+        };
+
+        angular.mock.inject(function (_reducer_) {
             reducer = _reducer_;
-            inputState = _DEFAULT_STATE_;
+            inputState = DEFAULT_STATE;
         });
     });
 

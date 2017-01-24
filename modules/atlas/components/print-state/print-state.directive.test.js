@@ -43,7 +43,7 @@ describe('The dp-print-state directive', function () {
     it('adds a printmode class to the element when isPrintMode is true', function () {
         var directive;
 
-        mockedState = {isPrintMode: true};
+        mockedState = {atlas: {isPrintMode: true}};
 
         directive = getDirective();
 
@@ -53,7 +53,7 @@ describe('The dp-print-state directive', function () {
     it('does not add a class to the element when isPrintMode is false', function () {
         var directive;
 
-        mockedState = {isPrintMode: false};
+        mockedState = {atlas: {isPrintMode: false}};
 
         directive = getDirective();
 
@@ -63,7 +63,7 @@ describe('The dp-print-state directive', function () {
     it('adds a print-landscape class to the element when map or panorama or fullscreen map is visible', function () {
         var directive;
 
-        mockedState = { isPrintMode: true, map: { isFullscreen: true } };
+        mockedState = { atlas: {isPrintMode: true}, map: { isFullscreen: true } };
 
         directive = getDirective();
 
@@ -73,7 +73,7 @@ describe('The dp-print-state directive', function () {
     it('Do not add a print-landscape class when we are on a page, detail or results view', function () {
         var directive;
 
-        mockedState = { isPrintMode: true, straatbeeld: null, map: { isFullscreen: false } };
+        mockedState = { atlas: {isPrintMode: true}, straatbeeld: null, map: { isFullscreen: false } };
 
         directive = getDirective();
 

@@ -23,7 +23,7 @@
         function showPrintReducer (oldState) {
             var newState = angular.copy(oldState);
 
-            newState.isPrintMode = true;
+            newState.atlas.isPrintMode = true;
 
             return newState;
         }
@@ -36,7 +36,7 @@
         function hidePrintReducer (oldState) {
             var newState = angular.copy(oldState);
 
-            newState.isPrintMode = false;
+            newState.atlas.isPrintMode = false;
 
             return newState;
         }

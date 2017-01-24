@@ -3,12 +3,36 @@ describe('The search-reducers factory', function () {
         DEFAULT_STATE,
         ACTIONS;
 
+    DEFAULT_STATE = {
+        map: {
+            baseLayer: 'topografie',
+            overlays: [],
+            viewCenter: [52.3719, 4.9012],
+            zoom: 9,
+            showActiveOverlays: false,
+            isFullscreen: false,
+            isLoading: false
+        },
+        layerSelection: {
+            isEnabled: false
+        },
+        search: null,
+        page: {
+            name: 'home'
+        },
+        detail: null,
+        straatbeeld: null,
+        dataSelection: null,
+        atlas: {
+            isPrintMode: false
+        }
+    };
+
     beforeEach(function () {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_searchReducers_, _DEFAULT_STATE_, _ACTIONS_) {
+        angular.mock.inject(function (_searchReducers_, _ACTIONS_) {
             searchReducers = _searchReducers_;
-            DEFAULT_STATE = _DEFAULT_STATE_;
             ACTIONS = _ACTIONS_;
         });
     });
@@ -38,16 +62,16 @@ describe('The search-reducers factory', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
-            inputState.layerSelection = true;
-            inputState.page = 'somePage';
+            inputState.layerSelection.isEnabled = true;
+            inputState.page.name = 'somePage';
             inputState.detail = {some: 'object'};
             inputState.straatbeeld = null;
             inputState.dataSelection = {some: 'object'};
 
             output = searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY.id](inputState, 'linnaeus');
 
-            expect(output.layerSelection).toBe(false);
-            expect(output.page).toBeNull();
+            expect(output.layerSelection.isEnabled).toBe(false);
+            expect(output.page.name).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
             expect(output.dataSelection).toBeNull();
@@ -123,18 +147,18 @@ describe('The search-reducers factory', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
-            inputState.layerSelection = true;
+            inputState.layerSelection.isEnabled = true;
             inputState.map.showActiveOverlays = true;
-            inputState.page = 'somePage';
+            inputState.page.name = 'somePage';
             inputState.detail = {some: 'object'};
             inputState.staatbeeld = {some: 'object'};
             inputState.dataSelection = {some: 'object'};
 
             output = searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION.id](inputState, [52.001, 4.002]);
 
-            expect(output.layerSelection).toBe(false);
+            expect(output.layerSelection.isEnabled).toBe(false);
             expect(output.map.showActiveOverlays).toBe(false);
-            expect(output.page).toBeNull();
+            expect(output.page.name).toBeNull();
             expect(output.detail).toBeNull();
             expect(output.straatbeeld).toBeNull();
             expect(output.dataSelection).toBeNull();
@@ -158,7 +182,7 @@ describe('The search-reducers factory', function () {
             expect(output.map.viewCenter).toEqual([52.001, 4.002]);
 
             // With layer selection enabled
-            inputState.layerSelection = true;
+            inputState.layerSelection.isEnabled = true;
             output = searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION.id](inputState, [52.001, 4.002]);
             expect(output.map.viewCenter).toEqual([52.001, 4.002]);
         });

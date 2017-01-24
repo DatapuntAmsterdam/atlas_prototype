@@ -27,6 +27,8 @@
                 'title',
                 'author',
                 'author_email',
+                'maintainer',
+                'maintainer_email',
                 'metadata_created',
                 'metadata_modified',
                 'notes',

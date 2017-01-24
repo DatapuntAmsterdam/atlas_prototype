@@ -5,9 +5,9 @@
         .module('atlas')
         .factory('homeReducers', homeReducersFactory);
 
-    homeReducersFactory.$inject = ['ACTIONS', 'DEFAULT_STATE'];
+    homeReducersFactory.$inject = ['ACTIONS', 'stateUrlConverter'];
 
-    function homeReducersFactory (ACTIONS, DEFAULT_STATE) {
+    function homeReducersFactory (ACTIONS, stateUrlConverter) {
         var reducers = {};
 
         reducers[ACTIONS.SHOW_HOME.id] = showHomeReducer;
@@ -20,9 +20,9 @@
          * @returns {Object} newState
          */
         function showHomeReducer (oldState) {
-            var newState = angular.copy(DEFAULT_STATE);
+            var newState = angular.copy(stateUrlConverter.getDefaultState());
 
-            newState.isPrintMode = oldState.isPrintMode;
+            newState.atlas.isPrintMode = oldState.atlas.isPrintMode;
 
             return newState;
         }

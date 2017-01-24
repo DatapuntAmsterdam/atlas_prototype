@@ -24,11 +24,11 @@
         function showPageReducer (oldState, payload) {
             var newState = angular.copy(oldState);
 
-            newState.page = payload;
+            newState.page.name = payload;
 
             newState.map.isFullscreen = false;
 
-            newState.layerSelection = false;
+            newState.layerSelection.isEnabled = false;
             newState.search = null;
             newState.detail = null;
             newState.straatbeeld = null;

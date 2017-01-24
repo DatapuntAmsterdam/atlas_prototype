@@ -18,7 +18,7 @@
         function showLayerSelectionReducer (oldState) {
             var newState = angular.copy(oldState);
 
-            newState.layerSelection = true;
+            newState.layerSelection.isEnabled = true;
 
             return newState;
         }
@@ -26,7 +26,7 @@
         function hideLayerSelectionReducer (oldState) {
             var newState = angular.copy(oldState);
 
-            newState.layerSelection = false;
+            newState.layerSelection.isEnabled = false;
 
             return newState;
         }
