@@ -5,7 +5,7 @@
         .module('dpDataSelection')
         .constant('DATA_SELECTION_CONFIG', {
             options: {
-                MAX_NUMBER_OF_CLUSTERED_MARKERS: 10000
+                MAX_NUMBER_OF_CLUSTERED_MARKERS: 2000
             },
             datasets: {
                 bag: {
