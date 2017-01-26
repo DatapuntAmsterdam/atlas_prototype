@@ -7,7 +7,7 @@
             bindings: {
                 content: '<'
             },
-            templateUrl: 'modules/data-selection/components/list/list.html',
+            templateUrl: 'modules/data-selection/components/views/list/list.html',
             controllerAs: 'vm'
         });
 })();

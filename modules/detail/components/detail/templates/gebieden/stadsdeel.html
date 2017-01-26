@@ -29,12 +29,7 @@
             <dp-api-call endpoint="{{vm.apiData.results.gebiedsgerichtwerken.href}}" partial="lijst"></dp-api-call>
         </div>
 
-        <div>
-            <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
-            <div class="u-margin__bottom--4">
-                <dp-link type="FETCH_DATA_SELECTION" payload="{dataset: 'bag', filters: {'stadsdeel_naam': vm.filterSelection.stadsdeel}, page: 1}">Toon alle adressen</dp-link>
-            </div>
-        </div>
+        <dp-data-selection-links active-filters="{'stadsdeel_naam': vm.filterSelection.stadsdeel}"></dp-data-selection-links>
 
         <dp-bbga-graphs
             gebied-heading="{{vm.apiData.results.naam}}"

@@ -51,36 +51,16 @@ describe('The dataSelectionReducers factory', function () {
             };
         });
 
-        it('resets the map, but preservers the active baseLayer and overlays', function () {
+        it('makes the map small (!isFullscreen), relevant when navigating via dp-dropdown-menu', () => {
             let mockedState,
                 output;
 
             mockedState = angular.copy(DEFAULT_STATE);
-
-            mockedState.map = {
-                baseLayer: 'luchtfoto_1914',
-                overlays: ['OVERLAY_1', 'OVERLAY_2'],
-                viewCenter: [52.52, 4.4],
-                zoom: 16,
-                isFullscreen: true,
-                isLoading: true
-            };
-            mockedState.layerSelection.isEnabled = true;
+            mockedState.map.isFullscreen = true;
 
             output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
 
-            // It keeps the active layers
-            expect(output.map.baseLayer).toBe('luchtfoto_1914');
-            expect(output.map.overlays).toEqual(['OVERLAY_1', 'OVERLAY_2']);
-
-            // It resets view and zoom to the default state
-            expect(output.map.viewCenter).toEqual(DEFAULT_STATE.map.viewCenter);
-            expect(output.map.zoom).toBe(DEFAULT_STATE.map.zoom);
-
-            // It disables the rest
             expect(output.map.isFullscreen).toBe(false);
-            expect(output.map.isLoading).toBe(false);
-            expect(output.layerSelection.isEnabled).toBe(null);
         });
 
         it('has a default table view', function () {

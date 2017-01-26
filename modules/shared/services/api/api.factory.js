@@ -10,8 +10,7 @@
     function apiFactory ($http, user, API_CONFIG) {
         return {
             getByUrl,
-            getByUri,
-            ROOT: API_CONFIG.ROOT
+            getByUri
         };
 
         /**

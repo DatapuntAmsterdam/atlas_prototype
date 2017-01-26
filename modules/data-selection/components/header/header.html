@@ -1,26 +1,73 @@
-<div class="c-data-selection-header">
-    <div ng-if="vm.numberOfRecords > 0" class="qa-data-selection-header__with-records">
-        <div class="u-row">
-            <div class="u-pull--right">
-                <dp-data-selection-toggle-view-button
-                    ng-if="vm.state.view !== 'CARDS'"
-                    view="vm.state.view"></dp-data-selection-toggle-view-button>
-
-                <dp-data-selection-download-button
-                    ng-if="vm.state.view !== 'CARDS'"
-                    dataset="{{vm.state.dataset}}"
-                    active-filters="vm.state.filters">
-
-                </dp-data-selection-download-button>
-            </div>
-
-            <h2 ng-if="vm.state.view !== 'CARDS'">{{vm.headerTitle}} ({{vm.numberOfRecords | number}})</h2>
-            <h2 ng-if="vm.state.view === 'CARDS'">{{vm.numberOfRecords | number}} dataset<span ng-if="vm.numberOfRecords !== 1">s</span></h2>
+<div ng-if="vm.showHeader" ng-class="{
+        'u-margin__bottom--3': vm.showTabs || !vm.showActiveFilters,
+        'u-margin__bottom--1-5': !(vm.showTabs || !vm.showActiveFilters)
+    }">
+    <div ng-if="vm.showButtons" class="u-pull--right qa-buttons">
+        <div class="u-inline-block u-margin__right--1">
+            <dp-data-selection-toggle-view-button view="vm.state.view"></dp-data-selection-toggle-view-button>
+        </div>
+        <div class="u-inline-block">
+            <dp-data-selection-download-button dataset="{{vm.state.dataset}}" active-filters="vm.state.filters">
+            </dp-data-selection-download-button>
         </div>
     </div>
 
-    <div ng-if="vm.numberOfRecords <= 0" class="qa-data-selection-header__no-records">
-        <h2>Geen resultaten gevonden</h2>
-        <p>Tip: verwijder één of meer filtercriteria</p>
+    <div ng-if="vm.showTitle" class="qa-title">
+        <h2 ng-if="vm.state.view === 'TABLE'">{{vm.datasetTitle}} ({{vm.numberOfRecords | number}})</h2>
+        <h2 ng-if="vm.state.view === 'CARDS'">{{vm.numberOfRecords | number}} dataset<span ng-if="vm.numberOfRecords !== 1">s</span></h2>
+        <h2 ng-if="vm.state.view === 'LIST'">Resultaten</h2>
     </div>
+
+    <h2 ng-if="vm.showNoResultsFound && !vm.showTabs" class="qa-no-results-found">Geen resultaten gevonden</h2>
+
+    <h3 ng-if="vm.showSearchQuery" class="u-font--s qa-search-query">met "{{vm.state.query}}"</h3>
 </div>
+
+
+<div ng-if="vm.showTabs" class="o-tabs qa-tabs u-margin__bottom--1-5">
+    <ul>
+        <li ng-repeat="tab in vm.tabs" ng-class="{'is-active': tab.isActive}">
+            <dp-link ng-if="!tab.isActive" type="FETCH_DATA_SELECTION" payload="{dataset: tab.dataset, filters: vm.state.filters, page: 1, view: 'LIST'}" class-name="o-tabs__tab o-tabs__tab--link">
+                {{tab.title}}
+            </dp-link>
+
+            <span ng-if="tab.isActive" class="o-tabs__tab o-tabs__tab--active">
+                {{tab.title}}
+                <span ng-if="!vm.isLoading && tab.isActive">({{vm.numberOfRecords | number}})</span>
+            </span>
+        </li>
+    </ul>
+</div>
+
+<p ng-if="vm.showNoResultsFound && vm.showTabs" class="qa-no-results-found">Geen resultaten gevonden</p>
+
+<div ng-if="vm.showActiveFilters" class="qa-active-filters">
+    <dp-data-selection-active-filters
+        dataset="{{vm.state.dataset}}",
+        available-filters="vm.availableFilters"
+        active-filters="vm.state.filters">
+    </dp-data-selection-active-filters>
+</div>
+
+<dp-loading-indicator is-loading="vm.isLoading" use-delay="false" show-inline="true"></dp-loading-indicator>
+
+<dp-panel ng-if="vm.showMessageMaxPages" is-panel-visible="true" type="warning" can-close="true">
+    <div class="qa-message-max-pages">
+        <h3>Deze pagina kan niet worden getoond</h3>
+        <p>
+            Alleen de eerste {{vm.maxAvailablePages | number}} pagina's kunnen worden weergegeven (om technische redenen). Bij
+            downloaden worden wel alle resultaten opgenomen.
+        </p>
+        <p>
+            Tip: Gebruik de download-knop om alle resultaten te bekijken. Of voeg meer filtercriteria
+            toe voor specifiekere resultaten.
+        </p>
+    </div>
+</dp-panel>
+
+<dp-panel ng-if="vm.showMessageClusteredMarkers" is-panel-visible="true" type="warning" can-close="true">
+    <div class="qa-message-clustered-markers">
+        <p>Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan {{vm.maxNumberOfClusteredMarkers | number}} resultaten tegelijk kan weergeven (om technische redenen).</p>
+        <p class="u-margin__bottom--1">Tip: Bekijk de lijst resultaten in kleinere delen. Dit kan door een voor een filtercriteria toe te voegen (bijv. de verschillende buurtcombinaties uit de selectie).</p>
+    </div>
+</dp-panel>

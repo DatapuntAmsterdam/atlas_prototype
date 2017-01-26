@@ -38,7 +38,7 @@
 }
 
 .c-login-form__button {
-  @include icon-button-text-left("forward");
+  @include icon-button-text-left("forward", "gray");
 
   margin-right: 0;
   float: right;

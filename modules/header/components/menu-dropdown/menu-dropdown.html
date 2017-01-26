@@ -8,8 +8,14 @@
     <ul>
         <li>
             <dp-link type="FETCH_DATA_SELECTION" payload="{dataset: 'bag', filters: {}, page: 1}"
-                     class-name="site-header__menu__subitem">
+                class-name="site-header__menu__subitem">
                 Downloaden adressen
+            </dp-link>
+        </li>
+        <li>
+            <dp-link type="FETCH_DATA_SELECTION" payload="{dataset: 'hr', filters: {}, page: 1}"
+                class-name="site-header__menu__subitem">
+                Downloaden vestigingen
             </dp-link>
         </li>
         <li ng-if="hasPrintButton">

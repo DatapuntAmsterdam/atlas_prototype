@@ -19,17 +19,12 @@
     </div>
 
     <div ng-if="vm.apiData.results.buurten.count">
-      <dp-stelselpedia-header definition="BUURT" use-plural="true"></dp-stelselpedia-header>
+        <dp-stelselpedia-header definition="BUURT" use-plural="true"></dp-stelselpedia-header>
 
-      <dp-api-call endpoint="{{vm.apiData.results.buurten.href}}" partial="lijst"></dp-api-call>
+        <dp-api-call endpoint="{{vm.apiData.results.buurten.href}}" partial="lijst"></dp-api-call>
     </div>
 
-    <div>
-        <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
-        <div class="u-margin__bottom--4">
-            <dp-link type="FETCH_DATA_SELECTION" payload="{dataset: 'bag', filters: {'buurtcombinatie_naam': vm.filterSelection.buurtcombinatie}, page: 1}">Toon alle adressen</dp-link>
-        </div>
-    </div>
+    <dp-data-selection-links active-filters="{'buurtcombinatie_naam': vm.filterSelection.buurtcombinatie}"></dp-data-selection-links>
 
     <dp-bbga-graphs
       gebied-heading="{{vm.apiData.results.naam}}"

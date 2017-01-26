@@ -1,4 +1,4 @@
-describe('The dp-data-selection-filters component', function () {
+describe('The dp-data-selection-available-filters component', function () {
     var $compile,
         $rootScope,
         store,
@@ -15,14 +15,16 @@ describe('The dp-data-selection-filters component', function () {
             },
             function ($provide) {
                 $provide.constant('DATA_SELECTION_CONFIG', {
-                    my_special_dataset: {
-                        FILTERS: [
-                            {
-                                slug: 'filter_a_new'
-                            }, {
-                                slug: 'filterb'
-                            }
-                        ]
+                    datasets: {
+                        my_special_dataset: {
+                            FILTERS: [
+                                {
+                                    slug: 'filter_a_new'
+                                }, {
+                                    slug: 'filterb'
+                                }
+                            ]
+                        }
                     }
                 });
             }
@@ -113,7 +115,7 @@ describe('The dp-data-selection-filters component', function () {
             element,
             scope;
 
-        element = document.createElement('dp-data-selection-filters');
+        element = document.createElement('dp-data-selection-available-filters');
 
         element.setAttribute('dataset', 'my_special_dataset');
         element.setAttribute('available-filters', 'availableFilters');
@@ -225,30 +227,6 @@ describe('The dp-data-selection-filters component', function () {
         });
     });
 
-    it('added filters are also shown in a separate list w/ active filters', function () {
-        var component,
-            activeFilters;
-
-        // Without any active filters
-        activeFilters = {};
-        component = getComponent(activeFilters, false);
-        expect(component.find('.qa-active-filters').length).toBe(0);
-
-        // With active filters
-        activeFilters = {
-            filterb: 'optie-b-3',
-            filter_a_new: 'optie-a-7'
-        };
-
-        component = getComponent(activeFilters, false);
-        expect(component.find('.qa-active-filters').length).toBe(1);
-
-        // The configured order is respected here
-        expect(component.find('.qa-active-filters li').length).toBe(2);
-        expect(component.find('.qa-active-filters li').eq(0).text()).toContain('Optie A-7');
-        expect(component.find('.qa-active-filters li').eq(1).text()).toContain('Optie B-3');
-    });
-
     it('uses different styling for active filters in the list w/ all filters', function () {
         var component,
             activeFilters;
@@ -272,34 +250,7 @@ describe('The dp-data-selection-filters component', function () {
             .toContain('u-color__primary--dark');
     });
 
-    it('current filters can be removed, dispatching an action', function () {
-        var component,
-            activeFilters;
-
-        // Without any active filters
-        activeFilters = {
-            filter_a_new: 'optie-a-2',
-            filterb: 'optie-b-2'
-        };
-
-        component = getComponent(activeFilters, false);
-
-        // Remove 'Optie B2' (filterb)
-        component.find('.qa-active-filters li').eq(1).find('button').click();
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_DATA_SELECTION,
-            payload: {
-                dataset: 'my_special_dataset',
-                filters: {
-                    filter_a_new: 'optie-a-2'
-                },
-                page: 1
-            }
-        });
-    });
-
-    it('update its filters when available filters ', function () {
+    it('updates its active filters when available filters are changed', function () {
         var component,
             activeFilters;
 

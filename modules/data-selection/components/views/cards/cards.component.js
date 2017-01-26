@@ -3,21 +3,21 @@
 
     angular
         .module('dpDataSelection')
-        .component('dpDataSelectionTable', {
+        .component('dpDataSelectionCards', {
             bindings: {
                 content: '<'
             },
-            templateUrl: 'modules/data-selection/components/table/table.html',
-            controller: DpDataSelectionTableController,
+            controller: DpDataSelectionCardsController,
+            templateUrl: 'modules/data-selection/components/views/cards/cards.html',
             controllerAs: 'vm'
         });
 
-    DpDataSelectionTableController.$inject = ['store', 'ACTIONS'];
+    DpDataSelectionCardsController.$inject = ['store', 'ACTIONS'];
 
-    function DpDataSelectionTableController (store, ACTIONS) {
+    function DpDataSelectionCardsController (store, ACTIONS) {
         let vm = this;
 
-        vm.followLink = function (endpoint) {
+        vm.fetch_detail = function (endpoint) {
             store.dispatch({
                 type: ACTIONS.FETCH_DETAIL,
                 payload: endpoint

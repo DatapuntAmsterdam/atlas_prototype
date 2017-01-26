@@ -95,19 +95,26 @@ describe('The zoom factory', function () {
 
     it('can zoom in and out', function () {
         // Set a initial zoom
+        mockedLeafletMap.setZoom.calls.reset();
         zoom.setZoom(mockedLeafletMap, 12);
-        expect(mockedLeafletMap.setZoom).toHaveBeenCalledTimes(1);
-        expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(12);
+        expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(12, jasmine.anything());
 
         // Zoom in
+        mockedLeafletMap.setZoom.calls.reset();
         zoom.setZoom(mockedLeafletMap, 16);
-        expect(mockedLeafletMap.setZoom).toHaveBeenCalledTimes(2);
-        expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(16);
+        expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(16, jasmine.anything());
 
         // Zoom out
+        mockedLeafletMap.setZoom.calls.reset();
         zoom.setZoom(mockedLeafletMap, 8);
-        expect(mockedLeafletMap.setZoom).toHaveBeenCalledTimes(3);
-        expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(8);
+        expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(8, jasmine.anything());
+    });
+
+    it('doesn\'t use animations when the zoom is triggered by a state change', () => {
+        zoom.setZoom(mockedLeafletMap, 12);
+        expect(mockedLeafletMap.setZoom).toHaveBeenCalledWith(jasmine.anything(), {
+            animate: false
+        });
     });
 
     it('listens for Leaflet\'s zoomend event, then it fires the MAP_ZOOM action', function () {

@@ -3,25 +3,25 @@
 
     angular
         .module('dpDataSelection')
-        .component('dpDataSelectionFilters', {
+        .component('dpDataSelectionAvailableFilters', {
             bindings: {
                 dataset: '@',
                 availableFilters: '=',
                 activeFilters: '=',
                 isLoading: '='
             },
-            templateUrl: 'modules/data-selection/components/filters/filters.html',
-            controller: DpDataSelectionFilterController,
+            templateUrl: 'modules/data-selection/components/available-filters/available-filters.html',
+            controller: DpDataSelectionAvailableFiltersController,
             controllerAs: 'vm'
         });
 
-    DpDataSelectionFilterController.$inject = ['$scope', 'store', 'ACTIONS', 'DATA_SELECTION_CONFIG'];
+    DpDataSelectionAvailableFiltersController.$inject = ['$scope', 'store', 'ACTIONS', 'DATA_SELECTION_CONFIG'];
 
-    function DpDataSelectionFilterController ($scope, store, ACTIONS, DATA_SELECTION_CONFIG) {
+    function DpDataSelectionAvailableFiltersController ($scope, store, ACTIONS, DATA_SELECTION_CONFIG) {
         var vm = this,
             expandedFilters = [];
 
-        $scope.$watchGroup(['vm.dataset', 'vm.activeFilters'], updateFilters, true);
+        $scope.$watch('vm.dataset', updateConfig, true);
 
         vm.showMoreThreshold = 10;
 
@@ -37,14 +37,6 @@
             var filters = angular.copy(vm.activeFilters);
 
             filters[filterSlug] = optionId;
-
-            applyFilters(filters);
-        };
-
-        vm.removeFilter = function (filterSlug) {
-            var filters = angular.copy(vm.activeFilters);
-
-            delete filters[filterSlug];
 
             applyFilters(filters);
         };
@@ -84,24 +76,8 @@
             return vm.availableFilters.filter(filter => filter.slug === filterSlug);
         }
 
-        function updateFilters () {
-            if (angular.isObject(vm.availableFilters)) {
-                vm.showOptionCounts = DATA_SELECTION_CONFIG[vm.dataset].SHOW_FILTER_OPTION_COUNTS;
-
-                vm.formattedActiveFilters = vm.availableFilters.filter(filter => {
-                    return angular.isString(vm.activeFilters[filter.slug]);
-                }).map(function (filter) {
-                    const option = filter.options.find(opt => {
-                        return opt.id === vm.activeFilters[filter.slug];
-                    });
-
-                    return {
-                        slug: filter.slug,
-                        label: filter.label,
-                        option
-                    };
-                });
-            }
+        function updateConfig () {
+            vm.showOptionCounts = DATA_SELECTION_CONFIG.datasets[vm.dataset].SHOW_FILTER_OPTION_COUNTS;
         }
 
         function applyFilters (filters) {

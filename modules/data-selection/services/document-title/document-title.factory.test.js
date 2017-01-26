@@ -8,22 +8,24 @@ describe('The dpDataSelectionDocumentTitle factory', function () {
             'dpDataSelection',
             function ($provide) {
                 $provide.constant('DATA_SELECTION_CONFIG', {
-                    bag: {
-                        TITLE: 'Adressen',
-                        FILTERS: [
-                            {
-                                slug: 'stadsdeel_naam',
-                                label: 'Stadsdeel'
-                            },
-                            {
-                                slug: 'buurt_naam',
-                                label: 'Buurt'
-                            }
-                        ]
-                    },
-                    hr: {
-                        TITLE: 'Handelsregister',
-                        FILTERS: []
+                    datasets: {
+                        bag: {
+                            TITLE: 'Adressen',
+                            FILTERS: [
+                                {
+                                    slug: 'stadsdeel_naam',
+                                    label: 'Stadsdeel'
+                                },
+                                {
+                                    slug: 'buurt_naam',
+                                    label: 'Buurt'
+                                }
+                            ]
+                        },
+                        hr: {
+                            TITLE: 'Handelsregister',
+                            FILTERS: []
+                        }
                     }
                 });
             }

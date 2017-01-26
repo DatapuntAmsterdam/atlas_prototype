@@ -1,0 +1,21 @@
+<div class="qa-bag">
+    <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
+    <div class="u-margin__bottom--4">
+        <dp-link
+            type="FETCH_DATA_SELECTION"
+            payload="{dataset: 'bag', view: 'LIST', filters: vm.activeFilters, page: 1}">
+            Toon alle adressen
+        </dp-link>
+    </div>
+</div>
+
+<div class="qa-hr">
+    <dp-stelselpedia-header definition="VESTIGING" use-plural="true"></dp-stelselpedia-header>
+    <div class="u-margin__bottom--4">
+        <dp-link
+            type="FETCH_DATA_SELECTION"
+            payload="{dataset: 'hr', view: 'LIST', filters: vm.activeFilters, page: 1}">
+            Toon alle vestigingen
+        </dp-link>
+    </div>
+</div>

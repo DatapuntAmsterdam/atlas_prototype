@@ -35,10 +35,14 @@ describe('The dp-data-selection component', function () {
             },
             function ($provide) {
                 $provide.constant('DATA_SELECTION_CONFIG', {
-                    HAS_PAGE_LIMIT: true,
-                    MAX_AVAILABLE_PAGES: 5,
-                    zwembaden: {
-                        TITLE: 'Zwembaden'
+                    options: {
+                        MAX_NUMBER_OF_CLUSTERED_MARKERS: 500
+                    },
+                    datasets: {
+                        zwembaden: {
+                            TITLE: 'Zwembaden',
+                            MAX_AVAILABLE_PAGES: 5
+                        }
                     }
                 });
 
@@ -94,7 +98,10 @@ describe('The dp-data-selection component', function () {
         mockedApiPreviewData = {
             numberOfPages: 107,
             numberOfRecords: 77,
-            filters: 'MOCKED_FILTER_DATA',
+            filters: [{
+                slug: 'type',
+                options: ['zwembaden']
+            }],
             data: 'MOCKED_PREVIEW_DATA'
         };
 
@@ -126,15 +133,16 @@ describe('The dp-data-selection component', function () {
         return component;
     }
 
-    it('retieves the filter and table data and passes it to it\'s child directives', function () {
+    it('retieves the available-filters and table data and passes it to it\'s child directives', function () {
         const component = getComponent(mockedState);
         let scope = component.isolateScope();
 
-        expect(component.find('dp-data-selection-filters').length).toBe(1);
-        expect(component.find('dp-data-selection-filters').attr('dataset')).toBe('zwembaden');
-        expect(component.find('dp-data-selection-filters').attr('available-filters')).toBe('vm.availableFilters');
-        expect(component.find('dp-data-selection-filters').attr('active-filters')).toBe('vm.state.filters');
-        expect(scope.vm.availableFilters).toBe('MOCKED_FILTER_DATA');
+        expect(component.find('dp-data-selection-available-filters').length).toBe(1);
+        expect(component.find('dp-data-selection-available-filters').attr('dataset')).toBe('zwembaden');
+        expect(component.find('dp-data-selection-available-filters').attr('available-filters'))
+            .toBe('vm.availableFilters');
+        expect(component.find('dp-data-selection-available-filters').attr('active-filters')).toBe('vm.state.filters');
+        expect(scope.vm.availableFilters).toBe(mockedApiPreviewData.filters);
         expect(scope.vm.state.filters).toEqual({
             type: 'Buitenbad'
         });
@@ -152,7 +160,7 @@ describe('The dp-data-selection component', function () {
         expect(scope.vm.numberOfRecords).toBe(77);
     });
 
-    it('either calls the table or list view', function () {
+    it('either calls the TABLE, LIST or CARDS view', function () {
         let component;
 
         mockedState.view = 'TABLE';
@@ -160,11 +168,20 @@ describe('The dp-data-selection component', function () {
         expect(component.find('dp-data-selection-table').length).toBe(1);
         expect(component.find('dp-data-selection-table').attr('content')).toBe('vm.data');
         expect(component.find('dp-data-selection-list').length).toBe(0);
+        expect(component.find('dp-data-selection-cards').length).toBe(0);
 
         mockedState.view = 'LIST';
         component = getComponent(mockedState);
         expect(component.find('dp-data-selection-list').length).toBe(1);
         expect(component.find('dp-data-selection-list').attr('content')).toBe('vm.data');
+        expect(component.find('dp-data-selection-table').length).toBe(0);
+        expect(component.find('dp-data-selection-cards').length).toBe(0);
+
+        mockedState.view = 'CARDS';
+        component = getComponent(mockedState);
+        expect(component.find('dp-data-selection-cards').length).toBe(1);
+        expect(component.find('dp-data-selection-cards').attr('content')).toBe('vm.data');
+        expect(component.find('dp-data-selection-list').length).toBe(0);
         expect(component.find('dp-data-selection-table').length).toBe(0);
     });
 
@@ -184,7 +201,7 @@ describe('The dp-data-selection component', function () {
     });
 
     describe('it triggers SHOW_DATA_SELECTION to communicate the related marker locations', function () {
-        it('sends an empty Array if the table view is active', function () {
+        it('sends an empty Array if the TABLE or CARDS view is active', function () {
             mockedState.view = 'TABLE';
             getComponent(mockedState);
 
@@ -192,13 +209,22 @@ describe('The dp-data-selection component', function () {
                 type: ACTIONS.SHOW_DATA_SELECTION,
                 payload: []
             });
+
+            store.dispatch.calls.reset();
+
+            mockedState.view = 'CARDS';
+            $rootScope.$apply();
+            expect(store.dispatch).toHaveBeenCalledWith({
+                type: ACTIONS.SHOW_DATA_SELECTION,
+                payload: []
+            });
         });
 
-        it('sends an empty Array if there are too many records (> 10000) to show', function () {
+        it('sends an empty Array if there are too many records (> MAX_NUMBER_OF_CLUSTERED_MARKERS)', function () {
             mockedState.view = 'LIST';
 
             // It should still send data with 10000 records
-            mockedApiPreviewData.numberOfRecords = 10000;
+            mockedApiPreviewData.numberOfRecords = 500;
 
             getComponent(mockedState);
 
@@ -211,8 +237,8 @@ describe('The dp-data-selection component', function () {
                 ]
             });
 
-            // It should send an empty Array with more than 10000
-            mockedApiPreviewData.numberOfRecords = 10001;
+            // It should send an empty Array with more than MAX_NUMBER_OF_CLUSTERED_MARKERS
+            mockedApiPreviewData.numberOfRecords = 501;
 
             getComponent(mockedState);
 
@@ -222,23 +248,7 @@ describe('The dp-data-selection component', function () {
             });
         });
 
-        it('shows a message in the LIST view when there are too many records', function () {
-            let component;
-
-            mockedApiPreviewData.numberOfRecords = 10001;
-
-            // The message is not shown in the TABLE view
-            mockedState.view = 'TABLE';
-            component = getComponent(mockedState);
-            expect(component.find('dp-panel').length).toBe(0);
-
-            // The message is shown in the LIST view
-            mockedState.view = 'LIST';
-            component = getComponent(mockedState);
-            expect(component.find('dp-panel').length).toBe(1);
-        });
-
-        it('sends an Array with locations if the LIST view is active and there are < 10000 records', function () {
+        it('sends locations (LIST view) when there are less than MAX_NUMBER_OF_CLUSTERED_MARKERS', function () {
             mockedState.view = 'LIST';
 
             getComponent(mockedState);
@@ -271,21 +281,6 @@ describe('The dp-data-selection component', function () {
             component = getComponent(mockedState);
 
             expect(component.find('dp-data-selection-table').length).toBe(0);
-        });
-
-        it('shows a message when the content isn\'t shown because of this limit', function () {
-            let component;
-
-            // When there is content, don't show the message
-            mockedState.page = 5;
-            component = getComponent(mockedState);
-            expect(component.find('dp-panel').length).toBe(0);
-
-            // Where there is no content, because of the page limit, do show the message
-            mockedState.page = 6;
-            component = getComponent(mockedState);
-            expect(component.find('dp-panel').length).toBe(1);
-            expect(component.find('dp-panel').text()).toContain('Deze pagina kan niet worden getoond');
         });
     });
 });

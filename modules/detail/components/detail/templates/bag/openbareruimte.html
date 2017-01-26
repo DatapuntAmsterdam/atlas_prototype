@@ -27,9 +27,6 @@
     </div>
 
     <div ng-if="vm.apiData.results.adressen.count" class="u-row">
-        <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
-        <div class="u-margin__bottom--4">
-            <dp-link type="FETCH_DATA_SELECTION" payload="{dataset: 'bag', filters: {'naam': vm.filterSelection.openbareruimte}, page: 1}">Toon alle adressen</dp-link>
-        </div>
+        <dp-data-selection-links active-filters="{'naam': vm.filterSelection.openbareruimte}"></dp-data-selection-links>
     </div>
 </div>

@@ -19,6 +19,11 @@ describe('The dataSelectionApiDataSelection factory', function () {
                         return q.promise;
                     }
                 }
+            },
+            function ($provide) {
+                $provide.constant('API_CONFIG', {
+                    ROOT: 'https://api.amsterdam.nl/'
+                });
             }
         );
 
@@ -31,8 +36,8 @@ describe('The dataSelectionApiDataSelection factory', function () {
 
         config = {
             MAX_AVAILABLE_PAGES: 100,
-            ENDPOINT_PREVIEW: 'https://api.amsterdam.nl/zwembaden/',
-            ENDPOINT_DETAIL: 'https://amsterdam.nl/api_endpoint/zwembaden/',
+            ENDPOINT_PREVIEW: 'zwembaden/',
+            ENDPOINT_DETAIL: 'api_endpoint/zwembaden/',
             PRIMARY_KEY: 'id',
             FILTERS: [
                 {
@@ -122,18 +127,18 @@ describe('The dataSelectionApiDataSelection factory', function () {
     it('calls the api factory with the active filters and page as searchParams', function () {
         // Without active filters
         dataSelectionApiDataSelection.query(config, {}, 1);
-        expect(api.getByUri).toHaveBeenCalledWith('https://api.amsterdam.nl/zwembaden/', {page: 1});
+        expect(api.getByUri).toHaveBeenCalledWith('zwembaden/', {page: 1});
 
         // With active filters
         dataSelectionApiDataSelection.query(config, {water: 'Verwarmd'}, 1);
-        expect(api.getByUri).toHaveBeenCalledWith('https://api.amsterdam.nl/zwembaden/', {
+        expect(api.getByUri).toHaveBeenCalledWith('zwembaden/', {
             water: 'Verwarmd',
             page: 1
         });
 
         // With another page
         dataSelectionApiDataSelection.query(config, {water: 'Verwarmd'}, 27);
-        expect(api.getByUri).toHaveBeenCalledWith('https://api.amsterdam.nl/zwembaden/', {
+        expect(api.getByUri).toHaveBeenCalledWith('zwembaden/', {
             water: 'Verwarmd',
             page: 27
         });
@@ -250,7 +255,7 @@ describe('The dataSelectionApiDataSelection factory', function () {
         expect(output.data[0]).toEqual({
             _links: {
                 self: {
-                    href: 'https://amsterdam.nl/api_endpoint/zwembaden/1/'
+                    href: 'https://api.amsterdam.nl/api_endpoint/zwembaden/1/'
                 }
             },
             _openbare_ruimte_naam: 'Binnenkant',
@@ -266,7 +271,7 @@ describe('The dataSelectionApiDataSelection factory', function () {
         expect(output.data[1]).toEqual({
             _links: {
                 self: {
-                    href: 'https://amsterdam.nl/api_endpoint/zwembaden/2/'
+                    href: 'https://api.amsterdam.nl/api_endpoint/zwembaden/2/'
                 }
             },
             _openbare_ruimte_naam: 'Binnenkant',
@@ -284,7 +289,7 @@ describe('The dataSelectionApiDataSelection factory', function () {
         expect(output.data[2]).toEqual({
             _links: {
                 self: {
-                    href: 'https://amsterdam.nl/api_endpoint/zwembaden/3/'
+                    href: 'https://api.amsterdam.nl/api_endpoint/zwembaden/3/'
                 }
             },
             _openbare_ruimte_naam: 'Binnenkant',

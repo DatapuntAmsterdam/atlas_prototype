@@ -13,22 +13,31 @@
             controllerAs: 'vm'
         });
 
-    DpDataSelectionDownloadButtonController.$inject = ['$window', 'DATA_SELECTION_CONFIG'];
+    DpDataSelectionDownloadButtonController.$inject = ['$window', '$scope', 'API_CONFIG', 'DATA_SELECTION_CONFIG'];
 
-    function DpDataSelectionDownloadButtonController ($window, DATA_SELECTION_CONFIG) {
+    function DpDataSelectionDownloadButtonController ($window, $scope, API_CONFIG, DATA_SELECTION_CONFIG) {
         let vm = this,
             filterParams = [];
 
-        vm.downloadUrl = DATA_SELECTION_CONFIG[vm.dataset].ENDPOINT_EXPORT;
+        $scope.$watchGroup([
+            'vm.dataset',
+            'vm.activeFilters'
+        ], setDownloadUrl);
 
-        DATA_SELECTION_CONFIG[vm.dataset].FILTERS.forEach(function (filter) {
-            if (angular.isString(vm.activeFilters[filter.slug])) {
-                filterParams.push(filter.slug + '=' + $window.encodeURIComponent(vm.activeFilters[filter.slug]));
+        function setDownloadUrl () {
+            filterParams.length = 0;
+
+            vm.downloadUrl = API_CONFIG.ROOT + DATA_SELECTION_CONFIG.datasets[vm.dataset].ENDPOINT_EXPORT;
+
+            DATA_SELECTION_CONFIG.datasets[vm.dataset].FILTERS.forEach(function (filter) {
+                if (angular.isString(vm.activeFilters[filter.slug])) {
+                    filterParams.push(filter.slug + '=' + $window.encodeURIComponent(vm.activeFilters[filter.slug]));
+                }
+            });
+
+            if (filterParams.length) {
+                vm.downloadUrl += '?' + filterParams.join('&');
             }
-        });
-
-        if (filterParams.length) {
-            vm.downloadUrl += '?' + filterParams.join('&');
         }
     }
 })();

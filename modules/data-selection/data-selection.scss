@@ -1,10 +1,11 @@
 @import "../shared/styles/config";
 
-@import "components/cards/cards";
+@import "components/active-filters/active-filters";
+@import "components/available-filters/available-filters";
 @import "components/data-selection/data-selection";
-@import "components/filters/filters";
 @import "components/formatter/templates/file-type";
 @import "components/formatter/templates/tags";
 @import "components/header/header";
 @import "components/pagination/pagination";
-@import "components/table/table";
+@import "components/views/cards/cards";
+@import "components/views/table/table";

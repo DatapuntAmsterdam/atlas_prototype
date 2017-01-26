@@ -29,7 +29,9 @@
         }
 
         function setZoom (leafletMap, zoomLevel) {
-            leafletMap.setZoom(zoomLevel);
+            leafletMap.setZoom(zoomLevel, {
+                animate: false
+            });
         }
     }
 })();

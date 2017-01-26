@@ -26,8 +26,8 @@
             };
 
             view = VIEW_NAMES[dataSelectionState.view];
-            variant = DATA_SELECTION_CONFIG[dataSelectionState.dataset].TITLE;
-            criteria = DATA_SELECTION_CONFIG[dataSelectionState.dataset].FILTERS
+            variant = DATA_SELECTION_CONFIG.datasets[dataSelectionState.dataset].TITLE;
+            criteria = DATA_SELECTION_CONFIG.datasets[dataSelectionState.dataset].FILTERS
                 // Retrieve all the active filters
                 .filter(availableFilter => angular.isDefined(dataSelectionState.filters[availableFilter.slug]))
                 // Show the value of each active filter

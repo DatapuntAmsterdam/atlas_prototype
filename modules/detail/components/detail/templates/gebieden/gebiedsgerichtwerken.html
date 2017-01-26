@@ -9,12 +9,7 @@
         <dd><dp-link type="FETCH_DETAIL" payload="vm.apiData.results.stadsdeel._links.self.href">{{ vm.apiData.results.stadsdeel._display }}</dp-link></dd>
     </dl>
 
-    <div>
-        <dp-stelselpedia-header definition="NUMMERAANDUIDING" use-plural="true"></dp-stelselpedia-header>
-        <div class="u-margin__bottom--4">
-            <dp-link type="FETCH_DATA_SELECTION" payload="{dataset: 'bag', filters: {'ggw_naam': vm.filterSelection.gebiedsgerichtwerken}, page: 1}">Toon alle adressen</dp-link>
-        </div>
-    </div>
+    <dp-data-selection-links active-filters="{'ggw_naam': vm.filterSelection.gebiedsgerichtwerken}"></dp-data-selection-links>
 
     <dp-bbga-graphs
         gebied-heading="{{vm.apiData.results.naam}}"

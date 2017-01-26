@@ -1,0 +1,55 @@
+<div class="c-data-selection-available-filters">
+    <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
+
+    <div class="qa-available-filters c-data-selection-available-filters--available-filters">
+        <div ng-if="!vm.isLoading" ng-show="vm.hasInactiveFilterOptions(filter)" ng-repeat="filter in vm.availableFilters">
+            <div class="c-data-selection-available-filters__available-filter">
+                <h3 class="c-data-selection-available-filters__available-filter-label">{{filter.label}}</h3>
+                <ul class="c-data-selection-available-filters__list">
+                    <li class="c-data-selection-available-filters__listitem"
+                        ng-repeat="option in filter.options | limitTo : vm.isExpandedFilter(filter.slug) ? undefined : vm.showMoreThreshold">
+                        <button
+                            class="o-btn o-btn--link"
+                            ng-class="{
+                                'u-color__primary--dark': vm.isFilterOptionActive(filter.slug, option.id)
+                            }"
+                            ng-click="vm.addFilter(filter.slug, option.id)">
+
+                            <span ng-class="{'c-data-selection-available-filters--empty-value': !option.label}">
+                                {{option.label}}
+                                <span ng-if="vm.showOptionCounts">({{option.count}})</span>
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="c-data-selection-available-filters--toon-meerminder" ng-if="vm.canExpandImplode(filter.slug) && vm.showExpandButton(filter.slug)">
+                    <div class="c-data-selection-available-filters__separator"></div>
+                    <button class="o-btn o-btn--link qa-show-more-button"
+                            ng-click="vm.expandFilter(filter.slug)">
+
+                        <strong>Toon meer</strong>
+                    </button>
+                    <div class="c-data-selection-available-filters__separator"></div>
+                </div>
+
+                <div class="c-data-selection-available-filters--toon-meerminder" ng-if="vm.canExpandImplode(filter.slug) && vm.isExpandedFilter(filter.slug)">
+                    <div class="c-data-selection-available-filters__separator"></div>
+
+                    <div ng-if="vm.nrHiddenOptions(filter) > 0" class="qa-hidden-options c-data-selection-available-filters--hidden-options">
+                        ...nog {{vm.nrHiddenOptions(filter) | number}} waarden
+                    </div>
+
+                    <button class="o-btn o-btn--link qa-show-more-button"
+                            ng-click="vm.implodeFilter(filter.slug)">
+
+                        <strong>Toon minder</strong>
+                    </button>
+
+                    <div class="c-data-selection-available-filters__separator"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

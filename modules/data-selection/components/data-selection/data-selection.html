@@ -1,86 +1,62 @@
-<div ng-if="vm.view === 'CARDS'">
+<dp-panel is-panel-visible="vm.showCatalogusIntroduction" can-close="true">
+    <h3>Welkom op data.amsterdam.nl</h3>
+    <p>De Gemeente Amsterdam beschikt over een goudmijn aan data over de stad. Deze data gebruikt de gemeente voor de uitvoering van haar taken. Doordat gemeentelijke onderdelen  hun datasets centraal toegankelijk maken via het Amsterdamse dataportaal, kunnen data buiten het oorspronkelijke domein in samenhang worden hergebruikt, gecombineerd en verwerkt. Hierdoor worden de beschikbare data optimaal gebruikt en krijgen ze meerwaarde.</p>
 
-    <dp-panel is-panel-visible="vm.showCatalogusIntroduction" can-close="true">
-        <h3>Welkom op data.amsterdam.nl</h3>
-        <p>De Gemeente Amsterdam beschikt over een goudmijn aan data over de stad. Deze data gebruikt de gemeente voor de uitvoering van haar taken. Doordat gemeentelijke onderdelen  hun datasets centraal toegankelijk maken via het Amsterdamse dataportaal, kunnen data buiten het oorspronkelijke domein in samenhang worden hergebruikt, gecombineerd en verwerkt. Hierdoor worden de beschikbare data optimaal gebruikt en krijgen ze meerwaarde.</p>
+    <p>Met het Amsterdamse dataportaal maakt de gemeente mogelijk dat de open data over de stad ook beschikbaar komen voor burgers, ondernemers en onderwijsinstellingen. Het is een uitnodiging om met de Amsterdamse data innovatieve toepassingen te ontwikkelen. Bovendien wil de Gemeente Amsterdam met het ontsluiten  van de beschikbare open data een transparante en controleerbare overheid zijn. Het gaat om open data, die niet te herleiden zijn tot personen.</p>
 
-        <p>Met het Amsterdamse dataportaal maakt de gemeente mogelijk dat de open data over de stad ook beschikbaar komen voor burgers, ondernemers en onderwijsinstellingen. Het is een uitnodiging om met de Amsterdamse data innovatieve toepassingen te ontwikkelen. Bovendien wil de Gemeente Amsterdam met het ontsluiten  van de beschikbare open data een transparante en controleerbare overheid zijn. Het gaat om open data, die niet te herleiden zijn tot personen.</p>
+    <h3>Data.amsterdam.nl is volop in ontwikkeling</h3>
+    <p>Het Amsterdamse dataportaal is en blijft in ontwikkeling. Zowel de gemeentelijke organisatie als externe partijen kunnen bijdragen aan deze ontwikkeling, met het ontsluiten van eigen data via dit dataportaal. Ook komen functionaliteiten beschikbaar om data te raadplegen, analyseren, bewerken en te downloaden.</p>
 
-        <h3>Data.amsterdam.nl is volop in ontwikkeling</h3>
-        <p>Het Amsterdamse dataportaal is en blijft in ontwikkeling. Zowel de gemeentelijke organisatie als externe partijen kunnen bijdragen aan deze ontwikkeling, met het ontsluiten van eigen data via dit dataportaal. Ook komen functionaliteiten beschikbaar om data te raadplegen, analyseren, bewerken en te downloaden.</p>
+    <h3>Catalogus</h3>
+    <p>Op data.amsterdam.nl vind je op dit moment de catalogus van alle tot dusver beschikbare open data van de regio Amsterdam. Het zijn data van de Gemeente Amsterdam, en van andere overheidsinstellingen, bedrijven en organisaties. Beschikbaar in verschillende formaten en als API’s en webservices voor datakoppelingen in applicaties.</p>
 
-        <h3>Catalogus</h3>
-        <p>Op data.amsterdam.nl vind je op dit moment de catalogus van alle tot dusver beschikbare open data van de regio Amsterdam. Het zijn data van de Gemeente Amsterdam, en van andere overheidsinstellingen, bedrijven en organisaties. Beschikbaar in verschillende formaten en als API’s en webservices voor datakoppelingen in applicaties.</p>
+    <h3>Data raadplegen en selecteren</h3>
+    <p>Medewerkers van de Gemeente Amsterdam kunnen ook een deel van de data zelf (op de kaart) bekijken, doorzoeken en selecteren. De applicatie (Atlas) waarmee dit kan, wordt later dit jaar ook publiekelijk toegankelijk. Met deze applicatie kun je data zoals bedrijven, buurten, panden raadplegen, adressen downloaden en zijn er actuele 'streetview' beelden van straten, de haven en binnenkort de grachten van Amsterdam.</p>
 
-        <h3>Data raadplegen en selecteren</h3>
-        <p>Medewerkers van de Gemeente Amsterdam kunnen ook een deel van de data zelf (op de kaart) bekijken, doorzoeken en selecteren. De applicatie (Atlas) waarmee dit kan, wordt later dit jaar ook publiekelijk toegankelijk. Met deze applicatie kun je data zoals bedrijven, buurten, panden raadplegen, adressen downloaden en zijn er actuele 'streetview' beelden van straten, de haven en binnenkort de grachten van Amsterdam.</p>
+    <p class="u-margin__bottom--0">
+        Heeft u vragen over het Amsterdamse dataportaal, of wilt u een eigen dataset toevoegen, neem dan contact op met <a class="c-data-selection__link" href="mailto:algemeen.ois@amsterdam.nl">algemeen.ois@amsterdam.nl</a>.
+    </p>
+</dp-panel>
 
-        <p class="u-margin__bottom--0">
-            Heeft u vragen over het Amsterdamse dataportaal, of wilt u een eigen dataset toevoegen, neem dan contact op met <a class="c-data-selection__link" href="mailto:algemeen.ois@amsterdam.nl">algemeen.ois@amsterdam.nl</a>.
-        </p>
-    </dp-panel>
-
-    <dp-panel is-panel-visible="true">
-        <p class="u-margin__bottom--0">
-            Alleen voor medewerkers van de gemeente Amsterdam: <a class="c-data-selection__link" href="https://atlas.amsterdam.nl/">data raadplegen</a> (bekend als 'Atlas'; openen in Firefox)
-        </p>
-    </dp-panel>
-</div>
+<dp-panel ng-if="vm.view === 'CARDS'" is-panel-visible="true">
+    <p class="u-margin__bottom--0">
+        Alleen voor medewerkers van de gemeente Amsterdam: <a class="c-data-selection__link" href="https://atlas.amsterdam.nl/">data raadplegen</a> (bekend als 'Atlas'; openen in Firefox)
+    </p>
+</dp-panel>
 
 <div class="u-grid">
     <div class="u-row">
         <div ng-if="vm.showFilters" class="u-col-sm--3">
-            <dp-data-selection-filters
+            <dp-data-selection-available-filters
                 dataset="{{vm.state.dataset}}"
                 available-filters="vm.availableFilters"
                 active-filters="vm.state.filters"
                 is-loading="vm.isLoading">
 
-            </dp-data-selection-filters>
+            </dp-data-selection-available-filters>
         </div>
         <div ng-class="{
             'u-col-sm--12': !vm.showFilters,
             'u-col-sm--9': vm.showFilters}">
 
-            <dp-loading-indicator is-loading="vm.isLoading" use-delay="false" show-inline="true"></dp-loading-indicator>
+            <dp-data-selection-header
+                state="vm.state"
+                available-filters="vm.availableFilters"
+                number-of-records="vm.numberOfRecords"
+                is-loading="vm.isLoading">
+            </dp-data-selection-header>
 
-            <div ng-if="!vm.isLoading">
-                <dp-data-selection-header
-                    state="vm.state"
-                    number-of-records="vm.numberOfRecords"
-                    header-title="vm.title">
-                </dp-data-selection-header>
-
-                <div ng-if="vm.numberOfRecords">
-                    <dp-panel ng-if="!vm.isPageAvailable" is-panel-visible="true" type="warning" can-close="true">
-                        <h3>Deze pagina kan niet worden getoond</h3>
-                        <p>
-                            Alleen de eerste 100 pagina's kunnen worden weergegeven (om technische redenen). Bij
-                            downloaden worden wel alle resultaten opgenomen.
-                        </p>
-                        <p>
-                            Tip: Gebruik de download-knop om alle resultaten te bekijken. Of voeg meer filtercriteria
-                            toe voor specifiekere resultaten.
-                        </p>
-                    </dp-panel>
-
-                    <dp-panel ng-if="vm.hasTooManyMarkers" is-panel-visible="true" type="warning" can-close="true">
-                        <p>Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan 10.000 resultaten tegelijk kan weergeven (om technische redenen).</p>
-                        <p class="u-margin__bottom--1">Tip: Bekijk de lijst resultaten in kleinere delen. Dit kan door een voor een filtercriteria toe te voegen (bijv. de verschillende buurtcombinaties uit de selectie).</p>
-                    </dp-panel>
-
-                    <div ng-if="vm.isPageAvailable">
-                        <dp-data-selection-table ng-if="vm.view === 'TABLE'" content="vm.data"></dp-data-selection-table>
-                        <dp-data-selection-list ng-if="vm.view === 'LIST'" content="vm.data"></dp-data-selection-list>
-                        <dp-data-selection-cards ng-if="vm.view === 'CARDS'" content="vm.data"></dp-data-selection-cards>
-                    </div>
-                </div>
-
-                <dp-data-selection-pagination
-                    current-page="vm.currentPage"
-                    number-of-pages="vm.numberOfPages">
-                </dp-data-selection-pagination>
+            <div ng-if="vm.showContent">
+                <dp-data-selection-table ng-if="vm.view === 'TABLE'" content="vm.data"></dp-data-selection-table>
+                <dp-data-selection-list ng-if="vm.view === 'LIST'" content="vm.data"></dp-data-selection-list>
+                <dp-data-selection-cards ng-if="vm.view === 'CARDS'" content="vm.data"></dp-data-selection-cards>
             </div>
+
+            <dp-data-selection-pagination
+                ng-if="!vm.isLoading"
+                current-page="vm.currentPage"
+                number-of-pages="vm.numberOfPages">
+            </dp-data-selection-pagination>
         </div>
     </div>
 </div>

@@ -11,8 +11,6 @@
     ];
 
     function dataSelectionReducersFactory (ACTIONS, stateUrlConverter) {
-        const DEFAULT_STATE = stateUrlConverter.getDefaultState();
-
         let reducers = {};
 
         reducers[ACTIONS.FETCH_DATA_SELECTION.id] = fetchDataSelectionReducer;
@@ -31,8 +29,6 @@
         function fetchDataSelectionReducer (oldState, payload) {
             let newState = angular.copy(oldState);
 
-            newState.map.viewCenter = DEFAULT_STATE.map.viewCenter;
-            newState.map.zoom = DEFAULT_STATE.map.zoom;
             newState.map.isFullscreen = false;
 
             newState.layerSelection.isEnabled = null;

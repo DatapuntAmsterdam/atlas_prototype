@@ -14,16 +14,20 @@ describe('The dataSelectionApiCkan factory', function () {
                     getByUri: function (url) {
                         let q = $q.defer();
 
-                        if (url === 'https://api.amsterdam.nl/catalogus/reject') {
+                        if (url === 'catalogus/reject') {
                             q.reject();
                         } else {
                             q.resolve(mockedApiResponse);
                         }
 
                         return q.promise;
-                    },
-                    ROOT: ''
+                    }
                 }
+            },
+            function ($provide) {
+                $provide.constant('API_CONFIG', {
+                    ROOT: 'https://api.amsterdam.nl/'
+                });
             }
         );
 
@@ -36,8 +40,8 @@ describe('The dataSelectionApiCkan factory', function () {
 
         config = {
             MAX_ITEMS_PER_PAGE: 2,
-            ENDPOINT_PREVIEW: 'https://api.amsterdam.nl/catalogus/',
-            ENDPOINT_DETAIL: 'https://amsterdam.nl/api_endpoint/catalogus/',
+            ENDPOINT_PREVIEW: 'catalogus/',
+            ENDPOINT_DETAIL: 'api_endpoint/catalogus/',
             PRIMARY_KEY: 'id',
             FILTERS: [
                 {
@@ -133,7 +137,7 @@ describe('The dataSelectionApiCkan factory', function () {
     it('calls the api factory with available filters, active filters and offset as searchParams', function () {
         // Without active filters
         dataSelectionApiCkan.query(config, {}, 1);
-        expect(api.getByUri).toHaveBeenCalledWith('https://api.amsterdam.nl/catalogus/', {
+        expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
             start: 0,
             'facet.field': '["type","water"]',
             fq: '',
@@ -144,7 +148,7 @@ describe('The dataSelectionApiCkan factory', function () {
 
         // With an active filter and search text
         dataSelectionApiCkan.query(config, {water: 'verwarmd'}, 1, 'searchText');
-        expect(api.getByUri).toHaveBeenCalledWith('https://api.amsterdam.nl/catalogus/', {
+        expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
             start: 0,
             'facet.field': '["type","water"]',
             fq: 'water:"verwarmd"',
@@ -156,7 +160,7 @@ describe('The dataSelectionApiCkan factory', function () {
 
         // With active filters
         dataSelectionApiCkan.query(config, {water: 'verwarmd', type: 'overdekt'}, 1);
-        expect(api.getByUri).toHaveBeenCalledWith('https://api.amsterdam.nl/catalogus/', {
+        expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
             start: 0,
             'facet.field': '["type","water"]',
             fq: 'water:"verwarmd" type:"overdekt"',
@@ -167,7 +171,7 @@ describe('The dataSelectionApiCkan factory', function () {
 
         // With another page
         dataSelectionApiCkan.query(config, {water: 'extra-koud'}, 2);
-        expect(api.getByUri).toHaveBeenCalledWith('https://api.amsterdam.nl/catalogus/', {
+        expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
             start: 2,
             'facet.field': '["type","water"]',
             fq: 'water:"extra-koud"',
@@ -360,7 +364,7 @@ describe('The dataSelectionApiCkan factory', function () {
         expect(output.data[0]).toEqual({
             _links: {
                 self: {
-                    href: 'https://amsterdam.nl/api_endpoint/catalogus/?id=1'
+                    href: 'https://api.amsterdam.nl/api_endpoint/catalogus/?id=1'
                 }
             },
             _openbare_ruimte_naam: 'Binnenkant',
@@ -376,7 +380,7 @@ describe('The dataSelectionApiCkan factory', function () {
         expect(output.data[1]).toEqual({
             _links: {
                 self: {
-                    href: 'https://amsterdam.nl/api_endpoint/catalogus/?id=2'
+                    href: 'https://api.amsterdam.nl/api_endpoint/catalogus/?id=2'
                 }
             },
             _openbare_ruimte_naam: 'Binnenkant',
@@ -394,7 +398,7 @@ describe('The dataSelectionApiCkan factory', function () {
         expect(output.data[2]).toEqual({
             _links: {
                 self: {
-                    href: 'https://amsterdam.nl/api_endpoint/catalogus/?id=3'
+                    href: 'https://api.amsterdam.nl/api_endpoint/catalogus/?id=3'
                 }
             },
             _openbare_ruimte_naam: 'Binnenkant',
