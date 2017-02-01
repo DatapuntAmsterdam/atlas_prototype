@@ -5,6 +5,9 @@ MAINTAINER datapunt.ois@amsterdam.nl
 EXPOSE 80
 
 
+ARG BUILD_ID
+ENV BUILD_ID=BUILD_ID
+
 RUN apt-get update \
  && apt-get install -y git nginx build-essential openjdk-7-jre \
  && apt-get clean \
