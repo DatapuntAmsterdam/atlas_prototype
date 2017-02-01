@@ -13,7 +13,8 @@
             ng-keydown="navigateSuggestions($event)"
             ng-blur="removeSuggestions($event)">
 
-        <button class="c-search-form__submit" type="submit" title="Zoeken">
+        <button class="c-search-form__submit" type="submit" title="Zoeken"
+                ng-disabled="!query">
             <span class="u-sr-only">Zoeken</span>
         </button>
 
