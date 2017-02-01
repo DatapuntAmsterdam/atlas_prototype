@@ -8,19 +8,20 @@
     function applicationStateFactory (Redux) {
         let store,
             reducer,
-            stateToUrl;
+            stateUrlConverter;
 
         return {
             initialize,
             getStore: () => store,
             getReducer: () => reducer,
-            getStateToUrl: () => stateToUrl
+            getStateUrlConverter: () => stateUrlConverter
         };
 
-        function initialize (_reducer_, _stateToUrl_, defaultState, ...middleware) {
-            var enhancer = Redux.applyMiddleware(...middleware);
+        function initialize (_reducer_, _stateUrlConverter_, defaultState, ...middleware) {
             reducer = _reducer_;
-            stateToUrl = _stateToUrl_;
+            stateUrlConverter = _stateUrlConverter_;
+
+            let enhancer = Redux.applyMiddleware(...middleware);
             store = Redux.createStore(reducer, defaultState, enhancer);
         }
     }

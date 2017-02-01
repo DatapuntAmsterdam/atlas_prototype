@@ -713,18 +713,18 @@
                 {
                     heading: 'Economie',
                     overlays: [
-                        'hvo',
-                        'pir',
                         'bouw',
-                        'lb',
+                        'csr',
+                        'fdvrog',
+                        'hvo',
                         'hrc',
                         'itc',
-                        'fdvrog',
-                        'zd',
+                        'lb',
                         'ooz',
-                        'csr',
+                        'ovrg',
                         'pd',
-                        'ovrg'
+                        'pir',
+                        'zd'
                     ]
                 }, {
                     heading: 'Onroerende zaken',

@@ -6,7 +6,6 @@
     runBlock.$inject = [
         'applicationState',
         'reducer',
-        'stateToUrl',
         'stateUrlConverter',
         'contextMiddleware',
         'stateToUrlMiddleware'
@@ -15,13 +14,12 @@
     function runBlock (
             applicationState,
             reducer,
-            stateToUrl,
             stateUrlConverter,
             contextMiddleware,
             stateToUrlMiddleware) {
         applicationState.initialize(
             reducer,
-            stateToUrl,
+            stateUrlConverter,
             stateUrlConverter.getDefaultState(),
             contextMiddleware,
             stateToUrlMiddleware);

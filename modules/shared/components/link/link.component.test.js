@@ -6,7 +6,7 @@ describe('The dp-link component', function () {
         mockedActions,
         mockedPayload,
         mockedState,
-        mockedStateToUrl,
+        mockedStateUrlConverter,
         mockedTargetState,
         mockedCurrentPath,
         mockedTargetPath;
@@ -41,8 +41,8 @@ describe('The dp-link component', function () {
                     getReducer: () => {
                         return mockedReducer;
                     },
-                    getStateToUrl: () => {
-                        return mockedStateToUrl;
+                    getStateUrlConverter: () => {
+                        return mockedStateUrlConverter;
                     },
                     getStore: () => {
                         return {
@@ -71,8 +71,10 @@ describe('The dp-link component', function () {
 
         mockedReducer = jasmine.createSpy('reducer');
 
-        mockedStateToUrl = {
-            create: () => {
+        mockedStateUrlConverter = {
+            state2params: angular.noop,
+            params2state: angular.noop,
+            state2url: () => {
                 return mockedTargetPath;
             }
         };
@@ -82,7 +84,7 @@ describe('The dp-link component', function () {
 
         spyOn(store, 'dispatch');
 
-        spyOn(mockedStateToUrl, 'create').and.returnValue(mockedTargetPath);
+        spyOn(mockedStateUrlConverter, 'state2url').and.returnValue(mockedTargetPath);
     });
 
     function getComponent (className, hoverText, type, payload) {
@@ -197,6 +199,7 @@ describe('The dp-link component', function () {
         });
 
         // A dispatch without a payload
+        store.dispatch.calls.reset();
         component = getComponent(null, null, 'ACTION_WITH_BUTTON');
         component.find('button').click();
         expect(store.dispatch).toHaveBeenCalledWith({
@@ -217,7 +220,7 @@ describe('The dp-link component', function () {
                 payload: mockedPayload
             }
         );
-        expect(mockedStateToUrl.create).toHaveBeenCalledWith(mockedTargetState);
+        expect(mockedStateUrlConverter.state2url).toHaveBeenCalledWith(mockedTargetState);
     });
 
     it('left clicking the link will NOT follow the href, it will trigger a regular store.dispatch', function () {
