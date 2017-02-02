@@ -109,7 +109,7 @@
                     return activeFilterKey === filter.slug;
                 }).length === 1;
 
-                if (!isAvailable && angular.isUndefined(activeFilters.shape)) {
+                if (!isAvailable) {
                     delete activeAndAvailableFilters[activeFilterKey];
                 }
             });

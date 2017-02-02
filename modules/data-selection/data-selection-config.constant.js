@@ -20,6 +20,9 @@
                     TITLE: 'Adressen',
                     FILTERS: [
                         {
+                            slug: 'shape',
+                            label: 'Shape'
+                        }, {
                             slug: 'stadsdeel_naam',
                             label: 'Stadsdeel'
                         }, {
@@ -185,6 +188,9 @@
                     TITLE: 'Vestigingen',
                     FILTERS: [
                         {
+                            slug: 'shape',
+                            label: 'Shape'
+                        }, {
                             slug: 'hoofdcategorie',
                             label: 'Hoofdcategorie'
                         }, {
