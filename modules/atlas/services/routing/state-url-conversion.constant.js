@@ -69,6 +69,12 @@
                     }
                     return newState;
                 },
+                map: (oldState, newState) => {
+                    if (angular.isObject(oldState)) {
+                        newState.drawingMode = oldState.drawingMode;
+                    }
+                    return newState;
+                },
                 straatbeeld: (oldState, newState) => {
                     if (angular.isObject(oldState) && oldState.id === newState.id) {
                         newState.image = oldState.image;
@@ -113,7 +119,8 @@
                     overlays: [],
                     isFullscreen: false,
                     isLoading: false,
-                    showActiveOverlays: false
+                    showActiveOverlays: false,
+                    drawingMode: false
                 },
                 page: {
                     name: null  // eg: 'home'
@@ -158,6 +165,11 @@
                 dsf: {
                     name: 'dataSelection.filters',
                     type: 'keyvalues'
+                },
+                dsgf: {
+                    name: 'dataSelection.geometryFilter',
+                    type: 'base62[][]',
+                    precision: 7
                 },
                 dsp: {
                     name: 'dataSelection.page',

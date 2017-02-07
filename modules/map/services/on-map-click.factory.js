@@ -5,11 +5,11 @@
         .module('dpMap')
         .factory('onMapClick', onMapClickFactory);
 
-    onMapClickFactory.$inject = ['$rootScope', 'store', 'ACTIONS'];
+    onMapClickFactory.$inject = ['$rootScope', 'store', 'ACTIONS', 'drawTool'];
 
-    function onMapClickFactory ($rootScope, store, ACTIONS) {
+    function onMapClickFactory ($rootScope, store, ACTIONS, drawTool) {
         return {
-            initialize: initialize
+            initialize
         };
 
         function initialize (leafletMap) {
@@ -17,15 +17,17 @@
         }
 
         function onMapClick (event) {
-            $rootScope.$applyAsync(function () {
-                store.dispatch({
-                    type: ACTIONS.MAP_CLICK,
-                    payload: [
-                        event.latlng.lat,
-                        event.latlng.lng
-                    ]
+            if (!drawTool.isEnabled()) {
+                $rootScope.$applyAsync(function () {
+                    store.dispatch({
+                        type: ACTIONS.MAP_CLICK,
+                        payload: [
+                            event.latlng.lat,
+                            event.latlng.lng
+                        ]
+                    });
                 });
-            });
+            }
         }
     }
 })();

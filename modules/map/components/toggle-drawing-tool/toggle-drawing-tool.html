@@ -1,0 +1,9 @@
+<button ng-click="vm.toggle()"
+        ng-class="{
+          'c-toggle-drawing-tool c-toggle-drawing-tool--active': vm.isEnabled(),
+          'c-toggle-drawing-tool c-toggle-drawing-tool': !vm.isEnabled()
+      }" title='{{ !vm.isEnabled() ? "Meten en intekenen" : "" }}'>
+    <span class="u-sr-only">Polygoon meten</span>
+    <span class="c-toggle-drawing-tool__label" ng-show="vm.isEnabled()" title="Sluit meten en intekenen">
+        Klaar</span>
+</button>

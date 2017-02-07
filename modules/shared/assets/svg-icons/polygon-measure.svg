@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-polygoon-meten-wit</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="-5.32907052e-15 26 26 26 26 0 -5.32907052e-15 0"></polygon>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="26" height="26" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <path d="M14.5369045,12.3955584 C13.9876453,12.3378289 13.4955837,12.7362926 13.4378542,13.2855518 C13.3801247,13.8348111 13.7785883,14.3268727 14.3278476,14.3846022 C14.8771069,14.4423317 15.3691685,14.043868 15.426898,13.4946088 C15.4846274,12.9453495 15.0861638,12.4532879 14.5369045,12.3955584 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1.5" y="-1.5" width="5.00016181" height="5.00016181">
+            <rect x="11.9322952" y="10.8899994" width="5.00016181" height="5.00016181" fill="white"></rect>
+            <use xlink:href="#path-3" fill="black"></use>
+        </mask>
+        <path d="M14.5369045,3.5555592 C13.9876453,3.49782972 13.4955837,3.89629336 13.4378542,4.44555263 C13.3801247,4.99481191 13.7785883,5.48687352 14.3278476,5.54460299 C14.8771069,5.60233247 15.3691685,5.20386884 15.426898,4.65460956 C15.4846274,4.10535028 15.0861638,3.61328868 14.5369045,3.5555592 Z" id="path-5"></path>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1.5" y="-1.5" width="5.00016181" height="5.00016181">
+            <rect x="11.9322952" y="2.05000019" width="5.00016181" height="5.00016181" fill="white"></rect>
+            <use xlink:href="#path-5" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-polygoon-meten-wit">
+            <use id="Fill-4" stroke="#CCCCCC" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+            <g id="icoon" transform="translate(5.000000, 4.000000)">
+                <path d="M5.47722925,15.2046565 L12.2972294,13.6299992 L5.47722925,15.2046565 Z" id="Line" stroke="#666666" stroke-linecap="square"></path>
+                <path d="M14.5,3.20000005 L14.5,15.2 L14.5,3.20000005 Z" id="Line" stroke="#666666" stroke-linecap="square"></path>
+                <path d="M5.7021803,2.75 L12.5221805,4.32465738 L5.7021803,2.75 Z" id="Line" stroke="#666666" stroke-linecap="square"></path>
+                <g id="Oval-2">
+                    <use fill="#666666" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    <use stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="3" xlink:href="#path-3"></use>
+                </g>
+                <g id="Oval-2">
+                    <use fill="#666666" fill-rule="evenodd" xlink:href="#path-5"></use>
+                    <use stroke="#FFFFFF" mask="url(#mask-6)" stroke-width="3" xlink:href="#path-5"></use>
+                </g>
+                <polygon id="Rectangle" fill="#FFFFFF" points="0.826467369 17.3590285 7.55727172 17.3590285 7.55727172 0.599028243 0.826467369 0.599028243"></polygon>
+                <polygon id="Page-1" fill="#666666" points="0.724490946 16.5842739 0.724490946 15.3039554 3.22577873 15.304434 3.22625735 14.5960708 0.724251634 14.5958315 0.724251634 13.3964004 2.26733464 13.3959217 2.26733464 12.6880372 0.724730258 12.6880372 0.724490946 11.4524699 3.22506079 11.4527093 3.22482148 10.7441068 0.724490946 10.7445854 0.724490946 9.53988939 2.26757396 9.53988939 2.26781327 8.83176553 0.724251634 8.83176553 0.724251634 7.61175356 3.21261658 7.61175356 3.21285589 6.90410833 0.724490946 6.90362971 0.724251634 5.65896861 2.24268552 5.6587293 2.2422069 4.95084475 0.724490946 4.95084475 0.724490946 3.74136251 3.23080428 3.74160182 3.23056497 3.03299934 0.724490946 3.03347796 0.722491 1.3668797 6.71581775 1.3668797 6.71829632 16.5842739"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

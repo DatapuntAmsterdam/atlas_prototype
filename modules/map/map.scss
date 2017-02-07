@@ -2,11 +2,13 @@
 
 @import "components/active-overlays/active-overlays";
 @import "components/map/map";
+@import "components/toggle-drawing-tool/toggle-drawing-tool";
 @import "components/toggle-fullscreen/toggle-fullscreen";
 @import "components/toggle-active-overlays/toggle-active-overlays";
 @import "components/toggle-layer-selection/toggle-layer-selection";
+@import "components/points-available/points-available";
 @import "services/highlight/highlight-cluster";
-@import "services/measure/measure";
+@import "services/draw-tool/draw-tool";
 
 .is-print-mode {
   @import "components/map/map-print";

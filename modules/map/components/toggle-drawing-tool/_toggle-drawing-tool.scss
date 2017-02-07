@@ -1,0 +1,42 @@
+.c-toggle-drawing-tool {
+  @include icon-button("polygon-measure");
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+&.c-toggle-drawing-tool--active {
+  @include icon-button("polygon-measure", "red");
+  border-top: none;
+  border-left: none;
+
+  &:hover,
+  &:active {
+    border-top: none;
+    border-left: none;
+  }
+
+  .c-toggle-drawing-tool__label {
+    display: inline-block;
+    position: relative;
+    left: $button-size;
+    height: $button-size;
+    padding: {
+      right: $base-whitespace;
+      left: $base-whitespace;
+    }
+    border: 1px solid $secondary-gray20;
+    background-color: $primary-light;
+    color: $secondary-gray60;
+    font-family: $header-font-family;
+    line-height: $button-size - 2;
+
+    &:hover,
+    &:active {
+      border: $primary-contrast;
+      background-color: $primary-contrast;
+      color: $primary-light;
+    }
+  }
+}

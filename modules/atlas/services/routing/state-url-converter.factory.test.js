@@ -21,7 +21,8 @@ describe('The state url conversion factory', function () {
                     zoom: 9,
                     showActiveOverlays: false,
                     isFullscreen: false,
-                    isLoading: false
+                    isLoading: false,
+                    drawingMode: false
                 },
                 layerSelection: {
                     isEnabled: false
