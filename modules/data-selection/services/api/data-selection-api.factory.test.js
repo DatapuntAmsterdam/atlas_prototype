@@ -185,22 +185,15 @@ describe('The dataSelectionApi factory', function () {
 
         it('calls the api factory with the configuration, active filters and page', function () {
             // Without active filters
-            dataSelectionApi.query('zwembaden', 'TABLE', {}, 1);
-            expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {}, 1, undefined);
+            dataSelectionApi.query('zwembaden', 'TABLE', {}, 1, []);
+            expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {}, 1, [], undefined);
 
             // With active filters
             mockedApiService.query.calls.reset();
-            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 1, 'searchText');
+            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 1, 'searchText', []);
             expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {
                 water: 'Verwarmd'
-            }, 1, 'searchText');
-
-            // With another page
-            mockedApiService.query.calls.reset();
-            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 2);
-            expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {
-                water: 'Verwarmd'
-            }, 2, undefined);
+            }, 1, 'searchText', []);
         });
 
         it('returns the total number of pages', function () {
@@ -487,7 +480,8 @@ describe('The dataSelectionApi factory', function () {
                     fake_filter: 'lalala'
                 },
                 1,
-                'searchText'
+                'searchText',
+                []
             );
 
             expect(mockedApiService.query).toHaveBeenCalledWith(
@@ -497,7 +491,8 @@ describe('The dataSelectionApi factory', function () {
                     // Note that fake_filter is missing here
                 },
                 1,
-                'searchText'
+                'searchText',
+                []
             );
         });
 

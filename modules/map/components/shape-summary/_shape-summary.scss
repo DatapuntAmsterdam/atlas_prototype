@@ -1,0 +1,27 @@
+.c-shape-summary {
+  position: absolute;
+  top: -1px;
+  left: 37px;
+  z-index: 99;
+}
+
+.c-shape-summary__panel {
+  display: inline-block;
+
+  .c-panel {
+    height: $button-size;
+    padding: 0 $base-whitespace * 3 0 $base-whitespace;
+    border: 1px solid $secondary-gray20;
+    background-color: $primary-light;
+    color: $secondary-gray60;
+    line-height: 24px;
+  }
+}
+
+.c-shape-summary--remove-geometry {
+  @include icon-button("remove-line", "", "");
+
+  position: absolute;
+  top: -1px;
+  right: 0;
+}

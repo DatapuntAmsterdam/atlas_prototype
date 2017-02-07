@@ -30,7 +30,7 @@
             <dp-data-selection-available-filters
                 dataset="{{vm.state.dataset}}"
                 available-filters="vm.availableFilters"
-                active-filters="vm.state.filters"
+                active-filters="vm.activeFilters"
                 is-loading="vm.isLoading">
 
             </dp-data-selection-available-filters>
@@ -42,6 +42,8 @@
             <dp-data-selection-header
                 state="vm.state"
                 available-filters="vm.availableFilters"
+                active-filters="vm.activeFilters"
+                geometry-filter="vm.geometryFilter"
                 number-of-records="vm.numberOfRecords"
                 is-loading="vm.isLoading">
             </dp-data-selection-header>

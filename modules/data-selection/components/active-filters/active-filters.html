@@ -4,8 +4,8 @@
             ng-repeat="filter in vm.formattedActiveFilters">
             <span>
                 {{filter.label}}:
-                <span ng-class="{'c-data-selection-active-filters--empty-value': !filter.option.label}">
-                    {{filter.option.label}}
+                <span ng-class="{'c-data-selection-active-filters--empty-value': !filter.option.label}"
+                      ng-bind-html="filter.option.label">
                 </span>
             </span>
 

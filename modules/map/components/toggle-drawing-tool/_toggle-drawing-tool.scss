@@ -1,0 +1,30 @@
+%toggle-drawing-tool {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.c-toggle-drawing-tool {
+  @extend %toggle-drawing-tool;
+  @include icon-button("polygon-measure");
+}
+
+&.c-toggle-drawing-tool--active {
+  @extend %toggle-drawing-tool;
+  @include icon-button-text-box-right-invert("polygon-measure", "red", "white");
+  padding-left: 28px;
+  border-top: none;
+  border-left: none;
+
+  &:hover,
+  &:active {
+    border-top: none;
+    border-left: none;
+  }
+
+  &::before {
+    top: -1px;
+    border-bottom: solid $secondary-gray20 1px;
+  }
+}

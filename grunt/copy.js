@@ -53,19 +53,6 @@ module.exports = function (grunt) {
                     expand: true
                 }
             ]
-        },
-        bower_leaflet_measure_images: {
-            files: [
-                {
-                    cwd: 'bower_components/leaflet-measure/dist/',
-                    src: [
-                        '**/*.png'
-                    ],
-                    dest: 'build/',
-                    expand: true,
-                    flatten: false
-                }
-            ]
         }
     };
 };

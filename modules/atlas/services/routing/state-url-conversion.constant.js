@@ -69,6 +69,12 @@
                     }
                     return newState;
                 },
+                map: (oldState, newState) => {
+                    if (angular.isObject(oldState)) {
+                        newState.drawingMode = oldState.drawingMode;
+                    }
+                    return newState;
+                },
                 straatbeeld: (oldState, newState) => {
                     if (angular.isObject(oldState) && oldState.id === newState.id) {
                         newState.image = oldState.image;
@@ -89,6 +95,7 @@
                 dataSelection: {
                     markers: [],    // eg: [[52.1, 4.1], [52.2, 4.0]],
                     filters: {},    // eg: {buurtcombinatie: 'Geuzenbuurt', buurt: 'Trompbuurt'}
+                    geometryFilter: [],
                     isLoading: true
                     // view: 'TABLE',
                     // dataset: 'bag',
@@ -113,7 +120,8 @@
                     overlays: [],
                     isFullscreen: false,
                     isLoading: false,
-                    showActiveOverlays: false
+                    showActiveOverlays: false,
+                    drawingMode: false
                 },
                 page: {
                     name: null  // eg: 'home'
@@ -159,6 +167,15 @@
                     name: 'dataSelection.filters',
                     type: 'keyvalues'
                 },
+                dsgf: {
+                    name: 'dataSelection.geometryFilter',
+                    type: 'base62[][]',
+                    precision: 7
+                },
+                dsgd: {
+                    name: 'dataSelection.geometryFilterDescription',
+                    type: 'string'
+                },
                 dsp: {
                     name: 'dataSelection.page',
                     type: 'number'
@@ -198,6 +215,11 @@
                 mpfs: {
                     name: 'map.isFullscreen',
                     type: 'boolean'
+                },
+                mpg: {
+                    name: 'map.geometry',
+                    type: 'base62[][]',
+                    precision: 7
                 },
                 mpo: {
                     name: 'map.overlays',

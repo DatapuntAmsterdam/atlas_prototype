@@ -142,6 +142,39 @@
   }
 }
 
+// Icon with a text box on the right side, hover state inverted
+%icon-button-text-box-hover-invert {
+  border: solid $primary-light 1px;
+  border-right: solid $secondary-gray20 1px;
+  border-bottom: solid $secondary-gray20 1px;
+  background-color: $primary-light;
+  color: $secondary-gray60;
+  text-decoration: none;
+}
+
+@mixin icon-button-text-box-right-invert($icon, $state: "", $hover-state: "") {
+  @extend %icon-button-text-box;
+
+  padding-left: $button-size;
+  // Overuling default attributes for inverted state
+  background-color: $primary-contrast;
+  color: $primary-light;
+
+  &::before {
+    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
+    @extend %icon-button-text-box-extra;
+    left: 0;
+  }
+
+  &:hover {
+    @extend %icon-button-text-box-hover-invert;
+
+    &::before {
+      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
+    }
+  }
+}
+
 %icon-button-text-box-flat {
   @extend %icon-button-text-box;
 

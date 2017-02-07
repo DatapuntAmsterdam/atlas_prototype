@@ -7,7 +7,8 @@
             bindings: {
                 dataset: '@',
                 availableFilters: '=',
-                activeFilters: '='
+                activeFilters: '=',
+                geometryFilter: '<'
             },
             templateUrl: 'modules/data-selection/components/active-filters/active-filters.html',
             controller: DpDataSelectionActiveFilterController,
@@ -19,32 +20,58 @@
     function DpDataSelectionActiveFilterController ($scope, store, ACTIONS) {
         var vm = this;
 
+        const GEOMETRY_FILTER = 'GEOMETRY_FILTER';  // Identification for a geometry filter
+
         $scope.$watchGroup(['vm.dataset', 'vm.activeFilters'], updateFilters, true);
 
         vm.removeFilter = function (filterSlug) {
-            var filters = angular.copy(vm.activeFilters);
+            if (filterSlug === GEOMETRY_FILTER) {
+                removeGeometryFilter();
+            } else {
+                let filters = angular.copy(vm.activeFilters);
 
-            delete filters[filterSlug];
+                delete filters[filterSlug];
 
-            applyFilters(filters);
+                applyFilters(filters);
+            }
         };
 
         function updateFilters () {
-            if (angular.isObject(vm.availableFilters)) {
-                vm.formattedActiveFilters = vm.availableFilters.filter(filter => {
-                    return angular.isString(vm.activeFilters[filter.slug]);
-                }).map(function (filter) {
-                    const option = filter.options.find(opt => {
-                        return opt.id === vm.activeFilters[filter.slug];
-                    });
+            vm.formattedActiveFilters = [];
 
-                    return {
-                        slug: filter.slug,
-                        label: filter.label,
-                        option
-                    };
+            if (vm.geometryFilter.markers.length > 2) {
+                vm.formattedActiveFilters.push({
+                    slug: GEOMETRY_FILTER,
+                    label: 'Locatie',
+                    option: {
+                        label: 'ingetekend (' + vm.geometryFilter.description + ')'
+                    }
                 });
             }
+
+            if (angular.isObject(vm.availableFilters)) {
+                let textFilters = vm.availableFilters
+                    .filter(filter => angular.isString(vm.activeFilters[filter.slug]))
+                    .map(filter => {
+                        return {
+                            slug: filter.slug,
+                            label: filter.label,
+                            option: filter.options.find(opt => opt.id === vm.activeFilters[filter.slug])
+                        };
+                    });
+                vm.formattedActiveFilters = vm.formattedActiveFilters.concat(textFilters);
+            }
+        }
+
+        function removeGeometryFilter () {
+            store.dispatch({
+                type: ACTIONS.FETCH_DATA_SELECTION,
+                payload: {
+                    dataset: vm.dataset,
+                    geometryFilter: [],
+                    page: 1
+                }
+            });
         }
 
         function applyFilters (filters) {

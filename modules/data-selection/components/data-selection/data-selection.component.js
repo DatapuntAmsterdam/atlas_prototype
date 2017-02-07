@@ -37,6 +37,7 @@
                 vm.state.dataset,
                 vm.state.view,
                 vm.state.filters,
+                vm.state.geometryFilter,
                 vm.state.page,
                 vm.state.query
             ];
@@ -59,10 +60,16 @@
                 vm.state.view,
                 vm.state.filters,
                 vm.currentPage,
-                vm.state.query).then(data => {
+                vm.state.query,
+                vm.state.geometryFilter).then(data => {
                     vm.availableFilters = data.filters;
-                    vm.data = data.data;
+                    vm.activeFilters = vm.state.filters;
+                    vm.geometryFilter = {
+                        markers: vm.state.geometryFilter,
+                        description: vm.state.geometryFilterDescription
+                    };
 
+                    vm.data = data.data;
                     vm.numberOfRecords = data.numberOfRecords;
                     vm.numberOfPages = data.numberOfPages;
 
@@ -75,11 +82,15 @@
 
                     vm.isLoading = false;
 
+                    let activeFilters = angular.extend({
+                        shape: angular.toJson(vm.geometryFilter.markers.map(([lat, lng]) => [lng, lat]))
+                    }, vm.state.filters);
+
                     if (
                         isListView &&
                         vm.numberOfRecords <= DATA_SELECTION_CONFIG.options.MAX_NUMBER_OF_CLUSTERED_MARKERS
                     ) {
-                        dataSelectionApi.getMarkers(vm.state.dataset, vm.state.filters).then(markerData => {
+                        dataSelectionApi.getMarkers(vm.state.dataset, activeFilters).then(markerData => {
                             store.dispatch({
                                 type: ACTIONS.SHOW_DATA_SELECTION,
                                 payload: markerData

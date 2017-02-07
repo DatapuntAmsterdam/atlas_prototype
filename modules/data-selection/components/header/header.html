@@ -39,15 +39,16 @@
     </ul>
 </div>
 
-<p ng-if="vm.showNoResultsFound && vm.showTabs" class="qa-no-results-found">Geen resultaten gevonden</p>
-
 <div ng-if="vm.showActiveFilters" class="qa-active-filters">
     <dp-data-selection-active-filters
         dataset="{{vm.state.dataset}}",
         available-filters="vm.availableFilters"
-        active-filters="vm.state.filters">
+        active-filters="vm.activeFilters",
+        geometry-filter="vm.geometryFilter">
     </dp-data-selection-active-filters>
 </div>
+
+<p ng-if="vm.showNoResultsFound && vm.showTabs" class="qa-no-results-found">Geen resultaten gevonden</p>
 
 <dp-loading-indicator is-loading="vm.isLoading" use-delay="false" show-inline="true"></dp-loading-indicator>
 

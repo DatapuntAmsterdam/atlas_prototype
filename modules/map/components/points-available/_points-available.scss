@@ -1,0 +1,17 @@
+
+
+.c-points-available {
+  position: relative;
+  left: 87px;
+  z-index: 99;
+}
+
+.c-points-available__panel {
+  display: inline-block;
+
+  .c-panel {
+    height: $button-size;
+    padding: 0 $base-whitespace;
+    line-height: 24px;
+  }
+}

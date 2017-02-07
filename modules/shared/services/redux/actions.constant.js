@@ -66,11 +66,23 @@
                 id: 'MAP_FULLSCREEN',
                 isButton: true
             },
+            MAP_START_DRAWING: {
+                id: 'MAP_START_DRAWING',
+                ignore: true,
+                isButton: true
+            },
+            MAP_CLEAR_DRAWING: {
+                id: 'MAP_CLEAR_DRAWING',
+                isButton: true
+            },
+            MAP_END_DRAWING: {
+                id: 'MAP_END_DRAWING',
+                isButton: true
+            },
             SHOW_MAP_ACTIVE_OVERLAYS: {
                 id: 'SHOW_MAP_ACTIVE_OVERLAYS',
                 replace: true,
                 isButton: true
-
             },
             HIDE_MAP_ACTIVE_OVERLAYS: {
                 id: 'HIDE_MAP_ACTIVE_OVERLAYS',

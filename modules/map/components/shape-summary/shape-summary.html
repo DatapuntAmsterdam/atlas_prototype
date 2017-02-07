@@ -1,0 +1,10 @@
+<div class="c-shape-summary qa-summary-available" ng-if="vm.showSummary">
+    <dp-panel is-panel-visible="true" type="warning" class="c-shape-summary__panel">
+        Lijn: <span ng-bind-html="vm.summary"></span>
+        <button ng-click="vm.deleteGeometry()"
+                class="qa-summary-remove-geometry c-shape-summary--remove-geometry o-btn"
+                title="Lijn verwijderen">
+            <span class="u-sr-only">Lijn verwijderen</span>
+        </button>
+    </dp-panel>
+</div>

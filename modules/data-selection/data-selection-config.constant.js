@@ -12,6 +12,7 @@
                     CUSTOM_API: 'dataSelectionApiDataSelection',
                     MAX_AVAILABLE_PAGES: 100,
                     ENDPOINT_PREVIEW: 'dataselectie/bag/',
+                    ENDPOINT_GEOFILTER_PREVIEW: 'dataselectie/bag/geolocation/',
                     ENDPOINT_MARKERS: 'dataselectie/bag/geolocation/',
                     ENDPOINT_EXPORT: 'dataselectie/bag/export/',
                     ENDPOINT_DETAIL: 'bag/nummeraanduiding/',

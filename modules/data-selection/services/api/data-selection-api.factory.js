@@ -11,7 +11,7 @@
             getMarkers: getMarkers
         };
 
-        function query (dataset, view, activeFilters, page, searchText) {
+        function query (dataset, view, activeFilters, page, searchText, geometryFilter) {
             const customApi = DATA_SELECTION_CONFIG.datasets[dataset].CUSTOM_API;
             const apiService = $injector.get(customApi);
 
@@ -19,7 +19,8 @@
                 DATA_SELECTION_CONFIG.datasets[dataset],
                 filterUnavailableFilters(dataset, activeFilters),
                 page,
-                searchText
+                searchText,
+                geometryFilter
             ).then(function (data) {
                 return {
                     numberOfPages: data.numberOfPages,
@@ -108,7 +109,7 @@
                     return activeFilterKey === filter.slug;
                 }).length === 1;
 
-                if (!isAvailable) {
+                if (!isAvailable && angular.isUndefined(activeFilters.shape)) {
                     delete activeAndAvailableFilters[activeFilterKey];
                 }
             });

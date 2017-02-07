@@ -124,23 +124,17 @@ describe('The dataSelectionApiDataSelection factory', function () {
         spyOn(api, 'getByUri').and.callThrough();
     });
 
-    it('calls the api factory with the active filters and page as searchParams', function () {
+    it('calls the api factory with the active filters, page and shape as searchParams', function () {
         // Without active filters
-        dataSelectionApiDataSelection.query(config, {}, 1);
-        expect(api.getByUri).toHaveBeenCalledWith('zwembaden/', {page: 1});
+        dataSelectionApiDataSelection.query(config, {}, 1, 'search', [[12, 3]]);
+        expect(api.getByUri).toHaveBeenCalledWith('zwembaden/', { page: 1, shape: '[[3,12]]' });
 
         // With active filters
-        dataSelectionApiDataSelection.query(config, {water: 'Verwarmd'}, 1);
+        dataSelectionApiDataSelection.query(config, {water: 'Verwarmd'}, 2);
         expect(api.getByUri).toHaveBeenCalledWith('zwembaden/', {
             water: 'Verwarmd',
-            page: 1
-        });
-
-        // With another page
-        dataSelectionApiDataSelection.query(config, {water: 'Verwarmd'}, 27);
-        expect(api.getByUri).toHaveBeenCalledWith('zwembaden/', {
-            water: 'Verwarmd',
-            page: 27
+            page: 2,
+            shape: '[]'
         });
 
         // With yet another page
