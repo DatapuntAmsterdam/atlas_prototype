@@ -1,0 +1,20 @@
+<div>
+    <dp-google-spreadsheet-script key="1aQF5boEYQvXPESFumP0we4CoKuL8hpkZhFy43mTtmrM" sheet="1" callback="setNews">
+    </dp-google-spreadsheet-script>
+
+    <div ng-if="vm.feed">
+        <h1>{{vm.feed.title}}</h1>
+        <p>
+            Last updated: {{vm.feed.lastUpdated}}
+        </p>
+
+        <div ng-repeat="entry in vm.newsEntries">
+            <div>
+                Item {{entry.id}}<br>
+                {{entry.datum}} - {{entry.titel}}<br>
+                {{entry.short}}<br>
+                {{entry.contents}}
+            </div>
+        </div>
+    </div>
+</div>
