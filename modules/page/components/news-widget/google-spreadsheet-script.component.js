@@ -34,11 +34,12 @@
                 '/public/basic?alt=json-in-script&callback=' +
                 callbackName;
             document.head.appendChild(script);
+
+            // Remove the original element after it has been replaced by the google script tag
             elem.remove();
 
             // On destroy remove the script from the document.head and remove the global scope function
             scope.$on('$destroy', () => {
-                console.log('cleanup');
                 delete $window[callbackName];
                 document.head.removeChild(script);
             });
