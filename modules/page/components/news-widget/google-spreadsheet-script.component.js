@@ -27,7 +27,7 @@
             let script = document.createElement('script');
             script.type = 'text/javascript';
             script.src =
-                'http://spreadsheets.google.com/feeds/list/' +
+                'https://spreadsheets.google.com/feeds/list/' +
                 scope.key +
                 '/' +
                 scope.sheet +
