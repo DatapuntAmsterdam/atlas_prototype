@@ -183,6 +183,7 @@
                     newState.dataSelection.markers = [];
 
                     newState.map.geometry = [];
+                    newState.map.isLoading = true;
                 } else if (payload.markers.length === 2) {
                     // Line
                     newState.map.geometry = payload.markers;

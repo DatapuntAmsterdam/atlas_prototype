@@ -78,9 +78,10 @@
                 newState.dataSelection.markers = payload;
                 newState.dataSelection.isLoading = false;
 
-                newState.map.isLoading = false;
                 newState.dataSelection.isFullscreen = newState.dataSelection.view !== 'LIST';
             }
+
+            newState.map.isLoading = false;
 
             return newState;
         }

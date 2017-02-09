@@ -383,30 +383,6 @@ describe('The dp-map directive', function () {
                 );
             });
 
-            it('can add a group of clustered markers', function () {
-                // Start without any clustered markers
-                let highlightItems = {
-                    regular: [],
-                    clustered: []
-                };
-
-                let directive = getDirective(mockedMapState, false, highlightItems);
-                $rootScope.$apply();
-
-                // Add one marker
-                highlightItems.clustered.push([52.1, 4.1], [52.2, 4.1]);
-                // Set loading mode
-                directive.isolateScope().mapState.isLoading = true;
-                $rootScope.$apply();
-                expect(highlight.setCluster).toHaveBeenCalledWith(
-                    mockedLeafletMap,
-                    [
-                        [52.1, 4.1],
-                        [52.2, 4.1]
-                    ]
-                );
-            });
-
             it('can remove a group of clustered markers', function () {
                 let highlightItems = {
                     regular: [],
