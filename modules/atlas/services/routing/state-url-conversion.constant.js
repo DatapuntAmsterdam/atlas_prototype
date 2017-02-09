@@ -72,6 +72,7 @@
                 map: (oldState, newState) => {
                     if (angular.isObject(oldState)) {
                         newState.drawingMode = oldState.drawingMode;
+                        newState.isLoading = oldState.isLoading;
                     }
                     return newState;
                 },
