@@ -10,22 +10,38 @@
     function dpGoogleSpreadsheetScriptDirective ($window) {
         return {
             restrict: 'E',
-            scope: false,
+            scope: {
+                key: '@',
+                sheet: '@',
+                callback: '&'
+            },
             link: dpGoogleSpreadsheetScriptLink
         };
 
-        function dpGoogleSpreadsheetScriptLink (scope, elem, attr) {
+        function dpGoogleSpreadsheetScriptLink (scope, elem) {
+            // Create a temporary function in the global scope that can be called by the google script
+            let callbackName = 'googleScriptCallback' + scope.$id;
+            $window[callbackName] = (news) => scope.$applyAsync(() => scope.callback({news}));
+
+            // Create the script
             let script = document.createElement('script');
             script.type = 'text/javascript';
             script.src =
                 'http://spreadsheets.google.com/feeds/list/' +
-                elem.attr('key') +
+                scope.key +
                 '/' +
-                elem.attr('sheet') +
+                scope.sheet +
                 '/public/basic?alt=json-in-script&callback=' +
-                elem.attr('callback');
+                callbackName;
             document.head.appendChild(script);
             elem.remove();
+
+            // On destroy remove the script from the document.head and remove the global scope function
+            scope.$on('$destroy', () => {
+                console.log('cleanup');
+                delete $window[callbackName];
+                document.head.removeChild(script);
+            });
         }
     }
 })();

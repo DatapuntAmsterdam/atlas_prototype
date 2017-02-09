@@ -9,9 +9,9 @@
             controllerAs: 'vm'
         });
 
-    DpNewsWidgetController.$inject = ['$window', '$scope'];
+    DpNewsWidgetController.$inject = ['$scope'];
 
-    function DpNewsWidgetController ($window, $scope) {
+    function DpNewsWidgetController ($scope) {
         let vm = this;
 
         vm.feed = null;
@@ -39,7 +39,5 @@
                 return result;
             });
         };
-
-        $window.setNews = (news) => $scope.$applyAsync(() => vm.setNews(news));
     }
 })();
