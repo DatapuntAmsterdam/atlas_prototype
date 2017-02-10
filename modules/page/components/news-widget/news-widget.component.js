@@ -9,9 +9,9 @@
             controllerAs: 'vm'
         });
 
-    DpNewsWidgetController.$inject = ['$scope'];
+    DpNewsWidgetController.$inject = ['$sce', '$scope', 'markdownParser'];
 
-    function DpNewsWidgetController ($scope) {
+    function DpNewsWidgetController ($sce, $scope, markdownParser) {
         let vm = this;
 
         vm.feed = null;
@@ -32,14 +32,16 @@
 
                 // Extract the contents
                 let content = entry.content.$t;
-                ['datum', 'titel', 'short', 'contents'].forEach((key, i, keys) => {
-                    let re = '^.*attr' + key + ': (.*)';
-                    if (i !== keys.length - 1) {
-                        re += ', attr' + keys[i + 1] + '.*';
+                content.split(/(^|, )attr/).forEach(keyValue => {
+                    if (keyValue) {
+                        let i = keyValue.indexOf(':');
+                        let key = keyValue.substring(0, i);
+                        let value = keyValue.substring(i + 1);
+                        result[key] = value;
                     }
-                    re += '$';
-                    result[key] = content.replace(new RegExp(re), '$1');
                 });
+
+                result.contents = $sce.trustAsHtml(markdownParser.parse(result.contents));
 
                 return result;
             });

@@ -10,12 +10,12 @@
             Last updated: {{vm.feed.lastUpdated}}
         </p>
 
-        <div ng-repeat="entry in vm.newsEntries">
+        <div class="s-cms-content" ng-repeat="entry in vm.newsEntries">
             <div>
                 Item {{entry.id}}<br>
                 {{entry.datum}} - {{entry.titel}}<br>
                 {{entry.short}}<br>
-                {{entry.contents}}
+                <div ng-bind-html="entry.contents"></div>
             </div>
         </div>
     </div>
