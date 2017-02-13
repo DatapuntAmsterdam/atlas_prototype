@@ -21,7 +21,7 @@
 
         function determineActivity (state) {
             return {
-                map: determineMapActivity(state),
+                map: true,
                 layerSelection: state.layerSelection.isEnabled,
                 searchResults: angular.isObject(state.search),
                 page: angular.isString(state.page.name),
@@ -36,17 +36,28 @@
             let visibility = {};
 
             visibility.httpStatus = httpStatus.getStatus().hasErrors;
-            visibility.map = activity.map;
 
             if (angular.isObject(state.dataSelection)) {
                 visibility.dataSelection = true;
 
+                visibility.map = !state.dataSelection.isFullscreen;
                 visibility.layerSelection = !state.dataSelection.isFullscreen && state.layerSelection.isEnabled;
                 visibility.detail = false;
                 visibility.page = false;
                 visibility.searchResults = false;
                 visibility.straatbeeld = false;
             } else {
+                if (state.atlas.isPrintMode) {
+                    visibility.map = !activity.layerSelection &&
+                        (
+                            state.map.isFullscreen ||
+                            (activity.detail && angular.isObject(state.detail.geometry)) ||
+                            activity.straatbeeld
+                        );
+                } else {
+                    visibility.map = true;
+                }
+
                 visibility.layerSelection = state.layerSelection.isEnabled;
                 visibility.straatbeeld = activity.straatbeeld;
 
@@ -54,6 +65,7 @@
                     visibility.detail = false;
                     visibility.page = false;
                     visibility.searchResults = false;
+                    visibility.map = false;
                 } else if (state.layerSelection.isEnabled || state.map.isFullscreen) {
                     visibility.detail = false;
                     visibility.page = false;
@@ -71,27 +83,6 @@
             return visibility;
         }
 
-        function determineMapActivity (state) {
-            if (!state.atlas.isPrintMode) {
-                // Non-print mode
-                return !(state.detail && state.detail.isFullscreen) &&
-                    !(state.dataSelection && state.dataSelection.view !== 'LIST') &&
-                    !(state.straatbeeld && state.straatbeeld.isFullscreen);
-            } else {
-                // Print mode
-                if (state.map.isFullscreen && !state.layerSelection.isEnabled) {
-                    return true;
-                } else if (state.page.name || state.search || state.dataSelection || state.layerSelection.isEnabled) {
-                    return false;
-                } else if (angular.isObject(state.detail)) {
-                    // Only print the map when detail is NOT fullscreen and has geometry
-                    return !state.detail.isFullscreen && angular.isObject(state.detail.geometry);
-                } else {
-                    return state.straatbeeld && !state.straatbeeld.isFullscreen;
-                }
-            }
-        }
-
         function determineColumnSizes (state) {
             const visibility = determineVisibility(state);
             const hasFullscreenElement = (visibility.map && state.map.isFullscreen) ||
@@ -99,10 +90,10 @@
                 (visibility.detail && state.detail.isFullscreen) ||
                 (visibility.dataSelection && state.dataSelection.isFullscreen);
 
-            if (!state.atlas.isPrintMode) {
-                return determineColumnSizesDefault (state, visibility, hasFullscreenElement);
-            } else {
+            if (state.atlas.isPrintMode) {
                 return determineColumnSizesPrint (state, visibility, hasFullscreenElement);
+            } else {
+                return determineColumnSizesDefault (state, visibility, hasFullscreenElement);
             }
         }
 
