@@ -107,22 +107,22 @@ describe('The dashboardColumns factory', function () {
                 columnSizes = dashboardColumns.determineColumnSizes(mockedState);
             });
 
-            it('makes the map and page visibile', function () {
-                expect(activity.map).toBe(true);
-                expect(visibility.map).toBe(true);
+            it('makes only the page visibile', function () {
                 expect(visibility.page).toBe(true);
 
                 expect(visibility.detail).toBe(false);
                 expect(visibility.layerSelection).toBe(false);
+                expect(activity.map).toBe(false);
+                expect(visibility.map).toBe(false);
                 expect(visibility.straatbeeld).toBe(false);
                 expect(visibility.searchResults).toBe(false);
                 expect(visibility.dataSelection).toBe(false);
             });
 
-            it('left column: 0/3, middle column: 1/3, right column 2/3', function () {
+            it('left column: 0/3, middle column: 0/3, right column 3/3', function () {
                 expect(columnSizes.left).toBe(0);
-                expect(columnSizes.middle).toBe(4);
-                expect(columnSizes.right).toBe(8);
+                expect(columnSizes.middle).toBe(0);
+                expect(columnSizes.right).toBe(12);
             });
         });
 
@@ -427,8 +427,9 @@ describe('The dashboardColumns factory', function () {
 
     describe('when using layer selection', function () {
         beforeEach(function () {
+            mockedState.page.name = null;
             mockedState.detail = {
-                uri: 'blah/blah/123',
+                endpoint: 'http://api.example.com/blah/blah/123',
                 isLoading: false
             };
             mockedState.layerSelection.isEnabled = true;

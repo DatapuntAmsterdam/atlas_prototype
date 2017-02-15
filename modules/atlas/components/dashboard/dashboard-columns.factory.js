@@ -72,9 +72,12 @@
         }
 
         function determineMapActivity (state) {
+            // console.log;
+
             if (!state.atlas.isPrintMode) {
                 // Non-print mode
-                return !(state.detail && state.detail.isFullscreen) &&
+                return !(state.page.name && !state.map.isFullscreen) &&
+                    !(state.detail && state.detail.isFullscreen) &&
                     !(state.dataSelection && state.dataSelection.view !== 'LIST') &&
                     !(state.straatbeeld && state.straatbeeld.isFullscreen);
             } else {
@@ -94,7 +97,8 @@
 
         function determineColumnSizes (state) {
             const visibility = determineVisibility(state);
-            const hasFullscreenElement = (visibility.map && state.map.isFullscreen) ||
+            const hasFullscreenElement = (visibility.page) ||
+                (visibility.map && state.map.isFullscreen) ||
                 (visibility.straatbeeld && state.straatbeeld.isFullscreen) ||
                 (visibility.detail && state.detail.isFullscreen) ||
                 (visibility.dataSelection && state.dataSelection.isFullscreen);

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (page) {
-    expect(page.title).toBe('Panorama 123357.48, 486232.84 (52.3630724, 4.9226576) - Atlas');
+    expect(page.title).toMatch(/^Panorama \d+.\d+, \d+.\d+ \(\d+.\d+, \d+.\d+\) - Atlas$/);
 
     expect(page.dashboard.leftColumn.columnSize).toBe(0);
 

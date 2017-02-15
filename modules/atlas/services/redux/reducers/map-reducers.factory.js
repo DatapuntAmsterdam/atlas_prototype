@@ -10,6 +10,7 @@
     function mapReducersFactory (ACTIONS) {
         var reducers = {};
 
+        reducers[ACTIONS.SHOW_MAP.id] = showMapReducer;
         reducers[ACTIONS.MAP_SET_BASELAYER.id] = mapSetBaselayerReducer;
         reducers[ACTIONS.MAP_ADD_OVERLAY.id] = mapAddOverlayReducer;
         reducers[ACTIONS.MAP_REMOVE_OVERLAY.id] = mapRemoveOverlayReducer;
@@ -24,6 +25,15 @@
         reducers[ACTIONS.HIDE_MAP_ACTIVE_OVERLAYS.id] = hideActiveOverlaysReducer;
 
         return reducers;
+
+        function showMapReducer (oldState) {
+            let newState = angular.copy(oldState);
+
+            newState.map.isFullscreen = true;
+            newState.layerSelection.isEnabled = true;
+
+            return newState;
+        }
 
         /**
          * @param {Object} oldState

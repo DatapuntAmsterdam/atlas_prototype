@@ -33,6 +33,9 @@
                 id: 'SHOW_SEARCH_RESULTS'
             },
 
+            SHOW_MAP: {
+                id: 'SHOW_MAP'
+            },
             MAP_SET_BASELAYER: {
                 id: 'MAP_SET_BASELAYER',
                 replace: true
