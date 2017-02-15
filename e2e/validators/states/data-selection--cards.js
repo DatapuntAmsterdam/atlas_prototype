@@ -1,13 +1,15 @@
 'use strict';
 
 const dataSelectionValidator = require('./data-selection');
+const pageCheck = require('./../../helpers/page-check');
 
-module.exports = function (page) {
-    expect(page.title).toBe('Dataset Catalogus - Atlas');
-
-    expect(page.dashboard.rightColumn.dataSelection.header.title).toContain('datasets');
-    expect(page.dashboard.rightColumn.dataSelection.availableFilters.visible).toBe(true);
-    expect(page.dashboard.rightColumn.dataSelection.availableFilters.categories(0).header).toBe('Thema\'s');
+module.exports = function (page, expected) {
+    pageCheck({
+        title: page.title,
+        headerTitle: page.dashboard.rightColumn.dataSelection.header.title,
+        availableFilterVisible: page.dashboard.rightColumn.dataSelection.availableFilters.visible,
+        categories0Header: page.dashboard.rightColumn.dataSelection.availableFilters.categories(0).header
+    }, expected);
 
     dataSelectionValidator(page);
 };

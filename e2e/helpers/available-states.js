@@ -1,7 +1,13 @@
 module.exports = {
     'DATA-SELECTION--CARDS': {
         url: '#?mpv=52.3719:4.9012&mpb=topografie&mpz=9&dsv=CARDS&dsd=catalogus&dsp=1',
-        validator: require('../validators/states/data-selection--cards')
+        validator: require('../validators/states/data-selection--cards'),
+        expected: {
+            title: 'Dataset Catalogus - Atlas',
+            headerTitle: /datasets/,
+            availableFilterVisible: true,
+            categories0Header: 'Thema\'s'
+        }
     },
     'DATA-SELECTION--TABLE': {
         url: '#?mpv=52.3719:4.9012&mpb=topografie&mpz=9&dsv=TABLE&dsd=bag&dsp=1',
