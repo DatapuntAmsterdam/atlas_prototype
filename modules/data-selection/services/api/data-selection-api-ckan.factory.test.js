@@ -139,6 +139,7 @@ describe('The dataSelectionApiCkan factory', function () {
         dataSelectionApiCkan.query(config, {}, 1);
         expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
             start: 0,
+            rows: config.MAX_ITEMS_PER_PAGE,
             'facet.field': '["type","water"]',
             fq: '',
             sort: 'name asc'
@@ -150,6 +151,7 @@ describe('The dataSelectionApiCkan factory', function () {
         dataSelectionApiCkan.query(config, {water: 'verwarmd'}, 1, 'searchText');
         expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
             start: 0,
+            rows: config.MAX_ITEMS_PER_PAGE,
             'facet.field': '["type","water"]',
             fq: 'water:"verwarmd"',
             q: 'searchText',
@@ -162,6 +164,7 @@ describe('The dataSelectionApiCkan factory', function () {
         dataSelectionApiCkan.query(config, {water: 'verwarmd', type: 'overdekt'}, 1);
         expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
             start: 0,
+            rows: config.MAX_ITEMS_PER_PAGE,
             'facet.field': '["type","water"]',
             fq: 'water:"verwarmd" type:"overdekt"',
             sort: 'name asc'
@@ -173,6 +176,7 @@ describe('The dataSelectionApiCkan factory', function () {
         dataSelectionApiCkan.query(config, {water: 'extra-koud'}, 2);
         expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
             start: 2,
+            rows: config.MAX_ITEMS_PER_PAGE,
             'facet.field': '["type","water"]',
             fq: 'water:"extra-koud"',
             sort: 'name asc'

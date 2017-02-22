@@ -126,7 +126,7 @@
                     }
                 },
                 catalogus: {
-                    MAX_ITEMS_PER_PAGE: 10,
+                    MAX_ITEMS_PER_PAGE: 100,
                     CUSTOM_API: 'dataSelectionApiCkan',
                     ENDPOINT_PREVIEW: 'catalogus/api/3/action/package_search',
                     ENDPOINT_DETAIL: 'catalogus/api/3/action/package_show',

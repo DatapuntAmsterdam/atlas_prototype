@@ -14,6 +14,7 @@
             const deferred = $q.defer(),
                 searchParams = {
                     start: (page - 1) * config.MAX_ITEMS_PER_PAGE,
+                    rows: config.MAX_ITEMS_PER_PAGE,
                     'facet.field': queryFilters(config.FILTERS),
                     fq: queryActiveFilters(activeFilters),
                     sort: 'name asc'
