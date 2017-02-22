@@ -182,4 +182,22 @@ describe('The dpBaseCoder', function () {
             expect(decode('F', 16, 1000)).toBeNaN();
         });
     });
+
+    describe('The toPrecision method', function () {
+        it('rounds a number to the specified precision', function () {
+            expect(baseCoder.toPrecision(1, 5)).toBe(1);
+            expect(baseCoder.toPrecision(1.12345, 5)).toBe(1.12345);
+            expect(baseCoder.toPrecision(1.123454, 5)).toBe(1.12345);
+            expect(baseCoder.toPrecision(1.123455, 5)).toBe(1.12346);
+            expect(baseCoder.toPrecision(1.123456, 5)).toBe(1.12346);
+        });
+
+        it('rounds an array of numbers to the specified precision', function () {
+            expect(baseCoder.toPrecision([1, 1], 5)).toEqual([1, 1]);
+            expect(baseCoder.toPrecision([1.12345, 1.12345], 5)).toEqual([1.12345, 1.12345]);
+            expect(baseCoder.toPrecision([1.123454, 1.123454], 5)).toEqual([1.12345, 1.12345]);
+            expect(baseCoder.toPrecision([1.123455, 1.123455], 5)).toEqual([1.12346, 1.12346]);
+            expect(baseCoder.toPrecision([1.123456, 1.123456], 5)).toEqual([1.12346, 1.12346]);
+        });
+    });
 });
