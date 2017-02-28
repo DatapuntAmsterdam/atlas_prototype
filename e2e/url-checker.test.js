@@ -56,6 +56,14 @@ describe('each URL should load the corresponding view', function () {
         expect(page.dashboard.rightColumn.dataSelection.header.tabs(1).isActive).toBe(true);
     });
 
+    it('MAP_DETAIL--KADASTRAAL-SUBJECT', () => {
+        page = dp.navigate('MAP_DETAIL--KADASTRAAL-SUBJECT');
+
+        dp.validate('MAP_DETAIL--KADASTRAAL-SUBJECT', page);
+
+        expect(page.title).toMatch('Kadastraal subject: Erik Niels Nijland - Atlas');
+    });
+
     it('MAP_DETAIL--NUMMERAANDUIDING', () => {
         page = dp.navigate('MAP_DETAIL--NUMMERAANDUIDING');
         const detail = page.dashboard.rightColumn.detail;
