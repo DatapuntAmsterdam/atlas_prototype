@@ -25,9 +25,14 @@ module.exports = {
         url: '#?mpv=52.3719:4.9012&mpb=topografie&mpz=9&dsv=LIST&dsd=hr&dsp=1',
         validator: require('../validators/map_data-selection')
     },
-    'MAP_DETAIL--KADASTRAAL-SUBJECT': {
+    'MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON': {
         url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbrk%2Fsubject%2FNL.KAD.Persoon.304757725%2F&mpb=topografi' +
-             'e&mpz=9&mpv=52.3719:4.9012',
+        'e&mpz=9&mpv=52.3719:4.9012',
+        validator: require('../validators/map_detail--kadastraal-subject')
+    },
+    'MAP_DETAIL--KADASTRAAL-SUBJECT-NIET-NATUURLIJK-PERSOON': {
+        url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbrk%2Fsubject%2FNL.KAD.Persoon.172031668%2F&mpb=topografi' +
+             'e&mpz=16&mpv=52.3408374:4.9044968',
         validator: require('../validators/map_detail--kadastraal-subject')
     },
     'MAP_DETAIL--NUMMERAANDUIDING': {

@@ -12,14 +12,17 @@ module.exports = function (detailElement) {
         get visible () {
             return dp.visible(detailElement);
         },
-        get nummeraanduiding () {
-            return groupedDataPageObject(detailElement.element(by.css('.qa-nummeraanduiding')));
-        },
         get straatbeeldThumbnail () {
             return straatbeeldThumbnail(detailElement.element(by.css('dp-straatbeeld-thumbnail')));
         },
+        get nummeraanduiding () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-nummeraanduiding')));
+        },
         get verblijfsobject () {
             return groupedDataPageObject(detailElement.element(by.css('.qa-verblijfsobject')));
+        },
+        get kadastraalSubject () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-kadastraal-subject')));
         }
     };
 };

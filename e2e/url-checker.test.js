@@ -56,12 +56,20 @@ describe('each URL should load the corresponding view', function () {
         expect(page.dashboard.rightColumn.dataSelection.header.tabs(1).isActive).toBe(true);
     });
 
-    it('MAP_DETAIL--KADASTRAAL-SUBJECT', () => {
-        page = dp.navigate('MAP_DETAIL--KADASTRAAL-SUBJECT');
+    it('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON', () => {
+        page = dp.navigate('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON');
 
-        dp.validate('MAP_DETAIL--KADASTRAAL-SUBJECT', page);
+        dp.validate('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON', page);
 
         expect(page.title).toMatch('Kadastraal subject: Erik Niels Nijland - Atlas');
+    });
+
+    it('MAP_DETAIL--KADASTRAAL-SUBJECT-NIET-NATUURLIJK-PERSOON', () => {
+        page = dp.navigate('MAP_DETAIL--KADASTRAAL-SUBJECT-NIET-NATUURLIJK-PERSOON');
+
+        dp.validate('MAP_DETAIL--KADASTRAAL-SUBJECT-NIET-NATUURLIJK-PERSOON', page);
+
+        expect(page.title).toMatch('Kadastraal subject: De Gemeente Gods Amsterdam - Atlas');
     });
 
     it('MAP_DETAIL--NUMMERAANDUIDING', () => {
