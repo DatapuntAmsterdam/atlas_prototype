@@ -21,6 +21,25 @@ module.exports = function (detailElement) {
         get verblijfsobject () {
             return groupedDataPageObject(detailElement.element(by.css('.qa-verblijfsobject')));
         },
+
+
+
+
+        get aantekeningen () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-aantekeningen')));
+        },
+        get ontstaanUit () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-ontstaan-uit')));
+        },
+        get betrokkenBij () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-betrokken-bij')));
+        },
+        get beperking () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-beperking')));
+        },
+        get kadastraalObject () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-kadastraal-object')));
+        },
         get kadastraalSubject () {
             return groupedDataPageObject(detailElement.element(by.css('.qa-kadastraal-subject')));
         },
