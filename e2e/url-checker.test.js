@@ -61,7 +61,7 @@ describe('each URL should load the corresponding view', function () {
 
         dp.validate('MAP_DETAIL--KADASTRAAL-OBJECT', page);
 
-        expect(page.title).toMatch('Kadastraal object: ASD41 AU 00154 G 0000 - Atlas');
+        expect(page.title).toMatch('Kadastraal object: STN02 N 00538 A 0001 - Atlas');
     });
 
     it('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON', () => {

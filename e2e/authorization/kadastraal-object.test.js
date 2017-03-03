@@ -4,10 +4,10 @@ describe('The detail page of kadastrale objecten', () => {
         const detail = page.dashboard.rightColumn.detail;
 
         expect(detail.kadastraalObject.glossaryHeader.subtitle).toBe('Kadastraal object');
-        expect(detail.kadastraalObject.glossaryHeader.title).toBe('ASD41 AU 00154 G 0000');
+        expect(detail.kadastraalObject.glossaryHeader.title).toBe('STN02 N 00538 A 0001');
 
         expect(detail.kadastraalObject.descriptionList.term(0)).toBe('Kadastrale gemeentecode');
-        expect(detail.kadastraalObject.descriptionList.definition(0)).toBe('ASD41');
+        expect(detail.kadastraalObject.descriptionList.definition(0)).toBe('STN02');
 
         expect(detail.kadastraalObject.descriptionList.term(7)).toBe('Koopsom');
         expect(detail.kadastraalObject.descriptionList.definition(7)).toBe('');
@@ -34,10 +34,10 @@ describe('The detail page of kadastrale objecten', () => {
             const detail = page.dashboard.rightColumn.detail;
 
             expect(detail.kadastraalObject.glossaryHeader.subtitle).toBe('Kadastraal object');
-            expect(detail.kadastraalObject.glossaryHeader.title).toBe('ASD41 AU 00154 G 0000');
+            expect(detail.kadastraalObject.glossaryHeader.title).toBe('STN02 N 00538 A 0001');
 
             expect(detail.kadastraalObject.descriptionList.term(0)).toBe('Kadastrale gemeentecode');
-            expect(detail.kadastraalObject.descriptionList.definition(0)).toBe('ASD41');
+            expect(detail.kadastraalObject.descriptionList.definition(0)).toBe('STN02');
 
             expect(detail.kadastraalObject.descriptionList.term(7)).toBe('Koopsom');
             expect(detail.kadastraalObject.descriptionList.definition(7)).toBe('TODO: DIT INVULLEN');
