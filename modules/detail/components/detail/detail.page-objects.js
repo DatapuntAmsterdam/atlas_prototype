@@ -25,6 +25,9 @@ module.exports = function (detailElement) {
         get betrokkenBij () {
             return groupedDataPageObject(detailElement.element(by.css('.qa-betrokken-bij')));
         },
+        get brondocument () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-brondocument')));
+        },
         get kadastraalObject () {
             return groupedDataPageObject(detailElement.element(by.css('.qa-kadastraal-object')));
         },
