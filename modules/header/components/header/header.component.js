@@ -14,15 +14,16 @@
             controllerAs: 'vm'
         });
 
-    DpHeaderController.$inject = ['user'];
+    DpHeaderController.$inject = ['authenticator', 'user'];
 
-    function DpHeaderController (user) {
+    function DpHeaderController (authenticator, user) {
         var vm = this;
 
-        vm.isLoggedIn = function () {
-            return user.getStatus().isLoggedIn;
-        };
+        vm.login = authenticator.login;
+        vm.logout = authenticator.logout;
 
-        vm.logout = user.logout;
+        vm.isAuthenticated = function () {
+            return user.getUserType() === user.USER_TYPE.AUTHENTICATED;
+        };
     }
 })();

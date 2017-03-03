@@ -23,15 +23,12 @@
                 </div>
                 <div class="u-col-sm--5 u-padding__right--2">
                     <nav class="site-header__menu">
-                        <dp-link ng-if="!vm.isLoggedIn()"
-                            type="SHOW_PAGE" payload="{name: 'login'}" class-name="site-header__menu__item">
+                        <button ng-if="!vm.isAuthenticated()" ng-click="vm.login()" class="qa-header__login site-header__menu__item">
                             Inloggen
-                        </dp-link>
-
-                        <button ng-if="vm.isLoggedIn()" ng-click="vm.logout()" class="site-header__menu__item">
-                            Uitloggen
                         </button>
-
+                        <span ng-if="vm.isAuthenticated()" ng-click="vm.logout()" class="qa-header__logout site-header__menu__item">
+                            Uitloggen
+                        </span>
                         <dp-menu-dropdown has-print-button="vm.hasPrintButton"></dp-menu-dropdown>
                     </nav>
                 </div>
