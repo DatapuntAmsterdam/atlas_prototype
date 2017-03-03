@@ -42,8 +42,13 @@ module.exports = {
     },
     'MAP_DETAIL--NUMMERAANDUIDING': {
         url: '#?mpv=52.353263440372224:5.001382398402873&mpb=topografie&mpz=16&' +
-             'dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbag%2Fnummeraanduiding%2F03630000500149%2F',
+        'dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbag%2Fnummeraanduiding%2F03630000500149%2F',
         validator: require('../validators/map_detail--nummeraanduiding')
+    },
+    'MAP_DETAIL--VERBLIJFSOBJECT': {
+        url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbag%2Fverblijfsobject%2F03630001024765%2F&mpb=topografie&' +
+            'mpz=16&mpv=52.3532641:5.0013824',
+        validator: require('../validators/map_detail--verblijfsobject')
     },
     'MAP_PAGE--HOME': {
         url: '',

@@ -113,6 +113,14 @@ describe('each URL should load the corresponding view', function () {
         expect(detail.verblijfsobject.descriptionList.definition(1)).toBe('woning');
     });
 
+    it('MAP_DETAIL--VERBLIJFSOBJECT', () => {
+        page = dp.navigate('MAP_DETAIL--VERBLIJFSOBJECT');
+
+        dp.validate('MAP_DETAIL--VERBLIJFSOBJECT', page);
+
+        expect(page.title).toMatch('Verblijfsobject: Maria Austriastraat 730 - Atlas');
+    });
+
     it('MAP_PAGE--HOME', () => {
         page = dp.navigate('MAP_PAGE--HOME');
 

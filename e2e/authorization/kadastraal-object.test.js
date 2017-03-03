@@ -1,4 +1,4 @@
-fdescribe('The detail page of kadastrale objecten', () => {
+describe('The detail page of kadastrale objecten', () => {
     it('only shows identification properties for users with the DEFAULT role', () => {
         const page = dp.navigate('MAP_DETAIL--KADASTRAAL-OBJECT', 'DEFAULT');
         const detail = page.dashboard.rightColumn.detail;
