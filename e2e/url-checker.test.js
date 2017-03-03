@@ -56,6 +56,14 @@ describe('each URL should load the corresponding view', function () {
         expect(page.dashboard.rightColumn.dataSelection.header.tabs(1).isActive).toBe(true);
     });
 
+    it('MAP_DETAIL--KADASTRAAL-OBJECT', () => {
+        page = dp.navigate('MAP_DETAIL--KADASTRAAL-OBJECT');
+
+        dp.validate('MAP_DETAIL--KADASTRAAL-OBJECT', page);
+
+        expect(page.title).toMatch('Kadastraal object: ASD41 AU 00154 G 0000 - Atlas');
+    });
+
     it('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON', () => {
         page = dp.navigate('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON');
 

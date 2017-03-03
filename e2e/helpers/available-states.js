@@ -25,6 +25,11 @@ module.exports = {
         url: '#?mpv=52.3719:4.9012&mpb=topografie&mpz=9&dsv=LIST&dsd=hr&dsp=1',
         validator: require('../validators/map_data-selection')
     },
+    'MAP_DETAIL--KADASTRAAL-OBJECT': {
+        url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbrk%2Fobject%2FNL.KAD.OnroerendeZaak.11820015470000%2F&mp' +
+            'b=topografie&mpz=13&mpv=52.3530715:5.0008373',
+        validator: require('../validators/map_detail--kadastraal-object')
+    },
     'MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON': {
         url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbrk%2Fsubject%2FNL.KAD.Persoon.304757725%2F&mpb=topografi' +
         'e&mpz=9&mpv=52.3719:4.9012',
