@@ -1,3 +1,7 @@
+/**
+ * Todo: voorbeeld vbo vinden die 'alles heeft': bij dit voorbeeld ontbreekt betrokkebBij
+ * Ook test cases isPresent goed zetten overal.
+ */
 describe('The detail page of a verblijfsobject', () => {
     it('doesn\'t show rechten en aantekeningen voor users with the DEFAULT role', () => {
         const page = dp.navigate('MAP_DETAIL--VERBLIJFSOBJECT', 'DEFAULT');
@@ -5,7 +9,7 @@ describe('The detail page of a verblijfsobject', () => {
 
         expect(detail.kadastraleObjecten(0).link.label).toBe('ASD03 E 10377 A 0001');
 
-        expect(detail.kadastraleObjecten(0).zakelijkRecht.glossaryHeader.subtitle).toBe('Zakelijke rechten');
+        expect(detail.kadastraleObjecten(0).zakelijkRecht.isPresent.subtitle).toBe('Zakelijke rechten');
         expect(detail.kadastraleObjecten(0).zakelijkRecht.list(0).link.label).toBe('Meesters,Catharina Maria Elisabeth, (V) - Eigendom (recht van) (1/2)');
         expect(detail.kadastraleObjecten(0).zakelijkRecht.list(1).link.label).toBe('Halder,Adrianus Andreas Everdina Maria,van (M) - Eigendom (recht van) (1/2)');
 
