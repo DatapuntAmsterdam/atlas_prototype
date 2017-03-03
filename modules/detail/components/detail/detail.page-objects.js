@@ -23,12 +23,24 @@ module.exports = function (detailElement) {
         },
         get kadastraalSubject () {
             return groupedDataPageObject(detailElement.element(by.css('.qa-kadastraal-subject')));
+        },
+        get natuurlijkPersoon () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-natuurlijk-persoon')));
+        },
+        get nietNatuurlijkPersoon () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-niet-natuurlijk-persoon')));
+        },
+        get zakelijkRecht () {
+            return groupedDataPageObject(detailElement.element(by.css('.qa-zakelijk-recht')));
         }
     };
 };
 
 function groupedDataPageObject (groupedDataElement) {
     return {
+        get isPresent () {
+            return groupedDataElement.isPresent();
+        },
         get glossaryHeader () {
             return glossaryHeader(groupedDataElement.element(by.css('dp-glossary-header')));
         },
