@@ -26,13 +26,13 @@ module.exports = {
         validator: require('../validators/map_data-selection')
     },
     'MAP_DETAIL--BEPERKING': {
-        url: '#?dte=https:%2F%2Fapi-acc.datapunt.amsterdam.nl%2Fwkpb%2Fbeperking%2F3488%2F&mpb=topografie&mpz=16&mpv=' +
-            '52.3785997:4.8457623',
+        url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fwkpb%2Fbeperking%2F3488%2F&mpb=topografie&mpz=16&mpv=52.3' +
+            '785997:4.8457623',
         validator: require('../validators/map_detail--beperking')
     },
     'MAP_DETAIL--KADASTRAAL-OBJECT': {
-        url: '#?dte=https:%2F%2Fapi-acc.datapunt.amsterdam.nl%2Fbrk%2Fobject%2FNL.KAD.OnroerendeZaak.14110053810001%2' +
-            'F&mpb=topografie&mpz=16&mpv=52.3785997:4.8457623',
+        url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbrk%2Fobject%2FNL.KAD.OnroerendeZaak.14110053810001%2F&mp' +
+            'b=topografie&mpz=16&mpv=52.3785997:4.8457623',
         validator: require('../validators/map_detail--kadastraal-object')
     },
     'MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON': {
