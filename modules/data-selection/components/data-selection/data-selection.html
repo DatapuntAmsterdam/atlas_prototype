@@ -19,7 +19,7 @@
         </p>
     </dp-panel>
 
-    <dp-tab-header title="Resultaten met &quot;{{vm.state.query}}&quot;" tab-header="vm.tabHeader"></dp-tab-header>
+    <dp-tab-header ng-if="vm.showTabHeader()" search-text="{{vm.state.query}}" tab-header="vm.tabHeader"></dp-tab-header>
 
     <dp-panel is-panel-visible="true">
         <p class="u-margin__bottom--0">

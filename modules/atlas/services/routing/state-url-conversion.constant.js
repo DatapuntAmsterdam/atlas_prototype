@@ -264,6 +264,10 @@
                     name: 'search.category',
                     type: 'string'
                 },
+                sre: {
+                    name: 'search.isEnabled',
+                    type: 'boolean'
+                },
                 srl: {
                     name: 'search.location',
                     type: 'base62[]',

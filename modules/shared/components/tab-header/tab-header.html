@@ -1,17 +1,17 @@
-<div class="o-tabs qa-tabs u-margin__bottom--1-5">
-    <div class="qa-tab-header__title c-tab-header__title">{{vm.title}}</div>
+<div ng-if="vm.searchText.trim()" class="o-tabs qa-tabs u-margin__bottom--1-5">
+    <div class="qa-tab-header__title c-tab-header__title">Resultaten met &quot;{{vm.searchText}}&quot;</div>
     <ul>
         <li ng-repeat="tab in vm.tabHeader.tabs" ng-class="{'is-active': tab.isActive}">
             <dp-link ng-if="!tab.isActive"
                      type="{{tab.action}}"
                      payload="tab.payload"
                      class-name="o-tabs__tab o-tabs__tab--link">
-                {{tab.title}} <span ng-if="tab.count !== null">({{tab.count}})</span>
+                {{tab.title}} <span ng-if="tab.count !== null">({{tab.count | number}})</span>
             </dp-link>
 
             <span ng-if="tab.isActive"
                   class="qa-tab-header__active o-tabs__tab o-tabs__tab--active">
-                {{tab.title}} <span ng-if="tab.count !== null">({{tab.count}})</span>
+                {{tab.title}} <span ng-if="tab.count !== null">({{tab.count | number}})</span>
             </span>
         </li>
     </ul>

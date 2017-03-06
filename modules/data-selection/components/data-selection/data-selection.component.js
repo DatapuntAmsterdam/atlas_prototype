@@ -35,6 +35,8 @@
         vm.showCatalogusIntroduction = vm.state.view === 'CARDS' &&
             userSettings.showCatalogusIntroduction.value === true.toString();
 
+        vm.showTabHeader = () => Object.keys(vm.state.filters).length === 0;
+
         $scope.$watch('vm.showCatalogusIntroduction', function () {
             userSettings.showCatalogusIntroduction.value = vm.showCatalogusIntroduction.toString();
         });

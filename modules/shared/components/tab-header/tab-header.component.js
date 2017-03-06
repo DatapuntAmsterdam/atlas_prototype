@@ -6,7 +6,7 @@
         .component('dpTabHeader', {
             templateUrl: 'modules/shared/components/tab-header/tab-header.html',
             bindings: {
-                title: '@',
+                searchText: '@',
                 tabHeader: '<'
             },
             controllerAs: 'vm'

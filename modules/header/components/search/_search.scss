@@ -46,3 +46,18 @@ $submit-button-width: 30px;
     background-color: $primary-contrast;
   }
 }
+
+.c-search-form__clear {
+  @include icon-button("close", "transparent", "red");
+
+  width: $submit-button-width;
+  height: $search-form-height;
+  margin-left: -2 * $submit-button-width;
+  float: left;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-contrast;
+  }
+}

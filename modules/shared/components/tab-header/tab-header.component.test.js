@@ -1,12 +1,12 @@
 describe('The tabHeader component', function () {
     let $compile,
         $rootScope,
-        mockedTitle,
+        mockedSearchText,
         mockedActiveItems,
         mockedInactiveItems;
 
     beforeEach(function () {
-        mockedTitle = 'AnyTitle';
+        mockedSearchText = 'AnySearchText';
 
         mockedActiveItems = [1].map(i => getMockedItem(i, {isActive: true, count: i})); // One active tab
 
@@ -37,7 +37,7 @@ describe('The tabHeader component', function () {
             scope;
 
         element = document.createElement('dp-tab-header');
-        element.setAttribute('title', title);
+        element.setAttribute('search-text', title);
         element.setAttribute('tab-header', 'tabHeader');
 
         scope = $rootScope.$new();
@@ -51,14 +51,14 @@ describe('The tabHeader component', function () {
     }
 
     it('accepts a title and an array of tabs', function () {
-        let component = getComponent(mockedTitle, []);
-        expect(component.find('.qa-tab-header__title').text()).toBe(mockedTitle);
+        let component = getComponent(mockedSearchText, []);
+        expect(component.find('.qa-tab-header__title').text()).toBe(`Resultaten met "${mockedSearchText}"`);
         expect(component.find('ul dp-link').length).toBe(0);
         expect(component.find('.qa-tab-header__active').length).toBe(0);
     });
 
     it('shows a link with the title for each non-active tab', function () {
-        let component = getComponent(mockedTitle, mockedInactiveItems);
+        let component = getComponent(mockedSearchText, mockedInactiveItems);
         expect(component.find('ul dp-link').length).toBe(mockedInactiveItems.length);
         mockedInactiveItems.forEach((item, i) => {
             expect(component.find('ul dp-link').eq(i).text().trim())
@@ -70,7 +70,7 @@ describe('The tabHeader component', function () {
     });
 
     it('shows a tab with the title and number of items for the active tab', function () {
-        let component = getComponent(mockedTitle, mockedActiveItems);
+        let component = getComponent(mockedSearchText, mockedActiveItems);
         expect(component.find('ul dp-link').length).toBe(0);
         expect(component.find('.qa-tab-header__active').length).toBe(mockedActiveItems.length);
         mockedActiveItems.forEach((item, i) => {
@@ -80,7 +80,7 @@ describe('The tabHeader component', function () {
     });
 
     it('shows tabs for inactive and active items', function () {
-        let component = getComponent(mockedTitle, mockedActiveItems.concat(mockedInactiveItems));
+        let component = getComponent(mockedSearchText, mockedActiveItems.concat(mockedInactiveItems));
         expect(component.find('ul dp-link').length).toBe(mockedInactiveItems.length);
         expect(component.find('.qa-tab-header__active').length).toBe(mockedActiveItems.length);
     });

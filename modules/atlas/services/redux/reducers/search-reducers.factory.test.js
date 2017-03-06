@@ -58,6 +58,38 @@ describe('The search-reducers factory', function () {
             expect(output.search.numberOfResults).toBeNull();
         });
 
+        it('sets query to null on empty string payload', function () {
+            var inputState = angular.copy(DEFAULT_STATE),
+                output;
+
+            inputState.search = {
+                query: 'xyz',
+                location: [12.345, 6.789],
+                category: 'adres',
+                numberOfResults: 23
+            };
+
+            output = searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY.id](inputState, '');
+
+            expect(output.search.query).toBe(null);
+        });
+
+        it('sets query isEnabled to true', function () {
+            var inputState = angular.copy(DEFAULT_STATE),
+                output;
+
+            inputState.search = {
+                query: 'xyz',
+                location: [12.345, 6.789],
+                category: 'adres',
+                numberOfResults: 23
+            };
+
+            output = searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY.id](inputState, '');
+
+            expect(output.search.isEnabled).toBe(true);
+        });
+
         it('hides the layer selection, page, detail, straatbeeld and dataSelection', function () {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
@@ -141,6 +173,22 @@ describe('The search-reducers factory', function () {
             expect(output.search.location).toEqual([52.001, 4.002]);
             expect(output.search.category).toBeNull();
             expect(output.search.numberOfResults).toBeNull();
+        });
+
+        it('sets query isEnabled to true', function () {
+            var inputState = angular.copy(DEFAULT_STATE),
+                output;
+
+            inputState.search = {
+                query: 'some query',
+                location: null,
+                category: 'adres',
+                numberOfResults: 23
+            };
+
+            output = searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION.id](inputState, [52.001, 4.002]);
+
+            expect(output.search.isEnabled).toBe(true);
         });
 
         it('rounds the search location with a precision of 7 decimals', () => {
