@@ -21,11 +21,11 @@ describe('The detail page of kadastrale objecten', () => {
         expect(detail.kadastraalObject.descriptionList.term(11)).toBe('Cultuur onbebouwd');
         expect(detail.kadastraalObject.descriptionList.definition(11)).toBe('');
 
-        expect(detail.zakelijkRecht.isPresent).toBe(false);
-        expect(detail.beperking.isPresent).toBe(true);
-        expect(detail.aantekeningen.isPresent).toBe(false);
-        expect(detail.ontstaanUit.isPresent).toBe(true);
-        expect(detail.betrokkenBij.isPresent).toBe(true);
+        expect(detail.kadastraleObjecten(0).zakelijkRecht.isPresent).toBe(false);
+        expect(detail.kadastraleObjecten(0).beperking.isPresent).toBe(true);
+        expect(detail.kadastraleObjecten(0).aantekeningen.isPresent).toBe(false);
+        expect(detail.kadastraleObjecten(1).ontstaanUit.isPresent).toBe(true);
+        expect(detail.kadastraleObjecten(0).betrokkenBij.isPresent).toBe(true);
     });
 
     it('only shows everything for users with the EMPLOYEE and EMPLOYEE_PLUS role', () => {
@@ -51,11 +51,11 @@ describe('The detail page of kadastrale objecten', () => {
             expect(detail.kadastraalObject.descriptionList.term(11)).toBe('Cultuur onbebouwd');
             expect(detail.kadastraalObject.descriptionList.definition(11)).toBe('TODO: DIT INVULLEN');
 
-            expect(detail.zakelijkRecht.isPresent).toBe(true);
-            expect(detail.beperking.isPresent).toBe(true);
-            expect(detail.aantekeningen.isPresent).toBe(true);
-            expect(detail.ontstaanUit.isPresent).toBe(true);
-            expect(detail.betrokkenBij.isPresent).toBe(true);
+            expect(detail.kadastraleObjecten(0).zakelijkRecht.isPresent).toBe(true);
+            expect(detail.kadastraleObjecten(0).beperking.isPresent).toBe(true);
+            expect(detail.kadastraleObjecten(0).aantekeningen.isPresent).toBe(true);
+            expect(detail.kadastraleObjecten(1).ontstaanUit.isPresent).toBe(true);
+            expect(detail.kadastraleObjecten(0).betrokkenBij.isPresent).toBe(true);
         });
     });
 });
