@@ -122,12 +122,20 @@ describe('each URL should load the corresponding view', function () {
         expect(detail.verblijfsobject.descriptionList.definition(1)).toBe('woning');
     });
 
-    it('MAP_DETAIL--VERBLIJFSOBJECT', () => {
-        page = dp.navigate('MAP_DETAIL--VERBLIJFSOBJECT');
+    it('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-OU', () => {
+        page = dp.navigate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-OU');
 
-        dp.validate('MAP_DETAIL--VERBLIJFSOBJECT', page);
+        dp.validate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-OU', page);
 
-        expect(page.title).toBe('Verblijfsobject: Maria Austriastraat 730 - Atlas');
+        expect(page.title).toBe('Verblijfsobject: Keizersgracht 343A - Atlas');
+    });
+
+    it('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-BB', () => {
+        page = dp.navigate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-BB');
+
+        dp.validate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-BB', page);
+
+        expect(page.title).toBe('Verblijfsobject: Dam 10 - Atlas');
     });
 
     it('MAP_PAGE--HOME', () => {

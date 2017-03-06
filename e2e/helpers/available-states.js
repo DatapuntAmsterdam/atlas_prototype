@@ -50,9 +50,16 @@ module.exports = {
         'dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbag%2Fnummeraanduiding%2F03630000500149%2F',
         validator: require('../validators/map_detail--nummeraanduiding')
     },
-    'MAP_DETAIL--VERBLIJFSOBJECT': {
-        url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbag%2Fnummeraanduiding%2F03630000479107%2F&mpb=topografie' +
-            '&mpz=16&mpv=52.3692026:4.8849819',
+    // ZR-GB-A-OU? Zakelijke rechten, Gemeentelijke beperkingen, Aantekeningen en Ontstaan uit!
+    'MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-OU': {
+        url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbag%2Fverblijfsobject%2F03630000995097%2F&mpb=topografie&' +
+        'mpz=16&mpv=52.3692026:4.8849819',
+        validator: require('../validators/map_detail--verblijfsobject')
+    },
+    // ZR-GB-A-BB? Zakelijke rechten, Gemeentelijke beperkingen, Aantekeningen en Betrokken bij!
+    'MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-BB': {
+        url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbag%2Fverblijfsobject%2F03630001171789%2F&mpb=topografie&' +
+            'mpz=16&mpv=52.3736014:4.8923039',
         validator: require('../validators/map_detail--verblijfsobject')
     },
     'MAP_PAGE--HOME': {
