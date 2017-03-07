@@ -1,6 +1,6 @@
 'use strict';
 
-const loginPageObjects = dp.require('e2e/authorization/page-objects/login.page-objects');
+// const loginPageObjects = dp.require('e2e/authorization/page-objects/login.page-objects');
 const dashboardPageObjects = dp.require('modules/atlas/components/dashboard/dashboard.page-objects');
 
 module.exports = function (pageName, role) {

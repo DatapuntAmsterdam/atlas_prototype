@@ -10,8 +10,8 @@ module.exports = function (searchElement) {
         },
         get autocomplete () {
             return {
-                categories: function (index) {
-                    const category = searchElement.element(by.repeater('category in suggestions').row(index));
+                categories: function (categoryIndex) {
+                    const category = searchElement.element(by.repeater('category in suggestions').row(categoryIndex));
 
                     return {
                         get isPresent () {
@@ -20,8 +20,9 @@ module.exports = function (searchElement) {
                         get header () {
                             return searchElement.element(by.css('.qa-autocomplete-header')).getText();
                         },
-                        options: function (index) {
-                            const option = category.element(by.repeater('suggestion in category.content').row(index));
+                        options: function (optionIndex) {
+                            const option = category.element(by.repeater('suggestion in category.content')
+                                .row(optionIndex));
 
                             return {
                                 get label () {
