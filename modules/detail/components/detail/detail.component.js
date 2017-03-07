@@ -50,7 +50,7 @@
         $scope.$watch('vm.endpoint', getData);
 
         // (Re)load the data when the user logs in or out
-        $scope.$watch(() => user.getUserType(), (newValue, oldValue) => {
+        $scope.$watch(() => user.getStatus().isLoggedIn, (newValue, oldValue) => {
             if (newValue !== oldValue) {
                 getData(vm.endpoint);
             }
@@ -70,9 +70,8 @@
                     results: data
                 };
 
-                // Derive whether more info is available if the user would be authenticated
-                vm.isMoreInfoAvailable = vm.apiData.results.is_natuurlijk_persoon &&
-                        user.getUserType() !== user.USER_TYPE.AUTHENTICATED;
+                // Derive whether more info is available if the user would login
+                vm.isMoreInfoAvailable = vm.apiData.results.is_natuurlijk_persoon && !user.getStatus().isLoggedIn;
 
                 vm.filterSelection = {
                     [subject]: vm.apiData.results.naam

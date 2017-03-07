@@ -5,52 +5,126 @@
         .module('dpShared')
         .factory('user', userFactory);
 
-    userFactory.$inject = ['userSettings'];
+    userFactory.$inject = [
+        '$http',
+        '$httpParamSerializer',
+        '$q',
+        '$timeout',
+        'sharedConfig',
+        'API_CONFIG',
+        'userSettings'
+    ];
 
-    function userFactory (userSettings) {
-        const USER_TYPE = {
-            NONE: 'NONE',
-            ANONYMOUS: 'ANONYMOUS',
-            AUTHENTICATED: 'AUTHENTICATED'
-        };
+    function userFactory ($http, $httpParamSerializer, $q, $timeout, sharedConfig, API_CONFIG, userSettings) {
+        var userState = {},
+            accessToken = userSettings.token.value;
 
-        let accessToken = null;
+        // if sessionStorage is available use the refreshToken function to check if a token is available and valid
+        if (accessToken) {
+            refreshToken();
+        } else {
+            userState.username = null;
+            userState.accessToken = null;
+            userState.isLoggedIn = false;
+        }
+
+        //  Refresh the successfully obtained token every 4 and a half minutes (token expires in 5 minutes)
+        var intervalDuration = 270000;
+        var intervalPromise = null;
 
         return {
-            getRefreshToken,
-            setRefreshToken,
-            getAccessToken,
-            setAccessToken,
-            getUserType,
-            clearToken,
-            USER_TYPE
+            login: login,
+            refreshToken: refreshToken,
+            logout: logout,
+            getStatus: getStatus
         };
 
-        function getRefreshToken () {
-            return userSettings.refreshToken.value;
+        function login (username, password) {
+            return $http({
+                method: 'POST',
+                url: sharedConfig.API_ROOT + API_CONFIG.AUTH + 'token/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: $httpParamSerializer(
+                    {
+                        username: username,
+                        password: password
+                    }
+                )
+            })
+                .then(loginSuccess, loginError);
+
+            function loginSuccess (response) {
+                // This is the username as entered by the user in the login form, backend doesn't return the username
+                userState.username = username;
+                userState.accessToken = response.data.token;
+                userState.isLoggedIn = true;
+
+                userSettings.token.value = userState.accessToken;
+                accessToken = response.data.token;
+
+                intervalPromise = $timeout(refreshToken, intervalDuration);
+            }
+
+            function loginError (response) {
+                var q = $q.defer();
+
+                switch (response.status) {
+                    case 400:
+                    case 401:
+                        q.reject('De combinatie gebruikersnaam en wachtwoord wordt niet herkend.');
+                        break;
+                    case 404:
+                        q.reject('Er is iets mis met de inlog server, probeer het later nog eens.');
+                        break;
+                    default:
+                        q.reject('Er is een fout opgetreden. Neem contact op met de beheerder en vermeld code: ' +
+                            response.status + ' status: ' + response.statusText + '.');
+                }
+
+                return q.promise;
+            }
         }
 
-        function setRefreshToken (token, userType) {
-            userSettings.refreshToken.value = token;
-            userSettings.userType.value = USER_TYPE[userType];
+        function refreshToken () {
+            return $http({
+                method: 'POST',
+                url: sharedConfig.API_ROOT + API_CONFIG.AUTH + 'refresh/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: $httpParamSerializer(
+                    {
+                        token: accessToken
+                    }
+                    )
+            })
+                .then(refreshSuccess, logout);
+
+            function refreshSuccess (response) {
+                userState.accessToken = response.data.token;
+                userSettings.token.value = userState.accessToken;
+                accessToken = response.data.token;
+                userState.isLoggedIn = true;
+
+                intervalPromise = $timeout(refreshToken, intervalDuration);
+            }
         }
 
-        function getAccessToken () {
-            return accessToken;
+        function logout () {
+            if (intervalPromise) {
+                $timeout.cancel(intervalPromise);
+            }
+            userSettings.token.remove();
+
+            userState.username = null;
+            userState.accessToken = null;
+            userState.isLoggedIn = false;
         }
 
-        function setAccessToken (token) {
-            accessToken = token;
-        }
-
-        function getUserType () {
-            return USER_TYPE[userSettings.userType.value] || USER_TYPE.NONE;
-        }
-
-        function clearToken () {
-            accessToken = null;
-            userSettings.refreshToken.remove();
-            userSettings.userType.remove();
+        function getStatus () {
+            return userState;
         }
     }
 })();

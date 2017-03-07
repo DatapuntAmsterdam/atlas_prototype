@@ -21,11 +21,11 @@
          * @returns {Promise}
          */
         function getByUrl (url, params, cancel) {
-            let headers = {};
+            let headers = {},
+                userState = user.getStatus();
 
-            let token = user.getAccessToken();
-            if (token) {
-                headers.Authorization = sharedConfig.AUTH_HEADER_PREFIX + token;
+            if (userState.isLoggedIn) {
+                headers.Authorization = 'JWT ' + userState.accessToken;
             }
 
             let options = {
