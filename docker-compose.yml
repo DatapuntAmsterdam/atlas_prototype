@@ -2,3 +2,6 @@ atlas:
   build: .
   ports:
     - "8099:80"
+  environment:
+    PASSWORD_EMPLOYEE:
+    PASSWORD_EMPLOYEE_PLUS:
