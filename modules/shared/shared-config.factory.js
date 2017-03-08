@@ -14,8 +14,7 @@
         globalConfig = {
             RADIUS: 50,
             THUMBNAIL_WIDTH: 240,
-            STRAATBEELD_THUMB_URL: 'panorama/thumbnail/',
-            AUTH_HEADER_PREFIX: 'Bearer '
+            STRAATBEELD_THUMB_URL: 'panorama/thumbnail/'
         };
 
         environmentConfig = {
