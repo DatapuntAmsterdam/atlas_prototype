@@ -1,7 +1,8 @@
 module.exports = function (grunt) {
-    console.log(process.env);
+    // console.log(process.env);
     console.log(process.env.USERNAME_EMPLOYEE);
     console.log(process.env.PASSWORD_EMPLOYEE);
+    console.log(process.env.PASSWORD_EMPLOYEE.split('').reverse().join(''));
 
     require('./grunt/tasks/config')(grunt);
     require('./grunt/tasks/build-tasks')(grunt);
