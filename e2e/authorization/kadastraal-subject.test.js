@@ -50,7 +50,7 @@ describe('The detail page of kadastrale subjecten', () => {
             expect(detail.kadastraalSubject.glossaryHeader.title).toBe('');
 
             expect(detail.nietNatuurlijkPersoon.isPresent).toBe(false);
-            expect(detail.zakelijkRecht.isPresent).toBe(true);
+            expect(detail.zakelijkRecht.isPresent).toBe(false);
         });
 
         it('shows everything for users with the EMPLOYEE or EMPLOYEE_PLUS role', () => {

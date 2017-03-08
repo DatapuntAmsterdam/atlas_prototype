@@ -1,4 +1,4 @@
-fdescribe('The detail page of a verblijfsobject', () => {
+describe('The detail page of a verblijfsobject', () => {
     it('doesn\'t show rechten en aantekeningen voor users with the DEFAULT role', () => {
         let page = dp.navigate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-OU', 'DEFAULT');
         let detail = page.dashboard.rightColumn.detail;

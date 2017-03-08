@@ -24,6 +24,7 @@ describe('The autocomplete suggestions', () => {
             page = dp.navigate('MAP_PAGE--HOME', role);
             page.dashboard.header.search.setQuery('De Gemeente Gods Amsterdam');
 
+            expect(page.dashboard.header.search.autocomplete.categories(0).isPresent).toBe(true);
             expect(page.dashboard.header.search.autocomplete.categories(0).header).toBe('Kadastrale subjecten');
             expect(page.dashboard.header.search.autocomplete.categories(0).options(0).label)
                 .toBe('De Gemeente Gods Amsterdam');
