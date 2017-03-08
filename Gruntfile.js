@@ -1,5 +1,6 @@
 module.exports = function (grunt) {
     console.log(process.env);
+    console.log('Hallo');
 
     require('./grunt/tasks/config')(grunt);
     require('./grunt/tasks/build-tasks')(grunt);
