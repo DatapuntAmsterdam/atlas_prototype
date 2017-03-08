@@ -1,7 +1,10 @@
-atlas:
-  build: ..
-  ports:
-    - "80"
-  environment:
-    PASSWORD_EMPLOYEE:
-    PASSWORD_EMPLOYEE_PLUS:
+version: '3.0'
+services:
+  atlas:
+    build:
+      context: ..
+      args:
+        PASSWORD_EMPLOYEE:
+        PASSWORD_EMPLOYEE_PLUS:
+    ports:
+      - "8099:80"
