@@ -66,7 +66,6 @@ stage('Waiting for approval') {
 }
 
 
-
 node {
     stage('Push production image') {
         tryStep "image tagging", {
