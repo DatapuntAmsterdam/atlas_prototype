@@ -4,7 +4,10 @@
     angular
         .module('dpShared')
         .constant('USER_SETTINGS', {
-            token: {
+            refreshToken: {
+                storage: 'session'
+            },
+            userType: {
                 storage: 'session'
             },
             fullscreenStraatbeeld: {

@@ -127,10 +127,11 @@ describe('the dp-detail component', function () {
             {
                 user: {
                     isLoggedIn: false,
-                    getStatus: function () {
-                        return {
-                            isLoggedIn: this.isLoggedIn
-                        };
+                    getUserType: function () {
+                        return this.isLoggedIn ? this.USER_TYPE.AUTHENTICATED : null;
+                    },
+                    USER_TYPE: {
+                        AUTHENTICATED: 'AUTHENTICATED'
                     }
                 }
             }
