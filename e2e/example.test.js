@@ -3,7 +3,7 @@
 describe('The basic application navigation', function () {
     let page;
 
-    fit('allows to navigate from home to layerSelection and back', function () {
+    it('allows to navigate from home to layerSelection and back', function () {
         page = dp.navigate('MAP_PAGE--HOME', 'EMPLOYEE');
         dp.validate('MAP_PAGE--HOME', page);
 

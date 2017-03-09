@@ -24,13 +24,13 @@ function login (role) {
     const isLoggedIn = element(by.css('.qa-header__login')).isPresent() &&
         !element(by.css('.qa-header__logout')).isPresent();
 
-    browser.ignoreSynchronization = true;
-
     if (isLoggedIn) {
+        browser.ignoreSynchronization = true;
         element(by.css('.qa-header__logout')).click();
     }
 
     if (role === 'EMPLOYEE' || role === 'EMPLOYEE_PLUS') {
+        browser.ignoreSynchronization = true;
         element(by.css('.qa-header__login')).click();
 
         const loginPage = loginPageObjects(element(by.css('body')));

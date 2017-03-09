@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('each URL should load the corresponding view', function () {
+describe('each URL should load the corresponding view', function () {
     let page;
 
     it('DATA-SELECTION--CARDS', () => {
