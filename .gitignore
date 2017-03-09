@@ -1,6 +1,5 @@
 .idea
 .sass-cache
-grunt/config/credentials.js
 bower_components
 build
 docs
