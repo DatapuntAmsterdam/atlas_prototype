@@ -1,4 +1,9 @@
 .menu-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.menu-dropdown__contents {
   position: absolute;
   top: $site-header-height;
   right: 0;

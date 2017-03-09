@@ -9,6 +9,8 @@
         return {
             restrict: 'E',
             scope: {
+                title: '@',
+                type: '@',
                 hasPrintButton: '<'
             },
             transclude: true,

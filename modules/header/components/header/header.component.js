@@ -14,15 +14,17 @@
             controllerAs: 'vm'
         });
 
-    DpHeaderController.$inject = ['user'];
+    DpHeaderController.$inject = ['authenticator', 'user'];
 
-    function DpHeaderController (user) {
+    function DpHeaderController (authenticator, user) {
         var vm = this;
 
-        vm.isLoggedIn = function () {
-            return user.getStatus().isLoggedIn;
-        };
+        vm.login = authenticator.login;
 
-        vm.logout = user.logout;
+        vm.isAuthenticated = () => user.getUserType() === user.USER_TYPE.AUTHENTICATED;
+
+        vm.userName = () => user.getName().replace(/@.*$/, '');
+
+        vm.userIsBevoegd = () => user.getAuthorizationLevel() === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS;
     }
 })();
