@@ -56,13 +56,46 @@ describe('each URL should load the corresponding view', function () {
         expect(page.dashboard.rightColumn.dataSelection.header.tabs(1).isActive).toBe(true);
     });
 
+    it('MAP_DETAIL--BEPERKING', () => {
+        page = dp.navigate('MAP_DETAIL--BEPERKING');
+
+        dp.validate('MAP_DETAIL--BEPERKING', page);
+
+        expect(page.title).toBe('Gemeentelijke beperking: Huisvestingsverordening, splitsingsvergunningstelsel, Huisv' +
+            'estingswet - Atlas');
+    });
+
+    it('MAP_DETAIL--KADASTRAAL-OBJECT', () => {
+        page = dp.navigate('MAP_DETAIL--KADASTRAAL-OBJECT');
+
+        dp.validate('MAP_DETAIL--KADASTRAAL-OBJECT', page);
+
+        expect(page.title).toBe('Kadastraal object: STN02 N 00538 A 0001 - Atlas');
+    });
+
+    it('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON', () => {
+        page = dp.navigate('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON');
+
+        dp.validate('MAP_DETAIL--KADASTRAAL-SUBJECT-NATUURLIJK-PERSOON', page);
+
+        expect(page.title).toBe('Kadastraal subject: Erik Niels Nijland - Atlas');
+    });
+
+    it('MAP_DETAIL--KADASTRAAL-SUBJECT-NIET-NATUURLIJK-PERSOON', () => {
+        page = dp.navigate('MAP_DETAIL--KADASTRAAL-SUBJECT-NIET-NATUURLIJK-PERSOON');
+
+        dp.validate('MAP_DETAIL--KADASTRAAL-SUBJECT-NIET-NATUURLIJK-PERSOON', page);
+
+        expect(page.title).toBe('Kadastraal subject: De Gemeente Gods Amsterdam - Atlas');
+    });
+
     it('MAP_DETAIL--NUMMERAANDUIDING', () => {
         page = dp.navigate('MAP_DETAIL--NUMMERAANDUIDING');
         const detail = page.dashboard.rightColumn.detail;
 
         dp.validate('MAP_DETAIL--NUMMERAANDUIDING', page);
 
-        expect(page.title).toMatch('Adres: Maria Austriastraat 730 - Atlas');
+        expect(page.title).toBe('Adres: Maria Austriastraat 730 - Atlas');
 
         expect(detail.nummeraanduiding.nummeraanduidingHeader.glossaryHeader.title)
             .toBe('Maria Austriastraat 730');
@@ -87,6 +120,22 @@ describe('each URL should load the corresponding view', function () {
         expect(detail.verblijfsobject.descriptionList.definition(0)).toBe('BEST-woning');
         expect(detail.verblijfsobject.descriptionList.term(1)).toBe('Feitelijk gebruik');
         expect(detail.verblijfsobject.descriptionList.definition(1)).toBe('woning');
+    });
+
+    it('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-OU', () => {
+        page = dp.navigate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-OU');
+
+        dp.validate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-OU', page);
+
+        expect(page.title).toBe('Verblijfsobject: Keizersgracht 343A - Atlas');
+    });
+
+    it('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-BB', () => {
+        page = dp.navigate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-BB');
+
+        dp.validate('MAP_DETAIL--VERBLIJFSOBJECT-ZR-GB-A-BB', page);
+
+        expect(page.title).toBe('Verblijfsobject: Dam 10 - Atlas');
     });
 
     it('MAP_PAGE--HOME', () => {

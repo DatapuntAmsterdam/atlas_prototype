@@ -1,6 +1,7 @@
 describe('The dp-header component', function () {
     var $compile,
         $rootScope,
+        authenticator,
         user;
 
     beforeEach(function () {
@@ -22,13 +23,14 @@ describe('The dp-header component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _user_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _authenticator_, _user_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
+            authenticator = _authenticator_;
             user = _user_;
         });
 
-        spyOn(user, 'logout');
+        spyOn(authenticator, 'logout');
     });
 
     function getComponent (query, isPrintMode) {
@@ -67,35 +69,64 @@ describe('The dp-header component', function () {
         it('when not logged in', function () {
             var component;
 
-            spyOn(user, 'getStatus').and.returnValue({isLoggedIn: false});
+            spyOn(user, 'getUserType').and.returnValue('ANONYMOUS');
 
             component = getComponent('', false);
 
-            expect(component.find('.site-header__menu dp-link').length).toBe(1);
-
-            // Show the login button
-            expect(component.find('.site-header__menu dp-link').eq(0).attr('type')).toBe('SHOW_PAGE');
-            expect(component.find('.site-header__menu dp-link').eq(0).attr('payload')).toBe('{name: \'login\'}');
-            expect(component.find('.site-header__menu dp-link').eq(0).attr('class-name'))
-                .toBe('site-header__menu__item');
-
-            // Hide the logout button
-            expect(component.find('.site-header__menu button.site-header__menu__item').length).toBe(0);
+            expect(component.find('.qa-header__login').length).toBe(1);
+            expect(component.find('dp-menu-dropdown').length).toBe(1);  // Only main menu
+            expect(component.find('dp-menu-dropdown').eq(0).attr('type')).toBe('main');
         });
 
         it('when logged in', function () {
             var component;
 
-            spyOn(user, 'getStatus').and.returnValue({isLoggedIn: true});
+            spyOn(user, 'getUserType').and.returnValue('AUTHENTICATED');
+            spyOn(user, 'getName').and.returnValue('My username');
 
             component = getComponent('', false);
 
-            // Hide the login button
-            expect(component.find('.site-header__menu dp-link').length).toBe(0);
-            expect(component.find('.site-header__menu dp-link').eq(0).attr('payload')).not.toBe('\'login\'');
+            expect(component.find('.qa-header__login').length).toBe(0);
+            expect(component.find('dp-menu-dropdown').length).toBe(2);
+            expect(component.find('dp-menu-dropdown').eq(0).attr('type')).toBe('user');
+            expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('My username');
+            expect(component.find('dp-menu-dropdown').eq(1).attr('type')).toBe('main');
+        });
 
-            // Show the logout button
-            expect(component.find('.site-header__menu button.site-header__menu__item').length).toBe(1);
+        it('removes the domain name for a logged-in user', function () {
+            var component;
+
+            spyOn(user, 'getUserType').and.returnValue('AUTHENTICATED');
+            spyOn(user, 'getName').and.returnValue('user@xyz.com');
+            spyOn(user, 'getAuthorizationLevel').and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE);
+
+            component = getComponent('', false);
+
+            expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('user');
+        });
+
+        it('can show that a user is a normal employee', function () {
+            var component;
+
+            spyOn(user, 'getUserType').and.returnValue('AUTHENTICATED');
+            spyOn(user, 'getName').and.returnValue('user');
+            spyOn(user, 'getAuthorizationLevel').and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE);
+
+            component = getComponent('', false);
+
+            expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('user');
+        });
+
+        it('can show that a user is a bevoegd employee', function () {
+            var component;
+
+            spyOn(user, 'getUserType').and.returnValue('AUTHENTICATED');
+            spyOn(user, 'getName').and.returnValue('user');
+            spyOn(user, 'getAuthorizationLevel').and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS);
+
+            component = getComponent('', false);
+
+            expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('user (bevoegd)');
         });
     });
 

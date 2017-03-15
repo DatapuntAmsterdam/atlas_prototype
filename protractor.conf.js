@@ -1,7 +1,7 @@
 exports.config = {
     baseUrl: 'http://localhost:8000/',
     framework: 'jasmine',
-    specs: 'e2e/*.test.js',
+    specs: 'e2e/**/*.test.js',
     capabilities: {
         browserName: 'phantomjs',
         shardTestFiles: true,

@@ -8,6 +8,8 @@ Requirements
 - Java JRE (needed to run protractor)
 
 Installation
+- Create a local file "grunt/config/credentials.js", use credentials.sample.js as a template. Usernames and passwords
+are stored in Rattic. These credentials are used when running E2E tests.
 - npm install
 - bower install
 - grunt

@@ -5,126 +5,164 @@
         .module('dpShared')
         .factory('user', userFactory);
 
-    userFactory.$inject = [
-        '$http',
-        '$httpParamSerializer',
-        '$q',
-        '$timeout',
-        'sharedConfig',
-        'API_CONFIG',
-        'userSettings'
-    ];
+    userFactory.$inject = ['$window', 'userSettings'];
 
-    function userFactory ($http, $httpParamSerializer, $q, $timeout, sharedConfig, API_CONFIG, userSettings) {
-        var userState = {},
-            accessToken = userSettings.token.value;
-
-        // if sessionStorage is available use the refreshToken function to check if a token is available and valid
-        if (accessToken) {
-            refreshToken();
-        } else {
-            userState.username = null;
-            userState.accessToken = null;
-            userState.isLoggedIn = false;
-        }
-
-        //  Refresh the successfully obtained token every 4 and a half minutes (token expires in 5 minutes)
-        var intervalDuration = 270000;
-        var intervalPromise = null;
-
-        return {
-            login: login,
-            refreshToken: refreshToken,
-            logout: logout,
-            getStatus: getStatus
+    function userFactory ($window, userSettings) {
+        const USER_TYPE = { // the possible types of a user
+            NONE: 'NONE',
+            ANONYMOUS: 'ANONYMOUS',
+            AUTHENTICATED: 'AUTHENTICATED'
         };
 
-        function login (username, password) {
-            return $http({
-                method: 'POST',
-                url: sharedConfig.API_ROOT + API_CONFIG.AUTH + 'token/',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                data: $httpParamSerializer(
-                    {
-                        username: username,
-                        password: password
+        const AUTHORIZATION_LEVEL = {   // The possible user authorization levels
+            NONE: 'NONE',
+            DEFAULT: 'DEFAULT',
+            EMPLOYEE: 'EMPLOYEE',
+            EMPLOYEE_PLUS: 'EMPLOYEE_PLUS'
+        };
+
+        const AUTHORIZATION_LEVEL_MAPPING = {   // maps the backend level codes upon a valid authorization level
+            0: AUTHORIZATION_LEVEL.DEFAULT,
+            1: AUTHORIZATION_LEVEL.EMPLOYEE,
+            3: AUTHORIZATION_LEVEL.EMPLOYEE_PLUS
+        };
+
+        class User {
+            constructor () {
+                this.init = function () {   // initialize private properties
+                    this._accessToken = null;
+                    this._authorizationLevel = AUTHORIZATION_LEVEL.NONE;
+                    this.name = '';
+                };
+
+                this.decodeToken = function (token) {
+                    try {
+                        return angular.fromJson(
+                            $window.atob(token
+                                .split('.')[1]
+                                .replace('-', '+')
+                                .replace('_', '/')
+                            ));
+                    } catch (e) {
+                        return {};
                     }
-                )
-            })
-                .then(loginSuccess, loginError);
+                };
 
-            function loginSuccess (response) {
-                // This is the username as entered by the user in the login form, backend doesn't return the username
-                userState.username = username;
-                userState.accessToken = response.data.token;
-                userState.isLoggedIn = true;
+                this.parseToken = function (token) {   // private method to parse a refresh or access token
+                    let content = this.decodeToken(token);
 
-                userSettings.token.value = userState.accessToken;
-                accessToken = response.data.token;
+                    if (angular.isDefined(content.sub)) {   // contained in refresh token
+                        this.name = content.sub || '';
+                    }
 
-                intervalPromise = $timeout(refreshToken, intervalDuration);
-            }
+                    if (angular.isDefined(content.authz)) { // contained in access token
+                        this.authorizationLevel = content.authz;
+                    }
+                };
 
-            function loginError (response) {
-                var q = $q.defer();
+                this.init();
 
-                switch (response.status) {
-                    case 400:
-                    case 401:
-                        q.reject('De combinatie gebruikersnaam en wachtwoord wordt niet herkend.');
-                        break;
-                    case 404:
-                        q.reject('Er is iets mis met de inlog server, probeer het later nog eens.');
-                        break;
-                    default:
-                        q.reject('Er is een fout opgetreden. Neem contact op met de beheerder en vermeld code: ' +
-                            response.status + ' status: ' + response.statusText + '.');
+                if (this.refreshToken) {                // get any existing refresh token
+                    this.parseToken(this.refreshToken); // and parse its contents
                 }
+            }
 
-                return q.promise;
+            clear () {
+                userSettings.refreshToken.remove();
+                userSettings.userType.remove();
+
+                this.init();
+            }
+
+            get refreshToken () {
+                return userSettings.refreshToken.value; // the refresh token in stored in the session
+            }
+
+            set refreshToken (value) {
+                userSettings.refreshToken.value = value;
+                this.parseToken(value);
+            }
+
+            get accessToken () {
+                return this._accessToken;
+            }
+
+            set accessToken (value) {
+                this._accessToken = value;
+                this.parseToken(value);
+            }
+
+            get type () {
+                return USER_TYPE[userSettings.userType.value] || USER_TYPE.NONE;
+            }
+
+            set type (value) {
+                userSettings.userType.value = USER_TYPE[value];
+            }
+
+            get name () {
+                return this._name;
+            }
+
+            set name (value) {
+                this._name = value;
+            }
+
+            get authorizationLevel () {
+                return AUTHORIZATION_LEVEL[this._authorizationLevel];
+            }
+
+            set authorizationLevel (value) {
+                this._authorizationLevel = AUTHORIZATION_LEVEL_MAPPING[value] || AUTHORIZATION_LEVEL.NONE;
             }
         }
 
-        function refreshToken () {
-            return $http({
-                method: 'POST',
-                url: sharedConfig.API_ROOT + API_CONFIG.AUTH + 'refresh/',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                data: $httpParamSerializer(
-                    {
-                        token: accessToken
-                    }
-                    )
-            })
-                .then(refreshSuccess, logout);
+        let user = new User();
 
-            function refreshSuccess (response) {
-                userState.accessToken = response.data.token;
-                userSettings.token.value = userState.accessToken;
-                accessToken = response.data.token;
-                userState.isLoggedIn = true;
+        return {
+            getRefreshToken,
+            setRefreshToken,
+            getAccessToken,
+            setAccessToken,
+            getName,
+            getAuthorizationLevel,
+            getUserType,
+            clearToken,
+            USER_TYPE,
+            AUTHORIZATION_LEVEL
+        };
 
-                intervalPromise = $timeout(refreshToken, intervalDuration);
-            }
+        function getRefreshToken () {
+            return user.refreshToken;
         }
 
-        function logout () {
-            if (intervalPromise) {
-                $timeout.cancel(intervalPromise);
-            }
-            userSettings.token.remove();
-
-            userState.username = null;
-            userState.accessToken = null;
-            userState.isLoggedIn = false;
+        function setRefreshToken (token, userType) {
+            user.type = userType;
+            user.refreshToken = token;
         }
 
-        function getStatus () {
-            return userState;
+        function getAccessToken () {
+            return user.accessToken;
+        }
+
+        function setAccessToken (token) {
+            user.accessToken = token;
+        }
+
+        function getUserType () {
+            return user.type;
+        }
+
+        function getName () {
+            return user.name;
+        }
+
+        function getAuthorizationLevel () {
+            return user.authorizationLevel;
+        }
+
+        function clearToken () {
+            user.clear();
         }
     }
 })();

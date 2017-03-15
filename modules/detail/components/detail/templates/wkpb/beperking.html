@@ -15,7 +15,7 @@
 
     </div>
 
-    <div class="u-row" ng-if="vm.apiData.results.documenten.count === 1">
+    <div class="u-row qa-brondocument" ng-if="vm.apiData.results.documenten.count === 1">
         <dp-glossary-header definition="BRONDOCUMENT"></dp-glossary-header>
 
         <dp-api-call endpoint="{{vm.apiData.results.documenten.href}}" partial="wkpb/brondocument"></dp-api-call>

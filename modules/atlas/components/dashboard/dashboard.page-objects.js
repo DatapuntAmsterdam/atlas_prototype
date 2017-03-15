@@ -1,5 +1,7 @@
 'use strict';
 
+const headerPO = dp.require('modules/header/components/header/header.page-objects');
+
 const dataSelectionPO = dp.require('modules/data-selection/components/data-selection/data-selection.page-objects');
 const detailPO = dp.require('modules/detail/components/detail/detail.page-objects');
 const layerSelectionPO = dp.require('modules/layer-selection/components/layer-selection/layer-selection.page-objects');
@@ -10,6 +12,7 @@ const straatbeeldPO = dp.require('modules/straatbeeld/components/straatbeeld/str
 
 module.exports = function (dashboardElement) {
     return {
+        header: headerPO(dashboardElement.element(by.css('dp-header'))),
         leftColumn: getColumn('left'),
         middleColumn: getColumn('middle'),
         rightColumn: getColumn('right')

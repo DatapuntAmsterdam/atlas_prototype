@@ -1,0 +1,29 @@
+<ul>
+    <li>
+        <dp-link type="FETCH_DATA_SELECTION" payload="{dataset: 'bag', filters: {}, page: 1}"
+            class-name="site-header__menu__subitem">
+            Downloaden adressen
+        </dp-link>
+    </li>
+    <li>
+        <dp-link type="FETCH_DATA_SELECTION" payload="{dataset: 'hr', filters: {}, page: 1}"
+            class-name="site-header__menu__subitem">
+            Downloaden vestigingen
+        </dp-link>
+    </li>
+    <li ng-if="hasPrintButton">
+        <dp-link type="SHOW_PRINT" class-name="site-header__menu__subitem">
+            Printen
+        </dp-link>
+    </li>
+    <li>
+        <dp-terugmelden-button>
+            Terugmelden
+        </dp-terugmelden-button>
+    </li>
+    <li>
+        <dp-link type="SHOW_PAGE" payload="{name: 'help'}" class-name="site-header__menu__subitem">
+            Help
+        </dp-link>
+    </li>
+</ul>

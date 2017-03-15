@@ -2,9 +2,9 @@
   <h4 ng-if="apiData.count >= 2" class="c-paginering">1-{{ apiData.results.length }} van {{ apiData.count }}</h4>
 
   <ul class="o-list">
-    <li ng-repeat="object in apiData.results">
+    <li ng-repeat="object in apiData.results" class="qa-brk-vbo">
         <dp-link type="FETCH_DETAIL" payload="object._links.self.href" class-name="o-btn o-btn--link o-btn--contrast s-btn--nested">
-          {{ object._display}}
+            {{ object._display}}
         </dp-link>
 
         <div class="s-indented-list">

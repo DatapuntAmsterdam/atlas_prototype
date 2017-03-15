@@ -16,24 +16,26 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
     }
 }
 
-node {
 
+node {
     stage("Checkout") {
         checkout scm
     }
 
-    stage ("Test") {
-        tryStep "Test",  {
-                sh "docker-compose -p atlas -f .jenkins/docker-compose.yml build"
-                sh "docker-compose -p atlas -f .jenkins/docker-compose.yml run --rm -u root atlas npm test"
+    stage('Test') {
+        tryStep "test", {
+            withCredentials([[$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE', variable: 'PASSWORD_EMPLOYEE'],
+                             [$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE_PLUS', variable: 'PASSWORD_EMPLOYEE_PLUS']]) {
+                sh "docker-compose -p atlas -f .jenkins/docker-compose.yml build && " +
+                   "docker-compose -p atlas -f .jenkins/docker-compose.yml run --rm -u root atlas npm test"
+            }
         }
     }
 
-    stage("Build develop image") {
+    stage("Build image") {
         tryStep "build", {
             def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}")
             image.push()
-            image.push("acceptance")
         }
     }
 }
@@ -42,49 +44,54 @@ String BRANCH = "${env.BRANCH_NAME}"
 
 if (BRANCH == "master") {
 
-node {
-    stage("Deploy to ACC") {
-        tryStep "deployment", {
-            build job: 'Subtask_Openstack_Playbook',
-                    parameters: [
-                            [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-                            [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml'],
-                            [$class: 'StringParameterValue', name: 'BRANCH', value: 'master'],
-                    ]
+    node {
+        stage('Push acceptance image') {
+            tryStep "image tagging", {
+                def image = docker.image("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}")
+                image.pull()
+                image.push("acceptance")
+            }
         }
     }
-}
 
-
-stage('Waiting for approval') {
-    slackSend channel: '#ci-channel', color: 'warning', message: 'Atlas is waiting for Production Release - please confirm'
-    input "Deploy to Production?"
-}
-
-
-
-node {
-    stage('Push production image') {
-        tryStep "image tagging", {
-            def image = docker.image("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}")
-            image.pull()
-
-            image.push("production")
-            image.push("latest")
+    node {
+        stage("Deploy to ACC") {
+            tryStep "deployment", {
+                build job: 'Subtask_Openstack_Playbook',
+                parameters: [
+                    [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml'],
+                ]
+            }
         }
     }
-}
 
-node {
-    stage("Deploy") {
-        tryStep "deployment", {
-            build job: 'Subtask_Openstack_Playbook',
-                    parameters: [
-                            [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
-                            [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml'],
-                            [$class: 'StringParameterValue', name: 'BRANCH', value: 'master'],
-                    ]
+
+    stage('Waiting for approval') {
+        slackSend channel: '#ci-channel', color: 'warning', message: 'Atlas is waiting for Production Release - please confirm'
+        input "Deploy to Production?"
+    }
+
+    node {
+        stage('Push production image') {
+            tryStep "image tagging", {
+                def image = docker.image("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}")
+                image.pull()
+                image.push("production")
+                image.push("latest")
+            }
         }
     }
-}
+
+    node {
+        stage("Deploy") {
+            tryStep "deployment", {
+                build job: 'Subtask_Openstack_Playbook',
+                parameters: [
+                    [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml'],
+                ]
+            }
+        }
+    }
 }
