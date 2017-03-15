@@ -1,0 +1,15 @@
+.s-cms-content {
+  li {
+    display: list-item;
+  }
+
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 20px;
+  }
+}

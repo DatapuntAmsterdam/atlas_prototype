@@ -1,4 +1,4 @@
-/* globals L, proj4, Redux */
+/* globals L, proj4, Redux, marked */
 
 (function () {
     'use strict';
@@ -13,5 +13,6 @@
         $provide.constant('L', L);
         $provide.constant('proj4', proj4);
         $provide.constant('Redux', Redux);
+        $provide.constant('marked', marked);
     }
 })();
