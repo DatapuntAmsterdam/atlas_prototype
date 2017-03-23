@@ -727,7 +727,7 @@
                         'zd'
                     ]
                 }, {
-                    heading: 'Onroerende zaken',
+                    heading: 'Geografie: onroerende zaken',
                     overlays: [
                         'bgem',
                         'kgem',
@@ -798,7 +798,7 @@
                         'mgvvgsh'
                     ]
                 }, {
-                    heading: 'Verkeer',
+                    heading: 'Verkeer en infrastructuur',
                     overlays: [
                         'pv',
                         'pvb',
