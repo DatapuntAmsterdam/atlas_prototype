@@ -16,7 +16,7 @@ module.exports = function (page) {
     expect(layerSelection.overlays.categories(0).options(0).label).toBe('Bouw');
     expect(layerSelection.overlays.categories(0).options(1).label).toBe('Cultuur, sport, recreatie');
 
-    expect(layerSelection.overlays.categories(1).header).toBe('Onroerende zaken');
+    expect(layerSelection.overlays.categories(1).header).toBe('Geografie: onroerende zaken');
     expect(layerSelection.overlays.categories(1).options(0).label).toBe('Burgerlijke gemeenten');
     expect(layerSelection.overlays.categories(1).options(1).label).toBe('Kadastrale gemeenten');
 
