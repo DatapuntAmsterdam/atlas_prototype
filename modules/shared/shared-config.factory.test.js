@@ -28,7 +28,7 @@ describe('The sharedConfig factory', function () {
             expect(sharedConfig.STRAATBEELD_THUMB_URL).toBe('panorama/thumbnail/');
 
             // Environment config
-            expect(sharedConfig.API_ROOT).toBe('https://api.datapunt.amsterdam.nl/');
+            expect(sharedConfig.API_ROOT).toBe('https://api-acc.datapunt.amsterdam.nl/');
         });
 
         it('ACCEPTATION', function () {
@@ -52,7 +52,7 @@ describe('The sharedConfig factory', function () {
             expect(sharedConfig.STRAATBEELD_THUMB_URL).toBe('panorama/thumbnail/');
 
             // Environment config
-            expect(sharedConfig.API_ROOT).toBe('https://api.datapunt.amsterdam.nl/');
+            expect(sharedConfig.API_ROOT).toBe('https://api-acc.datapunt.amsterdam.nl/');
         });
     });
 });
