@@ -71,11 +71,12 @@
                 };
 
                 // Derive whether more info is available if the user would be authenticated
-                vm.isMoreInfoAvailable = vm.apiData.results.is_natuurlijk_persoon &&
-                        user.getUserType() !== user.USER_TYPE.AUTHENTICATED;
+                vm.showMoreInfoWarning = !(user.getUserType() === user.USER_TYPE.AUTHENTICATED &&
+                user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE));
 
-                // Derive whether more info is available if the user would have special privileges
-                vm.hasInsufficientRights = vm.apiData.results.is_natuurlijk_persoon &&
+                // In the case of a "natuurlijk" kadastraal subject, derive whether more info is available if
+                // the user would have special privileges
+                vm.showInsufficientRightsMessage = vm.apiData.results.is_natuurlijk_persoon &&
                     user.getUserType() === user.USER_TYPE.AUTHENTICATED &&
                     user.getAuthorizationLevel() !== user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS;
 

@@ -18,6 +18,11 @@
     <div class="u-row" ng-if="vm.apiData.results.documenten.count === 1">
         <dp-glossary-header definition="BRONDOCUMENT"></dp-glossary-header>
 
+        <dp-panel is-panel-visible="vm.showMoreInfoWarning" type="warning" can-close="true">
+            Medewerkers/ketenpartners van Gemeente Amsterdam kunnen _inloggen_ om meer gegevens te zien:
+            documentnaam en link naar bestand.
+        </dp-panel>
+
         <dp-api-call endpoint="{{vm.apiData.results.documenten.href}}" partial="wkpb/brondocument"></dp-api-call>
     </div>
 

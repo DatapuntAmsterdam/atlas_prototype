@@ -5,9 +5,9 @@
         .module('dpDetail')
         .directive('dpPartialSelect', dpPartialSelectDirective);
 
-    dpPartialSelectDirective.$inject = ['partialCompiler'];
+    dpPartialSelectDirective.$inject = ['partialCompiler', 'user'];
 
-    function dpPartialSelectDirective (partialCompiler) {
+    function dpPartialSelectDirective (partialCompiler, user) {
         return {
             restrict: 'E',
             scope: {
@@ -20,6 +20,9 @@
 
         function linkFunction (scope, element) {
             var templateUrl = 'modules/detail/components/partial-select/partials/' + scope.partial + '.html';
+
+            scope.showMoreInfoWarning = !(user.getUserType() === user.USER_TYPE.AUTHENTICATED &&
+                user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE));
 
             partialCompiler.getHtml(templateUrl, scope).then(function (partial) {
                 scope.loadMore = scope.loadMoreFn;

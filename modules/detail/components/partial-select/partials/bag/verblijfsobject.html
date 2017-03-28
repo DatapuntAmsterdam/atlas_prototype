@@ -65,6 +65,11 @@
     <div ng-if="apiData.results.kadastrale_objecten.count">
         <dp-glossary-header definition="OBJECT" use-plural="true"></dp-glossary-header>
 
+        <dp-panel is-panel-visible="showMoreInfoWarning" type="warning" can-close="true">
+            Medewerkers/ketenpartners van Gemeente Amsterdam kunnen _inloggen_ om meer gegevens te zien:
+            zakelijke rechten en aantekeningen.
+        </dp-panel>
+
         <dp-api-call
             endpoint="{{apiData.results.kadastrale_objecten.href}}"
             partial="bag/brk-vbo"

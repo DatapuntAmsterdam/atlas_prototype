@@ -1,109 +1,101 @@
 <div>
     <div class="u-row">
-      <dp-glossary-header
-        heading="{{vm.apiData.results._display}}"
-        definition="SUBJECT"
-        meta-data="vm.apiData">
-      </dp-glossary-header>
+        <dp-glossary-header
+            heading="{{vm.apiData.results._display}}"
+            definition="SUBJECT"
+            meta-data="vm.apiData">
+        </dp-glossary-header>
 
-      <!-- niet natuurlijke persoon -->
-      <dl class="c-key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === false">
-        <dt>Statutaire zetel</dt>
-        <dd>{{ vm.apiData.results.statutaire_zetel }}</dd>
-        <dt>Rechtsvorm</dt>
-        <dd>{{ vm.apiData.results.rechtsvorm.omschrijving }}</dd>
-        <dt>RSIN</dt>
-        <dd>{{ vm.apiData.results.rsin }}</dd>
-        <dt>KvK nummer</dt>
-        <dd>{{ vm.apiData.results.kvknummer }}</dd>
-        <dt>Woonadres</dt>
-        <dd>
-          {{ vm.apiData.results.woonadres.openbareruimte_naam }} {{ vm.apiData.results.woonadres.huisnummer }}{{ vm.apiData.results.woonadres.huisletter }}<span ng-if="vm.apiData.results.woonadres.toevoeging">-{{ vm.apiData.results.woonadres.toevoeging }}</span> {{ vm.apiData.results.woonadres.postcode }} {{ vm.apiData.results.woonadres.woonplaats }}
-        </dd>
-
-        <dt>Woonadres buitenland</dt>
-        <dd>
-          {{ vm.apiData.results.woonadres.buitenland_adres }} {{ vm.apiData.results.woonadres.buitenland_woonplaats }} {{ vm.apiData.results.woonadres.buitenland_naam }} {{ vm.apiData.results.woonadres.buitenland_land.omschrijving }}
-        </dd>
-        <dt>Postadres</dt>
-        <dd>
-          {{ vm.apiData.results.postadres.openbareruimte_naam }} {{ vm.apiData.results.postadres.huisnummer }}{{ vm.apiData.results.postadres.huisletter }}<span ng-if="vm.apiData.results.postadres.toevoeging">-{{ vm.apiData.results.postadres.toevoeging }}</span> {{ vm.apiData.results.postadres.postcode }} {{ vm.apiData.results.postadres.woonplaats }}
-        </dd>
-        <dt>Postadres buitenland</dt>
-        <dd>
-          {{ vm.apiData.results.postadres.buitenland_adres }} {{ vm.apiData.results.postadres.buitenland_woonplaats }} {{ vm.apiData.results.postadres.buitenland_naam }} {{ vm.apiData.results.postadres.buitenland_land.omschrijving }}
-        </dd>
-        <dt>Postadres postbus</dt>
-        <dd>
-          {{ vm.apiData.results.postadres.postbus_nummer }} {{ vm.apiData.results.postadres.postbus_postcode }} {{ vm.apiData.results.postadres.postbus_woonplaats }}
-        </dd>
-      </dl>
-
-      <!-- natuurlijke persoon -->
-      <dl class="c-key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === true">
-        <dt>Voornamen</dt>
-        <dd>{{ vm.apiData.results.voornamen }}</dd>
-        <dt>Voorvoegsels</dt>
-        <dd>{{ vm.apiData.results.voorvoegsels }}</dd>
-        <dt>Geslachtsnaam</dt>
-        <dd>{{ vm.apiData.results.naam }}</dd>
-        <dt>Geslacht</dt>
-        <dd>{{ vm.apiData.results.geslacht.omschrijving }}</dd>
-        <dt>Geboortedatum</dt>
-        <dd>{{ vm.apiData.results.geboortedatum }}</dd>
-        <dt>Geboorteplaats</dt>
-        <dd>{{ vm.apiData.results.geboorteplaats }}</dd>
-        <dt>Geboorteland</dt>
-        <dd>{{ vm.apiData.results.geboorteland.omschrijving }}</dd>
-        <dt>Datum van overlijden</dt>
-        <dd>{{ vm.apiData.results.overlijdensdatum }}</dd>
-        <dt>Woonadres</dt>
-        <dd>
-          {{ vm.apiData.results.woonadres.openbareruimte_naam }} {{ vm.apiData.results.woonadres.huisnummer }}{{ vm.apiData.results.woonadres.huisletter }}<span ng-if="vm.apiData.results.woonadres.toevoeging">-{{ vm.apiData.results.woonadres.toevoeging }}</span> {{ vm.apiData.results.woonadres.postcode }} {{ vm.apiData.results.woonadres.woonplaats }}
-        </dd>
-        <dt>Woonadres buitenland</dt>
-        <dd>
-          {{ vm.apiData.results.woonadres.buitenland_adres }} {{ vm.apiData.results.woonadres.buitenland_woonplaats }} {{ vm.apiData.results.woonadres.buitenland_naam }} {{ vm.apiData.results.woonadres.buitenland_land.omschrijving }}
-        </dd>
-        <dt>Postadres</dt>
-        <dd>
-          {{ vm.apiData.results.postadres.openbareruimte_naam }} {{ vm.apiData.results.postadres.huisnummer }}{{ vm.apiData.results.postadres.huisletter }}<span ng-if="vm.apiData.results.postadres.toevoeging">-{{ vm.apiData.results.postadres.toevoeging }}</span> {{ vm.apiData.results.postadres.postcode }} {{ vm.apiData.results.postadres.woonplaats }}
-        </dd>
-        <dt>Postadres buitenland</dt>
-        <dd>
-          {{ vm.apiData.results.postadres.buitenland_adres }} {{ vm.apiData.results.postadres.buitenland_woonplaats }} {{ vm.apiData.results.postadres.buitenland_naam }} {{ vm.apiData.results.postadres.buitenland_land.omschrijving }}
-        </dd>
-        <dt>Postadres postbus</dt>
-        <dd>
-          {{ vm.apiData.results.postadres.postbus_nummer }} {{ vm.apiData.results.postadres.postbus_postcode }} {{ vm.apiData.results.postadres.postbus_woonplaats }}
-        </dd>
-      </dl>
-    </div>
-
-    <div class="default-box">
-        <dp-glossary-header definition="ZAKELIJK_RECHT" use-plural="true"></dp-glossary-header>
-
-        <dp-panel is-panel-visible="vm.isMoreInfoAvailable" type="warning" can-close="true" class-name="c-kadastraal-subject__warning">
-            Om alle gegevens (ook zakelijke rechten) te kunnen zien, moet je inloggen en
-            <a class="o-link-inline o-link-inline--light"
-               target="_blank"
-               href="http://intranet.amsterdam.nl/mdw-basisinformatie/projecten-0/programma-datapunt/autorisatie-atlas/">speciale bevoegdheden</a>
-            hebben. Zie
-            <dp-link class-name="o-link-inline o-link-inline--light"
-                     type="SHOW_PAGE"
-                     payload="{name: 'snel-wegwijs'}">Snel wegwijs</dp-link>
-            voor hulp bij in- of uitloggen.
+        <dp-panel is-panel-visible="vm.showMoreInfoWarning" type="warning" can-close="true">
+            Om kadastraal subjecten te kunnen bekijken, moet je als medewerker/ketenpartner van Gemeente Amsterdam _inloggen_ en _speciale bevoegdheden_ hebben.
         </dp-panel>
 
-        <dp-panel is-panel-visible="vm.hasInsufficientRights" type="warning" can-close="true" class-name="c-kadastraal-subject__warning">
-            Om alle gegevens (ook zakelijke rechten) te kunnen zien, moet je
-            <a class="o-link-inline o-link-inline--light"
-               target="_blank"
-               href="http://intranet.amsterdam.nl/mdw-basisinformatie/projecten-0/programma-datapunt/autorisatie-atlas/">speciale bevoegdheden</a>
-            hebben.
-        </dp-panel>
+        <div>
+            <!-- niet natuurlijke persoon -->
+            <dl class="c-key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === false">
+                <dt>Statutaire zetel</dt>
+                <dd>{{ vm.apiData.results.statutaire_zetel }}</dd>
+                <dt>Rechtsvorm</dt>
+                <dd>{{ vm.apiData.results.rechtsvorm.omschrijving }}</dd>
+                <dt>RSIN</dt>
+                <dd>{{ vm.apiData.results.rsin }}</dd>
+                <dt>KvK nummer</dt>
+                <dd>{{ vm.apiData.results.kvknummer }}</dd>
+                <dt>Woonadres</dt>
+                <dd>
+                    {{ vm.apiData.results.woonadres.openbareruimte_naam }} {{ vm.apiData.results.woonadres.huisnummer }}{{ vm.apiData.results.woonadres.huisletter }}<span ng-if="vm.apiData.results.woonadres.toevoeging">-{{ vm.apiData.results.woonadres.toevoeging }}</span> {{ vm.apiData.results.woonadres.postcode }} {{ vm.apiData.results.woonadres.woonplaats }}
+                </dd>
 
-        <dp-api-call ng-if="vm.apiData.results.rechten.count" endpoint="{{vm.apiData.results.rechten.href}}" partial="brk/subject-rechten"></dp-api-call>
+                <dt>Woonadres buitenland</dt>
+                <dd>
+                  {{ vm.apiData.results.woonadres.buitenland_adres }} {{ vm.apiData.results.woonadres.buitenland_woonplaats }} {{ vm.apiData.results.woonadres.buitenland_naam }} {{ vm.apiData.results.woonadres.buitenland_land.omschrijving }}
+                </dd>
+                <dt>Postadres</dt>
+                <dd>
+                  {{ vm.apiData.results.postadres.openbareruimte_naam }} {{ vm.apiData.results.postadres.huisnummer }}{{ vm.apiData.results.postadres.huisletter }}<span ng-if="vm.apiData.results.postadres.toevoeging">-{{ vm.apiData.results.postadres.toevoeging }}</span> {{ vm.apiData.results.postadres.postcode }} {{ vm.apiData.results.postadres.woonplaats }}
+                </dd>
+                <dt>Postadres buitenland</dt>
+                <dd>
+                  {{ vm.apiData.results.postadres.buitenland_adres }} {{ vm.apiData.results.postadres.buitenland_woonplaats }} {{ vm.apiData.results.postadres.buitenland_naam }} {{ vm.apiData.results.postadres.buitenland_land.omschrijving }}
+                </dd>
+                <dt>Postadres postbus</dt>
+                <dd>
+                  {{ vm.apiData.results.postadres.postbus_nummer }} {{ vm.apiData.results.postadres.postbus_postcode }} {{ vm.apiData.results.postadres.postbus_woonplaats }}
+                </dd>
+            </dl>
+
+            <!-- natuurlijke persoon -->
+            <dl class="c-key-value-list" ng-if="vm.apiData.results.is_natuurlijk_persoon === true">
+                <dt>Voornamen</dt>
+                <dd>{{ vm.apiData.results.voornamen }}</dd>
+                <dt>Voorvoegsels</dt>
+                <dd>{{ vm.apiData.results.voorvoegsels }}</dd>
+                <dt>Geslachtsnaam</dt>
+                <dd>{{ vm.apiData.results.naam }}</dd>
+                <dt>Geslacht</dt>
+                <dd>{{ vm.apiData.results.geslacht.omschrijving }}</dd>
+                <dt>Geboortedatum</dt>
+                <dd>{{ vm.apiData.results.geboortedatum }}</dd>
+                <dt>Geboorteplaats</dt>
+                <dd>{{ vm.apiData.results.geboorteplaats }}</dd>
+                <dt>Geboorteland</dt>
+                <dd>{{ vm.apiData.results.geboorteland.omschrijving }}</dd>
+                <dt>Datum van overlijden</dt>
+                <dd>{{ vm.apiData.results.overlijdensdatum }}</dd>
+                <dt>Woonadres</dt>
+                <dd>
+                    {{ vm.apiData.results.woonadres.openbareruimte_naam }} {{ vm.apiData.results.woonadres.huisnummer }}{{ vm.apiData.results.woonadres.huisletter }}<span ng-if="vm.apiData.results.woonadres.toevoeging">-{{ vm.apiData.results.woonadres.toevoeging }}</span> {{ vm.apiData.results.woonadres.postcode }} {{ vm.apiData.results.woonadres.woonplaats }}
+                </dd>
+                <dt>Woonadres buitenland</dt>
+                <dd>
+                    {{ vm.apiData.results.woonadres.buitenland_adres }} {{ vm.apiData.results.woonadres.buitenland_woonplaats }} {{ vm.apiData.results.woonadres.buitenland_naam }} {{ vm.apiData.results.woonadres.buitenland_land.omschrijving }}
+                </dd>
+                <dt>Postadres</dt>
+                <dd>
+                    {{ vm.apiData.results.postadres.openbareruimte_naam }} {{ vm.apiData.results.postadres.huisnummer }}{{ vm.apiData.results.postadres.huisletter }}<span ng-if="vm.apiData.results.postadres.toevoeging">-{{ vm.apiData.results.postadres.toevoeging }}</span> {{ vm.apiData.results.postadres.postcode }} {{ vm.apiData.results.postadres.woonplaats }}
+                </dd>
+                <dt>Postadres buitenland</dt>
+                <dd>
+                    {{ vm.apiData.results.postadres.buitenland_adres }} {{ vm.apiData.results.postadres.buitenland_woonplaats }} {{ vm.apiData.results.postadres.buitenland_naam }} {{ vm.apiData.results.postadres.buitenland_land.omschrijving }}
+                </dd>
+                <dt>Postadres postbus</dt>
+                <dd>
+                    {{ vm.apiData.results.postadres.postbus_nummer }} {{ vm.apiData.results.postadres.postbus_postcode }} {{ vm.apiData.results.postadres.postbus_woonplaats }}
+                </dd>
+            </dl>
+            <div class="default-box">
+                <dp-glossary-header definition="ZAKELIJK_RECHT" use-plural="true"></dp-glossary-header>
+
+                <dp-panel is-panel-visible="vm.showInsufficientRightsMessage" type="warning" can-close="true" class-name="c-kadastraal-subject__warning">
+                    Om alle gegevens (ook zakelijke rechten) te kunnen zien, moet je als medewerker
+                    <a class="o-link-inline o-link-inline--light"
+                       target="_blank"
+                       href="http://intranet.amsterdam.nl/mdw-basisinformatie/projecten-0/programma-datapunt/autorisatie-atlas/">speciale bevoegdheden</a>
+                    hebben.
+                </dp-panel>
+
+                <dp-api-call ng-if="vm.apiData.results.rechten.count" endpoint="{{vm.apiData.results.rechten.href}}" partial="brk/subject-rechten"></dp-api-call>
+            </div>
+        </div>
     </div>
 </div>
-

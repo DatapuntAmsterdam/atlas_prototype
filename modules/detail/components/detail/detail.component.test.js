@@ -8,6 +8,9 @@ describe('the dp-detail component', function () {
         mockedGeometryPoint = {type: 'Point', coordinates: 'FAKE_NUMMERAANDUIDING_POINT'},
         mockedGeometryMultiPolygon = {type: 'MultiPolygon', coordinates: 'FAKE_KADASTRAAL_OBJECT_MULTIPOLYGON'};
 
+    const naturalPersonEndPoint = 'http://www.fake-endpoint.com/brk/subject/123/';
+    const noneNaturalPersonEndPoint = 'http://www.fake-endpoint.com/brk/subject/456/';
+
     beforeEach(function () {
         angular.mock.module(
             'dpDetail',
@@ -33,14 +36,14 @@ describe('the dp-detail component', function () {
                                 dummy: 'B',
                                 something: -90
                             });
-                        } else if (endpoint === 'http://www.fake-endpoint.com/brk/subject/123/') {
+                        } else if (endpoint === naturalPersonEndPoint) {
                             q.resolve({
                                 _display: 'Ferdinand de Vries',
                                 dummy: 'C',
                                 something: 4,
                                 is_natuurlijk_persoon: true
                             });
-                        } else if (endpoint === 'http://www.fake-endpoint.com/brk/subject/456/') {
+                        } else if (endpoint === noneNaturalPersonEndPoint) {
                             q.resolve({
                                 _display: 'Ferdinand de Vries BV',
                                 dummy: 'C',
@@ -62,7 +65,7 @@ describe('the dp-detail component', function () {
                             subject = 'nummeraanduiding';
                         } else if (endpoint === 'http://www.fake-endpoint.com/brk/object/789/') {
                             subject = 'object';
-                        } else if (endpoint === 'http://www.fake-endpoint.com/brk/subject/123/') {
+                        } else if (endpoint === naturalPersonEndPoint) {
                             subject = 'subject';
                         }
 
@@ -75,7 +78,7 @@ describe('the dp-detail component', function () {
                             templateUrl += 'bag/nummeraanduiding';
                         } else if (endpoint === 'http://www.fake-endpoint.com/brk/object/789/') {
                             templateUrl += 'brk/object';
-                        } else if (endpoint === 'http://www.fake-endpoint.com/brk/subject/123/') {
+                        } else if (endpoint === naturalPersonEndPoint) {
                             templateUrl += 'brk/subject';
                         }
 
@@ -92,7 +95,7 @@ describe('the dp-detail component', function () {
                             q.resolve(mockedGeometryPoint);
                         } else if (endpoint === 'http://www.fake-endpoint.com/brk/object/789/') {
                             q.resolve(mockedGeometryMultiPolygon);
-                        } else if (endpoint === 'http://www.fake-endpoint.com/brk/subject/123/') {
+                        } else if (endpoint === naturalPersonEndPoint) {
                             q.resolve(null);
                         } else if (endpoint === 'http://www.fake-endpoint.amsterdam.nl/brk/geo/404/') {
                             q.reject();
@@ -122,28 +125,6 @@ describe('the dp-detail component', function () {
             }
         );
 
-        angular.mock.module(
-            'dpShared',
-            {
-                user: {
-                    isLoggedIn: false,
-                    isBevoegd: false,
-                    getUserType: function () {
-                        return this.isLoggedIn ? this.USER_TYPE.AUTHENTICATED : null;
-                    },
-                    getAuthorizationLevel: function () {
-                        return this.isBevoegd ? this.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS : null;
-                    },
-                    USER_TYPE: {
-                        AUTHENTICATED: 'AUTHENTICATED'
-                    },
-                    AUTHORIZATION_LEVEL: {
-                        EMPLOYEE_PLUS: 'EMPLOYEE_PLUS'
-                    }
-                }
-            }
-        );
-
         angular.mock.inject(function (
             _$compile_,
             _$rootScope_,
@@ -163,6 +144,9 @@ describe('the dp-detail component', function () {
         });
 
         spyOn(store, 'dispatch');
+        spyOn(user, 'getUserType').and.returnValue(null);
+        spyOn(user, 'getAuthorizationLevel').and.returnValue(null);
+        spyOn(user, 'meetsRequiredLevel').and.returnValue(false);
     });
 
     function getComponent (endpoint, isLoading) {
@@ -326,7 +310,7 @@ describe('the dp-detail component', function () {
     });
 
     it('sets the SHOW_DETAIL geometry payload to null if there is no geometry', function () {
-        getComponent('http://www.fake-endpoint.com/brk/subject/123/');
+        getComponent(naturalPersonEndPoint);
 
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_DETAIL,
@@ -346,66 +330,70 @@ describe('the dp-detail component', function () {
         expect(scope.vm.location).toEqual([51.123, 3.123]);
 
         // Something without geometry
-        scope.vm.endpoint = 'http://www.fake-endpoint.com/brk/subject/123/';
+        scope.vm.endpoint = naturalPersonEndPoint;
         scope.$apply();
         expect(scope.vm.location).toBeNull();
     });
 
-    it('shows a message that more info is available for natuurlijke personen and anonymous users', function () {
-        var component,
-            scope;
+    describe('the "natural kadastraal subject" warning message', () => {
+        beforeEach(() => {
+            user.getUserType.and.returnValue(user.USER_TYPE.AUTHENTICATED);
+            user.meetsRequiredLevel.and.returnValue(true);
+        });
 
-        user.isLoggedIn = false;
+        describe('a normal employee user', () => {
+            beforeEach(() => {
+                user.getAuthorizationLevel.and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE);
+            });
 
-        component = getComponent('http://www.fake-endpoint.com/brk/subject/123/');
-        scope = component.isolateScope();
+            it('shows a message that more info is available for "natuurlijke personen"', function () {
+                const component = getComponent(naturalPersonEndPoint);
 
-        expect(scope.vm.isMoreInfoAvailable).toBe(true);
+                const scope = component.isolateScope();
+                expect(scope.vm.showInsufficientRightsMessage).toBe(true);
+            });
 
-        scope.vm.endpoint = 'http://www.fake-endpoint.com/brk/subject/456/';
-        scope.$apply();
-        expect(scope.vm.isMoreInfoAvailable).toBe(false);
+            it('does not show a message that more info is available for none "natuurlijke personen"', function () {
+                const component = getComponent(noneNaturalPersonEndPoint);
+
+                const scope = component.isolateScope();
+                expect(scope.vm.showInsufficientRightsMessage).toBe(false);
+            });
+        });
+
+        it('does not show a message that more info is available employee plus users', function () {
+            user.getAuthorizationLevel.and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS);
+
+            const component = getComponent(naturalPersonEndPoint);
+
+            const scope = component.isolateScope();
+            expect(scope.vm.showInsufficientRightsMessage).toBe(false);
+        });
     });
 
-    it('shows a message that more info is available for natuurlijke personen and not bevoegde users', function () {
-        var component,
-            scope;
+    describe('the warning message', () => {
+        it('is shown if not logged in', () => {
+            const component = getComponent(naturalPersonEndPoint);
 
-        user.isLoggedIn = true;
-        user.isBevoegd = false;
+            const scope = component.isolateScope();
+            expect(scope.vm.showMoreInfoWarning).toBe(true);
+        });
+        it('is shown for a non-employee', () => {
+            user.getUserType.and.returnValue(user.USER_TYPE.AUTHENTICATED);
 
-        component = getComponent('http://www.fake-endpoint.com/brk/subject/123/');
-        scope = component.isolateScope();
+            const component = getComponent(naturalPersonEndPoint);
 
-        expect(scope.vm.hasInsufficientRights).toBe(true);
+            const scope = component.isolateScope();
+            expect(scope.vm.showMoreInfoWarning).toBe(true);
+        });
+        it('is not shown for an employee', () => {
+            user.getUserType.and.returnValue(user.USER_TYPE.AUTHENTICATED);
+            user.meetsRequiredLevel.and.returnValue(true);
 
-        scope.vm.endpoint = 'http://www.fake-endpoint.com/brk/subject/456/';
-        scope.$apply();
-        expect(scope.vm.hasInsufficientRights).toBe(false);
-    });
-
-    it('does not show a message that more info is available when a user is logged in and bevoegd', function () {
-        var component,
-            scope;
-
-        user.isLoggedIn = true;
-        user.isBevoegd = true;
-
-        component = getComponent('http://www.fake-endpoint.com/brk/subject/123/');
-        scope = component.isolateScope();
-
-        expect(scope.vm.isMoreInfoAvailable).toBe(false);
-        expect(scope.vm.hasInsufficientRights).toBe(false);
-
-        scope.vm.endpoint = 'http://www.fake-endpoint.com/brk/subject/456/';
-        scope.$apply();
-        expect(scope.vm.isMoreInfoAvailable).toBe(false);
-        expect(scope.vm.hasInsufficientRights).toBe(false);
-
-        user.isLoggedIn = false;
-        scope.$apply();
-        expect(scope.vm.isMoreInfoAvailable).toBe(false);
-        expect(scope.vm.hasInsufficientRights).toBe(false);
+            const component = getComponent(naturalPersonEndPoint);
+            const scope = component.isolateScope();
+            expect(scope.vm.showMoreInfoWarning).toBe(false);
+        });
     });
 
     it('gracefully handles a 404 with no data', function () {

@@ -26,6 +26,10 @@
                             <span ng-if="category.count === 1">{{category.label_singular}}</span>
                         </h2>
 
+                        <dp-panel ng-if="category.warning" is-panel-visible="category.warning" type="warning" can-close="true" class="qa-category-warning">
+                            {{ category.warning }}
+                        </dp-panel>
+
                         <dp-search-results-list category="category" limit-results="true"></dp-search-results-list>
 
                         <div ng-if="category.count > 10">

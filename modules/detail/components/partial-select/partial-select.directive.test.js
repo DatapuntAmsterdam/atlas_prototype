@@ -3,7 +3,8 @@ describe('The dp-partial-select directive', function () {
         $rootScope,
         $q,
         partialCompiler,
-        api;
+        api,
+        user;
 
     beforeEach(function () {
         angular.mock.module(
@@ -41,16 +42,19 @@ describe('The dp-partial-select directive', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _partialCompiler_, _api_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _partialCompiler_, _api_, _user_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
             partialCompiler = _partialCompiler_;
             api = _api_;
+            user = _user_;
         });
 
         spyOn(partialCompiler, 'getHtml').and.callThrough();
         spyOn(api, 'getByUrl').and.callThrough();
+        spyOn(user, 'getUserType').and.returnValue(null);
+        spyOn(user, 'meetsRequiredLevel').and.returnValue(false);
     });
 
     function getDirective (apiData, partial, loadMoreFn) {
@@ -99,5 +103,31 @@ describe('The dp-partial-select directive', function () {
         expect(hasMockedLoadMoreFunctionBeenCalled).toBe(false);
         scope.loadMore();
         expect(hasMockedLoadMoreFunctionBeenCalled).toBe(true);
+    });
+
+    describe('the warning message', () => {
+        it('is shown if not logged in', () => {
+            const directive = getDirective({foo: 'FAKE_API_DATA_A'}, 'my-template');
+
+            const scope = directive.isolateScope();
+            expect(scope.showMoreInfoWarning).toBe(true);
+        });
+        it('is shown for a non-employee', () => {
+            user.getUserType.and.returnValue(user.USER_TYPE.AUTHENTICATED);
+
+            const directive = getDirective({foo: 'FAKE_API_DATA_A'}, 'my-template');
+
+            const scope = directive.isolateScope();
+            expect(scope.showMoreInfoWarning).toBe(true);
+        });
+        it('is not shown for an employee', () => {
+            user.getUserType.and.returnValue(user.USER_TYPE.AUTHENTICATED);
+            user.meetsRequiredLevel.and.returnValue(true);
+
+            const directive = getDirective({foo: 'FAKE_API_DATA_A'}, 'my-template');
+
+            const scope = directive.isolateScope();
+            expect(scope.showMoreInfoWarning).toBe(false);
+        });
     });
 });

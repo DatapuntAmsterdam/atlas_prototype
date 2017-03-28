@@ -7,6 +7,7 @@ describe('The dp-search-results component', function () {
         element,
         search,
         geosearch,
+        user,
         ACTIONS,
         mockedSearchResults,
         mockedSearchResultsNextPage,
@@ -71,13 +72,16 @@ describe('The dp-search-results component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _store_, _search_, _geosearch_, _ACTIONS_) {
+        angular.mock.inject(function (
+            _$compile_, _$rootScope_, _$q_, _store_, _search_, _geosearch_, _user_, _ACTIONS_
+        ) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
             store = _store_;
             search = _search_;
             geosearch = _geosearch_;
+            user = _user_;
             ACTIONS = _ACTIONS_;
         });
 
@@ -266,6 +270,7 @@ describe('The dp-search-results component', function () {
             {
                 label_singular: 'Kadastraal object',
                 label_plural: 'Kadastrale objecten',
+                slug: 'subject',
                 results: [
                     {
                         label: 'ASD41AU00154G0000',
@@ -313,6 +318,7 @@ describe('The dp-search-results component', function () {
         mockedNoResults = [];
 
         spyOn(store, 'dispatch');
+        spyOn(user, 'meetsRequiredLevel');
     });
 
     function getComponent (numberOfResults, query, location, category) {
@@ -646,6 +652,66 @@ describe('The dp-search-results component', function () {
 
         it('shows the dp-straatbeeld-thumbnail component', function () {
             expect(component.find('dp-straatbeeld-thumbnail').length).toBe(1);
+        });
+    });
+
+    describe('the Kadastraal subject warning messages', function () {
+        it('should not be shown for an employee plus', function () {
+            user.meetsRequiredLevel.and.callFake(
+                required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS
+            );
+
+            const component = getComponent(22, null, [51.123, 4.789]);
+
+            const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+            expect(categoryNode.find('h2').text().trim()).toBe('Kadastraal object');
+
+            expect(categoryNode.find('.qa-category-warning').length).toBe(0);
+        });
+
+        it('should show a specific message for an employee users', function () {
+            user.meetsRequiredLevel.and.callFake(
+                required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE
+            );
+            const component = getComponent(22, null, [51.123, 4.789]);
+
+            const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+            expect(categoryNode.find('h2').text().trim()).toBe('Kadastraal object');
+
+            expect(categoryNode.find('.qa-category-warning').text()).toContain(
+                'Om alle gegevens (ook natuurlijke personen) te kunnen vinden,' +
+                ' moet je als medewerker _speciale bevoegdheden_ hebben.'
+            );
+        });
+
+        it('should show a general message for all other users', function () {
+            user.meetsRequiredLevel.and.returnValue(false);
+            const component = getComponent(22, null, [51.123, 4.789]);
+
+            const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+            expect(categoryNode.find('h2').text().trim()).toBe('Kadastraal object');
+
+            expect(categoryNode.find('.qa-category-warning').text()).toContain(
+                'Om kadastraal subjecten te kunnen vinden,' +
+                ' moet je als medewerker/ketenpartner van Gemeente Amsterdam _inloggen_' +
+                ' en _speciale bevoegdheden_ hebben.'
+            );
+        });
+
+        it('should update the message on authorization change', function () {
+            user.meetsRequiredLevel.and.callFake(
+                required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS
+            );
+            const component = getComponent(22, null, [51.123, 4.789]);
+            const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+            expect(categoryNode.find('h2').text().trim()).toBe('Kadastraal object');
+            expect(categoryNode.find('.qa-category-warning').length).toBe(0);
+
+            spyOn(user, 'getAuthorizationLevel').and.returnValue('foo'); // changed so $watch fires
+            user.meetsRequiredLevel.and.returnValue(false);
+            $rootScope.$apply();
+
+            expect(categoryNode.find('.qa-category-warning').length).toBe(1);
         });
     });
 

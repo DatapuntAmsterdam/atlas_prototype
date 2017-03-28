@@ -14,10 +14,17 @@
             controllerAs: 'vm'
         });
 
-    DpLayerSelectionController.$inject = ['BASE_LAYERS', 'overlays', 'store', 'ACTIONS'];
+    DpLayerSelectionController.$inject = ['$rootScope', 'BASE_LAYERS', 'overlays', 'store', 'user', 'ACTIONS'];
 
-    function DpLayerSelectionController (BASE_LAYERS, overlays, store, ACTIONS) {
+    function DpLayerSelectionController ($rootScope, BASE_LAYERS, overlays, store, user, ACTIONS) {
         var vm = this;
+
+        // Show warning if not logged in as employee
+        const unwatchAuthorizationLevel = $rootScope.$watch(() => user.getAuthorizationLevel(), () => {
+            vm.isMoreInfoAvailable = !(user.getUserType() === user.USER_TYPE.AUTHENTICATED &&
+            user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE));
+        });
+        $rootScope.$on('$destroy', unwatchAuthorizationLevel);
 
         vm.allBaseLayers = BASE_LAYERS;
 

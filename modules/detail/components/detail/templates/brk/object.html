@@ -6,6 +6,11 @@
             meta-data="vm.apiData">
         </dp-glossary-header>
 
+        <dp-panel is-panel-visible="vm.showMoreInfoWarning" type="warning" can-close="true">
+            Medewerkers/ketenpartners van Gemeente Amsterdam kunnen _inloggen_ om meer gegevens te zien:
+            koopsom, koopjaar en cultuur (on)bebouwd; zakelijke rechten en aantekeningen.
+        </dp-panel>
+
         <dl class="c-key-value-list">
             <dt>Kadastrale gemeentecode</dt>
             <dd>{{ vm.apiData.results.kadastrale_gemeente._display }}</dd>
