@@ -56,12 +56,15 @@
             vm.showContent = false;
             vm.isLoading = true;
 
-            dataSelectionApi.query(vm.state.dataset,
-                vm.state.view,
-                vm.state.filters,
-                vm.currentPage,
-                vm.state.query,
-                vm.state.geometryFilter.markers).then(data => {
+            dataSelectionApi
+                .query(
+                    vm.state.dataset,
+                    vm.state.view,
+                    vm.state.filters,
+                    vm.currentPage,
+                    vm.state.query,
+                    vm.state.geometryFilter.markers)
+                .then(data => {
                     vm.availableFilters = data.filters;
 
                     vm.data = data.data;
