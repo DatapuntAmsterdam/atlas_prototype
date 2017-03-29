@@ -112,7 +112,11 @@
          * @returns {number}
          */
         static toPrecision (n, decimals) {
-            return Number(Math.round(n + `e${decimals}`) + `e-${decimals}`);
+            if (angular.isArray(n)) {
+                return n.map(item => BaseCoder.toPrecision(item, decimals));
+            } else {
+                return Number(Math.round(n + `e${decimals}`) + `e-${decimals}`);
+            }
         }
 
         /**
