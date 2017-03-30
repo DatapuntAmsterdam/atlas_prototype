@@ -13,66 +13,7 @@
             getByUri
         };
 
-        // function getByUrl2 (url, params, cancel) {
-        //     const token = user.getAccessToken();
-        //     if (token) {
-        //         return getByUrlWithToken(url, params, cancel, token);
-        //     } else if (user.getRefreshToken()) {
-        //         // user is logging in, refresh token is available, access token not yet
-        //         const defer = $q.defer();
-        //
-        //         const interval = $interval(() => {
-        //             if (!user.getRefreshToken() || user.getAccessToken()) {
-        //                 // Refresh token was invalid or access token has been received
-        //                 $interval.cancel(interval);
-        //                 defer.resolve(getByUrl(url, params, cancel));
-        //             }
-        //         }, 250, 20);    // try every 1/4 second, for max 20 * 250 = 5 seconds
-        //
-        //         // On interval ends resolve without a token
-        //         // interval.then(() => {
-        //         //     defer.resolve(getByUrlWithToken(url, params, cancel, null));
-        //         // });
-        //
-        //         return defer.promise;
-        //     }
-        // }
-        //
-
-        function getByUrl (url, params, cancel) {
-            const token = user.getAccessToken();
-            if (token) {
-                return getByUrlWithToken(url, params, cancel, user.getAccessToken());
-            }
-            // else if (user.getRefreshToken()) {
-            //     // user is logging in, refresh token is available, access token not yet
-            //     const defer = $q.defer();
-            //
-            //     const interval = $interval(() => {
-            //         if (!user.getRefreshToken() || user.getAccessToken()) {
-            //             // Refresh token was invalid or access token has been received
-            //             $interval.cancel(interval);
-            //             defer.resolve(getByUrl(url, params, cancel));
-            //         }
-            //     }, 250, 20);    // try every 1/4 second, for max 20 * 250 = 5 seconds
-            //
-            //     // On interval ends resolve without a token
-            //     // interval.then(() => {
-            //     //     defer.resolve(getByUrlWithToken(url, params, cancel, null));
-            //     // });
-            //
-            //     return defer.promise;
-            // }
-        }
-
-        /**
-         *
-         * @param {string} url
-         * @param {Object} params
-         * @param {Promise} cancel - an optional promise ($q.defer()) to be able to cancel the request
-         * @returns {Promise}
-         */
-        function getByUrlWithToken (url, params, cancel, token) {
+        function getWithToken (url, params, cancel, token) {
             const headers = {};
 
             if (token) {
@@ -106,6 +47,38 @@
                         cancel.reject();
                     }
                 });
+        }
+
+        /**
+         *
+         * @param {string} url
+         * @param {Object} params
+         * @param {Promise} cancel - an optional promise ($q.defer()) to be able to cancel the request
+         * @returns {Promise}
+         */
+        function getByUrl (url, params, cancel) {
+            let token = user.getAccessToken();
+            if (token) {
+                return getWithToken(url, params, cancel, token);
+            } else if (user.getRefreshToken()) {
+                // user is logging in, refresh token is available, access token not yet
+                const defer = $q.defer();
+                const interval = $interval(() => {
+                    token = user.getAccessToken();
+                    if (!user.getRefreshToken() || token) {
+                        // Refresh token was invalid or access token has been received
+                        $interval.cancel(interval);
+                        defer.resolve(getWithToken(url, params, cancel, token));
+                    }
+                }, 250, 20);    // try every 1/4 second, for max 20 * 250 = 5 seconds
+
+                // On interval ends resolve without a token
+                interval.then(() => defer.resolve(getWithToken(url, params, cancel, null)));
+
+                return defer.promise;
+            } else {
+                return getWithToken(url, params, cancel, null);
+            }
         }
 
         function getByUri (uri, params) {

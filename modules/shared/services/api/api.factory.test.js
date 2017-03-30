@@ -103,6 +103,26 @@ describe('The api factory', function () {
         expect(returnValue).toEqual(mockedApiData);
     });
 
+    it('waits for an access token if user is logging in for max 5 seconds', function () {
+        var returnValue;
+
+        spyOn(user, 'getRefreshToken').and.returnValue(true);
+        spyOn(user, 'getAccessToken').and.returnValue(false);
+
+        api.getByUrl('http://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/').then(function (data) {
+            returnValue = data;
+        });
+
+        $rootScope.$digest();
+        $httpBackend.verifyNoOutstandingRequest();
+
+        $interval.flush(5500);   // force end of interval
+        $rootScope.$digest();
+
+        $httpBackend.flush();
+        expect(returnValue).toEqual(mockedApiData);
+    });
+
     it('getByUrl optionally accepts a promise to allow for cancelling the request', function () {
         const cancel = $q.defer();
 
