@@ -101,6 +101,7 @@
         function onAccessToken (token) {
             setError();
             user.setAccessToken(token);
+            restorePath();  // Restore path from session
             tokenLoop(STATE.ON_ACCESS_TOKEN);
         }
 
@@ -125,6 +126,7 @@
                 'code: ${response.status}, status: ${response.statusText}.',
                 response.status,
                 response.statusText);
+            restorePath();  // Restore path from session
             tokenLoop(state);
         }
 
@@ -141,16 +143,11 @@
         function restorePath () {
             let params = storage.session.getItem(CALLBACK_PARAMS);
             storage.session.removeItem(CALLBACK_PARAMS);
-
-            params = params && angular.fromJson(params);    // decode params
-            if (!(params && Object.keys(params).length)) {
-                // set params to default state
-                const stateUrlConverter = applicationState.getStateUrlConverter();
-                params = stateUrlConverter.state2params(stateUrlConverter.getDefaultState());
+            if (params) {
+                params = params && angular.fromJson(params);    // decode params
+                $location.replace();    // overwrite the existing location (prevent back button to re-login)
+                $location.search(params);
             }
-
-            $location.replace();    // overwrite the existing location (prevent back button to re-login)
-            $location.search(params);
         }
 
         function login () {     // redirect to external authentication provider
@@ -162,7 +159,6 @@
         }
 
         function handleCallback (params) {  // request user token with returned authorization parameters from callback
-            restorePath();  // Restore path from session
             RequestRefreshToken(params);
         }
 

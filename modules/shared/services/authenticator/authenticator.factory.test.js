@@ -184,6 +184,7 @@ describe(' The authenticator factory', function () {
         spyOn(user, 'setAccessToken');
         spyOn($location, 'replace');
         spyOn($location, 'search');
+        spyOn(storage.session, 'getItem').and.returnValue(angular.toJson({one: 1}));
 
         $httpBackend.whenGET(AUTH_PATH + '/siam/token?a-select-server=1&aselect_credentials=2&rid=3')
             .respond('token');
@@ -194,8 +195,41 @@ describe(' The authenticator factory', function () {
 
         expect(user.setRefreshToken).toHaveBeenCalledWith('token', user.USER_TYPE.AUTHENTICATED);
         expect($location.replace).toHaveBeenCalled();
-        expect($location.search).toHaveBeenCalledWith({default: 'state'});
+        expect($location.search).toHaveBeenCalledWith({one: 1});
         expect(user.setAccessToken).toHaveBeenCalledWith('accesstoken');
+        $httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it('returns to the saved callback path on a refresh token error', function () {
+        spyOn($location, 'replace');
+        spyOn($location, 'search');
+        spyOn(storage.session, 'getItem').and.returnValue(angular.toJson({one: 1}));
+
+        $httpBackend.whenGET(AUTH_PATH + '/siam/token?a-select-server=1&aselect_credentials=2&rid=3')
+            .respond(400, 'refresh token error');
+
+        authenticator.handleCallback({one: 1, 'a-select-server': 1, 'aselect_credentials': 2, 'rid': 3});
+        $httpBackend.flush();
+
+        expect($location.replace).toHaveBeenCalled();
+        expect($location.search).toHaveBeenCalledWith({one: 1});
+        $httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it('returns to the saved callback path on an access token error', function () {
+        spyOn($location, 'replace');
+        spyOn($location, 'search');
+        spyOn(storage.session, 'getItem').and.returnValue(angular.toJson({one: 1}));
+
+        $httpBackend.whenGET(AUTH_PATH + '/siam/token?a-select-server=1&aselect_credentials=2&rid=3')
+            .respond('token');
+        $httpBackend.whenGET(AUTH_PATH + '/accesstoken').respond(400, 'accesstoken error');
+
+        authenticator.handleCallback({one: 1, 'a-select-server': 1, 'aselect_credentials': 2, 'rid': 3});
+        $httpBackend.flush();
+
+        expect($location.replace).toHaveBeenCalled();
+        expect($location.search).toHaveBeenCalledWith({one: 1});
         $httpBackend.verifyNoOutstandingRequest();
     });
 
@@ -214,7 +248,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('defaults to home page when no saved callback path can be found', function () {
+    it('stays at home page when no saved callback path can be found', function () {
         spyOn($location, 'search');
         spyOn(storage.session, 'getItem').and.returnValue(null);
 
@@ -225,7 +259,7 @@ describe(' The authenticator factory', function () {
         authenticator.handleCallback({'a-select-server': 1, 'aselect_credentials': 2, 'rid': 3});
         $httpBackend.flush();
 
-        expect($location.search).toHaveBeenCalledWith({default: 'state'});
+        expect($location.search).not.toHaveBeenCalled();
         $httpBackend.verifyNoOutstandingRequest();
     });
 
