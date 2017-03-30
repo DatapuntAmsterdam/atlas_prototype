@@ -112,6 +112,34 @@ describe('The dp-menu component', () => {
 
             expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('user (bevoegd)');
         });
+
+        it('shortens the name in every possible way', () => {
+            spyOn(user, 'getName').and.returnValue('longusername');
+            spyOn(user, 'getAuthorizationLevel').and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE);
+
+            const component = getComponent('tall');
+
+            // Name too long; ellipsis
+            expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('longusern...');
+
+            // Name only one character too long; no ellipsis
+            user.getName.and.returnValue('longuserna');
+            $rootScope.$digest();
+            expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('longuserna');
+
+            // User bevoegd
+            user.getAuthorizationLevel.and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS);
+
+            // Name too long; ellipsis
+            $rootScope.$digest();
+            expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('long...(bevoegd)');
+
+            // Name only one character too long; no ellipsis
+            user.getName.and.returnValue('longu');
+            user.getAuthorizationLevel.and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS);
+            $rootScope.$digest();
+            expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('longu (bevoegd)');
+        });
     });
 
     describe('the login button', () => {

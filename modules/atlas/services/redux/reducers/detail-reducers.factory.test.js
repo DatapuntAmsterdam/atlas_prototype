@@ -37,12 +37,12 @@ describe('The detailReducers factory', function () {
 
     describe('FETCH_DETAIL', function () {
         it('sets the api endpoint for detail', function () {
-            var payload = 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/123/',
+            var payload = 'https://api.data.amsterdam.nl/bag/verblijfsobject/123/',
                 output;
 
             output = detailReducers.FETCH_DETAIL(defaultState, payload);
 
-            expect(output.detail.endpoint).toBe('https://api.datapunt.amsterdam.nl/bag/verblijfsobject/123/');
+            expect(output.detail.endpoint).toBe('https://api.data.amsterdam.nl/bag/verblijfsobject/123/');
         });
 
         it('sets loading indicators for map and detail', function () {

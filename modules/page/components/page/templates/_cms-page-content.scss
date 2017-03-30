@@ -47,3 +47,18 @@
     }
   }
 }
+
+.s-cms-page-content__toc {
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: $primary-dark;
+    text-decoration: none;
+
+    &:hover {
+      color: $primary-contrast;
+    }
+  }
+}

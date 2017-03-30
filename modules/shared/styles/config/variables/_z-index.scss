@@ -1,0 +1,7 @@
+$body-z-index: 1;
+/* Content with a fixed position (header, error panel) should be displayed
+ * above the body */
+$fixed-position-z-index: 2;
+/* Fixed position that needs to be positioned on top of some other fixed
+ * positioned element. */
+$on-top-z-index: 3;

@@ -1,27 +1,19 @@
 .c-layer-selection {
   height: 100%;
-  border-width: 0 1px 1px;
-  border-style: solid;
-  border-color: $secondary-gray40;
 }
 
 .c-layer-selection__heading {
-  @include font-size($m-header-font);
   position: relative;
   height: $button-size;
-  padding-right: $base-whitespace;
-  padding-left: $base-whitespace;
-  background-color: $secondary-gray40;
-  color: $primary-light;
-  line-height: $button-size;
+  margin: $base-whitespace;
 }
 
 .c-layer-selection__close {
-  @include icon-button("close", "red", "");
+  @include icon-button("close", "transparent");
 
   position: absolute;
   top: 0;
-  right: -1px;
+  right: 0;
 }
 
 

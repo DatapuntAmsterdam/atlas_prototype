@@ -5,9 +5,9 @@
         .module('dpShared')
         .factory('googleSheet', googleSheetFactory);
 
-    googleSheetFactory.$inject = ['$q', '$window', '$sce', 'markdownParser', 'GOOGLE_SHEET_CMS'];
+    googleSheetFactory.$inject = ['$q', '$window', '$sce', 'environment', 'api', 'markdownParser', 'GOOGLE_SHEET_CMS'];
 
-    function googleSheetFactory ($q, $window, $sce, markdownParser, GOOGLE_SHEET_CMS) {
+    function googleSheetFactory ($q, $window, $sce, environment, api, markdownParser, GOOGLE_SHEET_CMS) {
         const sheets = {};    // local cache of parsed sheets
 
         return {
@@ -15,32 +15,57 @@
         };
 
         function getContents (key, index) {
-            const defer = $q.defer();
+            const defer = $q.defer(),
+                getSheet = GOOGLE_SHEET_CMS.getStatic[environment.NAME] ? getStaticSheet : getDynamicSheet;
 
             if (sheets[key] && sheets[key][index]) {
                 defer.resolve(sheets[key][index]);  // resolves to the value or the promise
             } else {
-                // Create a temporary function in the global scope that can be called by the google script
                 sheets[key] = sheets[key] || {};
-                sheets[key][index] = defer.promise; // later replaced by its contents
-                const callbackName = 'googleScriptCallback_' + key + '_' + index;
-                $window[callbackName] = (contents) => {
-                    sheets[key][index] = parseContents(contents);
-                    defer.resolve(sheets[key][index]);
+                let result = {
+                    feed: {
+                        title: ''
+                    },
+                    entries: []
                 };
-
-                // Create the script
-                const script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.src =
-                    'https://spreadsheets.google.com/feeds/list/' +
-                    key +
-                    '/' +
-                    index +
-                    '/public/basic?alt=json-in-script&callback=' +
-                    callbackName;
-                document.head.appendChild(script);
+                getSheet(key, index)
+                    .then(contents => result = parseContents(contents))
+                    .finally(
+                        () => {
+                            sheets[key][index] = result;
+                            defer.resolve(sheets[key][index]);
+                        });
             }
+
+            return defer.promise;
+        }
+
+        function getStaticSheet (key, index) {
+            // The 'static' version of the sheet is accessed by url
+            // The contents is refreshed on a daily basis or on demand by a curl script that is run by Jenkins
+            // Like curl https://spreadsheets.google.com/feeds/list/$KEY/$INDEX/public/basic?alt=json > [somefile]
+            return api.getByUrl(`${GOOGLE_SHEET_CMS.staticAddress}/${key}.${index}.json`);
+        }
+
+        function getDynamicSheet (key, index) {
+            // The 'dynamic' version of the sheet is accessed by calling a Google script from the head of the document
+            // The script accepts a callback method to receive the contents in json format
+            const defer = $q.defer(),
+                callbackName = 'googleScriptCallback_' + key + '_' + index;
+
+            $window[callbackName] = contents => defer.resolve(contents);
+
+            // Create the script
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src =
+                'https://spreadsheets.google.com/feeds/list/' +
+                key +
+                '/' +
+                index +
+                '/public/basic?alt=json-in-script&callback=' +
+                callbackName;
+            document.head.appendChild(script);
 
             return defer.promise;
         }

@@ -16,9 +16,11 @@
             controllerAs: 'vm'
         });
 
-    DpSearchResultsController.$inject = ['$scope', 'search', 'geosearch', 'TabHeader', 'store', 'ACTIONS'];
+    DpSearchResultsController.$inject = [
+        '$rootScope', '$scope', 'search', 'geosearch', 'TabHeader', 'user', 'store', 'ACTIONS'
+    ];
 
-    function DpSearchResultsController ($scope, search, geosearch, TabHeader, store, ACTIONS) {
+    function DpSearchResultsController ($rootScope, $scope, search, geosearch, TabHeader, user, store, ACTIONS) {
         const vm = this;
 
         /**
@@ -47,6 +49,10 @@
             }
         });
 
+        // Show warning depending on authorization
+        const unwatchAuthorizationLevel = $rootScope.$watch(() => user.getAuthorizationLevel(), updateWarningMessage);
+        $rootScope.$on('$destroy', unwatchAuthorizationLevel);
+
         vm.loadMore = function () {
             vm.isLoadMoreLoading = true;
 
@@ -73,9 +79,9 @@
             const isQuery = angular.isString(query);
             if (isQuery) {
                 if (angular.isString(category) && category.length) {
-                    search.search(query, category).then(setSearchResults);
+                    search.search(query, category).then(setSearchResults).then(updateWarningMessage);
                 } else {
-                    search.search(query).then(setSearchResults);
+                    search.search(query).then(setSearchResults).then(updateWarningMessage);
                 }
             }
             return isQuery;
@@ -84,9 +90,26 @@
         function searchByLocation (location) {
             const isLocation = angular.isArray(location);
             if (isLocation) {
-                geosearch.search(location).then(setSearchResults);
+                geosearch.search(location).then(setSearchResults).then(updateWarningMessage);
             }
             return isLocation;
+        }
+
+        function updateWarningMessage () {
+            const kadastraleSubject = vm.searchResults &&
+                vm.searchResults.find(category => category.slug === 'subject');
+            if (kadastraleSubject) {
+                if (user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS)) {
+                    delete kadastraleSubject.warning;
+                } else if (user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE)) {
+                    kadastraleSubject.warning = 'Om alle gegevens (ook natuurlijke personen) te kunnen vinden, moet' +
+                        ' je als medewerker speciale bevoegdheden hebben. Zie Help > Bediening dataportaal > Inloggen.';
+                } else {
+                    kadastraleSubject.warning = 'Om kadastraal subjecten te kunnen vinden,' +
+                        ' moet je als medewerker/ketenpartner van Gemeente Amsterdam inloggen' +
+                        ' en speciale bevoegdheden hebben. Zie Help > Bediening dataportaal > Inloggen.';
+                }
+            }
         }
 
         /**
@@ -105,6 +128,7 @@
             });
 
             vm.searchResults = searchResults;
+
             vm.hasLoadMore = function () {
                 return angular.isString(vm.category) &&
                     vm.searchResults[0].count > vm.searchResults[0].results.length &&

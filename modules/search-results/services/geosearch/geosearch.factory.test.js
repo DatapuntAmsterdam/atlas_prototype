@@ -63,11 +63,11 @@ describe('The geosearch factory', function () {
                         // Used to retrieve the pand data and related verblijfsobjecten
                         var q = $q.defer();
 
-                        if (endpoint === 'https://api.datapunt.amsterdam.nl/bag/pand/0456789/') {
+                        if (endpoint === 'https://api.data.amsterdam.nl/bag/pand/0456789/') {
                             q.resolve(mockedPandApiResults);
-                        } else if (endpoint === 'https://api.datapunt.amsterdam.nl/bag/standplaats/0456789/') {
+                        } else if (endpoint === 'https://api.data.amsterdam.nl/bag/standplaats/0456789/') {
                             q.resolve(mockedStandplaatsApiResults);
-                        } else if (endpoint === 'https://api.datapunt.amsterdam.nl/bag/nummeraanduiding/?pand=0456789'
+                        } else if (endpoint === 'https://api.data.amsterdam.nl/bag/nummeraanduiding/?pand=0456789'
                             ) {
                             q.resolve(mockedNummeraanduidingApiResults);
                         }
@@ -114,7 +114,7 @@ describe('The geosearch factory', function () {
                         display: '12981535',
                         id: '12981535',
                         type: 'meetbouten/meetbout',
-                        uri: 'https://api.datapunt.amsterdam.nl/meetbouten/meetbout/12981535/'
+                        uri: 'https://api.data.amsterdam.nl/meetbouten/meetbout/12981535/'
                     }
                 }
             ]
@@ -128,28 +128,28 @@ describe('The geosearch factory', function () {
                         display: 'De Pijp / Rivierenbuurt',
                         id: 'DX12',
                         type: 'gebieden/gebiedsgerichtwerken',
-                        uri: 'https://api.datapunt.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX12/'
+                        uri: 'https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX12/'
                     }
                 }, {
                     properties: {
                         display: 'Nieuwe Pijp',
                         id: '3630012052060',
                         type: 'gebieden/buurtcombinatie',
-                        uri: 'https://api.datapunt.amsterdam.nl/gebieden/buurtcombinatie/3630012052060/'
+                        uri: 'https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052060/'
                     }
                 }, {
                     properties: {
                         display: 'Zuid',
                         id: '03630011872038',
                         type: 'gebieden/stadsdeel',
-                        uri: 'https://api.datapunt.amsterdam.nl/gebieden/stadsdeel/03630011872038/'
+                        uri: 'https://api.data.amsterdam.nl/gebieden/stadsdeel/03630011872038/'
                     }
                 }, {
                     properties: {
                         display: 'Willibrordusbuurt',
                         id: '03630000000788',
                         type: 'gebieden/buurt',
-                        uri: 'https://api.datapunt.amsterdam.nl/gebieden/buurt/03630000000788/'
+                        uri: 'https://api.data.amsterdam.nl/gebieden/buurt/03630000000788/'
                     }
                 }, {
                     properties: {
@@ -157,14 +157,14 @@ describe('The geosearch factory', function () {
                         id: '03630011950509',
                         opr_type: 'Water',
                         type: 'bag/openbareruimte',
-                        uri: 'https://api.datapunt.amsterdam.nl/bag/openbareruimte/03630011950509/'
+                        uri: 'https://api.data.amsterdam.nl/bag/openbareruimte/03630011950509/'
                     }
                 }, {
                     properties: {
                         display: 'ASD14R06669G0000',
                         id: 'NL.KAD.OnroerendeZaak.11550666970000',
                         type: 'kadaster/kadastraal_object',
-                        uri: 'https://api.datapunt.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11550666970000/'
+                        uri: 'https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11550666970000/'
                     }
                 }
             ]
@@ -200,7 +200,7 @@ describe('The geosearch factory', function () {
                 display: '0456789',
                 id: '0456789',
                 type: 'bag/pand',
-                uri: 'https://api.datapunt.amsterdam.nl/bag/pand/456789/'
+                uri: 'https://api.data.amsterdam.nl/bag/pand/456789/'
             }
         };
 
@@ -209,7 +209,7 @@ describe('The geosearch factory', function () {
             count: 1,
             results: [
                 {
-                    endpoint: 'https://api.datapunt.amsterdam.nl/bag/pand/0456789/',
+                    endpoint: 'https://api.data.amsterdam.nl/bag/pand/0456789/',
                     label: '0456789'
                 }
             ]
@@ -218,12 +218,12 @@ describe('The geosearch factory', function () {
         mockedPandApiResults = {
             _links: {
                 self: {
-                    href: 'https://api.datapunt.amsterdam.nl/bag/pand/0456789/'
+                    href: 'https://api.data.amsterdam.nl/bag/pand/0456789/'
                 }
             },
             pandidentificatie: '0456789',
             _adressen: {
-                href: 'https://api.datapunt.amsterdam.nl/bag/nummeraanduiding/?pand=0456789'
+                href: 'https://api.data.amsterdam.nl/bag/nummeraanduiding/?pand=0456789'
             }
         };
 
@@ -231,7 +231,7 @@ describe('The geosearch factory', function () {
             properties: {
                 display: '0456789',
                 type: 'bag/standplaats',
-                uri: 'https://api.datapunt.amsterdam.nl/bag/standplaats/456789/'
+                uri: 'https://api.data.amsterdam.nl/bag/standplaats/456789/'
             }
         };
 
@@ -240,7 +240,7 @@ describe('The geosearch factory', function () {
             count: 1,
             results: [
                 {
-                    endpoint: 'https://api.datapunt.amsterdam.nl/bag/standplaats/0456789/',
+                    endpoint: 'https://api.data.amsterdam.nl/bag/standplaats/0456789/',
                     label: '0456789'
                 }
             ]
@@ -249,7 +249,7 @@ describe('The geosearch factory', function () {
         mockedStandplaatsApiResults = {
             _links: {
                 self: {
-                    href: 'https://api.datapunt.amsterdam.nl/bag/standplaats/0456789/'
+                    href: 'https://api.data.amsterdam.nl/bag/standplaats/0456789/'
                 }
             },
             standplaatsidentificatie: '123456',
@@ -271,22 +271,22 @@ describe('The geosearch factory', function () {
             results: [
                 {
                     label: 'Amsteldijk 32-1',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630000567203/',
+                    endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630000567203/',
                     subtype: null
                 },
                 {
                     label: 'Amsteldijk 32-2',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630000567204/',
+                    endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630000567204/',
                     subtype: null
                 },
                 {
                     label: 'Amsteldijk 32-3',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630000567205/',
+                    endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630000567205/',
                     subtype: null
                 },
                 {
                     label: 'Ceintuurbaan 263',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630000602864/',
+                    endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630000602864/',
                     subtype: null
                 }
             ],
@@ -307,22 +307,22 @@ describe('The geosearch factory', function () {
             results: [
                 {
                     label: 'Vestiging 1',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/handelsregister/vestiging/03630000567203/',
+                    endpoint: 'https://api.data.amsterdam.nl/handelsregister/vestiging/03630000567203/',
                     subtype: null
                 },
                 {
                     label: 'Vestiging 2',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/handelsregister/vestiging/03630000567204/',
+                    endpoint: 'https://api.data.amsterdam.nl/handelsregister/vestiging/03630000567204/',
                     subtype: null
                 },
                 {
                     label: 'Vestiging 3',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/handelsregister/vestiging/03630000567205/',
+                    endpoint: 'https://api.data.amsterdam.nl/handelsregister/vestiging/03630000567205/',
                     subtype: null
                 },
                 {
                     label: 'Vestiging 4',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/handelsregister/vestiging/03630000602864/',
+                    endpoint: 'https://api.data.amsterdam.nl/handelsregister/vestiging/03630000602864/',
                     subtype: null
                 }
             ],
@@ -411,14 +411,14 @@ describe('The geosearch factory', function () {
             expectedSearchResults[2].useIndenting = true;
             expectedSearchResults[2].more = {
                 label: 'Bekijk alle 2 adressen binnen dit pand',
-                endpoint: 'https://api.datapunt.amsterdam.nl/bag/pand/0456789/'
+                endpoint: 'https://api.data.amsterdam.nl/bag/pand/0456789/'
             };
 
             expect(api.getByUrl).toHaveBeenCalledTimes(2);
             expect(api.getByUrl)
-                .toHaveBeenCalledWith('https://api.datapunt.amsterdam.nl/bag/pand/0456789/');
+                .toHaveBeenCalledWith('https://api.data.amsterdam.nl/bag/pand/0456789/');
             expect(api.getByUrl)
-                .toHaveBeenCalledWith('https://api.datapunt.amsterdam.nl/bag/nummeraanduiding/?pand=0456789');
+                .toHaveBeenCalledWith('https://api.data.amsterdam.nl/bag/nummeraanduiding/?pand=0456789');
 
             expect(searchFormatter.formatCategory).toHaveBeenCalledWith('adres', mockedNummeraanduidingApiResults);
             expect(searchResults).toEqual(expectedSearchResults);
@@ -449,11 +449,11 @@ describe('The geosearch factory', function () {
             expectedSearchResults[2].useIndenting = true;
             expectedSearchResults[2].more = {
                 label: 'Bekijk alle 2 vestigingen binnen dit pand',
-                endpoint: 'https://api.datapunt.amsterdam.nl/bag/pand/0456789/'
+                endpoint: 'https://api.data.amsterdam.nl/bag/pand/0456789/'
             };
 
             expect(api.getByUrl)
-                .toHaveBeenCalledWith('https://api.datapunt.amsterdam.nl/bag/pand/0456789/');
+                .toHaveBeenCalledWith('https://api.data.amsterdam.nl/bag/pand/0456789/');
 
             expect(api.getByUri)
                 .toHaveBeenCalledWith('handelsregister/vestiging/?pand=0456789');
@@ -483,20 +483,20 @@ describe('The geosearch factory', function () {
             expectedSearchResults[2].useIndenting = true;
             expectedSearchResults[2].more = {
                 label: 'Bekijk alle 2 adressen binnen dit pand',
-                endpoint: 'https://api.datapunt.amsterdam.nl/bag/pand/0456789/'
+                endpoint: 'https://api.data.amsterdam.nl/bag/pand/0456789/'
             };
 
             expectedSearchResults[3].useIndenting = true;
             expectedSearchResults[3].more = {
                 label: 'Bekijk alle 2 vestigingen binnen dit pand',
-                endpoint: 'https://api.datapunt.amsterdam.nl/bag/pand/0456789/'
+                endpoint: 'https://api.data.amsterdam.nl/bag/pand/0456789/'
             };
 
             expect(api.getByUrl).toHaveBeenCalledTimes(2);
             expect(api.getByUrl)
-                .toHaveBeenCalledWith('https://api.datapunt.amsterdam.nl/bag/pand/0456789/');
+                .toHaveBeenCalledWith('https://api.data.amsterdam.nl/bag/pand/0456789/');
             expect(api.getByUrl)
-                .toHaveBeenCalledWith('https://api.datapunt.amsterdam.nl/bag/nummeraanduiding/?pand=0456789');
+                .toHaveBeenCalledWith('https://api.data.amsterdam.nl/bag/nummeraanduiding/?pand=0456789');
 
             expect(api.getByUri)
                 .toHaveBeenCalledWith('handelsregister/vestiging/?pand=0456789');
@@ -552,12 +552,12 @@ describe('The geosearch factory', function () {
 
             expectedSearchResults[2].more = {
                 label: 'Bekijk alle 2 vestigingen binnen deze standplaats',
-                endpoint: 'https://api.datapunt.amsterdam.nl/bag/standplaats/0456789/'
+                endpoint: 'https://api.data.amsterdam.nl/bag/standplaats/0456789/'
             };
 
             expect(api.getByUrl).toHaveBeenCalledTimes(1);
             expect(api.getByUrl)
-                .toHaveBeenCalledWith('https://api.datapunt.amsterdam.nl/bag/standplaats/0456789/');
+                .toHaveBeenCalledWith('https://api.data.amsterdam.nl/bag/standplaats/0456789/');
 
             expect(api.getByUri)
                 .toHaveBeenCalledWith('handelsregister/vestiging/?nummeraanduiding=0123456789');
@@ -588,7 +588,7 @@ describe('The geosearch factory', function () {
 
             expectedSearchResults[2].more = {
                 label: 'Bekijk alle 2 vestigingen binnen deze ligplaats',
-                endpoint: 'https://api.datapunt.amsterdam.nl/bag/standplaats/0456789/'
+                endpoint: 'https://api.data.amsterdam.nl/bag/standplaats/0456789/'
             };
 
             expect(searchResults).toEqual(expectedSearchResults);

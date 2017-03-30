@@ -40,7 +40,7 @@
 
         vm.loadScene = function () {
             store.dispatch({
-                type: ACTIONS.FETCH_STRAATBEELD_BY_ID,
+                type: ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT,
                 payload: {
                     id: vm.sceneId,
                     isInitial: false

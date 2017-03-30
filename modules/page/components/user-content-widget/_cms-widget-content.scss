@@ -1,6 +1,6 @@
 .s-cms-widget-content {
   p {
-    margin-bottom: .5 * $base-whitespace;
+    margin-bottom: 0;
   }
 
   a {
@@ -9,6 +9,7 @@
 
     &:hover {
       color: $primary-contrast;
+      text-decoration: underline;
     }
   }
 }

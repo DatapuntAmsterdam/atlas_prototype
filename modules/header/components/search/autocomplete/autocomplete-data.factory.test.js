@@ -1,18 +1,13 @@
 describe('The autocompleteData factory', function () {
-    var $httpBackend,
-        $rootScope,
+    var $rootScope,
+        $q,
+        api,
         autocompleteData,
-        mockedResults,
-        mockedNoResults;
+        mockedResults;
 
     beforeEach(function () {
         angular.mock.module(
             'dpHeader',
-            {
-                sharedConfig: {
-                    API_ROOT: 'http://api-domain.com/'
-                }
-            },
             function ($provide) {
                 $provide.constant('HEADER_CONFIG', {
                     AUTOCOMPLETE_ENDPOINT: 'path/to/typeahead/'
@@ -20,9 +15,10 @@ describe('The autocompleteData factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$httpBackend_, _$rootScope_, _autocompleteData_) {
-            $httpBackend = _$httpBackend_;
+        angular.mock.inject(function (_$rootScope_, _$q_, _api_, _autocompleteData_) {
             $rootScope = _$rootScope_;
+            $q = _$q_;
+            api = _api_;
             autocompleteData = _autocompleteData_;
         });
 
@@ -53,15 +49,7 @@ describe('The autocompleteData factory', function () {
             }
         ];
 
-        mockedNoResults = [];
-
-        $httpBackend
-            .whenGET('http://api-domain.com/path/to/typeahead/?q=linn')
-            .respond(mockedNoResults);
-
-        $httpBackend
-            .whenGET('http://api-domain.com/path/to/typeahead/?q=linnae')
-            .respond(mockedResults);
+        spyOn(api, 'getByUri').and.returnValue($q.resolve(mockedResults));
     });
 
     it('can search and format data', function () {
@@ -72,7 +60,6 @@ describe('The autocompleteData factory', function () {
         });
 
         $rootScope.$apply();
-        $httpBackend.flush();
 
         expect(suggestions.count).toBe(3);
         expect(suggestions.data.length).toBe(2);

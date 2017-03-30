@@ -1,11 +1,21 @@
-<div ng-if="vm.feed" class="c-user-content-widget">
+<div ng-if="vm.feed">
     <div ng-repeat="entry in vm.entries | limitTo: vm.limitTo" class="c-user-content-widget__entry">
-        <dp-link type="SHOW_PAGE"
+
+        <div ng-if="entry.short.isHref"
+             class="o-btn link--inline c-user-content-widget__external-link c-user-content-widget__short">
+            <dp-event date="entry.datum.date" is-compact="true">
+                <div class="s-cms-widget-content" ng-bind-html="entry.short.html"></div>
+            </dp-event>
+        </div>
+
+        <dp-link ng-if="!entry.short.isHref"
+                 type="SHOW_PAGE"
                  payload="{name: 'content-detail', type: vm.type, item: entry.id}"
-                 class-name="o-btn o-btn--link c-user-content-widget__events-link">
-                <dp-event date="entry.datum.date" is-compact="true">
-                    <div class="c-user-content-widget__short s-cms-widget-content" ng-bind-html="entry.short.html"></div>
-                </dp-event>
+                 class-name="o-btn o-btn--link c-user-content-widget__events-link c-user-content-widget__short">
+            <dp-event date="entry.datum.date" is-compact="true">
+                <div class="s-cms-widget-content" ng-bind-html="entry.short.html"></div>
+            </dp-event>
         </dp-link>
+
     </div>
 </div>

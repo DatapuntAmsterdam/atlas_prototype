@@ -13,17 +13,34 @@
             controllerAs: 'vm'
         });
 
-    DpMenuController.$inject = ['authenticator', 'user'];
+    DpMenuController.$inject = ['$scope', 'authenticator', 'user'];
 
-    function DpMenuController (authenticator, user) {
+    function DpMenuController ($scope, authenticator, user) {
         const vm = this;
 
         vm.login = authenticator.login;
 
         vm.isAuthenticated = () => user.getUserType() === user.USER_TYPE.AUTHENTICATED;
 
-        vm.userName = () => user.getName().replace(/@.*$/, '');
+        $scope.$watchGroup([getUsername, getUserIsBevoegd], setUserMenuLabel);
 
-        vm.userIsBevoegd = () => user.getAuthorizationLevel() === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS;
+        function getUsername () {
+            return user.getName().replace(/@.*$/, '');
+        }
+
+        function getUserIsBevoegd () {
+            return user.getAuthorizationLevel() === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS;
+        }
+
+        function setUserMenuLabel ([username, isBevoegd]) {
+            const maxLength = isBevoegd ? 4 : 9,
+                name = username.length > maxLength + 1
+                    ? username.substr(0, maxLength) : username,
+                ellipsis = name !== username ? '...' : '',
+                space = ellipsis ? '' : ' ',
+                bevoegd = isBevoegd ? space + '(bevoegd)' : '';
+
+            vm.userMenuLabel = name + ellipsis + bevoegd;
+        }
     }
 })();

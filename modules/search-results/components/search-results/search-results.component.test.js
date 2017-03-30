@@ -7,6 +7,7 @@ describe('The dp-search-results component', function () {
         element,
         search,
         geosearch,
+        user,
         ACTIONS,
         mockedSearchResults,
         mockedSearchResultsNextPage,
@@ -71,13 +72,16 @@ describe('The dp-search-results component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _store_, _search_, _geosearch_, _ACTIONS_) {
+        angular.mock.inject(function (
+            _$compile_, _$rootScope_, _$q_, _store_, _search_, _geosearch_, _user_, _ACTIONS_
+        ) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
             store = _store_;
             search = _search_;
             geosearch = _geosearch_;
+            user = _user_;
             ACTIONS = _ACTIONS_;
         });
 
@@ -172,7 +176,7 @@ describe('The dp-search-results component', function () {
                     {
                         label: '03630013054429',
                         subtype: null,
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/pand/03630013054429/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/pand/03630013054429/'
                     }
                 ],
                 count: 1,
@@ -186,57 +190,57 @@ describe('The dp-search-results component', function () {
                 results: [
                     {
                         label: 'Lumièrestraat 6',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023953/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023953/'
                     },
                     {
                         label: 'Lumièrestraat 8',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023954/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023954/'
                     },
                     {
                         label: 'Lumièrestraat 10',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023955/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023955/'
                     },
                     {
                         label: 'Lumièrestraat 12',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023956/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023956/'
                     },
                     {
                         label: 'Lumièrestraat 14',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023957/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023957/'
                     },
                     {
                         label: 'Lumièrestraat 16',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023958/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023958/'
                     },
                     {
                         label: 'Lumièrestraat 18',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023959/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023959/'
                     },
                     {
                         label: 'Lumièrestraat 20',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023960/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023960/'
                     },
                     {
                         label: 'Lumièrestraat 22',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023961/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023961/'
                     },
                     {
                         label: 'Lumièrestraat 24',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023962/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023962/'
                     },
                     {
                         label: 'Lumièrestraat 26',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023963/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023963/'
                     },
                     {
                         label: 'Lumièrestraat 28',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023964/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023964/'
                     }
                 ],
-                next: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/?page=2&panden__id=03630013054429',
+                next: 'https://api.data.amsterdam.nl/bag/verblijfsobject/?page=2&panden__id=03630013054429',
                 more: {
                     label: 'Bekijk alle 12 adressen binnen dit pand',
-                    endpoint: 'https://api.datapunt.amsterdam.nl/bag/pand/03630013054429/'
+                    endpoint: 'https://api.data.amsterdam.nl/bag/pand/03630013054429/'
                 },
                 useIndenting: true
             },
@@ -247,17 +251,17 @@ describe('The dp-search-results component', function () {
                     {
                         label: 'Test OR #1',
                         subtype: 'landschappelijk gebied',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/openbareruimte/123/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/openbareruimte/123/'
                     },
                     {
                         label: 'Test OR #2',
                         subtype: 'weg',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/openbareruimte/456/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/openbareruimte/456/'
                     },
                     {
                         label: 'Test OR #3',
                         subtype: 'water',
-                        endpoint: 'https://api.datapunt.amsterdam.nl/bag/openbareruimte/789/'
+                        endpoint: 'https://api.data.amsterdam.nl/bag/openbareruimte/789/'
                     }
                 ],
                 count: 3,
@@ -266,11 +270,12 @@ describe('The dp-search-results component', function () {
             {
                 label_singular: 'Kadastraal object',
                 label_plural: 'Kadastrale objecten',
+                slug: 'subject',
                 results: [
                     {
                         label: 'ASD41AU00154G0000',
                         subtype: null,
-                        endpoint: 'https://api.datapunt.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11820015470000/'
+                        endpoint: 'https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11820015470000/'
                     }
                 ],
                 count: 1,
@@ -283,27 +288,27 @@ describe('The dp-search-results component', function () {
                     {
                         label: 'Haveneiland Noordoost',
                         subtype: null,
-                        endpoint: 'https://api.datapunt.amsterdam.nl/gebieden/buurt/03630023754004/'
+                        endpoint: 'https://api.data.amsterdam.nl/gebieden/buurt/03630023754004/'
                     },
                     {
                         label: 'IJburg West',
                         subtype: null,
-                        endpoint: 'https://api.datapunt.amsterdam.nl/gebieden/buurtcombinatie/3630012052079/'
+                        endpoint: 'https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052079/'
                     },
                     {
                         label: 'Ijburg / Eiland Zeeburg',
                         subtype: null,
-                        endpoint: 'https://api.datapunt.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX16/'
+                        endpoint: 'https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX16/'
                     },
                     {
                         label: 'AW33',
                         subtype: null,
-                        endpoint: 'https://api.datapunt.amsterdam.nl/gebieden/bouwblok/03630012096424/'
+                        endpoint: 'https://api.data.amsterdam.nl/gebieden/bouwblok/03630012096424/'
                     },
                     {
                         label: 'Oost',
                         subtype: null,
-                        endpoint: 'https://api.datapunt.amsterdam.nl/gebieden/stadsdeel/03630011872039/'
+                        endpoint: 'https://api.data.amsterdam.nl/gebieden/stadsdeel/03630011872039/'
                     }
                 ],
                 count: 5,
@@ -313,6 +318,7 @@ describe('The dp-search-results component', function () {
         mockedNoResults = [];
 
         spyOn(store, 'dispatch');
+        spyOn(user, 'meetsRequiredLevel');
     });
 
     function getComponent (numberOfResults, query, location, category) {
@@ -423,7 +429,21 @@ describe('The dp-search-results component', function () {
                 mockedSearchResults[0].count = 1;
                 mockedSearchResults[0].results.length = 1;
                 component = getComponent(12, 'Weesperstraat');
-                expect(component.find('h2').eq(0).text().trim()).toBe('Adres');
+                expect(component.find('.qa-search-header').eq(0).text().trim()).toBe('Adres');
+            });
+
+            it('has a plural heading in case only a warning is shown', function () {
+                user.meetsRequiredLevel.and.returnValue(false);
+                const component = getComponent(22, null, [51.123, 4.789]);
+                const isolateScope = component.isolateScope();
+
+                isolateScope.vm.searchResults[3].results = [];
+                isolateScope.vm.searchResults[3].count = 0;
+                isolateScope.$digest();
+
+                const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+                expect(categoryNode.find('.qa-category-warning').length).toBe(1);
+                expect(categoryNode.find('.qa-search-header').text().trim()).toBe('Kadastrale objecten');
             });
 
             it('categories with more than 10 results show a link to the category', function () {
@@ -521,30 +541,32 @@ describe('The dp-search-results component', function () {
         });
 
         it('shows search results from the geosearch API on the scope', function () {
-            expect(component.find('h2').length).toBe(5);
+            expect(component.find('.qa-search-header').length).toBe(5);
 
             // 21 Links include an additional 'show more' link to Pand and it includes only 10 adressen instead of 12
             expect(component.find('.qa-search-result dp-link').length).toBe(21);
 
             // First category
-            expect(component.find('h2').eq(0).text().trim()).toBe('Pand'); // Singular, no number of results shown
+            expect(component.find('.qa-search-header')
+                .eq(0).text().trim()).toBe('Pand'); // Singular, no number of results shown
 
             expect(removeWhitespace(component.find('.qa-search-result dp-link').eq(0).text())).toBe('03630013054429');
             component.find('.qa-search-result dp-link').eq(0).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/bag/pand/03630013054429/'
+                payload: 'https://api.data.amsterdam.nl/bag/pand/03630013054429/'
             });
 
             // Second category
-            expect(component.find('h2').eq(1).text().trim()).toBe('Adressen (12)'); // Plural, with number of results
+            expect(component.find('.qa-search-header')
+                .eq(1).text().trim()).toBe('Adressen (12)'); // Plural, with number of results
 
             expect(removeWhitespace(component.find('.qa-search-result dp-link').eq(1).text()))
                 .toBe('Lumièrestraat 6');
             component.find('.qa-search-result dp-link').eq(1).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023953/'
+                payload: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023953/'
             });
 
             expect(removeWhitespace(component.find('.qa-search-result dp-link').eq(10).text()))
@@ -552,53 +574,53 @@ describe('The dp-search-results component', function () {
             component.find('.qa-search-result dp-link').eq(10).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/03630001023962/'
+                payload: 'https://api.data.amsterdam.nl/bag/verblijfsobject/03630001023962/'
             });
 
             // Third category
-            expect(component.find('h2').eq(2).text().trim()).toBe('Openbare ruimtes (3)'); // Plural
+            expect(component.find('.qa-search-header').eq(2).text().trim()).toBe('Openbare ruimtes (3)'); // Plural
 
             expect(removeWhitespace(component.find('.qa-search-result dp-link').eq(12).text())).toBe('Test OR #1');
             component.find('.qa-search-result dp-link').eq(12).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/bag/openbareruimte/123/'
+                payload: 'https://api.data.amsterdam.nl/bag/openbareruimte/123/'
             });
 
             expect(removeWhitespace(component.find('.qa-search-result dp-link').eq(14).text())).toBe('Test OR #3');
             component.find('.qa-search-result dp-link').eq(14).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/bag/openbareruimte/789/'
+                payload: 'https://api.data.amsterdam.nl/bag/openbareruimte/789/'
             });
 
             // Fourth category
-            expect(component.find('h2').eq(3).text().trim()).toBe('Kadastraal object'); // Singular
+            expect(component.find('.qa-search-header').eq(3).text().trim()).toBe('Kadastraal object'); // Singular
 
             expect(removeWhitespace(component.find('.qa-search-result dp-link').eq(15).text()))
                 .toBe('ASD41AU00154G0000');
             component.find('.qa-search-result dp-link').eq(15).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11820015470000/'
+                payload: 'https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11820015470000/'
             });
 
             // Fifth category
-            expect(component.find('h2').eq(4).text().trim()).toBe('Gebieden (5)'); // Plural
+            expect(component.find('.qa-search-header').eq(4).text().trim()).toBe('Gebieden (5)'); // Plural
 
             expect(removeWhitespace(component.find('.qa-search-result dp-link').eq(16).text()))
                 .toBe('Haveneiland Noordoost');
             component.find('.qa-search-result dp-link').eq(16).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/gebieden/buurt/03630023754004/'
+                payload: 'https://api.data.amsterdam.nl/gebieden/buurt/03630023754004/'
             });
 
             expect(removeWhitespace(component.find('.qa-search-result dp-link').eq(20).text())).toBe('Oost');
             component.find('.qa-search-result dp-link').eq(20).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/gebieden/stadsdeel/03630011872039/'
+                payload: 'https://api.data.amsterdam.nl/gebieden/stadsdeel/03630011872039/'
             });
         });
 
@@ -631,7 +653,7 @@ describe('The dp-search-results component', function () {
             component.find('.qa-search-result dp-link').eq(11).find('button').click();
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.FETCH_DETAIL,
-                payload: 'https://api.datapunt.amsterdam.nl/bag/pand/03630013054429/'
+                payload: 'https://api.data.amsterdam.nl/bag/pand/03630013054429/'
             });
 
             const numberOfDpLinks = component.find('.qa-search-result dp-link').length;
@@ -655,6 +677,66 @@ describe('The dp-search-results component', function () {
 
         it('shows the dp-straatbeeld-thumbnail component', function () {
             expect(component.find('dp-straatbeeld-thumbnail').length).toBe(1);
+        });
+    });
+
+    describe('the Kadastraal subject warning messages', function () {
+        it('should not be shown for an employee plus', function () {
+            user.meetsRequiredLevel.and.callFake(
+                required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS
+            );
+
+            const component = getComponent(22, null, [51.123, 4.789]);
+
+            const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+            expect(categoryNode.find('.qa-search-header').text().trim()).toBe('Kadastraal object');
+
+            expect(categoryNode.find('.qa-category-warning').length).toBe(0);
+        });
+
+        it('should show a specific message for an employee users', function () {
+            user.meetsRequiredLevel.and.callFake(
+                required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE
+            );
+            const component = getComponent(22, null, [51.123, 4.789]);
+
+            const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+            expect(categoryNode.find('.qa-search-header').text().trim()).toBe('Kadastraal object');
+
+            expect(categoryNode.find('.qa-category-warning').text()).toContain(
+                'Om alle gegevens (ook natuurlijke personen) te kunnen vinden,' +
+                ' moet je als medewerker speciale bevoegdheden hebben. Zie Help > Bediening dataportaal > Inloggen.'
+            );
+        });
+
+        it('should show a general message for all other users', function () {
+            user.meetsRequiredLevel.and.returnValue(false);
+            const component = getComponent(22, null, [51.123, 4.789]);
+
+            const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+            expect(categoryNode.find('.qa-search-header').text().trim()).toBe('Kadastraal object');
+
+            expect(categoryNode.find('.qa-category-warning').text()).toContain(
+                'Om kadastraal subjecten te kunnen vinden,' +
+                ' moet je als medewerker/ketenpartner van Gemeente Amsterdam inloggen' +
+                ' en speciale bevoegdheden hebben. Zie Help > Bediening dataportaal > Inloggen.'
+            );
+        });
+
+        it('should update the message on authorization change', function () {
+            user.meetsRequiredLevel.and.callFake(
+                required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS
+            );
+            const component = getComponent(22, null, [51.123, 4.789]);
+            const categoryNode = component.find('[ng-repeat="category in vm.searchResults"]').eq(3);
+            expect(categoryNode.find('.qa-search-header').text().trim()).toBe('Kadastraal object');
+            expect(categoryNode.find('.qa-category-warning').length).toBe(0);
+
+            spyOn(user, 'getAuthorizationLevel').and.returnValue('foo'); // changed so $watch fires
+            user.meetsRequiredLevel.and.returnValue(false);
+            $rootScope.$apply();
+
+            expect(categoryNode.find('.qa-category-warning').length).toBe(1);
         });
     });
 

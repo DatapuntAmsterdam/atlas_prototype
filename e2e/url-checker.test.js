@@ -174,12 +174,6 @@ describe('each URL should load the corresponding view', function () {
         dp.validate('PAGE--HOME', page);
     });
 
-    it('PAGE--LOGIN', () => {
-        page = dp.navigate('PAGE--LOGIN');
-
-        dp.validate('PAGE--LOGIN', page);
-    });
-
     it('STRAATBEELD--DETAIL', () => {
         page = dp.navigate('STRAATBEELD--DETAIL');
 

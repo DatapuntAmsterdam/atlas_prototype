@@ -1,33 +1,41 @@
-.c-user-content-widget {
-  .c-user-content-widget__beleid-zie-ook {
-    margin-bottom: $base-whitespace;
-    font-weight: bold;
+.c-user-content-widget__beleid-zie-ook {
+  margin-bottom: $base-whitespace;
+  font-weight: bold;
+}
+
+.c-user-content-widget__beleid-lees-meer {
+  margin-bottom: 2 * $base-whitespace;
+  color: $secondary-gray60;
+}
+
+.c-user-content-widget__entry {
+  max-height: 4 * $base-whitespace;
+  margin-bottom: 1.2 * $base-whitespace;
+  overflow: hidden;
+
+  &:hover {
+    color: $primary-contrast;
+    text-decoration: underline;
   }
+}
 
-  .c-user-content-widget__beleid-lees-meer {
-    margin-bottom: 2 * $base-whitespace;
-    color: $secondary-gray60;
-  }
+.c-user-content-widget__short {
+  font-weight: normal;
+}
 
-  .c-user-content-widget__entry {
-    max-height: 4 * $base-whitespace;
-    margin-bottom: 1.2 * $base-whitespace;
-    overflow: hidden;
-
-    p {
-      margin-bottom: 0;
+.c-user-content-widget__external-link {
+  &:hover {
+    a {
+      color: $primary-contrast;
+      text-decoration: underline;
     }
   }
+}
 
-  .c-user-content-widget__short {
-    font-weight: normal;
-  }
+.c-user-content-widget__events-link {
+  margin-left: 0;
 
-  .c-user-content-widget__events-link {
-    margin-left: 0;
-
-    &::before {
-      display: none;
-    }
+  &::before {
+    display: none;
   }
 }

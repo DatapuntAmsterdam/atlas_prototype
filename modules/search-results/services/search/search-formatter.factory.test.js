@@ -248,6 +248,22 @@ describe('The searchFormatter factory', function () {
                 ],
                 useIndenting: false,
                 next: 'path/to/meetbouten/?q=something&page=2'
+            }, {
+                label_singular: 'Bouwblok',
+                label_plural: 'Bouwblokken',
+                slug: 'bouwblokken',
+                count: 0,
+                results: [],
+                useIndenting: false,
+                next: null
+            }, {
+                label_singular: 'Kadastraal object',
+                label_plural: 'Kadastrale objecten',
+                slug: 'brk-object',
+                count: 0,
+                results: [],
+                useIndenting: false,
+                next: null
             }
         ]);
     });

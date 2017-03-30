@@ -1,10 +1,5 @@
 @import "modules/shared/styles/config";
 
-$body-z-index: 1;
-/* Content with a fixed position (header, error panel) should be displayed
- * above the body */
-$fixed-position-z-index: 2;
-
 $dashboard-heading-height: 50px;
 $dashboard-heading-height-homepage: 108px;
 $dashboard-heading-shadow-height: 2px;

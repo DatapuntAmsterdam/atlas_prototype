@@ -1,20 +1,16 @@
-<nav class="c-menu qa-menu"
+<nav class="c-menu _extra-space-for-the-menu-keep-right qa-menu"
      ng-class="'c-menu--' + vm.size">
     <button ng-if="!vm.isAuthenticated()" ng-click="vm.login()" class="c-menu__item c-menu__link qa-menu__login">
         Inloggen
     </button>
-    <!--<dp-link ng-if="!vm.isAuthenticated()"-->
-        <!--type="SHOW_PAGE" payload="{name: 'login'}" class-name="c-menu__item c-menu__link qa-menu__login">-->
-        <!--Inloggen-->
-    <!--</dp-link>-->
-    <div ng-if="vm.isAuthenticated()" class="qa-menu__user-menu">
-        <dp-menu-dropdown title="{{vm.userName() + (vm.userIsBevoegd() ? ' (bevoegd)': '')}}"
-                          type="user"
-                          align="left"></dp-menu-dropdown>
-    </div>
+    <dp-menu-dropdown ng-if="vm.isAuthenticated()"
+                      class="qa-menu__user-menu"
+                      title="{{vm.userMenuLabel}}"
+                      type="user"
+                      align="left"></dp-menu-dropdown>
     <span class="c-menu__item qa-menu__item">
         <dp-link type="SHOW_PAGE"
-                 payload="{name: 'help'}"
+                 payload="{name: 'content-overzicht', type: 'help'}"
                  class-name="c-menu__link">Help</dp-link>
     </span>
     <dp-menu-dropdown title="Menu"

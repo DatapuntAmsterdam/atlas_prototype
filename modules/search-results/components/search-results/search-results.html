@@ -22,12 +22,18 @@
                          class="u-margin__bottom--4"
                          ng-class="{
                             's-indented-result': category.useIndenting,
-                        }">
+                         }"
+                         ng-if="category.count >= 1 || category.warning">
 
                         <h2 class="o-header__subtitle qa-search-header">
                             <span ng-if="category.count > 1">{{category.label_plural}} ({{category.count | number}})</span>
                             <span ng-if="category.count === 1">{{category.label_singular}}</span>
+                            <span ng-if="category.count === 0">{{category.label_plural}}</span>
                         </h2>
+
+                        <dp-panel ng-if="category.warning" is-panel-visible="category.warning" type="warning" can-close="true" class="qa-category-warning">
+                            {{ category.warning }}
+                        </dp-panel>
 
                         <dp-search-results-list category="category" limit-results="true"></dp-search-results-list>
 

@@ -48,7 +48,7 @@
 }
 
 .c-straatbeeld__close {
-  @include icon-button("close", "white", "red");
+  @include icon-button-box("close", "white");
   position: absolute;
   top: $base-whitespace;
   right: $base-whitespace;

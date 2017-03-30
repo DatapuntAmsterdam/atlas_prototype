@@ -2,6 +2,7 @@ describe('The header controller', function () {
     var $controller,
         $rootScope,
         store,
+        ACTIONS,
         mockedState;
 
     beforeEach(function () {
@@ -19,10 +20,11 @@ describe('The header controller', function () {
             }
         );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
+        angular.mock.inject(function (_$controller_, _$rootScope_, _store_, _ACTIONS_) {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
+            ACTIONS = _ACTIONS_;
         });
 
         mockedState = {
@@ -55,12 +57,53 @@ describe('The header controller', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the query string based on the state', function () {
-        spyOn(store, 'getState').and.returnValue(mockedState);
+    it('sets the search query and action when search is active', function () {
+        spyOn(store, 'getState').and.returnValue({
+            search: {
+                query: 'search query'
+            }
+        });
 
         const controller = getController();
 
-        expect(controller.query).toBe('i am a search query');
+        expect(controller.query).toBe('search query');
+        expect(controller.searchAction).toEqual(ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY);
+    });
+
+    it('sets the dataSelection query and action when datasets are active', function () {
+        spyOn(store, 'getState').and.returnValue({
+            dataSelection: {
+                view: 'CARDS',
+                query: 'dataSelection query'
+            }
+        });
+
+        const controller = getController();
+
+        expect(controller.query).toBe('dataSelection query');
+        expect(controller.searchAction).toEqual(ACTIONS.FETCH_DATA_SELECTION);
+    });
+
+    it('sets the dataSelection query and action when detail API view is active', function () {
+        spyOn(store, 'getState').and.returnValue({
+            detail: {
+                endpoint: 'somewhere://abc/catalogus/api/xyz'
+            }
+        });
+
+        const controller = getController();
+
+        expect(controller.query).toBeUndefined();
+        expect(controller.searchAction).toEqual(ACTIONS.FETCH_DATA_SELECTION);
+    });
+
+    it('default sets the search query and search action', function () {
+        spyOn(store, 'getState').and.returnValue({});
+
+        const controller = getController();
+
+        expect(controller.query).toBeUndefined();
+        expect(controller.searchAction).toEqual(ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY);
     });
 
     it('doesn\'t break when search is null', function () {

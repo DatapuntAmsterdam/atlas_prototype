@@ -2,7 +2,7 @@ module.exports = {
     build: {
         options: {
             base: 'build',
-            open: true,
+            open: false,
             middleware: function (connect, options, middlewares) {
                 middlewares.unshift(require('connect-livereload')());
 

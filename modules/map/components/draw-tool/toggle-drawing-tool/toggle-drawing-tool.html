@@ -1,6 +1,7 @@
 <button ng-click="vm.toggle()"
         class="c-toggle-drawing-tool"
         ng-class="{
+          'c-toggle-drawing-tool--inactive': !vm.isEnabled(),
           'c-toggle-drawing-tool--active': vm.isEnabled()
         }"
         title="{{ vm.isEnabled() ? 'Eindig meten en intekenen' : 'Begin meten en intekenen' }}">

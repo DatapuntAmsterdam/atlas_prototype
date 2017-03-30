@@ -49,13 +49,12 @@ describe('The stateToUrlMiddleware factory', function () {
         var actionWithoutUrlUpdate = [
             ACTIONS.URL_CHANGE,
             ACTIONS.FETCH_DETAIL,
-            ACTIONS.FETCH_STRAATBEELD_BY_ID,
-            ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
+            ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT,
+            ACTIONS.SHOW_STRAATBEELD_INITIAL,
             ACTIONS.MAP_CLICK,
             ACTIONS.HIDE_STRAATBEELD,
             ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION,
-            ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY,
-            ACTIONS.FETCH_STRAATBEELD_BY_LOCATION
+            ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY
         ];
 
         actionWithoutUrlUpdate.forEach(function (action) {
@@ -79,7 +78,9 @@ describe('The stateToUrlMiddleware factory', function () {
             ACTIONS.MAP_ZOOM,
             ACTIONS.MAP_FULLSCREEN,
             ACTIONS.SHOW_DETAIL,
-            ACTIONS.SHOW_STRAATBEELD_INITIAL,
+            ACTIONS.FETCH_STRAATBEELD_BY_ID,
+            ACTIONS.FETCH_STRAATBEELD_BY_LOCATION,
+            ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
             ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT,
             ACTIONS.SET_STRAATBEELD_ORIENTATION,
             ACTIONS.SHOW_LAYER_SELECTION,

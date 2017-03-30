@@ -10,9 +10,9 @@
         <dt>Gewijzigd</dt>
         <dd>{{ { metadata_modified: vm.apiData.results.metadata_modified, metadata_compact: true } | modificationDate }} ({{vm.apiData.results.metadata_modified | date:'dd MMMM yyyy'}})</dd>
         <dt>Gepubliceerd door</dt>
-        <dd><a href="mailto:{{vm.apiData.results.author_email}}" class="o-btn o-btn--link">{{vm.apiData.results.author}} ({{vm.apiData.results.author_email}})</a>                    </dd>
+        <dd><a href="mailto:{{vm.apiData.results.publisher_email}}" class="o-btn o-btn--link">{{vm.apiData.results.publisher}} ({{vm.apiData.results.publisher_email}})</a>                    </dd>
         <dt>Contactpersoon</dt>
-        <dd><a href="mailto:{{vm.apiData.results.maintainer_email}}" class="o-btn o-btn--link">{{vm.apiData.results.maintainer}} ({{vm.apiData.results.maintainer_email}})</a></dd>
+        <dd><a href="mailto:{{vm.apiData.results.contact_email}}" class="o-btn o-btn--link">{{vm.apiData.results.contact_name}} ({{vm.apiData.results.contact_email}})</a></dd>
         <dt>Thema</dt>
         <dd>
             <ul ng-repeat="group in vm.apiData.results.groups">

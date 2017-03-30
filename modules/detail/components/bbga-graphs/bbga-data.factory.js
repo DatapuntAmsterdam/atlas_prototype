@@ -5,9 +5,9 @@
         .module('dpDetail')
         .factory('bbgaDataService', bbgaDataService);
 
-    bbgaDataService.$inject = ['$q', '$http', 'BBGA_CONFIG', 'sharedConfig'];
+    bbgaDataService.$inject = ['$q', 'api', 'BBGA_CONFIG', 'sharedConfig'];
 
-    function bbgaDataService ($q, $http, BBGA_CONFIG, sharedConfig) {
+    function bbgaDataService ($q, api, BBGA_CONFIG, sharedConfig) {
         return {
             getGraphData: getGraphData
         };
@@ -49,35 +49,27 @@
         }
 
         function getMetaData (variableName) {
-            return $http({
-                method: 'GET',
-                url: sharedConfig.API_ROOT + 'bbga/meta/',
-                params: {
-                    variabele: variableName
-                }
+            return api.getByUri('bbga/meta/', {
+                variabele: variableName
             }).then(function (response) {
                 return {
-                    label: response.data.results[0].label,
-                    peildatum: response.data.results[0].peildatum
+                    label: response.results[0].label,
+                    peildatum: response.results[0].peildatum
                 };
             });
         }
 
         function getData (variableName, gebiedHeading, gebiedCode) {
-            return $http({
-                method: 'GET',
-                url: sharedConfig.API_ROOT + 'bbga/cijfers/',
-                params: {
-                    variabele: variableName,
-                    gebiedcode15: gebiedCode,
-                    jaar: 'latest'
-                }
+            return api.getByUri('bbga/cijfers/', {
+                variabele: variableName,
+                gebiedcode15: gebiedCode,
+                jaar: 'latest'
             }).then(function (response) {
                 return {
                     label: gebiedHeading,
                     code: gebiedCode,
-                    waarde: response.data.count > 0 ? response.data.results[0].waarde : null,
-                    jaar: response.data.count > 0 ? response.data.results[0].jaar : null
+                    waarde: response.count > 0 ? response.results[0].waarde : null,
+                    jaar: response.count > 0 ? response.results[0].jaar : null
                 };
             });
         }

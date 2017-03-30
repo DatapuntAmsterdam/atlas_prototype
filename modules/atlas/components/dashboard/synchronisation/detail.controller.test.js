@@ -4,7 +4,7 @@ describe('The detail controller', function () {
         store,
         mockedState = {
             detail: {
-                endpoint: 'https://api.datapunt.amsterdam.nl/bag/verblijfsobject/123/',
+                endpoint: 'https://api.data.amsterdam.nl/bag/verblijfsobject/123/',
                 reload: false,
                 isLoading: false
             }
@@ -60,7 +60,7 @@ describe('The detail controller', function () {
 
         controller = getController();
 
-        expect(controller.endpoint).toBe('https://api.datapunt.amsterdam.nl/bag/verblijfsobject/123/');
+        expect(controller.endpoint).toBe('https://api.data.amsterdam.nl/bag/verblijfsobject/123/');
         expect(controller.reload).toBe(false);
         expect(controller.isLoading).toBe(false);
     });

@@ -14,10 +14,12 @@
             controllerAs: 'vm'
         });
 
-    DpLayerSelectionController.$inject = ['BASE_LAYERS', 'overlays', 'store', 'ACTIONS'];
+    DpLayerSelectionController.$inject = ['$scope', 'BASE_LAYERS', 'overlays', 'store', 'ACTIONS', 'user'];
 
-    function DpLayerSelectionController (BASE_LAYERS, overlays, store, ACTIONS) {
+    function DpLayerSelectionController ($scope, BASE_LAYERS, overlays, store, ACTIONS, user) {
         var vm = this;
+
+        $scope.$watch(user.getAuthorizationLevel, onAuthorizationChange);
 
         vm.allBaseLayers = BASE_LAYERS;
 
@@ -27,18 +29,6 @@
                 payload: baseLayer
             });
         };
-
-        vm.allOverlays = overlays.HIERARCHY.map(function (category) {
-            var formattedOverlays = angular.copy(category);
-
-            formattedOverlays.overlays = formattedOverlays.overlays.map(function (overlaySlug) {
-                return {
-                    slug: overlaySlug,
-                    label: overlays.SOURCES[overlaySlug].label_long
-                };
-            });
-            return formattedOverlays;
-        });
 
         vm.toggleOverlay = function (overlay) {
             var action;
@@ -68,5 +58,25 @@
             return vm.zoom >= overlays.SOURCES[overlay].minZoom &&
                 vm.zoom <= overlays.SOURCES[overlay].maxZoom;
         };
+
+        function onAuthorizationChange () {
+            vm.isMoreInfoAvailable = !user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE);
+
+            setOverlays();
+        }
+
+        function setOverlays () {
+            vm.allOverlays = overlays.HIERARCHY.map(function (category) {
+                var formattedOverlays = angular.copy(category);
+
+                formattedOverlays.overlays = formattedOverlays.overlays.map(function (overlaySlug) {
+                    return {
+                        slug: overlaySlug,
+                        label: overlays.SOURCES[overlaySlug].label_long
+                    };
+                });
+                return formattedOverlays;
+            });
+        }
     }
 })();

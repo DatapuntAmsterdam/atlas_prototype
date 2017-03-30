@@ -3,13 +3,13 @@
   top: $base-whitespace;
   left: $base-whitespace;
   cursor: pointer;
-  z-index: 10;
+  z-index: $on-top-z-index;
 }
 
 .c-toggle-straatbeeld-fullscreen--minimize {
-  @include icon-button("minimize", "", "red");
+  @include icon-button-box("minimize");
 }
 
 .c-toggle-straatbeeld-fullscreen--maximize {
-  @include icon-button("maximize", "", "red");
+  @include icon-button-box("maximize");
 }

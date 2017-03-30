@@ -14,14 +14,18 @@
             controllerAs: 'vm'
         });
 
-    DpActiveOverlaysController.$inject = ['$scope', 'overlays'];
+    DpActiveOverlaysController.$inject = ['$scope', 'overlays', 'user'];
 
-    function DpActiveOverlaysController ($scope, overlays) {
+    function DpActiveOverlaysController ($scope, overlays, user) {
         var vm = this;
 
-        $scope.$watchGroup(['vm.overlays', 'vm.showActiveOverlays'], function () {
+        $scope.$watch(user.getAuthorizationLevel, setOverlays);
+
+        $scope.$watchGroup(['vm.overlays', 'vm.showActiveOverlays'], setOverlays, true);
+
+        function setOverlays () {
             vm.validOverlays = vm.overlays.filter(overlay => overlays.SOURCES[overlay.id]);
             vm.visible = vm.showActiveOverlays && vm.overlays.length > 0;
-        }, true);
+        }
     }
 })();

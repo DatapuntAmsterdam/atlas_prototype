@@ -1,5 +1,7 @@
 describe('The bbgaDataService', function () {
-    var $httpBackend,
+    var $rootScope,
+        $q,
+        api,
         bbgaDataService,
         mockedMetaData,
         mockedCijfers;
@@ -7,11 +9,6 @@ describe('The bbgaDataService', function () {
     beforeEach(function () {
         angular.mock.module(
             'dpDetail',
-            {
-                sharedConfig: {
-                    API_ROOT: 'http://www.api-root.com/'
-                }
-            },
             function ($provide) {
                 $provide.constant('BBGA_CONFIG', {
                     MY_GRAPH_SETTINGS: [
@@ -34,8 +31,10 @@ describe('The bbgaDataService', function () {
             }
         );
 
-        angular.mock.inject(function (_$httpBackend_, _bbgaDataService_) {
-            $httpBackend = _$httpBackend_;
+        angular.mock.inject(function (_$rootScope_, _$q_, _api_, _bbgaDataService_) {
+            $rootScope = _$rootScope_;
+            $q = _$q_;
+            api = _api_;
             bbgaDataService = _bbgaDataService_;
         });
 
@@ -106,33 +105,15 @@ describe('The bbgaDataService', function () {
             }
         };
 
-        $httpBackend
-            .whenGET('http://www.api-root.com/bbga/meta/?variabele=VARIABELE_A')
-            .respond(mockedMetaData.VARIABELE_A);
-
-        $httpBackend
-            .whenGET('http://www.api-root.com/bbga/meta/?variabele=VARIABELE_B')
-            .respond(mockedMetaData.VARIABELE_B);
-
-        $httpBackend
-            .whenGET('http://www.api-root.com/bbga/meta/?variabele=VARIABELE_C')
-            .respond(mockedMetaData.VARIABELE_C);
-
-        $httpBackend
-            .whenGET('http://www.api-root.com/bbga/cijfers/?gebiedcode15=GEBIED_A&jaar=latest&variabele=VARIABELE_A')
-            .respond(mockedCijfers.VARIABELE_A.GEBIED_A);
-
-        $httpBackend
-            .whenGET('http://www.api-root.com/bbga/cijfers/?gebiedcode15=GEBIED_A&jaar=latest&variabele=VARIABELE_B')
-            .respond(mockedCijfers.VARIABELE_B.GEBIED_A);
-
-        $httpBackend
-            .whenGET('http://www.api-root.com/bbga/cijfers/?gebiedcode15=STAD&jaar=latest&variabele=VARIABELE_B')
-            .respond(mockedCijfers.VARIABELE_B.STAD);
-
-        $httpBackend
-            .whenGET('http://www.api-root.com/bbga/cijfers/?gebiedcode15=GEBIED_A&jaar=latest&variabele=VARIABELE_C')
-            .respond(mockedCijfers.VARIABELE_C.GEBIED_A);
+        spyOn(api, 'getByUri').and.callFake((uri, params) => {
+            let result;
+            if (uri === 'bbga/meta/') {
+                result = mockedMetaData[params.variabele];
+            } else if (uri === 'bbga/cijfers/') {
+                result = mockedCijfers[params.variabele][params.gebiedcode15];
+            }
+            return $q.resolve(result);
+        });
     });
 
     it('combines and formats metadata and cijfers from the BBGA API', function () {
@@ -151,8 +132,7 @@ describe('The bbgaDataService', function () {
             expect(bbgaData.VARIABELE_B.data[0].code).toBe('GEBIED_A');
             expect(bbgaData.VARIABELE_B.data[0].waarde).toBe(1234.56);
         });
-
-        $httpBackend.flush();
+        $rootScope.$digest();
     });
 
     it('adds the gebieds name to the BBGA data', function () {
@@ -160,6 +140,7 @@ describe('The bbgaDataService', function () {
             expect(bbgaData.VARIABELE_A.data[0].label).toBe('Gebied A');
             expect(bbgaData.VARIABELE_B.data[0].label).toBe('Gebied A');
         });
+        $rootScope.$digest();
 
         bbgaDataService
             .getGraphData('MY_GRAPH_SETTINGS', 'Dit is een andere titel voor gebied A', 'GEBIED_A')
@@ -167,8 +148,7 @@ describe('The bbgaDataService', function () {
                 expect(bbgaData.VARIABELE_A.data[0].label).toBe('Dit is een andere titel voor gebied A');
                 expect(bbgaData.VARIABELE_B.data[0].label).toBe('Dit is een andere titel voor gebied A');
             });
-
-        $httpBackend.flush();
+        $rootScope.$digest();
     });
 
     it('returns null for data that isn\'t available in the BBGA API', function () {
@@ -184,8 +164,7 @@ describe('The bbgaDataService', function () {
                 expect(bbgaData.VARIABELE_C.data[0].label).toBe('Gebied A');
                 expect(bbgaData.VARIABELE_C.data[0].code).toBe('GEBIED_A');
             });
-
-        $httpBackend.flush();
+        $rootScope.$digest();
     });
 
     it('optionally adds data for amsterdam (gebiedscode STAD) based on the BBGA_CONFIG', function () {
@@ -199,8 +178,7 @@ describe('The bbgaDataService', function () {
             expect(bbgaData.VARIABELE_B.data[1].waarde).toBe(789.123);
             expect(bbgaData.VARIABELE_B.data[1].label).toBe('Amsterdam');
         });
-
-        $httpBackend.flush();
+        $rootScope.$digest();
     });
 
     it('makes the jaar variable part of the metadata', function () {
@@ -212,7 +190,6 @@ describe('The bbgaDataService', function () {
             expect(bbgaData.VARIABELE_B.data[0].jaar).toBeUndefined();
             expect(bbgaData.VARIABELE_B.data[1].jaar).toBeUndefined();
         });
-
-        $httpBackend.flush();
+        $rootScope.$digest();
     });
 });

@@ -1,4 +1,4 @@
-<div ng-if="vm.feed" class="c-user-content-widget">
+<div ng-if="vm.feed">
     <div ng-repeat="entry in vm.entries | limitTo: vm.limitTo" class="c-user-content-widget__entry">
         <div ng-if="entry.short.isHref"
              class="o-btn o-btn--link c-user-content-widget__short s-cms-widget-content"

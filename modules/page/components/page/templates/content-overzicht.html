@@ -9,7 +9,10 @@
     <div class="u-row">
         <div class="u-col-sm--offset-1 u-col-sm--7">
             <div class="c-user-content-overview__left">
-                <div id="{{vm.type}}{{entry.id}}" ng-repeat="entry in vm.entries" class="u-margin__bottom--4">
+                <div ng-if="!entry.short.isHref"
+                     id="{{vm.type}}{{entry.id}}"
+                     ng-repeat="entry in vm.entries"
+                     class="u-margin__bottom--4">
 
                     <div ng-if="vm.type !== 'events'">
                         <h2 class="u-margin__bottom--1">{{entry.titel.value}}</h2>
@@ -36,12 +39,15 @@
             <div class="c-user-content-overview__right">
                 <div class="c-user-content-overview__toc-header">Op deze pagina</div>
 
-                <dp-anchor-link ng-repeat="e in vm.entries"
-                                link="{{$first ? (vm.type + 'top') : (vm.type + e.id)}}"
-                                class-name="u-margin__bottom--1"
-                                auto-scroll="e.id === vm.entry.id">
-                    {{e.titel.value}}
-                </dp-anchor-link>
+                <div ng-repeat="entry in vm.entries" class="u-margin__bottom--1">
+                    <div ng-if="entry.short.isHref"
+                         class="o-btn o-btn--link s-cms-page-content__toc"
+                         ng-bind-html="entry.short.html"></div>
+                    <dp-anchor-link ng-if="!entry.short.isHref"
+                                    link="{{$first ? (vm.type + 'top') : (vm.type + entry.id)}}"
+                                    auto-scroll="entry.id === vm.entry.id">
+                        {{entry.short.value}}</dp-anchor-link>
+                </div>
             </div>
         </div>
 

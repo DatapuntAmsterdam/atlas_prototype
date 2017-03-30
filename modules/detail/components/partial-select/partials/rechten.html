@@ -5,7 +5,7 @@
 
   <ul class="o-list">
     <li ng-repeat="object in apiData.results">
-      <dp-link type="FETCH_DETAIL" payload="object.subject_href">
+        <dp-link type="FETCH_DETAIL" payload="object.kadastraal_subject._links.self.href">
         {{ object._display}}
       </dp-link>
     </li>

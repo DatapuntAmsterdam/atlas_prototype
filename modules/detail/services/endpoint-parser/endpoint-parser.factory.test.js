@@ -16,26 +16,26 @@ describe('The endpointParser factory', function () {
         });
     });
 
-    describe('getSubject', () => {
-        it('returns the subject based on an endpoint', () => {
-            expect(endpointParser.getSubject('http://www.api-root.com/bag/nummeraanduiding/123456/'))
-                .toBe('nummeraanduiding');
+    describe('getParts', () => {
+        it('returns the category and subject based on an endpoint', () => {
+            expect(endpointParser.getParts('http://www.api-root.com/bag/nummeraanduiding/123456/'))
+                .toEqual(['bag', 'nummeraanduiding']);
 
-            expect(endpointParser.getSubject('http://www.api-root.com/brk/object/789/'))
-                .toBe('object');
+            expect(endpointParser.getParts('http://www.api-root.com/brk/object/789/'))
+                .toEqual(['brk', 'object']);
 
-            expect(endpointParser.getSubject('http://www.api-root.com/meetbouten/meetbout/654/'))
-                .toBe('meetbout');
+            expect(endpointParser.getParts('http://www.api-root.com/meetbouten/meetbout/654/'))
+                .toEqual(['meetbouten', 'meetbout']);
 
-            expect(endpointParser.getSubject('http://www.api-root.com/brk/object-wkpb/' +
+            expect(endpointParser.getParts('http://www.api-root.com/brk/object-wkpb/' +
                 'NL.KAD.OnroerendeZaak.123456/'))
-                .toBe('object-wkpb');
+                .toEqual(['brk', 'object-wkpb']);
 
-            expect(endpointParser.getSubject('http://www.api-root.com/folder-1/folder-2/folder-3/123/'))
-                .toBe('folder-3');
+            expect(endpointParser.getParts('http://www.api-root.com/folder-1/folder-2/folder-3/123/'))
+                .toEqual(['folder-2', 'folder-3']);
 
-            expect(endpointParser.getSubject('http://www.api-root.com/catalogus/api/3/action/package_show?id=7'))
-                .toBe('api');
+            expect(endpointParser.getParts('http://www.api-root.com/catalogus/api/3/action/package_show?id=7'))
+                .toEqual(['catalogus', 'api']);
         });
     });
 

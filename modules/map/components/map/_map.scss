@@ -18,20 +18,19 @@
   //translateZ(0) is needed to fix a Firefox bug, see tg-1306 (black screen when scrolling)
   transform: translateZ(0);
   cursor: default;
-  z-index: 1;
+  z-index: $body-z-index;
 }
 
 .c-map__overlay-buttons {
   position: absolute;
-  bottom: 0;
+  bottom: $button-shadow-size;
   left: 0;
 }
 
 %overlay-button {
   margin-right: $base-whitespace * .2;
   float: left;
-  border-bottom: none;
-  z-index: 3;
+  z-index: $on-top-z-index;
 }
 
 .s-leaflet-draw {

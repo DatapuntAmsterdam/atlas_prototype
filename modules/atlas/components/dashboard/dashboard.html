@@ -14,6 +14,7 @@
                 <div ng-if="!vm.isPrintMode" class="qa-dashboard__header">
                     <dp-site-header size="vm.headerSize"
                                     has-print-button="header.hasPrintButton"
+                                    search-action="header.searchAction"
                                     query="{{header.query}}"></dp-site-header>
                 </div>
                 <div ng-if="vm.isPrintMode" class="qa-dashboard__print-header">

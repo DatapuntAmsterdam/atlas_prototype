@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="39px" height="39px" viewBox="0 0 39 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
     <title>icoon-cluster</title>
     <desc>Created with Sketch.</desc>
     <defs>
@@ -15,12 +15,12 @@
             <use xlink:href="#path-3" fill="black"></use>
         </mask>
     </defs>
-    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="icoon-cluster">
             <g id="cluster-icoon" transform="translate(3.000000, 3.000000)">
                 <use id="Oval" stroke="#666666" mask="url(#mask-2)" stroke-width="6" xlink:href="#path-1"></use>
                 <use id="Oval" stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="6" xlink:href="#path-3"></use>
-                <circle id="Oval" fill="#FF0000" cx="16" cy="16" r="16"></circle>
+                <circle id="Oval" fill="#EC0000" cx="16" cy="16" r="16"></circle>
             </g>
         </g>
     </g>

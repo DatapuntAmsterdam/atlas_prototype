@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
     <title>icoon-polygoon-meten-rood</title>
     <desc>Created with Sketch.</desc>
     <defs>
@@ -15,9 +15,9 @@
             <use xlink:href="#path-3" fill="black"></use>
         </mask>
     </defs>
-    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="icoon-polygoon-meten-rood">
-            <polygon id="Fill-4" fill="#FF0000" points="-5.32907052e-15 26 26 26 26 0 -5.32907052e-15 0"></polygon>
+            <polygon id="Fill-4" fill="#EC0000" points="-5.32907052e-15 26 26 26 26 0 -5.32907052e-15 0"></polygon>
             <g id="icoon" transform="translate(5.000000, 4.000000)">
                 <path d="M5.47722925,15.2046565 L12.2972294,13.6299992 L5.47722925,15.2046565 Z" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>
                 <path d="M14.5,3.20000005 L14.5,15.2 L14.5,3.20000005 Z" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>

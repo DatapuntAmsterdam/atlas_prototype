@@ -2,7 +2,9 @@ describe('The dp-active-overlays component', function () {
     var $compile,
         $rootScope,
         store,
-        ACTIONS;
+        ACTIONS,
+        allOverlays,
+        user;
 
     beforeEach(function () {
         angular.mock.module(
@@ -22,6 +24,9 @@ describe('The dp-active-overlays component', function () {
                             maxZoom: 14
                         }
                     }
+                },
+                user: {
+                    getAuthorizationLevel: angular.noop
                 }
             },
             function ($provide) {
@@ -31,11 +36,13 @@ describe('The dp-active-overlays component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_, _overlays_, _user_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
             ACTIONS = _ACTIONS_;
+            allOverlays = _overlays_;
+            user = _user_;
         });
 
         spyOn(store, 'dispatch');
@@ -72,6 +79,21 @@ describe('The dp-active-overlays component', function () {
         // With overlays
         component = getComponent([{id: 'overlay_a', isVisible: true}], 8, true);
         expect(component.find('.c-active-overlays').length).toBe(1);
+    });
+
+    it('re-computes the overlays when the user authorization level changes', function () {
+        spyOn(user, 'getAuthorizationLevel').and.returnValue(1);
+
+        const component = getComponent([{id: 'overlay_a', isVisible: true}], 8, true);
+        const scope = component.isolateScope();
+
+        expect(scope.vm.validOverlays.length).toBe(1);
+
+        user.getAuthorizationLevel.and.returnValue(2);
+        allOverlays.SOURCES = {};
+        $rootScope.$digest();
+
+        expect(scope.vm.validOverlays.length).toBe(0);
     });
 
     it('loads the dp-active-overlays-item components in reversed order', function () {

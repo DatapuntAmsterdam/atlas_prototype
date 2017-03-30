@@ -4,16 +4,16 @@
   margin-right: $base-whitespace;
   padding: 0 $base-whitespace;
   float: left;
-  border: 1px solid $secondary-gray20;
   background-color: $primary-light;
   color: $secondary-gray60;
-  line-height: 24px;
+  line-height: $button-size;
 }
 
 .c-draw-tool {
   position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 100%;
-  z-index: 1;
+  top: 0;
+  left: 0;
+  width: calc(100% - #{$button-size + $base-whitespace}); // Don't overlap the fullscreen button
+  padding: $base-whitespace;
+  z-index: $fixed-position-z-index;
 }

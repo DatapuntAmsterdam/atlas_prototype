@@ -1,7 +1,5 @@
 <div class="c-layer-selection">
     <div class="c-layer-selection__heading">
-        Selecteer kaartlagen
-
         <dp-link type="HIDE_LAYER_SELECTION"
                  class-name="c-layer-selection__close qa-layer-selection-close"
                  hover-text="Sluiten">
@@ -9,7 +7,7 @@
     </div>
     <div class="c-layer-selection__content">
         <div class="u-margin__bottom--1 qa-baselayers">
-            <h2 class="o-header__subtitle u-margin__top--1-5 qa-category-header">Achtergrond</h2>
+            <h2 class="o-header__subtitle qa-category-header">Achtergrond</h2>
             <ul class="u-margin__bottom--2-5">
                 <li ng-repeat="baseLayer in vm.allBaseLayers" class="c-layer-selection__item">
                     <label>
@@ -52,5 +50,9 @@
                 </li>
             </ul>
         </div>
+
+        <dp-panel ng-if="vm.isMoreInfoAvailable" is-panel-visible="vm.isMoreInfoAvailable" type="warning" can-close="true" class="qa-category-warning">
+            'Bedrijven - Bronnen en risicozones' verschijnt na inloggen. Zie Help > Bediening dataportaal > Inloggen.
+        </dp-panel>
     </div>
 </div>

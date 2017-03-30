@@ -62,10 +62,6 @@ module.exports = {
         url: '',
         validator: require('../validators/page--home')
     },
-    'PAGE--LOGIN': {
-        url: '#?mpv=52.3731081:4.8932945&mpb=topografie&mpz=11&pgn=login',
-        validator: require('../validators/page--login')
-    },
     'STRAATBEELD--DETAIL': {
         url: '#?dte=https:%2F%2Fapi.datapunt.amsterdam.nl%2Fbag%2Fnummeraanduiding%2F03630000500149%2F&' +
              'mpb=topografie&mpz=16&mpv=52.3531791:5.00131&sbf=Cu&sbfs=T&sbh=4W&' +

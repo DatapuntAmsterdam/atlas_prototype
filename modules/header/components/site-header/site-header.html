@@ -11,15 +11,15 @@
                 </div>
             </div>
             <div ng-if="vm.isTall" class="u-col-sm--6 qa-site-header__contact">
-                <a href="https://amsterdam.nl/contact" class="c-site-header__contact">Contact</a>
+                <a href="mailto:algemeen.ois@amsterdam.nl" class="c-site-header__contact">Contact</a>
             </div>
             <div ng-if="vm.isShort" class="u-col-sm--6">
                 <div class="c-site-header__search qa-site-header__search">
-                    <dp-search query="{{vm.query}}"></dp-search>
+                    <dp-search query="{{vm.query}}" search-action="vm.searchAction"></dp-search>
                 </div>
             </div>
             <div ng-if="vm.isShort" class="u-col-sm--3 u-padding__right--2 qa-site-header__menu-col">
-                <div class="c-site-header__menu qa-site-header__menu">
+                <div class="c-site-header__menu _extra-space-for-the-menu qa-site-header__menu">
                     <dp-menu size="vm.menuSize" has-print-button="vm.hasPrintButton"></dp-menu>
                 </div>
             </div>
@@ -28,7 +28,7 @@
             <div class="c-site-header__toolbar qa-site-header__toolbar">
                 <div class="u-col-sm--6">
                     <div class="c-site-header__search qa-site-header__search">
-                        <dp-search query="{{vm.query}}"></dp-search>
+                        <dp-search query="{{vm.query}}" search-action="vm.searchAction"></dp-search>
                     </div>
                 </div>
                 <div class="u-col-sm--6 u-padding__right--2 qa-site-header__menu-col">

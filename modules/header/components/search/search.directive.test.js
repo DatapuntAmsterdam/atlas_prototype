@@ -107,29 +107,20 @@ describe('The dp-search directive', function () {
         promises = [];
     });
 
-    function getDirective (query,
-                           placeholder = 'placeholder',
-                           type = null,
-                           searchOnly = false,
-                           payload) {
+    function getDirective (query, searchAction = ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY) {
         var directive,
             element,
             scope;
 
         element = document.createElement('dp-search');
+
         element.setAttribute('query', query);
-        element.setAttribute('placeholder', placeholder);
-        if (type) {
-            element.setAttribute('type', type);
-        }
-        if (payload) {
-            element.setAttribute('payload', payload);
-        }
-        element.setAttribute('search-only', searchOnly);
+        element.setAttribute('search-action', 'searchAction');
 
         scope = $rootScope.$new();
 
-        scope.searchOnly = searchOnly;
+        scope.searchAction = searchAction;
+
         directive = $compile(element)(scope);
         scope.$apply();
 
@@ -154,82 +145,15 @@ describe('The dp-search directive', function () {
         expect(directive.find('.js-search-input')[0].value).toBe('');
     });
 
-    it('searches on cleared input when searchOnly is set to be true', function () {
-        const directive = getDirective('any query', 'placeholder', 'FETCH_SEARCH_RESULTS_BY_QUERY', true);
-        spyOn(store, 'dispatch');
-        directive.find('.qa-search-form__clear').click();
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
-            payload: ''
-        });
-    });
-
-    it('does not search on cleared input when searchOnly is set to be false', function () {
-        const directive = getDirective('any query', 'placeholder', 'FETCH_SEARCH_RESULTS_BY_QUERY', false);
+    it('does not search on cleared input', function () {
+        const directive = getDirective('any query');
         spyOn(store, 'dispatch');
         directive.find('.qa-search-form__clear').click();
         expect(store.dispatch).not.toHaveBeenCalledWith();
     });
 
-    it('optionally accepts a payload to include the query', function () {
-        const directive = getDirective('q', 'ph', 'FETCH_SEARCH_RESULTS_BY_QUERY', true, '{aap: "noot"}');
-
-        spyOn(store, 'dispatch');
-
-        // Set a query
-        directive.find('.js-search-input')[0].value = 'query';
-        directive.find('.js-search-input').trigger('change');
-
-        // Submit the form
-        directive.find('.c-search-form').trigger('submit');
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
-            payload: {
-                aap: 'noot',
-                query: 'query'
-            }
-        });
-    });
-
-    it('defaults search type to FETCH_SEARCH_RESULTS_BY_QUERY', function () {
-        var directive = getDirective('');
-
-        spyOn(store, 'dispatch');
-
-        // Set a query
-        directive.find('.js-search-input')[0].value = 'query without suggestions';
-        directive.find('.js-search-input').trigger('change');
-
-        // Submit the form
-        directive.find('.c-search-form').trigger('submit');
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
-            payload: 'query without suggestions'
-        });
-    });
-
-    it('allows other search types', function () {
-        var directive = getDirective('', 'placeholder', 'FETCH_SEARCH_RESULTS_BY_LOCATION');
-
-        spyOn(store, 'dispatch');
-
-        // Set a query
-        directive.find('.js-search-input')[0].value = 'query without suggestions';
-        directive.find('.js-search-input').trigger('change');
-
-        // Submit the form
-        directive.find('.c-search-form').trigger('submit');
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION,
-            payload: 'query without suggestions'
-        });
-    });
-
     it('can search (without using a suggestion from autocomplete)', function () {
-        var directive = getDirective('');
+        var directive = getDirective('', 'Any action');
 
         spyOn(store, 'dispatch');
 
@@ -241,7 +165,7 @@ describe('The dp-search directive', function () {
         directive.find('.c-search-form').trigger('submit');
 
         expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
+            type: 'Any action',
             payload: 'query without suggestions'
         });
     });
@@ -271,33 +195,6 @@ describe('The dp-search directive', function () {
 
         expect(directive.find('.c-search-form__submit').attr('title')).toBe('Zoeken');
         expect(directive.find('.c-search-form__submit .u-sr-only').text()).toBe('Zoeken');
-    });
-
-    describe('the autocomplete function', function () {
-        it('can be disabled', function () {
-            var directive = getDirective('', 'placeholder', 'FETCH', true);
-
-            // A query with suggestions
-            directive.find('.js-search-input')[0].value = 'query with suggestions';
-            directive.find('.js-search-input').trigger('change');
-            finishApiCall();
-            expect(directive.find('.c-autocomplete').length).toBe(0);
-        });
-
-        it('calls search when no search text is detected', function () {
-            spyOn(store, 'dispatch');
-            var directive = getDirective('', 'placeholder', 'FETCH_SEARCH_RESULTS_BY_QUERY', true);
-
-            // A query with suggestions
-            directive.find('.js-search-input')[0].value = 'aap';
-            directive.find('.js-search-input').trigger('change');
-            directive.find('.js-search-input')[0].value = '';
-            directive.find('.js-search-input').trigger('change');
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY,
-                payload: ''
-            });
-        });
     });
 
     describe('has autocomplete suggestions', function () {
