@@ -1,5 +1,6 @@
 describe('The user factory', function () {
-    let userSettings,
+    let $window,
+        userSettings,
         refreshToken,
         userType,
         user;
@@ -38,10 +39,13 @@ describe('The user factory', function () {
             }
         );
 
-        angular.mock.inject(function (_userSettings_, _user_) {
+        angular.mock.inject(function (_$window_, _userSettings_, _user_) {
+            $window = _$window_;
             userSettings = _userSettings_;
             user = _user_;
         });
+
+        spyOn($window.location, 'reload').and.returnValue(null);
     });
 
     describe('The regular behaviour', function () {
@@ -159,6 +163,27 @@ describe('The user factory', function () {
                 .forEach(level => expect(user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL[level])).toBe(true));
             dummyValues.forEach(level => expect(user.meetsRequiredLevel(level)).toBe(false));
             expect(user.meetsRequiredLevel(undefined)).toBe(true);
+        });
+    });
+
+    describe('The behaviour when the user authorization changes', function () {
+        it('reloads the application on logout', function () {
+            user.clearToken();
+            expect($window.location.reload).toHaveBeenCalledWith();
+        });
+
+        it('reloads the application on a lower authorization level', function () {
+            user.setAccessToken(testAccessTokenAuthz1);
+            expect($window.location.reload).not.toHaveBeenCalled();
+            user.setAccessToken(testAccessTokenAuthz0);
+            expect($window.location.reload).toHaveBeenCalledWith();
+        });
+
+        it('does not reload the application on a higher authorization level', function () {
+            user.setAccessToken(testAccessTokenAuthz0);
+            expect($window.location.reload).not.toHaveBeenCalled();
+            user.setAccessToken(testAccessTokenAuthz1);
+            expect($window.location.reload).not.toHaveBeenCalled();
         });
     });
 

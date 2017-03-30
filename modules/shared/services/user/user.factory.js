@@ -147,7 +147,13 @@
         }
 
         function setAccessToken (token) {
+            const currentAuthorizationLevel = user.authorizationLevel;
+
             user.accessToken = token;
+
+            if (!meetsRequiredLevel(currentAuthorizationLevel)) {
+                onLowerAuthorizationLevel();
+            }
         }
 
         function getUserType () {
@@ -177,8 +183,14 @@
             }
         }
 
+        function onLowerAuthorizationLevel () {
+            // Brute fix to reload the application when the user authorization decreases
+            $window.location.reload();
+        }
+
         function clearToken () {
             user.clear();
+            onLowerAuthorizationLevel();
         }
     }
 })();
