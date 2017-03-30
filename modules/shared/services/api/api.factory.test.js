@@ -1,9 +1,12 @@
 describe('The api factory', function () {
-    var $http,
+    var $rootScope,
+        $interval,
+        $http,
         $httpBackend,
         $q,
         api,
         mockedApiData,
+        user,
         isLoggedIn;
 
     beforeEach(function () {
@@ -11,7 +14,8 @@ describe('The api factory', function () {
             'dpShared',
             {
                 user: {
-                    getAccessToken: () => isLoggedIn ? 'MY_FAKE_ACCESS_TOKEN' : null
+                    getAccessToken: () => isLoggedIn ? 'MY_FAKE_ACCESS_TOKEN' : null,
+                    getRefreshToken: angular.noop
                 },
                 sharedConfig: {
                     API_ROOT: 'http://www.i-am-the-api-root.com/path/',
@@ -20,11 +24,14 @@ describe('The api factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$http_, _$httpBackend_, _$q_, _api_) {
+        angular.mock.inject(function (_$rootScope_, _$interval_, _$http_, _$httpBackend_, _$q_, _api_, _user_) {
+            $rootScope = _$rootScope_;
+            $interval = _$interval_;
             $http = _$http_;
             $httpBackend = _$httpBackend_;
             $q = _$q_;
             api = _api_;
+            user = _user_;
         });
 
         mockedApiData = {
@@ -51,6 +58,68 @@ describe('The api factory', function () {
 
         $httpBackend.flush();
 
+        expect(returnValue).toEqual(mockedApiData);
+    });
+
+    it('waits for an access token if user is logging in, continues if login succeeds', function () {
+        var returnValue;
+
+        spyOn(user, 'getRefreshToken').and.returnValue(true);
+        spyOn(user, 'getAccessToken').and.returnValue(false);
+
+        api.getByUrl('http://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/').then(function (data) {
+            returnValue = data;
+        });
+
+        $rootScope.$digest();
+        $httpBackend.verifyNoOutstandingRequest();
+
+        user.getAccessToken.and.returnValue(true);
+        $interval.flush(350);   // force refresh of access token
+        $rootScope.$digest();
+
+        $httpBackend.flush();
+        expect(returnValue).toEqual(mockedApiData);
+    });
+
+    it('waits for an access token if user is logging in, continues if login fails', function () {
+        var returnValue;
+
+        spyOn(user, 'getRefreshToken').and.returnValue(true);
+        spyOn(user, 'getAccessToken').and.returnValue(false);
+
+        api.getByUrl('http://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/').then(function (data) {
+            returnValue = data;
+        });
+
+        $rootScope.$digest();
+        $httpBackend.verifyNoOutstandingRequest();
+
+        user.getRefreshToken.and.returnValue(false);
+        $interval.flush(350);   // force refresh of access token
+        $rootScope.$digest();
+
+        $httpBackend.flush();
+        expect(returnValue).toEqual(mockedApiData);
+    });
+
+    it('waits for an access token if user is logging in for max 5 seconds', function () {
+        var returnValue;
+
+        spyOn(user, 'getRefreshToken').and.returnValue(true);
+        spyOn(user, 'getAccessToken').and.returnValue(false);
+
+        api.getByUrl('http://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/').then(function (data) {
+            returnValue = data;
+        });
+
+        $rootScope.$digest();
+        $httpBackend.verifyNoOutstandingRequest();
+
+        $interval.flush(5500);   // force end of interval
+        $rootScope.$digest();
+
+        $httpBackend.flush();
         expect(returnValue).toEqual(mockedApiData);
     });
 
