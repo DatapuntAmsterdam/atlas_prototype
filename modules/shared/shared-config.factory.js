@@ -17,13 +17,13 @@
 
         const environmentConfig = {
             PRODUCTION: {
-                API_ROOT: 'https://api.data.amsterdam.nl/'
+                API_ROOT: 'https://api-acc.data.amsterdam.nl/'
             },
             ACCEPTATION: {
                 API_ROOT: 'https://api-acc.datapunt.amsterdam.nl/'
             },
             DEVELOPMENT: {
-                API_ROOT: 'https://api.data.amsterdam.nl/'
+                API_ROOT: 'https://api-acc.data.amsterdam.nl/'
             }
         };
 
