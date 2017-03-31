@@ -34,7 +34,7 @@ describe('The mapConfig factory', function () {
 
             // Environment config
             expect(mapConfig.OVERLAY_ROOT)
-                .toBe('https://map.datapunt.amsterdam.nl/');
+                .toBe('https://map-acc.datapunt.amsterdam.nl/');
         });
 
         it('ACCEPTATION', function () {
@@ -56,7 +56,7 @@ describe('The mapConfig factory', function () {
 
             // Environment config
             expect(mapConfig.OVERLAY_ROOT)
-                .toBe('https://map.datapunt.amsterdam.nl/');
+                .toBe('https://map-acc.datapunt.amsterdam.nl/');
         });
     });
 
