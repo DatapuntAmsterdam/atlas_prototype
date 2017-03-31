@@ -185,7 +185,7 @@
 
         function onLowerAuthorizationLevel () {
             // Brute fix to reload the application when the user authorization decreases
-            $window.location.reload();
+            $window.location.reload(true);
         }
 
         function clearToken () {
