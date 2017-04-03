@@ -169,14 +169,14 @@ describe('The user factory', function () {
     describe('The behaviour when the user authorization changes', function () {
         it('reloads the application on logout', function () {
             user.clearToken();
-            expect($window.location.reload).toHaveBeenCalledWith();
+            expect($window.location.reload).toHaveBeenCalledWith(true);
         });
 
         it('reloads the application on a lower authorization level', function () {
             user.setAccessToken(testAccessTokenAuthz1);
             expect($window.location.reload).not.toHaveBeenCalled();
             user.setAccessToken(testAccessTokenAuthz0);
-            expect($window.location.reload).toHaveBeenCalledWith();
+            expect($window.location.reload).toHaveBeenCalledWith(true);
         });
 
         it('does not reload the application on a higher authorization level', function () {
