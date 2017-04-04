@@ -5,10 +5,16 @@ exports.config = {
     capabilities: {
         browserName: 'phantomjs',
         shardTestFiles: true,
-        maxInstances: 4,
-        'phantomjs.binary.path': './node_modules/phantomjs/bin/phantomjs'
+        maxInstances: 4
+    },
+    allScriptsTimeout: 60000,
+    ignoreUncaughtExceptions: true,
+    jasmineNodeOpts: {
+        showColors: true,
+        defaultTimeoutInterval: 60000
     },
     onPrepare: function () {
+
         browser.driver.manage().window().setSize(1024, 768);
 
         global.dp = require('./e2e/helpers/datapunt');
