@@ -59,7 +59,7 @@ describe('The mapConfig factory', function () {
             // Environment config
             expect(mapConfig.BASE_LAYER_OPTIONS.subdomains).toEqual(['t1', 't2', 't3', 't4']);
             expect(mapConfig.OVERLAY_ROOT)
-                .toBe('https://map.datapunt.amsterdam.nl/');
+                .toBe('https://map-acc.datapunt.amsterdam.nl/');
         });
     });
 

@@ -52,7 +52,7 @@ describe('The sharedConfig factory', function () {
             expect(sharedConfig.STRAATBEELD_THUMB_URL).toBe('panorama/thumbnail/');
 
             // Environment config
-            expect(sharedConfig.API_ROOT).toBe('https://api.data.amsterdam.nl/');
+            expect(sharedConfig.API_ROOT).toBe('https://acc.api.data.amsterdam.nl/');
         });
     });
 });

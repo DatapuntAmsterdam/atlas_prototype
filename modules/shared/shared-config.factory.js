@@ -17,7 +17,7 @@
 
         const environmentConfig = {
             PRODUCTION: {
-                API_ROOT: 'https://api.data.amsterdam.nl/'
+                API_ROOT: 'https://acc.api.data.amsterdam.nl/'
             },
             ACCEPTATION: {
                 API_ROOT: 'https://acc.api.data.amsterdam.nl/'
