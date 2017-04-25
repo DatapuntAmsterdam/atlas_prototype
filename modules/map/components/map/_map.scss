@@ -43,3 +43,36 @@
     }
   }
 }
+
+.leaflet-dragging .leaflet-grab {
+  cursor: move;
+}
+
+.leaflet-marker-draggable {
+  cursor: grab !important;
+}
+
+.leaflet-marker-draggable.leaflet-drag-target {
+  cursor: grabbing !important;
+}
+
+.o-highlight-cluster {
+  cursor: zoom-in;
+}
+
+.leaflet-marker-pane img {
+  cursor: default;
+}
+
+.leaflet-dragging .leaflet-marker-pane img {
+  cursor: move !important;
+}
+
+.leaflet-pane > svg path.leaflet-interactive {
+  cursor: url("assets/images/cursor-edit.cur") 3 19, pointer;
+}
+
+// @todo add save icon only when editing is in process
+//.leaflet-pane > svg path.leaflet-interactive {
+//  cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
+//}
