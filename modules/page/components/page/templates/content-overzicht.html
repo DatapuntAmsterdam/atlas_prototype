@@ -38,8 +38,7 @@
         <div ng-if="vm.entries.length > 1" class="u-col-sm--offset-1 u-col-sm--3">
             <div class="c-user-content-overview__right">
                 <div class="c-user-content-overview__toc-header">Op deze pagina</div>
-                <div ng-repeat="entry in vm.entries"
-                        ng-if="entry.short.isHref || entry.titel.value" class="u-margin__bottom--1">
+                <div ng-repeat="entry in vm.entries" class="u-margin__bottom--1">
                     <div ng-if="entry.short.isHref"
                          class="o-btn o-btn--link s-cms-page-content s-cms-page-content--toc"
                          ng-bind-html="entry.short.html"></div>
