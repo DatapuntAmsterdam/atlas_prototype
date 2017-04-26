@@ -44,43 +44,44 @@
   }
 }
 
+// dragging the map
 .leaflet-dragging .leaflet-grab {
   cursor: move;
 }
-
-.leaflet-marker-draggable {
-  cursor: grab !important;
+// edit anchor
+.leaflet-marker-icon.leaflet-editing-icon {
+  cursor: grab;
 }
-
-.leaflet-marker-draggable.leaflet-drag-target {
-  cursor: grabbing !important;
+// edit anchor while dragging the map
+.leaflet-dragging .leaflet-marker-icon.leaflet-editing-icon {
+  cursor: grabbing;
 }
-
-.o-highlight-cluster {
+// cluster
+.leaflet-marker-icon.o-highlight-cluster {
   cursor: zoom-in;
 }
-
-.leaflet-dragging .o-highlight-cluster {
-  cursor: move !important;
+// cluster while dragging the map
+.leaflet-dragging .leaflet-marker-icon.o-highlight-cluster {
+  cursor: move;
 }
-
-.leaflet-marker-pane img {
-  cursor: default;
-}
-
-.leaflet-dragging .leaflet-marker-pane img {
-  cursor: move !important;
-}
-
+// selection on map
 .leaflet-pane > svg path.leaflet-interactive {
   cursor: url("assets/images/cursor-edit.cur") 3 19, pointer;
 }
-
+// selection on map in edit mode
 // @todo remove this dependency to fill color for save cursor
 .leaflet-pane > svg path.leaflet-interactive[fill="#fe57a1"] {
   cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
 }
-
+// selection map while dragging the map
 .leaflet-dragging .leaflet-pane > svg path.leaflet-interactive {
+  cursor: move;
+}
+// panopopje
+.leaflet-pane.leaflet-marker-pane > img {
+  cursor: default;
+}
+// panopopje while dragging the map
+.leaflet-dragging .leaflet-pane.leaflet-marker-pane > img {
   cursor: move;
 }
