@@ -60,6 +60,10 @@
   cursor: zoom-in;
 }
 
+.leaflet-dragging .o-highlight-cluster {
+  cursor: move !important;
+}
+
 .leaflet-marker-pane img {
   cursor: default;
 }
@@ -72,7 +76,11 @@
   cursor: url("assets/images/cursor-edit.cur") 3 19, pointer;
 }
 
-// @todo add save icon only when editing is in process
-//.leaflet-pane > svg path.leaflet-interactive {
-//  cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
-//}
+// @todo remove this dependency to fill color for save cursor
+.leaflet-pane > svg path.leaflet-interactive[fill="#fe57a1"] {
+  cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
+}
+
+.leaflet-dragging .leaflet-pane > svg path.leaflet-interactive {
+  cursor: move;
+}
