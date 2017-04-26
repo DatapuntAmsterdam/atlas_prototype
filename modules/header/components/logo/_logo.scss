@@ -58,21 +58,9 @@ $title-tall-offset-left: 80px;
 
   .c-logo--short & {
     @include font-size($s-header-font);
-
-    &.c-logo__title--super {
-      margin-top: 14px;
-    }
   }
 
   .c-logo--tall & {
     @include font-size($xl-header-font);
-  }
-
-  &.c-logo__title--super {
-    align-self: flex-start;
-    margin: 12px 0 0 3px;
-    color: $secondary-gray60;
-    font-size: 10px;
-    font-weight: normal;
   }
 }

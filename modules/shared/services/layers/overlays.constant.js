@@ -612,8 +612,7 @@
                     label_long: 'Industrie - Geluidszones',
                     layers: [
                         'gezoneerdindustrieterrein',
-                        'geluidzoneindustrieterrein',
-                        'indicatievecontour55dbindustrieterrein'
+                        'geluidzoneindustrieterrein'
                     ],
                     minZoom: 8,
                     maxZoom: 16,
