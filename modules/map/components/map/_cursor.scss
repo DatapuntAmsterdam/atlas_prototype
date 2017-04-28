@@ -10,20 +10,22 @@
   }
 }
 
-.leaflet-pane  > svg path.leaflet-interactive {
-  // selection on map
-  & {
-    cursor: url("assets/images/cursor-edit.cur") 3 19, pointer;
+.leaflet-pane {
+  > svg path.leaflet-interactive {
+    // selection on map
+    & {
+      cursor: url("assets/images/cursor-edit.cur") 3 19, pointer;
+    }
+    // selection on map in edit mode
+    &[fill="#fe57a1"] {
+      cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
+    }
   }
-  // selection on map in edit mode
-  &[fill="#fe57a1"] {
-    cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
-  }
-}
 
-// pano popje
-.leaflet-pane.leaflet-marker-pane > img {
-  cursor: default;
+  // pano popje
+  .leaflet-marker-pane > img {
+    cursor: default;
+  }
 }
 
 .leaflet-dragging {
@@ -46,13 +48,15 @@
   }
 
   // selection map while dragging the map
-  .leaflet-pane > svg path.leaflet-interactive {
-    cursor: move;
-  }
+  .leaflet-pane {
+    > svg path.leaflet-interactive {
+      cursor: move;
+    }
 
-  // pano popje while dragging the map
-  .leaflet-pane.leaflet-marker-pane > img {
-    cursor: move;
+    // pano popje while dragging the map
+    &.leaflet-marker-pane > img {
+      cursor: move;
+    }
   }
 }
 
