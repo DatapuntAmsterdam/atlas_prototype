@@ -11,14 +11,16 @@
 }
 
 .leaflet-pane {
-  > svg path.leaflet-interactive {
+  > svg {
     // selection on map
-    & {
+    .leaflet-interactive {
       cursor: url("assets/images/cursor-edit.cur") 3 19, pointer;
-    }
-    // selection on map in edit mode
-    &[fill="#fe57a1"] {
-      cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
+
+      // selection on map in edit mode
+      // @todo fix dependency on fill color to detect editing of the polygon
+      &[fill="#fe57a1"] {
+        cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
+      }
     }
   }
 
@@ -49,8 +51,10 @@
 
   // selection map while dragging the map
   .leaflet-pane {
-    > svg path.leaflet-interactive {
-      cursor: move;
+    > svg {
+      .leaflet-interactive {
+        cursor: move;
+      }
     }
 
     // pano popje while dragging the map
