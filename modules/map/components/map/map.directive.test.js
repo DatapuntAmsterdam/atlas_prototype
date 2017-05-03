@@ -500,4 +500,33 @@ describe('The dp-map directive', function () {
             expect(mockedLeafletMap.invalidateSize).toHaveBeenCalled();
         });
     });
+
+    describe('draw state', () => {
+        it('should set the draw mode to draw when it is activated', () => {
+            spyOn(drawTool, 'getDrawingMode').and.returnValue(null);
+
+            const directive = getDirective(mockedMapState, false, mockedMarkers);
+            const element = directive[0].querySelector('.c-map');
+
+            expect(element.getAttribute('class')).toContain('c-map--drawing-mode-none');
+        });
+
+        it('should set the draw mode to draw when it is activated', () => {
+            spyOn(drawTool, 'getDrawingMode').and.returnValue('DRAW');
+
+            const directive = getDirective(mockedMapState, false, mockedMarkers);
+            const element = directive[0].querySelector('.c-map');
+
+            expect(element.getAttribute('class')).toContain('c-map--drawing-mode-draw');
+        });
+
+        it('should set the draw mode to draw when it is activated', () => {
+            spyOn(drawTool, 'getDrawingMode').and.returnValue('EDIT');
+
+            const directive = getDirective(mockedMapState, false, mockedMarkers);
+            const element = directive[0].querySelector('.c-map');
+
+            expect(element.getAttribute('class')).toContain('c-map--drawing-mode-edit');
+        });
+    });
 });
