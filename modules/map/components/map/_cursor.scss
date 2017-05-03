@@ -2,6 +2,10 @@
   // edit anchor
   &.leaflet-editing-icon {
     cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
   }
 
   // cluster icon
@@ -10,29 +14,24 @@
   }
 }
 
-.leaflet-pane {
+.leaflet-overlay-pane {
   > svg {
     // selection on map
     .leaflet-interactive {
       cursor: url("assets/images/cursor-edit.cur") 3 19, pointer;
 
-      // selection on map in edit mode
-      // @todo fix dependency on fill color to detect editing of the polygon
-      &[fill="#fe57a1"] {
-        cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
-      }
     }
-  }
-
-  // pano popje
-  .leaflet-marker-pane > img {
-    cursor: default;
   }
 }
 
-.leaflet-dragging {
+// pano popje
+.leaflet-marker-pane > img {
+  cursor: default;
+}
 
+.leaflet-dragging {
   // dragging the map
+
   .leaflet-grab {
     cursor: move;
   }
@@ -50,17 +49,38 @@
   }
 
   // selection map while dragging the map
-  .leaflet-pane {
+  .leaflet-overlay-pane {
     > svg {
       .leaflet-interactive {
         cursor: move;
       }
     }
+}
 
-    // pano popje while dragging the map
-    &.leaflet-marker-pane > img {
-      cursor: move;
+  // pano popje while dragging the map
+  .leaflet-marker-pane > img {
+    cursor: move;
+  }
+}
+
+.c-map--drawing-mode-draw {
+  // selection on map in draw mode
+  .leaflet-marker-icon {
+    // draw anchor
+    &.leaflet-editing-icon {
+      cursor: pointer;
     }
   }
 }
 
+.c-map--drawing-mode-edit {
+  // selection on map in edit mode
+  .leaflet-overlay-pane {
+    > svg {
+      // selection on map
+      .leaflet-interactive {
+        cursor: url("assets/images/cursor-save.cur") 3 19, pointer;
+      }
+    }
+  }
+}
