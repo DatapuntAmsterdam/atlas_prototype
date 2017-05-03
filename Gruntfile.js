@@ -17,7 +17,8 @@ module.exports = function (grunt) {
     grunt.registerTask('test', [
         'build-develop',
         'test-js',
-        'test-css'
+        'test-css',
+        'test-e2e'
     ]);
 
     grunt.registerTask('fulltest', [
