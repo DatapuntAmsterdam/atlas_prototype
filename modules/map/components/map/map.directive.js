@@ -12,10 +12,11 @@
         'zoom',
         'onMapClick',
         'user',
-        'overlays'
+        'overlays',
+        'drawTool'
     ];
 
-    function dpMapDirective (L, mapConfig, layers, highlight, panning, zoom, onMapClick, user, overlays) {
+    function dpMapDirective (L, mapConfig, layers, highlight, panning, zoom, onMapClick, user, overlays, drawTool) {
         return {
             restrict: 'E',
             scope: {
@@ -100,6 +101,10 @@
                     scope.$applyAsync(function () {
                         leafletMap.invalidateSize();
                     });
+                });
+
+                scope.$watch(drawTool.getDrawingMode, (drawingMode) => {
+                    scope.drawingMode = drawingMode ? drawingMode.toLowerCase() : 'none';
                 });
             });
 
