@@ -73,6 +73,7 @@
   }
 }
 
+// sass-lint:disable nesting-depth
 .c-map--drawing-mode-edit {
   // selection on map in edit mode
   .leaflet-overlay-pane {
@@ -84,3 +85,4 @@
     }
   }
 }
+// sass-lint:enable nesting-depth
