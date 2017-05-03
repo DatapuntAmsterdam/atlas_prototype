@@ -44,6 +44,7 @@
             isEnabled,
             enable,
             disable,
+            getDrawingMode,
             setPolygon,
             shape: shapeInfo
         };
@@ -124,6 +125,10 @@
             }
         }
 
+        function getDrawingMode () {
+            return drawTool.drawingMode;
+        }
+
         // Initialisation of the draw tool, initialise drawing and register required objects in the drawTool object
         function initDrawTool (map) {
             L.drawLocal.format = DRAW_TOOL_CONFIG.format;
@@ -159,7 +164,7 @@
 
         // Auto close polygon when in drawing mode and max markers has been reached
         function autoClose () {
-            if (drawTool.drawingMode === 'DRAW' &&
+            if (drawTool.drawingMode === DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW &&
                 currentShape.markers.length === currentShape.markersMaxCount) {
                 $rootScope.$applyAsync(() => {
                     disable();
@@ -171,7 +176,7 @@
         function handleDrawEvent (eventName, e) {
             const handlers = {
                 // Triggered when the user has chosen to draw a particular vector or marker
-                DRAWSTART: () => setDrawingMode('DRAW'),
+                DRAWSTART: () => setDrawingMode(DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW),
 
                 // Triggered when a vertex is created on a polyline or polygon
                 DRAWVERTEX: bindLastDrawnMarker,
@@ -183,7 +188,7 @@
                 },
 
                 // Triggered when the user starts edit mode by clicking the edit tool button
-                EDITSTART: () => setDrawingMode('EDIT'),
+                EDITSTART: () => setDrawingMode(DRAW_TOOL_CONFIG.DRAWING_MODE.EDIT),
 
                 // Triggered when the user has finshed editing (edit mode) and saves edits
                 EDITSTOP: finishPolygon,
@@ -229,9 +234,9 @@
             // Click outside shape => delete shape
             drawTool.map.on('click', function () {
                 // In edit mode => disable()
-                if (drawTool.drawingMode === 'EDIT') {
+                if (drawTool.drawingMode === DRAW_TOOL_CONFIG.DRAWING_MODE.EDIT) {
                     disable();
-                } else if (drawTool.drawingMode !== 'DRAW' && currentShape.layer) {
+                } else if (drawTool.drawingMode !== DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW && currentShape.layer) {
                     // If not in Draw or EDIT mode and a polygon exists
                     // then the current polygon gets deleted
                     // Note: In draw mode the click on map adds a new marker
@@ -256,7 +261,7 @@
 
         function isEnabled () {
             // isEnabled => shape is being created or being edited
-            return ['EDIT', 'DRAW'].indexOf(drawTool.drawingMode) !== -1;
+            return Object.keys(DRAW_TOOL_CONFIG.DRAWING_MODE).indexOf(drawTool.drawingMode) !== -1;
         }
 
         // start draw or edit mode for current layer or start create mode for new shape
@@ -274,7 +279,7 @@
         // end of draw or edit mode => in create mode complete shape, in edit mode save shape
         function disable () {
             if (isEnabled()) {
-                if (drawTool.drawingMode === 'DRAW') {
+                if (drawTool.drawingMode === DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW) {
                     if (currentShape.markers.length > 1) {
                         // Close the polyline between the first and last points
                         drawTool.drawShapeHandler.completeShape();

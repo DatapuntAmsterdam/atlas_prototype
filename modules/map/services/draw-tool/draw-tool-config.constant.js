@@ -6,6 +6,10 @@
         .constant('DRAW_TOOL_CONFIG', {
             MAX_MARKERS: 40,
             MARKERS_LEFT_WARNING: 5,
+            DRAWING_MODE: {
+                DRAW: 'DRAW',
+                EDIT: 'EDIT'
+            },
             format: {
                 numeric: {
                     delimiters: {
