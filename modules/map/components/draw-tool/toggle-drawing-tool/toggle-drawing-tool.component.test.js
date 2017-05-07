@@ -15,7 +15,6 @@ describe('The dp-toggle-drawing-tool component', function () {
                     isEnabled: angular.noop,
                     enable: angular.noop,
                     disable: angular.noop,
-                    getHasDrawnPolygon: angular.noop,
                     shape: {
                         markers: [],
                         markersMaxCount: 5
@@ -55,13 +54,13 @@ describe('The dp-toggle-drawing-tool component', function () {
         });
 
         it('shows the button in default state', function () {
-            expect(component.find('.qa-button').length).toBe(1);
-            expect(component.find('.qa-button').attr('class')).toContain('c-toggle-drawing-tool');
-            expect(component.find('.qa-button').attr('title')).toBe('Begin meten en intekenen');
+            expect(component.find('button').length).toBe(1);
+            expect(component.find('button').attr('class')).toContain('c-toggle-drawing-tool');
+            expect(component.find('button').attr('title')).toBe('Begin meten en intekenen');
         });
 
         it('enables draw/edit mode when clicking the button', function () {
-            component.find('.qa-button').click();
+            component.find('button').click();
             expect(drawTool.enable).toHaveBeenCalled();
         });
 
@@ -69,7 +68,7 @@ describe('The dp-toggle-drawing-tool component', function () {
             drawTool.shape.markers = ['aap'];
             spyOn(drawTool, 'setPolygon');
 
-            component.find('.qa-button').click();
+            component.find('button').click();
             expect(drawTool.setPolygon).toHaveBeenCalledWith([]);
             expect(drawTool.enable).toHaveBeenCalled();
         });
@@ -81,37 +80,16 @@ describe('The dp-toggle-drawing-tool component', function () {
             component = getComponent(true);
         });
 
-        it('shows the button in eindig tekenen state with extra label', function () {
-            expect(component.find('.qa-button').length).toBe(1);
-            expect(component.find('.qa-button').attr('class')).toContain('c-toggle-drawing-tool--active');
-            expect(component.find('.qa-button').attr('title')).toBe('Eindig meten en intekenen');
-            expect(component.find('.qa-button-finish').length).toBe(1);
+        it('shows the button in active state with extra label', function () {
+            expect(component.find('button').length).toBe(1);
+            expect(component.find('button').attr('class')).toContain('c-toggle-drawing-tool--active');
+            expect(component.find('button').attr('title')).toBe('Eindig meten en intekenen');
+            expect(component.find('button span').attr('class')).not.toContain('ng-hide');
         });
 
-        it('disables draw/edit mode when clicking the button', function () {
-            component.find('.qa-button').click();
+        it('disables drwa/edit mode when clicking the button', function () {
+            component.find('button').click();
             expect(drawTool.disable).toHaveBeenCalled();
-        });
-    });
-
-    describe('when not active and has drawn polygon', function () {
-        beforeEach(function () {
-            drawTool.isEnabled = () => false;
-            drawTool.shape.markers = [1, 2, 3, 5];
-
-            component = getComponent(true);
-        });
-
-        it('shows the button in opnieuw tekenen state with extra label', function () {
-            expect(component.find('.qa-button').length).toBe(1);
-            expect(component.find('.qa-button').attr('class')).toContain('c-toggle-drawing-tool--again');
-            expect(component.find('.qa-button').attr('title')).toBe('Opnieuw meten en intekenen');
-            expect(component.find('.qa-button-again').length).toBe(1);
-        });
-
-        it('disables draw/edit mode when clicking the button', function () {
-            component.find('.qa-button').click();
-            expect(drawTool.enable).toHaveBeenCalled();
         });
     });
 });

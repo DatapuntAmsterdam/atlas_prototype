@@ -156,9 +156,11 @@ describe('The draw tool factory', function () {
         it('can be enabled', function () {
             drawTool.enable();
             expect(drawShapeHandler.enable).toHaveBeenCalled();
+            expect(drawTool.getDrawingMode()).toBe(null);
 
             fireEvent('draw:drawstart');
             expect(drawTool.isEnabled()).toBe(true);
+            expect(drawTool.getDrawingMode()).toBe('DRAW');
         });
 
         it('ignores enable() when already enabled', function () {
@@ -440,18 +442,20 @@ describe('The draw tool factory', function () {
             createPolygon();
 
             expect(shapeClickHandler.click).toEqual(jasmine.any(Function));
+            expect(drawTool.getDrawingMode()).toBe(null);
 
             shapeClickHandler.click();
 
             expect(editShapeHandler.enable).toHaveBeenCalled();
             fireEvent('draw:editstart');
-            expect(drawTool.getDrawingMode()).toEqual('EDIT');
+
+            expect(drawTool.getDrawingMode()).toBe('EDIT');
 
             shapeClickHandler.click();
 
             expect(editShapeHandler.save).toHaveBeenCalled();
             expect(editShapeHandler.disable).toHaveBeenCalled();
-            expect(drawTool.getDrawingMode()).toEqual(null);
+            expect(drawTool.getDrawingMode()).toBe(null);
         });
 
         it('can edit a polygon by enabling the draw tool', function () {
@@ -459,15 +463,16 @@ describe('The draw tool factory', function () {
 
             drawTool.enable();
             expect(editShapeHandler.enable).toHaveBeenCalled();
+            expect(drawTool.getDrawingMode()).toBe(null);
 
             fireEvent('draw:editstart');
-            expect(drawTool.getDrawingMode()).toEqual('EDIT');
+            expect(drawTool.getDrawingMode()).toBe('EDIT');
 
             drawTool.disable();
 
             expect(editShapeHandler.save).toHaveBeenCalled();
             expect(editShapeHandler.disable).toHaveBeenCalled();
-            expect(drawTool.getDrawingMode()).toEqual(null);
+            expect(drawTool.getDrawingMode()).toBe(null);
         });
 
         it('can add markers to a polygon in edit mode', function () {

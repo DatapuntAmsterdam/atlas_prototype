@@ -1,6 +1,9 @@
 <dp-loading-indicator is-loading="mapState.isLoading" use-delay="true" show-inline="false"></dp-loading-indicator>
 
-<div class="c-map">
+<div class="c-map"
+     ng-class="{ 'c-map--drawing-mode-none': drawingMode === 'none',
+                 'c-map--drawing-mode-draw': drawingMode === 'draw',
+                 'c-map--drawing-mode-edit': drawingMode === 'edit'}">
     <div class="s-leaflet-draw c-map__leaflet js-leaflet-map"></div>
 
     <div class="c-map__overlay-buttons">

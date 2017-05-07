@@ -651,25 +651,16 @@
                     '=WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=geluidszoneschiphol&format=image/png&S' +
                     'TYLE=default'
                 },
-                mgth: {
+                mghv: {
                     url: 'maps/planologischezonesschiphol',
-                    label_short: 'Schiphol - Maatg. toetshoogtes',
-                    label_long: 'Schiphol - Maatgevende toetshoogtes',
-                    layers: ['maatgevendetoetshoogteschiphol'],
+                    label_short: 'Schiphol - Hoogtebeperking',
+                    label_long: 'Schiphol - Hoogtebeperkende vlakken',
+                    layers: ['hoogtebeperkingschiphol'],
                     minZoom: 8,
                     maxZoom: 16,
-                    legend: 'maps/planologischezonesschiphol?version=1.3.0&service=WMS&request=GetLegendGraphic&' +
-                    'sld_version=1.1.0&layer=maatgevendetoetshoogteschiphol&format=image/png&STYLE=default'
-                },
-                mthr: {
-                    url: 'maps/planologischezonesschiphol',
-                    label_short: 'Schiphol - Toetshoogtes radar',
-                    label_long: 'Schiphol - Toetshoogtes voor radar',
-                    layers: ['toetshoogteradarschiphol'],
-                    minZoom: 8,
-                    maxZoom: 16,
-                    legend: 'maps/planologischezonesschiphol?version=1.3.0&service=WMS&request=GetLegendGraphic&' +
-                    'sld_version=1.1.0&layer=toetshoogteradarschiphol&format=image/png&STYLE=default'
+                    legend: 'maps/planologischezonesschiphol?version=1.3.0&service' +
+                    '=WMS&request=GetLegendGraphic&sld_version=1.1.0&layer=hoogtebeperkingschiphol&format=image/p' +
+                    'ng&STYLE=default'
                 },
                 mgvvgsh: {
                     url: 'maps/planologischezonesschiphol',
@@ -816,8 +807,7 @@
                         'mgsw',
                         'mgpm',
                         'mgpsh',
-                        'mgth',
-                        'mthr',
+                        'mghv',
                         'mgvvgsh'
                     ]
                 }, {

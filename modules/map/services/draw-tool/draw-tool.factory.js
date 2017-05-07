@@ -42,9 +42,9 @@
         return {
             initialize,
             isEnabled,
-            getDrawingMode,
             enable,
             disable,
+            getDrawingMode,
             setPolygon,
             shape: shapeInfo
         };
@@ -125,7 +125,6 @@
             }
         }
 
-        // returns drawing mode: edit or draw
         function getDrawingMode () {
             return drawTool.drawingMode;
         }

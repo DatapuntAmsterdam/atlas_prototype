@@ -3,31 +3,9 @@
 
   &.c-toggle-drawing-tool--inactive {
     @include icon-button-box("polygon-measure", "transparent");
-
-    border: 1px solid $secondary-gray20;
-
-    &:hover {
-      border: 1px solid transparent;
-    }
-  }
-
-  &.c-toggle-drawing-tool--again {
-    @include icon-button-text-box-right("polygon-measure", "transparent");
-
-    border: 1px solid $secondary-gray20;
-
-    &:hover {
-      border: 1px solid transparent;
-    }
   }
 
   &.c-toggle-drawing-tool--active {
     @include icon-button-text-box-right("polygon-measure", "red", "transparent");
-
-    border: 1px solid transparent;
-
-    &:hover {
-      border: 1px solid $secondary-gray20;
-    }
   }
 }

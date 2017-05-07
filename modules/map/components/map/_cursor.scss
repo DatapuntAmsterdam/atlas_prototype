@@ -1,0 +1,88 @@
+.leaflet-marker-icon {
+  // edit anchor
+  &.leaflet-editing-icon {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  // cluster icon
+  &.o-highlight-cluster {
+    cursor: zoom-in;
+  }
+}
+
+.leaflet-overlay-pane {
+  > svg {
+    // selection on map
+    .leaflet-interactive {
+      cursor: url("assets/images/cursor-edit.cur") 3 19, pointer;
+
+    }
+  }
+}
+
+// pano popje
+.leaflet-marker-pane > img {
+  cursor: default;
+}
+
+.leaflet-dragging {
+  // dragging the map
+
+  .leaflet-grab {
+    cursor: move;
+  }
+
+  .leaflet-marker-icon {
+    // edit anchor while dragging the map
+    &.leaflet-editing-icon {
+      cursor: grabbing;
+    }
+
+    // cluster icon while dragging the map
+    &.o-highlight-cluster {
+      cursor: move;
+    }
+  }
+
+  // selection map while dragging the map
+  .leaflet-overlay-pane {
+    > svg {
+      .leaflet-interactive {
+        cursor: move;
+      }
+    }
+}
+
+  // pano popje while dragging the map
+  .leaflet-marker-pane > img {
+    cursor: move;
+  }
+}
+
+.c-map--drawing-mode-draw {
+  // selection on map in draw mode
+  .leaflet-marker-icon {
+    // draw anchor
+    &.leaflet-editing-icon {
+      cursor: pointer;
+    }
+  }
+}
+
+// sass-lint:disable nesting-depth
+.c-map--drawing-mode-edit {
+  // selection on map in edit mode
+  .leaflet-overlay-pane {
+    > svg {
+      // selection on map
+      .leaflet-interactive {
+        cursor: url("assets/images/cursor-save.cur") 10 10, pointer;
+      }
+    }
+  }
+}
+// sass-lint:enable nesting-depth

@@ -89,13 +89,13 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('does handle client error responses and requests', function () {
+    it('does not handle client error responses and requests', function () {
         $http
             .get('http://api-domain.amsterdam.nl/400')
             .catch(data => {
                 expect(data.data).toEqual(mockedData);
                 expect(data.status).toBe(400);
-                expect(httpStatus.registerError).toHaveBeenCalledWith(httpStatus.SERVER_ERROR);
+                expect(httpStatus.registerError).not.toHaveBeenCalled();
                 callbackCalled = true;
             });
 
@@ -125,7 +125,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('handles 404 errors with an unexpected body as server errors', function () {
+    it('does not handle 404 errors without the correct body', function () {
         mockedData = {};
 
         $httpBackend
@@ -137,7 +137,7 @@ describe('The http error registrar', function () {
             .catch(data => {
                 expect(data.data).toEqual(mockedData);
                 expect(data.status).toBe(404);
-                expect(httpStatus.registerError).toHaveBeenCalledWith(httpStatus.SERVER_ERROR);
+                expect(httpStatus.registerError).not.toHaveBeenCalled();
                 callbackCalled = true;
             });
 

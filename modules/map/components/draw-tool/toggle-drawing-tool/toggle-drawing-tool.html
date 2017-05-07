@@ -1,12 +1,10 @@
 <button ng-click="vm.toggle()"
-        class="c-toggle-drawing-tool qa-button"
+        class="c-toggle-drawing-tool"
         ng-class="{
-          'c-toggle-drawing-tool--inactive': !vm.hasDrawnPolygon && !vm.isEnabled(),
-          'c-toggle-drawing-tool--active': vm.isEnabled(),
-          'c-toggle-drawing-tool--again': vm.hasDrawnPolygon && !vm.isEnabled()
+          'c-toggle-drawing-tool--inactive': !vm.isEnabled(),
+          'c-toggle-drawing-tool--active': vm.isEnabled()
         }"
-        title="{{ vm.isEnabled() ? 'Eindig meten en intekenen' : ( vm.hasDrawnPolygon ? 'Opnieuw' : 'Begin' ) + ' meten en intekenen' }}">
+        title="{{ vm.isEnabled() ? 'Eindig meten en intekenen' : 'Begin meten en intekenen' }}">
     <em class="u-sr-only">Polygoon meten</em>
-    <span ng-if="vm.isEnabled()" class="qa-button-finish">Eindig</span>
-    <span ng-if="vm.hasDrawnPolygon && !vm.isEnabled()" class="qa-button-again">Opnieuw</span>
+    <span ng-show="vm.isEnabled()">Eindig</span>
 </button>
