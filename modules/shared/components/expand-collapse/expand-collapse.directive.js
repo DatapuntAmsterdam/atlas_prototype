@@ -5,10 +5,10 @@
 
     DpExpandCollapseDirective.$inject = [
         '$compile',
-        '$timeout'
+        '$interval'
     ];
 
-    function DpExpandCollapseDirective ($compile, $timeout) {
+    function DpExpandCollapseDirective ($compile, $interval) {
         return {
             restrict: 'A',
             link: linkFn,
@@ -17,7 +17,7 @@
 
         function linkFn (scope, element, attrs, controller, transcludeFn) {
             // NB: `$timeout` is required to await the element's rendering
-            $timeout(() => {
+            $interval(() => {
                 const initialHeight = element[0].offsetHeight;
                 const scrollHeight = element[0].scrollHeight;
 
