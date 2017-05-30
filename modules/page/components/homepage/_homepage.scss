@@ -1,24 +1,24 @@
 @import "catalogus-themes/catalogus-themes";
 
-$block-tall-height: 287px;
+$block-tall-height: 302px;
 $block-short-height: 141px;
 $show-more-height: 70px;
 
 .c-homepage__block {
   display: block;
   position: relative;
-  margin-bottom: .5 * $base-whitespace;
+  margin-bottom: 2 * $base-whitespace;
   background-color: $secondary-gray4;
   background-position: center center;
   background-size: cover;
 }
 
 .c-homepage__block--left {
-  margin-right: .5 * $base-whitespace;
+  margin-right: 2 * $base-whitespace;
 }
 
 .c-homepage__block--middle {
-  margin-right: .5 * $base-whitespace;
+  margin-right: 2 * $base-whitespace;
 }
 
 .c-homepage__block--right {
@@ -118,12 +118,19 @@ $show-more-height: 70px;
 
 .c-homepage__block-button {
   position: absolute;
-  right: $base-whitespace;
-  bottom: $base-whitespace;
-  left: $base-whitespace;
-  width: calc(100% - (2 * #{$base-whitespace}));
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: $secondary-gray4;
 
   &:hover {
     @include o-btn-white--hover;
   }
+}
+
+.c-homepage__block-button--datasets {
+  bottom: -85px;
+  left: -20px;
+  width: calc(100% + 50px);
 }

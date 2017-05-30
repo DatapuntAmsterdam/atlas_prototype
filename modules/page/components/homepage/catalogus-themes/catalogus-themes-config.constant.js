@@ -44,6 +44,16 @@
                 name: 'Werk en inkomen',
                 slug: 'werk-inkomen',
                 icon: 'werk-en-inkomen'
+            },
+            {
+                name: 'Dienstverlening',
+                slug: 'dienstverlening',
+                icon: 'dienstverlening'
+            },
+            {
+                name: 'Educatie, jeugd en diversiteit',
+                slug: 'educatie-jeugd-diversiteit',
+                icon: 'educatie-jeugd-diversiteit'
             }
         ]);
 })();

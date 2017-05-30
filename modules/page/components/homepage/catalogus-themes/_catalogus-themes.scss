@@ -81,3 +81,11 @@ $base-padding: calc(#{$base-whitespace} * 2);
 .c-catalogus-theme__icon--werk-en-inkomen {
   @include icon-button-text-right("werk-en-inkomen", "", "red");
 }
+
+.c-catalogus-theme__icon--dienstverlening {
+  @include icon-button-text-right("dienstverlening", "", "red");
+}
+
+.c-catalogus-theme__icon--educatie-jeugd-diversiteit {
+  @include icon-button-text-right("educatie-jeugd-diversiteit", "", "red");
+}

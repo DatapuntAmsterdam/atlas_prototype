@@ -1,12 +1,12 @@
 <div class="c-homepage u-padding__top--2">
     <div class="u-grid">
         <div class="u-row">
-            <div class="u-col-sm--6">
+            <div class="u-col-sm--9">
                 <!-- Link to map -->
                 <div class="qa-map-link">
                     <dp-link type="SHOW_MAP" class-name="c-homepage__block c-homepage__block--left c-homepage__block--tall c-homepage__block--homepage">
                         <div class="o-btn o-btn--white c-homepage__block-button">
-                            <span class="o-btn--white__label">Data op de kaart</span>
+                            <span class="o-btn--white__label-right">Data op de kaart</span>
                         </div>
                     </dp-link>
                 </div>
@@ -14,29 +14,16 @@
             <div class="u-col-sm--3">
                 <!-- Link to straatbeeld -->
                 <div class="qa-straatbeeld-link">
-                    <dp-link type="FETCH_STRAATBEELD_BY_ID" class-name="c-homepage__block c-homepage__block--middle c-homepage__block--tall c-homepage__block--straatbeeld" payload="vm.fetchStraatbeeldPayload">
+                    <dp-link type="FETCH_STRAATBEELD_BY_ID" class-name="c-homepage__block c-homepage__block--right c-homepage__block--tall c-homepage__block--straatbeeld" payload="vm.fetchStraatbeeldPayload">
                         <div class="o-btn o-btn--white c-homepage__block-button">
-                            <span class="o-btn--white__label">Panorama</span>
+                            <span class="o-btn--white__label-right">Panorama</span>
                         </div>
                     </dp-link>
                 </div>
             </div>
-            <div class="u-col-sm--3">
-                <!-- News -->
-                <div class="c-homepage__block c-homepage__block--right c-homepage__block--tall">
-                    <div class="c-homepage__entries">
-                        <dp-user-content-widget type="news" limit-to="4"></dp-user-content-widget>
-                    </div>
-                    <div class="c-homepage__show-more">
-                        <dp-link type="SHOW_PAGE"
-                                 payload="{name: 'content-overzicht', type: 'news'}"
-                            >Nieuws</dp-link>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="u-row u-margin__bottom--2">
-            <div class="u-col-sm--6">
+            <div class="u-col-sm--9">
                 <!-- Links to data selection themes -->
                 <div class="c-homepage__block c-homepage__block--left c-homepage__block--tall">
                     <dp-catalogus-themes></dp-catalogus-themes>
@@ -45,33 +32,20 @@
             <div class="u-col-sm--3">
                 <div>
                     <!-- Link to data selection BAG -->
-                    <dp-link type="FETCH_DATA_SELECTION" class-name="c-homepage__block c-homepage__block--middle c-homepage__block--short c-homepage__block--adressen" payload="{dataset: 'bag', filters: {}, page: 1}">
+                    <dp-link type="FETCH_DATA_SELECTION" class-name="c-homepage__block c-homepage__block--right c-homepage__block--short c-homepage__block--adressen" payload="{dataset: 'bag', filters: {}, page: 1}">
                         <div class="o-btn o-btn--white c-homepage__block-button">
-                            <span class="o-btn--white__label">Adressentabel</span>
+                            <span class="o-btn--white__label-right">Adressentabel</span>
                         </div>
                     </dp-link>
                 </div>
 
                 <div>
                     <!-- Link to data selection HR -->
-                    <dp-link type="FETCH_DATA_SELECTION" class-name="c-homepage__block c-homepage__block--middle c-homepage__block--short c-homepage__block--vestigingen" payload="{dataset: 'hr', filters: {}, page: 1}">
+                    <dp-link type="FETCH_DATA_SELECTION" class-name="c-homepage__block c-homepage__block--right c-homepage__block--short c-homepage__block--vestigingen" payload="{dataset: 'hr', filters: {}, page: 1}">
                         <div class="o-btn o-btn--white c-homepage__block-button">
-                            <span class="o-btn--white__label">Vestigingentabel</span>
+                            <span class="o-btn--white__label-right">Vestigingentabel</span>
                         </div>
                     </dp-link>
-                </div>
-            </div>
-            <div class="u-col-sm--3">
-                <!-- Events -->
-                <div class="c-homepage__block c-homepage__block--right c-homepage__block--tall">
-                    <div class="c-homepage__entries">
-                        <dp-user-content-widget type="events" limit-to="4"></dp-user-content-widget>
-                    </div>
-                    <div class="c-homepage__show-more">
-                        <dp-link type="SHOW_PAGE"
-                                 payload="{name: 'content-overzicht', type: 'events'}"
-                            >Evenementen</dp-link>
-                    </div>
                 </div>
             </div>
         </div>
