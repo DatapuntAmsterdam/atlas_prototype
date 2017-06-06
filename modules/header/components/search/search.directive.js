@@ -5,9 +5,9 @@
         .module('dpHeader')
         .directive('dpSearch', dpSearchDirective);
 
-    dpSearchDirective.$inject = ['$timeout', 'autocompleteData', 'sharedConfig', 'store', 'ACTIONS'];
+    dpSearchDirective.$inject = ['$interval', 'autocompleteData', 'sharedConfig', 'store', 'ACTIONS'];
 
-    function dpSearchDirective ($timeout, autocompleteData, sharedConfig, store, ACTIONS) {
+    function dpSearchDirective ($interval, autocompleteData, sharedConfig, store, ACTIONS) {
         return {
             restrict: 'E',
             scope: {
@@ -129,6 +129,7 @@
             }
 
             function removeSuggestions (event) {
+                console.log('yoyo');
                 if (angular.isDefined(event) && event.type === 'blur') {
                     /**
                      * Clicking a suggestion link, which is outside the search box, triggers the blur event on the
@@ -136,7 +137,7 @@
                      * by removeSuggestionFromScope.
                      */
 
-                    $timeout(removeSuggestionFromScope, 200);
+                    $interval(removeSuggestionFromScope, 200);
                 } else {
                     removeSuggestionFromScope();
                 }
