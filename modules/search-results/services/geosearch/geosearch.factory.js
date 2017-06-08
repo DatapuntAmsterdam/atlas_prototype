@@ -3,9 +3,21 @@
         .module('dpSearchResults')
         .factory('geosearch', geosearchFactory);
 
-    geosearchFactory.$inject = ['$q', 'SEARCH_CONFIG', 'api', 'geosearchFormatter', 'searchFormatter'];
+    geosearchFactory.$inject = [
+        '$q',
+        'SEARCH_CONFIG',
+        'api',
+        'geosearchFormatter',
+        'searchFormatter',
+        'uriStripper'
+    ];
 
-    function geosearchFactory ($q, SEARCH_CONFIG, api, geosearchFormatter, searchFormatter) {
+    function geosearchFactory ($q,
+                               SEARCH_CONFIG,
+                               api,
+                               geosearchFormatter,
+                               searchFormatter,
+                               uriStripper) {
         return {
             search: searchFeatures
         };
@@ -26,7 +38,8 @@
 
                 request = api.getByUri(endpoint.uri, searchParams).then(
                     data => data,
-                    () => { return { features: [] }; });    // empty features on failure op api call
+                    () => { return { features: [] }; }) // empty features on failure op api call
+                    .then(stripSearchResultsUri);
 
                 allRequests.push(request);
             });
@@ -36,15 +49,33 @@
                 .then(getRelatedObjects);
         }
 
+        function stripSearchResultsUri (searchResult) {
+            console.log('searchResult: ', searchResult);
+            searchResult.features.forEach(feature => {
+                feature.properties.uri = uriStripper.stripUri(feature.properties.uri);
+                return feature;
+            });
+            console.log('searchResult: ', searchResult);
+            return searchResult;
+        }
+
         function getRelatedObjects (geosearchResults) {
             const q = $q.defer(),
                 [pandCategoryIndex, pandEndpoint] = getPandData(geosearchResults),
                 [plaatsCategoryIndex, plaatsEndpoint] = getPlaatsData(geosearchResults);
 
             if (plaatsEndpoint) {
-                api.getByUrl(plaatsEndpoint).then(processPlaatsData);
+                api.getByUri(plaatsEndpoint)
+                    .then(uriStripper.stripSelfLink) // strip the "show more" URL
+                    .then(processPlaatsData);
             } else if (pandEndpoint) {
-                api.getByUrl(pandEndpoint).then(processPandData);
+                api.getByUri(pandEndpoint)
+                    .then(pand => {
+                        uriStripper.stripSelfLink(pand); // strip the "show more" URL
+                        pand._adressen.href = uriStripper.stripUri(pand._adressen.href);
+                        return pand;
+                    })
+                    .then(processPandData);
             } else {
                 q.resolve(geosearchResults);
             }
@@ -54,12 +85,28 @@
             function processPandData (pand) {
                 const vestigingenUri = `handelsregister/vestiging/?pand=${pand.pandidentificatie}`;
 
+                // console.log('pand: ', pand);
+                // if(pand) {
+                //     console.log('pand._adressen: ', pand._adressen);
+                // }
+                // console.log('vestigingenUri: ', vestigingenUri);
                 $q.all([
-                    api.getByUrl(pand._adressen.href).then(formatVerblijfsobjecten),
-                    api.getByUri(vestigingenUri).then(formatVestigingen)
+                    api.getByUri(pand._adressen.href)
+                        .then(objecten => {
+                            objecten.results.map(uriStripper.stripSelfLink);
+                            return objecten;
+                        })
+                        .then(formatVerblijfsobjecten),
+                    api.getByUri(vestigingenUri)
+                        .then(objecten => {
+                            objecten.results.map(uriStripper.stripSelfLink);
+                            return objecten;
+                        })
+                        .then(formatVestigingen)
                 ]).then(combineResults);
 
                 function formatVerblijfsobjecten (objecten) {
+                    console.log('objecten: ', objecten);
                     // In verblijfsobjecten the status field is really a vbo_status field
                     // Rename this field to allow for tranparant processing of the search results
                     objecten.results.forEach(result => result.vbo_status = result.vbo_status || result.status);
@@ -77,6 +124,7 @@
                 }
 
                 function formatVestigingen (vestigingen) {
+                    console.log('vestigingen: ', vestigingen);
                     const formatted = (vestigingen && vestigingen.count)
                             ? searchFormatter.formatCategory('vestiging', vestigingen) : null,
                         extended = formatted ? angular.extend(formatted, {
@@ -91,6 +139,7 @@
                 }
 
                 function combineResults (results) {
+                    console.log('results: ', results);
                     const geosearchResultsCopy = angular.copy(geosearchResults),
                         filteredResults = results.filter(angular.identity);
 

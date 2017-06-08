@@ -22,7 +22,8 @@
         'geometry',
         'geojson',
         'crsConverter',
-        'dataFormatter'
+        'dataFormatter',
+        'uriStripper'
     ];
 
     function DpDetailController (
@@ -35,7 +36,8 @@
             geometry,
             geojson,
             crsConverter,
-            dataFormatter) {
+            dataFormatter,
+            uriStripper) {
         var vm = this;
 
         // Reload the data when the reload flag has been set (endpoint has not
@@ -71,38 +73,42 @@
                 vm.isLoading = false;
                 delete vm.apiData;
             } else {
-                api.getByUrl(endpoint).then(function (data) {
-                    data = dataFormatter.formatData(data, subject);
+                console.log('endpoint: ', endpoint);
+                api.getByUri(endpoint)
+                    .then(uriStripper.stripSelfLink) // strip the "show more" URL
+                    .then(function (data) {
+                        console.log('data: ', data);
+                        data = dataFormatter.formatData(data, subject);
 
-                    vm.apiData = {
-                        results: data
-                    };
+                        vm.apiData = {
+                            results: data
+                        };
 
-                    // In the case of a "natuurlijk" kadastraal subject, derive whether more info is available if
-                    // the user would have special privileges
-                    vm.showInsufficientRightsMessage = vm.apiData.results.is_natuurlijk_persoon &&
-                        user.getUserType() === user.USER_TYPE.AUTHENTICATED &&
-                        user.getAuthorizationLevel() !== user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS;
+                        // In the case of a "natuurlijk" kadastraal subject, derive whether more info is available if
+                        // the user would have special privileges
+                        vm.showInsufficientRightsMessage = vm.apiData.results.is_natuurlijk_persoon &&
+                            user.getUserType() === user.USER_TYPE.AUTHENTICATED &&
+                            user.getAuthorizationLevel() !== user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS;
 
-                    vm.filterSelection = {
-                        [subject]: vm.apiData.results.naam
-                    };
+                        vm.filterSelection = {
+                            [subject]: vm.apiData.results.naam
+                        };
 
-                    geometry.getGeoJSON(endpoint).then(function (geoJSON) {
-                        if (geoJSON !== null) {
-                            vm.location = crsConverter.rdToWgs84(geojson.getCenter(geoJSON));
-                        }
-
-                        store.dispatch({
-                            type: ACTIONS.SHOW_DETAIL,
-                            payload: {
-                                display: data._display,
-                                geometry: geoJSON,
-                                isFullscreen: subject === 'api' || !geoJSON
+                        geometry.getGeoJSON(endpoint).then(function (geoJSON) {
+                            if (geoJSON !== null) {
+                                vm.location = crsConverter.rdToWgs84(geojson.getCenter(geoJSON));
                             }
-                        });
+
+                            store.dispatch({
+                                type: ACTIONS.SHOW_DETAIL,
+                                payload: {
+                                    display: data._display,
+                                    geometry: geoJSON,
+                                    isFullscreen: subject === 'api' || !geoJSON
+                                }
+                            });
+                        }, errorHandler);
                     }, errorHandler);
-                }, errorHandler);
             }
         }
 
