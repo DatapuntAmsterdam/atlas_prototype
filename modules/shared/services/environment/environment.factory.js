@@ -13,6 +13,7 @@
         switch ($location.host()) {
             case 'atlas.amsterdam.nl':
             case 'data.amsterdam.nl':
+            case 'demo3.atlas.amsterdam.nl':
                 config.NAME = 'PRODUCTION';
                 break;
 

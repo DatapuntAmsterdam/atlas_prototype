@@ -35,6 +35,16 @@ describe('The environment factory', function () {
             });
         });
 
+        it('also uses PRODUCTION on demo3.atlas.amsterdam.nl', function () {
+            mockedHostname = 'demo3.atlas.amsterdam.nl';
+
+            angular.mock.inject(function (environment) {
+                expect(environment).toEqual({
+                    NAME: 'PRODUCTION'
+                });
+            });
+        });
+
         it('uses PRE_PRODUCTION on pre.atlas.amsterdam.nl and pre.data.amsterdam.nl', () => {
             const hostnames = ['pre.atlas.amsterdam.nl', 'pre.data.amsterdam.nl'];
 
