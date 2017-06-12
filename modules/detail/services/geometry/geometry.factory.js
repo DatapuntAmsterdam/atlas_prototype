@@ -18,7 +18,7 @@
              * @returns {Promise} - An object with GeoJSON or null
              */
         function getGeoJSON (url) {
-            return api.getByUrl(url).then(getGeometry);
+            return api.getByUri(url).then(getGeometry);
 
             function getGeometry (data) {
                 if (angular.isObject(data.geometrie)) {
