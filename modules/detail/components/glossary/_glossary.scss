@@ -1,9 +1,9 @@
 .c-stelselpedia__button {
-  @include icon-button("stelselpedia");
+  @include icon("stelselpedia");
 }
 
 .c-metadata__button {
-  @include icon-button("metadata");
+  @include icon("metadata");
 }
 
 // Negate negative margins for glossary meta inside a panel

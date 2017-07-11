@@ -2,32 +2,20 @@
   @extend %draw-tool-element;
 
   &.c-toggle-drawing-tool--inactive {
-    @include icon-button-box("polygon-measure", "transparent");
-
-    border: 1px solid $secondary-gray20;
-
-    &:hover {
-      border: 1px solid transparent;
-    }
+    @extend %icon--border-hover;
+    @extend %icon--shadow;
+    @include icon("polygon-measure", "transparent", "red");
   }
 
   &.c-toggle-drawing-tool--again {
-    @include icon-button-text-box-right("polygon-measure", "transparent");
-
-    border: 1px solid $secondary-gray20;
-
-    &:hover {
-      border: 1px solid transparent;
-    }
+    @extend %icon--border-hover;
+    @extend %icon--shadow;
+    @include icon-label-right("polygon-measure", "transparent", "red");
   }
 
   &.c-toggle-drawing-tool--active {
-    @include icon-button-text-box-right("polygon-measure", "red", "transparent");
-
-    border: 1px solid transparent;
-
-    &:hover {
-      border: 1px solid $secondary-gray20;
-    }
+    @extend %icon--border-inverted;
+    @extend %icon--shadow;
+    @include icon-label-right("polygon-measure", "red", "transparent");
   }
 }

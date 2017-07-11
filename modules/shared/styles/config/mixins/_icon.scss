@@ -1,56 +1,16 @@
-@mixin icon-button($icon, $state: "", $hover-state: "red") {
-  @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
-
+@mixin icon($icon, $state: "", $hover-state: "red") {
   width: $button-size;
   height: $button-size;
-
-  &:hover {
-    @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
-  }
-}
-
-%icon-button-text {
-  @extend %link;
-  @include font-size($s-font);
-  @include font-weight($bold-weight);
-  height: $button-size;
-  margin-left: 0;
-  color: inherit;
-}
-
-%icon-button-text-extra {
-  display: inline-block;
-  width: $button-size;
-  height: $button-size;
-  content: "";
-  vertical-align: middle;
-}
-
-@mixin icon-button-text-left($icon, $state: "", $hover-state: "red") {
-  @extend %icon-button-text;
-
-  &::after {
-    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
-    @extend %icon-button-text-extra;
-
-    margin-left: $base-whitespace;
-  }
-
-  &:hover {
-    &::after {
-      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
-    }
-  }
-}
-
-@mixin icon-button-text-right($icon, $state: "", $hover-state: "red") {
-  @extend %icon-button-text;
+  padding: 0;
+  line-height: $button-size;
 
   &::before {
     @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
-    @extend %icon-button-text-extra;
 
-    margin-right: $base-whitespace;
+    display: block;
+    width: $button-size;
+    height: $button-size;
+    content: "";
   }
 
   &:hover {
@@ -60,195 +20,82 @@
   }
 }
 
-%icon-button-box-base {
-  display: block;
-  position: relative;
-  width: $button-size;
-  height: $button-size;
-  box-shadow: $button-shadow-size $button-shadow-size 0 0 $secondary-gray40;
+%icon-label {
+  @include font-size($s-font);
+  @include font-weight($bold-weight);
 }
 
-%icon-button-box-white,
-%icon-button-box-transparent {
+@mixin icon-label-left($icon, $state: "", $hover-state: "red") {
+  @extend %icon-label;
+  @include icon($icon, $state, $hover-state);
+
+  width: auto;
+  padding-left: $base-whitespace;
+
+  &::before {
+    float: right;
+  }
+}
+
+@mixin icon-label-right($icon, $state: "", $hover-state: "red") {
+  @extend %icon-label;
+  @include icon($icon, $state, $hover-state);
+
+  width: auto;
+  padding-right: $base-whitespace;
+
+  &::before {
+    float: left;
+  }
+}
+
+%icon--border {
   background-color: $primary-light;
   color: $secondary-gray60;
-}
-
-%icon-button-box-red {
-  background-color: $primary-contrast;
-  color: $primary-light;
-}
-
-%icon-button-box-extra {
-  position: absolute;
-  top: 0;
-  width: $button-size;
-  height: $button-size;
-  content: "";
-  vertical-align: middle;
-}
-
-@mixin icon-button-box($icon, $state: "", $hover-state: "red") {
-  @extend %icon-button-box-base;
-  // extend icon-button-box-[$state | $hover-state] defaults to 'white'
-  @extend %#{"icon-button-box" + if(str-length($state) > 0, "-", "-white") + $state};
 
   &::after {
-    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
-    @extend %icon-button-box-extra;
-    left: 0;
-  }
-
-  &:hover {
-    // extend icon-button-box-[$state | $hover-state] defaults to 'white'
-    @extend %#{"icon-button-box" + if(str-length($hover-state) > 0, "-", "-white") + $hover-state};
-
-    &::after {
-      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
-    }
-  }
-}
-
-%icon-button-text-box {
-  @extend %icon-button-box-base;
-  @include font-size($s-font);
-  @include font-weight($bold-weight);
-  width: auto;
-  height: $button-size;
-  padding-right: $base-whitespace;
-  padding-left: $base-whitespace;
-  line-height: $button-size - 2px; // Compensate for the border, defined below
-  text-align: left;
-  text-decoration: none;
-  cursor: pointer;
-
-  span {
-    position: relative;
-    top: 0;
-  }
-}
-
-%icon-button-text-box-extra {
-  @extend %icon-button-box-extra;
-  top: -1px; // Compensate for the border
-}
-
-%icon-button-text-box-white,
-%icon-button-text-box-transparent {
-  @extend %icon-button-box-white;
-  border: 1px solid $secondary-gray20;
-}
-
-%icon-button-text-box-red {
-  @extend %icon-button-box-red;
-  border: 1px solid $primary-contrast;
-}
-
-@mixin icon-button-text-box-left($icon, $state: "", $hover-state: "red") {
-  @extend %icon-button-text-box;
-  // extend icon-button-box-[$state | $hover-state] defaults to 'white'
-  @extend %#{"icon-button-text-box" + if(str-length($state) > 0, "-", "-white") + $state};
-
-  padding-right: $base-whitespace + $button-size;
-
-  &::after {
-    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
-    @extend %icon-button-text-box-extra;
-
-    right: -1px; // Compensate for the border
-  }
-
-  &:hover {
-    // extend icon-button-box-[$state | $hover-state] defaults to 'white'
-    @extend %#{"icon-button-text-box" + if(str-length($hover-state) > 0, "-", "-white") + $hover-state};
-
-    &::after {
-      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
-    }
-  }
-}
-
-@mixin icon-button-text-box-right($icon, $state: "", $hover-state: "red") {
-  @extend %icon-button-text-box;
-  // extend icon-button-box-[$state | $hover-state] defaults to 'white'
-  @extend %#{"icon-button-text-box" + if(str-length($state) > 0, "-", "-white") + $state};
-
-  padding-left: $button-size;
-
-  &::before {
-    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
-    @extend %icon-button-text-box-extra;
-
-    left: -1px; // Compensate for the border
-  }
-
-  &:hover {
-    // extend icon-button-box-[$state | $hover-state] defaults to 'white'
-    @extend %#{"icon-button-text-box" + if(str-length($hover-state) > 0, "-", "-white") + $hover-state};
-
-    &::before {
-      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
-    }
-  }
-}
-
-%icon-button-text-flat {
-  @extend %icon-button-text-box;
-
-  border: none;
-  background-color: transparent;
-  color: $primary-dark;
-  box-shadow: none;
-}
-
-%icon-button-text-flat-extra {
-  @extend %icon-button-text-box-extra;
-}
-
-%icon-button-text-flat-hover {
-  @extend %icon-button-text-box-red;
-
-  border: none;
-}
-
-@mixin icon-button-text-flat-left($icon, $state: "", $hover-state: "red") {
-  @extend %icon-button-text-flat;
-
-  padding-right: $base-whitespace + $button-size;
-
-  &::after {
-    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
-    @extend %icon-button-text-flat-extra;
-
+    position: absolute;
     top: 0;
     right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid $secondary-gray20;
+    content: "";
   }
+}
+
+%icon--border-hover {
+  @extend %icon--border;
 
   &:hover {
-    @extend %icon-button-text-flat-hover;
+    background-color: $primary-contrast;
+    color: $primary-light;
 
     &::after {
-      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
+      border-color: $primary-contrast;
     }
   }
 }
 
-@mixin icon-button-text-flat-right($icon, $state: "", $hover-state: "red") {
-  @extend %icon-button-text-flat;
+%icon--border-inverted {
+  @extend %icon--border-hover;
+  background-color: $primary-contrast;
+  color: $primary-light;
 
-  padding-left: $button-size;
-
-  &::before {
-    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
-    @extend %icon-button-text-flat-extra;
-    left: 0;
+  &::after {
+    border-color: $primary-contrast;
   }
 
   &:hover {
-    @extend %icon-button-text-flat-hover;
+    background-color: $primary-light;
+    color: $secondary-gray60;
 
-    &::before {
-      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
+    &::after {
+      border-color: $secondary-gray20;
     }
   }
+}
+
+%icon--shadow {
+  box-shadow: $button-shadow-size $button-shadow-size 0 0 $secondary-gray40;
 }

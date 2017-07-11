@@ -1,3 +1,8 @@
 .c-print-button {
-  @include icon-button-text-left("print");
+  @extend %link;
+  @include icon-label-left("print");
+
+  &::before {
+    margin-left: $base-whitespace;
+  }
 }
