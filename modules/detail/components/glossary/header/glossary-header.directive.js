@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -33,7 +33,7 @@
             meta: false
         };
 
-        $scope.$watch('vm.heading', function (heading) {
+        $scope.$watch('vm.heading', heading => {
             vm.htmlHeading = $sce.trustAsHtml(heading);
         });
 
@@ -50,7 +50,7 @@
         vm.helpTitle = 'Uitleg tonen';
         vm.metaDataTitle = 'Informatie (metadata) tonen';
 
-        vm.toggle = function (item) {
+        vm.toggle = item => {
             vm.isVisible[item] = !vm.isVisible[item];
 
             if (item === 'help') {
@@ -69,4 +69,4 @@
             }
         };
     }
-})();
+}))();

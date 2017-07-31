@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -11,4 +11,4 @@
             'gebiedsgerichtwerken',
             'grootstedelijkgebied'
         ]);
-})();
+}))();

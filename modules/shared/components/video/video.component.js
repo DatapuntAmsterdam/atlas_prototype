@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     /**
@@ -54,4 +54,4 @@
             videoElement.setAttribute('poster', vm.poster);
         };
     }
-})();
+}))();

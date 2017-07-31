@@ -1,4 +1,4 @@
-describe('The api factory', function () {
+describe('The api factory', () => {
     var $rootScope,
         $http,
         $httpBackend,
@@ -10,7 +10,7 @@ describe('The api factory', function () {
         isLoggedIn,
         clearHttpCache;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpShared',
             {
@@ -26,7 +26,15 @@ describe('The api factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$http_, _$httpBackend_, _$cacheFactory_, _$q_, _api_, _user_) {
+        angular.mock.inject((
+            _$rootScope_,
+            _$http_,
+            _$httpBackend_,
+            _$cacheFactory_,
+            _$q_,
+            _api_,
+            _user_
+        ) => {
             $rootScope = _$rootScope_;
             $http = _$http_;
             $httpBackend = _$httpBackend_;
@@ -45,22 +53,22 @@ describe('The api factory', function () {
 
         isLoggedIn = false;
 
-        clearHttpCache = function () {
+        clearHttpCache = () => {
             // Clearing the cache whenever authorization level is lowered
             $cacheFactory.get('$http').removeAll();
         };
     });
 
-    afterEach(function () {
+    afterEach(() => {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
         clearHttpCache();
     });
 
-    it('getByUrl returns the data as a promise', function () {
+    it('getByUrl returns the data as a promise', () => {
         var returnValue;
 
-        api.getByUrl('https://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/').then(function (data) {
+        api.getByUrl('https://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/').then(data => {
             returnValue = data;
         });
 
@@ -69,11 +77,11 @@ describe('The api factory', function () {
         expect(returnValue).toEqual(mockedApiData);
     });
 
-    it('getByUrl optionally accepts a promise to allow for cancelling the request', function () {
+    it('getByUrl optionally accepts a promise to allow for cancelling the request', () => {
         const cancel = $q.defer();
 
         api.getByUrl('https://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/', undefined, cancel)
-            .then(function () {
+            .then(() => {
                 fail();   // Should never be resolved
             });
 
@@ -81,12 +89,12 @@ describe('The api factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('getByUrl optionally accepts a promise, rejects the promise when the request is not cancelled', function () {
+    it('getByUrl optionally accepts a promise, rejects the promise when the request is not cancelled', () => {
         var returnValue;
         const cancel = $q.defer();
 
         api.getByUrl('https://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/', undefined, cancel)
-            .then(function (data) {
+            .then(data => {
                 returnValue = data;
             });
 
@@ -99,10 +107,10 @@ describe('The api factory', function () {
         expect(isRejected).toBe(true);
     });
 
-    it('getByUri can be used when the API ROOT is unknown', function () {
+    it('getByUri can be used when the API ROOT is unknown', () => {
         var returnValue;
 
-        api.getByUri('bag/verblijfsobject/123/').then(function (data) {
+        api.getByUri('bag/verblijfsobject/123/').then(data => {
             returnValue = data;
         });
 
@@ -111,7 +119,7 @@ describe('The api factory', function () {
         expect(returnValue).toEqual(mockedApiData);
     });
 
-    it('does not add an Authorization header if the user is not logged in', function () {
+    it('does not add an Authorization header if the user is not logged in', () => {
         // Not logged in
         isLoggedIn = false;
 
@@ -123,7 +131,7 @@ describe('The api factory', function () {
         $httpBackend.flush();
     });
 
-    it('adds an Authorization header if the user is logged in', function () {
+    it('adds an Authorization header if the user is logged in', () => {
         // Logged in
         isLoggedIn = true;
         $httpBackend.expectGET(

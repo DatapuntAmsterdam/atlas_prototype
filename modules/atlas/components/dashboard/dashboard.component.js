@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -60,4 +60,4 @@
             vm.straatbeeldHistory = vm.isStraatbeeldActive ? state.straatbeeld.history : null;
         }
     }
-})();
+}))();

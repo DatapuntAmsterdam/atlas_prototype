@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -7,4 +7,4 @@
             templateUrl: 'modules/header/components/print-header/print-header.html',
             controllerAs: 'vm'
         });
-})();
+}))();

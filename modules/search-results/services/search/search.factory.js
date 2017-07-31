@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -28,7 +28,7 @@
                     q: query
                 };
 
-            SEARCH_CONFIG.QUERY_ENDPOINTS.forEach(function (endpoint) {
+            SEARCH_CONFIG.QUERY_ENDPOINTS.forEach(endpoint => {
                 if ((!angular.isString(categorySlug) || categorySlug === endpoint.slug) &&
                         endpoint.uri && user.meetsRequiredLevel(endpoint.authLevel)) {
                     queries.push(
@@ -39,9 +39,7 @@
 
             if (angular.isString(categorySlug)) {
                 // A single category
-                return $q.all(queries).then(function (searchResults) {
-                    return [searchFormatter.formatCategory(categorySlug, searchResults[0])];
-                });
+                return $q.all(queries).then(searchResults => [searchFormatter.formatCategory(categorySlug, searchResults[0])]);
             } else {
                 // All search results
                 return $q.all(queries).then(searchFormatter.formatCategories);
@@ -50,7 +48,7 @@
 
         function loadMore (category) {
             return api.getByUrl(category.next)
-                .then(function (nextPageData) {
+                .then(nextPageData => {
                     // Don't change the input, create a new variable
                     var output = {};
 
@@ -70,4 +68,4 @@
                 });
         }
     }
-})();
+}))();

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -20,7 +20,7 @@
     function DpNummeraanduidingHeaderController (api) {
         var vm = this;
 
-        api.getByUrl(vm.verblijfsobjectEndpoint).then(function (vboData) {
+        api.getByUrl(vm.verblijfsobjectEndpoint).then(vboData => {
             vm.isGevormd = Number(vboData.status.code) === 18;
 
             if (vm.isGevormd) {
@@ -29,4 +29,4 @@
             }
         });
     }
-})();
+}))();

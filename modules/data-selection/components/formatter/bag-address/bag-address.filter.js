@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,11 +6,11 @@
         .filter('bagAddress', bagAddressFilter);
 
     function bagAddressFilter () {
-        return function (input) {
+        return input => {
             const nummer = input.huisnummer + input.huisletter,
                 fullNummer = nummer + (input.huisnummer_toevoeging ? '-' + input.huisnummer_toevoeging : '');
 
             return `${input._openbare_ruimte_naam} ${fullNummer}`;
         };
     }
-})();
+}))();

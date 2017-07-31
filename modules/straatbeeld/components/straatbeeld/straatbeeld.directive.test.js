@@ -1,4 +1,4 @@
-describe('The dp-straatbeeld directive', function () {
+describe('The dp-straatbeeld directive', () => {
     var $compile,
         $rootScope,
         store,
@@ -9,7 +9,7 @@ describe('The dp-straatbeeld directive', function () {
         orientation,
         mockedMarzipanoViewer;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpStraatbeeld', {
             store: {
                 dispatch: function () { }
@@ -37,7 +37,7 @@ describe('The dp-straatbeeld directive', function () {
             }
         });
 
-        angular.mock.inject(function (
+        angular.mock.inject((
             _$compile_,
             _$rootScope_,
             _store_,
@@ -45,7 +45,7 @@ describe('The dp-straatbeeld directive', function () {
             _$q_,
             _marzipanoService_,
             _orientation_
-        ) {
+        ) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -89,8 +89,8 @@ describe('The dp-straatbeeld directive', function () {
         return directive;
     }
 
-    describe('there is a close icon', function () {
-        it('that triggers HIDE_STRAATBEELD', function () {
+    describe('there is a close icon', () => {
+        it('that triggers HIDE_STRAATBEELD', () => {
             var directive = getDirective({}, false);
 
             directive.find('.c-straatbeeld__close').click();
@@ -103,8 +103,8 @@ describe('The dp-straatbeeld directive', function () {
         });
     });
 
-    describe('Calls to SHOW_STRAATBEELD_INITIAL and SUBSEQUENT', function () {
-        it('Does not call SHOW_STRAATBEELD_INITIAL Or SUBSEQUENT IF State.id is unknown', function () {
+    describe('Calls to SHOW_STRAATBEELD_INITIAL and SUBSEQUENT', () => {
+        it('Does not call SHOW_STRAATBEELD_INITIAL Or SUBSEQUENT IF State.id is unknown', () => {
             var state = {};
 
             getDirective(state, false);
@@ -112,7 +112,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(store.dispatch).not.toHaveBeenCalled();
         });
 
-        it('Does call SHOW_STRAATBEELD_INITIAL', function () {
+        it('Does call SHOW_STRAATBEELD_INITIAL', () => {
             var state = {
                 id: 'ABC',
                 isInitial: true
@@ -128,7 +128,7 @@ describe('The dp-straatbeeld directive', function () {
             });
         });
 
-        it('Does call SHOW_STRAATBEELD_SUBSEQUENT', function () {
+        it('Does call SHOW_STRAATBEELD_SUBSEQUENT', () => {
             var state = {
                 id: 'ABC',
                 isInitial: false
@@ -144,7 +144,7 @@ describe('The dp-straatbeeld directive', function () {
             });
         });
 
-        it('Listens to changes on scope for id', function () {
+        it('Listens to changes on scope for id', () => {
             var directive = getDirective({}, false);
             expect(store.dispatch).not.toHaveBeenCalled();
 
@@ -159,7 +159,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(store.dispatch).toHaveBeenCalledTimes(2);
         });
 
-        it('Listens to resize changes', function () {
+        it('Listens to resize changes', () => {
             spyOn(mockedMarzipanoViewer, 'updateSize');
 
             const resize = [true, true];
@@ -181,7 +181,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(mockedMarzipanoViewer.updateSize).toHaveBeenCalled();
         });
 
-        it('Listens to changes on scope for location', function () {
+        it('Listens to changes on scope for location', () => {
             var directive = getDirective({}, false);
             expect(store.dispatch).not.toHaveBeenCalled();
 
@@ -196,7 +196,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(store.dispatch).toHaveBeenCalledTimes(2);
         });
 
-        it('triggers show action', function () {
+        it('triggers show action', () => {
             var directive = getDirective({}, false);
             expect(store.dispatch).not.toHaveBeenCalled();
 
@@ -213,8 +213,8 @@ describe('The dp-straatbeeld directive', function () {
         });
     });
 
-    describe('image state change triggers', function () {
-        it('Listens to changes on scope to trigger marzipanoService.loadscene', function () {
+    describe('image state change triggers', () => {
+        it('Listens to changes on scope to trigger marzipanoService.loadscene', () => {
             var directive = getDirective({}, false);
 
             expect(marzipanoService.loadScene).not.toHaveBeenCalled();
@@ -234,7 +234,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(marzipanoService.loadScene).toHaveBeenCalledTimes(2);
         });
 
-        it('Does not call Marzipano.loadscene when state.image is null', function () {
+        it('Does not call Marzipano.loadscene when state.image is null', () => {
             var state = {
                 image: null
             };
@@ -244,7 +244,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(marzipanoService.loadScene).not.toHaveBeenCalled();
         });
 
-        it('Does call Marzipano.loadscene when state.image exists', function () {
+        it('Does call Marzipano.loadscene when state.image exists', () => {
             var state = {
                 image: {
                     pattern: 'http://example.com/example/{a}/{b}/{c}.png',
@@ -271,7 +271,7 @@ describe('The dp-straatbeeld directive', function () {
         });
     });
 
-    describe('Changing hotspots', function () {
+    describe('Changing hotspots', () => {
         let directive;
 
         beforeEach(() => {
@@ -283,7 +283,7 @@ describe('The dp-straatbeeld directive', function () {
             }, false);
         });
 
-        it('Triggers marzipano to load the scene', function () {
+        it('Triggers marzipano to load the scene', () => {
             marzipanoService.loadScene.calls.reset();
 
             directive.isolateScope().state.hotspots = [{
@@ -305,7 +305,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(marzipanoService.loadScene).toHaveBeenCalledTimes(1);
         });
 
-        it('Triggers load scene on entire new array', function () {
+        it('Triggers load scene on entire new array', () => {
             marzipanoService.loadScene.calls.reset();
 
             directive.isolateScope().state.hotspots = [{
@@ -332,7 +332,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(marzipanoService.loadScene).toHaveBeenCalledTimes(1);
         });
 
-        it('Does not trigger load scene on entire new array with the exact same data', function () {
+        it('Does not trigger load scene on entire new array with the exact same data', () => {
             marzipanoService.loadScene.calls.reset();
 
             directive.isolateScope().state.hotspots = [{
@@ -360,8 +360,8 @@ describe('The dp-straatbeeld directive', function () {
         });
     });
 
-    describe('set orientation on mouse move', function () {
-        it('calls the orientation factory on mousemove to keep the state in sync', function () {
+    describe('set orientation on mouse move', () => {
+        it('calls the orientation factory on mousemove to keep the state in sync', () => {
             var directive;
 
             directive = getDirective({
@@ -379,7 +379,7 @@ describe('The dp-straatbeeld directive', function () {
             expect(orientation.update).toHaveBeenCalledWith(mockedMarzipanoViewer);
         });
 
-        it('doesn\'t call the orientation factory before the scene is done loading', function () {
+        it('doesn\'t call the orientation factory before the scene is done loading', () => {
             var directive,
                 mockedState;
 

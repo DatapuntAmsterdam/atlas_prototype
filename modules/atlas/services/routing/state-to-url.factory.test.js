@@ -1,10 +1,10 @@
-describe('The stateToUrl factory', function () {
+describe('The stateToUrl factory', () => {
     var $location,
         stateToUrl,
         stateUrlConverter,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas', {
             stateUrlConverter: {
                 state2params: state => angular.merge({}, state, {convert: true}),
@@ -12,7 +12,7 @@ describe('The stateToUrl factory', function () {
             }
         });
 
-        angular.mock.inject(function (_$location_, _stateToUrl_, _stateUrlConverter_) {
+        angular.mock.inject((_$location_, _stateToUrl_, _stateUrlConverter_) => {
             $location = _$location_;
             stateToUrl = _stateToUrl_;
             stateUrlConverter = _stateUrlConverter_;
@@ -27,13 +27,13 @@ describe('The stateToUrl factory', function () {
         spyOn(stateUrlConverter, 'state2url');
     });
 
-    describe('can update the url to reflect the state', function () {
-        it('by calling $location.search', function () {
+    describe('can update the url to reflect the state', () => {
+        it('by calling $location.search', () => {
             stateToUrl.update(mockedState);
             expect($location.search).toHaveBeenCalledWith(stateUrlConverter.state2params(mockedState));
         });
 
-        it('has the option to replace the URL by setting useReplace flag to true', function () {
+        it('has the option to replace the URL by setting useReplace flag to true', () => {
             // regular call
             stateToUrl.update(mockedState);
             expect($location.replace).not.toHaveBeenCalled();

@@ -1,13 +1,11 @@
-describe('The stateToUrlMiddleware factory', function () {
+describe('The stateToUrlMiddleware factory', () => {
     var stateToUrlMiddleware,
         mockedStore = {
             getState: function () {
                 return 'FAKE_STATE';
             }
         },
-        mockedNext = function (action) {
-            return action;
-        },
+        mockedNext = action => action,
         mockedAction = {
             type: 'FAKE_ACTION',
             payload: {}
@@ -15,10 +13,10 @@ describe('The stateToUrlMiddleware factory', function () {
         stateToUrl,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_stateToUrlMiddleware_, _stateToUrl_, _ACTIONS_) {
+        angular.mock.inject((_stateToUrlMiddleware_, _stateToUrl_, _ACTIONS_) => {
             stateToUrlMiddleware = _stateToUrlMiddleware_;
             stateToUrl = _stateToUrl_;
             ACTIONS = _ACTIONS_;
@@ -27,7 +25,7 @@ describe('The stateToUrlMiddleware factory', function () {
         spyOn(stateToUrl, 'update');
     });
 
-    it('calls the next action', function () {
+    it('calls the next action', () => {
         var returnValue;
 
         returnValue = stateToUrlMiddleware(mockedStore)(mockedNext)(mockedAction);
@@ -38,14 +36,14 @@ describe('The stateToUrlMiddleware factory', function () {
         });
     });
 
-    it('and call the stateToUrl service', function () {
+    it('and call the stateToUrl service', () => {
         stateToUrlMiddleware(mockedStore)(mockedNext)(mockedAction);
 
         expect(stateToUrl.update).toHaveBeenCalledWith('FAKE_STATE', jasmine.anything());
     });
 
     it('doesn\'t call stateToUrl.update for URL_CHANGE, FETCH_DETAIL, FETCH_STRAATBEELD_BY_ID, SHOW_LAYER_SELECTION ' +
-        'and HIDE_LAYER_SELECTION', function () {
+        'and HIDE_LAYER_SELECTION', () => {
         var actionWithoutUrlUpdate = [
             ACTIONS.URL_CHANGE,
             ACTIONS.FETCH_DETAIL,
@@ -57,7 +55,7 @@ describe('The stateToUrlMiddleware factory', function () {
             ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY
         ];
 
-        actionWithoutUrlUpdate.forEach(function (action) {
+        actionWithoutUrlUpdate.forEach(action => {
             stateToUrlMiddleware(mockedStore)(mockedNext)({
                 type: action,
                 payload: {}
@@ -67,7 +65,7 @@ describe('The stateToUrlMiddleware factory', function () {
         });
     });
 
-    it('does call stateToUrl.update for all other actions', function () {
+    it('does call stateToUrl.update for all other actions', () => {
         var actionsWithUrlUpdate = [
             ACTIONS.SHOW_SEARCH_RESULTS,
             ACTIONS.MAP_SET_BASELAYER,
@@ -93,7 +91,7 @@ describe('The stateToUrlMiddleware factory', function () {
             ACTIONS.HIDE_PRINT
         ];
 
-        actionsWithUrlUpdate.forEach(function (action) {
+        actionsWithUrlUpdate.forEach(action => {
             stateToUrlMiddleware(mockedStore)(mockedNext)({
                 type: action,
                 payload: {}
@@ -103,7 +101,7 @@ describe('The stateToUrlMiddleware factory', function () {
         });
     });
 
-    it('replaces the URL for some actions', function () {
+    it('replaces the URL for some actions', () => {
         var shouldUseReplace = [
                 ACTIONS.MAP_SET_BASELAYER,
                 ACTIONS.MAP_ADD_OVERLAY,
@@ -129,7 +127,7 @@ describe('The stateToUrlMiddleware factory', function () {
                 ACTIONS.HIDE_PRINT
             ];
 
-        shouldUseReplace.forEach(function (action) {
+        shouldUseReplace.forEach(action => {
             stateToUrlMiddleware(mockedStore)(mockedNext)({
                 type: action,
                 payload: {}
@@ -138,7 +136,7 @@ describe('The stateToUrlMiddleware factory', function () {
             expect(stateToUrl.update).toHaveBeenCalledWith('FAKE_STATE', true);
         });
 
-        shouldNotUseReplace.forEach(function (action) {
+        shouldNotUseReplace.forEach(action => {
             stateToUrlMiddleware(mockedStore)(mockedNext)({
                 type: action,
                 payload: {}

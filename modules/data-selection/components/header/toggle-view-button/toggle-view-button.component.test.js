@@ -1,10 +1,10 @@
-describe('The dp-data-selection-toggle-view-button component', function () {
+describe('The dp-data-selection-toggle-view-button component', () => {
     let $compile,
         $rootScope,
         store,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -14,7 +14,7 @@ describe('The dp-data-selection-toggle-view-button component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -37,7 +37,7 @@ describe('The dp-data-selection-toggle-view-button component', function () {
         return component;
     }
 
-    it('when in table view: it shows a link to the list view', function () {
+    it('when in table view: it shows a link to the list view', () => {
         const component = getComponent('TABLE');
         $rootScope.$apply();
 
@@ -51,7 +51,7 @@ describe('The dp-data-selection-toggle-view-button component', function () {
         });
     });
 
-    it('when in list view: it shows a link to the table view', function () {
+    it('when in list view: it shows a link to the table view', () => {
         const component = getComponent('LIST');
         $rootScope.$apply();
 

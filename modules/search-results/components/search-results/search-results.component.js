@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -53,10 +53,10 @@
         const unwatchAuthorizationLevel = $rootScope.$watch(() => user.getAuthorizationLevel(), updateWarningMessage);
         $rootScope.$on('$destroy', unwatchAuthorizationLevel);
 
-        vm.loadMore = function () {
+        vm.loadMore = () => {
             vm.isLoadMoreLoading = true;
 
-            search.loadMore(vm.searchResults[0]).then(function (searchResults) {
+            search.loadMore(vm.searchResults[0]).then(searchResults => {
                 vm.isLoadMoreLoading = false;
 
                 vm.searchResults[0] = searchResults;
@@ -140,11 +140,9 @@
 
             vm.searchResults = searchResults;
 
-            vm.hasLoadMore = function () {
-                return angular.isString(vm.category) &&
-                    vm.searchResults[0].count > vm.searchResults[0].results.length &&
-                    !vm.isLoadMoreLoading;
-            };
+            vm.hasLoadMore = () => angular.isString(vm.category) &&
+                vm.searchResults[0].count > vm.searchResults[0].results.length &&
+                !vm.isLoadMoreLoading;
         }
 
         // @TODO remove the exception when backend uses correct sub type name tg-3551
@@ -162,4 +160,4 @@
             return results;
         }
     }
-})();
+}))();

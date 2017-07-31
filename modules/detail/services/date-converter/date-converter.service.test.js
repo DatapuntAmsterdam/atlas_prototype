@@ -1,15 +1,15 @@
-describe('dateConverter', function () {
+describe('dateConverter', () => {
     var dateConverter;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDetail');
 
-        angular.mock.inject(function (_dateConverter_) {
+        angular.mock.inject(_dateConverter_ => {
             dateConverter = _dateConverter_;
         });
     });
 
-    it('should convert a string yyyy-mm-dd to a js date object ', function () {
+    it('should convert a string yyyy-mm-dd to a js date object ', () => {
         var result = dateConverter.ymdToDate('2016-03-01');
 
         expect(result.getFullYear()).toBe(2016);
@@ -17,7 +17,7 @@ describe('dateConverter', function () {
         expect(result.getDate()).toBe(1);
     });
 
-    it('should convert a string yyyy-mm-dd before 1970 to a js date object ', function () {
+    it('should convert a string yyyy-mm-dd before 1970 to a js date object ', () => {
         var result = dateConverter.ymdToDate('1969-08-20');
 
         expect(result.getFullYear()).toBe(1969);

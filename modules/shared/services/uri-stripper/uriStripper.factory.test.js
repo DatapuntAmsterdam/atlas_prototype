@@ -1,9 +1,9 @@
-describe('The uri stripper factory', function () {
+describe('The uri stripper factory', () => {
     var uriStripper;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared',
-            function ($provide) {
+            $provide => {
                 $provide.factory('sharedConfig', () => {
                     return {
                         API_ROOT: 'https://api.data.amsterdam.nl/'
@@ -12,7 +12,7 @@ describe('The uri stripper factory', function () {
             }
         );
 
-        angular.mock.inject(function (_uriStripper_) {
+        angular.mock.inject(_uriStripper_ => {
             uriStripper = _uriStripper_;
         });
     });

@@ -1,11 +1,11 @@
-describe('The dp-toggle-fullscreen component', function () {
+describe('The dp-toggle-fullscreen component', () => {
     var $compile,
         $rootScope,
         store,
         ACTIONS,
         component;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -15,7 +15,7 @@ describe('The dp-toggle-fullscreen component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -42,12 +42,12 @@ describe('The dp-toggle-fullscreen component', function () {
         return result;
     }
 
-    describe('when minimized', function () {
-        beforeEach(function () {
+    describe('when minimized', () => {
+        beforeEach(() => {
             component = getComponent(false);
         });
 
-        it('shows a maximize icon', function () {
+        it('shows a maximize icon', () => {
             expect(component.find('button').length).toBe(1);
 
             expect(component.find('button').attr('class')).toContain('c-toggle-fullscreen__icon--fullscreen');
@@ -55,7 +55,7 @@ describe('The dp-toggle-fullscreen component', function () {
             expect(component.find('button .u-sr-only').text()).toBe('Kaart vergroten');
         });
 
-        it('triggers the MAP_FULLSCREEN action w/ payload=true when clicking the button', function () {
+        it('triggers the MAP_FULLSCREEN action w/ payload=true when clicking the button', () => {
             component.find('button').click();
 
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -65,12 +65,12 @@ describe('The dp-toggle-fullscreen component', function () {
         });
     });
 
-    describe('when maximized', function () {
-        beforeEach(function () {
+    describe('when maximized', () => {
+        beforeEach(() => {
             component = getComponent(true);
         });
 
-        it('shows a minimize icon', function () {
+        it('shows a minimize icon', () => {
             expect(component.find('button').length).toBe(1);
 
             expect(component.find('button').attr('class')).toContain('c-toggle-fullscreen__icon--minimize');
@@ -78,7 +78,7 @@ describe('The dp-toggle-fullscreen component', function () {
             expect(component.find('button .u-sr-only').text()).toBe('Kaart verkleinen');
         });
 
-        it('triggers the MAP_FULLSCREEN action w/ payload=false when clicking the button', function () {
+        it('triggers the MAP_FULLSCREEN action w/ payload=false when clicking the button', () => {
             component.find('button').click();
 
             expect(store.dispatch).toHaveBeenCalledWith({

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -16,10 +16,10 @@
 
         vm.isLoading = true;
 
-        api.getByUri('metadata/').then(function (data) {
+        api.getByUri('metadata/').then(data => {
             vm.isLoading = false;
 
             vm.sources = data;
         });
     }
-})();
+}))();

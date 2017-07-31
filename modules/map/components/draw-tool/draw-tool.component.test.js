@@ -1,4 +1,4 @@
-describe('The draw tool component', function () {
+describe('The draw tool component', () => {
     let $compile,
         $rootScope,
         drawTool,
@@ -11,7 +11,7 @@ describe('The draw tool component', function () {
         onDrawingMode,
         DRAW_TOOL_CONFIG;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -41,7 +41,14 @@ describe('The draw tool component', function () {
         };
         map = {};
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _drawTool_, _store_, _ACTIONS_, _DRAW_TOOL_CONFIG_) {
+        angular.mock.inject((
+            _$compile_,
+            _$rootScope_,
+            _drawTool_,
+            _store_,
+            _ACTIONS_,
+            _DRAW_TOOL_CONFIG_
+        ) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             drawTool = _drawTool_;
@@ -72,14 +79,14 @@ describe('The draw tool component', function () {
         return component;
     }
 
-    describe('The state parameter', function () {
-        beforeEach(function () {
+    describe('The state parameter', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'enable');
             spyOn(drawTool, 'disable');
             spyOn(drawTool, 'cancel');
         });
 
-        it('Uses this parameter to follow drawing mode, default none should trigger cancel', function () {
+        it('Uses this parameter to follow drawing mode, default none should trigger cancel', () => {
             getComponent();
             $rootScope.$digest();
 
@@ -88,7 +95,7 @@ describe('The draw tool component', function () {
             expect(drawTool.cancel).toHaveBeenCalled();
         });
 
-        it('Uses this parameter to follow drawing mode: draw should enable drawing', function () {
+        it('Uses this parameter to follow drawing mode: draw should enable drawing', () => {
             state.drawingMode = DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW;
             getComponent();
             $rootScope.$digest();
@@ -98,7 +105,7 @@ describe('The draw tool component', function () {
             expect(drawTool.cancel).not.toHaveBeenCalled();
         });
 
-        it('Uses this parameter to follow drawing mode: edit should enable drawing', function () {
+        it('Uses this parameter to follow drawing mode: edit should enable drawing', () => {
             state.drawingMode = DRAW_TOOL_CONFIG.DRAWING_MODE.EDIT;
             getComponent();
             $rootScope.$digest();
@@ -109,12 +116,12 @@ describe('The draw tool component', function () {
         });
     });
 
-    describe('The map parameter', function () {
-        beforeEach(function () {
+    describe('The map parameter', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'initialize');
         });
 
-        it('Uses this parameter to initialise the draw tool factory', function () {
+        it('Uses this parameter to initialise the draw tool factory', () => {
             map = {
                 aap: 'noot'
             };
@@ -124,14 +131,14 @@ describe('The draw tool component', function () {
         });
     });
 
-    describe('The polygon parameter', function () {
-        beforeEach(function () {
+    describe('The polygon parameter', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'setPolygon');
             spyOn(drawTool, 'enable');
             spyOn(drawTool, 'disable');
         });
 
-        it('Informs the draw tool factory of any changes', function () {
+        it('Informs the draw tool factory of any changes', () => {
             getComponent();
 
             spyOn(drawTool, 'isEnabled').and.returnValue(false);
@@ -141,7 +148,7 @@ describe('The draw tool component', function () {
             expect(drawTool.setPolygon).toHaveBeenCalledWith(polygon.markers);
         });
 
-        it('Does not informs the draw tool factory when drawing mode is enabled', function () {
+        it('Does not informs the draw tool factory when drawing mode is enabled', () => {
             spyOn(drawTool, 'isEnabled').and.returnValue(true);
 
             getComponent();
@@ -151,7 +158,7 @@ describe('The draw tool component', function () {
             expect(drawTool.setPolygon).not.toHaveBeenCalled();
         });
 
-        it('Does enable drawing mode when state drawing mode is enabled', function () {
+        it('Does enable drawing mode when state drawing mode is enabled', () => {
             spyOn(drawTool, 'isEnabled').and.returnValue(false);
 
             getComponent();
@@ -164,14 +171,14 @@ describe('The draw tool component', function () {
         });
     });
 
-    describe('The geometry parameter', function () {
-        beforeEach(function () {
+    describe('The geometry parameter', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'setPolygon');
             spyOn(drawTool, 'enable');
             spyOn(drawTool, 'disable');
         });
 
-        it('Informs the draw tool factory of any changes', function () {
+        it('Informs the draw tool factory of any changes', () => {
             getComponent();
 
             spyOn(drawTool, 'isEnabled').and.returnValue(false);
@@ -181,7 +188,7 @@ describe('The draw tool component', function () {
             expect(drawTool.setPolygon).toHaveBeenCalledWith(state.geometry);
         });
 
-        it('Informs the draw tool factory of any changes, defaults to polygon', function () {
+        it('Informs the draw tool factory of any changes, defaults to polygon', () => {
             getComponent();
 
             spyOn(drawTool, 'isEnabled').and.returnValue(false);
@@ -199,12 +206,12 @@ describe('The draw tool component', function () {
         });
     });
 
-    describe('The dispatched actions', function () {
-        beforeEach(function () {
+    describe('The dispatched actions', () => {
+        beforeEach(() => {
             spyOn(store, 'dispatch');
         });
 
-        it('dispatches a MAP_END_DRAWING action when a polygon is finished and has changed', function () {
+        it('dispatches a MAP_END_DRAWING action when a polygon is finished and has changed', () => {
             drawTool.shape.markers = [1, 2, 3];
             getComponent();
             onDrawingMode(DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW);
@@ -219,7 +226,7 @@ describe('The draw tool component', function () {
             });
         });
 
-        it('does not dispatch a MAP_END_DRAWING action when a polygon is finished and has not changed', function () {
+        it('does not dispatch a MAP_END_DRAWING action when a polygon is finished and has not changed', () => {
             drawTool.shape.markers = [1, 2, 3];
             getComponent();
             onDrawingMode(DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW);
@@ -228,7 +235,7 @@ describe('The draw tool component', function () {
             expect(store.dispatch).not.toHaveBeenCalledWith();
         });
 
-        it('Dispatches a MAP_START_DRAWING action when the drawing starts', function () {
+        it('Dispatches a MAP_START_DRAWING action when the drawing starts', () => {
             getComponent();
             onDrawingMode(DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW);
             expect(store.dispatch).toHaveBeenCalledWith({

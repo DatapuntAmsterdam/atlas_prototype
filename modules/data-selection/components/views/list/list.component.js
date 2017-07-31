@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -10,4 +10,4 @@
             templateUrl: 'modules/data-selection/components/views/list/list.html',
             controllerAs: 'vm'
         });
-})();
+}))();

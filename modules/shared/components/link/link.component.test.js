@@ -1,4 +1,4 @@
-describe('The dp-link component', function () {
+describe('The dp-link component', () => {
     let $compile,
         $rootScope,
         store,
@@ -11,7 +11,7 @@ describe('The dp-link component', function () {
         mockedCurrentPath,
         mockedTargetPath;
 
-    beforeEach(function () {
+    beforeEach(() => {
         mockedActions = {
             ACTION_WITH_LINK: {
                 id: 'ACTION_WITH_LINK',
@@ -58,7 +58,7 @@ describe('The dp-link component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$location_, _store_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$location_, _store_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -114,7 +114,7 @@ describe('The dp-link component', function () {
         return component;
     }
 
-    it('depending on the specified type (ACTION) a button or link is shown', function () {
+    it('depending on the specified type (ACTION) a button or link is shown', () => {
         let component;
 
         // When using ACTION_WITH_LINK
@@ -128,14 +128,14 @@ describe('The dp-link component', function () {
         expect(component.find('a').length).toBe(0);
     });
 
-    it('shows a button when there is no isButton variabele present for this ACTION', function () {
+    it('shows a button when there is no isButton variabele present for this ACTION', () => {
         // When using ACTION_WITH_LINK
         const component = getComponent(null, null, 'ACTION_WITHOUT_BUTTON_CONFIG', mockedPayload);
         expect(component.find('a').length).toBe(1);
         expect(component.find('button').length).toBe(0);
     });
 
-    it('can have a custom className', function () {
+    it('can have a custom className', () => {
         let component;
 
         // A link with a custom class
@@ -147,7 +147,7 @@ describe('The dp-link component', function () {
         expect(component.find('button').attr('class')).toContain('my-special-class');
     });
 
-    it('has a default fallback class if no className is specified', function () {
+    it('has a default fallback class if no className is specified', () => {
         let component;
 
         // A link with the default class
@@ -159,7 +159,7 @@ describe('The dp-link component', function () {
         expect(component.find('button').attr('class')).toContain('o-btn o-btn--link');
     });
 
-    it('has an optional hover text (title attribute)', function () {
+    it('has an optional hover text (title attribute)', () => {
         let component;
 
         // A link with hover text
@@ -171,7 +171,7 @@ describe('The dp-link component', function () {
         expect(component.find('button').attr('title')).toContain('Woohoo!');
     });
 
-    it('clicking the button will trigger a call to store.dispatch', function () {
+    it('clicking the button will trigger a call to store.dispatch', () => {
         let component;
 
         // A dispatch with a payload
@@ -191,7 +191,7 @@ describe('The dp-link component', function () {
         });
     });
 
-    it('sets the href attribute for actions with a link', function () {
+    it('sets the href attribute for actions with a link', () => {
         const component = getComponent(null, null, 'ACTION_WITH_LINK', mockedPayload);
 
         expect(component.find('a').attr('href')).toBe(mockedTargetPath);
@@ -207,7 +207,7 @@ describe('The dp-link component', function () {
         expect(mockedStateUrlConverter.state2url).toHaveBeenCalledWith(mockedTargetState);
     });
 
-    it('left clicking the link will NOT follow the href, it will trigger a regular store.dispatch', function () {
+    it('left clicking the link will NOT follow the href, it will trigger a regular store.dispatch', () => {
         const mockedClickEvent = jasmine.createSpyObj('e', ['preventDefault']);
 
         const component = getComponent(null, null, 'ACTION_WITH_LINK', mockedPayload);
@@ -228,7 +228,7 @@ describe('The dp-link component', function () {
         });
     });
 
-    it('transcludes content without adding whitespace', function () {
+    it('transcludes content without adding whitespace', () => {
         let component;
 
         // A link with transcluded content

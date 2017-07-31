@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -19,17 +19,17 @@
         };
 
         function linkFunction (scope, element) {
-            bbgaDataService.getGraphData('PERSONEN', scope.gebiedHeading, scope.gebiedCode).then(function (data) {
+            bbgaDataService.getGraphData('PERSONEN', scope.gebiedHeading, scope.gebiedCode).then(data => {
                 var personenGraph = new BBGA.Personen();
 
                 personenGraph.create(element[0].querySelector('.js-personen-graph'), data);
             });
 
-            bbgaDataService.getGraphData('HUIZEN', scope.gebiedHeading, scope.gebiedCode).then(function (data) {
+            bbgaDataService.getGraphData('HUIZEN', scope.gebiedHeading, scope.gebiedCode).then(data => {
                 var huizenGraph = new BBGA.Huizen();
 
                 huizenGraph.create(element[0].querySelector('.js-huizen-graph'), data);
             });
         }
     }
-})();
+}))();

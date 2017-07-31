@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -18,10 +18,10 @@
     function DpBbgaTevredenheid (BBGA_TEVREDENHEID_CONFIG, bbgaDataService) {
         var vm = this;
 
-        bbgaDataService.getGraphData('TEVREDENHEID', vm.gebiedHeading, vm.gebiedCode).then(function (bbgaData) {
+        bbgaDataService.getGraphData('TEVREDENHEID', vm.gebiedHeading, vm.gebiedCode).then(bbgaData => {
             vm.tableData = [];
 
-            BBGA_TEVREDENHEID_CONFIG.forEach(function (rowConfig) {
+            BBGA_TEVREDENHEID_CONFIG.forEach(rowConfig => {
                 if (angular.isNumber(bbgaData[rowConfig.variable].data[0].waarde)) {
                     vm.tableData.push({
                         label: rowConfig.label,
@@ -36,4 +36,4 @@
             }
         });
     }
-})();
+}))();

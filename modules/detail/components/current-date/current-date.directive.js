@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -20,4 +20,4 @@
 
         vm.currentDate = new Date();
     }
-})();
+}))();

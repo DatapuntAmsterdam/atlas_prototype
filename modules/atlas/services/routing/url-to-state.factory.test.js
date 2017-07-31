@@ -1,4 +1,4 @@
-describe('The urlToState factory', function () {
+describe('The urlToState factory', () => {
     var $location,
         $rootScope,
         urlToState,
@@ -7,7 +7,7 @@ describe('The urlToState factory', function () {
         ACTIONS,
         mockedSearchParams;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -22,7 +22,14 @@ describe('The urlToState factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$location_, _$rootScope_, _urlToState_, _authenticator_, _store_, _ACTIONS_) {
+        angular.mock.inject((
+            _$location_,
+            _$rootScope_,
+            _urlToState_,
+            _authenticator_,
+            _store_,
+            _ACTIONS_
+        ) => {
             $location = _$location_;
             $rootScope = _$rootScope_;
             authenticator = _authenticator_;
@@ -39,13 +46,13 @@ describe('The urlToState factory', function () {
         spyOn(store, 'dispatch');
     });
 
-    it('initializes the authenticator on startup', function () {
+    it('initializes the authenticator on startup', () => {
         spyOn(authenticator, 'initialize');
         urlToState.initialize();
         expect(authenticator.initialize).toHaveBeenCalled();
     });
 
-    it('routes authentication responses via the authenticator', function () {
+    it('routes authentication responses via the authenticator', () => {
         spyOn(authenticator, 'isCallback').and.returnValue(true);
         spyOn(authenticator, 'handleCallback');
 
@@ -63,7 +70,7 @@ describe('The urlToState factory', function () {
         expect(store.dispatch).not.toHaveBeenCalled();
     });
 
-    it('routes all other responses via dispatch action', function () {
+    it('routes all other responses via dispatch action', () => {
         spyOn(authenticator, 'isCallback').and.returnValue(false);
         spyOn(authenticator, 'handleCallback');
 
@@ -82,7 +89,7 @@ describe('The urlToState factory', function () {
         });
     });
 
-    it('dispatches the URL_CHANGE action once on initialisation', function () {
+    it('dispatches the URL_CHANGE action once on initialisation', () => {
         $location.search(mockedSearchParams);
 
         urlToState.initialize();
@@ -94,7 +101,7 @@ describe('The urlToState factory', function () {
         });
     });
 
-    it('dispatches the URL_CHANGE action whenever the search parameters change', function () {
+    it('dispatches the URL_CHANGE action whenever the search parameters change', () => {
         var changedSearchParams;
 
         urlToState.initialize();

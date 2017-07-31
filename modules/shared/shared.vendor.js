@@ -1,6 +1,6 @@
 /* globals L, proj4, Redux, marked */
 
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -15,4 +15,4 @@
         $provide.constant('Redux', Redux);
         $provide.constant('marked', marked);
     }
-})();
+}))();

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -20,9 +20,7 @@
         function getBaseLayerTemplate (layerName) {
             var baseLayerTemplate;
 
-            baseLayerTemplate = BASE_LAYERS.filter(function (layer) {
-                return layerName === layer.slug;
-            })[0];
+            baseLayerTemplate = BASE_LAYERS.filter(layer => layerName === layer.slug)[0];
 
             return baseLayerTemplate.urlTemplate;
         }
@@ -87,4 +85,4 @@
                 : api.createUrlWithToken(mapConfig.OVERLAY_ROOT + overlay.url);
         }
     }
-})();
+}))();

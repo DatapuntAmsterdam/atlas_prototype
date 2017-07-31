@@ -1,4 +1,4 @@
-describe('The dashboard component', function () {
+describe('The dashboard component', () => {
     var $compile,
         $rootScope,
         store,
@@ -6,7 +6,7 @@ describe('The dashboard component', function () {
         dashboardColumns,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -18,7 +18,7 @@ describe('The dashboard component', function () {
                     }
                 }
             },
-            function ($provide) {
+            $provide => {
                 [
                     'dpHeaderDirective',
                     'dpCardsHeaderDirective',
@@ -61,7 +61,7 @@ describe('The dashboard component', function () {
             }
         };
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_, _dashboardColumns_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_, _dashboardColumns_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -86,7 +86,7 @@ describe('The dashboard component', function () {
         return component;
     }
 
-    it('subscribes to the store to listen for changes', function () {
+    it('subscribes to the store to listen for changes', () => {
         spyOn(store, 'subscribe');
 
         getComponent();
@@ -94,7 +94,7 @@ describe('The dashboard component', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('shows a special header when in print mode', function () {
+    it('shows a special header when in print mode', () => {
         let component = getComponent();
         expect(component.find('.qa-dashboard__header').length).toBe(1);
         expect(component.find('.qa-dashboard__print-header').length).toBe(0);
@@ -105,7 +105,7 @@ describe('The dashboard component', function () {
         expect(component.find('.qa-dashboard__print-header').length).toBe(1);
     });
 
-    it('shows a special header when in embed preview', function () {
+    it('shows a special header when in embed preview', () => {
         let component = getComponent();
         expect(component.find('.qa-dashboard__header').length).toBe(1);
         expect(component.find('.qa-dashboard__embed-header').length).toBe(0);
@@ -165,30 +165,30 @@ describe('The dashboard component', function () {
         expect(component.find('.c-dashboard--page-type-apis').length).toBe(0);
     });
 
-    describe('error message', function () {
+    describe('error message', () => {
         var component,
             mockedVisibility = {
                 httpStatus: false
             };
 
-        beforeEach(function () {
+        beforeEach(() => {
             spyOn(dashboardColumns, 'determineVisibility').and.callFake(() => mockedVisibility);
         });
 
-        it('when not shown, does not flags the dashboard body', function () {
+        it('when not shown, does not flags the dashboard body', () => {
             component = getComponent();
 
             expect(component.find('.c-dashboard__body').attr('class')).not.toContain('c-dashboard__body--error');
         });
 
-        it('when shown, flags the dashboard body', function () {
+        it('when shown, flags the dashboard body', () => {
             mockedVisibility.httpStatus = true;
             component = getComponent();
 
             expect(component.find('.c-dashboard__body').attr('class')).toContain('c-dashboard__body--error');
         });
 
-        it('watches for changes to error message and rerenders the dashboard when needed', function () {
+        it('watches for changes to error message and rerenders the dashboard when needed', () => {
             // Start without the error message
             component = getComponent();
             mockedVisibility = {
@@ -213,12 +213,12 @@ describe('The dashboard component', function () {
         });
     });
 
-    describe('column sizes', function () {
+    describe('column sizes', () => {
         var component,
             mockedVisibility,
             mockedColumnSizes;
 
-        beforeEach(function () {
+        beforeEach(() => {
             mockedVisibility = {
                 httpStatus: false,
                 map: true
@@ -233,7 +233,7 @@ describe('The dashboard component', function () {
             spyOn(dashboardColumns, 'determineColumnSizes').and.returnValue(mockedColumnSizes);
         });
 
-        it('displays the columns according to the column size', function () {
+        it('displays the columns according to the column size', () => {
             component = getComponent();
 
             expect(component.find('.qa-dashboard__column--left').hasClass('ng-hide')).toBe(false);
@@ -241,7 +241,7 @@ describe('The dashboard component', function () {
             expect(component.find('.qa-dashboard__column--right').hasClass('ng-hide')).toBe(false);
         });
 
-        it('does not display a column on zero size', function () {
+        it('does not display a column on zero size', () => {
             mockedColumnSizes.left = 0;
             component = getComponent();
 
@@ -250,7 +250,7 @@ describe('The dashboard component', function () {
             expect(component.find('.qa-dashboard__column--right').hasClass('ng-hide')).toBe(false);
         });
 
-        it('does not display a column on missing size', function () {
+        it('does not display a column on missing size', () => {
             delete mockedColumnSizes.left;
             delete mockedColumnSizes.middle;
             delete mockedColumnSizes.right;
@@ -261,7 +261,7 @@ describe('The dashboard component', function () {
             expect(component.find('.qa-dashboard__column--right').hasClass('ng-hide')).toBe(true);
         });
 
-        it('adds the correct class according to the column size', function () {
+        it('adds the correct class according to the column size', () => {
             component = getComponent();
 
             expect(component.find('.qa-dashboard__column--left').attr('class')).toContain('u-col-sm--1');

@@ -1,11 +1,11 @@
-describe('The anchorLink component', function () {
+describe('The anchorLink component', () => {
     const FLUSH_PERIOD = 150;
     let $compile,
         $rootScope,
         $interval,
         anchor;
 
-    beforeEach(function () {
+    beforeEach(() => {
         anchor = null;
 
         angular.mock.module('dpShared',
@@ -14,7 +14,7 @@ describe('The anchorLink component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$interval_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$interval_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $interval = _$interval_;
@@ -38,24 +38,24 @@ describe('The anchorLink component', function () {
         return component;
     }
 
-    it('accepts an optional classname', function () {
+    it('accepts an optional classname', () => {
         const component = getComponent('', 'some className');
         expect(component.find('.qa-anchor-link').attr('class')).toContain('some className');
     });
 
-    it('transcludes content', function () {
+    it('transcludes content', () => {
         const component = getComponent('a link', 'some className');
         expect(component.find('.qa-anchor-link').text()).toBe('Transcluded text');
     });
 
-    it('can scroll to the specified link (bookmark)', function () {
+    it('can scroll to the specified link (bookmark)', () => {
         const component = getComponent('a link');
         component.find('.qa-anchor-link').click();
         $interval.flush(FLUSH_PERIOD);
         expect(anchor).toBe('a link');
     });
 
-    it('can auto scroll to the specified link (bookmark)', function () {
+    it('can auto scroll to the specified link (bookmark)', () => {
         getComponent('a link', '', true);
         $rootScope.$apply();
         $interval.flush(FLUSH_PERIOD);

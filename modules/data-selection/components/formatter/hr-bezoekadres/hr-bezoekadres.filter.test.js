@@ -1,19 +1,19 @@
-describe('The hrBezoekadres filter', function () {
+describe('The hrBezoekadres filter', () => {
     let hrBezoekadresFilter,
         user;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection', {}
             );
 
-        angular.mock.inject(function (_hrBezoekadresFilter_, _user_) {
+        angular.mock.inject((_hrBezoekadresFilter_, _user_) => {
             hrBezoekadresFilter = _hrBezoekadresFilter_;
             user = _user_;
         });
     });
 
-    it('returns bezoekadres when non mailing indication is false', function () {
+    it('returns bezoekadres when non mailing indication is false', () => {
         const input = {
             bezoekadres_volledig_adres: 'Weesperstraat 113, Amsterdam',
             non_mailing: false
@@ -27,7 +27,7 @@ describe('The hrBezoekadres filter', function () {
         expect(output).toBe('Weesperstraat 113, Amsterdam');
     });
 
-    it('Hides bezoekadres when non mailing is on and user is not logged in', function () {
+    it('Hides bezoekadres when non mailing is on and user is not logged in', () => {
         const input = {
             bezoekadres_volledig_adres: 'Weesperstraat 113, Amsterdam',
             non_mailing: true
@@ -37,7 +37,7 @@ describe('The hrBezoekadres filter', function () {
         expect(output).toBe('Non-mailing-indicatie actief');
     });
 
-    it('Shows bezoekadres when non mailing is on and user is logged in', function () {
+    it('Shows bezoekadres when non mailing is on and user is logged in', () => {
         const input = {
             bezoekadres_volledig_adres: 'Weesperstraat 113, Amsterdam',
             non_mailing: true

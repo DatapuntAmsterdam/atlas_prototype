@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,4 +6,4 @@
         .constant('HEADER_CONFIG', {
             AUTOCOMPLETE_ENDPOINT: 'typeahead'
         });
-})();
+}))();

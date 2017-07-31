@@ -1,7 +1,7 @@
-describe('The endpointParser factory', function () {
+describe('The endpointParser factory', () => {
     var endpointParser;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
             {
@@ -11,7 +11,7 @@ describe('The endpointParser factory', function () {
             }
         );
 
-        angular.mock.inject(function (_endpointParser_) {
+        angular.mock.inject(_endpointParser_ => {
             endpointParser = _endpointParser_;
         });
     });

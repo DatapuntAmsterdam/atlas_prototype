@@ -1,4 +1,4 @@
-describe('The user content widget component', function () {
+describe('The user content widget component', () => {
     var $compile,
         $rootScope,
         $templateCache,
@@ -6,7 +6,7 @@ describe('The user content widget component', function () {
         googleSheet,
         entries;
 
-    beforeEach(function () {
+    beforeEach(() => {
         entries = [
             {
                 id: 'item'
@@ -29,7 +29,7 @@ describe('The user content widget component', function () {
             }
         });
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$templateCache_, _$q_, _googleSheet_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$templateCache_, _$q_, _googleSheet_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $templateCache = _$templateCache_;
@@ -54,7 +54,7 @@ describe('The user content widget component', function () {
         return component;
     }
 
-    it('loads cms contents for the specified type', function () {
+    it('loads cms contents for the specified type', () => {
         $templateCache.put('modules/page/components/user-content-widget/templates/type.html', 'TYPE');
         spyOn(googleSheet, 'getContents').and.callThrough();
 

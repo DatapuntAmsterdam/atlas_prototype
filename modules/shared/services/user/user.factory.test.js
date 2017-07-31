@@ -1,4 +1,4 @@
-describe('The user factory', function () {
+describe('The user factory', () => {
     const FORCE_REFRESH_TIMEOUT = 350,
         FORCE_END_TIMEOUT = 5500;
 
@@ -28,7 +28,7 @@ describe('The user factory', function () {
         testAccessTokenAuthz99 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODc4NDMwMjgsImV4cCI6MTQ4Nzg0ODc3NiwiYXV0aHoiOjk5LCJqdGkiOiI4Y2VjYTk1My03YzEzLTQwMmMtODIyMS1jM2RjYWE0ZWY1Y2MifQ.LahevkWI06bVCY66khV1z5WKoAByNC_kMSwjKsABkwY';
     /* eslint-enable max-len */
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpShared',
             {
@@ -47,9 +47,16 @@ describe('The user factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$interval_, _$window_,
-                                      _$httpBackend_, _$cacheFactory_, _api_,
-                                      _userSettings_, _user_) {
+        angular.mock.inject((
+            _$rootScope_,
+            _$interval_,
+            _$window_,
+            _$httpBackend_,
+            _$cacheFactory_,
+            _api_,
+            _userSettings_,
+            _user_
+        ) => {
             $rootScope = _$rootScope_;
             $interval = _$interval_;
             $window = _$window_;
@@ -65,28 +72,28 @@ describe('The user factory', function () {
         spyOn($window.location, 'reload').and.returnValue(null);
     });
 
-    describe('The regular behaviour', function () {
-        it('can store and tell the refresh token for the user', function () {
+    describe('The regular behaviour', () => {
+        it('can store and tell the refresh token for the user', () => {
             user.setRefreshToken(testToken);
             expect(user.getRefreshToken()).toBe(testToken);
         });
 
-        it('can store and tell the access token for the user', function () {
+        it('can store and tell the access token for the user', () => {
             user.setAccessToken(testToken);
             expect(user.getAccessToken()).toBe(testToken);
         });
 
-        it('can tell the name of the user', function () {
+        it('can tell the name of the user', () => {
             user.setRefreshToken(testRefreshToken);
             expect(user.getName()).toBe('I am the sub field');
         });
 
-        it('tells "" as the name of an anonymous user', function () {
+        it('tells "" as the name of an anonymous user', () => {
             user.setRefreshToken(testAnonymousRefreshToken);
             expect(user.getName()).toBe('');
         });
 
-        it('can tell the authorization level of the user', function () {
+        it('can tell the authorization level of the user', () => {
             user.setAccessToken(testAccessTokenAuthz0);
             expect(user.getAuthorizationLevel()).toBe(user.AUTHORIZATION_LEVEL.DEFAULT);
             user.setAccessToken(testAccessTokenAuthz1);
@@ -95,43 +102,43 @@ describe('The user factory', function () {
             expect(user.getAuthorizationLevel()).toBe(user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS);
         });
 
-        it('returns authorization level NONE for unknown authorization levels', function () {
+        it('returns authorization level NONE for unknown authorization levels', () => {
             user.setAccessToken(testAccessTokenAuthz99);
             expect(user.getAuthorizationLevel()).toBe(user.AUTHORIZATION_LEVEL.NONE);
         });
 
-        it('can store and tell the type of the user', function () {
+        it('can store and tell the type of the user', () => {
             user.setRefreshToken(testToken, user.USER_TYPE.ANONYMOUS);
             expect(user.getUserType()).toBe(user.USER_TYPE.ANONYMOUS);
         });
 
-        it('stores the refresh token and user type in the userSettings', function () {
+        it('stores the refresh token and user type in the userSettings', () => {
             user.setRefreshToken(testToken, user.USER_TYPE.ANONYMOUS);
             expect(userSettings.refreshToken.value).toBe(testToken);
             expect(userSettings.userType.value).toBe(user.USER_TYPE.ANONYMOUS);
         });
 
-        it('returns a default access token null', function () {
+        it('returns a default access token null', () => {
             expect(user.getAccessToken()).toBe(null);
         });
 
-        it('can clear all tokens for the user', function () {
+        it('can clear all tokens for the user', () => {
             user.clearToken();
             expect(user.getAccessToken()).toBe(null);
             expect(user.getRefreshToken()).toBe(null);
             expect(user.getUserType()).toBe(user.USER_TYPE.NONE);
         });
 
-        it('returns a default user type NONE for unknown user types', function () {
+        it('returns a default user type NONE for unknown user types', () => {
             userSettings.userType.value = 'unknown usertype';
             expect(user.getUserType()).toBe(user.USER_TYPE.NONE);
         });
     });
 
-    describe('The tests wether the user meets a required authorization level', function () {
+    describe('The tests wether the user meets a required authorization level', () => {
         const dummyValues = [null, 0, true, false, 'some strange value'];
 
-        it('can test wether the a non-authorized user meets a required authorization level', function () {
+        it('can test wether the a non-authorized user meets a required authorization level', () => {
             ['NONE']
                 .forEach(level => expect(user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL[level])).toBe(true));
             ['DEFAULT', 'EMPLOYEE', 'EMPLOYEE_PLUS']
@@ -140,7 +147,7 @@ describe('The user factory', function () {
             expect(user.meetsRequiredLevel(undefined)).toBe(true);
         });
 
-        it('can test wether a user with unknown auth. level meets a required authorization level', function () {
+        it('can test wether a user with unknown auth. level meets a required authorization level', () => {
             user.setAccessToken(testAccessTokenAuthz99);
             expect(user.getAuthorizationLevel()).toBe(user.AUTHORIZATION_LEVEL.NONE);
             ['NONE']
@@ -151,7 +158,7 @@ describe('The user factory', function () {
             expect(user.meetsRequiredLevel(undefined)).toBe(true);
         });
 
-        it('can test wether a DEFAULT user meets a required authorization level', function () {
+        it('can test wether a DEFAULT user meets a required authorization level', () => {
             user.setAccessToken(testAccessTokenAuthz0);
             expect(user.getAuthorizationLevel()).toBe(user.AUTHORIZATION_LEVEL.DEFAULT);
             ['NONE', 'DEFAULT']
@@ -162,7 +169,7 @@ describe('The user factory', function () {
             expect(user.meetsRequiredLevel(undefined)).toBe(true);
         });
 
-        it('can test wether a EMPLOYEE user meets a required authorization level', function () {
+        it('can test wether a EMPLOYEE user meets a required authorization level', () => {
             user.setAccessToken(testAccessTokenAuthz1);
             expect(user.getAuthorizationLevel()).toBe(user.AUTHORIZATION_LEVEL.EMPLOYEE);
             ['NONE', 'DEFAULT', 'EMPLOYEE']
@@ -173,7 +180,7 @@ describe('The user factory', function () {
             expect(user.meetsRequiredLevel(undefined)).toBe(true);
         });
 
-        it('can test wether a EMPLOYEE_PLUS user meets a required authorization level', function () {
+        it('can test wether a EMPLOYEE_PLUS user meets a required authorization level', () => {
             user.setAccessToken(testAccessTokenAuthz3);
             expect(user.getAuthorizationLevel()).toBe(user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS);
             ['NONE', 'DEFAULT', 'EMPLOYEE', 'EMPLOYEE_PLUS']
@@ -183,26 +190,26 @@ describe('The user factory', function () {
         });
     });
 
-    describe('The behaviour when the user authorization changes', function () {
-        it('reloads the application on logout', function () {
+    describe('The behaviour when the user authorization changes', () => {
+        it('reloads the application on logout', () => {
             user.clearToken();
             expect($window.location.reload).toHaveBeenCalledWith(true);
         });
 
-        it('reloads the application on a lower authorization level', function () {
+        it('reloads the application on a lower authorization level', () => {
             user.setAccessToken(testAccessTokenAuthz1);
             expect($window.location.reload).not.toHaveBeenCalled();
             user.setAccessToken(testAccessTokenAuthz0);
             expect($window.location.reload).toHaveBeenCalledWith(true);
         });
 
-        it('does not reload the application on a higher authorization level', function () {
+        it('does not reload the application on a higher authorization level', () => {
             user.setAccessToken(testAccessTokenAuthz0);
             expect($window.location.reload).not.toHaveBeenCalled();
             user.setAccessToken(testAccessTokenAuthz1);
             expect($window.location.reload).not.toHaveBeenCalled();
         });
-        it('clears cache on refresh token change', function () {
+        it('clears cache on refresh token change', () => {
             api.getByUrl('https://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/');
             $httpBackend.flush();
             const $httpCache = $cacheFactory.get('$http');
@@ -212,42 +219,42 @@ describe('The user factory', function () {
         });
     });
 
-    describe('The behaviour when a refreshToken and userType is available from the session storage', function () {
-        beforeEach(function () {
+    describe('The behaviour when a refreshToken and userType is available from the session storage', () => {
+        beforeEach(() => {
             refreshToken = 'refreshToken';
             userType = 'NONE';
         });
 
-        it('returns a default refresh token and user type as are stored in the userSettings', function () {
+        it('returns a default refresh token and user type as are stored in the userSettings', () => {
             expect(user.getRefreshToken()).toBe(userSettings.refreshToken.value);
             expect(user.getUserType()).toBe(userSettings.userType.value);
         });
     });
 
-    describe('The behaviour when no refreshToken and/or userType is available from the session storage', function () {
-        beforeEach(function () {
+    describe('The behaviour when no refreshToken and/or userType is available from the session storage', () => {
+        beforeEach(() => {
             refreshToken = null;
             userType = null;
         });
 
-        it('returns refresh token and user type as are stored in the userSettings', function () {
+        it('returns refresh token and user type as are stored in the userSettings', () => {
             expect(user.getRefreshToken()).toBe(null);
             expect(user.getUserType()).toBe(user.USER_TYPE.NONE);
         });
 
-        it('tells "" as the name of an anonymous user', function () {
+        it('tells "" as the name of an anonymous user', () => {
             expect(user.getName()).toBe('');
         });
     });
 
     describe('waiting for an access token if user is logging in', () => {
-        it('continues if an access token is already available', function () {
+        it('continues if an access token is already available', () => {
             var accessToken;
 
             refreshToken = 'refreshToken';
             user.setAccessToken(testAccessTokenAuthz1);
 
-            user.waitForAccessToken().then(function (token) {
+            user.waitForAccessToken().then(token => {
                 accessToken = token;
             });
 
@@ -256,12 +263,12 @@ describe('The user factory', function () {
             expect(accessToken).toEqual(testAccessTokenAuthz1);
         });
 
-        it('continues if login succeeds', function () {
+        it('continues if login succeeds', () => {
             var accessToken;
 
             refreshToken = 'refreshToken';
 
-            user.waitForAccessToken().then(function (token) {
+            user.waitForAccessToken().then(token => {
                 accessToken = token;
             });
 
@@ -274,12 +281,12 @@ describe('The user factory', function () {
             expect(accessToken).toEqual(testAccessTokenAuthz1);
         });
 
-        it('continues if login fails', function () {
+        it('continues if login fails', () => {
             var accessToken;
 
             refreshToken = 'refreshToken';
 
-            user.waitForAccessToken().then(function (token) {
+            user.waitForAccessToken().then(token => {
                 accessToken = token;
             });
 
@@ -292,12 +299,12 @@ describe('The user factory', function () {
             expect(accessToken).toEqual(null);
         });
 
-        it('waits for max 5 seconds', function () {
+        it('waits for max 5 seconds', () => {
             var accessToken;
 
             refreshToken = 'refreshToken';
 
-            user.waitForAccessToken().then(function (token) {
+            user.waitForAccessToken().then(token => {
                 accessToken = token;
             });
 

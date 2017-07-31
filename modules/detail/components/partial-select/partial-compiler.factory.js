@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -13,7 +13,7 @@
         };
 
         function getHtml (templateUrl, sharedScope) {
-            return $templateRequest(templateUrl).then(function (template) {
+            return $templateRequest(templateUrl).then(template => {
                 var q,
                     html;
 
@@ -21,7 +21,7 @@
 
                 html = $compile(template)(sharedScope);
 
-                $rootScope.$applyAsync(function () {
+                $rootScope.$applyAsync(() => {
                     /*
                      Wait for the next digest cycle (making this function asynchronous), the variables should be
                      rendered inside the template before returning the HTML.
@@ -33,4 +33,4 @@
             });
         }
     }
-})();
+}))();

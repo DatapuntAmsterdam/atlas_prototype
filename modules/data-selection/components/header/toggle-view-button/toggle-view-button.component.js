@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -17,7 +17,7 @@
     function DpToggleViewButtonController ($scope) {
         const vm = this;
 
-        $scope.$watch('vm.view', function () {
+        $scope.$watch('vm.view', () => {
             if (vm.view === 'TABLE') {
                 vm.targetView = 'LIST';
                 vm.targetLabel = 'Kaart weergeven';
@@ -27,4 +27,4 @@
             }
         });
     }
-})();
+}))();

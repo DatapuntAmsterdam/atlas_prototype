@@ -18,7 +18,7 @@
  *
 */
 
-(function () {
+((() => {
     angular
         .module('atlas')
         .directive('dpPreviewState', DpPreviewStateDirective);
@@ -68,4 +68,4 @@
             }
         }
     }
-})();
+}))();

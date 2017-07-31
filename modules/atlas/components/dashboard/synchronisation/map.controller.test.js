@@ -1,11 +1,11 @@
-describe('The map controller', function () {
+describe('The map controller', () => {
     let $controller,
         $rootScope,
         store,
         crsConverter,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -20,7 +20,7 @@ describe('The map controller', function () {
             }
         );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_, _crsConverter_) {
+        angular.mock.inject((_$controller_, _$rootScope_, _store_, _crsConverter_) => {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -51,7 +51,7 @@ describe('The map controller', function () {
         return controller;
     }
 
-    it('subscribes to the store to listen for changes', function () {
+    it('subscribes to the store to listen for changes', () => {
         spyOn(store, 'subscribe').and.callThrough();
 
         getController();
@@ -59,7 +59,7 @@ describe('The map controller', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the mapState based on the Redux state', function () {
+    it('sets the mapState based on the Redux state', () => {
         const controller = getController();
 
         expect(controller.mapState).toEqual({
@@ -68,7 +68,7 @@ describe('The map controller', function () {
         });
     });
 
-    it('sets the showLayerSelection based on the Redux state', function () {
+    it('sets the showLayerSelection based on the Redux state', () => {
         let controller;
 
         controller = getController();
@@ -79,10 +79,10 @@ describe('The map controller', function () {
         expect(controller.showLayerSelection).toEqual(true);
     });
 
-    describe('optionally adds marker data for search by location, detail and straatbeeld', function () {
+    describe('optionally adds marker data for search by location, detail and straatbeeld', () => {
         let controller;
 
-        it('can work without any markers', function () {
+        it('can work without any markers', () => {
             mockedState = {};
 
             controller = getController();
@@ -91,7 +91,7 @@ describe('The map controller', function () {
             expect(controller.markers.clustered).toEqual([]);
         });
 
-        it('supports a search marker', function () {
+        it('supports a search marker', () => {
             mockedState = {
                 search: {
                     location: [52.1, 4.1]
@@ -105,7 +105,7 @@ describe('The map controller', function () {
             }));
         });
 
-        it('supports a detail marker', function () {
+        it('supports a detail marker', () => {
             mockedState = {
                 detail: {
                     geometry: 'FAKE_GEOMETRY'
@@ -119,7 +119,7 @@ describe('The map controller', function () {
             }));
         });
 
-        it('supports a straatbeeld marker', function () {
+        it('supports a straatbeeld marker', () => {
             mockedState = {
                 straatbeeld: {
                     location: [52.2, 4.2],
@@ -139,7 +139,7 @@ describe('The map controller', function () {
             }));
         });
 
-        it('converts each WGS84 Point to geoJSON with the RD notation', function () {
+        it('converts each WGS84 Point to geoJSON with the RD notation', () => {
             mockedState = {
                 search: {
                     location: [52.1, 4.1]
@@ -189,7 +189,7 @@ describe('The map controller', function () {
             }));
         });
 
-        it('The straatbeeld_orientation icon will have a extra variable for leaflet-rotatedmarker', function () {
+        it('The straatbeeld_orientation icon will have a extra variable for leaflet-rotatedmarker', () => {
             mockedState = {
                 straatbeeld: {
                     location: [52.2, 4.2],
@@ -203,7 +203,7 @@ describe('The map controller', function () {
             }));
         });
 
-        it('sets useAutoFocus to true for detail page geometry (and false for everything else)', function () {
+        it('sets useAutoFocus to true for detail page geometry (and false for everything else)', () => {
             mockedState = {
                 search: {
                     location: [52.1, 4.1]
@@ -242,7 +242,7 @@ describe('The map controller', function () {
         });
     });
 
-    it('optionally adds clustered markers', function () {
+    it('optionally adds clustered markers', () => {
         let controller;
 
         // Without clustered markers

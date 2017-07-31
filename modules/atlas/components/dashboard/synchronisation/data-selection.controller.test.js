@@ -1,4 +1,4 @@
-describe('The DataSelectionController', function () {
+describe('The DataSelectionController', () => {
     var $controller,
         $rootScope,
         store,
@@ -9,7 +9,7 @@ describe('The DataSelectionController', function () {
             }
         };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -22,7 +22,7 @@ describe('The DataSelectionController', function () {
             }
         );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
+        angular.mock.inject((_$controller_, _$rootScope_, _store_) => {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -44,7 +44,7 @@ describe('The DataSelectionController', function () {
         return controller;
     }
 
-    it('subscribes to the store to listen for changes', function () {
+    it('subscribes to the store to listen for changes', () => {
         spyOn(store, 'subscribe').and.callThrough();
 
         getController();
@@ -52,7 +52,7 @@ describe('The DataSelectionController', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the dataSelection based on the state', function () {
+    it('sets the dataSelection based on the state', () => {
         var controller;
 
         controller = getController();

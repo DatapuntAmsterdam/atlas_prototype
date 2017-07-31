@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpMap')
         .directive('dpMap', dpMapDirective);
@@ -43,7 +43,7 @@
              * [tg-937] Wait for the next digest cycle to ensure this directive is appended to the DOM. Without being
              * added to the DOM it will have a width of 0 (zero) and that causes issues with centering the map.
              */
-            scope.$applyAsync(function () {
+            scope.$applyAsync(() => {
                 leafletMap = L.map(container, options);
 
                 panning.initialize(leafletMap);
@@ -53,15 +53,15 @@
 
                 scope.leafletMap = leafletMap;
 
-                scope.$watch('mapState.viewCenter', function (viewCenter) {
+                scope.$watch('mapState.viewCenter', viewCenter => {
                     panning.panTo(leafletMap, viewCenter);
                 });
 
-                scope.$watch('mapState.zoom', function (zoomLevel) {
+                scope.$watch('mapState.zoom', zoomLevel => {
                     zoom.setZoom(leafletMap, zoomLevel);
                 });
 
-                scope.$watch('mapState.baseLayer', function (baseLayer) {
+                scope.$watch('mapState.baseLayer', baseLayer => {
                     layers.setBaseLayer(leafletMap, baseLayer);
                 });
 
@@ -69,25 +69,25 @@
 
                 scope.$watch('mapState.overlays', setOverlays, true);
 
-                scope.$watch('markers.regular', function (newCollection, oldCollection) {
+                scope.$watch('markers.regular', (newCollection, oldCollection) => {
                     if (angular.equals(newCollection, oldCollection)) {
                         // Initialisation
-                        newCollection.forEach(function (item) {
+                        newCollection.forEach(item => {
                             highlight.addMarker(leafletMap, item);
                         });
                     } else {
                         // Change detected
-                        getRemovedGeojson(newCollection, oldCollection).forEach(function (item) {
+                        getRemovedGeojson(newCollection, oldCollection).forEach(item => {
                             highlight.removeMarker(leafletMap, item);
                         });
 
-                        getAddedGeojson(newCollection, oldCollection).forEach(function (item) {
+                        getAddedGeojson(newCollection, oldCollection).forEach(item => {
                             highlight.addMarker(leafletMap, item);
                         });
                     }
                 }, true);
 
-                scope.$watch('markers.clustered', function (newCollection, oldCollection) {
+                scope.$watch('markers.clustered', (newCollection, oldCollection) => {
                     highlight.clearCluster(leafletMap);
 
                     if (newCollection.length) {
@@ -95,9 +95,9 @@
                     }
                 }, true);
 
-                scope.$watchCollection('resize', function () {
+                scope.$watchCollection('resize', () => {
                     // Waiting for next digest cycle.
-                    scope.$applyAsync(function () {
+                    scope.$applyAsync(() => {
                         leafletMap.invalidateSize();
                     });
                 });
@@ -114,11 +114,11 @@
 
                 scope.hasActiveOverlays = newOverlays.length > 0;
 
-                getRemovedOverlays(newOverlays, oldOverlays, isInit).forEach(function (overlay) {
+                getRemovedOverlays(newOverlays, oldOverlays, isInit).forEach(overlay => {
                     layers.removeOverlay(leafletMap, overlay);
                 });
 
-                getAddedOverlays(newOverlays, oldOverlays, isInit).forEach(function (overlay) {
+                getAddedOverlays(newOverlays, oldOverlays, isInit).forEach(overlay => {
                     layers.addOverlay(leafletMap, overlay);
                 });
 
@@ -169,14 +169,12 @@
         }
 
         function getAddedGeojson (newCollection, oldCollection) {
-            return newCollection.filter(function (newItem) {
+            return newCollection.filter(newItem => {
                 var hasBeenAdded,
                     hasChanged,
                     linkedOldItems;
 
-                linkedOldItems = oldCollection.filter(function (oldItem) {
-                    return oldItem.id === newItem.id;
-                });
+                linkedOldItems = oldCollection.filter(oldItem => oldItem.id === newItem.id);
 
                 hasBeenAdded = linkedOldItems.length === 0;
                 hasChanged = !angular.equals(linkedOldItems[0], newItem);
@@ -186,14 +184,12 @@
         }
 
         function getRemovedGeojson (newCollection, oldCollection) {
-            return oldCollection.filter(function (oldItem) {
+            return oldCollection.filter(oldItem => {
                 var hasBeenRemoved,
                     hasChanged,
                     linkedNewItems;
 
-                linkedNewItems = newCollection.filter(function (newItem) {
-                    return newItem.id === oldItem.id;
-                });
+                linkedNewItems = newCollection.filter(newItem => newItem.id === oldItem.id);
 
                 hasBeenRemoved = linkedNewItems.length === 0;
                 hasChanged = !angular.equals(linkedNewItems[0], oldItem);
@@ -202,4 +198,4 @@
             });
         }
     }
-})();
+}))();

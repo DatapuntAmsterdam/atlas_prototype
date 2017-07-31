@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -27,7 +27,7 @@
             'vm.query',
             'vm.location',
             'vm.searchResults'
-        ], function () {
+        ], () => {
             var titleData = searchTitle.getTitleData(
                     vm.numberOfResults,
                     vm.query,
@@ -39,4 +39,4 @@
             vm.subTitle = titleData.subTitle;
         });
     }
-})();
+}))();

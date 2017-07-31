@@ -1,13 +1,13 @@
-describe('The dpDataSelectionDocumentTitle factory', function () {
+describe('The dpDataSelectionDocumentTitle factory', () => {
     let dpDataSelectionDocumentTitle,
         mockedBagState,
         mockedHrState,
         mockedCardsState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
-            function ($provide) {
+            $provide => {
                 $provide.constant('DATA_SELECTION_CONFIG', {
                     datasets: {
                         bag: {
@@ -41,7 +41,7 @@ describe('The dpDataSelectionDocumentTitle factory', function () {
             }
         );
 
-        angular.mock.inject(function (_dpDataSelectionDocumentTitle_) {
+        angular.mock.inject(_dpDataSelectionDocumentTitle_ => {
             dpDataSelectionDocumentTitle = _dpDataSelectionDocumentTitle_;
         });
 
@@ -68,29 +68,29 @@ describe('The dpDataSelectionDocumentTitle factory', function () {
         };
     });
 
-    it('shows a different title based on the active view', function () {
+    it('shows a different title based on the active view', () => {
         expect(dpDataSelectionDocumentTitle.getTitle(mockedBagState)).toMatch(/^Tabel/);
 
         mockedBagState.view = 'LIST';
         expect(dpDataSelectionDocumentTitle.getTitle(mockedBagState)).toMatch(/^Lijst/);
     });
 
-    it('shows a special title when showing all datasets', function () {
+    it('shows a special title when showing all datasets', () => {
         delete mockedCardsState.query;
         expect(dpDataSelectionDocumentTitle.getTitle(mockedCardsState)).toBe('Datasets');
     });
 
-    it('shows a the datasets query for text search in datasets', function () {
+    it('shows a the datasets query for text search in datasets', () => {
         expect(dpDataSelectionDocumentTitle.getTitle(mockedCardsState)).toBe('Datasets met \'my query\'');
     });
 
-    it('shows both the query and the active filter', function () {
+    it('shows both the query and the active filter', () => {
         mockedCardsState.filters.groups = 'bestuur-en-organisatie';
         expect(dpDataSelectionDocumentTitle.getTitle(mockedCardsState))
             .toBe('Datasets met \'my query\', bestuur-en-organisatie');
     });
 
-    it('shows the surface of the current selection', function () {
+    it('shows the surface of the current selection', () => {
         mockedBagState.geometryFilter = {
             description: '1,95 km en 216.980,2 m&sup2;',
             markers: [{}, {}]
@@ -100,13 +100,13 @@ describe('The dpDataSelectionDocumentTitle factory', function () {
             .toBe('Tabel adressen met ingetekend (1,95 km en 216.980,2 m²)');
     });
 
-    it('shows the title of the current dataset', function () {
+    it('shows the title of the current dataset', () => {
         expect(dpDataSelectionDocumentTitle.getTitle(mockedBagState)).toBe('Tabel adressen');
 
         expect(dpDataSelectionDocumentTitle.getTitle(mockedHrState)).toBe('Tabel handelsregister');
     });
 
-    it('optionally lists the (selected values of the) active filters', function () {
+    it('optionally lists the (selected values of the) active filters', () => {
         // One active filter
         mockedBagState.filters.stadsdeel_naam = 'Oost';
         expect(dpDataSelectionDocumentTitle.getTitle(mockedBagState)).toBe('Tabel adressen met Oost');
@@ -116,7 +116,7 @@ describe('The dpDataSelectionDocumentTitle factory', function () {
         expect(dpDataSelectionDocumentTitle.getTitle(mockedBagState)).toBe('Tabel adressen met Oost, Flevopark');
     });
 
-    it('respects the filter order from DATA_SELECTION_CONFIG', function () {
+    it('respects the filter order from DATA_SELECTION_CONFIG', () => {
         mockedBagState.filters = {
             stadsdeel_naam: 'Oost',
             buurt_naam: 'Flevopark'

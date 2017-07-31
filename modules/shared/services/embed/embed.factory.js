@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -24,4 +24,4 @@
             return `<iframe width="500" height="400" src="${url}" frameborder="0"></iframe>`;
         }
     }
-})();
+}))();

@@ -1,15 +1,15 @@
-describe('The nummeraanduidingType filter', function () {
+describe('The nummeraanduidingType filter', () => {
     let nummeraanduidingTypeFilter;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDataSelection');
 
-        angular.mock.inject(function (_nummeraanduidingTypeFilter_) {
+        angular.mock.inject(_nummeraanduidingTypeFilter_ => {
             nummeraanduidingTypeFilter = _nummeraanduidingTypeFilter_;
         });
     });
 
-    it('returns "(ligplaats)" when there is a ligplaats_id', function () {
+    it('returns "(ligplaats)" when there is a ligplaats_id', () => {
         const input = {
             ligplaats_id: '12345',
             standplaats_id: ''
@@ -17,7 +17,7 @@ describe('The nummeraanduidingType filter', function () {
         expect(nummeraanduidingTypeFilter(input)).toBe('(ligplaats)');
     });
 
-    it('returns "(standplaats)" when there is a standplaats_id', function () {
+    it('returns "(standplaats)" when there is a standplaats_id', () => {
         const input = {
             ligplaats_id: '',
             standplaats_id: '12345'
@@ -25,7 +25,7 @@ describe('The nummeraanduidingType filter', function () {
         expect(nummeraanduidingTypeFilter(input)).toBe('(standplaats)');
     });
 
-    it('returns an empty string when there is no ligplaats_id and no standplaats_id', function () {
+    it('returns an empty string when there is no ligplaats_id and no standplaats_id', () => {
         const input = {
             ligplaats_id: '',
             standplaats_id: ''

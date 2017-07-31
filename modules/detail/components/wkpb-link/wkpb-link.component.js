@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -19,4 +19,4 @@
 
         vm.wkpbEndpoint = sharedConfig.API_ROOT + 'brk/object-wkpb/' + vm.brkId + '/';
     }
-})();
+}))();

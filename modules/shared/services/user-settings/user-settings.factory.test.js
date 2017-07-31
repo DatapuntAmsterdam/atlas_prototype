@@ -1,4 +1,4 @@
-describe('the user settings factory', function () {
+describe('the user settings factory', () => {
     const GET_ITEM_VALUE = 'value';
 
     let userSettings,
@@ -23,7 +23,7 @@ describe('the user settings factory', function () {
             }
         );
 
-        angular.mock.inject(function (_userSettings_, _storage_) {
+        angular.mock.inject((_userSettings_, _storage_) => {
             userSettings = _userSettings_;
             storage = _storage_;
         });
@@ -34,7 +34,7 @@ describe('the user settings factory', function () {
             ));
     });
 
-    it('stores settings in the corresponding storage', function () {
+    it('stores settings in the corresponding storage', () => {
         [
             {key: 'refreshToken', type: 'session', whenNoValue: undefined},
             {key: 'fullscreenStraatbeeld', type: 'local', whenNoValue: true.toString()}

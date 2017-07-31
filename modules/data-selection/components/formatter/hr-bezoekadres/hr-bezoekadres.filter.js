@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -10,7 +10,7 @@
     ];
 
     function hrBezoekadresFilter (user) {
-        return function (input) {
+        return input => {
             if (input.non_mailing && user.getUserType() !== user.USER_TYPE.AUTHENTICATED) {
                 // Also user not logged in
                 return 'Non-mailing-indicatie actief';
@@ -18,4 +18,4 @@
             return input.bezoekadres_volledig_adres;
         };
     }
-})();
+}))();

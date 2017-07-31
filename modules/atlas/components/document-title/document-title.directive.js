@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('atlas')
         .directive('dpDocumentTitle', DpDocumentTitleDirective);
@@ -90,4 +90,4 @@
             }
         }
     }
-})();
+}))();

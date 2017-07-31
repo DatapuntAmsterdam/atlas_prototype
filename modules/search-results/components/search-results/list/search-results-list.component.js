@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -18,15 +18,13 @@
 
         const vm = this;
 
-        vm.showSubtype = function (categorySlug, link) {
-            return angular.isString(link.subtype) &&
-                ((categorySlug === 'openbareruimte' && link.subtype !== 'weg') ||
-                (categorySlug === 'adres' && link.subtype !== 'verblijfsobject') ||
-                categorySlug === 'gebied' ||
-                categorySlug === 'explosief');
-        };
+        vm.showSubtype = (categorySlug, link) => angular.isString(link.subtype) &&
+            ((categorySlug === 'openbareruimte' && link.subtype !== 'weg') ||
+            (categorySlug === 'adres' && link.subtype !== 'verblijfsobject') ||
+            categorySlug === 'gebied' ||
+            categorySlug === 'explosief');
 
-        vm.getExtraInfo = function (link) {
+        vm.getExtraInfo = link => {
             if (angular.isObject(link)) {
                 let extraInfo = '';
 
@@ -42,4 +40,4 @@
             }
         };
     }
-})();
+}))();

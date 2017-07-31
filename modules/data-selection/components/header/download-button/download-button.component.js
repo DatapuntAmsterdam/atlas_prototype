@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -43,7 +43,7 @@
 
             let url = sharedConfig.API_ROOT + DATA_SELECTION_CONFIG.datasets[vm.dataset].ENDPOINT_EXPORT;
 
-            DATA_SELECTION_CONFIG.datasets[vm.dataset].FILTERS.forEach(function (filter) {
+            DATA_SELECTION_CONFIG.datasets[vm.dataset].FILTERS.forEach(filter => {
                 if (angular.isString(vm.activeFilters[filter.slug])) {
                     filterParams.push(filter.slug + '=' + $window.encodeURIComponent(vm.activeFilters[filter.slug]));
                 }
@@ -60,4 +60,4 @@
             api.createUrlWithToken(url).then(tokenUrl => vm.downloadUrl = tokenUrl);
         }
     }
-})();
+}))();

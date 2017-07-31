@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpSearchResults')
         .factory('geosearch', geosearchFactory);
@@ -13,7 +13,7 @@
         function searchFeatures (location) {
             var allRequests = [];
 
-            SEARCH_CONFIG.COORDINATES_ENDPOINTS.forEach(function (endpoint) {
+            SEARCH_CONFIG.COORDINATES_ENDPOINTS.forEach(endpoint => {
                 var request,
                     searchParams = {
                         lat: location[0],
@@ -155,4 +155,4 @@
             return [plaatsCategoryIndex, plaatsEndpoint];
         }
     }
-})();
+}))();

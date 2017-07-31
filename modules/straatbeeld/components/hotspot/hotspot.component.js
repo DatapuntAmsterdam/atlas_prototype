@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -45,7 +45,7 @@
         vm.size = Math.round(angleConversion.radiansToDegrees(viewAngle) * viewport / STRAATBEELD_CONFIG.DEFAULT_FOV);
         vm.transform = 'rotateX(' + angle + 'deg)';
 
-        vm.loadScene = function () {
+        vm.loadScene = () => {
             store.dispatch({
                 type: ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT,
                 payload: {
@@ -55,4 +55,4 @@
             });
         };
     }
-})();
+}))();

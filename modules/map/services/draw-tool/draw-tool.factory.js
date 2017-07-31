@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -214,7 +214,7 @@
         // that all limits are respected and that the last consistent state gets exposed by the drawing tool
         function registerDrawEvents () {
             Object.keys(L.Draw.Event).forEach(eventName => {
-                drawTool.map.on(L.Draw.Event[eventName], function (e) {
+                drawTool.map.on(L.Draw.Event[eventName], e => {
                     if (eventName === 'DELETED') { // IE HACK
                         suppress.start(300);
                     }
@@ -241,7 +241,7 @@
         // register any non-leaflet.draw events
         function registerMapEvents () {
             // Click outside shape => delete shape
-            drawTool.map.on('click', function () {
+            drawTool.map.on('click', () => {
                 if (suppress.isBusy()) {
                     return;
                 }
@@ -438,4 +438,4 @@
             }));
         }
     }
-})();
+}))();

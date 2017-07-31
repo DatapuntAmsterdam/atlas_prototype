@@ -1,25 +1,23 @@
-describe('The dp-parent-relations directive', function () {
+describe('The dp-parent-relations directive', () => {
     var $compile,
         $rootScope,
         mockedContent;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
-            function ($provide) {
+            $provide => {
                 $provide.constant('PARENT_RELATIONS_CONFIG', [
                     'universe',
                     'planet',
                     'buurtcombinatie',
                     'verblijfsobject'
                 ]);
-                $provide.factory('dpLinkDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpLinkDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -77,7 +75,7 @@ describe('The dp-parent-relations directive', function () {
         return directive;
     }
 
-    it('creates a list of parent entities', function () {
+    it('creates a list of parent entities', () => {
         var directive,
             content = angular.copy(mockedContent);
 
@@ -100,7 +98,7 @@ describe('The dp-parent-relations directive', function () {
         expect(directive.find('dd:nth-of-type(4)').text().trim()).toBe('Weesperstraat 113');
     });
 
-    it('doesn\'t show missing relations', function () {
+    it('doesn\'t show missing relations', () => {
         var directive,
             content = angular.copy(mockedContent);
 
@@ -112,7 +110,7 @@ describe('The dp-parent-relations directive', function () {
         expect(directive.find('dd').length).toBe(3);
     });
 
-    it('supports API data with and without prefix underscores', function () {
+    it('supports API data with and without prefix underscores', () => {
         var directive,
             content = angular.copy(mockedContent),
             verblijfsobjectData = angular.copy(content.verblijfsobject);

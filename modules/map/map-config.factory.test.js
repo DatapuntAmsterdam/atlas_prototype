@@ -1,10 +1,10 @@
-describe('The mapConfig factory', function () {
+describe('The mapConfig factory', () => {
     function prepareMocks (environmentName) {
         var mapConfig;
 
         angular.mock.module(
             'dpMap',
-            function ($provide) {
+            $provide => {
                 $provide.value('environment', {
                     NAME: environmentName
                 });
@@ -18,15 +18,15 @@ describe('The mapConfig factory', function () {
             }
         );
 
-        angular.mock.inject(function (_mapConfig_) {
+        angular.mock.inject(_mapConfig_ => {
             mapConfig = _mapConfig_;
         });
 
         return mapConfig;
     }
 
-    describe('returns a combination of global and environment specific configuration', function () {
-        it('PRODUCTION', function () {
+    describe('returns a combination of global and environment specific configuration', () => {
+        it('PRODUCTION', () => {
             const mapConfig = prepareMocks('PRODUCTION');
 
             // Global config
@@ -38,7 +38,7 @@ describe('The mapConfig factory', function () {
                 .toBe('https://map.data.amsterdam.nl/');
         });
 
-        it('PRE_PRODUCTION', function () {
+        it('PRE_PRODUCTION', () => {
             const mapConfig = prepareMocks('PRE_PRODUCTION');
 
             // Global config
@@ -50,7 +50,7 @@ describe('The mapConfig factory', function () {
                 .toBe('https://map.data.amsterdam.nl/');
         });
 
-        it('ACCEPTATION', function () {
+        it('ACCEPTATION', () => {
             const mapConfig = prepareMocks('ACCEPTATION');
 
             // Global config
@@ -62,7 +62,7 @@ describe('The mapConfig factory', function () {
                 .toBe('https://acc.map.data.amsterdam.nl/');
         });
 
-        it('DEVELOPMENT', function () {
+        it('DEVELOPMENT', () => {
             const mapConfig = prepareMocks('DEVELOPMENT');
 
             // Global config

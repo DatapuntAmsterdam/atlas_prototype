@@ -8,7 +8,7 @@ describe('The video component', () => {
     beforeEach(() => {
         angular.mock.module('dpShared');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$window_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $window = _$window_;

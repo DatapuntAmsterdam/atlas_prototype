@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -18,11 +18,11 @@
     function DpDataSelectionTableController (store, ACTIONS) {
         const vm = this;
 
-        vm.followLink = function (endpoint) {
+        vm.followLink = endpoint => {
             store.dispatch({
                 type: ACTIONS.FETCH_DETAIL,
                 payload: endpoint
             });
         };
     }
-})();
+}))();

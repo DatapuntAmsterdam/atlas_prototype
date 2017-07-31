@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -26,4 +26,4 @@
             vm.link = embed.getLink(ghostState);
         }
     }
-})();
+}))();

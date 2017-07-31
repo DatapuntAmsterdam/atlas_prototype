@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -36,4 +36,4 @@
                 polyline: false
             }
         });
-})();
+}))();

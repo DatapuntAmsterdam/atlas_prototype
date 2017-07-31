@@ -1,4 +1,4 @@
-describe('The dp-search-results-header component', function () {
+describe('The dp-search-results-header component', () => {
     var $compile,
         $rootScope,
         searchTitle = {
@@ -10,16 +10,16 @@ describe('The dp-search-results-header component', function () {
             }
         };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpSearchResults',
-            function ($provide) {
+            $provide => {
                 $provide.value('store', angular.noop);
                 $provide.value('searchTitle', searchTitle);
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -62,20 +62,20 @@ describe('The dp-search-results-header component', function () {
         return component;
     }
 
-    it('calls the getTitleData function of the searchTitle service with the same parameters', function () {
+    it('calls the getTitleData function of the searchTitle service with the same parameters', () => {
         getComponent(45, 'westerpark', [52.123, 4.789], 'Adressen', [{slug: 'category'}]);
 
         expect(searchTitle.getTitleData).toHaveBeenCalledWith(
             45, 'westerpark', [52.123, 4.789], 'Adressen', [{slug: 'category'}]);
     });
 
-    it('shows the title and sub title', function () {
+    it('shows the title and sub title', () => {
         var component = getComponent();
         expect(component.find('h1').text()).toBe('title');
         expect(component.find('h2').text()).toBe('subTitle');
     });
 
-    it('does not show the subtitle if only the title is set', function () {
+    it('does not show the subtitle if only the title is set', () => {
         searchTitle.getTitleData.and.returnValue({ title: 'title' });
 
         var component = getComponent();

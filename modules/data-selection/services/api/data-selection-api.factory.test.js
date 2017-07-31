@@ -1,4 +1,4 @@
-describe('The dataSelectionApi factory', function () {
+describe('The dataSelectionApi factory', () => {
     let $rootScope,
         $q,
         dataSelectionApi,
@@ -27,7 +27,7 @@ describe('The dataSelectionApi factory', function () {
             }
         };
 
-    beforeEach(function () {
+    beforeEach(() => {
         mockedConfig = {
             datasets: {
                 zwembaden: {
@@ -86,12 +86,12 @@ describe('The dataSelectionApi factory', function () {
                 api,
                 mockedApiService
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('DATA_SELECTION_CONFIG', mockedConfig);
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$q_, _dataSelectionApi_, _user_, _TabHeader_) {
+        angular.mock.inject((_$rootScope_, _$q_, _dataSelectionApi_, _user_, _TabHeader_) => {
             $rootScope = _$rootScope_;
             $q = _$q_;
             dataSelectionApi = _dataSelectionApi_;
@@ -104,8 +104,8 @@ describe('The dataSelectionApi factory', function () {
         spyOn(user, 'meetsRequiredLevel').and.returnValue(false);
     });
 
-    describe('the query function', function () {
-        beforeEach(function () {
+    describe('the query function', () => {
+        beforeEach(() => {
             mockedApiPreviewResponse = {
                 filters: {
                     water: {
@@ -194,7 +194,7 @@ describe('The dataSelectionApi factory', function () {
             };
         });
 
-        it('can be initialised to register as a count provider for the tabheader', function () {
+        it('can be initialised to register as a count provider for the tabheader', () => {
             spyOn(TabHeader, 'provideCounter');
             dataSelectionApi.initialize();
             expect(TabHeader.provideCounter).toHaveBeenCalled();
@@ -212,7 +212,7 @@ describe('The dataSelectionApi factory', function () {
             expect(count).toBe(3);
         });
 
-        it('calls the api factory with the configuration, active filters and page', function () {
+        it('calls the api factory with the configuration, active filters and page', () => {
             // Without active filters
             dataSelectionApi.query('zwembaden', 'TABLE', {}, 1, []);
             expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {}, 1, [], undefined);
@@ -225,10 +225,10 @@ describe('The dataSelectionApi factory', function () {
             }, 1, 'searchText', []);
         });
 
-        it('returns the total number of pages', function () {
+        it('returns the total number of pages', () => {
             let output;
 
-            dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+            dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -236,10 +236,10 @@ describe('The dataSelectionApi factory', function () {
             expect(output.numberOfPages).toBe(2);
         });
 
-        it('does something that nobody understands, unless it is provided with some comment', function () {
+        it('does something that nobody understands, unless it is provided with some comment', () => {
             let output;
 
-            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(function (_output_) {
+            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -253,7 +253,7 @@ describe('The dataSelectionApi factory', function () {
             mockedApiPreviewResponse.data[0].huisnummer = [1, 2];
 
             mockedApiService.query.calls.reset();
-            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(function (_output_) {
+            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -267,18 +267,18 @@ describe('The dataSelectionApi factory', function () {
             mockedApiPreviewResponse.data[0].huisnummer = [1, 2];
 
             mockedApiService.query.calls.reset();
-            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(function (_output_) {
+            dataSelectionApi.query('zwembaden', 'CARDS', {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
             expect(output.numberOfPages).toBe(2);
         });
 
-        describe('it returns all available filters', function () {
-            it('orders the filters based on the configuration', function () {
+        describe('it returns all available filters', () => {
+            it('orders the filters based on the configuration', () => {
                 let output = {};
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -318,13 +318,13 @@ describe('The dataSelectionApi factory', function () {
                 ]);
             });
 
-            it('won\'t return filters from the configuration that are not part of the API\'s response', function () {
+            it('won\'t return filters from the configuration that are not part of the API\'s response', () => {
                 let output = {};
 
                 // With only one filter in the API response
                 delete mockedApiPreviewResponse.filters.type;
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -350,11 +350,11 @@ describe('The dataSelectionApi factory', function () {
                 ]);
             });
 
-            it('returns the number of results per category (e.g. there a 12 buurten)', function () {
+            it('returns the number of results per category (e.g. there a 12 buurten)', () => {
                 let output = {};
 
                 // With both filters in the response
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -367,11 +367,11 @@ describe('The dataSelectionApi factory', function () {
             });
         });
 
-        describe('it returns the data', function () {
-            it('has a single row for the head of the table based on the configuration', function () {
+        describe('it returns the data', () => {
+            it('has a single row for the head of the table based on the configuration', () => {
                 let output;
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -379,10 +379,10 @@ describe('The dataSelectionApi factory', function () {
                 expect(output.data.head).toEqual(['Adres', 'Openingstijden']);
             });
 
-            it('reorders the results per row from the API to match the order of the configuration', function () {
+            it('reorders the results per row from the API to match the order of the configuration', () => {
                 let output = {};
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -414,10 +414,10 @@ describe('The dataSelectionApi factory', function () {
                 });
             });
 
-            it('returns the formatters for each group of variables', function () {
+            it('returns the formatters for each group of variables', () => {
                 let output;
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -425,15 +425,15 @@ describe('The dataSelectionApi factory', function () {
                 expect(output.data.formatters).toEqual([undefined, 'openingstijdenFormatter']);
             });
 
-            it('uses different dataset configuration depending on the view', function () {
+            it('uses different dataset configuration depending on the view', () => {
                 let outputTable,
                     outputList;
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     outputTable = _output_;
                 });
 
-                dataSelectionApi.query('zwembaden', 'LIST', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'LIST', {}, 1).then(_output_ => {
                     outputList = _output_;
                 });
                 $rootScope.$apply();
@@ -450,7 +450,7 @@ describe('The dataSelectionApi factory', function () {
                 mockedApiPreviewResponse.data[1].kvk_nummer = '234';
                 mockedApiPreviewResponse.data[2].kvk_nummer = '345';
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -498,7 +498,7 @@ describe('The dataSelectionApi factory', function () {
             it('flags if columns have been omitted due to authentication level', () => {
                 let output;
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -511,7 +511,7 @@ describe('The dataSelectionApi factory', function () {
                 mockedApiPreviewResponse.data[1].kvk_nummer = '234';
                 mockedApiPreviewResponse.data[2].kvk_nummer = '345';
 
-                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(function (_output_) {
+                dataSelectionApi.query('zwembaden', 'TABLE', {}, 1).then(_output_ => {
                     output = _output_;
                 });
                 $rootScope.$apply();
@@ -521,8 +521,8 @@ describe('The dataSelectionApi factory', function () {
         });
     });
 
-    describe('the getMarkers function', function () {
-        beforeEach(function () {
+    describe('the getMarkers function', () => {
+        beforeEach(() => {
             mockedApiMarkersResponse = {
                 object_list: [
                     {
@@ -542,7 +542,7 @@ describe('The dataSelectionApi factory', function () {
             };
         });
 
-        it('calls the api factory with the active filters as searchParams', function () {
+        it('calls the api factory with the active filters as searchParams', () => {
             // Without filters
             dataSelectionApi.getMarkers('zwembaden', {});
             $rootScope.$apply();
@@ -561,10 +561,10 @@ describe('The dataSelectionApi factory', function () {
             );
         });
 
-        it('returns an array of locations [lat, lon]', function () {
+        it('returns an array of locations [lat, lon]', () => {
             let output = {};
 
-            dataSelectionApi.getMarkers('zwembaden', {}).then(function (_output_) {
+            dataSelectionApi.getMarkers('zwembaden', {}).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -577,7 +577,7 @@ describe('The dataSelectionApi factory', function () {
         });
     });
 
-    describe('only FILTERS that belong to a dataset may be part of the API call', function () {
+    describe('only FILTERS that belong to a dataset may be part of the API call', () => {
         it('ignores unavailable filters when using the dataselectie API call', () => {
             dataSelectionApi.query(
                 'zwembaden',

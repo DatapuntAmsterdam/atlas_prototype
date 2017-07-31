@@ -1,10 +1,10 @@
-describe('The dp-data-selection-pagination component', function () {
+describe('The dp-data-selection-pagination component', () => {
     var $compile,
         $rootScope,
         store,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -14,7 +14,7 @@ describe('The dp-data-selection-pagination component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -43,14 +43,14 @@ describe('The dp-data-selection-pagination component', function () {
         return component;
     }
 
-    it('doesn\'t do anything if there is only one page', function () {
+    it('doesn\'t do anything if there is only one page', () => {
         var component = getComponent(1, 1);
 
         expect(component.find('dp-data-selection-pagination-link').length).toBe(0);
         expect(component.find('form').length).toBe(0);
     });
 
-    it('when there is pagination; four child directives handle the presentation of the buttons', function () {
+    it('when there is pagination; four child directives handle the presentation of the buttons', () => {
         var component = getComponent(1, 10);
 
         expect(component.find('dp-data-selection-pagination-link').length).toBe(4);
@@ -62,7 +62,7 @@ describe('The dp-data-selection-pagination component', function () {
         expect(component.find('form').length).toBe(1);
     });
 
-    it('has first page and previous buttons that are only enabled when not on the first page', function () {
+    it('has first page and previous buttons that are only enabled when not on the first page', () => {
         var component,
             scope;
 
@@ -103,7 +103,7 @@ describe('The dp-data-selection-pagination component', function () {
         });
     });
 
-    it('has next page and last page buttons that are only enabled when not on the last page', function () {
+    it('has next page and last page buttons that are only enabled when not on the last page', () => {
         var component,
             scope;
 
@@ -144,7 +144,7 @@ describe('The dp-data-selection-pagination component', function () {
         });
     });
 
-    it('has a form that navigates directly to a specific page', function () {
+    it('has a form that navigates directly to a specific page', () => {
         var component = getComponent(1, 2);
 
         // Enter a value
@@ -160,7 +160,7 @@ describe('The dp-data-selection-pagination component', function () {
         });
     });
 
-    it('won\'t try to navigate to unexisting pages', function () {
+    it('won\'t try to navigate to unexisting pages', () => {
         var component = getComponent(1, 2);
 
         // Zero

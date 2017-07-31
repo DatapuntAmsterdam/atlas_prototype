@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpShared')
         .component('dpApiError', {
@@ -34,4 +34,4 @@
             vm.showNotFoundError = false;
         }
     }
-})();
+}))();

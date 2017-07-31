@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -117,4 +117,4 @@
 
         return TabHeader;
     }
-})();
+}))();

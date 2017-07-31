@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .filter('filename', filenameFilter);
 
     function filenameFilter () {
-        return function (input) {
+        return input => {
             const parts = input.split('/');
 
             const lastPart = parts[parts.length - 1];
@@ -19,4 +19,4 @@
             }
         };
     }
-})();
+}))();

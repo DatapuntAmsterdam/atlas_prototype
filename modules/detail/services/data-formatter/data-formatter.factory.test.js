@@ -1,17 +1,17 @@
-describe('The dataFormatter factory', function () {
+describe('The dataFormatter factory', () => {
     'use strict';
 
     var dataFormatter;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDetail');
 
-        angular.mock.inject(function (_dataFormatter_) {
+        angular.mock.inject(_dataFormatter_ => {
             dataFormatter = _dataFormatter_;
         });
     });
 
-    it('formats API data by selecting only a set of required properties', function () {
+    it('formats API data by selecting only a set of required properties', () => {
         var result = dataFormatter.formatData({
             result: {
                 title: 'myTitle',
@@ -53,7 +53,7 @@ describe('The dataFormatter factory', function () {
         );
     });
 
-    it('returns the original data for non-API data', function () {
+    it('returns the original data for non-API data', () => {
         var result = dataFormatter.formatData('aap');
         expect(result).toBe('aap');
     });

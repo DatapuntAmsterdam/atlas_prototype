@@ -1,25 +1,23 @@
-describe('The hotspotService', function () {
+describe('The hotspotService', () => {
     var $rootScope,
         hotspotService;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
-            function ($provide) {
-                $provide.factory('dpHotspotDirective', function () {
-                    return {};
-                });
+            $provide => {
+                $provide.factory('dpHotspotDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _hotspotService_) {
+        angular.mock.inject((_$rootScope_, _hotspotService_) => {
             $rootScope = _$rootScope_;
             hotspotService = _hotspotService_;
         });
     });
 
-    it('creates hotspot HTML', function () {
-        hotspotService.createHotspotTemplate(789, 15, 0.29, 2016).then(function (template) {
+    it('creates hotspot HTML', () => {
+        hotspotService.createHotspotTemplate(789, 15, 0.29, 2016).then(template => {
             var html = template.outerHTML,
                 scope = angular.element(template).scope();
 

@@ -1,4 +1,4 @@
-describe('The dp-nummeraanduiding-header directive', function () {
+describe('The dp-nummeraanduiding-header directive', () => {
     var $compile,
         $rootScope,
         $q,
@@ -17,7 +17,7 @@ describe('The dp-nummeraanduiding-header directive', function () {
             }
         };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
             'ngSanitize',
@@ -32,14 +32,12 @@ describe('The dp-nummeraanduiding-header directive', function () {
                     }
                 }
             },
-            function ($provide) {
-                $provide.factory('dpGlossaryHeaderDirective', function () {
-                    return {};
-                });
+            $provide => {
+                $provide.factory('dpGlossaryHeaderDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$q_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
@@ -67,8 +65,8 @@ describe('The dp-nummeraanduiding-header directive', function () {
         return directive;
     }
 
-    describe('it adds status badges', function () {
-        it('adds a red badge if the status of the verblijfsobject is \'Verblijfsobject gevormd\'', function () {
+    describe('it adds status badges', () => {
+        it('adds a red badge if the status of the verblijfsobject is \'Verblijfsobject gevormd\'', () => {
             var directive;
 
             // Status 'Verblijfsobject in gebruik', don't show a badge
@@ -83,7 +81,7 @@ describe('The dp-nummeraanduiding-header directive', function () {
             expect(directive.find('.c-panel--danger').text().trim()).toBe('Status: Verblijfsobject gevormd');
         });
 
-        it('adds a blue badge if it\'s a nevenadres', function () {
+        it('adds a blue badge if it\'s a nevenadres', () => {
             var directive;
 
             // Hoofdadres
@@ -97,7 +95,7 @@ describe('The dp-nummeraanduiding-header directive', function () {
         });
     });
 
-    it('loads the dp-glossary-header directive', function () {
+    it('loads the dp-glossary-header directive', () => {
         var directive = getDirective('http://www.example-endpoint.com/21/', true);
 
         expect(directive.find('dp-glossary-header').length).toBe(1);
@@ -106,7 +104,7 @@ describe('The dp-nummeraanduiding-header directive', function () {
         expect(directive.find('dp-glossary-header').attr('meta-data')).toBe('vm.metaData');
     });
 
-    it('makes the header italic is the verblijfsobject status is \'Verblijfsobject gevormd\'', function () {
+    it('makes the header italic is the verblijfsobject status is \'Verblijfsobject gevormd\'', () => {
         var directive;
 
         // Status 'Verblijfsobject in gebruik', use a roman font

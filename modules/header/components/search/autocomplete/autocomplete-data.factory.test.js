@@ -1,21 +1,21 @@
-describe('The autocompleteData factory', function () {
+describe('The autocompleteData factory', () => {
     var $rootScope,
         $q,
         api,
         autocompleteData,
         mockedResults;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpHeader',
-            function ($provide) {
+            $provide => {
                 $provide.constant('HEADER_CONFIG', {
                     AUTOCOMPLETE_ENDPOINT: 'path/to/typeahead/'
                 });
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$q_, _api_, _autocompleteData_) {
+        angular.mock.inject((_$rootScope_, _$q_, _api_, _autocompleteData_) => {
             $rootScope = _$rootScope_;
             $q = _$q_;
             api = _api_;
@@ -52,10 +52,10 @@ describe('The autocompleteData factory', function () {
         spyOn(api, 'getByUri').and.returnValue($q.resolve(mockedResults));
     });
 
-    it('can search and format data', function () {
+    it('can search and format data', () => {
         var suggestions;
 
-        autocompleteData.search('linnae').then(function (data) {
+        autocompleteData.search('linnae').then(data => {
             suggestions = data;
         });
 
@@ -86,7 +86,7 @@ describe('The autocompleteData factory', function () {
         expect(suggestions.data[1].content[1].index).toBe(2);
     });
 
-    it('can get the active search suggestion', function () {
+    it('can get the active search suggestion', () => {
         var mockedFormattedSearchResults = [
             {
                 label: 'Category A',

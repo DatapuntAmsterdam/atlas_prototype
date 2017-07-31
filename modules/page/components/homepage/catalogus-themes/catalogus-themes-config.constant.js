@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -56,4 +56,4 @@
                 icon: 'educatie-jeugd-diversiteit'
             }
         ]);
-})();
+}))();

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,8 +6,6 @@
         .filter('suggestionHighlight', suggestionHighlightFilter);
 
     function suggestionHighlightFilter () {
-        return function (suggestion, query) {
-            return suggestion.replace(new RegExp('(' + query + ')', 'gi'), '<strong>$1</strong>');
-        };
+        return (suggestion, query) => suggestion.replace(new RegExp('(' + query + ')', 'gi'), '<strong>$1</strong>');
     }
-})();
+}))();

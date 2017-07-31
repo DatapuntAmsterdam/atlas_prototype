@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -9,7 +9,7 @@
     httpErrorRegistrarFactory.inject = ['$log', '$rootScope', '$window', '$q', '$interval', 'httpStatus'];
 
     function httpErrorRegistrarFactory ($log, $rootScope, $window, $q, $interval, httpStatus) {
-        $window.addEventListener('error', function (e) {
+        $window.addEventListener('error', e => {
             if (e.target && e.target.src) {
                 // URL load error
                 if (e.target.src === 'https://piwik.data.amsterdam.nl/piwik.js') {
@@ -73,4 +73,4 @@
             return $q.reject(response);
         }
     }
-})();
+}))();

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -37,22 +37,20 @@
         vm.showCatalogusIntroduction = vm.state.view === 'CARDS' &&
             userSettings.showCatalogusIntroduction.value === true.toString();
 
-        $scope.$watch('vm.showCatalogusIntroduction', function () {
+        $scope.$watch('vm.showCatalogusIntroduction', () => {
             userSettings.showCatalogusIntroduction.value = vm.showCatalogusIntroduction.toString();
         });
 
-        $scope.$watch(function () {
-            // Watching all state variables except markers and isLoading
-            return [
-                vm.state.dataset,
-                vm.state.view,
-                vm.state.filters,
-                vm.state.geometryFilter,
-                vm.state.page,
-                vm.state.query,
-                user.getAuthorizationLevel()
-            ];
-        }, fetchData, true);
+        $scope.$watch(() => // Watching all state variables except markers and isLoading
+        [
+            vm.state.dataset,
+            vm.state.view,
+            vm.state.filters,
+            vm.state.geometryFilter,
+            vm.state.page,
+            vm.state.query,
+            user.getAuthorizationLevel()
+        ], fetchData, true);
 
         vm.tabHeader = new TabHeader('data-datasets');
         vm.tabHeader.activeTab = vm.tabHeader.getTab('datasets');
@@ -156,4 +154,4 @@
                 });
         }
     }
-})();
+}))();

@@ -1,13 +1,13 @@
-describe('The dp-terugmelden-button component', function () {
+describe('The dp-terugmelden-button component', () => {
     var $compile,
         $rootScope,
         $location,
         currentUrl = 'http://www.example.com/path/filename.html?foo=bar#baz';
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpHeader');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$location_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$location_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $location = _$location_;
@@ -38,7 +38,7 @@ describe('The dp-terugmelden-button component', function () {
         return component;
     }
 
-    it('sets a mailto URL', function () {
+    it('sets a mailto URL', () => {
         var component = getComponent();
 
         expect(component.find('a').attr('href'))
@@ -51,18 +51,18 @@ describe('The dp-terugmelden-button component', function () {
                 'ijlage%20toe%20(bijvoorbeeld%3A%20een%20bouwtekening%2C%20koopakte%2C%20et%20cetera).');
     });
 
-    it('has transclude enabled', function () {
+    it('has transclude enabled', () => {
         var htmlStr = '<p id="unit-test-selector">This will be transcluded!</p>';
 
         expect(getComponent(htmlStr).find('p[id="unit-test-selector"]').text()).toBe('This will be transcluded!');
     });
 
-    it('can have a custom className', function () {
+    it('can have a custom className', () => {
         const component = getComponent(null, 'my-special-class');
         expect(component.find('.qa-link').attr('class')).toContain('my-special-class');
     });
 
-    it('has a default fallback class if no className is specified', function () {
+    it('has a default fallback class if no className is specified', () => {
         const component = getComponent();
         expect(component.find('.qa-link').attr('class')).toContain('o-btn o-btn--link');
     });

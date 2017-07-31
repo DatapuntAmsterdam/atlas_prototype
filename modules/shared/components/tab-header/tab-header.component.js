@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -31,4 +31,4 @@
         // Return the active tab of the tabHeader
         vm.activeTab = vm.tabHeader.tabs.find(tab => tab.isActive);
     }
-})();
+}))();

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -13,4 +13,4 @@
             apis: 'API\'s gebruiken',
             proclaimer: 'Proclaimer'
         });
-})();
+}))();

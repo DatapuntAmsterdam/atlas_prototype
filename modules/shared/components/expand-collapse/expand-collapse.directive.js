@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpShared')
         .directive('dpExpandCollapse', DpExpandCollapseDirective);
@@ -46,4 +46,4 @@
             }, 0, 1);
         }
     }
-})();
+}))();

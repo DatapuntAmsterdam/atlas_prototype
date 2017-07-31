@@ -1,4 +1,4 @@
-describe('The dp-scrollable-content directive', function () {
+describe('The dp-scrollable-content directive', () => {
     let $compile,
         $rootScope,
         scope,
@@ -6,7 +6,7 @@ describe('The dp-scrollable-content directive', function () {
         state,
         visibility;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -25,7 +25,7 @@ describe('The dp-scrollable-content directive', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -72,7 +72,7 @@ describe('The dp-scrollable-content directive', function () {
         return directive;
     }
 
-    it('resets the scrollTop property whenever the active component changes', function () {
+    it('resets the scrollTop property whenever the active component changes', () => {
         var directive;
 
         visibility.detail = true;
@@ -94,7 +94,7 @@ describe('The dp-scrollable-content directive', function () {
         expect(directive[0].scrollTop).toBe(0);
     });
 
-    it('resets the scrollTop property when navigating between pages', function () {
+    it('resets the scrollTop property when navigating between pages', () => {
         var directive;
 
         visibility.page = true;
@@ -116,7 +116,7 @@ describe('The dp-scrollable-content directive', function () {
         expect(directive[0].scrollTop).toBe(0);
     });
 
-    it('resets the scrollTop property when nothing is visible', function () {
+    it('resets the scrollTop property when nothing is visible', () => {
         var directive;
 
         visibility.page = true;
@@ -139,7 +139,7 @@ describe('The dp-scrollable-content directive', function () {
         expect(directive[0].scrollTop).toBe(0);
     });
 
-    it('doesn\'t reset the scrollTop property when nothing changes', function () {
+    it('doesn\'t reset the scrollTop property when nothing changes', () => {
         var directive;
 
         visibility.page = true;

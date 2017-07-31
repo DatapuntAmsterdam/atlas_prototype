@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpDataSelection')
         .factory('dataSelectionApi', dataSelectionApiFactory);
@@ -31,25 +31,19 @@
                 page,
                 searchText,
                 geometryFilter
-            ).then(function (data) {
-                return {
-                    numberOfPages: data.numberOfPages,
-                    numberOfRecords: data.numberOfRecords,
-                    filters: formatFilters(dataset, data.filters),
-                    data: formatData(dataset, view, data.data)
-                };
-            });
+            ).then(data => ({
+                numberOfPages: data.numberOfPages,
+                numberOfRecords: data.numberOfRecords,
+                filters: formatFilters(dataset, data.filters),
+                data: formatData(dataset, view, data.data)
+            }));
         }
 
         function formatFilters (dataset, rawData) {
             const formattedFilters = angular.copy(DATA_SELECTION_CONFIG.datasets[dataset].FILTERS);
 
-            return formattedFilters.filter(function (filter) {
-                // Only show the filters that are returned by the API
-                return angular.isObject(rawData[filter.slug]);
-            }).map(function (filter) {
-                return angular.extend({}, filter, rawData[filter.slug]);
-            });
+            return formattedFilters.filter(filter => // Only show the filters that are returned by the API
+            angular.isObject(rawData[filter.slug])).map(filter => angular.extend({}, filter, rawData[filter.slug]));
         }
 
         function formatData (dataset, view, rawData) {
@@ -106,12 +100,10 @@
                     DATA_SELECTION_CONFIG.datasets[dataset].ENDPOINT_MARKERS,
                     filterUnavailableFilters(dataset, activeFilters)
                 )
-                .then(function (data) {
-                    return data.object_list
-                        .map(object => object._source.centroid)
-                        .filter(angular.identity)
-                        .map(([lon, lat]) => [lat, lon]);
-                });
+                .then(data => data.object_list
+                .map(object => object._source.centroid)
+                .filter(angular.identity)
+                .map(([lon, lat]) => [lat, lon]));
         }
 
         function filterUnavailableFilters (dataset, activeFilters) {
@@ -133,4 +125,4 @@
             return activeAndAvailableFilters;
         }
     }
-})();
+}))();

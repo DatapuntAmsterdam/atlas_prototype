@@ -1,4 +1,4 @@
-describe(' The authenticator factory', function () {
+describe(' The authenticator factory', () => {
     let $httpBackend,
         $window,
         $location,
@@ -16,7 +16,7 @@ describe(' The authenticator factory', function () {
     const REFRESH_TOKEN_PATH = 'idp/token';
     const ACCESS_TOKEN_PATH = 'accesstoken';
 
-    beforeEach(function () {
+    beforeEach(() => {
         absUrl = 'absUrl';
 
         const initUser = {
@@ -71,7 +71,7 @@ describe(' The authenticator factory', function () {
             }
         );
 
-        angular.mock.inject(function (
+        angular.mock.inject((
             _$httpBackend_,
             _$window_,
             _$location_,
@@ -80,7 +80,7 @@ describe(' The authenticator factory', function () {
             _user_,
             _authenticator_,
             _uriStripper_
-            ) {
+        ) => {
             $httpBackend = _$httpBackend_;
             $window = _$window_;
             $location = _$location_;
@@ -94,7 +94,7 @@ describe(' The authenticator factory', function () {
         spyOn($location, 'search').and.returnValue({});
     });
 
-    it('requests a accesstoken if a refresh token is available', function () {
+    it('requests a accesstoken if a refresh token is available', () => {
         spyOn(user, 'getRefreshToken').and.returnValue('token');
         spyOn(user, 'setAccessToken');
 
@@ -107,7 +107,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('does not request an anonymous refreshtoken when no refresh token is available', function () {
+    it('does not request an anonymous refreshtoken when no refresh token is available', () => {
         spyOn(user, 'getRefreshToken').and.returnValue(null);
         spyOn(user, 'setRefreshToken');
         spyOn(user, 'setAccessToken');
@@ -119,7 +119,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('does not try to get an anonymous refreshtoken on accesstoken error', function () {
+    it('does not try to get an anonymous refreshtoken on accesstoken error', () => {
         spyOn(user, 'getRefreshToken').and.returnValue('token');
         spyOn(user, 'setRefreshToken');
         spyOn(user, 'clearToken');
@@ -137,14 +137,14 @@ describe(' The authenticator factory', function () {
     });
 
     describe('login', () => {
-        it('can login a user by redirecting to an external security provider', function () {
+        it('can login a user by redirecting to an external security provider', () => {
             absUrl = 'absUrl/#?arg';
             authenticator.login();
             expect($window.location.href)
                 .toBe(AUTH_PATH + LOGIN_PATH + '?callback=' + encodeURIComponent('absUrl/#'));
         });
 
-        it('saves the current path in the session when redirecting to an external security provider', function () {
+        it('saves the current path in the session when redirecting to an external security provider', () => {
             spyOn(storage.session, 'setItem');
             $location.search.and.returnValue({one: 1});
             absUrl = 'absUrl/#?arg';
@@ -154,7 +154,7 @@ describe(' The authenticator factory', function () {
             expect(storage.session.setItem).toHaveBeenCalledWith('callbackParams', angular.toJson({one: 1}));
         });
 
-        it('saves the current path in the session removing the protocol and domain', function () {
+        it('saves the current path in the session removing the protocol and domain', () => {
             spyOn(storage.session, 'setItem');
             const path = 'foo/bar';
             const dte = 'https://api.data.amsterdam.nl' + path;
@@ -167,14 +167,14 @@ describe(' The authenticator factory', function () {
             expect(storage.session.setItem).toHaveBeenCalledWith('callbackParams', angular.toJson({dte: path}));
         });
 
-        it('adds # to path when missing', function () {
+        it('adds # to path when missing', () => {
             absUrl = 'absUrl';
             authenticator.login();
             expect($window.location.href)
                 .toBe(AUTH_PATH + LOGIN_PATH + '?callback=' + encodeURIComponent('absUrl#'));
         });
 
-        it('removes everything after # if present', function () {
+        it('removes everything after # if present', () => {
             absUrl = 'absUrl/#/?arg';
             authenticator.login();
             expect($window.location.href)
@@ -227,7 +227,7 @@ describe(' The authenticator factory', function () {
         });
     });
 
-    it('can logout a user by clearing its tokens', function () {
+    it('can logout a user by clearing its tokens', () => {
         spyOn(user, 'clearToken');
 
         authenticator.logout();
@@ -235,7 +235,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('is able to tell whether an url is a callback message from an external security provider', function () {
+    it('is able to tell whether an url is a callback message from an external security provider', () => {
         expect(authenticator.isCallback({})).toBe(false);
         expect(authenticator.isCallback({one: 1, two: 2})).toBe(false);
         expect(authenticator.isCallback({'a-select-server': 1, 'aselect_credentials': 2, 'rid': 3})).toBe(true);
@@ -243,7 +243,7 @@ describe(' The authenticator factory', function () {
         expect(authenticator.isCallback({one: 1, 'a-select-server': 1, 'aselect_credentials': 2, 'rid': 3})).toBe(true);
     });
 
-    it('is able to intercept callback messages from external security provider, clears browser history', function () {
+    it('is able to intercept callback messages from external security provider, clears browser history', () => {
         spyOn(user, 'setRefreshToken');
         spyOn(user, 'setAccessToken');
         spyOn($location, 'replace');
@@ -263,7 +263,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('returns to the saved callback path on a refresh token error', function () {
+    it('returns to the saved callback path on a refresh token error', () => {
         spyOn($location, 'replace');
         spyOn(storage.session, 'getItem').and.returnValue(angular.toJson({one: 1}));
 
@@ -278,7 +278,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('returns to the saved callback path on an access token error', function () {
+    it('returns to the saved callback path on an access token error', () => {
         spyOn($location, 'replace');
         spyOn(storage.session, 'getItem').and.returnValue(angular.toJson({one: 1}));
 
@@ -294,7 +294,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('retrieves a saved callback path when handling callback messages from external security provider', function () {
+    it('retrieves a saved callback path when handling callback messages from external security provider', () => {
         spyOn(storage.session, 'getItem').and.returnValue(angular.toJson({one: 1}));
 
         $httpBackend.whenGET(AUTH_PATH + REFRESH_TOKEN_PATH + '?a-select-server=1&aselect_credentials=2&rid=3')
@@ -308,7 +308,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('stays at home page when no saved callback path can be found', function () {
+    it('stays at home page when no saved callback path can be found', () => {
         spyOn(storage.session, 'getItem').and.returnValue(null);
 
         $httpBackend.whenGET(AUTH_PATH + REFRESH_TOKEN_PATH + '?a-select-server=1&aselect_credentials=2&rid=3')
@@ -322,7 +322,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('does not ask for an anonymous access token if a authenticated refresh token fails', function () {
+    it('does not ask for an anonymous access token if a authenticated refresh token fails', () => {
         spyOn(user, 'setRefreshToken');
 
         $httpBackend.whenGET(AUTH_PATH + REFRESH_TOKEN_PATH + '?a-select-server=1&aselect_credentials=2&rid=3')
@@ -336,7 +336,7 @@ describe(' The authenticator factory', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('does not ask for an anonymous refresh token if an authenticated access token fails', function () {
+    it('does not ask for an anonymous refresh token if an authenticated access token fails', () => {
         spyOn(user, 'setRefreshToken').and.callThrough();
         spyOn(user, 'setAccessToken').and.callThrough();
 

@@ -1,14 +1,12 @@
-(function () {
+((() => {
     'use strict';
 
     angular
         .module('dpShared')
-        .directive('dpAlt', function () {
-            return {
-                restrict: 'A',
-                link: dpAlt
-            };
-        });
+        .directive('dpAlt', () => ({
+        restrict: 'A',
+        link: dpAlt
+    }));
 
     function dpAlt (scope, element, attrs) {
         ['load', 'error']
@@ -17,4 +15,4 @@
                 () => element.attr('alt', attrs.dpAlt)
             ));
     }
-})();
+}))();

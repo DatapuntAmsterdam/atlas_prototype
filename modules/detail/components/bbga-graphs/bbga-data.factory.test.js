@@ -1,4 +1,4 @@
-describe('The bbgaDataService', function () {
+describe('The bbgaDataService', () => {
     var $rootScope,
         $q,
         api,
@@ -6,10 +6,10 @@ describe('The bbgaDataService', function () {
         mockedMetaData,
         mockedCijfers;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
-            function ($provide) {
+            $provide => {
                 $provide.constant('BBGA_CONFIG', {
                     MY_GRAPH_SETTINGS: [
                         {
@@ -31,7 +31,7 @@ describe('The bbgaDataService', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$q_, _api_, _bbgaDataService_) {
+        angular.mock.inject((_$rootScope_, _$q_, _api_, _bbgaDataService_) => {
             $rootScope = _$rootScope_;
             $q = _$q_;
             api = _api_;
@@ -116,8 +116,8 @@ describe('The bbgaDataService', function () {
         });
     });
 
-    it('combines and formats metadata and cijfers from the BBGA API', function () {
-        bbgaDataService.getGraphData('MY_GRAPH_SETTINGS', 'Gebied A', 'GEBIED_A').then(function (bbgaData) {
+    it('combines and formats metadata and cijfers from the BBGA API', () => {
+        bbgaDataService.getGraphData('MY_GRAPH_SETTINGS', 'Gebied A', 'GEBIED_A').then(bbgaData => {
             // VARIABELE_A
             expect(bbgaData.VARIABELE_A.meta.label).toBe('Variabele A');
             expect(bbgaData.VARIABELE_A.meta.peildatum).toBe('1 juli');
@@ -135,8 +135,8 @@ describe('The bbgaDataService', function () {
         $rootScope.$digest();
     });
 
-    it('adds the gebieds name to the BBGA data', function () {
-        bbgaDataService.getGraphData('MY_GRAPH_SETTINGS', 'Gebied A', 'GEBIED_A').then(function (bbgaData) {
+    it('adds the gebieds name to the BBGA data', () => {
+        bbgaDataService.getGraphData('MY_GRAPH_SETTINGS', 'Gebied A', 'GEBIED_A').then(bbgaData => {
             expect(bbgaData.VARIABELE_A.data[0].label).toBe('Gebied A');
             expect(bbgaData.VARIABELE_B.data[0].label).toBe('Gebied A');
         });
@@ -144,16 +144,16 @@ describe('The bbgaDataService', function () {
 
         bbgaDataService
             .getGraphData('MY_GRAPH_SETTINGS', 'Dit is een andere titel voor gebied A', 'GEBIED_A')
-            .then(function (bbgaData) {
+            .then(bbgaData => {
                 expect(bbgaData.VARIABELE_A.data[0].label).toBe('Dit is een andere titel voor gebied A');
                 expect(bbgaData.VARIABELE_B.data[0].label).toBe('Dit is een andere titel voor gebied A');
             });
         $rootScope.$digest();
     });
 
-    it('returns null for data that isn\'t available in the BBGA API', function () {
+    it('returns null for data that isn\'t available in the BBGA API', () => {
         bbgaDataService.getGraphData('MY_GRAPH_SETTINGS_WITH_NO_DATA', 'Gebied A', 'GEBIED_A')
-            .then(function (bbgaData) {
+            .then(bbgaData => {
                 expect(bbgaData.VARIABELE_C.meta.jaar).toBeNull();
                 expect(bbgaData.VARIABELE_C.data[0].waarde).toBeNull();
 
@@ -167,8 +167,8 @@ describe('The bbgaDataService', function () {
         $rootScope.$digest();
     });
 
-    it('optionally adds data for amsterdam (gebiedscode STAD) based on the BBGA_CONFIG', function () {
-        bbgaDataService.getGraphData('MY_GRAPH_SETTINGS', 'Gebied A', 'GEBIED_A').then(function (bbgaData) {
+    it('optionally adds data for amsterdam (gebiedscode STAD) based on the BBGA_CONFIG', () => {
+        bbgaDataService.getGraphData('MY_GRAPH_SETTINGS', 'Gebied A', 'GEBIED_A').then(bbgaData => {
             // When compareWithAmsterdam is false
             expect(bbgaData.VARIABELE_A.data.length).toBe(1);
 
@@ -181,8 +181,8 @@ describe('The bbgaDataService', function () {
         $rootScope.$digest();
     });
 
-    it('makes the jaar variable part of the metadata', function () {
-        bbgaDataService.getGraphData('MY_GRAPH_SETTINGS', 'Gebied A', 'GEBIED_A').then(function (bbgaData) {
+    it('makes the jaar variable part of the metadata', () => {
+        bbgaDataService.getGraphData('MY_GRAPH_SETTINGS', 'Gebied A', 'GEBIED_A').then(bbgaData => {
             expect(bbgaData.VARIABELE_A.meta.jaar).toBe(2017);
             expect(bbgaData.VARIABELE_A.data[0].jaar).toBeUndefined();
 

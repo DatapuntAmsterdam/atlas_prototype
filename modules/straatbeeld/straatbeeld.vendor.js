@@ -1,6 +1,6 @@
 /* globals Marzipano */
 
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -12,4 +12,4 @@
     function configuration ($provide) {
         $provide.constant('Marzipano', Marzipano);
     }
-})();
+}))();

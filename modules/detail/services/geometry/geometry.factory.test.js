@@ -1,4 +1,4 @@
-describe('The geometry factory', function () {
+describe('The geometry factory', () => {
     var $q,
         $rootScope,
         geometry,
@@ -127,7 +127,7 @@ describe('The geometry factory', function () {
             }
         ];
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
             {
@@ -136,9 +136,7 @@ describe('The geometry factory', function () {
                         var q = $q.defer(),
                             response;
 
-                        response = mockedData.filter(function (item) {
-                            return item.url === url;
-                        })[0].response;
+                        response = mockedData.filter(item => item.url === url)[0].response;
 
                         q.resolve(response);
 
@@ -148,17 +146,17 @@ describe('The geometry factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$q_, _$rootScope_, _geometry_) {
+        angular.mock.inject((_$q_, _$rootScope_, _geometry_) => {
             $q = _$q_;
             $rootScope = _$rootScope_;
             geometry = _geometry_;
         });
     });
 
-    it('returns the GeoJSON of an URL', function () {
+    it('returns the GeoJSON of an URL', () => {
         var response;
 
-        geometry.getGeoJSON('http://www.api-root.nl/brk/object/NL.KAD.OnroerendeZaak.123456/').then(function (data) {
+        geometry.getGeoJSON('http://www.api-root.nl/brk/object/NL.KAD.OnroerendeZaak.123456/').then(data => {
             response = data;
         });
 
@@ -169,12 +167,12 @@ describe('The geometry factory', function () {
         });
     });
 
-    it('returns the GeoJSON of the monument', function () {
+    it('returns the GeoJSON of the monument', () => {
         var response;
 
         geometry
             .getGeoJSON('http://www.api-root.nl/monumenten/monumenten/987654321/')
-            .then(function (data) {
+            .then(data => {
                 response = data;
             });
 
@@ -185,13 +183,13 @@ describe('The geometry factory', function () {
         });
     });
 
-    describe('when searching for the geometry of a vestiging', function () {
-        it('returns the GeoJSON of the bezoekadres if it falls within the bounding box of the map', function () {
+    describe('when searching for the geometry of a vestiging', () => {
+        it('returns the GeoJSON of the bezoekadres if it falls within the bounding box of the map', () => {
             var response;
 
             geometry
                 .getGeoJSON('https://www.api-root.nl/handelsregister/vestiging/123/')
-                .then(function (data) {
+                .then(data => {
                     response = data;
                 });
 
@@ -201,13 +199,13 @@ describe('The geometry factory', function () {
                 coordinates: [119695.616, 483365.537]
             });
         });
-        it('returns the Null if it does not fall within the bounding box of the map', function () {
+        it('returns the Null if it does not fall within the bounding box of the map', () => {
             var response;
 
             // BOTH x and y
             geometry
                 .getGeoJSON('https://www.api-root.nl/handelsregister/vestiging/456/')
-                .then(function (data) {
+                .then(data => {
                     response = data;
                 });
 
@@ -218,7 +216,7 @@ describe('The geometry factory', function () {
             // Either x or y
             geometry
                 .getGeoJSON('https://www.api-root.nl/handelsregister/vestiging/789/')
-                .then(function (data) {
+                .then(data => {
                     response = data;
                 });
 
@@ -228,13 +226,13 @@ describe('The geometry factory', function () {
         });
     });
 
-    describe('when searching for the geometry of an A perceel', function () {
-        it('returns the GeoJSON of the parent G perceel', function () {
+    describe('when searching for the geometry of an A perceel', () => {
+        it('returns the GeoJSON of the parent G perceel', () => {
             var response;
 
             geometry
                 .getGeoJSON('http://www.api-root.nl/brk/object/NL.KAD.OnroerendeZaak.456789/')
-                .then(function (data) {
+                .then(data => {
                     response = data;
                 });
 
@@ -246,13 +244,13 @@ describe('The geometry factory', function () {
         });
     });
 
-    describe('when searching for the geometry of a nummeraanduiding', function () {
-        describe('returns the GeoJSON of the parent adressseerbaar object', function () {
+    describe('when searching for the geometry of a nummeraanduiding', () => {
+        describe('returns the GeoJSON of the parent adressseerbaar object', () => {
             it('should return the verblijfsobject geometry when the type of nummeraanduiding is verblijfsobject',
-                function () {
+                () => {
                     var response;
 
-                    geometry.getGeoJSON('http://www.api-root.nl/bag/nummeraanduiding/10000001/').then(function (data) {
+                    geometry.getGeoJSON('http://www.api-root.nl/bag/nummeraanduiding/10000001/').then(data => {
                         response = data;
                     });
 
@@ -264,10 +262,10 @@ describe('The geometry factory', function () {
                 }
             );
 
-            it('should return the ligplaats geometry when the type of nummeraanduiding is Ligplaats', function () {
+            it('should return the ligplaats geometry when the type of nummeraanduiding is Ligplaats', () => {
                 var response;
 
-                geometry.getGeoJSON('http://www.api-root.nl/bag/nummeraanduiding/10000002/').then(function (data) {
+                geometry.getGeoJSON('http://www.api-root.nl/bag/nummeraanduiding/10000002/').then(data => {
                     response = data;
                 });
 
@@ -278,10 +276,10 @@ describe('The geometry factory', function () {
                 });
             });
 
-            it('should return the standplaats geometry when the type of nummeraanduiding is Standplaats', function () {
+            it('should return the standplaats geometry when the type of nummeraanduiding is Standplaats', () => {
                 var response;
 
-                geometry.getGeoJSON('http://www.api-root.nl/bag/nummeraanduiding/10000003/').then(function (data) {
+                geometry.getGeoJSON('http://www.api-root.nl/bag/nummeraanduiding/10000003/').then(data => {
                     response = data;
                 });
 
@@ -294,10 +292,10 @@ describe('The geometry factory', function () {
         });
     });
 
-    it('will return null if there is no geometry available', function () {
+    it('will return null if there is no geometry available', () => {
         var response;
 
-        geometry.getGeoJSON('http://www.api-root.nl/brk/subject/NL.KAD.Persoon.123456/').then(function (data) {
+        geometry.getGeoJSON('http://www.api-root.nl/brk/subject/NL.KAD.Persoon.123456/').then(data => {
             response = data;
         });
 

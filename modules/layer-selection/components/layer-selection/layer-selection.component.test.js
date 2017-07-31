@@ -1,11 +1,11 @@
-describe('The dp-layer-selection component', function () {
+describe('The dp-layer-selection component', () => {
     var $compile,
         $rootScope,
         store,
         user,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpLayerSelection',
             {
@@ -56,7 +56,7 @@ describe('The dp-layer-selection component', function () {
                     ]
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('BASE_LAYERS', [
                     {
                         slug: 'base_layer_a',
@@ -67,13 +67,11 @@ describe('The dp-layer-selection component', function () {
                     }
                 ]);
 
-                $provide.factory('dpPanelDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpPanelDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _user_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _user_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -104,14 +102,14 @@ describe('The dp-layer-selection component', function () {
         return component;
     }
 
-    describe('there is a close icon', function () {
+    describe('there is a close icon', () => {
         var component;
 
-        beforeEach(function () {
+        beforeEach(() => {
             component = getComponent('base_layer_a', [], 8);
         });
 
-        it('that triggers HIDE_LAYER_SELECTION', function () {
+        it('that triggers HIDE_LAYER_SELECTION', () => {
             component.find('.c-layer-selection__close').click();
 
             $rootScope.$apply();
@@ -121,14 +119,14 @@ describe('The dp-layer-selection component', function () {
             });
         });
 
-        it('with a title attribute and screen reader fallback', function () {
+        it('with a title attribute and screen reader fallback', () => {
             expect(component.find('.c-layer-selection__heading button').attr('title')).toBe('Sluiten');
             expect(component.find('.c-layer-selection__heading button .u-sr-only').text()).toContain('Sluiten');
         });
     });
 
-    describe('base layer', function () {
-        it('lists all base layers as radio buttons w/ labels', function () {
+    describe('base layer', () => {
+        it('lists all base layers as radio buttons w/ labels', () => {
             var component = getComponent('base_layer_a', [], 8);
 
             expect(component.find('ul').eq(0).find('li').length).toBe(2);
@@ -141,7 +139,7 @@ describe('The dp-layer-selection component', function () {
             expect(component.find('ul').eq(0).find('li').eq(1).find('input').val()).toBe('base_layer_b');
         });
 
-        it('can set the base layer', function () {
+        it('can set the base layer', () => {
             var component = getComponent('base_layer_a', [], 8),
                 scope = component.isolateScope();
 
@@ -163,16 +161,16 @@ describe('The dp-layer-selection component', function () {
         });
     });
 
-    describe('overlays', function () {
+    describe('overlays', () => {
         let overlays;
 
-        beforeEach(function () {
-            angular.mock.inject(function (_overlays_) {
+        beforeEach(() => {
+            angular.mock.inject(_overlays_ => {
                 overlays = _overlays_;
             });
         });
 
-        it('lists all overlays as checkboxes w/ labels', function () {
+        it('lists all overlays as checkboxes w/ labels', () => {
             var component = getComponent('base_layer_a', [], 8),
                 contentDiv = component.find('.c-layer-selection__content');
 
@@ -201,7 +199,7 @@ describe('The dp-layer-selection component', function () {
             expect(contentDiv.find('div').eq(2).find('li').eq(2).find('input').val()).toBe('overlay_2_c');
         });
 
-        it('re-computes overlays collection when the user authorization level changes', function () {
+        it('re-computes overlays collection when the user authorization level changes', () => {
             spyOn(user, 'getAuthorizationLevel').and.returnValue(1);
 
             const component = getComponent('base_layer_a', [], 8);
@@ -233,7 +231,7 @@ describe('The dp-layer-selection component', function () {
             expect(scope.vm.allOverlays.length).toBe(1);
         });
 
-        it('marks the checkboxes for active overlays', function () {
+        it('marks the checkboxes for active overlays', () => {
             var component,
                 contentDiv;
 
@@ -259,7 +257,7 @@ describe('The dp-layer-selection component', function () {
             expect(contentDiv.find('div').eq(2).find('li').eq(2).find('input').attr('checked')).toBeUndefined();
         });
 
-        it('can toggle overlays', function () {
+        it('can toggle overlays', () => {
             var component = getComponent('base_layer_a', [{id: 'overlay_1_a', isVisible: true}], 8),
                 scope = component.isolateScope();
 
@@ -280,7 +278,7 @@ describe('The dp-layer-selection component', function () {
             });
         });
 
-        it('has a indicator for overlays not visible on this zoom level', function () {
+        it('has a indicator for overlays not visible on this zoom level', () => {
             var component,
                 contentDiv,
                 allOverlays,
@@ -370,7 +368,7 @@ describe('The dp-layer-selection component', function () {
             }
         });
 
-        it('makes the active overlays bold (regardless of zoom level)', function () {
+        it('makes the active overlays bold (regardless of zoom level)', () => {
             var component,
                 contentDiv;
 
@@ -394,7 +392,7 @@ describe('The dp-layer-selection component', function () {
             expect(contentDiv.find('div').eq(2).find('li').eq(0).find('span').text()).toContain('Overlay 2a');
         });
 
-        it('only shows the i-am-not-visible indicator for active overlays', function () {
+        it('only shows the i-am-not-visible indicator for active overlays', () => {
             var component,
                 contentDiv;
 
@@ -444,7 +442,7 @@ describe('The dp-layer-selection component', function () {
 
                 expect(component.find('.qa-category-warning').length).toBe(0);
             });
-            it('should update the message on authorization change', function () {
+            it('should update the message on authorization change', () => {
                 const component = getComponent('base_layer_a', [], 8);
                 expect(component.find('.qa-category-warning').length).toBe(1);
 

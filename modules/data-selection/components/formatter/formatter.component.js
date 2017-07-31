@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -42,4 +42,4 @@
             vm.templatePath = `modules/data-selection/components/formatter/templates/${vm.template}.html`;
         }
     }
-})();
+}))();

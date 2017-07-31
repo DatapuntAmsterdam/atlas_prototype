@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -10,7 +10,7 @@
             MAX_LENGTH = 250,
             TRAILING_WHITESPACE = /\s+$/;
 
-        return function (input, maxLength = MAX_LENGTH) {
+        return (input, maxLength = MAX_LENGTH) => {
             if (angular.isString(input)) {
                 // Remove HTML code
                 let truncated = input.replace(/<[^>]+>/gm, '');
@@ -34,4 +34,4 @@
             }
         };
     }
-})();
+}))();

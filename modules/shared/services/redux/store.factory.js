@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpShared')
         .factory('store', storeFactory);
@@ -8,4 +8,4 @@
     function storeFactory (applicationState) {
         return applicationState.getStore();
     }
-})();
+}))();

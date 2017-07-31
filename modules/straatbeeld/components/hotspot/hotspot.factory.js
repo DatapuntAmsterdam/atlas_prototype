@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -34,11 +34,11 @@
 
             html = $compile(element)(scope)[0];
 
-            scope.$applyAsync(function () {
+            scope.$applyAsync(() => {
                 q.resolve(html);
             });
 
             return q.promise;
         }
     }
-})();
+}))();

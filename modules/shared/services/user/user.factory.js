@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -35,7 +35,7 @@
                     this.name = '';
                 };
 
-                this.decodeToken = function (token) {
+                this.decodeToken = token => {
                     try {
                         return angular.fromJson(
                             $window.atob(token
@@ -235,4 +235,4 @@
             onLowerAuthorizationLevel();
         }
     }
-})();
+}))();

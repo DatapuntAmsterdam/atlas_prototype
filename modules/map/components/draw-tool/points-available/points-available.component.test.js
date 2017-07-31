@@ -1,11 +1,11 @@
-describe('The dp-points-available component', function () {
+describe('The dp-points-available component', () => {
     var $compile,
         $rootScope,
         scope,
         drawTool,
         DRAW_TOOL_CONFIG;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -19,7 +19,7 @@ describe('The dp-points-available component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _drawTool_, _DRAW_TOOL_CONFIG_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _drawTool_, _DRAW_TOOL_CONFIG_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             drawTool = _drawTool_;
@@ -38,12 +38,12 @@ describe('The dp-points-available component', function () {
         return result;
     }
 
-    describe('When the draw tool is enabled', function () {
-        beforeEach(function () {
+    describe('When the draw tool is enabled', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'isEnabled').and.returnValue(true);
         });
 
-        it('shows the remaining number of markers only when less than X markers left', function () {
+        it('shows the remaining number of markers only when less than X markers left', () => {
             drawTool.shape.markers = [];
             const component = getComponent();
             for (let i = 0; i < drawTool.shape.markersMaxCount; i++) {
@@ -62,7 +62,7 @@ describe('The dp-points-available component', function () {
             }
         });
 
-        it('shows no markers available when 0 markers left', function () {
+        it('shows no markers available when 0 markers left', () => {
             drawTool.shape.markers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             const component = getComponent();
             expect(component.find('.qa-few-points-available').length).toBe(0);
@@ -73,12 +73,12 @@ describe('The dp-points-available component', function () {
         });
     });
 
-    describe('When the draw tool is disabled', function () {
-        beforeEach(function () {
+    describe('When the draw tool is disabled', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'isEnabled').and.returnValue(false);
         });
 
-        it('shows nothing', function () {
+        it('shows nothing', () => {
             drawTool.shape.markers = [];
             const component = getComponent();
             for (let i = 0; i < drawTool.shape.markersMaxCount; i++) {

@@ -1,10 +1,10 @@
-describe('The dp-data-selection-pagination-link component', function () {
+describe('The dp-data-selection-pagination-link component', () => {
     var $compile,
         $rootScope,
         store,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -14,7 +14,7 @@ describe('The dp-data-selection-pagination-link component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -41,7 +41,7 @@ describe('The dp-data-selection-pagination-link component', function () {
         return component;
     }
 
-    it('shows a button for each enabled link', function () {
+    it('shows a button for each enabled link', () => {
         var component = getComponent({
             label: 'Ik ben een knopske',
             page: 27,
@@ -55,7 +55,7 @@ describe('The dp-data-selection-pagination-link component', function () {
         expect(component.find('> span').length).toBe(0);
     });
 
-    it('triggers NAVIGATE_DATA_SELECTION when clicking a link', function () {
+    it('triggers NAVIGATE_DATA_SELECTION when clicking a link', () => {
         var component = getComponent({
             label: 'Ik ben een knopske',
             page: 27,
@@ -70,7 +70,7 @@ describe('The dp-data-selection-pagination-link component', function () {
         });
     });
 
-    it('hides the button if the link is disabled', function () {
+    it('hides the button if the link is disabled', () => {
         var component = getComponent({
             label: 'Ik ben een knopske',
             page: 27,

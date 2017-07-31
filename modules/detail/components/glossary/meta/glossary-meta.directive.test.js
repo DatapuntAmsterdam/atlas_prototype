@@ -1,11 +1,11 @@
-describe('The dp-glossary-meta directive', function () {
+describe('The dp-glossary-meta directive', () => {
     let $compile,
         $rootScope;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
-            function ($provide) {
+            $provide => {
                 $provide.constant('GLOSSARY', {
                     DEFINITIONS: {
                         BOUWBLOK: {
@@ -25,7 +25,7 @@ describe('The dp-glossary-meta directive', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -49,7 +49,7 @@ describe('The dp-glossary-meta directive', function () {
         return directive;
     }
 
-    it('sums up meta information', function () {
+    it('sums up meta information', () => {
         var directive,
             apiData = {
                 results: {
@@ -71,7 +71,7 @@ describe('The dp-glossary-meta directive', function () {
         expect(directive.find('dd:nth-child(4)').text().length).toBeGreaterThan(1);
     });
 
-    it('applies a date filter when the meta information of of type \'date\'', function () {
+    it('applies a date filter when the meta information of of type \'date\'', () => {
         var directive,
             apiData = {
                 results: {

@@ -1,4 +1,4 @@
-describe('The embedReducers factory', function () {
+describe('The embedReducers factory', () => {
     var embedReducers,
         ACTIONS,
         defaultState;
@@ -29,25 +29,25 @@ describe('The embedReducers factory', function () {
         }
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_embedReducers_, _ACTIONS_) {
+        angular.mock.inject((_embedReducers_, _ACTIONS_) => {
             embedReducers = _embedReducers_;
             ACTIONS = _ACTIONS_;
         });
     });
 
-    describe('SHOW_EMBED_PREVIEW', function () {
-        it('sets the isEmbedPreview variable to true', function () {
+    describe('SHOW_EMBED_PREVIEW', () => {
+        it('sets the isEmbedPreview variable to true', () => {
             var output = embedReducers[ACTIONS.SHOW_EMBED_PREVIEW.id](defaultState);
 
             expect(output.atlas.isEmbedPreview).toBe(true);
         });
     });
 
-    describe('HIDE_EMBED_PREVIEW', function () {
-        it('sets the isEmbedPreview variable to false', function () {
+    describe('HIDE_EMBED_PREVIEW', () => {
+        it('sets the isEmbedPreview variable to false', () => {
             var inputState,
                 output;
 

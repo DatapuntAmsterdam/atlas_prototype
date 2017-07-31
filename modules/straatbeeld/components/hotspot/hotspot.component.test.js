@@ -1,10 +1,10 @@
-describe('The dp-hotspot directive', function () {
+describe('The dp-hotspot directive', () => {
     var $compile,
         $rootScope,
         store,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
             {
@@ -14,7 +14,7 @@ describe('The dp-hotspot directive', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -45,7 +45,7 @@ describe('The dp-hotspot directive', function () {
         return directive;
     }
 
-    it('creates a button with dimensions and rotations based on the distance', function () {
+    it('creates a button with dimensions and rotations based on the distance', () => {
         var directive;
 
         directive = getComponent('ABC', 4, 0.1, 2016);
@@ -65,7 +65,7 @@ describe('The dp-hotspot directive', function () {
         expect(directive.find('.qa-hotspot-rotation').attr('style')).toContain('rotateX(48.35211024345884deg)');
     });
 
-    it('hotspots have a minimum and maximum size as if they in the 4-21 meter range', function () {
+    it('hotspots have a minimum and maximum size as if they in the 4-21 meter range', () => {
         var directive,
             minimumStyle,
             maximumStyle;
@@ -85,7 +85,7 @@ describe('The dp-hotspot directive', function () {
         expect(maximumStyle).toBe(directive.find('.qa-hotspot-button').attr('style'));
     });
 
-    it('hotspots have the correct year attached to them', function () {
+    it('hotspots have the correct year attached to them', () => {
         let directive;
 
         // 2016
@@ -97,7 +97,7 @@ describe('The dp-hotspot directive', function () {
         expect(directive.find('.qa-hotspot-button').attr('class')).toContain('c-hotspot--year-2017');
     });
 
-    it('clicking the hotspot will trigger the FETCH_STRAATBEELD_BY_HOTSPOT action', function () {
+    it('clicking the hotspot will trigger the FETCH_STRAATBEELD_BY_HOTSPOT action', () => {
         var directive;
 
         spyOn(store, 'dispatch');
@@ -114,7 +114,7 @@ describe('The dp-hotspot directive', function () {
         });
     });
 
-    it('has a screen reader fallback text', function () {
+    it('has a screen reader fallback text', () => {
         var directive;
 
         directive = getComponent('ABC', 5, 0.7, 2017);

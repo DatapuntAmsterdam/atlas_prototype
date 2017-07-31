@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpDataSelection')
         .factory('dataSelectionApiCkan', dataSelectionApiCkanFactory);
@@ -91,4 +91,4 @@
                 '?id=' + rawDataRow[config.PRIMARY_KEY];
         }
     }
-})();
+}))();

@@ -1,8 +1,8 @@
-describe('The leafletDrawTranslations factory', function () {
+describe('The leafletDrawTranslations factory', () => {
     let L,
         leafletDrawTranslations;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap'
         );
@@ -13,7 +13,7 @@ describe('The leafletDrawTranslations factory', function () {
         });
     });
 
-    it('sets all L.drawLocal texts to ampty string', function () {
+    it('sets all L.drawLocal texts to ampty string', () => {
         expect(L.drawLocal.draw.toolbar.actions.title).not.toBe('');
         expect(L.drawLocal.draw.toolbar.actions.text).not.toBe('');
 
@@ -26,7 +26,7 @@ describe('The leafletDrawTranslations factory', function () {
         expect(L.drawLocal.draw.toolbar.actions.text).toBe('');
     });
 
-    it('Leaves all L.drawLocal non-string values untouched', function () {
+    it('Leaves all L.drawLocal non-string values untouched', () => {
         L.drawLocal.draw.toolbar.actions.title = 10;
 
         leafletDrawTranslations.initialize();

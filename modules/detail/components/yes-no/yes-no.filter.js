@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .filter('yesNo', yesNoFilter);
 
     function yesNoFilter () {
-        return function (input) {
+        return input => {
             if (input === true) {
                 return 'Ja';
             } else if (input === false) {
@@ -16,4 +16,4 @@
             }
         };
     }
-})();
+}))();

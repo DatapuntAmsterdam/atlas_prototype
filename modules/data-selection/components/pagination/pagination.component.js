@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -55,7 +55,7 @@
             };
         }
 
-        vm.goToPage = function (event) {
+        vm.goToPage = event => {
             event.preventDefault();
 
             if (angular.isNumber(vm.currentPage) && vm.currentPage >= 1 && vm.currentPage <= vm.numberOfPages) {
@@ -66,4 +66,4 @@
             }
         };
     }
-})();
+}))();

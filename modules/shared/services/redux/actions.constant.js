@@ -1,4 +1,4 @@
-(function () {
+((() => {
     //
     // ACTIONS are identified by their id
     // Optionally an action can specify:
@@ -197,4 +197,4 @@
                 isButton: true
             }
         });
-})();
+}))();

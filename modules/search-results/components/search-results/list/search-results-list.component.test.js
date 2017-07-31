@@ -1,11 +1,11 @@
-describe('The dp-search-results-list component', function () {
+describe('The dp-search-results-list component', () => {
     var $compile,
         $rootScope,
         store,
         ACTIONS,
         mockedCategory;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpSearchResults',
             {
@@ -13,14 +13,12 @@ describe('The dp-search-results-list component', function () {
                     dispatch: function () {}
                 }
             },
-            function ($provide) {
-                $provide.value('longNameShortenerFilter', function (input) {
-                    return input && input.replace('Vereniging van Eigenaren', 'VVE');
-                });
+            $provide => {
+                $provide.value('longNameShortenerFilter', input => input && input.replace('Vereniging van Eigenaren', 'VVE'));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -123,7 +121,7 @@ describe('The dp-search-results-list component', function () {
         return component;
     }
 
-    it('lists search results', function () {
+    it('lists search results', () => {
         var component = getComponent(mockedCategory, false);
 
         expect(component.find('dp-link').length).toBe(12);
@@ -155,7 +153,7 @@ describe('The dp-search-results-list component', function () {
         });
     });
 
-    it('optionally limits the number of search results', function () {
+    it('optionally limits the number of search results', () => {
         var component;
 
         // Without the limiter
@@ -167,18 +165,18 @@ describe('The dp-search-results-list component', function () {
         expect(component.find('dp-link').length).toBe(10);
     });
 
-    it('applies the longNameShortener filter', function () {
+    it('applies the longNameShortener filter', () => {
         var component = getComponent(mockedCategory, false);
 
         expect(component.find('dp-link').eq(9).find('button').text()).not.toContain('Vereniging van Eigenaren');
         expect(component.find('dp-link').eq(9).find('button').text()).toContain('VVE');
     });
 
-    it('shows the type of openbare ruimte when it\'s something else than \'Weg\'', function () {
+    it('shows the type of openbare ruimte when it\'s something else than \'Weg\'', () => {
         var component = getComponent(mockedCategory);
 
         // Wegen
-        [0, 1, 2, 5, 6, 7, 8, 9, 10, 11].forEach(function (index) {
+        [0, 1, 2, 5, 6, 7, 8, 9, 10, 11].forEach(index => {
             expect(component.find('li').eq(index).text()).not.toContain('(weg)');
         });
 
@@ -189,7 +187,7 @@ describe('The dp-search-results-list component', function () {
         expect(component.find('li').eq(4).text()).toContain('(gebiedsgericht werken)');
     });
 
-    it('shows the type of gebied', function () {
+    it('shows the type of gebied', () => {
         var component,
             mockedGebiedenCategory = {
                 slug: 'gebied',
@@ -239,7 +237,7 @@ describe('The dp-search-results-list component', function () {
         expect(component.find('li').eq(1).text()).toContain('(reeds uitgevoerd CE onderzoek)');
     });
 
-    it('shows the type of adressen, except for verblijfsobjecten', function () {
+    it('shows the type of adressen, except for verblijfsobjecten', () => {
         var component,
             mockedGebiedenCategory = {
                 slug: 'adres',
@@ -271,7 +269,7 @@ describe('The dp-search-results-list component', function () {
         expect(component.find('li').eq(2).text()).toContain('(ligplaats)');
     });
 
-    it('doesn\'t show the type when the value is null', function () {
+    it('doesn\'t show the type when the value is null', () => {
         var component,
             mockedGebiedenCategory = {
                 slug: 'adres',

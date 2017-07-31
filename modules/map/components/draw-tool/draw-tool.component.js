@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -23,7 +23,7 @@
 
         drawTool.initialize(vm.map, onFinishShape, onDrawingMode);
 
-        $scope.$watch('vm.state.drawingMode', function (drawingMode) {
+        $scope.$watch('vm.state.drawingMode', drawingMode => {
             // enable is handled by the polygon markers watch method
             if (drawingMode === DRAW_TOOL_CONFIG.DRAWING_MODE.NONE) {
                 // The drawing mode 'suddenly' appears to be `none` => cancel
@@ -103,4 +103,4 @@
             }
         }
     }
-})();
+}))();

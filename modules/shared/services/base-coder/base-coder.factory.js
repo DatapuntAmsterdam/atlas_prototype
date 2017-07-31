@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -210,4 +210,4 @@
             return new BaseCoder(base);
         }
     }
-})();
+}))();

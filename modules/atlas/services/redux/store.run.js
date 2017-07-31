@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('atlas')
         .run(runBlock);
@@ -30,4 +30,4 @@
             contextMiddleware,
             stateToUrlMiddleware);
     }
-})();
+}))();

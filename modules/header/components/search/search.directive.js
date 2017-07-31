@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -24,7 +24,7 @@
             scope.activeSuggestionIndex = -1;
             scope.originalQuery = scope.query;
 
-            scope.formSubmit = function (event) {
+            scope.formSubmit = event => {
                 event.preventDefault();
 
                 search();
@@ -32,18 +32,18 @@
                 removeSuggestions();
             };
 
-            scope.clear = function () {
+            scope.clear = () => {
                 scope.query = '';
                 scope.getSuggestions();
                 scope.setFocus();
             };
 
-            scope.getSuggestions = function () {
+            scope.getSuggestions = () => {
                 scope.activeSuggestionIndex = -1;
                 scope.originalQuery = scope.query;
 
                 if (angular.isString(scope.query) && scope.query.length) {
-                    autocompleteData.search(scope.query).then(function (suggestions) {
+                    autocompleteData.search(scope.query).then(suggestions => {
                         // Only load suggestions if they are still relevant.
                         if (suggestions.query === scope.query) {
                             scope.suggestions = suggestions.data;
@@ -56,7 +56,7 @@
                 }
             };
 
-            scope.navigateSuggestions = function (event) {
+            scope.navigateSuggestions = event => {
                 // Cancel outstanding requests, we don't want suggestions to 'refresh' while navigating.
                 switch (event.keyCode) {
                     // Arrow up
@@ -92,7 +92,7 @@
                 }
             };
 
-            scope.goToDetail = function (uri) {
+            scope.goToDetail = uri => {
                 scope.setQuery('');
 
                 store.dispatch({
@@ -101,11 +101,11 @@
                 });
             };
 
-            scope.setQuery = function (query) {
+            scope.setQuery = query => {
                 scope.query = query;
             };
 
-            scope.setFocus = function () {
+            scope.setFocus = () => {
                 searchbox.focus();
             };
 
@@ -157,4 +157,4 @@
             }
         }
     }
-})();
+}))();

@@ -1,4 +1,4 @@
-describe('The dp-bbga-tevredenheid component', function () {
+describe('The dp-bbga-tevredenheid component', () => {
     var $compile,
         $rootScope,
         $q,
@@ -47,7 +47,7 @@ describe('The dp-bbga-tevredenheid component', function () {
         },
         mockedBbgaMissingData;
 
-    beforeEach(function () {
+    beforeEach(() => {
         hasBbgaData = true;
 
         mockedBbgaMissingData = angular.copy(mockedBbgaData);
@@ -68,7 +68,7 @@ describe('The dp-bbga-tevredenheid component', function () {
                     }
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('BBGA_TEVREDENHEID_CONFIG', [
                     {
                         label: 'Variabele A',
@@ -86,7 +86,7 @@ describe('The dp-bbga-tevredenheid component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _bbgaDataService_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$q_, _bbgaDataService_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
@@ -111,7 +111,7 @@ describe('The dp-bbga-tevredenheid component', function () {
         return component;
     }
 
-    it('loads the data from the bbgaData service', function () {
+    it('loads the data from the bbgaData service', () => {
         spyOn(bbgaDataService, 'getGraphData').and.callThrough();
 
         getComponent('Naam van het gebied', 'GEB12A');
@@ -119,26 +119,26 @@ describe('The dp-bbga-tevredenheid component', function () {
         expect(bbgaDataService.getGraphData).toHaveBeenCalledWith('TEVREDENHEID', 'Naam van het gebied', 'GEB12A');
     });
 
-    it('shows a header with the year of the data', function () {
+    it('shows a header with the year of the data', () => {
         var component = getComponent();
 
         expect(component.find('.o-header__subtitle').text()).toBe('Tevredenheid cijfers 2019');
     });
 
-    it('shows a table with a row for each grade from the BBGA API', function () {
+    it('shows a table with a row for each grade from the BBGA API', () => {
         var component = getComponent();
 
         expect(component.find('.c-table tr:nth-child(1) th').text()).toBe('Variabele A');
         expect(component.find('.c-table tr:nth-child(2) th').text()).toBe('Variabele B');
     });
 
-    it('doesn\'t show a row for missing data', function () {
+    it('doesn\'t show a row for missing data', () => {
         var component = getComponent();
 
         expect(component.find('.c-table').text()).not.toContain('Variabele C');
     });
 
-    it('formats the grades in the Dutch locale with one decimal', function () {
+    it('formats the grades in the Dutch locale with one decimal', () => {
         var component = getComponent();
 
         // Variabele A
@@ -150,7 +150,7 @@ describe('The dp-bbga-tevredenheid component', function () {
         expect(component.find('.c-table tr:nth-child(2) td:nth-of-type(2)').text().trim()).toBe('6,3');
     });
 
-    it('adds colored badges to the cells with values', function () {
+    it('adds colored badges to the cells with values', () => {
         var component = getComponent();
 
         expect(component.find('.c-table tr:nth-child(1) td:nth-of-type(1) .bbga-tevredenheid__value.u-background-colo' +
@@ -164,7 +164,7 @@ describe('The dp-bbga-tevredenheid component', function () {
             'r__primary--contrast').length).toBe(1);
     });
 
-    it('adds a legend with the name of the gebied', function () {
+    it('adds a legend with the name of the gebied', () => {
         var component = getComponent('Naam van de buurt');
 
         expect(component.find('.bbga-tevredenheid__legend:nth-child(1) .bbga-tevredenheid__legend__square.u-backgroun' +
@@ -176,7 +176,7 @@ describe('The dp-bbga-tevredenheid component', function () {
         expect(component.find('.bbga-tevredenheid__legend:nth-child(2)').text().trim()).toBe('Amsterdam');
     });
 
-    it('doesn\'t show anything if there are no known grades from the BBGA API', function () {
+    it('doesn\'t show anything if there are no known grades from the BBGA API', () => {
         var component;
 
         component = getComponent('Naam van de buurt');

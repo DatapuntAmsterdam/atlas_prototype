@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -22,10 +22,10 @@
             vm.summary = $sce.trustAsHtml(drawTool.shape.distanceTxt);
         }
 
-        vm.deleteGeometry = function () {
+        vm.deleteGeometry = () => {
             store.dispatch({
                 type: ACTIONS.MAP_CLEAR_DRAWING
             });
         };
     }
-})();
+}))();

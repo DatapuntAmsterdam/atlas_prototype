@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpDataSelection')
         .factory('dataSelectionApiDataSelection', dataSelectionApiDataSelectionFactory);
@@ -31,7 +31,7 @@
             );
 
             return api.getByUri(config.ENDPOINT_PREVIEW, searchParams)
-                .then(function (data) {
+                .then(data => {
                     if (searchPage !== page) {
                         // Requested page was out of api reach, dumping data
                         // and saving only the filters
@@ -79,4 +79,4 @@
                 rawDataRow[config.PRIMARY_KEY] + '/';
         }
     }
-})();
+}))();

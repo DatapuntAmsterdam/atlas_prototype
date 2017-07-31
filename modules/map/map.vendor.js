@@ -1,6 +1,6 @@
 /* globals L */
 
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -12,4 +12,4 @@
     function configuration ($provide) {
         $provide.constant('L', L);
     }
-})();
+}))();

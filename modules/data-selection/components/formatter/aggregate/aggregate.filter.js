@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .filter('aggregate', aggregateFilter);
 
     function aggregateFilter () {
-        return function (input) {
+        return input => {
             const result = input.reduce((aggregation, value) => {
                 const counter = aggregation.find(item => item.name === value);
 
@@ -31,4 +31,4 @@
             });
         };
     }
-})();
+}))();

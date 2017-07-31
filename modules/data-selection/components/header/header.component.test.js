@@ -35,7 +35,7 @@ describe('The dp-data-selection-header', () => {
                     dispatch: angular.noop
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('DATA_SELECTION_CONFIG', config);
 
                 $provide.factory('dpDataSelectionToggleViewButtonDirective', () => {
@@ -196,7 +196,7 @@ describe('The dp-data-selection-header', () => {
         });
     });
 
-    describe('the header title', function () {
+    describe('the header title', () => {
         it('in TABLE view shows the name followed by the number of results', () => {
             mockedInputTable.numberOfRecords = 1234;
             component = getComponent(mockedInputTable);
@@ -244,7 +244,7 @@ describe('The dp-data-selection-header', () => {
     });
 
     ['TABLE', 'CARDS'].forEach(viewName => {
-        beforeEach(function () {
+        beforeEach(() => {
             mockedViewInput = viewName === 'TABLE' ? mockedInputTable : mockedInputCards;
         });
 
@@ -259,7 +259,7 @@ describe('The dp-data-selection-header', () => {
                 expect(component.find('.qa-title').length).toBe(1);
             });
 
-            it('potentially shows the no results found message', function () {
+            it('potentially shows the no results found message', () => {
                 // When there are results
                 mockedViewInput.numberOfRecords = 1;
                 component = getComponent(mockedViewInput);
@@ -271,7 +271,7 @@ describe('The dp-data-selection-header', () => {
                 expect(component.find('.qa-no-results-found').length).toBe(1);
             });
 
-            it('doesn\'t show tabs', function () {
+            it('doesn\'t show tabs', () => {
                 component = getComponent(mockedViewInput);
 
                 expect(component.find('.qa-tabs').length).toBe(0);
@@ -287,13 +287,13 @@ describe('The dp-data-selection-header', () => {
             expect(component.find('.qa-title').length).toBe(1);
         });
 
-        it('shows the tabs', function () {
+        it('shows the tabs', () => {
             component = getComponent(mockedInputList);
 
             expect(component.find('.qa-tabs').length).toBe(1);
         });
 
-        it('potentially shows the no results found message', function () {
+        it('potentially shows the no results found message', () => {
             // Don't show the message
             mockedInputList.numberOfRecords = 1234;
             component = getComponent(mockedInputList);

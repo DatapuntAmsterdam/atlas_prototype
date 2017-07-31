@@ -1,22 +1,20 @@
-describe('The dpStraatbeeldDocumentTitle factory', function () {
+describe('The dpStraatbeeldDocumentTitle factory', () => {
     var documentTitle;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
-            function ($provide) {
-                $provide.value('coordinatesFilter', function (location) {
-                    return location.join(', ') + ' (X, Y)';
-                });
+            $provide => {
+                $provide.value('coordinatesFilter', location => location.join(', ') + ' (X, Y)');
             }
         );
 
-        angular.mock.inject(function (dpStraatbeeldDocumentTitle) {
+        angular.mock.inject(dpStraatbeeldDocumentTitle => {
             documentTitle = dpStraatbeeldDocumentTitle;
         });
     });
 
-    it('returns the text \'Panorama\' and the coordinates in both WGS84 and RD', function () {
+    it('returns the text \'Panorama\' and the coordinates in both WGS84 and RD', () => {
         var mockedStraatbeeldState;
 
         mockedStraatbeeldState = {
@@ -28,7 +26,7 @@ describe('The dpStraatbeeldDocumentTitle factory', function () {
         expect(documentTitle.getTitle(mockedStraatbeeldState)).toBe('Panorama 52.987, 4.321 (X, Y)');
     });
 
-    it('returns the text \'Panorama\' when no coordinates are (yet) available', function () {
+    it('returns the text \'Panorama\' when no coordinates are (yet) available', () => {
         const mockedStraatbeeldState = {};
         expect(documentTitle.getTitle(mockedStraatbeeldState)).toBe('Panorama');
     });

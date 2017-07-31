@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -27,4 +27,4 @@
                 vm.entries = contents.entries;
             });
     }
-})();
+}))();

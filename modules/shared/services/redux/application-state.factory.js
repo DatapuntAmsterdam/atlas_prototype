@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpShared')
         .factory('applicationState', applicationStateFactory);
@@ -31,4 +31,4 @@
             $window.reduxStore = store;
         }
     }
-})();
+}))();

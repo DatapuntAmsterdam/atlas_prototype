@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -29,7 +29,7 @@
         vm.tagName = getTagName(vm.type, vm.payload);
         vm.inline = vm.inline || false;
 
-        vm.dispatch = function () {
+        vm.dispatch = () => {
             store.dispatch(getAction(vm.type, vm.payload));
         };
 
@@ -48,7 +48,7 @@
                 return BUTTON;
             } else {
                 vm.href = getHref(type, payload);
-                vm.followLink = function (event) {
+                vm.followLink = event => {
                     // The href attribute is ignored when left-clicking
                     // It's only a fallback for middle and right mouse button
                     event.preventDefault();
@@ -71,4 +71,4 @@
             return applicationState.getStateUrlConverter().state2url(targetState);
         }
     }
-})();
+}))();

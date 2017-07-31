@@ -1,6 +1,6 @@
 /* globals d3, BBGA */
 
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -13,4 +13,4 @@
         $provide.constant('BBGA', BBGA);
         $provide.constant('d3', d3);
     }
-})();
+}))();

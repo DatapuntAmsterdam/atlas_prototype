@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -17,4 +17,4 @@
                 SITE_ID: 3
             }
         });
-})();
+}))();

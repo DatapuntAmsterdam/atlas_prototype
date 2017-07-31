@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -15,8 +15,8 @@
         };
 
         function initialize (leafletMap) {
-            leafletMap.on('dragend', function () {
-                $rootScope.$applyAsync(function () {
+            leafletMap.on('dragend', () => {
+                $rootScope.$applyAsync(() => {
                     store.dispatch({
                         type: ACTIONS.MAP_PAN,
                         payload: getCurrentLocation(leafletMap)
@@ -38,4 +38,4 @@
             return [center.lat, center.lng];
         }
     }
-})();
+}))();

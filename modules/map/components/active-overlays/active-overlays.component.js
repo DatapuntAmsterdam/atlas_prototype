@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -28,4 +28,4 @@
             vm.visible = vm.showActiveOverlays && vm.overlays.length > 0;
         }
     }
-})();
+}))();

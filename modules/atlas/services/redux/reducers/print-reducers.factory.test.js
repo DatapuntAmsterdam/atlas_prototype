@@ -1,4 +1,4 @@
-describe('The printReducers factory', function () {
+describe('The printReducers factory', () => {
     var printReducers,
         ACTIONS,
         defaultState;
@@ -28,25 +28,25 @@ describe('The printReducers factory', function () {
         }
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_printReducers_, _ACTIONS_) {
+        angular.mock.inject((_printReducers_, _ACTIONS_) => {
             printReducers = _printReducers_;
             ACTIONS = _ACTIONS_;
         });
     });
 
-    describe('SHOW_PRINT', function () {
-        it('sets the isPrintMode variable to true', function () {
+    describe('SHOW_PRINT', () => {
+        it('sets the isPrintMode variable to true', () => {
             var output = printReducers[ACTIONS.SHOW_PRINT.id](defaultState);
 
             expect(output.atlas.isPrintMode).toBe(true);
         });
     });
 
-    describe('HIDE_PRINT', function () {
-        it('sets the isPrintMode variable to false', function () {
+    describe('HIDE_PRINT', () => {
+        it('sets the isPrintMode variable to false', () => {
             var inputState,
                 output;
 

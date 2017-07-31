@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -7,4 +7,4 @@
             'ngSanitize',
             'dpShared'
         ]);
-})();
+}))();

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -10,4 +10,4 @@
     function runBlock (leafletDrawTranslations) {
         leafletDrawTranslations.initialize();
     }
-})();
+}))();

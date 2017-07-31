@@ -1,10 +1,10 @@
-describe('The dp-toggle-drawing-tool component', function () {
+describe('The dp-toggle-drawing-tool component', () => {
     var $compile,
         $rootScope,
         component,
         drawTool;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -25,7 +25,7 @@ describe('The dp-toggle-drawing-tool component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _drawTool_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _drawTool_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             drawTool = _drawTool_;
@@ -48,24 +48,24 @@ describe('The dp-toggle-drawing-tool component', function () {
         return result;
     }
 
-    describe('when inactive', function () {
-        beforeEach(function () {
+    describe('when inactive', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'isEnabled').and.returnValue(false);
             component = getComponent();
         });
 
-        it('shows the button in default state', function () {
+        it('shows the button in default state', () => {
             expect(component.find('.qa-button').length).toBe(1);
             expect(component.find('.qa-button').attr('class')).toContain('c-toggle-drawing-tool');
             expect(component.find('.qa-button').attr('title')).toBe('Begin meten en intekenen');
         });
 
-        it('enables draw/edit mode when clicking the button', function () {
+        it('enables draw/edit mode when clicking the button', () => {
             component.find('.qa-button').click();
             expect(drawTool.enable).toHaveBeenCalled();
         });
 
-        it('enables draw/edit mode when clicking the button', function () {
+        it('enables draw/edit mode when clicking the button', () => {
             drawTool.shape.markers = ['aap'];
             spyOn(drawTool, 'setPolygon');
 
@@ -75,41 +75,41 @@ describe('The dp-toggle-drawing-tool component', function () {
         });
     });
 
-    describe('when active', function () {
-        beforeEach(function () {
+    describe('when active', () => {
+        beforeEach(() => {
             drawTool.isEnabled = () => true;
             component = getComponent(true);
         });
 
-        it('shows the button in eindig tekenen state with extra label', function () {
+        it('shows the button in eindig tekenen state with extra label', () => {
             expect(component.find('.qa-button').length).toBe(1);
             expect(component.find('.qa-button').attr('class')).toContain('c-toggle-drawing-tool--active');
             expect(component.find('.qa-button').attr('title')).toBe('Eindig meten en intekenen');
             expect(component.find('.qa-button-finish').length).toBe(1);
         });
 
-        it('disables draw/edit mode when clicking the button', function () {
+        it('disables draw/edit mode when clicking the button', () => {
             component.find('.qa-button').click();
             expect(drawTool.disable).toHaveBeenCalled();
         });
     });
 
-    describe('when not active and has drawn polygon', function () {
-        beforeEach(function () {
+    describe('when not active and has drawn polygon', () => {
+        beforeEach(() => {
             drawTool.isEnabled = () => false;
             drawTool.shape.markers = [1, 2, 3, 5];
 
             component = getComponent(true);
         });
 
-        it('shows the button in opnieuw tekenen state with extra label', function () {
+        it('shows the button in opnieuw tekenen state with extra label', () => {
             expect(component.find('.qa-button').length).toBe(1);
             expect(component.find('.qa-button').attr('class')).toContain('c-toggle-drawing-tool--again');
             expect(component.find('.qa-button').attr('title')).toBe('Opnieuw meten en intekenen');
             expect(component.find('.qa-button-again').length).toBe(1);
         });
 
-        it('disables draw/edit mode when clicking the button', function () {
+        it('disables draw/edit mode when clicking the button', () => {
             component.find('.qa-button').click();
             expect(drawTool.enable).toHaveBeenCalled();
         });

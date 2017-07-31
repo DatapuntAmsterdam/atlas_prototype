@@ -1,9 +1,9 @@
-describe('The dp-straatbeeld-status-bar component', function () {
+describe('The dp-straatbeeld-status-bar component', () => {
     var $compile,
         $rootScope,
         $window;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
             {
@@ -11,14 +11,12 @@ describe('The dp-straatbeeld-status-bar component', function () {
                     dispatch: angular.noop
                 }
             },
-            function ($provide) {
-                $provide.value('coordinatesFilter', function (input) {
-                    return 'MOCKED_RD_COORDINATES (' + input.join(', ') + ')';
-                });
+            $provide => {
+                $provide.value('coordinatesFilter', input => 'MOCKED_RD_COORDINATES (' + input.join(', ') + ')');
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$window_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $window = _$window_;
@@ -46,7 +44,7 @@ describe('The dp-straatbeeld-status-bar component', function () {
         return component;
     }
 
-    it('only shows the meta information if it has a valid date and location', function () {
+    it('only shows the meta information if it has a valid date and location', () => {
         var component;
 
         component = getComponent(null, null);
@@ -57,7 +55,7 @@ describe('The dp-straatbeeld-status-bar component', function () {
         expect(component.text().trim().length).toBeGreaterThan(0);
     });
 
-    it('uses a date filter for formatting the date into dd-MM-yyyy', function () {
+    it('uses a date filter for formatting the date into dd-MM-yyyy', () => {
         var component,
             date = new Date(2016, 7, 1);
 
@@ -65,7 +63,7 @@ describe('The dp-straatbeeld-status-bar component', function () {
         expect(component.text()).toContain('01-08-2016'); // With leading zeros
     });
 
-    it('it uses a filter to display both the RD and the WGS84 coordinates', function () {
+    it('it uses a filter to display both the RD and the WGS84 coordinates', () => {
         var component;
 
         component = getComponent(new Date(), [52.123, 4.789]);

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,11 +6,11 @@
         .filter('verblijfsobjectGevormd', verblijfsobjectGevormdFilter);
 
     function verblijfsobjectGevormdFilter () {
-        return function (statusId) {
+        return statusId => {
             const VERBLIJFSOBJECT_GEVORMD = 18;
             const isVerblijfsobjectGevormd = Number(statusId) === VERBLIJFSOBJECT_GEVORMD;
 
             return isVerblijfsobjectGevormd ? '(verblijfsobject gevormd)' : '';
         };
     }
-})();
+}))();

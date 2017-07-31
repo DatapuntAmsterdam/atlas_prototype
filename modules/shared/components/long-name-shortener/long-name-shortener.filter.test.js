@@ -1,10 +1,10 @@
-describe('The longNameShortener filter', function () {
+describe('The longNameShortener filter', () => {
     var longNameShortener;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpShared',
-            function ($provide) {
+            $provide => {
                 $provide.constant('LONG_NAME_CONFIG', [
                     {
                         input: [
@@ -22,12 +22,12 @@ describe('The longNameShortener filter', function () {
             }
         );
 
-        angular.mock.inject(function (_longNameShortenerFilter_) {
+        angular.mock.inject(_longNameShortenerFilter_ => {
             longNameShortener = _longNameShortenerFilter_;
         });
     });
 
-    it('replaces long names with abbreviations', function () {
+    it('replaces long names with abbreviations', () => {
         expect(longNameShortener('Vereniging van Eigenaren blok 35')).toBe('VvE blok 35');
         expect(longNameShortener('Vereniging van Ijgenaren blok 35')).toBe('VvE blok 35');
 

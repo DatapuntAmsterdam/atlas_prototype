@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -15,9 +15,7 @@
         function initialize () {
             authenticator.initialize();
 
-            var unwatch = $rootScope.$watch(function () {
-                return $location.search();
-            }, function (params) {
+            var unwatch = $rootScope.$watch(() => $location.search(), params => {
                 if (authenticator.isCallback(params)) {
                     authenticator.handleCallback(params);
                 } else {
@@ -31,4 +29,4 @@
             $rootScope.$on('$destroy', unwatch);
         }
     }
-})();
+}))();

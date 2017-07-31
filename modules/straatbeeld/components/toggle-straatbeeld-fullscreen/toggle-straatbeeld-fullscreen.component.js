@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -25,7 +25,7 @@
             vm.screenReaderText = 'Kaart ' + (vm.isFullscreen ? 'verkleinen' : 'vergroten');
         }
 
-        vm.toggleFullscreen = function () {
+        vm.toggleFullscreen = () => {
             store.dispatch({
                 type: ACTIONS.STRAATBEELD_FULLSCREEN,
                 payload: !vm.isFullscreen
@@ -34,5 +34,5 @@
 
         $rootScope.$on('$destroy', deregistrationFn);
     }
-})();
+}))();
 

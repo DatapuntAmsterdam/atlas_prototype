@@ -1,19 +1,18 @@
 'use strict';
 
-module.exports = function (menuDropdownElement) {
-    return {
-        toggle: () => {
-            return menuDropdownElement.element(by.css('.qa-menu__toggle .qa-menu__link')).click();
-        },
-        items: index => {
-            return itemPageObject(menuDropdownElement.all(by.css('ul li')).get(index));
-        },
-        get itemCount () {
-            return dp.count(menuDropdownElement.all(by.css('ul li')));
-        }
+module.exports = menuDropdownElement => ({
+    toggle: () => {
+        return menuDropdownElement.element(by.css('.qa-menu__toggle .qa-menu__link')).click();
+    },
 
-    };
-};
+    items: index => {
+        return itemPageObject(menuDropdownElement.all(by.css('ul li')).get(index));
+    },
+
+    get itemCount () {
+        return dp.count(menuDropdownElement.all(by.css('ul li')));
+    }
+});
 
 function itemPageObject (menuItem) {
     return {

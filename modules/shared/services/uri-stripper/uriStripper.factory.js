@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpShared')
         .factory('uriStripper', uriStripperFactory);
@@ -15,4 +15,4 @@
             return uri.replace(sharedConfig.API_ROOT, '');
         }
     }
-})();
+}))();

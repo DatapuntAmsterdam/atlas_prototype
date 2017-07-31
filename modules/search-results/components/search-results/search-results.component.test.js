@@ -1,4 +1,4 @@
-describe('The dp-search-results component', function () {
+describe('The dp-search-results component', () => {
     let $compile,
         $rootScope,
         $q,
@@ -14,7 +14,7 @@ describe('The dp-search-results component', function () {
         mockedNoResults,
         i;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpSearchResults',
             {
@@ -56,24 +56,25 @@ describe('The dp-search-results component', function () {
                     dispatch: function () {}
                 }
             },
-            function ($provide) {
-                $provide.factory('dpStraatbeeldThumbnailDirective', function () {
-                    return {};
-                });
+            $provide => {
+                $provide.factory('dpStraatbeeldThumbnailDirective', () => ({}));
 
-                $provide.factory('dpSearchResultsHeaderDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpSearchResultsHeaderDirective', () => ({}));
 
-                $provide.value('coordinatesFilter', function (input) {
-                    return input.join(', ') + ' (X, Y)';
-                });
+                $provide.value('coordinatesFilter', input => input.join(', ') + ' (X, Y)');
             }
         );
 
-        angular.mock.inject(function (
-            _$compile_, _$rootScope_, _$q_, _store_, _search_, _geosearch_, _user_, _ACTIONS_
-        ) {
+        angular.mock.inject((
+            _$compile_,
+            _$rootScope_,
+            _$q_,
+            _store_,
+            _search_,
+            _geosearch_,
+            _user_,
+            _ACTIONS_
+        ) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
@@ -345,13 +346,13 @@ describe('The dp-search-results component', function () {
         return component;
     }
 
-    describe('search by query', function () {
-        it('should have access to UserService for autorization', function () {
+    describe('search by query', () => {
+        it('should have access to UserService for autorization', () => {
             var comp = getComponent(12, 'Weesperstraat');
             expect(typeof comp.isolateScope().vm.meetsRequiredLevel).toBe('function');
         });
 
-        it('shows search results', function () {
+        it('shows search results', () => {
             const component = getComponent(12, 'Weesperstraat');
 
             // It shows 10 results from the first category and 1 results from the second category
@@ -382,7 +383,7 @@ describe('The dp-search-results component', function () {
             });
         });
 
-        it('search on change of query', function () {
+        it('search on change of query', () => {
             getComponent(5, 'query');
             spyOn(search, 'search').and.callThrough();
             expect(search.search).not.toHaveBeenCalled();
@@ -394,13 +395,13 @@ describe('The dp-search-results component', function () {
             expect(search.search).toHaveBeenCalled();
         });
 
-        it('does nothing when no query and no location are specified', function () {
+        it('does nothing when no query and no location are specified', () => {
             const component = getComponent(12);
 
             expect(component.find('.qa-search-result ul dp-link').length).toBe(0);
         });
 
-        it('calls dispatch with the number of search results', function () {
+        it('calls dispatch with the number of search results', () => {
             getComponent(12, 'Weesperstraat');
 
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -409,14 +410,14 @@ describe('The dp-search-results component', function () {
             });
         });
 
-        it('doesn\'t show the dp-straatbeeld-thumbnail component', function () {
+        it('doesn\'t show the dp-straatbeeld-thumbnail component', () => {
             const component = getComponent(12, 'Weesperstraat');
 
             expect(component.find('dp-straatbeeld-thumbnail').length).toBe(0);
         });
 
-        describe('has category support', function () {
-            it('categories with more than 1000 results use a thousand separator in the show more button', function () {
+        describe('has category support', () => {
+            it('categories with more than 1000 results use a thousand separator in the show more button', () => {
                 // This link shows numbers with a thousand separator
                 mockedSearchResults[0].count = 1234;
                 const component = getComponent(12, 'Weesperstraat');
@@ -425,16 +426,16 @@ describe('The dp-search-results component', function () {
                 expect(showMoreNode.text().trim()).toBe('Toon alle 1.234');
             });
 
-            describe('the category page', function () {
+            describe('the category page', () => {
                 let component;
 
-                beforeEach(function () {
+                beforeEach(() => {
                     mockedSearchResults.length = 1;
 
                     component = getComponent(22, 'Weesperstraat', null, 'adres');
                 });
 
-                it('shows all links from the search API (instead of just the first 10)', function () {
+                it('shows all links from the search API (instead of just the first 10)', () => {
                     expect(component.find('.qa-list-item-link').length).toBe(11);
 
                     // The first link
@@ -446,7 +447,7 @@ describe('The dp-search-results component', function () {
                         .toBe('Weesperstraat 117');
                 });
 
-                it('can have a show more link inside the category', function () {
+                it('can have a show more link inside the category', () => {
                     mockedSearchResults[0].count = 30;
 
                     // Making sure the mockedSearchResults have 25 results for the first page
@@ -482,27 +483,27 @@ describe('The dp-search-results component', function () {
         });
     });
 
-    describe('search by location', function () {
+    describe('search by location', () => {
         let component;
 
-        beforeEach(function () {
+        beforeEach(() => {
             component = getComponent(22, null, [51.123, 4.789]);
         });
 
-        it('calls dispatch with the number of search results', function () {
+        it('calls dispatch with the number of search results', () => {
             expect(store.dispatch).toHaveBeenCalledWith({
                 type: ACTIONS.SHOW_SEARCH_RESULTS,
                 payload: 22
             });
         });
 
-        it('shows the dp-straatbeeld-thumbnail component', function () {
+        it('shows the dp-straatbeeld-thumbnail component', () => {
             expect(component.find('dp-straatbeeld-thumbnail').length).toBe(1);
         });
     });
 
-    describe('the Kadastraal subject warning messages', function () {
-        it('should not be shown for an employee plus', function () {
+    describe('the Kadastraal subject warning messages', () => {
+        it('should not be shown for an employee plus', () => {
             user.meetsRequiredLevel.and.callFake(
                 required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS
             );
@@ -515,7 +516,7 @@ describe('The dp-search-results component', function () {
             expect(categoryNode.find('.qa-category-warning').length).toBe(0);
         });
 
-        it('should show a specific message for an employee users', function () {
+        it('should show a specific message for an employee users', () => {
             user.meetsRequiredLevel.and.callFake(
                 required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE
             );
@@ -531,7 +532,7 @@ describe('The dp-search-results component', function () {
             expect(categoryNode.find('.qa-category-warning').text()).toContain('Help > Bediening > Inloggen');
         });
 
-        it('should show a general message for all other users', function () {
+        it('should show a general message for all other users', () => {
             user.meetsRequiredLevel.and.returnValue(false);
             const component = getComponent(22, null, [51.123, 4.789]);
 
@@ -547,7 +548,7 @@ describe('The dp-search-results component', function () {
             expect(categoryNode.find('.qa-category-warning').text()).toContain('Help > Bediening > Inloggen');
         });
 
-        it('should update the message on authorization change', function () {
+        it('should update the message on authorization change', () => {
             user.meetsRequiredLevel.and.callFake(
                 required => required === user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS
             );

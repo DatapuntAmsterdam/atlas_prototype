@@ -1,10 +1,10 @@
-describe('The search title factory', function () {
+describe('The search title factory', () => {
     var searchTitle;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpSearchResults',
-            function ($provide) {
+            $provide => {
                 $provide.constant('SEARCH_CONFIG', {
                     QUERY_ENDPOINTS: [
                         {
@@ -31,53 +31,51 @@ describe('The search title factory', function () {
                     ]
                 });
 
-                $provide.value('coordinatesFilter', function (input) {
-                    return 'X, Y (' + input.join(', ') + ')';
-                });
+                $provide.value('coordinatesFilter', input => 'X, Y (' + input.join(', ') + ')');
             }
         );
 
-        angular.mock.inject(function (_searchTitle_) {
+        angular.mock.inject(_searchTitle_ => {
             searchTitle = _searchTitle_;
         });
     });
 
-    it('can show the number of search results when searching with a query', function () {
+    it('can show the number of search results when searching with a query', () => {
         var titleData = searchTitle.getTitleData(45, 'westerpark', null, null);
 
         expect(titleData.title).toBe('Resultaten (45)');
         expect(titleData.subTitle).toContain('\'westerpark\'');
     });
 
-    it('returns an empty title and empty subtitle on a negative search result', function () {
+    it('returns an empty title and empty subtitle on a negative search result', () => {
         var titleData = searchTitle.getTitleData(-1, 'westerpark', null, null);
 
         expect(titleData.title).toBe('');
         expect(titleData.subTitle).toBe('');
     });
 
-    it('returns an empty title and subtitle when no query or location is specified', function () {
+    it('returns an empty title and subtitle when no query or location is specified', () => {
         var titleData = searchTitle.getTitleData(-1, null, null, null);
 
         expect(titleData.title).toBe('');
         expect(titleData.subTitle).toBe('');
     });
 
-    it('can show the number of search results when searching by location', function () {
+    it('can show the number of search results when searching by location', () => {
         var titleData = searchTitle.getTitleData(46, null, [52.123, 4.789], null);
 
         expect(titleData.title).toBe('Resultaten (46)');
         expect(titleData.subTitle).toContain('X, Y (52.123, 4.789)');
     });
 
-    it('can show category and query', function () {
+    it('can show category and query', () => {
         var titleData = searchTitle.getTitleData(47, 'westerpark', null, 'adres', [{slug: 'adres', count: 13}]);
 
         expect(titleData.title).toBe('Adressen (13)');
         expect(titleData.subTitle).toBe('met \'westerpark\'');
     });
 
-    it('can show category and location', function () {
+    it('can show category and location', () => {
         var titleData = searchTitle.getTitleData(
             47, null, [52.123, 4.789], 'monument', [{slug: 'monument', count: 14}]);
 
@@ -93,7 +91,7 @@ describe('The search title factory', function () {
         expect(titleData.subTitle).toBe('met locatie X, Y (52.123, 4.789)');
     });
 
-    it('shows a message when no results have been found', function () {
+    it('shows a message when no results have been found', () => {
         var titleData;
 
         // When searching by query

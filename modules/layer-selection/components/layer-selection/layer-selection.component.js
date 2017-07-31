@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -23,14 +23,14 @@
 
         vm.allBaseLayers = BASE_LAYERS;
 
-        vm.setBaseLayer = function (baseLayer) {
+        vm.setBaseLayer = baseLayer => {
             store.dispatch({
                 type: ACTIONS.MAP_SET_BASELAYER,
                 payload: baseLayer
             });
         };
 
-        vm.toggleOverlay = function (overlay) {
+        vm.toggleOverlay = overlay => {
             var action;
 
             if (!vm.isOverlayActive(overlay)) {
@@ -45,7 +45,7 @@
             });
         };
 
-        vm.isOverlayActive = function (overlay) {
+        vm.isOverlayActive = overlay => {
             for (var i = 0; i < vm.activeOverlays.length; i++) {
                 if (vm.activeOverlays[i].id === overlay) {
                     return true;
@@ -54,10 +54,8 @@
             return false;
         };
 
-        vm.isOverlayVisible = function (overlay) {
-            return vm.zoom >= overlays.SOURCES[overlay].minZoom &&
-                vm.zoom <= overlays.SOURCES[overlay].maxZoom;
-        };
+        vm.isOverlayVisible = overlay => vm.zoom >= overlays.SOURCES[overlay].minZoom &&
+            vm.zoom <= overlays.SOURCES[overlay].maxZoom;
 
         function onAuthorizationChange () {
             vm.isMoreInfoAvailable = !user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE);
@@ -66,17 +64,15 @@
         }
 
         function setOverlays () {
-            vm.allOverlays = overlays.HIERARCHY.map(function (category) {
+            vm.allOverlays = overlays.HIERARCHY.map(category => {
                 var formattedOverlays = angular.copy(category);
 
-                formattedOverlays.overlays = formattedOverlays.overlays.map(function (overlaySlug) {
-                    return {
-                        slug: overlaySlug,
-                        label: overlays.SOURCES[overlaySlug].label_long
-                    };
-                });
+                formattedOverlays.overlays = formattedOverlays.overlays.map(overlaySlug => ({
+                    slug: overlaySlug,
+                    label: overlays.SOURCES[overlaySlug].label_long
+                }));
                 return formattedOverlays;
             });
         }
     }
-})();
+}))();

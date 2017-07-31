@@ -1,12 +1,12 @@
-describe('The TabHeader factory', function () {
+describe('The TabHeader factory', () => {
     let $rootScope,
         $q,
         TAB_HEADER_CONFIG,
         TabHeader;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared',
-            function ($provide) {
+            $provide => {
                 $provide.constant('TAB_HEADER_CONFIG', {
                     tabs: {
                         tab1: {
@@ -38,7 +38,7 @@ describe('The TabHeader factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$q_, _TAB_HEADER_CONFIG_, _TabHeader_) {
+        angular.mock.inject((_$rootScope_, _$q_, _TAB_HEADER_CONFIG_, _TabHeader_) => {
             $rootScope = _$rootScope_;
             $q = _$q_;
             TAB_HEADER_CONFIG = _TAB_HEADER_CONFIG_;
@@ -49,7 +49,7 @@ describe('The TabHeader factory', function () {
             .forEach(key => spyOn(TAB_HEADER_CONFIG.tabs[key], 'getPayload'));
     });
 
-    it('has a constructor that accepts an TAB_HEADER_CONFIG key', function () {
+    it('has a constructor that accepts an TAB_HEADER_CONFIG key', () => {
         const tabHeader = new TabHeader('tabs');
         expect(tabHeader.tabs.length).toBe(2);
         tabHeader.tabs.forEach(tab => {
@@ -62,7 +62,7 @@ describe('The TabHeader factory', function () {
         });
     });
 
-    it('reuses any already created tabheader with the same key', function () {
+    it('reuses any already created tabheader with the same key', () => {
         let tabHeader = new TabHeader('tabs');
         tabHeader.getTab('tab1').isActive = true;
         tabHeader.getTab('tab1').count = 1;
@@ -76,7 +76,7 @@ describe('The TabHeader factory', function () {
         expect(tabHeader.getTab('tab1').count).toBe(1);
     });
 
-    it('can set the active tab to any given tab of the tabheader', function () {
+    it('can set the active tab to any given tab of the tabheader', () => {
         const tabHeader = new TabHeader('tabs');
         tabHeader.tabs.forEach(tab => {
             expect(tab.isActive).toBe(false);
@@ -87,7 +87,7 @@ describe('The TabHeader factory', function () {
         });
     });
 
-    it('can set the query that unites the tab header pages', function () {
+    it('can set the query that unites the tab header pages', () => {
         const tabHeader = new TabHeader('tabs'),
             query = 'a query';
 
@@ -97,7 +97,7 @@ describe('The TabHeader factory', function () {
             .forEach(key => expect(TAB_HEADER_CONFIG.tabs[key].getPayload).toHaveBeenCalledWith(query));
     });
 
-    it('does not update the payload if called with the same query', function () {
+    it('does not update the payload if called with the same query', () => {
         const tabHeader = new TabHeader('tabs'),
             query = 'a query';
 
@@ -112,7 +112,7 @@ describe('The TabHeader factory', function () {
             .forEach(key => expect(TAB_HEADER_CONFIG.tabs[key].getPayload).not.toHaveBeenCalled());
     });
 
-    it('accepts a count provider that can return counts for non-active pages', function () {
+    it('accepts a count provider that can return counts for non-active pages', () => {
         const tabHeader = new TabHeader('tabs'),
             count = 100,
             getCount = () => $q.resolve(count),

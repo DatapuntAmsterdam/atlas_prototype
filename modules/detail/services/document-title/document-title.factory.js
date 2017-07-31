@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     // This factory name is namespaced because other modules will get a similar service with the same name
@@ -19,4 +19,4 @@
             return `${GLOSSARY.DEFINITIONS[glossaryKey].label_singular}: ${detailState.display}`;
         }
     }
-})();
+}))();

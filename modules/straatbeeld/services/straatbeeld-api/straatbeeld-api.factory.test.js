@@ -1,4 +1,4 @@
-describe('The straatbeeldApi Factory', function () {
+describe('The straatbeeldApi Factory', () => {
     var straatbeeldApi,
         geojson,
         $q,
@@ -9,7 +9,7 @@ describe('The straatbeeldApi Factory', function () {
 
     searchSteps = [1000, 2000, 4000, 8000, 10000];
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
             {
@@ -62,7 +62,7 @@ describe('The straatbeeldApi Factory', function () {
                     }
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('STRAATBEELD_CONFIG', {
                     STRAATBEELD_ENDPOINT_ALL: 'all/',
                     STRAATBEELD_ENDPOINT_YEAR: 'year/'
@@ -70,7 +70,7 @@ describe('The straatbeeldApi Factory', function () {
             }
         );
 
-        angular.mock.inject(function (_straatbeeldApi_, _geojson_, _$q_, _api_, _$rootScope_) {
+        angular.mock.inject((_straatbeeldApi_, _geojson_, _$q_, _api_, _$rootScope_) => {
             straatbeeldApi = _straatbeeldApi_;
             geojson = _geojson_;
             $q = _$q_;
@@ -79,7 +79,7 @@ describe('The straatbeeldApi Factory', function () {
         });
     });
 
-    it('calls the API factory with the correct endpoint for id', function () {
+    it('calls the API factory with the correct endpoint for id', () => {
         spyOn(api, 'getByUrl').and.callThrough();
 
         straatbeeldApi.getImageDataById('ABC');
@@ -88,7 +88,7 @@ describe('The straatbeeldApi Factory', function () {
             undefined, jasmine.anything()); // Test the last argument for being a promise lateron
     });
 
-    it('cancels any outstanding call to the API factory when loading a new straatbeeld by id', function () {
+    it('cancels any outstanding call to the API factory when loading a new straatbeeld by id', () => {
         spyOn(api, 'getByUrl').and.callThrough();
         let cancelled = false;
 
@@ -109,7 +109,7 @@ describe('The straatbeeldApi Factory', function () {
         expect(cancelled).toBe(true);
     });
 
-    it('calls the API factory with the correct endpoint for location', function () {
+    it('calls the API factory with the correct endpoint for location', () => {
         spyOn(api, 'getByUrl').and.callThrough();
 
         straatbeeldApi.getImageDataByLocation([52, 4]);
@@ -118,7 +118,7 @@ describe('The straatbeeldApi Factory', function () {
             undefined, jasmine.anything());
     });
 
-    it('keeps calling the API factory until a straatbeeld is found', function () {
+    it('keeps calling the API factory until a straatbeeld is found', () => {
         spyOn(api, 'getByUrl').and.callFake(url => {
             const defer = $q.defer();
             if (url.includes('radius=10000')) {
@@ -148,7 +148,7 @@ describe('The straatbeeldApi Factory', function () {
         });
     });
 
-    it('stops calling the API factory when no straatbeeld is found within 10km and then returns null', function () {
+    it('stops calling the API factory when no straatbeeld is found within 10km and then returns null', () => {
         spyOn(api, 'getByUrl').and.callFake(url => {
             const defer = $q.defer();
             defer.resolve({});
@@ -176,7 +176,7 @@ describe('The straatbeeldApi Factory', function () {
         expect(result).toBeNull();  // But return null value
     });
 
-    it('cancels any outstanding call to the API factory when loading a new straatbeeld by loc', function () {
+    it('cancels any outstanding call to the API factory when loading a new straatbeeld by loc', () => {
         spyOn(api, 'getByUrl').and.callThrough();
         let cancelled = false;
 
@@ -197,24 +197,24 @@ describe('The straatbeeldApi Factory', function () {
         expect(cancelled).toBe(true);
     });
 
-    describe('the API will be mapped to the state structure', function () {
+    describe('the API will be mapped to the state structure', () => {
         var response;
 
-        beforeEach(function () {
+        beforeEach(() => {
             spyOn(geojson, 'getCenter').and.callThrough();
 
-            straatbeeldApi.getImageDataById('ABC').then(function (_response_) {
+            straatbeeldApi.getImageDataById('ABC').then(_response_ => {
                 response = _response_;
             });
 
             $rootScope.$apply();
         });
 
-        it('converts date string to Javascript date format', function () {
+        it('converts date string to Javascript date format', () => {
             expect(response.date).toEqual(new Date('2016-05-19T13:04:15.341110Z'));
         });
 
-        it('maps hotspot data to proper subset', function () {
+        it('maps hotspot data to proper subset', () => {
             expect(response.hotspots).toEqual(
                 [{
                     id: 'TMX7315120208-000054_pano_0002_000177',
@@ -230,7 +230,7 @@ describe('The straatbeeldApi Factory', function () {
             );
         });
 
-        it('maps a geoJSON Point to a location in a custom formatted [lat, lng] Array notation', function () {
+        it('maps a geoJSON Point to a location in a custom formatted [lat, lng] Array notation', () => {
             expect(geojson.getCenter).toHaveBeenCalledWith({
                 type: 'Point',
                 coordinates: [
@@ -242,7 +242,7 @@ describe('The straatbeeldApi Factory', function () {
             expect(response.location).toEqual([52.3747994036985, 4.91359770418102]);
         });
 
-        it('fetches the cubic image', function () {
+        it('fetches the cubic image', () => {
             expect(response.image).toEqual({
                 pattern: 'http://pano.amsterdam.nl/all/cubic/abf123/{a}/{b}/{c}.jpg',
                 preview: 'http://pano.amsterdam.nl/all/cubic/abf123/preview.jpg'

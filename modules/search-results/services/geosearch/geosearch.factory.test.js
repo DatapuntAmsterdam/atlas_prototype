@@ -1,4 +1,4 @@
-describe('The geosearch factory', function () {
+describe('The geosearch factory', () => {
     var $q,
         $rootScope,
         geosearch,
@@ -24,7 +24,7 @@ describe('The geosearch factory', function () {
 
     const FAIL_ON_URI = 'FAIL_ON_URI';
 
-    beforeEach(function () {
+    beforeEach(() => {
         coordinateEndpoints = [
             {
                 uri: 'endpoint/with-radius/',
@@ -88,15 +88,22 @@ describe('The geosearch factory', function () {
                     meetsRequiredLevel: () => true
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('SEARCH_CONFIG', {
                     COORDINATES_ENDPOINTS: coordinateEndpoints
                 });
             }
         );
 
-        angular.mock.inject(function (_$q_, _$rootScope_, _geosearch_, _api_, _geosearchFormatter_, _searchFormatter_,
-                                      _user_) {
+        angular.mock.inject((
+            _$q_,
+            _$rootScope_,
+            _geosearch_,
+            _api_,
+            _geosearchFormatter_,
+            _searchFormatter_,
+            _user_
+        ) => {
             $q = _$q_;
             $rootScope = _$rootScope_;
             geosearch = _geosearch_;
@@ -339,10 +346,10 @@ describe('The geosearch factory', function () {
         spyOn(searchFormatter, 'formatCategory').and.callThrough();
     });
 
-    it('retrieves formatted data based on a location', function () {
+    it('retrieves formatted data based on a location', () => {
         var searchResults;
 
-        geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+        geosearch.search([52.789, 4.987]).then(_searchResults_ => {
             searchResults = _searchResults_;
         });
 
@@ -363,14 +370,14 @@ describe('The geosearch factory', function () {
         expect(searchResults).toEqual(mockedFormattedSearchResults);
     });
 
-    it('retrieves formatted data based on a location, even if one or more queries fail', function () {
+    it('retrieves formatted data based on a location, even if one or more queries fail', () => {
         coordinateEndpoints.push({
             uri: FAIL_ON_URI
         });
 
         var searchResults;
 
-        geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+        geosearch.search([52.789, 4.987]).then(_searchResults_ => {
             searchResults = _searchResults_;
         });
 
@@ -389,7 +396,7 @@ describe('The geosearch factory', function () {
     });
 
     describe('when a pand has been found', () => {
-        it('loads related verblijfsobjecten', function () {
+        it('loads related verblijfsobjecten', () => {
             var searchResults,
                 expectedSearchResults;
 
@@ -405,7 +412,7 @@ describe('The geosearch factory', function () {
             expectedSearchResults = angular.copy(mockedFormattedSearchResults);
             expectedSearchResults[1].subResults = [mockedFormattedNummeraanduidingenApiResults];
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 
@@ -426,7 +433,7 @@ describe('The geosearch factory', function () {
             expect(searchResults).toEqual(expectedSearchResults);
         });
 
-        it('loads related vestigingen', function () {
+        it('loads related vestigingen', () => {
             var searchResults,
                 expectedSearchResults;
 
@@ -442,7 +449,7 @@ describe('The geosearch factory', function () {
             expectedSearchResults = angular.copy(mockedFormattedSearchResults);
             expectedSearchResults[1].subResults = [mockedFormattedVestigingenApiResults];
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 
@@ -463,7 +470,7 @@ describe('The geosearch factory', function () {
             expect(searchResults).toEqual(expectedSearchResults);
         });
 
-        it('loads both related verblijfsobjecten and vestigingen', function () {
+        it('loads both related verblijfsobjecten and vestigingen', () => {
             var searchResults,
                 expectedSearchResults;
 
@@ -477,7 +484,7 @@ describe('The geosearch factory', function () {
                 mockedFormattedVestigingenApiResults
             ];
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 
@@ -507,7 +514,7 @@ describe('The geosearch factory', function () {
             expect(searchResults).toEqual(expectedSearchResults);
         });
 
-        it('loads just related verblijfsobjecten if unauthorized', function () {
+        it('loads just related verblijfsobjecten if unauthorized', () => {
             var searchResults,
                 expectedSearchResults;
 
@@ -520,7 +527,7 @@ describe('The geosearch factory', function () {
             expectedSearchResults = angular.copy(mockedFormattedSearchResults);
             expectedSearchResults[1].subResults = [mockedFormattedNummeraanduidingenApiResults];
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 
@@ -536,7 +543,7 @@ describe('The geosearch factory', function () {
             expect(searchResults).toEqual(expectedSearchResults);
         });
 
-        it('sometimes has no related verblijfsobjecten nor vestigingen', function () {
+        it('sometimes has no related verblijfsobjecten nor vestigingen', () => {
             var searchResults;
 
             mockedNummeraanduidingApiResults = {
@@ -553,7 +560,7 @@ describe('The geosearch factory', function () {
             mockedSearchResultsWithoutRadius.features.splice(4, 0, mockedPandSearchResult);
             mockedFormattedSearchResults.splice(1, 0, mockedFormattedPandSearchResult);
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 
@@ -564,7 +571,7 @@ describe('The geosearch factory', function () {
     });
 
     describe('when a ligplaats/standplaats has been found', () => {
-        it('loads related vestigingen', function () {
+        it('loads related vestigingen', () => {
             var searchResults,
                 expectedSearchResults;
 
@@ -575,7 +582,7 @@ describe('The geosearch factory', function () {
             expectedSearchResults = angular.copy(mockedFormattedSearchResults);
             expectedSearchResults.splice(2, 0, mockedFormattedVestigingenApiResults);
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 
@@ -609,7 +616,7 @@ describe('The geosearch factory', function () {
 
             expectedSearchResults = mockedFormattedSearchResults;
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 
@@ -624,7 +631,7 @@ describe('The geosearch factory', function () {
             expect(searchResults).toEqual(expectedSearchResults);
         });
 
-        it('shows a different \'show more\' link based on type (standplaats, ligplaats)', function () {
+        it('shows a different \'show more\' link based on type (standplaats, ligplaats)', () => {
             var searchResults,
                 expectedSearchResults;
 
@@ -638,7 +645,7 @@ describe('The geosearch factory', function () {
             expectedSearchResults = angular.copy(mockedFormattedSearchResults);
             expectedSearchResults.splice(2, 0, mockedFormattedVestigingenApiResults);
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 
@@ -652,7 +659,7 @@ describe('The geosearch factory', function () {
             expect(searchResults).toEqual(expectedSearchResults);
         });
 
-        it('returns no vestigingen when api returns 0 vestigingen', function () {
+        it('returns no vestigingen when api returns 0 vestigingen', () => {
             var searchResults;
 
             mockedVestigingenApiResults = {
@@ -668,7 +675,7 @@ describe('The geosearch factory', function () {
             mockedSearchResultsWithoutRadius.features.splice(4, 0, mockedStandplaatsSearchResult);
             mockedFormattedSearchResults.splice(1, 0, mockedFormattedStandplaatsSearchResult);
 
-            geosearch.search([52.789, 4.987]).then(function (_searchResults_) {
+            geosearch.search([52.789, 4.987]).then(_searchResults_ => {
                 searchResults = _searchResults_;
             });
 

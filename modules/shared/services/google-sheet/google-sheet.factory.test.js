@@ -1,4 +1,4 @@
-describe('The google sheet factory', function () {
+describe('The google sheet factory', () => {
     const config = {};
     let $rootScope,
         $window,
@@ -6,7 +6,7 @@ describe('The google sheet factory', function () {
         googleSheet,
         feed;
 
-    beforeEach(function () {
+    beforeEach(() => {
         feed = {
             feed: {
                 updated: {
@@ -69,11 +69,11 @@ describe('The google sheet factory', function () {
                 NAME: 'ANY VALUE'
             }
         },
-        function ($provide) {
+        $provide => {
             $provide.constant('GOOGLE_SHEET_CMS', config);
         });
 
-        angular.mock.inject(function (_$rootScope_, _$window_, _$httpBackend_, _googleSheet_) {
+        angular.mock.inject((_$rootScope_, _$window_, _$httpBackend_, _googleSheet_) => {
             $rootScope = _$rootScope_;
             $window = _$window_;
             $httpBackend = _$httpBackend_;
@@ -93,18 +93,18 @@ describe('The google sheet factory', function () {
         });
     });
 
-    describe('The static variant', function () {
+    describe('The static variant', () => {
         let environment;
 
-        beforeEach(function () {
-            angular.mock.inject(function (_environment_) {
+        beforeEach(() => {
+            angular.mock.inject(_environment_ => {
                 environment = _environment_;
             });
 
             environment.NAME = 'PRODUCTION';
         });
 
-        it('reads its data from an address, specified in the confiuration', function () {
+        it('reads its data from an address, specified in the confiuration', () => {
             $httpBackend.whenGET('staticAddress/CMSKEY.99.json').respond(feed);
 
             let result;
@@ -117,7 +117,7 @@ describe('The google sheet factory', function () {
             $httpBackend.verifyNoOutstandingRequest();
         });
 
-        it('uses the cached value if loaded twice', function () {
+        it('uses the cached value if loaded twice', () => {
             $httpBackend.whenGET('staticAddress/CMSKEY.99.json').respond(feed);
 
             googleSheet.getContents('type');
@@ -132,7 +132,7 @@ describe('The google sheet factory', function () {
             $httpBackend.verifyNoOutstandingRequest();
         });
 
-        it('returns an empty feed when the get fails', function () {
+        it('returns an empty feed when the get fails', () => {
             $httpBackend.whenGET('staticAddress/CMSKEY.99.json').respond(500, 'ERROR');
 
             let result;
@@ -151,8 +151,8 @@ describe('The google sheet factory', function () {
         });
     });
 
-    describe('The dynamic variant is the default variant', function () {
-        it('puts a scripts in the document header to load the sheet contents', function () {
+    describe('The dynamic variant is the default variant', () => {
+        it('puts a scripts in the document header to load the sheet contents', () => {
             googleSheet.getContents('type');
             expect(document.head.innerHTML).toContain(
                 '<script type="text/javascript" ' +
@@ -160,7 +160,7 @@ describe('The google sheet factory', function () {
                 'alt=json-in-script&amp;callback=googleScriptCallback_CMSKEY_99"></script>');
         });
 
-        it('turs any dashes in the key into underscores for in the callback identifier', function () {
+        it('turs any dashes in the key into underscores for in the callback identifier', () => {
             config.key = 'CMS-KEY';
             googleSheet.getContents('type');
             expect(document.head.innerHTML).toContain(
@@ -169,7 +169,7 @@ describe('The google sheet factory', function () {
                 'alt=json-in-script&amp;callback=googleScriptCallback_CMS_KEY_99"></script>');
         });
 
-        it('uses the cached value if loaded twice', function () {
+        it('uses the cached value if loaded twice', () => {
             googleSheet.getContents('type');
             $window.googleScriptCallback_CMSKEY_99(feed);
 
@@ -181,18 +181,18 @@ describe('The google sheet factory', function () {
         });
     });
 
-    describe('The dynamic variant can also be specified explicitly', function () {
+    describe('The dynamic variant can also be specified explicitly', () => {
         let environment;
 
-        beforeEach(function () {
-            angular.mock.inject(function (_environment_) {
+        beforeEach(() => {
+            angular.mock.inject(_environment_ => {
                 environment = _environment_;
             });
 
             environment.NAME = 'ACCEPTATION';
         });
 
-        it('puts a scripts in the document header to load the sheet contents', function () {
+        it('puts a scripts in the document header to load the sheet contents', () => {
             googleSheet.getContents('type');
             expect(document.head.innerHTML).toContain(
                 '<script type="text/javascript" ' +
@@ -201,30 +201,30 @@ describe('The google sheet factory', function () {
         });
     });
 
-    describe('The contents parser', function () {
+    describe('The contents parser', () => {
         let result;
 
-        beforeEach(function () {
+        beforeEach(() => {
             googleSheet.getContents('type').then(contents => result = contents);
             $window.googleScriptCallback_CMSKEY_99(feed);
             $rootScope.$apply();
         });
 
-        it('processes the global feed properties', function () {
+        it('processes the global feed properties', () => {
             expect(result.feed.title).toBe(feed.feed.title.$t);
             expect(result.feed.lastUpdated).toBe(feed.feed.updated.$t);
         });
 
-        it('provides for a raw and html representation of each attribute', function () {
+        it('provides for a raw and html representation of each attribute', () => {
             expect(result.entries[2].verkorteTitel.value).toBe('short3');
             expect(result.entries[2].verkorteTitel.html).toBe('HTMLMDshort3');
         });
 
-        it('skips empty values', function () {
+        it('skips empty values', () => {
             expect(result.entries[3].title).toBeUndefined();
         });
 
-        it('identifies links', function () {
+        it('identifies links', () => {
             expect(result.entries[0].contents.value).toBe('[link link](http://link/)');
             expect(result.entries[0].contents.isHref).toBe(true);
             expect(result.entries[0].contents.isDate).toBe(false);
@@ -237,7 +237,7 @@ describe('The google sheet factory', function () {
             expect(result.entries[3].verkorteTitel.isHref).toBe(false);
         });
 
-        it('parses date values', function () {
+        it('parses date values', () => {
             expect(result.entries[0].datum.date).toEqual(new Date(2017, 0, 1));
             expect(result.entries[1].datum.date).toEqual(new Date(2017, 0, 10));
             expect(result.entries[2].datum.date).toEqual(new Date(2017, 11, 1));

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -15,10 +15,10 @@
         };
 
         function linkFunction (scope, elem, attrs) {
-            elem.on ('click', function () {
+            elem.on ('click', () => {
                 const url = attrs.dpFollowLink;
                 $window.open(url, '_blank');
             });
         }
     }
-})();
+}))();

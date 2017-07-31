@@ -1,15 +1,15 @@
-describe('The dpLayerSelectionDocumentTitle factory', function () {
+describe('The dpLayerSelectionDocumentTitle factory', () => {
     var documentTitle;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpLayerSelection');
 
-        angular.mock.inject(function (dpLayerSelectionDocumentTitle) {
+        angular.mock.inject(dpLayerSelectionDocumentTitle => {
             documentTitle = dpLayerSelectionDocumentTitle;
         });
     });
 
-    it('returns a static text', function () {
+    it('returns a static text', () => {
         expect(documentTitle.getTitle({someNumber: 4, ignoredParameter: false})).toBe('Selecteer kaartlagen');
     });
 });

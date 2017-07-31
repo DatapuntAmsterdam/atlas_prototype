@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -32,8 +32,8 @@
         vm.sizeClass = vm.size ? `c-panel--${vm.size}` : '';
         vm.typeClass = vm.type ? `c-panel--${vm.type}` : '';
 
-        vm.close = function () {
+        vm.close = () => {
             vm.isPanelVisible = false;
         };
     }
-})();
+}))();

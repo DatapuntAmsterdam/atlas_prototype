@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -90,4 +90,4 @@
             return subTitle;
         }
     }
-})();
+}))();

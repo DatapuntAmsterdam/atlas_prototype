@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpMap')
         .factory('zoom', zoomFactory);
@@ -17,10 +17,10 @@
 
             setDoubleClickZoom(leafletMap);
 
-            leafletMap.on('zoomend', function () {
+            leafletMap.on('zoomend', () => {
                 setDoubleClickZoom(leafletMap);
 
-                $rootScope.$applyAsync(function () {
+                $rootScope.$applyAsync(() => {
                     store.dispatch({
                         type: ACTIONS.MAP_ZOOM,
                         payload: {
@@ -46,4 +46,4 @@
             }
         }
     }
-})();
+}))();

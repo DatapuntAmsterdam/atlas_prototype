@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -38,4 +38,4 @@
                 .filter(hierarchy => hierarchy.overlays.length > 0);
         }
     }
-})();
+}))();

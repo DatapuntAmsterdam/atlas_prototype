@@ -1,4 +1,4 @@
-describe('The dataSelectionApiCkan factory', function () {
+describe('The dataSelectionApiCkan factory', () => {
     let $rootScope,
         $q,
         dataSelectionApiCkan,
@@ -6,7 +6,7 @@ describe('The dataSelectionApiCkan factory', function () {
         mockedApiResponse,
         config;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -29,7 +29,7 @@ describe('The dataSelectionApiCkan factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$q_, _dataSelectionApiCkan_, _api_) {
+        angular.mock.inject((_$rootScope_, _$q_, _dataSelectionApiCkan_, _api_) => {
             $rootScope = _$rootScope_;
             $q = _$q_;
             dataSelectionApiCkan = _dataSelectionApiCkan_;
@@ -132,7 +132,7 @@ describe('The dataSelectionApiCkan factory', function () {
         spyOn(api, 'getByUri').and.callThrough();
     });
 
-    it('calls the api factory with available filters, active filters and offset as searchParams', function () {
+    it('calls the api factory with available filters, active filters and offset as searchParams', () => {
         // Without active filters
         dataSelectionApiCkan.query(config, {}, 1);
         expect(api.getByUri).toHaveBeenCalledWith('catalogus/', {
@@ -181,10 +181,10 @@ describe('The dataSelectionApiCkan factory', function () {
         });
     });
 
-    it('returns the total number of pages', function () {
+    it('returns the total number of pages', () => {
         let output;
 
-        dataSelectionApiCkan.query(config, {}, 1).then(function (_output_) {
+        dataSelectionApiCkan.query(config, {}, 1).then(_output_ => {
             output = _output_;
         });
         $rootScope.$apply();
@@ -226,11 +226,11 @@ describe('The dataSelectionApiCkan factory', function () {
         expect(catchCalled).toBe(true);
     });
 
-    describe('the formatFilters process', function () {
-        it('orders the filters based on the configuration', function () {
+    describe('the formatFilters process', () => {
+        it('orders the filters based on the configuration', () => {
             let output = {};
 
-            dataSelectionApiCkan.query(config, {}, 1).then(function (_output_) {
+            dataSelectionApiCkan.query(config, {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -273,11 +273,11 @@ describe('The dataSelectionApiCkan factory', function () {
             });
         });
 
-        it('optionally applies a formatter to the display value', function () {
+        it('optionally applies a formatter to the display value', () => {
             let output = {};
 
             config.FILTERS[0].formatter = 'lowercase';
-            dataSelectionApiCkan.query(config, {}, 1).then(function (_output_) {
+            dataSelectionApiCkan.query(config, {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -320,13 +320,13 @@ describe('The dataSelectionApiCkan factory', function () {
             });
         });
 
-        it('won\'t return filters from the configuration that are not part of the API\'s response', function () {
+        it('won\'t return filters from the configuration that are not part of the API\'s response', () => {
             let output = {};
 
             // With only one filter in the API response
             delete mockedApiResponse.result.search_facets.type;
 
-            dataSelectionApiCkan.query(config, {}, 1).then(function (_output_) {
+            dataSelectionApiCkan.query(config, {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -354,10 +354,10 @@ describe('The dataSelectionApiCkan factory', function () {
         });
     });
 
-    it('processes the results correctly', function () {
+    it('processes the results correctly', () => {
         let output = {};
 
-        dataSelectionApiCkan.query(config, {}, 1).then(function (_output_) {
+        dataSelectionApiCkan.query(config, {}, 1).then(_output_ => {
             output = _output_;
         });
         $rootScope.$apply();

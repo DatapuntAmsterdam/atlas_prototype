@@ -6,7 +6,7 @@ const units = ['bytes', 'KB', 'MB', 'GB', 'TB']; // bytes and KB units not used
 const smallestUnit = 2; // index of units, === 'MB'
 const largestUnit = units.length - 1; // index of units, === 'TB'
 
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -35,4 +35,4 @@ const largestUnit = units.length - 1; // index of units, === 'TB'
             return localization.toLocaleString(number, 'nl-NL') + ' ' + units[power];
         };
     }
-})();
+}))();

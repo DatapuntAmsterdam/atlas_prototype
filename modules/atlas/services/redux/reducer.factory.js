@@ -1,6 +1,6 @@
 // import detailReducer from '../../../src/reducers/details';
 
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -37,7 +37,7 @@
                              printReducers,
                              embedReducers,
                              environment) {
-        return function (oldState, action) {
+        return (oldState, action) => {
             // TODO: Redux: replace
             // Warning: angular.merge is deprecated
             // -- https://docs.angularjs.org/api/ng/function/angular.merge
@@ -83,4 +83,4 @@
             }
         };
     }
-})();
+}))();

@@ -1,10 +1,10 @@
-describe('The dp-toggle-active-overlays component', function () {
+describe('The dp-toggle-active-overlays component', () => {
     var $compile,
         $rootScope,
         store,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -12,7 +12,7 @@ describe('The dp-toggle-active-overlays component', function () {
                     dispatch: function () {}
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('OVERLAYS', {
                     SOURCES: {
                         overlay_a: {
@@ -28,7 +28,7 @@ describe('The dp-toggle-active-overlays component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -57,7 +57,7 @@ describe('The dp-toggle-active-overlays component', function () {
         return component;
     }
 
-    it('watches the number of active overlays, shows nothing when there are none', function () {
+    it('watches the number of active overlays, shows nothing when there are none', () => {
         var component;
 
         // Without any overlays
@@ -69,7 +69,7 @@ describe('The dp-toggle-active-overlays component', function () {
         expect(component.find('.c-toggle-active-overlays').length).toBe(1);
     });
 
-    it('dispatches a show or hide action when clicked, based on the visibility', function () {
+    it('dispatches a show or hide action when clicked, based on the visibility', () => {
         var component;
 
         // With showActiveOverlays is false
@@ -89,7 +89,7 @@ describe('The dp-toggle-active-overlays component', function () {
         });
     });
 
-    it('changes the button title based on the visibility', function () {
+    it('changes the button title based on the visibility', () => {
         var component;
 
         // When closed

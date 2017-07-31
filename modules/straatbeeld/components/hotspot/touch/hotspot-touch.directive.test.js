@@ -1,16 +1,16 @@
-describe('The dp-hotspot-touch directive', function () {
+describe('The dp-hotspot-touch directive', () => {
     var $compile,
         $rootScope,
         mockedFunctions,
         scope;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpStraatbeeld');
 
         mockedFunctions = {
             callClick: function () { }
         };
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -34,7 +34,7 @@ describe('The dp-hotspot-touch directive', function () {
         return component;
     }
 
-    it('checks for response on element on click and touch events', function () {
+    it('checks for response on element on click and touch events', () => {
         var directive;
 
         directive = getComponent();

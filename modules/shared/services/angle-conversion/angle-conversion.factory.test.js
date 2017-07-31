@@ -1,15 +1,15 @@
-describe('The angleConversion service', function () {
+describe('The angleConversion service', () => {
     var angleConversion;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared');
 
-        angular.mock.inject(function (_angleConversion_) {
+        angular.mock.inject(_angleConversion_ => {
             angleConversion = _angleConversion_;
         });
     });
 
-    it('can convert degrees to radians', function () {
+    it('can convert degrees to radians', () => {
         expect(angleConversion.degreesToRadians(0).toFixed(2)).toBe('0.00');
         expect(angleConversion.degreesToRadians(45).toFixed(2)).toBe('0.79');
         expect(angleConversion.degreesToRadians(50).toFixed(2)).toBe('0.87');
@@ -18,7 +18,7 @@ describe('The angleConversion service', function () {
         expect(angleConversion.degreesToRadians(361).toFixed(2)).toBe('6.30');
     });
 
-    it('can convert radians to degrees', function () {
+    it('can convert radians to degrees', () => {
         expect(angleConversion.radiansToDegrees(0).toFixed(2)).toBe('0.00');
         expect(angleConversion.radiansToDegrees(1).toFixed(2)).toBe('57.30');
         expect(angleConversion.radiansToDegrees(2).toFixed(2)).toBe('114.59');

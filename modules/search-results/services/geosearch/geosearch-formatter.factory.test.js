@@ -1,11 +1,11 @@
-describe('The geosearchFormatter factory', function () {
+describe('The geosearchFormatter factory', () => {
     var geosearchFormatter,
         rawSearchResults;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpSearchResults',
-            function ($provide) {
+            $provide => {
                 $provide.constant('SEARCH_CONFIG', {
                     COORDINATES_HIERARCHY: [
                         {
@@ -53,7 +53,7 @@ describe('The geosearchFormatter factory', function () {
             }
         );
 
-        angular.mock.inject(function (_geosearchFormatter_) {
+        angular.mock.inject(_geosearchFormatter_ => {
             geosearchFormatter = _geosearchFormatter_;
         });
 
@@ -145,7 +145,7 @@ describe('The geosearchFormatter factory', function () {
         ];
     });
 
-    it('formats and sorts the raw API data', function () {
+    it('formats and sorts the raw API data', () => {
         expect(geosearchFormatter.format(rawSearchResults)).toEqual([
             {
                 slug: 'pand',

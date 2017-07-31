@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     // This factory name is namespaced because other modules will get a similar service with the same name
@@ -76,4 +76,4 @@
             }
         }
     }
-})();
+}))();

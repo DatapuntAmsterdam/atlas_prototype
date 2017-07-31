@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -21,4 +21,4 @@
             vm.zoom = state.map.zoom;
         }
     }
-})();
+}))();

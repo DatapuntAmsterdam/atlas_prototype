@@ -12,7 +12,7 @@ describe('The dp-homepage component', () => {
                     dispatch: angular.noop
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('HOMEPAGE_CONFIG', {
                     PANORAMA: {
                         id: 'abc789',

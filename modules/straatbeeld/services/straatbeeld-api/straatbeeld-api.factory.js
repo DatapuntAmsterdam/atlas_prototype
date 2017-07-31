@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -92,18 +92,16 @@
                 return {
                     date: new Date(response.timestamp),
                     id: response.pano_id,
-                    hotspots: response.adjacent.map(function (item) {
-                        return {
-                            id: item.pano_id,
-                            heading: item.heading,
-                            distance: item.distance,
-                            year: item.year
-                        };
-                    }),
+                    hotspots: response.adjacent.map(item => ({
+                        id: item.pano_id,
+                        heading: item.heading,
+                        distance: item.distance,
+                        year: item.year
+                    })),
                     location: geojson.getCenter(formattedGeometrie),
                     image: response.image_sets.cubic
                 };
             }
         }
     }
-})();
+}))();

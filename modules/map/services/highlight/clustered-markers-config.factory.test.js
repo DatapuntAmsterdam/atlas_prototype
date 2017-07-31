@@ -1,12 +1,12 @@
-describe('The clusteredMarkersConfig factory', function () {
+describe('The clusteredMarkersConfig factory', () => {
     let clusteredMarkersConfig,
         mockedCluster,
         L;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpMap');
 
-        angular.mock.inject(function (_clusteredMarkersConfig_, _L_) {
+        angular.mock.inject((_clusteredMarkersConfig_, _L_) => {
             clusteredMarkersConfig = _clusteredMarkersConfig_;
             L = _L_;
         });
@@ -20,7 +20,7 @@ describe('The clusteredMarkersConfig factory', function () {
         spyOn(L, 'divIcon').and.returnValue('MOCKED_DIV_ICON');
     });
 
-    it('has an iconCreateFunction that returns a Leaflet icon with custom HTML', function () {
+    it('has an iconCreateFunction that returns a Leaflet icon with custom HTML', () => {
         const icon = clusteredMarkersConfig.iconCreateFunction(mockedCluster);
 
         expect(icon).toBe('MOCKED_DIV_ICON');

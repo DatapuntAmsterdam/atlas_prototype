@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -23,9 +23,9 @@
 
         vm.showLoadingIndicator = false;
 
-        $scope.$watch('vm.isLoading', function (isLoading) {
+        $scope.$watch('vm.isLoading', isLoading => {
             if (isLoading) {
-                timer = $interval(function () {
+                timer = $interval(() => {
                     vm.showLoadingIndicator = true;
                 }, vm.useDelay ? threshold : 0, 1);
             } else {
@@ -35,4 +35,4 @@
             }
         });
     }
-})();
+}))();

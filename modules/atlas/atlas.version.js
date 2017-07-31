@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     /*
@@ -10,4 +10,4 @@
         .constant('ATLAS_VERSION', {
             build: 'Development'
         });
-})();
+}))();

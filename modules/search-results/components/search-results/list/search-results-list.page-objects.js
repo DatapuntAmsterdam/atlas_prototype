@@ -2,13 +2,9 @@
 
 const link = dp.require('modules/shared/components/link/link.page-objects');
 
-module.exports = function (searchResultsListElement) {
-    return function (index) {
-        return listItemPageObject(
-            searchResultsListElement.element(by.repeater('link in vm.category.results').row(index))
-        );
-    };
-};
+module.exports = searchResultsListElement => index => listItemPageObject(
+    searchResultsListElement.element(by.repeater('link in vm.category.results').row(index))
+);
 
 function listItemPageObject (listItemElement) {
     return {

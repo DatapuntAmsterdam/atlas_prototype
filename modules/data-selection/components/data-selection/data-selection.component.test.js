@@ -1,4 +1,4 @@
-describe('The dp-data-selection component', function () {
+describe('The dp-data-selection component', () => {
     let $rootScope,
         $compile,
         $q,
@@ -11,7 +11,7 @@ describe('The dp-data-selection component', function () {
         mockedApiPreviewData,
         mockedApiMarkersData;
 
-    beforeEach(function () {
+    beforeEach(() => {
         config = {
             options: {
                 MAX_NUMBER_OF_CLUSTERED_MARKERS: 1000
@@ -47,40 +47,34 @@ describe('The dp-data-selection component', function () {
                     dispatch: angular.noop
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('DATA_SELECTION_CONFIG', config);
 
-                $provide.factory('dpLoadingIndicatorDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpLoadingIndicatorDirective', () => ({}));
 
-                $provide.factory('dpDataSelectionFiltersDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpDataSelectionFiltersDirective', () => ({}));
 
-                $provide.factory('dpDataSelectionHeaderDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpDataSelectionHeaderDirective', () => ({}));
 
-                $provide.factory('dpDataSelectionTableDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpDataSelectionTableDirective', () => ({}));
 
-                $provide.factory('dpDataSelectionListDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpDataSelectionListDirective', () => ({}));
 
-                $provide.factory('dpPanelDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpPanelDirective', () => ({}));
 
-                $provide.factory('dpDataSelectionPaginationDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpDataSelectionPaginationDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$compile_, _$q_, _dataSelectionApi_, _store_, _ACTIONS_, _user_) {
+        angular.mock.inject((
+            _$rootScope_,
+            _$compile_,
+            _$q_,
+            _dataSelectionApi_,
+            _store_,
+            _ACTIONS_,
+            _user_
+        ) => {
             $rootScope = _$rootScope_;
             $compile = _$compile_;
             $q = _$q_;
@@ -138,7 +132,7 @@ describe('The dp-data-selection component', function () {
         return component;
     }
 
-    it('retrieves the available-filters and table data and passes it to it\'s child directives', function () {
+    it('retrieves the available-filters and table data and passes it to it\'s child directives', () => {
         const component = getComponent(mockedState);
         const scope = component.isolateScope();
 
@@ -171,7 +165,7 @@ describe('The dp-data-selection component', function () {
         expect(component.find('dp-data-selection-available-filters').length).toBe(0);
     });
 
-    it('hides the tab header in CARDS view when no search query is provided', function () {
+    it('hides the tab header in CARDS view when no search query is provided', () => {
         mockedState.view = 'CARDS';
         mockedState.query = '';
         const component = getComponent(mockedState);
@@ -180,7 +174,7 @@ describe('The dp-data-selection component', function () {
         expect(component.find('dp-tab-header').length).toBe(0);
     });
 
-    it('shows the tab header in CARDS view when a search query is provided', function () {
+    it('shows the tab header in CARDS view when a search query is provided', () => {
         mockedState.view = 'CARDS';
         mockedState.query = 'foo';
         const component = getComponent(mockedState);
@@ -189,7 +183,7 @@ describe('The dp-data-selection component', function () {
         expect(component.find('dp-tab-header').length).toBe(1);
     });
 
-    it('hides the tab header in any other than CARDS view', function () {
+    it('hides the tab header in any other than CARDS view', () => {
         ['TABLE', 'LIST'].forEach(view => {
             [{}, {filter: 'any filter'}].forEach(filters => {
                 mockedState.view = view;
@@ -202,7 +196,7 @@ describe('The dp-data-selection component', function () {
         });
     });
 
-    it('either calls the TABLE, LIST or CARDS view', function () {
+    it('either calls the TABLE, LIST or CARDS view', () => {
         let component;
 
         mockedState.view = 'TABLE';
@@ -227,7 +221,7 @@ describe('The dp-data-selection component', function () {
         expect(component.find('dp-data-selection-table').length).toBe(0);
     });
 
-    it('retrieves new data when the state changes', function () {
+    it('retrieves new data when the state changes', () => {
         const component = getComponent(mockedState);
         const scope = component.isolateScope();
 
@@ -242,7 +236,7 @@ describe('The dp-data-selection component', function () {
         expect(scope.vm.currentPage).toBe(3);
     });
 
-    describe('it triggers SHOW_DATA_SELECTION to communicate the related marker locations', function () {
+    describe('it triggers SHOW_DATA_SELECTION to communicate the related marker locations', () => {
         it('dispatches the RESET_DATA_SELECTION action when state.reset is set', () => {
             mockedState.view = 'TABLE';
             mockedState.reset = true;
@@ -263,7 +257,7 @@ describe('The dp-data-selection component', function () {
             });
         });
 
-        it('sends an empty Array if the TABLE or CARDS view is active', function () {
+        it('sends an empty Array if the TABLE or CARDS view is active', () => {
             mockedState.view = 'TABLE';
             getComponent(mockedState);
 
@@ -282,7 +276,7 @@ describe('The dp-data-selection component', function () {
             });
         });
 
-        it('sends an empty Array if there are too many records (> MAX_NUMBER_OF_CLUSTERED_MARKERS)', function () {
+        it('sends an empty Array if there are too many records (> MAX_NUMBER_OF_CLUSTERED_MARKERS)', () => {
             mockedState.view = 'LIST';
 
             // It should still send data with less than MAX_NUMBER_OF_CLUSTERED_MARKERS
@@ -310,7 +304,7 @@ describe('The dp-data-selection component', function () {
             });
         });
 
-        it('sends locations (LIST view) when there are less than MAX_NUMBER_OF_CLUSTERED_MARKERS', function () {
+        it('sends locations (LIST view) when there are less than MAX_NUMBER_OF_CLUSTERED_MARKERS', () => {
             mockedState.view = 'LIST';
 
             getComponent(mockedState);
@@ -326,15 +320,15 @@ describe('The dp-data-selection component', function () {
         });
     });
 
-    describe('it has a technical limit for the MAX_AVAILABLE_PAGES', function () {
-        it('shows the content on pages up to this limit', function () {
+    describe('it has a technical limit for the MAX_AVAILABLE_PAGES', () => {
+        it('shows the content on pages up to this limit', () => {
             mockedState.page = 5;
             const component = getComponent(mockedState);
 
             expect(component.find('dp-data-selection-table').length).toBe(1);
         });
 
-        it('doesn\'t show the content for pages above this limit', function () {
+        it('doesn\'t show the content for pages above this limit', () => {
             mockedState.page = 6;
             const component = getComponent(mockedState);
 

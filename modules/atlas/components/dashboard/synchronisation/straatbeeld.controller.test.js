@@ -1,10 +1,10 @@
-describe('The straatbeeld controller', function () {
+describe('The straatbeeld controller', () => {
     var $controller,
         $rootScope,
         store,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -19,7 +19,7 @@ describe('The straatbeeld controller', function () {
             }
         );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
+        angular.mock.inject((_$controller_, _$rootScope_, _store_) => {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -51,7 +51,7 @@ describe('The straatbeeld controller', function () {
         return controller;
     }
 
-    it('subscribes to the store to listen for changes', function () {
+    it('subscribes to the store to listen for changes', () => {
         spyOn(store, 'subscribe').and.callThrough();
 
         getController();
@@ -59,7 +59,7 @@ describe('The straatbeeld controller', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the straatbeeldState on the state', function () {
+    it('sets the straatbeeldState on the state', () => {
         var controller;
 
         controller = getController();
@@ -71,7 +71,7 @@ describe('The straatbeeld controller', function () {
         expect(controller.straatbeeldState.isLoading).toBe(false);
     });
 
-    it('can have a location instead of an ID', function () {
+    it('can have a location instead of an ID', () => {
         var controller;
 
         mockedState = {

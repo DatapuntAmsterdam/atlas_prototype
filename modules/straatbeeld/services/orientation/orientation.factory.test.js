@@ -1,10 +1,10 @@
-describe('The orientation factory', function () {
+describe('The orientation factory', () => {
     var orientation,
         store,
         ACTIONS,
         mockedViewer;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
             {
@@ -19,7 +19,7 @@ describe('The orientation factory', function () {
 
         );
 
-        angular.mock.inject(function (_orientation_, _store_, _ACTIONS_) {
+        angular.mock.inject((_orientation_, _store_, _ACTIONS_) => {
             orientation = _orientation_;
             store = _store_;
             ACTIONS = _ACTIONS_;
@@ -44,7 +44,7 @@ describe('The orientation factory', function () {
         spyOn(store, 'dispatch');
     });
 
-    it('dispatches an ACTION based on orientation from the Marzipano viewer', function () {
+    it('dispatches an ACTION based on orientation from the Marzipano viewer', () => {
         orientation.update(mockedViewer);
 
         expect(store.dispatch).toHaveBeenCalledWith({

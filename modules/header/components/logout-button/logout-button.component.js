@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -16,4 +16,4 @@
 
         vm.logout = authenticator.logout;
     }
-})();
+}))();

@@ -1,15 +1,15 @@
-describe('The nevenadres filter', function () {
+describe('The nevenadres filter', () => {
     let nevenadresFilter;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDataSelection');
 
-        angular.mock.inject(function (_nevenadresFilter_) {
+        angular.mock.inject(_nevenadresFilter_ => {
             nevenadresFilter = _nevenadresFilter_;
         });
     });
 
-    it('returns the String "(nevenadres)" when the input (hoofdadres) is "false"', function () {
+    it('returns the String "(nevenadres)" when the input (hoofdadres) is "false"', () => {
         expect(nevenadresFilter('False')).toBe('(nevenadres)');
         expect(nevenadresFilter('false')).toBe('(nevenadres)');
 

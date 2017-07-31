@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpShared')
         .component('dpAnchorLink', {
@@ -18,7 +18,7 @@
     function DpAnchorLinkController ($scope, $interval, $anchorScroll) {
         const vm = this;
 
-        vm.scrollTo = function (anchor) {
+        vm.scrollTo = anchor => {
             $interval(() => {
                 $anchorScroll(anchor);
             }, 150, 1);
@@ -30,4 +30,4 @@
             });
         }
     }
-})();
+}))();

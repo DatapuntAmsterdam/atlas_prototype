@@ -1,11 +1,11 @@
-describe('The localization service', function () {
+describe('The localization service', () => {
     let localization,
         originalIntl;
 
     beforeEach(() => {
         angular.mock.module('dpShared');
 
-        angular.mock.inject(function (_localization_) {
+        angular.mock.inject(_localization_ => {
             localization = _localization_;
         });
 

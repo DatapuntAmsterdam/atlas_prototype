@@ -9,7 +9,7 @@ const pagePO = dp.require('modules/page/components/page/page.page-objects');
 const searchResultsPO = dp.require('modules/search-results/components/search-results/search-results.page-objects');
 const straatbeeldPO = dp.require('modules/straatbeeld/components/straatbeeld/straatbeeld.page-objects');
 
-module.exports = function (dashboardElement) {
+module.exports = dashboardElement => {
     return {
         siteHeader: siteHeaderPO(dashboardElement.element(by.css('dp-site-header'))),
         leftColumn: getColumn('left'),

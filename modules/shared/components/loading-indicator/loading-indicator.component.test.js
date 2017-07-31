@@ -1,12 +1,12 @@
-describe('The dp-loading-indicator', function () {
+describe('The dp-loading-indicator', () => {
     var $compile,
         $rootScope,
         $interval;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$interval_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$interval_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $interval = _$interval_;
@@ -34,7 +34,7 @@ describe('The dp-loading-indicator', function () {
         return component;
     }
 
-    it('shows a spinner when it\'s loading', function () {
+    it('shows a spinner when it\'s loading', () => {
         var component,
             isLoading;
 
@@ -49,7 +49,7 @@ describe('The dp-loading-indicator', function () {
         expect(component.find('.c-loading-indicator').text()).toContain('Bezig met laden');
     });
 
-    it('has an option to delay the showing of the spinner (prevent unnecessary screen flickering)', function () {
+    it('has an option to delay the showing of the spinner (prevent unnecessary screen flickering)', () => {
         var component,
             isLoading;
 
@@ -65,7 +65,7 @@ describe('The dp-loading-indicator', function () {
         expect(component.find('.c-loading-indicator').length).toBe(1);
     });
 
-    it('the delayed showing of the spinner will be cancelled when the loading is finished', function () {
+    it('the delayed showing of the spinner will be cancelled when the loading is finished', () => {
         var component,
             scope;
 
@@ -85,22 +85,22 @@ describe('The dp-loading-indicator', function () {
         expect(component.find('.c-loading-indicator').length).toBe(0);
     });
 
-    describe('it has two display variants:', function () {
+    describe('it has two display variants:', () => {
         var component,
             isLoading;
 
-        beforeEach(function () {
+        beforeEach(() => {
             isLoading = true;
         });
 
-        it('as a box in the top left corner', function () {
+        it('as a box in the top left corner', () => {
             component = getComponent(isLoading, false, true);
             $interval.flush(0);
 
             expect(component.find('.c-loading-indicator').attr('class')).not.toContain('c-loading-indicator--box');
         });
 
-        it('inline', function () {
+        it('inline', () => {
             component = getComponent(isLoading, false, false);
             $interval.flush(0);
 

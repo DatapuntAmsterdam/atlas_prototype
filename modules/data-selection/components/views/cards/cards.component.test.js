@@ -1,4 +1,4 @@
-describe('The cards component', function () {
+describe('The cards component', () => {
     'use strict';
 
     let $rootScope,
@@ -52,13 +52,13 @@ describe('The cards component', function () {
         templates: []
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDataSelection', {
             store: mockedStore,
             ACTIONS: mockedACTIONS
         });
 
-        angular.mock.inject(function (_$rootScope_, _$compile_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$rootScope_, _$compile_, _store_, _ACTIONS_) => {
             $rootScope = _$rootScope_;
             $compile = _$compile_;
             store = _store_;
@@ -81,7 +81,7 @@ describe('The cards component', function () {
         return component;
     }
 
-    it('can load a detail page for a card', function () {
+    it('can load a detail page for a card', () => {
         const component = getComponent();
 
         component.find('.qa-card-fetch-detail')[0].click();

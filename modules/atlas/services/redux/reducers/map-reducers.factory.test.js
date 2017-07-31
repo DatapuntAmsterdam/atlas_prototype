@@ -1,4 +1,4 @@
-describe('The map reducers', function () {
+describe('The map reducers', () => {
     var mapReducers,
         ACTIONS,
         DEFAULT_STATE,
@@ -29,10 +29,10 @@ describe('The map reducers', function () {
         }
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_mapReducers_, _ACTIONS_, _DRAW_TOOL_CONFIG_) {
+        angular.mock.inject((_mapReducers_, _ACTIONS_, _DRAW_TOOL_CONFIG_) => {
             mapReducers = _mapReducers_;
             ACTIONS = _ACTIONS_;
             DRAW_TOOL_CONFIG = _DRAW_TOOL_CONFIG_;
@@ -55,8 +55,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_SET_BASELAYER', function () {
-        it('changes the baseLayer', function () {
+    describe('MAP_SET_BASELAYER', () => {
+        it('changes the baseLayer', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -68,8 +68,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_ADD_OVERLAY', function () {
-        it('adds an overlay', function () {
+    describe('MAP_ADD_OVERLAY', () => {
+        it('adds an overlay', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -85,7 +85,7 @@ describe('The map reducers', function () {
             expect(output.map.overlays.length).toBe(2);
         });
 
-        it('opens the active overlays panel if there were no active overlays before', function () {
+        it('opens the active overlays panel if there were no active overlays before', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -101,7 +101,7 @@ describe('The map reducers', function () {
             expect(output.map.showActiveOverlays).toBe(false);
         });
 
-        it('opens the active overlays panel if there were only active pano overlays before', function () {
+        it('opens the active overlays panel if there were only active pano overlays before', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -138,8 +138,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_REMOVE_OVERLAY', function () {
-        it('removes an overlay', function () {
+    describe('MAP_REMOVE_OVERLAY', () => {
+        it('removes an overlay', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -162,7 +162,7 @@ describe('The map reducers', function () {
             ]);
         });
 
-        it('will always keep the overlays state property an array (instead of null)', function () {
+        it('will always keep the overlays state property an array (instead of null)', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -173,8 +173,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_ADD_PANO_OVERLAY', function () {
-        it('adds a pano overlay', function () {
+    describe('MAP_ADD_PANO_OVERLAY', () => {
+        it('adds a pano overlay', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             inputState.straatbeeld = { history: 2020 };
 
@@ -184,7 +184,7 @@ describe('The map reducers', function () {
             expect(output.map.overlays[0].id).toBe('pano2020');
         });
 
-        it('defaults to \'pano\' when no history selection exists', function () {
+        it('defaults to \'pano\' when no history selection exists', () => {
             const inputState = angular.copy(DEFAULT_STATE);
 
             const output = mapReducers[ACTIONS.MAP_ADD_PANO_OVERLAY.id](inputState);
@@ -201,7 +201,7 @@ describe('The map reducers', function () {
             expect(outputStraatbeeld.map.overlays[0].id).toBe('pano');
         });
 
-        it('removes any pre-existing pano layers', function () {
+        it('removes any pre-existing pano layers', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             inputState.map.overlays.push({
                 id: 'pano2020',
@@ -226,7 +226,7 @@ describe('The map reducers', function () {
             expect(outputMultiple.map.overlays[0].id).toBe('pano2016');
         });
 
-        it('does not add an already active layer', function () {
+        it('does not add an already active layer', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             inputState.map.overlays.push({
                 id: 'pano',
@@ -239,7 +239,7 @@ describe('The map reducers', function () {
             expect(output.map.overlays[0].id).toBe('pano');
         });
 
-        it('appends to other active layers', function () {
+        it('appends to other active layers', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             inputState.map.overlays.push({
                 id: 'a',
@@ -295,8 +295,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_REMOVE_PANO_OVERLAY', function () {
-        it('removes the active pano overlay', function () {
+    describe('MAP_REMOVE_PANO_OVERLAY', () => {
+        it('removes the active pano overlay', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             inputState.map.overlays.push({
                 id: 'pano',
@@ -307,7 +307,7 @@ describe('The map reducers', function () {
             expect(output.map.overlays.length).toBe(0);
         });
 
-        it('removes all active pano overlays', function () {
+        it('removes all active pano overlays', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             inputState.map.overlays.push({
                 id: 'pano',
@@ -322,7 +322,7 @@ describe('The map reducers', function () {
             expect(output.map.overlays.length).toBe(0);
         });
 
-        it('leaves other active overlays be', function () {
+        it('leaves other active overlays be', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             inputState.map.overlays.push({
                 id: 'a',
@@ -358,7 +358,7 @@ describe('The map reducers', function () {
             }]);
         });
 
-        it('does nothing when there are no active pano overlays', function () {
+        it('does nothing when there are no active pano overlays', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             const output = mapReducers[ACTIONS.MAP_REMOVE_PANO_OVERLAY.id](inputState);
             expect(output.map.overlays.length).toBe(0);
@@ -391,8 +391,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_TOGGLE_VISIBILITY_OVERLAY', function () {
-        it('hides an overlay', function () {
+    describe('MAP_TOGGLE_VISIBILITY_OVERLAY', () => {
+        it('hides an overlay', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -416,7 +416,7 @@ describe('The map reducers', function () {
             ]);
         });
 
-        it('hides an overlay', function () {
+        it('hides an overlay', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -441,8 +441,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_PAN', function () {
-        it('updates the viewCenter', function () {
+    describe('MAP_PAN', () => {
+        it('updates the viewCenter', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -454,8 +454,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_ZOOM', function () {
-        it('can update the zoom and viewCenter property', function () {
+    describe('MAP_ZOOM', () => {
+        it('can update the zoom and viewCenter property', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -481,7 +481,7 @@ describe('The map reducers', function () {
             expect(output.map.zoom).toBe(16);
         });
 
-        it('doesn\'t have to update the optional viewCenter property', function () {
+        it('doesn\'t have to update the optional viewCenter property', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -493,8 +493,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_FULLSCREEN', function () {
-        it('can toggle the fullscreen mode', function () {
+    describe('MAP_FULLSCREEN', () => {
+        it('can toggle the fullscreen mode', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             let output;
 
@@ -507,7 +507,7 @@ describe('The map reducers', function () {
             expect(output.map.isFullscreen).toBe(false);
         });
 
-        it('disables layer selection when changing fullscreen', function () {
+        it('disables layer selection when changing fullscreen', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             let output;
 
@@ -525,8 +525,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_START_DRAWING', function () {
-        it('Set the map drawing mode to draw and not to reset dataSelection', function () {
+    describe('MAP_START_DRAWING', () => {
+        it('Set the map drawing mode to draw and not to reset dataSelection', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -536,7 +536,7 @@ describe('The map reducers', function () {
             expect(output.dataSelection).toBe('leave this as it is');
         });
 
-        it('Set the map drawing mode to edit and not to reset dataSelection', function () {
+        it('Set the map drawing mode to edit and not to reset dataSelection', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -546,7 +546,7 @@ describe('The map reducers', function () {
             expect(output.dataSelection).toBe('leave this as it is');
         });
 
-        it('Should reset dataSelection state only when markers are on the map and draw mode is not edit', function () {
+        it('Should reset dataSelection state only when markers are on the map and draw mode is not edit', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -562,7 +562,7 @@ describe('The map reducers', function () {
             expect(output.dataSelection.reset).toBe(true);
         });
 
-        it('Should not reset dataSelection state with markers on the map and draw mode is edit', function () {
+        it('Should not reset dataSelection state with markers on the map and draw mode is edit', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -574,7 +574,7 @@ describe('The map reducers', function () {
             expect(output.dataSelection.reset).toBeFalsy();
         });
 
-        it('Should not reset dataSelection state with no markers on the map and draw mode is not edit', function () {
+        it('Should not reset dataSelection state with no markers on the map and draw mode is not edit', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -586,8 +586,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_CLEAR_DRAWING', function () {
-        it('Clears the map geometry', function () {
+    describe('MAP_CLEAR_DRAWING', () => {
+        it('Clears the map geometry', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -597,8 +597,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('MAP_END_DRAWING', function () {
-        it('Set the map drawing mode to false', function () {
+    describe('MAP_END_DRAWING', () => {
+        it('Set the map drawing mode to false', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -618,7 +618,7 @@ describe('The map reducers', function () {
             expect(output.dataSelection.reset).toBeFalsy();
         });
 
-        it('Leaves the dataSelection state untouched on an argument polygon with <= 1 markers', function () {
+        it('Leaves the dataSelection state untouched on an argument polygon with <= 1 markers', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -634,7 +634,7 @@ describe('The map reducers', function () {
             expect(output.dataSelection).toBe('aap');
         });
 
-        it('Sets the map geometry on a polygon with 2 markers', function () {
+        it('Sets the map geometry on a polygon with 2 markers', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -645,7 +645,7 @@ describe('The map reducers', function () {
             expect(output.page.name).toBe('home');
         });
 
-        it('Initializes the dataSelection state when a payload is specified', function () {
+        it('Initializes the dataSelection state when a payload is specified', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -659,7 +659,7 @@ describe('The map reducers', function () {
             expect(output.dataSelection.geometryFilter).toEqual(geometryFilter);
         });
 
-        it('Does not initialize the dataSelection state when payload is missing', function () {
+        it('Does not initialize the dataSelection state when payload is missing', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -668,7 +668,7 @@ describe('The map reducers', function () {
             expect(output.dataSelection).toBe('aap');
         });
 
-        it('Leaves dataset and filters of an existing dataSelection state untouched', function () {
+        it('Leaves dataset and filters of an existing dataSelection state untouched', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -684,7 +684,7 @@ describe('The map reducers', function () {
             );
         });
 
-        it('Sets  dataset and filters of an existing dataSelection state untouched', function () {
+        it('Sets  dataset and filters of an existing dataSelection state untouched', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -700,7 +700,7 @@ describe('The map reducers', function () {
             );
         });
 
-        it('Sets page, fullscreen, loading, view and markers of the dataSelection state', function () {
+        it('Sets page, fullscreen, loading, view and markers of the dataSelection state', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -748,8 +748,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('SHOW_MAP_ACTIVE_OVERLAYS', function () {
-        it('sets the variable to true', function () {
+    describe('SHOW_MAP_ACTIVE_OVERLAYS', () => {
+        it('sets the variable to true', () => {
             var output;
 
             output = mapReducers[ACTIONS.SHOW_MAP_ACTIVE_OVERLAYS.id](DEFAULT_STATE);
@@ -757,8 +757,8 @@ describe('The map reducers', function () {
         });
     });
 
-    describe('HIDE_MAP_ACTIVE_OVERLAYS', function () {
-        it('sets the variable to false', function () {
+    describe('HIDE_MAP_ACTIVE_OVERLAYS', () => {
+        it('sets the variable to false', () => {
             var output,
                 inputState = angular.copy(DEFAULT_STATE);
 

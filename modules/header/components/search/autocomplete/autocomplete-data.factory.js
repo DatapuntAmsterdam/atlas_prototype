@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -16,17 +16,15 @@
         function search (query) {
             return api.getByUri(HEADER_CONFIG.AUTOCOMPLETE_ENDPOINT, {
                 q: query
-            }).then(function (response) {
-                return formatData(response, query);
-            });
+            }).then(response => formatData(response, query));
         }
 
         function formatData (categories, query) {
             var suggestionIndex = 0,
                 numberOfResults = 0;
 
-            categories.forEach(function (category) {
-                category.content.map(function (suggestion) {
+            categories.forEach(category => {
+                category.content.map(suggestion => {
                     suggestion.index = suggestionIndex++;
                     numberOfResults++;
 
@@ -44,8 +42,8 @@
         function getSuggestionByIndex (searchResults, index) {
             var activeSuggestion;
 
-            searchResults.forEach(function (category) {
-                category.content.forEach(function (suggestion) {
+            searchResults.forEach(category => {
+                category.content.forEach(suggestion => {
                     if (suggestion.index === index) {
                         activeSuggestion = suggestion;
                     }
@@ -55,4 +53,4 @@
             return activeSuggestion;
         }
     }
-})();
+}))();

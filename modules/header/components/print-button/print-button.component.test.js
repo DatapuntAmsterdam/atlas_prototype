@@ -1,12 +1,12 @@
-describe('The dp-print-button component', function () {
+describe('The dp-print-button component', () => {
     var $compile,
         $rootScope,
         $window;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpHeader');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$window_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $window = _$window_;
@@ -31,7 +31,7 @@ describe('The dp-print-button component', function () {
         return component;
     }
 
-    it('prints the page when clicking a button', function () {
+    it('prints the page when clicking a button', () => {
         var component;
 
         spyOn($window, 'print');
@@ -42,7 +42,7 @@ describe('The dp-print-button component', function () {
         expect($window.print).toHaveBeenCalled();
     });
 
-    it('transcludes stuff', function () {
+    it('transcludes stuff', () => {
         var component,
             html;
 

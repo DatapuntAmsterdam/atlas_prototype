@@ -1,4 +1,4 @@
-(function () {
+((() => {
     //
     // This constant holds the configuration of all state variables that are stored in the url
     // - The url parameter name can be found in stateVariables.<parameterName>
@@ -333,4 +333,4 @@
                 }
             }
         });
-})();
+}))();

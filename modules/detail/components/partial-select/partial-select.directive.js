@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -23,7 +23,7 @@
 
             scope.showMoreInfoWarning = !user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE);
 
-            partialCompiler.getHtml(templateUrl, scope).then(function (partial) {
+            partialCompiler.getHtml(templateUrl, scope).then(partial => {
                 scope.loadMore = scope.loadMoreFn;
 
                 scope.isEmployee = user.meetsRequiredLevel(user.AUTHORIZATION_LEVEL.EMPLOYEE);
@@ -33,4 +33,4 @@
             });
         }
     }
-})();
+}))();

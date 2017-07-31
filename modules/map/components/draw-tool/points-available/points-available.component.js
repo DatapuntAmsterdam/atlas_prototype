@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -23,4 +23,4 @@
             vm.showWarning = drawTool.isEnabled() && vm.markersLeft <= DRAW_TOOL_CONFIG.MARKERS_LEFT_WARNING;
         }
     }
-})();
+}))();

@@ -1,9 +1,9 @@
-describe('The dp-glossary-header directive', function () {
+describe('The dp-glossary-header directive', () => {
     var $compile,
         $rootScope;
 
-    beforeEach(function () {
-        angular.mock.module('dpDetail', function ($provide) {
+    beforeEach(() => {
+        angular.mock.module('dpDetail', $provide => {
             $provide.constant('GLOSSARY', {
                 DEFINITIONS: {
                     BOUWBLOK: {
@@ -37,15 +37,11 @@ describe('The dp-glossary-header directive', function () {
                 }
             });
 
-            $provide.factory('dpGlossaryMetaDirective', function () {
-                return {};
-            });
-            $provide.factory('dpWkpbLinkDirective', function () {
-                return {};
-            });
+            $provide.factory('dpGlossaryMetaDirective', () => ({}));
+            $provide.factory('dpWkpbLinkDirective', () => ({}));
         });
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -80,7 +76,7 @@ describe('The dp-glossary-header directive', function () {
         return directive;
     }
 
-    it('optionally shows the glossary label w/ an button to toggle more information', function () {
+    it('optionally shows the glossary label w/ an button to toggle more information', () => {
         let directive;
 
         // Don't show it if there is no description
@@ -99,7 +95,7 @@ describe('The dp-glossary-header directive', function () {
         expect(directive.find('.o-header__button:nth-of-type(1) .u-sr-only').text().trim()).toBe('Uitleg verbergen');
     });
 
-    it('has support for plurals in the glossary label', function () {
+    it('has support for plurals in the glossary label', () => {
         var directive;
 
         directive = getDirective(null, 'BOUWBLOK', false, null, null);
@@ -109,7 +105,7 @@ describe('The dp-glossary-header directive', function () {
         expect(directive.find('.o-header__subtitle').text().trim()).toBe('Bouwblokken');
     });
 
-    it('has an optional heading that can be placed in front of the glossary label', function () {
+    it('has an optional heading that can be placed in front of the glossary label', () => {
         var directive = getDirective('Ik ben een hele specifieke titel', 'BOUWBLOK', false, null);
 
         expect(directive.find('.o-header__title').text().trim())
@@ -118,7 +114,7 @@ describe('The dp-glossary-header directive', function () {
         expect(directive.find('.o-header__subtitle').text().trim()).toBe('Bouwblok');
     });
 
-    it('always has a glossary panel', function () {
+    it('always has a glossary panel', () => {
         var directive = getDirective(null, 'BOUWBLOK', false, null, null);
 
         // The panel is hidden by default
@@ -138,17 +134,17 @@ describe('The dp-glossary-header directive', function () {
             .toBe('Lees verder op stelselpedia');
     });
 
-    describe('optionally loads the dp-glossary-meta directive', function () {
+    describe('optionally loads the dp-glossary-meta directive', () => {
         var metaData;
 
-        beforeEach(function () {
+        beforeEach(() => {
             metaData = {
                 id: '123456',
                 begin_geldigheid: '2016-03-30T22:00:32.017685Z'
             };
         });
 
-        it('optionally show a button with \'toon metadata\' in the header', function () {
+        it('optionally show a button with \'toon metadata\' in the header', () => {
             var directive;
 
             // BRONDOCUMENT has no meta data
@@ -174,7 +170,7 @@ describe('The dp-glossary-header directive', function () {
                 .toBe('Informatie (metadata) verbergen');
         });
 
-        it('can open a panel that loads the dp-glossary-meta directive', function () {
+        it('can open a panel that loads the dp-glossary-meta directive', () => {
             var directive = getDirective(null, 'BOUWBLOK', false, metaData, null);
 
             // The panel is hidden by default
@@ -189,14 +185,14 @@ describe('The dp-glossary-header directive', function () {
         });
     });
 
-    describe('optionally activates the dp-wkpb-link directive', function () {
+    describe('optionally activates the dp-wkpb-link directive', () => {
         var brk;
 
-        beforeEach(function () {
+        beforeEach(() => {
             brk = {};
         });
 
-        it('optionally includes the dp-wkpb-link in the header when it\'s a BEPERKING', function () {
+        it('optionally includes the dp-wkpb-link in the header when it\'s a BEPERKING', () => {
             var directive;
 
             // BRONDOCUMENT has no wkpb-uittreksel
@@ -209,18 +205,18 @@ describe('The dp-glossary-header directive', function () {
         });
     });
 
-    describe('the show more stuff buttons', function () {
+    describe('the show more stuff buttons', () => {
         var directive,
             metaData = {
                 id: '123456',
                 begin_geldigheid: '2016-03-30T22:00:32.017685Z'
             };
 
-        beforeEach(function () {
+        beforeEach(() => {
             directive = getDirective(null, 'BOUWBLOK', false, metaData, null);
         });
 
-        it('can be opened and closed with the button in the header', function () {
+        it('can be opened and closed with the button in the header', () => {
             expect(directive.find('.qa-glossary').length).toBe(0);
 
             // Open uitleg
@@ -240,7 +236,7 @@ describe('The dp-glossary-header directive', function () {
             expect(directive.find('.qa-metadata').length).toBe(0);
         });
 
-        it('can be closed with the button (cross) in the panel', function () {
+        it('can be closed with the button (cross) in the panel', () => {
             expect(directive.find('.qa-glossary').length).toBe(0);
 
             // Open uitleg
@@ -260,7 +256,7 @@ describe('The dp-glossary-header directive', function () {
             expect(directive.find('.qa-metadatat').length).toBe(0);
         });
 
-        it('can open uitleg and metadata at the same time', function () {
+        it('can open uitleg and metadata at the same time', () => {
             expect(directive.find('.qa-glossary').length).toBe(0);
 
             // Open uitleg

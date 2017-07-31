@@ -1,4 +1,4 @@
-describe('The dpSearchResultsDocumentTitle factory', function () {
+describe('The dpSearchResultsDocumentTitle factory', () => {
     const searchTitle = { getTitleData: angular.noop };
     let documentTitle;
 
@@ -13,22 +13,22 @@ describe('The dpSearchResultsDocumentTitle factory', function () {
         spyOn(searchTitle, 'getTitleData');
     });
 
-    describe('For searches on text', function () {
-        it('returns "Resultaten met \'<searchText>\'" as a title', function () {
+    describe('For searches on text', () => {
+        it('returns "Resultaten met \'<searchText>\'" as a title', () => {
             expect(documentTitle.getTitle({query: 'a query', numberOfResults: 10}))
                 .toBe('Data met \'a query\'');
         });
 
-        it('returns "Geen resultaten met \'<searchText>\'" if no results as a title', function () {
+        it('returns "Geen resultaten met \'<searchText>\'" if no results as a title', () => {
             expect(documentTitle.getTitle({query: 'a query', numberOfResults: 0}))
                 .toBe('Data met \'a query\'');
         });
     });
 
-    describe('For searches on a location', function () {
+    describe('For searches on a location', () => {
         let searchOnLocation;
 
-        beforeEach(function () {
+        beforeEach(() => {
             searchOnLocation = {
                 location: [52, 4]
             };

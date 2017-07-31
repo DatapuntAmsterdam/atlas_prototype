@@ -1,11 +1,11 @@
-describe('The dp-data-selection-formatter component', function () {
+describe('The dp-data-selection-formatter component', () => {
     let $compile,
         $rootScope,
         $httpBackend,
         singleParamFormatterFilter,
         doubleParamFormatterFilter;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -18,11 +18,13 @@ describe('The dp-data-selection-formatter component', function () {
         );
 
         angular.mock.inject(
-            function (_$compile_,
-                      _$rootScope_,
-                      _$httpBackend_,
-                      _singleParamFormatterFilter_,
-                      _doubleParamFormatterFilter_) {
+            (
+                _$compile_,
+                _$rootScope_,
+                _$httpBackend_,
+                _singleParamFormatterFilter_,
+                _doubleParamFormatterFilter_
+            ) => {
                 $compile = _$compile_;
                 $rootScope = _$rootScope_;
                 $httpBackend = _$httpBackend_;
@@ -57,7 +59,7 @@ describe('The dp-data-selection-formatter component', function () {
         return component;
     }
 
-    it('returns all values separated by spaces if there is no formatter', function () {
+    it('returns all values separated by spaces if there is no formatter', () => {
         let component;
 
         // One variable, nothing to concatenate
@@ -86,7 +88,7 @@ describe('The dp-data-selection-formatter component', function () {
         expect(component.find('div').text()).toBe('my_first_value my_second_value');
     });
 
-    it('supports formatters with HTML output', function () {
+    it('supports formatters with HTML output', () => {
         const component = getComponent(
             [{
                 key: 'my_var_1',
@@ -98,7 +100,7 @@ describe('The dp-data-selection-formatter component', function () {
         expect(component.find('div strong').text()).toBe('my_first_value');
     });
 
-    it('has a use-inline option that renders the formatted output in a span instead of a div', function () {
+    it('has a use-inline option that renders the formatted output in a span instead of a div', () => {
         let component;
 
         // Not inline (default setting)? Use a div!
@@ -128,7 +130,7 @@ describe('The dp-data-selection-formatter component', function () {
         expect(component.find('span').text()).toBe('my_first_value');
     });
 
-    it('sets a template path if a template is specified', function () {
+    it('sets a template path if a template is specified', () => {
         $httpBackend
             .whenGET('modules/data-selection/components/formatter/templates/templatePath.html')
             .respond(200, 'aap');
@@ -147,8 +149,8 @@ describe('The dp-data-selection-formatter component', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    describe('when there is a formatter it calls the appropriate filter', function () {
-        it('sends a single String parameter if there is only one variable', function () {
+    describe('when there is a formatter it calls the appropriate filter', () => {
+        it('sends a single String parameter if there is only one variable', () => {
             getComponent(
                 [{
                     key: 'my_var_1',
@@ -160,7 +162,7 @@ describe('The dp-data-selection-formatter component', function () {
             expect(singleParamFormatterFilter).toHaveBeenCalledWith('my_first_value');
         });
 
-        it('sends all variables as an Object if there is more than one variable', function () {
+        it('sends all variables as an Object if there is more than one variable', () => {
             getComponent(
                 [{
                     key: 'my_var_1',

@@ -1,10 +1,10 @@
-describe('The searchResults controller', function () {
+describe('The searchResults controller', () => {
     var $controller,
         $rootScope,
         store,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -19,7 +19,7 @@ describe('The searchResults controller', function () {
             }
         );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
+        angular.mock.inject((_$controller_, _$rootScope_, _store_) => {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -48,7 +48,7 @@ describe('The searchResults controller', function () {
         return controller;
     }
 
-    it('subscribes to the store to listen for changes', function () {
+    it('subscribes to the store to listen for changes', () => {
         spyOn(store, 'subscribe').and.callThrough();
 
         getController();
@@ -56,7 +56,7 @@ describe('The searchResults controller', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the query string based on the state', function () {
+    it('sets the query string based on the state', () => {
         var controller;
 
         controller = getController();
@@ -65,7 +65,7 @@ describe('The searchResults controller', function () {
         expect(controller.location).toBeNull();
     });
 
-    it('sets the location based on the state', function () {
+    it('sets the location based on the state', () => {
         var controller;
 
         mockedState = {
@@ -81,7 +81,7 @@ describe('The searchResults controller', function () {
         expect(controller.location).toEqual([52.123, 4.789]);
     });
 
-    it('sets the category based on the state', function () {
+    it('sets the category based on the state', () => {
         var controller;
 
         mockedState = {
@@ -97,7 +97,7 @@ describe('The searchResults controller', function () {
         expect(controller.category).toBe('adres');
     });
 
-    it('sets isLoading based on the state', function () {
+    it('sets isLoading based on the state', () => {
         var controller;
 
         mockedState.search.isLoading = true;
@@ -107,7 +107,7 @@ describe('The searchResults controller', function () {
         expect(controller.isLoading).toBe(true);
     });
 
-    it('sets the number of results based on the state', function () {
+    it('sets the number of results based on the state', () => {
         var controller;
 
         mockedState.search.numberOfResults = 23;
@@ -117,7 +117,7 @@ describe('The searchResults controller', function () {
         expect(controller.numberOfResults).toBe(23);
     });
 
-    it('doesn\'t break if search is null', function () {
+    it('doesn\'t break if search is null', () => {
         var controller;
 
         mockedState = {

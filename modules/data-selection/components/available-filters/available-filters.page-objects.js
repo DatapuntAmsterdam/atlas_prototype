@@ -1,17 +1,16 @@
 'use strict';
 
-module.exports = function (availableFiltersElement) {
-    return {
-        get visible () {
-            return availableFiltersElement.isPresent();
-        },
-        categories: function (index) {
-            return categoryPageObject(
-                availableFiltersElement.element(by.repeater('filter in vm.availableFilters').row(index))
-            );
-        }
-    };
-};
+module.exports = availableFiltersElement => ({
+    get visible () {
+        return availableFiltersElement.isPresent();
+    },
+
+    categories: function (index) {
+        return categoryPageObject(
+            availableFiltersElement.element(by.repeater('filter in vm.availableFilters').row(index))
+        );
+    }
+});
 
 function categoryPageObject (categoryElement) {
     return {

@@ -1,8 +1,8 @@
-describe('The dp-wkpb-link directive', function () {
+describe('The dp-wkpb-link directive', () => {
     var $compile,
         $rootScope;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
             {
@@ -10,14 +10,12 @@ describe('The dp-wkpb-link directive', function () {
                     API_ROOT: 'http://www.api-root.com/'
                 }
             },
-            function ($provide) {
-                $provide.factory('dpLinkDirective', function () {
-                    return {};
-                });
+            $provide => {
+                $provide.factory('dpLinkDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -39,7 +37,7 @@ describe('The dp-wkpb-link directive', function () {
         return component;
     }
 
-    it('creates a dp-link that triggers FETCH_DETAIL to a object-wkpb endpoint', function () {
+    it('creates a dp-link that triggers FETCH_DETAIL to a object-wkpb endpoint', () => {
         var component = getComponent('abc789'),
             scope = component.isolateScope();
 
@@ -48,7 +46,7 @@ describe('The dp-wkpb-link directive', function () {
         expect(scope.vm.wkpbEndpoint).toBe('http://www.api-root.com/brk/object-wkpb/abc789/');
     });
 
-    it('is spelled WKPB-uittreksel', function () {
+    it('is spelled WKPB-uittreksel', () => {
         var component = getComponent('abc789');
 
         expect(component.text()).toContain('WKPB-uittreksel');

@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = function (toggleViewButtonElement) {
-    return {
-        click: toggleViewButtonElement.element(by.css('button')).click
-    };
-};
+module.exports = toggleViewButtonElement => ({
+    click: toggleViewButtonElement.element(by.css('button')).click
+});

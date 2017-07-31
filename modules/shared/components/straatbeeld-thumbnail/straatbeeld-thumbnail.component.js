@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -37,7 +37,7 @@
             vm.isLoading = true;
             vm.radius = sharedConfig.RADIUS;
 
-            api.getByUrl(imageUrl).then(function (thumbnailData) {
+            api.getByUrl(imageUrl).then(thumbnailData => {
                 heading = thumbnailData.heading;
                 id = thumbnailData.pano_id;
 
@@ -65,4 +65,4 @@
             });
         }
     }
-})();
+}))();

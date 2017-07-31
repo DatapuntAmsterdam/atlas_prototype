@@ -1,11 +1,11 @@
-describe('The dp-data-selection-available-filters component', function () {
+describe('The dp-data-selection-available-filters component', () => {
     var $compile,
         $rootScope,
         store,
         ACTIONS,
         availableFilters;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -13,7 +13,7 @@ describe('The dp-data-selection-available-filters component', function () {
                     dispatch: function () {}
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('DATA_SELECTION_CONFIG', {
                     datasets: {
                         my_special_dataset: {
@@ -30,7 +30,7 @@ describe('The dp-data-selection-available-filters component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -131,7 +131,7 @@ describe('The dp-data-selection-available-filters component', function () {
         return component;
     }
 
-    it('shows a list of available filters', function () {
+    it('shows a list of available filters', () => {
         var component = getComponent({}, false);
 
         expect(component.find('.qa-available-filters').length).toBe(1);
@@ -158,8 +158,8 @@ describe('The dp-data-selection-available-filters component', function () {
         expect(component.find('.qa-available-filters ul').eq(1).find('li').eq(2).text()).not.toContain('(6)');
     });
 
-    describe('it dispatches an action when a filter has been added', function () {
-        it('when adding the first filter; one filter is communicated', function () {
+    describe('it dispatches an action when a filter has been added', () => {
+        it('when adding the first filter; one filter is communicated', () => {
             var component,
                 activeFilters = {};
 
@@ -178,7 +178,7 @@ describe('The dp-data-selection-available-filters component', function () {
             });
         });
 
-        it('when adding another filter; all filters are communicated', function () {
+        it('when adding another filter; all filters are communicated', () => {
             var component,
                 activeFilters = {
                     filter_a_new: 'optie-a-2'
@@ -200,7 +200,7 @@ describe('The dp-data-selection-available-filters component', function () {
             });
         });
 
-        it('can only have one option per filter', function () {
+        it('can only have one option per filter', () => {
             var component,
                 activeFilters = {
                     filter_a_new: 'optie-a-2',
@@ -225,7 +225,7 @@ describe('The dp-data-selection-available-filters component', function () {
         });
     });
 
-    it('updates its active filters when available filters are changed', function () {
+    it('updates its active filters when available filters are changed', () => {
         var component,
             activeFilters;
 
@@ -238,7 +238,7 @@ describe('The dp-data-selection-available-filters component', function () {
         expect(component.scope().formattedActiveFilters).toBeUndefined();
     });
 
-    it('can implode both known and unknown filters', function () {
+    it('can implode both known and unknown filters', () => {
         var component = getComponent({}, false);
         var scope = component.isolateScope();
 
@@ -250,7 +250,7 @@ describe('The dp-data-selection-available-filters component', function () {
         expect(scope.vm.isExpandedFilter('abc')).toBe(false);
     });
 
-    it('shows maximum of 10 options per filter, it can expand/implode when it has more than 10 results', function () {
+    it('shows maximum of 10 options per filter, it can expand/implode when it has more than 10 results', () => {
         var component;
 
         // When there are 10 or less available options
@@ -302,7 +302,7 @@ describe('The dp-data-selection-available-filters component', function () {
         expect(component.find('.qa-available-filters > div').eq(0).text()).toContain('Toon meer');
     });
 
-    it('expanded filters have a message when there are more options that 100', function () {
+    it('expanded filters have a message when there are more options that 100', () => {
         // When there are less than 100 options
         var component;
 

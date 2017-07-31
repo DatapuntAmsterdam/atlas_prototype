@@ -1,11 +1,11 @@
-describe('The dp-toggle-straatbeeld-fullscreen component', function () {
+describe('The dp-toggle-straatbeeld-fullscreen component', () => {
     var $compile,
         $rootScope,
         store,
         scope,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
             {
@@ -15,7 +15,7 @@ describe('The dp-toggle-straatbeeld-fullscreen component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -42,8 +42,8 @@ describe('The dp-toggle-straatbeeld-fullscreen component', function () {
         return result;
     }
 
-    describe ('The fullscreen button for panorama', function () {
-        it('can change a window-view straatbeeld to fullscreen', function () {
+    describe ('The fullscreen button for panorama', () => {
+        it('can change a window-view straatbeeld to fullscreen', () => {
             let directive;
 
             // When straatbeeld is small
@@ -77,7 +77,7 @@ describe('The dp-toggle-straatbeeld-fullscreen component', function () {
             });
         });
 
-        it('can change a fullscreen straatbeeld to window-view', function () {
+        it('can change a fullscreen straatbeeld to window-view', () => {
             const directive = getDirective(true);
             const toggle = directive.find('.qa-toggle-straatbeeld-fullscreen');
 

@@ -1,4 +1,4 @@
-describe('The dataSelectionApiDataSelection factory', function () {
+describe('The dataSelectionApiDataSelection factory', () => {
     let $rootScope,
         $q,
         dataSelectionApiDataSelection,
@@ -6,7 +6,7 @@ describe('The dataSelectionApiDataSelection factory', function () {
         mockedApiResponse,
         config;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -25,7 +25,7 @@ describe('The dataSelectionApiDataSelection factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$q_, _dataSelectionApiDataSelection_, _api_) {
+        angular.mock.inject((_$rootScope_, _$q_, _dataSelectionApiDataSelection_, _api_) => {
             $rootScope = _$rootScope_;
             $q = _$q_;
             dataSelectionApiDataSelection = _dataSelectionApiDataSelection_;
@@ -122,7 +122,7 @@ describe('The dataSelectionApiDataSelection factory', function () {
         spyOn(api, 'getByUri').and.callThrough();
     });
 
-    it('calls the api factory with the active filters, page and shape as searchParams', function () {
+    it('calls the api factory with the active filters, page and shape as searchParams', () => {
         // Without active filters
         dataSelectionApiDataSelection.query(config, {}, 1, 'search', [[12, 3]]);
         expect(api.getByUri).toHaveBeenCalledWith('zwembaden/', { page: 1, shape: '[[3,12]]' });
@@ -137,17 +137,17 @@ describe('The dataSelectionApiDataSelection factory', function () {
 
         // With yet another page
         let output;
-        dataSelectionApiDataSelection.query(config, {}, 9999).then(function (_output_) {
+        dataSelectionApiDataSelection.query(config, {}, 9999).then(_output_ => {
             output = _output_;
         });
         $rootScope.$apply();
         expect(output.data.length).toBe(0);
     });
 
-    it('returns the total number of pages', function () {
+    it('returns the total number of pages', () => {
         let output;
 
-        dataSelectionApiDataSelection.query(config, {}, 1).then(function (_output_) {
+        dataSelectionApiDataSelection.query(config, {}, 1).then(_output_ => {
             output = _output_;
         });
         $rootScope.$apply();
@@ -155,11 +155,11 @@ describe('The dataSelectionApiDataSelection factory', function () {
         expect(output.numberOfPages).toBe(2);
     });
 
-    describe('the formatFilters process', function () {
-        it('orders the filters based on the configuration', function () {
+    describe('the formatFilters process', () => {
+        it('orders the filters based on the configuration', () => {
             let output = {};
 
-            dataSelectionApiDataSelection.query(config, {}, 1).then(function (_output_) {
+            dataSelectionApiDataSelection.query(config, {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -201,13 +201,13 @@ describe('The dataSelectionApiDataSelection factory', function () {
             });
         });
 
-        it('won\'t return filters from the configuration that are not part of the API\'s response', function () {
+        it('won\'t return filters from the configuration that are not part of the API\'s response', () => {
             let output = {};
 
             // With only one filter in the API response
             delete mockedApiResponse.aggs_list.type;
 
-            dataSelectionApiDataSelection.query(config, {}, 1).then(function (_output_) {
+            dataSelectionApiDataSelection.query(config, {}, 1).then(_output_ => {
                 output = _output_;
             });
             $rootScope.$apply();
@@ -235,10 +235,10 @@ describe('The dataSelectionApiDataSelection factory', function () {
         });
     });
 
-    it('processes the results correctly', function () {
+    it('processes the results correctly', () => {
         let output = {};
 
-        dataSelectionApiDataSelection.query(config, {}, 1).then(function (_output_) {
+        dataSelectionApiDataSelection.query(config, {}, 1).then(_output_ => {
             output = _output_;
         });
         $rootScope.$apply();

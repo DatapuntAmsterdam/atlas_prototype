@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -66,4 +66,4 @@
                 urlTemplate: 'https://{s}.data.amsterdam.nl/lufo2003_RD/{z}/{x}/{y}.jpeg'
             }
         ]);
-})();
+}))();

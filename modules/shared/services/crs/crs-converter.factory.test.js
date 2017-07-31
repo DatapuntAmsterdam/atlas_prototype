@@ -1,15 +1,15 @@
-describe('The crsConverter factory', function () {
+describe('The crsConverter factory', () => {
     var crsConverter;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared');
 
-        angular.mock.inject(function (_crsConverter_) {
+        angular.mock.inject(_crsConverter_ => {
             crsConverter = _crsConverter_;
         });
     });
 
-    it('coverts an wgs84 array to an array with RD coordinates', function () {
+    it('coverts an wgs84 array to an array with RD coordinates', () => {
         var output;
 
         // Nationaal monument, Dam
@@ -31,7 +31,7 @@ describe('The crsConverter factory', function () {
         expect(output[1].toFixed(2)).toBe('486223.01');
     });
 
-    it('coverts an rd array to an array with wgs84 coordinates', function () {
+    it('coverts an rd array to an array with wgs84 coordinates', () => {
         var output;
 
         // Nationaal monument, Dam

@@ -4,7 +4,7 @@ describe('The environment factory', () => {
     beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_freeze_) {
+        angular.mock.inject(_freeze_ => {
             freeze = _freeze_;
         });
     });

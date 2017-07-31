@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .filter('modificationDate', modificationDateFilter);
 
     function modificationDateFilter () {
-        return function (input) {
+        return input => {
             if (angular.isObject(input)) {
                 const created = input.metadata_created;
                 const modified = input.metadata_modified;
@@ -39,4 +39,4 @@
             }
         };
     }
-})();
+}))();

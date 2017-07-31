@@ -1,4 +1,4 @@
-describe('The link-to-page component', function () {
+describe('The link-to-page component', () => {
     let $compile,
         $rootScope,
         mockedReducer,
@@ -7,7 +7,7 @@ describe('The link-to-page component', function () {
         mockedTargetPath,
         store;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpShared',
             {
@@ -32,7 +32,7 @@ describe('The link-to-page component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -81,17 +81,17 @@ describe('The link-to-page component', function () {
         return component;
     }
 
-    it('has default label', function () {
+    it('has default label', () => {
         const component = getComponent();
         expect(component.find('.qa-link-to-page-button').text()).toBe('Help > Bediening > Inloggen');
     });
 
-    it('transcludes label', function () {
+    it('transcludes label', () => {
         const component = getComponent('infoitem4', 'info', 'Some label');
         expect(component.find('.qa-link-to-page-button').text()).toBe('Some label');
     });
 
-    it('clicking the button will trigger a call to store.dispatch with default type and no item', function () {
+    it('clicking the button will trigger a call to store.dispatch with default type and no item', () => {
         store.dispatch.calls.reset();
         const component = getComponent();
 
@@ -102,7 +102,7 @@ describe('The link-to-page component', function () {
         });
     });
 
-    it('clicking the button will trigger a call to store.dispatch with type info and infoitem4 item', function () {
+    it('clicking the button will trigger a call to store.dispatch with type info and infoitem4 item', () => {
         store.dispatch.calls.reset();
         const component = getComponent('infoitem4', 'info');
 

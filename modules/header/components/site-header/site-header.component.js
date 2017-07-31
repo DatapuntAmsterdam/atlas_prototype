@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -29,4 +29,4 @@
             vm.isShort = vm.size === HEADER.SIZE.SHORT;
         }
     }
-})();
+}))();

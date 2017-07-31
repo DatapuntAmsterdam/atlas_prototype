@@ -1,4 +1,4 @@
-describe('The searchFormatter factory', function () {
+describe('The searchFormatter factory', () => {
     var searchFormatter,
         mockedInputCategories = [
             {
@@ -130,10 +130,10 @@ describe('The searchFormatter factory', function () {
             }
         ];
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpSearchResults',
-            function ($provide) {
+            $provide => {
                 $provide.constant('SEARCH_CONFIG', {
                     QUERY_ENDPOINTS: [
                         {
@@ -165,12 +165,12 @@ describe('The searchFormatter factory', function () {
             }
         );
 
-        angular.mock.inject(function (_searchFormatter_) {
+        angular.mock.inject(_searchFormatter_ => {
             searchFormatter = _searchFormatter_;
         });
     });
 
-    it('has a formatCategories function', function () {
+    it('has a formatCategories function', () => {
         var output;
 
         output = searchFormatter.formatCategories(mockedInputCategories);
@@ -272,7 +272,7 @@ describe('The searchFormatter factory', function () {
         ]);
     });
 
-    it('has a formatCategory function (one single category)', function () {
+    it('has a formatCategory function (one single category)', () => {
         var output;
 
         output = searchFormatter.formatCategory('adres', mockedInputCategories[0]);
@@ -308,7 +308,7 @@ describe('The searchFormatter factory', function () {
         });
     });
 
-    it('has a formatLinks function', function () {
+    it('has a formatLinks function', () => {
         var output = searchFormatter.formatLinks('adres', mockedInputLinks);
 
         expect(output).toEqual([

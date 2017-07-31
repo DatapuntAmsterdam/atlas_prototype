@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,10 +6,10 @@
         .filter('nevenadres', nevenadresFilter);
 
     function nevenadresFilter () {
-        return function (hoofdadres) {
+        return hoofdadres => {
             const isNevenadres = String(hoofdadres).toLowerCase() === 'false';
 
             return isNevenadres ? '(nevenadres)' : '';
         };
     }
-})();
+}))();

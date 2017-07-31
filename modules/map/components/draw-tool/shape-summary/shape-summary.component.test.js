@@ -1,4 +1,4 @@
-describe('The dp-shape-summary component', function () {
+describe('The dp-shape-summary component', () => {
     var $compile,
         $rootScope,
         scope,
@@ -6,7 +6,7 @@ describe('The dp-shape-summary component', function () {
         ACTIONS,
         drawTool;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -24,7 +24,7 @@ describe('The dp-shape-summary component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_, _drawTool_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_, _drawTool_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -44,36 +44,36 @@ describe('The dp-shape-summary component', function () {
         return result;
     }
 
-    describe('When the draw tool is enabled', function () {
-        beforeEach(function () {
+    describe('When the draw tool is enabled', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'isEnabled').and.returnValue(true);
         });
 
-        it('shows nothing', function () {
+        it('shows nothing', () => {
             drawTool.shape.markers = [1, 2, 3];
             const component = getComponent();
             expect(component.find('.qa-summary-available').length).toBe(0);
         });
     });
 
-    describe('When the draw tool is disabled', function () {
-        beforeEach(function () {
+    describe('When the draw tool is disabled', () => {
+        beforeEach(() => {
             spyOn(drawTool, 'isEnabled').and.returnValue(false);
         });
 
-        it('shows a summary for a line', function () {
+        it('shows a summary for a line', () => {
             drawTool.shape.markers = [1, 2];
             const component = getComponent();
             expect(component.find('.qa-summary-available').length).toBe(1);
         });
 
-        it('shows a remove geometry button for a line', function () {
+        it('shows a remove geometry button for a line', () => {
             drawTool.shape.markers = [1, 2];
             const component = getComponent();
             expect(component.find('.qa-summary-remove-geometry').length).toBe(1);
         });
 
-        it('removes a geometry when the remove geometry button is clicked', function () {
+        it('removes a geometry when the remove geometry button is clicked', () => {
             drawTool.shape.markers = [1, 2];
             const component = getComponent();
 
@@ -84,7 +84,7 @@ describe('The dp-shape-summary component', function () {
             });
         });
 
-        it('doesn\'t show a summary for polygons', function () {
+        it('doesn\'t show a summary for polygons', () => {
             drawTool.shape.markers = [1, 2, 3];
             const component = getComponent();
             expect(component.find('.qa-summary-available').length).toBe(0);

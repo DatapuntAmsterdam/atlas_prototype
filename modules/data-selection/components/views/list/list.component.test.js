@@ -1,11 +1,11 @@
-describe('The dp-data-selection-list component', function () {
+describe('The dp-data-selection-list component', () => {
     let $compile,
         $rootScope,
         store,
         ACTIONS,
         mockedContent;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -15,7 +15,7 @@ describe('The dp-data-selection-list component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -100,14 +100,14 @@ describe('The dp-data-selection-list component', function () {
         return component;
     }
 
-    it('returns a <ul> with a <li> for each item', function () {
+    it('returns a <ul> with a <li> for each item', () => {
         const component = getComponent();
 
         expect(component.find('ul').length).toBe(1);
         expect(component.find('ul li').length).toBe(2);
     });
 
-    it('groups the first group of variables inside a dp-link to FETCH_DETAIL', function () {
+    it('groups the first group of variables inside a dp-link to FETCH_DETAIL', () => {
         const component = getComponent();
 
         // The first item
@@ -134,7 +134,7 @@ describe('The dp-data-selection-list component', function () {
         });
     });
 
-    it('lists the other formatted groups of variables behind the dp-link', function () {
+    it('lists the other formatted groups of variables behind the dp-link', () => {
         const component = getComponent();
 
         // First row, second group of variables
@@ -154,7 +154,7 @@ describe('The dp-data-selection-list component', function () {
             .toBe('VALUE_2_C');
     });
 
-    it('uses the use-inline option of dp-data-selection-formatter', function () {
+    it('uses the use-inline option of dp-data-selection-formatter', () => {
         const component = getComponent();
 
         expect(component.find('dp-data-selection-formatter').length).toBe(6);

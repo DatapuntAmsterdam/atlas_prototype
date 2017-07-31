@@ -1,25 +1,25 @@
-describe('The sharedConfig factory', function () {
+describe('The sharedConfig factory', () => {
     function prepareMocks (environmentName) {
         let sharedConfig;
 
         angular.mock.module(
             'dpShared',
-            function ($provide) {
+            $provide => {
                 $provide.value('environment', {
                     NAME: environmentName
                 });
             }
         );
 
-        angular.mock.inject(function (_sharedConfig_) {
+        angular.mock.inject(_sharedConfig_ => {
             sharedConfig = _sharedConfig_;
         });
 
         return sharedConfig;
     }
 
-    describe('returns a combination of global and environment specific configuration', function () {
-        it('PRODUCTION', function () {
+    describe('returns a combination of global and environment specific configuration', () => {
+        it('PRODUCTION', () => {
             const sharedConfig = prepareMocks('PRODUCTION');
 
             // Global config
@@ -31,7 +31,7 @@ describe('The sharedConfig factory', function () {
             expect(sharedConfig.API_ROOT).toBe('https://api.data.amsterdam.nl/');
         });
 
-        it('PRE_PRODUCTION', function () {
+        it('PRE_PRODUCTION', () => {
             const sharedConfig = prepareMocks('PRE_PRODUCTION');
 
             // Global config
@@ -43,7 +43,7 @@ describe('The sharedConfig factory', function () {
             expect(sharedConfig.API_ROOT).toBe('https://api.data.amsterdam.nl/');
         });
 
-        it('ACCEPTATION', function () {
+        it('ACCEPTATION', () => {
             const sharedConfig = prepareMocks('ACCEPTATION');
 
             // Global config
@@ -55,7 +55,7 @@ describe('The sharedConfig factory', function () {
             expect(sharedConfig.API_ROOT).toBe('https://acc.api.data.amsterdam.nl/');
         });
 
-        it('DEVELOPMENT', function () {
+        it('DEVELOPMENT', () => {
             const sharedConfig = prepareMocks('DEVELOPMENT');
 
             // Global config

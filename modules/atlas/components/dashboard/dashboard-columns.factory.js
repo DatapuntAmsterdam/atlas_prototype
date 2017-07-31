@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -185,4 +185,4 @@
             return state.atlas.isPrintMode || state.atlas.isEmbedPreview || state.atlas.isEmbed;
         }
     }
-})();
+}))();

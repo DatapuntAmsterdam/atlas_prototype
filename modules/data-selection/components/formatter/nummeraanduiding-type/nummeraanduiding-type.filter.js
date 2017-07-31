@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .filter('nummeraanduidingType', nummeraanduidingTypeFilter);
 
     function nummeraanduidingTypeFilter () {
-        return function (input) {
+        return input => {
             let type;
 
             if (input.ligplaats_id) {
@@ -18,4 +18,4 @@
             return type ? '(' + type + ')' : '';
         };
     }
-})();
+}))();

@@ -1,21 +1,19 @@
-describe('The contextMiddleware factory', function () {
+describe('The contextMiddleware factory', () => {
     const mockedStore = {
         getState: function () {
             return 'FAKE_STATE';
         }
     };
-    const mockedNext = function (action) {
-        return action;
-    };
+    const mockedNext = action => action;
     const mockedAction = {};
 
     let contextMiddleware;
     let ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_contextMiddleware_, _ACTIONS_) {
+        angular.mock.inject((_contextMiddleware_, _ACTIONS_) => {
             contextMiddleware = _contextMiddleware_;
             ACTIONS = _ACTIONS_;
         });
@@ -24,7 +22,7 @@ describe('The contextMiddleware factory', function () {
         mockedAction.payload = {};
     });
 
-    it('calls the next action', function () {
+    it('calls the next action', () => {
         const returnValue = contextMiddleware(mockedStore)(mockedNext)(mockedAction);
 
         expect(returnValue).toEqual({
@@ -33,7 +31,7 @@ describe('The contextMiddleware factory', function () {
         });
     });
 
-    it('translates MAP_CLICK actions, default in search results', function () {
+    it('translates MAP_CLICK actions, default in search results', () => {
         mockedAction.type = ACTIONS.MAP_CLICK;
 
         const returnValue = contextMiddleware(mockedStore)(mockedNext)(mockedAction);
@@ -44,7 +42,7 @@ describe('The contextMiddleware factory', function () {
         });
     });
 
-    it('translates MAP_CLICK actions to straatbeeld updates when a straatbeeld is active', function () {
+    it('translates MAP_CLICK actions to straatbeeld updates when a straatbeeld is active', () => {
         mockedAction.type = ACTIONS.MAP_CLICK;
         mockedStore.getState = () => {
             return {
@@ -85,7 +83,7 @@ describe('The contextMiddleware factory', function () {
         });
     });
 
-    it('translates HIDE_STRAATBEELD action in search results', function () {
+    it('translates HIDE_STRAATBEELD action in search results', () => {
         mockedAction.type = ACTIONS.HIDE_STRAATBEELD;
         mockedStore.getState = () => {
             return {
@@ -103,7 +101,7 @@ describe('The contextMiddleware factory', function () {
         });
     });
 
-    it('translates HIDE_STRAATBEELD action in fetch detail when details available', function () {
+    it('translates HIDE_STRAATBEELD action in fetch detail when details available', () => {
         mockedAction.type = ACTIONS.HIDE_STRAATBEELD;
         mockedStore.getState = () => {
             return {
@@ -122,7 +120,7 @@ describe('The contextMiddleware factory', function () {
     });
 
     describe('MAP_ZOOM', () => {
-        it('adds \'ignore\' flag while drawing', function () {
+        it('adds \'ignore\' flag while drawing', () => {
             mockedAction.type = ACTIONS.MAP_ZOOM;
             mockedStore.getState = () => {
                 return {
@@ -144,7 +142,7 @@ describe('The contextMiddleware factory', function () {
             });
         });
 
-        it('adds \'ignore\' flag while editing a drawing', function () {
+        it('adds \'ignore\' flag while editing a drawing', () => {
             mockedAction.type = ACTIONS.MAP_ZOOM;
             mockedStore.getState = () => {
                 return {
@@ -166,7 +164,7 @@ describe('The contextMiddleware factory', function () {
             });
         });
 
-        it('does not add \'ignore\' flag while not drawing', function () {
+        it('does not add \'ignore\' flag while not drawing', () => {
             mockedAction.type = ACTIONS.MAP_ZOOM;
             mockedStore.getState = () => {
                 return {
@@ -205,7 +203,7 @@ describe('The contextMiddleware factory', function () {
     });
 
     describe('MAP_PAN', () => {
-        it('adds \'ignore\' flag while drawing', function () {
+        it('adds \'ignore\' flag while drawing', () => {
             mockedAction.type = ACTIONS.MAP_PAN;
             mockedStore.getState = () => {
                 return {
@@ -227,7 +225,7 @@ describe('The contextMiddleware factory', function () {
             });
         });
 
-        it('adds \'ignore\' flag while editing a drawing', function () {
+        it('adds \'ignore\' flag while editing a drawing', () => {
             mockedAction.type = ACTIONS.MAP_PAN;
             mockedStore.getState = () => {
                 return {
@@ -249,7 +247,7 @@ describe('The contextMiddleware factory', function () {
             });
         });
 
-        it('does not add \'ignore\' flag while not drawing', function () {
+        it('does not add \'ignore\' flag while not drawing', () => {
             mockedAction.type = ACTIONS.MAP_PAN;
             mockedStore.getState = () => {
                 return {

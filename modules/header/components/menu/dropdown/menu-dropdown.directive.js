@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -26,11 +26,11 @@
             scope.isVisible = false;
             scope.align = scope.align === 'left' ? 'left' : 'right';
 
-            scope.toggleDropdown = function () {
+            scope.toggleDropdown = () => {
                 scope.isVisible = !scope.isVisible;
             };
 
-            everywhere.bind('click', function (event) {
+            everywhere.bind('click', event => {
                 const button = element.find('button'),
                     span = button.find('span'),
                     nav = element.find('nav'),
@@ -46,4 +46,4 @@
             });
         }
     }
-})();
+}))();

@@ -1,8 +1,8 @@
-describe('The crsService', function () {
+describe('The crsService', () => {
     var crsService,
         CRS_CONFIG;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared', {
             CRS_CONFIG: {
                 RD: {
@@ -19,13 +19,13 @@ describe('The crsService', function () {
             }
         });
 
-        angular.mock.inject(function (_crsService_, _CRS_CONFIG_) {
+        angular.mock.inject((_crsService_, _CRS_CONFIG_) => {
             crsService = _crsService_;
             CRS_CONFIG = _CRS_CONFIG_;
         });
     });
 
-    it('may not alter the configuration source', function () {
+    it('may not alter the configuration source', () => {
         // This specification solves ATLAS-1101
         var originalConfig = angular.copy(CRS_CONFIG);
 

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -49,4 +49,4 @@
             return parent.data !== null;
         }
     }
-})();
+}))();

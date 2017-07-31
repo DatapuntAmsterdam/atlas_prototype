@@ -1,10 +1,10 @@
-describe('The dp-search-results-categories component', function () {
+describe('The dp-search-results-categories component', () => {
     let $compile,
         $rootScope,
         user,
         mockedSearchResults;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpSearchResults',
             {
@@ -15,7 +15,7 @@ describe('The dp-search-results-categories component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _user_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _user_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             user = _user_;
@@ -190,7 +190,7 @@ describe('The dp-search-results-categories component', function () {
     });
 
     describe('category with more than 1000 results', () => {
-        it('uses a thousand separator in the show more link', function () {
+        it('uses a thousand separator in the show more link', () => {
             mockedSearchResults[2].count = 1234;
 
             const component = getComponent(mockedSearchResults);

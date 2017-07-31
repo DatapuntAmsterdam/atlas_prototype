@@ -1,4 +1,4 @@
-describe('The highlight factory', function () {
+describe('The highlight factory', () => {
     var highlight,
         L,
         crsService,
@@ -73,7 +73,7 @@ describe('The highlight factory', function () {
         areAllClusteredMarkersInViewport,
         projGeoJsonArguments;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -115,7 +115,7 @@ describe('The highlight factory', function () {
                     optimizationLevel: 999
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('ICON_CONFIG', {
                     item_multipolygon: {
                         foo: 'a'
@@ -139,7 +139,15 @@ describe('The highlight factory', function () {
             }
         );
 
-        angular.mock.inject(function (_highlight_, _L_, _crsService_, _crsConverter_, _geojson_, _store_, _ACTIONS_) {
+        angular.mock.inject((
+            _highlight_,
+            _L_,
+            _crsService_,
+            _crsConverter_,
+            _geojson_,
+            _store_,
+            _ACTIONS_
+        ) => {
             highlight = _highlight_;
             L = _L_;
             crsService = _crsService_;
@@ -202,18 +210,18 @@ describe('The highlight factory', function () {
         spyOn(mockedLatLngBounds, 'contains').and.callThrough();
     });
 
-    afterEach(function () {
+    afterEach(() => {
         projGeoJsonArguments = undefined;
     });
 
-    it('has an initialize function to set the Leaflet image path for icons to \'assets\'', function () {
+    it('has an initialize function to set the Leaflet image path for icons to \'assets\'', () => {
         expect(L.Icon.Default.imagePath).not.toBe('assets');
 
         highlight.initialize();
         expect(L.Icon.Default.imagePath).toBe('assets');
     });
 
-    it('can add a MultiPolygons to the map', function () {
+    it('can add a MultiPolygons to the map', () => {
         var item = {
             id: 'item_multipolygon',
             geometry: {
@@ -232,7 +240,7 @@ describe('The highlight factory', function () {
         expect(mockedLeafletMap.addLayer).toHaveBeenCalledWith(mockedLayer);
     });
 
-    it('has custom styling for MultiPolygons', function () {
+    it('has custom styling for MultiPolygons', () => {
         highlight.addMarker(mockedLeafletMap, mockedItems.item_multipolygon);
 
         // In the real world Leaflet calls the style function
@@ -245,7 +253,7 @@ describe('The highlight factory', function () {
         });
     });
 
-    it('can add markers with custom icons to the map', function () {
+    it('can add markers with custom icons to the map', () => {
         var item = {
             id: 'item_marker',
             geometry: {
@@ -270,7 +278,7 @@ describe('The highlight factory', function () {
         expect(mockedLeafletMap.addLayer).toHaveBeenCalledWith(mockedLayer);
     });
 
-    it('can add rotated markers to the map', function () {
+    it('can add rotated markers to the map', () => {
         highlight.addMarker(mockedLeafletMap, mockedItems.item_rotated_marker);
         projGeoJsonArguments[1].pointToLayer(null, 'FAKE_LATLNG'); // In the real world Leaflet calls this function
 
@@ -280,8 +288,8 @@ describe('The highlight factory', function () {
         });
     });
 
-    it('sets the CRS to RD', function () {
-        ['item_multipolygon', 'item_marker', 'item_rotated_marker'].forEach(function (item) {
+    it('sets the CRS to RD', () => {
+        ['item_multipolygon', 'item_marker', 'item_rotated_marker'].forEach(item => {
             highlight.addMarker(mockedLeafletMap, mockedItems[item]);
 
             expect(L.Proj.geoJson).toHaveBeenCalledWith(
@@ -296,8 +304,8 @@ describe('The highlight factory', function () {
         });
     });
 
-    it('can remove highlighted markers from the map', function () {
-        ['item_multipolygon', 'item_marker', 'item_rotated_marker'].forEach(function (item) {
+    it('can remove highlighted markers from the map', () => {
+        ['item_multipolygon', 'item_marker', 'item_rotated_marker'].forEach(item => {
             highlight.addMarker(mockedLeafletMap, mockedItems[item]);
             highlight.removeMarker(mockedLeafletMap, mockedItems[item]);
 
@@ -305,7 +313,7 @@ describe('The highlight factory', function () {
         });
     });
 
-    it('can add clustered markers to the map', function () {
+    it('can add clustered markers to the map', () => {
         spyOn(mockedLeafletMap, 'getZoom').and.returnValue(13);
 
         highlight.setCluster(mockedLeafletMap, [
@@ -380,7 +388,7 @@ describe('The highlight factory', function () {
         expect(store.dispatch).toHaveBeenCalledWith(jasmine.objectContaining({type: ACTIONS.MAP_ZOOM}));
     });
 
-    it('can remove clustered markers from the map', function () {
+    it('can remove clustered markers from the map', () => {
         spyOn(mockedLeafletMap, 'getZoom').and.returnValue(13);
 
         // When there is nothing to delete, nothing happens
@@ -400,7 +408,7 @@ describe('The highlight factory', function () {
         expect(mockedLeafletMap.removeLayer).toHaveBeenCalledWith(mockedClusteredLayer);
     });
 
-    it('can add a new cluster to the map after clearing the old cluster', function () {
+    it('can add a new cluster to the map after clearing the old cluster', () => {
         spyOn(mockedLeafletMap, 'getZoom').and.returnValue(13);
 
         expect(mockedLeafletMap.addLayer).not.toHaveBeenCalled();
@@ -438,8 +446,8 @@ describe('The highlight factory', function () {
         expect(mockedClusteredLayer.addLayer).toHaveBeenCalledTimes(2);
     });
 
-    describe('triggers MAP_ZOOM when geometry has been found (center and zoom)', function () {
-        it('Points do center automatically but use a default zoom level', function () {
+    describe('triggers MAP_ZOOM when geometry has been found (center and zoom)', () => {
+        it('Points do center automatically but use a default zoom level', () => {
             spyOn(mockedLeafletMap, 'getBoundsZoom').and.returnValue(NaN);
             spyOn(mockedLeafletMap, 'getZoom').and.returnValue(13);
 
@@ -456,7 +464,7 @@ describe('The highlight factory', function () {
             });
         });
 
-        it('Points will not zoom out when viewing with a zoom level larger than 14', function () {
+        it('Points will not zoom out when viewing with a zoom level larger than 14', () => {
             spyOn(mockedLeafletMap, 'getBoundsZoom').and.returnValue(NaN);
             spyOn(mockedLeafletMap, 'getZoom').and.returnValue(15);
 
@@ -473,7 +481,7 @@ describe('The highlight factory', function () {
             });
         });
 
-        it('Polygons support autozoom and auto center (without animation)', function () {
+        it('Polygons support autozoom and auto center (without animation)', () => {
             spyOn(mockedLeafletMap, 'getBoundsZoom').and.returnValue(10);
 
             highlight.addMarker(mockedLeafletMap, mockedItems.item_polygon);
@@ -488,7 +496,7 @@ describe('The highlight factory', function () {
             });
         });
 
-        it('MultiPolygons support autozoom and auto center (without animation)', function () {
+        it('MultiPolygons support autozoom and auto center (without animation)', () => {
             spyOn(mockedLeafletMap, 'getBoundsZoom').and.returnValue(10);
 
             highlight.addMarker(mockedLeafletMap, mockedItems.item_multipolygon);

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -32,4 +32,4 @@
 
         return angular.merge(globalConfig, environmentConfig[environment.NAME]);
     }
-})();
+}))();

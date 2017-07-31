@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -24,4 +24,4 @@
             return result;
         }, {});
     }
-})();
+}))();

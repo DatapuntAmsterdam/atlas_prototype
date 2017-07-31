@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -9,4 +9,4 @@
                 heading: 226
             }
         });
-})();
+}))();

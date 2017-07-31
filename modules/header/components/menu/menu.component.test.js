@@ -22,9 +22,7 @@ describe('The dp-menu component', () => {
             },
             $provide => {
                 $provide.constant('ACTIONS', mockedActions);
-                $provide.factory('dpMenuDropdownDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpMenuDropdownDirective', () => ({}));
             }
         );
 
@@ -87,7 +85,7 @@ describe('The dp-menu component', () => {
             expect(component.find('.qa-menu__user-menu').length).toBe(1);
         });
 
-        it('removes the domain name for a logged-in user', function () {
+        it('removes the domain name for a logged-in user', () => {
             spyOn(user, 'getName').and.returnValue('user@xyz.com');
             spyOn(user, 'getAuthorizationLevel').and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE);
 
@@ -96,7 +94,7 @@ describe('The dp-menu component', () => {
             expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('user');
         });
 
-        it('can show that a user is a normal employee', function () {
+        it('can show that a user is a normal employee', () => {
             spyOn(user, 'getName').and.returnValue('user');
             spyOn(user, 'getAuthorizationLevel').and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE);
 
@@ -105,7 +103,7 @@ describe('The dp-menu component', () => {
             expect(component.find('dp-menu-dropdown').eq(0).attr('title')).toBe('user');
         });
 
-        it('can show that a user is a bevoegd employee', function () {
+        it('can show that a user is a bevoegd employee', () => {
             spyOn(user, 'getName').and.returnValue('user');
             spyOn(user, 'getAuthorizationLevel').and.returnValue(user.AUTHORIZATION_LEVEL.EMPLOYEE_PLUS);
 

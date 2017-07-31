@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -22,9 +22,7 @@
         vm.overlayLabel = overlays.SOURCES[vm.overlay].label_short;
         vm.hasLegend = angular.isString(overlays.SOURCES[vm.overlay].legend);
 
-        $scope.$watchCollection(function () {
-            return [vm.isVisible, vm.zoom];
-        }, updateVisibility);
+        $scope.$watchCollection(() => [vm.isVisible, vm.zoom], updateVisibility);
 
         function updateVisibility () {
             vm.isOverlayVisible = vm.isVisible && isVisibleAtCurrentZoom(vm.overlay, vm.zoom);
@@ -63,4 +61,4 @@
             return zoom >= overlays.SOURCES[overlay].minZoom && zoom <= overlays.SOURCES[overlay].maxZoom;
         }
     }
-})();
+}))();

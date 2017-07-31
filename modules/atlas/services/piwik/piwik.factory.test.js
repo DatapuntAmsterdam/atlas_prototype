@@ -1,9 +1,9 @@
-describe('The piwik service', function () {
+describe('The piwik service', () => {
     var $window,
         $document,
         piwik;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -11,7 +11,7 @@ describe('The piwik service', function () {
                     NAME: 'DEVELOPMENT'
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('PIWIK_CONFIG', {
                     PRODUCTION: {
                         SITE_ID: 100
@@ -23,14 +23,14 @@ describe('The piwik service', function () {
             }
         );
 
-        angular.mock.inject(function (_$window_, _$document_, _piwik_) {
+        angular.mock.inject((_$window_, _$document_, _piwik_) => {
             $window = _$window_;
             $document = _$document_;
             piwik = _piwik_;
         });
     });
 
-    it('inserts a script tag into the DOM', function () {
+    it('inserts a script tag into the DOM', () => {
         var numberOfScripts,
             piwikScript;
 

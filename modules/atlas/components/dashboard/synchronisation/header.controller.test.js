@@ -1,11 +1,11 @@
-describe('The header controller', function () {
+describe('The header controller', () => {
     var $controller,
         $rootScope,
         store,
         ACTIONS,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -20,7 +20,7 @@ describe('The header controller', function () {
             }
         );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$controller_, _$rootScope_, _store_, _ACTIONS_) => {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -49,7 +49,7 @@ describe('The header controller', function () {
         return controller;
     }
 
-    it('subscribes to the store to listen for changes', function () {
+    it('subscribes to the store to listen for changes', () => {
         spyOn(store, 'subscribe').and.callThrough();
 
         getController();
@@ -57,7 +57,7 @@ describe('The header controller', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the search query and action when search is active', function () {
+    it('sets the search query and action when search is active', () => {
         spyOn(store, 'getState').and.returnValue({
             search: {
                 query: 'search query'
@@ -70,7 +70,7 @@ describe('The header controller', function () {
         expect(controller.searchAction).toEqual(ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY);
     });
 
-    it('sets the dataSelection query and action when datasets are active', function () {
+    it('sets the dataSelection query and action when datasets are active', () => {
         spyOn(store, 'getState').and.returnValue({
             dataSelection: {
                 view: 'CARDS',
@@ -84,7 +84,7 @@ describe('The header controller', function () {
         expect(controller.searchAction).toEqual(ACTIONS.FETCH_DATA_SELECTION);
     });
 
-    it('sets the dataSelection query and action when detail API view is active', function () {
+    it('sets the dataSelection query and action when detail API view is active', () => {
         spyOn(store, 'getState').and.returnValue({
             detail: {
                 endpoint: 'somewhere://abc/catalogus/api/xyz'
@@ -97,7 +97,7 @@ describe('The header controller', function () {
         expect(controller.searchAction).toEqual(ACTIONS.FETCH_DATA_SELECTION);
     });
 
-    it('default sets the search query and search action', function () {
+    it('default sets the search query and search action', () => {
         spyOn(store, 'getState').and.returnValue({});
 
         const controller = getController();
@@ -106,7 +106,7 @@ describe('The header controller', function () {
         expect(controller.searchAction).toEqual(ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY);
     });
 
-    it('doesn\'t break when search is null', function () {
+    it('doesn\'t break when search is null', () => {
         mockedState = {
             search: null
         };
@@ -118,8 +118,8 @@ describe('The header controller', function () {
         expect(controller.query).toBeNull();
     });
 
-    describe('not all states have a print version', function () {
-        it('there is no print button when dataSelection is active', function () {
+    describe('not all states have a print version', () => {
+        it('there is no print button when dataSelection is active', () => {
             mockedState.dataSelection = {};
 
             spyOn(store, 'getState').and.returnValue(mockedState);
@@ -139,7 +139,7 @@ describe('The header controller', function () {
             expect(controller.hasPrintButton).toBe(false);
         });
 
-        it('all other pages and non dataSelection content has a printButton', function () {
+        it('all other pages and non dataSelection content has a printButton', () => {
             mockedState.page = {
                 name: 'snel-wegwijs'
             };
@@ -151,8 +151,8 @@ describe('The header controller', function () {
         });
     });
 
-    describe('not all states have an embed version', function () {
-        it('only in fullscreen map there is an embed button', function () {
+    describe('not all states have an embed version', () => {
+        it('only in fullscreen map there is an embed button', () => {
             mockedState.map.isFullscreen = true;
 
             mockedState.page = {
@@ -165,7 +165,7 @@ describe('The header controller', function () {
             expect(controller.hasEmbedButton).toBe(true);
         });
 
-        it('there is no embed button when both full screen map and straatbeeld are active', function () {
+        it('there is no embed button when both full screen map and straatbeeld are active', () => {
             mockedState.map.isFullscreen = true;
             mockedState.straatbeeld = {};
 

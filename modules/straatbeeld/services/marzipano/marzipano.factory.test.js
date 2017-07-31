@@ -1,4 +1,4 @@
-describe('The marzipanoService factory', function () {
+describe('The marzipanoService factory', () => {
     var $rootScope,
         $q,
         Marzipano,
@@ -10,7 +10,7 @@ describe('The marzipanoService factory', function () {
         fakeHotspotContainer,
         fakeScene;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
             {
@@ -29,7 +29,7 @@ describe('The marzipanoService factory', function () {
                     }
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('STRAATBEELD_CONFIG', {
                     MAX_RESOLUTION: 1000,
                     MAX_FOV: 100,
@@ -40,7 +40,7 @@ describe('The marzipanoService factory', function () {
         );
 
         angular.mock.inject(
-            function (_$rootScope_, _$q_, _Marzipano_, _marzipanoService_, _hotspotService_) {
+            (_$rootScope_, _$q_, _Marzipano_, _marzipanoService_, _hotspotService_) => {
                 $rootScope = _$rootScope_;
                 $q = _$q_;
                 Marzipano = _Marzipano_;
@@ -89,7 +89,7 @@ describe('The marzipanoService factory', function () {
         spyOn(fakeHotspotContainer, 'createHotspot');
     });
 
-    it('creates a Marzipano viewer instance when initializing', function () {
+    it('creates a Marzipano viewer instance when initializing', () => {
         var fakeDomElement,
             viewer;
 
@@ -100,7 +100,7 @@ describe('The marzipanoService factory', function () {
         expect(viewer).toEqual(fakeViewer);
     });
 
-    it('uses the extra settings to enable print in Firefox and Safari', function () {
+    it('uses the extra settings to enable print in Firefox and Safari', () => {
         var fakeDomElement;
 
         fakeDomElement = document.createElement('div');
@@ -122,13 +122,13 @@ describe('The marzipanoService factory', function () {
         }));
     });
 
-    describe('it has a loadScene function', function () {
-        beforeEach(function () {
+    describe('it has a loadScene function', () => {
+        beforeEach(() => {
             var domElement = document.createElement('div');
             marzipanoService.initialize(domElement);
         });
 
-        it('that, ehm, loads a scene', function () {
+        it('that, ehm, loads a scene', () => {
             marzipanoService.loadScene(
                 {
                     pattern: 'http://api.example.com/path/{x}/{y}/{z}.jpg',
@@ -163,7 +163,7 @@ describe('The marzipanoService factory', function () {
             expect(fakeScene.switchTo).toHaveBeenCalled();
         });
 
-        it('which adds hotspots to the scene', function () {
+        it('which adds hotspots to the scene', () => {
             var mockedHotspots = [
                 {
                     id: 'ABC',

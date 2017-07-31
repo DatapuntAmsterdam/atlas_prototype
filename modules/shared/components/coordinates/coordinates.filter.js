@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -13,7 +13,7 @@
          *
          * @returns {String} - A formatted string with RD and lat/lon coordinates "X, Y (lat, lon)"
          */
-        return function (location, type) {
+        return (location, type) => {
             let wgs84Location,
                 rdLocation;
 
@@ -31,15 +31,11 @@
                 return;
             }
 
-            const formattedWgs84Location = wgs84Location.map(function (coordinate) {
-                return coordinate.toFixed(7);
-            }).join(', ');
+            const formattedWgs84Location = wgs84Location.map(coordinate => coordinate.toFixed(7)).join(', ');
 
-            const formattedRdLocation = rdLocation.map(function (coordinate) {
-                return coordinate.toFixed(2);
-            }).join(', ');
+            const formattedRdLocation = rdLocation.map(coordinate => coordinate.toFixed(2)).join(', ');
 
             return formattedRdLocation + ' (' + formattedWgs84Location + ')';
         };
     }
-})();
+}))();

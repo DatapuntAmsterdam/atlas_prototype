@@ -1,18 +1,18 @@
-describe('The state url conversion factory', function () {
+describe('The state url conversion factory', () => {
     let stateUrlConverter,
         DRAW_TOOL_CONFIG;
 
-    describe('The default state', function () {
-        beforeEach(function () {
+    describe('The default state', () => {
+        beforeEach(() => {
             angular.mock.module('atlas');
 
-            angular.mock.inject(function (_stateUrlConverter_, _DRAW_TOOL_CONFIG_) {
+            angular.mock.inject((_stateUrlConverter_, _DRAW_TOOL_CONFIG_) => {
                 stateUrlConverter = _stateUrlConverter_;
                 DRAW_TOOL_CONFIG = _DRAW_TOOL_CONFIG_;
             });
         });
 
-        it('is exported as DEFAULT_STATE', function () {
+        it('is exported as DEFAULT_STATE', () => {
             const DEFAULT_STATE = stateUrlConverter.getDefaultState();
 
             expect(DEFAULT_STATE).toEqual({
@@ -45,10 +45,10 @@ describe('The state url conversion factory', function () {
         });
     });
 
-    describe('the translation methods', function () {
+    describe('the translation methods', () => {
         let mockedStateUrlConversion;
 
-        beforeEach(function () {
+        beforeEach(() => {
             mockedStateUrlConversion = {
                 onCreate: {},
                 post: {},
@@ -114,27 +114,27 @@ describe('The state url conversion factory', function () {
             };
 
             angular.mock.module('atlas',
-                function ($provide) {
+                $provide => {
                     $provide.constant('STATE_URL_CONVERSION', mockedStateUrlConversion);
                 }
             );
 
-            angular.mock.inject(function (_STATE_URL_CONVERSION_, _stateUrlConverter_) {
+            angular.mock.inject((_STATE_URL_CONVERSION_, _stateUrlConverter_) => {
                 stateUrlConverter = _stateUrlConverter_;
             });
         });
 
-        describe('The state to params translation', function () {
-            beforeEach(function () {
+        describe('The state to params translation', () => {
+            beforeEach(() => {
 
             });
 
-            it('translates an empty state to empty params', function () {
+            it('translates an empty state to empty params', () => {
                 const params = stateUrlConverter.state2params({});
                 expect(params).toEqual({});
             });
 
-            it('translates a state to the corresponding params', function () {
+            it('translates a state to the corresponding params', () => {
                 const params = stateUrlConverter.state2params({
                     s: 'aap',
                     x: {
@@ -170,7 +170,7 @@ describe('The state url conversion factory', function () {
                 });
             });
 
-            it('skips empty values for strings and arrays', function () {
+            it('skips empty values for strings and arrays', () => {
                 const params = stateUrlConverter.state2params({
                     s: '',
                     as: []
@@ -179,14 +179,14 @@ describe('The state url conversion factory', function () {
                 expect(params).toEqual({});
             });
 
-            it('can handle key values with empty values', function () {
+            it('can handle key values with empty values', () => {
                 const params = stateUrlConverter.state2params({
                     kv: { aap: '' }
                 });
                 expect(params).toEqual({kv: 'aap::'});
             });
 
-            it('skips values of unknown type', function () {
+            it('skips values of unknown type', () => {
                 mockedStateUrlConversion.stateVariables.s.type = 'string1';
                 const params = stateUrlConverter.state2params({
                     s: 'aap'
@@ -196,8 +196,8 @@ describe('The state url conversion factory', function () {
             });
         });
 
-        describe('The state to url string', function () {
-            it('returns a url string for the converted state', function () {
+        describe('The state to url string', () => {
+            it('returns a url string for the converted state', () => {
                 const mockedState = {
                     s: 'aap',
                     x: {
@@ -208,7 +208,7 @@ describe('The state url conversion factory', function () {
                 expect(link).toEqual('#?s=aap&b=T');
             });
 
-            it('skips any null values in the state', function () {
+            it('skips any null values in the state', () => {
                 const mockedState = {
                     s: null,
                     x: {
@@ -230,13 +230,13 @@ describe('The state url conversion factory', function () {
             });
         });
 
-        describe('The params to state translation', function () {
-            it('translates empty params to an empty state', function () {
+        describe('The params to state translation', () => {
+            it('translates empty params to an empty state', () => {
                 const state = stateUrlConverter.params2state({}, {});
                 expect(state).toEqual({});
             });
 
-            it('translates params to the corresponding state', function () {
+            it('translates params to the corresponding state', () => {
                 const state = stateUrlConverter.params2state({}, {
                     s: 'aap',
                     b: 'T',
@@ -284,7 +284,7 @@ describe('The state url conversion factory', function () {
                 });
             });
 
-            it('can translate keyvalues with empty values', function () {
+            it('can translate keyvalues with empty values', () => {
                 const state = stateUrlConverter.params2state({}, {
                     kv: 'aap::'
                 });
@@ -294,7 +294,7 @@ describe('The state url conversion factory', function () {
                 });
             });
 
-            it('can use initialValues to initialize a state object', function () {
+            it('can use initialValues to initialize a state object', () => {
                 mockedStateUrlConversion.initialValues = {
                     x: {
                         aap: 'noot'
@@ -310,7 +310,7 @@ describe('The state url conversion factory', function () {
                 });
             });
 
-            it('uses DEFAULT initialValues to denote the main part of the state object', function () {
+            it('uses DEFAULT initialValues to denote the main part of the state object', () => {
                 mockedStateUrlConversion.initialValues = {
                     DEFAULT: {
                         aap: 'noot'
@@ -323,7 +323,7 @@ describe('The state url conversion factory', function () {
                 });
             });
 
-            it('initializes non-used initialValues to null', function () {
+            it('initializes non-used initialValues to null', () => {
                 mockedStateUrlConversion.initialValues = {
                     xyz: {
                         mies: 'teun'
@@ -336,7 +336,7 @@ describe('The state url conversion factory', function () {
                 });
             });
 
-            it('can use a onCreate method to inialize a state object', function () {
+            it('can use a onCreate method to inialize a state object', () => {
                 mockedStateUrlConversion.onCreate = {
                     x: (oldState, newState) => {
                         newState.mies = oldState.aap + ', ' + newState.aap;
@@ -364,7 +364,7 @@ describe('The state url conversion factory', function () {
                 });
             });
 
-            it('supplies the payload to a onCreate method for the main state object', function () {
+            it('supplies the payload to a onCreate method for the main state object', () => {
                 mockedStateUrlConversion.onCreate = {
                     DEFAULT: (oldState, newState, params) => {
                         newState.mies = oldState.aap + ', ' + newState.aap + ', ' + params.s;
@@ -387,7 +387,7 @@ describe('The state url conversion factory', function () {
                 });
             });
 
-            it('can use a post method to post process a state when all conversion has finished', function () {
+            it('can use a post method to post process a state when all conversion has finished', () => {
                 let onlyPostForStates = true;
                 mockedStateUrlConversion.post = {
                     x: (oldState, newState) => {
@@ -420,13 +420,13 @@ describe('The state url conversion factory', function () {
                 expect(onlyPostForStates).toBe(true);
             });
 
-            it('skips values of unknown type', function () {
+            it('skips values of unknown type', () => {
                 mockedStateUrlConversion.stateVariables.s.type = 'string1';
                 const state = stateUrlConverter.params2state({}, {s: 'mies'});
                 expect(state).toEqual({});
             });
 
-            it('restores empty values for multidimensional arrays', function () {
+            it('restores empty values for multidimensional arrays', () => {
                 const state = stateUrlConverter.params2state({}, {
                     aab: 'T::F'
                 });

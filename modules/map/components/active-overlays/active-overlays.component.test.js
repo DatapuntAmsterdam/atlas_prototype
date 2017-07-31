@@ -1,4 +1,4 @@
-describe('The dp-active-overlays component', function () {
+describe('The dp-active-overlays component', () => {
     var $compile,
         $rootScope,
         store,
@@ -6,7 +6,7 @@ describe('The dp-active-overlays component', function () {
         allOverlays,
         user;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -29,14 +29,12 @@ describe('The dp-active-overlays component', function () {
                     getAuthorizationLevel: angular.noop
                 }
             },
-            function ($provide) {
-                $provide.factory('dpActiveOverlaysItemDirective', function () {
-                    return {};
-                });
+            $provide => {
+                $provide.factory('dpActiveOverlaysItemDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_, _overlays_, _user_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_, _overlays_, _user_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -69,7 +67,7 @@ describe('The dp-active-overlays component', function () {
         return component;
     }
 
-    it('doesn\'t show anything if there are no active overlays', function () {
+    it('doesn\'t show anything if there are no active overlays', () => {
         var component;
 
         // Without any overlays
@@ -81,7 +79,7 @@ describe('The dp-active-overlays component', function () {
         expect(component.find('.c-active-overlays').length).toBe(1);
     });
 
-    it('re-computes the overlays when the user authorization level changes', function () {
+    it('re-computes the overlays when the user authorization level changes', () => {
         spyOn(user, 'getAuthorizationLevel').and.returnValue(1);
 
         const component = getComponent([{id: 'overlay_a', isVisible: true}], 8, true);
@@ -96,7 +94,7 @@ describe('The dp-active-overlays component', function () {
         expect(scope.vm.validOverlays.length).toBe(0);
     });
 
-    it('loads the dp-active-overlays-item components in reversed order', function () {
+    it('loads the dp-active-overlays-item components in reversed order', () => {
         var component;
 
         component = getComponent(
@@ -109,10 +107,10 @@ describe('The dp-active-overlays component', function () {
         expect(component.find('dp-active-overlays-item').eq(1).attr('overlay')).toBe('overlay_a');
     });
 
-    describe('there is a close icon in the active overlays panel', function () {
+    describe('there is a close icon in the active overlays panel', () => {
         var component;
 
-        beforeEach(function () {
+        beforeEach(() => {
             component = getComponent(
                 [{id: 'overlay_a', isVisible: true}, {id: 'overlay_b', isVisible: true}],
                 10,
@@ -120,7 +118,7 @@ describe('The dp-active-overlays component', function () {
             );
         });
 
-        it('triggers HIDE_MAP_ACTIVE_OVERLAYS when clicked', function () {
+        it('triggers HIDE_MAP_ACTIVE_OVERLAYS when clicked', () => {
             component.find('.c-active-overlays__close').click();
 
             expect(store.dispatch).toHaveBeenCalledWith({
@@ -128,7 +126,7 @@ describe('The dp-active-overlays component', function () {
             });
         });
 
-        it('has a title attribute and screen reader text fallback', function () {
+        it('has a title attribute and screen reader text fallback', () => {
             expect(component.find('.c-active-overlays__close').attr('title')).toBe('Sluiten');
             expect(component.find('.c-active-overlays__close .u-sr-only').text()).toContain('Sluiten');
         });

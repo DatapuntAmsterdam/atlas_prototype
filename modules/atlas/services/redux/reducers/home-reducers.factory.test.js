@@ -1,4 +1,4 @@
-describe('The homeReducers factory', function () {
+describe('The homeReducers factory', () => {
     var homeReducers,
         DEFAULT_STATE,
         mockedStates = [],
@@ -7,10 +7,10 @@ describe('The homeReducers factory', function () {
         mockedDetailState,
         mockedStraatbeeldState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_homeReducers_, _stateUrlConverter_) {
+        angular.mock.inject((_homeReducers_, _stateUrlConverter_) => {
             homeReducers = _homeReducers_;
             DEFAULT_STATE = _stateUrlConverter_.getDefaultState();
         });
@@ -69,15 +69,15 @@ describe('The homeReducers factory', function () {
         );
     });
 
-    describe('SHOW_HOME', function () {
-        it('resets the state to the default', function () {
-            mockedStates.forEach(function (inputState) {
+    describe('SHOW_HOME', () => {
+        it('resets the state to the default', () => {
+            mockedStates.forEach(inputState => {
                 expect(homeReducers.SHOW_HOME(inputState)).toEqual(DEFAULT_STATE);
             });
         });
 
-        it('keeps the isPrintMode setting', function () {
-            mockedStates.forEach(function (inputState) {
+        it('keeps the isPrintMode setting', () => {
+            mockedStates.forEach(inputState => {
                 inputState.atlas.isPrintMode = true;
                 expect(homeReducers.SHOW_HOME(inputState).atlas.isPrintMode).toBe(true);
 
@@ -86,8 +86,8 @@ describe('The homeReducers factory', function () {
             });
         });
 
-        it('keeps the isEmbedPreview setting', function () {
-            mockedStates.forEach(function (inputState) {
+        it('keeps the isEmbedPreview setting', () => {
+            mockedStates.forEach(inputState => {
                 inputState.atlas.isEmbedPreview = true;
                 expect(homeReducers.SHOW_HOME(inputState).atlas.isEmbedPreview).toBe(true);
 

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpDetail')
         .component('dpDetail', {
@@ -72,7 +72,7 @@
                 vm.isLoading = false;
                 delete vm.apiData;
             } else {
-                api.getByUrl(endpoint).then(function (data) {
+                api.getByUrl(endpoint).then(data => {
                     data = dataFormatter.formatData(data, subject);
 
                     vm.apiData = {
@@ -89,7 +89,7 @@
                         [subject]: vm.apiData.results.naam
                     };
 
-                    geometry.getGeoJSON(endpoint).then(function (geoJSON) {
+                    geometry.getGeoJSON(endpoint).then(geoJSON => {
                         if (geoJSON !== null) {
                             vm.location = crsConverter.rdToWgs84(geojson.getCenter(geoJSON));
                         }
@@ -114,4 +114,4 @@
             });
         }
     }
-})();
+}))();

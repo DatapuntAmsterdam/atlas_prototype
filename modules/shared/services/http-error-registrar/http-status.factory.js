@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -51,4 +51,4 @@
             return object;
         }
     }
-})();
+}))();

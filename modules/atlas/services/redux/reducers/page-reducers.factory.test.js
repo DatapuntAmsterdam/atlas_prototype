@@ -1,8 +1,8 @@
-describe('The pageReducers factory', function () {
+describe('The pageReducers factory', () => {
     var pageReducers,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         const DEFAULT_STATE = {
             map: {
                 baseLayer: 'topografie',
@@ -30,16 +30,16 @@ describe('The pageReducers factory', function () {
 
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_pageReducers_) {
+        angular.mock.inject(_pageReducers_ => {
             pageReducers = _pageReducers_;
             mockedState = angular.copy(DEFAULT_STATE);
         });
     });
 
-    describe('SHOW_PAGE', function () {
+    describe('SHOW_PAGE', () => {
         var output;
 
-        it('sets page name', function () {
+        it('sets page name', () => {
             output = pageReducers.SHOW_PAGE(mockedState, {name: 'welcome'});
             expect(output.page.name).toBe('welcome');
 
@@ -47,7 +47,7 @@ describe('The pageReducers factory', function () {
             expect(output.page.name).toBe('goodbye');
         });
 
-        it('disables the layer selection, search, detail, straatbeeld and dataSelection', function () {
+        it('disables the layer selection, search, detail, straatbeeld and dataSelection', () => {
             mockedState.search = {
                 query: 'SOME_QUERY',
                 location: null
@@ -79,7 +79,7 @@ describe('The pageReducers factory', function () {
             expect(output.dataSelection).toBeNull();
         });
 
-        it('disables the full screen mode of the map', function () {
+        it('disables the full screen mode of the map', () => {
             mockedState.map.isFullscreen = true;
 
             output = pageReducers.SHOW_PAGE(mockedState, {name: 'goodbye'});

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     angular
         .module('dpSearchResults')
         .factory('geosearchFormatter', geosearchFormatterFactory);
@@ -12,26 +12,18 @@
 
         function format (allSearchResults) {
             var allFeaturesFlattened = allSearchResults
-                .map(function (searchResult) {
-                    return searchResult.features.map(function (feature) {
-                        return feature.properties;
-                    });
-                })
-                .reduce(function (previous, current) {
-                    return previous.concat(current);
-                }, []);
+                .map(searchResult => searchResult.features.map(feature => feature.properties))
+                .reduce((previous, current) => previous.concat(current), []);
 
             return SEARCH_CONFIG.COORDINATES_HIERARCHY
-                .map(function (rawCategory) {
+                .map(rawCategory => {
                     var formattedCategory = {
                         slug: rawCategory.slug || null,
                         label_singular: rawCategory.label_singular,
                         label_plural: rawCategory.label_plural,
                         results: allFeaturesFlattened
-                            .filter(function (feature) {
-                                return rawCategory.features.indexOf(feature.type) !== -1;
-                            })
-                            .sort(function (featureA, featureB) {
+                            .filter(feature => rawCategory.features.indexOf(feature.type) !== -1)
+                            .sort((featureA, featureB) => {
                                 var indexA,
                                     indexB;
 
@@ -40,7 +32,7 @@
 
                                 return indexA - indexB;
                             })
-                            .map(function (feature) {
+                            .map(feature => {
                                 let subtype = null,
                                     subtypeLabel;
 
@@ -77,10 +69,8 @@
 
                     return formattedCategory;
                 })
-                .filter(function (category) {
-                    // Remove empty categories
-                    return category.count > 0;
-                });
+                .filter(category => // Remove empty categories
+            category.count > 0);
         }
     }
-})();
+}))();

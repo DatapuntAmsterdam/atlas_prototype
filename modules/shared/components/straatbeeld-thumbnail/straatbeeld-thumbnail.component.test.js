@@ -1,4 +1,4 @@
-describe('The dp-straatbeeld-thumbnail component', function () {
+describe('The dp-straatbeeld-thumbnail component', () => {
     var $compile,
         $rootScope,
         store,
@@ -9,7 +9,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
         response,
         finishApiCall;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpShared',
             {
@@ -22,7 +22,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
                     getByUrl: function () {
                         var q = $q.defer();
 
-                        finishApiCall = function () {
+                        finishApiCall = () => {
                             if (httpStatus && httpStatus !== 200) {
                                 response = {
                                     status: httpStatus
@@ -50,18 +50,14 @@ describe('The dp-straatbeeld-thumbnail component', function () {
                     RADIUS: 50,
                     THUMBNAIL_WIDTH: 240
                 }
-            }, function ($provide) {
-                $provide.factory('dpLoadingIndicatorDirective', function () {
-                    return {};
-                });
+            }, $provide => {
+                $provide.factory('dpLoadingIndicatorDirective', () => ({}));
 
-                $provide.factory('dpLinkDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpLinkDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _$q_, _api_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _$q_, _api_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -95,7 +91,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
         return component;
     }
 
-    it('when it cannot find a thumbnail it shows a message', function () {
+    it('when it cannot find a thumbnail it shows a message', () => {
         hasMockedThumbnail = false;
         var component = getComponent([52, 4]);
         var scope = component.isolateScope();
@@ -115,7 +111,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
             );
     });
 
-    it('shows a message when the response is a 404 not found', function () {
+    it('shows a message when the response is a 404 not found', () => {
         httpStatus = 404;
         var component = getComponent([52, 4]);
         var scope = component.isolateScope();
@@ -137,7 +133,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
             );
     });
 
-    it('does not mark error handled when status is neither 200 nor 404', function () {
+    it('does not mark error handled when status is neither 200 nor 404', () => {
         httpStatus = 500;
         var component = getComponent([52, 4]);
         var scope = component.isolateScope();
@@ -159,7 +155,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
             );
     });
 
-    it('waits for a valid location to be present', function () {
+    it('waits for a valid location to be present', () => {
         hasMockedThumbnail = true;
         var component = getComponent();
         var scope = component.isolateScope();
@@ -184,7 +180,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
         expect(scope.vm.isLoading).toBe(false);
     });
 
-    it('shows a thumbnail when thumbnail is found', function () {
+    it('shows a thumbnail when thumbnail is found', () => {
         hasMockedThumbnail = true;
         var component = getComponent([52, 4]);
         var scope = component.isolateScope();
@@ -196,7 +192,7 @@ describe('The dp-straatbeeld-thumbnail component', function () {
         expect(scope.vm.isLoading).toBe(false);
     });
 
-    it('shows a loading indicator when loading', function () {
+    it('shows a loading indicator when loading', () => {
         var component = getComponent([52, 4]);
         var scope = component.isolateScope();
         expect(component.find('dp-loading-indicator').length).toBe(1);

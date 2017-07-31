@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -22,4 +22,4 @@
 
         vm.showMetaInfo = () => angular.isDate(vm.date) && angular.isArray(vm.location);
     }
-})();
+}))();

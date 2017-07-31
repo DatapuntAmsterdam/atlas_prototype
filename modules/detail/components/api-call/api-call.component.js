@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -23,7 +23,7 @@
         vm.isLoading = true;
         vm.useLoadingIndicatorDelay = false;
 
-        $scope.$watch('vm.endpoint', function (endpoint) {
+        $scope.$watch('vm.endpoint', endpoint => {
             if (endpoint) {
                 if (vm.useBrkObjectExpanded) {
                     endpoint = endpoint.replace('brk/object', 'brk/object-expand');
@@ -36,7 +36,7 @@
                 loadData(endpoint, vm.addApiRoot);
 
                 // Load pages 2-n
-                vm.loadMore = function () {
+                vm.loadMore = () => {
                     vm.isLoading = true;
 
                     loadData(vm.apiData.next);
@@ -46,7 +46,7 @@
 
         function loadData (endpoint, addApiRoot) {
             var callEndpointFn = addApiRoot ? api.getByUri : api.getByUrl;
-            callEndpointFn(endpoint).then(function (response) {
+            callEndpointFn(endpoint).then(response => {
                 var hasPagination = angular.isArray(response.results);
 
                 if (hasPagination) {
@@ -66,4 +66,4 @@
             });
         }
     }
-})();
+}))();

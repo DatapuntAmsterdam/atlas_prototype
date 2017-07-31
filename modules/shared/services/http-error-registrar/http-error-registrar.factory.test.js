@@ -1,4 +1,4 @@
-describe('The http error registrar', function () {
+describe('The http error registrar', () => {
     const FLUSH_PERIOD = 1,
         httpStatus = {
             SERVER_ERROR: 'SERVER_ERROR',
@@ -13,7 +13,7 @@ describe('The http error registrar', function () {
         onError,
         callbackCalled;
 
-    beforeEach(function () {
+    beforeEach(() => {
         onError = null;
         const window = {
             addEventListener: function (type, func) {
@@ -25,11 +25,11 @@ describe('The http error registrar', function () {
 
         angular.mock.module('dpShared', { httpStatus });
 
-        angular.mock.module(function ($provide) {
+        angular.mock.module($provide => {
             $provide.value('$window', window);
         });
 
-        angular.mock.inject(function (_$httpBackend_, _$http_, _$rootScope_, _$interval_) {
+        angular.mock.inject((_$httpBackend_, _$http_, _$rootScope_, _$interval_) => {
             $httpBackend = _$httpBackend_;
             $http = _$http_;
             $rootScope = _$rootScope_;
@@ -64,7 +64,7 @@ describe('The http error registrar', function () {
         spyOn(httpStatus, 'registerError');
     });
 
-    it('does not handle normal responses and requests', function () {
+    it('does not handle normal responses and requests', () => {
         $http
             .get('http://api-domain.amsterdam.nl/200')
             .then(data => {
@@ -80,7 +80,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('does not handle response errors outside of the 400 and 500 ranges', function () {
+    it('does not handle response errors outside of the 400 and 500 ranges', () => {
         $http
             .get('http://api-domain.amsterdam.nl/300')
             .catch(data => {
@@ -96,7 +96,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('does handle client error responses and requests', function () {
+    it('does handle client error responses and requests', () => {
         $http
             .get('http://api-domain.amsterdam.nl/400')
             .catch(data => {
@@ -112,7 +112,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('does handle 404 errors with the correct body', function () {
+    it('does handle 404 errors with the correct body', () => {
         mockedData = {
             detail: 'Not found.'
         };
@@ -136,7 +136,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('handles 404 errors with an unexpected body as server errors', function () {
+    it('handles 404 errors with an unexpected body as server errors', () => {
         mockedData = {};
 
         $httpBackend
@@ -158,7 +158,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('registers all http server error responses, leaves content untouched', function () {
+    it('registers all http server error responses, leaves content untouched', () => {
         $http
             .get('http://api-domain.amsterdam.nl/500')
             .catch(data => {
@@ -174,7 +174,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('registers url load errors by listening to window error events', function () {
+    it('registers url load errors by listening to window error events', () => {
         // onError is the window error event listener (see mock of $window)
         // If called with an event that contains a target src url it will issue a server error
 
@@ -190,7 +190,7 @@ describe('The http error registrar', function () {
         expect(httpStatus.registerError).toHaveBeenCalledWith(httpStatus.SERVER_ERROR);
     });
 
-    it('does not register error if piwik is not loaded', function () {
+    it('does not register error if piwik is not loaded', () => {
         onError({
             target: {
                 src: 'https://piwik.data.amsterdam.nl/piwik.js'
@@ -199,7 +199,7 @@ describe('The http error registrar', function () {
         expect(httpStatus.registerError).not.toHaveBeenCalledWith(httpStatus.SERVER_ERROR);
     });
 
-    it('registers http server error -1 for non-cancellable responses, leaves content untouched', function () {
+    it('registers http server error -1 for non-cancellable responses, leaves content untouched', () => {
         $http({
             method: 'GET',
             url: 'http://api-domain.amsterdam.nl/-1'
@@ -216,7 +216,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('registers http server error -1 for non-cancelled responses, leaves content untouched', function () {
+    it('registers http server error -1 for non-cancelled responses, leaves content untouched', () => {
         $http({
             method: 'GET',
             url: 'http://api-domain.amsterdam.nl/-1',
@@ -240,7 +240,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('skips http server error -1 for cancelled responses, leaves content untouched', function () {
+    it('skips http server error -1 for cancelled responses, leaves content untouched', () => {
         $http({
             method: 'GET',
             url: 'http://api-domain.amsterdam.nl/-1',
@@ -260,7 +260,7 @@ describe('The http error registrar', function () {
         expect(callbackCalled).toBe(true);
     });
 
-    it('calls the local error handler before the global one', function () {
+    it('calls the local error handler before the global one', () => {
         mockedData = {};
 
         $httpBackend
@@ -285,7 +285,7 @@ describe('The http error registrar', function () {
         expect(httpStatus.registerError).toHaveBeenCalledWith(httpStatus.SERVER_ERROR);
     });
 
-    it('does not handle an error that has already been handled locally', function () {
+    it('does not handle an error that has already been handled locally', () => {
         mockedData = {};
 
         $httpBackend

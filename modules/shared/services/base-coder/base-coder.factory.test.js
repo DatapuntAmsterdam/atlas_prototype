@@ -1,13 +1,13 @@
-describe('The dpBaseCoder', function () {
+describe('The dpBaseCoder', () => {
     let baseCoder;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpShared',
             {}
         );
 
-        angular.mock.inject(function (_dpBaseCoder_) {
+        angular.mock.inject(_dpBaseCoder_ => {
             baseCoder = _dpBaseCoder_;
         });
     });
@@ -27,7 +27,7 @@ describe('The dpBaseCoder', function () {
         return code.decode(e, ndecimals);
     }
 
-    it('encodes and decodes a number in any base between 2 and 62', function () {
+    it('encodes and decodes a number in any base between 2 and 62', () => {
         for (let base = 2; base <= 62; base++) {
             expect(encode(0, base)).toBe('0');
             expect(decode('0', base)).toBe(0);
@@ -59,7 +59,7 @@ describe('The dpBaseCoder', function () {
         }
     });
 
-    it('encodes a number by mapping it on 0-9A-Za-z', function () {
+    it('encodes a number by mapping it on 0-9A-Za-z', () => {
         expect(encode(9, 10)).toBe('9');
         expect(encode(-9, 10)).toBe('-9');
         expect(encode(15, 16)).toBe('F');
@@ -70,7 +70,7 @@ describe('The dpBaseCoder', function () {
         expect(encode(-61, 62)).toBe('-z');
     });
 
-    it('can encode an array of numbers', function () {
+    it('can encode an array of numbers', () => {
         expect(encode([9, -9], 10)).toEqual(['9', '-9']);
         expect(decode(['9', '-9'], 10)).toEqual([9, -9]);
         expect(encode([15, -15], 16)).toEqual(['F', '-F']);
@@ -81,7 +81,7 @@ describe('The dpBaseCoder', function () {
         expect(decode(['z', '-z'], 62)).toEqual([61, -61]);
     });
 
-    it('can encode from strings', function () {
+    it('can encode from strings', () => {
         expect(stringEncode('9', 10)).toBe('9');
         expect(stringEncode('-9', 10)).toBe('-9');
         expect(stringEncode('15', 16)).toBe('F');
@@ -92,7 +92,7 @@ describe('The dpBaseCoder', function () {
         expect(stringEncode('-61', 62)).toBe('-z');
     });
 
-    it('can encode floating point numbers', function () {
+    it('can encode floating point numbers', () => {
         expect(encode(9.1, 10, 1)).toBe('91');
 
         expect(encode(1.005, 10, 2)).toBe('101');
@@ -109,82 +109,82 @@ describe('The dpBaseCoder', function () {
         expect(decode(['91', '92'], 10, 1)).toEqual([9.1, 9.2]);
     });
 
-    it('can encode floating point numbers, but decimals should be equal for encode and decode', function () {
+    it('can encode floating point numbers, but decimals should be equal for encode and decode', () => {
         expect(encode(9.123456789, 10, 1)).toBe('91');
         expect(decode('91', 10, 1)).toBe(9.1);
         expect(decode('91', 10, 7)).not.toBe(9.1);
         expect(decode('91', 10, 7)).toBe(0.0000091);
     });
 
-    it('can not encode floating point numbers when precision is specified', function () {
+    it('can not encode floating point numbers when precision is specified', () => {
         expect(encode(9.1, 10)).toBeUndefined();
         expect(encode([9.1, 9.2], 10)).toEqual([undefined, undefined]);
     });
 
-    it('can encode an array of an array of numbers', function () {
+    it('can encode an array of an array of numbers', () => {
         expect(encode([[61, -61], [62, -62], [63, -63]], 62)).toEqual([['z', '-z'], ['10', '-10'], ['11', '-11']]);
         expect(decode([['z', '-z'], ['10', '-10'], ['11', '-11']], 62)).toEqual([[61, -61], [62, -62], [63, -63]]);
     });
 
-    describe('the dpBaseDecode filter', function () {
-        it('works only for strings and arrays of strings', function () {
+    describe('the dpBaseDecode filter', () => {
+        it('works only for strings and arrays of strings', () => {
             expect(decode(525, 10)).toBeUndefined();
             expect(decode([525, 0], 10)).toEqual([undefined, undefined]);
             expect(decode([525, '9'], 10)).toEqual([undefined, 9]);
         });
 
-        it('works only for integer base', function () {
+        it('works only for integer base', () => {
             [[525, 'aap'], [525, 10.1]].forEach(a => {
                 const f = () => decode(...a);
                 expect(f).toThrowError(RangeError);
             });
         });
 
-        it('works only for valid strings', function () {
+        it('works only for valid strings', () => {
             const f = () => decode('G', 16);
             expect(f).toThrowError(TypeError);
         });
 
-        it('works only for valid precisions', function () {
+        it('works only for valid precisions', () => {
             [['F', 16, -1], ['F', 16, 1.5], ['F', 16, 'aap'], ['F', 16, true]].forEach(a => {
                 const f = () => decode(...a);
                 expect(f).toThrowError(RangeError);
             });
         });
 
-        it('returns NaN when precision is too big', function () {
+        it('returns NaN when precision is too big', () => {
             expect(encode(100, 16, 1000)).toBeNaN();
         });
     });
 
-    describe('the dpBaseEncode filter', function () {
-        it('works only for numbers and arrays of numbers', function () {
+    describe('the dpBaseEncode filter', () => {
+        it('works only for numbers and arrays of numbers', () => {
             expect(encode('aap', 10)).toBeUndefined();
             expect(encode(['aap', 'noot'], 10)).toEqual([undefined, undefined]);
             expect(encode(['aap', 9], 10)).toEqual([undefined, '9']);
         });
 
-        it('works only for integer base', function () {
+        it('works only for integer base', () => {
             [[525, 'aap'], [525, 10.1]].forEach(a => {
                 const f = () => encode(...a);
                 expect(f).toThrowError(RangeError);
             });
         });
 
-        it('works only for valid precisions', function () {
+        it('works only for valid precisions', () => {
             [[525, 10, -25], [525, 10, 5.7], [525, 10, 'noot'], [525, 10, false]].forEach(a => {
                 const f = () => encode(...a);
                 expect(f).toThrowError(RangeError);
             });
         });
 
-        it('returns undefined when precision is too big', function () {
+        it('returns undefined when precision is too big', () => {
             expect(decode('F', 16, 1000)).toBeNaN();
         });
     });
 
-    describe('The toPrecision method', function () {
-        it('rounds a number to the specified precision', function () {
+    describe('The toPrecision method', () => {
+        it('rounds a number to the specified precision', () => {
             expect(baseCoder.toPrecision(1, 5)).toBe(1);
             expect(baseCoder.toPrecision(1.12345, 5)).toBe(1.12345);
             expect(baseCoder.toPrecision(1.123454, 5)).toBe(1.12345);
@@ -192,7 +192,7 @@ describe('The dpBaseCoder', function () {
             expect(baseCoder.toPrecision(1.123456, 5)).toBe(1.12346);
         });
 
-        it('rounds an array of numbers to the specified precision', function () {
+        it('rounds an array of numbers to the specified precision', () => {
             expect(baseCoder.toPrecision([1, 1], 5)).toEqual([1, 1]);
             expect(baseCoder.toPrecision([1.12345, 1.12345], 5)).toEqual([1.12345, 1.12345]);
             expect(baseCoder.toPrecision([1.123454, 1.123454], 5)).toEqual([1.12345, 1.12345]);

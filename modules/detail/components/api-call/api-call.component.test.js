@@ -1,11 +1,11 @@
-describe('The dp-api-call component', function () {
+describe('The dp-api-call component', () => {
     var $compile,
         $rootScope,
         $q,
         api,
         finishApiRequest;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
             {
@@ -18,18 +18,14 @@ describe('The dp-api-call component', function () {
                     }
                 }
             },
-            function ($provide) {
-                $provide.factory('dpPartialSelectDirective', function () {
-                    return {};
-                });
+            $provide => {
+                $provide.factory('dpPartialSelectDirective', () => ({}));
 
-                $provide.factory('dpLoadingIndicatorDirective', function () {
-                    return {};
-                });
+                $provide.factory('dpLoadingIndicatorDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _api_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$q_, _api_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
@@ -89,7 +85,7 @@ describe('The dp-api-call component', function () {
                 break;
         }
 
-        finishApiRequest = function () {
+        finishApiRequest = () => {
             q.resolve(mockedResponse);
         };
 
@@ -117,15 +113,15 @@ describe('The dp-api-call component', function () {
         return component;
     }
 
-    it('does nothing if there is no endpoint', function () {
+    it('does nothing if there is no endpoint', () => {
         var component = getComponent('', 'some-partial', false);
 
         expect(api.getByUrl).not.toHaveBeenCalled();
         expect(component.find('dp-partial-select').length).toBe(0);
     });
 
-    describe('content without pagination', function () {
-        it('retrieves data from the api factory and restructures it for dp-partial-select', function () {
+    describe('content without pagination', () => {
+        it('retrieves data from the api factory and restructures it for dp-partial-select', () => {
             var component,
                 scope;
 
@@ -148,8 +144,8 @@ describe('The dp-api-call component', function () {
         });
     });
 
-    describe('content with pagination', function () {
-        it('optionally sets next variable on the scope', function () {
+    describe('content with pagination', () => {
+        it('optionally sets next variable on the scope', () => {
             var component,
                 scope;
 
@@ -164,7 +160,7 @@ describe('The dp-api-call component', function () {
             }));
         });
 
-        it('puts a loadMore function on the scope that can retrieve the next page of data', function () {
+        it('puts a loadMore function on the scope that can retrieve the next page of data', () => {
             var component,
                 scope;
 
@@ -192,7 +188,7 @@ describe('The dp-api-call component', function () {
         });
     });
 
-    it('communicates the partial variabe to dp-partial-select', function () {
+    it('communicates the partial variabe to dp-partial-select', () => {
         var component;
 
         component = getComponent('http://www.some-domain.com/without-pagination/123/', 'some-partial', false);
@@ -201,7 +197,7 @@ describe('The dp-api-call component', function () {
         expect(component.find('dp-partial-select').attr('partial')).toBe('some-partial');
     });
 
-    it('overrides the brk/object endpoint based on the useBrkObjectExpanded variable', function () {
+    it('overrides the brk/object endpoint based on the useBrkObjectExpanded variable', () => {
         // It does nothing when the endpoint doesn't match brk/object
         getComponent('http://www.some-domain.com/something/123/', 'some-partial', true);
         expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/something/123/');
@@ -215,22 +211,22 @@ describe('The dp-api-call component', function () {
         expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/brk/object-expand/123/');
     });
 
-    describe('the add-api-root attribute', function () {
-        it('calls the url method of the api module as usual, when set to false', function () {
+    describe('the add-api-root attribute', () => {
+        it('calls the url method of the api module as usual, when set to false', () => {
             getComponent('http://www.some-domain.com/something/123/', 'some-partial', false, false);
             expect(api.getByUrl).toHaveBeenCalledWith('http://www.some-domain.com/something/123/');
             expect(api.getByUri.calls.any()).toEqual(false);
         });
 
-        it('calls the uri method of the api module when set to true', function () {
+        it('calls the uri method of the api module when set to true', () => {
             getComponent('something/123/', 'some-partial', false, true);
             expect(api.getByUrl.calls.any()).toEqual(false);
             expect(api.getByUri).toHaveBeenCalledWith('something/123/');
         });
     });
 
-    describe('a loading indicator', function () {
-        it('will be shown, without delay, when fetching the initial data', function () {
+    describe('a loading indicator', () => {
+        it('will be shown, without delay, when fetching the initial data', () => {
             var component,
                 scope;
 
@@ -250,7 +246,7 @@ describe('The dp-api-call component', function () {
             expect(scope.vm.isLoading).toBe(false);
         });
 
-        it('will be shown, with delay, when fetching pages (2-n)', function () {
+        it('will be shown, with delay, when fetching pages (2-n)', () => {
             var component,
                 scope;
 

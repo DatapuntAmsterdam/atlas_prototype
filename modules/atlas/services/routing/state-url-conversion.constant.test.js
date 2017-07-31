@@ -1,18 +1,18 @@
-describe('The state url conversion definition', function () {
+describe('The state url conversion definition', () => {
     let STATE_URL_CONVERSION,
         DRAW_TOOL_CONFIG;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas', {});
 
-        angular.mock.inject(function (_STATE_URL_CONVERSION_, _DRAW_TOOL_CONFIG_) {
+        angular.mock.inject((_STATE_URL_CONVERSION_, _DRAW_TOOL_CONFIG_) => {
             STATE_URL_CONVERSION = _STATE_URL_CONVERSION_;
             DRAW_TOOL_CONFIG = _DRAW_TOOL_CONFIG_;
         });
     });
 
-    describe('The registered state initialisation methods', function () {
-        it('initialize a state to the home page and it sets a default map, (only) on an empty payload', function () {
+    describe('The registered state initialisation methods', () => {
+        it('initialize a state to the home page and it sets a default map, (only) on an empty payload', () => {
             let state;
 
             state = STATE_URL_CONVERSION.onCreate.DEFAULT({}, {}, {}, STATE_URL_CONVERSION.initialValues);
@@ -45,9 +45,9 @@ describe('The state url conversion definition', function () {
         });
     });
 
-    describe('The registered post processing methods', function () {
-        describe('The post processing for dataSelection', function () {
-            it('copies markers and isLoading from old state and determines fullscreen mode', function () {
+    describe('The registered post processing methods', () => {
+        describe('The post processing for dataSelection', () => {
+            it('copies markers and isLoading from old state and determines fullscreen mode', () => {
                 let oldState,
                     newState;
 
@@ -81,8 +81,8 @@ describe('The state url conversion definition', function () {
             });
         });
 
-        describe('The post processing for map', function () {
-            it('copies isLoading from the previous state, but not the drawing mode ', function () {
+        describe('The post processing for map', () => {
+            it('copies isLoading from the previous state, but not the drawing mode ', () => {
                 // isLoading and drawingMode
                 let oldState = {
                     isLoading: true,
@@ -126,8 +126,8 @@ describe('The state url conversion definition', function () {
             });
         });
 
-        describe('The post processing for detail', function () {
-            it('copies display, geometry, isLoading and isFullscreen from old state if equal endpoint', function () {
+        describe('The post processing for detail', () => {
+            it('copies display, geometry, isLoading and isFullscreen from old state if equal endpoint', () => {
                 let newState;
 
                 const oldState = {
@@ -239,8 +239,8 @@ describe('The state url conversion definition', function () {
             });
         });
 
-        describe('The post processing for straatbeeld', function () {
-            it('copies image, hotspots, data, location, isInitial, isLoading from old state if equal id', function () {
+        describe('The post processing for straatbeeld', () => {
+            it('copies image, hotspots, data, location, isInitial, isLoading from old state if equal id', () => {
                 let newState;
 
                 const oldState = {

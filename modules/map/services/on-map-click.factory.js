@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -20,7 +20,7 @@
             const state = store.getState();
 
             if (!(suppress.isBusy() || state.atlas.isEmbedPreview || state.atlas.isEmbed || drawTool.isEnabled())) {
-                $rootScope.$applyAsync(function () {
+                $rootScope.$applyAsync(() => {
                     store.dispatch({
                         type: ACTIONS.MAP_CLICK,
                         payload: [
@@ -32,4 +32,4 @@
             }
         }
     }
-})();
+}))();

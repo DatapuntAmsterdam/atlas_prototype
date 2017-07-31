@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -17,11 +17,11 @@
     function DpDataSelectionCardsController (store, ACTIONS) {
         const vm = this;
 
-        vm.fetch_detail = function (endpoint) {
+        vm.fetch_detail = endpoint => {
             store.dispatch({
                 type: ACTIONS.FETCH_DETAIL,
                 payload: endpoint
             });
         };
     }
-})();
+}))();

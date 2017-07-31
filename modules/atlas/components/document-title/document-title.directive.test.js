@@ -1,4 +1,4 @@
-describe('The dp-document-title directive', function () {
+describe('The dp-document-title directive', () => {
     var $compile,
         $rootScope,
         storeHandler,
@@ -16,10 +16,10 @@ describe('The dp-document-title directive', function () {
         searchResultsDocumentTitle = { getTitle: angular.noop },
         straatbeeldDocumentTitle = { getTitle: angular.noop };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
-            function ($provide) {
+            $provide => {
                 $provide.value('store', store);
                 $provide.value('dashboardColumns', dashboardColumns);
                 $provide.value('dpDataSelectionDocumentTitle', dataSelectionDocumentTitle);
@@ -32,7 +32,7 @@ describe('The dp-document-title directive', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -69,7 +69,7 @@ describe('The dp-document-title directive', function () {
         return component;
     }
 
-    it('shows the element content as default title', function () {
+    it('shows the element content as default title', () => {
         spyOn(store, 'getState').and.returnValue({ page: {} });
         spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ page: true });
         moduleDocumentTitle.getTitle.and.returnValue('');
@@ -79,7 +79,7 @@ describe('The dp-document-title directive', function () {
         expect(component.text()).toBe('Atlas');
     });
 
-    it('passes the state on in the call to determineVisibility', function () {
+    it('passes the state on in the call to determineVisibility', () => {
         const state = { key: 'value' };
 
         spyOn(store, 'getState').and.returnValue(state);
@@ -90,8 +90,8 @@ describe('The dp-document-title directive', function () {
         expect(dashboardColumns.determineVisibility).toHaveBeenCalledWith(state);
     });
 
-    describe('getTitle', function () {
-        it('does not get called when there is no visible item', function () {
+    describe('getTitle', () => {
+        it('does not get called when there is no visible item', () => {
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ unknownModule: true });
 
             getComponent();
@@ -99,7 +99,7 @@ describe('The dp-document-title directive', function () {
             expect(moduleDocumentTitle.getTitle).not.toHaveBeenCalled();
         });
 
-        it('does not get called when there is no state for the visible item', function () {
+        it('does not get called when there is no state for the visible item', () => {
             spyOn(store, 'getState').and.returnValue({});
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ page: true });
 
@@ -108,7 +108,7 @@ describe('The dp-document-title directive', function () {
             expect(moduleDocumentTitle.getTitle).not.toHaveBeenCalled();
         });
 
-        it('does not get called when the visible item is loading', function () {
+        it('does not get called when the visible item is loading', () => {
             spyOn(store, 'getState').and.returnValue({ page: { isLoading: true } });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ page: true });
 
@@ -117,7 +117,7 @@ describe('The dp-document-title directive', function () {
             expect(moduleDocumentTitle.getTitle).not.toHaveBeenCalled();
         });
 
-        it('gets called with the item\'s state', function () {
+        it('gets called with the item\'s state', () => {
             const itemState = { key: 'value' };
             spyOn(store, 'getState').and.returnValue({ page: itemState });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ page: true });
@@ -128,7 +128,7 @@ describe('The dp-document-title directive', function () {
         });
     });
 
-    it('prepends the base title with the item title', function () {
+    it('prepends the base title with the item title', () => {
         spyOn(store, 'getState').and.returnValue({ page: {} });
         spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ page: true });
         moduleDocumentTitle.getTitle.and.returnValue('Item title');
@@ -138,7 +138,7 @@ describe('The dp-document-title directive', function () {
         expect(component.text()).toBe('Item title - Atlas');
     });
 
-    it('simply displays the base title when the item title is empty', function () {
+    it('simply displays the base title when the item title is empty', () => {
         spyOn(store, 'getState').and.returnValue({ page: {} });
         spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ page: true });
         moduleDocumentTitle.getTitle.and.returnValue('');
@@ -148,8 +148,8 @@ describe('The dp-document-title directive', function () {
         expect(component.text()).toBe('Atlas');
     });
 
-    describe('data selection', function () {
-        it('maps the right names and services', function () {
+    describe('data selection', () => {
+        it('maps the right names and services', () => {
             spyOn(store, 'getState').and.returnValue({ dataSelection: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ dataSelection: true });
             dataSelectionDocumentTitle.getTitle.and.returnValue('Data selection title');
@@ -159,7 +159,7 @@ describe('The dp-document-title directive', function () {
             expect(component.text()).toBe('Data selection title - Atlas');
         });
 
-        it('has precedence over the map module', function () {
+        it('has precedence over the map module', () => {
             spyOn(store, 'getState').and.returnValue({ dataSelection: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ map: true, dataSelection: true });
             dataSelectionDocumentTitle.getTitle.and.returnValue('Data selection title');
@@ -170,8 +170,8 @@ describe('The dp-document-title directive', function () {
         });
     });
 
-    describe('detail', function () {
-        it('maps the right names and services', function () {
+    describe('detail', () => {
+        it('maps the right names and services', () => {
             spyOn(store, 'getState').and.returnValue({ detail: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ detail: true });
             detailDocumentTitle.getTitle.and.returnValue('Detail title');
@@ -181,7 +181,7 @@ describe('The dp-document-title directive', function () {
             expect(component.text()).toBe('Detail title - Atlas');
         });
 
-        it('has precedence over the map module', function () {
+        it('has precedence over the map module', () => {
             spyOn(store, 'getState').and.returnValue({ detail: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ map: true, detail: true });
             detailDocumentTitle.getTitle.and.returnValue('Detail title');
@@ -192,8 +192,8 @@ describe('The dp-document-title directive', function () {
         });
     });
 
-    describe('layer selection', function () {
-        it('maps the right names and services', function () {
+    describe('layer selection', () => {
+        it('maps the right names and services', () => {
             spyOn(store, 'getState').and.returnValue({ layerSelection: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ layerSelection: true });
             layerSelectionDocumentTitle.getTitle.and.returnValue('Layer selection title');
@@ -203,7 +203,7 @@ describe('The dp-document-title directive', function () {
             expect(component.text()).toBe('Layer selection title - Atlas');
         });
 
-        it('has precedence over the map module', function () {
+        it('has precedence over the map module', () => {
             spyOn(store, 'getState').and.returnValue({ layerSelection: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ map: true, layerSelection: true });
             layerSelectionDocumentTitle.getTitle.and.returnValue('Layer selection title');
@@ -214,8 +214,8 @@ describe('The dp-document-title directive', function () {
         });
     });
 
-    describe('map', function () {
-        it('maps the right names and services', function () {
+    describe('map', () => {
+        it('maps the right names and services', () => {
             spyOn(store, 'getState').and.returnValue({ map: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ map: true });
             mapDocumentTitle.getTitle.and.returnValue('Map title');
@@ -226,8 +226,8 @@ describe('The dp-document-title directive', function () {
         });
     });
 
-    describe('page', function () {
-        it('maps the right names and services', function () {
+    describe('page', () => {
+        it('maps the right names and services', () => {
             spyOn(store, 'getState').and.returnValue({ page: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ page: true });
             pageDocumentTitle.getTitle.and.returnValue('Page title');
@@ -237,7 +237,7 @@ describe('The dp-document-title directive', function () {
             expect(component.text()).toBe('Page title - Atlas');
         });
 
-        it('has precedence over the map module', function () {
+        it('has precedence over the map module', () => {
             spyOn(store, 'getState').and.returnValue({ page: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ page: true, map: true });
             pageDocumentTitle.getTitle.and.returnValue('Page title');
@@ -248,8 +248,8 @@ describe('The dp-document-title directive', function () {
         });
     });
 
-    describe('search results', function () {
-        it('maps the right names and services', function () {
+    describe('search results', () => {
+        it('maps the right names and services', () => {
             spyOn(store, 'getState').and.returnValue({ search: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ searchResults: true });
             searchResultsDocumentTitle.getTitle.and.returnValue('Search results title');
@@ -259,7 +259,7 @@ describe('The dp-document-title directive', function () {
             expect(component.text()).toBe('Search results title - Atlas');
         });
 
-        it('has precedence over the map module', function () {
+        it('has precedence over the map module', () => {
             spyOn(store, 'getState').and.returnValue({ search: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ searchResults: true, map: true });
             searchResultsDocumentTitle.getTitle.and.returnValue('Search results title');
@@ -270,8 +270,8 @@ describe('The dp-document-title directive', function () {
         });
     });
 
-    describe('straatbeeld', function () {
-        it('maps the right names and services', function () {
+    describe('straatbeeld', () => {
+        it('maps the right names and services', () => {
             spyOn(store, 'getState').and.returnValue({ straatbeeld: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ straatbeeld: true });
             straatbeeldDocumentTitle.getTitle.and.returnValue('Straatbeeld title');
@@ -281,7 +281,7 @@ describe('The dp-document-title directive', function () {
             expect(component.text()).toBe('Straatbeeld title - Atlas');
         });
 
-        it('has precedence over the map module', function () {
+        it('has precedence over the map module', () => {
             spyOn(store, 'getState').and.returnValue({ straatbeeld: {} });
             spyOn(dashboardColumns, 'determineVisibility').and.returnValue({ straatbeeld: true, map: true });
             straatbeeldDocumentTitle.getTitle.and.returnValue('Straatbeeld title');

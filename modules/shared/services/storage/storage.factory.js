@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -83,4 +83,4 @@
             local: new Storage($window.localStorage)
         };
     }
-})();
+}))();

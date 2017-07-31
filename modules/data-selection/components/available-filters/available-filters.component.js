@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -24,15 +24,11 @@
 
         vm.showMoreThreshold = 10;
 
-        vm.hasInactiveFilterOptions = function (filter) {
-            return filter.options.some(option => !vm.isFilterOptionActive(filter.slug, option.label));
-        };
+        vm.hasInactiveFilterOptions = filter => filter.options.some(option => !vm.isFilterOptionActive(filter.slug, option.label));
 
-        vm.isFilterOptionActive = function (filterSlug, optionId) {
-            return vm.activeFilters[filterSlug] === optionId;
-        };
+        vm.isFilterOptionActive = (filterSlug, optionId) => vm.activeFilters[filterSlug] === optionId;
 
-        vm.addFilter = function (filterSlug, optionId) {
+        vm.addFilter = (filterSlug, optionId) => {
             var filters = angular.copy(vm.activeFilters);
 
             filters[filterSlug] = optionId;
@@ -40,32 +36,24 @@
             applyFilters(filters);
         };
 
-        vm.showExpandButton = function (filterSlug) {
-            return !vm.isExpandedFilter(filterSlug) && getAvailableOptions(filterSlug).length > vm.showMoreThreshold;
-        };
+        vm.showExpandButton = filterSlug => !vm.isExpandedFilter(filterSlug) && getAvailableOptions(filterSlug).length > vm.showMoreThreshold;
 
-        vm.nrHiddenOptions = function (filter) {
-            return filter.numberOfOptions - filter.options.length;
-        };
+        vm.nrHiddenOptions = filter => filter.numberOfOptions - filter.options.length;
 
-        vm.expandFilter = function (filterSlug) {
+        vm.expandFilter = filterSlug => {
             expandedFilters.push(filterSlug);
         };
 
-        vm.implodeFilter = function (filterSlug) {
+        vm.implodeFilter = filterSlug => {
             var index = expandedFilters.indexOf(filterSlug);
             if (index >= 0) {
                 expandedFilters.splice(index, 1);
             }
         };
 
-        vm.isExpandedFilter = function (filterSlug) {
-            return expandedFilters.indexOf(filterSlug) !== -1;
-        };
+        vm.isExpandedFilter = filterSlug => expandedFilters.indexOf(filterSlug) !== -1;
 
-        vm.canExpandImplode = function (filterSlug) {
-            return getAvailableOptions(filterSlug).length > vm.showMoreThreshold;
-        };
+        vm.canExpandImplode = filterSlug => getAvailableOptions(filterSlug).length > vm.showMoreThreshold;
 
         function getAvailableOptions (filterSlug) {
             return getAvailableFilters(filterSlug)[0].options;
@@ -90,4 +78,4 @@
             });
         }
     }
-})();
+}))();

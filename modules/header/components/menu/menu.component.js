@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -44,4 +44,4 @@
             vm.userMenuLabel = name + ellipsis + bevoegd;
         }
     }
-})();
+}))();

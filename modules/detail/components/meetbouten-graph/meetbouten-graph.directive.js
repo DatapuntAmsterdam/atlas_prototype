@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -25,7 +25,7 @@
 
             // parse url om alle metingen te krijgen voor de meetbout
             var href = scope.href + '&page_size=' + scope.pageSize;
-            api.getByUrl(href).then(function (response) {
+            api.getByUrl(href).then(response => {
                 // data laden
                 scope.objects = response.results;
 
@@ -37,9 +37,7 @@
 
                 // x scale min-max
                 var xAs = d3.time.scale()
-                    .domain(d3.extent(scope.objects, function (d) {
-                        return dateConverter.ymdToDate(d.datum);
-                    }))
+                    .domain(d3.extent(scope.objects, d => dateConverter.ymdToDate(d.datum)))
                     .range([0, width]);
 
                 var xAxis = d3.svg.axis()
@@ -48,9 +46,7 @@
 
                 // Y as 1, zakking cumulatief
                 var yZakkingCum = d3.scale.linear()
-                    .domain(d3.extent(scope.objects, function (d) {
-                        return d.zakking_cumulatief;
-                    }))
+                    .domain(d3.extent(scope.objects, d => d.zakking_cumulatief))
                     .range([0, height]);
 
                 var yZakkingCumAxis = d3.svg.axis()
@@ -59,12 +55,8 @@
 
                 // definieren grafiek lijnen
                 var zakkingCumLine = d3.svg.line()
-                    .x(function (d) {
-                        return xAs(dateConverter.ymdToDate(d.datum));
-                    })
-                    .y(function (d) {
-                        return yZakkingCum(d.zakking_cumulatief);
-                    });
+                    .x(d => xAs(dateConverter.ymdToDate(d.datum)))
+                    .y(d => yZakkingCum(d.zakking_cumulatief));
 
                 // Dom manipulatie
                 // Initieren svg voor grafiek
@@ -100,4 +92,4 @@
             });
         }
     }
-})();
+}))();

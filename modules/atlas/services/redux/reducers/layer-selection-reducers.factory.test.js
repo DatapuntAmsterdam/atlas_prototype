@@ -1,4 +1,4 @@
-describe('The layerSelectionReducers factory', function () {
+describe('The layerSelectionReducers factory', () => {
     var layerSelectionReducers,
         DEFAULT_STATE,
         ACTIONS;
@@ -28,23 +28,23 @@ describe('The layerSelectionReducers factory', function () {
         }
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_layerSelectionReducers_, _ACTIONS_) {
+        angular.mock.inject((_layerSelectionReducers_, _ACTIONS_) => {
             layerSelectionReducers = _layerSelectionReducers_;
             ACTIONS = _ACTIONS_;
         });
     });
 
-    describe('SHOW_LAYER_SELECTION', function () {
-        it('sets the variable to true', function () {
+    describe('SHOW_LAYER_SELECTION', () => {
+        it('sets the variable to true', () => {
             var output = layerSelectionReducers[ACTIONS.SHOW_LAYER_SELECTION.id](DEFAULT_STATE);
 
             expect(output.layerSelection.isEnabled).toBe(true);
         });
 
-        it('leaves the fullscreen mode as is', function () {
+        it('leaves the fullscreen mode as is', () => {
             var output,
                 inputState = angular.copy(DEFAULT_STATE);
 
@@ -55,8 +55,8 @@ describe('The layerSelectionReducers factory', function () {
         });
     });
 
-    describe('HIDE_LAYER_SELECTION', function () {
-        it('sets the variable to true', function () {
+    describe('HIDE_LAYER_SELECTION', () => {
+        it('sets the variable to true', () => {
             var inputState,
                 output;
 

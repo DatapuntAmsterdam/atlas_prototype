@@ -13,7 +13,7 @@
  *
  */
 
-(function () {
+((() => {
     angular
         .module('atlas')
         .directive('dpMaxWidthClass', dpMaxWidthClassDirective);
@@ -42,4 +42,4 @@
             }
         }
     }
-})();
+}))();

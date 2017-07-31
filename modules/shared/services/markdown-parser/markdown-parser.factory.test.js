@@ -1,19 +1,19 @@
-describe('The markdown parser', function () {
+describe('The markdown parser', () => {
     let markdownParser;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared',
-            function ($provide) {
+            $provide => {
                 $provide.constant('marked', (text) => 'marked' + text);
             }
         );
 
-        angular.mock.inject(function (_markdownParser_) {
+        angular.mock.inject(_markdownParser_ => {
             markdownParser = _markdownParser_;
         });
     });
 
-    it('uses the marked library to parse markdown text', function () {
+    it('uses the marked library to parse markdown text', () => {
         expect(markdownParser.parse('text')).toBe('markedtext');
     });
 });

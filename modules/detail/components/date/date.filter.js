@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -8,8 +8,6 @@
     dpDateFilter.$inject = ['dateFilter'];
 
     function dpDateFilter (dateFilter) {
-        return function (input) {
-            return dateFilter(input, 'd MMMM yyyy');
-        };
+        return input => dateFilter(input, 'd MMMM yyyy');
     }
-})();
+}))();

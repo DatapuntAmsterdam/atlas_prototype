@@ -1,14 +1,14 @@
-describe('The geojson factory', function () {
+describe('The geojson factory', () => {
     var geojson,
         mockedPoint,
         mockedPolygon,
         mockedPolygonWithHoles,
         mockedMultiPolygon;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared');
 
-        angular.mock.inject(function (_geojson_) {
+        angular.mock.inject(_geojson_ => {
             geojson = _geojson_;
         });
 
@@ -54,16 +54,16 @@ describe('The geojson factory', function () {
         };
     });
 
-    it('can transform a Point to an Array format', function () {
+    it('can transform a Point to an Array format', () => {
         expect(geojson.getCenter(mockedPoint)).toEqual([4, 52]);
     });
 
-    it('can calculate the center of a Polygon', function () {
+    it('can calculate the center of a Polygon', () => {
         expect(geojson.getCenter(mockedPolygon)).toEqual([101.0, 5.0]);
         expect(geojson.getCenter(mockedPolygonWithHoles)).toEqual([100.5, 0.55]);
     });
 
-    it('can calculate the center of a MultiPolygon', function () {
+    it('can calculate the center of a MultiPolygon', () => {
         expect(geojson.getCenter(mockedMultiPolygon)).toEqual([151.0, 45.15]);
     });
 });

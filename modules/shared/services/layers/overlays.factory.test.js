@@ -1,9 +1,9 @@
-describe('The overlays factory', function () {
+describe('The overlays factory', () => {
     let $rootScope,
         overlays,
         userAuthLevel;
 
-    beforeEach(function () {
+    beforeEach(() => {
         userAuthLevel = 0;
 
         angular.mock.module(
@@ -14,7 +14,7 @@ describe('The overlays factory', function () {
                     getAuthorizationLevel: () => userAuthLevel
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('OVERLAYS', {
                     SOURCES: {
                         a: {},
@@ -42,13 +42,13 @@ describe('The overlays factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _overlays_) {
+        angular.mock.inject((_$rootScope_, _overlays_) => {
             $rootScope = _$rootScope_;
             overlays = _overlays_;
         });
     });
 
-    it('filters the overlays on the users authorization level', function () {
+    it('filters the overlays on the users authorization level', () => {
         expect(overlays.SOURCES).toEqual({
             c: {
                 authorizationLevel: 0
@@ -65,7 +65,7 @@ describe('The overlays factory', function () {
         ]);
     });
 
-    it('recreates the overlays on change of user\'s authorization level', function () {
+    it('recreates the overlays on change of user\'s authorization level', () => {
         userAuthLevel = 1;
         $rootScope.$digest();
 

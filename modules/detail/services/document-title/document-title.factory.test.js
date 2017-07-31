@@ -1,10 +1,10 @@
-describe('The dpDetailDocumentTitle factory', function () {
+describe('The dpDetailDocumentTitle factory', () => {
     var documentTitle;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDetail',
-            function ($provide) {
+            $provide => {
                 $provide.constant('GLOSSARY', {
                     DEFINITIONS: {
                         BEPERKING: {
@@ -18,12 +18,12 @@ describe('The dpDetailDocumentTitle factory', function () {
             }
         );
 
-        angular.mock.inject(function (dpDetailDocumentTitle) {
+        angular.mock.inject(dpDetailDocumentTitle => {
             documentTitle = dpDetailDocumentTitle;
         });
     });
 
-    it('combines a GLOSSARY label with a specific display variable', function () {
+    it('combines a GLOSSARY label with a specific display variable', () => {
         var mockedDetailState;
 
         mockedDetailState = {

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -38,4 +38,4 @@
                 angular.isObject(state.map) && state.map.isFullscreen;
         }
     }
-})();
+}))();

@@ -1,4 +1,4 @@
-describe('The reducer factory', function () {
+describe('The reducer factory', () => {
     var reducer,
         $window,
         urlReducers,
@@ -15,7 +15,7 @@ describe('The reducer factory', function () {
         freeze,
         environment;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -60,7 +60,7 @@ describe('The reducer factory', function () {
         );
 
         // eslint-disable-next-line max-params
-        angular.mock.inject(function (
+        angular.mock.inject((
             _$window_,
             _urlReducers_,
             _homeReducers_,
@@ -74,7 +74,7 @@ describe('The reducer factory', function () {
             _embedReducers_,
             _freeze_,
             _environment_
-        ) {
+        ) => {
             $window = _$window_;
             urlReducers = _urlReducers_;
             homeReducers = _homeReducers_;
@@ -115,7 +115,7 @@ describe('The reducer factory', function () {
             }
         };
 
-        angular.mock.inject(function (_reducer_) {
+        angular.mock.inject(_reducer_ => {
             reducer = _reducer_;
             inputState = DEFAULT_STATE;
         });
@@ -123,7 +123,7 @@ describe('The reducer factory', function () {
         environment.isDevelopment.and.returnValue(false);
     });
 
-    it('groups all separate reducers and calls the appropriate one depening on the action type', function () {
+    it('groups all separate reducers and calls the appropriate one depening on the action type', () => {
         spyOn(urlReducers, 'ACTION_A').and.callThrough();
         spyOn(homeReducers, 'ACTION_C').and.callThrough();
         spyOn(layerSelectionReducers, 'ACTION_D').and.callThrough();
@@ -159,7 +159,7 @@ describe('The reducer factory', function () {
         expect(embedReducers.ACTION_K).toHaveBeenCalled();
     });
 
-    it('returns the oldState if the specified action type has no separate reducer', function () {
+    it('returns the oldState if the specified action type has no separate reducer', () => {
         // Note redux has some built-in action types that we can safely ignore.
         var output = reducer(inputState, {type: {id: 'ACTION_NO_REDUCER'}});
 
@@ -176,7 +176,7 @@ describe('The reducer factory', function () {
         expect(freeze.deepFreeze).toHaveBeenCalledWith(state);
     });
 
-    it('should map vanilla reducers for cross-compatibility', function () {
+    it('should map vanilla reducers for cross-compatibility', () => {
         const payload = { foo: 'bar' };
         spyOn($window.reducers, 'detailReducer');
         environment.isDevelopment.and.returnValue(true);

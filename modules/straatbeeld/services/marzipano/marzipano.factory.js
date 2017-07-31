@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -58,14 +58,12 @@
             });
 
             angular.copy(hotspots) // Do not mutate someone else's data collection!
-                .sort(function (hotspotA, hotspotB) {
-                    return hotspotB.distance - hotspotA.distance;
-                })
-                .forEach(function (hotspot) {
+                .sort((hotspotA, hotspotB) => hotspotB.distance - hotspotA.distance)
+                .forEach(hotspot => {
                     const hotspotPitch = calculateHotspotPitch(STRAATBEELD_CONFIG.CAMERA_HEIGHT, hotspot.distance);
 
                     hotspotService.createHotspotTemplate(hotspot.id, hotspot.distance, hotspotPitch, hotspot.year)
-                        .then(function (template) {
+                        .then(template => {
                             var position = {
                                 yaw: angleConversion.degreesToRadians(hotspot.heading),
                                 pitch: hotspotPitch
@@ -89,4 +87,4 @@
             }
         }
     }
-})();
+}))();

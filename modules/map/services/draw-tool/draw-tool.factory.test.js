@@ -1,4 +1,4 @@
-describe('The draw tool factory', function () {
+describe('The draw tool factory', () => {
     let $rootScope,
         L,
         DRAW_TOOL_CONFIG,
@@ -16,7 +16,7 @@ describe('The draw tool factory', function () {
 
     let testMarkers;
 
-    beforeEach(function () {
+    beforeEach(() => {
         testMarkers = [[4, 50], [4, 51], [3, 51], [3, 50], [0, 0], [0, 0]];
 
         layerGroup = {
@@ -76,7 +76,7 @@ describe('The draw tool factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _L_, _DRAW_TOOL_CONFIG_, _drawTool_, _suppress_) {
+        angular.mock.inject((_$rootScope_, _L_, _DRAW_TOOL_CONFIG_, _drawTool_, _suppress_) => {
             $rootScope = _$rootScope_;
             L = _L_;
             DRAW_TOOL_CONFIG = _DRAW_TOOL_CONFIG_;
@@ -146,16 +146,16 @@ describe('The draw tool factory', function () {
         $rootScope.$digest();
     }
 
-    describe('Initialisation', function () {
-        beforeEach(function () {
+    describe('Initialisation', () => {
+        beforeEach(() => {
             drawTool.initialize(leafletMap);
         });
 
-        it('is disabled by default', function () {
+        it('is disabled by default', () => {
             expect(drawTool.isEnabled()).toBe(false);
         });
 
-        it('can be enabled', function () {
+        it('can be enabled', () => {
             drawTool.enable();
             expect(drawShapeHandler.enable).toHaveBeenCalled();
 
@@ -163,7 +163,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.isEnabled()).toBe(true);
         });
 
-        it('ignores enable() when already enabled', function () {
+        it('ignores enable() when already enabled', () => {
             drawTool.enable();
             fireEvent('draw:drawstart');
             drawShapeHandler.enable.calls.reset();
@@ -172,7 +172,7 @@ describe('The draw tool factory', function () {
             expect(drawShapeHandler.enable).not.toHaveBeenCalled();
         });
 
-        it('can be disabled', function () {
+        it('can be disabled', () => {
             drawTool.enable();
             fireEvent('draw:drawstart');
 
@@ -180,12 +180,12 @@ describe('The draw tool factory', function () {
             expect(drawTool.isEnabled()).toBe(false);
         });
 
-        it('ignores disable() when already disabled', function () {
+        it('ignores disable() when already disabled', () => {
             drawTool.disable();
             expect(drawShapeHandler.disable).not.toHaveBeenCalled();
         });
 
-        it('can be canceled', function () {
+        it('can be canceled', () => {
             drawTool.enable();
             fireEvent('draw:drawstart');
 
@@ -193,22 +193,22 @@ describe('The draw tool factory', function () {
             expect(drawTool.isEnabled()).toBe(false);
         });
 
-        it('ignores cancel() when already disabled', function () {
+        it('ignores cancel() when already disabled', () => {
             drawTool.cancel();
             expect(drawShapeHandler.disable).not.toHaveBeenCalled();
             expect(editShapeHandler.disable).not.toHaveBeenCalled();
         });
     });
 
-    describe('On drawing mode changed event', function () {
+    describe('On drawing mode changed event', () => {
         let onResult;
         const onDrawingMode = status => onResult = status;
 
-        beforeEach(function () {
+        beforeEach(() => {
             drawTool.initialize(leafletMap, null, onDrawingMode);
         });
 
-        it('calls onDrawingMode when the drawing mode changes, in the next digest cycle', function () {
+        it('calls onDrawingMode when the drawing mode changes, in the next digest cycle', () => {
             drawTool.enable();
             fireEvent('draw:drawstart');
             $rootScope.$digest();
@@ -216,7 +216,7 @@ describe('The draw tool factory', function () {
             expect(onResult).toBe('draw');
         });
 
-        it('calls onDrawingMode when disabling, in the next digest cycle', function () {
+        it('calls onDrawingMode when disabling, in the next digest cycle', () => {
             drawTool.enable();
             fireEvent('draw:drawstart');
             drawTool.disable();
@@ -225,7 +225,7 @@ describe('The draw tool factory', function () {
             expect(onResult).toBe('none');
         });
 
-        it('calls onDrawingMode when canceling, in the next digest cycle', function () {
+        it('calls onDrawingMode when canceling, in the next digest cycle', () => {
             drawTool.enable();
             fireEvent('draw:drawstart');
             drawTool.cancel();
@@ -235,11 +235,11 @@ describe('The draw tool factory', function () {
         });
     });
 
-    describe('Draw polygon', function () {
+    describe('Draw polygon', () => {
         let nVertices,
             vertices;
 
-        beforeEach(function () {
+        beforeEach(() => {
             nVertices = 3;
 
             spyOn(L.GeometryUtil, 'readableArea').and.returnValue(1);
@@ -339,14 +339,14 @@ describe('The draw tool factory', function () {
             fireEvent('draw:deleted');
         }
 
-        beforeEach(function () {
+        beforeEach(() => {
             spyOn(suppress, 'isBusy').and.returnValue(false);
             spyOn(onHandler, 'finish');
 
             drawTool.initialize(leafletMap, onHandler.finish);
         });
 
-        it('Can add a vertex', function () {
+        it('Can add a vertex', () => {
             enable();
             drawShapeHandler._markers = [vertices[0]];
             fireEvent('draw:drawvertex');
@@ -354,13 +354,13 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.markers).toEqual(testMarkers.slice(0, 1));
         });
 
-        it('Can build a polygon', function () {
+        it('Can build a polygon', () => {
             buildPolygon();
 
             expect(drawTool.shape.markers).toEqual(testMarkers.slice(0, nVertices));
         });
 
-        it('Can build a line', function () {
+        it('Can build a line', () => {
             enable();
 
             nVertices = 2;
@@ -385,7 +385,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.isEnabled()).toBe(false);
         });
 
-        it('Can not build a line when suppressing', function () {
+        it('Can not build a line when suppressing', () => {
             suppress.isBusy.and.returnValue(true);
 
             enable();
@@ -400,7 +400,7 @@ describe('The draw tool factory', function () {
             expect(drawShapeHandler.completeShape).not.toHaveBeenCalled();
         });
 
-        it('Can build a polygon and notifies info on shape on finish drawing', function () {
+        it('Can build a polygon and notifies info on shape on finish drawing', () => {
             let onResult;
             const onFinish = shape => onResult = shape;
 
@@ -416,7 +416,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.areaTxt).toEqual(1);
         });
 
-        it('Can build a polygon and shows distance in meters with 1 decimal when < 1000 meters', function () {
+        it('Can build a polygon and shows distance in meters with 1 decimal when < 1000 meters', () => {
             vertices[0]._latlng.distanceTo = () => 900;
             vertices[1]._latlng.distanceTo = () => 90;
             vertices[2]._latlng.distanceTo = () => 9;
@@ -429,7 +429,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.distanceTxt).toEqual('999,0 m');
         });
 
-        it('Can build a polygon and shows distance in kilometers with 2 decimals when >= 1000 meters', function () {
+        it('Can build a polygon and shows distance in kilometers with 2 decimals when >= 1000 meters', () => {
             vertices[0]._latlng.distanceTo = () => 1000;
             vertices[1]._latlng.distanceTo = () => 0;
             vertices[2]._latlng.distanceTo = () => 0;
@@ -442,7 +442,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.distanceTxt).toEqual('1,00 km');
         });
 
-        it('Can delete a polygon', function () {
+        it('Can delete a polygon', () => {
             createPolygon();
 
             deletePolygon();
@@ -450,7 +450,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.markers).toEqual([]);
         });
 
-        it('Can delete the last marker', function () {
+        it('Can delete the last marker', () => {
             enable();
 
             addVertices();
@@ -460,7 +460,7 @@ describe('The draw tool factory', function () {
             expect(drawShapeHandler.deleteLastVertex).toHaveBeenCalled();
         });
 
-        it('Can not delete the last marker when suppressing', function () {
+        it('Can not delete the last marker when suppressing', () => {
             suppress.isBusy.and.returnValue(true);
 
             enable();
@@ -472,7 +472,7 @@ describe('The draw tool factory', function () {
             expect(drawShapeHandler.deleteLastVertex).not.toHaveBeenCalled();
         });
 
-        it('Can delete the first marker', function () {
+        it('Can delete the first marker', () => {
             nVertices = 1;
 
             enable();
@@ -489,7 +489,7 @@ describe('The draw tool factory', function () {
             expect(drawShapeHandler.enable).toHaveBeenCalled();
         });
 
-        it('Can not delete the first marker when suppressing', function () {
+        it('Can not delete the first marker when suppressing', () => {
             suppress.isBusy.and.returnValue(true);
             nVertices = 1;
 
@@ -507,7 +507,7 @@ describe('The draw tool factory', function () {
             expect(drawShapeHandler.enable).not.toHaveBeenCalled();
         });
 
-        it ('Auto closes a polygon', function () {
+        it ('Auto closes a polygon', () => {
             enable();
 
             nVertices = 4;
@@ -517,7 +517,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.markers.length).toBe(4);
         });
 
-        it('can edit a polygon by clicking the drawn polygon', function () {
+        it('can edit a polygon by clicking the drawn polygon', () => {
             createPolygon();
 
             expect(shapeClickHandler.click).toEqual(jasmine.any(Function));
@@ -533,7 +533,7 @@ describe('The draw tool factory', function () {
             expect(editShapeHandler.disable).toHaveBeenCalled();
         });
 
-        it('can not edit a polygon by clicking the drawn polygon when suppressing', function () {
+        it('can not edit a polygon by clicking the drawn polygon when suppressing', () => {
             suppress.isBusy.and.returnValue(true);
 
             createPolygon();
@@ -543,7 +543,7 @@ describe('The draw tool factory', function () {
             expect(editShapeHandler.enable).not.toHaveBeenCalled();
         });
 
-        it('can edit a polygon by enabling the draw tool', function () {
+        it('can edit a polygon by enabling the draw tool', () => {
             createPolygon();
 
             drawTool.enable();
@@ -557,7 +557,7 @@ describe('The draw tool factory', function () {
             expect(editShapeHandler.disable).toHaveBeenCalled();
         });
 
-        it('can cancel drawing', function () {
+        it('can cancel drawing', () => {
             enable();
             drawShapeHandler._markers = [vertices[0]];
             fireEvent('draw:drawvertex');
@@ -568,7 +568,7 @@ describe('The draw tool factory', function () {
             expect(drawShapeHandler.disable).toHaveBeenCalled();
         });
 
-        it('can cancel editing', function () {
+        it('can cancel editing', () => {
             createPolygon();
             drawTool.enable();
             fireEvent('draw:editstart');
@@ -579,7 +579,7 @@ describe('The draw tool factory', function () {
             expect(editShapeHandler.disable).toHaveBeenCalled();
         });
 
-        it('can add markers to a polygon in edit mode', function () {
+        it('can add markers to a polygon in edit mode', () => {
             createPolygon();
 
             drawTool.enable();
@@ -591,7 +591,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.markers.length).toBe(4);
         });
 
-        it('does not let a polygon exceed max markers in edit mode', function () {
+        it('does not let a polygon exceed max markers in edit mode', () => {
             L.Polygon = Layer;
 
             drawShapeHandler.disable.and.callFake(() => fireEvent('draw:drawstop'));
@@ -624,7 +624,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.markers.length).toBe(4);
         });
 
-        it('click on map while drawing polygon does not end draw mode', function () {
+        it('click on map while drawing polygon does not end draw mode', () => {
             enable();
 
             addVertices();
@@ -636,7 +636,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.isEnabled()).toBe(true);
         });
 
-        it('click on map when suppressing is busy it should do nothing', function () {
+        it('click on map when suppressing is busy it should do nothing', () => {
             suppress.isBusy.and.returnValue(true);
             spyOn(drawTool, 'disable');
 
@@ -645,7 +645,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.disable).not.toHaveBeenCalled();
         });
 
-        it('click on map while finished drawing polygon deletes polygon and calls onFinish method', function () {
+        it('click on map while finished drawing polygon deletes polygon and calls onFinish method', () => {
             createPolygon();
 
             drawShapeHandler._markers = []; // edit mode, no markers in draw mode
@@ -668,7 +668,7 @@ describe('The draw tool factory', function () {
             });
         });
 
-        it('click on map while finished drawing polygon does not delete polygon while suppressing', function () {
+        it('click on map while finished drawing polygon does not delete polygon while suppressing', () => {
             suppress.isBusy.and.returnValue(true);
 
             createPolygon();
@@ -683,13 +683,13 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.markers.length).toBe(3);
         });
 
-        it('click on map when no polygon exists and not in EDIT/DRAW mode does not call onFinish method', function () {
+        it('click on map when no polygon exists and not in EDIT/DRAW mode does not call onFinish method', () => {
             fireEvent('click');
 
             expect(onHandler.finish).not.toHaveBeenCalled();
         });
 
-        it('click on map while editing polygon ends edit mode', function () {
+        it('click on map while editing polygon ends edit mode', () => {
             createPolygon();
 
             drawTool.enable();
@@ -712,7 +712,7 @@ describe('The draw tool factory', function () {
             });
         });
 
-        it('click on map while editing polygon does not end edit mode while suppressing', function () {
+        it('click on map while editing polygon does not end edit mode while suppressing', () => {
             suppress.isBusy.and.returnValue(true);
 
             createPolygon();
@@ -728,19 +728,19 @@ describe('The draw tool factory', function () {
         });
     });
 
-    describe('Set polygon', function () {
-        beforeEach(function () {
+    describe('Set polygon', () => {
+        beforeEach(() => {
             drawTool.initialize(leafletMap);
         });
 
-        it('does not create a new polygon for empty markers', function () {
+        it('does not create a new polygon for empty markers', () => {
             drawTool.setPolygon([]);
 
             expect(drawnItems.addLayer).not.toHaveBeenCalled();
             expect(drawTool.shape.markers.length).toBe(0);
         });
 
-        it('creates a new polygon for the specified markers', function () {
+        it('creates a new polygon for the specified markers', () => {
             const markers = testMarkers.slice(0, 3);
             drawTool.setPolygon(markers);
 
@@ -748,7 +748,7 @@ describe('The draw tool factory', function () {
             expect(drawTool.shape.markers.length).toBe(3);
         });
 
-        it('deletes any existing polygon', function () {
+        it('deletes any existing polygon', () => {
             const markers = testMarkers.slice(0, 3);
             drawTool.setPolygon(markers);
 

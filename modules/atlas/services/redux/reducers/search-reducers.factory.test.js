@@ -1,4 +1,4 @@
-describe('The search-reducers factory', function () {
+describe('The search-reducers factory', () => {
     var searchReducers,
         DEFAULT_STATE,
         ACTIONS;
@@ -28,17 +28,17 @@ describe('The search-reducers factory', function () {
         }
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_searchReducers_, _ACTIONS_) {
+        angular.mock.inject((_searchReducers_, _ACTIONS_) => {
             searchReducers = _searchReducers_;
             ACTIONS = _ACTIONS_;
         });
     });
 
-    describe('FETCH_SEARCH_RESULTS_BY_QUERY', function () {
-        it('sets the search query and resets the search location and active category', function () {
+    describe('FETCH_SEARCH_RESULTS_BY_QUERY', () => {
+        it('sets the search query and resets the search location and active category', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -58,7 +58,7 @@ describe('The search-reducers factory', function () {
             expect(output.search.numberOfResults).toBeNull();
         });
 
-        it('sets query to null on empty string payload', function () {
+        it('sets query to null on empty string payload', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -74,7 +74,7 @@ describe('The search-reducers factory', function () {
             expect(output.search.query).toBe(null);
         });
 
-        it('sets query isFullscreen to true', function () {
+        it('sets query isFullscreen to true', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -90,7 +90,7 @@ describe('The search-reducers factory', function () {
             expect(output.search.isFullscreen).toBe(true);
         });
 
-        it('hides the layer selection, page, detail, straatbeeld and dataSelection', function () {
+        it('hides the layer selection, page, detail, straatbeeld and dataSelection', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -111,7 +111,7 @@ describe('The search-reducers factory', function () {
             expect(output.dataSelection).toBeNull();
         });
 
-        it('clears the straatbeeld when no straatbeeld id exists', function () {
+        it('clears the straatbeeld when no straatbeeld id exists', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -122,7 +122,7 @@ describe('The search-reducers factory', function () {
             expect(output.straatbeeld).toBeNull();
         });
 
-        it('clears the straatbeeld when a straatbeeld is active', function () {
+        it('clears the straatbeeld when a straatbeeld is active', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -133,7 +133,7 @@ describe('The search-reducers factory', function () {
             expect(output.straatbeeld).toBeNull();
         });
 
-        it('clears straatbeeld when a straatbeeld is active with a location', function () {
+        it('clears straatbeeld when a straatbeeld is active with a location', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -144,7 +144,7 @@ describe('The search-reducers factory', function () {
             expect(output.straatbeeld).toBeNull();
         });
 
-        it('disables the fullscreen mode of the map', function () {
+        it('disables the fullscreen mode of the map', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -156,8 +156,8 @@ describe('The search-reducers factory', function () {
         });
     });
 
-    describe('FETCH_SEARCH_RESULTS_BY_LOCATION', function () {
-        it('resets the search query and active category and sets the search location', function () {
+    describe('FETCH_SEARCH_RESULTS_BY_LOCATION', () => {
+        it('resets the search query and active category and sets the search location', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -177,7 +177,7 @@ describe('The search-reducers factory', function () {
             expect(output.search.numberOfResults).toBeNull();
         });
 
-        it('sets query isFullscreen to false', function () {
+        it('sets query isFullscreen to false', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -207,7 +207,7 @@ describe('The search-reducers factory', function () {
             expect(output.search.location).toEqual([52.1234568, 4.1234567]);
         });
 
-        it('hides the layer selection, active overlays, page, detail, straatbeeld and dataSelection', function () {
+        it('hides the layer selection, active overlays, page, detail, straatbeeld and dataSelection', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -228,7 +228,7 @@ describe('The search-reducers factory', function () {
             expect(output.dataSelection).toBeNull();
         });
 
-        it('changes the viewCenter when layerSelection or fullscreen mode is enabled', function () {
+        it('changes the viewCenter when layerSelection or fullscreen mode is enabled', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -251,7 +251,7 @@ describe('The search-reducers factory', function () {
             expect(output.map.viewCenter).toEqual([52.001, 4.002]);
         });
 
-        it('clears the straatbeeld', function () {
+        it('clears the straatbeeld', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -262,7 +262,7 @@ describe('The search-reducers factory', function () {
             expect(output.straatbeeld).toBeNull();
         });
 
-        it('clears the straatbeeld when a straatbeeld is active', function () {
+        it('clears the straatbeeld when a straatbeeld is active', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -273,7 +273,7 @@ describe('The search-reducers factory', function () {
             expect(output.straatbeeld).toBeNull();
         });
 
-        it('clears the straatbeeld when a straatbeeld is active with a location', function () {
+        it('clears the straatbeeld when a straatbeeld is active with a location', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -284,7 +284,7 @@ describe('The search-reducers factory', function () {
             expect(output.straatbeeld).toBeNull();
         });
 
-        it('disables the fullscreen mode of the map', function () {
+        it('disables the fullscreen mode of the map', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -295,14 +295,14 @@ describe('The search-reducers factory', function () {
             expect(output.map.isFullscreen).toBe(false);
         });
 
-        it('removes a drawn line from the map', function () {
+        it('removes a drawn line from the map', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output = searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION.id](inputState, [52.001, 4.002]);
 
             expect(output.map.geometry).toEqual([]);
         });
 
-        it('does not depend on a map being present', function () {
+        it('does not depend on a map being present', () => {
             var inputState = angular.copy(DEFAULT_STATE),
                 output;
 
@@ -314,11 +314,11 @@ describe('The search-reducers factory', function () {
         });
     });
 
-    describe('FETCH_SEARCH_RESULTS_CATEGORY', function () {
+    describe('FETCH_SEARCH_RESULTS_CATEGORY', () => {
         var inputState,
             output;
 
-        beforeEach(function () {
+        beforeEach(() => {
             inputState = angular.copy(DEFAULT_STATE);
             inputState.search = {
                 isLoading: false,
@@ -331,21 +331,21 @@ describe('The search-reducers factory', function () {
             output = searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY.id](inputState, 'adres');
         });
 
-        it('sets the active category', function () {
+        it('sets the active category', () => {
             expect(output.search.category).toBe('adres');
         });
 
-        it('sets the number of search results to null', function () {
+        it('sets the number of search results to null', () => {
             expect(output.search.numberOfResults).toBeNull();
         });
 
-        it('sets isLoading to true', function () {
+        it('sets isLoading to true', () => {
             expect(output.search.isLoading).toBe(true);
         });
     });
 
-    describe('FETCH_SEARCH_RESULTS_CATEGORY', function () {
-        it('only updates the search state when a search is active', function () {
+    describe('FETCH_SEARCH_RESULTS_CATEGORY', () => {
+        it('only updates the search state when a search is active', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             delete inputState.search;
             searchReducers[ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY.id](inputState, 'adres');
@@ -353,11 +353,11 @@ describe('The search-reducers factory', function () {
         });
     });
 
-    describe('SHOW_SEARCH_RESULTS', function () {
+    describe('SHOW_SEARCH_RESULTS', () => {
         var inputState,
             output;
 
-        beforeEach(function () {
+        beforeEach(() => {
             inputState = angular.copy(DEFAULT_STATE);
             inputState.search = {
                 isLoading: true,
@@ -371,27 +371,27 @@ describe('The search-reducers factory', function () {
             output = searchReducers[ACTIONS.SHOW_SEARCH_RESULTS.id](inputState, 23);
         });
 
-        it('sets the number of search results', function () {
+        it('sets the number of search results', () => {
             expect(output.search.numberOfResults).toBe(23);
         });
 
-        it('sets isLoading to false', function () {
+        it('sets isLoading to false', () => {
             expect(output.search.isLoading).toBe(false);
         });
 
-        it('sets map isLoading to false when map is available', function () {
+        it('sets map isLoading to false when map is available', () => {
             expect(output.map.isLoading).toBe(false);
         });
 
-        it('does not set map isLoading to false when map is not available', function () {
+        it('does not set map isLoading to false when map is not available', () => {
             delete inputState.map;
             output = searchReducers[ACTIONS.SHOW_SEARCH_RESULTS.id](inputState, 23);
             expect(output.map).toBeUndefined();
         });
     });
 
-    describe('SHOW_SEARCH_RESULTS', function () {
-        it('only updates the search state when a search is active', function () {
+    describe('SHOW_SEARCH_RESULTS', () => {
+        it('only updates the search state when a search is active', () => {
             const inputState = angular.copy(DEFAULT_STATE);
             delete inputState.search;
             searchReducers[ACTIONS.SHOW_SEARCH_RESULTS.id](inputState, 23);

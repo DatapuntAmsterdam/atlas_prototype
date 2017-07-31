@@ -1,4 +1,4 @@
-describe('The search factory', function () {
+describe('The search factory', () => {
     let $q,
         $rootScope,
         search,
@@ -9,7 +9,7 @@ describe('The search factory', function () {
 
     const FAIL_ON_URI = 'FAIL_ON_URI';
 
-    beforeEach(function () {
+    beforeEach(() => {
         queryEndpoints = [
             {
                 slug: 'adres',
@@ -95,14 +95,14 @@ describe('The search factory', function () {
                     }
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('SEARCH_CONFIG', {
                     QUERY_ENDPOINTS: queryEndpoints
                 });
             }
         );
 
-        angular.mock.inject(function (_$q_, _$rootScope_, _search_, _api_, _searchFormatter_, _TabHeader_) {
+        angular.mock.inject((_$q_, _$rootScope_, _search_, _api_, _searchFormatter_, _TabHeader_) => {
             $q = _$q_;
             $rootScope = _$rootScope_;
             search = _search_;
@@ -117,7 +117,7 @@ describe('The search factory', function () {
         spyOn(searchFormatter, 'formatLinks').and.callThrough();
     });
 
-    it('can be initialised to register as a count provider for the tabheader', function () {
+    it('can be initialised to register as a count provider for the tabheader', () => {
         searchFormatter.formatCategories = () => {
             return [{
                 count: 1
@@ -134,10 +134,10 @@ describe('The search factory', function () {
         expect(count).toBe(1);
     });
 
-    it('can retrieve formatted search results for all categories based on a query', function () {
+    it('can retrieve formatted search results for all categories based on a query', () => {
         var searchResults;
 
-        search.search('Waterlooplein').then(function (_searchResults_) {
+        search.search('Waterlooplein').then(_searchResults_ => {
             searchResults = _searchResults_;
         });
 
@@ -155,7 +155,7 @@ describe('The search factory', function () {
         expect(searchResults).toBe('FAKE_FORMATTED_CATEGORIES_RESULTS');
     });
 
-    it('can retrieve formatted search results for all categories, even if one or more queries fail', function () {
+    it('can retrieve formatted search results for all categories, even if one or more queries fail', () => {
         queryEndpoints.push({
             slug: 'fail',
             label_singular: 'Fail',
@@ -165,7 +165,7 @@ describe('The search factory', function () {
 
         let searchResults;
 
-        search.search('Waterlooplein').then(function (_searchResults_) {
+        search.search('Waterlooplein').then(_searchResults_ => {
             searchResults = _searchResults_;
         });
 
@@ -181,10 +181,10 @@ describe('The search factory', function () {
         expect(searchResults).toBe('FAKE_FORMATTED_CATEGORIES_RESULTS');
     });
 
-    it('can retrieve a single category based on a query', function () {
+    it('can retrieve a single category based on a query', () => {
         var searchResults;
 
-        search.search('Waterlooplein', 'openbare_ruimte').then(function (_searchResults_) {
+        search.search('Waterlooplein', 'openbare_ruimte').then(_searchResults_ => {
             searchResults = _searchResults_;
         });
 
@@ -202,7 +202,7 @@ describe('The search factory', function () {
         expect(searchResults).toEqual(['FAKE_FORMATTED_CATEGORY_RESULT']);
     });
 
-    it('has a load more function that returns a new set of search results', function () {
+    it('has a load more function that returns a new set of search results', () => {
         var searchResultsInput = {
                 slug: 'adres',
                 next: 'http://some-domain/path/to/slug/?q=waterloo&page=2&page_size=5',
@@ -217,7 +217,7 @@ describe('The search factory', function () {
             },
             searchResultsOutput;
 
-        search.loadMore(searchResultsInput).then(function (_searchResultsOutput_) {
+        search.loadMore(searchResultsInput).then(_searchResultsOutput_ => {
             searchResultsOutput = _searchResultsOutput_;
         });
 
@@ -248,7 +248,7 @@ describe('The search factory', function () {
         ]);
     });
 
-    it('updates the next link', function () {
+    it('updates the next link', () => {
         var searchResultsInput = {
                 next: 'http://some-domain/path/to/slug/?q=waterloo&page=2&page_size=5',
                 count: 11,
@@ -263,7 +263,7 @@ describe('The search factory', function () {
             searchResultsOutput;
 
         // Load the second page
-        search.loadMore(searchResultsInput).then(function (_searchResultsOutput_) {
+        search.loadMore(searchResultsInput).then(_searchResultsOutput_ => {
             searchResultsOutput = _searchResultsOutput_;
         });
 
@@ -273,7 +273,7 @@ describe('The search factory', function () {
         expect(searchResultsOutput.results.length).toBe(10);
 
         // Load the third (and last) page
-        search.loadMore(searchResultsOutput).then(function (_searchResultsOutput_) {
+        search.loadMore(searchResultsOutput).then(_searchResultsOutput_ => {
             searchResultsOutput = _searchResultsOutput_;
         });
 

@@ -1,10 +1,10 @@
-describe('The dp-toggle-layer-selection component', function () {
+describe('The dp-toggle-layer-selection component', () => {
     var $compile,
         $rootScope,
         store,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -14,7 +14,7 @@ describe('The dp-toggle-layer-selection component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -43,7 +43,7 @@ describe('The dp-toggle-layer-selection component', function () {
         return component;
     }
 
-    it('has a toggle that can trigger both SHOW_LAYER_SELECTION and HIDE_LAYER_SELECTION', function () {
+    it('has a toggle that can trigger both SHOW_LAYER_SELECTION and HIDE_LAYER_SELECTION', () => {
         var component;
 
         // When showActiveOverlays is false
@@ -65,7 +65,7 @@ describe('The dp-toggle-layer-selection component', function () {
         });
     });
 
-    it('has different styling depending on showLayerSelection', function () {
+    it('has different styling depending on showLayerSelection', () => {
         var component;
 
         // When showActiveOverlays is false
@@ -79,7 +79,7 @@ describe('The dp-toggle-layer-selection component', function () {
             .toContain('c-toggle-layer-selection--opened');
     });
 
-    it('has a different title and alt attribute depending on showLayerSelection', function () {
+    it('has a different title and alt attribute depending on showLayerSelection', () => {
         var component;
 
         // When showActiveOverlays is false

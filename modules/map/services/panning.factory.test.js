@@ -1,4 +1,4 @@
-describe('The panning factory', function () {
+describe('The panning factory', () => {
     var $rootScope,
         panning,
         store,
@@ -7,7 +7,7 @@ describe('The panning factory', function () {
         mockedLeafletMap,
         moveEndCallback;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -17,7 +17,7 @@ describe('The panning factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _panning_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$rootScope_, _panning_, _store_, _ACTIONS_) => {
             $rootScope = _$rootScope_;
             panning = _panning_;
             store = _store_;
@@ -44,19 +44,19 @@ describe('The panning factory', function () {
         spyOn(store, 'dispatch');
     });
 
-    it('can pan to a location', function () {
+    it('can pan to a location', () => {
         panning.panTo(mockedLeafletMap, mockedLocation);
 
         expect(mockedLeafletMap.panTo).toHaveBeenCalledWith(mockedLocation, jasmine.any(Object));
     });
 
-    it('prevents infinite loops; it won\'t fire if the new location is equal to the current location', function () {
+    it('prevents infinite loops; it won\'t fire if the new location is equal to the current location', () => {
         panning.panTo(mockedLeafletMap, [52.123, 4.789]);
 
         expect(mockedLeafletMap.panTo).not.toHaveBeenCalled();
     });
 
-    it('listens for Leaflet\'s moveend event, then it fires the MAP_PAN action', function () {
+    it('listens for Leaflet\'s moveend event, then it fires the MAP_PAN action', () => {
         panning.initialize(mockedLeafletMap);
 
         expect(mockedLeafletMap.on).toHaveBeenCalledWith('dragend', jasmine.any(Function));
@@ -76,13 +76,13 @@ describe('The panning factory', function () {
         });
     });
 
-    it('has disabled animations', function () {
+    it('has disabled animations', () => {
         // By default animations are disabled
         panning.panTo(mockedLeafletMap, [52.1, 4.1]);
         expect(mockedLeafletMap.panTo).toHaveBeenCalledWith([52.1, 4.1], {animate: false});
     });
 
-    it('exposes the getCurrentLocation function', function () {
+    it('exposes the getCurrentLocation function', () => {
         expect(panning.getCurrentLocation(mockedLeafletMap)).toEqual([52.123, 4.789]);
     });
 });

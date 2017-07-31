@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -23,7 +23,7 @@
         function getGraphData (visualisation, gebiedHeading, gebiedCode) {
             var variables = {};
 
-            BBGA_CONFIG[visualisation].forEach(function (variableConfig) {
+            BBGA_CONFIG[visualisation].forEach(variableConfig => {
                 variables[variableConfig.variable] = getVariable(variableConfig, gebiedHeading, gebiedCode);
             });
 
@@ -51,12 +51,10 @@
         function getMetaData (variableName) {
             return api.getByUri('bbga/meta/', {
                 variabele: variableName
-            }).then(function (response) {
-                return {
-                    label: response.results[0].label,
-                    peildatum: response.results[0].peildatum
-                };
-            });
+            }).then(response => ({
+                label: response.results[0].label,
+                peildatum: response.results[0].peildatum
+            }));
         }
 
         function getData (variableName, gebiedHeading, gebiedCode) {
@@ -64,14 +62,12 @@
                 variabele: variableName,
                 gebiedcode15: gebiedCode,
                 jaar: 'latest'
-            }).then(function (response) {
-                return {
-                    label: gebiedHeading,
-                    code: gebiedCode,
-                    waarde: response.count > 0 ? response.results[0].waarde : null,
-                    jaar: response.count > 0 ? response.results[0].jaar : null
-                };
-            });
+            }).then(response => ({
+                label: gebiedHeading,
+                code: gebiedCode,
+                waarde: response.count > 0 ? response.results[0].waarde : null,
+                jaar: response.count > 0 ? response.results[0].jaar : null
+            }));
         }
 
         // We're assuming that all data for a variable gets updated at the same time
@@ -80,7 +76,7 @@
             variableData.meta.jaar = variableData.data[0].jaar;
 
             // Remove the jaar from it's old position
-            variableData.data.map(function (data) {
+            variableData.data.map(data => {
                 delete data.jaar;
 
                 return data;
@@ -89,4 +85,4 @@
             return variableData;
         }
     }
-})();
+}))();

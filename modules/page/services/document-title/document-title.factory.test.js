@@ -1,20 +1,20 @@
-describe('The dpPageDocumentTitle factory', function () {
+describe('The dpPageDocumentTitle factory', () => {
     var documentTitle,
         mocks = {
             pageName: angular.noop
         };
 
-    beforeEach(function () {
+    beforeEach(() => {
         spyOn(mocks, 'pageName');
 
         angular.mock.module('dpPage', mocks);
 
-        angular.mock.inject(function (dpPageDocumentTitle) {
+        angular.mock.inject(dpPageDocumentTitle => {
             documentTitle = dpPageDocumentTitle;
         });
     });
 
-    it('uses the pageName service', function () {
+    it('uses the pageName service', () => {
         documentTitle.getTitle({ name: 'pageA' });
         documentTitle.getTitle({ name: 'page-b' });
 
@@ -22,7 +22,7 @@ describe('The dpPageDocumentTitle factory', function () {
         expect(mocks.pageName).toHaveBeenCalledWith('page-b');
     });
 
-    it('uses the pageState type if available', function () {
+    it('uses the pageState type if available', () => {
         documentTitle.getTitle({ name: 'pageA', type: 'pageAtype' });
         documentTitle.getTitle({ name: 'page-b', type: 'page-b-type' });
 

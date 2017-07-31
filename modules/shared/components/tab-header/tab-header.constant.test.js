@@ -1,19 +1,19 @@
-describe('The TAB_HEADER_CONFIG', function () {
+describe('The TAB_HEADER_CONFIG', () => {
     let TAB_HEADER_CONFIG;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpShared');
 
-        angular.mock.inject(function (_TAB_HEADER_CONFIG_) {
+        angular.mock.inject(_TAB_HEADER_CONFIG_ => {
             TAB_HEADER_CONFIG = _TAB_HEADER_CONFIG_;
         });
     });
 
-    it('contains a configuration for the data-datasets tab header', function () {
+    it('contains a configuration for the data-datasets tab header', () => {
         expect(Object.keys(TAB_HEADER_CONFIG['data-datasets'])).toEqual(['data', 'datasets']);
     });
 
-    it('the data-datasets tab header configuration provides for a getPayload method for each tab', function () {
+    it('the data-datasets tab header configuration provides for a getPayload method for each tab', () => {
         expect(TAB_HEADER_CONFIG['data-datasets'].data.getPayload('payload')).toBe('payload');
         expect(TAB_HEADER_CONFIG['data-datasets'].datasets.getPayload('payload')).toEqual({
             dataset: 'catalogus',
@@ -24,7 +24,7 @@ describe('The TAB_HEADER_CONFIG', function () {
         });
     });
 
-    it('allows for searching on an empty string', function () {
+    it('allows for searching on an empty string', () => {
         expect(TAB_HEADER_CONFIG['data-datasets'].data.getPayload('')).toBe('');
     });
 });

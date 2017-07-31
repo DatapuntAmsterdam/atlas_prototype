@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -167,4 +167,4 @@
             return newState;
         }
     }
-})();
+}))();

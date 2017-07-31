@@ -1,15 +1,15 @@
-describe('The bagAddress filter', function () {
+describe('The bagAddress filter', () => {
     let bagAddressFilter;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDataSelection');
 
-        angular.mock.inject(function (_bagAddressFilter_) {
+        angular.mock.inject(_bagAddressFilter_ => {
             bagAddressFilter = _bagAddressFilter_;
         });
     });
 
-    it('returns _openbare_ruimte_naam followed by the huisnummer and an optional huisletter', function () {
+    it('returns _openbare_ruimte_naam followed by the huisnummer and an optional huisletter', () => {
         let output;
 
         // huisnummer
@@ -28,7 +28,7 @@ describe('The bagAddress filter', function () {
         expect(output).toBe('Weesperstraat 113B');
     });
 
-    it('shows an optional huisnummer_toevoeging after the huisnummer+huisletter', function () {
+    it('shows an optional huisnummer_toevoeging after the huisnummer+huisletter', () => {
         let output;
 
         // huisnummer

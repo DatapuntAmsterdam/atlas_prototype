@@ -1,4 +1,4 @@
-describe('The page component', function () {
+describe('The page component', () => {
     var $compile,
         $rootScope,
         $templateCache,
@@ -6,7 +6,7 @@ describe('The page component', function () {
         googleSheet,
         entries;
 
-    beforeEach(function () {
+    beforeEach(() => {
         entries = [
             {
                 id: 'item'
@@ -29,7 +29,7 @@ describe('The page component', function () {
             }
         });
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$templateCache_, _$q_, _googleSheet_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$templateCache_, _$q_, _googleSheet_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $templateCache = _$templateCache_;
@@ -59,7 +59,7 @@ describe('The page component', function () {
         return component;
     }
 
-    it('loads an HTML page based on the name binding', function () {
+    it('loads an HTML page based on the name binding', () => {
         var component;
 
         // Welcome page
@@ -71,7 +71,7 @@ describe('The page component', function () {
         expect(component.text()).toContain('THIS_IS_ABOUT');
     });
 
-    it('loads cms contents for the specified type and item', function () {
+    it('loads cms contents for the specified type and item', () => {
         $templateCache.put('modules/page/components/page/templates/name.html', 'NAME');
         spyOn(googleSheet, 'getContents').and.callThrough();
 
@@ -87,7 +87,7 @@ describe('The page component', function () {
         expect(scope.vm.entry).toEqual({id: 'item'});
     });
 
-    it('does nothing on empty type', function () {
+    it('does nothing on empty type', () => {
         spyOn(googleSheet, 'getContents').and.callThrough();
         const component = getComponent('about', '', '');
         const scope = component.isolateScope();

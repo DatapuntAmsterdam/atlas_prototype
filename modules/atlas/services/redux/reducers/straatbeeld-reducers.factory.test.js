@@ -1,9 +1,9 @@
-describe('Straatbeeld reducers factory', function () {
+describe('Straatbeeld reducers factory', () => {
     var straatbeeldReducers,
         inputState,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         const DEFAULT_STATE = {
             map: {
                 baseLayer: 'topografie',
@@ -31,24 +31,24 @@ describe('Straatbeeld reducers factory', function () {
 
         angular.mock.module(
             'atlas',
-            function ($provide) {
+            $provide => {
                 $provide.constant('STRAATBEELD_CONFIG', {
                     DEFAULT_FOV: 79
                 });
             }
         );
 
-        angular.mock.inject(function (_straatbeeldReducers_, _ACTIONS_) {
+        angular.mock.inject((_straatbeeldReducers_, _ACTIONS_) => {
             straatbeeldReducers = _straatbeeldReducers_;
             inputState = angular.copy(DEFAULT_STATE);
             ACTIONS = _ACTIONS_;
         });
     });
 
-    describe('FETCH_STRAATBEELD_BY_ID', function () {
+    describe('FETCH_STRAATBEELD_BY_ID', () => {
         var payload;
 
-        beforeEach(function () {
+        beforeEach(() => {
             payload = {
                 'id': 'ABC',
                 'heading': 123,
@@ -56,7 +56,7 @@ describe('Straatbeeld reducers factory', function () {
             };
         });
 
-        it('when heading is not in payload, use oldstate heading', function () {
+        it('when heading is not in payload, use oldstate heading', () => {
             delete payload.heading;
 
             inputState.straatbeeld = {
@@ -73,24 +73,24 @@ describe('Straatbeeld reducers factory', function () {
             expect(newState.straatbeeld.heading).toBe(179);
         });
 
-        it('when heading is in payload, use the payload heading', function () {
+        it('when heading is in payload, use the payload heading', () => {
             var newState = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
             expect(newState.straatbeeld.heading).toBe(123);
         });
 
-        it('Set INITIAL id, heading, isInitial', function () {
+        it('Set INITIAL id, heading, isInitial', () => {
             inputState.straatbeeld = null;
             var newState = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
             expect(newState.straatbeeld).toEqual(jasmine.objectContaining(payload));
         });
 
-        it('Sets loading indication for map and straatbeeld', function () {
+        it('Sets loading indication for map and straatbeeld', () => {
             var newState = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
             expect(newState.straatbeeld.isLoading).toBe(true);
             expect(newState.map.isLoading).toBe(true);
         });
 
-        it('resets previous straatbeeld variables', function () {
+        it('resets previous straatbeeld variables', () => {
             inputState.straatbeeld = {
                 'fov': 1,
                 'pitch': 2,
@@ -110,7 +110,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(newState.straatbeeld.image).toBeNull();
         });
 
-        it('resets search results', function () {
+        it('resets search results', () => {
             inputState.search = {
                 query: 'linnaeus'
             };
@@ -119,7 +119,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(newState.search).toBeNull();
         });
 
-        it('has a default heading of 0', function () {
+        it('has a default heading of 0', () => {
             inputState.search = {
                 query: 'linnaeus'
             };
@@ -130,7 +130,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(newState.straatbeeld.heading).toBe(0);
         });
 
-        it('optionally sets straatbeeld to fullscreen', function () {
+        it('optionally sets straatbeeld to fullscreen', () => {
             inputState.detail = {
                 endpoint: 'bag/verblijfsobject/123/',
                 geometry: 'aap',
@@ -161,11 +161,11 @@ describe('Straatbeeld reducers factory', function () {
     describe('STRAATBEELD_FULLSCREEN', () => {
         let payload;
 
-        beforeEach(function () {
+        beforeEach(() => {
             inputState.straatbeeld = {};
         });
 
-        it('can set straatbeeld explicitly to fullscreen', function () {
+        it('can set straatbeeld explicitly to fullscreen', () => {
             let newState = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN.id](inputState);
             expect(newState.straatbeeld.isFullscreen).toBeUndefined();
 
@@ -183,7 +183,7 @@ describe('Straatbeeld reducers factory', function () {
         });
     });
 
-    describe('SHOW_STRAATBEELD', function () {
+    describe('SHOW_STRAATBEELD', () => {
         var payload = {
             date: new Date('2016-05-19T13:04:15.341110Z'),
             hotspots: [{
@@ -198,7 +198,7 @@ describe('Straatbeeld reducers factory', function () {
             }
         };
 
-        beforeEach(function () {
+        beforeEach(() => {
             inputState.straatbeeld = {
                 isLoading: true,
                 id: 'ABC',
@@ -209,19 +209,19 @@ describe('Straatbeeld reducers factory', function () {
             inputState.detail = null;
         });
 
-        it('Adds the payload to the state', function () {
+        it('Adds the payload to the state', () => {
             var newState = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
 
             expect(newState.straatbeeld).toEqual(jasmine.objectContaining(payload));
         });
 
-        it('set defaults for pitch, fov when oldstate is unknown', function () {
+        it('set defaults for pitch, fov when oldstate is unknown', () => {
             var newState = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
             expect(newState.straatbeeld.pitch).toBe(0);
             expect(newState.straatbeeld.fov).toBe(79);
         });
 
-        it('set Pitch and fov to newState when oldstate is known', function () {
+        it('set Pitch and fov to newState when oldstate is known', () => {
             inputState.straatbeeld.pitch = 1;
             inputState.straatbeeld.fov = 2;
 
@@ -230,7 +230,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(newState.straatbeeld.fov).toBe(2);
         });
 
-        it('sets viewcenter when no heading is known', function () {
+        it('sets viewcenter when no heading is known', () => {
             inputState.straatbeeld.heading = null;
             inputState.map = {};
 
@@ -238,7 +238,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(newState.map.viewCenter).toEqual(payload.location);
         });
 
-        it('do not overwrite isLoading, id, heading, isInitial', function () {
+        it('do not overwrite isLoading, id, heading, isInitial', () => {
             var newState = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
 
             expect(newState.straatbeeld).toEqual(jasmine.objectContaining({
@@ -249,7 +249,7 @@ describe('Straatbeeld reducers factory', function () {
             }));
         });
 
-        it('can set the straatbeeld to the new location', function () {
+        it('can set the straatbeeld to the new location', () => {
             var state = { straatbeeld: {} },
                 output;
 
@@ -262,7 +262,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(output.straatbeeld.targetLocation).toEqual(location);
         });
 
-        it('centers the map when layerselection or fullscreen map is active', function () {
+        it('centers the map when layerselection or fullscreen map is active', () => {
             const state = {
                 'map': {
                     isFullscreen: true
@@ -276,7 +276,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(newState.map.viewCenter).toEqual(location);
         });
 
-        it('can set the straatbeeld to the new location from scratch', function () {
+        it('can set the straatbeeld to the new location from scratch', () => {
             var state = {},
                 output;
 
@@ -289,7 +289,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(output.straatbeeld.targetLocation).toEqual(location);
         });
 
-        it('removes a drawn line from the map', function () {
+        it('removes a drawn line from the map', () => {
             const state = { map: {} },
                 location = [52.001, 4.002],
                 output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION.id](state, location);
@@ -297,7 +297,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(output.map.geometry).toEqual([]);
         });
 
-        it('heads towards a targetlocation when straatbeeld is loaded by location', function () {
+        it('heads towards a targetlocation when straatbeeld is loaded by location', () => {
             let newState;
 
             [
@@ -317,7 +317,7 @@ describe('Straatbeeld reducers factory', function () {
             });
         });
 
-        it('does not head towards a targetlocation when straatbeeld by location is reloaded', function () {
+        it('does not head towards a targetlocation when straatbeeld by location is reloaded', () => {
             // When a straatbeeld is reloaded, there is no target location available
             // There is however a location available to denote that the straatbeeld origins from a location
             // The heading has already been calculated and saved on the first show of the straatbeeld
@@ -331,7 +331,7 @@ describe('Straatbeeld reducers factory', function () {
             }));
         });
 
-        it('Sets the map viewCenter when straatbeeld is loaded by id', function () {
+        it('Sets the map viewCenter when straatbeeld is loaded by id', () => {
             // When a straatbeeld is loaded by id the map should be centered on the location
             // Load by id is indicated by the absence of a location
             // The map center should not be set when the straatbeeld is loaded by location
@@ -362,20 +362,20 @@ describe('Straatbeeld reducers factory', function () {
             }));
         });
 
-        it('Sets loading to false', function () {
+        it('Sets loading to false', () => {
             var newState = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
             expect(newState.straatbeeld.isLoading).toBe(false);
             expect(newState.map.isLoading).toBe(false);
         });
 
-        it('does nothing when straatbeeld is null', function () {
+        it('does nothing when straatbeeld is null', () => {
             inputState.straatbeeld = null;
             var newState = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
 
             expect(newState.straatbeeld).toBeNull();
         });
 
-        it('sets the map viewcenter on first and every subsequent straatbeeld', function () {
+        it('sets the map viewcenter on first and every subsequent straatbeeld', () => {
             inputState.map.viewCenter = null;
             let newState;
 
@@ -388,7 +388,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(newState.map.viewCenter).toEqual([3, 4]);
         });
 
-        it('only sets the map viewcenter on a subsequent straatbeeld when straatbeeld active', function () {
+        it('only sets the map viewcenter on a subsequent straatbeeld when straatbeeld active', () => {
             inputState.straatbeeld = null;  // no straatbeeld is active
             var location = inputState.map.viewCenter;   // save location
             payload.location = [location[0] + 1, location[1] + 1];  // try to set to other location
@@ -397,8 +397,8 @@ describe('Straatbeeld reducers factory', function () {
         });
     });
 
-    describe('setOrientationReducer', function () {
-        it('updates the orientation with pitch and fov', function () {
+    describe('setOrientationReducer', () => {
+        it('updates the orientation with pitch and fov', () => {
             inputState.straatbeeld = {};
 
             inputState.straatbeeld.pitch = 1;
@@ -418,8 +418,8 @@ describe('Straatbeeld reducers factory', function () {
         });
     });
 
-    describe('setStraatbeeldHistoryReducer', function () {
-        it('sets the straatbeeld history selection', function () {
+    describe('setStraatbeeldHistoryReducer', () => {
+        it('sets the straatbeeld history selection', () => {
             inputState.straatbeeld = {};
 
             const payload = 2020;
@@ -428,7 +428,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(output.straatbeeld.history).toEqual(payload);
         });
 
-        it('updates the straatbeeld history selection', function () {
+        it('updates the straatbeeld history selection', () => {
             inputState.straatbeeld = {};
 
             inputState.straatbeeld.history = 0;
@@ -439,7 +439,7 @@ describe('Straatbeeld reducers factory', function () {
             expect(output.straatbeeld.history).toEqual(payload);
         });
 
-        it('can set the history selection to zero', function () {
+        it('can set the history selection to zero', () => {
             inputState.straatbeeld = {};
 
             inputState.straatbeeld.history = 2020;

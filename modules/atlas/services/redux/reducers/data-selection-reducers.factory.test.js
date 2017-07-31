@@ -1,4 +1,4 @@
-describe('The dataSelectionReducers factory', function () {
+describe('The dataSelectionReducers factory', () => {
     let dataSelectionReducers,
         ACTIONS;
 
@@ -27,19 +27,19 @@ describe('The dataSelectionReducers factory', function () {
         }
     };
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('atlas');
 
-        angular.mock.inject(function (_dataSelectionReducers_, _ACTIONS_) {
+        angular.mock.inject((_dataSelectionReducers_, _ACTIONS_) => {
             dataSelectionReducers = _dataSelectionReducers_;
             ACTIONS = _ACTIONS_;
         });
     });
 
-    describe('FETCH_DATA_SELECTION', function () {
+    describe('FETCH_DATA_SELECTION', () => {
         let payload;
 
-        beforeEach(function () {
+        beforeEach(() => {
             payload = {
                 dataset: 'bag',
                 filters: {
@@ -59,7 +59,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.map.isFullscreen).toBe(false);
         });
 
-        it('has a default table view and set map not to be loading', function () {
+        it('has a default table view and set map not to be loading', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
 
             const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
@@ -70,7 +70,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.map.isLoading).toEqual(false);
         });
 
-        it('can display in list view and set map to be loading', function () {
+        it('can display in list view and set map to be loading', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
             payload.view = 'LIST';
 
@@ -82,7 +82,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.map.isLoading).toEqual(true);
         });
 
-        it('sets the dataSelection dataset, filters and page', function () {
+        it('sets the dataSelection dataset, filters and page', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
 
             const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
@@ -97,7 +97,7 @@ describe('The dataSelectionReducers factory', function () {
             }));
         });
 
-        it('sets the dataSelection query, page, view, dataset and empties filters', function () {
+        it('sets the dataSelection query, page, view, dataset and empties filters', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
             mockedState.filters = {
                 a: 'a'
@@ -116,7 +116,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.dataSelection.filters).toEqual({});
         });
 
-        it('defaults the filters to an empty object', function () {
+        it('defaults the filters to an empty object', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
 
             // Object as payload
@@ -130,7 +130,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(fromStringOutput.dataSelection.filters).toEqual({});
         });
 
-        it('makes the Array of markers empty', function () {
+        it('makes the Array of markers empty', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
 
             const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
@@ -140,7 +140,7 @@ describe('The dataSelectionReducers factory', function () {
             }));
         });
 
-        it('sets isLoading to true', function () {
+        it('sets isLoading to true', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
 
             const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
@@ -148,7 +148,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.dataSelection.isLoading).toBe(true);
         });
 
-        it('disables search, page, detail and straatbeeld', function () {
+        it('disables search, page, detail and straatbeeld', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
             mockedState.search = {some: 'object'};
             mockedState.page.name = 'somePage';
@@ -163,7 +163,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.straatbeeld).toBeNull();
         });
 
-        it('preserves the isPrintMode variable', function () {
+        it('preserves the isPrintMode variable', () => {
             let output;
             const mockedState = angular.copy(DEFAULT_STATE);
 
@@ -179,12 +179,12 @@ describe('The dataSelectionReducers factory', function () {
         });
     });
 
-    describe('SHOW_DATA_SELECTION', function () {
+    describe('SHOW_DATA_SELECTION', () => {
         let mockedState,
             payload,
             output;
 
-        beforeEach(function () {
+        beforeEach(() => {
             mockedState = {
                 dataSelection: {
                     dataset: 'bag',
@@ -203,19 +203,19 @@ describe('The dataSelectionReducers factory', function () {
             payload = ['MOCKED', 'MARKER', 'ARRAY'];
         });
 
-        it('adds markers to the state', function () {
+        it('adds markers to the state', () => {
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.dataSelection.markers).toEqual(['MOCKED', 'MARKER', 'ARRAY']);
         });
 
-        it('sets isLoading to false', function () {
+        it('sets isLoading to false', () => {
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.dataSelection.isLoading).toEqual(false);
         });
 
-        it('sets map isLoading to false', function () {
+        it('sets map isLoading to false', () => {
             output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.map.isLoading).toEqual(false);
@@ -229,12 +229,12 @@ describe('The dataSelectionReducers factory', function () {
         });
     });
 
-    describe('RESET_DATA_SELECTION', function () {
+    describe('RESET_DATA_SELECTION', () => {
         let mockedState,
             payload,
             output;
 
-        beforeEach(function () {
+        beforeEach(() => {
             mockedState = {
                 dataSelection: {
                     dataset: 'bag',
@@ -253,19 +253,19 @@ describe('The dataSelectionReducers factory', function () {
             payload = ['MOCKED', 'MARKER', 'ARRAY'];
         });
 
-        it('adds markers to the state', function () {
+        it('adds markers to the state', () => {
             output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.dataSelection.markers).toEqual(['MOCKED', 'MARKER', 'ARRAY']);
         });
 
-        it('sets isLoading to false', function () {
+        it('sets isLoading to false', () => {
             output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.dataSelection.isLoading).toEqual(false);
         });
 
-        it('sets map isLoading to false', function () {
+        it('sets map isLoading to false', () => {
             output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
 
             expect(output.map.isLoading).toEqual(false);
@@ -278,7 +278,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.dataSelection).toBeNull();
         });
 
-        it('sets the reset flag to false', function () {
+        it('sets the reset flag to false', () => {
             mockedState.dataSelection.reset = true;
             output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
 
@@ -286,12 +286,12 @@ describe('The dataSelectionReducers factory', function () {
         });
     });
 
-    describe('SET_DATA_SELECTION_VIEW', function () {
+    describe('SET_DATA_SELECTION_VIEW', () => {
         let mockedState,
             payload,
             output;
 
-        beforeEach(function () {
+        beforeEach(() => {
             mockedState = {
                 dataSelection: {
                     dataset: 'bag',
@@ -306,7 +306,7 @@ describe('The dataSelectionReducers factory', function () {
             };
         });
 
-        it('can set the view to list view and set map to be loading', function () {
+        it('can set the view to list view and set map to be loading', () => {
             payload = 'LIST';
 
             output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](mockedState, payload);
@@ -315,7 +315,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.map.isLoading).toBe(true);
         });
 
-        it('can set the view to table view and set map not to be loading', function () {
+        it('can set the view to table view and set map not to be loading', () => {
             payload = 'TABLE';
 
             output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](mockedState, payload);
@@ -324,7 +324,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.map.isLoading).toBe(false);
         });
 
-        it('refuses to set the view to an unknown view', function () {
+        it('refuses to set the view to an unknown view', () => {
             payload = 'aap';
 
             output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](mockedState, payload);
@@ -332,7 +332,7 @@ describe('The dataSelectionReducers factory', function () {
             expect(output.dataSelection.view).toBeUndefined();
         });
 
-        it('sets isLoading to true', function () {
+        it('sets isLoading to true', () => {
             payload = 'LIST';
             mockedState.dataSelection.isLoading = false;
 
@@ -342,8 +342,8 @@ describe('The dataSelectionReducers factory', function () {
         });
     });
 
-    describe('NAVIGATE_DATA_SELECTION', function () {
-        it('updates the page', function () {
+    describe('NAVIGATE_DATA_SELECTION', () => {
+        it('updates the page', () => {
             const mockedState = angular.copy(DEFAULT_STATE);
 
             mockedState.dataSelection = {

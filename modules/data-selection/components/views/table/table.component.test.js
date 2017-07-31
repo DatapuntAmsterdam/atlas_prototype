@@ -1,4 +1,4 @@
-describe('The dp-data-selection-table component', function () {
+describe('The dp-data-selection-table component', () => {
     let $compile,
         $rootScope,
         $templateCache,
@@ -6,7 +6,7 @@ describe('The dp-data-selection-table component', function () {
         store,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -19,7 +19,7 @@ describe('The dp-data-selection-table component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$templateCache_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$templateCache_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $templateCache = _$templateCache_;
@@ -99,7 +99,7 @@ describe('The dp-data-selection-table component', function () {
         expect(panel.text()).toContain('MESSAGE');
     });
 
-    it('renders a <thead> with all the column names', function () {
+    it('renders a <thead> with all the column names', () => {
         const component = getComponent();
 
         expect(component.find('table thead').length).toBe(1);
@@ -110,14 +110,14 @@ describe('The dp-data-selection-table component', function () {
         expect(component.find('table thead th').eq(2).text().trim()).toBe('Column C');
     });
 
-    it('renders <tr>\'s inside <tbody> for each row', function () {
+    it('renders <tr>\'s inside <tbody> for each row', () => {
         const component = getComponent();
 
         expect(component.find('table tbody').length).toBe(1);
         expect(component.find('table tbody tr').length).toBe(2);
     });
 
-    it('applies dp-data-selection-formatter to each <td> inside <tbody>', function () {
+    it('applies dp-data-selection-formatter to each <td> inside <tbody>', () => {
         const component = getComponent();
 
         // The first two columns have no formatters
@@ -131,7 +131,7 @@ describe('The dp-data-selection-table component', function () {
         expect(component.find('tbody tr:nth-child(2) td:nth-child(3)').html().trim()).toContain('<strong>2C</strong>');
     });
 
-    it('makes each <tr> clickable (will FETCH_DETAIL)', function () {
+    it('makes each <tr> clickable (will FETCH_DETAIL)', () => {
         const component = getComponent();
 
         expect(store.dispatch).not.toHaveBeenCalled();

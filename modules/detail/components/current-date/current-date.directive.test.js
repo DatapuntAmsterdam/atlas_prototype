@@ -1,17 +1,17 @@
-describe('The dp-current-date directive', function () {
+describe('The dp-current-date directive', () => {
     var $compile,
         $rootScope;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDetail');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
     });
 
-    afterEach(function () {
+    afterEach(() => {
         // Reset the mocked date
         jasmine.clock().uninstall();
     });
@@ -30,7 +30,7 @@ describe('The dp-current-date directive', function () {
         return directive;
     }
 
-    it('displays and formats the current date', function () {
+    it('displays and formats the current date', () => {
         var directive,
             mockedDate;
 
@@ -41,7 +41,7 @@ describe('The dp-current-date directive', function () {
         expect(directive.text()).toBe('25-12-2016');
     });
 
-    it('adds leading zeros to the days and months', function () {
+    it('adds leading zeros to the days and months', () => {
         var directive,
             mockedDate;
 

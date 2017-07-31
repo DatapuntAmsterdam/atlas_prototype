@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -17,8 +17,8 @@
     function DpToggleFullscreenController ($scope) {
         const vm = this;
 
-        $scope.$watch('vm.isFullscreen', function () {
+        $scope.$watch('vm.isFullscreen', () => {
             vm.buttonText = `Kaart ${vm.isFullscreen ? 'verkleinen' : 'vergroten'}`;
         });
     }
-})();
+}))();

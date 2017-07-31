@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
     angular
         .module('dpStraatbeeld')
@@ -15,8 +15,8 @@
     }
     function linkFn (scope, element) {
         // Add click AND touchsstart events to the element
-        element.bind('touchstart click', function () {
+        element.bind('touchstart click', () => {
             scope.$apply(scope.dpHotspotTouch());
         });
     }
-})();
+}))();

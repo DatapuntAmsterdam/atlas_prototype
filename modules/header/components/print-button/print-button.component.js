@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -15,8 +15,8 @@
     function DpPrintButtonController ($window) {
         var vm = this;
 
-        vm.print = function () {
+        vm.print = () => {
             $window.print();
         };
     }
-})();
+}))();

@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -16,11 +16,9 @@
 
         function formatCategories (allSearchResults) {
             return allSearchResults
-                .map(function (endpointSearchResults, index) {
-                    return formatCategory(SEARCH_CONFIG.QUERY_ENDPOINTS.filter((endpoint) => {
-                        return user.meetsRequiredLevel(endpoint.authLevel);
-                    })[index].slug, endpointSearchResults);
-                });
+                .map((endpointSearchResults, index) => formatCategory(SEARCH_CONFIG.QUERY_ENDPOINTS.filter((endpoint) => {
+                return user.meetsRequiredLevel(endpoint.authLevel);
+            })[index].slug, endpointSearchResults));
         }
 
         function formatCategory (slug, endpointSearchResults) {
@@ -44,7 +42,7 @@
         function formatLinks (slug, links) {
             const endpointConfig = SEARCH_CONFIG.QUERY_ENDPOINTS.filter(endpoint => endpoint.slug === slug)[0];
 
-            return links.map(function (item) {
+            return links.map(item => {
                 const subtype = item.subtype || null;
                 let subtypeLabel = subtype;
 
@@ -75,4 +73,4 @@
             return label;
         }
     }
-})();
+}))();

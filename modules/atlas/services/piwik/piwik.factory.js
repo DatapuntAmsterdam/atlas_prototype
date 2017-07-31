@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -34,4 +34,4 @@
             scripts.parentNode.insertBefore(piwik, scripts);
         }
     }
-})();
+}))();

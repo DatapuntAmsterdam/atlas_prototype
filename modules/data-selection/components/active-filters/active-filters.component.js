@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -24,7 +24,7 @@
 
         $scope.$watchGroup(['vm.dataset', 'vm.textFilters'], updateFilters, true);
 
-        vm.removeFilter = function (filterSlug) {
+        vm.removeFilter = filterSlug => {
             if (filterSlug === GEOMETRY_FILTER) {
                 removeGeometryFilter();
             } else {
@@ -98,4 +98,4 @@
             });
         }
     }
-})();
+}))();

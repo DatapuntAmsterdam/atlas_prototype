@@ -3,7 +3,7 @@ const MB = 1024 * 1024;
 const GB = 1024 * 1024 * 1024;
 const TB = 1024 * 1024 * 1024 * 1024;
 
-describe('The filesize filter', function () {
+describe('The filesize filter', () => {
     'use strict';
 
     let filesizeFilter,
@@ -13,7 +13,7 @@ describe('The filesize filter', function () {
         localization = jasmine.createSpyObj('localizationFactory', ['toLocaleString']);
         angular.mock.module('dpShared', { localization });
 
-        angular.mock.inject(function ($filter) {
+        angular.mock.inject($filter => {
             filesizeFilter = $filter('filesize');
         });
 

@@ -1,10 +1,10 @@
-describe('The layerSelection controller', function () {
+describe('The layerSelection controller', () => {
     var $controller,
         $rootScope,
         store,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -19,7 +19,7 @@ describe('The layerSelection controller', function () {
             }
         );
 
-        angular.mock.inject(function (_$controller_, _$rootScope_, _store_) {
+        angular.mock.inject((_$controller_, _$rootScope_, _store_) => {
             $controller = _$controller_;
             $rootScope = _$rootScope_;
             store = _store_;
@@ -55,7 +55,7 @@ describe('The layerSelection controller', function () {
         return controller;
     }
 
-    it('subscribes to the store to listen for changes', function () {
+    it('subscribes to the store to listen for changes', () => {
         spyOn(store, 'subscribe').and.callThrough();
 
         getController();
@@ -63,7 +63,7 @@ describe('The layerSelection controller', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the baseLayer, overlays and zoom level based on the state', function () {
+    it('sets the baseLayer, overlays and zoom level based on the state', () => {
         var controller;
 
         spyOn(store, 'getState').and.returnValue(mockedState);

@@ -1,9 +1,9 @@
-describe('The dp-preview-state directive', function () {
+describe('The dp-preview-state directive', () => {
     var $compile,
         $rootScope,
         mockedState;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'atlas',
             {
@@ -18,7 +18,7 @@ describe('The dp-preview-state directive', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject((_$compile_, _$rootScope_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
@@ -40,7 +40,7 @@ describe('The dp-preview-state directive', function () {
         return directive;
     }
 
-    it('adds a printmode class to the element when isPrintMode is true', function () {
+    it('adds a printmode class to the element when isPrintMode is true', () => {
         var directive;
 
         mockedState = {atlas: {isPrintMode: true}};
@@ -50,7 +50,7 @@ describe('The dp-preview-state directive', function () {
         expect(directive.hasClass('is-print-mode')).toBe(true);
     });
 
-    it('does not add a class to the element when isPrintMode is false', function () {
+    it('does not add a class to the element when isPrintMode is false', () => {
         var directive;
 
         mockedState = {atlas: {isPrintMode: false}};
@@ -106,7 +106,7 @@ describe('The dp-preview-state directive', function () {
         });
     });
 
-    it('adds an embed preview class to the element when isEmbedPreview is true', function () {
+    it('adds an embed preview class to the element when isEmbedPreview is true', () => {
         var directive;
 
         mockedState = {atlas: {isEmbedPreview: true}};
@@ -116,7 +116,7 @@ describe('The dp-preview-state directive', function () {
         expect(directive.hasClass('is-embed-preview')).toBe(true);
     });
 
-    it('does not add an embed preview to the element when isEmbedPreview is false', function () {
+    it('does not add an embed preview to the element when isEmbedPreview is false', () => {
         var directive;
 
         mockedState = {atlas: {isEmbedPreview: false}};
@@ -126,7 +126,7 @@ describe('The dp-preview-state directive', function () {
         expect(directive.hasClass('is-embed-preview')).toBe(false);
     });
 
-    it('adds a embed class to the element when isEmbed is true', function () {
+    it('adds a embed class to the element when isEmbed is true', () => {
         var directive;
 
         mockedState = {atlas: {isEmbed: true}};
@@ -136,7 +136,7 @@ describe('The dp-preview-state directive', function () {
         expect(directive.hasClass('is-embed')).toBe(true);
     });
 
-    it('does not add a embed to the element when isEmbed is false', function () {
+    it('does not add a embed to the element when isEmbed is false', () => {
         var directive;
 
         mockedState = {atlas: {isEmbed: false}};

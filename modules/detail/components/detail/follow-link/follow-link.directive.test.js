@@ -1,12 +1,12 @@
-describe('The follow link directive', function () {
+describe('The follow link directive', () => {
     var $rootScope,
         $compile,
         $window;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDetail');
 
-        angular.mock.inject(function (_$rootScope_, _$compile_, _$window_) {
+        angular.mock.inject((_$rootScope_, _$compile_, _$window_) => {
             $rootScope = _$rootScope_;
             $compile = _$compile_;
             $window = _$window_;
@@ -28,7 +28,7 @@ describe('The follow link directive', function () {
         return directive;
     }
 
-    it('opens a window when clicking the element', function () {
+    it('opens a window when clicking the element', () => {
         var directive;
 
         spyOn($window, 'open');

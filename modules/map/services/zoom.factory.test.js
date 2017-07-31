@@ -1,4 +1,4 @@
-describe('The zoom factory', function () {
+describe('The zoom factory', () => {
     var $rootScope,
         L,
         zoom,
@@ -12,7 +12,7 @@ describe('The zoom factory', function () {
         mockedLocation,
         mockedZoomLevel;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -34,7 +34,7 @@ describe('The zoom factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _L_, _zoom_, _store_, _ACTIONS_, _panning_) {
+        angular.mock.inject((_$rootScope_, _L_, _zoom_, _store_, _ACTIONS_, _panning_) => {
             $rootScope = _$rootScope_;
             L = _L_;
             zoom = _zoom_;
@@ -81,7 +81,7 @@ describe('The zoom factory', function () {
         spyOn(panning, 'getCurrentLocation').and.returnValue(mockedLocation);
     });
 
-    it('adds a scale to the map', function () {
+    it('adds a scale to the map', () => {
         zoom.initialize(mockedLeafletMap);
 
         expect(L.control.scale).toHaveBeenCalledWith({
@@ -92,7 +92,7 @@ describe('The zoom factory', function () {
         expect(mockedScaleControl.addTo).toHaveBeenCalledWith(mockedLeafletMap);
     });
 
-    it('adds zoom controls to the map', function () {
+    it('adds zoom controls to the map', () => {
         zoom.initialize(mockedLeafletMap);
 
         expect(L.control.zoom).toHaveBeenCalledWith({
@@ -102,7 +102,7 @@ describe('The zoom factory', function () {
         expect(mockedZoomControl.addTo).toHaveBeenCalledWith(mockedLeafletMap);
     });
 
-    it('can zoom in and out', function () {
+    it('can zoom in and out', () => {
         // Set a initial zoom
         mockedLeafletMap.setZoom.calls.reset();
         zoom.setZoom(mockedLeafletMap, 12);
@@ -126,7 +126,7 @@ describe('The zoom factory', function () {
         });
     });
 
-    it('listens for Leaflet\'s zoomend event, then it fires the MAP_ZOOM action', function () {
+    it('listens for Leaflet\'s zoomend event, then it fires the MAP_ZOOM action', () => {
         zoom.initialize(mockedLeafletMap);
 
         expect(mockedLeafletMap.on).toHaveBeenCalledWith('zoomend', jasmine.any(Function));

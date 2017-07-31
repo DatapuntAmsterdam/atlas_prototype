@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     angular
@@ -16,4 +16,4 @@
             return marked(markdownText);
         }
     }
-})();
+}))();

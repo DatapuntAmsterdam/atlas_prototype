@@ -1,4 +1,4 @@
-describe('The layers factory', function () {
+describe('The layers factory', () => {
     var $rootScope,
         $q,
         api,
@@ -6,7 +6,7 @@ describe('The layers factory', function () {
         layers,
         mockedLeafletMap;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -41,7 +41,7 @@ describe('The layers factory', function () {
                     }
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('BASE_LAYERS', [
                     {
                         slug: 'baselayer_a',
@@ -56,7 +56,7 @@ describe('The layers factory', function () {
             }
         );
 
-        angular.mock.inject(function (_$rootScope_, _$q_, _api_, _L_, _layers_) {
+        angular.mock.inject((_$rootScope_, _$q_, _api_, _L_, _layers_) => {
             $rootScope = _$rootScope_;
             $q = _$q_;
             api = _api_;
@@ -76,12 +76,12 @@ describe('The layers factory', function () {
         spyOn(mockedLeafletMap, 'removeLayer');
     });
 
-    describe('baseLayer', function () {
-        beforeEach(function () {
+    describe('baseLayer', () => {
+        beforeEach(() => {
             spyOn(L, 'tileLayer').and.returnValue('FAKE_BASE_LAYER');
         });
 
-        it('can set a baseLayer', function () {
+        it('can set a baseLayer', () => {
             layers.setBaseLayer(mockedLeafletMap, 'baselayer_a');
 
             expect(L.tileLayer).toHaveBeenCalledWith(
@@ -95,7 +95,7 @@ describe('The layers factory', function () {
             expect(mockedLeafletMap.addLayer).toHaveBeenCalledWith('FAKE_BASE_LAYER');
         });
 
-        it('makes sure a maximum of one baseLayer is active at the same time', function () {
+        it('makes sure a maximum of one baseLayer is active at the same time', () => {
             layers.setBaseLayer(mockedLeafletMap, 'baselayer_a');
             expect(mockedLeafletMap.hasLayer).toHaveBeenCalledWith(undefined);
 
@@ -118,10 +118,10 @@ describe('The layers factory', function () {
         });
     });
 
-    describe('overlays', function () {
+    describe('overlays', () => {
         var fakeWmsSource;
 
-        beforeEach(function () {
+        beforeEach(() => {
             fakeWmsSource = {
                 getLayer: function (layerName) {
                     return 'FAKE_' + layerName.toUpperCase();
@@ -131,7 +131,7 @@ describe('The layers factory', function () {
             spyOn(L.WMS, 'source').and.returnValue(fakeWmsSource);
         });
 
-        it('can add an overlay', function () {
+        it('can add an overlay', () => {
             layers.addOverlay(mockedLeafletMap, 'overlay_a');
             $rootScope.$digest();
 
@@ -146,7 +146,7 @@ describe('The layers factory', function () {
             expect(mockedLeafletMap.addLayer).toHaveBeenCalledWith('FAKE_SUBLAYER_1');
         });
 
-        it('adds only overlays that exist', function () {
+        it('adds only overlays that exist', () => {
             layers.addOverlay(mockedLeafletMap, 'overlay_does_not_exist');
             $rootScope.$digest();
 
@@ -155,7 +155,7 @@ describe('The layers factory', function () {
             expect(mockedLeafletMap.addLayer).not.toHaveBeenCalled();
         });
 
-        it('can add multiples sublayers per overlay', function () {
+        it('can add multiples sublayers per overlay', () => {
             layers.addOverlay(mockedLeafletMap, 'overlay_b');
             $rootScope.$digest();
 
@@ -186,7 +186,7 @@ describe('The layers factory', function () {
             );
         });
 
-        it('can add on overlay from an external source', function () {
+        it('can add on overlay from an external source', () => {
             layers.addOverlay(mockedLeafletMap, 'overlay_c');
             $rootScope.$digest();
 
@@ -201,7 +201,7 @@ describe('The layers factory', function () {
             expect(mockedLeafletMap.addLayer).toHaveBeenCalledWith('FAKE_SUBLAYER_1');
         });
 
-        it('can remove an overlay with one sublayer', function () {
+        it('can remove an overlay with one sublayer', () => {
             layers.removeOverlay(mockedLeafletMap, 'overlay_a');
             $rootScope.$digest();
 
@@ -209,7 +209,7 @@ describe('The layers factory', function () {
             expect(mockedLeafletMap.removeLayer).toHaveBeenCalledWith('FAKE_SUBLAYER_1');
         });
 
-        it('can remove an overlay with multiple sublayers', function () {
+        it('can remove an overlay with multiple sublayers', () => {
             layers.removeOverlay(mockedLeafletMap, 'overlay_b');
             $rootScope.$digest();
 
@@ -218,7 +218,7 @@ describe('The layers factory', function () {
             expect(mockedLeafletMap.removeLayer).toHaveBeenCalledWith('FAKE_SUBLAYER_2');
         });
 
-        it('caches the result of L.WMS.source per L.map instance', function () {
+        it('caches the result of L.WMS.source per L.map instance', () => {
             expect(L.WMS.source).not.toHaveBeenCalled();
 
             layers.addOverlay(mockedLeafletMap, 'overlay_a');

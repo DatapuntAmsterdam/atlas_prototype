@@ -1,10 +1,10 @@
-describe('The dp-data-selection-download-button component', function () {
+describe('The dp-data-selection-download-button component', () => {
     let $compile,
         $q,
         $rootScope,
         api;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpDataSelection',
             {
@@ -12,7 +12,7 @@ describe('The dp-data-selection-download-button component', function () {
                     API_ROOT: 'http://www.example.com/'
                 }
             },
-            function ($provide) {
+            $provide => {
                 $provide.constant('DATA_SELECTION_CONFIG', {
                     datasets: {
                         dataset_a: {
@@ -42,7 +42,7 @@ describe('The dp-data-selection-download-button component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$q_, _$rootScope_, _api_) {
+        angular.mock.inject((_$compile_, _$q_, _$rootScope_, _api_) => {
             $compile = _$compile_;
             $q = _$q_;
             $rootScope = _$rootScope_;
@@ -72,13 +72,13 @@ describe('The dp-data-selection-download-button component', function () {
         return component;
     }
 
-    it('will generate a download link for the current dataset', function () {
+    it('will generate a download link for the current dataset', () => {
         const component = getComponent('dataset_a', {});
 
         expect(component.find('a').attr('href')).toBe('http://www.example.com/datasets/a/download/');
     });
 
-    it('will filters as parameters to the download link', function () {
+    it('will filters as parameters to the download link', () => {
         let component;
 
         // With one active filter
@@ -99,7 +99,7 @@ describe('The dp-data-selection-download-button component', function () {
             .toBe('http://www.example.com/datasets/a/download/?filter_a=ingeschakeld&filter_b=eenofanderewaarde');
     });
 
-    it('uses URL encoding for the values of the active filters', function () {
+    it('uses URL encoding for the values of the active filters', () => {
         // With one active filter
         const component = getComponent('dataset_a', {
             filter_a: 'äéë',

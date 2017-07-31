@@ -1,17 +1,17 @@
-describe('The aggregate filter', function () {
+describe('The aggregate filter', () => {
     'use strict';
 
     var aggregateFilter;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpDataSelection');
 
-        angular.mock.inject(function ($filter) {
+        angular.mock.inject($filter => {
             aggregateFilter = $filter('aggregate');
         });
     });
 
-    it('return an array with for every string in the input array an entry with the name and # occurences', function () {
+    it('return an array with for every string in the input array an entry with the name and # occurences', () => {
         expect(aggregateFilter(['aap', 'aap'])).toEqual([
             {
                 name: 'aap',
@@ -20,11 +20,11 @@ describe('The aggregate filter', function () {
         ]);
     });
 
-    it('returns an empty array when supplied with an empty array', function () {
+    it('returns an empty array when supplied with an empty array', () => {
         expect(aggregateFilter([])).toEqual([]);
     });
 
-    it('returns an array sorted on number of occurences and then on name', function () {
+    it('returns an array sorted on number of occurences and then on name', () => {
         expect(aggregateFilter(['aap', 'aap', 'noot', 'noot', 'mies'])).toEqual([
             {
                 name: 'aap',

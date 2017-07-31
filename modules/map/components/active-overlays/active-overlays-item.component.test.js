@@ -1,10 +1,10 @@
-describe('The dp-active-overlays-item component', function () {
+describe('The dp-active-overlays-item component', () => {
     var $compile,
         $rootScope,
         $q,
         api;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpMap',
             {
@@ -34,14 +34,12 @@ describe('The dp-active-overlays-item component', function () {
                     }
                 }
             },
-            function ($provide) {
-                $provide.factory('dpLinkDirective', function () {
-                    return {};
-                });
+            $provide => {
+                $provide.factory('dpLinkDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_, _api_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$q_, _api_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
@@ -69,7 +67,7 @@ describe('The dp-active-overlays-item component', function () {
         return component;
     }
 
-    it('shows uses the short label from the OVERLAYS config', function () {
+    it('shows uses the short label from the OVERLAYS config', () => {
         var component = getComponent('overlay_without_legend', true, 8);
 
         expect(component.find('.qa-active-overlay-header').eq(0).text()).toContain('Overlay A');
@@ -81,13 +79,13 @@ describe('The dp-active-overlays-item component', function () {
             spyOn(api, 'createUrlWithToken').and.returnValue(tokenized);
         });
 
-        it('is optional', function () {
+        it('is optional', () => {
             const component = getComponent('overlay_without_legend', true, 10);
 
             expect(component.find('.qa-active-overlay-image').length).toBe(0);
         });
 
-        it('can display a self-hosted legend', function () {
+        it('can display a self-hosted legend', () => {
             const component = getComponent('overlay_with_internal_legend', true, 10),
                 image = component.find('.qa-active-overlay-image');
 
@@ -95,7 +93,7 @@ describe('The dp-active-overlays-item component', function () {
             expect(image.attr('src')).toBe('http://atlas.example.com/overlays/blabla.png?token=abc');
         });
 
-        it('can display an externally hosted legend', function () {
+        it('can display an externally hosted legend', () => {
             const component = getComponent('overlay_with_external_legend', true, 10),
                 image = component.find('.qa-active-overlay-image');
 
@@ -104,7 +102,7 @@ describe('The dp-active-overlays-item component', function () {
         });
     });
 
-    it('shows a message for visibile layers that have no legend', function () {
+    it('shows a message for visibile layers that have no legend', () => {
         var component,
             expectedMessage = '(geen legenda)';
 
@@ -121,7 +119,7 @@ describe('The dp-active-overlays-item component', function () {
         expect(component.text()).toContain(expectedMessage);
     });
 
-    it('shows a message for hidden overlays caused by the zoom level', function () {
+    it('shows a message for hidden overlays caused by the zoom level', () => {
         var component,
             i;
 
@@ -138,7 +136,7 @@ describe('The dp-active-overlays-item component', function () {
         }
     });
 
-    it('won\'t show the hidden because of the zoom level message when the layer has been hidden manually', function () {
+    it('won\'t show the hidden because of the zoom level message when the layer has been hidden manually', () => {
         var component,
             i;
 
@@ -149,7 +147,7 @@ describe('The dp-active-overlays-item component', function () {
         }
     });
 
-    it('has a button to hide the overlay, even if it\'s already hidden because of the zoom level', function () {
+    it('has a button to hide the overlay, even if it\'s already hidden because of the zoom level', () => {
         var component;
 
         // With a supported zoom level
@@ -163,7 +161,7 @@ describe('The dp-active-overlays-item component', function () {
         expect(component.find('dp-link').text()).toContain('Verbergen');
     });
 
-    it('has a button to show the overlay, even if it can\'t be shown on the current zoom level', function () {
+    it('has a button to show the overlay, even if it can\'t be shown on the current zoom level', () => {
         var component;
 
         // With a supported zoom level

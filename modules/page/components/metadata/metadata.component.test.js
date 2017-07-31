@@ -1,11 +1,11 @@
-describe('The dp-metadata component', function () {
+describe('The dp-metadata component', () => {
     var $compile,
         $rootScope,
         $q,
         mockedApiData,
         finishApiCall;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpPage',
             {
@@ -13,7 +13,7 @@ describe('The dp-metadata component', function () {
                     getByUri: function () {
                         var q = $q.defer();
 
-                        finishApiCall = function (data) {
+                        finishApiCall = data => {
                             q.resolve(data);
                             $rootScope.$apply();
                         };
@@ -22,14 +22,12 @@ describe('The dp-metadata component', function () {
                     }
                 }
             },
-            function ($provide) {
-                $provide.factory('dpLoadingIndicatorDirective', function () {
-                    return {};
-                });
+            $provide => {
+                $provide.factory('dpLoadingIndicatorDirective', () => ({}));
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$q_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$q_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $q = _$q_;
@@ -50,7 +48,7 @@ describe('The dp-metadata component', function () {
         ];
     });
 
-    afterEach(function () {
+    afterEach(() => {
         finishApiCall = null;
     });
 
@@ -68,7 +66,7 @@ describe('The dp-metadata component', function () {
         return component;
     }
 
-    it('shows the dp-loading-indicator while waiting for the API', function () {
+    it('shows the dp-loading-indicator while waiting for the API', () => {
         var component,
             scope;
 
@@ -86,7 +84,7 @@ describe('The dp-metadata component', function () {
         expect(scope.vm.isLoading).toBe(false);
     });
 
-    it('shows all data in a table', function () {
+    it('shows all data in a table', () => {
         var component;
 
         component = getComponent();
@@ -103,7 +101,7 @@ describe('The dp-metadata component', function () {
         expect(component.find('tbody tr:nth-child(2) td:nth-child(3)').text().trim()).toBe('FAKE_MODIFIED_DATE_2');
     });
 
-    it('skips sources that have no title', function () {
+    it('skips sources that have no title', () => {
         var component;
 
         delete mockedApiData[0].title;
@@ -115,7 +113,7 @@ describe('The dp-metadata component', function () {
         expect(component.find('tbody tr:nth-child(1) td:nth-child(1)').text().trim()).toBe('FAKE_TITLE_2');
     });
 
-    it('optionally adds the group in front of the title', function () {
+    it('optionally adds the group in front of the title', () => {
         var component;
 
         mockedApiData[0].group = 'FAKE_GROUP_1';

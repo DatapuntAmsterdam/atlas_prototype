@@ -1,20 +1,20 @@
-describe('The dpPageName filter', function () {
+describe('The dpPageName filter', () => {
     var dpPageNameFilter,
         mocks = {
             pageName: angular.noop
         };
 
-    beforeEach(function () {
+    beforeEach(() => {
         spyOn(mocks, 'pageName');
 
         angular.mock.module('dpPage', mocks);
 
-        angular.mock.inject(function (_dpPageNameFilter_) {
+        angular.mock.inject(_dpPageNameFilter_ => {
             dpPageNameFilter = _dpPageNameFilter_;
         });
     });
 
-    it('uses the pageName service', function () {
+    it('uses the pageName service', () => {
         dpPageNameFilter('pageA');
         dpPageNameFilter('page-b');
 

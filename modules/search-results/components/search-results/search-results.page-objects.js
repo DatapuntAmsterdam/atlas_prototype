@@ -7,21 +7,21 @@ const
         'modules/shared/components/straatbeeld-thumbnail/straatbeeld-thumbnail.page-objects'),
     link = dp.require('modules/shared/components/link/link.page-objects');
 
-module.exports = function (searchResultsElement) {
-    return {
-        get visible () {
-            return dp.visible(searchResultsElement);
-        },
-        get straatbeeldThumbnail () {
-            return straatbeeldThumbnail(searchResultsElement.element(by.css('dp-straatbeeld-thumbnail')));
-        },
-        categories: function (index) {
-            return categoryPageObject(
-                searchResultsElement.element(by.repeater('category in vm.categories').row(index))
-            );
-        }
-    };
-};
+module.exports = searchResultsElement => ({
+    get visible () {
+        return dp.visible(searchResultsElement);
+    },
+
+    get straatbeeldThumbnail () {
+        return straatbeeldThumbnail(searchResultsElement.element(by.css('dp-straatbeeld-thumbnail')));
+    },
+
+    categories: function (index) {
+        return categoryPageObject(
+            searchResultsElement.element(by.repeater('category in vm.categories').row(index))
+        );
+    }
+});
 
 function categoryPageObject (categoryElement) {
     return {

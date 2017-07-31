@@ -1,4 +1,4 @@
-(function () {
+((() => {
     'use strict';
 
     /**
@@ -13,4 +13,4 @@
             transclude: true,
             templateUrl: 'modules/shared/components/message/message.html'
         });
-})();
+}))();

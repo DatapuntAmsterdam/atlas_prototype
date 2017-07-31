@@ -1,21 +1,21 @@
-describe('The suppress factory', function () {
+describe('The suppress factory', () => {
     let suppress,
         $interval;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module('dpMap');
 
-        angular.mock.inject(function (_$interval_, _suppress_) {
+        angular.mock.inject((_$interval_, _suppress_) => {
             $interval = _$interval_;
             suppress = _suppress_;
         });
     });
 
-    it('busy should be false by default', function () {
+    it('busy should be false by default', () => {
         expect(suppress.isBusy()).toEqual(false);
     });
 
-    it('after start suppressing it should be busy, after the timeout ends it should not be busy anymore', function () {
+    it('after start suppressing it should be busy, after the timeout ends it should not be busy anymore', () => {
         suppress.start();
         expect(suppress.isBusy()).toEqual(true);
 

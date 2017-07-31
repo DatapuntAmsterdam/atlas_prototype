@@ -1,11 +1,11 @@
-describe('The dp-straatbeeld-history component', function () {
+describe('The dp-straatbeeld-history component', () => {
     var $compile,
         $rootScope,
         $window,
         store,
         ACTIONS;
 
-    beforeEach(function () {
+    beforeEach(() => {
         angular.mock.module(
             'dpStraatbeeld',
             {
@@ -13,14 +13,12 @@ describe('The dp-straatbeeld-history component', function () {
                     dispatch: angular.noop
                 }
             },
-            function ($provide) {
-                $provide.value('coordinatesFilter', function (input) {
-                    return 'MOCKED_RD_COORDINATES (' + input.join(', ') + ')';
-                });
+            $provide => {
+                $provide.value('coordinatesFilter', input => 'MOCKED_RD_COORDINATES (' + input.join(', ') + ')');
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_, _store_, _ACTIONS_) {
+        angular.mock.inject((_$compile_, _$rootScope_, _$window_, _store_, _ACTIONS_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $window = _$window_;
