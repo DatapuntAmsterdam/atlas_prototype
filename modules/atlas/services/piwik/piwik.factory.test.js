@@ -13,11 +13,8 @@ describe('The piwik service', function () {
             },
             function ($provide) {
                 $provide.constant('PIWIK_CONFIG', {
-                    PRODUCTION: {
-                        SITE_ID: 100
-                    },
                     DEVELOPMENT: {
-                        SITE_ID: 300
+                        SITE_ID: 3
                     }
                 });
             }
@@ -43,7 +40,7 @@ describe('The piwik service', function () {
         expect($window._paq).toEqual(
             [['enableLinkTracking'],
              ['setTrackerUrl', 'https://piwik.data.amsterdam.nl/piwik.php'],
-             ['setSiteId', 300]]);
+             ['setSiteId', 3]]);
 
         piwikScript = getScripts()[0];
         // Checking script
