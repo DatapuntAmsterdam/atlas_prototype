@@ -108,9 +108,10 @@
                 )
                 .then(function (data) {
                     return data.object_list
-                        .map(object => object._source.centroid)
-                        .filter(angular.identity)
-                        .map(([lon, lat]) => [lat, lon]);
+                        .map(item => {
+                            const coords = item._source.centroid;
+                            return [coords[1], coords[0]];
+                        });
                 });
         }
 
