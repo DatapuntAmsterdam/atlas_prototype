@@ -10,7 +10,7 @@
     "bbga_visualisatie_d3": "https://github.com/DatapuntAmsterdam/bbga_visualisatie_d3.git#master",
     "d3": "^3.5.17",
     "leaflet": "1.0.3",
-    "leaflet.markercluster": "^1.0.0",
+    "leaflet.markercluster": "^1.1.0",
     "leaflet.wms": "0.2.0",
     "leaflet-draw": "0.4.10",
     "leaflet-rotatedmarker": "https://unpkg.com/leaflet-rotatedmarker/leaflet.rotatedMarker.js",
