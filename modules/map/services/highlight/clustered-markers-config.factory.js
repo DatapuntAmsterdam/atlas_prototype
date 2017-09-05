@@ -10,6 +10,8 @@
     function clusteredMarkersConfig (L) {
         return {
             chunkedLoading: true,
+            chunkInterval: 50,
+            chunkDelay: 100,
             maxClusterRadius: 50,
             disableClusteringAtZoom: 16,
             spiderfyOnMaxZoom: false,
