@@ -36,7 +36,8 @@
             const container = element[0].querySelector('.js-leaflet-map');
             const options = angular.merge(mapConfig.MAP_OPTIONS, {
                 center: scope.mapState.viewCenter,
-                zoom: scope.mapState.zoom
+                zoom: scope.mapState.zoom,
+                preferCanvas: true
             });
 
             /**
