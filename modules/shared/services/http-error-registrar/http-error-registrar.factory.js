@@ -13,7 +13,6 @@
         '$q',
         '$interval',
         'httpStatus',
-        'authenticator',
         'Raven'];
 
     function httpErrorRegistrarFactory (
@@ -23,7 +22,6 @@
         $q,
         $interval,
         httpStatus,
-        authenticator,
         Raven
     ) {
         $window.addEventListener('error', function (e) {
@@ -91,7 +89,7 @@
                     logResponse('HTTP 5xx response', response.status);
                 } else if (isClientError) {
                     if (response.status === 401) {
-                        authenticator.logout();
+                        $window.auth.logout();
                     } else if (response && response.data && response.data.detail === 'Not found.') {
                         registerNotFoundError();
                         logResponse('HTTP response body: Not found.', response.status);

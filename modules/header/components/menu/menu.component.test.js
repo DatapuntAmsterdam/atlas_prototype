@@ -2,7 +2,8 @@ describe('The dp-menu component', () => {
     let $compile,
         $rootScope,
         store,
-        authenticator,
+        $window,
+        origAuth,
         mockedUser,
         mockedActions;
 
@@ -28,12 +29,17 @@ describe('The dp-menu component', () => {
             }
         );
 
-        angular.mock.inject((_$compile_, _$rootScope_, _store_, _authenticator_) => {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _$window_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
-            authenticator = _authenticator_;
+            $window = _$window_;
         });
+
+        origAuth = $window.auth;
+        $window.auth = {
+            login: angular.noop
+        };
 
         mockedUser = {
             authenticated: false,
@@ -42,6 +48,10 @@ describe('The dp-menu component', () => {
         };
 
         spyOn(store, 'dispatch');
+    });
+
+    afterEach(() => {
+        $window.auth = origAuth;
     });
 
     function getComponent (size) {
@@ -126,13 +136,13 @@ describe('The dp-menu component', () => {
         let component;
 
         beforeEach(() => {
-            spyOn(authenticator, 'login').and.returnValue(null);
+            spyOn($window.auth, 'login').and.returnValue(null);
             component = getComponent('tall');
         });
 
-        it('calls the authenticator logon method', () => {
+        it('calls the auth login method', () => {
             component.find('.qa-menu__login').click();
-            expect(authenticator.login).toHaveBeenCalledWith();
+            expect($window.auth.login).toHaveBeenCalledWith();
         });
     });
 

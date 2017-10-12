@@ -15,7 +15,7 @@ module.exports = function () {
 
     files.modules.forEach(module => {
         targets[`module_${module.slug}`] = {
-            src: [`modules/${module.slug}/**/*.js`]
+            src: [`modules/${module.slug}/**/!(atlas.module).js`]
         };
     });
 

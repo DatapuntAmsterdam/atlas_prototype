@@ -13,12 +13,18 @@ describe('The api factory', function () {
         angular.mock.module(
             'dpShared',
             {
-                authenticator: {
-                    getAccessToken: () => isLoggedIn ? 'MY_FAKE_ACCESS_TOKEN' : null
-                },
                 sharedConfig: {
                     API_ROOT: 'https://www.i-am-the-api-root.com/path/',
                     AUTH_HEADER_PREFIX: 'Bearer '
+                },
+                store: {
+                    getState: () => {
+                        return {
+                            user: {
+                                accessToken: isLoggedIn ? 'MY_FAKE_ACCESS_TOKEN' : null
+                            }
+                        };
+                    }
                 }
             }
         );
@@ -70,7 +76,7 @@ describe('The api factory', function () {
 
         api.getByUrl('https://www.i-am-the-api-root.com/path/bag/verblijfsobject/123/', undefined, cancel)
             .then(function () {
-                fail();   // Should never be resolved
+                fail(); // Should never be resolved
             });
 
         cancel.resolve();

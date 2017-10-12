@@ -1,6 +1,8 @@
 describe('The dp-menu-dropdown directive', () => {
     let $compile,
         $rootScope,
+        $window,
+        origAuth,
         options;
 
     beforeEach(() => {
@@ -22,10 +24,16 @@ describe('The dp-menu-dropdown directive', () => {
             }
         );
 
-        angular.mock.inject((_$compile_, _$rootScope_) => {
+        angular.mock.inject((_$compile_, _$rootScope_, _$window_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
+            $window = _$window_;
         });
+
+        origAuth = $window.auth;
+        $window.auth = {
+            logout: angular.noop
+        };
 
         options = {
             title: 'Menu',
@@ -34,6 +42,10 @@ describe('The dp-menu-dropdown directive', () => {
             hasPrintButton: true,
             hasEmbedButton: true
         };
+    });
+
+    afterEach(() => {
+        $window.auth = origAuth;
     });
 
     function getDirective (attrs) {

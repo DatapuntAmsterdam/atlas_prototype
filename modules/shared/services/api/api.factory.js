@@ -5,14 +5,21 @@
         .module('dpShared')
         .factory('api', apiFactory);
 
-    apiFactory.$inject = ['$interval', '$q', '$http', 'authenticator', 'sharedConfig'];
+    apiFactory.$inject = ['$injector', '$interval', '$q', '$http', '$window', 'sharedConfig'];
 
-    function apiFactory ($interval, $q, $http, authenticator, sharedConfig) {
+    function apiFactory ($injector, $interval, $q, $http, $window, sharedConfig) {
+        let store;
+
         return {
             getByUrl,
             getByUri,
             createUrlWithToken
         };
+
+        function getAccessToken () {
+            store = store || $injector.get('store');
+            return store.getState().user.accessToken;
+        }
 
         function getWithToken (url, params, cancel, token) {
             const headers = {};
@@ -59,7 +66,7 @@
          * string.
          */
         function createUrlWithToken (url, params) {
-            const token = authenticator.getAccessToken();
+            const token = getAccessToken();
 
             params = params || {};
             if (token) {
@@ -81,7 +88,7 @@
          * @returns {Promise}
          */
         function getByUrl (url, params, cancel) {
-            const token = authenticator.getAccessToken();
+            const token = getAccessToken();
             return $q.resolve(getWithToken(url, params, cancel, token));
         }
 
@@ -90,8 +97,8 @@
         }
 
         function encodeQueryParams (params) {
-            return Object.keys(params).map(param =>
-                    encodeURIComponent(param) + '=' + encodeURIComponent(params[param]))
+            return Object.keys(params)
+                .map(param => encodeURIComponent(param) + '=' + encodeURIComponent(params[param]))
                 .join('&');
         }
     }

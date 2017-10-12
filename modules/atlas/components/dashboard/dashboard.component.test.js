@@ -1,6 +1,8 @@
 describe('The dashboard component', function () {
     var $compile,
         $rootScope,
+        $window,
+        origAuth,
         store,
         ACTIONS,
         dashboardColumns,
@@ -65,15 +67,25 @@ describe('The dashboard component', function () {
             }
         };
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_, _dashboardColumns_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_, _store_, _ACTIONS_, _dashboardColumns_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
+            $window = _$window_;
             store = _store_;
             ACTIONS = _ACTIONS_;
             dashboardColumns = _dashboardColumns_;
         });
 
+        origAuth = $window.auth;
+        $window.auth = {
+            login: angular.noop
+        };
+
         mockedState = angular.copy(angular.copy(DEFAULT_STATE));
+    });
+
+    afterEach(() => {
+        $window.auth = origAuth;
     });
 
     function getComponent () {

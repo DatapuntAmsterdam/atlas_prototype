@@ -1,9 +1,12 @@
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
+export const AUTHENTICATE_ERROR = 'AUTHENTICATE_ERROR';
 
 const initialState = {
   authenticated: false,
+  accessToken: '',
   scopes: [],
-  name: ''
+  name: '',
+  error: false
 };
 
 export default function UserReducer(state = initialState, action) {
@@ -14,8 +17,18 @@ export default function UserReducer(state = initialState, action) {
         user: {
           ...state.user,
           authenticated: true,
-          scopes: action.scopes,
-          name: action.name
+          accessToken: action.accessToken,
+          name: action.name,
+          scopes: action.scopes
+        }
+      };
+
+    case 'AUTHENTICATE_ERROR':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          error: true
         }
       };
 
@@ -24,6 +37,9 @@ export default function UserReducer(state = initialState, action) {
   }
 };
 
-export const authenticateUser = (name, scopes) => ({ type: AUTHENTICATE_USER, name, scopes });
+export const authenticateUser = (accessToken, name, scopes) =>
+  ({ type: AUTHENTICATE_USER, accessToken, name, scopes });
+
+export const authenticateError = () => ({ type: AUTHENTICATE_ERROR });
 
 window.UserReducer = UserReducer;

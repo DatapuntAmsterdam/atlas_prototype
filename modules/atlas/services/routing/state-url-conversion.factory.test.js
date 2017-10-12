@@ -41,7 +41,8 @@ describe('The state url conversion definition', function () {
                 user: {
                     authenticated: false,
                     scopes: [],
-                    name: ''
+                    name: '',
+                    error: false
                 },
                 map: {
                     viewCenter: [52.3731081, 4.8932945],

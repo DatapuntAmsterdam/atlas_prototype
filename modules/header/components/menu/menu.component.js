@@ -15,12 +15,18 @@
             controllerAs: 'vm'
         });
 
-    DpMenuController.$inject = ['$scope', 'authenticator'];
+    DpMenuController.$inject = ['$scope', '$window', 'store', 'ACTIONS'];
 
-    function DpMenuController ($scope, authenticator) {
+    function DpMenuController ($scope, $window, store, ACTIONS) {
         const vm = this;
 
-        vm.login = authenticator.login;
+        vm.login = () => {
+            try {
+                $window.auth.login();
+            } catch (error) {
+                store.dispatch({ type: ACTIONS.AUTHENTICATE_ERROR.id });
+            }
+        };
 
         $scope.$watch('vm.user.name', setUserMenuLabel);
 

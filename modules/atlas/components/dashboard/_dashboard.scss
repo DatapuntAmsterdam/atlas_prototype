@@ -109,12 +109,12 @@
   }
 
   .c-dashboard__error {
-    top: $dashboard-heading-height-homepage + $dashboard-toolbar-height;
+    top: $dashboard-heading-height-homepage + $dashboard-toolbar-height + $dashboard-heading-shadow-height;
   }
 
   .c-dashboard__body {
     top: $dashboard-heading-height-homepage + $dashboard-toolbar-height;
-    height: calc(100% - #{$dashboard-heading-height-homepage + $dashboard-toolbar-height});
+    height: calc(100% - #{$dashboard-heading-height-homepage + $dashboard-toolbar-height + $dashboard-heading-shadow-height});
   }
 
   .c-dashboard__page-inner {

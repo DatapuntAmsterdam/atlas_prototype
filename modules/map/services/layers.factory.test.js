@@ -10,6 +10,9 @@ describe('The layers factory', () => {
         angular.mock.module(
             'dpMap',
             {
+                store: {
+                    getState: () => ({ user: { } })
+                },
                 mapConfig: {
                     BASE_LAYER_OPTIONS: {
                         option_a: false,

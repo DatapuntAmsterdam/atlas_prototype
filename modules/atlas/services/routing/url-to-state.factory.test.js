@@ -2,7 +2,6 @@ describe('The urlToState factory', function () {
     var $location,
         $rootScope,
         urlToState,
-        authenticator,
         store,
         ACTIONS,
         mockedSearchParams;
@@ -13,18 +12,13 @@ describe('The urlToState factory', function () {
             {
                 store: {
                     dispatch: function () {}
-                },
-                authenticator: {
-                    initialize: angular.noop,
-                    isAuthenticated: () => false
                 }
             }
         );
 
-        angular.mock.inject(function (_$location_, _$rootScope_, _urlToState_, _authenticator_, _store_, _ACTIONS_) {
+        angular.mock.inject(function (_$location_, _$rootScope_, _urlToState_, _store_, _ACTIONS_) {
             $location = _$location_;
             $rootScope = _$rootScope_;
-            authenticator = _authenticator_;
             urlToState = _urlToState_;
             store = _store_;
             ACTIONS = _ACTIONS_;
@@ -38,15 +32,7 @@ describe('The urlToState factory', function () {
         spyOn(store, 'dispatch');
     });
 
-    it('initializes the authenticator on startup', function () {
-        spyOn(authenticator, 'initialize');
-        urlToState.initialize();
-        expect(authenticator.initialize).toHaveBeenCalled();
-    });
-
     it('routes responses via dispatch action', function () {
-        spyOn(authenticator, 'isAuthenticated').and.returnValue(false);
-
         urlToState.initialize();
         $rootScope.$apply();
 

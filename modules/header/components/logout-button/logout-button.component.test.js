@@ -1,16 +1,26 @@
 describe('The dp-logout-button component', function () {
     var $compile,
         $rootScope,
-        authenticator;
+        $window,
+        origAuth;
 
     beforeEach(function () {
         angular.mock.module('dpHeader');
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _authenticator_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
-            authenticator = _authenticator_;
+            $window = _$window_;
         });
+
+        origAuth = $window.auth;
+        $window.auth = {
+            logout: angular.noop
+        };
+    });
+
+    afterEach(() => {
+        $window.auth = origAuth;
     });
 
     function getComponent () {
@@ -30,11 +40,11 @@ describe('The dp-logout-button component', function () {
     it('logs the user out when clicking the button', function () {
         var component;
 
-        spyOn(authenticator, 'logout');
+        spyOn($window.auth, 'logout');
 
         component = getComponent();
         component.find('button').click();
 
-        expect(authenticator.logout).toHaveBeenCalled();
+        expect($window.auth.logout).toHaveBeenCalled();
     });
 });

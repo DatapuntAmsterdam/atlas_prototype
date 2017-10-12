@@ -14,7 +14,8 @@ describe('The http error registrar', function () {
         mockedData,
         onError,
         callbackCalled,
-        authenticator;
+        $window,
+        origAuth;
 
     beforeEach(function () {
         onError = null;
@@ -32,13 +33,19 @@ describe('The http error registrar', function () {
             $provide.value('$window', window);
         });
 
-        angular.mock.inject(function (_$httpBackend_, _$http_, _$rootScope_, _$interval_, _authenticator_) {
+        angular.mock.inject(function (_$httpBackend_, _$http_, _$rootScope_, _$interval_, _$window_) {
             $httpBackend = _$httpBackend_;
             $http = _$http_;
             $rootScope = _$rootScope_;
             $interval = _$interval_;
-            authenticator = _authenticator_;
+            $window = _$window_;
         });
+
+        origAuth = $window.auth;
+        $window.auth = {
+            logout: angular.noop,
+            initialize: angular.noop
+        };
 
         mockedData = {
             Key: 'Value'
@@ -71,8 +78,12 @@ describe('The http error registrar', function () {
 
         spyOn(httpStatus, 'registerError');
         spyOn(Raven, 'captureMessage');
-        spyOn(authenticator, 'logout');
-        spyOn(authenticator, 'initialize');
+        spyOn($window.auth, 'logout');
+        spyOn($window.auth, 'initialize');
+    });
+
+    afterEach(() => {
+        $window.auth = origAuth;
     });
 
     it('does not handle normal responses and requests', function () {
@@ -142,7 +153,7 @@ describe('The http error registrar', function () {
 
         expect(httpStatus.registerError).not.toHaveBeenCalled();
         expect(Raven.captureMessage).not.toHaveBeenCalled();
-        expect(authenticator.logout).toHaveBeenCalled();
+        expect($window.auth.logout).toHaveBeenCalled();
         expect(callbackCalled).toBe(true);
     });
 

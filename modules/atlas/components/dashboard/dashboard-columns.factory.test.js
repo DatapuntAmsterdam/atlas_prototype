@@ -6,6 +6,13 @@ describe('The dashboardColumns factory', function () {
         columnSizes,
         hasLimitedWidth,
         DEFAULT_STATE = {
+            user: {
+                authenticated: false,
+                accessToken: '',
+                name: '',
+                scopes: [],
+                error: false
+            },
             map: {
                 baseLayer: 'topografie',
                 overlays: [],

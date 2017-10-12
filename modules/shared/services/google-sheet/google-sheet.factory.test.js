@@ -67,6 +67,9 @@ describe('The google sheet factory', function () {
             },
             environment: {
                 NAME: 'ANY VALUE'
+            },
+            store: {
+                getState: () => ({ user: {} })
             }
         },
         function ($provide) {

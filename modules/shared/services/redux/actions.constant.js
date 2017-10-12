@@ -16,8 +16,13 @@
                 id: 'URL_CHANGE',
                 ignore: true
             },
+
             AUTHENTICATE_USER: {
                 id: 'AUTHENTICATE_USER',
+                ignore: true
+            },
+            AUTHENTICATE_ERROR: {
+                id: 'AUTHENTICATE_ERROR',
                 ignore: true
             },
 

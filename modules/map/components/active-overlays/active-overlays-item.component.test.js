@@ -9,6 +9,9 @@ describe('The dp-active-overlays-item component', function () {
         angular.mock.module(
             'dpMap',
             {
+                store: {
+                    getState: () => ({ user: { } })
+                },
                 mapConfig: {
                     OVERLAY_ROOT: 'http://atlas.example.com/overlays/'
                 },

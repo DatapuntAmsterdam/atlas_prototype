@@ -2,6 +2,9 @@
     angular
         .module('dpShared')
         .component('dpApiError', {
+            bindings: {
+                user: '<'
+            },
             templateUrl: 'modules/shared/components/api-error/api-error.html',
             controller: DpApiErrorController,
             controllerAs: 'vm'
@@ -17,17 +20,23 @@
 
         reset();
 
-        $scope.$watch('vm.httpStatus', currentStatus => {
+        $scope.$watch('vm.httpStatus.hasErrors', (hasErrors) => {
             reset();
 
-            if (currentStatus.hasErrors) {
-                if (currentStatus[httpStatus.NOT_FOUND_ERROR]) {
+            if (hasErrors) {
+                if (vm.httpStatus[httpStatus.NOT_FOUND_ERROR]) {
                     vm.showNotFoundError = true;
-                } else if (currentStatus[httpStatus.LOGIN_ERROR]) {
+                } else if (vm.httpStatus[httpStatus.LOGIN_ERROR]) {
                     vm.showLoginError = true;
                 } else {
                     vm.showServerError = true;
                 }
+            }
+        });
+
+        $scope.$watch('vm.user.error', (error) => {
+            if (error) {
+                httpStatus.registerError(httpStatus.LOGIN_ERROR);
             }
         });
 

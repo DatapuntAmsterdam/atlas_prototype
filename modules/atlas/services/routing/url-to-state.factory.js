@@ -5,24 +5,14 @@
         .module('atlas')
         .factory('urlToState', urlToStateFactory);
 
-    urlToStateFactory.$inject = ['$rootScope', '$location', 'store', 'ACTIONS', 'authenticator'];
+    urlToStateFactory.$inject = ['$rootScope', '$location', 'store', 'ACTIONS'];
 
-    function urlToStateFactory ($rootScope, $location, store, ACTIONS, authenticator) {
+    function urlToStateFactory ($rootScope, $location, store, ACTIONS) {
         return {
             initialize: initialize
         };
 
         function initialize () {
-            authenticator.initialize();
-            if (authenticator.isAuthenticated()) {
-                store.dispatch({
-                    type: ACTIONS.AUTHENTICATE_USER,
-                    name: authenticator.getName(),
-                    scopes: authenticator.getScopes()
-                });
-            }
-            $location.path(''); // Make sure the default `/` is always used. Resulting in `/#/?etc`
-
             var unwatch = $rootScope.$watch(function () {
                 return $location.search();
             }, function (params) {
