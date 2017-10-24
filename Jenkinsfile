@@ -58,11 +58,10 @@ if (BRANCH == "master") {
     }
 
     node {
-        stage('Build and Push production image') {
+        stage('Build and Push preproduction image') {
             tryStep "image tagging", {
-                def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/app")
-                image.push("production")
-                image.push("latest")
+                def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}-preprodcution")
+                image.push()
             }
         }
     }
@@ -82,6 +81,17 @@ if (BRANCH == "master") {
     stage('Waiting for approval') {
         slackSend channel: '#ci-channel', color: 'warning', message: 'City Data is waiting for Production Release - please confirm'
         input "Deploy to Production?"
+    }
+
+    node {
+        stage('Push production image') {
+            tryStep "image tagging", {
+                def image = docker.image("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}-preproduction")
+                image.pull()
+                image.push("production")
+                image.push("latest")
+            }
+        }
     }
 
     node {
