@@ -25,11 +25,11 @@ describe('The embed factory', function () {
     });
 
     it('can create a embed link', function () {
-        expect(embed.getLink({})).toBe('https://data.amsterdam.nl:443/#foo=1&bar=x');
+        expect(embed.getLink({})).toBe('https://data.amsterdam.nl/#foo=1&bar=x');
     });
 
     it('can create a embed html', function () {
         expect(embed.getHtml({})).toBe('<iframe width="500" height="400" ' +
-            'src="https://data.amsterdam.nl:443/#foo=1&bar=x" frameborder="0"></iframe>');
+            'src="https://data.amsterdam.nl/#foo=1&bar=x" frameborder="0"></iframe>');
     });
 });

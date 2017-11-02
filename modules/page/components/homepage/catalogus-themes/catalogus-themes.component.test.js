@@ -114,12 +114,12 @@ describe('The dp-catalogus-themes', () => {
     it('when the number of themes is uneven the left column will have more themes than the right column', () => {
         const component = getComponent();
         const firstColumn = component.find('.c-catalogus-themes__column').eq(0);
-        const secondColumn = component.find('.c-catalogus-themes__column').eq(2);
+        const secondColumn = component.find('.c-catalogus-themes__column').eq(1);
 
         expect(firstColumn.attr('class')).toContain('c-catalogus-themes__column--left');
-        expect(firstColumn.find('.qa-theme-link').length).toBe(2);
+        expect(firstColumn.find('.qa-theme-link').length).toBe(3);
 
         expect(secondColumn.attr('class')).toContain('c-catalogus-themes__column--right');
-        expect(secondColumn.find('.qa-theme-link').length).toBe(1);
+        expect(secondColumn.find('.qa-theme-link').length).toBe(2);
     });
 });

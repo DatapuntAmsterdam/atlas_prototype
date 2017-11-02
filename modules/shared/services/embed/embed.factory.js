@@ -8,7 +8,7 @@
     EmbedFactory.$inject = ['stateUrlConverter', '$location'];
 
     function EmbedFactory (stateUrlConverter, $location) {
-        const baseUrl = `${$location.protocol()}://${$location.host()}:${$location.port()}`;
+        const baseUrl = `${$location.protocol()}://${$location.host()}`;
 
         return {
             getLink: getLink,

@@ -20,7 +20,7 @@
 
 %icon-button-text-extra {
   display: inline-block;
-  width: $button-size;
+  width: $button-size + 1px;
   height: $button-size;
   content: "";
   vertical-align: middle;

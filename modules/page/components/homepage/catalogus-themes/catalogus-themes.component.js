@@ -33,6 +33,6 @@
         };
 
         vm.themes = angular.copy(CATALOGUS_THEMES_CONFIG);
-        vm.themesPerColumn = Math.ceil(vm.themes.length / 3);
+        vm.themesPerColumn = Math.ceil(vm.themes.length / 2);
     }
 })();

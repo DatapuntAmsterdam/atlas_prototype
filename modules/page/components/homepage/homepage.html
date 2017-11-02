@@ -12,7 +12,7 @@
                         >
                         <dp-video
                             src="'assets/video/map.mp4'"
-                            poster="'assets/video/map.jpg'"
+                            poster="'assets/video/map.png'"
                             width="1200"
                             height="250"
                             play="vm.mapLinkHover"
@@ -20,6 +20,57 @@
                         <div class="c-homepage__block-button">
                             <div class="o-btn--transparent">Data op de kaart</div>
                             <div class="c-homepage__block-details">Selecteer kaartlagen, vind gegevens op een punt in de kaart, meet of teken een gebied</div>
+                        </div>
+                    </dp-link>
+                </div>
+            </div>
+            <div class="u-col-sm--3">
+                <div>
+                    <!-- Link to maps.amsterdam.nl -->
+                    <a href="https://maps.amsterdam.nl" target="_blank" class="c-homepage__block c-homepage__block--right c-homepage__block--tall c-homepage__block--amsterdam-maps">
+                        <div class="c-homepage__block-button c-homepage__block-button--tall">
+                            <div class="c-homepage__block-details-title o-btn--transparent">Meer op Maps Amsterdam</div>
+                            <div class="c-homepage__block-details">Ruimtelijke themakaarten (nog te integreren)</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="u-row">
+            <div class="u-col-sm--6 c-homepage__block--data-selection">
+                <!-- Links to data selection themes -->
+                <div class="c-homepage__block c-homepage__block--left c-homepage__block--tall c-homepage__block--datasets" ng-class="{ 'c-homepage__block--shadow': datasetsHover }">
+                    <dp-link class-name="c-homepage__block-button" type="FETCH_DATA_SELECTION" payload="{
+                             dataset: 'catalogus',
+                             filters: {},
+                             view: 'CARDS',
+                             page: 1
+                         }" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
+                        <div class-name="c-homepage__block-button" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
+                            <div class="o-btn--transparent">Datasetcatalogus</div>
+                            <div class="c-homepage__block-details">Blader door datasets (verzamelingen gegevens)</div>
+                        </div>
+                    </dp-link>
+                    <dp-catalogus-themes></dp-catalogus-themes>
+                </div>
+            </div>
+            <div class="u-col-sm--3 c-homepage__block--adressen-vestigingen">
+                <div>
+                    <!-- Link to data selection BAG -->
+                    <dp-link type="FETCH_DATA_SELECTION" class-name="c-homepage__block c-homepage__block--middle c-homepage__block--short c-homepage__block--adressen" payload="{dataset: 'bag', filters: {}, page: 1}">
+                        <div class="c-homepage__block-button c-homepage__block-button--tall">
+                            <div class="o-btn--transparent">Adressentabel</div>
+                            <div class="c-homepage__block-details">Selecteer adressen en download spreadsheet</div>
+                        </div>
+                    </dp-link>
+                </div>
+
+                <div>
+                    <!-- Link to data selection HR -->
+                    <dp-link type="FETCH_DATA_SELECTION" class-name="c-homepage__block c-homepage__block--middle c-homepage__block--short c-homepage__block--vestigingen" payload="{dataset: 'hr', filters: {}, page: 1}">
+                        <div class="c-homepage__block-button c-homepage__block-button--tall">
+                            <div class="o-btn--transparent">Vestigingentabel</div>
+                            <div class="c-homepage__block-details">Selecteer vestigingen en download spreadsheet</div>
                         </div>
                     </dp-link>
                 </div>
@@ -48,54 +99,14 @@
             </div>
         </div>
         <div class="u-row">
-            <div class="u-col-sm--9">
-                <!-- Links to data selection themes -->
-                <div class="c-homepage__block c-homepage__block--left c-homepage__block--tall c-homepage__block--datasets" ng-class="{ 'c-homepage__block--shadow': datasetsHover }">
-                    <dp-link class-name="c-homepage__block-button" type="FETCH_DATA_SELECTION" payload="{
-                             dataset: 'catalogus',
-                             filters: {},
-                             view: 'CARDS',
-                             page: 1
-                         }" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
-                        <div class-name="c-homepage__block-button" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
-                            <div class="o-btn--transparent">Datasetcatalogus</div>
-                            <div class="c-homepage__block-details">Blader door datasets (verzamelingen gegevens)</div>
-                        </div>
-                    </dp-link>
-                    <dp-catalogus-themes></dp-catalogus-themes>
-                </div>
-            </div>
-            <div class="u-col-sm--3">
-                <div>
-                    <!-- Link to data selection BAG -->
-                    <dp-link type="FETCH_DATA_SELECTION" class-name="c-homepage__block c-homepage__block--right c-homepage__block--short c-homepage__block--adressen" payload="{dataset: 'bag', filters: {}, page: 1}">
-                        <div class="c-homepage__block-button">
-                            <div class="o-btn--transparent">Adressentabel</div>
-                            <div class="c-homepage__block-details">Selecteer adressen en download als spreadsheet</div>
-                        </div>
-                    </dp-link>
-                </div>
-
-                <div>
-                    <!-- Link to data selection HR -->
-                    <dp-link type="FETCH_DATA_SELECTION" class-name="c-homepage__block c-homepage__block--right c-homepage__block--short c-homepage__block--vestigingen" payload="{dataset: 'hr', filters: {}, page: 1}">
-                        <div class="c-homepage__block-button">
-                            <div class="o-btn--transparent">Vestigingentabel</div>
-                            <div class="c-homepage__block-details">Selecteer vestigingen en download als spreadsheet</div>
-                        </div>
-                    </dp-link>
-                </div>
-            </div>
-        </div>
-        <div class="u-row">
             <div class="c-homepage__news">
                 <div class="u-col-sm--9">
-                    <div class="u-padding__left--2 u-padding__right--2 u-margin__right--2">
-                        <h1 class="c-homepage__news-header">Nieuws</h1>
-                        <div class="">
+                    <div>
+                        <h1 class="u-padding__left--3 c-homepage__news-header">Nieuws</h1>
+                        <div>
                             <dp-user-content-widget type="news" limit-to="3"></dp-user-content-widget>
                         </div>
-                        <div class="c-homepage__news-show-more">
+                        <div class="u-padding__left--3 c-homepage__news-show-more">
                             <dp-link type="SHOW_PAGE"
                                      payload="{name: 'content-overzicht', type: 'news'}"
                                      >Nieuwsoverzicht</dp-link>
@@ -103,7 +114,7 @@
                     </div>
                 </div>
                 <div class="u-col-sm--3">
-                    <div class="c-homepage__news-instructions">
+                    <div class="u-margin__left--1 c-homepage__news-instructions">
                         <h2 class="c-homepage__news-instructions-title">Instructies</h2>
                         <div class="c-user-content-widget__entry">
                             <dp-link type="SHOW_PAGE"
@@ -126,27 +137,26 @@
             </div>
         </div>
     </div>
-        </div>
-        <div class="u-row">
-            <div class="c-homepage__text">
-                <div class="u-col-sm--8">
-                    <div class="u-margin__left--2 c-homepage__visie">
-                        <h1 class="c-homepage__visie-header">Amsterdam City Data</h1>
-                        <p class="c-homepage__visie-paragraph">Amsterdam beschikt over een schat aan gegevens over de stad. Via dit dataportaal stellen wij, in samenwerking met onze partners, deze gegevens beschikbaar. Samen met u willen wij werken aan vernieuwende datatoepassingen voor Amsterdam als leefbare stad.</p>
-                        <p class="c-homepage__visie-paragraph">Amsterdam City Data blijft zich ontwikkelen. Het aantal beschikbare gegevens en functionaliteiten van dit dataportaal zal verder groeien. Dit stemmen we af op de behoefte in de stad.</p>
-                        <p class="c-homepage__visie-paragraph">Op dit moment is het dataportaal met name geschikt voor professionals, zoals onderzoekers en uiteraard de medewerkers en ketenpartners van Gemeente Amsterdam. Daarnaast ondersteunen we ontwikkelaars die gegevens gebruiken in eigen toepassingen.</p>
-                        <div class="c-homepage__visie-panel">
-                            <dp-panel is-panel-visible="true" type="info" can-close="false">
-                                <p class="c-homepage__visie-paragraph c-homepage__visie-paragraph--panel">Meer weten over data en de gemeente Amsterdam? Informatie over beleid, samenwerkingsverbanden, inspirerende voorbeelden van toepassingen en informatie voor de pers vindt u op:</p>
-                                <a class="c-link c-link--arrow" href="https://amsterdam.nl/data" target="_blank" rel="noopener">amsterdam.nl/data</a>
-                            </dp-panel>
-                        </div>
+    <div class="u-row">
+        <div class="c-homepage__text">
+            <div class="u-col-sm--8">
+                <div class="u-margin__left--3 c-homepage__visie">
+                    <h1 class="c-homepage__visie-header">Amsterdam City Data</h1>
+                    <p class="c-homepage__visie-paragraph">Amsterdam beschikt over een schat aan gegevens over de stad. Via dit dataportaal stellen wij, in samenwerking met onze partners, deze gegevens beschikbaar. Samen met u willen wij werken aan vernieuwende datatoepassingen voor Amsterdam als leefbare stad.</p>
+                    <p class="c-homepage__visie-paragraph">Amsterdam City Data blijft zich ontwikkelen. Het aantal beschikbare gegevens en functionaliteiten van dit dataportaal zal verder groeien. Dit stemmen we af op de behoefte in de stad.</p>
+                    <p class="c-homepage__visie-paragraph">Op dit moment is het dataportaal met name geschikt voor professionals, zoals onderzoekers en uiteraard de medewerkers en ketenpartners van Gemeente Amsterdam. Daarnaast ondersteunen we ontwikkelaars die gegevens gebruiken in eigen toepassingen.</p>
+                    <div class="c-homepage__visie-panel">
+                        <dp-panel is-panel-visible="true" type="info" can-close="false">
+                            <p class="c-homepage__visie-paragraph c-homepage__visie-paragraph--panel">Meer weten over data en de gemeente Amsterdam? Informatie over beleid, samenwerkingsverbanden, inspirerende voorbeelden van toepassingen en informatie voor de pers vindt u op:</p>
+                            <a class="c-link c-link--arrow" href="https://amsterdam.nl/data" target="_blank" rel="noopener">amsterdam.nl/data</a>
+                        </dp-panel>
                     </div>
                 </div>
-                <div class="u-col-sm--3 u-col-sm--offset-1">
-                    <div class="c-homepage__beleid">
-                        <dp-user-content-widget type="beleid"></dp-user-content-widget>
-                    </div>
+            </div>
+            <div class="u-col-sm--1">&nbsp;</div>
+            <div class="u-col-sm--3">
+                <div class="u-margin__left--1 c-homepage__beleid">
+                    <dp-user-content-widget type="beleid"></dp-user-content-widget>
                 </div>
             </div>
         </div>

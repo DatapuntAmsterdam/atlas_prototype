@@ -2,26 +2,28 @@
 
 $block-tall-height: 288px;
 $block-short-height: 134px;
+$button-height: 100px;
+$button-tall-height: 134px;
 $show-more-height: 70px;
+
+.c-homepage {
+  margin-right: -$base-whitespace;
+  margin-left: -$base-whitespace;
+}
 
 .c-homepage__block {
   @extend %link--arrow;
   display: block;
   position: relative;
+  margin-right: $base-whitespace;
   margin-bottom: 2 * $base-whitespace;
-  margin-left: 0;
+  margin-left: $base-whitespace;
   background-color: $secondary-gray4;
   background-position: center center;
   background-size: cover;
   overflow: hidden;
   box-sizing: border-box;
   background-origin: border-box;
-
-  &:not(.c-homepage__block--datasets) {
-    &:hover {
-      box-shadow: $primary-dark 2px 2px, $primary-dark 2px 0;
-    }
-  }
 
   &::before {
     display: none;
@@ -36,44 +38,32 @@ $show-more-height: 70px;
     z-index: 20;
     pointer-events: none;
   }
+
+  &:hover {
+    box-shadow: $primary-dark 2px 2px, $primary-dark 2px 0;
+
+    .c-homepage__block-button {
+      height: $button-height;
+      transform: translateY(0);
+      background-color: $primary-light;
+    }
+
+    .c-homepage__block-button--tall {
+      height: $button-tall-height;
+    }
+  }
 }
 
 .c-homepage__block--shadow {
   box-shadow: $primary-dark 2px 2px, $primary-dark 2px 0;
 }
 
-.c-homepage__block--left {
-  margin-right: 2 * $base-whitespace;
-}
-
-.c-homepage__block--middle {
-  margin-right: 2 * $base-whitespace;
-}
-
 .c-homepage__block--tall {
   height: $block-tall-height;
-
-  &:not(.c-homepage__block--datasets) {
-    &:hover {
-      .c-homepage__block-button { // sass-lint:disable-line nesting-depth
-        transform: translateY(0);
-        background-color: $primary-light;
-      }
-    }
-  }
 }
 
 .c-homepage__block--short {
   height: $block-short-height;
-
-  &:not(.c-homepage__block--datasets) {
-    &:hover {
-      .c-homepage__block-button { // sass-lint:disable-line nesting-depth
-        transform: translateY(0);
-        background-color: $primary-light;
-      }
-    }
-  }
 }
 
 .c-homepage__text {
@@ -139,19 +129,8 @@ $show-more-height: 70px;
   background-image: url("assets/images/homepage-adressen.png");
 }
 
-.c-homepage__block--datasets {
-  .c-homepage__block-button {
-    &:hover {
-      transform: translateY(0);
-      background-color: $primary-light;
-    }
-  }
-
-  &:not(.c-homepage__block--shadow) {
-    &::after {
-      @include icon-button("link-arrow", "light-gray", "light-gray");
-    }
-  }
+.c-homepage__block--amsterdam-maps {
+  background-image: url("assets/images/amsterdam-maps.png");
 }
 
 .c-homepage__block-button {
@@ -177,9 +156,20 @@ $show-more-height: 70px;
   }
 }
 
+.c-homepage__block-details-title {
+  padding-right: 3 * $base-whitespace;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .c-homepage__block-details {
   @include font-weight($normal-weight);
   width: 100%;
   color: $primary-dark;
   line-height: 3.5 * $base-whitespace;
+
+  .c-homepage__block-button--tall & {
+    max-width: 300px;
+  }
 }

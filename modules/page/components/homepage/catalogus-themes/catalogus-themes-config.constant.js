@@ -36,24 +36,6 @@
                 name: 'Energie',
                 slug: 'energie',
                 icon: 'energie'
-            }, {
-                name: 'Wonen en leefomgeving',
-                slug: 'wonen-leefomgeving',
-                icon: 'wonen-leefomgeving'
-            }, {
-                name: 'Werk en inkomen',
-                slug: 'werk-inkomen',
-                icon: 'werk-en-inkomen'
-            },
-            {
-                name: 'Bestuur en organisatie',
-                slug: 'bestuur-en-organisatie',
-                icon: 'bestuur-organisatie'
-            },
-            {
-                name: 'Educatie, jeugd en diversiteit',
-                slug: 'educatie-jeugd-diversiteit',
-                icon: 'educatie-jeugd-diversiteit'
             }
         ]);
 })();

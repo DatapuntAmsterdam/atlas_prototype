@@ -19,3 +19,7 @@
   @import "components/draw-tool/draw-tool-print";
   @import "components/toggle-fullscreen/toggle-fullscreen-print";
 }
+
+.is-embed {
+  @import "components/map/map-embed";
+}

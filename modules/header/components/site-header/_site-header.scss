@@ -25,11 +25,6 @@ $contact-height: 60px;
   height: $site-header-search-form-height;
 }
 
-.c-site-header__menu {
-  position: absolute;
-  top: 0;
-}
-
 .c-site-header--tall {
   height: $site-header-height-tall + $site-header-toolbar-height + $site-header-tall-bottom-gutter;
   margin-right: $site-header-gutter;
@@ -45,7 +40,6 @@ $contact-height: 60px;
   }
 
   .c-site-header__menu {
-    right: -$base-whitespace;
     height: $site-header-toolbar-height;
   }
 }

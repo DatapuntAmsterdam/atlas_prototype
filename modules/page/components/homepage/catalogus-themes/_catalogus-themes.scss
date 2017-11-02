@@ -8,8 +8,12 @@ $base-padding: calc(#{$base-whitespace} * 2);
 }
 
 .c-catalogus-themes__column {
-  margin-bottom: 17px;  // to position the button links under the themes
+  margin: 6px 0 17px;  // to position the button links under the themes
   font-size: 0;
+}
+
+.c-catalogus-themes__column--right {
+  margin-left: 3 * $base-whitespace;
 }
 
 .c-catalogus-theme__icon {
