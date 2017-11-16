@@ -42,9 +42,7 @@
                 vm.formattedActiveFilters.push({
                     slug: GEOMETRY_FILTER,
                     label: 'Locatie',
-                    option: {
-                        label: 'ingetekend (' + vm.geometryFilter.description + ')'
-                    }
+                    option: 'ingetekend (' + vm.geometryFilter.description + ')'
                 });
             }
 

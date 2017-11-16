@@ -214,14 +214,14 @@ describe('The dataSelectionApi factory', function () {
         it('calls the api factory with the configuration, (optional) active filters and page', function () {
             // Without active filters
             dataSelectionApi.query('zwembaden', 'TABLE', undefined, 1, []);
-            expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {dataset: 'ves'},
+            expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {},
                 1, [], undefined);
 
             // With active filters
             mockedApiService.query.calls.reset();
             dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 1, 'searchText', []);
             expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {
-                water: 'Verwarmd', dataset: 'ves'
+                water: 'Verwarmd'
             }, 1, 'searchText', []);
         });
 
@@ -475,7 +475,7 @@ describe('The dataSelectionApi factory', function () {
             dataSelectionApi.getMarkers('zwembaden', {});
             $rootScope.$apply();
 
-            expect(api.getByUri).toHaveBeenCalledWith('zwembaden/markers/', {dataset: 'ves'});
+            expect(api.getByUri).toHaveBeenCalledWith('zwembaden/markers/', {});
 
             // With filters
             api.getByUri.calls.reset();
@@ -484,8 +484,7 @@ describe('The dataSelectionApi factory', function () {
             expect(api.getByUri).toHaveBeenCalledWith(
                 'zwembaden/markers/',
                 {
-                    water: 'Verwarmd',
-                    dataset: 'ves'
+                    water: 'Verwarmd'
                 }
             );
         });
@@ -523,8 +522,7 @@ describe('The dataSelectionApi factory', function () {
             expect(mockedApiService.query).toHaveBeenCalledWith(
                 mockedConfig.datasets.zwembaden,
                 {
-                    water: 'Verwarmd',
-                    dataset: 'ves'
+                    water: 'Verwarmd'
                     // Note that fake_filter is missing here
                 },
                 1,
@@ -545,8 +543,7 @@ describe('The dataSelectionApi factory', function () {
             expect(api.getByUri).toHaveBeenCalledWith(
                 'zwembaden/markers/',
                 {
-                    water: 'Verwarmd',
-                    dataset: 'ves'
+                    water: 'Verwarmd'
                     // Not that fake_filter isn't part of the api call
                 }
             );

@@ -175,7 +175,8 @@ describe('The dp-data-selection-active-filters component', () => {
         };
 
         const component = getComponent(activeFilters);
-        expect(component.find('.qa-active-filters').length).toBe(1);
+        expect(component.find('.qa-active-filters').text()).toContain('Locatie:');
+        expect(component.find('.qa-active-filters').text()).toContain('ingetekend (description)');
     });
 
     it('shows an empty list with no available filters', () => {
