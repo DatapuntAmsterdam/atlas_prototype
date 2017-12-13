@@ -84,7 +84,7 @@
     "preinstall": "npm cache verify",
     "start": "grunt && webpack-dev-server --config webpack.dev.js",
     "test": "karma start && NODE_ENV=development jest",
-    "test-e2e": "babel-node ./test/e2e.js",
+    "test-e2e": "babel-node ./test/e2e.js --",
     "test-jest": "NODE_ENV=development jest",
     "test-karma": "karma start",
     "test-watch": "karma start --no-single-run & jest --watch",
