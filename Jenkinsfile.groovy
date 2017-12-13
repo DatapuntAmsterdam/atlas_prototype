@@ -27,8 +27,8 @@ node {
             withCredentials([[$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE', variable: 'PASSWORD_EMPLOYEE'],
                              [$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE_PLUS', variable: 'PASSWORD_EMPLOYEE_PLUS']]) {
 
-                println(PASSWORD_EMPLOYEE)
-                println(PASSWORD_EMPLOYEE_PLUS)
+                println("FML: $PASSWORD_EMPLOYEE")
+                println("FML: $PASSWORD_EMPLOYEE_PLUS")
 
                 def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}",
                     "--build-arg BUILD_ENV=acc --build-arg PASSWORD_EMPLOYEE=${PASSWORD_EMPLOYEE} " +
