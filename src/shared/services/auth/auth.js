@@ -22,7 +22,7 @@ const ERROR_MESSAGES = {
 // success
 const AUTH_PARAMS = ['access_token', 'token_type', 'expires_in', 'state'];
 
-const API_ROOT = process.env.NODE_ENV === 'production'
+export const API_ROOT = process.env.NODE_ENV === 'production'
   ? 'https://api.data.amsterdam.nl/'
   : 'https://acc.api.data.amsterdam.nl/';
 
@@ -55,7 +55,7 @@ const scopes = [
 const encodedScopes = encodeURIComponent(scopes.join(' '));
 // The URI we need to redirect to for communication with the OAuth2
 // authorization service
-const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=${encodedScopes}`;
+export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=${encodedScopes}`;
 
 // The keys of values we need to store in the session storage
 //

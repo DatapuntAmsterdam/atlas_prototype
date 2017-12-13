@@ -6,6 +6,11 @@ EXPOSE 80
 
 ENV NODE_ENV=production
 
+ARG PASSWORD_EMPLOYEE
+ARG PASSWORD_EMPLOYEE_PLUS
+ENV USERNAME_EMPLOYEE=atlas.employee@amsterdam.nl
+ENV USERNAME_EMPLOYEE_PLUS=atlas.employee.plus@amsterdam.nl
+
 RUN apt-get update \
   && apt-get upgrade -y --no-install-recommends \
   && apt-get install -y git nginx xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 \
