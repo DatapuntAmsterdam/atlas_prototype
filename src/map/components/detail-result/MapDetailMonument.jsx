@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailResultItem from './MapDetailResultItem';
 
-const MapDetailMonument = ({ panoUrl, result }) => (
+const MapDetailMonument = ({ panoUrl, monument }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -20,21 +20,21 @@ const MapDetailMonument = ({ panoUrl, result }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Monument</h1>
-        <h2 className="map-detail-result__header-subtitle">{result._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{monument._display}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Nummer"
-        value={`${result.monumentnummer}`}
+        value={`${monument.monumentnummer}`}
       />
       <MapDetailResultItem
         label="Type"
-        value={result.monumenttype}
+        value={monument.monumenttype}
       />
       <MapDetailResultItem
         label="Status"
-        value={result.monumentstatus}
+        value={monument.monumentstatus}
       />
     </ul>
   </section>
@@ -45,8 +45,13 @@ MapDetailMonument.defaultProps = {
 };
 
 MapDetailMonument.propTypes = {
-  panoUrl: PropTypes.string,
-  result: PropTypes.object // eslint-disable-line
+  monument: PropTypes.shape({
+    _display: PropTypes.string,
+    monumentnummer: PropTypes.string,
+    monumentstatus: PropTypes.string,
+    monumenttype: PropTypes.string
+  }).isRequired,
+  panoUrl: PropTypes.string
 };
 
 export default MapDetailMonument;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailResultItem from './MapDetailResultItem';
 
-const MapDetailMeetbout = ({ panoUrl, result }) => (
+const MapDetailMeetbout = ({ panoUrl, meetbout }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -20,17 +20,17 @@ const MapDetailMeetbout = ({ panoUrl, result }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Meetbout</h1>
-        <h2 className="map-detail-result__header-subtitle">{result.meetboutidentificatie}</h2>
+        <h2 className="map-detail-result__header-subtitle">{meetbout.meetboutidentificatie}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Status"
-        value={result.status}
+        value={meetbout.status}
       />
       <MapDetailResultItem
         label="Adres"
-        value={result.adres}
+        value={meetbout.adres}
       />
     </ul>
   </section>
@@ -41,8 +41,12 @@ MapDetailMeetbout.defaultProps = {
 };
 
 MapDetailMeetbout.propTypes = {
-  panoUrl: PropTypes.string,
-  result: PropTypes.object // eslint-disable-line
+  meetbout: PropTypes.shape({
+    adres: PropTypes.string,
+    meetboutidentificatie: PropTypes.string,
+    status: PropTypes.string
+  }).isRequired,
+  panoUrl: PropTypes.string
 };
 
 export default MapDetailMeetbout;

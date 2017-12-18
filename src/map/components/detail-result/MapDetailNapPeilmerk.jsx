@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailResultItem from './MapDetailResultItem';
 
-const MapDetailNapPeilmerk = ({ panoUrl, result }) => (
+const MapDetailNapPeilmerk = ({ panoUrl, peilmerk }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -20,21 +20,21 @@ const MapDetailNapPeilmerk = ({ panoUrl, result }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">NAP Peilmerk</h1>
-        <h2 className="map-detail-result__header-subtitle">{result.peilmerkidentificatie}</h2>
+        <h2 className="map-detail-result__header-subtitle">{peilmerk.peilmerkidentificatie}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Hoogte NAP"
-        value={(result.hoogte_nap || result.hoogte_nap === 0) && `${result.hoogte_nap} m`}
+        value={(peilmerk.hoogte_nap || peilmerk.hoogte_nap === 0) && `${peilmerk.hoogte_nap} m`}
       />
       <MapDetailResultItem
         label="Jaar"
-        value={result.jaar && result.jaar.toString()}
+        value={peilmerk.jaar && peilmerk.jaar.toString()}
       />
       <MapDetailResultItem
         label="Omschrijving"
-        value={result.omschrijving}
+        value={peilmerk.omschrijving}
       />
     </ul>
   </section>
@@ -46,7 +46,12 @@ MapDetailNapPeilmerk.defaultProps = {
 
 MapDetailNapPeilmerk.propTypes = {
   panoUrl: PropTypes.string,
-  result: PropTypes.object // eslint-disable-line
+  peilmerk: PropTypes.shape({
+    hoogte_nap: PropTypes.string,
+    jaar: PropTypes.string,
+    omschrijving: PropTypes.string,
+    peilmerkidentificatie: PropTypes.string
+  }).isRequired
 };
 
 export default MapDetailNapPeilmerk;

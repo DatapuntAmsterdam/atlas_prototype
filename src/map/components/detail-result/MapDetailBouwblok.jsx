@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MapDetailBouwblok = ({ panoUrl, result }) => (
+const MapDetailBouwblok = ({ panoUrl, bouwblok }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -18,7 +18,7 @@ const MapDetailBouwblok = ({ panoUrl, result }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Bouwblok</h1>
-        <h2 className="map-detail-result__header-subtitle">{result._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{bouwblok._display}</h2>
       </div>
     </header>
   </section>
@@ -29,8 +29,10 @@ MapDetailBouwblok.defaultProps = {
 };
 
 MapDetailBouwblok.propTypes = {
-  panoUrl: PropTypes.string,
-  result: PropTypes.object // eslint-disable-line
+  bouwblok: PropTypes.shape({
+    _display: PropTypes.string.isRequired
+  }).isRequired,
+  panoUrl: PropTypes.string
 };
 
 export default MapDetailBouwblok;

@@ -13,13 +13,15 @@ const MapDetailAddressItem = ({ label, values }) => (
   </div>
 );
 
-MapDetailAddressItem.defaultProps = {
-  values: {}
-};
-
 MapDetailAddressItem.propTypes = {
   label: PropTypes.string.isRequired,
-  values: PropTypes.object // eslint-disable-line react/forbid-prop-types
+  values: PropTypes.shape({
+    huisnummer: PropTypes.number,
+    huisnummertoevoeging: PropTypes.string,
+    plaats: PropTypes.string,
+    postcode: PropTypes.string,
+    straatnaam: PropTypes.string
+  }).isRequired
 };
 
 export default MapDetailAddressItem;

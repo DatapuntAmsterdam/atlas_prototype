@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailResultItem from './MapDetailResultItem';
 
-const MapDetailInslag = ({ panoUrl, result }) => (
+const MapDetailInslag = ({ panoUrl, inslag }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -20,21 +20,21 @@ const MapDetailInslag = ({ panoUrl, result }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Inslag</h1>
-        <h2 className="map-detail-result__header-subtitle">{result._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{inslag._display}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Datum van inslag"
-        value={result.datum_inslag}
+        value={inslag.datum_inslag}
       />
       <MapDetailResultItem
         label="Soort handeling"
-        value={result.type}
+        value={inslag.type}
       />
       <MapDetailResultItem
         label="Bron"
-        value={result.bron}
+        value={inslag.bron}
       />
     </ul>
   </section>
@@ -45,8 +45,13 @@ MapDetailInslag.defaultProps = {
 };
 
 MapDetailInslag.propTypes = {
-  panoUrl: PropTypes.string,
-  result: PropTypes.object // eslint-disable-line
+  inslag: PropTypes.shape({
+    bron: PropTypes.string,
+    datum_inslag: PropTypes.string,
+    _display: PropTypes.string,
+    type: PropTypes.string
+  }).isRequired,
+  panoUrl: PropTypes.string
 };
 
 export default MapDetailInslag;

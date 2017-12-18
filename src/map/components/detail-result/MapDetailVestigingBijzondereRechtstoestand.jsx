@@ -28,7 +28,10 @@ MapDetailVestigingBijzondereRechtstoestand.defaultProps = {
 };
 
 MapDetailVestigingBijzondereRechtstoestand.propTypes = {
-  values: PropTypes.object // eslint-disable-line react/forbid-prop-types
+  values: PropTypes.shape({
+    faillissement: PropTypes.bool,
+    status: PropTypes.string
+  })
 };
 
 export default MapDetailVestigingBijzondereRechtstoestand;

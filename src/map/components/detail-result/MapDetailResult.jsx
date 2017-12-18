@@ -27,42 +27,42 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
       return (
         <MapDetailKadastraalObject
           panoUrl={panoUrl}
-          result={result}
+          kadastraalObject={result}
         />
       );
     case 'gebieden/bouwblok':
       return (
         <MapDetailBouwblok
           panoUrl={panoUrl}
-          result={result}
+          bouwblok={result}
         />
       );
     case 'meetbouten/meetbout':
       return (
         <MapDetailMeetbout
           panoUrl={panoUrl}
-          result={result}
+          meetbout={result}
         />
       );
     case 'nap/peilmerk':
       return (
         <MapDetailNapPeilmerk
           panoUrl={panoUrl}
-          result={result}
+          peilmerk={result}
         />
       );
     case 'milieuthemas/explosieven/inslagen':
       return (
         <MapDetailInslag
           panoUrl={panoUrl}
-          result={result}
+          inslag={result}
         />
       );
     case 'monumenten/monumenten':
       return (
         <MapDetailMonument
           panoUrl={panoUrl}
-          result={result}
+          monument={result}
         />
       );
     case 'handelsregister/vestiging':
@@ -78,13 +78,14 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
 };
 
 MapDetailResult.defaultProps = {
-  panoUrl: ''
+  panoUrl: '',
+  result: {}
 };
 
 MapDetailResult.propTypes = {
   endpoint: PropTypes.string.isRequired,
   panoUrl: PropTypes.string,
-  result: PropTypes.object // eslint-disable-line
+  result: PropTypes.object // eslint-disable-line react/forbid-prop-types
 };
 
 export default MapDetailResult;

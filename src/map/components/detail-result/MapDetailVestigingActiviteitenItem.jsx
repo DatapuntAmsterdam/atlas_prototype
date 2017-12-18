@@ -24,7 +24,10 @@ MapDetailResultItem.defaultProps = {
 };
 
 MapDetailResultItem.propTypes = {
-  activiteiten: PropTypes.array // eslint-disable-line react/forbid-prop-types
+  activiteiten: PropTypes.arrayOf(PropTypes.shape({
+    sbi_code: PropTypes.string,
+    sbi_omschrijving: PropTypes.string
+  }))
 };
 
 export default MapDetailResultItem;

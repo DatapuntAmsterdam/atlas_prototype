@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailResultItem from './MapDetailResultItem';
 
-const MapDetailKadastraalObject = ({ panoUrl, result }) => (
+const MapDetailKadastraalObject = ({ panoUrl, kadastraalObject }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -20,23 +20,23 @@ const MapDetailKadastraalObject = ({ panoUrl, result }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Kadastraal object</h1>
-        <h2 className="map-detail-result__header-subtitle">{result._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{kadastraalObject._display}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Objectnummer"
-        value={result.objectnummer}
+        value={kadastraalObject.objectnummer}
       />
-      {result.kadastrale_gemeente && (
+      {kadastraalObject.kadastrale_gemeente && (
         <MapDetailResultItem
           label="Kadastrale gemeente"
-          value={`${result.kadastrale_gemeente._display}: ${result.kadastrale_gemeente.naam}`}
+          value={`${kadastraalObject.kadastrale_gemeente._display}: ${kadastraalObject.kadastrale_gemeente.naam}`}
         />
       )}
       <MapDetailResultItem
         label="Grootte"
-        value={(result.grootte || result.grootte === 0) && `${result.grootte} m²`}
+        value={(kadastraalObject.grootte || kadastraalObject.grootte === 0) && `${kadastraalObject.grootte} m²`}
       />
     </ul>
   </section>
@@ -47,8 +47,7 @@ MapDetailKadastraalObject.defaultProps = {
 };
 
 MapDetailKadastraalObject.propTypes = {
-  panoUrl: PropTypes.string,
-  result: PropTypes.shape({
+  kadastraalObject: PropTypes.shape({
     _display: PropTypes.string,
     grootte: PropTypes.number,
     kadastrale_gemeente: PropTypes.shape({
@@ -56,7 +55,8 @@ MapDetailKadastraalObject.propTypes = {
       naam: PropTypes.string
     }),
     objectnummer: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  panoUrl: PropTypes.string
 };
 
 export default MapDetailKadastraalObject;

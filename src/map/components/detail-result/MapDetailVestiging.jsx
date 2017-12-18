@@ -7,7 +7,7 @@ import MapDetailAddressItem from './MapDetailAddressItem';
 import MapDetailVestigingActiviteitenItem from './MapDetailVestigingActiviteitenItem';
 import MapDetailVestigingBijzondereRechtstoestand from './MapDetailVestigingBijzondereRechtstoestand';
 
-const MapDetailVestiging = ({ panoUrl, result }) => (
+const MapDetailVestiging = ({ panoUrl, vestiging }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -24,30 +24,30 @@ const MapDetailVestiging = ({ panoUrl, result }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Vestiging</h1>
-        {result._display && (
-          <h2 className="map-detail-result__header-subtitle">{result._display}</h2>
+        {vestiging._display && (
+          <h2 className="map-detail-result__header-subtitle">{vestiging._display}</h2>
         )}
       </div>
     </header>
-    {!result._display && (
+    {!vestiging._display && (
       <Notification>
         Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om
         maatschappelijke activiteiten en vestigingen te bekijken.
       </Notification>
     )}
-    {result._display && (
+    {vestiging._display && (
       <ul className="map-detail-result__list">
         <MapDetailResultItem
           label="KvK-nummer"
-          value={result.kvkNummer}
+          value={vestiging.kvkNummer}
         />
         <MapDetailAddressItem
           label="Bezoekadres"
-          values={result.bezoekadres}
+          values={vestiging.bezoekadres}
         />
-        <MapDetailVestigingActiviteitenItem activiteiten={result.activiteiten} />
+        <MapDetailVestigingActiviteitenItem activiteiten={vestiging.activiteiten} />
         <MapDetailVestigingBijzondereRechtstoestand
-          values={result._bijzondere_rechts_toestand}
+          values={vestiging._bijzondere_rechts_toestand}
         />
       </ul>
     )}
@@ -60,7 +60,13 @@ MapDetailVestiging.defaultProps = {
 
 MapDetailVestiging.propTypes = {
   panoUrl: PropTypes.string,
-  result: PropTypes.object // eslint-disable-line
+  vestiging: PropTypes.shape({
+    activiteiten: PropTypes.object,
+    bezoekadres: PropTypes.string,
+    _bijzondere_rechts_toestand: PropTypes.string,
+    _display: PropTypes.string,
+    kvkNummer: PropTypes.string
+  }).isRequired
 };
 
 export default MapDetailVestiging;
