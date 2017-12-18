@@ -5,7 +5,7 @@ import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsItem from './MapSearchResultsItem';
 import Notification from '../../../shared/components/notification/Notification';
 
-const MapSearchResults = ({ count, location, results, panoUrl, missingLayers, onItemClick }) => {
+const MapSearchResults = ({ count, location, missingLayers, onItemClick, panoUrl, results }) => {
   const rdCoordinates = wgs84ToRd(location);
 
   // Filter non pand monumenten if search result is pand
