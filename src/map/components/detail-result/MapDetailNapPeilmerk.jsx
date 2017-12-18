@@ -20,21 +20,21 @@ const MapDetailNapPeilmerk = ({ panoUrl, peilmerk }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">NAP Peilmerk</h1>
-        <h2 className="map-detail-result__header-subtitle">{peilmerk.peilmerkidentificatie}</h2>
+        <h2 className="map-detail-result__header-subtitle">{peilmerk.label}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Hoogte NAP"
-        value={(peilmerk.hoogte_nap || peilmerk.hoogte_nap === 0) && `${peilmerk.hoogte_nap} m`}
+        value={(peilmerk.height || peilmerk.height === 0) && `${peilmerk.height} m`}
       />
       <MapDetailResultItem
         label="Jaar"
-        value={peilmerk.jaar && peilmerk.jaar.toString()}
+        value={peilmerk.year && peilmerk.year.toString()}
       />
       <MapDetailResultItem
         label="Omschrijving"
-        value={peilmerk.omschrijving}
+        value={peilmerk.description}
       />
     </ul>
   </section>
@@ -47,10 +47,10 @@ MapDetailNapPeilmerk.defaultProps = {
 MapDetailNapPeilmerk.propTypes = {
   panoUrl: PropTypes.string,
   peilmerk: PropTypes.shape({
-    hoogte_nap: PropTypes.string,
-    jaar: PropTypes.string,
-    omschrijving: PropTypes.string,
-    peilmerkidentificatie: PropTypes.string
+    description: PropTypes.string,
+    height: PropTypes.string,
+    label: PropTypes.string,
+    year: PropTypes.string
   }).isRequired
 };
 

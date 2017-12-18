@@ -20,21 +20,21 @@ const MapDetailMonument = ({ panoUrl, monument }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Monument</h1>
-        <h2 className="map-detail-result__header-subtitle">{monument._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{monument.label}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Nummer"
-        value={`${monument.monumentnummer}`}
+        value={`${monument.number}`}
       />
       <MapDetailResultItem
         label="Type"
-        value={monument.monumenttype}
+        value={monument.type}
       />
       <MapDetailResultItem
         label="Status"
-        value={monument.monumentstatus}
+        value={monument.status}
       />
     </ul>
   </section>
@@ -46,10 +46,10 @@ MapDetailMonument.defaultProps = {
 
 MapDetailMonument.propTypes = {
   monument: PropTypes.shape({
-    _display: PropTypes.string,
-    monumentnummer: PropTypes.string,
-    monumentstatus: PropTypes.string,
-    monumenttype: PropTypes.string
+    label: PropTypes.string,
+    number: PropTypes.string,
+    status: PropTypes.string,
+    type: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string
 };

@@ -20,7 +20,7 @@ const MapDetailMeetbout = ({ panoUrl, meetbout }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Meetbout</h1>
-        <h2 className="map-detail-result__header-subtitle">{meetbout.meetboutidentificatie}</h2>
+        <h2 className="map-detail-result__header-subtitle">{meetbout.label}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
@@ -30,7 +30,7 @@ const MapDetailMeetbout = ({ panoUrl, meetbout }) => (
       />
       <MapDetailResultItem
         label="Adres"
-        value={meetbout.adres}
+        value={meetbout.address}
       />
     </ul>
   </section>
@@ -42,8 +42,8 @@ MapDetailMeetbout.defaultProps = {
 
 MapDetailMeetbout.propTypes = {
   meetbout: PropTypes.shape({
-    adres: PropTypes.string,
-    meetboutidentificatie: PropTypes.string,
+    address: PropTypes.string,
+    label: PropTypes.string,
     status: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string

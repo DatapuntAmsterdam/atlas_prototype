@@ -22,7 +22,15 @@ export default function fetchByUri(uri) {
         maatschappelijkeActiviteit(result.maatschappelijke_activiteit)
         .then((mac) => ({
           ...vestigingResult,
-          kvkNummer: mac.kvk_nummer
+          activities: vestigingResult.activiteiten.map((activity) => ({
+            ...activity,
+            sbiCode: activity.sbi_code,
+            sbiDescription: activity.sbi_omschrijving
+          })),
+          bijzondereRechtstoestand: vestigingResult._bijzondere_rechts_toestand,
+          kvkNumber: mac.kvk_nummer,
+          label: vestigingResult._display,
+          visitingAddress: vestigingResult.bezoekadres
         })) : vestigingResult;
     });
 }

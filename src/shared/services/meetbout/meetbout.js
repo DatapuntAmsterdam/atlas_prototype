@@ -10,6 +10,8 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
+        address: result.adres,
+        label: result.meetboutidentificatie,
         location: result.location || wgs84Center
       };
     });

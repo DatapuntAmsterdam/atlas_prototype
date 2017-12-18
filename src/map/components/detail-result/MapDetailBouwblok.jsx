@@ -18,7 +18,7 @@ const MapDetailBouwblok = ({ panoUrl, bouwblok }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Bouwblok</h1>
-        <h2 className="map-detail-result__header-subtitle">{bouwblok._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{bouwblok.label}</h2>
       </div>
     </header>
   </section>
@@ -30,7 +30,7 @@ MapDetailBouwblok.defaultProps = {
 
 MapDetailBouwblok.propTypes = {
   bouwblok: PropTypes.shape({
-    _display: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired
   }).isRequired,
   panoUrl: PropTypes.string
 };

@@ -24,30 +24,30 @@ const MapDetailVestiging = ({ panoUrl, vestiging }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Vestiging</h1>
-        {vestiging._display && (
-          <h2 className="map-detail-result__header-subtitle">{vestiging._display}</h2>
+        {vestiging.label && (
+          <h2 className="map-detail-result__header-subtitle">{vestiging.label}</h2>
         )}
       </div>
     </header>
-    {!vestiging._display && (
+    {!vestiging.label && (
       <Notification>
         Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om
         maatschappelijke activiteiten en vestigingen te bekijken.
       </Notification>
     )}
-    {vestiging._display && (
+    {vestiging.label && (
       <ul className="map-detail-result__list">
         <MapDetailResultItem
           label="KvK-nummer"
-          value={vestiging.kvkNummer}
+          value={vestiging.kvkNumber}
         />
         <MapDetailAddressItem
           label="Bezoekadres"
-          values={vestiging.bezoekadres}
+          values={vestiging.visitingAddress}
         />
-        <MapDetailVestigingActiviteitenItem activiteiten={vestiging.activiteiten} />
+        <MapDetailVestigingActiviteitenItem activities={vestiging.activities} />
         <MapDetailVestigingBijzondereRechtstoestand
-          values={vestiging._bijzondere_rechts_toestand}
+          values={vestiging.bijzondereRechtstoestand}
         />
       </ul>
     )}
@@ -61,11 +61,11 @@ MapDetailVestiging.defaultProps = {
 MapDetailVestiging.propTypes = {
   panoUrl: PropTypes.string,
   vestiging: PropTypes.shape({
-    activiteiten: PropTypes.object,
-    bezoekadres: PropTypes.string,
-    _bijzondere_rechts_toestand: PropTypes.string,
-    _display: PropTypes.string,
-    kvkNummer: PropTypes.string
+    activities: PropTypes.object,
+    bijzondereRechtstoestand: PropTypes.string,
+    kvkNumber: PropTypes.string,
+    label: PropTypes.string,
+    visitingAddress: PropTypes.string
   }).isRequired
 };
 

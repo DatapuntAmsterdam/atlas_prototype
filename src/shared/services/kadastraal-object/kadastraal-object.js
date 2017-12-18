@@ -10,7 +10,15 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
-        location: result.location || wgs84Center
+        kadastraleGemeente: {
+          ...result.kadastrale_gemeente,
+          label: result.kadastrale_gemeente._display,
+          name: result.kadastrale_gemeente.naam
+        },
+        label: result._display,
+        location: result.location || wgs84Center,
+        objectNumber: result.objectnummer,
+        size: result.grootte
       };
     });
 }

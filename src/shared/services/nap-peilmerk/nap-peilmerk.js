@@ -10,7 +10,11 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
-        location: result.location || wgs84Center
+        description: result.omschrijving,
+        height: result.hoogte_nap,
+        label: result.peilmerkidentificatie,
+        location: result.location || wgs84Center,
+        year: result.jaar
       };
     });
 }

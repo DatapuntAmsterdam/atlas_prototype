@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MapDetailResultItem = ({ activiteiten }) => (
+const MapDetailVestigingActiviteitenItem = ({ activities }) => (
   <div className="map-detail-result__item">
     <section className="map-detail-result__item-content">
       <div className="map-detail-result__item-label">SBI-activiteiten</div>
       <ul className="map-detail-result__item-value map-detail-result__item-list">
-        {activiteiten && activiteiten.length && activiteiten.slice(0, 5).map((activiteit) => (
+        {activities && activities.length && activities.slice(0, 5).map((activity) => (
           <li
-            key={activiteit.sbi_code}
+            key={activity.sbiCode}
             className="map-detail-result__item-list-item"
           >
-            {activiteit.sbi_code}: {activiteit.sbi_omschrijving}
+            {activity.sbiCode}: {activity.sbiDescription}
           </li>
         ))}
       </ul>
@@ -19,15 +19,15 @@ const MapDetailResultItem = ({ activiteiten }) => (
   </div>
 );
 
-MapDetailResultItem.defaultProps = {
-  activiteiten: []
+MapDetailVestigingActiviteitenItem.defaultProps = {
+  activities: []
 };
 
-MapDetailResultItem.propTypes = {
-  activiteiten: PropTypes.arrayOf(PropTypes.shape({
-    sbi_code: PropTypes.string,
-    sbi_omschrijving: PropTypes.string
+MapDetailVestigingActiviteitenItem.propTypes = {
+  activities: PropTypes.arrayOf(PropTypes.shape({
+    sbiCode: PropTypes.string,
+    sbiDescription: PropTypes.string
   }))
 };
 
-export default MapDetailResultItem;
+export default MapDetailVestigingActiviteitenItem;

@@ -20,23 +20,23 @@ const MapDetailKadastraalObject = ({ panoUrl, kadastraalObject }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Kadastraal object</h1>
-        <h2 className="map-detail-result__header-subtitle">{kadastraalObject._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{kadastraalObject.label}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Objectnummer"
-        value={kadastraalObject.objectnummer}
+        value={kadastraalObject.objectNumber}
       />
-      {kadastraalObject.kadastrale_gemeente && (
+      {kadastraalObject.kadastraleGemeente && (
         <MapDetailResultItem
           label="Kadastrale gemeente"
-          value={`${kadastraalObject.kadastrale_gemeente._display}: ${kadastraalObject.kadastrale_gemeente.naam}`}
+          value={`${kadastraalObject.kadastraleGemeente.label}: ${kadastraalObject.kadastraleGemeente.name}`}
         />
       )}
       <MapDetailResultItem
         label="Grootte"
-        value={(kadastraalObject.grootte || kadastraalObject.grootte === 0) && `${kadastraalObject.grootte} m²`}
+        value={(kadastraalObject.size || kadastraalObject.size === 0) && `${kadastraalObject.size} m²`}
       />
     </ul>
   </section>
@@ -48,13 +48,13 @@ MapDetailKadastraalObject.defaultProps = {
 
 MapDetailKadastraalObject.propTypes = {
   kadastraalObject: PropTypes.shape({
-    _display: PropTypes.string,
-    grootte: PropTypes.number,
-    kadastrale_gemeente: PropTypes.shape({
-      _display: PropTypes.string,
-      naam: PropTypes.string
+    kadastraleGemeente: PropTypes.shape({
+      label: PropTypes.string,
+      name: PropTypes.string
     }),
-    objectnummer: PropTypes.string
+    label: PropTypes.string,
+    objectNumber: PropTypes.string,
+    size: PropTypes.number
   }).isRequired,
   panoUrl: PropTypes.string
 };

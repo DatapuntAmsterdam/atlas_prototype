@@ -20,13 +20,13 @@ const MapDetailInslag = ({ panoUrl, inslag }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Inslag</h1>
-        <h2 className="map-detail-result__header-subtitle">{inslag._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{inslag.label}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
       <MapDetailResultItem
         label="Datum van inslag"
-        value={inslag.datum_inslag}
+        value={inslag.dateInslag}
       />
       <MapDetailResultItem
         label="Soort handeling"
@@ -34,7 +34,7 @@ const MapDetailInslag = ({ panoUrl, inslag }) => (
       />
       <MapDetailResultItem
         label="Bron"
-        value={inslag.bron}
+        value={inslag.source}
       />
     </ul>
   </section>
@@ -46,9 +46,9 @@ MapDetailInslag.defaultProps = {
 
 MapDetailInslag.propTypes = {
   inslag: PropTypes.shape({
-    bron: PropTypes.string,
-    datum_inslag: PropTypes.string,
-    _display: PropTypes.string,
+    dateInslag: PropTypes.string,
+    label: PropTypes.string,
+    source: PropTypes.string,
     type: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string

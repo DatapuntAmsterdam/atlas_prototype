@@ -15,7 +15,11 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
-        location: result.location || wgs84Center
+        label: result._display,
+        location: result.location || wgs84Center,
+        number: result.monumentnummer,
+        status: result.monumentstatus,
+        type: result.monumenttype
       };
     });
 }

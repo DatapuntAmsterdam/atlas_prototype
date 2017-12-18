@@ -10,7 +10,10 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
-        location: result.location || wgs84Center
+        dateInslag: result.datum_inslag,
+        label: result._display,
+        location: result.location || wgs84Center,
+        source: result.bron
       };
     });
 }
