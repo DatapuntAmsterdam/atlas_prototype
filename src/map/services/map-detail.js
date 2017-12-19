@@ -4,6 +4,7 @@ import explosievenGevrijwaardGebied from '../../shared/services/explosieven/expl
 import explosievenInslag from '../../shared/services/explosieven/explosieven-inslag';
 import explosievenUitgevoerdOnderzoek from '../../shared/services/explosieven/explosieven-uitgevoerd-onderzoek';
 import explosievenVerdachtGebied from '../../shared/services/explosieven/explosieven-verdacht-gebied';
+import gebiedsgerichtWerken from '../../shared/services/gebiedsgericht-werken/gebiedsgericht-werken';
 import kadastraalObject from '../../shared/services/kadastraal-object/kadastraal-object';
 import meetbout from '../../shared/services/meetbout/meetbout';
 import monument from '../../shared/services/monument/monument';
@@ -40,6 +41,9 @@ const servicesByEndpointType = {
   },
   'gebieden/buurt': {
     fetch: buurt
+  },
+  'gebieden/gebiedsgerichtwerken': {
+    fetch: gebiedsgerichtWerken
   },
   'handelsregister/vestiging': {
     fetch: vestiging,

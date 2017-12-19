@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailBouwblok from './MapDetailBouwblok';
 import MapDetailBuurt from './MapDetailBuurt';
+import MapDetailGebiedsgerichtWerken from './MapDetailGebiedsgerichtWerken';
 import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
 import MapDetailExplosievenUitgevoerdOnderzoek from './MapDetailExplosievenUitgevoerdOnderzoek';
 import MapDetailExplosievenVerdachtGebied from './MapDetailExplosievenVerdachtGebied';
@@ -26,14 +27,15 @@ const endpointTypes = [
   'brk/object', // Kadastraal object
   'gebieden/bouwblok', // Bouwblok
   'gebieden/buurt', // Buurt
+  'gebieden/gebiedsgerichtwerken', // Gebiedsgericht werken
   'handelsregister/vestiging', // Vestiging
   'meetbouten/meetbout', // Meetbout
   'milieuthemas/explosieven/gevrijwaardgebied', // Explosieven - Gevrijwaard gebied
   'milieuthemas/explosieven/uitgevoerdonderzoek', // Explosieven - Uitgevoerd onderzoek
   'milieuthemas/explosieven/verdachtgebied', // Explosieven - Verdacht gebied
-  'milieuthemas/explosieven/inslagen', // Inslag
+  'milieuthemas/explosieven/inslagen', // Explosieven - Inslag
   'monumenten/monumenten', // Monument
-  'nap/peilmerk' // NAP Peilmer
+  'nap/peilmerk' // NAP Peilmerk
 ];
 
 const MapDetailResult = ({ endpoint, panoUrl, result }) => {
@@ -83,6 +85,13 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailBuurt
           panoUrl={panoUrl}
           buurt={result}
+        />
+      );
+    case 'gebieden/gebiedsgerichtwerken':
+      return (
+        <MapDetailGebiedsgerichtWerken
+          panoUrl={panoUrl}
+          gebiedsgerichtWerken={result}
         />
       );
     case 'meetbouten/meetbout':
