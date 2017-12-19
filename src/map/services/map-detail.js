@@ -14,6 +14,7 @@ import nummeraanduiding from '../../shared/services/nummeraanduiding/nummeraandu
 import openbareRuimte from '../../shared/services/openbare-ruimte/openbare-ruimte';
 import pand from '../../shared/services/pand/pand';
 import stadsdeel from '../../shared/services/gebieden/gebieden-stadsdeel';
+import unesco from '../../shared/services/gebieden/gebieden-unesco';
 import vestiging from '../../shared/services/vestiging/vestiging';
 
 const servicesByEndpointType = {
@@ -52,6 +53,9 @@ const servicesByEndpointType = {
   },
   'gebieden/stadsdeel': {
     fetch: stadsdeel
+  },
+  'gebieden/unesco': {
+    fetch: unesco
   },
   'handelsregister/vestiging': {
     fetch: vestiging,
