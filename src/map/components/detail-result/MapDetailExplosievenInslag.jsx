@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailResultItem from './MapDetailResultItem';
 
-const MapDetailInslag = ({ panoUrl, inslag }) => (
+const MapDetailExplosievenInslag = ({ panoUrl, inslag }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -40,11 +40,11 @@ const MapDetailInslag = ({ panoUrl, inslag }) => (
   </section>
 );
 
-MapDetailInslag.defaultProps = {
+MapDetailExplosievenInslag.defaultProps = {
   panoUrl: ''
 };
 
-MapDetailInslag.propTypes = {
+MapDetailExplosievenInslag.propTypes = {
   inslag: PropTypes.shape({
     dateInslag: PropTypes.string,
     label: PropTypes.string,
@@ -54,4 +54,4 @@ MapDetailInslag.propTypes = {
   panoUrl: PropTypes.string
 };
 
-export default MapDetailInslag;
+export default MapDetailExplosievenInslag;

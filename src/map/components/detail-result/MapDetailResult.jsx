@@ -5,7 +5,7 @@ import MapDetailBouwblok from './MapDetailBouwblok';
 import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
 import MapDetailExplosievenUitgevoerdOnderzoek from './MapDetailExplosievenUitgevoerdOnderzoek';
 import MapDetailExplosievenVerdachtGebied from './MapDetailExplosievenVerdachtGebied';
-import MapDetailInslag from './MapDetailInslag';
+import MapDetailExplosievenInslag from './MapDetailExplosievenInslag';
 import MapDetailKadastraalObject from './MapDetailKadastraalObject';
 import MapDetailMeetbout from './MapDetailMeetbout';
 import MapDetailMonument from './MapDetailMonument';
@@ -99,7 +99,7 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
       );
     case 'milieuthemas/explosieven/inslagen':
       return (
-        <MapDetailInslag
+        <MapDetailExplosievenInslag
           panoUrl={panoUrl}
           inslag={result}
         />
