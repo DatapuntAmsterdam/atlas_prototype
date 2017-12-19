@@ -1,6 +1,7 @@
 import bouwblok from '../../shared/services/bouwblok/bouwblok';
 import explosievenGevrijwaardGebied from '../../shared/services/explosieven/explosieven-gevrijwaard-gebied';
 import explosievenUitgevoerdOnderzoek from '../../shared/services/explosieven/explosieven-uitgevoerd-onderzoek';
+import explosievenVerdachtGebied from '../../shared/services/explosieven/explosieven-verdacht-gebied';
 import inslag from '../../shared/services/inslag/inslag';
 import kadastraalObject from '../../shared/services/kadastraal-object/kadastraal-object';
 import meetbout from '../../shared/services/meetbout/meetbout';
@@ -51,6 +52,9 @@ const servicesByEndpointType = {
   },
   'milieuthemas/explosieven/uitgevoerdonderzoek': {
     fetch: explosievenUitgevoerdOnderzoek
+  },
+  'milieuthemas/explosieven/verdachtgebied': {
+    fetch: explosievenVerdachtGebied
   },
   'monumenten/monumenten': {
     fetch: monument

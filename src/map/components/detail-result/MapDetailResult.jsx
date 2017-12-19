@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MapDetailBouwblok from './MapDetailBouwblok';
 import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
 import MapDetailExplosievenUitgevoerdOnderzoek from './MapDetailExplosievenUitgevoerdOnderzoek';
+import MapDetailExplosievenVerdachtGebied from './MapDetailExplosievenVerdachtGebied';
 import MapDetailInslag from './MapDetailInslag';
 import MapDetailKadastraalObject from './MapDetailKadastraalObject';
 import MapDetailMeetbout from './MapDetailMeetbout';
@@ -27,6 +28,7 @@ const endpointTypes = [
   'meetbouten/meetbout', // Meetbout
   'milieuthemas/explosieven/gevrijwaardgebied', // Explosieven - Gevrijwaard gebied
   'milieuthemas/explosieven/uitgevoerdonderzoek', // Explosieven - Uitgevoerd onderzoek
+  'milieuthemas/explosieven/verdachtgebied', // Explosieven - Verdacht gebied
   'milieuthemas/explosieven/inslagen', // Inslag
   'monumenten/monumenten', // Monument
   'nap/peilmerk' // NAP Peilmer
@@ -95,6 +97,13 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
           gevrijwaardGebied={result}
         />
       );
+    case 'milieuthemas/explosieven/inslagen':
+      return (
+        <MapDetailInslag
+          panoUrl={panoUrl}
+          inslag={result}
+        />
+      );
     case 'milieuthemas/explosieven/uitgevoerdonderzoek':
       return (
         <MapDetailExplosievenUitgevoerdOnderzoek
@@ -102,11 +111,11 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
           uitgevoerdOnderzoek={result}
         />
       );
-    case 'milieuthemas/explosieven/inslagen':
+    case 'milieuthemas/explosieven/verdachtgebied':
       return (
-        <MapDetailInslag
+        <MapDetailExplosievenVerdachtGebied
           panoUrl={panoUrl}
-          inslag={result}
+          verdachtGebied={result}
         />
       );
     case 'monumenten/monumenten':
