@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MapDetailKadastraalObject from './MapDetailKadastraalObject';
 import MapDetailBouwblok from './MapDetailBouwblok';
-import MapDetailMeetbout from './MapDetailMeetbout';
-import MapDetailNapPeilmerk from './MapDetailNapPeilmerk';
 import MapDetailInslag from './MapDetailInslag';
+import MapDetailKadastraalObject from './MapDetailKadastraalObject';
+import MapDetailMeetbout from './MapDetailMeetbout';
 import MapDetailMonument from './MapDetailMonument';
+import MapDetailNapPeilmerk from './MapDetailNapPeilmerk';
+import MapDetailNummeraanduiding from './MapDetailNummeraanduiding';
 import MapDetailVestiging from './MapDetailVestiging';
 
 const endpointTypes = [
+  'bag/ligplaats', // Ligplaats
+  'bag/nummeraanduiding', // Verblijfsobject
+  'bag/standplaats', // Standplaats
   'brk/object', // Kadastraal object
   'gebieden/bouwblok', // Bouwblok
   'handelsregister/vestiging', // Vestiging
@@ -23,6 +27,15 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
   const endpointType = endpointTypes.find((type) => endpoint.includes(type));
 
   switch (endpointType) {
+    case 'bag/ligplaats':
+    case 'bag/nummeraanduiding':
+    case 'bag/standplaats':
+      return (
+        <MapDetailNummeraanduiding
+          panoUrl={panoUrl}
+          nummeraanduiding={result}
+        />
+      );
     case 'brk/object':
       return (
         <MapDetailKadastraalObject

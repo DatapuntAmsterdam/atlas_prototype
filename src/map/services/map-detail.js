@@ -1,12 +1,22 @@
-import kadastraalObject from '../../shared/services/kadastraal-object/kadastraal-object';
 import bouwblok from '../../shared/services/bouwblok/bouwblok';
-import meetbout from '../../shared/services/meetbout/meetbout';
-import napPeilmerk from '../../shared/services/nap-peilmerk/nap-peilmerk';
 import inslag from '../../shared/services/inslag/inslag';
+import kadastraalObject from '../../shared/services/kadastraal-object/kadastraal-object';
+import meetbout from '../../shared/services/meetbout/meetbout';
 import monument from '../../shared/services/monument/monument';
+import napPeilmerk from '../../shared/services/nap-peilmerk/nap-peilmerk';
+import nummeraanduiding from '../../shared/services/nummeraanduiding/nummeraanduiding';
 import vestiging from '../../shared/services/vestiging/vestiging';
 
 const servicesByEndpointType = {
+  'bag/ligplaats': {
+    fetch: nummeraanduiding
+  },
+  'bag/nummeraanduiding': {
+    fetch: nummeraanduiding
+  },
+  'bag/standplaats': {
+    fetch: nummeraanduiding
+  },
   'brk/object': {
     fetch: kadastraalObject
   },
