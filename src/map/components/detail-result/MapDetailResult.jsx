@@ -8,12 +8,15 @@ import MapDetailMeetbout from './MapDetailMeetbout';
 import MapDetailMonument from './MapDetailMonument';
 import MapDetailNapPeilmerk from './MapDetailNapPeilmerk';
 import MapDetailNummeraanduiding from './MapDetailNummeraanduiding';
+import MapDetailPand from './MapDetailPand';
 import MapDetailVestiging from './MapDetailVestiging';
 
 const endpointTypes = [
   'bag/ligplaats', // Ligplaats
   'bag/nummeraanduiding', // Verblijfsobject
+  'bag/pand', // Pand
   'bag/standplaats', // Standplaats
+  'bag/verblijfsobject', // Also verblijfsobject (different endpoint)
   'brk/object', // Kadastraal object
   'gebieden/bouwblok', // Bouwblok
   'handelsregister/vestiging', // Vestiging
@@ -30,10 +33,18 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
     case 'bag/ligplaats':
     case 'bag/nummeraanduiding':
     case 'bag/standplaats':
+    case 'bag/verblijfsobject':
       return (
         <MapDetailNummeraanduiding
           panoUrl={panoUrl}
           nummeraanduiding={result}
+        />
+      );
+    case 'bag/pand':
+      return (
+        <MapDetailPand
+          panoUrl={panoUrl}
+          pand={result}
         />
       );
     case 'brk/object':
