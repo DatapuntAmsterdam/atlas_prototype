@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailBouwblok from './MapDetailBouwblok';
 import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
+import MapDetailExplosievenUitgevoerdOnderzoek from './MapDetailExplosievenUitgevoerdOnderzoek';
 import MapDetailInslag from './MapDetailInslag';
 import MapDetailKadastraalObject from './MapDetailKadastraalObject';
 import MapDetailMeetbout from './MapDetailMeetbout';
@@ -25,6 +26,7 @@ const endpointTypes = [
   'handelsregister/vestiging', // Vestiging
   'meetbouten/meetbout', // Meetbout
   'milieuthemas/explosieven/gevrijwaardgebied', // Explosieven - Gevrijwaard gebied
+  'milieuthemas/explosieven/uitgevoerdonderzoek', // Explosieven - Uitgevoerd onderzoek
   'milieuthemas/explosieven/inslagen', // Inslag
   'monumenten/monumenten', // Monument
   'nap/peilmerk' // NAP Peilmer
@@ -91,6 +93,13 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailExplosievenGevrijwaardGebied
           panoUrl={panoUrl}
           gevrijwaardGebied={result}
+        />
+      );
+    case 'milieuthemas/explosieven/uitgevoerdonderzoek':
+      return (
+        <MapDetailExplosievenUitgevoerdOnderzoek
+          panoUrl={panoUrl}
+          uitgevoerdOnderzoek={result}
         />
       );
     case 'milieuthemas/explosieven/inslagen':
