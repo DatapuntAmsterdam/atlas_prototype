@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MapDetailBouwblok from './MapDetailBouwblok';
 import MapDetailBuurt from './MapDetailBuurt';
 import MapDetailGebiedsgerichtWerken from './MapDetailGebiedsgerichtWerken';
+import MapDetailGebiedenGrootstedelijk from './MapDetailGebiedenGrootstedelijk';
 import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
 import MapDetailExplosievenUitgevoerdOnderzoek from './MapDetailExplosievenUitgevoerdOnderzoek';
 import MapDetailExplosievenVerdachtGebied from './MapDetailExplosievenVerdachtGebied';
@@ -28,6 +29,7 @@ const endpointTypes = [
   'gebieden/bouwblok', // Bouwblok
   'gebieden/buurt', // Buurt
   'gebieden/gebiedsgerichtwerken', // Gebiedsgericht werken
+  'gebieden/grootstedelijkgebied', // Grootstedelijk gebied
   'handelsregister/vestiging', // Vestiging
   'meetbouten/meetbout', // Meetbout
   'milieuthemas/explosieven/gevrijwaardgebied', // Explosieven - Gevrijwaard gebied
@@ -92,6 +94,13 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailGebiedsgerichtWerken
           panoUrl={panoUrl}
           gebiedsgerichtWerken={result}
+        />
+      );
+    case 'gebieden/grootstedelijkgebied':
+      return (
+        <MapDetailGebiedenGrootstedelijk
+          panoUrl={panoUrl}
+          grootstedelijk={result}
         />
       );
     case 'meetbouten/meetbout':
