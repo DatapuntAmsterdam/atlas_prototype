@@ -16,6 +16,7 @@ import pand from '../../shared/services/pand/pand';
 import stadsdeel from '../../shared/services/gebieden/gebieden-stadsdeel';
 import unesco from '../../shared/services/gebieden/gebieden-unesco';
 import vestiging from '../../shared/services/vestiging/vestiging';
+import wijk from '../../shared/services/gebieden/gebieden-wijk';
 
 const servicesByEndpointType = {
   'bag/ligplaats': {
@@ -41,6 +42,9 @@ const servicesByEndpointType = {
   },
   'gebieden/bouwblok': {
     fetch: bouwblok
+  },
+  'gebieden/buurtcombinatie': {
+    fetch: wijk
   },
   'gebieden/buurt': {
     fetch: buurt

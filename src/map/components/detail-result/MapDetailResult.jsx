@@ -7,6 +7,7 @@ import MapDetailGebiedsgerichtWerken from './MapDetailGebiedsgerichtWerken';
 import MapDetailGebiedenGrootstedelijk from './MapDetailGebiedenGrootstedelijk';
 import MapDetailGebiedenStadsdeel from './MapDetailGebiedenStadsdeel';
 import MapDetailGebiedenUnesco from './MapDetailGebiedenUnesco';
+import MapDetailGebiedenWijk from './MapDetailGebiedenWijk';
 import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
 import MapDetailExplosievenUitgevoerdOnderzoek from './MapDetailExplosievenUitgevoerdOnderzoek';
 import MapDetailExplosievenVerdachtGebied from './MapDetailExplosievenVerdachtGebied';
@@ -29,6 +30,7 @@ const endpointTypes = [
   'bag/verblijfsobject', // Also verblijfsobject (different endpoint)
   'brk/object', // Kadastraal object
   'gebieden/bouwblok', // Bouwblok
+  'gebieden/buurtcombinatie', // Wijk (buurtcombinatie)
   'gebieden/buurt', // Buurt
   'gebieden/gebiedsgerichtwerken', // Gebiedsgericht werken
   'gebieden/grootstedelijkgebied', // Grootstedelijk gebied
@@ -84,6 +86,13 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailBouwblok
           panoUrl={panoUrl}
           bouwblok={result}
+        />
+      );
+    case 'gebieden/buurtcombinatie':
+      return (
+        <MapDetailGebiedenWijk
+          panoUrl={panoUrl}
+          wijk={result}
         />
       );
     case 'gebieden/buurt':
