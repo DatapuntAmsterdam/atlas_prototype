@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MapDetailBouwblok from './MapDetailBouwblok';
+import MapDetailBuurt from './MapDetailBuurt';
 import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
 import MapDetailExplosievenUitgevoerdOnderzoek from './MapDetailExplosievenUitgevoerdOnderzoek';
 import MapDetailExplosievenVerdachtGebied from './MapDetailExplosievenVerdachtGebied';
@@ -24,6 +25,7 @@ const endpointTypes = [
   'bag/verblijfsobject', // Also verblijfsobject (different endpoint)
   'brk/object', // Kadastraal object
   'gebieden/bouwblok', // Bouwblok
+  'gebieden/buurt', // Buurt
   'handelsregister/vestiging', // Vestiging
   'meetbouten/meetbout', // Meetbout
   'milieuthemas/explosieven/gevrijwaardgebied', // Explosieven - Gevrijwaard gebied
@@ -74,6 +76,13 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailBouwblok
           panoUrl={panoUrl}
           bouwblok={result}
+        />
+      );
+    case 'gebieden/buurt':
+      return (
+        <MapDetailBuurt
+          panoUrl={panoUrl}
+          buurt={result}
         />
       );
     case 'meetbouten/meetbout':

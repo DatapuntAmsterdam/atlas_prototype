@@ -1,4 +1,5 @@
 import bouwblok from '../../shared/services/bouwblok/bouwblok';
+import buurt from '../../shared/services/buurt/buurt';
 import explosievenGevrijwaardGebied from '../../shared/services/explosieven/explosieven-gevrijwaard-gebied';
 import explosievenInslag from '../../shared/services/explosieven/explosieven-inslag';
 import explosievenUitgevoerdOnderzoek from '../../shared/services/explosieven/explosieven-uitgevoerd-onderzoek';
@@ -36,6 +37,9 @@ const servicesByEndpointType = {
   },
   'gebieden/bouwblok': {
     fetch: bouwblok
+  },
+  'gebieden/buurt': {
+    fetch: buurt
   },
   'handelsregister/vestiging': {
     fetch: vestiging,
