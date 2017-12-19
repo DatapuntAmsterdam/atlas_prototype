@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MapDetailBouwblok from './MapDetailBouwblok';
+import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
 import MapDetailInslag from './MapDetailInslag';
 import MapDetailKadastraalObject from './MapDetailKadastraalObject';
 import MapDetailMeetbout from './MapDetailMeetbout';
@@ -23,6 +24,7 @@ const endpointTypes = [
   'gebieden/bouwblok', // Bouwblok
   'handelsregister/vestiging', // Vestiging
   'meetbouten/meetbout', // Meetbout
+  'milieuthemas/explosieven/gevrijwaardgebied', // Explosieven - Gevrijwaard gebied
   'milieuthemas/explosieven/inslagen', // Inslag
   'monumenten/monumenten', // Monument
   'nap/peilmerk' // NAP Peilmer
@@ -82,6 +84,13 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailNapPeilmerk
           panoUrl={panoUrl}
           peilmerk={result}
+        />
+      );
+    case 'milieuthemas/explosieven/gevrijwaardgebied':
+      return (
+        <MapDetailExplosievenGevrijwaardGebied
+          panoUrl={panoUrl}
+          gevrijwaardGebied={result}
         />
       );
     case 'milieuthemas/explosieven/inslagen':
