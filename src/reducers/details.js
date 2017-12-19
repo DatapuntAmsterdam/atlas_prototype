@@ -1,17 +1,5 @@
 export const FETCH_DETAIL = 'FETCH_DETAIL';
 
-// Temporarily only show the preview panel for detail endpoints which are
-// also selectable on the map.
-const previewPanelDetailEndpoints = [
-  'brk/object', // Kadastraal object
-  'gebieden/bouwblok', // Bouwblok
-  'handelsregister/vestiging', // Vestiging
-  'meetbouten/meetbout', // Meetbout
-  'milieuthemas/explosieven/inslagen', // Inslag
-  'monumenten/monumenten', // Monument
-  'nap/peilmerk' // NAP Peilmerk
-];
-
 /* eslint-disable */
 // export default function detailReducer(state = {}, action) {
 /* istanbul ignore next */
@@ -19,9 +7,6 @@ window.reducers = window.reducers || {};
 window.reducers.detailReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_DETAIL:
-      const leaveMapFullscreen = action.payload && previewPanelDetailEndpoints
-        .some((previewPanelEndpoint) => action.payload.includes(previewPanelEndpoint));
-
       return {
         ...state,
         dataSelection: null,
@@ -34,7 +19,6 @@ window.reducers.detailReducer = (state = {}, action) => {
         },
         map: {
           ...state.map,
-          isFullscreen: leaveMapFullscreen ? state.map.isFullscreen : false,
           isLoading: true
         },
         page: {

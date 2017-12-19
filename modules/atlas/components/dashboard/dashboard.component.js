@@ -1,18 +1,6 @@
 (function () {
     'use strict';
 
-    // Temporarily only show the preview panel for detail endpoints which are
-    // also selectable on the map.
-    const previewPanelDetailEndpoints = [
-        'brk/object', // Kadastraal object
-        'gebieden/bouwblok', // Bouwblok
-        'handelsregister/vestiging', // Vestiging
-        'meetbouten/meetbout', // Meetbout
-        'milieuthemas/explosieven/inslagen', // Inslag
-        'monumenten/monumenten', // Monument
-        'nap/peilmerk' // NAP Peilmerk
-    ];
-
     angular
         .module('atlas')
         .component('dpDashboard', {
@@ -69,11 +57,7 @@
             'vm.geosearchLocation',
             'vm.detailEndpoint'
         ], () => {
-            const detailActive = vm.detailEndpoint &&
-                previewPanelDetailEndpoints.some((endpoint) =>
-                    vm.detailEndpoint.includes(endpoint));
-
-            if (vm.visibility.mapPreviewPanel && (vm.geosearchLocation || detailActive)) {
+            if (vm.visibility.mapPreviewPanel && (vm.geosearchLocation || vm.detailEndpoint)) {
                 store.dispatch({ type: 'OPEN_MAP_PREVIEW_PANEL' });
             } else {
                 store.dispatch({ type: 'CLOSE_MAP_PREVIEW_PANEL' });
@@ -114,7 +98,6 @@
             vm.isMapFullscreen = Boolean(vm.visibility.map && state.map.isFullscreen);
             vm.isStraatbeeldActive = Boolean(state.straatbeeld);
             vm.straatbeeldHistory = vm.isStraatbeeldActive ? state.straatbeeld.history : null;
-            vm.isMapPreviewPanelVisible = vm.visibility.mapPreviewPanel;
             vm.geosearchLocation = state.search && state.search.location && state.search.location.toString();
             vm.detailEndpoint = state.detail && state.detail.endpoint;
         }
