@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MapDetailBouwblok from './MapDetailBouwblok';
-import MapDetailBuurt from './MapDetailBuurt';
-import MapDetailGebiedsgerichtWerken from './MapDetailGebiedsgerichtWerken';
+import MapDetailGebiedenBouwblok from './MapDetailGebiedenBouwblok';
+import MapDetailGebiedenBuurt from './MapDetailGebiedenBuurt';
+import MapDetailGebiedenGebiedsgerichtWerken from './MapDetailGebiedenGebiedsgerichtWerken';
 import MapDetailGebiedenGrootstedelijk from './MapDetailGebiedenGrootstedelijk';
 import MapDetailGebiedenStadsdeel from './MapDetailGebiedenStadsdeel';
 import MapDetailGebiedenUnesco from './MapDetailGebiedenUnesco';
@@ -83,7 +83,7 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
       );
     case 'gebieden/bouwblok':
       return (
-        <MapDetailBouwblok
+        <MapDetailGebiedenBouwblok
           panoUrl={panoUrl}
           bouwblok={result}
         />
@@ -97,14 +97,14 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
       );
     case 'gebieden/buurt':
       return (
-        <MapDetailBuurt
+        <MapDetailGebiedenBuurt
           panoUrl={panoUrl}
           buurt={result}
         />
       );
     case 'gebieden/gebiedsgerichtwerken':
       return (
-        <MapDetailGebiedsgerichtWerken
+        <MapDetailGebiedenGebiedsgerichtWerken
           panoUrl={panoUrl}
           gebiedsgerichtWerken={result}
         />

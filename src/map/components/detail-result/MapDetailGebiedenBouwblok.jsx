@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MapDetailGebiedsgerichtWerken = ({ panoUrl, gebiedsgerichtWerken }) => (
+const MapDetailGebiedenBouwblok = ({ panoUrl, bouwblok }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -17,22 +17,22 @@ const MapDetailGebiedsgerichtWerken = ({ panoUrl, gebiedsgerichtWerken }) => (
         />
       )}
       <div className="map-detail-result__header-container">
-        <h1 className="map-detail-result__header-title">GebiedsgerichtWerken</h1>
-        <h2 className="map-detail-result__header-subtitle">{gebiedsgerichtWerken.label}</h2>
+        <h1 className="map-detail-result__header-title">Bouwblok</h1>
+        <h2 className="map-detail-result__header-subtitle">{bouwblok.label}</h2>
       </div>
     </header>
   </section>
 );
 
-MapDetailGebiedsgerichtWerken.defaultProps = {
+MapDetailGebiedenBouwblok.defaultProps = {
   panoUrl: ''
 };
 
-MapDetailGebiedsgerichtWerken.propTypes = {
-  gebiedsgerichtWerken: PropTypes.shape({
+MapDetailGebiedenBouwblok.propTypes = {
+  bouwblok: PropTypes.shape({
     label: PropTypes.string.isRequired
   }).isRequired,
   panoUrl: PropTypes.string
 };
 
-export default MapDetailGebiedsgerichtWerken;
+export default MapDetailGebiedenBouwblok;

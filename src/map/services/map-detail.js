@@ -1,11 +1,14 @@
-import bouwblok from '../../shared/services/bouwblok/bouwblok';
-import buurt from '../../shared/services/buurt/buurt';
 import explosievenGevrijwaardGebied from '../../shared/services/explosieven/explosieven-gevrijwaard-gebied';
 import explosievenInslag from '../../shared/services/explosieven/explosieven-inslag';
 import explosievenUitgevoerdOnderzoek from '../../shared/services/explosieven/explosieven-uitgevoerd-onderzoek';
 import explosievenVerdachtGebied from '../../shared/services/explosieven/explosieven-verdacht-gebied';
-import gebiedsgerichtWerken from '../../shared/services/gebiedsgericht-werken/gebiedsgericht-werken';
-import grootstedelijk from '../../shared/services/gebieden/gebieden-grootstedelijk';
+import gebiedenBouwblok from '../../shared/services/gebieden/gebieden-bouwblok';
+import gebiedenBuurt from '../../shared/services/gebieden/gebieden-buurt';
+import gebiedenGebiedsgerichtWerken from '../../shared/services/gebieden/gebieden-gebiedsgericht-werken';
+import gebiedenGrootstedelijk from '../../shared/services/gebieden/gebieden-grootstedelijk';
+import gebiedenStadsdeel from '../../shared/services/gebieden/gebieden-stadsdeel';
+import gebiedenUnesco from '../../shared/services/gebieden/gebieden-unesco';
+import gebiedenWijk from '../../shared/services/gebieden/gebieden-wijk';
 import kadastraalObject from '../../shared/services/kadastraal-object/kadastraal-object';
 import meetbout from '../../shared/services/meetbout/meetbout';
 import monument from '../../shared/services/monument/monument';
@@ -13,10 +16,7 @@ import napPeilmerk from '../../shared/services/nap-peilmerk/nap-peilmerk';
 import nummeraanduiding from '../../shared/services/nummeraanduiding/nummeraanduiding';
 import openbareRuimte from '../../shared/services/openbare-ruimte/openbare-ruimte';
 import pand from '../../shared/services/pand/pand';
-import stadsdeel from '../../shared/services/gebieden/gebieden-stadsdeel';
-import unesco from '../../shared/services/gebieden/gebieden-unesco';
 import vestiging from '../../shared/services/vestiging/vestiging';
-import wijk from '../../shared/services/gebieden/gebieden-wijk';
 
 const servicesByEndpointType = {
   'bag/ligplaats': {
@@ -41,25 +41,25 @@ const servicesByEndpointType = {
     fetch: kadastraalObject
   },
   'gebieden/bouwblok': {
-    fetch: bouwblok
+    fetch: gebiedenBouwblok
   },
   'gebieden/buurtcombinatie': {
-    fetch: wijk
+    fetch: gebiedenWijk
   },
   'gebieden/buurt': {
-    fetch: buurt
+    fetch: gebiedenBuurt
   },
   'gebieden/gebiedsgerichtwerken': {
-    fetch: gebiedsgerichtWerken
+    fetch: gebiedenGebiedsgerichtWerken
   },
   'gebieden/grootstedelijk': {
-    fetch: grootstedelijk
+    fetch: gebiedenGrootstedelijk
   },
   'gebieden/stadsdeel': {
-    fetch: stadsdeel
+    fetch: gebiedenStadsdeel
   },
   'gebieden/unesco': {
-    fetch: unesco
+    fetch: gebiedenUnesco
   },
   'handelsregister/vestiging': {
     fetch: vestiging,
