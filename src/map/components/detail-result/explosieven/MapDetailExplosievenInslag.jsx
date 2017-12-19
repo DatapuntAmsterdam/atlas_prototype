@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MapDetailResultItem from './MapDetailResultItem';
+import MapDetailResultItem from '../MapDetailResultItem';
 
 const MapDetailExplosievenInslag = ({ panoUrl, inslag }) => (
   <section className="map-detail-result">

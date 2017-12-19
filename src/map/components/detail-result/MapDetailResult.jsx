@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MapDetailGebiedenBouwblok from './MapDetailGebiedenBouwblok';
-import MapDetailGebiedenBuurt from './MapDetailGebiedenBuurt';
-import MapDetailGebiedenGebiedsgerichtWerken from './MapDetailGebiedenGebiedsgerichtWerken';
-import MapDetailGebiedenGrootstedelijk from './MapDetailGebiedenGrootstedelijk';
-import MapDetailGebiedenStadsdeel from './MapDetailGebiedenStadsdeel';
-import MapDetailGebiedenUnesco from './MapDetailGebiedenUnesco';
-import MapDetailGebiedenWijk from './MapDetailGebiedenWijk';
-import MapDetailExplosievenGevrijwaardGebied from './MapDetailExplosievenGevrijwaardGebied';
-import MapDetailExplosievenUitgevoerdOnderzoek from './MapDetailExplosievenUitgevoerdOnderzoek';
-import MapDetailExplosievenVerdachtGebied from './MapDetailExplosievenVerdachtGebied';
-import MapDetailExplosievenInslag from './MapDetailExplosievenInslag';
+import MapDetailExplosievenGevrijwaardGebied from './explosieven/MapDetailExplosievenGevrijwaardGebied';
+import MapDetailExplosievenInslag from './explosieven/MapDetailExplosievenInslag';
+import MapDetailExplosievenUitgevoerdOnderzoek from './explosieven/MapDetailExplosievenUitgevoerdOnderzoek';
+import MapDetailExplosievenVerdachtGebied from './explosieven/MapDetailExplosievenVerdachtGebied';
+import MapDetailGebiedenBouwblok from './gebieden/MapDetailGebiedenBouwblok';
+import MapDetailGebiedenBuurt from './gebieden/MapDetailGebiedenBuurt';
+import MapDetailGebiedenGebiedsgerichtWerken from './gebieden/MapDetailGebiedenGebiedsgerichtWerken';
+import MapDetailGebiedenGrootstedelijk from './gebieden/MapDetailGebiedenGrootstedelijk';
+import MapDetailGebiedenStadsdeel from './gebieden/MapDetailGebiedenStadsdeel';
+import MapDetailGebiedenUnesco from './gebieden/MapDetailGebiedenUnesco';
+import MapDetailGebiedenWijk from './gebieden/MapDetailGebiedenWijk';
 import MapDetailKadastraalObject from './MapDetailKadastraalObject';
 import MapDetailMeetbout from './MapDetailMeetbout';
 import MapDetailMonument from './MapDetailMonument';
@@ -39,9 +39,9 @@ const endpointTypes = [
   'handelsregister/vestiging', // Vestiging
   'meetbouten/meetbout', // Meetbout
   'milieuthemas/explosieven/gevrijwaardgebied', // Explosieven - Gevrijwaard gebied
+  'milieuthemas/explosieven/inslagen', // Explosieven - Inslag
   'milieuthemas/explosieven/uitgevoerdonderzoek', // Explosieven - Uitgevoerd onderzoek
   'milieuthemas/explosieven/verdachtgebied', // Explosieven - Verdacht gebied
-  'milieuthemas/explosieven/inslagen', // Explosieven - Inslag
   'monumenten/monumenten', // Monument
   'nap/peilmerk' // NAP Peilmerk
 ];
