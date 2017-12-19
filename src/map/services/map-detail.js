@@ -5,6 +5,7 @@ import meetbout from '../../shared/services/meetbout/meetbout';
 import monument from '../../shared/services/monument/monument';
 import napPeilmerk from '../../shared/services/nap-peilmerk/nap-peilmerk';
 import nummeraanduiding from '../../shared/services/nummeraanduiding/nummeraanduiding';
+import openbareRuimte from '../../shared/services/openbare-ruimte/openbare-ruimte';
 import pand from '../../shared/services/pand/pand';
 import vestiging from '../../shared/services/vestiging/vestiging';
 
@@ -14,6 +15,9 @@ const servicesByEndpointType = {
   },
   'bag/nummeraanduiding': {
     fetch: nummeraanduiding
+  },
+  'bag/openbareruimte': {
+    fetch: openbareRuimte
   },
   'bag/pand': {
     fetch: pand

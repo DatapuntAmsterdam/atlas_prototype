@@ -8,12 +8,14 @@ import MapDetailMeetbout from './MapDetailMeetbout';
 import MapDetailMonument from './MapDetailMonument';
 import MapDetailNapPeilmerk from './MapDetailNapPeilmerk';
 import MapDetailNummeraanduiding from './MapDetailNummeraanduiding';
+import MapDetailOpenbareRuimte from './MapDetailOpenbareRuimte';
 import MapDetailPand from './MapDetailPand';
 import MapDetailVestiging from './MapDetailVestiging';
 
 const endpointTypes = [
   'bag/ligplaats', // Ligplaats
   'bag/nummeraanduiding', // Verblijfsobject
+  'bag/openbareruimte', // Openbare ruimte
   'bag/pand', // Pand
   'bag/standplaats', // Standplaats
   'bag/verblijfsobject', // Also verblijfsobject (different endpoint)
@@ -23,7 +25,7 @@ const endpointTypes = [
   'meetbouten/meetbout', // Meetbout
   'milieuthemas/explosieven/inslagen', // Inslag
   'monumenten/monumenten', // Monument
-  'nap/peilmerk' // NAP Peilmerk
+  'nap/peilmerk' // NAP Peilmer
 ];
 
 const MapDetailResult = ({ endpoint, panoUrl, result }) => {
@@ -38,6 +40,13 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailNummeraanduiding
           panoUrl={panoUrl}
           nummeraanduiding={result}
+        />
+      );
+    case 'bag/openbareruimte':
+      return (
+        <MapDetailOpenbareRuimte
+          panoUrl={panoUrl}
+          openbareRuimte={result}
         />
       );
     case 'bag/pand':
