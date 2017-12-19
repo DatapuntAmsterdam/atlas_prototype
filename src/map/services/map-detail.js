@@ -13,6 +13,7 @@ import napPeilmerk from '../../shared/services/nap-peilmerk/nap-peilmerk';
 import nummeraanduiding from '../../shared/services/nummeraanduiding/nummeraanduiding';
 import openbareRuimte from '../../shared/services/openbare-ruimte/openbare-ruimte';
 import pand from '../../shared/services/pand/pand';
+import stadsdeel from '../../shared/services/gebieden/gebieden-stadsdeel';
 import vestiging from '../../shared/services/vestiging/vestiging';
 
 const servicesByEndpointType = {
@@ -48,6 +49,9 @@ const servicesByEndpointType = {
   },
   'gebieden/grootstedelijk': {
     fetch: grootstedelijk
+  },
+  'gebieden/stadsdeel': {
+    fetch: stadsdeel
   },
   'handelsregister/vestiging': {
     fetch: vestiging,

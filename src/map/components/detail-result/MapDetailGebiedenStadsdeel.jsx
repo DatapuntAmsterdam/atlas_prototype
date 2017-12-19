@@ -1,0 +1,38 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const MapDetailGebiedenStadsdeel = ({ panoUrl, stadsdeel }) => (
+  <section className="map-detail-result">
+    <header
+      className={`
+        map-detail-result__header
+        map-detail-result__header--${panoUrl ? 'pano' : 'no-pano'}
+      `}
+    >
+      {panoUrl && (
+        <img
+          alt="Panoramabeeld"
+          className="map-detail-result__header-pano"
+          src={panoUrl}
+        />
+      )}
+      <div className="map-detail-result__header-container">
+        <h1 className="map-detail-result__header-title">Stadsdeel</h1>
+        <h2 className="map-detail-result__header-subtitle">{stadsdeel.label}</h2>
+      </div>
+    </header>
+  </section>
+);
+
+MapDetailGebiedenStadsdeel.defaultProps = {
+  panoUrl: ''
+};
+
+MapDetailGebiedenStadsdeel.propTypes = {
+  stadsdeel: PropTypes.shape({
+    label: PropTypes.string.isRequired
+  }).isRequired,
+  panoUrl: PropTypes.string
+};
+
+export default MapDetailGebiedenStadsdeel;
