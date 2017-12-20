@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MapDetailOpenbareRuimte = ({ panoUrl, openbareRuimte }) => (
+const MapDetailAdressenVerblijfsobject = ({ panoUrl, verblijfsobject }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -17,22 +17,22 @@ const MapDetailOpenbareRuimte = ({ panoUrl, openbareRuimte }) => (
         />
       )}
       <div className="map-detail-result__header-container">
-        <h1 className="map-detail-result__header-title">Openbare ruimte</h1>
-        <h2 className="map-detail-result__header-subtitle">{openbareRuimte._display}</h2>
+        <h1 className="map-detail-result__header-title">Verblijfsobject</h1>
+        <h2 className="map-detail-result__header-subtitle">{verblijfsobject._display}</h2>
       </div>
     </header>
   </section>
 );
 
-MapDetailOpenbareRuimte.defaultProps = {
+MapDetailAdressenVerblijfsobject.defaultProps = {
   panoUrl: ''
 };
 
-MapDetailOpenbareRuimte.propTypes = {
-  openbareRuimte: PropTypes.shape({
+MapDetailAdressenVerblijfsobject.propTypes = {
+  verblijfsobject: PropTypes.shape({
     label: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string
 };
 
-export default MapDetailOpenbareRuimte;
+export default MapDetailAdressenVerblijfsobject;

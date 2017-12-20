@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MapDetailNummeraanduiding = ({ panoUrl, nummeraanduiding }) => (
+const MapDetailAdressenStandplaats = ({ panoUrl, standplaats }) => (
   <section className="map-detail-result">
     <header
       className={`
@@ -17,22 +17,22 @@ const MapDetailNummeraanduiding = ({ panoUrl, nummeraanduiding }) => (
         />
       )}
       <div className="map-detail-result__header-container">
-        <h1 className="map-detail-result__header-title">Adres</h1>
-        <h2 className="map-detail-result__header-subtitle">{nummeraanduiding._display}</h2>
+        <h1 className="map-detail-result__header-title">Standplaats</h1>
+        <h2 className="map-detail-result__header-subtitle">{standplaats._display}</h2>
       </div>
     </header>
   </section>
 );
 
-MapDetailNummeraanduiding.defaultProps = {
+MapDetailAdressenStandplaats.defaultProps = {
   panoUrl: ''
 };
 
-MapDetailNummeraanduiding.propTypes = {
-  nummeraanduiding: PropTypes.shape({
+MapDetailAdressenStandplaats.propTypes = {
+  standplaats: PropTypes.shape({
     label: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string
 };
 
-export default MapDetailNummeraanduiding;
+export default MapDetailAdressenStandplaats;

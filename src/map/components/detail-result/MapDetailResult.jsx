@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { endpointTypes } from '../../services/map-detail';
+import MapDetailAdressenLigplaats from './adressen/MapDetailAdressenLigplaats';
+import MapDetailAdressenNummeraanduiding from './adressen/MapDetailAdressenNummeraanduiding';
+import MapDetailAdressenOpenbareRuimte from './adressen/MapDetailAdressenOpenbareRuimte';
+import MapDetailAdressenPand from './adressen/MapDetailAdressenPand';
+import MapDetailAdressenStandplaats from './adressen/MapDetailAdressenStandplaats';
+import MapDetailAdressenVerblijfsobject from './adressen/MapDetailAdressenVerblijfsobject';
 import MapDetailExplosievenGevrijwaardGebied from './explosieven/MapDetailExplosievenGevrijwaardGebied';
 import MapDetailExplosievenInslag from './explosieven/MapDetailExplosievenInslag';
 import MapDetailExplosievenUitgevoerdOnderzoek from './explosieven/MapDetailExplosievenUitgevoerdOnderzoek';
@@ -17,9 +23,6 @@ import MapDetailKadastraalObject from './MapDetailKadastraalObject';
 import MapDetailMeetbout from './MapDetailMeetbout';
 import MapDetailMonument from './MapDetailMonument';
 import MapDetailNapPeilmerk from './MapDetailNapPeilmerk';
-import MapDetailNummeraanduiding from './MapDetailNummeraanduiding';
-import MapDetailOpenbareRuimte from './MapDetailOpenbareRuimte';
-import MapDetailPand from './MapDetailPand';
 import MapDetailVestiging from './MapDetailVestiging';
 
 const MapDetailResult = ({ endpoint, panoUrl, result }) => {
@@ -27,6 +30,48 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
   const endpointType = endpointTypes[endpointTypeKey];
 
   switch (endpointType) {
+    case endpointTypes.adressenLigplaats:
+      return (
+        <MapDetailAdressenLigplaats
+          panoUrl={panoUrl}
+          ligplaats={result}
+        />
+      );
+    case endpointTypes.adressenNummeraanduiding:
+      return (
+        <MapDetailAdressenNummeraanduiding
+          panoUrl={panoUrl}
+          nummeraanduiding={result}
+        />
+      );
+    case endpointTypes.adressenOpenbareRuimte:
+      return (
+        <MapDetailAdressenOpenbareRuimte
+          panoUrl={panoUrl}
+          openbareRuimte={result}
+        />
+      );
+    case endpointTypes.adressenPand:
+      return (
+        <MapDetailAdressenPand
+          panoUrl={panoUrl}
+          pand={result}
+        />
+      );
+    case endpointTypes.adressenStandplaats:
+      return (
+        <MapDetailAdressenStandplaats
+          panoUrl={panoUrl}
+          standplaats={result}
+        />
+      );
+    case endpointTypes.adressenVerblijfsobject:
+      return (
+        <MapDetailAdressenVerblijfsobject
+          panoUrl={panoUrl}
+          verblijfsobject={result}
+        />
+      );
     case endpointTypes.explosievenGevrijwaardGebied:
       return (
         <MapDetailExplosievenGevrijwaardGebied
@@ -111,16 +156,6 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
           kadastraalObject={result}
         />
       );
-    case endpointTypes.ligplaats:
-    case endpointTypes.nummeraanduiding:
-    case endpointTypes.standplaats:
-    case endpointTypes.verblijfsobject:
-      return (
-        <MapDetailNummeraanduiding
-          panoUrl={panoUrl}
-          nummeraanduiding={result}
-        />
-      );
     case endpointTypes.meetbout:
       return (
         <MapDetailMeetbout
@@ -140,20 +175,6 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailNapPeilmerk
           panoUrl={panoUrl}
           peilmerk={result}
-        />
-      );
-    case endpointTypes.openbareRuimte:
-      return (
-        <MapDetailOpenbareRuimte
-          panoUrl={panoUrl}
-          openbareRuimte={result}
-        />
-      );
-    case endpointTypes.pand:
-      return (
-        <MapDetailPand
-          panoUrl={panoUrl}
-          pand={result}
         />
       );
     case endpointTypes.vestiging:

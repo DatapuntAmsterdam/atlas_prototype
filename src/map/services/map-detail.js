@@ -1,3 +1,9 @@
+import adressenLigplaats from '../../shared/services/adressen/adressen-ligplaats';
+import adressenNummeraanduiding from '../../shared/services/adressen/adressen-nummeraanduiding';
+import adressenOpenbareRuimte from '../../shared/services/adressen/adressen-openbare-ruimte';
+import adressenPand from '../../shared/services/adressen/adressen-pand';
+import adressenStandplaats from '../../shared/services/adressen/adressen-standplaats';
+import adressenVerblijfsobject from '../../shared/services/adressen/adressen-verblijfsobject';
 import explosievenGevrijwaardGebied from '../../shared/services/explosieven/explosieven-gevrijwaard-gebied';
 import explosievenInslag from '../../shared/services/explosieven/explosieven-inslag';
 import explosievenUitgevoerdOnderzoek from '../../shared/services/explosieven/explosieven-uitgevoerd-onderzoek';
@@ -13,12 +19,15 @@ import kadastraalObject from '../../shared/services/kadastraal-object/kadastraal
 import meetbout from '../../shared/services/meetbout/meetbout';
 import monument from '../../shared/services/monument/monument';
 import napPeilmerk from '../../shared/services/nap-peilmerk/nap-peilmerk';
-import nummeraanduiding from '../../shared/services/nummeraanduiding/nummeraanduiding';
-import openbareRuimte from '../../shared/services/openbare-ruimte/openbare-ruimte';
-import pand from '../../shared/services/pand/pand';
 import vestiging from '../../shared/services/vestiging/vestiging';
 
 export const endpointTypes = {
+  adressenLigplaats: 'bag/ligplaats',
+  adressenNummeraanduiding: 'bag/nummeraanduiding',
+  adressenOpenbareRuimte: 'bag/openbareruimte',
+  adressenPand: 'bag/pand',
+  adressenStandplaats: 'bag/standplaats',
+  adressenVerblijfsobject: 'bag/verblijfsobject',
   explosievenGevrijwaardGebied: 'milieuthemas/explosieven/gevrijwaardgebied',
   explosievenInslag: 'milieuthemas/explosieven/inslagen',
   explosievenUitgevoerdOnderzoek: 'milieuthemas/explosieven/uitgevoerdonderzoek',
@@ -31,19 +40,19 @@ export const endpointTypes = {
   gebiedenUnesco: 'gebieden/unesco',
   gebiedenWijk: 'gebieden/buurtcombinatie',
   kadastraalObject: 'brk/object',
-  ligplaats: 'bag/ligplaats',
   meetbout: 'meetbouten/meetbout',
   monument: 'monumenten/monumenten',
   napPeilmerk: 'nap/peilmerk',
-  nummeraanduiding: 'bag/nummeraanduiding',
-  openbareRuimte: 'bag/openbareruimte',
-  pand: 'bag/pand',
-  standplaats: 'bag/standplaats',
-  verblijfsobject: 'bag/verblijfsobject',
   vestiging: 'handelsregister/vestiging'
 };
 
 const servicesByEndpointType = {
+  [endpointTypes.adressenLigplaats]: { fetch: adressenLigplaats },
+  [endpointTypes.adressenNummeraanduiding]: { fetch: adressenNummeraanduiding },
+  [endpointTypes.adressenOpenbareRuimte]: { fetch: adressenOpenbareRuimte },
+  [endpointTypes.adressenPand]: { fetch: adressenPand },
+  [endpointTypes.adressenStandplaats]: { fetch: adressenStandplaats },
+  [endpointTypes.adressenVerblijfsobject]: { fetch: adressenVerblijfsobject },
   [endpointTypes.explosievenGevrijwaardGebied]: { fetch: explosievenGevrijwaardGebied },
   [endpointTypes.explosievenInslag]: { fetch: explosievenInslag },
   [endpointTypes.explosievenUitgevoerdOnderzoek]: { fetch: explosievenUitgevoerdOnderzoek },
@@ -56,15 +65,9 @@ const servicesByEndpointType = {
   [endpointTypes.gebiedenUnesco]: { fetch: gebiedenUnesco },
   [endpointTypes.gebiedenWijk]: { fetch: gebiedenWijk },
   [endpointTypes.kadastraalObject]: { fetch: kadastraalObject },
-  [endpointTypes.ligplaats]: { fetch: nummeraanduiding },
   [endpointTypes.meetbout]: { fetch: meetbout },
   [endpointTypes.monument]: { fetch: monument },
   [endpointTypes.napPeilmerk]: { fetch: napPeilmerk },
-  [endpointTypes.nummeraanduiding]: { fetch: nummeraanduiding },
-  [endpointTypes.openbareRuimte]: { fetch: openbareRuimte },
-  [endpointTypes.pand]: { fetch: pand },
-  [endpointTypes.standplaats]: { fetch: nummeraanduiding },
-  [endpointTypes.verblijfsobject]: { fetch: nummeraanduiding },
   [endpointTypes.vestiging]: { fetch: vestiging, authScope: 'HR/R' }
 };
 
