@@ -18,74 +18,54 @@ import openbareRuimte from '../../shared/services/openbare-ruimte/openbare-ruimt
 import pand from '../../shared/services/pand/pand';
 import vestiging from '../../shared/services/vestiging/vestiging';
 
+export const endpointTypes = {
+  explosievenGevrijwaardGebied: 'milieuthemas/explosieven/gevrijwaardgebied',
+  explosievenInslag: 'milieuthemas/explosieven/inslagen',
+  explosievenUitgevoerdOnderzoek: 'milieuthemas/explosieven/uitgevoerdonderzoek',
+  explosievenVerdachtGebied: 'milieuthemas/explosieven/verdachtgebied',
+  gebiedenBouwblok: 'gebieden/bouwblok',
+  gebiedenBuurt: 'gebieden/buurt',
+  gebiedenGebiedsgerichtWerken: 'gebieden/gebiedsgerichtwerken',
+  gebiedenGrootstedelijk: 'gebieden/grootstedelijkgebied',
+  gebiedenStadsdeel: 'gebieden/stadsdeel',
+  gebiedenUnesco: 'gebieden/unesco',
+  gebiedenWijk: 'gebieden/buurtcombinatie',
+  kadastraalObject: 'brk/object',
+  ligplaats: 'bag/ligplaats',
+  meetbout: 'meetbouten/meetbout',
+  monument: 'monumenten/monumenten',
+  napPeilmerk: 'nap/peilmerk',
+  nummeraanduiding: 'bag/nummeraanduiding',
+  openbareRuimte: 'bag/openbareruimte',
+  pand: 'bag/pand',
+  standplaats: 'bag/standplaats',
+  verblijfsobject: 'bag/verblijfsobject',
+  vestiging: 'handelsregister/vestiging'
+};
+
 const servicesByEndpointType = {
-  'bag/ligplaats': {
-    fetch: nummeraanduiding
-  },
-  'bag/nummeraanduiding': {
-    fetch: nummeraanduiding
-  },
-  'bag/openbareruimte': {
-    fetch: openbareRuimte
-  },
-  'bag/pand': {
-    fetch: pand
-  },
-  'bag/standplaats': {
-    fetch: nummeraanduiding
-  },
-  'bag/verblijfsobject': {
-    fetch: nummeraanduiding
-  },
-  'brk/object': {
-    fetch: kadastraalObject
-  },
-  'gebieden/bouwblok': {
-    fetch: gebiedenBouwblok
-  },
-  'gebieden/buurtcombinatie': {
-    fetch: gebiedenWijk
-  },
-  'gebieden/buurt': {
-    fetch: gebiedenBuurt
-  },
-  'gebieden/gebiedsgerichtwerken': {
-    fetch: gebiedenGebiedsgerichtWerken
-  },
-  'gebieden/grootstedelijk': {
-    fetch: gebiedenGrootstedelijk
-  },
-  'gebieden/stadsdeel': {
-    fetch: gebiedenStadsdeel
-  },
-  'gebieden/unesco': {
-    fetch: gebiedenUnesco
-  },
-  'handelsregister/vestiging': {
-    fetch: vestiging,
-    authScope: 'HR/R'
-  },
-  'meetbouten/meetbout': {
-    fetch: meetbout
-  },
-  'milieuthemas/explosieven/gevrijwaardgebied': {
-    fetch: explosievenGevrijwaardGebied
-  },
-  'milieuthemas/explosieven/inslagen': {
-    fetch: explosievenInslag
-  },
-  'milieuthemas/explosieven/uitgevoerdonderzoek': {
-    fetch: explosievenUitgevoerdOnderzoek
-  },
-  'milieuthemas/explosieven/verdachtgebied': {
-    fetch: explosievenVerdachtGebied
-  },
-  'monumenten/monumenten': {
-    fetch: monument
-  },
-  'nap/peilmerk': {
-    fetch: napPeilmerk
-  }
+  [endpointTypes.explosievenGevrijwaardGebied]: { fetch: explosievenGevrijwaardGebied },
+  [endpointTypes.explosievenInslag]: { fetch: explosievenInslag },
+  [endpointTypes.explosievenUitgevoerdOnderzoek]: { fetch: explosievenUitgevoerdOnderzoek },
+  [endpointTypes.explosievenVerdachtGebied]: { fetch: explosievenVerdachtGebied },
+  [endpointTypes.gebiedenBouwblok]: { fetch: gebiedenBouwblok },
+  [endpointTypes.gebiedenBuurt]: { fetch: gebiedenBuurt },
+  [endpointTypes.gebiedenGebiedsgerichtWerken]: { fetch: gebiedenGebiedsgerichtWerken },
+  [endpointTypes.gebiedenGrootstedelijk]: { fetch: gebiedenGrootstedelijk },
+  [endpointTypes.gebiedenStadsdeel]: { fetch: gebiedenStadsdeel },
+  [endpointTypes.gebiedenUnesco]: { fetch: gebiedenUnesco },
+  [endpointTypes.gebiedenWijk]: { fetch: gebiedenWijk },
+  [endpointTypes.kadastraalObject]: { fetch: kadastraalObject },
+  [endpointTypes.ligplaats]: { fetch: nummeraanduiding },
+  [endpointTypes.meetbout]: { fetch: meetbout },
+  [endpointTypes.monument]: { fetch: monument },
+  [endpointTypes.napPeilmerk]: { fetch: napPeilmerk },
+  [endpointTypes.nummeraanduiding]: { fetch: nummeraanduiding },
+  [endpointTypes.openbareRuimte]: { fetch: openbareRuimte },
+  [endpointTypes.pand]: { fetch: pand },
+  [endpointTypes.standplaats]: { fetch: nummeraanduiding },
+  [endpointTypes.verblijfsobject]: { fetch: nummeraanduiding },
+  [endpointTypes.vestiging]: { fetch: vestiging, authScope: 'HR/R' }
 };
 
 export default function detail(endpoint, user) {

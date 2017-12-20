@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { endpointTypes } from '../../services/map-detail';
 import MapDetailExplosievenGevrijwaardGebied from './explosieven/MapDetailExplosievenGevrijwaardGebied';
 import MapDetailExplosievenInslag from './explosieven/MapDetailExplosievenInslag';
 import MapDetailExplosievenUitgevoerdOnderzoek from './explosieven/MapDetailExplosievenUitgevoerdOnderzoek';
@@ -21,165 +22,141 @@ import MapDetailOpenbareRuimte from './MapDetailOpenbareRuimte';
 import MapDetailPand from './MapDetailPand';
 import MapDetailVestiging from './MapDetailVestiging';
 
-const endpointTypes = [
-  'bag/ligplaats', // Ligplaats
-  'bag/nummeraanduiding', // Verblijfsobject
-  'bag/openbareruimte', // Openbare ruimte
-  'bag/pand', // Pand
-  'bag/standplaats', // Standplaats
-  'bag/verblijfsobject', // Also verblijfsobject (different endpoint)
-  'brk/object', // Kadastraal object
-  'gebieden/bouwblok', // Bouwblok
-  'gebieden/buurtcombinatie', // Wijk (buurtcombinatie)
-  'gebieden/buurt', // Buurt
-  'gebieden/gebiedsgerichtwerken', // Gebiedsgericht werken
-  'gebieden/grootstedelijkgebied', // Grootstedelijk gebied
-  'gebieden/stadsdeel', // Stadsdeel
-  'gebieden/unesco', // Unesco
-  'handelsregister/vestiging', // Vestiging
-  'meetbouten/meetbout', // Meetbout
-  'milieuthemas/explosieven/gevrijwaardgebied', // Explosieven - Gevrijwaard gebied
-  'milieuthemas/explosieven/inslagen', // Explosieven - Inslag
-  'milieuthemas/explosieven/uitgevoerdonderzoek', // Explosieven - Uitgevoerd onderzoek
-  'milieuthemas/explosieven/verdachtgebied', // Explosieven - Verdacht gebied
-  'monumenten/monumenten', // Monument
-  'nap/peilmerk' // NAP Peilmerk
-];
-
 const MapDetailResult = ({ endpoint, panoUrl, result }) => {
-  const endpointType = endpointTypes.find((type) => endpoint.includes(type));
+  const endpointTypeKey = Object.keys(endpointTypes).find((typeKey) => endpoint.includes(endpointTypes[typeKey]));
+  const endpointType = endpointTypes[endpointTypeKey];
 
   switch (endpointType) {
-    case 'bag/ligplaats':
-    case 'bag/nummeraanduiding':
-    case 'bag/standplaats':
-    case 'bag/verblijfsobject':
-      return (
-        <MapDetailNummeraanduiding
-          panoUrl={panoUrl}
-          nummeraanduiding={result}
-        />
-      );
-    case 'bag/openbareruimte':
-      return (
-        <MapDetailOpenbareRuimte
-          panoUrl={panoUrl}
-          openbareRuimte={result}
-        />
-      );
-    case 'bag/pand':
-      return (
-        <MapDetailPand
-          panoUrl={panoUrl}
-          pand={result}
-        />
-      );
-    case 'brk/object':
-      return (
-        <MapDetailKadastraalObject
-          panoUrl={panoUrl}
-          kadastraalObject={result}
-        />
-      );
-    case 'gebieden/bouwblok':
-      return (
-        <MapDetailGebiedenBouwblok
-          panoUrl={panoUrl}
-          bouwblok={result}
-        />
-      );
-    case 'gebieden/buurtcombinatie':
-      return (
-        <MapDetailGebiedenWijk
-          panoUrl={panoUrl}
-          wijk={result}
-        />
-      );
-    case 'gebieden/buurt':
-      return (
-        <MapDetailGebiedenBuurt
-          panoUrl={panoUrl}
-          buurt={result}
-        />
-      );
-    case 'gebieden/gebiedsgerichtwerken':
-      return (
-        <MapDetailGebiedenGebiedsgerichtWerken
-          panoUrl={panoUrl}
-          gebiedsgerichtWerken={result}
-        />
-      );
-    case 'gebieden/grootstedelijkgebied':
-      return (
-        <MapDetailGebiedenGrootstedelijk
-          panoUrl={panoUrl}
-          grootstedelijk={result}
-        />
-      );
-    case 'gebieden/stadsdeel':
-      return (
-        <MapDetailGebiedenStadsdeel
-          panoUrl={panoUrl}
-          stadsdeel={result}
-        />
-      );
-    case 'gebieden/unesco':
-      return (
-        <MapDetailGebiedenUnesco
-          panoUrl={panoUrl}
-          unesco={result}
-        />
-      );
-    case 'meetbouten/meetbout':
-      return (
-        <MapDetailMeetbout
-          panoUrl={panoUrl}
-          meetbout={result}
-        />
-      );
-    case 'nap/peilmerk':
-      return (
-        <MapDetailNapPeilmerk
-          panoUrl={panoUrl}
-          peilmerk={result}
-        />
-      );
-    case 'milieuthemas/explosieven/gevrijwaardgebied':
+    case endpointTypes.explosievenGevrijwaardGebied:
       return (
         <MapDetailExplosievenGevrijwaardGebied
           panoUrl={panoUrl}
           gevrijwaardGebied={result}
         />
       );
-    case 'milieuthemas/explosieven/inslagen':
+    case endpointTypes.explosievenInslag:
       return (
         <MapDetailExplosievenInslag
           panoUrl={panoUrl}
           inslag={result}
         />
       );
-    case 'milieuthemas/explosieven/uitgevoerdonderzoek':
+    case endpointTypes.explosievenUitgevoerdOnderzoek:
       return (
         <MapDetailExplosievenUitgevoerdOnderzoek
           panoUrl={panoUrl}
           uitgevoerdOnderzoek={result}
         />
       );
-    case 'milieuthemas/explosieven/verdachtgebied':
+    case endpointTypes.explosievenVerdachtGebied:
       return (
         <MapDetailExplosievenVerdachtGebied
           panoUrl={panoUrl}
           verdachtGebied={result}
         />
       );
-    case 'monumenten/monumenten':
+    case endpointTypes.gebiedenBouwblok:
+      return (
+        <MapDetailGebiedenBouwblok
+          panoUrl={panoUrl}
+          bouwblok={result}
+        />
+      );
+    case endpointTypes.gebiedenBuurt:
+      return (
+        <MapDetailGebiedenBuurt
+          panoUrl={panoUrl}
+          buurt={result}
+        />
+      );
+    case endpointTypes.gebiedenGebiedsgerichtWerken:
+      return (
+        <MapDetailGebiedenGebiedsgerichtWerken
+          panoUrl={panoUrl}
+          gebiedsgerichtWerken={result}
+        />
+      );
+    case endpointTypes.gebiedenGrootstedelijk:
+      return (
+        <MapDetailGebiedenGrootstedelijk
+          panoUrl={panoUrl}
+          grootstedelijk={result}
+        />
+      );
+    case endpointTypes.gebiedenStadsdeel:
+      return (
+        <MapDetailGebiedenStadsdeel
+          panoUrl={panoUrl}
+          stadsdeel={result}
+        />
+      );
+    case endpointTypes.gebiedenUnesco:
+      return (
+        <MapDetailGebiedenUnesco
+          panoUrl={panoUrl}
+          unesco={result}
+        />
+      );
+    case endpointTypes.gebiedenWijk:
+      return (
+        <MapDetailGebiedenWijk
+          panoUrl={panoUrl}
+          wijk={result}
+        />
+      );
+    case endpointTypes.kadastraalObject:
+      return (
+        <MapDetailKadastraalObject
+          panoUrl={panoUrl}
+          kadastraalObject={result}
+        />
+      );
+    case endpointTypes.ligplaats:
+    case endpointTypes.nummeraanduiding:
+    case endpointTypes.standplaats:
+    case endpointTypes.verblijfsobject:
+      return (
+        <MapDetailNummeraanduiding
+          panoUrl={panoUrl}
+          nummeraanduiding={result}
+        />
+      );
+    case endpointTypes.meetbout:
+      return (
+        <MapDetailMeetbout
+          panoUrl={panoUrl}
+          meetbout={result}
+        />
+      );
+    case endpointTypes.monument:
       return (
         <MapDetailMonument
           panoUrl={panoUrl}
           monument={result}
         />
       );
-    case 'handelsregister/vestiging':
+    case endpointTypes.napPeilmerk:
+      return (
+        <MapDetailNapPeilmerk
+          panoUrl={panoUrl}
+          peilmerk={result}
+        />
+      );
+    case endpointTypes.openbareRuimte:
+      return (
+        <MapDetailOpenbareRuimte
+          panoUrl={panoUrl}
+          openbareRuimte={result}
+        />
+      );
+    case endpointTypes.pand:
+      return (
+        <MapDetailPand
+          panoUrl={panoUrl}
+          pand={result}
+        />
+      );
+    case endpointTypes.vestiging:
       return (
         <MapDetailVestiging
           panoUrl={panoUrl}
