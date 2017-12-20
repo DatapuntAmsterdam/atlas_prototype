@@ -11,7 +11,8 @@ export default function fetchByUri(uri) {
       return {
         ...result,
         label: result._display,
-        location: result.location || wgs84Center
+        location: result.location || wgs84Center,
+        status: result.status.omschrijving
       };
     });
 }
