@@ -50,7 +50,7 @@ MapDetailNapPeilmerk.propTypes = {
     description: PropTypes.string,
     height: PropTypes.string,
     label: PropTypes.string,
-    year: PropTypes.string
+    year: PropTypes.number
   }).isRequired
 };
 
