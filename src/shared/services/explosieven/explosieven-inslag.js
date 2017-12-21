@@ -13,6 +13,7 @@ export default function fetchByUri(uri) {
         dateInslag: result.datum_inslag,
         label: result._display,
         location: result.location || wgs84Center,
+        remarks: result.opmerkingen,
         source: result.bron
       };
     });

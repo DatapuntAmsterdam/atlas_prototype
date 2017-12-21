@@ -36,6 +36,10 @@ const MapDetailExplosievenInslag = ({ panoUrl, inslag }) => (
         label="Bron"
         value={inslag.source}
       />
+      <MapDetailResultItem
+        label="Opmerkingen"
+        value={inslag.remarks}
+      />
     </ul>
   </section>
 );
@@ -48,6 +52,7 @@ MapDetailExplosievenInslag.propTypes = {
   inslag: PropTypes.shape({
     dateInslag: PropTypes.string,
     label: PropTypes.string,
+    remarks: PropTypes.string,
     source: PropTypes.string,
     type: PropTypes.string
   }).isRequired,
