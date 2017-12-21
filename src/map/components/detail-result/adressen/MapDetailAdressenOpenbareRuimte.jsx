@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import MapDetailResultItem from '../MapDetailResultItem';
+
 const MapDetailAdressenOpenbareRuimte = ({ panoUrl, openbareRuimte }) => (
   <section className="map-detail-result">
     <header
@@ -17,10 +19,16 @@ const MapDetailAdressenOpenbareRuimte = ({ panoUrl, openbareRuimte }) => (
         />
       )}
       <div className="map-detail-result__header-container">
-        <h1 className="map-detail-result__header-title">Openbare ruimte</h1>
+        <h1 className="map-detail-result__header-title">{openbareRuimte.type}</h1>
         <h2 className="map-detail-result__header-subtitle">{openbareRuimte._display}</h2>
       </div>
     </header>
+    <ul className="map-detail-result__list">
+      <MapDetailResultItem
+        label="Status"
+        value={openbareRuimte.status}
+      />
+    </ul>
   </section>
 );
 
@@ -30,7 +38,9 @@ MapDetailAdressenOpenbareRuimte.defaultProps = {
 
 MapDetailAdressenOpenbareRuimte.propTypes = {
   openbareRuimte: PropTypes.shape({
-    label: PropTypes.string
+    label: PropTypes.string,
+    status: PropTypes.string,
+    type: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string
 };
