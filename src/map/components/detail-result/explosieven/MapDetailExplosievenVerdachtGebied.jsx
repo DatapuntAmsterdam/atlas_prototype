@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import MapDetailResultItem from '../MapDetailResultItem';
+
 const MapDetailExplosievenVerdachtGebied = ({ panoUrl, verdachtGebied }) => (
   <section className="map-detail-result">
     <header
@@ -18,9 +20,23 @@ const MapDetailExplosievenVerdachtGebied = ({ panoUrl, verdachtGebied }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Verdacht gebied</h1>
-        <h2 className="map-detail-result__header-subtitle">{verdachtGebied._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{verdachtGebied.label}</h2>
       </div>
     </header>
+    <ul className="map-detail-result__list">
+      <MapDetailResultItem
+        label="Hoofdgroep"
+        value={verdachtGebied.type}
+      />
+      <MapDetailResultItem
+        label="Subsoort"
+        value={verdachtGebied.subType}
+      />
+      <MapDetailResultItem
+        label="Opmerkingen"
+        value={verdachtGebied.remarks}
+      />
+    </ul>
   </section>
 );
 
@@ -30,7 +46,10 @@ MapDetailExplosievenVerdachtGebied.defaultProps = {
 
 MapDetailExplosievenVerdachtGebied.propTypes = {
   verdachtGebied: PropTypes.shape({
-    label: PropTypes.string
+    label: PropTypes.string,
+    remarks: PropTypes.string,
+    subType: PropTypes.string,
+    type: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string
 };
