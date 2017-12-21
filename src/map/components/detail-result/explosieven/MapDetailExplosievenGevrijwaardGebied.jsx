@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import MapDetailResultItem from '../MapDetailResultItem';
+
 const MapDetailExplosievenGevrijwaardGebied = ({ panoUrl, gevrijwaardGebied }) => (
   <section className="map-detail-result">
     <header
@@ -18,9 +20,27 @@ const MapDetailExplosievenGevrijwaardGebied = ({ panoUrl, gevrijwaardGebied }) =
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Gevrijwaard gebied</h1>
-        <h2 className="map-detail-result__header-subtitle">{gevrijwaardGebied._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{gevrijwaardGebied.label}</h2>
       </div>
     </header>
+    <ul className="map-detail-result__list">
+      <MapDetailResultItem
+        label="Datum rapport"
+        value={gevrijwaardGebied.date}
+      />
+      <MapDetailResultItem
+        label="Soort handeling"
+        value={gevrijwaardGebied.type}
+      />
+      <MapDetailResultItem
+        label="Bron"
+        value={gevrijwaardGebied.source}
+      />
+      <MapDetailResultItem
+        label="Opmerkingen"
+        value={gevrijwaardGebied.remarks}
+      />
+    </ul>
   </section>
 );
 
@@ -30,7 +50,11 @@ MapDetailExplosievenGevrijwaardGebied.defaultProps = {
 
 MapDetailExplosievenGevrijwaardGebied.propTypes = {
   gevrijwaardGebied: PropTypes.shape({
-    label: PropTypes.string
+    date: PropTypes.string,
+    label: PropTypes.string,
+    remarks: PropTypes.string,
+    source: PropTypes.string,
+    type: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string
 };
