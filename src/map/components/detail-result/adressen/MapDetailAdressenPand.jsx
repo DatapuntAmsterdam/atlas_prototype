@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import MapDetailResultItem from '../MapDetailResultItem';
+
 const MapDetailAdressenPand = ({ panoUrl, pand }) => (
   <section className="map-detail-result">
     <header
@@ -21,6 +23,16 @@ const MapDetailAdressenPand = ({ panoUrl, pand }) => (
         <h2 className="map-detail-result__header-subtitle">{pand._display}</h2>
       </div>
     </header>
+    <ul className="map-detail-result__list">
+      <MapDetailResultItem
+        label="Oorspronkelijk bouwjaar"
+        value={pand.year}
+      />
+      <MapDetailResultItem
+        label="Status"
+        value={pand.status}
+      />
+    </ul>
   </section>
 );
 
@@ -30,7 +42,9 @@ MapDetailAdressenPand.defaultProps = {
 
 MapDetailAdressenPand.propTypes = {
   pand: PropTypes.shape({
-    label: PropTypes.string
+    label: PropTypes.string,
+    status: PropTypes.string,
+    year: PropTypes.string
   }).isRequired,
   panoUrl: PropTypes.string
 };
