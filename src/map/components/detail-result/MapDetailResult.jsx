@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { endpointTypes } from '../../services/map-detail';
 import MapDetailAdressenLigplaats from './adressen/MapDetailAdressenLigplaats';
-import MapDetailAdressenNummeraanduiding from './adressen/MapDetailAdressenNummeraanduiding';
 import MapDetailAdressenOpenbareRuimte from './adressen/MapDetailAdressenOpenbareRuimte';
 import MapDetailAdressenPand from './adressen/MapDetailAdressenPand';
 import MapDetailAdressenStandplaats from './adressen/MapDetailAdressenStandplaats';
@@ -38,10 +37,11 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         />
       );
     case endpointTypes.adressenNummeraanduiding:
+    case endpointTypes.adressenVerblijfsobject:
       return (
-        <MapDetailAdressenNummeraanduiding
+        <MapDetailAdressenVerblijfsobject
           panoUrl={panoUrl}
-          nummeraanduiding={result}
+          verblijfsobject={result}
         />
       );
     case endpointTypes.adressenOpenbareRuimte:
@@ -63,13 +63,6 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
         <MapDetailAdressenStandplaats
           panoUrl={panoUrl}
           standplaats={result}
-        />
-      );
-    case endpointTypes.adressenVerblijfsobject:
-      return (
-        <MapDetailAdressenVerblijfsobject
-          panoUrl={panoUrl}
-          verblijfsobject={result}
         />
       );
     case endpointTypes.explosievenGevrijwaardGebied:

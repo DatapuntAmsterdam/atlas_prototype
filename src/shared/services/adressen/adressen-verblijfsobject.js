@@ -10,8 +10,16 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
+        eigendomsverhouding: result.eigendomsverhouding.omschrijving,
+        gebruiksdoelen: result.gebruiksdoelen.map((item) => ({
+          ...item,
+          description: item.omschrijving,
+          descriptionPlus: item.omschrijving_plus
+        })),
         label: result._display,
-        location: result.location || wgs84Center
+        location: result.location || wgs84Center,
+        size: result.oppervlakte,
+        type: result.type_woonobject.omschrijving
       };
     });
 }
