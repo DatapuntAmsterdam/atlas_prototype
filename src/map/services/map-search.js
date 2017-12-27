@@ -1,4 +1,4 @@
-import * as address from '../../shared/services/address/address';
+import * as address from '../../shared/services/adressen/adressen-nummeraanduiding';
 import * as monument from '../../shared/services/monument/monument';
 import * as vestiging from '../../shared/services/vestiging/vestiging';
 
