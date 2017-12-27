@@ -17,7 +17,7 @@ const MapDetailGebiedenUnesco = ({ panoUrl, unesco }) => (
         />
       )}
       <div className="map-detail-result__header-container">
-        <h1 className="map-detail-result__header-title">Unesco</h1>
+        <h1 className="map-detail-result__header-title">UNESCO</h1>
         <h2 className="map-detail-result__header-subtitle">{unesco.label}</h2>
       </div>
     </header>

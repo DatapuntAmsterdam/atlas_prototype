@@ -17,7 +17,7 @@ const MapDetailGebiedenGebiedsgerichtWerken = ({ panoUrl, gebiedsgerichtWerken }
         />
       )}
       <div className="map-detail-result__header-container">
-        <h1 className="map-detail-result__header-title">GebiedsgerichtWerken</h1>
+        <h1 className="map-detail-result__header-title">Gebiedsgerichtwerken-gebied</h1>
         <h2 className="map-detail-result__header-subtitle">{gebiedsgerichtWerken.label}</h2>
       </div>
     </header>
