@@ -1,11 +1,71 @@
-import * as address from './adressen-nummeraanduiding';
+import fetchByUri, {
+  fetchByPandId,
+  fetchByLigplaatsId,
+  fetchHoofdadresByLigplaatsId,
+  fetchByStandplaatsId,
+  fetchHoofdadresByStandplaatsId
+} from './adressen-nummeraanduiding';
+import verblijfsobject from './adressen-verblijfsobject';
 
-describe('The address resource', () => {
+jest.mock('./adressen-verblijfsobject');
+
+describe('The adressen nummeraanduiding resource', () => {
   afterEach(() => {
     fetch.mockReset();
   });
 
-  it('can fetch an address by pand id', () => {
+  describe('By uri', () => {
+    it('can fetch a nummeraanduiding by uri', () => {
+      const uri = 'https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/123456';
+
+      fetch.mockResponseOnce(JSON.stringify({
+        _display: 'Address display name 1',
+        landelijk_id: 'abc123',
+        verblijfsobject: 'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/345678'
+      }));
+      verblijfsobject.mockImplementation(() => ({ label: 'Verblijfsobject' }));
+
+      fetchByUri(uri).then((response) => {
+        expect(response).toEqual({ label: 'Verblijfsobject' });
+        expect(verblijfsobject).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/bag/verblijfsobject/345678');
+      });
+
+      expect(fetch.mock.calls[0][0]).toBe(uri);
+    });
+
+    it('fetches without \'verblijfsobject\'', () => {
+      const uri = 'https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/123456';
+
+      fetch.mockResponseOnce(JSON.stringify({
+        _display: 'Address display name 1',
+        landelijk_id: 'abc123'
+      }));
+
+      fetchByUri(uri).then((response) => {
+        expect(response).toEqual({
+          _display: 'Address display name 1',
+          label: 'Address display name 1',
+          landelijk_id: 'abc123'
+        });
+      });
+
+      expect(fetch.mock.calls[0][0]).toBe(uri);
+    });
+
+    it('fetches with empty result object', () => {
+      const uri = 'https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/123456';
+
+      fetch.mockResponseOnce(JSON.stringify({}));
+
+      fetchByUri(uri).then((response) => {
+        expect(response).toEqual({ label: undefined });
+      });
+
+      expect(fetch.mock.calls[0][0]).toBe(uri);
+    });
+  });
+
+  it('can fetch nummeraanduidingen by pand id', () => {
     fetch.mockResponseOnce(JSON.stringify({ results: [
       {
         _display: 'Address display name 1',
@@ -16,7 +76,7 @@ describe('The address resource', () => {
       }
     ] }));
 
-    address.fetchByPandId(1).then((response) => {
+    fetchByPandId(1).then((response) => {
       expect(response
       ).toEqual([
         {
@@ -32,7 +92,7 @@ describe('The address resource', () => {
     expect(fetch.mock.calls[0][0]).toContain('pand=1');
   });
 
-  it('can fetch an address by ligplaats id, adds `id` attribute', () => {
+  it('can fetch nummeraanduidingen by ligplaats id, adds `id` attribute', () => {
     fetch.mockResponseOnce(JSON.stringify({ results: [
       {
         _display: 'Address display name 1',
@@ -43,7 +103,7 @@ describe('The address resource', () => {
       }
     ] }));
 
-    address.fetchByLigplaatsId('abc123').then((response) => {
+    fetchByLigplaatsId('abc123').then((response) => {
       expect(response
       ).toEqual([
         {
@@ -76,7 +136,7 @@ describe('The address resource', () => {
       }
     ] }));
 
-    address.fetchHoofdadresByLigplaatsId('abc123').then((response) => {
+    fetchHoofdadresByLigplaatsId('abc123').then((response) => {
       expect(response
       ).toEqual({
         _display: 'Address display name 2',
@@ -99,7 +159,7 @@ describe('The address resource', () => {
       }
     ] }));
 
-    address.fetchHoofdadresByLigplaatsId('abc123').then((response) => {
+    fetchHoofdadresByLigplaatsId('abc123').then((response) => {
       expect(response
       ).not.toBeDefined();
     });
@@ -107,7 +167,7 @@ describe('The address resource', () => {
     expect(fetch.mock.calls[0][0]).toContain('ligplaats=abc123');
   });
 
-  it('can fetch an address by standplaats id, adds `id` attribute', () => {
+  it('can fetch nummeraanduidingen by standplaats id, adds `id` attribute', () => {
     fetch.mockResponseOnce(JSON.stringify({ results: [
       {
         _display: 'Address display name 1',
@@ -118,7 +178,7 @@ describe('The address resource', () => {
       }
     ] }));
 
-    address.fetchByStandplaatsId('abc123').then((response) => {
+    fetchByStandplaatsId('abc123').then((response) => {
       expect(response
       ).toEqual([
         {
@@ -151,7 +211,7 @@ describe('The address resource', () => {
       }
     ] }));
 
-    address.fetchHoofdadresByStandplaatsId('abc123').then((response) => {
+    fetchHoofdadresByStandplaatsId('abc123').then((response) => {
       expect(response
       ).toEqual({
         _display: 'Address display name 2',
@@ -174,7 +234,7 @@ describe('The address resource', () => {
       }
     ] }));
 
-    address.fetchHoofdadresByStandplaatsId('abc123').then((response) => {
+    fetchHoofdadresByStandplaatsId('abc123').then((response) => {
       expect(response
       ).not.toBeDefined();
     });
