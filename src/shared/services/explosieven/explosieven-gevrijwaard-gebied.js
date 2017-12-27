@@ -10,7 +10,7 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
-        date: result.datum,
+        date: result.datum ? new Date(result.datum) : null,
         label: result._display,
         location: result.location || wgs84Center,
         remarks: result.opmerkingen,

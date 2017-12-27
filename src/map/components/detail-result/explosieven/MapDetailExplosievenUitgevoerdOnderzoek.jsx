@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import MapDetailResultDateItem from '../MapDetailResultDateItem';
 import MapDetailResultItem from '../MapDetailResultItem';
 
 const MapDetailExplosievenUitgevoerdOnderzoek = ({ panoUrl, uitgevoerdOnderzoek }) => (
@@ -24,9 +25,9 @@ const MapDetailExplosievenUitgevoerdOnderzoek = ({ panoUrl, uitgevoerdOnderzoek 
       </div>
     </header>
     <ul className="map-detail-result__list">
-      <MapDetailResultItem
+      <MapDetailResultDateItem
         label="Datum rapport"
-        value={uitgevoerdOnderzoek.date}
+        date={uitgevoerdOnderzoek.date}
       />
       <MapDetailResultItem
         label="Soort rapportage"
@@ -50,7 +51,7 @@ MapDetailExplosievenUitgevoerdOnderzoek.defaultProps = {
 
 MapDetailExplosievenUitgevoerdOnderzoek.propTypes = {
   uitgevoerdOnderzoek: PropTypes.shape({
-    date: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
     label: PropTypes.string,
     onderzoeksgebied: PropTypes.string,
     type: PropTypes.string,
