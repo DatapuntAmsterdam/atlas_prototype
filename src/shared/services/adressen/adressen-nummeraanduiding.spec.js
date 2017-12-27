@@ -1,4 +1,4 @@
-import * as address from './address';
+import * as address from './adressen-nummeraanduiding';
 
 describe('The address resource', () => {
   afterEach(() => {
