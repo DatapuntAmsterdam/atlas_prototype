@@ -20,7 +20,7 @@ const MapDetailAdressenLigplaats = ({ panoUrl, ligplaats }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Ligplaats</h1>
-        <h2 className="map-detail-result__header-subtitle">{ligplaats._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{ligplaats.label}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">

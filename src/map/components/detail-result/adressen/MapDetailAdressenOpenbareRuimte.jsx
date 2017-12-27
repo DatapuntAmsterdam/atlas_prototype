@@ -20,7 +20,7 @@ const MapDetailAdressenOpenbareRuimte = ({ panoUrl, openbareRuimte }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">{openbareRuimte.type}</h1>
-        <h2 className="map-detail-result__header-subtitle">{openbareRuimte._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{openbareRuimte.label}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">

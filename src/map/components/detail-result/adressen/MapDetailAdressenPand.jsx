@@ -20,7 +20,7 @@ const MapDetailAdressenPand = ({ panoUrl, pand }) => (
       )}
       <div className="map-detail-result__header-container">
         <h1 className="map-detail-result__header-title">Pand</h1>
-        <h2 className="map-detail-result__header-subtitle">{pand._display}</h2>
+        <h2 className="map-detail-result__header-subtitle">{pand.label}</h2>
       </div>
     </header>
     <ul className="map-detail-result__list">
