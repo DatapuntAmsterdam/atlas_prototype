@@ -22,7 +22,7 @@ export default function fetchByUri(uri) {
         maatschappelijkeActiviteit(result.maatschappelijke_activiteit)
         .then((mac) => ({
           ...vestigingResult,
-          activities: vestigingResult.activiteiten.map((activity) => ({
+          activities: (vestigingResult.activiteiten || []).map((activity) => ({
             ...activity,
             sbiCode: activity.sbi_code,
             sbiDescription: activity.sbi_omschrijving

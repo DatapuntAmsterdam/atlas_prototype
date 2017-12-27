@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 
@@ -10,8 +12,8 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
-        eigendomsverhouding: result.eigendomsverhouding && result.eigendomsverhouding.omschrijving,
-        gebruiksdoelen: result.gebruiksdoelen.map((item) => ({
+        eigendomsverhouding: get(result.eigendomsverhouding, 'omschrijving'),
+        gebruiksdoelen: (result.gebruiksdoelen || []).map((item) => ({
           ...item,
           description: item.omschrijving,
           descriptionPlus: item.omschrijving_plus
@@ -19,7 +21,7 @@ export default function fetchByUri(uri) {
         label: result._display,
         location: result.location || wgs84Center,
         size: result.oppervlakte,
-        type: result.type_woonobject.omschrijving
+        type: get(result.type_woonobject, 'omschrijving')
       };
     });
 }
