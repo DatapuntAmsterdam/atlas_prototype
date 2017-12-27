@@ -10,7 +10,7 @@ export default function fetchByUri(uri) {
 
       return {
         ...result,
-        eigendomsverhouding: result.eigendomsverhouding.omschrijving,
+        eigendomsverhouding: result.eigendomsverhouding && result.eigendomsverhouding.omschrijving,
         gebruiksdoelen: result.gebruiksdoelen.map((item) => ({
           ...item,
           description: item.omschrijving,

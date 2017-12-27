@@ -51,6 +51,7 @@ MapDetailAdressenVerblijfsobject.defaultProps = {
 MapDetailAdressenVerblijfsobject.propTypes = {
   verblijfsobject: PropTypes.shape({
     eigendomsverhouding: PropTypes.string,
+    gebruiksdoelen: PropTypes.array,
     label: PropTypes.string,
     size: PropTypes.number,
     type: PropTypes.string

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MapDetailAdressenVerblijfsobjectGebruiksdoelenItem = ({ gebruiksdoelen }) => (
+const MapDetailAdressenVerblijfsobjectGebruiksdoelenItem = ({ gebruiksdoelen }) => gebruiksdoelen.length > 0 && (
   <div className="map-detail-result__item">
     <section className="map-detail-result__item-content">
       <div className="map-detail-result__item-label">Gebruiksdoel</div>
       <ul className="map-detail-result__item-value map-detail-result__item-list">
-        {gebruiksdoelen && gebruiksdoelen.length && gebruiksdoelen.slice(0, 5).map((item) => (
+        {gebruiksdoelen.slice(0, 5).map((item) => (
           <li
             key={item.code}
             className="map-detail-result__item-list-item"
@@ -29,7 +29,8 @@ MapDetailAdressenVerblijfsobjectGebruiksdoelenItem.defaultProps = {
 MapDetailAdressenVerblijfsobjectGebruiksdoelenItem.propTypes = {
   gebruiksdoelen: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.string,
+    descriptionPlus: PropTypes.string
   }))
 };
 
