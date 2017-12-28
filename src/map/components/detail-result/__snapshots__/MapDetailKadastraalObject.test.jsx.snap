@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailKadastraalObject rendering should render everything 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--pano
+      "
+  >
+    <img
+      alt="Panoramabeeld"
+      className="map-detail-result__header-pano"
+      src="panoUrl"
+    />
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Kadastraal object
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Kadastraal object label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultItem
+      label="Objectnummer"
+      value="123ABC"
+    />
+    <MapDetailResultItem
+      label="Kadastrale gemeente"
+      value="Kadastrale gemeente label: Kadastrale gemeente name"
+    />
+    <MapDetailResultItem
+      label="Grootte"
+      value="115 m²"
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailKadastraalObject rendering should render with zero value for size 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Kadastraal object
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Kadastraal object label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultItem
+      label="Objectnummer"
+      value="123ABC"
+    />
+    <MapDetailResultItem
+      label="Grootte"
+      value="0 m²"
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailKadastraalObject rendering should render without kadastrale gemeente 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--pano
+      "
+  >
+    <img
+      alt="Panoramabeeld"
+      className="map-detail-result__header-pano"
+      src="panoUrl"
+    />
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Kadastraal object
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Kadastraal object label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultItem
+      label="Objectnummer"
+      value="123ABC"
+    />
+    <MapDetailResultItem
+      label="Grootte"
+      value="115 m²"
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailKadastraalObject rendering should render without pano url 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Kadastraal object
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Kadastraal object label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultItem
+      label="Objectnummer"
+      value="123ABC"
+    />
+    <MapDetailResultItem
+      label="Grootte"
+      value="115 m²"
+    />
+  </ul>
+</section>
+`;

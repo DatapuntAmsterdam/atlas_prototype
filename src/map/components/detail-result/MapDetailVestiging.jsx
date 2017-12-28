@@ -61,11 +61,11 @@ MapDetailVestiging.defaultProps = {
 MapDetailVestiging.propTypes = {
   panoUrl: PropTypes.string,
   vestiging: PropTypes.shape({
-    activities: PropTypes.object,
-    bijzondereRechtstoestand: PropTypes.string,
+    activities: PropTypes.array,
+    bijzondereRechtstoestand: PropTypes.object,
     kvkNumber: PropTypes.string,
     label: PropTypes.string,
-    visitingAddress: PropTypes.string
+    visitingAddress: PropTypes.object
   }).isRequired
 };
 

@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailVestiging rendering should render everything 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--pano
+      "
+  >
+    <img
+      alt="Panoramabeeld"
+      className="map-detail-result__header-pano"
+      src="panoUrl"
+    />
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Vestiging
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Vestiging label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultItem
+      label="KvK-nummer"
+      value="123456"
+    />
+    <MapDetailAddressItem
+      label="Bezoekadres"
+      values={
+        Object {
+          "plaats": "Amsterdam",
+        }
+      }
+    />
+    <MapDetailVestigingActiviteitenItem
+      activities={
+        Array [
+          Object {
+            "sbiCode": "01",
+            "sbiDescription": "SBI Description 1",
+          },
+          Object {
+            "sbiCode": "02",
+            "sbiDescription": "SBI Description 2",
+          },
+        ]
+      }
+    />
+    <MapDetailVestigingBijzondereRechtstoestand
+      values={
+        Object {
+          "status": "Bijzondere rechtstoestand",
+        }
+      }
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailVestiging rendering should render without label 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Vestiging
+      </h1>
+    </div>
+  </header>
+  <Notification
+    className=""
+    level="info"
+  >
+    Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.
+  </Notification>
+</section>
+`;
+
+exports[`MapDetailVestiging rendering should render without pano url 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Vestiging
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Vestiging label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultItem
+      label="KvK-nummer"
+      value="123456"
+    />
+    <MapDetailAddressItem
+      label="Bezoekadres"
+      values={
+        Object {
+          "plaats": "Amsterdam",
+        }
+      }
+    />
+    <MapDetailVestigingActiviteitenItem
+      activities={
+        Array [
+          Object {
+            "sbiCode": "01",
+            "sbiDescription": "SBI Description 1",
+          },
+          Object {
+            "sbiCode": "02",
+            "sbiDescription": "SBI Description 2",
+          },
+        ]
+      }
+    />
+    <MapDetailVestigingBijzondereRechtstoestand
+      values={
+        Object {
+          "status": "Bijzondere rechtstoestand",
+        }
+      }
+    />
+  </ul>
+</section>
+`;

@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailVestigingBijzondereRechtstoestand rendering should render faillissement 1`] = `
+<div
+  className="map-detail-result__item"
+>
+  <section
+    className="map-detail-result__item-content"
+  >
+    <div
+      className="map-detail-result__item-label"
+    >
+      Soort bijzondere rechtstoestand
+    </div>
+    <div
+      className="map-detail-result__item-value map-detail-result__item-value--alert"
+    >
+      <span>
+        Faillissement
+      </span>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`MapDetailVestigingBijzondereRechtstoestand rendering should render in surseance van betaling when \`Definitief\` 1`] = `
+<div
+  className="map-detail-result__item"
+>
+  <section
+    className="map-detail-result__item-content"
+  >
+    <div
+      className="map-detail-result__item-label"
+    >
+      Soort bijzondere rechtstoestand
+    </div>
+    <div
+      className="map-detail-result__item-value map-detail-result__item-value--alert"
+    >
+      <span>
+        Surseance van betaling
+      </span>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`MapDetailVestigingBijzondereRechtstoestand rendering should render in surseance van betaling when \`Voorlopig\` 1`] = `
+<div
+  className="map-detail-result__item"
+>
+  <section
+    className="map-detail-result__item-content"
+  >
+    <div
+      className="map-detail-result__item-label"
+    >
+      Soort bijzondere rechtstoestand
+    </div>
+    <div
+      className="map-detail-result__item-value map-detail-result__item-value--alert"
+    >
+      <span>
+        Surseance van betaling
+      </span>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`MapDetailVestigingBijzondereRechtstoestand rendering should render nothing special 1`] = `""`;
