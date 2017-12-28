@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 import { getAuthHeaders } from '../auth/auth';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
@@ -9,9 +11,10 @@ export default function fetchByUri(uri) {
   return fetch(uri, { headers: getAuthHeaders() })
     .then((response) => response.json())
     .then((result) => {
+      const visitingCoordinates = get(result.bezoekadres, 'geometrie');
       const geometryCenter =
         (result.geometrie && getCenter(result.geometrie)) ||
-        (result.bezoekadres.geometrie && getCenter(result.bezoekadres.geometrie));
+        (visitingCoordinates && getCenter(visitingCoordinates));
       const wgs84Center = geometryCenter ? rdToWgs84(geometryCenter) : null;
       const vestigingResult = {
         ...result,

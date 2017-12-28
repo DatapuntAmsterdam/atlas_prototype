@@ -15,7 +15,7 @@ describe('The adressen nummeraanduiding resource', () => {
   });
 
   describe('By uri', () => {
-    it('can fetch a nummeraanduiding by uri', () => {
+    it('fetches a nummeraanduiding', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/123456';
 
       fetch.mockResponseOnce(JSON.stringify({
@@ -33,7 +33,7 @@ describe('The adressen nummeraanduiding resource', () => {
       expect(fetch.mock.calls[0][0]).toBe(uri);
     });
 
-    it('fetches without \'verblijfsobject\'', () => {
+    it('fetches without verblijfsobject', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/nummeraanduiding/123456';
 
       fetch.mockResponseOnce(JSON.stringify({
@@ -77,8 +77,7 @@ describe('The adressen nummeraanduiding resource', () => {
     ] }));
 
     fetchByPandId(1).then((response) => {
-      expect(response
-      ).toEqual([
+      expect(response).toEqual([
         {
           _display: 'Address display name 1',
           landelijk_id: 'abc123'
@@ -104,8 +103,7 @@ describe('The adressen nummeraanduiding resource', () => {
     ] }));
 
     fetchByLigplaatsId('abc123').then((response) => {
-      expect(response
-      ).toEqual([
+      expect(response).toEqual([
         {
           _display: 'Address display name 1',
           landelijk_id: 'abc123',
@@ -137,8 +135,7 @@ describe('The adressen nummeraanduiding resource', () => {
     ] }));
 
     fetchHoofdadresByLigplaatsId('abc123').then((response) => {
-      expect(response
-      ).toEqual({
+      expect(response).toEqual({
         _display: 'Address display name 2',
         landelijk_id: '456',
         id: '456',
@@ -160,8 +157,7 @@ describe('The adressen nummeraanduiding resource', () => {
     ] }));
 
     fetchHoofdadresByLigplaatsId('abc123').then((response) => {
-      expect(response
-      ).not.toBeDefined();
+      expect(response).not.toBeDefined();
     });
 
     expect(fetch.mock.calls[0][0]).toContain('ligplaats=abc123');
@@ -179,8 +175,7 @@ describe('The adressen nummeraanduiding resource', () => {
     ] }));
 
     fetchByStandplaatsId('abc123').then((response) => {
-      expect(response
-      ).toEqual([
+      expect(response).toEqual([
         {
           _display: 'Address display name 1',
           landelijk_id: 'abc123',
@@ -212,8 +207,7 @@ describe('The adressen nummeraanduiding resource', () => {
     ] }));
 
     fetchHoofdadresByStandplaatsId('abc123').then((response) => {
-      expect(response
-      ).toEqual({
+      expect(response).toEqual({
         _display: 'Address display name 2',
         landelijk_id: '456',
         id: '456',
@@ -235,8 +229,7 @@ describe('The adressen nummeraanduiding resource', () => {
     ] }));
 
     fetchHoofdadresByStandplaatsId('abc123').then((response) => {
-      expect(response
-      ).not.toBeDefined();
+      expect(response).not.toBeDefined();
     });
 
     expect(fetch.mock.calls[0][0]).toContain('standplaats=abc123');
