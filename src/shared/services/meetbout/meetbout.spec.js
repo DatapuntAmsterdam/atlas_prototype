@@ -23,7 +23,7 @@ describe('The meetbout resource', () => {
       getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
       rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           adres: 'Meetbout address',
           address: 'Meetbout address',
@@ -36,6 +36,7 @@ describe('The meetbout resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
 
     it('fetches with empty result object', () => {
@@ -43,7 +44,7 @@ describe('The meetbout resource', () => {
 
       fetch.mockResponseOnce(JSON.stringify({}));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           address: undefined,
           label: undefined,
@@ -52,6 +53,7 @@ describe('The meetbout resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
   });
 });

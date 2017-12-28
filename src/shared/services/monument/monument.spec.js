@@ -33,7 +33,7 @@ describe('The monument resource', () => {
       getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
       rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           _display: 'Monument display name 1',
           geometrie: { type: 'Point' },
@@ -51,6 +51,7 @@ describe('The monument resource', () => {
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
       expect(fetch.mock.calls[0][1]).toEqual({ headers: { Authorization: 'Bearer 123AccessToken' } });
+      return promise;
     });
 
     it('fetches with monument coordinates', () => {
@@ -67,7 +68,7 @@ describe('The monument resource', () => {
       getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
       rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           _display: 'Monument display name 1',
           label: 'Monument display name 1',
@@ -85,6 +86,7 @@ describe('The monument resource', () => {
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
       expect(fetch.mock.calls[0][1]).toEqual({ headers: { Authorization: 'Bearer 123AccessToken' } });
+      return promise;
     });
 
     it('fetches with empty result object', () => {
@@ -92,7 +94,7 @@ describe('The monument resource', () => {
 
       fetch.mockResponseOnce(JSON.stringify({}));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           label: undefined,
           location: null,
@@ -103,6 +105,7 @@ describe('The monument resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
   });
 
@@ -117,7 +120,7 @@ describe('The monument resource', () => {
       }
     ] }));
 
-    fetchByPandId(1).then((response) => {
+    const promise = fetchByPandId(1).then((response) => {
       expect(response).toEqual([
         {
           _display: 'Monument display name 1',
@@ -131,5 +134,6 @@ describe('The monument resource', () => {
 
     expect(fetch.mock.calls[0][0]).toContain('betreft_pand=1');
     expect(fetch.mock.calls[0][1]).toEqual({ headers: { Authorization: 'Bearer 123AccessToken' } });
+    return promise;
   });
 });

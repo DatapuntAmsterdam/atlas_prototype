@@ -25,7 +25,7 @@ describe('The explosieven inslag resource', () => {
       getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
       rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           bron: 'source',
           date: new Date('1918-05-21'),
@@ -42,6 +42,7 @@ describe('The explosieven inslag resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
 
     it('fetches with empty result object', () => {
@@ -49,7 +50,7 @@ describe('The explosieven inslag resource', () => {
 
       fetch.mockResponseOnce(JSON.stringify({}));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           date: null,
           label: undefined,
@@ -60,6 +61,7 @@ describe('The explosieven inslag resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
   });
 });

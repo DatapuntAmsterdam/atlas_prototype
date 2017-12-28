@@ -34,7 +34,7 @@ describe('The adressen verblijfsobject resource', () => {
       getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
       rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           _display: 'Verblijfsobject display name 1',
           eigendomsverhouding: 'Eigendomsverhouding description',
@@ -62,6 +62,7 @@ describe('The adressen verblijfsobject resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
 
     it('fetches with empty result object', () => {
@@ -69,7 +70,7 @@ describe('The adressen verblijfsobject resource', () => {
 
       fetch.mockResponseOnce(JSON.stringify({}));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           eigendomsverhouding: undefined,
           gebruiksdoelen: [],
@@ -81,6 +82,7 @@ describe('The adressen verblijfsobject resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
   });
 });

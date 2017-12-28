@@ -23,7 +23,7 @@ describe('The adressen ligplaats resource', () => {
       getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
       rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           _display: 'Ligplaats display name 1',
           geometrie: { type: 'Point' },
@@ -35,6 +35,7 @@ describe('The adressen ligplaats resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
 
     it('fetches with empty result object', () => {
@@ -42,7 +43,7 @@ describe('The adressen ligplaats resource', () => {
 
       fetch.mockResponseOnce(JSON.stringify({}));
 
-      fetchByUri(uri).then((response) => {
+      const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           label: undefined,
           location: null,
@@ -51,6 +52,7 @@ describe('The adressen ligplaats resource', () => {
       });
 
       expect(fetch.mock.calls[0][0]).toBe(uri);
+      return promise;
     });
   });
 });
