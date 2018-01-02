@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailExplosievenUitgevoerdOnderzoek rendering should render everything 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--pano
+      "
+  >
+    <img
+      alt="Panoramabeeld"
+      className="map-detail-result__header-pano"
+      src="panoUrl"
+    />
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Reeds uitgevoerd CE onderzoek
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Uitgevoerd onderzoek label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultDateItem
+      date={1919-12-31T00:00:00.000Z}
+      label="Datum rapport"
+    />
+    <MapDetailResultItem
+      label="Soort rapportage"
+      value="Uitgevoerd onderzoek type"
+    />
+    <MapDetailResultItem
+      label="Onderzoeksgebied"
+      value="Uitgevoerd onderzoek onderzoeksgebied"
+    />
+    <MapDetailResultItem
+      label="Verdacht gebied"
+      value="Uitgevoerd onderzoek verdacht gebied"
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailExplosievenUitgevoerdOnderzoek rendering should render without pano url 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Reeds uitgevoerd CE onderzoek
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Uitgevoerd onderzoek label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultDateItem
+      date={1919-12-31T00:00:00.000Z}
+      label="Datum rapport"
+    />
+    <MapDetailResultItem
+      label="Soort rapportage"
+      value="Uitgevoerd onderzoek type"
+    />
+    <MapDetailResultItem
+      label="Onderzoeksgebied"
+      value="Uitgevoerd onderzoek onderzoeksgebied"
+    />
+    <MapDetailResultItem
+      label="Verdacht gebied"
+      value="Uitgevoerd onderzoek verdacht gebied"
+    />
+  </ul>
+</section>
+`;

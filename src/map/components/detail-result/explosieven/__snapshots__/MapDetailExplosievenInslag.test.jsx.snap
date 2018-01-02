@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailExplosievenInslag rendering should render everything 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--pano
+      "
+  >
+    <img
+      alt="Panoramabeeld"
+      className="map-detail-result__header-pano"
+      src="panoUrl"
+    />
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Inslag
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Inslag label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultDateItem
+      date={1980-08-19T00:00:00.000Z}
+      label="Datum van inslag"
+    />
+    <MapDetailResultItem
+      label="Soort handeling"
+      value="Inslag type"
+    />
+    <MapDetailResultItem
+      label="Bron"
+      value="Inslag source"
+    />
+    <MapDetailResultItem
+      label="Opmerkingen"
+      value="Inslag remarks"
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailExplosievenInslag rendering should render without pano url 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Inslag
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Inslag label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultDateItem
+      date={1980-08-19T00:00:00.000Z}
+      label="Datum van inslag"
+    />
+    <MapDetailResultItem
+      label="Soort handeling"
+      value="Inslag type"
+    />
+    <MapDetailResultItem
+      label="Bron"
+      value="Inslag source"
+    />
+    <MapDetailResultItem
+      label="Opmerkingen"
+      value="Inslag remarks"
+    />
+  </ul>
+</section>
+`;
