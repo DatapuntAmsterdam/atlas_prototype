@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailGebiedenBuurt rendering should render everything 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--pano
+      "
+  >
+    <img
+      alt="Panoramabeeld"
+      className="map-detail-result__header-pano"
+      src="panoUrl"
+    />
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Buurt
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Buurt label
+      </h2>
+    </div>
+  </header>
+</section>
+`;
+
+exports[`MapDetailGebiedenBuurt rendering should render without pano url 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Buurt
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Buurt label
+      </h2>
+    </div>
+  </header>
+</section>
+`;
