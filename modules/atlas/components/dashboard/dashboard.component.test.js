@@ -521,19 +521,6 @@ describe('The dashboard component', function () {
                 });
             });
 
-            it('Closes when visible and there is detail, but not clickable', () => {
-                mockedVisibility.mapPreviewPanel = true;
-                mockedState.detail = {
-                    endpoint: 'https://acc.api.amsterdam.nl/fake/not/clickable/endpoint'
-                };
-                handler();
-                $rootScope.$digest();
-
-                expect(store.dispatch).toHaveBeenCalledWith({
-                    type: 'CLOSE_MAP_PREVIEW_PANEL'
-                });
-            });
-
             it('Closes when visible and there is detail, but not endpoint', () => {
                 mockedVisibility.mapPreviewPanel = true;
                 mockedState.detail = {};
