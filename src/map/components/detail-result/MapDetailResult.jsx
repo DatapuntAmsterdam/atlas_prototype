@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { endpointTypes } from '../../services/map-detail';
+
+import MapDetailResultHeader from './MapDetailResultHeader';
 import MapDetailAdressenLigplaats from './adressen/MapDetailAdressenLigplaats';
 import MapDetailAdressenOpenbareRuimte from './adressen/MapDetailAdressenOpenbareRuimte';
 import MapDetailAdressenPand from './adressen/MapDetailAdressenPand';
@@ -24,162 +26,209 @@ import MapDetailMonument from './MapDetailMonument';
 import MapDetailNapPeilmerk from './MapDetailNapPeilmerk';
 import MapDetailVestiging from './MapDetailVestiging';
 
-const MapDetailResult = ({ endpoint, panoUrl, result }) => {
-  const endpointTypeKey = Object.keys(endpointTypes).find((typeKey) => endpoint.includes(endpointTypes[typeKey]));
-  const endpointType = endpointTypes[endpointTypeKey];
+const getEndpointType = (endpoint) => {
+  const endpointTypeKey = Object.keys(endpointTypes).find(
+    (typeKey) => endpoint.includes(endpointTypes[typeKey])
+  );
+  return endpointTypes[endpointTypeKey];
+};
+
+const renderContent = ({ endpointType, result }) => {
+  let content;
+  let title;
 
   switch (endpointType) {
     case endpointTypes.adressenLigplaats:
-      return (
+      title = 'MapDetailAdressenLigplaats';
+      content = (
         <MapDetailAdressenLigplaats
-          panoUrl={panoUrl}
           ligplaats={result}
         />
       );
+      break;
     case endpointTypes.adressenNummeraanduiding:
     case endpointTypes.adressenVerblijfsobject:
-      return (
+      title = 'Adres';
+      content = (
         <MapDetailAdressenVerblijfsobject
-          panoUrl={panoUrl}
           verblijfsobject={result}
         />
       );
+      break;
     case endpointTypes.adressenOpenbareRuimte:
-      return (
+      title = 'MapDetailAdressenOpenbareRuimte';
+      content = (
         <MapDetailAdressenOpenbareRuimte
-          panoUrl={panoUrl}
           openbareRuimte={result}
         />
       );
+      break;
     case endpointTypes.adressenPand:
-      return (
+      title = 'MapDetailAdressenPand';
+      content = (
         <MapDetailAdressenPand
-          panoUrl={panoUrl}
           pand={result}
         />
       );
+      break;
     case endpointTypes.adressenStandplaats:
-      return (
+      title = 'MapDetailAdressenStandplaats';
+      content = (
         <MapDetailAdressenStandplaats
-          panoUrl={panoUrl}
           standplaats={result}
         />
       );
+      break;
     case endpointTypes.explosievenGevrijwaardGebied:
-      return (
+      title = 'MapDetailExplosievenGevrijwaardGebied';
+      content = (
         <MapDetailExplosievenGevrijwaardGebied
-          panoUrl={panoUrl}
           gevrijwaardGebied={result}
         />
       );
+      break;
     case endpointTypes.explosievenInslag:
-      return (
+      title = 'MapDetailExplosievenInslag';
+      content = (
         <MapDetailExplosievenInslag
-          panoUrl={panoUrl}
           inslag={result}
         />
       );
+      break;
     case endpointTypes.explosievenUitgevoerdOnderzoek:
-      return (
+      title = 'MapDetailExplosievenUitgevoerdOnderzoek';
+      content = (
         <MapDetailExplosievenUitgevoerdOnderzoek
-          panoUrl={panoUrl}
           uitgevoerdOnderzoek={result}
         />
       );
+      break;
     case endpointTypes.explosievenVerdachtGebied:
-      return (
+      title = 'MapDetailExplosievenVerdachtGebied';
+      content = (
         <MapDetailExplosievenVerdachtGebied
-          panoUrl={panoUrl}
           verdachtGebied={result}
         />
       );
+      break;
     case endpointTypes.gebiedenBouwblok:
-      return (
+      title = 'MapDetailGebiedenBouwblok';
+      content = (
         <MapDetailGebiedenBouwblok
-          panoUrl={panoUrl}
           bouwblok={result}
         />
       );
+      break;
     case endpointTypes.gebiedenBuurt:
-      return (
+      title = 'MapDetailGebiedenBuurt';
+      content = (
         <MapDetailGebiedenBuurt
-          panoUrl={panoUrl}
           buurt={result}
         />
       );
+      break;
     case endpointTypes.gebiedenGebiedsgerichtWerken:
-      return (
+      title = 'MapDetailGebiedenGebiedsgerichtWerken';
+      content = (
         <MapDetailGebiedenGebiedsgerichtWerken
-          panoUrl={panoUrl}
           gebiedsgerichtWerken={result}
         />
       );
+      break;
     case endpointTypes.gebiedenGrootstedelijk:
-      return (
+      title = 'MapDetailGebiedenGrootstedelijk';
+      content = (
         <MapDetailGebiedenGrootstedelijk
-          panoUrl={panoUrl}
           grootstedelijk={result}
         />
       );
+      break;
     case endpointTypes.gebiedenStadsdeel:
-      return (
+      title = 'MapDetailGebiedenStadsdeel';
+      content = (
         <MapDetailGebiedenStadsdeel
-          panoUrl={panoUrl}
           stadsdeel={result}
         />
       );
+      break;
     case endpointTypes.gebiedenUnesco:
-      return (
+      title = 'MapDetailGebiedenUnesco';
+      content = (
         <MapDetailGebiedenUnesco
-          panoUrl={panoUrl}
           unesco={result}
         />
       );
+      break;
     case endpointTypes.gebiedenWijk:
-      return (
+      title = 'MapDetailGebiedenWijk';
+      content = (
         <MapDetailGebiedenWijk
-          panoUrl={panoUrl}
           wijk={result}
         />
       );
+      break;
     case endpointTypes.kadastraalObject:
-      return (
+      title = 'MapDetailKadastraalObject';
+      content = (
         <MapDetailKadastraalObject
-          panoUrl={panoUrl}
           kadastraalObject={result}
         />
       );
+      break;
     case endpointTypes.meetbout:
-      return (
+      title = 'MapDetailMeetbout';
+      content = (
         <MapDetailMeetbout
-          panoUrl={panoUrl}
           meetbout={result}
         />
       );
+      break;
     case endpointTypes.monument:
-      return (
+      title = 'MapDetailMonument';
+      content = (
         <MapDetailMonument
-          panoUrl={panoUrl}
           monument={result}
         />
       );
+      break;
     case endpointTypes.napPeilmerk:
-      return (
+      title = 'MapDetailNapPeilmerk';
+      content = (
         <MapDetailNapPeilmerk
-          panoUrl={panoUrl}
           peilmerk={result}
         />
       );
+      break;
     case endpointTypes.vestiging:
-      return (
+      title = 'MapDetailVestiging';
+      content = (
         <MapDetailVestiging
-          panoUrl={panoUrl}
           vestiging={result}
         />
       );
     default:
       return '';
   }
+  return {
+    content,
+    title
+  };
+};
+
+const MapDetailResult = ({ endpoint, panoUrl, result }) => {
+  const endpointType = getEndpointType(endpoint);
+  const { content, title } = renderContent({ endpointType, result });
+
+  return (
+    <section className="map-detail-result">
+      <MapDetailResultHeader
+        panoUrl={panoUrl}
+        title={title}
+        subtitle={result.label}
+      />
+      { content }
+    </section>
+  );
 };
 
 MapDetailResult.defaultProps = {
