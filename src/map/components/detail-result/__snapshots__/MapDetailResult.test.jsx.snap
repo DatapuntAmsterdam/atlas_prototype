@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailResult rendering should not render a non existent component 1`] = `""`;
+
+exports[`MapDetailResult rendering should render adressen ligplaats 1`] = `
+<MapDetailAdressenLigplaats
+  ligplaats={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render adressen nummeraanduiding 1`] = `
+<MapDetailAdressenVerblijfsobject
+  panoUrl="panoUrl"
+  verblijfsobject={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render adressen openbareruimte 1`] = `
+<MapDetailAdressenOpenbareRuimte
+  openbareRuimte={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render adressen pand 1`] = `
+<MapDetailAdressenPand
+  pand={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render adressen standplaats 1`] = `
+<MapDetailAdressenStandplaats
+  panoUrl="panoUrl"
+  standplaats={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render adressen verblijfsobject 1`] = `
+<MapDetailAdressenVerblijfsobject
+  panoUrl="panoUrl"
+  verblijfsobject={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render explosieven gevrijwaard gebied 1`] = `
+<MapDetailExplosievenGevrijwaardGebied
+  gevrijwaardGebied={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render explosieven inslag 1`] = `
+<MapDetailExplosievenInslag
+  inslag={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render explosieven uitgevoerd onderzoek 1`] = `
+<MapDetailExplosievenUitgevoerdOnderzoek
+  panoUrl="panoUrl"
+  uitgevoerdOnderzoek={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render explosieven verdacht gebied 1`] = `
+<MapDetailExplosievenVerdachtGebied
+  panoUrl="panoUrl"
+  verdachtGebied={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render gebieden bouwblok 1`] = `
+<MapDetailGebiedenBouwblok
+  bouwblok={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render gebieden buurt 1`] = `
+<MapDetailGebiedenBuurt
+  buurt={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render gebieden gebiedsgericht-werken 1`] = `
+<MapDetailGebiedenGebiedsgerichtWerken
+  gebiedsgerichtWerken={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render gebieden grootstedelijk 1`] = `
+<MapDetailGebiedenGrootstedelijk
+  grootstedelijk={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render gebieden stadsdeel 1`] = `
+<MapDetailGebiedenStadsdeel
+  panoUrl="panoUrl"
+  stadsdeel={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render gebieden unesco 1`] = `
+<MapDetailGebiedenUnesco
+  panoUrl="panoUrl"
+  unesco={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render gebieden wijk 1`] = `
+<MapDetailGebiedenWijk
+  panoUrl="panoUrl"
+  wijk={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render kadastraal object 1`] = `
+<MapDetailKadastraalObject
+  kadastraalObject={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render meetbout 1`] = `
+<MapDetailMeetbout
+  meetbout={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render monument 1`] = `
+<MapDetailMonument
+  monument={
+    Object {
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
+
+exports[`MapDetailResult rendering should render nap peilmerk 1`] = `
+<MapDetailNapPeilmerk
+  panoUrl="panoUrl"
+  peilmerk={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;
+
+exports[`MapDetailResult rendering should render vestiging 1`] = `
+<MapDetailVestiging
+  panoUrl="panoUrl"
+  vestiging={
+    Object {
+      "label": "value",
+    }
+  }
+/>
+`;

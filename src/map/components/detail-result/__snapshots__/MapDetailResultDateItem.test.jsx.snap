@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailResultDateItem rendering should render future date 1`] = `
+<div
+  className="map-detail-result__item"
+>
+  <section
+    className="map-detail-result__item-content"
+  >
+    <div
+      className="map-detail-result__item-label"
+    >
+      label
+    </div>
+    <div
+      className="map-detail-result__item-value"
+    >
+      2029 M12 1
+    </div>
+  </section>
+</div>
+`;
+
+exports[`MapDetailResultDateItem rendering should render label and date 1`] = `
+<div
+  className="map-detail-result__item"
+>
+  <section
+    className="map-detail-result__item-content"
+  >
+    <div
+      className="map-detail-result__item-label"
+    >
+      label
+    </div>
+    <div
+      className="map-detail-result__item-value"
+    >
+      1980 M09 21
+    </div>
+  </section>
+</div>
+`;

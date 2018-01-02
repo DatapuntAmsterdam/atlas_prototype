@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailResultItem rendering should not render empty value 1`] = `""`;
+
+exports[`MapDetailResultItem rendering should not render without value 1`] = `""`;
+
+exports[`MapDetailResultItem rendering should render label and value 1`] = `
+<div
+  className="map-detail-result__item"
+>
+  <section
+    className="map-detail-result__item-content"
+  >
+    <div
+      className="map-detail-result__item-label"
+    >
+      label
+    </div>
+    <div
+      className="map-detail-result__item-value"
+    >
+      value
+    </div>
+  </section>
+</div>
+`;

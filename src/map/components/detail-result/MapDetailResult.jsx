@@ -174,7 +174,7 @@ const MapDetailResult = ({ endpoint, panoUrl, result }) => {
       return (
         <MapDetailVestiging
           panoUrl={panoUrl}
-          result={result}
+          vestiging={result}
         />
       );
     default:
