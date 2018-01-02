@@ -44,11 +44,11 @@ describe('The vestiging resource', () => {
       }));
       getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
       rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
-      maatschappelijkeActiviteit.mockImplementation(() => {
-        return new Promise ((resolve) => {
+      maatschappelijkeActiviteit.mockImplementation(() => (
+        new Promise((resolve) => {
           resolve({ kvk_nummer: 'KvK number' });
-        });
-      });
+        })
+      ));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
@@ -108,11 +108,11 @@ describe('The vestiging resource', () => {
       }));
       getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
       rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
-      maatschappelijkeActiviteit.mockImplementation(() => {
-        return new Promise ((resolve) => {
+      maatschappelijkeActiviteit.mockImplementation(() => (
+        new Promise((resolve) => {
           resolve({});
-        });
-      });
+        })
+      ));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
@@ -148,11 +148,11 @@ describe('The vestiging resource', () => {
         maatschappelijke_activiteit:
           'https://acc.api.data.amsterdam.nl/handelsregister/maatschappelijkeactiviteit/345678'
       }));
-      maatschappelijkeActiviteit.mockImplementation(() => {
-        return new Promise ((resolve) => {
+      maatschappelijkeActiviteit.mockImplementation(() => (
+        new Promise((resolve) => {
           resolve({});
-        });
-      });
+        })
+      ));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({

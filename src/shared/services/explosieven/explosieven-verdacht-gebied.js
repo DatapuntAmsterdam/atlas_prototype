@@ -13,7 +13,7 @@ export default function fetchByUri(uri) {
         label: result._display,
         location: result.location || wgs84Center,
         remarks: result.opmerkingen,
-        subType: result.subtype,
+        subType: result.subtype
       };
     });
 }
