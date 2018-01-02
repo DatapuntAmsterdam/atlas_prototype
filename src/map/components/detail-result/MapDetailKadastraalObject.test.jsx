@@ -68,5 +68,18 @@ describe('MapDetailKadastraalObject', () => {
       );
       expect(wrapper).toMatchSnapshot();
     });
+
+    it('should not render size', () => {
+      const kadastraalObject = {
+        label: 'Kadastraal object label',
+        objectNumber: '123ABC',
+      };
+      const wrapper = shallow(
+        <MapDetailKadastraalObject
+          kadastraalObject={kadastraalObject}
+        />
+      );
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 });

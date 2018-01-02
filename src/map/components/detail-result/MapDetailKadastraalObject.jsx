@@ -36,7 +36,7 @@ const MapDetailKadastraalObject = ({ panoUrl, kadastraalObject }) => (
       )}
       <MapDetailResultItem
         label="Grootte"
-        value={(kadastraalObject.size || kadastraalObject.size === 0) && `${kadastraalObject.size} m²`}
+        value={(kadastraalObject.size || kadastraalObject.size === 0) ? `${kadastraalObject.size} m²` : ''}
       />
     </ul>
   </section>

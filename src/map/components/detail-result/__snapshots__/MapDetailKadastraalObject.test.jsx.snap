@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MapDetailKadastraalObject rendering should not render size 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Kadastraal object
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Kadastraal object label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultItem
+      label="Objectnummer"
+      value="123ABC"
+    />
+    <MapDetailResultItem
+      label="Grootte"
+      value=""
+    />
+  </ul>
+</section>
+`;
+
 exports[`MapDetailKadastraalObject rendering should render everything 1`] = `
 <section
   className="map-detail-result"
