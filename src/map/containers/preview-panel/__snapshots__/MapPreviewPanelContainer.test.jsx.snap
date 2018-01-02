@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MapPreviewPanelContainer rendering should not render when the application is in embed preview state 1`] = `""`;
+
+exports[`MapPreviewPanelContainer rendering should not render when the application is in embed state 1`] = `""`;
+
 exports[`MapPreviewPanelContainer rendering should render detail 1`] = `
 <section
   className="

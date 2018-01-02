@@ -450,6 +450,18 @@ describe('MapPreviewPanelContainer', () => {
       wrapper.setProps({ isMapPreviewPanelVisible: true });
       expect(wrapper).toMatchSnapshot();
     });
+
+    it('should not render when the application is in embed state', () => {
+      const store = configureMockStore()({ ...searchState, atlas: { isEmbed: true } });
+      const wrapper = shallow(<MapPreviewPanelContainer />, { context: { store } }).dive();
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render when the application is in embed preview state', () => {
+      const store = configureMockStore()({ ...searchState, atlas: { isEmbedPreview: true } });
+      const wrapper = shallow(<MapPreviewPanelContainer />, { context: { store } }).dive();
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 
   it('should maximize the preview panel', () => {
