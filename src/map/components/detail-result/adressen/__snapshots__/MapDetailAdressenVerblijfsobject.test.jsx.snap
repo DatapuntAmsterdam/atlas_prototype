@@ -1,0 +1,242 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailAdressenVerblijfsobject rendering should not render size 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Adres
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Verblijfsobject label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailAdressenVerblijfsobjectGebruiksdoelenItem
+      gebruiksdoelen={
+        Array [
+          Object {
+            "code": "01",
+            "description": "Gebruiksdoel description 1",
+          },
+          Object {
+            "code": "0400",
+            "description": "Gebruiksdoel description 2",
+            "descriptionPlus": "Gebruiksdoel description plus",
+          },
+        ]
+      }
+    />
+    <MapDetailResultItem
+      label="Oppervlakte"
+      value=""
+    />
+    <MapDetailResultItem
+      label="Type woonobject"
+      value="Verblijfsobject type"
+    />
+    <MapDetailResultItem
+      label="Eigendomsverhouding"
+      value="Verblijfsobject eigendomsverhouding"
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailAdressenVerblijfsobject rendering should render everything 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--pano
+      "
+  >
+    <img
+      alt="Panoramabeeld"
+      className="map-detail-result__header-pano"
+      src="panoUrl"
+    />
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Adres
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Verblijfsobject label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailAdressenVerblijfsobjectGebruiksdoelenItem
+      gebruiksdoelen={
+        Array [
+          Object {
+            "code": "01",
+            "description": "Gebruiksdoel description 1",
+          },
+          Object {
+            "code": "0400",
+            "description": "Gebruiksdoel description 2",
+            "descriptionPlus": "Gebruiksdoel description plus",
+          },
+        ]
+      }
+    />
+    <MapDetailResultItem
+      label="Oppervlakte"
+      value="15 m²"
+    />
+    <MapDetailResultItem
+      label="Type woonobject"
+      value="Verblijfsobject type"
+    />
+    <MapDetailResultItem
+      label="Eigendomsverhouding"
+      value="Verblijfsobject eigendomsverhouding"
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailAdressenVerblijfsobject rendering should render with zero value for size 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Adres
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Verblijfsobject label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailAdressenVerblijfsobjectGebruiksdoelenItem
+      gebruiksdoelen={
+        Array [
+          Object {
+            "code": "01",
+            "description": "Gebruiksdoel description 1",
+          },
+          Object {
+            "code": "0400",
+            "description": "Gebruiksdoel description 2",
+            "descriptionPlus": "Gebruiksdoel description plus",
+          },
+        ]
+      }
+    />
+    <MapDetailResultItem
+      label="Oppervlakte"
+      value="0 m²"
+    />
+    <MapDetailResultItem
+      label="Type woonobject"
+      value="Verblijfsobject type"
+    />
+    <MapDetailResultItem
+      label="Eigendomsverhouding"
+      value="Verblijfsobject eigendomsverhouding"
+    />
+  </ul>
+</section>
+`;
+
+exports[`MapDetailAdressenVerblijfsobject rendering should render without pano url 1`] = `
+<section
+  className="map-detail-result"
+>
+  <header
+    className="
+        map-detail-result__header
+        map-detail-result__header--no-pano
+      "
+  >
+    <div
+      className="map-detail-result__header-container"
+    >
+      <h1
+        className="map-detail-result__header-title"
+      >
+        Adres
+      </h1>
+      <h2
+        className="map-detail-result__header-subtitle"
+      >
+        Verblijfsobject label
+      </h2>
+    </div>
+  </header>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailAdressenVerblijfsobjectGebruiksdoelenItem
+      gebruiksdoelen={
+        Array [
+          Object {
+            "code": "01",
+            "description": "Gebruiksdoel description 1",
+          },
+          Object {
+            "code": "0400",
+            "description": "Gebruiksdoel description 2",
+            "descriptionPlus": "Gebruiksdoel description plus",
+          },
+        ]
+      }
+    />
+    <MapDetailResultItem
+      label="Oppervlakte"
+      value="15 m²"
+    />
+    <MapDetailResultItem
+      label="Type woonobject"
+      value="Verblijfsobject type"
+    />
+    <MapDetailResultItem
+      label="Eigendomsverhouding"
+      value="Verblijfsobject eigendomsverhouding"
+    />
+  </ul>
+</section>
+`;
