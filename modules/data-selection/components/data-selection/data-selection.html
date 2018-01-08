@@ -1,7 +1,7 @@
 <div class="c-data-selection">
     <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
 
-    <div ng-if="!vm.isLoading">
+    <div ng-if="!vm.isLoading" class="qa-data-selection-content">
         <dp-tab-header ng-if="vm.showTabHeader()"
                        search-text="{{vm.state.query}}"
                        tab-header="vm.tabHeader"

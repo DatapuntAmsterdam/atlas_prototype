@@ -34,7 +34,7 @@ exports[`Notification should be able to render \`a\` elements 1`] = `
     className="notification__content"
   >
     <a
-      href=""
+      href="http://real-address.com"
     >
       External link
     </a>

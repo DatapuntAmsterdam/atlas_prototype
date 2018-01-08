@@ -29,7 +29,7 @@ describe('Notification', () => {
   it('should be able to render `a` elements', () => {
     const notification = shallow(
       <Notification>
-        <a href="">External link</a>
+        <a href="http://real-address.com">External link</a>
       </Notification>
     );
 

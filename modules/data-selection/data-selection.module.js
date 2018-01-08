@@ -3,7 +3,6 @@
 
     angular
         .module('dpDataSelection', [
-            'ngAria',
             'ngSanitize',
             'dpShared'
         ]);

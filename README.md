@@ -25,6 +25,10 @@
 Make sure the app is running locally by running `grunt`.
 Then, in a second terminal, run `grunt test-e2e`.
 
+## Aria testing
+Make sure that NODE_ENV=development.
+Then run `npm run test-aria`.
+
 In order to run the E2E tests, the following environment variables should be set:
 - `PASSWORD_EMPLOYEE`
 - `PASSWORD_EMPLOYEE_PLUS`
