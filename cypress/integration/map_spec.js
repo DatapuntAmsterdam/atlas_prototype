@@ -1,5 +1,5 @@
 /* eslint-disable */
-describe('map module', () => {
+describe.skip('map module', () => {
   describe('user should be able to navigate to the map from the homepage', () => {
     it('should open the map', () => {
       // go to the homepage

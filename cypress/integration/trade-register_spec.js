@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { login, logout } from '../services/authentication';
 
-describe('trade-register module', () => {
+describe.skip('trade-register module', () => {
   describe('user should be able to navigate to the trade-register from the homepage', () => {
     it('should open the trade register', () => {
       // go to the homepage

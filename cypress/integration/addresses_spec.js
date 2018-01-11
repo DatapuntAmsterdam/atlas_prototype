@@ -1,5 +1,5 @@
 /* eslint-disable */
-describe('addresses module', () => {
+describe.skip('addresses module', () => {
   beforeEach(() => {
     // go to the homepage
     cy.visit('http://localhost:8080/');

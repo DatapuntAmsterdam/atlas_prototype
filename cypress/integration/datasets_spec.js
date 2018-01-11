@@ -1,5 +1,5 @@
 /* eslint-disable */
-describe('datasets module', () => {
+describe.skip('datasets module', () => {
   describe('user should be able to navigate to the datasets catalogus from the homepage', () => {
     beforeEach(() => {
       // go to the homepage

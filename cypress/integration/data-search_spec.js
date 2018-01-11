@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { login, logout } from '../services/authentication';
-describe('data search module', () => {
+describe.skip('data search module', () => {
   before(() => {
     login();
   });

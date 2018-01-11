@@ -1,5 +1,5 @@
 /* eslint-disable */
-describe('content module', () => {
+describe.skip('content module', () => {
   describe('user should be able to navigate to the content from the homepage', () => {
     it('should open `Bediening` content', () => {
       // go to the homepage
