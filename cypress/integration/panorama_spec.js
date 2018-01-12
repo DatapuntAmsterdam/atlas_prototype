@@ -1,5 +1,5 @@
 /* eslint-disable */
-describe.skip('panorama module', () => {
+describe('panorama module', () => {
   beforeEach(() => {
     // go to the homepage
     cy.visit('http://localhost:8080/');

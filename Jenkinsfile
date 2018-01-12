@@ -72,9 +72,22 @@ if (BRANCH == "master") {
     node {
         stage('Build and Push preproduction image') {
             tryStep "image tagging", {
-                def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}-preproduction")
-                image.push("preproduction")
-                image.push()
+                withCredentials([[$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE', variable: 'PASSWORD_EMPLOYEE'],
+                                 [$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE_PLUS', variable: 'PASSWORD_EMPLOYEE_PLUS']]) {
+                    if (!PASSWORD_EMPLOYEE?.trim()) {
+                        error("PASSWORD_EMPLOYEE missing")
+                    }
+                    if (!PASSWORD_EMPLOYEE_PLUS?.trim()) {
+                        error("PASSWORD_EMPLOYEE_PLUS missing")
+                    }
+                    def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}-preproduction",
+                        "--shm-size 1G " +
+                        "--build-arg BUILD_ENV=acc --build-arg PASSWORD_EMPLOYEE=${PASSWORD_EMPLOYEE} " +
+                        "--build-arg PASSWORD_EMPLOYEE_PLUS=${PASSWORD_EMPLOYEE_PLUS} .")
+
+                    image.push("preproduction")
+                    image.push()
+                }
             }
         }
     }
