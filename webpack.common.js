@@ -102,6 +102,9 @@ function commonConfig({ nodeEnv }) {
       ]
     },
     plugins: [
+      new webpack.DefinePlugin({
+        '__REACT_DEVTOOLS_GLOBAL_HOOK__': '({ isDisabled: true })'
+      }),
       new CleanWebpackPlugin([dist]),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
