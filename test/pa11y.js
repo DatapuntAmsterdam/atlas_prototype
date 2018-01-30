@@ -19,8 +19,7 @@ const filename = name => path.join(__dirname, '..', 'pa11y', `${name}.png`);
 
 console.log('Pa11y testing...');
 
-const checkActions = () => {
-  // flatten actions
+const checkActions = () => { // flatten actions
   const actions = config.urls.reduce(
     (acc, next) => next.actions ? [...acc, ...next.actions] : acc,
     []);
