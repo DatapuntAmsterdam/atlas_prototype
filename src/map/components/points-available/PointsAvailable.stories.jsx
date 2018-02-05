@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'; // eslint-disable-line import/no-e
 
 import PointsAvailable from './PointsAvailable';
 
-storiesOf('Map/PointsAvailable', module)
+storiesOf('Map/DrawTool/PointsAvailable', module)
   .add('no markers left', () => (
     <PointsAvailable
       markersLeft={0}

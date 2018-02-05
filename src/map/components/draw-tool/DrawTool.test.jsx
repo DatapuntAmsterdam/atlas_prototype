@@ -5,13 +5,11 @@ import DrawTool from './DrawTool';
 import drawToolConfig from '../../services/draw-tool/draw-tool-config';
 
 describe('DrawTool', () => {
-  let isEnabled;
   let defaultProps;
 
   beforeEach(() => {
-    isEnabled = jest.fn();
     defaultProps = {
-      isEnabled,
+      isEnabled: false,
       toggleDrawing: jest.fn(),
       onClearDrawing: jest.fn(),
       drawingMode: drawToolConfig.DRAWING_MODE.NONE,
@@ -26,7 +24,6 @@ describe('DrawTool', () => {
   });
 
   it('should render summary for 2 points', () => {
-    isEnabled.mockImplementation(() => false);
     const wrapper = shallow((
       <DrawTool
         {...defaultProps}
@@ -37,10 +34,10 @@ describe('DrawTool', () => {
   });
 
   it('should not render summary when tool is enabled', () => {
-    isEnabled.mockImplementation(() => true);
     const wrapper = shallow((
       <DrawTool
         {...defaultProps}
+        isEnabled
         shapeMarkers={2}
       />
     ));
@@ -48,10 +45,10 @@ describe('DrawTool', () => {
   });
 
   it('should render points available if near max points', () => {
-    isEnabled.mockImplementation(() => true);
     const wrapper = shallow((
       <DrawTool
         {...defaultProps}
+        isEnabled
         shapeMarkers={10}
       />
     ));
@@ -59,7 +56,6 @@ describe('DrawTool', () => {
   });
 
   it('should not render points available if tool is disabled', () => {
-    isEnabled.mockImplementation(() => false);
     const wrapper = shallow((
       <DrawTool
         {...defaultProps}

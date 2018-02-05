@@ -146,6 +146,7 @@ class DrawToolContainer extends React.Component {
     return (<DrawTool
       markersLeft={markersLeft}
       {...this.props}
+      isEnabled={isEnabled()}
     />);
   }
 }

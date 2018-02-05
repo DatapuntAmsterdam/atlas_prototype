@@ -24,7 +24,7 @@ const DrawTool = ({
         toggleDrawing={toggleDrawing}
       />
       {
-        !isEnabled() && shapeMarkers === 2
+        !isEnabled && shapeMarkers === 2
         &&
         <ShapeSummary
           shapeDistanceTxt={shapeDistanceTxt}
@@ -33,7 +33,7 @@ const DrawTool = ({
       }
       {
         markersLeft <= drawToolConfig.MARKERS_LEFT_WARNING &&
-        isEnabled() &&
+        isEnabled &&
         <PointsAvailable
           markersLeft={markersLeft}
           drawingMode={drawingMode}
@@ -45,7 +45,7 @@ const DrawTool = ({
 
 DrawTool.propTypes = {
   drawingMode: PropTypes.string.isRequired,
-  isEnabled: PropTypes.func.isRequired,
+  isEnabled: PropTypes.bool.isRequired,
   onClearDrawing: PropTypes.func.isRequired,
   shapeDistanceTxt: PropTypes.string.isRequired,
   shapeMarkers: PropTypes.number.isRequired,
