@@ -1,8 +1,5 @@
-// TODO: R: clean file, overly complex and contains state
-
 /* eslint-disable no-use-before-define,no-underscore-dangle */
 /* global L */
-
 import defer from 'lodash.defer';
 import isEqual from 'lodash.isequal';
 import debounce from 'lodash.debounce';
@@ -10,7 +7,7 @@ import debounce from 'lodash.debounce';
 import { isBusy, start } from '../suppress/suppress';
 import drawToolConfig from './draw-tool-config';
 
-  // holds all information about the state of the shape being created or edited
+// holds all information about the state of the shape being created or edited
 const DEFAULTS = {
   isConsistent: true,
   type: null,
@@ -58,6 +55,7 @@ export function initialize(map, onFinish, onDrawingMode, onUpdateShape) {
 
   registerDrawEvents();
   registerMapEvents();
+  return currentShape;
 }
 
 // triggered when a polygon has finished drawing or editing

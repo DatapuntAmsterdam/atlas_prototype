@@ -7,18 +7,12 @@ const initialState = {
     markers: []
   },
   isLoading: true
-  // view: 'TABLE',
-  // dataset: 'bag',
-  // query: 'searchText',
-  // page: 1,
-  // isFullscreen: true,
 };
-let geometryFilter = {};
 
 export default function DataSelectionReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_DATA_SELECTION_GEOMETRY_FILTER:
-      geometryFilter = { ...action.payload } || { markers: [] };
+    case SET_DATA_SELECTION_GEOMETRY_FILTER: {
+      const geometryFilter = { ...action.payload } || { markers: [] };
       return {
         ...{
           dataset: 'bag'
@@ -34,9 +28,10 @@ export default function DataSelectionReducer(state = initialState, action) {
         // change
         reset: geometryFilter.markers.length === 0
       };
+    }
 
-    case RESET_DATA_SELECTION_GEOMETRY_FILTER:
-      geometryFilter = action.payload.polygon || { markers: [] };
+    case RESET_DATA_SELECTION_GEOMETRY_FILTER: {
+      const geometryFilter = action.payload.polygon || { markers: [] };
       if ((action.payload.drawingMode !== 'edit') &&
         state &&
         state.geometryFilter &&
@@ -60,7 +55,7 @@ export default function DataSelectionReducer(state = initialState, action) {
         };
       }
       return state;
-
+    }
     default:
       return state;
   }

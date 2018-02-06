@@ -23,9 +23,11 @@ import '../modules/straatbeeld/straatbeeld.scss';
 import './_styles.scss';
 
 // Import this here, because `modules/atlas/services/redux%reducer.factory`
-// cannoct do, because that would break the grunt build...
-import detailReducer from './reducers/details'; // eslint-disable-line
-import userReducer from './reducers/user'; // eslint-disable-line
+// can not import the files. That would break the grunt build...
+import './reducers/details';
+import './reducers/user';
+import './shared/ducks/data-selection/data-selection';
+import './shared/ducks/page/page';
 
 // All our modules' javascript
 import '../modules/atlas/atlas.module';

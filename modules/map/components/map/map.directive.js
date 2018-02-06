@@ -1,3 +1,5 @@
+import { unmountComponentAtNode } from 'react-dom';
+
 (() => {
     angular
         .module('dpMap')
@@ -73,6 +75,11 @@
                     render(React.createElement(MapEmbedButtonWrapper, { embedLink }), mapEmbedButtonNode);
                 }
             };
+
+            const unmountReactComponents = () => {
+                unmountComponentAtNode(document.getElementById('map-react'));
+            };
+            scope.$on('$destroy', unmountReactComponents);
 
             store.subscribe(update);
             update();

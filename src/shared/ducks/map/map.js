@@ -16,10 +16,6 @@ const initialState = {
   shapeAreaTxt: ''
 };
 
-let polygon = {};
-let has2Markers;
-let moreThan2Markers;
-
 export default function MapReducer(state = initialState, action) {
   switch (action.type) {
     case MAP_CLEAR_DRAWING:
@@ -31,6 +27,7 @@ export default function MapReducer(state = initialState, action) {
     case MAP_UPDATE_SHAPE:
       return {
         ...state,
+        geometry: action.payload.markers,
         shapeMarkers: action.payload.shapeMarkers,
         shapeDistanceTxt: action.payload.shapeDistanceTxt,
         shapeAreaTxt: action.payload.shapeAreaTxt
@@ -39,20 +36,20 @@ export default function MapReducer(state = initialState, action) {
     case MAP_START_DRAWING:
       return {
         ...state,
-        drawingMode: action.payload.drawingMode
+        drawingMode: action.payload
       };
 
-    case MAP_END_DRAWING:
-      polygon = action.payload && action.payload.polygon;
-      has2Markers = polygon && polygon.markers && polygon.markers.length === 2;
-      moreThan2Markers = polygon && polygon.markers && polygon.markers.length > 2;
+    case MAP_END_DRAWING: {
+      const polygon = action.payload && action.payload.polygon;
+      const moreThan2Markers = polygon && polygon.markers && polygon.markers.length > 2;
 
       return {
         ...state,
         drawingMode: 'none',
-        geometry: has2Markers ? polygon.markers : moreThan2Markers ? [] : state.geometry,
+        geometry: polygon ? polygon.markers : state.geometry,
         isLoading: moreThan2Markers ? true : state.isLoading
       };
+    }
 
     default:
       return state;
