@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './_draw-tool.scss';
-import drawToolConfig from '../../services/draw-tool/draw-tool-config';
+import { MARKERS_LEFT_WARNING, MAX_MARKERS } from '../../services/draw-tool/draw-tool-config';
 import ToggleDrawing from '../toggle-drawing/ToggleDrawing';
 import ShapeSummary from '../shape-summary/ShapeSummary';
 import PointsAvailable from '../points-available/PointsAvailable';
@@ -15,7 +15,7 @@ const DrawTool = ({
   shapeMarkers,
   toggleDrawing
 }) => {
-  const markersLeft = drawToolConfig.MAX_MARKERS - shapeMarkers;
+  const markersLeft = MAX_MARKERS - shapeMarkers;
   return (
     <section className="draw-tool">
       <ToggleDrawing
@@ -32,7 +32,7 @@ const DrawTool = ({
         />
       }
       {
-        markersLeft <= drawToolConfig.MARKERS_LEFT_WARNING &&
+        markersLeft <= MARKERS_LEFT_WARNING &&
         isEnabled &&
         <PointsAvailable
           markersLeft={markersLeft}

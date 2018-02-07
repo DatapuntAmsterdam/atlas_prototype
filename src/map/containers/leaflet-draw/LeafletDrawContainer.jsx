@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { setPolygon } from '../../services/draw-tool/draw-tool';
-import drawToolConfig from '../../services/draw-tool/draw-tool-config';
+import { DRAWING_MODE } from '../../services/draw-tool/draw-tool-config';
 import initialize from '../../services/draw-tool/leaflet-draw-to-redux';
 
 import {
@@ -28,7 +28,7 @@ const consolidateState = (stateMarkers, drawMode, currentShape) => {
     && currentShape.layer.getLatLngs()
     && currentShape.layer.getLatLngs()[0] || []; // eslint-disable-line no-mixed-operators
 
-  if (drawMode === drawToolConfig.DRAWING_MODE.NONE) {
+  if (drawMode === DRAWING_MODE.NONE) {
     if (drawnMarkers.length !== stateMarkers.length) {
       setPolygon(stateMarkers);
     }

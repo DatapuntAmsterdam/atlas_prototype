@@ -1,4 +1,4 @@
-import DRAW_TOOL_CONFIG from '../../../../../src/map/services/draw-tool/draw-tool-config';
+import { DRAWING_MODE } from '../../../../../src/map/services/draw-tool/draw-tool-config';
 
 (function () {
     'use strict';
@@ -44,7 +44,7 @@ import DRAW_TOOL_CONFIG from '../../../../../src/map/services/draw-tool/draw-too
                         }
                     }
 
-                    if (map && map.drawingMode !== DRAW_TOOL_CONFIG.DRAWING_MODE.NONE) {
+                    if (map && map.drawingMode !== DRAWING_MODE.NONE) {
                         if (action.type.id === ACTIONS.MAP_ZOOM.id) {
                             action.type = Object.assign({}, action.type);
                             action.type.ignore = true;

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'; // eslint-disable-line import/no-e
 import { action } from '@storybook/addon-actions'; // eslint-disable-line import/no-extraneous-dependencies
 
 import DrawTool from './DrawTool';
-import drawToolConfig from '../../services/draw-tool/draw-tool-config';
+import { DRAWING_MODE } from '../../services/draw-tool/draw-tool-config';
 
 const toggleDrawing = action('toggleDrawing');
 const onClearDrawing = action('onClearDrawing');
@@ -20,20 +20,20 @@ storiesOf('Map/DrawTool', module)
   .add('Disabled tool', () => (
     <DrawTool
       {...defaultProps}
-      drawingMode={drawToolConfig.DRAWING_MODE.NONE}
+      drawingMode={DRAWING_MODE.NONE}
     />
   ))
   .add('Line summary', () => (
     <DrawTool
       {...defaultProps}
-      drawingMode={drawToolConfig.DRAWING_MODE.NONE}
+      drawingMode={DRAWING_MODE.NONE}
       shapeMarkers={2}
     />
   ))
   .add('Remaining markers warning', () => (
     <DrawTool
       {...defaultProps}
-      drawingMode={drawToolConfig.DRAWING_MODE.DRAW}
+      drawingMode={DRAWING_MODE.DRAW}
       isEnabled
       shapeMarkers={10}
     />

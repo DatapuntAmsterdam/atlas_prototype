@@ -3,8 +3,7 @@
 //
 import isEqual from 'lodash.isequal';
 
-
-import drawToolConfig from './draw-tool-config';
+import { DRAWING_MODE } from './draw-tool-config';
 import {
   currentShape,
   initialize
@@ -42,7 +41,7 @@ export default ({
 
   const onDrawingMode = (drawingMode) => {
     // console.log('onDrawingMode');
-    if (drawingMode !== drawToolConfig.DRAWING_MODE.NONE) {
+    if (drawingMode !== DRAWING_MODE.NONE) {
       _previousMarkers = [...currentShape.markers];
       resetDataSelectionGeometryFilter({ drawingMode });
       mapStartDrawing(drawingMode);

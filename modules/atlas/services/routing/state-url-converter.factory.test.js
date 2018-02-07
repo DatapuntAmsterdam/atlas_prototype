@@ -1,4 +1,4 @@
-import DRAW_TOOL_CONFIG from '../../../../src/map/services/draw-tool/draw-tool-config';
+import { DRAWING_MODE } from '../../../../src/map/services/draw-tool/draw-tool-config';
 
 describe('The state url conversion factory', function () {
     let stateUrlConverter;
@@ -22,7 +22,7 @@ describe('The state url conversion factory', function () {
                     viewCenter: [52.3731081, 4.8932945],
                     zoom: 11,
                     isLoading: false,
-                    drawingMode: DRAW_TOOL_CONFIG.DRAWING_MODE.NONE,
+                    drawingMode: DRAWING_MODE.NONE,
                     highlight: true,
                     shapeMarkers: 0,
                     shapeDistanceTxt: '',

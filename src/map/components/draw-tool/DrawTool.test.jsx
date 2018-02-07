@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import DrawTool from './DrawTool';
-import drawToolConfig from '../../services/draw-tool/draw-tool-config';
+import { DRAWING_MODE } from '../../services/draw-tool/draw-tool-config';
 
 describe('DrawTool', () => {
   let defaultProps;
@@ -12,7 +12,7 @@ describe('DrawTool', () => {
       isEnabled: false,
       toggleDrawing: jest.fn(),
       onClearDrawing: jest.fn(),
-      drawingMode: drawToolConfig.DRAWING_MODE.NONE,
+      drawingMode: DRAWING_MODE.NONE,
       shapeMarkers: 0,
       shapeDistanceTxt: 'myDistanceTxt'
     };

@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import DrawTool from '../../components/draw-tool/DrawTool';
-import drawToolConfig from '../../services/draw-tool/draw-tool-config';
+import { DRAWING_MODE, MAX_MARKERS } from '../../services/draw-tool/draw-tool-config';
 import toggleDrawing from '../../services/draw-tool/draw-tool-toggle';
 import { mapClearDrawing } from '../../../shared/ducks/map/map';
 
 const mapStateToProps = (state) => ({
   drawingMode: state.map.drawingMode,
-  isEnabled: state.map.drawingMode !== drawToolConfig.DRAWING_MODE.NONE,
+  isEnabled: state.map.drawingMode !== DRAWING_MODE.NONE,
   shapeMarkers: state.map.shapeMarkers,
   shapeDistanceTxt: state.map.shapeDistanceTxt
 });
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch);
 
 const DrawToolContainer = (props) => {
-  const markersLeft = drawToolConfig.MAX_MARKERS - props.shapeMarkers;
+  const markersLeft = MAX_MARKERS - props.shapeMarkers;
   return (<DrawTool
     markersLeft={markersLeft}
     {...props}
