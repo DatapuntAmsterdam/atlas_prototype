@@ -26,14 +26,16 @@
 
             location = [event.latlng.lat, event.latlng.lng];
 
-            if (!(suppress.isBusy() || state.ui.isEmbedPreview || state.ui.isEmbed || drawTool.isEnabled())) {
+            if (state.map.mode === 'parkeervakken') {
+                dispatchMapLocation(location);
                 store.dispatch({
-                    type: ACTIONS.SET_MAP_CLICK_LOCATION.id,
-                    location: {
-                        latitude: location[0],
-                        longitude: location[1]
-                    }
-                });
+                    type: 'FETCH_PARKEERVAKKEN',
+                    payload: location
+                })
+            }
+
+            if (!(suppress.isBusy() || state.ui.isEmbedPreview || state.ui.isEmbed || drawTool.isEnabled())) {
+                dispatchMapLocation(location);
 
                 if (!state.straatbeeld && visibleOverlays.length > 0) {
                     // do geosearch for nearest item in overlays
@@ -52,6 +54,16 @@
             store.dispatch({
                 type: ACTIONS.MAP_CLICK,
                 payload: location
+            });
+        }
+
+        function dispatchMapLocation (latLong) {
+            store.dispatch({
+                type: ACTIONS.SET_MAP_CLICK_LOCATION.id,
+                location: {
+                    latitude: latLong[0],
+                    longitude: latLong[1]
+                }
             });
         }
     }

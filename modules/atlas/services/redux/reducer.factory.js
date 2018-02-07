@@ -31,11 +31,13 @@ import { combineReducers } from 'redux';
             const PanoPreviewReducer = $window.reducers.PanoPreviewReducer;
             const UiReducer = $window.reducers.UiReducer;
             const UserReducer = $window.reducers.UserReducer;
+            const ParkeervakkenReducer = $window.reducers.ParkeervakkenReducer;
             const newRootReducer = combineReducers({
                 error: ErrorMessageReducer,
                 pano: PanoPreviewReducer,
                 ui: UiReducer,
-                user: UserReducer
+                user: UserReducer,
+                parkeervakken: ParkeervakkenReducer
             });
             const filteredState = {
                 ui: deprecatedState.ui,
@@ -47,7 +49,8 @@ import { combineReducers } from 'redux';
                 // the URL resolution step in the deprecatedReducer would
                 // therefore reset these fields in the state.
                 error: oldState.error,
-                pano: oldState.pano
+                pano: oldState.pano,
+                parkeervakken: oldState.parkeervakken
             };
 
             // Combine old and new reducer states
