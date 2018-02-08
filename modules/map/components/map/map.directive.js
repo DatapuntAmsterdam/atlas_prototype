@@ -127,7 +127,7 @@
                 });
 
                 scope.$watch('parkeervakken.selected', function (selected) {
-                       $window.parent.postMessage({ action: 'updateSelected', selected }, 'http://127.0.0.1:8082');
+                    $window.parent.postMessage({ selected }, '*');
                 });
 
                 scope.$watchGroup(['user.scopes', 'mapState.overlays'], setOverlays);
