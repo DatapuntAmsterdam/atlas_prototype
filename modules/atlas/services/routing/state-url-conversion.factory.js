@@ -336,6 +336,10 @@
                     type: 'number[]',
                     precision: 7
                 },
+                mpm: {
+                    name: 'map.mode',
+                    type: 'string'
+                },
                 // page (pg)
                 pgn: {
                     name: 'page.name',

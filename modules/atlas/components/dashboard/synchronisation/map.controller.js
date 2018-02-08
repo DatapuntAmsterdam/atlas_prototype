@@ -19,7 +19,8 @@
 
             vm.markers = {
                 regular: [],
-                clustered: []
+                clustered: [],
+                parkeervakken: []
             };
 
             // drawGeometry = geometryfilter of dataselection
@@ -58,6 +59,14 @@
                 });
             }
 
+            if (state.parkeervakken.geolocation && state.parkeervakken.geolocation.singleshape) {
+                vm.markers.regular.push({
+                    id: 'parkeervakken',
+                    geometry: state.parkeervakken.geolocation.singleshape,
+                    useAutoFocus: false
+                });
+            }
+
             if (angular.isObject(state.dataSelection)) {
                 vm.markers.regular = [];
                 vm.markers.clustered = state.dataSelection.markers;
@@ -68,6 +77,7 @@
             }
 
             vm.mapState = state.map;
+            vm.parkeervakken = state.parkeervakken;
         }
 
         function convertLocationToGeoJSON (location) {
