@@ -76,8 +76,12 @@ import { unmountComponentAtNode } from 'react-dom';
                 }
             };
 
+            /* istanbul ignore next */
             const unmountReactComponents = () => {
-                unmountComponentAtNode(document.getElementById('map-react'));
+                const mapReactNode = document.getElementById('map-react');
+                if (mapReactNode) {
+                    unmountComponentAtNode(mapReactNode);
+                }
             };
             scope.$on('$destroy', unmountReactComponents);
 

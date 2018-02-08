@@ -18,7 +18,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch);
 
 const MapContainer = (props) => (
-  // TODO: possibly use only normal components, no container components.
   <section className="map">
     <LeafletDraw />
     <DrawTool />

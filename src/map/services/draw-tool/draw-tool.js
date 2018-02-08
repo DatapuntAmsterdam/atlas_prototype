@@ -35,8 +35,8 @@ export let currentShape = { ...DEFAULTS };  // eslint-disable-line import/no-mut
 const shapeInfo = {};
 updateShapeInfo(currentShape); // initialise to initial current shape
 
-  // holds all information of the leaflet.draw drawing and editing structures
-const drawTool = {
+// holds all information of the leaflet.draw drawing and editing structures
+export const drawTool = {
   drawingMode: DRAWING_MODE.NONE,
   drawnItems: null,
   drawShapeHandler: null,

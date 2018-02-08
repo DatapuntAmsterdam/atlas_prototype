@@ -4,6 +4,7 @@ exports[`MapContainer should render 1`] = `
 <section
   className="map"
 >
+  <Connect(LeafletDrawContainer) />
   <Connect(Component) />
   <ToggleFullscreen
     isFullscreen={false}
