@@ -3,7 +3,9 @@ import { selectParkeervakByLatLng } from '../../services/parkeervakken/parkeerva
 import {
   fetchParkeervakkenSuccess,
   fetchParkeervakkenError,
-  FETCH_PARKEERVAKKEN
+  fetchParkeervakkenGeolocation,
+  FETCH_PARKEERVAKKEN,
+  FETCH_PARKEERVAKKEN_SUCCESS
 } from '../../ducks/parkeervakken/parkeervakken';
 
 function* fetchParkeervakken(action) {
@@ -17,4 +19,12 @@ function* fetchParkeervakken(action) {
 
 export default function* watchFetchParkeervakken() {
   yield takeLatest(FETCH_PARKEERVAKKEN, fetchParkeervakken);
+}
+
+function* fetchParkeervakkenGeo() {
+  yield put(fetchParkeervakkenGeolocation());
+}
+
+export function* watchFetchParkeervakkenSuccess() {
+  yield takeLatest(FETCH_PARKEERVAKKEN_SUCCESS, fetchParkeervakkenGeo);
 }

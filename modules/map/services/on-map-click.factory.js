@@ -1,3 +1,5 @@
+import { fetchParkeervakken } from '../../../src/map/ducks/parkeervakken/parkeervakken';
+
 (() => {
     'use strict';
 
@@ -28,10 +30,7 @@
 
             if (state.map.mode === 'parkeervakken') {
                 dispatchMapLocation(location);
-                store.dispatch({
-                    type: 'FETCH_PARKEERVAKKEN',
-                    payload: location
-                })
+                store.dispatch(fetchParkeervakken(location));
             }
 
             if (!(suppress.isBusy() || state.ui.isEmbedPreview || state.ui.isEmbed || drawTool.isEnabled())) {

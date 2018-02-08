@@ -59,6 +59,7 @@
                     <div ng-if="vm.activity.map" ng-show="vm.visibility.map" ng-controller="MapController as map" class="qa-map">
                         <dp-map
                             map-state="map.mapState"
+                            parkeervakken="map.parkeervakken"
                             markers="map.markers"
                             draw-geometry="map.drawGeometry"
                             resize="[vm.isPrintMode, vm.isEmbedPreview, vm.isEmbed, vm.visibility.error, vm.visibility.map, vm.columnSizes.middle]">

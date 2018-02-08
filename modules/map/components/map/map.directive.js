@@ -39,6 +39,7 @@
             restrict: 'E',
             scope: {
                 mapState: '=',
+                parkeervakken: '<',
                 markers: '=',
                 drawGeometry: '=',
                 resize: '<',
@@ -123,6 +124,10 @@
 
                 scope.$watch('mapState.baseLayer', function (baseLayer) {
                     layers.setBaseLayer(leafletMap, baseLayer);
+                });
+
+                scope.$watch('parkeervakken.selected', function (selected) {
+                       $window.parent.postMessage({ action: 'updateSelected', selected }, 'http://127.0.0.1:8082');
                 });
 
                 scope.$watchGroup(['user.scopes', 'mapState.overlays'], setOverlays);

@@ -4,7 +4,8 @@ import watchFetchMapBaseLayers from './layers/map-base-layers';
 import watchFetchMapLayers from './layers/map-layers';
 import watchFetchMapSearchResults from './search-results/map-search-results';
 import watchFetchMapDetail from './detail/map-detail';
-import watchFetchParkeervakken from './parkeervakken/parkeervakken';
+import watchFetchParkeervakken, { watchFetchParkeervakkenSuccess } from './parkeervakken/parkeervakken';
+import watchFetchParkeervakkenGeolocation from './parkeervakken/parkeervakken-geolocation';
 import watchFetchPanoPreview from '../../pano/sagas/preview/pano-preview';
 
 export default function* rootSaga() {
@@ -14,6 +15,8 @@ export default function* rootSaga() {
     fork(watchFetchMapSearchResults),
     fork(watchFetchMapDetail),
     fork(watchFetchParkeervakken),
+    fork(watchFetchParkeervakkenSuccess),
+    fork(watchFetchParkeervakkenGeolocation),
     fork(watchFetchPanoPreview)
   ]);
 }

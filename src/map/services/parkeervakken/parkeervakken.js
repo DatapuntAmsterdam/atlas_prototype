@@ -6,7 +6,7 @@ export const selectParkeervakByLatLng = (latLng) =>
   .catch((error) => error);
 
 
-export const getSelectedParkeervakkenByIds = (ids) =>
+export const getSelectedParkeervakkenGeoselection = (ids) =>
   fetch(`${apiUrl}parkeervakken/geoselection?ids=${ids}`)
   .then((response) => response.json())
   .catch((error) => error);
