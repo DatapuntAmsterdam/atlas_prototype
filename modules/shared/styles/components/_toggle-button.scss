@@ -10,6 +10,12 @@
   padding: 4px;
   width: 24px;
 
+  &:focus {
+    background-color: $secondary-gray10;
+    color: $primary-dark;
+    fill: $primary-dark;
+  }
+
   &:hover {
     background-color: $primary-contrast;
     border-color: $primary-contrast;

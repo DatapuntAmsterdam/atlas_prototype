@@ -103,7 +103,7 @@ class MapPreviewPanelContainer extends React.Component {
     if (!selectedPano) {
       return;
     }
-    this.context.store.dispatch(onOpenPanoById(selectedPano.id));
+    this.context.store.dispatch(onOpenPanoById(selectedPano));
     this.context.store.dispatch(toggleMapFullscreen());
   }
 

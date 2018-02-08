@@ -1,5 +1,5 @@
 /* globals L */
-import ACTIONS from '../../../shared/actions';
+import ACTIONS from '../../shared/actions';
 import { getCurrentLocation } from './panControls';
 
 const addHeading = (element, text) => {

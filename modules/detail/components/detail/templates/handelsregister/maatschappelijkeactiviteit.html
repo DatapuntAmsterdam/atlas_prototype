@@ -28,8 +28,11 @@
         <dl ng-if="vm.apiData" class="c-key-value-list">
             <dt>Handelsnaam</dt>
             <dd ng-if="!vm.apiData.results.onderneming.handelsnamen[0]"></dd>
-            <dd class="c-key-value-list__multiple-values" ng-repeat="object in vm.apiData.results.onderneming.handelsnamen">
+            <dd class="c-key-value-list__multiple-values" ng-if="vm.apiData.results.onderneming.handelsnamen" ng-repeat="object in vm.apiData.results.onderneming.handelsnamen">
                 {{ object.handelsnaam }}
+            </dd>
+            <dd class="c-key-value-list__multiple-values" ng-if="!vm.apiData.results.onderneming.handelsnamen">
+                {{ vm.apiData.results.naam }}
             </dd>
             <dt>KvK-nummer</dt>
             <dd> {{ vm.apiData.results.kvk_nummer }} </dd>

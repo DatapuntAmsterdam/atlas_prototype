@@ -15,7 +15,13 @@
     width: 24px;
   }
 
-  &:focus,
+  &:focus {
+    background-color: #eee;
+    color: #000;
+    fill: #000;
+    outline: none;
+  }
+
   &:hover {
     background-color: #ec0000;
     border-color: #ec0000;

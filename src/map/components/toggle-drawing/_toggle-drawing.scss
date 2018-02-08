@@ -23,7 +23,13 @@
     }
   }
 
-  &:focus,
+
+  &:focus {
+    background-color: #eee;
+    color: #000;
+    fill: #000;
+  }
+
   &:hover {
     background-color: #ec0000;
     border-color: #ec0000;

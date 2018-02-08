@@ -1,7 +1,7 @@
 import {
     initialize,
     setZoom
-} from '../../../src/map/components/map/zoomControls';
+} from '../../../src/map/services/zoomControls';
 
 /* istanbul ignore next */
 (function () {

@@ -1,4 +1,4 @@
-import { initialize, panTo, getCurrentLocation } from '../../../src/map/components/map/panControls';
+import { initialize, panTo, getCurrentLocation } from '../../../src/map/services/panControls';
 
 /* istanbul ignore next */
 (function () {

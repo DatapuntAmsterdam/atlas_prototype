@@ -1,4 +1,4 @@
-import ACTIONS from '../../../shared/actions';
+import ACTIONS from '../../shared/actions';
 
 export const getCurrentLocation = (leafletMap) => {
   const center = leafletMap.getCenter();

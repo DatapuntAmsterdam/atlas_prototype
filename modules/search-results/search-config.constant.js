@@ -120,13 +120,13 @@
                     label_singular: 'Gebied',
                     label_plural: 'Gebieden',
                     features: [
-                        'gebieden/grootstedelijkgebied',
-                        'gebieden/unesco',
-                        'gebieden/stadsdeel',
-                        'gebieden/gebiedsgerichtwerken',
-                        'gebieden/buurtcombinatie',
+                        'gebieden/bouwblok',
                         'gebieden/buurt',
-                        'gebieden/bouwblok'
+                        'gebieden/buurtcombinatie',
+                        'gebieden/gebiedsgerichtwerken',
+                        'gebieden/stadsdeel',
+                        'gebieden/grootstedelijkgebied',
+                        'gebieden/unesco'
                     ],
                     subtypes: {
                         grootstedelijkgebied: 'grootstedelijk gebied',

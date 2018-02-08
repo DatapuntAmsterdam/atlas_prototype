@@ -1,4 +1,4 @@
-import ACTIONS from '../../../shared/actions';
+import ACTIONS from '../../shared/actions';
 
 import * as panControls from './panControls';
 import {

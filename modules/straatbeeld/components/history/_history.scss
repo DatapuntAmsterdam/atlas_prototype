@@ -34,6 +34,13 @@
     right: 4px;
   }
 
+  &:focus {
+    outline: none;
+    background-color: $secondary-gray10;
+    color: $primary-dark;
+    fill: $primary-dark;
+  }
+
   &:hover {
     border-color: $primary-contrast;
     background-color: $primary-contrast;

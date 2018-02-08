@@ -81,7 +81,16 @@
     padding: 4px;
     width: 100%;
 
-    &:focus,
+    &:focus {
+      background-color: #eee;
+      color: #000;
+
+      .map-panel__heading-icon,
+      .map-panel__toggle-icon {
+        fill: #000;
+      }
+    }
+
     &:hover {
       background-color: #EC0000;
       color: #FFFFFF;
@@ -91,6 +100,7 @@
         fill: #FFFFFF;
       }
     }
+
   }
 
   &__toggle-icon {
@@ -180,12 +190,17 @@
     padding: 4px;
     width: 24px !important;
 
-    &:focus,
+    &:focus {
+      background-color: #eee;
+      color: #000;
+    }
+
     &:hover {
       background-color: #EC0000;
       border-color: #EC0000;
       color: #FFFFFF;
     }
+
   }
 
   .leaflet-control-zoom-in {

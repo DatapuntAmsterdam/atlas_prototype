@@ -23,6 +23,7 @@ export default function fetchPano(location) {
     })
     .then((response) => ({
       id: response.pano_id,
+      heading: response.heading,
       url: response.url
     }));
 }

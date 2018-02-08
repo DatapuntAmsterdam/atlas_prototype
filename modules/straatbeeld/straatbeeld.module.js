@@ -3,6 +3,7 @@
 
     angular
         .module('dpStraatbeeld', [
-            'dpShared'
+            'dpShared',
+            'ngAria'
         ]);
 })();
