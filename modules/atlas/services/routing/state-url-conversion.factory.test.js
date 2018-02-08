@@ -1,4 +1,4 @@
-import DRAW_TOOL_CONFIG from '../../../../src/map/services/draw-tool/draw-tool-config';
+import { DRAWING_MODE } from '../../../../src/map/services/draw-tool/draw-tool-config';
 
 describe('The state url conversion definition', function () {
     let stateUrlConversion,
@@ -54,7 +54,7 @@ describe('The state url conversion definition', function () {
                     zoom: 11,
                     overlays: [],
                     isLoading: false,
-                    drawingMode: DRAW_TOOL_CONFIG.DRAWING_MODE.NONE,
+                    drawingMode: DRAWING_MODE.NONE,
                     highlight: true,
                     shapeMarkers: 0,
                     shapeDistanceTxt: '',
@@ -157,7 +157,7 @@ describe('The state url conversion definition', function () {
                     shapeMarkers: 0,
                     shapeDistanceTxt: '',
                     shapeAreaTxt: '',
-                    drawingMode: DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW
+                    drawingMode: DRAWING_MODE.DRAW
                 };
                 let newState = {};
 
@@ -172,7 +172,7 @@ describe('The state url conversion definition', function () {
 
                 // only drawingMode
                 oldState = {
-                    drawingMode: DRAW_TOOL_CONFIG.DRAWING_MODE.NONE
+                    drawingMode: DRAWING_MODE.NONE
                 };
                 newState = {};
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import drawToolConfig from '../../services/draw-tool/draw-tool-config';
+import { DRAWING_MODE } from '../../services/draw-tool/draw-tool-config';
 
 import IconMeasure from '../../../../public/images/icon-measure.svg';
 
 import './_toggle-drawing.scss';
 
 const ToggleDrawing = ({ drawingMode, shapeMarkers, toggleDrawing }) => {
-  const title = drawingMode !== drawToolConfig.DRAWING_MODE.NONE ? 'Eindig' :
+  const title = drawingMode !== DRAWING_MODE.NONE ? 'Eindig' :
     (shapeMarkers > 0 ? 'Opnieuw' : 'Begin');
   const label = title === 'Begin' ? '' : title;
 

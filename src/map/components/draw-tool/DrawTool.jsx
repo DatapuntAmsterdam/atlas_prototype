@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './_draw-tool.scss';
-import drawToolConfig from '../../services/draw-tool/draw-tool-config';
+import { MARKERS_LEFT_WARNING, MAX_MARKERS } from '../../services/draw-tool/draw-tool-config';
 import ToggleDrawing from '../toggle-drawing/ToggleDrawing';
 import ShapeSummary from '../shape-summary/ShapeSummary';
 import PointsAvailable from '../points-available/PointsAvailable';
@@ -15,7 +15,7 @@ const DrawTool = ({
   shapeMarkers,
   toggleDrawing
 }) => {
-  const markersLeft = drawToolConfig.MAX_MARKERS - shapeMarkers;
+  const markersLeft = MAX_MARKERS - shapeMarkers;
   return (
     <section className="draw-tool">
       <ToggleDrawing
@@ -24,7 +24,7 @@ const DrawTool = ({
         toggleDrawing={toggleDrawing}
       />
       {
-        !isEnabled() && shapeMarkers === 2
+        !isEnabled && shapeMarkers === 2
         &&
         <ShapeSummary
           shapeDistanceTxt={shapeDistanceTxt}
@@ -32,8 +32,8 @@ const DrawTool = ({
         />
       }
       {
-        markersLeft <= drawToolConfig.MARKERS_LEFT_WARNING &&
-        isEnabled() &&
+        markersLeft <= MARKERS_LEFT_WARNING &&
+        isEnabled &&
         <PointsAvailable
           markersLeft={markersLeft}
           drawingMode={drawingMode}
@@ -45,7 +45,7 @@ const DrawTool = ({
 
 DrawTool.propTypes = {
   drawingMode: PropTypes.string.isRequired,
-  isEnabled: PropTypes.func.isRequired,
+  isEnabled: PropTypes.bool.isRequired,
   onClearDrawing: PropTypes.func.isRequired,
   shapeDistanceTxt: PropTypes.string.isRequired,
   shapeMarkers: PropTypes.number.isRequired,

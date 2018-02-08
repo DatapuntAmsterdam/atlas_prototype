@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { toggleMapFullscreen } from '../../../shared/ducks/ui/ui';
 
+import LeafletDraw from '../../containers/leaflet-draw/LeafletDrawContainer';
 import DrawTool from '../../containers/draw-tool/DrawToolContainer';
 import ToggleFullscreen from '../../components/toggle-fullscreen/ToggleFullscreen';
 
@@ -18,6 +19,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 
 const MapContainer = (props) => (
   <section className="map">
+    <LeafletDraw />
     <DrawTool />
     <ToggleFullscreen
       isFullscreen={props.isFullscreen}

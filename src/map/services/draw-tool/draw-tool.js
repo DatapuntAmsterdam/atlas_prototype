@@ -1,16 +1,19 @@
-// TODO: R: clean file, overly complex and contains state
-
 /* eslint-disable no-use-before-define,no-underscore-dangle */
 /* global L */
-
 import defer from 'lodash.defer';
 import isEqual from 'lodash.isequal';
 import debounce from 'lodash.debounce';
 
 import { isBusy, start } from '../suppress/suppress';
-import drawToolConfig from './draw-tool-config';
+import {
+  DRAWING_MODE,
+  MAX_MARKERS,
+  LeafletEditConfig,
+  LeafletFormat,
+  LeafletDrawConfig
+} from './draw-tool-config';
 
-  // holds all information about the state of the shape being created or edited
+// holds all information about the state of the shape being created or edited
 const DEFAULTS = {
   isConsistent: true,
   type: null,
@@ -19,7 +22,7 @@ const DEFAULTS = {
   markersPrev: [],
   markersEdit: [],
   deleteMarker: {},
-  markersMaxCount: drawToolConfig.MAX_MARKERS,
+  markersMaxCount: MAX_MARKERS,
   area: 0,
   areaTxt: '',
   distance: 0,
@@ -32,9 +35,9 @@ export let currentShape = { ...DEFAULTS };  // eslint-disable-line import/no-mut
 const shapeInfo = {};
 updateShapeInfo(currentShape); // initialise to initial current shape
 
-  // holds all information of the leaflet.draw drawing and editing structures
-const drawTool = {
-  drawingMode: drawToolConfig.DRAWING_MODE.NONE,
+// holds all information of the leaflet.draw drawing and editing structures
+export const drawTool = {
+  drawingMode: DRAWING_MODE.NONE,
   drawnItems: null,
   drawShapeHandler: null,
   editShapeHandler: null,
@@ -58,6 +61,7 @@ export function initialize(map, onFinish, onDrawingMode, onUpdateShape) {
 
   registerDrawEvents();
   registerMapEvents();
+  return currentShape;
 }
 
 // triggered when a polygon has finished drawing or editing
@@ -123,13 +127,13 @@ function createPolygon(layer) {
 // Called when a polygon is finished (end draw or end edit)
 function finishPolygon() {
   currentShape.markersEdit = [];
-  if (drawTool.drawingMode === drawToolConfig.DRAWING_MODE.EDIT && !currentShape.isConsistent) {
+  if (drawTool.drawingMode === DRAWING_MODE.EDIT && !currentShape.isConsistent) {
     setPolygon([...currentShape.markersPrev]); // restore previous polygon
     updateShape();
   }
   setPolygon(currentShape.markers);
   // Silently change the drawing mode
-  setDrawingMode(drawToolConfig.DRAWING_MODE.NONE);
+  setDrawingMode(DRAWING_MODE.NONE);
   onFinishPolygon();
 }
 
@@ -144,13 +148,13 @@ function setDrawingMode(drawingMode) {
 // Initialisation of the draw tool, initialise drawing and register required objects
 // in the drawTool object
 function initDrawTool(map) {
-  L.drawLocal.format = drawToolConfig.format;
+  L.drawLocal.format = LeafletFormat;
 
   drawTool.map = map;
   drawTool.drawnItems = new L.FeatureGroup();
-  drawTool.drawShapeHandler = new L.Draw.Polygon(drawTool.map, drawToolConfig.draw.polygon);
+  drawTool.drawShapeHandler = new L.Draw.Polygon(drawTool.map, LeafletDrawConfig.polygon);
 
-  const editConfig = { ...drawToolConfig.edit };
+  const editConfig = { ...LeafletEditConfig };
   editConfig.featureGroup = drawTool.drawnItems;
   const editToolbar = new L.EditToolbar(editConfig);
 
@@ -178,7 +182,7 @@ function enforceLimits() {
 
 // Auto close polygon when in drawing mode and max markers has been reached
 function autoClose() {
-  if (drawTool.drawingMode === drawToolConfig.DRAWING_MODE.DRAW &&
+  if (drawTool.drawingMode === DRAWING_MODE.DRAW &&
     currentShape.markers.length === currentShape.markersMaxCount) {
     defer(() => disable());
   }
@@ -188,7 +192,7 @@ function autoClose() {
 function handleDrawEvent(eventName, e) {
   const handlers = {
     // Triggered when the user has chosen to draw a particular vector or marker
-    DRAWSTART: () => setDrawingMode(drawToolConfig.DRAWING_MODE.DRAW),
+    DRAWSTART: () => setDrawingMode(DRAWING_MODE.DRAW),
 
     // Triggered when a vertex is created on a polyline or polygon
     DRAWVERTEX: bindLastDrawnMarker,
@@ -200,7 +204,7 @@ function handleDrawEvent(eventName, e) {
     },
 
     // Triggered when the user starts edit mode by clicking the edit tool button
-    EDITSTART: () => setDrawingMode(drawToolConfig.DRAWING_MODE.EDIT),
+    EDITSTART: () => setDrawingMode(DRAWING_MODE.EDIT),
 
     EDITVERTEX: editVertex,
 
@@ -262,9 +266,9 @@ function registerMapEvents() {
     }
 
     // In edit mode => disable()
-    if (drawTool.drawingMode === drawToolConfig.DRAWING_MODE.EDIT) {
+    if (drawTool.drawingMode === DRAWING_MODE.EDIT) {
       disable();
-    } else if (drawTool.drawingMode !== drawToolConfig.DRAWING_MODE.DRAW && currentShape.layer) {
+    } else if (drawTool.drawingMode !== DRAWING_MODE.DRAW && currentShape.layer) {
       // If not in Draw or EDIT mode and a polygon exists
       // then the current polygon gets deleted
       // Note: In draw mode the click on map adds a new marker
@@ -292,7 +296,7 @@ function toggle() {
 
 export function isEnabled() {
   // isEnabled => shape is being created or being edited
-  return drawTool.drawingMode !== drawToolConfig.DRAWING_MODE.NONE;
+  return drawTool.drawingMode !== DRAWING_MODE.NONE;
 }
 
 // start draw or edit mode for current layer or start create mode for new shape
@@ -311,7 +315,7 @@ export function enable() {
 // end of draw or edit mode => in create mode complete shape, in edit mode save shape
 export function disable() {
   if (isEnabled()) {
-    if (drawTool.drawingMode === drawToolConfig.DRAWING_MODE.DRAW) {
+    if (drawTool.drawingMode === DRAWING_MODE.DRAW) {
       if (currentShape.markers.length > 1) {
         // Close the polyline between the first and last points
         drawTool.drawShapeHandler.completeShape();
@@ -322,7 +326,7 @@ export function disable() {
       drawTool.editShapeHandler.save(); // Save the layer geometries
       drawTool.editShapeHandler.disable();
     }
-    setDrawingMode(drawToolConfig.DRAWING_MODE.NONE);
+    setDrawingMode(DRAWING_MODE.NONE);
   }
 }
 
@@ -330,13 +334,13 @@ export function disable() {
 // that has been drawn
 export function cancel() {
   if (isEnabled()) {
-    if (drawTool.drawingMode === drawToolConfig.DRAWING_MODE.DRAW) {
+    if (drawTool.drawingMode === DRAWING_MODE.DRAW) {
       drawTool.drawShapeHandler.disable();
     } else {
       drawTool.editShapeHandler.disable();
     }
     // Silently change the drawing mode
-    setDrawingMode(drawToolConfig.DRAWING_MODE.NONE);
+    setDrawingMode(DRAWING_MODE.NONE);
   }
 }
 
@@ -385,8 +389,8 @@ function updateShape() {
   currentShape.area = area;
   currentShape.areaTxt = L.GeometryUtil.readableArea(
     area,
-    drawToolConfig.draw.polygon.metric,
-    drawToolConfig.draw.polygon.precision
+    LeafletDrawConfig.polygon.metric,
+    LeafletDrawConfig.polygon.precision
   );
   currentShape.distance = distance;
   if (distance >= DISTANCE_IN_KILOMETERS) {

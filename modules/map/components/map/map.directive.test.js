@@ -1,4 +1,4 @@
-import drawToolConfig from '../../../../src/map/services/draw-tool/draw-tool-config';
+import { DRAWING_MODE } from '../../../../src/map/services/draw-tool/draw-tool-config';
 
 describe('The dp-map directive', () => {
     let $compile,
@@ -541,7 +541,7 @@ describe('The dp-map directive', () => {
 
     describe('draw state', () => {
         it('should set the draw mode to none when drawing and editing are not active', () => {
-            mockedMapState.drawingMode = drawToolConfig.DRAWING_MODE.NONE;
+            mockedMapState.drawingMode = DRAWING_MODE.NONE;
 
             const directive = getDirective(mockedMapState, mockedMarkers);
             const element = directive.find('.qa-map-container');
@@ -550,7 +550,7 @@ describe('The dp-map directive', () => {
         });
 
         it('should set the draw mode to draw when drawing is active', () => {
-            mockedMapState.drawingMode = drawToolConfig.DRAWING_MODE.DRAW;
+            mockedMapState.drawingMode = DRAWING_MODE.DRAW;
 
             const directive = getDirective(mockedMapState, mockedMarkers);
             const element = directive.find('.qa-map-container');
@@ -559,7 +559,7 @@ describe('The dp-map directive', () => {
         });
 
         it('should set the draw mode to draw when editing is active', () => {
-            mockedMapState.drawingMode = drawToolConfig.DRAWING_MODE.EDIT;
+            mockedMapState.drawingMode = DRAWING_MODE.EDIT;
 
             const directive = getDirective(mockedMapState, mockedMarkers);
             const element = directive.find('.qa-map-container');
