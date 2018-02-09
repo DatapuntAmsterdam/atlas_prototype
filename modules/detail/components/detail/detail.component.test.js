@@ -338,7 +338,7 @@ describe('the dp-detail component', () => {
                 naam: 'naam'
             }
         });
-        expect(store.dispatch).toHaveBeenCalledTimes(2);
+        expect(store.dispatch).toHaveBeenCalledTimes(3);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_DETAIL,
             payload: {
@@ -349,6 +349,10 @@ describe('the dp-detail component', () => {
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.DETAIL_FULLSCREEN,
             payload: false
+        });
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: ACTIONS.MAP_PAN,
+            payload: [51.123, 3.123]
         });
 
         // Change the endpoint
@@ -362,7 +366,7 @@ describe('the dp-detail component', () => {
                 something: -90
             }
         });
-        expect(store.dispatch).toHaveBeenCalledTimes(4);
+        expect(store.dispatch).toHaveBeenCalledTimes(6);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_DETAIL,
             payload: {
@@ -373,6 +377,10 @@ describe('the dp-detail component', () => {
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.DETAIL_FULLSCREEN,
             payload: false
+        });
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: ACTIONS.MAP_PAN,
+            payload: [51.123, 3.123]
         });
     });
 
@@ -401,7 +409,7 @@ describe('the dp-detail component', () => {
                 naam: 'naam'
             }
         });
-        expect(store.dispatch).toHaveBeenCalledTimes(4);
+        expect(store.dispatch).toHaveBeenCalledTimes(6);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.SHOW_DETAIL,
             payload: {
@@ -412,6 +420,11 @@ describe('the dp-detail component', () => {
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.DETAIL_FULLSCREEN,
             payload: false
+        });
+        
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: ACTIONS.MAP_PAN,
+            payload: [51.123, 3.123]
         });
     });
 
