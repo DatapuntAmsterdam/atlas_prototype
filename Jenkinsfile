@@ -135,11 +135,15 @@ if (BRANCH == "master") {
     node {
         stage('Test') {
             tryStep "Test", {
-                sh "docker-compose up --build test-lint"
+                parallel 'test-lint':{
+                    sh "docker-compose up --build test-lint"
+                }, 'test-uni':{
+                    sh "docker-compose up --build test-unit"
+                }
             }
         }
     }
-    
+
     node {
         stage('Deploy on Bakkie') {
             tryStep "building bakkie", {
