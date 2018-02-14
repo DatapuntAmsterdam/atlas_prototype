@@ -132,17 +132,30 @@ if (BRANCH == "master") {
         }
     }
 }  else {
-    node {
-        stage('Test') {
-            tryStep "Test", {
-                parallel 'test-lint':{
-                    sh "docker-compose up --build test-lint"
-                }, 'test-uni':{
-                    sh "docker-compose up --build test-unit"
-                }
+    parallel 'integration-tests':{
+        stage('integration-tests') {
+            node {
+                sh "docker-compose up --build test-lint"
+            }
+        }
+    }, 'functional-tests':{
+        stage('functional-tests') {
+            node{
+                sh "docker-compose up --build test-unit"
             }
         }
     }
+    // node {
+    //     stage('Test') {
+    //         tryStep "Test", {
+    //             parallel 'test-lint':{
+    //                 sh "docker-compose up --build test-lint"
+    //             }, 'test-uni':{
+    //                 sh "docker-compose up --build test-unit"
+    //             }
+    //         }
+    //     }
+    // }
 
     node {
         stage('Deploy on Bakkie') {
