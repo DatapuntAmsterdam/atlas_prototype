@@ -132,7 +132,14 @@ if (BRANCH == "master") {
         }
     }
 }  else {
-
+    node {
+        stage('Test') {
+            tryStep "Test", {
+                sh "docker-compose up --build test-lint"
+            }
+        }
+    }
+    
     node {
         stage('Deploy on Bakkie') {
             tryStep "building bakkie", {
