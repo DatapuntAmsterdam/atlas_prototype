@@ -14,7 +14,8 @@ pipeline {
         }
         stage('Unit') {
           steps {
-            sh "docker-compose up --build test-unit"
+            // sh "docker-compose up --build test-unit"
+            echo 'Skip'
           }
         }
         stage('Visual E2E') {
@@ -32,18 +33,17 @@ pipeline {
         }
         stage('Aria E2E') {
           steps {
-            // echo 'Skip'
-            sh "docker-compose up --build test-e2e-aria"
+            echo 'Skip'
+            // sh "docker-compose up --build test-e2e-aria"
           }
         }
       }
     }
     stage('Build A') {
       steps {
-        echo 'foo'
-        sh '
-          echo "multiline";
-        '
+        sh "docker.build -t build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}" +
+              "--shm-size 1G " +
+              "--build-arg BUILD_ENV=acc "
       }
     }
     stage('Deploy on Bakkie') {
