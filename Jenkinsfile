@@ -20,7 +20,8 @@ pipeline {
         }
         stage('Functional E2E') {
           steps {
-            sh "docker-compose up --build test-e2e-functional"
+            // sh "docker-compose up --build test-e2e-functional"
+            sh 'echo "Failing"; exit 1;'
           }
         }
         stage('Aria E2E') {
