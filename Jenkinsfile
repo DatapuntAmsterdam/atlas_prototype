@@ -36,6 +36,25 @@ pipeline {
         echo 'foo'
       }
     }
+    stage('Deploy on Bakkie') {
+        when { not { branch 'master' } }
+
+        steps {
+          echo "Bakkie deploy"
+            // sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
+        }
+    }
+    stage('Master only') {
+      when { branch 'master' }
+        steps {
+          echo "Master stage echo"
+        }
+    }
+
+    stage('Waiting for approval') {
+        //slackSend channel: '#ci-channel', color: 'warning', message: 'City Data is waiting for Production Release - please confirm'
+        input "Deploy to Production?"
+    }
   }
   post {
     always {
