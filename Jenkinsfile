@@ -2,6 +2,7 @@ pipeline {
   agent any
   stages {
     stage('Test') {
+      failFast true
       parallel {
         stage('Linting') {
           steps {
@@ -50,10 +51,19 @@ pipeline {
           echo "Master stage echo"
         }
     }
-
     stage('Waiting for approval') {
-        //slackSend channel: '#ci-channel', color: 'warning', message: 'City Data is waiting for Production Release - please confirm'
-        input "Deploy to Production?"
+        input {
+            message "Deploy to production?"
+            ok "Yes, deploy"
+        }
+        steps {
+            echo "Okay, moving on"
+        }
+    }
+    stage('Deploy P') {
+        steps {
+            echo "Deploying P"
+        }
     }
   }
   post {
