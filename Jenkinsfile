@@ -8,14 +8,24 @@ pipeline {
             sh "docker-compose up --build test-lint"
           }
         }
-        stage('test par 1') {
+        stage('Unit') {
           steps {
-            sh 'echo "success 2"'
+            sh "docker-compose up --build test-unit"
           }
         }
-        stage('Test par 2') {
+        stage('Visual E2E') {
           steps {
-            echo 'Wootwoot'
+            sh "docker-compose up --build test-e2e-visual"
+          }
+        }
+        stage('Functional E2E') {
+          steps {
+            sh "docker-compose up --build test-e2e-functional"
+          }
+        }
+        stage('Aria E2E') {
+          steps {
+            sh "docker-compose up --build test-e2e-aria"
           }
         }
       }
