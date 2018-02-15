@@ -16,18 +16,21 @@ pipeline {
         }
         stage('Visual E2E') {
           steps {
-            sh "docker-compose up --build test-e2e-visual"
+            // sh "docker-compose up --build test-e2e-visual"
+            echo 'Skip'
           }
         }
         stage('Functional E2E') {
           steps {
             // sh "docker-compose up --build test-e2e-functional"
-            sh 'echo "Failing"; exit 1;'
+            // sh 'echo "Failing"; exit 1;'
+            echo 'Skip'
           }
         }
         stage('Aria E2E') {
           steps {
-            sh "docker-compose up --build test-e2e-aria"
+            echo 'Skip'
+            // sh "docker-compose up --build test-e2e-aria"
           }
         }
       }
