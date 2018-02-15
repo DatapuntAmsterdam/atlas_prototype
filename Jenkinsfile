@@ -29,8 +29,8 @@ pipeline {
         }
         stage('Aria E2E') {
           steps {
-            echo 'Skip'
-            // sh "docker-compose up --build test-e2e-aria"
+            // echo 'Skip'
+            sh "docker-compose up --build test-e2e-aria"
           }
         }
       }
