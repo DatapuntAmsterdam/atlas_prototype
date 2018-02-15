@@ -3,9 +3,9 @@ pipeline {
   stages {
     stage('Test') {
       parallel {
-        stage('Test') {
+        stage('Linting') {
           steps {
-            sh 'echo "success!"'
+            sh "docker-compose up --build test-lint"
           }
         }
         stage('test par 1') {
