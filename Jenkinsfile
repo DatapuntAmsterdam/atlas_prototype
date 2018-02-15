@@ -1,6 +1,9 @@
 pipeline {
   agent any
   stages {
+    stage('Build') {
+
+    }
     stage('Test') {
       failFast true
       parallel {
@@ -35,9 +38,12 @@ pipeline {
         }
       }
     }
-    stage('Stage2') {
+    stage('Build A') {
       steps {
         echo 'foo'
+        sh '
+          echo "multiline";
+        '
       }
     }
     stage('Deploy on Bakkie') {
@@ -48,13 +54,20 @@ pipeline {
             // sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
         }
     }
-    stage('Master only') {
-      when { branch 'master' }
+    stage('Deploy A (Master only)') {
+        when { branch 'master' }
+        steps {
+          echo "Deploying A"
+        }
+    }
+    stage('Build P (Master only)') {
+        when { branch 'master' }
         steps {
           echo "Master stage echo"
         }
     }
-    stage('Waiting for approval') {
+    stage('Waiting for approval (Master only)') {
+        when { branch 'master' }
         input {
             message "Deploy to production?"
             ok "Yes, deploy"
@@ -63,7 +76,8 @@ pipeline {
             echo "Okay, moving on"
         }
     }
-    stage('Deploy P') {
+    stage('Deploy P (Master only)') {
+        when { branch 'master' }
         steps {
             echo "Deploying P"
         }
