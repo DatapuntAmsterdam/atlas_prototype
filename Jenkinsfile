@@ -38,7 +38,7 @@ pipeline {
     }
     stage('Build A') {
       steps {
-        sh "docker.build -t build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}" +
+        sh "docker build -t build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}" +
               "--shm-size 1G " +
               "--build-arg BUILD_ENV=acc "
       }
