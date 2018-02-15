@@ -1,169 +1,28 @@
-#!groovy
-
-def tryStep(String message, Closure block, Closure tearDown = null) {
-    try {
-        block()
+pipeline {
+    agent any
+    stages {
+        stage('Test') {
+            steps {
+                sh 'echo "Fail!"; exit 1'
+            }
+        }
     }
-    catch (Throwable t) {
-        //slackSend message: "${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}", channel: '#ci-channel', color: 'danger'
-
-        throw t
-    }
-    finally {
-        if (tearDown) {
-            tearDown()
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
         }
     }
 }
-
-
-node {
-    stage("Checkout") {
-        checkout scm
-    }
-
-    stage("Build image") {
-        tryStep "build", {
-            withCredentials([[$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE', variable: 'PASSWORD_EMPLOYEE'],
-                             [$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE_PLUS', variable: 'PASSWORD_EMPLOYEE_PLUS']]) {
-                if (!PASSWORD_EMPLOYEE?.trim()) {
-                    error("PASSWORD_EMPLOYEE missing")
-                }
-                if (!PASSWORD_EMPLOYEE_PLUS?.trim()) {
-                    error("PASSWORD_EMPLOYEE_PLUS missing")
-                }
-                def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}",
-                    "--shm-size 1G " +
-                    "--build-arg BUILD_ENV=acc --build-arg PASSWORD_EMPLOYEE=${PASSWORD_EMPLOYEE} " +
-                    "--build-arg PASSWORD_EMPLOYEE_PLUS=${PASSWORD_EMPLOYEE_PLUS} .")
-                image.push()
-            }
-        }
-    }
-}
-
-
-String BRANCH = "${env.BRANCH_NAME}"
-
-if (BRANCH == "master") {
-
-    node {
-        stage('Push acceptance image') {
-            tryStep "image tagging", {
-                def image = docker.image("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}")
-                image.pull()
-                image.push("acceptance")
-            }
-        }
-    }
-
-    node {
-        stage("Deploy to ACC") {
-            tryStep "deployment", {
-                build job: 'Subtask_Openstack_Playbook',
-                    parameters: [
-                        [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-                        [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml'],
-                    ]
-            }
-        }
-    }
-
-    node {
-        stage('Build and Push preproduction image') {
-            tryStep "image tagging", {
-                withCredentials([[$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE', variable: 'PASSWORD_EMPLOYEE'],
-                                 [$class: 'StringBinding', credentialsId: 'PASSWORD_EMPLOYEE_PLUS', variable: 'PASSWORD_EMPLOYEE_PLUS']]) {
-                    if (!PASSWORD_EMPLOYEE?.trim()) {
-                        error("PASSWORD_EMPLOYEE missing")
-                    }
-                    if (!PASSWORD_EMPLOYEE_PLUS?.trim()) {
-                        error("PASSWORD_EMPLOYEE_PLUS missing")
-                    }
-                    def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}-preproduction",
-                        "--shm-size 1G " +
-                        "--build-arg PASSWORD_EMPLOYEE=${PASSWORD_EMPLOYEE} " +
-                        "--build-arg PASSWORD_EMPLOYEE_PLUS=${PASSWORD_EMPLOYEE_PLUS} .")
-
-                    image.push("preproduction")
-                    image.push()
-                }
-            }
-        }
-    }
-
-    node {
-        stage("Deploy to PRE-Production") {
-            tryStep "deployment", {
-                build job: 'Subtask_Openstack_Playbook',
-                    parameters: [
-                        [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-                        [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client-pre.yml'],
-                    ]
-            }
-        }
-    }
-
-    stage('Waiting for approval') {
-        //slackSend channel: '#ci-channel', color: 'warning', message: 'City Data is waiting for Production Release - please confirm'
-        input "Deploy to Production?"
-    }
-
-    node {
-        stage('Push production image') {
-            tryStep "image tagging", {
-                def image = docker.image("build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER}-preproduction")
-                image.pull()
-                image.push("production")
-                image.push("latest")
-            }
-        }
-    }
-
-    node {
-        stage("Deploy") {
-            tryStep "deployment", {
-                build job: 'Subtask_Openstack_Playbook',
-                    parameters: [
-                        [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
-                        [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml'],
-                    ]
-            }
-        }
-    }
-}  else {
-    parallel 'integration-tests':{
-        stage('integration-tests') {
-            node {
-                sh "docker-compose up --build test-lint"
-            }
-        }
-    }, 'functional-tests':{
-        stage('functional-tests') {
-            node{
-                sh "docker-compose up --build test-unit"
-            }
-        }
-    }
-    // node {
-    //     stage('Test') {
-    //         tryStep "Test", {
-    //             parallel 'test-lint':{
-    //                 sh "docker-compose up --build test-lint"
-    //             }, 'test-uni':{
-    //                 sh "docker-compose up --build test-unit"
-    //             }
-    //         }
-    //     }
-    // }
-
-    node {
-        stage('Deploy on Bakkie') {
-            tryStep "building bakkie", {
-                sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
-            }
-        }
-    }
-
-}
-
