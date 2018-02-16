@@ -43,71 +43,71 @@ pipeline {
     stage('Build A') {
       steps {
         sh "docker build -t ${IMAGE_BASE}:${env.BUILD_NUMBER} " +
-              "--shm-size 1G " +
-              "--build-arg BUILD_ENV=acc " +
-              "."
+          "--shm-size 1G " +
+          "--build-arg BUILD_ENV=acc " +
+          "."
       }
     }
     stage('Deploy Bakkie') {
-        when { not { branch 'master' } }
-        steps {
-          sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
-        }
+      when { not { branch 'master' } }
+      steps {
+        sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
+      }
     }
     stage('Deploy A (Master only)') {
-        when { branch 'master' }
-        steps {
-            sh "docker tag " +
-              "${IMAGE_BASE}:${env.BUILD_NUMBER} " +
-              "${IMAGE_BASE}:acceptance"
-            sh "docker push ${IMAGE_BASE}:${env.BUILD_NUMBER}"
-            sh "docker push ${IMAGE_BASE}:acceptance"
-            build job: 'Subtask_Openstack_Playbook', parameters: [
-              [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-              [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
-            ]
-        }
+      when { branch 'master' }
+      steps {
+        sh "docker tag " +
+          "${IMAGE_BASE}:${env.BUILD_NUMBER} " +
+          "${IMAGE_BASE}:acceptance"
+        sh "docker push ${IMAGE_BASE}:${env.BUILD_NUMBER}"
+        sh "docker push ${IMAGE_BASE}:acceptance"
+        build job: 'Subtask_Openstack_Playbook', parameters: [
+          [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
+          [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
+        ]
+      }
     }
     stage('Build P (Master only)') {
-        when { branch 'master' }
-        steps {
-          // NOTE BUILD_ENV intentionaly not set
-          sh "docker build -t ${IMAGE_BASE}:production " +
-              "--shm-size 1G " +
-              "."
-          sh "docker push ${IMAGE_BASE}:production"
-        }
+      when { branch 'master' }
+      steps {
+        // NOTE BUILD_ENV intentionaly not set
+        sh "docker build -t ${IMAGE_BASE}:production " +
+            "--shm-size 1G " +
+            "."
+        sh "docker push ${IMAGE_BASE}:production"
+      }
     }
     stage('Deploy pre P (Master only)') {
-        when { branch 'master' }
-        steps {
-            build job: 'Subtask_Openstack_Playbook', parameters: [
-              [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-              [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client-pre.yml']
-            ]
-        }
+      when { branch 'master' }
+      steps {
+        build job: 'Subtask_Openstack_Playbook', parameters: [
+          [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
+          [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client-pre.yml']
+        ]
+      }
     }
     stage('Waiting for approval (Master only)') {
-        when {
-          beforeAgent true
-          branch 'master'
-        }
-        input {
-            message "Deploy to production?"
-            ok "Yes, deploy"
-        }
-        steps {
-            echo "Okay, moving on"
-        }
+      when {
+        beforeAgent true
+        branch 'master'
+      }
+      input {
+        message "Deploy to production?"
+        ok "Yes, deploy"
+      }
+      steps {
+        echo "Okay, moving on"
+      }
     }
     stage('Deploy P (Master only)') {
-        when { branch 'master' }
-        steps {
-            build job: 'Subtask_Openstack_Playbook', parameters: [
-              [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
-              [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
-            ]
-        }
+      when { branch 'master' }
+      steps {
+        build job: 'Subtask_Openstack_Playbook', parameters: [
+          [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
+          [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
+        ]
+      }
     }
   }
   post {
@@ -122,7 +122,11 @@ pipeline {
 
     failure {
       echo 'This will run only if failed'
-      slackSend(channel: 'ci-channel', color: 'danger', message: '${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}')
+      slackSend(
+        channel: 'ci-channel',
+        color: 'danger',
+        message: "${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}"
+      )
     }
 
     unstable {
@@ -132,8 +136,6 @@ pipeline {
     changed {
       echo 'This will run only if the state of the Pipeline has changed'
       echo 'For example, if the Pipeline was previously failing but is now successful'
-
     }
-
   }
 }
