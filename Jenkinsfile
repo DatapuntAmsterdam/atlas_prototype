@@ -48,8 +48,8 @@ pipeline {
         when { not { branch 'master' } }
 
         steps {
-          echo "Bakkie deploy"
-            // sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
+          // echo "Bakkie deploy"
+          sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
         }
     }
     stage('Deploy A (Master only)') {
