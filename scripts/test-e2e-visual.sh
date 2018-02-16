@@ -10,9 +10,5 @@ do
     sleep $(( NEXT_WAIT_TIME++ ))
 done
 
-
-
-PATH=./node_modules/.bin/:$PATH
-# NODE_ENV=test babel-node $(pwd)/test/visual-regression.js
-
-NODE_ENV=test jest --config=jest.visual.config.js --runInBand
+NODE_ENV=test ./node_modules/.bin/jest \
+    --config=jest.visual.config.js

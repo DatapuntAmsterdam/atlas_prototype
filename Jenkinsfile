@@ -47,8 +47,8 @@ pipeline {
         }
         stage('Aria E2E') {
           steps {
-            // echo 'Skip'
             sh 'docker-compose up --build --exit-code-from test-e2e-aria test-e2e-aria'
+            // echo 'Skip'
           }
         }
       }
