@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
     IMAGE_BASE = "build.datapunt.amsterdam.nl:5000/atlas/app"
+    IMAGE_ACC = "${IMAGE_BASE}:acceptance"
   }
   stages {
     stage('Test') {
@@ -9,6 +10,8 @@ pipeline {
       parallel {
         stage('Linting') {
           steps {
+            echo "$IMAGE_BASE"
+            echo "$IMAGE_ACC"
             sh "docker-compose up --build test-lint"
             // echo 'Skip'
           }
