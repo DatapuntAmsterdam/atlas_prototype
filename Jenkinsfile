@@ -10,18 +10,19 @@ pipeline {
         stage('Linting') {
           steps {
             sh "docker-compose up --build test-lint"
+            // echo 'Skip'
           }
         }
         stage('Unit') {
           steps {
-            // sh "docker-compose up --build test-unit"
-            echo 'Skip'
+            sh "docker-compose up --build test-unit"
+            // echo 'Skip'
           }
         }
         stage('Visual E2E') {
           steps {
-            // sh "docker-compose up --build test-e2e-visual"
-            echo 'Skip'
+            sh "docker-compose up --build test-e2e-visual"
+            // echo 'Skip'
           }
         }
         stage('Functional E2E') {
@@ -47,19 +48,15 @@ pipeline {
               "."
       }
     }
-    stage('Deploy on Bakkie') {
+    stage('Deploy Bakkie') {
         when { not { branch 'master' } }
-
         steps {
-          echo "Bakkie deploy"
-          // sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
+          sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
         }
     }
-    // stage('Deploy A (Master only)') {
-    stage('Build & deploy A') {
-        // when { branch 'master' }
+    stage('Deploy A (Master only)') {
+        when { branch 'master' }
         steps {
-            echo "Deploying A"
             sh "docker tag " +
               "${IMAGE_BASE}:${env.BUILD_NUMBER} " +
               "${IMAGE_BASE}:acceptance"
@@ -71,22 +68,23 @@ pipeline {
             ]
         }
     }
-    // stage('Buid P (Master only)') {
-    stage('Build P') {
-        // when { branch 'master' }
+    stage('Build P (Master only)') {
+        when { branch 'master' }
         steps {
-          echo "Build P"
-          // // NOTE BUILD_ENV intentionaly not set
-          // sh "docker build -t ${IMAGE_BASE}:production-test " +
-          //     "--shm-size 1G " +
-          //     "."
-          // sh "docker push ${IMAGE_BASE}:production-test"
+          // NOTE BUILD_ENV intentionaly not set
+          sh "docker build -t ${IMAGE_BASE}:production " +
+              "--shm-size 1G " +
+              "."
+          sh "docker push ${IMAGE_BASE}:production"
         }
     }
     stage('Deploy pre P (Master only)') {
         when { branch 'master' }
         steps {
-          echo "Pre prod deploy"
+            build job: 'Subtask_Openstack_Playbook', parameters: [
+              [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
+              [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client-pre.yml']
+            ]
         }
     }
     stage('Waiting for approval (Master only)') {
@@ -105,7 +103,10 @@ pipeline {
     stage('Deploy P (Master only)') {
         when { branch 'master' }
         steps {
-            echo "Deploying P"
+            build job: 'Subtask_Openstack_Playbook', parameters: [
+              [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
+              [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
+            ]
         }
     }
   }
@@ -120,6 +121,7 @@ pipeline {
 
     failure {
       echo 'This will run only if failed'
+      slackSend(channel: 'ci-channel', color: 'danger', message: '${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}')
     }
 
     unstable {
