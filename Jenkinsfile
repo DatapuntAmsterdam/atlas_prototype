@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    IMAGE_BASE = "build.datapunt.amsterdam.nl:5000/atlas/app"
+  }
   stages {
     stage('Test') {
       failFast true
@@ -38,7 +41,7 @@ pipeline {
     }
     stage('Build A') {
       steps {
-        sh "docker build -t build.datapunt.amsterdam.nl:5000/atlas/app:${env.BUILD_NUMBER} " +
+        sh "docker build -t ${IMAGE_BASE}:${env.BUILD_NUMBER} " +
               "--shm-size 1G " +
               "--build-arg BUILD_ENV=acc " +
               "."
@@ -48,24 +51,46 @@ pipeline {
         when { not { branch 'master' } }
 
         steps {
-          // echo "Bakkie deploy"
-          sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
+          echo "Bakkie deploy"
+          // sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
         }
     }
-    stage('Deploy A (Master only)') {
-        when { branch 'master' }
+    // stage('Deploy A (Master only)') {
+    stage('Build & deploy A') {
+        // when { branch 'master' }
         steps {
           echo "Deploying A"
+          sh "docker tag " +
+            "${IMAGE_BASE}:${env.BUILD_NUMBER} " +
+            "${IMAGE_BASE}:acceptance"
+          sh "docker push ${IMAGE_BASE}:${env.BUILD_NUMBER}"
+          sh "docker push ${IMAGE_BASE}:acceptance"
+          build job: 'Subtask_Openstack_Playbook', parameters: [
+            [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
+            [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml'],
+          ]
+    }
+    stage('Build P' {
+        // when { branch 'master' }
+        steps {
+          // NOTE BUILD_ENV intentionaly not set
+          sh "docker build -t ${IMAGE_BASE}:production-test " +
+              "--shm-size 1G " +
+              "."
+          sh "docker push ${IMAGE_BASE}:production-test"
         }
     }
-    stage('Build P (Master only)') {
+    stage('Deploy pre P (Master only)') {
         when { branch 'master' }
         steps {
-          echo "Master stage echo"
+          echo "Pre prod deploy"
         }
     }
     stage('Waiting for approval (Master only)') {
-        when { branch 'master' }
+        when {
+          beforeAgent true
+          branch 'master'
+        }
         input {
             message "Deploy to production?"
             ok "Yes, deploy"
@@ -84,22 +109,18 @@ pipeline {
   post {
     always {
       echo 'This will always run'
-
     }
 
     success {
       echo 'This will run only if successful'
-
     }
 
     failure {
       echo 'This will run only if failed'
-
     }
 
     unstable {
       echo 'This will run only if the run was marked as unstable'
-
     }
 
     changed {
