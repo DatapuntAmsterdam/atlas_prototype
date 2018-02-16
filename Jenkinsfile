@@ -2,7 +2,9 @@ pipeline {
   agent any
   environment {
     IMAGE_BASE = "build.datapunt.amsterdam.nl:5000/atlas/app"
-    IMAGE_ACC = "${IMAGE_BASE}:acceptance"
+    IMAGE_BUILD = "${IMAGE_BASE}:${env.BUILD_NUMBER}"
+    IMAGE_ACCEPTANCE = "${IMAGE_BASE}:acceptance"
+    IMAGE_PRODUCTION = "${IMAGE_BASE}:production"
   }
   stages {
     stage('Test') {
@@ -11,7 +13,9 @@ pipeline {
         stage('Linting') {
           steps {
             echo "$IMAGE_BASE"
-            echo "$IMAGE_ACC"
+            echo "$IMAGE_BUILD"
+            echo "$IMAGE_ACCEPTANCE"
+            echo "$IMAGE_PRODUCTION"
             sh "docker-compose up --build test-lint"
             // echo 'Skip'
           }
@@ -45,7 +49,7 @@ pipeline {
     }
     stage('Build A') {
       steps {
-        sh "docker build -t ${IMAGE_BASE}:${env.BUILD_NUMBER} " +
+        sh "docker build -t ${IMAGE_BUILD} " +
           "--shm-size 1G " +
           "--build-arg BUILD_ENV=acc " +
           "."
@@ -60,11 +64,9 @@ pipeline {
     stage('Deploy A (Master only)') {
       when { branch 'master' }
       steps {
-        sh "docker tag " +
-          "${IMAGE_BASE}:${env.BUILD_NUMBER} " +
-          "${IMAGE_BASE}:acceptance"
-        sh "docker push ${IMAGE_BASE}:${env.BUILD_NUMBER}"
-        sh "docker push ${IMAGE_BASE}:acceptance"
+        sh "docker tag ${IMAGE_BUILD} ${IMAGE_ACCEPTANCE}"
+        sh "docker push ${IMAGE_BUILD}"
+        sh "docker push ${IMAGE_ACCEPTANCE}"
         build job: 'Subtask_Openstack_Playbook', parameters: [
           [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
           [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
@@ -75,10 +77,10 @@ pipeline {
       when { branch 'master' }
       steps {
         // NOTE BUILD_ENV intentionaly not set
-        sh "docker build -t ${IMAGE_BASE}:production " +
+        sh "docker build -t ${IMAGE_PRODUCTION} " +
             "--shm-size 1G " +
             "."
-        sh "docker push ${IMAGE_BASE}:production"
+        sh "docker push ${IMAGE_PRODUCTION}"
       }
     }
     stage('Deploy pre P (Master only)') {
