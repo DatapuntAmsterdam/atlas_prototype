@@ -11,7 +11,6 @@ pipeline {
     stage('Cleanup') {
       steps {
         // TODO remove
-        sh "echo 'Failing'; exit 1;"
         sh 'docker ps'
         sh 'docker-compose down'
         sh 'docker-compose stop storybook'
@@ -35,8 +34,8 @@ pipeline {
         }
         stage('Visual E2E') {
           steps {
-            sh 'docker-compose up --build --exit-code-from test-e2e-visual test-e2e-visual'
-            // echo 'Skip'
+            // sh 'docker-compose up --build --exit-code-from test-e2e-visual test-e2e-visual'
+            echo 'Skip'
           }
         }
         stage('Functional E2E') {
@@ -48,8 +47,8 @@ pipeline {
         }
         stage('Aria E2E') {
           steps {
-            echo 'Skip'
-            // sh 'docker-compose up --build --exit-code-from test-e2e-aria test-e2e-aria'
+            // echo 'Skip'
+            sh 'docker-compose up --build --exit-code-from test-e2e-aria test-e2e-aria'
           }
         }
       }
@@ -136,8 +135,11 @@ pipeline {
 
     failure {
       echo 'This will run only if failed'
-      echo "${env.JOB_NAME}: failure ${env.BUILD_URL}"
-      slackSend(channel: 'ci-channel', color: 'danger', message: "${env.JOB_NAME}: failure ${env.BUILD_URL}")
+      // slackSend(
+      //   channel: 'ci-channel',
+      //   color: 'danger',
+      //   message: "${env.JOB_NAME}: failure ${env.BUILD_URL}"
+      // )
     }
 
     unstable {
