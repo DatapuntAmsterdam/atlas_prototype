@@ -5,13 +5,15 @@ pipeline {
     IMAGE_BUILD = "${IMAGE_BASE}:${env.BUILD_NUMBER}"
     IMAGE_ACCEPTANCE = "${IMAGE_BASE}:acceptance"
     IMAGE_PRODUCTION = "${IMAGE_BASE}:production"
+    IMAGE_LATEST = "${IMAGE_BASE}:latest"
   }
   stages {
     stage('Cleanup') {
       steps {
-
         // TODO remove
         sh 'docker ps'
+        sh 'docker stop 110cbf6c7ea5'
+        sh 'docker rm 110cbf6c7ea5'
         sh 'docker-compose down'
         sh 'docker ps'
       }
@@ -21,10 +23,6 @@ pipeline {
       parallel {
         stage('Linting') {
           steps {
-            echo "$IMAGE_BASE"
-            echo "$IMAGE_BUILD"
-            echo "$IMAGE_ACCEPTANCE"
-            echo "$IMAGE_PRODUCTION"
             sh "docker-compose up --build test-lint"
             // echo 'Skip'
           }
@@ -89,12 +87,14 @@ pipeline {
         sh "docker build -t ${IMAGE_PRODUCTION} " +
             "--shm-size 1G " +
             "."
-        sh "docker push ${IMAGE_PRODUCTION}"
       }
     }
     stage('Deploy pre P (Master only)') {
       when { branch 'master' }
       steps {
+        sh "docker tag ${IMAGE_PRODUCTION} ${IMAGE_LATEST}"
+        sh "docker push ${IMAGE_PRODUCTION}"
+        sh "docker push ${IMAGE_LATEST}"
         build job: 'Subtask_Openstack_Playbook', parameters: [
           [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
           [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client-pre.yml']
@@ -136,11 +136,7 @@ pipeline {
 
     failure {
       echo 'This will run only if failed'
-      slackSend(
-        channel: 'ci-channel',
-        color: 'danger',
-        message: "${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}"
-      )
+      slackSend(channel: 'ci-channel', color: 'danger', message: "${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}")
     }
 
     unstable {
