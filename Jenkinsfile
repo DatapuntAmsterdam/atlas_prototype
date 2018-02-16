@@ -12,6 +12,8 @@ pipeline {
       steps {
         // TODO remove
         sh 'docker ps'
+        sh 'docker stop eb48a97669a8'
+        sh 'docker rm eb48a97669a8'
         sh 'docker-compose down'
         sh 'docker-compose stop storybook'
         sh 'docker ps'
