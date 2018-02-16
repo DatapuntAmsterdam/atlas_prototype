@@ -41,9 +41,9 @@ pipeline {
         }
         stage('Functional E2E') {
           environment {
-            ENV USERNAME_EMPLOYEE=atlas.employee@amsterdam.nl
-            ENV USERNAME_EMPLOYEE_PLUS=atlas.employee.plus@amsterdam.nl
-            PASSWORD_EMPLOYEE = credentials('PASSWORD_EMPLOYEE')
+            USERNAME_EMPLOYEE      = 'atlas.employee@amsterdam.nl'
+            USERNAME_EMPLOYEE_PLUS = 'atlas.employee.plus@amsterdam.nl'
+            PASSWORD_EMPLOYEE      = credentials('PASSWORD_EMPLOYEE')
             PASSWORD_EMPLOYEE_PLUS = credentials('PASSWORD_EMPLOYEE_PLUS')
           }
           steps {
