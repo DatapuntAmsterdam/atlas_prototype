@@ -11,9 +11,8 @@ pipeline {
     stage('Cleanup') {
       steps {
         // TODO remove
+        sh "echo 'Failing'; exit 1;"
         sh 'docker ps'
-        sh 'docker stop eb48a97669a8'
-        sh 'docker rm eb48a97669a8'
         sh 'docker-compose down'
         sh 'docker-compose stop storybook'
         sh 'docker ps'
@@ -137,7 +136,8 @@ pipeline {
 
     failure {
       echo 'This will run only if failed'
-      slackSend(channel: 'ci-channel', color: 'danger', message: '${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}')
+      echo "${env.JOB_NAME}: failure ${env.BUILD_URL}"
+      slackSend(channel: 'ci-channel', color: 'danger', message: "${env.JOB_NAME}: failure ${env.BUILD_URL}")
     }
 
     unstable {
