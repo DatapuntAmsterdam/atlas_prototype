@@ -21,25 +21,25 @@ pipeline {
       parallel {
         stage('Linting') {
           steps {
-            sh "docker-compose up --build test-lint --exit-code-from test-lint"
+            sh "docker-compose up --build --exit-code-from test-lint test-lint"
             // echo 'Skip'
           }
         }
         stage('Unit') {
           steps {
-            sh "docker-compose up --build test-unit --exit-code-from test-unit"
+            sh "docker-compose up --build --exit-code-from test-unit test-unit"
             // echo 'Skip'
           }
         }
         stage('Visual E2E') {
           steps {
-            sh "docker-compose up --build test-e2e-visual --exit-code-from test-e2e-visual"
+            sh "docker-compose up --build --exit-code-from test-e2e-visual test-e2e-visual"
             // echo 'Skip'
           }
         }
         stage('Functional E2E') {
           steps {
-            // sh "docker-compose up --build test-e2e-functional --exit-code-from test-e2e-functional"
+            // sh "docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional"
             // sh 'echo "Failing"; exit 1;'
             echo 'Skip'
           }
@@ -47,7 +47,7 @@ pipeline {
         stage('Aria E2E') {
           steps {
             echo 'Skip'
-            // sh "docker-compose up --build test-e2e-aria --exit-code-from test-e2e-aria"
+            // sh "docker-compose up --build --exit-code-from test-e2e-aria test-e2e-aria"
           }
         }
       }
