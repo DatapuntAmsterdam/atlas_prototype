@@ -137,7 +137,7 @@ pipeline {
 
     failure {
       echo 'This will run only if failed'
-      slackSend(channel: 'ci-channel', color: 'danger', message: "${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}")
+      slackSend(channel: 'ci-channel', color: 'danger', message: '${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}')
     }
 
     unstable {
