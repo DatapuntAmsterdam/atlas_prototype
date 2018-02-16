@@ -41,13 +41,14 @@ pipeline {
         }
         stage('Functional E2E') {
           environment {
+            ENV USERNAME_EMPLOYEE=atlas.employee@amsterdam.nl
+            ENV USERNAME_EMPLOYEE_PLUS=atlas.employee.plus@amsterdam.nl
             PASSWORD_EMPLOYEE = credentials('PASSWORD_EMPLOYEE')
             PASSWORD_EMPLOYEE_PLUS = credentials('PASSWORD_EMPLOYEE_PLUS')
           }
           steps {
-            echo "$USERNAME_EMPLOYEE"
             sh 'docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional'
-            echo 'Skip'
+            // echo 'Skip'
           }
         }
         stage('Aria E2E') {
