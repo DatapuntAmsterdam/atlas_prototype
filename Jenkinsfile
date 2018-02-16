@@ -67,17 +67,19 @@ pipeline {
           sh "docker push ${IMAGE_BASE}:acceptance"
           build job: 'Subtask_Openstack_Playbook', parameters: [
             [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-            [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml'],
+            [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
           ]
     }
+    // stage('Buid P (Master only)') {
     stage('Build P' {
         // when { branch 'master' }
         steps {
-          // NOTE BUILD_ENV intentionaly not set
-          sh "docker build -t ${IMAGE_BASE}:production-test " +
-              "--shm-size 1G " +
-              "."
-          sh "docker push ${IMAGE_BASE}:production-test"
+          echo "Build P"
+          // // NOTE BUILD_ENV intentionaly not set
+          // sh "docker build -t ${IMAGE_BASE}:production-test " +
+          //     "--shm-size 1G " +
+          //     "."
+          // sh "docker push ${IMAGE_BASE}:production-test"
         }
     }
     stage('Deploy pre P (Master only)') {
