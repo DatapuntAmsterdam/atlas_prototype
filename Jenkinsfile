@@ -59,19 +59,20 @@ pipeline {
     stage('Build & deploy A') {
         // when { branch 'master' }
         steps {
-          echo "Deploying A"
-          sh "docker tag " +
-            "${IMAGE_BASE}:${env.BUILD_NUMBER} " +
-            "${IMAGE_BASE}:acceptance"
-          sh "docker push ${IMAGE_BASE}:${env.BUILD_NUMBER}"
-          sh "docker push ${IMAGE_BASE}:acceptance"
-          build job: 'Subtask_Openstack_Playbook', parameters: [
-            [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-            [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
-          ]
+            echo "Deploying A"
+            sh "docker tag " +
+              "${IMAGE_BASE}:${env.BUILD_NUMBER} " +
+              "${IMAGE_BASE}:acceptance"
+            sh "docker push ${IMAGE_BASE}:${env.BUILD_NUMBER}"
+            sh "docker push ${IMAGE_BASE}:acceptance"
+            build job: 'Subtask_Openstack_Playbook', parameters: [
+              [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
+              [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-client.yml']
+            ]
+        }
     }
     // stage('Buid P (Master only)') {
-    stage('Build P' {
+    stage('Build P') {
         // when { branch 'master' }
         steps {
           echo "Build P"
