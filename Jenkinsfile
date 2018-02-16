@@ -8,10 +8,13 @@ pipeline {
   }
   stages {
     stage('Cleanup') {
-      // TODO remove
-      sh 'docker ps'
-      sh 'docker-compose down'
-      sh 'docker ps'
+      steps {
+
+        // TODO remove
+        sh 'docker ps'
+        sh 'docker-compose down'
+        sh 'docker ps'
+      }
     }
     stage('Test') {
       failFast true
