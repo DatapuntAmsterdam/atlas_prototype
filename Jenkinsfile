@@ -15,6 +15,7 @@ pipeline {
         sh 'docker-compose down'
         sh 'docker-compose stop storybook'
         sh 'docker ps'
+        // sh "echo 'Failing'; exit 1;"
       }
     }
     stage('Test') {
@@ -40,8 +41,7 @@ pipeline {
         }
         stage('Functional E2E') {
           steps {
-            // sh 'docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional'
-            // sh "echo 'Failing'; exit 1;"
+            sh 'docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional'
             echo 'Skip'
           }
         }
