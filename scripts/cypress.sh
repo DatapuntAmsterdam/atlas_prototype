@@ -1,4 +1,5 @@
 #!/bin/bash
+# TODO remove
 cypress open --env \
 "USERNAME_EMPLOYEE=$USERNAME_EMPLOYEE,"\
 "USERNAME_EMPLOYEE_PLUS=$USERNAME_EMPLOYEE_PLUS,"\

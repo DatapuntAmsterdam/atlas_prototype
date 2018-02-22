@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { login, logout } from '../services/authentication';
-describe.skip('data search module', () => {
+describe('data search module', () => {
   before(() => {
     login();
   });
@@ -9,7 +9,7 @@ describe.skip('data search module', () => {
     logout();
   });
 
-  it('user should be to type and see suggestions', () => {
+  it('user should see suggestions', () => {
     // open the autocomplete panel and select the first dataset option and route the correct address
     cy.visit('/');
     cy.get('input.js-search-input').trigger('focus');
@@ -24,7 +24,7 @@ describe.skip('data search module', () => {
     });
   });
 
-  describe('user should be to type and submit', () => {
+  describe('user should be able to submit', () => {
     beforeEach(() => {
       cy.server()
       cy.route('https://acc.api.data.amsterdam.nl/catalogus/api/3/action/*').as('getResults')
