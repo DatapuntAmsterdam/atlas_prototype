@@ -114,10 +114,9 @@ pipeline {
       //   beforeAgent true
       //   branch 'master'
       // }
-      //
-      // timeout(time:1, unit:'DAYS') {
-      timeout(time:2, unit:'MINUTES') {
-          input message:'Approve deployment?', submitter: 'it-ops'
+      // timeout(time:5, unit:'DAYS') {
+      options {
+        timeout(time:2, unit:'MINUTES')
       }
       input {
         message "Deploy to production?"
