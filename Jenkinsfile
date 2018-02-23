@@ -114,7 +114,7 @@ pipeline {
         beforeAgent true
         branch 'master'
       }
-      timeout(time:5, unit:'DAYS') {
+      timeout(time:5, unit:'DAYS')
       input {
         message "Deploy to production?"
         ok "Yes, deploy"
