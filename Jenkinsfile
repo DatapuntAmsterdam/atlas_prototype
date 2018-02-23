@@ -27,7 +27,7 @@ pipeline {
       }
     }
     stage('Test') {
-      failFast true
+      // failFast true // fail if one of the parallel stages fail
       parallel {
         stage('Linting') {
           steps {
@@ -55,8 +55,8 @@ pipeline {
             PASSWORD_EMPLOYEE_PLUS = credentials('PASSWORD_EMPLOYEE_PLUS')
           }
           steps {
-            sh 'docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional'
-            // echo 'Skip'
+            // sh 'docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional'
+            echo 'Skip'
           }
         }
         stage('Aria E2E') {
