@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  options {
+    timeout(time: 1, unit: 'HOURS')
+  }
   environment {
     IMAGE_BASE = "build.datapunt.amsterdam.nl:5000/atlas/app"
     IMAGE_BUILD = "${IMAGE_BASE}:${env.BUILD_NUMBER}"
@@ -107,9 +110,14 @@ pipeline {
       }
     }
     stage('Waiting for approval (Master only)') {
-      when {
-        beforeAgent true
-        branch 'master'
+      // when {
+      //   beforeAgent true
+      //   branch 'master'
+      // }
+      //
+      // timeout(time:1, unit:'DAYS') {
+      timeout(time:2, unit:'MINUTES') {
+          input message:'Approve deployment?', submitter: 'it-ops'
       }
       input {
         message "Deploy to production?"
@@ -132,7 +140,7 @@ pipeline {
   post {
     always {
       echo 'This will always run'
-      sh 'docker-compose down'
+      sh 'docker-compose down -v'
     }
 
     success {
