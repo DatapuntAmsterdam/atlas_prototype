@@ -20,12 +20,13 @@ pipeline {
         // sh "echo 'Failing'; exit 1;"
       }
     }
-    stage('Deploy Bakkie') {
-      when { not { branch 'master' } }
-      steps {
-        sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
-      }
-    }
+    // TODO reactivate
+    // stage('Deploy Bakkie') {
+    //   when { not { branch 'master' } }
+    //   steps {
+    //     sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
+    //   }
+    // }
     stage('Test') {
       // failFast true // fail if one of the parallel stages fail
       parallel {
