@@ -21,6 +21,12 @@ pipeline {
         // sh "echo 'Failing'; exit 1;"
       }
     }
+    stage('Deploy Bakkie') {
+      when { not { branch 'master' } }
+      steps {
+        sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
+      }
+    }
     stage('Test') {
       failFast true
       parallel {
@@ -70,12 +76,6 @@ pipeline {
           "."
       }
     }
-    stage('Deploy Bakkie') {
-      when { not { branch 'master' } }
-      steps {
-        sh "scripts/bakkie.sh ${env.BRANCH_NAME}"
-      }
-    }
     stage('Deploy A (Master only)') {
       when { branch 'master' }
       steps {
@@ -110,14 +110,11 @@ pipeline {
       }
     }
     stage('Waiting for approval (Master only)') {
-      // when {
-      //   beforeAgent true
-      //   branch 'master'
-      // }
-      // timeout(time:5, unit:'DAYS') {
-      options {
-        timeout(time:2, unit:'MINUTES')
+      when {
+        beforeAgent true
+        branch 'master'
       }
+      timeout(time:5, unit:'DAYS') {
       input {
         message "Deploy to production?"
         ok "Yes, deploy"
