@@ -15,8 +15,7 @@ pipeline {
       steps {
         // TODO remove
         sh 'docker ps'
-        sh 'docker-compose down'
-        sh 'docker-compose stop storybook'
+        sh 'docker-compose down -v'
         sh 'docker ps'
         // sh "echo 'Failing'; exit 1;"
       }
