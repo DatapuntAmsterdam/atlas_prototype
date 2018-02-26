@@ -69,6 +69,7 @@ const isUpdated = (props, prevProps, paths) => {
 };
 
 const update = (dispatch, props, prevProps = {}) => {
+  // Don't just copy this. It's an anti-pattern.
   if (isUpdated(props, prevProps, 'detail.endpoint')) {
     dispatch(getMapDetail(props.detail.endpoint, props.user));
   } else if (isUpdated(props, prevProps, 'detailResult.location')) {
@@ -86,10 +87,12 @@ class MapPreviewPanelContainer extends React.Component {
   }
 
   componentDidMount() {
+    // Don't just copy this. It's an anti-pattern.
     update(this.context.store.dispatch, this.props);
   }
 
   componentDidUpdate(prevProps) {
+    // Don't just copy this. It's an anti-pattern.
     update(this.context.store.dispatch, this.props, prevProps);
   }
 

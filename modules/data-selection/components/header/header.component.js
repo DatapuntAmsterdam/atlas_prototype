@@ -24,6 +24,7 @@
 
         $scope.$watchGroup([
             'vm.state.dataset',
+            'vm.state.geometryFilter',
             'vm.state.view',
             'vm.numberOfRecords'
         ], setHeader);

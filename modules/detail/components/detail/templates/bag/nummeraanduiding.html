@@ -2,7 +2,7 @@
     <!-- nummeraanduiding -->
     <dp-api-call
         partial="bag/nummeraanduiding"
-        endpoint="{{vm.apiData.results._links.self.href}}"
+        endpoint="{{vm.apiData.results.verblijfsobject}}"
         merge="{
             results: {
                 begin_geldigheid: vm.apiData.results.begin_geldigheid,

@@ -1,6 +1,7 @@
+import DRAW_TOOL_CONFIG from '../../../../src/map/services/draw-tool/draw-tool-config';
+
 describe('The state url conversion definition', function () {
     let stateUrlConversion,
-        DRAW_TOOL_CONFIG,
         uriStripper;
 
     beforeEach(function () {
@@ -14,9 +15,8 @@ describe('The state url conversion definition', function () {
         spyOn(uriStripper, 'stripDomain');
         spyOn(uriStripper, 'restoreDomain');
 
-        angular.mock.inject(function (_stateUrlConversion_, _DRAW_TOOL_CONFIG_) {
+        angular.mock.inject(function (_stateUrlConversion_) {
             stateUrlConversion = _stateUrlConversion_;
-            DRAW_TOOL_CONFIG = _DRAW_TOOL_CONFIG_;
         });
     });
 
@@ -55,7 +55,10 @@ describe('The state url conversion definition', function () {
                     overlays: [],
                     isLoading: false,
                     drawingMode: DRAW_TOOL_CONFIG.DRAWING_MODE.NONE,
-                    highlight: true
+                    highlight: true,
+                    shapeMarkers: 0,
+                    shapeDistanceTxt: '',
+                    shapeAreaTxt: ''
                 },
                 ui: {
                     isEmbed: false,
@@ -151,6 +154,9 @@ describe('The state url conversion definition', function () {
                 let oldState = {
                     highlight: false,
                     isLoading: true,
+                    shapeMarkers: 0,
+                    shapeDistanceTxt: '',
+                    shapeAreaTxt: '',
                     drawingMode: DRAW_TOOL_CONFIG.DRAWING_MODE.DRAW
                 };
                 let newState = {};
@@ -158,7 +164,10 @@ describe('The state url conversion definition', function () {
                 stateUrlConversion.post.map(oldState, newState);
                 expect(newState).toEqual({
                     highlight: false,
-                    isLoading: true
+                    isLoading: true,
+                    shapeMarkers: 0,
+                    shapeDistanceTxt: '',
+                    shapeAreaTxt: ''
                 });
 
                 // only drawingMode
@@ -170,7 +179,10 @@ describe('The state url conversion definition', function () {
                 stateUrlConversion.post.map(oldState, newState);
                 expect(newState).toEqual({
                     highlight: undefined,
-                    isLoading: undefined
+                    isLoading: undefined,
+                    shapeMarkers: undefined,
+                    shapeDistanceTxt: undefined,
+                    shapeAreaTxt: undefined
                 });
 
                 // only isLoading
@@ -182,7 +194,10 @@ describe('The state url conversion definition', function () {
                 stateUrlConversion.post.map(oldState, newState);
                 expect(newState).toEqual({
                     highlight: undefined,
-                    isLoading: true
+                    isLoading: true,
+                    shapeMarkers: undefined,
+                    shapeDistanceTxt: undefined,
+                    shapeAreaTxt: undefined
                 });
 
                 // only highlight
@@ -194,7 +209,10 @@ describe('The state url conversion definition', function () {
                 stateUrlConversion.post.map(oldState, newState);
                 expect(newState).toEqual({
                     highlight: true,
-                    isLoading: undefined
+                    isLoading: undefined,
+                    shapeMarkers: undefined,
+                    shapeDistanceTxt: undefined,
+                    shapeAreaTxt: undefined
                 });
 
                 // no map state at all

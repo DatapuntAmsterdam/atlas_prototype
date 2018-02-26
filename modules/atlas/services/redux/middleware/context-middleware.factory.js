@@ -1,3 +1,5 @@
+import DRAW_TOOL_CONFIG from '../../../../../src/map/services/draw-tool/draw-tool-config';
+
 (function () {
     'use strict';
 
@@ -5,9 +7,9 @@
         .module('atlas')
         .factory('contextMiddleware', contextMiddlewareFactory);
 
-    contextMiddlewareFactory.$inject = ['ACTIONS', 'DRAW_TOOL_CONFIG'];
+    contextMiddlewareFactory.$inject = ['ACTIONS'];
 
-    function contextMiddlewareFactory (ACTIONS, DRAW_TOOL_CONFIG) {
+    function contextMiddlewareFactory (ACTIONS) {
         return function (store) {
             return function (next) {
                 /* eslint-disable complexity */

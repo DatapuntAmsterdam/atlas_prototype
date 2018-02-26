@@ -5,9 +5,9 @@
         .module('atlas')
         .factory('mapReducers', mapReducersFactory);
 
-    mapReducersFactory.$inject = ['$rootScope', '$timeout', 'ACTIONS', 'DRAW_TOOL_CONFIG'];
+    mapReducersFactory.$inject = ['$rootScope', '$timeout', 'ACTIONS'];
 
-    function mapReducersFactory ($rootScope, $timeout, ACTIONS, DRAW_TOOL_CONFIG) {
+    function mapReducersFactory ($rootScope, $timeout, ACTIONS) {
         var reducers = {};
 
         reducers[ACTIONS.SHOW_MAP.id] = showMapReducer;
@@ -16,9 +16,6 @@
         reducers[ACTIONS.MAP_PAN.id] = mapPanReducer;
         reducers[ACTIONS.MAP_ZOOM.id] = mapZoomReducer;
         reducers[ACTIONS.MAP_HIGHLIGHT.id] = mapHighlightReducer;
-        reducers[ACTIONS.MAP_START_DRAWING.id] = mapStartDrawingReducer;
-        reducers[ACTIONS.MAP_CLEAR_DRAWING.id] = mapClearDrawingReducer;
-        reducers[ACTIONS.MAP_END_DRAWING.id] = mapEndDrawingReducer;
 
         return reducers;
 
@@ -143,92 +140,6 @@
                     ...state.map,
                     highlight: payload
                 } : state.map
-            };
-        }
-
-        function mapStartDrawingReducer (state, payload) {
-            if (payload !== DRAW_TOOL_CONFIG.DRAWING_MODE.EDIT &&
-                state.dataSelection &&
-                state.dataSelection.geometryFilter &&
-                state.dataSelection.geometryFilter.markers &&
-                state.dataSelection.geometryFilter.markers.length > 0) {
-                state = resetDataSelection(state);
-            }
-
-            return {
-                ...state,
-                map: angular.isObject(state.map) ? {
-                    ...state.map,
-                    drawingMode: payload
-                } : state.map
-            };
-        }
-
-        function mapClearDrawingReducer (state) {
-            return {
-                ...state,
-                map: angular.isObject(state.map) ? {
-                    ...state.map,
-                    geometry: []
-                } : state.map
-            };
-        }
-
-        function mapEndDrawingReducer (state, payload) {
-            const moreThan2Markers = payload && payload.markers && payload.markers.length > 2;
-
-            if (moreThan2Markers) {
-                state = resetDataSelection(state, payload);
-            }
-
-            return {
-                ...state,
-                map: angular.isObject(state.map) ? {
-                    ...state.map,
-                    ...getMap(state, payload)
-                } : state.map,
-                ui: angular.isObject(state.ui) ? {
-                    ...state.ui,
-                    isMapPanelVisible: moreThan2Markers ? false : state.ui.isMapPanelVisible,
-                    isMapFullscreen: moreThan2Markers ? false : state.ui.isMapFullscreen
-                } : state.ui,
-                page: angular.isObject(state.page) ? {
-                    ...state.page,
-                    name: moreThan2Markers ? null : state.page.name
-                } : state.page
-            };
-        }
-
-        function getMap (state, payload) {
-            const has2Markers = payload && payload.markers && payload.markers.length === 2,
-                moreThan2Markers = payload && payload.markers && payload.markers.length > 2;
-
-            return {
-                drawingMode: DRAW_TOOL_CONFIG.DRAWING_MODE.NONE,
-                geometry: has2Markers ? payload.markers : moreThan2Markers ? [] : state.map.geometry,
-                isLoading: moreThan2Markers ? true : state.map.isLoading
-            };
-        }
-
-        function resetDataSelection (state, payload = {markers: []}) {
-            return {
-                ...state,
-                dataSelection: {
-                    ...{
-                        dataset: 'bag'
-                    },
-                    ...state.dataSelection,
-                    geometryFilter: payload,
-                    page: 1,
-                    isFullscreen: false,
-                    isLoading: true,
-                    view: 'LIST',
-                    markers: [],
-                    // No markers, the data selection goes back to its default state of
-                    // showing all data => make sure it will not trigger a url state
-                    // change
-                    reset: payload.markers.length === 0
-                }
             };
         }
     }

@@ -1,0 +1,8 @@
+@import "../../../shared/styles/config/variables/colors";
+
+.points-available {
+  background-color: $primary-contrast-blue;
+  color: $primary-light;
+  margin-left: 10px;
+  padding: 4px 10px;
+}

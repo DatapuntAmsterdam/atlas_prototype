@@ -1,14 +1,14 @@
+import DRAW_TOOL_CONFIG from '../../../../src/map/services/draw-tool/draw-tool-config';
+
 describe('The state url conversion factory', function () {
-    let stateUrlConverter,
-        DRAW_TOOL_CONFIG;
+    let stateUrlConverter;
 
     describe('The default state', function () {
         beforeEach(function () {
             angular.mock.module('atlas');
 
-            angular.mock.inject(function (_stateUrlConverter_, _DRAW_TOOL_CONFIG_) {
+            angular.mock.inject(function (_stateUrlConverter_) {
                 stateUrlConverter = _stateUrlConverter_;
-                DRAW_TOOL_CONFIG = _DRAW_TOOL_CONFIG_;
             });
         });
 
@@ -23,7 +23,11 @@ describe('The state url conversion factory', function () {
                     zoom: 11,
                     isLoading: false,
                     drawingMode: DRAW_TOOL_CONFIG.DRAWING_MODE.NONE,
-                    highlight: true
+                    highlight: true,
+                    shapeMarkers: 0,
+                    shapeDistanceTxt: '',
+                    shapeAreaTxt: ''
+
                 },
                 mapBaseLayers: {},
                 user: {

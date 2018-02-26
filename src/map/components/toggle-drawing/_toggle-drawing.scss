@@ -1,0 +1,51 @@
+@import "../../../shared/styles/config/variables/colors";
+
+.toggle-drawing {
+  background-color: $primary-light;
+  border: solid 1px $secondary-gray20;
+  box-shadow: 2px 2px 0 0 $secondary-gray40;
+  display: flex;
+  padding: 4px;
+
+  &__icon {
+    display: block;
+    fill: $secondary-gray60;
+    height: 24px;
+    width: 24px;
+  }
+
+  &__label {
+    align-self: center;
+    color: $secondary-gray60;
+    font-family: "Avenir LT W01 85 Heavy";
+    margin: 0 4px;
+
+    &:empty {
+      margin: 0;
+    }
+  }
+
+
+  &:focus {
+    background-color: $secondary-gray10;
+    color: $primary-dark;
+    fill: $primary-dark;
+  }
+
+  &:hover {
+    background-color: $primary-contrast;
+    border-color: $primary-contrast;
+
+    .toggle-drawing__icon,
+    .toggle-drawing__label {
+      color: $primary-light;
+      fill: $primary-light;
+    }
+  }
+
+  .is-embed &,
+  .is-embed-preview &,
+  .is-print-mode & {
+    display: none;
+  }
+}

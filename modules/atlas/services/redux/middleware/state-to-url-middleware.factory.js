@@ -16,11 +16,15 @@
                     // optional attributes)?
                     const vanilla = angular.isString(action.type);
 
+                    const ignoredActions = ['AUTHENTICATE_USER', 'MAP_START_DRAWING',
+                        'MAP_EMPTY_GEOMETRY', 'MAP_UPDATE_SHAPE',
+                        'SET_DATA_SELECTION_GEOMETRY_FILTER', 'RESET_DATA_SELECTION_GEOMETRY_FILTER'];
+
                     // Update the state first
                     const returnValue = next(action);
 
                     // Then update the URL
-                    if ((vanilla || !action.type.ignore) && action.type !== 'AUTHENTICATE_USER') {
+                    if ((vanilla || !action.type.ignore) && !ignoredActions.includes(action.type)) {
                         stateToUrl.update(
                             store.getState(),
                             !vanilla && Boolean(action.type.replace)

@@ -1,3 +1,6 @@
+$map-panel-heading-height: 33px;
+$map-panel-offset: 130px;
+
 .map-panel {
   background-color: $primary-light;
   border: solid 1px $secondary-gray20;
@@ -7,16 +10,18 @@
   flex-direction: column;
   font-family: "Avenir LT W01 55 Roman";
   left: 8px;
+  max-height: calc(100% - #{$dashboard-heading-height} - #{$map-panel-offset});
   max-width: 444px;
   min-width: 285px;
   overflow: hidden;
-  position: fixed;
-  width: 28%;
+  position: absolute;
+  width: 28vw;
   z-index: 100;
 
   &--collapsed {
     height: auto;
     min-width: auto;
+    top: auto;
     width: auto;
 
     &:hover {
@@ -122,22 +127,23 @@
   }
 
   .scroll-wrapper {
-    max-height: calc(100vh - #{$dashboard-heading-height} - 130px);
+    max-height: calc(100% - #{$dashboard-heading-height} - #{$map-panel-offset} - #{$map-panel-heading-height});
     overflow-x: hidden;
     overflow-y: auto;
     // NB: Workaround to force smooth scrolling on Chrome
     will-change: transform;
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { //sass-lint:disable-line no-vendor-prefixes
+      // NB: IE doesn't take the height of the parent into account (because 100vh we need to take the site-nav into account 50px)
+      max-height: calc(100vh - #{$dashboard-heading-height} - #{$map-panel-offset} - #{$map-panel-heading-height} - 50px);
+    }
   }
 
-  .is-embed &,
-  .is-embed-preview &,
   .is-print-mode & {
     height: auto;
     max-height: none;
     position: absolute;
-  }
 
-  .is-print-mode & {
     &--collapsed,
     &--has-no-active-layers,
     &--has-just-invisible-layers,

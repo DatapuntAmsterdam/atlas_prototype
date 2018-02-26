@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DrawTool should not render points available if tool is disabled 1`] = `
+<section
+  className="draw-tool"
+>
+  <ToggleDrawing
+    drawingMode="none"
+    shapeMarkers={10}
+    toggleDrawing={[MockFunction]}
+  />
+</section>
+`;
+
+exports[`DrawTool should not render summary when tool is enabled 1`] = `
+<section
+  className="draw-tool"
+>
+  <ToggleDrawing
+    drawingMode="none"
+    shapeMarkers={2}
+    toggleDrawing={[MockFunction]}
+  />
+</section>
+`;
+
+exports[`DrawTool should render points available if near max points 1`] = `
+<section
+  className="draw-tool"
+>
+  <ToggleDrawing
+    drawingMode="none"
+    shapeMarkers={38}
+    toggleDrawing={[MockFunction]}
+  />
+  <PointsAvailable
+    drawingMode="none"
+    markersLeft={2}
+  />
+</section>
+`;
+
+exports[`DrawTool should render summary for 2 points 1`] = `
+<section
+  className="draw-tool"
+>
+  <ToggleDrawing
+    drawingMode="none"
+    shapeMarkers={2}
+    toggleDrawing={[MockFunction]}
+  />
+  <ShapeSummary
+    onClearDrawing={[MockFunction]}
+    shapeDistanceTxt="myDistanceTxt"
+  />
+</section>
+`;
+
+exports[`DrawTool should render toggle drawing 1`] = `
+<section
+  className="draw-tool"
+>
+  <ToggleDrawing
+    drawingMode="none"
+    shapeMarkers={0}
+    toggleDrawing={[MockFunction]}
+  />
+</section>
+`;

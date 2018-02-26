@@ -30,14 +30,26 @@ import { combineReducers } from 'redux';
             const ErrorMessageReducer = $window.reducers.ErrorMessageReducer;
             const PanoPreviewReducer = $window.reducers.PanoPreviewReducer;
             const UiReducer = $window.reducers.UiReducer;
+            const MapReducer = $window.reducers.MapReducer;
+            const DataSelectionReducer = $window.reducers.DataSelectionReducer;
+            const PageReducer = $window.reducers.PageReducer;
+            const StraatbeeldReducer = $window.reducers.StraatbeeldReducer;
             const UserReducer = $window.reducers.UserReducer;
             const newRootReducer = combineReducers({
+                dataSelection: DataSelectionReducer,
+                page: PageReducer,
                 error: ErrorMessageReducer,
+                map: MapReducer,
                 pano: PanoPreviewReducer,
+                straatbeeld: StraatbeeldReducer,
                 ui: UiReducer,
                 user: UserReducer
             });
             const filteredState = {
+                dataSelection: deprecatedState.dataSelection,
+                page: deprecatedState.page,
+                map: deprecatedState.map,
+                straatbeeld: deprecatedState.straatbeeld,
                 ui: deprecatedState.ui,
                 user: deprecatedState.user,
 

@@ -1,20 +1,14 @@
 @import "../shared/styles/config";
 
-@import "components/draw-tool/draw-tool";
 @import "components/map/map";
 @import "components/map/leaflet-draw";
 @import "components/map/cursor";
-@import "components/draw-tool/toggle-drawing-tool/toggle-drawing-tool";
-@import "components/draw-tool/points-available/points-available";
-@import "components/draw-tool/shape-summary/shape-summary";
 @import "services/highlight/highlight-cluster";
-@import "services/draw-tool/draw-tool";
 
 .is-print-mode,
 .is-embed-preview,
 .is-embed {
   @import "components/map/map-print";
-  @import "components/draw-tool/draw-tool-print";
 }
 
 .is-embed {

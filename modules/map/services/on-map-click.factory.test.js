@@ -1,3 +1,5 @@
+import { isBusy } from '../../../src/map/services/suppress/suppress';
+
 describe('The onMapClick factory', () => {
     var $rootScope,
         onMapClick,
@@ -6,7 +8,6 @@ describe('The onMapClick factory', () => {
         drawTool,
         mockedLeafletMap,
         mockState,
-        suppress,
         activeOverlays,
         nearestDetail;
 
@@ -23,13 +24,16 @@ describe('The onMapClick factory', () => {
                 },
                 nearestDetail: {
                     search: angular.noop
+                },
+                drawTool: {
+                    isEnabled: angular.noop
                 }
             }
         );
 
         let L;
 
-        angular.mock.inject((_$rootScope_, _L_, _onMapClick_, _store_, _ACTIONS_, _drawTool_, _suppress_,
+        angular.mock.inject((_$rootScope_, _L_, _onMapClick_, _store_, _ACTIONS_, _drawTool_,
             _activeOverlays_, _nearestDetail_) => {
             $rootScope = _$rootScope_;
             onMapClick = _onMapClick_;
@@ -37,7 +41,6 @@ describe('The onMapClick factory', () => {
             ACTIONS = _ACTIONS_;
             drawTool = _drawTool_;
             L = _L_;
-            suppress = _suppress_;
             activeOverlays = _activeOverlays_;
             nearestDetail = _nearestDetail_;
         });
@@ -61,6 +64,12 @@ describe('The onMapClick factory', () => {
         spyOn(nearestDetail, 'search');
 
         onMapClick.initialize(mockedLeafletMap);
+
+        window.isBusy = isBusy; // eslint-disable-line angular/window-service
+    });
+
+    afterEach(() => {
+        delete window.isBusy; // eslint-disable-line angular/window-service
     });
 
     // Mock the Leaflet click event
@@ -75,7 +84,7 @@ describe('The onMapClick factory', () => {
     }
 
     it('click on map when suppressing is busy it should stop proceeding', () => {
-        spyOn(suppress, 'isBusy').and.returnValue(true);
+        spyOn(window, 'isBusy').and.returnValue(true);
         click();
         expect(drawTool.isEnabled).not.toHaveBeenCalled();
     });

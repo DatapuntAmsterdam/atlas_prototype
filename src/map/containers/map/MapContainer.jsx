@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { toggleMapFullscreen } from '../../../shared/ducks/ui/ui';
 
+import DrawTool from '../../containers/draw-tool/DrawToolContainer';
 import ToggleFullscreen from '../../components/toggle-fullscreen/ToggleFullscreen';
 
 const mapStateToProps = (state) => ({
@@ -17,6 +18,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 
 const MapContainer = (props) => (
   <section className="map">
+    <DrawTool />
     <ToggleFullscreen
       isFullscreen={props.isFullscreen}
       onToggleFullscreen={props.onToggleFullscreen}
@@ -27,6 +29,10 @@ const MapContainer = (props) => (
 
 MapContainer.contextTypes = {
   store: PropTypes.object.isRequired
+};
+
+MapContainer.defaultProps = {
+  geometry: null
 };
 
 MapContainer.propTypes = {

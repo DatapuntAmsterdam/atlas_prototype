@@ -1,17 +1,19 @@
 @import "./map-search-results-category/map-search-results-category";
 @import "./map-search-results-item/map-search-results-item";
 
-.map-search-results {
-  $header-height: 116px;
-  $above-list-height: $map-preview-panel-top + 1px + 33px + $header-height;
-  $below-list-height: 1px + $map-preview-panel-bottom;
+$header-height: 116px;
+$above-list-height: $map-preview-panel-top + 1px + 33px + $header-height;
+$below-list-height: 1px + $map-preview-panel-bottom;
 
+.map-search-results {
   display: flex;
+  flex: 0 1 auto;
   flex-direction: column;
   height: 100%;
 
   &__header {
     height: $header-height;
+    min-height: $header-height;
     position: relative;
 
     &--no-pano {
@@ -70,11 +72,12 @@
   }
 
   &__scroll-wrapper {
-    max-height: calc(100vh - #{$above-list-height + $below-list-height});
+    max-height: calc(100vh - #{$above-list-height + $below-list-height}); //NB: fix for IE
+    min-height: 1px; // NB: firefox & ie fix - https://stackoverflow.com/a/43027202
     overflow-y: auto;
 
     .c-dashboard__body--error & {
-      max-height: calc(100vh - #{$above-list-height + $below-list-height + $dashboard-error-height});
+      max-height: calc(100vh - #{$above-list-height + $below-list-height + $dashboard-error-height}); //NB: fix for IE
     }
 
     .is-embed &,

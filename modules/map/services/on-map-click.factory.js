@@ -1,3 +1,6 @@
+import { isBusy } from '../../../src/map/services/suppress/suppress';
+import { isEnabled } from '../../../src/map/services/draw-tool/draw-tool';
+
 (() => {
     'use strict';
 
@@ -5,10 +8,10 @@
         .module('dpMap')
         .factory('onMapClick', onMapClickFactory);
 
-    onMapClickFactory.$inject = ['$rootScope', 'store', 'ACTIONS', 'drawTool', 'suppress', 'activeOverlays',
+    onMapClickFactory.$inject = ['$rootScope', 'store', 'ACTIONS', 'activeOverlays', '$window',
         'nearestDetail'];
 
-    function onMapClickFactory ($rootScope, store, ACTIONS, drawTool, suppress, activeOverlays,
+    function onMapClickFactory ($rootScope, store, ACTIONS, activeOverlays, $window,
                                 nearestDetail) {
         let location = [];
 
@@ -26,7 +29,8 @@
 
             location = [event.latlng.lat, event.latlng.lng];
 
-            if (!(suppress.isBusy() || state.ui.isEmbedPreview || state.ui.isEmbed || drawTool.isEnabled())) {
+            if (!(isBusy() || state.ui.isEmbedPreview || state.ui.isEmbed ||
+                isEnabled())) {
                 store.dispatch({
                     type: ACTIONS.SET_MAP_CLICK_LOCATION.id,
                     location: {
