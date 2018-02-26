@@ -15,13 +15,10 @@ RUN apt-get update && \
 
 COPY package.json package-lock.json /app/
 
-# Changing git URL because network is blocking git protocol...
-RUN git config --global url."https://".insteadOf git:// && \
-    git config --global url."https://github.com/".insteadOf git@github.com:
-
-
-# Uninstall cypress because it is not used here and installation is sluggish
-# Note: uninstall actually does install (NPM magic)
+# Install all NPM dependencies. Also:
+#  * Changing git URL because network is blocking git protocol...
+#  * Uninstall cypress because it is not used here and installation is sluggish
+#    Note: uninstall actually performs an installation as well (NPM magic)
 RUN git config --global url."https://".insteadOf git:// && \
     git config --global url."https://github.com/".insteadOf git@github.com: && \
     npm --production=false \
