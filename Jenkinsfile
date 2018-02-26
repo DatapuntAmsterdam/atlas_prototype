@@ -49,6 +49,9 @@ pipeline {
           }
         }
         stage('Functional E2E') {
+          agent {
+            docker { image 'cypress/base:8' }
+          }
           environment {
             USERNAME_EMPLOYEE      = 'atlas.employee@amsterdam.nl'
             USERNAME_EMPLOYEE_PLUS = 'atlas.employee.plus@amsterdam.nl'
@@ -57,13 +60,16 @@ pipeline {
           }
           steps {
             // sh 'docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional'
-            echo 'Skip'
+            sh 'docker-compose up --build -d atlas'
+            sh './scripts/test-e2e-functional.sh'
+            sh 'docker-compose down --verbose atlas'
+            // echo 'Skip'
           }
         }
         stage('Aria E2E') {
           steps {
-            sh 'docker-compose up --build --exit-code-from test-e2e-aria test-e2e-aria'
-            // echo 'Skip'
+            // sh 'docker-compose up --build --exit-code-from test-e2e-aria test-e2e-aria'
+            echo 'Skip'
           }
         }
       }
