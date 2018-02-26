@@ -1,0 +1,13 @@
+FROM cypress/base:8
+RUN apt-get update && \
+    apt-get install -y netcat && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /home
+
+RUN npm install cypress
+COPY src /home/src
+COPY test /home/test
+COPY scripts /home/scripts
+COPY cypress.json /home/
+

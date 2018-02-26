@@ -59,10 +59,10 @@ pipeline {
             PASSWORD_EMPLOYEE_PLUS = credentials('PASSWORD_EMPLOYEE_PLUS')
           }
           steps {
-            // sh 'docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional'
-            sh 'docker-compose up --build -d atlas'
-            sh './scripts/test-e2e-functional.sh'
-            sh 'docker-compose down --verbose atlas'
+            sh 'docker-compose up --build --exit-code-from test-e2e-functional test-e2e-functional'
+            // sh 'docker-compose up --build -d atlas'
+            // sh './scripts/test-e2e-functional.sh'
+            // sh 'docker-compose down --verbose atlas'
             // echo 'Skip'
           }
         }
