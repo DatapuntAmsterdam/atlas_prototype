@@ -39,8 +39,8 @@ services:
 
   test-e2e-functional:
     build:
+      dockerfile: Dockerfile-e2e
       context: .
-      target: build-deps
     links:
       - atlas:acc.data.amsterdam.nl
     environment:

@@ -11,15 +11,15 @@ pipeline {
     IMAGE_LATEST = "${IMAGE_BASE}:latest"
   }
   stages {
-    stage('Cleanup') {
-      steps {
-        // TODO remove
-        sh 'docker ps'
-        sh 'docker-compose down -v || true'
-        sh 'docker ps'
-        // sh "echo 'Failing'; exit 1;"
-      }
-    }
+    // stage('Cleanup') {
+    //   steps {
+    //     // TODO remove
+    //     sh 'docker ps'
+    //     sh 'docker-compose down -v || true'
+    //     sh 'docker ps'
+    //     // sh "echo 'Failing'; exit 1;"
+    //   }
+    // }
     // TODO reactivate
     // stage('Deploy Bakkie') {
     //   when { not { branch 'master' } }
