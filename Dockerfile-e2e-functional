@@ -6,9 +6,10 @@ RUN apt-get update && \
 
 WORKDIR /home
 
+COPY package.json package-lock.json /home
 RUN npm install cypress
+
 COPY src /home/src
 COPY test /home/test
 COPY scripts /home/scripts
 COPY cypress.json /home/
-
