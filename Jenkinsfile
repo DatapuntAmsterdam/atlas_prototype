@@ -125,18 +125,16 @@ pipeline {
     }
     stage('Waiting for approval (Master only)') {
       when {
-        beforeAgent true
         branch 'master'
       }
       options {
         timeout(time:5, unit:'DAYS')
       }
-      input {
-        message "Deploy to production?"
-        ok "Yes, deploy"
-      }
       steps {
-        echo "Okay, moving on"
+        script {
+          input "Deploy to Production?"
+          echo "Okay, moving on"
+        }
       }
     }
     stage('Deploy P (Master only)') {
