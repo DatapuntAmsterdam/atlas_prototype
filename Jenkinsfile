@@ -15,7 +15,7 @@ pipeline {
       steps {
         // TODO remove
         sh 'docker ps'
-        sh 'docker-compose down -v'
+        sh 'docker-compose down -v || true'
         sh 'docker ps'
         // sh "echo 'Failing'; exit 1;"
       }
@@ -37,7 +37,7 @@ pipeline {
           }
           post {
             always {
-              sh 'docker-compose down -v'
+              sh 'docker-compose down -v || true'
             }
           }
         }
@@ -48,7 +48,7 @@ pipeline {
           }
           post {
             always {
-              sh 'docker-compose down -v'
+              sh 'docker-compose down -v || true'
             }
           }
         }
@@ -65,7 +65,7 @@ pipeline {
           }
           post {
             always {
-              sh 'docker-compose down -v'
+              sh 'docker-compose down -v || true'
             }
           }
         }
@@ -76,7 +76,7 @@ pipeline {
           }
           post {
             always {
-              sh 'docker-compose down -v'
+              sh 'docker-compose down -v || true'
             }
           }
         }
@@ -152,7 +152,7 @@ pipeline {
   post {
     always {
       echo 'This will always run'
-      sh 'docker-compose down -v'
+      sh 'docker-compose down -v || true'
     }
 
     success {
