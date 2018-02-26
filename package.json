@@ -93,7 +93,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "karma start && NODE_ENV=development jest",
     "test-aria": "babel-node ./test/pa11y.js",
-    "test-lint": "npm run test-eslint",
+    "test-lint": "npm run test-eslint && npm run test-sass",
     "test-eslint": "eslint ./modules/ ./src/",
     "test-sass": "sass-lint -c src/.sass-lint.yml 'src/**/*.scss' --verbose --no-exit && sass-lint -c modules/.sass-lint.yml 'modules/**/*.scss' --verbose --no-exit",
     "test-e2e": "babel-node ./test/e2e.js",

@@ -1,40 +1,5 @@
 @import "styles/config";
 
-@import "styles/base/reset";
-@import "styles/base/typography";
-
-@import "styles/layout/grid";
-@import "styles/layout/offset";
-@import "styles/layout/push-pull";
-@import "styles/layout/quick-pull";
-
-@import "styles/components/button";
-@import "styles/components/header";
-@import "styles/components/link";
-@import "styles/components/list";
-@import "styles/components/list-bulleted";
-@import "styles/components/paragraph";
-@import "styles/components/show-more";
-@import "styles/components/table";
-@import "styles/components/tabs";
-@import "styles/components/tag";
-@import "styles/components/toggle-button";
-
-@import "styles/utilities/aspect-ratio";
-@import "styles/utilities/clearfix";
-@import "styles/utilities/color";
-@import "styles/utilities/display";
-@import "styles/utilities/failliet";
-@import "styles/utilities/height";
-@import "styles/utilities/margin";
-@import "styles/utilities/no-presentation";
-@import "styles/utilities/padding";
-@import "styles/utilities/screen-reader";
-@import "styles/utilities/print";
-@import "styles/utilities/text-align";
-@import "styles/utilities/typography";
-@import "styles/utilities/width";
-
 @import "components/anchor-link/anchor-link";
 @import "components/api-error/api-error";
 @import "components/link-to-page/link-to-page";
@@ -44,18 +9,6 @@
 @import "components/straatbeeld-thumbnail/straatbeeld-thumbnail";
 @import "components/tab-header/tab-header";
 @import "components/video/video";
-
-.is-print-mode {
-  @import "styles/base/reset-print";
-}
-
-.is-embed-preview {
-  @import "styles/base/reset-embed-preview";
-}
-
-.is-embed {
-  @import "styles/base/reset-embed";
-}
 
 .is-print-mode,
 .is-embed-preview,

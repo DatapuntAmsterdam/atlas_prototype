@@ -32,17 +32,17 @@ $clear-button-margin: ($site-header-search-form-height - $button-size) / 2;
     color: $secondary-gray60;
   }
 
-  &:-ms-input-placeholder { /* IE11 */
+  &:-ms-input-placeholder { /* IE11 */ //sass-lint:disable-line no-vendor-prefixes
     @include font-weight($normal-weight);
     color: $secondary-gray60;
   }
 
-  &::-ms-input-placeholder { /* Edge */
+  &::-ms-input-placeholder { /* Edge */ // sass-lint:disable-line no-vendor-prefixes
     // cannot change font attributes in edge here, so we have a lighter text color
     color: $secondary-gray40;
   }
 
-  &::-ms-clear {
+  &::-ms-clear { //sass-lint:disable-line no-vendor-prefixes
     display: none;
   }
 

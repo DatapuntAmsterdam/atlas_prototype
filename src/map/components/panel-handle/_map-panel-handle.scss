@@ -1,8 +1,8 @@
 .map-panel-handle {
   $handle-height: 24px;
 
-  background-color: #FAFAFA;
-  border-top: 2px solid #CCCCCC;
+  background-color: $secondary-gray5;
+  border-top: 2px solid $secondary-gray20;
   margin-top: -2px;
   position: relative;
 
@@ -13,8 +13,8 @@
   &__toggle {
     $border-size: 2px;
 
-    background-color: #FAFAFA;
-    border: $border-size solid #CCCCCC;
+    background-color: $secondary-gray5;
+    border: $border-size solid $secondary-gray20;
     border-bottom: none;
     box-sizing: content-box;
     height: $handle-height;
@@ -28,13 +28,15 @@
     z-index: 10000;
 
     svg {
-      fill: #666666;
+      fill: $secondary-gray60;
       height: $handle-height;
       width: $handle-height;
     }
 
-    &:hover svg {
-      fill: #000000;
+    &:hover {
+      svg {
+        fill: $primary-dark;
+      }
     }
   }
 

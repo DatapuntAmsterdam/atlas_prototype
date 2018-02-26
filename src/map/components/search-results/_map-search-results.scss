@@ -1,5 +1,5 @@
-@import './map-search-results-category/map-search-results-category';
-@import './map-search-results-item/map-search-results-item';
+@import "./map-search-results-category/map-search-results-category";
+@import "./map-search-results-item/map-search-results-item";
 
 .map-search-results {
   $header-height: 116px;
@@ -35,15 +35,15 @@
     }
 
     &-container {
-      background: #666666;
+      background: $secondary-gray60;
       bottom: 16px;
-      color: #ffffff;
+      color: $primary-light;
       margin-right: 16px;
       padding: 8px;
       position: absolute;
       text-align: left;
 
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: $breakpoint-md) {
         padding: 8px 12px;
       }
 
@@ -91,12 +91,12 @@
 
   &__button {
     align-items: center;
-    background-color: #fff;
+    background-color: $primary-light;
+    border: 1px solid $secondary-gray20;
     border-radius: 0;
-    border: 1px solid #cccccc;
-    color: #666666;
+    color: $secondary-gray60;
     display: flex;
-    fill: #666666;
+    fill: $secondary-gray60;
     font-family: "Avenir LT W01 85 Heavy", Arial, sans-serif;
     justify-content: center;
     margin: auto;
@@ -104,16 +104,16 @@
     width: auto;
 
     &:hover {
-      background-color: #EC0000;
-      color: #fff;
-      fill: #fff;
+      background-color: $primary-contrast;
+      color: $primary-light;
+      fill: $primary-light;
     }
 
     &-icon {
       fill: inherit;
       height: 24px;
-      width: 24px;
       margin-right: 5px;
+      width: 24px;
     }
   }
 }

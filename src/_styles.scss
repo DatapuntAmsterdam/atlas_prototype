@@ -1,4 +1,5 @@
-@import "../modules/atlas/styles/config";
+/* SHARED */
+@import "./shared/styles/shared";
 
+/* COMPONENTS */
 @import "./map/map";
-

@@ -1,11 +1,11 @@
 .map-panel {
-  background-color: #FFFFFF;
-  border: solid 1px #CCCCCC;
+  background-color: $primary-light;
+  border: solid 1px $secondary-gray20;
   bottom: 8px;
-  box-shadow: 2px 2px 0 0 #999999;
+  box-shadow: 2px 2px 0 0 $secondary-gray40;
   display: flex;
   flex-direction: column;
-  font-family: 'Avenir LT W01 55 Roman';
+  font-family: "Avenir LT W01 55 Roman";
   left: 8px;
   max-width: 444px;
   min-width: 285px;
@@ -20,7 +20,7 @@
     width: auto;
 
     &:hover {
-      border-color: #EC0000;
+      border-color: $primary-contrast;
     }
 
     .scroll-wrapper {
@@ -30,32 +30,32 @@
 
   &__heading {
     align-items: center;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #999999;
+    background-color: $primary-light;
+    border-bottom: 1px solid $secondary-gray40;
 
     .map-panel--collapsed & {
       border-bottom: none;
 
       &:focus,
       &:hover {
-        background-color: #EC0000;
+        background-color: $primary-contrast;
         cursor: pointer;
 
-        .map-panel__heading-icon,
+        .map-panel__heading-icon, // sass-lint:disable-line nesting-depth
         .map-panel__toggle-icon {
-          fill: #FFFFFF;
+          fill: $primary-light;
         }
       }
     }
   }
 
   &__heading-icon {
-    fill: #666666;
+    fill: $secondary-gray60;
     height: 24px;
     width: 24px;
 
     .map-panel--collapsed & {
-      fill: #666666;
+      fill: $secondary-gray60;
     }
   }
 
@@ -82,34 +82,34 @@
     width: 100%;
 
     &:focus {
-      background-color: #eee;
-      color: #000;
+      background-color: $secondary-gray10;
+      color: $primary-dark;
 
       .map-panel__heading-icon,
       .map-panel__toggle-icon {
-        fill: #000;
+        fill: $primary-dark;
       }
     }
 
     &:hover {
-      background-color: #EC0000;
-      color: #FFFFFF;
+      background-color: $primary-contrast;
+      color: $primary-light;
 
       .map-panel__heading-icon,
       .map-panel__toggle-icon {
-        fill: #FFFFFF;
+        fill: $primary-light;
       }
     }
 
   }
 
   &__toggle-icon {
-    fill: #666666;
+    fill: $secondary-gray60;
     height: 24px;
     width: 24px;
 
     .map-panel--collapsed & {
-      fill: #666666;
+      fill: $secondary-gray60;
     }
 
     .map-panel--collapsed &--expanded {
@@ -122,9 +122,9 @@
   }
 
   .scroll-wrapper {
+    max-height: calc(100vh - #{$dashboard-heading-height} - 130px);
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: calc(100vh - #{$dashboard-heading-height} - 130px);
     // NB: Workaround to force smooth scrolling on Chrome
     will-change: transform;
   }
@@ -135,7 +135,6 @@
     height: auto;
     max-height: none;
     position: absolute;
-    width: auto;
   }
 
   .is-print-mode & {
@@ -178,12 +177,12 @@
 
   .leaflet-control-zoom-in,
   .leaflet-control-zoom-out {
-    background-color: #FFFFFF;
-    border: 1px solid #CCCCCC;
+    background-color: $primary-light;
+    border: 1px solid $secondary-gray20;
     border-radius: 0 !important;
-    box-shadow: 2px 2px 0 0 #999999;
+    box-shadow: 2px 2px 0 0 $secondary-gray40;
     box-sizing: content-box;
-    color: #666666;
+    color: $secondary-gray60;
     height: 24px !important;
     line-height: 22px !important;
     outline: none;
@@ -191,14 +190,14 @@
     width: 24px !important;
 
     &:focus {
-      background-color: #eee;
-      color: #000;
+      background-color: $secondary-gray10;
+      color: $primary-dark;
     }
 
     &:hover {
-      background-color: #EC0000;
-      border-color: #EC0000;
-      color: #FFFFFF;
+      background-color: $primary-contrast;
+      border-color: $primary-contrast;
+      color: $primary-light;
     }
 
   }
@@ -212,13 +211,13 @@
   }
 }
 
-%__toggle {
+%__toggle { // sass-lint:disable-line placeholder-name-format
   align-items: center;
   align-self: center;
-  background-color: #FFFFFF;
-  border: 1px solid #CCCCCC;
+  background-color: $primary-light;
+  border: 1px solid $secondary-gray20;
   border-radius: 50%;
-  content: 'X';
+  content: "X";
   display: flex;
   flex-shrink: 0;
   font-size: 0;

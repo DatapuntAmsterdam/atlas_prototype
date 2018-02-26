@@ -1,14 +1,14 @@
 .c-toggle-drawing-tool {
-  background-color: #FFFFFF;
-  border: 1px solid #CCCCCC;
-  box-shadow: 2px 2px 0 0 #999999;
-  box-sizing: content-box;
-  color: #666666;
   display: flex;
   height: 24px;
   margin: -2px 0 0 -2px;
-  outline: none;
   padding: 4px;
+  border: 1px solid $secondary-gray20;
+  outline: none;
+  background-color: $primary-light;
+  color: $secondary-gray60;
+  box-shadow: 2px 2px 0 0 $secondary-gray40;
+  box-sizing: content-box;
 
   &:focus {
     background-color: $secondary-gray10;
@@ -17,32 +17,31 @@
   }
 
   &:hover {
-    border-color: #EC0000;
-    background-color: #EC0000;
+    border-color: $primary-contrast;
+    background-color: $primary-contrast;
 
     // TODO:, fix illegal BEM
     svg {
-      fill: #FFFFFF;
+      fill: $primary-light;
     }
 
     // TODO:, fix illegal BEM
     span {
-      color: #FFFFFF;
+      color: $primary-light;
     }
   }
 
-
   // TODO:, fix illegal BEM
   svg {
-    fill: #666666;
-    height: 24px;
     width: 24px;
+    height: 24px;
+    fill: $secondary-gray60;
   }
 
   // TODO:, fix illegal BEM
   div {
+    margin-left: 4px;
     font-family: "Avenir LT W01 85 Heavy";
     line-height: 24px;
-    margin-left: 4px;
   }
 }

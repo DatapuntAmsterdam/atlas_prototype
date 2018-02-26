@@ -1,3 +1,4 @@
+/* Deprecated, DO NOT USE THIS */
 (function () {
     'use strict';
 

@@ -1,12 +1,12 @@
 @import "../../../../modules/atlas/styles/config";
 
-%__toggle {
+%__toggle { // sass-lint:disable-line placeholder-name-format
   align-items: center;
   align-self: center;
   background-color: $primary-light;
   border: 1px solid $secondary-gray20;
   border-radius: 50%;
-  content: 'X';
+  content: "X";
   display: flex;
   flex-shrink: 0;
   font-size: 0;

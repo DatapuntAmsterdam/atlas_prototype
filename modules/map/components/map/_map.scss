@@ -52,9 +52,11 @@ $on-top-of-leaflet: 999;
 
 .is-embed,
 .is-embed-preview {
-  .c-map__leaflet:focus {
-    .c-map__focus-layer {
-      border: 1px solid #000;
+  .c-map__leaflet {
+    &:focus {
+      .c-map__focus-layer { // sass-lint:disable-line nesting-depth
+        border: 1px solid $primary-dark;
+      }
     }
   }
 }

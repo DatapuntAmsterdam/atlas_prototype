@@ -1,5 +1,5 @@
 /* eslint-disable */
-describe.skip('addresses module', () => {
+describe('addresses module', () => {
   beforeEach(() => {
     // go to the homepage
     cy.visit('/');

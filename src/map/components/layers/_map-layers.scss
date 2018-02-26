@@ -1,12 +1,12 @@
 @import "../../../shared/components/toggle/toggle";
-@import "../../../../modules/shared/styles/utilities/screen-reader";
+@import "../../../shared/styles/utilities/screen-reader";
 
 .map-layers {
-  background-color: #FAFAFA;
+  background-color: $secondary-gray5;
   position: relative;
   user-select: none;
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: $breakpoint-md) {
     padding-bottom: 12px;
   }
 
@@ -20,14 +20,14 @@
     margin-top: 8px;
     text-indent: 8px;
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: $breakpoint-md) {
       text-indent: 12px;
     }
 
     & + & {
       margin-top: 16px;
 
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: $breakpoint-md) {
         margin-top: 24px;
       }
     }
@@ -35,7 +35,7 @@
     &:last-child {
       margin-bottom: 8px;
 
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: $breakpoint-md) {
         margin-bottom: 12px;
       }
     }
@@ -47,7 +47,7 @@
   }
 
   &__category-text {
-    color: #000;
+    color: $primary-dark;
     font-family: "Avenir LT W01 85 Heavy";
     font-size: 16px;
     margin: 0;
@@ -62,9 +62,9 @@
     text-indent: 0;
 
     &--active {
-      background-color: #FFFFFF;
-      border-bottom-color: #666666;
-      border-top-color: #666666;
+      background-color: $primary-light;
+      border-bottom-color: $secondary-gray60;
+      border-top-color: $secondary-gray60;
 
       & + & {
         border-top-color: transparent;
@@ -85,7 +85,7 @@
       padding: 0;
       width: 100%;
 
-      & > span:first-child {
+      .map-layers__toggle-title {
         overflow: hidden;
         padding: 8px;
         text-align: left;
@@ -93,7 +93,7 @@
         white-space: nowrap;
         width: 100%;
 
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: $breakpoint-md) {
           padding: 8px 12px;
         }
       }
@@ -101,10 +101,10 @@
   }
 
   &__toggle {
-    @extend %__toggle;
+    @extend %__toggle; // sass-lint:disable-line placeholder-name-format
     margin-right: 8px;
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: $breakpoint-md) {
       margin-right: 12px;
     }
 
@@ -114,15 +114,15 @@
     }
 
     .map-layers__title--active & {
-      border-color: #666666;
+      border-color: $secondary-gray60;
     }
 
-    .map-layers__title:hover & {
-      background-color: #EC0000;
-      border-color: #EC0000;
+    .map-layers__title:hover & { // sass-lint:disable-line force-pseudo-nesting
+      background-color: $primary-contrast;
+      border-color: $primary-contrast;
 
       svg {
-        fill: #FFFFFF;
+        fill: $primary-light;
       }
     }
   }

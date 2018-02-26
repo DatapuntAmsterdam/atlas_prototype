@@ -2,9 +2,9 @@
   $map-preview-panel-top-print: 8px;
   $map-preview-panel-bottom-print: 2px + 10px + 17px + 8px;
 
-  background-color: #FAFAFA;
-  border: solid 1px #CCCCCC;
-  box-shadow: 2px 2px 0 0 #999999;
+  background-color: $secondary-gray5;
+  border: solid 1px $secondary-gray20;
+  box-shadow: 2px 2px 0 0 $secondary-gray40;
   font-family: "Avenir LT W01 55 Roman";
   max-height: calc(100vh - #{$map-preview-panel-top + $map-preview-panel-bottom});
   max-width: 440px;
@@ -27,20 +27,20 @@
 
   &__heading {
     align-items: center;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #CCCCCC;
+    background-color: $primary-light;
+    border-bottom: 1px solid $secondary-gray20;
     display: flex;
     justify-content: flex-end;
     padding: 4px;
   }
 
   &__heading-icon {
-    fill: #000000;
+    fill: $primary-dark;
     height: 24px;
     width: 24px;
 
     .map-panel--collapsed & {
-      fill: #666666;
+      fill: $secondary-gray60;
     }
   }
 
@@ -52,7 +52,7 @@
     width: 24px;
 
     &:hover {
-      background-color: #EC0000;
+      background-color: $primary-contrast;
     }
 
     &--show-all {
@@ -64,17 +64,17 @@
         background-color: transparent;
 
         .map-preview-panel__button-label {
-          color: #EC0000;
+          color: $primary-contrast;
           text-decoration: underline;
         }
 
         .map-preview-panel__button-icon {
-          fill: #EC0000;
+          fill: $primary-contrast;
         }
       }
 
       .map-preview-panel__button-label {
-        color: #666666;
+        color: $secondary-gray60;
         font-family: "Avenir LT W01 85 Heavy";
         font-size: 14px;
       }
@@ -86,12 +86,12 @@
     }
 
     &-icon {
-      fill: #666666;
+      fill: $secondary-gray60;
       height: inherit;
       width: inherit;
 
       *:hover > & {
-        fill: #FFFFFF;
+        fill: $primary-light;
       }
     }
   }
@@ -113,9 +113,7 @@
     max-height: none;
     position: absolute;
     top: $map-preview-panel-top-print;
-  }
 
-  .is-print-mode & {
     &__heading {
       display: none;
     }

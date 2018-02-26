@@ -1,42 +1,44 @@
 @import "../../../shared/components/toggle/toggle";
-@import "../../../../modules/shared/styles/utilities/screen-reader";
+@import "../../../shared/styles/utilities/screen-reader";
 
 .map-legend {
-  background-color: #FFFFFF;
-  border: 1px solid #999999;
+  background-color: $primary-light;
+  border: 1px solid $secondary-gray40;
   border-top: none;
   list-style-type: none;
-  margin: 8px 8px 32px 8px;
+  margin: 8px 8px 32px;
   padding: 0;
   user-select: none;
 
-  @media screen and (min-width: 1200px) {
-    margin: 12px 12px 32px 12px;
+  @media screen and (min-width: $breakpoint-md) {
+    margin: 12px 12px 32px;
   }
 
   &__category {
     align-items: center;
-    border-top: 1px solid #999999;
+    border-top: 1px solid $secondary-gray40;
     display: flex;
     justify-content: space-between;
     padding: 9px 10px;
     position: relative;
 
-    &--selectable-legend:after {
-      background-color: #999999;
-      bottom: -1px;
-      content: '';
-      display: block;
-      height: 1px;
-      left: 0;
-      position: absolute;
-      width: 36px;
+    &--selectable-legend {
+      &::after { // sass-lint:disable-line nesting-depth
+        background-color: $secondary-gray40;
+        bottom: -1px;
+        content: "";
+        display: block;
+        height: 1px;
+        left: 0;
+        position: absolute;
+        width: 36px;
+      }
     }
 
     &--unselectable-legend + .map-legend__items {
       padding-top: 0;
 
-      .is-print-mode &,
+      .is-print-mode &, // sass-lint:disable-line nesting-depth
       .is-embed &,
       .is-embed-preview & {
         padding-top: 10px;
@@ -44,13 +46,9 @@
     }
   }
 
-  &__category-title {
-    font-family: "Avenir LT W01 55 Roman";
-  }
-
   &__zoom-level-notification {
-    background-color: #004699;
-    color: #FFFFFF;
+    background-color: $thema-10;
+    color: $primary-light;
     display: block;
     margin: 10px;
     padding: 10px;
@@ -100,7 +98,7 @@
   }
 
   &__category-title {
-    color: #000;
+    color: $primary-light;
     font-family: "Avenir LT W01 55 Roman";
     font-size: 16px;
     line-height: 20px;
@@ -120,16 +118,16 @@
   }
 
   &__toggle {
-    @extend %__toggle;
+    @extend %__toggle; // sass-lint:disable-line placeholder-name-format
     margin-left: 10px;
     outline: none;
 
     &:hover {
-      background-color: #EC0000;
-      border-color: #EC0000;
+      background-color: $primary-contrast;
+      border-color: $primary-contrast;
 
       svg {
-        fill: #FFFFFF;
+        fill: $primary-light;
       }
     }
   }
@@ -143,7 +141,7 @@
       font-size: 14px;
       padding-bottom: 0;
 
-      &:after,
+      &::after,
       button,
       .checkbox {
         display: none;
@@ -162,7 +160,12 @@
       }
     }
 
-    &__items .checkbox,
+    &__items {
+      .checkbox {
+        display: none;
+      }
+    }
+
     &__map-layer--hidden {
       display: none;
     }

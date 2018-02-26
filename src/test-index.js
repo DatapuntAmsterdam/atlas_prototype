@@ -441,4 +441,3 @@ import '../modules/atlas/services/routing/url-to-state.factory.test';
 import '../modules/atlas/services/routing/state-url-conversion.factory.test';
 import '../modules/atlas/services/routing/state-url-converter.factory.test';
 import '../modules/atlas/services/routing/state-to-url.factory.test';
-import '../modules/atlas/services/freeze/freeze.factory.test';

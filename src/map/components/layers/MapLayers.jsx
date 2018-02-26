@@ -40,7 +40,7 @@ const MapLayers = (props) => (
                         props.onLayerToggle(mapLayerId));
                     }}
                     >
-                      <span>
+                      <span className="map-layers__toggle-title">
                         {layer.title}
                       </span>
                       <span className="map-layers__toggle map-layers__toggle--remove">

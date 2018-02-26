@@ -1,7 +1,7 @@
 .toggle-fullscreen {
-  background-color: #ffffff;
-  border: solid 1px #CCCCCC;
-  box-shadow: 2px 2px 0 0 #999999;
+  background-color: $primary-light;
+  border: solid 1px $secondary-gray20;
+  box-shadow: 2px 2px 0 0 $secondary-gray40;
   padding: 4px;
   position: absolute;
   right: 10px;
@@ -10,7 +10,7 @@
 
   .toggle-fullscreen__icon {
     display: block;
-    fill: #666666;
+    fill: $secondary-gray60;
     height: 24px;
     width: 24px;
   }
@@ -23,11 +23,11 @@
   }
 
   &:hover {
-    background-color: #ec0000;
-    border-color: #ec0000;
+    background-color: $primary-contrast;
+    border-color: $primary-contrast;
 
     .toggle-fullscreen__icon {
-      fill: #ffffff;
+      fill: $primary-light;
     }
   }
 

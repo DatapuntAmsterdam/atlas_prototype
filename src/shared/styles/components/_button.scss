@@ -1,0 +1,137 @@
+.o-btn {
+  /*
+  @name Button w/ link styling
+  @markup
+    <button class="btn btn--link">Lorem ipsum</button>
+  */
+  background-color: transparent;
+  font-size: inherit;
+  overflow: visible;
+  text-align: left;
+}
+
+.o-btn--link {
+  @extend %link--arrow;
+}
+
+.o-btn--link--inverse {
+  @extend %link--arrow;
+
+  color: $primary-light;
+
+  &::before {
+    @include icon-button("link-arrow", "white", "white");
+    height: $icon-size;
+    width: $icon-size;
+  }
+
+  &:hover,
+  &:visited,
+  &:active {
+    color: $primary-light;
+  }
+}
+
+.o-btn--plus {
+  @extend %link--plus;
+}
+
+.o-btn--contrast {
+  color: $primary-contrast;
+
+  &:hover {
+    color: $secondary-gray60;
+  }
+}
+
+.o-btn--block {
+  @include icon-button-text-left("forward", "gray")
+}
+
+.o-btn--inverted-block {
+  @include icon-button-text-left("forward", "gray-inverted")
+}
+
+%o-btn {
+  @include font-weight($bold-weight);
+  background-color: $primary-light;
+  color: $primary-dark;
+  cursor: pointer;
+  display: inline-block;
+  font-size: $base-font-size;
+  height: $base-whitespace * 4;
+  line-height: $base-whitespace * 4;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.o-btn--transparent {
+  @extend %o-btn;
+  background-color: transparent;
+  height: $base-whitespace * 5;
+  line-height: $base-whitespace * 5;
+}
+
+.o-btn--white {
+  @extend %o-btn;
+}
+
+.o-btn--white__label {
+  @extend %link--arrow;
+
+  line-height: $base-whitespace * 4;
+  padding-left: $base-whitespace;
+  width: 100%;
+}
+
+.o-btn--white__label-right {
+  @extend %link--arrow;
+
+  line-height: $base-whitespace * 4;
+  padding-left: calc(#{$base-whitespace - 6px});
+  padding-right: $base-whitespace;
+  width: 100%;
+
+  &::after {
+    display: inline-block;
+    float: right;
+    margin: 7px 16px;
+  }
+
+  &::before {
+    display: none;
+  }
+}
+
+%btn-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.o-btn--close {
+  @extend %btn-close;
+  @include icon-button("close");
+}
+
+.o-btn--close--info {
+  @extend %btn-close;
+  @include icon-button("close", "info", "");
+}
+
+.o-btn--close--warning {
+  @extend %btn-close;
+  @include icon-button("close", "warning", "");
+}
+
+.o-btn--close--danger {
+  @extend %btn-close;
+  @include icon-button("close", "danger", "");
+}
+
+.s-btn--nested {
+  margin-bottom: $base-whitespace !important;
+  margin-top: $base-whitespace !important;
+}

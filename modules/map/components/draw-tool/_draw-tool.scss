@@ -10,11 +10,11 @@
 }
 
 .c-draw-tool {
-  align-items: center;
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
+  align-items: center;
   padding: $base-whitespace;
   z-index: $fixed-position-z-index;
 }
