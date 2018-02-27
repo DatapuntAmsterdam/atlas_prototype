@@ -20,6 +20,9 @@ class PuppeteerEnvironment extends NodeEnvironment {
     this.global.__BROWSER__ = await puppeteer.connect({
       browserWSEndpoint: wsEndpoint
     });
+
+    this.global.__HOST__ = process.env.STORYBOOK_URL || 'http://localhost:9001/';
+    console.log('using storybook host: ', this.global.__HOST__);
   }
 
   async teardown() {

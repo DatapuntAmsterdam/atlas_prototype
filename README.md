@@ -2,7 +2,6 @@
 
 ## Requirements
 - npm
-- Webpack
 - Java JRE (needed to run protractor)
 
 ## Installations
@@ -13,11 +12,12 @@
 - Open the server at http://localhost:8080/
 
 ## Testing
-- NODE_ENV=development npm test
 
-### Visual unit test
-`npm run test-visual-regression`
+Karma & Jest unit test
 
+```
+NODE_ENV=development npm test
+```
 
 ### E2E testing authentication
 
@@ -38,13 +38,22 @@ Then, in a second terminal, run `npm run test-e2e` (single run) or `npm run test
 
 ### E2E Aria testing
 
-Make sure that NODE_ENV=development.
+Make sure that `NODE_ENV=development`.
 Then run `npm run test-aria`.
+
+### E2E Visual testing
+
+_Currently not working in CI_
+
+`npm run test-visual-regression`
+
+and
+
+`docker-compose up --build test-e2e-visual`
 
 
 ## Other useful commands
 
-- `grunt build-release`
 - `npm run clean`
 - `npm run test-lint`
 

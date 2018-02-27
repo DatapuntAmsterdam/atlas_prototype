@@ -3,7 +3,7 @@ describe('datasets module', () => {
   describe('user should be able to navigate to the datasets catalogus from the homepage', () => {
     beforeEach(() => {
       // go to the homepage
-      cy.visit('http://localhost:8080/');
+      cy.visit('/');
       // check if the link is in the dom and visible
       cy.get('.c-homepage__block--datasets').should('exist').and('be.visible');
       // the datasets component should not exist yet

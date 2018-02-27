@@ -2,7 +2,7 @@
 describe('addresses module', () => {
   beforeEach(() => {
     // go to the homepage
-    cy.visit('http://localhost:8080/');
+    cy.visit('/');
     // check if the link is in the dom and visible
     cy.get('.c-homepage__block--adressen').should('exist').and('be.visible');
     // the data-selection should not exist yet

@@ -1,10 +1,7 @@
 /*
- * pa11y.js will start a dev server with npm start.
- * When everything builds fine. It will start an aria test
- * the config file contains all urls needed for testing to be successful.
- * After running tests it will kill all processes involved.
+ * pa11y.js tests all the URLs in the config file.
+ * All URL tests need to succeed for the entire test to succeed.
  */
-
 import chalk from 'chalk';
 import pa11y from 'pa11y';
 import pAll from 'p-all';
@@ -34,86 +31,73 @@ const checkActions = () => {
 console.log('Pa11y: checking configuration');
 checkActions();
 
-console.log('Pa11y: starting dev server...');
-const defaults = config.defaults || {};
-const httpServer = spawn('http-server', ['./dist']);
+console.log('Pa11y: running tests...');
 
-let running = false;
-let testing = false;
-
-httpServer.stdout.on('data', (buffer) => {
-  running = buffer.toString('utf8').includes('Available on:') || running;
-
-  if (!running) {
-    process.stdout.write(buffer.toString('utf8'));
-    return;
+const defaults = config.defaults;
+const actions = config.urls.map((test, i) => () => {
+  let url = test.url;
+  if (process.env.BASE_URL) {
+    url = url.replace('http://localhost:8080', process.env.BASE_URL);
   }
-  if (testing) {
-    return;
-  }
-  testing = true;
-  console.log('Pa11y: running tests...');
 
-  const actions = config.urls.map((test, i) => () => {
-    console.log(`  checking ${test.url}`);
-    const screenCapture = filename(i);
-    return pa11y(test.url, {
-      ...defaults,
-      screenCapture,
-      ...test
-    })
-  });
+  console.log(`checking ${url}`);
+  const screenCapture = filename(i);
+  return pa11y(url, {
+    ...defaults,
+    screenCapture,
+    ...test
+  })
+});
 
-  pAll(actions, {
-    concurrency: CONCURRENT_TESTS
-  }).then(results => {
-    const total = {
-      errors: 0,
-      warnings: 0,
-      notices: 0
-    };
+pAll(actions, {
+  concurrency: CONCURRENT_TESTS
+}).then(results => {
+  const total = {
+    errors: 0,
+    warnings: 0,
+    notices: 0
+  };
 
-    console.log('');
+  console.log('');
 
-    results.forEach(result => {
-      if (result.documentTitle) {
-        console.log(`results for "${result.documentTitle}"`);
+  results.forEach(result => {
+    if (result.documentTitle) {
+      console.log(`results for "${result.documentTitle}"`);
 
-        console.log(reporter.results(result));
+      console.log(reporter.results(result));
 
-        total.errors += result.issues.reduce((accumulator, issue) =>
-          issue.type === 'error' ? accumulator + 1 : accumulator, 0);
-        total.warnings += result.issues.reduce((accumulator, issue) =>
-          issue.type === 'warning' ? accumulator + 1 : accumulator, 0);
-        total.notices += result.issues.reduce((accumulator, issue) =>
-          issue.type === 'notice' ? accumulator + 1 : accumulator, 0);
-      }
-    }, reason => {
-      console.error(chalk.red('Pa11y: promise rejection:', reason));
-      process.exit(1);
-    });
-
-    console.log('Pa11y: TOTALS found', (total.errors + total.warnings + total.notices));
-
-    if (total.errors) {
-      console.log(chalk.red('Pa11y: total errors', total.errors));
+      total.errors += result.issues.reduce((accumulator, issue) =>
+        issue.type === 'error' ? accumulator + 1 : accumulator, 0);
+      total.warnings += result.issues.reduce((accumulator, issue) =>
+        issue.type === 'warning' ? accumulator + 1 : accumulator, 0);
+      total.notices += result.issues.reduce((accumulator, issue) =>
+        issue.type === 'notice' ? accumulator + 1 : accumulator, 0);
     }
-    if (total.warnings) {
-      console.log(chalk.yellow('Pa11y: total warnings', total.warnings));
-    }
-    if (total.notices) {
-      console.log(chalk.cyan('Pa11y: total notices', total.notices));
-    }
-
-    console.log('');
-
-    if (total.errors) {
-      process.exit(1);
-    }
-
-    process.exit(0);
-  }).catch(error => {
-    console.error('Pa11y: error: ', error);
+  }, reason => {
+    console.error(chalk.red('Pa11y: promise rejection:', reason));
     process.exit(1);
   });
+
+  console.log('Pa11y: TOTALS found', (total.errors + total.warnings + total.notices));
+
+  if (total.errors) {
+    console.log(chalk.red('Pa11y: total errors', total.errors));
+  }
+  if (total.warnings) {
+    console.log(chalk.yellow('Pa11y: total warnings', total.warnings));
+  }
+  if (total.notices) {
+    console.log(chalk.cyan('Pa11y: total notices', total.notices));
+  }
+
+  console.log('');
+
+  if (total.errors) {
+    process.exit(1);
+  }
+
+  process.exit(0);
+}).catch(error => {
+  console.error('Pa11y: error: ', error);
+  process.exit(1);
 });

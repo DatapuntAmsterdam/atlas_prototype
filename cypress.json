@@ -1,5 +1,6 @@
 {
   "screenshotOnHeadlessFailure": false,
   "videoRecording": false,
-  "integrationFolder": "test/cypress/integration"
+  "integrationFolder": "test/cypress/integration",
+  "baseUrl": "http://localhost:8080"
 }

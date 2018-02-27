@@ -1,0 +1,17 @@
+FROM cypress/base:8
+RUN apt-get update && \
+    apt-get install -y \
+      netcat && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /home
+
+COPY package-lock.json /home/
+
+# install single package same version as package-lock.json version
+RUN npm install cypress@`node -p -e "require('./package-lock.json').dependencies.cypress.version"`
+
+COPY src /home/src
+COPY test /home/test
+COPY scripts /home/scripts
+COPY cypress.json /home/

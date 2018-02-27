@@ -18,7 +18,7 @@ describe('MapLegend', () => {
 
   beforeEach(async () => {
     page = await global.__BROWSER__.newPage();
-    await page.goto('http://localhost:9001/?selectedKind=Map%2FMapLegend&selectedStory=default&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel');
+    await page.goto(global.__HOST__ + '?selectedKind=Map%2FMapLegend&selectedStory=default&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel');
     await page.waitFor(linkSelector([moduleName]));
     await page.click(linkSelector([moduleName]));
     await page.waitFor(linkSelector([moduleName, componentName]));
