@@ -92,6 +92,11 @@
                     geometry.getGeoJSON(endpoint).then(function (geoJSON) {
                         if (geoJSON !== null) {
                             vm.location = crsConverter.rdToWgs84(geojson.getCenter(geoJSON));
+                            
+                            store.dispatch({
+                                type: ACTIONS.MAP_PAN,
+                                payload: vm.location
+                            });
                         }
 
                         if (vm.isMapHighlight) {
