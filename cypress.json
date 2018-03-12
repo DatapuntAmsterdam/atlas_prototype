@@ -2,5 +2,10 @@
   "screenshotOnHeadlessFailure": false,
   "videoRecording": false,
   "integrationFolder": "test/cypress/integration",
-  "baseUrl": "http://localhost:8080"
+  "baseUrl": "http://localhost:8080" ,
+  "defaultCommandTimeout": 12000,
+  "requestTimeout": 12000,
+  "responseTimeout": 80000,
+  "execTimeout": 120000,
+  "pageLoadTimeout": 120000
 }
