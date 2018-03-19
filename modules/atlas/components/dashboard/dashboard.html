@@ -56,14 +56,15 @@
                     ng-class="{ 'u-page-break-after': vm.columnSizes.middle && vm.columnSizes.right }">
 
                     <!-- Map -->
-                    <div ng-if="vm.activity.map" ng-show="vm.visibility.map" ng-controller="MapController as map" class="qa-map">
-                        <dp-map
+                    <!-- <div ng-if="vm.activity.map" ng-show="vm.visibility.map" ng-controller="MapController as map" class="qa-map"> -->
+                        <!-- <dp-map
                             map-state="map.mapState"
                             markers="map.markers"
                             draw-geometry="map.drawGeometry"
                             resize="[vm.isPrintMode, vm.isEmbedPreview, vm.isEmbed, vm.visibility.error, vm.visibility.map, vm.columnSizes.middle]">
-                        </dp-map>
-                    </div>
+                        </dp-map> -->
+                    <!-- </div> -->
+                    <dp-map-wrapper resize="[vm.isPrintMode, vm.isEmbedPreview, vm.isEmbed, vm.visibility.error, vm.visibility.map, vm.columnSizes.middle]"></dp-map-wrapper>
                 </div>
 
                 <!-- Right column -->

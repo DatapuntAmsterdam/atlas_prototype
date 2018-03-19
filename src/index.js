@@ -36,6 +36,7 @@ import '../modules/atlas/atlas.run';
 import '../modules/atlas/atlas.version.webpack';
 import '../modules/atlas/components/dashboard/dashboard-columns.factory';
 import '../modules/atlas/components/dashboard/dashboard.component';
+import '../modules/atlas/components/dashboard/wrappers/map-wrapper/map-wrapper.component';
 import '../modules/atlas/components/dashboard/synchronisation/data-selection.controller';
 import '../modules/atlas/components/dashboard/synchronisation/detail.controller';
 import '../modules/atlas/components/dashboard/synchronisation/header.controller';
