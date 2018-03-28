@@ -15,6 +15,7 @@
         const vm = this;
 
         vm.onClick = (theme) => {
+
             store.dispatch({
                 type: ACTIONS.APPLY_FILTERS,
                 payload: {
@@ -25,7 +26,7 @@
             store.dispatch({
                 type: ACTIONS.FETCH_DATA_SELECTION,
                 payload: {
-                    dataset: 'catalogus',
+                    dataset: 'dcatd',
                     view: 'CARDS',
                     page: 1
                 }

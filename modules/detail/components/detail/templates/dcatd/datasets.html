@@ -1,0 +1,105 @@
+<div class="u-grid">
+    <div class="c-detail__block">
+        <div class="o-header">
+            <h3 class="o-header__subtitle">Dataset</h3>
+            <h2 class="o-header__title u-margin__bottom--3">{{vm.apiData.results["dct:title"]}}</h2>
+        </div>
+        <dl class="c-key-value-list">
+            <dt>Aangemaakt - {{ vm.apiData.results['foaf:isPrimaryTopicOf']['dct:issued']}}</dt>
+            <dd>{{ { metadata_created: vm.apiData.results['foaf:isPrimaryTopicOf']['dct:issued'], metadata_compact: true }
+                | modificationDate }} ({{vm.apiData.results['foaf:isPrimaryTopicOf']['dct:issued'] | date:'dd MMMM yyyy'}})</dd>
+            <dt>Gepubliceerd door</dt>
+            <dd>
+                <a href="{{vm.apiData.results['dct:publisher']['foaf:mbox']}}" class="o-btn o-btn--link">{{vm.apiData.results['dct:publisher']['foaf:name']}} ({{vm.apiData.results['dct:publisher']['foaf:mbox']}})</a>
+            </dd>
+            <dt>Contactpersoon</dt>
+            <dd>
+                <a href="{{vm.apiData.results['dcat:contactPoint']['vcard:hasEmail']}}" class="o-btn o-btn--link">{{vm.apiData.results['dcat:contactPoint']['vcard:fn']}} ({{vm.apiData.results['dcat:contactPoint']['vcard:hasEmail']}})</a>
+            </dd>
+            <dt>Thema</dt>
+            <dd>
+                <ul ng-repeat="group in vm.apiData.results['dcat:theme']">
+                    <li> {{ group | optionLabel: vm.dcatFilters.groupTypes:'theme'}}</li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+
+    <div class="u-row u-margin__bottom--4">
+        <span class="s-detail-catalogus-notes" ng-bind-html="vm.apiData.results['dct:description']"> </span>
+    </div>
+
+    <div class="c-detail__block">
+        <h3 class="o-header__subtitle">Data</h3>
+
+        <div class="c-detail-catalogus-table">
+            <table class="c-table c-table--click c-detail-catalogus-table__table">
+                <tbody>
+                    <tr dp-follow-link="{{ resource['dcat:accessURL'] }}" class="c-table__content-row u-align--top piwik_download" ng-repeat="resource in vm.apiData.results['dcat:distribution']">
+                        <td class="c-table__field
+                                   c-table__content-field
+                                   c-detail-catalogus-table__field
+                                   c-detail-catalogus-table__field--type">
+                            <div class="c-data-selection-file-type
+                                        c-data-selection-file-type__name
+                                        c-data-selection-file-type__format-{{resource['dct:format'] | optionLabel: vm.dcatFilters.formatTypes| lowercase }}">
+                                <span ng-if="resource['dct:format']">{{resource['dct:format'] | optionLabel: vm.dcatFilters.formatTypes}}</span>
+                                <span ng-if="!resource['dct:format']"> ? </span>
+                            </div>
+                        </td>
+                        <td class="c-table__field
+                                   c-table__content-field
+                                   c-detail-catalogus-table__field
+                                   c-detail-catalogus-table__field--name">
+                            <span class="c-detail-catalogus-table__text
+                                         c-detail-catalogus-table__text--light">{{resource['dct:title']}}</span>
+                        </td>
+                        <td class="c-table__field
+                                   c-table__content-field
+                                   c-detail-catalogus-table__field
+                                   c-detail-catalogus-table__field--description">
+                            <!-- <span class="c-detail-catalogus-table__text"
+                                  ng-if="resource.description">{{resource[]}}</span>
+                            <span class="c-detail-catalogus-table__text"
+                                  ng-if="!resource.description">{{resource['dcat:accessURL']}}</span> -->
+                            <span class="c-detail-catalogus-table__text">{{resource['dcat:accessURL']}}</span>
+                        </td>
+                        <td class="c-table__field
+                                   c-table__content-field
+                                   c-detail-catalogus-table__field
+                                   c-detail-catalogus-table__field--size
+                                   u-align--right">
+                            <!-- <span class="c-detail-catalogus-table__text"
+                                  ng-if="resource.size > 0" >{{resource.size | filesize}}</span> -->
+                            <a ng-href="{{resource['dcat:accessURL']}}" target="_blank" rel="noopener" class="o-btn o-btn--inverted-block"></a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="u-row u-margin__bottom--4">
+        <div class="u-col-md--12">
+
+            <h3 class="o-header__subtitle">Tags</h3>
+            <ul ng-repeat="tag in vm.apiData.results['dcat:keyword']" class="u-inline">
+                <li class="u-inline">
+                    <span class="o-tag">{{tag | dpUppercaseFirstLetter}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="u-row u-margin__bottom--4">
+
+        <h3 class="o-header__subtitle">Licentie</h3>
+        <p ng-if="vm.apiData.results['ams:license']">{{vm.apiData.results['ams:license'] | optionLabel: vm.dcatFilters.licenseTypes }}</p>
+        <!-- <a ng-if="vm.apiData.results.license_url" class="o-btn o-btn--link" ng-href="{{ vm.apiData.results.license_url }}" target="_blank"
+                rel="noopener">{{vm.apiData.results.license_title}}</a> -->
+
+    </div>
+
+
+</div>
