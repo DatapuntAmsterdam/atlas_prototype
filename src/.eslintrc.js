@@ -27,6 +27,7 @@ module.exports = {
         "_links",
         "__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"
       ]
-    }]
+    }],
+    "linebreak-style": "off"
   }
 }
