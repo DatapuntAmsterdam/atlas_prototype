@@ -51,7 +51,8 @@
                 vm.state.geometryFilter,
                 vm.state.page,
                 vm.state.query,
-                vm.user.scopes
+                vm.user.scopes,
+                store.getState().catalogFilters
             ];
         }, fetchData, true);
 
@@ -67,7 +68,7 @@
 
         function fetchData () {
             const config = DATA_SELECTION_CONFIG.datasets[vm.state.dataset];
-
+            const catalogFilters = store.getState().catalogFilters;
             const isListView = vm.state.view === 'LIST';
             vm.view = vm.state.view;
 
@@ -98,10 +99,10 @@
                 vm.filters,
                 vm.currentPage,
                 vm.state.query,
-                vm.state.geometryFilter.markers)
+                vm.state.geometryFilter.markers,
+                catalogFilters)
                 .then(data => {
                     vm.availableFilters = data.filters;
-
                     vm.data = data.data;
                     vm.numberOfRecords = data.numberOfRecords;
                     vm.numberOfPages = data.numberOfPages;

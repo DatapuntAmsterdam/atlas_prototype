@@ -1,0 +1,32 @@
+%font {
+  font-weight: normal;
+}
+
+
+%light-font {
+  @extend %font;
+
+  font-family: "Avenir LT W01 45 Book", Arial, sans-serif;
+}
+
+%base-font {
+  @extend %font;
+
+  font-family: "Avenir LT W01 55 Roman", Arial, sans-serif;
+  font-size: 16px;
+}
+
+%heavy-font {
+  @extend %font;
+
+  font-family: "Avenir LT W01 85 Heavy", Arial, sans-serif;
+}
+
+%title-font {
+  @extend %heavy-font;
+
+  color: $red;
+  display: block;
+  font-size: 20px;
+  margin-bottom: 5px;
+}

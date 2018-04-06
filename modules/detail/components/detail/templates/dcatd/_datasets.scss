@@ -1,0 +1,62 @@
+// resources, resources-item and the styles/** are copyied form dcatd_admin and should be integrated in atlas
+@import "./resources";
+@import "./resources-item";
+.resources {
+  margin-left: -20px;
+  margin-right: -20px;
+
+  .resources-item__description{
+    :first-child{
+      margin-right: 5px;
+    }
+  }
+
+  .resources-item__navigate-arrow {
+    bottom: 0;
+    position: absolute;
+    right: 60px;
+
+    &::after {
+      @extend %icon-arrow-right;
+      bottom: -5px;
+      content: "";
+      display: inline-block;
+      height: 35px;
+      position: absolute;
+      width: 35px;
+    }
+  }
+}
+
+.dcad-dataset-detail {
+  .c-detail__block {
+    dl>dt {
+      width: 30%;
+    }
+    dl>dd {
+      width: 70%;
+    }
+  }
+  .o-header__subtitle {
+    position: relative;
+    .navigate-button {
+      @extend %icon--border-hover;
+      @include icon-label-right("forward", "", "white", "tall");
+      position: absolute;
+      right: 0;
+    }
+  }
+  .c-catalogus-theme {
+    display: flex;
+    &>.c-catalogus-theme__icon {
+      width: auto;
+      padding-right: 10px;
+      padding: 10px;
+    }
+  }
+  .resources-item__description{
+    &:first-child{
+      margin-right: 10px;
+    }
+  }
+}

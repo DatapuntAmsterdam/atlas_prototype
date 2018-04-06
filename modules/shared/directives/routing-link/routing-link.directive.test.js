@@ -1,14 +1,11 @@
-describe('The follow link directive', function () {
+describe('The routing link directive', function () {
     var $rootScope,
         $compile,
         $window;
 
     beforeEach(function () {
         const $windowMock = {
-            _paq: {
-                push: angular.noop
-            },
-            open: angular.noop
+            location: 'module/'
         };
 
         angular.mock.module('dpDetail',
@@ -16,7 +13,6 @@ describe('The follow link directive', function () {
                 $provide.value('$window', $windowMock);
             }
         );
-        angular.mock.module('dpDetail');
 
         angular.mock.inject(function (_$rootScope_, _$compile_, _$window_) {
             $rootScope = _$rootScope_;
@@ -31,7 +27,7 @@ describe('The follow link directive', function () {
             scope;
 
         element = document.createElement('div');
-        element.setAttribute('dp-follow-link', url);
+        element.setAttribute('dp-routing-link', url);
         scope = $rootScope.$new();
 
         directive = $compile(element)(scope);
@@ -40,15 +36,13 @@ describe('The follow link directive', function () {
         return directive;
     }
 
-    it('opens a window when clicking the element', function () {
+    it('redirects to the route clicking the element', function () {
         var directive;
+        var testRoute = 'module/action/id';
+        directive = getDirective(testRoute);
 
-        spyOn($window, 'open');
-
-        directive = getDirective ('http://www.linktofollow.link');
-
-        expect(directive.attr('dp-follow-link')).toBe('http://www.linktofollow.link');
+        expect(directive.attr('dp-routing-link')).toBe(testRoute);
         directive.click();
-        expect($window.open).toHaveBeenCalled();
+        expect($window.location).toBe(testRoute);
     });
 });

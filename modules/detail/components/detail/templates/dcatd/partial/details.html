@@ -1,0 +1,39 @@
+<dl class="c-key-value-list">
+    <dt>Doel</dt>
+    <dd>{{vm.apiData.results['overheidds:doel']}}</dd>
+    <dt>Meer informatie</dt>
+    <dd>{{vm.apiData.results['dcat:landingPage']}}</dd>
+    <dt>Publicatiedatum</dt>
+    <dd>{{vm.apiData.results['foaf:isPrimaryTopicOf']['dct:issued'] | date:'dd MMMM yyyy'}}</dd>
+    <dt>Wijzigingsdatum</dt>
+    <dd>{{vm.apiData.results['foaf:isPrimaryTopicOf']['dct:modified'] | date:'dd MMMM yyyy'}}</dd>
+    <dt>Wijzigingsfrequentie</dt>
+    <dd>{{vm.apiData.results['dct:accrualPeriodicity'] | optionLabel: vm.catalogFilters.accrualPeriodicities}}</dd>
+    <dt>Tijdsperiode</dt>
+    <dd>{{vm.apiData.results['dct:temporal']}}</dd>
+    <dt>Tijdseenheid</dt>
+    <dd>{{vm.apiData.results['ams:temporalUnit'] | optionLabel: vm.catalogFilters.temporalUnits}}</dd>
+    <dt>Omschrijving gebied</dt>
+    <dd>{{vm.apiData.results['ams:spatialDescription']}}</dd>
+    <dt>Coördinaten gebied</dt>
+    <dd>{{vm.apiData.results['dct:spatial']}}</dd>
+    <dt>Gebiedseenheid</dt>
+    <dd>{{vm.apiData.results['ams:spatialUnit'] | optionLabel: vm.catalogFilters.spatialUnits}}</dd>
+    <dt>Juridische grondslag</dt>
+    <dd>{{vm.apiData.results['overheid:grondslag']}}</dd>
+    <dt>Taal</dt>
+    <dd>{{vm.apiData.results['dct:language'] | optionLabel: vm.catalogFilters.languages:'lang1'}}</dd>
+    <dt>Eigenaar</dt>
+    <dd>{{vm.apiData.results['ams:owner'] | optionLabel: vm.catalogFilters.owners}}</dd>
+    <dt>Inhoudelijk contactpersoon</dt>
+    <dd>
+        <a ng-if="vm.apiData.results['dcat:contactPoint']['vcard:hasEmail']" href="{{vm.apiData.results['dcat:contactPoint']['vcard:hasEmail']}}"
+            class="o-btn o-btn--link">{{vm.apiData.results['dcat:contactPoint']['vcard:fn']}} ({{vm.apiData.results['dcat:contactPoint']['vcard:hasEmail']}})</a>
+    </dd>
+    <dt>Technisch contactpersoon</dt>
+    <dd>
+        <a ng-if="vm.apiData.results['dct:publisher']['foaf:mbox']" href="{{vm.apiData.results['dct:publisher']['foaf:mbox']}}" class="o-btn o-btn--link">{{vm.apiData.results['dct:publisher']['foaf:name']}} ({{vm.apiData.results['dct:publisher']['foaf:mbox']}})</a>
+    </dd>
+    <dt>Zichtbaarheid</dt>
+    <dd></dd>
+</dl>

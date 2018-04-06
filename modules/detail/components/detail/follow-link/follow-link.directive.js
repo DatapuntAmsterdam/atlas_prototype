@@ -17,6 +17,7 @@
         function linkFunction (scope, elem, attrs) {
             elem.on ('click', function () {
                 const url = attrs.dpFollowLink;
+                $window._paq.push(['trackEvent', 'CatalogResources', 'download']);
                 $window.open(url, '_blank');
             });
         }

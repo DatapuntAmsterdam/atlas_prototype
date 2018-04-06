@@ -6,6 +6,7 @@ import './shared/ducks/error-message';
 import './map/ducks/click-location/map-click-location';
 import * as auth from './shared/services/auth/auth';
 import { authenticateUser } from './reducers/user';
+import { fetchCatalogFilters } from './catalog/ducks/data-selection/data-selection-catalog';
 
 export default function initialize(Redux, reducer, stateUrlConverter, defaultState, ...middleware) {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -39,6 +40,8 @@ export default function initialize(Redux, reducer, stateUrlConverter, defaultSta
     window.reduxStore.dispatch(authenticateUser(auth.getAccessToken(), auth.getName(),
       auth.getScopes()));
   }
+
+  window.reduxStore.dispatch(fetchCatalogFilters());
 }
 
 window.initializeState = initialize;

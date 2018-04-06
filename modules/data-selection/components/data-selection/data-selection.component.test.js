@@ -45,7 +45,8 @@ describe('The dp-data-selection component', function () {
                     }
                 },
                 store: {
-                    dispatch: angular.noop
+                    dispatch: angular.noop,
+                    getState: angular.noop
                 }
             },
             function ($provide) {
@@ -97,7 +98,8 @@ describe('The dp-data-selection component', function () {
                 markers: [[1, 2]]
             },
             page: 2,
-            isLoading: false
+            isLoading: false,
+            catalogFilters: {}
         };
 
         mockedFilters = {
@@ -129,6 +131,7 @@ describe('The dp-data-selection component', function () {
         spyOn(dataSelectionApi, 'query').and.callThrough();
         spyOn(dataSelectionApi, 'getMarkers').and.callThrough();
         spyOn(store, 'dispatch');
+        spyOn(store, 'getState').and.returnValue(mockedState);
     });
 
     function getComponent (state, filters, user) {

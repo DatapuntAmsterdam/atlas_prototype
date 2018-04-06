@@ -1,0 +1,89 @@
+{
+    "@context": {
+        "ams": "http: //datacatalogus.amsterdam.nl/term/",
+        "ams-dcatd": "https: //acc.api.data.amsterdam.nl/dcatd/datasets/",
+        "ckan": "https: //ckan.org/terms/",
+        "class": "ams:class#",
+        "dc": "http: //purl.org/dc/elements/1.1/",
+        "dcat": "http: //www.w3.org/ns/dcat#",
+        "dct": "http: //purl.org/dc/terms/",
+        "foaf": "http: //xmlns.com/foaf/0.1/",
+        "lang1": "http: //id.loc.gov/vocabulary/iso639-1/",
+        "lang2": "http: //id.loc.gov/vocabulary/iso639-2/",
+        "org": "ams:org#",
+        "overheid": "http: //standaarden.overheid.nl/owms/terms/",
+        "overheidds": "http: //standaarden.overheid.nl/owms/terms/ds#",
+        "rdf": "http: //www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http: //www.w3.org/2000/01/rdf-schema#",
+        "skos": "http: //www.w3.org/2004/02/skos/core#",
+        "theme": "ams:theme#",
+        "time": "http: //www.w3.org/2006/time#",
+        "vcard": "http: //www.w3.org/2006/vcard/ns#",
+        "dcat:dataset": {
+            "@container": "@list"
+        },
+        "dcat:distribution": {
+            "@container": "@set"
+        },
+        "dcat:keyword": {
+            "@container": "@set"
+        },
+        "dcat:landingpage": {
+            "@type": "@id"
+        },
+        "dcat:theme": {
+            "@container": "@set",
+            "@type": "@id"
+        },
+        "dct:issued": {
+            "@type": "xsd:date"
+        },
+        "dct:language": {
+            "@type": "@id"
+        },
+        "dct:modified": {
+            "@type": "xsd:date"
+        },
+        "foaf:homepage": {
+            "@type": "@id"
+        },
+        "foaf:mbox": {
+            "@type": "@id"
+        },
+        "vcard:hasEmail": {
+            "@type": "@id"
+        },
+        "vcard:hasURL": {
+            "@type": "@id"
+        },
+        "vcard:hasLogo": {
+            "@type": "@id"
+        }
+    },
+    "dcat:dataset": [
+        {
+            "@id": "ams-dcatd: 642f15c7-8368-4795-9e3d-1a87fa7e562a",
+            "dct:description": "<p>Alle activiteiten in Amsterdam en omgeving...</p>",
+            "dct:identifier": "642f15c7-8368-4795-9e3d-1a87fa7e562a",
+            "dct:title": "Activiteiten"
+        },
+        {
+            "@id": "ams-dcatd:a968ab7f-d891-4502-b103-0f78dcc58fb8",
+            "dct:description": "<p>Alle restaurants en cafes in Amsterdam en omgeving...</p>",
+            "dct:identifier": "a968ab7f-d891-4502-b103-0f78dcc58fb8",
+            "dct:title": "Eten en Drinken"
+        },
+        {
+            "@id": "ams-dcatd: 5b1174ee-901b-47de-abfb-14548bfcb7fb",
+            "dct:description": "<p>Alle evenementen in Amsterdam en omgeving...</p>",
+            "dct:identifier": "5b1174ee-901b-47de-abfb-14548bfcb7fb",
+            "dct:title": "Evenementen in Amsterdam"
+        },
+        {
+            "@id": "ams-dcatd:d7a4c93c-0d7f-4d39-82d4-5f50eaffa624",
+            "dct:description": "<p>Alle attracties in Amsterdam en omgeving...</p>",
+            "dct:identifier": "d7a4c93c-0d7f-4d39-82d4-5f50eaffa624",
+            "dct:title": "Attracties"
+        }
+    ]
+}

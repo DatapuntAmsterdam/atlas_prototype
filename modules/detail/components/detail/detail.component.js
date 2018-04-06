@@ -8,6 +8,7 @@
                 reload: '=',
                 isLoading: '=',
                 isMapHighlight: '=',
+                catalogFilters: '=',
                 user: '<'
             },
             templateUrl: 'modules/detail/components/detail/detail.html',
@@ -25,7 +26,8 @@
         'geojson',
         'crsConverter',
         'dataFormatter',
-        'nearestDetail'
+        'nearestDetail',
+        'markdownParser'
     ];
 
     /* eslint-disable max-params */
@@ -39,7 +41,8 @@
         geojson,
         crsConverter,
         dataFormatter,
-        nearestDetail
+        nearestDetail,
+        markdownParser
     ) {
         /* eslint-enable max-params */
         var vm = this;
@@ -53,7 +56,15 @@
         });
 
         // (Re)load the data when the endpoint is set or gets changed
-        $scope.$watch('vm.endpoint', getData);
+        $scope.$watch('vm.endpoint', () => {
+            getData(vm.endpoint);
+        });
+
+        // Ensure the catalog filters for dcatd endpoints
+        $scope.$watch('vm.catalogFilters', () => {
+            if (!vm.catalogFilters) return;
+            getData(vm.endpoint);
+        });
 
         // (Re)load the data when the user logs in or out or on a change of authorization level
         $scope.$watch('vm.user.scopes', (newValue, oldValue) => {
@@ -79,12 +90,21 @@
                 //   BRK Kadastrale Subjecten, nor
                 //   handelsregister, nor
                 //   grondexploitatie
+                // Or the catalogFilter data is not present
                 // so do not fetch data
+                delete vm.apiData;
+                errorHandler();
+            } else if (category === 'dcatd' && subject === 'datasets' && !vm.catalogFilters) {
+                // The catalogFilters data is not present so do not fetch data
                 delete vm.apiData;
                 errorHandler();
             } else {
                 api.getByUrl(endpoint).then(function (data) {
                     data = dataFormatter.formatData(data, subject);
+
+                    if (category === 'dcatd' && subject === 'datasets') {
+                        data['dct:description'] = markdownParser.parse(data['dct:description']);
+                    }
 
                     vm.apiData = {
                         results: data

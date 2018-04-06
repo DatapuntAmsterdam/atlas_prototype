@@ -20,6 +20,7 @@
             vm.reload = state.detail && state.detail.reload;
             vm.isLoading = state.detail && state.detail.isLoading;
             vm.isMapHighlight = state.map && state.map.highlight;
+            vm.catalogFilters = state.catalogFilters;
         }
     }
 })();

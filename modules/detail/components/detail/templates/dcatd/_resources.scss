@@ -1,0 +1,90 @@
+@import "./styles/config";
+
+.resources {
+  @extend %base-font;
+
+  &-button  {
+    background-color: $white;
+    border: 1px solid $pinkish-grey;
+    height: 33px;
+    width: 33px;
+
+    &-new {
+      @extend %icon-plus;
+
+      &:hover {
+        @extend %icon-plus-white;
+      }
+    }
+
+    &-edit {
+      @extend %icon-edit;
+
+      &:hover {
+        @extend %icon-edit-white;
+      }
+    }
+
+    &:hover {
+      background-color: $red;
+      border-color: $red;
+    }
+  }
+
+  .resources-type {
+    margin-bottom: 22px;
+
+    &__header {
+      border-bottom: 1px solid $pinkish-grey;
+      color: $black;
+      display: flex;
+      font-size: 17px;
+      padding: 8px 23px 15px 20px;
+
+      &-title {
+        align-self: center;
+        flex-grow: 1;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .resources-button-new  {
+        align-self: center;
+      }
+    }
+
+    &__content {
+      font-size: 16px;
+      margin: 0 -20px 23px;
+      padding: 0 20px;
+
+      &-item {
+        border-bottom: 1px solid $pinkish-grey;
+        display: flex;
+        padding: 11px 20px;
+        width: 100%;
+      }
+
+      .resources-button-edit {
+        align-self: center;
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-right: 3px;
+      }
+
+      &:empty {
+        background-color: $white-four;
+        border-bottom: 1px solid $pinkish-grey;
+        color: $warm-grey;
+        font-style: italic;
+        margin: 0;
+        padding: 22px 0;
+        text-align:  center;
+
+        &::before {
+          content: "Nog geen resources van dit type";
+        }
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@
             store.dispatch({
                 type: ACTIONS.FETCH_DATA_SELECTION,
                 payload: {
-                    dataset: 'catalogus',
+                    dataset: 'dcatd',
                     view: 'CARDS',
                     page: 1
                 }

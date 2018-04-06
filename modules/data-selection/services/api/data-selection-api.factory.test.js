@@ -213,16 +213,16 @@ describe('The dataSelectionApi factory', function () {
 
         it('calls the api factory with the configuration, (optional) active filters and page', function () {
             // Without active filters
-            dataSelectionApi.query('zwembaden', 'TABLE', undefined, 1, []);
+            dataSelectionApi.query('zwembaden', 'TABLE', undefined, 1, [], {});
             expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {},
-                1, [], undefined);
+                1, [], {}, undefined);
 
             // With active filters
             mockedApiService.query.calls.reset();
-            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 1, 'searchText', []);
+            dataSelectionApi.query('zwembaden', 'TABLE', {water: 'Verwarmd'}, 1, 'searchText', [], {});
             expect(mockedApiService.query).toHaveBeenCalledWith(mockedConfig.datasets.zwembaden, {
                 water: 'Verwarmd'
-            }, 1, 'searchText', []);
+            }, 1, 'searchText', [], {});
         });
 
         it('returns the total number of pages', function () {
@@ -516,7 +516,8 @@ describe('The dataSelectionApi factory', function () {
                 },
                 1,
                 'searchText',
-                []
+                [],
+                {}
             );
 
             expect(mockedApiService.query).toHaveBeenCalledWith(
@@ -527,7 +528,8 @@ describe('The dataSelectionApi factory', function () {
                 },
                 1,
                 'searchText',
-                []
+                [],
+                {}
             );
         });
 

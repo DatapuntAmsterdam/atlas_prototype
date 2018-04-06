@@ -1,0 +1,35 @@
+<div class="resources">
+
+    <div class="resources-type" ng-repeat="resourceType in vm.apiData.results.resources">
+        <div class="resources-type__header">
+            <span class="resources-type__header-title">{{resourceType.type | optionLabel: vm.catalogFilters.resourceTypes}}</span>
+            <button type="button" ng-if="vm.apiData.results.canEditDataset" class="resources-button resources-button-new" onclick="alert('not implemented');return false;" />
+        </div>
+        <div class="resources-type__content" ng-repeat="resource in resourceType.rows">
+            <div class="resources-type__content-item">
+                <a class="resources-item piwik_download" dp-follow-link="{{ resource['dcat:accessURL'] }}">
+                    <div class="resources-item__modified" ng-if="resource['dct:modified']">
+                        gewijzigd op {{resource['dct:modified'] | date:'dd MMMM yyyy' }}
+                    </div>
+                    <div class="resources-item__file-size" ng-if="resource['dcat:byteSize'] > 0">{{resource['dcat:byteSize'] | filesize}}</div>
+                    <div class="resources-item__navigate-arrow" ng-if="!resource['dcat:byteSize']"></div>
+                    <div class="resources-item__title">
+                        {{resource['dct:title']}}
+                    </div>
+                    <div class="resources-item__description">
+                        <span class="c-data-selection-file-type
+                                     c-data-selection-file-type__name
+                                     c-data-selection-file-type__format-{{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes| lowercase }}">
+                            <span ng-if="resource['dct:format']">{{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes}}</span>
+                            <span ng-if="!resource['dct:format']"> ? </span>
+                        </span>
+                        <span>{{resource['dct:description']}}</span>
+                    </div>
+                </a>
+
+
+                <button type="button" ng-if="vm.apiData.results.canEditDataset" class="resources-button resources-button-edit" onclick="alert('not implemented');return false;"/>
+            </div>
+        </div>
+    </div>
+</div>

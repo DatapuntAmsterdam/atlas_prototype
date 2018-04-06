@@ -1,0 +1,57 @@
+<div class="u-grid dcad-dataset-detail">
+
+    <div class="u-row u-margin__bottom--4">
+        <div class="o-header">
+            <h3 class="o-header__subtitle">Dataset
+                <button class="o-btn navigate-button" title="Wijzigen" dp-routing-link="{{ vm.apiData.results.editDatasetUrl }}">
+                    Wijzigen
+                    <span class="u-sr-only">Wijzigen</span>
+                </button>
+            </h3>
+            <h2 class="o-header__title u-margin__bottom--3 ">{{vm.apiData.results["dct:title"]}}</h2>
+        </div>
+        <span class="s-detail-catalogus-notes" ng-bind-html="vm.apiData.results['dct:description']"> </span>
+    </div>
+
+    <div ng-show="true" class="u-row">
+        <div class="u-col-md--12">
+            <h3 class="o-header__subtitle">Resources</h3>
+
+            <div class="c-detail__block--" ng-include="'modules/detail/components/detail/templates/dcatd/partial/resources.html'"></div>
+        </div>
+    </div>
+
+    <div ng-show="true" class="c-detail__block">
+        <div class="u-col-md--12">
+            <h3 class="o-header__subtitle">Details</h3>
+
+            <div ng-include="'modules/detail/components/detail/templates/dcatd/partial/details.html'"></div>
+        </div>
+    </div>
+
+    <div ng-show="true" class="c-detail__block">
+        <div class="u-col-md--12">
+            <h3 class="o-header__subtitle">Thema's</h3>
+
+            <p ng-include="'modules/detail/components/detail/templates/dcatd/partial/themes.html'"></p>
+        </div>
+    </div>
+
+    <div class="c-detail__block u-padding__bottom--1">
+        <div class="u-col-md--12">
+            <h3 class="o-header__subtitle">Tags</h3>
+
+            <ul ng-repeat="tag in vm.apiData.results['dcat:keyword']" class="u-inline">
+                <li class="u-inline">
+                    <span class="o-tag">{{tag | dpUppercaseFirstLetter}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="c-detail__block">
+        <h3 class="o-header__subtitle">Licentie</h3>
+        <p ng-if="vm.apiData.results['ams:license']">{{vm.apiData.results['ams:license'] | optionLabel: vm.catalogFilters.licenseTypes }}</p>
+    </div>
+
+</div>

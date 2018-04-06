@@ -23,7 +23,7 @@
                 .then(results => results.numberOfRecords);
         }
 
-        function query (dataset, view, activeFilters, page, searchText, geometryFilter) {
+        function query (dataset, view, activeFilters, page, searchText, geometryFilter, catalogFilters) {
             const customApi = DATA_SELECTION_CONFIG.datasets[dataset].CUSTOM_API;
             const apiService = $injector.get(customApi);
 
@@ -32,7 +32,8 @@
                 filterUnavailableFilters(dataset, activeFilters),
                 page,
                 searchText,
-                geometryFilter
+                geometryFilter,
+                catalogFilters
             ).then(function (data) {
                 return {
                     numberOfPages: data.numberOfPages,

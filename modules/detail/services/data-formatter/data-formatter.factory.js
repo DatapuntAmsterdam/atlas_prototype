@@ -5,7 +5,9 @@
         .module('dpDetail')
         .factory('dataFormatter', dataFormatterFactory);
 
-    function dataFormatterFactory () {
+    dataFormatterFactory.$inject = ['store'];
+
+    function dataFormatterFactory (store) {
         return {
             formatData
         };
@@ -14,6 +16,8 @@
             switch (subject) {
                 case 'api':
                     return formatApiData(data);
+                case 'datasets': // dcat data
+                    return formatCatalogData(data);
                 default:
                     return data;
             }
@@ -42,6 +46,27 @@
                 result[key] = data.result[key];
                 return result;
             }, formattedData);
+        }
+
+        function formatCatalogData (data) {
+            const state = store.getState();
+            const resourceTypes = state.catalogFilters.resourceTypes;
+            if (!resourceTypes) return {};
+            var resources = data['dcat:distribution'];
+
+            data.resources = resourceTypes.map((item, index) => {
+                return {
+                    type: item.id,
+                    rows: resources.filter((row) => row['ams:resourceType'] === item.id)
+                };
+            }).filter(resource => resource.rows.length > 0);
+
+            delete data['dcat:distribution'];
+            data.editDatasetUrl = `dcatd_admin/datasets/${data['dct:identifier']}`;
+            data.canEditDataset = state.user.scopes.includes('CAT/W');
+            // data.canEditDataset = state.user.scopes.includes('GREX/R');
+
+            return data;
         }
     }
 })();

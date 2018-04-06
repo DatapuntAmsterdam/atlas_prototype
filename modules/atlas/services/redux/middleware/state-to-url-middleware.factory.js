@@ -18,7 +18,8 @@
 
                     const ignoredActions = ['AUTHENTICATE_USER', 'MAP_START_DRAWING',
                         'MAP_EMPTY_GEOMETRY', 'MAP_UPDATE_SHAPE',
-                        'SET_DATA_SELECTION_GEOMETRY_FILTER', 'RESET_DATA_SELECTION_GEOMETRY_FILTER'];
+                        'SET_DATA_SELECTION_GEOMETRY_FILTER', 'RESET_DATA_SELECTION_GEOMETRY_FILTER',
+                        'FETCH_CATALOG_FILTERS_REQUEST'];
 
                     // Update the state first
                     const returnValue = next(action);

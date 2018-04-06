@@ -1,0 +1,8 @@
+<div class="c-catalogus-theme">
+    <div ng-repeat="group in vm.apiData.results['dcat:theme']" class="c-catalogus-theme__icon c-catalogus-theme__icon--{{group.substring(6)}}">
+
+        <div class="c-catalogus-theme__link">
+            <div class="c-catalogus-theme__link__text">{{ group | optionLabel: vm.catalogFilters.groupTypes:'theme'}}</div>
+        </div>
+    </div>
+</div>
