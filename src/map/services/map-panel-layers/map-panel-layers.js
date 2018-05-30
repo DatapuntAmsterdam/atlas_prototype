@@ -102,7 +102,7 @@ export default [
   {
     category: 'Geografie: onroerende zaken',
     id: 'gbep',
-    layers: ['wkpb'],
+    layers: ['beperking'],
     legendItems: [
       {
         selectable: false,
