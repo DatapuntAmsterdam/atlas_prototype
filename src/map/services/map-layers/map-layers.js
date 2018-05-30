@@ -145,7 +145,7 @@ export default [
   {
     id: 'gbep',
     url: 'maps/wkpb',
-    layers: ['wkpb']
+    layers: ['beperking']
   },
   // geografie: gebieden
   {
