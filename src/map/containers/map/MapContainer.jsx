@@ -41,9 +41,7 @@ class MapContainer extends React.Component {
   render() {
     return (
       <div className={`c-map c-map--drawing-mode-${this.props.drawMode} qa-map-container`}>
-        <LeafletContainer
-          getLeafletInstance={this.setLeafletInstance}
-        />
+        <MapPreviewPanelContainer />
         {
           this.state.leafletInstance && (
             <DrawTool
@@ -55,13 +53,15 @@ class MapContainer extends React.Component {
           isFullscreen={this.props.isFullscreen}
           onToggleFullscreen={this.props.onToggleFullscreen}
         />
-        <MapPanelContainer />
         {
           this.props.embedLink.length ? (
             <MapEmbedButton link={this.props.embedLink} />
           ) : ''
         }
-        <MapPreviewPanelContainer />
+        <LeafletContainer
+          getLeafletInstance={this.setLeafletInstance}
+        />
+        <MapPanelContainer />
       </div>
     );
   }
