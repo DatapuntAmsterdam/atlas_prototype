@@ -41,9 +41,7 @@ class MapContainer extends React.Component {
   render() {
     return (
       <div className={`c-map c-map--drawing-mode-${this.props.drawMode} qa-map-container`}>
-        <div className="map-preview-panel-wrapper">
-          <MapPreviewPanelContainer />
-        </div>
+        <MapPreviewPanelContainer />
         {
           this.state.leafletInstance && (
             <DrawTool
