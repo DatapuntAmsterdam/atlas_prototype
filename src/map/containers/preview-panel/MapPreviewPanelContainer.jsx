@@ -121,69 +121,71 @@ class MapPreviewPanelContainer extends React.Component {
     const isDetailLoaded = !isLoading && props.detail && props.mapDetail && props.detailResult;
 
     return !props.isEmbed && (
-      <section className={`
-        map-preview-panel
-        map-preview-panel--${props.isMapPreviewPanelVisible ? 'visible' : 'hidden'}
-      `}
-      >
-        <div className="map-preview-panel__heading">
-          {showDisplayAllResultsButton && (
-            <button
-              className="map-preview-panel__button map-preview-panel__button--show-all"
-              onClick={() => props.onSearch(props.mapClickLocation)}
-              title="Alle resultaten tonen"
-            >
-              <PlusIcon className="map-preview-panel__button-icon" />
-              <span className="map-preview-panel__button-label">Alle resultaten tonen</span>
-            </button>
-          )}
-          <button
-            className="map-preview-panel__button"
-            onClick={props.onMapPreviewPanelMaximize}
-            title="Volledige weergave tonen"
-          >
-            <MaximizeIcon className="map-preview-panel__button-icon" />
-          </button>
-          <button
-            className="map-preview-panel__button"
-            onClick={props.onMapPreviewPanelClose}
-            title="Sluiten"
-          >
-            <CloseIcon className="map-preview-panel__button-icon" />
-          </button>
-        </div>
-        <div
-          className={`
-            map-preview-panel__body
-            map-preview-panel__body--${isLoading ? 'loading' : 'loaded'}
-          `}
+      <div className="map-preview-panel-wrapper">
+        <section className={`
+          map-preview-panel
+          map-preview-panel--${props.isMapPreviewPanelVisible ? 'visible' : 'hidden'}
+        `}
         >
-          {isLoading && (
-            <LoadingIndicator />
-          )}
-          {isDetailLoaded && (
-            <MapDetailResult
-              endpoint={props.mapDetail.currentEndpoint}
-              panoUrl={panoDetailPreview.url}
-              onMaximize={props.onMapPreviewPanelMaximize}
-              onPanoPreviewClick={this.onPanoPreviewClick}
-              result={props.detailResult}
-            />
-          )}
-          {!isDetailLoaded && isSearchLoaded && (
-            <MapSearchResults
-              location={props.searchLocation}
-              missingLayers={props.missingLayers}
-              onItemClick={props.onMapSearchResultsItemClick}
-              onMaximize={props.onMapPreviewPanelMaximize}
-              onPanoPreviewClick={this.onPanoPreviewClick}
-              panoUrl={panoSearchPreview.url}
-              resultLimit={previewPanelSearchResultLimit}
-              results={props.results}
-            />
-          )}
-        </div>
-      </section>
+          <div className="map-preview-panel__heading">
+            {showDisplayAllResultsButton && (
+              <button
+                className="map-preview-panel__button map-preview-panel__button--show-all"
+                onClick={() => props.onSearch(props.mapClickLocation)}
+                title="Alle resultaten tonen"
+              >
+                <PlusIcon className="map-preview-panel__button-icon" />
+                <span className="map-preview-panel__button-label">Alle resultaten tonen</span>
+              </button>
+            )}
+            <button
+              className="map-preview-panel__button"
+              onClick={props.onMapPreviewPanelMaximize}
+              title="Volledige weergave tonen"
+            >
+              <MaximizeIcon className="map-preview-panel__button-icon" />
+            </button>
+            <button
+              className="map-preview-panel__button"
+              onClick={props.onMapPreviewPanelClose}
+              title="Sluiten"
+            >
+              <CloseIcon className="map-preview-panel__button-icon" />
+            </button>
+          </div>
+          <div
+            className={`
+              map-preview-panel__body
+              map-preview-panel__body--${isLoading ? 'loading' : 'loaded'}
+            `}
+          >
+            {isLoading && (
+              <LoadingIndicator />
+            )}
+            {isDetailLoaded && (
+              <MapDetailResult
+                endpoint={props.mapDetail.currentEndpoint}
+                panoUrl={panoDetailPreview.url}
+                onMaximize={props.onMapPreviewPanelMaximize}
+                onPanoPreviewClick={this.onPanoPreviewClick}
+                result={props.detailResult}
+              />
+            )}
+            {!isDetailLoaded && isSearchLoaded && (
+              <MapSearchResults
+                location={props.searchLocation}
+                missingLayers={props.missingLayers}
+                onItemClick={props.onMapSearchResultsItemClick}
+                onMaximize={props.onMapPreviewPanelMaximize}
+                onPanoPreviewClick={this.onPanoPreviewClick}
+                panoUrl={panoSearchPreview.url}
+                resultLimit={previewPanelSearchResultLimit}
+                results={props.results}
+              />
+            )}
+          </div>
+        </section>
+      </div>
     );
   }
 }

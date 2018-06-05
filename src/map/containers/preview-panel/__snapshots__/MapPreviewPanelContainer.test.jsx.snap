@@ -5,968 +5,1036 @@ exports[`MapPreviewPanelContainer rendering should not render when the applicati
 exports[`MapPreviewPanelContainer rendering should not render when the application is in embed state 1`] = `""`;
 
 exports[`MapPreviewPanelContainer rendering should render detail 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapDetailResult
-      endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      result={
-        Object {
-          "location": Object {
-            "latitude": 1,
-            "longitude": 0,
-          },
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapDetailResult
+        endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        result={
+          Object {
+            "location": Object {
+              "latitude": 1,
+              "longitude": 0,
+            },
+          }
         }
-      }
-    />
-  </div>
-</section>
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render detail 2`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapDetailResult
-      endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl=""
-      result={
-        Object {
-          "location": Object {
-            "latitude": 2,
-            "longitude": 1,
-          },
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapDetailResult
+        endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl=""
+        result={
+          Object {
+            "location": Object {
+              "latitude": 2,
+              "longitude": 1,
+            },
+          }
         }
-      }
-    />
-  </div>
-</section>
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render detail with a button to show all results 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button map-preview-panel__button--show-all"
-      onClick={[Function]}
-      title="Alle resultaten tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-      <span
-        className="map-preview-panel__button-label"
-      >
-        Alle resultaten tonen
-      </span>
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapDetailResult
-      endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      result={
-        Object {
-          "location": Object {
-            "latitude": 1,
-            "longitude": 0,
-          },
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button map-preview-panel__button--show-all"
+        onClick={[Function]}
+        title="Alle resultaten tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+        <span
+          className="map-preview-panel__button-label"
+        >
+          Alle resultaten tonen
+        </span>
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapDetailResult
+        endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        result={
+          Object {
+            "location": Object {
+              "latitude": 1,
+              "longitude": 0,
+            },
+          }
         }
-      }
-    />
-  </div>
-</section>
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render detail without pano 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapDetailResult
-      endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl=""
-      result={
-        Object {
-          "location": Object {
-            "latitude": 1,
-            "longitude": 2,
-          },
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapDetailResult
+        endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl=""
+        result={
+          Object {
+            "location": Object {
+              "latitude": 1,
+              "longitude": 2,
+            },
+          }
         }
-      }
-    />
-  </div>
-</section>
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render detail without pano 2`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapDetailResult
-      endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="different-pano-url"
-      result={
-        Object {
-          "location": Object {
-            "latitude": 1,
-            "longitude": 2,
-          },
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapDetailResult
+        endpoint="https://acc.api.data.amsterdam.nl/fake/endpoint"
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="different-pano-url"
+        result={
+          Object {
+            "location": Object {
+              "latitude": 1,
+              "longitude": 2,
+            },
+          }
         }
-      }
-    />
-  </div>
-</section>
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render empty search results 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
+          Object {
+            "latitude": 1,
+            "longitude": 0,
+          }
         }
-      }
-      missingLayers=""
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={Array []}
-    />
-  </div>
-</section>
+        missingLayers=""
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={Array []}
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render empty search results 2`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
-        }
-      }
-      missingLayers=""
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={
-        Array [
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
           Object {
-            "item": 3,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+            "latitude": 1,
+            "longitude": 0,
+          }
+        }
+        missingLayers=""
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 3,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render loading of detail 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loading
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <LoadingIndicator />
-  </div>
-</section>
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loading
+            "
+    >
+      <LoadingIndicator />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render loading of search results 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loading
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <LoadingIndicator />
-  </div>
-</section>
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loading
+            "
+    >
+      <LoadingIndicator />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render multiple missing layers 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
+          Object {
+            "latitude": 1,
+            "longitude": 0,
+          }
         }
-      }
-      missingLayers="Layer 1, Layer 2"
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={
-        Array [
-          Object {
-            "item": 1,
-          },
-          Object {
-            "item": 2,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+        missingLayers="Layer 1, Layer 2"
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 1,
+            },
+            Object {
+              "item": 2,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render one missing layer 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
+          Object {
+            "latitude": 1,
+            "longitude": 0,
+          }
         }
-      }
-      missingLayers="Layer 1"
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={
-        Array [
-          Object {
-            "item": 1,
-          },
-          Object {
-            "item": 2,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+        missingLayers="Layer 1"
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 1,
+            },
+            Object {
+              "item": 2,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render search results 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
+          Object {
+            "latitude": 1,
+            "longitude": 0,
+          }
         }
-      }
-      missingLayers=""
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={
-        Array [
-          Object {
-            "item": 1,
-          },
-          Object {
-            "item": 2,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+        missingLayers=""
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 1,
+            },
+            Object {
+              "item": 2,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render search results 2`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
-        }
-      }
-      missingLayers=""
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={
-        Array [
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
           Object {
-            "item": 3,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+            "latitude": 1,
+            "longitude": 0,
+          }
+        }
+        missingLayers=""
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 3,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render search results without pano 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
+          Object {
+            "latitude": 1,
+            "longitude": 0,
+          }
         }
-      }
-      missingLayers=""
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      resultLimit={3}
-      results={
-        Array [
-          Object {
-            "item": 1,
-          },
-          Object {
-            "item": 2,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+        missingLayers=""
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 1,
+            },
+            Object {
+              "item": 2,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render search results without pano 2`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
+          Object {
+            "latitude": 1,
+            "longitude": 0,
+          }
         }
-      }
-      missingLayers=""
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={
-        Array [
-          Object {
-            "item": 1,
-          },
-          Object {
-            "item": 2,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+        missingLayers=""
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 1,
+            },
+            Object {
+              "item": 2,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render visibility 1`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--hidden
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--hidden
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
-        }
-      }
-      missingLayers=""
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={
-        Array [
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
           Object {
-            "item": 3,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+            "latitude": 1,
+            "longitude": 0,
+          }
+        }
+        missingLayers=""
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 3,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
 
 exports[`MapPreviewPanelContainer rendering should render visibility 2`] = `
-<section
-  className="
-        map-preview-panel
-        map-preview-panel--visible
-      "
+<div
+  className="map-preview-panel-wrapper"
 >
-  <div
-    className="map-preview-panel__heading"
-  >
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Volledige weergave tonen"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-    <button
-      className="map-preview-panel__button"
-      onClick={[Function]}
-      title="Sluiten"
-    >
-      <Component
-        className="map-preview-panel__button-icon"
-      />
-    </button>
-  </div>
-  <div
+  <section
     className="
-            map-preview-panel__body
-            map-preview-panel__body--loaded
-          "
+          map-preview-panel
+          map-preview-panel--visible
+        "
   >
-    <MapSearchResults
-      location={
-        Object {
-          "latitude": 1,
-          "longitude": 0,
-        }
-      }
-      missingLayers=""
-      onItemClick={[Function]}
-      onMaximize={[Function]}
-      onPanoPreviewClick={[Function]}
-      panoUrl="pano-url"
-      resultLimit={3}
-      results={
-        Array [
+    <div
+      className="map-preview-panel__heading"
+    >
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Volledige weergave tonen"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+      <button
+        className="map-preview-panel__button"
+        onClick={[Function]}
+        title="Sluiten"
+      >
+        <Component
+          className="map-preview-panel__button-icon"
+        />
+      </button>
+    </div>
+    <div
+      className="
+              map-preview-panel__body
+              map-preview-panel__body--loaded
+            "
+    >
+      <MapSearchResults
+        location={
           Object {
-            "item": 3,
-          },
-        ]
-      }
-    />
-  </div>
-</section>
+            "latitude": 1,
+            "longitude": 0,
+          }
+        }
+        missingLayers=""
+        onItemClick={[Function]}
+        onMaximize={[Function]}
+        onPanoPreviewClick={[Function]}
+        panoUrl="pano-url"
+        resultLimit={3}
+        results={
+          Array [
+            Object {
+              "item": 3,
+            },
+          ]
+        }
+      />
+    </div>
+  </section>
+</div>
 `;
