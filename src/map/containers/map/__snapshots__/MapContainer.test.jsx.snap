@@ -4,15 +4,15 @@ exports[`MapContainer should render 1`] = `
 <div
   className="c-map c-map--drawing-mode-none qa-map-container"
 >
-  <Connect(LeafletContainer)
-    getLeafletInstance={[Function]}
-  />
+  <Connect(MapPreviewPanelContainer) />
   <ToggleFullscreen
     isFullscreen={false}
     onToggleFullscreen={[Function]}
   />
+  <Connect(LeafletContainer)
+    getLeafletInstance={[Function]}
+  />
   <Connect(MapPanelContainer) />
-  <Connect(MapPreviewPanelContainer) />
 </div>
 `;
 
@@ -20,14 +20,14 @@ exports[`MapContainer should render 2`] = `
 <div
   className="c-map c-map--drawing-mode-draw qa-map-container"
 >
-  <Connect(LeafletContainer)
-    getLeafletInstance={[Function]}
-  />
+  <Connect(MapPreviewPanelContainer) />
   <ToggleFullscreen
     isFullscreen={false}
     onToggleFullscreen={[Function]}
   />
+  <Connect(LeafletContainer)
+    getLeafletInstance={[Function]}
+  />
   <Connect(MapPanelContainer) />
-  <Connect(MapPreviewPanelContainer) />
 </div>
 `;
