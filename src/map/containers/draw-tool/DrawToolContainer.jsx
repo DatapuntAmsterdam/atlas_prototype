@@ -118,8 +118,6 @@ class DrawToolContainer extends React.Component {
   onDrawingMode(drawingMode) {
     if (drawingMode !== drawToolConfig.DRAWING_MODE.NONE) {
       this.setState({ previousMarkers: [...this.props.currentShape.markers] });
-      this.props.onEmptyGeometry();
-      this.props.resetGeometryFilter({ drawingMode });
       this.props.onStartDrawing({ drawingMode });
     } else {
       this.props.onEndDrawing();

@@ -94,6 +94,7 @@ describe('Draw-tool service', () => {
         isConsistent: true,
         type: null,
         layer: null,
+        layerPrev: null,
         markers: [],
         markersPrev: [],
         markersEdit: [],

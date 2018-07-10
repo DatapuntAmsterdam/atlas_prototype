@@ -15,6 +15,7 @@ const DEFAULTS = {
   isConsistent: true,
   type: null,
   layer: null,
+  layerPrev: null,
   markers: [],
   markersPrev: [],
   markersEdit: [],
@@ -93,6 +94,8 @@ function onChangePolygon() {
 
 // Construct a polygon from a array of coordinates
 export function setPolygon(latLngs) {
+  // Save the previous layer
+  currentShape.layerPrev = currentShape.layer;
   deletePolygon(); // delete any existing polygon
   if (latLngs.length > 0) {
     createPolygon(new L.Polygon(latLngs));
@@ -124,8 +127,21 @@ function createPolygon(layer) {
 // Called when a polygon is finished (end draw or end edit)
 function finishPolygon() {
   currentShape.markersEdit = [];
-  if (drawTool.drawingMode === drawToolConfig.DRAWING_MODE.EDIT && !currentShape.isConsistent) {
-    setPolygon([...currentShape.markersPrev]); // restore previous polygon
+  if (
+    drawTool.drawingMode === drawToolConfig.DRAWING_MODE.EDIT &&
+    !currentShape.isConsistent
+  ) {
+    // Exit edit mode with an inconsistent shape; restore previous shape
+    setPolygon([...currentShape.markersPrev]);
+    updateShape();
+  } else if (
+    drawTool.drawingMode === drawToolConfig.DRAWING_MODE.DRAW &&
+    currentShape.markers.length <= 1 &&
+    currentShape.layerPrev
+  ) {
+    // Exit draw mode without having drawn a line or shape;
+    // Restore the previous polygon layer if available
+    createPolygon(currentShape.layerPrev);
     updateShape();
   }
   setPolygon(currentShape.markers);
@@ -199,6 +215,9 @@ function handleDrawEvent(eventName, e) {
   const handlers = {
     // Triggered when the user has chosen to draw a particular vector or marker
     DRAWSTART: () => setDrawingMode(drawToolConfig.DRAWING_MODE.DRAW),
+
+    // Triggered when the user has chosen to exit the drawing mode
+    DRAWSTOP: finishPolygon,
 
     // Triggered when a vertex is created on a polyline or polygon
     DRAWVERTEX: bindLastDrawnMarker,
@@ -479,6 +498,9 @@ function bindLastDrawnMarker() {
         const isLineOrPolygon = currentShape.markers.length > 1;
         disable(); // Includes auto close for any line or polygon
         if (!isLineOrPolygon) {
+          if (currentShape.markers.length) {
+            setPolygon([]);
+          }
           // Reopen draw mode to place first marker somewhere else
           enable();
         }
