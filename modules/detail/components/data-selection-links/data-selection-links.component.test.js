@@ -37,7 +37,7 @@ describe('The dp-data-selection-link component', () => {
         return component;
     }
 
-    it('renders a header for both BAG and HR', () => {
+    it('renders a header for BAG, HR and BRK', () => {
         const component = getComponent({});
 
         expect(component.find('.qa-bag dp-glossary-header').attr('definition')).toBe('NUMMERAANDUIDING');
@@ -45,9 +45,12 @@ describe('The dp-data-selection-link component', () => {
 
         expect(component.find('.qa-hr dp-glossary-header').attr('definition')).toBe('VESTIGING');
         expect(component.find('.qa-hr dp-glossary-header').attr('use-plural')).toBe('true');
+
+        expect(component.find('.qa-brk dp-glossary-header').attr('definition')).toBe('OBJECT');
+        expect(component.find('.qa-brk dp-glossary-header').attr('use-plural')).toBe('true');
     });
 
-    it('has links to the LIST view of data-selection for both BAG and HR', () => {
+    it('has links to the LIST view of data-selection for BAG, HR and BRK', () => {
         const activeFilters = {stadsdeel_naam: 'Noord', buurt_naam: 'Ghetto C'};
         const component = getComponent(activeFilters);
 
@@ -69,6 +72,19 @@ describe('The dp-data-selection-link component', () => {
             type: ACTIONS.FETCH_DATA_SELECTION,
             payload: {
                 dataset: 'hr',
+                view: 'LIST',
+                filters: activeFilters,
+                page: 1
+            }
+        });
+
+        store.dispatch.calls.reset();
+
+        component.find('dp-link button').click();
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: ACTIONS.FETCH_DATA_SELECTION,
+            payload: {
+                dataset: 'brk',
                 view: 'LIST',
                 filters: activeFilters,
                 page: 1
