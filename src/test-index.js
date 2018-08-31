@@ -22,7 +22,7 @@ import './vendor';
 // All our modules' javascript
 import '../modules/atlas/atlas.module';
 import '../modules/atlas/atlas.run';
-import '../modules/atlas/atlas.version.webpack';
+import '../modules/atlas/atlas.version';
 import '../modules/atlas/components/dashboard/dashboard-columns.factory';
 import '../modules/atlas/components/dashboard/dashboard.component';
 import '../modules/atlas/components/dashboard/synchronisation/data-selection.controller';

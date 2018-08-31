@@ -88,7 +88,7 @@ docker-compose up --build test-e2e-aria
 ## Other useful commands
 
 - `npm run clean`
-- `npm run test-lint`
+- `npm run lint`
 
 ## Techniques used
 - AngularJS

@@ -1,6 +1,6 @@
 # Build
 FROM node:8.9 AS build-deps
-MAINTAINER datapunt.ois@amsterdam.nl
+LABEL maintainer="datapunt@amsterdam.nl"
 
 WORKDIR /app
 
@@ -44,8 +44,8 @@ RUN echo "build= `date`" > /app/dist/version.txt
 
 # Test dependencies
 COPY karma.conf.js \
-      jest.config.js \
-      /app/
+     jest.config.js \
+     /app/
 COPY test /app/test
 
 

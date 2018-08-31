@@ -1,6 +1,6 @@
 version: '3.5'
 services:
-  atlas_func: # NGINX
+  atlas: # NGINX
     build:
       args:
         - BUILD_ENV=acc
@@ -14,26 +14,20 @@ services:
       context: .
     ipc: host
 
-  test-lint:
-    build:
-      context: .
-      target: build-deps
-    command: npm run test-lint
-
   test-unit-integration:
     build:
       context: .
       target: build-deps
     environment:
       - NODE_ENV=development
-    command: npm run test
+    command: npm run lint && npm run test
 
   test-e2e:
     build:
       dockerfile: Dockerfile-e2e
       context: .
     links:
-      - atlas_func:acc.data.amsterdam.nl
+      - atlas:acc.data.amsterdam.nl
     environment:
       # Note that baseUrl must be formatted so
       # calls to API pass CORS check!
@@ -57,3 +51,20 @@ services:
       - PASSWORD_EMPLOYEE
       - PASSWORD_EMPLOYEE_PLUS
     command: ./scripts/ci/test-e2e-aria.sh
+
+  test-e2e-api-health:
+    build:
+      dockerfile: Dockerfile-e2e
+      context: .
+    links:
+      - atlas:acc.data.amsterdam.nl
+    environment:
+      # Note that baseUrl must be formatted so
+      # calls to API pass CORS check!
+      - CYPRESS_baseUrl=http://acc.data.amsterdam.nl
+      - USERNAME_EMPLOYEE
+      - USERNAME_EMPLOYEE_PLUS
+      - PASSWORD_EMPLOYEE
+      - PASSWORD_EMPLOYEE_PLUS
+    command: ./scripts/ci/test-e2e-api-health.sh
+

@@ -3,7 +3,7 @@ const homepage = '.c-homepage';
 const notification = '.c-panel--warning';
 const table = '.c-table';
 
-describe('trade-register module', () => {
+describe('trade-register (vestigingen) module', () => {
   describe('user should be able to navigate to the trade-register from the homepage', () => {
     it('should open the trade register', () => {
       // go to the homepage
@@ -20,7 +20,7 @@ describe('trade-register module', () => {
       cy.get(homepage).should('not.be.visible');
       // the data selection should exist
       cy.get(dataSelection).should('exist').and('be.visible');
-      // the title should contain Adressen
+      // the title should contain Vestigingen
       cy.get('h1').contains('Vestigingen').should('exist').and('be.visible');
     });
   });

@@ -62,6 +62,7 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
+      VERSION: JSON.stringify(require("./package.json").version),
       '__BUILD_ID__': JSON.stringify(nodeEnv),
       'process.env': {
         'NODE_ENV': JSON.stringify(nodeEnv)

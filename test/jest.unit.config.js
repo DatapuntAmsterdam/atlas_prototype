@@ -49,11 +49,14 @@ module.exports = {
   testURL: 'http://localhost:8080/',
   testEnvironment: 'jest-environment-jsdom-global',
   testPathIgnorePatterns: [
-    '/e2e/',
     '/modules/',
-    '/node_modules/'
+    '/node_modules/',
+    '/internals/',
+    '/server/'
   ],
   watchPathIgnorePatterns: [
-    '/modules/'
+    '/modules/',
+    '/internals/',
+    '/server/'
   ]
 };

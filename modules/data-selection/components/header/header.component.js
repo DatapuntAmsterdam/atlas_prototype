@@ -46,8 +46,7 @@
                 DATA_SELECTION_CONFIG.datasets[vm.state.dataset].SHOW_NUMBER_OF_RECORDS;
             vm.datasetTitle = DATA_SELECTION_CONFIG.datasets[vm.state.dataset].TITLE;
 
-            // vm.tabs = ['bag', 'hr', 'brk'].map(dataset => {
-            vm.tabs = ['bag', 'hr'].map(dataset => {
+            vm.tabs = ['bag', 'hr', 'brk'].map(dataset => {
                 return {
                     dataset: dataset,
                     title: DATA_SELECTION_CONFIG.datasets[dataset].TITLE_TAB,

@@ -3,6 +3,7 @@ pipeline {
   options {
     timeout(time: 5, unit: 'DAYS')
   }
+
   environment {
     COMMIT_HASH = GIT_COMMIT.substring(0, 8)
     PROJECT_PREFIX = "${BRANCH_NAME}_${COMMIT_HASH}_${BUILD_NUMBER}_"
@@ -12,8 +13,10 @@ pipeline {
     IMAGE_PRODUCTION = "${IMAGE_BASE}:production"
     IMAGE_LATEST = "${IMAGE_BASE}:latest"
   }
+
   stages {
-    stage('Deploy Bakkie') {
+
+    stage('Deploy feature branch (Bakkie)') {
       when { not { branch 'master' } }
       options {
         timeout(time: 5, unit: 'MINUTES')
@@ -22,31 +25,20 @@ pipeline {
         sh "scripts/bakkie.sh ${BRANCH_NAME}"
       }
     }
-    stage('Linting') {
+
+    stage('Check API\'s health') {
       options {
-        timeout(time: 10, unit: 'MINUTES')
+        timeout(time: 30, unit: 'MINUTES')
       }
       environment {
-        PROJECT = "${PROJECT_PREFIX}lint"
+        PROJECT                = "${PROJECT_PREFIX}e2e-api-health"
+        USERNAME_EMPLOYEE      = 'atlas.employee@amsterdam.nl'
+        USERNAME_EMPLOYEE_PLUS = 'atlas.employee.plus@amsterdam.nl'
+        PASSWORD_EMPLOYEE      = credentials('PASSWORD_EMPLOYEE')
+        PASSWORD_EMPLOYEE_PLUS = credentials('PASSWORD_EMPLOYEE_PLUS')
       }
       steps {
-        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-lint test-lint"
-      }
-      post {
-        always {
-          sh "docker-compose -p ${PROJECT} down -v || true"
-        }
-      }
-    }
-    stage('Unit and Integration') {
-      options {
-        timeout(time: 10, unit: 'MINUTES')
-      }
-      environment {
-        PROJECT = "${PROJECT_PREFIX}unit"
-      }
-      steps {
-        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit-integration test-unit-integration"
+        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-e2e-api-health test-e2e-api-health"
       }
       post {
         always {
@@ -55,42 +47,65 @@ pipeline {
       }
     }
 
-    stage('Functional E2E') {
-      options {
-        timeout(time: 30, unit: 'MINUTES')
-      }
-      environment {
-        PROJECT                = "${PROJECT_PREFIX}e2e"
-          USERNAME_EMPLOYEE      = 'atlas.employee@amsterdam.nl'
-          USERNAME_EMPLOYEE_PLUS = 'atlas.employee.plus@amsterdam.nl'
-          PASSWORD_EMPLOYEE      = credentials('PASSWORD_EMPLOYEE')
-          PASSWORD_EMPLOYEE_PLUS = credentials('PASSWORD_EMPLOYEE_PLUS')
-      }
-      steps {
-        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-e2e test-e2e"
-      }
-      post {
-        always {
-          sh "docker-compose -p ${PROJECT} down -v || true"
+    stage ('Run Tests') {
+      parallel {
+        stage('Unit tests') {
+          options {
+            timeout(time: 10, unit: 'MINUTES')
+          }
+          environment {
+            PROJECT = "${PROJECT_PREFIX}unit"
+          }
+          steps {
+            sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit-integration test-unit-integration"
+          }
+          post {
+            always {
+              sh "docker-compose -p ${PROJECT} down -v || true"
+            }
+          }
+        }
+
+        stage('E2E tests') {
+          options {
+            timeout(time: 30, unit: 'MINUTES')
+          }
+          environment {
+            PROJECT                = "${PROJECT_PREFIX}e2e"
+            USERNAME_EMPLOYEE      = 'atlas.employee@amsterdam.nl'
+            USERNAME_EMPLOYEE_PLUS = 'atlas.employee.plus@amsterdam.nl'
+            PASSWORD_EMPLOYEE      = credentials('PASSWORD_EMPLOYEE')
+            PASSWORD_EMPLOYEE_PLUS = credentials('PASSWORD_EMPLOYEE_PLUS')
+          }
+          steps {
+            sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-e2e test-e2e"
+          }
+          post {
+            always {
+              sh "docker-compose -p ${PROJECT} down -v || true"
+            }
+          }
+        }
+
+        stage('E2E tests (Aria)') {
+          options {
+            timeout(time: 20, unit: 'MINUTES')
+          }
+          environment {
+            PROJECT = "${PROJECT_PREFIX}e2e-aria"
+          }
+          steps {
+            sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-e2e-aria test-e2e-aria"
+          }
+          post {
+            always {
+              sh "docker-compose -p ${PROJECT} down -v || true"
+            }
+          }
         }
       }
     }
-    stage('Aria E2E') {
-      options {
-        timeout(time: 20, unit: 'MINUTES')
-      }
-      environment {
-        PROJECT = "${PROJECT_PREFIX}e2e-aria"
-      }
-      steps {
-        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-e2e-aria test-e2e-aria"
-      }
-      post {
-        always {
-          sh "docker-compose -p ${PROJECT} down -v || true"
-        }
-      }
-    }
+
     stage('Build A') {
       when { branch 'master' }
       options {
@@ -104,6 +119,7 @@ pipeline {
         sh "docker push ${IMAGE_BUILD}"
       }
     }
+
     stage('Deploy A (Master)') {
       when { branch 'master' }
       options {
@@ -119,6 +135,7 @@ pipeline {
         ]
       }
     }
+
     stage('Build P (Master)') {
       when { branch 'master' }
       options {
@@ -134,6 +151,7 @@ pipeline {
         sh "docker push ${IMAGE_LATEST}"
       }
     }
+
     stage('Deploy pre P (Master)') {
       when { branch 'master' }
       options {
@@ -146,6 +164,7 @@ pipeline {
         ]
       }
     }
+
     stage('Waiting for approval (Master)') {
       when { branch 'master' }
       steps {
@@ -155,6 +174,7 @@ pipeline {
         }
       }
     }
+
     stage('Deploy P (Master)') {
       when { branch 'master' }
       options {
@@ -168,6 +188,7 @@ pipeline {
       }
     }
   }
+
   post {
     success {
       echo 'Pipeline success'

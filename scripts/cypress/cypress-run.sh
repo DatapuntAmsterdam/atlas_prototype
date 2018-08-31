@@ -8,4 +8,4 @@
 # "PASSWORD_EMPLOYEE=$PASSWORD_EMPLOYEE,"\
 # "PASSWORD_EMPLOYEE_PLUS=$PASSWORD_EMPLOYEE_PLUS"
 
-node ./scripts/cypress-run-isolated.js
+node ./scripts/cypress/cypress-run-isolated.js

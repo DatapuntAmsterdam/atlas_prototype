@@ -2,7 +2,7 @@ import SHARED_CONFIG from '../../shared/services/shared-config/shared-config';
 
 export default function fetchPano(location) {
   const searchParams = {
-    lat: location.c,
+    lat: location.latitude,
     lon: location.longitude,
     width: 438,
     radius: 180

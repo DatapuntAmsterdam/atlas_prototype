@@ -15,7 +15,7 @@ const checkEnvironmentVariablesSet = () => {
   });
 };
 
-const USER_TOKENS = {
+export const USER_TOKENS = { // eslint-disable-line import/prefer-default-export
 };
 
 Cypress.Commands.add('login', (type = 'EMPLOYEE_PLUS') => {
@@ -41,7 +41,7 @@ Cypress.Commands.add('login', (type = 'EMPLOYEE_PLUS') => {
     'idp_id=datapunt&',
     'response_type=token&',
     'client_id=citydata&',
-    'scope=BRK%2FRS%20BRK%2FRSN%20BRK%2FRO%20WKPB%2FRBDU%20MON%2FRBC%20MON%2FRDM%20HR%2FR&',
+    'scope=BRK%2FRS%20BRK%2FRSN%20BRK%2FRO%20WKPB%2FRBDU%20MON%2FRBC%20MON%2FRDM%20HR%2FR%20GREX%2FR%20CAT%2FW&',
     `state=${encodeURIComponent(stateToken)}&`,
     `redirect_uri=${encodeURIComponent(redirectUri)}`
   ].join('');

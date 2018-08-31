@@ -19,4 +19,4 @@ RUN git config --global url."https://".insteadOf git:// && \
 COPY src /home/src
 COPY test /home/test
 COPY scripts /home/scripts
-COPY package.json cypress.json /home/
+COPY package.json package-lock.json cypress.json /home/
