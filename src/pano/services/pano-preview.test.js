@@ -14,7 +14,7 @@ describe('panoPreview service', () => {
         url: 'url'
       });
     });
-    expect(fetch).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/panorama/thumbnail/?lat=undefined&lon=321&width=438&radius=180');
+    expect(fetch).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/panorama/thumbnail/?lat=123&lon=321&width=438&radius=180');
   });
 
   it('should return an empty object when status is 404', () => {

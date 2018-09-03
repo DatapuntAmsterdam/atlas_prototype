@@ -29,7 +29,7 @@ $below-list-height: 1px + $map-preview-panel-bottom;
     }
 
     &-pano-button--disabled {
-      cursor: default;
+      display: none;
     }
 
     &-pano {

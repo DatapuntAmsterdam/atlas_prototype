@@ -6,7 +6,7 @@ RUN apt-get update && \
 
 WORKDIR /home
 
-COPY package-lock.json /home/
+COPY package.json package-lock.json /home/
 
 # Install selected package (faster).
 # Use versions defined in package-lock.json.
