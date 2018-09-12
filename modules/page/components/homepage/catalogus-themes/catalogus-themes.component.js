@@ -1,3 +1,6 @@
+import { switchPage } from '../../../../../src/shared/ducks/ui/ui';
+import PAGES from '../../../../../src/pages';
+
 (function () {
     'use strict';
 
@@ -30,6 +33,8 @@
                     page: 1
                 }
             });
+
+            store.dispatch(switchPage(PAGES.DATASETS));
         };
 
         vm.themes = angular.copy(CATALOGUS_THEMES_CONFIG);

@@ -1,3 +1,7 @@
+import { switchPage } from '../../../../../src/shared/ducks/ui/ui';
+import PAGES from '../../../../../src/pages';
+import ACTIONS from '../../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -12,10 +16,22 @@
             controllerAs: 'vm'
         });
 
-    DpToggleViewButtonController.$inject = ['$scope'];
+    DpToggleViewButtonController.$inject = ['$scope', 'store'];
 
-    function DpToggleViewButtonController ($scope) {
+    function DpToggleViewButtonController ($scope, store) {
         const vm = this;
+
+        vm.onClick = () => {
+            store.dispatch({
+                type: ACTIONS.SET_DATA_SELECTION_VIEW,
+                payload: vm.targetView
+            });
+            if (vm.targetView === 'LIST') {
+                store.dispatch(switchPage(PAGES.KAART_ADRESSSEN));
+            } else {
+                store.dispatch(switchPage(PAGES.ADRESSEN));
+            }
+        };
 
         $scope.$watch('vm.view', function () {
             if (vm.view === 'TABLE') {

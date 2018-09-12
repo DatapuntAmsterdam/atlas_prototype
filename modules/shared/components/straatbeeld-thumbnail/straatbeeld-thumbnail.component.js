@@ -1,3 +1,8 @@
+import { closeMapPreviewPanel } from '../../../../src/map/ducks/preview-panel/map-preview-panel';
+import { fetchStraatbeeldById } from '../../../../src/map/ducks/straatbeeld/straatbeeld';
+import { switchPage } from '../../../../src/shared/ducks/ui/ui';
+import PAGES from '../../../../src/pages';
+
 (function () {
     'use strict';
 
@@ -12,9 +17,9 @@
             controllerAs: 'vm'
         });
 
-    DpStraatbeeldThumbnailController.$inject = ['$q', '$scope', 'sharedConfig', 'api'];
+    DpStraatbeeldThumbnailController.$inject = ['store', '$q', '$scope', 'sharedConfig', 'api'];
 
-    function DpStraatbeeldThumbnailController ($q, $scope, sharedConfig, api) {
+    function DpStraatbeeldThumbnailController (store, $q, $scope, sharedConfig, api) {
         var vm = this,
             imageUrl,
             heading,
@@ -36,6 +41,11 @@
 
             vm.isLoading = true;
             vm.radius = sharedConfig.RADIUS;
+
+            vm.openThumbnailPage = () => {
+                store.dispatch(fetchStraatbeeldById(vm.payload));
+                store.dispatch(switchPage(PAGES.KAART_PANORAMA));
+            };
 
             api.getByUrl(imageUrl).then(function (thumbnailData) {
                 heading = thumbnailData.heading;

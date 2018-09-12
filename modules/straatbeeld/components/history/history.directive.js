@@ -60,6 +60,7 @@
             scope.$watchCollection('location', updateLocation, true);
 
             everywhere.bind('click', (event) => {
+                console.log('catch all click event fired');
                 const container = element.find('div').eq(0);
                 const button = container.find('div');
                 const menu = container.find('ul');

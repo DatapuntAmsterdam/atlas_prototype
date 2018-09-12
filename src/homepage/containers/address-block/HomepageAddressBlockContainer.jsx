@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import { fetchDataSelection } from '../../../header/ducks/search/search';
 
 import HomepageAddressBlock from '../../components/address-block/HomepageAddressBlock';
+import { switchPage } from '../../../shared/ducks/ui/ui';
+import PAGES from '../../../pages';
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  onfetchDataSelection: fetchDataSelection
-}, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  onfetchDataSelection: (payload) => {
+    dispatch(fetchDataSelection(payload));
+    dispatch(switchPage(PAGES.DATASETS));
+  }
+});
 
 const HomepageAddressBlockContainer = (props) => (
   <HomepageAddressBlock

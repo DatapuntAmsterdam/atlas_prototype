@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { toggleMapFullscreen } from '../../../shared/ducks/ui/ui';
+import { switchPage } from '../../../shared/ducks/ui/ui';
 
 import DrawTool from '../../containers/draw-tool/DrawToolContainer'; //eslint-disable-line
 import ToggleFullscreen from '../../components/toggle-fullscreen/ToggleFullscreen';
@@ -14,15 +14,18 @@ import MapPreviewPanelContainer from '../../containers/preview-panel/MapPreviewP
 import MapEmbedButton from '../../components/map-embed-button/MapEmbedButton';
 
 import getEmbedLink from '../../ducks/embed/embed';
+import PAGES from '../../../pages';
 
 const mapStateToProps = (state) => ({
-  isFullscreen: state.ui.isMapFullscreen,
+  isFullscreen: state.ui.page === PAGES.KAART, // ROUTING_LOGIC
   drawMode: state.map.drawingMode,
   embedLink: getEmbedLink(state)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  onToggleFullscreen: toggleMapFullscreen
+  onToggleFullscreen: () => {
+    return dispatch(switchPage(PAGES.KAART));
+  }
 }, dispatch);
 
 class MapContainer extends React.Component {

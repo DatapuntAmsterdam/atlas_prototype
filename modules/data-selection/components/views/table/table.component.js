@@ -1,3 +1,6 @@
+import { switchPage } from '../../../../../src/shared/ducks/ui/ui';
+import PAGES from '../../../../../src/pages';
+
 (function () {
     'use strict';
 
@@ -23,6 +26,7 @@
                 type: ACTIONS.FETCH_DETAIL,
                 payload: endpoint
             });
+            store.dispatch(switchPage(PAGES.KAART_DETAIL));
         };
     }
 })();

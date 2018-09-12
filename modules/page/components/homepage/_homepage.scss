@@ -24,6 +24,7 @@ $show-more-height: 70px;
   overflow: hidden;
   box-sizing: border-box;
   background-origin: border-box;
+  text-align: left;
 
   &::before {
     display: none;
@@ -143,6 +144,7 @@ $show-more-height: 70px;
   transition: transform .2s;
   background-color: $secondary-gray4;
   text-decoration: none;
+  text-align: left;
   z-index: 10;
 
   .c-homepage__block--short & {

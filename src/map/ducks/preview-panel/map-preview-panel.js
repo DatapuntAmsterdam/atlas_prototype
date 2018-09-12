@@ -1,6 +1,6 @@
 export const MAXIMIZE_MAP_PREVIEW_PANEL = 'MAXIMIZE_MAP_PREVIEW_PANEL';
-export const OPEN_MAP_PREVIEW_PANEL = 'OPEN_MAP_PREVIEW_PANEL';
-export const CLOSE_MAP_PREVIEW_PANEL = 'CLOSE_MAP_PREVIEW_PANEL';
+const OPEN_MAP_PREVIEW_PANEL = 'OPEN_MAP_PREVIEW_PANEL';
+const CLOSE_MAP_PREVIEW_PANEL = 'CLOSE_MAP_PREVIEW_PANEL';
 
 const initialState = {};
 
@@ -18,23 +18,24 @@ export default function MapPreviewPanelReducer(state = initialState, action) {
         isMapPreviewPanelVisible: false
       };
 
-    case MAXIMIZE_MAP_PREVIEW_PANEL:
-      return {
-        ...state,
-        isMapPreviewPanelVisible: false,
-        ui: {
-          ...state.ui,
-          isMapFullscreen: false
-        }
-      };
+    // case MAXIMIZE_MAP_PREVIEW_PANEL:
+    //   return {
+    //     ...state,
+    //     isMapPreviewPanelVisible: false,
+    //     ui: {
+    //       ...state.ui,
+    //       isMapFullscreen: false
+    //     }
+    //   };
 
     default:
       return state;
   }
 }
 
+export const openMapPreviewPanel = () => ({ type: OPEN_MAP_PREVIEW_PANEL });
 export const closeMapPreviewPanel = () => ({ type: CLOSE_MAP_PREVIEW_PANEL });
-export const maximizeMapPreviewPanel = () => ({ type: MAXIMIZE_MAP_PREVIEW_PANEL });
+// export const maximizeMapPreviewPanel = () => ({ type: MAXIMIZE_MAP_PREVIEW_PANEL });
 
 // Todo: is this used in a reducer?
 export const fetchSearchResults = (location) => ({

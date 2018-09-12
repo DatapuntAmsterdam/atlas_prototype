@@ -80,6 +80,14 @@ class MapPreviewPanel extends React.Component {
     const isSearchLoaded = !isLoading && props.search && props.searchLocation;
     const isDetailLoaded = !isLoading && props.detail && props.mapDetail && props.detailResult;
 
+    const onMaximizeButton = () => {
+      if(isDetailLoaded) {
+        props.maximizeDetail();
+      } else {
+        props.maximizeSearch();
+      }
+    };
+
     return !props.isEmbed && (
       <div className="map-preview-panel-wrapper">
         <section className={`
@@ -100,7 +108,7 @@ class MapPreviewPanel extends React.Component {
             )}
             <button
               className="map-preview-panel__button"
-              onClick={props.onMapPreviewPanelMaximize}
+              onClick={onMaximizeButton}
               title="Volledige weergave tonen"
             >
               <MaximizeIcon className="map-preview-panel__button-icon" />
@@ -125,7 +133,7 @@ class MapPreviewPanel extends React.Component {
             {isDetailLoaded && (
               <MapDetailResult
                 panoUrl={panoDetailPreview.url}
-                onMaximize={props.onMapPreviewPanelMaximize}
+                onMaximize={props.maximizeDetail}
                 onPanoPreviewClick={this.onPanoPreviewClick}
                 result={props.detailResult}
               />
@@ -135,7 +143,7 @@ class MapPreviewPanel extends React.Component {
                 location={props.searchLocation}
                 missingLayers={props.missingLayers}
                 onItemClick={props.onMapSearchResultsItemClick}
-                onMaximize={props.onMapPreviewPanelMaximize}
+                onMaximize={props.maximizeSearch}
                 onPanoPreviewClick={this.onPanoPreviewClick}
                 panoUrl={panoSearchPreview.url}
                 resultLimit={previewPanelSearchResultLimit}
@@ -177,7 +185,8 @@ MapPreviewPanel.propTypes = {
   mapDetail: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   missingLayers: PropTypes.string,
   onMapPreviewPanelClose: PropTypes.func.isRequired,
-  onMapPreviewPanelMaximize: PropTypes.func.isRequired,
+  maximizeDetail: PropTypes.func.isRequired,
+  maximizeSearch: PropTypes.func.isRequired,
   onMapSearchResultsItemClick: PropTypes.func.isRequired,
   onOpenPanoById: PropTypes.func.isRequired,
   pano: PropTypes.object, // eslint-disable-line react/forbid-prop-types

@@ -20,6 +20,8 @@ import { fetchMapBaseLayers, getUrlTemplate } from '../../ducks/base-layers/map-
 import { fetchMapLayers, getLayers } from '../../ducks/layers/map-layers';
 import { fetchPanelLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { isDrawingActive } from '../../services/draw-tool/draw-tool';
+import { openMapPreviewPanel } from '../../ducks/preview-panel/map-preview-panel';
+import ACTIONS from '../../../shared/actions';
 
 const baseLayerOptions = MAP_CONFIG.BASE_LAYER_OPTIONS;
 const mapOptions = MAP_CONFIG.MAP_OPTIONS;
@@ -44,7 +46,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   onUpdateZoom: updateZoom,
   onUpdatePan: updatePan,
-  onUpdateClick: updateClick,
+  onUpdateClick: (event) => {
+    dispatch(openMapPreviewPanel());
+    return updateClick(event);
+  },
   onUpdateBoundingBox: updateBoundingBox,
 
   onFetchMapBaseLayers: fetchMapBaseLayers,

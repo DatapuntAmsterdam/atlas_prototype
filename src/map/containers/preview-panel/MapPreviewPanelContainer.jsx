@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { maximizeMapPreviewPanel, closeMapPreviewPanel, fetchSearchResults }
+import { closeMapPreviewPanel, fetchSearchResults }
   from '../../ducks/preview-panel/map-preview-panel';
 import { selectLatestMapSearchResults }
   from '../../ducks/search-results/map-search-results';
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { selectLatestMapDetail } from '../../ducks/detail/map-detail';
-import { toggleMapFullscreen } from '../../../shared/ducks/ui/ui';
+import { switchPage} from '../../../shared/ducks/ui/ui';
 import { fetchStraatbeeldById } from '../../ducks/straatbeeld/straatbeeld';
 import { fetchDetail as legacyFetchDetail } from '../../../reducers/details';
 import MapPreviewPanel from './MapPreviewPanel';
+import PAGES from '../../../pages';
 
 
 const mapStateToProps = (state) => ({
@@ -37,10 +38,21 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   onSearch: fetchSearchResults,
   onMapPreviewPanelClose: closeMapPreviewPanel,
-  onMapPreviewPanelMaximize: maximizeMapPreviewPanel,
+  maximizeDetail: () => {
+    console.log('maximizeDetail');
+    dispatch(closeMapPreviewPanel());
+    return dispatch(switchPage(PAGES.KAART_DETAIL));
+  },
+  maximizeSearch: () => {
+    console.log('maximizeSearch');
+    dispatch(closeMapPreviewPanel());
+    return dispatch(switchPage(PAGES.KAART_SEARCH));
+  },
   onMapSearchResultsItemClick: legacyFetchDetail,
   onOpenPanoById: fetchStraatbeeldById,
-  closeMapFullScreen: toggleMapFullscreen
+  closeMapFullScreen: () => {
+    return dispatch(switchPage(PAGES.KAART)); // TODO
+  }
 }, dispatch);
 
 /* eslint-enable react/no-unused-prop-types */
