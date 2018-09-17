@@ -128,6 +128,7 @@ describe('parcel-ownership (eigendommen) module', () => {
             cy.get('.c-data-selection-available-filters__item')
               .find('.qa-option-label')
               .contains(selectedFilter)
+              .scrollIntoView()
               .click();
 
             cy.wait('@getDataselectieBrk');
