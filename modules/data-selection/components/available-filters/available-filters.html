@@ -4,7 +4,14 @@
          ng-if="!filter.slug.startsWith('sbi') && filter.options.length"
          ng-repeat="filter in vm.availableFilters">
 
-        <h2 class="c-data-selection-available-filters__category-label qa-category-header">{{filter.label}}</h2>
+        <h2 class="c-data-selection-available-filters__category-label qa-category-header">
+            <span>{{filter.label}}</span>
+            <a ng-if="filter.info_url"
+                class="o-header__button c-stelselpedia__button"
+                ng-href="{{filter.info_url}}"
+                target="_blank"
+                rel="noopener"></a>
+        </h2>
 
         <ul>
             <li class="c-data-selection-available-filters__item"

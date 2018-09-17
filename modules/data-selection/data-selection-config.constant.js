@@ -151,7 +151,8 @@
                                 'Grondeigenaar',
                                 'Pandeigenaar',
                                 'Appartementseigenaar'
-                            ]
+                            ],
+                            info_url: 'https://www.amsterdam.nl/stelselpedia/brk-index/producten-brk/kadastertabel/'
                         }, {
                             slug: 'eigenaar_cat',
                             label: 'Zakelijk gerechtigde',
@@ -166,7 +167,8 @@
                                 'Spoorwegen/ProRail',
                                 'Overige niet-natuurlijke personen',
                                 'Overig natuurlijke personen'
-                            ]
+                            ],
+                            info_url: 'https://www.amsterdam.nl/stelselpedia/brk-index/producten-brk/kadastertabel/'
                         }, {
                             slug: 'stadsdeel_naam',
                             label: 'Stadsdeel'
