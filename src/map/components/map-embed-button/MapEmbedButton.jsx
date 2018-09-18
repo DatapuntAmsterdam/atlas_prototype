@@ -9,6 +9,7 @@ const MapEmbedButton = ({ link }) => (
     title="Naar interactieve kaart (Amsterdam City Data)"
     className="c-embed-button qa-embed-button"
     target="_blank"
+    rel="noopener noreferrer"
   >
     <MaximizeIcon className="c-embed-button__icon" />
     <span className="c-embed-button__label">City Data</span>
