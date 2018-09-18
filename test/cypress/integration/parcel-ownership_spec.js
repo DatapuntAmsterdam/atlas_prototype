@@ -104,7 +104,7 @@ describe('parcel-ownership (eigendommen) module', () => {
 
     describe('user should be able to add a filter', () => {
       it('should add the filter to the active filters and filter the results', () => {
-        const route = '/#?dsd=brk&dsp=1&dsv=TABLE&dsf=eigenaar_type::Appartementseigenaar:stadsdeel_naam::Centrum:eigenaar_cat::Woningbouwcorporaties:ggw_naam::Centrum-Oost&mpb=topografie&mpz=8&mpv=52.3547489:4.9036586';
+        const route = '/#?dsd=brk&dsp=1&dsv=TABLE&dsf=eigenaar_type::Appartementseigenaar:stadsdeel_naam::Centrum:eigenaar_cat::Woningbouwcorporaties:ggw_naam::Centrum-Oost&mpb=topografie&mpz=8&mpv=52.3547489:4.9036587';
 
         cy.visit(route);
         cy.wait('@getDataselectieBrk');
@@ -119,16 +119,15 @@ describe('parcel-ownership (eigendommen) module', () => {
             const category = group[0].children[0].innerText;
             // get the innerText of the first nested li
             const selectedFilter = 'Amstelveldbuurt';
-            const filter = cy.get('.c-data-selection-available-filters__item')
-              .find('.qa-option-label')
-              .contains(selectedFilter);
-            filter.should('exist').and('be.visible');
-
-            // click the filter that contains the selectedFilter variable
             cy.get('.c-data-selection-available-filters__item')
               .find('.qa-option-label')
               .contains(selectedFilter)
-              .click();
+              .should('exist').and('be.visible');
+
+            cy.get('.c-data-selection-available-filters__item')
+              .find('.qa-option-label')
+              .contains(selectedFilter)
+              .click({ force: true });
 
             cy.wait('@getDataselectieBrk');
             cy.scrollTo('top');
