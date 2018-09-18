@@ -24,8 +24,6 @@
 
         vm.showMoreThreshold = 10;
 
-        vm.stelselpediaUrl = DATA_SELECTION_CONFIG.datasets[vm.dataset].STELSELPEDIA_URL;
-
         vm.hasInactiveFilterOptions = function (filter) {
             return !filter.options.some(option => vm.isFilterOptionActive(filter.slug, option.id, option.label));
         };
@@ -79,6 +77,7 @@
 
         function updateConfig () {
             vm.showOptionCounts = DATA_SELECTION_CONFIG.datasets[vm.dataset].SHOW_FILTER_OPTION_COUNTS;
+            vm.stelselpediaUrl = DATA_SELECTION_CONFIG.datasets[vm.dataset].STELSELPEDIA_URL;
         }
 
         function applyFilters (filters) {
