@@ -1,4 +1,4 @@
-export default {
+const PAGES = {
   HOME: 'HOME',
   KAART: 'KAART',
   KAART_PANORAMA: 'KAART_PANORAMA',
@@ -25,3 +25,24 @@ export default {
   BEHEER_WERKWIJZE: 'BEHEER_WERKWIJZE',
   STATISTIEKEN: 'STATISTIEKEN'
 };
+
+export default PAGES;
+
+export const isMapPanelPage = (page) =>
+  page === PAGES.KAART_ADRESSSEN ||
+  page === PAGES.KAART_SEARCH ||
+  page === PAGES.KAART_DETAIL ||
+  page === PAGES.KAART_PANORAMA;
+
+export const isCmsPage = (page) =>
+  page === PAGES.NIEUWS ||
+  page === PAGES.HELP ||
+  page === PAGES.PROCLAIMER ||
+  page === PAGES.BEDIENING ||
+  page === PAGES.BEDIENING ||
+  page === PAGES.GEGEVENS ||
+  page === PAGES.OVER_API ||
+  page === PAGES.PRIVACY_BEVEILIGING ||
+  page === PAGES.BESCHIKBAAR_KWALITEIT ||
+  page === PAGES.STATISTIEKEN ||
+  page === PAGES.BEHEER_WERKWIJZE;

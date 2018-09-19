@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { switchPage } from '../../../shared/ducks/ui/ui';
+import { toggleMapFullscreen } from '../../../shared/ducks/ui/ui';
 
 import DrawTool from '../../containers/draw-tool/DrawToolContainer'; //eslint-disable-line
 import ToggleFullscreen from '../../components/toggle-fullscreen/ToggleFullscreen';
@@ -23,9 +23,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  onToggleFullscreen: () => {
-    return dispatch(switchPage(PAGES.KAART));
-  }
+  onToggleFullscreen: toggleMapFullscreen
 }, dispatch);
 
 class MapContainer extends React.Component {

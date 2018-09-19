@@ -255,7 +255,8 @@ export default {
       isMapPanelVisible: false,
       isMapPanelHandleVisible: true,
       isPrintMode: false,
-      page: 'HOME'
+      page: 'HOME',
+      mapMode: 'NORMAL'
     }
   },
   stateVariables: {
@@ -420,6 +421,14 @@ export default {
       name: 'ui.page',
       type: 'string'
     },
+    upp: {
+      name: 'ui.prevPage',
+      type: 'string'
+    },
+    umm: {
+      name: 'ui.mapMode',
+      type: 'string'
+    }
   }
 };
 

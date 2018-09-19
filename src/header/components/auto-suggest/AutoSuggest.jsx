@@ -89,7 +89,6 @@ class AutoSuggest extends React.Component {
   }
 
   onFormSubmit(event) {
-    console.log('onFormSubmit autoSuggest');
     const {
       onSubmit
     } = this.props;

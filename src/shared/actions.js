@@ -104,13 +104,6 @@ export default {
     id: 'SHOW_STRAATBEELD_SUBSEQUENT',
     replace: true
   },
-  STRAATBEELD_FULLSCREEN: {
-    id: 'STRAATBEELD_FULLSCREEN'
-  },
-  HIDE_STRAATBEELD: {
-    id: 'HIDE_STRAATBEELD',
-    ignore: true
-  },
   SET_STRAATBEELD_ORIENTATION: {
     id: 'SET_STRAATBEELD_ORIENTATION',
     replace: true

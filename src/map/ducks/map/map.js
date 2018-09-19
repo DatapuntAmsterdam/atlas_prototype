@@ -191,7 +191,7 @@ export const mapEmptyGeometry = () => ({ type: MAP_EMPTY_GEOMETRY });
 export const mapUpdateShape = (payload) => ({ type: MAP_UPDATE_SHAPE, payload });
 export const mapStartDrawing = (payload) => ({ type: MAP_START_DRAWING, payload });
 export const mapEndDrawing = (payload) => ({ type: MAP_END_DRAWING, payload });
-export const mapClear = () => ({ type: MAP_CLEAR });
+// export const mapClear = () => ({ type: MAP_CLEAR });
 export const setMapBaseLayer = (payload) => ({ type: SET_MAP_BASE_LAYER, payload });
 
 export const toggleMapOverlay = (mapLayerId) => ({ type: TOGGLE_MAP_OVERLAY, mapLayerId });

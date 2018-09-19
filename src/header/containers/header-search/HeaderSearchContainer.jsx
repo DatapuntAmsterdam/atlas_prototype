@@ -105,7 +105,6 @@ class HeaderSearchContainer extends React.Component {
   }
 
   onSuggestionActivate(suggestion) {
-    console.log('onSuggestionActivate container');
     const {
       onSuggestionActivate,
       onGetSuggestions,
@@ -113,14 +112,12 @@ class HeaderSearchContainer extends React.Component {
     } = this.props;
 
     if (suggestion && suggestion.index === -1) {
-      console.log('firing onGetSuggestions container');
       onGetSuggestions(typedQuery);
     }
     onSuggestionActivate(suggestion);
   }
 
   onSuggestionSelection(suggestion, shouldOpenInNewWindow) {
-    console.log('onSuggestionSelection container');
     const {
       onDetailLoad,
       typedQuery
@@ -149,18 +146,14 @@ class HeaderSearchContainer extends React.Component {
       typedQuery
     } = this.props;
 
-    console.log('onFormSubmit container');
-
     piwikTracker(['trackSiteSearch', typedQuery, isDatasetView ? 'datasets' : 'data', numberOfSuggestions]);
 
     if (activeSuggestion.index === -1) {
       // Load the search results
       onCleanDatasetOverview();
       if (isDatasetView) {
-        console.log('onDatasetSearch container');
         onDatasetSearch(typedQuery);
       } else {
-        console.log('onSearch container');
         onSearch(typedQuery);
       }
     }

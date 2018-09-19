@@ -15,7 +15,6 @@ import PAGES from '../../../../../src/pages';
             controllerAs: 'vm'
         });
 
-
     DpDataSelectionListController.$inject = ['store', 'ACTIONS'];
 
     function DpDataSelectionListController (store, ACTIONS) {

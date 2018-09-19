@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { fetchStraatbeeldById } from '../../../../src/map/ducks/straatbeeld/straatbeeld';
-import { showMap, switchPage } from '../../../../src/shared/ducks/ui/ui';
+import { MAP_MODE, showMap, switchMode, switchPage } from '../../../../src/shared/ducks/ui/ui';
 import PAGES from '../../../../src/pages';
 import ACTIONS from '../../../../src/shared/actions';
 
@@ -26,11 +26,13 @@ import ACTIONS from '../../../../src/shared/actions';
 
         vm.openMap = () => {
             store.dispatch(showMap());
+            store.dispatch(switchMode(MAP_MODE.NORMAL));
             store.dispatch(switchPage(PAGES.KAART));
         };
 
         vm.openPanorama = () => {
             store.dispatch(fetchStraatbeeldById(HOMEPAGE_CONFIG.PANORAMA));
+            store.dispatch(switchMode(MAP_MODE.PANORAMA));
             store.dispatch(switchPage(PAGES.KAART_PANORAMA));
         };
 

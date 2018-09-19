@@ -158,6 +158,7 @@
                         <!--Resize straatbeeld when any of printMode, errorMode or fullscreen changes-->
                         <dp-straatbeeld
                             state="straatbeeldController.straatbeeldState"
+                            is-fullscreen="straatbeeldController.isFullscreen"
                             resize="[vm.isPrintMode, vm.isEmbedPreview, vm.isEmbed, vm.visibility.error, vm.visibility.straatbeeld, vm.columnSizes.right]">
                         </dp-straatbeeld>
                     </div>

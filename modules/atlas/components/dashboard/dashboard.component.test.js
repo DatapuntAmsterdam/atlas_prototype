@@ -85,8 +85,6 @@ describe('The dashboard component', function () {
             login: angular.noop
         };
 
-        origEndpointTypes = $window.mapPreviewPanelDetailEndpointTypes;
-
         mockedState = angular.copy(angular.copy(DEFAULT_STATE));
     });
 

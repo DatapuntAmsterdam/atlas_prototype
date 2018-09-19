@@ -1,3 +1,5 @@
+import PAGES, { isCmsPage, isMapPanelPage } from '../../../../src/pages';
+
 (function () {
     'use strict';
 
@@ -19,165 +21,132 @@
             isPrintOrEmbedOrPreview
         };
 
-        function determineActivity (state) {
-            const searchResults = angular.isObject(state.search);
-            const detail = angular.isObject(state.detail);
-            const { ui = {} } = state;
-
-            const geoSearchActive = searchResults &&
-                angular.isArray(state.search.location);
-
-            const mapPreviewPanel =
-                ui.isMapFullscreen &&
-                (geoSearchActive || detail) &&
-                !angular.isObject(state.dataSelection);
-
-            return {
-                dataSelection: angular.isObject(state.dataSelection),
-                detail,
-                map: determineMapActivity(state),
-                mapPreviewPanel,
-                page: angular.isString(state.page.name),
-                searchResults,
-                straatbeeld: angular.isObject(state.straatbeeld)
+        function determineActivity (state) { // eslint-disable-line complexity
+            //
+            // ROUTING
+            //
+            // Translates ui.page to old style range of variables
+            // disable all previous activity and visibility logic
+            const activity = {
+                dataSelection: false,
+                detail: false,
+                map: false,
+                mapPreviewPanel: false,
+                page: false,
+                searchResults: false,
+                straatbeeld: false
             };
+
+            activity.dataSelection = state.ui.page === PAGES.ADRESSEN ||
+                state.ui.page === PAGES.KAART_ADRESSSEN ||
+                state.ui.page === PAGES.DATASETS ||
+                state.ui.page === PAGES.SEARCH_DATASETS;
+
+            activity.page = state.ui.page === PAGES.HOME || isCmsPage(state.ui.page);
+
+            activity.map = state.ui.page === PAGES.KAART ||
+                state.ui.page === PAGES.KAART_DETAIL ||
+                state.ui.page === PAGES.KAART_PANORAMA ||
+                state.ui.page === PAGES.KAART_ADRESSSEN ||
+                state.ui.page === PAGES.KAART_SEARCH;
+
+            activity.straatbeeld = state.ui.page === PAGES.PANORAMA ||
+                state.ui.page === PAGES.KAART_PANORAMA;
+
+            activity.searchResults = state.ui.page === PAGES.KAART_SEARCH ||
+                state.ui.page === PAGES.SEARCH_DATA;
+
+            activity.detail = state.ui.page === PAGES.KAART_DETAIL ||
+                state.ui.page === PAGES.DATASETS_DETAIL;
+
+            return activity;
         }
 
         function determineVisibility (state) {
             const activity = determineActivity(state);
-            const visibility = {};
-            const { ui = {} } = state;
-
-            visibility.error = state.error.hasErrors || state.user.error;
+            const visibility = {
+                error: false,
+                map: false,
+                straatbeeld: false,
+                detail: false,
+                page: false,
+                searchResults: false,
+                dataSelection: false
+            };
+            visibility.dataSelection = activity.dataSelection;
+            visibility.page = activity.page;
             visibility.map = activity.map;
-
-            if (angular.isObject(state.dataSelection) && !ui.isMapFullscreen) {
-                visibility.dataSelection = true;
-
-                visibility.detail = false;
-                visibility.page = false;
-                visibility.searchResults = false;
-                visibility.straatbeeld = false;
-            } else {
-                visibility.straatbeeld = activity.straatbeeld;
-
-                if (visibility.straatbeeld && state.straatbeeld.isFullscreen) {
-                    visibility.detail = false;
-                    visibility.page = false;
-                    visibility.searchResults = false;
-                } else if (ui.isMapFullscreen) {
-                    visibility.detail = false;
-                    visibility.page = false;
-                    visibility.searchResults = false;
-                    visibility.straatbeeld = false;
-                } else {
-                    visibility.detail = activity.detail && !activity.straatbeeld;
-                    visibility.page = angular.isString(state.page.name) && !activity.straatbeeld;
-                    visibility.searchResults = activity.searchResults;
-                }
-
-                visibility.dataSelection = false;
-            }
-
+            visibility.straatbeeld = activity.straatbeeld;
+            visibility.searchResults = activity.searchResults;
+            visibility.detail = activity.detail;
             return visibility;
         }
 
-        function determineMapActivity (state) {
-            if (isPrintOrEmbedOrPreview(state)) {
-                return determineMapActivityPrint(state);
-            } else {
-                return determineMapActivityDefault(state);
-            }
-        }
+        function determineColumnSizes (state) { // eslint-disable-line complexity
+            const activity = determineActivity(state);
+            let columnSizes = {
+                left: 4,
+                middle: 4,
+                right: 4
+            };
 
-        function determineMapActivityDefault (state) {
-            const { ui = {} } = state;
-            return ui.isMapFullscreen ||
-                (
-                    !(state.page.name && !ui.isMapFullscreen && !state.straatbeeld) &&
-                    !(state.detail && state.detail.isFullscreen) &&
-                    !(state.dataSelection && state.dataSelection.view !== 'LIST') &&
-                    !(state.search && state.search.isFullscreen) &&
-                    !(state.straatbeeld && state.straatbeeld.isFullscreen)
-                );
-        }
-
-        function determineMapActivityPrint (state) {
-            if (isEmbedOrPreviewWithFullscreenMap(state)) {
-                return true;
-            }
-
-            if (state.ui.isMapFullscreen) {
-                return true;
-            } else if (state.straatbeeld) {
-                return !state.straatbeeld.isFullscreen;
-            } else if (state.dataSelection) {
-                // Show the map when in list view of data selection
-                return state.dataSelection.view === 'LIST';
-            } else if (angular.isObject(state.detail)) {
-                // Only print the map when detail is NOT fullscreen and has geometry
-                return !state.detail.isFullscreen && angular.isObject(state.detail.geometry);
-            } else {
-                return !state.page.name && !state.search;
-            }
-        }
-
-        function determineColumnSizes (state) {
-            const visibility = determineVisibility(state);
-            const hasFullscreenElement = visibility.page ||
-                (visibility.map && state.ui.isMapFullscreen) ||
-                (visibility.straatbeeld && state.straatbeeld.isFullscreen) ||
-                (visibility.detail && state.detail.isFullscreen) ||
-                (visibility.searchResults && state.search.isFullscreen) ||
-                (visibility.dataSelection && state.dataSelection.isFullscreen);
-
-            if (isPrintOrEmbedOrPreview(state)) {
-                return determineColumnSizesPrint (state, visibility, hasFullscreenElement);
-            } else {
-                return determineColumnSizesDefault (state, visibility, hasFullscreenElement);
-            }
-        }
-
-        function determineColumnSizesDefault (state, visibility, hasFullscreenElement) {
-            const columnSizes = {};
-
-            if (hasFullscreenElement) {
-                columnSizes.left = 0;
-                columnSizes.middle = state.ui.isMapFullscreen ? 12 : 0;
-                columnSizes.right = !state.ui.isMapFullscreen ? 12 : 0;
-            } else {
-                columnSizes.left = 0;
-                columnSizes.middle = 4;
-                columnSizes.right = 8;
+            if (state.ui.page === PAGES.HOME) {
+                columnSizes = {
+                    left: 0,
+                    middle: 0,
+                    right: 12
+                };
+            } else if (isCmsPage(state.ui.page)) {
+                columnSizes = {
+                    left: 0,
+                    middle: 0,
+                    right: 12
+                };
+            } else if (activity.map) {
+                columnSizes = {
+                    left: 0,
+                    middle: 12,
+                    right: 0
+                };
+            } else if (state.ui.page === PAGES.DATASETS_DETAIL) {
+                columnSizes = {
+                    left: 0,
+                    middle: 0,
+                    right: 12
+                };
+            } else if (state.ui.page === PAGES.PANORAMA) {
+                columnSizes = {
+                    left: 0,
+                    middle: 0,
+                    right: 12
+                };
+            } else if (activity.dataSelection) {
+                columnSizes = {
+                    left: 0,
+                    middle: 0,
+                    right: 12
+                };
+            } else if (activity.searchResults) {
+                columnSizes = {
+                    left: 0,
+                    middle: 0,
+                    right: 12
+                };
             }
 
-            return columnSizes;
-        }
-
-        function determineColumnSizesPrint (state, visibility, hasFullscreenElement) {
-            const columnSizes = {};
-
-            if (hasFullscreenElement) {
-                columnSizes.left = 0;
-                columnSizes.middle = state.ui.isMapFullscreen ? 12 : 0;
-                columnSizes.right = !state.ui.isMapFullscreen ? 12 : 0;
-            } else {
-                columnSizes.left = 0;
-                columnSizes.middle = visibility.page || visibility.searchResults ? 0 : 12;
-                columnSizes.right = visibility.dataSelection ? 0 : 12;
+            if (isMapPanelPage(state.ui.page)) {
+                columnSizes = {
+                    left: 0,
+                    middle: 4,
+                    right: 8
+                };
             }
-
             return columnSizes;
         }
 
         function hasLimitedWidth (state) {
             const visibility = determineVisibility(state);
             return Boolean(visibility.page);
-        }
-
-        function isEmbedOrPreviewWithFullscreenMap (state) {
-            return (state.ui.isEmbed || state.ui.isEmbedPreview) &&
-                state.ui.isMapFullscreen && !state.straatbeeld;
         }
 
         function isPrintOrEmbedOrPreview (state) {

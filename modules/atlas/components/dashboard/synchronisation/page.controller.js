@@ -9,13 +9,13 @@ import PAGES from '../../../../../src/pages';
 
     PageController.$inject = ['store'];
 
-    function PageController(store) {
+    function PageController (store) {
         const vm = this;
 
         store.subscribe(update);
         update();
 
-        function update() {
+        function update () { // eslint-disable-line complexity
             var state = store.getState();
 
             // TODO get rid of page reducer, reducer is doing view logic

@@ -1,6 +1,6 @@
 import { closeMapPreviewPanel } from '../../../../src/map/ducks/preview-panel/map-preview-panel';
 import { fetchStraatbeeldById } from '../../../../src/map/ducks/straatbeeld/straatbeeld';
-import { switchPage } from '../../../../src/shared/ducks/ui/ui';
+import { MAP_MODE, switchMode, switchPage } from '../../../../src/shared/ducks/ui/ui';
 import PAGES from '../../../../src/pages';
 
 (function () {
@@ -43,7 +43,9 @@ import PAGES from '../../../../src/pages';
             vm.radius = sharedConfig.RADIUS;
 
             vm.openThumbnailPage = () => {
+                store.dispatch(closeMapPreviewPanel());
                 store.dispatch(fetchStraatbeeldById(vm.payload));
+                store.dispatch(switchMode(MAP_MODE.PANORAMA));
                 store.dispatch(switchPage(PAGES.KAART_PANORAMA));
             };
 
