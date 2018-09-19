@@ -1,5 +1,5 @@
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
-export const AUTHENTICATE_ERROR = 'AUTHENTICATE_ERROR';
+const AUTHENTICATE_ERROR = 'AUTHENTICATE_ERROR';
 
 const initialState = {
   authenticated: false,

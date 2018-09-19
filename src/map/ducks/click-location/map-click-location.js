@@ -1,5 +1,3 @@
-import ACTIONS from '../../../shared/actions';
-
 export const getMapClickLocation = (state) => state.mapClickLocation;
 
 export const SET_MAP_CLICK_LOCATION = 'SET_MAP_CLICK_LOCATION';
@@ -22,7 +20,7 @@ export default function MapClickLocationReducer(state = initialState, action) {
 export const setMapClickLocation = (location) => ({ type: SET_MAP_CLICK_LOCATION, location });
 
 export const updateClick = (payload) => ({
-  type: ACTIONS.SET_MAP_CLICK_LOCATION.id,
+  type: SET_MAP_CLICK_LOCATION,
   location: {
     latitude: payload.latlng.lat,
     longitude: payload.latlng.lng
