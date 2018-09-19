@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -14,9 +16,9 @@
             controllerAs: 'vm'
         });
 
-    DpStraatbeeldFullscreenController.$inject = ['$scope', 'store', 'ACTIONS'];
+    DpStraatbeeldFullscreenController.$inject = ['$scope', 'store'];
 
-    function DpStraatbeeldFullscreenController ($scope, store, ACTIONS) {
+    function DpStraatbeeldFullscreenController ($scope, store) {
         const vm = this;
 
         const deregistrationFn = $scope.$watch('vm.isFullscreen', setButtonText);

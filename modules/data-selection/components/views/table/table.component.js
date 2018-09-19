@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -13,9 +15,9 @@
             controllerAs: 'vm'
         });
 
-    DpDataSelectionTableController.$inject = ['store', 'ACTIONS'];
+    DpDataSelectionTableController.$inject = ['store'];
 
-    function DpDataSelectionTableController (store, ACTIONS) {
+    function DpDataSelectionTableController (store) {
         const vm = this;
 
         vm.followLink = function (endpoint) {

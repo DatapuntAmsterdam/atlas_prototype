@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 // This component is just an mock of the dp-link component
 // Is only used in the tests to simplify the test process
 (function () {
@@ -7,9 +9,9 @@
         .module('dpShared')
         .directive('dpButton', dpButtonDirective);
 
-    dpButtonDirective.$inject = ['store', 'ACTIONS'];
+    dpButtonDirective.$inject = ['store'];
 
-    function dpButtonDirective (store, ACTIONS) {
+    function dpButtonDirective (store) {
         return {
             template: '<button ng-click="click()" class="{{className}}" title="{{hoverText}}">' +
                 '<ng-transclude></ng-transclude><span class="u-sr-only">{{hoverText}}</span></button>',

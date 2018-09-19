@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -16,9 +18,9 @@
             controllerAs: 'vm'
         });
 
-    DpButtonController.$inject = ['$scope', 'store', 'ACTIONS'];
+    DpButtonController.$inject = ['$scope', 'store'];
 
-    function DpButtonController ($scope, store, ACTIONS) {
+    function DpButtonController ($scope, store) {
         const vm = this;
 
         vm.className = vm.className || 'o-btn o-btn--link';

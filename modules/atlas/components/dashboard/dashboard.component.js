@@ -2,6 +2,7 @@ import {
     hideMapPanel,
     showMapPanel
 } from '../../../../src/shared/ducks/ui/ui';
+import ACTIONS from '../../../../src/shared/actions';
 
 (function () {
     'use strict';
@@ -14,9 +15,9 @@ import {
             controllerAs: 'vm'
         });
 
-    DpDashboardController.$inject = ['$window', '$scope', '$timeout', 'store', 'ACTIONS', 'dashboardColumns', 'HEADER'];
+    DpDashboardController.$inject = ['$window', '$scope', '$timeout', 'store', 'dashboardColumns', 'HEADER'];
 
-    function DpDashboardController ($window, $scope, $timeout, store, ACTIONS, dashboardColumns, HEADER) {
+    function DpDashboardController ($window, $scope, $timeout, store, dashboardColumns, HEADER) {
         const vm = this;
         const endpointTypes = $window.mapPreviewPanelDetailEndpointTypes || {};
 

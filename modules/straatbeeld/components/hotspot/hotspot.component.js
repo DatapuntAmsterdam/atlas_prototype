@@ -1,4 +1,5 @@
 import { radiansToDegrees } from '../../../../src/shared/services/angle-conversion/angle-conversion';
+import ACTIONS from '../../../../src/shared/actions';
 
 (function () {
     'use strict';
@@ -17,9 +18,9 @@ import { radiansToDegrees } from '../../../../src/shared/services/angle-conversi
             controllerAs: 'vm'
         });
 
-    DpHotspotController.$inject = ['store', 'ACTIONS', 'STRAATBEELD_CONFIG'];
+    DpHotspotController.$inject = ['store', 'STRAATBEELD_CONFIG'];
 
-    function DpHotspotController (store, ACTIONS, STRAATBEELD_CONFIG) {
+    function DpHotspotController (store, STRAATBEELD_CONFIG) {
         var vm = this,
             realLifeHotspotSize = 0.6,
             minDistance = 4,

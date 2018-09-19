@@ -1,4 +1,5 @@
 import stateUrlConverter from '../../../../src/shared/services/routing/state-url-converter';
+import ACTIONS from '../../../../src/shared/actions';
 
 (function () {
     'use strict';
@@ -19,9 +20,9 @@ import stateUrlConverter from '../../../../src/shared/services/routing/state-url
             controllerAs: 'vm'
         });
 
-    DpLinkController.$inject = ['$scope', 'store', 'ACTIONS', '$location', '$window'];
+    DpLinkController.$inject = ['$scope', 'store', '$location', '$window'];
 
-    function DpLinkController ($scope, store, ACTIONS, $location, $window) {
+    function DpLinkController ($scope, store, $location, $window) {
         const vm = this;
         vm.activeUrl = $location.url();
 

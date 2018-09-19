@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -15,9 +17,9 @@
             controllerAs: 'vm'
         });
 
-    DpDataSelectionActiveFilterController.$inject = ['$scope', 'store', 'ACTIONS'];
+    DpDataSelectionActiveFilterController.$inject = ['$scope', 'store'];
 
-    function DpDataSelectionActiveFilterController ($scope, store, ACTIONS) {
+    function DpDataSelectionActiveFilterController ($scope, store) {
         var vm = this;
 
         const GEOMETRY_FILTER = 'GEOMETRY_FILTER';  // Identification for a geometry filter

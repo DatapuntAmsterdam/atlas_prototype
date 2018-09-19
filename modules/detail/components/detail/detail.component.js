@@ -1,6 +1,7 @@
 import removeMd from 'remove-markdown';
 
 import { getMapClickLocation } from '../../../../src/map/ducks/click-location/map-click-location';
+import ACTIONS from '../../../../src/shared/actions';
 
 (function () {
     angular
@@ -23,7 +24,6 @@ import { getMapClickLocation } from '../../../../src/map/ducks/click-location/ma
     DpDetailController.$inject = [
         '$scope',
         'store',
-        'ACTIONS',
         'api',
         'endpointParser',
         'geometry',
@@ -37,7 +37,6 @@ import { getMapClickLocation } from '../../../../src/map/ducks/click-location/ma
     function DpDetailController (
         $scope,
         store,
-        ACTIONS,
         api,
         endpointParser,
         geometry,

@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (() => {
     'use strict';
 
@@ -19,10 +21,10 @@
         });
 
     DpSearchResultsController.$inject = [
-        '$rootScope', '$scope', 'search', 'geosearch', 'TabHeader', 'store', 'ACTIONS', 'activeOverlays'
+        '$rootScope', '$scope', 'search', 'geosearch', 'TabHeader', 'store', 'activeOverlays'
     ];
 
-    function DpSearchResultsController ($rootScope, $scope, search, geosearch, TabHeader, store, ACTIONS,
+    function DpSearchResultsController ($rootScope, $scope, search, geosearch, TabHeader, store,
                                         activeOverlays) {
         const vm = this;
 
