@@ -47,6 +47,8 @@ import '../modules/atlas/components/scrollable-content/scrollable-content.direct
 import '../modules/atlas/services/piwik/piwik-config.constant';
 import '../modules/atlas/services/piwik/piwik.factory';
 import '../modules/atlas/services/piwik/piwik.run';
+import '../modules/atlas/services/magic/redux-angular-magic.factory';
+import '../modules/atlas/services/magic/redux-angular-magic.run';
 import '../modules/atlas/services/redux/store.run';
 import '../modules/atlas/services/routing/state-to-url.factory';
 import '../modules/data-selection/data-selection.module';

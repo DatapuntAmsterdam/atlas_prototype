@@ -25,14 +25,6 @@ import {
         store.subscribe(setLayout);
         setLayout();
 
-        $scope.$watchGroup(['vm.isStraatbeeldActive', 'vm.straatbeeldHistory'], () => {
-            if (vm.isStraatbeeldActive) {
-                store.dispatch({ type: ACTIONS.MAP_ADD_PANO_OVERLAY.id, payload: store.getState().straatbeeld });
-            } else {
-                $timeout(() => store.dispatch({ type: ACTIONS.MAP_REMOVE_PANO_OVERLAY.id }));
-            }
-        });
-
         $scope.$watchGroup(['vm.isEmbed', 'vm.isEmbedPreview'], () => {
             if (vm.store.getState().map.overlays.length) {
                 return;
@@ -105,8 +97,6 @@ import {
             vm.isFullHeight = !vm.isRightColumnScrollable || vm.columnSizes.right < 12;
 
             vm.isMapFullscreen = Boolean(vm.visibility.map && state.ui.isMapFullscreen);
-            vm.isStraatbeeldActive = Boolean(state.straatbeeld);
-            vm.straatbeeldHistory = vm.isStraatbeeldActive ? state.straatbeeld.history : null;
             vm.geosearchLocation = state.search && state.search.location && state.search.location.toString();
             vm.detailEndpoint = state.detail && state.detail.endpoint;
         }
