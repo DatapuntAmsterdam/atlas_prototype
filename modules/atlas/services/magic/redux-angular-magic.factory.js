@@ -3,8 +3,17 @@
 // DO NOT REPEAT ANY OF THESE PATTERNS!!!
 
 import watch from 'redux-watch';
-import { createSelector } from 'reselect';
 import { MAP_ADD_PANO_OVERLAY, MAP_REMOVE_PANO_OVERLAY } from '../../../../src/map/ducks/map/map';
+import {
+    getDetailEndpoint,
+    getGeosearchLocation,
+    isHomePageActive,
+    isMapFullscreen,
+    isMapOverlaysActive,
+    isMapPreviewPanelActive,
+    isStraatbeeldActive
+} from './selectors';
+import { hideMapPanel, showMapPanel } from '../../../../src/shared/ducks/ui/ui';
 
 // mimics dashboard.component behavior:
 // $scope.$watchGroup(['vm.isStraatbeeldActive', 'vm.straatbeeldHistory'], () => {
@@ -22,34 +31,76 @@ import { MAP_ADD_PANO_OVERLAY, MAP_REMOVE_PANO_OVERLAY } from '../../../../src/m
 //   vm.straatbeeldHistory = vm.isStraatbeeldActive ? state.straatbeeld.history : null;
 // });
 //
-const getStraatbeeld = (state) => state.straatbeeld;
-const getStraatbeeldHistory = (state) => state.straatbeeld && state.straatbeeld.history;
 
 (function () {
     angular
         .module('atlas')
         .factory('reduxAngularMagic', ReduxAngularMagicFactory);
 
-    ReduxAngularMagicFactory.$inject = ['store', '$timeout'];
+    ReduxAngularMagicFactory.$inject = ['store', '$timeout', '$window'];
 
-    function ReduxAngularMagicFactory (store, $timeout) {
+    function ReduxAngularMagicFactory (store, $timeout, $window) {
+        const { getState, subscribe, dispatch } = store;
         const initialize = () => {
-            const checkStraatbeeldChange = createSelector(
-                [getStraatbeeld, getStraatbeeldHistory],
-                (straatbeeld, history) => {
-                    return Boolean(straatbeeld) || history;
-                }
-            );
+            const watchStraatbeeld = watch(() => isStraatbeeldActive(getState()));
+            const watchMapOverlays = watch(() => isMapOverlaysActive(getState()));
+            const watchMapFullscreen = watch(() => isMapFullscreen(getState()));
+            const watchMapPreviewPanel = watch(() => isMapPreviewPanelActive(getState()));
+            const watchGeosearchLocation = watch(() => getGeosearchLocation(getState()));
+            const watchDetailEndpoint = watch(() => getDetailEndpoint(getState()));
 
-            const watchStraatbeeld = watch(() => checkStraatbeeldChange(store.getState()));
-            store.subscribe(watchStraatbeeld(() => {
-                const state = store.getState();
-                if (state.straatbeeld) {
-                    store.dispatch({ type: MAP_ADD_PANO_OVERLAY, payload: state.straatbeeld });
+            subscribe(watchStraatbeeld((active) => {
+                const state = getState();
+                if (active) {
+                    dispatch({ type: MAP_ADD_PANO_OVERLAY, payload: state.straatbeeld });
                 } else {
-                    $timeout(() => store.dispatch({ type: MAP_REMOVE_PANO_OVERLAY }));
+                    $timeout(() => dispatch({ type: MAP_REMOVE_PANO_OVERLAY }));
                 }
             }));
+
+            // Todo: probably obsolete, check if this can be removed
+            subscribe(watchMapOverlays((active) => {
+                const state = getState();
+                if (!active && (state.ui.isEmbed || state.ui.isEmbedPreview)) {
+                    dispatch(hideMapPanel());
+                }
+            }));
+
+            // Show or hide React `MapPanel` app according to map fullscreen state
+            subscribe(watchMapFullscreen((active) => {
+                if (!active) {
+                    // Always hide when map exits fullscreen mode
+                    store.dispatch(hideMapPanel());
+                } else if (isHomePageActive) {
+                    // Only show when coming from the home page
+                    store.dispatch(showMapPanel());
+                }
+            }));
+
+            // Open or close React `MapPreviewPanel` app
+            function checkMapPreviewPanel () {
+                const state = getState();
+                const endpointTypes = $window.mapPreviewPanelDetailEndpointTypes || {};
+                const detailEndpoint = getDetailEndpoint(state);
+
+                const detailActive = detailEndpoint && Object
+                    .keys(endpointTypes)
+                    .some((typeKey) => detailEndpoint.includes(endpointTypes[typeKey]));
+
+                if (isMapPreviewPanelActive(state) && (getGeosearchLocation(state) || detailActive)) {
+                    store.dispatch({ type: 'OPEN_MAP_PREVIEW_PANEL' });
+                } else {
+                    store.dispatch({ type: 'CLOSE_MAP_PREVIEW_PANEL' });
+                }
+            }
+
+            subscribe(watchMapPreviewPanel(checkMapPreviewPanel));
+            subscribe(watchGeosearchLocation(checkMapPreviewPanel));
+            subscribe(watchDetailEndpoint(checkMapPreviewPanel));
+
+            // Hack to initially call the checkMapPreview, as it's not called the first time
+            // because the default values didn't change when initialize the app
+            $timeout(checkMapPreviewPanel);
         };
 
         return {

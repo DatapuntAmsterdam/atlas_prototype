@@ -1,8 +1,3 @@
-import {
-    hideMapPanel,
-    showMapPanel
-} from '../../../../src/shared/ducks/ui/ui';
-
 (function () {
     'use strict';
 
@@ -18,52 +13,11 @@ import {
 
     function DpDashboardController ($window, $scope, $timeout, store, ACTIONS, dashboardColumns, HEADER) {
         const vm = this;
-        const endpointTypes = $window.mapPreviewPanelDetailEndpointTypes || {};
 
         vm.store = store;
 
         store.subscribe(setLayout);
         setLayout();
-
-        $scope.$watchGroup(['vm.isEmbed', 'vm.isEmbedPreview'], () => {
-            if (vm.store.getState().map.overlays.length) {
-                return;
-            }
-
-            if (vm.isEmbed || vm.isEmbedPreview) {
-                store.dispatch(hideMapPanel());
-            }
-        });
-
-        // Show or hide React `MapPanel` app according to map fullscreen state
-        $scope.$watch('vm.isMapFullscreen', (newValue, oldValue) => {
-            if (newValue !== oldValue) {
-                if (!vm.isMapFullscreen) {
-                    // Always hide when map exits fullscreen mode
-                    store.dispatch(hideMapPanel());
-                } else if (vm.isHomePageActive) {
-                    // Only show when coming from the home page
-                    store.dispatch(showMapPanel());
-                }
-            }
-        });
-
-        // Open or close React `MapPreviewPanel` app
-        $scope.$watchGroup([
-            'vm.activity.mapPreviewPanel',
-            'vm.geosearchLocation',
-            'vm.detailEndpoint'
-        ], () => {
-            const detailActive = vm.detailEndpoint && Object
-                .keys(endpointTypes)
-                .some((typeKey) => vm.detailEndpoint.includes(endpointTypes[typeKey]));
-
-            if (vm.activity.mapPreviewPanel && (vm.geosearchLocation || detailActive)) {
-                store.dispatch({ type: 'OPEN_MAP_PREVIEW_PANEL' });
-            } else {
-                store.dispatch({ type: 'CLOSE_MAP_PREVIEW_PANEL' });
-            }
-        });
 
         function setLayout () { // eslint-disable-line complexity
             const state = store.getState();
@@ -95,10 +49,6 @@ import {
             vm.columnSizes = dashboardColumns.determineColumnSizes(state);
 
             vm.isFullHeight = !vm.isRightColumnScrollable || vm.columnSizes.right < 12;
-
-            vm.isMapFullscreen = Boolean(vm.visibility.map && state.ui.isMapFullscreen);
-            vm.geosearchLocation = state.search && state.search.location && state.search.location.toString();
-            vm.detailEndpoint = state.detail && state.detail.endpoint;
         }
     }
 })();
