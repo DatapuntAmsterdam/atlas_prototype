@@ -7,6 +7,8 @@ import {
 
 export const FETCH_STRAATBEELD_BY_ID = 'FETCH_STRAATBEELD_BY_ID';
 
+
+// selectors
 export const getStraatbeeld = (state) => state.straatbeeld;
 
 export const getStraatbeeldLocation = createSelector(getStraatbeeld,
@@ -35,6 +37,7 @@ export const getStraatbeeldMarkers = createSelector([getStraatbeeldLocation, get
   )
 );
 
+// action creators
 // src/reducers/deprecated/straatbeeld-reducers.js
 export const fetchStraatbeeldById = (pano) => ({
   type: { id: FETCH_STRAATBEELD_BY_ID },

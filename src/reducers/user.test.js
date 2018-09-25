@@ -1,6 +1,4 @@
 import reducer, {
-  AUTHENTICATE_ERROR,
-  AUTHENTICATE_USER,
   authenticateError,
   authenticateUser
 } from './user';
@@ -18,13 +16,8 @@ describe('User Reducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it(`should set the user data when ${AUTHENTICATE_USER} is dispatched`, () => {
-    expect(reducer(initialState, {
-      type: AUTHENTICATE_USER,
-      accessToken: 'token',
-      name: 'name',
-      scopes: ['scope']
-    })).toEqual({
+  it('should set the user data when AUTHENTICATE_USER is dispatched', () => {
+    expect(reducer(initialState, authenticateUser('token', 'name', ['scope']))).toEqual({
       authenticated: true,
       accessToken: 'token',
       name: 'name',
@@ -33,31 +26,10 @@ describe('User Reducer', () => {
     });
   });
 
-  it(`should set error details when ${AUTHENTICATE_ERROR} is dispatched`, () => {
-    expect(reducer(initialState, {
-      type: AUTHENTICATE_ERROR
-    })).toEqual({
+  it('should set error details when AUTHENTICATE_ERROR is dispatched', () => {
+    expect(reducer(initialState, authenticateError())).toEqual({
       ...initialState,
       error: true
-    });
-  });
-});
-
-describe('authenticateUser method', () => {
-  it('should return the right action', () => {
-    expect(authenticateUser('123', 'name', ['scope'])).toEqual({
-      type: AUTHENTICATE_USER,
-      accessToken: '123',
-      name: 'name',
-      scopes: ['scope']
-    });
-  });
-});
-
-describe('authenticateError method', () => {
-  it('should return the right action', () => {
-    expect(authenticateError()).toEqual({
-      type: AUTHENTICATE_ERROR
     });
   });
 });

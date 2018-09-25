@@ -2,8 +2,9 @@ import {
   MAP_ZOOM,
   MAP_PAN,
   MAP_ADD_PANO_OVERLAY,
-  MAP_REMOVE_PANO_OVERLAY
+  MAP_REMOVE_PANO_OVERLAY, MAP_END_DRAWING, MAP_START_DRAWING
 } from '../map/ducks/map/map';
+import { SET_MAP_CLICK_LOCATION } from '../map/ducks/click-location/map-click-location';
 //
 // ACTIONS are identified by their id
 // Optionally an action can specify:
@@ -55,7 +56,7 @@ export default {
     ignore: true
   },
   SET_MAP_CLICK_LOCATION: {
-    id: 'SET_MAP_CLICK_LOCATION',
+    id: SET_MAP_CLICK_LOCATION,
     ignore: true
   },
   MAP_PAN: {
@@ -67,11 +68,11 @@ export default {
     replace: true
   },
   MAP_START_DRAWING: {
-    id: 'MAP_START_DRAWING',
+    id: MAP_START_DRAWING,
     ignore: true
   },
   MAP_END_DRAWING: {
-    id: 'MAP_END_DRAWING'
+    id: MAP_END_DRAWING
   },
 
   FETCH_DETAIL: {
