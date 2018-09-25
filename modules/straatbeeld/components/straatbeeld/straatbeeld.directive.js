@@ -43,7 +43,7 @@ import { hideStraatbeeld, MAP_MODE, switchMode } from '../../../../src/shared/du
 
             scope.updateOrientation = function () {
                 if (!scope.state.isLoading) {
-                    // orientation.update(viewer); // TODO reactivate
+                    orientation.update(viewer);
                 }
             };
 

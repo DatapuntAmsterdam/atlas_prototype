@@ -18,7 +18,7 @@ import PAGES from '../../../../../src/pages';
         function update () { // eslint-disable-line complexity
             var state = store.getState();
 
-            // TODO get rid of page reducer, reducer is doing view logic
+            // TODO refactor, get rid of page reducer, reducer is doing view logic
             // vm.pageName = state.page.name;
             // vm.pageType = state.page.type;
             // vm.pageItem = state.page.item;

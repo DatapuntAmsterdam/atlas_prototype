@@ -41,7 +41,7 @@ describe('The dp-data-selection-toggle-view-button component', function () {
         const component = getComponent('TABLE');
         $rootScope.$apply();
 
-        expect(component.find('ng-transclude').text().trim()).toBe('Kaart weergeven');
+        expect(component.find('button').text().trim()).toBe('Kaart weergeven');
         expect(component.find('button').attr('title').trim()).toBe('Resultaten op de kaart weergeven');
 
         component.find('button').click();
@@ -56,7 +56,7 @@ describe('The dp-data-selection-toggle-view-button component', function () {
         const component = getComponent('LIST');
         $rootScope.$apply();
 
-        expect(component.find('ng-transclude').text().trim()).toBe('Tabel weergeven');
+        expect(component.find('button').text().trim()).toBe('Tabel weergeven');
         expect(component.find('button').attr('title').trim()).toBe('Resultaten in tabel weergeven');
 
         component.find('button').click();

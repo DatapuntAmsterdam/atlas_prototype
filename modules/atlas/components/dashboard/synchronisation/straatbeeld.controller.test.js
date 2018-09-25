@@ -1,3 +1,5 @@
+import PAGES from '../../../../../src/pages';
+
 describe('The straatbeeld controller', function () {
     var $controller,
         $rootScope,
@@ -26,12 +28,11 @@ describe('The straatbeeld controller', function () {
         });
 
         mockedState = {
+            ui: {
+                page: PAGES.HOME
+            },
             straatbeeld: {
-                id: 7,
-                location: [52.741, 4.852],
-                date: new Date(2016, 6, 8),
-                hotspots: ['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y', 'FAKE_HOTSPOT_Z'],
-                isLoading: false
+                id: 7
             }
         };
 
@@ -65,25 +66,16 @@ describe('The straatbeeld controller', function () {
         controller = getController();
 
         expect(controller.straatbeeldState.id).toBe(7);
-        expect(controller.straatbeeldState.date).toEqual(new Date(2016, 6, 8));
-        expect(controller.straatbeeldState.location).toEqual([52.741, 4.852]);
-        expect(controller.straatbeeldState.hotspots).toEqual(['FAKE_HOTSPOT_X', 'FAKE_HOTSPOT_Y', 'FAKE_HOTSPOT_Z']);
-        expect(controller.straatbeeldState.isLoading).toBe(false);
     });
 
-    it('can have a location instead of an ID', function () {
-        var controller;
+    it('is not fullscreen when not on panorama page', function () {
+        const controller = getController();
+        expect(controller.isFullscreen).toBe(false);
+    });
 
-        mockedState = {
-            straatbeeld: {
-                id: 'ABC',
-                isLoading: false
-            }
-        };
-
-        controller = getController();
-
-        expect(controller.straatbeeldState.id).toBe('ABC');
-        expect(controller.straatbeeldState.isLoading).toBe(false);
+    it('is fullscreen on panorama page', function () {
+        mockedState.ui.page = PAGES.PANORAMA;
+        const controller = getController();
+        expect(controller.isFullscreen).toBe(true);
     });
 });

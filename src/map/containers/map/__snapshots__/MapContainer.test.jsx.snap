@@ -12,7 +12,7 @@ exports[`MapContainer should render 1`] = `
     onToggleFullscreen={[Function]}
   />
   <Connect(MapPanelContainer) />
-  <Connect(MapPreviewPanelContainer) />
+  <Connect(MapPreviewPanel) />
 </div>
 `;
 
@@ -28,6 +28,6 @@ exports[`MapContainer should render with drawingmode: draw 1`] = `
     onToggleFullscreen={[Function]}
   />
   <Connect(MapPanelContainer) />
-  <Connect(MapPreviewPanelContainer) />
+  <Connect(MapPreviewPanel) />
 </div>
 `;

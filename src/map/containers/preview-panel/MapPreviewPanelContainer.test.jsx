@@ -11,6 +11,12 @@ import {
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { getMapDetail, selectLatestMapDetail } from '../../ducks/detail/map-detail';
 import { getPanoPreview } from '../../../pano/ducks/preview/pano-preview';
+import PAGES from '../../../pages';
+import {
+  closeMapPreviewPanel
+} from '../../ducks/preview-panel/map-preview-panel';
+import { MAP_MODE, switchMode, switchPage } from '../../../shared/ducks/ui/ui';
+import { fetchStraatbeeldById } from '../../ducks/straatbeeld/straatbeeld';
 
 jest.mock('../../ducks/search-results/map-search-results');
 jest.mock('../../ducks/panel-layers/map-panel-layers');
@@ -38,6 +44,9 @@ describe('MapPreviewPanelContainer', () => {
     mapDetail: null,
     detail: null,
     search: null,
+    ui: {
+      page: PAGES.KAART
+    },
     pano: {
       previews: {}
     },
@@ -492,22 +501,13 @@ describe('MapPreviewPanelContainer', () => {
     });
   });
 
-  it('should maximize the preview panel', () => {
-    const store = configureMockStore()(searchState);
-    jest.spyOn(store, 'dispatch');
-    const wrapper = shallow(<MapPreviewPanelContainer />, { context: { store } }).dive();
-    wrapper.find('.map-preview-panel__button').at(0).simulate('click');
-
-    expect(store.dispatch).toHaveBeenCalledWith({ type: 'MAXIMIZE_MAP_PREVIEW_PANEL' });
-  });
-
   it('should close the preview panel', () => {
     const store = configureMockStore()(searchState);
     jest.spyOn(store, 'dispatch');
     const wrapper = shallow(<MapPreviewPanelContainer />, { context: { store } }).dive();
     wrapper.find('.map-preview-panel__button').at(1).simulate('click');
 
-    expect(store.dispatch).toHaveBeenCalledWith({ type: 'CLOSE_MAP_PREVIEW_PANEL' });
+    expect(store.dispatch).toHaveBeenCalledWith(closeMapPreviewPanel());
   });
 
   it('should go from detail to all results', () => {
@@ -560,16 +560,13 @@ describe('MapPreviewPanelContainer', () => {
         }
       }).dive();
       wrapper.instance().onPanoPreviewClick();
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'TOGGLE_MAP_FULLSCREEN' });
-      expect(store.dispatch).toHaveBeenCalledWith({
-        payload: {
-          heading: undefined,
-          id: undefined
-        },
-        type: {
-          id: 'FETCH_STRAATBEELD_BY_ID'
-        }
-      });
+      expect(store.dispatch).toHaveBeenCalledWith(closeMapPreviewPanel());
+      expect(store.dispatch).toHaveBeenCalledWith(switchMode(MAP_MODE.PANORAMA));
+      expect(store.dispatch).toHaveBeenCalledWith(switchPage(PAGES.KAART_PANORAMA));
+      expect(store.dispatch).toHaveBeenCalledWith(fetchStraatbeeldById({
+        heading: undefined,
+        id: undefined
+      }));
 
       wrapper.setProps({
         pano: {

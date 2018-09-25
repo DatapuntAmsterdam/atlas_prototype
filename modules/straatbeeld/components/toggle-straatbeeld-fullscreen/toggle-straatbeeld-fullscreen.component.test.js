@@ -1,9 +1,10 @@
+import { toggleStraatbeeldFullscreen } from '../../../../src/shared/ducks/ui/ui';
+
 describe('The dp-toggle-straatbeeld-fullscreen component', function () {
     var $compile,
         $rootScope,
         store,
-        scope,
-        ACTIONS;
+        scope;
 
     beforeEach(function () {
         angular.mock.module(
@@ -15,11 +16,10 @@ describe('The dp-toggle-straatbeeld-fullscreen component', function () {
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _store_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
-            ACTIONS = _ACTIONS_;
         });
 
         spyOn(store, 'dispatch');
@@ -44,31 +44,13 @@ describe('The dp-toggle-straatbeeld-fullscreen component', function () {
 
     describe ('The fullscreen button for panorama', function () {
         it('can change a window-view straatbeeld to fullscreen', function () {
-            let directive;
-
             // When straatbeeld is small
-            directive = getDirective(false);
+            const directive = getDirective(false);
 
             directive.find('.qa-toggle-straatbeeld-fullscreen').click();
             $rootScope.$apply();
 
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: true
-            });
-
-            store.dispatch.calls.reset();
-
-            // When straatbeeld is large
-            directive = getDirective(true);
-
-            directive.find('.qa-toggle-straatbeeld-fullscreen').click();
-            $rootScope.$apply();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: false
-            });
+            expect(store.dispatch).toHaveBeenCalledWith(toggleStraatbeeldFullscreen());
         });
 
         it('can change a fullscreen straatbeeld to window-view', function () {
@@ -78,10 +60,7 @@ describe('The dp-toggle-straatbeeld-fullscreen component', function () {
             toggle.click();
             $rootScope.$apply();
 
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: false
-            });
+            store.dispatch(toggleStraatbeeldFullscreen());
         });
 
         it('sets a screen reader text', () => {

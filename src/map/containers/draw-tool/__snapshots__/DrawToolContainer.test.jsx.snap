@@ -25,16 +25,14 @@ exports[`DrawToolContainer should render DrawToolContainer 1`] = `
   }
   isEnabled={false}
   leafletInstance={Object {}}
+  mapClearDrawing={[Function]}
   markersLeft={40}
   onClearDrawing={[Function]}
   onEmptyGeometry={[Function]}
   onEndDrawing={[Function]}
-  onMapClear={[Function]}
   onMapUpdateShape={[Function]}
-  onSetMapFullscreen={[Function]}
   onSetPageName={[Function]}
   onStartDrawing={[Function]}
-  onStraatbeeldOff={[Function]}
   resetGeometryFilter={[Function]}
   setGeometryFilter={[Function]}
   setPolygon={

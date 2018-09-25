@@ -28,12 +28,6 @@
         <div class="o-tabs qa-tabs u-margin__bottom--2">
             <ul>
                 <li ng-repeat="tab in vm.tabHeader.tabs" ng-class="{'is-active': tab.isActive}">
-                    <!--<dp-link ng-if="!tab.isActive"-->
-                             <!--type="{{tab.action}}"-->
-                             <!--payload="tab.payload"-->
-                             <!--class-name="o-tabs__tab o-tabs__tab&#45;&#45;link">-->
-                        <!--{{tab.title}} <span ng-if="tab.count !== null">({{tab.count | number}})</span>-->
-                    <!--</dp-link>-->
                     <button ng-if="!tab.isActive"
                     ng-click="vm.onTabClick(tab)"
                     class="o-tabs__tab o-tabs__tab--link">

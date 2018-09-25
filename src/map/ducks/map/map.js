@@ -37,7 +37,6 @@ export const MAP_START_DRAWING = 'MAP_START_DRAWING';
 export const MAP_UPDATE_SHAPE = 'MAP_UPDATE_SHAPE';
 export const MAP_ZOOM = 'MAP_ZOOM';
 export const MAP_ZOOM_SILENT = 'MAP_ZOOM_SILENT';
-export const MAP_CLEAR = 'MAP_CLEAR';
 export const SET_MAP_BASE_LAYER = 'SET_MAP_BASE_LAYER';
 export const TOGGLE_MAP_OVERLAY = 'TOGGLE_MAP_OVERLAY';
 export const TOGGLE_MAP_OVERLAY_VISIBILITY = 'TOGGLE_MAP_OVERLAY_VISIBILITY';
@@ -178,9 +177,6 @@ export default function MapReducer(state = initialState, action) {
         }))
       };
 
-    case MAP_CLEAR:
-      return initialState;
-
     default:
       return state;
   }
@@ -191,7 +187,6 @@ export const mapEmptyGeometry = () => ({ type: MAP_EMPTY_GEOMETRY });
 export const mapUpdateShape = (payload) => ({ type: MAP_UPDATE_SHAPE, payload });
 export const mapStartDrawing = (payload) => ({ type: MAP_START_DRAWING, payload });
 export const mapEndDrawing = (payload) => ({ type: MAP_END_DRAWING, payload });
-// export const mapClear = () => ({ type: MAP_CLEAR });
 export const setMapBaseLayer = (payload) => ({ type: SET_MAP_BASE_LAYER, payload });
 
 export const toggleMapOverlay = (mapLayerId) => ({ type: TOGGLE_MAP_OVERLAY, mapLayerId });

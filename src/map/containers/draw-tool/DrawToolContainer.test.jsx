@@ -6,18 +6,16 @@ import DrawToolContainer from './DrawToolContainer';
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 
 import {
-  MAP_CLEAR,
-  mapClear,
   mapEndDrawing,
   mapStartDrawing,
   mapUpdateShape
 } from '../../ducks/map/map';
 import { setDataSelectionGeometryFilter } from '../../../shared/ducks/data-selection/data-selection';
 import { setPageName } from '../../../shared/ducks/page/page';
-import { setMapFullscreen } from '../../../shared/ducks/ui/ui';
-import { setStraatbeeldOff } from '../../../shared/ducks/straatbeeld/straatbeeld';
 
 import { isEnabled } from '../../services/draw-tool/draw-tool';
+import PAGES from '../../../pages';
+import { switchPage } from '../../../shared/ducks/ui/ui';
 
 jest.mock('../../services/draw-tool/draw-tool');
 
@@ -129,19 +127,6 @@ describe('DrawToolContainer', () => {
     });
 
     describe('componentWillReceiveProps', () => {
-      it('should reset the polygon when there is no geometry or dataSelection', () => {
-        wrapperInstance.props.setPolygon.mockClear();
-
-        wrapperInstance.componentWillReceiveProps({
-          ...props,
-          drawingMode: drawToolConfig.DRAWING_MODE.NONE,
-          geometry: [],
-          dataSelection: null
-        });
-
-        expect(wrapperInstance.props.setPolygon).toHaveBeenCalledWith([]);
-      });
-
       it('should save the markers as previous markers', () => {
         const geometry = [...markers.filter((item, index) => index < 2)];
         wrapperInstance.props.setPolygon.mockClear();
@@ -182,13 +167,6 @@ describe('DrawToolContainer', () => {
         });
         expect(wrapperInstance.props.cancel).toHaveBeenCalled();
         expect(wrapperInstance.state.drawingMode).toEqual(drawToolConfig.DRAWING_MODE.NONE);
-      });
-    });
-
-    describe('componentWillUnmount', () => {
-      it(`should dispatch ${MAP_CLEAR}`, () => {
-        wrapper.unmount();
-        expect(store.dispatch).toHaveBeenCalledWith(mapClear());
       });
     });
 
@@ -288,10 +266,9 @@ describe('DrawToolContainer', () => {
         wrapperInstance.onFinishShape(polygon);
 
         expect(store.dispatch).toHaveBeenCalledWith(setDataSelectionGeometryFilter(geometryFilter));
-        expect(store.dispatch).toHaveBeenCalledWith(setStraatbeeldOff());
         expect(store.dispatch).toHaveBeenCalledWith(mapEndDrawing({ polygon }));
         expect(store.dispatch).toHaveBeenCalledWith(setPageName({ name: null }));
-        expect(store.dispatch).toHaveBeenCalledWith(setMapFullscreen({ isMapFullscreen: false }));
+        expect(store.dispatch).toHaveBeenCalledWith(switchPage(PAGES.KAART_ADRESSSEN));
       });
     });
 

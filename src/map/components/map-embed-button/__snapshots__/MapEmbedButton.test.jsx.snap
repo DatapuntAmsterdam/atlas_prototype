@@ -4,6 +4,7 @@ exports[`MapEmbedButton should render the link 1`] = `
 <a
   className="c-embed-button qa-embed-button"
   href="foo/bar"
+  rel="noopener noreferrer"
   target="_blank"
   title="Naar interactieve kaart (Amsterdam City Data)"
 >

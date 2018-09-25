@@ -17,6 +17,9 @@ Object {
       },
     ],
   },
+  "search": Object {
+    "isLoading": false,
+  },
 }
 `;
 

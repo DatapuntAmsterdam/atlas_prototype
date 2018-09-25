@@ -1,3 +1,6 @@
+import { switchPage } from '../../../../../src/shared/ducks/ui/ui';
+import PAGES from '../../../../../src/pages';
+
 describe('The dp-data-selection-table component', function () {
     let $compile,
         $rootScope,
@@ -121,18 +124,20 @@ describe('The dp-data-selection-table component', function () {
 
         // The first row
         component.find('tbody tr:nth-child(1)').click();
-        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_DETAIL,
             payload: 'https://www.example.com/path/to/1/'
         });
-
+        expect(store.dispatch).toHaveBeenCalledWith(switchPage(PAGES.KAART_DETAIL));
         // The second row
         component.find('tbody tr:nth-child(2)').click();
-        expect(store.dispatch).toHaveBeenCalledTimes(2);
+
+        expect(store.dispatch).toHaveBeenCalledTimes(4);
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_DETAIL,
             payload: 'https://www.example.com/path/to/2/'
         });
+        expect(store.dispatch).toHaveBeenCalledWith(switchPage(PAGES.KAART_DETAIL));
     });
 });

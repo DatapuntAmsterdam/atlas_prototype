@@ -156,7 +156,7 @@ describe('map module', () => {
   describe('user should be able to use the map', () => {
     it('should render the leaflet map', () => {
       // route to the map by url
-      cy.visit('/#?mpb=topografie');
+      cy.visit('/#?mpb=topografie&upg=KAART&upp=HOME&umm=NORMAL');
       // the map container should exist
       cy.get(map).should('exist').and('be.visible');
       // the leaflet map should exist
@@ -167,7 +167,7 @@ describe('map module', () => {
 
     it('should add a map-layer to the leaflet map', () => {
       // route to the map
-      cy.visit('/#?mpb=topografie&mpz=11&mpfs=T&mpv=52.3731081:4.8932945&pgn=home&uvm=T');
+      cy.visit('/#?mpb=topografie&mpz=11&mpfs=T&mpv=52.3731081:4.8932945&pgn=home&uvm=T&upg=KAART&upp=HOME&umm=NORMAL');
       // get the first map-layer button
       cy.get('.map-layers__title').first().click();
       // check if the map has overlay panes
@@ -180,7 +180,7 @@ describe('map module', () => {
   describe('user should be able to open the map panel when collapsed', () => {
     it('should add open the map panel component', () => {
       // route to the map
-      cy.visit('/#?mpb=topografie');
+      cy.visit('/#?mpb=topografie&upg=KAART&upp=HOME&umm=NORMAL');
       // the map-panel should have the class collapsed
       cy.get('.map-panel').should('have.class', 'map-panel--collapsed');
       // the scroll wrapper should not be visible when map panel is collapsed

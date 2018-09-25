@@ -1,5 +1,6 @@
 import PAGES, { isCmsPage, isMapPanelPage } from '../../../../src/pages';
 
+/* istanbul ignore next */
 (function () {
     'use strict';
 

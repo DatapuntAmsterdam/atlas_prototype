@@ -1,12 +1,12 @@
+import PAGES from '../../../../src/pages';
+
 describe('The dashboard component', function () {
     var $compile,
         $rootScope,
-        $timeout,
         $window,
         origAuth,
         origEndpointTypes,
         store,
-        ACTIONS,
         dashboardColumns,
         mockedState;
 
@@ -61,7 +61,8 @@ describe('The dashboard component', function () {
                 isEmbedPreview: false,
                 isMapFullscreen: false,
                 isMapPanelVisible: false,
-                isPrintMode: false
+                isPrintMode: false,
+                page: PAGES.HOME
             },
             error: {
                 hasErrors: false,
@@ -69,14 +70,12 @@ describe('The dashboard component', function () {
             }
         };
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$timeout_, _$window_, _store_, _ACTIONS_,
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_, _store_,
                                       _dashboardColumns_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
-            $timeout = _$timeout_;
             $window = _$window_;
             store = _store_;
-            ACTIONS = _ACTIONS_;
             dashboardColumns = _dashboardColumns_;
         });
 
@@ -147,18 +146,18 @@ describe('The dashboard component', function () {
         let component;
 
         // On the homepage
-        mockedState.page.name = 'home';
+        mockedState.ui.page = PAGES.HOME;
         component = getComponent();
         expect(component.find('.c-dashboard__footer').length).toBe(1);
 
         // On other pages with the homepage 'behind' it
-        mockedState.page.name = 'home';
+        mockedState.ui.page = PAGES.KAART;
         mockedState.ui.isMapFullscreen = true;
         component = getComponent();
         expect(component.find('.c-dashboard__footer').length).toBe(0);
 
         // On other pages
-        mockedState.page.name = 'snel-wegwijs';
+        mockedState.ui.page = PAGES.HELP;
         component = getComponent();
         expect(component.find('.c-dashboard__footer').length).toBe(0);
     });
@@ -270,7 +269,7 @@ describe('The dashboard component', function () {
 
         it('should do nothing if outside homepage', () => {
             mockedState.ui.isMapFullscreen = false;
-            mockedState.page.name = 'other';
+            mockedState.ui.page = 'other';
             getComponent();
 
             mockedState.ui.isMapFullscreen = true;
@@ -396,251 +395,6 @@ describe('The dashboard component', function () {
 
             expect(component.find('.qa-dashboard__column--middle').attr('class')).toContain('u-col-sm--2');
             expect(component.find('.qa-dashboard__column--right').attr('class')).toContain('u-col-sm--3');
-        });
-    });
-
-    describe('Panorama layers', () => {
-        let handler;
-
-        beforeEach(() => {
-            spyOn(store, 'dispatch');
-            spyOn(store, 'subscribe').and.callFake((fn) => {
-                // This function will be called later on by other components as
-                // well
-                handler = handler || fn;
-            });
-
-            getComponent();
-        });
-
-        afterEach(() => handler = null);
-
-        it('are added when there is straatbeeld on the state', () => {
-            store.dispatch.calls.reset();
-
-            mockedState.straatbeeld = {};
-            handler();
-            $rootScope.$digest();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: 'MAP_ADD_PANO_OVERLAY',
-                payload: {}
-            });
-        });
-
-        it('are removed when there is no straatbeeld on the state', () => {
-            mockedState.straatbeeld = { history: 2020 };
-            handler();
-            $rootScope.$digest();
-
-            store.dispatch.calls.reset();
-
-            mockedState.straatbeeld = null;
-            handler();
-            $rootScope.$digest();
-
-            $timeout.flush();
-
-            $rootScope.$digest();
-
-            expect(store.dispatch.calls.mostRecent()).toEqual(jasmine.objectContaining({ args: [{
-                type: 'MAP_REMOVE_PANO_OVERLAY'
-            }] }));
-        });
-
-        it('are changed when the straatbeeld history selection changes', () => {
-            mockedState.straatbeeld = {};
-            handler();
-            $rootScope.$digest();
-
-            store.dispatch.calls.reset();
-
-            // Change history
-            mockedState.straatbeeld.history = 2020;
-            handler();
-            $rootScope.$digest();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: 'MAP_ADD_PANO_OVERLAY',
-                payload: { history: 2020 }
-            });
-
-            store.dispatch.calls.reset();
-
-            // Change history
-            mockedState.straatbeeld.history = 2018;
-            handler();
-            $rootScope.$digest();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.MAP_ADD_PANO_OVERLAY.id,
-                payload: { history: 2018 }
-            });
-
-            store.dispatch.calls.reset();
-
-            // Change history (reset to default)
-            mockedState.straatbeeld.history = null;
-            handler();
-            $rootScope.$digest();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.MAP_ADD_PANO_OVERLAY.id,
-                payload: { history: null }
-            });
-        });
-    });
-
-    describe('MapPreviewPanel', () => {
-        let handler;
-        let mockedActivity;
-
-        beforeEach(function () {
-            handler = null;
-            mockedActivity = {
-                mapPreviewPanel: false
-            };
-
-            spyOn(dashboardColumns, 'determineActivity').and.returnValue(mockedActivity);
-            spyOn(store, 'dispatch');
-            spyOn(store, 'subscribe').and.callFake((fn) => {
-                // This function will be called later on by other components as
-                // well
-                handler = handler || fn;
-            });
-        });
-
-        describe('Opening and closing', () => {
-            it('Opens when visible and there is geolocation', () => {
-                getComponent();
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = true;
-                mockedState.search = {
-                    location: [1, 0]
-                };
-                handler();
-                $rootScope.$digest();
-
-                expect(store.dispatch).toHaveBeenCalledWith({
-                    type: 'OPEN_MAP_PREVIEW_PANEL'
-                });
-            });
-
-            it('Opens when visible and there is a map preview panel implementation for the endpoint', () => {
-                getComponent({ brkObject: 'brk/object/' });
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = true;
-                mockedState.detail = {
-                    endpoint: 'https://acc.api.amsterdam.nl/fake/brk/object/endpoint'
-                };
-                handler();
-                $rootScope.$digest();
-
-                expect(store.dispatch).toHaveBeenCalledWith({
-                    type: 'OPEN_MAP_PREVIEW_PANEL'
-                });
-            });
-
-            it('Closes when visible, but there is no map preview panel implementation for the endpoint', () => {
-                getComponent();
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = true;
-                mockedState.detail = {
-                    endpoint: 'https://acc.api.amsterdam.nl/fake/non/existent/endpoint'
-                };
-                handler();
-                $rootScope.$digest();
-
-                expect(store.dispatch).toHaveBeenCalledWith({
-                    type: 'CLOSE_MAP_PREVIEW_PANEL'
-                });
-            });
-
-            it('Closes when visible and there is detail, but not endpoint', () => {
-                getComponent();
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = true;
-                mockedState.detail = {};
-                handler();
-                $rootScope.$digest();
-
-                expect(store.dispatch).toHaveBeenCalledWith({
-                    type: 'CLOSE_MAP_PREVIEW_PANEL'
-                });
-            });
-
-            it('Closes when visible but there is no geolocation nor detail', () => {
-                getComponent();
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = true;
-                handler();
-                $rootScope.$digest();
-
-                expect(store.dispatch).toHaveBeenCalledWith({
-                    type: 'CLOSE_MAP_PREVIEW_PANEL'
-                });
-            });
-
-            it('Closes when not visible', () => {
-                getComponent();
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = true;
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = false;
-                handler();
-                $rootScope.$digest();
-
-                expect(store.dispatch).toHaveBeenCalledWith({
-                    type: 'CLOSE_MAP_PREVIEW_PANEL'
-                });
-            });
-
-            it('Closes when not visible, even though there is geolocation or detail', () => {
-                getComponent();
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = true;
-                handler();
-                $rootScope.$digest();
-                store.dispatch.calls.reset();
-
-                mockedActivity.mapPreviewPanel = false;
-                mockedState.search = {
-                    location: [1, 0]
-                };
-                mockedState.detail = {
-                    endpoint: 'https://acc.api.amsterdam.nl/fake/brk/object/endpoint'
-                };
-                handler();
-                $rootScope.$digest();
-
-                expect(store.dispatch).toHaveBeenCalledWith({
-                    type: 'CLOSE_MAP_PREVIEW_PANEL'
-                });
-            });
         });
     });
 });

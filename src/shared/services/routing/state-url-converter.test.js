@@ -4,6 +4,8 @@ import DRAW_TOOL_CONFIG from '../../../map/services/draw-tool/draw-tool.config';
 import * as stateUrlConversion from './state-url-conversion';
 
 import stateUrlConverter from './state-url-converter';
+import { MAP_MODE } from '../../ducks/ui/ui';
+import PAGES from '../../../pages';
 
 describe('The state url conversion factory', () => {
   let mockedStateUrlConversion;
@@ -46,7 +48,9 @@ describe('The state url conversion factory', () => {
           isMapPanelVisible: false,
           isMapLayersVisible: true,
           isMapPanelHandleVisible: true,
-          isPrintMode: false
+          isPrintMode: false,
+          mapMode: MAP_MODE.NORMAL,
+          page: PAGES.HOME
         },
         isMapPreviewPanelVisible: false,
         filters: {},

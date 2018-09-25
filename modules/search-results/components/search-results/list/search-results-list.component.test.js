@@ -126,29 +126,29 @@ describe('The dp-search-results-list component', function () {
     it('lists search results', function () {
         var component = getComponent(mockedCategory, false);
 
-        expect(component.find('dp-link').length).toBe(12);
+        expect(component.find('.qa-list-item-link').length).toBe(12);
 
-        expect(component.find('dp-link').eq(0).find('button').text().trim()).toBe('Link #1');
+        expect(component.find('.qa-list-item-link').eq(0).text().trim()).toBe('Link #1');
         expect(component.find('.qa-search-results__link-extra-info').eq(0).text().trim()).toBe('(nevenadres)');
-        component.find('dp-link').eq(0).find('button').click();
+        component.find('.qa-list-item-link').eq(0).click();
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_DETAIL,
             payload: 'http://www.example.com/bag/or/1/'
         });
 
-        expect(component.find('dp-link').eq(1).find('button').text().trim())
+        expect(component.find('.qa-list-item-link').eq(1).text().trim())
             .toBe('Link #2');
         expect(component.find('.qa-search-results__link-extra-info').eq(1).text().trim())
             .toBe('(verblijfsobject gevormd)');
 
-        expect(component.find('dp-link').eq(2).find('button').text().trim())
+        expect(component.find('.qa-list-item-link').eq(2).text().trim())
             .toBe('Link #3');
         expect(component.find('.qa-search-results__link-extra-info').eq(2).text().trim())
             .toBe('(nevenadres) (verblijfsobject gevormd)');
 
-        expect(component.find('dp-link').eq(3).find('button').text().trim()).toBe('');
-        expect(component.find('dp-link').eq(10).find('button').text().trim()).toBe('Link #11');
-        component.find('dp-link').eq(10).find('button').click();
+        expect(component.find('.qa-list-item-link').eq(3).text().trim()).toBe('');
+        expect(component.find('.qa-list-item-link').eq(10).text().trim()).toBe('Link #11');
+        component.find('.qa-list-item-link').eq(10).click();
         expect(store.dispatch).toHaveBeenCalledWith({
             type: ACTIONS.FETCH_DETAIL,
             payload: 'http://www.example.com/bag/or/11/'
@@ -160,18 +160,18 @@ describe('The dp-search-results-list component', function () {
 
         // Without the limiter
         component = getComponent(mockedCategory, false);
-        expect(component.find('dp-link').length).toBe(12);
+        expect(component.find('.qa-list-item-link').length).toBe(12);
 
         // With the limiter
         component = getComponent(mockedCategory, true);
-        expect(component.find('dp-link').length).toBe(10);
+        expect(component.find('.qa-list-item-link').length).toBe(10);
     });
 
     it('applies the longNameShortener filter', function () {
         var component = getComponent(mockedCategory, false);
 
-        expect(component.find('dp-link').eq(9).find('button').text()).not.toContain('Vereniging van Eigenaren');
-        expect(component.find('dp-link').eq(9).find('button').text()).toContain('VVE');
+        expect(component.find('.qa-list-item-link').eq(9).text()).not.toContain('Vereniging van Eigenaren');
+        expect(component.find('.qa-list-item-link').eq(9).text()).toContain('VVE');
     });
 
     it('shows the type of openbare ruimte when it\'s something else than \'Weg\'', function () {

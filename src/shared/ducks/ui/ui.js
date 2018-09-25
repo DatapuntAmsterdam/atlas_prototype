@@ -3,16 +3,16 @@ import PAGES from '../../../pages';
 export const HIDE_EMBED_PREVIEW = 'HIDE_EMBED_PREVIEW';
 export const HIDE_MAP_PANEL = 'HIDE_MAP_PANEL';
 export const HIDE_PRINT = 'HIDE_PRINT';
-const HIDE_STRAATBEELD = 'HIDE_STRAATBEELD';
+export const HIDE_STRAATBEELD = 'HIDE_STRAATBEELD';
 export const SET_MAP_FULLSCREEN = 'SET_MAP_FULLSCREEN';
 export const SHOW_EMBED_PREVIEW = 'SHOW_EMBED_PREVIEW';
-const SHOW_MAP = 'SHOW_MAP';
+export const SHOW_MAP = 'SHOW_MAP';
 export const SHOW_MAP_PANEL = 'SHOW_MAP_PANEL';
 export const SHOW_PRINT = 'SHOW_PRINT';
 export const TOGGLE_MAP_FULLSCREEN = 'TOGGLE_MAP_FULLSCREEN';
 export const TOGGLE_MAP_PANEL = 'TOGGLE_MAP_PANEL';
 export const TOGGLE_MAP_PANEL_HANDLE = 'TOGGLE_MAP_PANEL_HANDLE';
-const TOGGLE_STRAATBEELD_FULLSCREEN = 'TOGGLE_STRAATBEELD_FULLSCREEN';
+export const TOGGLE_STRAATBEELD_FULLSCREEN = 'TOGGLE_STRAATBEELD_FULLSCREEN';
 const SWITCH_PAGE = 'SWITCH_PAGE';
 const SWITCH_MODE = 'SWITCH_MODE';
 
@@ -36,6 +36,7 @@ const handleFullScreenChange = (state, doMaximize) => {
   const isFullscreen = state.page === PAGES.KAART;
 
   if (isFullscreen === doMaximize) {
+    // current state is already equal to desired state, exit early
     return state;
   }
 
@@ -44,12 +45,14 @@ const handleFullScreenChange = (state, doMaximize) => {
     if (state.prevPage) {
       return {
         ...state,
+        isMapFullscreen: state.prevPage === PAGES.KAART,
         prevPage: state.page,
         page: state.prevPage
       };
     }
     return {
       ...state,
+      isMapFullscreen: false,
       page: PAGES.HOME
     };
   }
@@ -57,6 +60,7 @@ const handleFullScreenChange = (state, doMaximize) => {
   // maximize
   return {
     ...state,
+    isMapFullscreen: true,
     prevPage: state.page,
     page: PAGES.KAART
   };

@@ -1,10 +1,19 @@
 import ReactDOM from 'react-dom';
+import { fetchStraatbeeldById } from '../../../../src/map/ducks/straatbeeld/straatbeeld';
+import { MAP_MODE, switchMode, switchPage } from '../../../../src/shared/ducks/ui/ui';
+import PAGES from '../../../../src/pages';
 
 describe('The dp-homepage component', () => {
+    const HOMEPAGE_CONFIG = {
+        PANORAMA: {
+            id: 'abc789',
+            heading: 45
+        }
+    };
+
     let $compile,
         $rootScope,
         store,
-        ACTIONS,
         $window,
         $timeout,
         originalWindow;
@@ -18,20 +27,14 @@ describe('The dp-homepage component', () => {
                 }
             },
             function ($provide) {
-                $provide.constant('HOMEPAGE_CONFIG', {
-                    PANORAMA: {
-                        id: 'abc789',
-                        heading: 45
-                    }
-                });
+                $provide.constant('HOMEPAGE_CONFIG', HOMEPAGE_CONFIG);
             }
         );
 
-        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_, _$window_, _$timeout_) => {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_, _$window_, _$timeout_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
-            ACTIONS = _ACTIONS_;
             $window = _$window_;
             $timeout = _$timeout_;
         });
@@ -57,17 +60,12 @@ describe('The dp-homepage component', () => {
 
     it('clicking on straatbeeld will dispatch FETCH_STRAATBEELD_BY_ID', () => {
         const component = getComponent();
+
         component.find('.qa-straatbeeld-link button').click();
 
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_STRAATBEELD_BY_ID,
-            payload: jasmine.objectContaining({
-                id: 'abc789',
-                heading: 45,
-                isInitial: true, // isInitial has to be true to make sure a new history entry is added
-                isFullscreen: false
-            })
-        });
+        expect(store.dispatch).toHaveBeenCalledWith(fetchStraatbeeldById(HOMEPAGE_CONFIG.PANORAMA));
+        expect(store.dispatch).toHaveBeenCalledWith(switchMode(MAP_MODE.PANORAMA));
+        expect(store.dispatch).toHaveBeenCalledWith(switchPage(PAGES.KAART_PANORAMA));
     });
 
     describe('setting search component', () => {

@@ -14,13 +14,11 @@
         };
 
         function getTitle (detailState) {
-            // TODO reactivate
-            // const glossaryKey = endpointParser.getGlossaryKey(detailState.endpoint);
-            // const glossaryDefinition = GLOSSARY.DEFINITIONS[glossaryKey];
-            // const label = glossaryDefinition ? glossaryDefinition.label_singular : glossaryKey;
-            //
-            // return detailState.display ? `${label}: ${detailState.display}` : label;
-            return 'detail';
+            const glossaryKey = endpointParser.getGlossaryKey(detailState.endpoint);
+            const glossaryDefinition = GLOSSARY.DEFINITIONS[glossaryKey];
+            const label = glossaryDefinition ? glossaryDefinition.label_singular : glossaryKey;
+
+            return detailState.display ? `${label}: ${detailState.display}` : label;
         }
     }
 })();
