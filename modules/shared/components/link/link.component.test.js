@@ -14,19 +14,19 @@ describe('The dp-link component', function () {
         mockedTargetPath;
 
     beforeEach(function () {
-        mockedActions = {
-            ACTION_WITH_LINK: {
-                id: 'ACTION_WITH_LINK',
-                isButton: false
-            },
-            ACTION_WITH_BUTTON: {
-                id: 'ACTION_WITH_BUTTON',
-                isButton: true
-            },
-            ACTION_WITHOUT_BUTTON_CONFIG: {
-                id: 'ACTION_WITHOUT_BUTTON_CONFIG'
-            }
-        };
+        // mockedActions = {
+        //     ACTION_WITH_LINK: {
+        //         id: 'ACTION_WITH_LINK',
+        //         isButton: false
+        //     },
+        //     ACTION_WITH_BUTTON: {
+        //         id: 'ACTION_WITH_BUTTON',
+        //         isButton: true
+        //     },
+        //     ACTION_WITHOUT_BUTTON_CONFIG: {
+        //         id: 'ACTION_WITHOUT_BUTTON_CONFIG'
+        //     }
+        // };
 
         angular.mock.module(
             'dpShared',
@@ -54,9 +54,6 @@ describe('The dp-link component', function () {
                         };
                     }
                 }
-            },
-            $provide => {
-                $provide.constant('ACTIONS', mockedActions);
             }
         );
 

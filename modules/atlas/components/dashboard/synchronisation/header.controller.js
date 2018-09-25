@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -5,9 +7,9 @@
         .module('atlas')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['store', 'ACTIONS'];
+    HeaderController.$inject = ['store'];
 
-    function HeaderController (store, ACTIONS) {
+    function HeaderController (store) {
         const vm = this;
 
         store.subscribe(update);

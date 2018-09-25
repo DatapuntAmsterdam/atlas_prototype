@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -8,7 +10,6 @@
     dpStraatbeeldDirective.$inject = [
         '$rootScope',
         'store',
-        'ACTIONS',
         'marzipanoService',
         'straatbeeldApi',
         'orientation'
@@ -17,7 +18,6 @@
     function dpStraatbeeldDirective (
         $rootScope,
         store,
-        ACTIONS,
         marzipanoService,
         straatbeeldApi,
         orientation) {

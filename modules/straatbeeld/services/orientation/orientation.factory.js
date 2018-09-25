@@ -1,4 +1,5 @@
 import { radiansToDegrees } from '../../../../src/shared/services/angle-conversion/angle-conversion';
+import ACTIONS from '../../../../src/shared/actions';
 
 (function () {
     'use strict';
@@ -7,9 +8,9 @@ import { radiansToDegrees } from '../../../../src/shared/services/angle-conversi
         .module('dpStraatbeeld')
         .factory('orientation', orientationFactory);
 
-    orientationFactory.$inject = ['store', 'ACTIONS'];
+    orientationFactory.$inject = ['store'];
 
-    function orientationFactory (store, ACTIONS) {
+    function orientationFactory (store) {
         return {
             update: update
         };

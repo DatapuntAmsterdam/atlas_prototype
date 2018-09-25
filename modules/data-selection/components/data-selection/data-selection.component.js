@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -23,8 +25,7 @@
         'dataSelectionApi',
         'DATA_SELECTION_CONFIG',
         'TabHeader',
-        'store',
-        'ACTIONS'
+        'store'
     ];
 
     function DpDataSelectionController (
@@ -33,8 +34,7 @@
         dataSelectionApi,
         DATA_SELECTION_CONFIG,
         TabHeader,
-        store,
-        ACTIONS
+        store
     ) {
         const vm = this;
 

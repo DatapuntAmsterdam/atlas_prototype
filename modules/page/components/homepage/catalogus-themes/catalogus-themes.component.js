@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -9,9 +11,9 @@
             controllerAs: 'vm'
         });
 
-    DpCatalogusThemes.$inject = ['CATALOGUS_THEMES_CONFIG', 'store', 'ACTIONS'];
+    DpCatalogusThemes.$inject = ['CATALOGUS_THEMES_CONFIG', 'store'];
 
-    function DpCatalogusThemes (CATALOGUS_THEMES_CONFIG, store, ACTIONS) {
+    function DpCatalogusThemes (CATALOGUS_THEMES_CONFIG, store) {
         const vm = this;
 
         vm.onClick = (theme) => {

@@ -17,9 +17,9 @@ import { authenticateError } from '../../../../src/reducers/user';
             controllerAs: 'vm'
         });
 
-    DpMenuController.$inject = ['$scope', '$window', 'store', 'ACTIONS'];
+    DpMenuController.$inject = ['$scope', '$window', 'store'];
 
-    function DpMenuController ($scope, $window, store, ACTIONS) {
+    function DpMenuController ($scope, $window, store) {
         const vm = this;
 
         vm.login = () => {

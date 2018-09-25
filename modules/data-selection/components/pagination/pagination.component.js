@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -13,9 +15,9 @@
             controllerAs: 'vm'
         });
 
-    DpDataSelectionPaginationController.$inject = ['store', 'ACTIONS'];
+    DpDataSelectionPaginationController.$inject = ['store'];
 
-    function DpDataSelectionPaginationController (store, ACTIONS) {
+    function DpDataSelectionPaginationController (store) {
         var vm = this,
             isFirstPage,
             isLastPage;

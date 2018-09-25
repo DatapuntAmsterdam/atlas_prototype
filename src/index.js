@@ -191,7 +191,6 @@ import '../modules/shared/services/http-error-registrar/http-error-registrar.fac
 import '../modules/shared/services/http-error-registrar/http-status.factory';
 import '../modules/shared/services/localization/localization.factory';
 import '../modules/shared/services/markdown-parser/markdown-parser.factory';
-import '../modules/shared/services/redux/actions.constant';
 import '../modules/shared/services/redux/store.factory';
 import '../modules/shared/services/storage/instance-storage.factory';
 import '../modules/shared/services/storage/storage.factory';

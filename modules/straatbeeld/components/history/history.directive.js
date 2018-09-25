@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (function () {
     'use strict';
 
@@ -5,9 +7,9 @@
         .module('dpStraatbeeld')
         .directive('dpStraatbeeldHistory', DpStraatbeeldHistoryDirective);
 
-    DpStraatbeeldHistoryDirective.$inject = ['store', 'ACTIONS'];
+    DpStraatbeeldHistoryDirective.$inject = ['store'];
 
-    function DpStraatbeeldHistoryDirective (store, ACTIONS) {
+    function DpStraatbeeldHistoryDirective (store) {
         return {
             restrict: 'E',
             scope: {

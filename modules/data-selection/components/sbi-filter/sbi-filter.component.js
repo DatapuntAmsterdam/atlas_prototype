@@ -1,3 +1,5 @@
+import ACTIONS from '../../../../src/shared/actions';
+
 (() => {
     'use strict';
 
@@ -13,9 +15,9 @@
             controllerAs: 'vm'
         });
 
-    DpSbiFilterController.$inject = ['$scope', 'store', 'ACTIONS'];
+    DpSbiFilterController.$inject = ['$scope', 'store'];
 
-    function DpSbiFilterController ($scope, store, ACTIONS) {
+    function DpSbiFilterController ($scope, store) {
         const vm = this,
             sbiLevelFilters = vm.availableFilters.filter(filter => filter.slug.startsWith('sbi_l')),
             numberOfOptions = sbiLevelFilters
