@@ -86,6 +86,7 @@
     "recharts": "^1.2.0",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
+    "redux-watch": "1.1.1",
     "remove-markdown": "^0.2.2",
     "reselect": "^3.0.1"
   },
