@@ -1,17 +1,17 @@
-import DetailsReducer from '../details';
+import DetailsReducer from './details';
 import isObject from '../../shared/services/is-object';
 
-import DataSelectionReducer from '../data-selection-reducers';
+import DataSelectionReducer from './data-selection-reducers';
 import MapPreviewPanelReducer from '../../map/ducks/preview-panel/map-preview-panel';
-import PageReducer from '../page-reducers';
-import homeReducer from '../home-reducers';
+import PageReducer from './page-reducers';
+import homeReducer from './home-reducers';
 import filtersReducers from './filters-reducers';
 import straatbeeldReducers from './straatbeeld-reducers';
 import MapSearchResultsReducer from '../../map/ducks/search-results/map-search-results';
 import MapClickLocationReducer from '../../map/ducks/click-location/map-click-location';
 import searchReducers from './search-reducers';
 import deepFreeze from '../../shared/services/freeze/freeze';
-import urlReducersInit from '../url-reducers';
+import urlReducersInit from './url-reducers';
 import { isDevelopment } from '../../shared/environment';
 import stateUrlConverter from '../../shared/services/routing/state-url-converter';
 

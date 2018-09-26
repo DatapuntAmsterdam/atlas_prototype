@@ -1,5 +1,5 @@
 import homeReducers from './home-reducers';
-import * as stateUrlConverter from '../shared/services/routing/state-url-converter';
+import * as stateUrlConverter from '../../shared/services/routing/state-url-converter';
 
 describe('The homeReducers', () => {
   let urlState = {};

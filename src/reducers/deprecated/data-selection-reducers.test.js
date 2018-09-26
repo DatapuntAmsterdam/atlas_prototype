@@ -1,4 +1,4 @@
-import ACTIONS from '../shared/actions';
+import ACTIONS from '../../shared/actions';
 import dataSelectionReducers from './data-selection-reducers';
 
 // deprecated!!! only used to quickly migrate away from Angular

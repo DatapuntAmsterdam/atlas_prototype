@@ -11,7 +11,7 @@ import AutoSuggestReducer from '../../ducks/auto-suggest/auto-suggest';
 import DataSelectionReducer from '../../../shared/ducks/data-selection/data-selection';
 
 import * as search from '../../ducks/search/search';
-import * as details from '../../../reducers/details';
+import * as details from '../../../reducers/deprecated/details';
 
 // mock authentication call, as this is not part of this test scope
 jest.mock('../../../shared/services/auth/auth');

@@ -7,11 +7,11 @@ import { getSuggestions, setActiveSuggestion, FETCH_SUGGESTIONS_REQUEST, SET_ACT
 
 import { fetchDataSelection, fetchSearchResultsByQuery, FETCH_DATA_SELECTION, FETCH_SEARCH_RESULTS_BY_QUERY } from '../../ducks/search/search';
 
-import { fetchDetail, FETCH_DETAIL } from '../../../reducers/details';
+import { fetchDetail, FETCH_DETAIL } from '../../../reducers/deprecated/details';
 import piwikTracker from '../../../shared/services/piwik-tracker/piwik-tracker';
 
 jest.mock('../../ducks/auto-suggest/auto-suggest');
-jest.mock('../../../reducers/details');
+jest.mock('../../../reducers/deprecated/details');
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
 jest.mock('../../ducks/search/search');
 

@@ -1,9 +1,9 @@
+import * as googleSheet from '../../../../src/shared/services/google-sheet/google.sheet';
+
 describe('The page component', function () {
     var $compile,
         $rootScope,
         $templateCache,
-        $q,
-        googleSheet,
         entries;
 
     beforeEach(function () {
@@ -16,29 +16,18 @@ describe('The page component', function () {
             }
         ];
 
-        angular.mock.module('dpPage', {
-            googleSheet: {
-                getContents: () => {
-                    const q = $q.defer();
-                    q.resolve({
-                        feed: 'a feed',
-                        entries
-                    });
-                    return q.promise;
-                }
-            }
-        });
+        angular.mock.module('dpPage', {});
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$templateCache_, _$q_, _googleSheet_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$templateCache_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $templateCache = _$templateCache_;
-            $q = _$q_;
-            googleSheet = _googleSheet_;
         });
 
         $templateCache.put('modules/page/components/page/templates/welcome.html', 'THIS_IS_WELCOME');
         $templateCache.put('modules/page/components/page/templates/about.html', 'THIS_IS_ABOUT');
+
+        spyOn(googleSheet, 'default').and.returnValue(Promise.resolve({ feed: 'a feed', entries }));
     });
 
     function getComponent (name, type, item) {
@@ -73,22 +62,13 @@ describe('The page component', function () {
 
     it('loads cms contents for the specified type and item', function () {
         $templateCache.put('modules/page/components/page/templates/name.html', 'NAME');
-        spyOn(googleSheet, 'getContents').and.callThrough();
 
-        const component = getComponent('name', 'type', 'item');
-        const scope = component.isolateScope();
+        getComponent('name', 'type', 'item');
 
-        expect(googleSheet.getContents).toHaveBeenCalledWith('type');
-
-        $rootScope.$apply();
-
-        expect(scope.vm.feed).toBe('a feed');
-        expect(scope.vm.entries).toEqual(entries);
-        expect(scope.vm.entry).toEqual({id: 'item'});
+        expect(googleSheet.default).toHaveBeenCalledWith('type');
     });
 
     it('does nothing on empty type', function () {
-        spyOn(googleSheet, 'getContents').and.callThrough();
         const component = getComponent('about', '', '');
         const scope = component.isolateScope();
 
@@ -96,6 +76,6 @@ describe('The page component', function () {
 
         expect(scope.vm.feed).toBeNull();
         expect(scope.vm.entries).toEqual([]);
-        expect(googleSheet.getContents).not.toHaveBeenCalled();
+        expect(googleSheet.default).not.toHaveBeenCalled();
     });
 });

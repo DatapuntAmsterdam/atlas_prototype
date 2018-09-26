@@ -110,7 +110,7 @@ function parseContents(contents) {
   };
 }
 
-export default function getContents(type) {
+export default function (type) {
   const promise = new Promise((resolve) => {
     const key = GOOGLE_SHEET_CMS.key;
     const index = GOOGLE_SHEET_CMS.index[type];

@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
-import ACTIONS from '../shared/actions';
-import isObject from '../shared/services/is-object';
+import ACTIONS from '../../shared/actions';
+import isObject from '../../shared/services/is-object';
 
 /**
  * @param {Object} state

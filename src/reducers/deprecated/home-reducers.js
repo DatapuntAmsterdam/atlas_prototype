@@ -1,5 +1,5 @@
-import stateUrlConverter from '../shared/services/routing/state-url-converter';
-import ACTIONS from '../shared/actions';
+import stateUrlConverter from '../../shared/services/routing/state-url-converter';
+import ACTIONS from '../../shared/actions';
 
 /**
  * @param {Object} oldState

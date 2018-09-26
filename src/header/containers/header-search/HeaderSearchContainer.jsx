@@ -7,7 +7,7 @@ import {
   getSuggestions,
   setActiveSuggestion
 } from '../../ducks/auto-suggest/auto-suggest';
-import { fetchDetail } from '../../../reducers/details';
+import { fetchDetail } from '../../../reducers/deprecated/details';
 import {
   fetchDataSelection,
   fetchSearchResultsByQuery

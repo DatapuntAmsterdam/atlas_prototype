@@ -1,7 +1,7 @@
 import transformResultByType from './transform-result-by-type';
 
 
-describe.only('transformResultByType', () => {
+describe('transformResultByType', () => {
   it('should get the default description when the results are not adress or openbareruimte', async () => {
     const result = {
       properties:

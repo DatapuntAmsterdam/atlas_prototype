@@ -13,7 +13,7 @@ import {
   switchPage
 } from '../../../shared/ducks/ui/ui';
 import { fetchStraatbeeldById } from '../../ducks/straatbeeld/straatbeeld';
-import { fetchDetail as legacyFetchDetail } from '../../../reducers/details';
+import { fetchDetail as legacyFetchDetail } from '../../../reducers/deprecated/details';
 import MapPreviewPanel from './MapPreviewPanel';
 import PAGES from '../../../pages';
 

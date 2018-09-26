@@ -5,7 +5,7 @@ import { AUTHENTICATE_USER } from '../../../reducers/user';
 
 jest.mock('../routing/state-to-url');
 
-describe.only('The stateToUrlMiddleware factory', () => {
+describe('The stateToUrlMiddleware factory', () => {
   const mockedStore = {
     getState: () => 'FAKE_STATE'
   };
