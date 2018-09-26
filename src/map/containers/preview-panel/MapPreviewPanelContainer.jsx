@@ -9,7 +9,7 @@ import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map
 import { selectLatestMapDetail } from '../../ducks/detail/map-detail';
 import { toggleMapFullscreen } from '../../../shared/ducks/ui/ui';
 import { fetchStraatbeeldById } from '../../ducks/straatbeeld/straatbeeld';
-import { fetchDetail as legacyFetchDetail } from '../../../reducers/details';
+import { fetchDetail as legacyFetchDetail } from '../../../reducers/deprecated/details';
 import MapPreviewPanel from './MapPreviewPanel';
 
 

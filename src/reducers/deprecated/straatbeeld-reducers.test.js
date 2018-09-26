@@ -68,7 +68,7 @@ describe('Straatbeeld reducers factory', () => {
         }
       };
 
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
       expect(output.straatbeeld.heading)
         .toBe(179);
     });
@@ -77,7 +77,7 @@ describe('Straatbeeld reducers factory', () => {
       const inputState = {
         ...defaultState
       };
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
       expect(output.straatbeeld.heading)
         .toBe(123);
     });
@@ -87,7 +87,7 @@ describe('Straatbeeld reducers factory', () => {
         ...defaultState,
         straatbeeld: null
       };
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
       expect(output.straatbeeld)
         .toEqual(jasmine.objectContaining(payload));
     });
@@ -96,7 +96,7 @@ describe('Straatbeeld reducers factory', () => {
       const inputState = {
         ...defaultState
       };
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
       expect(output.straatbeeld.isLoading)
         .toBe(true);
       expect(output.map.isLoading)
@@ -116,7 +116,7 @@ describe('Straatbeeld reducers factory', () => {
         }
       };
 
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
 
       expect(output.straatbeeld.fov)
         .toBeNull();
@@ -140,7 +140,7 @@ describe('Straatbeeld reducers factory', () => {
         }
       };
 
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
       expect(output.search)
         .toBeNull();
     });
@@ -158,7 +158,7 @@ describe('Straatbeeld reducers factory', () => {
         isInitial: true
       };
 
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
       expect(output.straatbeeld.heading)
         .toBe(0);
     });
@@ -174,27 +174,27 @@ describe('Straatbeeld reducers factory', () => {
         }
       };
 
-      let output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      let output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
       expect(output.straatbeeld.isFullscreen)
         .toBeUndefined();
 
       payload.isFullscreen = true;
-      output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](output, payload);
+      output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](output, payload);
       expect(output.straatbeeld.isFullscreen)
         .toBe(true);
 
       delete payload.isFullscreen;
-      output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](output, payload);
+      output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](output, payload);
       expect(output.straatbeeld.isFullscreen)
         .toBe(true);
 
       payload.isFullscreen = false;
-      output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](output, payload);
+      output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](output, payload);
       expect(output.straatbeeld.isFullscreen)
         .toBe(false);
 
       delete payload.isFullscreen;
-      output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](output, payload);
+      output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](output, payload);
       expect(output.straatbeeld.isFullscreen)
         .toBeUndefined();
     });
@@ -205,7 +205,7 @@ describe('Straatbeeld reducers factory', () => {
         map: null
       };
 
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_ID](inputState, payload);
       expect(output.map)
         .toBeNull();
     });
@@ -217,21 +217,21 @@ describe('Straatbeeld reducers factory', () => {
         ...defaultState,
         straatbeeld: {}
       };
-      let output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN.id](inputState);
+      let output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](inputState);
       expect(output.straatbeeld.isFullscreen)
         .toBeUndefined();
 
-      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN.id](output, true);
+      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](output, true);
       expect(output.straatbeeld.isFullscreen)
         .toBe(true);
-      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN.id](output);
+      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](output);
       expect(output.straatbeeld.isFullscreen)
         .toBe(true);
 
-      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN.id](output, false);
+      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](output, false);
       expect(output.straatbeeld.isFullscreen)
         .toBe(false);
-      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN.id](output);
+      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](output);
       expect(output.straatbeeld.isFullscreen)
         .toBe(false);
     });
@@ -242,7 +242,7 @@ describe('Straatbeeld reducers factory', () => {
         straatbeeld: null
       };
 
-      const output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN.id](inputState, undefined);
+      const output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](inputState, undefined);
       expect(output.straatbeeld)
         .toBeNull();
     });
@@ -278,14 +278,14 @@ describe('Straatbeeld reducers factory', () => {
     });
 
     it('Adds the payload to the state', () => {
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
 
       expect(output.straatbeeld)
         .toEqual(jasmine.objectContaining(payload));
     });
 
     it('set defaults for pitch, fov when oldstate is unknown', () => {
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.straatbeeld.pitch)
         .toBe(0);
       expect(output.straatbeeld.fov)
@@ -296,7 +296,7 @@ describe('Straatbeeld reducers factory', () => {
       inputState.straatbeeld.pitch = 1;
       inputState.straatbeeld.fov = 2;
 
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.straatbeeld.pitch)
         .toBe(1);
       expect(output.straatbeeld.fov)
@@ -307,13 +307,13 @@ describe('Straatbeeld reducers factory', () => {
       inputState.straatbeeld.heading = null;
       inputState.map = {};
 
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.map.viewCenter)
         .toEqual(payload.location);
     });
 
     it('do not overwrite isLoading, id, heading, isInitial', () => {
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
 
       expect(output.straatbeeld)
         .toEqual(jasmine.objectContaining({
@@ -328,7 +328,7 @@ describe('Straatbeeld reducers factory', () => {
       const state = { straatbeeld: {}, ui: {} };
 
       const location = [52.001, 4.002];
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION.id](state, location);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION](state, location);
 
       expect(output.straatbeeld.id)
         .toBeNull();
@@ -351,7 +351,7 @@ describe('Straatbeeld reducers factory', () => {
       };
       const location = [52.001, 4.002];
 
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION.id](state, location);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION](state, location);
       expect(output.map.viewCenter)
         .toEqual(location);
     });
@@ -360,7 +360,7 @@ describe('Straatbeeld reducers factory', () => {
       const state = { ui: null };
 
       const location = [52.001, 4.002];
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION.id](state, location);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION](state, location);
 
       expect(output.straatbeeld.id)
         .toBeNull();
@@ -375,7 +375,7 @@ describe('Straatbeeld reducers factory', () => {
     it('removes a drawn line from the map', () => {
       const state = { map: {}, ui: {} };
       const location = [52.001, 4.002];
-      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION.id](state, location);
+      const output = straatbeeldReducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION](state, location);
 
       expect(output.map.geometry)
         .toEqual([]);
@@ -394,7 +394,7 @@ describe('Straatbeeld reducers factory', () => {
       ].forEach(({ target, heading }) => {
         inputState.straatbeeld.targetLocation = target;
         inputState.straatbeeld.location = inputState.straatbeeld.targetLocation;
-        output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+        output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
         expect(output.straatbeeld)
           .toEqual(jasmine.objectContaining({
             heading
@@ -410,7 +410,7 @@ describe('Straatbeeld reducers factory', () => {
       inputState.straatbeeld.location = [1, 2];
       delete inputState.straatbeeld.targetLocation; // not saved in state, so not present on reload
       inputState.straatbeeld.heading = 'aap';
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.straatbeeld)
         .toEqual(jasmine.objectContaining({
           heading: inputState.straatbeeld.heading // keep original heading
@@ -426,7 +426,7 @@ describe('Straatbeeld reducers factory', () => {
       delete inputState.straatbeeld.location;
       delete inputState.straatbeeld.targetLocation;
       inputState.map.viewCenter = 'aap';
-      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.map)
         .toEqual(jasmine.objectContaining({
           viewCenter: payload.location    // center map on payload location
@@ -435,7 +435,7 @@ describe('Straatbeeld reducers factory', () => {
       delete inputState.straatbeeld.location;
       inputState.straatbeeld.targetLocation = [1, 2];
       inputState.map.viewCenter = 'aap';
-      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.map)
         .toEqual(jasmine.objectContaining({
           viewCenter: payload.location    // center map on payload location
@@ -444,7 +444,7 @@ describe('Straatbeeld reducers factory', () => {
       inputState.straatbeeld.location = [1, 2];
       delete inputState.straatbeeld.targetLocation;
       inputState.map.viewCenter = 'aap';
-      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.map)
         .toEqual(jasmine.objectContaining({
           viewCenter: inputState.map.viewCenter   // keep original map viewCenter
@@ -452,7 +452,7 @@ describe('Straatbeeld reducers factory', () => {
     });
 
     it('Sets loading to false', () => {
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.straatbeeld.isLoading)
         .toBe(false);
       expect(output.map.isLoading)
@@ -461,7 +461,7 @@ describe('Straatbeeld reducers factory', () => {
 
     it('does nothing when straatbeeld is null', () => {
       inputState.straatbeeld = null;
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
 
       expect(output.straatbeeld)
         .toBeNull();
@@ -472,12 +472,12 @@ describe('Straatbeeld reducers factory', () => {
       let output;
 
       payload.location = [5, 6];
-      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id](inputState, payload);
+      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_INITIAL](inputState, payload);
       expect(output.map.viewCenter)
         .toEqual([5, 6]);
 
       payload.location = [3, 4];
-      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT.id](inputState, payload);
+      output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT](inputState, payload);
       expect(output.map.viewCenter)
         .toEqual([3, 4]);
     });
@@ -487,7 +487,7 @@ describe('Straatbeeld reducers factory', () => {
       const location = inputState.map.viewCenter;   // save location
       payload.location = [location[0] + 1, location[1] + 1];  // try to set to other location
       // eslint-disable-next-line max-len
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT.id](inputState, payload);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT](inputState, payload);
       expect(output.map.viewCenter)
         .toEqual(location);  // location is not changed; equal to old location
     });
@@ -496,7 +496,7 @@ describe('Straatbeeld reducers factory', () => {
       inputState.map = null;
       inputState.straatbeeld = null;
 
-      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT.id](inputState);
+      const output = straatbeeldReducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT](inputState);
       expect(output.map)
         .toBeNull();
       expect(output.straatbeeld)

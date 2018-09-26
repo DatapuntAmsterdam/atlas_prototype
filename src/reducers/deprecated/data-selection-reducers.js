@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
-import ACTIONS from '../shared/actions';
-import isObject from '../shared/services/is-object';
+import ACTIONS from '../../shared/actions';
+import isObject from '../../shared/services/is-object';
 
 /**
  * @param {Object} state
@@ -171,10 +171,10 @@ function setDataSelectionViewReducer(state, payload) {
 
 const reducers = {};
 
-reducers[ACTIONS.FETCH_DATA_SELECTION.id] = fetchDataSelectionReducer;
-reducers[ACTIONS.SHOW_DATA_SELECTION.id] = showDataSelectionReducer;
-reducers[ACTIONS.RESET_DATA_SELECTION.id] = resetDataSelectionReducer;
-reducers[ACTIONS.NAVIGATE_DATA_SELECTION.id] = navigateDataSelectionReducer;
-reducers[ACTIONS.SET_DATA_SELECTION_VIEW.id] = setDataSelectionViewReducer;
+reducers[ACTIONS.FETCH_DATA_SELECTION] = fetchDataSelectionReducer;
+reducers[ACTIONS.SHOW_DATA_SELECTION] = showDataSelectionReducer;
+reducers[ACTIONS.RESET_DATA_SELECTION] = resetDataSelectionReducer;
+reducers[ACTIONS.NAVIGATE_DATA_SELECTION] = navigateDataSelectionReducer;
+reducers[ACTIONS.SET_DATA_SELECTION_VIEW] = setDataSelectionViewReducer;
 
 export default reducers;

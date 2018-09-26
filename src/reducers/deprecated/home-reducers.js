@@ -1,5 +1,5 @@
-import stateUrlConverter from '../shared/services/routing/state-url-converter';
-import ACTIONS from '../shared/actions';
+import stateUrlConverter from '../../shared/services/routing/state-url-converter';
+import ACTIONS from '../../shared/actions';
 
 /**
  * @param {Object} oldState
@@ -21,6 +21,6 @@ function showHomeReducer(state) {
 
 const reducers = {};
 
-reducers[ACTIONS.SHOW_HOME.id] = showHomeReducer;
+reducers[ACTIONS.SHOW_HOME] = showHomeReducer;
 
 export default reducers;

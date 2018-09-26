@@ -1,6 +1,5 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import createHistory from 'history/createBrowserHistory';
 
 import rootSaga from './root-saga';
 import './shared/ducks/error-message';
@@ -14,7 +13,7 @@ import { isDevelopment } from './shared/environment';
 import freeze from './shared/services/freeze/freeze';
 import contextMiddleware from './shared/services/context/context-middleware';
 import stateToUrlMiddleware from './shared/services/state-to-url/state-to-url-middleware';
-import locationHandlerCreator from './location-handler';
+import historyInstance from './history';
 
 window.reducer = rootReducer;
 
@@ -55,9 +54,4 @@ if (accessToken) {
 
 window.reduxStore.dispatch(fetchCatalogFilters());
 
-const history = createHistory();
-const locationHandler = locationHandlerCreator(window.reduxStore);
-// eslint-disable-next-line no-unused-vars
-const unlisten = history.listen(locationHandler);
-// Handle first page load URL
-locationHandler(window.location);
+historyInstance.initialize(window.reduxStore);

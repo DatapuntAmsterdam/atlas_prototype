@@ -3,30 +3,30 @@ import configureMockStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
 import HeaderSearchContainer from './HeaderSearchContainer';
-import { getSuggestions, setActiveSuggestion } from '../../ducks/auto-suggest/auto-suggest';
+import { getSuggestions, setActiveSuggestion, FETCH_SUGGESTIONS_REQUEST, SET_ACTIVE_SUGGESTION } from '../../ducks/auto-suggest/auto-suggest';
 
-import { fetchDataSelection, fetchSearchResultsByQuery } from '../../ducks/search/search';
+import { fetchDataSelection, fetchSearchResultsByQuery, FETCH_DATA_SELECTION, FETCH_SEARCH_RESULTS_BY_QUERY } from '../../ducks/search/search';
 
-import { fetchDetail } from '../../../reducers/details';
+import { fetchDetail, FETCH_DETAIL } from '../../../reducers/deprecated/details';
 import piwikTracker from '../../../shared/services/piwik-tracker/piwik-tracker';
 
 jest.mock('../../ducks/auto-suggest/auto-suggest');
-jest.mock('../../../reducers/details');
+jest.mock('../../../reducers/deprecated/details');
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
 jest.mock('../../ducks/search/search');
 
 describe('HeaderSearchContainer', () => {
   beforeEach(() => {
-    setActiveSuggestion.mockImplementation(() => ({ type: 'SET_ACTIVE_SUGGESTION' }));
-    getSuggestions.mockImplementation(() => ({ type: 'FETCH_SUGGESTIONS_REQUEST' }));
-    fetchDetail.mockImplementation((endpoint) => ({ type: 'FETCH_DETAIL', payload: endpoint }));
+    setActiveSuggestion.mockImplementation(() => ({ type: SET_ACTIVE_SUGGESTION }));
+    getSuggestions.mockImplementation(() => ({ type: FETCH_SUGGESTIONS_REQUEST }));
+    fetchDetail.mockImplementation((endpoint) => ({ type: FETCH_DETAIL, payload: endpoint }));
     piwikTracker.mockImplementation(() => jest.fn());
     fetchDataSelection.mockImplementation((query) => ({
-      type: 'FETCH_DATA_SELECTION',
+      type: FETCH_DATA_SELECTION,
       payload: query
     }));
     fetchSearchResultsByQuery.mockImplementation((query) => ({
-      type: 'FETCH_SEARCH_RESULTS_BY_QUERY',
+      type: FETCH_SEARCH_RESULTS_BY_QUERY,
       payload: query
     }));
   });
@@ -125,7 +125,7 @@ describe('HeaderSearchContainer', () => {
       expect(fetchDetail).toHaveBeenCalled();
 
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: 'FETCH_DETAIL',
+        type: FETCH_DETAIL,
         payload: 'https://acc.api.data.amsterdam.nl/bag/openbareruimte/03630000001038/'
       });
     });

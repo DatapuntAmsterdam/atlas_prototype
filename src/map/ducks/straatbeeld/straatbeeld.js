@@ -37,6 +37,6 @@ export const getStraatbeeldMarkers = createSelector([getStraatbeeldLocation, get
 
 // src/reducers/deprecated/straatbeeld-reducers.js
 export const fetchStraatbeeldById = (pano) => ({
-  type: { id: FETCH_STRAATBEELD_BY_ID },
+  type: FETCH_STRAATBEELD_BY_ID,
   payload: { id: pano.id, heading: pano.heading }
 });

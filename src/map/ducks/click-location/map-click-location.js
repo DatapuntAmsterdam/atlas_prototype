@@ -22,7 +22,7 @@ export default function MapClickLocationReducer(state = initialState, action) {
 export const setMapClickLocation = (location) => ({ type: SET_MAP_CLICK_LOCATION, location });
 
 export const updateClick = (payload) => ({
-  type: ACTIONS.SET_MAP_CLICK_LOCATION.id,
+  type: ACTIONS.SET_MAP_CLICK_LOCATION,
   location: {
     latitude: payload.latlng.lat,
     longitude: payload.latlng.lng

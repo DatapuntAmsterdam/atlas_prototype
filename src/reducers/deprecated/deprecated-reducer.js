@@ -1,30 +1,21 @@
-import DetailsReducer from '../details';
+import DetailsReducer from './details';
 import isObject from '../../shared/services/is-object';
 
-import DataSelectionReducer from '../data-selection-reducers';
+import DataSelectionReducer from './data-selection-reducers';
 import MapPreviewPanelReducer from '../../map/ducks/preview-panel/map-preview-panel';
-import PageReducer from '../page-reducers';
-import homeReducer from '../home-reducers';
+import PageReducer from './page-reducers';
+import homeReducer from './home-reducers';
 import filtersReducers from './filters-reducers';
 import straatbeeldReducers from './straatbeeld-reducers';
 import MapSearchResultsReducer from '../../map/ducks/search-results/map-search-results';
 import MapClickLocationReducer from '../../map/ducks/click-location/map-click-location';
 import searchReducers from './search-reducers';
 import deepFreeze from '../../shared/services/freeze/freeze';
-import urlReducersInit from '../url-reducers';
+import urlReducersInit from './url-reducers';
 import { isDevelopment } from '../../shared/environment';
 import stateUrlConverter from '../../shared/services/routing/state-url-converter';
 
 export default (oldState, action) => {
-    /**
-     *
-     *
-     *
-     * Try not to add new stuff to this file. DEPRECATED
-     *
-     *
-     *
-     */
   const UrlReducers = urlReducersInit(stateUrlConverter);
 
   const detailReducers = { // TODO: try moving to root reducer
@@ -34,9 +25,9 @@ export default (oldState, action) => {
   };
 
   const mapSearchResultsReducers = { // TODO: try moving to root reducer
-    FETCH_MAP_SEARCH_RESULTS_FAILURE: MapSearchResultsReducer,
     FETCH_MAP_SEARCH_RESULTS_REQUEST: MapSearchResultsReducer,
-    FETCH_MAP_SEARCH_RESULTS_SUCCESS: MapSearchResultsReducer
+    FETCH_MAP_SEARCH_RESULTS_SUCCESS: MapSearchResultsReducer,
+    FETCH_MAP_SEARCH_RESULTS_FAILURE: MapSearchResultsReducer
   };
 
   const mapClickLocationReducers = { // TODO: try moving to root reducer
@@ -63,46 +54,34 @@ export default (oldState, action) => {
     ...UrlReducers
   };
 
-    // Are we dealing with vanilla js reducers here (type is a
-    // string instead of an object with an ID and other
-    // optional attributes)? e.g.:
-    // {
-    //      type: 'SHOW_DETAIL'
-    // }
-  const vanilla = isObject(action) &&
-      typeof action.type === 'string' &&
-      typeof actions[action.type] === 'function';
+  // if the action type is found in the deprecated reducers handle the action here
+  const handledByOldReducers = isObject(action) &&
+    typeof actions[action.type] === 'function';
 
-    // {
-    //      type: {
-    //          id: 'FOO'
-    //      }
-    // }
-  const legacy = isObject(action) &&
-      isObject(action.type) &&
-      typeof actions[action.type.id] === 'function';
+  // eslint-disable-next-line no-prototype-builtins
+  const handlesAction = (reducer, actionType) => reducer.hasOwnProperty(actionType);
 
-  if (vanilla) {
-    const result = actions[action.type](oldState, action);
+  if (handledByOldReducers) {
+    let newState;
+
+    // reformat the action for the detailReducers
+    if (handlesAction(detailReducers, action.type) ||
+      handlesAction(mapClickLocationReducers, action.type) ||
+      handlesAction(mapSearchResultsReducers, action.type) ||
+      handlesAction(mapPreviewPanelReducers, action.type)
+    ) {
+      newState = actions[action.type](oldState, action);
+    } else {
+      newState = actions[action.type](oldState, action.payload);
+    }
+
+    // TODO make isDevelopment Vanilla JS
     if (isDevelopment()) {
-      deepFreeze(result);
+      deepFreeze(newState); // TODO
     }
-    return result;
-  } else if (legacy) {
-      // eslint-disable-next-line no-prototype-builtins
-    if (detailReducers.hasOwnProperty(action.type.id)) {
-        // eslint-disable-next-line no-param-reassign
-      action.payload = {
-        ...action,
-        type: action.type.id
-      };
-    }
-    const result = actions[action.type.id](oldState, action.payload);
-      // TODO make isDevelopment Vanilla JS
-    if (isDevelopment()) {
-      deepFreeze(result); // TODO
-    }
-    return result;
+
+    return newState;
   }
+
   return oldState;
 };

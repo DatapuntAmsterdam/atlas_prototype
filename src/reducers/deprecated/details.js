@@ -1,4 +1,4 @@
-import { endpointTypes } from '../map/services/map-detail';
+import { endpointTypes } from '../../map/services/map-detail';
 
 export const FETCH_DETAIL = 'FETCH_DETAIL';
 export const SHOW_DETAIL = 'SHOW_DETAIL';

@@ -6,13 +6,10 @@
     runBlock.$inject = [
         '$timeout',
         '$rootScope',
-        '$window',
-        'stateToUrl'
+        '$window'
     ];
 
-    function runBlock ($timeout, $rootScope, $window, stateToUrl) {
-        $window.stateToUrl = stateToUrl;
-
+    function runBlock ($timeout, $rootScope, $window) {
         $window.reduxStore.subscribe(() => {
             $timeout(() => $rootScope.$digest());
         });

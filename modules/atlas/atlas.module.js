@@ -51,8 +51,17 @@ import { getEnvironment, ENVIRONMENTS } from '../../src/shared/environment';
             .install();
     }
 
+    // eslint-disable-next-line angular/di
     angular.module('atlas', moduleDependencies)
-        .config(function ($analyticsProvider) {
-            $analyticsProvider.virtualPageviews(false);
-        });
+        .config(['$analyticsProvider', '$provide', analyticsProvider]);
+
+    analyticsProvider.$inject = ['$analyticsProvider', '$provide'];
+    function analyticsProvider ($analyticsProvider, $provide) {
+        $analyticsProvider.virtualPageviews(false);
+        $provide.decorator('$browser', ['$delegate', function ($delegate) {
+            $delegate.onUrlChange = function () { };
+            $delegate.url = function () { return ''; };
+            return $delegate;
+        }]);
+    }
 })();

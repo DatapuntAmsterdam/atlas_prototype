@@ -1,5 +1,5 @@
-import ACTIONS from '../shared/actions';
-import isObject from '../shared/services/is-object';
+import ACTIONS from '../../shared/actions';
+import isObject from '../../shared/services/is-object';
 
 /**
  * @param {Object} state
@@ -32,6 +32,6 @@ function showPageReducer(state, payload) {
 
 const reducers = {};
 
-reducers[ACTIONS.SHOW_PAGE.id] = showPageReducer;
+reducers[ACTIONS.SHOW_PAGE] = showPageReducer;
 
 export default reducers;

@@ -108,7 +108,7 @@ exports[`LeafletContainer LeafletContainer snapshot should render 1`] = `
           "_proj": Object {
             "forward": [Function],
             "inverse": [Function],
-            "oProj": Projection {
+            "oProj": Projection$1 {
               "C": 1.0004758566842447,
               "K": 1.0037810841627226,
               "R2": 2.001645629371303,
@@ -157,7 +157,6 @@ exports[`LeafletContainer LeafletContainer snapshot should render 1`] = `
                 "Polar_Stereographic",
                 "sterea",
                 "Oblique Stereographic Alternative",
-                "Double_Stereographic",
               ],
               "no_defs": true,
               "phic0": 0.9096847567446857,
@@ -391,7 +390,7 @@ exports[`LeafletContainer LeafletContainer snapshot should render different base
           "_proj": Object {
             "forward": [Function],
             "inverse": [Function],
-            "oProj": Projection {
+            "oProj": Projection$1 {
               "C": 1.0004758566842447,
               "K": 1.0037810841627226,
               "R2": 2.001645629371303,
@@ -440,7 +439,6 @@ exports[`LeafletContainer LeafletContainer snapshot should render different base
                 "Polar_Stereographic",
                 "sterea",
                 "Oblique Stereographic Alternative",
-                "Double_Stereographic",
               ],
               "no_defs": true,
               "phic0": 0.9096847567446857,

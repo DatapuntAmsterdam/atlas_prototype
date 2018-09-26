@@ -9,6 +9,7 @@ import './homepage/wrappers/address-block/HomepageAddressBlockWrapper';
 // All third party dependencies
 import './vendor';
 
+
 // Legacy sass
 import '../modules/shared/shared.scss';
 import '../modules/atlas/atlas.scss';
@@ -23,7 +24,7 @@ import '../modules/straatbeeld/straatbeeld.scss';
 import './_styles.scss';
 // Import this here, because `modules/atlas/services/redux%reducer.factory`
 // cannoct do, because that would break the grunt build...
-import detailReducer from './reducers/details'; // eslint-disable-line
+import detailReducer from './reducers/deprecated/details'; // eslint-disable-line
 import userReducer from './reducers/user'; // eslint-disable-line
 
 // All our modules' javascript
@@ -48,7 +49,6 @@ import '../modules/atlas/services/piwik/piwik-config.constant';
 import '../modules/atlas/services/piwik/piwik.factory';
 import '../modules/atlas/services/piwik/piwik.run';
 import '../modules/atlas/services/redux/store.run';
-import '../modules/atlas/services/routing/state-to-url.factory';
 import '../modules/data-selection/data-selection.module';
 import '../modules/data-selection/components/active-filters/active-filters.component';
 import '../modules/data-selection/components/available-filters/available-filters.component';
@@ -183,8 +183,6 @@ import '../modules/shared/services/crs/crs-converter.factory';
 import '../modules/shared/services/embed/embed.factory';
 import '../modules/shared/services/environment/environment.factory';
 import '../modules/shared/services/geojson/geojson.factory';
-import '../modules/shared/services/google-sheet/google-sheet.constants';
-import '../modules/shared/services/google-sheet/google-sheet.factory';
 import '../modules/shared/services/window-error-handler/window-error-handler.factory';
 import '../modules/shared/services/window-error-handler/window-error-handler.run';
 import '../modules/shared/services/http-error-registrar/http-error-registrar.factory';

@@ -1,4 +1,4 @@
-import ACTIONS from '../../shared/actions';
+import ACTIONS, { FETCH_SEARCH_RESULTS_BY_LOCATION } from '../../shared/actions';
 import BaseCoder from '../../shared/services/base-coder/base-coder';
 import isObject from '../../shared/services/is-object';
 
@@ -107,9 +107,9 @@ function showSearchResultsReducer(state, payload) {
 
 const reducers = {};
 
-reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY.id] = fetchSearchResultsByQueryReducer;
-reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION.id] = fetchSearchResultsByLocationReducer;
-reducers[ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY.id] = fetchSearchResultsCategoryReducer;
-reducers[ACTIONS.SHOW_SEARCH_RESULTS.id] = showSearchResultsReducer;
+reducers[ACTIONS.FETCH_SEARCH_RESULTS_BY_QUERY] = fetchSearchResultsByQueryReducer;
+reducers[FETCH_SEARCH_RESULTS_BY_LOCATION] = fetchSearchResultsByLocationReducer;
+reducers[ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY] = fetchSearchResultsCategoryReducer;
+reducers[ACTIONS.SHOW_SEARCH_RESULTS] = showSearchResultsReducer;
 
 export default reducers;

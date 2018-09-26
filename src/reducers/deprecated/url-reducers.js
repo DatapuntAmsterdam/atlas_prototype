@@ -1,4 +1,4 @@
-import ACTIONS from '../shared/actions';
+import ACTIONS from '../../shared/actions';
 
 export default (stateUrlConverter) => {
   function urlChangeReducer(oldState, payload) {
@@ -6,6 +6,6 @@ export default (stateUrlConverter) => {
   }
 
   return {
-    [ACTIONS.URL_CHANGE.id]: urlChangeReducer
+    [ACTIONS.URL_CHANGE]: urlChangeReducer
   };
 };

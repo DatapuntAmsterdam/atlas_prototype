@@ -1,3 +1,5 @@
+import getContents from '../../../../src/shared/services/google-sheet/google.sheet';
+
 (function () {
     'use strict';
 
@@ -13,18 +15,19 @@
             controllerAs: 'vm'
         });
 
-    DpUserContentWidgetController.$inject = ['googleSheet'];
+    DpUserContentWidgetController.$inject = ['$scope'];
 
-    function DpUserContentWidgetController (googleSheet) {
+    function DpUserContentWidgetController ($scope) {
         const vm = this;
 
         vm.feed = null;
         vm.entries = [];
 
-        googleSheet.getContents(vm.type)
+        getContents(vm.type)
             .then(contents => {
                 vm.feed = contents.feed;
                 vm.entries = contents.entries;
+                $scope.$digest();
             });
     }
 })();
