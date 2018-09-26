@@ -1,3 +1,4 @@
+import getContents from '../../../../src/shared/services/google-sheet/google.sheet';
 import { BELEID_PAGES } from '../../../../src/shared/cms-name-mapping';
 import PAGES from '../../../../src/pages';
 
@@ -16,9 +17,9 @@ import PAGES from '../../../../src/pages';
             controllerAs: 'vm'
         });
 
-    DpUserContentWidgetController.$inject = ['googleSheet'];
+    DpUserContentWidgetController.$inject = ['$scope'];
 
-    function DpUserContentWidgetController (googleSheet) {
+    function DpUserContentWidgetController ($scope) {
         const vm = this;
 
         vm.feed = null;
@@ -32,10 +33,11 @@ import PAGES from '../../../../src/pages';
             }
         };
 
-        googleSheet.getContents(vm.type)
+        getContents(vm.type)
             .then(contents => {
                 vm.feed = contents.feed;
                 vm.entries = contents.entries;
+                $scope.$digest();
             });
     }
 })();

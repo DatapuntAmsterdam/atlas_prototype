@@ -89,9 +89,7 @@ describe('actions', () => {
   describe('fetchMapBaseLayers', () => {
     it('should create an action to request straatbeeld by id', () => {
       const expectedAction = {
-        type: {
-          id: FETCH_STRAATBEELD_BY_ID
-        },
+        type: FETCH_STRAATBEELD_BY_ID,
         payload: {
           id: 'id',
           heading: -130

@@ -33,6 +33,11 @@ export const isDevelopment = () => {
   return getEnvironment(window.location.hostname) === ENVIRONMENTS.DEVELOPMENT;
 };
 
+// This object enables/disables features that are not yet released
+export const features = {
+  eigendommen: true
+};
+
 const ENVIRONMENT = (process.env.NODE_ENV).toUpperCase();
 
 export default ENVIRONMENT;

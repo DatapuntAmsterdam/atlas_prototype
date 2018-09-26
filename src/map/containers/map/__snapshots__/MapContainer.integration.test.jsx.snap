@@ -23,7 +23,7 @@ Object {
     ],
     "tms": true,
   },
-  "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2017_RD/{z}/{x}/{y}.jpeg",
+  "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2018_RD/{z}/{x}/{y}.jpeg",
 }
 `;
 
@@ -264,7 +264,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                     "_proj": Object {
                       "forward": [Function],
                       "inverse": [Function],
-                      "oProj": Projection$1 {
+                      "oProj": Projection {
                         "C": 1.0004758566842447,
                         "K": 1.0037810841627226,
                         "R2": 2.001645629371303,
@@ -313,6 +313,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                           "Polar_Stereographic",
                           "sterea",
                           "Oblique Stereographic Alternative",
+                          "Double_Stereographic",
                         ],
                         "no_defs": true,
                         "phic0": 0.9096847567446857,
@@ -382,7 +383,6 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
           >
             <ResizeAware
               component="div"
-              heightPropName={undefined}
               onResize={[Function]}
               onlyEvent={true}
               style={
@@ -394,7 +394,6 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                   "top": "0",
                 }
               }
-              widthPropName={undefined}
             >
               <div
                 style={
@@ -419,6 +418,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                       "pointerEvents": "none",
                       "position": "absolute",
                       "top": 0,
+                      "visibility": "hidden",
                       "width": "100%",
                       "zIndex": -1,
                     }
@@ -501,7 +501,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                         "_proj": Object {
                           "forward": [Function],
                           "inverse": [Function],
-                          "oProj": Projection$1 {
+                          "oProj": Projection {
                             "C": 1.0004758566842447,
                             "K": 1.0037810841627226,
                             "R2": 2.001645629371303,
@@ -550,6 +550,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                               "Polar_Stereographic",
                               "sterea",
                               "Oblique Stereographic Alternative",
+                              "Double_Stereographic",
                             ],
                             "no_defs": true,
                             "phic0": 0.9096847567446857,
@@ -600,17 +601,12 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                   maxBoundsViscosity={1}
                   onClick={[Function]}
                   onDragEnd={[Function]}
-                  onDraw={undefined}
                   onMoveEnd={[Function]}
                   onZoomEnd={[Function]}
                   zoom={11}
                   zoomControl={false}
                 >
-                  <div
-                    className={undefined}
-                    id={undefined}
-                    style={undefined}
-                  >
+                  <div>
                     <TileLayer
                       bounds={
                         Array [
@@ -3342,7 +3338,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                   "_proj": Object {
                     "forward": [Function],
                     "inverse": [Function],
-                    "oProj": Projection$1 {
+                    "oProj": Projection {
                       "C": 1.0004758566842447,
                       "K": 1.0037810841627226,
                       "R2": 2.001645629371303,
@@ -3391,6 +3387,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                         "Polar_Stereographic",
                         "sterea",
                         "Oblique Stereographic Alternative",
+                        "Double_Stereographic",
                       ],
                       "no_defs": true,
                       "phic0": 0.9096847567446857,
@@ -3563,9 +3560,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
         }
       >
         <Component
-          dataSelection={undefined}
           drawingMode="none"
-          geometry={undefined}
           isEnabled={false}
           leafletInstance={
             NewClass {
@@ -6256,7 +6251,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                     "_proj": Object {
                       "forward": [Function],
                       "inverse": [Function],
-                      "oProj": Projection$1 {
+                      "oProj": Projection {
                         "C": 1.0004758566842447,
                         "K": 1.0037810841627226,
                         "R2": 2.001645629371303,
@@ -6305,6 +6300,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                           "Polar_Stereographic",
                           "sterea",
                           "Oblique Stereographic Alternative",
+                          "Double_Stereographic",
                         ],
                         "no_defs": true,
                         "phic0": 0.9096847567446857,
@@ -6478,6 +6474,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
           onClearDrawing={[Function]}
           onEmptyGeometry={[Function]}
           onEndDrawing={[Function]}
+          onMapClear={[Function]}
           onMapUpdateShape={[Function]}
           onSetMapFullscreen={[Function]}
           onSetPageName={[Function]}
@@ -9202,7 +9199,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                       "_proj": Object {
                         "forward": [Function],
                         "inverse": [Function],
-                        "oProj": Projection$1 {
+                        "oProj": Projection {
                           "C": 1.0004758566842447,
                           "K": 1.0037810841627226,
                           "R2": 2.001645629371303,
@@ -9251,6 +9248,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                             "Polar_Stereographic",
                             "sterea",
                             "Oblique Stereographic Alternative",
+                            "Double_Stereographic",
                           ],
                           "no_defs": true,
                           "phic0": 0.9096847567446857,
@@ -9424,6 +9422,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
             onClearDrawing={[Function]}
             onEmptyGeometry={[Function]}
             onEndDrawing={[Function]}
+            onMapClear={[Function]}
             onMapUpdateShape={[Function]}
             onSetMapFullscreen={[Function]}
             onSetPageName={[Function]}
@@ -12150,7 +12149,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                         "_proj": Object {
                           "forward": [Function],
                           "inverse": [Function],
-                          "oProj": Projection$1 {
+                          "oProj": Projection {
                             "C": 1.0004758566842447,
                             "K": 1.0037810841627226,
                             "R2": 2.001645629371303,
@@ -12199,6 +12198,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                               "Polar_Stereographic",
                               "sterea",
                               "Oblique Stereographic Alternative",
+                              "Double_Stereographic",
                             ],
                             "no_defs": true,
                             "phic0": 0.9096847567446857,
@@ -12373,6 +12373,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
               onClearDrawing={[Function]}
               onEmptyGeometry={[Function]}
               onEndDrawing={[Function]}
+              onMapClear={[Function]}
               onMapUpdateShape={[Function]}
               onSetMapFullscreen={[Function]}
               onSetPageName={[Function]}
@@ -12439,7 +12440,6 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
           activeMapLayers={Array []}
           atlas={Object {}}
           isEachOverlayInvisible={true}
-          isMapLayersVisible={undefined}
           isMapPanelHandleVisible={true}
           isMapPanelVisible={false}
           map={Object {}}
@@ -12448,8 +12448,20 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
               "aerial": Array [
                 Object {
                   "category": "aerial",
-                  "label": "Luchtfoto 2017",
+                  "label": "Luchtfoto 2018",
                   "selected": true,
+                  "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2018_RD/{z}/{x}/{y}.jpeg",
+                  "value": "lf2018",
+                },
+                Object {
+                  "category": "aerial",
+                  "label": "Infrarood 2018",
+                  "urlTemplate": "https://{s}.data.amsterdam.nl/infrarood2018_RD/{z}/{x}/{y}.jpeg",
+                  "value": "ir2018",
+                },
+                Object {
+                  "category": "aerial",
+                  "label": "Luchtfoto 2017",
                   "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2017_RD/{z}/{x}/{y}.jpeg",
                   "value": "lf2017",
                 },
@@ -14762,8 +14774,20 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                         "aerial": Array [
                           Object {
                             "category": "aerial",
-                            "label": "Luchtfoto 2017",
+                            "label": "Luchtfoto 2018",
                             "selected": true,
+                            "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2018_RD/{z}/{x}/{y}.jpeg",
+                            "value": "lf2018",
+                          },
+                          Object {
+                            "category": "aerial",
+                            "label": "Infrarood 2018",
+                            "urlTemplate": "https://{s}.data.amsterdam.nl/infrarood2018_RD/{z}/{x}/{y}.jpeg",
+                            "value": "ir2018",
+                          },
+                          Object {
+                            "category": "aerial",
+                            "label": "Luchtfoto 2017",
                             "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2017_RD/{z}/{x}/{y}.jpeg",
                             "value": "lf2017",
                           },
@@ -15033,8 +15057,20 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                           Array [
                             Object {
                               "category": "aerial",
-                              "label": "Luchtfoto 2017",
+                              "label": "Luchtfoto 2018",
                               "selected": true,
+                              "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2018_RD/{z}/{x}/{y}.jpeg",
+                              "value": "lf2018",
+                            },
+                            Object {
+                              "category": "aerial",
+                              "label": "Infrarood 2018",
+                              "urlTemplate": "https://{s}.data.amsterdam.nl/infrarood2018_RD/{z}/{x}/{y}.jpeg",
+                              "value": "ir2018",
+                            },
+                            Object {
+                              "category": "aerial",
+                              "label": "Luchtfoto 2017",
                               "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2017_RD/{z}/{x}/{y}.jpeg",
                               "value": "lf2017",
                             },
@@ -15146,7 +15182,7 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                             <div
                               className="select-button__label"
                             >
-                              Luchtfoto 2017
+                              Luchtfoto 2018
                             </div>
                           </button>
                           <button
@@ -15185,6 +15221,36 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
                               className="
                 select-button__drop-down-item
                 select-button__drop-down-item--selected
+              "
+                              key="lf2018"
+                            >
+                              <button
+                                className="select-button__drop-down-button"
+                                onClick={[Function]}
+                                value="lf2018"
+                              >
+                                Luchtfoto 2018
+                              </button>
+                            </li>
+                            <li
+                              className="
+                select-button__drop-down-item
+                false
+              "
+                              key="ir2018"
+                            >
+                              <button
+                                className="select-button__drop-down-button"
+                                onClick={[Function]}
+                                value="ir2018"
+                              >
+                                Infrarood 2018
+                              </button>
+                            </li>
+                            <li
+                              className="
+                select-button__drop-down-item
+                false
               "
                               key="lf2017"
                             >
@@ -19626,8 +19692,8 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
           </section>
         </MapPanelContainer>
       </Connect(MapPanelContainer)>
-      <Connect(MapPreviewPanelContainer)>
-        <MapPreviewPanelContainer
+      <Connect(MapPreviewPanel)>
+        <MapPreviewPanel
           closeMapFullScreen={[Function]}
           detail={Object {}}
           detailResult={Object {}}
@@ -19713,8 +19779,8 @@ exports[`MapContainer should render all the components in MapContainer 1`] = `
               </div>
             </section>
           </div>
-        </MapPreviewPanelContainer>
-      </Connect(MapPreviewPanelContainer)>
+        </MapPreviewPanel>
+      </Connect(MapPreviewPanel)>
     </div>
   </MapContainer>
 </Connect(MapContainer)>

@@ -4,7 +4,7 @@ import { getMapPanelLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { getStraatbeeld } from '../../ducks/straatbeeld/straatbeeld';
 import { getMapZoom } from '../../ducks/map/map';
 
-import ACTIONS from '../../../shared/actions';
+import ACTIONS, { REQUEST_GEOSEARCH, REQUEST_NEAREST_DETAILS } from '../../../shared/actions';
 
 export const getActiveMapLayers = (state) => (
   state.map.overlays
@@ -35,7 +35,7 @@ export function* switchClickAction(payload) {
   });
   if (!straatbeeld && layers.length) {
     yield put({
-      type: 'REQUEST_NEAREST_DETAILS',
+      type: REQUEST_NEAREST_DETAILS,
       payload: {
         location: payload.location,
         layers,
@@ -44,12 +44,12 @@ export function* switchClickAction(payload) {
     });
   } else {
     yield put({
-      type: 'REQUEST_GEOSEARCH',
+      type: REQUEST_GEOSEARCH,
       payload: [payload.location.latitude, payload.location.longitude]
     });
   }
 }
 
 export default function* watchMapClick() {
-  yield takeLatest(ACTIONS.SET_MAP_CLICK_LOCATION.id, switchClickAction);
+  yield takeLatest(ACTIONS.SET_MAP_CLICK_LOCATION, switchClickAction);
 }

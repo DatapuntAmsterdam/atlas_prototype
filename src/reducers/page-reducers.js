@@ -1,4 +1,3 @@
-// DEPRECATED!!!
 import ACTIONS from '../shared/actions';
 import isObject from '../shared/services/is-object';
 
@@ -33,6 +32,6 @@ function showPageReducer(state, payload) {
 
 const reducers = {};
 
-reducers[ACTIONS.SHOW_PAGE.id] = showPageReducer; // TODO destroy page reducer
+reducers[ACTIONS.SHOW_PAGE] = showPageReducer; // TODO refactor, destroy page reducer
 
 export default reducers;

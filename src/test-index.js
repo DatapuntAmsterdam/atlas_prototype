@@ -1,7 +1,7 @@
- /* eslint-disable */
-// For now simply import everything we need, from here
+/* eslint-disable */
+import "babel-polyfill";
 
-// Import the templates and inject them into angular
+ // Import the templates and inject them into angular
 const templates = require.context('../modules', true, /\.html$/);
 const origInject = angular.mock.inject;
 angular.mock.inject = (callback) => {
@@ -40,7 +40,6 @@ import '../modules/atlas/services/piwik/piwik-config.constant';
 import '../modules/atlas/services/piwik/piwik.factory';
 import '../modules/atlas/services/piwik/piwik.run';
 import '../modules/atlas/services/redux/store.run';
-import '../modules/atlas/services/routing/state-to-url.factory';
 import '../modules/data-selection/data-selection.module';
 import '../modules/data-selection/components/active-filters/active-filters.component';
 import '../modules/data-selection/components/available-filters/available-filters.component';
@@ -172,8 +171,6 @@ import '../modules/shared/services/crs/crs-converter.factory';
 import '../modules/shared/services/embed/embed.factory';
 import '../modules/shared/services/environment/environment.factory';
 import '../modules/shared/services/geojson/geojson.factory';
-import '../modules/shared/services/google-sheet/google-sheet.constants';
-import '../modules/shared/services/google-sheet/google-sheet.factory';
 import '../modules/shared/services/window-error-handler/window-error-handler.factory';
 import '../modules/shared/services/window-error-handler/window-error-handler.run';
 import '../modules/shared/services/http-error-registrar/http-error-registrar.factory';
@@ -212,7 +209,6 @@ import '../modules/shared/components/link/link.component.mock';
 import '../modules/shared/shared.module.test';
 import '../modules/search-results/search-results.module.test';
 import '../modules/data-selection/data-selection.module.test';
-import '../modules/atlas/services/routing/state-to-url.factory.test';
 import '../modules/straatbeeld/straatbeeld.module.test';
 import '../modules/header/header.module.test';
 import '../modules/page/page.module.test';
@@ -330,7 +326,6 @@ import '../modules/shared/components/dcatd-button/dcatd-button.component.test';
 import '../modules/shared/services/storage/storage.factory.test';
 import '../modules/shared/services/markdown-parser/markdown-parser.factory.test';
 import '../modules/shared/services/redux/store.factory.test';
-import '../modules/shared/services/google-sheet/google-sheet.factory.test';
 import '../modules/shared/services/window-error-handler/window-error-handler.factory.test';
 import '../modules/shared/services/http-error-registrar/http-error-registrar.factory.test';
 import '../modules/shared/services/http-error-registrar/http-status.factory.test';

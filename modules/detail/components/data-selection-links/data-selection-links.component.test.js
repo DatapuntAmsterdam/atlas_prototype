@@ -1,3 +1,5 @@
+import { features } from '../../../../src/shared/environment';
+
 describe('The dp-data-selection-link component', () => {
     let $compile,
         $rootScope,
@@ -45,13 +47,14 @@ describe('The dp-data-selection-link component', () => {
 
         expect(component.find('.qa-hr dp-glossary-header').attr('definition')).toBe('VESTIGING');
         expect(component.find('.qa-hr dp-glossary-header').attr('use-plural')).toBe('true');
-
-        expect(component.find('.qa-brk dp-glossary-header').attr('definition')).toBe('OBJECT');
-        expect(component.find('.qa-brk dp-glossary-header').attr('use-plural')).toBe('true');
+        if (features.eigendommen) {
+            expect(component.find('.qa-brk dp-glossary-header').attr('definition')).toBe('OBJECT');
+            expect(component.find('.qa-brk dp-glossary-header').attr('use-plural')).toBe('true');
+        }
     });
 
-    it('has links to the LIST view of data-selection for BAG, HR and BRK', () => {
-        const activeFilters = {stadsdeel_naam: 'Noord', buurt_naam: 'Ghetto C'};
+    it('has links to the TABLE view of data-selection for BAG', () => {
+        const activeFilters = { stadsdeel_naam: 'Noord', buurt_naam: 'Ghetto C' };
         const component = getComponent(activeFilters);
 
         component.find('dp-link button').click();
@@ -64,8 +67,11 @@ describe('The dp-data-selection-link component', () => {
                 page: 1
             }
         });
+    });
 
-        store.dispatch.calls.reset();
+    it('has links to the TABLE view of data-selection for HR', () => {
+        const activeFilters = { stadsdeel_naam: 'Noord', buurt_naam: 'Ghetto C' };
+        const component = getComponent(activeFilters);
 
         component.find('dp-link button').click();
         expect(store.dispatch).toHaveBeenCalledWith({
@@ -77,20 +83,23 @@ describe('The dp-data-selection-link component', () => {
                 page: 1
             }
         });
+    });
 
-        store.dispatch.calls.reset();
+    it('has links to the TABLE view of data-selection for BRK', () => {
+        const activeFilters = { stadsdeel_naam: 'Noord', buurt_naam: 'Ghetto C' };
+        const component = getComponent(activeFilters);
 
-        component.find('dp-link button').click();
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_DATA_SELECTION,
-            payload: {
-                dataset: 'brk',
-                view: 'TABLE',
-                filters: activeFilters,
-                page: 1
-            }
-        });
-
-        store.dispatch.calls.reset();
+        if (features.eigendommen) {
+            component.find('dp-link button').click();
+            expect(store.dispatch).toHaveBeenCalledWith({
+                type: ACTIONS.FETCH_DATA_SELECTION,
+                payload: {
+                    dataset: 'brk',
+                    view: 'TABLE',
+                    filters: activeFilters,
+                    page: 1
+                }
+            });
+        }
     });
 });

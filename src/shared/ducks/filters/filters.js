@@ -1,3 +1,5 @@
+import ACTIONS from '../../actions';
+
 /*
     TODO:
     move all the logic from
@@ -7,9 +9,7 @@
 
 const emptyFilters = () =>
   ({
-    type: {
-      id: 'EMPTY_FILTERS'
-    }
+    type: ACTIONS.EMPTY_FILTERS
   });
 
 export default emptyFilters;

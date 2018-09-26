@@ -24,9 +24,9 @@ import {
 
         $scope.$watchGroup(['vm.mapMode'], () => {
             if (vm.mapMode === MAP_MODE.PANORAMA) {
-                store.dispatch({ type: ACTIONS.MAP_ADD_PANO_OVERLAY.id, payload: store.getState().straatbeeld });
+                store.dispatch({ type: ACTIONS.MAP_ADD_PANO_OVERLAY, payload: store.getState().straatbeeld });
             } else {
-                $timeout(() => store.dispatch({ type: ACTIONS.MAP_REMOVE_PANO_OVERLAY.id }));
+                $timeout(() => store.dispatch({ type: ACTIONS.MAP_REMOVE_PANO_OVERLAY }));
             }
         });
 
@@ -86,7 +86,6 @@ import {
 
             vm.isFullHeight = !vm.isRightColumnScrollable || vm.columnSizes.right < 12;
 
-            vm.isMapFullscreen = Boolean(vm.visibility.map && state.ui.isMapFullscreen);
             vm.mapMode = state.ui.mapMode;
             vm.geosearchLocation = state.search && state.search.location && state.search.location.toString();
             vm.detailEndpoint = state.detail && state.detail.endpoint; // TODO remove? Seems useless

@@ -55,7 +55,7 @@ describe('The dataSelectionReducers', () => {
       const mockedState = deepCopy(DEFAULT_STATE);
       mockedState.ui.isMapFullscreen = true;
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.ui.isMapFullscreen)
         .toBe(false);
@@ -64,7 +64,7 @@ describe('The dataSelectionReducers', () => {
     it('has a default table view and set map not to be loading', () => {
       const mockedState = deepCopy(DEFAULT_STATE);
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toEqual(jasmine.objectContaining({
@@ -78,7 +78,7 @@ describe('The dataSelectionReducers', () => {
       const mockedState = deepCopy(DEFAULT_STATE);
       payload.view = 'LIST';
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toEqual(jasmine.objectContaining({
@@ -94,7 +94,7 @@ describe('The dataSelectionReducers', () => {
         view: 'LIST'
       };
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toEqual(jasmine.objectContaining({
@@ -114,7 +114,7 @@ describe('The dataSelectionReducers', () => {
         filter: 'filterValue'
       };
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toEqual(jasmine.objectContaining({
@@ -135,7 +135,7 @@ describe('The dataSelectionReducers', () => {
         buurt: 'Trompbuurt'
       };
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toEqual(jasmine.objectContaining({
@@ -159,7 +159,7 @@ describe('The dataSelectionReducers', () => {
 
       payload.emptyFilters = true;
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toEqual(jasmine.objectContaining({
@@ -175,7 +175,7 @@ describe('The dataSelectionReducers', () => {
       const mockedState = deepCopy(DEFAULT_STATE);
       payload.resetGeometryFilter = true;
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection.geometryFilter)
         .toEqual({
@@ -187,7 +187,7 @@ describe('The dataSelectionReducers', () => {
     it('makes the Array of markers empty', () => {
       const mockedState = deepCopy(DEFAULT_STATE);
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toEqual(jasmine.objectContaining({
@@ -198,7 +198,7 @@ describe('The dataSelectionReducers', () => {
     it('sets isLoading to true', () => {
       const mockedState = deepCopy(DEFAULT_STATE);
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection.isLoading)
         .toBe(true);
@@ -211,7 +211,7 @@ describe('The dataSelectionReducers', () => {
       mockedState.detail = { some: 'object' };
       mockedState.straatbeeld = { some: 'object' };
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
 
       expect(output.search)
         .toBeNull();
@@ -229,13 +229,13 @@ describe('The dataSelectionReducers', () => {
 
       // With print mode enabled
       mockedState.ui.isPrintMode = true;
-      output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
       expect(output.ui.isPrintMode)
         .toBe(true);
 
       // With print mode disabled
       mockedState.ui.isPrintMode = false;
-      output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, payload);
       expect(output.ui.isPrintMode)
         .toBe(false);
     });
@@ -246,7 +246,7 @@ describe('The dataSelectionReducers', () => {
       mockedState.ui = null;
       mockedState.page = null;
 
-      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION.id](mockedState, '');
+      const output = dataSelectionReducers[ACTIONS.FETCH_DATA_SELECTION](mockedState, '');
       expect(output.map)
         .toBeNull();
       expect(output.ui)
@@ -281,21 +281,21 @@ describe('The dataSelectionReducers', () => {
     });
 
     it('adds markers to the state', () => {
-      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection.markers)
         .toEqual(['MOCKED', 'MARKER', 'ARRAY']);
     });
 
     it('sets isLoading to false', () => {
-      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection.isLoading)
         .toEqual(false);
     });
 
     it('sets map isLoading to false', () => {
-      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
 
       expect(output.map.isLoading)
         .toEqual(false);
@@ -303,7 +303,7 @@ describe('The dataSelectionReducers', () => {
 
     it('does nothing if the user has navigated away from dataSelection before the API is finished', () => {
       mockedState.dataSelection = null;
-      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toBeNull();
@@ -312,7 +312,7 @@ describe('The dataSelectionReducers', () => {
     it('when map is not an object', () => {
       mockedState.map = null;
 
-      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SHOW_DATA_SELECTION](mockedState, payload);
       expect(output.map)
         .toBeNull();
     });
@@ -343,21 +343,21 @@ describe('The dataSelectionReducers', () => {
     });
 
     it('adds markers to the state', () => {
-      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection.markers)
         .toEqual(['MOCKED', 'MARKER', 'ARRAY']);
     });
 
     it('sets isLoading to false', () => {
-      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection.isLoading)
         .toEqual(false);
     });
 
     it('sets map isLoading to false', () => {
-      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION](mockedState, payload);
 
       expect(output.map.isLoading)
         .toEqual(false);
@@ -365,7 +365,7 @@ describe('The dataSelectionReducers', () => {
 
     it('does nothing if the user has navigated away from dataSelection before the API is finished', () => {
       mockedState.dataSelection = null;
-      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection)
         .toBeNull();
@@ -373,7 +373,7 @@ describe('The dataSelectionReducers', () => {
 
     it('sets the reset flag to false', () => {
       mockedState.dataSelection.reset = true;
-      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION](mockedState, payload);
 
       expect(output.dataSelection.reset)
         .toBe(false);
@@ -382,7 +382,7 @@ describe('The dataSelectionReducers', () => {
     it('when map is not an object', () => {
       mockedState.map = null;
 
-      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.RESET_DATA_SELECTION](mockedState, payload);
       expect(output.map)
         .toBeNull();
     });
@@ -411,7 +411,7 @@ describe('The dataSelectionReducers', () => {
     it('can set the view to list view and set map to be loading', () => {
       payload = 'LIST';
 
-      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW](mockedState, payload);
 
       expect(output.dataSelection.view)
         .toBe('LIST');
@@ -422,7 +422,7 @@ describe('The dataSelectionReducers', () => {
     it('can set the view to table view and set map not to be loading', () => {
       payload = 'TABLE';
 
-      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW](mockedState, payload);
 
       expect(output.dataSelection.view)
         .toBe('TABLE');
@@ -433,7 +433,7 @@ describe('The dataSelectionReducers', () => {
     it('refuses to set the view to an unknown view', () => {
       payload = 'aap';
 
-      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW](mockedState, payload);
 
       expect(output.dataSelection.view)
         .toBeUndefined();
@@ -443,7 +443,7 @@ describe('The dataSelectionReducers', () => {
       payload = 'LIST';
       mockedState.dataSelection.isLoading = false;
 
-      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](mockedState, payload);
+      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW](mockedState, payload);
 
       expect(output.dataSelection.isLoading)
         .toBe(true);
@@ -453,7 +453,7 @@ describe('The dataSelectionReducers', () => {
       mockedState.dataSelection = null;
       mockedState.map = null;
 
-      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW.id](mockedState, 'LIST');
+      output = dataSelectionReducers[ACTIONS.SET_DATA_SELECTION_VIEW](mockedState, 'LIST');
       expect(output.dataSelection)
         .toBeNull();
       expect(output.map)
@@ -470,7 +470,7 @@ describe('The dataSelectionReducers', () => {
         page: 1
       };
 
-      const output = dataSelectionReducers[ACTIONS.NAVIGATE_DATA_SELECTION.id](mockedState, 4);
+      const output = dataSelectionReducers[ACTIONS.NAVIGATE_DATA_SELECTION](mockedState, 4);
 
       expect(output.dataSelection)
         .toEqual({
@@ -484,7 +484,7 @@ describe('The dataSelectionReducers', () => {
 
       mockedState.dataSelection = null;
 
-      const output = dataSelectionReducers[ACTIONS.NAVIGATE_DATA_SELECTION.id](mockedState, 4);
+      const output = dataSelectionReducers[ACTIONS.NAVIGATE_DATA_SELECTION](mockedState, 4);
       expect(output.dataSelection)
         .toBeNull();
     });

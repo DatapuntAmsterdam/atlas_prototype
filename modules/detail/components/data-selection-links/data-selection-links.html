@@ -12,7 +12,7 @@
         >In tabel weergeven</dp-link>
 </div>
 
-<div class="c-detail__block qa-brk">
+<div class="c-detail__block qa-brk" ng-if="vm.eigendommen">
     <dp-glossary-header definition="OBJECT" use-plural="true"></dp-glossary-header>
     <dp-link class-name="o-btn o-btn--plus o-list__separate-item" type="FETCH_DATA_SELECTION"
              payload="{dataset: 'brk', view: 'TABLE', filters: vm.activeFilters, page: 1}"

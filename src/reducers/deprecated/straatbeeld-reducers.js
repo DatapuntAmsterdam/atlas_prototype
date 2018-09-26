@@ -167,12 +167,12 @@ function setStraatbeeldHistoryReducer(state, payload) {
 
 const reducers = {};
 
-reducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id] = fetchStraatbeeldByIdReducer;
-reducers[ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT.id] = fetchStraatbeeldByIdReducer;
-reducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION.id] = fetchStraatbeeldByLocationReducer;
-reducers[ACTIONS.SET_STRAATBEELD_HISTORY.id] = setStraatbeeldHistoryReducer;
-reducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id] = showStraatbeeldReducer;
-reducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT.id] = showStraatbeeldSubsequentReducer;
-reducers[ACTIONS.SET_STRAATBEELD_ORIENTATION.id] = setOrientationReducer;
+reducers[ACTIONS.FETCH_STRAATBEELD_BY_ID] = fetchStraatbeeldByIdReducer;
+reducers[ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT] = fetchStraatbeeldByIdReducer;
+reducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION] = fetchStraatbeeldByLocationReducer;
+reducers[ACTIONS.SET_STRAATBEELD_HISTORY] = setStraatbeeldHistoryReducer;
+reducers[ACTIONS.SHOW_STRAATBEELD_INITIAL] = showStraatbeeldReducer;
+reducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT] = showStraatbeeldSubsequentReducer;
+reducers[ACTIONS.SET_STRAATBEELD_ORIENTATION] = setOrientationReducer;
 
 export default reducers;

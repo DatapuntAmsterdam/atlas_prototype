@@ -6,9 +6,11 @@ import HomepageBlock from '../block/HomepageBlock';
 import IconAddress from '../../../../public/images/icon-adres.svg';
 import IconHr from '../../../../public/images/icon-hr.svg';
 import IconKadaster from '../../../../public/images/icon-kadaster.svg';
+import { features } from '../../../shared/environment';
 
 const HomepageAddressBlock = (props) => {
   const { onLinkClick } = props;
+  const brkClassName = `homepage-block__item ${features.eigendommen ? '' : 'homepage-block__item--invisible'}`;
 
   return (
     <HomepageBlock
@@ -47,7 +49,7 @@ const HomepageAddressBlock = (props) => {
         </button>
       </div>
 
-      <div className={'homepage-block__item homepage-block__item--invisible'}>
+      <div className={brkClassName}>
         <button
           className={'c-link homepage-block__link'}
           title={'Bekijk kadaster-tabel'}

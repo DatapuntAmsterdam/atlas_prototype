@@ -1,3 +1,4 @@
+import { HIDE_MAP_PANEL } from '../../../../src/shared/ducks/ui/ui';
 import PAGES from '../../../../src/pages';
 
 describe('The dashboard component', function () {
@@ -61,8 +62,7 @@ describe('The dashboard component', function () {
                 isEmbedPreview: false,
                 isMapFullscreen: false,
                 isMapPanelVisible: false,
-                isPrintMode: false,
-                page: PAGES.HOME
+                isPrintMode: false
             },
             error: {
                 hasErrors: false,
@@ -70,7 +70,7 @@ describe('The dashboard component', function () {
             }
         };
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$window_, _store_,
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$timeout_, _$window_, _store_,
                                       _dashboardColumns_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
@@ -83,6 +83,8 @@ describe('The dashboard component', function () {
         $window.auth = {
             login: angular.noop
         };
+
+        origEndpointTypes = $window.mapPreviewPanelDetailEndpointTypes;
 
         mockedState = angular.copy(angular.copy(DEFAULT_STATE));
     });
@@ -150,12 +152,6 @@ describe('The dashboard component', function () {
         component = getComponent();
         expect(component.find('.c-dashboard__footer').length).toBe(1);
 
-        // On other pages with the homepage 'behind' it
-        mockedState.ui.page = PAGES.KAART;
-        mockedState.ui.isMapFullscreen = true;
-        component = getComponent();
-        expect(component.find('.c-dashboard__footer').length).toBe(0);
-
         // On other pages
         mockedState.ui.page = PAGES.HELP;
         component = getComponent();
@@ -165,7 +161,7 @@ describe('The dashboard component', function () {
     it('has a type class when page type is help or snelwegwijs or apis', () => {
         let component;
 
-        mockedState.page.name = 'content-overzicht';
+        mockedState.ui.page = PAGES.HELP;
 
         // On the help page
         mockedState.page.type = 'help';
@@ -218,69 +214,7 @@ describe('The dashboard component', function () {
             $rootScope.$digest();
 
             expect(store.dispatch).not.toHaveBeenCalledWith({
-                type: 'HIDE_MAP_PANEL'
-            });
-        });
-    });
-
-    describe('the full screen watch functionality', () => {
-        let handler;
-        const mockedVisibility = {
-            map: true
-        };
-
-        beforeEach(() => {
-            spyOn(dashboardColumns, 'determineVisibility').and.callFake(() => mockedVisibility);
-            spyOn(store, 'dispatch');
-            spyOn(store, 'subscribe').and.callFake((fn) => {
-                // This function will be called later on by other components as
-                // well
-                handler = handler || fn;
-            });
-        });
-
-        afterEach(() => handler = null);
-
-        it('should show the map panel if isHomePageActive', () => {
-            mockedState.ui.isMapFullscreen = false;
-            getComponent();
-
-            mockedState.ui.isMapFullscreen = true;
-            handler();
-            $rootScope.$digest();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: 'SHOW_MAP_PANEL'
-            });
-        });
-
-        it('should hide the map panel map is no longer full screen', () => {
-            mockedState.ui.isMapFullscreen = true;
-            getComponent();
-
-            mockedState.ui.isMapFullscreen = false;
-            handler();
-            $rootScope.$digest();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: 'HIDE_MAP_PANEL'
-            });
-        });
-
-        it('should do nothing if outside homepage', () => {
-            mockedState.ui.isMapFullscreen = false;
-            mockedState.ui.page = 'other';
-            getComponent();
-
-            mockedState.ui.isMapFullscreen = true;
-            handler();
-            $rootScope.$digest();
-
-            expect(store.dispatch).not.toHaveBeenCalledWith({
-                type: 'SHOW_MAP_PANEL'
-            });
-            expect(store.dispatch).not.toHaveBeenCalledWith({
-                type: 'HIDE_MAP_PANEL'
+                type: HIDE_MAP_PANEL
             });
         });
     });

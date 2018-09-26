@@ -1,3 +1,5 @@
+import { features } from '../../../../src/shared/environment';
+
 (function () {
     'use strict';
 
@@ -46,7 +48,14 @@
                 DATA_SELECTION_CONFIG.datasets[vm.state.dataset].SHOW_NUMBER_OF_RECORDS;
             vm.datasetTitle = DATA_SELECTION_CONFIG.datasets[vm.state.dataset].TITLE;
 
-            vm.tabs = ['bag', 'hr', 'brk'].map(dataset => {
+            const tabs = ['bag', 'hr'];
+
+            /* istanbul ignore next */
+            if (features.eigendommen) {
+                tabs.push('brk');
+            }
+
+            vm.tabs = tabs.map(dataset => {
                 return {
                     dataset: dataset,
                     title: DATA_SELECTION_CONFIG.datasets[dataset].TITLE_TAB,

@@ -6,24 +6,33 @@ import { shallow } from 'enzyme';
 import MapPreviewPanelContainer from './MapPreviewPanelContainer';
 import {
   getMapSearchResults,
-  selectLatestMapSearchResults
+  selectLatestMapSearchResults,
+  FETCH_MAP_SEARCH_RESULTS_REQUEST
 } from '../../ducks/search-results/map-search-results';
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
-import { getMapDetail, selectLatestMapDetail } from '../../ducks/detail/map-detail';
-import { getPanoPreview } from '../../../pano/ducks/preview/pano-preview';
+import {
+  FETCH_MAP_DETAIL_REQUEST,
+  getMapDetail,
+  selectLatestMapDetail
+} from '../../ducks/detail/map-detail';
+import {
+  FETCH_PANO_PREVIEW_REQUEST,
+  getPanoPreview
+} from '../../../pano/ducks/preview/pano-preview';
 import PAGES from '../../../pages';
 import {
   closeMapPreviewPanel
 } from '../../ducks/preview-panel/map-preview-panel';
 import { MAP_MODE, switchMode, switchPage } from '../../../shared/ducks/ui/ui';
 import { fetchStraatbeeldById } from '../../ducks/straatbeeld/straatbeeld';
+import { FETCH_SEARCH_RESULTS_BY_LOCATION } from '../../../shared/actions';
 
 jest.mock('../../ducks/search-results/map-search-results');
 jest.mock('../../ducks/panel-layers/map-panel-layers');
 jest.mock('../../ducks/detail/map-detail');
 jest.mock('../../../pano/ducks/preview/pano-preview');
 
-describe('MapPreviewPanelContainer', () => {
+describe.only('MapPreviewPanelContainer', () => {
   const initialState = {
     isMapPreviewPanelVisible: true,
     map: {
@@ -95,9 +104,9 @@ describe('MapPreviewPanelContainer', () => {
   };
 
   beforeEach(() => {
-    getMapSearchResults.mockImplementation(() => ({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' }));
-    getMapDetail.mockImplementation(() => ({ type: 'FETCH_MAP_DETAIL_REQUEST' }));
-    getPanoPreview.mockImplementation(() => ({ type: 'FETCH_PANO_PREVIEW_REQUEST' }));
+    getMapSearchResults.mockImplementation(() => ({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST }));
+    getMapDetail.mockImplementation(() => ({ type: FETCH_MAP_DETAIL_REQUEST }));
+    getPanoPreview.mockImplementation(() => ({ type: FETCH_PANO_PREVIEW_REQUEST }));
     selectNotClickableVisibleMapLayers.mockImplementation(() => ([]));
   });
 
@@ -149,9 +158,9 @@ describe('MapPreviewPanelContainer', () => {
       }, { name: 'User name' });
       expect(getMapDetail).not.toHaveBeenCalled();
       expect(getPanoPreview).toHaveBeenCalledWith({ latitude: 1, longitude: 0 });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
 
     it('should dispatch action to fetch detail', () => {
@@ -162,9 +171,9 @@ describe('MapPreviewPanelContainer', () => {
       expect(getMapSearchResults).not.toHaveBeenCalledWith();
       expect(getMapDetail).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/fake/endpoint', { name: 'User name' });
       expect(getPanoPreview).not.toHaveBeenCalled();
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
   });
 
@@ -187,9 +196,9 @@ describe('MapPreviewPanelContainer', () => {
       }, { name: 'User name' });
       expect(getMapDetail).not.toHaveBeenCalled();
       expect(getPanoPreview).toHaveBeenCalledWith({ latitude: 1, longitude: 0 });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
 
     it('should fetch search results with new search location', () => {
@@ -213,9 +222,9 @@ describe('MapPreviewPanelContainer', () => {
       }, { name: 'User name' });
       expect(getMapDetail).not.toHaveBeenCalled();
       expect(getPanoPreview).toHaveBeenCalledWith({ latitude: 0, longitude: 1 });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
 
     it('should fetch search results when search location changes', () => {
@@ -236,9 +245,9 @@ describe('MapPreviewPanelContainer', () => {
       }, { name: 'User name' });
       expect(getMapDetail).not.toHaveBeenCalled();
       expect(getPanoPreview).toHaveBeenCalledWith({ latitude: 0, longitude: 1 });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
 
     it('should fetch detail with new detail state', () => {
@@ -256,9 +265,9 @@ describe('MapPreviewPanelContainer', () => {
       expect(getMapSearchResults).not.toHaveBeenCalled();
       expect(getMapDetail).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/fake/endpoint', { name: 'User name' });
       expect(getPanoPreview).not.toHaveBeenCalled();
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
 
     it('should fetch detail with new detail endpoint', () => {
@@ -276,9 +285,9 @@ describe('MapPreviewPanelContainer', () => {
       expect(getMapSearchResults).not.toHaveBeenCalled();
       expect(getMapDetail).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/fake/endpoint', { name: 'User name' });
       expect(getPanoPreview).not.toHaveBeenCalled();
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
 
     it('should fetch detail when detail endpoint changes', () => {
@@ -296,9 +305,9 @@ describe('MapPreviewPanelContainer', () => {
       expect(getMapSearchResults).not.toHaveBeenCalled();
       expect(getMapDetail).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/fake/other-endpoint', { name: 'User name' });
       expect(getPanoPreview).not.toHaveBeenCalled();
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
 
     it('should fetch pano preview with new detail result', () => {
@@ -316,9 +325,9 @@ describe('MapPreviewPanelContainer', () => {
       expect(getMapSearchResults).not.toHaveBeenCalled();
       expect(getMapDetail).not.toHaveBeenCalled();
       expect(getPanoPreview).toHaveBeenCalledWith({ latitude: 1, longitude: 2 });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
 
     it('should fetch pano preview when detail result changes', () => {
@@ -337,9 +346,9 @@ describe('MapPreviewPanelContainer', () => {
       expect(getMapSearchResults).not.toHaveBeenCalled();
       expect(getMapDetail).not.toHaveBeenCalled();
       expect(getPanoPreview).toHaveBeenCalledWith({ latitude: 2, longitude: 1 });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_SEARCH_RESULTS_REQUEST' });
-      expect(store.dispatch).not.toHaveBeenCalledWith({ type: 'FETCH_MAP_DETAIL_REQUEST' });
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'FETCH_PANO_PREVIEW_REQUEST' });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_SEARCH_RESULTS_REQUEST });
+      expect(store.dispatch).not.toHaveBeenCalledWith({ type: FETCH_MAP_DETAIL_REQUEST });
+      expect(store.dispatch).toHaveBeenCalledWith({ type: FETCH_PANO_PREVIEW_REQUEST });
     });
   });
 
@@ -531,10 +540,7 @@ describe('MapPreviewPanelContainer', () => {
     wrapper.find('.map-preview-panel__button--show-all').at(0).simulate('click');
 
     expect(store.dispatch).toHaveBeenCalledWith({
-      type: {
-        id: 'FETCH_SEARCH_RESULTS_BY_LOCATION',
-        ignore: true
-      },
+      type: FETCH_SEARCH_RESULTS_BY_LOCATION,
       payload: [15, 39]
     });
   });

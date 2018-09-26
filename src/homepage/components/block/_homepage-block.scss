@@ -52,7 +52,7 @@ $block-item-height: 40px;
 
   &__item {
     &--invisible {
-      display: inherit;
+      display: none;
     }
   }
 }

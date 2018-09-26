@@ -1,5 +1,5 @@
 import contextMiddleware from './context-middleware';
-import ACTIONS from '../../actions';
+import ACTIONS, { FETCH_SEARCH_RESULTS_BY_LOCATION } from '../../actions';
 
 describe('The contextMiddleware factory', () => {
   const mockedStore = {
@@ -30,7 +30,7 @@ describe('The contextMiddleware factory', () => {
     const returnValue = contextMiddleware(mockedStore)(mockedNext)(mockedAction);
 
     expect(returnValue).toEqual({
-      type: ACTIONS.FETCH_SEARCH_RESULTS_BY_LOCATION,
+      type: FETCH_SEARCH_RESULTS_BY_LOCATION,
       payload: {}
     });
   });

@@ -57,11 +57,11 @@ describe('LeafletContainer', () => {
           urlTemplate: 'https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png'
         },
         {
-          value: 'lf2017',
-          label: 'Luchtfoto 2017',
+          value: 'lf2018',
+          label: 'Luchtfoto 2018',
           category: 'aerial',
           selected: true,
-          urlTemplate: 'https://{s}.data.amsterdam.nl/lufo2017_RD/{z}/{x}/{y}.jpeg'
+          urlTemplate: 'https://{s}.data.amsterdam.nl/lufo2018_RD/{z}/{x}/{y}.jpeg'
         }
       ]
     }
@@ -126,7 +126,7 @@ describe('LeafletContainer', () => {
         ...initialState,
         map: {
           viewCenter: [52.4333137, 4.9108908],
-          baseLayer: 'lf2017',
+          baseLayer: 'lf2018',
           zoom: 10,
           ui: {
             map: true,
