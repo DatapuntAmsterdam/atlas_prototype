@@ -1,4 +1,7 @@
 import removeMd from 'remove-markdown';
+import ACTIONS from '../../../../../src/shared/actions';
+import PAGES from '../../../../../src/pages';
+import { switchPage } from '../../../../../src/shared/ducks/ui/ui';
 
 (function () {
     'use strict';
@@ -37,5 +40,13 @@ import removeMd from 'remove-markdown';
         });
 
         sessionStorage.setItem('DCATD_LIST_REDIRECT_URL', document.location.href);
+
+        vm.onCatalogItemOpen = (endpoint) => {
+            store.dispatch({
+                type: ACTIONS.FETCH_DETAIL,
+                payload: (endpoint)
+            });
+            store.dispatch(switchPage(PAGES.DATASETS_DETAIL));
+        };
     }
 }) ();

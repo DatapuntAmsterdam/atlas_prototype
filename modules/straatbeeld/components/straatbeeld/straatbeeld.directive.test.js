@@ -1,3 +1,5 @@
+import { hideStraatbeeld, MAP_MODE, switchMode } from '../../../../src/shared/ducks/ui/ui';
+
 describe('The dp-straatbeeld directive', function () {
     var $compile,
         $rootScope,
@@ -97,9 +99,8 @@ describe('The dp-straatbeeld directive', function () {
 
             $rootScope.$apply();
 
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.HIDE_STRAATBEELD
-            });
+            expect(store.dispatch).toHaveBeenCalledWith(switchMode(MAP_MODE.NORMAL));
+            expect(store.dispatch).toHaveBeenCalledWith(hideStraatbeeld());
         });
     });
 

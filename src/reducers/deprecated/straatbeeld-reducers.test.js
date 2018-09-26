@@ -211,43 +211,6 @@ describe('Straatbeeld reducers factory', () => {
     });
   });
 
-  describe('STRAATBEELD_FULLSCREEN', () => {
-    it('can set straatbeeld explicitly to fullscreen', () => {
-      const inputState = {
-        ...defaultState,
-        straatbeeld: {}
-      };
-      let output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](inputState);
-      expect(output.straatbeeld.isFullscreen)
-        .toBeUndefined();
-
-      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](output, true);
-      expect(output.straatbeeld.isFullscreen)
-        .toBe(true);
-      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](output);
-      expect(output.straatbeeld.isFullscreen)
-        .toBe(true);
-
-      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](output, false);
-      expect(output.straatbeeld.isFullscreen)
-        .toBe(false);
-      output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](output);
-      expect(output.straatbeeld.isFullscreen)
-        .toBe(false);
-    });
-
-    it('when straatbeeld is not an object', () => {
-      const inputState = {
-        ...defaultState,
-        straatbeeld: null
-      };
-
-      const output = straatbeeldReducers[ACTIONS.STRAATBEELD_FULLSCREEN](inputState, undefined);
-      expect(output.straatbeeld)
-        .toBeNull();
-    });
-  });
-
   describe('SHOW_STRAATBEELD', () => {
     const payload = {
       date: new Date('2016-05-19T13:04:15.341110Z'),

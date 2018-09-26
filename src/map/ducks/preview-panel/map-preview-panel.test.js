@@ -2,8 +2,6 @@ import reducer, {
   CLOSE_MAP_PREVIEW_PANEL,
   closeMapPreviewPanel,
   fetchSearchResults,
-  MAXIMIZE_MAP_PREVIEW_PANEL,
-  maximizeMapPreviewPanel,
   OPEN_MAP_PREVIEW_PANEL
 } from './map-preview-panel';
 import { FETCH_SEARCH_RESULTS_BY_LOCATION } from '../../../shared/actions';
@@ -25,15 +23,6 @@ describe('map preview reducer and actions', () => {
   it(`should handle ${CLOSE_MAP_PREVIEW_PANEL}`, () => {
     expect(reducer({}, closeMapPreviewPanel())).toEqual({
       isMapPreviewPanelVisible: false
-    });
-  });
-
-  it(`should handle ${MAXIMIZE_MAP_PREVIEW_PANEL}`, () => {
-    expect(reducer({}, maximizeMapPreviewPanel())).toEqual({
-      isMapPreviewPanelVisible: false,
-      ui: {
-        isMapFullscreen: false
-      }
     });
   });
 

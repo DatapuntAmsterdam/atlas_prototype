@@ -1,4 +1,6 @@
 import getContents from '../../../../src/shared/services/google-sheet/google.sheet';
+import { BELEID_PAGES } from '../../../../src/shared/cms-name-mapping';
+import PAGES from '../../../../src/pages';
 
 (function () {
     'use strict';
@@ -22,6 +24,14 @@ import getContents from '../../../../src/shared/services/google-sheet/google.she
 
         vm.feed = null;
         vm.entries = [];
+
+        vm.getPageNameForCMS = (type, id) => {
+            if (type === 'beleid') {
+                return BELEID_PAGES[id];
+            } else if (type === 'news') {
+                return PAGES.NIEUWS;
+            }
+        };
 
         getContents(vm.type)
             .then(contents => {

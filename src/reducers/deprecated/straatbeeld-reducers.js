@@ -92,17 +92,6 @@ function fetchStraatbeeldByLocationReducer(state, payload) {
     detail: null
   };
 }
-
-function straatbeeldFullscreenReducer(state, payload) {
-  return {
-    ...state,
-    straatbeeld: isObject(state.straatbeeld) ? {
-      ...state.straatbeeld,
-      isFullscreen: typeof payload !== 'undefined' ? payload : state.straatbeeld.isFullscreen
-    } : state.straatbeeld
-  };
-}
-
 /**
  * @param {Object} state
  * @param {Object} payload -  data from straatbeeld-api
@@ -182,7 +171,6 @@ reducers[ACTIONS.FETCH_STRAATBEELD_BY_ID] = fetchStraatbeeldByIdReducer;
 reducers[ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT] = fetchStraatbeeldByIdReducer;
 reducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION] = fetchStraatbeeldByLocationReducer;
 reducers[ACTIONS.SET_STRAATBEELD_HISTORY] = setStraatbeeldHistoryReducer;
-reducers[ACTIONS.STRAATBEELD_FULLSCREEN] = straatbeeldFullscreenReducer;
 reducers[ACTIONS.SHOW_STRAATBEELD_INITIAL] = showStraatbeeldReducer;
 reducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT] = showStraatbeeldSubsequentReducer;
 reducers[ACTIONS.SET_STRAATBEELD_ORIENTATION] = setOrientationReducer;

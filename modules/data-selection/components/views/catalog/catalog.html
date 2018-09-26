@@ -1,7 +1,8 @@
 <div class="c-data-selection-catalog u-margin__bottom--1">
-    <dp-link type="FETCH_DETAIL" payload="row.detailEndpoint" ng-repeat="row in vm.items" class-name="c-data-selection-catalog__list" inline="false">
-
-        <button class="c-data-selection-catalog__item qa-catalog-fetch-detail u-no-presentation">
+    <button ng-repeat="row in vm.items"
+            ng-click="vm.onCatalogItemOpen(row.detailEndpoint)"
+            class="c-data-selection-catalog__list">
+        <div class="c-data-selection-catalog__item qa-catalog-fetch-detail u-no-presentation">
             <div class="c-data-selection-catalog__header">
                 <h2>
                     {{row.header}}
@@ -33,7 +34,7 @@
             <div class="c-data-selection-catalog__description">
                 {{row.description | truncateHtmlAsText}}
             </div>
-        </button>
-    </dp-link>
+        </div>
+    </button>
 
 </div>

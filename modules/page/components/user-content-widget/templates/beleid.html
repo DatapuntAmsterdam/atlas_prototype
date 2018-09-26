@@ -1,7 +1,7 @@
 <div ng-if="vm.feed">
     <div class="c-user-content-widget__beleid-zie-ook">Over</div>
     <div ng-repeat="entry in vm.entries  | limitTo: vm.limitTo" class="c-user-content-widget__entry">
-        <dp-link type="SHOW_PAGE" payload="{name: 'content-detail', type: vm.type, item: entry.id}"
+        <dp-link type="SWITCH_PAGE" payload="vm.getPageNameForCMS(vm.type, entry.id)"
             ><div class="c-user-content-widget__short s-cms-widget-content s-cms-widget-content--inline"
                   ng-bind-html="entry.verkorteTitel.html"></div></dp-link>
     </div>

@@ -4,11 +4,11 @@
             <div class="u-col-sm--9">
                 <!-- Link to map -->
                 <div class="qa-map-link">
-                    <dp-link
-                        type="SHOW_MAP"
+                    <button
+                        ng-click="vm.openMap()"
                         ng-mouseenter="vm.mapLinkHover=true;"
                         ng-mouseleave="vm.mapLinkHover=false;"
-                        class-name="c-homepage__block c-homepage__block--left c-homepage__block--tall"
+                        class="c-homepage__block c-homepage__block--left c-homepage__block--tall"
                         >
                         <dp-video
                             src="'assets/video/map.mp4'"
@@ -21,7 +21,7 @@
                             <div class="o-btn--transparent">Data op de kaart</div>
                             <div class="c-homepage__block-details">Selecteer kaartlagen, vind gegevens op een punt in de kaart, meet of teken een gebied</div>
                         </div>
-                    </dp-link>
+                    </button>
                 </div>
             </div>
             <div class="u-col-sm--3">
@@ -40,17 +40,10 @@
             <div class="u-col-sm--6 c-homepage__block--data-selection">
                 <!-- Links to data selection themes -->
                 <div class="c-homepage__block c-homepage__block--left c-homepage__block--tall c-homepage__block--datasets" ng-class="{ 'c-homepage__block--shadow': datasetsHover }">
-                    <dp-link class-name="c-homepage__block-button" type="FETCH_DATA_SELECTION" payload="{
-                             dataset: 'dcatd',
-                             filters: {},
-                             view: 'CATALOG',
-                             page: 1
-                         }" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
-                        <div class-name="c-homepage__block-button" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
-                            <div class="o-btn--transparent">Datasetcatalogus</div>
-                            <div class="c-homepage__block-details">Blader door datasets (verzamelingen gegevens)</div>
-                        </div>
-                    </dp-link>
+                    <button class="c-homepage__block-button qa-dp-link" ng-click="vm.fetchDataSelection()" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
+                        <div class="o-btn--transparent">Datasetcatalogus</div>
+                        <div class="c-homepage__block-details">Blader door datasets (verzamelingen gegevens)</div>
+                    </button>
                     <dp-catalogus-themes></dp-catalogus-themes>
                 </div>
             </div>
@@ -61,11 +54,11 @@
             <div class="u-col-sm--3">
                 <!-- Link to straatbeeld -->
                 <div class="qa-straatbeeld-link">
-                    <dp-link
-                        type="FETCH_STRAATBEELD_BY_ID"
+                    <button
+                        ng-click="vm.openPanorama()"
                         ng-mouseenter="vm.panoramaLinkHover=true;"
                         ng-mouseleave="vm.panoramaLinkHover=false;"
-                        class-name="c-homepage__block c-homepage__block--right c-homepage__block--tall" payload="vm.fetchStraatbeeldPayload">
+                        class="c-homepage__block c-homepage__block--right c-homepage__block--tall">
                         <dp-video
                             src="'assets/video/panorama.mp4'"
                             poster="'assets/video/panorama.jpg'"
@@ -77,7 +70,7 @@
                             <div class="o-btn--transparent">Panoramabeelden</div>
                             <div class="c-homepage__block-details">Kijk rond ter plaatse</div>
                         </div>
-                    </dp-link>
+                    </button>
                 </div>
             </div>
         </div>
@@ -90,8 +83,8 @@
                             <dp-user-content-widget type="news" limit-to="3"></dp-user-content-widget>
                         </div>
                         <div class="u-padding__left--3 c-homepage__news-show-more">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'news'}"
+                            <dp-link type="SWITCH_PAGE"
+                                     payload="'NIEUWS'"
                                      >Nieuwsoverzicht</dp-link>
                         </div>
                     </div>
@@ -100,19 +93,19 @@
                     <div class="u-margin__left--1 c-homepage__news-instructions">
                         <h2 class="c-homepage__news-instructions-title">Instructies</h2>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'snelwegwijs'}"
-                                 >Bediening</dp-link>
+                            <dp-link type="SWITCH_PAGE"
+                                payload="'BEDIENING'"
+                                >Bediening</dp-link>
                         </div>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'info'}"
-                                 >Gegevens</dp-link>
+                            <dp-link type="SWITCH_PAGE"
+                                     payload="'GEGEVENS'"
+                                >Gegevens</dp-link>
                         </div>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'apis'}"
-                                 >API's</dp-link>
+                            <dp-link type="SWITCH_PAGE"
+                                     payload="'OVER_API'"
+                                >API's</dp-link>
                         </div>
                     </div>
                 </div>

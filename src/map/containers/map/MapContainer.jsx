@@ -14,9 +14,10 @@ import MapPreviewPanelContainer from '../../containers/preview-panel/MapPreviewP
 import MapEmbedButton from '../../components/map-embed-button/MapEmbedButton';
 
 import getEmbedLink from '../../ducks/embed/embed';
+import PAGES from '../../../pages';
 
 const mapStateToProps = (state) => ({
-  isFullscreen: state.ui.isMapFullscreen,
+  isFullscreen: state.ui.page === PAGES.KAART, // ROUTING_LOGIC
   drawMode: state.map.drawingMode,
   embedLink: getEmbedLink(state)
 });

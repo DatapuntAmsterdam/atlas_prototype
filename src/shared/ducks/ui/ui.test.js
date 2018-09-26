@@ -9,8 +9,9 @@ import UiReducer, {
   SHOW_PRINT,
   HIDE_PRINT,
   SHOW_EMBED_PREVIEW,
-  HIDE_EMBED_PREVIEW
+  HIDE_EMBED_PREVIEW, MAP_MODE
 } from './ui';
+import PAGES from '../../../pages';
 
 describe('UiReducer', () => {
   let state;
@@ -23,7 +24,10 @@ describe('UiReducer', () => {
     expect(state).toEqual({
       isMapPanelVisible: false,
       isMapPanelHandleVisible: true,
-      isMapFullscreen: false
+      isMapFullscreen: false,
+      mapMode: MAP_MODE.NORMAL,
+      page: PAGES.HOME,
+      prevPage: undefined
     });
   });
 
@@ -60,13 +64,17 @@ describe('UiReducer', () => {
     }));
     expect(newState).toEqual({
       ...state,
-      isMapFullscreen: true
+      isMapFullscreen: true,
+      prevPage: state.page,
+      page: PAGES.KAART
     });
     expect(UiReducer(newState, setMapFullscreen({
       isMapFullscreen: false
     }))).toEqual({
       ...state,
-      isMapFullscreen: false
+      isMapFullscreen: false,
+      prevPage: newState.page,
+      page: PAGES.HOME
     });
   });
 
@@ -132,11 +140,15 @@ describe('UiReducer', () => {
     const newState = UiReducer(state, toggleMapFullscreen());
     expect(newState).toEqual({
       ...state,
-      isMapFullscreen: true
+      isMapFullscreen: true,
+      page: PAGES.KAART,
+      prevPage: state.page
     });
     expect(UiReducer(newState, toggleMapFullscreen())).toEqual({
       ...state,
-      isMapFullscreen: false
+      isMapFullscreen: false,
+      page: PAGES.HOME,
+      prevPage: newState.page
     });
   });
 });

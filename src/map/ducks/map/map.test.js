@@ -1,7 +1,6 @@
 import reducer, {
   MAP_ADD_PANO_OVERLAY,
   MAP_REMOVE_PANO_OVERLAY,
-  mapClear,
   mapClearDrawing,
   mapEmptyGeometry,
   mapEndDrawing,
@@ -29,10 +28,6 @@ describe('Map Reducer', () => {
   };
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
-  });
-
-  it('should clear the map state', () => {
-    expect(reducer({ shapeMarkers: 2 }, mapClear())).toEqual(initialState);
   });
 
   it('should clear the map drawing when dispatching mapClearDrawing', () => {

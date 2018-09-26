@@ -1,3 +1,5 @@
+import { hideStraatbeeld, MAP_MODE, switchMode } from '../../../../src/shared/ducks/ui/ui';
+
 (function () {
     'use strict';
 
@@ -25,6 +27,7 @@
             restrict: 'E',
             scope: {
                 state: '=',
+                isFullscreen: '=',
                 resize: '<'
             },
             templateUrl: 'modules/straatbeeld/components/straatbeeld/straatbeeld.html',
@@ -75,6 +78,11 @@
                     payload: straatbeeldData
                 });
             }
+
+            scope.hideStraatbeeld = () => {
+                store.dispatch(switchMode(MAP_MODE.NORMAL));
+                store.dispatch(hideStraatbeeld());
+            };
 
             // We need to watch for object equality instead of reference
             // equality for both the `image` and `hotspots` object/array. This

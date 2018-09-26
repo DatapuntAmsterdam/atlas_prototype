@@ -32,6 +32,6 @@ function showPageReducer(state, payload) {
 
 const reducers = {};
 
-reducers[ACTIONS.SHOW_PAGE] = showPageReducer;
+reducers[ACTIONS.SHOW_PAGE] = showPageReducer; // TODO refactor, destroy page reducer
 
 export default reducers;

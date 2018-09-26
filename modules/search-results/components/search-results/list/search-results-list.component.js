@@ -1,3 +1,7 @@
+import ACTIONS from '../../../../../src/shared/actions';
+import PAGES from '../../../../../src/pages';
+import { switchPage } from '../../../../../src/shared/ducks/ui/ui';
+
 (function () {
     'use strict';
 
@@ -13,7 +17,9 @@
             controllerAs: 'vm'
         });
 
-    function DpSearchResultsListController () {
+    DpSearchResultsListController.$inject = ['store'];
+
+    function DpSearchResultsListController (store) {
         const STATUS_OBJECT_GEVORMD = 18;
 
         const vm = this;
@@ -44,6 +50,15 @@
 
                 return extraInfo;
             }
+        };
+
+        vm.openDetail = (endpoint) => {
+            // link.endpoint
+            store.dispatch({
+                type: ACTIONS.FETCH_DETAIL,
+                payload: endpoint
+            });
+            store.dispatch(switchPage(PAGES.KAART_DETAIL));
         };
     }
 })();

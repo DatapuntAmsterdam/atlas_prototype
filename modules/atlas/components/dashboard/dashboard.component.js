@@ -1,15 +1,10 @@
+import PAGES from '../../../../src/pages';
 import {
-    hideMapPanel,
+    hideMapPanel, MAP_MODE,
     showMapPanel
 } from '../../../../src/shared/ducks/ui/ui';
-import {
-    OPEN_MAP_PREVIEW_PANEL,
-    CLOSE_MAP_PREVIEW_PANEL
-} from '../../../../src/map/ducks/preview-panel/map-preview-panel';
 
 (function () {
-    'use strict';
-
     angular
         .module('atlas')
         .component('dpDashboard', {
@@ -22,15 +17,13 @@ import {
 
     function DpDashboardController ($window, $scope, $timeout, store, ACTIONS, dashboardColumns, HEADER) {
         const vm = this;
-        const endpointTypes = $window.mapPreviewPanelDetailEndpointTypes || {};
-
         vm.store = store;
 
         store.subscribe(setLayout);
         setLayout();
 
-        $scope.$watchGroup(['vm.isStraatbeeldActive', 'vm.straatbeeldHistory'], () => {
-            if (vm.isStraatbeeldActive) {
+        $scope.$watchGroup(['vm.mapMode'], () => {
+            if (vm.mapMode === MAP_MODE.PANORAMA) {
                 store.dispatch({ type: ACTIONS.MAP_ADD_PANO_OVERLAY, payload: store.getState().straatbeeld });
             } else {
                 $timeout(() => store.dispatch({ type: ACTIONS.MAP_REMOVE_PANO_OVERLAY }));
@@ -60,23 +53,6 @@ import {
             }
         });
 
-        // Open or close React `MapPreviewPanel` app
-        $scope.$watchGroup([
-            'vm.activity.mapPreviewPanel',
-            'vm.geosearchLocation',
-            'vm.detailEndpoint'
-        ], () => {
-            const detailActive = vm.detailEndpoint && Object
-                .keys(endpointTypes)
-                .some((typeKey) => vm.detailEndpoint.includes(endpointTypes[typeKey]));
-
-            if (vm.activity.mapPreviewPanel && (vm.geosearchLocation || detailActive)) {
-                store.dispatch({ type: OPEN_MAP_PREVIEW_PANEL });
-            } else {
-                store.dispatch({ type: CLOSE_MAP_PREVIEW_PANEL });
-            }
-        });
-
         function setLayout () { // eslint-disable-line complexity
             const state = store.getState();
 
@@ -84,10 +60,16 @@ import {
 
             vm.activity = dashboardColumns.determineActivity(state);
             vm.visibility = dashboardColumns.determineVisibility(state);
+            vm.columnSizes = dashboardColumns.determineColumnSizes(state);
 
+            vm.isHomePage = state.ui.page === PAGES.HOME;
+            vm.isHomePageActive = vm.isHomePage;
+
+            //
+            // Previous logic
+            //
             vm.hasMaxWidth = vm.visibility.page;
-            vm.isHomePageActive = state.page && state.page.name === 'home';
-            vm.isHomePage = vm.visibility.page && vm.isHomePageActive;
+
             vm.headerSize = vm.isHomePage ? HEADER.SIZE.TALL : HEADER.SIZE.SHORT;
             vm.pageType = state.page && state.page.type ? state.page.type : '';
 
@@ -96,23 +78,17 @@ import {
             vm.isEmbed = state.ui.isEmbed;
             vm.isPrintOrEmbedOrPreview = dashboardColumns.isPrintOrEmbedOrPreview(state);
 
-            vm.dataSelectionState = state.dataSelection;
-
             vm.isRightColumnScrollable =
                 vm.visibility.page ||
                 vm.visibility.detail ||
                 vm.visibility.searchResults ||
                 vm.visibility.dataSelection;
 
-            vm.columnSizes = dashboardColumns.determineColumnSizes(state);
-
             vm.isFullHeight = !vm.isRightColumnScrollable || vm.columnSizes.right < 12;
 
-            vm.isMapFullscreen = Boolean(vm.visibility.map && state.ui.isMapFullscreen);
-            vm.isStraatbeeldActive = Boolean(state.straatbeeld);
-            vm.straatbeeldHistory = vm.isStraatbeeldActive ? state.straatbeeld.history : null;
+            vm.mapMode = state.ui.mapMode;
             vm.geosearchLocation = state.search && state.search.location && state.search.location.toString();
-            vm.detailEndpoint = state.detail && state.detail.endpoint;
+            vm.detailEndpoint = state.detail && state.detail.endpoint; // TODO remove? Seems useless
         }
     }
 })();

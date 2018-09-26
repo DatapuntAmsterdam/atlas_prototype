@@ -50,7 +50,9 @@ describe('The state url conversion definition', () => {
             isMapLayersVisible: true,
             isMapPanelVisible: false,
             isMapPanelHandleVisible: true,
-            isPrintMode: false
+            isPrintMode: false,
+            page: 'HOME',
+            mapMode: 'NORMAL'
           }
         });
 

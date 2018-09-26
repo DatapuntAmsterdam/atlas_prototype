@@ -109,5 +109,3 @@ export default async function fetchDetail(endpoint, user) {
     endpointType: endpointTypeForResult
   };
 }
-
-window.mapPreviewPanelDetailEndpointTypes = endpointTypes;

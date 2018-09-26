@@ -203,7 +203,6 @@ import '../modules/straatbeeld/straatbeeld.vendor';
 
 // The mocks
 import 'angular-mocks';
-import '../modules/shared/components/button/button.component.mock';
 import '../modules/shared/components/link/link.component.mock';
 
 // All our modules' javascript tests
@@ -340,7 +339,6 @@ import '../modules/shared/services/environment/environment.factory.test';
 import '../modules/shared/filters/filesize.filter.test';
 import '../modules/shared/services/combined-document-title/combined-document-title.factory.test';
 import '../modules/atlas/components/preview-state/preview-state.directive.test';
-import '../modules/atlas/components/dashboard/dashboard-columns.factory.test';
 import '../modules/atlas/components/dashboard/dashboard.component.test';
 import '../modules/atlas/components/dashboard/synchronisation/map.controller.test';
 import '../modules/atlas/components/dashboard/synchronisation/search-results.controller.test';

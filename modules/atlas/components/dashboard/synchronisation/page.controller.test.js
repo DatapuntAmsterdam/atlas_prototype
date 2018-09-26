@@ -1,3 +1,5 @@
+import PAGES from '../../../../../src/pages';
+
 describe('The page controller', function () {
     var $controller,
         $rootScope,
@@ -26,8 +28,8 @@ describe('The page controller', function () {
         });
 
         mockedState = {
-            page: {
-                name: 'about-atlas'
+            ui: {
+                page: PAGES.HOME
             }
         };
 
@@ -60,6 +62,6 @@ describe('The page controller', function () {
 
         controller = getController();
 
-        expect(controller.pageName).toBe('about-atlas');
+        expect(controller.pageName).toBe('home');
     });
 });

@@ -1,16 +1,15 @@
 <div class="qa-straatbeeld-thumbnail">
     <h3 class="o-header__subtitle u-margin__bottom--1">Panoramabeeld</h3>
 
-    <dp-link ng-if="vm.hasThumbnail"
-             type="FETCH_STRAATBEELD_BY_ID"
-             payload="vm.payload"
-             class-name="u-block u-width-100 u-margin__bottom--4"
+    <button ng-if="vm.hasThumbnail"
+             ng-click="vm.openThumbnailPage()"
+             class="u-block u-width-100 u-margin__bottom--4"
              hover-text="Panoramabeeld tonen">
         <div class="u-aspect-ratio u-aspect-ratio--16-9">
             <img class="c-straatbeeld-thumbnail--img"
                  ng-if="!vm.isLoading" ng-src="{{vm.imageUrl}}" alt="Panoramabeeld tonen">
         </div>
-    </dp-link>
+    </button>
 
     <div class="qa-found-no-straatbeeld" ng-if="!vm.isLoading && !vm.hasThumbnail">
         <dp-panel is-panel-visible="true" type="warning" can-close="true">

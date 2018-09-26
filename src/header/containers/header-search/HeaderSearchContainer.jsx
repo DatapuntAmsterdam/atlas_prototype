@@ -17,6 +17,8 @@ import emptyFilters from '../../../shared/ducks/filters/filters';
 import AutoSuggest from '../../components/auto-suggest/AutoSuggest';
 import piwikTracker from '../../../shared/services/piwik-tracker/piwik-tracker';
 import SHARED_CONFIG from '../../../shared/services/shared-config/shared-config';
+import { switchPage } from '../../../shared/ducks/ui/ui';
+import PAGES from '../../../pages';
 
 const mapStateToProps = (state) => ({
   activeSuggestion: state.autoSuggest.activeSuggestion,
@@ -30,14 +32,30 @@ const mapStateToProps = (state) => ({
   typedQuery: state.autoSuggest.typedQuery
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  onCleanDatasetOverview: emptyFilters,
-  onDatasetSearch: fetchDataSelection,
-  onDetailLoad: fetchDetail,
-  onGetSuggestions: getSuggestions,
-  onSearch: fetchSearchResultsByQuery,
-  onSuggestionActivate: setActiveSuggestion
-}, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    onCleanDatasetOverview: emptyFilters,
+    onDatasetSearch: fetchDataSelection,
+    onGetSuggestions: getSuggestions,
+    onSuggestionActivate: setActiveSuggestion
+  }, dispatch),
+  onSearch: (payload) => {
+    // Called on general search (by pressing enter or search button)
+    dispatch(fetchSearchResultsByQuery(payload));
+    return dispatch(switchPage(PAGES.SEARCH_DATA));
+  },
+  onDetailLoad: (category, payload) => {
+    // Called when search suggestion is selected
+    dispatch(fetchDetail(payload));
+
+    switch (category) {
+      case 'Datasets':
+        return dispatch(switchPage(PAGES.DATASETS_DETAIL));
+      default:
+        return dispatch(switchPage(PAGES.KAART_DETAIL));
+    }
+  }
+});
 
 class HeaderSearchContainer extends React.Component {
   constructor(props) {
@@ -113,7 +131,7 @@ class HeaderSearchContainer extends React.Component {
       // (webpack overrides the data it seems)
       newWindow.window.suggestionToLoadUri = suggestion.uri;
     } else {
-      onDetailLoad(`${SHARED_CONFIG.API_ROOT}${suggestion.uri}`);
+      onDetailLoad(suggestion.category, `${SHARED_CONFIG.API_ROOT}${suggestion.uri}`);
     }
   }
 

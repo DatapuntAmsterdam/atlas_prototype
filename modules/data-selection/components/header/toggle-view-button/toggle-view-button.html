@@ -1,5 +1,4 @@
-<dp-link
-    type="SET_DATA_SELECTION_VIEW"
-    payload="vm.targetView"
-    hover-text="{{vm.targetHover}}"
-    class-name="o-btn c-toggle-view-button">{{vm.targetLabel}}</dp-link>
+<button
+    ng-click="vm.onClick()"
+    title="{{vm.targetHover}}"
+    class="o-btn c-toggle-view-button qa-dp-link">{{vm.targetLabel}}</button>

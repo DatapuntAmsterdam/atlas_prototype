@@ -12,13 +12,15 @@ const initialState = {
                   // }
   hotspots: [],   // eg: [{id: 'ABC124', heading: 90, distance: 18}],
   date: null,     // eg: new Date()
-  isFullscreen: false,
+  isFullscreen: false, // TODO: remove, no longer used
   isInitial: true,
   isLoading: true
 };
 
 export default function StraatbeeldReducer(state = initialState, action) {
   switch (action.type) {
+    case 'HIDE_STRAATBEELD': // TODO REMOVE HACK
+      return null;
     case STRAATBEELD_OFF:
       return null;
 

@@ -1,20 +1,25 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { maximizeMapPreviewPanel, closeMapPreviewPanel, fetchSearchResults }
+import { closeMapPreviewPanel, fetchSearchResults }
   from '../../ducks/preview-panel/map-preview-panel';
 import { selectLatestMapSearchResults }
   from '../../ducks/search-results/map-search-results';
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { selectLatestMapDetail } from '../../ducks/detail/map-detail';
-import { toggleMapFullscreen } from '../../../shared/ducks/ui/ui';
+import {
+  MAP_MODE,
+  switchMode,
+  switchPage
+} from '../../../shared/ducks/ui/ui';
 import { fetchStraatbeeldById } from '../../ducks/straatbeeld/straatbeeld';
 import { fetchDetail as legacyFetchDetail } from '../../../reducers/deprecated/details';
 import MapPreviewPanel from './MapPreviewPanel';
+import PAGES from '../../../pages';
 
 
 const mapStateToProps = (state) => ({
-  isMapPreviewPanelVisible: state.isMapPreviewPanelVisible,
+  isMapPreviewPanelVisible: state.isMapPreviewPanelVisible && state.ui.page === PAGES.KAART,
   mapClickLocation: state.mapClickLocation,
   pano: state.pano,
   results: selectLatestMapSearchResults(state),
@@ -34,14 +39,28 @@ const mapStateToProps = (state) => ({
   isEmbed: state.ui && (state.ui.isEmbed || state.ui.isEmbedPreview)
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  onSearch: fetchSearchResults,
-  onMapPreviewPanelClose: closeMapPreviewPanel,
-  onMapPreviewPanelMaximize: maximizeMapPreviewPanel,
-  onMapSearchResultsItemClick: legacyFetchDetail,
-  onOpenPanoById: fetchStraatbeeldById,
-  closeMapFullScreen: toggleMapFullscreen
-}, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    onSearch: fetchSearchResults,
+    onMapPreviewPanelClose: closeMapPreviewPanel,
+    onMapSearchResultsItemClick: legacyFetchDetail
+  }, dispatch),
+  closeMapFullScreen: () => dispatch(switchPage(PAGES.KAART)),
+  maximizeDetail: () => {
+    dispatch(closeMapPreviewPanel());
+    return dispatch(switchPage(PAGES.KAART_DETAIL));
+  },
+  maximizeSearch: () => {
+    dispatch(closeMapPreviewPanel());
+    return dispatch(switchPage(PAGES.KAART_SEARCH));
+  },
+  onOpenPanoById: (payload) => {
+    dispatch(closeMapPreviewPanel());
+    dispatch(fetchStraatbeeldById(payload));
+    dispatch(switchMode(MAP_MODE.PANORAMA));
+    return dispatch(switchPage(PAGES.KAART_PANORAMA));
+  }
+});
 
 /* eslint-enable react/no-unused-prop-types */
 export default connect(mapStateToProps, mapDispatchToProps)(MapPreviewPanel);

@@ -1,3 +1,7 @@
+import ACTIONS from '../../../../src/shared/actions';
+import { switchPage } from '../../../../src/shared/ducks/ui/ui';
+import PAGES from '../../../../src/pages';
+
 (function () {
     'use strict';
 
@@ -14,9 +18,9 @@
             controllerAs: 'vm'
         });
 
-    DpTabHeaderController.$inject = [];
+    DpTabHeaderController.$inject = ['store'];
 
-    function DpTabHeaderController () {
+    function DpTabHeaderController (store) {
         const vm = this;
 
         // show the tabHeader when any searchText is set and all counts are known
@@ -30,5 +34,21 @@
 
         // Return the active tab of the tabHeader
         vm.activeTab = vm.tabHeader.tabs.find(tab => tab.isActive);
+
+        vm.onTabClick = (tab) => {
+            // Mimic old dp-link behavior
+            const action = {
+                type: ACTIONS[tab.action] || tab.action,
+                payload: tab.payload
+            };
+            store.dispatch(action);
+
+            // Depending on tab label, switch to one page or another
+            if (tab.id === 'datasets') {
+                store.dispatch(switchPage(PAGES.SEARCH_DATASETS));
+            } else if (tab.id === 'data') {
+                store.dispatch(switchPage(PAGES.SEARCH_DATA));
+            }
+        };
     }
 })();

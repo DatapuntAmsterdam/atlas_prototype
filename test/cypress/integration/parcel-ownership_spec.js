@@ -89,7 +89,7 @@ describe('parcel-ownership (eigendommen) module', () => {
 
     describe('user should be able to navigate to the eigendommen detail view', () => {
       it('should open the correct detail view', () => {
-        const route = '/#?dsd=brk&dsp=1&dsv=TABLE&dsf=eigenaar_type::Appartementseigenaar:stadsdeel_naam::Centrum:eigenaar_cat::Woningbouwcorporaties:ggw_naam::Centrum-Oost&mpb=topografie&mpz=8&mpv=52.3547489:4.9036586';
+        const route = '/#?dsd=brk&dsp=1&dsv=TABLE&dsf=eigenaar_type::Appartementseigenaar:stadsdeel_naam::Centrum:eigenaar_cat::Woningbouwcorporaties:ggw_naam::Centrum-Oost&mpb=topografie&mpz=8&mpv=52.3547489:4.9036586&upg=DATASETS';
 
         cy.visit(route);
         cy.wait('@getDataselectieBrk');
@@ -104,7 +104,7 @@ describe('parcel-ownership (eigendommen) module', () => {
 
     describe('user should be able to add a filter', () => {
       it('should add the filter to the active filters and filter the results', () => {
-        const route = '/#?dsd=brk&dsp=1&dsv=TABLE&dsf=eigenaar_type::Appartementseigenaar:stadsdeel_naam::Centrum:eigenaar_cat::Woningbouwcorporaties:ggw_naam::Centrum-Oost&mpb=topografie&mpz=8&mpv=52.3547489:4.9036587';
+        const route = '/#?dsd=brk&dsp=1&dsv=TABLE&dsf=eigenaar_type::Appartementseigenaar:stadsdeel_naam::Centrum:eigenaar_cat::Woningbouwcorporaties:ggw_naam::Centrum-Oost&mpb=topografie&mpz=8&mpv=52.3547489:4.9036587&upg=DATASETS';
 
         cy.visit(route);
         cy.wait('@getDataselectieBrk');
@@ -156,7 +156,7 @@ describe('parcel-ownership (eigendommen) module', () => {
 
     describe('user should be able to view a parcel in the leaflet map', () => {
       it('should open the detail view with a leaflet map and a cursor', () => {
-        const route = '/#?dte=brk%2Fobject%2FNL.KAD.OnroerendeZaak.11430433270000%2F&mpb=topografie&mpz=13&mpv=52.3675111:4.9375494';
+        const route = '/#?dte=brk%2Fobject%2FNL.KAD.OnroerendeZaak.11430433270000%2F&mpb=topografie&mpz=13&mpv=52.3675111:4.9375494&upg=KAART_DETAIL';
 
         // open the detail
         cy.visit(route);

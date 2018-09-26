@@ -8,11 +8,9 @@ import isEqual from 'lodash.isequal';
 import DrawTool from '../../components/draw-tool/DrawTool';
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 
-import { mapClearDrawing, mapEmptyGeometry, mapUpdateShape, mapStartDrawing, mapEndDrawing, mapClear } from '../../ducks/map/map';
+import { mapClearDrawing, mapEmptyGeometry, mapUpdateShape, mapStartDrawing, mapEndDrawing } from '../../ducks/map/map';
 import { setDataSelectionGeometryFilter, resetDataSelectionGeometryFilter } from '../../../shared/ducks/data-selection/data-selection';
 import { setPageName } from '../../../shared/ducks/page/page';
-import { setMapFullscreen } from '../../../shared/ducks/ui/ui';
-import { setStraatbeeldOff } from '../../../shared/ducks/straatbeeld/straatbeeld';
 
 import {
   cancel,
@@ -22,6 +20,8 @@ import {
   isEnabled
 } from '../../services/draw-tool/draw-tool';
 import toggleDrawing from '../../services/draw-tool/draw-tool-toggle';
+import { switchPage } from '../../../shared/ducks/ui/ui';
+import PAGES from '../../../pages';
 
 const mapStateToProps = (state) => ({
   drawingMode: state.map.drawingMode,
@@ -33,19 +33,23 @@ const mapStateToProps = (state) => ({
   uiMapFullscreen: state.ui.isMapFullscreen
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  onClearDrawing: mapClearDrawing,
-  onEmptyGeometry: mapEmptyGeometry,
-  onMapUpdateShape: mapUpdateShape,
-  setGeometryFilter: setDataSelectionGeometryFilter,
-  resetGeometryFilter: resetDataSelectionGeometryFilter,
-  onStartDrawing: mapStartDrawing,
-  onEndDrawing: mapEndDrawing,
-  onMapClear: mapClear,
-  onSetPageName: setPageName,
-  onSetMapFullscreen: setMapFullscreen,
-  onStraatbeeldOff: setStraatbeeldOff
-}, dispatch);
+
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    onClearDrawing: mapClearDrawing,
+    onEmptyGeometry: mapEmptyGeometry,
+    onMapUpdateShape: mapUpdateShape,
+    setGeometryFilter: setDataSelectionGeometryFilter,
+    resetGeometryFilter: resetDataSelectionGeometryFilter,
+    onStartDrawing: mapStartDrawing,
+    mapClearDrawing,
+    onSetPageName: setPageName
+  }, dispatch),
+  onEndDrawing: (payload) => {
+    dispatch(switchPage(PAGES.KAART_ADRESSSEN));
+    dispatch(mapEndDrawing(payload));
+  }
+});
 
 // TODO: Get all business logic out of this file, probably to Redux!
 class DrawToolContainer extends React.Component {
@@ -82,13 +86,6 @@ class DrawToolContainer extends React.Component {
       this.setState({ previousMarkers: [...markers] });
     }
 
-    if (!props.dataSelection && props.geometry && props.geometry.length === 0 &&
-      props.drawingMode !== drawToolConfig.DRAWING_MODE.DRAW) {
-      // if dataSelection and geometry are empty then remove the drawn polygon
-      this.props.onEndDrawing();
-      this.props.setPolygon([]);
-    }
-
     if (this.state.drawingMode !== props.drawingMode) {
       if (props.drawingMode === drawToolConfig.DRAWING_MODE.NONE) {
         // after drawing mode has changed the draw tool should be cancelled after navigating
@@ -104,7 +101,7 @@ class DrawToolContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.onMapClear();
+    this.props.mapClearDrawing();
   }
 
   onFinishShape(polygon) {
@@ -117,11 +114,8 @@ class DrawToolContainer extends React.Component {
         description: `${polygon.distanceTxt} en ${polygon.areaTxt}`
       });
 
-      this.props.onStraatbeeldOff();
       this.props.onEndDrawing({ polygon });
       this.props.onSetPageName({ name: null });
-
-      this.props.onSetMapFullscreen({ isMapFullscreen: false });
     } else if (has2Markers) {
       this.props.onEndDrawing({ polygon });
     }
@@ -198,9 +192,7 @@ DrawToolContainer.propTypes = {
   onStartDrawing: PropTypes.func.isRequired,
   onEndDrawing: PropTypes.func.isRequired,
   onSetPageName: PropTypes.func.isRequired,
-  onSetMapFullscreen: PropTypes.func.isRequired,
-  onStraatbeeldOff: PropTypes.func.isRequired,
-  onMapClear: PropTypes.func.isRequired
+  mapClearDrawing: PropTypes.func.isRequired
 };
 
 DrawToolContainer.defaultProps = {

@@ -1,3 +1,5 @@
+import PAGES from '../../../../../src/pages';
+
 (function () {
     'use strict';
 
@@ -16,6 +18,7 @@
         function update () {
             var state = store.getState();
             vm.straatbeeldState = state.straatbeeld;
+            vm.isFullscreen = state.ui.page === PAGES.PANORAMA;
         }
     }
 })();

@@ -21,6 +21,7 @@ $show-more-height: 70px;
   background-color: $secondary-gray4;
   background-position: center center;
   background-size: cover;
+  text-align: left;
   overflow: hidden;
   box-sizing: border-box;
   background-origin: border-box;
@@ -142,6 +143,7 @@ $show-more-height: 70px;
   padding-left: 2 * $base-whitespace;
   transition: transform .2s;
   background-color: $secondary-gray4;
+  text-align: left;
   text-decoration: none;
   z-index: 10;
 

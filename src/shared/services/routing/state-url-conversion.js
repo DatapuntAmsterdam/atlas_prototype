@@ -254,7 +254,9 @@ export default {
       isMapLayersVisible: true,
       isMapPanelVisible: false,
       isMapPanelHandleVisible: true,
-      isPrintMode: false
+      isPrintMode: false,
+      page: 'HOME',
+      mapMode: 'NORMAL'
     }
   },
   stateVariables: {
@@ -414,6 +416,18 @@ export default {
     uvm: {
       name: 'ui.isMapPanelVisible',
       type: 'boolean'
+    },
+    upg: {
+      name: 'ui.page',
+      type: 'string'
+    },
+    upp: {
+      name: 'ui.prevPage',
+      type: 'string'
+    },
+    umm: {
+      name: 'ui.mapMode',
+      type: 'string'
     }
   }
 };
