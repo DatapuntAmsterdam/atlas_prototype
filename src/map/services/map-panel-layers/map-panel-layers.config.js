@@ -1982,5 +1982,74 @@ export default [
     minZoom: 8,
     title: 'Grondexploitaties - Stadsdelen',
     url: '/maps/grondexploitatie?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Geografie: onroerende zaken',
+    legendItems: [
+      {
+        id: 'egga',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Gemeente Amsterdam'
+      },
+      {
+        id: 'egog',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Overige gemeenten'
+      },
+      {
+        id: 'egst',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Staat'
+      },
+      {
+        id: 'egpr',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Provincies'
+      },
+      {
+        id: 'egwa',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Waterschappen'
+      },
+      {
+        id: 'egwo',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Woningbouwcorporaties'
+      },
+      {
+        id: 'egve',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Verenigingen van eigenaren'
+      },
+      {
+        id: 'egsp',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Spoorwegen/ProRail'
+      },
+      {
+        id: 'egnnp',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Overige niet-natuurlijke personen'
+      },
+      {
+        id: 'egnp',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Overig natuurlijke personen'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Eigendommen',
+    url: '/maps/eigendommen?version=1.3.0&service=WMS'
   }
 ];
