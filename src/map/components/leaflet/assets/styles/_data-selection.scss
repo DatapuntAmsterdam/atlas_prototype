@@ -34,6 +34,7 @@
     background-image: url("assets/images/map/data-selection/cluster-zoomed-in-1.svg");
 
     .data-selection-cluster__text {
+      margin-left: -1.5px;
       line-height: 21px;
     }
   }
@@ -66,6 +67,8 @@
     background-image: url("assets/images/map/data-selection/cluster-zoomed-out-1.svg");
 
     .data-selection-cluster__text {
+      margin-left: -1px;
+      margin-top: -.5px;
       line-height: 15px;
     }
   }
