@@ -103,6 +103,85 @@ export default [
     category: 'Geografie: onroerende zaken',
     legendItems: [
       {
+        id: 'egga',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Gemeente Amsterdam',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-1.svg'
+      },
+      {
+        id: 'egog',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Overige gemeenten',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-2.svg'
+      },
+      {
+        id: 'egst',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Staat',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-3.svg'
+      },
+      {
+        id: 'egpr',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Provincies',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-4.svg'
+      },
+      {
+        id: 'egwa',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Waterschappen',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-5.svg'
+      },
+      {
+        id: 'egwo',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Woningbouwcorporaties',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-6.svg'
+      },
+      {
+        id: 'egve',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Verenigingen van eigenaren',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-7.svg'
+      },
+      {
+        id: 'egsp',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Spoorwegen/ProRail',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-8.svg'
+      },
+      {
+        id: 'egnnp',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Overige niet-natuurlijke personen',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-9.svg'
+      },
+      {
+        id: 'egnp',
+        layer: 'eigendommen',
+        selectable: true,
+        title: 'Overige natuurlijke personen',
+        iconUrl: 'assets/images/map-legend/icon-egdm-cat-10.svg'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Kadastrale eigenaren',
+    url: '/maps/eigendommen?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Geografie: onroerende zaken',
+    legendItems: [
+      {
         id: 'gbvv',
         layer: 'beperking-VV',
         selectable: true,
@@ -1982,74 +2061,5 @@ export default [
     minZoom: 8,
     title: 'Grondexploitaties - Stadsdelen',
     url: '/maps/grondexploitatie?version=1.3.0&service=WMS'
-  },
-  {
-    category: 'Geografie: onroerende zaken',
-    legendItems: [
-      {
-        id: 'egga',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Gemeente Amsterdam'
-      },
-      {
-        id: 'egog',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Overige gemeenten'
-      },
-      {
-        id: 'egst',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Staat'
-      },
-      {
-        id: 'egpr',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Provincies'
-      },
-      {
-        id: 'egwa',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Waterschappen'
-      },
-      {
-        id: 'egwo',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Woningbouwcorporaties'
-      },
-      {
-        id: 'egve',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Verenigingen van eigenaren'
-      },
-      {
-        id: 'egsp',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Spoorwegen/ProRail'
-      },
-      {
-        id: 'egnnp',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Overige niet-natuurlijke personen'
-      },
-      {
-        id: 'egnp',
-        layer: 'eigendommen',
-        selectable: true,
-        title: 'Overig natuurlijke personen'
-      }
-    ],
-    maxZoom: 16,
-    minZoom: 8,
-    title: 'Eigendommen',
-    url: '/maps/eigendommen?version=1.3.0&service=WMS'
   }
 ];
