@@ -589,5 +589,56 @@ export default [
     id: 'pano2020',
     url: 'maps/panorama',
     layers: ['panorama_recent_2020']
+  },
+  // Eigendommen
+  {
+    id: 'egga',
+    url: 'maps/eigendommen?categorie=1',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egog',
+    url: 'maps/eigendommen?categorie=2',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egst',
+    url: 'maps/eigendommen?categorie=3',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egpr',
+    url: 'maps/eigendommen?categorie=4',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egwa',
+    url: 'maps/eigendommen?categorie=5',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egwo',
+    url: 'maps/eigendommen?categorie=6',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egve',
+    url: 'maps/eigendommen?categorie=7',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egsp',
+    url: 'maps/eigendommen?categorie=8',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egnnp',
+    url: 'maps/eigendommen?categorie=9',
+    layers: ['eigendommen']
+  },
+  {
+    id: 'egnp',
+    url: 'maps/eigendommen?categorie=10',
+    layers: ['eigendommen']
   }
 ];
