@@ -7,7 +7,7 @@ function getOptions(propertyType) {
       const index = propertyType.enum[i].indexOf(':');
       return {
         id: index === -1 ? propertyType.enum[i] : propertyType.enum[i].substring(index + 1),
-        label: propertyType.enumNames[i]
+        label: (propertyType.enumNames[i]) ? propertyType.enumNames[i] : 'Anders'
       };
     }
   );
@@ -18,6 +18,7 @@ function getCatalogFilters(data) {
   const themaProperties = dcatDocProperties['dcat:theme'].items;
   const distributionProperties = dcatDocProperties['dcat:distribution'].items.properties;
   const ownerProperties = dcatDocProperties['ams:owner'].examples;
+
   const catalogFilters = {
     groupTypes: getOptions(themaProperties),
     formatTypes: getOptions(distributionProperties['dct:format']),

@@ -15,10 +15,10 @@
                             </div>
 
                             <div class="resources-item__description">
-                                <span class="c-data-selection-file-type
-                                             c-data-selection-file-type__name
-                                             c-data-selection-file-type__format-{{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes| lowercase }}">
-                                    <span ng-if="resource['dct:format']">{{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes}}</span>
+                                <span ng-if="resource['ams:distributionType'] !== 'web'">
+                                    <span class="c-data-selection-file-type
+                                                 c-data-selection-file-type__name
+                                                 c-data-selection-file-type__format-{{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes| lowercase }}">{{(resource['dct:format']) ? resource['dct:format'] : 'n/a' | optionLabel: vm.catalogFilters.formatTypes}}</span>
                                 </span>
                                 <div>{{ resource['dct:description'] ? vm.stripMarkdown(resource['dct:description']) : resource['dcat:accessURL'] }}</div>
                             </div>
