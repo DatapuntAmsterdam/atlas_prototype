@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import { routing } from '../../../../src/app/routes';
 
 (function () {
     'use strict';
@@ -19,6 +20,8 @@ import ReactDOM from 'react-dom';
         const render = $window.render;
         const homepageAddressBlockWrapper = $window.HomepageAddressBlockWrapper;
         let homepageAddressBlockWrapperContainer;
+
+        vm.routing = routing;
 
         vm.fetchStraatbeeldPayload = angular.merge(
             {},

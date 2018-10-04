@@ -6,7 +6,8 @@ import {
   getMapOverlays,
   getMapZoom,
   getMarkers,
-  getRdGeoJsons
+  getRdGeoJsons,
+  getSelectedLocation
 } from './map-selectors';
 
 import {
@@ -14,9 +15,9 @@ import {
   getDataSelection,
   getMarkers as getDataSelectionMarkers
 } from '../data-selection/data-selection';
-import { getSearchMarker } from '../search-results/map-search-results';
 import { getStraatbeeldLocation, getStraatbeeldMarkers } from '../straatbeeld/straatbeeld';
 import { getGeoJson as getDetailGeoJson } from '../detail/map-detail';
+import { geoSearchType } from '../../components/leaflet/services/icons.constant';
 
 jest.mock('../data-selection/data-selection');
 jest.mock('../search-results/map-search-results');
@@ -27,7 +28,8 @@ describe('Map Selectors', () => {
     baseLayer: 'baseLayer',
     viewCenter: true,
     overlays: [{ overlay: '' }],
-    zoom: 2
+    zoom: 2,
+    selectedLocation: '123,456'
   };
   const straatbeeld = {
     location: 'sss'
@@ -71,6 +73,12 @@ describe('Map Selectors', () => {
     });
   });
 
+  describe('getSelectedLocation', () => {
+    it('should return mapClickLocation', () => {
+      expect(getSelectedLocation(state)).toEqual({ lat: 123, lng: 456 });
+    });
+  });
+
   describe('getMarkers selector', () => {
     it('should call getDataSelectionMarkers when dataSelection is true', () => {
       getDataSelection.mockImplementation(() => true);
@@ -80,12 +88,11 @@ describe('Map Selectors', () => {
 
     it('should return searchMarker and straatbeeldMarker data', () => {
       getDataSelection.mockImplementation(() => false);
-      getSearchMarker.mockImplementation(() => ['getSearchMarkerData']);
       getStraatbeeldMarkers.mockImplementation(() => ['getStraatbeeldMarkersData']);
       expect(getMarkers({
         ...state,
         some: 'state' // force the state to change so it clears the cache
-      })).toEqual(['getSearchMarkerData', 'getStraatbeeldMarkersData']);
+      })).toEqual([{ position: [123, 456], type: geoSearchType }, 'getStraatbeeldMarkersData']);
     });
   });
 });

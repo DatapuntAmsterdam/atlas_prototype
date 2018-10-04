@@ -1,3 +1,5 @@
+import getContents from '../../../../src/shared/services/google-sheet/google.sheet';
+
 (function () {
     'use strict';
 
@@ -14,27 +16,23 @@
             controllerAs: 'vm'
         });
 
-    DpPageComponent.inject = ['$scope', 'googleSheet'];
+    DpPageComponent.inject = ['$scope'];
 
-    function DpPageComponent ($scope, googleSheet) {
+    function DpPageComponent ($scope) {
         const vm = this;
 
         vm.feed = null;
         vm.entries = [];
         vm.entry = null;
 
-        $scope.$watchGroup(['vm.type', 'vm.item'], () => {
-            if (vm.type) {
-                vm.feed = null;
-                vm.entries = [];
-                vm.entry = null;
-                googleSheet.getContents(vm.type)
-                    .then(contents => {
-                        vm.feed = contents.feed;
-                        vm.entries = contents.entries;
-                        vm.entry = vm.entries.find(entry => entry.id === vm.item);
-                    });
-            }
-        });
+        if (vm.type) {
+            getContents(vm.type)
+                .then(contents => {
+                    vm.feed = contents.feed;
+                    vm.entries = contents.entries;
+                    vm.entry = vm.entries.find(entry => entry.id === vm.item);
+                    $scope.$digest();
+                });
+        }
     }
 })();

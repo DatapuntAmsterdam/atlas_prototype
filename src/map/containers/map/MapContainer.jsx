@@ -44,13 +44,6 @@ class MapContainer extends React.Component {
         <LeafletContainer
           getLeafletInstance={this.setLeafletInstance}
         />
-        {
-          this.state.leafletInstance && (
-            <DrawTool
-              leafletInstance={this.state.leafletInstance}
-            />
-          )
-        }
         <ToggleFullscreen
           isFullscreen={this.props.isFullscreen}
           onToggleFullscreen={this.props.onToggleFullscreen}

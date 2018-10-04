@@ -10,10 +10,9 @@ import reducer, {
   setMapBaseLayer,
   toggleMapOverlay,
   toggleMapOverlayVisibility,
-  updateBoundingBox,
-  updatePan,
-  updateZoom
+  updateBoundingBox
 } from './map';
+import { routing } from '../../../app/routes';
 
 describe('Map Reducer', () => {
   const initialState = {
@@ -25,7 +24,8 @@ describe('Map Reducer', () => {
     shapeDistanceTxt: '',
     shapeMarkers: 0,
     viewCenter: [52.3731081, 4.8932945],
-    zoom: 11
+    zoom: 11,
+    selectedLocation: null
   };
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
@@ -111,35 +111,16 @@ describe('Map Reducer', () => {
         123, 321
       ]
     };
-    expect(reducer({}, updateZoom({
-      zoom: 1,
-      center: {
-        lat: 123,
-        lng: 321
+    expect(reducer({}, {
+      type: routing.map.type,
+      meta: {
+        query: {
+          zoom: 1,
+          lat: 123,
+          lng: 321
+        }
       }
-    }, true))).toEqual(expectedResult);
-
-    expect(reducer({}, updateZoom({
-      zoom: 1,
-      center: {
-        lat: 123,
-        lng: 321
-      }
-    }, true))).toEqual(expectedResult);
-  });
-
-  it('should set the viewCenter when dispatching updatePan', () => {
-    const expectedResult = {
-      viewCenter: [
-        123, 321
-      ]
-    };
-    expect(reducer({}, updatePan({
-      center: {
-        lat: 123,
-        lng: 321
-      }
-    }, true))).toEqual(expectedResult);
+    })).toEqual(expectedResult);
   });
 
   it('should set the boundingBox state when dispatching updateBoundingBox', () => {

@@ -75,9 +75,9 @@ describe('The dp-data-selection-header', () => {
         });
 
         mockedInputTable = {
+            dataset: 'bag',
+            view: 'TABLE',
             state: {
-                dataset: 'bag',
-                view: 'TABLE',
                 geometryFilter: {
                     markers: [],
                     description: 'geometryFilter description'
@@ -99,9 +99,9 @@ describe('The dp-data-selection-header', () => {
         };
 
         mockedInputList = {
+            dataset: 'hr',
+            view: 'LIST',
             state: {
-                dataset: 'hr',
-                view: 'LIST',
                 geometryFilter: {
                     markers: [],
                     description: 'geometryFilter description'
@@ -115,9 +115,9 @@ describe('The dp-data-selection-header', () => {
         };
 
         mockedInputCatalog = {
+            dataset: 'dcatd',
+            view: 'CATALOG',
             state: {
-                dataset: 'dcatd',
-                view: 'CATALOG',
                 geometryFilter: {
                     markers: [],
                     description: 'geometryFilter description'
@@ -142,6 +142,8 @@ describe('The dp-data-selection-header', () => {
         element.setAttribute('available-filters', 'availableFilters');
         element.setAttribute('number-of-records', 'numberOfRecords');
         element.setAttribute('show-header', 'showHeader');
+        element.setAttribute('dataset', 'dataset');
+        element.setAttribute('view', 'view');
 
         const scope = $rootScope.$new();
         scope.user = mockedInput.user || anonymousUser;
@@ -150,6 +152,8 @@ describe('The dp-data-selection-header', () => {
         scope.availableFilters = {};
         scope.numberOfRecords = mockedInput.numberOfRecords;
         scope.showHeader = mockedInput.showHeader;
+        scope.dataset = mockedInput.dataset;
+        scope.view = mockedInput.view;
         const compiledComponent = $compile(element)(scope);
         scope.$apply();
 

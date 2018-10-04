@@ -6,14 +6,15 @@ import stateUrlConverter from '../../../../src/shared/services/routing/state-url
     angular
         .module('dpShared')
         .component('dpLink', {
-            templateUrl: 'modules/shared/components/link/link.html',
+            template: require('./link.html'),
             transclude: true,
             bindings: {
                 className: '@',
                 inline: '@',
                 hoverText: '@',
                 type: '@',
-                payload: '<'
+                payload: '<',
+                query: '<'
             },
             controller: DpLinkController,
             controllerAs: 'vm'
@@ -35,7 +36,7 @@ import stateUrlConverter from '../../../../src/shared/services/routing/state-url
         });
 
         vm.dispatch = function () {
-            store.dispatch(getAction(vm.type, vm.payload));
+            store.dispatch(getAction(vm.type, vm.payload, vm.query));
         };
 
         store.subscribe(() => {
@@ -48,12 +49,17 @@ import stateUrlConverter from '../../../../src/shared/services/routing/state-url
             }
         });
 
-        function getAction (type, payload) {
+        function getAction (type, payload, query) {
             const action = {
                 type: ACTIONS[type] || type
             };
             if (angular.isDefined(payload)) {
                 action.payload = payload;
+            }
+
+            if (angular.isDefined(query)) {
+                action.meta = {};
+                action.meta.query = query;
             }
             return action;
         }

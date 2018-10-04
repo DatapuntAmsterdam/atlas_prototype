@@ -35,7 +35,7 @@ export const isDevelopment = () => {
 
 // This object enables/disables features that are not yet released
 export const features = {
-  eigendommen: false
+  eigendommen: true
 };
 
 const ENVIRONMENT = (process.env.NODE_ENV).toUpperCase();

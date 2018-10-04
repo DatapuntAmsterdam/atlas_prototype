@@ -27,7 +27,7 @@ function emptyFiltersReducer(state) {
 
 const reducers = {};
 
-reducers[ACTIONS.APPLY_FILTERS.id] = applyFiltersReducer;
-reducers[ACTIONS.EMPTY_FILTERS.id] = emptyFiltersReducer;
+reducers[ACTIONS.APPLY_FILTERS] = applyFiltersReducer;
+reducers[ACTIONS.EMPTY_FILTERS] = emptyFiltersReducer;
 
 export default reducers;

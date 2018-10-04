@@ -2,8 +2,9 @@
 
 exports[`mapSearch reducer handles search results request 1`] = `
 Object {
-  "isLoading": true,
-  "mapSearchResultsError": null,
+  "search": Object {
+    "isLoading": true,
+  },
 }
 `;
 
@@ -27,6 +28,5 @@ exports[`mapSearch reducer sets the initial state 1`] = `
 Object {
   "isLoading": false,
   "mapSearchResultsByLocation": Object {},
-  "mapSearchResultsError": null,
 }
 `;

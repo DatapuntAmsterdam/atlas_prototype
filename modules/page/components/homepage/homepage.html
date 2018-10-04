@@ -5,7 +5,8 @@
                 <!-- Link to map -->
                 <div class="qa-map-link">
                     <dp-link
-                        type="SHOW_MAP"
+                        type="{{vm.routing.map.type}}"
+                        query="{ lat: 52.3931081, lng: 4.8932945 }"
                         ng-mouseenter="vm.mapLinkHover=true;"
                         ng-mouseleave="vm.mapLinkHover=false;"
                         class-name="c-homepage__block c-homepage__block--left c-homepage__block--tall"
@@ -90,9 +91,7 @@
                             <dp-user-content-widget type="news" limit-to="3"></dp-user-content-widget>
                         </div>
                         <div class="u-padding__left--3 c-homepage__news-show-more">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'news'}"
-                                     >Nieuwsoverzicht</dp-link>
+                            <dp-link type={{vm.routing.nieuws.type}}>Nieuwsoverzicht</dp-link>
                         </div>
                     </div>
                 </div>
@@ -100,18 +99,15 @@
                     <div class="u-margin__left--1 c-homepage__news-instructions">
                         <h2 class="c-homepage__news-instructions-title">Instructies</h2>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'snelwegwijs'}"
+                            <dp-link type={{vm.routing.bediening.type}}
                                  >Bediening</dp-link>
                         </div>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'info'}"
+                            <dp-link type={{vm.routing.gegevens.type}}
                                  >Gegevens</dp-link>
                         </div>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'apis'}"
+                            <dp-link type={{vm.routing.apis.type}}
                                  >API's</dp-link>
                         </div>
                     </div>
@@ -139,7 +135,30 @@
             <div class="u-col-sm--1">&nbsp;</div>
             <div class="u-col-sm--3">
                 <div class="u-margin__left--1 c-homepage__beleid">
-                    <dp-user-content-widget type="beleid"></dp-user-content-widget>
+                    <div>
+                        <div class="c-user-content-widget__beleid-zie-ook">Over</div>
+                        <div class="c-user-content-widget__entry">
+                            <dp-link type={{vm.routing.privacy_beveiliging.type}}>
+                                <div class="c-user-content-widget__short s-cms-widget-content s-cms-widget-content--inline">
+                                    <p>Privacy en informatiebeveiliging</p>
+                                </div>
+                            </dp-link>
+                        </div>
+                        <div class="c-user-content-widget__entry">
+                            <dp-link type={{vm.routing.beschikbaar_kwaliteit.type}}>
+                                <div class="c-user-content-widget__short s-cms-widget-content s-cms-widget-content--inline">
+                                    <p>Beschikbaarheid en kwaliteit data</p>
+                                </div>
+                            </dp-link>
+                        </div>
+                        <div class="c-user-content-widget__entry">
+                            <dp-link type={{vm.routing.beheer_werkwijze.type}}>
+                                <div class="c-user-content-widget__short s-cms-widget-content s-cms-widget-content--inline">
+                                    <p>Technisch beheer en werkwijze</p>
+                                </div>
+                            </dp-link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

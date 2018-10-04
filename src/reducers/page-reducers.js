@@ -32,6 +32,6 @@ function showPageReducer(state, payload) {
 
 const reducers = {};
 
-reducers[ACTIONS.SHOW_PAGE.id] = showPageReducer;
+reducers[ACTIONS.SHOW_PAGE] = showPageReducer;
 
 export default reducers;

@@ -1,183 +1,124 @@
-<div class="c-dashboard c-dashboard--page-type-{{vm.pageType}}"
-     ng-class="{
-         'c-dashboard--max-width': vm.hasMaxWidth,
-         'c-dashboard--full-height': vm.isFullHeight,
-         'c-dashboard--homepage': vm.isHomePage
-     }">
+<!-- Body -->
 
-    <!-- Header -->
-    <div ng-if="!vm.isEmbed" ng-class="{ 'u-fixed': !vm.isPrintMode && !vm.isEmbedPreview }">
-        <div class="c-dashboard__heading"
-             ng-class="{ 'o-max-width': vm.hasMaxWidth }"
-             ng-controller="HeaderController as headerController">
-            <div ng-class="{ 'o-max-width__inner': vm.hasMaxWidth }">
-                <div ng-if="!vm.isPrintOrEmbedOrPreview" class="qa-dashboard__header">
-                    <dp-site-header size="vm.headerSize"
-                                    user="vm.user"
-                                    has-print-button="headerController.hasPrintButton"
-                                    has-embed-button="headerController.hasEmbedButton"
-                                    search-action="headerController.searchAction"
-                                    query="{{headerController.query}}"></dp-site-header>
-                </div>
-                <div ng-if="vm.isPrintMode" class="qa-dashboard__print-header">
-                    <dp-print-header></dp-print-header>
-                </div>
-                <div ng-if="vm.isEmbedPreview" class="qa-dashboard__embed-header">
-                    <dp-embed-header></dp-embed-header>
+<div>
+
+    <!-- Right column -->
+    <div ng-show="vm.columnSizes.right"
+         class="c-dashboard__column c-dashboard__content u-col-sm--{{vm.columnSizes.right}} qa-dashboard__column--right">
+
+        <!-- Page -->
+        <div ng-if="vm.activity.page" ng-show="vm.visibility.page"
+             class="c-dashboard__page o-max-width">
+            <div class="c-dashboard__page-inner o-max-width__inner"
+                 ng-class="{ 'u-gutter': vm.isHomePage }">
+                <div ng-controller="PageController as page" class="qa-page">
+                    <dp-page name="{{page.pageName}}"
+                             type="{{page.pageType}}"
+                             item="{{page.pageItem}}"></dp-page>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Error message -->
-    <div ng-if="vm.visibility.error"
-         class="c-dashboard__error">
-        <div class="u-background-color__primary--light"
-             ng-class="{ 'o-max-width': vm.hasMaxWidth }">
-            <div ng-class="{
-                     'o-max-width__inner': vm.hasMaxWidth,
-                     'u-gutter': vm.isHomePage
-                 }">
-                <dp-api-error user="vm.user"></dp-api-error>
-            </div>
-        </div>
-    </div>
-
-    <!-- Body -->
-    <div class="c-dashboard__body"
-         ng-class="{ 'c-dashboard__body--error': vm.visibility.error }">
-        <div class="u-grid u-full-height">
-            <!-- Columns -->
-            <div class="u-row u-full-height">
-
-                <!-- Middle column -->
-                <div ng-show="vm.columnSizes.middle"
-                    class="c-dashboard__column u-col-sm--{{vm.columnSizes.middle}} qa-dashboard__column--middle"
-                    ng-class="{ 'u-page-break-after': vm.columnSizes.middle && vm.columnSizes.right }">
-                    <div ng-if="vm.activity.map && vm.visibility.map" class="qa-map">
-                      <dp-map-wrapper></dp-map-wrapper>
+            <footer ng-if="vm.isHomePage" class="c-dashboard__footer o-max-width">
+                <div class="c-dashboard__footer-content u-row">
+                    <div class="u-col-sm--8">
+                        <div class="u-margin__left--2 c-dashboard__proclaimer">
+                            <h2 class="c-dashboard__proclaimer-header">Proclaimer</h2>
+                            <p class="c-dashboard__proclaimer-paragraph">Gemeente Amsterdam
+                                biedt met City Data een voorziening waar data voor iedereen
+                                beschikbaar zijn en hergebruikt mogen worden. De gegevens
+                                worden aangeboden door gemeentelijke en externe partijen. De
+                                eigenaren van deze gegevens zijn primair verantwoordelijk
+                                voor de kwaliteit van hun gepubliceerde data. Opmerkingen en
+                                aanvullingen op de gegevens kunt u <a
+                                    class="c-link--inverse"
+                                    href="mailto:terugmelding.basisinformatie@amsterdam.nl">melden</a>.
+                            </p>
+                            <p class="c-dashboard__proclaimer-paragraph">
+                                <a class="o-btn o-btn--link--inverse"
+                                   href="#?mpb=topografie&mpz=11&mpv=52.3731081:4.8932945&pgn=content-overzicht&pgt=proclaimer">Lees
+                                    de hele proclaimer</a>
+                            </p>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Right column -->
-                <div ng-show="vm.columnSizes.right"
-                     class="c-dashboard__column c-dashboard__content u-col-sm--{{vm.columnSizes.right}} qa-dashboard__column--right">
-
-                    <!-- Detail -->
-                    <div ng-if="vm.activity.detail" ng-show="vm.visibility.detail" ng-controller="DetailController as detailController" class="qa-detail">
-                        <dp-detail
-                            show="vm.visibility.detail"
-                            endpoint="{{detailController.endpoint}}"
-                            reload="detailController.reload"
-                            is-loading="detailController.isLoading"
-                            skipped-search-results="detailController.skippedSearchResults"
-                            catalog-filters="detailController.catalogFilters"
-                            user="vm.user">
-                        </dp-detail>
-                    </div>
-
-                    <!-- Page -->
-                    <div ng-if="vm.activity.page" ng-show="vm.visibility.page" class="c-dashboard__page o-max-width">
-                        <div class="c-dashboard__page-inner o-max-width__inner"
-                             ng-class="{ 'u-gutter': vm.isHomePage }">
-                            <div ng-controller="PageController as pageController" class="qa-page">
-                                <dp-page name="{{pageController.pageName}}"
-                                         type="{{pageController.pageType}}"
-                                         item="{{pageController.pageItem}}"></dp-page>
+                    <div class="u-col-sm--3 u-col-sm--offset-1">
+                        <div class="c-dashboard__social">
+                            <h2 class="c-dashboard__social-header">Volg de gemeente</h2>
+                            <div class="c-dashboard__social-link">
+                                <a
+                                    class="o-btn--link--inverse"
+                                    href="https://twitter.com/AmsterdamNL"
+                                    rel="external"
+                                    target="_blank" rel="noopener">Twitter</a>
+                            </div>
+                            <div class="c-dashboard__social-link">
+                                <a
+                                    class="o-btn o-btn--link--inverse"
+                                    href="https://www.facebook.com/gemeenteamsterdam"
+                                    rel="external"
+                                    target="_blank" rel="noopener">Facebook</a>
+                            </div>
+                            <div class="c-dashboard__social-link">
+                                <a
+                                    class="o-btn o-btn--link--inverse"
+                                    href="https://www.linkedin.com/company/gemeente-amsterdam"
+                                    rel="external"
+                                    target="_blank" rel="noopener">LinkedIn</a>
+                            </div>
+                            <div class="c-dashboard__social-link">
+                                <a
+                                    class="o-btn o-btn--link--inverse"
+                                    href="https://github.com/Amsterdam"
+                                    rel="external"
+                                    target="_blank" rel="noopener">GitHub</a>
                             </div>
                         </div>
-                        <footer ng-if="vm.isHomePage" class="c-dashboard__footer o-max-width">
-                            <div class="c-dashboard__footer-content u-row">
-                                <div class="u-col-sm--8">
-                                    <div class="u-margin__left--2 c-dashboard__proclaimer">
-                                        <h2 class="c-dashboard__proclaimer-header">Proclaimer</h2>
-                                        <p class="c-dashboard__proclaimer-paragraph">Gemeente Amsterdam biedt met City Data een voorziening waar data voor iedereen beschikbaar zijn en hergebruikt mogen worden. De gegevens worden aangeboden door gemeentelijke en externe partijen. De eigenaren van deze gegevens zijn primair verantwoordelijk voor de kwaliteit van hun gepubliceerde data. Opmerkingen en aanvullingen op de gegevens kunt u <a class="c-link--inverse" href="mailto:terugmelding.basisinformatie@amsterdam.nl">melden</a>.</p>
-                                        <p class="c-dashboard__proclaimer-paragraph">
-                                            <a class="o-btn o-btn--link--inverse" href="#?mpb=topografie&mpz=11&mpv=52.3731081:4.8932945&pgn=content-overzicht&pgt=proclaimer">Lees de hele proclaimer</a>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="u-col-sm--3 u-col-sm--offset-1">
-                                    <div class="c-dashboard__social">
-                                        <h2 class="c-dashboard__social-header">Volg de gemeente</h2>
-                                        <div class="c-dashboard__social-link">
-                                            <a
-                                              class="o-btn--link--inverse"
-                                              href="https://twitter.com/AmsterdamNL"
-                                              rel="external"
-                                              target="_blank" rel="noopener">Twitter</a>
-                                        </div>
-                                        <div class="c-dashboard__social-link">
-                                            <a
-                                              class="o-btn o-btn--link--inverse"
-                                              href="https://www.facebook.com/gemeenteamsterdam"
-                                              rel="external"
-                                              target="_blank" rel="noopener">Facebook</a>
-                                        </div>
-                                        <div class="c-dashboard__social-link">
-                                            <a
-                                              class="o-btn o-btn--link--inverse"
-                                              href="https://www.linkedin.com/company/gemeente-amsterdam"
-                                              rel="external"
-                                              target="_blank" rel="noopener">LinkedIn</a>
-                                        </div>
-                                        <div class="c-dashboard__social-link">
-                                            <a
-                                              class="o-btn o-btn--link--inverse"
-                                              href="https://github.com/Amsterdam"
-                                              rel="external"
-                                              target="_blank" rel="noopener">GitHub</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="u-clearfix"></div>
-                            </div>
-                        </footer>
                     </div>
-
-                    <!-- Search results -->
-                    <div ng-if="vm.activity.searchResults" ng-show="vm.visibility.searchResults" ng-controller="SearchResultsController as searchResultsController" class="qa-search-results">
-                        <dp-search-results
-                            show="vm.visibility.searchResults"
-                            is-loading="searchResultsController.isLoading"
-                            query="{{searchResultsController.query}}"
-                            location="searchResultsController.location"
-                            category="{{searchResultsController.category}}"
-                            number-of-results="searchResultsController.numberOfResults"
-                            user="vm.user">
-                        </dp-search-results>
-                    </div>
-
-                    <!-- Straatbeeld -->
-                    <div ng-if="vm.activity.straatbeeld" ng-show="vm.visibility.straatbeeld"
-                        ng-controller="StraatbeeldController as straatbeeldController"
-                        class="u-full-height qa-straatbeeld">
-
-                        <!--Resize straatbeeld when any of printMode, errorMode or fullscreen changes-->
-                        <dp-straatbeeld
-                            state="straatbeeldController.straatbeeldState"
-                            resize="[vm.isPrintMode, vm.isEmbedPreview, vm.isEmbed, vm.visibility.error, vm.visibility.straatbeeld, vm.columnSizes.right]">
-                        </dp-straatbeeld>
-                    </div>
-
-                    <!-- Data selection -->
-                    <div
-                        ng-if="vm.activity.dataSelection"
-                        ng-show="vm.visibility.dataSelection"
-                        ng-controller="DataSelectionController as dataSelectionController"
-                        class="qa-data-selection"
-                    >
-                        <dp-data-selection
-                            bounding-box="dataSelectionController.boundingBox"
-                            catalog-filters="dataSelectionController.catalogFilters"
-                            filters="dataSelectionController.filters"
-                            state="dataSelectionController.dataSelectionState"
-                            user="vm.user"
-                            zoom-level="dataSelectionController.zoomLevel"
-                        ></dp-data-selection>
-                    </div>
+                    <div class="u-clearfix"></div>
                 </div>
-            </div>
+            </footer>
+        </div>
+
+        <!-- Search results -->
+        <div ng-if="vm.activity.searchResults" ng-show="vm.visibility.searchResults"
+             ng-controller="SearchResultsController as searchResults"
+             class="qa-search-results">
+            <dp-search-results
+                show="vm.visibility.searchResults"
+                is-loading="searchResults.isLoading"
+                query="{{searchResults.query}}"
+                location="searchResults.location"
+                category="{{searchResults.category}}"
+                number-of-results="searchResults.numberOfResults"
+                user="vm.user">
+            </dp-search-results>
+        </div>
+
+        <!-- Straatbeeld -->
+        <div ng-if="vm.activity.straatbeeld" ng-show="vm.visibility.straatbeeld"
+             ng-controller="StraatbeeldController as straatbeeld"
+             class="u-full-height qa-straatbeeld">
+
+            <!--Resize straatbeeld when any of printMode, errorMode or fullscreen changes-->
+            <dp-straatbeeld
+                state="straatbeeld.straatbeeldState"
+                resize="[vm.isPrintMode, vm.isEmbedPreview, vm.isEmbed, vm.visibility.error, vm.visibility.straatbeeld, vm.columnSizes.right]">
+            </dp-straatbeeld>
+        </div>
+
+        <!-- Data selection -->
+        <div
+            ng-if="vm.activity.dataSelection"
+            ng-show="vm.visibility.dataSelection"
+            ng-controller="DataSelectionController as dataSelection"
+            class="qa-data-selection"
+        >
+            <dp-data-selection
+                bounding-box="dataSelection.boundingBox"
+                catalog-filters="dataSelection.catalogFilters"
+                filters="dataSelection.filters"
+                state="dataSelection.dataSelectionState"
+                user="vm.user"
+                zoom-level="dataSelection.zoomLevel"
+            ></dp-data-selection>
         </div>
     </div>
 </div>

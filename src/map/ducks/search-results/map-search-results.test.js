@@ -4,10 +4,10 @@ import reducer, {
   getMapResultsByLocation,
   getMapSearchResults,
   getSearch,
-  getSearchMarker,
-  isSearchActive,
-  selectLatestMapSearchResults
+  isSearchActive
 } from './map-search-results';
+
+import { getSearchMarker, selectLatestMapSearchResults } from '../map/map-selectors';
 
 describe('mapSearch reducer', () => {
   it('sets the initial state', () => {
@@ -92,11 +92,8 @@ describe('mapSearch Selectors', () => {
 
   describe('getSearchMarker', () => {
     it('should return an array of searchMarkers', () => {
-      const isSearchActiveMock = 2;
-      const getSearchMock = {
-        location: [10, 10]
-      };
-      const selected = getSearchMarker.resultFunc(isSearchActiveMock, getSearchMock);
+      const getShortSelectedLocationMock = { latitude: 10, longitude: 10 };
+      const selected = getSearchMarker.resultFunc(getShortSelectedLocationMock);
       expect(selected).toEqual([{ position: [10, 10], type: 'geoSearchType' }]);
     });
 
@@ -113,20 +110,18 @@ describe('mapSearch Selectors', () => {
   describe('selectLatestMapSearchResults', () => {
     it('should return an array of results', () => {
       const getMapResultsByLocationMock = {
-        '10,10': [
-          { id: 'resultMock' }
+        '123,456': [
+          { id: 'resultMock1' }
         ],
-        '20,20': [
-          { id: 'resultMock' }
+        '789,1011': [
+          { id: 'resultMock2' }
         ]
       };
-      const getSearchMock = {
-        location: [10, 10]
-      };
+      const getLocationIdMock = '123,456';
       const selected = selectLatestMapSearchResults.resultFunc(
-        getSearchMock, getMapResultsByLocationMock
+        getLocationIdMock, getMapResultsByLocationMock
       );
-      expect(selected).toBe(getMapResultsByLocationMock['10,10']);
+      expect(selected).toBe(getMapResultsByLocationMock['123,456']);
     });
 
     it('should return undefined', () => {

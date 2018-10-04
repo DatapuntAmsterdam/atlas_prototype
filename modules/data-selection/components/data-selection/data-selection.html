@@ -10,24 +10,26 @@
         <dp-data-selection-header
             ng-if="!vm.showTabHeader() || vm.numberOfRecords > 0"
             state="vm.state"
+            dataset="vm.dataset"
+            view="vm.view"
             user="vm.user"
             filters="vm.filters"
             available-filters="vm.availableFilters"
             number-of-records="vm.numberOfRecords"
-            show-header="!vm.showTabHeader() && ( vm.state.view === 'LIST' || !vm.isLoading )">
+            show-header="!vm.showTabHeader() && ( vm.view === 'LIST' || !vm.isLoading )">
         </dp-data-selection-header>
 
         <div class="u-grid qa-data-grid" ng-if="!vm.disabled">
             <div class="u-row">
                 <div ng-if="vm.showFilters" class="u-col-sm--3 c-data-selection__available-filters">
                     <dp-sbi-filter
-                        ng-if="vm.state.dataset === 'hr'"
+                        ng-if="vm.dataset === 'hr'"
                         available-filters="vm.availableFilters"
                         active-filters="vm.filters">
                     </dp-sbi-filter>
 
                     <dp-data-selection-available-filters
-                        dataset="{{vm.state.dataset}}"
+                        dataset="{{vm.dataset}}"
                         available-filters="vm.availableFilters"
                         active-filters="vm.filters">
                     </dp-data-selection-available-filters>
@@ -62,7 +64,7 @@
                         <dp-data-selection-table
                             ng-if="vm.view === 'TABLE'"
                             content="vm.data"
-                            dataset="vm.state.dataset"></dp-data-selection-table>
+                            dataset="vm.dataset"></dp-data-selection-table>
                         <dp-data-selection-list ng-if="vm.view === 'LIST'" content="vm.data"></dp-data-selection-list>
                         <dp-data-selection-catalog ng-if="vm.view === 'CATALOG'" content="vm.data"></dp-data-selection-catalog>
                     </div>

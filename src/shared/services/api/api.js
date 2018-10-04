@@ -1,5 +1,6 @@
 import getState from '../redux/get-state';
 import SHARED_CONFIG from '../shared-config/shared-config';
+import { encodeQueryParams } from '../query-string-parser/query-string-parser';
 
 export const getAccessToken = () => getState().user.accessToken;
 
@@ -41,11 +42,6 @@ export const getByUrl = async (url, params, cancel) => {
   const token = getAccessToken();
   return Promise.resolve(getWithToken(url, params, cancel, token));
 };
-
-const encodeQueryParams = (params) =>
-  (Object.keys(params)
-    .map((param) => `${encodeURIComponent(param)}=${encodeURIComponent(params[param])}`)
-    .join('&'));
 
 export const createUrlWithToken = (url, token) => {
   const params = {};

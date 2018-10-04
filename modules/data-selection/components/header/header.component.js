@@ -8,11 +8,13 @@ import { features } from '../../../../src/shared/environment';
         .component('dpDataSelectionHeader', {
             bindings: {
                 state: '<',
+                dataset: '<',
                 availableFilters: '<',
                 filters: '<',
                 numberOfRecords: '<',
                 showHeader: '<',
-                user: '<'
+                user: '<',
+                view: '<'
             },
             templateUrl: 'modules/data-selection/components/header/header.html',
             controllerAs: 'vm',
@@ -25,7 +27,7 @@ import { features } from '../../../../src/shared/environment';
         const vm = this;
 
         $scope.$watchGroup([
-            'vm.state.dataset',
+            'vm.dataset',
             'vm.state.geometryFilter',
             'vm.state.view',
             'vm.numberOfRecords'
@@ -33,9 +35,9 @@ import { features } from '../../../../src/shared/environment';
 
         function setHeader () {
             const isListView = vm.state.view === 'LIST';
-            const config = DATA_SELECTION_CONFIG.datasets[vm.state.dataset];
+            const config = DATA_SELECTION_CONFIG.datasets[vm.dataset];
             const exportAuthScope = config.AUTH_SCOPE;
-            vm.showButtons = vm.state.dataset !== 'dcatd';
+            vm.showButtons = vm.dataset !== 'dcatd';
             vm.showDownloadButton = vm.state.view !== 'LIST' &&
                 vm.numberOfRecords > 0 &&
                 (!exportAuthScope || vm.user.scopes.includes(exportAuthScope));
@@ -45,8 +47,8 @@ import { features } from '../../../../src/shared/environment';
 
             vm.canEditDataset = vm.user.scopes.includes('CAT/W');
             vm.showNumberOfRecords = vm.numberOfRecords > 0 &&
-                DATA_SELECTION_CONFIG.datasets[vm.state.dataset].SHOW_NUMBER_OF_RECORDS;
-            vm.datasetTitle = DATA_SELECTION_CONFIG.datasets[vm.state.dataset].TITLE;
+                DATA_SELECTION_CONFIG.datasets[vm.dataset].SHOW_NUMBER_OF_RECORDS;
+            vm.datasetTitle = DATA_SELECTION_CONFIG.datasets[vm.dataset].TITLE;
 
             const tabs = ['bag', 'hr'];
 
@@ -59,7 +61,7 @@ import { features } from '../../../../src/shared/environment';
                 return {
                     dataset: dataset,
                     title: DATA_SELECTION_CONFIG.datasets[dataset].TITLE_TAB,
-                    isActive: vm.state.dataset === dataset
+                    isActive: vm.dataset === dataset
                 };
             });
         }

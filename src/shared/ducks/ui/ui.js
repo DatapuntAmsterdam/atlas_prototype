@@ -1,10 +1,9 @@
+import { routing } from '../../../app/routes';
+
 export const HIDE_EMBED_PREVIEW = 'HIDE_EMBED_PREVIEW';
-export const HIDE_MAP_PANEL = 'HIDE_MAP_PANEL';
 export const HIDE_PRINT = 'HIDE_PRINT';
 export const SET_MAP_FULLSCREEN = 'SET_MAP_FULLSCREEN';
 export const SHOW_EMBED_PREVIEW = 'SHOW_EMBED_PREVIEW';
-export const SHOW_MAP = 'SHOW_MAP';
-export const SHOW_MAP_PANEL = 'SHOW_MAP_PANEL';
 export const SHOW_PRINT = 'SHOW_PRINT';
 export const TOGGLE_MAP_FULLSCREEN = 'TOGGLE_MAP_FULLSCREEN';
 export const TOGGLE_MAP_PANEL = 'TOGGLE_MAP_PANEL';
@@ -24,12 +23,6 @@ export default function UiReducer(state = initialState, action) {
         isEmbedPreview: false
       };
 
-    case HIDE_MAP_PANEL:
-      return {
-        ...state,
-        isMapPanelVisible: false
-      };
-
     case HIDE_PRINT:
       return {
         ...state,
@@ -42,13 +35,7 @@ export default function UiReducer(state = initialState, action) {
         isEmbedPreview: true
       };
 
-    case SHOW_MAP_PANEL:
-      return {
-        ...state,
-        isMapPanelVisible: true
-      };
-
-    case SHOW_MAP:
+    case routing.map.type:
       return {
         ...state,
         isMapPanelVisible: true,
@@ -90,8 +77,6 @@ export default function UiReducer(state = initialState, action) {
   }
 }
 
-export const hideMapPanel = () => ({ type: HIDE_MAP_PANEL });
-export const showMapPanel = () => ({ type: SHOW_MAP_PANEL });
 export const toggleMapFullscreen = () => ({ type: TOGGLE_MAP_FULLSCREEN });
 export const setMapFullscreen = (payload) => ({ type: SET_MAP_FULLSCREEN, payload });
 export const toggleMapPanel = () => ({ type: TOGGLE_MAP_PANEL });

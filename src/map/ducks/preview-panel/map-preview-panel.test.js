@@ -6,6 +6,7 @@ import reducer, {
   maximizeMapPreviewPanel,
   OPEN_MAP_PREVIEW_PANEL
 } from './map-preview-panel';
+import { FETCH_SEARCH_RESULTS_BY_LOCATION } from '../../../shared/actions';
 
 const initialState = {};
 describe('map preview reducer and actions', () => {
@@ -43,10 +44,7 @@ describe('map preview reducer and actions', () => {
         longitude: 321
       };
       expect(fetchSearchResults(location)).toEqual({
-        type: {
-          id: 'FETCH_SEARCH_RESULTS_BY_LOCATION',
-          ignore: true
-        },
+        type: FETCH_SEARCH_RESULTS_BY_LOCATION,
         payload: [location.latitude, location.longitude]
       });
     });

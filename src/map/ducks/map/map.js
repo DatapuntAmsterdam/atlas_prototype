@@ -1,28 +1,4 @@
-import {
-  getActiveBaseLayer,
-  getCenter,
-  getClusterMarkers,
-  getGeoJsons,
-  getMap,
-  getMapCenter,
-  getMapOverlays,
-  getMapZoom,
-  getMarkers,
-  getRdGeoJsons
-} from './map-selectors';
-
-export {
-  getActiveBaseLayer,
-  getCenter,
-  getClusterMarkers,
-  getGeoJsons,
-  getMap,
-  getMapCenter,
-  getMapOverlays,
-  getMapZoom,
-  getMarkers,
-  getRdGeoJsons
-};
+import { routing } from '../../../app/routes';
 
 export const MAP_ADD_PANO_OVERLAY = 'MAP_ADD_PANO_OVERLAY';
 export const MAP_BOUNDING_BOX = 'MAP_BOUNDING_BOX';
@@ -41,6 +17,8 @@ export const MAP_CLEAR = 'MAP_CLEAR';
 export const SET_MAP_BASE_LAYER = 'SET_MAP_BASE_LAYER';
 export const TOGGLE_MAP_OVERLAY = 'TOGGLE_MAP_OVERLAY';
 export const TOGGLE_MAP_OVERLAY_VISIBILITY = 'TOGGLE_MAP_OVERLAY_VISIBILITY';
+export const SET_MAP_CLICK_LOCATION = 'SET_MAP_CLICK_LOCATION';
+export const UPDATE_MAP = 'UPDATE_MAP';
 
 const initialState = {
   viewCenter: [52.3731081, 4.8932945],
@@ -51,7 +29,8 @@ const initialState = {
   drawingMode: 'none',
   shapeMarkers: 0,
   shapeDistanceTxt: '',
-  shapeAreaTxt: ''
+  shapeAreaTxt: '',
+  selectedLocation: null
 };
 
 let polygon = {};
@@ -62,7 +41,7 @@ const getNewLayer = (straatbeeld) => (
   straatbeeld && straatbeeld.history
     ? `pano${straatbeeld.history}`
     : 'pano'
-  );
+);
 
 const overlayExists = (state, newLayer) => (
   state.map && state.map.overlays.filter((overlay) =>
@@ -71,27 +50,24 @@ const overlayExists = (state, newLayer) => (
 
 export default function MapReducer(state = initialState, action) {
   switch (action.type) {
+    case routing.map.type: {
+      const { lat, lng, zoom, selectedLocation } = action.meta.query || {};
+      return {
+        ...state,
+        viewCenter: [
+          parseFloat(lat) || initialState.viewCenter[0],
+          parseFloat(lng) || initialState.viewCenter[1]
+        ],
+        zoom: parseFloat(zoom) || initialState.zoom,
+        selectedLocation
+      };
+    }
+
     case MAP_BOUNDING_BOX:
     case MAP_BOUNDING_BOX_SILENT:
       return {
         ...state,
         boundingBox: action.payload.boundingBox
-      };
-
-    case MAP_PAN:
-    case MAP_PAN_SILENT:
-      return {
-        ...state,
-        viewCenter: action.payload
-      };
-
-    case MAP_ZOOM:
-    case MAP_ZOOM_SILENT:
-      return {
-        ...state,
-        zoom: action.payload.zoom,
-        viewCenter: Array.isArray(action.payload.viewCenter) ?
-          action.payload.viewCenter : state.viewCenter
       };
 
     case MAP_CLEAR_DRAWING:
@@ -144,7 +120,7 @@ export default function MapReducer(state = initialState, action) {
         ...state,
         overlays: [
           ...(state.overlays.filter((overlay) =>
-            !overlay.id.startsWith('pano'))
+              !overlay.id.startsWith('pano'))
           ),
           { id: newLayer, isVisible: true }
         ]
@@ -153,7 +129,7 @@ export default function MapReducer(state = initialState, action) {
     case MAP_REMOVE_PANO_OVERLAY: //eslint-disable-line
       // Remove all active 'pano' layers
       const overlays = state && state.overlays
-          .filter((overlay) => !overlay.id.startsWith('pano'));
+                                     .filter((overlay) => !overlay.id.startsWith('pano'));
 
       return state && overlays.length === state.overlays.length ? state : {
         ...state,
@@ -186,6 +162,7 @@ export default function MapReducer(state = initialState, action) {
   }
 }
 
+// Actions
 export const mapClearDrawing = () => ({ type: MAP_CLEAR_DRAWING });
 export const mapEmptyGeometry = () => ({ type: MAP_EMPTY_GEOMETRY });
 export const mapUpdateShape = (payload) => ({ type: MAP_UPDATE_SHAPE, payload });
@@ -193,32 +170,50 @@ export const mapStartDrawing = (payload) => ({ type: MAP_START_DRAWING, payload 
 export const mapEndDrawing = (payload) => ({ type: MAP_END_DRAWING, payload });
 export const mapClear = () => ({ type: MAP_CLEAR });
 export const setMapBaseLayer = (payload) => ({ type: SET_MAP_BASE_LAYER, payload });
-
 export const toggleMapOverlay = (mapLayerId) => ({ type: TOGGLE_MAP_OVERLAY, mapLayerId });
 export const toggleMapOverlayVisibility = (mapLayerId, show) => ({
   type: TOGGLE_MAP_OVERLAY_VISIBILITY,
   mapLayerId,
   show
 });
-
-export const updateZoom = (payload, isDrawingActive) =>
+export const updateZoom = (payload) =>
   ({
-    type: isDrawingActive ? MAP_ZOOM_SILENT : MAP_ZOOM,
+    type: UPDATE_MAP,
     payload: {
-      ...payload,
-      viewCenter: [payload.center.lat, payload.center.lng]
+      query: {
+        zoom: payload.zoom,
+        lat: payload.center.lat,
+        lng: payload.center.lng
+      }
     }
   });
-
-export const updatePan = (payload, isDrawingActive) =>
+export const updatePan = (payload) =>
   ({
-    type: isDrawingActive ? MAP_PAN_SILENT : MAP_PAN,
-    payload: [payload.center.lat, payload.center.lng]
+    type: UPDATE_MAP,
+    payload: {
+      query: {
+        lat: payload.center.lat,
+        lng: payload.center.lng
+      }
+    }
   });
-
+export const setSelectedLocation = (payload) => ({
+  type: SET_MAP_CLICK_LOCATION,
+  location: {
+    latitude: payload.latlng.lat,
+    longitude: payload.latlng.lng
+  }
+});
+export const clearSelectedLocation = () => ({
+  type: UPDATE_MAP,
+  payload: {
+    query: {
+      selectedLocation: null
+    }
+  }
+});
 export const updateBoundingBox = (payload, isDrawingActive) =>
   ({
     type: isDrawingActive ? MAP_BOUNDING_BOX_SILENT : MAP_BOUNDING_BOX,
     payload
   });
-

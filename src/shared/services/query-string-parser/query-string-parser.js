@@ -33,9 +33,8 @@ const queryStringParser = (queryString) => {
     }, {});
 };
 
-export const encodeQueryParams = (params) => (Object.keys(params)
+export const encodeQueryParams = (params) => (params ? Object.keys(params)
       .map((param) => `${encodeURIComponent(param)}=${encodeURIComponent(params[param])}`)
-      .join('&'));
-
+      .join('&') : '');
 
 export default queryStringParser;

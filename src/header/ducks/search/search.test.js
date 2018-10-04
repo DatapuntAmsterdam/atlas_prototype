@@ -8,18 +8,14 @@ import {
 describe('Search actions', () => {
   it('fetchDataSelection', () => {
     expect(fetchDataSelection('query')).toEqual({
-      type: {
-        id: FETCH_DATA_SELECTION
-      },
+      type: FETCH_DATA_SELECTION,
       payload: 'query'
     });
   });
 
   it('fetchSearchResultsByQuery', () => {
     expect(fetchSearchResultsByQuery('query')).toEqual({
-      type: {
-        id: FETCH_SEARCH_RESULTS_BY_QUERY
-      },
+      type: FETCH_SEARCH_RESULTS_BY_QUERY,
       payload: 'query'
     });
   });

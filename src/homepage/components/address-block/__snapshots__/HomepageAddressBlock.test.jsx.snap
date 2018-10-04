@@ -48,7 +48,7 @@ exports[`HomepageAddressBlock should render with the default block-link 1`] = `
     </button>
   </div>
   <div
-    className="homepage-block__item homepage-block__item--invisible"
+    className="homepage-block__item "
   >
     <button
       className="c-link homepage-block__link"

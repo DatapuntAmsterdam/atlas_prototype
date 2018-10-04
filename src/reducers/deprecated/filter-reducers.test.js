@@ -11,7 +11,7 @@ describe('The filtersReducers', () => {
     const payload = {
       filter: 'this'
     };
-    const output = filtersReducers[ACTIONS.APPLY_FILTERS.id](state, payload);
+    const output = filtersReducers[ACTIONS.APPLY_FILTERS](state, payload);
 
     expect(output)
       .toEqual({
@@ -27,7 +27,7 @@ describe('The filtersReducers', () => {
         myfilter: 'something'
       }
     };
-    const output = filtersReducers[ACTIONS.EMPTY_FILTERS.id](filterState);
+    const output = filtersReducers[ACTIONS.EMPTY_FILTERS](filterState);
     expect(output)
       .toEqual(state);
   });

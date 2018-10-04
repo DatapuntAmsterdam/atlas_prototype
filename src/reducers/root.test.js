@@ -48,7 +48,7 @@ describe('the root reducer', () => {
     const state = {};
     const action = {};
 
-    const output = rootReducer(state, action);
+    const output = rootReducer(() => 'location')(state, action);
     expect(output)
       .toEqual({
         ...deprecatedOutput,
@@ -58,9 +58,11 @@ describe('the root reducer', () => {
         map: 'map',
         mapDetail: 'mapDetail',
         pano: 'pano',
+        location: 'location',
         straatbeeld: 'straatbeeld',
         ui: 'ui',
         user: 'user',
+        currentPage: 'HOME',
         mapLayers: {
           baseLayers: 'baseLayers',
           layers: 'layers',
