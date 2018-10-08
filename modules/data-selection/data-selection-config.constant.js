@@ -199,7 +199,7 @@
                             },
                             {
                                 label: 'Gemeente',
-                                variables: ['woonplaats']
+                                variables: ['burgerlijke_gemeentenaam']
                             },
                             {
                                 label: 'Zakelijk recht: aard',
