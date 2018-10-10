@@ -5,26 +5,23 @@ import { bindActionCreators } from 'redux';
 
 import MapLeaflet from '../../components/leaflet/MapLeaflet';
 import MAP_CONFIG from '../../services/map-config';
+import { setSelectedLocation, updateBoundingBox, updatePan, updateZoom } from '../../ducks/map/map';
+import { fetchMapBaseLayers, getUrlTemplate } from '../../ducks/base-layers/map-base-layers';
+import { fetchMapLayers, getLayers } from '../../ducks/layers/map-layers';
+import { fetchPanelLayers } from '../../ducks/panel-layers/map-panel-layers';
+import { isDrawingActive } from '../../services/draw-tool/draw-tool';
 import {
   getCenter,
   getClusterMarkers,
   getGeoJsons,
   getMarkers,
   getRdGeoJsons,
-  updateBoundingBox,
-  updatePan,
-  updateZoom
-} from '../../ducks/map/map';
-import { updateClick } from '../../ducks/click-location/map-click-location';
-import { fetchMapBaseLayers, getUrlTemplate } from '../../ducks/base-layers/map-base-layers';
-import { fetchMapLayers, getLayers } from '../../ducks/layers/map-layers';
-import { fetchPanelLayers } from '../../ducks/panel-layers/map-panel-layers';
-import { isDrawingActive } from '../../services/draw-tool/draw-tool';
+  isMarkerActive
+} from '../../ducks/map/map-selectors';
 
 const baseLayerOptions = MAP_CONFIG.BASE_LAYER_OPTIONS;
 const mapOptions = MAP_CONFIG.MAP_OPTIONS;
 const scaleControlOptions = MAP_CONFIG.SCALE_OPTIONS;
-
 
 const mapStateToProps = (state) => ({
   baseLayer: {
@@ -37,6 +34,7 @@ const mapStateToProps = (state) => ({
   rdGeoJsons: getRdGeoJsons(state),
   markers: getMarkers(state),
   layers: getLayers(state),
+  showMarker: isMarkerActive(state),
   drawingMode: state.map.drawingMode,
   zoom: state.map.zoom
 });
@@ -44,7 +42,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   onUpdateZoom: updateZoom,
   onUpdatePan: updatePan,
-  onUpdateClick: updateClick,
+  onUpdateClick: setSelectedLocation,
   onUpdateBoundingBox: updateBoundingBox,
 
   onFetchMapBaseLayers: fetchMapBaseLayers,
@@ -128,8 +126,10 @@ class LeafletContainer extends React.Component {
       getLeafletInstance,
       layers,
       markers,
+      showMarker,
       zoom
     } = this.props;
+
     return baseLayer.urlTemplate && (
       <MapLeaflet
         getLeafletInstance={getLeafletInstance}
@@ -140,7 +140,7 @@ class LeafletContainer extends React.Component {
         rdGeoJsons={rdGeoJsons}
         layers={layers}
         mapOptions={mapOptions}
-        markers={markers}
+        markers={(showMarker) ? markers : []}
         onClick={this.handleClick}
         onDragEnd={this.handlePan}
         onZoomEnd={this.handleZoom}
@@ -181,6 +181,7 @@ LeafletContainer.propTypes = {
   rdGeoJsons: PropTypes.arrayOf(PropTypes.shape({})),
   getLeafletInstance: PropTypes.func.isRequired,
   markers: PropTypes.arrayOf(PropTypes.shape({})),
+  showMarker: PropTypes.bool.isRequired,
   layers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     isVisible: PropTypes.bool.isRequired,

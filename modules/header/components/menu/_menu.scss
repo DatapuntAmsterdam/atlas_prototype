@@ -19,6 +19,10 @@
   text-decoration: none;
   cursor: pointer;
 
+  a {
+    text-decoration: none;
+  }
+
   &:hover {
     .c-menu__title {
       border-bottom: 2px solid $primary-contrast !important;

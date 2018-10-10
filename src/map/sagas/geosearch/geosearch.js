@@ -1,6 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 
-import ACTIONS from '../../../shared/actions';
+import ACTIONS, { REQUEST_GEOSEARCH } from '../../../shared/actions';
 
 export function* requestGeoSearch(action) {
   yield put({
@@ -10,5 +10,5 @@ export function* requestGeoSearch(action) {
 }
 
 export default function* watchGeoSearchRequest() {
-  yield takeLatest('REQUEST_GEOSEARCH', requestGeoSearch);
+  yield takeLatest(REQUEST_GEOSEARCH, requestGeoSearch);
 }

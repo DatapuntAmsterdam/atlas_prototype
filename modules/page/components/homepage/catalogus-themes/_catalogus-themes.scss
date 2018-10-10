@@ -29,13 +29,13 @@ $base-padding: calc(#{$base-whitespace} * 2);
 }
 
 .c-catalogus-theme__link {
+  @extend %link;
   @include font-weight($normal-weight);
-  display: table;
   height: 40px;
 }
 
 .c-catalogus-theme__link__text {
-  display: table-cell;
+  padding-top: 10px;
   padding-right: $base-whitespace;
   line-height: 20px;
   vertical-align: middle;

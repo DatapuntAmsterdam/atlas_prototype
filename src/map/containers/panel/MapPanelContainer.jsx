@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setMapBaseLayer, toggleMapOverlay, toggleMapOverlayVisibility } from '../../ducks/map/map';
 import { selectActivePanelLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { getBaseLayers } from '../../ducks/base-layers/map-base-layers';
 import { toggleMapPanel, toggleMapPanelHandle } from '../../../shared/ducks/ui/ui';
@@ -14,6 +13,7 @@ import MapType from '../../components/type/MapType';
 import CollapseIcon from '../../../../public/images/icon-arrow-down.svg';
 import ExpandIcon from '../../../../public/images/icon-arrow-up.svg';
 import MapLayersIcon from '../../../../public/images/icon-map-layers.svg';
+import { setMapBaseLayer, toggleMapOverlay, toggleMapOverlayVisibility } from '../../ducks/map/map';
 
 const mapStateToProps = (state) => ({
   activeBaseLayer: state.map.baseLayer,

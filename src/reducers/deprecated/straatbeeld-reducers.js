@@ -1,25 +1,6 @@
 import ACTIONS from '../../shared/actions';
-import STRAATBEELD_CONFIG from '../../../modules/straatbeeld/straatbeeld-config';
 import isObject from '../../shared/services/is-object';
-
-function getHeadingDegrees([x1, y1], [x2, y2]) {
-  return (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
-}
-
-function resetStraatbeeld() {
-  return {
-    id: null,
-    location: null,
-    isInitial: true,
-    date: null,
-    hotspots: [],
-    heading: null,
-    pitch: null,
-    fov: null,
-    image: null,
-    isLoading: true
-  };
-}
+import { routing } from '../../app/routes';
 
 /**
  * @description If the oldState had an active straatbeeld it will remember the heading.
@@ -29,25 +10,9 @@ function resetStraatbeeld() {
  *
  * @returns {Object} newState
  */
-function fetchStraatbeeldByIdReducer(state, payload) {
+function fetchStraatbeeldByIdReducer(state) {
   return {
     ...state,
-    straatbeeld: {
-      ...(state.straatbeeld || {}),
-      ...resetStraatbeeld(),
-      id: payload.id,
-      heading: payload.heading ||
-        (state.straatbeeld && state.straatbeeld.heading) ||
-        0,
-      isInitial: payload.isInitial,
-      isFullscreen: typeof payload.isFullscreen !== 'undefined' ? payload.isFullscreen
-        : state.straatbeeld && state.straatbeeld.isFullscreen ? state.straatbeeld.isFullscreen
-          : undefined
-    },
-    map: isObject(state.map) ? {
-      ...state.map,
-      isLoading: true
-    } : state.map,
     search: null,
     dataSelection: null
   };
@@ -68,15 +33,8 @@ function fetchStraatbeeldByLocationReducer(state, payload) {
 
   return {
     ...state,
-    straatbeeld: {
-      ...(state.straatbeeld || {}),
-      ...resetStraatbeeld(),
-      location: payload,
-      targetLocation: payload
-    },
     map: {
-      ...map,
-      geometry: []
+      ...map
     },
     ui: isObject(state.ui) ? {
       ...state.ui,
@@ -93,98 +51,11 @@ function fetchStraatbeeldByLocationReducer(state, payload) {
   };
 }
 
-function straatbeeldFullscreenReducer(state, payload) {
-  return {
-    ...state,
-    straatbeeld: isObject(state.straatbeeld) ? {
-      ...state.straatbeeld,
-      isFullscreen: typeof payload !== 'undefined' ? payload : state.straatbeeld.isFullscreen
-    } : state.straatbeeld
-  };
-}
-
-/**
- * @param {Object} state
- * @param {Object} payload -  data from straatbeeld-api
- *
- * @returns {Object} newState
- */
-function showStraatbeeldReducer(state, payload) {
-  return {
-    ...state,
-    straatbeeld: isObject(state.straatbeeld) ? {
-      ...state.straatbeeld,
-      id: payload.id || state.straatbeeld.id,
-      date: payload.date,
-      pitch: state.straatbeeld.pitch || 0,
-      fov: state.straatbeeld.fov || STRAATBEELD_CONFIG.DEFAULT_FOV,
-      heading: Array.isArray(state.straatbeeld.location) &&
-      Array.isArray(state.straatbeeld.targetLocation)
-        ? getHeadingDegrees(payload.location, state.straatbeeld.targetLocation)
-        : state.straatbeeld.heading,
-      hotspots: payload.hotspots,
-      isLoading: false,
-      location: payload.location,
-      image: payload.image
-    } : state.straatbeeld,
-    map: isObject(state.map) && isObject(state.straatbeeld) ? {
-      ...state.map,
-      isLoading: false,
-      viewCenter: isObject(state.straatbeeld) && !Array.isArray(state.straatbeeld.location)
-        ? payload.location : state.map.viewCenter
-    } : state.map
-  };
-}
-
-/**
- * @param {Object} oldState
- * @param {Object} payload -  data from straatbeeld-api
- *
- * @returns {Object} newState
- */
-function showStraatbeeldSubsequentReducer(oldState, payload) {
-  const state = showStraatbeeldReducer(oldState, payload);
-
-  return {
-    ...state,
-    map: isObject(state.map) ? {
-      ...state.map,
-      viewCenter: isObject(state.straatbeeld) ? payload.location : state.map.viewCenter
-    } : state.map
-  };
-}
-
-function setOrientationReducer(state, payload) {
-  return {
-    ...state,
-    straatbeeld: isObject(state.straatbeeld) ? {
-      ...state.straatbeeld,
-      heading: payload.heading,
-      pitch: payload.pitch,
-      fov: payload.fov
-    } : state.straatbeeld
-  };
-}
-
-function setStraatbeeldHistoryReducer(state, payload) {
-  return {
-    ...state,
-    straatbeeld: isObject(state.straatbeeld) ? {
-      ...state.straatbeeld,
-      history: payload
-    } : state.straatbeeld
-  };
-}
-
 const reducers = {};
 
-reducers[ACTIONS.FETCH_STRAATBEELD_BY_ID.id] = fetchStraatbeeldByIdReducer;
-reducers[ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT.id] = fetchStraatbeeldByIdReducer;
-reducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION.id] = fetchStraatbeeldByLocationReducer;
-reducers[ACTIONS.SET_STRAATBEELD_HISTORY.id] = setStraatbeeldHistoryReducer;
-reducers[ACTIONS.STRAATBEELD_FULLSCREEN.id] = straatbeeldFullscreenReducer;
-reducers[ACTIONS.SHOW_STRAATBEELD_INITIAL.id] = showStraatbeeldReducer;
-reducers[ACTIONS.SHOW_STRAATBEELD_SUBSEQUENT.id] = showStraatbeeldSubsequentReducer;
-reducers[ACTIONS.SET_STRAATBEELD_ORIENTATION.id] = setOrientationReducer;
+reducers[routing.mapPanorama.type] = fetchStraatbeeldByIdReducer;
+reducers[ACTIONS.FETCH_STRAATBEELD_BY_ID] = fetchStraatbeeldByIdReducer;
+reducers[ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT] = fetchStraatbeeldByIdReducer;
+reducers[ACTIONS.FETCH_STRAATBEELD_BY_LOCATION] = fetchStraatbeeldByLocationReducer;
 
 export default reducers;

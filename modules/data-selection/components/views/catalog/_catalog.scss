@@ -73,12 +73,18 @@
 }
 
 .c-data-selection-catalog__item {
+  display: block;
   width: 100%;
   padding-top: $base-whitespace * 2;
   padding-right: $base-whitespace * 2;
   padding-bottom: $base-whitespace;
   padding-left: $base-whitespace * 2;
   border-bottom: 1px solid $secondary-gray20;
+
+  a {
+    color: $primary-dark;
+    text-decoration: none;
+  }
 
   &:hover {
     @include o-tag;

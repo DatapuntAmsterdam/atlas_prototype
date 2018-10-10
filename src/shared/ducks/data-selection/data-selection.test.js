@@ -27,11 +27,9 @@ describe('DataSelection Reducer', () => {
       }]
     }))).toEqual({
       ...state,
-      dataset: 'bag',
       isFullscreen: false,
       page: 1,
       reset: false,
-      view: 'LIST',
       geometryFilter: {
         markers: [{
           marker: 'a'
@@ -54,7 +52,7 @@ describe('DataSelection Reducer', () => {
       });
     });
 
-    it('should ', () => {
+    it('should reset the geometry', () => {
       expect(reducer({
         ...state,
         geometryFilter: {
@@ -70,11 +68,9 @@ describe('DataSelection Reducer', () => {
         }
       }))).toEqual({
         ...state,
-        dataset: 'bag',
         isFullscreen: false,
         page: 1,
         reset: false,
-        view: 'LIST',
         geometryFilter: {
           markers: [{
             marker: 'b'

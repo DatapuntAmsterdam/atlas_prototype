@@ -1,3 +1,5 @@
+import { routing } from '../../../../src/app/routes';
+
 (function () {
     'use strict';
 
@@ -16,6 +18,8 @@
 
     function DpLogoController ($scope, HEADER) {
         const vm = this;
+
+        vm.homeType = routing.home.type;
 
         $scope.$watch('vm.size', updateSize);
 

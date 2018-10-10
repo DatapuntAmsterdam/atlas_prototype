@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { isSearchActive } from '../search-results/map-search-results';
 import { getDataSelection } from '../data-selection/data-selection';
 
-const detailSelector = (state) => state.detail;
+export const detailSelector = (state) => state.detail;
 const mapDetailSelector = (state) => state.mapDetail;
 
 export const getCurrentEndpoint = createSelector(mapDetailSelector,

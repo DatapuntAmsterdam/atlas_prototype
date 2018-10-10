@@ -10,12 +10,12 @@
                             s-cms-widget-content--inline
                             s-cms-widget-content--link"
                      ng-bind-html="entry.verkorteTitel.html"></div>
-                <dp-link ng-if="!entry.verkorteTitel.isHref"
-                         class-name="c-link"
-                         type="SHOW_PAGE"
-                         payload="{name: 'content-detail', type: vm.type, item: entry.id}"
+                <dp-redux-link
+                    ng-if="!entry.verkorteTitel.isHref"
+                    link-class="c-link"
+                    to="{type: vm.routing.nieuws.type }"
                     ><div class="s-cms-widget-content s-cms-widget-content--inline"
-                          ng-bind-html="entry.verkorteTitel.html"></div></dp-link>
+                          ng-bind-html="entry.verkorteTitel.html"></div></dp-redux-link>
             </h2>
 
             <div class="c-user-content-widget__news-content s-cms-widget-content"

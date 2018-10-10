@@ -1,3 +1,4 @@
+
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -11,6 +12,7 @@ module.exports = function(env) {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
+      historyApiFallback: true,
       disableHostCheck: true,
       contentBase: dist,
       compress: true,

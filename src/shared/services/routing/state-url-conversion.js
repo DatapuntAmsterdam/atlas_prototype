@@ -179,18 +179,6 @@ export default {
       name: '',
       error: false
     },
-    dataSelection: {
-      markers: [], // eg: [[52.1, 4.1], [52.2, 4.0]],
-      geometryFilter: {
-        markers: []
-      },
-      isLoading: true
-      // view: 'TABLE',
-      // dataset: 'bag',
-      // query: 'searchText',
-      // page: 1,
-      // isFullscreen: true,
-    },
     detail: {
       isFullscreen: false,
       isLoading: true,
@@ -209,7 +197,8 @@ export default {
       drawingMode: 'none',
       shapeMarkers: 0,
       shapeDistanceTxt: '',
-      shapeAreaTxt: ''
+      shapeAreaTxt: '',
+      selectedLocation: null
     },
     mapSearchResults: [],
     mapSearchResultsByLocation: {},

@@ -1,11 +1,11 @@
 import reducer, {
+  FETCH_PANEL_ITEMS_FAILURE,
   FETCH_PANEL_ITEMS_REQUEST,
   FETCH_PANEL_ITEMS_SUCCESS,
-  FETCH_PANEL_ITEMS_FAILURE,
   fetchPanelLayers,
+  getActiveMapLayersWithinZoom,
   getMapPanelLayers,
   selectActivePanelLayers,
-  getActiveMapLayersWithinZoom,
   selectNotClickableVisibleMapLayers
 } from './map-panel-layers';
 

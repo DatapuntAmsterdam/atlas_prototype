@@ -1,19 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HomepageAddressBlock should render with the default block-link 1`] = `
+exports[`HomepageAddressBlock should render links 1`] = `
 <HomepageBlock
   description="Selecteer en download als spreadsheet"
   hasTallDescription={true}
-  onBlockLinkClick={[Function]}
+  linkAction={
+    Object {
+      "type": "atlasRouter/ADRESSEN",
+    }
+  }
   title="Adressentabel"
 >
   <div
     className="homepage-block__item"
   >
-    <button
+    <Connect(Link)
       className="c-link homepage-block__link"
-      onClick={[Function]}
       title="Bekijk Adressentabel"
+      to={
+        Object {
+          "type": "atlasRouter/ADRESSEN",
+        }
+      }
     >
       <span
         className="homepage-block__icon"
@@ -25,15 +33,19 @@ exports[`HomepageAddressBlock should render with the default block-link 1`] = `
       >
         Adressentabel
       </span>
-    </button>
+    </Connect(Link)>
   </div>
   <div
     className="homepage-block__item"
   >
-    <button
+    <Connect(Link)
       className="c-link homepage-block__link"
-      onClick={[Function]}
       title="Bekijk handelsregister-tabel"
+      to={
+        Object {
+          "type": "atlasRouter/VESTIGINGEN",
+        }
+      }
     >
       <span
         className="homepage-block__icon"
@@ -45,15 +57,19 @@ exports[`HomepageAddressBlock should render with the default block-link 1`] = `
       >
         Handelsregister-tabel
       </span>
-    </button>
+    </Connect(Link)>
   </div>
   <div
-    className="homepage-block__item homepage-block__item--invisible"
+    className="homepage-block__item "
   >
-    <button
+    <Connect(Link)
       className="c-link homepage-block__link"
-      onClick={[Function]}
       title="Bekijk kadaster-tabel"
+      to={
+        Object {
+          "type": "atlasRouter/VESTIGINGEN",
+        }
+      }
     >
       <span
         className="homepage-block__icon"
@@ -65,7 +81,7 @@ exports[`HomepageAddressBlock should render with the default block-link 1`] = `
       >
         Kadaster-tabel
       </span>
-    </button>
+    </Connect(Link)>
   </div>
 </HomepageBlock>
 `;

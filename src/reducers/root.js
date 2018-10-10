@@ -15,9 +15,11 @@ import MapPanelLayersReducer from '../map/ducks/panel-layers/map-panel-layers';
 import StraatbeeldReducer from '../shared/ducks/straatbeeld/straatbeeld';
 import PanoPreviewReducer from '../pano/ducks/preview/pano-preview';
 import deprecatedReducer from './deprecated/deprecated-reducer';
+import CurrentPageReducer from './current-page-reducer';
+import CatalogReducer from '../shared/ducks/catalog/catalog';
 
-export default (oldState, action) => {
-    // Run state changes based on old reducers
+export default (routeReducer) => (oldState, action) => {
+  // Run state changes based on old reducers
   const deprecatedState = deprecatedReducer(oldState, action);
 
   const mapLayers = combineReducers({
@@ -26,8 +28,9 @@ export default (oldState, action) => {
     panelLayers: MapPanelLayersReducer
   });
 
-    // Use combine reducer for new reducers
+  // Use combine reducer for new reducers
   const newRootReducer = combineReducers({
+    catalog: CatalogReducer,
     dataSelection: DataSelectionReducer,
     page: PageReducer,
     error: ErrorMessageReducer,
@@ -39,7 +42,9 @@ export default (oldState, action) => {
     user: UserReducer,
     mapLayers,
     autoSuggest: AutoSuggestReducer,
-    catalogFilters: DataSelectionCatalogReducer
+    catalogFilters: DataSelectionCatalogReducer,
+    location: routeReducer,
+    currentPage: CurrentPageReducer
   });
   const filteredState = {
     dataSelection: deprecatedState.dataSelection,
@@ -50,19 +55,22 @@ export default (oldState, action) => {
     ui: deprecatedState.ui,
     user: deprecatedState.user,
 
-      // Using oldState instead of chaining deprecatedState from
-      // other reducer for the following fields.
-      // This is because these fields do not recide in the URL state,
-      // the URL resolution step in the deprecatedReducer would
-      // therefore reset these fields in the state.
+    // Using oldState instead of chaining deprecatedState from
+    // other reducer for the following fields.
+    // This is because these fields do not recide in the URL state,
+    // the URL resolution step in the deprecatedReducer would
+    // therefore reset these fields in the state.
+    catalog: oldState.catalog,
     error: oldState.error,
     pano: oldState.pano,
     mapLayers: oldState.mapLayers,
     autoSuggest: oldState.autoSuggest,
-    catalogFilters: oldState.catalogFilters
+    catalogFilters: oldState.catalogFilters,
+    location: oldState.location,
+    currentPage: oldState.currentPage
   };
 
-    // Combine old and new reducer states
+  // Combine old and new reducer states
   const newState = {
     ...deprecatedState,
     ...newRootReducer(filteredState, action)

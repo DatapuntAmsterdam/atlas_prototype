@@ -5,7 +5,8 @@
                 <!-- Link to map -->
                 <div class="qa-map-link">
                     <dp-link
-                        type="SHOW_MAP"
+                        type="{{vm.routing.map.type}}"
+                        query="{ lat: 52.3931081, lng: 4.8932945 }"
                         ng-mouseenter="vm.mapLinkHover=true;"
                         ng-mouseleave="vm.mapLinkHover=false;"
                         class-name="c-homepage__block c-homepage__block--left c-homepage__block--tall"
@@ -40,17 +41,12 @@
             <div class="u-col-sm--6 c-homepage__block--data-selection">
                 <!-- Links to data selection themes -->
                 <div class="c-homepage__block c-homepage__block--left c-homepage__block--tall c-homepage__block--datasets" ng-class="{ 'c-homepage__block--shadow': datasetsHover }">
-                    <dp-link class-name="c-homepage__block-button" type="FETCH_DATA_SELECTION" payload="{
-                             dataset: 'dcatd',
-                             filters: {},
-                             view: 'CATALOG',
-                             page: 1
-                         }" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
-                        <div class-name="c-homepage__block-button" ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
+                    <dp-redux-link class="c-homepage__block-button"
+                            to="vm.toCatalogus"
+                            ng-mouseover="datasetsHover = true" ng-mouseout="datasetsHover = false">
                             <div class="o-btn--transparent">Datasetcatalogus</div>
                             <div class="c-homepage__block-details">Blader door datasets (verzamelingen gegevens)</div>
-                        </div>
-                    </dp-link>
+                    </dp-redux-link>
                     <dp-catalogus-themes></dp-catalogus-themes>
                 </div>
             </div>
@@ -90,9 +86,10 @@
                             <dp-user-content-widget type="news" limit-to="3"></dp-user-content-widget>
                         </div>
                         <div class="u-padding__left--3 c-homepage__news-show-more">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'news'}"
-                                     >Nieuwsoverzicht</dp-link>
+                            <dp-redux-link
+                                to="{type: vm.routing.nieuws.type }"
+                                link-class="o-btn o-btn--link"
+                            >Nieuwsoverzicht</dp-redux-link>
                         </div>
                     </div>
                 </div>
@@ -100,19 +97,22 @@
                     <div class="u-margin__left--1 c-homepage__news-instructions">
                         <h2 class="c-homepage__news-instructions-title">Instructies</h2>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'snelwegwijs'}"
-                                 >Bediening</dp-link>
+                            <dp-redux-link
+                                to="{type: vm.routing.bediening.type }"
+                                link-class="o-btn o-btn--link"
+                            >Bediening</dp-redux-link>
                         </div>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'info'}"
-                                 >Gegevens</dp-link>
+                            <dp-redux-link
+                                to="{type: vm.routing.gegevens.type }"
+                                link-class="o-btn o-btn--link"
+                            >Gegevens</dp-redux-link>
                         </div>
                         <div class="c-user-content-widget__entry">
-                            <dp-link type="SHOW_PAGE"
-                                     payload="{name: 'content-overzicht', type: 'apis'}"
-                                 >API's</dp-link>
+                            <dp-redux-link
+                                to="{type: vm.routing.apis.type }"
+                                link-class="o-btn o-btn--link"
+                            >API's</dp-redux-link>
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,30 @@
             <div class="u-col-sm--1">&nbsp;</div>
             <div class="u-col-sm--3">
                 <div class="u-margin__left--1 c-homepage__beleid">
-                    <dp-user-content-widget type="beleid"></dp-user-content-widget>
+                    <div>
+                        <div class="c-user-content-widget__beleid-zie-ook">Over</div>
+                        <div class="c-user-content-widget__entry">
+                            <dp-redux-link to="{type: vm.routing.privacy_beveiliging.type }" link-class="o-btn o-btn--link">
+                                <div class="c-user-content-widget__short s-cms-widget-content s-cms-widget-content--inline">
+                                    <p>Privacy en informatiebeveiliging</p>
+                                </div>
+                            </dp-redux-link>
+                        </div>
+                        <div class="c-user-content-widget__entry">
+                            <dp-redux-link to="{type: vm.routing.beschikbaar_kwaliteit.type }" link-class="o-btn o-btn--link">
+                                <div class="c-user-content-widget__short s-cms-widget-content s-cms-widget-content--inline">
+                                    <p>Beschikbaarheid en kwaliteit data</p>
+                                </div>
+                            </dp-redux-link>
+                        </div>
+                        <div class="c-user-content-widget__entry">
+                            <dp-redux-link to="{type: vm.routing.beheer_werkwijze.type }" link-class="o-btn o-btn--link">
+                                <div class="c-user-content-widget__short s-cms-widget-content s-cms-widget-content--inline">
+                                    <p>Technisch beheer en werkwijze</p>
+                                </div>
+                            </dp-redux-link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

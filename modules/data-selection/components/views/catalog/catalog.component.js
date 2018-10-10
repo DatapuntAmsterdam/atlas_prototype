@@ -1,4 +1,5 @@
 import removeMd from 'remove-markdown';
+import { routing } from '../../../../../src/app/routes';
 
 (function () {
     'use strict';
@@ -37,6 +38,12 @@ import removeMd from 'remove-markdown';
                 }
             });
 
+            const id = item['dct:identifier'];
+            const linkTo = {
+                type: routing.catalogusDetail.type,
+                payload: { id }
+            };
+
             return {
                 header: item['dct:title'],
                 description: removeMd(item['dct:description']),
@@ -46,7 +53,7 @@ import removeMd from 'remove-markdown';
                 },
                 formats: $filter('aggregate')(formats),
                 tags: item['dcat:keyword'],
-                detailEndpoint: item._links.self.href
+                linkTo
             };
         });
 

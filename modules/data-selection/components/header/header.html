@@ -1,25 +1,25 @@
 <div ng-if="vm.showHeader" class="qa-header u-margin__bottom--3">
     <div ng-if="vm.showButtons" class="u-pull--right qa-buttons">
         <div class="u-inline-block u-margin__right--1">
-            <dp-data-selection-toggle-view-button view="vm.state.view"></dp-data-selection-toggle-view-button>
+            <dp-data-selection-toggle-view-button view="vm.view"></dp-data-selection-toggle-view-button>
         </div>
         <div ng-if="vm.showDownloadButton" class="u-inline-block qa-download-button">
-            <dp-data-selection-download-button dataset="{{vm.state.dataset}}" active-filters="vm.filters" geometry-filter="vm.state.geometryFilter">
+            <dp-data-selection-download-button dataset="{{vm.dataset}}" active-filters="vm.filters" geometry-filter="vm.state.geometryFilter">
             </dp-data-selection-download-button>
         </div>
     </div>
 
     <div class="qa-title">
-        <dp-dcatd-button ng-if="vm.canEditDataset && vm.state.view === 'CATALOG'" id="_" type="toevoegen">
+        <dp-dcatd-button ng-if="vm.canEditDataset && vm.view === 'CATALOG'" id="_" type="toevoegen">
           Toevoegen
           <span class="u-sr-only">Toevoegen</span>
         </dp-dcatd-button>
-        <h1 ng-if="vm.state.view === 'TABLE'">
+        <h1 ng-if="vm.view === 'TABLE'">
             {{vm.datasetTitle}}
             <span ng-if="vm.showNumberOfRecords">({{vm.numberOfRecords | number}})</span>
         </h1>
-        <h1 ng-if="vm.state.view === 'CATALOG'">Datasets ({{vm.numberOfRecords | number}})</h1>
-        <h1 ng-if="vm.state.view === 'LIST'">Resultaten</h1>
+        <h1 ng-if="vm.view === 'CATALOG'">Datasets ({{vm.numberOfRecords | number}})</h1>
+        <h1 ng-if="vm.view === 'LIST'">Resultaten</h1>
     </div>
 </div>
 
@@ -41,7 +41,7 @@
 
 <div ng-if="vm.showActiveFilters" class="qa-active-filters">
     <dp-data-selection-active-filters
-        dataset="{{vm.state.dataset}}",
+        dataset="{{vm.dataset}}",
         available-filters="vm.availableFilters"
         text-filters="vm.filters",
         geometry-filter="vm.state.geometryFilter">

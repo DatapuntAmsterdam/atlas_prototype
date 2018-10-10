@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import { routing } from '../../../../src/app/routes';
 
 (function () {
     'use strict';
@@ -11,14 +12,16 @@ import ReactDOM from 'react-dom';
             controllerAs: 'vm'
         });
 
-    DpHomepageController.$inject = ['HOMEPAGE_CONFIG', '$window', '$timeout'];
+    DpHomepageController.$inject = ['HOMEPAGE_CONFIG', '$window', '$timeout', 'store'];
 
-    function DpHomepageController (HOMEPAGE_CONFIG, $window, $timeout) {
+    function DpHomepageController (HOMEPAGE_CONFIG, $window, $timeout, store) {
         const vm = this;
         const React = $window.React;
         const render = $window.render;
         const homepageAddressBlockWrapper = $window.HomepageAddressBlockWrapper;
         let homepageAddressBlockWrapperContainer;
+
+        vm.routing = routing;
 
         vm.fetchStraatbeeldPayload = angular.merge(
             {},
@@ -28,6 +31,9 @@ import ReactDOM from 'react-dom';
                 isFullscreen: false
             }
         );
+
+        vm.toCatalogus = { type: routing.catalogus.type };
+
         $timeout(setReactComponents);
 
         function setReactComponents () {

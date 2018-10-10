@@ -57,9 +57,8 @@ class MapPreviewPanel extends React.Component {
   }
 
   onPanoPreviewClick() {
-    const { onOpenPanoById, search, pano } = this.props;
-    const location = search ? search.location.join(',') : `${pano.location.latitude},${pano.location.longitude}`;
-    const selectedPano = pano.previews[location];
+    const { onOpenPanoById, searchLocationId, pano } = this.props;
+    const selectedPano = pano.previews[searchLocationId];
     if (!selectedPano) {
       return;
     }
@@ -79,12 +78,13 @@ class MapPreviewPanel extends React.Component {
     const isLoading = get(props, 'search.isLoading') || get(props, 'mapDetail.isLoading');
     const isSearchLoaded = !isLoading && props.search && props.searchLocation;
     const isDetailLoaded = !isLoading && props.detail && props.mapDetail && props.detailResult;
+    const hidden = !(props.mapClickLocation || isLoading);
 
     return !props.isEmbed && (
       <div className="map-preview-panel-wrapper">
         <section className={`
           map-preview-panel
-          map-preview-panel--${props.isMapPreviewPanelVisible ? 'visible' : 'hidden'}
+          map-preview-panel--${hidden ? 'hidden' : 'visible'}
         `}
         >
           <div className="map-preview-panel__heading">
@@ -157,7 +157,6 @@ MapPreviewPanel.defaultProps = {
   detail: {},
   detailResult: {},
   isEmbed: false,
-  isMapPreviewPanelVisible: false,
   mapDetail: {},
   missingLayers: '',
   pano: {},
@@ -173,7 +172,6 @@ MapPreviewPanel.propTypes = {
   detail: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   detailResult: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   isEmbed: PropTypes.bool,
-  isMapPreviewPanelVisible: PropTypes.bool,
   mapDetail: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   missingLayers: PropTypes.string,
   onMapPreviewPanelClose: PropTypes.func.isRequired,

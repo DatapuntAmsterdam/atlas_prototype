@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HomepageBlock should render with the children and default block-link 1`] = `
+exports[`HomepageBlock should render with the children and default link 1`] = `
 <div
   className="homepage-block c-homepage__block c-homepage__block--tall"
 >
@@ -9,10 +9,14 @@ exports[`HomepageBlock should render with the children and default block-link 1`
       This is a child of the homepageblock
     </span>
   </div>
-  <button
+  <Connect(Link)
     className="c-homepage__block-button "
-    onClick={[MockFunction]}
     title="Bekijk test block"
+    to={
+      Object {
+        "type": "foo",
+      }
+    }
   >
     <div
       className="o-btn--transparent"
@@ -24,18 +28,22 @@ exports[`HomepageBlock should render with the children and default block-link 1`
     >
       click here for the test link in the block
     </div>
-  </button>
+  </Connect(Link)>
 </div>
 `;
 
-exports[`HomepageBlock should render with the default block-link 1`] = `
+exports[`HomepageBlock should render with the default link 1`] = `
 <div
   className="homepage-block c-homepage__block c-homepage__block--tall"
 >
-  <button
+  <Connect(Link)
     className="c-homepage__block-button "
-    onClick={[MockFunction]}
     title="Bekijk test block"
+    to={
+      Object {
+        "type": "foo",
+      }
+    }
   >
     <div
       className="o-btn--transparent"
@@ -47,6 +55,6 @@ exports[`HomepageBlock should render with the default block-link 1`] = `
     >
       click here for the test link in the block
     </div>
-  </button>
+  </Connect(Link)>
 </div>
 `;

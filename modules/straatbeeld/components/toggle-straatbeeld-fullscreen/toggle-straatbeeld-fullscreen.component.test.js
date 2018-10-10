@@ -1,25 +1,33 @@
+import { UPDATE_MAP } from '../../../../src/map/ducks/map/map';
+
 describe('The dp-toggle-straatbeeld-fullscreen component', function () {
     var $compile,
         $rootScope,
         store,
         scope,
-        ACTIONS;
+        currentLocation = {
+            type: 'atlasRouter/PANORAMA'
+        };
 
     beforeEach(function () {
         angular.mock.module(
             'dpStraatbeeld',
             {
                 store: {
-                    dispatch: function () { }
+                    dispatch: function () { },
+                    getState: function () {
+                        return {
+                            location: currentLocation
+                        };
+                    }
                 }
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _store_, _ACTIONS_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _store_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
-            ACTIONS = _ACTIONS_;
         });
 
         spyOn(store, 'dispatch');
@@ -53,12 +61,21 @@ describe('The dp-toggle-straatbeeld-fullscreen component', function () {
             $rootScope.$apply();
 
             expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: true
+                type: UPDATE_MAP,
+                payload: {
+                    noRedirect: true,
+                    route: 'atlasRouter/KAART_PANORAMA',
+                    query: {
+                        panoId: undefined,
+                        panoHeading: undefined
+                    }
+                }
             });
 
+            currentLocation = {
+                type: 'atlasRouter/KAART_PANORAMA'
+            };
             store.dispatch.calls.reset();
-
             // When straatbeeld is large
             directive = getDirective(true);
 
@@ -66,21 +83,15 @@ describe('The dp-toggle-straatbeeld-fullscreen component', function () {
             $rootScope.$apply();
 
             expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: false
-            });
-        });
-
-        it('can change a fullscreen straatbeeld to window-view', function () {
-            const directive = getDirective(true);
-            const toggle = directive.find('.qa-toggle-straatbeeld-fullscreen');
-
-            toggle.click();
-            $rootScope.$apply();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: false
+                type: UPDATE_MAP,
+                payload: {
+                    noRedirect: true,
+                    route: 'atlasRouter/PANORAMA',
+                    query: {
+                        panoId: undefined,
+                        panoHeading: undefined
+                    }
+                }
             });
         });
 

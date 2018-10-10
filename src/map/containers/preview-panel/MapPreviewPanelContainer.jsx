@@ -1,29 +1,31 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { maximizeMapPreviewPanel, closeMapPreviewPanel, fetchSearchResults }
-  from '../../ducks/preview-panel/map-preview-panel';
-import { selectLatestMapSearchResults }
-  from '../../ducks/search-results/map-search-results';
+import {
+  fetchSearchResults,
+  maximizeMapPreviewPanel
+} from '../../ducks/preview-panel/map-preview-panel';
+import { clearSelectedLocation } from '../../ducks/map/map';
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { selectLatestMapDetail } from '../../ducks/detail/map-detail';
 import { toggleMapFullscreen } from '../../../shared/ducks/ui/ui';
-import { fetchStraatbeeldById } from '../../ducks/straatbeeld/straatbeeld';
+import { showStraatbeeld } from '../../../shared/ducks/straatbeeld/straatbeeld';
 import { fetchDetail as legacyFetchDetail } from '../../../reducers/details';
 import MapPreviewPanel from './MapPreviewPanel';
-
+import {
+  getLocationId,
+  getSelectedLocation,
+  getShortSelectedLocation,
+  selectLatestMapSearchResults
+} from '../../ducks/map/map-selectors';
 
 const mapStateToProps = (state) => ({
-  isMapPreviewPanelVisible: state.isMapPreviewPanelVisible,
-  mapClickLocation: state.mapClickLocation,
+  mapClickLocation: getSelectedLocation(state),
   pano: state.pano,
   results: selectLatestMapSearchResults(state),
   search: state.search,
-  searchLocation: state.search && state.search.location && {
-    latitude: state.search.location[0],
-    longitude: state.search.location[1]
-  },
-  searchLocationId: state.search && state.search.location && state.search.location.toString(),
+  searchLocation: getShortSelectedLocation(state),
+  searchLocationId: getLocationId(state),
   missingLayers: selectNotClickableVisibleMapLayers(state)
     .map((mapLayer) => mapLayer.title)
     .join(', '),
@@ -36,10 +38,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   onSearch: fetchSearchResults,
-  onMapPreviewPanelClose: closeMapPreviewPanel,
+  onMapPreviewPanelClose: clearSelectedLocation,
   onMapPreviewPanelMaximize: maximizeMapPreviewPanel,
   onMapSearchResultsItemClick: legacyFetchDetail,
-  onOpenPanoById: fetchStraatbeeldById,
+  onOpenPanoById: showStraatbeeld,
   closeMapFullScreen: toggleMapFullscreen
 }, dispatch);
 

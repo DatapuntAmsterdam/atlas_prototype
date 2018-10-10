@@ -11,7 +11,9 @@
                 filters: '<',
                 state: '<',
                 user: '<',
-                zoomLevel: '<'
+                zoomLevel: '<',
+                view: '<',
+                dataset: '<'
             },
             controller: DpDataSelectionController,
             controllerAs: 'vm'
@@ -38,7 +40,7 @@
     ) {
         const vm = this;
 
-        vm.showCatalogusIntroduction = vm.state.view === 'CATALOG' &&
+        vm.showCatalogusIntroduction = vm.view === 'CATALOG' &&
             userSettings.showCatalogusIntroduction.value === true.toString();
 
         $scope.$watch('vm.showCatalogusIntroduction', function () {
@@ -50,11 +52,11 @@
             'vm.boundingBox',
             'vm.catalogFilters',
             'vm.filters',
-            'vm.state.dataset',
+            'vm.dataset',
+            'vm.view',
             'vm.state.geometryFilter',
             'vm.state.page',
             'vm.state.query',
-            'vm.state.view',
             'vm.user.scopes',
             'vm.zoomLevel'
         ], fetchData);
@@ -71,9 +73,8 @@
         }
 
         function fetchData () {
-            const config = DATA_SELECTION_CONFIG.datasets[vm.state.dataset];
-            const isListView = vm.state.view === 'LIST';
-            vm.view = vm.state.view;
+            const config = DATA_SELECTION_CONFIG.datasets[vm.dataset];
+            const isListView = vm.view === 'LIST';
 
             const isQueryView = angular.isDefined(vm.state.query) && vm.state.query.trim().length >= 1;
             vm.showTabHeader = () => (vm.view === 'CATALOG') && isQueryView;
@@ -88,7 +89,7 @@
             if (config.AUTH_SCOPE && !vm.user.scopes.includes(config.AUTH_SCOPE)) {
                 vm.disabled = true;
                 vm.notAuthorizedMessageSrc =
-                    `modules/data-selection/components/data-selection/not-authorized-message/${vm.state.dataset}.html`;
+                    `modules/data-selection/components/data-selection/not-authorized-message/${vm.dataset}.html`;
                 vm.availableFilters = [];
                 store.dispatch({
                     type: ACTIONS.SHOW_DATA_SELECTION,
@@ -101,8 +102,8 @@
 
             dataSelectionApi
                 .query(
-                    vm.state.dataset,
-                    vm.state.view,
+                    vm.dataset,
+                    vm.view,
                     vm.filters,
                     vm.currentPage,
                     vm.state.query,
@@ -117,11 +118,11 @@
                     vm.showFilters = !isListView && vm.numberOfRecords > 0;
 
                     // determine if warning messages should be shown
-                    vm.maxAvailablePages = DATA_SELECTION_CONFIG.datasets[vm.state.dataset].MAX_AVAILABLE_PAGES;
+                    vm.maxAvailablePages = DATA_SELECTION_CONFIG.datasets[vm.dataset].MAX_AVAILABLE_PAGES;
                     vm.showMessageMaxPages = vm.maxAvailablePages && vm.state.page > vm.maxAvailablePages;
 
                     vm.maxNumberOfClusteredMarkers =
-                        DATA_SELECTION_CONFIG.datasets[vm.state.dataset].MAX_NUMBER_OF_CLUSTERED_MARKERS;
+                        DATA_SELECTION_CONFIG.datasets[vm.dataset].MAX_NUMBER_OF_CLUSTERED_MARKERS;
                     vm.showMessageClusteredMarkers = isListView && vm.numberOfRecords > vm.maxNumberOfClusteredMarkers;
 
                     updateTabHeader(vm.state.query, vm.numberOfRecords);
@@ -130,7 +131,8 @@
                         vm.numberOfRecords &&
                         (
                             angular.isUndefined(vm.maxAvailablePages) ||
-                            vm.state.page <= vm.maxAvailablePages
+                            angular.isUndefined(vm.state.page) ||
+                            vm.state.page <= vm.maxAvailablePages // TODO refactor, get page through query parameter
                         );
 
                     const activeFilters = angular.extend({
@@ -141,7 +143,7 @@
                         // Get marker data and update the state to show the
                         // data
                         dataSelectionApi
-                            .getMarkers(vm.state.dataset, activeFilters, vm.zoomLevel, vm.boundingBox)
+                            .getMarkers(vm.dataset, activeFilters, vm.zoomLevel, vm.boundingBox)
                             .then(markerData => {
                                 store.dispatch({
                                     type: ACTIONS.SHOW_DATA_SELECTION,

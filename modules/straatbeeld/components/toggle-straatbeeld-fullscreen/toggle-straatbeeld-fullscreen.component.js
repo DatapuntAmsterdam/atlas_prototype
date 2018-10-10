@@ -1,3 +1,7 @@
+import { routing } from '../../../../src/app/routes';
+import { UPDATE_MAP } from '../../../../src/map/ducks/map/map';
+import { getStraatbeeld } from '../../../../src/shared/ducks/straatbeeld/straatbeeld';
+
 (function () {
     'use strict';
 
@@ -9,14 +13,14 @@
                 isFullscreen: '<'
             },
             templateUrl:
-            'modules/straatbeeld/components/toggle-straatbeeld-fullscreen/toggle-straatbeeld-fullscreen.html',
+                'modules/straatbeeld/components/toggle-straatbeeld-fullscreen/toggle-straatbeeld-fullscreen.html',
             controller: DpStraatbeeldFullscreenController,
             controllerAs: 'vm'
         });
 
-    DpStraatbeeldFullscreenController.$inject = ['$scope', 'store', 'ACTIONS'];
+    DpStraatbeeldFullscreenController.$inject = ['$scope', 'store'];
 
-    function DpStraatbeeldFullscreenController ($scope, store, ACTIONS) {
+    function DpStraatbeeldFullscreenController ($scope, store) {
         const vm = this;
 
         const deregistrationFn = $scope.$watch('vm.isFullscreen', setButtonText);
@@ -27,8 +31,17 @@
 
         vm.toggleFullscreen = function () {
             store.dispatch({
-                type: ACTIONS.STRAATBEELD_FULLSCREEN,
-                payload: !vm.isFullscreen
+                type: UPDATE_MAP,
+                payload: {
+                    noRedirect: true,
+                    route: (store.getState().location.type === routing.panorama.type)
+                        ? routing.mapPanorama.type
+                        : routing.panorama.type,
+                    query: {
+                        panoId: getStraatbeeld(store.getState()).id,
+                        panoHeading: getStraatbeeld(store.getState()).heading
+                    }
+                }
             });
         };
 

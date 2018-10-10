@@ -1,30 +1,78 @@
+import ACTIONS, { FETCH_SEARCH_RESULTS_BY_LOCATION } from '../../actions';
+import stateToUrl from '../routing/state-to-url';
+import { AUTHENTICATE_USER } from '../../../reducers/user';
+import {
+  MAP_UPDATE_SHAPE,
+  MAP_ZOOM_SILENT,
+  MAP_PAN_SILENT,
+  MAP_BOUNDING_BOX_SILENT,
+  MAP_EMPTY_GEOMETRY,
+  MAP_START_DRAWING
+} from '../../../map/ducks/map/map';
+import {
+  SET_DATA_SELECTION_GEOMETRY_FILTER,
+  RESET_DATA_SELECTION_GEOMETRY_FILTER
+} from '../../ducks/data-selection/data-selection';
+import {
+  FETCH_CATALOG_FILTERS_REQUEST
+} from '../../../catalog/ducks/data-selection/data-selection-catalog';
+
+// old type actions
+const urlIgnoreActions = [
+  ACTIONS.URL_CHANGE,
+  ACTIONS.FETCH_DETAIL,
+  ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT,
+  ACTIONS.SHOW_STRAATBEELD_INITIAL,
+  ACTIONS.MAP_CLICK,
+  ACTIONS.HIDE_STRAATBEELD,
+  FETCH_SEARCH_RESULTS_BY_LOCATION,
+  ACTIONS.FETCH_SEARCH_RESULTS_CATEGORY,
+  ACTIONS.MAP_ADD_PANO_OVERLAY,
+  ACTIONS.MAP_REMOVE_PANO_OVERLAY,
+  ACTIONS.MAP_CLICK,
+  ACTIONS.MAP_START_DRAWING,
+  ACTIONS.FETCH_DETAIL,
+  ACTIONS.FETCH_STRAATBEELD_BY_HOTSPOT,
+  ACTIONS.SHOW_STRAATBEELD_INITIAL,
+  ACTIONS.HIDE_STRAATBEELD,
+  ACTIONS.FETCH_DATA_SELECTION,
+  ACTIONS.RESET_DATA_SELECTION,
+  ACTIONS.APPLY_FILTERS,
+  ACTIONS.EMPTY_FILTERS
+];
+
+const replaceActions = [
+  ACTIONS.MAP_PAN,
+  ACTIONS.MAP_ZOOM,
+  ACTIONS.DETAIL_FULLSCREEN,
+  ACTIONS.SHOW_STRAATBEELD,
+  ACTIONS.SET_STRAATBEELD_ORIENTATION
+];
+
+// union old type actions - ignored actions
+const ignoreActions = [
+  AUTHENTICATE_USER,
+  MAP_START_DRAWING,
+  MAP_EMPTY_GEOMETRY,
+  MAP_UPDATE_SHAPE,
+  MAP_ZOOM_SILENT,
+  MAP_PAN_SILENT,
+  MAP_BOUNDING_BOX_SILENT,
+  SET_DATA_SELECTION_GEOMETRY_FILTER,
+  RESET_DATA_SELECTION_GEOMETRY_FILTER,
+  FETCH_CATALOG_FILTERS_REQUEST,
+  ...urlIgnoreActions
+];
+
 const stateToUrlMiddleware = (store) => (next) => (action) => {
-  // Are we dealing with vanilla js reducers here (type is a
-  // string instead of an object with an ID and other
-  // optional attributes)?
-  const vanilla = typeof action.type === 'string';
-
-  const ignoredActions = ['AUTHENTICATE_USER', 'MAP_START_DRAWING',
-    'MAP_EMPTY_GEOMETRY', 'MAP_UPDATE_SHAPE', 'MAP_ZOOM_SILENT', 'MAP_PAN_SILENT',
-    'MAP_BOUNDING_BOX_SILENT', 'SET_DATA_SELECTION_GEOMETRY_FILTER',
-    'RESET_DATA_SELECTION_GEOMETRY_FILTER',
-    'FETCH_CATALOG_FILTERS_REQUEST'];
-
-  // vanilla (new actions) that don't need to be saved to the location history (replace)
-  const replaceHistoryActions = ['MAP_ZOOM', 'MAP_PAN'];
-
   // Update the state first
   const returnValue = next(action);
+  const updateUrl = !ignoreActions.includes(action.type);
+  const replaceUrl = replaceActions.includes(action.type);
 
   // Then update the URL
-  // window.stateToUrl is the angular factory that uses $location
-  const stateToUrl = window.stateToUrl;
-  if ((vanilla || !action.type.ignore) && !ignoredActions.includes(action.type)) {
-    stateToUrl.update(
-      store.getState(),
-      ((!vanilla && Boolean(action.type.replace)) || (vanilla &&
-      replaceHistoryActions.some((historyAction) => historyAction === action.type)))
-    );
+  if (updateUrl || replaceUrl) {
+    stateToUrl.update(store.getState(), replaceUrl);
   }
   return returnValue;
 };

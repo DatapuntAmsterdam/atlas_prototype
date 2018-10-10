@@ -1,8 +1,9 @@
+import { routing } from '../../../../../src/app/routes';
+
 describe('The dp-catalogus-themes', () => {
     let $compile,
         $rootScope,
-        store,
-        ACTIONS;
+        store;
 
     beforeEach(() => {
         angular.mock.module(
@@ -39,11 +40,10 @@ describe('The dp-catalogus-themes', () => {
             }
         );
 
-        angular.mock.inject((_$compile_, _$rootScope_, _store_, _ACTIONS_) => {
+        angular.mock.inject((_$compile_, _$rootScope_, _store_) => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             store = _store_;
-            ACTIONS = _ACTIONS_;
         });
 
         spyOn(store, 'dispatch');
@@ -67,21 +67,13 @@ describe('The dp-catalogus-themes', () => {
         expect(component.find('.qa-theme-link').eq(0).attr('class'))
             .toContain('c-catalogus-theme__icon c-catalogus-theme__icon--icon-a');
 
-        component.find('.qa-theme-link').eq(0).click();
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.APPLY_FILTERS,
-            payload: {
-                groups: 'thema-a'
-            }
-        });
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_DATA_SELECTION,
-            payload: {
-                dataset: 'dcatd',
-                view: 'CATALOG',
-                page: 1
+        const scope = component.isolateScope();
+        const link = component.find('.qa-theme-link').eq(4);
+        expect(link).toHaveAttr('to', 'theme.linkTo');
+        expect(scope.vm.themes[4].linkTo).toEqual({
+            type: routing.catalogus.type,
+            query: {
+                filter_theme: 'thema-e'
             }
         });
 
@@ -91,24 +83,6 @@ describe('The dp-catalogus-themes', () => {
         expect(component.find('.qa-theme-link').eq(4).text()).toBe('Thema E');
         expect(component.find('.qa-theme-link').eq(4).attr('class'))
             .toContain('c-catalogus-theme__icon c-catalogus-theme__icon--icon-e');
-
-        component.find('.qa-theme-link').eq(4).click();
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.APPLY_FILTERS,
-            payload: {
-                groups: 'thema-e'
-            }
-        });
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: ACTIONS.FETCH_DATA_SELECTION,
-            payload: {
-                dataset: 'dcatd',
-                view: 'CATALOG',
-                page: 1
-            }
-        });
     });
 
     it('when the number of themes is uneven the left column will have more themes than the right column', () => {

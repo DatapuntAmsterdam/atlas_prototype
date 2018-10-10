@@ -7,9 +7,9 @@ const templates = require.context('..', true, /\.html$/);
         .module('atlas')
         .run(runBlock);
 
-    runBlock.$inject = ['$templateCache', 'ATLAS_VERSION'];
+    runBlock.$inject = ['$templateCache', 'store', 'ATLAS_VERSION'];
 
-    function runBlock ($templateCache, atlasVersion) {
+    function runBlock ($templateCache, store, atlasVersion) {
         templates.keys().forEach((key) => {
             // Remove the dot from './dir/template.html' and prepend with
             // 'modules' to get 'modules/dir/template.html'.

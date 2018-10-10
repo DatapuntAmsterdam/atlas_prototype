@@ -4,15 +4,15 @@ import watchFetchNearestDetails, { fetchNearestDetails } from './nearest-details
 
 import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
 
-import ACTIONS from '../../../shared/actions';
+import ACTIONS, { REQUEST_GEOSEARCH, REQUEST_NEAREST_DETAILS } from '../../../shared/actions';
 
 describe('watchFetchNearestDetails', () => {
-  const action = { type: 'REQUEST_NEAREST_DETAILS' };
+  const action = { type: REQUEST_NEAREST_DETAILS };
 
   it('should watch REQUEST_NEAREST_DETAILS and call fetchPanelLayers', () => {
     testSaga(watchFetchNearestDetails)
       .next()
-      .takeLatestEffect('REQUEST_NEAREST_DETAILS', fetchNearestDetails)
+      .takeLatestEffect(REQUEST_NEAREST_DETAILS, fetchNearestDetails)
       .next(action)
       .isDone();
   });
@@ -58,7 +58,7 @@ describe('fetchNearestDetails', () => {
         }
       })
       .put({
-        type: 'REQUEST_GEOSEARCH',
+        type: REQUEST_GEOSEARCH,
         payload: [action.payload.location.latitude, action.payload.location.longitude]
       })
       .run()
@@ -70,7 +70,7 @@ describe('fetchNearestDetails', () => {
       .next()
       .throw(error)
       .put({
-        type: 'REQUEST_GEOSEARCH',
+        type: REQUEST_GEOSEARCH,
         payload: [action.payload.location.latitude, action.payload.location.longitude]
       })
       .next()

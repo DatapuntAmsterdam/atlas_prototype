@@ -5,6 +5,12 @@ import { shallow } from 'enzyme';
 import DrawToolContainer from './DrawToolContainer';
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 
+import { setDataSelectionGeometryFilter } from '../../../shared/ducks/data-selection/data-selection';
+import { setPageName } from '../../../shared/ducks/page/page';
+import { setMapFullscreen } from '../../../shared/ducks/ui/ui';
+import { setStraatbeeldOff } from '../../../shared/ducks/straatbeeld/straatbeeld';
+
+import { isEnabled } from '../../services/draw-tool/draw-tool';
 import {
   MAP_CLEAR,
   mapClear,
@@ -12,12 +18,6 @@ import {
   mapStartDrawing,
   mapUpdateShape
 } from '../../ducks/map/map';
-import { setDataSelectionGeometryFilter } from '../../../shared/ducks/data-selection/data-selection';
-import { setPageName } from '../../../shared/ducks/page/page';
-import { setMapFullscreen } from '../../../shared/ducks/ui/ui';
-import { setStraatbeeldOff } from '../../../shared/ducks/straatbeeld/straatbeeld';
-
-import { isEnabled } from '../../services/draw-tool/draw-tool';
 
 jest.mock('../../services/draw-tool/draw-tool');
 

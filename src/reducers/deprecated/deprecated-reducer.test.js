@@ -6,11 +6,12 @@ import * as DataSelectionReducer from '../data-selection-reducers';
 import * as MapPreviewPanelReducer from '../../map/ducks/preview-panel/map-preview-panel';
 import * as PageReducer from '../page-reducers';
 import * as filtersReducers from './filters-reducers';
-import * as straatbeeldReducers from './straatbeeld-reducers';
 import * as MapSearchResultsReducer from '../../map/ducks/search-results/map-search-results';
-import * as MapClickLocationReducer from '../../map/ducks/click-location/map-click-location';
 import * as searchReducers from './search-reducers';
 import * as deepFreeze from '../../shared/services/freeze/freeze';
+
+const ACTION_NO_REDUCER = 'ACTION_NO_REDUCER';
+const FREEZE = 'FREEZE';
 
 describe('The deprecated reducer', () => {
   beforeEach(() => {
@@ -24,7 +25,6 @@ describe('The deprecated reducer', () => {
     const actionC = jest.fn();
     const actionF = jest.fn();
     const actionG = jest.fn();
-    const actionH = jest.fn();
     const actionI = jest.fn();
     const actionL = jest.fn();
 
@@ -34,22 +34,18 @@ describe('The deprecated reducer', () => {
     homeReducer.default = { ACTION_C: actionC };
     PageReducer.default = { ACTION_F: actionF };
     searchReducers.default = { ACTION_G: actionG };
-    straatbeeldReducers.default = { ACTION_H: actionH };
 
-    reducer(state, { type: { id: 'ACTION_C' } });
-    reducer(state, { type: { id: 'ACTION_F' } });
-    reducer(state, { type: { id: 'ACTION_G' } });
-    reducer(state, { type: { id: 'ACTION_H' } });
-    reducer(state, { type: { id: 'ACTION_I' } });
-    reducer(state, { type: { id: 'ACTION_L' } });
+    reducer(state, { type: 'ACTION_C' });
+    reducer(state, { type: 'ACTION_F' });
+    reducer(state, { type: 'ACTION_G' });
+    reducer(state, { type: 'ACTION_I' });
+    reducer(state, { type: 'ACTION_L' });
 
     expect(actionC.mock.calls[0])
       .toEqual([state, undefined]);
     expect(actionF.mock.calls[0])
       .toEqual([state, undefined]);
     expect(actionG.mock.calls[0])
-      .toEqual([state, undefined]);
-    expect(actionH.mock.calls[0])
       .toEqual([state, undefined]);
     expect(actionI.mock.calls[0])
       .toEqual([state, undefined]);
@@ -62,47 +58,38 @@ describe('The deprecated reducer', () => {
     const state = { foo: 'bar' };
 
     DetailsReducer.default = jest.fn();
-    reducer(state, { type: { id: 'FETCH_DETAIL' }, payload });
+    reducer(state, { type: DetailsReducer.FETCH_DETAIL, payload });
 
     expect(DetailsReducer.default.mock.calls[0])
-      .toEqual([state, { payload, type: 'FETCH_DETAIL' }]);
+      .toEqual([state, { payload, type: DetailsReducer.FETCH_DETAIL }]);
   });
 
   it('calls MapSearchResultsReducer', () => {
     const state = { foo: 'bar' };
-
+    const action = { type: MapSearchResultsReducer.FETCH_MAP_SEARCH_RESULTS_FAILURE };
     MapSearchResultsReducer.default = jest.fn();
-    reducer(state, { type: { id: 'FETCH_MAP_SEARCH_RESULTS_FAILURE' } });
+    reducer(state, action);
 
     expect(MapSearchResultsReducer.default.mock.calls[0])
-      .toEqual([state, undefined]);
-  });
-
-  it('calls MapClickLocationReducer', () => {
-    const state = { foo: 'bar' };
-
-    MapClickLocationReducer.default = jest.fn();
-    reducer(state, { type: { id: 'SET_MAP_CLICK_LOCATION' } });
-
-    expect(MapClickLocationReducer.default.mock.calls[0])
-      .toEqual([state, undefined]);
+      .toEqual([state, action]);
   });
 
   it('calls MapPreviewPanelReducer', () => {
     const state = { foo: 'bar' };
+    const action = { type: MapPreviewPanelReducer.OPEN_MAP_PREVIEW_PANEL };
 
     MapPreviewPanelReducer.default = jest.fn();
-    reducer(state, { type: { id: 'OPEN_MAP_PREVIEW_PANEL' } });
+    reducer(state, action);
 
     expect(MapPreviewPanelReducer.default.mock.calls[0])
-      .toEqual([state, undefined]);
+      .toEqual([state, action]);
   });
 
 
   it('returns the oldState if the specified action type has no separate reducer', () => {
     const state = { foo: 'bar' };
     // Note redux has some built-in action types that we can safely ignore.
-    const output = reducer(state, { type: { id: 'ACTION_NO_REDUCER' } });
+    const output = reducer(state, { type: ACTION_NO_REDUCER });
 
     expect(output)
       .toBe(state);
@@ -113,7 +100,7 @@ describe('The deprecated reducer', () => {
     DataSelectionReducer.default = { FREEZE: (s) => s };
 
     environment.isDevelopment = () => true;
-    reducer(state, { type: { id: 'FREEZE' } });
+    reducer(state, { type: FREEZE });
 
     expect(deepFreeze.default).toHaveBeenCalledWith(state);
   });
@@ -122,7 +109,7 @@ describe('The deprecated reducer', () => {
     const state = { foo: 'bar' };
     const payload = { abc: 'xyz' };
     DetailsReducer.default = jest.fn();
-    const action = { type: 'FETCH_DETAIL', payload };
+    const action = { type: DetailsReducer.FETCH_DETAIL, payload };
     reducer(state, action);
 
     expect(DetailsReducer.default.mock.calls[0])
@@ -134,7 +121,7 @@ describe('The deprecated reducer', () => {
     const payload = { abc: 'xyz' };
     DetailsReducer.default = () => state;
     environment.isDevelopment = () => true;
-    const action = { type: 'FETCH_DETAIL', payload };
+    const action = { type: DetailsReducer.FETCH_DETAIL, payload };
 
     reducer(state, action);
 

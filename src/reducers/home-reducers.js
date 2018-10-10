@@ -21,6 +21,6 @@ function showHomeReducer(state) {
 
 const reducers = {};
 
-reducers[ACTIONS.SHOW_HOME.id] = showHomeReducer;
+reducers[ACTIONS.SHOW_HOME] = showHomeReducer;
 
 export default reducers;

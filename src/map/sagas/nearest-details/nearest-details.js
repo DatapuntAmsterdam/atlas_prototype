@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
 
-import ACTIONS from '../../../shared/actions';
+import ACTIONS, { REQUEST_GEOSEARCH, REQUEST_NEAREST_DETAILS } from '../../../shared/actions';
 
 export function* fetchNearestDetails(action) {
   const {
@@ -20,18 +20,18 @@ export function* fetchNearestDetails(action) {
       });
     } else {
       yield put({
-        type: 'REQUEST_GEOSEARCH',
+        type: REQUEST_GEOSEARCH,
         payload: [location.latitude, location.longitude]
       });
     }
   } catch (error) {
     yield put({
-      type: 'REQUEST_GEOSEARCH',
+      type: REQUEST_GEOSEARCH,
       payload: [location.latitude, location.longitude]
     });
   }
 }
 
 export default function* watchFetchNearestDetails() {
-  yield takeLatest('REQUEST_NEAREST_DETAILS', fetchNearestDetails);
+  yield takeLatest(REQUEST_NEAREST_DETAILS, fetchNearestDetails);
 }

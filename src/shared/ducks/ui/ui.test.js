@@ -1,11 +1,8 @@
 import UiReducer, {
-  hideMapPanel,
   setMapFullscreen,
-  showMapPanel,
   toggleMapFullscreen,
   toggleMapPanel,
   toggleMapPanelHandle,
-  SHOW_MAP,
   SHOW_PRINT,
   HIDE_PRINT,
   SHOW_EMBED_PREVIEW,
@@ -24,21 +21,6 @@ describe('UiReducer', () => {
       isMapPanelVisible: false,
       isMapPanelHandleVisible: true,
       isMapFullscreen: false
-    });
-  });
-
-  it('should show the map panel', () => {
-    expect(UiReducer(state, showMapPanel())).toEqual({
-      ...state,
-      isMapPanelVisible: true
-    });
-  });
-
-  it('should hide the map panel', () => {
-    const newState = UiReducer(state, showMapPanel());
-    expect(UiReducer(newState, hideMapPanel())).toEqual({
-      ...state,
-      isMapPanelVisible: false
     });
   });
 
@@ -115,16 +97,6 @@ describe('UiReducer', () => {
     })).toEqual({
       ...state,
       isPrintMode: false
-    });
-  });
-
-  it('should set the show map visibility and full screen state to true', () => {
-    expect(UiReducer(state, {
-      type: SHOW_MAP
-    })).toEqual({
-      ...state,
-      isMapPanelVisible: true,
-      isMapFullscreen: true
     });
   });
 
