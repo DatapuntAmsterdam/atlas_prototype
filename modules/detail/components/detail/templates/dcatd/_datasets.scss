@@ -95,6 +95,11 @@
     &:hover {
       background-color: $secondary-gray10;
     }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 }
 

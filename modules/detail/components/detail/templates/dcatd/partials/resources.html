@@ -1,47 +1,42 @@
 <div class="resources">
-
     <div class="resources-type" ng-repeat="resourceType in vm.apiData.results.resources">
         <div class="resources-type__header">
             <span class="resources-type__header-title">{{resourceType.type | optionLabel: vm.catalogFilters.resourceTypes}}</span>
         </div>
         <div class="resources-type__content" ng-repeat="resource in resourceType.rows">
             <div class="resources-type__content-item">
-
-                <div class="resources-item" dp-follow-link="{{ resource['ams:purl'] }}" dp-follow-link-resource-name={{vm.apiData.results["dct:title"]}}>
-
-                        <div class="resources-item__left">
-                            <div class="resources-item__title">
-                                {{resource['dct:title']}}
-                            </div>
-
-                            <div class="resources-item__description">
-                                    <span ng-if="resource['ams:distributionType'] === 'file'"
-                                          class="c-data-selection-file-type
-                                                 c-data-selection-file-type__name
-                                                 c-data-selection-file-type__format-{{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes| lowercase}}">
-                                                 {{(resource['dct:format'] || 'n/a') | optionLabel: vm.catalogFilters.formatTypes}}</span>
-                                    <span ng-if="resource['ams:distributionType'] === 'api'"
-                                          class="c-data-selection-file-type
-                                                 c-data-selection-file-type__name
-                                                 c-data-selection-file-type__format-{{resource['ams:serviceType'] | optionLabel: vm.catalogFilters.serviceTypes| lowercase}}">
-                                                 {{(resource['ams:serviceType'] || 'other') | optionLabel: vm.catalogFilters.serviceTypes}}</span>
-                                    <span ng-if="resource['ams:distributionType'] === 'web'"
-                                          class="c-data-selection-file-type
-                                                 c-data-selection-file-type__name
-                                                 c-data-selection-file-type__format-{{resource['ams:distributionType'] | optionLabel: vm.catalogFilters.distributionTypes| lowercase}}">
-                                                 {{resource['ams:distributionType'] | optionLabel: vm.catalogFilters.distributionTypes}}</span>
-                                </span>
-                                <div>{{ resource['dct:description'] ? vm.stripMarkdown(resource['dct:description']) : resource['ams:purl'] }}</div>
-                            </div>
+                <a class="resources-item" href="{{resource['ams:purl']}}" target="_blank">
+                    <div class="resources-item__left">
+                        <div class="resources-item__title">
+                            {{resource['dct:title']}}
                         </div>
-                        <div class="resources-item__right">
-                            <div class="resources-item__modified">{{resource['dct:modified'] | date:'dd MMMM yyyy' }}</div>
-                            <div class="resources-item__navigation">
-                                <div class="resources-item__navigation-file-size" ng-if="resource['dcat:byteSize'] > 0">{{resource['dcat:byteSize'] | filesize}}</div>
-                                <div class="resources-item__navigation-arrow"></div>
-                            </div>
+                        <div class="resources-item__description">
+                            <span ng-if="resource['ams:distributionType'] === 'file'"
+                                  class="c-data-selection-file-type
+                                         c-data-selection-file-type__name
+                                         c-data-selection-file-type__format-{{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes| lowercase}}">
+                                         {{(resource['dct:format'] || 'n/a') | optionLabel: vm.catalogFilters.formatTypes}}</span>
+                            <span ng-if="resource['ams:distributionType'] === 'api'"
+                                  class="c-data-selection-file-type
+                                         c-data-selection-file-type__name
+                                         c-data-selection-file-type__format-{{resource['ams:serviceType'] | optionLabel: vm.catalogFilters.serviceTypes| lowercase}}">
+                                         {{(resource['ams:serviceType'] || 'other') | optionLabel: vm.catalogFilters.serviceTypes}}</span>
+                            <span ng-if="resource['ams:distributionType'] === 'web'"
+                                  class="c-data-selection-file-type
+                                         c-data-selection-file-type__name
+                                         c-data-selection-file-type__format-{{resource['ams:distributionType'] | optionLabel: vm.catalogFilters.distributionTypes| lowercase}}">
+                                         {{resource['ams:distributionType'] | optionLabel: vm.catalogFilters.distributionTypes}}</span>
+                            <div>{{resource['dct:description'] ? vm.stripMarkdown(resource['dct:description']) : resource['ams:purl']}}</div>
                         </div>
-                </div>
+                    </div>
+                    <div class="resources-item__right">
+                        <div class="resources-item__modified">{{resource['dct:modified'] | date:'dd MMMM yyyy' }}</div>
+                        <div class="resources-item__navigation">
+                            <div class="resources-item__navigation-file-size" ng-if="resource['dcat:byteSize'] > 0">{{resource['dcat:byteSize'] | filesize}}</div>
+                            <div class="resources-item__navigation-arrow"></div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
