@@ -53,7 +53,9 @@ describe('datasets module', () => {
 
       // as downloading is not testable, we check for the presence of href
       cy.get('.resources-item').should('exist').and('be.visible')
-        .and('have.attr', 'href');
+        .and('have.attr', 'ng-href')
+        .and('have.attr', 'dp-follow-link')
+        .and('have.attr', 'dp-follow-link-resource-name');
     });
 
     it('should open the datasets catalogus with a filter and see filtered results', () => {

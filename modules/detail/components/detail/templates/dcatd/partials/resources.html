@@ -5,7 +5,7 @@
         </div>
         <div class="resources-type__content" ng-repeat="resource in resourceType.rows">
             <div class="resources-type__content-item">
-                <a class="resources-item" href="{{resource['ams:purl']}}" target="_blank">
+                <a class="resources-item" ng-href="{{resource['ams:purl']}}" dp-follow-link="{{ resource['ams:purl'] }}" dp-follow-link-resource-name={{vm.apiData.results["dct:title"]}} target="_blank">
                     <div class="resources-item__left">
                         <div class="resources-item__title">
                             {{resource['dct:title']}}
