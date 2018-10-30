@@ -1,6 +1,6 @@
 <div class="c-logo qa-logo"
      ng-class="'c-logo--' + vm.size">
-    <dp-link type="SHOW_HOME" class-name="c-logo__link" hover-text="Naar voorpagina Dataportaal">
+    <dp-link type="SHOW_HOME" class-name="c-logo__link" hover-text="Naar voorpagina Dataportaal" ng-click="vm.navigateHomeClick()">
         <div class="c-logo__image-col qa-logo__image-col">
             <img class="c-logo__image qa-logo__image"
                  ng-src="assets/images/logo-{{vm.size}}.svg"
