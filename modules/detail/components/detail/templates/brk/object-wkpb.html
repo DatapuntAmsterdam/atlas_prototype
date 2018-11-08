@@ -39,7 +39,7 @@
         <dt>Perceeloppervlakte</dt>
         <dd>
             <span ng-if="vm.apiData.results.grootte">
-                {{vm.apiData.results.grootte}} m<sup>2</sup>
+                {{vm.apiData.results.grootte | number}} m<sup>2</sup>
             </span>
         </dd>
         <dt>Toestandsdatum</dt>

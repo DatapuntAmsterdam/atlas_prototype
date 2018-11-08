@@ -109,3 +109,10 @@ Cypress.Commands.add('logout', () => {
     }
   });
 });
+
+// Cypress doesn’t recognize `window.fetch` calls as XHR requests, which makes
+// it impossible to stub them. We delete `fetch` from the window object so the
+// `unfetch` polyfill (which uses proper `XMLHttpRequest`) kicks in.
+Cypress.on('window:before:load', (win) => {
+  delete win.fetch; // eslint-disable-line no-param-reassign
+});

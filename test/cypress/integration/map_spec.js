@@ -24,18 +24,18 @@ describe('map module', () => {
     });
   });
 
-  // TODO Skipping these tests because they seem to fail inside the docker
-  // container
-  describe.skip('user should be able to interact with the map', () => {
+  describe('user should be able to interact with the map', () => {
     it('should show results based on the interaction with the map', () => {
       cy.server();
       cy.defineGeoSearchRoutes();
       cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding');
       cy.route('/bag/verblijfsobject/*').as('getVerblijfsobject');
       cy.route('/panorama/thumbnail/*').as('getPanoThumbnail');
-      // TODO: enable this (getResults) once fetch is supported by Cypress
-      // https://github.com/cypress-io/cypress/issues/95
-      // cy.route('/typeahead?q=dam+1').as('getResults');
+      cy.route('/monumenten/monumenten/*').as('getMonumenten');
+
+      // Use regular expression to match spaces
+      cy.route(/\/typeahead\?q=dam 1/).as('getTypeaheadResults');
+
       // ensure the viewport is always the same in this test, so the clicks can be aligned properly
       cy.viewport(1000, 660);
       cy.visit('/');
@@ -43,9 +43,7 @@ describe('map module', () => {
       cy.get('.qa-map-link').click();
       cy.get('#auto-suggest__input').focus().type('dam 1');
 
-      // TODO: remove wait(500) and enably the route-wait
-      cy.wait(500);
-      // cy.wait('@getResults');
+      cy.wait('@getTypeaheadResults');
       cy.get('.auto-suggest').contains('Dam 1').click();
 
       cy.wait('@getVerblijfsobject');
@@ -64,9 +62,14 @@ describe('map module', () => {
       cy.get('.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive')
         .should('exist').and('be.visible')
         .and('have.attr', 'src', 'assets/images/map/search.svg');
-      cy.get('.map-preview-panel.map-preview-panel--visible').contains('Beursplein 2').click();
 
+      cy.wait('@getMonumenten');
       cy.wait('@getNummeraanduiding');
+      cy.get('.map-preview-panel.map-preview-panel--visible').contains('Beursplein 15').click();
+
+      cy.wait('@getMonumenten');
+      cy.wait('@getNummeraanduiding');
+
       cy.get('.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive')
         .should('exist').and('be.visible')
         .and('have.attr', 'src', 'assets/images/map/detail.svg');
@@ -79,19 +82,17 @@ describe('map module', () => {
       // become visible
       cy.get('button.map-preview-panel__button[title="Volledige weergave tonen"]').click();
       cy.get(columnRight).should('exist').and('be.visible');
-      cy.get(columnRight).get('.qa-title').contains('Beursplein 2');
+      cy.get(columnRight).get('.qa-title').contains('Beursplein 15');
       cy.get(columnRight).get('dl').contains('1012JW');
       cy.wait('@getPanoThumbnail');
       cy.get(columnRight)
         .get('img.c-straatbeeld-thumbnail--img')
         .should('exist').and('be.visible');
-      cy.get('.c-panel--warning').should('exist').and('be.visible');
-      cy.get('.c-panel--warning').contains('Dit is een nevenadres');
     });
 
     it('should remember the state when navigating back', () => {
       cy.server();
-      cy.route('/geosearch/search/?item=meetbout*').as('getResults');
+      cy.route('/geosearch/search/?*').as('getSearchResults');
       cy.route('/meetbouten/meetbout/*').as('getMeetbout');
       cy.route('/panorama/thumbnail/*').as('getPanoThumbnail');
       // ensure the viewport is always the same in this test, so the clicks can be aligned properly
@@ -103,6 +104,7 @@ describe('map module', () => {
         .contains('Zichtbaar bij verder inzoomen')
         .and('is.visible');
       cy.get('.leaflet-control-zoom-in').click();
+
       // wait for the second click
       cy.wait(250);
       cy.get('.leaflet-control-zoom-in').click();
@@ -110,9 +112,10 @@ describe('map module', () => {
       cy.get('.map-legend__items').should('exist').and('be.visible');
 
       // click on the map
+      cy.wait(250);
       cy.get('.qa-map-container').click(702, 517);
 
-      cy.wait('@getResults');
+      cy.wait('@getSearchResults');
       cy.wait('@getMeetbout');
       cy.checkPreviewPanel(['Nieuwmarkt 25', '10581111']);
 

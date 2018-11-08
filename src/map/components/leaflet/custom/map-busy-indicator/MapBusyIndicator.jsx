@@ -41,7 +41,7 @@ export default class MapBusyIndicator extends MapControl {
   createMapContolExtension() { // eslint-disable-line class-methods-use-this
     return {
       options: {
-        position: 'topleft'
+        position: 'topright'
       },
 
       initialize(options) {
@@ -54,12 +54,12 @@ export default class MapBusyIndicator extends MapControl {
       createContainer() {
         //  create a container for the indicator
         this.indicatorContainer = L.DomUtil.create('div', 'leaflet-control-layer-container leaflet-bar');
-
-        // Create the loading indicator
-        const indicator = L.DomUtil.create('img', 'leaflet-control-loading', this.indicatorContainer);
-        indicator.alt = 'laden...';
-        indicator.src = 'assets/images/spinner.svg';
-
+        this.indicatorContainer.innerHTML = `
+          <div class="c-loading-indicator c-loading-indicator--box">
+              <img class="c-loading-indicator__icon" src="assets/images/spinner.svg" alt="">
+              <span class="c-loading-indicator__text">Bezig met laden...</span>
+          </div>
+        `;
         return this.indicatorContainer;
       },
 

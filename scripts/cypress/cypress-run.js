@@ -13,7 +13,9 @@ return cypress.run({
     USERNAME_EMPLOYEE_PLUS: process.env.USERNAME_EMPLOYEE_PLUS,
     PASSWORD_EMPLOYEE: process.env.PASSWORD_EMPLOYEE,
     PASSWORD_EMPLOYEE_PLUS: process.env.PASSWORD_EMPLOYEE_PLUS
-  }
+  },
+  // Uncomment next line for debugging of only one script
+  // spec: 'test/cypress/integration/map_spec.js'
 })
 .then((results) => {
   if(results.totalFailed > 0) {

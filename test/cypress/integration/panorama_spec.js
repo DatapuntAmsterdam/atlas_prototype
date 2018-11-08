@@ -108,7 +108,7 @@ describe('panorama module', () => {
       cy.get('.leaflet-marker-pane').find('img').should('exist').and('be.visible');
       cy.get('#auto-suggest__input').type('lei');
 
-      // TODO: remove wait(500) and enably the route-wait
+      // TODO: remove wait(500) and enable the route-wait (DP-6088)
       cy.wait(500);
       cy.get('.auto-suggest').contains('Leidsegracht').click();
 

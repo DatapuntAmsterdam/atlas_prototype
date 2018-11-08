@@ -139,6 +139,34 @@ describe('MapLeaflet component', () => {
     wrapper.setProps({
       layers: [
         {
+          id: 'biz',
+          isVisible: false,
+          overlayOptions: {
+            format: 'image/png',
+            identify: false,
+            layers: ['biz_polygons']
+          },
+          transparent: true,
+          url: 'https://acc.map.data.amsterdam.nl/maps/biz'
+        }
+      ],
+      rdGeoJsons: [
+        {},
+        {
+          geoJson: {
+            coordinates: [120983, 487047],
+            type: 'Point',
+            label: 'Adres YE39'
+          },
+          id: 'YE39'
+        }
+      ]
+    });
+    expect(wrapper).toMatchSnapshot();
+
+    wrapper.setProps({
+      layers: [
+        {
           id: 'bbn',
           isVisible: true,
           overlayOptions: {
@@ -171,7 +199,8 @@ describe('MapLeaflet component', () => {
                 ]
               ]
             ],
-            type: 'MultiPolygon'
+            type: 'MultiPolygon',
+            label: 'Object YE39'
           },
           id: 'YE39'
         }

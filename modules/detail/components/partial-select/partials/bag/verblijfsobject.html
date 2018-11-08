@@ -16,7 +16,7 @@
             <dt>Aanduiding in onderzoek</dt>
             <dd>{{ apiData.results.aanduiding_in_onderzoek | yesNo }}</dd>
             <dt>Oppervlakte</dt>
-            <dd ng-if="apiData.results.oppervlakte !== 1">{{ apiData.results.oppervlakte }} m<sup>2</sup></dd>
+            <dd ng-if="apiData.results.oppervlakte !== 1">{{ apiData.results.oppervlakte | number}} m<sup>2</sup></dd>
             <dd ng-if="apiData.results.oppervlakte === 1">onbekend</dd>
             <dt>Aantal kamers</dt>
             <dd>{{ apiData.results.aantal_kamers }}</dd>

@@ -11,10 +11,7 @@ exports[`MapLegend should render the component 1`] = `
     className="map-legend"
   >
     <li
-      className="
-                map-legend__map-layer
-                map-legend__map-layer--hidden
-              "
+      className="map-legend__map-layer"
       key="title"
     >
       <div
@@ -70,10 +67,7 @@ exports[`MapLegend should render the component 1`] = `
       </ul>
     </li>
     <li
-      className="
-                map-legend__map-layer
-                map-legend__map-layer--hidden
-              "
+      className="map-legend__map-layer"
       key="title"
     >
       <div

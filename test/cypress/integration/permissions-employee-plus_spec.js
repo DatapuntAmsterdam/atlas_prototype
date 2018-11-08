@@ -6,22 +6,15 @@ describe('employee PLUS permissions', () => {
     cy.login('EMPLOYEE_PLUS');
   });
 
-  beforeEach(() => {
-    // go to the homepage
-    cy.visit('/');
-  });
-
   after(() => {
     cy.logout();
   });
 
-  it.skip('0. Should show "Kadastrale subjecten" for medewerker plus in the autocomplete', () => {
-    // TODO: enable this test once fetch is fully supported by Cypress
-    // this test now fails because we send the auth headers in the fetch call
-    // https://github.com/cypress-io/cypress/issues/95
-
+  it('0. Should show "Kadastrale subjecten" for medewerker plus in the autocomplete', () => {
     cy.server();
     cy.route('/typeahead?q=bakker').as('getResults');
+
+    cy.visit('/');
 
     cy.get('#auto-suggest__input').focus().type('bakker');
 
@@ -35,6 +28,8 @@ describe('employee PLUS permissions', () => {
   it('1. Should show no message after search is performed', () => {
     cy.server();
     cy.defineSearchRoutes();
+
+    cy.visit('/');
 
     cy.get('#auto-suggest__input').focus().type('bakker');
     cy.get('.qa-search-form-submit').click();
@@ -181,17 +176,14 @@ describe('employee PLUS permissions', () => {
     cy.get(queries.listItem).contains(values.pandVestigingName);
   });
 
-  it.skip('7C. Should show a plus employee all information in a Geo search', () => {
-    // TODO: enable this test once fetch is fully supported by Cypress
-    // this test now fails because we send the auth headers in the fetch call
-    // https://github.com/cypress-io/cypress/issues/95
-
+  it('7C. Should show a plus employee all information in a Geo search', () => {
     cy.server();
     cy.defineGeoSearchRoutes();
     cy.route('/bag/pand/*').as('getResults');
     cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten');
     cy.route('/bag/nummeraanduiding/?pand=*').as('getNummeraanduidingen');
     cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen');
+    cy.route('/panorama/thumbnail/*').as('getPanorama');
 
     cy.visit(urls.geoSearch);
 
@@ -200,7 +192,8 @@ describe('employee PLUS permissions', () => {
     cy.wait('@getMonumenten');
     cy.wait('@getNummeraanduidingen');
     cy.wait('@getVestigingen');
-    cy.get('.o-header').contains('121393.70, 4873');
+    cy.wait('@getPanorama');
+    cy.get('.qa-search-header').contains('121393');
     cy.get(queries.warningPanel).should('not.exist');
     cy.get(queries.headerSubTitle).contains(values.vestigingen);
     cy.get('button.toggle-fullscreen').click();

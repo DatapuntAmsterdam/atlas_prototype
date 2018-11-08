@@ -1,23 +1,15 @@
 import { queries, urls, values } from '../support/permissions-constants';
 
 describe('visitor permissions', () => {
-  beforeEach(() => {
-    // go to the homepage
-    cy.visit('/');
-    cy.logout();
-  });
-
   it('0. Should NOT show "Kadastrale subjecten" in the autocomplete', () => {
     cy.server();
-    // TODO: enable this (getResults) once fetch is supported by Cypress
-    // https://github.com/cypress-io/cypress/issues/95
-    // cy.route('/typeahead?q=bakker').as('getResults');
+    cy.route('/typeahead?q=bakker').as('getResults');
+
+    cy.visit('/');
 
     cy.get('#auto-suggest__input').focus().type('bakker');
 
-    // TODO: remove wait(500) and enably the route-wait
-    cy.wait(500);
-    // cy.wait('@getResults');
+    cy.wait('@getResults');
     cy.get('.auto-suggest__tip').should('exist').and('be.visible');
     cy.get(queries.autoSuggestHeader).should(($values) => {
       expect($values).to.not.contain(values.kadastraleSubjecten);
@@ -27,6 +19,8 @@ describe('visitor permissions', () => {
   it('1. Should show a message after search is performed', () => {
     cy.server();
     cy.defineSearchRoutes();
+
+    cy.visit('/');
 
     cy.get('#auto-suggest__input').focus().type('bakker');
     cy.get('.qa-search-form-submit').click();

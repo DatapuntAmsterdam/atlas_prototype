@@ -82,7 +82,7 @@ const MapDetailAdressenVerblijfsobject = ({
         />
         <MapDetailResultItem
           label="Oppervlakte"
-          value={verblijfsobject.size ? `${verblijfsobject.size} m²` : 'onbekend'}
+          value={verblijfsobject.size ? `${verblijfsobject.size.toLocaleString('nl-NL')} m²` : 'onbekend'}
         />
       </ul>
     </MapDetailResultWrapper>

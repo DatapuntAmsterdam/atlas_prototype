@@ -18,24 +18,25 @@ exports[`MapSearchResults rendering should filter external monumenten on pand re
       disabled={true}
       onClick={[MockFunction]}
       title="Geen Panoramabeeld beschikbaar"
-    />
-    <div
-      className="map-search-results__header-container"
     >
-      <h1
-        className="map-search-results__header-title"
+      <div
+        className="map-search-results__header-container"
       >
-        Resultaten
-      </h1>
-      <h2
-        className="map-search-results__header-subtitle"
-      >
-        locatie 
-        1.12
-        , 
-        654.32
-      </h2>
-    </div>
+        <h1
+          className="map-search-results__header-title"
+        >
+          Resultaten
+        </h1>
+        <h2
+          className="map-search-results__header-subtitle"
+        >
+          locatie 
+          1.12
+          , 
+          654.32
+        </h2>
+      </div>
+    </button>
   </header>
   <div
     className="map-search-results__scroll-wrapper"
@@ -131,24 +132,25 @@ exports[`MapSearchResults rendering should render empty results 1`] = `
       disabled={true}
       onClick={[MockFunction]}
       title="Geen Panoramabeeld beschikbaar"
-    />
-    <div
-      className="map-search-results__header-container"
     >
-      <h1
-        className="map-search-results__header-title"
+      <div
+        className="map-search-results__header-container"
       >
-        Resultaten
-      </h1>
-      <h2
-        className="map-search-results__header-subtitle"
-      >
-        locatie 
-        1.12
-        , 
-        654.32
-      </h2>
-    </div>
+        <h1
+          className="map-search-results__header-title"
+        >
+          Resultaten
+        </h1>
+        <h2
+          className="map-search-results__header-subtitle"
+        >
+          locatie 
+          1.12
+          , 
+          654.32
+        </h2>
+      </div>
+    </button>
   </header>
   <div
     className="map-search-results__scroll-wrapper"
@@ -200,24 +202,24 @@ exports[`MapSearchResults rendering should render results 1`] = `
         src="pano-url"
         width="438"
       />
+      <div
+        className="map-search-results__header-container"
+      >
+        <h1
+          className="map-search-results__header-title"
+        >
+          Resultaten
+        </h1>
+        <h2
+          className="map-search-results__header-subtitle"
+        >
+          locatie 
+          1.12
+          , 
+          654.32
+        </h2>
+      </div>
     </button>
-    <div
-      className="map-search-results__header-container"
-    >
-      <h1
-        className="map-search-results__header-title"
-      >
-        Resultaten
-      </h1>
-      <h2
-        className="map-search-results__header-subtitle"
-      >
-        locatie 
-        1.12
-        , 
-        654.32
-      </h2>
-    </div>
   </header>
   <div
     className="map-search-results__scroll-wrapper"
@@ -314,24 +316,24 @@ exports[`MapSearchResults rendering should update results 1`] = `
         src="pano-url"
         width="438"
       />
+      <div
+        className="map-search-results__header-container"
+      >
+        <h1
+          className="map-search-results__header-title"
+        >
+          Resultaten
+        </h1>
+        <h2
+          className="map-search-results__header-subtitle"
+        >
+          locatie 
+          1.12
+          , 
+          654.32
+        </h2>
+      </div>
     </button>
-    <div
-      className="map-search-results__header-container"
-    >
-      <h1
-        className="map-search-results__header-title"
-      >
-        Resultaten
-      </h1>
-      <h2
-        className="map-search-results__header-subtitle"
-      >
-        locatie 
-        1.12
-        , 
-        654.32
-      </h2>
-    </div>
   </header>
   <div
     className="map-search-results__scroll-wrapper"
@@ -418,24 +420,24 @@ exports[`MapSearchResults rendering should update results 2`] = `
         src="other-pano-url"
         width="438"
       />
+      <div
+        className="map-search-results__header-container"
+      >
+        <h1
+          className="map-search-results__header-title"
+        >
+          Resultaten
+        </h1>
+        <h2
+          className="map-search-results__header-subtitle"
+        >
+          locatie 
+          1.12
+          , 
+          654.32
+        </h2>
+      </div>
     </button>
-    <div
-      className="map-search-results__header-container"
-    >
-      <h1
-        className="map-search-results__header-title"
-      >
-        Resultaten
-      </h1>
-      <h2
-        className="map-search-results__header-subtitle"
-      >
-        locatie 
-        1.12
-        , 
-        654.32
-      </h2>
-    </div>
   </header>
   <div
     className="map-search-results__scroll-wrapper"

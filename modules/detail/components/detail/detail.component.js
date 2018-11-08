@@ -1,6 +1,7 @@
 import removeMd from 'remove-markdown';
 
 import { getMapClickLocation } from '../../../../src/map/ducks/click-location/map-click-location';
+import piwikTracker from '../../../../src/shared/services/piwik-tracker/piwik-tracker';
 
 (function () {
     angular
@@ -75,6 +76,9 @@ import { getMapClickLocation } from '../../../../src/map/ducks/click-location/ma
         });
 
         vm.stripMarkdown = (val) => removeMd(val);
+
+        // TODO DP-6031: Create Redux Middelware, map Piwik events to ACTIONS
+        vm.geosearchButtonClick = () => sendPiwikEvent();
 
         function getData (endpoint) {
             vm.location = null;
@@ -158,6 +162,18 @@ import { getMapClickLocation } from '../../../../src/map/ducks/click-location/ma
                 type: ACTIONS.SHOW_DETAIL,
                 payload: {}
             });
+        }
+
+        // TODO DP-6031: Create Redux Middelware, map Piwik events to ACTIONS
+        function sendPiwikEvent () {
+            const piwik = {
+                TRACK_EVENT: 'trackEvent',
+                SHOW_ALL_RESULTS: 'show-all-results',
+                NAVIGATION: 'navigation'
+            };
+
+            piwikTracker([piwik.TRACK_EVENT, piwik.NAVIGATION,
+                piwik.SHOW_ALL_RESULTS, window.document.title]);
         }
     }
 })();

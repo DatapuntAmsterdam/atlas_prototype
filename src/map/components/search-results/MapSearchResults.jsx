@@ -50,13 +50,13 @@ const MapSearchResults = ({
               width="438"
             />
           )}
+          <div className="map-search-results__header-container">
+            <h1 className="map-search-results__header-title">Resultaten</h1>
+            <h2 className="map-search-results__header-subtitle">
+              locatie {rdCoordinates.x.toFixed(2)}, {rdCoordinates.y.toFixed(2)}
+            </h2>
+          </div>
         </button>
-        <div className="map-search-results__header-container">
-          <h1 className="map-search-results__header-title">Resultaten</h1>
-          <h2 className="map-search-results__header-subtitle">
-            locatie {rdCoordinates.x.toFixed(2)}, {rdCoordinates.y.toFixed(2)}
-          </h2>
-        </div>
       </header>
       <div className="map-search-results__scroll-wrapper">
         <ul className="map-search-results__list">

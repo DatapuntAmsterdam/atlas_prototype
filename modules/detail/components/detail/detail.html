@@ -1,4 +1,6 @@
-<dp-link ng-if="vm.geosearchButton" class-name="o-btn o-btn--plus c-detail__geosearch" type="FETCH_SEARCH_RESULTS_BY_LOCATION" payload="vm.geosearchButton" >Alle resultaten op deze locatie tonen</dp-link>
+<dp-link ng-if="vm.geosearchButton" class-name="o-btn o-btn--plus c-detail__geosearch" ng-click="vm.geosearchButtonClick()" type="FETCH_SEARCH_RESULTS_BY_LOCATION" payload="vm.geosearchButton" >
+  Alle resultaten op deze locatie tonen
+</dp-link>
 
 <div class="c-detail">
     <div ng-if="vm.isLoading">

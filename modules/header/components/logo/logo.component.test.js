@@ -1,3 +1,5 @@
+import * as piwik from '../../../../src/shared/services/piwik-tracker/piwik-tracker';
+
 describe('The dp-logo component', () => {
     let $compile,
         $rootScope;
@@ -16,6 +18,8 @@ describe('The dp-logo component', () => {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
         });
+
+        spyOn(piwik, 'default').and.callFake(angular.noop);
     });
 
     function getComponent (size) {
@@ -49,6 +53,11 @@ describe('The dp-logo component', () => {
 
         it('shows the short logo image', () => {
             expect(component.find('.qa-logo__image')[0].getAttribute('src')).toContain('logo-short');
+        });
+
+        it('it handles piwik on ng-click', () => {
+            component.find('.c-logo__link').click();
+            expect(piwik.default).toHaveBeenCalledWith(['trackEvent', 'navigation', 'home', '']);
         });
     });
 

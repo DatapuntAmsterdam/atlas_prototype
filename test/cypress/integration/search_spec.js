@@ -1,14 +1,11 @@
 import { getCountFromHeader } from '../support/helper-functions';
 
 describe('search module', () => {
-  beforeEach(() => {
-    // go to the homepage
-    cy.visit('/');
-  });
-
   it('should show results when searching for "dam"', () => {
     cy.server();
     cy.defineSearchRoutes();
+
+    cy.visit('/');
 
     cy.get('#auto-suggest__input').type('dam');
     // submit search form

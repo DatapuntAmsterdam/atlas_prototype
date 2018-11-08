@@ -71,10 +71,7 @@ class MapLegend extends React.Component {
         <ul className="map-legend">
           {activeMapLayers.map((mapLayer) => (
             <li
-              className={`
-                map-legend__map-layer
-                map-legend__map-layer--${this.determineLayerVisibility(mapLayer) ? 'visible' : 'hidden'}
-              `}
+              className="map-legend__map-layer"
               key={mapLayer.title}
             >
               <div

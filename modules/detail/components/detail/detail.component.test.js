@@ -1,3 +1,5 @@
+import * as piwik from '../../../../src/shared/services/piwik-tracker/piwik-tracker';
+
 describe('the dp-detail component', () => {
     var $compile,
         $rootScope,
@@ -199,6 +201,7 @@ describe('the dp-detail component', () => {
             mapClickLocation: { latitude: 52.654, longitude: 4.987 }
         });
         spyOn(api, 'getByUrl').and.callThrough();
+        spyOn(piwik, 'default').and.callFake(angular.noop);
     });
 
     function getComponent (endpoint, isLoading, skippedSearchResults = false, show = true, catalogFilters = undefined) {
@@ -616,6 +619,12 @@ describe('the dp-detail component', () => {
 
             const scope = component.isolateScope();
             expect(scope.vm.geosearchButton).toEqual([52.654, 4.987]);
+        });
+
+        it('it handles piwik on ng-click', () => {
+            const component = getComponent('http://www.fake-endpoint.com/bag/nummeraanduiding/123/', false, true);
+            component.find('.c-detail__geosearch').click();
+            expect(piwik.default).toHaveBeenCalledWith(['trackEvent', 'navigation', 'show-all-results', '']);
         });
     });
 

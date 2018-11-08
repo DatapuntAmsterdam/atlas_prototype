@@ -17,17 +17,19 @@ import MapBusyIndicator from './custom/map-busy-indicator/MapBusyIndicator';
 
 const visibleToOpacity = ((isVisible) => (isVisible ? 100 : 0));
 
-const convertBounds = (leafletBounds) => ({
-  northEast: {
-    latitude: leafletBounds._northEast.lat,
-    longitude: leafletBounds._northEast.lng
-  },
-  southWest: {
-    latitude: leafletBounds._southWest.lat,
-    longitude: leafletBounds._southWest.lng
-  }
-});
-
+const convertBounds = (map) => {
+  const leafletBounds = map.getBounds();
+  return ({
+    northEast: {
+      latitude: leafletBounds._northEast.lat,
+      longitude: leafletBounds._northEast.lng
+    },
+    southWest: {
+      latitude: leafletBounds._southWest.lat,
+      longitude: leafletBounds._southWest.lng
+    }
+  });
+};
 class MapLeaflet extends React.Component {
   constructor() {
     super();
@@ -62,7 +64,7 @@ class MapLeaflet extends React.Component {
       maxZoom: event.target.getMaxZoom(),
       minZoom: event.target.getMinZoom(),
       center: event.target.getCenter(),
-      boundingBox: convertBounds(this.MapElement.getBounds())
+      boundingBox: convertBounds(this.MapElement)
     });
   }
 
@@ -78,14 +80,14 @@ class MapLeaflet extends React.Component {
   onMoveEnd(event) {
     this.props.onMoveEnd({
       center: event.target.getCenter(),
-      boundingBox: convertBounds(this.MapElement.getBounds())
+      boundingBox: convertBounds(this.MapElement)
     });
   }
 
   onDragEnd(event) {
     this.props.onDragEnd({
       center: event.target.getCenter(),
-      boundingBox: convertBounds(this.MapElement.getBounds())
+      boundingBox: convertBounds(this.MapElement)
     });
   }
 
@@ -96,7 +98,7 @@ class MapLeaflet extends React.Component {
   handleResize() {
     this.MapElement.invalidateSize();
     this.props.onResizeEnd({
-      boundingBox: convertBounds(this.MapElement.getBounds())
+      boundingBox: convertBounds(this.MapElement)
     });
     if (this.activeElement) {
       this.fitActiveElement(getBounds(this.activeElement));
@@ -238,13 +240,15 @@ class MapLeaflet extends React.Component {
             ))
           }
           {
-            rdGeoJsons.map((shape) => Boolean(shape.geoJson) && (
-              <RdGeoJson
-                data={shape.geoJson}
-                key={shape.id}
-                ref={rdGeoJsons.length === 1 && this.setActiveElement}
-              />
-            ))
+            rdGeoJsons.map((shape) =>
+              (Boolean(shape.geoJson) && Boolean(shape.geoJson.label)) && (
+                <RdGeoJson
+                  data={shape.geoJson}
+                  key={shape.id}
+                  ref={rdGeoJsons.length === 1 && this.setActiveElement}
+                />
+              )
+            )
           }
           <ScaleControl {...scaleControlOptions} />
           {
