@@ -109,6 +109,12 @@ function commonConfig ({ nodeEnv }) {
     },
     plugins: [
       new CleanWebpackPlugin([dist]),
+      new SVGSpritemapPlugin({
+        src: 'src/shared/assets/icons/*.svg',
+        filename: 'sprite.svg',
+        chunk: 'sprite',
+        styles: 'src/shared/styles/config/mixins/_sprites.scss',
+      }),
       new CopyWebpackPlugin([
         { from: './public/', to: './assets/' },
         // Simply copy the leaflet styling for now
@@ -180,12 +186,6 @@ function commonConfig ({ nodeEnv }) {
           'proj4.js',
           'proj4leaflet.js'
         ]
-      }),
-      new SVGSpritemapPlugin({
-        src: path.resolve(src, 'shared/assets/icons/*.svg'),
-        filename: 'sprite.svg',
-        chunk: 'sprite',
-        styles: path.resolve(src, 'shared/styles/config/mixins/_sprites.scss'),
       })
     ]
   };

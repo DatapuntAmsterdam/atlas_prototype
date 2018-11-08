@@ -86,8 +86,7 @@
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "remove-markdown": "^0.2.2",
-    "reselect": "^3.0.1",
-    "svg-spritemap-webpack-plugin": "^2.7.1"
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "@metahub/karma-jasmine-jquery": "^2.0.0",
@@ -162,10 +161,11 @@
     "sass-loader": "^7.1.0",
     "stijl": "Amsterdam/stijl.git",
     "svg-react-loader": "^0.4.5",
+    "svg-spritemap-webpack-plugin": "^2.7.1",
     "uglifyjs-webpack-plugin": "^2.0.0",
-    "webpack": "^4.19.0",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
   }
 }
