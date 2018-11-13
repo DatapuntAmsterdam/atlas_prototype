@@ -1,6 +1,6 @@
 /* eslint-disable import/first */
 /* eslint-disable import/no-extraneous-dependencies */
-import 'babel-polyfill';
+import '@babel/polyfill';
 import angular from 'angular';
 
  // Import the templates and inject them into angular

@@ -15,7 +15,7 @@ function commonConfig ({ nodeEnv }) {
   return {
     context: root,
     entry: {
-      app: ['isomorphic-fetch', 'babel-polyfill', './src/index.js']
+      app: ['isomorphic-fetch', '@babel/polyfill', './src/index.js']
     },
     output: {
       filename: '[name].bundle.js',
