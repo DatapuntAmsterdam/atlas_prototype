@@ -189,7 +189,7 @@ function restoreAccessToken() {
  */
 export function login() {
   // Get the URI the OAuth2 authorization service needs to use as callback
-  const callback = encodeURIComponent(`${location.protocol}//${location.host}${location.pathname}`);
+  const callback = encodeURIComponent(`${location.protocol}//${location.host}/`);
   // Get a random string to prevent CSRF
   const stateToken = stateTokenGenerator();
   const encodedStateToken = encodeURIComponent(stateToken);
@@ -199,7 +199,7 @@ export function login() {
   }
 
   sessionStorage.removeItem(ACCESS_TOKEN);
-  sessionStorage.setItem(RETURN_PATH, location.hash);
+  sessionStorage.setItem(RETURN_PATH, location.href);
   sessionStorage.setItem(STATE_TOKEN, stateToken);
 
   location.assign(`${API_ROOT}${AUTH_PATH}&state=${encodedStateToken}&redirect_uri=${callback}`);
