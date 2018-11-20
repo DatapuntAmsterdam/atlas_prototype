@@ -14,6 +14,8 @@ window.reactHistory = history;
 
 // eslint-disable-next-line no-undef,no-console
 console.log(`CityData: version: ${VERSION}, build: ${__BUILD_ID__}`);
+// eslint-disable-next-line no-undef,no-console
+console.log(`public url: ${process.env.PUBLIC_URL}`);
 
 ReactDOM.render(
   <Provider store={store}>
