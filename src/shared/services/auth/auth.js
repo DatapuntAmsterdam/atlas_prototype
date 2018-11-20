@@ -188,8 +188,9 @@ function restoreAccessToken() {
  * Redirects to the OAuth2 authorization service.
  */
 export function login() {
+  const basePath = process.env.ASSETS_PATH || '';
   // Get the URI the OAuth2 authorization service needs to use as callback
-  const callback = encodeURIComponent(`${location.protocol}//${location.host}/`);
+  const callback = encodeURIComponent(`${location.protocol}//${location.host}/${basePath}`);
   // Get a random string to prevent CSRF
   const stateToken = stateTokenGenerator();
   const encodedStateToken = encodeURIComponent(stateToken);

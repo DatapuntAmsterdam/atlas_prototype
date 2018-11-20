@@ -20,8 +20,8 @@ function commonConfig ({ nodeEnv, publicPath }) {
     },
     output: {
       filename: '[name].bundle.js',
-      publicPath: publicPath,
-      path: dist
+      path: dist,
+      publicPath: 'http://localhost:8080/adrian/'
     },
     resolve: {
       extensions: ['.js', '.jsx'],
@@ -165,7 +165,7 @@ function commonConfig ({ nodeEnv, publicPath }) {
         minify: {
           collapseWhitespace: nodeEnv === 'production' || nodeEnv === 'acceptance'
         },
-        baseHref: '/',
+        baseHref: '/adrian/',
         lang: 'nl',
         title: 'Dataportaal',
         favicon: 'favicon.png',

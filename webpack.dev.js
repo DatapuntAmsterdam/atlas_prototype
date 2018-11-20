@@ -7,7 +7,7 @@ const { commonConfig, dist } = require('./webpack.common.js');
 module.exports = function(env) {
   const nodeEnv = env && env.nodeEnv ? env.nodeEnv : 'development';
   const buildId = env && env.buildId ? env.buildId : nodeEnv;
-  const publicPath = process.env.ASSET_PATH ? `${process.env.ASSET_PATH}` : '/';
+  const publicPath = process.env.ASSETS_PATH ? `${process.env.ASSETS_PATH}` : '';
 
   return merge(commonConfig({ nodeEnv, buildId, publicPath }), {
     mode: 'development',
@@ -43,7 +43,7 @@ module.exports = function(env) {
         '__BUILD_ID__': JSON.stringify(buildId),
         'process.env': {
           'NODE_ENV': JSON.stringify(nodeEnv),
-          'ASSET_PATH': JSON.stringify(publicPath)
+          'ASSETS_PATH': JSON.stringify(publicPath)
         }
       }),
       new MiniCssExtractPlugin('main.css')
