@@ -7,8 +7,9 @@ const {commonConfig} = require('./webpack.common.js');
 module.exports = function(env) {
   const nodeEnv = env && env.nodeEnv ? env.nodeEnv : 'production';
   const buildId = env && env.buildId ? env.buildId : nodeEnv;
+  const publicPath = process.env.ASSET_PATH ? `${process.env.ASSET_PATH}` : '/';
 
-  return merge(commonConfig({ nodeEnv, buildId }), {
+  return merge(commonConfig({ nodeEnv, buildId, publicPath }), {
     output: {
       filename: '[name].[chunkhash].js'
     },
@@ -29,7 +30,8 @@ module.exports = function(env) {
         VERSION: JSON.stringify(require("./package.json").version),
         '__BUILD_ID__': JSON.stringify(buildId),
         'process.env': {
-          'NODE_ENV': JSON.stringify(nodeEnv)
+          'NODE_ENV': JSON.stringify(nodeEnv),
+          'ASSET_PATH': JSON.stringify(publicPath)
         }
       }),
       new MiniCssExtractPlugin('main.[contenthash].css')

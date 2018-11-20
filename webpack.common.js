@@ -11,9 +11,8 @@ const legacy = path.resolve(root, 'modules');
 const dist = path.resolve(root, 'dist');
 
 // Try the environment variable, otherwise use root
-const ASSET_PATH = process.env.ASSET_PATH ? `/${process.env.ASSET_PATH}` : '/';
 
-function commonConfig ({ nodeEnv }) {
+function commonConfig ({ nodeEnv, publicPath }) {
   return {
     context: root,
     entry: {
@@ -21,7 +20,7 @@ function commonConfig ({ nodeEnv }) {
     },
     output: {
       filename: '[name].bundle.js',
-      publicPath: ASSET_PATH,
+      publicPath: publicPath,
       path: dist
     },
     resolve: {
@@ -166,32 +165,33 @@ function commonConfig ({ nodeEnv }) {
         minify: {
           collapseWhitespace: nodeEnv === 'production' || nodeEnv === 'acceptance'
         },
+        baseHref: '/',
         lang: 'nl',
         title: 'Dataportaal',
-        favicon: './favicon.png',
+        favicon: 'favicon.png',
         links: [
           {
             href: 'https://fast.fonts.net/cssapi/3680cf49-2b05-4b8a-af28-fa9e27d2bed0.css',
             rel: 'stylesheet'
           },
           {
-            href: '/leaflet.css',
+            href: 'leaflet.css',
             rel: 'stylesheet'
           },
           {
-            href: '/leaflet.draw.css',
+            href: 'leaflet.draw.css',
             rel: 'stylesheet'
           },
           {
-            href: '/bbga.css',
+            href: 'bbga.css',
             rel: 'stylesheet'
           }
         ],
         scripts: [
-          '/leaflet.js',
-          '/NonTiledLayer.js',
-          '/proj4.js',
-          '/proj4leaflet.js'
+          'leaflet.js',
+          'NonTiledLayer.js',
+          'proj4.js',
+          'proj4leaflet.js'
         ]
       })
     ]

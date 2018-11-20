@@ -6,7 +6,7 @@ set -x
 
 echo Building $1
 
-ASSET_PATH=$1
+export ASSET_PATH=/atlas/builds/$1
 
 echo Build distribution of this branch
 export NODE_ENV=test
