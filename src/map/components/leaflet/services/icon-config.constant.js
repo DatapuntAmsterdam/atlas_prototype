@@ -1,11 +1,11 @@
 const ICON_CONFIG = {
   SEARCH: {
-    iconUrl: '/assets/images/map/search.svg',
+    iconUrl: 'assets/images/map/search.svg',
     iconSize: [48, 77],
     iconAnchor: [23, 65]
   },
   DETAIL: {
-    iconUrl: '/assets/images/map/detail.svg',
+    iconUrl: 'assets/images/map/detail.svg',
     iconSize: [21, 21],
     iconAnchor: [10, 10]
   },
@@ -48,12 +48,12 @@ const ICON_CONFIG = {
     }
   },
   STRAATBEELD_ORIENTATION: {
-    iconUrl: '/assets/images/map/straatbeeld-orientation.svg',
+    iconUrl: 'assets/images/map/straatbeeld-orientation.svg',
     iconSize: [70, 70],
     iconAnchor: [35, 35]
   },
   STRAATBEELD_PERSON: {
-    iconUrl: '/assets/images/map/straatbeeld-person.svg',
+    iconUrl: 'assets/images/map/straatbeeld-person.svg',
     iconSize: [18, 31],
     iconAnchor: [9, 22]
   }

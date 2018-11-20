@@ -66,8 +66,8 @@ const Home = ({ showFooter }) => (
                       blockIsLink
                     >
                       <PreviewVideo
-                        poster="/assets/video/map.png"
-                        src="/assets/video/map.mp4"
+                        poster="assets/video/map.png"
+                        src="assets/video/map.mp4"
                         type="video/mp4"
                       />
                       <div className="c-homepage__block-button">
@@ -138,8 +138,8 @@ const Home = ({ showFooter }) => (
                       blockIsLink
                     >
                       <PreviewVideo
-                        poster="/assets/video/panorama.jpg"
-                        src="/assets/video/panorama.mp4"
+                        poster="assets/video/panorama.jpg"
+                        src="assets/video/panorama.mp4"
                         type="video/mp4"
                       />
                     </HomepageBlock>
