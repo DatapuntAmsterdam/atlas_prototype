@@ -41,7 +41,8 @@ module.exports = function(env) {
         VERSION: JSON.stringify(require("./package.json").version),
         '__BUILD_ID__': JSON.stringify(buildId),
         'process.env': {
-          'NODE_ENV': JSON.stringify(nodeEnv)
+          'NODE_ENV': JSON.stringify(nodeEnv),
+          'ASSET_PATH': JSON.stringify('ASSET_PATH_NOT_DEFINED')
         }
       }),
       new MiniCssExtractPlugin('main.css')

@@ -10,6 +10,8 @@ const src = path.resolve(root, 'src');
 const legacy = path.resolve(root, 'modules');
 const dist = path.resolve(root, 'dist');
 
+// Try the environment variable, otherwise use root
+const ASSET_PATH = process.env.ASSET_PATH ? `/${process.env.ASSET_PATH}` : '/';
 
 function commonConfig ({ nodeEnv }) {
   return {
@@ -19,7 +21,7 @@ function commonConfig ({ nodeEnv }) {
     },
     output: {
       filename: '[name].bundle.js',
-      publicPath: '/',
+      publicPath: ASSET_PATH,
       path: dist
     },
     resolve: {
