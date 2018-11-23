@@ -125,7 +125,8 @@ const App = ({
 
               {currentPage === PAGES.PANORAMA && <PanoramaPage />}
 
-              {currentPage === PAGES.DATASETS && <Dataset />}
+              {(currentPage === PAGES.DATASETS
+                || currentPage === PAGES.SEARCH_DATASETS) && <Dataset />}
 
               {currentPage === PAGES.DATASETS_DETAIL && (
                 <DatasetDetailContainer />

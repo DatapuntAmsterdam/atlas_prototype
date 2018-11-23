@@ -1,3 +1,4 @@
+import get from 'lodash.get';
 import { routing } from '../../../../app/routes';
 
 export const REDUCER_KEY = 'datasetData';
@@ -23,6 +24,14 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         page: parseInt(page, 0) || initialState.page
+      };
+    }
+    case routing.searchDatasets.type: {
+      const { page } = action.meta.query || {};
+      return {
+        ...state,
+        page: parseInt(page, 0) || initialState.page,
+        query: get(action, 'meta.query.zoekterm')
       };
     }
     case FETCH_DATASETS_REQUEST:
@@ -72,4 +81,3 @@ export const receiveDatasetsFailure = (payload) => ({
 });
 
 export const setPage = (payload) => ({ type: SET_PAGE, payload });
-
