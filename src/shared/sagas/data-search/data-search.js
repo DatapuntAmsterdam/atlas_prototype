@@ -29,6 +29,7 @@ export function* fireMapSearchResultsRequest() {
     yield put(fetchMapSearchResultsRequest(location));
   }
 }
+
 export function* fireFetchSearchResultsByQuery() {
   const query = yield select(getSearchQuery);
   if (query) {

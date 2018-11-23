@@ -6,9 +6,12 @@ import {
   DEFAULT_DATASET,
   DEFAULT_VIEW,
   FETCH_DATASETS_REQUEST,
-  fetchDatasets, initialState,
+  fetchDatasets,
+  initialState,
   receiveDatasetsFailure,
-  receiveDatasetsSuccess, SET_PAGE
+  receiveDatasetsSuccess,
+  fetchSearchResultsByQuery,
+  SET_PAGE
 } from '../../ducks/datasets/data/data';
 import {
   FETCH_API_SPECIFICATION_REQUEST,
@@ -78,6 +81,12 @@ export function* retrieveApiSpecification() {
   }
 }
 
+export function* fireFetchSearchResultsByQuery() {
+  if (query) {
+    yield put(fetchSearchResultsByQuery(query));
+  }
+}
+
 export default function* watchFetchDatasets() {
   yield takeLatest(
     [ADD_FILTER, REMOVE_FILTER, EMPTY_FILTERS, FETCH_API_SPECIFICATION_SUCCESS, SET_PAGE,
@@ -89,6 +98,8 @@ export default function* watchFetchDatasets() {
 
   yield takeLatest(FETCH_API_SPECIFICATION_REQUEST, retrieveApiSpecification);
   yield takeLatest(FETCH_DATASETS_REQUEST, retrieveDataset);
+
+  yield takeLatest(routing.searchDatasets.type, fireFetchSearchResultsByQuery);
 }
 
 // Todo: keep until search is implemented
