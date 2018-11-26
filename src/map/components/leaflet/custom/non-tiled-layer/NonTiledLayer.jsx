@@ -12,6 +12,13 @@ class NonTiledLayer extends TileLayer {
 
     return L.nonTiledLayer.wms(layerUrl, this.getOptions(args));
   }
+
+  updateLeafletElement(fromProps, toProps) {
+    super.updateLeafletElement(fromProps, toProps);
+    if (toProps.params !== fromProps.params) {
+      this.leafletElement.setParams(toProps.params);
+    }
+  }
 }
 
 export default NonTiledLayer;
