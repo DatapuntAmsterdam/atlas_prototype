@@ -183,6 +183,7 @@ export default function MapReducer(state = initialState, action) {
     case MAP_CLEAR:
       return {
         ...state,
+        overlays: initialState.overlays,
         drawingMode: initialState.drawingMode,
         shapeMarkers: initialState.shapeMarkers,
         shapeDistanceTxt: initialState.shapeDistanceTxt,
@@ -215,7 +216,7 @@ export const toggleMapOverlay = (payload) => ({
     mapLayers: (payload.id) ? [payload.id] : payload.legendItems.map((overlay) => overlay.id)
   },
   meta: {
-    tracking: payload
+    tracking: !payload.id.startsWith(PANORAMA) ? payload : false
   }
 });
 export const toggleMapOverlayPanorama = (payload) => ({
