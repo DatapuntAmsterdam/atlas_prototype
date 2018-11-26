@@ -563,32 +563,35 @@ export default [
   {
     id: 'pano',
     url: 'maps/panorama',
-    layers: ['panorama_recent']
+    layers: ['panorama_new']
   },
   {
     id: 'pano2016',
     url: 'maps/panorama',
-    layers: ['panorama_recent_2016']
+    layers: ['panorama_new_2016'],
+    params: {
+      before: '2016-12-31',
+      after: '2016-01-01'
+    }
   },
   {
     id: 'pano2017',
     url: 'maps/panorama',
-    layers: ['panorama_recent_2017']
+    layers: ['panorama_new_2017'],
+    params: {
+      before: '2017-12-31',
+      after: '2017-01-01'
+    }
   },
   {
     id: 'pano2018',
     url: 'maps/panorama',
-    layers: ['panorama_recent_2018']
+    layers: ['panorama_new_2018']
   },
   {
     id: 'pano2019',
     url: 'maps/panorama',
-    layers: ['panorama_recent_2019']
-  },
-  {
-    id: 'pano2020',
-    url: 'maps/panorama',
-    layers: ['panorama_recent_2020']
+    layers: ['panorama_new_2019']
   },
   // Eigenaren
   {

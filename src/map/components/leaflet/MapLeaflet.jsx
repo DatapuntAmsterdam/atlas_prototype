@@ -198,6 +198,7 @@ class MapLeaflet extends React.Component {
                 key={layerIndex}
                 {...layer.overlayOptions}
                 url={layer.url}
+                params={layer.params}
                 opacity={visibleToOpacity(layer.isVisible)}
               />
             ))
