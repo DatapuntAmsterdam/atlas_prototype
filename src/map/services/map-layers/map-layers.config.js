@@ -586,7 +586,11 @@ export default [
   {
     id: 'pano2018',
     url: 'maps/panorama',
-    layers: ['panorama_new_2018']
+    layers: ['panorama_new_2018'],
+    params: {
+      before: '2018-12-31',
+      after: '2018-01-01'
+    }
   },
   {
     id: 'pano2019',

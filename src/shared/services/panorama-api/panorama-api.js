@@ -2,13 +2,13 @@ import sharedConfig from '../shared-config/shared-config';
 import { getByUrl } from '../api/api';
 import getCenter from '../geo-json/geo-json';
 
-const MAX_RADIUS_KM = 100; // The maximum search radius panorama in KM
-
 export const PANORAMA_CONFIG = {
-  PANORAMA_ENDPOINT_ALL: 'panorama/recente_opnames/alle/',
-  PANORAMA_ENDPOINT_YEAR: 'panorama/recente_opnames/',
+  PANORAMA_ENDPOINT_PREFIX: 'panorama/panoramas',
+  PANORAMA_ENDPOINT_SUFFIX: 'adjacencies',
+  SRID: 4326, // For latitude, longitude
   DEFAULT_FOV: 80,
   MAX_FOV: 90,
+  MAX_RADIUS: 100,
   MAX_RESOLUTION: 12 * 1024,
   CAMERA_HEIGHT: 1.8,
   LEVEL_PROPERTIES_LIST: [
@@ -33,39 +33,50 @@ export const PANORAMA_CONFIG = {
 };
 
 function imageData(response) {
-  if (response.geometrie !== null && typeof response.geometrie === 'object') {
-    const formattedGeometrie = {
+  const panorama = response[0];
+  const adjacencies = response.filter((adjacency) => adjacency !== response[0]);
+
+  if (panorama.geometry !== null && typeof panorama.geometry === 'object') {
+    const formattedGeometry = {
       coordinates: [
-        response.geometrie.coordinates[1],
-        response.geometrie.coordinates[0]
+        panorama.geometry.coordinates[1],
+        panorama.geometry.coordinates[0]
       ],
-      type: response.geometrie.type
+      type: panorama.geometry.type
     };
 
-    const center = getCenter(formattedGeometrie);
+    const center = getCenter(formattedGeometry);
 
-    return {
-      date: new Date(response.timestamp),
-      id: response.pano_id,
-      hotspots: response.adjacent.map((item) => ({
-        id: item.pano_id,
-        heading: item.heading,
-        distance: item.distance,
-        year: item.year
-      })),
+    const data = {
+      date: new Date(panorama.timestamp),
+      id: panorama.pano_id,
+      hotspots: Array.isArray(adjacencies) ?
+        adjacencies.map((adjacency) => ({
+          id: adjacency.pano_id,
+          heading: adjacency.heading,
+          distance: adjacency.distance,
+          year: adjacency.timestamp.substring(0, 4)
+        })) : [],
       location: [center.x, center.y],
-      image: response.image_sets.cubic
+      image: {
+        baseurl: panorama.cubic_img_baseurl,
+        pattern: panorama.cubic_img_pattern,
+        preview: panorama.cubic_img_baseurl
+      }
     };
+
+    return data;
   }
 
   return null;
 }
 
-function fetchPanorama(url) {
+function fetchPanorama(url, key) {
   const promise = new Promise((resolve, reject) => {
     getByUrl(url)
+      .then((json) => json._embedded)
       .then((data) => {
-        resolve(imageData(data));
+        resolve(imageData(data[key]));
       })
       .catch((error) => reject(error));
   });
@@ -73,45 +84,21 @@ function fetchPanorama(url) {
   return promise;
 }
 
-/**
- * Search for a straatbeeld.
- *
- * @param {Number[]} location The center location.
- * @param {Number} radius The distance from the location within to
- *   search for a straatbeeld.
- * @param {Number} year The year to featch hotspots for, queries all
- *   years when falsy.
- *
- * @returns {Promise.imageData} The fetched straatbeeld, or null on failure.
- */
-function searchWithinRadius(location, radius, year) {
-  const endpoint = year
-    ? `${PANORAMA_CONFIG.PANORAMA_ENDPOINT_YEAR}${year}/`
-    : PANORAMA_CONFIG.PANORAMA_ENDPOINT_ALL;
-
-  return fetchPanorama(`${sharedConfig.API_ROOT}${endpoint}?lat=${location[0]}&lon=${location[1]}&radius=${radius}`)
-    .then((data) => {
-      if (data) {
-        return data;
-      }
-      return null;
-    });
-}
-
-/**
- * @param {Number[]} location The center location.
- * @param {Number} year The year to featch hotspots for, queries all
- *   years when falsy.
- * @returns {Promise.imageData} The fetched straatbeeld, or null on failure.
- */
 export function getImageDataByLocation(location, year) {
-  return searchWithinRadius(location, MAX_RADIUS_KM * 1000, year);
+  const maxRadius = `radius=${PANORAMA_CONFIG.MAX_RADIUS}`;
+  const locationRange = Array.isArray(location) ?
+    `near=${location[0]},${location[1]}&srid=${PANORAMA_CONFIG.SRID}` : '';
+  const yearRange = year ? `timestamp_before=${year}-12-21&timestamp_after=${year}-01-01` : '';
+
+  const endpoint = `${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}?${maxRadius}&${locationRange}&${yearRange}`;
+
+  return fetchPanorama(`${sharedConfig.API_ROOT}${endpoint}`, 'panoramas');
 }
 
 export function getImageDataById(id, year) {
-  const endpoint = year
-    ? `${PANORAMA_CONFIG.PANORAMA_ENDPOINT_YEAR}${year}/`
-    : PANORAMA_CONFIG.PANORAMA_ENDPOINT_ALL;
+  const yearRange = year ? `timestamp_before=${year}-12-21&timestamp_after=${year}-01-01` : 'newest_in_range=true';
 
-  return fetchPanorama(`${sharedConfig.API_ROOT}${endpoint}${id}/`);
+  const endpoint = `${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}/${id}/${PANORAMA_CONFIG.PANORAMA_ENDPOINT_SUFFIX}?${yearRange}`;
+
+  return fetchPanorama(`${sharedConfig.API_ROOT}${endpoint}`, 'adjacencies');
 }
