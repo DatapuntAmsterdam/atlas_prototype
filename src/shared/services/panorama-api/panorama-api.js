@@ -8,7 +8,7 @@ export const PANORAMA_CONFIG = {
   SRID: 4326, // For latitude, longitude
   DEFAULT_FOV: 80,
   MAX_FOV: 90,
-  MAX_RADIUS: 100,
+  MAX_RADIUS: 50,
   MAX_RESOLUTION: 12 * 1024,
   CAMERA_HEIGHT: 1.8,
   LEVEL_PROPERTIES_LIST: [
@@ -53,7 +53,7 @@ function imageData(response) {
       hotspots: Array.isArray(adjacencies) ?
         adjacencies.map((adjacency) => ({
           id: adjacency.pano_id,
-          heading: adjacency.heading,
+          heading: adjacency.direction,
           distance: adjacency.distance,
           year: adjacency.timestamp.substring(0, 4)
         })) : [],
@@ -96,9 +96,10 @@ export function getImageDataByLocation(location, year) {
 }
 
 export function getImageDataById(id, year) {
+  const maxRadius = `radius=${PANORAMA_CONFIG.MAX_RADIUS}`;
   const yearRange = year ? `timestamp_before=${year}-12-21&timestamp_after=${year}-01-01` : 'newest_in_range=true';
 
-  const endpoint = `${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}/${id}/${PANORAMA_CONFIG.PANORAMA_ENDPOINT_SUFFIX}?${yearRange}`;
+  const endpoint = `${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}/${id}/${PANORAMA_CONFIG.PANORAMA_ENDPOINT_SUFFIX}?${yearRange}&${maxRadius}`;
 
   return fetchPanorama(`${sharedConfig.API_ROOT}${endpoint}`, 'adjacencies');
 }
