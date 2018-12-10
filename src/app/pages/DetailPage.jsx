@@ -20,7 +20,7 @@ const DetailPage = ({ view: routeView, hasGeometry, endpoint, getPageActionEndpo
     // Hide map if no geometry is available
     view = hasGeometry ? DETAIL_VIEW.MAP_DETAIL : DETAIL_VIEW.DETAIL;
   }
-  const toMap = () => getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP);
+  const toMap = () => getPageActionEndpoint(endpoint);
 
   switch (view) {
     case DETAIL_VIEW.DETAIL:

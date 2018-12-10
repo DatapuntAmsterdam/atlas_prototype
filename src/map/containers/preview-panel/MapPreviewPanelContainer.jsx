@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { selectLatestMapDetail } from '../../ducks/detail/map-detail';
 import { isEmbedded, isEmbedPreview } from '../../../shared/ducks/ui/ui';
-import { DETAIL_VIEW, getDetail, getDetailEndpoint } from '../../../shared/ducks/detail/detail';
+import { getDetail, getDetailEndpoint } from '../../../shared/ducks/detail/detail';
 import MapPreviewPanel from './MapPreviewPanel';
 import { getLocationId } from '../../ducks/map/map-selectors';
 import { isGeoSearch } from '../../../shared/ducks/selection/selection';
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
     const action = toPanorama(id, heading);
     return dispatch(action);
   },
-  openPreviewDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP)),
+  openPreviewDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint)),
   openDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint))
 });
 

@@ -45,7 +45,7 @@ export const endpointTypes = {
   gebiedenGrootstedelijk: 'gebieden/grootstedelijkgebied/',
   gebiedenStadsdeel: 'gebieden/stadsdeel/',
   gebiedenUnesco: 'gebieden/unesco/',
-  gebiedenWijk: 'gebieden/buurtcombinatie/',
+  gebiedenWijk: 'gebieden/wijk/',
   grondexploitatie: 'grondexploitatie/project/',
   kadastraalObject: 'brk/object/',
   meetbout: 'meetbouten/meetbout/',
