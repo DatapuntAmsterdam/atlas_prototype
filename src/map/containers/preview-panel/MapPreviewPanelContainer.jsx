@@ -45,12 +45,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
     closePanel: toMap,
-    onSearchMaximize: toDataSearchLocationAndPreserveQuery
+    onSearchMaximize: toDataSearchLocationAndPreserveQuery,
+    openPano: toPanorama
   }, dispatch),
-  openPano: (id, heading) => {
-    const action = toPanorama(id, heading);
-    return dispatch(action);
-  },
   openPreviewDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP)),
   openDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP_DETAIL))
 });

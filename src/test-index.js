@@ -183,7 +183,6 @@ import '../modules/data-selection/components/formatter/formatter.component.test'
 import '../modules/data-selection/components/formatter/aggregate/aggregate.filter.test';
 import '../modules/data-selection/components/formatter/hr-bezoekadres/hr-bezoekadres.filter.test';
 import '../modules/data-selection/services/document-title/document-title.factory.test';
-import '../modules/straatbeeld/components/toggle-straatbeeld-fullscreen/toggle-straatbeeld-fullscreen.component.test';
 import '../modules/straatbeeld/components/history/history.directive.test';
 import '../modules/straatbeeld/components/straatbeeld/straatbeeld.directive.test';
 import '../modules/straatbeeld/components/hotspot/touch/hotspot-touch.directive.test';

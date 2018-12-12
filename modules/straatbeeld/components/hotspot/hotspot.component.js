@@ -1,6 +1,5 @@
 import { radiansToDegrees } from '../../../../src/shared/services/angle-conversion/angle-conversion';
-import {
-    toPanorama } from '../../../../src/store/redux-first-router';
+import { fetchPanoramaRequest } from '../../../../src/shared/ducks/panorama/actions';
 
 (function () {
     'use strict';
@@ -50,7 +49,7 @@ import {
         vm.transform = 'rotateX(' + angle + 'deg)';
 
         vm.loadScene = function () {
-            store.dispatch(toPanorama(vm.sceneId));
+            store.dispatch(fetchPanoramaRequest(vm.sceneId));
         };
     }
 })();

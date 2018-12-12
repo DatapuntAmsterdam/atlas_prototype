@@ -1,4 +1,4 @@
-import { setPanoramaYear } from '../../../../src/shared/ducks/panorama/panorama';
+import { setPanoramaYear } from '../../../../src/shared/ducks/panorama/actions';
 
 describe('The dp-straatbeeld-history component', function () {
     let $compile,

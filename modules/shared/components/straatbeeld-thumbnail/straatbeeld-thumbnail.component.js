@@ -1,4 +1,4 @@
-import { toPanorama } from '../../../../src/store/redux-first-router';
+import { getDetailLocation, toPanorama } from '../../../../src/store/redux-first-router';
 
 (function () {
     'use strict';
@@ -15,15 +15,22 @@ import { toPanorama } from '../../../../src/store/redux-first-router';
             controllerAs: 'vm'
         });
 
-    DpStraatbeeldThumbnailController.$inject = ['sharedConfig'];
+    DpStraatbeeldThumbnailController.$inject = ['sharedConfig', 'store'];
 
-    function DpStraatbeeldThumbnailController (sharedConfig) {
+    function DpStraatbeeldThumbnailController (sharedConfig, store) {
         const vm = this;
+        const state = store.getState();
+
+        const reference = getDetailLocation(state);
         vm.radius = sharedConfig.RADIUS;
 
         function setLinkTo (panorama) {
             if (panorama) {
-                vm.linkTo = toPanorama(panorama.id, panorama.heading);
+                vm.linkTo = toPanorama(
+                    panorama.id,
+                    panorama.heading,
+                    reference
+                );
             }
         }
 

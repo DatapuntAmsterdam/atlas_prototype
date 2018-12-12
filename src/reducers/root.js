@@ -10,7 +10,7 @@ import MapReducer from '../map/ducks/map/map';
 import MapLayersReducer from '../map/ducks/layers/map-layers';
 import MapBaseLayersReducer from '../map/ducks/base-layers/map-base-layers';
 import MapPanelLayersReducer from '../map/ducks/panel-layers/map-panel-layers';
-import PanoramaReducer, { REDUCER_KEY as PANORAMA } from '../shared/ducks/panorama/panorama';
+import PanoramaReducer, { REDUCER_KEY as PANORAMA } from '../shared/ducks/panorama/reducer';
 import PanoPreviewReducer, { REDUCER_KEY as PANO_PREVIEW } from '../shared/ducks/panorama/preview/panorama-preview';
 import FiltersReducer, { REDUCER_KEY as FILTER } from '../shared/ducks/filters/filters';
 import DetailReducer, { REDUCER_KEY as DETAIL } from '../shared/ducks/detail/reducer';

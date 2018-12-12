@@ -1,22 +1,23 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { routing } from '../../../app/routes';
 import {
-  FETCH_PANORAMA_REQUEST,
+  fetchPanoramaError,
   fetchPanoramaRequest,
+  fetchPanoramaSuccess
+} from '../../ducks/panorama/actions';
+import { toggleMapOverlayPanorama } from '../../../map/ducks/map/map';
+import { getImageDataById, getImageDataByLocation } from '../../services/panorama-api/panorama-api';
+import { toMap } from '../../../store/redux-first-router';
+import {
+  CLOSE_PANORAMA,
+  FETCH_PANORAMA_REQUEST, SET_PANORAMA_LOCATION,
+  SET_PANORAMA_YEAR
+} from '../../ducks/panorama/constants';
+import {
   getPanoramaId,
   getPanoramaLocation,
-  getPanoramaYear,
-  fetchPanoramaSuccess,
-  fetchPanoramaError,
-  CLOSE_PANORAMA,
-  SET_PANORAMA_YEAR
-} from '../../ducks/panorama/panorama';
-import { toggleMapOverlayPanorama } from '../../../map/ducks/map/map';
-import {
-  getImageDataById,
-  getImageDataByLocation
-} from '../../services/panorama-api/panorama-api';
-import { toMap } from '../../../store/redux-first-router';
+  getPanoramaYear
+} from '../../ducks/panorama/selectors';
 
 export function* fireFetchPanormaRequest(action) {
   yield put(fetchPanoramaRequest(action.payload.id));
@@ -41,7 +42,7 @@ export function* fetchPanorama() {
   }
 }
 
-export function* fetchPanoramaYear() {
+export function* fetchPanoramaByLocation() {
   const [location, year] = yield all([
     select(getPanoramaLocation),
     select(getPanoramaYear)
@@ -50,7 +51,9 @@ export function* fetchPanoramaYear() {
   try {
     const imageData = yield call(getImageDataByLocation, location, year);
     yield put(fetchPanoramaSuccess(imageData));
-    yield put(toggleMapOverlayPanorama(year));
+    if (year) {
+      yield put(toggleMapOverlayPanorama(year));
+    }
   } catch (error) {
     yield put(fetchPanoramaError(error));
   }
@@ -59,7 +62,7 @@ export function* fetchPanoramaYear() {
 export function* watchFetchPanorama() {
   yield all([
     takeLatest(FETCH_PANORAMA_REQUEST, fetchPanorama),
-    takeLatest(SET_PANORAMA_YEAR, fetchPanoramaYear)
+    takeLatest([SET_PANORAMA_YEAR, SET_PANORAMA_LOCATION], fetchPanoramaByLocation)
   ]);
 }
 

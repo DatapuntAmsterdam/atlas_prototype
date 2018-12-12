@@ -1,6 +1,6 @@
 import {
     setPanoramaYear
-} from '../../../../src/shared/ducks/panorama/panorama';
+} from '../../../../src/shared/ducks/panorama/actions';
 
 (function () {
     'use strict';

@@ -2,31 +2,31 @@ import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import { select, takeLatest } from 'redux-saga/effects';
 import {
   doClosePanorama,
-  watchFetchPanorama,
-  watchPanoramaRoute,
-  watchClosePanorama,
   fetchPanorama,
-  fetchPanoramaYear,
+  fetchPanoramaByLocation,
   fetchPanoramaRequest,
-  fireFetchPanormaRequest
+  fireFetchPanormaRequest,
+  watchClosePanorama,
+  watchFetchPanorama,
+  watchPanoramaRoute
 } from './panorama';
 import { routing } from '../../../app/routes';
 import {
-  FETCH_PANORAMA_REQUEST,
-  FETCH_PANORAMA_SUCCESS,
-  FETCH_PANORAMA_ERROR,
   getPanoramaId,
   getPanoramaLocation,
-  getPanoramaYear,
-  CLOSE_PANORAMA,
-  SET_PANORAMA_YEAR
-} from '../../ducks/panorama/panorama';
-import {
-  getImageDataById,
-  getImageDataByLocation
-} from '../../services/panorama-api/panorama-api';
+  getPanoramaYear
+} from '../../ducks/panorama/selectors';
+import { getImageDataById, getImageDataByLocation } from '../../services/panorama-api/panorama-api';
 import { TOGGLE_MAP_OVERLAY_PANORAMA } from '../../../map/ducks/map/map';
 import { toMap } from '../../../store/redux-first-router';
+import {
+  CLOSE_PANORAMA,
+  FETCH_PANORAMA_ERROR,
+  FETCH_PANORAMA_REQUEST,
+  FETCH_PANORAMA_SUCCESS,
+  SET_PANORAMA_LOCATION,
+  SET_PANORAMA_YEAR
+} from '../../ducks/panorama/constants';
 
 describe('watchPanoramaRoute', () => {
   const action = { type: routing.panorama.type };
@@ -63,7 +63,7 @@ describe('watchFetchPanorama', () => {
       .next()
       .all([
         takeLatest(FETCH_PANORAMA_REQUEST, fetchPanorama),
-        takeLatest(SET_PANORAMA_YEAR, fetchPanoramaYear)
+        takeLatest([SET_PANORAMA_YEAR, SET_PANORAMA_LOCATION], fetchPanoramaByLocation)
       ])
       .next(action)
       .isDone();
@@ -83,16 +83,16 @@ describe('watchClosePanorama', () => {
 
   it('should call doClosePanorama and dispatch the correct action', () => {
     expectSaga(doClosePanorama)
-     .provide({
-       call(effect) {
-         return effect.fn === toMap();
-       }
-     })
-     .run();
+      .provide({
+        call(effect) {
+          return effect.fn === toMap();
+        }
+      })
+      .run();
   });
 });
 
-describe('fetchPanorma and fetchPanoramaYear', () => {
+describe('fetchPanorma and fetchPanoramaByLocation', () => {
   it('should call fetchPanorma and dispatch the correct action', () => {
     testSaga(fetchPanorama)
       .next()
@@ -135,7 +135,7 @@ describe('fetchPanorma and fetchPanoramaYear', () => {
   });
 
   it('should call fetchPanormaYear and dispatch the correct action', () => {
-    testSaga(fetchPanoramaYear)
+    testSaga(fetchPanoramaByLocation)
       .next()
       .all([
         select(getPanoramaLocation),
@@ -157,8 +157,8 @@ describe('fetchPanorma and fetchPanoramaYear', () => {
       .isDone();
   });
 
-  it('should call fetchPanoramaYear and throw an error', () => {
-    testSaga(fetchPanoramaYear)
+  it('should call fetchPanoramaByLocation and throw an error', () => {
+    testSaga(fetchPanoramaByLocation)
       .next()
       .all([
         select(getPanoramaLocation),

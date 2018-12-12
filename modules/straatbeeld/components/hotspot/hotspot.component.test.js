@@ -1,4 +1,4 @@
-import { toPanorama } from '../../../../src/store/redux-first-router';
+import { fetchPanoramaRequest } from '../../../../src/shared/ducks/panorama/actions';
 
 describe('The dp-hotspot directive', function () {
     var $compile,
@@ -104,7 +104,7 @@ describe('The dp-hotspot directive', function () {
         const directive = getComponent(id, 20, 0.5, 2016);
         directive.find('button').click();
 
-        expect(store.dispatch).toHaveBeenCalledWith(toPanorama(id));
+        expect(store.dispatch).toHaveBeenCalledWith(fetchPanoramaRequest(id));
     });
 
     it('has a screen reader fallback text', function () {

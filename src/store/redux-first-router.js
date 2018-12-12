@@ -3,7 +3,6 @@ import queryString from 'querystring';
 import get from 'lodash.get';
 import { routing } from '../app/routes';
 import PAGES from '../app/pages';
-import PANORAMA_VIEW from '../shared/ducks/panorama/panorama-view';
 
 export const REDUCER_KEY = 'location';
 
@@ -49,7 +48,7 @@ export const toDataSearchLocation = (payload) => ({ // TODO rename
 });
 export const toMapAndPreserveQuery = () => preserveQuery({ type: routing.map.type });
 export const toMap = () => ({ type: routing.map.type });
-export const toPanorama = (id, heading, view) => {
+export const toPanorama = (id, heading, reference = []) => {
   const action = {
     type: routing.panorama.type,
     payload: {
@@ -57,15 +56,19 @@ export const toPanorama = (id, heading, view) => {
     },
     meta: {
       query: {
-        heading
+        heading,
+        ...(reference.length === 3 ? { reference: reference.join(',') } : {})
       }
     }
   };
-  if (view === PANORAMA_VIEW.PANO) {
-    action.meta.query.panorama = '';
-  }
   return action;
 };
+
+export const toPanoramaAndPreserveQuery = (id) => preserveQuery({
+  type: routing.panorama.type,
+  payload: id
+});
+
 export const extractIdEndpoint = (endpoint) => {
   const matches = endpoint.match(/\/([\w-]+)\/?$/);
   return matches[1];
@@ -156,15 +159,16 @@ export const toDatasetSuggestion = (payload) => ({
     }
   }
 });
-export const toControlPage = () => ({
-  type: routing.bediening.type
-});
-
 // Selectors
 const getLocation = (state) => state[REDUCER_KEY];
 
 export const getLocationQuery = createSelector(getLocation, (location) => location.query || {});
 export const getLocationPayload = createSelector(getLocation, (location) => location.payload);
+export const getDetailLocation = createSelector(
+  getLocation,
+  ({ payload: { type, subtype, id } }) => (
+    (type && subtype && id) ? [id.slice(2), type, subtype] : [])
+);
 
 export const getPage = createSelector(getLocation, (location = {}) => {
   const key = Object.keys(routing).find((route) => routing[route].type === location.type);

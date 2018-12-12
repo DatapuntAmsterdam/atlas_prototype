@@ -14,7 +14,7 @@ import * as MapReducer from '../map/ducks/map/map';
 import * as MapLayersReducer from '../map/ducks/layers/map-layers';
 import * as MapBaseLayersReducer from '../map/ducks/base-layers/map-base-layers';
 import * as MapPanelLayersReducer from '../map/ducks/panel-layers/map-panel-layers';
-import * as PanoramaReducer from '../shared/ducks/panorama/panorama';
+import * as PanoramaReducer from '../shared/ducks/panorama/reducer';
 import * as PanoPreviewReducer from '../shared/ducks/panorama/preview/panorama-preview';
 import * as FiltersReducer from '../shared/ducks/filters/filters';
 import * as DataSearchReducer from '../shared/ducks/data-search/reducer';

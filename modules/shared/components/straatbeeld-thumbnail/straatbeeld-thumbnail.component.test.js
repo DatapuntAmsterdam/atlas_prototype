@@ -3,7 +3,8 @@ import { toPanorama } from '../../../../src/store/redux-first-router';
 describe('The dp-straatbeeld-thumbnail component', function () {
     let $compile,
         $rootScope,
-        parentScope;
+        parentScope,
+        store;
 
     beforeEach(function () {
         angular.mock.module(
@@ -11,13 +12,23 @@ describe('The dp-straatbeeld-thumbnail component', function () {
             {
                 sharedConfig: {
                     RADIUS: 50
+                },
+                store: {
+                    getState: angular.noop
                 }
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _store_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
+            store = _store_;
+        });
+
+        spyOn(store, 'getState').and.returnValue({
+            location: {
+                payload: {}
+            }
         });
     });
 

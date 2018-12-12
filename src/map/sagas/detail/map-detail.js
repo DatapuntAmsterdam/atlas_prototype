@@ -22,7 +22,7 @@ export function* fetchMapDetail() {
     const mapDetail = yield call(fetchDetail, endpoint, user);
     yield put(fetchMapDetailSuccess(endpoint, mapDetail || {}));
   } catch (error) {
-    yield put(fetchMapDetailFailure);
+    yield put(fetchMapDetailFailure(error));
   }
 }
 

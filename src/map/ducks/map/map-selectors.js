@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { getPanoramaLocation, getPanoramaMarkers } from '../../../shared/ducks/panorama/panorama';
+import { getPanoramaLocation, getPanoramaMarkers } from '../../../shared/ducks/panorama/selectors';
 import { getGeoJson as getDetailGeoJson } from '../detail/map-detail';
 import { geoSearchType } from '../../components/leaflet/services/icons.constant';
 import { getDetail } from '../../../shared/ducks/detail/selectors';

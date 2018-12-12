@@ -1,9 +1,5 @@
-import { toPanorama } from '../../../../src/store/redux-first-router';
-import {
-    getPanoramaHeading,
-    getPanoramaId
-} from '../../../../src/shared/ducks/panorama/panorama';
 import PANORAMA_VIEW from '../../../../src/shared/ducks/panorama/panorama-view';
+import { setView } from '../../../../src/shared/ducks/panorama/actions';
 
 (function () {
     'use strict';
@@ -33,15 +29,10 @@ import PANORAMA_VIEW from '../../../../src/shared/ducks/panorama/panorama-view';
         }
 
         vm.toggleFullscreen = function () {
-            // TODO: refactor, make component unaware of store
-            // (wrap in smart component like connect in React).
-            const state = store.getState();
-            const id = getPanoramaId(state);
-            const heading = getPanoramaHeading(state);
             if (vm.isFullscreen) {
-                store.dispatch(toPanorama(id, heading, PANORAMA_VIEW.MAP_PANO));
+                store.dispatch(setView(PANORAMA_VIEW.MAP_PANO));
             } else {
-                store.dispatch(toPanorama(id, heading, PANORAMA_VIEW.PANO));
+                store.dispatch(setView(PANORAMA_VIEW.PANO));
             }
         };
 
