@@ -20,7 +20,7 @@ describe('employee permissions', () => {
     cy.wait('@getResults');
     cy.get('.auto-suggest__tip').should('exist').and('be.visible');
     cy.get('.auto-suggest__dropdown').contains(values.kadastraleSubjecten);
-    cy.get('.auto-suggest__dropdown-item').contains('ijf Ja');
+    cy.get('.auto-suggest__dropdown-item').contains('Bakkerswaal');
   });
 
   it('1. Should show a message after search is performed', () => {

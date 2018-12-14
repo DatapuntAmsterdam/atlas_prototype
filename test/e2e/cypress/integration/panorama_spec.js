@@ -5,7 +5,7 @@ const straatbeeld = '.c-straatbeeld';
 describe('panorama module', () => {
   beforeEach(() => {
     cy.server();
-    cy.route('/panorama/recente_opnames/alle/*').as('getResults');
+    cy.route('/panorama/panoramas/*/adjacencies/?newest_in_range=true').as('getResults');
 
     // go to the homepage
     cy.visit('/');
@@ -155,8 +155,8 @@ describe('panorama module', () => {
       cy.wait('@getResults');
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
-        const thisUrl = loc.pathname + loc.search;
-        expect(thisUrl).to.not.equal(newUrl);
+        const thisUrl = loc.pathname + loc.hash;
+        expect(thisUrl).not.to.equal(newUrl);
       });
       cy.get('button.c-straatbeeld__close').click();
 

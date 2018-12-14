@@ -571,36 +571,67 @@ export default [
     layers: ['panorama_new']
   },
   {
-    id: 'pano2016',
+    id: 'pano2016bi',
     url: 'maps/panorama',
-    layers: ['panorama_new_2016'],
+    layers: ['panorama_new'],
     params: {
-      before: '2016-12-31',
-      after: '2016-01-01'
+      mission_year: 2016,
+      mission_type: 'bi'
     }
   },
   {
-    id: 'pano2017',
+    id: 'pano2017bi',
     url: 'maps/panorama',
-    layers: ['panorama_new_2017'],
+    layers: ['panorama_new'],
     params: {
-      before: '2017-12-31',
-      after: '2017-01-01'
+      mission_year: 2017,
+      mission_type: 'bi'
     }
   },
   {
-    id: 'pano2018',
+    id: 'pano2017woz',
     url: 'maps/panorama',
-    layers: ['panorama_new_2018'],
+    layers: ['panorama_new'],
     params: {
-      before: '2018-12-31',
-      after: '2018-01-01'
+      mission_year: 2017,
+      mission_type: 'woz'
     }
   },
   {
-    id: 'pano2019',
+    id: 'pano2018bi',
     url: 'maps/panorama',
-    layers: ['panorama_new_2019']
+    layers: ['panorama_new'],
+    params: {
+      mission_year: 2018,
+      mission_type: 'bi'
+    }
+  },
+  {
+    id: 'pano2018woz',
+    url: 'maps/panorama',
+    layers: ['panorama_new'],
+    params: {
+      mission_year: 2018,
+      mission_type: 'woz'
+    }
+  },
+  {
+    id: 'pano2019bi',
+    url: 'maps/panorama',
+    layers: ['panorama_new'],
+    params: {
+      mission_year: 2019,
+      mission_type: 'bi'
+    }
+  },
+  {
+    id: 'pano2019woz',
+    url: 'maps/panorama',
+    layers: ['panorama_new'],
+    params: {
+      mission_year: 2019,
+      mission_type: 'woz'
+    }
   },
   // Eigenaren
   {

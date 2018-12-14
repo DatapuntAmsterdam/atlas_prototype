@@ -16,9 +16,9 @@ import { setPanoramaOrientation } from '../../../../src/shared/ducks/panorama/pa
         };
 
         function update (viewer) {
+            const heading = radiansToDegrees(viewer.view().yaw());
             const pitch = radiansToDegrees(viewer.view().pitch());
             const fov = radiansToDegrees(viewer.view().fov());
-            const heading = radiansToDegrees(viewer.view().yaw());
 
             store.dispatch(setPanoramaOrientation({
                 heading,

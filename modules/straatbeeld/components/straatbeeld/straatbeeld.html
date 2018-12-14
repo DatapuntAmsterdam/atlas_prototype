@@ -10,7 +10,11 @@
         </button>
     </div>
 
-    <div class="c-straatbeeld__marzipano js-marzipano-viewer"></div>
+    <div class="c-straatbeeld__marzipano js-marzipano-viewer"
+        ng-mousemove="updateOrientation()"
+        ng-mousedown="startUpdating()"
+        ng-mouseup="stopUpdating()" >
+    </div>
 
     <dp-straatbeeld-status-bar
         class="c-straatbeeld__status-bar"

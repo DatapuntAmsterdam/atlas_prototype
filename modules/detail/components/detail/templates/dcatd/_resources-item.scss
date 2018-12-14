@@ -20,13 +20,6 @@
     font-size: 14px;
     line-height: 23px;
     margin-bottom: 2px;
-    position: absolute;
-    right: 39px;
-    top: 0;
-
-    &::before {
-      content: "gewijzigd op ";
-    }
 
     &:empty {
       &::before {

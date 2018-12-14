@@ -1,5 +1,3 @@
-import { setPanoramaYear } from '../../../../src/shared/ducks/panorama/panorama';
-
 describe('The dp-straatbeeld-history component', function () {
     let $compile,
         $rootScope,
@@ -120,8 +118,6 @@ describe('The dp-straatbeeld-history component', function () {
             button.click();
 
             component.find('.qa-straatbeeld-history__menu').click();
-            component.find('.qa-straatbeeld-history__devider').click();
-            component.find('.qa-straatbeeld-history__external').click();
 
             expect(component.find('.qa-straatbeeld-history__menu').length).toBe(1);
         });
@@ -174,11 +170,12 @@ describe('The dp-straatbeeld-history component', function () {
 
             const items = component.find('.qa-straatbeeld-history__item');
 
-            expect(items.length).toBe(4);
+            expect(items.length).toBe(5);
             expect(items.eq(0).text()).toContain('recent');
             expect(items.eq(1).text()).toContain('2018');
             expect(items.eq(2).text()).toContain('2017');
-            expect(items.eq(3).text()).toContain('2016');
+            expect(items.eq(3).text()).toContain('2017');
+            expect(items.eq(4).text()).toContain('2016');
         });
 
         it('sets the selection', () => {
@@ -201,7 +198,7 @@ describe('The dp-straatbeeld-history component', function () {
 
             button.click();
             items = component.find('.qa-straatbeeld-history__item');
-            items.eq(3).click();
+            items.eq(4).click();
             expect(button.text()).toContain('2016');
 
             button.click();
@@ -219,26 +216,26 @@ describe('The dp-straatbeeld-history component', function () {
             button.click();
             items = component.find('.qa-straatbeeld-history__item');
             items.eq(1).click();
-            expect(store.dispatch).toHaveBeenCalledWith(setPanoramaYear(2018));
-
-            button.click();
-            items = component.find('.qa-straatbeeld-history__item');
-            items.eq(2).click();
-            expect(store.dispatch).toHaveBeenCalledWith(setPanoramaYear(2017));
+            expect(store.dispatch).toHaveBeenCalled();
 
             button.click();
             items = component.find('.qa-straatbeeld-history__item');
             items.eq(3).click();
-            expect(store.dispatch).toHaveBeenCalledWith(setPanoramaYear(2016));
+            expect(store.dispatch).toHaveBeenCalledTimes(2);
+
+            button.click();
+            items = component.find('.qa-straatbeeld-history__item');
+            items.eq(4).click();
+            expect(store.dispatch).toHaveBeenCalledTimes(3);
 
             button.click();
             items = component.find('.qa-straatbeeld-history__item');
             items.eq(0).click();
-            expect(store.dispatch).toHaveBeenCalledWith(setPanoramaYear(undefined));
+            expect(store.dispatch).toHaveBeenCalledTimes(4);
         });
 
         it('can have its selection initialized', () => {
-            const component = getComponent(null, null, 2017);
+            const component = getComponent(null, null, { year: 2017, missionType: 'bi' });
             const button = component.find('.qa-straatbeeld-history__button');
 
             expect(button.text()).toContain('2017');

@@ -17,14 +17,16 @@
     }
 
     &__right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
       padding-right: .5 * $base-whitespace;
       padding-left: .5 * $base-whitespace;
       text-align: right;
     }
 
     &__modified {
-      position: initial;
-      right: auto;
       height: 23px;
 
       span {
@@ -65,10 +67,10 @@
       }
 
       &-arrow {
-        @extend %icon-arrow-right;
+        @include sprite("link-arrow");
+        display: block;
         width: 24px;
         height: 24px;
-        background-size: 100%;
       }
     }
   }

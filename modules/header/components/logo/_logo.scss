@@ -19,9 +19,8 @@ $title-short-hover-height: 40px;
   color: $primary-dark;
   cursor: pointer;
 
-
-
-  &__link:hover {  // sass-lint:disable-line force-pseudo-nesting
+  &__link:hover, // sass-lint:disable-line force-pseudo-nesting
+  &__link:focus {  // sass-lint:disable-line force-pseudo-nesting
     .c-logo__container {
       border-bottom: 2px solid $primary-contrast;
     }
