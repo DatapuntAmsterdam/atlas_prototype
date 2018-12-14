@@ -1,6 +1,6 @@
 import {
     historyOptions,
-    setPanoramaYear
+    fetchPanoramaRequestToggle
 } from '../../../../src/shared/ducks/panorama/panorama';
 
 (function () {
@@ -38,7 +38,7 @@ import {
             scope.toggleMenu = () => scope.menuActive = !scope.menuActive;
             scope.setSelectedOption = (option) => {
                 scope.selectedOption = option;
-                store.dispatch(setPanoramaYear(option));
+                store.dispatch(fetchPanoramaRequestToggle(option));
             };
 
             scope.$watchCollection('location', updateLocation, true);

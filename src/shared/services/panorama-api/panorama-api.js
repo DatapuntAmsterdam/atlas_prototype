@@ -8,7 +8,8 @@ export const PANORAMA_CONFIG = {
   SRID: 4326, // For latitude, longitude
   DEFAULT_FOV: 80,
   MAX_FOV: 90,
-  MAX_RADIUS: 50,
+  MAX_RADIUS: 22,
+  LARGE_RADIUS: 100000,
   MAX_RESOLUTION: 12 * 1024,
   CAMERA_HEIGHT: 1.8,
   LEVEL_PROPERTIES_LIST: [
@@ -32,51 +33,66 @@ export const PANORAMA_CONFIG = {
   ]
 };
 
-function imageData(response) {
+const prefix = PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX;
+const suffix = PANORAMA_CONFIG.PANORAMA_ENDPOINT_SUFFIX;
+
+const getLocationHistoryParams = (location, history) => {
+  const yearTypeMission = (history && history.year)
+    ? `&mission_year=${history.year}&mission_type=${history.missionType}`
+    : '';
+  const newestInRange = 'newest_in_range=true';
+  const pageSize = 'page_size=1';
+
+  return {
+    locationRange: (location)
+      ? `near=${location[1]},${location[0]}&srid=${PANORAMA_CONFIG.SRID}&${pageSize}` : '',
+    newestInRange,
+    standardRadius: `radius=${PANORAMA_CONFIG.MAX_RADIUS}`,
+    largeRadius: `radius=${PANORAMA_CONFIG.LARGE_RADIUS}`,
+    yearTypeMission,
+    adjacenciesParams: `${newestInRange}${yearTypeMission}`
+  };
+};
+
+const imageData = (response) => {
   const panorama = response[0];
   const adjacencies = response.filter((adjacency) => adjacency !== response[0]);
 
-  if (panorama.geometry !== null && typeof panorama.geometry === 'object') {
-    const formattedGeometry = {
-      coordinates: [
-        panorama.geometry.coordinates[1],
-        panorama.geometry.coordinates[0]
-      ],
-      type: panorama.geometry.type
-    };
+  const formattedGeometry = {
+    coordinates: [
+      panorama.geometry.coordinates[1],
+      panorama.geometry.coordinates[0]
+    ],
+    type: panorama.geometry.type
+  };
 
-    const center = getCenter(formattedGeometry);
+  const center = getCenter(formattedGeometry);
 
-    const data = {
-      date: new Date(panorama.timestamp),
-      id: panorama.pano_id,
-      hotspots: Array.isArray(adjacencies) ?
-        adjacencies.map((adjacency) => ({
-          id: adjacency.pano_id,
-          heading: adjacency.direction,
-          distance: adjacency.distance,
-          year: adjacency.timestamp.substring(0, 4)
-        })) : [],
-      location: [center.x, center.y],
-      image: {
-        baseurl: panorama.cubic_img_baseurl,
-        pattern: panorama.cubic_img_pattern,
-        preview: panorama.cubic_img_baseurl
-      }
-    };
+  return {
+    date: new Date(panorama.timestamp),
+    id: panorama.pano_id,
+    hotspots: Array.isArray(adjacencies) ?
+      adjacencies.map((adjacency) => ({
+        id: adjacency.pano_id,
+        heading: adjacency.direction,
+        distance: adjacency.distance,
+        year: adjacency.mission_year
+      })) : [],
+    location: [center.x, center.y],
+    image: {
+      baseurl: panorama.cubic_img_baseurl,
+      pattern: panorama.cubic_img_pattern,
+      preview: panorama.cubic_img_baseurl
+    }
+  };
+};
 
-    return data;
-  }
-
-  return null;
-}
-
-function fetchPanorama(url, key) {
+function fetchPanorama(url) {
   const promise = new Promise((resolve, reject) => {
     getByUrl(url)
-      .then((json) => json._embedded)
+      .then((json) => json._embedded.adjacencies)
       .then((data) => {
-        resolve(imageData(data[key]));
+        resolve(imageData(data));
       })
       .catch((error) => reject(error));
   });
@@ -84,22 +100,52 @@ function fetchPanorama(url, key) {
   return promise;
 }
 
-export function getImageDataByLocation(location, year) {
-  const maxRadius = `radius=${PANORAMA_CONFIG.MAX_RADIUS}`;
-  const locationRange = Array.isArray(location) ?
-    `near=${location[0]},${location[1]}&srid=${PANORAMA_CONFIG.SRID}` : '';
-  const yearRange = year ? `timestamp_before=${year}-12-21&timestamp_after=${year}-01-01` : '';
-
-  const endpoint = `${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}?${maxRadius}&${locationRange}&${yearRange}`;
-
-  return fetchPanorama(`${sharedConfig.API_ROOT}${endpoint}`, 'panoramas');
+function getAdjacencies(url, params) {
+  const getAdjacenciesUrl = `${url}?${params}`;
+  return fetchPanorama(getAdjacenciesUrl);
 }
 
-export function getImageDataById(id, year) {
-  const maxRadius = `radius=${PANORAMA_CONFIG.MAX_RADIUS}`;
-  const yearRange = year ? `timestamp_before=${year}-12-21&timestamp_after=${year}-01-01` : 'newest_in_range=true';
+export function getImageDataByLocation(location, history) {
+  if (!Array.isArray(location)) {
+    return null;
+  }
 
-  const endpoint = `${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}/${id}/${PANORAMA_CONFIG.PANORAMA_ENDPOINT_SUFFIX}?${yearRange}&${maxRadius}`;
+  const {
+    adjacenciesParams,
+    largeRadius,
+    locationRange,
+    newestInRange,
+    standardRadius,
+    yearTypeMission
+  } = getLocationHistoryParams(location, history);
+  const getLocationUrl = `${sharedConfig.API_ROOT}${prefix}/?${locationRange}${yearTypeMission}`;
+  const limitResults = 'limit_results=1';
 
-  return fetchPanorama(`${sharedConfig.API_ROOT}${endpoint}`, 'adjacencies');
+  const promise = new Promise((resolve, reject) => {
+    getByUrl(`${getLocationUrl}&${standardRadius}&${newestInRange}&${limitResults}`)
+      .then((json) => json._embedded.panoramas[0])
+      .then((data) => {
+        if (data) { // we found a pano nearby go to it
+          resolve(getAdjacencies(data._links.adjacencies.href, adjacenciesParams));
+        } else { // there is no pano nearby search with a large radius and go to it
+          resolve(
+            getByUrl(`${getLocationUrl}&${largeRadius}&${limitResults}`)
+              .then((json) => json._embedded.panoramas[0])
+              .then((_data) => getAdjacencies(_data._links.adjacencies.href, adjacenciesParams))
+          );
+        }
+      })
+      .catch((error) => reject(error));
+      // .finally(() => cancel = null);
+  });
+
+  return promise;
+}
+
+export function getImageDataById(id, history) {
+  const { adjacenciesParams } = getLocationHistoryParams(null, history);
+
+  return fetchPanorama(
+    `${sharedConfig.API_ROOT}${prefix}/${id}/${suffix}/?${adjacenciesParams}`
+  );
 }

@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getLayers } from '../../ducks/panel-layers/map-panel-layers';
-import { getPanoramaYear } from '../../../shared/ducks/panorama/panorama';
+import { getPanoramaHistory } from '../../../shared/ducks/panorama/panorama';
 import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/map';
 import { getMapZoom } from '../../ducks/map/map-selectors';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
@@ -21,9 +21,9 @@ export function* switchClickAction(action) {
   const { location } = action.payload;
 
   if (selectionType === SELECTION_TYPE.PANORAMA) {
-    const year = yield select(getPanoramaYear);
+    const history = yield select(getPanoramaHistory);
     const locationArray = latitudeLongitudeToArray(location);
-    const imageData = yield call(getImageDataByLocation, locationArray, year);
+    const imageData = yield call(getImageDataByLocation, locationArray, history);
 
     // The view direction should be towards the location that the user clicked
     const heading = getHeadingDegrees(imageData.location, locationArray);

@@ -11,14 +11,24 @@ import PAGES from '../../../app/pages';
 export const REDUCER_KEY = 'panorama';
 
 export const FETCH_PANORAMA_REQUEST = `${REDUCER_KEY}/FETCH_PANORAMA_REQUEST`;
+export const FETCH_PANORAMA_REQUEST_TOGGLE = `${REDUCER_KEY}/FETCH_PANORAMA_REQUEST_TOGGLE`;
 export const FETCH_PANORAMA_SUCCESS = `${REDUCER_KEY}/FETCH_PANORAMA_SUCCESS`;
 export const FETCH_PANORAMA_ERROR = `${REDUCER_KEY}/FETCH_PANORAMA_ERROR`;
 export const SET_PANORAMA_ORIENTATION = `${REDUCER_KEY}/SET_PANORAMA_ORIENTATION`;
-export const SET_PANORAMA_YEAR = `${REDUCER_KEY}/SET_PANORAMA_YEAR`;
 export const CLOSE_PANORAMA = `${REDUCER_KEY}/CLOSE_PANORAMA`;
+
+export const historyOptions = [
+  { year: 0, missionType: '', label: 'Meest recent', layerName: 'pano' },
+  { year: 2018, missionType: 'bi', label: 'Alleen 2018 regulier', layerName: 'pano2018bi' },
+  // { year: 2018, missionType: 'woz', label: 'Alleen 2018 WOZ', layerName: 'pano2018woz' },
+  { year: 2017, missionType: 'bi', label: 'Alleen 2017 regulier', layerName: 'pano2017bi' },
+  { year: 2017, missionType: 'woz', label: 'Alleen 2017 WOZ', layerName: 'pano2017woz' },
+  { year: 2016, missionType: 'bi', label: 'Alleen 2016 regulier', layerName: 'pano2016bi' }
+];
 
 export const initialState = {
   location: null,   // eg: [52.8, 4.9]
+  history: historyOptions[0],
   year: undefined,  // eg: 2016
   pitch: 0,         // eg: -10
   heading: 0,       // eg: 270
@@ -66,10 +76,10 @@ export default function reducer(state = initialState, action) {
         isLoading: true
       };
 
-    case SET_PANORAMA_YEAR:
+    case FETCH_PANORAMA_REQUEST_TOGGLE:
       return {
         ...state,
-        year: action.payload
+        history: action.payload
       };
 
     case FETCH_PANORAMA_SUCCESS:
@@ -111,11 +121,14 @@ export default function reducer(state = initialState, action) {
 }
 
 // Actions creators
-export const fetchPanoramaRequest = (id) => ({
+export const fetchPanoramaRequest = (payload) => ({
   type: FETCH_PANORAMA_REQUEST,
-  payload: {
-    id
-  }
+  payload
+});
+
+export const fetchPanoramaRequestToggle = (payload) => ({
+  type: FETCH_PANORAMA_REQUEST_TOGGLE,
+  payload
 });
 
 export const fetchPanoramaSuccess = (payload) => ({
@@ -126,11 +139,6 @@ export const fetchPanoramaSuccess = (payload) => ({
 export const fetchPanoramaError = (error) => ({
   type: FETCH_PANORAMA_ERROR,
   payload: error
-});
-
-export const setPanoramaYear = (year) => ({
-  type: SET_PANORAMA_YEAR,
-  payload: year
 });
 
 export const setPanoramaOrientation = ({ heading, pitch, fov }) => ({
@@ -190,4 +198,4 @@ export const getPanoramaMarkers = createSelector([getPanoramaLocation, getPanora
 );
 
 export const getPanoramaView = createSelector(getPanorama, (panorama) => panorama.view);
-export const getPanoramaYear = createSelector(getPanorama, (panorama) => panorama.year);
+export const getPanoramaHistory = createSelector(getPanorama, (panorama) => panorama.history);

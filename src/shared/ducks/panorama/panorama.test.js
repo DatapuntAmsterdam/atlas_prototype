@@ -4,7 +4,9 @@ import reducer, {
   getPanoramaLocation,
   getPanoramaMarkers,
   fetchPanoramaSuccess,
-  setPanoramaYear, fetchPanoramaRequest, setPanoramaOrientation
+  fetchPanoramaRequest,
+  fetchPanoramaRequestToggle,
+  setPanoramaOrientation
 } from './panorama';
 import * as PANORAMA_CONFIG from '../../../../modules/straatbeeld/straatbeeld-config';
 
@@ -48,10 +50,10 @@ describe('Panorama Reducer', () => {
     });
   });
 
-  describe('setPanoramaYear', () => {
-    it('sets the year', () => {
+  describe('fetchPanoramaRequestToggle', () => {
+    it('sets the history', () => {
       expect(
-        reducer({ year: 2010 }, setPanoramaYear(2020))
+        reducer({ year: 2010 }, fetchPanoramaRequestToggle({ year: 2020 }))
       ).toEqual({
         year: 2020
       });

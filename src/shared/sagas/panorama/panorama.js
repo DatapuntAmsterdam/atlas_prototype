@@ -1,15 +1,15 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import { routing } from '../../../app/routes';
 import {
-  FETCH_PANORAMA_REQUEST,
   fetchPanoramaRequest,
   getPanoramaId,
   getPanoramaLocation,
-  getPanoramaYear,
+  getPanoramaHistory,
   fetchPanoramaSuccess,
   fetchPanoramaError,
   CLOSE_PANORAMA,
-  SET_PANORAMA_YEAR
+  FETCH_PANORAMA_REQUEST,
+  FETCH_PANORAMA_REQUEST_TOGGLE
 } from '../../ducks/panorama/panorama';
 import { toggleMapOverlayPanorama } from '../../../map/ducks/map/map';
 import {
@@ -19,38 +19,38 @@ import {
 import { toMap } from '../../../store/redux-first-router';
 
 export function* fireFetchPanormaRequest(action) {
-  yield put(fetchPanoramaRequest(action.payload.id));
+  yield put(fetchPanoramaRequest(action.payload));
 }
 
 export function* watchPanoramaRoute() {
   yield takeLatest(routing.panorama.type, fireFetchPanormaRequest);
 }
 
-export function* fetchPanorama() {
-  const [id, year = ''] = yield all([
+export function* fetchPanoramaById() {
+  const [id, history = {}] = yield all([
     select(getPanoramaId),
-    select(getPanoramaYear)
+    select(getPanoramaHistory)
   ]);
 
   try {
-    const imageData = yield call(getImageDataById, id, year);
+    const imageData = yield call(getImageDataById, id, history);
     yield put(fetchPanoramaSuccess(imageData));
-    yield put(toggleMapOverlayPanorama(year));
+    yield put(toggleMapOverlayPanorama(history));
   } catch (error) {
     yield put(fetchPanoramaError(error));
   }
 }
 
-export function* fetchPanoramaYear() {
-  const [location, year] = yield all([
+export function* fetchPanoramaByLocation() {
+  const [location, history = {}] = yield all([
     select(getPanoramaLocation),
-    select(getPanoramaYear)
+    select(getPanoramaHistory)
   ]);
 
   try {
-    const imageData = yield call(getImageDataByLocation, location, year);
+    const imageData = yield call(getImageDataByLocation, location, history);
     yield put(fetchPanoramaSuccess(imageData));
-    yield put(toggleMapOverlayPanorama(year));
+    yield put(toggleMapOverlayPanorama(history));
   } catch (error) {
     yield put(fetchPanoramaError(error));
   }
@@ -58,8 +58,8 @@ export function* fetchPanoramaYear() {
 
 export function* watchFetchPanorama() {
   yield all([
-    takeLatest(FETCH_PANORAMA_REQUEST, fetchPanorama),
-    takeLatest(SET_PANORAMA_YEAR, fetchPanoramaYear)
+    takeLatest(FETCH_PANORAMA_REQUEST, fetchPanoramaById),
+    takeLatest(FETCH_PANORAMA_REQUEST_TOGGLE, fetchPanoramaByLocation)
   ]);
 }
 

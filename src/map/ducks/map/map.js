@@ -231,7 +231,7 @@ export const toggleMapOverlay = (payload) => ({
 });
 export const toggleMapOverlayPanorama = (payload) => ({
   type: TOGGLE_MAP_OVERLAY_PANORAMA,
-  payload: `${PANORAMA}${payload}`
+  payload: (payload.year) ? `${PANORAMA}${payload.year}${payload.missionType}` : PANORAMA
 });
 export const toggleMapOverlayVisibility = (mapLayerId, show) => ({
   type: TOGGLE_MAP_OVERLAY_VISIBILITY,

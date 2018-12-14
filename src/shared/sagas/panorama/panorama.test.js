@@ -5,8 +5,8 @@ import {
   watchFetchPanorama,
   watchPanoramaRoute,
   watchClosePanorama,
-  fetchPanorama,
-  fetchPanoramaYear,
+  fetchPanoramaById,
+  fetchPanoramaByLocation,
   fetchPanoramaRequest,
   fireFetchPanormaRequest
 } from './panorama';
@@ -17,7 +17,7 @@ import {
   FETCH_PANORAMA_ERROR,
   getPanoramaId,
   getPanoramaLocation,
-  getPanoramaYear,
+  getPanoramaHistory,
   CLOSE_PANORAMA,
   SET_PANORAMA_YEAR
 } from '../../ducks/panorama/panorama';
@@ -58,12 +58,12 @@ describe('watchPanoramaRoute', () => {
 describe('watchFetchPanorama', () => {
   const action = { type: FETCH_PANORAMA_REQUEST };
 
-  it(`should watch ${FETCH_PANORAMA_REQUEST} and call fetchPanorama`, () => {
+  it(`should watch ${FETCH_PANORAMA_REQUEST} and call fetchPanoramaById`, () => {
     testSaga(watchFetchPanorama)
       .next()
       .all([
-        takeLatest(FETCH_PANORAMA_REQUEST, fetchPanorama),
-        takeLatest(SET_PANORAMA_YEAR, fetchPanoramaYear)
+        takeLatest(FETCH_PANORAMA_REQUEST, fetchPanoramaById),
+        takeLatest(SET_PANORAMA_YEAR, fetchPanoramaByLocation)
       ])
       .next(action)
       .isDone();
@@ -92,16 +92,16 @@ describe('watchClosePanorama', () => {
   });
 });
 
-describe('fetchPanorma and fetchPanoramaYear', () => {
+describe('fetchPanorma and fetchPanoramaByLocation', () => {
   it('should call fetchPanorma and dispatch the correct action', () => {
-    testSaga(fetchPanorama)
+    testSaga(fetchPanoramaById)
       .next()
       .all([
         select(getPanoramaId),
-        select(getPanoramaYear)
+        select(getPanoramaHistory)
       ])
-      .next(['id', 'year'])
-      .call(getImageDataById, 'id', 'year')
+      .next(['id', 'history'])
+      .call(getImageDataById, 'id', 'history')
       .next('imageData')
       .put({
         type: FETCH_PANORAMA_SUCCESS,
@@ -110,21 +110,21 @@ describe('fetchPanorma and fetchPanoramaYear', () => {
       .next()
       .put({
         type: TOGGLE_MAP_OVERLAY_PANORAMA,
-        payload: `pano${'year'}`
+        payload: `pano${'history.year'}${'history.missionType'}`
       })
       .next()
       .isDone();
   });
 
   it('should call fetchPanorama and throw an error', () => {
-    testSaga(fetchPanorama)
+    testSaga(fetchPanoramaById)
       .next()
       .all([
         select(getPanoramaId),
-        select(getPanoramaYear)
+        select(getPanoramaHistory)
       ])
-      .next(['id', 'year'])
-      .call(getImageDataById, 'id', 'year')
+      .next(['id', 'history'])
+      .call(getImageDataById, 'id', 'history')
       .throw('error')
       .put({
         type: FETCH_PANORAMA_ERROR,
@@ -135,14 +135,14 @@ describe('fetchPanorma and fetchPanoramaYear', () => {
   });
 
   it('should call fetchPanormaYear and dispatch the correct action', () => {
-    testSaga(fetchPanoramaYear)
+    testSaga(fetchPanoramaByLocation)
       .next()
       .all([
         select(getPanoramaLocation),
-        select(getPanoramaYear)
+        select(getPanoramaHistory)
       ])
-      .next(['location', 'year'])
-      .call(getImageDataByLocation, 'location', 'year')
+      .next(['location', 'history'])
+      .call(getImageDataByLocation, 'location', 'history')
       .next('imageData')
       .put({
         type: FETCH_PANORAMA_SUCCESS,
@@ -151,21 +151,21 @@ describe('fetchPanorma and fetchPanoramaYear', () => {
       .next()
       .put({
         type: TOGGLE_MAP_OVERLAY_PANORAMA,
-        payload: `pano${'year'}`
+        payload: `pano${'history.year'}${'history.missionType'}`
       })
       .next()
       .isDone();
   });
 
-  it('should call fetchPanoramaYear and throw an error', () => {
-    testSaga(fetchPanoramaYear)
+  it('should call fetchPanoramaByLocation and throw an error', () => {
+    testSaga(fetchPanoramaByLocation)
       .next()
       .all([
         select(getPanoramaLocation),
-        select(getPanoramaYear)
+        select(getPanoramaHistory)
       ])
-      .next(['location', 'year'])
-      .call(getImageDataByLocation, 'location', 'year')
+      .next(['location', 'history'])
+      .call(getImageDataByLocation, 'location', 'history')
       .throw('error')
       .put({
         type: FETCH_PANORAMA_ERROR,
