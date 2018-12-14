@@ -4,9 +4,9 @@ describe('content module', () => {
       // go to the homepage
       cy.visit('/');
       // check if the link is in the dom and visible
-      cy.get('.qa-dp-link').contains('Bediening').should('exist').and('be.visible');
+      cy.get('.qa-btn--link').contains('Bediening').should('exist').and('be.visible');
       // click to go to the content
-      cy.get('.qa-dp-link').contains('Bediening').click();
+      cy.get('.qa-btn--link').contains('Bediening').click();
       // the correct content should exist and be visible
       cy.get('p').contains('Het dataportaal biedt verschillende mogelijkheden').should('exist').and('be.visible');
     });

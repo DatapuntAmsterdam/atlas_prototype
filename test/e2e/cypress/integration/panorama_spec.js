@@ -93,9 +93,9 @@ describe('panorama module', () => {
     });
   });
 
-  describe('user should be able to interact with the panorama', () => {
+  describe.only('user should be able to interact with the panorama', () => {
     it('should remember the state when closing the pano, and update to search results when clicked in map', () => {
-      const panoUrl = '/#?dte=bag%2Fopenbareruimte%2F03630000004153%2F&mpb=topografie&mpz=11&mpo=pano::T&mpv=52.3663002:4.883519&sbf=Cu&sbh=qQ&sbi=TMX7316010203-000714_pano_0001_002608&sbl=ZREfS:3IuGM';
+      const panoUrl = '/datasets/panorama/TMX7316010203-000714_pano_0001_002608?heading=-35.000000000000064&lagen=cGFubzox&lat=52.3734172850645&legenda=false&lng=4.8935938669686';
       let newUrl;
 
       cy.defineGeoSearchRoutes();
@@ -120,7 +120,7 @@ describe('panorama module', () => {
 
       cy.wait('@getResults');
       cy.location().then((loc) => {
-        newUrl = loc.pathname + loc.hash;
+        newUrl = loc.pathname + loc.search;
         expect(newUrl).to.equal(panoUrl);
       });
 
@@ -141,7 +141,7 @@ describe('panorama module', () => {
       cy.wait('@getResults');
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
-        newUrl = loc.pathname + loc.hash;
+        newUrl = loc.pathname + loc.search;
         expect(newUrl).not.to.equal(panoUrl);
       });
 
@@ -155,7 +155,7 @@ describe('panorama module', () => {
       cy.wait('@getResults');
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
-        const thisUrl = loc.pathname + loc.hash;
+        const thisUrl = loc.pathname + loc.search;
         expect(thisUrl).to.not.equal(newUrl);
       });
       cy.get('button.c-straatbeeld__close').click();

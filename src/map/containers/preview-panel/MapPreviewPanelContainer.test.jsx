@@ -6,9 +6,9 @@ import { shallow } from 'enzyme';
 import MapPreviewPanelContainer from './MapPreviewPanelContainer';
 import {
   getDataSearchLocation,
-  getMapResultsByLocation,
+  getMapPanelResults,
   isSearchLoading
-} from '../../../shared/ducks/data-search/data-search';
+} from '../../../shared/ducks/data-search/selectors';
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import {
   FETCH_MAP_DETAIL_REQUEST,
@@ -19,17 +19,13 @@ import {
   FETCH_PANORAMA_PREVIEW_REQUEST,
   fetchPanoramaPreview
 } from '../../../shared/ducks/panorama/preview/panorama-preview';
-import {
-  getLocationId,
-  getShortSelectedLocation,
-  selectLatestMapSearchResults
-} from '../../ducks/map/map-selectors';
-import { getDetailEndpoint } from '../../../shared/ducks/detail/detail';
+import { getLocationId } from '../../ducks/map/map-selectors';
+import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
 import { toMap, toPanorama } from '../../../store/redux-first-router';
 import { isGeoSearch } from '../../../shared/ducks/selection/selection';
 
-jest.mock('../../../shared/ducks/detail/detail');
-jest.mock('../../../shared/ducks/data-search/data-search');
+jest.mock('../../../shared/ducks/detail/selectors');
+jest.mock('../../../shared/ducks/data-search/selectors');
 jest.mock('../../ducks/panel-layers/map-panel-layers');
 jest.mock('../../ducks/detail/map-detail');
 jest.mock('../../ducks/map/map-selectors');
@@ -90,7 +86,7 @@ describe('MapPreviewPanelContainer', () => {
   };
 
   beforeEach(() => {
-    getMapResultsByLocation.mockReturnValue({});
+    getMapPanelResults.mockReturnValue([]);
     getDataSearchLocation.mockReturnValue({
       latitude: 1,
       longitude: 0
@@ -98,7 +94,6 @@ describe('MapPreviewPanelContainer', () => {
     getMapDetail.mockImplementation(() => ({ type: FETCH_MAP_DETAIL_REQUEST }));
     fetchPanoramaPreview.mockImplementation(() => ({ type: FETCH_PANORAMA_PREVIEW_REQUEST }));
     selectNotClickableVisibleMapLayers.mockImplementation(() => ([]));
-    getShortSelectedLocation.mockImplementation(() => null);
     isGeoSearch.mockImplementation((state) => !(state.detail && state.detail.endpoint));
     isSearchLoading.mockReturnValue(false);
     getDetailEndpoint.mockImplementation((state) => state.detail && state.detail.endpoint);
@@ -107,7 +102,6 @@ describe('MapPreviewPanelContainer', () => {
   afterEach(() => {
     getMapDetail.mockReset();
     fetchPanoramaPreview.mockReset();
-    selectLatestMapSearchResults.mockReset();
     selectLatestMapDetail.mockReset();
     selectNotClickableVisibleMapLayers.mockReset();
   });

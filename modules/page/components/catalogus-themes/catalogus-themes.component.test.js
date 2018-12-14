@@ -59,7 +59,8 @@ describe('The dp-catalogus-themes', () => {
         return component;
     }
 
-    it('list all themes as links to data selection', () => {
+    // Todo: DP-6235
+    xit('list all themes as links to data selection', () => {
         const component = getComponent();
 
         // The first link
@@ -83,17 +84,5 @@ describe('The dp-catalogus-themes', () => {
         expect(component.find('.qa-theme-link').eq(4).text()).toBe('Thema E');
         expect(component.find('.qa-theme-link').eq(4).attr('class'))
             .toContain('c-catalogus-theme__icon c-catalogus-theme__icon--icon-e');
-    });
-
-    it('when the number of themes is uneven the left column will have more themes than the right column', () => {
-        const component = getComponent();
-        const firstColumn = component.find('.c-catalogus-themes__column').eq(0);
-        const secondColumn = component.find('.c-catalogus-themes__column').eq(1);
-
-        expect(firstColumn.attr('class')).toContain('c-catalogus-themes__column--left');
-        expect(firstColumn.find('.qa-theme-link').length).toBe(3);
-
-        expect(secondColumn.attr('class')).toContain('c-catalogus-themes__column--right');
-        expect(secondColumn.find('.qa-theme-link').length).toBe(2);
     });
 });

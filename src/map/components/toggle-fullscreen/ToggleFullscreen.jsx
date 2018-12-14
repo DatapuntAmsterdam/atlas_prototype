@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MinimizeIcon from '../../../../public/images/icon-minimize.svg';
-import MaximizeIcon from '../../../../public/images/icon-maximize.svg';
-
 import './_toggle-fullscreen.scss';
 
 const ToggleFullscreen = ({ isFullscreen, onToggleFullscreen }) => (
@@ -12,9 +9,11 @@ const ToggleFullscreen = ({ isFullscreen, onToggleFullscreen }) => (
     className="toggle-fullscreen"
     onClick={() => onToggleFullscreen()}
   >
-    {isFullscreen ?
-      <MinimizeIcon className="toggle-fullscreen__icon" /> :
-      <MaximizeIcon className="toggle-fullscreen__icon" />}
+    <span className={`
+      toggle-fullscreen__icon
+      toggle-fullscreen__icon--${isFullscreen ? 'minimize' : 'maximize'}
+    `}
+    />
   </button>
 );
 

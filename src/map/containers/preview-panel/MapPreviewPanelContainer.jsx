@@ -4,31 +4,32 @@ import { bindActionCreators } from 'redux';
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { selectLatestMapDetail } from '../../ducks/detail/map-detail';
 import { isEmbedded, isEmbedPreview } from '../../../shared/ducks/ui/ui';
-import { DETAIL_VIEW, getDetail, getDetailEndpoint } from '../../../shared/ducks/detail/detail';
+import { getDetail, getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
 import MapPreviewPanel from './MapPreviewPanel';
-import { getLocationId, selectLatestMapSearchResults } from '../../ducks/map/map-selectors';
+import { getLocationId } from '../../ducks/map/map-selectors';
 import { isGeoSearch } from '../../../shared/ducks/selection/selection';
 import {
   getDataSearch,
   getDataSearchLocation,
-  getMapResultsByLocation,
+  getMapPanelResults,
   isSearchLoading
-} from '../../../shared/ducks/data-search/data-search';
+} from '../../../shared/ducks/data-search/selectors';
 import { getPanoramaPreview } from '../../../shared/ducks/panorama/preview/panorama-preview';
 import {
   getPageActionEndpoint,
-  toDataLocationSearch,
+  toDataSearchLocationAndPreserveQuery,
   toMap,
   toPanorama
 } from '../../../store/redux-first-router';
+import { DETAIL_VIEW } from '../../../shared/ducks/detail/constants';
 
 const mapStateToProps = (state) => ({
   panoPreview: getPanoramaPreview(state),
-  searchResults: selectLatestMapSearchResults(state),
+  searchResults: getMapPanelResults(state),
   dataSearch: getDataSearch(state),
   searchLocation: getDataSearchLocation(state),
   searchLocationId: getLocationId(state),
-  isSearchLoaded: !isSearchLoading(state) && getMapResultsByLocation(state),
+  isSearchLoaded: !isSearchLoading(state) && getMapPanelResults(state),
   missingLayers: selectNotClickableVisibleMapLayers(state)
     .map((mapLayer) => mapLayer.title)
     .join(', '),
@@ -44,14 +45,14 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
     closePanel: toMap,
-    onSearchMaximize: toDataLocationSearch
+    onSearchMaximize: toDataSearchLocationAndPreserveQuery
   }, dispatch),
   openPano: (id, heading) => {
     const action = toPanorama(id, heading);
     return dispatch(action);
   },
   openPreviewDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP)),
-  openDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint))
+  openDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP_DETAIL))
 });
 
 /* eslint-enable react/no-unused-prop-types */

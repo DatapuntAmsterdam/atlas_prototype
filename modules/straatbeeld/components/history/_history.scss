@@ -18,8 +18,8 @@
   cursor: pointer;
 
   &::before {
-    @extend %dp-clock-black-icon;
     @extend %icon-button-text-extra;
+    @include sprite("clock-black");
 
     position: absolute;
     top: 0;
@@ -27,8 +27,8 @@
   }
 
   &::after {
-    @extend %dp-up-black-icon;
     @extend %icon-button-text-extra;
+    @include sprite("up-black");
 
     position: absolute;
     top: 0;
@@ -41,7 +41,7 @@
     @extend %active-button;
 
     &::after {
-      @extend %dp-down-black-icon;
+      @include sprite("down-black");
     }
   }
 }
@@ -99,7 +99,8 @@
   opacity: .6;
 
   &:active,
-  &:hover {
+  &:hover,
+  &:focus {
     opacity: 1;
   }
 }

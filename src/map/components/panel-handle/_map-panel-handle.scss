@@ -27,21 +27,29 @@
     width: $handle-height;
     z-index: 10000;
 
-    svg {
-      fill: $secondary-gray60;
-      height: $handle-height;
-      width: $handle-height;
-    }
-
     &:hover,
     &:focus {
-      svg {
-        fill: $primary-dark;
+      border-color: $primary-dark;
+    }
+
+    &--icon-collapse {
+      @include icon-sprite("icon-arrow-down", $secondary-gray60, $primary-dark, $handle-height);
+      background-color: $secondary-gray5;
+
+      &:hover,
+      &:focus {
+        background-color: $secondary-gray5;
       }
     }
 
-    &:focus {
-      border-color: $primary-dark;
+    &--icon-expand {
+      @include icon-sprite("icon-arrow-up", $secondary-gray60, $primary-dark, $handle-height);
+      background-color: $secondary-gray5;
+
+      &:hover,
+      &:focus {
+        background-color: $secondary-gray5;
+      }
     }
   }
 

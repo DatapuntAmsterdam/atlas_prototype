@@ -27,11 +27,9 @@ RUN git config --global url."https://".insteadOf git:// && \
 # Build dependencies
 COPY src /app/src
 COPY modules /app/modules
-COPY grunt /app/grunt
 COPY public /app/public
 COPY scripts /app/scripts
 COPY .babelrc \
-      Gruntfile.js \
       webpack.* \
       index.ejs \
       favicon.png \

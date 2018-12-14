@@ -1,28 +1,30 @@
-@mixin icon($icon, $state: "", $hover-state: "red", $tall: "") {
+@mixin icon($name, $state: "#666", $hover-state: "#000", $tall: "") {
+  @include icon-sprite($name, $state, $hover-state);
+
+  background-color: $primary-light;
   display: inline-block;
   line-height: $button-size;
   padding: 0;
   position: relative;
   width: $button-size;
+
   @if $tall == "tall" {
     height: $button-tall-size;
   } @else {
     height: $button-size;
   }
 
-  &::before {
-    @extend %#{"dp-" + $icon + if(str-length($state) > 0, "-", "") + $state + "-icon"};
+  &:hover,
+  &:focus {
+    background-color: $secondary-gray20;
+    outline: none;
+  }
 
+  &::before {
     content: "";
     display: block;
     height: $button-size;
     width: $button-size;
-  }
-
-  &:hover {
-    &::before {
-      @extend %#{"dp-" + $icon + if(str-length($hover-state) > 0, "-", "") + $hover-state + "-icon"};
-    }
   }
 }
 
@@ -65,58 +67,101 @@
   }
 }
 
+%border-after {
+  border: 1px solid $secondary-gray20;
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 %icon--border {
-  background-color: $primary-light;
-  color: $secondary-gray60;
   text-decoration: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 
   &::after {
-    border: 1px solid $secondary-gray20;
-    bottom: 0;
-    content: "";
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
+    @extend %border-after;
+  }
+}
+
+%base-button {
+  background-color: $primary-light;
+  color: $secondary-gray60;
+  position: relative;
+
+  &::after {
+    @extend %border-after;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $secondary-gray20;
+    color: $primary-dark;
+    outline: none;
+
+    &::after {
+      border: 1px solid $primary-dark;
+    }
   }
 }
 
 %icon--border-hover {
   @extend %icon--border;
 
-  &:hover {
-    background-color: $primary-contrast;
-    color: $primary-light;
+  &:hover,
+  &:focus {
+    background-color: $primary-dark;
 
     &::after {
-      border-color: $primary-contrast;
+      border-color: $primary-dark;
     }
   }
 }
 
 %icon--border-inverted {
   @extend %icon--border-hover;
-  background-color: $primary-contrast;
-  color: $primary-light;
 
   &::after {
-    border-color: $primary-contrast;
+    border-color: $secondary-gray20;
   }
 
-  &:hover {
-    background-color: $primary-light;
+  &:hover,
+  &:focus {
+    background-color: $secondary-gray20;
     color: $secondary-gray60;
+    outline: none;
 
     &::after {
-      border-color: $secondary-gray20;
+      border-color: $primary-dark;
     }
   }
 }
 
 %icon--shadow {
   box-shadow: $button-shadow-size $button-shadow-size 0 0 $secondary-gray40;
+}
+
+@mixin icon-sprite($name, $fill: "#FFF", $hover-fill: "", $size: auto 100%) {
+  @include sprite($name, ( fill: $fill));
+
+  @if $size {
+    background-size: $size;
+  }
+
+  @if $hover-fill {
+    &:hover,
+    &:focus {
+      @include sprite($name, ( fill: $hover-fill));
+
+      @if $size {
+        background-size: $size;
+      }
+    }
+  }
 }

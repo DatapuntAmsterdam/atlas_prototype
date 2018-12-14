@@ -6,8 +6,11 @@ exports[`ToggleFullscreen actions rendering should render with fullscreen is tur
   onClick={[Function]}
   title="Kaart vergroten"
 >
-  <Component
-    className="toggle-fullscreen__icon"
+  <span
+    className="
+      toggle-fullscreen__icon
+      toggle-fullscreen__icon--maximize
+    "
   />
 </button>
 `;
@@ -18,8 +21,11 @@ exports[`ToggleFullscreen actions rendering should render with fullscreen is tur
   onClick={[Function]}
   title="Kaart verkleinen"
 >
-  <Component
-    className="toggle-fullscreen__icon"
+  <span
+    className="
+      toggle-fullscreen__icon
+      toggle-fullscreen__icon--minimize
+    "
   />
 </button>
 `;

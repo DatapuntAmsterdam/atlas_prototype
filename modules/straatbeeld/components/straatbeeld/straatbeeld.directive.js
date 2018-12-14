@@ -47,7 +47,7 @@ import throttle from 'lodash.throttle';
             // period.
             // NOTE: throttle is done for performance reasons. If store changes are less of a
             // performance hit, then we may remove this or reduce the period length.
-            const viewChangeHandler = viewer.addEventListener('viewChange',
+            const viewChangeHandler = viewer.addEventListener('viewChange', /* istanbul ignore next */ () => {
                 throttle(
                     () => {
                         orientation.update(viewer);
@@ -57,8 +57,8 @@ import throttle from 'lodash.throttle';
                         leading: true,
                         trailing: true
                     }
-                )
-            );
+                );
+            });
 
             // We need to watch for object equality instead of reference
             // equality for both the `image` and `hotspots` object/array. This

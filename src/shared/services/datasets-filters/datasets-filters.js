@@ -21,6 +21,7 @@ function getCatalogFilters(data) {
   const ownerProperties = dcatDocProperties['ams:owner'].examples;
 
   const datasetsFilters = {
+    statusTypes: getOptions(dcatDocProperties['ams:status']),
     groupTypes: getOptions(themaProperties),
     formatTypes: getOptions(distributionProperties['dcat:mediaType']),
     serviceTypes: getOptions(distributionProperties['ams:serviceType']),

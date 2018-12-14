@@ -1,4 +1,23 @@
-.c-toggle-view-button {
-  @extend %icon--border-hover;
-  @include icon-label-left("forward", "", "white", "tall");
+.c-toggle-view-button--kaart {
+  @include header-button("kaart-small", 24px);
+
+  padding-top: 3px;
+  padding-right: 12px;
+
+  &::before {
+    margin-top: 1px;
+    margin-right: 5px;
+  }
+}
+
+.c-toggle-view-button--list {
+  @include header-button("list", 24px);
+
+  padding-top: 3px;
+  padding-right: 12px;
+
+  &::before {
+    margin-top: 1px;
+    margin-right: 5px;
+  }
 }

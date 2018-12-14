@@ -7,15 +7,16 @@ import {
 } from '../../ducks/datasets/apiSpecification/apiSpecification';
 import fetchApiSpecification from '../../services/datasets-filters/datasets-filters';
 
-// Todo: make this work again
-describe.skip('watchFetchCatalogFilters', () => {
-  const action = { type: FETCH_API_SPECIFICATION_REQUEST };
-
+describe('watchFetchCatalogFilters', () => {
   it(`should watch ${FETCH_API_SPECIFICATION_REQUEST} and call getApiSpecification`, () => {
     testSaga(retrieveApiSpecification)
       .next()
-      .takeLatestEffect(retrieveApiSpecification)
-      .next(action)
+      .next('data')
+      .put({
+        type: FETCH_API_SPECIFICATION_SUCCESS,
+        payload: 'data'
+      })
+      .next()
       .isDone();
   });
 });

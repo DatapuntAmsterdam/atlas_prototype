@@ -5,12 +5,16 @@ describe('The anchorLink component', function () {
         $interval,
         anchor;
 
+    var vmMock = {
+        anchorScroll: function (value) { anchor = value;}
+    };
+
     beforeEach(function () {
         anchor = null;
 
         angular.mock.module('dpShared',
             $provide => {
-                $provide.constant('$anchorScroll', value => anchor = value);
+                $provide.constant('$anchorScroll', vmMock.anchorScroll);
             }
         );
 
@@ -60,5 +64,25 @@ describe('The anchorLink component', function () {
         $rootScope.$apply();
         $interval.flush(FLUSH_PERIOD);
         expect(anchor).toBe('a link');
+    });
+
+    it('should scroll to a specified link on enter', () => {
+        const component = getComponent('a link', '', false);
+        const controller = component.controller('dpAnchorLink');
+        spyOn(controller, 'scrollTo');
+        component.find('.qa-anchor-link').triggerHandler({ type: 'keydown', key: 'Enter' });
+        $rootScope.$apply();
+        $interval.flush(FLUSH_PERIOD);
+        expect(controller.scrollTo).toHaveBeenCalled();
+    });
+
+    it('should ignore the action when the pressed key is not enter', () => {
+        const component = getComponent('a link', '', false);
+        const controller = component.controller('dpAnchorLink');
+        spyOn(controller, 'scrollTo');
+        component.find('.qa-anchor-link').triggerHandler({ type: 'keydown', key: 'Up' });
+        $rootScope.$apply();
+        $interval.flush(FLUSH_PERIOD);
+        expect(controller.scrollTo).not.toHaveBeenCalled();
     });
 });

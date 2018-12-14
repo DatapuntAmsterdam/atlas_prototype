@@ -2,51 +2,47 @@ import {
   FETCH_DATA_SELECTION_FAILURE,
   FETCH_DATA_SELECTION_REQUEST,
   FETCH_DATA_SELECTION_SUCCESS,
-  initialState,
-  ROUTE_DATASET_MAPPER,
+  initialState, ROUTE_DATASET_MAPPER,
   SET_DATASET,
   SET_GEOMETRY_FILTERS,
   SET_MARKERS,
   SET_PAGE,
-  SET_VIEW,
-  VIEWS
+  SET_VIEW
 } from './constants';
 import { routing } from '../../../app/routes';
 import { getStateFromQuery } from '../../../store/query-synchronization';
-import query from './query';
+import urlParams from './query';
+import { SET_SELECTION } from '../selection/selection';
+import { FETCH_MAP_DETAIL_SUCCESS } from '../../../map/ducks/detail/constants';
 
 export { REDUCER_KEY } from './constants';
 
 export default function reducer(state = initialState, action) {
+  const enrichedState = {
+    ...state,
+    ...getStateFromQuery(urlParams, action),
+    ...(ROUTE_DATASET_MAPPER[action.type]) ? { dataset: ROUTE_DATASET_MAPPER[action.type] } : {}
+  };
+
   switch (action.type) {
-    case routing.addresses.type:
-    case routing.establishments.type:
-    case routing.cadastralObjects.type: {
-      if (action.meta && action.meta.query) {
-        const stateFromQuery = getStateFromQuery(query, action.meta.query);
-        return {
-          ...state,
-          ...stateFromQuery,
-          dataset: ROUTE_DATASET_MAPPER[action.type]
-        };
-      }
+    case routing.home.type:
+    case FETCH_MAP_DETAIL_SUCCESS:
+    case SET_SELECTION: {
       return {
-        ...state,
-        dataset: ROUTE_DATASET_MAPPER[action.type],
-        view: VIEWS.TABLE
+        ...initialState
       };
     }
 
     case FETCH_DATA_SELECTION_REQUEST:
       return {
-        ...state,
+        ...enrichedState,
         isLoading: true,
         markers: []
       };
 
     case FETCH_DATA_SELECTION_SUCCESS: {
       return {
-        ...state,
+        ...enrichedState,
         isLoading: false,
         markers: [],
         errorMessage: '',
@@ -57,47 +53,47 @@ export default function reducer(state = initialState, action) {
 
     case FETCH_DATA_SELECTION_FAILURE:
       return {
-        ...state,
+        ...enrichedState,
         isLoading: false,
         authError: (action.payload.error === 'Unauthorized'),
         errorMessage: action.payload.error,
         dataset: action.payload.dataset,
-        results: {},
+        result: {},
         markers: []
       };
 
     case SET_MARKERS:
       return {
-        ...state,
+        ...enrichedState,
         isLoading: false,
         markers: action.payload
       };
 
     case SET_DATASET:
       return {
-        ...state,
+        ...enrichedState,
         dataset: action.payload
       };
 
     case SET_GEOMETRY_FILTERS:
       return {
-        ...state,
+        ...enrichedState,
         geometryFilter: action.payload
       };
 
     case SET_PAGE:
       return {
-        ...state,
+        ...enrichedState,
         page: action.payload
       };
 
     case SET_VIEW:
       return {
-        ...state,
+        ...enrichedState,
         view: action.payload
       };
 
     default:
-      return state;
+      return enrichedState;
   }
 }

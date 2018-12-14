@@ -10,8 +10,9 @@ import watchFetchSuggestions from '../../../header/sagas/auto-suggest/auto-sugge
 import AutoSuggestReducer from '../../ducks/auto-suggest/auto-suggest';
 import DataSelectionReducer from '../../../shared/ducks/data-selection/reducer';
 
-import * as search from '../../../shared/ducks/data-search/data-search';
-import * as details from '../../../shared/ducks/detail/detail';
+import * as search from '../../../shared/ducks/data-search/actions';
+import * as details from '../../../shared/ducks/detail/reducer';
+import { fetchDetail } from '../../../shared/ducks/detail/actions';
 
 // mock authentication call, as this is not part of this test scope
 jest.mock('../../../shared/services/auth/auth');
@@ -130,7 +131,7 @@ describe('HeaderSearchContainer', () => {
           expect(headerSearch).toMatchSnapshot(); // first suggestion is active
           input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
           headerSearch.update();
-          expect(details.fetchDetail)
+          expect(fetchDetail)
             .toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/bag/openbareruimte/03630000001528/');
           // dropdown should be hidden and value should be cleared
           expect(headerSearch).toMatchSnapshot();
@@ -156,7 +157,7 @@ describe('HeaderSearchContainer', () => {
           const autoSuggestItem = headerSearch.find('.auto-suggest__dropdown-item').first();
           autoSuggestItem.simulate('click');
           headerSearch.update();
-          expect(details.fetchDetail)
+          expect(fetchDetail)
             .toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/bag/openbareruimte/03630000001528/');
           // dropdown should be hidden and value should be cleared
           expect(headerSearch).toMatchSnapshot();

@@ -15,11 +15,21 @@
         };
 
         function linkFunction (scope, elem, attrs) {
-            elem.on ('click', function () {
-                const url = attrs.dpFollowLink;
-                const resourceName = attrs.dpFollowLinkResourceName;
+            const followLink = (attributes) => {
+                const url = attributes.dpFollowLink;
+                const resourceName = attributes.dpFollowLinkResourceName;
                 $window._paq.push(['trackEvent', 'Download', resourceName, url]);
                 $window.open(url, '_blank');
+            };
+
+            elem.on('click', function () {
+                followLink(attrs);
+            });
+
+            elem.on('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    followLink(attrs);
+                }
             });
         }
     }

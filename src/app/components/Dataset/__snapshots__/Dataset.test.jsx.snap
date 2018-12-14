@@ -1,3 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dataset should render the inital state 1`] = `<LoadingIndicator />`;
+exports[`Dataset should render the inital state 1`] = `
+<div>
+  <Connect(DatasetActiveFilters) />
+  <div
+    className="u-grid qa-data-grid"
+  >
+    <div
+      className="u-row"
+    >
+      <div
+        className="u-col-sm--12"
+      >
+        <div>
+          <AngularWrapper
+            bindings={
+              Object {
+                "catalogFilters": Object {},
+                "content": undefined,
+              }
+            }
+            component="dpDataSelectionCatalog"
+            dependencies={
+              Array [
+                "atlas",
+              ]
+            }
+            interpolateBindings={Object {}}
+            moduleName="dpDataSelectionCatalogWrapper"
+          />
+        </div>
+        <AngularWrapper
+          bindings={
+            Object {
+              "currentPage": 1,
+              "numberOfPages": undefined,
+              "setPage": [Function],
+            }
+          }
+          component="dpDataSelectionPagination"
+          dependencies={
+            Array [
+              "atlas",
+            ]
+          }
+          interpolateBindings={Object {}}
+          moduleName="dpDataSelectionPaginationWrapper"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

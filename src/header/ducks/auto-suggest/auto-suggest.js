@@ -1,3 +1,6 @@
+import get from 'lodash.get';
+import { routing } from '../../../app/routes';
+
 export const SET_ACTIVE_SUGGESTION = 'SET_ACTIVE_SUGGESTION';
 export const FETCH_SUGGESTIONS_REQUEST = 'FETCH_SUGGESTIONS_REQUEST';
 export const FETCH_SUGGESTIONS_SUCCESS = 'FETCH_SUGGESTIONS_SUCCESS';
@@ -41,7 +44,14 @@ export default function AutoSuggestReducer(state = initialState, action) {
       return {
         ...state,
         activeSuggestion: action.suggestion,
-        displayQuery: action.suggestion.label
+        displayQuery: action.suggestion.label,
+        typedQuery: action.suggestion === -1 ? '' : state.typedQuery
+      };
+    case routing.dataSearch.type:
+    case routing.searchDatasets.type:
+      return {
+        ...state,
+        typedQuery: get(action, 'meta.query.zoekterm')
       };
 
     default:

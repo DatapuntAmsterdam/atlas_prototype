@@ -6,7 +6,6 @@
         'dpHeader',
         'dpPage',
         'dpDetail',
-        'dpSearchResults',
         'dpStraatbeeld',
         'dpDataSelection',
 

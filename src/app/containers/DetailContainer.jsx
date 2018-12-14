@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AngularWrapper } from 'react-angular';
-import {
-  getDetailEndpoint,
-  isDetailLoading
-} from '../../shared/ducks/detail/detail';
+import { getDetailEndpoint, isDetailLoading } from '../../shared/ducks/detail/selectors';
 import { getUser } from '../../shared/ducks/user/user';
-import { getPanoramaPreview, isPanoramaPreviewLoading } from '../../shared/ducks/panorama/preview/panorama-preview';
+import {
+  getPanoramaPreview,
+  isPanoramaPreviewLoading
+} from '../../shared/ducks/panorama/preview/panorama-preview';
 
 const mapStateToProps = (state) => ({
   isLoading: isDetailLoading(state),

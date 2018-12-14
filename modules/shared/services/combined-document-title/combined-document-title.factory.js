@@ -9,14 +9,12 @@ import * as mapDocumentTitle from '../../../../src/map/services/document-title/d
         .factory('dpCombinedDocumentTitle', documentTitleFactory);
 
     documentTitleFactory.$inject = [
-        'dpSearchResultsDocumentTitle',
         'dpDataSelectionDocumentTitle',
         'dpDetailDocumentTitle',
         '$q'
     ];
 
     function documentTitleFactory (
-        dpSearchResultsDocumentTitle,
         dpDataSelectionDocumentTitle,
         dpDetailDocumentTitle,
         $q
@@ -34,8 +32,6 @@ import * as mapDocumentTitle from '../../../../src/map/services/document-title/d
                     q.resolve(`${dpDataSelectionDocumentTitle.getTitle(fullState.dataSelection, filters)} | ${result}`);
                 } else if (fullState.detail && fullState.detail.display) {
                     q.resolve(`${dpDetailDocumentTitle.getTitle(fullState.detail, filters)} | ${result}`);
-                } else if (fullState.search && fullState.search.numberOfResults) {
-                    q.resolve(`${dpSearchResultsDocumentTitle.getTitle(fullState.search, filters)} | ${result}`);
                 } else {
                     q.resolve(result);
                 }

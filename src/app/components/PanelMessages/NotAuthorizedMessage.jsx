@@ -1,21 +1,11 @@
 import React from 'react';
 import Link from 'redux-first-router-link';
-import { AngularWrapper } from 'react-angular';
 import { routing } from '../../routes';
+import Notification from '../../../shared/components/notification/Notification';
 
 const NotAuthorizedPanel = () => (
-  <AngularWrapper
-    moduleName={'dpPanelWrapper'}
-    component="dpPanel"
-    className="qa-disabled-message"
-    dependencies={['atlas']}
-    bindings={{
-      isPanelVisible: true,
-      canClose: true
-    }}
-    interpolateBindings={{
-      type: 'warning'
-    }}
+  <Notification
+    type="warning"
   >
     <div>
       <p className="c-panel__paragraph">
@@ -23,10 +13,18 @@ const NotAuthorizedPanel = () => (
         rechthebbenden te bekijken.
       </p>
       <p className="c-panel__paragraph">
-        Zie <Link className="c-link--light qa-link-to-page-button qa-dp-link" to={{ type: routing.bediening.type, payload: { deeplink: 'inloggen' } }}>Help &#62; Bediening &#62; Inloggen</Link>
+        Zie <Link
+          className="c-link--light qa-link-to-page-button qa-dp-link"
+          to={{
+            type: routing.bediening.type,
+            payload: { deeplink: 'inloggen' }
+          }}
+        >
+          Help &#62; Bediening &#62; Inloggen
+        </Link>
       </p>
     </div>
-  </AngularWrapper>
+  </Notification>
 );
 
 export default NotAuthorizedPanel;

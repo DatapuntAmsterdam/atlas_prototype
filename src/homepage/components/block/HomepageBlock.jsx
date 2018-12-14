@@ -13,7 +13,7 @@ const HomepageBlock = ({
   description,
   blockIsLink
 }) => {
-  const className = `c-homepage__block-link homepage-block c-homepage__block c-homepage__block--tall ${classes}`;
+  const className = `c-homepage__block-link c-homepage__block c-homepage__block--tall ${classes}`;
   const linkProps = { title: `Bekijk ${title}`, to: linkAction };
 
   const Block = blockIsLink ? Link : 'div';
@@ -25,11 +25,14 @@ const HomepageBlock = ({
     <Block
       {...blockProps}
       className={className}
+      onKeyDown={(event) => event.key === 'Enter' && linkAction}
+      tabIndex="0"  // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
     >
       {children}
       <BlockButton
         {...blockButtonProps}
-        className={`c-homepage__block-button ${hasTallDescription ? 'c-homepage__block-button--tall' : ''}`}
+        className={`c-homepage__block-button ${hasTallDescription ? 'c-homepage__block-button--tall' : ''} qa-button-datasets`}
+        tabIndex="-1"
       >
         <div className="o-btn--transparent">{title}</div>
         <div className="c-homepage__block-details">{description}</div>

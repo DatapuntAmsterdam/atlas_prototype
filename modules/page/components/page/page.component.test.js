@@ -28,9 +28,7 @@ describe('The page component', function () {
         $templateCache.put('modules/page/components/page/templates/welcome.html', 'THIS_IS_WELCOME');
         $templateCache.put('modules/page/components/page/templates/about.html', 'THIS_IS_ABOUT');
 
-        getContents.default = jasmine.createSpy('getContents').and.returnValue({
-            then: (func) => getContentsThen = func
-        });
+        spyOn(getContents, 'default').and.returnValue({ then: (func) => getContentsThen = func });
     });
 
     function getComponent (name, type, item) {

@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CollapseIcon from '../../../../public/images/icon-arrow-down.svg';
-import ExpandIcon from '../../../../public/images/icon-arrow-up.svg';
-
 const MapPanelHandle = (props) => (
   <div className={`
     map-panel-handle
@@ -11,13 +8,15 @@ const MapPanelHandle = (props) => (
   `}
   >
     <button
-      className="map-panel-handle__toggle"
+      className={`
+        map-panel-handle__toggle
+        map-panel-handle__toggle--${props.isMapPanelHandleVisible ? 'icon-collapse' : 'icon-expand'}
+      `}
       onClick={props.onMapPanelHandleToggle}
     >
-      {props.isMapPanelHandleVisible
-        ? <span><CollapseIcon /><span className="u-sr-only">Kaartlagen verbergen</span></span>
-        : <span><ExpandIcon /><span className="u-sr-only">Kaartlagen tonen</span></span>
-      }
+      <span className="u-sr-only">
+        {props.isMapPanelHandleVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen' }
+      </span>
     </button>
     {props.isMapPanelHandleVisible && props.children}
   </div>

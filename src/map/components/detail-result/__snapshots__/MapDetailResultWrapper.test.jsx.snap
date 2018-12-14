@@ -44,8 +44,8 @@ exports[`MapDetailResultWrapper should not render empty panoUrl 1`] = `
         onClick={[MockFunction]}
         title="Volledig weergeven"
       >
-        <Component
-          className="map-search-results__button-icon"
+        <span
+          className=" map-search-results__button-icon map-search-results__button-icon--maximize"
         />
         Volledig weergeven
       </button>
@@ -93,8 +93,8 @@ exports[`MapDetailResultWrapper should not render empty sub title 1`] = `
         onClick={[MockFunction]}
         title="Volledig weergeven"
       >
-        <Component
-          className="map-search-results__button-icon"
+        <span
+          className=" map-search-results__button-icon map-search-results__button-icon--maximize"
         />
         Volledig weergeven
       </button>
@@ -134,8 +134,8 @@ exports[`MapDetailResultWrapper should not render missing children 1`] = `
         onClick={[MockFunction]}
         title="Volledig weergeven"
       >
-        <Component
-          className="map-search-results__button-icon"
+        <span
+          className=" map-search-results__button-icon map-search-results__button-icon--maximize"
         />
         Volledig weergeven
       </button>
@@ -183,8 +183,8 @@ exports[`MapDetailResultWrapper should not render missing sub title 1`] = `
         onClick={[MockFunction]}
         title="Volledig weergeven"
       >
-        <Component
-          className="map-search-results__button-icon"
+        <span
+          className=" map-search-results__button-icon map-search-results__button-icon--maximize"
         />
         Volledig weergeven
       </button>
@@ -254,8 +254,8 @@ exports[`MapDetailResultWrapper should render everything 1`] = `
         onClick={[MockFunction]}
         title="Volledig weergeven"
       >
-        <Component
-          className="map-search-results__button-icon"
+        <span
+          className=" map-search-results__button-icon map-search-results__button-icon--maximize"
         />
         Volledig weergeven
       </button>

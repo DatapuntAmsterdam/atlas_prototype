@@ -1,11 +1,12 @@
 import { createSelector } from 'reselect';
-import { routing } from '../../../app/routes';
+import { ROUTER_NAMESPACE, routing } from '../../../app/routes';
 import { PANORAMA_CONFIG } from '../../services/panorama-api/panorama-api';
 import PANORAMA_VIEW from './panorama-view';
 import {
   panoramaOrientationType,
   panoramaPersonType
 } from '../../../map/components/leaflet/services/icons.constant';
+import PAGES from '../../../app/pages';
 
 export const REDUCER_KEY = 'panorama';
 
@@ -32,6 +33,12 @@ export const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  if (action.type &&
+    action.type.startsWith(ROUTER_NAMESPACE) &&
+    !action.type.includes(PAGES.PANORAMA)
+  ) {
+    return initialState;
+  }
   switch (action.type) {
     case routing.panorama.type: {
       const { query = {} } = action.meta;

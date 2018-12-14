@@ -17,9 +17,9 @@ import * as MapPanelLayersReducer from '../map/ducks/panel-layers/map-panel-laye
 import * as PanoramaReducer from '../shared/ducks/panorama/panorama';
 import * as PanoPreviewReducer from '../shared/ducks/panorama/preview/panorama-preview';
 import * as FiltersReducer from '../shared/ducks/filters/filters';
-import * as DataSearchReducer from '../shared/ducks/data-search/data-search';
+import * as DataSearchReducer from '../shared/ducks/data-search/reducer';
 import * as SelectionReducer from '../shared/ducks/selection/selection';
-import * as DetailReducer from '../shared/ducks/detail/detail';
+import * as DetailReducer from '../shared/ducks/detail/reducer';
 
 describe('the root reducer', () => {
   AutoSuggestReducer.default = () => 'autoSuggest';

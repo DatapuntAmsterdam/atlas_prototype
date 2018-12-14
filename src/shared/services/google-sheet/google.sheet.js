@@ -23,7 +23,9 @@ export const GOOGLE_SHEET_CMS = {
     proclaimer: 6,
     info: 7,
     inloggen: 8,
-    statistieken: 9
+    statistieken: 9,
+    verplaatst: 10,
+    nietgevonden: 11
   }
 };
 

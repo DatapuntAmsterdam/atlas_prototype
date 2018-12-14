@@ -86,7 +86,7 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
 >
   <form
     className="auto-suggest
-          auto-suggest__backdrop"
+          "
     onSubmit={[Function]}
   >
     <fieldset>
@@ -103,6 +103,7 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
+          autoFocus="true"
           className="auto-suggest__input"
           id="auto-suggest__input"
           onBlur={[Function]}
@@ -120,9 +121,6 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
           title="Wis zoektekst"
           type="button"
         >
-          <Component>
-            mock-svg
-          </Component>
           <span
             className="u-sr-only"
           >
@@ -130,384 +128,12 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
           </span>
         </button>
       </div>
-      <div
-        className="auto-suggest__dropdown"
-      >
-        <h3
-          className="auto-suggest__tip"
-        >
-          Enkele suggesties
-        </h3>
-        <AutoSuggestCategory
-          activeSuggestion={
-            Object {
-              "index": -1,
-            }
-          }
-          category={
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Straatnamen",
-                  "index": 0,
-                  "label": "Dam",
-                  "uri": "bag/openbareruimte/03630000003186/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 1,
-                  "label": "Damloperspad",
-                  "uri": "bag/openbareruimte/03630000001038/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 2,
-                  "label": "Damrak",
-                  "uri": "bag/openbareruimte/03630000003187/",
-                },
-              ],
-              "label": "Straatnamen",
-              "total_results": 6,
-            }
-          }
-          key="Straatnamen"
-          onSuggestionSelection={[Function]}
-          query=""
-        >
-          <div
-            className="auto-suggest__dropdown-category"
-          >
-            <h4
-              className="auto-suggest__dropdown-category__heading qa-auto-suggest-header"
-            >
-              Straatnamen
-            </h4>
-            <ul>
-              <AutoSuggestItem
-                content="Dam"
-                isActive={false}
-                key="Dam0"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damloperspad"
-                isActive={false}
-                key="Damloperspad1"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>l<span class=\\"auto-suggest__dropdown__highlight\\"></span>o<span class=\\"auto-suggest__dropdown__highlight\\"></span>p<span class=\\"auto-suggest__dropdown__highlight\\"></span>e<span class=\\"auto-suggest__dropdown__highlight\\"></span>r<span class=\\"auto-suggest__dropdown__highlight\\"></span>s<span class=\\"auto-suggest__dropdown__highlight\\"></span>p<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>d<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damrak"
-                isActive={false}
-                key="Damrak2"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>r<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>k<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="..."
-                isActive={false}
-                key="Straatnamen..."
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className="auto-suggest__dropdown-item--row-height"
-                >
-                  <button
-                    className="auto-suggest__dropdown-item-button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      ...
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-            </ul>
-          </div>
-        </AutoSuggestCategory>
-        <AutoSuggestCategory
-          activeSuggestion={
-            Object {
-              "index": -1,
-            }
-          }
-          category={
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Monumenten",
-                  "index": 3,
-                  "label": "Damrak 1",
-                  "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 4,
-                  "label": "Dam 10",
-                  "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 5,
-                  "label": "Damrak 15",
-                  "uri": "monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/",
-                },
-              ],
-              "label": "Monumenten",
-              "total_results": 5,
-            }
-          }
-          key="Monumenten"
-          onSuggestionSelection={[Function]}
-          query=""
-        >
-          <div
-            className="auto-suggest__dropdown-category"
-          >
-            <h4
-              className="auto-suggest__dropdown-category__heading qa-auto-suggest-header"
-            >
-              Monumenten
-            </h4>
-            <ul>
-              <AutoSuggestItem
-                content="Damrak 1"
-                isActive={false}
-                key="Damrak 13"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>r<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>k<span class=\\"auto-suggest__dropdown__highlight\\"></span> <span class=\\"auto-suggest__dropdown__highlight\\"></span>1<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Dam 10"
-                isActive={false}
-                key="Dam 104"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span> <span class=\\"auto-suggest__dropdown__highlight\\"></span>1<span class=\\"auto-suggest__dropdown__highlight\\"></span>0<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damrak 15"
-                isActive={false}
-                key="Damrak 155"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>r<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>k<span class=\\"auto-suggest__dropdown__highlight\\"></span> <span class=\\"auto-suggest__dropdown__highlight\\"></span>1<span class=\\"auto-suggest__dropdown__highlight\\"></span>5<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="..."
-                isActive={false}
-                key="Monumenten..."
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className="auto-suggest__dropdown-item--row-height"
-                >
-                  <button
-                    className="auto-suggest__dropdown-item-button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      ...
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-            </ul>
-          </div>
-        </AutoSuggestCategory>
-      </div>
       <button
         className="auto-suggest__submit qa-search-form-submit"
         disabled={false}
         title="Zoeken"
         type="submit"
       >
-        <Component>
-          mock-svg
-        </Component>
         <span
           className="u-sr-only"
         >
@@ -608,7 +234,7 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
 >
   <form
     className="auto-suggest
-          auto-suggest__backdrop"
+          "
     onSubmit={[Function]}
   >
     <fieldset>
@@ -625,6 +251,7 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
+          autoFocus="true"
           className="auto-suggest__input"
           id="auto-suggest__input"
           onBlur={[Function]}
@@ -642,9 +269,6 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
           title="Wis zoektekst"
           type="button"
         >
-          <Component>
-            mock-svg
-          </Component>
           <span
             className="u-sr-only"
           >
@@ -652,390 +276,12 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
           </span>
         </button>
       </div>
-      <div
-        className="auto-suggest__dropdown"
-      >
-        <h3
-          className="auto-suggest__tip"
-        >
-          Enkele suggesties
-        </h3>
-        <AutoSuggestCategory
-          activeSuggestion={
-            Object {
-              "category": "Monumenten",
-              "index": 3,
-              "label": "Damrak 1",
-              "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-            }
-          }
-          category={
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Straatnamen",
-                  "index": 0,
-                  "label": "Dam",
-                  "uri": "bag/openbareruimte/03630000003186/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 1,
-                  "label": "Damloperspad",
-                  "uri": "bag/openbareruimte/03630000001038/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 2,
-                  "label": "Damrak",
-                  "uri": "bag/openbareruimte/03630000003187/",
-                },
-              ],
-              "label": "Straatnamen",
-              "total_results": 6,
-            }
-          }
-          key="Straatnamen"
-          onSuggestionSelection={[Function]}
-          query="dam"
-        >
-          <div
-            className="auto-suggest__dropdown-category"
-          >
-            <h4
-              className="auto-suggest__dropdown-category__heading qa-auto-suggest-header"
-            >
-              Straatnamen
-            </h4>
-            <ul>
-              <AutoSuggestItem
-                content="Dam"
-                isActive={false}
-                key="Dam0"
-                onSuggestionSelection={[Function]}
-                query="dam"
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\">Dam</span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damloperspad"
-                isActive={false}
-                key="Damloperspad1"
-                onSuggestionSelection={[Function]}
-                query="dam"
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\">Dam</span>loperspad",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damrak"
-                isActive={false}
-                key="Damrak2"
-                onSuggestionSelection={[Function]}
-                query="dam"
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\">Dam</span>rak",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="..."
-                isActive={false}
-                key="Straatnamen..."
-                onSuggestionSelection={[Function]}
-                query="dam"
-              >
-                <li
-                  className="auto-suggest__dropdown-item--row-height"
-                >
-                  <button
-                    className="auto-suggest__dropdown-item-button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      ...
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-            </ul>
-          </div>
-        </AutoSuggestCategory>
-        <AutoSuggestCategory
-          activeSuggestion={
-            Object {
-              "category": "Monumenten",
-              "index": 3,
-              "label": "Damrak 1",
-              "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-            }
-          }
-          category={
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Monumenten",
-                  "index": 3,
-                  "label": "Damrak 1",
-                  "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 4,
-                  "label": "Dam 10",
-                  "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 5,
-                  "label": "Damrak 15",
-                  "uri": "monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/",
-                },
-              ],
-              "label": "Monumenten",
-              "total_results": 5,
-            }
-          }
-          key="Monumenten"
-          onSuggestionSelection={[Function]}
-          query="dam"
-        >
-          <div
-            className="auto-suggest__dropdown-category"
-          >
-            <h4
-              className="auto-suggest__dropdown-category__heading qa-auto-suggest-header"
-            >
-              Monumenten
-            </h4>
-            <ul>
-              <AutoSuggestItem
-                content="Damrak 1"
-                isActive={true}
-                key="Damrak 13"
-                onSuggestionSelection={[Function]}
-                query="dam"
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--active
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\">Dam</span>rak 1",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Dam 10"
-                isActive={false}
-                key="Dam 104"
-                onSuggestionSelection={[Function]}
-                query="dam"
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\">Dam</span> 10",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damrak 15"
-                isActive={false}
-                key="Damrak 155"
-                onSuggestionSelection={[Function]}
-                query="dam"
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\">Dam</span>rak 15",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="..."
-                isActive={false}
-                key="Monumenten..."
-                onSuggestionSelection={[Function]}
-                query="dam"
-              >
-                <li
-                  className="auto-suggest__dropdown-item--row-height"
-                >
-                  <button
-                    className="auto-suggest__dropdown-item-button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      ...
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-            </ul>
-          </div>
-        </AutoSuggestCategory>
-      </div>
       <button
         className="auto-suggest__submit qa-search-form-submit"
         disabled={false}
         title="Zoeken"
         type="submit"
       >
-        <Component>
-          mock-svg
-        </Component>
         <span
           className="u-sr-only"
         >
@@ -1150,6 +396,7 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
+          autoFocus="true"
           className="auto-suggest__input"
           id="auto-suggest__input"
           onBlur={[Function]}
@@ -1167,9 +414,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
           title="Wis zoektekst"
           type="button"
         >
-          <Component>
-            mock-svg
-          </Component>
           <span
             className="u-sr-only"
           >
@@ -1183,9 +427,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
         title="Zoeken"
         type="submit"
       >
-        <Component>
-          mock-svg
-        </Component>
         <span
           className="u-sr-only"
         >
@@ -1283,7 +524,7 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
 >
   <form
     className="auto-suggest
-          auto-suggest__backdrop"
+          "
     onSubmit={[Function]}
   >
     <fieldset>
@@ -1300,6 +541,7 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
+          autoFocus="true"
           className="auto-suggest__input"
           id="auto-suggest__input"
           onBlur={[Function]}
@@ -1317,9 +559,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
           title="Wis zoektekst"
           type="button"
         >
-          <Component>
-            mock-svg
-          </Component>
           <span
             className="u-sr-only"
           >
@@ -1327,384 +566,12 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
           </span>
         </button>
       </div>
-      <div
-        className="auto-suggest__dropdown"
-      >
-        <h3
-          className="auto-suggest__tip"
-        >
-          Enkele suggesties
-        </h3>
-        <AutoSuggestCategory
-          activeSuggestion={
-            Object {
-              "index": -1,
-            }
-          }
-          category={
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Straatnamen",
-                  "index": 0,
-                  "label": "Dam",
-                  "uri": "bag/openbareruimte/03630000003186/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 1,
-                  "label": "Damloperspad",
-                  "uri": "bag/openbareruimte/03630000001038/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 2,
-                  "label": "Damrak",
-                  "uri": "bag/openbareruimte/03630000003187/",
-                },
-              ],
-              "label": "Straatnamen",
-              "total_results": 6,
-            }
-          }
-          key="Straatnamen"
-          onSuggestionSelection={[Function]}
-          query=""
-        >
-          <div
-            className="auto-suggest__dropdown-category"
-          >
-            <h4
-              className="auto-suggest__dropdown-category__heading qa-auto-suggest-header"
-            >
-              Straatnamen
-            </h4>
-            <ul>
-              <AutoSuggestItem
-                content="Dam"
-                isActive={false}
-                key="Dam0"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damloperspad"
-                isActive={false}
-                key="Damloperspad1"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>l<span class=\\"auto-suggest__dropdown__highlight\\"></span>o<span class=\\"auto-suggest__dropdown__highlight\\"></span>p<span class=\\"auto-suggest__dropdown__highlight\\"></span>e<span class=\\"auto-suggest__dropdown__highlight\\"></span>r<span class=\\"auto-suggest__dropdown__highlight\\"></span>s<span class=\\"auto-suggest__dropdown__highlight\\"></span>p<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>d<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damrak"
-                isActive={false}
-                key="Damrak2"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>r<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>k<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="..."
-                isActive={false}
-                key="Straatnamen..."
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className="auto-suggest__dropdown-item--row-height"
-                >
-                  <button
-                    className="auto-suggest__dropdown-item-button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      ...
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-            </ul>
-          </div>
-        </AutoSuggestCategory>
-        <AutoSuggestCategory
-          activeSuggestion={
-            Object {
-              "index": -1,
-            }
-          }
-          category={
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Monumenten",
-                  "index": 3,
-                  "label": "Damrak 1",
-                  "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 4,
-                  "label": "Dam 10",
-                  "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 5,
-                  "label": "Damrak 15",
-                  "uri": "monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/",
-                },
-              ],
-              "label": "Monumenten",
-              "total_results": 5,
-            }
-          }
-          key="Monumenten"
-          onSuggestionSelection={[Function]}
-          query=""
-        >
-          <div
-            className="auto-suggest__dropdown-category"
-          >
-            <h4
-              className="auto-suggest__dropdown-category__heading qa-auto-suggest-header"
-            >
-              Monumenten
-            </h4>
-            <ul>
-              <AutoSuggestItem
-                content="Damrak 1"
-                isActive={false}
-                key="Damrak 13"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>r<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>k<span class=\\"auto-suggest__dropdown__highlight\\"></span> <span class=\\"auto-suggest__dropdown__highlight\\"></span>1<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Dam 10"
-                isActive={false}
-                key="Dam 104"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span> <span class=\\"auto-suggest__dropdown__highlight\\"></span>1<span class=\\"auto-suggest__dropdown__highlight\\"></span>0<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="Damrak 15"
-                isActive={false}
-                key="Damrak 155"
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className=""
-                >
-                  <button
-                    className="
-        auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--inactive
-        "
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      <span
-                        className="icon"
-                      >
-                        <Component>
-                          mock-svg
-                        </Component>
-                      </span>
-                      <span
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "<span class=\\"auto-suggest__dropdown__highlight\\"></span>D<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>m<span class=\\"auto-suggest__dropdown__highlight\\"></span>r<span class=\\"auto-suggest__dropdown__highlight\\"></span>a<span class=\\"auto-suggest__dropdown__highlight\\"></span>k<span class=\\"auto-suggest__dropdown__highlight\\"></span> <span class=\\"auto-suggest__dropdown__highlight\\"></span>1<span class=\\"auto-suggest__dropdown__highlight\\"></span>5<span class=\\"auto-suggest__dropdown__highlight\\"></span>",
-                          }
-                        }
-                      />
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-              <AutoSuggestItem
-                content="..."
-                isActive={false}
-                key="Monumenten..."
-                onSuggestionSelection={[Function]}
-                query=""
-              >
-                <li
-                  className="auto-suggest__dropdown-item--row-height"
-                >
-                  <button
-                    className="auto-suggest__dropdown-item-button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <div>
-                      ...
-                    </div>
-                  </button>
-                </li>
-              </AutoSuggestItem>
-            </ul>
-          </div>
-        </AutoSuggestCategory>
-      </div>
       <button
         className="auto-suggest__submit qa-search-form-submit"
         disabled={false}
         title="Zoeken"
         type="submit"
       >
-        <Component>
-          mock-svg
-        </Component>
         <span
           className="u-sr-only"
         >
@@ -1819,6 +686,7 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
+          autoFocus="true"
           className="auto-suggest__input"
           id="auto-suggest__input"
           onBlur={[Function]}
@@ -1836,9 +704,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
           title="Wis zoektekst"
           type="button"
         >
-          <Component>
-            mock-svg
-          </Component>
           <span
             className="u-sr-only"
           >
@@ -1852,9 +717,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
         title="Zoeken"
         type="submit"
       >
-        <Component>
-          mock-svg
-        </Component>
         <span
           className="u-sr-only"
         >

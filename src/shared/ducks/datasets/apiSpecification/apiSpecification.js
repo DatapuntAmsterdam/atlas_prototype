@@ -6,13 +6,14 @@ export const FETCH_API_SPECIFICATION_FAILURE = `${REDUCER_KEY}/FETCH_API_SPECIFI
 const initialState = {
   isLoading: false,
   error: null,
-  data: undefined
+  data: {}
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_API_SPECIFICATION_REQUEST:
       return {
+        ...state,
         isLoading: true,
         error: null
       };
@@ -27,7 +28,8 @@ export default function reducer(state = initialState, action) {
 
     case FETCH_API_SPECIFICATION_FAILURE:
       return {
-        data: undefined,
+        ...state,
+        data: {},
         isLoading: false,
         error: action.payload
       };

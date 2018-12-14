@@ -1,4 +1,12 @@
 .c-download-button {
-  @extend %icon--border-hover;
-  @include icon-label-left("download", "transparent", "red", "tall");
+  @include header-button("download", 24px);
+
+  margin-left: 0;
+  padding-top: 3px;
+  padding-right: 12px;
+
+  &::before {
+    margin-top: 1px;
+    margin-right: 5px;
+  }
 }

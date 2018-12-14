@@ -1,6 +1,8 @@
 @import "../../../shared/components/toggle/toggle";
 @import "../../../shared/styles/utilities/screen-reader";
 
+$icon-height: 24px;
+
 .map-legend {
   background-color: $primary-light;
   border: 1px solid $secondary-gray40;
@@ -111,9 +113,18 @@
 
   &__toggle {
     @extend %__toggle; // sass-lint:disable-line placeholder-name-format
-    @extend %hover-focus-button;
     margin-left: 10px;
     outline: none;
+
+    &--remove {
+      @include icon-sprite("icon-cross", $secondary-gray60, $primary-dark, $icon-height);
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $secondary-gray20;
+      border-color: $primary-dark;
+    }
   }
 
   .is-embed &,

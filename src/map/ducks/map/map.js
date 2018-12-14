@@ -1,11 +1,10 @@
 import { routing } from '../../../app/routes';
+import { FETCH_MAP_DETAIL_SUCCESS } from '../detail/constants';
 
 export const MAP_BOUNDING_BOX = 'MAP_BOUNDING_BOX';
-export const MAP_BOUNDING_BOX_SILENT = 'MAP_BOUNDING_BOX_SILENT';
 export const MAP_EMPTY_GEOMETRY = 'MAP_EMPTY_GEOMETRY';
 export const MAP_END_DRAWING = 'MAP_END_DRAWING';
 export const MAP_PAN = 'MAP_PAN';
-export const MAP_PAN_SILENT = 'MAP_PAN_SILENT';
 export const MAP_START_DRAWING = 'MAP_START_DRAWING';
 export const MAP_UPDATE_SHAPE = 'MAP_UPDATE_SHAPE';
 export const MAP_ZOOM = 'MAP_ZOOM';
@@ -37,6 +36,7 @@ export const initialState = {
 let polygon = {};
 let has2Markers;
 let moreThan2Markers;
+export const isPanoLayer = (layer) => layer.id.startsWith(PANORAMA);
 
 export default function MapReducer(state = initialState, action) {
   const enrichedState = {
@@ -71,15 +71,25 @@ export default function MapReducer(state = initialState, action) {
 
   switch (action.type) {
     case routing.dataDetail.type:
-    case routing.panorama.type:
     case routing.dataSearch.type:
     case routing.addresses.type:
     case routing.cadastralObjects.type:
     case routing.establishments.type:
+      // When opening these pages, close legend, remove pano layer
+      return {
+        ...enrichedState,
+        mapPanelActive: false,
+        overlays: enrichedState.overlays ? [...enrichedState.overlays.filter(
+          (overlay) => !isPanoLayer(overlay)
+        )] : []
+      };
+
+    case routing.panorama.type:
       // When opening these pages, close legend
       return {
         ...enrichedState,
-        mapPanelActive: false
+        mapPanelActive: false,
+        overlays: enrichedState.overlays
       };
 
     case MAP_PAN:
@@ -97,13 +107,13 @@ export default function MapReducer(state = initialState, action) {
       };
 
     case MAP_BOUNDING_BOX:
-    case MAP_BOUNDING_BOX_SILENT:
       return {
         ...enrichedState,
         boundingBox: action.payload.boundingBox
       };
 
     case MAP_EMPTY_GEOMETRY:
+    case FETCH_MAP_DETAIL_SUCCESS:
       return {
         ...enrichedState,
         geometry: []
@@ -151,7 +161,7 @@ export default function MapReducer(state = initialState, action) {
       return {
         ...enrichedState,
         overlays: enrichedState.overlays.some(
-          (overlay) => action.payload.mapLayers.includes(overlay.id)
+          (overlay) => !isPanoLayer(overlay) && action.payload.mapLayers.includes(overlay.id)
         ) ? [...enrichedState.overlays.filter(
           (overlay) => !action.payload.mapLayers.includes(overlay.id)
         )] : [...enrichedState.overlays, ...action.payload.mapLayers.map(
@@ -162,12 +172,11 @@ export default function MapReducer(state = initialState, action) {
     case TOGGLE_MAP_OVERLAY_PANORAMA:
       return {
         ...enrichedState,
-        overlays: enrichedState.overlays.some(
-          (overlay) => action.payload !== overlay.id
-        ) ? [...enrichedState.overlays.filter(
-          (overlay) => !overlay.id.startsWith(PANORAMA)
-        ), { id: action.payload, isVisible: true }]
-        : [...enrichedState.overlays, { id: action.payload, isVisible: true }]
+        overlays: [
+          { id: action.payload, isVisible: true },
+          ...enrichedState.overlays.filter(
+            (overlay) => !isPanoLayer(overlay)
+          )]
       };
 
     case TOGGLE_MAP_OVERLAY_VISIBILITY:
@@ -180,6 +189,7 @@ export default function MapReducer(state = initialState, action) {
         }))
       };
 
+    case routing.home.type:
     case MAP_CLEAR:
       return {
         ...state,
@@ -216,7 +226,7 @@ export const toggleMapOverlay = (payload) => ({
     mapLayers: (payload.id) ? [payload.id] : payload.legendItems.map((overlay) => overlay.id)
   },
   meta: {
-    tracking: !payload.id.startsWith(PANORAMA) ? payload : false
+    tracking: (payload && payload.id && !isPanoLayer(payload)) ? payload : null
   }
 });
 export const toggleMapOverlayPanorama = (payload) => ({
@@ -244,7 +254,7 @@ export const setSelectedLocation = (payload) => ({
     }
   }
 });
-export const updateBoundingBox = (payload, isDrawingActive) => ({
-  type: isDrawingActive ? MAP_BOUNDING_BOX_SILENT : MAP_BOUNDING_BOX,
+export const updateBoundingBox = (payload) => ({
+  type: MAP_BOUNDING_BOX,
   payload
 });

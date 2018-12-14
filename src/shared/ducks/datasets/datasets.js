@@ -11,14 +11,26 @@ export default combineReducers({
 });
 
 // Selectors
-export const getDatasetsData = (state) => state[REDUCER_KEY][DATA];
-export const getDatasetApiSpecification = (state) => state[REDUCER_KEY][API_SPECIFICATION].data;
+const getDatasetsData = (state) => state[REDUCER_KEY][DATA];
+const getApiSpecification = (state) => state[REDUCER_KEY][API_SPECIFICATION];
 
-export const getResults = createSelector(getDatasetsData, (datasets) => datasets.result || {});
+const getStateOfKey = {
+  data: (key) => (state) => createSelector(getDatasetsData, (data) => (data[key]))(state),
+  apiSpec: (key) => (state) => createSelector(getApiSpecification, (data) => (data[key]))(state)
+};
+
+export const getApiSpecificationData = getStateOfKey.apiSpec('data');
+
+export const getResults = getStateOfKey.data('result');
+export const getAuthError = getStateOfKey.data('authError');
+export const getPage = getStateOfKey.data('page');
 export const getFilters = createSelector(getResults, (result) => result.filters || []);
-export const getAuthError = createSelector(getDatasetsData, (resultState) => resultState.authError);
-export const getPage = createSelector(getDatasetsData, (resultState) => resultState.page);
-export const dataIsLoading = createSelector(
+export const getNumberOfResults = createSelector(
+  getResults,
+  (resultState) => resultState.numberOfRecords
+);
+export const isLoading = createSelector(
   getDatasetsData,
-  (resultState) => resultState.isLoading
+  getApiSpecification,
+  (resultState, apiSpecs) => resultState.isLoading || apiSpecs.isLoading
 );

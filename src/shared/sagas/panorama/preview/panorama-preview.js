@@ -7,11 +7,11 @@ import {
 
 import panoPreview from '../../../services/panorama-preview/pano-preview';
 import {
-  FETCH_MAP_SEARCH_RESULTS_REQUEST,
   getDataSearchLocation
-} from '../../../ducks/data-search/data-search';
+} from '../../../ducks/data-search/selectors';
 import { routing } from '../../../../app/routes';
-import { FETCH_MAP_DETAIL_SUCCESS } from '../../../../map/ducks/detail/map-detail';
+import { FETCH_MAP_DETAIL_SUCCESS } from '../../../../map/ducks/detail/constants';
+import { FETCH_MAP_SEARCH_RESULTS_REQUEST } from '../../../ducks/data-search/constants';
 
 export function* fetchMapPano(action) {
   try {

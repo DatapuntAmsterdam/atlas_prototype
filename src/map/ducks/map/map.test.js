@@ -36,6 +36,7 @@ describe('Map Reducer', () => {
     const state = { shapeMarkers: 2 };
     expect(reducer(state, mapClear())).toEqual({
       ...state,
+      overlays: [],
       drawingMode: initialState.drawingMode,
       shapeMarkers: initialState.shapeMarkers,
       shapeDistanceTxt: initialState.shapeDistanceTxt,
@@ -139,7 +140,8 @@ describe('Map Reducer', () => {
     expect(reducer({}, {
       type: routing.dataDetail.type
     })).toEqual({
-      mapPanelActive: false
+      mapPanelActive: false,
+      overlays: []
     });
 
     expect(reducer({}, {
@@ -226,21 +228,21 @@ describe('Map Reducer', () => {
   it('should remove toggled overlays from the active ones', () => {
     const state = {
       overlays: [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 }
+        { id: '1' },
+        { id: '2' },
+        { id: '3' }
       ]
     };
 
     const newOverlay = {
       legendItems: [
-        { id: 3 }
+        { id: '3' }
       ]
     };
     expect(reducer(state, toggleMapOverlay(newOverlay))).toEqual({
       overlays: [
-        { id: 1 },
-        { id: 2 }
+        { id: '1' },
+        { id: '2' }
       ]
     });
   });
@@ -248,21 +250,21 @@ describe('Map Reducer', () => {
   it('should add toggled overlays from to active ones', () => {
     const state = {
       overlays: [
-        { id: 2 },
-        { id: 3 }
+        { id: '2' },
+        { id: '3' }
       ]
     };
 
     const newOverlay = {
       legendItems: [
-        { id: 4 }
+        { id: '4' }
       ]
     };
     expect(reducer(state, toggleMapOverlay(newOverlay))).toEqual({
       overlays: [
-        { id: 2 },
-        { id: 3 },
-        { id: 4, isVisible: true }
+        { id: '2' },
+        { id: '3' },
+        { id: '4', isVisible: true }
       ]
     });
   });
@@ -270,18 +272,18 @@ describe('Map Reducer', () => {
   it('should handle toggling overlays without legend items', () => {
     const state = {
       overlays: [
-        { id: 2 },
-        { id: 3 }
+        { id: '2' },
+        { id: '3' }
       ]
     };
 
-    const newOverlay = { id: 4 };
+    const newOverlay = { id: '4' };
 
     expect(reducer(state, toggleMapOverlay(newOverlay))).toEqual({
       overlays: [
-        { id: 2 },
-        { id: 3 },
-        { id: 4, isVisible: true }
+        { id: '2' },
+        { id: '3' },
+        { id: '4', isVisible: true }
       ]
     });
   });
@@ -289,23 +291,23 @@ describe('Map Reducer', () => {
   it('should toggle the overlay visibility with and without show action', () => {
     const state = {
       overlays: [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 }
+        { id: '1' },
+        { id: '2' },
+        { id: '3' }
       ]
     };
-    expect(reducer(state, toggleMapOverlayVisibility(1, true))).toEqual({
+    expect(reducer(state, toggleMapOverlayVisibility('1', true))).toEqual({
       overlays: [
-        { id: 1, isVisible: true },
-        { id: 2, isVisible: undefined },
-        { id: 3, isVisible: undefined }
+        { id: '1', isVisible: true },
+        { id: '2', isVisible: undefined },
+        { id: '3', isVisible: undefined }
       ]
     });
-    expect(reducer(state, toggleMapOverlayVisibility(2))).toEqual({
+    expect(reducer(state, toggleMapOverlayVisibility('2'))).toEqual({
       overlays: [
-        { id: 1, isVisible: undefined },
-        { id: 2, isVisible: true },
-        { id: 3, isVisible: undefined }
+        { id: '1', isVisible: undefined },
+        { id: '2', isVisible: true },
+        { id: '3', isVisible: undefined }
       ]
     });
   });

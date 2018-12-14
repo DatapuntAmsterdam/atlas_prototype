@@ -18,7 +18,7 @@ exports[`MapSearchResultsItem rendering should render an item 1`] = `
         Dam 1
       </div>
     </section>
-    <Component
+    <span
       className="map-search-results-item__arrow"
     />
   </button>
@@ -43,7 +43,7 @@ exports[`MapSearchResultsItem rendering should update an item 1`] = `
         ABC123
       </div>
     </section>
-    <Component
+    <span
       className="map-search-results-item__arrow"
     />
   </button>

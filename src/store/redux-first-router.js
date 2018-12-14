@@ -3,13 +3,14 @@ import queryString from 'querystring';
 import get from 'lodash.get';
 import { routing } from '../app/routes';
 import PAGES from '../app/pages';
-import { DETAIL_VIEW } from '../shared/ducks/detail/detail';
 import PANORAMA_VIEW from '../shared/ducks/panorama/panorama-view';
 
 export const REDUCER_KEY = 'location';
 
 // TODO: refactor unit test or remove all together
 // Action creators
+export const toHome = () => ({ type: routing.home.type });
+
 export const preserveQuery = (action) => {
   const search = location.search && location.search.substr(1);
   return {
@@ -22,25 +23,29 @@ export const preserveQuery = (action) => {
     }
   };
 };
-export const toDataDetail = (id, type, subtype, view) => {
-  const action = {
-    type: routing.dataDetail.type,
-    payload: {
-      type,
-      subtype,
-      id: `id${id}`
-    },
-    meta: {
-      query: {}
+export const toDataDetail = (id, type, subtype, view) => (preserveQuery({
+  type: routing.dataDetail.type,
+  payload: {
+    type,
+    subtype,
+    id: `id${id}`
+  },
+  meta: {
+    query: {
+      ...view ? { detailModus: view } : {}
     }
-  };
-  if (view === DETAIL_VIEW.MAP) {
-    action.meta.query.kaart = '';
   }
-  return action;
-};
-export const toDataLocationSearch = () => preserveQuery({ // TODO rename
+}));
+export const toDataSearchLocationAndPreserveQuery = () => preserveQuery({ // TODO rename
   type: routing.dataSearch.type
+});
+export const toDataSearchLocation = (payload) => ({ // TODO rename
+  type: routing.dataSearch.type,
+  meta: {
+    query: {
+      locatie: payload
+    }
+  }
 });
 export const toMapAndPreserveQuery = () => preserveQuery({ type: routing.map.type });
 export const toMap = () => ({ type: routing.map.type });
@@ -56,9 +61,6 @@ export const toPanorama = (id, heading, view) => {
       }
     }
   };
-  if (view === PANORAMA_VIEW.MAP) {
-    action.meta.query.kaart = '';
-  }
   if (view === PANORAMA_VIEW.PANO) {
     action.meta.query.panorama = '';
   }
@@ -85,22 +87,46 @@ export const pageTypeToEndpoint = (type, subtype, id) => {
   endpoint += `${type}/${subtype}/${id}/`; // TODO: refactor, get back-end to return detail as detail GET not listing!
   return endpoint;
 };
-export const toDataSearch = (searchQuery) => ({
+export const toDataSearch = (searchQuery, skipFetch = false) => ({
   type: routing.dataSearch.type,
   meta: {
+    skipFetch,
     query: {
       zoekterm: searchQuery
     }
   }
 });
-export const toDatasetSearch = (searchQuery) => ({
-  type: routing.searchDatasets.type,
+export const toDataSearchCategory = (searchQuery, category) => ({
+  type: routing.dataSearchCategory.type,
+  payload: {
+    category
+  },
   meta: {
     query: {
       zoekterm: searchQuery
     }
   }
 });
+export const toDatasets = () => ({ type: routing.datasets.type });
+export const toDatasetSearch = (searchQuery, skipFetch = false) => ({
+  type: routing.searchDatasets.type,
+  meta: {
+    skipFetch,
+    query: {
+      zoekterm: searchQuery
+    }
+  }
+});
+
+export const toDatasetsWithFilter = (themeSlug) => ({
+  type: routing.datasets.type,
+  meta: {
+    query: {
+      filters: btoa(JSON.stringify({ groups: themeSlug }))
+    }
+  }
+});
+
 export const toDataSuggestion = (payload) => {
   const { type, subtype, id } = getDetailPageData(payload.endpoint);
   const action = {
@@ -130,6 +156,9 @@ export const toDatasetSuggestion = (payload) => ({
     }
   }
 });
+export const toControlPage = () => ({
+  type: routing.bediening.type
+});
 
 // Selectors
 const getLocation = (state) => state[REDUCER_KEY];
@@ -139,13 +168,20 @@ export const getLocationPayload = createSelector(getLocation, (location) => loca
 
 export const getPage = createSelector(getLocation, (location = {}) => {
   const key = Object.keys(routing).find((route) => routing[route].type === location.type);
-  return key && routing[key].page;
+  return (key && routing[key].page) || routing.niet_gevonden.page;
 });
 
 export const isMapView = createSelector(
   getLocationQuery,
   (query) => (
     Object.prototype.hasOwnProperty.call(query, 'kaart') || false
+  )
+);
+
+export const isLocationSelected = createSelector(
+  getLocationQuery,
+  (query) => (
+    Object.prototype.hasOwnProperty.call(query, 'locatie') || false
   )
 );
 
@@ -174,4 +210,12 @@ export const isDataSelectionPage = createSelector(
   (page) => page === PAGES.ADDRESSES
     || page === PAGES.CADASTRAL_OBJECTS
     || page === PAGES.ESTABLISHMENTS
+);
+
+export const isDataSearch = createSelector(
+  getPage,
+  isMapActive,
+  isLocationSelected,
+  (page, mapActive, locationSelected) =>
+    (page === PAGES.DATA_SEARCH || (mapActive && locationSelected))
 );

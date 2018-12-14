@@ -132,7 +132,8 @@ const DATA_SELECTION_CONFIG = {
       MAX_NUMBER_OF_CLUSTERED_MARKERS: Infinity,
       ENDPOINT_PREVIEW: {
         TABLE: 'dataselectie/brk/',
-        LIST: 'dataselectie/brk/kot/'
+        LIST: 'dataselectie/brk/kot/',
+        MAP: 'dataselectie/brk/kot/'
       },
       ENDPOINT_MARKERS: 'dataselectie/brk/geolocation/',
       ENDPOINT_EXPORT: 'dataselectie/brk/export/',

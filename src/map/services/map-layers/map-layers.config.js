@@ -194,6 +194,16 @@ export default [
     layers: ['grootstedelijkgebied', 'grootstedelijkgebied_label']
   },
   {
+    id: 'ggwpg',
+    url: 'maps/gebieden?service=wms',
+    layers: ['gebiedsgerichtwerkenpraktijkgebieden', 'gebiedsgerichtwerkenpraktijkgebieden_label']
+  },
+  {
+    id: 'ggwg',
+    url: 'maps/gebieden?service=wms',
+    layers: ['gebiedsgerichtwerken', 'gebiedsgerichtwerken_label']
+  },
+  {
     id: 'unesco',
     url: 'maps/gebieden?service=wms',
     layers: ['unesco', 'unesco_label']
@@ -202,11 +212,6 @@ export default [
     id: 'sd',
     url: 'maps/gebieden?service=wms',
     layers: ['stadsdeel', 'stadsdeel_label']
-  },
-  {
-    id: 'ggw',
-    url: 'maps/gebieden?service=wms',
-    layers: ['gebiedsgerichtwerken', 'gebiedsgerichtwerken_label']
   },
   {
     id: 'bc',

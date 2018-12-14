@@ -1,0 +1,188 @@
+@import "../../../page/components/catalogus-themes/catalogus-themes";
+
+$block-tall-height: 288px;
+$block-short-height: 134px;
+$button-height: 100px;
+$button-tall-height: 134px;
+$show-more-height: 70px;
+
+.c-homepage {
+  margin-right: -$base-whitespace;
+  margin-left: -$base-whitespace;
+}
+
+.c-homepage__block-link {
+  cursor: pointer !important;
+}
+
+.c-homepage__block {
+  @extend %link--arrow-right;
+  display: block;
+  position: relative;
+  margin-right: $base-whitespace;
+  margin-bottom: 2 * $base-whitespace;
+  margin-left: $base-whitespace;
+  background-color: $secondary-gray4;
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-origin: border-box;
+
+  &::before {
+    display: none;
+  }
+
+  &::after {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    cursor: pointer;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: $primary-dark 2px 2px, $primary-dark 2px 0;
+
+    .c-homepage__block-button {
+      height: $button-height;
+      transform: translateY(0);
+      background-color: $primary-light;
+    }
+
+    .c-homepage__block-button--tall {
+      height: $button-tall-height;
+    }
+  }
+}
+
+.c-homepage__block--shadow {
+  box-shadow: $primary-dark 2px 2px, $primary-dark 2px 0;
+}
+
+.c-homepage__block--tall {
+  height: $block-tall-height;
+}
+
+.c-homepage__block--short {
+  height: $block-short-height;
+}
+
+.c-homepage__text {
+  margin-top: 6 * $base-whitespace;
+}
+
+.c-homepage__news {
+  margin-top: 4 * $base-whitespace;
+  padding-bottom: 6 * $base-whitespace;
+  border-bottom: 1px solid $secondary-gray20;
+}
+
+.c-homepage__news-header {
+  margin-bottom: 3 * $base-whitespace;
+}
+
+.c-homepage__news-show-more {
+  margin-top: 3 * $base-whitespace;
+}
+
+.c-homepage__news-instructions {
+  padding: 0 2 * $base-whitespace;
+}
+
+.c-homepage__news-instructions-title {
+  @include font-size($l-font);
+  margin-bottom: (2 * $base-whitespace);
+}
+
+.c-homepage__visie {
+  @include font-size-responsive($m-font);
+  max-width: 734px;
+}
+
+.c-homepage__visie-header {
+  margin-bottom: 2 * $base-whitespace;
+}
+
+.c-homepage__visie-paragraph {
+  margin-bottom: 1.6 * $base-whitespace;
+  line-height: $l-line-height;
+}
+
+.c-homepage__visie-paragraph--panel {
+  margin-bottom: .8 * $base-whitespace;
+}
+
+.c-homepage__visie-panel {
+  @include font-size($s-font);
+  margin-top: (2 * $base-whitespace);
+}
+
+.c-homepage__beleid {
+  padding: 2 * $base-whitespace;
+  padding-top: 0;
+}
+
+.c-homepage__block--vestigingen {
+  background-image: url("assets/images/homepage-vestigingen.png");
+}
+
+.c-homepage__block--adressen {
+  background-image: url("assets/images/homepage-adressen.png");
+}
+
+.c-homepage__block--amsterdam-maps {
+  background-image: url("assets/images/amsterdam-maps.png");
+}
+
+.c-homepage__block-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 2 * $base-whitespace;
+  transition: transform .2s;
+  outline: none;
+  background-color: $secondary-gray4;
+  text-align: left;
+  text-decoration: none;
+  z-index: 10;
+
+  a {
+    text-decoration: none;
+  }
+
+  .c-homepage__block--short & {
+    height: $block-short-height;
+    transform: translateY($block-short-height - (5 * $base-whitespace));
+  }
+
+  .c-homepage__block--tall & {
+    height: 100px;
+    transform: translateY(5 * $base-whitespace);
+  }
+}
+
+.c-homepage__block-details-title {
+  padding-right: 3 * $base-whitespace;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.c-homepage__block-details {
+  @include font-weight($normal-weight);
+  width: 100%;
+  color: $primary-dark;
+  line-height: 3.5 * $base-whitespace;
+
+  .c-homepage__block-button--tall & {
+    max-width: 280px;
+  }
+}
+

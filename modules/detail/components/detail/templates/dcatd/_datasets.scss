@@ -84,16 +84,20 @@
 
   .resources-type__content {
     margin-bottom: 0;
-  }
 
-  .resources-type__content-item {
+    &:hover,
+    &:focus {
+      outline: none;
 
-    padding-top: 8px;
-    padding-bottom: 8px;
-    cursor: pointer;
+      .resources-type__content-item {
+        background-color: $secondary-gray10;
+      }
+    }
 
-    &:hover {
-      background-color: $secondary-gray10;
+    &-item {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      cursor: pointer;
     }
   }
 }

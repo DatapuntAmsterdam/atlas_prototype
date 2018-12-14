@@ -11,7 +11,7 @@ import { getPanoramaLocation } from '../../../shared/ducks/panorama/panorama';
 import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection';
 
 jest.mock('../../../shared/ducks/selection/selection');
-jest.mock('../../../shared/ducks/data-search/data-search');
+jest.mock('../../../shared/ducks/data-search/selectors');
 jest.mock('../../../shared/ducks/panorama/panorama');
 jest.mock('../detail/map-detail');
 describe('Map Selectors', () => {

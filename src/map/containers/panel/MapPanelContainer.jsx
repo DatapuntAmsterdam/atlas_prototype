@@ -18,9 +18,6 @@ import MapLayers from '../../components/layers/MapLayers';
 import MapLegend from '../../components/legend/MapLegend';
 import MapPanelHandle from '../../components/panel-handle/MapPanelHandle';
 import MapType from '../../components/type/MapType';
-import CollapseIcon from '../../../../public/images/icon-arrow-down.svg';
-import ExpandIcon from '../../../../public/images/icon-arrow-up.svg';
-import MapLayersIcon from '../../../../public/images/icon-map-layers.svg';
 import {
   setMapBaseLayer,
   toggleMapOverlay,
@@ -95,10 +92,13 @@ class MapPanelContainer extends React.Component {
             onClick={onMapPanelToggle}
             title={isMapPanelVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen'}
           >
-            <MapLayersIcon className="map-panel__heading-icon" />
+            <span className="map-panel__heading-icon" />
             <h2 className="map-panel__heading-title" aria-hidden="true">Kaartlagen</h2>
-            <CollapseIcon className="map-panel__toggle-icon map-panel__toggle-icon--expanded" />
-            <ExpandIcon className="map-panel__toggle-icon map-panel__toggle-icon--collapsed" />
+            <span className={`
+              map-panel__toggle--icon
+              map-panel__toggle--icon-${this.props.isMapPanelVisible ? 'collapse' : 'expand'}
+            `}
+            />
           </button>
         </div>
         <div className="scroll-wrapper">

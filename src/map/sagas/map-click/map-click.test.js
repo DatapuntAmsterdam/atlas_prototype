@@ -2,11 +2,13 @@ import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import { composeProviders } from 'redux-saga-test-plan/providers';
 
 import watchMapClick, { switchClickAction } from './map-click';
-import { getMapPanelLayers, getActiveMapLayers } from '../../ducks/panel-layers/map-panel-layers';
+import { getMapPanelLayers, getActiveMapLayers, getLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { getPanorama } from '../../../shared/ducks/panorama/panorama';
 import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/map';
 import { getMapZoom } from '../../ducks/map/map-selectors';
-import { REQUEST_GEOSEARCH, REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
+import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
+import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
+import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection';
 
 describe('getActiveMapLayers', () => {
   const state = {
@@ -129,25 +131,31 @@ describe('watchMapClick', () => {
     );
 
     const provideMapLayers = ({ selector }, next) => (
-      selector === getActiveMapLayers ?
-        mockMapLayers : next()
+      selector === getActiveMapLayers ||
+      selector === getLayers
+      ? mockMapLayers : next()
     );
 
     const provideMapZoom = ({ selector }, next) => (
       selector === getMapZoom ? 8 : next()
     );
 
+    const provideSelectionType = ({ selector }, next) => (
+      selector === getSelectionType ? SELECTION_TYPE.POINT : next()
+    );
+
     it('should dispatch the REQUEST_NEAREST_DETAILS when the panorama is not enabled', () => {
       const provideMapPanelLayers = ({ selector }, next) => (
         selector === getMapPanelLayers ? mapPanelLayersWithSelection : next()
       );
-      expectSaga(switchClickAction, payload)
+      expectSaga(switchClickAction, { payload })
         .provide({
           select: composeProviders(
             providePanorama,
             provideMapLayers,
             provideMapZoom,
-            provideMapPanelLayers
+            provideMapPanelLayers,
+            provideSelectionType
           )
         })
         .put({
@@ -161,12 +169,12 @@ describe('watchMapClick', () => {
         .run();
     });
 
-    it('should dispatch the REQUEST_GEOSEARCH when the panorama is not enabled and there is not panelLayer found ', () => {
+    it('should dispatch setGeolocation when the panorama is not enabled and there is no panelLayer found ', () => {
       const provideMapPanelLayers = ({ selector }, next) => (
-        selector === getMapPanelLayers ? [...mockPanelLayers] : next()
+        selector === getMapPanelLayers ? [] : next()
       );
 
-      expectSaga(switchClickAction, payload)
+      expectSaga(switchClickAction, { payload })
         .provide({
           select: composeProviders(
             providePanorama,
@@ -175,10 +183,7 @@ describe('watchMapClick', () => {
             provideMapPanelLayers
           )
         })
-        .put({
-          type: REQUEST_GEOSEARCH,
-          payload: [payload.location.latitude, payload.location.longitude]
-        })
+        .put(setGeoLocation(payload.location))
         .run();
     });
   });

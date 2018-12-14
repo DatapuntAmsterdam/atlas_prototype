@@ -1,11 +1,11 @@
-import reducer, {
-  REDUCER_KEY,
-  getMapResultsByLocation,
-  getSearchQuery,
-  isSearchActive,
+import {
+  fetchMapSearchResultsFailure,
   fetchMapSearchResultsRequest,
-  fetchMapSearchResultsSuccess, fetchMapSearchResultsFailure
-} from './data-search';
+  fetchMapSearchResultsSuccessPanel
+} from './actions';
+import { REDUCER_KEY } from './constants';
+import reducer from './reducer';
+import { getMapPanelResults, getSearchQuery } from './selectors';
 
 describe('mapSearch reducer', () => {
   it('sets the initial state', () => {
@@ -21,7 +21,7 @@ describe('mapSearch reducer', () => {
   });
 
   it('handles search results success', () => {
-    const action = fetchMapSearchResultsSuccess([{ foo: 'bar' }]);
+    const action = fetchMapSearchResultsSuccessPanel([{ foo: 'bar' }]);
     expect(reducer({}, action)).toMatchSnapshot();
   });
 
@@ -43,32 +43,14 @@ describe('data-search selectors', () => {
     expect(getSearchQuery(state)).toEqual(state[REDUCER_KEY].query);
   });
 
-  describe('getMapResultsByLocation', () => {
-    it('should return state.mapSearchResultsByLocation as a array', () => {
+  describe('getMapPanelResults', () => {
+    it('should return state.resultsMap as a array', () => {
       const state = {
         [REDUCER_KEY]: {
-          mapSearchResultsByLocation: []
+          resultsMapPanel: []
         }
       };
-      expect(getMapResultsByLocation(state)).toEqual(state[REDUCER_KEY].mapSearchResultsByLocation);
-    });
-  });
-
-  describe('isSearchActive', () => {
-    it('should return state.search.location as a number: > 0', () => {
-      const mockParameters = {
-        location: [10, 10]
-      };
-      const selected = isSearchActive.resultFunc(mockParameters);
-      expect(selected).toEqual(mockParameters.location.length);
-    });
-
-    it('should return state.search.location as a number: 0', () => {
-      const mockParameters = {
-        location: []
-      };
-      const selected = isSearchActive.resultFunc(mockParameters);
-      expect(selected).toEqual(mockParameters.location.length);
+      expect(getMapPanelResults(state)).toEqual(state[REDUCER_KEY].resultsMapPanel);
     });
   });
 });

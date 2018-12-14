@@ -1,4 +1,11 @@
 .c-print-button {
-  @extend %icon--border-hover;
-  @include icon-label-left("print", "", "red");
+  @include header-button("print", 24px, right);
+
+  height: 26px;
+  padding: 0 2px 0 5px;
+
+  &::before {
+    margin-right: 0;
+    margin-left: 2px;
+  }
 }

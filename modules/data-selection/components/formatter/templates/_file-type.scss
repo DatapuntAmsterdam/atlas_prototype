@@ -4,52 +4,93 @@
   margin-top: $base-whitespace / 5;
   float: left;
   color: $secondary-gray40;
-}
 
-.c-data-selection-file-type__name {
-  display: inline-block;
-  padding: 0 $base-whitespace * .5;
-  background-color: $secondary-gray40;
-  color: $primary-dark;
-  line-height: 1;
-}
+  &__name {
+    display: inline-block;
+    padding: 0 $base-whitespace * .5;
+    background-color: $secondary-gray20;
+    color: $primary-dark;
+    line-height: 1;
+  }
 
-.c-data-selection-file-type__format-xls,
-.c-data-selection-file-type__format-xlsx {
-  background-color: $thema-6;
-}
+  &__count {
+    display: inline-block;
+    padding-right: $base-whitespace * .7;
+  }
 
-.c-data-selection-file-type__format-json {
-  background-color: $thema-1;
-}
+  &__format {
+    color: $primary-dark;
 
-.c-data-selection-file-type__format-xml {
-  background-color: $thema-4;
-}
+    &-anders {
+      background-color: $secondary-gray60;
+      color: $primary-light;
+    }
 
-.c-data-selection-file-type__format-html {
-  background-color: $thema-9;
-}
+    &-csv {
+      background-color: $aquamarine;
+    }
 
-.c-data-selection-file-type__format-csv {
-  background-color: $thema-2;
-}
+    &-docx {
+      background-color: $darkish-blue;
+      color: $primary-light;
+    }
 
-.c-data-selection-file-type__format-zip {
-  background-color: $secondary-gray60;
-  color: $primary-light;
-}
+    &-geojson {
+      background-color: $marigold;
+    }
 
-.c-data-selection-file-type__format-pdf {
-  background-color: $primary-contrast;
-  color: $primary-light;
-}
+    &-gml {
+      background-color: $deep-green-two;
+      color: $primary-light;
+    }
 
-.c-data-selection-file-type__format-api {
-  background-color: $thema-15;
-}
+    &-html {
+      background-color: $azure;
+    }
 
-.c-data-selection-file-type__count {
-  display: inline-block;
-  padding-right: $base-whitespace * .7;
+    &-json {
+      background-color: $dandelion;
+    }
+
+    &-pdf {
+      background-color: $red;
+      color: $primary-light;
+    }
+
+    &-png {
+      background-color: $turquoise-blue;
+    }
+
+    &-rest-atom-feed {
+      background-color: $tangerine;
+    }
+
+    &-shp {
+      background-color: $deep-green;
+      color: $primary-light;
+    }
+
+    &-website {
+      background-color: $secondary-gray40;
+    }
+
+    &-wfs {
+      background-color: $red-violet;
+      color: $primary-light;
+    }
+
+    &-wms {
+      background-color: $dark-hot-pink;
+      color: $primary-light;
+    }
+
+    &-xml {
+      background-color: $ugly-yellow;
+    }
+
+    &-xls,
+    &-xlsx {
+      background-color: $emerald;
+    }
+  }
 }

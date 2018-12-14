@@ -1,4 +1,5 @@
 $map-preview-panel-max-width: 440px;
+$button-height: 24px;
 
 .map-preview-panel {
   background-color: $secondary-gray5;
@@ -33,23 +34,29 @@ $map-preview-panel-max-width: 440px;
     padding: 4px;
   }
 
-  &__heading-icon {
-    fill: $primary-dark;
-    height: 24px;
-    width: 24px;
-
-    .map-panel--collapsed & {
-      fill: $secondary-gray60;
-    }
-  }
-
   &__button {
     @extend %hover-focus-button;
     border-radius: 0;
-    height: 24px;
+    height: $button-height;
     margin-left: 4px;
     outline: none;
-    width: 24px;
+    width: $button-height;
+
+
+    &:hover,
+    &:focus {
+      .map-preview-panel__button-icon--close { //sass-lint:disable-line nesting-depth
+        @include icon-sprite("icon-clear", $primary-dark, $primary-dark, $button-height);
+      }
+
+      .map-preview-panel__button-icon--maximize { //sass-lint:disable-line nesting-depth
+        @include icon-sprite("icon-maximize", $primary-dark, $primary-dark, $button-height);
+      }
+
+      .map-preview-panel__button-icon--plus { //sass-lint:disable-line nesting-depth
+        @include icon-sprite("icon-plus", $primary-contrast, $primary-contrast, $button-height);
+      }
+    }
 
     &--show-all {
       align-items: center;
@@ -64,10 +71,6 @@ $map-preview-panel-max-width: 440px;
           color: $primary-contrast;
           text-decoration: underline;
         }
-
-        .map-preview-panel__button-icon { //sass-lint:disable-line nesting-depth
-          fill: $primary-contrast;
-        }
       }
 
       .map-preview-panel__button-label {
@@ -75,17 +78,24 @@ $map-preview-panel-max-width: 440px;
         font-family: "Avenir LT W01 85 Heavy";
         font-size: 14px;
       }
-
-      .map-preview-panel__button-icon {
-        height: 20px;
-        width: 20px;
-      }
     }
 
     &-icon {
-      fill: $secondary-gray60;
-      height: inherit;
-      width: inherit;
+      display: block;
+      height: $button-height;
+      width: $button-height;
+
+      &--close {
+        @include icon-sprite("icon-clear", $secondary-gray60, $primary-dark, $button-height);
+      }
+
+      &--maximize {
+        @include icon-sprite("icon-maximize", $secondary-gray60, $primary-dark, $button-height);
+      }
+
+      &--plus {
+        @include icon-sprite("icon-plus", $secondary-gray60, $primary-dark, $button-height);
+      }
     }
   }
 

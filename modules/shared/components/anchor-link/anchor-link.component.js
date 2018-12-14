@@ -18,6 +18,12 @@
     function DpAnchorLinkController ($scope, $interval, $anchorScroll) {
         const vm = this;
 
+        vm.onKeydown = function (event, anchor) {
+            if (event.key === 'Enter') {
+                vm.scrollTo(anchor);
+            }
+        };
+
         vm.scrollTo = function (anchor) {
             $interval(() => {
                 $anchorScroll(anchor);

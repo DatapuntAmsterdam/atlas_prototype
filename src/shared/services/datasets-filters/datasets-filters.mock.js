@@ -144,6 +144,26 @@ const mockApiData = {
             title: 'Gebiedseenheid',
             type: 'string'
           },
+          'ams:status': {
+            default: 'gepland',
+            description: 'Let op: deze status geldt alleen voor de weergave in City Data. Via andere wegen blijft de dataset te raadplegen, ongeacht de status.',
+            enum: [
+              'in_onderzoek',
+              'niet_beschikbaar',
+              'beschikbaar',
+              'gepland'
+            ],
+            enumNames: [
+              'In onderzoek',
+              'Niet beschikbaar',
+              'Beschikbaar',
+              'Gepland'
+            ],
+            minLength: 1,
+            readOnly: false,
+            title: 'Status',
+            type: 'string'
+          },
           'ams:temporalUnit': {
             default: 'na',
             enum: [

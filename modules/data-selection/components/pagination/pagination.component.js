@@ -64,7 +64,7 @@
             }
         };
 
-        if (vm.currentPage > vm.numberOfPages) {
+        if (vm.numberOfPages && (vm.currentPage > vm.numberOfPages)) {
             vm.setPage()(1);
         }
     }

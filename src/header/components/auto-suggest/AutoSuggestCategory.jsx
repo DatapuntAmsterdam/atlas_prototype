@@ -2,10 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AutoSuggestItem from './AutoSuggestItem';
 
+const MAX_NUMBER_RESULTS = 3;
+
+// Todo: Please consider rewriting the way we keep track on the active (selected) item in the
+// autosuggest result list. Now we use an (arbitrary) high number for more results button ("..."),
+// so this wont conflict with the activeSuggestion indexes.
+export const MORE_RESULTS_INDEX = 999;
+
 const AutoSuggestCategory = (props) => {
   const { category, activeSuggestion, query, onSuggestionSelection } = props;
-  const showEllipsis = category.total_results > 3;
-  const content = '...';
+
+  let suggestions = category.content;
+  if (category.total_results > MAX_NUMBER_RESULTS) {
+    suggestions = [...category.content, { label: '...', index: MORE_RESULTS_INDEX }];
+  }
 
   return (
     <div className="auto-suggest__dropdown-category">
@@ -13,7 +23,7 @@ const AutoSuggestCategory = (props) => {
         {category.label}
       </h4>
       <ul>
-        {category.content.map((suggestion) => (
+        {suggestions.map((suggestion) => (
           <AutoSuggestItem
             key={suggestion.label + suggestion.index}
             isActive={activeSuggestion && activeSuggestion.index === suggestion.index}
@@ -24,23 +34,12 @@ const AutoSuggestCategory = (props) => {
             query={query}
           />
         ))}
-        {showEllipsis ?
-          <AutoSuggestItem
-            key={`${category.label}${content}`}
-            onSuggestionSelection={(e) => {
-              onSuggestionSelection({ index: -1 }, e);
-            }}
-            content={content}
-            query={query}
-          /> : ''
-        }
       </ul>
     </div>
   );
 };
 
-AutoSuggestCategory.defaultProps = {
-};
+AutoSuggestCategory.defaultProps = {};
 
 AutoSuggestCategory.propTypes = {
   activeSuggestion: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -48,6 +47,5 @@ AutoSuggestCategory.propTypes = {
   onSuggestionSelection: PropTypes.func.isRequired,
   query: PropTypes.string.isRequired
 };
-
 
 export default AutoSuggestCategory;

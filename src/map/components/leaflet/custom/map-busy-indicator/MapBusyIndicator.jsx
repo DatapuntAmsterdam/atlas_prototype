@@ -56,7 +56,7 @@ export default class MapBusyIndicator extends MapControl {
         this.indicatorContainer = L.DomUtil.create('div', 'leaflet-control-layer-container leaflet-bar');
         this.indicatorContainer.innerHTML = `
           <div class="c-loading-indicator c-loading-indicator--box">
-              <img class="c-loading-indicator__icon" src="assets/images/spinner.svg" alt="">
+              <img class="c-loading-indicator__icon" src="/assets/images/spinner.svg" alt="">
               <span class="c-loading-indicator__text">Bezig met laden...</span>
           </div>
         `;

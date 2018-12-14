@@ -1,9 +1,10 @@
+import { createSelector } from 'reselect';
+
 export const REDUCER_KEY = 'panoramaPreview';
 
 export const FETCH_PANORAMA_PREVIEW_REQUEST = `${REDUCER_KEY}/FETCH_PANORAMA_PREVIEW_REQUEST`;
 const FETCH_PANORAMA_PREVIEW_SUCCESS = `${REDUCER_KEY}/FETCH_PANORAMA_PREVIEW_SUCCESS`;
 const FETCH_PANORAMA_PREVIEW_FAILURE = `${REDUCER_KEY}/FETCH_PANORAMA_PREVIEW_FAILURE`;
-
 
 const initialState = {
   isLoading: false,
@@ -57,5 +58,9 @@ export const fetchPanoramaPreviewFailure = (error) => ({
 });
 
 // selectors
-export const getPanoramaPreview = (state) => state[REDUCER_KEY].preview;
-export const isPanoramaPreviewLoading = (state) => state[REDUCER_KEY].isLoading;
+const getPanoramaPreviewState = (state) => state[REDUCER_KEY];
+const getStateOfKey = (key) =>
+  (state) => createSelector(getPanoramaPreviewState, (data) => (data[key]))(state);
+
+export const getPanoramaPreview = getStateOfKey('preview');
+export const isPanoramaPreviewLoading = getStateOfKey('isLoading');

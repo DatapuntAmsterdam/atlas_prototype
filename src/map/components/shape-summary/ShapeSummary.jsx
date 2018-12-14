@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IconCrossBig from '../../../../public/images/icon-cross-big.svg';
-
 import './_shape-summary.scss';
 
 const ShapeSummary = ({ shapeDistanceTxt, onClearDrawing }) => (
@@ -17,9 +15,7 @@ const ShapeSummary = ({ shapeDistanceTxt, onClearDrawing }) => (
       onClick={onClearDrawing}
       title="Lijn verwijderen"
     >
-      <IconCrossBig
-        className="shape-summary__icon"
-      />
+      <span className="shape-summary__button--close" />
     </button>
   </div>
 );

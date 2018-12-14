@@ -57,10 +57,10 @@ export function* fetchPanoramaYear() {
 }
 
 export function* watchFetchPanorama() {
-  yield [
+  yield all([
     takeLatest(FETCH_PANORAMA_REQUEST, fetchPanorama),
     takeLatest(SET_PANORAMA_YEAR, fetchPanoramaYear)
-  ];
+  ]);
 }
 
 export function* doClosePanorama() {

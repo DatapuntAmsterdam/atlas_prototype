@@ -1,6 +1,7 @@
 $header-height: 116px;
 $above-list-height: $map-preview-panel-top + 1px + 33px + $header-height - 50px;
 $below-list-height: 1px + $map-preview-panel-bottom;
+$icon-height: 24px;
 
 .map-detail-result {
   display: flex;
@@ -172,7 +173,6 @@ $below-list-height: 1px + $map-preview-panel-bottom;
     border-radius: 0;
     color: $secondary-gray60;
     display: flex;
-    fill: $secondary-gray60;
     font-family: "Avenir LT W01 85 Heavy", Arial, sans-serif;
     justify-content: center;
     margin: auto;
@@ -182,14 +182,20 @@ $below-list-height: 1px + $map-preview-panel-bottom;
     &:hover {
       background-color: $primary-contrast;
       color: $primary-light;
-      fill: $primary-light;
+
+      &--maximize {
+        @include icon-sprite("icon-maximize", $primary-dark, $primary-dark, $icon-height);
+      }
     }
 
     &-icon {
-      fill: inherit;
-      height: 24px;
+      height: $icon-height;
       margin-right: 5px;
-      width: 24px;
+      width: $icon-height;
+
+      &--maximize {
+        @include icon-sprite("icon-maximize", $secondary-gray60, $primary-dark, $icon-height);
+      }
     }
   }
 

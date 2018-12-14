@@ -1,6 +1,5 @@
 import mockedContentJson from './catalog.component.test.content.json';
 import { routing } from '../../../../../src/app/routes';
-import * as detail from '../../../../../src/shared/ducks/detail/detail';
 
 describe('The catalog component', function () {
     'use strict';
@@ -75,8 +74,6 @@ describe('The catalog component', function () {
     });
 
     it('can load a detail page for a catalog', function () {
-        detail.fetchDetail = () => 'fetchDetail';
-
         const component = getComponent();
         const scope = component.isolateScope();
         const link = component.find('.qa-catalog-fetch-detail')[0];

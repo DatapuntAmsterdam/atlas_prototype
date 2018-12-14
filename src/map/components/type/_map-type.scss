@@ -1,6 +1,8 @@
 @import "../../../shared/styles/config";
 @import "../../../shared/styles/utilities/screen-reader";
 
+$icon-height: 20px;
+
 .map-type {
   margin: 8px 8px 16px;
 
@@ -34,5 +36,44 @@
   .is-embed-preview &,
   .is-print-mode & {
     display: none;
+  }
+}
+
+.icon {
+  display: block;
+  height: $icon-height;
+  width: $icon-height;
+
+  &--topography {
+    @include icon-sprite("icon-topography", $secondary-gray60, $primary-dark, $icon-height);
+  }
+
+  &--aerial {
+    @include icon-sprite("icon-aerial", $secondary-gray60, $primary-dark, $icon-height);
+  }
+}
+
+.select-button--enabled {
+  .icon {
+    &--topography {
+      @include icon-sprite("icon-topography", $primary-dark, $primary-dark, $icon-height);
+    }
+
+    &--aerial {
+      @include icon-sprite("icon-aerial", $primary-dark, $primary-dark, $icon-height);
+    }
+  }
+}
+
+.select-button__wrapper {
+  &:hover,
+  &:focus {
+    .icon--topography {
+      @include icon-sprite("icon-topography", $primary-dark, $primary-dark, $icon-height);
+    }
+
+    .icon--aerial {
+      @include icon-sprite("icon-aerial", $primary-dark, $primary-dark, $icon-height);
+    }
   }
 }

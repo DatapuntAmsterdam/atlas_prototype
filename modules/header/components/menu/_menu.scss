@@ -24,7 +24,8 @@
     text-decoration: none;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     .c-menu__title {
       border-bottom: 2px solid $primary-contrast !important;
       color: $primary-contrast !important;
@@ -82,8 +83,11 @@
   text-align: left;
   white-space: nowrap;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
     color: $primary-contrast;
+    text-decoration: underline;
   }
 }
 

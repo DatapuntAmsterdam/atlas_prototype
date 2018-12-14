@@ -37,14 +37,10 @@ exports[`MapLayer should render 1`] = `
             </span>
             <span
               className="map-layers__toggle map-layers__toggle--remove"
-            >
-              <Component />
-            </span>
+            />
             <span
               className="map-layers__toggle map-layers__toggle--add"
-            >
-              <Component />
-            </span>
+            />
           </button>
         </li>
       </ul>
@@ -90,14 +86,10 @@ exports[`MapLayer should render without active layers 1`] = `
             </span>
             <span
               className="map-layers__toggle map-layers__toggle--remove"
-            >
-              <Component />
-            </span>
+            />
             <span
               className="map-layers__toggle map-layers__toggle--add"
-            >
-              <Component />
-            </span>
+            />
           </button>
         </li>
       </ul>

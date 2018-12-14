@@ -24,6 +24,7 @@
             }
         };
 
+        /* istanbul igonre next */
         function linkFn (scope, element) {
             scope.className = scope.className || 'o-btn o-btn--link';
             scope.click = clickHandler;

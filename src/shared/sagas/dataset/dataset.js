@@ -1,3 +1,4 @@
+import get from 'lodash.get';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { routing } from '../../../app/routes';
 import { query } from '../../services/data-selection/data-selection-api';
@@ -6,9 +7,11 @@ import {
   DEFAULT_DATASET,
   DEFAULT_VIEW,
   FETCH_DATASETS_REQUEST,
-  fetchDatasets, initialState,
+  fetchDatasets,
+  initialState,
   receiveDatasetsFailure,
-  receiveDatasetsSuccess, SET_PAGE
+  receiveDatasetsSuccess,
+  SET_PAGE
 } from '../../ducks/datasets/data/data';
 import {
   FETCH_API_SPECIFICATION_REQUEST,
@@ -17,9 +20,9 @@ import {
   fetchApiSpecificationFailure,
   fetchApiSpecificationSuccess
 } from '../../ducks/datasets/apiSpecification/apiSpecification';
-import { getDatasetApiSpecification, getPage } from '../../ducks/datasets/datasets';
+import { getApiSpecificationData, getPage } from '../../ducks/datasets/datasets';
 import getApiSpecification from '../../services/datasets-filters/datasets-filters';
-import { isDatasetPage } from '../../../store/redux-first-router';
+import { getSearchQuery } from '../../ducks/data-search/selectors';
 
 function* retrieveDataset(action) {
   const { activeFilters, page, searchText, geometryFilter, catalogFilters } =
@@ -36,7 +39,7 @@ function* retrieveDataset(action) {
     );
 
     // Put the results in the reducer
-    yield put(receiveDatasetsSuccess({ activeFilters, page, geometryFilter, result }));
+    yield put(receiveDatasetsSuccess({ activeFilters, page, searchText, geometryFilter, result }));
   } catch (e) {
     yield put(receiveDatasetsFailure({
       error: e.message
@@ -47,25 +50,23 @@ function* retrieveDataset(action) {
 function* fireRequest(action) {
   const state = yield select();
 
-  // Always ensure we are on the right page, otherwise this can be called unintentionally
-  if (isDatasetPage(state)) {
-    const activeFilters = getFilters(state);
-    const catalogFilters = getDatasetApiSpecification(state);
-    const page = getPage(state);
-
-    // Todo: make it possible to fetch both api specification and dataset data simultaneously
-    // This can be done by refactoring the datasets-filters service
-    if (!getDatasetApiSpecification(state)) {
-      yield put(fetchApiSpecification());
-    } else {
-      yield put(
-        fetchDatasets({
-          activeFilters,
-          page: action.type === ADD_FILTER ? initialState.page : page,
-          catalogFilters
-        })
-      );
-    }
+  const activeFilters = getFilters(state);
+  const catalogFilters = getApiSpecificationData(state);
+  const page = getPage(state);
+  const searchText = get(action, 'meta.query.zoekterm') || getSearchQuery(state);
+  // Todo: make it possible to fetch both api specification and dataset data simultaneously
+  // This can be done by refactoring the datasets-filters service
+  if (!Object.keys(getApiSpecificationData(state) || {}).length) {
+    yield put(fetchApiSpecification());
+  } else if (!get(action, 'meta.skipFetch')) {
+    yield put(
+      fetchDatasets({
+        activeFilters,
+        page: action.type === ADD_FILTER ? initialState.page : page,
+        catalogFilters,
+        searchText
+      })
+    );
   }
 }
 
@@ -82,7 +83,9 @@ export default function* watchFetchDatasets() {
   yield takeLatest(
     [ADD_FILTER, REMOVE_FILTER, EMPTY_FILTERS, FETCH_API_SPECIFICATION_SUCCESS, SET_PAGE,
       routing.datasets.type,
-      routing.datasetsDetail.type
+      routing.datasetsDetail.type,
+      routing.dataSearch.type,
+      routing.searchDatasets.type
     ],
     fireRequest
   );
@@ -90,19 +93,3 @@ export default function* watchFetchDatasets() {
   yield takeLatest(FETCH_API_SPECIFICATION_REQUEST, retrieveApiSpecification);
   yield takeLatest(FETCH_DATASETS_REQUEST, retrieveDataset);
 }
-
-// Todo: keep until search is implemented
-// export function* fetchCatalogData(action) {
-//   const urlQuery = get(action, 'meta.query', {});
-//   if (query.filter_theme) {
-//     yield put(addFilter, {
-//       groups: urlQuery.filter_theme
-//     });
-//   }
-// }
-//
-// export function* watchCatalogList() {
-//   yield takeLatest([
-//     routing.searchDatasets.type
-//   ], fetchCatalogData);
-// }

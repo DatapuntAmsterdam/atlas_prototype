@@ -1,12 +1,13 @@
-.loading-indicator {
-  display: flex;
+@import "../../../shared/styles/config";
+$spinner-height: 36px;
 
-  svg {
-    animation: rotating-spinner 1s linear infinite;
-    height: 36px;
-    margin: auto;
-    width: 36px;
-  }
+.loading-indicator {
+  @include icon-sprite("icon-spinner", $secondary-gray60, $secondary-gray60, $spinner-height);
+  animation: rotating-spinner 1s linear infinite;
+  display: flex;
+  height: $spinner-height;
+  margin: auto;
+  width: $spinner-height;
 }
 
 @keyframes rotating-spinner {

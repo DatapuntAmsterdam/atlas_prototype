@@ -7,8 +7,6 @@ import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 
 import { isEnabled } from '../../services/draw-tool/draw-tool';
 import {
-  MAP_CLEAR,
-  mapClear,
   mapEndDrawing,
   mapStartDrawing,
   mapUpdateShape
@@ -179,12 +177,13 @@ describe('DrawToolContainer', () => {
       });
     });
 
-    describe('componentWillUnmount', () => {
-      it(`should dispatch ${MAP_CLEAR}`, () => {
-        wrapper.unmount();
-        expect(store.dispatch).toHaveBeenCalledWith(mapClear());
-      });
-    });
+    // TODO DP-6340: side effect. this resets the visible layers after featching data?
+    // describe('componentWillUnmount', () => {
+      // it(`should dispatch ${MAP_CLEAR}`, () => {
+      //   wrapper.unmount();
+      //   expect(store.dispatch).toHaveBeenCalledWith(mapClear());
+      // });
+    // });
 
     describe('onDrawingMode', () => {
       it('should dispatch MAP_END_DRAWING when the drawing mode set to NONE', () => {

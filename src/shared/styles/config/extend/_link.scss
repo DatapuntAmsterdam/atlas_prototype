@@ -17,8 +17,10 @@ $link-offset: 3px;
   position: relative;
   text-decoration: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: $primary-contrast;
+    outline: none;
     text-decoration: underline;
   }
 
@@ -40,8 +42,36 @@ $link-offset: 3px;
   // the left side of the image.
   margin-left: calc(#{$icon-size - $icon-offset} + #{$link-offset});
 
-  &::after,
   &::before {
+    @include icon-button("link-arrow", $primary-dark);
+    content: "";
+    display: inline-block;
+    height: $icon-size;
+    // Move the arrow icon left of the link text by the width of the icon plus
+    // the space needed between the icon and the link
+    margin-left: calc(-#{$icon-size} - #{$link-offset});
+    margin-right: $link-offset;
+    position: relative;
+    vertical-align: text-bottom;
+    width: $icon-size;
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      @include icon-button("link-arrow", $primary-contrast);
+      height: $icon-size;
+      outline: none;
+      width: $icon-size;
+    }
+  }
+}
+
+%link--arrow-right {
+  @extend %link;
+
+  &::after {
+    @include icon-button("link-arrow", $secondary-gray20);
     content: "";
     display: inline-block;
     // Move the arrow icon left of the link text by the width of the icon plus
@@ -52,15 +82,11 @@ $link-offset: 3px;
     vertical-align: text-bottom;
   }
 
-  &::after {
-    @include icon-button("link-arrow", "light-gray", "");
-    display: none;
-  }
-
-  &::before {
-    @include icon-button("link-arrow");
-    height: $icon-size;
-    width: $icon-size;
+  &:hover,
+  &:focus {
+    &::after {
+      @include icon-button("link-arrow", $primary-dark);
+    }
   }
 }
 

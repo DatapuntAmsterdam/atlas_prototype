@@ -1,8 +1,8 @@
 @mixin icon-detail-text-right($icon) {
 
   &::before {
-    @extend %#{"dp-" + $icon + "-icon"};
     @extend %icon-button-text-extra;
+    @include icon-sprite($icon, $primary-dark);
 
     margin-right: $base-whitespace;
   }
@@ -25,7 +25,7 @@
 }
 
 .catalog-theme__detail-icon--educatie-jeugd-diversiteit {
-  @include icon-detail-text-right("educatie-jeugd-diversiteit");
+  @include icon-detail-text-right("thema-educatie-jeugd-diversiteit");
 }
 
 .catalog-theme__detail-icon--energie {
@@ -75,4 +75,3 @@
 .catalog-theme__detail-icon--zorg-welzijn {
   @include icon-detail-text-right("thema-zorg-welzijn");
 }
-

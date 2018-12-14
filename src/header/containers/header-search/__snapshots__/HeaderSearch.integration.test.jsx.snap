@@ -17,7 +17,8 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
     onDatasetSearch={[Function]}
     onGetSuggestions={[Function]}
     onSuggestionActivate={[Function]}
-    openSuggestion={[Function]}
+    openDataSuggestion={[Function]}
+    openDatasetSuggestion={[Function]}
     pageName=""
     prefillQuery=""
     suggestions={
@@ -207,6 +208,7 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
+              autoFocus="true"
               className="auto-suggest__input"
               id="auto-suggest__input"
               onBlur={[Function]}
@@ -224,9 +226,6 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
               title="Wis zoektekst"
               type="button"
             >
-              <Component>
-                mock-svg
-              </Component>
               <span
                 className="u-sr-only"
               >
@@ -293,25 +292,21 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -330,25 +325,21 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -367,25 +358,21 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -439,25 +426,21 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -523,25 +506,21 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -560,25 +539,21 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -597,25 +572,21 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -669,25 +640,21 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -709,9 +676,6 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
             title="Zoeken"
             type="submit"
           >
-            <Component>
-              mock-svg
-            </Component>
             <span
               className="u-sr-only"
             >
@@ -824,7 +788,8 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
     onDatasetSearch={[Function]}
     onGetSuggestions={[Function]}
     onSuggestionActivate={[Function]}
-    openSuggestion={[Function]}
+    openDataSuggestion={[Function]}
+    openDatasetSuggestion={[Function]}
     pageName=""
     prefillQuery=""
     suggestions={Array []}
@@ -872,6 +837,7 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
+              autoFocus="true"
               className="auto-suggest__input"
               id="auto-suggest__input"
               onBlur={[Function]}
@@ -890,9 +856,6 @@ exports[`HeaderSearchContainer allows the user to clear the query and suggestion
             title="Zoeken"
             type="submit"
           >
-            <Component>
-              mock-svg
-            </Component>
             <span
               className="u-sr-only"
             >
@@ -1129,6 +1092,7 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user click on a 
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
+              autoFocus="true"
               className="auto-suggest__input"
               id="auto-suggest__input"
               onBlur={[Function]}
@@ -1147,9 +1111,6 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user click on a 
             title="Zoeken"
             type="submit"
           >
-            <Component>
-              mock-svg
-            </Component>
             <span
               className="u-sr-only"
             >
@@ -1180,7 +1141,8 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to dismiss 
     onDatasetSearch={[Function]}
     onGetSuggestions={[Function]}
     onSuggestionActivate={[Function]}
-    openSuggestion={[Function]}
+    openDataSuggestion={[Function]}
+    openDatasetSuggestion={[Function]}
     pageName=""
     prefillQuery=""
     suggestions={
@@ -1370,6 +1332,7 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to dismiss 
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
+              autoFocus="true"
               className="auto-suggest__input"
               id="auto-suggest__input"
               onBlur={[Function]}
@@ -1387,9 +1350,6 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to dismiss 
               title="Wis zoektekst"
               type="button"
             >
-              <Component>
-                mock-svg
-              </Component>
               <span
                 className="u-sr-only"
               >
@@ -1403,9 +1363,6 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to dismiss 
             title="Zoeken"
             type="submit"
           >
-            <Component>
-              mock-svg
-            </Component>
             <span
               className="u-sr-only"
             >
@@ -1436,7 +1393,8 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
     onDatasetSearch={[Function]}
     onGetSuggestions={[Function]}
     onSuggestionActivate={[Function]}
-    openSuggestion={[Function]}
+    openDataSuggestion={[Function]}
+    openDatasetSuggestion={[Function]}
     pageName=""
     prefillQuery=""
     suggestions={
@@ -1626,6 +1584,7 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
+              autoFocus="true"
               className="auto-suggest__input"
               id="auto-suggest__input"
               onBlur={[Function]}
@@ -1643,9 +1602,6 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
               title="Wis zoektekst"
               type="button"
             >
-              <Component>
-                mock-svg
-              </Component>
               <span
                 className="u-sr-only"
               >
@@ -1659,9 +1615,6 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
             title="Zoeken"
             type="submit"
           >
-            <Component>
-              mock-svg
-            </Component>
             <span
               className="u-sr-only"
             >
@@ -1695,7 +1648,8 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
     onDatasetSearch={[Function]}
     onGetSuggestions={[Function]}
     onSuggestionActivate={[Function]}
-    openSuggestion={[Function]}
+    openDataSuggestion={[Function]}
+    openDatasetSuggestion={[Function]}
     pageName=""
     prefillQuery=""
     suggestions={
@@ -1888,6 +1842,7 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
+              autoFocus="true"
               className="auto-suggest__input"
               id="auto-suggest__input"
               onBlur={[Function]}
@@ -1905,9 +1860,6 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
               title="Wis zoektekst"
               type="button"
             >
-              <Component>
-                mock-svg
-              </Component>
               <span
                 className="u-sr-only"
               >
@@ -1977,25 +1929,21 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--active
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -2014,25 +1962,21 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -2051,25 +1995,21 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -2126,25 +2066,21 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -2213,25 +2149,21 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -2250,25 +2182,21 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -2287,25 +2215,21 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -2362,25 +2286,21 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
                     onSuggestionSelection={[Function]}
                     query="dijk"
                   >
-                    <li
-                      className=""
-                    >
+                    <li>
                       <button
                         className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
                         onClick={[Function]}
                         type="button"
                       >
-                        <div>
+                        <div
+                          className=""
+                        >
                           <span
                             className="icon"
-                          >
-                            <Component>
-                              mock-svg
-                            </Component>
-                          </span>
+                          />
                           <span
                             dangerouslySetInnerHTML={
                               Object {
@@ -2402,9 +2322,6 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
             title="Zoeken"
             type="submit"
           >
-            <Component>
-              mock-svg
-            </Component>
             <span
               className="u-sr-only"
             >
@@ -2625,6 +2542,7 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
+              autoFocus="true"
               className="auto-suggest__input"
               id="auto-suggest__input"
               onBlur={[Function]}
@@ -2643,9 +2561,6 @@ exports[`HeaderSearchContainer auto-suggest dropdown allows the user to use the 
             title="Zoeken"
             type="submit"
           >
-            <Component>
-              mock-svg
-            </Component>
             <span
               className="u-sr-only"
             >

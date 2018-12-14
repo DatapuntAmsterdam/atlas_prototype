@@ -7,9 +7,7 @@
         <dp-site-header size="vm.headerSize"
                         user="vm.user"
                         has-print-button="header.hasPrintButton"
-                        has-embed-button="header.hasEmbedButton"
-                        search-action="header.searchAction"
-                        query="{{header.query}}"></dp-site-header>
+                        has-embed-button="header.hasEmbedButton"></dp-site-header>
       </div>
       <div ng-if="vm.isPrintMode" class="qa-dashboard__print-header">
         <dp-print-header close-action="vm.hidePrintAction"></dp-print-header>

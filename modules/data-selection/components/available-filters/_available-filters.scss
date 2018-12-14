@@ -35,6 +35,13 @@ $data-selection-available-filters-item-height: 32px;
       display: inline-block;
       content: "(geen)";
     }
+
+    .o-btn--link:hover &,  // sass-lint:disable-line force-pseudo-nesting
+    .o-btn--link:focus & { // sass-lint:disable-line force-pseudo-nesting
+      &::before {
+        text-decoration: underline;
+      }
+    }
   }
 }
 

@@ -106,15 +106,11 @@ class DrawToolContainer extends React.Component {
       }
       this.setState({ drawingMode: props.drawingMode });
     }
-
-    if (this.state.dataSelection !== props.dataSelection) {
-      this.setState({ dataSelection: props.dataSelection });
-      this.onUpdateShape(props.currentShape);
-    }
   }
 
   componentWillUnmount() {
-    this.props.onMapClear();
+    // TODO DP-6340: side effect. this resets the visible layers after featching data?
+    // this.props.onMapClear();
   }
 
   onFinishShape(polygon) {

@@ -45,7 +45,9 @@
     color: $primary-contrast-blue;
     text-decoration: underline;
 
-    &:hover {
+    &:hover,
+    &:focus {
+      outline: none;
       color: $primary-contrast;
     }
   }

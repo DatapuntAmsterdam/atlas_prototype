@@ -86,8 +86,10 @@
     text-decoration: none;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     @include o-tag;
+    outline: none;
     background-color: $secondary-gray10;
   }
 

@@ -22,6 +22,10 @@ import { routing } from '../../../../../src/app/routes';
         const vm = this;
 
         vm.$onChanges = function () {
+            if (!Object.keys(vm.catalogFilters).length) {
+                return false;
+            }
+
             const formatMap = arrayToObject(vm.catalogFilters.formatTypes, 'id');
             const serviceMap = arrayToObject(vm.catalogFilters.serviceTypes, 'id');
             const distributionMap = arrayToObject(vm.catalogFilters.distributionTypes, 'id');
