@@ -1,0 +1,58 @@
+@import "../../shared/styles/config";
+
+.c-panorama {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.c-panorama__marzipano {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom:  0;
+  left: 0;
+  border: solid $secondary-gray20 1px;
+}
+
+.c-panorama__status-bar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.c-panorama__close {
+  @extend %hover-focus-button;
+  position: absolute;
+  top: $container-whitespace;
+  right: $container-whitespace;
+  z-index: 2;
+}
+
+.is-print-mode,
+.is-embed-preview,
+.is-embed {
+  .c-panorama {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    height: 800px;
+    margin-top: $base-whitespace * 2;
+  }
+
+  .c-panorama__close {
+    display: none;
+  }
+
+  .c-panorama__status-bar {
+    background-color: $primary-light;
+  }
+}

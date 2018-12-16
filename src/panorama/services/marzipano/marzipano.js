@@ -80,7 +80,8 @@ export function initialize(domElement) {
   const viewer = new Marzipano.Viewer(domElement, {
     stageType: null,
     stage: {
-      preserveDrawingBuffer: true
+      preserveDrawingBuffer: true,
+      width: 960
     }
   });
 
@@ -98,7 +99,7 @@ export function loadScene(viewer, image, heading, pitch, fov, hotspots) {
     degreesToRadians(PANORAMA_CONFIG.MAX_FOV)
   );
 
-  const view = new Marzipano.RectilinearView({}, viewLimiter);
+  const view = new Marzipano.RectilinearView(null, viewLimiter);
 
   const scene = viewer.createScene({
     source,
