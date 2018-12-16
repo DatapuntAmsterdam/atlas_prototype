@@ -8,7 +8,7 @@ import reducer, {
   fetchPanoramaRequestToggle,
   setPanoramaOrientation
 } from './panorama';
-import * as PANORAMA_CONFIG from '../../../modules/straatbeeld/straatbeeld-config';
+import { PANORAMA_CONFIG } from '../services/panorama-api/panorama-api';
 
 describe('Panorama Reducer', () => {
   beforeAll(() => {

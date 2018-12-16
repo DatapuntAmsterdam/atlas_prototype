@@ -142,19 +142,6 @@ import '../modules/shared/services/user-settings/user-settings.constant';
 import '../modules/shared/services/user-settings/user-settings.factory';
 import '../modules/shared/shared-config.factory';
 import '../modules/shared/shared.vendor';
-import '../modules/straatbeeld/straatbeeld.module';
-import '../modules/straatbeeld/components/history/history.directive';
-import '../modules/straatbeeld/components/hotspot/hotspot.component';
-import '../modules/straatbeeld/components/hotspot/hotspot.factory';
-import '../modules/straatbeeld/components/hotspot/touch/hotspot-touch.directive';
-import '../modules/straatbeeld/components/status-bar/status-bar.component';
-import '../modules/straatbeeld/components/straatbeeld/straatbeeld.directive';
-import '../modules/straatbeeld/components/toggle-straatbeeld-fullscreen/toggle-straatbeeld-fullscreen.component';
-import '../modules/straatbeeld/services/document-title/document-title.factory';
-import '../modules/straatbeeld/services/marzipano/marzipano.factory';
-import '../modules/straatbeeld/services/orientation/orientation.factory';
-import '../modules/straatbeeld/straatbeeld-config.constant';
-import '../modules/straatbeeld/straatbeeld.vendor';
 
 // The mocks
 import 'angular-mocks';
@@ -183,16 +170,6 @@ import '../modules/data-selection/components/formatter/formatter.component.test'
 import '../modules/data-selection/components/formatter/aggregate/aggregate.filter.test';
 import '../modules/data-selection/components/formatter/hr-bezoekadres/hr-bezoekadres.filter.test';
 import '../modules/data-selection/services/document-title/document-title.factory.test';
-import '../modules/straatbeeld/components/toggle-straatbeeld-fullscreen/toggle-straatbeeld-fullscreen.component.test';
-import '../modules/straatbeeld/components/history/history.directive.test';
-import '../modules/straatbeeld/components/straatbeeld/straatbeeld.directive.test';
-import '../modules/straatbeeld/components/hotspot/touch/hotspot-touch.directive.test';
-import '../modules/straatbeeld/components/hotspot/hotspot.component.test';
-import '../modules/straatbeeld/components/hotspot/hotspot.factory.test';
-import '../modules/straatbeeld/components/status-bar/status-bar.component.test';
-import '../modules/straatbeeld/services/document-title/document-title.factory.test';
-import '../modules/straatbeeld/services/marzipano/marzipano.factory.test';
-import '../modules/straatbeeld/services/orientation/orientation.factory.test';
 import '../modules/header/components/logout-button/logout-button.component.test';
 import '../modules/header/components/terugmelden-button/terugmelden-button.component.test';
 import '../modules/header/components/menu/dropdown/menu-dropdown.directive.test';

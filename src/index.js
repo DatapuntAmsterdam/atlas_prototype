@@ -13,7 +13,6 @@ import '../modules/data-selection/data-selection.scss';
 import '../modules/detail/detail.scss';
 import '../modules/header/header.scss';
 import '../modules/page/page.scss';
-import '../modules/straatbeeld/straatbeeld.scss';
 
 // New style sass
 import './_styles.scss';

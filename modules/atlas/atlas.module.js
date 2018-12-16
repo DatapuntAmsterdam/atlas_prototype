@@ -6,7 +6,6 @@
         'dpHeader',
         'dpPage',
         'dpDetail',
-        'dpStraatbeeld',
         'dpDataSelection',
 
         // Shared module

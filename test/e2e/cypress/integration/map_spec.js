@@ -87,7 +87,7 @@ describe('map module', () => {
       cy.get(columnRight).get('dl').contains('1012JW');
       cy.wait('@getPanoThumbnail');
       cy.get(columnRight)
-        .get('img.c-straatbeeld-thumbnail--img')
+        .get('img.c-panorama-thumbnail--img')
         .should('exist').and('be.visible');
     });
 
@@ -127,7 +127,7 @@ describe('map module', () => {
       cy.get(columnRight).get('.qa-title').contains('10581111');
       cy.get(columnRight).get('dl').contains('Nieuwmarkt 25');
       cy.get(columnRight)
-        .get('img.c-straatbeeld-thumbnail--img')
+        .get('img.c-panorama-thumbnail--img')
         .should('exist').and('be.visible');
 
       cy.get('button.toggle-fullscreen').click();
@@ -144,7 +144,7 @@ describe('map module', () => {
       cy.get(columnRight).get('.qa-title').contains('10581111');
       cy.get(columnRight).get('dl').contains('Nieuwmarkt 25');
       cy.get(columnRight)
-        .get('img.c-straatbeeld-thumbnail--img')
+        .get('img.c-panorama-thumbnail--img')
         .should('exist').and('be.visible');
 
       cy.go('back');
