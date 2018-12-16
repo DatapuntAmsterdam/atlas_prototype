@@ -1,8 +1,8 @@
-import { getByUrl } from '../api/api';
+import { getByUrl } from '../../shared/services/api/api';
 import { getImageDataById, getImageDataByLocation, PANORAMA_CONFIG } from './panorama-api';
-import sharedConfig from '../shared-config/shared-config';
+import sharedConfig from '../../shared/services/shared-config/shared-config';
 
-jest.mock('../api/api');
+jest.mock('../../shared/services/api/api');
 
 describe('The panoramaApi Factory', () => {
   beforeEach(() => {

@@ -10,7 +10,7 @@ import {
   fetchPanoramaRequest,
   fireFetchPanormaRequest
 } from './panorama';
-import { routing } from '../../../app/routes';
+import { routing } from '../../app/routes';
 import {
   FETCH_PANORAMA_REQUEST,
   FETCH_PANORAMA_SUCCESS,
@@ -20,13 +20,13 @@ import {
   getPanoramaHistory,
   CLOSE_PANORAMA,
   SET_PANORAMA_YEAR
-} from '../../ducks/panorama/panorama';
+} from '../ducks/panorama';
 import {
   getImageDataById,
   getImageDataByLocation
-} from '../../services/panorama-api/panorama-api';
-import { TOGGLE_MAP_OVERLAY_PANORAMA } from '../../../map/ducks/map/map';
-import { toMap } from '../../../store/redux-first-router';
+} from '../services/panorama-api';
+import { TOGGLE_MAP_OVERLAY_PANORAMA } from '../../map/ducks/map/map';
+import { toMap } from '../../store/redux-first-router';
 
 describe('watchPanoramaRoute', () => {
   const action = { type: routing.panorama.type };

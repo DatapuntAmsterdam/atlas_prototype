@@ -1,6 +1,6 @@
-import sharedConfig from '../shared-config/shared-config';
-import { getByUrl } from '../api/api';
-import getCenter from '../geo-json/geo-json';
+import sharedConfig from '../../shared/services/shared-config/shared-config';
+import { getByUrl } from '../../shared/services/api/api';
+import getCenter from '../../shared/services/geo-json/geo-json';
 
 export const PANORAMA_CONFIG = {
   PANORAMA_ENDPOINT_PREFIX: 'panorama/panoramas',
@@ -136,7 +136,6 @@ export function getImageDataByLocation(location, history) {
         }
       })
       .catch((error) => reject(error));
-      // .finally(() => cancel = null);
   });
 
   return promise;

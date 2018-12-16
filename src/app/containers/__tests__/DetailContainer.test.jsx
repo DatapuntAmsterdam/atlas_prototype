@@ -7,11 +7,11 @@ import { getUser } from '../../../shared/ducks/user/user';
 import {
   getPanoramaPreview,
   isPanoramaPreviewLoading
-} from '../../../shared/ducks/panorama/preview/panorama-preview';
+} from '../../../panorama/ducks/preview/panorama-preview';
 
 jest.mock('../../../shared/ducks/detail/selectors');
 jest.mock('../../../shared/ducks/user/user');
-jest.mock('../../../shared/ducks/panorama/preview/panorama-preview');
+jest.mock('../../../panorama/ducks/preview/panorama-preview');
 
 describe('DetailContainer', () => {
   beforeEach(() => {

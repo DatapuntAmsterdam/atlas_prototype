@@ -1,5 +1,5 @@
 import { radiansToDegrees } from '../../../../src/shared/services/angle-conversion/angle-conversion';
-import { setPanoramaOrientation } from '../../../../src/shared/ducks/panorama/panorama';
+import { setPanoramaOrientation } from '../../../../src/panorama/ducks/panorama';
 
 (function () {
     'use strict';

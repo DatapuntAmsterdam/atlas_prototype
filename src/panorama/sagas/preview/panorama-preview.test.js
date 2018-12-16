@@ -3,8 +3,8 @@ import { fetchMapPano } from './panorama-preview';
 import {
   fetchPanoramaPreviewFailure,
   fetchPanoramaPreviewSuccess
-} from '../../../ducks/panorama/preview/panorama-preview';
-import panoPreview from '../../../services/panorama-preview/pano-preview';
+} from '../../ducks/preview/panorama-preview';
+import panoPreview from '../../services/preview/panorama-preview';
 
 describe('fetchMapPano', () => {
   it('should dispatch the correct action', () => (

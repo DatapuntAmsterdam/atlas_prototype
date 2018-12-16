@@ -2,8 +2,8 @@ import { toPanorama } from '../../../../src/store/redux-first-router';
 import {
     getPanoramaHeading,
     getPanoramaId
-} from '../../../../src/shared/ducks/panorama/panorama';
-import PANORAMA_VIEW from '../../../../src/shared/ducks/panorama/panorama-view';
+} from '../../../../src/panorama/ducks/panorama';
+import PANORAMA_VIEW from '../../../../src/panorama/ducks/panorama';
 
 (function () {
     'use strict';

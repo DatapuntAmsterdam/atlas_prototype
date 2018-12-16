@@ -1,4 +1,4 @@
-import { setPanoramaOrientation } from '../../../../src/shared/ducks/panorama/panorama';
+import { setPanoramaOrientation } from '../../../../src/panorama/ducks/panorama';
 
 describe('The orientation factory', function () {
     let orientation,

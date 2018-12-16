@@ -1,12 +1,12 @@
 import { createSelector } from 'reselect';
-import { ROUTER_NAMESPACE, routing } from '../../../app/routes';
-import { PANORAMA_CONFIG } from '../../services/panorama-api/panorama-api';
+import { ROUTER_NAMESPACE, routing } from '../../app/routes';
+import { PANORAMA_CONFIG } from '../services/panorama-api';
 import PANORAMA_VIEW from './panorama-view';
 import {
   panoramaOrientationType,
   panoramaPersonType
-} from '../../../map/components/leaflet/services/icons.constant';
-import PAGES from '../../../app/pages';
+} from '../../map/components/leaflet/services/icons.constant';
+import PAGES from '../../app/pages';
 
 export const REDUCER_KEY = 'panorama';
 

@@ -1,7 +1,7 @@
 import {
     historyOptions,
     fetchPanoramaRequestToggle
-} from '../../../../src/shared/ducks/panorama/panorama';
+} from '../../../../src/panorama/ducks/panorama';
 
 (function () {
     'use strict';

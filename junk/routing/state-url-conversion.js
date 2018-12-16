@@ -2,7 +2,7 @@
 import deepCopy from 'deep-copy';  // Deprecated, added during Angular to Vanilla migration. Try ES6 Object.assign and the like where possible.
 import { stripDomain, restoreDomain } from './uri-stripper';
 import isObject from '../is-object';
-import { historyOptions } from '../../../shared/ducks/straatbeeld/straatbeeld';
+import { historyOptions } from '../../../panorama/ducks/panorama';
 
 //
 // This constant holds the configuration of all state variables that are stored in the url
@@ -140,7 +140,7 @@ export default {
 
       return newState;
     },
-    straatbeeld: (oldState, newState) => {
+    panorama: (oldState, newState) => {
       if (isObject(oldState)) {
         newState.targetLocation = oldState.targetLocation;
 
@@ -221,7 +221,7 @@ export default {
       isLoading: true
       // numberOfResults: null
     },
-    straatbeeld: {
+    panorama: {
       location: null, // eg: [52.8, 4.9]
       history: historyOptions[0],
       pitch: 0,       // eg: -10
@@ -367,50 +367,50 @@ export default {
       name: 'search.query',
       type: 'string'
     },
-    // straatbeeld (sb)
+    // panorama (sb)
     sbf: {
-      name: 'straatbeeld.fov',
+      name: 'panorama.fov',
       type: 'base62',
       precision: 1
     },
     sbfs: {
-      name: 'straatbeeld.isFullscreen',
+      name: 'panorama.isFullscreen',
       type: 'boolean'
     },
     sbh: {
-      name: 'straatbeeld.heading',
+      name: 'panorama.heading',
       type: 'base62',
       precision: 1
     },
     sbi: {
-      name: 'straatbeeld.id',
+      name: 'panorama.id',
       type: 'string'
     },
     sbl: {
-      name: 'straatbeeld.location',
+      name: 'panorama.location',
       type: 'base62[]',
       precision: 7
     },
     sbp: {
-      name: 'straatbeeld.pitch',
+      name: 'panorama.pitch',
       type: 'base62',
       precision: 1
     },
     sby: {
-      name: 'straatbeeld.history.year',
+      name: 'panorama.history.year',
       type: 'base62',
       precision: 1
     },
     sbmt: {
-      name: 'straatbeeld.history.missionType',
+      name: 'panorama.history.missionType',
       type: 'string'
     },
     sbln: {
-      name: 'straatbeeld.history.layerName',
+      name: 'panorama.history.layerName',
       type: 'string'
     },
     sblb: {
-      name: 'straatbeeld.history.label',
+      name: 'panorama.history.label',
       type: 'string'
     },
     // UI visibility (uv)

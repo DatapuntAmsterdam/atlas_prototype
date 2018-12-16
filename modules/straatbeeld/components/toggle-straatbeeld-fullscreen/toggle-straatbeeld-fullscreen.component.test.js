@@ -1,7 +1,7 @@
 import { toPanorama } from '../../../../src/store/redux-first-router';
-import PANORAMA_VIEW from '../../../../src/shared/ducks/panorama/panorama-view';
+import PANORAMA_VIEW from '../../../../src/panorama/ducks/panorama-view';
 
-import * as straatbeeld from '../../../../src/shared/ducks/panorama/panorama';
+import * as straatbeeld from '../../../../src/panorama/ducks/panorama';
 
 describe('The dp-toggle-straatbeeld-fullscreen component', function () {
     let $compile,

@@ -3,7 +3,7 @@ import queryString from 'querystring';
 import get from 'lodash.get';
 import { routing } from '../app/routes';
 import PAGES from '../app/pages';
-import PANORAMA_VIEW from '../shared/ducks/panorama/panorama-view';
+import PANORAMA_VIEW from '../panorama/ducks/panorama-view';
 
 export const REDUCER_KEY = 'location';
 

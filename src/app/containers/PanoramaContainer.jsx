@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { AngularWrapper } from 'react-angular';
-import { getHotspots, getPanorama } from '../../shared/ducks/panorama/panorama';
+import { getHotspots, getPanorama } from '../../panorama/ducks/panorama';
 import { isPrintMode } from '../../shared/ducks/ui/ui';
 import { getMapCenter } from '../../map/ducks/map/map-selectors';
 import { toDataSearchLocation } from '../../store/redux-first-router';

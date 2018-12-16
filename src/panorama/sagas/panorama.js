@@ -1,5 +1,5 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import { routing } from '../../../app/routes';
+import { routing } from '../../app/routes';
 import {
   fetchPanoramaRequest,
   getPanoramaId,
@@ -10,13 +10,13 @@ import {
   CLOSE_PANORAMA,
   FETCH_PANORAMA_REQUEST,
   FETCH_PANORAMA_REQUEST_TOGGLE
-} from '../../ducks/panorama/panorama';
-import { toggleMapOverlayPanorama } from '../../../map/ducks/map/map';
+} from '../ducks/panorama';
+import { toggleMapOverlayPanorama } from '../../map/ducks/map/map';
 import {
   getImageDataById,
   getImageDataByLocation
-} from '../../services/panorama-api/panorama-api';
-import { toMap } from '../../../store/redux-first-router';
+} from '../services/panorama-api';
+import { toMap } from '../../store/redux-first-router';
 
 export function* fireFetchPanormaRequest(action) {
   yield put(fetchPanoramaRequest(action.payload));

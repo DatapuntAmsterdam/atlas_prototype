@@ -1,11 +1,11 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getLayers } from '../../ducks/panel-layers/map-panel-layers';
-import { getPanoramaHistory } from '../../../shared/ducks/panorama/panorama';
+import { getPanoramaHistory } from '../../../panorama/ducks/panorama';
 import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/map';
 import { getMapZoom } from '../../ducks/map/map-selectors';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
 import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection';
-import { getImageDataByLocation } from '../../../shared/services/panorama-api/panorama-api';
+import { getImageDataByLocation } from '../../../panorama/services/panorama-api';
 import { toPanorama } from '../../../store/redux-first-router';
 import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
 

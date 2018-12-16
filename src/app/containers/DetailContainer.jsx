@@ -7,7 +7,7 @@ import { getUser } from '../../shared/ducks/user/user';
 import {
   getPanoramaPreview,
   isPanoramaPreviewLoading
-} from '../../shared/ducks/panorama/preview/panorama-preview';
+} from '../../panorama/ducks/preview/panorama-preview';
 
 const mapStateToProps = (state) => ({
   isLoading: isDetailLoading(state),
