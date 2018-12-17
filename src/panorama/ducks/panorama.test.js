@@ -23,12 +23,17 @@ describe('Panorama Reducer', () => {
       date: null,
       fov: null,
       heading: 0,
+      history: {
+        label: 'Meest recent',
+        layerName: 'pano',
+        missionType: '',
+        year: 0
+      },
       hotspots: [],
       image: null,
       isLoading: true,
       location: null,
-      pitch: 0,
-      year: undefined
+      pitch: 0
     });
   });
 
@@ -44,7 +49,7 @@ describe('Panorama Reducer', () => {
         image: 'http://example.com/example.png'
       };
       const id = 'ABC';
-      const newState = reducer(inputState, fetchPanoramaRequest(id));
+      const newState = reducer(inputState, fetchPanoramaRequest({ id }));
       expect(newState.id).toBe(id);
       expect(newState.heading).toBe(inputState.heading);
     });
@@ -53,9 +58,11 @@ describe('Panorama Reducer', () => {
   describe('fetchPanoramaRequestToggle', () => {
     it('sets the history', () => {
       expect(
-        reducer({ year: 2010 }, fetchPanoramaRequestToggle({ year: 2020 }))
+        reducer({}, fetchPanoramaRequestToggle({ year: 2020 }))
       ).toEqual({
-        year: 2020
+        history: {
+          year: 2020
+        }
       });
     });
   });

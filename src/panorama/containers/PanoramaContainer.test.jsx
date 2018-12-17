@@ -2,23 +2,27 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import PanoramaContainer from './PanoramaContainer';
-import { getHotspots, getPanorama } from '../ducks/panorama';
-import { isPrintMode } from '../../shared/ducks/ui/ui';
-import { getMapCenter } from '../../map/ducks/map/map-selectors';
+import { getPanorama } from '../ducks/panorama';
+import { getLocationLatLong } from '../../map/ducks/map/map-selectors';
 
 jest.mock('../ducks/panorama');
-jest.mock('../../shared/ducks/ui/ui');
 jest.mock('../../map/ducks/map/map-selectors');
+jest.mock('../services/marzipano/marzipano');
 
 describe('PanoramaContainer', () => {
-  it('should render', () => {
-    const store = configureMockStore()();
+  let initialState;
+  beforeEach(() => {
+    initialState = {};
     getPanorama.mockReturnValue(({}));
-    getHotspots.mockReturnValue([]);
-    isPrintMode.mockReturnValue(false);
-    getMapCenter.mockReturnValue([123, 321]);
+    getLocationLatLong.mockReturnValue([]);
+  });
+
+  it('should render', () => {
+    const store = configureMockStore()({ ...initialState });
     const component = shallow(
-      <PanoramaContainer isFullscreen={false} />,
+      <PanoramaContainer
+        isFullscreen={false}
+      />,
       { context: { store } }
     ).dive();
     expect(component).toMatchSnapshot();

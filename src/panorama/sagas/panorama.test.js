@@ -19,7 +19,7 @@ import {
   getPanoramaLocation,
   getPanoramaHistory,
   CLOSE_PANORAMA,
-  SET_PANORAMA_YEAR
+  FETCH_PANORAMA_REQUEST_TOGGLE
 } from '../ducks/panorama';
 import {
   getImageDataById,
@@ -63,7 +63,7 @@ describe('watchFetchPanorama', () => {
       .next()
       .all([
         takeLatest(FETCH_PANORAMA_REQUEST, fetchPanoramaById),
-        takeLatest(SET_PANORAMA_YEAR, fetchPanoramaByLocation)
+        takeLatest(FETCH_PANORAMA_REQUEST_TOGGLE, fetchPanoramaByLocation)
       ])
       .next(action)
       .isDone();
@@ -110,7 +110,7 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
       .next()
       .put({
         type: TOGGLE_MAP_OVERLAY_PANORAMA,
-        payload: `pano${'history.year'}${'history.missionType'}`
+        payload: 'pano'
       })
       .next()
       .isDone();
@@ -134,7 +134,7 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
       .isDone();
   });
 
-  it('should call fetchPanormaYear and dispatch the correct action', () => {
+  it('should call fetchPanoramaByLocation and dispatch the correct action', () => {
     testSaga(fetchPanoramaByLocation)
       .next()
       .all([
@@ -151,7 +151,7 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
       .next()
       .put({
         type: TOGGLE_MAP_OVERLAY_PANORAMA,
-        payload: `pano${'history.year'}${'history.missionType'}`
+        payload: 'pano'
       })
       .next()
       .isDone();

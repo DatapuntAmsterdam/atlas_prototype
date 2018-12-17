@@ -236,7 +236,6 @@ export default {
       isFullscreen: false,
       isInitial: true,
       isLoading: true
-      // id: 'ABC123',
     },
     ui: {
       isEmbed: false,

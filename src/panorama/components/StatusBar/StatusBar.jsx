@@ -34,7 +34,7 @@ StatusBar.defaultProps = {
 
 StatusBar.propTypes = {
   heading: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.date]),
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
   history: PropTypes.shape().isRequired,
   location: PropTypes.array.isRequired //eslint-disable-line
 };
