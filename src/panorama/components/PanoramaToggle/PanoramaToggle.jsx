@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import './PanoramaToggle.scss';
 import { historyOptions, fetchPanoramaRequestToggle } from '../../ducks/panorama';
 
@@ -30,6 +32,7 @@ class PanoramaToggle extends React.Component {
       showMenu: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.setSelectedOption = this.setSelectedOption.bind(this);
   }
 
   setSelectedOption(option) {
@@ -49,8 +52,7 @@ class PanoramaToggle extends React.Component {
     return (
       <div className="c-panorama-status-bar__history">
         <div className="c-panorama-toggle qa-panorama-toggle">
-          <div
-            role="button"
+          <button
             className={`
               c-panorama-toggle__button
               qa-panorama-toggle__button
@@ -60,7 +62,7 @@ class PanoramaToggle extends React.Component {
             onKeyPress={this.toggleMenu}
           >
             { selectedOption }
-          </div>
+          </button>
           {(showMenu) ? <ul className="c-panorama-toggle__menu qa-panorama-toggle__menu">
             {historyOptions.map((option) => (
               <li
@@ -69,9 +71,8 @@ class PanoramaToggle extends React.Component {
                   c-panorama-toggle__item
                   qa-panorama-toggle__item
                 `}
-                onClick={() => this.setSelectedOption(option)}
               >
-                { option.label }
+                <button onClick={() => this.setSelectedOption(option)}>{ option.label }</button>
               </li>
             ))}
             <li
@@ -103,14 +104,19 @@ class PanoramaToggle extends React.Component {
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchPanoramaRequest: (option) => dispatch(fetchPanoramaRequestToggle(option))
-});
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  fetchPanoramaRequest: fetchPanoramaRequestToggle
+}, dispatch);
+
+PanoramaToggle.defaultProps = {
+  fetchPanoramaRequest: ''
+};
 
 PanoramaToggle.propTypes = {
   heading: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   history: PropTypes.shape().isRequired,
   location: PropTypes.array.isRequired,  // eslint-disable-line
+  fetchPanoramaRequest: PropTypes.oneOfType([PropTypes.string, PropTypes.func]) // eslint-disable-line
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PanoramaToggle);

@@ -1,13 +1,12 @@
 .c-hotspot {
-  margin: 0 -20px;
-  padding: 0 20px;
-  outline: none;
   cursor: pointer;
+  margin: 0 -20px;
+  outline: none;
+  padding: 0 20px;
 
   &:hover {
-    transform: scale(1.15);
     animation: hotspot-animation 100ms linear;
-
+    transform: scale(1.15);
   }
 }
 
@@ -36,8 +35,8 @@
 }
 
 .c-hotspot__image {
-  transform: scale(1);
   background-size: cover;
+  transform: scale(1);
 
   .c-hotspot--year-2016 & {
     background-image: url("assets/images/hotspots/2016.svg");

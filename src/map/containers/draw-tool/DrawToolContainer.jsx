@@ -200,7 +200,6 @@ DrawToolContainer.propTypes = {
   onStartDrawing: PropTypes.func.isRequired,
   onEndDrawing: PropTypes.func.isRequired,
   onSetPageName: PropTypes.func.isRequired,
-  // onStraatbeeldOff: PropTypes.func.isRequired,
   onMapClear: PropTypes.func.isRequired
 };
 

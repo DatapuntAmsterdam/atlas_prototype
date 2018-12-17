@@ -82,7 +82,7 @@ const imageData = (response) => {
     image: {
       baseurl: panorama.cubic_img_baseurl,
       pattern: panorama.cubic_img_pattern,
-      preview: panorama.cubic_img_baseurl
+      preview: panorama._links.cubic_img_preview.href
     }
   };
 };

@@ -48,12 +48,12 @@ const ICON_CONFIG = {
     }
   },
   PANORAMA_ORIENTATION: {
-    iconUrl: '/assets/images/map/straatbeeld-orientation.svg',
+    iconUrl: '/assets/images/map/panorama-orientation.svg',
     iconSize: [70, 70],
     iconAnchor: [35, 35]
   },
   PANORAMA_PERSON: {
-    iconUrl: '/assets/images/map/straatbeeld-person.svg',
+    iconUrl: '/assets/images/map/panorama-person.svg',
     iconSize: [18, 31],
     iconAnchor: [9, 22]
   }

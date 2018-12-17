@@ -28,11 +28,15 @@ const StatusBar = ({ date, location, heading, history }) => (
   </div>
 );
 
+StatusBar.defaultProps = {
+  date: ''
+};
+
 StatusBar.propTypes = {
   heading: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  //date: PropTypes.oneOfType([PropTypes.string, PropTypes.date]).isRequired,
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.date]),
   history: PropTypes.shape().isRequired,
-  location: PropTypes.array.isRequired // eslint-disable-line
+  location: PropTypes.array.isRequired //eslint-disable-line
 };
 
 export default StatusBar;

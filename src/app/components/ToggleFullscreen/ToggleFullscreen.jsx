@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './_toggle-fullscreen.scss';
+import './ToggleFullscreen.scss';
 
-const ToggleFullscreen = ({ isFullscreen, onToggleFullscreen }) => (
+const ToggleFullscreen = ({ isFullscreen, title, onToggleFullscreen, alignLeft = false }) => (
   <button
-    title={isFullscreen ? 'Kaart verkleinen' : 'Kaart vergroten'}
-    className="toggle-fullscreen"
+    title={isFullscreen ? `${title} verkleinen` : `${title} vergroten`}
+    className={`toggle-fullscreen toggle-fullscreen${(alignLeft) ? '__left' : '__right'}`}
     onClick={() => onToggleFullscreen()}
   >
     <span className={`
@@ -17,8 +17,14 @@ const ToggleFullscreen = ({ isFullscreen, onToggleFullscreen }) => (
   </button>
 );
 
+ToggleFullscreen.defaultProps = {
+  alignLeft: false
+};
+
 ToggleFullscreen.propTypes = {
+  alignLeft: PropTypes.bool,
   isFullscreen: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
   onToggleFullscreen: PropTypes.func.isRequired
 };
 

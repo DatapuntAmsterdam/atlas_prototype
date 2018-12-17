@@ -4,19 +4,29 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import './PanoramaContainer.scss';
-import { getHotspots, getPanorama, setPanoramaOrientation } from '../ducks/panorama';
-import { isPrintMode } from '../../shared/ducks/ui/ui';
-import { getMapCenter } from '../../map/ducks/map/map-selectors';
-import { toDataSearchLocation } from '../../store/redux-first-router';
+import {
+  getPanorama,
+  setPanoramaOrientation,
+  fetchPanoramaRequest
+} from '../ducks/panorama';
+import PANORAMA_VIEW from '../ducks/panorama-view';
+import { getLocationLatLong } from '../../map/ducks/map/map-selectors';
+import {
+  toDataSearchLocation,
+  toPanorama as toPanoramaActionCreator
+} from '../../store/redux-first-router';
 
 import { initialize, loadScene, getOrientation } from '../services/marzipano/marzipano';
 
 import StatusBar from '../components/StatusBar/StatusBar';
+import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullscreen';
 
 class PanoramaContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.toggleFullscreen = this.toggleFullscreen.bind(this);
     this.updateOrientation = this.updateOrientation.bind(this);
+    this.hotspotClickHandler = this.hotspotClickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +38,7 @@ class PanoramaContainer extends React.Component {
     if (panoramaState.image !== prevProps.panoramaState.image) {
       loadScene(
         this.panoramaViewer,
+        this.hotspotClickHandler,
         panoramaState.image,
         panoramaState.heading,
         panoramaState.pitch,
@@ -42,16 +53,42 @@ class PanoramaContainer extends React.Component {
     this.props.setOrientation({ heading, pitch, fov });
   }
 
+  hotspotClickHandler(panoramaId) {
+    const { fetchPanoramaById } = this.props;
+    return fetchPanoramaById({ id: panoramaId });
+  }
+
+  toggleFullscreen() {
+    const { isFullscreen, panoramaState, toPanorama } = this.props;
+
+    if (isFullscreen) {
+      return toPanorama(panoramaState.id, panoramaState.heading, PANORAMA_VIEW.MAP_PANO);
+    }
+
+    return toPanorama(panoramaState.id, panoramaState.heading, PANORAMA_VIEW.PANO);
+  }
+
   render() {
-    const { panoramaState } = this.props;
+    const { isFullscreen, panoramaState } = this.props;
 
     return (
       <div className="c-panorama">
         <div
-          ref={(el) => this.panoramaRef = el}
+          ref={
+            //eslint-disable-next-line
+            (el) => this.panoramaRef = el
+          }
           role="button"
+          tabIndex="-1"
           className="c-panorama__marzipano js-marzipano-viewer"
           onMouseDown={this.updateOrientation}
+        />
+
+        <ToggleFullscreen
+          isFullscreen={isFullscreen}
+          title="Panoramabeeld"
+          onToggleFullscreen={this.toggleFullscreen}
+          alignLeft
         />
 
         {(panoramaState.date && panoramaState.location) ? (
@@ -69,23 +106,30 @@ class PanoramaContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   panoramaState: getPanorama(state),
-  hotspots: getHotspots(state),
-  isPrint: isPrintMode(state),
-  // Todo: DP-6312: get the location from selection reducer
-  locationString: getMapCenter(state).join(',')
+  locationString: getLocationLatLong(state)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  doClose: toDataSearchLocation,
-  setOrientation: setPanoramaOrientation
+  closePanorama: toDataSearchLocation,
+  toPanorama: toPanoramaActionCreator,
+  setOrientation: setPanoramaOrientation,
+  fetchPanoramaById: fetchPanoramaRequest
 }, dispatch);
 
+PanoramaContainer.defaultProps = {
+  toPanorama: '',
+  setOrientation: '',
+  fetchPanoramaById: ''
+};
+
 PanoramaContainer.propTypes = {
-  panoramaState: PropTypes.shape({}).isRequired
-  // isFullscreen: PropTypes.bool.isRequired,
-  // doClose: PropTypes.func.isRequired,
-  // isPrint: PropTypes.bool.isRequired,
-  // locationString: PropTypes.string.isRequired,
+  panoramaState: PropTypes.shape({}).isRequired,
+  isFullscreen: PropTypes.bool.isRequired,
+  locationString: PropTypes.array.isRequired, // eslint-disable-line
+  toPanorama: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  setOrientation: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  fetchPanoramaById: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PanoramaContainer);
