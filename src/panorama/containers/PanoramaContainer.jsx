@@ -119,13 +119,14 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 PanoramaContainer.defaultProps = {
   toPanorama: '',
   setOrientation: '',
-  fetchPanoramaById: ''
+  fetchPanoramaById: '',
+  panoramaState: {}
 };
 
 PanoramaContainer.propTypes = {
   panoramaState: PropTypes.shape({}).isRequired,
   isFullscreen: PropTypes.bool.isRequired,
-  locationString: PropTypes.array.isRequired, // eslint-disable-line
+  locationString: PropTypes.array, // eslint-disable-line
   toPanorama: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   setOrientation: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   fetchPanoramaById: PropTypes.oneOfType([PropTypes.string, PropTypes.func])

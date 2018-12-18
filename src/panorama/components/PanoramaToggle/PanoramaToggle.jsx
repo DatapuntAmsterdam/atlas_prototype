@@ -4,18 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import './PanoramaToggle.scss';
-import { historyOptions, fetchPanoramaRequestToggle } from '../../ducks/panorama';
-
-const getSelectedOption = ({ year, missionType }) => {
-  let selectedOption = historyOptions[0];
-
-  if (year && missionType) {
-    selectedOption = historyOptions.find(
-      (option) => option.year === year && option.missionType === missionType
-    );
-  }
-  return selectedOption;
-};
+import { fetchPanoramaRequestToggle } from '../../ducks/panorama';
 
 const getStreetViewUrl = (location, heading) => {
   const [latitude, longitude] = location;
@@ -45,9 +34,8 @@ class PanoramaToggle extends React.Component {
   }
 
   render() {
-    const { heading, history, location } = this.props;
+    const { heading, history, historyOptions, location } = this.props;
     const { showMenu } = this.state;
-    const { label: selectedOption } = getSelectedOption(history);
 
     return (
       <div className="c-panorama-status-bar__history">
@@ -61,7 +49,7 @@ class PanoramaToggle extends React.Component {
             onClick={this.toggleMenu}
             onKeyPress={this.toggleMenu}
           >
-            { selectedOption }
+            { history.label }
           </button>
           {(showMenu) ? <ul className="c-panorama-toggle__menu qa-panorama-toggle__menu">
             {historyOptions.map((option) => (
@@ -115,6 +103,7 @@ PanoramaToggle.defaultProps = {
 PanoramaToggle.propTypes = {
   heading: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   history: PropTypes.shape().isRequired,
+  historyOptions: PropTypes.array.isRequired,  // eslint-disable-line
   location: PropTypes.array.isRequired,  // eslint-disable-line
   fetchPanoramaRequest: PropTypes.oneOfType([PropTypes.string, PropTypes.func]) // eslint-disable-line
 };

@@ -120,7 +120,7 @@ export function loadScene(viewer, onClickHandler, image, heading, pitch, fov, ho
   view.setPitch(degreesToRadians(pitch));
   view.setFov(degreesToRadians(fov));
 
-  scene.switchTo();
+  return scene.switchTo();
 }
 
 /*
