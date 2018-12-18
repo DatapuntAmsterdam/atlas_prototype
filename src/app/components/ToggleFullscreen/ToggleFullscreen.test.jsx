@@ -4,26 +4,25 @@ import { shallow } from 'enzyme';
 import ToggleFullscreen from './ToggleFullscreen';
 
 describe('ToggleFullscreen', () => {
+  const onToggleFullscreen = jest.fn();
+  const props = {
+    isFullscreen: true,
+    title: 'ABC',
+    onToggleFullscreen
+  };
+
   describe('actions', () => {
     it('should trigger toggle off when clicked', () => {
-      const onToggleFullscreen = jest.fn();
       const wrapper = shallow(
-        <ToggleFullscreen
-          isFullscreen
-          onToggleFullscreen={onToggleFullscreen}
-        />
+        <ToggleFullscreen {...props} />
       );
       wrapper.find('button').at(0).simulate('click');
       expect(onToggleFullscreen).toHaveBeenCalled();
     });
 
     it('should trigger toggle on when clicked', () => {
-      const onToggleFullscreen = jest.fn();
       const wrapper = shallow(
-        <ToggleFullscreen
-          isFullscreen={false}
-          onToggleFullscreen={onToggleFullscreen}
-        />
+        <ToggleFullscreen {...props} />
       );
       wrapper.find('button').at(0).simulate('click');
       expect(onToggleFullscreen).toHaveBeenCalled();
@@ -31,23 +30,15 @@ describe('ToggleFullscreen', () => {
 
     describe('rendering', () => {
       it('should render with fullscreen is turned on', () => {
-        const onToggleFullscreen = jest.fn();
         const wrapper = shallow(
-          <ToggleFullscreen
-            isFullscreen
-            onToggleFullscreen={onToggleFullscreen}
-          />
+          <ToggleFullscreen {...props} />
         );
         expect(wrapper).toMatchSnapshot();
       });
 
       it('should render with fullscreen is turned off', () => {
-        const onToggleFullscreen = jest.fn();
         const wrapper = shallow(
-          <ToggleFullscreen
-            isFullscreen={false}
-            onToggleFullscreen={onToggleFullscreen}
-          />
+          <ToggleFullscreen {...props} />
         );
         expect(wrapper).toMatchSnapshot();
       });

@@ -41,7 +41,8 @@ describe('NonTiledLayer', () => {
     wrapper.instance().leafletElement = {
       setParams: setParamsMock,
       setOpacity: jest.fn(),
-      setUrl: jest.fn()
+      setUrl: jest.fn(),
+      wmsParams: {}
     };
 
     wrapper.instance().updateLeafletElement({ props }, { props });

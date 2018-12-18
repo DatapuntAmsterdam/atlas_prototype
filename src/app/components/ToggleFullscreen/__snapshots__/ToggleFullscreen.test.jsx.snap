@@ -2,14 +2,14 @@
 
 exports[`ToggleFullscreen actions rendering should render with fullscreen is turned off 1`] = `
 <button
-  className="toggle-fullscreen"
+  className="toggle-fullscreen toggle-fullscreen__right"
   onClick={[Function]}
-  title="Kaart vergroten"
+  title="ABC verkleinen"
 >
   <span
     className="
       toggle-fullscreen__icon
-      toggle-fullscreen__icon--maximize
+      toggle-fullscreen__icon--minimize
     "
   />
 </button>
@@ -17,9 +17,9 @@ exports[`ToggleFullscreen actions rendering should render with fullscreen is tur
 
 exports[`ToggleFullscreen actions rendering should render with fullscreen is turned on 1`] = `
 <button
-  className="toggle-fullscreen"
+  className="toggle-fullscreen toggle-fullscreen__right"
   onClick={[Function]}
-  title="Kaart verkleinen"
+  title="ABC verkleinen"
 >
   <span
     className="

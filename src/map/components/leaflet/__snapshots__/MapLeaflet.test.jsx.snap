@@ -4448,7 +4448,7 @@ exports[`MapLeaflet component should render markers 1`] = `
         NewClass {
           "_initHooksCalled": true,
           "options": Object {
-            "className": "straatbeeld_person",
+            "className": "panorama_person",
             "iconAnchor": Array [
               9,
               22,
@@ -4457,7 +4457,7 @@ exports[`MapLeaflet component should render markers 1`] = `
               18,
               31,
             ],
-            "iconUrl": "/assets/images/map/straatbeeld-person.svg",
+            "iconUrl": "/assets/images/map/panorama-person.svg",
             "popupAnchor": null,
             "shadowAnchor": null,
             "shadowSize": null,
@@ -4480,7 +4480,7 @@ exports[`MapLeaflet component should render markers 1`] = `
         NewClass {
           "_initHooksCalled": true,
           "options": Object {
-            "className": "straatbeeld_orientation",
+            "className": "panorama_orientation",
             "iconAnchor": Array [
               35,
               35,
@@ -4489,7 +4489,7 @@ exports[`MapLeaflet component should render markers 1`] = `
               70,
               70,
             ],
-            "iconUrl": "/assets/images/map/straatbeeld-orientation.svg",
+            "iconUrl": "/assets/images/map/panorama-orientation.svg",
             "popupAnchor": null,
             "shadowAnchor": null,
             "shadowSize": null,
@@ -5116,7 +5116,7 @@ exports[`MapLeaflet component should render markers 2`] = `
         NewClass {
           "_initHooksCalled": true,
           "options": Object {
-            "className": "straatbeeld_person",
+            "className": "panorama_person",
             "iconAnchor": Array [
               9,
               22,
@@ -5125,7 +5125,7 @@ exports[`MapLeaflet component should render markers 2`] = `
               18,
               31,
             ],
-            "iconUrl": "/assets/images/map/straatbeeld-person.svg",
+            "iconUrl": "/assets/images/map/panorama-person.svg",
             "popupAnchor": null,
             "shadowAnchor": null,
             "shadowSize": null,
@@ -5148,7 +5148,7 @@ exports[`MapLeaflet component should render markers 2`] = `
         NewClass {
           "_initHooksCalled": true,
           "options": Object {
-            "className": "straatbeeld_orientation",
+            "className": "panorama_orientation",
             "iconAnchor": Array [
               35,
               35,
@@ -5157,7 +5157,7 @@ exports[`MapLeaflet component should render markers 2`] = `
               70,
               70,
             ],
-            "iconUrl": "/assets/images/map/straatbeeld-orientation.svg",
+            "iconUrl": "/assets/images/map/panorama-orientation.svg",
             "popupAnchor": null,
             "shadowAnchor": null,
             "shadowSize": null,
