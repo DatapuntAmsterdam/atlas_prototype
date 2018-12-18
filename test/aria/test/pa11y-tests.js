@@ -24,12 +24,12 @@ export default [
   //     ]
   // },
   {
-    // straatbeeld
+    // panorama
     url: 'http://localhost:8080/#?mpb=topografie&mpz=11&mpo=pano::T&mpv=52.3730353:4.8932471&pgn=home&sbf=Cu&' +
       'sbh=aS&sbi=TMX7315120208-000073_pano_0005_000449&sbl=ZRWBl:3JJZP',
     actions: [
       'wait for element .c-map to be visible',
-      'wait for element .c-straatbeeld to be visible'
+      'wait for element .c-panorama to be visible'
     ]
   },
   // TEST DOES NOT WORK IN CI

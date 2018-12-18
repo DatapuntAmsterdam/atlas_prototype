@@ -1,30 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import configureMockStore from 'redux-mock-store';
 import Dataset from './Dataset';
 
-const initialState = {
-  filters: {},
-  user: {},
-  datasets: {
-    datasetData: {
-      isLoading: false,
-      page: 1,
-      authError: false
-    },
-    datasetApiSpecification: {
-      isLoading: false,
-      error: null,
-      data: {}
-    }
-  }
-};
-
-// Todo: properly test this
-describe('Dataset', () => {
+// Todo: DP-6235
+describe.only('Dataset', () => {
   it('should render the inital state', () => {
-    const store = configureMockStore()({ ...initialState });
-    const component = shallow(<Dataset />, { context: { store } }).dive();
+    const component = shallow(
+      <Dataset
+        activeFilters={{}}
+        authError={false}
+        page={1}
+        results={{}}
+        apiSpecification={{}}
+        setPage={() => {
+        }}
+      />);
     expect(component).toMatchSnapshot();
   });
 });

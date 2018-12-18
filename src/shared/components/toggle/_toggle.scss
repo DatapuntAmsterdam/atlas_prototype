@@ -10,22 +10,13 @@
   display: flex;
   flex-shrink: 0;
   font-size: 0;
-  height: 24px;
+  height: 26px;
   justify-content: center;
-  width: 24px;
+  width: 26px;
 
-  &:hover {
-    background-color: $primary-contrast;
-    border-color: $primary-contrast;
-
-    svg {
-      fill: $primary-light;
-    }
-  }
-
-  svg {
-    fill: $secondary-gray60;
-    height: 24px;
-    width: 24px;
+  &:hover,
+  &:focus {
+    background-color: $secondary-gray20;
+    border-color: $primary-dark;
   }
 }

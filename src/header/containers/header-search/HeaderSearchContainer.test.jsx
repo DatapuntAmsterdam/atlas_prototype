@@ -3,21 +3,24 @@ import configureMockStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
 import HeaderSearchContainer from './HeaderSearchContainer';
-import {
-  getSuggestionsAction,
-  getTypedQuery
-} from '../../ducks/auto-suggest/auto-suggest';
+import { getSuggestionsAction, getTypedQuery } from '../../ducks/auto-suggest/auto-suggest';
 
 import piwikTracker from '../../../shared/services/piwik-tracker/piwik-tracker';
-import { fetchDetail, FETCH_DETAIL } from '../../../shared/ducks/detail/detail';
+import { fetchDetail } from '../../../shared/ducks/detail/actions';
 import { ROUTER_NAMESPACE } from '../../../app/routes';
 import PAGES from '../../../app/pages';
 import { emptyFilters } from '../../../shared/ducks/filters/filters';
-import { toDataSearch, toDatasetSearch, toDataSuggestion, toDatasetSuggestion } from '../../../store/redux-first-router';
+import {
+  toDataSearch,
+  toDatasetSearch,
+  toDatasetSuggestion,
+  toDataSuggestion
+} from '../../../store/redux-first-router';
+import { FETCH_DETAIL } from '../../../shared/ducks/detail/constants';
 
 jest.mock('../../ducks/auto-suggest/auto-suggest');
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
-jest.mock('../../../shared/ducks/detail/detail');
+jest.mock('../../../shared/ducks/detail/actions');
 
 describe('HeaderSearchContainer', () => {
   beforeEach(() => {
@@ -114,7 +117,11 @@ describe('HeaderSearchContainer', () => {
       headerSearch.instance().onSuggestionSelection(selectedSuggestion, shouldOpenInNewWindow);
 
       expect(store.dispatch).toHaveBeenCalledWith(
-        toDataSuggestion({ endpoint: selectedSuggestion.uri, category: selectedSuggestion.category, typedQuery: '' })
+        toDataSuggestion({
+          endpoint: selectedSuggestion.uri,
+          category: selectedSuggestion.category,
+          typedQuery: ''
+        })
       );
     });
 

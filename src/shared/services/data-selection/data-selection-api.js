@@ -70,9 +70,9 @@ function formatData(dataset, view, rawData) {
   // Filter on fields allowed by current authorization level
   const fields = DATA_SELECTION_CONFIG.datasets[dataset].CONTENT[view];
 
-  // For the catalog return the data unformatted.
+  // For the catalog or when there is no format definition return the data unformatted.
   // The formatting is complex an will be done in the catalog view component
-  if (view === 'CATALOG') {
+  if (!fields || view === 'CATALOG') {
     return rawData;
   }
   return {

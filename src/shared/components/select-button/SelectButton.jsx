@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ExpandIcon from '../../../../public/images/icon-arrow-down.svg';
-import CollapseIcon from '../../../../public/images/icon-arrow-up.svg';
-
 import './_select-button.scss';
 
 class SelectButton extends React.Component {
@@ -116,7 +113,7 @@ class SelectButton extends React.Component {
           className="select-button__wrapper"
           onClick={this.handleClick}
         >
-          <this.props.icon className="select-button__custom-icon" />
+          {this.props.icon && <span className="select-button__custom-icon">{this.props.icon}</span>}
           <div className="select-button__label">
             {this.state.label}
           </div>
@@ -126,13 +123,12 @@ class SelectButton extends React.Component {
           className="select-button__icon-wrapper"
           onClick={this.handleToggle}
         >
-          <span className="select-button__icon select-button__icon--expand">
-            <span className="u-sr-only">Uitklappen</span>
-            <ExpandIcon />
-          </span>
-          <span className="select-button__icon select-button__icon--collapse">
-            <span className="u-sr-only">Inklappen</span>
-            <CollapseIcon />
+          <span className={`
+            select-button__icon
+            select-button__icon-${this.state.isExpanded ? 'collapse' : 'expand'}
+          `}
+          >
+            <span className="u-sr-only">${this.state.isExpanded ? 'Inklappen' : 'Uitklappen'}</span>
           </span>
         </button>
 
@@ -164,6 +160,7 @@ class SelectButton extends React.Component {
 SelectButton.defaultProps = {
   className: '',
   handleChange: () => {},
+  icon: null,
   isDisabled: false,
   isExpanded: false,
   label: '',
@@ -174,7 +171,7 @@ SelectButton.defaultProps = {
 SelectButton.propTypes = {
   className: PropTypes.string,
   handleChange: PropTypes.func,
-  icon: PropTypes.func.isRequired,
+  icon: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   isDisabled: PropTypes.bool,
   isExpanded: PropTypes.bool,
   label: PropTypes.string, // eslint-disable-line react/no-unused-prop-types

@@ -1,7 +1,4 @@
 import reducer, {
-  FETCH_MAP_DETAIL_FAILURE,
-  FETCH_MAP_DETAIL_REQUEST,
-  FETCH_MAP_DETAIL_SUCCESS,
   fetchMapDetailFailure,
   fetchMapDetailSuccess,
   getAllResults,
@@ -13,6 +10,7 @@ import reducer, {
   getMapDetailGeometry,
   selectLatestMapDetail
 } from './map-detail';
+import { FETCH_MAP_DETAIL_SUCCESS, FETCH_MAP_DETAIL_FAILURE } from './constants';
 
 // REDUCER
 describe('reducer', () => {
@@ -28,13 +26,9 @@ describe('reducer', () => {
   });
 
   it('should handle FETCH_MAP_DETAIL_REQUEST', () => {
-    const startAction = {
-      type: FETCH_MAP_DETAIL_REQUEST,
-      endpoint: '123'
-    };
-    expect(reducer(initialState, startAction)).toEqual({
+    expect(reducer(initialState, getMapDetail('123'))).toEqual({
       byEndpoint: {},
-      currentEndpoint: startAction.endpoint,
+      currentEndpoint: '123',
       isLoading: true,
       error: ''
     });
@@ -227,17 +221,6 @@ describe('selectors', () => {
 
 // ACTION CREATORS
 describe('actions', () => {
-  describe('getMapDetail', () => {
-    it('should create an action to request the map detail', () => {
-      const expectedAction = {
-        type: FETCH_MAP_DETAIL_REQUEST,
-        endpoint: '123',
-        user: 'user'
-      };
-      expect(getMapDetail('123', 'user')).toEqual(expectedAction);
-    });
-  });
-
   describe('fetchMapDetailFailure', () => {
     it('should create an action if requests fails', () => {
       const expectedAction = {

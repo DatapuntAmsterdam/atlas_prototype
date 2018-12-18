@@ -2,16 +2,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SearchContainer from '../containers/SearchContainer';
 import MapContainer from '../../map/containers/map/MapContainer';
-import QuerySearchContainer from '../containers/QuerySearchContainer';
-import { getSearchQuery } from '../../shared/ducks/data-search/data-search';
+import QuerySearch from '../components/QuerySearch';
+import { getDataSearchLocation } from '../../shared/ducks/data-search/selectors';
 import { toMapAndPreserveQuery as toMapActionCreator } from '../../store/redux-first-router';
 import SplitScreen from '../components/SplitScreen/SplitScreen';
+import LocationSearchContainer from '../containers/LocationSearchContainer';
 
-const SearchPage = ({ query, toMap }) => {
-  if (query) {
-    return <QuerySearchContainer />;
+const SearchPage = ({ geoSearch, toMap }) => {
+  if (!geoSearch) {
+    return <QuerySearch />;
   }
   return (
     <SplitScreen
@@ -19,26 +19,22 @@ const SearchPage = ({ query, toMap }) => {
         <MapContainer isFullscreen={false} toggleFullscreen={toMap} />
       )}
       rightComponent={(
-        <SearchContainer />
+        <LocationSearchContainer />
       )}
     />
   );
 };
 
 const mapStateToProps = (state) => ({
-  query: getSearchQuery(state)
+  geoSearch: !!getDataSearchLocation(state)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   toMap: toMapActionCreator
 }, dispatch);
 
-SearchPage.defaultProps = {
-  query: undefined
-};
-
 SearchPage.propTypes = {
-  query: PropTypes.string,
+  geoSearch: PropTypes.bool.isRequired,
   toMap: PropTypes.func.isRequired
 };
 

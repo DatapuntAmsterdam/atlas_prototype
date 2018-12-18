@@ -25,10 +25,12 @@ import { VIEWS } from '../../../../../src/shared/ducks/data-selection/constants'
                 vm.targetLabel = 'Kaart weergeven';
                 vm.targetHover = 'Resultaten op de kaart weergeven';
                 vm.action = setView(VIEWS.LIST);
+                vm.targetIcon = 'kaart';
             } else {
                 vm.targetLabel = 'Tabel weergeven';
                 vm.targetHover = 'Resultaten in tabel weergeven';
                 vm.action = setView(VIEWS.TABLE);
+                vm.targetIcon = 'list';
             }
         });
     }

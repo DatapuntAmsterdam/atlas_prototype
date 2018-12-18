@@ -107,6 +107,24 @@ class HeaderSearchContainer extends React.Component {
     }
   }
 
+  // onSuggestionSelection(suggestion, shouldOpenInNewWindow) {
+  //   const {
+  //     onDetailLoad,
+  //     typedQuery
+  //   } = this.props;
+  //
+  //   piwikTracker(['trackEvent', 'auto-suggest', suggestion.category, typedQuery]);
+  //
+  //   if (shouldOpenInNewWindow) {
+  //     const newWindow = window.open(`${window.location.href}`, '_blank');
+  //     // setting uri to the window, as window.postMessage does not work for some reason
+  //     // (webpack overrides the data it seems)
+  //     newWindow.window.suggestionToLoadUri = suggestion.uri;
+  //   } else {
+  //     onDetailLoad(`${SHARED_CONFIG.API_ROOT}${suggestion.uri}`);
+  //   }
+  // }
+
   onFormSubmit() {
     const {
       activeSuggestion,

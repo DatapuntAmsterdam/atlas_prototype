@@ -4,6 +4,10 @@
   padding-bottom: 0;
   border-top: 2px solid $secondary-gray40;
   background-color: $primary-light;
+
+  &-link-label {
+    color: $secondary-gray60;
+  }
 }
 
 .c-data-selection-pagination__controls {
@@ -20,20 +24,32 @@
   width: 3rem;
   height: $button-size;
   border: 1px solid $secondary-gray20;
+  outline: none;
   text-align: center;
   vertical-align: middle;
+
+  &:hover,
+  &:focus {
+    border: 2px solid $primary-dark;
+  }
 }
 
 .c-data-selection-pagination__button {
   @extend %icon--border-hover;
-  @include icon-label-left("forward");
+  @include icon-label-left("forward", "", "");
 
   padding-right: $base-whitespace;
+  color: $secondary-gray60;
   vertical-align: middle;
 
   /* Display button without icon */
   &::before {
     display: none;
+  }
+
+  &:hover,
+  &:focus {
+    color: $primary-dark;
   }
 }
 
@@ -59,22 +75,86 @@
 
 .c-data-selection-pagination-link--first {
   @extend %icon--border-hover;
-  @include icon-label-right("first", "", "white");
+  @include icon-label-right("first", "", "");
   margin-right: $base-whitespace;
+
+  &::before {
+    @include icon("first", $secondary-gray60);
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      @include icon("first", $primary-dark);
+      background-color: $secondary-gray20;
+    }
+
+    .c-data-selection-pagination-link-label {
+      color: $primary-dark;
+    }
+  }
 }
 
 .c-data-selection-pagination-link--last {
   @extend %icon--border-hover;
-  @include icon-label-left("last", "", "white");
+  @include icon-label-left("last", "", "");
   margin-left: $base-whitespace;
+
+  &::before {
+    @include icon("last", $secondary-gray60);
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      @include icon("last", $primary-dark);
+      background-color: $secondary-gray20;
+    }
+
+    .c-data-selection-pagination-link-label {
+      color: $primary-dark;
+    }
+  }
 }
 
 .c-data-selection-pagination-link--previous {
   @extend %icon--border-hover;
-  @include icon-label-right("previous", "", "white");
+  @include icon-label-right("previous", "", "");
+
+  &::before {
+    @include icon("previous", $secondary-gray60);
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      @include icon("previous", $primary-dark);
+      background-color: $secondary-gray20;
+    }
+
+    .c-data-selection-pagination-link-label {
+      color: $primary-dark;
+    }
+  }
 }
 
 .c-data-selection-pagination-link--next {
   @extend %icon--border-hover;
-  @include icon-label-left("next", "", "white");
+  @include icon-label-left("next", "", "");
+
+  &::before {
+    @include icon("next", $secondary-gray60);
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      @include icon("next", $primary-dark);
+      background-color: $secondary-gray20;
+    }
+
+    .c-data-selection-pagination-link-label {
+      color: $primary-dark;
+    }
+  }
 }

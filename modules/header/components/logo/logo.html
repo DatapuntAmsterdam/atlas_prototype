@@ -1,13 +1,14 @@
-<div class="c-logo qa-logo"
-     ng-class="'c-logo--' + vm.size">
+<div class="c-logo qa-logo" ng-class="'c-logo--' + vm.size">
     <dp-link ng-click="vm.navigateHomeClick()" type="{{vm.homeType}}" class-name="c-logo__link" hover-text="Naar voorpagina Dataportaal">
-        <div class="c-logo__image-col qa-logo__image-col">
-            <img class="c-logo__image qa-logo__image"
-                 ng-src="/assets/images/logo-{{vm.size}}.svg"
-                 alt="Logo Gemeente Amsterdam">
-        </div>
-        <div class="c-logo__title-col qa-logo__title-col">
-            <span class="c-logo__title">City Data</span>
+        <div class="c-logo__container">
+            <div class="c-logo__image-col qa-logo__image-col">
+                <img class="c-logo__image qa-logo__image"
+                    ng-src="/assets/images/logo-{{vm.size}}.svg"
+                    alt="Logo Gemeente Amsterdam">
+            </div>
+            <div class="c-logo__title-col qa-logo__title-col">
+                <span class="c-logo__title">City Data</span>
+            </div
         </div>
     </dp-link>
 </div>

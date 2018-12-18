@@ -1,22 +1,22 @@
 const homepage = '.c-homepage';
-const statusBarInfo = '.c-straatbeeld-status-bar__info-item';
-const straatbeeld = '.c-straatbeeld';
+const statusBarInfo = '.c-panorama-status-bar__info-item';
+const panorama = '.c-panorama';
 
 describe('panorama module', () => {
   beforeEach(() => {
     cy.server();
-    cy.route('/panorama/recente_opnames/alle/*').as('getResults');
+    cy.route('/panorama/panoramas/*/adjacencies/?newest_in_range=true').as('getResults');
 
     // go to the homepage
     cy.visit('/');
     // the homepage should be visible
     cy.get(homepage).should('be.visible');
     // check if the link is in the dom and visible
-    cy.get('.qa-straatbeeld-link').should('exist').and('be.visible');
-    // the straatbeeld should not exist yet
-    cy.get(straatbeeld).should('not.exist');
+    cy.get('.qa-panorama-link').should('exist').and('be.visible');
+    // the panorama should not exist yet
+    cy.get(panorama).should('not.exist');
     // click on the link to go to the map
-    cy.get('.qa-straatbeeld-link').click();
+    cy.get('.qa-panorama-link').click();
 
     cy.wait('@getResults');
   });
@@ -26,7 +26,7 @@ describe('panorama module', () => {
       // the homepage should not be visible anymore
       cy.get(homepage).should('not.be.visible');
       // the map should be visible
-      cy.get(straatbeeld).should('exist').and('be.visible');
+      cy.get(panorama).should('exist').and('be.visible');
     });
   });
 
@@ -93,9 +93,9 @@ describe('panorama module', () => {
     });
   });
 
-  describe('user should be able to interact with the panorama', () => {
+  describe.only('user should be able to interact with the panorama', () => {
     it('should remember the state when closing the pano, and update to search results when clicked in map', () => {
-      const panoUrl = '/#?dte=bag%2Fopenbareruimte%2F03630000004153%2F&mpb=topografie&mpz=11&mpo=pano::T&mpv=52.3663002:4.883519&sbf=Cu&sbh=qQ&sbi=TMX7316010203-000714_pano_0001_002608&sbl=ZREfS:3IuGM';
+      const panoUrl = '/datasets/panorama/TMX7316010203-000714_pano_0001_002608?heading=-35.000000000000064&lagen=cGFubzox&lat=52.3734172850645&legenda=false&lng=4.8935938669686';
       let newUrl;
 
       cy.defineGeoSearchRoutes();
@@ -114,13 +114,13 @@ describe('panorama module', () => {
 
       cy.wait('@getOpenbareRuimte');
       cy.wait('@getPanoThumbnail');
-      cy.get('img.c-straatbeeld-thumbnail--img').should('exist').and('be.visible');
+      cy.get('img.c-panorama-thumbnail--img').should('exist').and('be.visible');
       cy.get('h2.qa-title').should('exist').and('be.visible').contains('Leidsegracht');
-      cy.get('img.c-straatbeeld-thumbnail--img').click();
+      cy.get('img.c-panorama-thumbnail--img').click();
 
       cy.wait('@getResults');
       cy.location().then((loc) => {
-        newUrl = loc.pathname + loc.hash;
+        newUrl = loc.pathname + loc.search;
         expect(newUrl).to.equal(panoUrl);
       });
 
@@ -141,14 +141,14 @@ describe('panorama module', () => {
       cy.wait('@getResults');
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
-        newUrl = loc.pathname + loc.hash;
+        newUrl = loc.pathname + loc.search;
         expect(newUrl).not.to.equal(panoUrl);
       });
 
-      cy.get('button.c-straatbeeld__close').click();
-      cy.get('img.c-straatbeeld-thumbnail--img').should('exist').and('be.visible');
+      cy.get('button.c-panorama__close').click();
+      cy.get('img.c-panorama-thumbnail--img').should('exist').and('be.visible');
       cy.get('h2.qa-title').should('exist').and('be.visible').contains('Leidsegracht');
-      cy.get('img.c-straatbeeld-thumbnail--img').click();
+      cy.get('img.c-panorama-thumbnail--img').click();
 
       cy.get('.leaflet-container').click(20, 100);
 
@@ -156,9 +156,9 @@ describe('panorama module', () => {
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
         const thisUrl = loc.pathname + loc.hash;
-        expect(thisUrl).to.not.equal(newUrl);
+        expect(thisUrl).not.to.equal(newUrl);
       });
-      cy.get('button.c-straatbeeld__close').click();
+      cy.get('button.c-panorama__close').click();
 
       cy.waitForGeoSearch();
       cy.get('h1.o-header__title').contains('Resultaten').should('exist').and('be.visible');

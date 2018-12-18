@@ -49,7 +49,8 @@
   }
 
   &__arrow {
-    fill: $secondary-gray60;
+    @include icon-sprite("icon-arrow-right", $secondary-gray60, $secondary-gray60, 24px);
+
     flex-shrink: 0;
     height: 24px;
     width: 24px;

@@ -15,8 +15,8 @@ import {
 } from '../../ducks/map/map-selectors';
 
 import {
-  MAP_BOUNDING_BOX_SILENT,
-  MAP_PAN_SILENT,
+  MAP_BOUNDING_BOX,
+  MAP_PAN,
   setSelectedLocation,
   updateBoundingBox,
   updatePan,
@@ -35,10 +35,7 @@ import {
 } from '../../ducks/panel-layers/map-panel-layers';
 import { isDrawingActive } from '../../services/draw-tool/draw-tool';
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
-import {
-  getClusterMarkers,
-  getGeoJsons
-} from '../../../shared/ducks/data-selection/selectors';
+import { getClusterMarkers, getGeoJsons } from '../../../shared/ducks/data-selection/selectors';
 
 jest.mock('../../../shared/ducks/data-selection/selectors');
 jest.mock('../../ducks/base-layers/map-base-layers');
@@ -404,8 +401,8 @@ describe('LeafletContainer', () => {
       it('should trigger updatePan and updateBoundingBox', () => {
         const event = { center: { lat: 1, lon: 5 } };
 
-        updatePan.mockImplementation(() => ({ type: MAP_PAN_SILENT }));
-        updateBoundingBox.mockImplementation(() => ({ type: MAP_BOUNDING_BOX_SILENT }));
+        updatePan.mockImplementation(() => ({ type: MAP_PAN }));
+        updateBoundingBox.mockImplementation(() => ({ type: MAP_BOUNDING_BOX }));
 
         wrapperInstance.handlePan(event);
         expect(store.dispatch).toHaveBeenCalledWith(updatePan());
@@ -419,11 +416,11 @@ describe('LeafletContainer', () => {
       it('should trigger updateBoundingBox', () => {
         const event = {};
         const action = {
-          type: MAP_BOUNDING_BOX_SILENT,
+          type: MAP_BOUNDING_BOX,
           payload: event
         };
         isDrawingActive.mockImplementation(() => true);
-        updateBoundingBox.mockImplementation(() => ({ type: MAP_BOUNDING_BOX_SILENT }));
+        updateBoundingBox.mockImplementation(() => ({ type: MAP_BOUNDING_BOX }));
 
         wrapperInstance.handleResize(event);
         expect(store.dispatch).toHaveBeenCalledWith(updateBoundingBox(action, true));

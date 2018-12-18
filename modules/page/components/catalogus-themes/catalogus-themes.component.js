@@ -1,4 +1,4 @@
-import { routing } from '../../../../src/app/routes';
+import { toDatasetsWithFilter } from '../../../../src/store/redux-first-router';
 
 (function () {
     'use strict';
@@ -17,12 +17,7 @@ import { routing } from '../../../../src/app/routes';
         const vm = this;
 
         vm.themes = CATALOGUS_THEMES_CONFIG.map(theme => {
-            const linkTo = {
-                type: routing.datasets.type,
-                query: {
-                    filter_theme: theme.slug
-                }
-            };
+            const linkTo = toDatasetsWithFilter(theme.slug);
             return {
                 ...theme,
                 linkTo

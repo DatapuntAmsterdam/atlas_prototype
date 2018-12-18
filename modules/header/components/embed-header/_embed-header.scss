@@ -6,11 +6,17 @@ $embed-header-padding: 46px;
 }
 
 .c-embed-header__close {
-  @include icon-button("close", "transparent", "red");
+  @include icon-button("close", $secondary-gray60, $primary-dark);
 
   position: absolute;
   top: -($embed-header-padding - $base-whitespace);
   right: -($embed-header-padding - $base-whitespace);
+  background-color: $primary-light;
+
+  &:hover,
+  &:focus {
+    background-color: $secondary-gray20;
+  }
 }
 
 .c-embed-header-form__input {
@@ -29,7 +35,7 @@ $embed-header-padding: 46px;
   }
 
   &:focus {
-    border-color: $primary-dark;
+    border: 2px solid $primary-dark;
   }
 }
 

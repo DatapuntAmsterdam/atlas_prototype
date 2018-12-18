@@ -13,9 +13,13 @@ exports[`rendering should render with default value 1`] = `
     className="select-button__wrapper"
     onClick={[Function]}
   >
-    <Component
+    <span
       className="select-button__custom-icon"
-    />
+    >
+      <span
+        className="icon icon--topography"
+      />
+    </span>
     <div
       className="select-button__label"
     >
@@ -27,24 +31,17 @@ exports[`rendering should render with default value 1`] = `
     onClick={[Function]}
   >
     <span
-      className="select-button__icon select-button__icon--expand"
+      className="
+            select-button__icon
+            select-button__icon-expand
+          "
     >
       <span
         className="u-sr-only"
       >
+        $
         Uitklappen
       </span>
-      <Component />
-    </span>
-    <span
-      className="select-button__icon select-button__icon--collapse"
-    >
-      <span
-        className="u-sr-only"
-      >
-        Inklappen
-      </span>
-      <Component />
     </span>
   </button>
   <ul
@@ -112,9 +109,13 @@ exports[`rendering should render with no options 1`] = `
     className="select-button__wrapper"
     onClick={[Function]}
   >
-    <Component
+    <span
       className="select-button__custom-icon"
-    />
+    >
+      <span
+        className="icon icon--topography"
+      />
+    </span>
     <div
       className="select-button__label"
     />
@@ -124,24 +125,17 @@ exports[`rendering should render with no options 1`] = `
     onClick={[Function]}
   >
     <span
-      className="select-button__icon select-button__icon--expand"
+      className="
+            select-button__icon
+            select-button__icon-expand
+          "
     >
       <span
         className="u-sr-only"
       >
+        $
         Uitklappen
       </span>
-      <Component />
-    </span>
-    <span
-      className="select-button__icon select-button__icon--collapse"
-    >
-      <span
-        className="u-sr-only"
-      >
-        Inklappen
-      </span>
-      <Component />
     </span>
   </button>
   <ul

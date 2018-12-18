@@ -7,9 +7,7 @@ jest.mock('../../../store/query-synchronization');
 
 describe('Data Selection Reducer', () => {
   beforeEach(() => {
-    getStateFromQuery.mockImplementation(() => ({
-      foo: 'bar'
-    }));
+    getStateFromQuery.mockImplementation(() => ({}));
   });
 
   /**
@@ -74,7 +72,7 @@ describe('Data Selection Reducer', () => {
     ),
     ...getExpectations(
       actionCreators.receiveDataSelectionFailure.name,
-      ['isLoading', 'authError', 'errorMessage', 'dataset', 'results', 'markers'],
+      ['isLoading', 'authError', 'errorMessage', 'dataset', 'result', 'markers'],
       [{ error: 'error message' }]
     )
   };
@@ -93,7 +91,7 @@ describe('Data Selection Reducer', () => {
 
   describe('when a route type is dispatched', () => {
     it('should set dataset and an object from getStateFromQuery if meta.query is set', () => {
-      const expectedKeysToChange = ['dataset', 'foo'];
+      const expectedKeysToChange = ['dataset'];
       const result = reducer({}, {
         type: routing.addresses.type,
         meta: {
@@ -105,7 +103,7 @@ describe('Data Selection Reducer', () => {
     });
 
     it('should set the dataset and view if meta.query is not set', () => {
-      const expectedKeysToChange = ['dataset', 'view'];
+      const expectedKeysToChange = ['dataset'];
       const result = reducer({}, {
         type: routing.establishments.type
       });

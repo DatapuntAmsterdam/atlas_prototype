@@ -1,18 +1,13 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getLayers } from '../../ducks/panel-layers/map-panel-layers';
-import { getPanoramaYear } from '../../../shared/ducks/panorama/panorama';
+import { getPanoramaHistory } from '../../../panorama/ducks/panorama';
 import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/map';
 import { getMapZoom } from '../../ducks/map/map-selectors';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
-import {
-  getSelectionType,
-  SELECTION_TYPE,
-  setSelection
-} from '../../../shared/ducks/selection/selection';
-import { getImageDataByLocation } from '../../../shared/services/panorama-api/panorama-api';
-import { getPage, toPanorama, toMapAndPreserveQuery } from '../../../store/redux-first-router';
-import { fetchMapSearchResultsRequest } from '../../../shared/ducks/data-search/data-search';
-import PAGES from '../../../app/pages';
+import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection';
+import { getImageDataByLocation } from '../../../panorama/services/panorama-api/panorama-api';
+import { toPanorama } from '../../../store/redux-first-router';
+import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
 
 function getHeadingDegrees([x1, y1], [x2, y2]) {
   return (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
@@ -26,9 +21,9 @@ export function* switchClickAction(action) {
   const { location } = action.payload;
 
   if (selectionType === SELECTION_TYPE.PANORAMA) {
-    const year = yield select(getPanoramaYear);
+    const history = yield select(getPanoramaHistory);
     const locationArray = latitudeLongitudeToArray(location);
-    const imageData = yield call(getImageDataByLocation, locationArray, year);
+    const imageData = yield call(getImageDataByLocation, locationArray, history);
 
     // The view direction should be towards the location that the user clicked
     const heading = getHeadingDegrees(imageData.location, locationArray);
@@ -47,15 +42,7 @@ export function* switchClickAction(action) {
         }
       });
     } else {
-      const currentPage = yield select(getPage);
-      yield put(setSelection(SELECTION_TYPE.POINT, location));
-
-      if (currentPage === PAGES.DATA_SEARCH) {
-        // already on search page, don't switch pages
-      } else {
-        yield put(toMapAndPreserveQuery());
-      }
-      yield put(fetchMapSearchResultsRequest(location));
+      yield put(setGeoLocation(location));
     }
   }
 }

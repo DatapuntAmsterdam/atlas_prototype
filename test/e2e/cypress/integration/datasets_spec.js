@@ -22,7 +22,7 @@ describe('datasets module', () => {
 
     it('should open the datasets catalogus without a filter and see results', () => {
       // click on the link to go to the datasets without a specified catalogus theme
-      cy.get('.c-homepage__block--datasets').find('.qa-dp-link').click();
+      cy.get('.c-homepage__block--datasets').find('.qa-button-datasets').click();
       cy.wait('@getResults');
 
       // the homepage should not be visible anymore

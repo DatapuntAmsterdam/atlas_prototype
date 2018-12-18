@@ -11,8 +11,10 @@ exports[`MapContainer should render 1`] = `
       getLeafletInstance={[Function]}
     />
     <ToggleFullscreen
+      alignLeft={false}
       isFullscreen={false}
       onToggleFullscreen={[Function]}
+      title="Kaart"
     />
     <Connect(MapPanelContainer)
       isMapPanelVisible={true}
@@ -32,8 +34,10 @@ exports[`MapContainer should render with drawingmode: draw 1`] = `
       getLeafletInstance={[Function]}
     />
     <ToggleFullscreen
+      alignLeft={false}
       isFullscreen={false}
       onToggleFullscreen={[Function]}
+      title="Kaart"
     />
     <Connect(MapPanelContainer)
       isMapPanelVisible={true}

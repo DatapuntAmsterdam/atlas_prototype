@@ -2,7 +2,7 @@
 
 exports[`HomepageAddressBlock should render links 1`] = `
 <HomepageBlock
-  blockIsLink={false}
+  blockIsLink={true}
   classes=""
   description="Selecteer en download als spreadsheet"
   hasTallDescription={true}
@@ -14,79 +14,77 @@ exports[`HomepageAddressBlock should render links 1`] = `
   title="Adressentabel"
 >
   <div
-    className="homepage-block__item "
-    key="ADRESSEN"
+    className="homepage-block"
   >
-    <Connect(Link)
-      className="c-link homepage-block__link"
-      title="Bekijk Adressentabel"
-      to={
-        Object {
-          "type": "atlasRouter/ADDRESSES",
-        }
-      }
+    <div
+      className="homepage-block__item "
+      key="ADRESSEN"
     >
-      <span
-        className="homepage-block__icon"
-      >
-        <Component />
-      </span>
-      <span
-        className="homepage-block__label"
-      >
-        Adressentabel
-      </span>
-    </Connect(Link)>
-  </div>
-  <div
-    className="homepage-block__item "
-    key="HANDELSREGISTER"
-  >
-    <Connect(Link)
-      className="c-link homepage-block__link"
-      title="Bekijk handelsregister-tabel"
-      to={
-        Object {
-          "type": "atlasRouter/ESTABLISHMENTS",
+      <Connect(Link)
+        className="c-link homepage-block__link"
+        title="Bekijk Adressentabel"
+        to={
+          Object {
+            "type": "atlasRouter/ADDRESSES",
+          }
         }
-      }
+      >
+        <span
+          className="homepage-block__icon homepage-block__icon--bag"
+        />
+        <span
+          className="homepage-block__label"
+        >
+          Adressentabel
+        </span>
+      </Connect(Link)>
+    </div>
+    <div
+      className="homepage-block__item "
+      key="HANDELSREGISTER"
     >
-      <span
-        className="homepage-block__icon"
-      >
-        <Component />
-      </span>
-      <span
-        className="homepage-block__label"
-      >
-        Handelsregister-tabel
-      </span>
-    </Connect(Link)>
-  </div>
-  <div
-    className="homepage-block__item "
-    key="KADASTER"
-  >
-    <Connect(Link)
-      className="c-link homepage-block__link"
-      title="Bekijk kadaster-tabel"
-      to={
-        Object {
-          "type": "atlasRouter/CADASTRAL_OBJECTS",
+      <Connect(Link)
+        className="c-link homepage-block__link"
+        title="Bekijk handelsregister-tabel"
+        to={
+          Object {
+            "type": "atlasRouter/ESTABLISHMENTS",
+          }
         }
-      }
+      >
+        <span
+          className="homepage-block__icon homepage-block__icon--hr"
+        />
+        <span
+          className="homepage-block__label"
+        >
+          Handelsregister-tabel
+        </span>
+      </Connect(Link)>
+    </div>
+    <div
+      className="homepage-block__item "
+      key="KADASTER"
     >
-      <span
-        className="homepage-block__icon"
+      <Connect(Link)
+        className="c-link homepage-block__link"
+        title="Bekijk kadaster-tabel"
+        to={
+          Object {
+            "type": "atlasRouter/CADASTRAL_OBJECTS",
+          }
+        }
       >
-        <Component />
-      </span>
-      <span
-        className="homepage-block__label"
-      >
-        Kadaster-tabel
-      </span>
-    </Connect(Link)>
+        <span
+          className="homepage-block__icon homepage-block__icon--brk"
+        />
+        <span
+          className="homepage-block__label"
+        >
+          Kadaster-tabel
+        </span>
+      </Connect(Link)>
+    </div>
   </div>
 </HomepageBlock>
 `;

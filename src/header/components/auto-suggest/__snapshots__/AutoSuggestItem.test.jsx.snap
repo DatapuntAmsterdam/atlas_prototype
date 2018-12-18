@@ -1,23 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AutoSuggestItem should render the item 1`] = `
-<li
-  className=""
->
+<li>
   <button
     className="
-        auto-suggest__dropdown-item
+          auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
     onClick={[MockFunction]}
     type="button"
   >
-    <div>
+    <div
+      className=""
+    >
       <span
         className="icon"
-      >
-        <Component />
-      </span>
+      />
       <span
         dangerouslySetInnerHTML={
           Object {

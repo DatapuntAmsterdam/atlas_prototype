@@ -2,10 +2,14 @@ $image-tall-offset-top: 20px;
 $image-tall-offset-left: -26px;
 $image-tall-width: 85px;
 $image-tall-height: 68px;
-$title-short-offset-left: 86px;
+$title-short-offset-left: 63px;
 $title-tall-offset-left: 100px;
 $title-short-height: 47px;
 $title-tall-height: 61px;
+$title-tall-hover-width: 220px;
+$title-tall-hover-height: 100px;
+$title-short-hover-width: 140px;
+$title-short-hover-height: 40px;
 
 .c-logo {
   @include font-size($xl-header-font);
@@ -14,6 +18,29 @@ $title-tall-height: 61px;
   height: 100%;
   color: $primary-dark;
   cursor: pointer;
+
+  &__link:hover, // sass-lint:disable-line force-pseudo-nesting
+  &__link:focus {  // sass-lint:disable-line force-pseudo-nesting
+    .c-logo__container {
+      border-bottom: 2px solid $primary-contrast;
+    }
+  }
+}
+
+.c-logo__container {
+  position: relative;
+
+  .c-logo--short & {
+    position: relative;
+    left: 2 * $base-whitespace + 3px;
+    width: $title-short-hover-width;
+    height: $title-short-hover-height;
+  }
+
+  .c-logo--tall & {
+    width: $title-tall-hover-width;
+    height: $title-tall-hover-height;
+  }
 }
 
 .c-logo__link {
@@ -44,7 +71,7 @@ $title-tall-height: 61px;
   .c-logo--short & {
     top: $base-whitespace;
     right: $base-whitespace;
-    left: $base-whitespace;
+    left: -$base-whitespace - 3px;
   }
 
   .c-logo--tall & {

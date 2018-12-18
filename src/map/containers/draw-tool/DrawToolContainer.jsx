@@ -106,15 +106,11 @@ class DrawToolContainer extends React.Component {
       }
       this.setState({ drawingMode: props.drawingMode });
     }
-
-    if (this.state.dataSelection !== props.dataSelection) {
-      this.setState({ dataSelection: props.dataSelection });
-      this.onUpdateShape(props.currentShape);
-    }
   }
 
   componentWillUnmount() {
-    this.props.onMapClear();
+    // TODO DP-6340: side effect. this resets the visible layers after featching data?
+    // this.props.onMapClear();
   }
 
   onFinishShape(polygon) {
@@ -127,7 +123,6 @@ class DrawToolContainer extends React.Component {
         description: `${polygon.distanceTxt} en ${polygon.areaTxt}`
       });
 
-      // this.props.onStraatbeeldOff();
       this.props.onEndDrawing({ polygon });
       this.props.onSetPageName({ name: null });
     } else if (has2Markers) {
@@ -205,7 +200,6 @@ DrawToolContainer.propTypes = {
   onStartDrawing: PropTypes.func.isRequired,
   onEndDrawing: PropTypes.func.isRequired,
   onSetPageName: PropTypes.func.isRequired,
-  // onStraatbeeldOff: PropTypes.func.isRequired,
   onMapClear: PropTypes.func.isRequired
 };
 

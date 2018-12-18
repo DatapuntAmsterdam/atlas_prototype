@@ -8,16 +8,16 @@ exports[`MapPanelHandle should render children by default 1`] = `
   "
 >
   <button
-    className="map-panel-handle__toggle"
+    className="
+        map-panel-handle__toggle
+        map-panel-handle__toggle--icon-collapse
+      "
     onClick={[Function]}
   >
-    <span>
-      <Component />
-      <span
-        className="u-sr-only"
-      >
-        Kaartlagen verbergen
-      </span>
+    <span
+      className="u-sr-only"
+    >
+      Kaartlagen verbergen
     </span>
   </button>
   <div

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount, shallow } from 'enzyme';
 import SelectButton from './SelectButton';
-import Icon from '../../../../public/images/icon-aerial.svg';
 
 const options = [
   {
@@ -25,7 +24,7 @@ describe('SelectButton', () => {
       <SelectButton
         className="someclass"
         handleChange={handleChange}
-        icon={Icon}
+        icon={<span className="icon icon--topography" />}
         isDisabled={false}
         name="topography"
         options={options}
@@ -40,7 +39,7 @@ describe('SelectButton', () => {
     const wrapper = mount(
       <SelectButton
         className="someclass"
-        icon={Icon}
+        icon={<span className="icon icon--topography" />}
         isDisabled={false}
         name="topography"
         options={options}
@@ -58,7 +57,7 @@ describe('SelectButton', () => {
       <SelectButton
         className="someclass"
         handleChange={handleChange}
-        icon={Icon}
+        icon={<span className="icon icon--topography" />}
         isDisabled={false}
         name="topography"
         options={options}
@@ -76,7 +75,7 @@ describe('SelectButton', () => {
     const wrapper = mount(
       <SelectButton
         className="someclass"
-        icon={Icon}
+        icon={<span className="icon icon--topography" />}
         isDisabled={false}
         name="topography"
         options={options}
@@ -100,7 +99,7 @@ describe('SelectButton', () => {
     const wrapper = mount(
       <SelectButton
         className="someclass"
-        icon={Icon}
+        icon={<span className="icon icon--topography" />}
         isDisabled={false}
         name="topography"
         options={options}
@@ -124,7 +123,7 @@ describe('rendering', () => {
     const wrapper = shallow(
       <SelectButton
         className="someclass"
-        icon={Icon}
+        icon={<span className="icon icon--topography" />}
         isDisabled={isDisabled}
         name="topography"
         options={options}
@@ -137,7 +136,7 @@ describe('rendering', () => {
     const wrapper = shallow(
       <SelectButton
         className="someclass"
-        icon={Icon}
+        icon={<span className="icon icon--topography" />}
         isDisabled={false}
         name="topography"
         options={options}
@@ -153,7 +152,7 @@ describe('rendering', () => {
   it('should render with no options', () => {
     const wrapper = shallow(
       <SelectButton
-        icon={Icon}
+        icon={<span className="icon icon--topography" />}
         name="topography"
       />
     );

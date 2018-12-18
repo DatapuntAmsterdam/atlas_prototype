@@ -1,4 +1,2 @@
-<div>
-    <a class="o-btn o-btn--link c-anchor-link__link {{vm.className}} qa-anchor-link"
-            ng-click="vm.scrollTo(vm.link)"><ng-transclude></ng-transclude></a>
-</div>
+    <a class="o-btn o-btn--link c-anchor-link__link {{vm.className}} qa-anchor-link" tabindex="0"
+            ng-click="vm.scrollTo(vm.link)" ng-keydown="vm.onKeydown($event, vm.link)" ><ng-transclude></ng-transclude></a>

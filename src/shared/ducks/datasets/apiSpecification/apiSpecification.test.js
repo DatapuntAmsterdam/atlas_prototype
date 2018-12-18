@@ -7,7 +7,8 @@ import reducer, {
 
 const initialState = {
   isLoading: false,
-  error: null
+  error: null,
+  data: {}
 };
 describe('data-selection-catalog reducer', () => {
   it('should return the initial state', () => {
@@ -43,7 +44,8 @@ describe('data-selection-catalog reducer', () => {
     };
     expect(reducer({}, updateAction)).toEqual({
       error: 'Error',
-      isLoading: false
+      isLoading: false,
+      data: {}
     });
   });
 });

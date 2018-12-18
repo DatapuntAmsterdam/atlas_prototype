@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AutoSuggestCategory from './AutoSuggestCategory';
+import AutoSuggestCategory, { MORE_RESULTS_INDEX } from './AutoSuggestCategory';
 
 describe('AutoSuggestCategory', () => {
   let props;
@@ -56,7 +56,10 @@ describe('AutoSuggestCategory', () => {
     const mockEvent = { event: 'event' };
     const itemWrapper = wrapper.find('AutoSuggestItem').at(3).dive();
     itemWrapper.find('button').simulate('click', mockEvent);
-    expect(props.onSuggestionSelection).toHaveBeenCalledWith({ index: -1 }, mockEvent);
+    expect(props.onSuggestionSelection).toHaveBeenCalledWith({
+      index: MORE_RESULTS_INDEX,
+      label: '...'
+    }, mockEvent);
   });
 
   it('should render no ellipsis when there are 3 or less results', () => {

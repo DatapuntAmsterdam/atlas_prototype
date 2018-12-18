@@ -10,22 +10,13 @@ describe('The dp-link component', function () {
         mockedPayload,
         mockedState,
         mockedStateUrlConverter,
-        mockedTargetState,
         mockedTargetPath;
 
     beforeEach(function () {
         mockedActions = {
-            ACTION_WITH_LINK: {
-                id: 'ACTION_WITH_LINK',
-                isButton: false
-            },
-            ACTION_WITH_BUTTON: {
-                id: 'ACTION_WITH_BUTTON',
-                isButton: true
-            },
-            ACTION_WITHOUT_BUTTON_CONFIG: {
-                id: 'ACTION_WITHOUT_BUTTON_CONFIG'
-            }
+            ACTION_WITH_LINK: 'ACTION_WITH_LINK',
+            ACTION_WITH_BUTTON: 'ACTION_WITH_BUTTON',
+            ACTION_WITHOUT_BUTTON_CONFIG: 'ACTION_WITHOUT_BUTTON_CONFIG'
         };
 
         angular.mock.module(
@@ -112,33 +103,12 @@ describe('The dp-link component', function () {
         return component;
     }
 
-    it('depending on the specified type (ACTION) a button or link is shown', function () {
-        let component;
-
-        // When using ACTION_WITH_LINK
-        component = getComponent(null, null, 'ACTION_WITH_LINK', mockedPayload);
-        expect(component.find('a').length).toBe(1);
-        expect(component.find('button').length).toBe(0);
-
-        // When using ACTION_WITH_BUTTON
-        component = getComponent(null, null, 'ACTION_WITH_BUTTON', mockedPayload);
-        expect(component.find('button').length).toBe(1);
-        expect(component.find('a').length).toBe(0);
-    });
-
-    it('shows a button when there is no isButton variabele present for this ACTION', function () {
-        // When using ACTION_WITH_LINK
-        const component = getComponent(null, null, 'ACTION_WITHOUT_BUTTON_CONFIG', mockedPayload);
-        expect(component.find('a').length).toBe(1);
-        expect(component.find('button').length).toBe(0);
-    });
-
     it('can have a custom className', function () {
         let component;
 
         // A link with a custom class
         component = getComponent('my-special-class', null, 'ACTION_WITH_LINK', mockedPayload);
-        expect(component.find('a').attr('class')).toContain('my-special-class');
+        expect(component.find('button').attr('class')).toContain('my-special-class');
 
         // A button with a custom class
         component = getComponent('my-special-class', null, 'ACTION_WITH_BUTTON', mockedPayload);
@@ -150,7 +120,7 @@ describe('The dp-link component', function () {
 
         // A link with the default class
         component = getComponent(null, null, 'ACTION_WITH_LINK', mockedPayload);
-        expect(component.find('a').attr('class')).toContain('o-btn o-btn--link');
+        expect(component.find('button').attr('class')).toContain('o-btn o-btn--link');
 
         // A button with the default class
         component = getComponent(null, null, 'ACTION_WITH_BUTTON', mockedPayload);
@@ -162,7 +132,7 @@ describe('The dp-link component', function () {
 
         // A link with hover text
         component = getComponent(null, 'Look at me!', 'ACTION_WITH_LINK', mockedPayload);
-        expect(component.find('a').attr('title')).toContain('Look at me!');
+        expect(component.find('button').attr('title')).toContain('Look at me!');
 
         // A button with hover text
         component = getComponent(null, 'Woohoo!', 'ACTION_WITH_BUTTON', mockedPayload);
@@ -189,31 +159,8 @@ describe('The dp-link component', function () {
         });
     });
 
-    it('sets the href attribute for actions with a link', function () {
-        const component = getComponent(null, null, 'ACTION_WITH_LINK', mockedPayload);
-
-        expect(component.find('a').attr('href')).toBe(mockedTargetPath);
-
-        // The value for the href attribute is composed by several injected dependencies, making sure these are used
-        expect(mockedReducer).toHaveBeenCalledWith(
-            mockedState,
-            {
-                type: mockedActions.ACTION_WITH_LINK,
-                payload: mockedPayload
-            }
-        );
-        expect(mockedStateUrlConverter.state2url).toHaveBeenCalledWith(mockedTargetState);
-    });
-
-    it('transcludes content without adding whitespace', function () {
-        let component;
-
-        // A link with transcluded content
-        component = getComponent(null, null, 'ACTION_WITH_LINK', mockedPayload);
-        expect(component.find('a').text()).toBe('Transcluded text');
-
-        // A button with transcluded content
-        component = getComponent(null, null, 'ACTION_WITH_BUTTON', mockedPayload);
-        expect(component.find('button').text()).toBe('Transcluded text');
+    it('should render an empty link', () => {
+        const component = getComponent(null, null, 'ACTION_WITH_LINK', null);
+        expect(component.find('button').attr('class')).toEqual('o-btn o-btn--link');
     });
 });

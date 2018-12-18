@@ -3,7 +3,5 @@
 exports[`Checkbox should render everything 1`] = `
 <span
   className="loading-indicator"
->
-  <Component />
-</span>
+/>
 `;

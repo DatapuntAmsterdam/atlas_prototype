@@ -12,7 +12,7 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
   const params = {
     ...activeFilters,
     zoom: zoomLevel,
-    bbox: {
+    bbox: JSON.stringify({
       _northEast: {
         lat: boundingBox.northEast.latitude,
         lng: boundingBox.northEast.longitude
@@ -21,7 +21,7 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
         lat: boundingBox.southWest.latitude,
         lng: boundingBox.southWest.longitude
       }
-    }
+    })
   };
   return boundingBox ? getByUrl(sharedConfig.API_ROOT + config.ENDPOINT_MARKERS, params)
       .then((data) => ({

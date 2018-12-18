@@ -1,3 +1,4 @@
+import get from 'lodash.get';
 import {
     setGlobalError
 } from '../../../../src/shared/ducks/error-message';
@@ -9,9 +10,7 @@ import {
         .module('dpShared')
         .factory('httpStatus', httpStatusFactory);
 
-    httpStatusFactory.$inject = [
-        '$window'
-    ];
+    httpStatusFactory.$inject = ['$window'];
 
     function httpStatusFactory ($window) {
         return {
@@ -25,7 +24,10 @@ import {
         }
 
         function registerError (errorType) {
-            $window.reduxStore.dispatch(setGlobalError(errorType));
+            const dispatch = get($window, 'reduxStore.dispatch');
+            if (dispatch) {
+                dispatch(setGlobalError(errorType));
+            }
         }
     }
 })();

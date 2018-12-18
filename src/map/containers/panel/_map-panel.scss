@@ -2,6 +2,7 @@
 $map-panel-heading-height: 33px;
 $map-panel-offset: 130px;
 $map-panel-max-width: 444px;
+$handle-height: 24px;
 
 .map-panel {
   background-color: $primary-light;
@@ -45,15 +46,16 @@ $map-panel-max-width: 444px;
         cursor: pointer;
       }
     }
-  }
 
-  &__heading-icon {
-    fill: $secondary-gray60;
-    height: 24px;
-    width: 24px;
+    &-icon {
+      @include icon-sprite("icon-map-layers", $secondary-gray60, $primary-dark, $handle-height);
+      height: $handle-height;
+      width: $handle-height;
+    }
   }
 
   &__heading-title {
+    color: $secondary-gray60;
     flex-grow: 1;
     font-family: "Avenir LT W01 85 Heavy";
     font-size: 16px;
@@ -79,31 +81,44 @@ $map-panel-max-width: 444px;
     .map-panel--collapsed & {
       border: solid 1px $secondary-gray20;
     }
-  }
 
-  &__toggle-icon {
-    fill: $secondary-gray60;
-    height: 24px;
-    width: 24px;
+    &--icon {
+      height: $handle-height;
+      width: $handle-height;
 
-    .map-panel--collapsed & {
-      fill: $secondary-gray60;
+      &-collapse {
+        @include icon-sprite("icon-arrow-down", $secondary-gray60, $primary-dark, $handle-height);
+      }
+
+      &-expand {
+        @include icon-sprite("icon-arrow-up", $secondary-gray60, $primary-dark, $handle-height);
+      }
     }
 
-    .map-panel--collapsed &--expanded {
-      display: none;
-    }
+    &:hover,
+    &:focus {
+      .map-panel__heading-title {
+        color: $primary-dark;
+      }
 
-    .map-panel--expanded &--collapsed {
-      display: none;
+      .map-panel__heading-icon {
+        @include icon-sprite("icon-map-layers", $primary-dark, $primary-dark, $handle-height);
+      }
+
+      .map-panel__toggle--icon-collapse {
+        @include icon-sprite("icon-arrow-down", $primary-dark, $primary-dark, $handle-height);
+      }
+
+      .map-panel__toggle--icon-expand {
+        @include icon-sprite("icon-arrow-up", $primary-dark, $primary-dark, $handle-height);
+      }
     }
   }
 
   .scroll-wrapper {
     max-height: calc(100% - #{$dashboard-heading-height} - #{$map-panel-offset} - #{$map-panel-heading-height});
     overflow-x: hidden;
-    overflow-y: auto;
-    // NB: Workaround to force smooth scrolling on Chrome
+    overflow-y: auto; // NB: Workaround to force smooth scrolling on Chrome
     will-change: transform;
 
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { //sass-lint:disable-line no-vendor-prefixes
@@ -115,8 +130,7 @@ $map-panel-max-width: 444px;
   .is-print-mode & {
     height: auto;
     max-height: none;
-    position: absolute;
-    // Make sure the width is fixed
+    position: absolute; // Make sure the width is fixed
     width: $map-panel-max-width;
 
 
@@ -130,9 +144,7 @@ $map-panel-max-width: 444px;
 
     .scroll-wrapper {
       height: auto;
-    }
-
-    // This hack makes sure IE also has a white background when printing
+    } // This hack makes sure IE also has a white background when printing
     // https://stackoverflow.com/a/27822161
     @media print {
       &::before {
@@ -198,25 +210,5 @@ $map-panel-max-width: 444px;
 
   .leaflet-control-scale {
     margin: 0 8px 8px 0 !important;
-  }
-}
-
-%__toggle { // sass-lint:disable-line placeholder-name-format
-  align-items: center;
-  align-self: center;
-  background-color: $primary-light;
-  border: 1px solid $secondary-gray20;
-  border-radius: 50%;
-  content: "X";
-  display: flex;
-  flex-shrink: 0;
-  font-size: 0;
-  height: 26px;
-  justify-content: center;
-  width: 26px;
-
-  svg {
-    height: 24px;
-    width: 24px;
   }
 }

@@ -38,6 +38,7 @@ describe('MapSearchResultsItem', () => {
         <MapSearchResultsItem
           onClick={clickHandler}
           label={label}
+          statusLabel={label}
         />
       );
 

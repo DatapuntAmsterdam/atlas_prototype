@@ -87,7 +87,7 @@ describe('addresses module', () => {
 
       cy.get('th.c-table__header-field').first()
         .then((firstTableHeader) => {
-          const selectedGroup = firstTableHeader[0].innerText;
+          const selectedGroup = firstTableHeader[0].innerText.trim();
           cy.get('.c-table__content-row').first().find('td:nth-child(1)')
             .then((firstValue) => {
               const selectedValue = firstValue[0].innerText.trim();

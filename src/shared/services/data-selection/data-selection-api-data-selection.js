@@ -62,7 +62,6 @@ export function query(config, view, activeFilters, page, search, shape = '[]') {
   };
 
   const uri = config.ENDPOINT_PREVIEW[view] || config.ENDPOINT_PREVIEW;
-
   return getByUrl(sharedConfig.API_ROOT + uri, searchParams)
     .then((data) => {
       const newData = { ...data };

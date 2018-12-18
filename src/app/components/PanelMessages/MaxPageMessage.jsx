@@ -1,19 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AngularWrapper } from 'react-angular';
+import Panel from '../Panel/Panel';
 
 const MaxPageMessage = ({ maxAvailablePages }) => (
-  <AngularWrapper
-    moduleName={'dpPanelWrapper'}
-    component="dpPanel"
-    dependencies={['atlas']}
-    bindings={{
-      isPanelVisible: true,
-      canClose: true
-    }}
-    interpolateBindings={{
-      type: 'warning'
-    }}
+  <Panel
+    isPanelVisible
+    canClose
+    type="warning"
   >
     <div className="qa-message-max-pages">
       <h2 className="c-panel__title">Deze pagina kan niet worden getoond</h2>
@@ -30,7 +23,7 @@ const MaxPageMessage = ({ maxAvailablePages }) => (
         toe voor specifiekere resultaten.
       </p>
     </div>
-  </AngularWrapper>
+  </Panel>
 );
 
 MaxPageMessage.propTypes = {

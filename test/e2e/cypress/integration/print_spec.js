@@ -18,7 +18,7 @@ describe('print module', () => {
     cy.wait('@getResults');
     cy.wait('@getMeeting');
     cy.wait('@getPanoThumbnail');
-    cy.get('img.c-straatbeeld-thumbnail--img').should('exist').and('be.visible');
+    cy.get('img.c-panorama-thumbnail--img').should('exist').and('be.visible');
     cy.get('h2.qa-title').should('exist').and('be.visible').contains('10581111');
 
     cy.get('button.qa-menu__link').click();
@@ -26,7 +26,7 @@ describe('print module', () => {
     cy.get(headerTitle).should('exist').and('be.visible');
     cy.get('.c-print-header__close').click();
     cy.get(headerTitle).should('not.exist').and('not.be.visible');
-    cy.get('img.c-straatbeeld-thumbnail--img').should('exist').and('be.visible');
+    cy.get('img.c-panorama-thumbnail--img').should('exist').and('be.visible');
     cy.get('h2.qa-title').should('exist').and('be.visible').contains('10581111');
   });
 });

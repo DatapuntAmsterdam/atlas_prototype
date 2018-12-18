@@ -6,9 +6,9 @@ import {
   getPanoramaHeading,
   getPanoramaId,
   getPanoramaView
-} from '../../shared/ducks/panorama/panorama';
-import PANORAMA_VIEW from '../../shared/ducks/panorama/panorama-view';
-import PanoramaContainer from '../containers/PanoramaContainer';
+} from '../../panorama/ducks/panorama';
+import PANORAMA_VIEW from '../../panorama/ducks/panorama-view';
+import PanoramaContainer from '../../panorama/containers/PanoramaContainer';
 import MapContainer from '../../map/containers/map/MapContainer';
 import { toPanorama as toPanoramaActionCreator } from '../../store/redux-first-router';
 import SplitScreen from '../components/SplitScreen/SplitScreen';

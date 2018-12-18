@@ -1,0 +1,110 @@
+@import "../../../shared/styles/config";
+
+.c-panorama-toggle {
+  @include font-size($s-font);
+  position: relative;
+}
+
+.c-panorama-toggle__button {
+  @extend %hover-focus-button;
+  @include font-size($s-font);
+  @include font-weight($bold-weight);
+
+  background-color: $primary-light-alpha48;
+  border: 1px solid $secondary-gray20;
+  cursor: pointer;
+  height: $button-size;
+  line-height: #{$button-size - 3};
+  min-width: 202px;
+  padding: 0 #{$button-size + 6};
+
+  &::before {
+    @extend %icon-button-text-extra;
+    @include sprite("clock-black");
+
+    left: 4px;
+    position: absolute;
+    top: 0;
+  }
+
+  &::after {
+    @extend %icon-button-text-extra;
+    @include sprite("up-black");
+
+    position: absolute;
+    right: 4px;
+    top: 0;
+  }
+
+
+
+  &.c-panorama-toggle__button--active {
+    @extend %active-button;
+
+    &::after {
+      @include sprite("down-black");
+    }
+  }
+}
+
+.c-panorama-toggle__menu {
+  background-color: $primary-light;
+  border: 1px solid $secondary-gray20;
+  bottom: $button-size;
+  box-shadow: 2px 0 0 0 $secondary-gray40;
+  padding: 12px 0 6px;
+  position: absolute;
+}
+
+.c-panorama-toggle__item {
+  @extend %hover-focus-listitem;
+
+  cursor: pointer;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 32px;
+  white-space: nowrap;
+
+  & button {
+    @include font-weight($bold-weight);
+  }
+
+  &.c-panorama-toggle__item--active {
+    background-color: $secondary-gray10;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $secondary-gray4 !important;
+    }
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $secondary-gray4 !important;
+  }
+}
+
+.c-panorama-toggle__devider {
+  background-color: $secondary-gray20;
+  height: 1px;
+  margin: 12px 0 6px;
+}
+
+.c-panorama-toggle__external {
+  height: 32px;
+  padding: 0 20px 0 16px;
+  white-space: nowrap;
+}
+
+.c-panorama-toggle__external-link {
+  line-height: 32px;
+  opacity: .6;
+
+  &:active,
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}

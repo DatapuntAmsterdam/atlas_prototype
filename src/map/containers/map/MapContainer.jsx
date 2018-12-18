@@ -6,7 +6,7 @@ import { LatLngBounds } from 'leaflet';
 import { isEmbedded } from '../../../shared/ducks/ui/ui';
 
 import DrawTool from '../../containers/draw-tool/DrawToolContainer';
-import ToggleFullscreen from '../../components/toggle-fullscreen/ToggleFullscreen';
+import ToggleFullscreen from '../../../app/components/ToggleFullscreen/ToggleFullscreen';
 
 import LeafletContainer from '../leaflet/LeafletContainer';
 import MapPanelContainer from '../../containers/panel/MapPanelContainer';
@@ -76,6 +76,7 @@ class MapContainer extends React.Component {
           {toggleFullscreen && (
             <ToggleFullscreen
               isFullscreen={isFullscreen}
+              title="Kaart"
               onToggleFullscreen={toggleFullscreen}
             />
           )}
@@ -101,7 +102,7 @@ MapContainer.defaultProps = {
   leafletInstance: null,
   showPreviewPanel: false,
   drawMode: 'none',
-  toggleFullscreen: undefined
+  toggleFullscreen: null
 };
 
 MapContainer.propTypes = {

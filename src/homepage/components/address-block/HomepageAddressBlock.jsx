@@ -3,28 +3,25 @@ import Link from 'redux-first-router-link';
 
 import HomepageBlock from '../block/HomepageBlock';
 
-import IconAddress from '../../../../public/images/icon-adres.svg';
-import IconHr from '../../../../public/images/icon-hr.svg';
-import IconKadaster from '../../../../public/images/icon-kadaster.svg';
 import { features } from '../../../shared/environment';
 import { routing } from '../../../app/routes';
 
 const BLOCK_ITEMS = {
   ADRESSEN: {
     label: 'Adressentabel',
-    icon: IconAddress,
+    icon: 'bag',
     route: routing.addresses.type,
     title: 'Bekijk Adressentabel'
   },
   HANDELSREGISTER: {
     label: 'Handelsregister-tabel',
-    icon: IconHr,
+    icon: 'hr',
     route: routing.establishments.type,
     title: 'Bekijk handelsregister-tabel'
   },
   KADASTER: {
     label: 'Kadaster-tabel',
-    icon: IconKadaster,
+    icon: 'brk',
     route: routing.cadastralObjects.type,
     title: 'Bekijk kadaster-tabel'
   }
@@ -36,27 +33,28 @@ const HomepageAddressBlock = () => (
     title="Adressentabel"
     description="Selecteer en download als spreadsheet"
     hasTallDescription
+    blockIsLink
   >
-    {Object.keys(BLOCK_ITEMS).map((key) => {
-      const extraClass = (key === 'KADASTER' && !features.eigendommen) ? 'homepage-block__item--invisible' : '';
-      const { label, icon: Icon, route, title } = BLOCK_ITEMS[key];
-      return (
-        <div key={key} className={`homepage-block__item ${extraClass}`}>
-          <Link
-            className="c-link homepage-block__link"
-            title={title}
-            to={{ type: route }}
-          >
-            <span className="homepage-block__icon">
-              <Icon />
-            </span>
-            <span className="homepage-block__label">
-              {label}
-            </span>
-          </Link>
-        </div>
-      );
-    })}
+    <div className="homepage-block">
+      {Object.keys(BLOCK_ITEMS).map((key) => {
+        const extraClass = (key === 'KADASTER' && !features.eigendommen) ? 'homepage-block__item--invisible' : '';
+        const { label, icon, route, title } = BLOCK_ITEMS[key];
+        return (
+          <div key={key} className={`homepage-block__item ${extraClass}`}>
+            <Link
+              className="c-link homepage-block__link"
+              title={title}
+              to={{ type: route }}
+            >
+              <span className={`homepage-block__icon homepage-block__icon--${icon}`} />
+              <span className="homepage-block__label">
+                {label}
+              </span>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
   </HomepageBlock>
 );
 

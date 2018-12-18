@@ -1,6 +1,5 @@
-import * as mapSelectors from '../../../../src/map/ducks/map/map-selectors';
-import { SHOW_DETAIL } from '../../../../src/shared/ducks/detail/detail';
-import * as piwik from '../../../../src/shared/services/piwik-tracker/piwik-tracker';
+import { SHOW_DETAIL } from '../../../../src/shared/ducks/detail/constants';
+import { DOWNLOAD_DATASET_RESOURCE } from '../../../../src/shared/ducks/datasets/data/data';
 
 describe('the dp-detail component', () => {
     var $compile,
@@ -24,12 +23,6 @@ describe('the dp-detail component', () => {
     const dcatdEndPoint = 'http://www.fake-endpoint.com/dcatd/datasets/789/';
 
     beforeEach(() => {
-        mapSelectors.getSelectedLocation = jasmine.createSpy('getSelectedLocation')
-            .and.returnValue({
-                latitude: 52.654,
-                longitude: 4.987
-            });
-
         angular.mock.module(
             'dpDetail', {
                 store: {
@@ -207,7 +200,6 @@ describe('the dp-detail component', () => {
             mapClickLocation: { latitude: 52.654, longitude: 4.987 }
         });
         spyOn(api, 'getByUrl').and.callThrough();
-        spyOn(piwik, 'default').and.callFake(angular.noop);
     });
 
     function getComponent (endpoint, isLoading, show = true, catalogFilters = undefined) {
@@ -326,8 +318,7 @@ describe('the dp-detail component', () => {
         });
     });
 
-    it('loads new API data and triggers a new SHOW_DETAIL action when the endpoint ' +
-        'changes', () => {
+    it('loads new API data and triggers a new SHOW_DETAIL action when the endpoint changes', () => {
         var component,
             scope,
             endpoint;
@@ -503,6 +494,27 @@ describe('the dp-detail component', () => {
             const description = vm.stripMarkdown('test description');
 
             expect(description).toEqual('test description');
+        });
+    });
+
+    describe('the downloadResource function', () => {
+        it('dispatches  a value', () => {
+            const component = getComponent('http://www.fake-endpoint.com/dcatd/datasets/789/', false);
+
+            const scope = component.isolateScope();
+            store.dispatch.calls.reset();
+            const vm = scope.vm;
+            vm.downloadResource('dataset name', 'dataset url');
+
+            expect(store.dispatch).toHaveBeenCalledWith({
+                type: DOWNLOAD_DATASET_RESOURCE,
+                meta: {
+                    tracking: {
+                        dataset: 'dataset name',
+                        resourceUrl: 'dataset url'
+                    }
+                }
+            });
         });
     });
 });

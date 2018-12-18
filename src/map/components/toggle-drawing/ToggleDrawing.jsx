@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 
-import IconMeasure from '../../../../public/images/icon-measure.svg';
-
 import './_toggle-drawing.scss';
 
 const ToggleDrawing = ({ drawingMode, shapeMarkers, toggleDrawing }) => {
@@ -20,7 +18,7 @@ const ToggleDrawing = ({ drawingMode, shapeMarkers, toggleDrawing }) => {
     onClick={() => toggleDrawing(shapeMarkers)}
     title={`${title} meten en intekenen`}
   >
-    <IconMeasure className="toggle-drawing__icon" />
+    <span className="toggle-drawing__icon" />
     <span className="toggle-drawing__label">
       {label}
     </span>

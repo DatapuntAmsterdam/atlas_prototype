@@ -146,7 +146,7 @@ module.exports = {
         "no-invalid-this": "error",             // disallow this keywords outside of classes or class-like objects
         "require-yield": "error",               // require generator functions to contain yield
         "jasmine/no-focused-tests": "error",    // disallow fdescribe, fit
-        "jasmine/no-disabled-tests": "error",   // disallow xdescribe, xit
+        "jasmine/no-disabled-tests": "off",   // allow xdescribe, xit
         "linebreak-style": "off"
     },
     "plugins": [

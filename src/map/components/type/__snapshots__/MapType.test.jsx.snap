@@ -12,7 +12,11 @@ exports[`MapType rendering should render select buttons with aerial value 1`] = 
   <SelectButton
     className="map-type__select map-type__select--topography"
     handleChange={[MockFunction]}
-    icon={[Function]}
+    icon={
+      <span
+        className="icon icon--topography"
+      />
+    }
     isDisabled={true}
     isExpanded={false}
     label=""
@@ -42,7 +46,11 @@ exports[`MapType rendering should render select buttons with aerial value 1`] = 
   <SelectButton
     className="map-type__select map-type__select--aerial"
     handleChange={[MockFunction]}
-    icon={[Function]}
+    icon={
+      <span
+        className="icon icon--aerial"
+      />
+    }
     isDisabled={false}
     isExpanded={false}
     label=""
@@ -94,7 +102,11 @@ exports[`MapType rendering should render select buttons with topography value 1`
   <SelectButton
     className="map-type__select map-type__select--topography"
     handleChange={[MockFunction]}
-    icon={[Function]}
+    icon={
+      <span
+        className="icon icon--topography"
+      />
+    }
     isDisabled={false}
     isExpanded={false}
     label=""
@@ -124,7 +136,11 @@ exports[`MapType rendering should render select buttons with topography value 1`
   <SelectButton
     className="map-type__select map-type__select--aerial"
     handleChange={[MockFunction]}
-    icon={[Function]}
+    icon={
+      <span
+        className="icon icon--aerial"
+      />
+    }
     isDisabled={true}
     isExpanded={false}
     label=""

@@ -2,18 +2,25 @@
 
 exports[`mapSearch reducer handles search results request 1`] = `
 Object {
+  "category": null,
+  "error": null,
   "geoSearch": Object {
     "latitude": 52.3637006,
     "longitude": 4.7943446,
   },
   "isLoading": true,
+  "numberOfResults": 0,
+  "resultsMap": Array [],
+  "resultsMapPanel": Array [],
+  "resultsQuery": Array [],
 }
 `;
 
 exports[`mapSearch reducer handles search results success 1`] = `
 Object {
   "isLoading": false,
-  "mapSearchResultsByLocation": Array [
+  "numberOfResults": undefined,
+  "resultsMapPanel": Array [
     Object {
       "foo": "bar",
     },
@@ -23,7 +30,12 @@ Object {
 
 exports[`mapSearch reducer sets the initial state 1`] = `
 Object {
+  "category": null,
+  "error": null,
   "isLoading": false,
-  "mapSearchResultsByLocation": Array [],
+  "numberOfResults": 0,
+  "resultsMap": Array [],
+  "resultsMapPanel": Array [],
+  "resultsQuery": Array [],
 }
 `;

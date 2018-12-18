@@ -1,3 +1,37 @@
+@mixin header-button($name, $icon-size: 12px, $icon-position: left) {
+  @extend %icon--border-hover;
+  @include icon-label-right($name, $primary-light, $secondary-gray20);
+
+  height: 32px;
+  margin-left: .5 * $base-whitespace;
+  padding: 4px 8px;
+
+  &::before {
+    @include icon($name, $secondary-gray60);
+    float: $icon-position;
+    height: $icon-size;
+    width: $icon-size;
+  }
+
+  span {
+    color: $secondary-gray60;
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      @include icon($name, $primary-dark);
+      background-color: $secondary-gray20;
+      height: $icon-size;
+      width: $icon-size;
+    }
+
+    span {
+      color: $primary-dark;
+    }
+  }
+}
+
 .o-btn {
   /*
   @name Button w/ link styling
@@ -12,6 +46,7 @@
 
 .o-btn--link {
   @extend %link--arrow;
+  white-space: nowrap;
 }
 
 .o-btn--link--inverse {
@@ -20,15 +55,26 @@
   color: $primary-light;
 
   &::before {
-    @include icon-button("link-arrow", "white", "white");
+    @include icon-button("link-arrow", $primary-light);
     height: $icon-size;
     width: $icon-size;
   }
 
   &:hover,
   &:visited,
-  &:active {
+  &:active,
+  &:focus {
     color: $primary-light;
+    outline: none;
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      @include icon-button("link-arrow", $primary-light);
+      height: $icon-size;
+      width: $icon-size;
+    }
   }
 }
 
@@ -39,8 +85,10 @@
 .o-btn--contrast {
   color: $primary-contrast;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: $secondary-gray60;
+    outline: none;
   }
 }
 
@@ -95,7 +143,7 @@
   width: 100%;
 
   &::after {
-    display: inline-block;
+    // display: inline-block;
     float: right;
     margin: 7px 16px;
   }
@@ -113,22 +161,47 @@
 
 .o-btn--close {
   @extend %btn-close;
-  @include icon-button("close");
-}
+  @include icon-button("close", $primary-dark, $primary-light);
 
-.o-btn--close--info {
-  @extend %btn-close;
-  @include icon-button("close", "info", "");
-}
+  &--info {
+    @include icon-button("close", $secondary-gray60, $primary-dark);
 
-.o-btn--close--warning {
-  @extend %btn-close;
-  @include icon-button("close", "warning", "");
-}
+    position: absolute;
+    right: 0;
+    top: 0;
 
-.o-btn--close--danger {
-  @extend %btn-close;
-  @include icon-button("close", "danger", "");
+    &:hover,
+    &:focus {
+      background-color: $secondary-gray20;
+    }
+  }
+
+  &--danger {
+    @include icon-button("close-danger", $primary-light, $primary-light);
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &:hover,
+    &:focus {
+      background-color: $secondary-gray60;
+    }
+  }
+
+  &--warning {
+    @include icon-button("close-warning", $primary-light, $primary-light);
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &:hover,
+    &:focus {
+      background-color: $secondary-gray60;
+    }
+
+  }
 }
 
 .s-btn--nested {

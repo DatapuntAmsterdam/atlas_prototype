@@ -2,6 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 
 import AutoSuggest from './AutoSuggest';
+import { MORE_RESULTS_INDEX } from './AutoSuggestCategory';
 
 const mockFilledState = {
   suggestions: [
@@ -254,7 +255,7 @@ describe('The AutoSuggest component', () => {
         onTextInput={onTextInput}
       />);
 
-      const suggestion = { index: -1 };
+      const suggestion = { index: MORE_RESULTS_INDEX };
       const event = {
         preventDefault: jest.fn(),
         stopPropagation: jest.fn()
@@ -309,6 +310,7 @@ describe('The AutoSuggest component', () => {
       autoSuggestComponent.find('input#auto-suggest__input').simulate('focus');
       autoSuggestComponent.find('input#auto-suggest__input').type('Dam');
       autoSuggestComponent.setProps({ suggestions: mockFilledState.suggestions });
+      autoSuggestComponent.setState({ showSuggestions: true });
       autoSuggestComponent.update();
       autoSuggestComponent.find('.auto-suggest__dropdown-item').at(2).simulate('click', mockEvent);
       expect(onSuggestionSelection).toHaveBeenCalledWith(selectedSuggestion, true);
@@ -325,6 +327,7 @@ describe('The AutoSuggest component', () => {
       autoSuggestComponent.find('input#auto-suggest__input').simulate('focus');
       autoSuggestComponent.find('input#auto-suggest__input').type('Dam');
       autoSuggestComponent.setProps({ suggestions: mockFilledState.suggestions });
+      autoSuggestComponent.setState({ showSuggestions: true });
       autoSuggestComponent.update();
       autoSuggestComponent.find('.auto-suggest__dropdown-item').at(2).simulate('click', mockEvent);
       expect(onSuggestionSelection).toHaveBeenCalledWith(selectedSuggestion, false);

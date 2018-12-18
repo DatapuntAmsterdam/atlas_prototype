@@ -16,14 +16,14 @@ Object {
 }
 `;
 
-exports[`Data Selection Reducer should set isLoading, authError, errorMessage, dataset, results, markers state when dispatching receiveDataSelectionFailure 1`] = `
+exports[`Data Selection Reducer should set isLoading, authError, errorMessage, dataset, result, markers state when dispatching receiveDataSelectionFailure 1`] = `
 Object {
   "authError": false,
   "dataset": undefined,
   "errorMessage": "error message",
   "isLoading": false,
   "markers": Array [],
-  "results": Object {},
+  "result": Object {},
 }
 `;
 
@@ -72,13 +72,11 @@ Object {
 exports[`Data Selection Reducer when a route type is dispatched should set dataset and an object from getStateFromQuery if meta.query is set 1`] = `
 Object {
   "dataset": "bag",
-  "foo": "bar",
 }
 `;
 
 exports[`Data Selection Reducer when a route type is dispatched should set the dataset and view if meta.query is not set 1`] = `
 Object {
   "dataset": "hr",
-  "view": "TABLE",
 }
 `;

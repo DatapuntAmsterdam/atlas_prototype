@@ -9,16 +9,20 @@
   color: $primary-light;
   text-decoration: underline;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: $primary-light;
+    outline: none;
   }
 }
 
 .c-link--light {
   color: $primary-light;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: $primary-light;
+    outline: none;
   }
 }
 
@@ -50,8 +54,10 @@
     color: $primary-contrast-blue;
     text-decoration: underline;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: $primary-contrast;
+      outline: none;
       text-decoration: underline;
     }
   }
@@ -61,8 +67,10 @@
   a {
     color: $primary-light;
 
-    &:hover {
-      color: $primary-contrast;
+    &:hover,
+    &:focus {
+      color: $primary-light;
+      outline: none;
     }
   }
 }

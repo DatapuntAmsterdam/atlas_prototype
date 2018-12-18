@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import DatasetsDetailContainer from '../DatasetsDetailContainer';
+import DatasetsDetailContainer from '../DatasetDetailContainer';
 
 const initialState = {
   detail: {

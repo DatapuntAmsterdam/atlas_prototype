@@ -3,6 +3,7 @@
 
   .s-btn--wordwrap {
     width: calc(100% - #{$link-offset});
+    white-space: normal;
     word-wrap: break-word;
   }
 }

@@ -2,10 +2,10 @@ import { createSelector } from 'reselect';
 import {
   getDetailDisplay,
   getDetailEndpoint,
-  getDetailGeometry,
-  isDetailMapView
-} from '../../../shared/ducks/detail/detail';
+  getDetailGeometry
+} from '../../../shared/ducks/detail/selectors';
 import { isDataDetailPage } from '../../../store/redux-first-router';
+import { FETCH_MAP_DETAIL_REQUEST, FETCH_MAP_DETAIL_SUCCESS, FETCH_MAP_DETAIL_FAILURE } from './constants';
 
 const mapDetailSelector = (state) => state.mapDetail;
 
@@ -29,15 +29,8 @@ export const getDetailId = createSelector(getDetailEndpoint, getCurrentEndpoint,
   (detailEndpoint, currentEndpoint) => detailEndpoint || currentEndpoint);
 
 export const getGeometry = createSelector(
-  isDetailMapView,
   getDetailGeometry,
-  getMapDetailGeometry,
-  (kaartView, detailGeometry, mapDetailGeometry) => {
-    if (kaartView) {
-      return mapDetailGeometry;
-    }
-    return detailGeometry;
-  }
+  (detailGeometry) => detailGeometry
 );
 
 export const shouldShowGeoJson = isDataDetailPage;
@@ -57,10 +50,6 @@ export const getGeoJson = createSelector(
     } : {}
   ));
 
-export const FETCH_MAP_DETAIL_REQUEST = 'FETCH_MAP_DETAIL_REQUEST';
-export const FETCH_MAP_DETAIL_SUCCESS = 'FETCH_MAP_DETAIL_SUCCESS';
-export const FETCH_MAP_DETAIL_FAILURE = 'FETCH_MAP_DETAIL_FAILURE';
-
 const initialState = {
   byEndpoint: {},
   isLoading: false,
@@ -73,7 +62,7 @@ export default function MapDetailReducer(state = initialState, action) {
     case FETCH_MAP_DETAIL_REQUEST:
       return {
         ...state,
-        currentEndpoint: action.endpoint,
+        currentEndpoint: action.payload,
         isLoading: true
       };
 
@@ -99,10 +88,9 @@ export default function MapDetailReducer(state = initialState, action) {
   }
 }
 
-export const getMapDetail = (endpoint, user) => ({
+export const getMapDetail = (payload) => ({
   type: FETCH_MAP_DETAIL_REQUEST,
-  endpoint,
-  user
+  payload
 });
 export const fetchMapDetailFailure = (error) => ({ type: FETCH_MAP_DETAIL_FAILURE, error });
 export const fetchMapDetailSuccess = (endpoint, mapDetail) => ({

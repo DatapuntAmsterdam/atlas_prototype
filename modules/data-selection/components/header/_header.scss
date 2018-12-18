@@ -1,26 +1,2 @@
 @import "download-button/download-button";
 @import "toggle-view-button/toggle-view-button";
-
-
-.catalog__button--toevoegen {
-  @include icon-button-text-right("add", "", "white");
-
-  height: auto;
-  padding: 5px 8px;
-  float: right;
-  border: 1px solid $secondary-gray20;
-  color: $secondary-gray60;
-
-  &::before {
-    width: 12px;
-    height: 12px;
-    text-decoration: none;
-  }
-
-  &:hover {
-    border-color: $primary-contrast;
-    background-color: $primary-contrast;
-    color: $primary-light;
-    text-decoration: none;
-  }
-}

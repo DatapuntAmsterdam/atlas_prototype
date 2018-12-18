@@ -80,10 +80,8 @@ function formatData(config, rawData) {
 }
 
 export function query(config, view, activeFilters, page, searchText = '', geometryFilter = undefined, catalogFilters = {}) {
-  const searchParams = {
-    offset: (page - 1) * config.MAX_ITEMS_PER_PAGE,
-    limit: config.MAX_ITEMS_PER_PAGE
-  };
+  const searchParams = {};
+
   const queryTheme = activeFilters.groups && `eq=theme:${activeFilters.groups}`;
   const queryFormat = activeFilters.formats && `eq=${activeFilters.formats}`;
   const queryOwner = activeFilters.owners && `eq=${activeFilters.owners}`;
@@ -119,6 +117,9 @@ export function query(config, view, activeFilters, page, searchText = '', geomet
     // optional service type filter
     searchParams[propertyName.serviceType] = queryServiceType;
   }
+
+  searchParams.offset = (page - 1) * config.MAX_ITEMS_PER_PAGE;
+  searchParams.limit = config.MAX_ITEMS_PER_PAGE;
 
   return getByUrl(sharedConfig.API_ROOT + config.ENDPOINT_PREVIEW, searchParams).then((data) => ({
     numberOfPages: Math.ceil(data['void:documents'] / config.MAX_ITEMS_PER_PAGE),

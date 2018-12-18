@@ -14,7 +14,9 @@ const PAGE_TYPES = {
   gegevens: 'info',
   over_api: 'apis',
   beleid: 'beleid',
-  statistieken: 'statistieken'
+  statistieken: 'statistieken',
+  verplaatst: 'verplaatst',
+  niet_gevonden: 'nietgevonden'
 };
 
 // Help > Bediening > Inloggen deeplink id
@@ -70,5 +72,13 @@ export const CMS_PAGE_MAPPING = {
   [PAGES.STATISTICS]: {
     template: PAGE_TEMPLATE.contentOverview,
     type: PAGE_TYPES.statistieken
+  },
+  [PAGES.MOVED]: {
+    template: PAGE_TEMPLATE.contentOverview,
+    type: PAGE_TYPES.verplaatst
+  },
+  [PAGES.NOT_FOUND]: {
+    template: PAGE_TEMPLATE.contentOverview,
+    type: PAGE_TYPES.niet_gevonden
   }
 };

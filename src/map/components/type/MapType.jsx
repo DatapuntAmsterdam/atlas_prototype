@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 
 import { SelectButton } from '../../../shared/components/select-button';
 
-import AerialIcon from '../../../../public/images/icon-aerial.svg';
-import TopographyIcon from '../../../../public/images/icon-topography.svg';
-
 import './_map-type.scss';
 
 function hasLayer(activeBaseLayer, baseLayers) {
@@ -20,7 +17,7 @@ const MapType = ({ activeBaseLayer, baseLayers, onBaseLayerToggle }) => (
     <SelectButton
       className="map-type__select map-type__select--topography"
       handleChange={onBaseLayerToggle}
-      icon={TopographyIcon}
+      icon={<span className="icon icon--topography" />}
       isDisabled={!hasLayer(activeBaseLayer, baseLayers.topography)}
       name="topography"
       options={baseLayers.topography}
@@ -30,7 +27,7 @@ const MapType = ({ activeBaseLayer, baseLayers, onBaseLayerToggle }) => (
     <SelectButton
       className="map-type__select map-type__select--aerial"
       handleChange={onBaseLayerToggle}
-      icon={AerialIcon}
+      icon={<span className="icon icon--aerial" />}
       isDisabled={!hasLayer(activeBaseLayer, baseLayers.aerial)}
       name="aerial"
       options={baseLayers.aerial}

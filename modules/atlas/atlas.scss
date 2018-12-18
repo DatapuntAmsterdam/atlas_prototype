@@ -5,18 +5,19 @@
 @import "styles/utilities/full-height";
 @import "styles/utilities/gutter";
 @import "styles/objects/max-width";
-@import "styles/deprecated/dashboard";
-@import "styles/deprecated/active-filters";
+@import "styles/legacy/dashboard";
+@import "styles/legacy/active-filters";
+@import "styles/legacy/search-results";
 
 .is-print-mode {
-  @import "styles/deprecated/dashboard-print";
+  @import "styles/legacy/dashboard-print";
 }
 
 .is-embed {
-  @import "styles/deprecated/dashboard-embed";
+  @import "styles/legacy/dashboard-embed";
 }
 
-@import "styles/deprecated/dashboard-embed-preview";
+@import "styles/legacy/dashboard-embed-preview";
 
 .is-print-mode,
 .is-embed-preview,

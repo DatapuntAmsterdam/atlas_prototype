@@ -2,9 +2,8 @@
   margin-bottom: 3 * $base-whitespace;
 }
 
-.c-tab-header__reset {
-  @extend %icon--border;
-  @include icon-label-right("datasets", "", "");
+.c-tab-header__reset-button {
+  @include header-button("datasets", 24px);
 
   float: right;
 }

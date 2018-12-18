@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ArrowRightIcon from '../../../../../public/images/icon-arrow-right.svg';
-
 const MapSearchResultsItem = ({ label, onClick, statusLabel }) => (
   <li className="map-search-results-item">
     <button
@@ -19,7 +17,7 @@ const MapSearchResultsItem = ({ label, onClick, statusLabel }) => (
           ) : ''
         }
       </section>
-      <ArrowRightIcon className="map-search-results-item__arrow" />
+      <span className="map-search-results-item__arrow" />
     </button>
   </li>
 );

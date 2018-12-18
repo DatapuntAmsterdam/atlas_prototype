@@ -1,0 +1,62 @@
+.c-hotspot {
+  cursor: pointer;
+  margin: 0 -20px;
+  outline: none;
+  padding: 0 20px;
+
+  &:hover {
+    animation: hotspot-animation 100ms linear;
+    transform: scale(1.15);
+  }
+}
+
+.c-hotspot--year-2016 {
+  &:hover {
+    .c-hotspot__image {
+      background-image: url("assets/images/hotspots/2016-hover.svg");
+    }
+  }
+}
+
+.c-hotspot--year-2017 {
+  &:hover {
+    .c-hotspot__image {
+      background-image: url("assets/images/hotspots/2017-hover.svg");
+    }
+  }
+}
+
+.c-hotspot--year-2018 {
+  &:hover {
+    .c-hotspot__image {
+      background-image: url("assets/images/hotspots/2018-hover.svg");
+    }
+  }
+}
+
+.c-hotspot__image {
+  background-size: cover;
+  transform: scale(1);
+
+  .c-hotspot--year-2016 & {
+    background-image: url("assets/images/hotspots/2016.svg");
+  }
+
+  .c-hotspot--year-2017 & {
+    background-image: url("assets/images/hotspots/2017.svg");
+  }
+
+  .c-hotspot--year-2018 & {
+    background-image: url("assets/images/hotspots/2018.svg");
+  }
+}
+
+@keyframes hotspot-animation {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.15);
+  }
+}

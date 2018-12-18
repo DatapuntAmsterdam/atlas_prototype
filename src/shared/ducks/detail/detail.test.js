@@ -1,9 +1,6 @@
-import reducer, {
-  DETAIL_VIEW,
-  FETCH_DETAIL,
-  fetchDetail,
-  SHOW_DETAIL
-} from './detail';
+import reducer from './reducer';
+import { DETAIL_VIEW, FETCH_DETAIL, SHOW_DETAIL } from './constants';
+import { fetchDetail } from './actions';
 
 describe('DetailReducer', () => {
   const initialState = {};

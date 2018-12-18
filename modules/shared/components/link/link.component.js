@@ -13,7 +13,8 @@
                 type: '@',
                 payload: '<',
                 query: '<',
-                action: '<'
+                action: '<',
+                tabIndex: '@'
             },
             controller: DpLinkController,
             controllerAs: 'vm'
@@ -27,6 +28,7 @@
 
         vm.className = vm.className || 'o-btn o-btn--link';
         vm.inline = vm.inline || false;
+        vm.tabIndex = vm.tabIndex || '0';
 
         vm.dispatch = function (e) {
             e.preventDefault();

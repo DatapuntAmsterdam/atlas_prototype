@@ -5,8 +5,6 @@
         .module('dpHeader')
         .component('dpSiteHeader', {
             bindings: {
-                query: '@',
-                searchAction: '<',
                 hasPrintButton: '<',
                 hasEmbedButton: '<',
                 size: '=',

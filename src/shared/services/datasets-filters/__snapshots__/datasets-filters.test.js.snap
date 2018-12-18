@@ -610,6 +610,24 @@ Object {
       "label": "anders",
     },
   ],
+  "statusTypes": Array [
+    Object {
+      "id": "in_onderzoek",
+      "label": "In onderzoek",
+    },
+    Object {
+      "id": "niet_beschikbaar",
+      "label": "Niet beschikbaar",
+    },
+    Object {
+      "id": "beschikbaar",
+      "label": "Beschikbaar",
+    },
+    Object {
+      "id": "gepland",
+      "label": "Gepland",
+    },
+  ],
   "temporalUnits": Array [
     Object {
       "id": "na",

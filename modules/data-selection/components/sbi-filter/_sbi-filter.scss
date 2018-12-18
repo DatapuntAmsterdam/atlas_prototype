@@ -54,24 +54,17 @@ $sbi-filter-item-height: 32px;
   }
 
   &:focus {
-    border-color: $primary-dark;
+    border: 2px solid $primary-dark;
   }
 }
 
 .c-sbi-filter__submit {
+  @extend %base-button;
+  // @extend %icon--border;
   @include font-size($s-font);
   @include font-weight($bold-weight);
   margin-left: $base-whitespace;
   padding: 3px 7px;
-  border: 1px solid $secondary-gray20;
-  background-color: $primary-light;
-  color: $secondary-gray60;
-
-  &:hover {
-    border-color: $primary-contrast;
-    background-color: $primary-contrast;
-    color: $primary-light;
-  }
 }
 
 .c-sbi-filter__item {
@@ -89,7 +82,9 @@ $sbi-filter-item-height: 32px;
     top: -5px;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
     text-decoration: underline;
 
     .c-sbi-filter__item-label {

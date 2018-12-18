@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Checkbox } from '../../../shared/components/checkbox';
-import RemoveIcon from '../../../../public/images/icon-cross.svg';
 import MAP_CONFIG from '../../services/map-config';
 
 import './_map-legend.scss';
@@ -82,16 +81,14 @@ class MapLegend extends React.Component {
                     name={mapLayer.title}
                     onChange={
                       /* istanbul ignore next */
-                      () => this.toggleLayerVisibility(mapLayer, layerIsVisible)
+                      () => this.toggleLayerVisibility(mapLayer)
                     }
                   />
                   <h4 className="map-legend__category-title">{mapLayer.title}</h4>
                   <button
                     className="map-legend__toggle map-legend__toggle--remove"
                     onClick={() => this.props.onLayerToggle(mapLayer)}
-                  >
-                    <RemoveIcon />
-                  </button>
+                  />
                 </div>
                 {!isAuthorised(mapLayer, user) && (
                   <div className="map-legend__notification">

@@ -36,8 +36,7 @@ describe('the user settings factory', function () {
 
     it('stores settings in the corresponding storage', function () {
         [
-            {key: 'showCatalogusIntroduction', type: 'session', whenNoValue: true.toString()},
-            {key: 'fullscreenStraatbeeld', type: 'local', whenNoValue: true.toString()}
+            {key: 'showCatalogusIntroduction', type: 'session', whenNoValue: true.toString()}
         ].forEach(({key, type, whenNoValue}) => {
             let value;
             // Remove value

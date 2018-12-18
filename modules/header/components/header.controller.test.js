@@ -1,8 +1,6 @@
 import PAGES from '../../../src/app/pages';
-import { FETCH_SEARCH_RESULTS_BY_QUERY } from '../../../src/shared/ducks/data-search/data-search';
 import { ROUTER_NAMESPACE } from '../../../src/app/routes';
 import * as routerSelectors from '../../../src/store/redux-first-router';
-import { FETCH_DATA_SELECTION_REQUEST } from '../../../src/shared/ducks/data-selection/constants';
 
 describe('The header controller', function () {
     var $controller,
@@ -66,60 +64,6 @@ describe('The header controller', function () {
         expect(store.subscribe).toHaveBeenCalledWith(jasmine.any(Function));
     });
 
-    it('sets the search query and action when search is active', function () {
-        routerSelectors.isDatasetPage = () => false;
-        spyOn(store, 'getState').and.returnValue({
-            search: {
-                query: 'search query'
-            }
-        });
-
-        const controller = getController();
-
-        expect(controller.query).toBe('search query');
-        expect(controller.searchAction).toEqual(FETCH_SEARCH_RESULTS_BY_QUERY);
-    });
-
-    it('sets the dataSelection query and action when datasets are active', function () {
-        spyOn(store, 'getState').and.returnValue({
-            dataSelection: {
-                view: 'CATALOG',
-                query: 'dataSelection query'
-            }
-        });
-
-        const controller = getController();
-
-        expect(controller.query).toBe('dataSelection query');
-        expect(controller.searchAction).toEqual(FETCH_DATA_SELECTION_REQUEST);
-    });
-
-    it('sets the dataSelection query and action when catalog detail API view is active', function () {
-        spyOn(store, 'getState').and.returnValue({
-            dataSelection: {
-                view: 'CATALOG'
-            },
-            detail: {
-                endpoint: 'somewhere://abc/dcatd/datasets/xyz'
-            }
-        });
-
-        const controller = getController();
-
-        expect(controller.query).toBeUndefined();
-        expect(controller.searchAction).toEqual(FETCH_DATA_SELECTION_REQUEST);
-    });
-
-    it('default sets the search query and search action', function () {
-        routerSelectors.isDatasetPage = () => false;
-        spyOn(store, 'getState').and.returnValue({});
-
-        const controller = getController();
-
-        expect(controller.query).toBeUndefined();
-        expect(controller.searchAction).toEqual(FETCH_SEARCH_RESULTS_BY_QUERY);
-    });
-
     it('doesn\'t break when search is null', function () {
         routerSelectors.isDatasetPage = () => false;
         mockedState = {
@@ -130,7 +74,7 @@ describe('The header controller', function () {
 
         const controller = getController();
 
-        expect(controller.query).toBeNull();
+        expect(controller.query).toBeUndefined();
     });
 
     describe('not all states have a print version', function () {

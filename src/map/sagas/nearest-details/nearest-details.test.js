@@ -3,8 +3,8 @@ import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import watchFetchNearestDetails, { fetchNearestDetails } from './nearest-details';
 
 import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
-import { REQUEST_GEOSEARCH, REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
-import { routing as routes } from '../../../app/routes';
+import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
+import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
 
 describe('watchFetchNearestDetails', () => {
   const action = { type: REQUEST_NEAREST_DETAILS };
@@ -14,6 +14,7 @@ describe('watchFetchNearestDetails', () => {
       .next()
       .takeLatestEffect(REQUEST_NEAREST_DETAILS, fetchNearestDetails)
       .next(action)
+      .next()
       .isDone();
   });
 });
@@ -39,19 +40,11 @@ describe('fetchNearestDetails', () => {
           return next();
         }
       })
-      .put({
-        type: routes.dataDetail.type,
-        payload: { type: 'brk', subtype: 'object', id: 'id123' },
-        meta: {
-          query: {
-            kaart: ''
-          }
-        }
-      })
+      .put(setGeoLocation(action.payload.location))
       .run()
   ));
 
-  it('should call fetchNearestDetails and dispatch geosearch', () => (
+  it('should call fetchNearestDetails and dispatch setGeolocation', () => (
     expectSaga(fetchNearestDetails, action)
       .provide({
         call(effect, next) {
@@ -61,22 +54,16 @@ describe('fetchNearestDetails', () => {
           return next();
         }
       })
-      .put({
-        type: REQUEST_GEOSEARCH,
-        payload: [action.payload.location.latitude, action.payload.location.longitude]
-      })
+      .put(setGeoLocation(action.payload.location))
       .run()
   ));
 
-  it('should throw error and dispatch geosearch', () => {
+  it('should throw error and dispatch setGeolocation', () => {
     const error = new Error('My Error');
     testSaga(fetchNearestDetails, action)
       .next()
       .throw(error)
-      .put({
-        type: REQUEST_GEOSEARCH,
-        payload: [action.payload.location.latitude, action.payload.location.longitude]
-      })
+      .put(setGeoLocation(action.payload.location))
       .next()
       .isDone();
   });

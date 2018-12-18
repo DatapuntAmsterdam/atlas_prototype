@@ -8,7 +8,7 @@ export const panoramaPersonIcon = () => new Icon({
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
-  className: 'straatbeeld_person'
+  className: 'panorama_person'
 });
 
 export const panoramaOrientationIcon = () => new Icon({
@@ -17,5 +17,5 @@ export const panoramaOrientationIcon = () => new Icon({
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
-  className: 'straatbeeld_orientation'
+  className: 'panorama_orientation'
 });

@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MaximizeIcon from '../../../../public/images/icon-maximize.svg';
-
 const MapDetailResultWrapper = ({
   children, panoUrl, subTitle, title, onMaximize, onPanoPreviewClick
 }) => (
@@ -49,7 +47,10 @@ const MapDetailResultWrapper = ({
           onClick={onMaximize}
           title="Volledig weergeven"
         >
-          <MaximizeIcon className="map-search-results__button-icon" />
+          <span className="
+            map-search-results__button-icon
+            map-search-results__button-icon--maximize"
+          />
           Volledig weergeven
         </button>
       </footer>

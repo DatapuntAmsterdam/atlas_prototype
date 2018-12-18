@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tab not the current tab should render 1`] = `
+<li
+  className=""
+  key="myTab"
+>
+  <button
+    className="o-tabs__tab o-tabs__tab--link"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    myTab
+     
+    <span>
+      (
+      0
+      )
+    </span>
+  </button>
+</li>
+`;
+
+exports[`Tab the current tab should render 1`] = `
+<li
+  className="is-active"
+  key="myTab"
+>
+  <span
+    className="qa-tab-header__active o-tabs__tab o-tabs__tab--active"
+  >
+    myTab
+     
+    <span>
+      (
+      0
+      )
+    </span>
+  </span>
+</li>
+`;

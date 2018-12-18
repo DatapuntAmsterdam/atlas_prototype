@@ -16,8 +16,8 @@ exports[`ShapeSummary should render info with 2 markers 1`] = `
     onClick={[MockFunction]}
     title="Lijn verwijderen"
   >
-    <Component
-      className="shape-summary__icon"
+    <span
+      className="shape-summary__button--close"
     />
   </button>
 </div>

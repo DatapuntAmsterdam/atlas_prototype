@@ -1,6 +1,6 @@
 $tab-height: 36px;
 $tab-border-radius: 2px;
-$tab-v-padding: 8px;
+$tab-v-padding: 7px;
 
 .o-tabs {
   position: relative;
@@ -30,17 +30,22 @@ $tab-v-padding: 8px;
   }
 
   li {
+    // sass-lint:disable-line force-pseudo-nesting
     border-right: 1px solid $secondary-gray20;
     border-top: 1px solid $secondary-gray20;
     display: block;
     float: left;
     height: $tab-height;
 
-    &:not(.is-active) {
-      background-color: $secondary-gray4;
+    &:not(.is-active) { // sass-lint:disable-line nesting-depth
+      a {
+        background-color: $secondary-gray4;
 
-      &:hover {
-        background-color: $secondary-gray10;
+        &:hover, // sass-lint:disable-line nesting-depth
+        &:focus {
+          background-color: $secondary-gray10;
+          outline: none;
+        }
       }
     }
 
@@ -57,6 +62,11 @@ $tab-v-padding: 8px;
         right: 0;
         z-index: 1;
       }
+
+      &:hover,
+      &:focus {
+        outline: none;
+      }
     }
   }
 }
@@ -65,6 +75,7 @@ $tab-v-padding: 8px;
   display: block;
   padding: $tab-v-padding (2 * $base-whitespace);
 }
+
 
 .o-tabs__tab--link {
   color: $primary-dark;

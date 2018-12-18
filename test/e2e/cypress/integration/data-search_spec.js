@@ -65,7 +65,7 @@ describe('data search module', () => {
 
     cy.wait('@getPanoThumbnail');
     cy.get('.qa-dashboard__column--right')
-      .get('img.c-straatbeeld-thumbnail--img')
+      .get('img.c-panorama-thumbnail--img')
       .should('exist').and('be.visible');
 
     // click in map (there is a marker on this position)
@@ -73,7 +73,7 @@ describe('data search module', () => {
 
     // check that the address is open in right column
     cy.waitForGeoSearch();
-    cy.get('.c-search-results__block-content')
+    cy.get('.map-search-results-item__name')
       .contains('Ad Windighof 2')
       .should('exist').and('be.visible');
   });

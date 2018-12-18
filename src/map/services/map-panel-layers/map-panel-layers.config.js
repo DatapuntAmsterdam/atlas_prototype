@@ -275,12 +275,6 @@ export default [
         title: 'Stadsdeel'
       },
       {
-        id: 'ggw',
-        layer: 'gebiedsgerichtwerken',
-        selectable: true,
-        title: 'Gebiedsgerichtwerken-gebied'
-      },
-      {
         id: 'bc',
         layer: 'buurtcombinatie',
         selectable: true,
@@ -311,6 +305,28 @@ export default [
     maxZoom: 16,
     minZoom: 12,
     title: 'Bouwblokken',
+    url: '/maps/gebieden?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Geografie: gebieden',
+    id: 'ggw',
+    legendItems: [
+      {
+        id: 'ggwg',
+        layer: 'gebiedsgerichtwerken',
+        selectable: true,
+        title: 'Gebiedsgerichtwerken-gebied'
+      },
+      {
+        id: 'ggwpg',
+        layer: 'gebiedsgerichtwerkenpraktijkgebieden',
+        selectable: true,
+        title: 'Gebiedsgerichtwerken-praktijkgebied'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 6,
+    title: 'Gebiedsgericht werken',
     url: '/maps/gebieden?version=1.3.0&service=WMS'
   },
   {
@@ -1004,10 +1020,6 @@ export default [
       },
       {
         selectable: false,
-        title: 'Bominslag'
-      },
-      {
-        selectable: false,
         title: 'Crashlocatie'
       },
       {
@@ -1017,10 +1029,6 @@ export default [
       {
         selectable: false,
         title: 'Geruimd explosief'
-      },
-      {
-        selectable: false,
-        title: 'Krater'
       },
       {
         selectable: false,

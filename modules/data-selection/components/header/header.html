@@ -33,7 +33,7 @@
 
             <span ng-if="tab.isActive" class="o-tabs__tab o-tabs__tab--active">
                 {{tab.title}}
-                <span ng-if="tab.isActive && vm.numberOfRecords !== null">({{vm.numberOfRecords | number}})</span>
+                <span ng-if="tab.isActive && vm.numberOfRecords">({{vm.numberOfRecords | number}})</span>
             </span>
         </li>
     </ul>

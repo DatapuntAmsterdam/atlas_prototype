@@ -56,11 +56,11 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH}`,
     page: PAGES.DATA_SEARCH
   },
-  detail: {
-    title: '',
-    path: '/map/detail',
-    type: `${ROUTER_NAMESPACE}/${PAGES.KAART_DETAIL}`,
-    page: PAGES.KAART_DETAIL
+  dataSearchCategory: {
+    title: 'Data zoeken',
+    path: '/data/:category',
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH_CATEGORY}`,
+    page: PAGES.DATA_SEARCH_CATEGORY
   },
   panorama: {
     title: 'Panorama',
@@ -129,6 +129,19 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.STATISTICS}`,
     page: PAGES.STATISTICS
   },
+  verplaatst: {
+    title: '',
+    path: '/verplaatst',
+    type: `${ROUTER_NAMESPACE}/${PAGES.MOVED}`,
+    page: PAGES.MOVED
+  },
+  niet_gevonden: {
+    title: '',
+    path: '/niet-gevonden',
+    type: `${ROUTER_NAMESPACE}/${PAGES.NOT_FOUND}`,
+    page: PAGES.NOT_FOUND
+  },
+
 
   dataDetail: {
     title: 'Data detail',

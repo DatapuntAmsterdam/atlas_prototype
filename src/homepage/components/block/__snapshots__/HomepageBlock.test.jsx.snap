@@ -2,7 +2,9 @@
 
 exports[`HomepageBlock should render with the children and default link 1`] = `
 <div
-  className="c-homepage__block-link homepage-block c-homepage__block c-homepage__block--tall "
+  className="c-homepage__block-link c-homepage__block c-homepage__block--tall "
+  onKeyDown={[Function]}
+  tabIndex="0"
 >
   <div>
     <span>
@@ -10,7 +12,8 @@ exports[`HomepageBlock should render with the children and default link 1`] = `
     </span>
   </div>
   <Connect(Link)
-    className="c-homepage__block-button "
+    className="c-homepage__block-button  qa-button-datasets"
+    tabIndex="-1"
     title="Bekijk test block"
     to={
       Object {
@@ -34,10 +37,13 @@ exports[`HomepageBlock should render with the children and default link 1`] = `
 
 exports[`HomepageBlock should render with the default link 1`] = `
 <div
-  className="c-homepage__block-link homepage-block c-homepage__block c-homepage__block--tall "
+  className="c-homepage__block-link c-homepage__block c-homepage__block--tall "
+  onKeyDown={[Function]}
+  tabIndex="0"
 >
   <Connect(Link)
-    className="c-homepage__block-button "
+    className="c-homepage__block-button  qa-button-datasets"
+    tabIndex="-1"
     title="Bekijk test block"
     to={
       Object {

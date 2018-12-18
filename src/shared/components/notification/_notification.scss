@@ -1,5 +1,7 @@
 @import "../../styles/config";
 
+$icon-height: 24px;
+
 .notification {
   color: $primary-light;
   display: flex;
@@ -14,6 +16,10 @@
 
   &--info {
     background-color: $darkish-blue;
+
+    a {
+      color: $white;
+    }
   }
 
   &--alert {
@@ -30,10 +36,14 @@
       line-height: 1;
       vertical-align: middle;
     }
+
+    a {
+      color: $primary-contrast-blue;
+    }
   }
 
   &__content {
-    line-height: 24px;
+    line-height: $icon-height;
     vertical-align: middle;
   }
 
@@ -44,19 +54,26 @@
     border: none;
     border-radius: 0;
     cursor: pointer;
-    height: 24px;
+    height: $icon-height;
     line-height: 0;
-    width: 24px;
+    width: $icon-height;
+
+    &:hover,
+    &:focus {
+      .notification__button--close {
+        @include icon-sprite("icon-cross", $primary-dark, $primary-dark, $icon-height +4px);
+      }
+    }
+
+    &--close {
+      @include icon-sprite("icon-cross", $primary-light, $primary-dark, $icon-height + 4px);
+      display: block;
+      height: $icon-height;
+      width: $icon-height;
+    }
   }
 
   a {
-    color: $primary-contrast-blue;
     text-decoration: underline;
-  }
-
-  svg {
-    fill: $primary-light;
-    height: 24px;
-    width: 24px;
   }
 }

@@ -26,16 +26,35 @@ $base-padding: calc(#{$base-whitespace} * 2);
     margin-top: 7px;
     float: left;
   }
+
+  a {
+    color: $primary-dark;
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    a {
+      color: $primary-contrast;
+      text-decoration: underline;
+    }
+  }
 }
 
 .c-catalogus-theme__link {
-  @extend %link;
   @include font-weight($normal-weight);
+  display: table;
   height: 40px;
+
+  &:focus {
+    color: $primary-contrast;
+    text-decoration: underline;
+  }
 }
 
 .c-catalogus-theme__link__text {
-  padding-top: 10px;
+  display: table-cell;
+  width: 100%;
   padding-right: $base-whitespace;
   line-height: 20px;
   vertical-align: middle;

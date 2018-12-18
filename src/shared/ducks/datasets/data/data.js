@@ -14,7 +14,10 @@ export const DEFAULT_VIEW = 'CATALOG';
 export const initialState = {
   isLoading: false,
   page: 1,
-  authError: false
+  authError: false,
+  result: {
+    numberOfRecords: 0
+  }
 };
 
 export default function reducer(state = initialState, action) {
