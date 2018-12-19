@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects';
 
-import watchFetchPanoPreview from './shared/sagas/panorama/preview/panorama-preview';
+import watchFetchPanoPreview from './panorama/sagas/preview/panorama-preview';
 import watchFetchSuggestions from './header/sagas/auto-suggest/auto-suggest';
 import watchDataSearch from './shared/sagas/data-search/data-search';
 import watchFetchMapBaseLayers from './map/sagas/map-base-layers';
@@ -13,7 +13,7 @@ import {
   watchClosePanorama,
   watchFetchPanorama,
   watchPanoramaRoute
-} from './shared/sagas/panorama/panorama';
+} from './panorama/sagas/panorama';
 import { watchDetailRoute } from './detail/sagas/detail';
 import watchFetchDataSelection from './shared/sagas/data-selection/data-selection';
 import watchQueryActions from './store/query-synchronization';

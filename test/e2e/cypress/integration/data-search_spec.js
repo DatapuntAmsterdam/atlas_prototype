@@ -65,7 +65,7 @@ describe('data search module', () => {
 
     cy.wait('@getPanoThumbnail');
     cy.get('.qa-dashboard__column--right')
-      .get('img.c-straatbeeld-thumbnail--img')
+      .get('img.c-panorama-thumbnail--img')
       .should('exist').and('be.visible');
 
     // click in map (there is a marker on this position)

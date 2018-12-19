@@ -128,7 +128,7 @@ const Home = ({ showFooter }) => (
                 </div>
 
                 <div className="u-col-sm--3">
-                  <div className="qa-straatbeeld-link">
+                  <div className="qa-panorama-link">
                     <HomepageBlock
                       classes="c-homepage__block--right"
                       linkAction={

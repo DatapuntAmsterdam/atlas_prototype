@@ -5,7 +5,7 @@ import { getMapZoom } from '../../ducks/map/map-selectors';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
 import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection';
 import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
-import { setPanoramaLocation } from '../../../shared/ducks/panorama/actions';
+import { setPanoramaLocation } from '../../../panorama/ducks/actions';
 
 const latitudeLongitudeToArray = (location) => [location.latitude, location.longitude];
 

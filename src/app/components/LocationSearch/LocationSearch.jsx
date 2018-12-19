@@ -72,4 +72,3 @@ LocationSearch.propTypes = {
 };
 
 export default LocationSearch;
-

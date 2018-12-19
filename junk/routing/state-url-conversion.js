@@ -2,7 +2,7 @@
 import deepCopy from 'deep-copy';  // Deprecated, added during Angular to Vanilla migration. Try ES6 Object.assign and the like where possible.
 import { stripDomain, restoreDomain } from './uri-stripper';
 import isObject from '../is-object';
-
+import { historyOptions } from '../../../panorama/ducks/panorama';
 
 //
 // This constant holds the configuration of all state variables that are stored in the url
@@ -140,12 +140,13 @@ export default {
 
       return newState;
     },
-    straatbeeld: (oldState, newState) => {
+    panorama: (oldState, newState) => {
       if (isObject(oldState)) {
         newState.targetLocation = oldState.targetLocation;
 
         if (oldState.id === newState.id) {
           newState.image = oldState.image;
+          newState.history = oldState.history;
           newState.hotspots = oldState.hotspots;
           newState.date = oldState.date;
           newState.location = oldState.location;
@@ -220,9 +221,9 @@ export default {
       isLoading: true
       // numberOfResults: null
     },
-    straatbeeld: {
+    panorama: {
       location: null, // eg: [52.8, 4.9]
-      history: 0,     // eg: 2016
+      history: historyOptions[0],
       pitch: 0,       // eg: -10
       heading: 0,     // eg: 270
       fov: 0,         // eg: 65
@@ -235,7 +236,6 @@ export default {
       isFullscreen: false,
       isInitial: true,
       isLoading: true
-      // id: 'ABC123',
     },
     ui: {
       isEmbed: false,
@@ -366,39 +366,51 @@ export default {
       name: 'search.query',
       type: 'string'
     },
-    // straatbeeld (sb)
+    // panorama (sb)
     sbf: {
-      name: 'straatbeeld.fov',
+      name: 'panorama.fov',
       type: 'base62',
       precision: 1
     },
     sbfs: {
-      name: 'straatbeeld.isFullscreen',
+      name: 'panorama.isFullscreen',
       type: 'boolean'
     },
     sbh: {
-      name: 'straatbeeld.heading',
+      name: 'panorama.heading',
       type: 'base62',
       precision: 1
     },
     sbi: {
-      name: 'straatbeeld.id',
+      name: 'panorama.id',
       type: 'string'
     },
     sbl: {
-      name: 'straatbeeld.location',
+      name: 'panorama.location',
       type: 'base62[]',
       precision: 7
     },
     sbp: {
-      name: 'straatbeeld.pitch',
+      name: 'panorama.pitch',
       type: 'base62',
       precision: 1
     },
     sby: {
-      name: 'straatbeeld.history',
+      name: 'panorama.history.year',
       type: 'base62',
       precision: 1
+    },
+    sbmt: {
+      name: 'panorama.history.missionType',
+      type: 'string'
+    },
+    sbln: {
+      name: 'panorama.history.layerName',
+      type: 'string'
+    },
+    sblb: {
+      name: 'panorama.history.label',
+      type: 'string'
     },
     // UI visibility (uv)
     uvm: {
@@ -407,4 +419,3 @@ export default {
     }
   }
 };
-

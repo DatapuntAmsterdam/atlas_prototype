@@ -11,7 +11,8 @@ import reducer, {
   toggleMapPanel,
   updateBoundingBox,
   updatePan,
-  updateZoom
+  updateZoom,
+  TOGGLE_MAP_OVERLAY_PANORAMA
 } from './map';
 import { routing } from '../../../app/routes';
 
@@ -269,23 +270,20 @@ describe('Map Reducer', () => {
     });
   });
 
-  it('should handle toggling overlays without legend items', () => {
-    const state = {
-      overlays: [
-        { id: '2' },
-        { id: '3' }
-      ]
-    };
-
-    const newOverlay = { id: '4' };
-
-    expect(reducer(state, toggleMapOverlay(newOverlay))).toEqual({
-      overlays: [
-        { id: '2' },
-        { id: '3' },
-        { id: '4', isVisible: true }
-      ]
+  it(`should add a pano overlay when dispatching ${TOGGLE_MAP_OVERLAY_PANORAMA}`, () => {
+    expect(reducer({ overlays: [] }, {
+      type: TOGGLE_MAP_OVERLAY_PANORAMA,
+      payload: 'pano'
+    })).toEqual({
+      overlays: [{ id: 'pano', isVisible: true }]
     });
+
+    // expect(reducer({ overlays: [{ id: 'pano' }] }, {
+    //   type: TOGGLE_MAP_OVERLAY_PANORAMA,
+    //   payload: 'pano'
+    // })).toEqual({
+    //   overlays: []
+    // });
   });
 
   it('should toggle the overlay visibility with and without show action', () => {

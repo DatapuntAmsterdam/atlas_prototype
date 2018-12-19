@@ -1,22 +1,22 @@
 const homepage = '.c-homepage';
-const statusBarInfo = '.c-straatbeeld-status-bar__info-item';
-const straatbeeld = '.c-straatbeeld';
+const statusBarInfo = '.c-panorama-status-bar__info-item';
+const panorama = '.c-panorama';
 
 describe('panorama module', () => {
   beforeEach(() => {
     cy.server();
-    cy.route('/panorama/recente_opnames/alle/*').as('getResults');
+    cy.route('/panorama/panoramas/*/adjacencies/?newest_in_range=true').as('getResults');
 
     // go to the homepage
     cy.visit('/');
     // the homepage should be visible
     cy.get(homepage).should('be.visible');
     // check if the link is in the dom and visible
-    cy.get('.qa-straatbeeld-link').should('exist').and('be.visible');
-    // the straatbeeld should not exist yet
-    cy.get(straatbeeld).should('not.exist');
+    cy.get('.qa-panorama-link').should('exist').and('be.visible');
+    // the panorama should not exist yet
+    cy.get(panorama).should('not.exist');
     // click on the link to go to the map
-    cy.get('.qa-straatbeeld-link').click();
+    cy.get('.qa-panorama-link').click();
 
     cy.wait('@getResults');
   });
@@ -26,7 +26,7 @@ describe('panorama module', () => {
       // the homepage should not be visible anymore
       cy.get(homepage).should('not.be.visible');
       // the map should be visible
-      cy.get(straatbeeld).should('exist').and('be.visible');
+      cy.get(panorama).should('exist').and('be.visible');
     });
   });
 
@@ -114,9 +114,9 @@ describe('panorama module', () => {
 
       cy.wait('@getOpenbareRuimte');
       cy.wait('@getPanoThumbnail');
-      cy.get('img.c-straatbeeld-thumbnail--img').should('exist').and('be.visible');
+      cy.get('img.c-panorama-thumbnail--img').should('exist').and('be.visible');
       cy.get('h2.qa-title').should('exist').and('be.visible').contains('Leidsegracht');
-      cy.get('img.c-straatbeeld-thumbnail--img').click();
+      cy.get('img.c-panorama-thumbnail--img').click();
 
       cy.wait('@getResults');
       cy.location().then((loc) => {
@@ -145,20 +145,20 @@ describe('panorama module', () => {
         expect(newUrl).not.to.equal(panoUrl);
       });
 
-      cy.get('button.c-straatbeeld__close').click();
-      cy.get('img.c-straatbeeld-thumbnail--img').should('exist').and('be.visible');
+      cy.get('button.c-panorama__close').click();
+      cy.get('img.c-panorama-thumbnail--img').should('exist').and('be.visible');
       cy.get('h2.qa-title').should('exist').and('be.visible').contains('Leidsegracht');
-      cy.get('img.c-straatbeeld-thumbnail--img').click();
+      cy.get('img.c-panorama-thumbnail--img').click();
 
       cy.get('.leaflet-container').click(20, 100);
 
       cy.wait('@getResults');
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
-        const thisUrl = loc.pathname + loc.search;
-        expect(thisUrl).to.not.equal(newUrl);
+        const thisUrl = loc.pathname + loc.hash;
+        expect(thisUrl).not.to.equal(newUrl);
       });
-      cy.get('button.c-straatbeeld__close').click();
+      cy.get('button.c-panorama__close').click();
 
       cy.waitForGeoSearch();
       cy.get('h1.o-header__title').contains('Resultaten').should('exist').and('be.visible');

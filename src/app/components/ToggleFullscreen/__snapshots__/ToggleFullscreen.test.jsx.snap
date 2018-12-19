@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToggleFullscreen actions rendering should render with fullscreen is turned off 1`] = `
+<button
+  className="toggle-fullscreen toggle-fullscreen__right"
+  onClick={[Function]}
+  title="ABC verkleinen"
+>
+  <span
+    className="
+      toggle-fullscreen__icon
+      toggle-fullscreen__icon--minimize
+    "
+  />
+</button>
+`;
+
+exports[`ToggleFullscreen actions rendering should render with fullscreen is turned on 1`] = `
+<button
+  className="toggle-fullscreen toggle-fullscreen__right"
+  onClick={[Function]}
+  title="ABC verkleinen"
+>
+  <span
+    className="
+      toggle-fullscreen__icon
+      toggle-fullscreen__icon--minimize
+    "
+  />
+</button>
+`;

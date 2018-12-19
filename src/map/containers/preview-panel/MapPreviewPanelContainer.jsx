@@ -14,7 +14,7 @@ import {
   getMapPanelResults,
   isSearchLoading
 } from '../../../shared/ducks/data-search/selectors';
-import { getPanoramaPreview } from '../../../shared/ducks/panorama/preview/panorama-preview';
+import { getPanoramaPreview } from '../../../panorama/ducks/preview/panorama-preview';
 import {
   getPageActionEndpoint,
   toDataSearchLocationAndPreserveQuery,

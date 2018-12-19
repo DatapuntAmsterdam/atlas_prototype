@@ -220,6 +220,13 @@ exports[`LeafletContainer LeafletContainer snapshot should render 1`] = `
     }
   }
   zoom={8}
+  zoomControlOptions={
+    Object {
+      "position": "bottomright",
+      "zoomInTitle": "Inzoomen",
+      "zoomOutTitle": "Uitzoomen",
+    }
+  }
 />
 `;
 
@@ -556,5 +563,12 @@ exports[`LeafletContainer LeafletContainer snapshot should render different base
     }
   }
   zoom={10}
+  zoomControlOptions={
+    Object {
+      "position": "bottomright",
+      "zoomInTitle": "Inzoomen",
+      "zoomOutTitle": "Uitzoomen",
+    }
+  }
 />
 `;

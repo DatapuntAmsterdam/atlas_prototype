@@ -2,12 +2,12 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPanoramaView } from '../../shared/ducks/panorama/selectors';
-import PANORAMA_VIEW from '../../shared/ducks/panorama/panorama-view';
-import PanoramaContainer from '../containers/PanoramaContainer';
+import { getPanoramaView } from '../../panorama/ducks/selectors';
 import MapContainer from '../../map/containers/map/MapContainer';
 import SplitScreen from '../components/SplitScreen/SplitScreen';
-import { setView } from '../../shared/ducks/panorama/actions';
+import { setView } from '../../panorama/ducks/actions';
+import PanoramaContainer from '../../panorama/containers/PanoramaContainer';
+import PANORAMA_VIEW from '../../panorama/ducks/panorama-view';
 
 /* istanbul ignore next */ // TODO: refactor, test
 const PanoramaPage = ({ view, setPanoramaView }) => {

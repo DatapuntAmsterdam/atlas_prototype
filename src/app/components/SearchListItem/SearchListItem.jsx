@@ -51,7 +51,7 @@ const SearchListItem = ({ result, category }) => (
 
     {(showSubtype(category.slug, result)) ? (
       <span className="qa-subtype">
-        ({result.subtypeLabel})
+        &nbsp;({result.subtypeLabel})
       </span>
     ) : null}
   </li>
@@ -60,9 +60,9 @@ const SearchListItem = ({ result, category }) => (
 SearchListItem.propTypes = {
   result: PropTypes.shape({
     label: PropTypes.string,
-    linkTo: PropTypes.string
+    linkTo: PropTypes.shape()
   }).isRequired,
-  category: PropTypes.string.isRequired
+  category: PropTypes.shape().isRequired
 };
 
 export default SearchListItem;

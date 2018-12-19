@@ -1,0 +1,57 @@
+@import "../../../shared/styles/config";
+
+.c-panorama-status-bar {
+  background-color: $primary-light-alpha67;
+  bottom: 0;
+  color: $primary-dark;
+  height: $button-size;
+  line-height: $button-size;
+  padding-right: $base-whitespace / 2;
+  position: absolute;
+  width: 100%;
+}
+
+.c-panorama-status-bar__history {
+  border-right: 1px solid $secondary-gray20;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.c-panorama-status-bar__info {
+  @include font-size($xs-font);
+  @include font-weight($bold-weight);
+
+  bottom: 0;
+  height: $button-size;
+  left: 202px;
+  line-height: $button-size;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+}
+
+.c-panorama-status-bar__info-item {
+  border-left: solid $secondary-gray20 1px;
+  float: right;
+  padding: 0 $base-whitespace;
+}
+
+.c-panorama-status-bar-status-bar__history {
+  border: none;
+  padding-left: $base-whitespace;
+
+  &::before {
+    display: none;
+  }
+
+  &:hover,
+  &:active {
+    border: none;
+  }
+}
+
+.c-panorama-status-bar-status-bar__coordinates {
+  border: none;
+}

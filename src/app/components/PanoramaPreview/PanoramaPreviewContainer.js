@@ -3,7 +3,7 @@ import PanoramaPreview from './PanoramaPreview';
 import {
   getPanoramaPreview,
   isPanoramaPreviewLoading
-} from '../../../shared/ducks/panorama/preview/panorama-preview';
+} from '../../../panorama/ducks/preview/panorama-preview';
 
 const mapStateToProps = (state) => ({
   panoramaPreview: getPanoramaPreview(state),

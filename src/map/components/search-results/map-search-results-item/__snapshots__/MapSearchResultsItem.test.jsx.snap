@@ -42,6 +42,11 @@ exports[`MapSearchResultsItem rendering should update an item 1`] = `
       >
         ABC123
       </div>
+      <div
+        className="map-search-results-item__status"
+      >
+        dam 1
+      </div>
     </section>
     <span
       className="map-search-results-item__arrow"

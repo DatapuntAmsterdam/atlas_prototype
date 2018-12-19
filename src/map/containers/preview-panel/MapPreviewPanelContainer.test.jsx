@@ -18,7 +18,7 @@ import {
 import {
   FETCH_PANORAMA_PREVIEW_REQUEST,
   fetchPanoramaPreview
-} from '../../../shared/ducks/panorama/preview/panorama-preview';
+} from '../../../panorama/ducks/preview/panorama-preview';
 import { getLocationId } from '../../ducks/map/map-selectors';
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
 import { toMap, toPanorama } from '../../../store/redux-first-router';
@@ -29,7 +29,7 @@ jest.mock('../../../shared/ducks/data-search/selectors');
 jest.mock('../../ducks/panel-layers/map-panel-layers');
 jest.mock('../../ducks/detail/map-detail');
 jest.mock('../../ducks/map/map-selectors');
-jest.mock('../../../shared/ducks/panorama/preview/panorama-preview');
+jest.mock('../../../panorama/ducks/preview/panorama-preview');
 jest.mock('../../../shared/ducks/selection/selection');
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
 

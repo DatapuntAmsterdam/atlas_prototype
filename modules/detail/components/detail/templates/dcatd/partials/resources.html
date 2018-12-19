@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="resources-item__right">
-                            <div class="resources-item__modified">{{resource['dct:modified'] | date:'dd MMMM yyyy' }}</div>
+                            <div class="resources-item__modified">gewijzigd op {{resource['dct:modified'] | date:'dd MMMM yyyy' }}</div>
                             <div class="resources-item__navigation">
                                 <div class="resources-item__navigation-file-size" ng-if="resource['dcat:byteSize'] > 0">{{resource['dcat:byteSize'] | filesize}}</div>
                                 <div class="resources-item__navigation-arrow"></div>

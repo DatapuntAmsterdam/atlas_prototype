@@ -7,7 +7,7 @@ import {
   getNumberOfResults,
   isSearchLoading
 } from '../../shared/ducks/data-search/selectors';
-import { getPanoramaPreview } from '../../shared/ducks/panorama/preview/panorama-preview';
+import { getPanoramaPreview } from '../../panorama/ducks/preview/panorama-preview';
 import LocationSearch from '../components/LocationSearch/LocationSearch';
 
 const mapStateToProps = (state) => ({
@@ -21,4 +21,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, null)(LocationSearch);
-

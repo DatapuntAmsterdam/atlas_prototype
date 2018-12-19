@@ -161,6 +161,7 @@ class MapLeaflet extends React.Component {
       mapOptions,
       markers,
       scaleControlOptions,
+      zoomControlOptions,
       zoom,
       loading
     } = this.props;
@@ -198,6 +199,7 @@ class MapLeaflet extends React.Component {
                 key={layerIndex}
                 {...layer.overlayOptions}
                 url={layer.url}
+                params={layer.params}
                 opacity={visibleToOpacity(layer.isVisible)}
               />
             ))
@@ -254,7 +256,7 @@ class MapLeaflet extends React.Component {
           <ScaleControl {...scaleControlOptions} />
           {
             this.props.isZoomControlVisible && (
-              <ZoomControl position="bottomright" />
+              <ZoomControl {...zoomControlOptions} />
             )
           }
           <MapBusyIndicator loading={loading} />
@@ -278,6 +280,7 @@ MapLeaflet.defaultProps = {
   mapOptions: {},
   markers: [],
   scaleControlOptions: {},
+  zoomControlOptions: {},
   zoom: 11,
   loading: false,
   isZoomControlVisible: true,
@@ -315,6 +318,7 @@ MapLeaflet.propTypes = {
   onResizeEnd: PropTypes.func,
   onZoomEnd: PropTypes.func,
   scaleControlOptions: PropTypes.shape({}),
+  zoomControlOptions: PropTypes.shape({}),
   zoom: PropTypes.number,
   loading: PropTypes.bool
 };

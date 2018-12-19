@@ -1,7 +1,7 @@
 export default [
   {
     id: 'pano',
-    layers: ['panorama_recent'],
+    layers: ['panorama_new'],
     legendItems: [
       {
         selectable: false,
@@ -23,7 +23,7 @@ export default [
   },
   {
     id: 'pano2018',
-    layers: ['panorama_recent_2018'],
+    layers: ['panorama_new_2018'],
     legendItems: [
       {
         selectable: false,
@@ -37,7 +37,7 @@ export default [
   },
   {
     id: 'pano2017',
-    layers: ['panorama_recent_2017'],
+    layers: ['panorama_new_2017'],
     legendItems: [
       {
         selectable: false,
@@ -47,11 +47,11 @@ export default [
     maxZoom: 16,
     minZoom: 11,
     title: 'Panoramabeelden',
-    url: '/maps/panorama?version=1.3.0&service=WMS'
+    url: '/maps/panorama&version=1.3.0&service=WMS'
   },
   {
     id: 'pano2016',
-    layers: ['panorama_recent_2016'],
+    layers: ['panorama_new_2016'],
     legendItems: [
       {
         selectable: false,
@@ -61,7 +61,7 @@ export default [
     maxZoom: 16,
     minZoom: 11,
     title: 'Panoramabeelden',
-    url: '/maps/panorama?version=1.3.0&service=WMS'
+    url: '/maps/panorama&version=1.3.0&service=WMS'
   },
   {
     category: 'Geografie: onroerende zaken',

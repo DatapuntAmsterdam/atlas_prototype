@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PanoramaContainer should render StatusBar when panoramaState is complete 1`] = `
+<div
+  className="c-panorama"
+>
+  <div
+    className="c-panorama__marzipano js-marzipano-viewer"
+    onMouseDown={[Function]}
+    role="button"
+    tabIndex="-1"
+  />
+  <ToggleFullscreen
+    alignLeft={true}
+    isFullscreen={false}
+    onToggleFullscreen={[Function]}
+    title="Panoramabeeld"
+  />
+  <StatusBar
+    date="2012-12-12T00:00:00.000Z"
+    heading={999}
+    history={Object {}}
+    location={Array []}
+  />
+</div>
+`;
+
+exports[`PanoramaContainer should render everything 1`] = `
+<Connect(PanoramaContainer)
+  isFullscreen={false}
+  panoramaState={
+    Object {
+      "date": "2012-12-12T00:00:00.000Z",
+      "heading": 999,
+      "history": Object {
+        "label": "ABC",
+        "missionType": "ABC",
+        "year": 2020,
+      },
+      "id": "ABC",
+      "image": "ABC_IMAGE.jpg",
+      "location": Array [
+        1,
+        2,
+      ],
+    }
+  }
+>
+  <PanoramaContainer
+    closePanorama={[Function]}
+    fetchPanoramaById={[Function]}
+    isFullscreen={false}
+    locationString={undefined}
+    panoramaState={Object {}}
+    setOrientation={[Function]}
+    toPanorama={[Function]}
+  >
+    <div
+      className="c-panorama"
+    >
+      <div
+        className="c-panorama__marzipano js-marzipano-viewer"
+        onMouseDown={[Function]}
+        role="button"
+        tabIndex="-1"
+      />
+      <ToggleFullscreen
+        alignLeft={true}
+        isFullscreen={false}
+        onToggleFullscreen={[Function]}
+        title="Panoramabeeld"
+      >
+        <button
+          className="toggle-fullscreen toggle-fullscreen__left"
+          onClick={[Function]}
+          title="Panoramabeeld vergroten"
+        >
+          <span
+            className="
+      toggle-fullscreen__icon
+      toggle-fullscreen__icon--maximize
+    "
+          />
+        </button>
+      </ToggleFullscreen>
+    </div>
+  </PanoramaContainer>
+</Connect(PanoramaContainer)>
+`;

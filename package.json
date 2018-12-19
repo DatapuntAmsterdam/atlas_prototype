@@ -64,7 +64,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.throttle": "4.1.1",
     "marked": "^0.5.0",
-    "marzipano": "https://github.com/Amsterdam/marzipano.git#master",
+    "marzipano": "git+https://github.com/Amsterdam/marzipano.git#master",
     "objectFitPolyfill": "^2.1.1",
     "proj4": "^2.4.4",
     "proj4leaflet": "^1.0.2",

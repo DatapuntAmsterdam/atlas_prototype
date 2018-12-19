@@ -65,10 +65,9 @@ const DataSearch = ({
                     {result.warning}
                   </Panel>
                   }
-
                   <SearchList
                     categoryResults={result}
-                    limit={category ? undefined : 10}
+                    limit={category ? null : 10}
                     hasLoadMore={
                       category && (searchResults[0].count > searchResults[0].results.length)
                     }
@@ -96,11 +95,11 @@ const DataSearch = ({
                   </div>
                   }
                 </div>
-
                 <div className="s-indented-list">
                   {!!result.subResults &&
                   <DataSearch
                     searchResults={result.subResults}
+                    numberOfResults={numberOfResults}
                     {...{
                       fetchDetailPage,
                       setSearchCategory,
@@ -121,7 +120,9 @@ const DataSearch = ({
 DataSearch.propTypes = {
   user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   numberOfResults: PropTypes.number.isRequired,
-  category: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  category: PropTypes.oneOfType( // eslint-disable-line react/require-default-props
+    [PropTypes.string, PropTypes.object]
+  ),
   setSearchCategory: PropTypes.func.isRequired,
   fetchDetailPage: PropTypes.func.isRequired,
   searchResults: PropTypes.arrayOf(PropTypes.object).isRequired
