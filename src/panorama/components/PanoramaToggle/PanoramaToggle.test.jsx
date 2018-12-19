@@ -29,12 +29,13 @@ describe('PanoramaToggle', () => {
         label: 'XYZ',
         layerName: '2020XYZ',
         missionType: 'XYZ'
-      },
+      }
     ],
     location: [2, 3]
   };
+
   fetchPanoramaRequestToggle.mockReturnValue({ type: '' });
-  
+
   it('should render everything', () => {
     const wrapper = shallow(
       <PanoramaToggle {...props} />, { context: { store } }
