@@ -19,11 +19,10 @@ export const historyOptions = [
   { year: 2016, missionType: 'bi', label: 'Alleen 2016 regulier', layerName: 'pano2016bi' }
 ];
 
-
 export const initialState = {
   view: PANORAMA_VIEW.MAP_PANO,
   location: null,   // eg: [52.8, 4.9]
-  year: undefined,  // eg: 2016
+  history: historyOptions[0],
   pitch: 0,         // eg: -10
   heading: 0,       // eg: 270
   fov: null,        // eg: 65
