@@ -17,7 +17,7 @@ describe('PanoramaContainer', () => {
       id: 'ABC',
       heading: 999,
       image: 'ABC_IMAGE.jpg',
-      date: new Date('12-12-2012'),
+      date: '2012-12-12T00:00:00.000Z',
       location: [1, 2],
       history: {
         year: 2020,
@@ -42,7 +42,7 @@ describe('PanoramaContainer', () => {
 
     wrapper.setProps({
       panoramaState: {
-        date: new Date('12-12-2012'),
+        date: '2012-12-12T00:00:00.000Z',
         location: [],
         history: {},
         heading: 999
