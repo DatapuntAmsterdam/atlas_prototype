@@ -9,63 +9,202 @@ import sharedConfig from '../../../shared/services/shared-config/shared-config';
 
 jest.mock('../../../shared/services/api/api');
 
-describe('The panoramaApi Factory', () => {
+describe('The Panorama Api', () => {
   beforeEach(() => {
-    getByUrl.mockImplementation(() => Promise.resolve({
-      image_sets: {
-        cubic: {
-          pattern: 'http://pano.amsterdam.nl/all/cubic/abf123/{a}/{b}/{c}.jpg',
-          preview: 'http://pano.amsterdam.nl/all/cubic/abf123/preview.jpg'
+    getByUrl.mockImplementation((url) => {
+      if (url.includes('near=999,999') || url.includes('###')) {
+        return Promise.reject();
+      } else if (url.includes('near=1,1') && url.includes('newest_in_range=true')) {
+        return Promise.resolve({
+          _embedded: {
+            adjacencies: [],
+            panoramas: []
+          }
+        });
+      }
+
+      return Promise.resolve({
+        _embedded: {
+          adjacencies: [
+            {
+              pano_id: 'TMX7315120208-000054_pano_0002_000177',
+              direction: 116.48,
+              distance: 10.14,
+              mission_year: 2016,
+              cubic_img_baseurl: 'http://pano.amsterdam.nl/all/cubic/abf123/base.jpg',
+              cubic_img_pattern: 'http://pano.amsterdam.nl/all/cubic/abf123/{a}/{b}/{c}.jpg',
+              geometry: {
+                type: 'Point',
+                coordinates: [
+                  4.91359770418102,
+                  52.3747994036985,
+                  46.9912552172318
+                ]
+              },
+              timestamp: '2016-05-19T13:04:15.341110Z',
+              _links: {
+                cubic_img_preview: {
+                  href: 'http://pano.amsterdam.nl/all/cubic/abf123/preview.jpg'
+                }
+              }
+            },
+            {
+              pano_id: 'TMX7315120208-000054_pano_0002_000177',
+              direction: 116.48,
+              distance: 10.14,
+              mission_year: 2016,
+              cubic_img_baseurl: 'http://pano.amsterdam.nl/all/cubic/abf123/base.jpg',
+              cubic_img_pattern: 'http://pano.amsterdam.nl/all/cubic/abf123/{a}/{b}/{c}.jpg',
+              geometry: {
+                type: 'Point',
+                coordinates: [
+                  4.91359770418102,
+                  52.3747994036985,
+                  46.9912552172318
+                ]
+              },
+              timestamp: '2016-05-19T13:04:15.341110Z',
+              _links: {
+                cubic_img_preview: {
+                  href: 'http://pano.amsterdam.nl/all/cubic/abf123/preview.jpg'
+                }
+              }
+            }
+          ],
+          panoramas: [
+            {
+              pano_id: 'TMX7315120208-000054_pano_0002_000177',
+              direction: 116.48,
+              distance: 10.14,
+              mission_year: 2016,
+              cubic_img_baseurl: 'http://pano.amsterdam.nl/all/cubic/abf123/base.jpg',
+              cubic_img_pattern: 'http://pano.amsterdam.nl/all/cubic/abf123/{a}/{b}/{c}.jpg',
+              geometry: {
+                type: 'Point',
+                coordinates: [
+                  4.91359770418102,
+                  52.3747994036985,
+                  46.9912552172318
+                ]
+              },
+              timestamp: '2016-05-19T13:04:15.341110Z',
+              _links: {
+                adjacencies: 'http://pano.amsterdam.nl',
+                cubic_img_preview: {
+                  href: 'http://pano.amsterdam.nl/all/cubic/abf123/preview.jpg'
+                }
+              }
+            },
+            {
+              pano_id: 'TMX7315120208-000054_pano_0002_000178',
+              direction: 127.37,
+              distance: 5.25,
+              mission_year: 2017,
+              cubic_img_baseurl: 'http://pano.amsterdam.nl/all/cubic/abf123/base.jpg',
+              cubic_img_pattern: 'http://pano.amsterdam.nl/all/cubic/abf123/{a}/{b}/{c}.jpg',
+              geometry: {
+                type: 'Point',
+                coordinates: [
+                  4.91359770418102,
+                  52.3747994036985,
+                  46.9912552172318
+                ]
+              },
+              timestamp: '2017-05-19T13:04:15.341110Z',
+              _links: {
+                adjacencies: 'http://pano.amsterdam.nl',
+                cubic_img_preview: {
+                  href: 'http://pano.amsterdam.nl/all/cubic/abf123/preview.jpg'
+                }
+              }
+            }
+          ],
+          _links: {
+            href: 'http://pano.amsterdam.nl'
+          }
         }
-      },
-      geometrie: {
-        type: 'Point',
-        coordinates: [
-          4.91359770418102,
-          52.3747994036985,
-          46.9912552172318
-        ]
-      },
-      adjacent: [
-        {
-          pano_id: 'TMX7315120208-000054_pano_0002_000177',
-          heading: 116.48,
-          distance: 10.14,
-          year: 2016
-        },
-        {
-          pano_id: 'TMX7315120208-000054_pano_0002_000178',
-          heading: 127.37,
-          distance: 5.25,
-          year: 2017
-        }
-      ],
-      timestamp: '2016-05-19T13:04:15.341110Z'
-    }));
+      });
+    });
   });
 
-  it('calls the API factory with the correct endpoint for id', () => {
-    getImageDataById('ABC');
-    expect(getByUrl).toHaveBeenCalledWith(`${sharedConfig.API_ROOT}${PANORAMA_CONFIG.PANORAMA_ENDPOINT_ALL}ABC/`); // Test the last argument for being a promise lateron
+  const prefix = PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX;
+  const suffix = PANORAMA_CONFIG.PANORAMA_ENDPOINT_SUFFIX;
+
+  describe('calls the API for panorama', () => {
+    it('with the correct endpoint for id', () => {
+      getImageDataById('ABC', {});
+
+      const { newestInRange } = getLocationHistoryParams(null, null);
+
+      expect(getByUrl).toHaveBeenCalledWith(
+        `${sharedConfig.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}`
+      );
+    });
+
+    it('and returns error if failing for id', () => {
+      let response;
+      getImageDataById('###', {}).then((_response_) => {
+        response = _response_;
+      });
+
+      expect(getByUrl).toHaveBeenCalled();
+      expect(response).toBe(undefined);
+    });
   });
 
-  it('calls the API factory with the correct endpoint for location', () => {
-    getImageDataByLocation([52, 4]);
-    expect(getByUrl).toHaveBeenCalledWith(`${sharedConfig.API_ROOT}${PANORAMA_CONFIG.PANORAMA_ENDPOINT_ALL}?lat=52&lon=4&radius=100000`);
-  });
+  describe('calls the API for panorama', () => {
+    it('with the correct endpoint for location', () => {
+      getImageDataByLocation([52, 4]);
 
-  it('return null when no straatbeeld is found', async () => {
-    getByUrl.mockImplementation(() => Promise.resolve({}));
-    const result = await getImageDataByLocation([52, 4]);
+      const {
+        locationRange,
+        yearTypeMission,
+        standardRadius,
+        newestInRange
+      } = getLocationHistoryParams([52, 4], null);
 
-    expect(result).toBe(null);
+      expect(getByUrl).toHaveBeenCalledWith(
+        `${sharedConfig.API_ROOT}${prefix}` +
+        `/?${locationRange}${yearTypeMission}&${standardRadius}&${newestInRange}&limit_results=1`
+      );
+    });
+
+    it('with the correct endpoint for location if not found, ', () => {
+      getImageDataByLocation([1, 1]);
+
+      const {
+        locationRange,
+        yearTypeMission,
+        standardRadius,
+        newestInRange
+      } = getLocationHistoryParams([1, 1], null);
+
+      expect(getByUrl).toHaveBeenCalledWith(
+        `${sharedConfig.API_ROOT}${prefix}` +
+        `/?${locationRange}${yearTypeMission}&${standardRadius}&${newestInRange}&limit_results=1`
+      );
+    });
+
+    it('and rejects without location array', () => {
+      expect(getImageDataByLocation(null)).toBe(null);
+    });
+
+    it('and returns error if failing for location', () => {
+      let response;
+      getImageDataByLocation([999, 999], {}).then((_response_) => {
+        response = _response_;
+      });
+
+      expect(getByUrl).toHaveBeenCalled();
+      expect(response).toBe(undefined);
+    });
   });
 
   describe('the API will be mapped to the state structure', () => {
     let response;
 
     beforeEach(() => {
-      getImageDataById('ABC').then((_response_) => {
+      getImageDataById('ABC', {}).then((_response_) => {
         response = _response_;
       });
     });
@@ -81,11 +220,6 @@ describe('The panoramaApi Factory', () => {
           heading: 116.48,
           distance: 10.14,
           year: 2016
-        }, {
-          id: 'TMX7315120208-000054_pano_0002_000178',
-          heading: 127.37,
-          distance: 5.25,
-          year: 2017
         }]
       );
     });
@@ -96,6 +230,7 @@ describe('The panoramaApi Factory', () => {
 
     it('fetches the cubic image', () => {
       expect(response.image).toEqual({
+        baseurl: 'http://pano.amsterdam.nl/all/cubic/abf123/base.jpg',
         pattern: 'http://pano.amsterdam.nl/all/cubic/abf123/{a}/{b}/{c}.jpg',
         preview: 'http://pano.amsterdam.nl/all/cubic/abf123/preview.jpg'
       });
@@ -104,45 +239,54 @@ describe('The panoramaApi Factory', () => {
 
   describe('the history selection', () => {
     it('will make \'getImageDataByLocation\' use another endpoint', () => {
-      const year = 2020;
-      getImageDataByLocation([52, 4], year);
+      const history = { year: 2020, missionType: 'WOZ' };
+      getImageDataByLocation([52, 4], history);
 
-      expect(getByUrl).toHaveBeenCalledWith(`${sharedConfig.API_ROOT}${PANORAMA_CONFIG.PANORAMA_ENDPOINT_YEAR}${year}/?lat=52&lon=4&radius=100000`);
-    });
-
-    it('will make \'getImageDataById\' use another endpoint', () => {
-      const year = 2020;
-      getImageDataById('ABC', year);
-
-      expect(getByUrl).toHaveBeenCalledWith(
-        `${sharedConfig.API_ROOT}${PANORAMA_CONFIG.PANORAMA_ENDPOINT_YEAR}${year}/ABC/`
-      );
-    });
-
-    it('will not change the endpoint when falsy', () => {
-      getImageDataByLocation([52, 4], 0);
       const {
         locationRange,
         yearTypeMission,
         standardRadius,
-        largeRadius,
         newestInRange
-      } = getLocationHistoryParams([52, 4], 0);
+      } = getLocationHistoryParams([52, 4], history);
 
       expect(getByUrl).toHaveBeenCalledWith(
-        `${sharedConfig.API_ROOT}${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}` +
+        `${sharedConfig.API_ROOT}${prefix}` +
         `/?${locationRange}${yearTypeMission}&${standardRadius}&${newestInRange}&limit_results=1`
       );
+    });
+
+    it('will make \'getImageDataById\' use another endpoint', () => {
+      const history = { year: 2020, missionType: 'WOZ' };
+      getImageDataById('ABC', history);
+
+      const {
+        yearTypeMission,
+        newestInRange
+      } = getLocationHistoryParams(null, history);
 
       expect(getByUrl).toHaveBeenCalledWith(
-        `${sharedConfig.API_ROOT}${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}` +
-        `/?${locationRange}${yearTypeMission}&${largeRadius}&${newestInRange}&limit_results=1`
+        `${sharedConfig.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}${yearTypeMission}`
+      );
+    });
+
+    it('will not change the endpoint when falsy', () => {
+      getImageDataByLocation([42, 4], null);
+      const {
+        locationRange,
+        yearTypeMission,
+        standardRadius,
+        newestInRange
+      } = getLocationHistoryParams([52, 4], null);
+
+      expect(getByUrl).toHaveBeenCalledWith(
+        `${sharedConfig.API_ROOT}${prefix}` +
+        `/?${locationRange}${yearTypeMission}&${standardRadius}&${newestInRange}&limit_results=1`
       );
 
       getImageDataById('ABC', 0);
 
       expect(getByUrl).toHaveBeenCalledWith(
-        `${sharedConfig.API_ROOT}${PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX}ABC/${newestInRange}`
+        `${sharedConfig.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}`
       );
     });
   });

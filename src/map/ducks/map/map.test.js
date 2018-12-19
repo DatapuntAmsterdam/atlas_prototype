@@ -12,7 +12,7 @@ import reducer, {
   updateBoundingBox,
   updatePan,
   updateZoom,
-  MAP_ADD_PANO_OVERLAY
+  TOGGLE_MAP_OVERLAY_PANORAMA
 } from './map';
 import { routing } from '../../../app/routes';
 
@@ -270,33 +270,20 @@ describe('Map Reducer', () => {
     });
   });
 
-  it(`should add a pano overlay when dispatching ${MAP_ADD_PANO_OVERLAY}`, () => {
+  it(`should add a pano overlay when dispatching ${TOGGLE_MAP_OVERLAY_PANORAMA}`, () => {
     expect(reducer({ overlays: [] }, {
-      type: MAP_ADD_PANO_OVERLAY,
-      payload: {
-        id: 'panob',
-        history: {
-          year: 0,
-          layerName: 'pano'
-        }
-      }
+      type: TOGGLE_MAP_OVERLAY_PANORAMA,
+      payload: 'pano'
     })).toEqual({
       overlays: [{ id: 'pano', isVisible: true }]
     });
 
-    expect(reducer({ overlays: [{ id: 'panoaaa' }] }, {
-      type: MAP_ADD_PANO_OVERLAY,
-      payload: {}
-    })).toEqual({
-      overlays: [{ id: 'pano', isVisible: true }]
-    });
-
-    expect(reducer({ map: { overlays: [{ id: 'pano' }] } }, {
-      type: MAP_ADD_PANO_OVERLAY,
-      payload: {
-        id: 'panoaaa'
-      }
-    })).toEqual({ map: { overlays: [{ id: 'pano' }] } });
+    // expect(reducer({ overlays: [{ id: 'pano' }] }, {
+    //   type: TOGGLE_MAP_OVERLAY_PANORAMA,
+    //   payload: 'pano'
+    // })).toEqual({
+    //   overlays: []
+    // });
   });
 
   it('should toggle the overlay visibility with and without show action', () => {

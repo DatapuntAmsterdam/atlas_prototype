@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="110px" height="110px" viewBox="0 0 110 110" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>icoon-pano-4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icoon-pano-4" fill="#231F1F">
+            <path d="M79.5,55 C79.5,41.4688369 68.5311631,30.5 55,30.5 C41.4688369,30.5 30.5,41.4688369 30.5,55 C30.5,68.5311631 41.4688369,79.5 55,79.5 C68.5311631,79.5 79.5,68.5311631 79.5,55 Z M84.5,55 C84.5,71.2925869 71.2925869,84.5 55,84.5 C38.7074131,84.5 25.5,71.2925869 25.5,55 C25.5,38.7074131 38.7074131,25.5 55,25.5 C71.2925869,25.5 84.5,38.7074131 84.5,55 Z" id="Stroke-142" fill-rule="nonzero"></path>
+            <polygon id="Fill-143" transform="translate(55.000000, 14.000000) rotate(180.000000) translate(-55.000000, -14.000000) " points="69 0 54.754386 28 41 0.164540209"></polygon>
+        </g>
+    </g>
+</svg>

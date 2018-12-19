@@ -36,7 +36,7 @@ export const PANORAMA_CONFIG = {
 const prefix = PANORAMA_CONFIG.PANORAMA_ENDPOINT_PREFIX;
 const suffix = PANORAMA_CONFIG.PANORAMA_ENDPOINT_SUFFIX;
 
-const getLocationHistoryParams = (location, history) => {
+export const getLocationHistoryParams = (location, history) => {
   const yearTypeMission = (history && history.year)
     ? `&mission_year=${history.year}&mission_type=${history.missionType}`
     : '';

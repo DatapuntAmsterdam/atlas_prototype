@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusBar should render 1`] = `
+<div
+  className="c-panorama-status-bar"
+>
+  <Connect(PanoramaToggle)
+    heading={999}
+    history={Object {}}
+    historyOptions={
+      Array [
+        Object {
+          "label": "Meest recent",
+          "layerName": "pano",
+          "missionType": "",
+          "year": 0,
+        },
+        Object {
+          "label": "Alleen 2018 regulier",
+          "layerName": "pano2018bi",
+          "missionType": "bi",
+          "year": 2018,
+        },
+        Object {
+          "label": "Alleen 2018 WOZ",
+          "layerName": "pano2018woz",
+          "missionType": "woz",
+          "year": 2018,
+        },
+        Object {
+          "label": "Alleen 2017 regulier",
+          "layerName": "pano2017bi",
+          "missionType": "bi",
+          "year": 2017,
+        },
+        Object {
+          "label": "Alleen 2017 WOZ",
+          "layerName": "pano2017woz",
+          "missionType": "woz",
+          "year": 2017,
+        },
+        Object {
+          "label": "Alleen 2016 regulier",
+          "layerName": "pano2016bi",
+          "missionType": "bi",
+          "year": 2016,
+        },
+      ]
+    }
+    location={
+      Array [
+        2,
+        3,
+      ]
+    }
+  />
+  <div
+    className="c-panorama-status-bar__info"
+  >
+    <div
+      className="c-panorama-status-bar__info-item"
+    >
+      <span>
+        12.00, 9.00 (2.0000000, 3.0000000)
+      </span>
+    </div>
+    <div
+      className="c-panorama-status-bar__info-item"
+    >
+      <span />
+    </div>
+  </div>
+</div>
+`;

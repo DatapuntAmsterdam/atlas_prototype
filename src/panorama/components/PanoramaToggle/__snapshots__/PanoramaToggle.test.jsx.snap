@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PanoramaToggle menu opens on button click 1`] = `
+<div
+  className="c-panorama-status-bar__history"
+>
+  <div
+    className="c-panorama-toggle qa-panorama-toggle"
+  >
+    <button
+      className="
+              c-panorama-toggle__button
+              qa-panorama-toggle__button
+              c-panorama-toggle__button--active
+            "
+      onClick={[Function]}
+      onKeyPress={[Function]}
+    >
+      ABC
+    </button>
+    <ul
+      className="c-panorama-toggle__menu qa-panorama-toggle__menu"
+    >
+      <li
+        className="
+                  c-panorama-toggle__item
+                  qa-panorama-toggle__item
+                "
+        key="2020ABC"
+      >
+        <button
+          onClick={[Function]}
+        >
+          ABC
+        </button>
+      </li>
+      <li
+        className="
+                  c-panorama-toggle__item
+                  qa-panorama-toggle__item
+                "
+        key="2020XYZ"
+      >
+        <button
+          onClick={[Function]}
+        >
+          XYZ
+        </button>
+      </li>
+      <li
+        className="c-panorama-toggle__devider qa-panorama-toggle__devider"
+        key="divider"
+      />
+      <li
+        className="c-panorama-toggle__external qa-panorama-toggle__external"
+        key="google-street-view"
+      >
+        <a
+          className=" c-link c-link--arrow c-panorama-toggle__external-link qa-panorama-toggle__external-link"
+          href="http://maps.google.com/maps?q=&layer=c&cbll=2,3&cbp=11,999,0,0,0"
+          onClick={[Function]}
+          rel="noopener"
+          target="_blank"
+        >
+          Google Street View
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`PanoramaToggle should render everything 1`] = `
+<div
+  className="c-panorama-status-bar__history"
+>
+  <div
+    className="c-panorama-toggle qa-panorama-toggle"
+  >
+    <button
+      className="
+              c-panorama-toggle__button
+              qa-panorama-toggle__button
+              
+            "
+      onClick={[Function]}
+      onKeyPress={[Function]}
+    >
+      ABC
+    </button>
+  </div>
+</div>
+`;

@@ -17,6 +17,7 @@ describe('PanoramaContainer', () => {
       id: 'ABC',
       heading: 999,
       image: 'ABC_IMAGE.jpg',
+      date: new Date('12-12-2012'),
       location: [1, 2],
       history: {
         year: 2020,
@@ -30,6 +31,23 @@ describe('PanoramaContainer', () => {
     const wrapper = mount(
       <PanoramaContainer {...props} />, { context: { store } }
     );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render StatusBar when panoramaState is complete', () => {
+    const wrapper = shallow(
+      <PanoramaContainer {...props} />, { context: { store } }
+    ).dive();
+
+    wrapper.setProps({
+      panoramaState: {
+        date: new Date('12-12-2012'),
+        location: [],
+        history: {},
+        heading: 999
+      }
+    });
 
     expect(wrapper).toMatchSnapshot();
   });
