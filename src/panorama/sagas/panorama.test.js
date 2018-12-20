@@ -2,7 +2,6 @@ import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import { select, takeLatest } from 'redux-saga/effects';
 import {
   doClosePanorama,
-  fetchPanorama,
   fetchPanoramaById,
   fetchPanoramaByLocation,
   fetchPanoramaRequest,
@@ -60,11 +59,11 @@ describe('watchFetchPanorama', () => {
     testSaga(watchFetchPanorama)
       .next()
       .all([
-        takeLatest(FETCH_PANORAMA_REQUEST, fetchPanorama),
+        takeLatest(FETCH_PANORAMA_REQUEST, fetchPanoramaById),
         takeLatest([
-          FETCH_PANORAMA_REQUEST_TOGGLE,
           SET_PANORAMA_YEAR,
-          SET_PANORAMA_LOCATION
+          SET_PANORAMA_LOCATION,
+          FETCH_PANORAMA_REQUEST_TOGGLE
         ], fetchPanoramaByLocation)
       ])
       .next(action)

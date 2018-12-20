@@ -12,7 +12,7 @@ import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selectio
 
 jest.mock('../../../shared/ducks/selection/selection');
 jest.mock('../../../shared/ducks/data-search/selectors');
-jest.mock('../../../shared/ducks/panorama/selectors');
+jest.mock('../../../panorama/ducks/selectors');
 jest.mock('../detail/map-detail');
 describe('Map Selectors', () => {
   const map = {

@@ -14,8 +14,8 @@ class MapPreviewPanel extends React.Component {
   }
 
   onPanoPreviewClick() {
-    const { openPano, panoPreview } = this.props;
-    openPano(panoPreview.id, panoPreview.heading);
+    const { openPano, panoPreview, detailLocation } = this.props;
+    openPano(panoPreview.id, panoPreview.heading, detailLocation);
   }
 
   render() {
@@ -113,6 +113,7 @@ MapPreviewPanel.propTypes = {
   isEmbed: PropTypes.bool,
   mapDetail: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   missingLayers: PropTypes.string,
+  detailLocation: PropTypes.arrayOf(PropTypes.string).isRequired,
   closePanel: PropTypes.func.isRequired,
   openDetail: PropTypes.func.isRequired,
   // onMapPreviewPanelMaximizeSearch: PropTypes.func.isRequired,

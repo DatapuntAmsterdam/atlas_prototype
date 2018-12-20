@@ -33,7 +33,7 @@ const HomepageAddressBlock = () => (
     title="Adressentabel"
     description="Selecteer en download als spreadsheet"
     hasTallDescription
-    blockIsLink
+    blockIsLink={false}
   >
     <div className="homepage-block">
       {Object.keys(BLOCK_ITEMS).map((key) => {

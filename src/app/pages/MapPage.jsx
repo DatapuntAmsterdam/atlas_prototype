@@ -28,7 +28,7 @@ MapPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  hasSelectionLocation: getDataSearchLocation(state),
+  hasSelectionLocation: !!getDataSearchLocation(state),
   hasGeometryFilter: geometryFilterActive(state)
 });
 

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Notification should add the notification level as class name 1`] = `
-<p
+<div
   className="
         
         notification
@@ -21,11 +21,11 @@ exports[`Notification should add the notification level as class name 1`] = `
       className="notification__button--close"
     />
   </button>
-</p>
+</div>
 `;
 
 exports[`Notification should be able to render \`a\` elements 1`] = `
-<p
+<div
   className="
         
         notification
@@ -49,11 +49,11 @@ exports[`Notification should be able to render \`a\` elements 1`] = `
       className="notification__button--close"
     />
   </button>
-</p>
+</div>
 `;
 
 exports[`Notification should not show the close button for the message level 1`] = `
-<p
+<div
   className="
         
         notification
@@ -65,11 +65,11 @@ exports[`Notification should not show the close button for the message level 1`]
   >
     Test message
   </span>
-</p>
+</div>
 `;
 
 exports[`Notification should not show the close button when disabled 1`] = `
-<p
+<div
   className="
         
         notification
@@ -81,11 +81,11 @@ exports[`Notification should not show the close button when disabled 1`] = `
   >
     Test message
   </span>
-</p>
+</div>
 `;
 
 exports[`Notification should render the provided message 1`] = `
-<p
+<div
   className="
         
         notification
@@ -105,5 +105,5 @@ exports[`Notification should render the provided message 1`] = `
       className="notification__button--close"
     />
   </button>
-</p>
+</div>
 `;

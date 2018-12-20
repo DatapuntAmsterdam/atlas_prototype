@@ -55,7 +55,7 @@ const mapStateToProps = (state) => ({
   hasGeometry: Boolean(getDetailGeometry(state)),
   view: getDetailView(state),
   endpoint: getDetailEndpoint(state),
-  hasSelection: getSelectionType(state)
+  hasSelection: !!getSelectionType(state)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

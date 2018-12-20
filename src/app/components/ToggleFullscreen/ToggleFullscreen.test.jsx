@@ -16,7 +16,7 @@ describe('ToggleFullscreen', () => {
       const wrapper = shallow(
         <ToggleFullscreen {...props} />
       );
-      wrapper.find('button').at(0).simulate('click');
+      wrapper.find('Button').at(0).simulate('click');
       expect(onToggleFullscreen).toHaveBeenCalled();
     });
 
@@ -24,7 +24,7 @@ describe('ToggleFullscreen', () => {
       const wrapper = shallow(
         <ToggleFullscreen {...props} />
       );
-      wrapper.find('button').at(0).simulate('click');
+      wrapper.find('Button').at(0).simulate('click');
       expect(onToggleFullscreen).toHaveBeenCalled();
     });
 

@@ -33,7 +33,7 @@ describe('Panorama Reducer', () => {
       hotspots: [],
       image: null,
       isLoading: true,
-      reference: null,
+      reference: [],
       location: null,
       pitch: 0
     });
@@ -164,7 +164,7 @@ describe('panorama selectors', () => {
 
     it('should return an empty string if panorama is empty', () => {
       const selected = selectors.getPanoramaLocation.resultFunc('');
-      expect(selected).toEqual('');
+      expect(selected).toEqual([]);
     });
   });
 

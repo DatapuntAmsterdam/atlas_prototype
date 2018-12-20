@@ -11,7 +11,7 @@ import datasetQuery, { ACTIONS as DATASET_ACTIONS } from '../shared/ducks/datase
 import detailQuery, { ACTIONS as DETAIL_ACTIONS } from '../shared/ducks/detail/query';
 import uiQuery, { ACTIONS as UI_ACTIONS } from '../shared/ducks/ui/ui-query';
 import { getLocationQuery } from './redux-first-router';
-import { ROUTER_NAMESPACE } from '../app/routes';
+import { ROUTE_ACTIONS, ROUTER_NAMESPACE } from '../app/routes';
 
 const separateHistory = createHistory();
 
@@ -23,7 +23,8 @@ const watchedActions = [
   ...DATASET_ACTIONS,
   ...UI_ACTIONS,
   ...DATA_SEARCH_ACTIONS,
-  ...DETAIL_ACTIONS
+  ...DETAIL_ACTIONS,
+  ...ROUTE_ACTIONS
 ];
 
 const querieObjects = [

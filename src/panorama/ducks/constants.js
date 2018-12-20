@@ -33,5 +33,5 @@ export const initialState = {
   hotspots: [],     // eg: [{id: 'ABC124', heading: 90, distance: 18}],
   date: null,       // eg: new Date()
   isLoading: true,
-  reference: null
+  reference: []
 };

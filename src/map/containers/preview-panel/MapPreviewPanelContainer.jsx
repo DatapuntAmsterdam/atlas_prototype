@@ -16,6 +16,7 @@ import {
 } from '../../../shared/ducks/data-search/selectors';
 import { getPanoramaPreview } from '../../../panorama/ducks/preview/panorama-preview';
 import {
+  getDetailLocation,
   getPageActionEndpoint,
   toDataSearchLocationAndPreserveQuery,
   toMap,
@@ -27,6 +28,7 @@ const mapStateToProps = (state) => ({
   panoPreview: getPanoramaPreview(state),
   searchResults: getMapPanelResults(state),
   dataSearch: getDataSearch(state),
+  detailLocation: getDetailLocation(state),
   searchLocation: getDataSearchLocation(state),
   searchLocationId: getLocationId(state),
   isSearchLoaded: !isSearchLoading(state) && getMapPanelResults(state),

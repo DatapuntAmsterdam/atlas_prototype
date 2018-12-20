@@ -141,8 +141,6 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.NOT_FOUND}`,
     page: PAGES.NOT_FOUND
   },
-
-
   dataDetail: {
     title: 'Data detail',
     path: '/datasets/:type/:subtype/:id',
@@ -150,6 +148,10 @@ export const routing = {
     page: PAGES.DATA_DETAIL
   }
 };
+
+export const ROUTE_ACTIONS = Object
+  .keys(routing)
+  .reduce((acc, key) => ([...acc, routing[key].type]), []);
 
 // e.g. { home: '/' }, to be used by redux-first-router/connectRoutes
 const routes = Object.keys(routing).reduce((acc, key) => {

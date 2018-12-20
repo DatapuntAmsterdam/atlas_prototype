@@ -18,7 +18,7 @@ class Notification extends React.Component {
 
   render() {
     return this.state.isNotificationVisible && (
-      <p className={`
+      <div className={`
         ${this.props.className}
         notification
         notification--${this.props.level}
@@ -33,7 +33,7 @@ class Notification extends React.Component {
             <span className="notification__button--close" />
           </button>
         }
-      </p>
+      </div>
     );
   }
 }

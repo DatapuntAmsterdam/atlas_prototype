@@ -6,7 +6,7 @@ import { fetchPanoramaRequestToggle } from '../../ducks/actions';
 
 import PanoramaToggle from './PanoramaToggle';
 
-jest.mock('../../ducks/panorama');
+jest.mock('../../ducks/actions');
 
 describe('PanoramaToggle', () => {
   const store = configureMockStore()();
