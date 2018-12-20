@@ -71,7 +71,7 @@ export const extractIdEndpoint = (endpoint) => {
   return matches[1];
 };
 const getDetailPageData = (endpoint) => {
-  const matches = endpoint.match(/(\w+)\/([\w]+)\/([\w\.-]+)\/?$/); // eslint-disable-line no-useless-escape
+  const matches = endpoint.match(/(\w+)\/([\w-]+)\/([\w\.-]+)\/?$/); // eslint-disable-line no-useless-escape
   return {
     type: matches[1],
     subtype: matches[2],

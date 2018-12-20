@@ -7,7 +7,7 @@ describe('The dp-wkpb-link directive', function () {
             'dpDetail',
             {
                 sharedConfig: {
-                    API_ROOT: 'http://www.api-root.com/'
+                    ROOT: 'http://www.amsterdam.com/'
                 }
             },
             function ($provide) {
@@ -39,13 +39,12 @@ describe('The dp-wkpb-link directive', function () {
         return component;
     }
 
-    it('creates a dp-link that triggers FETCH_DETAIL to a object-wkpb endpoint', function () {
+    it('creates a dp-redux-link that directs to a object-wkpb endpoint', function () {
         var component = getComponent('abc789'),
             scope = component.isolateScope();
 
-        expect(component.find('dp-link').attr('type')).toBe('FETCH_DETAIL');
-        expect(component.find('dp-link').attr('payload')).toBe('vm.wkpbEndpoint');
-        expect(scope.vm.wkpbEndpoint).toBe('http://www.api-root.com/brk/object-wkpb/abc789/');
+        expect(component.find('dp-redux-link').attr('to')).toBe('vm.wkpbEndpoint | detailEndpointAction');
+        expect(scope.vm.wkpbEndpoint).toBe('http://www.amsterdam.com/brk/object-wkpb/abc789/');
     });
 
     it('is spelled WKPB-uittreksel', function () {

@@ -13,7 +13,10 @@ export default function detailReducer(state = initialState, action) {
   switch (action.type) {
     case routing.dataDetail.type: {
       const { id: idString, type, subtype } = action.payload;
-      const id = idString.substr(2); // Change `id123` to `123`
+
+      // Package `redux-first-router` doesn't support parameters starting with numbers
+      // So prefix `id` is added to numerical IDs and is filtered out here
+      const id = idString.startsWith('id') ? idString.substr(2) : idString;
 
       return {
         ...enrichedState,
@@ -47,4 +50,3 @@ export default function detailReducer(state = initialState, action) {
       return state;
   }
 }
-
