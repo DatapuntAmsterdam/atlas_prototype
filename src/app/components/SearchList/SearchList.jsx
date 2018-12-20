@@ -37,15 +37,14 @@ const SearchList = ({ categoryResults, limit, hasLoadMore, fetchMoreResults }) =
 };
 
 SearchList.defaultProps = {
-  hasLoadMore: false,
-  limit: undefined
+  hasLoadMore: false
 };
 
 SearchList.propTypes = {
   categoryResults: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   hasLoadMore: PropTypes.bool,
   fetchMoreResults: PropTypes.func.isRequired,
-  limit: PropTypes.oneOfType([PropTypes.object, PropTypes.number])
+  limit: PropTypes.number.isRequired
 };
 
 export default SearchList;

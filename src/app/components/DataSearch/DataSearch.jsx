@@ -67,7 +67,7 @@ const DataSearch = ({
                   }
                   <SearchList
                     categoryResults={result}
-                    limit={category ? null : 10}
+                    limit={category ? result.length : 10}
                     hasLoadMore={
                       category && (searchResults[0].count > searchResults[0].results.length)
                     }

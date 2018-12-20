@@ -31,6 +31,7 @@ dp-search-results {
 
 .c-search-results__block {
   @extend %list-block;
+  background-color: $primary-light;
 
   &.c-search-results__block--container {
     @extend %list-block-container;
