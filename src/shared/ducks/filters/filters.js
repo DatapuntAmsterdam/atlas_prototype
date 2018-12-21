@@ -8,6 +8,7 @@ export const EMPTY_FILTERS = `${REDUCER_KEY}/EMPTY_FILTERS`;
 
 export const ADD_FILTER = `${REDUCER_KEY}/ADD_FILTER`;
 export const REMOVE_FILTER = `${REDUCER_KEY}/REMOVE_FILTER`;
+export const SET_SHAPE_FILTER = `${REDUCER_KEY}/SET_SHAPE_FILTER`;
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -15,23 +16,13 @@ const reducer = (state = {}, action) => {
     case routing.addresses.type:
     case routing.establishments.type:
     case routing.cadastralObjects.type: {
-      const { filters: queryFilters, geoFilter, geoFilterDescription } = action.meta.query || {};
+      const { filters: queryFilters } = action.meta.query || {};
       let filterToParse = '{}';
       if (queryFilters) {
         filterToParse = atob(queryFilters);
       }
-      let shapeFilter = {};
 
-      if (geoFilter) {
-        shapeFilter = {
-          shape: {
-            slug: 'shape',
-            label: 'Locatie',
-            option: `ingetekend (${geoFilterDescription})`
-          }
-        };
-      }
-      return Object.assign({}, JSON.parse(filterToParse), shapeFilter);
+      return Object.assign({}, JSON.parse(filterToParse));
     }
 
     case ADD_FILTER:
@@ -47,6 +38,12 @@ const reducer = (state = {}, action) => {
         ...newState
       };
     }
+
+    case SET_SHAPE_FILTER:
+      return {
+        ...state,
+        shape: { ...action.payload }
+      };
 
     case EMPTY_FILTERS:
       return {};
@@ -67,6 +64,7 @@ export const removeFilter = (filterKey) => ({
   payload: filterKey
 });
 
+export const setShapeFilter = (payload) => ({ type: SET_SHAPE_FILTER, payload });
 export const emptyFilters = () => ({ type: EMPTY_FILTERS });
 
 // Selectors

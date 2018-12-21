@@ -33,14 +33,8 @@
 
             <span ng-if="tab.isActive" class="o-tabs__tab o-tabs__tab--active">
                 {{tab.title}}
-                <span ng-if="tab.isActive && vm.numberOfRecords">({{vm.numberOfRecords | number}})</span>
+                <span ng-if="tab.isActive && vm.numberOfRecords !== null">({{vm.numberOfRecords | number}})</span>
             </span>
         </li>
     </ul>
-</div>
-
-<div ng-if="vm.showNoResultsFound" class="qa-no-results-found">
-    <p class="u-margin__bottom--1-5">Geen resultaten van deze soort</p>
-
-    <p>Tip: verwijder een of meer criteria</p>
 </div>

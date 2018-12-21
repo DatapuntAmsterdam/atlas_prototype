@@ -17,6 +17,7 @@ import {
   getDataSelectionResult
 } from '../../../shared/ducks/data-selection/selectors';
 import { VIEWS } from '../../../shared/ducks/data-selection/constants';
+import NoResultsForSearchType from '../Messages/NoResultsForSearchType';
 
 const DataSelection = ({
   view,
@@ -34,7 +35,7 @@ const DataSelection = ({
   },
   page: currentPage
 }) => {
-  if (isLoading || (!numberOfRecords && !authError)) {
+  if (isLoading) {
     return <LoadingIndicator />;
   }
 
@@ -72,6 +73,13 @@ const DataSelection = ({
         />
 
         <DataSelectionActiveFilters />
+
+        {(!numberOfRecords && !authError) ?
+          <NoResultsForSearchType
+            message={'Tip: verwijder een of meer criteria'}
+          />
+          : ''
+        }
 
         {(!authError) && (
           <div className="u-grid qa-data-grid">
@@ -134,40 +142,42 @@ const DataSelection = ({
                   </AngularWrapper>
                 )}
 
-
-                <div>
-                  {view === VIEWS.TABLE && (
+                {numberOfRecords > 0 ?
+                  (<div>
+                    {view === VIEWS.TABLE && (
+                      <AngularWrapper
+                        moduleName={'dpDataSelectionTableWrapper'}
+                        component="dpDataSelectionTable"
+                        dependencies={['atlas']}
+                        bindings={{
+                          content: data,
+                          dataset
+                        }}
+                      />
+                    )}
+                    {view === VIEWS.LIST && (
+                      <AngularWrapper
+                        moduleName={'dpDataSelectionListWrapper'}
+                        component="dpDataSelectionList"
+                        dependencies={['atlas']}
+                        bindings={{
+                          content: data
+                        }}
+                      />
+                    )}
                     <AngularWrapper
-                      moduleName={'dpDataSelectionTableWrapper'}
-                      component="dpDataSelectionTable"
+                      moduleName={'dpDataSelectionPaginationWrapper'}
+                      component="dpDataSelectionPagination"
                       dependencies={['atlas']}
                       bindings={{
-                        content: data,
-                        dataset
+                        currentPage,
+                        numberOfPages,
+                        setPage
                       }}
                     />
-                  )}
-                  {view === VIEWS.LIST && (
-                    <AngularWrapper
-                      moduleName={'dpDataSelectionListWrapper'}
-                      component="dpDataSelectionList"
-                      dependencies={['atlas']}
-                      bindings={{
-                        content: data
-                      }}
-                    />
-                  )}
-                </div>
-                <AngularWrapper
-                  moduleName={'dpDataSelectionPaginationWrapper'}
-                  component="dpDataSelectionPagination"
-                  dependencies={['atlas']}
-                  bindings={{
-                    currentPage,
-                    numberOfPages,
-                    setPage
-                  }}
-                />
+                  </div>)
+                  : ''
+                }
               </div>
             </div>
           </div>

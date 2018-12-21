@@ -283,18 +283,6 @@ describe('The dp-data-selection-header', () => {
                 expect(component.find('.qa-title').length).toBe(1);
             });
 
-            it('potentially shows the no results found message', function () {
-                // When there are results
-                mockedViewInput.numberOfRecords = 1;
-                component = getComponent(mockedViewInput);
-                expect(component.find('.qa-no-results-found').length).toBe(0);
-
-                // When there are no results
-                mockedViewInput.numberOfRecords = 0;
-                component = getComponent(mockedViewInput);
-                expect(component.find('.qa-no-results-found').length).toBe(1);
-            });
-
             it('doesn\'t show tabs', function () {
                 component = getComponent(mockedViewInput);
 
@@ -315,19 +303,6 @@ describe('The dp-data-selection-header', () => {
             component = getComponent(mockedInputList);
 
             expect(component.find('.qa-tabs').length).toBe(1);
-        });
-
-        it('potentially shows the no results found message', function () {
-            // Don't show the message
-            mockedInputList.numberOfRecords = 1234;
-            component = getComponent(mockedInputList);
-            expect(component.find('.qa-no-results-found').length).toBe(0);
-
-            // Show the message
-            mockedInputList.numberOfRecords = 0;
-            component = getComponent(mockedInputList);
-            expect(component.find('.qa-no-results-found').length).toBe(1);
-            expect(component.find('.qa-no-results-found').text()).toContain('Tip: verwijder een of meer criteria');
         });
     });
 

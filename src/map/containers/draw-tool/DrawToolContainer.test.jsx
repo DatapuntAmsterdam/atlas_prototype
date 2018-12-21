@@ -134,26 +134,6 @@ describe('DrawToolContainer', () => {
         expect(wrapperInstance.props.setPolygon).toHaveBeenCalledWith([]);
       });
 
-      it('should save the markers as previous markers', () => {
-        const geometry = [...markers.filter((item, index) => index < 2)];
-        wrapperInstance.props.setPolygon.mockClear();
-        wrapper.setProps({ geometry });
-        const oldState = wrapperInstance.state;
-
-        wrapperInstance.componentWillReceiveProps({
-          ...props,
-          geometry,
-          drawingMode: drawToolConfig.DRAWING_MODE.NONE
-        });
-
-        expect(wrapperInstance.state).toEqual({
-          ...oldState,
-          drawingMode: drawToolConfig.DRAWING_MODE.NONE,
-          previousMarkers: [...geometry]
-        });
-        expect(wrapperInstance.props.setPolygon).toHaveBeenCalled();
-      });
-
       it('should not cancel after the drawingMode is changed to draw', () => {
         wrapper.setState({ drawingMode: drawToolConfig.DRAWING_MODE.NONE });
         wrapperInstance.props.cancel.mockClear();
@@ -266,6 +246,15 @@ describe('DrawToolContainer', () => {
         const polygon = {
           ...polygonMock,
           markers: [...markers.filter((item, index) => index < 2)]
+        };
+        wrapperInstance.onFinishShape(polygon);
+        expect(store.dispatch).toHaveBeenCalledWith(mapEndDrawing({ polygon }));
+      });
+
+      it('should set new Markers and dispatch MAP_END_DRAWING when the polygon has more than two points', () => {
+        const polygon = {
+          ...polygonMock,
+          markers: [...markers.filter((item, index) => index < 3)]
         };
         wrapperInstance.onFinishShape(polygon);
         expect(store.dispatch).toHaveBeenCalledWith(mapEndDrawing({ polygon }));

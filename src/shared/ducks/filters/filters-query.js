@@ -1,4 +1,4 @@
-import { ADD_FILTER, EMPTY_FILTERS, getFilters } from './filters';
+import { ADD_FILTER, EMPTY_FILTERS, getFilters, SET_SHAPE_FILTER } from './filters';
 
 /* istanbul ignore next */ // TODO: refactor, test
 const getFiltersString = (state) => (
@@ -12,4 +12,4 @@ export default {
   }
 };
 
-export const ACTIONS = [ADD_FILTER, EMPTY_FILTERS];
+export const ACTIONS = [ADD_FILTER, EMPTY_FILTERS, SET_SHAPE_FILTER];

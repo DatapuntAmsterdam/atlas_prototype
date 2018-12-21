@@ -17,8 +17,12 @@ describe('The catalog component', function () {
                     self: 'endpoint'
                 }
             };
-        })
-        ;
+        });
+    const mockedCatalogFilters = {
+        formatTypes: [{}],
+        serviceTypes: [{}],
+        distributionTypes: [{}]
+    };
 
     const mockedOptionLabelFilter = () => 'label';
 
@@ -47,17 +51,13 @@ describe('The catalog component', function () {
         $window.sessionStorage = origSessionStorage;
     });
 
-    function getComponent () {
+    function getComponent (catalogFilters = {}) {
         const element = document.createElement('dp-data-selection-catalog');
         element.setAttribute('catalog-filters', 'catalogFilters');
         element.setAttribute('content', 'content');
 
         const scope = $rootScope.$new();
-        scope.catalogFilters = {
-            formatTypes: [{}],
-            serviceTypes: [{}],
-            distributionTypes: [{}]
-        };
+        scope.catalogFilters = catalogFilters;
         scope.content = mockedContent;
 
         const component = $compile(element)(scope);
@@ -66,15 +66,22 @@ describe('The catalog component', function () {
         return component;
     }
 
+    it('should render without catalog filters', () => {
+        const component = getComponent();
+        const scope = component.isolateScope();
+
+        expect(scope.vm.items).toBeFalsy();
+    });
+
     it('sets the redirect url', () => {
-        getComponent();
+        getComponent(mockedCatalogFilters);
 
         expect($window.sessionStorage.setItem)
             .toHaveBeenCalledWith('DCATD_LIST_REDIRECT_URL', jasmine.any(String));
     });
 
     it('can load a detail page for a catalog', function () {
-        const component = getComponent();
+        const component = getComponent(mockedCatalogFilters);
         const scope = component.isolateScope();
         const link = component.find('.qa-catalog-fetch-detail')[0];
 

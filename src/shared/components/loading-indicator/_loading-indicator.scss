@@ -7,7 +7,9 @@ $spinner-height: 36px;
   display: flex;
   height: $spinner-height;
   margin: auto;
-  width: $spinner-height;
+  position: absolute;
+  top: 2 * $base-whitespace;
+  width: 100%;
 }
 
 @keyframes rotating-spinner {

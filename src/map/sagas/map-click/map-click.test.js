@@ -9,48 +9,30 @@ import { getMapZoom } from '../../ducks/map/map-selectors';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
 import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
 import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection';
-
-describe('getActiveMapLayers', () => {
-  const state = {
-    map: {
-      overlays: []
-    }
-  };
-  it('should return an empty array if there are no overlays active', () => {
-    const selected = getActiveMapLayers(state);
-    expect(selected).toEqual([]);
-  });
-
-  it('should return an empty array if there are no overlays visible', () => {
-    state.map.overlays = [state.map.overlays, { isVisible: false }];
-    const selected = getActiveMapLayers(state);
-    expect(selected).toEqual([]);
-  });
-
-  it('should return an empty array if there are no overlays found in the map layers', () => {
-    state.map.overlays = [state.map.overlays, { id: 'id', isVisible: true }];
-    state.mapLayers = { layers: { items: [] } };
-    const selected = getActiveMapLayers(state);
-    expect(selected).toEqual([]);
-  });
-
-  it('should return an empty array if there are no overlays found in the map layers', () => {
-    state.map.overlays = [state.map.overlays, { id: 'id', isVisible: true }];
-    state.mapLayers = { layers: { items: [] } };
-    const selected = getActiveMapLayers(state);
-    expect(selected).toEqual([]);
-  });
-
-  it('should return the maplayers that matches the id with the visible overlays', () => {
-    state.map.overlays = [state.map.overlays, { id: 'id', isVisible: true }];
-    state.mapLayers = { layers: { items: [{ id: 'id', detailUrl: 'url' }] } };
-    const selected = getActiveMapLayers(state);
-    expect(selected).toEqual([{ id: 'id', detailUrl: 'url' }]);
-  });
-});
+import { toPanorama } from '../../../store/redux-first-router';
+import { 
+  anorama, getPanoramaHistory } from '../../../panorama/ducks/panorama';
+import { getImageDataByLocation } from '../../../panorama/services/panorama-api/panorama-api';
 
 describe('watchMapClick', () => {
   const action = { type: SET_MAP_CLICK_LOCATION };
+
+  it('should watch "SET_MAP_CLICK_LOCATION" and call switchClickAction', () => {
+    testSaga(watchMapClick)
+      .next()
+      .takeLatestEffect(SET_MAP_CLICK_LOCATION, switchClickAction)
+      .next(action)
+      .isDone();
+  });
+});
+
+describe('switchClickAction', () => {
+  const payload = {
+    location: {
+      latitude: 52.11,
+      longitude: 4.11
+    }
+  };
 
   const mockMapLayers = [
     {
@@ -108,83 +90,99 @@ describe('watchMapClick', () => {
     url: '/maps/brk?version=1.3.0&service=WMS'
   };
 
-  it('should watch "SET_MAP_CLICK_LOCATION" and call switchClickAction', () => {
-    testSaga(watchMapClick)
-      .next()
-      .takeLatestEffect(SET_MAP_CLICK_LOCATION, switchClickAction)
-      .next(action)
-      .isDone();
-  });
+  const mapPanelLayersWithSelection = [...mockPanelLayers, matchingPanelLayer];
 
-  describe('switchClickAction', () => {
-    const payload = {
-      location: {
-        latitude: 52.11,
-        longitude: 4.11
-      }
-    };
+  const providePanorama = ({ selector }, next) => (
+    selector === getPanorama ? null : next()
+  );
 
-    const mapPanelLayersWithSelection = [...mockPanelLayers, matchingPanelLayer];
-
-    const providePanorama = ({ selector }, next) => (
-      selector === getPanorama ? null : next()
-    );
-
-    const provideMapLayers = ({ selector }, next) => (
-      selector === getActiveMapLayers ||
+  const provideMapLayers = ({ selector }, next) => (
+    selector === getActiveMapLayers ||
       selector === getLayers
       ? mockMapLayers : next()
+  );
+
+  const provideMapZoom = ({ selector }, next) => (
+    selector === getMapZoom ? 8 : next()
+  );
+
+  const provideSelectionTypePoint = ({ selector }, next) => (
+    selector === getSelectionType ? SELECTION_TYPE.POINT : next()
+  );
+
+  const provideSelectionTypePanorama = ({ selector }, next) => (
+    selector === getSelectionType ? SELECTION_TYPE.PANORAMA : next()
+  );
+
+  it('should dispatch the REQUEST_NEAREST_DETAILS when the panorama is not enabled', () => {
+    const provideMapPanelLayers = ({ selector }, next) => (
+      selector === getMapPanelLayers ? mapPanelLayersWithSelection : next()
+    );
+    return expectSaga(switchClickAction, { payload })
+      .provide({
+        select: composeProviders(
+          providePanorama,
+          provideMapLayers,
+          provideMapZoom,
+          provideMapPanelLayers,
+          provideSelectionTypePoint
+        )
+      })
+      .put({
+        type: REQUEST_NEAREST_DETAILS,
+        payload: {
+          location: payload.location,
+          layers: [...mockMapLayers],
+          zoom: 8
+        }
+      })
+      .run();
+  });
+
+  it('should dispatch setGeolocation when the panorama is not enabled and there is no panelLayer found ', () => {
+    const provideMapPanelLayers = ({ selector }, next) => (
+      selector === getActiveMapLayers ||
+        selector === getLayers
+        ? [] : next()
     );
 
-    const provideMapZoom = ({ selector }, next) => (
-      selector === getMapZoom ? 8 : next()
+    return expectSaga(switchClickAction, { payload })
+      .provide({
+        select: composeProviders(
+          providePanorama,
+          provideMapZoom,
+          provideMapPanelLayers,
+          provideSelectionTypePoint
+        )
+      })
+      .put(setGeoLocation(payload.location))
+      .run();
+  });
+
+  it('should open the panorama when in pano mode', () => {
+    const provideCallGetImageDataByLocation = ({ fn }, next) => {
+      if (fn === getImageDataByLocation) {
+        return { id: '123', location: Object.keys(payload.location).map((key) => payload.location[key]) };
+      }
+      return next();
+    };
+
+    const provideSelectPanoramaHistory = ({ selector }, next) => (
+      selector === getPanoramaHistory
+        ? { year: 2018, missionType: 'woz' } : next()
     );
 
-    const provideSelectionType = ({ selector }, next) => (
-      selector === getSelectionType ? SELECTION_TYPE.POINT : next()
-    );
-
-    it('should dispatch the REQUEST_NEAREST_DETAILS when the panorama is not enabled', () => {
-      const provideMapPanelLayers = ({ selector }, next) => (
-        selector === getMapPanelLayers ? mapPanelLayersWithSelection : next()
-      );
-      expectSaga(switchClickAction, { payload })
-        .provide({
-          select: composeProviders(
-            providePanorama,
-            provideMapLayers,
-            provideMapZoom,
-            provideMapPanelLayers,
-            provideSelectionType
-          )
-        })
-        .put({
-          type: REQUEST_NEAREST_DETAILS,
-          payload: {
-            location: payload.location,
-            layers: [...mockMapLayers],
-            zoom: 8
-          }
-        })
-        .run();
-    });
-
-    it('should dispatch setGeolocation when the panorama is not enabled and there is no panelLayer found ', () => {
-      const provideMapPanelLayers = ({ selector }, next) => (
-        selector === getMapPanelLayers ? [] : next()
-      );
-
-      expectSaga(switchClickAction, { payload })
-        .provide({
-          select: composeProviders(
-            providePanorama,
-            provideMapLayers,
-            provideMapZoom,
-            provideMapPanelLayers
-          )
-        })
-        .put(setGeoLocation(payload.location))
-        .run();
-    });
+    return expectSaga(switchClickAction, { payload })
+      .provide({
+        select: composeProviders(
+          provideSelectionTypePanorama,
+          provideSelectPanoramaHistory
+        ),
+        call: provideCallGetImageDataByLocation
+      }
+      )
+      .put(toPanorama('123', 0))
+      .run();
   });
 });
+

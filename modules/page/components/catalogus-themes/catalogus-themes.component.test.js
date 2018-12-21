@@ -1,4 +1,4 @@
-import { routing } from '../../../../src/app/routes';
+import { toDatasetsWithFilter } from '../../../../src/store/redux-first-router';
 
 describe('The dp-catalogus-themes', () => {
     let $compile,
@@ -60,29 +60,24 @@ describe('The dp-catalogus-themes', () => {
     }
 
     // Todo: DP-6235
-    xit('list all themes as links to data selection', () => {
+    it('list all themes as links to data selection', () => {
         const component = getComponent();
 
         // The first link
         expect(component.find('.qa-theme-link').eq(0).text()).toBe('Thema A');
-        expect(component.find('.qa-theme-link').eq(0).attr('class'))
+        expect(component.find('.qa-theme-link').eq(0).attr('link-class'))
             .toContain('c-catalogus-theme__icon c-catalogus-theme__icon--icon-a');
 
         const scope = component.isolateScope();
         const link = component.find('.qa-theme-link').eq(4);
         expect(link).toHaveAttr('to', 'theme.linkTo');
-        expect(scope.vm.themes[4].linkTo).toEqual({
-            type: routing.datasets.type,
-            query: {
-                filter_theme: 'thema-e'
-            }
-        });
+        expect(scope.vm.themes[4].linkTo).toEqual(toDatasetsWithFilter('thema-e'));
 
         store.dispatch.calls.reset();
 
         // The last link
         expect(component.find('.qa-theme-link').eq(4).text()).toBe('Thema E');
-        expect(component.find('.qa-theme-link').eq(4).attr('class'))
+        expect(component.find('.qa-theme-link').eq(4).attr('link-class'))
             .toContain('c-catalogus-theme__icon c-catalogus-theme__icon--icon-e');
     });
 });

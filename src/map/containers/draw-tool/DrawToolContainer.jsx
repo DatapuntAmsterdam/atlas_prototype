@@ -85,13 +85,6 @@ class DrawToolContainer extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    const markers = this.getMarkers();
-    if (!isEqual(this.state.previousMarkers, markers)) {
-      // if the markers have changed save the new markers as previous markers
-      this.setPolygon();
-      this.setState({ previousMarkers: [...markers] });
-    }
-
     if (!props.dataSelection && props.geometry && props.geometry.length === 0 &&
       props.drawingMode !== drawToolConfig.DRAWING_MODE.DRAW) {
       // if dataSelection and geometry are empty then remove the drawn polygon
@@ -108,10 +101,19 @@ class DrawToolContainer extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    // TODO DP-6340: side effect. this resets the visible layers after featching data?
-    // this.props.onMapClear();
+  componentDidUpdate(prevProps) {
+    // if the markers have changed save the old markers as previous markers
+    if (prevProps.geometry !== this.props.geometry) {
+      this.setPolygon();
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ previousMarkers: [...prevProps.geometry] });
+    }
   }
+
+  // TODO DP-6340: side effect. this resets the visible layers after featching data?
+  // componentWillUnmount() {
+    // this.props.onMapClear();
+  // }
 
   onFinishShape(polygon) {
     const has2Markers = polygon && polygon.markers && polygon.markers.length === 2;

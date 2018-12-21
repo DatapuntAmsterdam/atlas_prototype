@@ -20,7 +20,7 @@ export function* switchClickAction(action) {
   } else {
     const zoom = yield select(getMapZoom);
     const layers = yield select(getLayers);
-    if (layers.length) { // eslint-disable-line no-lonely-if
+    if (layers.length) {
       yield put({
         type: REQUEST_NEAREST_DETAILS,
         payload: {

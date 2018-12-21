@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoreResultsWhenLoggedIn should render everything 1`] = `
+<Notification
+  canClose={true}
+  className=""
+  level="info"
+  type="warning"
+>
+  <h3
+    className="c-panel__title"
+  >
+    Meer resultaten na inloggen
+  </h3>
+  <p
+    className="c-panel__paragraph"
+  >
+    Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te vinden: kadastrale subjecten, vestigingen en maatschappelijke activiteiten. Zie 
+    <Connect(Link)
+      className="c-link--light qa-link-to-page-button qa-dp-link"
+      to={
+        Object {
+          "payload": Object {
+            "deeplink": "inloggen",
+          },
+          "type": "atlasRouter/CONTROLS",
+        }
+      }
+    >
+      Help &gt; Bediening &gt; Inloggen
+    </Connect(Link)>
+  </p>
+</Notification>
+`;

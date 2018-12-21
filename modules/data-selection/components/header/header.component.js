@@ -51,11 +51,6 @@ import {
                 vm.numberOfRecords > 0 &&
                 (!exportAuthScope || vm.user.scopes.includes(exportAuthScope));
             vm.showTabs = isListView;
-            vm.showNoResultsFound = vm.numberOfRecords === 0;
-            vm.showActiveFilters = !!(
-                Object.keys(vm.filters).length ||
-                (vm.geometryFilter && vm.geometryFilter.markers && vm.geometryFilter.markers.length)
-            );
 
             vm.canEditDataset = vm.user.scopes.includes('CAT/W');
             vm.showNumberOfRecords = vm.numberOfRecords > 0 &&

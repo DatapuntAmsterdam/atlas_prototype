@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotAuthorizedPanel should render everything 1`] = `
+<Notification
+  canClose={true}
+  className=""
+  level="info"
+  type="warning"
+>
+  <div>
+    <p
+      className="c-panel__paragraph"
+    >
+      Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met zakelijk rechthebbenden te bekijken.
+    </p>
+    <p
+      className="c-panel__paragraph"
+    >
+      Zie 
+      <Connect(Link)
+        className="c-link--light qa-link-to-page-button qa-dp-link"
+        to={
+          Object {
+            "payload": Object {
+              "deeplink": "inloggen",
+            },
+            "type": "atlasRouter/CONTROLS",
+          }
+        }
+      >
+        Help &gt; Bediening &gt; Inloggen
+      </Connect(Link)>
+    </p>
+  </div>
+</Notification>
+`;

@@ -6,7 +6,8 @@ import reducer, {
   getActiveMapLayersWithinZoom,
   getMapPanelLayers,
   selectActivePanelLayers,
-  selectNotClickableVisibleMapLayers
+  selectNotClickableVisibleMapLayers,
+  getActiveMapLayers
 } from './map-panel-layers';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   isLoading: false,
   error: null
 };
+
 describe('post reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
@@ -156,6 +158,45 @@ describe('selectors', () => {
           notClickable: true
         }
       ]);
+    });
+  });
+
+  describe('getActiveMapLayers', () => {
+    const state = {
+      map: {
+        overlays: []
+      }
+    };
+    it('should return an empty array if there are no overlays active', () => {
+      const selected = getActiveMapLayers(state);
+      expect(selected).toEqual([]);
+    });
+
+    it('should return an empty array if there are no overlays visible', () => {
+      state.map.overlays = [state.map.overlays, { isVisible: false }];
+      const selected = getActiveMapLayers(state);
+      expect(selected).toEqual([]);
+    });
+
+    it('should return an empty array if there are no overlays found in the map layers', () => {
+      state.map.overlays = [state.map.overlays, { id: 'id', isVisible: true }];
+      state.mapLayers = { layers: { items: [] } };
+      const selected = getActiveMapLayers(state);
+      expect(selected).toEqual([]);
+    });
+
+    it('should return an empty array if there are no overlays found in the map layers', () => {
+      state.map.overlays = [state.map.overlays, { id: 'id', isVisible: true }];
+      state.mapLayers = { layers: { items: [] } };
+      const selected = getActiveMapLayers(state);
+      expect(selected).toEqual([]);
+    });
+
+    it('should return the maplayers that matches the id with the visible overlays', () => {
+      state.map.overlays = [state.map.overlays, { id: 'id', isVisible: true }];
+      state.mapLayers = { layers: { items: [{ id: 'id', detailUrl: 'url' }] } };
+      const selected = getActiveMapLayers(state);
+      expect(selected).toEqual([{ id: 'id', detailUrl: 'url' }]);
     });
   });
 });
