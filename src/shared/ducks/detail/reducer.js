@@ -44,7 +44,6 @@ export default function detailReducer(state = initialState, action) {
       };
 
     default:
-      return state;
+      return enrichedState;
   }
 }
-

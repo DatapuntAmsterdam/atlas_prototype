@@ -4,7 +4,7 @@ import {
   getDetailEndpoint,
   getDetailGeometry
 } from '../../../shared/ducks/detail/selectors';
-import { isDataDetailPage } from '../../../store/redux-first-router';
+import { isDataDetailPage, isPanoPage } from '../../../store/redux-first-router';
 import { FETCH_MAP_DETAIL_REQUEST, FETCH_MAP_DETAIL_SUCCESS, FETCH_MAP_DETAIL_FAILURE } from './constants';
 
 const mapDetailSelector = (state) => state.mapDetail;
@@ -33,7 +33,7 @@ export const getGeometry = createSelector(
   (detailGeometry) => detailGeometry
 );
 
-export const shouldShowGeoJson = isDataDetailPage;
+export const shouldShowGeoJson = () => isDataDetailPage || isPanoPage;
 
 export const getGeoJson = createSelector(
   shouldShowGeoJson,
