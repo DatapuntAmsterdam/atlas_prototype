@@ -27,25 +27,26 @@ const LocationSearch = ({
             <h1
               className="o-header__title u-margin__bottom--1"
             >
-              Resultaten ({numberOfResults})
+              {(numberOfResults) ? `Resultaten (${numberOfResults})` : 'Geen resultaten'}
             </h1>
             <h2
               className={`o-header__subtitle u-color__primary--dark u-font--responsive-m
                   qa-search-header`}
             >
-              Met
-              locatie {`${rdX.toFixed(2)}, ${rdY.toFixed(2)}`} ({`${location.latitude.toFixed(7)}, ${location.longitude.toFixed(7)}`})
+              met locatie {`${rdX.toFixed(2)}, ${rdY.toFixed(2)}`} ({`${location.latitude.toFixed(7)}, ${location.longitude.toFixed(7)}`})
             </h2>
           </div>
 
           {layerWarning && <NoDetailsAvailable {...{ layerWarning }} />}
 
-          {panoramaPreview && (
+          {!!numberOfResults && panoramaPreview && (
             <PanoramaPreview />
           )}
 
-          <DataSearchLocation {...{ searchResults }} />
-          {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) &&
+          {numberOfResults ?
+            <DataSearchLocation {...{ searchResults }} /> :
+            'Van deze locatie zijn geen gegevens bekend.'}
+          {(!!numberOfResults && (!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS'))) &&
           <MoreResultsWhenLoggedIn />
           }
         </div>

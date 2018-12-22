@@ -1,7 +1,7 @@
 import React from 'react';
 import { AngularWrapper } from 'react-angular';
 import PropTypes from 'prop-types';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import LoadingIndicator from '../../shared/components/loading-indicator/LoadingIndicator';
 import { DEFAULT_DATASET, DEFAULT_VIEW } from '../../shared/ducks/datasets/data/data';
 import {

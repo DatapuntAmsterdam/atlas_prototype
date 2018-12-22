@@ -24,7 +24,6 @@ describe('Map Reducer', () => {
     overlays: [],
     shapeAreaTxt: '',
     shapeDistanceTxt: '',
-    shapeMarkers: 0,
     viewCenter: [52.3731081, 4.8932945],
     zoom: 11,
     mapPanelActive: true
@@ -39,7 +38,6 @@ describe('Map Reducer', () => {
       ...state,
       overlays: [],
       drawingMode: initialState.drawingMode,
-      shapeMarkers: initialState.shapeMarkers,
       shapeDistanceTxt: initialState.shapeDistanceTxt,
       shapeAreaTxt: initialState.shapeAreaTxt
     });
@@ -53,7 +51,6 @@ describe('Map Reducer', () => {
 
   it('should set the shape state when dispatching mapUpdateShape', () => {
     const payloadAndResult = {
-      shapeMarkers: [1, 2],
       shapeDistanceTxt: 'foo',
       shapeAreaTxt: 'bar'
     };

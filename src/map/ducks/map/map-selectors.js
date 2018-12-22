@@ -23,7 +23,6 @@ export const isDrawingEnabled = createSelector(
   (mapState) => mapState.drawingMode !== drawToolConfig.DRAWING_MODE.NONE
 );
 export const getGeometry = createSelector(getMap, (mapState) => mapState.geometry);
-export const getShapeMarkers = createSelector(getMap, (mapState) => mapState.shapeMarkers);
 export const getShapeDistanceTxt = createSelector(getMap, (mapState) => mapState.shapeDistanceTxt);
 
 export const getCenter = createSelector([getMapCenter, getPanoramaLocation],
@@ -33,8 +32,6 @@ export const getCenter = createSelector([getMapCenter, getPanoramaLocation],
 
 export const getLatitude = createSelector(getCenter, (center) => center[0]);
 export const getLongitude = createSelector(getCenter, (center) => center[1]);
-export const getLocationLatLong =
-  createSelector(getLatitude, getLongitude, (lat, long) => ([lat, long]));
 
 export const getRdGeoJsons = createSelector(getDetailGeoJson, (geoJson) => [geoJson]);
 

@@ -29,7 +29,6 @@ export const initialState = {
   overlays: [],
   isLoading: false,
   drawingMode: drawToolConfig.DRAWING_MODE.NONE,
-  shapeMarkers: 0,
   shapeDistanceTxt: '',
   shapeAreaTxt: '',
   mapPanelActive: true
@@ -124,7 +123,6 @@ export default function MapReducer(state = initialState, action) {
     case MAP_UPDATE_SHAPE:
       return {
         ...enrichedState,
-        shapeMarkers: action.payload.shapeMarkers,
         shapeDistanceTxt: action.payload.shapeDistanceTxt,
         shapeAreaTxt: action.payload.shapeAreaTxt
       };
@@ -198,7 +196,6 @@ export default function MapReducer(state = initialState, action) {
         ...state,
         overlays: initialState.overlays,
         drawingMode: initialState.drawingMode,
-        shapeMarkers: initialState.shapeMarkers,
         shapeDistanceTxt: initialState.shapeDistanceTxt,
         shapeAreaTxt: initialState.shapeAreaTxt
       };
@@ -207,7 +204,6 @@ export default function MapReducer(state = initialState, action) {
       return {
         ...state,
         drawingMode: initialState.drawingMode,
-        shapeMarkers: initialState.shapeMarkers,
         shapeDistanceTxt: initialState.shapeDistanceTxt,
         shapeAreaTxt: initialState.shapeAreaTxt
       };

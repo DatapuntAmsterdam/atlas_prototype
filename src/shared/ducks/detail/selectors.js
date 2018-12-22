@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { pageTypeToEndpoint } from '../../../store/redux-first-router';
-import { DETAIL_VIEW, REDUCER_KEY } from './constants';
+import { REDUCER_KEY } from './constants';
 
 export const getDetail = (state) => state[REDUCER_KEY];
 export const getDetailView = (state) => state[REDUCER_KEY].view;
@@ -13,4 +13,3 @@ export const getDetailEndpoint = createSelector(getDetail, (detail) => {
 });
 export const getDetailDisplay = createSelector(getDetail, (detail) => detail && detail.display);
 export const isDetailLoading = createSelector(getDetail, (detail) => detail && detail.isLoading);
-export const isDetailMapView = createSelector(getDetailView, (view) => view === DETAIL_VIEW.MAP);

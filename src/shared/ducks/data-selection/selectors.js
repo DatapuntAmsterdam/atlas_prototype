@@ -9,9 +9,6 @@ export const getDataSelectionPage = createSelector(
   getDataSelection,
   (dataSelection) => dataSelection.page);
 
-export const isDataSelectionLoading = createSelector(
-  getDataSelection,
-  (dataSelection) => dataSelection.isLoading);
 export const getGeometryFilters = createSelector(
   getDataSelection,
   (dataSelection) => dataSelection.geometryFilter);
@@ -50,7 +47,6 @@ export const getGeoJsons = createSelector([getMapMarkers],
 export const getFilters = createSelector(
   getDataSelectionResult, (result) => result.filters || []
 );
-export const getGeometryFilterDescription = (state) => getGeometryFilters(state).description;
 export const getGeomarkersShape = createSelector(
   getGeometryFiltersMarkers,
   (markers) => JSON.stringify(
@@ -60,4 +56,9 @@ export const getGeomarkersShape = createSelector(
 export const hasGeometryFilter = createSelector(
   getDataSelection,
   (dataSelection) => !!get(dataSelection, 'geometryFilter.markers', false)
+);
+
+export const getNumberOfDrawMarkers = createSelector(
+  getDataSelection,
+  (dataSelection) => get(dataSelection, 'geometryFilter.markers', []).length
 );

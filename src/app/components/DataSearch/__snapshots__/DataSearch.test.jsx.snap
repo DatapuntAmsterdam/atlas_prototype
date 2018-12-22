@@ -13,19 +13,8 @@ exports[`DataSearch should render with search results 1`] = `
 `;
 
 exports[`DataSearch should render without search results 1`] = `
-<div>
-  Tip: maak de zoekcriteria minder specifiek. Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer gegevens te zien, zie 
-  <Connect(Link)
-    to={
-      Object {
-        "payload": Object {
-          "deeplink": "inloggen",
-        },
-        "type": "atlasRouter/CONTROLS",
-      }
-    }
-  >
-    Help &gt; Bediening &gt; Inloggen
-  </Connect(Link)>
-</div>
+<NoResultsForSearchType
+  message="Tip: maak de zoekcriteria minder specifiek. Of probeer in plaats van zoeken eens
+        de optie 'Alle datasets tonen' en filter vervolgens op thema."
+/>
 `;

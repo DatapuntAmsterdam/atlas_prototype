@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should render 1`] = `
+<div
+  className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
+>
+  <PiwikComponent />
+  <AngularWrapper
+    bindings={
+      Object {
+        "hasMaxWidth": true,
+        "isEmbedPreview": false,
+        "isHomePage": false,
+        "isPrintMode": false,
+        "isPrintOrEmbedOrPreview": false,
+        "user": Object {},
+      }
+    }
+    component="dpHeader"
+    dependencies={
+      Array [
+        "atlas",
+      ]
+    }
+    interpolateBindings={Object {}}
+    moduleName="dpHeaderWrapper"
+  />
+  <AngularWrapper
+    bindings={
+      Object {
+        "isHomePage": false,
+        "visibilityError": false,
+      }
+    }
+    component="dpError"
+    dependencies={
+      Array [
+        "atlas",
+      ]
+    }
+    interpolateBindings={
+      Object {
+        "hasMaxWidth": true,
+      }
+    }
+    moduleName="dpErrorWrapper"
+  />
+  <div
+    className="c-dashboard__body "
+  >
+    <div
+      className="u-grid u-full-height"
+    >
+      <div
+        className="u-row u-full-height"
+      >
+        <ContentPage
+          item={Array []}
+          name="content-overzicht"
+          showFooter={false}
+          type="nietgevonden"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
