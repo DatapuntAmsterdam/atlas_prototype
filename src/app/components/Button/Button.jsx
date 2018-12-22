@@ -5,6 +5,7 @@ import './Button.scss';
 
 const Button = ({ title, onClick, children, alignLeft }) => (
   <button
+    type="button"
     title={title}
     className={`button-new button-new${(alignLeft) ? '__left' : '__right'}`}
     onClick={onClick}
