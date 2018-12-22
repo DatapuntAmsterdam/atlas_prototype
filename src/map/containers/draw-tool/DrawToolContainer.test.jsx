@@ -23,10 +23,13 @@ describe('DrawToolContainer', () => {
       baseLayer: '',
       overlays: [],
       drawingMode: 'none',
-      shapeMarkers: 0,
       shapeDistanceTxt: ''
     },
-    dataSelection: null
+    dataSelection: {
+      geometryFilter: {
+        markers: []
+      }
+    }
   };
 
   const props = {

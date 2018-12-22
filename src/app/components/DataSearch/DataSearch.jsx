@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'redux-first-router-link';
 import get from 'lodash.get';
 import Panel from '../Panel/Panel';
 import SearchList from '../SearchList';
-import { routing } from '../../routes';
+import NoResultsForSearchType from '../Messages/NoResultsForSearchType';
 
 const DataSearch = ({
   user,
@@ -16,17 +15,10 @@ const DataSearch = ({
 }) => {
   if (numberOfResults === 0) {
     return (
-      <div>
-        Tip: maak de zoekcriteria minder specifiek. Medewerkers/ketenpartners van Gemeente Amsterdam
-        kunnen inloggen om meer gegevens te zien, zie <Link
-          to={{
-            type: routing.bediening.type,
-            payload: { deeplink: 'inloggen' }
-          }}
-        >
-        Help &#62; Bediening &#62; Inloggen
-      </Link>
-      </div>
+      <NoResultsForSearchType
+        message={`Tip: maak de zoekcriteria minder specifiek. Of probeer in plaats van zoeken eens
+        de optie 'Alle datasets tonen' en filter vervolgens op thema.`}
+      />
     );
   }
   return (

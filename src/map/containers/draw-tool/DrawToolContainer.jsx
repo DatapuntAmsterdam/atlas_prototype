@@ -29,18 +29,18 @@ import {
   getDrawingMode,
   getGeometry,
   getShapeDistanceTxt,
-  getShapeMarkers,
   isDrawingEnabled
 } from '../../ducks/map/map-selectors';
+import { setGeometryFilter } from '../../../shared/ducks/data-selection/actions';
 import {
-  setGeometryFilter
-} from '../../../shared/ducks/data-selection/actions';
-import { getDataSelection } from '../../../shared/ducks/data-selection/selectors';
+  getDataSelection,
+  getNumberOfDrawMarkers
+} from '../../../shared/ducks/data-selection/selectors';
 
 const mapStateToProps = (state) => ({
   drawingMode: getDrawingMode(state),
   isEnabled: isDrawingEnabled(state),
-  shapeMarkers: getShapeMarkers(state),
+  shapeMarkers: getNumberOfDrawMarkers(state),
   shapeDistanceTxt: getShapeDistanceTxt(state),
   dataSelection: getDataSelection(state),
   geometry: getGeometry(state)
@@ -112,7 +112,7 @@ class DrawToolContainer extends React.Component {
 
   // TODO DP-6340: side effect. this resets the visible layers after featching data?
   // componentWillUnmount() {
-    // this.props.onMapClear();
+  // this.props.onMapClear();
   // }
 
   onFinishShape(polygon) {

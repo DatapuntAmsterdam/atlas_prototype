@@ -1,12 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NoResultsForSearchType should render everything 1`] = `
-<div>
+<div
+  className="c-link__wrapper--inine-block"
+>
   <div
     className="u-margin__bottom--1"
   >
     Geen resultaten van deze soort
   </div>
   Tip: this is the message
+   Zie: 
+  <Connect(Link)
+    to={
+      Object {
+        "payload": Object {
+          "deeplink": "inloggen",
+        },
+        "type": "atlasRouter/CONTROLS",
+      }
+    }
+  >
+    Help &gt; Bediening &gt; Inloggen
+  </Connect(Link)>
 </div>
 `;
