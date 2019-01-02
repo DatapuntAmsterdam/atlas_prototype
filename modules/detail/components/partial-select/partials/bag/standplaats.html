@@ -13,7 +13,7 @@
     </div>
 
     <!-- Vestiging -->
-    <div class="c-detail__block">
+    <div ng-if-"apiData.results.hoofdadres.landelijk_id" class="c-detail__block">
         <dp-glossary-header definition="VESTIGING" use-plural="true"></dp-glossary-header>
 
         <dp-panel is-panel-visible="!user.scopes.includes('HR/R')" can-close="true" type="warning">
@@ -21,6 +21,12 @@
             Zie <dp-link-to-page class-name="c-link--light"></dp-link-to-page>.
         </dp-panel>
 
-        <dp-api-call ng-if="user.scopes.includes('HR/R')" endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}" add-api-root="true" partial="lijst" user="user"></dp-api-call>
+        <dp-api-call
+            ng-if="user.scopes.includes('HR/R')"
+            endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}"
+            add-api-root="true"
+            partial="lijst"
+            user="user"
+        />
     </div>
 </div>

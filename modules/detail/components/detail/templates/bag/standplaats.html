@@ -25,10 +25,12 @@
     <dp-partial-select partial="bag/standplaats" api-data="vm.apiData" user="vm.user"></dp-partial-select>
 
     <!-- monumenten -->
-    <dp-api-call
-        endpoint="monumenten/situeringen/?betreft_nummeraanduiding={{vm.apiData.results.landelijk_id}}"
-        add-api-root="true"
-        partial="monumenten/situering"
-        user="vm.user">
-    </dp-api-call>
+    <div ng-if="apiData.results.hoofdadres.landelijk_id">
+        <dp-api-call
+            endpoint="monumenten/situeringen/?betreft_nummeraanduiding={{vm.apiData.results.landelijk_id}}"
+            add-api-root="true"
+            partial="monumenten/situering"
+            user="vm.user"
+        />
+    </div>
 </div>
