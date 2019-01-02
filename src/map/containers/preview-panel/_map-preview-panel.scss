@@ -115,6 +115,11 @@ $button-height: 24px;
     &--loading {
       padding: 36px;
     }
+
+    .loading-indicator {
+      position: relative;
+      top: 0;
+    }
   }
 
   .is-print-mode & {
