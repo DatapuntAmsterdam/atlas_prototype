@@ -14,7 +14,7 @@ import {
   watchFetchPanorama,
   watchPanoramaRoute
 } from './panorama/sagas/panorama';
-import { watchDetailRoute } from './detail/sagas/detail';
+import watchDetailRoute from './detail/sagas/detail';
 import watchFetchDataSelection from './shared/sagas/data-selection/data-selection';
 import watchQueryActions from './store/query-synchronization';
 import watchFetchDatasets from './shared/sagas/dataset/dataset';
