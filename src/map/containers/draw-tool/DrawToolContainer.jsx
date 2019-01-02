@@ -84,24 +84,18 @@ class DrawToolContainer extends React.Component {
     this.setPolygon();
   }
 
-  componentWillReceiveProps(props) {
-    if (!props.dataSelection && props.geometry && props.geometry.length === 0 &&
-      props.drawingMode !== drawToolConfig.DRAWING_MODE.DRAW) {
-      // if dataSelection and geometry are empty then remove the drawn polygon
-      this.props.onEndDrawing();
-      this.props.setPolygon([]);
-    }
-
-    if (this.state.drawingMode !== props.drawingMode) {
-      if (props.drawingMode === drawToolConfig.DRAWING_MODE.NONE) {
-        // after drawing mode has changed the draw tool should be cancelled after navigating
-        this.props.cancel();
-      }
-      this.setState({ drawingMode: props.drawingMode });
-    }
-  }
-
   componentDidUpdate(prevProps) {
+    // Clear Polygon if the dataSelection filter changes
+    if (prevProps.dataSelection.geometryFilter !== this.props.dataSelection.geometryFilter) {
+      this.setPolygon();
+    }
+
+    // Update DrawingMode on props update
+    if (prevProps.drawingMode !== this.props.drawingMode) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ drawingMode: this.props.drawingMode });
+    }
+
     // if the markers have changed save the old markers as previous markers
     if (prevProps.geometry !== this.props.geometry) {
       this.setPolygon();
@@ -110,10 +104,9 @@ class DrawToolContainer extends React.Component {
     }
   }
 
-  // TODO DP-6340: side effect. this resets the visible layers after featching data?
-  // componentWillUnmount() {
-  // this.props.onMapClear();
-  // }
+  componentWillUnmount() {
+    this.props.onMapClear();
+  }
 
   onFinishShape(polygon) {
     const has2Markers = polygon && polygon.markers && polygon.markers.length === 2;

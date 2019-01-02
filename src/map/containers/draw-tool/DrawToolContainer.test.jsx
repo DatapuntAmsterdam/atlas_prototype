@@ -7,6 +7,7 @@ import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 
 import { isEnabled } from '../../services/draw-tool/draw-tool';
 import {
+  mapClear,
   mapEndDrawing,
   mapStartDrawing,
   mapUpdateShape
@@ -123,50 +124,19 @@ describe('DrawToolContainer', () => {
       spy.mockReset();
     });
 
-    describe('componentWillReceiveProps', () => {
-      it('should reset the polygon when there is no geometry or dataSelection', () => {
-        wrapperInstance.props.setPolygon.mockClear();
+    it('should update the state when the drawingMode is changed to draw', () => {
+      wrapper.setState({ drawingMode: drawToolConfig.DRAWING_MODE.NONE });
+      wrapper.setProps({ drawingMode: drawToolConfig.DRAWING_MODE.DRAW });
 
-        wrapperInstance.componentWillReceiveProps({
-          ...props,
-          drawingMode: drawToolConfig.DRAWING_MODE.NONE,
-          geometry: [],
-          dataSelection: null
-        });
-
-        expect(wrapperInstance.props.setPolygon).toHaveBeenCalledWith([]);
-      });
-
-      it('should not cancel after the drawingMode is changed to draw', () => {
-        wrapper.setState({ drawingMode: drawToolConfig.DRAWING_MODE.NONE });
-        wrapperInstance.props.cancel.mockClear();
-        wrapperInstance.componentWillReceiveProps({
-          ...props,
-          drawingMode: drawToolConfig.DRAWING_MODE.DRAW
-        });
-        expect(wrapperInstance.props.cancel).not.toHaveBeenCalled();
-        expect(wrapperInstance.state.drawingMode).toEqual(drawToolConfig.DRAWING_MODE.DRAW);
-      });
-
-      it('should cancel after the drawingMode is changed to NONE', () => {
-        wrapper.setState({ drawingMode: drawToolConfig.DRAWING_MODE.DRAW });
-        wrapperInstance.props.cancel.mockClear();
-        wrapperInstance.componentWillReceiveProps({
-          ...props,
-          drawingMode: drawToolConfig.DRAWING_MODE.NONE
-        });
-        expect(wrapperInstance.props.cancel).toHaveBeenCalled();
-        expect(wrapperInstance.state.drawingMode).toEqual(drawToolConfig.DRAWING_MODE.NONE);
-      });
+      expect(wrapperInstance.state.drawingMode).toEqual(drawToolConfig.DRAWING_MODE.DRAW);
     });
 
-    // TODO DP-6340: side effect. this resets the visible layers after featching data?
-    // describe('componentWillUnmount', () => {
-      // it(`should dispatch ${MAP_CLEAR}`, () => {
-      //   wrapper.unmount();
-      //   expect(store.dispatch).toHaveBeenCalledWith(mapClear());
-      // });
-    // });
+    describe('componentWillUnmount', () => {
+      it('should dispatch MAP_CLEAR', () => {
+        wrapper.unmount();
+        expect(store.dispatch).toHaveBeenCalledWith(mapClear());
+      });
+    });
 
     describe('onDrawingMode', () => {
       it('should dispatch MAP_END_DRAWING when the drawing mode set to NONE', () => {
