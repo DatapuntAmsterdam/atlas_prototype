@@ -20,7 +20,8 @@ import {
   SET_GEOMETRY_FILTERS,
   SET_PAGE,
   SET_VIEW,
-  VIEWS
+  VIEWS,
+  DATASET_ROUTE_MAPPER
 } from '../../ducks/data-selection/constants';
 import { getDataSelection, getGeomarkersShape } from '../../ducks/data-selection/selectors';
 import { waitForAuthentication } from '../user/user';
@@ -122,12 +123,6 @@ function* clearShapeFilter(action) {
 function* setGeometryFilters(action) {
   yield put(setShapeFilter(createShapeFilter(action.payload)));
 }
-
-const DATASET_ROUTE_MAPPER = {
-  hr: routing.establishments.type,
-  bag: routing.addresses.type,
-  brk: routing.cadastralObjects.type
-};
 
 function* switchPage() {
   const state = yield select();

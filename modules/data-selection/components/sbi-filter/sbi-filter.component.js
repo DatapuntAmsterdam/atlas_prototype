@@ -32,7 +32,7 @@ import { addFilter, removeFilter } from '../../../../src/shared/ducks/filters/fi
                 .reduce((a, b) => a.concat(b), [])
                 .slice(0, 100);
 
-        vm.sbiCode = vm.activeFilters.sbi_code && vm.activeFilters.sbi_code.replace(/['\[\]]/g, '');
+        vm.sbiCode = vm.activeFilters && vm.activeFilters.sbi_code && vm.activeFilters.sbi_code.replace(/['\[\]]/g, '');
         vm.showMoreThreshold = 10;
         vm.isExpanded = false;
         vm.filterSlug = 'sbi_code';

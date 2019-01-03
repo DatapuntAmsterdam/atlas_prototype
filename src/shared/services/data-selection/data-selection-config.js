@@ -199,7 +199,7 @@ const DATA_SELECTION_CONFIG = {
           },
           {
             label: 'Gemeente',
-            variables: ['woonplaats']
+            variables: ['burgerlijke_gemeentenaam']
           },
           {
             label: 'Zakelijk recht: aard',
