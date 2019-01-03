@@ -1,5 +1,6 @@
 import { features } from '../../../../src/shared/environment';
-import { fetchDataSelection } from '../../../../src/shared/ducks/data-selection/actions';
+import { toDatasetsTableWithFilter } from '../../../../src/store/redux-first-router';
+import { DATASET_ROUTE_MAPPER } from '../../../../src/shared/ducks/data-selection/constants';
 
 describe('The dp-data-selection-link component', () => {
     let $compile,
@@ -57,11 +58,9 @@ describe('The dp-data-selection-link component', () => {
         const component = getComponent(activeFilters);
 
         component.find('dp-link button').click();
-        expect(store.dispatch).toHaveBeenCalledWith(fetchDataSelection({
-            dataset: 'bag',
-            activeFilters,
-            page: 1
-        }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+            toDatasetsTableWithFilter(DATASET_ROUTE_MAPPER.bag, activeFilters)
+        );
     });
 
     it('has links to the data-selection for HR', () => {
@@ -69,24 +68,19 @@ describe('The dp-data-selection-link component', () => {
         const component = getComponent(activeFilters);
 
         component.find('dp-link button').click();
-        expect(store.dispatch).toHaveBeenCalledWith(fetchDataSelection({
-            dataset: 'hr',
-            activeFilters,
-            page: 1
-        }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+            toDatasetsTableWithFilter(DATASET_ROUTE_MAPPER.hr, activeFilters)
+        );
     });
 
     it('has links to the data-selection for BRK', () => {
         const activeFilters = { stadsdeel_naam: 'Noord', buurt_naam: 'Ghetto C' };
         const component = getComponent(activeFilters);
-
         if (features.eigendommen) {
             component.find('dp-link button').click();
-            expect(store.dispatch).toHaveBeenCalledWith(fetchDataSelection({
-                dataset: 'brk',
-                activeFilters,
-                page: 1
-            }));
+            expect(store.dispatch).toHaveBeenCalledWith(
+                toDatasetsTableWithFilter(DATASET_ROUTE_MAPPER.brk, activeFilters)
+            );
         }
     });
 });

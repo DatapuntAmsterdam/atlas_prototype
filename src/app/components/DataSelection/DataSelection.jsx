@@ -6,8 +6,8 @@ import classNames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { setPage as setDatasetPage } from '../../../shared/ducks/data-selection/actions';
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config';
-import { getUser } from '../../../shared/ducks/user/user';
-import NotAuthorizedPanel from '../PanelMessages/NotAuthorizedMessage';
+import { getUser, getUserScopes } from '../../../shared/ducks/user/user';
+import NotAuthorizedMessage from '../PanelMessages/NotAuthorizedMessage';
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator';
 import { getActiveFilters } from '../../../shared/ducks/filters/filters';
 import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer';
@@ -25,6 +25,7 @@ const DataSelection = ({
   dataset,
   activeFilters,
   user,
+  userScopes,
   setPage,
   authError,
   results: {
@@ -48,6 +49,8 @@ const DataSelection = ({
   const showMessageMaxPages = MAX_AVAILABLE_PAGES && currentPage > MAX_AVAILABLE_PAGES;
   const showMessageClusteredMarkers =
     (view === VIEWS.LIST) && numberOfRecords > MAX_NUMBER_OF_CLUSTERED_MARKERS;
+
+  const authScopeError = !userScopes.includes(DATA_SELECTION_CONFIG.datasets[dataset].AUTH_SCOPE);
 
   const widthClass = classNames({
     'u-col-sm--12': !showFilters,
@@ -74,7 +77,7 @@ const DataSelection = ({
 
         <DataSelectionActiveFilters />
 
-        {(!numberOfRecords && !authError) ?
+        {(!numberOfRecords && !authError && !authScopeError) ?
           <NoResultsForSearchType
             message={'Tip: verwijder een of meer criteria'}
           />
@@ -182,9 +185,8 @@ const DataSelection = ({
             </div>
           </div>
         )}
-
-        {authError && (
-          <NotAuthorizedPanel />
+        {(authError || authScopeError) && (
+          <NotAuthorizedMessage scopeError={!!authScopeError} />
         )}
       </div>
     </div>
@@ -201,6 +203,7 @@ DataSelection.propTypes = {
   dataset: PropTypes.string.isRequired,
   activeFilters: PropTypes.shape({}).isRequired,
   user: PropTypes.shape({}).isRequired,
+  userScopes: PropTypes.arrayOf(PropTypes.string).isRequired,
   authError: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
@@ -222,7 +225,8 @@ const mapStateToProps = (state) => {
     page,
     activeFilters: getActiveFilters(state),
     results: getDataSelectionResult(state),
-    user: getUser(state)
+    user: getUser(state),
+    userScopes: getUserScopes(state)
   });
 };
 

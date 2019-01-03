@@ -22,6 +22,7 @@ export const preserveQuery = (action) => {
     }
   };
 };
+
 export const toDataDetail = (id, type, subtype, view) => (preserveQuery({
   type: routing.dataDetail.type,
   payload: {
@@ -35,9 +36,11 @@ export const toDataDetail = (id, type, subtype, view) => (preserveQuery({
     }
   }
 }));
+
 export const toDataSearchLocationAndPreserveQuery = () => preserveQuery({ // TODO rename
   type: routing.dataSearch.type
 });
+
 export const toDataSearchLocation = (payload) => ({ // TODO rename
   type: routing.dataSearch.type,
   meta: {
@@ -46,8 +49,11 @@ export const toDataSearchLocation = (payload) => ({ // TODO rename
     }
   }
 });
+
 export const toMapAndPreserveQuery = () => preserveQuery({ type: routing.map.type });
+
 export const toMap = () => ({ type: routing.map.type });
+
 export const toPanorama = (id, heading, reference = []) => {
   const action = {
     type: routing.panorama.type,
@@ -73,6 +79,7 @@ export const extractIdEndpoint = (endpoint) => {
   const matches = endpoint.match(/\/([\w-]+)\/?$/);
   return matches[1];
 };
+
 const getDetailPageData = (endpoint) => {
   const matches = endpoint.match(/(\w+)\/([\w-]+)\/([\w\.-]+)\/?$/); // eslint-disable-line no-useless-escape
   return {
@@ -81,15 +88,18 @@ const getDetailPageData = (endpoint) => {
     id: matches[3]
   };
 };
+
 export const getPageActionEndpoint = (endpoint, view) => {
   const { type, subtype, id } = getDetailPageData(endpoint);
   return toDataDetail(id, type, subtype, view);
 };
+
 export const pageTypeToEndpoint = (type, subtype, id) => {
   let endpoint = 'https://acc.api.data.amsterdam.nl/';
   endpoint += `${type}/${subtype}/${id}/`; // TODO: refactor, get back-end to return detail as detail GET not listing!
   return endpoint;
 };
+
 export const toDataSearch = (searchQuery, skipFetch = false) => ({
   type: routing.dataSearch.type,
   meta: {
@@ -99,6 +109,7 @@ export const toDataSearch = (searchQuery, skipFetch = false) => ({
     }
   }
 });
+
 export const toDataSearchCategory = (searchQuery, category) => ({
   type: routing.dataSearchCategory.type,
   payload: {
@@ -110,7 +121,9 @@ export const toDataSearchCategory = (searchQuery, category) => ({
     }
   }
 });
+
 export const toDatasets = () => ({ type: routing.datasets.type });
+
 export const toDatasetSearch = (searchQuery, skipFetch = false) => ({
   type: routing.searchDatasets.type,
   meta: {
@@ -149,6 +162,7 @@ export const toDataSuggestion = (payload) => {
   };
   return action;
 };
+
 export const toDatasetSuggestion = (payload) => ({
   type: routing.datasetsDetail.type,
   payload,
@@ -159,6 +173,20 @@ export const toDatasetSuggestion = (payload) => ({
     }
   }
 });
+
+export const toDatasetsTableWithFilter = (datasetType, filter) => {
+  const ret = {
+    type: datasetType,
+    meta: {
+      query: {
+        filters: btoa(JSON.stringify(filter))
+      }
+    }
+  };
+  return ret;
+};
+
+
 // Selectors
 const getLocation = (state) => state[REDUCER_KEY];
 

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataSelection should render as LIST 1`] = `
+<SplitScreen
+  leftComponent={
+    <Connect(MapContainer)
+      isFullscreen={false}
+      toggleFullscreen={[Function]}
+    />
+  }
+  rightComponent={<Connect(DataSelection) />}
+/>
+`;
+
+exports[`DataSelection should render as MAP 1`] = `
+<Connect(MapContainer)
+  isFullscreen={true}
+  toggleFullscreen={[Function]}
+/>
+`;

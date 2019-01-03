@@ -1,8 +1,6 @@
 import { features } from '../../../../src/shared/environment';
-import {
-    fetchDataSelection
-} from '../../../../src/shared/ducks/data-selection/actions';
-import { DATASETS } from '../../../../src/shared/ducks/data-selection/constants';
+import { DATASET_ROUTE_MAPPER } from '../../../../src/shared/ducks/data-selection/constants';
+import { toDatasetsTableWithFilter } from '../../../../src/store/redux-first-router';
 
 (function () {
     'use strict';
@@ -22,22 +20,10 @@ import { DATASETS } from '../../../../src/shared/ducks/data-selection/constants'
         var vm = this;
         vm.eigendommen = features.eigendommen;
 
-        const defaultActionPayload = (dataset) => ({
-            dataset,
-            activeFilters: vm.activeFilters,
-            page: 1
-        });
+        vm.getBAG = toDatasetsTableWithFilter(DATASET_ROUTE_MAPPER.bag, vm.activeFilters);
 
-        vm.getBRK = fetchDataSelection({
-            ...defaultActionPayload(DATASETS.BRK)
-        });
+        vm.getHR = toDatasetsTableWithFilter(DATASET_ROUTE_MAPPER.hr, vm.activeFilters);
 
-        vm.getHR = fetchDataSelection({
-            ...defaultActionPayload(DATASETS.HR)
-        });
-
-        vm.getBAG = fetchDataSelection({
-            ...defaultActionPayload(DATASETS.BAG)
-        });
+        vm.getBRK = toDatasetsTableWithFilter(DATASET_ROUTE_MAPPER.brk, vm.activeFilters);
     }
 })();

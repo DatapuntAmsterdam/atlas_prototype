@@ -15,6 +15,11 @@ export const ROUTE_DATASET_MAPPER = {
   [routing.establishments.type]: 'hr',
   [routing.addresses.type]: 'bag'
 };
+export const DATASET_ROUTE_MAPPER = {
+  hr: routing.establishments.type,
+  bag: routing.addresses.type,
+  brk: routing.cadastralObjects.type
+};
 
 export const VIEWS = {
   LIST: 'LIST',

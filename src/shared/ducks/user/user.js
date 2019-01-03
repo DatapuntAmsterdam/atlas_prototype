@@ -52,7 +52,7 @@ export const userCheckedAuthentication = createSelector(
   getUser, (user) => user.hasCheckedAuthentication
 );
 export const getUserScopes = createSelector(
- getUser, (user) => user.scopes
+  getUser, (user) => user.scopes
 );
 
 export const authenticateUserSuccess = (accessToken, name, scopes) => ({

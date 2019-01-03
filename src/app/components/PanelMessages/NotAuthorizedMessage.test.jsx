@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NotAuthorizedPanel from './NotAuthorizedMessage';
+import NotAuthorizedMessage from './NotAuthorizedMessage';
 
-describe('NotAuthorizedPanel', () => {
+describe('NotAuthorizedMessage', () => {
   it('should render everything', () => {
-    const component = shallow(<NotAuthorizedPanel />);
+    const component = shallow(<NotAuthorizedMessage scopeError />);
     expect(component).toMatchSnapshot();
   });
 });

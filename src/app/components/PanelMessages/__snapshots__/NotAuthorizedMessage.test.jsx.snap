@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotAuthorizedPanel should render everything 1`] = `
+exports[`NotAuthorizedMessage should render everything 1`] = `
 <Notification
   canClose={true}
   className=""
