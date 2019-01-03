@@ -37,4 +37,11 @@ describe('The http-status component', function () {
             setGlobalError(errorType)
         );
     });
+
+    it('should do nothing when the reduxStore dispatch is not defined', () => {
+        $window.reduxStore = {
+            dispatch: null
+        };
+        httpStatus.registerError('');
+    });
 });
