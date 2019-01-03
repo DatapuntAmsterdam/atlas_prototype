@@ -6,9 +6,11 @@ import { DATASETS, VIEWS } from '../../../shared/ducks/data-selection/constants'
 
 const initialState = {
   filters: {},
-  user: {},
+  user: {
+    scopes: []
+  },
   dataSelection: {
-    isLoading: true,
+    isLoading: false,
     markers: [],
     geometryFilter: {
       markers: []
@@ -24,6 +26,19 @@ const initialState = {
 describe('DataSelection', () => {
   it('should render', () => {
     const store = configureMockStore()({ ...initialState });
+    const component = shallow(<DataSelection />, { context: { store } }).dive();
+    expect(component).toMatchSnapshot();
+  });
+
+  it('should render LoadingIndicator', () => {
+    const state = {
+      ...initialState,
+      dataSelection: {
+        ...initialState.dataSelection,
+        isLoading: true
+      }
+    };
+    const store = configureMockStore()({ ...state });
     const component = shallow(<DataSelection />, { context: { store } }).dive();
     expect(component).toMatchSnapshot();
   });

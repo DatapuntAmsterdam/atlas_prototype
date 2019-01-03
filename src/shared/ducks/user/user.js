@@ -51,6 +51,9 @@ export const getUser = (state) => state[REDUCER_KEY];
 export const userCheckedAuthentication = createSelector(
   getUser, (user) => user.hasCheckedAuthentication
 );
+export const getUserScopes = createSelector(
+  getUser, (user) => user.scopes
+);
 
 export const authenticateUserSuccess = (accessToken, name, scopes) => ({
   type: AUTHENTICATE_USER_SUCCESS,

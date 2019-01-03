@@ -1,3 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataSelection should render 1`] = `<LoadingIndicator />`;
+exports[`DataSelection should render 1`] = `
+<div
+  className="c-data-selection c-dashboard__content"
+>
+  <div
+    className="qa-data-selection-content"
+  >
+    <AngularWrapper
+      bindings={
+        Object {
+          "availableFilters": undefined,
+          "dataset": "bag",
+          "filters": Object {},
+          "numberOfRecords": undefined,
+          "showHeader": true,
+          "user": Object {
+            "scopes": Array [],
+          },
+          "view": "TABLE",
+        }
+      }
+      component="dpDataSelectionHeader"
+      dependencies={
+        Array [
+          "atlas",
+        ]
+      }
+      interpolateBindings={Object {}}
+      moduleName="dpDataSelectionHeaderWrapper"
+    />
+    <Connect(DataSelectionActiveFilters) />
+    <div
+      className="u-grid qa-data-grid"
+    >
+      <div
+        className="u-row"
+      >
+        <div
+          className="u-col-sm--12"
+        />
+      </div>
+    </div>
+    <NotAuthorizedMessage
+      scopeError={true}
+    />
+  </div>
+</div>
+`;
+
+exports[`DataSelection should render LoadingIndicator 1`] = `<LoadingIndicator />`;
