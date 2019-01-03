@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUser } from '../../../shared/ducks/user/user';
-import { getNumberOfResults, getSearchCategory } from '../../../shared/ducks/data-search/selectors';
+import { getUserScopes } from '../../../shared/ducks/user/user';
+import { getNumberOfResults, getSearchCategory, getSearchQuery } from '../../../shared/ducks/data-search/selectors';
 import DataSearch from './DataSearch';
 import { toDataSearchCategory } from '../../../store/redux-first-router';
 import { fetchDetail } from '../../../shared/ducks/detail/actions';
 
 const mapStateToProps = (state) => ({
-  user: getUser(state),
+  userScopes: getUserScopes(state),
   numberOfResults: getNumberOfResults(state),
-  category: getSearchCategory(state)
+  category: getSearchCategory(state),
+  searchQuery: getSearchQuery(state)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

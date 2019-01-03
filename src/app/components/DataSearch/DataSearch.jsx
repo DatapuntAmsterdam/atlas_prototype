@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import get from 'lodash.get';
 import Panel from '../Panel/Panel';
 import SearchList from '../SearchList';
 import NoResultsForSearchType from '../Messages/NoResultsForSearchType';
 
 const DataSearch = ({
-  user,
+  userScopes,
   searchResults,
+  searchQuery,
   numberOfResults,
   setSearchCategory,
   fetchDetailPage,
@@ -27,26 +27,45 @@ const DataSearch = ({
         <div>
           {searchResults && searchResults.map((result) => (
             (result.count >= 1 || result.warning) &&
-            (!result.authScope || get(user, 'scopes', []).includes(result.authScope)) && (
+            (!result.authScope || userScopes.includes(result.authScope)) && (
               <div
                 key={result.label_plural}
-                className={`c-search-results__block qa-search-results-category ${!!(result.subResults) && 'c-search-results__block--container'}`}
+                className={`
+                  c-search-results__block
+                  qa-search-results-category
+                  ${!!(result.subResults) && 'c-search-results__block--container'}
+                `}
               >
                 <div className="c-search-results__block-content">
-                  <h2 className="o-header__subtitle qa-search-header">
-                    {(result.count > 1) && (
-                      <span>{result.label_plural} (
-                          <span className="qa-search-header-count">{result.count}</span>
-                        )
-                        </span>
-                    )}
-                    {(result.count === 1) && (
-                      <span>{result.label_singular}</span>
-                    )}
-                    {(result.count === 0) && (
-                      <span>{result.label_plural}</span>
-                    )}
-                  </h2>
+                  { (category)
+                      ? <div className="o-header u-margin__bottom--3">
+                        <h1 className="o-header__title u-margin__bottom--1">
+                          {`${result.label_plural} (${result.count})`}
+                        </h1>
+                        <h2
+                          className="
+                            o-header__subtitle
+                            u-color__primary--dark
+                            u-font--responsive-m
+                            qa-search-header
+                          "
+                        >
+                          {`met '${searchQuery}'`}
+                        </h2>
+                      </div>
+                      : <div className="o-header">
+                        <h2 className="o-header__subtitle qa-search-header">
+                          {(result.count > 1) && (
+                            <span>
+                              {result.label_plural}
+                              (<span className="qa-search-header-count">{result.count}</span>)
+                            </span>
+                          )}
+                          {(result.count === 1) && <span>{result.label_singular}</span>}
+                          {(result.count === 0) && <span>{result.label_plural}</span>}
+                        </h2>
+                      </div>
+                  }
 
                   {(!!result.warning) &&
                   <Panel
@@ -59,7 +78,7 @@ const DataSearch = ({
                   }
                   <SearchList
                     categoryResults={result}
-                    limit={category ? result.length : 10}
+                    limit={category ? result.count : 10}
                     hasLoadMore={
                       category && (searchResults[0].count > searchResults[0].results.length)
                     }
@@ -79,7 +98,7 @@ const DataSearch = ({
                       <button
                         type="button"
                         className="qa-show-more c-show-more o-list__separate-item"
-                        onClick={() => setSearchCategory('wee', result.slug)}
+                        onClick={() => setSearchCategory(searchQuery, result.slug)}
                       >
                         Toon alle {result.count}
                       </button>
@@ -95,7 +114,7 @@ const DataSearch = ({
                     {...{
                       fetchDetailPage,
                       setSearchCategory,
-                      user
+                      userScopes
                     }}
                   />
                   }
@@ -110,14 +129,15 @@ const DataSearch = ({
 };
 
 DataSearch.propTypes = {
-  user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userScopes: PropTypes.arrayOf(PropTypes.string).isRequired,
   numberOfResults: PropTypes.number.isRequired,
   category: PropTypes.oneOfType( // eslint-disable-line react/require-default-props
     [PropTypes.string, PropTypes.object]
   ),
   setSearchCategory: PropTypes.func.isRequired,
   fetchDetailPage: PropTypes.func.isRequired,
-  searchResults: PropTypes.arrayOf(PropTypes.object).isRequired
+  searchResults: PropTypes.arrayOf(PropTypes.object).isRequired,
+  searchQuery: PropTypes.string.isRequired
 };
 
 export default DataSearch;
