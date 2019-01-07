@@ -33,6 +33,10 @@ dp-search-results {
   @extend %list-block;
   background-color: $primary-light;
 
+  &:only-child {
+    border-bottom: none;
+  }
+
   &.c-search-results__block--container {
     @extend %list-block-container;
   }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'redux-first-router-link';
 import { routing } from '../../routes';
 import Notification from '../../../shared/components/notification/Notification';
+import { BEDIENING_LOGIN_DEEPLINK } from '../../pages/CMSPageMapping';
 
 const NotAuthorizedMessage = ({ scopeError }) => (
   <Notification type="warning" >
@@ -22,7 +23,7 @@ const NotAuthorizedMessage = ({ scopeError }) => (
           className="c-link--light qa-link-to-page-button qa-dp-link"
           to={{
             type: routing.bediening.type,
-            payload: { deeplink: 'inloggen' }
+            payload: { deeplink: BEDIENING_LOGIN_DEEPLINK }
           }}
         >
           Help &#62; Bediening &#62; Inloggen

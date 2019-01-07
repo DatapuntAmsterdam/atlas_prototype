@@ -15,10 +15,7 @@ const DataSearch = ({
 }) => {
   if (numberOfResults === 0) {
     return (
-      <NoResultsForSearchType
-        message={`Tip: maak de zoekcriteria minder specifiek. Of probeer in plaats van zoeken eens
-        de optie 'Alle datasets tonen' en filter vervolgens op thema.`}
-      />
+      <NoResultsForSearchType />
     );
   }
   return (
@@ -57,8 +54,7 @@ const DataSearch = ({
                         <h2 className="o-header__subtitle qa-search-header">
                           {(result.count > 1) && (
                             <span>
-                              {result.label_plural}
-                              (<span className="qa-search-header-count">{result.count}</span>)
+                              {`${result.label_plural} (${result.count})`}
                             </span>
                           )}
                           {(result.count === 1) && <span>{result.label_singular}</span>}

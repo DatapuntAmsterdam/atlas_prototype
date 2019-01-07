@@ -9,19 +9,21 @@ exports[`NoResultsForSearchType should render everything 1`] = `
   >
     Geen resultaten van deze soort
   </div>
-  Tip: this is the message
-   Zie: 
-  <Connect(Link)
-    to={
-      Object {
-        "payload": Object {
-          "deeplink": "inloggen",
-        },
-        "type": "atlasRouter/CONTROLS",
+  <span>
+    Tip: this is the message
+     Zie: 
+    <Connect(Link)
+      to={
+        Object {
+          "payload": Object {
+            "deeplink": "snelwegwijsitem9",
+          },
+          "type": "atlasRouter/CONTROLS",
+        }
       }
-    }
-  >
-    Help &gt; Bediening &gt; Inloggen
-  </Connect(Link)>
+    >
+      Help &gt; Bediening &gt; Inloggen
+    </Connect(Link)>
+  </span>
 </div>
 `;

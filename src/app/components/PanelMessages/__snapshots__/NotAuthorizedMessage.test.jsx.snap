@@ -22,7 +22,7 @@ exports[`NotAuthorizedMessage should render everything 1`] = `
         to={
           Object {
             "payload": Object {
-              "deeplink": "inloggen",
+              "deeplink": "snelwegwijsitem9",
             },
             "type": "atlasRouter/CONTROLS",
           }

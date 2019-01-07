@@ -20,7 +20,7 @@ const PAGE_TYPES = {
 };
 
 // Help > Bediening > Inloggen deeplink id
-export const BEDIENINING_LOGIN_DEEPLINK = 'snelwegwijsitem9';
+export const BEDIENING_LOGIN_DEEPLINK = 'snelwegwijsitem9';
 
 /**
  * Maps site page to CMS page variables
