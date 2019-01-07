@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataSelection should render 1`] = `
+exports[`DataSelection should render LoadingIndicator 1`] = `
 <div
   className="c-data-selection c-dashboard__content"
 >
@@ -13,6 +13,94 @@ exports[`DataSelection should render 1`] = `
           "availableFilters": undefined,
           "dataset": "bag",
           "filters": Object {},
+          "isLoading": true,
+          "numberOfRecords": undefined,
+          "showHeader": false,
+          "user": Object {
+            "scopes": Array [],
+          },
+          "view": "TABLE",
+        }
+      }
+      component="dpDataSelectionHeader"
+      dependencies={
+        Array [
+          "atlas",
+        ]
+      }
+      interpolateBindings={Object {}}
+      moduleName="dpDataSelectionHeaderWrapper"
+    />
+    <Connect(DataSelectionActiveFilters) />
+    <LoadingIndicator />
+  </div>
+</div>
+`;
+
+exports[`DataSelection should render as LIST 1`] = `
+<div
+  className="c-data-selection c-dashboard__content"
+>
+  <div
+    className="qa-data-selection-content"
+  >
+    <AngularWrapper
+      bindings={
+        Object {
+          "availableFilters": undefined,
+          "dataset": "bag",
+          "filters": Object {},
+          "isLoading": false,
+          "numberOfRecords": undefined,
+          "showHeader": true,
+          "user": Object {
+            "scopes": Array [],
+          },
+          "view": "LIST",
+        }
+      }
+      component="dpDataSelectionHeader"
+      dependencies={
+        Array [
+          "atlas",
+        ]
+      }
+      interpolateBindings={Object {}}
+      moduleName="dpDataSelectionHeaderWrapper"
+    />
+    <Connect(DataSelectionActiveFilters) />
+    <NoResultsForSearchType
+      message="Tip: verwijder een of meer criteria"
+    />
+    <div
+      className="u-grid qa-data-grid"
+    >
+      <div
+        className="u-row"
+      >
+        <div
+          className="u-col-sm--12"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DataSelection should render as TABLE 1`] = `
+<div
+  className="c-data-selection c-dashboard__content"
+>
+  <div
+    className="qa-data-selection-content"
+  >
+    <AngularWrapper
+      bindings={
+        Object {
+          "availableFilters": undefined,
+          "dataset": "bag",
+          "filters": Object {},
+          "isLoading": false,
           "numberOfRecords": undefined,
           "showHeader": true,
           "user": Object {
@@ -31,6 +119,9 @@ exports[`DataSelection should render 1`] = `
       moduleName="dpDataSelectionHeaderWrapper"
     />
     <Connect(DataSelectionActiveFilters) />
+    <NoResultsForSearchType
+      message="Tip: verwijder een of meer criteria"
+    />
     <div
       className="u-grid qa-data-grid"
     >
@@ -42,11 +133,45 @@ exports[`DataSelection should render 1`] = `
         />
       </div>
     </div>
-    <NotAuthorizedMessage
-      scopeError={true}
-    />
   </div>
 </div>
 `;
 
-exports[`DataSelection should render LoadingIndicator 1`] = `<LoadingIndicator />`;
+exports[`DataSelection should show authorization message if user has no permission 1`] = `
+<div
+  className="c-data-selection c-dashboard__content"
+>
+  <div
+    className="qa-data-selection-content"
+  >
+    <AngularWrapper
+      bindings={
+        Object {
+          "availableFilters": undefined,
+          "dataset": "bag",
+          "filters": Object {},
+          "isLoading": false,
+          "numberOfRecords": undefined,
+          "showHeader": true,
+          "user": Object {
+            "scopes": Array [],
+          },
+          "view": "TABLE",
+        }
+      }
+      component="dpDataSelectionHeader"
+      dependencies={
+        Array [
+          "atlas",
+        ]
+      }
+      interpolateBindings={Object {}}
+      moduleName="dpDataSelectionHeaderWrapper"
+    />
+    <Connect(DataSelectionActiveFilters) />
+    <NotAuthorizedMessage
+      scopeError={false}
+    />
+  </div>
+</div>
+`;

@@ -19,6 +19,7 @@ import {
                 dataset: '<',
                 availableFilters: '<',
                 filters: '<',
+                isLoading: '<',
                 numberOfRecords: '<',
                 showHeader: '<',
                 user: '<',
@@ -39,7 +40,8 @@ import {
             'vm.geometryFilter',
             'vm.view',
             'vm.numberOfRecords',
-            'vm.filters'
+            'vm.filters',
+            'vm.isLoading'
         ], setHeader);
 
         function setHeader () {

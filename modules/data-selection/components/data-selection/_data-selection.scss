@@ -21,3 +21,9 @@ $data-selection-outer-padding: 2 * $base-whitespace;
 .c-data-selection__link {
   color: $primary-dark;
 }
+
+.qa-data-selection-content {
+  .loading-indicator {
+    position: relative;
+  }
+}
