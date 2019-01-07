@@ -1,6 +1,7 @@
 .c-dashboard {
   height: 100%;
   background-color: $primary-light;
+  overflow: auto;
 }
 
 .c-dashboard__heading {

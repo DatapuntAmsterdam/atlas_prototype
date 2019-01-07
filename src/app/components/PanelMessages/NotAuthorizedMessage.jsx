@@ -7,15 +7,15 @@ import Notification from '../../../shared/components/notification/Notification';
 const NotAuthorizedMessage = ({ scopeError }) => (
   <Notification type="warning" >
     <div>
-      { (scopeError)
-        ? <p className="c-panel__paragraph">
-            Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met
-            zakelijk rechthebbenden te bekijken.
-          </p>
-        : <p className="c-panel__paragraph">
-            Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke
-            activiteiten en vestigingen te bekijken.
-          </p>
+      { (scopeError === 'BRK/RSN')
+          ? <p className="c-panel__paragraph">
+              Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met
+              zakelijk rechthebbenden te bekijken.
+            </p>
+          : <p className="c-panel__paragraph">
+              Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke
+              activiteiten en vestigingen te bekijken.
+            </p>
       }
       <p className="c-panel__paragraph">
         Zie <Link
@@ -32,8 +32,12 @@ const NotAuthorizedMessage = ({ scopeError }) => (
   </Notification>
 );
 
+NotAuthorizedMessage.defaultProps = {
+  scopeError: ''
+};
+
 NotAuthorizedMessage.propTypes = {
-  scopeError: PropTypes.bool.isRequired
+  scopeError: PropTypes.string
 };
 
 export default NotAuthorizedMessage;

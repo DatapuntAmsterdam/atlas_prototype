@@ -170,7 +170,7 @@ exports[`DataSelection should show authorization message if user has no permissi
     />
     <Connect(DataSelectionActiveFilters) />
     <NotAuthorizedMessage
-      scopeError={false}
+      scopeError=""
     />
   </div>
 </div>

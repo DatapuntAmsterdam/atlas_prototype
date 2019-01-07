@@ -46,9 +46,8 @@ const DataSelection = ({
   const showMessageClusteredMarkers =
     (view === VIEWS.LIST) && numberOfRecords > MAX_NUMBER_OF_CLUSTERED_MARKERS;
 
-  const authScopeError = DATA_SELECTION_CONFIG.datasets[dataset].AUTH_SCOPE
-    ? !userScopes.includes(DATA_SELECTION_CONFIG.datasets[dataset].AUTH_SCOPE)
-    : false;
+  const datasetScope = DATA_SELECTION_CONFIG.datasets[dataset].AUTH_SCOPE;
+  const authScopeError = datasetScope ? !userScopes.includes(datasetScope) : false;
 
   const widthClass = classNames({
     'u-col-sm--12': !showFilters,
@@ -187,7 +186,7 @@ const DataSelection = ({
           </div>
         )}
         {(!isLoading && (authError || authScopeError)) && (
-          <NotAuthorizedMessage scopeError={!!authScopeError} />
+          <NotAuthorizedMessage scopeError={datasetScope} />
         )}
       </div>
     </div>
