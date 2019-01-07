@@ -50,8 +50,8 @@ export default function MapReducer(state = initialState, action) {
   const { lat, lng, zoom, legenda, lagen } = query;
   if (lat && lng) {
     enrichedState.viewCenter = [
-      normalizeCoordinate(parseFloat(lat), 7),
-      normalizeCoordinate(parseFloat(lng), 7)
+      normalizeCoordinate(parseFloat(lat), 7) || initialState.viewCenter[0],
+      normalizeCoordinate(parseFloat(lng), 7) || initialState.viewCenter[1]
     ];
   }
   if (zoom) {
