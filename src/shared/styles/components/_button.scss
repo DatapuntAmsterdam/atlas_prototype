@@ -161,14 +161,16 @@
 
 .o-btn--close {
   @extend %btn-close;
-  @include icon-button("close", $primary-dark, $primary-light);
+  @include icon-sprite("icon-cross", $primary-light, $primary-dark);
 
   &--info {
-    @include icon-button("close", $secondary-gray60, $primary-dark);
+    @include icon-sprite("icon-cross", $primary-light, $primary-dark);
 
+    height: 24px;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 4px;
+    top: 4px;
+    width: 24px;
 
     &:hover,
     &:focus {
@@ -177,28 +179,32 @@
   }
 
   &--danger {
-    @include icon-button("close-danger", $primary-light, $primary-light);
+    @include icon-sprite("icon-cross", $primary-light, $primary-dark);
 
+    height: 24px;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 4px;
+    top: 4px;
+    width: 24px;
 
     &:hover,
     &:focus {
-      background-color: $secondary-gray60;
+      background-color: $secondary-gray20;
     }
   }
 
   &--warning {
-    @include icon-button("close-warning", $primary-light, $primary-light);
+    @include icon-sprite("icon-cross", $primary-light, $primary-dark);
 
+    height: 24px;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 4px;
+    top: 4px;
+    width: 24px;
 
     &:hover,
     &:focus {
-      background-color: $secondary-gray60;
+      background-color: $secondary-gray20;
     }
 
   }

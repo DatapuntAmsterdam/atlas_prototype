@@ -136,7 +136,7 @@ const DataSelection = ({
                       <p className="c-panel__paragraph">Deze resultaten worden niet getoond op
                         de
                         kaart, omdat deze niet meer
-                        dan {MAX_NUMBER_OF_CLUSTERED_MARKERS} resultaten tegelijk kan
+                        dan {MAX_NUMBER_OF_CLUSTERED_MARKERS.toLocaleString('nl-NL')} resultaten tegelijk kan
                         weergeven (om technische redenen).</p>
                       <p className="c-panel__paragraph">Tip: Bekijk de lijst resultaten in
                         kleinere delen. Dit kan door een voor een filtercriteria toe te voegen

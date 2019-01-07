@@ -26,13 +26,13 @@
 }
 
 .c-panel--warning {
-  padding: $base-whitespace * .3 $base-whitespace;
+  padding: $base-whitespace * .6 $base-whitespace * .8;
   background-color: $darkish-blue;
   color: $primary-light;
 }
 
 .c-panel--danger {
-  padding: $base-whitespace * .3 $base-whitespace;
+  padding: $base-whitespace * .6 $base-whitespace * .8;
   background-color: $primary-contrast;
   color: $primary-light;
 }

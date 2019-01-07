@@ -8,7 +8,7 @@ $icon-height: 24px;
   font-family: "Avenir LT W01 65 Medium";
   justify-content: space-between;
   margin: 0;
-  padding: 3px 10px;
+  padding: 6px 8px;
   padding-right: 26px;
   position: relative;
 
@@ -52,25 +52,25 @@ $icon-height: 24px;
     border: none;
     border-radius: 0;
     cursor: pointer;
-    height: $icon-height + 2px;
+    height: $icon-height;
     line-height: 0;
     position: absolute;
-    right: 0;
-    top: 0;
-    width: $icon-height + 2px;
+    right: 4px;
+    top: 4px;
+    width: $icon-height;
 
     &:hover,
     &:focus {
       .notification__button--close {
-        @include icon-sprite("close-warning", $primary-dark, $primary-dark, $icon-height + 2);
+        @include icon-sprite("icon-cross", $primary-light, $primary-dark);
       }
     }
 
     &--close {
-      @include icon-sprite("close-warning", $primary-light, $primary-dark, $icon-height + 2);
+      @include icon-sprite("icon-cross", $primary-light, $primary-dark);
       display: block;
-      height: $icon-height + 2px;
-      width: $icon-height + 2px;
+      height: $icon-height;
+      width: $icon-height;
     }
   }
 
