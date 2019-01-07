@@ -1,6 +1,9 @@
 <div>
-    <div class="c-detail__block qa-verblijfsobject">
-        <dp-glossary-header definition="VERBLIJFSOBJECT" meta-data="apiData"></dp-glossary-header>
+    <div
+        ng-if="apiData.results._display"
+        class="c-detail__block qa-verblijfsobject"
+    >
+        <dp-glossary-header definition="VERBLIJFSOBJECT" meta-data="apiData" />
         <dl class="c-key-value-list">
             <dt>Gebruiksdoel</dt>
             <dd ng-if="!apiData.results.gebruiksdoelen[0]"></dd>
@@ -50,41 +53,47 @@
     <!-- Adres -->
     <div ng-if="apiData.results.adressen.count > 1"
          class="c-detail__block">
-        <dp-glossary-header definition="NUMMERAANDUIDING" use-plural="true"></dp-glossary-header>
+        <dp-glossary-header definition="NUMMERAANDUIDING" use-plural="true" />
 
-        <dp-api-call endpoint="{{apiData.results.adressen.href}}" partial="adressen_lijst" user="user"></dp-api-call>
+        <dp-api-call endpoint="{{apiData.results.adressen.href}}" partial="adressen_lijst" user="user" />
     </div>
 
     <!-- Pand -->
     <div ng-if="apiData.results.panden.count"
          class="c-detail__block">
-        <dp-glossary-header definition="PAND" use-plural="true"></dp-glossary-header>
+        <dp-glossary-header definition="PAND" use-plural="true" />
 
-        <dp-api-call endpoint="{{apiData.results.panden.href}}" partial="lijst" user="user"></dp-api-call>
+        <dp-api-call endpoint="{{apiData.results.panden.href}}" partial="lijst" user="user" />
     </div>
 
     <!-- Vestiging -->
     <div ng-if="apiData.results.hoofdadres.landelijk_id"
          class="c-detail__block">
-        <dp-glossary-header definition="VESTIGING" use-plural="true"></dp-glossary-header>
+        <dp-glossary-header definition="VESTIGING" use-plural="true" />
 
         <dp-panel ng-if="!user.scopes.includes('HR/R')" is-panel-visible="true" can-close="true" type="warning">
             Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om vestigingen te bekijken.
-            Zie <dp-link-to-page class-name="c-link--light"></dp-link-to-page>.
+            Zie <dp-link-to-page class-name="c-link--light" />.
         </dp-panel>
 
-        <dp-api-call ng-if="user.scopes.includes('HR/R')" endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}" add-api-root="true" partial="lijst" user="user"></dp-api-call>
+        <dp-api-call
+            ng-if="user.scopes.includes('HR/R') && apiData.results.hoofdadres.landelijk_id"
+            endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}"
+            add-api-root="true"
+            partial="lijst"
+            user="user"
+        />
     </div>
 
     <!-- Kadastraal apiData -->
     <div ng-if="apiData.results.kadastrale_objecten.count"
          class="c-detail__block c-detail__block--container qa-kadastraal-object-list">
-        <dp-glossary-header definition="OBJECT" use-plural="true"></dp-glossary-header>
+        <dp-glossary-header definition="OBJECT" use-plural="true" />
 
         <dp-panel is-panel-visible="!user.scopes.includes('BRK/RO')" type="warning" can-close="true">
             Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer gegevens te zien:
             zakelijke rechten en aantekeningen.
-            Zie <dp-link-to-page class-name="c-link--light"></dp-link-to-page>.
+            Zie <dp-link-to-page class-name="c-link--light" />.
         </dp-panel>
 
         <dp-api-call

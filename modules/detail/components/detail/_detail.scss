@@ -1,5 +1,6 @@
 .c-detail {
   padding: $detail-padding;
+  background-color: $primary-light;
 
   // Needs to be nested to gain more importance over `o-btn`
   & .c-detail__table-link {
