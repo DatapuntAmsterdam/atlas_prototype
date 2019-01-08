@@ -904,6 +904,22 @@ export default [
     url: '/maps/overlastgebieden?version=1.3.0&service=WMS'
   },
   {
+    category: 'Openbare orde en veiligheid',
+    id: 'oovvz',
+    layers: ['vuurwerkvrijezone'],
+    legendItems: [
+      {
+        selectable: false,
+        title: 'Vuurwerkvrije zone',
+        imageRule: 'vuurwerkvrijezone'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Vuurwerkvrije zones',
+    url: '/maps/overlastgebieden?version=1.3.0&service=WMS'
+  },
+  {
     category: 'Toerisme en cultuur',
     id: 'tcmnmt',
     legendItems: [
@@ -1106,6 +1122,21 @@ export default [
     minZoom: 8,
     title: 'Explosieven - Uitgevoerde CE-onderzoeken',
     url: '/maps/bommenkaart?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Milieu: bodem',
+    id: 'bros',
+    layers: ['cpt'],
+    legendItems: [
+      {
+        selectable: false,
+        title: 'Geotechnische sondering',
+        iconUrl: 'assets/images/map-legend/icon-bro-sondering.png'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Geotechnische sonderingen (CPT BRO)'
   },
   {
     category: 'Milieu: externe veiligheid',

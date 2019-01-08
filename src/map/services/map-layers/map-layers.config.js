@@ -333,6 +333,13 @@ export default [
     url: 'maps/bommenkaart',
     layers: ['uitgevoerde_CE_onderzoeken']
   },
+  {
+    id: 'bros',
+    url: 'https://geodata.nationaalgeoregister.nl/brocpt/wms?',
+    layers: ['cpt'],
+    external: true,
+    noDetail: true
+  },
   // milieu: veiligheid
   {
     id: 'mvlpgv',
@@ -518,6 +525,11 @@ export default [
     id: 'oovtig',
     url: 'maps/overlastgebieden',
     layers: ['taxi-standplaatsgebied', 'taxi-standplaatsgebied_label']
+  },
+  {
+    id: 'oovvz',
+    url: 'maps/overlastgebieden',
+    layers: ['vuurwerkvrijezone', 'vuurwerkvrijezone_label']
   },
   // Toerisme en cultuur
   {
