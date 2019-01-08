@@ -126,21 +126,4 @@ describe('NonTiledLayer', () => {
     wrapper.instance().updateLeafletElement({ props }, { ...props, params: { mission_type: 'WOZ', mission_year: 2018 } });
     expect(setParamsMock).toHaveBeenCalled();
   });
-
-  it('should rerender everything when props change', () => {
-    const wrapper = renderComponent();
-    const setParamsMock = jest.fn();
-
-    wrapper.instance().leafletElement = {
-      setParams: setParamsMock,
-      setOpacity: jest.fn(),
-      setUrl: jest.fn()
-    };
-
-    wrapper.instance().updateLeafletElement({ props }, { props });
-    expect(setParamsMock).not.toHaveBeenCalled();
-
-    wrapper.instance().updateLeafletElement({ props }, { ...props, params: { mission_type: 'WOZ', mission_year: 2018 } });
-    expect(setParamsMock).toHaveBeenCalled();
-  });
 });
