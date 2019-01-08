@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getFilters as getDataSelectionFilters } from '../data-selection/selectors';
+import { getFilters as getDataSelectionFilters, getShapeFilter } from '../data-selection/selectors';
 import { getFilters as getDatasetFilters } from '../datasets/datasets';
 import paramsRegistry from '../../../store/params-registry';
 
@@ -8,7 +8,6 @@ export const EMPTY_FILTERS = `${REDUCER_KEY}/EMPTY_FILTERS`;
 
 export const ADD_FILTER = `${REDUCER_KEY}/ADD_FILTER`;
 export const REMOVE_FILTER = `${REDUCER_KEY}/REMOVE_FILTER`;
-export const SET_SHAPE_FILTER = `${REDUCER_KEY}/SET_SHAPE_FILTER`;
 
 export const initialState = {
   filters: {}
@@ -34,15 +33,6 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case SET_SHAPE_FILTER:
-      return {
-        ...enrichedState,
-        filters: {
-          ...enrichedState.filters,
-          shape: { ...action.payload }
-        }
-      };
-
     case EMPTY_FILTERS:
       return initialState;
 
@@ -50,8 +40,6 @@ const reducer = (state = initialState, action) => {
       return enrichedState;
   }
 };
-
-export const getFilters = (state) => state[REDUCER_KEY].filters;
 
 export const addFilter = (payload) => ({
   type: ADD_FILTER,
@@ -63,10 +51,19 @@ export const removeFilter = (filterKey) => ({
   payload: filterKey
 });
 
-export const setShapeFilter = (payload) => ({ type: SET_SHAPE_FILTER, payload });
 export const emptyFilters = () => ({ type: EMPTY_FILTERS });
 
 // Selectors
+const getReducerState = (state) => state[REDUCER_KEY];
+export const getFiltersWithoutShape = createSelector(getReducerState, ({ filters }) => filters);
+export const getFilters = createSelector(
+  getFiltersWithoutShape, getShapeFilter,
+  (filters, shapeFilter) => ({
+    ...filters,
+    ...shapeFilter
+  })
+);
+
 export const selectDataSelectionFilters = createSelector(
   getFilters, getDataSelectionFilters,
   (activeFilters, availableFilters) => {

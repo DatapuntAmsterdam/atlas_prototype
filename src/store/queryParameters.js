@@ -1,28 +1,4 @@
-import {
-  normalizeCoordinate,
-  parseLocationString
-} from '../shared/services/coordinate-reference-system';
-import paramsRegistry from './params-registry';
 import { routing } from '../app/routes';
-import { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer';
-import { initialState as dataSearchInitialState } from '../shared/ducks/data-search/constants';
-import {
-  getDataSearchLocation,
-  getSearchCategory,
-  getSearchQuery
-} from '../shared/ducks/data-search/selectors';
-import {
-  getDataSelectionPage,
-  getDataSelectionView,
-  getGeometryFilters
-} from '../shared/ducks/data-selection/selectors';
-import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer';
-import { initialState as dataSelectionInitialState } from '../shared/ducks/data-selection/constants';
-import { DATASETS, getPage } from '../shared/ducks/datasets/datasets';
-import { DATA, initialState as datasetsDataInitialState } from '../shared/ducks/datasets/data/data';
-import { getDetailView } from '../shared/ducks/detail/selectors';
-import { initialState as detailInitialState } from '../shared/ducks/detail/constants';
-import { DETAIL } from '../shared/ducks/detail/reducer';
 import { initialState as mapInitialState, MAP } from '../map/ducks/map/map';
 import {
   getCenter,
@@ -30,8 +6,8 @@ import {
   getMapZoom,
   isMapPanelActive
 } from '../map/ducks/map/map-selectors';
-import { PANORAMA } from '../panorama/ducks/reducer';
 import { initialState as panoramaInitialState } from '../panorama/ducks/constants';
+import { PANORAMA } from '../panorama/ducks/reducer';
 import {
   getPanoramaHeading,
   getPanoramaLocation,
@@ -39,8 +15,27 @@ import {
   getPanoramaView,
   getReference
 } from '../panorama/ducks/selectors';
+import { initialState as dataSearchInitialState } from '../shared/ducks/data-search/constants';
+import { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer';
 import {
-  getFilters,
+  getDataSearchLocation,
+  getSearchCategory,
+  getSearchQuery
+} from '../shared/ducks/data-search/selectors';
+import { initialState as dataSelectionInitialState } from '../shared/ducks/data-selection/constants';
+import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer';
+import {
+  getDataSelectionPage,
+  getDataSelectionView,
+  getGeometryFilters
+} from '../shared/ducks/data-selection/selectors';
+import { DATA, initialState as datasetsDataInitialState } from '../shared/ducks/datasets/data/data';
+import { DATASETS, getPage } from '../shared/ducks/datasets/datasets';
+import { initialState as detailInitialState } from '../shared/ducks/detail/constants';
+import { DETAIL } from '../shared/ducks/detail/reducer';
+import { getDetailView } from '../shared/ducks/detail/selectors';
+import {
+  getFiltersWithoutShape,
   initialState as filterInitialState,
   REDUCER_KEY as FILTER
 } from '../shared/ducks/filters/filters';
@@ -51,7 +46,12 @@ import {
   isPrintMode,
   UI
 } from '../shared/ducks/ui/ui';
+import {
+  normalizeCoordinate,
+  parseLocationString
+} from '../shared/services/coordinate-reference-system';
 import PARAMETERS from './parameters';
+import paramsRegistry from './params-registry';
 
 export default paramsRegistry
   .addParameter(PARAMETERS.QUERY, (routes) => {
@@ -190,7 +190,7 @@ export default paramsRegistry
           return {};
         }
       },
-      selector: getFilters,
+      selector: getFiltersWithoutShape,
       encode: (selectorResult = {}) => (
         Object.keys(selectorResult).length ? btoa(JSON.stringify(selectorResult)) : undefined
       )

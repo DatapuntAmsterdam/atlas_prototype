@@ -14,9 +14,8 @@ import { getMapBoundingBox, getMapZoom } from '../../../map/ducks/map/map-select
 import {
   ADD_FILTER,
   EMPTY_FILTERS,
-  getFilters,
-  REMOVE_FILTER,
-  setShapeFilter
+  getFiltersWithoutShape,
+  REMOVE_FILTER
 } from '../../ducks/filters/filters';
 import {
   isDataSelectionPage,
@@ -24,7 +23,7 @@ import {
   toDatasetPage
 } from '../../../store/redux-first-router';
 import {
-  FETCH_DATA_SELECTION_REQUEST,
+  FETCH_DATA_SELECTION_REQUEST, REMOVE_GEOMETRY_FILTER,
   SET_DATASET,
   SET_GEOMETRY_FILTER,
   SET_PAGE,
@@ -39,15 +38,6 @@ import {
 import { waitForAuthentication } from '../user/user';
 import { MAP_BOUNDING_BOX } from '../../../map/ducks/map/map';
 import PARAMETERS from '../../../store/parameters';
-
-export const createShapeFilter = (geometryFilter) =>
-  (geometryFilter.markers === undefined
-    ? {}
-    : {
-      slug: 'shape',
-      label: 'Locatie',
-      option: `ingetekend (${geometryFilter.description})`
-    });
 
 function* getMapMarkers(dataset, activeFilters) {
   // Since bounding box can be set later, we check if we have to wait for the boundingbox to get set
@@ -66,23 +56,23 @@ function* retrieveDataSelection(action) {
   const {
     dataset,
     view,
-    activeFilters,
     page,
     searchText,
-    shape,
     catalogFilters
   } = action.payload;
+
   try {
     yield call(waitForAuthentication);
-
+    const activeFilters = yield select(getFiltersWithoutShape);
+    const shape = yield select(getGeomarkersShape);
     // exclude the geometryFilter from the attribute filters
     // TODO DP-6442 improve the geometryFilter handling
     const activeAttributeFilters = Object.keys(activeFilters)
-                                         .filter((key) => key !== 'shape')
                                          .reduce((result, key) => ({
                                            ...result,
                                            [key]: activeFilters[key]
                                          }), {});
+
     const result = yield call(query,
       dataset, view, activeAttributeFilters, page, searchText, shape, catalogFilters);
 
@@ -114,14 +104,10 @@ function* fireRequest(action) {
   // Always ensure we are on the right page, otherwise this can be called unintentionally
   if (isDataSelectionPage(state) && !get(action, 'meta.skipFetch')) {
     const dataSelection = getDataSelection(state);
-    const activeFilters = getFilters(state);
-    const shape = getGeomarkersShape(state);
 
     yield put(
       fetchDataSelection({
-        ...dataSelection,
-        activeFilters,
-        shape
+        ...dataSelection
       })
     );
   }
@@ -139,11 +125,7 @@ function* switchPage(additionalParams = {}) {
   yield put(preserveQuery(toDatasetPage(dataSelection.dataset), additionalParams));
 }
 
-function* setGeometryFilters(action) {
-  if (action.payload) {
-    yield put(setShapeFilter(createShapeFilter(action.payload)));
-  }
-
+function* setGeometryFilters() {
   const geometryFilters = yield select(getGeometryFilters);
 
   yield call(switchPage, {
@@ -156,7 +138,7 @@ export default function* watchFetchDataSelection() {
   yield takeLatest(REMOVE_FILTER, clearShapeFilter);
   yield takeLatest(SET_GEOMETRY_FILTER, setGeometryFilters);
   yield takeLatest(
-    [SET_VIEW, SET_PAGE, ADD_FILTER, REMOVE_FILTER, EMPTY_FILTERS,
+    [SET_VIEW, SET_PAGE, ADD_FILTER, REMOVE_FILTER, REMOVE_GEOMETRY_FILTER, EMPTY_FILTERS,
       routing.addresses.type, routing.establishments.type, routing.cadastralObjects.type
     ],
     fireRequest
