@@ -123,8 +123,9 @@ class PanoramaContainer extends React.Component {
             onClose(panoramaLocation, detailReference);
           }}
           title="Sluit panorama"
+          padding={0}
         >
-          <Icon icon="cross" />
+          <Icon icon="cross" padding={4} />
         </Button>
 
         {(panoramaState.date && panoramaState.location) ? (

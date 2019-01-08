@@ -8,8 +8,9 @@ const ToggleFullscreen = ({ isFullscreen, title, onToggleFullscreen, alignLeft }
     title={isFullscreen ? `${title} verkleinen` : `${title} vergroten`}
     onClick={onToggleFullscreen}
     alignLeft={alignLeft}
+    padding={0}
   >
-    <Icon icon={isFullscreen ? 'minimize' : 'maximize'} />
+    <Icon icon={isFullscreen ? 'minimize' : 'maximize'} padding={4} />
   </Button>
 );
 

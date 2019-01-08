@@ -93,6 +93,7 @@ $icon-height: 24px;
         .map-layers__toggle--add,
         .map-layers__toggle--remove {
           @extend %active-button;
+          background-color: $secondary-gray20 !important; // !important statement only needed in  Chrome
         }
 
         .map-layers__toggle--add {

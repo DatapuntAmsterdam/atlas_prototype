@@ -11,11 +11,13 @@ exports[`ToggleFullscreen actions rendering should render with fullscreen is tur
       ],
     }
   }
+  padding={0}
   title="ABC verkleinen"
 >
   <Icon
     alignLeft={false}
     icon="minimize"
+    padding={4}
   />
 </Button>
 `;
@@ -31,11 +33,13 @@ exports[`ToggleFullscreen actions rendering should render with fullscreen is tur
       ],
     }
   }
+  padding={0}
   title="ABC verkleinen"
 >
   <Icon
     alignLeft={false}
     icon="minimize"
+    padding={4}
   />
 </Button>
 `;

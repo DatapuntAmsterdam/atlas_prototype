@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import ToggleFullscreen from './ToggleFullscreen';
 
+
 describe('ToggleFullscreen', () => {
   const onToggleFullscreen = jest.fn();
   const props = {
