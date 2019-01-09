@@ -1,15 +1,13 @@
-import { ROUTER_NAMESPACE, routing } from '../../../app/routes';
+import { routing } from '../../../app/routes';
 import { FETCH_DETAIL, initialState, SET_VIEW, SHOW_DETAIL, REDUCER_KEY } from './constants';
 import paramsRegistry from '../../../store/params-registry';
 import PAGES from '../../../app/pages';
+import { shouldResetState } from '../../../store/redux-first-router';
 
 export { REDUCER_KEY as DETAIL };
 
 export default function detailReducer(state = initialState, action) {
-  if (action.type &&
-    action.type.startsWith(ROUTER_NAMESPACE) &&
-    !action.type.includes(PAGES.DATA_DETAIL)
-  ) {
+  if (shouldResetState(action, [PAGES.DATA_DETAIL])) {
     return initialState;
   }
 

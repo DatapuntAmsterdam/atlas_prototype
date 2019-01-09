@@ -2,7 +2,7 @@ import get from 'lodash.get';
 import queryString from 'querystring';
 import { createSelector } from 'reselect';
 import PAGES from '../app/pages';
-import { routing } from '../app/routes';
+import { routing, ROUTER_NAMESPACE } from '../app/routes';
 import { DATASETS } from '../shared/ducks/data-selection/constants';
 import PARAMETERS from './parameters';
 import paramsRegistry from './params-registry';
@@ -29,6 +29,12 @@ export const preserveQuery = (action, additionalParams = {}) => {
     ...get(action, 'meta.query')
   });
 };
+
+// Determines if the route change should reinitialize the state for a reducer
+export const shouldResetState = (action, allowedRoutes = []) => (action.type &&
+  action.type.startsWith(ROUTER_NAMESPACE) &&
+  allowedRoutes.every((route) => !action.type.includes(route))
+);
 
 export const toDataDetail = (id, type, subtype) => ({
   type: routing.dataDetail.type,

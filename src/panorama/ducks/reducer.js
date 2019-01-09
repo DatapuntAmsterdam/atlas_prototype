@@ -1,4 +1,4 @@
-import { ROUTER_NAMESPACE, routing } from '../../app/routes';
+import { routing } from '../../app/routes';
 import { PANORAMA_CONFIG } from '../services/panorama-api/panorama-api';
 import PAGES from '../../app/pages';
 import {
@@ -14,14 +14,12 @@ import {
   REDUCER_KEY
 } from './constants';
 import paramsRegistry from '../../store/params-registry';
+import { shouldResetState } from '../../store/redux-first-router';
 
 export { REDUCER_KEY as PANORAMA };
 
 export default function reducer(state = initialState, action) {
-  if (action.type &&
-    action.type.startsWith(ROUTER_NAMESPACE) &&
-    !action.type.includes(PAGES.PANORAMA)
-  ) {
+  if (shouldResetState(action, [PAGES.PANORAMA])) {
     return initialState;
   }
 
