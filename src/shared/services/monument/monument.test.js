@@ -1,28 +1,22 @@
 import fetchByUri, { fetchByPandId } from './monument';
-import { getAuthHeaders } from '../auth/auth';
+import { getByUrl } from '../api/api';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 
-jest.mock('../auth/auth');
+jest.mock('../api/api');
 jest.mock('../geo-json/geo-json');
 jest.mock('../coordinate-reference-system/crs-converter');
 
 describe('The monument resource', () => {
-  beforeEach(() => {
-    getAuthHeaders.mockImplementation(() => ({
-      Authorization: 'Bearer 123AccessToken'
-    }));
-  });
-
   afterEach(() => {
-    fetch.mockReset();
+    getByUrl.mockReset();
   });
 
   describe('By uri', () => {
     it('fetches a monument', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/monumenten/monument/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         _display: 'Monument display name 1',
         geometrie: { type: 'Point' },
         monumentnummer: 'Monument number',
@@ -49,15 +43,14 @@ describe('The monument resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
-      expect(fetch.mock.calls[0][1]).toEqual({ headers: { Authorization: 'Bearer 123AccessToken' } });
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('fetches with monument coordinates', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/monumenten/monument/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         _display: 'Monument display name 1',
         monumentcoordinaten: { type: 'Point' },
         monumentnummer: 'Monument number',
@@ -84,15 +77,14 @@ describe('The monument resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
-      expect(fetch.mock.calls[0][1]).toEqual({ headers: { Authorization: 'Bearer 123AccessToken' } });
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('fetches with empty result object', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/monumenten/monument/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({}));
+      getByUrl.mockReturnValueOnce(Promise.resolve({}));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
@@ -104,13 +96,13 @@ describe('The monument resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
   });
 
   it('can fetch monumenten by pand id', () => {
-    fetch.mockResponseOnce(JSON.stringify({ results: [
+    getByUrl.mockReturnValueOnce(Promise.resolve({ results: [
       {
         _display: 'Monument display name 1',
         nummer: 'abc123'
@@ -132,8 +124,7 @@ describe('The monument resource', () => {
       ]);
     });
 
-    expect(fetch.mock.calls[0][0]).toContain('betreft_pand=1');
-    expect(fetch.mock.calls[0][1]).toEqual({ headers: { Authorization: 'Bearer 123AccessToken' } });
+    expect(getByUrl.mock.calls[0][0]).toContain('betreft_pand=1');
     return promise;
   });
 });

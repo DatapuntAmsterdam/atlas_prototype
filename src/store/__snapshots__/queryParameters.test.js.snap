@@ -384,6 +384,15 @@ Object {
         "selector": [Function],
         "stateKey": "query",
       },
+      "atlasRouter/SEARCH_DATA_CATEGORY": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": "",
+        "encode": [Function],
+        "reducerKey": "dataSearch",
+        "selector": [Function],
+        "stateKey": "query",
+      },
     },
   },
   "view": Object {

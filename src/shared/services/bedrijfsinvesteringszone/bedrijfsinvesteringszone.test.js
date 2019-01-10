@@ -2,19 +2,22 @@ import fetchByUri from './bedrijfsinvesteringszone';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 
+import { getByUrl } from '../api/api';
+
 jest.mock('../geo-json/geo-json');
+jest.mock('../api/api');
 jest.mock('../coordinate-reference-system/crs-converter');
 
 describe('The bedrijfsinvesteringszone resource', () => {
   afterEach(() => {
-    fetch.mockReset();
+    getByUrl.mockReset();
   });
 
   describe('By uri', () => {
     it('fetches a bedrijfsinvesteringszone', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/vsd/biz/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValue(Promise.resolve({
         _display: 'Bedrijfsinvesteringszone display name 1',
         bijdrageplichtigen: 'Bedrijfsinvesteringszone heffingsplichtigen',
         biz_type: 'Bedrijfsinvesteringszone type',
@@ -41,14 +44,14 @@ describe('The bedrijfsinvesteringszone resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('fetches with empty result object', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/vsd/biz/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({}));
+      getByUrl.mockReturnValue(Promise.resolve({}));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
@@ -60,7 +63,7 @@ describe('The bedrijfsinvesteringszone resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
   });

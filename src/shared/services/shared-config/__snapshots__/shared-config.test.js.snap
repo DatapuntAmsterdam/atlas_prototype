@@ -4,6 +4,7 @@ exports[`The sharedConfig service gives you the configuration based on global en
 Object {
   "API_ROOT": "https://acc.api.data.amsterdam.nl/",
   "AUTH_HEADER_PREFIX": "Bearer ",
+  "CACHE_EXPIRATION": 0,
   "PANORAMA_THUMBNAIL_URL": "panorama/thumbnail/",
   "RADIUS": 50,
   "ROOT": "https://acc.data.amsterdam.nl/",
@@ -18,6 +19,7 @@ exports[`The sharedConfig service gives you the configuration based on global en
 Object {
   "API_ROOT": "https://acc.api.data.amsterdam.nl/",
   "AUTH_HEADER_PREFIX": "Bearer ",
+  "CACHE_EXPIRATION": 0,
   "PANORAMA_THUMBNAIL_URL": "panorama/thumbnail/",
   "RADIUS": 50,
   "ROOT": "https://acc.data.amsterdam.nl/",
@@ -32,6 +34,7 @@ exports[`The sharedConfig service gives you the configuration based on global en
 Object {
   "API_ROOT": "https://acc.api.data.amsterdam.nl/",
   "AUTH_HEADER_PREFIX": "Bearer ",
+  "CACHE_EXPIRATION": 0,
   "PANORAMA_THUMBNAIL_URL": "panorama/thumbnail/",
   "RADIUS": 50,
   "ROOT": "https://acc.data.amsterdam.nl/",
@@ -46,6 +49,7 @@ exports[`The sharedConfig service gives you the configuration based on global en
 Object {
   "API_ROOT": "https://acc.api.data.amsterdam.nl/",
   "AUTH_HEADER_PREFIX": "Bearer ",
+  "CACHE_EXPIRATION": 0,
   "PANORAMA_THUMBNAIL_URL": "panorama/thumbnail/",
   "RADIUS": 50,
   "ROOT": "https://acc.data.amsterdam.nl/",

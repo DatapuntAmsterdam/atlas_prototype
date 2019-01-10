@@ -4,9 +4,10 @@ import verblijfsobject from './adressen-verblijfsobject';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 
+import { getByUrl } from '../api/api';
+
 export default function fetchByUri(uri) {
-  return fetch(uri)
-    .then((response) => response.json())
+  return getByUrl(uri)
     .then((result) => ({
       ...result,
       label: result._display,
@@ -43,8 +44,7 @@ export function fetchByPandId(pandId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&');
 
-  return fetch(`${SHARED_CONFIG.API_ROOT}bag/nummeraanduiding/?${queryString}`)
-    .then((response) => response.json())
+  return getByUrl(`${SHARED_CONFIG.API_ROOT}bag/nummeraanduiding/?${queryString}`)
     .then((data) => data.results);
 }
 
@@ -57,8 +57,7 @@ export function fetchByLigplaatsId(ligplaatsId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&');
 
-  return fetch(`${SHARED_CONFIG.API_ROOT}bag/nummeraanduiding/?${queryString}`)
-    .then((response) => response.json())
+  return getByUrl(`${SHARED_CONFIG.API_ROOT}bag/nummeraanduiding/?${queryString}`)
     .then((data) => data.results
       .map((result) => ({
         ...result,
@@ -81,8 +80,7 @@ export function fetchByStandplaatsId(standplaatsId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&');
 
-  return fetch(`${SHARED_CONFIG.API_ROOT}bag/nummeraanduiding/?${queryString}`)
-    .then((response) => response.json())
+  return getByUrl(`${SHARED_CONFIG.API_ROOT}bag/nummeraanduiding/?${queryString}`)
     .then((data) => data.results
       .map((result) => ({
         ...result,

@@ -3,7 +3,8 @@ import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import PanoramaContainer from './PanoramaContainer';
 import { getOrientation, loadScene } from '../services/marzipano/marzipano';
-import { fetchPanoramaRequest } from '../ducks/actions';
+import { fetchPanoramaRequest, setView } from '../ducks/actions';
+import PANORAMA_VIEW from '../ducks/panorama-view';
 import { getPanorama, getPanoramaLocation, getReference } from '../ducks/selectors';
 
 jest.mock('../../map/ducks/map/map-selectors');
@@ -76,12 +77,12 @@ describe('PanoramaContainer', () => {
     expect(wrapper.instance().props.isFullscreen).toBe(false);
 
     wrapper.instance().toggleFullscreen();
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(setView(`${PANORAMA_VIEW.PANO}`));
 
     wrapper.setProps({ isFullscreen: true });
 
     wrapper.instance().toggleFullscreen();
-    expect(store.dispatch).toHaveBeenCalledTimes(2);
+    expect(store.dispatch).toHaveBeenCalledWith(setView(`${PANORAMA_VIEW.MAP_PANO}`));
   });
 
   it('should load new scene when panorama image information changes', () => {

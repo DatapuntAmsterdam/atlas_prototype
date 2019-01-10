@@ -197,14 +197,18 @@ export function login() {
     throw new Error('crypto library is not available on the current browser');
   }
 
-  sessionStorage.removeItem(ACCESS_TOKEN);
+  // Clear cache and ACCESS_TOKEN from sessionStorage
+  sessionStorage.clear();
+
+  // Set RETURN_PATH and ACCESS_TOKEN on login
   sessionStorage.setItem(RETURN_PATH, location.href);
   sessionStorage.setItem(STATE_TOKEN, stateToken);
   location.assign(`${API_ROOT}${AUTH_PATH}&state=${encodedStateToken}&redirect_uri=${callback}`);
 }
 
 export function logout() {
-  sessionStorage.removeItem(ACCESS_TOKEN);
+  // Clear cache and ACCESS_TOKEN from sessionStorage
+  sessionStorage.clear();
   location.reload();
 }
 

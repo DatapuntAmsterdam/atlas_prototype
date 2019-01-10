@@ -35,7 +35,8 @@ describe('The auth service', () => {
           }
         },
         setItem: noop,
-        removeItem: noop
+        removeItem: noop,
+        clear: noop
       }
     });
 
@@ -45,6 +46,7 @@ describe('The auth service', () => {
     jest.spyOn(global.sessionStorage, 'getItem');
     jest.spyOn(global.sessionStorage, 'removeItem');
     jest.spyOn(global.sessionStorage, 'setItem');
+    jest.spyOn(global.sessionStorage, 'clear');
 
     queryStringParser.mockImplementation(() => queryObject);
     stateTokenGenerator.mockImplementation(() => stateToken);
@@ -207,7 +209,7 @@ describe('The auth service', () => {
 
       login();
 
-      expect(global.sessionStorage.removeItem).toHaveBeenCalledWith('accessToken');
+      expect(global.sessionStorage.clear).toHaveBeenCalled();
       expect(global.sessionStorage.setItem).toHaveBeenCalledWith('stateToken', stateToken);
     });
 
@@ -226,7 +228,7 @@ describe('The auth service', () => {
   describe('Logout process', () => {
     it('Removes the access token from the session storage', () => {
       logout();
-      expect(global.sessionStorage.removeItem).toHaveBeenCalledWith('accessToken');
+      expect(global.sessionStorage.clear).toHaveBeenCalled();
     });
 
     it('Reloads the app', () => {

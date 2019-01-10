@@ -1,15 +1,14 @@
 import get from 'lodash.get';
 
-import { getAuthHeaders } from '../auth/auth';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 import maatschappelijkeActiviteit from '../maatschappelijke-activiteit/maatschappelijke-activiteit';
 import SHARED_CONFIG from '../shared-config/shared-config';
 
+import { getByUrl } from '../api/api';
 
 export default function fetchByUri(uri) {
-  return fetch(uri, { headers: getAuthHeaders() })
-    .then((response) => response.json())
+  return getByUrl(uri)
     .then((result) => {
       const visitingCoordinates = get(result.bezoekadres, 'geometrie');
       const geometryCenter =
@@ -53,10 +52,7 @@ export function fetchByPandId(pandId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&');
 
-  return fetch(`${SHARED_CONFIG.API_ROOT}handelsregister/vestiging/?${queryString}`,
-    { headers: getAuthHeaders() }
-  )
-    .then((response) => response.json())
+  return getByUrl(`${SHARED_CONFIG.API_ROOT}handelsregister/vestiging/?${queryString}`)
     .then((data) => data.results);
 }
 
@@ -69,9 +65,6 @@ export function fetchByAddressId(addressId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&');
 
-  return fetch(`${SHARED_CONFIG.API_ROOT}handelsregister/vestiging/?${queryString}`,
-    { headers: getAuthHeaders() }
-  )
-    .then((response) => response.json())
+  return getByUrl(`${SHARED_CONFIG.API_ROOT}handelsregister/vestiging/?${queryString}`)
     .then((data) => data.results);
 }

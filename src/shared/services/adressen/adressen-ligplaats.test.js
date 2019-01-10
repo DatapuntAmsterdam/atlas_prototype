@@ -2,19 +2,22 @@ import fetchByUri from './adressen-ligplaats';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 
+import { getByUrl } from '../api/api';
+
 jest.mock('../geo-json/geo-json');
+jest.mock('../api/api');
 jest.mock('../coordinate-reference-system/crs-converter');
 
 describe('The adressen ligplaats resource', () => {
   afterEach(() => {
-    fetch.mockReset();
+    getByUrl.mockReset();
   });
 
   describe('By uri', () => {
     it('fetches a ligplaats', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/ligplaats/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         _display: 'Ligplaats display name 1',
         aanduiding_in_onderzoek: true,
         geometrie: { type: 'Point' },
@@ -43,14 +46,14 @@ describe('The adressen ligplaats resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('fetches with empty result object', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/ligplaats/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({}));
+      getByUrl.mockReturnValueOnce(Promise.resolve({}));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
@@ -65,7 +68,7 @@ describe('The adressen ligplaats resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
   });

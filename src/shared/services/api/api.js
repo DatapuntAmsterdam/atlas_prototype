@@ -18,8 +18,33 @@ const handleErrors = (response, reloadOnUnauthorized) => {
   return response;
 };
 
-// TODO: This function is not used yet because it is not finished
-// cancel functionality doesn't work yet and is needed for the straatbeeld-api.js
+const handleCache = (response, key) => {
+  sessionStorage.setItem(
+    key,
+    JSON.stringify({
+      timestamp: new Date(),
+      data: response
+    })
+  );
+
+  return response;
+};
+
+const getFromCache = (key) => {
+  const cache = JSON.parse(sessionStorage.getItem(key));
+
+  const now = new Date().getTime();
+  let expiration = new Date(cache.timestamp);
+  expiration = expiration.setMinutes(expiration.getMinutes() + SHARED_CONFIG.CACHE_EXPIRATION);
+
+  if (now >= expiration) {
+    sessionStorage.removeItem(key);
+    return false;
+  }
+
+  return cache.data;
+};
+
 export const getWithToken = (url, params, cancel, token, reloadOnUnauthorized = false) => {
   const headers = {};
 
@@ -37,9 +62,16 @@ export const getWithToken = (url, params, cancel, token, reloadOnUnauthorized = 
   }
 
   const fullUrl = `${url}${params ? `?${generateParams(params)}` : ''}`;
-  return fetch(fullUrl, options)
-    .then((response) => handleErrors(response, reloadOnUnauthorized))
-    .then((response) => response.json());
+
+  // Retrieve from cache, otherwise execute API call
+  try {
+    return getFromCache(fullUrl);
+  } catch (e) {
+    return fetch(fullUrl, options)
+      .then((response) => handleErrors(response, reloadOnUnauthorized))
+      .then((response) => response.json())
+      .then((response) => handleCache(response, fullUrl));
+  }
 };
 
 export const getByUrl = async (url, params, cancel, reloadOnUnauthorized) => {

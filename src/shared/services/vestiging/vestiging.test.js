@@ -1,23 +1,17 @@
 import fetchByUri, { fetchByPandId, fetchByAddressId } from './vestiging';
-import { getAuthHeaders } from '../auth/auth';
+import { getByUrl } from '../api/api';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 import maatschappelijkeActiviteit from '../maatschappelijke-activiteit/maatschappelijke-activiteit';
 
-jest.mock('../auth/auth');
+jest.mock('../api/api');
 jest.mock('../geo-json/geo-json');
 jest.mock('../coordinate-reference-system/crs-converter');
 jest.mock('../maatschappelijke-activiteit/maatschappelijke-activiteit');
 
 describe('The vestiging resource', () => {
-  beforeEach(() => {
-    getAuthHeaders.mockImplementation(() => ({
-      Authorization: 'Bearer 123AccessToken'
-    }));
-  });
-
   afterEach(() => {
-    fetch.mockReset();
+    getByUrl.mockReset();
     maatschappelijkeActiviteit.mockReset();
   });
 
@@ -25,7 +19,7 @@ describe('The vestiging resource', () => {
     it('fetches a vestiging', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/handelsregister/vestiging/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         activiteiten: [{
           sbi_code: '01',
           sbi_omschrijving: 'Activity 1 description',
@@ -103,14 +97,14 @@ describe('The vestiging resource', () => {
           'https://acc.api.data.amsterdam.nl/handelsregister/maatschappelijkeactiviteit/345678');
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('fetches with visiting address coordinates', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/handelsregister/vestiging/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         bezoekadres: {
           geometrie: { type: 'Point' },
           something: 'else'
@@ -153,14 +147,14 @@ describe('The vestiging resource', () => {
           'https://acc.api.data.amsterdam.nl/handelsregister/maatschappelijkeactiviteit/345678');
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('marks `surseanceVanBetaling` when `bijzondereRechtstoestand` is `voorlopig` ', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/handelsregister/vestiging/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         _bijzondere_rechts_toestand: {
           faillissement: true,
           status: 'Voorlopig'
@@ -195,14 +189,14 @@ describe('The vestiging resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('marks `surseanceVanBetaling` when `bijzondereRechtstoestand` is `definitief` ', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/handelsregister/vestiging/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         _bijzondere_rechts_toestand: {
           faillissement: false,
           status: 'Definitief'
@@ -237,14 +231,14 @@ describe('The vestiging resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('fetches with empty result object', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/handelsregister/vestiging/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         maatschappelijke_activiteit:
           'https://acc.api.data.amsterdam.nl/handelsregister/maatschappelijkeactiviteit/345678'
       }));
@@ -269,14 +263,14 @@ describe('The vestiging resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('fetches without maatschappelijke activiteit', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/handelsregister/vestiging/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         geometrie: { type: 'Point' },
         something: 'abc123'
       }));
@@ -290,14 +284,14 @@ describe('The vestiging resource', () => {
         expect(maatschappelijkeActiviteit).not.toHaveBeenCalled();
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('fetches without maatschappelijke activiteit, with empty result object', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/handelsregister/vestiging/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({}));
+      getByUrl.mockReturnValueOnce(Promise.resolve({}));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
@@ -305,13 +299,13 @@ describe('The vestiging resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
   });
 
   it('can fetch a vestiging by pand id', () => {
-    fetch.mockResponseOnce(JSON.stringify({ results: [
+    getByUrl.mockReturnValueOnce(Promise.resolve({ results: [
       {
         _display: 'Vestiging display name 1',
         id: 'abc123'
@@ -334,12 +328,12 @@ describe('The vestiging resource', () => {
       ]);
     });
 
-    expect(fetch.mock.calls[0][0]).toContain('pand=1');
+    expect(getByUrl.mock.calls[0][0]).toContain('pand=1');
     return promise;
   });
 
   it('can fetch a vestiging by address id', () => {
-    fetch.mockResponseOnce(JSON.stringify({ results: [
+    getByUrl.mockReturnValueOnce(Promise.resolve({ results: [
       {
         _display: 'Vestiging display name 1',
         id: 'abc123'
@@ -362,7 +356,7 @@ describe('The vestiging resource', () => {
       ]);
     });
 
-    expect(fetch.mock.calls[0][0]).toContain('nummeraanduiding=0');
+    expect(getByUrl.mock.calls[0][0]).toContain('nummeraanduiding=0');
     return promise;
   });
 });

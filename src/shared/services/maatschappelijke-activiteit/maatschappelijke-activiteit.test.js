@@ -1,24 +1,18 @@
 import fetchByUri from './maatschappelijke-activiteit';
-import { getAuthHeaders } from '../auth/auth';
+import { getByUrl } from '../api/api';
 
-jest.mock('../auth/auth');
+jest.mock('../api/api');
 
 describe('The maatschappelijke activiteit resource', () => {
-  beforeEach(() => {
-    getAuthHeaders.mockImplementation(() => ({
-      Authorization: 'Bearer 123AccessToken'
-    }));
-  });
-
   afterEach(() => {
-    fetch.mockReset();
+    getByUrl.mockReset();
   });
 
   describe('By uri', () => {
     it('fetches a maatschappelijke activiteit', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/handelsregister/maatschappelijkeactiviteit/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         _display: 'Maatschappelijke activiteit display name 1'
       }));
 
@@ -28,8 +22,7 @@ describe('The maatschappelijke activiteit resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
-      expect(fetch.mock.calls[0][1]).toEqual({ headers: { Authorization: 'Bearer 123AccessToken' } });
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
   });

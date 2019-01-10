@@ -20,7 +20,7 @@ describe('Api service', () => {
     };
 
     it('should return the response from fetch', async () => {
-      fetch.mockResponse(JSON.stringify(response));
+      fetch.mockResponseOnce(JSON.stringify(response));
 
       const result = await getWithToken(
         'http://localhost/',
@@ -36,7 +36,7 @@ describe('Api service', () => {
     });
 
     it('should return the response from fetch', async () => {
-      fetch.mockResponse(JSON.stringify(response), { status: 503 });
+      fetch.mockResponseOnce(JSON.stringify(response), JSON.stringify({ ok: 503 }));
 
       expect(getWithToken(
         'http://localhost/',
@@ -46,11 +46,11 @@ describe('Api service', () => {
         },
         false,
         'token12345'
-      )).rejects.toThrow('Service Unavailable');
+      )).toBe(false);
     });
 
     it('should pass a signal: true to fetch options and add the token to the header', async () => {
-      fetch.mockResponse(JSON.stringify(response));
+      fetch.mockResponseOnce(JSON.stringify(response));
 
       await getWithToken(
         'http://localhost/',

@@ -1,11 +1,11 @@
-import { getAuthHeaders } from '../auth/auth';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 import SHARED_CONFIG from '../shared-config/shared-config';
 
+import { getByUrl } from '../api/api';
+
 export default function fetchByUri(uri) {
-  return fetch(uri, { headers: getAuthHeaders() })
-    .then((response) => response.json())
+  return getByUrl(uri)
     .then((result) => {
       const geometryCenter =
         (result.geometrie && getCenter(result.geometrie)) ||
@@ -32,9 +32,6 @@ export function fetchByPandId(pandId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&');
 
-  return fetch(`${SHARED_CONFIG.API_ROOT}monumenten/monumenten/?${queryString}`,
-    { headers: getAuthHeaders() }
-  )
-    .then((response) => response.json())
+  return getByUrl(`${SHARED_CONFIG.API_ROOT}monumenten/monumenten/?${queryString}`)
     .then((data) => data.results);
 }

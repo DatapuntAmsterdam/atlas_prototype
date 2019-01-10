@@ -1,6 +1,5 @@
-import { getAuthHeaders } from '../auth/auth';
+import { getByUrl } from '../api/api';
 
 export default function fetchByUri(uri) {
-  return fetch(uri, { headers: getAuthHeaders() })
-    .then((response) => response.json());
+  return getByUrl(uri);
 }

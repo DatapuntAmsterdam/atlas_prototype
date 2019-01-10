@@ -7,6 +7,7 @@ import SHARED_CONFIG from '../../../shared/services/shared-config/shared-config'
 import transformResultByType from './transform-result-by-type';
 
 import { createMapSearchResultsModel } from '../../services/map-search-results/map-search-results';
+import { getByUrl } from '../../../shared/services/api/api';
 
 const endpoints = [
   { uri: 'geosearch/nap/', radius: 25 },
@@ -68,18 +69,18 @@ export const fetchRelatedForUser = (user) => (data) => {
   const requests = resources.map((resource) => (
     (resource.authScope &&
       (!user.authenticated || !user.scopes.includes(resource.authScope))
-    ) ? [] :
-      resource.fetch(item.properties.id)
+    ) ? []
+      : resource.fetch(item.properties.id)
         .then((results) => results
-            .map((result) => ({
-              ...result,
-              properties: {
-                uri: result._links.self.href,
-                display: result._display,
-                type: resource.type,
-                parent: item.properties.type
-              }
-            }))
+          .map((result) => ({
+            ...result,
+            properties: {
+              uri: result._links.self.href,
+              display: result._display,
+              type: resource.type,
+              parent: item.properties.type
+            }
+          }))
         )
   ));
 
@@ -103,8 +104,7 @@ export default function search(location, user) {
       .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
       .join('&');
 
-    return fetch(`${SHARED_CONFIG.API_ROOT}${endpoint.uri}?${queryString}`)
-      .then((response) => response.json())
+    return getByUrl(`${SHARED_CONFIG.API_ROOT}${endpoint.uri}?${queryString}`)
       .then(fetchRelatedForUser(user))
       .then((features) => features.map((feature) => transformResultByType(feature)));
   });

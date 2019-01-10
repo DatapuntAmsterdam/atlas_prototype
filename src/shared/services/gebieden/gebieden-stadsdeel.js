@@ -4,8 +4,7 @@ import { getByUrl } from '../api/api';
 import SHARED_CONFIG from '../shared-config/shared-config';
 
 function fetchStadsdeel(uri) {
-  return fetch(uri)
-    .then((response) => response.json())
+  return getByUrl(uri)
     .then((result) => {
       const geometryCenter = result.geometrie && getCenter(result.geometrie);
       const wgs84Center = geometryCenter ? rdToWgs84(geometryCenter) : null;

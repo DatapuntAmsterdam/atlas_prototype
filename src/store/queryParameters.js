@@ -1,4 +1,17 @@
 import { routing } from '../app/routes';
+import { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer';
+import { initialState as dataSearchInitialState } from '../shared/ducks/data-search/constants';
+import {
+  getDataSelectionPage,
+  getDataSelectionView,
+  getGeometryFilters
+} from '../shared/ducks/data-selection/selectors';
+import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer';
+import { DATASETS, getPage } from '../shared/ducks/datasets/datasets';
+import { DATA, initialState as datasetsDataInitialState } from '../shared/ducks/datasets/data/data';
+import { initialState as detailInitialState } from '../shared/ducks/detail/constants';
+import { getDetailView } from '../shared/ducks/detail/selectors';
+import { DETAIL } from '../shared/ducks/detail/reducer';
 import { initialState as mapInitialState, MAP } from '../map/ducks/map/map';
 import {
   getCenter,
@@ -16,8 +29,6 @@ import {
   getPanoramaView,
   getReference
 } from '../panorama/ducks/selectors';
-import { initialState as dataSearchInitialState } from '../shared/ducks/data-search/constants';
-import { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer';
 import {
   getDataSearchLocation,
   getSearchCategory,
@@ -28,17 +39,6 @@ import {
   initialState as dataSelectionInitialState,
   PARAMS_TO_VIEWS
 } from '../shared/ducks/data-selection/constants';
-import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer';
-import {
-  getDataSelectionPage,
-  getDataSelectionView,
-  getGeometryFilters
-} from '../shared/ducks/data-selection/selectors';
-import { DATA, initialState as datasetsDataInitialState } from '../shared/ducks/datasets/data/data';
-import { DATASETS, getPage } from '../shared/ducks/datasets/datasets';
-import { initialState as detailInitialState } from '../shared/ducks/detail/constants';
-import { DETAIL } from '../shared/ducks/detail/reducer';
-import { getDetailView } from '../shared/ducks/detail/selectors';
 import {
   getFiltersWithoutShape,
   initialState as filterInitialState,
@@ -60,7 +60,11 @@ import paramsRegistry from './params-registry';
 
 export default paramsRegistry
   .addParameter(PARAMETERS.QUERY, (routes) => {
-    routes.add([routing.dataSearch.type, routing.searchDatasets.type], DATA_SEARCH_REDUCER, 'query', {
+    routes.add([
+      routing.dataSearch.type,
+      routing.dataSearchCategory.type,
+      routing.searchDatasets.type
+    ], DATA_SEARCH_REDUCER, 'query', {
       selector: getSearchQuery,
       defaultValue: dataSearchInitialState.query
     });

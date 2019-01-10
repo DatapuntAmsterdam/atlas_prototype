@@ -2,19 +2,22 @@ import fetchByUri from './adressen-pand';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 
+import { getByUrl } from '../api/api';
+
 jest.mock('../geo-json/geo-json');
+jest.mock('../api/api');
 jest.mock('../coordinate-reference-system/crs-converter');
 
 describe('The adressen pand resource', () => {
   afterEach(() => {
-    fetch.mockReset();
+    getByUrl.mockReset();
   });
 
   describe('By uri', () => {
     it('fetches a pand', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/pand/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         _display: 'Pand display name 1',
         geometrie: { type: 'Point' },
         oorspronkelijk_bouwjaar: '1893',
@@ -46,14 +49,14 @@ describe('The adressen pand resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
     it('changes the value (indicating the year is unkown) to the empty string', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/pand/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({ oorspronkelijk_bouwjaar: '1005' }));
+      getByUrl.mockReturnValueOnce(Promise.resolve({ oorspronkelijk_bouwjaar: '1005' }));
 
       return fetchByUri(uri).then((response) => {
         expect(response.year).toBe('');
@@ -63,7 +66,7 @@ describe('The adressen pand resource', () => {
     it('fetches with empty result object', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/pand/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({}));
+      getByUrl.mockReturnValueOnce(Promise.resolve({}));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
@@ -78,7 +81,7 @@ describe('The adressen pand resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
   });

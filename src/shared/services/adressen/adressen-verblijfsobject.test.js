@@ -2,19 +2,22 @@ import fetchByUri from './adressen-verblijfsobject';
 import getCenter from '../geo-json/geo-json';
 import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
 
+import { getByUrl } from '../api/api';
+
 jest.mock('../geo-json/geo-json');
+jest.mock('../api/api');
 jest.mock('../coordinate-reference-system/crs-converter');
 
 describe('The adressen verblijfsobject resource', () => {
   afterEach(() => {
-    fetch.mockReset();
+    getByUrl.mockReset();
   });
 
   describe('By uri', () => {
     it('fetches a verblijfsobject', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({
+      getByUrl.mockReturnValueOnce(Promise.resolve({
         _display: 'Verblijfsobject display name 1',
         aanduiding_in_onderzoek: true,
         eigendomsverhouding: { omschrijving: 'Eigendomsverhouding description' },
@@ -84,7 +87,7 @@ describe('The adressen verblijfsobject resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
 
@@ -92,7 +95,7 @@ describe('The adressen verblijfsobject resource', () => {
       it('Changes one to zero', () => {
         const uri = 'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/123456';
 
-        fetch.mockResponseOnce(JSON.stringify({ oppervlakte: 1 }));
+        getByUrl.mockReturnValueOnce(Promise.resolve({ oppervlakte: 1 }));
 
         return fetchByUri(uri).then((response) => {
           expect(response.size).toBe(0);
@@ -102,7 +105,7 @@ describe('The adressen verblijfsobject resource', () => {
       it('Keeps a zero as a zero', () => {
         const uri = 'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/123456';
 
-        fetch.mockResponseOnce(JSON.stringify({ oppervlakte: 0 }));
+        getByUrl.mockReturnValueOnce(Promise.resolve({ oppervlakte: 0 }));
 
         return fetchByUri(uri).then((response) => {
           expect(response.size).toBe(0);
@@ -112,7 +115,7 @@ describe('The adressen verblijfsobject resource', () => {
       it('Uses zero for negative values', () => {
         const uri = 'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/123456';
 
-        fetch.mockResponseOnce(JSON.stringify({ oppervlakte: -1 }));
+        getByUrl.mockReturnValueOnce(Promise.resolve({ oppervlakte: -1 }));
 
         return fetchByUri(uri).then((response) => {
           expect(response.size).toBe(0);
@@ -123,7 +126,7 @@ describe('The adressen verblijfsobject resource', () => {
     it('fetches with empty result object', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/bag/verblijfsobject/123456';
 
-      fetch.mockResponseOnce(JSON.stringify({}));
+      getByUrl.mockReturnValueOnce(Promise.resolve({}));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
@@ -146,7 +149,7 @@ describe('The adressen verblijfsobject resource', () => {
         });
       });
 
-      expect(fetch.mock.calls[0][0]).toBe(uri);
+      expect(getByUrl).toHaveBeenCalledWith(uri);
       return promise;
     });
   });
