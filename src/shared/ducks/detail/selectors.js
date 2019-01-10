@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { pageTypeToEndpoint } from '../../../store/redux-first-router';
+import { pageTypeToEndpoint } from '../../../store/redux-first-router/actions';
 import { REDUCER_KEY } from './constants';
 
 export const getDetail = (state) => state[REDUCER_KEY];

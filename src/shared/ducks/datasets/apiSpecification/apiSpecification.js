@@ -1,7 +1,9 @@
-export const REDUCER_KEY = 'datasetApiSpecification';
+const REDUCER_KEY = 'datasetApiSpecification';
 export const FETCH_API_SPECIFICATION_REQUEST = `${REDUCER_KEY}/FETCH_API_SPECIFICATION_REQUEST`;
 export const FETCH_API_SPECIFICATION_SUCCESS = `${REDUCER_KEY}/FETCH_API_SPECIFICATION_SUCCESS`;
 export const FETCH_API_SPECIFICATION_FAILURE = `${REDUCER_KEY}/FETCH_API_SPECIFICATION_FAILURE`;
+
+export { REDUCER_KEY as API_SPECIFICATION };
 
 const initialState = {
   isLoading: false,

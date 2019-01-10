@@ -1,4 +1,8 @@
-import { toDatasetsWithFilter } from '../../../../src/store/redux-first-router';
+import {
+    preserveQuery,
+    toDatasetsWithFilter
+} from '../../../../src/store/redux-first-router/actions';
+import PARAMETERS from '../../../../src/store/parameters';
 
 (function () {
     'use strict';
@@ -17,7 +21,10 @@ import { toDatasetsWithFilter } from '../../../../src/store/redux-first-router';
         const vm = this;
 
         vm.themes = CATALOGUS_THEMES_CONFIG.map(theme => {
-            const linkTo = toDatasetsWithFilter(theme.slug);
+            const linkTo = preserveQuery(toDatasetsWithFilter(), {
+                // eslint-disable-next-line angular/json-functions
+                [PARAMETERS.FILTERS]: { groups: theme.slug }
+            });
             return {
                 ...theme,
                 linkTo

@@ -1,58 +1,45 @@
 import { createSelector } from 'reselect';
-import { routing } from '../../../app/routes';
-import { getFilters as getDataSelectionFilters } from '../data-selection/selectors';
+import { getFilters as getDataSelectionFilters, getShapeFilter } from '../data-selection/selectors';
 import { getFilters as getDatasetFilters } from '../datasets/datasets';
+import paramsRegistry from '../../../store/params-registry';
 
-export const REDUCER_KEY = 'filters';
+export const REDUCER_KEY = 'filter';
 export const EMPTY_FILTERS = `${REDUCER_KEY}/EMPTY_FILTERS`;
 
 export const ADD_FILTER = `${REDUCER_KEY}/ADD_FILTER`;
 export const REMOVE_FILTER = `${REDUCER_KEY}/REMOVE_FILTER`;
-export const SET_SHAPE_FILTER = `${REDUCER_KEY}/SET_SHAPE_FILTER`;
 
-const reducer = (state = {}, action) => {
+export const initialState = {
+  filters: {}
+};
+
+const reducer = (state = initialState, action) => {
+  const enrichedState = {
+    ...state,
+    ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action)
+  };
   switch (action.type) {
-    case routing.datasets.type:
-    case routing.addresses.type:
-    case routing.establishments.type:
-    case routing.cadastralObjects.type: {
-      const { filters: queryFilters } = action.meta.query || {};
-      let filterToParse = '{}';
-      if (queryFilters) {
-        filterToParse = atob(queryFilters);
-      }
-
-      return Object.assign({}, JSON.parse(filterToParse));
-    }
-
     case ADD_FILTER:
       return {
-        ...state,
-        ...action.payload
+        ...enrichedState,
+        filters: { ...enrichedState.filters, ...action.payload }
       };
 
     case REMOVE_FILTER: {
-      const newState = { ...state };
-      delete newState[action.payload];
+      const newState = { ...enrichedState };
+      delete newState.filters[action.payload];
       return {
         ...newState
       };
     }
 
-    case SET_SHAPE_FILTER:
-      return {
-        ...state,
-        shape: { ...action.payload }
-      };
-
     case EMPTY_FILTERS:
-      return {};
+      return initialState;
+
     default:
-      return state;
+      return enrichedState;
   }
 };
-
-export const getFilters = (state) => state[REDUCER_KEY];
 
 export const addFilter = (payload) => ({
   type: ADD_FILTER,
@@ -64,13 +51,21 @@ export const removeFilter = (filterKey) => ({
   payload: filterKey
 });
 
-export const setShapeFilter = (payload) => ({ type: SET_SHAPE_FILTER, payload });
 export const emptyFilters = () => ({ type: EMPTY_FILTERS });
 
 // Selectors
-export const getActiveFilters = (state) => state[REDUCER_KEY];
+const getReducerState = (state) => state[REDUCER_KEY];
+export const getFiltersWithoutShape = createSelector(getReducerState, ({ filters }) => filters);
+export const getFilters = createSelector(
+  getFiltersWithoutShape, getShapeFilter,
+  (filters, shapeFilter) => ({
+    ...filters,
+    ...shapeFilter
+  })
+);
+
 export const selectDataSelectionFilters = createSelector(
-  getActiveFilters, getDataSelectionFilters,
+  getFilters, getDataSelectionFilters,
   (activeFilters, availableFilters) => {
     const formattedFilters = availableFilters
       .filter((filterSet) => activeFilters[filterSet.slug])
@@ -102,7 +97,7 @@ export const selectDataSelectionFilters = createSelector(
   });
 
 export const selectDatasetFilters = createSelector(
-  getActiveFilters, getDatasetFilters,
+  getFilters, getDatasetFilters,
   (activeFilters, availableFilters) => {
     const formattedFilters = availableFilters
       .filter((filterSet) => activeFilters[filterSet.slug])

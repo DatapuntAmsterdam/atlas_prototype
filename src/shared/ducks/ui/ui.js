@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect';
 import { VIEWS } from '../data-selection/constants';
-import { isMapPage, isPanoPage } from '../../../store/redux-first-router';
-import { ROUTER_NAMESPACE } from '../../../app/routes';
+import { isMapPage, isPanoPage } from '../../../store/redux-first-router/selectors';
 import { getDataSelectionView } from '../data-selection/selectors';
+import paramsRegistry from '../../../store/params-registry';
 
-export const REDUCER_KEY = 'ui';
-
+const REDUCER_KEY = 'ui';
+export { REDUCER_KEY as UI };
 export const HIDE_EMBED_PREVIEW = `${REDUCER_KEY}/HIDE_EMBED_PREVIEW`;
 export const HIDE_PRINT = `${REDUCER_KEY}/HIDE_PRINT`;
 export const SHOW_EMBED_PREVIEW = `${REDUCER_KEY}/SHOW_EMBED_PREVIEW`;
@@ -20,50 +20,45 @@ export const initialState = {
 };
 
 export default function UiReducer(state = initialState, action) {
-  if (action.type && action.type.startsWith(ROUTER_NAMESPACE)) {
-    const { embedPreview, embed, print } = action.meta.query || {};
-    return {
-      ...state,
-      isEmbedPreview: (embedPreview === 'true'),
-      isEmbed: (embed === 'true'),
-      isPrintMode: (print === 'true')
-    };
-  }
+  const enrichedState = {
+    ...state,
+    ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action)
+  };
 
   switch (action.type) {
     case HIDE_EMBED_PREVIEW:
       return {
-        ...state,
+        ...enrichedState,
         isEmbedPreview: false,
         isEmbed: false
       };
 
     case HIDE_PRINT:
       return {
-        ...state,
+        ...enrichedState,
         isPrintMode: false
       };
 
     case SHOW_EMBED_PREVIEW:
       return {
-        ...state,
+        ...enrichedState,
         isEmbedPreview: true
       };
 
     case SHOW_PRINT:
       return {
-        ...state,
+        ...enrichedState,
         isPrintMode: true
       };
 
     case TOGGLE_MAP_PANEL_HANDLE:
       return {
-        ...state,
-        isMapPanelHandleVisible: !state.isMapPanelHandleVisible
+        ...enrichedState,
+        isMapPanelHandleVisible: !enrichedState.isMapPanelHandleVisible
       };
 
     default:
-      return state;
+      return enrichedState;
   }
 }
 
@@ -75,7 +70,7 @@ export const hideEmbedMode = () => ({ type: HIDE_EMBED_PREVIEW });
 export const toggleMapPanelHandle = () => ({ type: 'NOOP' });
 
 // Selectors
-const getUIState = (state) => state.ui;
+const getUIState = (state) => state[REDUCER_KEY];
 export const isEmbedded = createSelector(getUIState, (ui) => ui.isEmbed);
 export const isEmbedPreview = createSelector(getUIState, (ui) => ui.isEmbedPreview);
 export const isPrintMode = createSelector(getUIState, (ui) => ui.isPrintMode);

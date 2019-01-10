@@ -29,7 +29,10 @@ exports[`SearchList should render a results list 1`] = `
           "label": "Dam 1",
           "linkTo": Object {
             "meta": Object {
-              "query": Object {},
+              "additionalParams": Object {
+                "view": "detail-kaart",
+              },
+              "preserve": true,
             },
             "payload": Object {
               "id": "id03630003761571",
@@ -63,7 +66,10 @@ exports[`SearchList should render a results list 1`] = `
           "label": "Dam 2",
           "linkTo": Object {
             "meta": Object {
-              "query": Object {},
+              "additionalParams": Object {
+                "view": "detail-kaart",
+              },
+              "preserve": true,
             },
             "payload": Object {
               "id": "id03630011909911",

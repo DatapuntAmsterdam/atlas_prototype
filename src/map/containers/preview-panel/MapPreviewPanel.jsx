@@ -24,6 +24,7 @@ class MapPreviewPanel extends React.Component {
     const isDetailLoaded = !isLoading && props.detail && props.mapDetail && props.detailResult;
 
     const openDetailEndpoint = () => props.openDetail(props.detailEndpoint);
+    const onMaximize = () => props.onSearchMaximize(props.searchLocation);
 
     return !props.isEmbed && (
       <div className="map-preview-panel-wrapper">
@@ -31,7 +32,7 @@ class MapPreviewPanel extends React.Component {
           <div className="map-preview-panel__heading">
             <button
               className="map-preview-panel__button"
-              onClick={props.isSearchPreview ? props.onSearchMaximize : openDetailEndpoint}
+              onClick={(props.isSearchPreview) ? onMaximize : openDetailEndpoint}
               title="Volledige weergave tonen"
             >
               <span className="
@@ -72,7 +73,7 @@ class MapPreviewPanel extends React.Component {
                 location={props.searchLocation}
                 missingLayers={props.missingLayers}
                 onItemClick={props.openPreviewDetail}
-                onMaximize={props.onSearchMaximize}
+                onMaximize={onMaximize}
                 onPanoPreviewClick={this.onPanoPreviewClick}
                 panoUrl={props.panoPreview.url}
                 resultLimit={previewPanelSearchResultLimit}

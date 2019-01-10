@@ -5,6 +5,9 @@ import HeaderSearchWrapper from './HeaderSearchWrapper';
 
 describe('HeaderSearchWrapper', () => {
   const initialState = {
+    dataSearch: {
+      query: 'dam'
+    },
     autoSuggest: {
       count: 6,
       suggestions: [

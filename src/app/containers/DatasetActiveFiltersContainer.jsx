@@ -1,8 +1,11 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+import React from 'react';
 import { connect } from 'react-redux';
-import { removeFilter as removeActiveFilter, selectDatasetFilters } from '../../shared/ducks/filters/filters';
+import { removeGeometryFilter } from '../../shared/ducks/data-selection/actions';
+import {
+  removeFilter as removeActiveFilter,
+  selectDatasetFilters
+} from '../../shared/ducks/filters/filters';
 import ActiveFilters from '../components/ActiveFilters/ActiveFilters';
 
 const DatasetActiveFilters = ({ filters, removeFilter }) => (
@@ -18,8 +21,12 @@ const mapStateToProps = (state) => ({
   filters: selectDatasetFilters(state)
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  removeFilter: removeActiveFilter
-}, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  removeFilter: (key) => (
+    (key === 'shape') ?
+      dispatch(removeGeometryFilter()) :
+      dispatch(removeActiveFilter(key))
+  )
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(DatasetActiveFilters);

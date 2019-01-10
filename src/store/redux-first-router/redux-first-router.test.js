@@ -1,4 +1,4 @@
-import { preserveQuery } from './redux-first-router';
+import { preserveQuery } from './actions';
 
 describe('redux first router', () => {
   it('should preserve the current query when creating new route actions', () => {
@@ -10,10 +10,8 @@ describe('redux first router', () => {
     expect(preserveQuery(action)).toEqual({
       ...action,
       meta: {
-        query: {
-          abc: 'xyz',
-          zoom: '10'
-        }
+        additionalParams: null,
+        preserve: true
       }
     });
   });

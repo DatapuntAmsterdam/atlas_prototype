@@ -19,7 +19,7 @@ import {
 } from '../../panorama/ducks/selectors';
 import { toggleMapOverlayPanorama } from '../../map/ducks/map/map';
 import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api';
-import { toMap } from '../../store/redux-first-router';
+import { toMap } from '../../store/redux-first-router/actions';
 
 export function* fireFetchPanormaRequest(action) {
   yield put(fetchPanoramaRequest(action.payload));

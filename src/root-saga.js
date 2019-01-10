@@ -16,7 +16,6 @@ import {
 } from './panorama/sagas/panorama';
 import watchDetailRoute from './detail/sagas/detail';
 import watchFetchDataSelection from './shared/sagas/data-selection/data-selection';
-import watchQueryActions from './store/query-synchronization';
 import watchFetchDatasets from './shared/sagas/dataset/dataset';
 import watchAuthenticationRequest from './shared/sagas/user/user';
 
@@ -33,7 +32,6 @@ export default function* rootSaga() {
     fork(watchClosePanorama),
     fork(watchMapClick),
     fork(watchFetchNearestDetails),
-    fork(watchQueryActions),
     fork(watchAuthenticationRequest),
 
     // route change watchers

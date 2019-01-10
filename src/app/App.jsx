@@ -22,7 +22,7 @@ import PanoramaPage from './pages/PanoramaPage';
 import DetailPage from './pages/DetailPage';
 import Home from './pages/Home';
 import { getUser } from '../shared/ducks/user/user';
-import { getPage } from '../store/redux-first-router';
+import { getPage } from '../store/redux-first-router/selectors';
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe';
 import SearchPage from './pages/SearchPage';
 import DatasetPage from './pages/DatasetPage';

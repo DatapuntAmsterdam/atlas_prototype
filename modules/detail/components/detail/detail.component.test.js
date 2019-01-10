@@ -306,18 +306,6 @@ describe('the dp-detail component', () => {
         });
     });
 
-    it('triggers the SHOW_DETAIL action with the display and geometry as its payload', () => {
-        getComponent('http://www.fake-endpoint.com/bag/nummeraanduiding/123/', false);
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: SHOW_DETAIL,
-            payload: {
-                display: 'Adresstraat 1A',
-                geometry: mockedGeometryPoint
-            }
-        });
-    });
-
     it('loads new API data and triggers a new SHOW_DETAIL action when the endpoint changes', () => {
         var component,
             scope,
@@ -338,14 +326,6 @@ describe('the dp-detail component', () => {
                 naam: 'naam'
             }
         });
-        expect(store.dispatch).toHaveBeenCalledTimes(1);
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: SHOW_DETAIL,
-            payload: {
-                display: 'Adresstraat 1A',
-                geometry: mockedGeometryPoint
-            }
-        });
 
         // Change the endpoint
         scope.vm.endpoint = 'http://www.fake-endpoint.com/brk/object/789/';
@@ -358,73 +338,9 @@ describe('the dp-detail component', () => {
                 something: -90
             }
         });
-        expect(store.dispatch).toHaveBeenCalledTimes(2);
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: SHOW_DETAIL,
-            payload: {
-                display: 'Een of ander kadastraal object',
-                geometry: mockedGeometryMultiPolygon
-            }
-        });
-    });
-
-    it('sets the SHOW_DETAIL geometry payload to null if there is no geometry', () => {
-        mockedUser.scopes = ['BRK/RS'];
-
-        getComponent(naturalPersonEndPoint);
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: SHOW_DETAIL,
-            payload: jasmine.objectContaining({
-                geometry: null
-            })
-        });
-    });
-
-    it('gracefully handles a 404 with no data', () => {
-        getComponent('http://www.fake-endpoint.amsterdam.nl/brk/subject/404/');
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: SHOW_DETAIL,
-            payload: {}
-        });
-    });
-
-    it('gracefully handles a 404 from geo json', () => {
-        getComponent('http://www.fake-endpoint.amsterdam.nl/brk/geo/404/');
-
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: SHOW_DETAIL,
-            payload: {}
-        });
     });
 
     describe('"kadastraal subject" data', () => {
-        it('should be fetched if is authenticated as EMPLOYEE', () => {
-            mockedUser.scopes = ['BRK/RS'];
-
-            getComponent(naturalPersonEndPoint);
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: SHOW_DETAIL,
-                payload: jasmine.objectContaining({
-                    geometry: null
-                })
-            });
-        });
-        it('should not fetch data if not authorized', () => {
-            const component = getComponent(naturalPersonEndPoint);
-
-            const scope = component.isolateScope();
-
-            expect(store.dispatch).toHaveBeenCalledWith({
-                type: SHOW_DETAIL,
-                payload: {}
-            });
-
-            expect(scope.vm.apiData).toBeUndefined();
-            expect(store.dispatch).toHaveBeenCalledTimes(1);
-        });
         it('should remove apiData if not authorized', () => {
             // Special case where user is logged out while on detail page and the user loses access to content
             mockedUser.scopes = ['BRK/RS'];

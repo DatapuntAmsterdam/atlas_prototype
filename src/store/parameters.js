@@ -1,0 +1,20 @@
+export default {
+  QUERY: 'term',
+  PAGE: 'page',
+  GEO: 'geo',
+  VIEW: 'view',
+  CATEGORY: 'category',
+  VIEW_CENTER: 'center',
+  ZOOM: 'zoom',
+  LEGEND: 'legenda',
+  HEADING: 'heading',
+  PANORAMA_SET: 'set',
+  PITCH: 'pitch',
+  FILTERS: 'filters',
+  REFERENCE: 'reference',
+  EMBED_PREVIEW: 'embed-preview',
+  EMBED: 'embed',
+  PRINT: 'print',
+  LAYERS: 'lagen',
+  LOCATION: 'locatie'
+};

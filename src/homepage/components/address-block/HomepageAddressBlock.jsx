@@ -5,23 +5,27 @@ import HomepageBlock from '../block/HomepageBlock';
 
 import { features } from '../../../shared/environment';
 import { routing } from '../../../app/routes';
+import { preserveQuery, toDatasetPage } from '../../../store/redux-first-router/actions';
+import PARAMETERS from '../../../store/parameters';
+import { DATASETS, VIEWS } from '../../../shared/ducks/data-selection/constants';
+
 
 const BLOCK_ITEMS = {
   ADRESSEN: {
     label: 'Adressentabel',
-    icon: 'bag',
+    id: DATASETS.BAG,
     route: routing.addresses.type,
     title: 'Bekijk Adressentabel'
   },
   HANDELSREGISTER: {
     label: 'Handelsregister-tabel',
-    icon: 'hr',
+    id: DATASETS.HR,
     route: routing.establishments.type,
     title: 'Bekijk handelsregister-tabel'
   },
   KADASTER: {
     label: 'Kadaster-tabel',
-    icon: 'brk',
+    id: DATASETS.BRK,
     route: routing.cadastralObjects.type,
     title: 'Bekijk kadaster-tabel'
   }
@@ -38,15 +42,17 @@ const HomepageAddressBlock = () => (
     <div className="homepage-block">
       {Object.keys(BLOCK_ITEMS).map((key) => {
         const extraClass = (key === 'KADASTER' && !features.eigendommen) ? 'homepage-block__item--invisible' : '';
-        const { label, icon, route, title } = BLOCK_ITEMS[key];
+        const { label, id, title } = BLOCK_ITEMS[key];
         return (
           <div key={key} className={`homepage-block__item ${extraClass}`}>
             <Link
               className="c-link homepage-block__link"
               title={title}
-              to={{ type: route }}
+              to={preserveQuery(toDatasetPage(id), {
+                [PARAMETERS.VIEW]: VIEWS.TABLE
+              })}
             >
-              <span className={`homepage-block__icon homepage-block__icon--${icon}`} />
+              <span className={`homepage-block__icon homepage-block__icon--${id}`} />
               <span className="homepage-block__label">
                 {label}
               </span>

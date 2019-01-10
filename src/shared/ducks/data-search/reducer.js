@@ -12,17 +12,16 @@ import {
   SET_GEO_LOCATION,
   SET_QUERY_CATEGORY
 } from './constants';
-import { getStateFromQuery } from '../../../store/query-synchronization';
-import urlParams from './query';
 import { routing } from '../../../app/routes';
 import { FETCH_DATA_SELECTION_REQUEST } from '../data-selection/constants';
+import paramsRegistry from '../../../store/params-registry';
 
-export { REDUCER_KEY };
+export { REDUCER_KEY as DATA_SEARCH_REDUCER };
 
 export default function reducer(state = initialState, action) {
   const enrichedState = {
     ...state,
-    ...getStateFromQuery(urlParams, action)
+    ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action)
   };
 
   switch (action.type) {
@@ -31,11 +30,17 @@ export default function reducer(state = initialState, action) {
         ...enrichedState,
         category: action.payload.category
       };
+
     case FETCH_QUERY_SEARCH_RESULTS_REQUEST:
       return {
         ...initialState,
         isLoading: true,
         query: action.payload
+      };
+
+    case 'RESET_QUERY':
+      return {
+        ...initialState
       };
 
     case FETCH_QUERY_SEARCH_RESULTS_SUCCESS: {

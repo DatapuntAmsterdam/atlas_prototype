@@ -1,5 +1,12 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {
+  getPageActionEndpoint,
+  toDataSearchLocation,
+  toMap,
+  toPanoramaAndPreserveQuery
+} from '../../../store/redux-first-router/actions';
+import { getDetailLocation } from '../../../store/redux-first-router/selectors';
 
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { selectLatestMapDetail } from '../../ducks/detail/map-detail';
@@ -15,13 +22,6 @@ import {
   isSearchLoading
 } from '../../../shared/ducks/data-search/selectors';
 import { getPanoramaPreview } from '../../../panorama/ducks/preview/panorama-preview';
-import {
-  getDetailLocation,
-  getPageActionEndpoint,
-  toDataSearchLocationAndPreserveQuery,
-  toMap,
-  toPanorama
-} from '../../../store/redux-first-router';
 import { DETAIL_VIEW } from '../../../shared/ducks/detail/constants';
 
 const mapStateToProps = (state) => ({
@@ -47,8 +47,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
     closePanel: toMap,
-    onSearchMaximize: toDataSearchLocationAndPreserveQuery,
-    openPano: toPanorama
+    onSearchMaximize: toDataSearchLocation,
+    openPano: toPanoramaAndPreserveQuery
   }, dispatch),
   openPreviewDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP)),
   openDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP_DETAIL))

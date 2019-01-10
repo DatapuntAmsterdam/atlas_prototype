@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
-import results, { REDUCER_KEY as DATA } from './data/data';
-import filters, { REDUCER_KEY as API_SPECIFICATION } from './apiSpecification/apiSpecification';
+import results, { DATA } from './data/data';
+import filters, { API_SPECIFICATION } from './apiSpecification/apiSpecification';
 
-export const REDUCER_KEY = 'datasets';
+const REDUCER_KEY = 'datasets';
+
+export { REDUCER_KEY as DATASETS };
 
 export default combineReducers({
   [DATA]: results,

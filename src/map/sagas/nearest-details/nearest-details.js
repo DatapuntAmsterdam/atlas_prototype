@@ -1,11 +1,12 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
-import { getPageActionEndpoint } from '../../../store/redux-first-router';
+import { getPageActionEndpoint } from '../../../store/redux-first-router/actions';
 import { getDetailView } from '../../../shared/ducks/detail/selectors';
 import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
 import { showDetail } from '../../../shared/ducks/detail/actions';
 import { FETCH_MAP_DETAIL_SUCCESS } from '../../ducks/detail/constants';
+import { getGeometry } from '../../../shared/services/geometry/geometry';
 
 export function* fetchNearestDetails(action) {
   const {
@@ -29,7 +30,7 @@ export function* fetchNearestDetails(action) {
 export function* fireShowDetail(action) {
   yield put(showDetail({
     display: action.mapDetail._display,
-    geometry: action.mapDetail.geometrie
+    geometry: getGeometry(action.mapDetail)
   }));
 }
 

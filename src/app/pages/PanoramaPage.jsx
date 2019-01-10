@@ -44,7 +44,7 @@ const PanoramaPage = ({ view, setPanoramaView }) => {
 };
 
 PanoramaPage.propTypes = {
-  view: PropTypes.oneOf(Object.keys(PANORAMA_VIEW)).isRequired,
+  view: PropTypes.oneOf(Object.values(PANORAMA_VIEW)).isRequired,
   setPanoramaView: PropTypes.func.isRequired
 };
 

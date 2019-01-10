@@ -1,4 +1,4 @@
-import { ROUTER_NAMESPACE, routing } from '../../app/routes';
+import { routing } from '../../app/routes';
 import { PANORAMA_CONFIG } from '../services/panorama-api/panorama-api';
 import PAGES from '../../app/pages';
 import {
@@ -10,25 +10,24 @@ import {
   SET_PANORAMA_ORIENTATION,
   SET_PANORAMA_VIEW,
   SET_PANORAMA_YEAR,
-  FETCH_PANORAMA_REQUEST_TOGGLE
+  FETCH_PANORAMA_REQUEST_TOGGLE,
+  REDUCER_KEY
 } from './constants';
-import { getStateFromQuery } from '../../store/query-synchronization';
-import urlParams from './query';
+import paramsRegistry from '../../store/params-registry';
+import { shouldResetState } from '../../store/redux-first-router/actions';
 
-export { REDUCER_KEY } from './constants';
+export { REDUCER_KEY as PANORAMA };
 
 export default function reducer(state = initialState, action) {
-  if (action.type &&
-    action.type.startsWith(ROUTER_NAMESPACE) &&
-    !action.type.includes(PAGES.PANORAMA)
-  ) {
+  if (shouldResetState(action, [PAGES.PANORAMA])) {
     return initialState;
   }
 
   const enrichedState = {
     ...state,
-    ...getStateFromQuery(urlParams, action)
+    ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action)
   };
+
   switch (action.type) {
     case routing.panorama.type: {
       return {
@@ -46,7 +45,7 @@ export default function reducer(state = initialState, action) {
 
     case FETCH_PANORAMA_REQUEST_TOGGLE:
       return {
-        ...state,
+        ...enrichedState,
         history: action.payload
       };
 
@@ -60,8 +59,8 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         date: action.payload.date,
-        pitch: state.pitch || initialState.pitch,
-        fov: state.fov || PANORAMA_CONFIG.DEFAULT_FOV,
+        pitch: enrichedState.pitch || initialState.pitch,
+        fov: enrichedState.fov || PANORAMA_CONFIG.DEFAULT_FOV,
         hotspots: action.payload.hotspots,
         isLoading: false,
         location: action.payload.location,
@@ -102,7 +101,7 @@ export default function reducer(state = initialState, action) {
       };
 
     default:
-      return enrichedState;
+      return state;
   }
 }
 

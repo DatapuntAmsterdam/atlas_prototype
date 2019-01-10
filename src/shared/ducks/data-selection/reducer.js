@@ -1,26 +1,32 @@
+import PAGES from '../../../app/pages';
+import { shouldResetState } from '../../../store/redux-first-router/actions';
 import {
   FETCH_DATA_SELECTION_FAILURE,
   FETCH_DATA_SELECTION_REQUEST,
   FETCH_DATA_SELECTION_SUCCESS,
   initialState, ROUTE_DATASET_MAPPER,
   SET_DATASET,
-  SET_GEOMETRY_FILTERS,
+  REMOVE_GEOMETRY_FILTER,
+  SET_GEOMETRY_FILTER,
   SET_MARKERS,
   SET_PAGE,
-  SET_VIEW
+  SET_VIEW,
+  REDUCER_KEY
 } from './constants';
 import { routing } from '../../../app/routes';
-import { getStateFromQuery } from '../../../store/query-synchronization';
-import urlParams from './query';
 import { SET_SELECTION } from '../selection/selection';
 import { FETCH_MAP_DETAIL_SUCCESS } from '../../../map/ducks/detail/constants';
+import paramsRegistry from '../../../store/params-registry';
 
-export { REDUCER_KEY } from './constants';
+export { REDUCER_KEY as DATA_SELECTION };
 
 export default function reducer(state = initialState, action) {
+  if (shouldResetState(action, [PAGES.ADDRESSES, PAGES.ESTABLISHMENTS, PAGES.CADASTRAL_OBJECTS])) {
+    return initialState;
+  }
   const enrichedState = {
     ...state,
-    ...getStateFromQuery(urlParams, action),
+    ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action),
     ...(ROUTE_DATASET_MAPPER[action.type]) ? { dataset: ROUTE_DATASET_MAPPER[action.type] } : {}
   };
 
@@ -75,10 +81,16 @@ export default function reducer(state = initialState, action) {
         dataset: action.payload
       };
 
-    case SET_GEOMETRY_FILTERS:
+    case SET_GEOMETRY_FILTER:
       return {
         ...enrichedState,
         geometryFilter: action.payload
+      };
+
+    case REMOVE_GEOMETRY_FILTER:
+      return {
+        ...enrichedState,
+        geometryFilter: {}
       };
 
     case SET_PAGE:

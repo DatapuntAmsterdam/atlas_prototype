@@ -21,27 +21,21 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.DATASETS}`,
     page: PAGES.DATASETS
   },
-  datasetsDetail: {
-    title: '',
-    path: '/datasets/detail/:id',
-    type: `${ROUTER_NAMESPACE}/${PAGES.DATASETS_DETAIL}`,
-    page: PAGES.DATASETS_DETAIL
-  },
   addresses: {
     title: '',
-    path: '/datasets/bag/adressen',
+    path: '/data/bag/adressen',
     type: `${ROUTER_NAMESPACE}/${PAGES.ADDRESSES}`,
     page: PAGES.ADDRESSES
   },
   establishments: {
     title: '',
-    path: '/datasets/hr/vestigingen',
+    path: '/data/hr/vestigingen',
     type: `${ROUTER_NAMESPACE}/${PAGES.ESTABLISHMENTS}`,
     page: PAGES.ESTABLISHMENTS
   },
   cadastralObjects: {
     title: '',
-    path: '/datasets/brk/kadastrale-objecten',
+    path: '/data/brk/kadastrale-objecten',
     type: `${ROUTER_NAMESPACE}/${PAGES.CADASTRAL_OBJECTS}`,
     page: PAGES.CADASTRAL_OBJECTS
   },
@@ -50,9 +44,15 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.SEARCH_DATASETS}`,
     page: PAGES.SEARCH_DATASETS
   },
+  datasetsDetail: {
+    title: '',
+    path: '/datasets/:id',
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATASETS_DETAIL}`,
+    page: PAGES.DATASETS_DETAIL
+  },
   dataSearch: {
     title: 'Data zoeken',
-    path: '/data/',
+    path: '/data/zoek',
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH}`,
     page: PAGES.DATA_SEARCH
   },
@@ -64,7 +64,7 @@ export const routing = {
   },
   panorama: {
     title: 'Panorama',
-    path: '/datasets/panorama/:id',
+    path: '/data/panorama/:id',
     type: `${ROUTER_NAMESPACE}/${PAGES.PANORAMA}`,
     page: PAGES.PANORAMA
   },
@@ -143,7 +143,7 @@ export const routing = {
   },
   dataDetail: {
     title: 'Data detail',
-    path: '/datasets/:type/:subtype/:id',
+    path: '/data/:type/:subtype/:id',
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_DETAIL}`,
     page: PAGES.DATA_DETAIL
   }

@@ -113,18 +113,6 @@ import { showDetail } from '../../../../src/shared/ducks/detail/actions';
                     vm.filterSelection = {
                         [subject]: vm.apiData.results.naam
                     };
-
-                    geometry.getGeoJSON(endpoint).then(function (geoJSON) {
-                        if (geoJSON !== null) {
-                            const rd = geojson.getCenter(geoJSON);
-                            vm.location = crsConverter.rdToWgs84([rd.x, rd.y]);
-                        }
-
-                        store.dispatch(showDetail({
-                            display: data._display,
-                            geometry: geoJSON
-                        }));
-                    }, errorHandler);
                 }, errorHandler);
             }
         }

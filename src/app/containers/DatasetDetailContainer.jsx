@@ -5,7 +5,7 @@ import { AngularWrapper } from 'react-angular';
 import { isDetailLoading } from '../../shared/ducks/detail/selectors';
 import { getUser } from '../../shared/ducks/user/user';
 import { getApiSpecificationData } from '../../shared/ducks/datasets/datasets';
-import { getLocationPayload } from '../../store/redux-first-router';
+import { getLocationPayload } from '../../store/redux-first-router/selectors';
 
 const mapStateToProps = (state) => ({
   isLoading: isDetailLoading(state),

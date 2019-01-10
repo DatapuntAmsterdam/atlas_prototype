@@ -1,14 +1,19 @@
 import { routing } from '../../../app/routes';
-import { FETCH_DETAIL, initialState, SET_VIEW, SHOW_DETAIL } from './constants';
-import { getStateFromQuery } from '../../../store/query-synchronization';
-import urlParams from './query';
+import { FETCH_DETAIL, initialState, SET_VIEW, SHOW_DETAIL, REDUCER_KEY } from './constants';
+import paramsRegistry from '../../../store/params-registry';
+import PAGES from '../../../app/pages';
+import { shouldResetState } from '../../../store/redux-first-router/actions';
 
-export { REDUCER_KEY } from './constants';
+export { REDUCER_KEY as DETAIL };
 
 export default function detailReducer(state = initialState, action) {
+  if (shouldResetState(action, [PAGES.DATA_DETAIL])) {
+    return initialState;
+  }
+
   const enrichedState = {
     ...state,
-    ...getStateFromQuery(urlParams, action)
+    ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action)
   };
   switch (action.type) {
     case routing.dataDetail.type: {
@@ -25,6 +30,7 @@ export default function detailReducer(state = initialState, action) {
         subtype
       };
     }
+
     case FETCH_DETAIL:
       return {
         ...enrichedState,
@@ -43,6 +49,7 @@ export default function detailReducer(state = initialState, action) {
 
     case SET_VIEW:
       return {
+        ...enrichedState,
         view: action.payload
       };
 

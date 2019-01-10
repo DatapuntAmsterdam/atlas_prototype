@@ -7,7 +7,7 @@ import Footer from '../components/Footer/Footer';
 import PreviewVideo from '../components/PreviewVideo/PreviewVideo';
 import HomepageAddressBlock from '../../homepage/components/address-block/HomepageAddressBlock';
 import HomepageBlock from '../../homepage/components/block/HomepageBlock';
-import { toDatasets, toPanorama } from '../../store/redux-first-router';
+import { toDatasets, toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions';
 
 const HOMEPAGE_CONFIG = {
   PANORAMA: {
@@ -132,7 +132,10 @@ const Home = ({ showFooter }) => (
                     <HomepageBlock
                       classes="c-homepage__block--right"
                       linkAction={
-                        toPanorama(HOMEPAGE_CONFIG.PANORAMA.id, HOMEPAGE_CONFIG.PANORAMA.heading)
+                        toPanoramaAndPreserveQuery(
+                          HOMEPAGE_CONFIG.PANORAMA.id,
+                          HOMEPAGE_CONFIG.PANORAMA.heading
+                        )
                       }
                       title="Panoramabeelden"
                       description="Kijk rond ter plaatse"

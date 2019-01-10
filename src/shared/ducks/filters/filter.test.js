@@ -3,10 +3,12 @@ import reducer, { addFilter, emptyFilters, removeFilter } from './filters';
 describe('The filtersReducers', () => {
   it('EMPTY FILTERS saves the current filters', () => {
     const state = {
-      myfilter: 'something'
+      filters: {
+        myfilter: 'something'
+      }
     };
 
-    expect(reducer(state, emptyFilters())).toEqual({});
+    expect(reducer(state, emptyFilters())).toEqual({ filters: {} });
   });
 
   it('ADD_FILTER adds a filter to the current state', () => {
@@ -17,18 +19,24 @@ describe('The filtersReducers', () => {
     const newFilter = { new_filter: 'foo' };
     expect(reducer(state, addFilter(newFilter))).toEqual({
       ...state,
-      ...newFilter
+      filters: {
+        ...newFilter
+      }
     });
   });
 
   it('REMOVE_FILTER removes a filter from the current state', () => {
     const state = {
-      foo: 'bar',
-      myfilter: 'something'
+      filters: {
+        foo: 'bar',
+        myfilter: 'something'
+      }
     };
 
     expect(reducer(state, removeFilter('myfilter'))).toEqual({
-      foo: 'bar'
+      filters: {
+        foo: 'bar'
+      }
     });
   });
 });

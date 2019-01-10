@@ -36,7 +36,6 @@ describe('Map Reducer', () => {
     const state = { shapeMarkers: 2 };
     expect(reducer(state, mapClear())).toEqual({
       ...state,
-      overlays: [],
       drawingMode: initialState.drawingMode,
       shapeDistanceTxt: initialState.shapeDistanceTxt,
       shapeAreaTxt: initialState.shapeAreaTxt
@@ -138,7 +137,6 @@ describe('Map Reducer', () => {
     expect(reducer({}, {
       type: routing.dataDetail.type
     })).toEqual({
-      mapPanelActive: false,
       overlays: []
     });
 
@@ -158,59 +156,6 @@ describe('Map Reducer', () => {
     }))).toEqual({
       ...initialState
     });
-  });
-
-  it('should set the viewCenter and zoom state', () => {
-    const expectedResult = {
-      zoom: 1,
-      viewCenter: [
-        123, 321
-      ],
-      detailEndpoint: undefined,
-      selectedLocation: undefined
-    };
-    expect(reducer({}, {
-      type: routing.map.type,
-      meta: {
-        query: {
-          zoom: 1,
-          lat: 123,
-          lng: 321
-        }
-      }
-    })).toEqual(expectedResult);
-
-    // Should also set viewCenter and Zoomstate when values cannot be parsed
-    const expectedResultInitial = {
-      zoom: initialState.zoom,
-      viewCenter: initialState.viewCenter,
-      mapPanelActive: false
-    };
-    expect(reducer({}, {
-      type: routing.map.type,
-      meta: {
-        query: {
-          zoom: 'test123',
-          lat: 'test123',
-          lng: 'test123',
-          legenda: true
-        }
-      }
-    })).toEqual(expectedResultInitial);
-  });
-
-  it('should set the overlays state', () => {
-    const expectedResult = {
-      overlays: [{ id: 'bag', isVisible: true }, { id: 'beg', isVisible: false }]
-    };
-    expect(reducer({}, {
-      type: routing.map.type,
-      meta: {
-        query: {
-          lagen: btoa('bag:1|beg:0')
-        }
-      }
-    })).toEqual(expectedResult);
   });
 
   it('should set the boundingBox state when dispatching updateBoundingBox', () => {

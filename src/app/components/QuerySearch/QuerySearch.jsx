@@ -17,6 +17,7 @@ const QuerySearch = ({
   currentPage,
   toDataPage,
   toDatasetPage,
+  filters,
   user
 }) => (
   <div className="c-data-selection c-dashboard__content">
@@ -33,12 +34,12 @@ const QuerySearch = ({
             <Tab
               label="Data"
               count={numberOfDataResults}
-              onClick={() => toDataPage(query, true)}
+              onClick={() => toDataPage(query, filters, true)}
             />
             <Tab
               label="Datasets"
               count={numberOfDatasetResults}
-              onClick={() => toDatasetPage(query, true)}
+              onClick={() => toDatasetPage(query, filters, true)}
             />
           </Tabs>
         </TabBar>
@@ -67,6 +68,7 @@ QuerySearch.defaultProps = {
 
 QuerySearch.propTypes = {
   user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  filters: PropTypes.shape({}).isRequired,
   isLoading: PropTypes.bool,
   query: PropTypes.string,
   currentPage: PropTypes.string.isRequired,

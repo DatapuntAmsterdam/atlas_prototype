@@ -4,8 +4,12 @@ import {
   getDetailEndpoint,
   getDetailGeometry
 } from '../../../shared/ducks/detail/selectors';
-import { isDataDetailPage, isPanoPage } from '../../../store/redux-first-router';
-import { FETCH_MAP_DETAIL_REQUEST, FETCH_MAP_DETAIL_SUCCESS, FETCH_MAP_DETAIL_FAILURE } from './constants';
+import { isDataDetailPage, isPanoPage } from '../../../store/redux-first-router/selectors';
+import {
+  FETCH_MAP_DETAIL_FAILURE,
+  FETCH_MAP_DETAIL_REQUEST,
+  FETCH_MAP_DETAIL_SUCCESS
+} from './constants';
 
 const mapDetailSelector = (state) => state.mapDetail;
 

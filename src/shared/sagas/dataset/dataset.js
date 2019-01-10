@@ -23,6 +23,7 @@ import {
 import { getApiSpecificationData, getPage } from '../../ducks/datasets/datasets';
 import getApiSpecification from '../../services/datasets-filters/datasets-filters';
 import { getSearchQuery } from '../../ducks/data-search/selectors';
+import PARAMETERS from '../../../store/parameters';
 
 function* retrieveDataset(action) {
   const { activeFilters, page, searchText, geometryFilter, catalogFilters } =
@@ -53,7 +54,7 @@ function* fireRequest(action) {
   const activeFilters = getFilters(state);
   const catalogFilters = getApiSpecificationData(state);
   const page = getPage(state);
-  const searchText = get(action, 'meta.query.zoekterm') || getSearchQuery(state);
+  const searchText = get(action, `meta.query[${PARAMETERS.QUERY}]`) || getSearchQuery(state);
   // Todo: make it possible to fetch both api specification and dataset data simultaneously
   // This can be done by refactoring the datasets-filters service
   if (!Object.keys(getApiSpecificationData(state) || {}).length) {

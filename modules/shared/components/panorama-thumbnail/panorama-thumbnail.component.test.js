@@ -1,4 +1,4 @@
-import { toPanorama } from '../../../../src/store/redux-first-router';
+import { routing } from '../../../../src/app/routes';
 
 describe('The dp-panorama-thumbnail component', function () {
     let $compile,
@@ -68,7 +68,11 @@ describe('The dp-panorama-thumbnail component', function () {
         expect(component.find('.qa-found-no-panorama').length).toBe(0);
         expect(component.find('img').attr('src')).toBe('http://example.com/example.png');
         expect(component.find('dp-redux-link').attr('to')).toBe('vm.linkTo');
-        expect(scope.vm.linkTo).toEqual(toPanorama(42, 99));
+        expect(scope.vm.linkTo).toEqual({
+            type: routing.panorama.type,
+            payload: { id: 42 },
+            meta: { preserve: true, additionalParams: { heading: 99 } }
+        });
         expect(scope.vm.isLoading).toBe(false);
     });
 
@@ -87,7 +91,11 @@ describe('The dp-panorama-thumbnail component', function () {
         };
         parentScope.$digest();
 
-        expect(scope.vm.linkTo).toEqual(toPanorama(43, 99));
+        expect(scope.vm.linkTo).toEqual({
+            type: routing.panorama.type,
+            payload: { id: 43 },
+            meta: { preserve: true, additionalParams: { heading: 99 } }
+        });
     });
 
     it('when it cannot find a thumbnail it shows a message', function () {

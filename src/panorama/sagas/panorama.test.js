@@ -13,7 +13,7 @@ import {
 import { routing } from '../../app/routes';
 import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api';
 import { TOGGLE_MAP_OVERLAY_PANORAMA } from '../../map/ducks/map/map';
-import { toMap } from '../../store/redux-first-router';
+import { toMap } from '../../store/redux-first-router/actions';
 import {
   CLOSE_PANORAMA,
   FETCH_PANORAMA_ERROR,

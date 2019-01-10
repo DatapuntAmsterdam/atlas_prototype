@@ -3,7 +3,7 @@ import {
     isDataSelectionPage,
     isHomepage,
     isMapActive
-} from '../../../src/store/redux-first-router';
+} from '../../../src/store/redux-first-router/selectors';
 
 (function () {
     'use strict';

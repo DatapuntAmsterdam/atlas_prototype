@@ -1,4 +1,4 @@
-import { toDatasetsWithFilter } from '../../../../src/store/redux-first-router';
+import { routing } from '../../../../src/app/routes';
 
 describe('The dp-catalogus-themes', () => {
     let $compile,
@@ -71,7 +71,10 @@ describe('The dp-catalogus-themes', () => {
         const scope = component.isolateScope();
         const link = component.find('.qa-theme-link').eq(4);
         expect(link).toHaveAttr('to', 'theme.linkTo');
-        expect(scope.vm.themes[4].linkTo).toEqual(toDatasetsWithFilter('thema-e'));
+        expect(scope.vm.themes[4].linkTo).toEqual({
+            type: routing.datasets.type,
+            meta: { preserve: true, additionalParams: { filters: { groups: 'thema-e' } } }
+        });
 
         store.dispatch.calls.reset();
 

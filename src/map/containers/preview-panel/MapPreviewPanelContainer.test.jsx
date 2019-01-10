@@ -21,12 +21,12 @@ import {
 } from '../../../panorama/ducks/preview/panorama-preview';
 import { getLocationId } from '../../ducks/map/map-selectors';
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
+import { getDetailLocation } from '../../../store/redux-first-router/selectors';
 import {
-  getDetailLocation,
-  toDataSearchLocationAndPreserveQuery,
+  toDataSearchLocation,
   toMap,
-  toPanorama
-} from '../../../store/redux-first-router';
+  toPanoramaAndPreserveQuery
+} from '../../../store/redux-first-router/actions';
 import { isGeoSearch } from '../../../shared/ducks/selection/selection';
 
 jest.mock('../../../shared/ducks/detail/selectors');
@@ -36,7 +36,8 @@ jest.mock('../../ducks/detail/map-detail');
 jest.mock('../../ducks/map/map-selectors');
 jest.mock('../../../panorama/ducks/preview/panorama-preview');
 jest.mock('../../../shared/ducks/selection/selection');
-jest.mock('../../../store/redux-first-router');
+jest.mock('../../../store/redux-first-router/selectors');
+jest.mock('../../../store/redux-first-router/actions');
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
 
 describe('MapPreviewPanelContainer', () => {
@@ -99,9 +100,9 @@ describe('MapPreviewPanelContainer', () => {
     });
     getMapDetail.mockImplementation(() => ({ type: FETCH_MAP_DETAIL_REQUEST }));
     getDetailLocation.mockImplementation(() => (['123', '321']));
-    toPanorama.mockImplementation(() => ({ type: 'sometype' }));
+    toPanoramaAndPreserveQuery.mockImplementation(() => ({ type: 'sometype' }));
     toMap.mockImplementation(() => ({ type: 'sometype' }));
-    toDataSearchLocationAndPreserveQuery.mockImplementation(() => ({ type: 'sometype' }));
+    toDataSearchLocation.mockImplementation(() => ({ type: 'sometype' }));
     fetchPanoramaPreview.mockImplementation(() => ({ type: FETCH_PANORAMA_PREVIEW_REQUEST }));
     selectNotClickableVisibleMapLayers.mockImplementation(() => ([]));
     isGeoSearch.mockImplementation((state) => !(state.detail && state.detail.endpoint));
@@ -156,7 +157,7 @@ describe('MapPreviewPanelContainer', () => {
         }
       }).dive();
       wrapper.instance().onPanoPreviewClick();
-      expect(store.dispatch).toHaveBeenCalledWith(toPanorama());
+      expect(store.dispatch).toHaveBeenCalledWith(toPanoramaAndPreserveQuery());
     });
   });
 });

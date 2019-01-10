@@ -9,7 +9,7 @@ import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-
 import { getUser, getUserScopes } from '../../../shared/ducks/user/user';
 import NotAuthorizedMessage from '../PanelMessages/NotAuthorizedMessage';
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator';
-import { getActiveFilters } from '../../../shared/ducks/filters/filters';
+import { getFilters } from '../../../shared/ducks/filters/filters';
 import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer';
 import MaxPageMessage from '../PanelMessages/MaxPageMessage';
 import {
@@ -223,7 +223,7 @@ const mapStateToProps = (state) => {
     dataset,
     authError,
     page,
-    activeFilters: getActiveFilters(state),
+    activeFilters: getFilters(state),
     results: getDataSelectionResult(state),
     user: getUser(state),
     userScopes: getUserScopes(state)

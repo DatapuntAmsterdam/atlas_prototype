@@ -5,7 +5,7 @@ import DataSelection from './DataSelection';
 import { DATASETS, VIEWS } from '../../../shared/ducks/data-selection/constants';
 
 const initialState = {
-  filters: {},
+  filter: { filters: {} },
   user: {
     scopes: []
   },

@@ -44,6 +44,19 @@ export const getGeoJsons = createSelector([getMapMarkers],
     markers && markers.geoJsons && markers.geoJsons.length ?
       markers.geoJsons : []
   ));
+
+export const getShapeFilter = createSelector(getDataSelection, (dataSelection) => {
+  const markers = get(dataSelection, 'geometryFilter.markers');
+  const description = get(dataSelection, 'geometryFilter.description');
+  return (markers && description) ? {
+    shape: {
+      slug: 'shape',
+      label: 'Locatie',
+      option: `ingetekend (${description})`
+    }
+  } : {};
+});
+
 export const getFilters = createSelector(
   getDataSelectionResult, (result) => result.filters || []
 );

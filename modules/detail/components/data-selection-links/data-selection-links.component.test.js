@@ -1,5 +1,5 @@
 import { features } from '../../../../src/shared/environment';
-import { toDatasetsTableWithFilter } from '../../../../src/store/redux-first-router';
+import { toDatasetsTableWithFilter } from '../../../../src/store/redux-first-router/actions';
 import { DATASET_ROUTE_MAPPER } from '../../../../src/shared/ducks/data-selection/constants';
 
 describe('The dp-data-selection-link component', () => {

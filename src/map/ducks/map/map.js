@@ -1,10 +1,12 @@
 import { routing } from '../../../app/routes';
+import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system';
 import { FETCH_MAP_DETAIL_SUCCESS } from '../detail/constants';
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 import { SET_SELECTION } from '../../../shared/ducks/selection/selection';
-import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system';
+import paramsRegistry from '../../../store/params-registry';
 
-
+const REDUCER_KEY = 'map';
+export { REDUCER_KEY as MAP };
 export const MAP_BOUNDING_BOX = 'MAP_BOUNDING_BOX';
 export const MAP_EMPTY_GEOMETRY = 'MAP_EMPTY_GEOMETRY';
 export const MAP_END_DRAWING = 'MAP_END_DRAWING';
@@ -43,37 +45,19 @@ export const isPanoLayer = (layer) => layer.id.startsWith(PANORAMA);
 
 export default function MapReducer(state = initialState, action) {
   const enrichedState = {
-    ...state
+    ...state,
+    ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action)
   };
-  const { meta = {} } = action;
-  const { query = {} } = meta;
-  const { lat, lng, zoom, legenda, lagen } = query;
-  if (lat && lng) {
-    enrichedState.viewCenter = [
-      normalizeCoordinate(parseFloat(lat), 7) || initialState.viewCenter[0],
-      normalizeCoordinate(parseFloat(lng), 7) || initialState.viewCenter[1]
-    ];
-  }
-  if (zoom) {
-    enrichedState.zoom = parseFloat(zoom) || initialState.zoom;
-  }
-  if (legenda) {
-    enrichedState.mapPanelActive = legenda === 'true';
-  }
-
-  if (lagen) {
-    try {
-      enrichedState.overlays = atob(lagen).split('|').map((obj) => {
-        const layerInfo = obj.split(':');
-        return { id: layerInfo[0], isVisible: !!parseInt(layerInfo[1], 0) };
-      });
-    } catch (e) {
-      // console.warn(e);
-    }
-  }
 
   switch (action.type) {
     case routing.dataDetail.type:
+      return {
+        ...enrichedState,
+        overlays: enrichedState.overlays ? [...enrichedState.overlays.filter(
+          (overlay) => !isPanoLayer(overlay)
+        )] : []
+      };
+
     case routing.dataSearch.type:
     case routing.addresses.type:
     case routing.cadastralObjects.type:
@@ -193,10 +177,17 @@ export default function MapReducer(state = initialState, action) {
       };
 
     case routing.home.type:
-    case MAP_CLEAR:
       return {
         ...state,
         overlays: initialState.overlays,
+        drawingMode: initialState.drawingMode,
+        shapeDistanceTxt: initialState.shapeDistanceTxt,
+        shapeAreaTxt: initialState.shapeAreaTxt
+      };
+
+    case MAP_CLEAR:
+      return {
+        ...state,
         drawingMode: initialState.drawingMode,
         shapeDistanceTxt: initialState.shapeDistanceTxt,
         shapeAreaTxt: initialState.shapeAreaTxt

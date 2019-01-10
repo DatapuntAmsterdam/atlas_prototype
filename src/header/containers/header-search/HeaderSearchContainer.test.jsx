@@ -10,13 +10,15 @@ import { fetchDetail } from '../../../shared/ducks/detail/actions';
 import { ROUTER_NAMESPACE } from '../../../app/routes';
 import PAGES from '../../../app/pages';
 import { emptyFilters } from '../../../shared/ducks/filters/filters';
+
 import {
-  toDataSearch,
+  toDataSearchQuery,
   toDatasetSearch,
   toDatasetSuggestion,
   toDataSuggestion
-} from '../../../store/redux-first-router';
+} from '../../../store/redux-first-router/actions';
 import { FETCH_DETAIL } from '../../../shared/ducks/detail/constants';
+
 
 jest.mock('../../ducks/auto-suggest/auto-suggest');
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
@@ -36,6 +38,9 @@ describe('HeaderSearchContainer', () => {
   });
 
   const initialState = {
+    dataSearch: {
+      query: 'dam'
+    },
     autoSuggest: {
       count: 6,
       suggestions: [
@@ -226,7 +231,7 @@ describe('HeaderSearchContainer', () => {
       headerSearch.instance().onFormSubmit();
 
       expect(store.dispatch).toHaveBeenCalledWith(emptyFilters());
-      expect(store.dispatch).toHaveBeenCalledWith(toDataSearch(query));
+      expect(store.dispatch).toHaveBeenCalledWith(toDataSearchQuery(query));
     });
 
     it('does dataset search', () => {

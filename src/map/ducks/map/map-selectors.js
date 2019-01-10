@@ -30,9 +30,6 @@ export const getCenter = createSelector([getMapCenter, getPanoramaLocation],
     panoramaLocation || mapCenter
   ));
 
-export const getLatitude = createSelector(getCenter, (center) => center[0]);
-export const getLongitude = createSelector(getCenter, (center) => center[1]);
-
 export const getRdGeoJsons = createSelector(getDetailGeoJson, (geoJson) => [geoJson]);
 
 export const getLocationId = createSelector(

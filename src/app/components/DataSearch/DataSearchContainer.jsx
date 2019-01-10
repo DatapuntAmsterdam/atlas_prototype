@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { getUserScopes } from '../../../shared/ducks/user/user';
 import { getNumberOfResults, getSearchCategory, getSearchQuery } from '../../../shared/ducks/data-search/selectors';
 import DataSearch from './DataSearch';
-import { toDataSearchCategory } from '../../../store/redux-first-router';
+import { toDataSearchCategory } from '../../../store/redux-first-router/actions';
 import { fetchDetail } from '../../../shared/ducks/detail/actions';
 
 const mapStateToProps = (state) => ({

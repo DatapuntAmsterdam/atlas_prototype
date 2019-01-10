@@ -6,6 +6,12 @@ Object {
 }
 `;
 
+exports[`Data Selection Reducer should set geometryFilter state when dispatching removeGeometryFilter 1`] = `
+Object {
+  "geometryFilter": Object {},
+}
+`;
+
 exports[`Data Selection Reducer should set geometryFilter state when dispatching setGeometryFilter 1`] = `
 Object {
   "geometryFilter": Array [

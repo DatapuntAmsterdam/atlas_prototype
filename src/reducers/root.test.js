@@ -39,7 +39,7 @@ describe('the root reducer', () => {
   PanoPreviewReducer.default = () => 'panoramaPreview';
   DataSearchReducer.default = () => 'dataSearch';
   SelectionReducer.default = () => 'selection';
-  FiltersReducer.default = () => 'filters';
+  FiltersReducer.default = () => 'filter';
   Datasets.default = () => 'datasets';
 
   it('combines many reducers', () => {
@@ -53,7 +53,7 @@ describe('the root reducer', () => {
         datasets: 'datasets',
         page: 'page',
         error: 'error',
-        filters: 'filters',
+        filter: 'filter',
         map: 'map',
         detail: 'detail',
         mapDetail: 'mapDetail',

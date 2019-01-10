@@ -9,7 +9,7 @@ import {
   getResults,
   isLoading as datasetsLoading
 } from '../../shared/ducks/datasets/datasets';
-import { getActiveFilters } from '../../shared/ducks/filters/filters';
+import { getFilters } from '../../shared/ducks/filters/filters';
 import { getUser } from '../../shared/ducks/user/user';
 import Dataset from '../components/Dataset';
 
@@ -66,7 +66,7 @@ DatasetPage.propTypes = {
 const mapStateToProps = (state) => ({
   isLoading: datasetsLoading(state),
   authError: getAuthError(state),
-  activeFilters: getActiveFilters(state),
+  activeFilters: getFilters(state),
   results: getResults(state),
   user: getUser(state)
 });

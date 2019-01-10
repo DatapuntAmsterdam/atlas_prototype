@@ -1,6 +1,6 @@
 import PAGES from '../../../src/app/pages';
 import { ROUTER_NAMESPACE } from '../../../src/app/routes';
-import * as routerSelectors from '../../../src/store/redux-first-router';
+import * as routerSelectors from '../../../src/store/redux-first-router/selectors';
 
 describe('The header controller', function () {
     var $controller,

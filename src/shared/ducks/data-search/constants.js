@@ -16,6 +16,7 @@ export const SET_QUERY_CATEGORY = `${REDUCER_KEY}/SET_QUERY_CATEGORY`;
 export const SET_GEO_LOCATION = `${REDUCER_KEY}/SET_GEO_LOCATION`;
 
 export const initialState = {
+  query: '',
   resultsMapPanel: [],
   resultsMap: [],
   resultsQuery: [],

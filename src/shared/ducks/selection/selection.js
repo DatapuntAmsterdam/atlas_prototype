@@ -1,5 +1,5 @@
 import { routing } from '../../../app/routes';
-import { SET_GEOMETRY_FILTERS } from '../data-selection/constants';
+import { SET_GEOMETRY_FILTER } from '../data-selection/constants';
 
 export const REDUCER_KEY = 'selection';
 
@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case routing.home.type:
-    case SET_GEOMETRY_FILTERS:
+    case SET_GEOMETRY_FILTER:
       return {
         ...initialState
       };

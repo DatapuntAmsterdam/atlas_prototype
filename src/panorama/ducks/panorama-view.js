@@ -1,5 +1,5 @@
 export default {
-  MAP: 'MAP',
-  MAP_PANO: 'MAP_PANO',
-  PANO: 'PANO'
+  MAP: 'kaart',
+  MAP_PANO: 'beeld-kaart',
+  PANO: 'beeld'
 };

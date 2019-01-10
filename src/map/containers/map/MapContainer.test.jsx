@@ -2,13 +2,13 @@ import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 import MapContainer, { overrideLeafletGetBounds } from './MapContainer';
-import { isMapActive } from '../../../store/redux-first-router';
+import { isMapActive } from '../../../store/redux-first-router/selectors';
 import { previewDataAvailable } from '../../../shared/ducks/selection/selection';
 import { isEmbedded, isEmbedPreview } from '../../../shared/ducks/ui/ui';
 import { getDrawingMode } from '../../ducks/map/map-selectors';
 
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
-jest.mock('../../../store/redux-first-router');
+jest.mock('../../../store/redux-first-router/selectors');
 jest.mock('../../../shared/ducks/selection/selection');
 jest.mock('../../../shared/ducks/ui/ui');
 jest.mock('../../ducks/map/map-selectors');

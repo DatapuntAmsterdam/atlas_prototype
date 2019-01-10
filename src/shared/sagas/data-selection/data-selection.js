@@ -1,40 +1,41 @@
 import { call, put, select, take, takeLatest } from 'redux-saga/effects';
-import queryString from 'querystring';
 import get from 'lodash.get';
 import {
   fetchDataSelection,
   receiveDataSelectionFailure,
   receiveDataSelectionSuccess,
   setMarkers,
-  setGeometryFilter
+  removeGeometryFilter
 } from '../../ducks/data-selection/actions';
 import { routing } from '../../../app/routes';
-import dataselectionConfig from '../../services/data-selection/data-selection-config';
+import dataSelectionConfig from '../../services/data-selection/data-selection-config';
 import { getMarkers, query } from '../../services/data-selection/data-selection-api';
 import { getMapBoundingBox, getMapZoom } from '../../../map/ducks/map/map-selectors';
-import { ADD_FILTER, EMPTY_FILTERS, getFilters, REMOVE_FILTER, setShapeFilter } from '../../ducks/filters/filters';
-import { isDataSelectionPage } from '../../../store/redux-first-router';
+import {
+  ADD_FILTER,
+  EMPTY_FILTERS,
+  getFiltersWithoutShape,
+  REMOVE_FILTER
+} from '../../ducks/filters/filters';
+import { preserveQuery, toDatasetPage } from '../../../store/redux-first-router/actions';
+import { isDataSelectionPage } from '../../../store/redux-first-router/selectors';
 import {
   FETCH_DATA_SELECTION_REQUEST,
+  REMOVE_GEOMETRY_FILTER,
   SET_DATASET,
-  SET_GEOMETRY_FILTERS,
+  SET_GEOMETRY_FILTER,
   SET_PAGE,
   SET_VIEW,
-  VIEWS,
-  DATASET_ROUTE_MAPPER
+  VIEWS
 } from '../../ducks/data-selection/constants';
-import { getDataSelection, getGeomarkersShape } from '../../ducks/data-selection/selectors';
+import {
+  getDataSelection,
+  getGeomarkersShape,
+  getGeometryFilters
+} from '../../ducks/data-selection/selectors';
 import { waitForAuthentication } from '../user/user';
 import { MAP_BOUNDING_BOX } from '../../../map/ducks/map/map';
-
-export const createShapeFilter = (geometryFilter) =>
-  (geometryFilter.markers === undefined
-    ? {}
-    : {
-      slug: 'shape',
-      label: 'Locatie',
-      option: `ingetekend (${geometryFilter.description})`
-    });
+import PARAMETERS from '../../../store/parameters';
 
 function* getMapMarkers(dataset, activeFilters) {
   // Since bounding box can be set later, we check if we have to wait for the boundingbox to get set
@@ -53,23 +54,23 @@ function* retrieveDataSelection(action) {
   const {
     dataset,
     view,
-    activeFilters,
     page,
     searchText,
-    shape,
     catalogFilters
   } = action.payload;
+
   try {
     yield call(waitForAuthentication);
-
+    const activeFilters = yield select(getFiltersWithoutShape);
+    const shape = yield select(getGeomarkersShape);
     // exclude the geometryFilter from the attribute filters
     // TODO DP-6442 improve the geometryFilter handling
     const activeAttributeFilters = Object.keys(activeFilters)
-      .filter((key) => key !== 'shape')
-      .reduce((result, key) => ({
-        ...result,
-        [key]: activeFilters[key]
-      }), {});
+                                         .reduce((result, key) => ({
+                                           ...result,
+                                           [key]: activeFilters[key]
+                                         }), {});
+
     const result = yield call(query,
       dataset, view, activeAttributeFilters, page, searchText, shape, catalogFilters);
 
@@ -79,7 +80,7 @@ function* retrieveDataSelection(action) {
     }));
 
     // Check if markers need to be fetched
-    const { MAX_NUMBER_OF_CLUSTERED_MARKERS } = dataselectionConfig.datasets[dataset];
+    const { MAX_NUMBER_OF_CLUSTERED_MARKERS } = dataSelectionConfig.datasets[dataset];
     const markersShouldBeFetched = (
       view !== VIEWS.TABLE && result.numberOfRecords <= MAX_NUMBER_OF_CLUSTERED_MARKERS
     );
@@ -101,14 +102,10 @@ function* fireRequest(action) {
   // Always ensure we are on the right page, otherwise this can be called unintentionally
   if (isDataSelectionPage(state) && !get(action, 'meta.skipFetch')) {
     const dataSelection = getDataSelection(state);
-    const activeFilters = getFilters(state);
-    const shape = getGeomarkersShape(state);
 
     yield put(
       fetchDataSelection({
-        ...dataSelection,
-        activeFilters,
-        shape
+        ...dataSelection
       })
     );
   }
@@ -116,34 +113,29 @@ function* fireRequest(action) {
 
 function* clearShapeFilter(action) {
   if (action.payload === 'shape') {
-    yield put(setGeometryFilter({ markers: undefined, description: '' }));
+    yield put(removeGeometryFilter());
   }
 }
 
-function* setGeometryFilters(action) {
-  yield put(setShapeFilter(createShapeFilter(action.payload)));
-}
-
-function* switchPage() {
+function* switchPage(additionalParams = {}) {
   const state = yield select();
   const dataSelection = getDataSelection(state);
-  yield put({
-    type: DATASET_ROUTE_MAPPER[dataSelection.dataset],
-    meta: {
-      query: {
-        view: VIEWS.LIST,
-        // Todo: temporary solution to pass existing query
-        ...queryString.decode(location.search.slice(1))
-      }
-    }
+  yield put(preserveQuery(toDatasetPage(dataSelection.dataset), additionalParams));
+}
+
+function* setGeometryFilters() {
+  const geometryFilters = yield select(getGeometryFilters);
+  yield call(switchPage, {
+    [PARAMETERS.GEO]: geometryFilters,
+    [PARAMETERS.VIEW]: VIEWS.LIST
   });
 }
 
 export default function* watchFetchDataSelection() {
   yield takeLatest(REMOVE_FILTER, clearShapeFilter);
-  yield takeLatest(SET_GEOMETRY_FILTERS, setGeometryFilters);
+  yield takeLatest(SET_GEOMETRY_FILTER, setGeometryFilters);
   yield takeLatest(
-    [SET_VIEW, ADD_FILTER, REMOVE_FILTER, EMPTY_FILTERS,
+    [SET_VIEW, SET_PAGE, ADD_FILTER, REMOVE_FILTER, REMOVE_GEOMETRY_FILTER, EMPTY_FILTERS,
       routing.addresses.type, routing.establishments.type, routing.cadastralObjects.type
     ],
     fireRequest
@@ -151,5 +143,5 @@ export default function* watchFetchDataSelection() {
 
   // Actions
   yield takeLatest(FETCH_DATA_SELECTION_REQUEST, retrieveDataSelection);
-  yield takeLatest([SET_DATASET, SET_GEOMETRY_FILTERS, SET_PAGE], switchPage);
+  yield takeLatest([SET_DATASET], switchPage);
 }

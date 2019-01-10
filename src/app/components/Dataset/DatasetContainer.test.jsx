@@ -13,7 +13,9 @@ const initialState = {
       data: {}
     }
   },
-  filters: {}
+  filter: {
+    filters: {}
+  }
 };
 
 describe('DatasetContainer', () => {
