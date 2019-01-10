@@ -1,6 +1,7 @@
 import piwikTracker from '../../shared/services/piwik-tracker/piwik-tracker';
 import { routing } from '../../app/routes';
 import { DOWNLOAD_DATASET_RESOURCE } from '../../shared/ducks/datasets/data/data';
+import { AUTHENTICATE_USER_REQUEST, AUTHENTICATE_USER_SUCCESS } from '../../shared/ducks/user/user';
 
 /** Set Piwik variable */
 const actionsToPiwik = {
@@ -39,6 +40,18 @@ const actionsToPiwik = {
     'kaartlaag',
     tracking.category.toLowerCase().replace(/[: ][ ]*/g, '_'),
     tracking.title
+  ],
+  [AUTHENTICATE_USER_REQUEST]: (tracking) => [
+    'trackEvent',
+    'login',
+    tracking,
+    null
+  ],
+  [AUTHENTICATE_USER_SUCCESS]: (tracking) => [
+    'trackEvent',
+    'login',
+    'ingelogd',
+    tracking
   ]
 };
 
@@ -49,7 +62,7 @@ const piwikMiddleware = () => (next) => (action) => {
   const actionMap = actionsToPiwik[action.type];
 
   if (actionMap) {
-    const { tracking } = action.meta;
+    const { tracking } = (action.meta) ? action.meta : {};
 
     if (tracking) {
       piwikTracker(actionMap(tracking));

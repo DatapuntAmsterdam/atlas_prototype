@@ -1,3 +1,5 @@
+import { authenticateRequest } from '../../../../src/shared/ducks/user/user';
+
 (function () {
     'use strict';
 
@@ -9,11 +11,14 @@
             controllerAs: 'vm'
         });
 
-    DpLogoutButtonController.$inject = ['$window'];
+    DpLogoutButtonController.$inject = ['$window', 'store'];
 
-    function DpLogoutButtonController ($window) {
+    function DpLogoutButtonController ($window, store) {
         var vm = this;
 
-        vm.logout = $window.auth.logout;
+        vm.logout = () => {
+            store.dispatch(authenticateRequest('uitloggen'));
+            $window.auth.logout();
+        };
     }
 })();

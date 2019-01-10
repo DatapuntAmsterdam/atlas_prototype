@@ -2,6 +2,7 @@ import { put, race, select, take, takeLatest } from 'redux-saga/effects';
 import {
   AUTHENTICATE_USER_FAILED,
   AUTHENTICATE_USER_REQUEST,
+  AUTHENTICATE_USER_RELOAD,
   AUTHENTICATE_USER_SUCCESS,
   authenticateFailed,
   authenticateUserSuccess,
@@ -9,10 +10,17 @@ import {
 } from '../../ducks/user/user';
 import * as auth from '../../services/auth/auth';
 
-export function* authenticateUser() {
+export function* authenticateUser(action) {
   const accessToken = auth.getAccessToken();
+  const reload = action.type === [AUTHENTICATE_USER_RELOAD];
+
   if (accessToken) {
-    yield put(authenticateUserSuccess(auth.getAccessToken(), auth.getName(), auth.getScopes()));
+    yield put(authenticateUserSuccess(
+      auth.getAccessToken(),
+      auth.getName(),
+      auth.getScopes(),
+      reload)
+    );
   } else {
     yield put(authenticateFailed());
   }
@@ -30,4 +38,5 @@ export function* waitForAuthentication() {
 
 export default function* watchAuthenticationRequest() {
   yield takeLatest([AUTHENTICATE_USER_REQUEST], authenticateUser);
+  yield takeLatest([AUTHENTICATE_USER_RELOAD], authenticateUser);
 }

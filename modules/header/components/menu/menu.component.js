@@ -1,4 +1,4 @@
-import { authenticateError } from '../../../../src/shared/ducks/user/user';
+import { authenticateError, authenticateRequest } from '../../../../src/shared/ducks/user/user';
 import { routing } from '../../../../src/app/routes';
 
 (function () {
@@ -27,6 +27,7 @@ import { routing } from '../../../../src/app/routes';
 
         vm.login = () => {
             try {
+                store.dispatch(authenticateRequest('inloggen'));
                 $window.auth.login();
             } catch (error) {
                 store.dispatch(authenticateError());

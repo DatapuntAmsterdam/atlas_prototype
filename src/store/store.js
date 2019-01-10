@@ -6,7 +6,7 @@ import queryString from 'querystring';
 import rootSaga from '../root-saga';
 import '../shared/ducks/error-message';
 import * as auth from '../shared/services/auth/auth';
-import { authenticateRequest } from '../shared/ducks/user/user';
+import { authenticateReload } from '../shared/ducks/user/user';
 import rootReducer from '../reducers/root';
 import documentHeadMiddleware from './middleware/documentHead';
 import piwikMiddleware from './middleware/piwikMiddleware';
@@ -64,7 +64,7 @@ const configureStore = (history, routesMap) => {
   }
 
   initialRouteDispatch();
-  window.reduxStore.dispatch(authenticateRequest());
+  window.reduxStore.dispatch(authenticateReload());
 
   return window.reduxStore;
 };

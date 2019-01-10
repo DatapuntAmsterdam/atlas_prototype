@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 
 export const REDUCER_KEY = 'user';
 export const AUTHENTICATE_USER_REQUEST = `${REDUCER_KEY}/AUTHENTICATE_USER_REQUEST`;
+export const AUTHENTICATE_USER_RELOAD = `${REDUCER_KEY}/AUTHENTICATE_USER_RELOAD`;
 export const AUTHENTICATE_USER_SUCCESS = `${REDUCER_KEY}/AUTHENTICATE_USER_SUCCESS`;
 export const AUTHENTICATE_USER_FAILED = `${REDUCER_KEY}/AUTHENTICATE_USER_FAILED`;
 
@@ -55,11 +56,22 @@ export const getUserScopes = createSelector(
   getUser, (user) => user.scopes
 );
 
-export const authenticateUserSuccess = (accessToken, name, scopes) => ({
-  type: AUTHENTICATE_USER_SUCCESS,
-  payload: { accessToken, name, scopes }
-});
+export const authenticateUserSuccess = (accessToken, name, scopes, reload) => {
+  const meta = (!reload) ? { tracking: scopes } : null;
 
-export const authenticateRequest = () => ({ type: AUTHENTICATE_USER_REQUEST });
+  return ({
+    type: AUTHENTICATE_USER_SUCCESS,
+    payload: { accessToken, name, scopes },
+    ...meta
+  });
+};
+
+export const authenticateRequest = (payload) => ({
+  type: AUTHENTICATE_USER_REQUEST,
+  meta: {
+    tracking: payload
+  }
+});
+export const authenticateReload = () => ({ type: AUTHENTICATE_USER_RELOAD });
 export const authenticateError = () => ({ type: AUTHENTICATE_USER_ERROR });
 export const authenticateFailed = () => ({ type: AUTHENTICATE_USER_FAILED });
