@@ -51,6 +51,9 @@ export const getUser = (state) => state[REDUCER_KEY];
 export const userCheckedAuthentication = createSelector(
   getUser, (user) => user.hasCheckedAuthentication
 );
+export const userIsAuthenticated = createSelector(
+  getUser, (user) => user.authenticated
+);
 export const getUserScopes = createSelector(
   getUser, (user) => user.scopes
 );

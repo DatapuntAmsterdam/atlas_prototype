@@ -4,12 +4,14 @@ import Link from 'redux-first-router-link/dist/Link';
 import { routing } from '../../routes';
 import { BEDIENING_LOGIN_DEEPLINK } from '../../pages/CMSPageMapping';
 
-const NoResultsForSearchType = ({ message }) => (
+const NoResultsForSearchType = ({ message, authMessage }) => (
   <div className="c-link__wrapper--inine-block">
     <div className="u-margin__bottom--1">Geen resultaten van deze soort</div>
-    { message && (
+    { message }
+    { authMessage && (
       <span>
-        {message} Zie: <Link
+        &nbsp;Medewerkers/ketenpartners van Gemeente Amsterdam kunnen
+        inloggen om meer gegevens te zien, zie <Link
           to={{
             type: routing.bediening.type,
             payload: { deeplink: BEDIENING_LOGIN_DEEPLINK } /* TODO DP-6485 */
@@ -23,11 +25,13 @@ const NoResultsForSearchType = ({ message }) => (
 );
 
 NoResultsForSearchType.defaultProps = {
-  message: ''
+  message: '',
+  authMessage: false
 };
 
 NoResultsForSearchType.propTypes = {
-  message: PropTypes.string
+  message: PropTypes.string,
+  authMessage: PropTypes.bool
 };
 
 export default NoResultsForSearchType;

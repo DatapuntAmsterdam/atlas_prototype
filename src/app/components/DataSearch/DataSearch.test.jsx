@@ -4,6 +4,7 @@ import DataSearch from './DataSearch';
 
 describe('DataSearch', () => {
   const props = {
+    userAuthenticated: false,
     userScopes: [],
     numberOfResults: 0,
     category: '',

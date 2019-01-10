@@ -9,6 +9,7 @@ const initialState = {
     query: 'foo'
   },
   user: {
+    authenticated: false,
     scopes: []
   }
 };
