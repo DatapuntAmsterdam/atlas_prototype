@@ -11,7 +11,6 @@ describe('Button', () => {
         title="This is a button"
         onClick={clickMock}
         alignLeft
-        padding={4}
       >
         Hello, I am a button
       </Button>

@@ -2,14 +2,13 @@
 
 $icon-height: 24px;
 
-.button-new {
+.icon-button {
   @extend %hover-focus-button;
   background-color: $primary-light;
   border: solid 1px $secondary-gray20;
   box-shadow: 2px 2px 0 0 $secondary-gray40;
   max-height: 34px;
   max-width: 34px;
-  padding: 4px;
   position: absolute;
   right: $container-whitespace;
   top: $container-whitespace;
@@ -24,5 +23,26 @@ $icon-height: 24px;
   .is-embed-preview &,
   .is-print-mode & {
     display: none;
+  }
+}
+
+.rc-icon-button {
+  box-sizing: content-box;
+  display: block;
+  height: $icon-height;
+  padding: 4px;
+  width: $icon-height;
+
+  &--maximize {
+    @include icon-sprite("icon-maximize", $secondary-gray60, $primary-dark, $icon-height);
+
+  }
+
+  &--minimize {
+    @include icon-sprite("icon-minimize", $secondary-gray60, $primary-dark, $icon-height);
+  }
+
+  &--cross {
+    @include icon-sprite("icon-cross", $secondary-gray60, $primary-dark, 30px);
   }
 }

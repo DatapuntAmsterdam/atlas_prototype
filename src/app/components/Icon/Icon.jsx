@@ -3,26 +3,17 @@ import PropTypes from 'prop-types';
 
 import './Icon.scss';
 
-const Icon = ({ icon, padding }) => (
+const Icon = ({ icon }) => (
   <span
     className={`
       rc-icon
       rc-icon--${icon}
     `}
-    style={{
-      padding: `${padding}px`
-    }}
   />
 );
 
-Icon.defaultProps = {
-  alignLeft: false,
-  padding: 0
-};
-
 Icon.propTypes = {
-  icon: PropTypes.string.isRequired,
-  padding: PropTypes.number
+  icon: PropTypes.string.isRequired
 };
 
 export default Icon;

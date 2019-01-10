@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
+import IconButton from '../IconButton/IconButton';
 
 const ToggleFullscreen = ({ isFullscreen, title, onToggleFullscreen, alignLeft }) => (
-  <Button
+  <IconButton
     title={isFullscreen ? `${title} verkleinen` : `${title} vergroten`}
+    icon={isFullscreen ? 'minimize' : 'maximize'}
     onClick={onToggleFullscreen}
     alignLeft={alignLeft}
-    padding={0}
-  >
-    <Icon icon={isFullscreen ? 'minimize' : 'maximize'} padding={4} />
-  </Button>
+  />
 );
 
 ToggleFullscreen.defaultProps = {
