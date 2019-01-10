@@ -39,7 +39,7 @@ const getFromCache = (key) => {
 
   if (now >= expiration) {
     sessionStorage.removeItem(key);
-    return false;
+    throw Error('No cache present');
   }
 
   return cache.data;
