@@ -83,7 +83,7 @@ export default paramsRegistry
       .add(routing.datasets.type, `${DATASETS}.${DATA}`, 'page', {
         defaultValue: datasetsDataInitialState.page,
         selector: getPage,
-        decode: (value) => parseInt(value, 0)
+        decode: (value) => (Number.isInteger(value) ? parseFloat(value) : value)
       });
   })
   .addParameter(PARAMETERS.GEO, (routes) => {
