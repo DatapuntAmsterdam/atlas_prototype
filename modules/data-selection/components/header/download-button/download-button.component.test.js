@@ -1,11 +1,13 @@
 import * as dataSelectionConfig
     from '../../../../../src/shared/services/data-selection/data-selection-config';
 import isDefined from '../../../../../src/shared/services/is-defined';
+import { DOWNLOAD_DATA_SELECTION } from '../../../../../src/shared/ducks/data-selection/constants';
 
 describe('The dp-data-selection-download-button component', function () {
     let $compile,
         $q,
         $rootScope,
+        store,
         api;
 
     const config = {
@@ -19,7 +21,8 @@ describe('The dp-data-selection-download-button component', function () {
                     }, {
                         slug: 'filter_b'
                     }
-                ]
+                ],
+                TITLE: 'foo'
             },
             dataset_b: {
                 ENDPOINT: 'datasets/b/',
@@ -42,19 +45,24 @@ describe('The dp-data-selection-download-button component', function () {
             {
                 sharedConfig: {
                     API_ROOT: 'http://www.example.com/'
+                },
+                store: {
+                    dispatch: angular.noop
                 }
             }
         );
 
         dataSelectionConfig.default = config;
 
-        angular.mock.inject(function (_$compile_, _$q_, _$rootScope_, _api_) {
+        angular.mock.inject(function (_$compile_, _$q_, _$rootScope_, _store_, _api_) {
             $compile = _$compile_;
             $q = _$q_;
             $rootScope = _$rootScope_;
+            store = _store_;
             api = _api_;
         });
 
+        spyOn(store, 'dispatch');
         spyOn(api, 'createUrlWithToken').and.callFake($q.resolve); // wrap url in promise
     });
 
@@ -158,5 +166,12 @@ describe('The dp-data-selection-download-button component', function () {
             filter_a: 'äéë'
         });
         expect(component.find('a').attr('href')).toBe('tokenUrl');
+    });
+
+    it('dispatches an action that is tracked by piwik', function () {
+        const component = getComponent('dataset_a', {});
+        component.find('a').click();
+
+        expect(store.dispatch).toHaveBeenCalledWith({ type: DOWNLOAD_DATA_SELECTION, meta: { tracking: 'foo' } });
     });
 });
