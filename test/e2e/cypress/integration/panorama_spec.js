@@ -120,7 +120,7 @@ describe('panorama module', () => {
 
       cy.wait('@getResults');
       cy.location().then((loc) => {
-        newUrl = loc.pathname + loc.search + '&reference=03630000004153%2Cbag%2Copenbareruimte';
+        newUrl = `${loc.pathname + loc.search  }&reference=03630000004153%2Cbag%2Copenbareruimte`;
         expect(newUrl).to.equal(panoUrl);
       });
 

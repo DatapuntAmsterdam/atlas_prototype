@@ -18,6 +18,7 @@ class NonTiledLayer extends TileLayer {
     if (toProps.params !== fromProps.params) {
       this.leafletElement.setParams(toProps.params);
     }
+
     if (toProps.url !== fromProps.url) {
       // eslint-disable-next-line no-underscore-dangle
       this.leafletElement._wmsUrl = toProps.url;

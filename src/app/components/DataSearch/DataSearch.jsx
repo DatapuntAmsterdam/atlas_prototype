@@ -5,6 +5,7 @@ import SearchList from '../SearchList';
 import NoResultsForSearchType from '../Messages/NoResultsForSearchType';
 
 const DataSearch = ({
+  userAuthenticated,
   userScopes,
   searchResults,
   searchQuery,
@@ -15,7 +16,10 @@ const DataSearch = ({
 }) => {
   if (numberOfResults === 0) {
     return (
-      <NoResultsForSearchType />
+      <NoResultsForSearchType
+        message="Tip: maak de zoekcriteria minder specifiek."
+        authMessage={!userAuthenticated}
+      />
     );
   }
   return (
@@ -125,6 +129,7 @@ const DataSearch = ({
 };
 
 DataSearch.propTypes = {
+  userAuthenticated: PropTypes.bool.isRequired,
   userScopes: PropTypes.arrayOf(PropTypes.string).isRequired,
   numberOfResults: PropTypes.number.isRequired,
   category: PropTypes.oneOfType( // eslint-disable-line react/require-default-props

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NoResultsForSearchType should render everything 1`] = `
+exports[`NoResultsForSearchType should render 1`] = `
 <div
   className="c-link__wrapper--inine-block"
 >
@@ -9,9 +9,22 @@ exports[`NoResultsForSearchType should render everything 1`] = `
   >
     Geen resultaten van deze soort
   </div>
+  Tip: this is the message
+</div>
+`;
+
+exports[`NoResultsForSearchType should render with login message 1`] = `
+<div
+  className="c-link__wrapper--inine-block"
+>
+  <div
+    className="u-margin__bottom--1"
+  >
+    Geen resultaten van deze soort
+  </div>
+  Tip: this is the message
   <span>
-    Tip: this is the message
-     Zie: 
+     Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer gegevens te zien, zie 
     <Connect(Link)
       to={
         Object {
