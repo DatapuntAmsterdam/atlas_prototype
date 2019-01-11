@@ -12,15 +12,15 @@ import * as auth from '../../services/auth/auth';
 
 export function* authenticateUser(action) {
   const accessToken = auth.getAccessToken();
-  const reload = action.type === [AUTHENTICATE_USER_RELOAD];
+  const reload = action && action.type === AUTHENTICATE_USER_RELOAD;
 
   if (accessToken) {
     yield put(authenticateUserSuccess(
-      auth.getAccessToken(),
+      accessToken,
       auth.getName(),
       auth.getScopes(),
-      reload)
-    );
+      reload
+    ));
   } else {
     yield put(authenticateFailed());
   }

@@ -1,12 +1,15 @@
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
-// import { composeProviders } from 'redux-saga-test-plan/providers';
 import * as auth from '../../services/auth/auth';
 
-import { AUTHENTICATE_USER_REQUEST, authenticateUserSuccess, authenticateFailed } from '../../ducks/user/user';
+import {
+  AUTHENTICATE_USER_REQUEST,
+  AUTHENTICATE_USER_RELOAD,
+  authenticateUserSuccess,
+  authenticateFailed
+} from '../../ducks/user/user';
 import watchAuthenticationRequest, { authenticateUser, waitForAuthentication } from './user';
 
 jest.mock('../../services/auth/auth');
-
 
 describe('watchAuthenticationRequest', () => {
   const action = { type: AUTHENTICATE_USER_REQUEST };
@@ -15,6 +18,8 @@ describe('watchAuthenticationRequest', () => {
     testSaga(watchAuthenticationRequest)
       .next()
       .takeLatestEffect([AUTHENTICATE_USER_REQUEST], authenticateUser)
+      .next(action)
+      .takeLatestEffect([AUTHENTICATE_USER_RELOAD], authenticateUser)
       .next(action)
       .isDone();
   });
