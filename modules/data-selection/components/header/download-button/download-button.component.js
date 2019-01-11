@@ -1,6 +1,7 @@
 import DATA_SELECTION_CONFIG
     from '../../../../../src/shared/services/data-selection/data-selection-config';
 import isDefined from '../../../../../src/shared/services/is-defined';
+import { downloadDataSelection } from '../../../../../src/shared/ducks/data-selection/actions';
 
 (function () {
     'use strict';
@@ -22,14 +23,16 @@ import isDefined from '../../../../../src/shared/services/is-defined';
         '$window',
         '$scope',
         'api',
-        'sharedConfig'
+        'sharedConfig',
+        'store'
     ];
 
     function DpDataSelectionDownloadButtonController (
         $window,
         $scope,
         api,
-        sharedConfig
+        sharedConfig,
+        store
     ) {
         const vm = this,
             filterParams = [];
@@ -64,6 +67,10 @@ import isDefined from '../../../../../src/shared/services/is-defined';
             }
 
             api.createUrlWithToken(url).then(tokenUrl => vm.downloadUrl = tokenUrl);
+
+            vm.downloadDataSelection = () => store.dispatch(
+                downloadDataSelection(DATA_SELECTION_CONFIG.datasets[vm.dataset].TITLE)
+            );
         }
     }
 })();

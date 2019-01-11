@@ -71,6 +71,11 @@ describe('Data Selection Reducer', () => {
       actionCreators.receiveDataSelectionFailure.name,
       ['isLoading', 'authError', 'errorMessage', 'dataset', 'result', 'markers'],
       [{ error: 'error message' }]
+    ),
+    ...getExpectations(
+      actionCreators.downloadDataSelection.name,
+      [],
+      []
     )
   };
 

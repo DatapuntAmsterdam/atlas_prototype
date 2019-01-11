@@ -1,10 +1,11 @@
 import PAGES from '../../../app/pages';
 import { shouldResetState } from '../../../store/redux-first-router/actions';
 import {
+  initialState,
   FETCH_DATA_SELECTION_FAILURE,
   FETCH_DATA_SELECTION_REQUEST,
   FETCH_DATA_SELECTION_SUCCESS,
-  initialState, ROUTE_DATASET_MAPPER,
+  ROUTE_DATASET_MAPPER,
   SET_DATASET,
   REMOVE_GEOMETRY_FILTER,
   SET_GEOMETRY_FILTER,

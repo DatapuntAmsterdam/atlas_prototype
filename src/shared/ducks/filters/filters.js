@@ -43,12 +43,18 @@ const reducer = (state = initialState, action) => {
 
 export const addFilter = (payload) => ({
   type: ADD_FILTER,
-  payload
+  payload,
+  meta: {
+    tracking: payload
+  }
 });
 
-export const removeFilter = (filterKey) => ({
+export const removeFilter = (payload) => ({
   type: REMOVE_FILTER,
-  payload: filterKey
+  payload,
+  meta: {
+    tracking: payload
+  }
 });
 
 export const emptyFilters = () => ({ type: EMPTY_FILTERS });

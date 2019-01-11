@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Data Selection Reducer should set  state when dispatching downloadDataSelection 1`] = `Object {}`;
+
 exports[`Data Selection Reducer should set dataset state when dispatching setDataset 1`] = `
 Object {
   "dataset": "foobar",
