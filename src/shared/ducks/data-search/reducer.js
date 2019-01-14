@@ -1,8 +1,8 @@
 import {
-  FETCH_MAP_SEARCH_RESULTS_FAILURE,
-  FETCH_MAP_SEARCH_RESULTS_REQUEST,
-  FETCH_MAP_SEARCH_RESULTS_SUCCESS_LIST,
-  FETCH_MAP_SEARCH_RESULTS_SUCCESS_PANEL,
+  FETCH_GEO_SEARCH_RESULTS_FAILURE,
+  FETCH_GEO_SEARCH_RESULTS_REQUEST,
+  FETCH_GEO_SEARCH_RESULTS_SUCCESS_LIST,
+  FETCH_GEO_SEARCH_RESULTS_SUCCESS_PANEL,
   FETCH_QUERY_SEARCH_MORE_RESULTS_SUCCESS,
   FETCH_QUERY_SEARCH_RESULTS_FAILURE,
   FETCH_QUERY_SEARCH_RESULTS_REQUEST,
@@ -10,7 +10,7 @@ import {
   initialState,
   REDUCER_KEY,
   SET_GEO_LOCATION,
-  SET_QUERY_CATEGORY
+  SET_QUERY_CATEGORY, SET_VIEW
 } from './constants';
 import { routing } from '../../../app/routes';
 import { FETCH_DATA_SELECTION_REQUEST } from '../data-selection/constants';
@@ -33,14 +33,9 @@ export default function reducer(state = initialState, action) {
 
     case FETCH_QUERY_SEARCH_RESULTS_REQUEST:
       return {
-        ...initialState,
+        ...enrichedState,
         isLoading: true,
         query: action.payload
-      };
-
-    case 'RESET_QUERY':
-      return {
-        ...initialState
       };
 
     case FETCH_QUERY_SEARCH_RESULTS_SUCCESS: {
@@ -65,14 +60,14 @@ export default function reducer(state = initialState, action) {
       };
     }
 
-    case FETCH_MAP_SEARCH_RESULTS_REQUEST:
+    case FETCH_GEO_SEARCH_RESULTS_REQUEST:
       return {
-        ...initialState,
+        ...enrichedState,
         isLoading: true,
         geoSearch: action.payload
       };
 
-    case FETCH_MAP_SEARCH_RESULTS_SUCCESS_PANEL: {
+    case FETCH_GEO_SEARCH_RESULTS_SUCCESS_PANEL: {
       const { results, numberOfResults } = action.payload;
       return {
         ...enrichedState,
@@ -82,7 +77,7 @@ export default function reducer(state = initialState, action) {
       };
     }
 
-    case FETCH_MAP_SEARCH_RESULTS_SUCCESS_LIST: {
+    case FETCH_GEO_SEARCH_RESULTS_SUCCESS_LIST: {
       const { results, numberOfResults } = action.payload;
       return {
         ...enrichedState,
@@ -93,7 +88,7 @@ export default function reducer(state = initialState, action) {
     }
 
     case FETCH_QUERY_SEARCH_RESULTS_FAILURE:
-    case FETCH_MAP_SEARCH_RESULTS_FAILURE:
+    case FETCH_GEO_SEARCH_RESULTS_FAILURE:
       return {
         ...enrichedState,
         isLoading: false,
@@ -106,6 +101,12 @@ export default function reducer(state = initialState, action) {
         category: action.payload
       };
 
+    case SET_VIEW:
+      return {
+        ...enrichedState,
+        view: action.payload
+      };
+
     case SET_GEO_LOCATION:
       return {
         ...enrichedState,
@@ -114,7 +115,7 @@ export default function reducer(state = initialState, action) {
 
     case FETCH_DATA_SELECTION_REQUEST:
       return {
-        ...initialState
+        ...enrichedState
       };
 
     default:

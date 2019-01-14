@@ -13,3 +13,4 @@ export const getDetailEndpoint = createSelector(getDetail, (detail) => {
 });
 export const getDetailDisplay = createSelector(getDetail, (detail) => detail && detail.display);
 export const isDetailLoading = createSelector(getDetail, (detail) => detail && detail.isLoading);
+export const getView = createSelector(getDetail, (detail) => detail && detail.view);

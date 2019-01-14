@@ -11,6 +11,9 @@ describe('App', () => {
         isEmbedPreview: false,
         isPrintMode: false
       },
+      map: {
+        view: 'home'
+      },
       user: {}
     });
     const component = shallow(

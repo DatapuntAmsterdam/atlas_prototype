@@ -2,11 +2,11 @@
 
 exports[`DataSearchContainer should render 1`] = `
 <DataSearch
-  fetchDetailPage={[Function]}
   numberOfResults={0}
   searchQuery="foo"
   searchResults={Array []}
   setSearchCategory={[Function]}
+  toDetail={[Function]}
   userAuthenticated={false}
   userScopes={Array []}
 />

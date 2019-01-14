@@ -20,7 +20,7 @@ class MapPreviewPanel extends React.Component {
 
   render() {
     const props = this.props;
-    const isLoading = get(props, 'dataSearch.isLoading') || get(props, 'mapDetail.isLoading');
+    const isLoading = get(props, 'dataQuerySearch.isLoading') || get(props, 'mapDetail.isLoading');
     const isDetailLoaded = !isLoading && props.detail && props.mapDetail && props.detailResult;
 
     const openDetailEndpoint = () => props.openDetail(props.detailEndpoint);

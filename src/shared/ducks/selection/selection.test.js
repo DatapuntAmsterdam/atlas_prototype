@@ -44,14 +44,6 @@ describe('selection Reducer', () => {
 
       expect(reducer(state, action)).toEqual(initialState);
     });
-
-    it('should handle the routing.map.type', () => {
-      const action = { type: routing.map.type };
-
-      expect(reducer(state, action)).toEqual({
-        type: SELECTION_TYPE.NONE
-      });
-    });
   });
 
   it('should handle the SET_GEOMETRY_FILTERS', () => {

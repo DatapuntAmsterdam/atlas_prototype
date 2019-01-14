@@ -41,7 +41,6 @@ const reducer = (state = initialState, action) => {
         type: action.payload
       };
 
-    case routing.map.type:
     case CLEAR_SELECTION: {
       return {
         type: SELECTION_TYPE.NONE

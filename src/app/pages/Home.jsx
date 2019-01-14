@@ -7,7 +7,12 @@ import Footer from '../components/Footer/Footer';
 import PreviewVideo from '../components/PreviewVideo/PreviewVideo';
 import HomepageAddressBlock from '../../homepage/components/address-block/HomepageAddressBlock';
 import HomepageBlock from '../../homepage/components/block/HomepageBlock';
-import { toDatasets, toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions';
+import {
+  toDatasets,
+  toMap,
+  toPanoramaAndPreserveQuery
+} from '../../store/redux-first-router/actions';
+import { VIEWS } from '../../map/ducks/map/map';
 
 const HOMEPAGE_CONFIG = {
   PANORAMA: {
@@ -59,7 +64,7 @@ const Home = ({ showFooter }) => (
                   <div className="qa-map-link">
                     <HomepageBlock
                       classes="c-homepage__block--left"
-                      linkAction={{ type: routing.map.type }}
+                      linkAction={toMap({ view: VIEWS.MAP })}
                       title="Data op de kaart"
                       description="Selecteer kaartlagen, vind gegevens op een punt in de kaart,
                         meet of teken een gebied"

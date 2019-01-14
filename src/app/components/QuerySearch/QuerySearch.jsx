@@ -29,7 +29,7 @@ const QuerySearch = ({
           showDatasetsButton={currentPage === PAGES.SEARCH_DATASETS}
         >
           <Tabs
-            currentTab={(currentPage === PAGES.DATA_SEARCH) ? 'Data' : 'Datasets'}
+            currentTab={(currentPage === PAGES.DATA_QUERY_SEARCH) ? 'Data' : 'Datasets'}
           >
             <Tab
               label="Data"
@@ -44,7 +44,7 @@ const QuerySearch = ({
           </Tabs>
         </TabBar>
         <div className="qa-search-results">
-          {(currentPage === PAGES.DATA_SEARCH &&
+          {(currentPage === PAGES.DATA_QUERY_SEARCH &&
             <div>
               <DataSearchQuery />
               {(!!numberOfDataResults && (!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS'))) &&

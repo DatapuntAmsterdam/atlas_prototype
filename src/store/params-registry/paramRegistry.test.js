@@ -16,7 +16,7 @@ describe('ParamsRegistery singleton', () => {
               decode: jest.fn(),
               encode: jest.fn()
             })
-            .add('/foo/bar', 'dataSearch', 'bar');
+            .add('/foo/bar', 'dataQuerySearch', 'bar');
         });
 
       const result = paramsRegistry.result;
@@ -34,7 +34,7 @@ describe('ParamsRegistery singleton', () => {
             '/foo/bar': {
               decode: (val) => val,
               encode: (val) => val,
-              reducerKey: 'dataSearch',
+              reducerKey: 'dataQuerySearch',
               stateKey: 'bar',
               addHistory: true
             }
@@ -86,6 +86,14 @@ describe('ParamsRegistery singleton', () => {
           routes.add(['/bar', '/foo'], 'reducerKey', 'foo', {}, true);
         }).result;
       expect(Object.keys(result.map.routes)).toEqual(['/bar', '/foo']);
+    });
+  });
+
+  describe('static orderQuery', () => {
+    it('should return an object with keys in alphabetical order', () => {
+      const result = JSON.stringify(ParamsRegistery.orderQuery({ h: 3, a: 1, c: 2 }));
+      const expectation = JSON.stringify({ a: 1, c: 2, h: 3 });
+      expect(result).toMatch(expectation);
     });
   });
 

@@ -24,9 +24,12 @@ import Home from './pages/Home';
 import { getUser } from '../shared/ducks/user/user';
 import { getPage } from '../store/redux-first-router/selectors';
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe';
-import SearchPage from './pages/SearchPage';
+import QuerySearchPage from './pages/QuerySearchPage';
 import DatasetPage from './pages/DatasetPage';
 import { DataSearchQuery } from './components/DataSearch';
+import { getMapView } from '../map/ducks/map/map-selectors';
+import { VIEWS } from '../map/ducks/map/map';
+import GeoSearchPage from './pages/GeoSearchPage';
 
 // TodoReactMigration: implement logic
 const App = ({
@@ -38,9 +41,11 @@ const App = ({
   embedPreviewMode,
   printModeLandscape,
   printOrEmbedMode,
+  mapView,
   user
 }) => {
-  const isHomePage = currentPage === PAGES.HOME;
+  const isHomePage = (mapView === VIEWS.HOME && currentPage === PAGES.HOME);
+  const isMapPage = (mapView === VIEWS.MAP && currentPage === PAGES.HOME);
   const isCmsPage = pageIsCmsPage(currentPage);
   let cmsPageData;
   if (isCmsPage) {
@@ -114,22 +119,22 @@ const App = ({
           <EmbedIframeComponent /> :
           <div className="u-grid u-full-height">
             <div className="u-row u-full-height">
-              {currentPage === PAGES.HOME && (
-                <Home showFooter />
-              )}
+              {isHomePage && <Home showFooter />}
 
-              {(currentPage === PAGES.DATA_SEARCH || currentPage === PAGES.SEARCH_DATASETS) &&
-              <SearchPage />
+              {(currentPage === PAGES.DATA_QUERY_SEARCH || currentPage === PAGES.SEARCH_DATASETS) &&
+              <QuerySearchPage />
               }
+
+              {(currentPage === PAGES.DATA_GEO_SEARCH) && <GeoSearchPage /> }
 
               {/* Todo: DP-6391 */}
               {(currentPage === PAGES.DATA_SEARCH_CATEGORY) && (
-              <div className="c-search-results u-grid">
-                <DataSearchQuery />
-              </div>
+                <div className="c-search-results u-grid">
+                  <DataSearchQuery />
+                </div>
               )}
 
-              {currentPage === PAGES.MAP && <MapPage />}
+              {(isMapPage) && <MapPage />}
 
               {currentPage === PAGES.DATA_DETAIL && <DetailPage />}
 
@@ -170,6 +175,7 @@ App.defaultProps = {
 
 App.propTypes = {
   isFullHeight: PropTypes.bool,
+  mapView: PropTypes.string.isRequired,
   currentPage: PropTypes.string.isRequired,
   visibilityError: PropTypes.bool, // vm.visibility.error
   embedMode: PropTypes.bool.isRequired,
@@ -182,6 +188,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentPage: getPage(state),
+  mapView: getMapView(state),
   embedMode: isEmbedded(state),
   printMode: isPrintMode(state),
   printModeLandscape: isPrintModeLandscape(state),

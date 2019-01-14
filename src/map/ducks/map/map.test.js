@@ -26,6 +26,7 @@ describe('Map Reducer', () => {
     shapeDistanceTxt: '',
     viewCenter: [52.3731081, 4.8932945],
     zoom: 11,
+    view: 'home',
     mapPanelActive: true
   };
   it('should return the initial state', () => {

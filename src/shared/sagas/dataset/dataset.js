@@ -85,7 +85,7 @@ export default function* watchFetchDatasets() {
     [ADD_FILTER, REMOVE_FILTER, EMPTY_FILTERS, FETCH_API_SPECIFICATION_SUCCESS, SET_PAGE,
       routing.datasets.type,
       routing.datasetsDetail.type,
-      routing.dataSearch.type,
+      routing.dataQuerySearch.type,
       routing.searchDatasets.type
     ],
     fireRequest

@@ -9,7 +9,8 @@ import {
   getDetailGeometry,
   getDetailView
 } from '../../shared/ducks/detail/selectors';
-import { getPageActionEndpoint as endpointActionCreator } from '../../store/redux-first-router/actions';
+import { setView as setViewAction } from '../../shared/ducks/detail/actions';
+import { toDetailFromEndpoint as endpointActionCreator } from '../../store/redux-first-router/actions';
 import SplitScreen from '../components/SplitScreen/SplitScreen';
 import { DETAIL_VIEW } from '../../shared/ducks/detail/constants';
 import { getSelectionType } from '../../shared/ducks/selection/selection';
@@ -18,16 +19,14 @@ import { getSelectionType } from '../../shared/ducks/selection/selection';
 const DetailPage = ({
   view: routeView,
   hasGeometry,
-  endpoint,
   hasSelection,
-  getPageActionEndpoint
+  setView
 }) => {
   let view = routeView;
   if (routeView === DETAIL_VIEW.MAP_DETAIL) {
     // Hide map if no geometry is available
     view = hasGeometry ? DETAIL_VIEW.MAP_DETAIL : DETAIL_VIEW.DETAIL;
   }
-  const toMap = () => getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP);
 
   switch (view) {
     case DETAIL_VIEW.DETAIL:
@@ -40,7 +39,7 @@ const DetailPage = ({
       return (
         <SplitScreen
           leftComponent={(
-            <MapContainer isFullscreen={false} toggleFullscreen={toMap} />
+            <MapContainer isFullscreen={false} toggleFullscreen={() => setView(DETAIL_VIEW.MAP)} />
           )}
           rightComponent={(
             <DetailContainer />
@@ -59,15 +58,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getPageActionEndpoint: endpointActionCreator
+  getPageActionEndpoint: endpointActionCreator,
+  setView: setViewAction
 }, dispatch);
 
 DetailPage.propTypes = {
   hasGeometry: PropTypes.bool.isRequired,
   view: PropTypes.oneOf(Object.values(DETAIL_VIEW)).isRequired,
-  endpoint: PropTypes.string.isRequired,
   hasSelection: PropTypes.bool.isRequired,
-  getPageActionEndpoint: PropTypes.func.isRequired
+  setView: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPage);

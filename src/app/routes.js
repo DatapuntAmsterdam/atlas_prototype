@@ -9,12 +9,6 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.HOME}`,
     page: PAGES.HOME
   },
-  map: {
-    title: 'Grote kaart',
-    path: '/kaart',
-    type: `${ROUTER_NAMESPACE}/${PAGES.MAP}`,
-    page: PAGES.MAP
-  },
   datasets: {
     title: 'Datasets',
     path: '/datasets',
@@ -50,11 +44,17 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.DATASETS_DETAIL}`,
     page: PAGES.DATASETS_DETAIL
   },
-  dataSearch: {
+  dataQuerySearch: {
     title: 'Data zoeken',
     path: '/data/zoek',
-    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH}`,
-    page: PAGES.DATA_SEARCH
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_QUERY_SEARCH}`,
+    page: PAGES.DATA_QUERY_SEARCH
+  },
+  dataGeoSearch: {
+    title: 'Data zoeken',
+    path: '/data/geozoek',
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_GEO_SEARCH}`,
+    page: PAGES.DATA_GEO_SEARCH
   },
   dataSearchCategory: {
     title: 'Data zoeken',

@@ -5,7 +5,7 @@ import HeaderSearchWrapper from './HeaderSearchWrapper';
 
 describe('HeaderSearchWrapper', () => {
   const initialState = {
-    dataSearch: {
+    dataQuerySearch: {
       query: 'dam'
     },
     autoSuggest: {

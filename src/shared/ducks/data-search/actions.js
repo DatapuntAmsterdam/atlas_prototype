@@ -1,36 +1,36 @@
 import {
-  FETCH_MAP_SEARCH_RESULTS_FAILURE,
-  FETCH_MAP_SEARCH_RESULTS_REQUEST,
-  FETCH_MAP_SEARCH_RESULTS_SUCCESS_LIST,
-  FETCH_MAP_SEARCH_RESULTS_SUCCESS_PANEL,
+  FETCH_GEO_SEARCH_RESULTS_FAILURE,
+  FETCH_GEO_SEARCH_RESULTS_REQUEST,
+  FETCH_GEO_SEARCH_RESULTS_SUCCESS_LIST,
+  FETCH_GEO_SEARCH_RESULTS_SUCCESS_PANEL,
   FETCH_QUERY_SEARCH_MORE_RESULTS_REQUEST,
   FETCH_QUERY_SEARCH_MORE_RESULTS_SUCCESS,
   FETCH_QUERY_SEARCH_RESULTS_REQUEST,
   FETCH_QUERY_SEARCH_RESULTS_SUCCESS,
   SET_GEO_LOCATION,
-  SET_QUERY_CATEGORY
+  SET_VIEW
 } from './constants';
 
 // Action creators
 export const fetchMapSearchResultsRequest = (payload, isMap) => ({
-  type: FETCH_MAP_SEARCH_RESULTS_REQUEST,
+  type: FETCH_GEO_SEARCH_RESULTS_REQUEST,
   payload,
   meta: {
     isMap
   }
 });
 export const fetchMapSearchResultsSuccessPanel = (results, numberOfResults) => ({
-  type: FETCH_MAP_SEARCH_RESULTS_SUCCESS_PANEL,
+  type: FETCH_GEO_SEARCH_RESULTS_SUCCESS_PANEL,
   payload: { results, numberOfResults }
 });
 
 export const fetchMapSearchResultsSuccessList = (results, numberOfResults) => ({
-  type: FETCH_MAP_SEARCH_RESULTS_SUCCESS_LIST,
+  type: FETCH_GEO_SEARCH_RESULTS_SUCCESS_LIST,
   payload: { results, numberOfResults }
 });
 
 export const fetchMapSearchResultsFailure = (payload) => ({
-  type: FETCH_MAP_SEARCH_RESULTS_FAILURE,
+  type: FETCH_GEO_SEARCH_RESULTS_FAILURE,
   payload
 });
 
@@ -62,8 +62,8 @@ export const fetchMoreResultsSuccess = (payload) => ({
   payload
 });
 
-export const setCategory = (payload) => ({
-  type: SET_QUERY_CATEGORY,
+export const setView = (payload) => ({
+  type: SET_VIEW,
   payload
 });
 

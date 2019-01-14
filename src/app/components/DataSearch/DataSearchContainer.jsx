@@ -1,10 +1,16 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getUserScopes, userIsAuthenticated } from '../../../shared/ducks/user/user';
-import { getNumberOfResults, getSearchCategory, getSearchQuery } from '../../../shared/ducks/data-search/selectors';
+import {
+  getNumberOfResults,
+  getSearchCategory,
+  getSearchQuery
+} from '../../../shared/ducks/data-search/selectors';
 import DataSearch from './DataSearch';
-import { toDataSearchCategory } from '../../../store/redux-first-router/actions';
-import { fetchDetail } from '../../../shared/ducks/detail/actions';
+import {
+  toDataSearchCategory,
+  toDetailFromEndpoint
+} from '../../../store/redux-first-router/actions';
 
 const mapStateToProps = (state) => ({
   userAuthenticated: userIsAuthenticated(state),
@@ -16,7 +22,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   setSearchCategory: toDataSearchCategory,
-  fetchDetailPage: fetchDetail
+  toDetail: toDetailFromEndpoint
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataSearch);

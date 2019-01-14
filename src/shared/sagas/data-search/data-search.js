@@ -12,16 +12,19 @@ import {
 } from '../../ducks/data-search/actions';
 import { routing } from '../../../app/routes';
 import {
-  FETCH_MAP_SEARCH_RESULTS_REQUEST,
+  FETCH_GEO_SEARCH_RESULTS_REQUEST,
   FETCH_QUERY_SEARCH_MORE_RESULTS_REQUEST,
   SET_GEO_LOCATION,
-  SET_QUERY_CATEGORY
+  SET_QUERY_CATEGORY,
+  SET_VIEW,
+  VIEWS
 } from '../../ducks/data-search/constants';
 import {
   getDataSearchLocation,
   getSearchCategory,
   getSearchQuery,
-  getSearchQueryResults
+  getSearchQueryResults,
+  getView
 } from '../../ducks/data-search/selectors';
 import {
   getNumberOfResults as getNrOfSearchResults,
@@ -29,8 +32,7 @@ import {
   replaceBuurtcombinatie,
   search as vanillaSearch
 } from '../../services/search/search';
-import { toDataSearchLocation } from '../../../store/redux-first-router/actions';
-import { isDataSearch, isMapActive, isMapPage } from '../../../store/redux-first-router/selectors';
+import { isMapPage } from '../../../store/redux-first-router/selectors';
 import { getMapZoom } from '../../../map/ducks/map/map-selectors';
 import ActiveOverlaysClass from '../../services/active-overlays/active-overlays';
 import { waitForAuthentication } from '../user/user';
@@ -39,29 +41,20 @@ import { SELECTION_TYPE, setSelection } from '../../ducks/selection/selection';
 // Todo: DP-6390
 export function* fetchMapSearchResults() {
   const zoom = yield select(getMapZoom);
-  const isMap = yield select(isMapPage);
-  const mapActive = yield select(isMapActive);
-  const isDataSearchPage = yield select(isDataSearch);
+  const view = yield select(getView);
   const location = yield select(getDataSearchLocation);
   try {
     yield put(setSelection(SELECTION_TYPE.POINT));
     yield call(waitForAuthentication);
     const user = yield select(getUser);
 
-    if (!isDataSearchPage) { // User is not on a search page so go to data-search page
-      if (mapActive) {
-        const mapSearchResults = yield call(search, location, user);
-        yield put(fetchMapSearchResultsSuccessPanel(mapSearchResults));
-      } else {
-        yield put(toDataSearchLocation(location));
-      }
-    } else if (isMap) { // if user is on the map page, fetch request for map-panel
-      const mapSearchResults = yield call(search, location, user);
-      yield put(fetchMapSearchResultsSuccessPanel(mapSearchResults));
-    } else { // user is on data-search page
+    if (view === VIEWS.LIST) {
       const geoSearchResults = yield call(geosearch, location, user);
       const results = replaceBuurtcombinatie(geoSearchResults);
       yield put(fetchMapSearchResultsSuccessList(results, getNrOfSearchResults(geoSearchResults)));
+    } else {
+      const mapSearchResults = yield call(search, location, user);
+      yield put(fetchMapSearchResultsSuccessPanel(mapSearchResults));
     }
   } catch (error) {
     const payload = ActiveOverlaysClass.getOverlaysWarning(zoom);
@@ -98,17 +91,16 @@ function* fetchQuerySearchResults() {
   }
 }
 
-export function* fireSearchResultsRequest() {
+export function* fireGeoSearchResultsRequest() {
   const location = yield select(getDataSearchLocation);
+  const isMap = yield select(isMapPage);
+  yield put(fetchMapSearchResultsRequest(location, isMap));
+}
+
+export function* fireQuerySearchResultsRequest() {
   const query = yield select(getSearchQuery);
   const category = yield select(getSearchCategory);
-  const isMap = yield select(isMapPage);
-
-  if (location) {
-    yield put(fetchMapSearchResultsRequest(location, isMap));
-  } else if (query) {
-    yield call(fetchQuerySearchResults, query, category);
-  }
+  yield call(fetchQuerySearchResults, query, category);
 }
 
 function* loadMore() {
@@ -119,7 +111,7 @@ function* loadMore() {
 
 export default function* watchDataSearch() {
   yield takeLatest([
-    FETCH_MAP_SEARCH_RESULTS_REQUEST
+    FETCH_GEO_SEARCH_RESULTS_REQUEST
   ], fetchMapSearchResults);
 
   yield takeLatest([
@@ -128,10 +120,14 @@ export default function* watchDataSearch() {
 
   yield takeLatest([
     SET_GEO_LOCATION,
+    SET_VIEW,
+    routing.dataGeoSearch.type
+  ], fireGeoSearchResultsRequest);
+
+  yield takeLatest([
     SET_QUERY_CATEGORY,
-    routing.map.type,
-    routing.dataSearch.type,
+    routing.dataQuerySearch.type,
     routing.searchDatasets.type,
     routing.dataSearchCategory.type
-  ], fireSearchResultsRequest);
+  ], fireQuerySearchResultsRequest);
 }

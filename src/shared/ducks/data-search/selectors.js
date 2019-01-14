@@ -10,6 +10,7 @@ export const getDataSearchLocation = getStateOfKey('geoSearch');
 export const isSearchLoading = getStateOfKey('isLoading');
 export const getSearchQuery = getStateOfKey('query');
 export const getSearchCategory = getStateOfKey('category');
+export const getView = getStateOfKey('view');
 
 // Results
 export const getSearchQueryResults = getStateOfKey('resultsQuery');

@@ -38,7 +38,7 @@ describe('HeaderSearchContainer', () => {
   });
 
   const initialState = {
-    dataSearch: {
+    dataQuerySearch: {
       query: 'dam'
     },
     autoSuggest: {

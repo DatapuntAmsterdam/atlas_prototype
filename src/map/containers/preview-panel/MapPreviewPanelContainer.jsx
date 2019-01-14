@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  getPageActionEndpoint,
-  toDataSearchLocation,
+  toDetailFromEndpoint,
+  toGeoSearch,
   toMap,
   toPanoramaAndPreserveQuery
 } from '../../../store/redux-first-router/actions';
@@ -27,7 +27,7 @@ import { DETAIL_VIEW } from '../../../shared/ducks/detail/constants';
 const mapStateToProps = (state) => ({
   panoPreview: getPanoramaPreview(state),
   searchResults: getMapPanelResults(state),
-  dataSearch: getDataSearch(state),
+  dataQuerySearch: getDataSearch(state),
   detailLocation: getDetailLocation(state),
   searchLocation: getDataSearchLocation(state),
   searchLocationId: getLocationId(state),
@@ -47,11 +47,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
     closePanel: toMap,
-    onSearchMaximize: toDataSearchLocation,
+    onSearchMaximize: toGeoSearch,
     openPano: toPanoramaAndPreserveQuery
   }, dispatch),
-  openPreviewDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP)),
-  openDetail: (endpoint) => dispatch(getPageActionEndpoint(endpoint, DETAIL_VIEW.MAP_DETAIL))
+  openPreviewDetail: (endpoint) => dispatch(toDetailFromEndpoint(endpoint, DETAIL_VIEW.MAP)),
+  openDetail: (endpoint) => dispatch(toDetailFromEndpoint(endpoint, DETAIL_VIEW.MAP_DETAIL))
 });
 
 /* eslint-enable react/no-unused-prop-types */

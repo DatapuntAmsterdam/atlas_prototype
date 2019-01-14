@@ -71,7 +71,7 @@ describe('The dp-panorama-thumbnail component', function () {
         expect(scope.vm.linkTo).toEqual({
             type: routing.panorama.type,
             payload: { id: 42 },
-            meta: { preserve: true, additionalParams: { heading: 99 } }
+            meta: { preserve: true, additionalParams: { heading: 99, view: 'beeld-kaart' } }
         });
         expect(scope.vm.isLoading).toBe(false);
     });
@@ -94,7 +94,7 @@ describe('The dp-panorama-thumbnail component', function () {
         expect(scope.vm.linkTo).toEqual({
             type: routing.panorama.type,
             payload: { id: 43 },
-            meta: { preserve: true, additionalParams: { heading: 99 } }
+            meta: { preserve: true, additionalParams: { heading: 99, view: 'beeld-kaart' } }
         });
     });
 

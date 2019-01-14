@@ -23,7 +23,7 @@ const initialState = {
 
 export default function AutoSuggestReducer(state = initialState, action) {
   // cleanup the state for this reducer when not on the search routes
-  if (shouldResetState(action, [PAGES.DATA_SEARCH, PAGES.SEARCH_DATASETS])) {
+  if (shouldResetState(action, [PAGES.DATA_QUERY_SEARCH, PAGES.SEARCH_DATASETS])) {
     return initialState;
   }
 
@@ -64,7 +64,7 @@ export default function AutoSuggestReducer(state = initialState, action) {
       };
 
     // Todo: DP-6480 Refactor this: conflict with other queryParam in data-search reducer
-    case routing.dataSearch.type:
+    case routing.dataQuerySearch.type:
     case routing.searchDatasets.type:
       return {
         ...enrichedState,

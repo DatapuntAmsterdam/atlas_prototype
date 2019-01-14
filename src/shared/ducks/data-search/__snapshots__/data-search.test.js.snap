@@ -2,18 +2,11 @@
 
 exports[`mapSearch reducer handles search results request 1`] = `
 Object {
-  "category": null,
-  "error": null,
   "geoSearch": Object {
     "latitude": 52.3637006,
     "longitude": 4.7943446,
   },
   "isLoading": true,
-  "numberOfResults": 0,
-  "query": "",
-  "resultsMap": Array [],
-  "resultsMapPanel": Array [],
-  "resultsQuery": Array [],
 }
 `;
 
@@ -39,5 +32,6 @@ Object {
   "resultsMap": Array [],
   "resultsMapPanel": Array [],
   "resultsQuery": Array [],
+  "view": "kaart",
 }
 `;
