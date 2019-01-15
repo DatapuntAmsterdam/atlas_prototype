@@ -9,11 +9,11 @@ describe('getIframeUrl', () => {
     expect(getIframeUrl()).toEqual('https://www.someurl.com/?embed=true');
   });
 
-  it('should return the current url and remove embedPreview=true', () => {
-    jsdom.reconfigure({ url: 'https://www.someurl.com/?foo=bar&embedPreview=true' });
+  it('should return the current url and remove embed-preview=true', () => {
+    jsdom.reconfigure({ url: 'https://www.someurl.com/?foo=bar&embed-preview=true' });
     expect(getIframeUrl()).toEqual('https://www.someurl.com/?foo=bar&embed=true');
 
-    jsdom.reconfigure({ url: 'https://www.someurl.com/?embedPreview=true' });
+    jsdom.reconfigure({ url: 'https://www.someurl.com/?embed-preview=true' });
     expect(getIframeUrl()).toEqual('https://www.someurl.com/?embed=true');
   });
 });

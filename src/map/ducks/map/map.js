@@ -190,15 +190,6 @@ export default function MapReducer(state = initialState, action) {
         }))
       };
 
-    case routing.home.type:
-      return {
-        ...enrichedState,
-        overlays: initialState.overlays,
-        drawingMode: initialState.drawingMode,
-        shapeDistanceTxt: initialState.shapeDistanceTxt,
-        shapeAreaTxt: initialState.shapeAreaTxt
-      };
-
     case MAP_CLEAR:
       return {
         ...enrichedState,

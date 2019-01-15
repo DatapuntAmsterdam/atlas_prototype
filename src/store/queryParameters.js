@@ -103,17 +103,17 @@ export default paramsRegistry
       selector: getGeometryFilters,
       encode: ({ markers, description }) => {
         if (markers && description) {
-          return btoa(JSON.stringify({
+          return JSON.stringify({
             markers: markers.map((latLong) => `${latLong[0]}:${latLong[1]}`).join('|'),
             description
-          }));
+          });
         }
         return undefined;
       },
       decode: (geo) => {
         let geometryFilter = dataSelectionInitialState.geometryFilter;
         if (geo) {
-          const { markers, description } = JSON.parse(atob(geo));
+          const { markers, description } = JSON.parse(geo);
           geometryFilter = {
             markers: markers && markers.length
               ? markers.split('|').map((latLng) => latLng.split(':').map((str) => parseFloat(str)))
@@ -216,14 +216,14 @@ export default paramsRegistry
       defaultValue: filterInitialState.filters,
       decode: (val) => {
         try {
-          return Object.assign({}, JSON.parse(atob(val)));
+          return Object.assign({}, JSON.parse(val));
         } catch (e) {
           return {};
         }
       },
       selector: getFiltersWithoutShape,
       encode: (selectorResult = {}) => (
-        Object.keys(selectorResult).length ? btoa(JSON.stringify(selectorResult)) : undefined
+        Object.keys(selectorResult).length ? JSON.stringify(selectorResult) : undefined
       )
     });
   })
@@ -269,21 +269,15 @@ export default paramsRegistry
       routing.dataDetail.type
     ], MAP, 'overlays', {
       defaultValue: mapInitialState.overlays,
-      decode: (val) => {
-        try {
-          return val ? atob(val).split('|').map((obj) => {
-            const layerInfo = obj.split(':');
-            return { id: layerInfo[0], isVisible: !!parseInt(layerInfo[1], 0) };
-          }) : mapInitialState.overlays;
-        } catch (e) {
-          return mapInitialState.overlays;
-        }
-      },
+      decode: (val) => (
+        val ? val.split('|').map((obj) => {
+          const layerInfo = obj.split(':');
+          return { id: layerInfo[0], isVisible: !!parseInt(layerInfo[1], 0) };
+        }) : mapInitialState.overlays
+      ),
       selector: getMapOverlays,
       encode: (selectorResult) => (
-        btoa(
-          selectorResult.map((overlay) => `${overlay.id}:${overlay.isVisible ? 1 : 0}`).join('|')
-        )
+        selectorResult.map((overlay) => `${overlay.id}:${overlay.isVisible ? 1 : 0}`).join('|')
       )
     });
   })

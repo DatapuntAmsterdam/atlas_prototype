@@ -4,6 +4,7 @@ import PARAMETERS from '../parameters';
 import { VIEWS as DATA_SEARCH_VIEW } from '../../shared/ducks/data-search/constants';
 import PANORAMA_VIEW from '../../panorama/ducks/panorama-view';
 import { VIEWS } from '../../map/ducks/map/map';
+import { DETAIL_VIEW } from '../../shared/ducks/detail/constants';
 
 export const preserveQuery = (action, additionalParams = null) => ({
   ...action,
@@ -136,7 +137,7 @@ export const toDatasetsWithFilter = (additionalParams = {}, preserve = false) =>
 });
 export const toDataSuggestion = (payload) => {
   const { type, subtype, id } = getDetailPageData(payload.endpoint);
-  const action = {
+  return {
     type: routing.dataDetail.type,
     payload: {
       type,
@@ -144,6 +145,9 @@ export const toDataSuggestion = (payload) => {
       id: `id${id}`
     },
     meta: {
+      additionalParams: {
+        [PARAMETERS.VIEW]: DETAIL_VIEW.MAP_DETAIL
+      },
       tracking: {
         category: payload.category,
         event: 'auto-suggest',
@@ -151,7 +155,6 @@ export const toDataSuggestion = (payload) => {
       }
     }
   };
-  return action;
 };
 export const toDatasetSuggestion = (payload) => ({
   type: routing.datasetsDetail.type,

@@ -1,4 +1,5 @@
 import queryString from 'querystring';
+import PARAMETERS from '../../../store/parameters';
 
 const getUrlQuery = () => (queryString.decode(window.location.search.slice(1)));
 
@@ -9,12 +10,12 @@ const buildUrl = (query) => {
 
 export const getIframeUrl = () => {
   const query = { ...getUrlQuery(), embed: true };
-  delete query.embedPreview;
+  delete query[PARAMETERS.EMBED_PREVIEW];
   return buildUrl(query);
 };
 
 export const getEmbedButtonLink = () => {
   const query = { ...getUrlQuery() };
-  delete query.embed;
+  delete query[PARAMETERS.EMBED];
   return buildUrl(query);
 };
