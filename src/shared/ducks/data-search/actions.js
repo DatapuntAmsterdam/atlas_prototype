@@ -7,7 +7,6 @@ import {
   FETCH_QUERY_SEARCH_MORE_RESULTS_SUCCESS,
   FETCH_QUERY_SEARCH_RESULTS_REQUEST,
   FETCH_QUERY_SEARCH_RESULTS_SUCCESS,
-  SET_GEO_LOCATION,
   SET_VIEW
 } from './constants';
 
@@ -64,10 +63,5 @@ export const fetchMoreResultsSuccess = (payload) => ({
 
 export const setView = (payload) => ({
   type: SET_VIEW,
-  payload
-});
-
-export const setGeoLocation = (payload) => ({
-  type: SET_GEO_LOCATION,
   payload
 });

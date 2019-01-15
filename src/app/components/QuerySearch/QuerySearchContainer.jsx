@@ -13,6 +13,7 @@ import { toDataSearchQuery, toDatasetSearch } from '../../../store/redux-first-r
 import { getPage } from '../../../store/redux-first-router/selectors';
 import QuerySearch from './QuerySearch';
 import { getUser } from '../../../shared/ducks/user/user';
+import PARAMETERS from '../../../store/parameters';
 
 const mapStateToProps = (state) => ({
   isLoading: isDatasetsLoading(state) || isSearchLoading(state),
@@ -25,8 +26,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toDataPage: (...args) => dispatch(toDataSearchQuery(...args)),
-  toDatasetPage: (...args) => dispatch(toDatasetSearch(...args))
+  toDataPage: (query, filters) => dispatch(toDataSearchQuery({
+    [PARAMETERS.QUERY]: query,
+    [PARAMETERS.FILTERS]: filters
+  }, true)),
+  toDatasetPage: (query, filters) => dispatch(toDatasetSearch({
+    [PARAMETERS.QUERY]: query,
+    [PARAMETERS.FILTERS]: filters
+  }, true))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuerySearch);

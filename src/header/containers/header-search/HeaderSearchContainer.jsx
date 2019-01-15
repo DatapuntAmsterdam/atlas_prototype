@@ -23,6 +23,7 @@ import {
   toDataSuggestion
 } from '../../../store/redux-first-router/actions';
 import { isDatasetPage, isMapPage } from '../../../store/redux-first-router/selectors';
+import PARAMETERS from '../../../store/parameters';
 
 
 const mapStateToProps = (state) => ({
@@ -44,7 +45,9 @@ const mapDispatchToProps = (dispatch) => ({
     onSuggestionActivate: setActiveSuggestionAction
   }, dispatch),
   onDatasetSearch: (query) => dispatch(toDatasetSearch(query)),
-  onDataSearch: (query) => dispatch(toDataSearchQuery(query)),
+  onDataSearch: (query) => dispatch(toDataSearchQuery({
+    [PARAMETERS.QUERY]: query
+  })),
   openDataSuggestion: (suggestion) => dispatch(toDataSuggestion(suggestion)),
   openDatasetSuggestion: (suggestion) => dispatch(toDatasetSuggestion(suggestion))
 });

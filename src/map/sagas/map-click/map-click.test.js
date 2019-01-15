@@ -1,7 +1,7 @@
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import { composeProviders } from 'redux-saga-test-plan/providers';
 
-import watchMapClick, { switchClickAction } from './map-click';
+import watchMapClick, { goToGeoSearch, switchClickAction } from './map-click';
 import {
   getActiveMapLayers,
   getLayers,
@@ -13,7 +13,6 @@ import { getMapZoom } from '../../ducks/map/map-selectors';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
 import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection';
 import { getImageDataByLocation } from '../../../panorama/services/panorama-api/panorama-api';
-import { toGeoSearch } from '../../../store/redux-first-router/actions';
 import { getPage } from '../../../store/redux-first-router/selectors';
 import { getView as getDataSearchView, getView } from '../../../shared/ducks/data-search/selectors';
 import { getView as getDetailView } from '../../../shared/ducks/detail/selectors';
@@ -174,7 +173,7 @@ describe('switchClickAction', () => {
           provideSelectionTypePoint
         )
       })
-      .put(toGeoSearch(payload.location, 'kaart'))
+      .call(goToGeoSearch, payload.location)
       .run();
   });
 

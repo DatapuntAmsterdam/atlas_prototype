@@ -218,7 +218,7 @@ export default paramsRegistry
         try {
           return Object.assign({}, JSON.parse(val));
         } catch (e) {
-          return {};
+          return filterInitialState.filters;
         }
       },
       selector: getFiltersWithoutShape,

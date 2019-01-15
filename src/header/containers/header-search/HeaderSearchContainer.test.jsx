@@ -18,6 +18,7 @@ import {
   toDataSuggestion
 } from '../../../store/redux-first-router/actions';
 import { FETCH_DETAIL } from '../../../shared/ducks/detail/constants';
+import PARAMETERS from '../../../store/parameters';
 
 
 jest.mock('../../ducks/auto-suggest/auto-suggest');
@@ -231,7 +232,9 @@ describe('HeaderSearchContainer', () => {
       headerSearch.instance().onFormSubmit();
 
       expect(store.dispatch).toHaveBeenCalledWith(emptyFilters());
-      expect(store.dispatch).toHaveBeenCalledWith(toDataSearchQuery(query));
+      expect(store.dispatch).toHaveBeenCalledWith(toDataSearchQuery({
+        [PARAMETERS.QUERY]: query
+      }));
     });
 
     it('does dataset search', () => {
