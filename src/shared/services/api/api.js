@@ -2,6 +2,7 @@ import getState from '../redux/get-state';
 import SHARED_CONFIG from '../shared-config/shared-config';
 import { encodeQueryParams } from '../query-string-parser/query-string-parser';
 import { logout } from '../auth/auth';
+// import { addToCache, getFromCache } from '../cache/cache';
 
 export const getAccessToken = () => getState().user.accessToken;
 
@@ -18,7 +19,25 @@ const handleErrors = (response, reloadOnUnauthorized) => {
   return response;
 };
 
+
 const handleCache = (response, key) => {
+  if (sessionStorage.length > SHARED_CONFIG.CACHE_THRESHOLD) {
+    Object.entries(sessionStorage).forEach(([itemKey]) => {
+      if (itemKey.startsWith('http')) {
+        const cache = JSON.parse(sessionStorage.getItem(itemKey));
+
+        const now = new Date().getTime();
+        let expiration = new Date(cache.timestamp);
+        expiration = expiration.setMinutes(expiration.getMinutes()
+          + SHARED_CONFIG.CACHE_EXPIRATION);
+
+        if (now >= expiration) {
+          sessionStorage.removeItem(itemKey);
+        }
+      }
+    });
+  }
+
   sessionStorage.setItem(
     key,
     JSON.stringify({

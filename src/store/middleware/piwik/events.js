@@ -205,12 +205,12 @@ const events = {
     (year > 0) ? `panorama-set-${year}${missionType}` : 'panorama-set-recent',
     null
   ],
-  [FETCH_PANORAMA_HOTSPOT_REQUEST]: (state) => isPanoPage(state) && ([
+  [FETCH_PANORAMA_HOTSPOT_REQUEST]: () => [
     'trackEvent',
     'panorama-navigation',
     'panorama-hotspot-klik',
     null
-  ]),
+  ],
   [SET_PANORAMA_LOCATION]: () => [
     'trackevent',
     'panorama-navigatie',

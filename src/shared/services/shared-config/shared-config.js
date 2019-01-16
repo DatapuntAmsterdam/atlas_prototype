@@ -6,7 +6,8 @@ const baseConfig = {
   PANORAMA_THUMBNAIL_URL: 'panorama/thumbnail/',
   AUTH_HEADER_PREFIX: 'Bearer ',
   // Allows sanity checking input of root keys based on white listing
-  ROOT_KEYS: ['API_ROOT']
+  ROOT_KEYS: ['API_ROOT'],
+  CACHE_THRESHOLD: 200
 };
 
 const environmentConfig = {

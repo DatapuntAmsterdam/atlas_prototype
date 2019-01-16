@@ -1,4 +1,4 @@
-import { generateParams, getWithToken } from './api';
+import { generateParams, createUrlWithToken, getWithToken } from './api';
 
 describe('Api service', () => {
   describe('generateParams', () => {
@@ -35,7 +35,7 @@ describe('Api service', () => {
       expect(result).toEqual(response);
     });
 
-    it('should return the response from fetch', async () => {
+    it('should not return the response from fetch when service is unavailable', async () => {
       fetch.mockResponseOnce(JSON.stringify(response), { status: 503 });
 
       expect(getWithToken(
@@ -66,6 +66,20 @@ describe('Api service', () => {
       expect(fetch.mock.calls[0][1].headers).toEqual({
         Authorization: 'Bearer token12345'
       });
+    });
+  });
+
+  describe('createUrlWithToken', () => {
+    it('should create an url with authorization token', () => {
+      const result = createUrlWithToken('http://localhost?foo=data', 'token1234');
+
+      expect(result).toEqual('http://localhost?foo=data&access_token=token1234');
+    });
+
+    it('should create an url without authorization token', () => {
+      const result = createUrlWithToken('http://localhost?foo=data', '');
+
+      expect(result).toEqual('http://localhost?foo=data');
     });
   });
 });
