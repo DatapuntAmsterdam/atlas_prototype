@@ -138,8 +138,7 @@ describe('addresses module', () => {
               cy.get('.map-detail-result__header-subtitle').contains(selectedValue)
               .should('exist').and('be.visible');
               // the show more button should exist and be visible
-              cy.get('.map-search-results__button').should('exist');
-              cy.get('.map-search-results__button').scrollIntoView().should('be.visible');
+              cy.get('.map-search-results__button').should('exist').scrollIntoView().and('be.visible');
             });
           });
       });
