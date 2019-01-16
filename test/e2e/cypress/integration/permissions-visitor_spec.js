@@ -35,7 +35,8 @@ describe('visitor permissions', () => {
   it('2A. Should NOT allow a visitor to view a natural subject', () => {
     cy.visit(urls.natuurlijk);
 
-    cy.get(queries.warningPanel)
+    cy.get(queries.warningPanelAngular)
+      .scrollIntoView()
       .contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
     cy.get(queries.headerTitle).should('not.exist');
     cy.get(queries.natuurlijkPersoon).should('not.exist');
@@ -44,7 +45,7 @@ describe('visitor permissions', () => {
   it('2B. Should NOT allow a visitor to view a non-natural subject', () => {
     cy.visit(urls.nietNatuurlijk);
 
-    cy.get(queries.warningPanel)
+    cy.get(queries.warningPanelAngular)
       .contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
     cy.get(queries.headerTitle).should('not.exist');
     cy.get(queries.nietNatuurlijkPersoon).should('not.exist');
@@ -61,7 +62,7 @@ describe('visitor permissions', () => {
     cy.wait('@getResults');
     cy.wait('@getObjectExpand');
     cy.wait('@getNummeraanduidingen');
-    cy.get(queries.warningPanel)
+    cy.get(queries.warningPanelAngular)
       .contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
     cy.get(queries.headerTitle).contains('A 0001');
     cy.get(queries.headerSubTitle).should(($values) => {
@@ -97,7 +98,7 @@ describe('visitor permissions', () => {
       expect($values).to.contain('Monumenten');
       expect($values).to.not.contain(values.zakelijkeRechten);
     });
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+    cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
   });
 
   it('5. Should show a visitor limited info for "Gemeentelijke beperking"', () => {
@@ -111,7 +112,7 @@ describe('visitor permissions', () => {
     cy.wait('@getResults');
     cy.wait('@getBronDocument');
     cy.wait('@getObject');
-    cy.get(queries.warningPanel)
+    cy.get(queries.warningPanelAngular)
       .contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
     cy.get(queries.headerTitle).contains('142');
     cy.get(queries.keyValueList).contains(values.documentnaam).should('not.exist');
@@ -119,108 +120,119 @@ describe('visitor permissions', () => {
 
   it('6. Should show a visitor a notification for limited map layers', () => {
     cy.visit(urls.map);
+
+    // the map-panel should have the class collapsed by default
+    cy.get('.map-panel').should('have.class', 'map-panel--collapsed');
+    // expand the map-panel
+    cy.get('.map-panel__toggle').click();
+    // the map panel should have the class expanded
+    cy.get('.map-panel').should('have.class', 'map-panel--expanded');
+
     cy.get(queries.mapLayersCategory).should(($values) => {
       expect($values).to.contain(values.economieEnHaven);
       expect($values).to.contain(values.geografie);
       expect($values).to.contain(values.bedrijvenInvloedsgebieden);
     });
     cy.get(queries.legendToggleItem).contains(values.vestigingenHoreca).click();
-    cy.get(queries.legendNotification).contains(values.legendPermissionNotification).should('exist').and('be.visible');
+    cy.get(queries.legendNotification).scrollIntoView()
+      .contains(values.legendPermissionNotification).should('exist').and('be.visible');
   });
 
-  it('7A. Should NOT allow a visitor to view "Vestigingen"', () => {
-    cy.visit(urls.vestigingenTabel);
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-    cy.get(queries.table).should('not.exist');
-  });
+  describe.only('7', () => {
+    it('A. Should NOT allow a visitor to view "Vestigingen"', () => {
+      cy.visit(urls.vestigingenTabel);
+      cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.table).should('not.exist');
+    });
 
-  it('7B. Should show a visitor limited "Pand" information', () => {
-    cy.server();
-    cy.route('/bag/pand/*').as('getResults');
-    cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten');
-    cy.route('/bag/nummeraanduiding/?pand=*').as('getNummeraanduidingen');
+    it('B. Should show a visitor limited "Pand" information', () => {
+      cy.server();
+      cy.route('/bag/pand/*').as('getResults');
+      cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten');
+      cy.route('/bag/nummeraanduiding/?pand=*').as('getNummeraanduidingen');
 
-    cy.visit(urls.pand);
+      cy.visit(urls.pand);
 
-    cy.wait('@getResults');
-    cy.wait('@getMonumenten');
-    cy.wait('@getNummeraanduidingen');
-    cy.get(queries.headerTitle).contains('036310001');
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-    cy.get(queries.listItem).contains(values.pandVestigingName).should('not.exist');
-  });
+      cy.wait('@getResults');
+      cy.wait('@getMonumenten');
+      cy.wait('@getNummeraanduidingen');
+      cy.get(queries.headerTitle).contains('036310001');
+      cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.listItem).contains(values.pandVestigingName).should('not.exist');
+    });
 
-  it('7C. Should show a visitor limited information in a Geo search', () => {
-    cy.server();
-    cy.defineGeoSearchRoutes();
-    cy.route('/bag/pand/*').as('getResults');
-    cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten');
-    cy.route('/bag/nummeraanduiding/?pand=*').as('getNummeraanduidingen');
+    it('C. Should show a visitor limited information in a Geo search', () => {
+      cy.server();
+      cy.defineGeoSearchRoutes();
+      cy.route('/bag/pand/*').as('getResults');
+      cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten');
+      cy.route('/bag/nummeraanduiding/?pand=*').as('getNummeraanduidingen');
 
-    cy.visit(urls.geoSearch);
+      cy.visit(urls.geoSearch);
 
-    cy.waitForGeoSearch();
-    cy.wait('@getResults');
-    cy.wait('@getMonumenten');
-    cy.wait('@getNummeraanduidingen');
-    cy.get('.o-header').contains('393.70, 487385.19');
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-    cy.get(queries.headerSubTitle)
-      .contains(values.vestigingen)
-      .should('not.exist');
-    cy.get('button.toggle-fullscreen').click();
-    cy.get(queries.mapSearchResultsCategoryHeader)
-      .contains(values.vestigingen)
-      .should('not.exist');
-  });
+      cy.waitForGeoSearch();
+      cy.wait('@getResults');
+      cy.wait('@getMonumenten');
+      cy.wait('@getNummeraanduidingen');
+      cy.get('.o-header').contains('393.70, 487385.19');
+      cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.headerSubTitle)
+        .contains(values.vestigingen)
+        .should('not.exist');
+      cy.get('button.toggle-fullscreen').click();
+      cy.get(queries.mapSearchResultsCategoryHeader)
+        .contains(values.vestigingen)
+        .should('not.exist');
+    });
 
-  it('7D. Should show a visitor limited information in a "ligplaats" search', () => {
-    cy.server();
-    cy.route('/bag/ligplaats/*').as('getResults');
-    cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding');
-    cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getMonument');
+    it('D. Should show a visitor limited information in a "ligplaats" search', () => {
+      cy.server();
+      cy.route('/bag/ligplaats/*').as('getResults');
+      cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding');
+      cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getMonument');
 
-    cy.visit(urls.ligplaats);
+      cy.visit(urls.ligplaats);
 
-    cy.wait('@getResults');
-    cy.wait('@getNummeraanduiding');
-    cy.wait('@getMonument');
-    cy.get(queries.headerTitle).contains('erdokska');
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-    cy.get(queries.listItem).contains(values.ligplaatsVestigingName).should('not.exist');
-  });
+      cy.wait('@getResults');
+      cy.wait('@getNummeraanduiding');
+      cy.wait('@getMonument');
+      cy.get(queries.headerTitle).contains('erdokska');
+      cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.listItem).contains(values.ligplaatsVestigingName).should('not.exist');
+    });
 
-  it('7E. Should show a visitor limited information in "standplaats" search', () => {
-    cy.server();
-    cy.route('/bag/standplaats/*').as('getResults');
-    cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding');
-    cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getMonument');
+    it('E. Should show a visitor limited information in "standplaats" search', () => {
+      cy.server();
+      cy.route('/bag/standplaats/*').as('getResults');
+      cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding');
+      cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getMonument');
 
-    cy.visit(urls.standplaats);
+      cy.visit(urls.standplaats);
 
-    cy.wait('@getResults');
-    cy.wait('@getNummeraanduiding');
-    cy.wait('@getMonument');
-    cy.get(queries.headerTitle).contains('Johan Broedeletstraat 20');
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-    cy.get(queries.listItem).contains(values.standplaatsVestigingName).should('not.exist');
-  });
+      cy.wait('@getResults');
+      cy.wait('@getNummeraanduiding');
+      cy.wait('@getMonument');
+      cy.get(queries.headerTitle).contains('Johan Broedeletstraat 20');
+      cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.listItem).contains(values.standplaatsVestigingName).should('not.exist');
+    });
 
-  it('7F. Should NOT allow a visitor to view "vestiging"', () => {
-    cy.visit(urls.vestiging);
-    cy.get(queries.headerTitle).should('not.exist');
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-    cy.get(queries.keyValueList).should('not.exist');
-    cy.get('button.toggle-fullscreen').click();
-    cy.get(queries.infoNotification).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-    cy.get(queries.mapDetailResultHeaderSubTitle).should('not.exist');
-  });
+    it('F. Should NOT allow a visitor to view "vestiging"', () => {
+      cy.visit(urls.vestiging);
+      cy.get(queries.headerTitle).should('not.exist');
+      cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.keyValueList).should('not.exist');
+      cy.get('button.toggle-fullscreen').click();
+      cy.get(queries.infoNotification).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.mapDetailResultHeaderSubTitle).should('not.exist');
+    });
 
-  it('7G. Should NOT allow a visitor to view "maatschappelijke activiteit"', () => {
-    cy.visit(urls.maatschappelijkeActiviteit);
-    cy.get(queries.headerTitle).should('not.exist');
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-    cy.get(queries.keyValueList).should('not.exist');
+    it('G. Should NOT allow a visitor to view "maatschappelijke activiteit"', () => {
+      cy.visit(urls.maatschappelijkeActiviteit);
+      cy.get(queries.headerTitle).should('not.exist');
+      cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.keyValueList).should('not.exist');
+    });
   });
 
   it('8A. Should show a visitor limited information in "monument"', () => {

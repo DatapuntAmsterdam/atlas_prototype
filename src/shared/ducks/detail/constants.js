@@ -8,6 +8,6 @@ export const DETAIL_VIEW = {
   DETAIL: 'detail'
 };
 export const initialState = {
-  view: DETAIL_VIEW.MAP,
+  view: DETAIL_VIEW.MAP_DETAIL,
   isLoading: false
 };

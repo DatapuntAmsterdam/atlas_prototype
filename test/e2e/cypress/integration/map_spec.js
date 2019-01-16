@@ -100,7 +100,19 @@ describe('map module', () => {
       cy.viewport(1000, 660);
 
       cy.visit('/?center=52.3728007%2C4.899258&view=kaart');
+
+      // the map-panel should have the class collapsed by default
+      cy.get('.map-panel').should('have.class', 'map-panel--collapsed');
+      // expand the map-panel
+      cy.get('.map-panel__toggle').click();
+      // the map panel should have the class expanded
+      cy.get('.map-panel').should('have.class', 'map-panel--expanded');
+      // the scroll wrapper should be visible when map panel is expanded
+      cy.get(scrollWrapper).should('exist').and('be.visible');
+
+      // click on a map layer
       cy.get('.map-layers__category').contains('Meetbouten - Zaksnelheid').click();
+      cy.get(scrollWrapper).scrollTo('top');
       cy.get(notification)
         .contains('Zichtbaar bij verder inzoomen')
         .and('is.visible');
@@ -130,7 +142,10 @@ describe('map module', () => {
         .get('img.c-panorama-thumbnail--img')
         .should('exist').and('be.visible');
 
-      cy.get('button.toggle-fullscreen').click();
+      // the map view maximize button should exist
+      cy.get('button.icon-button__right');
+      // click on the maximize button to open the map view
+      cy.get('button.icon-button__right').first().click();
 
       cy.get(columnRight).should('exist').and('not.be.visible');
       cy.get('.map-preview-panel.map-preview-panel--visible')
@@ -151,7 +166,7 @@ describe('map module', () => {
 
       cy.get(columnRight).should('exist').and('not.be.visible');
       cy.get('.map-preview-panel.map-preview-panel--visible')
-        .get('img.map-detail-result__header-pano')
+        //.get('img.map-detail-result__header-pano')
         .should('exist').and('be.visible');
       cy.checkPreviewPanel(['Nieuwmarkt 25', '10581111']);
     });
@@ -172,6 +187,16 @@ describe('map module', () => {
     it('should add a map-layer to the leaflet map', () => {
       // route to the map
       cy.visit('/?center=52.3731081%2C4.8932945&view=kaart');
+
+      // the map-panel should have the class collapsed by default
+      cy.get('.map-panel').should('have.class', 'map-panel--collapsed');
+      // expand the map-panel
+      cy.get('.map-panel__toggle').click();
+      // the map panel should have the class expanded
+      cy.get('.map-panel').should('have.class', 'map-panel--expanded');
+      // the scroll wrapper should be visible when map panel is expanded
+      cy.get(scrollWrapper).should('exist').and('be.visible');
+
       // get the first map-layer button
       cy.get('.map-layers__title').first().click();
       // check if the map has overlay panes
