@@ -5,9 +5,6 @@ import Hotspot from './Hotspot';
 describe('Hotspot', () => {
   it('should render', () => {
     const props = {
-      sceneId: 'ABC',
-      distance: 999,
-      pitch: 999,
       year: '2020',
       size: 9,
       angle: 9

@@ -49,9 +49,6 @@ function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler) {
   hotspotElement.className = 'hotspot';
   hotspotElement.innerHTML = renderToStaticMarkup( // eslint-disable-next-line
     <Hotspot
-      sceneId={hotspot.id}
-      distance={hotspot.distance}
-      pitch={hotspotPitch}
       year={hotspot.year}
       size={size}
       angle={angle}

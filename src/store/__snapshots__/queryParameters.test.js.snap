@@ -2,6 +2,19 @@
 
 exports[`QueryParameters should match the snapshot 1`] = `
 Object {
+  "achtergrond": Object {
+    "routes": Object {
+      "atlasRouter/HOME": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": "topografie",
+        "encode": [Function],
+        "reducerKey": "map",
+        "selector": [Function],
+        "stateKey": "baseLayer",
+      },
+    },
+  },
   "category": Object {
     "routes": Object {
       "atlasRouter/DATA_QUERY_SEARCH": Object {

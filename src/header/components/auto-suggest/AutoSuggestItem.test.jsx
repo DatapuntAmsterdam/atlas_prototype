@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import AutoSuggestItem from './AutoSuggestItem';
 
-describe.only('AutoSuggestItem', () => {
+describe('AutoSuggestItem', () => {
   it('should render the item', () => {
     const props = {
       isActive: false,

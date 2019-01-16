@@ -39,7 +39,7 @@ describe('Panorama Reducer', () => {
     });
   });
 
-  describe('fetchPanoramaById', () => {
+  describe('fetchPanoramaRequest', () => {
     it('when heading is not in payload, use oldstate heading', () => {
       const inputState = {
         fov: 1,
@@ -50,9 +50,7 @@ describe('Panorama Reducer', () => {
         location: ['lat', 'lon'],
         image: 'http://example.com/example.png'
       };
-      const id = 'ABC';
-      const newState = reducer(inputState, fetchPanoramaRequest({ id }));
-      expect(newState.id).toBe(id);
+      const newState = reducer(inputState, fetchPanoramaRequest('abc'));
       expect(newState.heading).toBe(inputState.heading);
     });
   });

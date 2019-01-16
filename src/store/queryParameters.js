@@ -14,6 +14,7 @@ import { getDetailView } from '../shared/ducks/detail/selectors';
 import { DETAIL } from '../shared/ducks/detail/reducer';
 import { initialState as mapInitialState, MAP } from '../map/ducks/map/map';
 import {
+  getActiveBaseLayer,
   getCenter,
   getMapOverlays,
   getMapView,
@@ -33,7 +34,8 @@ import {
 import {
   getDataSearchLocation,
   getSearchCategory,
-  getSearchQuery, getView
+  getSearchQuery,
+  getView
 } from '../shared/ducks/data-search/selectors';
 import {
   initialState as dataSelectionInitialState,
@@ -183,6 +185,12 @@ export default paramsRegistry
     routes.add(routing.panorama.type, PANORAMA, 'heading', {
       defaultValue: panoramaInitialState.heading,
       selector: getPanoramaHeading
+    });
+  })
+  .addParameter(PARAMETERS.MAP_BACKGROUND, (routes) => {
+    routes.add(routing.home.type, MAP, 'baseLayer', {
+      defaultValue: mapInitialState.baseLayer,
+      selector: getActiveBaseLayer
     });
   })
   .addParameter(PARAMETERS.PANORAMA_SET, (routes) => {

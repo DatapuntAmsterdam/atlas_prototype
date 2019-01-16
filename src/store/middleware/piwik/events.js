@@ -42,34 +42,38 @@ import {
   VIEWS as PANORAMA_VIEWS
 } from '../../../panorama/ducks/constants';
 
+const PIWIK_CONSTANTS = {
+  TRACK_EVENT: 'trackEvent'
+};
+
 const events = {
   // NAVIGATION
   [routing.dataGeoSearch.type]: (tracking, state) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'navigation',
     isPanoPage(state) ? 'panorama-verlaten' : 'georesultaten-volledig-weergeven',
     null
   ],
   [routing.dataDetail.type]: (tracking, state) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'navigation',
     isPanoPage(state) ? 'panorama-verlaten' : 'detail-volledig-weergeven',
     null
   ],
   [NAVIGATE_HOME_REQUEST]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'navigation',
     'home',
     null
   ],
   [SET_GEOSEARCH_VIEW]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'navigation',
     'georesultaten-kaart-vergroten',
     null
   ],
   [SET_DETAIL_VIEW]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'navigation',
     'detail-kaart-vergroten',
     null
@@ -77,12 +81,12 @@ const events = {
   [SET_DATA_SELECTION_VIEW]: (tracking, state) => {
     const view = (tracking === DATA_SELECTION_VIEWS.LIST) ? 'kaart-weergeven'
       : (tracking === DATA_SELECTION_VIEWS.TABLE) ? 'tabel-weergeven'
-      : (tracking === DATA_SELECTION_VIEWS.MAP) ? 'kaart-vergroten'
-      : (tracking === DATA_SELECTION_VIEWS.LIST && getView(state) === DATA_SELECTION_VIEWS.MAP) ? 'kaart-verkleinen'
-      : null;
+        : (tracking === DATA_SELECTION_VIEWS.MAP) ? 'kaart-vergroten'
+          : (tracking === DATA_SELECTION_VIEWS.LIST && getView(state) === DATA_SELECTION_VIEWS.MAP) ? 'kaart-verkleinen'
+            : null;
 
     return view && ([
-      'trackEvent',
+      PIWIK_CONSTANTS.TRACK_EVENT,
       'navigation',
       `dataselectie-${view}`,
       null
@@ -91,12 +95,12 @@ const events = {
   [SET_PANORAMA_VIEW]: (tracking, state) => {
     const view = (tracking === PANORAMA_VIEWS.MAP) ? 'kaart-vergroten'
       : (tracking === PANORAMA_VIEWS.PANO) ? 'beeld-weergeven'
-      : (tracking === PANORAMA_VIEWS.MAP_PANO && getView(state) === PANORAMA_VIEWS.MAP) ? 'kaart-verkleinen'
-      : (tracking === PANORAMA_VIEWS.MAP_PANO && getView(state) === PANORAMA_VIEWS.PANO) ? 'beeld-verkleinen'
-      : null;
+        : (tracking === PANORAMA_VIEWS.MAP_PANO && getView(state) === PANORAMA_VIEWS.MAP) ? 'kaart-verkleinen'
+          : (tracking === PANORAMA_VIEWS.MAP_PANO && getView(state) === PANORAMA_VIEWS.PANO) ? 'beeld-verkleinen'
+            : null;
 
     return view && ([
-      'trackEvent',
+      PIWIK_CONSTANTS.TRACK_EVENT,
       'navigation',
       `panorama-${view}`,
       null
@@ -104,51 +108,51 @@ const events = {
   },
   // DATASET
   [routing.datasetsDetail.type]: ({ event, query }) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     event,
     'Datasets',
     query
   ],
   [DOWNLOAD_DATASET_RESOURCE]: ({ dataset, resourceUrl }) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'Download',
     dataset,
     resourceUrl
   ],
   // DATA SELECTION
   [DOWNLOAD_DATA_SELECTION]: (tracking) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'Download-tabel',
     `dataselectie-download-${tracking.toLowerCase()}`,
     null
   ],
   [SET_GEOMETRY_FILTER]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'filter',
     'dataselectie-polygoon-filter',
     'Locatie ingetekend'
   ],
   // MAP
   [routing.home.type]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'embed',
     'embedkaart',
     window.location.href
   ],
   [SET_MAP_BASE_LAYER]: (tracking) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'achtergrond',
     (tracking.startsWith('lf') ? 'luchtfoto' : 'topografie'),
     tracking
   ],
   [SET_MAP_CLICK_LOCATION]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'kaart',
     'kaart-puntzoek',
     null
   ],
   TOGGLE_MAP_OVERLAY: ({ category, title }) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'kaartlaag',
     category.toLowerCase().replace(/[: ][ ]*/g, '_'),
     title
@@ -162,13 +166,13 @@ const events = {
   ],
   // AUTHENTICATION
   [AUTHENTICATE_USER_REQUEST]: (tracking) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'login',
     tracking,
     null
   ],
   [AUTHENTICATE_USER_SUCCESS]: (tracking) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'login',
     'ingelogd',
     tracking
@@ -177,10 +181,10 @@ const events = {
   [ADD_FILTER]: (tracking, state) => {
     const page = isDataSelectionPage(state) ? 'dataselectie'
       : isDatasetPage(state) ? 'dataset'
-      : null;
+        : null;
 
     return page && ([
-      'trackEvent',
+      PIWIK_CONSTANTS.TRACK_EVENT,
       'filter',
       `${page}-tabel-filter`,
       Object.keys(tracking)[0]
@@ -189,10 +193,10 @@ const events = {
   [REMOVE_FILTER]: (tracking, state) => {
     const page = isDataSelectionPage(state) ? 'dataselectie'
       : isDatasetPage(state) ? 'dataset'
-      : null;
+        : null;
 
     return page && ([
-      'trackEvent',
+      PIWIK_CONSTANTS.TRACK_EVENT,
       'filter',
       `${page}-tabel-filter-verwijder`,
       tracking
@@ -200,38 +204,38 @@ const events = {
   },
   // PANORAMA
   [FETCH_PANORAMA_REQUEST_TOGGLE]: ({ year, missionType }) => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'panorama-set',
     (year > 0) ? `panorama-set-${year}${missionType}` : 'panorama-set-recent',
     null
   ],
-  [FETCH_PANORAMA_HOTSPOT_REQUEST]: () => [
-    'trackEvent',
+  [FETCH_PANORAMA_HOTSPOT_REQUEST]: () => ([
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'panorama-navigation',
     'panorama-hotspot-klik',
     null
-  ],
-  [SET_PANORAMA_LOCATION]: () => [
-    'trackevent',
+  ]),
+  [SET_PANORAMA_LOCATION]: () => ([
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'panorama-navigatie',
     'panorama-kaart-klik',
     null
-  ],
+  ]),
   // MENU
   [REPORT_PROBLEM_REQUEST]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'menu',
     'menu-terugmelden',
     null
   ],
   [SHOW_EMBED_PREVIEW]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'menu',
     'menu-embedversie',
     null
   ],
   [SHOW_PRINT]: () => [
-    'trackEvent',
+    PIWIK_CONSTANTS.TRACK_EVENT,
     'menu',
     'menu-printversie',
     null

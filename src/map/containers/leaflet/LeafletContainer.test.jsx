@@ -134,7 +134,7 @@ describe('LeafletContainer', () => {
       jest.resetAllMocks();
     });
 
-    it.only('should render correct', () => {
+    it('should render correct', () => {
       const store = configureMockStore()({ ...initialState });
       const wrapper = shallow(
         <LeafletContainer

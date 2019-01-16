@@ -17,8 +17,8 @@ module.exports = {
     global: {
       statements: 80,
       branches: 74, // TODO refactor, get coverage up
-      functions: 78,
-      lines: 81
+      functions: 79,
+      lines: 82
     }
   },
   coverageReporters: process.env.CI ? [
