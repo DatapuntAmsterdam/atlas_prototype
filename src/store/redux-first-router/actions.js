@@ -4,6 +4,7 @@ import PARAMETERS from '../parameters';
 import { VIEWS as DATA_SEARCH_VIEW } from '../../shared/ducks/data-search/constants';
 import { VIEWS as PANORAMA_VIEWS } from '../../panorama/ducks/constants';
 import { VIEWS } from '../../map/ducks/map/map';
+import { DETAIL_VIEW } from '../../shared/ducks/detail/constants';
 
 export const preserveQuery = (action, additionalParams = null) => ({
   ...action,
@@ -31,19 +32,6 @@ export const toDataDetail = (id, type, subtype, additionalParams = null) => pres
   }
 }, additionalParams);
 
-const toDataSearch = (additionalParams = null) => ({
-  type: routing.dataQuerySearch.type,
-  meta: {
-    additionalParams
-  }
-});
-
-export const toDataSearchLocation = (location) => (
-  toDataSearch({
-    [PARAMETERS.LOCATION]: location
-  })
-);
-
 export const toGeoSearch = (location, view = DATA_SEARCH_VIEW.LIST) => preserveQuery({
   type: routing.dataGeoSearch.type
 }, {
@@ -51,16 +39,14 @@ export const toGeoSearch = (location, view = DATA_SEARCH_VIEW.LIST) => preserveQ
   [PARAMETERS.VIEW]: view
 });
 
-export const toDataSearchQuery = (searchQuery, filters, skipFetch = false) => ({
+export const toDataSearchQuery = (additionalParams = null, skipFetch = false) => ({
   type: routing.dataQuerySearch.type,
   meta: {
     skipFetch,
-    additionalParams: {
-      [PARAMETERS.QUERY]: searchQuery,
-      [PARAMETERS.FILTERS]: filters
-    }
+    additionalParams
   }
 });
+
 export const toMap = () => ({
   type: routing.home.type,
   meta: {
@@ -120,14 +106,12 @@ export const toDataSearchCategory = (searchQuery, category) => ({
   }
 });
 export const toDatasets = () => ({ type: routing.datasets.type });
-export const toDatasetSearch = (searchQuery, skipFetch = false) => ({
+export const toDatasetSearch = (additionalParams = null, skipFetch = false) => ({
   type: routing.searchDatasets.type,
   meta: {
     skipFetch,
     preserveQuery: true,
-    additionalParams: {
-      [PARAMETERS.QUERY]: searchQuery
-    }
+    additionalParams
   }
 });
 export const toDatasetsWithFilter = (additionalParams = {}, preserve = false) => ({
@@ -139,7 +123,7 @@ export const toDatasetsWithFilter = (additionalParams = {}, preserve = false) =>
 });
 export const toDataSuggestion = (payload) => {
   const { type, subtype, id } = getDetailPageData(payload.endpoint);
-  const action = {
+  return {
     type: routing.dataDetail.type,
     payload: {
       type,
@@ -147,6 +131,9 @@ export const toDataSuggestion = (payload) => {
       id: `id${id}`
     },
     meta: {
+      additionalParams: {
+        [PARAMETERS.VIEW]: DETAIL_VIEW.MAP_DETAIL
+      },
       tracking: {
         category: payload.category,
         event: 'auto-suggest',
@@ -154,7 +141,6 @@ export const toDataSuggestion = (payload) => {
       }
     }
   };
-  return action;
 };
 export const toDatasetSuggestion = (payload) => ({
   type: routing.datasetsDetail.type,

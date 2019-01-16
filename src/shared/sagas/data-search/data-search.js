@@ -14,7 +14,6 @@ import { routing } from '../../../app/routes';
 import {
   FETCH_GEO_SEARCH_RESULTS_REQUEST,
   FETCH_QUERY_SEARCH_MORE_RESULTS_REQUEST,
-  SET_GEO_LOCATION,
   SET_QUERY_CATEGORY,
   SET_VIEW,
   VIEWS
@@ -122,7 +121,6 @@ export default function* watchDataSearch() {
   ], loadMore);
 
   yield takeLatest([
-    SET_GEO_LOCATION,
     SET_VIEW,
     routing.dataGeoSearch.type
   ], fireGeoSearchResultsRequest);

@@ -55,7 +55,6 @@ import '../../modules/detail/detail.vendor';
 import '../../modules/detail/services/data-formatter/data-formatter.factory';
 import '../../modules/detail/services/date-converter/date-converter.factory';
 import '../../modules/detail/services/date-formatter/date-formatter.factory';
-import '../../modules/detail/services/document-title/document-title.factory';
 import '../../modules/detail/services/endpoint-parser/endpoint-parser.factory';
 import '../../modules/detail/services/geometry/geometry.factory';
 import '../../modules/header/header.module';

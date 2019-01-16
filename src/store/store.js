@@ -37,11 +37,11 @@ const configureStore = (history, routesMap) => {
   const enhancer = composeEnhancers(
     routeEnhancer,
     applyMiddleware(
-      documentHeadMiddleware,
-      piwikMiddleware,
       preserveUrlParametersMiddleware,
       routeMiddleware,
       urlParamsMiddleware,
+      documentHeadMiddleware,
+      piwikMiddleware,
       sagaMiddleware
     )
   );

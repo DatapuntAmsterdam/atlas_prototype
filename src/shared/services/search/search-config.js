@@ -65,6 +65,11 @@ export default {
       label_singular: 'Monument',
       label_plural: 'Monumenten',
       uri: 'monumenten/search/'
+    }, {
+      slug: 'landelijk_id',
+      label_singular: 'Landelijk ID',
+      label_plural: 'Landelijke ID\'s',
+      uri: 'atlas/search/landelijk_id/'
     }
   ],
   COORDINATES_ENDPOINTS: [

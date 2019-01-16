@@ -3,10 +3,10 @@ import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions';
 import { getDetailView } from '../../../shared/ducks/detail/selectors';
-import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
 import { showDetail } from '../../../shared/ducks/detail/actions';
 import { FETCH_MAP_DETAIL_SUCCESS } from '../../ducks/detail/constants';
 import { getGeometry } from '../../../shared/services/geometry/geometry';
+import { goToGeoSearch } from '../map-click/map-click';
 
 export function* fetchNearestDetails(action) {
   const {
@@ -20,10 +20,10 @@ export function* fetchNearestDetails(action) {
       const view = yield select(getDetailView);
       yield put(toDetailFromEndpoint(uri, view));
     } else {
-      yield put(setGeoLocation(location));
+      yield call(goToGeoSearch, location);
     }
   } catch (error) {
-    yield put(setGeoLocation(location));
+    yield call(goToGeoSearch, location);
   }
 }
 

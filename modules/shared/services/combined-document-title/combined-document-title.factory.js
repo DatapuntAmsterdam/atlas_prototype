@@ -10,13 +10,11 @@ import * as mapDocumentTitle from '../../../../src/map/services/document-title/d
 
     documentTitleFactory.$inject = [
         'dpDataSelectionDocumentTitle',
-        'dpDetailDocumentTitle',
         '$q'
     ];
 
     function documentTitleFactory (
         dpDataSelectionDocumentTitle,
-        dpDetailDocumentTitle,
         $q
     ) {
         return {
@@ -30,8 +28,6 @@ import * as mapDocumentTitle from '../../../../src/map/services/document-title/d
             mapDocumentTitle.getTitle(fullState).then(result => {
                 if (fullState.dataSelection && fullState.dataSelection.view.length) {
                     q.resolve(`${dpDataSelectionDocumentTitle.getTitle(fullState.dataSelection, filters)} | ${result}`);
-                } else if (fullState.detail && fullState.detail.display) {
-                    q.resolve(`${dpDetailDocumentTitle.getTitle(fullState.detail, filters)} | ${result}`);
                 } else {
                     q.resolve(result);
                 }

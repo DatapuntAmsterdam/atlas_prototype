@@ -4,14 +4,12 @@ describe('The dpCombinedDocumentTitle factory', function () {
     let combinedDocumentTitle,
         $q,
         $rootScope;
-    const detailDocumentTitle = { getTitle: angular.noop },
-        dataSelectionDocumentTitle = { getTitle: angular.noop };
+    const dataSelectionDocumentTitle = { getTitle: angular.noop };
 
     beforeEach(function () {
         angular.mock.module(
             'dpShared',
             function ($provide) {
-                $provide.value('dpDetailDocumentTitle', detailDocumentTitle);
                 $provide.value('dpDataSelectionDocumentTitle', dataSelectionDocumentTitle);
             }
         );
@@ -28,7 +26,6 @@ describe('The dpCombinedDocumentTitle factory', function () {
             return def.promise;
         });
 
-        spyOn(detailDocumentTitle, 'getTitle').and.returnValue('detailTitel');
         spyOn(dataSelectionDocumentTitle, 'getTitle').and.returnValue('dataSelectionTitel');
     });
 
@@ -38,22 +35,6 @@ describe('The dpCombinedDocumentTitle factory', function () {
 
         promise.then(value => {
             expect(value).toBe('simpele titel');
-        });
-
-        $rootScope.$digest();
-    });
-
-    it('returns a detail title with promise', function () {
-        const mockState = {
-            detail: {
-                display: true
-            }
-        };
-
-        const promise = combinedDocumentTitle.getTitle(mockState);
-
-        promise.then(value => {
-            expect(value).toBe('detailTitel | simpele titel');
         });
 
         $rootScope.$digest();

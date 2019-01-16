@@ -4,7 +4,7 @@ import watchFetchNearestDetails, { fetchNearestDetails } from './nearest-details
 
 import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
 import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
-import { setGeoLocation } from '../../../shared/ducks/data-search/actions';
+import { goToGeoSearch } from '../map-click/map-click';
 
 describe('watchFetchNearestDetails', () => {
   const action = { type: REQUEST_NEAREST_DETAILS };
@@ -40,7 +40,7 @@ describe('fetchNearestDetails', () => {
           return next();
         }
       })
-      .put(setGeoLocation(action.payload.location))
+      .call(goToGeoSearch, action.payload.location)
       .run()
   ));
 
@@ -54,7 +54,7 @@ describe('fetchNearestDetails', () => {
           return next();
         }
       })
-      .put(setGeoLocation(action.payload.location))
+      .call(goToGeoSearch, action.payload.location)
       .run()
   ));
 
@@ -63,7 +63,7 @@ describe('fetchNearestDetails', () => {
     testSaga(fetchNearestDetails, action)
       .next()
       .throw(error)
-      .put(setGeoLocation(action.payload.location))
+      .call(goToGeoSearch, action.payload.location)
       .next()
       .isDone();
   });

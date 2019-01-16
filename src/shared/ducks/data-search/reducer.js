@@ -9,7 +9,6 @@ import {
   FETCH_QUERY_SEARCH_RESULTS_SUCCESS,
   initialState,
   REDUCER_KEY,
-  SET_GEO_LOCATION,
   SET_QUERY_CATEGORY, SET_VIEW
 } from './constants';
 import { routing } from '../../../app/routes';
@@ -105,12 +104,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         view: action.payload
-      };
-
-    case SET_GEO_LOCATION:
-      return {
-        ...enrichedState,
-        geoSearch: action.payload
       };
 
     case FETCH_DATA_SELECTION_REQUEST:

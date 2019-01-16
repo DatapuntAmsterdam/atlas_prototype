@@ -531,7 +531,7 @@ Object {
   "zoom": Object {
     "routes": Object {
       "atlasRouter/ADDRESSES": Object {
-        "addHistory": true,
+        "addHistory": false,
         "decode": [Function],
         "defaultValue": 11,
         "encode": [Function],
@@ -540,7 +540,7 @@ Object {
         "stateKey": "zoom",
       },
       "atlasRouter/CADASTRAL_OBJECTS": Object {
-        "addHistory": true,
+        "addHistory": false,
         "decode": [Function],
         "defaultValue": 11,
         "encode": [Function],
@@ -549,7 +549,7 @@ Object {
         "stateKey": "zoom",
       },
       "atlasRouter/DATA_DETAIL": Object {
-        "addHistory": true,
+        "addHistory": false,
         "decode": [Function],
         "defaultValue": 11,
         "encode": [Function],
@@ -558,7 +558,7 @@ Object {
         "stateKey": "zoom",
       },
       "atlasRouter/DATA_GEO_SEARCH": Object {
-        "addHistory": true,
+        "addHistory": false,
         "decode": [Function],
         "defaultValue": 11,
         "encode": [Function],
@@ -567,7 +567,7 @@ Object {
         "stateKey": "zoom",
       },
       "atlasRouter/ESTABLISHMENTS": Object {
-        "addHistory": true,
+        "addHistory": false,
         "decode": [Function],
         "defaultValue": 11,
         "encode": [Function],
@@ -576,7 +576,7 @@ Object {
         "stateKey": "zoom",
       },
       "atlasRouter/HOME": Object {
-        "addHistory": true,
+        "addHistory": false,
         "decode": [Function],
         "defaultValue": 11,
         "encode": [Function],

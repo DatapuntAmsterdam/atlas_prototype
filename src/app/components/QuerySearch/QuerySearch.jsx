@@ -34,12 +34,12 @@ const QuerySearch = ({
             <Tab
               label="Data"
               count={numberOfDataResults}
-              onClick={() => toDataPage(query, filters, true)}
+              onClick={() => toDataPage(query, filters)}
             />
             <Tab
               label="Datasets"
               count={numberOfDatasetResults}
-              onClick={() => toDatasetPage(query, filters, true)}
+              onClick={() => toDatasetPage(query, filters)}
             />
           </Tabs>
         </TabBar>

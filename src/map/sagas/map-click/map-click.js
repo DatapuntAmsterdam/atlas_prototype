@@ -1,4 +1,4 @@
-import { put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/map';
 import { getMapZoom } from '../../ducks/map/map-selectors';
@@ -28,13 +28,20 @@ const showGeoSearchList = (pageType, dataSearchView, detailView, dataSelectionVi
   ) && dataSelectionView !== DATA_SELECTION_VIEWS.MAP)
 );
 
-/* istanbul ignore next */ // TODO: refactor, test
-export function* switchClickAction(action) {
-  const selectionType = yield select(getSelectionType);
+export function* goToGeoSearch(location) {
   const pageType = yield select(getPage);
   const dataSearchView = yield select(getDataSearchView);
   const dataSelectionView = yield select(getDataSelectionView);
   const detailView = yield select(getDetailView);
+  const view = showGeoSearchList(pageType, dataSearchView, detailView, dataSelectionView) ?
+    VIEWS.LIST :
+    VIEWS.MAP;
+  yield put(toGeoSearch(location, view));
+}
+
+/* istanbul ignore next */ // TODO: refactor, test
+export function* switchClickAction(action) {
+  const selectionType = yield select(getSelectionType);
   const location = normalizeLocation(action.payload.location, 7);
   if (selectionType === SELECTION_TYPE.PANORAMA) {
     const locationArray = latitudeLongitudeToArray(location);
@@ -52,10 +59,7 @@ export function* switchClickAction(action) {
         }
       });
     } else {
-      const view = showGeoSearchList(pageType, dataSearchView, detailView, dataSelectionView) ?
-        VIEWS.LIST :
-        VIEWS.MAP;
-      yield put(toGeoSearch(location, view));
+      yield call(goToGeoSearch, location);
     }
   }
 }
