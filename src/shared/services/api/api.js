@@ -33,6 +33,8 @@ const handleCache = (response, key) => {
 
         if (now >= expiration) {
           sessionStorage.removeItem(itemKey);
+        } else {
+          sessionStorage.clear();
         }
       }
     });
