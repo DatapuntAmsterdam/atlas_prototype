@@ -77,14 +77,15 @@ describe('addresses module', () => {
   });
 
   describe('user should be able to navigate to the address detail view', () => {
-    it('should open the detail view with the correct address', () => {
+    beforeEach(() => {
       cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding');
       cy.route('/bag/verblijfsobject/*').as('getVerblijfsobject');
       cy.route('/bag/pand/?verblijfsobjecten__id=*').as('getPanden');
       cy.route('/brk/object-expand/?verblijfsobjecten__id=*').as('getObjectExpand');
       cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen');
       cy.route('/monumenten/monumenten/*').as('getMonument');
-
+    });
+    it('should open the detail view with the correct address', () => {
       cy.get('th.c-table__header-field').first()
         .then((firstTableHeader) => {
           const selectedGroup = firstTableHeader[0].innerText.trim();
@@ -113,6 +114,35 @@ describe('addresses module', () => {
             });
         });
     });
+    it('should close the detail view and open the map view with the correct address', () => {
+      cy.get('th.c-table__header-field').first()
+        .then((firstTableHeader) => {
+          cy.get('.c-table__content-row').first().find('td:nth-child(1)')
+            .then((firstValue) => {
+              const selectedValue = firstValue[0].innerText.trim();
+              // click on the firstItem to open address preview panel
+              cy.get('.c-table__content-row').first().click();
+              // the detail view should exist
+              cy.get('.qa-detail').should('exist').and('be.visible');
+              // the map view maximize button should exist
+              cy.get('button.icon-button__right');
+              // click on the maximize button to open the map view
+              cy.get('button.icon-button__right').first().click();
+
+              cy.wait('@getNummeraanduiding');
+              cy.wait('@getVerblijfsobject');
+
+              // the preview panel should exist
+              cy.get('.map-preview-panel').should('exist').and('be.visible');
+              // the preview panel has the right title
+              cy.get('.map-detail-result__header-subtitle').contains(selectedValue)
+              .should('exist').and('be.visible');
+              // the show more button should exist and be visible
+              cy.get('.map-search-results__button').should('exist');
+              cy.get('.map-search-results__button').scrollIntoView().should('be.visible');
+            });
+          });
+      });
   });
 
   describe('user should be able to view a cursor in the leaflet map', () => {
@@ -127,7 +157,6 @@ describe('addresses module', () => {
       // click on the first item in the table
       cy.get('.c-table__content-row').first().click();
 
-      // request the detail information
       cy.wait('@getNummeraanduiding');
       cy.wait('@getVerblijfsobject');
       cy.wait('@getPanden');
