@@ -21,7 +21,7 @@ describe('panorama module', () => {
     cy.wait('@getResults');
   });
 
-  describe('user should be able to navigate to the panoram from the homepage', () => {
+  describe('user should be able to navigate to the panorama from the homepage', () => {
     it('should open the panorama viewer', () => {
       // the homepage should not be visible anymore
       cy.get(homepage).should('not.be.visible');
@@ -45,7 +45,7 @@ describe('panorama module', () => {
 
         cy.wait('@getResults');
         // the coordinates should be different
-        cy.get(statusBarInfo).first()
+        cy.get(statusBarInfo).first().find('span')
           .contains(coordinates)
           .should('not.exist');
       });
@@ -93,9 +93,9 @@ describe('panorama module', () => {
     });
   });
 
-  describe.only('user should be able to interact with the panorama', () => {
+  describe('user should be able to interact with the panorama', () => {
     it('should remember the state when closing the pano, and update to search results when clicked in map', () => {
-      const panoUrl = '/datasets/panorama/TMX7316010203-000714_pano_0001_002608?heading=325&legenda=false&reference=03630000004153%2Cbag%2Copenbareruimte&reference=03630000004153%2Cbag%2Copenbareruimte';
+      const panoUrl = '/data/panorama/TMX7316010203-000714_pano_0001_002608?heading=325&reference=03630000004153%2Cbag%2Copenbareruimte&reference=03630000004153%2Cbag%2Copenbareruimte';
       let newUrl;
 
       cy.defineGeoSearchRoutes();

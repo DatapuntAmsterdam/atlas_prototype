@@ -4,7 +4,6 @@ import PARAMETERS from '../parameters';
 import { VIEWS as DATA_SEARCH_VIEW } from '../../shared/ducks/data-search/constants';
 import { VIEWS as PANORAMA_VIEWS } from '../../panorama/ducks/constants';
 import { VIEWS } from '../../map/ducks/map/map';
-import { DETAIL_VIEW } from '../../shared/ducks/detail/constants';
 
 export const preserveQuery = (action, additionalParams = null) => ({
   ...action,
@@ -20,17 +19,18 @@ export const shouldResetState = (action, allowedRoutes = []) => (action.type &&
   allowedRoutes.every((route) => !action.type.includes(route))
 );
 
-export const toDataDetail = (id, type, subtype, additionalParams = null) => preserveQuery({
-  type: routing.dataDetail.type,
-  payload: {
-    type,
-    subtype,
-    id: `id${id}`
-  },
-  meta: {
-    tracking: true
-  }
-}, additionalParams);
+export const toDataDetail =
+  (id, type, subtype, additionalParams = null, tracking = true) => preserveQuery({
+    type: routing.dataDetail.type,
+    payload: {
+      type,
+      subtype,
+      id: `id${id}`
+    },
+    meta: {
+      tracking
+    }
+  }, additionalParams);
 
 export const toGeoSearch = (location, view = DATA_SEARCH_VIEW.LIST) => preserveQuery({
   type: routing.dataGeoSearch.type
@@ -123,24 +123,13 @@ export const toDatasetsWithFilter = (additionalParams = {}, preserve = false) =>
 });
 export const toDataSuggestion = (payload) => {
   const { type, subtype, id } = getDetailPageData(payload.endpoint);
-  return {
-    type: routing.dataDetail.type,
-    payload: {
-      type,
-      subtype,
-      id: `id${id}`
-    },
-    meta: {
-      additionalParams: {
-        [PARAMETERS.VIEW]: DETAIL_VIEW.MAP_DETAIL
-      },
-      tracking: {
-        category: payload.category,
-        event: 'auto-suggest',
-        query: payload.typedQuery
-      }
-    }
+  const tracking = {
+    category: payload.category,
+    event: 'auto-suggest',
+    query: payload.typedQuery
   };
+
+  return toDataDetail(id, type, subtype, null, tracking);
 };
 export const toDatasetSuggestion = (payload) => ({
   type: routing.datasetsDetail.type,

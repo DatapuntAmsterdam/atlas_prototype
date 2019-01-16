@@ -469,6 +469,7 @@ Object {
       "atlasRouter/ADDRESSES": Object {
         "addHistory": true,
         "decode": [Function],
+        "defaultValue": "TABLE",
         "encode": [Function],
         "reducerKey": "dataSelection",
         "selector": [Function],
@@ -477,6 +478,7 @@ Object {
       "atlasRouter/CADASTRAL_OBJECTS": Object {
         "addHistory": true,
         "decode": [Function],
+        "defaultValue": "TABLE",
         "encode": [Function],
         "reducerKey": "dataSelection",
         "selector": [Function],
@@ -503,6 +505,7 @@ Object {
       "atlasRouter/ESTABLISHMENTS": Object {
         "addHistory": true,
         "decode": [Function],
+        "defaultValue": "TABLE",
         "encode": [Function],
         "reducerKey": "dataSelection",
         "selector": [Function],
