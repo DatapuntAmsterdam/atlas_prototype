@@ -130,6 +130,7 @@ export default paramsRegistry
     routes
       .add(routesWithDataSelection, DATA_SELECTION, 'view', {
         selector: getDataSelectionView,
+        defaultValue: dataSelectionInitialState.view,
         decode: (val) => PARAMS_TO_VIEWS[val],
         encode: (val) => VIEWS_TO_PARAMS[val]
       })
