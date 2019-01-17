@@ -10,7 +10,7 @@ const SEARCHPAGE_SELECTORS = {
   HEADER: '.qa-search-header',
   RESULTS_BLOCK: '.c-search-results__block-content',
   RESULTS_ITEM_LINK: '.qa-list-item-link',
-  MORE_BUTTON: '.qa-show-more .qa-dp-link'
+  MORE_BUTTON: 'button.qa-show-more'
 };
 
 const DETAIL_PAGE = '.qa-detail';
@@ -86,11 +86,13 @@ describe('search module', () => {
       cy.get('@resultItems')
         .contains('nevenadres')
         .should('exist')
+        .scrollIntoView()
         .and('be.visible');
 
       cy.get('@resultItems')
         .contains('verblijfsobject gevormd')
         .should('exist')
+        .scrollIntoView()
         .and('be.visible');
 
       cy.get(SEARCHPAGE_SELECTORS.HEADER).contains(`met '${SEARCH_QUERY}'`).should('exist');

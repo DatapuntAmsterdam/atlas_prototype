@@ -93,7 +93,7 @@ describe('panorama module', () => {
     });
   });
 
-  describe('user should be able to interact with the panorama', () => {
+  describe.only('user should be able to interact with the panorama', () => {
     it('should remember the state when closing the pano, and update to search results when clicked in map', () => {
       const panoUrl = '/data/panorama/TMX7316010203-000714_pano_0001_002608?heading=325&reference=03630000004153%2Cbag%2Copenbareruimte&reference=03630000004153%2Cbag%2Copenbareruimte';
       let newUrl;
@@ -114,9 +114,9 @@ describe('panorama module', () => {
 
       cy.wait('@getOpenbareRuimte');
       cy.wait('@getPanoThumbnail');
-      cy.get('img.map-detail-result__header-pano').should('exist').and('be.visible');
-      cy.get('h2.map-detail-result__header-subtitle').should('exist').and('be.visible').contains('Leidsegracht');
-      cy.get('img.map-detail-result__header-pano').click();
+      cy.get('.c-panorama-thumbnail--img').should('exist').and('be.visible');
+      cy.get('h2.o-header__title').should('exist').and('be.visible').contains('Leidsegracht');
+      cy.get('.c-panorama-thumbnail--img').click();
 
       cy.wait('@getResults');
       cy.location().then((loc) => {
@@ -145,27 +145,38 @@ describe('panorama module', () => {
         expect(newUrl).not.to.equal(panoUrl);
       });
 
-      cy.get('button.button-new__right').last().click();
-      cy.get('img.map-detail-result__header-pano').should('exist').and('be.visible');
-      cy.get('h2.map-detail-result__header-subtitle').should('exist').and('be.visible').contains('Leidsegracht');
-      cy.get('img.map-detail-result__header-pano').click();
+      cy.wait('@getResults');
+      cy.wait(250);
+
+      cy.get('button.icon-button__right').should('exist');
+      // click on the maximize button to open the map view
+      cy.get('button.icon-button__right').last().click();
+
+      cy.wait('@getOpenbareRuimte');
+      cy.wait('@getPanoThumbnail');
+      cy.wait(500);
+
+      cy.get('.c-panorama-thumbnail--img').should('exist').and('be.visible');
+      cy.get('h2.o-header__title').should('exist').and('be.visible').contains('Leidsegracht');
+      cy.get('.c-panorama-thumbnail--img').click();
 
       cy.get('.leaflet-container').click(20, 100);
 
       cy.wait('@getResults');
+
       // verify that something happened by comparing the url
       cy.location().then((loc) => {
         const thisUrl = loc.pathname + loc.hash;
         expect(thisUrl).not.to.equal(newUrl);
       });
-      cy.get('button.button-new__right').last().click();
+      cy.get('button.icon-button__right').last().click();
 
+      // should show the openbareruimte again
       cy.wait('@getOpenbareRuimte');
       cy.wait('@getPanoThumbnail');
 
-      // should show the openbareruimte again
-      cy.get('img.map-detail-result__header-pano').should('exist').and('be.visible');
-      cy.get('h2.map-detail-result__header-subtitle').should('exist').and('be.visible').contains('Leidsegracht');
+      cy.get('.c-panorama-thumbnail--img').should('exist').and('be.visible');
+      cy.get('h2.o-header__title').should('exist').and('be.visible').contains('Leidsegracht');
     });
   });
 });

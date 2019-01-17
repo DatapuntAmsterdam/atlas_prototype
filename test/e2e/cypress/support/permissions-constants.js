@@ -3,7 +3,7 @@ const urls = {
   business: '/data/brk/object/idNL.KAD.OnroerendeZaak.11460857510001?lat=52.370780184456194&legenda=false&lng=4.893603037285888&zoom=16',
   gemeentelijkeBeperking: '/data/wkpb/beperking/id1006388',
   geoSearch: '/data/geozoek?locatie=52.3736166%2C4.8943521&view=lijst-kaart',
-  ligplaats: '/data/bag/ligplaats/id03630001025735?legenda=false&zoom=15',
+  ligplaats: '/data/bag/ligplaats/id03630001025735?view=lijst-kaart',
   maatschappelijkeActiviteit: '/data/handelsregister/maatschappelijkeactiviteit/id01029509',
   map: '/?center=52.3731081%2C4.8932945&view=kaart',
   monument: '/data/monumenten/monumenten/idc115314a-59d4-4574-bfe9-1f7df5cb20c4',
@@ -11,8 +11,8 @@ const urls = {
   natuurlijk: '/data/brk/subject/idNL.KAD.Persoon.171720901',
   nietNatuurlijk: 'data/brk/subject/idNL.KAD.Persoon.423186718',
   pand: '/data/bag/pand/id0363100012168052?legenda=false',
-  standplaats: '/data/geozoek?locatie=52.3747877%2C4.8352249&view=lijst-kaart',
-  vestiging: '/data/handelsregister/vestiging/id000003579875',
+  standplaats: '/data/bag/standplaats/id03630000691684?view=lijst-kaart',
+  vestiging: '/data/handelsregister/vestiging/id000003579875?view=lijst-kaart',
   vestigingenTabel: '/data/hr/vestigingen?legenda=false&zoom=11'
 };
 

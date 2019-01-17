@@ -138,7 +138,7 @@ describe('visitor permissions', () => {
       .contains(values.legendPermissionNotification).should('exist').and('be.visible');
   });
 
-  describe.only('7', () => {
+  describe('7', () => {
     it('A. Should NOT allow a visitor to view "Vestigingen"', () => {
       cy.visit(urls.vestigingenTabel);
       cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
@@ -174,12 +174,16 @@ describe('visitor permissions', () => {
       cy.wait('@getResults');
       cy.wait('@getMonumenten');
       cy.wait('@getNummeraanduidingen');
-      cy.get('.o-header').contains('393.70, 487385.19');
-      cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get('.o-header').contains('121437.46, 487418.76 (52.3736166, 4.8943521)');
+      cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
       cy.get(queries.headerSubTitle)
         .contains(values.vestigingen)
         .should('not.exist');
-      cy.get('button.toggle-fullscreen').click();
+      // the map view maximize button should exist
+      cy.get('button.icon-button__right');
+      // click on the maximize button to open the map view
+      cy.get('button.icon-button__right').first().click();
+      cy.wait(250);
       cy.get(queries.mapSearchResultsCategoryHeader)
         .contains(values.vestigingen)
         .should('not.exist');
@@ -211,9 +215,8 @@ describe('visitor permissions', () => {
 
       cy.wait('@getResults');
       cy.wait('@getNummeraanduiding');
-      cy.wait('@getMonument');
       cy.get(queries.headerTitle).contains('Johan Broedeletstraat 20');
-      cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+      cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
       cy.get(queries.listItem).contains(values.standplaatsVestigingName).should('not.exist');
     });
 
@@ -222,7 +225,10 @@ describe('visitor permissions', () => {
       cy.get(queries.headerTitle).should('not.exist');
       cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
       cy.get(queries.keyValueList).should('not.exist');
-      cy.get('button.toggle-fullscreen').click();
+      // the map view maximize button should exist
+      cy.get('button.icon-button__right');
+      // click on the maximize button to open the map view
+      cy.get('button.icon-button__right').first().click();
       cy.get(queries.infoNotification).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
       cy.get(queries.mapDetailResultHeaderSubTitle).should('not.exist');
     });
@@ -247,9 +253,12 @@ describe('visitor permissions', () => {
     cy.wait('@getComplex');
     cy.wait('@getSitueringen');
     cy.get(queries.headerTitle).contains('Museumtuin met hekwerken en bouwfragmenten');
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+    cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
     cy.get(queries.keyValueList).contains(values.redengevendeOmschrijving).should('not.exist');
-    cy.get('button.toggle-fullscreen').click();
+    // the map view maximize button should exist
+    cy.get('button.icon-button__right');
+    // click on the maximize button to open the map view
+    cy.get('button.icon-button__right').first().click();
     cy.get(queries.mapDetailResultItem).contains(values.type).should('not.exist');
   });
 
@@ -263,7 +272,7 @@ describe('visitor permissions', () => {
     cy.wait('@getComplex');
     cy.wait('@getMonumenten');
     cy.get(queries.headerTitle).contains('Hortus Botanicus');
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
+    cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
     cy.get(queries.keyValueList).contains(values.beschrijving).should('not.exist');
   });
 });

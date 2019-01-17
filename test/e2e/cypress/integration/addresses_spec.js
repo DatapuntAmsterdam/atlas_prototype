@@ -125,7 +125,7 @@ describe('addresses module', () => {
               // the detail view should exist
               cy.get('.qa-detail').should('exist').and('be.visible');
               // the map view maximize button should exist
-              cy.get('button.icon-button__right');
+              cy.get('button.icon-button__right').should('exist');
               // click on the maximize button to open the map view
               cy.get('button.icon-button__right').first().click();
 
