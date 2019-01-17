@@ -93,7 +93,7 @@ describe('panorama module', () => {
     });
   });
 
-  describe.only('user should be able to interact with the panorama', () => {
+  describe('user should be able to interact with the panorama', () => {
     it('should remember the state when closing the pano, and update to search results when clicked in map', () => {
       const panoUrl = '/data/panorama/TMX7316010203-000714_pano_0001_002608?heading=325&reference=03630000004153%2Cbag%2Copenbareruimte&reference=03630000004153%2Cbag%2Copenbareruimte';
       let newUrl;
