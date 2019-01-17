@@ -500,7 +500,7 @@ Object {
       "atlasRouter/DATA_DETAIL": Object {
         "addHistory": true,
         "decode": [Function],
-        "defaultValue": "kaart",
+        "defaultValue": "detail-kaart",
         "encode": [Function],
         "reducerKey": "detail",
         "selector": [Function],
