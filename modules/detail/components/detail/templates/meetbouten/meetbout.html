@@ -54,7 +54,7 @@
 
         <h3 ng-if="vm.apiData.results.metingen.count > 1">Zakking cumulatief (mm)</h3>
 
-        <dp-meetbout-graph
+        <dp-meetbout-graph ng-if="vm.apiData.results.metingen.href"
             page-size="vm.apiData.results.metingen.count"
             href="{{vm.apiData.results.metingen.href}}">
         </dp-meetbout-graph>
