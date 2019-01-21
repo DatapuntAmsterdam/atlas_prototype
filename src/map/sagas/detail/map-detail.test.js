@@ -4,6 +4,7 @@ import {
   fetchMapDetailFailure,
   fetchMapDetailSuccess
 } from '../../ducks/detail/map-detail';
+import { mapLoadingAction } from '../../ducks/map/map';
 import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants';
 
 describe('watchFetchMapDetail', () => {
@@ -34,6 +35,8 @@ describe('fetchNearestDetails', () => {
       .next('mapDetail')
       .put(fetchMapDetailSuccess(action.endpoint, 'mapDetail'))
       .next()
+      .put(mapLoadingAction(false))
+      .next()
       .isDone();
   });
 
@@ -43,6 +46,8 @@ describe('fetchNearestDetails', () => {
       .next()
       .throw(error)
       .put(fetchMapDetailFailure(error))
+      .next()
+      .put(mapLoadingAction(false))
       .next()
       .isDone();
   });
