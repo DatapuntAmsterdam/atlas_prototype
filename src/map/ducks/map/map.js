@@ -42,8 +42,7 @@ export const initialState = {
   drawingMode: drawToolConfig.DRAWING_MODE.NONE,
   shapeDistanceTxt: '',
   shapeAreaTxt: '',
-  mapPanelActive: true,
-  isMapBusy: false
+  mapPanelActive: true
 };
 
 let polygon = {};
@@ -73,7 +72,7 @@ export default function MapReducer(state = initialState, action) {
       // When opening these pages, close legend, remove pano layer
       return {
         ...enrichedState,
-        isMapBusy: true,
+        isLoading: true,
         mapPanelActive: false,
         overlays: enrichedState.overlays ? [...enrichedState.overlays.filter(
           (overlay) => !isPanoLayer(overlay)
@@ -210,7 +209,7 @@ export default function MapReducer(state = initialState, action) {
     case MAP_LOADING:
       return {
         ...state,
-        isMapBusy: action.payload
+        isLoading: action.payload
       };
 
     default:
@@ -275,4 +274,4 @@ export const updateBoundingBox = (payload) => ({
   payload
 });
 
-export const mapLoadingAction = (isBusy) => ({ type: MAP_LOADING, payload: isBusy });
+export const mapLoadingAction = (isLoading) => ({ type: MAP_LOADING, payload: isLoading });

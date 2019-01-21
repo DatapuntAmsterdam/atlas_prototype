@@ -37,7 +37,7 @@ exports[`LeafletContainer LeafletContainer snapshot should render correct 1`] = 
   clusterMarkers={Array []}
   geoJsons={Array []}
   getLeafletInstance={[Function]}
-  isBusy={false}
+  isLoading={false}
   isZoomControlVisible={true}
   layers={Array []}
   mapOptions={
@@ -327,7 +327,7 @@ exports[`LeafletContainer LeafletContainer snapshot should render different base
     ]
   }
   getLeafletInstance={[Function]}
-  isBusy={false}
+  isLoading={false}
   isZoomControlVisible={true}
   layers={Array []}
   mapOptions={

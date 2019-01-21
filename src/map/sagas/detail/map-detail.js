@@ -6,7 +6,9 @@ import {
   getCurrentEndpoint,
   getMapDetail
 } from '../../ducks/detail/map-detail';
-
+import {
+  mapLoadingAction
+} from '../../ducks/map/map';
 import fetchDetail from '../../services/map-detail';
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
 import { routing } from '../../../app/routes';
@@ -21,6 +23,7 @@ export function* fetchMapDetail() {
     const endpoint = yield select(getCurrentEndpoint);
     const mapDetail = yield call(fetchDetail, endpoint, user);
     yield put(fetchMapDetailSuccess(endpoint, mapDetail || {}));
+    yield put(mapLoadingAction(false));
   } catch (error) {
     yield put(fetchMapDetailFailure(error));
   }

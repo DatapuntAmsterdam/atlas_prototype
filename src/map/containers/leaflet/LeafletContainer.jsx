@@ -16,7 +16,7 @@ import {
   getMapZoom,
   getMarkers,
   getRdGeoJsons,
-  isMapBusy
+  isMapLoading
 } from '../../ducks/map/map-selectors';
 import {
   getClusterMarkers,
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => ({
   layers: getLayers(state),
   drawingMode: getDrawingMode(state),
   zoom: getMapZoom(state),
-  isBusy: isMapBusy(state)
+  isLoading: isMapLoading(state)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -103,8 +103,9 @@ class LeafletContainer extends React.Component {
   }
 
   handleClick(event) {
-    const { drawingMode, isBusy } = this.props;
-    if (!isDrawingActive(drawingMode) && !isBusy) {
+    const { drawingMode, isLoading } = this.props;
+
+    if (!isDrawingActive(drawingMode) && !isLoading) {
       this.props.onUpdateClick(event);
     }
   }
@@ -120,7 +121,7 @@ class LeafletContainer extends React.Component {
       layers,
       markers,
       zoom,
-      isBusy
+      isLoading
     } = this.props;
 
     const showMarker = markers.length > 0;
@@ -144,7 +145,7 @@ class LeafletContainer extends React.Component {
         scaleControlOptions={scaleControlOptions}
         zoomControlOptions={zoomControlOptions}
         zoom={zoom}
-        isBusy={isBusy}
+        isLoading={isLoading}
       />
     );
   }
@@ -186,7 +187,7 @@ LeafletContainer.propTypes = {
     url: PropTypes.string.isRequired
   })),
   zoom: PropTypes.number.isRequired,
-  isBusy: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   onUpdateClick: PropTypes.func.isRequired,
   onUpdatePan: PropTypes.func.isRequired,
   onUpdateZoom: PropTypes.func.isRequired,

@@ -10,7 +10,7 @@ import {
   getGeometry,
   getShapeDistanceTxt,
   isMarkerActive,
-  isMapBusy,
+  isMapLoading,
   isMapPanelActive
 } from './map-selectors';
 import { getGeoJson as getDetailGeoJson } from '../detail/map-detail';
@@ -31,7 +31,7 @@ describe('Map Selectors', () => {
     overlays: [{ overlay: '' }],
     zoom: 2,
     selectedLocation: '123,456',
-    isMapBusy: false,
+    isLoading: false,
     mapPanelActive: false,
     geometry: [],
     shapeDistanceTxt: 'foo'
@@ -56,7 +56,7 @@ describe('Map Selectors', () => {
       expect(getGeometry(state)).toEqual(map.geometry);
       expect(getDrawingMode(state)).toEqual(map.drawingMode);
       expect(getShapeDistanceTxt(state)).toEqual(map.shapeDistanceTxt);
-      expect(isMapBusy(state)).toEqual(map.isMapBusy);
+      expect(isMapLoading(state)).toEqual(map.isLoading);
       expect(getMapBoundingBox(state)).toEqual(map.boundingBox);
       expect(isMarkerActive(state)).toEqual(!detail);
       expect(isMapPanelActive(state)).toEqual(map.mapPanelActive);

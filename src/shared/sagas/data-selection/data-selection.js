@@ -102,8 +102,7 @@ function* retrieveDataSelection(action) {
       yield call(getMapMarkers, dataset, { ...activeFilters, shape });
       yield put(mapLoadingAction(false));
     }
-
-    yield put(mapLoadingAction(false));
+    yield put(mapLoadingAction(false)); // reset loading after retrieving data selection
   } catch (e) {
     yield put(receiveDataSelectionFailure({
       error: e.message,

@@ -37,7 +37,7 @@ describe('Map Reducer', () => {
     expect(reducer(initialState, mapLoadingAction(true)
     )).toEqual({
       ...initialState,
-      isMapBusy: true
+      isLoading: true
     });
   });
 
