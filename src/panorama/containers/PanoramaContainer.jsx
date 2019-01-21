@@ -12,7 +12,6 @@ import {
 } from '../ducks/actions';
 import { VIEWS } from '../ducks/constants';
 import {
-  pageTypeToEndpoint,
   toDataDetail,
   toGeoSearch
 } from '../../store/redux-first-router/actions';
@@ -24,6 +23,7 @@ import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullsc
 import { getPanorama, getPanoramaLocation, getReference } from '../ducks/selectors';
 import IconButton from '../../app/components/IconButton/IconButton';
 import { getMapDetail } from '../../map/ducks/detail/map-detail';
+import { pageTypeToEndpoint } from '../../map/services/map-detail';
 
 class PanoramaContainer extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
-import { pageTypeToEndpoint } from '../../../store/redux-first-router/actions';
 import { REDUCER_KEY } from './constants';
+import { pageTypeToEndpoint } from '../../../map/services/map-detail';
 
 export const getDetail = (state) => state[REDUCER_KEY];
 export const getDetailView = (state) => state[REDUCER_KEY].view;

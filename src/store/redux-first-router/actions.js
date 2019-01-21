@@ -92,11 +92,7 @@ export const toDetailFromEndpoint = (endpoint, view) => {
     [PARAMETERS.VIEW]: view
   });
 };
-export const pageTypeToEndpoint = (type, subtype, id) => {
-  let endpoint = 'https://acc.api.data.amsterdam.nl/';
-  endpoint += `${type}/${subtype}/${id}/`; // TODO: refactor, get back-end to return detail as detail GET not listing!
-  return endpoint;
-};
+
 export const toDataSearchCategory = (searchQuery, category) => ({
   type: routing.dataSearchCategory.type,
   payload: {

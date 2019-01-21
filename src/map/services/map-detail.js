@@ -22,11 +22,22 @@ import meetbout from '../../shared/services/meetbout/meetbout';
 import monument from '../../shared/services/monument/monument';
 import napPeilmerk from '../../shared/services/nap-peilmerk/nap-peilmerk';
 import vestiging from '../../shared/services/vestiging/vestiging';
+import { API_ROOT } from '../../shared/services/auth/auth';
 
 export const maxDisplayValuesPerProperty = 5;
 
-// NOTE: beware, if FETCH_DETAIL action payload includes endpointTypes string
-// then magic happens in '/src/reducers/details.js'
+export const pageEndpointTypeMapping = {
+  'explosieven/gevrijwaardgebied/': 'milieuthemas/explosieven/gevrijwaardgebied/',
+  'explosieven/inslagen/': 'milieuthemas/explosieven/inslagen/',
+  'explosieven/uitgevoerdonderzoek/': 'milieuthemas/explosieven/uitgevoerdonderzoek/',
+  'explosieven/verdachtgebied/': 'milieuthemas/explosieven/verdachtgebied/'
+};
+
+export const pageTypeToEndpoint = (type, subtype, id) => {
+  const endpoinType = pageEndpointTypeMapping[`${type}/${subtype}/`] || `${type}/${subtype}/`;
+  return `${API_ROOT}${endpoinType}${id}/`;
+};
+
 export const endpointTypes = {
   adressenLigplaats: 'bag/ligplaats/',
   adressenNummeraanduiding: 'bag/nummeraanduiding/',
