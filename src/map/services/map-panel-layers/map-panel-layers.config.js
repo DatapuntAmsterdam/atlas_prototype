@@ -107,70 +107,70 @@ export default [
         layer: 'eigendommen',
         selectable: true,
         title: 'Gemeente Amsterdam',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-1.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-1.svg'
       },
       {
         id: 'egog',
         layer: 'eigendommen',
         selectable: true,
         title: 'Overige gemeenten',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-2.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-2.svg'
       },
       {
         id: 'egst',
         layer: 'eigendommen',
         selectable: true,
         title: 'Staat',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-3.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-3.svg'
       },
       {
         id: 'egpr',
         layer: 'eigendommen',
         selectable: true,
         title: 'Provincies',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-4.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-4.svg'
       },
       {
         id: 'egwa',
         layer: 'eigendommen',
         selectable: true,
         title: 'Waterschappen',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-5.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-5.svg'
       },
       {
         id: 'egwo',
         layer: 'eigendommen',
         selectable: true,
         title: 'Woningbouwcorporaties',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-6.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-6.svg'
       },
       {
         id: 'egve',
         layer: 'eigendommen',
         selectable: true,
         title: 'Verenigingen van eigenaren',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-7.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-7.svg'
       },
       {
         id: 'egsp',
         layer: 'eigendommen',
         selectable: true,
         title: 'Spoorwegen/ProRail',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-8.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-8.svg'
       },
       {
         id: 'egnnp',
         layer: 'eigendommen',
         selectable: true,
         title: 'Overige niet-natuurlijke personen',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-9.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-9.svg'
       },
       {
         id: 'egnp',
         layer: 'eigendommen',
         selectable: true,
         title: 'Overige natuurlijke personen',
-        iconUrl: 'assets/images/map-legend/icon-egdm-cat-10.svg'
+        iconUrl: '/assets/images/map-legend/icon-egdm-cat-10.svg'
       }
     ],
     maxZoom: 16,
@@ -186,14 +186,14 @@ export default [
         layer: 'erfpacht',
         selectable: true,
         title: 'Gemeente Amsterdam',
-        iconUrl: 'assets/images/map-legend/icon-erf-cat-1.svg'
+        iconUrl: '/assets/images/map-legend/icon-erf-cat-1.svg'
       },
       {
         id: 'efov',
         layer: 'erfpacht',
         selectable: true,
         title: 'Overig',
-        iconUrl: 'assets/images/map-legend/icon-erf-cat-2.svg'
+        iconUrl: '/assets/images/map-legend/icon-erf-cat-2.svg'
       }
     ],
     maxZoom: 16,
@@ -368,57 +368,57 @@ export default [
     layers: ['ahn3_05m_dtm'],
     legendItems: [
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-minus-10.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-minus-10.svg',
         selectable: false,
         title: '-10 m tot -5 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-minus-5.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-minus-5.svg',
         selectable: false,
         title: '-5 m tot -2 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-minus-2.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-minus-2.svg',
         selectable: false,
         title: '-2 m tot -1 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-minus-1.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-minus-1.svg',
         selectable: false,
         title: '-1 m tot 0 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-0.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-0.svg',
         selectable: false,
         title: '0 m tot 1 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-1.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-1.svg',
         selectable: false,
         title: '1 m tot 2 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-2.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-2.svg',
         selectable: false,
         title: '2 m tot 5 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-5.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-5.svg',
         selectable: false,
         title: '5 m tot 10 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-10.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-10.svg',
         selectable: false,
         title: '10 m tot 20 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-20.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-20.svg',
         selectable: false,
         title: '20 m tot 30 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-30.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-30.svg',
         selectable: false,
         title: 'hoger dan 30 m'
       }
@@ -434,57 +434,57 @@ export default [
     layers: ['ahn3_05m_dsm'],
     legendItems: [
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-minus-10.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-minus-10.svg',
         selectable: false,
         title: '-10 m tot -5 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-minus-5.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-minus-5.svg',
         selectable: false,
         title: '-5 m tot -2 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-minus-2.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-minus-2.svg',
         selectable: false,
         title: '-2 m tot -1 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-minus-1.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-minus-1.svg',
         selectable: false,
         title: '-1 m tot 0 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-0.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-0.svg',
         selectable: false,
         title: '0 m tot 1 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-1.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-1.svg',
         selectable: false,
         title: '1 m tot 2 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-2.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-2.svg',
         selectable: false,
         title: '2 m tot 5 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-5.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-5.svg',
         selectable: false,
         title: '5 m tot 10 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-10.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-10.svg',
         selectable: false,
         title: '10 m tot 20 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-20.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-20.svg',
         selectable: false,
         title: '20 m tot 30 m'
       },
       {
-        iconUrl: 'assets/images/map-legend/icon-ahn-plus-30.svg',
+        iconUrl: '/assets/images/map-legend/icon-ahn-plus-30.svg',
         selectable: false,
         title: 'hoger dan 30 m'
       }
@@ -1131,7 +1131,7 @@ export default [
       {
         selectable: false,
         title: 'Geotechnische sondering',
-        iconUrl: 'assets/images/map-legend/icon-bro-sondering.png'
+        iconUrl: '/assets/images/map-legend/icon-bro-sondering.png'
       }
     ],
     maxZoom: 16,
@@ -2114,7 +2114,7 @@ export default [
       {
         selectable: false,
         title: 'Totale begroting baten',
-        iconUrl: 'assets/images/map-legend/icon-grex-stadsdeel.svg'
+        iconUrl: '/assets/images/map-legend/icon-grex-stadsdeel.svg'
       }
     ],
     maxZoom: 16,
