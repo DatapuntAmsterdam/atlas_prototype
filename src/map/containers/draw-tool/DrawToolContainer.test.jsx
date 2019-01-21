@@ -175,16 +175,16 @@ describe('DrawToolContainer', () => {
         expect(store.dispatch).not.toHaveBeenCalled();
       });
 
-      it('should dispatch MAP_END_DRAWING when the polygon has only two points', () => {
+      it('should not dispatch SET_GEOMETRY_FILTER when the polygon has only two points', () => {
         const polygon = {
           ...polygonMock,
           markers: [...markers.filter((item, index) => index < 2)]
         };
         wrapperInstance.onFinishShape(polygon);
-        expect(store.dispatch).toHaveBeenCalledWith(setGeometryFilter(polygon));
+        expect(store.dispatch).not.toHaveBeenCalledWith(setGeometryFilter(polygon));
       });
 
-      it('should set new Markers and dispatch MAP_END_DRAWING when the polygon has more than two points', () => {
+      it('should set new Markers and dispatch SET_GEOMETRY_FILTER when the polygon has more than two points', () => {
         const polygon = {
           ...polygonMock,
           markers: [...markers.filter((item, index) => index < 3)]

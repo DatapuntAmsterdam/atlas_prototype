@@ -29,14 +29,6 @@ Object {
 }
 `;
 
-exports[`Data Selection Reducer should set geometryFilter, markers, shape state when dispatching resetDrawing 1`] = `
-Object {
-  "geometryFilter": Object {},
-  "markers": Array [],
-  "shape": "",
-}
-`;
-
 exports[`Data Selection Reducer should set isLoading, authError, errorMessage, dataset, result, markers state when dispatching receiveDataSelectionFailure 1`] = `
 Object {
   "authError": false,
@@ -81,6 +73,12 @@ Object {
 exports[`Data Selection Reducer should set page state when dispatching setPage 1`] = `
 Object {
   "page": 1,
+}
+`;
+
+exports[`Data Selection Reducer should set shape state when dispatching resetDrawing 1`] = `
+Object {
+  "shape": "",
 }
 `;
 

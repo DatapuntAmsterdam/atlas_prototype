@@ -76,7 +76,7 @@ describe('Data Selection Reducer', () => {
     ),
     ...getExpectations(
       actionCreators.resetDrawing.name,
-      ['geometryFilter', 'markers', 'shape']
+      ['shape']
     ),
     ...getExpectations(
       actionCreators.receiveDataSelectionSuccess.name,

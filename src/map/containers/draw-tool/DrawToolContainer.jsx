@@ -86,10 +86,7 @@ class DrawToolContainer extends React.Component {
 
   onFinishShape(polygon) {
     const { onSetGeometryFilter } = this.props;
-    const has2Markers = polygon && polygon.markers && polygon.markers.length === 2;
-    const moreThan2Markers = polygon && polygon.markers && polygon.markers.length > 2;
-
-    if (moreThan2Markers || has2Markers) {
+    if (polygon && polygon.markers && polygon.markers.length > 2) {
       onSetGeometryFilter(polygon);
     }
   }

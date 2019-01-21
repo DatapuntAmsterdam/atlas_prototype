@@ -12,7 +12,8 @@ import {
   SET_MARKERS,
   SET_PAGE,
   SET_VIEW,
-  REDUCER_KEY, RESET_DATA_SELECTION
+  REDUCER_KEY,
+  RESET_DATA_SELECTION
 } from './constants';
 import { routing } from '../../../app/routes';
 import { SET_SELECTION } from '../selection/selection';
@@ -114,8 +115,6 @@ export default function reducer(state = initialState, action) {
     case RESET_DATA_SELECTION:
       return {
         ...enrichedState,
-        geometryFilter: {},
-        markers: [],
         shape: ''
       };
 
