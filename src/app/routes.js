@@ -40,7 +40,7 @@ export const routing = {
     page: PAGES.SEARCH_DATASETS
   },
   datasetsDetail: {
-    title: 'Datasets',
+    title: 'Dataset',
     path: '/datasets/:id',
     type: `${ROUTER_NAMESPACE}/${PAGES.DATASETS_DETAIL}`,
     page: PAGES.DATASETS_DETAIL
