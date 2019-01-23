@@ -172,6 +172,7 @@ export default function MapReducer(state = initialState, action) {
       return {
         ...enrichedState,
         drawingMode: initialState.drawingMode,
+        shapeMarkers: initialState.shapeMarkers,
         shapeDistanceTxt: initialState.shapeDistanceTxt,
         shapeAreaTxt: initialState.shapeAreaTxt
       };
@@ -180,6 +181,7 @@ export default function MapReducer(state = initialState, action) {
       return {
         ...enrichedState,
         drawingMode: initialState.drawingMode,
+        shapeMarkers: initialState.shapeMarkers,
         shapeDistanceTxt: initialState.shapeDistanceTxt,
         shapeAreaTxt: initialState.shapeAreaTxt
       };
