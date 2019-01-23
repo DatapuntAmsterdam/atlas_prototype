@@ -44,11 +44,6 @@ describe('Data Selection Reducer', () => {
       [1]
     ),
     ...getExpectations(
-      actionCreators.setView.name,
-      ['view'],
-      ['map']
-    ),
-    ...getExpectations(
       actionCreators.setDataset.name,
       ['dataset'],
       ['foobar']

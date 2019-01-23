@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import DataSearch from './DataSearch';
+import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
 
 jest.mock('../../../shared/ducks/detail/constants', () => ({
   DETAIL_VIEW: {
@@ -58,7 +59,7 @@ describe('DataSearch', () => {
     );
 
     component.find('button.qa-show-more').at(0).simulate('click');
-    expect(toDetailMock).toHaveBeenCalledWith('https://something.com', 'foo');
+    expect(toDetailMock).toHaveBeenCalledWith('https://something.com', VIEW_MODE.SPLIT);
   });
 
   it('should fetch all search results on button click', () => {

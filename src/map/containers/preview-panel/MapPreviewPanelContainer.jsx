@@ -9,12 +9,11 @@ import { getDetailLocation } from '../../../store/redux-first-router/selectors';
 
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
 import { selectLatestMapDetail } from '../../ducks/detail/map-detail';
-import { isEmbedded, isEmbedPreview } from '../../../shared/ducks/ui/ui';
+import { isEmbedded, isEmbedPreview, setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui';
 import { getDetail, getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
 import MapPreviewPanel from './MapPreviewPanel';
 import { getLocationId } from '../../ducks/map/map-selectors';
 import { isGeoSearch } from '../../../shared/ducks/selection/selection';
-import { setView } from '../../../shared/ducks/data-search/actions';
 import {
   getDataSearch,
   getDataSearchLocation,
@@ -22,7 +21,6 @@ import {
   isSearchLoading
 } from '../../../shared/ducks/data-search/selectors';
 import { getPanoramaPreview } from '../../../panorama/ducks/preview/panorama-preview';
-import { DETAIL_VIEW } from '../../../shared/ducks/detail/constants';
 
 const mapStateToProps = (state) => ({
   panoPreview: getPanoramaPreview(state),
@@ -47,11 +45,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
     closePanel: toMapAndPreserveQuery,
-    onSearchMaximize: setView,
+    onSearchMaximize: setViewMode,
     openPano: toPanoramaAndPreserveQuery
   }, dispatch),
-  openPreviewDetail: (endpoint) => dispatch(toDetailFromEndpoint(endpoint, DETAIL_VIEW.MAP)),
-  openDetail: (endpoint) => dispatch(toDetailFromEndpoint(endpoint, DETAIL_VIEW.MAP_DETAIL))
+  openPreviewDetail: (endpoint) => dispatch(toDetailFromEndpoint(endpoint, VIEW_MODE.MAP)),
+  openDetail: (endpoint) => dispatch(toDetailFromEndpoint(endpoint, VIEW_MODE.SPLIT))
 });
 
 /* eslint-enable react/no-unused-prop-types */

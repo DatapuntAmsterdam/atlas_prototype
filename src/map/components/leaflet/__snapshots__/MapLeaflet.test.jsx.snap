@@ -1540,7 +1540,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 2`] 
     <NonTiledLayer
       format="image/png"
       identify={false}
-      key="0"
+      key="biz"
       layers={
         Array [
           "biz_polygons",
@@ -1917,7 +1917,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 3`] 
     <NonTiledLayer
       format="image/png"
       identify={false}
-      key="0"
+      key="bbn"
       layers={
         Array [
           "bouwblok",
@@ -2495,7 +2495,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     <NonTiledLayer
       format="image/png"
       identify={false}
-      key="0"
+      key="biz"
       layers={
         Array [
           "biz_polygons",
@@ -2757,7 +2757,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     <NonTiledLayer
       format="image/png"
       identify={false}
-      key="0"
+      key="biz"
       layers={
         Array [
           "biz_polygons",
@@ -3020,7 +3020,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     <NonTiledLayer
       format="image/png"
       identify={false}
-      key="0"
+      key="bbn"
       layers={
         Array [
           "bouwblok",
@@ -3594,7 +3594,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
     <NonTiledLayer
       format="image/png"
       identify={false}
-      key="0"
+      key="biz"
       layers={
         Array [
           "biz_polygons",

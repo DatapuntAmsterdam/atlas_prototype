@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { DETAIL_VIEW, FETCH_DETAIL, SHOW_DETAIL } from './constants';
+import { FETCH_DETAIL, SHOW_DETAIL } from './constants';
 import { fetchDetail } from './actions';
 
 describe('DetailReducer', () => {
@@ -10,8 +10,7 @@ describe('DetailReducer', () => {
 
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
-      isLoading: false,
-      view: DETAIL_VIEW.MAP_DETAIL
+      isLoading: false
     });
   });
 

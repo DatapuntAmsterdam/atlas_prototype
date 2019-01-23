@@ -1,6 +1,6 @@
 import PAGES from '../../../src/app/pages';
 import { ROUTER_NAMESPACE } from '../../../src/app/routes';
-import * as routerSelectors from '../../../src/store/redux-first-router/selectors';
+import * as ui from '../../../src/shared/ducks/ui/ui';
 
 describe('The header controller', function () {
     var $controller,
@@ -38,11 +38,8 @@ describe('The header controller', function () {
             }
         };
 
-        routerSelectors.isDataSelectionPage = () => true;
-        routerSelectors.isDatasetPage = () => true;
-        routerSelectors.isDatasetDetailPage = () => true;
-        routerSelectors.isHomepage = () => true;
-        routerSelectors.isMapActive = () => true;
+        ui.hasPrintMode = () => false;
+        ui.isMapActive = () => true;
     });
 
     function getController () {
@@ -66,7 +63,6 @@ describe('The header controller', function () {
     });
 
     it('doesn\'t break when search is null', function () {
-        routerSelectors.isDatasetPage = () => false;
         mockedState = {
             search: null
         };
@@ -95,8 +91,7 @@ describe('The header controller', function () {
         });
 
         it('all other pages and non dataSelection content has a printButton', function () {
-            routerSelectors.isDataSelectionPage = () => false;
-            routerSelectors.isHomepage = () => false;
+            ui.hasPrintMode = () => true;
 
             const controller = getController();
 
@@ -112,7 +107,7 @@ describe('The header controller', function () {
         });
 
         it('should not show when map page is not active', function () {
-            routerSelectors.isMapActive = () => false;
+            ui.isMapActive = () => false;
             const controller = getController();
 
             expect(controller.hasEmbedButton).toBe(false);

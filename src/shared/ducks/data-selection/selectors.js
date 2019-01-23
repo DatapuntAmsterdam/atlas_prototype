@@ -1,7 +1,7 @@
 // Selectors
 import get from 'lodash.get';
 import { createSelector } from 'reselect';
-import { REDUCER_KEY, VIEWS } from './constants';
+import { REDUCER_KEY } from './constants';
 import { detailPointType } from '../../../map/components/leaflet/services/icons.constant';
 
 export const getDataSelection = (state) => state[REDUCER_KEY];
@@ -18,14 +18,6 @@ export const getGeometryFiltersMarkers = createSelector(
 export const getDataSelectionResult = createSelector(
   getDataSelection,
   (dataSelection) => dataSelection.result || {});
-export const getDataSelectionView = createSelector(
-  getDataSelection,
-  (dataSelection) => dataSelection && dataSelection.view
-);
-export const isListView = createSelector(
-  getDataSelectionView,
-  (view) => view === VIEWS.LIST
-);
 const generateMarkers = (markers) => (
   markers.map((markerLocation, index) => ({
     position: markerLocation,

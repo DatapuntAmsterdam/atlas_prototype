@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions';
 import SearchListItem from '../SearchListItem/SearchListItem';
-import { DETAIL_VIEW } from '../../../shared/ducks/detail/constants';
+import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
 
 const SearchList = ({ categoryResults, limit, hasLoadMore, fetchMoreResults }) => {
   const results = (categoryResults && categoryResults.results) ?
     categoryResults.results.map((result) => ({
       ...result,
-      linkTo: toDetailFromEndpoint(result.endpoint, DETAIL_VIEW.MAP_DETAIL)
+      linkTo: toDetailFromEndpoint(result.endpoint, VIEW_MODE.SPLIT)
     })) : [];
   return (
     <div className="qa-search-results-list">

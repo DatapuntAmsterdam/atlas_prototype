@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
-import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
+import { REQUEST_NEAREST_DETAILS } from '../../../shared/ducks/data-search/constants';
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions';
 import { showDetail } from '../../../shared/ducks/detail/actions';
 import { FETCH_MAP_DETAIL_SUCCESS } from '../../ducks/detail/constants';

@@ -4,9 +4,9 @@ import DATA_SELECTION_CONFIG
 import {
     setDataset} from '../../../../src/shared/ducks/data-selection/actions';
 import {
-    DATASETS,
-    VIEWS
+    DATASETS, VIEWS_TO_PARAMS
 } from '../../../../src/shared/ducks/data-selection/constants';
+import { VIEW_MODE } from '../../../../src/shared/ducks/ui/ui';
 
 (function () {
     'use strict';
@@ -45,11 +45,11 @@ import {
         ], setHeader);
 
         function setHeader () {
-            const isListView = vm.view === VIEWS.LIST;
+            const isListView = vm.view === VIEWS_TO_PARAMS[VIEW_MODE.SPLIT];
             const config = DATA_SELECTION_CONFIG.datasets[vm.dataset];
             const exportAuthScope = config.AUTH_SCOPE;
             vm.showButtons = vm.dataset !== 'dcatd';
-            vm.showDownloadButton = vm.view !== VIEWS.LIST &&
+            vm.showDownloadButton = vm.view !== VIEWS_TO_PARAMS[VIEW_MODE.SPLIT] &&
                 vm.numberOfRecords > 0 &&
                 (!exportAuthScope || vm.user.scopes.includes(exportAuthScope));
             vm.showTabs = isListView;

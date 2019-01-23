@@ -1,4 +1,5 @@
 import { routing } from '../../../../src/app/routes';
+import { VIEW_MODE } from '../../../../src/shared/ducks/ui/ui';
 
 describe('The dp-panorama-thumbnail component', function () {
     let $compile,
@@ -71,7 +72,7 @@ describe('The dp-panorama-thumbnail component', function () {
         expect(scope.vm.linkTo).toEqual({
             type: routing.panorama.type,
             payload: { id: 42 },
-            meta: { preserve: true, additionalParams: { heading: 99, view: 'beeld-kaart' } }
+            meta: { preserve: true, additionalParams: { heading: 99, view: VIEW_MODE.SPLIT } }
         });
         expect(scope.vm.isLoading).toBe(false);
     });
@@ -94,7 +95,7 @@ describe('The dp-panorama-thumbnail component', function () {
         expect(scope.vm.linkTo).toEqual({
             type: routing.panorama.type,
             payload: { id: 43 },
-            meta: { preserve: true, additionalParams: { heading: 99, view: 'beeld-kaart' } }
+            meta: { preserve: true, additionalParams: { heading: 99, view: VIEW_MODE.SPLIT } }
         });
     });
 

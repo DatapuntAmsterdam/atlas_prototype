@@ -16,8 +16,9 @@ import {
   getDataSelection,
   getDataSelectionResult
 } from '../../../shared/ducks/data-selection/selectors';
-import { VIEWS } from '../../../shared/ducks/data-selection/constants';
 import NoResultsForSearchType from '../Messages/NoResultsForSearchType';
+import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui';
+import { VIEWS_TO_PARAMS } from '../../../shared/ducks/data-selection/constants';
 
 const DataSelection = ({
   view,
@@ -37,14 +38,14 @@ const DataSelection = ({
   page: currentPage
 }) => {
   // Local state
-  const showHeader = (view === VIEWS.LIST || !isLoading);
-  const showFilters = (view !== VIEWS.LIST) && numberOfRecords > 0;
+  const showHeader = (view === VIEW_MODE.SPLIT || !isLoading);
+  const showFilters = (view !== VIEW_MODE.SPLIT) && numberOfRecords > 0;
   const { MAX_AVAILABLE_PAGES, MAX_NUMBER_OF_CLUSTERED_MARKERS } =
     DATA_SELECTION_CONFIG.datasets[dataset];
 
   const showMessageMaxPages = MAX_AVAILABLE_PAGES && currentPage > MAX_AVAILABLE_PAGES;
   const showMessageClusteredMarkers =
-    (view === VIEWS.LIST) && numberOfRecords > MAX_NUMBER_OF_CLUSTERED_MARKERS;
+    (view === VIEW_MODE.SPLIT) && numberOfRecords > MAX_NUMBER_OF_CLUSTERED_MARKERS;
 
   const datasetScope = DATA_SELECTION_CONFIG.datasets[dataset].AUTH_SCOPE;
   const authScopeError = datasetScope ? !userScopes.includes(datasetScope) : false;
@@ -69,7 +70,7 @@ const DataSelection = ({
             numberOfRecords,
             showHeader,
             user,
-            view
+            view: VIEWS_TO_PARAMS[view]
           }}
         />
 
@@ -147,7 +148,7 @@ const DataSelection = ({
 
                 {numberOfRecords > 0 ?
                   (<div>
-                    {view === VIEWS.TABLE && (
+                    {view === VIEW_MODE.FULL && (
                       <AngularWrapper
                         moduleName={'dpDataSelectionTableWrapper'}
                         component="dpDataSelectionTable"
@@ -158,7 +159,7 @@ const DataSelection = ({
                         }}
                       />
                     )}
-                    {view === VIEWS.LIST && (
+                    {view === VIEW_MODE.SPLIT && (
                       <AngularWrapper
                         moduleName={'dpDataSelectionListWrapper'}
                         component="dpDataSelectionList"
@@ -216,13 +217,13 @@ DataSelection.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { view, isLoading, dataset, authError, page } = getDataSelection(state);
+  const { isLoading, dataset, authError, page } = getDataSelection(state);
   return ({
-    view,
     isLoading,
     dataset,
     authError,
     page,
+    view: getViewMode(state),
     activeFilters: getFilters(state),
     results: getDataSelectionResult(state),
     user: getUser(state),

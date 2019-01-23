@@ -1,4 +1,5 @@
 import { routing } from '../../../app/routes';
+import { VIEW_MODE } from '../ui/ui';
 
 export const REDUCER_KEY = 'dataSelection';
 export const FETCH_DATA_SELECTION_REQUEST = `${REDUCER_KEY}/FETCH_DATA_SELECTION_REQUEST`;
@@ -7,7 +8,6 @@ export const FETCH_DATA_SELECTION_FAILURE = `${REDUCER_KEY}/FETCH_DATA_SELECTION
 export const DOWNLOAD_DATA_SELECTION = `${REDUCER_KEY}/DOWNLOAD_DATA_SELECTION`;
 export const REMOVE_GEOMETRY_FILTER = `${REDUCER_KEY}/REMOVE_GEOMETRY_FILTER`;
 export const SET_GEOMETRY_FILTER = `${REDUCER_KEY}/SET_GEOMETRY_FILTER`;
-export const SET_VIEW = `${REDUCER_KEY}/SET_VIEW`;
 export const RESET_DATA_SELECTION = `${REDUCER_KEY}/RESET_DATA_SELECTION`;
 export const CANCEL_DATA_SELECTION = `${REDUCER_KEY}/CANCEL_DATA_SELECTION`;
 export const START_DATA_SELECTION = `${REDUCER_KEY}/START_DATA_SELECTION`;
@@ -22,16 +22,10 @@ export const ROUTE_DATASET_MAPPER = {
   [routing.addresses.type]: 'bag'
 };
 
-export const VIEWS = {
-  LIST: 'LIST',
-  TABLE: 'TABLE',
-  MAP: 'MAP'
-};
-
 export const VIEWS_TO_PARAMS = {
-  [VIEWS.LIST]: 'lijst-kaart',
-  [VIEWS.MAP]: 'kaart',
-  [VIEWS.TABLE]: 'tabel'
+  [VIEW_MODE.SPLIT]: 'LIST',
+  [VIEW_MODE.MAP]: 'MAP',
+  [VIEW_MODE.FULL]: 'TABLE'
 };
 
 export const PARAMS_TO_VIEWS =
@@ -56,7 +50,6 @@ export const initialState = {
     markers: undefined
   },
   dataset: DATASETS.BAG,
-  view: VIEWS.TABLE,
   authError: false,
   errorMessage: '',
   page: 1

@@ -22,10 +22,10 @@ import {
   FETCH_PANORAMA_REQUEST_TOGGLE,
   FETCH_PANORAMA_SUCCESS,
   SET_PANORAMA_LOCATION,
-  SET_PANORAMA_YEAR,
-  VIEWS
+  SET_PANORAMA_YEAR
 } from '../../panorama/ducks/constants';
-import { getPanoramaHistory, getPanoramaLocation, getPanoramaView } from '../ducks/selectors';
+import { getPanoramaHistory, getPanoramaLocation } from '../ducks/selectors';
+import { getViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 
 describe('watchPanoramaRoute', () => {
   const payload = { id: 'payload' };
@@ -33,8 +33,8 @@ describe('watchPanoramaRoute', () => {
   it('should dispatch the correct action', () => {
     testSaga(fetchFetchPanoramaEffect, { payload })
       .next()
-      .select(getPanoramaView)
-      .next(VIEWS.PANO)
+      .select(getViewMode)
+      .next(VIEW_MODE.FULL)
       .put(closeMapPanel())
       .next()
       .put(fetchPanoramaRequest(payload))

@@ -1,14 +1,14 @@
 import get from 'lodash.get';
 import { toGlossaryKey } from '../../../detail/services/endpoint-parser/endpoint-parser';
 import GLOSSARY from '../../../detail/services/glossary.constant';
-import { VIEWS } from '../../../map/ducks/map/map';
 import { routing } from '../../../app/routes';
+import { VIEW_MODE } from '../../ducks/ui/ui';
 
 export const homeDocumentTitle = (action, defaultTitle) => {
   let pageTitle = defaultTitle;
   const view = get(action, 'meta.query.view', '');
   const embed = get(action, 'meta.query.embed', 'false');
-  if (view === VIEWS.MAP) {
+  if (view === VIEW_MODE.MAP) {
     pageTitle = 'Grote kaart';
     if (embed === 'true') {
       pageTitle = `${pageTitle} | Embeded`;

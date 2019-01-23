@@ -1,4 +1,10 @@
-import UiReducer, { HIDE_EMBED_PREVIEW, HIDE_PRINT, SHOW_EMBED_PREVIEW, SHOW_PRINT } from './ui';
+import UiReducer, {
+  HIDE_EMBED_PREVIEW,
+  HIDE_PRINT,
+  SHOW_EMBED_PREVIEW,
+  SHOW_PRINT,
+  VIEW_MODE
+} from './ui';
 
 describe('UiReducer', () => {
   let state;
@@ -12,7 +18,8 @@ describe('UiReducer', () => {
       isMapPanelHandleVisible: true,
       isEmbedPreview: false,
       isEmbed: false,
-      isPrintMode: false
+      isPrintMode: false,
+      viewMode: VIEW_MODE.FULL
     });
   });
 

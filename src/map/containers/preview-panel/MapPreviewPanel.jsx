@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator';
 import MapDetailResult from '../../components/detail-result/MapDetailResult';
 import MapSearchResults from '../../components/search-results/MapSearchResults';
-import { VIEWS } from '../../../shared/ducks/data-search/constants';
+import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
 
 const previewPanelSearchResultLimit = 3;
 
@@ -25,7 +25,7 @@ class MapPreviewPanel extends React.Component {
     const isDetailLoaded = !isLoading && props.detail && props.mapDetail && props.detailResult;
 
     const openDetailEndpoint = () => props.openDetail(props.detailEndpoint);
-    const onMaximize = () => props.onSearchMaximize(VIEWS.LIST);
+    const onMaximize = () => props.onSearchMaximize(VIEW_MODE.SPLIT);
 
     return !props.isEmbed && (
       <div className="map-preview-panel-wrapper">

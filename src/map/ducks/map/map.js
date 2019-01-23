@@ -22,20 +22,14 @@ export const SET_MAP_CLICK_LOCATION = 'SET_MAP_CLICK_LOCATION';
 export const TOGGLE_MAP_PANEL = 'TOGGLE_MAP_PANEL';
 export const CLOSE_MAP_PANEL = 'CLOSE_MAP_PANEL';
 export const MAP_LOADING = 'MAP_LOADING';
-export const SET_VIEW = 'SET_VIEW';
 
 export const DEFAULT_LAT = 52.3731081;
 export const DEFAULT_LNG = 4.8932945;
 export const PANORAMA = 'pano';
-export const VIEWS = {
-  MAP: 'kaart',
-  HOME: 'home'
-};
 
 export const initialState = {
   viewCenter: [DEFAULT_LAT, DEFAULT_LNG],
   baseLayer: 'topografie',
-  view: VIEWS.HOME,
   zoom: 11,
   overlays: [],
   isLoading: false,
@@ -113,12 +107,6 @@ export default function MapReducer(state = initialState, action) {
       return {
         ...enrichedState,
         baseLayer: action.payload
-      };
-
-    case SET_VIEW:
-      return {
-        ...enrichedState,
-        view: action.payload
       };
 
     case TOGGLE_MAP_PANEL:

@@ -1,11 +1,4 @@
-import { isListView } from '../../../src/shared/ducks/data-selection/selectors';
-import {
-    isDataSelectionPage,
-    isDatasetPage,
-    isDatasetDetailPage,
-    isHomepage,
-    isMapActive
-} from '../../../src/store/redux-first-router/selectors';
+import { hasPrintMode, isMapActive } from '../../../src/shared/ducks/ui/ui';
 
 (function () {
     'use strict';
@@ -25,9 +18,7 @@ import {
         function update () {
             const state = store.getState();
 
-            vm.hasPrintButton = (!isDataSelectionPage(state) || isListView(state)) &&
-                (isDatasetDetailPage(state) || !isDatasetPage(state)) &&
-                !isHomepage(state);
+            vm.hasPrintButton = hasPrintMode(state);
             vm.hasEmbedButton = isMapActive(state);
         }
     }

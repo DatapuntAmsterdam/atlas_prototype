@@ -30,7 +30,7 @@ exports[`SearchList should render a results list 1`] = `
           "linkTo": Object {
             "meta": Object {
               "additionalParams": Object {
-                "view": "detail-kaart",
+                "view": "gesplitst",
               },
               "forceSaga": true,
               "preserve": true,
@@ -69,7 +69,7 @@ exports[`SearchList should render a results list 1`] = `
           "linkTo": Object {
             "meta": Object {
               "additionalParams": Object {
-                "view": "detail-kaart",
+                "view": "gesplitst",
               },
               "forceSaga": true,
               "preserve": true,

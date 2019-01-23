@@ -3,22 +3,20 @@ import classNames from 'classnames';
 import { AngularWrapper } from 'react-angular';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import MapPage from './pages/MapPage';
 import ContentPage from './pages/ContentPage';
 import PAGES, { isCmsPage as pageIsCmsPage } from './pages';
-import DataSelection from './pages/DataSelection';
 import './_app.scss';
 import DatasetDetailContainer from './containers/DatasetDetailContainer';
 import {
+  getViewMode,
   isEmbedded,
   isEmbedPreview,
   isPrintMode,
   isPrintModeLandscape,
-  isPrintOrEmbedMode
+  isPrintOrEmbedMode,
+  VIEW_MODE
 } from '../shared/ducks/ui/ui';
 import { CMS_PAGE_MAPPING } from './pages/CMSPageMapping';
-import PanoramaPage from './pages/PanoramaPage';
-import DetailPage from './pages/DetailPage';
 import Home from './pages/Home';
 import { getUser } from '../shared/ducks/user/user';
 import { getPage } from '../store/redux-first-router/selectors';
@@ -26,9 +24,7 @@ import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe';
 import QuerySearchPage from './pages/QuerySearchPage';
 import DatasetPage from './pages/DatasetPage';
 import { DataSearchQuery } from './components/DataSearch';
-import { getMapView } from '../map/ducks/map/map-selectors';
-import { VIEWS } from '../map/ducks/map/map';
-import GeoSearchPage from './pages/GeoSearchPage';
+import MapSplitPage from './pages/MapSplitPage';
 
 // TodoReactMigration: implement logic
 const App = ({
@@ -40,11 +36,11 @@ const App = ({
   embedPreviewMode,
   printModeLandscape,
   printOrEmbedMode,
-  mapView,
+  viewMode,
   user
 }) => {
-  const isHomePage = (mapView === VIEWS.HOME && currentPage === PAGES.HOME);
-  const isMapPage = (mapView === VIEWS.MAP && currentPage === PAGES.HOME);
+  const isHomePage = (viewMode === VIEW_MODE.FULL && currentPage === PAGES.HOME);
+  const isMapPage = (viewMode === VIEW_MODE.MAP && currentPage === PAGES.HOME);
   const isCmsPage = pageIsCmsPage(currentPage);
   let cmsPageData;
   if (isCmsPage) {
@@ -123,8 +119,6 @@ const App = ({
               <QuerySearchPage />
               }
 
-              {(currentPage === PAGES.DATA_GEO_SEARCH) && <GeoSearchPage /> }
-
               {/* Todo: DP-6391 */}
               {(currentPage === PAGES.DATA_SEARCH_CATEGORY) && (
                 <div className="c-search-results u-grid">
@@ -132,23 +126,20 @@ const App = ({
                 </div>
               )}
 
-              {(isMapPage) && <MapPage />}
-
-              {currentPage === PAGES.DATA_DETAIL && <DetailPage />}
-
-              {currentPage === PAGES.PANORAMA && <PanoramaPage />}
+              {(isMapPage ||
+                currentPage === PAGES.PANORAMA ||
+                currentPage === PAGES.DATA_DETAIL ||
+                currentPage === PAGES.ADDRESSES ||
+                currentPage === PAGES.ESTABLISHMENTS ||
+                currentPage === PAGES.DATA_GEO_SEARCH ||
+                currentPage === PAGES.CADASTRAL_OBJECTS)
+              && <MapSplitPage />
+              }
 
               {currentPage === PAGES.DATASETS && <DatasetPage />}
 
               {currentPage === PAGES.DATASETS_DETAIL && (
                 <DatasetDetailContainer />
-              )}
-
-              {(currentPage === PAGES.ADDRESSES
-                || currentPage === PAGES.ESTABLISHMENTS
-                || currentPage === PAGES.CADASTRAL_OBJECTS)
-              && (
-                <DataSelection />
               )}
 
               {isCmsPage && (
@@ -173,7 +164,7 @@ App.defaultProps = {
 
 App.propTypes = {
   isFullHeight: PropTypes.bool,
-  mapView: PropTypes.string.isRequired,
+  viewMode: PropTypes.string.isRequired,
   currentPage: PropTypes.string.isRequired,
   visibilityError: PropTypes.bool, // vm.visibility.error
   embedMode: PropTypes.bool.isRequired,
@@ -186,7 +177,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentPage: getPage(state),
-  mapView: getMapView(state),
+  viewMode: getViewMode(state),
   embedMode: isEmbedded(state),
   printMode: isPrintMode(state),
   printModeLandscape: isPrintModeLandscape(state),

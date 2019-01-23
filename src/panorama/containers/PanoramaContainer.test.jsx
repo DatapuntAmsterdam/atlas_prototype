@@ -3,14 +3,15 @@ import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import PanoramaContainer from './PanoramaContainer';
 import { getOrientation, loadScene } from '../services/marzipano/marzipano';
-import { fetchPanoramaHotspotRequest, setView } from '../ducks/actions';
-import { VIEWS } from '../ducks/constants';
+import { fetchPanoramaHotspotRequest } from '../ducks/actions';
 import { getPanorama, getPanoramaLocation, getReference } from '../ducks/selectors';
 import { getMapOverlaysWithoutPanorama } from '../../map/ducks/map/map-selectors';
+import { VIEW_MODE, setViewMode } from '../../shared/ducks/ui/ui';
 
 jest.mock('../../map/ducks/map/map-selectors');
 jest.mock('../services/marzipano/marzipano');
 jest.mock('../ducks/selectors');
+jest.mock('../../shared/ducks/ui/ui');
 
 describe('PanoramaContainer', () => {
   const initialState = {};
@@ -32,6 +33,7 @@ describe('PanoramaContainer', () => {
       missionType: 'ABC'
     }
   }));
+  setViewMode.mockImplementation(() => ({ type: 'some type' }));
   getReference.mockImplementation(() => []);
   getMapOverlaysWithoutPanorama.mockImplementation(() => ([]));
   getPanoramaLocation.mockImplementation(() => []);
@@ -79,12 +81,12 @@ describe('PanoramaContainer', () => {
     expect(wrapper.instance().props.isFullscreen).toBe(false);
 
     wrapper.instance().toggleFullscreen();
-    expect(store.dispatch).toHaveBeenCalledWith(setView(`${VIEWS.PANO}`));
+    expect(store.dispatch).toHaveBeenCalledWith(setViewMode(VIEW_MODE.FULL));
 
     wrapper.setProps({ isFullscreen: true });
 
     wrapper.instance().toggleFullscreen();
-    expect(store.dispatch).toHaveBeenCalledWith(setView(`${VIEWS.MAP_PANO}`));
+    expect(store.dispatch).toHaveBeenCalledWith(setViewMode(VIEW_MODE.SPLIT));
   });
 
   it('should load new scene when panorama image information changes', () => {

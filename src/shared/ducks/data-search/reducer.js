@@ -9,7 +9,7 @@ import {
   FETCH_QUERY_SEARCH_RESULTS_SUCCESS,
   initialState,
   REDUCER_KEY,
-  SET_QUERY_CATEGORY, SET_VIEW
+  SET_QUERY_CATEGORY
 } from './constants';
 import { routing } from '../../../app/routes';
 import { FETCH_DATA_SELECTION_REQUEST } from '../data-selection/constants';
@@ -98,12 +98,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         category: action.payload
-      };
-
-    case SET_VIEW:
-      return {
-        ...enrichedState,
-        view: action.payload
       };
 
     case FETCH_DATA_SELECTION_REQUEST:

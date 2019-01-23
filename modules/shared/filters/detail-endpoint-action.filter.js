@@ -1,5 +1,5 @@
 import { toDetailFromEndpoint } from '../../../src/store/redux-first-router/actions';
-import { DETAIL_VIEW } from '../../../src/shared/ducks/detail/constants';
+import { VIEW_MODE } from '../../../src/shared/ducks/ui/ui';
 
 (function () {
     'use strict';
@@ -13,7 +13,7 @@ import { DETAIL_VIEW } from '../../../src/shared/ducks/detail/constants';
             if (!endpoint) {
                 return;
             }
-            const action = toDetailFromEndpoint(endpoint, DETAIL_VIEW.MAP_DETAIL);
+            const action = toDetailFromEndpoint(endpoint, VIEW_MODE.SPLIT);
             return action;
         };
     }

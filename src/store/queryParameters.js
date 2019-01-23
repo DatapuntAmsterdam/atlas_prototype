@@ -1,23 +1,15 @@
 import { routing } from '../app/routes';
 import { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer';
 import { initialState as dataSearchInitialState } from '../shared/ducks/data-search/constants';
-import {
-  getDataSelectionPage,
-  getDataSelectionView,
-  getGeometryFilters
-} from '../shared/ducks/data-selection/selectors';
+import { getDataSelectionPage, getGeometryFilters } from '../shared/ducks/data-selection/selectors';
 import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer';
 import { DATASETS, getPage } from '../shared/ducks/datasets/datasets';
 import { DATA, initialState as datasetsDataInitialState } from '../shared/ducks/datasets/data/data';
-import { initialState as detailInitialState } from '../shared/ducks/detail/constants';
-import { getDetailView } from '../shared/ducks/detail/selectors';
-import { DETAIL } from '../shared/ducks/detail/reducer';
 import { initialState as mapInitialState, MAP } from '../map/ducks/map/map';
 import {
   getActiveBaseLayer,
   getCenter,
   getMapOverlays,
-  getMapView,
   getMapZoom,
   isMapPanelActive
 } from '../map/ducks/map/map-selectors';
@@ -28,26 +20,21 @@ import {
   getPanoramaHistory,
   getPanoramaLocation,
   getPanoramaPitch,
-  getPanoramaView,
   getReference
 } from '../panorama/ducks/selectors';
 import {
   getDataSearchLocation,
   getSearchCategory,
-  getSearchQuery,
-  getView
+  getSearchQuery
 } from '../shared/ducks/data-search/selectors';
-import {
-  initialState as dataSelectionInitialState,
-  PARAMS_TO_VIEWS,
-  VIEWS_TO_PARAMS
-} from '../shared/ducks/data-selection/constants';
+import { initialState as dataSelectionInitialState } from '../shared/ducks/data-selection/constants';
 import {
   getFiltersWithoutShape,
   initialState as filterInitialState,
   REDUCER_KEY as FILTER
 } from '../shared/ducks/filters/filters';
 import {
+  getViewMode,
   initialState as UIInitialState,
   isEmbedded,
   isEmbedPreview,
@@ -130,27 +117,15 @@ export default paramsRegistry
   })
   .addParameter(PARAMETERS.VIEW, (routes) => {
     routes
-      .add(routesWithDataSelection, DATA_SELECTION, 'view', {
-        selector: getDataSelectionView,
-        defaultValue: dataSelectionInitialState.view,
-        decode: (val) => PARAMS_TO_VIEWS[val],
-        encode: (val) => VIEWS_TO_PARAMS[val]
-      })
-      .add(routing.dataDetail.type, DETAIL, 'view', {
-        selector: getDetailView,
-        defaultValue: detailInitialState.view
-      })
-      .add(routing.panorama.type, PANORAMA, 'view', {
-        defaultValue: panoramaInitialState.view,
-        selector: getPanoramaView
-      })
-      .add(routing.dataGeoSearch.type, DATA_SEARCH_REDUCER, 'view', {
-        defaultValue: dataSearchInitialState.view,
-        selector: getView
-      })
-      .add(routing.home.type, MAP, 'view', {
-        defaultValue: mapInitialState.view,
-        selector: getMapView
+      .add([
+        ...routesWithDataSelection,
+        routing.dataDetail.type,
+        routing.panorama.type,
+        routing.dataGeoSearch.type,
+        routing.home.type
+      ], UI, 'viewMode', {
+        selector: getViewMode,
+        defaultValue: UIInitialState.viewMode
       });
   })
   .addParameter(PARAMETERS.CATEGORY, (routes) => {

@@ -102,11 +102,12 @@ MapContainer.defaultProps = {
   leafletInstance: null,
   showPreviewPanel: false,
   drawMode: 'none',
-  toggleFullscreen: null
+  toggleFullscreen: null,
+  isFullscreen: true
 };
 
 MapContainer.propTypes = {
-  isFullscreen: PropTypes.bool.isRequired,
+  isFullscreen: PropTypes.bool,
   toggleFullscreen: PropTypes.func,
   drawMode: PropTypes.string,
   embedMode: PropTypes.bool.isRequired,

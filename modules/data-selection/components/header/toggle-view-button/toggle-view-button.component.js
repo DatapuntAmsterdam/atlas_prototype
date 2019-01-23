@@ -1,5 +1,5 @@
-import { setView } from '../../../../../src/shared/ducks/data-selection/actions';
-import { VIEWS } from '../../../../../src/shared/ducks/data-selection/constants';
+import { setViewMode, VIEW_MODE } from '../../../../../src/shared/ducks/ui/ui';
+import { VIEWS_TO_PARAMS } from '../../../../../src/shared/ducks/data-selection/constants';
 
 (function () {
     'use strict';
@@ -21,15 +21,15 @@ import { VIEWS } from '../../../../../src/shared/ducks/data-selection/constants'
         const vm = this;
 
         $scope.$watch('vm.view', function () {
-            if (vm.view === VIEWS.TABLE) {
+            if (vm.view === VIEWS_TO_PARAMS[VIEW_MODE.FULL]) {
                 vm.targetLabel = 'Kaart weergeven';
                 vm.targetHover = 'Resultaten op de kaart weergeven';
-                vm.action = setView(VIEWS.LIST);
+                vm.action = setViewMode(VIEW_MODE.SPLIT, 'kaart-weergeven');
                 vm.targetIcon = 'kaart';
             } else {
                 vm.targetLabel = 'Tabel weergeven';
                 vm.targetHover = 'Resultaten in tabel weergeven';
-                vm.action = setView(VIEWS.TABLE);
+                vm.action = setViewMode(VIEW_MODE.FULL, 'tabel-weergeven');
                 vm.targetIcon = 'list';
             }
         });

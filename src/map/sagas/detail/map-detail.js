@@ -12,8 +12,8 @@ import fetchDetail from '../../services/map-detail';
 import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants';
 import { getUser } from '../../../shared/ducks/user/user';
 import { waitForAuthentication } from '../../../shared/sagas/user/user';
-import { getDetailEndpoint, getDetailView } from '../../../shared/ducks/detail/selectors';
-import { DETAIL_VIEW } from '../../../shared/ducks/detail/constants';
+import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
+import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui';
 
 export function* fetchMapDetail() {
   try {
@@ -34,8 +34,8 @@ export default function* watchMapDetail() {
 }
 
 export function* fetchDetailEffect() {
-  const view = yield select(getDetailView);
-  if (view === DETAIL_VIEW.MAP_DETAIL || view === DETAIL_VIEW.DETAIL) {
+  const view = yield select(getViewMode);
+  if (view === VIEW_MODE.SPLIT || view === VIEW_MODE.FULL) {
     yield put(closeMapPanel());
   }
   const endpoint = yield select(getDetailEndpoint);

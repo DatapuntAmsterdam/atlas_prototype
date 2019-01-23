@@ -7,15 +7,9 @@ import throttle from 'lodash.throttle';
 import './PanoramaContainer.scss';
 import {
   fetchPanoramaHotspotRequest,
-  setPanoramaOrientation,
-  setView as setPanoramaView
+  setPanoramaOrientation
 } from '../ducks/actions';
-import { VIEWS } from '../ducks/constants';
-import { VIEWS as DATA_SEARCH_VIEWS } from '../../shared/ducks/data-search/constants';
-import {
-  toDataDetail,
-  toGeoSearch
-} from '../../store/redux-first-router/actions';
+import { toDataDetail, toGeoSearch } from '../../store/redux-first-router/actions';
 
 import { getOrientation, initialize, loadScene } from '../services/marzipano/marzipano';
 
@@ -27,6 +21,7 @@ import { getMapDetail } from '../../map/ducks/detail/map-detail';
 import PARAMETERS from '../../store/parameters';
 import { getMapOverlaysWithoutPanorama } from '../../map/ducks/map/map-selectors';
 import { pageTypeToEndpoint } from '../../map/services/map-detail';
+import { setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 
 class PanoramaContainer extends React.Component {
   constructor(props) {
@@ -102,10 +97,10 @@ class PanoramaContainer extends React.Component {
     const { isFullscreen, setView } = this.props;
 
     if (isFullscreen) {
-      return setView(VIEWS.MAP_PANO);
+      return setView(VIEW_MODE.SPLIT, 'beeld-verkleinen');
     }
 
-    return setView(VIEWS.PANO);
+    return setView(VIEW_MODE.FULL, 'beeld-vergroten');
   }
 
   render() {
@@ -167,7 +162,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
     setOrientation: setPanoramaOrientation,
-    setView: setPanoramaView,
+    setView: setViewMode,
     fetchPanoramaById: fetchPanoramaHotspotRequest,
     fetchMapDetail: getMapDetail
   }, dispatch),
@@ -180,7 +175,7 @@ const mapDispatchToProps = (dispatch) => ({
     } else {
       dispatch(toGeoSearch({
         [PARAMETERS.LOCATION]: panoramaLocation,
-        [PARAMETERS.VIEW]: DATA_SEARCH_VIEWS.LIST,
+        [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
         [PARAMETERS.LAYERS]: overlaysWithoutPanorama
       }));
     }

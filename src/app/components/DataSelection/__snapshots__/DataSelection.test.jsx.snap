@@ -19,7 +19,7 @@ exports[`DataSelection should render LoadingIndicator 1`] = `
           "user": Object {
             "scopes": Array [],
           },
-          "view": "TABLE",
+          "view": undefined,
         }
       }
       component="dpDataSelectionHeader"
@@ -36,7 +36,7 @@ exports[`DataSelection should render LoadingIndicator 1`] = `
 </div>
 `;
 
-exports[`DataSelection should render as LIST 1`] = `
+exports[`DataSelection should render as gesplitst 1`] = `
 <div
   className="c-data-selection c-dashboard__content"
 >
@@ -55,7 +55,7 @@ exports[`DataSelection should render as LIST 1`] = `
           "user": Object {
             "scopes": Array [],
           },
-          "view": "LIST",
+          "view": undefined,
         }
       }
       component="dpDataSelectionHeader"
@@ -87,7 +87,7 @@ exports[`DataSelection should render as LIST 1`] = `
 </div>
 `;
 
-exports[`DataSelection should render as TABLE 1`] = `
+exports[`DataSelection should render as volledig 1`] = `
 <div
   className="c-data-selection c-dashboard__content"
 >
@@ -106,7 +106,7 @@ exports[`DataSelection should render as TABLE 1`] = `
           "user": Object {
             "scopes": Array [],
           },
-          "view": "TABLE",
+          "view": undefined,
         }
       }
       component="dpDataSelectionHeader"
@@ -157,7 +157,7 @@ exports[`DataSelection should show authorization message if user has no permissi
           "user": Object {
             "scopes": Array [],
           },
-          "view": "TABLE",
+          "view": undefined,
         }
       }
       component="dpDataSelectionHeader"

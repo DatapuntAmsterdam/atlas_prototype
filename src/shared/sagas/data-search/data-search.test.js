@@ -6,15 +6,15 @@ import {
 } from '../../ducks/data-search/actions';
 import { fetchMapSearchResults } from './data-search';
 import geosearch from '../../services/search/geosearch';
-import { VIEWS } from '../../ducks/data-search/constants';
 import search from '../../../map/services/map-search/map-search';
+import { VIEW_MODE } from '../../ducks/ui/ui';
 
 describe('fetchMapSearchResults', () => {
   it('should do a geo search in a list view', () => {
     testSaga(fetchMapSearchResults, {})
       .next()
       .next(12) // zoom
-      .next(VIEWS.LIST) // view
+      .next(VIEW_MODE.SPLIT) // view
       .next('location')
       .next()
       .next()
@@ -30,7 +30,7 @@ describe('fetchMapSearchResults', () => {
     testSaga(fetchMapSearchResults, {})
       .next()
       .next(12) // zoom
-      .next(VIEWS.MAP) // view
+      .next(VIEW_MODE.MAP) // view
       .next('location')
       .next()
       .next()

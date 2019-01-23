@@ -2,9 +2,7 @@ import { createSelector } from 'reselect';
 import queryString from 'querystring';
 import PAGES from '../../app/pages';
 import { routing } from '../../app/routes';
-import PARAMETERS from '../parameters';
 import { REDUCER_KEY } from './constants';
-import { VIEWS } from '../../map/ducks/map/map';
 
 const getLocation = (state) => state[REDUCER_KEY];
 export const getLocationType = (state) => state[REDUCER_KEY].type;
@@ -26,33 +24,11 @@ export const getPage = createSelector(getLocation, (location = {}) => {
   const key = Object.keys(routing).find((route) => routing[route].type === location.type);
   return (key && routing[key].page) || routing.niet_gevonden.page;
 });
-export const getView = createSelector(
-  getLocationQuery,
-  (query) => query.view
-);
-export const isMapView = createSelector(
-  getView,
-  (view) => (view === VIEWS.MAP)
-);
-export const isLocationSelected = createSelector(
-  getLocationQuery,
-  (query) => (
-    Object.prototype.hasOwnProperty.call(query, PARAMETERS.LOCATION) || false
-  )
-);
 export const isHomepage = createSelector(getPage, (page) => page === PAGES.HOME);
-export const isMapPage = createSelector(isHomepage, isMapView, (homePage, mapView) => (
-  homePage && mapView
-));
 export const isPanoPage = createSelector(getPage, (page) => page === PAGES.PANORAMA);
 export const isDataDetailPage = createSelector(getPage, (page) => page === PAGES.DATA_DETAIL);
 export const isDatasetDetailPage = createSelector(
   getPage, (page) => page === PAGES.DATASETS_DETAIL
-);
-
-export const isMapActive = createSelector(
-  isMapView, isMapPage,
-  (isMap, isMapPageActive) => isMap || isMapPageActive
 );
 
 export const isDatasetPage = createSelector(
@@ -66,11 +42,4 @@ export const isDataSelectionPage = createSelector(
   (page) => page === PAGES.ADDRESSES
     || page === PAGES.CADASTRAL_OBJECTS
     || page === PAGES.ESTABLISHMENTS
-);
-export const isDataSearch = createSelector(
-  getPage,
-  isMapActive,
-  isLocationSelected,
-  (page, mapActive, locationSelected) =>
-    (page === PAGES.DATA_QUERY_SEARCH || (mapActive && locationSelected))
 );

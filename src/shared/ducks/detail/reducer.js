@@ -1,5 +1,5 @@
 import { routing } from '../../../app/routes';
-import { FETCH_DETAIL, initialState, SET_VIEW, SHOW_DETAIL, REDUCER_KEY } from './constants';
+import { FETCH_DETAIL, initialState, SHOW_DETAIL, REDUCER_KEY } from './constants';
 import paramsRegistry from '../../../store/params-registry';
 import PAGES from '../../../app/pages';
 import { shouldResetState } from '../../../store/redux-first-router/actions';
@@ -45,12 +45,6 @@ export default function detailReducer(state = initialState, action) {
         display: action.payload.display,
         geometry: action.payload.geometry,
         isLoading: false
-      };
-
-    case SET_VIEW:
-      return {
-        ...enrichedState,
-        view: action.payload
       };
 
     default:

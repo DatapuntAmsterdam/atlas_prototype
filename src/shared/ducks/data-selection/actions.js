@@ -11,7 +11,7 @@ import {
   SET_GEOMETRY_FILTER,
   SET_MARKERS,
   SET_PAGE,
-  SET_VIEW, START_DATA_SELECTION
+  START_DATA_SELECTION
 } from './constants';
 
 export const fetchDataSelection = (payload) => ({ type: FETCH_DATA_SELECTION_REQUEST, payload });
@@ -38,13 +38,6 @@ export const setGeometryFilter = (payload) => ({
   payload,
   meta: {
     tracking: true
-  }
-});
-export const setView = (payload) => ({
-  type: SET_VIEW,
-  payload,
-  meta: {
-    tracking: payload
   }
 });
 export const resetDrawing = (payload = false) => ({

@@ -193,10 +193,9 @@ class MapLeaflet extends React.Component {
             url={baseLayer.urlTemplate}
           />
           {
-            layers.map((layer, layerIndex) => (
+            layers.map((layer) => (
               <NonTiledLayer
-                // eslint-disable-next-line react/no-array-index-key
-                key={layerIndex}
+                key={layer.id}
                 {...layer.overlayOptions}
                 url={layer.url}
                 params={layer.params}

@@ -7,7 +7,6 @@ import {
   FETCH_PANORAMA_SUCCESS,
   initialState, SET_PANORAMA_LOCATION,
   SET_PANORAMA_ORIENTATION,
-  SET_PANORAMA_VIEW,
   SET_PANORAMA_YEAR,
   FETCH_PANORAMA_REQUEST_TOGGLE,
   REDUCER_KEY, FETCH_PANORAMA_HOTSPOT_REQUEST
@@ -79,12 +78,6 @@ export default function reducer(state = initialState, action) {
         ...enrichedState,
         location: initialState.location,
         image: initialState.image
-      };
-
-    case SET_PANORAMA_VIEW:
-      return {
-        ...enrichedState,
-        view: action.payload
       };
 
     case SET_PANORAMA_LOCATION:

@@ -1,6 +1,7 @@
 import get from 'lodash.get';
 import isUndefined from 'lodash.isundefined';
 import queryString from 'querystring';
+import PARAMETERS from '../parameters';
 
 /**
  * ParamsRegistry manages the relations between url parameters, reducers and routes.
@@ -15,8 +16,15 @@ import queryString from 'querystring';
 let instance;
 
 class ParamsRegistry {
+  /**
+   * Order alphabetically, but always show the view parameter first
+   * @param query
+   * @returns {{}}
+   */
   static orderQuery(query) {
-    return Object.entries(query).sort().reduce((acc, [key, value]) => ({
+    return Object.entries(query).sort().sort(([key1], [key2]) =>
+      (key1 === PARAMETERS.VIEW ? -1 : key2 === PARAMETERS.VIEW ? 1 : 0)
+    ).reduce((acc, [key, value]) => ({
       ...acc,
       [key]: value
     }), {});

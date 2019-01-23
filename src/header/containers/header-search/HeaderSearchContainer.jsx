@@ -22,8 +22,9 @@ import {
   toDatasetSuggestion,
   toDataSuggestion
 } from '../../../store/redux-first-router/actions';
-import { isDatasetPage, isMapPage } from '../../../store/redux-first-router/selectors';
+import { isDatasetPage } from '../../../store/redux-first-router/selectors';
 import PARAMETERS from '../../../store/parameters';
+import { isMapPage } from '../../../shared/ducks/ui/ui';
 
 
 const mapStateToProps = (state) => ({

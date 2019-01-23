@@ -2,12 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import DataSelection from './DataSelection';
-import { DATASETS, VIEWS } from '../../../shared/ducks/data-selection/constants';
+import { DATASETS } from '../../../shared/ducks/data-selection/constants';
+import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
 
 const initialState = {
   filter: { filters: {} },
   user: {
     scopes: []
+  },
+  ui: {
+    viewMode: 'split'
   },
   dataSelection: {
     isLoading: false,
@@ -16,7 +20,7 @@ const initialState = {
       markers: []
     },
     dataset: DATASETS.BAG,
-    view: VIEWS.TABLE,
+    view: VIEW_MODE.FULL,
     authError: false,
     errorMessage: '',
     page: 1,
@@ -27,18 +31,18 @@ const initialState = {
 };
 
 describe('DataSelection', () => {
-  it(`should render as ${VIEWS.TABLE}`, () => {
+  it(`should render as ${VIEW_MODE.FULL}`, () => {
     const store = configureMockStore()({ ...initialState });
     const component = shallow(<DataSelection />, { context: { store } }).dive();
     expect(component).toMatchSnapshot();
   });
 
-  it(`should render as ${VIEWS.LIST}`, () => {
+  it(`should render as ${VIEW_MODE.SPLIT}`, () => {
     const state = {
       ...initialState,
       dataSelection: {
         ...initialState.dataSelection,
-        view: VIEWS.LIST
+        view: VIEW_MODE.SPLIT
       }
     };
     const store = configureMockStore()({ ...state });

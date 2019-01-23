@@ -27,12 +27,10 @@ import {
   SET_DATASET,
   SET_GEOMETRY_FILTER,
   SET_PAGE,
-  SET_VIEW,
-  START_DATA_SELECTION,
-  VIEWS
+  START_DATA_SELECTION, VIEWS_TO_PARAMS
 } from '../../ducks/data-selection/constants';
 import {
-  getDataSelection, getDataSelectionView,
+  getDataSelection,
   getGeomarkersShape,
   getGeometryFilters
 } from '../../ducks/data-selection/selectors';
@@ -47,6 +45,7 @@ import {
 } from '../../../map/ducks/map/map';
 import PARAMETERS from '../../../store/parameters';
 import drawToolConfig from '../../../map/services/draw-tool/draw-tool.config';
+import { getViewMode, SET_VIEW_MODE, VIEW_MODE } from '../../ducks/ui/ui';
 
 function* getMapMarkers(dataset, activeFilters) {
   // Since bounding box can be set later, we check if we have to wait for the boundingbox to get set
@@ -64,7 +63,6 @@ function* getMapMarkers(dataset, activeFilters) {
 function* retrieveDataSelection(action) {
   const {
     dataset,
-    view,
     page,
     searchText,
     catalogFilters
@@ -74,6 +72,7 @@ function* retrieveDataSelection(action) {
     yield call(waitForAuthentication);
     const activeFilters = yield select(getFiltersWithoutShape);
     const shape = yield select(getGeomarkersShape);
+    const view = yield select(getViewMode);
     // exclude the geometryFilter from the attribute filters
     // TODO DP-6442 improve the geometryFilter handling
     const activeAttributeFilters = Object.keys(activeFilters)
@@ -82,18 +81,26 @@ function* retrieveDataSelection(action) {
                                            [key]: activeFilters[key]
                                          }), {});
 
-    const result = yield call(query,
-      dataset, view, activeAttributeFilters, page, searchText, shape, catalogFilters);
+    const result = yield call(
+      query,
+      dataset,
+      VIEWS_TO_PARAMS[view],
+      activeAttributeFilters,
+      page,
+      searchText,
+      shape,
+      catalogFilters
+    );
 
     // Put the results in the reducer
     yield put(receiveDataSelectionSuccess({
-      dataset, view, activeFilters, page, shape, result
+      dataset, activeFilters, page, shape, result
     }));
 
     // Check if markers need to be fetched
     const { MAX_NUMBER_OF_CLUSTERED_MARKERS } = dataSelectionConfig.datasets[dataset];
     const markersShouldBeFetched = (
-      view !== VIEWS.TABLE && result.numberOfRecords <= MAX_NUMBER_OF_CLUSTERED_MARKERS
+      view !== VIEW_MODE.FULL && result.numberOfRecords <= MAX_NUMBER_OF_CLUSTERED_MARKERS
     );
 
     if (markersShouldBeFetched) {
@@ -123,8 +130,8 @@ function* requestDataSelectionEffect() {
 
 export function* fetchDataSelectionEffect() {
   const dataSelectionPage = yield select(isDataSelectionPage);
-  const view = yield select(getDataSelectionView);
-  if (view === VIEWS.LIST) {
+  const view = yield select(getViewMode);
+  if (view === VIEW_MODE.SPLIT) {
     yield put(closeMapPanel());
   }
 
@@ -158,7 +165,7 @@ function* setGeometryFilters({ payload }) {
     } else {
       yield call(switchPage, {
         [PARAMETERS.GEO]: geometryFilters,
-        [PARAMETERS.VIEW]: VIEWS.LIST
+        [PARAMETERS.VIEW]: VIEW_MODE.SPLIT
       });
     }
   }
@@ -189,7 +196,7 @@ export default function* watchFetchDataSelection() {
   yield takeLatest(REMOVE_FILTER, clearShapeFilter);
   yield takeLatest(SET_GEOMETRY_FILTER, setGeometryFilters);
   yield takeLatest(
-    [SET_VIEW, SET_PAGE, ADD_FILTER, REMOVE_FILTER, REMOVE_GEOMETRY_FILTER, EMPTY_FILTERS],
+    [SET_VIEW_MODE, SET_PAGE, ADD_FILTER, REMOVE_FILTER, REMOVE_GEOMETRY_FILTER, EMPTY_FILTERS],
     fetchDataSelectionEffect
   );
 

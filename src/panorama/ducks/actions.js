@@ -1,13 +1,12 @@
 // Actions creators
 import {
   FETCH_PANORAMA_ERROR,
+  FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST,
+  FETCH_PANORAMA_REQUEST_TOGGLE,
   FETCH_PANORAMA_SUCCESS,
   SET_PANORAMA_LOCATION,
-  SET_PANORAMA_ORIENTATION,
-  SET_PANORAMA_VIEW,
-  FETCH_PANORAMA_HOTSPOT_REQUEST,
-  FETCH_PANORAMA_REQUEST_TOGGLE
+  SET_PANORAMA_ORIENTATION
 } from './constants';
 
 export const fetchPanoramaRequest = (payload) => ({
@@ -47,13 +46,6 @@ export const setPanoramaLocation = (payload) => ({
   payload,
   meta: {
     tracking: true
-  }
-});
-export const setView = (payload) => ({
-  type: SET_PANORAMA_VIEW,
-  payload,
-  meta: {
-    tracking: payload
   }
 });
 export const setPanoramaOrientation = ({ heading, pitch, fov }) => ({

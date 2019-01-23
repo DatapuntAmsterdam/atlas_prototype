@@ -3,7 +3,7 @@ import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import watchFetchNearestDetails, { fetchNearestDetails } from './nearest-details';
 
 import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
-import { REQUEST_NEAREST_DETAILS } from '../geosearch/geosearch';
+import { REQUEST_NEAREST_DETAILS } from '../../../shared/ducks/data-search/constants';
 import { goToGeoSearch } from '../map-click/map-click';
 
 describe('watchFetchNearestDetails', () => {

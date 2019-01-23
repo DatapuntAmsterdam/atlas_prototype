@@ -38,6 +38,9 @@ describe('HeaderSearchContainer', () => {
     dataQuerySearch: {
       query: 'dam'
     },
+    ui: {
+      viewMode: 'split'
+    },
     autoSuggest: {
       count: 6,
       suggestions: [

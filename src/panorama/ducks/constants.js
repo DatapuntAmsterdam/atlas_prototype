@@ -5,7 +5,6 @@ export const FETCH_PANORAMA_ERROR = `${REDUCER_KEY}/FETCH_PANORAMA_ERROR`;
 export const SET_PANORAMA_ORIENTATION = `${REDUCER_KEY}/SET_PANORAMA_ORIENTATION`;
 export const SET_PANORAMA_YEAR = `${REDUCER_KEY}/SET_PANORAMA_YEAR`;
 export const SET_PANORAMA_LOCATION = `${REDUCER_KEY}/SET_PANORAMA_LOCATION`;
-export const SET_PANORAMA_VIEW = `${REDUCER_KEY}/SET_PANORAMA_VIEW`;
 export const CLOSE_PANORAMA = `${REDUCER_KEY}/CLOSE_PANORAMA`;
 export const FETCH_PANORAMA_HOTSPOT_REQUEST = `${REDUCER_KEY}/FETCH_PANORAMA_HOTSPOT_REQUEST`;
 export const FETCH_PANORAMA_REQUEST_TOGGLE = `${REDUCER_KEY}/FETCH_PANORAMA_REQUEST_TOGGLE`;
@@ -18,14 +17,7 @@ export const historyOptions = [
   { year: 2017, missionType: 'woz', label: 'Alleen 2017 WOZ', layerName: 'pano2017woz' }
 ];
 
-export const VIEWS = {
-  MAP: 'kaart',
-  MAP_PANO: 'beeld-kaart',
-  PANO: 'beeld'
-};
-
 export const initialState = {
-  view: VIEWS.MAP_PANO,
   location: null,   // eg: [52.8, 4.9]
   history: historyOptions[0],
   pitch: 0,         // eg: -10

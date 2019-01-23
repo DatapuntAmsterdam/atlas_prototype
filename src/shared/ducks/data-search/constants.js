@@ -12,13 +12,9 @@ export const FETCH_QUERY_SEARCH_MORE_RESULTS_REQUEST = `${REDUCER_KEY}/FETCH_QUE
 export const FETCH_QUERY_SEARCH_MORE_RESULTS_SUCCESS = `${REDUCER_KEY}/FETCH_QUERY_SEARCH_MORE_RESULTS_SUCCESS`;
 export const FETCH_QUERY_SEARCH_MORE_RESULTS_FAILURE = `${REDUCER_KEY}/FETCH_QUERY_SEARCH_MORE_RESULTS_FAILURE`;
 
-export const SET_QUERY_CATEGORY = `${REDUCER_KEY}/SET_QUERY_CATEGORY`;
-export const SET_VIEW = `${REDUCER_KEY}/SET_VIEW`;
+export const REQUEST_NEAREST_DETAILS = `${REDUCER_KEY}/REQUEST_NEAREST_DETAILS`;
 
-export const VIEWS = {
-  MAP: 'kaart',
-  LIST: 'lijst-kaart'
-};
+export const SET_QUERY_CATEGORY = `${REDUCER_KEY}/SET_QUERY_CATEGORY`;
 
 export const initialState = {
   query: '',
@@ -28,6 +24,6 @@ export const initialState = {
   isLoading: false,
   numberOfResults: 0,
   category: null,
-  view: VIEWS.LIST,
   error: null
 };
+

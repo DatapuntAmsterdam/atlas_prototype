@@ -2,9 +2,8 @@ import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 import MapContainer, { overrideLeafletGetBounds } from './MapContainer';
-import { isMapActive } from '../../../store/redux-first-router/selectors';
+import { isEmbedded, isEmbedPreview, isMapActive } from '../../../shared/ducks/ui/ui';
 import { previewDataAvailable } from '../../../shared/ducks/selection/selection';
-import { isEmbedded, isEmbedPreview } from '../../../shared/ducks/ui/ui';
 import { getDrawingMode } from '../../ducks/map/map-selectors';
 
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
@@ -70,7 +69,8 @@ describe('MapContainer', () => {
     const wrapper = shallow(
       <MapContainer
         isFullscreen={false}
-        toggleFullscreen={() => {}}
+        toggleFullscreen={() => {
+        }}
       />,
       { context: { store } }
     ).dive();

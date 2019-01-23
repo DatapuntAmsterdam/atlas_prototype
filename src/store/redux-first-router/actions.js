@@ -1,11 +1,7 @@
 import { ROUTER_NAMESPACE, routing } from '../../app/routes';
-import {
-  DATASET_ROUTE_MAPPER,
-  VIEWS as DATASET_VIEWS
-} from '../../shared/ducks/data-selection/constants';
+import { DATASET_ROUTE_MAPPER } from '../../shared/ducks/data-selection/constants';
 import PARAMETERS from '../parameters';
-import { VIEWS as PANORAMA_VIEWS } from '../../panorama/ducks/constants';
-import { VIEWS } from '../../map/ducks/map/map';
+import { VIEW_MODE } from '../../shared/ducks/ui/ui';
 
 export const preserveQuery = (action, additionalParams = null) => ({
   ...action,
@@ -57,7 +53,7 @@ export const toMap = (preserve = false) => ({
   meta: {
     preserve,
     additionalParams: {
-      [PARAMETERS.VIEW]: VIEWS.MAP
+      [PARAMETERS.VIEW]: VIEW_MODE.MAP
     }
   }
 });
@@ -67,8 +63,7 @@ export const toMapWithLegendOn = () => ({
   meta: {
     preserve: false,
     additionalParams: {
-      [PARAMETERS.VIEW]: VIEWS.MAP,
-      [PARAMETERS.LEGEND]: 'true'
+      [PARAMETERS.VIEW]: VIEW_MODE.MAP
     }
   }
 });
@@ -89,7 +84,7 @@ export const toPanorama = (id, additionalParams = null) => ({
 export const toPanoramaAndPreserveQuery = (id, heading, reference = []) => toPanorama(id, {
   heading,
   ...(reference.length === 3 ? { [PARAMETERS.REFERENCE]: reference } : {}),
-  [PARAMETERS.VIEW]: PANORAMA_VIEWS.MAP_PANO
+  [PARAMETERS.VIEW]: VIEW_MODE.SPLIT
 });
 
 export const extractIdEndpoint = (endpoint) => {
@@ -167,7 +162,7 @@ export const toDatasetsTableWithFilter = (datasetType, filter) => ({
   meta: {
     additionalParams: {
       [PARAMETERS.FILTERS]: filter,
-      [PARAMETERS.VIEW]: DATASET_VIEWS.TABLE
+      [PARAMETERS.VIEW]: VIEW_MODE.FULL
     }
   }
 });

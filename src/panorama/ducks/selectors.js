@@ -31,9 +31,6 @@ export const getPanoramaMarkers = createSelector([getPanoramaLocation, getPanora
   )
 );
 
-export const getPanoramaId = getStateOfKey('id');
-
 export const getPanoramaPitch = getStateOfKey('pitch');
-export const getPanoramaView = getStateOfKey('view');
 export const getReference = getStateOfKey('reference');
 export const getPanoramaHistory = getStateOfKey('history');

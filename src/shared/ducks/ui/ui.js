@@ -1,7 +1,11 @@
 import { createSelector } from 'reselect';
-import { VIEWS } from '../data-selection/constants';
-import { isMapPage, isPanoPage } from '../../../store/redux-first-router/selectors';
-import { getDataSelectionView } from '../data-selection/selectors';
+import {
+  isDataSelectionPage,
+  isDatasetPage,
+  isDatasetDetailPage,
+  isHomepage,
+  isPanoPage
+} from '../../../store/redux-first-router/selectors';
 import paramsRegistry from '../../../store/params-registry';
 
 const REDUCER_KEY = 'ui';
@@ -11,12 +15,20 @@ export const HIDE_PRINT = `${REDUCER_KEY}/HIDE_PRINT`;
 export const SHOW_EMBED_PREVIEW = `${REDUCER_KEY}/SHOW_EMBED_PREVIEW`;
 export const SHOW_PRINT = `${REDUCER_KEY}/SHOW_PRINT`;
 export const TOGGLE_MAP_PANEL_HANDLE = `${REDUCER_KEY}/TOGGLE_MAP_PANEL_HANDLE`;
+export const SET_VIEW_MODE = `${REDUCER_KEY}/SET_VIEW_MODE`;
+
+export const VIEW_MODE = {
+  MAP: 'kaart',
+  SPLIT: 'gesplitst',
+  FULL: 'volledig'
+};
 
 export const initialState = {
   isMapPanelHandleVisible: true,
   isEmbedPreview: false,
   isEmbed: false,
-  isPrintMode: false
+  isPrintMode: false,
+  viewMode: VIEW_MODE.FULL
 };
 
 export default function UiReducer(state = initialState, action) {
@@ -51,6 +63,12 @@ export default function UiReducer(state = initialState, action) {
         isPrintMode: true
       };
 
+    case SET_VIEW_MODE:
+      return {
+        ...enrichedState,
+        viewMode: action.payload
+      };
+
     case TOGGLE_MAP_PANEL_HANDLE:
       return {
         ...enrichedState,
@@ -75,6 +93,11 @@ export const showPrintMode = () => ({
     tracking: true
   }
 });
+export const setViewMode = (payload, tracking = true) => ({
+  type: SET_VIEW_MODE,
+  payload,
+  meta: { tracking }
+});
 export const hidePrintMode = () => ({ type: HIDE_PRINT });
 export const hideEmbedMode = () => ({ type: HIDE_EMBED_PREVIEW });
 export const toggleMapPanelHandle = () => ({ type: TOGGLE_MAP_PANEL_HANDLE });
@@ -84,6 +107,7 @@ const getUIState = (state) => state[REDUCER_KEY];
 export const isEmbedded = createSelector(getUIState, (ui) => ui.isEmbed);
 export const isEmbedPreview = createSelector(getUIState, (ui) => ui.isEmbedPreview);
 export const isPrintMode = createSelector(getUIState, (ui) => ui.isPrintMode);
+export const getViewMode = createSelector(getUIState, (ui) => ui.viewMode);
 export const isPrintOrEmbedMode = createSelector(
   isEmbedded,
   isPrintMode,
@@ -94,11 +118,32 @@ export const isMapLayersVisible = createSelector(getUIState, (ui) => ui.isMapLay
 export const isMapPanelHandleVisible =
   createSelector(getUIState, (ui) => ui.isMapPanelHandleVisible);
 
+export const isMapPage = createSelector(isHomepage, getViewMode, (homePage, viewMode) => (
+  homePage && viewMode === VIEW_MODE.MAP
+));
+export const isMapActive = createSelector(
+  getViewMode, isMapPage,
+  (viewMode, isMapPageActive) => viewMode === VIEW_MODE.MAP || isMapPageActive
+);
+export const hasPrintMode = createSelector(
+  isDataSelectionPage,
+  isDatasetPage,
+  isDatasetDetailPage,
+  isHomepage,
+  isMapActive,
+  getViewMode,
+  (dataSelectionPage, datasetPage, datasetDetailPage, homePage, mapActive, viewMode) =>
+    (!dataSelectionPage || viewMode === VIEW_MODE.SPLIT) &&
+    (!datasetPage || datasetDetailPage) &&
+    (!homePage || mapActive)
+);
 export const isPrintModeLandscape = createSelector(
   isPrintMode,
   isPanoPage,
   isMapPage,
-  getDataSelectionView,
-  (printMode, panoPageActive, mapPageActive, dataSelectionView) =>
-    (printMode && (panoPageActive || mapPageActive || (dataSelectionView === VIEWS.LIST)))
+  getViewMode,
+  (printMode, panoPageActive, mapPageActive, viewMode) =>
+    (printMode &&
+      (panoPageActive || mapPageActive || (viewMode === VIEW_MODE.MAP))
+    )
 );

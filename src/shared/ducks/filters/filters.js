@@ -77,14 +77,13 @@ export const selectDataSelectionFilters = createSelector(
       .filter((filterSet) => activeFilters[filterSet.slug])
       .map((availableFilter) => {
         const value = activeFilters[availableFilter.slug];
-        const { id, label } = value;
         const filter = { ...availableFilter };
         // If there are no options but the filter is active, adding the filtered
         // value as an option with 0 values available
         if (filter.numberOfOptions === 0) {
           filter.options = [{
-            id,
-            label,
+            id: value,
+            label: value,
             count: 0
           }];
         }

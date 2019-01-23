@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Panel from '../Panel/Panel';
 import SearchList from '../SearchList';
 import NoResultsForSearchType from '../Messages/NoResultsForSearchType';
-import { DETAIL_VIEW } from '../../../shared/ducks/detail/constants';
+import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
 
 const DataSearch = ({
   userAuthenticated,
@@ -91,7 +91,7 @@ const DataSearch = ({
                       <button
                         className="qa-show-more c-show-more o-list__separate-item"
                         type="button"
-                        onClick={() => toDetail(result.more.endpoint, DETAIL_VIEW.MAP_DETAIL)}
+                        onClick={() => toDetail(result.more.endpoint, VIEW_MODE.SPLIT)}
                       >
                         {result.more.label}
                       </button>

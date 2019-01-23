@@ -11,7 +11,6 @@ import {
   SET_GEOMETRY_FILTER,
   SET_MARKERS,
   SET_PAGE,
-  SET_VIEW,
   REDUCER_KEY,
   RESET_DATA_SELECTION
 } from './constants';
@@ -104,12 +103,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         page: action.payload
-      };
-
-    case SET_VIEW:
-      return {
-        ...enrichedState,
-        view: action.payload
       };
 
     case RESET_DATA_SELECTION:

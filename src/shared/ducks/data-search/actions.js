@@ -7,7 +7,7 @@ import {
   FETCH_QUERY_SEARCH_MORE_RESULTS_SUCCESS,
   FETCH_QUERY_SEARCH_RESULTS_REQUEST,
   FETCH_QUERY_SEARCH_RESULTS_SUCCESS,
-  SET_VIEW
+  REQUEST_NEAREST_DETAILS
 } from './constants';
 
 // Action creators
@@ -61,10 +61,7 @@ export const fetchMoreResultsSuccess = (payload) => ({
   payload
 });
 
-export const setView = (payload) => ({
-  type: SET_VIEW,
-  payload,
-  meta: {
-    tracking: true
-  }
+export const requestNearestDetails = (payload) => ({
+  type: REQUEST_NEAREST_DETAILS,
+  payload
 });

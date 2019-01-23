@@ -82,12 +82,6 @@ Object {
 }
 `;
 
-exports[`Data Selection Reducer should set view state when dispatching setView 1`] = `
-Object {
-  "view": "map",
-}
-`;
-
 exports[`Data Selection Reducer when a route type is dispatched should set dataset and an object from getStateFromQuery if meta.query is set 1`] = `
 Object {
   "dataset": "bag",
