@@ -40,6 +40,7 @@ describe('The header controller', function () {
 
         routerSelectors.isDataSelectionPage = () => true;
         routerSelectors.isDatasetPage = () => true;
+        routerSelectors.isDatasetDetailPage = () => true;
         routerSelectors.isHomepage = () => true;
         routerSelectors.isMapActive = () => true;
     });

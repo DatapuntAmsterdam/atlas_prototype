@@ -46,6 +46,9 @@ export const isMapPage = createSelector(isHomepage, isMapView, (homePage, mapVie
 ));
 export const isPanoPage = createSelector(getPage, (page) => page === PAGES.PANORAMA);
 export const isDataDetailPage = createSelector(getPage, (page) => page === PAGES.DATA_DETAIL);
+export const isDatasetDetailPage = createSelector(
+  getPage, (page) => page === PAGES.DATASETS_DETAIL
+);
 
 export const isMapActive = createSelector(
   isMapView, isMapPage,
