@@ -4,7 +4,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MapContainer from '../../map/containers/map/MapContainer';
 import DetailContainer from '../containers/DetailContainer';
-import { getDetailEndpoint, getDetailGeometry } from '../../shared/ducks/detail/selectors';
+import {
+  getDetailEndpoint,
+  hasNoGeometry
+} from '../../shared/ducks/detail/selectors';
 import { toDetailFromEndpoint as endpointActionCreator } from '../../store/redux-first-router/actions';
 import SplitScreen from '../components/SplitScreen/SplitScreen';
 import DataSelection from '../components/DataSelection/DataSelection';
@@ -21,15 +24,12 @@ const MapSplitPage = ({
   currentPage,
   setViewMode,
   viewMode,
-  hasGeometry
+  forceFullScreen
 }) => {
-  let forceFullScreen = false;
   let mapProps = {};
   let Component;
   switch (currentPage) {
     case PAGES.DATA_DETAIL:
-      // Todo: hack. fix this properly (UX wise or from info API response)
-      forceFullScreen = !hasGeometry;
       Component = <DetailContainer />;
       mapProps = {
         showPreviewPanel: hasSelection
@@ -89,7 +89,7 @@ const MapSplitPage = ({
 };
 
 const mapStateToProps = (state) => ({
-  hasGeometry: Boolean(getDetailGeometry(state)),
+  forceFullScreen: hasNoGeometry(state),
   endpoint: getDetailEndpoint(state),
   hasSelection: !!getSelectionType(state),
   viewMode: getViewMode(state),
@@ -102,7 +102,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch);
 
 MapSplitPage.propTypes = {
-  hasGeometry: PropTypes.bool.isRequired,
+  forceFullScreen: PropTypes.bool.isRequired,
   hasSelection: PropTypes.bool.isRequired,
   setViewMode: PropTypes.func.isRequired,
   viewMode: PropTypes.string.isRequired,
