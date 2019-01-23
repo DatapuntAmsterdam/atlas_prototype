@@ -40,10 +40,15 @@ export const toGeoSearch = (additionalParams) => preserveQuery({
   }
 }, additionalParams);
 
-export const toDataSearchQuery = (additionalParams = null, skipSaga = false) => ({
+export const toDataSearchQuery = (
+  additionalParams = null,
+  skipSaga = false,
+  forceSaga = false
+) => ({
   type: routing.dataQuerySearch.type,
   meta: {
     skipSaga,
+    forceSaga,
     additionalParams
   }
 });
@@ -118,10 +123,11 @@ export const toDataSearchCategory = (searchQuery, category) => ({
   }
 });
 export const toDatasets = () => ({ type: routing.datasets.type });
-export const toDatasetSearch = (additionalParams = null, skipSaga = false) => ({
+export const toDatasetSearch = (additionalParams = null, skipSaga = false, forceSaga = false) => ({
   type: routing.searchDatasets.type,
   meta: {
     skipSaga,
+    forceSaga,
     preserveQuery: true,
     additionalParams
   }

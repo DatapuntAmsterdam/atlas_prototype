@@ -47,10 +47,10 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch),
   onDatasetSearch: (query) => dispatch(toDatasetSearch({
     [PARAMETERS.QUERY]: query
-  })),
+  }, false, true)),
   onDataSearch: (query) => dispatch(toDataSearchQuery({
     [PARAMETERS.QUERY]: query
-  })),
+  }, false, true)),
   openDataSuggestion: (suggestion) => dispatch(toDataSuggestion(suggestion)),
   openDatasetSuggestion: (suggestion) => dispatch(toDatasetSuggestion(suggestion))
 });
