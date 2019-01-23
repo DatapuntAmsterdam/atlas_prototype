@@ -189,7 +189,7 @@ PanoramaContainer.propTypes = {
   onClose: PropTypes.func.isRequired,
   setView: PropTypes.func.isRequired,
   detailReference: PropTypes.arrayOf(PropTypes.string).isRequired,
-  panoramaLocation: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  panoramaLocation: PropTypes.arrayOf(PropTypes.number).isRequired,
   setOrientation: PropTypes.func.isRequired,
   fetchMapDetail: PropTypes.func.isRequired,
   fetchPanoramaById: PropTypes.func.isRequired

@@ -6,7 +6,7 @@ import MapContainer from '../../map/containers/map/MapContainer';
 import DetailContainer from '../containers/DetailContainer';
 import {
   getDetailEndpoint,
-  hasNoGeometry
+  shouldShowFullScreen
 } from '../../shared/ducks/detail/selectors';
 import { toDetailFromEndpoint as endpointActionCreator } from '../../store/redux-first-router/actions';
 import SplitScreen from '../components/SplitScreen/SplitScreen';
@@ -27,7 +27,7 @@ const MapSplitPage = ({
   forceFullScreen
 }) => {
   let mapProps = {};
-  let Component;
+  let Component = null;
   switch (currentPage) {
     case PAGES.DATA_DETAIL:
       Component = <DetailContainer />;
@@ -70,7 +70,9 @@ const MapSplitPage = ({
       };
   }
 
-  if (viewMode === VIEW_MODE.FULL || forceFullScreen) {
+  if (viewMode === VIEW_MODE.MAP) {
+    return <MapContainer {...mapProps} />;
+  } else if ((Component && viewMode === VIEW_MODE.FULL) || (Component && forceFullScreen)) {
     return Component;
   } else if (viewMode === VIEW_MODE.SPLIT && Component) {
     return (
@@ -85,11 +87,12 @@ const MapSplitPage = ({
       />
     );
   }
-  return <MapContainer {...mapProps} />;
+
+  return null;
 };
 
 const mapStateToProps = (state) => ({
-  forceFullScreen: hasNoGeometry(state),
+  forceFullScreen: shouldShowFullScreen(state),
   endpoint: getDetailEndpoint(state),
   hasSelection: !!getSelectionType(state),
   viewMode: getViewMode(state),

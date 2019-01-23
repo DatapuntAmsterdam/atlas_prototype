@@ -15,7 +15,9 @@ export const getDetailEndpoint = createSelector(getDetail, (detail) => {
 });
 export const getDetailDisplay = createSelector(getDetail, (detail) => detail && detail.display);
 export const isDetailLoading = createSelector(getDetail, (detail) => detail && detail.isLoading);
-export const hasNoGeometry = createSelector(
+
+// Todo: DP-6571
+export const shouldShowFullScreen = createSelector(
   getDetailGeometry,
   getViewMode,
   isDetailLoading,
