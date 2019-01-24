@@ -5,14 +5,57 @@ exports[`SplitScreen should render 1`] = `
   className="c-dashboard__column-holder"
 >
   <div
-    className="c-dashboard__column u-col-sm--4 qa-dashboard__column--middle u-page-break-after"
+    className="
+        c-dashboard__column
+        u-col-sm--4
+        qa-dashboard__column--middle
+        u-page-break-after
+      "
   >
     <p>
       Hello
     </p>
   </div>
   <div
-    className="c-dashboard__column c-dashboard__content u-overflow--y-auto u-col-sm--8 qa-dashboard__column--right"
+    className="
+        c-dashboard__column
+        c-dashboard__content
+        u-overflow--y-auto
+        u-col-sm--8
+        qa-dashboard__column--right
+      "
+  >
+    <span>
+      World
+    </span>
+  </div>
+</div>
+`;
+
+exports[`SplitScreen should render in print mode 1`] = `
+<div
+  className="c-dashboard__column-holder"
+>
+  <div
+    className="
+        c-dashboard__column
+        u-col-sm--12
+        qa-dashboard__column--middle
+        u-page-break-after
+      "
+  >
+    <p>
+      Hello
+    </p>
+  </div>
+  <div
+    className="
+        c-dashboard__column
+        c-dashboard__content
+        u-overflow--y-auto
+        u-col-sm--12
+        qa-dashboard__column--right
+      "
   >
     <span>
       World

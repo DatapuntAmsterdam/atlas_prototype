@@ -222,21 +222,13 @@ export default paramsRegistry
     }, false);
   })
   .addParameter(PARAMETERS.EMBED_PREVIEW, (routes) => {
-    routes.add([
-      routing.home.type,
-      routing.dataGeoSearch.type,
-      routing.dataDetail.type
-    ], UI, 'isEmbedPreview', {
+    routes.add(routesWithMapActive, UI, 'isEmbedPreview', {
       defaultValue: UIInitialState.isEmbedPreview,
       selector: isEmbedPreview
     });
   })
   .addParameter(PARAMETERS.EMBED, (routes) => {
-    routes.add([
-      routing.home.type,
-      routing.dataGeoSearch.type,
-      routing.dataDetail.type
-    ], UI, 'isEmbed', {
+    routes.add(routesWithMapActive, UI, 'isEmbed', {
       defaultValue: UIInitialState.isEmbed,
       selector: isEmbedded
     });

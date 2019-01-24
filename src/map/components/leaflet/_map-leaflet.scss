@@ -8,6 +8,12 @@
 .is-embed-preview,
 .is-embed {
   @import "assets/styles/map-print";
+
+  &--landscape {
+    .c-map {
+      height: 700px;
+    }
+  }
 }
 
 .is-embed {

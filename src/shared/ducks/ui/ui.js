@@ -133,7 +133,7 @@ export const hasPrintMode = createSelector(
   isMapActive,
   getViewMode,
   (dataSelectionPage, datasetPage, datasetDetailPage, homePage, mapActive, viewMode) =>
-    (!dataSelectionPage || viewMode === VIEW_MODE.SPLIT) &&
+    (!dataSelectionPage || viewMode === VIEW_MODE.SPLIT || viewMode === VIEW_MODE.MAP) &&
     (!datasetPage || datasetDetailPage) &&
     (!homePage || mapActive)
 );
