@@ -29,6 +29,7 @@ export const isDrawingEnabled = createSelector(
   (mapState) => mapState.drawingMode !== drawToolConfig.DRAWING_MODE.NONE
 );
 export const getGeometry = createSelector(getMap, (mapState) => mapState.geometry);
+export const getShapeMarkers = createSelector(getMap, (mapState) => mapState.shapeMarkers);
 export const getShapeDistanceTxt = createSelector(getMap, (mapState) => mapState.shapeDistanceTxt);
 
 export const getCenter = createSelector([getMapCenter, getPanoramaLocation],

@@ -27,6 +27,7 @@ describe('Map Reducer', () => {
     expect(reducer(state, mapClear())).toEqual({
       ...state,
       drawingMode: initialState.drawingMode,
+      shapeMarkers: initialState.shapeMarkers,
       shapeDistanceTxt: initialState.shapeDistanceTxt,
       shapeAreaTxt: initialState.shapeAreaTxt
     });

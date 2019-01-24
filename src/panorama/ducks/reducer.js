@@ -31,7 +31,8 @@ export default function reducer(state = initialState, action) {
     case FETCH_PANORAMA_REQUEST:
       return {
         ...enrichedState,
-        isLoading: true
+        isLoading: true,
+        targetLocation: null
       };
 
     case FETCH_PANORAMA_REQUEST_TOGGLE:
@@ -83,7 +84,8 @@ export default function reducer(state = initialState, action) {
     case SET_PANORAMA_LOCATION:
       return {
         ...enrichedState,
-        location: action.payload
+        location: action.payload,
+        targetLocation: action.payload
       };
 
     default:

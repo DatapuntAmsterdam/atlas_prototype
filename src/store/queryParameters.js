@@ -62,7 +62,7 @@ const routesWithDataSelection = [
 
 const routesWithMapActive = [
   ...routesWithDataSelection,
-  routing.home.type,
+  routing.data.type,
   routing.panorama.type,
   routing.dataGeoSearch.type,
   routing.dataDetail.type
@@ -117,13 +117,7 @@ export default paramsRegistry
   })
   .addParameter(PARAMETERS.VIEW, (routes) => {
     routes
-      .add([
-        ...routesWithDataSelection,
-        routing.dataDetail.type,
-        routing.panorama.type,
-        routing.dataGeoSearch.type,
-        routing.home.type
-      ], UI, 'viewMode', {
+      .add(routesWithMapActive, UI, 'viewMode', {
         selector: getViewMode,
         defaultValue: UIInitialState.viewMode
       });
@@ -234,7 +228,7 @@ export default paramsRegistry
     });
   })
   .addParameter(PARAMETERS.PRINT, (routes) => {
-    routes.add(routing.home.type, UI, 'isPrintMode', {
+    routes.add(routing.data.type, UI, 'isPrintMode', {
       defaultValue: UIInitialState.isPrintMode,
       selector: isPrintMode
     });

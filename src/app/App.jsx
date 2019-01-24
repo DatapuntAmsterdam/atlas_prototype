@@ -8,13 +8,11 @@ import PAGES, { isCmsPage as pageIsCmsPage } from './pages';
 import './_app.scss';
 import DatasetDetailContainer from './containers/DatasetDetailContainer';
 import {
-  getViewMode,
   isEmbedded,
   isEmbedPreview,
   isPrintMode,
   isPrintModeLandscape,
-  isPrintOrEmbedMode,
-  VIEW_MODE
+  isPrintOrEmbedMode
 } from '../shared/ducks/ui/ui';
 import { CMS_PAGE_MAPPING } from './pages/CMSPageMapping';
 import Home from './pages/Home';
@@ -36,11 +34,9 @@ const App = ({
   embedPreviewMode,
   printModeLandscape,
   printOrEmbedMode,
-  viewMode,
   user
 }) => {
-  const isHomePage = (viewMode === VIEW_MODE.FULL && currentPage === PAGES.HOME);
-  const isMapPage = (viewMode === VIEW_MODE.MAP && currentPage === PAGES.HOME);
+  const isHomePage = (currentPage === PAGES.HOME);
   const isCmsPage = pageIsCmsPage(currentPage);
   let cmsPageData;
   if (isCmsPage) {
@@ -126,7 +122,7 @@ const App = ({
                 </div>
               )}
 
-              {(isMapPage ||
+              {(currentPage === PAGES.DATA ||
                 currentPage === PAGES.PANORAMA ||
                 currentPage === PAGES.DATA_DETAIL ||
                 currentPage === PAGES.ADDRESSES ||
@@ -164,7 +160,6 @@ App.defaultProps = {
 
 App.propTypes = {
   isFullHeight: PropTypes.bool,
-  viewMode: PropTypes.string.isRequired,
   currentPage: PropTypes.string.isRequired,
   visibilityError: PropTypes.bool, // vm.visibility.error
   embedMode: PropTypes.bool.isRequired,
@@ -177,7 +172,6 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentPage: getPage(state),
-  viewMode: getViewMode(state),
   embedMode: isEmbedded(state),
   printMode: isPrintMode(state),
   printModeLandscape: isPrintModeLandscape(state),

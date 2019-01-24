@@ -1,7 +1,10 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getShapeDistanceTxt, isDrawingEnabled } from '../../ducks/map/map-selectors';
-import { getNumberOfDrawMarkers } from '../../../shared/ducks/data-selection/selectors';
+import {
+  getShapeDistanceTxt,
+  isDrawingEnabled,
+  getShapeMarkers
+} from '../../ducks/map/map-selectors';
 import {
   cancelDrawing,
   endDataSelection,
@@ -12,7 +15,7 @@ import ToggleDrawing from './ToggleDrawing';
 
 const mapStateToProps = (state) => ({
   isEnabled: isDrawingEnabled(state),
-  shapeMarkers: getNumberOfDrawMarkers(state),
+  shapeMarkers: getShapeMarkers(state),
   shapeDistance: getShapeDistanceTxt(state)
 });
 

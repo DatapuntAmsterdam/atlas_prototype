@@ -40,28 +40,23 @@ export const toGeoSearch = (additionalParams) => preserveQuery({
   }
 }, additionalParams);
 
-export const toDataSearchQuery = (additionalParams = null, skipSaga = false) => ({
+export const toDataSearchQuery = (
+  additionalParams = null,
+  skipSaga = false,
+  forceSaga = false
+) => ({
   type: routing.dataQuerySearch.type,
   meta: {
     skipSaga,
+    forceSaga,
     additionalParams
   }
 });
 
 export const toMap = (preserve = false) => ({
-  type: routing.home.type,
+  type: routing.data.type,
   meta: {
     preserve,
-    additionalParams: {
-      [PARAMETERS.VIEW]: VIEW_MODE.MAP
-    }
-  }
-});
-
-export const toMapWithLegendOn = () => ({
-  type: routing.home.type,
-  meta: {
-    preserve: false,
     additionalParams: {
       [PARAMETERS.VIEW]: VIEW_MODE.MAP
     }
@@ -118,10 +113,11 @@ export const toDataSearchCategory = (searchQuery, category) => ({
   }
 });
 export const toDatasets = () => ({ type: routing.datasets.type });
-export const toDatasetSearch = (additionalParams = null, skipSaga = false) => ({
+export const toDatasetSearch = (additionalParams = null, skipSaga = false, forceSaga = false) => ({
   type: routing.searchDatasets.type,
   meta: {
     skipSaga,
+    forceSaga,
     preserveQuery: true,
     additionalParams
   }
@@ -165,4 +161,7 @@ export const toDatasetsTableWithFilter = (datasetType, filter) => ({
       [PARAMETERS.VIEW]: VIEW_MODE.FULL
     }
   }
+});
+export const toNotFoundPage = () => ({
+  type: routing.niet_gevonden.type
 });

@@ -18,18 +18,18 @@ import {
   getDrawingMode,
   getGeometry,
   getShapeDistanceTxt,
-  isDrawingEnabled
+  isDrawingEnabled,
+  getShapeMarkers
 } from '../../ducks/map/map-selectors';
 import { endDataSelection, setGeometryFilter } from '../../../shared/ducks/data-selection/actions';
 import {
-  getDataSelection,
-  getNumberOfDrawMarkers
+  getDataSelection
 } from '../../../shared/ducks/data-selection/selectors';
 
 const mapStateToProps = (state) => ({
   drawingMode: getDrawingMode(state),
   drawingEnabled: isDrawingEnabled(state),
-  shapeMarkers: getNumberOfDrawMarkers(state),
+  shapeMarkers: getShapeMarkers(state),
   shapeDistanceTxt: getShapeDistanceTxt(state),
   dataSelection: getDataSelection(state),
   geometry: getGeometry(state)

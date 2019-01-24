@@ -233,7 +233,7 @@ describe('HeaderSearchContainer', () => {
       expect(store.dispatch).toHaveBeenCalledWith(emptyFilters());
       expect(store.dispatch).toHaveBeenCalledWith(toDataSearchQuery({
         [PARAMETERS.QUERY]: query
-      }));
+      }, false, true));
     });
 
     it('does dataset search', () => {
@@ -258,7 +258,7 @@ describe('HeaderSearchContainer', () => {
       headerSearch.instance().onFormSubmit();
       expect(store.dispatch).toHaveBeenCalledWith(toDatasetSearch({
         [PARAMETERS.QUERY]: query
-      }));
+      }, false, true));
     });
   });
 

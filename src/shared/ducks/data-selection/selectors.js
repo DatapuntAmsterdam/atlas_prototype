@@ -62,8 +62,3 @@ export const hasGeometryFilter = createSelector(
   getDataSelection,
   (dataSelection) => !!get(dataSelection, 'geometryFilter.markers', false)
 );
-
-export const getNumberOfDrawMarkers = createSelector(
-  getDataSelection,
-  (dataSelection) => get(dataSelection, 'geometryFilter.markers', []).length
-);

@@ -1,6 +1,7 @@
 import removeMd from 'remove-markdown';
 import { downloadDatasetResource } from '../../../../src/shared/ducks/datasets/data/data';
 import { showDetail } from '../../../../src/shared/ducks/detail/actions';
+import { toNotFoundPage } from '../../../../src/store/redux-first-router/actions';
 
 (function () {
     angular
@@ -117,8 +118,13 @@ import { showDetail } from '../../../../src/shared/ducks/detail/actions';
             }
         }
 
-        function errorHandler () {
-            store.dispatch(showDetail({}));
+        function errorHandler (error) {
+            console.error(error); // eslint-disable-line no-console, angular/log
+            if (error && error.status === 404) {
+                store.dispatch(toNotFoundPage());
+            } else {
+                store.dispatch(showDetail({}));
+            }
         }
     }
 })();

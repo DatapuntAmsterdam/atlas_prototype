@@ -33,6 +33,7 @@ describe('Panorama Reducer', () => {
       isLoading: true,
       reference: [],
       location: null,
+      targetLocation: null,
       pitch: 0
     });
   });
