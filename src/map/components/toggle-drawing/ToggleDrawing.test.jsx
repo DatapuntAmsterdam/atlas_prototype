@@ -4,12 +4,10 @@ import configureMockStore from 'redux-mock-store';
 
 import ToggleDrawing from './ToggleDrawingContainer';
 
-import { getShapeDistanceTxt, isDrawingEnabled } from '../../ducks/map/map-selectors';
-import { getNumberOfDrawMarkers } from '../../../shared/ducks/data-selection/selectors';
+import { getShapeMarkers, getShapeDistanceTxt, isDrawingEnabled } from '../../ducks/map/map-selectors';
 import * as dataSelectionActions from '../../../shared/ducks/data-selection/actions';
 
 jest.mock('../../../shared/ducks/data-selection/actions');
-jest.mock('../../../shared/ducks/data-selection/selectors');
 jest.mock('../../ducks/map/map-selectors');
 
 describe('ToggleDrawing', () => {
@@ -24,7 +22,7 @@ describe('ToggleDrawing', () => {
   const setupComponent = (shapeDistanceTxt, drawingEnabled, numberOfMarkers) => {
     getShapeDistanceTxt.mockImplementation(() => shapeDistanceTxt);
     isDrawingEnabled.mockImplementation(() => drawingEnabled);
-    getNumberOfDrawMarkers.mockImplementation(() => numberOfMarkers);
+    getShapeMarkers.mockImplementation(() => numberOfMarkers);
     wrapper = shallow(<ToggleDrawing />, { context: { store } }).dive();
   };
 
