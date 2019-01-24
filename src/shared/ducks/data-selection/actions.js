@@ -48,7 +48,10 @@ export const cancelDrawing = () => ({
   type: CANCEL_DATA_SELECTION
 });
 export const endDataSelection = () => ({
-  type: END_DATA_SELECTION
+  type: END_DATA_SELECTION,
+  meta: {
+    tracking: true
+  }
 });
 export const startDrawing = () => ({
   type: START_DATA_SELECTION

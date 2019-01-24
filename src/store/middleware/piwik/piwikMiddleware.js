@@ -45,8 +45,8 @@ export const initializePiwik = () => {
 
 // Map actions to be tracked
 export const actionsToPiwik = {
-  ...events,
-  ...routes
+  ...routes,
+  ...events
 };
 
 // Execute Piwik actions
@@ -57,12 +57,13 @@ const piwikMiddleware = ({ getState }) => (next) => (action) => {
   const actionMap = actionsToPiwik[action.type];
 
   if (actionMap) {
-    const { tracking, location } = action.meta || {};
+    const { firstAction, location, query, tracking } = action.meta || {};
     const state = getState();
-    const { href } = window.location;
+    const href = window.location.href;
+    const title = document.title;
 
     if (tracking || location) {
-      piwikTracker(actionMap(tracking, state, href));
+      piwikTracker(actionMap({ tracking, firstAction, query, state, title, href }));
     }
   }
 

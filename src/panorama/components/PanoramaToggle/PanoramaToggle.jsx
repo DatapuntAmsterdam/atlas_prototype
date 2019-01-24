@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import './PanoramaToggle.scss';
-import { fetchPanoramaRequestToggle } from '../../ducks/actions';
+import { fetchPanoramaRequestToggle, fetchPanoramaRequestExternal } from '../../ducks/actions';
 
 const getStreetViewUrl = (location, heading) => {
   const [latitude, longitude] = location;
@@ -22,6 +22,12 @@ class PanoramaToggle extends React.Component {
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.setSelectedOption = this.setSelectedOption.bind(this);
+    this.onOpenPanoramaExternal = this.onOpenPanoramaExternal.bind(this);
+  }
+
+  onOpenPanoramaExternal() {
+    this.props.openPanoramaExternal();
+    this.toggleMenu();
   }
 
   setSelectedOption(option) {
@@ -80,7 +86,7 @@ class PanoramaToggle extends React.Component {
                   c-link--arrow
                   c-panorama-toggle__external-link
                   qa-panorama-toggle__external-link"
-                onClick={this.toggleMenu}
+                onClick={this.onOpenPanoramaExternal}
               >Google Street View</a>
             </li>
           </ul> : ''}
@@ -93,7 +99,8 @@ class PanoramaToggle extends React.Component {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchPanoramaRequest: fetchPanoramaRequestToggle
+  fetchPanoramaRequest: fetchPanoramaRequestToggle,
+  openPanoramaExternal: fetchPanoramaRequestExternal
 }, dispatch);
 
 PanoramaToggle.defaultProps = {
@@ -105,7 +112,8 @@ PanoramaToggle.propTypes = {
   history: PropTypes.shape().isRequired,
   historyOptions: PropTypes.array.isRequired,  // eslint-disable-line
   location: PropTypes.array.isRequired,  // eslint-disable-line
-  fetchPanoramaRequest: PropTypes.oneOfType([PropTypes.string, PropTypes.func]) // eslint-disable-line
+  fetchPanoramaRequest: PropTypes.oneOfType([PropTypes.string, PropTypes.func]), // eslint-disable-line
+  openPanoramaExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.func]) // eslint-disable-line
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PanoramaToggle);

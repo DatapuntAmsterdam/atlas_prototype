@@ -8,6 +8,7 @@ export const SET_PANORAMA_LOCATION = `${REDUCER_KEY}/SET_PANORAMA_LOCATION`;
 export const CLOSE_PANORAMA = `${REDUCER_KEY}/CLOSE_PANORAMA`;
 export const FETCH_PANORAMA_HOTSPOT_REQUEST = `${REDUCER_KEY}/FETCH_PANORAMA_HOTSPOT_REQUEST`;
 export const FETCH_PANORAMA_REQUEST_TOGGLE = `${REDUCER_KEY}/FETCH_PANORAMA_REQUEST_TOGGLE`;
+export const FETCH_PANORAMA_REQUEST_EXTERNAL = `${REDUCER_KEY}/FETCH_PANORAMA_REQUEST_EXTERNAL`;
 export const historyOptions = [
   { year: 0, missionType: 'bi', label: 'Meest recent', layerName: 'pano' },
   { year: 2018, missionType: 'bi', label: 'Alleen 2018', layerName: 'pano2018bi' },
