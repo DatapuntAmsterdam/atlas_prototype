@@ -1,5 +1,6 @@
 import { SHOW_DETAIL } from '../../../../src/shared/ducks/detail/constants';
 import { DOWNLOAD_DATASET_RESOURCE } from '../../../../src/shared/ducks/datasets/data/data';
+import { toNotFoundPage } from '../../../../src/store/redux-first-router/actions';
 
 describe('the dp-detail component', () => {
     var $compile,
@@ -79,6 +80,8 @@ describe('the dp-detail component', () => {
                             q.reject();
                         } else if (endpoint === dcatdEndPoint) {
                             q.resolve({ 'dct:description': 'description' });
+                        } else if (endpoint === 'http://www.fake-endpoint.com/dcatd/datasets/404') {
+                            q.reject({status: 404});
                         }
 
                         return q.promise;
@@ -398,6 +401,13 @@ describe('the dp-detail component', () => {
 
             expect(scope.vm.apiData).not.toBeUndefined();
             expect(api.getByUrl).toHaveBeenCalled();
+        });
+
+        it('should redirect to notFound when the dataset is not available', () => {
+            getComponent('http://www.fake-endpoint.com/dcatd/datasets/404', false);
+
+            expect(store.dispatch).toHaveBeenCalledTimes(1);
+            expect(store.dispatch).toHaveBeenCalledWith(toNotFoundPage());
         });
     });
 

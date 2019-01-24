@@ -172,3 +172,6 @@ export const toDatasetsTableWithFilter = (datasetType, filter) => ({
     }
   }
 });
+export const toNotFoundPage = () => ({
+  type: routing.niet_gevonden.type
+});
