@@ -31,8 +31,7 @@ import { NAVIGATE_HOME_REQUEST, REPORT_PROBLEM_REQUEST } from '../../../header/d
 import {
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST_TOGGLE,
-  FETCH_PANORAMA_REQUEST_EXTERNAL,
-  SET_PANORAMA_LOCATION
+  FETCH_PANORAMA_REQUEST_EXTERNAL
 } from '../../../panorama/ducks/constants';
 import PAGES from '../../../app/pages';
 
@@ -44,18 +43,14 @@ const PIWIK_CONSTANTS = {
 
 const events = {
   // NAVIGATION
-  [routing.dataDetail.type]: ({ tracking, state }) => {
-    // NAVIGATION -> CLICK AUTOSUGGEST OPTION
-    if (tracking && tracking.event === 'auto-suggest') {
-      return [
-        PIWIK_CONSTANTS.TRACK_EVENT,
-        'auto-suggest',
-        tracking.category,
-        tracking.query
-      ];
-    }
-    // NAVIGATION
-    return [
+  // NAVIGATION -> SELECT AUTOSUGGEST OPTION
+  [routing.dataDetail.type]: function trackDataDetail({ tracking, state }) {
+    return (tracking && tracking.event === 'auto-suggest') ? [
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      'auto-suggest',
+      tracking.category,
+      tracking.query
+    ] : [
       PIWIK_CONSTANTS.TRACK_EVENT,
       'navigation',
       isPanoPage(state) ? 'panorama-verlaten' : 'detail-volledig-weergeven',
@@ -179,17 +174,25 @@ const events = {
     (tracking.startsWith('lf') ? 'luchtfoto' : 'topografie'),
     tracking
   ],
-  [SET_MAP_CLICK_LOCATION]: () => [
-    PIWIK_CONSTANTS.TRACK_EVENT,
-    'kaart',
-    'kaart-puntzoek',
-    null
-  ],
-  TOGGLE_MAP_OVERLAY: ({ category, title }) => [
+  // MAP -> CLICK LOCATION
+  [SET_MAP_CLICK_LOCATION]: function trackMapClick({ state }) {
+    return isPanoPage(state) ? [   // PANORAMA -> CLICK MAP
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      'panorama-navigatie',
+      'panorama-kaart-klik',
+      null
+    ] : [ // GEOSEARCH -> CLICK MAP
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      'kaart',
+      'kaart-puntzoek',
+      null
+    ];
+  },
+  TOGGLE_MAP_OVERLAY: ({ tracking }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
     'kaartlaag',
-    category.toLowerCase().replace(/[: ][ ]*/g, '_'),
-    title
+    tracking.category.toLowerCase().replace(/[: ][ ]*/g, '_'),
+    tracking.title
   ],
   // AUTHENTICATION
   // AUTHENTICATION BUTTON -> "inloggen" / "uitloggen"
@@ -253,13 +256,6 @@ const events = {
     PIWIK_CONSTANTS.TRACK_EVENT,
     'panorama-navigation',
     'panorama-hotspot-klik',
-    null
-  ]),
-  // PANORAMA -> CLICK MAP
-  [SET_PANORAMA_LOCATION]: () => ([
-    PIWIK_CONSTANTS.TRACK_EVENT,
-    'panorama-navigatie',
-    'panorama-kaart-klik',
     null
   ]),
   // MENU
