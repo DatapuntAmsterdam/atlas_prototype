@@ -166,7 +166,7 @@ const DATA_SELECTION_CONFIG = {
             'Verenigingen van eigenaren',
             'Spoorwegen/ProRail',
             'Overige niet-natuurlijke personen',
-            'Overig natuurlijke personen'
+            'Overige natuurlijke personen'
           ],
           info_url: 'https://www.amsterdam.nl/stelselpedia/brk-index/producten-brk/kadastertabel/'
         }, {

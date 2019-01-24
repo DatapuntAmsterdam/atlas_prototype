@@ -9,7 +9,7 @@
         return {
             restrict: 'E',
             scope: {
-                content: '='
+                content: '<'
             },
             templateUrl: 'modules/detail/components/parent-relations/parent-relations.html',
             controller: DpParentRelationsController,
@@ -23,11 +23,13 @@
     function DpParentRelationsController (PARENT_RELATIONS_CONFIG) {
         var vm = this;
 
-        vm.parentRelations = PARENT_RELATIONS_CONFIG.keyOrder
-            .map((key) => ({
-                data: vm.content[key] || vm.content['_' + key] || null,
-                label: PARENT_RELATIONS_CONFIG.labels[key]
-            }))
-            .filter((item) => item.data !== null);
+        vm.$onChanges = (changes) => {
+            vm.parentRelations = PARENT_RELATIONS_CONFIG.keyOrder
+                .map((key) => ({
+                    data: vm.content[key] || vm.content['_' + key] || null,
+                    label: PARENT_RELATIONS_CONFIG.labels[key]
+                }))
+                .filter((item) => item.data !== null);
+        };
     }
 })();

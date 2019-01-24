@@ -23,6 +23,7 @@ import QuerySearchPage from './pages/QuerySearchPage';
 import DatasetPage from './pages/DatasetPage';
 import { DataSearchQuery } from './components/DataSearch';
 import MapSplitPage from './pages/MapSplitPage';
+import ActualityContainer from './containers/ActualityContainer';
 
 // TodoReactMigration: implement logic
 const App = ({
@@ -120,6 +121,10 @@ const App = ({
                 <div className="c-search-results u-grid">
                   <DataSearchQuery />
                 </div>
+              )}
+
+              {(currentPage === PAGES.ACTUALITY) && (
+                <ActualityContainer />
               )}
 
               {(currentPage === PAGES.DATA ||
