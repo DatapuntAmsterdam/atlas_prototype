@@ -172,6 +172,24 @@ Object {
   },
   "embed": Object {
     "routes": Object {
+      "atlasRouter/ADDRESSES": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": false,
+        "encode": [Function],
+        "reducerKey": "ui",
+        "selector": [Function],
+        "stateKey": "isEmbed",
+      },
+      "atlasRouter/CADASTRAL_OBJECTS": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": false,
+        "encode": [Function],
+        "reducerKey": "ui",
+        "selector": [Function],
+        "stateKey": "isEmbed",
+      },
       "atlasRouter/DATA_DETAIL": Object {
         "addHistory": true,
         "decode": [Function],
@@ -190,7 +208,25 @@ Object {
         "selector": [Function],
         "stateKey": "isEmbed",
       },
+      "atlasRouter/ESTABLISHMENTS": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": false,
+        "encode": [Function],
+        "reducerKey": "ui",
+        "selector": [Function],
+        "stateKey": "isEmbed",
+      },
       "atlasRouter/HOME": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": false,
+        "encode": [Function],
+        "reducerKey": "ui",
+        "selector": [Function],
+        "stateKey": "isEmbed",
+      },
+      "atlasRouter/PANORAMA": Object {
         "addHistory": true,
         "decode": [Function],
         "defaultValue": false,
@@ -203,6 +239,24 @@ Object {
   },
   "embed-preview": Object {
     "routes": Object {
+      "atlasRouter/ADDRESSES": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": false,
+        "encode": [Function],
+        "reducerKey": "ui",
+        "selector": [Function],
+        "stateKey": "isEmbedPreview",
+      },
+      "atlasRouter/CADASTRAL_OBJECTS": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": false,
+        "encode": [Function],
+        "reducerKey": "ui",
+        "selector": [Function],
+        "stateKey": "isEmbedPreview",
+      },
       "atlasRouter/DATA_DETAIL": Object {
         "addHistory": true,
         "decode": [Function],
@@ -221,7 +275,25 @@ Object {
         "selector": [Function],
         "stateKey": "isEmbedPreview",
       },
+      "atlasRouter/ESTABLISHMENTS": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": false,
+        "encode": [Function],
+        "reducerKey": "ui",
+        "selector": [Function],
+        "stateKey": "isEmbedPreview",
+      },
       "atlasRouter/HOME": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": false,
+        "encode": [Function],
+        "reducerKey": "ui",
+        "selector": [Function],
+        "stateKey": "isEmbedPreview",
+      },
+      "atlasRouter/PANORAMA": Object {
         "addHistory": true,
         "decode": [Function],
         "defaultValue": false,
