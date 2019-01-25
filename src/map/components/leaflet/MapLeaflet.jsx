@@ -163,6 +163,7 @@ class MapLeaflet extends React.Component {
       scaleControlOptions,
       zoomControlOptions,
       zoom,
+      brkMarkers,
       isLoading
     } = this.props;
     return (
@@ -221,6 +222,18 @@ class MapLeaflet extends React.Component {
           }
           {
             markers.map((marker) => Boolean(marker.position) && (
+              <CustomMarker
+                ref={markerConfig[marker.type].requestFocus && this.setActiveElement}
+                position={marker.position}
+                key={marker.position.toString() + marker.type}
+                icon={icons[marker.type](marker.iconData)}
+                zIndexOffset={100}
+                rotationAngle={marker.heading || 0}
+              />
+            ))
+          }
+          {
+            brkMarkers.map((marker) => Boolean(marker.position) && (
               <CustomMarker
                 ref={markerConfig[marker.type].requestFocus && this.setActiveElement}
                 position={marker.position}
@@ -300,6 +313,7 @@ MapLeaflet.propTypes = {
   geoJsons: PropTypes.arrayOf(PropTypes.shape({})),
   rdGeoJsons: PropTypes.arrayOf(PropTypes.shape({})),
   getLeafletInstance: PropTypes.func.isRequired,
+  brkMarkers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   isZoomControlVisible: PropTypes.bool,
   mapOptions: PropTypes.shape({}),
   markers: PropTypes.arrayOf(PropTypes.shape({})),

@@ -28,6 +28,7 @@ exports[`LeafletContainer LeafletContainer snapshot should render correct 1`] = 
       "urlTemplate": "https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png",
     }
   }
+  brkMarkers={Array []}
   center={
     Array [
       0,
@@ -258,6 +259,7 @@ exports[`LeafletContainer LeafletContainer snapshot should render different base
       "urlTemplate": "https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png",
     }
   }
+  brkMarkers={Array []}
   center={
     Array [
       52.4333137,

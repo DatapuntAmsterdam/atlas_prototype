@@ -15,6 +15,11 @@ export const getGeometryFilters = createSelector(
 export const getGeometryFiltersMarkers = createSelector(
   getGeometryFilters,
   (filters) => (filters && filters.markers) || []);
+
+export const getDataset = createSelector(
+  getDataSelection,
+  (dataSelection) => dataSelection.dataset);
+
 export const getDataSelectionResult = createSelector(
   getDataSelection,
   (dataSelection) => dataSelection.result || {});
@@ -26,10 +31,17 @@ const generateMarkers = (markers) => (
   })));
 const getMapMarkers = createSelector([getDataSelection],
   (dataSelection) => dataSelection.markers || []);
+
 export const getClusterMarkers = createSelector([getMapMarkers],
   (markers) => (
     markers && markers.clusterMarkers && markers.clusterMarkers.length ?
       generateMarkers(markers.clusterMarkers) : []
+  ));
+
+export const getBrkMarkers = createSelector([getMapMarkers],
+  (markers) => (
+    markers && markers.markers && markers.markers.length ?
+      markers.markers : []
   ));
 export const getGeoJsons = createSelector([getMapMarkers],
   (markers) => (
@@ -58,7 +70,7 @@ export const getGeomarkersShape = createSelector(
     markers.map(([lat, lng]) => [lng, lat])
   )
 );
-export const hasGeometryFilter = createSelector(
+export const isLoading = createSelector(
   getDataSelection,
-  (dataSelection) => !!get(dataSelection, 'geometryFilter.markers', false)
+  (dataSelection) => dataSelection.loadingMarkers || dataSelection.isLoading
 );

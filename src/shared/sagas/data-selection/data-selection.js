@@ -1,10 +1,12 @@
 import { call, put, select, take, takeLatest } from 'redux-saga/effects';
 import {
   fetchDataSelection,
+  fetchMarkersFailure,
+  fetchMarkersRequest,
+  fetchMarkersSuccess,
   receiveDataSelectionFailure,
   receiveDataSelectionSuccess,
-  removeGeometryFilter,
-  setMarkers
+  removeGeometryFilter
 } from '../../ducks/data-selection/actions';
 import dataSelectionConfig from '../../services/data-selection/data-selection-config';
 import { getMarkers, query } from '../../services/data-selection/data-selection-api';
@@ -22,15 +24,18 @@ import {
   CANCEL_DATA_SELECTION,
   END_DATA_SELECTION,
   FETCH_DATA_SELECTION_REQUEST,
+  FETCH_MARKERS_REQUEST,
   REMOVE_GEOMETRY_FILTER,
   RESET_DATA_SELECTION,
   SET_DATASET,
   SET_GEOMETRY_FILTER,
   SET_PAGE,
-  START_DATA_SELECTION, VIEWS_TO_PARAMS
+  START_DATA_SELECTION,
+  VIEWS_TO_PARAMS
 } from '../../ducks/data-selection/constants';
 import {
   getDataSelection,
+  getDataset,
   getGeomarkersShape,
   getGeometryFilters
 } from '../../ducks/data-selection/selectors';
@@ -40,24 +45,37 @@ import {
   MAP_BOUNDING_BOX,
   mapEmptyGeometry,
   mapEndDrawing,
-  mapLoadingAction,
   mapStartDrawing
 } from '../../../map/ducks/map/map';
 import PARAMETERS from '../../../store/parameters';
 import drawToolConfig from '../../../map/services/draw-tool/draw-tool.config';
 import { getViewMode, SET_VIEW_MODE, VIEW_MODE } from '../../ducks/ui/ui';
 
-function* getMapMarkers(dataset, activeFilters) {
+export function* mapBoundsEffect() {
+  const dataSelectionPage = yield select(isDataSelectionPage);
+  if (dataSelectionPage) {
+    yield put(fetchMarkersRequest());
+  }
+}
+
+export function* requestMarkersEffect() {
   // Since bounding box can be set later, we check if we have to wait for the boundingbox to get set
+  const activeFilters = yield select(getFiltersWithoutShape);
+  const dataset = yield select(getDataset);
+  const shape = yield select(getGeomarkersShape);
   let boundingBox = yield select(getMapBoundingBox);
   if (!boundingBox) {
     yield take(MAP_BOUNDING_BOX);
     boundingBox = yield select(getMapBoundingBox);
   }
   const mapZoom = yield select(getMapZoom);
-  const markerData = yield call(getMarkers,
-    dataset, activeFilters, mapZoom, boundingBox);
-  yield put(setMarkers(markerData));
+  try {
+    const markerData = yield call(getMarkers,
+      dataset, { shape, ...activeFilters }, mapZoom, boundingBox);
+    yield put(fetchMarkersSuccess(markerData));
+  } catch (e) {
+    yield put(fetchMarkersFailure(e));
+  }
 }
 
 function* retrieveDataSelection(action) {
@@ -102,24 +120,18 @@ function* retrieveDataSelection(action) {
     const markersShouldBeFetched = (
       view !== VIEW_MODE.FULL && result.numberOfRecords <= MAX_NUMBER_OF_CLUSTERED_MARKERS
     );
-
     if (markersShouldBeFetched) {
-      yield put(mapLoadingAction(true));
-      yield call(getMapMarkers, dataset, { ...activeFilters, shape });
-      yield put(mapLoadingAction(false));
+      yield put(fetchMarkersRequest());
     }
-    yield put(mapLoadingAction(false)); // reset loading after retrieving data selection
   } catch (e) {
     yield put(receiveDataSelectionFailure({
       error: e.message,
       dataset
     }));
-    yield put(mapLoadingAction(false));
   }
 }
 
 function* requestDataSelectionEffect() {
-  yield put(mapLoadingAction(true));
   const dataSelection = yield select(getDataSelection);
   yield put(
     fetchDataSelection({
@@ -195,14 +207,22 @@ function* cancelDrawing() {
 export default function* watchFetchDataSelection() {
   yield takeLatest(REMOVE_FILTER, clearShapeFilter);
   yield takeLatest(SET_GEOMETRY_FILTER, setGeometryFilters);
+  yield takeLatest(MAP_BOUNDING_BOX, mapBoundsEffect);
   yield takeLatest(
-    [SET_VIEW_MODE, SET_PAGE, ADD_FILTER, REMOVE_FILTER, REMOVE_GEOMETRY_FILTER, EMPTY_FILTERS],
+    [
+      SET_VIEW_MODE,
+      SET_PAGE,
+      ADD_FILTER,
+      REMOVE_FILTER,
+      REMOVE_GEOMETRY_FILTER,
+      EMPTY_FILTERS
+    ],
     fetchDataSelectionEffect
   );
 
-  // Actions
   yield takeLatest(FETCH_DATA_SELECTION_REQUEST, retrieveDataSelection);
   yield takeLatest([SET_DATASET], switchPage);
+  yield takeLatest(FETCH_MARKERS_REQUEST, requestMarkersEffect);
 
   yield takeLatest(RESET_DATA_SELECTION, clearDrawing);
   yield takeLatest(START_DATA_SELECTION, startDrawing);

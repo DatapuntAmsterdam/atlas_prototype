@@ -34,7 +34,7 @@ import {
   fetchPanelLayers
 } from '../../ducks/panel-layers/map-panel-layers';
 import { isDrawingActive } from '../../services/draw-tool/draw-tool';
-import { getClusterMarkers, getGeoJsons } from '../../../shared/ducks/data-selection/selectors';
+import { getClusterMarkers, getGeoJsons, getBrkMarkers } from '../../../shared/ducks/data-selection/selectors';
 
 jest.mock('../../../shared/ducks/data-selection/selectors');
 jest.mock('../../ducks/base-layers/map-base-layers');
@@ -86,6 +86,7 @@ describe('LeafletContainer', () => {
     getCenter.mockImplementation(() => [0, 0]);
     getMapZoom.mockImplementation(() => 8);
     getDrawingMode.mockImplementation(() => 'none');
+    getBrkMarkers.mockImplementation(() => []);
     getClusterMarkers.mockImplementation(() => []);
     getGeoJsons.mockImplementation(() => []);
     getMapOverlays.mockImplementation(() => []);

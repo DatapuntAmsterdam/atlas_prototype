@@ -1,5 +1,6 @@
 import reducer from './reducer';
 import * as actionCreators from './actions';
+import { initialState as realInitialState } from './constants';
 import { routing } from '../../../app/routes';
 
 describe('Data Selection Reducer', () => {
@@ -34,11 +35,6 @@ describe('Data Selection Reducer', () => {
       ['isLoading', 'markers']
     ),
     ...getExpectations(
-      actionCreators.setMarkers.name,
-      ['markers', 'isLoading'],
-      [[{ markers: [] }]]
-    ),
-    ...getExpectations(
       actionCreators.setPage.name,
       ['page'],
       [1]
@@ -47,6 +43,21 @@ describe('Data Selection Reducer', () => {
       actionCreators.setDataset.name,
       ['dataset'],
       ['foobar']
+    ),
+    ...getExpectations(
+      actionCreators.fetchMarkersRequest.name,
+      ['loadingMarkers'],
+      []
+    ),
+    ...getExpectations(
+      actionCreators.fetchMarkersSuccess.name,
+      ['loadingMarkers', 'markers'],
+      ['foobar']
+    ),
+    ...getExpectations(
+      actionCreators.fetchMarkersFailure.name,
+      [...Object.keys(realInitialState)],
+      ['error']
     ),
     ...getExpectations(
       actionCreators.setGeometryFilter.name,

@@ -40,6 +40,21 @@ Object {
 }
 `;
 
+exports[`Data Selection Reducer should set isLoading, loadingMarkers, markers, geometryFilter, dataset, authError, errorMessage, page state when dispatching fetchMarkersFailure 1`] = `
+Object {
+  "authError": false,
+  "dataset": "bag",
+  "errorMessage": "error",
+  "geometryFilter": Object {
+    "markers": undefined,
+  },
+  "isLoading": false,
+  "loadingMarkers": false,
+  "markers": Array [],
+  "page": 1,
+}
+`;
+
 exports[`Data Selection Reducer should set isLoading, markers state when dispatching fetchDataSelection 1`] = `
 Object {
   "isLoading": true,
@@ -59,14 +74,16 @@ Object {
 }
 `;
 
-exports[`Data Selection Reducer should set markers, isLoading state when dispatching setMarkers 1`] = `
+exports[`Data Selection Reducer should set loadingMarkers state when dispatching fetchMarkersRequest 1`] = `
 Object {
-  "isLoading": false,
-  "markers": Array [
-    Object {
-      "markers": Array [],
-    },
-  ],
+  "loadingMarkers": true,
+}
+`;
+
+exports[`Data Selection Reducer should set loadingMarkers, markers state when dispatching fetchMarkersSuccess 1`] = `
+Object {
+  "loadingMarkers": false,
+  "markers": "foobar",
 }
 `;
 

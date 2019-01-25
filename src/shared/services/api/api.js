@@ -53,6 +53,7 @@ const handleCache = (response, key) => {
 
 const getFromCache = (key) => {
   const cache = JSON.parse(sessionStorage.getItem(key));
+  if (!cache) return null;
 
   const now = new Date().getTime();
   let expiration = new Date(cache.timestamp);
@@ -60,7 +61,7 @@ const getFromCache = (key) => {
 
   if (now >= expiration) {
     sessionStorage.removeItem(key);
-    throw Error('No cache present');
+    return null;
   }
 
   return cache.data;
@@ -85,14 +86,12 @@ export const getWithToken = (url, params, cancel, token, reloadOnUnauthorized = 
   const fullUrl = `${url}${params ? `?${generateParams(params)}` : ''}`;
 
   // Retrieve from cache, otherwise execute API call
-  try {
-    return getFromCache(fullUrl);
-  } catch (e) {
-    return fetch(fullUrl, options)
+  const cachedResult = getFromCache(fullUrl);
+  return cachedResult ||
+    fetch(fullUrl, options)
       .then((response) => handleErrors(response, reloadOnUnauthorized))
       .then((response) => response.json())
       .then((response) => handleCache(response, fullUrl));
-  }
 };
 
 export const getByUrl = async (url, params, cancel, reloadOnUnauthorized) => {

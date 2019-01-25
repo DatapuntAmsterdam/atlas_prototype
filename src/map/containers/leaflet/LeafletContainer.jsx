@@ -19,6 +19,7 @@ import {
   isMapLoading
 } from '../../ducks/map/map-selectors';
 import {
+  getBrkMarkers,
   getClusterMarkers,
   getGeoJsons
 } from '../../../shared/ducks/data-selection/selectors';
@@ -39,6 +40,7 @@ const mapStateToProps = (state) => ({
   geoJsons: getGeoJsons(state),
   rdGeoJsons: getRdGeoJsons(state),
   markers: getMarkers(state),
+  brkMarkers: getBrkMarkers(state),
   layers: getLayers(state),
   drawingMode: getDrawingMode(state),
   zoom: getMapZoom(state),
@@ -121,6 +123,7 @@ class LeafletContainer extends React.Component {
       layers,
       markers,
       zoom,
+      brkMarkers,
       isLoading
     } = this.props;
 
@@ -128,24 +131,27 @@ class LeafletContainer extends React.Component {
 
     return baseLayer.urlTemplate && (
       <MapLeaflet
-        getLeafletInstance={getLeafletInstance}
-        baseLayer={baseLayer}
-        center={center}
-        clusterMarkers={clusterMarkers}
-        geoJsons={geoJsons}
-        rdGeoJsons={rdGeoJsons}
-        layers={layers}
-        mapOptions={mapOptions}
+        {...{
+          getLeafletInstance,
+          baseLayer,
+          center,
+          brkMarkers,
+          clusterMarkers,
+          geoJsons,
+          rdGeoJsons,
+          layers,
+          mapOptions,
+          scaleControlOptions,
+          zoomControlOptions,
+          zoom,
+          isLoading
+        }}
         markers={(showMarker) ? markers : []}
         onClick={this.handleClick}
         onDragEnd={this.handlePan}
         onZoomEnd={this.handleZoom}
         onResizeEnd={this.handleResize}
         ref={this.setMapLeaflet}
-        scaleControlOptions={scaleControlOptions}
-        zoomControlOptions={zoomControlOptions}
-        zoom={zoom}
-        isLoading={isLoading}
       />
     );
   }
@@ -179,6 +185,7 @@ LeafletContainer.propTypes = {
   rdGeoJsons: PropTypes.arrayOf(PropTypes.shape({})),
   getLeafletInstance: PropTypes.func.isRequired,
   markers: PropTypes.arrayOf(PropTypes.shape({})),
+  brkMarkers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   layers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     isVisible: PropTypes.bool.isRequired,

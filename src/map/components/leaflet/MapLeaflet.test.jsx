@@ -37,6 +37,7 @@ describe('MapLeaflet component', () => {
         mapOptions={mapOptions}
         onMoveEnd={clickHandler}
         onZoomEnd={clickHandler}
+        brkMarkers={[]}
         scaleControlOptions={scaleControlOptions}
         zoomControlOptions={zoomControlOptions}
       />
@@ -58,6 +59,7 @@ describe('MapLeaflet component', () => {
     const layers = [];
     const wrapper = shallow(
       <MapLeaflet
+        brkMarkers={[]}
         baseLayer={baseLayer}
         center={center}
         getLeafletInstance={getLeafletInstance}
@@ -100,6 +102,7 @@ describe('MapLeaflet component', () => {
     const layers = [];
     const wrapper = shallow(
       <MapLeaflet
+        brkMarkers={[]}
         baseLayer={baseLayer}
         center={center}
         getLeafletInstance={getLeafletInstance}
@@ -225,6 +228,7 @@ describe('MapLeaflet component', () => {
       <MapLeaflet
         baseLayer={baseLayer}
         center={center}
+        brkMarkers={[]}
         getLeafletInstance={getLeafletInstance}
         layers={layers}
         mapOptions={mapOptions}
@@ -369,6 +373,7 @@ describe('MapLeaflet component', () => {
       <MapLeaflet
         baseLayer={baseLayer}
         center={center}
+        brkMarkers={[]}
         clusterMarkers={clusterMarkers}
         getLeafletInstance={getLeafletInstance}
         layers={layers}
@@ -482,6 +487,7 @@ describe('MapLeaflet component', () => {
         baseLayer={baseLayer}
         center={center}
         markers={markers}
+        brkMarkers={[]}
         getLeafletInstance={getLeafletInstance}
         layers={layers}
         mapOptions={mapOptions}
@@ -498,6 +504,41 @@ describe('MapLeaflet component', () => {
       zoom: 9
     });
 
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render brkMarkers', () => {
+    const center = [52.3731081, 4.8932945];
+    const zoom = 11;
+    const brkMarkers = [{
+      iconData: {
+        zoomLevel: 14,
+        count: 4
+      },
+      position: [
+        52.378971546685705,
+        4.854030078341637
+      ],
+      type: 'dataSelectionType'
+    }];
+    const clickHandler = jest.fn();
+    const layers = [];
+    const wrapper = shallow(
+      <MapLeaflet
+        baseLayer={baseLayer}
+        center={center}
+        markers={[]}
+        brkMarkers={brkMarkers}
+        getLeafletInstance={getLeafletInstance}
+        layers={layers}
+        mapOptions={mapOptions}
+        onMoveEnd={clickHandler}
+        onZoomEnd={clickHandler}
+        scaleControlOptions={scaleControlOptions}
+        zoomControlOptions={zoomControlOptions}
+        zoom={zoom}
+      />
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -547,6 +588,7 @@ describe('MapLeaflet component', () => {
 
       wrapper = shallow(
         <MapLeaflet
+          brkMarkers={[]}
           baseLayer={baseLayer}
           getLeafletInstance={getLeafletInstance}
           mapOptions={mapOptions}
