@@ -98,8 +98,18 @@ export const setViewMode = (payload, tracking = true) => ({
   payload,
   meta: { tracking }
 });
-export const hidePrintMode = () => ({ type: HIDE_PRINT });
-export const hideEmbedMode = () => ({ type: HIDE_EMBED_PREVIEW });
+export const hidePrintMode = () => ({
+  type: HIDE_PRINT,
+  meta: {
+    tracking: true
+  }
+});
+export const hideEmbedMode = () => ({
+  type: HIDE_EMBED_PREVIEW,
+  meta: {
+    tracking: true
+  }
+});
 export const toggleMapPanelHandle = () => ({ type: TOGGLE_MAP_PANEL_HANDLE });
 
 // Selectors

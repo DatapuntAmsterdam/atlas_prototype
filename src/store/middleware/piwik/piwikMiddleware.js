@@ -19,6 +19,12 @@ const PIWIK_CONFIG = {
   }
 };
 
+export const PIWIK_CONSTANTS = {
+  TRACK_EVENT: 'trackEvent',
+  TRACK_SEARCH: 'trackSiteSearch',
+  TRACK_VIEW: 'trackPageView'
+};
+
 // Initialize connection with Piwik
 export const initializePiwik = () => {
   const urlBase = 'https://piwik.data.amsterdam.nl/';

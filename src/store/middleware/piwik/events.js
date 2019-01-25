@@ -5,10 +5,12 @@ import {
   isDatasetPage,
   isPanoPage
 } from '../../redux-first-router/selectors';
-import { DOWNLOAD_DATASET_RESOURCE } from '../../../shared/ducks/datasets/data/data';
+import {
+  DOWNLOAD_DATASET_RESOURCE,
+  FETCH_DATASETS_SUCCESS
+} from '../../../shared/ducks/datasets/data/data';
 import {
   DOWNLOAD_DATA_SELECTION,
-  END_DATA_SELECTION,
   SET_GEOMETRY_FILTER
 } from '../../../shared/ducks/data-selection/constants';
 import {
@@ -24,9 +26,12 @@ import {
   SET_VIEW_MODE,
   SHOW_EMBED_PREVIEW,
   SHOW_PRINT,
+  HIDE_PRINT,
+  HIDE_EMBED_PREVIEW,
   VIEW_MODE
 } from '../../../shared/ducks/ui/ui';
-import { SET_MAP_BASE_LAYER, SET_MAP_CLICK_LOCATION } from '../../../map/ducks/map/map';
+import { SET_MAP_BASE_LAYER, SET_MAP_CLICK_LOCATION, MAP_START_DRAWING } from '../../../map/ducks/map/map';
+import { getShapeMarkers } from '../../../map/ducks/map/map-selectors';
 import { NAVIGATE_HOME_REQUEST, REPORT_PROBLEM_REQUEST } from '../../../header/ducks/actions';
 import {
   FETCH_PANORAMA_HOTSPOT_REQUEST,
@@ -34,29 +39,57 @@ import {
   FETCH_PANORAMA_REQUEST_EXTERNAL
 } from '../../../panorama/ducks/constants';
 import PAGES from '../../../app/pages';
-
-const PIWIK_CONSTANTS = {
-  TRACK_EVENT: 'trackEvent',
-  TRACK_SEARCH: 'trackSiteSearch'
-
-};
+import { PIWIK_CONSTANTS } from './piwikMiddleware';
 
 const events = {
   // NAVIGATION
-  // NAVIGATION -> SELECT AUTOSUGGEST OPTION
-  [routing.dataDetail.type]: function trackDataDetail({ tracking, state }) {
+  // NAVIGATION -> NAVIGATE TO DATA DETAIL
+  [routing.dataDetail.type]: function trackDataDetail({ query, tracking, state }) {
     return (tracking && tracking.event === 'auto-suggest') ? [
       PIWIK_CONSTANTS.TRACK_EVENT,
-      'auto-suggest',
+      'auto-suggest', // NAVIGATION -> SELECT AUTOSUGGEST OPTION
       tracking.category,
       tracking.query
-    ] : [
+    ] : (getViewMode(state) === VIEW_MODE.MAP && query.view === VIEW_MODE.SPLIT) ? [
       PIWIK_CONSTANTS.TRACK_EVENT,
-      'navigation',
-      isPanoPage(state) ? 'panorama-verlaten' : 'detail-volledig-weergeven',
+      'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP
+      'detail-volledig-weergeven',
       null
-    ];
+    ] : (getViewMode(state) === VIEW_MODE.SPLIT && query.view === VIEW_MODE.MAP) ? [
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM SPLITSCREEN
+      'detail-kaart-vergroten',
+      null
+    ] : isPanoPage(state) ? [
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      'navigation', // NAVIGATION -> CLICK CLOSE FROM PANORAMA
+      'panorama-verlaten',
+      null
+    ] : [];
   },
+  // NAVIGATION -> NAVIGATE TO GEO SEARCH
+  [routing.dataGeoSearch.type]: function trackGeoSearch({ state }) {
+    return isPanoPage(state) ? [
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      'navigation', // NAVIGATION -> CLICK CLOSE FROM PANORAMA
+      'panorama-verlaten',
+      null
+    ] : [];
+  },
+  // NAVIGATION -> CLOSE PRINT VIEW
+  [HIDE_PRINT]: () => [
+    PIWIK_CONSTANTS.TRACK_EVENT,
+    'navigation',
+    'printversie-verlaten',
+    null
+  ],
+  // NAVIGATION -> CLOSE EMBED VIEW
+  [HIDE_EMBED_PREVIEW]: () => [
+    PIWIK_CONSTANTS.TRACK_EVENT,
+    'navigation',
+    'embedversie-verlaten',
+    null
+  ],
   // NAVIGATION -> CLICK LOGO
   [NAVIGATE_HOME_REQUEST]: ({ title }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
@@ -71,16 +104,8 @@ const events = {
       case PAGES.DATA_GEO_SEARCH:
         return [
           PIWIK_CONSTANTS.TRACK_EVENT,
-          'navigation',
-          `georesultaten-${(viewMode === VIEW_MODE.MAP) ? 'kaart-verkleinen' : 'kaart-vergroten'}`,
-          null
-        ];
-
-      case PAGES.DATA_DETAIL:
-        return [
-          PIWIK_CONSTANTS.TRACK_EVENT,
-          'navigation',
-          `detail-${(viewMode === VIEW_MODE.MAP) ? 'kaart-verkleinen' : 'kaart-vergroten'}`,
+          'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP Or SPLITSCREEN
+          `georesultaten-${(viewMode === VIEW_MODE.MAP) ? 'volledig-weergeven' : 'kaart-vergroten'}`,
           null
         ];
 
@@ -123,18 +148,30 @@ const events = {
   },
   // SITE SEARCH
   // SITE SEARCH -> DATA
-  [FETCH_QUERY_SEARCH_RESULTS_SUCCESS]: ({ tracking }) => [
-    PIWIK_CONSTANTS.TRACK_SEARCH,
-    'Data',
-    tracking.query,
-    tracking.numberOfResults
-  ],
-  // DATASET
-  [DOWNLOAD_DATASET_RESOURCE]: ({ dataset, resourceUrl }) => [
+  [FETCH_QUERY_SEARCH_RESULTS_SUCCESS]: function trackDataSearch({ tracking, state }) {
+    return (getPage(state) === PAGES.DATA_QUERY_SEARCH) ? [
+      PIWIK_CONSTANTS.TRACK_SEARCH,
+      tracking.query,
+      'data',
+      tracking.numberOfResults
+    ] : [];
+  },
+  // SITE SEARCH -> DATASETS
+  [FETCH_DATASETS_SUCCESS]: function trackDatasetSearch({ tracking, state }) {
+    return (getPage(state) === PAGES.SEARCH_DATASETS) ? [
+      PIWIK_CONSTANTS.TRACK_SEARCH,
+      tracking.query,
+      'datasets',
+      tracking.numberOfResults
+    ] : [];
+  },
+  // DATASETS
+  // DATASETS -> CLICK RESOURCE ON DATASETS_DETAIL
+  [DOWNLOAD_DATASET_RESOURCE]: ({ tracking }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
     'Download',
-    dataset,
-    resourceUrl
+    tracking.dataset,
+    tracking.resourceUrl
   ],
   // DATA SELECTION
   // DATA SELECTION -> BUTTON "downloaden"
@@ -151,23 +188,17 @@ const events = {
     'dataselectie-polygoon-filter',
     'Locatie ingetekend'
   ],
-  // MAP
-  // MAP -> SHOW EMBEDDED
-  [routing.data.type]: function trackEmbed({ query, href }) {
-    return (query.embed) ? [
+  // DATA SELECTION -> DRAW "line"
+  [MAP_START_DRAWING]: function trackDrawing({ tracking, state, title }) {
+    const markers = getShapeMarkers(state);
+    return (tracking === 'none' && markers === 2) ? [
       PIWIK_CONSTANTS.TRACK_EVENT,
-      'embed',
-      'embedkaart',
-      href
+      'kaart',
+      'kaart-tekenlijn',
+      title
     ] : [];
   },
-  // MAP -> DRAW "line"
-  [END_DATA_SELECTION]: ({ title }) => [
-    PIWIK_CONSTANTS.TRACK_EVENT,
-    'kaart',
-    'kaart-tekenlijn',
-    title
-  ],
+  // MAP
   [SET_MAP_BASE_LAYER]: ({ tracking }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
     'achtergrond',
@@ -212,14 +243,14 @@ const events = {
   // FILTERS
   // ADD FILTER -> "datasets" / "dataselectie"
   [ADD_FILTER]: ({ tracking, state }) => {
-    const page = isDataSelectionPage(state) ? 'dataselectie'
-      : isDatasetPage(state) ? 'dataset'
+    const page = isDataSelectionPage(state) ? 'dataselectie-tabel'
+      : isDatasetPage(state) ? 'datasets'
         : null;
 
     return page ? ([
       PIWIK_CONSTANTS.TRACK_EVENT,
       'filter',
-      `${page}-tabel-filter`,
+      `${page}-filter`,
       Object.keys(tracking)[0]
     ]) : [];
   },
@@ -254,7 +285,7 @@ const events = {
   // PANORAMA -> CLICK HOTSPOT
   [FETCH_PANORAMA_HOTSPOT_REQUEST]: () => ([
     PIWIK_CONSTANTS.TRACK_EVENT,
-    'panorama-navigation',
+    'panorama-navigatie',
     'panorama-hotspot-klik',
     null
   ]),

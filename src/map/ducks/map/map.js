@@ -188,7 +188,13 @@ export default function MapReducer(state = initialState, action) {
 // Actions
 export const mapEmptyGeometry = () => ({ type: MAP_EMPTY_GEOMETRY });
 export const mapUpdateShape = (payload) => ({ type: MAP_UPDATE_SHAPE, payload });
-export const mapStartDrawing = (payload) => ({ type: MAP_START_DRAWING, payload });
+export const mapStartDrawing = (payload) => ({
+  type: MAP_START_DRAWING,
+  payload,
+  meta: {
+    tracking: payload.drawingMode
+  }
+});
 export const mapEndDrawing = (payload) => ({ type: MAP_END_DRAWING, payload });
 export const mapClear = () => ({ type: MAP_CLEAR });
 export const updateZoom = (payload) => ({ type: MAP_ZOOM, payload });

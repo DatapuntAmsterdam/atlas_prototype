@@ -73,7 +73,13 @@ export const fetchDatasets = (payload) => ({
 
 export const receiveDatasetsSuccess = (payload) => ({
   type: FETCH_DATASETS_SUCCESS,
-  payload
+  payload,
+  meta: {
+    tracking: {
+      query: payload.searchText,
+      numberOfResults: payload.result.numberOfRecords
+    }
+  }
 });
 
 export const receiveDatasetsFailure = (payload) => ({
