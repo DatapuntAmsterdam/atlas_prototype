@@ -10,17 +10,23 @@ import {
   FETCH_DATASETS_SUCCESS
 } from '../../../shared/ducks/datasets/data/data';
 import {
-  DOWNLOAD_DATA_SELECTION,
-  SET_GEOMETRY_FILTER
-} from '../../../shared/ducks/data-selection/constants';
+  getNumberOfResults as getNumberOfDatasetsResults,
+  getSearchText as getDatasetsSearchQuery
+} from '../../../shared/ducks/datasets/datasets';
+import { DOWNLOAD_DATA_SELECTION } from '../../../shared/ducks/data-selection/constants';
+import { FETCH_QUERY_SEARCH_RESULTS_SUCCESS } from '../../../shared/ducks/data-search/constants';
 import {
-  FETCH_QUERY_SEARCH_RESULTS_SUCCESS
-} from '../../../shared/ducks/data-search/constants';
+  getSearchQuery,
+  getNumberOfResults
+} from '../../../shared/ducks/data-search/selectors';
 import {
   AUTHENTICATE_USER_REQUEST,
   AUTHENTICATE_USER_SUCCESS
 } from '../../../shared/ducks/user/user';
-import { ADD_FILTER, REMOVE_FILTER } from '../../../shared/ducks/filters/filters';
+import {
+  ADD_FILTER,
+  REMOVE_FILTER
+} from '../../../shared/ducks/filters/filters';
 import {
   getViewMode,
   SET_VIEW_MODE,
@@ -30,9 +36,16 @@ import {
   HIDE_EMBED_PREVIEW,
   VIEW_MODE
 } from '../../../shared/ducks/ui/ui';
-import { SET_MAP_BASE_LAYER, SET_MAP_CLICK_LOCATION, MAP_START_DRAWING } from '../../../map/ducks/map/map';
+import {
+  SET_MAP_BASE_LAYER,
+  SET_MAP_CLICK_LOCATION,
+  MAP_START_DRAWING
+} from '../../../map/ducks/map/map';
 import { getShapeMarkers } from '../../../map/ducks/map/map-selectors';
-import { NAVIGATE_HOME_REQUEST, REPORT_PROBLEM_REQUEST } from '../../../header/ducks/actions';
+import {
+  NAVIGATE_HOME_REQUEST,
+  REPORT_PROBLEM_REQUEST
+} from '../../../header/ducks/actions';
 import {
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST_TOGGLE,
@@ -147,7 +160,18 @@ const events = {
     }
   },
   // SITE SEARCH
-  // SITE SEARCH -> DATA
+  // SITE SEARCH -> DATA SWITCH TAB
+  [routing.dataQuerySearch.type]: ({ state }) => {
+    const query = getSearchQuery(state);
+    const numberOfResults = getNumberOfResults(state);
+    return (query || numberOfResults) ? [
+      PIWIK_CONSTANTS.TRACK_SEARCH,
+      query,
+      'data',
+      numberOfResults
+    ] : [];
+  },
+  // SITE SEARCH -> DATA INITIAL LOAD
   [FETCH_QUERY_SEARCH_RESULTS_SUCCESS]: function trackDataSearch({ tracking, state }) {
     return (getPage(state) === PAGES.DATA_QUERY_SEARCH) ? [
       PIWIK_CONSTANTS.TRACK_SEARCH,
@@ -156,7 +180,18 @@ const events = {
       tracking.numberOfResults
     ] : [];
   },
-  // SITE SEARCH -> DATASETS
+  // SITE SEARCH -> DATASETS SWITCH TAB
+  [routing.searchDatasets.type]: ({ state }) => {
+    const query = getDatasetsSearchQuery(state);
+    const numberOfResults = getNumberOfDatasetsResults(state);
+    return (query || numberOfResults) ? [
+      PIWIK_CONSTANTS.TRACK_SEARCH,
+      query,
+      'datasets',
+      numberOfResults
+    ] : [];
+  },
+  // SITE SEARCH -> DATASETS INITIAL LOAD
   [FETCH_DATASETS_SUCCESS]: function trackDatasetSearch({ tracking, state }) {
     return (getPage(state) === PAGES.SEARCH_DATASETS) ? [
       PIWIK_CONSTANTS.TRACK_SEARCH,
@@ -181,24 +216,23 @@ const events = {
     `dataselectie-download-${tracking.toLowerCase()}`,
     null
   ],
-  // DATA SELECTION -> DRAW "polygoon"
-  [SET_GEOMETRY_FILTER]: () => [
-    PIWIK_CONSTANTS.TRACK_EVENT,
-    'filter',
-    'dataselectie-polygoon-filter',
-    'Locatie ingetekend'
-  ],
-  // DATA SELECTION -> DRAW "line"
+  // DRAW TOOL
   [MAP_START_DRAWING]: function trackDrawing({ tracking, state, title }) {
     const markers = getShapeMarkers(state);
     return (tracking === 'none' && markers === 2) ? [
       PIWIK_CONSTANTS.TRACK_EVENT,
-      'kaart',
+      'kaart', // DRAW TOOL -> DRAW "line"
       'kaart-tekenlijn',
       title
+    ] : (tracking === 'none' && markers > 2) ? [
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      'filter', // DRAW TOOL -> DRAW "polygoon"
+      'dataselectie-polygoon-filter',
+      'Locatie ingetekend'
     ] : [];
   },
   // MAP
+  // MAP -> TOGGLE BASE LAYER
   [SET_MAP_BASE_LAYER]: ({ tracking }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
     'achtergrond',
@@ -219,6 +253,7 @@ const events = {
       null
     ];
   },
+  // MAP -> TOGGLE OVERLAYS
   TOGGLE_MAP_OVERLAY: ({ tracking }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
     'kaartlaag',

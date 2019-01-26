@@ -49,27 +49,29 @@ export const initializePiwik = () => {
   }
 };
 
-// Map actions to be tracked
-export const actionsToPiwik = {
-  ...routes,
-  ...events
-};
-
 // Execute Piwik actions
 const piwikMiddleware = ({ getState }) => (next) => (action) => {
   initializePiwik();
   const nextAction = action;
 
-  const actionMap = actionsToPiwik[action.type];
+  const actionsToPiwik = [];
+  if (routes[action.type]) {
+    actionsToPiwik.push(routes[action.type]);
+  }
+  if (events[action.type]) {
+    actionsToPiwik.push(events[action.type]);
+  }
 
-  if (actionMap) {
+  if (actionsToPiwik.length) {
     const { firstAction, location, query, tracking } = action.meta || {};
     const state = getState();
     const href = window.location.href;
     const title = document.title;
 
     if (tracking || location) {
-      piwikTracker(actionMap({ tracking, firstAction, query, state, title, href }));
+      actionsToPiwik.forEach((piwikAction) => {
+        piwikTracker(piwikAction({ tracking, firstAction, query, state, title, href }));
+      });
     }
   }
 

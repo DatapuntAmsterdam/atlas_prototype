@@ -13,8 +13,8 @@ export default combineReducers({
 });
 
 // Selectors
-const getDatasetsData = (state) => state[REDUCER_KEY][DATA];
-const getApiSpecification = (state) => state[REDUCER_KEY][API_SPECIFICATION];
+export const getDatasetsData = (state) => state[REDUCER_KEY][DATA];
+export const getApiSpecification = (state) => state[REDUCER_KEY][API_SPECIFICATION];
 
 const getStateOfKey = {
   data: (key) => (state) => createSelector(getDatasetsData, (data) => (data[key]))(state),
@@ -26,13 +26,11 @@ export const getApiSpecificationData = getStateOfKey.apiSpec('data');
 export const getResults = getStateOfKey.data('result');
 export const getAuthError = getStateOfKey.data('authError');
 export const getPage = getStateOfKey.data('page');
+export const getSearchText = getStateOfKey.data('searchText');
 export const getFilters = createSelector(getResults, (result) => result.filters || []);
-export const getNumberOfResults = createSelector(
-  getResults,
-  (resultState) => resultState.numberOfRecords
-);
+export const getNumberOfResults = createSelector(getResults, (result) => result.numberOfRecords);
 export const isLoading = createSelector(
   getDatasetsData,
   getApiSpecification,
-  (resultState, apiSpecs) => resultState.isLoading || apiSpecs.isLoading
+  (result, apiSpecs) => result.isLoading || apiSpecs.isLoading
 );
