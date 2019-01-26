@@ -3,8 +3,8 @@ import {
   isDataSelectionPage,
   isDatasetPage,
   isDatasetDetailPage,
-  isHomepage,
-  isPanoPage
+  isPanoPage,
+  isDataPage
 } from '../../../store/redux-first-router/selectors';
 import paramsRegistry from '../../../store/params-registry';
 
@@ -128,8 +128,8 @@ export const isMapLayersVisible = createSelector(getUIState, (ui) => ui.isMapLay
 export const isMapPanelHandleVisible =
   createSelector(getUIState, (ui) => ui.isMapPanelHandleVisible);
 
-export const isMapPage = createSelector(isHomepage, getViewMode, (homePage, viewMode) => (
-  homePage && viewMode === VIEW_MODE.MAP
+export const isMapPage = createSelector(isDataPage, getViewMode, (dataPage, viewMode) => (
+  dataPage && viewMode === VIEW_MODE.MAP
 ));
 export const isMapActive = createSelector(
   getViewMode, isMapPage,
@@ -139,21 +139,19 @@ export const hasPrintMode = createSelector(
   isDataSelectionPage,
   isDatasetPage,
   isDatasetDetailPage,
-  isHomepage,
+  isDataPage,
   isMapActive,
   getViewMode,
   (
     dataSelectionPage,
     datasetPage,
     datasetDetailPage,
-    dataDetailPage,
-    homePage,
+    dataPage,
     mapActive,
     viewMode
   ) =>
     (!dataSelectionPage || viewMode === VIEW_MODE.SPLIT || viewMode === VIEW_MODE.MAP) &&
-    (!datasetPage || datasetDetailPage) &&
-    (!homePage || mapActive)
+    (!datasetPage || datasetDetailPage) && (dataPage || mapActive)
 );
 export const isPrintModeLandscape = createSelector(
   isPrintMode,
