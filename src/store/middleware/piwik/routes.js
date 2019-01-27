@@ -1,5 +1,6 @@
 import { routing } from '../../../app/routes';
 import { isEmbedded } from '../../../shared/ducks/ui/ui';
+import { isDataDetailPage } from '../../redux-first-router/selectors';
 import { PIWIK_CONSTANTS } from './piwikMiddleware';
 
 let routes = Object.entries(routing).reduce((acc, [, value]) => ({
@@ -33,6 +34,19 @@ routes = {
     ] : (firstAction) ? [
       PIWIK_CONSTANTS.TRACK_VIEW,
       title, // PAGEVIEW -> MAP
+      href,
+      null
+    ] : [];
+  },
+  'atlasRouter/DATA_DETAIL': function trackRoute({ firstAction = null, href, title, state, tracking }) {
+    return (!firstAction && isDataDetailPage(state) && tracking) ? [
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      title, // PAGEVIEW -> DETAIL VIEW CLICK THROUGH VIEWS
+      href,
+      null
+    ] : (firstAction) ? [
+      PIWIK_CONSTANTS.TRACK_VIEW,
+      title, // PAGEVIEW -> DETAIL VIEW INITIAL LOAD
       href,
       null
     ] : [];
