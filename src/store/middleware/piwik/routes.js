@@ -40,7 +40,7 @@ routes = {
   },
   'atlasRouter/DATA_DETAIL': function trackRoute({ firstAction = null, href, title, state, tracking }) {
     return (!firstAction && isDataDetailPage(state) && tracking) ? [
-      PIWIK_CONSTANTS.TRACK_EVENT,
+      PIWIK_CONSTANTS.TRACK_VIEW,
       title, // PAGEVIEW -> DETAIL VIEW CLICK THROUGH VIEWS
       href,
       null

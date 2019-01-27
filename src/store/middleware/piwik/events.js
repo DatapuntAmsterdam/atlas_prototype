@@ -161,12 +161,14 @@ const events = {
   },
   // SITE SEARCH
   // SITE SEARCH -> DATA SWITCH TAB
-  [routing.dataQuerySearch.type]: ({ firstAction = null, state }) => {
-    const query = getSearchQuery(state);
+  [routing.dataQuerySearch.type]: ({ firstAction = null, query, state }) => {
+    const searchQuery = getSearchQuery(state);
     const numberOfResults = getNumberOfResults(state);
-    return (firstAction && (query && query.length > 0)) ? [
+    return (
+      firstAction && (searchQuery && searchQuery.length > 0) && (query.term === searchQuery)
+    ) ? [
       PIWIK_CONSTANTS.TRACK_SEARCH,
-      query,
+      searchQuery,
       'data',
       numberOfResults
     ] : [];
@@ -181,12 +183,14 @@ const events = {
     ] : [];
   },
   // SITE SEARCH -> DATASETS SWITCH TAB
-  [routing.searchDatasets.type]: ({ firstAction = null, state }) => {
-    const query = getDatasetsSearchQuery(state);
+  [routing.searchDatasets.type]: ({ firstAction = null, query, state }) => {
+    const searchQuery = getDatasetsSearchQuery(state);
     const numberOfResults = getNumberOfDatasetsResults(state);
-    return (firstAction && (query && query.length > 0)) ? [
+    return (
+      firstAction && (searchQuery && searchQuery.length > 0) && (query.term === searchQuery)
+    ) ? [
       PIWIK_CONSTANTS.TRACK_SEARCH,
-      query,
+      searchQuery,
       'datasets',
       numberOfResults
     ] : [];
