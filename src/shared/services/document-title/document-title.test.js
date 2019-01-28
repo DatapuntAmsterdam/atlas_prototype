@@ -1,26 +1,26 @@
 
-import { homeDocumentTitle, detailDocumentTitle } from './document-title';
+import { mapDocumentTitle, detailDocumentTitle } from './document-title';
 
 describe('The Detail DocumentTitle service', () => {
   beforeEach(() => {
   });
 
-  describe('homeDocumentTitle', () => {
+  describe('mapDocumentTitle', () => {
     it('should return the default name when no map view', () => {
       const action = {
         meta: {}
       };
-      expect(homeDocumentTitle(action, 'Home')).toBe('Home');
+      expect(mapDocumentTitle(action, 'Home')).toBe('Home');
     });
 
     it('should return the map name when the view is map', () => {
       const action = { meta: { query: { view: 'kaart' } } };
-      expect(homeDocumentTitle(action, 'Home')).toBe('Grote kaart');
+      expect(mapDocumentTitle(action, 'Home')).toBe('Grote kaart');
     });
 
     it('should return the map embeded name when the map is embeded', () => {
       const action = { meta: { query: { view: 'kaart', embed: 'true' } } };
-      expect(homeDocumentTitle(action, 'Home')).toBe('Grote kaart | Embeded');
+      expect(mapDocumentTitle(action, 'Home')).toBe('Grote kaart | Embeded');
     });
   });
 
