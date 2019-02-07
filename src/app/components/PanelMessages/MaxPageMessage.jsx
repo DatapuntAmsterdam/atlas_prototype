@@ -11,7 +11,7 @@ const MaxPageMessage = ({ maxAvailablePages }) => (
     <div className="qa-message-max-pages">
       <h2 className="c-panel__title">Deze pagina kan niet worden getoond</h2>
       <p className="c-panel__paragraph">
-        Alleen de eerste {{ maxAvailablePages }} pagina&apos;s kunnen
+        Alleen de eerste {maxAvailablePages} pagina&apos;s kunnen
         worden
         weergegeven (om technische redenen). Bij
         downloaden worden wel alle resultaten opgenomen.
