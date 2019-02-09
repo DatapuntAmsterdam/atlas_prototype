@@ -1,10 +1,11 @@
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
-import watchFetchSuggestions, { fetchSuggestions } from './auto-suggest';
+import watchFetchSuggestions, { fetchSuggestions, doSelectSugestion } from './auto-suggest';
 import {
-  FETCH_SUGGESTIONS_FAILURE,
-  FETCH_SUGGESTIONS_REQUEST,
-  FETCH_SUGGESTIONS_SUCCESS
-} from '../../ducks/auto-suggest/auto-suggest';
+  SELECT_SUGGESTION
+  , FETCH_SUGGESTIONS_REQUEST
+  , FETCH_SUGGESTIONS_SUCCESS,
+  FETCH_SUGGESTIONS_FAILURE
+} from '../../ducks/auto-suggest/constants';
 import autoSuggestSearch from '../../services/auto-suggest/auto-suggest';
 
 describe('watchFetchSuggestions', () => {
@@ -13,6 +14,8 @@ describe('watchFetchSuggestions', () => {
     testSaga(watchFetchSuggestions)
       .next()
       .takeLatestEffect(FETCH_SUGGESTIONS_REQUEST, fetchSuggestions)
+      .next(action)
+      .takeLatestEffect(SELECT_SUGGESTION, doSelectSugestion)
       .next(action)
       .isDone();
   });

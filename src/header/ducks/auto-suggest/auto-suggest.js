@@ -4,23 +4,15 @@ import paramsRegistry from '../../../store/params-registry';
 import PARAMETERS from '../../../store/parameters';
 import PAGES from '../../../app/pages';
 import { shouldResetState } from '../../../store/redux-first-router/actions';
+import {
+  initialState,
+  FETCH_SUGGESTIONS_REQUEST,
+  REDUCER_KEY,
+  FETCH_SUGGESTIONS_SUCCESS,
+  FETCH_SUGGESTIONS_FAILURE,
+  SET_ACTIVE_SUGGESTION
+} from './constants';
 
-const REDUCER_KEY = 'autoSuggest';
-export { REDUCER_KEY as AUTO_SUGGEST };
-export const SET_ACTIVE_SUGGESTION = `${REDUCER_KEY}/SET_ACTIVE_SUGGESTION`;
-export const FETCH_SUGGESTIONS_REQUEST = `${REDUCER_KEY}/FETCH_SUGGESTIONS_REQUEST`;
-export const FETCH_SUGGESTIONS_SUCCESS = `${REDUCER_KEY}/FETCH_SUGGESTIONS_SUCCESS`;
-export const FETCH_SUGGESTIONS_FAILURE = `${REDUCER_KEY}/FETCH_SUGGESTIONS_FAILURE`;
-export const SELECT_SUGGESTION = `${REDUCER_KEY}/SELECT_SUGGESTION`;
-
-const initialState = {
-  count: 0,
-  displayQuery: '',
-  error: '',
-  isLoading: false,
-  suggestions: [],
-  typedQuery: ''
-};
 
 export default function AutoSuggestReducer(state = initialState, action) {
   // cleanup the state for this reducer when not on the search routes
@@ -64,7 +56,6 @@ export default function AutoSuggestReducer(state = initialState, action) {
         typedQuery: enrichedState.typedQuery
       };
 
-    // Todo: DP-6480 Refactor this: conflict with other queryParam in data-search reducer
     case routing.dataQuerySearch.type:
     case routing.searchDatasets.type:
       return {
@@ -83,14 +74,4 @@ export const getDisplayQuery = (state) => state.autoSuggest.displayQuery;
 export const getNumberOfSuggestions = (state) => state.autoSuggest.count;
 export const getAutoSuggestSuggestions = (state) => state.autoSuggest.suggestions;
 export const getTypedQuery = (state) => state.autoSuggest.typedQuery;
-
-// Action creators
-export const setActiveSuggestionAction = (suggestion = { index: -1 }) =>
-  ({ type: SET_ACTIVE_SUGGESTION, suggestion });
-
-export const getSuggestionsAction = (query = '') =>
-  ({ type: FETCH_SUGGESTIONS_REQUEST, query });
-
-export const selectSuggestionAction = (suggestion, view) =>
-  ({ type: SELECT_SUGGESTION, payload: { suggestion, view } });
 

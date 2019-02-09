@@ -6,7 +6,7 @@ import {
   FETCH_SUGGESTIONS_REQUEST,
   FETCH_SUGGESTIONS_SUCCESS,
   SELECT_SUGGESTION
-} from '../../ducks/auto-suggest/auto-suggest';
+} from '../../ducks/auto-suggest/constants';
 import { getMapOverlaysWithoutPanorama } from '../../../map/ducks/map/map-selectors';
 import { setGlobalError } from '../../../shared/ducks/error/error-message';
 import { toDataSuggestion } from '../../../store/redux-first-router/actions';

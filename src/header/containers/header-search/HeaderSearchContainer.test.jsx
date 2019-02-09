@@ -4,9 +4,7 @@ import { shallow } from 'enzyme';
 
 import HeaderSearchContainer from './HeaderSearchContainer';
 import {
-  getSuggestionsAction,
-  getTypedQuery,
-  selectSuggestionAction
+  getTypedQuery
 } from '../../ducks/auto-suggest/auto-suggest';
 
 import { clearMapDetail } from '../../../shared/ducks/detail/actions';
@@ -22,14 +20,17 @@ import {
 import { CLEAR_MAP_DETAIL } from '../../../shared/ducks/detail/constants';
 import PARAMETERS from '../../../store/parameters';
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
+import { selectSuggestionAction, getSuggestionsAction } from '../../ducks/auto-suggest/actions';
 
 
 jest.mock('../../ducks/auto-suggest/auto-suggest');
+jest.mock('../../ducks/auto-suggest/actions');
 jest.mock('../../../shared/ducks/detail/actions');
 
 describe('HeaderSearchContainer', () => {
   beforeEach(() => {
     getSuggestionsAction.mockImplementation(() => ({ type: 'getSuggestionsAction' }));
+    selectSuggestionAction.mockImplementation(() => ({ type: 'selectSuggestionAction' }));
     clearMapDetail.mockImplementation((endpoint) => ({
       type: CLEAR_MAP_DETAIL,
       payload: endpoint
@@ -38,6 +39,7 @@ describe('HeaderSearchContainer', () => {
 
   afterEach(() => {
     getSuggestionsAction.mockReset();
+    selectSuggestionAction.mockReset();
     clearMapDetail.mockReset();
   });
 
@@ -113,10 +115,10 @@ describe('HeaderSearchContainer', () => {
   });
 
   describe('onSuggestionSelection', () => {
-    it.only('opens data from the suggestions', () => {
+    it('opens data from the suggestions', () => {
       const store = configureMockStore()({ ...initialState });
       const shouldOpenInNewWindow = false;
-      const selectedSuggestion = {
+      const suggestionMock = {
         uri: 'bag/openbareruimte/GgCm07EqNVIpwQ',
         label: 'Damloperspad',
         index: 1,
@@ -126,12 +128,12 @@ describe('HeaderSearchContainer', () => {
       jest.spyOn(store, 'dispatch');
       const headerSearch = shallow(<HeaderSearchContainer />, { context: { store } }).dive();
 
-      headerSearch.instance().onSuggestionSelection(selectedSuggestion, shouldOpenInNewWindow);
+      headerSearch.instance().onSuggestionSelection(suggestionMock, shouldOpenInNewWindow);
 
       expect(store.dispatch).toHaveBeenCalledWith(
         selectSuggestionAction({
-          endpoint: selectedSuggestion.uri,
-          category: selectedSuggestion.category,
+          endpoint: suggestionMock.uri,
+          category: suggestionMock.category,
           typedQuery: ''
         }, VIEW_MODE.SPLIT)
       );
@@ -157,7 +159,7 @@ describe('HeaderSearchContainer', () => {
       );
     });
 
-    it.only('does call to open new window if shouldOpenInNewWindow is true', () => {
+    it('does call to open new window if shouldOpenInNewWindow is true', () => {
       // TODO: refactor, allow opening in new window.
       const store = configureMockStore()({ ...initialState });
       const shouldOpenInNewWindow = true;
