@@ -3,7 +3,11 @@ import configureMockStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
 import HeaderSearchContainer from './HeaderSearchContainer';
-import { getSuggestionsAction, getTypedQuery } from '../../ducks/auto-suggest/auto-suggest';
+import {
+  getSuggestionsAction,
+  getTypedQuery,
+  selectSuggestionAction
+} from '../../ducks/auto-suggest/auto-suggest';
 
 import { clearMapDetail } from '../../../shared/ducks/detail/actions';
 import { ROUTER_NAMESPACE } from '../../../app/routes';
@@ -13,8 +17,7 @@ import { emptyFilters } from '../../../shared/ducks/filters/filters';
 import {
   toDataSearchQuery,
   toDatasetSearch,
-  toDatasetSuggestion,
-  toDataSuggestion
+  toDatasetSuggestion
 } from '../../../store/redux-first-router/actions';
 import { CLEAR_MAP_DETAIL } from '../../../shared/ducks/detail/constants';
 import PARAMETERS from '../../../store/parameters';
@@ -110,7 +113,7 @@ describe('HeaderSearchContainer', () => {
   });
 
   describe('onSuggestionSelection', () => {
-    it('opens data from the suggestions', () => {
+    it.only('opens data from the suggestions', () => {
       const store = configureMockStore()({ ...initialState });
       const shouldOpenInNewWindow = false;
       const selectedSuggestion = {
@@ -126,7 +129,7 @@ describe('HeaderSearchContainer', () => {
       headerSearch.instance().onSuggestionSelection(selectedSuggestion, shouldOpenInNewWindow);
 
       expect(store.dispatch).toHaveBeenCalledWith(
-        toDataSuggestion({
+        selectSuggestionAction({
           endpoint: selectedSuggestion.uri,
           category: selectedSuggestion.category,
           typedQuery: ''
@@ -154,7 +157,7 @@ describe('HeaderSearchContainer', () => {
       );
     });
 
-    it('does call to open new window if shouldOpenInNewWindow is true', () => {
+    it.only('does call to open new window if shouldOpenInNewWindow is true', () => {
       // TODO: refactor, allow opening in new window.
       const store = configureMockStore()({ ...initialState });
       const shouldOpenInNewWindow = true;
