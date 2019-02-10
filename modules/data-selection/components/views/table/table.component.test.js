@@ -2,7 +2,8 @@ describe('The dp-data-selection-table component', function () {
     let $compile,
         $rootScope,
         $templateCache,
-        mockedContent;
+        mockedContent,
+        store;
 
     beforeEach(function () {
         angular.mock.module(
@@ -10,14 +11,18 @@ describe('The dp-data-selection-table component', function () {
             {
                 makeBoldFormatterFilter: function (input) {
                     return '<strong>' + input + '</strong>';
+                },
+                store: {
+                    dispatch: angular.noop
                 }
             }
         );
 
-        angular.mock.inject(function (_$compile_, _$rootScope_, _$templateCache_) {
+        angular.mock.inject(function (_$compile_, _$rootScope_, _$templateCache_, _store_) {
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             $templateCache = _$templateCache_;
+            store = _store_;
         });
 
         mockedContent = {
@@ -57,6 +62,7 @@ describe('The dp-data-selection-table component', function () {
         };
 
         $templateCache.put('modules/data-selection/components/views/table/templates/dataset.html', 'MESSAGE');
+        spyOn(store, 'dispatch');
     });
 
     function getComponent () {
@@ -104,5 +110,21 @@ describe('The dp-data-selection-table component', function () {
         // The third column does use a formatter
         expect(component.find('tbody tr:nth-child(1) td:nth-child(3)').html().trim()).toContain('<strong>1C</strong>');
         expect(component.find('tbody tr:nth-child(2) td:nth-child(3)').html().trim()).toContain('<strong>2C</strong>');
+    });
+
+    it('makes each <tr> clickable (will go to detail)', function () {
+        const component = getComponent();
+
+        expect(store.dispatch).not.toHaveBeenCalled();
+
+        // The first row
+        component.find('tbody tr:nth-child(1)').click();
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledWith('https://www.example.com/path/to/1/');
+
+        // The second row
+        component.find('tbody tr:nth-child(2)').click();
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
+        expect(store.dispatch).toHaveBeenCalledWith('https://www.example.com/path/to/2/');
     });
 });

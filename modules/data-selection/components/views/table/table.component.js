@@ -9,6 +9,17 @@
                 dataset: '<'
             },
             templateUrl: 'modules/data-selection/components/views/table/table.html',
+            controller: DpDataSelectionTableController,
             controllerAs: 'vm'
         });
+
+    DpDataSelectionTableController.$inject = ['store'];
+
+    function DpDataSelectionTableController (store) {
+        const vm = this;
+
+        vm.followLink = function (endpoint) {
+            store.dispatch(endpoint);
+        };
+    }
 })();
