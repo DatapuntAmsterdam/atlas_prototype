@@ -588,6 +588,24 @@ export default [
     layers: ['reistijdenauto'],
     noDetail: true
   },
+  {
+    id: 'bgt',
+    url: 'maps/hoofdroutes?service=wms',
+    layers: ['busbaan_geen_taxi'],
+    noDetail: true
+  },
+  {
+    id: 'tar',
+    url: 'maps/hoofdroutes?service=wms',
+    layers: ['taxiroutes'],
+    noDetail: true
+  },
+  {
+    id: 'vrr',
+    url: 'maps/hoofdroutes?service=wms',
+    layers: ['vrachtroutes'],
+    noDetail: true
+  },
   // Panoramabeelden
   {
     id: 'pano',

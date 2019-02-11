@@ -808,6 +808,36 @@ export default [
   },
   {
     category: 'Verkeer en infrastructuur',
+    legendItems: [
+      {
+        id: 'bgt',
+        notClickable: true,
+        layer: 'busbaan_geen_taxi',
+        selectable: true,
+        title: 'Taxi busbaanontheffing'
+      },
+      {
+        id: 'tar',
+        notClickable: true,
+        layer: 'taxiroutes',
+        selectable: true,
+        title: 'Taxi hoofdroute'
+      },
+      {
+        id: 'vrr',
+        notClickable: true,
+        layer: 'vrachtroutes',
+        selectable: true,
+        title: 'Vrachtauto 7,5t-route'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    title: 'Routes - Taxi en vrachtauto',
+    url: '/maps/hoofdroutes?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
     id: 'pr',
     notClickable: true,
     layers: ['reistijdenauto'],
