@@ -79,11 +79,11 @@ describe('trade-register (vestigingen) module', () => {
     });
 
     describe('user should be able to navigate to the trade register detail view', () => {
-      it('should open the correct detail view', () => {
+      it.only('should open the correct detail view', () => {
         cy.server();
         cy.route('/handelsregister/vestiging/*').as('getVestiging');
 
-        cy.get('.c-table__content-row:first-child > td:first-of-type a').click();
+        cy.get('.c-table__content-row:first-child td:first-child').click();
 
         cy.wait('@getVestiging');
         cy.get('.qa-detail').should('exist').and('be.visible');
