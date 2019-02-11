@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <tr class="c-table__content-row"
-                ng-repeat="row in vm.content.body track by $index" ng-click="vm.followLink(row.detailEndpoint)">
+                ng-repeat="row in vm.content.body track by $index" ng-click="vm.followLink(row.detailEndpoint | detailEndpointAction)">
                 <td class="c-table__field c-table__content-field"
                     ng-repeat="variables in row.content track by $index">
                     <dp-data-selection-formatter

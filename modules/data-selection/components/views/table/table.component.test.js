@@ -1,3 +1,5 @@
+import { routing } from '../../../../../src/app/routes';
+
 describe('The dp-data-selection-table component', function () {
     let $compile,
         $rootScope,
@@ -15,6 +17,11 @@ describe('The dp-data-selection-table component', function () {
                 store: {
                     dispatch: angular.noop
                 }
+            },
+            function ($provide) {
+                $provide.value('detailEndpointActionFilter', function (endpoint) {
+                    return ({ type: 'atlasRouter/DATA_DETAIL', payload: endpoint });
+                });
             }
         );
 
@@ -120,11 +127,17 @@ describe('The dp-data-selection-table component', function () {
         // The first row
         component.find('tbody tr:nth-child(1)').click();
         expect(store.dispatch).toHaveBeenCalledTimes(1);
-        expect(store.dispatch).toHaveBeenCalledWith('https://www.example.com/path/to/1/');
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: routing.dataDetail.type,
+            payload: 'https://www.example.com/path/to/1/'
+        });
 
         // The second row
         component.find('tbody tr:nth-child(2)').click();
         expect(store.dispatch).toHaveBeenCalledTimes(2);
-        expect(store.dispatch).toHaveBeenCalledWith('https://www.example.com/path/to/2/');
+        expect(store.dispatch).toHaveBeenCalledWith({
+            type: routing.dataDetail.type,
+            payload: 'https://www.example.com/path/to/2/'
+        });
     });
 });
