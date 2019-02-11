@@ -808,6 +808,27 @@ export default [
   },
   {
     category: 'Verkeer en infrastructuur',
+    legendItems: [
+      {
+        id: 'glp',
+        layer: 'oplaadpalen',
+        selectable: true,
+        title: 'Gewoon laadpunt'
+      },
+      {
+        id: 'slp',
+        layer: 'oplaadpalen',
+        selectable: true,
+        title: 'Snellaadpunt'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    title: 'Oplaadpunten',
+    url: '/maps/oplaadpalen?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
     id: 'pr',
     notClickable: true,
     layers: ['reistijdenauto'],

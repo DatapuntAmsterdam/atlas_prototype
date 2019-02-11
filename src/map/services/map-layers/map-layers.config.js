@@ -588,6 +588,20 @@ export default [
     layers: ['reistijdenauto'],
     noDetail: true
   },
+  {
+    id: 'glp',
+    url: 'maps/oplaadpalen?charging_cap_max=21',
+    layers: ['oplaadpalen'],
+    detailUrl: 'geosearch/search/',
+    detailItem: 'oplaadpalen'
+  },
+  {
+    id: 'slp',
+    url: 'maps/oplaadpalen?charging_cap_min=22',
+    layers: ['oplaadpalen'],
+    detailUrl: 'geosearch/search/',
+    detailItem: 'oplaadpalen'
+  },
   // Panoramabeelden
   {
     id: 'pano',
