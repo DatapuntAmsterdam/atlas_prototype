@@ -692,6 +692,108 @@ export default [
   },
   {
     category: 'Verkeer en infrastructuur',
+    id: 'mzb',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Bestelauto',
+        selectable: false,
+        title: 'Milieuzone bestelauto'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Bestelauto',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mzbs',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Brom- en snorfiets',
+        selectable: false,
+        title: 'Milieuzone brom- en snorfiets'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Brom- en snorfiets',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mzt',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Taxi',
+        selectable: false,
+        title: 'Milieuzone taxi'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Taxi',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mztc',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Touringcar',
+        selectable: false,
+        title: 'Milieuzone touringcar'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Touringcar',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mztc2020',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Touringcar na 2020',
+        selectable: false,
+        title: 'Milieuzone touringcar (vanaf 1-1-2020)'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Touringcar (vanaf 1-1-2020)',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mzva',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Vrachtauto',
+        selectable: false,
+        title: 'Milieuzone vrachtauto'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Vrachtauto',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
     id: 'pv',
     notClickable: true,
     layers: ['alle_parkeervakken'],

@@ -565,6 +565,42 @@ export default [
     noDetail: true
   },
   {
+    id: 'mzb',
+    url: 'maps/milieuzones?id=63363',
+    layers: ['milieuzones'],
+    noDetail: true
+  },
+  {
+    id: 'mzbs',
+    url: 'maps/milieuzones?id=63324',
+    layers: ['milieuzones'],
+    noDetail: true
+  },
+  {
+    id: 'mzt',
+    url: 'maps/milieuzones?id=63360',
+    layers: ['milieuzones'],
+    noDetail: true
+  },
+  {
+    id: 'mztc',
+    url: 'maps/milieuzones?id=63361',
+    layers: ['milieuzones'],
+    noDetail: true
+  },
+  {
+    id: 'mztc2020',
+    url: 'maps/milieuzones?id=63316',
+    layers: ['milieuzones'],
+    noDetail: true
+  },
+  {
+    id: 'mzva',
+    url: 'maps/milieuzones?id=63362',
+    layers: ['milieuzones'],
+    noDetail: true
+  },
+  {
     id: 'pv',
     url: 'maps/parkeervakken',
     layers: ['alle_parkeervakken', 'parkeervakken_label'],
