@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataSelectionTable should render without failing 1`] = `
+<table
+  className="c-table"
+>
+  <thead>
+    <tr
+      className="c-table__header-row"
+    >
+      <th
+        className="c-table__field c-table__header-field"
+        key="0"
+      >
+        foo
+      </th>
+      <th
+        className="c-table__field c-table__header-field"
+        key="1"
+      >
+        bar
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      className="c-table__content-row qa-table-link"
+      key="http://example.com"
+      onClick={[Function]}
+      role="link"
+    />
+  </tbody>
+</table>
+`;

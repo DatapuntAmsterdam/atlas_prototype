@@ -7,6 +7,7 @@ import DatasetActiveFilters from '../../containers/DatasetActiveFiltersContainer
 import { DEFAULT_DATASET } from '../../../shared/ducks/datasets/data/data';
 import MaxPageMessage from '../PanelMessages/MaxPageMessage';
 import NoResultsForSearchType from '../Messages/NoResultsForSearchType';
+import Catalog from './Catalog/Catalog';
 
 const Dataset = ({
   setPage,
@@ -66,15 +67,7 @@ const Dataset = ({
             )}
 
             <div>
-              <AngularWrapper
-                moduleName={'dpDataSelectionCatalogWrapper'}
-                component="dpDataSelectionCatalog"
-                dependencies={['atlas']}
-                bindings={{
-                  content: data,
-                  catalogFilters: apiSpecification
-                }}
-              />
+              <Catalog content={data} catalogFilters={apiSpecification} />
             </div>
             <AngularWrapper
               moduleName={'dpDataSelectionPaginationWrapper'}

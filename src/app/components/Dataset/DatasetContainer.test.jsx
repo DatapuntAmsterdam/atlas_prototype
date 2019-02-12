@@ -32,7 +32,7 @@ describe('Dataset', () => {
         activeFilters={{}}
         apiSpecification={{}}
         page={1}
-        results={{}}
+        results={{ data: [] }}
         setPage={jest.fn}
       />
     );

@@ -10,6 +10,8 @@ import MaxPageMessage from '../PanelMessages/MaxPageMessage';
 import NoResultsForSearchType from '../Messages/NoResultsForSearchType';
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
 import { VIEWS_TO_PARAMS } from '../../../shared/ducks/data-selection/constants';
+import DataSelectionTable from './DataSelectionTable/DataSelectionTable';
+import DataSelectionList from './DataSelectionList/DataSelectionList';
 
 const DataSelection = ({
   view,
@@ -143,24 +145,13 @@ const DataSelection = ({
                 {numberOfRecords > 0 ?
                   (<div>
                     {view === VIEW_MODE.FULL && (
-                      <AngularWrapper
-                        moduleName={'dpDataSelectionTableWrapper'}
-                        component="dpDataSelectionTable"
-                        dependencies={['atlas']}
-                        bindings={{
-                          content: data,
-                          dataset
-                        }}
+                      <DataSelectionTable
+                        content={data}
                       />
                     )}
                     {view === VIEW_MODE.SPLIT && (
-                      <AngularWrapper
-                        moduleName={'dpDataSelectionListWrapper'}
-                        component="dpDataSelectionList"
-                        dependencies={['atlas']}
-                        bindings={{
-                          content: data
-                        }}
+                      <DataSelectionList
+                        content={data}
                       />
                     )}
                     <AngularWrapper

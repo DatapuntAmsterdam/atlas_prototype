@@ -1,4 +1,0 @@
-<div ng-if="vm.template" class="qa-table-value" ng-include="vm.templatePath"></div>
-<div ng-if="!vm.template && !vm.useInline" class="qa-table-value" ng-bind-html="vm.formattedValue"></div>
-<span ng-if="!vm.template && vm.useInline" class="qa-table-value" ng-bind-html="vm.formattedValue"></span>
-<div ng-if="!vm.formattedValue && !vm.useInline" class="qa-table-value">&nbsp</div><!--nbsp required for table link to fill entire table cell-->
