@@ -811,6 +811,7 @@ export default [
     legendItems: [
       {
         id: 'bgt',
+        imageRule: 'Busbaan geen taxi',
         notClickable: true,
         layer: 'busbaan_geen_taxi',
         selectable: true,
@@ -818,6 +819,7 @@ export default [
       },
       {
         id: 'tar',
+        imageRule: 'Taxiroutes',
         notClickable: true,
         layer: 'taxiroutes',
         selectable: true,
@@ -825,6 +827,7 @@ export default [
       },
       {
         id: 'vrr',
+        imageRule: 'Vrachtroutes',
         notClickable: true,
         layer: 'vrachtroutes',
         selectable: true,
