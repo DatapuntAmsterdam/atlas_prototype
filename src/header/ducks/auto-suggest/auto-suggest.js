@@ -68,10 +68,16 @@ export default function AutoSuggestReducer(state = initialState, action) {
   }
 }
 
+// Action creators
+export const setActiveSuggestionAction = (suggestion = { index: -1 }) =>
+  ({ type: SET_ACTIVE_SUGGESTION, suggestion });
+
+export const getSuggestionsAction = (query = '') =>
+  ({ type: FETCH_SUGGESTIONS_REQUEST, query });
+
 // Selectors
 export const getActiveSuggestions = (state) => state.autoSuggest.activeSuggestion;
 export const getDisplayQuery = (state) => state.autoSuggest.displayQuery;
 export const getNumberOfSuggestions = (state) => state.autoSuggest.count;
 export const getAutoSuggestSuggestions = (state) => state.autoSuggest.suggestions;
 export const getTypedQuery = (state) => state.autoSuggest.typedQuery;
-

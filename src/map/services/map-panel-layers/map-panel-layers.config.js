@@ -18,12 +18,13 @@ export default [
     ],
     maxZoom: 16,
     minZoom: 11,
+    notClosable: true,
     title: 'Panoramabeelden',
     url: '/maps/panorama?version=1.3.0&service=WMS'
   },
   {
-    id: 'pano2018',
-    layers: ['panorama_new_2018'],
+    id: 'pano2018bi',
+    layers: ['panorama_new'],
     legendItems: [
       {
         selectable: false,
@@ -33,11 +34,27 @@ export default [
     maxZoom: 16,
     minZoom: 11,
     title: 'Panoramabeelden',
+    notClosable: true,
     url: '/maps/panorama?version=1.3.0&service=WMS'
   },
   {
-    id: 'pano2017',
-    layers: ['panorama_new_2017'],
+    id: 'pano2018woz',
+    layers: ['panorama_new'],
+    legendItems: [
+      {
+        selectable: false,
+        title: '2018 WOZ'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    notClosable: true,
+    title: 'Panoramabeelden',
+    url: '/maps/panorama?version=1.3.0&service=WMS'
+  },
+  {
+    id: 'pano2017bi',
+    layers: ['panorama_new'],
     legendItems: [
       {
         selectable: false,
@@ -46,12 +63,28 @@ export default [
     ],
     maxZoom: 16,
     minZoom: 11,
+    notClosable: true,
     title: 'Panoramabeelden',
-    url: '/maps/panorama&version=1.3.0&service=WMS'
+    url: '/maps/panorama?version=1.3.0&service=WMS'
   },
   {
-    id: 'pano2016',
-    layers: ['panorama_new_2016'],
+    id: 'pano2017woz',
+    layers: ['panorama_new'],
+    legendItems: [
+      {
+        selectable: false,
+        title: '2017 WOZ'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    title: 'Panoramabeelden',
+    notClosable: true,
+    url: '/maps/panorama?version=1.3.0&service=WMS'
+  },
+  {
+    id: 'pano2016bi',
+    layers: ['panorama_new'],
     legendItems: [
       {
         selectable: false,
@@ -60,8 +93,9 @@ export default [
     ],
     maxZoom: 16,
     minZoom: 11,
+    notClosable: true,
     title: 'Panoramabeelden',
-    url: '/maps/panorama&version=1.3.0&service=WMS'
+    url: '/maps/panorama?version=1.3.0&service=WMS'
   },
   {
     category: 'Geografie: onroerende zaken',

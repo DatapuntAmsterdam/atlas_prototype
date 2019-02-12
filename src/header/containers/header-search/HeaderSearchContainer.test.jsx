@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 
 import HeaderSearchContainer from './HeaderSearchContainer';
 import {
+  getSuggestionsAction,
   getTypedQuery
 } from '../../ducks/auto-suggest/auto-suggest';
 
@@ -15,22 +16,19 @@ import { emptyFilters } from '../../../shared/ducks/filters/filters';
 import {
   toDataSearchQuery,
   toDatasetSearch,
+  toDataSuggestion,
   toDatasetSuggestion
 } from '../../../store/redux-first-router/actions';
 import { CLEAR_MAP_DETAIL } from '../../../shared/ducks/detail/constants';
 import PARAMETERS from '../../../store/parameters';
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
-import { selectSuggestionAction, getSuggestionsAction } from '../../ducks/auto-suggest/actions';
-
 
 jest.mock('../../ducks/auto-suggest/auto-suggest');
-jest.mock('../../ducks/auto-suggest/actions');
 jest.mock('../../../shared/ducks/detail/actions');
 
 describe('HeaderSearchContainer', () => {
   beforeEach(() => {
     getSuggestionsAction.mockImplementation(() => ({ type: 'getSuggestionsAction' }));
-    selectSuggestionAction.mockImplementation(() => ({ type: 'selectSuggestionAction' }));
     clearMapDetail.mockImplementation((endpoint) => ({
       type: CLEAR_MAP_DETAIL,
       payload: endpoint
@@ -39,7 +37,6 @@ describe('HeaderSearchContainer', () => {
 
   afterEach(() => {
     getSuggestionsAction.mockReset();
-    selectSuggestionAction.mockReset();
     clearMapDetail.mockReset();
   });
 
@@ -131,7 +128,7 @@ describe('HeaderSearchContainer', () => {
       headerSearch.instance().onSuggestionSelection(suggestionMock, shouldOpenInNewWindow);
 
       expect(store.dispatch).toHaveBeenCalledWith(
-        selectSuggestionAction({
+        toDataSuggestion({
           endpoint: suggestionMock.uri,
           category: suggestionMock.category,
           typedQuery: ''

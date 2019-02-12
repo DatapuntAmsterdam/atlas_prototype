@@ -149,7 +149,7 @@ export const toDatasetsWithFilter = (additionalParams = {}, preserve = false) =>
     preserve
   }
 });
-export const toDataSuggestion = (payload, view, layers) => {
+export const toDataSuggestion = (payload, view) => {
   const { type, subtype, id } = getDetailPageData(payload.endpoint);
   const tracking = {
     category: payload.category,
@@ -157,7 +157,6 @@ export const toDataSuggestion = (payload, view, layers) => {
     query: payload.typedQuery
   };
   return toDataDetail([id, type, subtype], {
-    [PARAMETERS.LAYERS]: layers,
     [PARAMETERS.VIEW]: view
   }, tracking);
 };

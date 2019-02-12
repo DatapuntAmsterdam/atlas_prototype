@@ -5,7 +5,7 @@ import PanoramaContainer from './PanoramaContainer';
 import { getOrientation, loadScene } from '../services/marzipano/marzipano';
 import { fetchPanoramaHotspotRequest } from '../ducks/actions';
 import { getDetailReference, getPanorama, getPanoramaLocation } from '../ducks/selectors';
-import { getMapOverlaysWithoutPanorama } from '../../map/ducks/map/map-selectors';
+import { getMapOverlays } from '../../map/ducks/map/map-selectors';
 import { setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 
 jest.mock('../../map/ducks/map/map-selectors');
@@ -35,7 +35,7 @@ describe('PanoramaContainer', () => {
   }));
   setViewMode.mockImplementation(() => ({ type: 'some type' }));
   getDetailReference.mockImplementation(() => []);
-  getMapOverlaysWithoutPanorama.mockImplementation(() => ([]));
+  getMapOverlays.mockImplementation(() => ([]));
   getPanoramaLocation.mockImplementation(() => []);
 
   beforeEach(() => {

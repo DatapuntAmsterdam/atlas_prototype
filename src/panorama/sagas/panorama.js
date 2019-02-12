@@ -16,7 +16,7 @@ import { toDataDetail, toGeoSearch, toPanorama } from '../../store/redux-first-r
 import { getLocationPayload } from '../../store/redux-first-router/selectors';
 import { getViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 import PARAMETERS from '../../store/parameters';
-import { getMapOverlaysWithoutPanorama } from '../../map/ducks/map/map-selectors';
+import { getMapOverlays } from '../../map/ducks/map/map-selectors';
 import {
   CLOSE_PANORAMA,
   FETCH_PANORAMA_HOTSPOT_REQUEST,
@@ -95,11 +95,11 @@ export function* doClosePanorama() {
   const detailReference = yield select(getDetailReference);
   const pageReference = yield select(getPageReference);
   const panoramaLocation = yield select(getPanoramaLocation);
-  const overlaysWithoutPanorama = yield select(getMapOverlaysWithoutPanorama);
+  const overlays = yield select(getMapOverlays);
 
   if (Array.isArray(detailReference) && detailReference.length) {
     yield put(toDataDetail(detailReference, {
-      [PARAMETERS.LAYERS]: overlaysWithoutPanorama,
+      [PARAMETERS.LAYERS]: overlays,
       [PARAMETERS.VIEW]: VIEW_MODE.SPLIT
     }));
   } else if (typeof PAGE_REF_MAPPING[pageReference] === 'function') {
@@ -108,7 +108,7 @@ export function* doClosePanorama() {
     yield put(toGeoSearch({
       [PARAMETERS.LOCATION]: panoramaLocation,
       [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
-      [PARAMETERS.LAYERS]: overlaysWithoutPanorama
+      [PARAMETERS.LAYERS]: overlays
     }));
   }
 }

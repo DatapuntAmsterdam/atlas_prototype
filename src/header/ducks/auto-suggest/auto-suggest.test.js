@@ -1,15 +1,14 @@
-import reducer from './auto-suggest';
+import reducer, {
+  getSuggestionsAction,
+  setActiveSuggestionAction
+} from './auto-suggest';
+import { routing } from '../../../app/routes';
 import {
   FETCH_SUGGESTIONS_FAILURE,
   FETCH_SUGGESTIONS_REQUEST,
   FETCH_SUGGESTIONS_SUCCESS,
   SET_ACTIVE_SUGGESTION
 } from './constants';
-
-import {
-getSuggestionsAction,
-setActiveSuggestionAction
-} from './actions';
 
 const initialState = {
   count: 0,
@@ -83,6 +82,18 @@ describe('AutoSuggestReducer Reducer', () => {
     })).toEqual({
       ...initialState,
       error: 'error'
+    });
+  });
+
+  it('should set the query from meta data', () => {
+    expect(reducer(initialState, {
+      type: routing.dataQuerySearch.type,
+      meta: {
+        query: { term: 'foo' }
+      }
+    })).toEqual({
+      ...initialState,
+      typedQuery: 'foo'
     });
   });
 });

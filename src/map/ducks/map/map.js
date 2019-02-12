@@ -43,7 +43,7 @@ export const initialState = {
 let polygon = {};
 let has2Markers;
 let moreThan2Markers;
-export const isPanoLayer = (layer) => layer.id.startsWith(PANORAMA);
+export const isPanoLayer = (layer) => layer.id && layer.id.startsWith(PANORAMA);
 
 export default function MapReducer(state = initialState, action) {
   const enrichedState = {

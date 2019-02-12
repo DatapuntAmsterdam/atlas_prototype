@@ -23,7 +23,7 @@ import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullsc
 import { getDetailReference, getPanorama, getPanoramaLocation } from '../ducks/selectors';
 import IconButton from '../../app/components/IconButton/IconButton';
 import { getMapDetail } from '../../map/ducks/detail/map-detail';
-import { getMapOverlaysWithoutPanorama } from '../../map/ducks/map/map-selectors';
+import { getMapOverlays } from '../../map/ducks/map/map-selectors';
 import { pageTypeToEndpoint } from '../../map/services/map-detail';
 import { setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 
@@ -160,7 +160,7 @@ const mapStateToProps = (state) => ({
   detailReference: getDetailReference(state),
   pageReference: getDetailReference(state),
   panoramaLocation: getPanoramaLocation(state),
-  overlaysWithoutPanorama: getMapOverlaysWithoutPanorama(state)
+  overlays: getMapOverlays(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
