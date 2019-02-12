@@ -1,11 +1,15 @@
-import reducer, {
+import reducer from './auto-suggest';
+import {
   FETCH_SUGGESTIONS_FAILURE,
   FETCH_SUGGESTIONS_REQUEST,
   FETCH_SUGGESTIONS_SUCCESS,
-  getSuggestionsAction,
-  SET_ACTIVE_SUGGESTION,
-  setActiveSuggestionAction
-} from './auto-suggest';
+  SET_ACTIVE_SUGGESTION
+} from './constants';
+
+import {
+getSuggestionsAction,
+setActiveSuggestionAction
+} from './actions';
 
 const initialState = {
   count: 0,

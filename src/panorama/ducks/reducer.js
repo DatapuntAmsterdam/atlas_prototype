@@ -79,7 +79,8 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         location: action.payload,
-        targetLocation: action.payload
+        targetLocation: action.payload,
+        detailReference: initialState.detailReference
       };
 
     default:
