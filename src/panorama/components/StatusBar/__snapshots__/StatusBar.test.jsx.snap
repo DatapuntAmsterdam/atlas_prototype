@@ -5,48 +5,8 @@ exports[`StatusBar should render 1`] = `
   className="c-panorama-status-bar"
 >
   <Connect(PanoramaToggle)
+    currentLabel="Meest recent"
     heading={999}
-    history={Object {}}
-    historyOptions={
-      Array [
-        Object {
-          "label": "Meest recent",
-          "layerName": "pano",
-          "missionType": "bi",
-          "year": 0,
-        },
-        Object {
-          "label": "Alleen 2018",
-          "layerName": "pano2018bi",
-          "missionType": "bi",
-          "year": 2018,
-        },
-        Object {
-          "label": "Alleen 2017",
-          "layerName": "pano2017bi",
-          "missionType": "bi",
-          "year": 2017,
-        },
-        Object {
-          "label": "Alleen 2016",
-          "layerName": "pano2016bi",
-          "missionType": "bi",
-          "year": 2016,
-        },
-        Object {
-          "label": "Alleen 2018 WOZ",
-          "layerName": "pano2018woz",
-          "missionType": "woz",
-          "year": 2018,
-        },
-        Object {
-          "label": "Alleen 2017 WOZ",
-          "layerName": "pano2017woz",
-          "missionType": "woz",
-          "year": 2017,
-        },
-      ]
-    }
     location={
       Array [
         2,

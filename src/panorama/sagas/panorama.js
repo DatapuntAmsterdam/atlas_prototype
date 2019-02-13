@@ -7,8 +7,8 @@ import {
 import {
   getDetailReference,
   getPageReference,
-  getPanoramaHistory,
-  getPanoramaLocation
+  getPanoramaLocation,
+  getPanoramaTags
 } from '../../panorama/ducks/selectors';
 import { closeMapPanel, toggleMapOverlayPanorama } from '../../map/ducks/map/map';
 import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api';
@@ -21,10 +21,9 @@ import {
   CLOSE_PANORAMA,
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST,
-  FETCH_PANORAMA_REQUEST_TOGGLE,
   PAGE_REF_MAPPING,
   SET_PANORAMA_LOCATION,
-  SET_PANORAMA_YEAR
+  SET_PANORAMA_TAGS
 } from '../ducks/constants';
 
 export function* fetchFetchPanoramaEffect(action) {
@@ -37,26 +36,27 @@ export function* fetchFetchPanoramaEffect(action) {
 
 export function* maybeChangeRoute(id) {
   const { id: urlId } = yield select(getLocationPayload);
+  const tags = yield select(getPanoramaTags);
   if (id && (urlId !== id)) {
-    yield put(toPanorama(id));
+    yield put(toPanorama(id, { [PARAMETERS.PANORAMA_SET]: tags }));
   }
 }
 
 export function* handlePanoramaRequest(fn, id, location) {
-  const history = yield select(getPanoramaHistory);
+  const tags = yield select(getPanoramaTags);
   try {
     // Navigate to new panorama if the id in URL is not the same
     // We check this before we fetch the panoramaData so prevents a useless call
     yield call(maybeChangeRoute, id);
 
     // continue getting the panoramaData
-    const panoramaData = yield call(fn, (id || location), history);
+    const panoramaData = yield call(fn, (id || location), tags);
 
     // Again check if we need to navigate, as we know our ID now
     yield call(maybeChangeRoute, panoramaData.id);
 
     yield put(fetchPanoramaSuccess(panoramaData));
-    yield put(toggleMapOverlayPanorama(history));
+    yield put(toggleMapOverlayPanorama(tags));
   } catch (error) {
     yield put(fetchPanoramaError(error));
   }
@@ -75,9 +75,8 @@ export function* watchFetchPanorama() {
   yield all([
     takeLatest([FETCH_PANORAMA_HOTSPOT_REQUEST, FETCH_PANORAMA_REQUEST], fetchPanoramaById),
     takeLatest([
-      SET_PANORAMA_YEAR,
       SET_PANORAMA_LOCATION,
-      FETCH_PANORAMA_REQUEST_TOGGLE
+      SET_PANORAMA_TAGS
     ], fetchPanoramaByLocation)
   ]);
 }

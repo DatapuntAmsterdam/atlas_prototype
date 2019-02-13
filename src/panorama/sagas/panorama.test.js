@@ -19,12 +19,11 @@ import {
   FETCH_PANORAMA_ERROR,
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST,
-  FETCH_PANORAMA_REQUEST_TOGGLE,
   FETCH_PANORAMA_SUCCESS,
   SET_PANORAMA_LOCATION,
-  SET_PANORAMA_YEAR
+  SET_PANORAMA_TAGS
 } from '../../panorama/ducks/constants';
-import { getPanoramaHistory, getPanoramaLocation } from '../ducks/selectors';
+import { getPanoramaLocation, getPanoramaTags } from '../ducks/selectors';
 import { getViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 
 describe('watchPanoramaRoute', () => {
@@ -52,9 +51,8 @@ describe('watchFetchPanorama', () => {
       .all([
         takeLatest([FETCH_PANORAMA_HOTSPOT_REQUEST, FETCH_PANORAMA_REQUEST], fetchPanoramaById),
         takeLatest([
-          SET_PANORAMA_YEAR,
           SET_PANORAMA_LOCATION,
-          FETCH_PANORAMA_REQUEST_TOGGLE
+          SET_PANORAMA_TAGS
         ], fetchPanoramaByLocation)
       ])
       .next(action)
@@ -113,7 +111,7 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
       const mockFn = jest.fn();
       testSaga(handlePanoramaRequest, mockFn, 'id123')
         .next()
-        .select(getPanoramaHistory)
+        .select(getPanoramaTags)
         .next({ year: 0 })
         .call(maybeChangeRoute, 'id123')
         .next()
@@ -141,7 +139,7 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
       const mockFn = jest.fn();
       testSaga(handlePanoramaRequest, mockFn, 'id123')
         .next()
-        .select(getPanoramaHistory)
+        .select(getPanoramaTags)
         .next({ year: 0 })
         .call(maybeChangeRoute, 'id123')
         .next()

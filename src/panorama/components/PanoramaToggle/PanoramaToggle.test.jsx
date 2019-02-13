@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { fetchPanoramaRequestToggle } from '../../ducks/actions';
+import { setPanoramaTags } from '../../ducks/actions';
 
 import PanoramaToggle from './PanoramaToggle';
 
@@ -14,33 +14,15 @@ describe('PanoramaToggle', () => {
       <PanoramaToggle
         {...{
           heading: 999,
-          history: {
-            year: 2020,
-            label: 'ABC',
-            missionType: 'ABC'
-          },
-          historyOptions: [
-            {
-              year: 2020,
-              label: 'ABC',
-              layerName: '2020ABC',
-              missionType: 'ABC'
-            },
-            {
-              year: 2020,
-              label: 'XYZ',
-              layerName: '2020XYZ',
-              missionType: 'XYZ'
-            }
-          ],
+          currentLabel: 'Meest recent',
           location: [2, 3],
-          fetchPanoramaRequest: jest.fn
+          setPanoramaTags: jest.fn
         }}
       />
     );
   });
 
-  fetchPanoramaRequestToggle.mockReturnValue({ type: '' });
+  setPanoramaTags.mockReturnValue({ type: '' });
 
   it('should render everything', () => {
     expect(wrapper).toMatchSnapshot();

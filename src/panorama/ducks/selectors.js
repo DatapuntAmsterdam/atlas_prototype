@@ -3,7 +3,7 @@ import {
   panoramaOrientationType,
   panoramaPersonType
 } from '../../map/components/leaflet/services/icons.constant';
-import { REDUCER_KEY } from './constants';
+import { PANO_LABELS, REDUCER_KEY } from './constants';
 
 export const getPanorama = (state) => state[REDUCER_KEY] || {};
 export const getPanoramaLocation = createSelector(
@@ -34,4 +34,9 @@ export const getPanoramaMarkers = createSelector([getPanoramaLocation, getPanora
 export const getPanoramaPitch = getStateOfKey('pitch');
 export const getDetailReference = getStateOfKey('detailReference');
 export const getPageReference = getStateOfKey('pageReference');
-export const getPanoramaHistory = getStateOfKey('history');
+export const getPanoramaTags = getStateOfKey('tags');
+
+export const getLabelObjectByTags = (tags) =>
+  PANO_LABELS.find((value) => (
+    JSON.stringify(value.tags.sort()) === JSON.stringify(tags)
+  )) || PANO_LABELS[0];

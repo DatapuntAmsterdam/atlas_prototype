@@ -822,16 +822,13 @@ Object {
       "atlasRouter/PANORAMA": Object {
         "addHistory": true,
         "decode": [Function],
-        "defaultValue": Object {
-          "label": "Meest recent",
-          "layerName": "pano",
-          "missionType": "bi",
-          "year": 0,
-        },
+        "defaultValue": Array [
+          "mission-bi",
+        ],
         "encode": [Function],
         "reducerKey": "panorama",
         "selector": [Function],
-        "stateKey": "history",
+        "stateKey": "tags",
       },
     },
   },

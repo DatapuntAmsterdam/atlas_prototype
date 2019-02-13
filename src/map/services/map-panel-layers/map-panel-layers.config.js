@@ -726,6 +726,108 @@ export default [
   },
   {
     category: 'Verkeer en infrastructuur',
+    id: 'mzb',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Bestelauto',
+        selectable: false,
+        title: 'Milieuzone bestelauto'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Bestelauto',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mzbs',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Brom- en snorfiets',
+        selectable: false,
+        title: 'Milieuzone brom- en snorfiets'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Brom- en snorfiets',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mzt',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Taxi',
+        selectable: false,
+        title: 'Milieuzone taxi'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Taxi',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mztc',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Touringcar',
+        selectable: false,
+        title: 'Milieuzone touringcar'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Touringcar',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mztc2020',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Touringcar na 2020',
+        selectable: false,
+        title: 'Milieuzone touringcar (vanaf 1-1-2020)'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Touringcar (vanaf 1-1-2020)',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    id: 'mzva',
+    notClickable: true,
+    layers: ['milieuzones'],
+    legendItems: [
+      {
+        imageRule: 'Vrachtauto',
+        selectable: false,
+        title: 'Milieuzone vrachtauto'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Milieuzones - Vrachtauto',
+    url: '/maps/milieuzones?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
     id: 'pv',
     notClickable: true,
     layers: ['alle_parkeervakken'],
@@ -762,83 +864,105 @@ export default [
   },
   {
     category: 'Verkeer en infrastructuur',
-    id: 'pvr',
-    notClickable: true,
-    layers: ['parkeervakken_reservering'],
     legendItems: [
       {
-        selectable: false,
+        id: 'pvrf',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'FISCAAL'
       },
       {
-        selectable: false,
+        id: 'pvrpv',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Parkeerverbod'
       },
       {
-        selectable: false,
-        title: 'Verbod stil te staan'
-      },
-      {
-        selectable: false,
-        title: 'Verbod (brom)fietsen plaatsen'
-      },
-      {
-        selectable: false,
-        title: 'Parkeergelegenheid'
-      },
-      {
-        selectable: false,
+        id: 'pvrts',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Taxistandplaats'
       },
       {
-        selectable: false,
-        title: 'Gehandicaptenplaats'
-      },
-      {
-        selectable: false,
+        id: 'pvrga',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Gehandicaptenplaats algemeen'
       },
       {
-        selectable: false,
+        id: 'pvrgk',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Gehandicaptenplaats kenteken'
       },
       {
-        selectable: false,
+        id: 'pvrll',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Laden lossen'
       },
       {
-        selectable: false,
+        id: 'pvrsv',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Specifieke voertuigcategorie'
       },
       {
-        selectable: false,
+        id: 'pvrvh',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Vergunninghouders'
       },
       {
-        selectable: false,
+        id: 'pvrbz',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Blauwe zone'
       },
       {
-        selectable: false,
-        title: 'Einde blauwe zone'
-      },
-      {
-        selectable: false,
+        id: 'pvrpr',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Park & Ride'
-      },
-      {
-        selectable: false,
-        title: 'Carpool'
-      },
-      {
-        selectable: false,
-        title: 'MULDER'
       }
     ],
     maxZoom: 16,
     minZoom: 11,
     title: 'Parkeervakken - Gereserveerd',
     url: '/maps/parkeervakken?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    legendItems: [
+      {
+        id: 'bgt',
+        imageRule: 'Busbaan geen taxi',
+        notClickable: true,
+        layer: 'busbaan_geen_taxi',
+        selectable: true,
+        title: 'Taxi busbaanontheffing'
+      },
+      {
+        id: 'tar',
+        imageRule: 'Taxiroutes',
+        notClickable: true,
+        layer: 'taxiroutes',
+        selectable: true,
+        title: 'Taxi hoofdroute'
+      },
+      {
+        id: 'vrr',
+        imageRule: 'Vrachtroutes',
+        notClickable: true,
+        layer: 'vrachtroutes',
+        selectable: true,
+        title: 'Vrachtauto 7,5t-route'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    title: 'Routes - Taxi en vrachtauto',
+    url: '/maps/hoofdroutes?version=1.3.0&service=WMS'
   },
   {
     category: 'Verkeer en infrastructuur',

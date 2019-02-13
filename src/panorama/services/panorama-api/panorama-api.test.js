@@ -2,8 +2,8 @@ import { getByUrl } from '../../../shared/services/api/api';
 import {
   getImageDataById,
   getImageDataByLocation,
-  PANORAMA_CONFIG,
-  getLocationHistoryParams
+  getLocationHistoryParams,
+  PANORAMA_CONFIG
 } from './panorama-api';
 import sharedConfig from '../../../shared/services/shared-config/shared-config';
 
@@ -134,7 +134,7 @@ describe('The Panorama Api', () => {
     it('with the correct endpoint for id', () => {
       getImageDataById('ABC', {});
 
-      const { newestInRange } = getLocationHistoryParams(null, null);
+      const { newestInRange } = getLocationHistoryParams(null, undefined);
 
       expect(getByUrl).toHaveBeenCalledWith(
         `${sharedConfig.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}`
@@ -158,14 +158,14 @@ describe('The Panorama Api', () => {
 
       const {
         locationRange,
-        yearTypeMission,
         standardRadius,
+        tagsQuery,
         newestInRange
       } = getLocationHistoryParams([52, 4], null);
 
       expect(getByUrl).toHaveBeenCalledWith(
         `${sharedConfig.API_ROOT}${prefix}` +
-        `/?${locationRange}${yearTypeMission}&${standardRadius}&${newestInRange}&limit_results=1`
+        `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`
       );
     });
 
@@ -174,14 +174,14 @@ describe('The Panorama Api', () => {
 
       const {
         locationRange,
-        yearTypeMission,
+        tagsQuery,
         standardRadius,
         newestInRange
       } = getLocationHistoryParams([1, 1], null);
 
       expect(getByUrl).toHaveBeenCalledWith(
         `${sharedConfig.API_ROOT}${prefix}` +
-        `/?${locationRange}${yearTypeMission}&${standardRadius}&${newestInRange}&limit_results=1`
+        `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`
       );
     });
 
@@ -243,15 +243,15 @@ describe('The Panorama Api', () => {
       getImageDataByLocation([52, 4], history);
 
       const {
+        tagsQuery,
         locationRange,
-        yearTypeMission,
         standardRadius,
         newestInRange
       } = getLocationHistoryParams([52, 4], history);
 
       expect(getByUrl).toHaveBeenCalledWith(
         `${sharedConfig.API_ROOT}${prefix}` +
-        `/?${locationRange}${yearTypeMission}&${standardRadius}&${newestInRange}&limit_results=1`
+        `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`
       );
     });
 
@@ -260,12 +260,12 @@ describe('The Panorama Api', () => {
       getImageDataById('ABC', history);
 
       const {
-        yearTypeMission,
+        tagsQuery,
         newestInRange
       } = getLocationHistoryParams(null, history);
 
       expect(getByUrl).toHaveBeenCalledWith(
-        `${sharedConfig.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}${yearTypeMission}`
+        `${sharedConfig.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}${tagsQuery}`
       );
     });
 
@@ -273,14 +273,14 @@ describe('The Panorama Api', () => {
       getImageDataByLocation([42, 4], null);
       const {
         locationRange,
-        yearTypeMission,
         standardRadius,
-        newestInRange
+        newestInRange,
+        tagsQuery
       } = getLocationHistoryParams([52, 4], null);
 
       expect(getByUrl).toHaveBeenCalledWith(
         `${sharedConfig.API_ROOT}${prefix}` +
-        `/?${locationRange}${yearTypeMission}&${standardRadius}&${newestInRange}&limit_results=1`
+        `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`
       );
 
       getImageDataById('ABC', 0);

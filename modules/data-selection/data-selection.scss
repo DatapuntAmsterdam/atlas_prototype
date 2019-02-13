@@ -2,13 +2,13 @@
 
 @import "components/available-filters/available-filters";
 @import "components/sbi-filter/sbi-filter";
-@import "components/data-selection/data-selection";
-@import "components/formatter/templates/bezoekadres";
-@import "components/formatter/templates/handelsnaam";
-@import "components/formatter/templates/sbi-omschrijving";
-@import "components/formatter/templates/file-type";
-@import "components/formatter/templates/tags";
+@import "../atlas/styles/legacy/data-selection";
+@import "../atlas/styles/legacy/formatter/bezoekadres";
+@import "../atlas/styles/legacy/formatter/handelsnaam";
+@import "../atlas/styles/legacy/formatter/sbi-omschrijving";
+@import "../atlas/styles/legacy/formatter/file-type";
+@import "../atlas/styles/legacy/formatter/tags";
 @import "components/header/header";
 @import "components/pagination/pagination";
-@import "components/views/table/table";
-@import "components/views/catalog/catalog";
+@import "../atlas/styles/legacy/table";
+@import "../atlas/styles/legacy/catalog";

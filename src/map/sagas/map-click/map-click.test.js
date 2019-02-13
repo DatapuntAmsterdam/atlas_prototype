@@ -7,7 +7,6 @@ import {
   getLayers,
   getMapPanelLayers
 } from '../../ducks/panel-layers/map-panel-layers';
-import { getPanoramaHistory } from '../../../panorama/ducks/selectors';
 import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/map';
 import { getMapZoom } from '../../ducks/map/map-selectors';
 import { requestNearestDetails } from '../../../shared/ducks/data-search/actions';
@@ -177,16 +176,10 @@ describe('switchClickAction', () => {
       return next();
     };
 
-    const provideSelectPanoramaHistory = ({ selector }, next) => (
-      selector === getPanoramaHistory
-        ? { year: 2018, missionType: 'woz' } : next()
-    );
-
     return expectSaga(switchClickAction, { payload })
       .provide({
         select: composeProviders(
-          provideSelectionTypePanorama,
-          provideSelectPanoramaHistory
+          provideSelectionTypePanorama
         ),
         call: provideCallGetImageDataByLocation
       })

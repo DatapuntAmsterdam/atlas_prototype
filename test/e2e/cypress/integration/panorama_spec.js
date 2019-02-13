@@ -5,7 +5,7 @@ const panorama = '.c-panorama';
 describe('panorama module', () => {
   beforeEach(() => {
     cy.server();
-    cy.route('/panorama/panoramas/*/adjacencies/?newest_in_range=true&mission_type=bi').as('getResults');
+    cy.route('/panorama/panoramas/*/adjacencies/?newest_in_range=true&tags=mission-bi').as('getResults');
 
     // go to the homepage
     cy.visit('/');

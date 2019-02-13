@@ -15,13 +15,13 @@ exports[`PanoramaToggle menu opens on button click 1`] = `
             "
       onClick={[Function]}
     >
-      ABC
+      Meest recent
     </button>
     <ul
       className="c-panorama-toggle__menu qa-panorama-toggle__menu"
     >
       <li
-        key="2020ABC"
+        key="pano"
       >
         <button
           className="
@@ -30,11 +30,11 @@ exports[`PanoramaToggle menu opens on button click 1`] = `
                   "
           onClick={[Function]}
         >
-          ABC
+          Meest recent
         </button>
       </li>
       <li
-        key="2020XYZ"
+        key="pano2018bi"
       >
         <button
           className="
@@ -43,7 +43,59 @@ exports[`PanoramaToggle menu opens on button click 1`] = `
                   "
           onClick={[Function]}
         >
-          XYZ
+          Alleen 2018
+        </button>
+      </li>
+      <li
+        key="pano2017bi"
+      >
+        <button
+          className="
+                    c-panorama-toggle__item
+                    qa-panorama-toggle__item
+                  "
+          onClick={[Function]}
+        >
+          Alleen 2017
+        </button>
+      </li>
+      <li
+        key="pano2016bi"
+      >
+        <button
+          className="
+                    c-panorama-toggle__item
+                    qa-panorama-toggle__item
+                  "
+          onClick={[Function]}
+        >
+          Alleen 2016
+        </button>
+      </li>
+      <li
+        key="pano2018woz"
+      >
+        <button
+          className="
+                    c-panorama-toggle__item
+                    qa-panorama-toggle__item
+                  "
+          onClick={[Function]}
+        >
+          Alleen 2018 WOZ
+        </button>
+      </li>
+      <li
+        key="pano2017woz"
+      >
+        <button
+          className="
+                    c-panorama-toggle__item
+                    qa-panorama-toggle__item
+                  "
+          onClick={[Function]}
+        >
+          Alleen 2017 WOZ
         </button>
       </li>
       <li
@@ -84,7 +136,7 @@ exports[`PanoramaToggle should render everything 1`] = `
             "
       onClick={[Function]}
     >
-      ABC
+      Meest recent
     </button>
   </div>
 </div>
