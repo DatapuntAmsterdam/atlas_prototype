@@ -42,6 +42,7 @@ export default [
     layers: ['panorama_new'],
     legendItems: [
       {
+        imageRule: '2018',
         selectable: false,
         title: '2018 WOZ'
       }
@@ -72,6 +73,7 @@ export default [
     layers: ['panorama_new'],
     legendItems: [
       {
+        imageRule: '2017',
         selectable: false,
         title: '2017 WOZ'
       }
@@ -960,7 +962,7 @@ export default [
       }
     ],
     maxZoom: 16,
-    minZoom: 11,
+    minZoom: 8,
     title: 'Routes - Taxi en vrachtauto',
     url: '/maps/hoofdroutes?version=1.3.0&service=WMS'
   },
