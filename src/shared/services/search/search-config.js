@@ -154,6 +154,11 @@ export default {
       label_plural: 'NAP Peilmerken',
       features: ['nap/peilmerk']
     }, {
+      slug: 'oplaadpunten',
+      label_singular: 'NAP Peilmerk',
+      label_plural: 'NAP Peilmerken',
+      features: ['vsd/oplaadpunten']
+    }, {
       slug: 'explosief',
       label_singular: 'Explosief',
       label_plural: 'Explosieven',

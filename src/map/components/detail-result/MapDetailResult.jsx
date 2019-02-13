@@ -233,7 +233,7 @@ const MapDetailResult = ({ panoUrl, result, onMaximize, onPanoPreviewClick }) =>
           onMaximize={onMaximize}
           onPanoPreviewClick={onPanoPreviewClick}
           panoUrl={panoUrl}
-          peilmerk={result}
+          oplaadpunt={result}
         />
       );
     case endpointTypes.vestiging:

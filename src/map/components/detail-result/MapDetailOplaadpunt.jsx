@@ -1,49 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import formatNumber from '../../../shared/services/number-formatter/number-formatter';
-
 import MapDetailResultItem from './MapDetailResultItem';
 import MapDetailResultWrapper from './MapDetailResultWrapper';
 
-const MapDetailOplaadpunt = ({ panoUrl, peilmerk, onMaximize, onPanoPreviewClick }) => (
+const MapDetailOplaadpunt = ({ panoUrl, oplaadpunt, onMaximize, onPanoPreviewClick }) => (
   <MapDetailResultWrapper
     panoUrl={panoUrl}
     onMaximize={onMaximize}
     onPanoPreviewClick={onPanoPreviewClick}
-    subTitle={peilmerk.label}
-    title="NAP Peilmerk"
+    subTitle={oplaadpunt.label}
+    title="Oplaadpunt"
   >
     <ul className="map-detail-result__list">
       <MapDetailResultItem
-        label="Hoogte NAP"
-        value={(peilmerk.height || peilmerk.height === 0) ? `${formatNumber(peilmerk.height)} m` : ''}
+        label="Adres"
+        value={oplaadpunt.address}
       />
       <MapDetailResultItem
-        label="Omschrijving"
-        value={peilmerk.description}
+        label="Aantal"
+        value={oplaadpunt.quantity}
       />
       <MapDetailResultItem
-        label="Windrichting"
-        value={peilmerk.windDirection}
+        label="Soort"
+        value={oplaadpunt.type}
       />
-      {peilmerk.wallCoordinates && <MapDetailResultItem
-        label="Muurvlakcoördinaten (cm)"
-        cm
-        value={`${peilmerk.wallCoordinates[0]}, ${peilmerk.wallCoordinates[1]}`}
-      />}
+      <MapDetailResultItem
+        label="Capaciteit"
+        value={oplaadpunt.capacity}
+      />
+      <MapDetailResultItem
+        label="Connectortype"
+        value={oplaadpunt.connectorType}
+      />
     </ul>
   </MapDetailResultWrapper>
 );
 
 MapDetailOplaadpunt.propTypes = {
   panoUrl: PropTypes.string.isRequired,
-  peilmerk: PropTypes.shape({
-    description: PropTypes.string,
-    height: PropTypes.number,
+  oplaadpunt: PropTypes.shape({
+    address: PropTypes.string,
+    quantity: PropTypes.string,
+    type: PropTypes.string,
     label: PropTypes.string,
-    windDirection: PropTypes.string,
-    wallCoordinates: PropTypes.array
+    capacity: PropTypes.string,
+    connectorType: PropTypes.string
   }).isRequired,
   onMaximize: PropTypes.func.isRequired,
   onPanoPreviewClick: PropTypes.func.isRequired

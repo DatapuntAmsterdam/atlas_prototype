@@ -1,25 +1,21 @@
 <div>
     <div class="c-detail__block">
         <dp-glossary-header
-            heading="{{vm.apiData.results._display}}"
+            heading="{{vm.apiData.results.label}}"
             definition="OPLAADPUNT">
         </dp-glossary-header>
 
         <dl class="c-key-value-list">
             <dt>Adres</dt>
-            <dd>
-                {{ vm.apiData.results.street }}
-                {{ vm.apiData.results.housenumber + vm.apiData.results.housenumberext + ',' }}
-                {{ vm.apiData.results.city }}
-            </dd>
+            <dd>{{ vm.apiData.results.address }}</dd>
             <dt>Aantal</dt>
-            <dd>{{ vm.apiData.results.charging_point }}</dd>
+            <dd>{{ vm.apiData.results.quantity }}</dd>
             <dt>Soort</dt>
-            <dd>{{ (vm.apiData.results.charging_cap_max >= 22) ? 'Snelllaadpunt' : 'Gewoon laadpunt' }}</dd>
+            <dd>{{ vm.apiData.results.type }}</dd>
             <dt>Capaciteit</dt>
-            <dd>{{ vm.apiData.results.charging_capability }}</dd>
+            <dd>{{ vm.apiData.results.capacity }}</dd>
             <dt>Connectortype</dt>
-            <dd>{{ vm.apiData.results.connector_type }}</dd>
+            <dd>{{ vm.apiData.results.connectorType }}</dd>
         </dl>
     </div>
 </div>
