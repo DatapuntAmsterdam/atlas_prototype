@@ -624,19 +624,34 @@ export default [
     layers: ['reistijdenauto'],
     noDetail: true
   },
+  // Oplaadpunten
   {
-    id: 'glp',
-    url: 'maps/oplaadpalen?charging_cap_max=21',
-    layers: ['oplaadpalen'],
+    id: 'nlpb',
+    url: 'maps/oplaadpunten',
+    layers: ['normaal_beschikbaar'],
     detailUrl: 'geosearch/search/',
-    detailItem: 'oplaadpalen'
+    detailItem: 'oplaadpunten'
   },
   {
-    id: 'slp',
-    url: 'maps/oplaadpalen?charging_cap_min=22',
-    layers: ['oplaadpalen'],
+    id: 'nlpnb',
+    url: 'maps/oplaadpunten',
+    layers: ['normaal_niet_beschikbaar'],
     detailUrl: 'geosearch/search/',
-    detailItem: 'oplaadpalen'
+    detailItem: 'oplaadpunten'
+  },
+  {
+    id: 'slpb',
+    url: 'maps/oplaadpunten',
+    layers: ['snel_beschikbaar'],
+    detailUrl: 'geosearch/search/',
+    detailItem: 'oplaadpunten'
+  },
+  {
+    id: 'slpnb',
+    url: 'maps/oplaadpunten',
+    layers: ['snel_niet_beschikbaar'],
+    detailUrl: 'geosearch/search/',
+    detailItem: 'oplaadpunten'
   },
   // Panoramabeelden
   {

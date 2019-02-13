@@ -295,6 +295,13 @@ const GLOSSARY = {
         'openbare_ruimte_code'
       ]
     },
+    OPLAADPUNT: {
+      label_singular: 'Oplaadpunt',
+      label_plural: 'Oplaadpunten',
+      description: null,
+      url: null,
+      meta: []
+    },
     PAND: {
       label_singular: 'Pand',
       label_plural: 'Panden',

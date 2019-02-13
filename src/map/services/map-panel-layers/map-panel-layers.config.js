@@ -906,22 +906,38 @@ export default [
     category: 'Verkeer en infrastructuur',
     legendItems: [
       {
-        id: 'glp',
-        layer: 'oplaadpalen',
+        id: 'nlpb',
+        imageRule: 'Normaal beschikbaar',
+        layer: 'normaal_beschikbaar',
         selectable: true,
-        title: 'Gewoon laadpunt'
+        title: 'Gewoon laadpunt (beschikbaar)'
       },
       {
-        id: 'slp',
-        layer: 'oplaadpalen',
+        id: 'nlpnb',
+        imageRule: 'Normaal niet beschikbaar',
+        layer: 'normaal_niet_beschikbaar',
         selectable: true,
-        title: 'Snellaadpunt'
+        title: 'Gewoon laadpunt (niet beschikbaar)'
+      },
+      {
+        id: 'snlpb',
+        imageRule: 'Snel beschikbaar',
+        layer: 'snel_beschikbaar',
+        selectable: true,
+        title: 'Snellaadpunt (beschikbaar)'
+      },
+      {
+        id: 'slpnb',
+        imageRule: 'Snel niet beschikbaar',
+        layer: 'snel_niet_beschikbaar',
+        selectable: true,
+        title: 'Snellaadpunt (niet beschikbaar)'
       }
     ],
     maxZoom: 16,
     minZoom: 11,
     title: 'Oplaadpunten',
-    url: '/maps/oplaadpalen?version=1.3.0&service=WMS'
+    url: '/maps/oplaadpunten?version=1.3.0&service=WMS'
   },
   {
     category: 'Verkeer en infrastructuur',
