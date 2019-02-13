@@ -47,6 +47,10 @@ const categoryLabels = {
     singular: 'Openbare ruimte',
     plural: 'Openbare ruimtes'
   },
+  oplaadpunten: {
+    singular: 'Oplaadpunt',
+    plural: 'Oplaadpunten'
+  },
   pand: {
     singular: 'Pand',
     plural: 'Panden'

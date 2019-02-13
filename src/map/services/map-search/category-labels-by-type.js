@@ -26,6 +26,7 @@ const categoryLabelsByType = {
   'nap/peilmerk': categoryLabels.napPijlmerk,
   vestiging: categoryLabels.vestiging,
   'vsd/biz': categoryLabels.bedrijfsinvesteringszone,
+  'vsd/oplaadpunten': categoryLabels.oplaadpunten,
   'wkpb/beperking': categoryLabels.gemeentelijkeBeperking
 };
 
