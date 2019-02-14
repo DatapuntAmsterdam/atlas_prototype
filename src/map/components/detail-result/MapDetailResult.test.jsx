@@ -428,7 +428,7 @@ describe('MapDetailResult', () => {
   it('should render oplaadpuntent', () => {
     const panoUrl = 'panoUrl';
     const result = {
-      endpointType: 'vsd/oplaadpunt/',
+      endpointType: 'vsd/oplaadpunten/',
       label: 'value'
     };
     const clickHandler = jest.fn();

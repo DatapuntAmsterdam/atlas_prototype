@@ -341,7 +341,19 @@ exports[`MapDetailResult should render nap peilmerk 1`] = `
 />
 `;
 
-exports[`MapDetailResult should render oplaadpuntent 1`] = `""`;
+exports[`MapDetailResult should render oplaadpuntent 1`] = `
+<MapDetailOplaadpunt
+  onMaximize={[MockFunction]}
+  onPanoPreviewClick={[MockFunction]}
+  oplaadpunt={
+    Object {
+      "endpointType": "vsd/oplaadpunten/",
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
+/>
+`;
 
 exports[`MapDetailResult should render vestiging 1`] = `
 <MapDetailVestiging
