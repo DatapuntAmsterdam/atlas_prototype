@@ -33,6 +33,10 @@ const MapDetailOplaadpunt = ({ panoUrl, oplaadpunt, onMaximize, onPanoPreviewCli
         label="Connectortype"
         value={oplaadpunt.connectorType}
       />
+      <MapDetailResultItem
+        label="Status"
+        value={oplaadpunt.currentStatus}
+      />
     </ul>
   </MapDetailResultWrapper>
 );
@@ -45,7 +49,8 @@ MapDetailOplaadpunt.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
     capacity: PropTypes.string,
-    connectorType: PropTypes.string
+    connectorType: PropTypes.string,
+    currentStatus: PropTypes.string
   }).isRequired,
   onMaximize: PropTypes.func.isRequired,
   onPanoPreviewClick: PropTypes.func.isRequired

@@ -31,6 +31,10 @@ exports[`MapDetailOplaadpunt should render everything 1`] = `
       label="Connectortype"
       value="Foo"
     />
+    <MapDetailResultItem
+      label="Status"
+      value=""
+    />
   </ul>
 </MapDetailResultWrapper>
 `;

@@ -26,6 +26,12 @@ export default function fetchByUri(uri) {
           : CHARGER_TYPES.REGULAR
         : null;
 
+      const currentStatus = (result.status === 'Available')
+        ? (result.charging_point >= 2)
+          ? 'Eén of meerdere beschikbaar'
+          : 'Beschikbaar'
+        : 'Niet beschikbaar';
+
       return {
         address,
         capacity: result.charging_capability,
@@ -34,6 +40,7 @@ export default function fetchByUri(uri) {
         label: result._display,
         location: wgs84Center,
         quantity: result.charging_point && result.charging_point.toString(),
+        currentStatus,
         type
       };
     });

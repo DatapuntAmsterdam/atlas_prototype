@@ -10,6 +10,7 @@ describe('MapDetailOplaadpunt', () => {
       address: 'Foo foo',
       capacity: 'Foo',
       connectorType: 'Foo',
+      status: 'Foo',
       quantity: '8',
       type: 'Monument type'
     };

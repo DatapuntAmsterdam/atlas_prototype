@@ -25,6 +25,7 @@ describe('The oplaadpunten resource', () => {
         charging_cap_max: 10,
         charging_point: 1,
         connector_type: 'type',
+        status: 'Available',
         _display: 'label',
         wkb_geometry: { type: 'Point' }
       };
@@ -39,6 +40,7 @@ describe('The oplaadpunten resource', () => {
           connectorType: oplaadpuntMock.connector_type,
           geometrie: oplaadpuntMock.wkb_geometry,
           label: oplaadpuntMock._display,
+          currentStatus: 'Beschikbaar',
           location: { latitude: 3, longitude: 4 },
           quantity: oplaadpuntMock.charging_point.toString(),
           type: 'Gewoon laadpunt'
@@ -59,6 +61,7 @@ describe('The oplaadpunten resource', () => {
           address: null,
           capacity: undefined,
           connectorType: undefined,
+          currentStatus: 'Niet beschikbaar',
           geometrie: undefined,
           label: undefined,
           location: null,
