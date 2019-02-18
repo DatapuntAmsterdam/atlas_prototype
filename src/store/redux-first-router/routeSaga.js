@@ -39,7 +39,7 @@ export default function* routeSaga() {
   ], yieldOnFirstAction(fetchDatasetsEffect));
 
   yield takeLatest([
-    routing.datasetsDetail.type
+    routing.datasetDetail.type
   ], yieldOnFirstAction(fetchDatasetsOptionalEffect));
 
   yield takeLatest(

@@ -20,10 +20,16 @@ import {
 
 import StatusBar from '../components/StatusBar/StatusBar';
 import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullscreen';
-import { getDetailReference, getPanorama, getPanoramaLocation } from '../ducks/selectors';
+import {
+  getDetailReference,
+  getLabelObjectByTags,
+  getPanorama,
+  getPanoramaLocation,
+  getPanoramaTags
+} from '../ducks/selectors';
 import IconButton from '../../app/components/IconButton/IconButton';
 import { getMapDetail } from '../../map/ducks/detail/map-detail';
-import { getMapOverlaysWithoutPanorama } from '../../map/ducks/map/map-selectors';
+import { getMapOverlays } from '../../map/ducks/map/map-selectors';
 import { pageTypeToEndpoint } from '../../map/services/map-detail';
 import { setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 
@@ -115,7 +121,8 @@ class PanoramaContainer extends React.Component {
     const {
       isFullscreen,
       panoramaState,
-      onClose
+      onClose,
+      tags
     } = this.props;
     return (
       <div className="c-panorama">
@@ -147,7 +154,7 @@ class PanoramaContainer extends React.Component {
             date={panoramaState.date}
             location={panoramaState.location}
             heading={panoramaState.heading}
-            history={panoramaState.history}
+            currentLabel={getLabelObjectByTags(tags).label}
           />
         ) : ''}
       </div>
@@ -157,10 +164,11 @@ class PanoramaContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   panoramaState: getPanorama(state),
+  tags: getPanoramaTags(state),
   detailReference: getDetailReference(state),
   pageReference: getDetailReference(state),
   panoramaLocation: getPanoramaLocation(state),
-  overlaysWithoutPanorama: getMapOverlaysWithoutPanorama(state)
+  overlays: getMapOverlays(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -178,6 +186,7 @@ PanoramaContainer.propTypes = {
   isFullscreen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   setView: PropTypes.func.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   detailReference: PropTypes.arrayOf(PropTypes.string).isRequired,
   setOrientation: PropTypes.func.isRequired,
   fetchMapDetail: PropTypes.func.isRequired,

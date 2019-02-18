@@ -5,7 +5,7 @@ import {
   FETCH_SUGGESTIONS_FAILURE,
   FETCH_SUGGESTIONS_REQUEST,
   FETCH_SUGGESTIONS_SUCCESS
-} from '../../ducks/auto-suggest/auto-suggest';
+} from '../../ducks/auto-suggest/constants';
 
 export function* fetchSuggestions(action) {
   try {

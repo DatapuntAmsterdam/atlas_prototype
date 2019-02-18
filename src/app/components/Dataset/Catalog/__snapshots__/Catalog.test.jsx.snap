@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Catalog should render without failing 1`] = `
+<div
+  className="c-data-selection-catalog u-margin__bottom--1"
+>
+  <div
+    className="c-data-selection-catalog__list"
+    key="1"
+  >
+    <div
+      className="c-data-selection-catalog__item qa-catalog-fetch-detail u-no-presentation"
+    >
+      <Connect(Link)
+        className="qa-dp-link"
+        tabIndex="-1"
+        to={
+          Object {
+            "payload": Object {
+              "id": 1,
+            },
+            "type": "atlasRouter/DATASET_DETAIL",
+          }
+        }
+      >
+        <div
+          className="c-data-selection-catalog__header"
+        >
+          <h2 />
+          <div />
+        </div>
+        <span
+          className="c-data-selection-catalog__formats"
+        />
+        <span
+          className="c-data-selection-catalog__tags"
+        >
+          <ul
+            className="u-inline"
+            key="0"
+          >
+            <li
+              className="u-inline"
+            >
+              <div
+                className="dataset-tag-small"
+              >
+                <i
+                  className="dataset-tag-small__arrow"
+                />
+                <span
+                  className="dataset-tag-small__label"
+                />
+              </div>
+            </li>
+          </ul>
+          <ul
+            className="u-inline"
+            key="1"
+          >
+            <li
+              className="u-inline"
+            >
+              <div
+                className="dataset-tag-small"
+              >
+                <i
+                  className="dataset-tag-small__arrow"
+                />
+                <span
+                  className="dataset-tag-small__label"
+                />
+              </div>
+            </li>
+          </ul>
+        </span>
+        <div
+          className="c-data-selection-catalog__description"
+        >
+          Text...
+        </div>
+      </Connect(Link)>
+    </div>
+  </div>
+</div>
+`;

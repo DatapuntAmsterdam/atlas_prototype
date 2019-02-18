@@ -13,8 +13,8 @@ import {
 import { emptyFilters } from '../../../shared/ducks/filters/filters';
 import {
   toDataSearchQuery,
+  toDatasetDetail,
   toDatasetSearch,
-  toDatasetSuggestion,
   toDataSuggestion
 } from '../../../store/redux-first-router/actions';
 import { isDatasetPage } from '../../../store/redux-first-router/selectors';
@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch) => ({
     [PARAMETERS.QUERY]: query
   }, false, true)),
   openDataSuggestion: (suggestion, view) => dispatch(toDataSuggestion(suggestion, view)),
-  openDatasetSuggestion: (suggestion) => dispatch(toDatasetSuggestion(suggestion))
+  openDatasetSuggestion: (suggestion) => dispatch(toDatasetDetail(suggestion))
 });
 
 

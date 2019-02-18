@@ -1,4 +1,5 @@
 import { getCountFromHeader } from '../support/helper-functions';
+import { DATA_SELECTION_TABLE } from '../support/selectors';
 
 const dataSelection = '.c-data-selection';
 const homepage = '.c-homepage';
@@ -58,18 +59,20 @@ describe('addresses module', () => {
           cy.get('.c-data-selection-active-filters__listitem')
             .find('span')
             .contains(selectedFilter)
-            .should('exist').and('be.visible');
+            .should('exist')
+            .and('be.visible');
 
           // get the position of the category in the th's of the table
-          cy.get('th.c-table__header-field').each((th, index) => {
+          cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`).each((th, index) => {
             // if the position is equal to the category
             if (th[0].innerText === category) {
               // get al the content the td's with the same position as the categoryGroup they all
               // should contain the same value as the `selectedFilter`
-              cy.get('.c-table__content-row')
-                .find(`td:nth-child(${index + 1})`)
+              cy.get(DATA_SELECTION_TABLE.row)
+                .find(`${DATA_SELECTION_TABLE.cell}:nth-child(${index + 1})`)
                 .contains(selectedFilter)
-                .should('exist').and('be.visible');
+                .should('exist')
+                .and('be.visible');
             }
           });
         });
@@ -86,14 +89,14 @@ describe('addresses module', () => {
       cy.route('/monumenten/monumenten/*').as('getMonument');
     });
     it('should open the detail view with the correct address', () => {
-      cy.get('th.c-table__header-field').first()
+      cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`).first()
         .then((firstTableHeader) => {
           const selectedGroup = firstTableHeader[0].innerText.trim();
-          cy.get('.c-table__content-row').first().find('td:nth-child(1)')
+          cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().find(`${DATA_SELECTION_TABLE.cell}:nth-child(1) .qa-table-value`)
             .then((firstValue) => {
               const selectedValue = firstValue[0].innerText.trim();
               // click on the firstItem to open address preview panel
-              cy.get('.c-table__content-row').first().click();
+              cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click();
 
               // request the detail information
               cy.wait('@getNummeraanduiding');
@@ -110,18 +113,19 @@ describe('addresses module', () => {
               // the selectedValue should exist as a sibling
               cy.get('dt').contains(selectedGroup)
                 .siblings('dd').contains(selectedValue)
-                .should('exist').and('be.visible');
+                .should('exist')
+                .and('be.visible');
             });
         });
     });
     it('should close the detail view and open the map view with the correct address', () => {
-      cy.get('th.c-table__header-field').first()
-        .then((firstTableHeader) => {
-          cy.get('.c-table__content-row').first().find('td:nth-child(1)')
+      cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`).first()
+        .then(() => {
+          cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().find(`${DATA_SELECTION_TABLE.cell}:nth-child(1)`)
             .then((firstValue) => {
               const selectedValue = firstValue[0].innerText.trim();
               // click on the firstItem to open address preview panel
-              cy.get('.c-table__content-row').first().click();
+              cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click();
               // the detail view should exist
               cy.get('.qa-detail').should('exist').and('be.visible');
               // the map view maximize button should exist
@@ -154,7 +158,7 @@ describe('addresses module', () => {
       cy.route('/monumenten/monumenten/*').as('getMonument');
 
       // click on the first item in the table
-      cy.get('.c-table__content-row').first().click();
+      cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click();
 
       cy.wait('@getNummeraanduiding');
       cy.wait('@getVerblijfsobject');

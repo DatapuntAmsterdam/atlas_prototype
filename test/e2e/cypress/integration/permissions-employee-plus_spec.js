@@ -1,5 +1,6 @@
 import { getCountFromHeader } from '../support/helper-functions';
 import { queries, urls, values } from '../support/permissions-constants';
+import { DATA_SELECTION_TABLE } from '../support/selectors';
 
 describe('employee PLUS permissions', () => {
   before(() => {
@@ -157,7 +158,7 @@ describe('employee PLUS permissions', () => {
 
     cy.wait('@getResults');
     cy.get(queries.warningPanel).should('not.exist');
-    cy.get(queries.table).contains('Handelsnaam');
+    cy.get(DATA_SELECTION_TABLE.table).contains('Handelsnaam');
   });
 
   it('7B. Should show a plus employee all "Pand" information', () => {

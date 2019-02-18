@@ -3,9 +3,9 @@ import reducer from './reducer';
 import * as selectors from './selectors';
 import {
   fetchPanoramaRequest,
-  fetchPanoramaRequestToggle,
   fetchPanoramaSuccess,
-  setPanoramaOrientation
+  setPanoramaOrientation,
+  setPanoramaTags
 } from './actions';
 import { PANORAMA_CONFIG } from '../services/panorama-api/panorama-api';
 
@@ -22,12 +22,7 @@ describe('Panorama Reducer', () => {
       date: null,
       fov: null,
       heading: 0,
-      history: {
-        label: 'Meest recent',
-        layerName: 'pano',
-        missionType: 'bi',
-        year: 0
-      },
+      tags: ['mission-bi'],
       hotspots: [],
       image: null,
       isLoading: true,
@@ -55,14 +50,12 @@ describe('Panorama Reducer', () => {
     });
   });
 
-  describe('fetchPanoramaRequestToggle', () => {
-    it('sets the history', () => {
+  describe('setPanoramaTags', () => {
+    it('sets the tags', () => {
       expect(
-        reducer({}, fetchPanoramaRequestToggle({ year: 2020 }))
+        reducer({}, setPanoramaTags(['mission-bi', 'mission-2018']))
       ).toEqual({
-        history: {
-          year: 2020
-        }
+        tags: ['mission-bi', 'mission-2018']
       });
     });
   });

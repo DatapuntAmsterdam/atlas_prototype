@@ -12,14 +12,13 @@ import { emptyFilters } from '../../../shared/ducks/filters/filters';
 
 import {
   toDataSearchQuery,
+  toDatasetDetail,
   toDatasetSearch,
-  toDatasetSuggestion,
   toDataSuggestion
 } from '../../../store/redux-first-router/actions';
 import { CLEAR_MAP_DETAIL } from '../../../shared/ducks/detail/constants';
 import PARAMETERS from '../../../store/parameters';
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
-
 
 jest.mock('../../ducks/auto-suggest/auto-suggest');
 jest.mock('../../../shared/ducks/detail/actions');
@@ -113,7 +112,7 @@ describe('HeaderSearchContainer', () => {
     it('opens data from the suggestions', () => {
       const store = configureMockStore()({ ...initialState });
       const shouldOpenInNewWindow = false;
-      const selectedSuggestion = {
+      const suggestionMock = {
         uri: 'bag/openbareruimte/GgCm07EqNVIpwQ',
         label: 'Damloperspad',
         index: 1,
@@ -123,12 +122,12 @@ describe('HeaderSearchContainer', () => {
       jest.spyOn(store, 'dispatch');
       const headerSearch = shallow(<HeaderSearchContainer />, { context: { store } }).dive();
 
-      headerSearch.instance().onSuggestionSelection(selectedSuggestion, shouldOpenInNewWindow);
+      headerSearch.instance().onSuggestionSelection(suggestionMock, shouldOpenInNewWindow);
 
       expect(store.dispatch).toHaveBeenCalledWith(
         toDataSuggestion({
-          endpoint: selectedSuggestion.uri,
-          category: selectedSuggestion.category,
+          endpoint: suggestionMock.uri,
+          category: suggestionMock.category,
           typedQuery: ''
         }, VIEW_MODE.SPLIT)
       );
@@ -150,7 +149,7 @@ describe('HeaderSearchContainer', () => {
       headerSearch.instance().onSuggestionSelection(selectedSuggestion, shouldOpenInNewWindow);
 
       expect(store.dispatch).toHaveBeenCalledWith(
-        toDatasetSuggestion({ id: 'GgCm07EqNVIpwQ', typedQuery: '' })
+        toDatasetDetail({ id: 'GgCm07EqNVIpwQ', typedQuery: '' })
       );
     });
 

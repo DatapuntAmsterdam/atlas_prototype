@@ -106,7 +106,7 @@ export const extractIdEndpoint = (endpoint) => {
   const matches = endpoint.match(/\/([\w-]+)\/?$/);
   return matches[1];
 };
-const getDetailPageData = (endpoint) => {
+export const getDetailPageData = (endpoint) => {
   const matches = endpoint.match(/(\w+)\/([\w-]+)\/([\w\.-]+)\/?$/); // eslint-disable-line no-useless-escape
   return {
     type: matches[1],
@@ -160,10 +160,12 @@ export const toDataSuggestion = (payload, view) => {
     [PARAMETERS.VIEW]: view
   }, tracking);
 };
-export const toDatasetSuggestion = (payload) => ({
-  type: routing.datasetsDetail.type,
+
+export const toDatasetDetail = (payload) => ({
+  type: routing.datasetDetail.type,
   payload,
   meta: {
+    forceSaga: true,
     tracking: {
       event: 'auto-suggest',
       query: payload.typedQuery

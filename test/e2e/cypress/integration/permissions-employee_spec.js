@@ -1,5 +1,6 @@
 import { getCountFromHeader } from '../support/helper-functions';
 import { queries, urls, values } from '../support/permissions-constants';
+import { DATA_SELECTION_TABLE } from '../support/selectors';
 
 describe('employee permissions', () => {
   before(() => {
@@ -152,7 +153,7 @@ describe('employee permissions', () => {
 
     cy.wait('@getResults');
     cy.get(queries.warningPanel).should('not.exist');
-    cy.get(queries.table).contains('Handelsnaam');
+    cy.get(DATA_SELECTION_TABLE.table).contains('Handelsnaam');
   });
 
   it('7B. Should show an employee all "Pand" information', () => {
@@ -173,7 +174,7 @@ describe('employee permissions', () => {
     cy.get(queries.listItem).contains(values.pandVestigingName);
   });
 
-  it('7C. Should show an employee all information in a Geo search', () => {
+  it.only('7C. Should show an employee all information in a Geo search', () => {
     cy.server();
     cy.defineGeoSearchRoutes();
     cy.route('/bag/pand/*').as('getResults');

@@ -25,7 +25,8 @@ const initialState = {
     errorMessage: '',
     page: 1,
     results: {
-      numberOfRecords: 10
+      numberOfRecords: 10,
+      data: {}
     }
   }
 };
@@ -44,7 +45,8 @@ describe('DataSelection', () => {
       dataset={DATASETS.BAG}
       userScopes={[]}
       results={{
-        numberOfRecords: 10
+        numberOfRecords: 10,
+        data: {}
       }}
       {...overrides}
     />

@@ -3,6 +3,7 @@ import { FETCH_MAP_DETAIL_SUCCESS } from '../detail/constants';
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 import { SET_SELECTION } from '../../../shared/ducks/selection/selection';
 import paramsRegistry from '../../../store/params-registry';
+import { getLabelObjectByTags } from '../../../panorama/ducks/selectors';
 
 const REDUCER_KEY = 'map';
 export { REDUCER_KEY as MAP };
@@ -43,7 +44,7 @@ export const initialState = {
 let polygon = {};
 let has2Markers;
 let moreThan2Markers;
-export const isPanoLayer = (layer) => layer.id.startsWith(PANORAMA);
+export const isPanoLayer = (layer) => layer.id && layer.id.startsWith(PANORAMA);
 
 export default function MapReducer(state = initialState, action) {
   const enrichedState = {
@@ -215,10 +216,12 @@ export const toggleMapOverlay = (payload) => ({
     tracking: payload
   }
 });
-export const toggleMapOverlayPanorama = (payload) => ({
+
+export const toggleMapOverlayPanorama = (tags) => ({
   type: TOGGLE_MAP_OVERLAY_PANORAMA,
-  payload: (payload.year) ? `${PANORAMA}${payload.year}${payload.missionType}` : PANORAMA
+  payload: getLabelObjectByTags(tags).layerId
 });
+
 export const toggleMapOverlayVisibility = (mapLayerId, isVisible) => ({
   type: TOGGLE_MAP_OVERLAY_VISIBILITY,
   mapLayerId,

@@ -12,7 +12,7 @@ describe('StatusBar', () => {
     const props = {
       heading: 999,
       date: '',
-      history: {},
+      currentLabel: 'Meest recent',
       location: [2, 3]
     };
 

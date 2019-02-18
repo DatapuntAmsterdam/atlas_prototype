@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './PanoramaToggle.scss';
+import { PANO_LABELS } from '../../ducks/constants';
 
 const getStreetViewUrl = (location, heading) => {
   const [latitude, longitude] = location;
@@ -18,7 +19,7 @@ class PanoramaToggle extends React.Component {
       showMenu: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.setSelectedOption = this.setSelectedOption.bind(this);
+    this.setPanoramaTags = this.setPanoramaTags.bind(this);
     this.onOpenPanoramaExternal = this.onOpenPanoramaExternal.bind(this);
   }
 
@@ -27,8 +28,8 @@ class PanoramaToggle extends React.Component {
     this.toggleMenu();
   }
 
-  setSelectedOption(option) {
-    this.props.fetchPanoramaRequest(option);
+  setPanoramaTags(option) {
+    this.props.setPanoramaTags(option);
     this.toggleMenu();
   }
 
@@ -37,7 +38,7 @@ class PanoramaToggle extends React.Component {
   }
 
   render() {
-    const { heading, history, historyOptions, location } = this.props;
+    const { heading, currentLabel, location } = this.props;
     const { showMenu } = this.state;
 
     return (
@@ -51,21 +52,21 @@ class PanoramaToggle extends React.Component {
             `}
             onClick={this.toggleMenu}
           >
-            {history.label}
+            {currentLabel}
           </button>
           {(showMenu) ? <ul className="c-panorama-toggle__menu qa-panorama-toggle__menu">
-            {historyOptions.map((option) => (
+            {PANO_LABELS.map((label) => (
               <li
-                key={option.layerName}
+                key={label.layerId}
               >
                 <button
                   className={`
                     c-panorama-toggle__item
                     qa-panorama-toggle__item
                   `}
-                  onClick={() => this.setSelectedOption(option)}
+                  onClick={() => this.setPanoramaTags(label.tags)}
                 >
-                  {option.label}
+                  {label.label}
                 </button>
               </li>
             ))}
@@ -102,10 +103,9 @@ PanoramaToggle.defaultProps = {
 
 PanoramaToggle.propTypes = {
   heading: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  history: PropTypes.shape().isRequired,
-  historyOptions: PropTypes.array.isRequired,  // eslint-disable-line
+  currentLabel: PropTypes.string.isRequired,
   location: PropTypes.array.isRequired,  // eslint-disable-line
-  fetchPanoramaRequest: PropTypes.oneOfType([PropTypes.string, PropTypes.func]), // eslint-disable-line
+  setPanoramaTags: PropTypes.oneOfType([PropTypes.string, PropTypes.func]), // eslint-disable-line
   openPanoramaExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.func]) // eslint-disable-line
 };
 

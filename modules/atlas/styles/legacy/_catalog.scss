@@ -1,0 +1,131 @@
+@mixin o-tag {
+  .o-tag {
+    &::before {
+      border-top: 8px solid $secondary-gray10;
+      border-right: 8px solid $secondary-gray30;
+      border-bottom: 8px solid $secondary-gray10;
+    }
+  }
+}
+
+.dataset-tag-small {
+  display: inline-block;
+  margin-left: -8px;
+  padding: 0 5px;
+
+  &__arrow {
+    display: inline-block;
+    position: relative;
+    top: .1px;
+    left: 5px;
+    width: 7.755px;
+    height: 7.755px;
+    padding: 5.1px;
+    transform: rotate(45deg);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: $secondary-gray30;
+    background-color: $primary-light;
+    -webkit-transform: rotate(45deg); // sass-lint:disable-line no-vendor-prefixes
+  }
+
+  &__label {
+    display: inline-block;
+    position: relative;
+    height: 16px;
+    margin: $base-whitespace / 2 0 $base-whitespace / 2;
+    padding: 0 3px;
+    border-top: 1px solid $secondary-gray30;
+    border-right: 1px solid $secondary-gray30;
+    border-bottom: 1px solid $secondary-gray30;
+    background-color: $primary-light;
+    color: $secondary-gray80;
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration: none;
+    text-transform: capitalize;
+  }
+}
+
+.c-data-selection-catalog {
+  margin-right: -$base-whitespace * 2;
+  margin-left: -$base-whitespace * 2;
+
+  &__header {
+    display: flex;
+    margin-bottom: $base-whitespace * .5;
+    line-height: $base-font-size * 1.2;
+
+    :first-child {
+      flex-grow: 1;
+    }
+
+    :last-child {
+      color: $secondary-gray40;
+      font-size: $xs-font-size;
+    }
+  }
+
+  & > :last-child {
+    .c-data-selection-catalog__item {
+      border: none;
+    }
+  }
+}
+
+.c-data-selection-catalog__item {
+  display: block;
+  width: 100%;
+  padding-top: $base-whitespace * 2;
+  padding-right: $base-whitespace * 2;
+  padding-bottom: $base-whitespace;
+  padding-left: $base-whitespace * 2;
+  border-bottom: 1px solid $secondary-gray20;
+
+  a {
+    color: $primary-dark;
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    @include o-tag;
+    outline: none;
+    background-color: $secondary-gray10;
+  }
+
+  &__formats {
+    float: left;
+  }
+
+  &__tags {
+    display: inline;
+    position: relative;
+    top: -3px;
+    margin: {
+      top: 0;
+      left: 0;
+    }
+    ;
+  }
+
+  &__description {
+    margin-bottom: $base-whitespace;
+
+    & p {
+      margin-bottom: $base-whitespace;
+    }
+  }
+
+  .c-data-selection-file-type {
+    padding-top: 3px;
+
+    span {
+      margin: 0 1.5px;
+    }
+  }
+}
+
+.c-data-selection-file-type__name {
+  padding: 2px 5px 0;
+}

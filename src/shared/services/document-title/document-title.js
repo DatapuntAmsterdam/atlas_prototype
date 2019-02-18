@@ -56,7 +56,7 @@ const titleActionMapping = [
     getTitle: detailDocumentTitle
   },
   {
-    actionType: routing.datasetsDetail.type,
+    actionType: routing.datasetDetail.type,
     getTitle: datasetDetailDocumentTitle
   },
   {

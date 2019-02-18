@@ -207,6 +207,8 @@ class MapLeaflet extends React.Component {
               }}
               tms
               subdomains={baseLayer.baseLayerOptions.subdomains}
+              minZoom={baseLayer.baseLayerOptions.minZoom}
+              maxZoom={baseLayer.baseLayerOptions.maxZoom}
               opacity={visibleToOpacity(isVisible)}
             />
           ))}

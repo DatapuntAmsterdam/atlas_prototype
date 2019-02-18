@@ -4,13 +4,12 @@ import {
   FETCH_PANORAMA_ERROR,
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST,
-  FETCH_PANORAMA_REQUEST_TOGGLE,
   FETCH_PANORAMA_SUCCESS,
   initialState,
   REDUCER_KEY,
   SET_PANORAMA_LOCATION,
   SET_PANORAMA_ORIENTATION,
-  SET_PANORAMA_YEAR
+  SET_PANORAMA_TAGS
 } from './constants';
 import paramsRegistry from '../../store/params-registry';
 import { shouldResetState } from '../../store/redux-first-router/actions';
@@ -36,16 +35,10 @@ export default function reducer(state = initialState, action) {
         targetLocation: null
       };
 
-    case FETCH_PANORAMA_REQUEST_TOGGLE:
+    case SET_PANORAMA_TAGS:
       return {
         ...enrichedState,
-        history: action.payload
-      };
-
-    case SET_PANORAMA_YEAR:
-      return {
-        ...enrichedState,
-        year: action.payload
+        tags: action.payload
       };
 
     case FETCH_PANORAMA_SUCCESS:
@@ -79,7 +72,8 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         location: action.payload,
-        targetLocation: action.payload
+        targetLocation: action.payload,
+        detailReference: initialState.detailReference
       };
 
     default:

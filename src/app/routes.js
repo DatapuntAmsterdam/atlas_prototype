@@ -51,11 +51,11 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.SEARCH_DATASETS}`,
     page: PAGES.SEARCH_DATASETS
   },
-  datasetsDetail: {
+  datasetDetail: {
     title: 'Dataset',
     path: `/${MAIN_PATHS.DATASETS}/:id/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.DATASETS_DETAIL}`,
-    page: PAGES.DATASETS_DETAIL
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATASET_DETAIL}`,
+    page: PAGES.DATASET_DETAIL
   },
   dataQuerySearch: {
     title: 'Data zoekresultaten',

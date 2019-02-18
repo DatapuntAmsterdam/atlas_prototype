@@ -1,4 +1,5 @@
 import { queries, urls, values } from '../support/permissions-constants';
+import { DATA_SELECTION_TABLE } from '../support/selectors';
 
 describe('visitor permissions', () => {
   it('0. Should NOT show "Kadastrale subjecten" in the autocomplete', () => {
@@ -142,7 +143,7 @@ describe('visitor permissions', () => {
     it('A. Should NOT allow a visitor to view "Vestigingen"', () => {
       cy.visit(urls.vestigingenTabel);
       cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam');
-      cy.get(queries.table).should('not.exist');
+      cy.get(DATA_SELECTION_TABLE.table).should('not.exist');
     });
 
     it('B. Should show a visitor limited "Pand" information', () => {

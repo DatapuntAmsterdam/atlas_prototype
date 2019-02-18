@@ -26,6 +26,7 @@ describe('Dataset', () => {
       ...props,
       results: {
         ...props.results,
+        data: [],
         numberOfRecords: 2
       }
     };

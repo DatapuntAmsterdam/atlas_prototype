@@ -76,20 +76,8 @@ exports[`DataSelection should render as gesplitst 1`] = `
           className="u-col-sm--12"
         >
           <div>
-            <AngularWrapper
-              bindings={
-                Object {
-                  "content": undefined,
-                }
-              }
-              component="dpDataSelectionList"
-              dependencies={
-                Array [
-                  "atlas",
-                ]
-              }
-              interpolateBindings={Object {}}
-              moduleName="dpDataSelectionListWrapper"
+            <Connect(DataSelectionList)
+              content={Object {}}
             />
             <AngularWrapper
               bindings={
@@ -181,21 +169,8 @@ exports[`DataSelection should render as volledig 1`] = `
           className="u-col-sm--9"
         >
           <div>
-            <AngularWrapper
-              bindings={
-                Object {
-                  "content": undefined,
-                  "dataset": "bag",
-                }
-              }
-              component="dpDataSelectionTable"
-              dependencies={
-                Array [
-                  "atlas",
-                ]
-              }
-              interpolateBindings={Object {}}
-              moduleName="dpDataSelectionTableWrapper"
+            <DataSelectionTable
+              content={Object {}}
             />
             <AngularWrapper
               bindings={

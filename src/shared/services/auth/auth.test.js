@@ -2,7 +2,7 @@
  * @jest-environment jsdom-global
  */
 
-import { getAuthHeaders, getName, getReturnPath, getScopes, initAuth, login, logout } from './auth';
+import { encodedScopes, getAuthHeaders, getName, getReturnPath, getScopes, initAuth, login, logout } from './auth';
 import queryStringParser from '../query-string-parser/query-string-parser';
 import stateTokenGenerator from '../state-token-generator/state-token-generator';
 import parseAccessToken from '../access-token-parser/access-token-parser';
@@ -248,7 +248,7 @@ describe('The auth service', () => {
 
       expect(global.location.assign).toHaveBeenCalledWith('https://acc.api.data.amsterdam.nl/' +
         'oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata' +
-        '&scope=BRK%2FRS%20BRK%2FRSN%20BRK%2FRO%20WKPB%2FRBDU%20MON%2FRBC%20MON%2FRDM%20HR%2FR%20GREX%2FR%20CAT%2FW' +
+        `&scope=${encodedScopes}` +
         '&state=123StateToken&redirect_uri=https%3A%2F%2Fdata.amsterdam.nl%2F');
     });
   });

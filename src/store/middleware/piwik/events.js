@@ -16,40 +16,31 @@ import {
 } from '../../../shared/ducks/datasets/datasets';
 import { DOWNLOAD_DATA_SELECTION } from '../../../shared/ducks/data-selection/constants';
 import { FETCH_QUERY_SEARCH_RESULTS_SUCCESS } from '../../../shared/ducks/data-search/constants';
-import {
-  getSearchQuery,
-  getNumberOfResults
-} from '../../../shared/ducks/data-search/selectors';
+import { getNumberOfResults, getSearchQuery } from '../../../shared/ducks/data-search/selectors';
 import {
   AUTHENTICATE_USER_REQUEST,
   AUTHENTICATE_USER_SUCCESS
 } from '../../../shared/ducks/user/user';
-import {
-  ADD_FILTER,
-  REMOVE_FILTER
-} from '../../../shared/ducks/filters/filters';
+import { ADD_FILTER, REMOVE_FILTER } from '../../../shared/ducks/filters/filters';
 import {
   getViewMode,
+  HIDE_EMBED_PREVIEW,
+  HIDE_PRINT,
   SET_VIEW_MODE,
   SHOW_EMBED_PREVIEW,
   SHOW_PRINT,
-  HIDE_PRINT,
-  HIDE_EMBED_PREVIEW,
   VIEW_MODE
 } from '../../../shared/ducks/ui/ui';
 import {
+  MAP_SET_DRAWING_MODE,
   SET_MAP_BASE_LAYER,
-  SET_MAP_CLICK_LOCATION,
-  MAP_SET_DRAWING_MODE
+  SET_MAP_CLICK_LOCATION
 } from '../../../map/ducks/map/map';
 import { getShapeMarkers } from '../../../map/ducks/map/map-selectors';
-import {
-  NAVIGATE_HOME_REQUEST,
-  REPORT_PROBLEM_REQUEST
-} from '../../../header/ducks/actions';
+import { NAVIGATE_HOME_REQUEST, REPORT_PROBLEM_REQUEST } from '../../../header/ducks/actions';
 import {
   FETCH_PANORAMA_HOTSPOT_REQUEST,
-  FETCH_PANORAMA_REQUEST_TOGGLE,
+  SET_PANORAMA_TAGS,
   FETCH_PANORAMA_REQUEST_EXTERNAL
 } from '../../../panorama/ducks/constants';
 import PAGES from '../../../app/pages';
@@ -207,7 +198,7 @@ const events = {
     ] : [];
   },
   // DATASETS
-  // DATASETS -> CLICK RESOURCE ON DATASETS_DETAIL
+  // DATASETS -> CLICK RESOURCE ON DATASET_DETAIL
   [DOWNLOAD_DATASET_RESOURCE]: ({ tracking }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
     'Download',
@@ -310,7 +301,7 @@ const events = {
   },
   // PANORAMA
   // PANORAMA -> TOGGLE "missionType" / "missionYear"
-  [FETCH_PANORAMA_REQUEST_TOGGLE]: ({ tracking }) => [
+  [SET_PANORAMA_TAGS]: ({ tracking }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
     'panorama-set',
     (tracking.year > 0) ? `panorama-set-${tracking.year}${tracking.missionType}` : 'panorama-set-recent',

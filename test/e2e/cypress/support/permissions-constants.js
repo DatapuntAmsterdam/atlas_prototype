@@ -33,7 +33,6 @@ const queries = {
   natuurlijkPersoon: 'dl.qa-natuurlijk-persoon',
   nietNatuurlijkPersoon: 'dl.qa-niet-natuurlijk-persoon',
   searchHeader: '.qa-search-header',
-  table: '.c-table',
   warningPanel: '.notification--info',
   warningPanelAngular: '.c-panel--warning'
 };

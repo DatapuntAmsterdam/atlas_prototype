@@ -47,7 +47,7 @@ class ParamsRegistry {
     });
 
     return {
-      selector: (state) => get(state, `[${reducerKey}][${stateKey}]`),
+      selector: (state) => get(state, `[${reducerKey}]${stateKey}`),
       decode: (val) => {
         if (val === 'true' || val === 'false') {
           return val === 'true';

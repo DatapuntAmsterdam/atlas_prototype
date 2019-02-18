@@ -37,21 +37,9 @@ exports[`Dataset should render with search results 1`] = `
         className="u-col-sm--9"
       >
         <div>
-          <AngularWrapper
-            bindings={
-              Object {
-                "catalogFilters": Object {},
-                "content": undefined,
-              }
-            }
-            component="dpDataSelectionCatalog"
-            dependencies={
-              Array [
-                "atlas",
-              ]
-            }
-            interpolateBindings={Object {}}
-            moduleName="dpDataSelectionCatalogWrapper"
+          <Catalog
+            catalogFilters={Object {}}
+            content={Array []}
           />
         </div>
         <AngularWrapper

@@ -30,13 +30,13 @@ export const isDataPage = createSelector(getPage, (page) => page === PAGES.DATA)
 export const isPanoPage = createSelector(getPage, (page) => page === PAGES.PANORAMA);
 export const isDataDetailPage = createSelector(getPage, (page) => page === PAGES.DATA_DETAIL);
 export const isDatasetDetailPage = createSelector(
-  getPage, (page) => page === PAGES.DATASETS_DETAIL
+  getPage, (page) => page === PAGES.DATASET_DETAIL
 );
 
 export const isDatasetPage = createSelector(
   getPage,
   (page) => page === PAGES.DATASETS
-    || page === PAGES.DATASETS_DETAIL
+    || page === PAGES.DATASET_DETAIL
     || page === PAGES.SEARCH_DATASETS
 );
 
@@ -50,8 +50,8 @@ export const isDataSelectionPage = createSelector(
 export const hasUserAccesToPage = createSelector(
   getPage, getUser,
   (page, user) => (page === PAGES.ADDRESSES
-      || (page === PAGES.ESTABLISHMENTS && user.authenticated)
-      || (page === PAGES.CADASTRAL_OBJECTS && user.scopes.includes('BRK/RSN'))
-    )
+    || (page === PAGES.ESTABLISHMENTS && user.authenticated)
+    || (page === PAGES.CADASTRAL_OBJECTS && user.scopes.includes('BRK/RSN'))
+  )
 );
 

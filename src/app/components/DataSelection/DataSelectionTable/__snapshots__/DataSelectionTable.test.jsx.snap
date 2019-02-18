@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataSelectionTable should render without failing 1`] = `
+<div
+  className="c-ds-table"
+>
+  <div
+    className="c-ds-table__head"
+  >
+    <div
+      className="c-ds-table__row"
+    >
+      <div
+        className="c-ds-table__cell"
+        key="0"
+      >
+        foo
+      </div>
+      <div
+        className="c-ds-table__cell"
+        key="1"
+      >
+        bar
+      </div>
+    </div>
+  </div>
+  <div
+    className="c-ds-table__body"
+  >
+    <Connect(Link)
+      className="c-ds-table__row qa-table-link"
+      key="0"
+      to={
+        Object {
+          "payload": Object {
+            "id": "idundefined",
+            "subtype": undefined,
+            "type": undefined,
+          },
+          "type": "atlasRouter/DATA_DETAIL",
+        }
+      }
+    />
+  </div>
+</div>
+`;

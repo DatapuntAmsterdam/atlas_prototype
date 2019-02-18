@@ -9,6 +9,7 @@ import { getDataSearchLocation } from '../../../shared/ducks/data-search/selecto
 import { isGeoSearch } from '../../../shared/ducks/selection/selection';
 import { isPanoLayer } from './map';
 import { areMarkersLoading } from '../../../shared/ducks/data-selection/selectors';
+import { isPanoPage } from '../../../store/redux-first-router/selectors';
 
 export const getMap = (state) => state.map;
 export const getActiveBaseLayer = createSelector(getMap, (mapState) => mapState.baseLayer);
@@ -16,10 +17,13 @@ export const getMapZoom = createSelector(getMap, (mapState) => mapState.zoom);
 export const isMapLoading = createSelector(getMap, areMarkersLoading,
   (mapState, dataSelectionLoading) => mapState.isLoading || dataSelectionLoading);
 
-export const getMapOverlays = createSelector(getMap, (mapState) => mapState && mapState.overlays);
-export const getMapOverlaysWithoutPanorama = createSelector(
-  getMapOverlays, (overlays) => overlays.filter(
-    (overlay) => !isPanoLayer(overlay)
+export const getMapOverlays = createSelector([getMap, isPanoPage],
+  (mapState, isPano) => (
+    mapState && isPano
+      ? mapState.overlays
+      : mapState.overlays.filter(
+        (overlay) => !isPanoLayer(overlay)
+      )
   ));
 
 export const getMapCenter = createSelector(getMap, (mapState) => mapState && mapState.viewCenter);

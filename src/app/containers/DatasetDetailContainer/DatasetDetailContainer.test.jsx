@@ -20,7 +20,7 @@ const initialState = {
   }
 };
 
-describe('DatasetsDetailContainer', () => {
+describe('DatasetDetailContainer', () => {
   it('should render', () => {
     const store = configureMockStore()({ ...initialState });
     const component = shallow(<DatasetDetailContainer />, { context: { store } }).dive();

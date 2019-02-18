@@ -1,7 +1,8 @@
+import { DATA_SELECTION_TABLE } from '../support/selectors';
+
 const dataSelection = '.c-data-selection';
 const homepage = '.c-homepage';
 const notification = '.qa-notification';
-const table = '.c-table';
 
 describe('parcel-ownership (eigendommen) module', () => {
   describe('user should be able to navigate to the parcel-ownership from the homepage', () => {
@@ -45,7 +46,7 @@ describe('parcel-ownership (eigendommen) module', () => {
 
       it('should not show the table with results', () => {
         // the table with results should not exist
-        cy.get(table).should('not.exist').and('not.be.visible');
+        cy.get(DATA_SELECTION_TABLE.table).should('not.exist').and('not.be.visible');
       });
     });
   });
@@ -86,7 +87,7 @@ describe('parcel-ownership (eigendommen) module', () => {
 
         it('should show the table with results', () => {
           // the table with results should exist
-          cy.get(table).should('exist').and('be.visible');
+          cy.get(DATA_SELECTION_TABLE.table).should('exist').and('be.visible');
         });
       });
     });
@@ -99,7 +100,7 @@ describe('parcel-ownership (eigendommen) module', () => {
         cy.wait('@getDataselectieBrk');
         cy.scrollTo('top');
 
-        cy.get('.c-table__content-row:first-child').click();
+        cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}:first-child`).click();
 
         cy.wait('@getBrkObjectExpand');
         cy.get('.qa-detail').should('exist').and('be.visible');
@@ -126,7 +127,8 @@ describe('parcel-ownership (eigendommen) module', () => {
             cy.get('.c-data-selection-available-filters__item')
               .find('.qa-option-label')
               .contains(selectedFilter)
-              .should('exist').and('be.visible');
+              .should('exist')
+              .and('be.visible');
 
             cy.get('.c-data-selection-available-filters__item')
               .find('.qa-option-label')
@@ -140,16 +142,17 @@ describe('parcel-ownership (eigendommen) module', () => {
             cy.get('.c-data-selection-active-filters__listitem')
               .find('span')
               .contains(selectedFilter)
-              .should('exist').and('be.visible');
+              .should('exist')
+              .and('be.visible');
 
             // get the position of the category in the th's of the table
-            cy.get('th.c-table__header-field').each((th, index) => {
+            cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`).each((th, index) => {
               // if the position is equal to the category
               if (th[0].innerText === category) {
                 // get al the content the td's with the same position as the categoryGroup they all
                 // should contain the same value as the `selectedFilter`
-                cy.get('.c-table__content-row')
-                  .find(`td:nth-child(${index + 1})`)
+                cy.get(DATA_SELECTION_TABLE.row)
+                  .find(`${DATA_SELECTION_TABLE.cell}:nth-child(${index + 1})`)
                   .contains(selectedFilter)
                   .should('exist').and('be.visible');
               }

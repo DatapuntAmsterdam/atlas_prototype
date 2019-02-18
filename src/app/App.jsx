@@ -125,7 +125,7 @@ const App = ({
 
               {currentPage === PAGES.DATASETS && <DatasetPage />}
 
-              {currentPage === PAGES.DATASETS_DETAIL && (
+              {currentPage === PAGES.DATASET_DETAIL && (
                 <DatasetDetailContainer />
               )}
 

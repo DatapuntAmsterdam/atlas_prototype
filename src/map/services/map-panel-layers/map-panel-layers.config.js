@@ -18,12 +18,13 @@ export default [
     ],
     maxZoom: 16,
     minZoom: 11,
+    notClosable: true,
     title: 'Panoramabeelden',
     url: '/maps/panorama?version=1.3.0&service=WMS'
   },
   {
-    id: 'pano2018',
-    layers: ['panorama_new_2018'],
+    id: 'pano2018bi',
+    layers: ['panorama_new'],
     legendItems: [
       {
         selectable: false,
@@ -33,11 +34,27 @@ export default [
     maxZoom: 16,
     minZoom: 11,
     title: 'Panoramabeelden',
+    notClosable: true,
     url: '/maps/panorama?version=1.3.0&service=WMS'
   },
   {
-    id: 'pano2017',
-    layers: ['panorama_new_2017'],
+    id: 'pano2018woz',
+    layers: ['panorama_new'],
+    legendItems: [
+      {
+        selectable: false,
+        title: '2018 WOZ'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    notClosable: true,
+    title: 'Panoramabeelden',
+    url: '/maps/panorama?version=1.3.0&service=WMS'
+  },
+  {
+    id: 'pano2017bi',
+    layers: ['panorama_new'],
     legendItems: [
       {
         selectable: false,
@@ -46,12 +63,28 @@ export default [
     ],
     maxZoom: 16,
     minZoom: 11,
+    notClosable: true,
     title: 'Panoramabeelden',
-    url: '/maps/panorama&version=1.3.0&service=WMS'
+    url: '/maps/panorama?version=1.3.0&service=WMS'
   },
   {
-    id: 'pano2016',
-    layers: ['panorama_new_2016'],
+    id: 'pano2017woz',
+    layers: ['panorama_new'],
+    legendItems: [
+      {
+        selectable: false,
+        title: '2017 WOZ'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    title: 'Panoramabeelden',
+    notClosable: true,
+    url: '/maps/panorama?version=1.3.0&service=WMS'
+  },
+  {
+    id: 'pano2016bi',
+    layers: ['panorama_new'],
     legendItems: [
       {
         selectable: false,
@@ -60,8 +93,9 @@ export default [
     ],
     maxZoom: 16,
     minZoom: 11,
+    notClosable: true,
     title: 'Panoramabeelden',
-    url: '/maps/panorama&version=1.3.0&service=WMS'
+    url: '/maps/panorama?version=1.3.0&service=WMS'
   },
   {
     category: 'Geografie: onroerende zaken',
@@ -729,6 +763,7 @@ export default [
     layers: ['milieuzones'],
     legendItems: [
       {
+        imageRule: 'Taxi',
         selectable: false,
         title: 'Milieuzone taxi'
       }
@@ -745,6 +780,7 @@ export default [
     layers: ['milieuzones'],
     legendItems: [
       {
+        imageRule: 'Touringcar',
         selectable: false,
         title: 'Milieuzone touringcar'
       }
@@ -761,6 +797,7 @@ export default [
     layers: ['milieuzones'],
     legendItems: [
       {
+        imageRule: 'Touringcar na 2020',
         selectable: false,
         title: 'Milieuzone touringcar (vanaf 1-1-2020)'
       }
@@ -777,6 +814,7 @@ export default [
     layers: ['milieuzones'],
     legendItems: [
       {
+        imageRule: 'Vrachtauto',
         selectable: false,
         title: 'Milieuzone vrachtauto'
       }
@@ -824,83 +862,105 @@ export default [
   },
   {
     category: 'Verkeer en infrastructuur',
-    id: 'pvr',
-    notClickable: true,
-    layers: ['parkeervakken_reservering'],
     legendItems: [
       {
-        selectable: false,
+        id: 'pvrf',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'FISCAAL'
       },
       {
-        selectable: false,
+        id: 'pvrpv',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Parkeerverbod'
       },
       {
-        selectable: false,
-        title: 'Verbod stil te staan'
-      },
-      {
-        selectable: false,
-        title: 'Verbod (brom)fietsen plaatsen'
-      },
-      {
-        selectable: false,
-        title: 'Parkeergelegenheid'
-      },
-      {
-        selectable: false,
+        id: 'pvrts',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Taxistandplaats'
       },
       {
-        selectable: false,
-        title: 'Gehandicaptenplaats'
-      },
-      {
-        selectable: false,
+        id: 'pvrga',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Gehandicaptenplaats algemeen'
       },
       {
-        selectable: false,
+        id: 'pvrgk',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Gehandicaptenplaats kenteken'
       },
       {
-        selectable: false,
+        id: 'pvrll',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Laden lossen'
       },
       {
-        selectable: false,
+        id: 'pvrsv',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Specifieke voertuigcategorie'
       },
       {
-        selectable: false,
+        id: 'pvrvh',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Vergunninghouders'
       },
       {
-        selectable: false,
+        id: 'pvrbz',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Blauwe zone'
       },
       {
-        selectable: false,
-        title: 'Einde blauwe zone'
-      },
-      {
-        selectable: false,
+        id: 'pvrpr',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
         title: 'Park & Ride'
-      },
-      {
-        selectable: false,
-        title: 'Carpool'
-      },
-      {
-        selectable: false,
-        title: 'MULDER'
       }
     ],
     maxZoom: 16,
     minZoom: 11,
     title: 'Parkeervakken - Gereserveerd',
     url: '/maps/parkeervakken?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    legendItems: [
+      {
+        id: 'bgt',
+        imageRule: 'Busbaan geen taxi',
+        notClickable: true,
+        layer: 'busbaan_geen_taxi',
+        selectable: true,
+        title: 'Taxi busbaanontheffing'
+      },
+      {
+        id: 'tar',
+        imageRule: 'Taxiroutes',
+        notClickable: true,
+        layer: 'taxiroutes',
+        selectable: true,
+        title: 'Taxi hoofdroute'
+      },
+      {
+        id: 'vrr',
+        imageRule: 'Vrachtroutes',
+        notClickable: true,
+        layer: 'vrachtroutes',
+        selectable: true,
+        title: 'Vrachtauto 7,5t-route'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    title: 'Routes - Taxi en vrachtauto',
+    url: '/maps/hoofdroutes?version=1.3.0&service=WMS'
   },
   {
     category: 'Verkeer en infrastructuur',
