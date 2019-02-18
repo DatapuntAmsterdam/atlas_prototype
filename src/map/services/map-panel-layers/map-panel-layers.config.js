@@ -804,7 +804,7 @@ export default [
         title: 'Gewoon laadpunt (niet beschikbaar)'
       },
       {
-        id: 'snlpb',
+        id: 'slpb',
         imageRule: 'Snel beschikbaar',
         layer: 'snel_beschikbaar',
         selectable: true,
