@@ -858,7 +858,7 @@ export default [
     ],
     maxZoom: 16,
     minZoom: 8,
-    title: 'Oplaadpunten',
+    title: 'Oplaadpunten (status ±15 min. geleden)',
     url: '/maps/oplaadpunten?version=1.3.0&service=WMS'
   },
   {
