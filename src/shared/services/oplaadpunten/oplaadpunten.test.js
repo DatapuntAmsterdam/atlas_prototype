@@ -14,7 +14,7 @@ describe('The oplaadpunten resource', () => {
   });
 
   describe('By uri', () => {
-    it('fetches a parkeervak', () => {
+    it('fetches a oplaadpunt', () => {
       const uri = 'https://acc.api.data.amsterdam.nl/vsd/oplaadpunten/123456';
       const oplaadpuntMock = {
         street: 'straat',

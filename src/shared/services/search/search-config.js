@@ -93,7 +93,8 @@ export default {
     },
     { uri: 'geosearch/grondexploitatie/' },
     { uri: 'geosearch/biz/' },
-    { uri: 'parkeervakken/geosearch/' }
+    { uri: 'parkeervakken/geosearch/' },
+    { uri: 'geosearch/oplaadpunten/' }
   ],
   COORDINATES_HIERARCHY: [
     {
@@ -156,8 +157,8 @@ export default {
       features: ['nap/peilmerk']
     }, {
       slug: 'oplaadpunten',
-      label_singular: 'NAP Peilmerk',
-      label_plural: 'NAP Peilmerken',
+      label_singular: 'Oplaadpunt',
+      label_plural: 'Oplaadpunten',
       features: ['vsd/oplaadpunten']
     }, {
       slug: 'explosief',

@@ -7,6 +7,7 @@ Cypress.Commands.add('defineGeoSearchRoutes', () => {
   cy.route('/geosearch/grondexploitatie/*').as('getGeoSearchGrondexploitatie');
   cy.route('/geosearch/biz/*').as('getGeoSearchBiz');
   cy.route('/parkeervakken/geosearch/*').as('getGeoSearchParkeervak');
+  cy.route('/geosearch/oplaadpunten/*').as('getGeoSearchOplaadpunten');
 });
 
 Cypress.Commands.add('defineSearchRoutes', () => {
@@ -30,6 +31,8 @@ Cypress.Commands.add('waitForGeoSearch', () => {
   cy.wait('@getGeoSearchMonumenten');
   cy.wait('@getGeoSearchGrondexploitatie');
   cy.wait('@getGeoSearchBiz');
+  cy.wait('@getGeoSearchParkeervak');
+  cy.wait('@getGeoSearchOplaadpunten');
 });
 
 Cypress.Commands.add('waitForSearch', (type = 'EMPLOYEE_PLUS') => {

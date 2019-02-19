@@ -43,6 +43,9 @@ const LocationSearch = ({
             <PanoramaPreview />
           )}
 
+          { console.log(searchResults) }
+
+
           {numberOfResults ?
             <DataSearchLocation {...{ searchResults }} /> :
             'Van deze locatie zijn geen gegevens bekend.'}

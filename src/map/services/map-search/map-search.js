@@ -23,7 +23,8 @@ const endpoints = [
   },
   { uri: 'geosearch/grondexploitatie/' },
   { uri: 'geosearch/biz/' },
-  { uri: 'parkeervakken/geosearch/' }
+  { uri: 'parkeervakken/geosearch/' },
+  { uri: 'geosearch/oplaadpunten/', radius: 25 }
 ];
 
 const relatedResourcesByType = {
