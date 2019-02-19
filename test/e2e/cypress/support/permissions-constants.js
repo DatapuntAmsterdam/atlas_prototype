@@ -10,7 +10,8 @@ const urls = {
   monumentComplex: '/data/monumenten/complexen/id182a9861-4052-4127-8300-6450cd75b6a5',
   natuurlijk: '/data/brk/subject/idNL.KAD.Persoon.171720901',
   nietNatuurlijk: 'data/brk/subject/idNL.KAD.Persoon.423186718',
-  pand: '/data/bag/pand/id0363100012168052?legenda=false',
+  pand: '/data/bag/pand/id0363100012168052',
+  parkeervak: '/data/parkeervakken/parkeervakken/id121403487278/',
   standplaats: '/data/bag/standplaats/id03630000691684',
   vestiging: '/data/handelsregister/vestiging/id000003579875/?modus=gesplitst',
   vestigingenTabel: '/data/hr/vestigingen?modus=volledig&legenda=false&zoom=11'
@@ -53,6 +54,7 @@ const values = {
   pandVestigingName: 'ller',
   redengevendeOmschrijving: 'Redengevende omschrijving',
   standplaatsVestigingName: 'us B',
+  parkeervakId: '121403487278',
   type: 'Type',
   vestigingName: 'om B',
   vestigingen: 'Vestigingen',

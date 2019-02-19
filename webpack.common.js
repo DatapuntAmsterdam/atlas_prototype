@@ -12,7 +12,7 @@ const legacy = path.resolve(root, 'modules');
 const dist = path.resolve(root, 'dist');
 
 
-function commonConfig ({ nodeEnv }) {
+function commonConfig({ nodeEnv }) {
   return {
     context: root,
     entry: {
@@ -101,24 +101,27 @@ function commonConfig ({ nodeEnv }) {
       ]
     },
     optimization: {
-      runtimeChunk: "single",
+      runtimeChunk: 'single',
       splitChunks: {
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: "vendor",
-            chunks: "all"
+            name: 'vendor',
+            chunks: 'all'
           }
         }
       }
     },
     plugins: [
       new CleanWebpackPlugin([dist]),
-      new SVGSpritemapPlugin({
-        src: 'src/shared/assets/icons/**/*.svg',
-        filename: 'sprite.svg',
-        chunk: 'sprite',
-        styles: 'src/shared/styles/config/mixins/_sprites.scss',
+      new SVGSpritemapPlugin(['src/shared/assets/icons/**/*.svg'], {
+        output: {
+          filename: 'sprite.svg',
+          chunk: {
+            name: 'sprite'
+          }
+        },
+        styles: 'src/shared/styles/config/mixins/_sprites.scss'
       }),
       new CopyWebpackPlugin([
         { from: './public/', to: './assets/' },

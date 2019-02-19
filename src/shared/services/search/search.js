@@ -29,7 +29,7 @@ export function search(query, categorySlug, user) {
   });
 
   return Promise.all(queries).then((results) => ({
-    results: formatCategories(results, user),
+    results: formatCategories(results, user, categorySlug),
     errors: results.some((result) => (result && result.type === errorType))
   }));
 }

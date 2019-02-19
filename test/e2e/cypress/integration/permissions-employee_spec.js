@@ -174,7 +174,7 @@ describe('employee permissions', () => {
     cy.get(queries.listItem).contains(values.pandVestigingName);
   });
 
-  it.only('7C. Should show an employee all information in a Geo search', () => {
+  it('7C. Should show an employee all information in a Geo search', () => {
     cy.server();
     cy.defineGeoSearchRoutes();
     cy.route('/bag/pand/*').as('getResults');

@@ -25,6 +25,15 @@ const getOpenbareRuimte = (item) => ({
   statusLabel: item.properties.opr_type !== 'Weg' ? item.properties.opr_type : ''
 });
 
+const getParkeervak = (feature) => ({
+  categoryLabel: categoryLabelsByType[feature.properties.type].singular,
+  label: feature.properties.display,
+  parent: null,
+  type: feature.properties.type,
+  uri: feature.properties.uri,
+  statusLabel: getStatusLabel(feature.properties.type)
+});
+
 const transformResultByType = (result) => {
   switch (result.properties.type) {
     case 'pand/address':
@@ -32,6 +41,9 @@ const transformResultByType = (result) => {
 
     case 'bag/openbareruimte':
       return getOpenbareRuimte(result);
+
+    case 'parkeervakken/parkeervakken':
+      return getParkeervak(result);
 
     default:
       return getDefault(result);

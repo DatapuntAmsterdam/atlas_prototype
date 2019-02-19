@@ -118,6 +118,20 @@ exports[`MapDetailResult should render bedrijfsinvesteringszone 1`] = `
 />
 `;
 
+exports[`MapDetailResult should render de parkeervak 1`] = `
+<MapDetailParkeervak
+  item={
+    Object {
+      "endpointType": "parkeervakken/parkeervakken/",
+      "label": "value",
+    }
+  }
+  onMaximize={[MockFunction]}
+  onPanoPreviewClick={[MockFunction]}
+  panoUrl="panoUrl"
+/>
+`;
+
 exports[`MapDetailResult should render explosieven gevrijwaard gebied 1`] = `
 <MapDetailExplosievenGevrijwaardGebied
   gevrijwaardGebied={

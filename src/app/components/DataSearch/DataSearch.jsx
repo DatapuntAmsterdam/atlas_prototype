@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Panel from '../Panel/Panel';
@@ -27,11 +28,11 @@ const DataSearch = ({
     <div className="qa-search-results-content">
       <div className="qa-search-result">
         <div>
-          {searchResults && searchResults.map((result) => (
+          {searchResults && searchResults.map((result, i) => (
             (result.count >= 1 || result.warning) &&
             (!result.authScope || userScopes.includes(result.authScope)) && (
               <div
-                key={result.label_plural}
+                key={i}
                 className={`
                   c-search-results__block
                   qa-search-results-category
@@ -39,33 +40,33 @@ const DataSearch = ({
                 `}
               >
                 <div className="c-search-results__block-content">
-                  { (category)
-                      ? <div className="o-header u-margin__bottom--3">
-                        <h1 className="o-header__title u-margin__bottom--1">
-                          {`${result.label_plural} (${result.count})`}
-                        </h1>
-                        <h2
-                          className="
+                  {(category)
+                    ? <div className="o-header u-margin__bottom--3">
+                      <h1 className="o-header__title u-margin__bottom--1">
+                        {`${result.label_plural} (${result.count})`}
+                      </h1>
+                      <h2
+                        className="
                             o-header__subtitle
                             u-color__primary--dark
                             u-font--responsive-m
                             qa-search-header
                           "
-                        >
-                          {`met '${searchQuery}'`}
-                        </h2>
-                      </div>
-                      : <div className="o-header">
-                        <h2 className="o-header__subtitle qa-search-header">
-                          {(result.count > 1) && (
-                            <span>
+                      >
+                        {`met '${searchQuery}'`}
+                      </h2>
+                    </div>
+                    : <div className="o-header">
+                      <h2 className="o-header__subtitle qa-search-header">
+                        {(result.count > 1) && (
+                          <span>
                               {`${result.label_plural} (${result.count})`}
                             </span>
-                          )}
-                          {(result.count === 1) && <span>{result.label_singular}</span>}
-                          {(result.count === 0) && <span>{result.label_plural}</span>}
-                        </h2>
-                      </div>
+                        )}
+                        {(result.count === 1) && <span>{result.label_singular}</span>}
+                        {(result.count === 0) && <span>{result.label_plural}</span>}
+                      </h2>
+                    </div>
                   }
 
                   {(!!result.warning) &&
@@ -84,7 +85,6 @@ const DataSearch = ({
                       category && (searchResults[0].count > searchResults[0].results.length)
                     }
                   />
-
                   {(result.count > 10 && !category) &&
                   <div>
                     {(result.more) ?

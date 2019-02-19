@@ -24,7 +24,8 @@ const categoryTypeOrder = [
   'bommenkaart/uitgevoerdonderzoek',
   'monumenten/monument',
   'grex/grondexploitatie',
-  'vsd/biz'
+  'vsd/biz',
+  'parkeervakken/parkeervakken'
 ];
 
 export default categoryTypeOrder;

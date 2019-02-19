@@ -1,0 +1,16 @@
+
+<div class="detail-page__content--main">
+    <div class="c-detail__block">
+        <dp-glossary-header heading="{{vm.apiData.results.id}}" definition="PARKEERVAK">
+        </dp-glossary-header>
+
+        <dl class="c-key-value-list">
+            <dt>Straatnaam</dt>
+            <dd>{{ vm.apiData.results.straatnaam }}</dd>
+            <dt>Type</dt>
+            <dd>{{ vm.apiData.results.e_type_desc }}</dd>
+            <dt>Bord</dt>
+            <dd>{{ vm.apiData.results.bord }}</dd>
+        </dl>
+    </div>
+</div>

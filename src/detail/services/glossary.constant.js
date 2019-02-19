@@ -333,6 +333,13 @@ const GLOSSARY = {
         'sleutelverzendend'
       ]
     },
+    PARKEERVAK: {
+      label_singular: 'Parkeervak',
+      label_plural: 'Parkeervakken',
+      description: 'Een parkeerplaats of parkeervak is een ruimte die is bestemd voor het parkeren van één voertuig.',
+      url: null,
+      meta: []
+    },
     ROLLAAG: {
       label_singular: 'Rollaag',
       label_plural: 'Rollagen',

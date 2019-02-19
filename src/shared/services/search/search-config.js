@@ -76,7 +76,7 @@ export default {
       uri: 'geosearch/nap/',
       radius: 25
     }, {
-      uri: 'geosearch/atlas/',
+      uri: 'geosearch/bag/',
       radius: null
     }, {
       uri: 'geosearch/munitie/',
@@ -92,7 +92,8 @@ export default {
       }
     },
     { uri: 'geosearch/grondexploitatie/' },
-    { uri: 'geosearch/biz/' }
+    { uri: 'geosearch/biz/' },
+    { uri: 'parkeervakken/geosearch/' }
   ],
   COORDINATES_HIERARCHY: [
     {
@@ -191,6 +192,11 @@ export default {
       label_singular: 'Bedrijfsinvesteringszone',
       label_plural: 'Bedrijfsinvesteringszones',
       features: ['vsd/biz']
+    }, {
+      slug: 'parkeervakken',
+      label_singular: 'Parkeervak',
+      label_plural: 'Parkeervakken',
+      features: ['parkeervakken/parkeervakken']
     }
   ]
 };

@@ -604,79 +604,106 @@ export default [
     id: 'pv',
     url: 'maps/parkeervakken',
     layers: ['alle_parkeervakken', 'parkeervakken_label'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvb',
     url: 'maps/parkeervakken',
-    layers: ['alle_parkeervakken', 'parkeervakken_bord'],
-    noDetail: true
+    layers: ['parkeervakken_bord'],
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
+  // Parkeervakken
   {
     id: 'pvrf',
     url: 'maps/parkeervakken?categorie=fiscaal',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrpv',
     url: 'maps/parkeervakken?categorie=parkeerverbod',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrts',
     url: 'maps/parkeervakken?categorie=taxistandplaats',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrgs',
     url: 'maps/parkeervakken?categorie=gehandicapten_plaats',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrga',
     url: 'maps/parkeervakken?categorie=gehandicapten_algemeen',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrgk',
     url: 'maps/parkeervakken?categorie=gehandicapten_kenteken',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrll',
     url: 'maps/parkeervakken?categorie=laden_lossen',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrsv',
     url: 'maps/parkeervakken?categorie=specifiek_voertuig',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrvh',
     url: 'maps/parkeervakken?categorie=vergunning_houders',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrbz',
     url: 'maps/parkeervakken?categorie=blauwe_zone',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pvrpr',
     url: 'maps/parkeervakken?categorie=park_ride',
     layers: ['parkeervakken_reservering'],
-    noDetail: true
+    detailUrl: 'parkeervakken/geosearch/',
+    detailItem: 'parkeervak',
+    detailIsShape: true
   },
   {
     id: 'pr',

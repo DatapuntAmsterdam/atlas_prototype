@@ -55,6 +55,10 @@ const categoryLabels = {
     singular: 'Pand',
     plural: 'Panden'
   },
+  parkeervak: {
+    singular: 'Parkeervak',
+    plural: 'Parkeervakken'
+  },
   standplaats: {
     singular: 'Adres',
     plural: 'Adressen'

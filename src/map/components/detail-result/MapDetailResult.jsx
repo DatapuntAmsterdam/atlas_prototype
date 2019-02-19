@@ -26,6 +26,7 @@ import MapDetailMonument from './MapDetailMonument';
 import MapDetailNapPeilmerk from './MapDetailNapPeilmerk';
 import MapDetailOplaadpunt from './MapDetailOplaadpunt';
 import MapDetailVestiging from './MapDetailVestiging';
+import MapDetailParkeervak from './MapDetailParkeervak';
 
 const MapDetailResult = ({ panoUrl, result, onMaximize, onPanoPreviewClick }) => {
   switch (result.endpointType) {
@@ -234,6 +235,15 @@ const MapDetailResult = ({ panoUrl, result, onMaximize, onPanoPreviewClick }) =>
           onPanoPreviewClick={onPanoPreviewClick}
           panoUrl={panoUrl}
           oplaadpunt={result}
+        />
+      );
+    case endpointTypes.parkeervak:
+      return (
+        <MapDetailParkeervak
+          onMaximize={onMaximize}
+          onPanoPreviewClick={onPanoPreviewClick}
+          panoUrl={panoUrl}
+          item={result}
         />
       );
     case endpointTypes.vestiging:

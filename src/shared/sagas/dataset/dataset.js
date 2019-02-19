@@ -30,7 +30,7 @@ import formatDetailData from '../../../detail/services/data-formatter/data-forma
 import { getUserScopes } from '../../ducks/user/user';
 import { getParts, getTemplateUrl } from '../../../detail/services/endpoint-parser/endpoint-parser';
 import { getByUrl } from '../../../shared/services/api/api';
-import { API_ROOT } from '../../services/auth/auth';
+import SHARED_CONFIG from '../../services/shared-config/shared-config';
 
 export function* ensureCatalogFilters() {
   const state = yield select();
@@ -113,7 +113,7 @@ export function* fetchDatasetsEffect(action) {
  */
 export function* fetchDatasetsOptionalEffect(action) {
   yield call(waitForAuthentication);
-  const endpoint = `${API_ROOT}dcatd/datasets/${action.payload.id}`;
+  const endpoint = `${SHARED_CONFIG.API_ROOT}dcatd/datasets/${action.payload.id}`;
 
   const detailData = yield call(getDatasetData, endpoint);
   yield put(fetchDetailSuccess(detailData));

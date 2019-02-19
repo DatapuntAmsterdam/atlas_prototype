@@ -3,6 +3,7 @@ import {
   FETCH_GEO_SEARCH_RESULTS_REQUEST,
   FETCH_GEO_SEARCH_RESULTS_SUCCESS_LIST,
   FETCH_GEO_SEARCH_RESULTS_SUCCESS_PANEL,
+  FETCH_QUERY_SEARCH_MORE_RESULTS_REQUEST,
   FETCH_QUERY_SEARCH_MORE_RESULTS_SUCCESS,
   FETCH_QUERY_SEARCH_RESULTS_FAILURE,
   FETCH_QUERY_SEARCH_RESULTS_REQUEST,
@@ -46,6 +47,13 @@ export default function reducer(state = initialState, action) {
         isLoading: false,
         numberOfResults,
         resultsQuery: results
+      };
+    }
+
+    case FETCH_QUERY_SEARCH_MORE_RESULTS_REQUEST: {
+      return {
+        ...enrichedState,
+        isLoading: true
       };
     }
 

@@ -1,7 +1,7 @@
 // Todo: fix / add tests
 import SEARCH_CONFIG from './search-config';
 
-const format = (allSearchResults) => {
+const geosearchFormatter = (allSearchResults) => {
   const allFeaturesFlattened = allSearchResults
     .map((searchResult) => searchResult.features.map((feature) => feature.properties))
     .reduce((previous, current) => previous.concat(current), []);
@@ -60,4 +60,4 @@ const format = (allSearchResults) => {
   }).filter((category) => category.count > 0);
 };
 
-export default format;
+export default geosearchFormatter;

@@ -11,7 +11,7 @@ import { getByUrl } from '../../../shared/services/api/api';
 
 const endpoints = [
   { uri: 'geosearch/nap/', radius: 25 },
-  { uri: 'geosearch/atlas/' },
+  { uri: 'geosearch/bag/' },
   { uri: 'geosearch/munitie/' },
   { uri: 'geosearch/bominslag/', radius: 25 },
   {
@@ -22,7 +22,8 @@ const endpoints = [
     }
   },
   { uri: 'geosearch/grondexploitatie/' },
-  { uri: 'geosearch/biz/' }
+  { uri: 'geosearch/biz/' },
+  { uri: 'parkeervakken/geosearch/' }
 ];
 
 const relatedResourcesByType = {
@@ -59,6 +60,26 @@ const relatedResourcesByType = {
   ]
 };
 
+export const geosearchTypes = {
+  parkeervakken: 'parkeervakken/geosearch/'
+};
+
+// this handles the geosearch endpoints that are not included in the geosearch api
+// and don't implement the geosearch api interface
+export const getFeaturesFromResult = (endpointType, result) => {
+  if (endpointType === geosearchTypes.parkeervakken) {
+    return (result.map((item) => ({
+      properties: {
+        display: item.id,
+        type: 'parkeervakken/parkeervakken',
+        uri: SHARED_CONFIG.API_ROOT + item._links.self.href.substring(1)
+      }
+    })));
+  }
+
+  return result.features;
+};
+
 export const fetchRelatedForUser = (user) => (data) => {
   const item = data.features.find((feature) => relatedResourcesByType[feature.properties.type]);
   if (!item) {
@@ -71,23 +92,23 @@ export const fetchRelatedForUser = (user) => (data) => {
       (!user.authenticated || !user.scopes.includes(resource.authScope))
     ) ? []
       : resource.fetch(item.properties.id)
-                .then((results) => results
-                  .map((result) => ({
-                    ...result,
-                    properties: {
-                      uri: result._links.self.href,
-                      display: result._display,
-                      type: resource.type,
-                      parent: item.properties.type
-                    }
-                  }))
-                )
+        .then((results) => results
+          .map((result) => ({
+            ...result,
+            properties: {
+              uri: result._links.self.href,
+              display: result._display,
+              type: resource.type,
+              parent: item.properties.type
+            }
+          }))
+        )
   ));
 
   return Promise.all(requests)
-                .then((results) => results
-                  .reduce((accumulator, subResults) => accumulator.concat(subResults),
-                    data.features));
+    .then((results) => results
+      .reduce((accumulator, subResults) => accumulator.concat(subResults),
+        data.features));
 };
 
 export default function search(location, user) {
@@ -104,8 +125,8 @@ export default function search(location, user) {
       .keys(searchParams)
       .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
       .join('&');
-
     return getByUrl(`${SHARED_CONFIG.API_ROOT}${endpoint.uri}?${queryString}`)
+      .then((result) => ({ features: getFeaturesFromResult(endpoint.uri, result) }))
       .then(fetchRelatedForUser(user))
       .then((features) => features.map((feature) => transformResultByType(feature)), (code) => ({
         type: errorType,
