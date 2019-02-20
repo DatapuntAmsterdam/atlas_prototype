@@ -62,7 +62,7 @@
     "lodash.isequal": "4.5.0",
     "lodash.isundefined": "3.0.1",
     "lodash.throttle": "4.1.1",
-    "marked": "0.6.0",
+    "marked": "0.6.1",
     "marzipano": "git+https://github.com/Amsterdam/marzipano.git#master",
     "objectFitPolyfill": "2.1.1",
     "proj4": "2.4.4",
