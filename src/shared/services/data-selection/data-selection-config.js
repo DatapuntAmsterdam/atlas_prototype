@@ -122,6 +122,36 @@ const DATA_SELECTION_CONFIG = {
             ],
             formatter: 'verblijfsobjectGevormd'
           }
+        ],
+        MAP: [
+          {
+            variables: [
+              '_openbare_ruimte_naam',
+              'huisnummer',
+              'huisletter',
+              'huisnummer_toevoeging'
+            ],
+            formatter: 'bagAddress'
+          },
+          {
+            variables: [
+              'ligplaats_id',
+              'standplaats_id'
+            ],
+            formatter: 'nummeraanduidingType'
+          },
+          {
+            variables: [
+              'hoofdadres'
+            ],
+            formatter: 'nevenadres'
+          },
+          {
+            variables: [
+              'status_id'
+            ],
+            formatter: 'verblijfsobjectGevormd'
+          }
         ]
       }
     },
@@ -229,6 +259,9 @@ const DATA_SELECTION_CONFIG = {
         ],
         LIST: [
           { variables: ['aanduiding'] }
+        ],
+        MAP: [
+          { variables: ['aanduiding'] }
         ]
       }
     },
@@ -314,6 +347,11 @@ const DATA_SELECTION_CONFIG = {
           }
         ],
         LIST: [
+          {
+            variables: ['handelsnaam']
+          }
+        ],
+        MAP: [
           {
             variables: ['handelsnaam']
           }
