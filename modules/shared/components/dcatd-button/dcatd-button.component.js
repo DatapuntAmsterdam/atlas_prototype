@@ -1,3 +1,5 @@
+import { routing } from '../../../../src/app/routes';
+
 (() => {
     'use strict';
 
@@ -21,6 +23,8 @@
 
         function onClick () {
             sessionStorage.setItem('DCATD_DETAIL_REDIRECT_URL', document.location.href);
+            sessionStorage.setItem('DCATD_LIST_REDIRECT_URL', `${document.location.origin}${routing.datasets.path}`);
+
             $window.location.assign(`/dcatd_admin#/datasets/${vm.id}`);
         }
 
