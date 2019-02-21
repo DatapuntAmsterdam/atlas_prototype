@@ -817,7 +817,7 @@ Object {
       },
     },
   },
-  "set": Object {
+  "tags": Object {
     "routes": Object {
       "atlasRouter/PANORAMA": Object {
         "addHistory": true,

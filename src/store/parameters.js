@@ -9,7 +9,7 @@ export default {
   ZOOM: 'zoom',
   LEGEND: 'legenda',
   HEADING: 'heading',
-  PANORAMA_SET: 'set',
+  PANORAMA_TAGS: 'tags',
   PITCH: 'pitch',
   FILTERS: 'filters',
   DETAIL_REFERENCE: 'detail-ref',

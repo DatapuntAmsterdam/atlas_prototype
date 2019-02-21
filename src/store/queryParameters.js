@@ -162,7 +162,7 @@ export default paramsRegistry
       selector: getActiveBaseLayer
     });
   })
-  .addParameter(PARAMETERS.PANORAMA_SET, (routes) => {
+  .addParameter(PARAMETERS.PANORAMA_TAGS, (routes) => {
     routes.add(routing.panorama.type, PANORAMA, 'tags', {
       defaultValue: panoramaInitialState.tags,
       selector: getPanoramaTags,
