@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapDetailParkeervak should render everything 1`] = `
+<MapDetailResultWrapper
+  onMaximize={[MockFunction]}
+  onPanoPreviewClick={[MockFunction]}
+  panoUrl="panoUrl"
+  subTitle=""
+  title="Parkeervak"
+>
+  <ul
+    className="map-detail-result__list"
+  >
+    <MapDetailResultItem
+      label="Straat"
+      value="Straatnaam"
+    />
+    <MapDetailResultItem
+      label="Type"
+      value=""
+    />
+    <MapDetailResultItem
+      label="Bord"
+      value="bord"
+    />
+  </ul>
+</MapDetailResultWrapper>
+`;

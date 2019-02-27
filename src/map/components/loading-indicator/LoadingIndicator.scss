@@ -1,0 +1,29 @@
+@import "../../../shared/styles/config";
+
+.c-dashboard--page-type-data {
+  .qa-loading-indicator {
+    right: $base-whitespace - 2;
+  }
+}
+
+.qa-loading-indicator { // sass-lint:disable-line force-element-nesting
+  border: none;
+  display: none;
+  position: absolute;
+  right: $base-whitespace * 5;
+  top: $base-whitespace - 2;
+
+  &.is-loading {
+    display: block;
+  }
+
+  .c-loading-indicator {
+    font-family: $base-font-family;
+    font-size: $s-font-size;
+    height: $base-whitespace * 3.5;
+    left: 0;
+    position: relative;
+    top: 0;
+    z-index: 999;
+  }
+}

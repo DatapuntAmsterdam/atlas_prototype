@@ -1,6 +1,6 @@
 <div class="u-grid dataset-detail">
 
-    <div class="u-row u-margin__bottom--3">
+    <div class="u-row u-margin__bottom--2">
         <div class="o-header">
             <h3 class="o-header__subtitle">
                 <span>Dataset</span>
@@ -21,6 +21,20 @@
             <h2 class="o-header__title u-margin__bottom--3 ">{{vm.apiData.results["dct:title"]}}</h2>
         </div>
         <span class="dataset-detail__description" ng-bind-html="vm.apiData.results['dct:description']"> </span>
+    </div>
+
+    <div class="u-row u-margin__bottom--2">
+        <div class="u-col-md--12">
+          <dp-panel is-panel-visible="
+              vm.apiData.results['ams:status'] === 'gepland' ||
+              vm.apiData.results['ams:status'] === 'in_onderzoek' ||
+              vm.apiData.results['ams:status'] === 'niet_beschikbaar'
+          ">
+              <span ng-if="vm.apiData.results['ams:status'] === 'gepland'">Deze dataset is gepland.</span>
+              <span ng-if="vm.apiData.results['ams:status'] === 'in_onderzoek'">De correctheid van deze dataset wordt momenteel onderzocht.</span>
+              <span ng-if="vm.apiData.results['ams:status'] === 'niet_beschikbaar'">Deze dataset is momenteel niet beschikbaar.</span>
+          </dp-panel>
+        </div>
     </div>
 
     <div class="u-row u-margin__bottom--3">

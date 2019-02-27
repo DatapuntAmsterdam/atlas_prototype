@@ -11,7 +11,7 @@ import geoJsonConfig from './services/geo-json-config.constant';
 import markerConfig from './services/marker-config.constant';
 import createClusterIcon from './services/cluster-icon';
 import { boundsToString, getBounds, isBoundsAPoint, isValidBounds } from './services/bounds';
-import MapBusyIndicator from './custom/map-busy-indicator/MapBusyIndicator';
+import LoadingIndicator from '../loading-indicator/LoadingIndicator';
 import { DEFAULT_LAT, DEFAULT_LNG } from '../../ducks/map/constants';
 import RdGeoJson from './custom/geo-json/RdGeoJson';
 import mapLayerTypes from '../../services/map-layer-types.config';
@@ -33,15 +33,17 @@ const convertBounds = (map) => {
 };
 
 class MapLeaflet extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onZoomEnd = this.onZoomEnd.bind(this);
     this.onClick = this.onClick.bind(this);
-    this.onMoveEnd = this.onMoveEnd.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
+    this.handleLoading = this.handleLoading.bind(this);
+    this.handleLoaded = this.handleLoaded.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.onClusterGroupBounds = this.onClusterGroupBounds.bind(this);
     this.state = {
+      pendingLayers: [],
       previousFitBoundsId: ''
     };
 
@@ -76,13 +78,6 @@ class MapLeaflet extends React.Component {
       latlng,
       containerPoint,
       layerPoint
-    });
-  }
-
-  onMoveEnd(event) {
-    this.props.onMoveEnd({
-      center: event.target.getCenter(),
-      boundingBox: convertBounds(this.MapElement)
     });
   }
 
@@ -152,6 +147,24 @@ class MapLeaflet extends React.Component {
     }
   }
 
+  handleLoading(layer) {
+    const { _leaflet_id: leafletId } = layer;
+
+    this.setState((state) => ({
+      pendingLayers: !state.pendingLayers.includes(leafletId)
+        ? [...state.pendingLayers, leafletId]
+        : state.pendingLayers
+    }));
+  }
+
+  handleLoaded(layer) {
+    const { _leaflet_id: leafletId } = layer;
+
+    this.setState((state) => ({
+      pendingLayers: state.pendingLayers.filter((layerId) => layerId !== leafletId)
+    }));
+  }
+
   render() {
     const {
       center,
@@ -171,6 +184,12 @@ class MapLeaflet extends React.Component {
 
     const tmsLayers = layers.filter((layer) => (layer.type === mapLayerTypes.TMS));
     const nonTmsLayers = layers.filter((layer) => (layer.type !== mapLayerTypes.TMS));
+
+    const loadingHandlers = {
+      onLoading: ({ sourceTarget }) => this.handleLoading(sourceTarget),
+      onLoad: ({ sourceTarget }) => this.handleLoaded(sourceTarget)
+    };
+
     return (
       <ResizeAware
         style={{
@@ -187,16 +206,17 @@ class MapLeaflet extends React.Component {
           ref={this.setMapElement}
           onZoomEnd={this.onZoomEnd}
           onClick={this.onClick}
-          onMoveEnd={this.onMoveEnd}
           onDragEnd={this.onDragEnd}
           onDraw={this.draw}
           center={center}
           zoom={zoom}
+          onLayerRemove={({ layer }) => this.handleLoaded(layer)}
           {...mapOptions}
         >
           <TileLayer
             {...baseLayer.baseLayerOptions}
             url={baseLayer.urlTemplate}
+            {...loadingHandlers}
           />
           {tmsLayers.map(({ id: key, isVisible, url, bounds }) => (
             <TileLayer
@@ -210,6 +230,7 @@ class MapLeaflet extends React.Component {
               minZoom={baseLayer.baseLayerOptions.minZoom}
               maxZoom={baseLayer.baseLayerOptions.maxZoom}
               opacity={visibleToOpacity(isVisible)}
+              {...loadingHandlers}
             />
           ))}
 
@@ -222,6 +243,7 @@ class MapLeaflet extends React.Component {
               }}
               {...overlayOptions}
               opacity={visibleToOpacity(isVisible)}
+              {...loadingHandlers}
             />
           ))}
           {
@@ -291,7 +313,8 @@ class MapLeaflet extends React.Component {
               <ZoomControl {...zoomControlOptions} />
             )
           }
-          <MapBusyIndicator loading={isLoading} />
+          <LoadingIndicator loading={isLoading || this.state.pendingLayers.length > 0} />
+
         </Map>
       </ResizeAware>
     );
@@ -317,7 +340,6 @@ MapLeaflet.defaultProps = {
   isLoading: false,
   isZoomControlVisible: true,
   onClick: () => 'click',  //
-  onMoveEnd: () => 'moveend',
   onDragEnd: () => 'dragend',
   onResizeEnd: () => 'resizeend',
   onZoomEnd: () => 'zoomend'
@@ -345,8 +367,6 @@ MapLeaflet.propTypes = {
     url: PropTypes.string.isRequired
   })),
   onClick: PropTypes.func,
-  // onDoubleClick: PropTypes.func,
-  onMoveEnd: PropTypes.func,
   onDragEnd: PropTypes.func,
   onResizeEnd: PropTypes.func,
   onZoomEnd: PropTypes.func,

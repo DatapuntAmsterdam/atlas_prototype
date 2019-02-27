@@ -1,5 +1,6 @@
 
 import marked from 'marked';
+import { dcatdScopes } from '../../../../src/shared/services/auth/auth';
 
 const formatCatalogData = (data, catalogFilters) => {
   const resourceTypes = catalogFilters.resourceTypes;
@@ -46,7 +47,7 @@ const formatDetailData = (rawData, category, subject, catalogFilters, scopes) =>
 
     data = { ...data, ...markdownFields };
 
-    data.canEditDataset = scopes.includes('CAT/W');
+    data.canEditDataset = scopes.some((scope) => dcatdScopes.includes(scope));
   }
   return data;
 };

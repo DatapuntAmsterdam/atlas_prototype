@@ -35,7 +35,6 @@ describe('MapLeaflet component', () => {
         center={center}
         getLeafletInstance={getLeafletInstance}
         mapOptions={mapOptions}
-        onMoveEnd={clickHandler}
         onZoomEnd={clickHandler}
         brkMarkers={[]}
         scaleControlOptions={scaleControlOptions}
@@ -65,7 +64,6 @@ describe('MapLeaflet component', () => {
         getLeafletInstance={getLeafletInstance}
         layers={layers}
         mapOptions={mapOptions}
-        onMoveEnd={clickHandler}
         onZoomEnd={clickHandler}
         scaleControlOptions={scaleControlOptions}
         zoomControlOptions={zoomControlOptions}
@@ -108,7 +106,6 @@ describe('MapLeaflet component', () => {
         getLeafletInstance={getLeafletInstance}
         layers={layers}
         mapOptions={mapOptions}
-        onMoveEnd={clickHandler}
         onZoomEnd={clickHandler}
         scaleControlOptions={scaleControlOptions}
         zoomControlOptions={zoomControlOptions}
@@ -232,7 +229,6 @@ describe('MapLeaflet component', () => {
         getLeafletInstance={getLeafletInstance}
         layers={layers}
         mapOptions={mapOptions}
-        onMoveEnd={clickHandler}
         onZoomEnd={clickHandler}
         scaleControlOptions={scaleControlOptions}
         zoomControlOptions={zoomControlOptions}
@@ -378,7 +374,6 @@ describe('MapLeaflet component', () => {
         getLeafletInstance={getLeafletInstance}
         layers={layers}
         mapOptions={mapOptions}
-        onMoveEnd={clickHandler}
         onZoomEnd={clickHandler}
         scaleControlOptions={scaleControlOptions}
         zoomControlOptions={zoomControlOptions}
@@ -491,7 +486,6 @@ describe('MapLeaflet component', () => {
         getLeafletInstance={getLeafletInstance}
         layers={layers}
         mapOptions={mapOptions}
-        onMoveEnd={clickHandler}
         onZoomEnd={clickHandler}
         scaleControlOptions={scaleControlOptions}
         zoomControlOptions={zoomControlOptions}
@@ -532,7 +526,6 @@ describe('MapLeaflet component', () => {
         getLeafletInstance={getLeafletInstance}
         layers={layers}
         mapOptions={mapOptions}
-        onMoveEnd={clickHandler}
         onZoomEnd={clickHandler}
         scaleControlOptions={scaleControlOptions}
         zoomControlOptions={zoomControlOptions}
@@ -580,7 +573,6 @@ describe('MapLeaflet component', () => {
         center: [52.3731081, 4.8932945],
         layers: [],
         onClick: jest.fn(),
-        onMoveEnd: jest.fn(),
         onZoomEnd: jest.fn(),
         onDragEnd: jest.fn(),
         onResizeEnd: jest.fn()
@@ -634,17 +626,6 @@ describe('MapLeaflet component', () => {
       const event = { latlng: null, containerPoint: null, layerPoint: null };
       wrapperInstance.onClick(event);
       expect(props.onClick).toHaveBeenCalledWith(event);
-    });
-
-    it('should delegate the onMoveEnd event', () => {
-      leafletMapMock.getCenter.mockImplementation(() => props.center);
-      const event = { target: leafletMapMock };
-      wrapperInstance.MapElement.getBounds.mockImplementation(() => bounds);
-      wrapperInstance.onMoveEnd(event);
-      expect(props.onMoveEnd).toHaveBeenCalledWith({
-        center: props.center,
-        boundingBox: convertedBounds
-      });
     });
 
     it('should delegate the onDragEnd event ', () => {

@@ -10,6 +10,10 @@
   @include font-size-responsive($l-header-font);
   @include font-weight($bold-weight);
   margin-bottom: $base-whitespace;
+
+  @at-root div.c-panel {
+    padding: $base-whitespace;
+  }
 }
 
 .c-panel__paragraph {
@@ -54,7 +58,10 @@
 }
 
 .c-panel--can-close {
+  padding-top: $base-whitespace * .3;
   padding-right: $button-size;
+  padding-bottom: $base-whitespace * .3;
+  line-height: $button-size;
 }
 
 .c-panel__list {

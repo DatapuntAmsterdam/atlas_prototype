@@ -425,6 +425,42 @@ describe('MapDetailResult', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render oplaadpuntent', () => {
+    const panoUrl = 'panoUrl';
+    const result = {
+      endpointType: 'vsd/oplaadpunten/',
+      label: 'value'
+    };
+    const clickHandler = jest.fn();
+    const wrapper = shallow(
+      <MapDetailResult
+        onMaximize={clickHandler}
+        onPanoPreviewClick={clickHandler}
+        panoUrl={panoUrl}
+        result={result}
+      />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render de parkeervak', () => {
+    const panoUrl = 'panoUrl';
+    const result = {
+      endpointType: 'parkeervakken/parkeervakken/',
+      label: 'value'
+    };
+    const clickHandler = jest.fn();
+    const wrapper = shallow(
+      <MapDetailResult
+        onMaximize={clickHandler}
+        onPanoPreviewClick={clickHandler}
+        panoUrl={panoUrl}
+        result={result}
+      />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render vestiging', () => {
     const panoUrl = 'panoUrl';
     const result = {

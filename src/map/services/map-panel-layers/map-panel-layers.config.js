@@ -42,6 +42,7 @@ export default [
     layers: ['panorama_new'],
     legendItems: [
       {
+        imageRule: '2018',
         selectable: false,
         title: '2018 WOZ'
       }
@@ -72,6 +73,7 @@ export default [
     layers: ['panorama_new'],
     legendItems: [
       {
+        imageRule: '2017',
         selectable: false,
         title: '2017 WOZ'
       }
@@ -364,17 +366,23 @@ export default [
   },
   {
     category: 'Geografie: gebieden',
-    id: 'gsg',
-    layers: ['grootstedelijkgebied'],
     legendItems: [
       {
-        selectable: false,
-        title: 'Grootstedelijk gebied'
+        id: 'ggra',
+        layer: 'grootstedelijk_regio_amsterdam',
+        selectable: true,
+        title: 'Regie Gemeente Amsterdam'
+      },
+      {
+        id: 'ggro',
+        layer: 'grootstedelijk_regio_omgevingsdienst',
+        selectable: true,
+        title: 'Regie Omgevingsdienst'
       }
     ],
     maxZoom: 16,
     minZoom: 8,
-    title: 'Grootstedelijke gebieden',
+    title: 'Grootstedelijke gebieden, projecten en belangen',
     url: '/maps/gebieden?version=1.3.0&service=WMS'
   },
   {
@@ -690,6 +698,22 @@ export default [
     disabled: true,
     legendItems: [
       {
+        id: 'pw1943-2500',
+        notClickable: false,
+        layer: 'burgerlijke_gemeente',
+        selectable: false,
+        title: '1943 (Dienst der Publieke Werken 1:2500)'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: '1943 (Dienst der Publieke Werken 1:2500)'
+  },
+  {
+    category: 'Topografie: historisch',
+    disabled: true,
+    legendItems: [
+      {
         id: 'pw1985',
         notClickable: false,
         layer: 'burgerlijke_gemeente',
@@ -828,17 +852,63 @@ export default [
   },
   {
     category: 'Verkeer en infrastructuur',
+    legendItems: [
+      {
+        id: 'slpb',
+        imageRule: 'Snel beschikbaar',
+        layer: 'snel_beschikbaar',
+        selectable: true,
+        title: 'Snellaadpunt (beschikbaar, ±15 min. geleden)'
+      },
+      {
+        id: 'slpnb',
+        imageRule: 'Snel niet beschikbaar',
+        layer: 'snel_niet_beschikbaar',
+        selectable: true,
+        title: 'Snellaadpunt (niet beschikbaar, ±15 min. geleden)'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Oplaadpunten - Snel laden',
+    url: '/maps/oplaadpunten?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    legendItems: [
+      {
+        id: 'nlpb',
+        imageRule: 'Normaal beschikbaar',
+        layer: 'normaal_beschikbaar',
+        selectable: true,
+        title: 'Gewoon laadpunt (beschikbaar, ±15 min. geleden)'
+      },
+      {
+        id: 'nlpnb',
+        imageRule: 'Normaal niet beschikbaar',
+        layer: 'normaal_niet_beschikbaar',
+        selectable: true,
+        title: 'Gewoon laadpunt (niet beschikbaar, ±15 min. geleden)'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Oplaadpunten - Gewoon laden',
+    url: '/maps/oplaadpunten?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
     id: 'pv',
     notClickable: true,
     layers: ['alle_parkeervakken'],
     legendItems: [
       {
         selectable: false,
-        title: 'FISCAAL'
+        title: 'Fiscaal'
       },
       {
         selectable: false,
-        title: 'Parkeervak'
+        title: 'Niet fiscaal'
       }
     ],
     maxZoom: 16,
@@ -849,7 +919,6 @@ export default [
   {
     category: 'Verkeer en infrastructuur',
     id: 'pvb',
-    notClickable: true,
     layers: ['parkeervakken_bord'],
     legendItems: [
       {
@@ -858,8 +927,38 @@ export default [
       }
     ],
     maxZoom: 16,
-    minZoom: 8,
+    minZoom: 11,
     title: 'Parkeervakken - Speciale bestemmingen',
+    url: '/maps/parkeervakken?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    legendItems: [
+      {
+        id: 'pvrts',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
+        imageRule: 'Taxistandplaats',
+        title: 'Taxistandplaats'
+      },
+      {
+        id: 'pvrll',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
+        imageRule: 'Laden lossen',
+        title: 'Laden en lossen'
+      },
+      {
+        id: 'pvrpr',
+        layer: 'parkeervakken_reservering',
+        selectable: true,
+        imageRule: 'Park & Ride',
+        title: 'Park & Ride'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 11,
+    title: 'Parkeervakken - Gereserveerd (logistiek)',
     url: '/maps/parkeervakken?version=1.3.0&service=WMS'
   },
   {
@@ -869,19 +968,13 @@ export default [
         id: 'pvrf',
         layer: 'parkeervakken_reservering',
         selectable: true,
-        title: 'FISCAAL'
+        title: 'Fiscaal'
       },
       {
         id: 'pvrpv',
         layer: 'parkeervakken_reservering',
         selectable: true,
         title: 'Parkeerverbod'
-      },
-      {
-        id: 'pvrts',
-        layer: 'parkeervakken_reservering',
-        selectable: true,
-        title: 'Taxistandplaats'
       },
       {
         id: 'pvrga',
@@ -894,12 +987,6 @@ export default [
         layer: 'parkeervakken_reservering',
         selectable: true,
         title: 'Gehandicaptenplaats kenteken'
-      },
-      {
-        id: 'pvrll',
-        layer: 'parkeervakken_reservering',
-        selectable: true,
-        title: 'Laden lossen'
       },
       {
         id: 'pvrsv',
@@ -918,17 +1005,11 @@ export default [
         layer: 'parkeervakken_reservering',
         selectable: true,
         title: 'Blauwe zone'
-      },
-      {
-        id: 'pvrpr',
-        layer: 'parkeervakken_reservering',
-        selectable: true,
-        title: 'Park & Ride'
       }
     ],
     maxZoom: 16,
     minZoom: 11,
-    title: 'Parkeervakken - Gereserveerd',
+    title: 'Parkeervakken - Gereserveerd (overige)',
     url: '/maps/parkeervakken?version=1.3.0&service=WMS'
   },
   {
@@ -940,7 +1021,7 @@ export default [
         notClickable: true,
         layer: 'busbaan_geen_taxi',
         selectable: true,
-        title: 'Taxi busbaanontheffing'
+        title: 'Taxi busbaanverbod'
       },
       {
         id: 'tar',
@@ -949,7 +1030,16 @@ export default [
         layer: 'taxiroutes',
         selectable: true,
         title: 'Taxi hoofdroute'
-      },
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Routes - Taxi',
+    url: '/maps/hoofdroutes?version=1.3.0&service=WMS'
+  },
+  {
+    category: 'Verkeer en infrastructuur',
+    legendItems: [
       {
         id: 'vrr',
         imageRule: 'Vrachtroutes',
@@ -960,8 +1050,8 @@ export default [
       }
     ],
     maxZoom: 16,
-    minZoom: 11,
-    title: 'Routes - Taxi en vrachtauto',
+    minZoom: 8,
+    title: 'Routes - Vrachtauto',
     url: '/maps/hoofdroutes?version=1.3.0&service=WMS'
   },
   {

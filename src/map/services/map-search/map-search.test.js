@@ -24,6 +24,83 @@ describe('mapSearch service', () => {
     };
   });
 
+  describe('search action', () => {
+    it('should return results from search for bommen', async () => {
+      getByUrl.mockReturnValue(Promise.resolve({
+        features: [
+          {
+            properties: {
+              type: 'bommenkaart/verdachtgebied' // not in map-search
+            }
+          }
+        ]
+      }));
+
+      const data = await search({ latitude: 1, longitude: 0 }, {
+        authenticated: false,
+        accessToken: '',
+        scopes: [],
+        name: '',
+        error: false
+      });
+
+      expect(data.results).toEqual([{
+        categoryLabel: 'Explosief',
+        results: Array(8).fill({
+          categoryLabel: 'Explosief',
+          label: undefined,
+          parent: undefined,
+          statusLabel: 'verdacht gebied',
+          type: 'bommenkaart/verdachtgebied',
+          uri: undefined
+        }),
+        subCategories: [],
+        type: 'bommenkaart/verdachtgebied'
+      }]);
+    });
+
+    it('should return results and ignore the ignore the failing calls (http 500 errors)', async () => {
+      getByUrl.mockImplementation((url) => {
+        if (url.indexOf('/nap/') > 0) {
+          return Promise.reject();
+        }
+        return (
+          Promise.resolve({
+            features: [
+              {
+                properties: {
+                  type: 'bommenkaart/verdachtgebied' // not in map-search
+                }
+              }
+            ]
+          })
+        );
+      });
+
+      const data = await search({ latitude: 1, longitude: 0 }, {
+        authenticated: false,
+        accessToken: '',
+        scopes: [],
+        name: '',
+        error: false
+      });
+
+      expect(data.results).toEqual([{
+        categoryLabel: 'Explosief',
+        results: Array(7).fill({
+          categoryLabel: 'Explosief',
+          label: undefined,
+          parent: undefined,
+          statusLabel: 'verdacht gebied',
+          type: 'bommenkaart/verdachtgebied',
+          uri: undefined
+        }),
+        subCategories: [],
+        type: 'bommenkaart/verdachtgebied'
+      }]);
+    });
+  });
+
   describe('fetchRelatedForUser', async () => {
     it('should return just the base features when no user related features found', () => {
       const features = [
@@ -38,7 +115,7 @@ describe('mapSearch service', () => {
     });
 
     it('should return just the base features when user related features found but user is not authorized', async () => {
-      user.scopes = ['CAT/W'];
+      user.scopes = ['CAT/W', 'CAT/R'];
       const features = [
         {
           properties: {
@@ -76,9 +153,9 @@ describe('mapSearch service', () => {
         dataset: 'bag'
       };
       address.fetchHoofdadresByStandplaatsId
-             .mockImplementation(() => Promise.resolve({ id: 2000 }));
+        .mockImplementation(() => Promise.resolve({ id: 2000 }));
       vestiging.fetchByAddressId
-               .mockImplementation(() => Promise.resolve([vestigingResult]));
+        .mockImplementation(() => Promise.resolve([vestigingResult]));
       const results = await fetchRelatedForUser(user)({ features });
       expect(results).toEqual([...features, {
         ...vestigingResult,
@@ -110,9 +187,9 @@ describe('mapSearch service', () => {
         dataset: 'bag'
       };
       address.fetchHoofdadresByLigplaatsId
-             .mockImplementation(() => Promise.resolve({ id: 1000 }));
+        .mockImplementation(() => Promise.resolve({ id: 1000 }));
       vestiging.fetchByAddressId
-               .mockImplementation(() => Promise.resolve([vestigingResult]));
+        .mockImplementation(() => Promise.resolve([vestigingResult]));
       const results = await fetchRelatedForUser(user)({ features });
       expect(results).toEqual([...features, {
         ...vestigingResult,
@@ -124,80 +201,5 @@ describe('mapSearch service', () => {
         }
       }]);
     });
-  });
-
-  it('should return results from search ', async () => {
-    getByUrl.mockReturnValue(Promise.resolve({
-      features: [
-        {
-          properties: {
-            type: 'bommenkaart/verdachtgebied' // not in map-search
-          }
-        }
-      ]
-    }));
-
-    const data = await search({ latitude: 1, longitude: 0 }, {
-      authenticated: false,
-      accessToken: '',
-      scopes: [],
-      name: '',
-      error: false
-    });
-
-    expect(data.results).toEqual([{
-      categoryLabel: 'Explosief',
-      results: Array(7).fill({
-        categoryLabel: 'Explosief',
-        label: undefined,
-        parent: undefined,
-        statusLabel: 'verdacht gebied',
-        type: 'bommenkaart/verdachtgebied',
-        uri: undefined
-      }),
-      subCategories: [],
-      type: 'bommenkaart/verdachtgebied'
-    }]);
-  });
-
-  it('should return results and ignore the ignore the failing calls (http 500 errors)', async () => {
-    getByUrl.mockImplementation((url) => {
-      if (url.indexOf('/nap/') > 0) {
-        return Promise.reject();
-      }
-      return (
-        Promise.resolve({
-          features: [
-            {
-              properties: {
-                type: 'bommenkaart/verdachtgebied' // not in map-search
-              }
-            }
-          ]
-        })
-      );
-    });
-
-    const data = await search({ latitude: 1, longitude: 0 }, {
-      authenticated: false,
-      accessToken: '',
-      scopes: [],
-      name: '',
-      error: false
-    });
-
-    expect(data.results).toEqual([{
-      categoryLabel: 'Explosief',
-      results: Array(6).fill({
-        categoryLabel: 'Explosief',
-        label: undefined,
-        parent: undefined,
-        statusLabel: 'verdacht gebied',
-        type: 'bommenkaart/verdachtgebied',
-        uri: undefined
-      }),
-      subCategories: [],
-      type: 'bommenkaart/verdachtgebied'
-    }]);
   });
 });

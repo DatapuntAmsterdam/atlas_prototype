@@ -1,3 +1,6 @@
+$icon-dimension: 24px;
+$filter-padding: 4px;
+
 .c-data-selection-active-filters {
   margin-top: $base-whitespace * 2;
   margin-bottom: $base-whitespace * 1.5;
@@ -8,7 +11,8 @@
     position: relative;
     margin-right: $base-whitespace / 2;
     margin-bottom: $base-whitespace / 2;
-    padding-right: $base-whitespace + $button-size;
+    padding: $filter-padding 8px;
+    padding-right: $base-whitespace + $icon-dimension + $filter-padding * 2;
     padding-left: $base-whitespace;
     background-color: $secondary-gray10;
     color: $primary-dark;
@@ -16,11 +20,11 @@
 }
 
 .c-data-selection-active-filters--remove-filter {
-  @include icon-button("close", $secondary-gray60, $primary-dark);
+  @include icon-button("icon-clear", $primary-dark, $primary-dark);
 
   position: absolute;
-  top: 0;
-  right: 0;
+  top: $filter-padding;
+  right: $filter-padding;
 
   &:hover,
   &:focus {

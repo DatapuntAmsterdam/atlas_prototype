@@ -5,18 +5,20 @@ import App from './App';
 import configureStore from '../store/store';
 import './angularModules';
 import routes from './routes';
-import resolveLegacyRoutes from './legacy-routes';
+import resolveRedirects from './redirects';
 
 const store = configureStore(routes);
 
-// eslint-disable-next-line no-undef,no-console
-console.log(`CityData: version: ${VERSION}, build: ${__BUILD_ID__}`);
+const hasToRedirect = resolveRedirects();
 
-resolveLegacyRoutes();
+if (!hasToRedirect) {
+  // eslint-disable-next-line no-undef,no-console
+  console.log(`CityData: version: ${VERSION}, build: ${__BUILD_ID__}`);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+}

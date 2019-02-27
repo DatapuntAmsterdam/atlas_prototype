@@ -56,6 +56,8 @@ describe('data search module', () => {
 
     // check that the large right column is visible and shows the correct data
     cy.wait('@getVerblijfsobject');
+    // Rendering after this request takes some time on server
+    cy.wait(500);
     cy.get('.qa-dashboard__column--right').should('exist').and('be.visible');
     cy.get('.qa-dashboard__column--right').get('.qa-title span')
       .contains('Ad Windighof 2')

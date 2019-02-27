@@ -14,6 +14,7 @@ class NonTiledLayer extends TileLayer {
   }
 
   updateLeafletElement(fromProps, toProps) {
+    super.updateLeafletElement(fromProps, toProps);
     if (toProps.params !== fromProps.params) {
       this.leafletElement.setParams(toProps.params);
     }

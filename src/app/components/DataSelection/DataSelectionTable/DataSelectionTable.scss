@@ -3,7 +3,6 @@
 .c-ds-table {
   $self: &;
   display: inline-table;
-  margin-bottom: $base-whitespace;
   width: 100%;
 
   &__head {
@@ -27,6 +26,12 @@
       &:hover,
       &:focus {
         background-color: $secondary-gray10;
+      }
+
+      &:last-child {
+        #{$self}__cell {
+          border-bottom: none;
+        }
       }
     }
   }

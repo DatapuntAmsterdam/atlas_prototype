@@ -57,12 +57,14 @@ export function formatCategory(slug, endpointSearchResults) {
   };
 }
 
-export function formatCategories(allSearchResults, user) {
+export function formatCategories(allSearchResults, user, categorySlug) {
   return allSearchResults
     .map((endpointSearchResults, index) =>
       formatCategory(SEARCH_CONFIG.QUERY_ENDPOINTS.filter(
-        (endpoint) => (
-          !endpoint.authScope || user.scopes.includes(endpoint.authScope))
+        (endpoint) => ((categorySlug) ?
+            endpoint.slug === categorySlug :
+            (!endpoint.authScope || user.scopes.includes(endpoint.authScope))
+        )
         )[index].slug, endpointSearchResults
       )
     );

@@ -1,6 +1,7 @@
 import { getByUrl } from '../../../shared/services/api/api';
 import SHARED_CONFIG from '../../../shared/services/shared-config/shared-config';
 import MAP_CONFIG from '../map-config';
+import { getFeaturesFromResult } from '../map-search/map-search';
 
 const generateParams = (layer, location, zoom) => ({
   lat: location.latitude,
@@ -27,6 +28,7 @@ const retrieveLayers = (detailItems, detailIsShape) => (
     ...item.properties
   })));
 
+
 export default async function fetchNearestDetail(location, layers, zoom) {
   const results = sortResults(
     (
@@ -34,11 +36,12 @@ export default async function fetchNearestDetail(location, layers, zoom) {
         layers.map(async (layer) => {
           const params = generateParams(layer, location, zoom);
           const result = await getByUrl(SHARED_CONFIG.API_ROOT + layer.detailUrl, params);
-          return retrieveLayers(result.features, layer.detailIsShape);
+          const features = getFeaturesFromResult(layer.detailUrl, result);
+          return retrieveLayers(features, layer.detailIsShape);
         })
       )
     )
-    .reduce(/* istanbul ignore next */ (a, b) => ([...a, ...b]))
+      .reduce(/* istanbul ignore next */(a, b) => ([...a, ...b]))
   );
   return results[0] ? results[0] : '';
 }

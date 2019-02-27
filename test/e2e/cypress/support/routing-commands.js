@@ -1,11 +1,13 @@
 Cypress.Commands.add('defineGeoSearchRoutes', () => {
   cy.route('/geosearch/nap/*').as('getGeoSearchNap');
-  cy.route('/geosearch/atlas/*').as('getGeoSearchAtlas');
+  cy.route('/geosearch/bag/*').as('getGeoSearchBag');
   cy.route('/geosearch/munitie/*').as('getGeoSearchMunitie');
   cy.route('/geosearch/bominslag/*').as('getGeoSearchBominslag');
   cy.route('/geosearch/monumenten/*').as('getGeoSearchMonumenten');
   cy.route('/geosearch/grondexploitatie/*').as('getGeoSearchGrondexploitatie');
   cy.route('/geosearch/biz/*').as('getGeoSearchBiz');
+  cy.route('/parkeervakken/geosearch/*').as('getGeoSearchParkeervak');
+  cy.route('/geosearch/oplaadpunten/*').as('getGeoSearchOplaadpunten');
 });
 
 Cypress.Commands.add('defineSearchRoutes', () => {
@@ -23,12 +25,14 @@ Cypress.Commands.add('defineSearchRoutes', () => {
 
 Cypress.Commands.add('waitForGeoSearch', () => {
   cy.wait('@getGeoSearchNap');
-  cy.wait('@getGeoSearchAtlas');
+  cy.wait('@getGeoSearchBag');
   cy.wait('@getGeoSearchMunitie');
   cy.wait('@getGeoSearchBominslag');
   cy.wait('@getGeoSearchMonumenten');
   cy.wait('@getGeoSearchGrondexploitatie');
   cy.wait('@getGeoSearchBiz');
+  cy.wait('@getGeoSearchParkeervak');
+  cy.wait('@getGeoSearchOplaadpunten');
 });
 
 Cypress.Commands.add('waitForSearch', (type = 'EMPLOYEE_PLUS') => {

@@ -7,6 +7,7 @@ import {
     DATASETS, VIEWS_TO_PARAMS
 } from '../../../../src/shared/ducks/data-selection/constants';
 import { VIEW_MODE } from '../../../../src/shared/ducks/ui/ui';
+import { dcatdScopes } from '../../../../src/shared/services/auth/auth';
 
 (function () {
     'use strict';
@@ -54,7 +55,7 @@ import { VIEW_MODE } from '../../../../src/shared/ducks/ui/ui';
                 (!exportAuthScope || vm.user.scopes.includes(exportAuthScope));
             vm.showTabs = isListView;
 
-            vm.canEditDataset = vm.user.scopes.includes('CAT/W');
+            vm.canEditDataset = vm.user.scopes.some((scope) => dcatdScopes.includes(scope));
             vm.showNumberOfRecords = vm.numberOfRecords > 0 &&
                 DATA_SELECTION_CONFIG.datasets[vm.dataset].SHOW_NUMBER_OF_RECORDS;
             vm.datasetTitle = DATA_SELECTION_CONFIG.datasets[vm.dataset].TITLE;

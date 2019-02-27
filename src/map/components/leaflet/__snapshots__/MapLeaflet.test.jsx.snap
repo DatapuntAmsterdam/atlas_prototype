@@ -188,7 +188,7 @@ exports[`MapLeaflet component should render brkMarkers 1`] = `
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -208,6 +208,8 @@ exports[`MapLeaflet component should render brkMarkers 1`] = `
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -267,7 +269,7 @@ exports[`MapLeaflet component should render brkMarkers 1`] = `
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -462,7 +464,7 @@ exports[`MapLeaflet component should render clusters 1`] = `
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -482,6 +484,8 @@ exports[`MapLeaflet component should render clusters 1`] = `
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -572,7 +576,7 @@ exports[`MapLeaflet component should render clusters 1`] = `
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -767,7 +771,7 @@ exports[`MapLeaflet component should render clusters 2`] = `
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={9}
     zoomControl={false}
@@ -787,6 +791,8 @@ exports[`MapLeaflet component should render clusters 2`] = `
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -877,7 +883,7 @@ exports[`MapLeaflet component should render clusters 2`] = `
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -1072,7 +1078,7 @@ exports[`MapLeaflet component should render map with base layer and update base 
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -1092,6 +1098,8 @@ exports[`MapLeaflet component should render map with base layer and update base 
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -1113,7 +1121,7 @@ exports[`MapLeaflet component should render map with base layer and update base 
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -1308,7 +1316,7 @@ exports[`MapLeaflet component should render map with base layer and update base 
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -1328,6 +1336,8 @@ exports[`MapLeaflet component should render map with base layer and update base 
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -1349,7 +1359,7 @@ exports[`MapLeaflet component should render map with base layer and update base 
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -1544,7 +1554,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 1`] 
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -1564,6 +1574,8 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 1`] 
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -1585,7 +1597,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 1`] 
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -1780,7 +1792,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 2`] 
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -1800,6 +1812,8 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 2`] 
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -1820,6 +1834,8 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 2`] 
           "biz_polygons",
         ]
       }
+      onLoad={[Function]}
+      onLoading={[Function]}
       opacity={100}
       url="https://acc.map.data.amsterdam.nl/maps/biz"
     />
@@ -1962,7 +1978,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 2`] 
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -2157,7 +2173,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 3`] 
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -2177,6 +2193,8 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 3`] 
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -2198,6 +2216,8 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 3`] 
           "bouwblok_label",
         ]
       }
+      onLoad={[Function]}
+      onLoading={[Function]}
       opacity={100}
       url="https://acc.map.data.amsterdam.nl/maps/gebieden?service=wms"
     />
@@ -2304,7 +2324,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 3`] 
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -2499,7 +2519,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -2519,6 +2539,8 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -2540,7 +2562,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -2735,7 +2757,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -2755,6 +2777,8 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -2775,6 +2799,8 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
           "biz_polygons",
         ]
       }
+      onLoad={[Function]}
+      onLoading={[Function]}
       opacity={0}
       url="https://acc.map.data.amsterdam.nl/maps/biz"
     />
@@ -2802,7 +2828,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -2997,7 +3023,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -3017,6 +3043,8 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -3037,6 +3065,8 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
           "biz_polygons",
         ]
       }
+      onLoad={[Function]}
+      onLoading={[Function]}
       opacity={0}
       url="https://acc.map.data.amsterdam.nl/maps/biz"
     />
@@ -3065,7 +3095,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -3260,7 +3290,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -3280,6 +3310,8 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -3301,6 +3333,8 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
           "bouwblok_label",
         ]
       }
+      onLoad={[Function]}
+      onLoading={[Function]}
       opacity={100}
       url="https://acc.map.data.amsterdam.nl/maps/gebieden?service=wms"
     />
@@ -3403,7 +3437,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -3598,7 +3632,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -3618,6 +3652,8 @@ exports[`MapLeaflet component should render map with without layers and add/remo
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -3639,7 +3675,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -3834,7 +3870,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -3854,6 +3890,8 @@ exports[`MapLeaflet component should render map with without layers and add/remo
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -3874,6 +3912,8 @@ exports[`MapLeaflet component should render map with without layers and add/remo
           "biz_polygons",
         ]
       }
+      onLoad={[Function]}
+      onLoading={[Function]}
       opacity={100}
       url="https://acc.map.data.amsterdam.nl/maps/biz"
     />
@@ -3887,7 +3927,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -4082,7 +4122,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -4102,6 +4142,8 @@ exports[`MapLeaflet component should render map with without layers and add/remo
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -4123,7 +4165,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -4318,7 +4360,7 @@ exports[`MapLeaflet component should render markers 1`] = `
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={11}
     zoomControl={false}
@@ -4338,6 +4380,8 @@ exports[`MapLeaflet component should render markers 1`] = `
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -4791,7 +4835,7 @@ exports[`MapLeaflet component should render markers 1`] = `
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>
@@ -4986,7 +5030,7 @@ exports[`MapLeaflet component should render markers 2`] = `
     maxBoundsViscosity={1}
     onClick={[Function]}
     onDragEnd={[Function]}
-    onMoveEnd={[Function]}
+    onLayerRemove={[Function]}
     onZoomEnd={[Function]}
     zoom={9}
     zoomControl={false}
@@ -5006,6 +5050,8 @@ exports[`MapLeaflet component should render markers 2`] = `
       }
       maxZoom={16}
       minZoom={8}
+      onLoad={[Function]}
+      onLoading={[Function]}
       subdomains={
         Array [
           "acc.t1",
@@ -5459,7 +5505,7 @@ exports[`MapLeaflet component should render markers 2`] = `
       zoomInTitle="Inzoomen"
       zoomOutTitle="Uitzoomen"
     />
-    <MapBusyIndicator
+    <LoadingIndicator
       loading={false}
     />
   </Map>

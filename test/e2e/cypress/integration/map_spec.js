@@ -37,6 +37,7 @@ describe('map module', () => {
       cy.route('/brk/object-expand/?verblijfsobjecten__id=*').as('getObjectExpand');
       cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen');
       cy.route('/monumenten/monumenten/*').as('getMonument');
+      cy.route('/parkeerplekken/parkeerplekken*').as('getParkeerplekken');
 
       // Use regular expression to match spaces
       cy.route(/\/typeahead\?q=dam 1/).as('getTypeaheadResults');
@@ -171,7 +172,6 @@ describe('map module', () => {
 
       cy.get(columnRight).should('exist').and('not.be.visible');
       cy.get('.map-preview-panel.map-preview-panel--visible')
-        //.get('img.map-detail-result__header-pano')
         .should('exist').and('be.visible');
       cy.checkPreviewPanel(['Nieuwmarkt 25', '10581111']);
     });

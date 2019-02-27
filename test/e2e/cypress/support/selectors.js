@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const DATA_SELECTION_TABLE = {
   table: '.c-ds-table',
   head: '.c-ds-table__head',

@@ -118,6 +118,20 @@ exports[`MapDetailResult should render bedrijfsinvesteringszone 1`] = `
 />
 `;
 
+exports[`MapDetailResult should render de parkeervak 1`] = `
+<MapDetailParkeervak
+  item={
+    Object {
+      "endpointType": "parkeervakken/parkeervakken/",
+      "label": "value",
+    }
+  }
+  onMaximize={[MockFunction]}
+  onPanoPreviewClick={[MockFunction]}
+  panoUrl="panoUrl"
+/>
+`;
+
 exports[`MapDetailResult should render explosieven gevrijwaard gebied 1`] = `
 <MapDetailExplosievenGevrijwaardGebied
   gevrijwaardGebied={
@@ -338,6 +352,20 @@ exports[`MapDetailResult should render nap peilmerk 1`] = `
       "label": "value",
     }
   }
+/>
+`;
+
+exports[`MapDetailResult should render oplaadpuntent 1`] = `
+<MapDetailOplaadpunt
+  onMaximize={[MockFunction]}
+  onPanoPreviewClick={[MockFunction]}
+  oplaadpunt={
+    Object {
+      "endpointType": "vsd/oplaadpunten/",
+      "label": "value",
+    }
+  }
+  panoUrl="panoUrl"
 />
 `;
 

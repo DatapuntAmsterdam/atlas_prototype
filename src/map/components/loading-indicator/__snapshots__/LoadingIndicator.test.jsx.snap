@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingIndicator should render everything 1`] = `
+<div
+  className="qa-loading-indicator "
+>
+  <div
+    className="c-loading-indicator c-loading-indicator--box"
+  >
+    <img
+      alt=""
+      className="c-loading-indicator__icon"
+      src="/assets/images/spinner.svg"
+    />
+    <span
+      className="c-loading-indicator__text"
+    >
+      Bezig met laden...
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingIndicator should render with classname is-loadingf 1`] = `
+<div
+  className="qa-loading-indicator is-loading"
+>
+  <div
+    className="c-loading-indicator c-loading-indicator--box"
+  >
+    <img
+      alt=""
+      className="c-loading-indicator__icon"
+      src="/assets/images/spinner.svg"
+    />
+    <span
+      className="c-loading-indicator__text"
+    >
+      Bezig met laden...
+    </span>
+  </div>
+</div>
+`;

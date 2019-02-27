@@ -80,7 +80,7 @@ const DataSelection = ({
           : ''
         }
 
-        {(!isLoading && !authError) && (
+        {(!isLoading && !authError && !authScopeError) && (
           <div className="u-grid qa-data-grid">
             <div className="u-row">
               {showFilters && (
@@ -122,7 +122,7 @@ const DataSelection = ({
                     dependencies={['atlas']}
                     bindings={{
                       isPanelVisible: true,
-                      canClose: true
+                      canClose: false
                     }}
                     interpolateBindings={{
                       type: 'warning'

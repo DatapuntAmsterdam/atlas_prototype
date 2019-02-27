@@ -295,6 +295,13 @@ const GLOSSARY = {
         'openbare_ruimte_code'
       ]
     },
+    OPLAADPUNTEN: {
+      label_singular: 'Oplaadpunt',
+      label_plural: 'Oplaadpunten',
+      description: null,
+      url: null,
+      meta: []
+    },
     PAND: {
       label_singular: 'Pand',
       label_plural: 'Panden',
@@ -325,6 +332,13 @@ const GLOSSARY = {
         'landelijk_id',
         'sleutelverzendend'
       ]
+    },
+    PARKEERVAKKEN: {
+      label_singular: 'Parkeervak',
+      label_plural: 'Parkeervakken',
+      description: 'Een parkeerplaats of parkeervak is een ruimte die is bestemd voor het parkeren van één voertuig.',
+      url: null,
+      meta: []
     },
     ROLLAAG: {
       label_singular: 'Rollaag',

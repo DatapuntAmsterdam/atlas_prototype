@@ -209,7 +209,6 @@ exports[`LeafletContainer LeafletContainer snapshot should render correct 1`] = 
   markers={Array []}
   onClick={[Function]}
   onDragEnd={[Function]}
-  onMoveEnd={[Function]}
   onResizeEnd={[Function]}
   onZoomEnd={[Function]}
   rdGeoJsons={Array []}
@@ -540,7 +539,6 @@ exports[`LeafletContainer LeafletContainer snapshot should render different base
   }
   onClick={[Function]}
   onDragEnd={[Function]}
-  onMoveEnd={[Function]}
   onResizeEnd={[Function]}
   onZoomEnd={[Function]}
   rdGeoJsons={

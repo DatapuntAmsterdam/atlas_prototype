@@ -1,16 +1,17 @@
 $embed-header-height: 211px;
 $embed-header-padding: 46px;
+$embed-header-padding-icon: 4px;
 
 .c-embed-header__title {
   @include font-size($xl-header-font);
 }
 
 .c-embed-header__close {
-  @include icon-button("close", $secondary-gray60, $primary-dark);
+  @include icon-button("icon-clear", $primary-dark, $primary-dark);
 
   position: absolute;
-  top: -($embed-header-padding - $base-whitespace);
-  right: -($embed-header-padding - $base-whitespace);
+  top: -($embed-header-padding - $embed-header-padding-icon);
+  right: -($embed-header-padding - $embed-header-padding-icon);
   background-color: $primary-light;
 
   &:hover,

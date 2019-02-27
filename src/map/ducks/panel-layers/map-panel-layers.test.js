@@ -76,7 +76,7 @@ describe('selectors', () => {
       legendItems: [
         {
           selectable: false,
-          title: 'FISCAAL'
+          title: 'Fiscaal'
         }
       ],
       maxZoom: 16,
