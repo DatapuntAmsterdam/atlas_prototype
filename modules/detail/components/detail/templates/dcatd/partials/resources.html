@@ -18,8 +18,8 @@
                                     <span ng-if="resource['ams:distributionType'] === 'file'"
                                           class="c-data-selection-file-type
                                                  c-data-selection-file-type__name
-                                                 c-data-selection-file-type__format-{{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes | kebabcase}}">
-                                                 {{resource['dct:format'] | optionLabel: vm.catalogFilters.formatTypes}}</span>
+                                                 c-data-selection-file-type__format-{{resource['dcat:mediaType'] | optionLabel: vm.catalogFilters.formatTypes | kebabcase}}">
+                                                 {{resource['dcat:mediaType'] | optionLabel: vm.catalogFilters.formatTypes}}</span>
                                     <span ng-if="resource['ams:distributionType'] === 'api'"
                                           class="c-data-selection-file-type
                                                  c-data-selection-file-type__name
