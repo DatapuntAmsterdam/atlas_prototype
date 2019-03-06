@@ -1944,6 +1944,45 @@ export default [
     url: '/maps/biz?version=1.3.0&service=WMS'
   },
   {
+    category: 'Economie en haven',
+    id: 'winkgeb',
+    layers: ['winkgeb'],
+    legendItems: [
+      {
+        selectable: false,
+        title: 'Winkelgebieden K'
+      },
+      {
+        selectable: false,
+        title: 'Winkelgebieden SC'
+      },
+      {
+        selectable: false,
+        title: 'Winkelgebieden WG'
+      },
+      {
+        selectable: false,
+        title: 'Winkelgebieden WK'
+      },
+      {
+        selectable: false,
+        title: 'Winkelgebieden BU'
+      },
+      {
+        selectable: false,
+        title: 'Winkelgebieden PDV'
+      },
+      {
+        selectable: false,
+        title: 'Winkelgebieden TR'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Winkelgebieden',
+    url: '/maps/winkgeb?version=1.3.0&service=WMS'
+  },
+  {
     authScope: 'HR/R',
     category: 'Economie en haven',
     id: 'bouw',

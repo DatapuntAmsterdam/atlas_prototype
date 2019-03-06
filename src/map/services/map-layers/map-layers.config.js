@@ -10,6 +10,14 @@ export default [
     detailIsShape: true
   },
   {
+    id: 'winkgeb',
+    url: 'maps/winkgeb',
+    layers: ['winkgeb'],
+    detailUrl: 'geosearch/winkgeb/', // Geosearch URL
+    detailItem: 'winkgeb', // Not needed for this API endpoint, but needed to trigger nearest detail on click...
+    detailIsShape: true
+  },
+  {
     id: 'hvo',
     authScope: 'HR/R',
     url: 'maps/handelsregister',

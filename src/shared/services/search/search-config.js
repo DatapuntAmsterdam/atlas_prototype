@@ -93,6 +93,7 @@ export default {
     },
     { uri: 'geosearch/grondexploitatie/' },
     { uri: 'geosearch/biz/' },
+    { uri: 'geosearch/winkgeb/' },
     { uri: 'parkeervakken/geosearch/' },
     { uri: 'geosearch/oplaadpunten/' }
   ],
@@ -193,6 +194,11 @@ export default {
       label_singular: 'Bedrijfsinvesteringszone',
       label_plural: 'Bedrijfsinvesteringszones',
       features: ['vsd/biz']
+    }, {
+      slug: 'winkelgebieden',
+      label_singular: 'Winkelgebied',
+      label_plural: 'Winkelgebieden',
+      features: ['vsd/winkgeb']
     }, {
       slug: 'parkeervakken',
       label_singular: 'Parkeervak',

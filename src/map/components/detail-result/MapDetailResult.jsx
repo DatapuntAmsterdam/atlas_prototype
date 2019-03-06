@@ -25,8 +25,9 @@ import MapDetailMeetbout from './MapDetailMeetbout';
 import MapDetailMonument from './MapDetailMonument';
 import MapDetailNapPeilmerk from './MapDetailNapPeilmerk';
 import MapDetailOplaadpunt from './MapDetailOplaadpunt';
-import MapDetailVestiging from './MapDetailVestiging';
 import MapDetailParkeervak from './MapDetailParkeervak';
+import MapDetailVestiging from './MapDetailVestiging';
+import MapDetailWinkelgebied from './MapDetailWinkelgebied';
 
 const MapDetailResult = ({ panoUrl, result, onMaximize, onPanoPreviewClick }) => {
   switch (result.endpointType) {
@@ -253,6 +254,15 @@ const MapDetailResult = ({ panoUrl, result, onMaximize, onPanoPreviewClick }) =>
           onPanoPreviewClick={onPanoPreviewClick}
           panoUrl={panoUrl}
           vestiging={result}
+        />
+      );
+    case endpointTypes.winkelgebied:
+      return (
+        <MapDetailWinkelgebied
+          onMaximize={onMaximize}
+          onPanoPreviewClick={onPanoPreviewClick}
+          panoUrl={panoUrl}
+          winkelgebied={result}
         />
       );
     default:

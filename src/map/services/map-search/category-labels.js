@@ -66,6 +66,10 @@ const categoryLabels = {
   vestiging: {
     singular: 'Vestiging',
     plural: 'Vestigingen'
+  },
+  winkelgebied: {
+    singular: ' Winkelgebied',
+    plural: 'Winkelgebieden'
   }
 };
 

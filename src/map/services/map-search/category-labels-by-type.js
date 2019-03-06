@@ -28,6 +28,7 @@ const categoryLabelsByType = {
   vestiging: categoryLabels.vestiging,
   'vsd/biz': categoryLabels.bedrijfsinvesteringszone,
   'vsd/oplaadpunten': categoryLabels.oplaadpunten,
+  'vsd/winkgeb': categoryLabels.winkelgebieden,
   'wkpb/beperking': categoryLabels.gemeentelijkeBeperking
 };
 
