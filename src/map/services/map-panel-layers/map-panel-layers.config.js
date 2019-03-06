@@ -1127,6 +1127,22 @@ export default [
     url: '/maps/reistijdenauto?version=1.3.0&service=WMS'
   },
   {
+    category: 'Verkeer en infrastructuur',
+    legendItems: [
+      {
+        id: 'vezips',
+        notClickable: true,
+        layer: 'vezips',
+        selectable: false,
+        title: 'Verzinkbare palen'
+      }
+    ],
+    maxZoom: 16,
+    minZoom: 8,
+    title: 'Verzinkbare palen',
+    url: '/maps/vezips?version=1.3.0&service=WMS'
+  },
+  {
     category: 'Openbare orde en veiligheid',
     legendItems: [
       {
