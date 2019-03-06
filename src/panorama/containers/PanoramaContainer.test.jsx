@@ -11,10 +11,10 @@ import {
   getPanoramaLocation,
   getPanoramaTags
 } from '../ducks/selectors';
-import { getMapOverlays } from '../../map/ducks/map/map-selectors';
+import { getMapOverlays } from '../../map/ducks/map/selectors';
 import { setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 
-jest.mock('../../map/ducks/map/map-selectors');
+jest.mock('../../map/ducks/map/selectors');
 jest.mock('../services/marzipano/marzipano');
 jest.mock('../ducks/selectors');
 jest.mock('../../shared/ducks/ui/ui');

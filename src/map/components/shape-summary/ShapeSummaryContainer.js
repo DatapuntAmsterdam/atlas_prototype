@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getShapeDistanceTxt } from '../../ducks/map/map-selectors';
+import { getShapeDistanceTxt } from '../../ducks/map/selectors';
 import ShapeSummary from './ShapeSummary';
 import { cancelDrawing } from '../../../shared/ducks/data-selection/actions';
 

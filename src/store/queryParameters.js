@@ -5,14 +5,14 @@ import { getDataSelectionPage, getGeometryFilter } from '../shared/ducks/data-se
 import { DATA_SELECTION } from '../shared/ducks/data-selection/reducer';
 import { DATASETS, getPage } from '../shared/ducks/datasets/datasets';
 import { DATA, initialState as datasetsDataInitialState } from '../shared/ducks/datasets/data/data';
-import { initialState as mapInitialState, MAP } from '../map/ducks/map/map';
+import { initialState as mapInitialState, REDUCER_KEY as MAP } from '../map/ducks/map/constants';
 import {
   getActiveBaseLayer,
   getCenter,
   getMapOverlays,
   getMapZoom,
   isMapPanelActive
-} from '../map/ducks/map/map-selectors';
+} from '../map/ducks/map/selectors';
 import { initialState as panoramaInitialState } from '../panorama/ducks/constants';
 import { PANORAMA } from '../panorama/ducks/reducer';
 import {

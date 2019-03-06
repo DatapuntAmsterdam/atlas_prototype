@@ -479,6 +479,24 @@ describe('MapDetailResult', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render winkelgebieden', () => {
+    const panoUrl = 'panoUrl';
+    const result = {
+      endpointType: 'vsd/winkgeb/',
+      label: 'value'
+    };
+    const clickHandler = jest.fn();
+    const wrapper = shallow(
+      <MapDetailResult
+        panoUrl={panoUrl}
+        onMaximize={clickHandler}
+        onPanoPreviewClick={clickHandler}
+        result={result}
+      />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should not render a non existent component', () => {
     const panoUrl = 'panoUrl';
     const result = {

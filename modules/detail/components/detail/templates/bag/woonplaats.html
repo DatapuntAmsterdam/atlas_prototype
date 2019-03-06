@@ -5,12 +5,15 @@
         definition="WOONPLAATS"
         meta-data="vm.apiData">
       </dp-glossary-header>
-
+        <dp-panel is-panel-visible="true" can-close="true" type="attention" class-name="qa-disabled-message c-disabled-message">
+            Enkele kenmerken vervallen of worden gewijzigd. Deze zijn hieronder rood gemarkeerd. <br />
+            Lees verder op <a class="c-link" target="_blank" href="https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse/" target="_blank" rel="noopener">stelselpedia</a>.
+        </dp-panel>
       <dl class="c-key-value-list">
-          <dt>Naam 17-posities (post)</dt>
-          <dd>{{ vm.apiData.results.naam_17_posities}}</dd>
           <dt>Gemeente</dt>
           <dd>{{ vm.apiData.results.gemeente._display }}</dd>
+          <dt><i class="c-key-value-list--attention"></i>Naam 17-posities (post)</dt>
+          <dd>{{ vm.apiData.results.naam_17_posities}}</dd>
       </dl>
     </div>
 

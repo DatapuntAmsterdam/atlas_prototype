@@ -382,3 +382,5 @@ exports[`MapDetailResult should render vestiging 1`] = `
   }
 />
 `;
+
+exports[`MapDetailResult should render winkelgebieden 1`] = `""`;

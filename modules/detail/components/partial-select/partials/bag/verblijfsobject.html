@@ -4,6 +4,10 @@
         class="c-detail__block qa-verblijfsobject"
     >
         <dp-glossary-header definition="VERBLIJFSOBJECT" meta-data="apiData" />
+        <dp-panel is-panel-visible="true" can-close="true" type="attention" class-name="qa-disabled-message c-disabled-message">
+            Enkele kenmerken vervallen of worden gewijzigd. Deze zijn hieronder rood gemarkeerd. <br />
+            Lees verder op <a class="c-link" target="_blank" href="https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-0/" target="_blank" rel="noopener">stelselpedia</a>.
+        </dp-panel>
         <dl class="c-key-value-list">
             <dt>Gebruiksdoel</dt>
             <dd ng-if="!apiData.results.gebruiksdoelen[0]"></dd>
@@ -23,29 +27,29 @@
             <dd ng-if="apiData.results.oppervlakte === 1">onbekend</dd>
             <dt>Aantal kamers</dt>
             <dd>{{ apiData.results.aantal_kamers }}</dd>
-            <dt>Type woonobject</dt>
-            <dd>{{ apiData.results.type_woonobject.omschrijving }}</dd>
-            <dt>Ligging</dt>
-            <dd>{{ apiData.results.ligging.omschrijving }}</dd>
             <dt>Aantal bouwlagen</dt>
             <dd>{{ apiData.results.bouwlagen }}</dd>
             <dt>Verdieping toegang</dt>
             <dd>{{ apiData.results.bouwlaag_toegang }}</dd>
-            <dt>Aantal verhuurbare eenheden</dt>
-            <dd>{{ apiData.results.verhuurbare_eenheden }}</dd>
-            <dt>Eigendomsverhouding</dt>
-            <dd>{{ apiData.results.eigendomsverhouding.omschrijving }}</dd>
-            <dt>Financieringswijze</dt>
-            <dd>{{ apiData.results.financieringswijze.omschrijving }}</dd>
-            <dt>Toegang</dt>
-            <dd>{{ apiData.results.toegang.omschrijving }}</dd>
-            <dt>Indicatie woningvoorraad</dt>
-            <dd>{{ apiData.results.woningvoorraad | yesNo }}</dd>
             <dt>Reden opvoer</dt>
             <dd>{{ apiData.results.reden_opvoer.omschrijving }}</dd>
+            <dt>Eigendomsverhouding</dt>
+            <dd>{{ apiData.results.eigendomsverhouding.omschrijving }}</dd>
+            <dt>Toegang</dt>
+            <dd>{{ apiData.results.toegang.omschrijving }}</dd>
             <dt>Coördinaten</dt>
             <dd>{{ apiData.results.geometrie.coordinates | coordinates: 'RD' }}</dd>
-            <dt>Status coördinaten</dt>
+            <dt><i class="c-key-value-list--attention"></i>Type woonobject</dt>
+            <dd>{{ apiData.results.type_woonobject.omschrijving }}</dd>
+            <dt><i class="c-key-value-list--attention"></i>Ligging</dt>
+            <dd>{{ apiData.results.ligging.omschrijving }}</dd>
+            <dt><i class="c-key-value-list--attention"></i>Aantal verhuurbare eenheden</dt>
+            <dd>{{ apiData.results.verhuurbare_eenheden }}</dd>
+            <dt><i class="c-key-value-list--attention"></i>Financieringswijze</dt>
+            <dd>{{ apiData.results.financieringswijze.omschrijving }}</dd>
+            <dt><i class="c-key-value-list--attention"></i>Indicatie woningvoorraad</dt>
+            <dd>{{ apiData.results.woningvoorraad | yesNo }}</dd>
+            <dt><i class="c-key-value-list--attention"></i>Status coördinaten</dt>
             <dd>{{ apiData.results.status_coordinaat.omschrijving }}</dd>
         </dl>
     </div>

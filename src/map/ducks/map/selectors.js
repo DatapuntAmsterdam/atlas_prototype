@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect';
 
 import { getPanoramaLocation, getPanoramaMarkers } from '../../../panorama/ducks/selectors';
-import { getGeoJson as getDetailGeoJson } from '../detail/map-detail';
+import { getGeoJson as getDetailGeoJson } from '../detail/selectors';
 import { geoSearchType } from '../../components/leaflet/services/icons.constant';
 import { getDetail } from '../../../shared/ducks/detail/selectors';
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 import { getDataSearchLocation } from '../../../shared/ducks/data-search/selectors';
 import { isGeoSearch } from '../../../shared/ducks/selection/selection';
-import { isPanoLayer } from './map';
+import { isPanoLayer } from './reducer';
 import { areMarkersLoading } from '../../../shared/ducks/data-selection/selectors';
 import { isPanoPage } from '../../../store/redux-first-router/selectors';
 

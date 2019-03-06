@@ -13,7 +13,7 @@ import MapPanelContainer from '../../containers/panel/MapPanelContainer';
 import MapPreviewPanelContainer from '../../containers/preview-panel/MapPreviewPanelContainer';
 import MapEmbedButton from '../../components/map-embed-button/MapEmbedButton';
 import { previewDataAvailable as previewDataAvailableSelector } from '../../../shared/ducks/selection/selection';
-import { getDrawingMode } from '../../ducks/map/map-selectors';
+import { getDrawingMode } from '../../ducks/map/selectors';
 
 export const overrideLeafletGetBounds = (map) => {
   // We override here the getBounds method of Leaflet

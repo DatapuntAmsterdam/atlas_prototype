@@ -2,9 +2,10 @@ import { testSaga } from 'redux-saga-test-plan';
 import watchMapDetail, { fetchDetailEffect, fetchMapDetail } from './map-detail';
 import {
   fetchMapDetailFailure,
-  fetchMapDetailSuccess, getMapDetail
-} from '../../ducks/detail/map-detail';
-import { closeMapPanel, mapLoadingAction } from '../../ducks/map/map';
+  fetchMapDetailSuccess,
+  getMapDetail
+} from '../../ducks/detail/actions';
+import { closeMapPanel, mapLoadingAction } from '../../ducks/map/actions';
 import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants';
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors';

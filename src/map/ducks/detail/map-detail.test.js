@@ -1,16 +1,19 @@
-import reducer, {
+import { FETCH_MAP_DETAIL_SUCCESS, FETCH_MAP_DETAIL_FAILURE } from './constants';
+import {
   fetchMapDetailFailure,
   fetchMapDetailSuccess,
+  getMapDetail
+} from './actions';
+import reducer from './reducer';
+import {
   getAllResults,
+  getGeoJson,
   getCurrentEndpoint,
   getDetailId,
-  getGeoJson,
   getGeometry,
-  getMapDetail,
   getMapDetailGeometry,
   selectLatestMapDetail
-} from './map-detail';
-import { FETCH_MAP_DETAIL_SUCCESS, FETCH_MAP_DETAIL_FAILURE } from './constants';
+} from './selectors';
 
 // REDUCER
 describe('reducer', () => {

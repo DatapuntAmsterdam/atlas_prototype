@@ -10,13 +10,13 @@ import {
   getPanoramaLocation,
   getPanoramaTags
 } from '../../panorama/ducks/selectors';
-import { closeMapPanel, toggleMapOverlayPanorama } from '../../map/ducks/map/map';
+import { closeMapPanel, toggleMapOverlayPanorama } from '../../map/ducks/map/actions';
 import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api';
 import { toDataDetail, toGeoSearch, toPanorama } from '../../store/redux-first-router/actions';
 import { getLocationPayload } from '../../store/redux-first-router/selectors';
 import { getViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui';
 import PARAMETERS from '../../store/parameters';
-import { getMapOverlays } from '../../map/ducks/map/map-selectors';
+import { getMapOverlays } from '../../map/ducks/map/selectors';
 import {
   CLOSE_PANORAMA,
   FETCH_PANORAMA_HOTSPOT_REQUEST,

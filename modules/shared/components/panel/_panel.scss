@@ -1,74 +1,111 @@
+$icon-dimension: 24px;
+
 .c-panel {
   position: relative;
-  margin-bottom: $base-whitespace * 2;
+  margin: $base-whitespace * 1.5 0 $base-whitespace / 2 0;
   padding: $base-whitespace / 2;
   padding-left: $base-whitespace;
   background-color: $secondary-gray10;
-}
 
-.c-panel__title {
-  @include font-size-responsive($l-header-font);
-  @include font-weight($bold-weight);
-  margin-bottom: $base-whitespace;
+  &__title {
+    @include font-size-responsive($l-header-font);
+    @include font-weight($bold-weight);
+    margin-bottom: $base-whitespace;
 
-  @at-root div.c-panel {
-    padding: $base-whitespace;
+    @at-root div.c-panel {
+      padding: $base-whitespace;
+    }
   }
-}
 
-.c-panel__paragraph {
-  margin-bottom: $base-whitespace;
+  &__paragraph {
+    margin-bottom: $base-whitespace;
 
-  &:last-child {
-    margin-bottom: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
-}
 
-.c-panel--offsets-below-page-title {
-  margin-top: -(2 * $base-whitespace);
-  margin-bottom: 3 * $base-whitespace;
-}
+  &--offsets-below-page-title {
+    margin-top: -(2 * $base-whitespace);
+    margin-bottom: 3 * $base-whitespace;
+  }
 
-.c-panel--warning {
-  padding: $base-whitespace * .6 $base-whitespace * .8;
-  background-color: $darkish-blue;
-  color: $primary-light;
-}
+  &--warning {
+    padding: $base-whitespace * .6 $base-whitespace * .8;
+    background-color: $darkish-blue;
+    color: $primary-light;
+  }
 
-.c-panel--danger {
-  padding: $base-whitespace * .6 $base-whitespace * .8;
-  background-color: $primary-contrast;
-  color: $primary-light;
-}
+  &--danger {
+    padding: $base-whitespace * .6 $base-whitespace * .8;
+    background-color: $primary-contrast;
+    color: $primary-light;
+  }
 
-.c-panel--small {
-  margin: 0;
-  padding-top: $base-whitespace * .3;
-  padding-bottom: $base-whitespace * .4;
-  padding-left: $base-whitespace;
-  line-height: $button-size - ($base-whitespace * .3) - ($base-whitespace * .4);
-}
+  &--small {
+    margin: 0;
+    padding-top: $base-whitespace * .3;
+    padding-bottom: $base-whitespace * .4;
+    padding-left: $base-whitespace;
+    line-height: $button-size - ($base-whitespace * .3) - ($base-whitespace * .4);
+  }
 
-.c-panel--tiny {
-  position: absolute;
-  top: 0;
-  right: ($button-size + $base-whitespace) * 2; //afstand berekend mbt metadata en stelselpedia buttons
-  padding: 0 $base-whitespace;
-  line-height: $button-size;
-}
+  &--tiny {
+    position: absolute;
+    top: 0;
+    right: ($button-size + $base-whitespace) * 2; //afstand berekend mbt metadata en stelselpedia buttons
+    padding: 0 $base-whitespace;
+    line-height: $button-size;
+  }
 
-.c-panel--can-close {
-  padding-top: $base-whitespace * .3;
-  padding-right: $button-size;
-  padding-bottom: $base-whitespace * .3;
-  line-height: $button-size;
-}
+  &--can-close {
+    padding-top: $base-whitespace * .3;
+    padding-right: $button-size;
+    padding-bottom: $base-whitespace * .3;
+    line-height: $button-size;
+  }
 
-.c-panel__list {
-  margin: 0 20px;
-  list-style: disc;
+  &__list {
+    margin: 0 20px;
+    list-style: disc;
 
-  li {
-    margin-top: 10px;
+    li {
+      margin-top: 10px;
+    }
+  }
+
+  &--attention {
+    & section {
+      margin-left: 15px;
+
+      &:before {
+        display: block;
+        position: absolute;
+        top: 17px;
+        left: 8px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $red;
+        content: "";
+      }
+    }
+  }
+
+  a {
+    @include font-weight($normal-weight);
+    text-decoration: underline;
+  }
+
+  &--attention,
+  &--info {
+    .o-btn--close {
+      @include icon-sprite("icon-clear", $primary-dark, $primary-dark, $icon-dimension);
+
+      &:hover,
+      &:focus {
+        background-color: $secondary-gray20;
+      }
+    }
   }
 }

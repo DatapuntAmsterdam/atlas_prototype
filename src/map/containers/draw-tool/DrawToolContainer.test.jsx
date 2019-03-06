@@ -6,7 +6,7 @@ import DrawToolContainer from './DrawToolContainer';
 import drawToolConfig from '../../services/draw-tool/draw-tool.config';
 
 import { isEnabled } from '../../services/draw-tool/draw-tool';
-import { mapClear, mapSetDrawingMode, mapUpdateShape } from '../../ducks/map/map';
+import { mapClear, mapSetDrawingMode, mapUpdateShape } from '../../ducks/map/actions';
 import { setGeometryFilter } from '../../../shared/ducks/data-selection/actions';
 
 jest.mock('../../services/draw-tool/draw-tool');

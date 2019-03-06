@@ -8,9 +8,9 @@ import MapContainer from './MapContainer';
 import rootSaga from '../../../root-saga';
 
 import BaseLayerReducer from '../../ducks/base-layers/map-base-layers';
-import MapDetailReducer from '../../ducks/detail/map-detail';
+import MapDetailReducer from '../../ducks/detail/reducer';
 import MapLayersReducer from '../../ducks/layers/map-layers';
-import MapReducer from '../../ducks/map/map';
+import MapReducer from '../../ducks/map/reducer';
 import PanelLayersReducer from '../../ducks/panel-layers/map-panel-layers';
 import reducer from '../../../shared/ducks/data-search/reducer';
 

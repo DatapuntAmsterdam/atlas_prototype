@@ -14,14 +14,14 @@ import {
   setPolygon
 } from '../../services/draw-tool/draw-tool';
 import { mapClear, mapEmptyGeometry, mapSetDrawingMode, mapUpdateShape
-} from '../../ducks/map/map';
+} from '../../ducks/map/actions';
 import {
   getDrawingMode,
   getGeometry,
   getShapeDistanceTxt,
   isDrawingEnabled,
   getShapeMarkers
-} from '../../ducks/map/map-selectors';
+} from '../../ducks/map/selectors';
 import { endDataSelection, setGeometryFilter } from '../../../shared/ducks/data-selection/actions';
 import {
   getDataSelection

@@ -24,6 +24,7 @@ import napPeilmerk from '../../shared/services/nap-peilmerk/nap-peilmerk';
 import oplaadpunten from '../../shared/services/oplaadpunten/oplaadpunten';
 import parkeervak from '../../shared/services/parkeervak/parkeervak';
 import vestiging from '../../shared/services/vestiging/vestiging';
+import winkelgebied from '../../shared/services/winkelgebied/winkelgebied';
 import SHARED_CONFIG from '../../shared/services/shared-config/shared-config';
 
 export const maxDisplayValuesPerProperty = 5;
@@ -66,7 +67,8 @@ export const endpointTypes = {
   napPeilmerk: 'nap/peilmerk/',
   oplaadpunten: 'vsd/oplaadpunten/',
   parkeervak: 'parkeervakken/parkeervakken/',
-  vestiging: 'handelsregister/vestiging/'
+  vestiging: 'handelsregister/vestiging/',
+  winkelgebied: 'vsd/winkgeb'
 };
 
 const servicesByEndpointType = {
@@ -95,7 +97,8 @@ const servicesByEndpointType = {
   [endpointTypes.napPeilmerk]: { fetch: napPeilmerk },
   [endpointTypes.oplaadpunten]: { fetch: oplaadpunten },
   [endpointTypes.parkeervak]: { fetch: parkeervak },
-  [endpointTypes.vestiging]: { fetch: vestiging, authScope: 'HR/R' }
+  [endpointTypes.vestiging]: { fetch: vestiging, authScope: 'HR/R' },
+  [endpointTypes.winkelgebied]: { fetch: winkelgebied }
 };
 
 const getEndpointTypeForResult = (endpointType, detail) => {

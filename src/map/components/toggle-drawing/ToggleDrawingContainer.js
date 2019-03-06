@@ -4,7 +4,7 @@ import {
   getShapeDistanceTxt,
   isDrawingEnabled,
   getShapeMarkers
-} from '../../ducks/map/map-selectors';
+} from '../../ducks/map/selectors';
 import {
   cancelDrawing,
   endDataSelection,

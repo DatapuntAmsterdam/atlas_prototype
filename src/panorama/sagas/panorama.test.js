@@ -12,7 +12,8 @@ import {
 } from './panorama';
 import { fetchPanoramaRequest } from '../ducks/actions';
 import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api';
-import { closeMapPanel, TOGGLE_MAP_OVERLAY_PANORAMA } from '../../map/ducks/map/map';
+import { TOGGLE_MAP_OVERLAY_PANORAMA } from '../../map/ducks/map/constants';
+import { closeMapPanel } from '../../map/ducks/map/actions';
 import { toMap } from '../../store/redux-first-router/actions';
 import {
   CLOSE_PANORAMA,

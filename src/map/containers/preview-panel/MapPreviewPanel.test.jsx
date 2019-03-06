@@ -10,16 +10,14 @@ import {
   isSearchLoading
 } from '../../../shared/ducks/data-search/selectors';
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers';
-import {
-  FETCH_MAP_DETAIL_REQUEST,
-  getMapDetail,
-  selectLatestMapDetail
-} from '../../ducks/detail/map-detail';
+import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants';
+import { getMapDetail } from '../../ducks/detail/actions';
+import { selectLatestMapDetail } from '../../ducks/detail/selectors';
 import {
   FETCH_PANORAMA_PREVIEW_REQUEST,
   fetchPanoramaPreview
 } from '../../../panorama/ducks/preview/panorama-preview';
-import { getLocationId } from '../../ducks/map/map-selectors';
+import { getLocationId } from '../../ducks/map/selectors';
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
 import { getDetailLocation } from '../../../store/redux-first-router/selectors';
 import {
@@ -34,9 +32,10 @@ jest.mock('../../../shared/ducks/ui/ui');
 jest.mock('../../../shared/ducks/data-search/selectors');
 jest.mock('../../ducks/panel-layers/map-panel-layers');
 jest.mock('../../../shared/ducks/data-search/actions');
-jest.mock('../../ducks/detail/map-detail');
+jest.mock('../../ducks/detail/actions');
+jest.mock('../../ducks/detail/selectors');
 jest.mock('../../../panorama/ducks/preview/panorama-preview');
-jest.mock('../../ducks/map/map-selectors');
+jest.mock('../../ducks/map/selectors');
 jest.mock('../../../shared/ducks/selection/selection');
 jest.mock('../../../store/redux-first-router/selectors');
 jest.mock('../../../store/redux-first-router/actions');

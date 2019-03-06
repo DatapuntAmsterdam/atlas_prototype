@@ -29,7 +29,7 @@ import {
   search as vanillaSearch
 } from '../../services/search/search';
 import { getPage } from '../../../store/redux-first-router/selectors';
-import { getMapZoom } from '../../../map/ducks/map/map-selectors';
+import { getMapZoom } from '../../../map/ducks/map/selectors';
 import ActiveOverlaysClass from '../../services/active-overlays/active-overlays';
 import { waitForAuthentication } from '../user/user';
 import { SELECTION_TYPE, setSelection } from '../../ducks/selection/selection';

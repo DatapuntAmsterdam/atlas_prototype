@@ -6,6 +6,7 @@ RUN apt-get update && \
 
 WORKDIR /home
 
+COPY asound.conf /etc/asound.conf
 COPY package.json package-lock.json  /home/
 
 # Install all NPM dependencies, and:

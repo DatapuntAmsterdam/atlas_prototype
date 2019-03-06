@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getMapOverlays, getMapZoom } from '../map/map-selectors';
+import { getMapOverlays, getMapZoom } from '../map/selectors';
 
 export const FETCH_PANEL_ITEMS_REQUEST = 'FETCH_PANEL_ITEMS_REQUEST';
 export const FETCH_PANEL_ITEMS_SUCCESS = 'FETCH_PANEL_ITEMS_SUCCESS';

@@ -5,7 +5,10 @@ import { bindActionCreators } from 'redux';
 
 import MapLeaflet from '../../components/leaflet/MapLeaflet';
 import MAP_CONFIG from '../../services/map-config';
-import { setSelectedLocation, updateBoundingBox, updatePan, updateZoom } from '../../ducks/map/map';
+import {
+  setSelectedLocation, updateBoundingBox,
+  updatePan, updateZoom
+} from '../../ducks/map/actions';
 import { fetchMapBaseLayers, getUrlTemplate } from '../../ducks/base-layers/map-base-layers';
 import { fetchMapLayers, getLayers } from '../../ducks/layers/map-layers';
 import { fetchPanelLayers } from '../../ducks/panel-layers/map-panel-layers';
@@ -17,7 +20,7 @@ import {
   getMarkers,
   getRdGeoJsons,
   isMapLoading
-} from '../../ducks/map/map-selectors';
+} from '../../ducks/map/selectors';
 import {
   getBrkMarkers,
   getClusterMarkers,

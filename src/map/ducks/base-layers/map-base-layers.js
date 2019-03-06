@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { getActiveBaseLayer } from '../map/map-selectors';
+import { getActiveBaseLayer } from '../map/selectors';
 
 export const FETCH_MAP_BASE_LAYERS_REQUEST = 'FETCH_MAP_BASE_LAYERS_REQUEST';
 export const FETCH_MAP_BASE_LAYERS_SUCCESS = 'FETCH_MAP_BASE_LAYERS_SUCCESS';

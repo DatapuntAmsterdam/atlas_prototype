@@ -25,6 +25,7 @@ const categoryTypeOrder = [
   'monumenten/monument',
   'grex/grondexploitatie',
   'vsd/biz',
+  'vsd/winkgeb',
   'parkeervakken/parkeervakken',
   'vsd/oplaadpunten'
 ];

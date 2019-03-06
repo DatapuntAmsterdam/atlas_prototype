@@ -1,5 +1,5 @@
-import reducer, {
-  initialState,
+import { initialState, TOGGLE_MAP_OVERLAY_PANORAMA } from './constants';
+import {
   mapClear,
   mapEmptyGeometry,
   mapEndDrawing,
@@ -8,14 +8,15 @@ import reducer, {
   mapUpdateShape,
   setMapBaseLayer,
   setSelectedLocation,
-  TOGGLE_MAP_OVERLAY_PANORAMA,
   toggleMapOverlay,
   toggleMapOverlayVisibility,
   toggleMapPanel,
   updateBoundingBox,
   updatePan,
   updateZoom
-} from './map';
+} from './actions';
+import reducer from './reducer';
+
 
 describe('Map Reducer', () => {
   it('should return the initial state', () => {

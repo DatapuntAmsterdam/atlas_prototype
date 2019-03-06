@@ -9,7 +9,7 @@
     margin-bottom: 40px;
   }
 
-  .c-key-value-list__border-top {
+  &__border-top {
     border-top: 1px solid $secondary-gray20 !important;
   }
 
@@ -17,7 +17,23 @@
     border-bottom: 1px solid $secondary-gray20;
   }
 
-  .c-key-value-list__multiple-values {
+  &--attention {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-top: 4px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: $red;
+    vertical-align: text-top;
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+  }
+
+  &__multiple-values {
     padding-top: 4.375px; //(2 * $base-font-size - $base-line-height) / 2
     padding-bottom: 4.375px;
     border: none;
@@ -30,36 +46,36 @@
     }
   }
 
-  .c-key-value-list__key {
+  &__key {
     @extend %description-list-key;
   }
 
-  .c-key-value-list__value {
+  &__value {
     @extend %description-list-value;
   }
 
-  .c-key-value-list__key--full-width {
+  &__key--full-width {
     width: 100%;
   }
 
-  .c-key-value-list__value--full-width {
+  &__value--full-width {
     width: 100%;
     padding: 0 20px;
     float: none;
     border-top: none;
   }
 
-  .c-key-value-list__value--ellipsis {
+  &__value--ellipsis {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .c-key-value-list__value-inline {
+  &__value-inline {
     display: inline;
   }
 
-  .c-key-value-list__content {
+  &__content {
     display: inline-block;
     max-width: 734px;
     max-height: 200px;

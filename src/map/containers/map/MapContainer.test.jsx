@@ -4,13 +4,13 @@ import { shallow } from 'enzyme';
 import MapContainer, { overrideLeafletGetBounds } from './MapContainer';
 import { isEmbedded, isEmbedPreview, isMapActive } from '../../../shared/ducks/ui/ui';
 import { previewDataAvailable } from '../../../shared/ducks/selection/selection';
-import { getDrawingMode } from '../../ducks/map/map-selectors';
+import { getDrawingMode } from '../../ducks/map/selectors';
 
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
 jest.mock('../../../store/redux-first-router/selectors');
 jest.mock('../../../shared/ducks/selection/selection');
 jest.mock('../../../shared/ducks/ui/ui');
-jest.mock('../../ducks/map/map-selectors');
+jest.mock('../../ducks/map/selectors');
 
 describe('overrideLeafletGetBounds', () => {
   it('should overide the getBounds', () => {

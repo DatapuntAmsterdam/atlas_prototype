@@ -17,13 +17,13 @@ import {
   toggleMapOverlay,
   toggleMapOverlayVisibility,
   toggleMapPanel
-} from '../../ducks/map/map';
+} from '../../ducks/map/actions';
 import {
   getActiveBaseLayer,
   getMapOverlays,
   getMapZoom,
   isMapPanelActive
-} from '../../ducks/map/map-selectors';
+} from '../../ducks/map/selectors';
 import { getUser } from '../../../shared/ducks/user/user';
 
 const mapStateToProps = (state) => ({

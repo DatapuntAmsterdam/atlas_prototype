@@ -12,7 +12,7 @@ import markerConfig from './services/marker-config.constant';
 import createClusterIcon from './services/cluster-icon';
 import { boundsToString, getBounds, isBoundsAPoint, isValidBounds } from './services/bounds';
 import LoadingIndicator from '../loading-indicator/LoadingIndicator';
-import { DEFAULT_LAT, DEFAULT_LNG } from '../../ducks/map/map';
+import { DEFAULT_LAT, DEFAULT_LNG } from '../../ducks/map/constants';
 import RdGeoJson from './custom/geo-json/RdGeoJson';
 import mapLayerTypes from '../../services/map-layer-types.config';
 

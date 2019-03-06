@@ -5,7 +5,7 @@ import { getPage, hasUserAccesToPage } from '../../../store/redux-first-router/s
 import { fetchMarkersRequest, fetchMarkersSuccess } from '../../ducks/data-selection/actions';
 import { getFiltersWithoutShape } from '../../ducks/filters/filters';
 import { getDataset, getGeomarkersShape } from '../../ducks/data-selection/selectors';
-import { getMapBoundingBox, getMapZoom } from '../../../map/ducks/map/map-selectors';
+import { getMapBoundingBox, getMapZoom } from '../../../map/ducks/map/selectors';
 import { getMarkers } from '../../services/data-selection/data-selection-api';
 import PAGES from '../../../app/pages';
 import { waitForAuthentication } from '../user/user';

@@ -6,11 +6,14 @@
             meta-data="vm.apiData">
         </dp-glossary-header>
 
+        <dp-panel is-panel-visible="true" can-close="true" type="attention" class-name="qa-disabled-message c-disabled-message">
+            Enkele kenmerken vervallen of worden gewijzigd. Deze zijn hieronder rood gemarkeerd. <br />
+            Lees verder op <a class="c-link" target="_blank" href="https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-3/" target="_blank" rel="noopener">stelselpedia</a>.
+        </dp-panel>
+
         <dl class="c-key-value-list">
             <dt>Naam 24-posities (NEN)</dt>
             <dd>{{ vm.apiData.results.naam_24_posities }}</dd>
-            <dt>Naam 17-posities (post)</dt>
-            <dd>{{ vm.apiData.results.naam_17_posities }}</dd>
             <dt>Woonplaats</dt>
             <dd>
                 <dp-redux-link
@@ -30,6 +33,8 @@
                   dp-expand-collapse
                   ng-if="vm.apiData.results.omschrijving">{{ vm.apiData.results.omschrijving }}</p>
             </dd>
+            <dt><i class="c-key-value-list--attention"></i>Naam 17-posities (post)</dt>
+            <dd>{{ vm.apiData.results.naam_17_posities }}</dd>
         </dl>
     </div>
 

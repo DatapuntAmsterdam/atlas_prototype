@@ -449,6 +449,11 @@ const GLOSSARY = {
       meta: [],
       authLevel: 'EMPLOYEE'
     },
+    WINKGEB: {
+      label_singular: 'Winkelgebied',
+      label_plural: 'Winkelgebieden',
+      description: ''
+    },
     WOONPLAATS: {
       label_singular: 'Woonplaats',
       label_plural: 'Woonplaatsen',
