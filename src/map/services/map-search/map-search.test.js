@@ -46,7 +46,7 @@ describe('mapSearch service', () => {
 
       expect(data.results).toEqual([{
         categoryLabel: 'Explosief',
-        results: Array(8).fill({
+        results: Array(9).fill({ // !!!!IMPORTANT: UPDATE WITH +1 WHEN ADDING NEW GEOSEARCH
           categoryLabel: 'Explosief',
           label: undefined,
           parent: undefined,
@@ -87,7 +87,7 @@ describe('mapSearch service', () => {
 
       expect(data.results).toEqual([{
         categoryLabel: 'Explosief',
-        results: Array(7).fill({
+        results: Array(8).fill({ // !!!!IMPORTANT: UPDATE WITH +1 WHEN ADDING NEW GEOSEARCH
           categoryLabel: 'Explosief',
           label: undefined,
           parent: undefined,
