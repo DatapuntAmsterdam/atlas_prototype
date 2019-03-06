@@ -9,13 +9,13 @@ const MapDetailWinkelgebied = ({ panoUrl, winkelgebied, onMaximize, onPanoPrevie
     panoUrl={panoUrl}
     onMaximize={onMaximize}
     onPanoPreviewClick={onPanoPreviewClick}
-    subTitle={winkelgebied._display}
+    subTitle={winkelgebied.label}
     title="Winkelgebied"
   >
     <ul className="map-detail-result__list">
       <MapDetailResultItem
-        label="Gebied"
-        value={winkelgebied.concnaam}
+        label="Categorie"
+        value={winkelgebied.category}
       />
     </ul>
   </MapDetailResultWrapper>
@@ -24,8 +24,8 @@ const MapDetailWinkelgebied = ({ panoUrl, winkelgebied, onMaximize, onPanoPrevie
 MapDetailWinkelgebied.propTypes = {
   panoUrl: PropTypes.string.isRequired,
   winkelgebied: PropTypes.shape({
-    _display: PropTypes.string,
-    concnaam: PropTypes.string
+    label: PropTypes.string,
+    category: PropTypes.string
   }).isRequired,
   onMaximize: PropTypes.func.isRequired,
   onPanoPreviewClick: PropTypes.func.isRequired

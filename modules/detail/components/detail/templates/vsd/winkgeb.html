@@ -1,13 +1,13 @@
 <div>
     <div class="c-detail__block">
         <dp-glossary-header
-            heading="{{vm.apiData.results._display}}"
+            heading="{{vm.apiData.results.label}}"
             definition="WINKGEB">
         </dp-glossary-header>
 
         <dl class="c-key-value-list">
-            <dt>Gebied</dt>
-            <dd>{{ vm.apiData.results.concnaam }}</dd>
+            <dt>Categorie</dt>
+            <dd>{{ vm.apiData.results.category }}</dd>
         </dl>
     </div>
 </div>

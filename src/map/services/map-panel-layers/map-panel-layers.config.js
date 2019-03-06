@@ -1950,31 +1950,38 @@ export default [
     legendItems: [
       {
         selectable: false,
-        title: 'Winkelgebieden K'
+        title: 'Kernwinkelgebied',
+        imageRule: 'Winkelgebieden K'
       },
       {
         selectable: false,
-        title: 'Winkelgebieden SC'
+        title: 'Stadsdeelcentra',
+        imageRule: 'Winkelgebieden SC'
       },
       {
         selectable: false,
-        title: 'Winkelgebieden WG'
+        title: 'Wijkcentrum groot',
+        imageRule: 'Winkelgebieden WG'
       },
       {
         selectable: false,
-        title: 'Winkelgebieden WK'
+        title: 'Wijkcentrum klein',
+        imageRule: 'Winkelgebieden WK'
       },
       {
         selectable: false,
-        title: 'Winkelgebieden BU'
+        title: 'Buurtcentrum',
+        imageRule: 'Winkelgebieden BU'
       },
       {
         selectable: false,
-        title: 'Winkelgebieden PDV'
+        title: 'Locatie voor perifere winkels',
+        imageRule: 'Winkelgebieden PDV'
       },
       {
         selectable: false,
-        title: 'Winkelgebieden TR'
+        title: 'Trafficlocaties',
+        imageRule: 'Winkelgebieden TR'
       }
     ],
     maxZoom: 16,
