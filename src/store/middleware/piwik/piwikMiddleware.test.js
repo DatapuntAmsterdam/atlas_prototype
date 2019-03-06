@@ -2,7 +2,7 @@ import piwikMiddleware from './piwikMiddleware';
 import piwikTracker from '../../../shared/services/piwik-tracker/piwik-tracker';
 
 jest.mock('../../../shared/services/piwik-tracker/piwik-tracker');
-jest.mock('./events', () => ({
+jest.mock('./trackEvents', () => ({
   YOUR_ACTION_TYPE: ({ tracking }) => [
     'foo',
     'foo',
