@@ -1,7 +1,6 @@
 import piwikTracker from '../../../shared/services/piwik-tracker/piwik-tracker';
 import { ENVIRONMENTS, getEnvironment } from '../../../shared/environment';
 import { getUserScopes, userIsAuthenticated } from '../../../shared/ducks/user/user';
-import { dcatdScopes } from '../../../shared/services/auth/auth';
 import events from './events';
 import routes from './routes';
 import { routing } from '../../../app/routes';
@@ -27,12 +26,11 @@ export const PIWIK_CONSTANTS = {
   TRACK_SEARCH: 'trackSiteSearch',
   TRACK_VIEW: 'trackPageView',
   DIMENSION3: {
-    AUTHENTICATED: 'Yes',
-    UNAUTHENTICATED: 'No'
+    AUTHENTICATED: true,
+    UNAUTHENTICATED: false
   },
   DIMENSION4: {
-    UNDEFINED: 'Undefined',
-    DCATDADMIN: 'Beheerder'
+    UNDEFINED: null
   }
 };
 
@@ -67,14 +65,12 @@ const authCustomDimensions = (state) => {
 
   let role = PIWIK_CONSTANTS.DIMENSION4.UNDEFINED;
   if (scopes.length > 0) {
-    const dcatdAdmin = scopes.some((scope) => dcatdScopes.includes(scope));
-    role = (dcatdAdmin)
-      ? PIWIK_CONSTANTS.DIMENSION4.DCATDADMIN : PIWIK_CONSTANTS.DIMENSION4.UNDEFINED;
+    role = scopes.join('|');
   }
 
   return [
-    { id: 1, value: authenticated }, // customDimension = 'Authenticated'
-    { id: 2, value: role } // customDimension = 'Role'
+    { id: 3, value: authenticated }, // customDimension = 'Authenticated'
+    { id: 4, value: role } // customDimension = 'Role'
   ];
 };
 
