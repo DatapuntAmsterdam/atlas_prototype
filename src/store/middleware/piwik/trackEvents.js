@@ -47,7 +47,7 @@ import PAGES from '../../../app/pages';
 import { PIWIK_CONSTANTS } from './piwikMiddleware';
 import PARAMETERS from '../../parameters';
 
-const events = {
+const trackEvents = {
   // NAVIGATION
   // NAVIGATION -> NAVIGATE TO DATA DETAIL
   [routing.dataDetail.type]: function trackDataDetail({ query, tracking, state }) {
@@ -347,4 +347,4 @@ const events = {
   ]
 };
 
-export default events;
+export default trackEvents;

@@ -1,9 +1,8 @@
 import piwikTracker from '../../../shared/services/piwik-tracker/piwik-tracker';
 import { ENVIRONMENTS, getEnvironment } from '../../../shared/environment';
 import { getUserScopes, userIsAuthenticated } from '../../../shared/ducks/user/user';
-import events from './events';
-import routes from './routes';
-import { routing } from '../../../app/routes';
+import trackEvents from './trackEvents';
+import trackViews from './trackViews';
 
 // Configure environment variables
 const PIWIK_CONFIG = {
@@ -74,22 +73,17 @@ const authCustomDimensions = (state) => {
   ];
 };
 
-// Delay logging the datasetDetail route in piwik,
-//    to allow logging the document title
-//    this will evolve to an exclusion list of routes as soon as this extra functionality is needed
-const logRoute = (actionType) => actionType !== routing.datasetDetail.type;
-
 // Execute Piwik actions
 const piwikMiddleware = ({ getState }) => (next) => (action) => {
   initializePiwik();
   const nextAction = action;
 
   const actionsToPiwik = [];
-  if (routes[action.type] && logRoute(action.type)) {
-    actionsToPiwik.push(routes[action.type]);
+  if (trackViews[action.type]) {
+    actionsToPiwik.push(trackViews[action.type]);
   }
-  if (events[action.type]) {
-    actionsToPiwik.push(events[action.type]);
+  if (trackEvents[action.type]) {
+    actionsToPiwik.push(trackEvents[action.type]);
   }
 
   if (actionsToPiwik.length) {
