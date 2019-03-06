@@ -2,10 +2,12 @@ import { routing } from '../../../app/routes';
 import { isEmbedded } from '../../../shared/ducks/ui/ui';
 import { getDetail } from '../../../shared/ducks/detail/selectors';
 import { PIWIK_CONSTANTS } from './piwikMiddleware';
+import { FETCH_DETAIL_SUCCESS } from '../../../shared/ducks/detail/constants';
+import { isDatasetDetailPage } from '../../redux-first-router/selectors';
 
-let routes = Object.entries(routing).reduce((acc, [, value]) => ({
+let views = Object.entries(routing).reduce((acc, [, value]) => ({
   ...acc,
-  [value.type]: function trackRoute({ firstAction = null, href, title }) {
+  [value.type]: function trackView({ firstAction = null, href, title }) {
     return (firstAction) ? [
       PIWIK_CONSTANTS.TRACK_VIEW,
       title,
@@ -15,9 +17,9 @@ let routes = Object.entries(routing).reduce((acc, [, value]) => ({
   }
 }));
 
-routes = {
-  ...routes,
-  'atlasRouter/HOME': function trackRoute({ firstAction = null, href, title }) {
+views = {
+  ...views,
+  'atlasRouter/HOME': function trackView({ firstAction = null, href, title }) {
     return (firstAction) ? [
       PIWIK_CONSTANTS.TRACK_VIEW,
       title,
@@ -25,7 +27,7 @@ routes = {
       null
     ] : [];
   },
-  'atlasRouter/DATA': function trackRoute({ firstAction = null, href, title, state }) {
+  'atlasRouter/DATA': function trackView({ firstAction = null, href, title, state }) {
     return (isEmbedded(state)) ? [
       PIWIK_CONSTANTS.TRACK_EVENT,
       'embed', // PAGEVIEW -> MAP IN EMBED VIEW
@@ -38,7 +40,7 @@ routes = {
       null
     ] : [];
   },
-  'atlasRouter/DATA_DETAIL': function trackRoute({ firstAction = null, href, title, state, tracking }) {
+  'atlasRouter/DATA_DETAIL': function trackView({ firstAction = null, href, title, state, tracking }) {
     return (
       !firstAction && (tracking && tracking.id !== getDetail(state).id)
     ) ? [
@@ -52,9 +54,20 @@ routes = {
       href,
       null
     ] : [];
+  },
+  [FETCH_DETAIL_SUCCESS]: function trackView({ href, title, state }) {
+    return isDatasetDetailPage(state) ? [
+      PIWIK_CONSTANTS.TRACK_VIEW,
+      title,
+      href,
+      null
+    ] : [];
   }
 };
 
-const trackRoutes = routes;
+// Prevent tracking of the next routes.
+delete views[routing.datasetDetail.type];
 
-export default trackRoutes;
+const trackViews = views;
+
+export default trackViews;

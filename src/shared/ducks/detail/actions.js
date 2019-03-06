@@ -27,7 +27,10 @@ export const fetchDetailRequest = (payload) => ({
 
 export const fetchDetailSuccess = (payload) => ({
   type: FETCH_DETAIL_SUCCESS,
-  payload
+  payload,
+  meta: {
+    tracking: true
+  }
 });
 
 export const fetchDetailFailure = (payload) => ({
