@@ -3,7 +3,7 @@ $icon-dimension: 24px;
 .c-panel {
   position: relative;
   margin: $base-whitespace * 1.5 0 $base-whitespace / 2 0;
-  padding: $base-whitespace / 2;
+  padding: $base-whitespace * .6 $base-whitespace;
   padding-left: $base-whitespace;
   background-color: $secondary-gray10;
 
@@ -12,9 +12,9 @@ $icon-dimension: 24px;
     @include font-weight($bold-weight);
     margin-bottom: $base-whitespace;
 
-    @at-root div.c-panel {
-      padding: $base-whitespace;
-    }
+    // @at-root div.c-panel {
+    //   padding: $base-whitespace;
+    // }
   }
 
   &__paragraph {
@@ -59,9 +59,9 @@ $icon-dimension: 24px;
   }
 
   &--can-close {
-    padding-top: $base-whitespace * .3;
+    padding-top: $base-whitespace * .6;
     padding-right: $button-size;
-    padding-bottom: $base-whitespace * .3;
+    padding-bottom: $base-whitespace * .6;
     line-height: $button-size;
   }
 
@@ -81,7 +81,7 @@ $icon-dimension: 24px;
       &:before {
         display: block;
         position: absolute;
-        top: 17px;
+        top: 12px;
         left: 8px;
         width: 10px;
         height: 10px;
