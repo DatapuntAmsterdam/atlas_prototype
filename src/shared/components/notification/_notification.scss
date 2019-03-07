@@ -63,7 +63,7 @@ $icon-padding: 4px;
     &:hover,
     &:focus {
       .notification__button--close {
-        @include icon-sprite("icon-clear", $primary-light, $primary-dark, $icon-dimension);
+        @include icon-sprite("icon-clear", $primary-dark, $primary-dark, $icon-dimension);
       }
     }
 
