@@ -78,7 +78,7 @@ $icon-dimension: 24px;
     & section {
       margin-left: 15px;
 
-      &:before {
+      &::before {
         display: block;
         position: absolute;
         top: 12px;
