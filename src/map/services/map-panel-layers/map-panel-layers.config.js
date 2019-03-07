@@ -1966,38 +1966,31 @@ export default [
     legendItems: [
       {
         selectable: false,
-        title: 'Kernwinkelgebied',
-        imageRule: 'Winkelgebieden K'
+        title: 'Kernwinkelgebied'
       },
       {
         selectable: false,
-        title: 'Stadsdeelcentra',
-        imageRule: 'Winkelgebieden SC'
+        title: 'Stadsdeelcentra'
       },
       {
         selectable: false,
-        title: 'Wijkcentrum groot',
-        imageRule: 'Winkelgebieden WG'
+        title: 'Wijkcentrum groot'
       },
       {
         selectable: false,
-        title: 'Wijkcentrum klein',
-        imageRule: 'Winkelgebieden WK'
+        title: 'Wijkcentrum klein'
       },
       {
         selectable: false,
-        title: 'Buurtcentrum',
-        imageRule: 'Winkelgebieden BU'
+        title: 'Buurtcentrum'
       },
       {
         selectable: false,
-        title: 'Locatie voor perifere winkels',
-        imageRule: 'Winkelgebieden PDV'
+        title: 'Locatie voor perifere winkels'
       },
       {
         selectable: false,
-        title: 'Trafficlocaties',
-        imageRule: 'Winkelgebieden TR'
+        title: 'Trafficlocaties'
       }
     ],
     maxZoom: 16,
