@@ -50,18 +50,18 @@ import PARAMETERS from '../../parameters';
 const trackEvents = {
   // NAVIGATION
   // NAVIGATION -> NAVIGATE TO DATA DETAIL
-  [routing.dataDetail.type]: function trackDataDetail({ query, tracking, state }) {
+  [routing.dataDetail.type]: function trackDataDetail({ firstAction, query, tracking, state }) {
     return (tracking && tracking.event === 'auto-suggest') ? [
       PIWIK_CONSTANTS.TRACK_EVENT,
       'auto-suggest', // NAVIGATION -> SELECT AUTOSUGGEST OPTION
       tracking.category,
       tracking.query
-    ] : (getViewMode(state) === VIEW_MODE.MAP && get(query, `${PARAMETERS.VIEW}`) === VIEW_MODE.SPLIT) ? [
+    ] : (getViewMode(state) === VIEW_MODE.MAP && get(query, `${PARAMETERS.VIEW}`) === undefined) ? [
       PIWIK_CONSTANTS.TRACK_EVENT,
       'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP
       'detail-volledig-weergeven',
       null
-    ] : (getViewMode(state) === VIEW_MODE.SPLIT && get(query, `${PARAMETERS.VIEW}`) === VIEW_MODE.MAP) ? [
+    ] : (!firstAction && getViewMode(state) === VIEW_MODE.SPLIT && get(query, `${PARAMETERS.VIEW}`) === VIEW_MODE.MAP) ? [
       PIWIK_CONSTANTS.TRACK_EVENT,
       'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM SPLITSCREEN
       'detail-kaart-vergroten',
@@ -147,7 +147,7 @@ const trackEvents = {
         return [
           PIWIK_CONSTANTS.TRACK_EVENT,
           'navigation',
-          `page-${(viewMode === VIEW_MODE.MAP) ? 'kaart-verkleinen' : 'kaart-vergroten'}`,
+          `detail-${(viewMode === VIEW_MODE.MAP) ? 'volledig-weergeven' : 'kaart-vergroten'}`,
           null
         ];
     }
