@@ -15,6 +15,26 @@ exports[`MapDetailWinkelgebied should render everything 1`] = `
       label="Categorie"
       value="Foo foo"
     />
+    <li
+      className="map-detail-result__notification"
+    >
+      <Notification
+        canClose={false}
+        className=""
+        level="info"
+      >
+        <h3
+          className="c-panel__title"
+        >
+          Disclaimer
+        </h3>
+        <p
+          className="c-panel__paragraph"
+        >
+          De grenzen van het winkelgebied zijn indicatief. Er kunnen geen rechten aan worden ontleend.
+        </p>
+      </Notification>
+    </li>
   </ul>
 </MapDetailResultWrapper>
 `;

@@ -12,7 +12,7 @@ export default function fetchByUri(uri) {
       return ({
         label: result._display,
         category: (result.categorie_naam) ? `${result.categorie_naam} (${result.categorie})` : null,
-        location: result.location || wgs84Center,
+        location: wgs84Center,
         geometrie: result.wkb_geometry
       });
     });

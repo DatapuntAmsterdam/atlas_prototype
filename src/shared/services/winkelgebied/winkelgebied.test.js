@@ -1,9 +1,14 @@
 import fetchByUri from './winkelgebied';
+import getCenter from '../geo-json/geo-json';
+import { rdToWgs84 } from '../coordinate-reference-system/crs-converter';
+
 import { getByUrl } from '../api/api';
 
+jest.mock('../geo-json/geo-json');
 jest.mock('../api/api');
+jest.mock('../coordinate-reference-system/crs-converter');
 
-describe('The oplaadpunten resource', () => {
+describe('The winkelgebied resource', () => {
   afterEach(() => {
     getByUrl.mockReset();
   });
@@ -18,11 +23,14 @@ describe('The oplaadpunten resource', () => {
         wkb_geometry: { type: 'Point' }
       };
       getByUrl.mockReturnValueOnce(Promise.resolve(winkelgebiedMock));
+      getCenter.mockImplementation(() => ({ x: 1, y: 2 }));
+      rdToWgs84.mockImplementation(() => ({ latitude: 3, longitude: 4 }));
 
       const promise = fetchByUri(uri).then((response) => {
         expect(response).toEqual({
           label: winkelgebiedMock._display,
           category: `${winkelgebiedMock.categorie_naam} (${winkelgebiedMock.categorie})`,
+          location: { latitude: 3, longitude: 4 },
           geometrie: winkelgebiedMock.wkb_geometry
         });
       });
@@ -40,6 +48,7 @@ describe('The oplaadpunten resource', () => {
         expect(response).toEqual({
           label: undefined,
           category: null,
+          location: null,
           geometrie: undefined
         });
       });

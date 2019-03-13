@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailResultItem from './MapDetailResultItem';
 import MapDetailResultWrapper from './MapDetailResultWrapper';
+import Notification from '../../../shared/components/notification/Notification';
 
 const MapDetailWinkelgebied = ({ panoUrl, winkelgebied, onMaximize, onPanoPreviewClick }) => (
   <MapDetailResultWrapper
@@ -17,6 +18,13 @@ const MapDetailWinkelgebied = ({ panoUrl, winkelgebied, onMaximize, onPanoPrevie
         label="Categorie"
         value={winkelgebied.category}
       />
+      <li className="map-detail-result__notification">
+        <Notification canClose={false}>
+          <h3 className="c-panel__title">Disclaimer</h3>
+          <p className="c-panel__paragraph">De grenzen van het winkelgebied zijn indicatief.
+            Er kunnen geen rechten aan worden ontleend.</p>
+        </Notification>
+      </li>
     </ul>
   </MapDetailResultWrapper>
 );
