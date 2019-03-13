@@ -147,7 +147,7 @@ const trackEvents = {
         return [
           PIWIK_CONSTANTS.TRACK_EVENT,
           'navigation',
-          `page-${(viewMode === VIEW_MODE.MAP) ? 'kaart-verkleinen' : 'kaart-vergroten'}`,
+          `detail-${(viewMode === VIEW_MODE.MAP) ? 'volledig-weergeven' : 'kaart-vergroten'}`,
           null
         ];
     }
