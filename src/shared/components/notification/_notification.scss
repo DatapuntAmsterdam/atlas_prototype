@@ -46,7 +46,7 @@ $icon-padding: 4px;
   }
 
   &__content {
-    line-height: $icon-dimension;
+    line-height: 2 * $base-whitespace;
     vertical-align: middle;
   }
 

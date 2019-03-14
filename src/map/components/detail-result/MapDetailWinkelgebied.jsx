@@ -13,19 +13,17 @@ const MapDetailWinkelgebied = ({ panoUrl, winkelgebied, onMaximize, onPanoPrevie
     subTitle={winkelgebied.label}
     title="Winkelgebied"
   >
-    <ul className="map-detail-result__list">
-      <MapDetailResultItem
-        label="Categorie"
-        value={winkelgebied.category}
-      />
-      <li className="map-detail-result__notification">
-        <Notification canClose={false}>
-          <h3 className="c-panel__title">Disclaimer</h3>
-          <p className="c-panel__paragraph">De grenzen van het winkelgebied zijn indicatief.
-            Er kunnen geen rechten aan worden ontleend.</p>
-        </Notification>
-      </li>
-    </ul>
+    <React.Fragment>
+      <Notification>
+        De grenzen van dit winkelgebied zijn indicatief. Er kunnen geen rechten aan worden ontleend.
+      </Notification>
+      <ul className="map-detail-result__list">
+        <MapDetailResultItem
+          label="Categorie"
+          value={winkelgebied.category}
+        />
+      </ul>
+    </React.Fragment>
   </MapDetailResultWrapper>
 );
 
