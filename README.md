@@ -113,4 +113,4 @@ docker-compose up --build test-e2e-aria
   terminal
 
 ## Thanks to
-<img src="/public/images/browserstack-logo@2x.png" height="80" title="BrowserStack Logo" alt="BrowserStack Logo" />
+<img src="/public/images/browserstack-logo@2x.png" height="60" title="BrowserStack Logo" alt="BrowserStack Logo" />
