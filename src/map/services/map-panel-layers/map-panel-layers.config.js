@@ -304,10 +304,10 @@ export default [
     category: 'Geografie: gebieden',
     legendItems: [
       {
-        id: 'sd',
-        layer: 'stadsdeel',
+        id: 'buurt',
+        layer: 'buurt',
         selectable: true,
-        title: 'Stadsdeel'
+        title: 'Buurt'
       },
       {
         id: 'bc',
@@ -316,10 +316,10 @@ export default [
         title: 'Wijk'
       },
       {
-        id: 'buurt',
-        layer: 'buurt',
+        id: 'sd',
+        layer: 'stadsdeel',
         selectable: true,
-        title: 'Buurt'
+        title: 'Stadsdeel'
       }
     ],
     maxZoom: 16,
