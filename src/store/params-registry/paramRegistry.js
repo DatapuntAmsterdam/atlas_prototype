@@ -197,9 +197,6 @@ class ParamsRegistry {
         let newQuery = {};
 
         // we need to use JSON.stringify here to also check if arrays and objects are equal
-        if (parameter === 'legenda') {
-          // console.log(reducerObject.decode(encodedValue), reducerObject.defaultValue)
-        }
         const isDefaultValue = !!(
           reducerObject && (
             JSON.stringify(reducerObject.decode(encodedValue)) ===
