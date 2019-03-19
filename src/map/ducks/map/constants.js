@@ -1,5 +1,4 @@
 export const REDUCER_KEY = 'map';
-// export { REDUCER_KEY as MAP };
 export const MAP_BOUNDING_BOX = 'MAP_BOUNDING_BOX';
 export const MAP_EMPTY_GEOMETRY = 'MAP_EMPTY_GEOMETRY';
 export const MAP_END_DRAWING = 'MAP_END_DRAWING';
@@ -16,6 +15,7 @@ export const SET_MAP_CLICK_LOCATION = 'SET_MAP_CLICK_LOCATION';
 export const TOGGLE_MAP_PANEL = 'TOGGLE_MAP_PANEL';
 export const CLOSE_MAP_PANEL = 'CLOSE_MAP_PANEL';
 export const MAP_LOADING = 'MAP_LOADING';
+export const TOGGLE_MAP_EMBED = 'TOGGLE_MAP_EMBED';
 
 export const DEFAULT_LAT = 52.3731081;
 export const DEFAULT_LNG = 4.8932945;
@@ -33,4 +33,3 @@ export const initialState = {
   shapeAreaTxt: '',
   mapPanelActive: false
 };
-

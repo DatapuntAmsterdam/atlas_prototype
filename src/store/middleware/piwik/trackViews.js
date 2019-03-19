@@ -1,5 +1,4 @@
 import { routing } from '../../../app/routes';
-import { isEmbedded } from '../../../shared/ducks/ui/ui';
 import { getDetail } from '../../../shared/ducks/detail/selectors';
 import { PIWIK_CONSTANTS } from './piwikMiddleware';
 import { FETCH_DETAIL_SUCCESS } from '../../../shared/ducks/detail/constants';
@@ -27,13 +26,8 @@ views = {
       null
     ] : [];
   },
-  'atlasRouter/DATA': function trackView({ firstAction = null, href, title, state }) {
-    return (isEmbedded(state)) ? [
-      PIWIK_CONSTANTS.TRACK_EVENT,
-      'embed', // PAGEVIEW -> MAP IN EMBED VIEW
-      'embedkaart',
-      href
-    ] : (firstAction) ? [
+  'atlasRouter/DATA': function trackView({ firstAction = null, href, title }) {
+    return (firstAction) ? [
       PIWIK_CONSTANTS.TRACK_VIEW,
       title, // PAGEVIEW -> MAP
       href,

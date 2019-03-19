@@ -1,8 +1,8 @@
 import piwikTracker from '../../../shared/services/piwik-tracker/piwik-tracker';
 import { ENVIRONMENTS, getEnvironment } from '../../../shared/environment';
-import { getUserScopes, userIsAuthenticated } from '../../../shared/ducks/user/user';
 import trackEvents from './trackEvents';
 import trackViews from './trackViews';
+import { authCustomDimensions, viewCustomDimensions } from './customDimensions';
 
 // Configure environment variables
 const PIWIK_CONFIG = {
@@ -23,14 +23,7 @@ const PIWIK_CONFIG = {
 export const PIWIK_CONSTANTS = {
   TRACK_EVENT: 'trackEvent',
   TRACK_SEARCH: 'trackSiteSearch',
-  TRACK_VIEW: 'trackPageView',
-  DIMENSION3: {
-    AUTHENTICATED: true,
-    UNAUTHENTICATED: false
-  },
-  DIMENSION4: {
-    UNDEFINED: null
-  }
+  TRACK_VIEW: 'trackPageView'
 };
 
 // Initialize connection with Piwik
@@ -57,22 +50,6 @@ export const initializePiwik = () => {
   }
 };
 
-const authCustomDimensions = (state) => {
-  const authenticated = (userIsAuthenticated(state))
-    ? PIWIK_CONSTANTS.DIMENSION3.AUTHENTICATED : PIWIK_CONSTANTS.DIMENSION3.UNAUTHENTICATED;
-  const scopes = (authenticated) ? getUserScopes(state) : [];
-
-  let role = PIWIK_CONSTANTS.DIMENSION4.UNDEFINED;
-  if (scopes.length > 0) {
-    role = scopes.sort().join('|');
-  }
-
-  return [
-    { id: 3, value: authenticated }, // customDimension = 'Authenticated'
-    { id: 4, value: role } // customDimension = 'Role'
-  ];
-};
-
 // Execute Piwik actions
 const piwikMiddleware = ({ getState }) => (next) => (action) => {
   initializePiwik();
@@ -94,7 +71,11 @@ const piwikMiddleware = ({ getState }) => (next) => (action) => {
     const title = window.document.title;
 
     if (tracking || location) {
-      const customDimensions = authCustomDimensions(state);
+      const customDimensions = [
+        ...authCustomDimensions(state),
+        ...viewCustomDimensions(query, state)
+      ];
+
       actionsToPiwik.forEach((piwikAction) => {
         piwikTracker(
           piwikAction({ tracking, firstAction, query, state, title, href }),

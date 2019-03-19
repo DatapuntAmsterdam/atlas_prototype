@@ -4,7 +4,7 @@ import {
   MAP_EMPTY_GEOMETRY, MAP_UPDATE_SHAPE, MAP_SET_DRAWING_MODE, MAP_END_DRAWING,
   MAP_CLEAR, MAP_ZOOM, TOGGLE_MAP_PANEL, CLOSE_MAP_PANEL, SET_MAP_BASE_LAYER,
   TOGGLE_MAP_OVERLAY, TOGGLE_MAP_OVERLAY_PANORAMA, TOGGLE_MAP_OVERLAY_VISIBILITY,
-  MAP_PAN, SET_MAP_CLICK_LOCATION, MAP_BOUNDING_BOX, MAP_LOADING
+  MAP_PAN, SET_MAP_CLICK_LOCATION, MAP_BOUNDING_BOX, MAP_LOADING, TOGGLE_MAP_EMBED
 } from './constants';
 
 // Actions
@@ -74,3 +74,4 @@ export const updateBoundingBox = (payload) => ({
 });
 
 export const mapLoadingAction = (payload) => ({ type: MAP_LOADING, payload });
+export const toggleEmbedButtonAction = () => ({ type: TOGGLE_MAP_EMBED, meta: { tracking: true } });
