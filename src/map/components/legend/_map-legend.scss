@@ -150,10 +150,6 @@ $icon-height: 24px;
 
     &__image {
       margin-left: 0;
-
-      &--not-selectable {
-        margin-left: 36px;
-      }
     }
 
     &__item {
@@ -169,10 +165,16 @@ $icon-height: 24px;
     }
   }
 
-  .is-print-mode {
+  .is-print-mode & {
     &__category {
       .checkbox {
         display: none;
+      }
+    }
+
+    &__image {
+      &--not-selectable {
+        margin-left: 36px;
       }
     }
 

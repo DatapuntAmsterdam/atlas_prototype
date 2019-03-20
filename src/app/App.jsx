@@ -19,7 +19,6 @@ import { getPage, isHomepage } from '../store/redux-first-router/selectors';
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe';
 import GeneralErrorMessage from './components/PanelMessages/ErrorMessage/ErrorMessageContainer';
 import ModalComponent from './components/Modal';
-import LoadingIndicator from '../map/components/loading-indicator/LoadingIndicator';
 
 const ContentPage = React.lazy(() => import('./pages/ContentPage'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -89,7 +88,7 @@ const App = ({
         }
       }}
     >
-      <Suspense fallback={<LoadingIndicator loading />}>
+      <Suspense fallback={<React.Fragment />}>
         <div
           className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}
         >

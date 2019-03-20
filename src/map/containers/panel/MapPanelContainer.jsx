@@ -8,7 +8,7 @@ import {
 import { getBaseLayers } from '../../ducks/base-layers/map-base-layers';
 import {
   isMapPanelHandleVisible,
-  isPrintOrEmbedMode,
+  isPrintMode,
   toggleMapPanelHandle
 } from '../../../shared/ducks/ui/ui';
 import MapPanel from './MapPanel';
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
   overlays: getMapOverlays(state),
   zoomLevel: getMapZoom(state),
   user: getUser(state),
-  isEmbedOrPrint: isPrintOrEmbedMode(state),
+  isPrint: isPrintMode(state),
   isMapPanelVisible: isMapPanelActive(state)
 });
 

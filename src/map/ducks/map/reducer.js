@@ -100,7 +100,7 @@ export default function MapReducer(state = initialState, action) {
           (overlay) => !isPanoLayer(overlay) && action.payload.mapLayers.includes(overlay.id)
         ) ? [...enrichedState.overlays.filter(
           (overlay) => !action.payload.mapLayers.includes(overlay.id)
-        )] : [...enrichedState.overlays, ...action.payload.mapLayers.map(
+        )] : [...enrichedState.overlays, ...action.payload.mapLayers.reverse().map(
           (mapLayerId) => ({ id: mapLayerId, isVisible: true })
         )]
       };

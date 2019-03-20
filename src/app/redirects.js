@@ -71,7 +71,7 @@ const legacyRoutes = [
 const shortUrls = [
   {
     from: '/themakaart/taxi',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=pr%3A1%7Coovtig%3A1%7Cvezips%3A1%7Cmzt%3A0%7Cbgt%3A1%7Ctar%3A1%7Cpvrts%3A1%7Cpvrll%3A1%7Cpvrpr%3A0&${LEGEND}=true`
+    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=pr%3A1%7Coovtig%3A1%7Cvezips%3A1%7Cmzt%3A0%7Cslpb%3A1%7Cslpnb%3A1%3A0%7Cbgt%3A1%7Ctar%3A1%7Cpvrts%3A1%7Cpvrll%3A1%7Cpvrpr&${LEGEND}=true`
   }
 ];
 

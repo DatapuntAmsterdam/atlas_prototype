@@ -368,9 +368,9 @@ const mapLayers = [
     category: THEMES.GEOGRAPHY_GEB,
     legendItems: [
       {
-        id: 'sd',
-        layers: ['stadsdeel', 'stadsdeel_label'],
-        title: 'Stadsdeel'
+        id: 'buurt',
+        layers: ['buurt', 'buurt_label'],
+        title: 'Buurt'
       },
       {
         id: 'bc',
@@ -378,9 +378,9 @@ const mapLayers = [
         title: 'Wijk'
       },
       {
-        id: 'buurt',
-        layers: ['buurt', 'buurt_label'],
-        title: 'Buurt'
+        id: 'sd',
+        layers: ['stadsdeel', 'stadsdeel_label'],
+        title: 'Stadsdeel'
       }
     ],
     title: 'Bestuurlijke gebieden',
@@ -990,7 +990,7 @@ const mapLayers = [
         id: 'tar',
         imageRule: 'Taxiroutes',
         layers: ['taxiroutes'],
-        title: 'Hoofdroutes Taxi\'s'
+        title: 'Hoofdroutes taxi\'s'
       }
     ],
     title: 'Routes - Taxi',
@@ -1928,19 +1928,19 @@ export const mapPanelLayers = ([
 
 export default [
   ...mapLayers.map((mapLayer) => (Object.prototype.hasOwnProperty.call(mapLayer, 'id')
-      ? mapLayer
-      : mapLayer.legendItems.map((legendItem) => (Object.prototype.hasOwnProperty.call(legendItem, 'id')
-          ? ({
-            layers: mapLayer.layers,
-            url: mapLayer.url,
-            detailUrl: mapLayer.detailUrl,
-            detailItem: mapLayer.detailItem,
-            detailIsShape: mapLayer.detailIsShape,
-            minZoom: mapLayer.minZoom,
-            ...legendItem
-          })
-          : null
-      ))
+    ? mapLayer
+    : mapLayer.legendItems.map((legendItem) => (Object.prototype.hasOwnProperty.call(legendItem, 'id')
+      ? ({
+        layers: mapLayer.layers,
+        url: mapLayer.url,
+        detailUrl: mapLayer.detailUrl,
+        detailItem: mapLayer.detailItem,
+        detailIsShape: mapLayer.detailIsShape,
+        minZoom: mapLayer.minZoom,
+        ...legendItem
+      })
+      : null
+    ))
   ))
 ].reduce((acc, val) => acc.concat(val), []); // Alternative to .flat()
 /* eslint-enable max-len */

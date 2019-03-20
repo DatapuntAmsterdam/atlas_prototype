@@ -15,7 +15,7 @@ exports[`LoadingIndicator should render everything 1`] = `
     <span
       className="c-loading-indicator__text"
     >
-      Bezig met laden...
+      Laden...
     </span>
   </div>
 </div>
@@ -36,7 +36,7 @@ exports[`LoadingIndicator should render with classname is-loadingf 1`] = `
     <span
       className="c-loading-indicator__text"
     >
-      Bezig met laden...
+      Laden...
     </span>
   </div>
 </div>
