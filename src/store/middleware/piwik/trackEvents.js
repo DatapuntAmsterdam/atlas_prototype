@@ -34,7 +34,8 @@ import {
 import {
   MAP_SET_DRAWING_MODE,
   SET_MAP_BASE_LAYER,
-  SET_MAP_CLICK_LOCATION
+  SET_MAP_CLICK_LOCATION,
+  TOGGLE_MAP_EMBED
 } from '../../../map/ducks/map/constants';
 import { getShapeMarkers } from '../../../map/ducks/map/selectors';
 import {
@@ -108,6 +109,13 @@ const trackEvents = {
     'navigation',
     'home',
     title
+  ],
+  // NAVIGATION -> TOGGLE FROM EMBEDDED MAP
+  [TOGGLE_MAP_EMBED]: () => [
+    PIWIK_CONSTANTS.TRACK_EVENT,
+    'navigation',
+    'embedkaart-naar-portaal',
+    null
   ],
   // NAVIGATION -> CHANGE VIEW MODE
   [SET_VIEW_MODE]: ({ tracking, state }) => {

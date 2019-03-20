@@ -11,7 +11,7 @@ const MapEmbedButton = ({ toggleEmbedButton }) => (
     onClick={(e) => {
       e.preventDefault();
       toggleEmbedButton();
-      window.open(getEmbedButtonLink(), '_blank');
+      setTimeout(() => window.open(getEmbedButtonLink(), '_blank'), 300);
     }}
     title="Naar interactieve kaart (Amsterdam City Data)"
     className="c-embed-button qa-embed-button"

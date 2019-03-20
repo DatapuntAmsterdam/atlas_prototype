@@ -74,4 +74,10 @@ export const updateBoundingBox = (payload) => ({
 });
 
 export const mapLoadingAction = (payload) => ({ type: MAP_LOADING, payload });
-export const toggleEmbedButtonAction = () => ({ type: TOGGLE_MAP_EMBED, meta: { tracking: true } });
+
+export const toggleEmbedButtonAction = () => ({
+  type: TOGGLE_MAP_EMBED,
+  meta: {
+    tracking: true
+  }
+});
