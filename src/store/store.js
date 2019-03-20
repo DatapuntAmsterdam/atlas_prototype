@@ -39,8 +39,6 @@ const configureStore = (routesMap) => {
 
   paramsRegistry.history = history;
 
-  console.log(paramsRegistry.history)
-
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const sagaMiddleware = createSagaMiddleware();
   const enhancer = composeEnhancers(

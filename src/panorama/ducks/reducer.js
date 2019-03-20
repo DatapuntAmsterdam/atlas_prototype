@@ -39,7 +39,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...enrichedState,
         isLoading: true
-        // tags: action.payload
       };
 
     case FETCH_PANORAMA_SUCCESS:

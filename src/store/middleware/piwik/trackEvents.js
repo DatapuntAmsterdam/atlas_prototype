@@ -37,6 +37,7 @@ import {
   SET_MAP_CLICK_LOCATION
 } from '../../../map/ducks/map/constants';
 import { getShapeMarkers } from '../../../map/ducks/map/selectors';
+import { getLabelObjectByTags } from '../../../panorama/ducks/selectors';
 import { NAVIGATE_HOME_REQUEST, REPORT_PROBLEM_REQUEST } from '../../../header/ducks/actions';
 import {
   FETCH_PANORAMA_HOTSPOT_REQUEST,
@@ -301,12 +302,17 @@ const trackEvents = {
   },
   // PANORAMA
   // PANORAMA -> TOGGLE "missionType" / "missionYear"
-  [SET_PANORAMA_TAGS]: ({ tracking }) => [
-    PIWIK_CONSTANTS.TRACK_EVENT,
-    'panorama-set',
-    (tracking.year > 0) ? `panorama-set-${tracking.year}${tracking.missionType}` : 'panorama-set-recent',
-    null
-  ],
+  [SET_PANORAMA_TAGS]: function trackPanoramaTags({ tracking }) {
+    const { layerId } = getLabelObjectByTags(tracking);
+    const set = (tracking.length > 1) ? layerId.replace('pano', '') : 'recent';
+
+    return ([
+      PIWIK_CONSTANTS.TRACK_EVENT,
+      'panorama-set',
+      `panorama-set-${set}`,
+      null
+    ]);
+  },
   // PANORAMA -> TOGGLE "external"
   [FETCH_PANORAMA_REQUEST_EXTERNAL]: () => [
     PIWIK_CONSTANTS.TRACK_EVENT,

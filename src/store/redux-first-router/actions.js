@@ -90,7 +90,7 @@ export const toPanorama = (id, additionalParams = null) => ({
   },
   meta: {
     preserve: true,
-    additionalParams
+    ...additionalParams
   }
 });
 

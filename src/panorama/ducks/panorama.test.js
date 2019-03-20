@@ -55,7 +55,7 @@ describe('Panorama Reducer', () => {
       expect(
         reducer({}, setPanoramaTags(['mission-bi', 'mission-2018']))
       ).toEqual({
-        tags: ['mission-bi', 'mission-2018']
+        isLoading: true
       });
     });
   });
