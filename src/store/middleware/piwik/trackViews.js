@@ -6,8 +6,8 @@ import { isDatasetDetailPage } from '../../redux-first-router/selectors';
 
 let views = Object.entries(routing).reduce((acc, [, value]) => ({
   ...acc,
-  [value.type]: function trackView({ firstAction = null, href, title }) {
-    return (firstAction) ? [
+  [value.type]: function trackView({ firstAction = null, query = {}, href, title }) {
+    return (firstAction || !!query.print) ? [
       PIWIK_CONSTANTS.TRACK_VIEW,
       title,
       href,
@@ -18,23 +18,23 @@ let views = Object.entries(routing).reduce((acc, [, value]) => ({
 
 views = {
   ...views,
-  'atlasRouter/HOME': function trackView({ firstAction = null, href, title }) {
-    return (firstAction) ? [
+  'atlasRouter/HOME': function trackView({ firstAction = null, query = {}, href, title }) {
+    return (firstAction || !!query.print) ? [
       PIWIK_CONSTANTS.TRACK_VIEW,
       title,
       href,
       null
     ] : [];
   },
-  'atlasRouter/DATA': function trackView({ firstAction = null, href, title }) {
-    return (firstAction) ? [
+  'atlasRouter/DATA': function trackView({ firstAction = null, query = {}, href, title }) {
+    return (firstAction || !!query.print) ? [
       PIWIK_CONSTANTS.TRACK_VIEW,
       title, // PAGEVIEW -> MAP
       href,
       null
     ] : [];
   },
-  'atlasRouter/DATA_DETAIL': function trackView({ firstAction = null, href, title, state, tracking }) {
+  'atlasRouter/DATA_DETAIL': function trackView({ firstAction = null, query = {}, href, title, state, tracking }) {
     return (
       !firstAction && (tracking && tracking.id !== getDetail(state).id)
     ) ? [
@@ -42,7 +42,7 @@ views = {
       title, // PAGEVIEW -> DETAIL VIEW CLICK THROUGH VIEWS
       href,
       null
-    ] : (firstAction) ? [
+    ] : (firstAction || !!query.print) ? [
       PIWIK_CONSTANTS.TRACK_VIEW,
       title, // PAGEVIEW -> DETAIL VIEW INITIAL LOAD
       href,

@@ -12,9 +12,9 @@ export const mapDocumentTitle = (action, defaultTitle) => {
   const embed = get(action, `meta.query[${PARAMETERS.EMBED}]`, 'false');
   if (view === VIEW_MODE.MAP) {
     pageTitle = 'Grote kaart';
-    if (embed === 'true') {
-      pageTitle = `${pageTitle} | Embedded`;
-    }
+  }
+  if (embed === 'true') {
+    pageTitle = `${pageTitle} | Embedded`;
   }
 
   return pageTitle;
@@ -23,7 +23,12 @@ export const mapDocumentTitle = (action, defaultTitle) => {
 export const detailDocumentTitle = (action, defaultTitle = 'UNKNOWN') => {
   const glossaryKey = toGlossaryKey(action.payload.type, action.payload.subtype);
   const glossaryDefinition = GLOSSARY.DEFINITIONS[glossaryKey];
-  const label = glossaryDefinition ? glossaryDefinition.label_singular : defaultTitle;
+  let label = glossaryDefinition ? glossaryDefinition.label_singular : defaultTitle;
+  const embed = get(action, `meta.query[${PARAMETERS.EMBED}]`, 'false');
+
+  if (embed === 'true') {
+    label = `${label} | Embedded`;
+  }
 
   return `${label}`;
 };
