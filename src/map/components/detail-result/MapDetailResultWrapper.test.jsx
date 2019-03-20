@@ -1,8 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
 
-import MapDetailResultWrapper
-  from './MapDetailResultWrapper';
+import MapDetailResultWrapper from './MapDetailResultWrapper';
+
+const store = configureMockStore()({
+  ui: {
+    isEmbed: false
+  }
+});
 
 describe('MapDetailResultWrapper', () => {
   it('should render everything', () => {
@@ -19,8 +25,8 @@ describe('MapDetailResultWrapper', () => {
           <li>Item 1</li>
           <li>Item 2</li>
         </ul>
-      </MapDetailResultWrapper>
-    );
+      </MapDetailResultWrapper>,
+      { context: { store } }).dive();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -38,8 +44,8 @@ describe('MapDetailResultWrapper', () => {
           <li>Item 1</li>
           <li>Item 2</li>
         </ul>
-      </MapDetailResultWrapper>
-    );
+      </MapDetailResultWrapper>,
+      { context: { store } }).dive();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -57,8 +63,8 @@ describe('MapDetailResultWrapper', () => {
           <li>Item 1</li>
           <li>Item 2</li>
         </ul>
-      </MapDetailResultWrapper>
-    );
+      </MapDetailResultWrapper>,
+      { context: { store } }).dive();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -75,8 +81,8 @@ describe('MapDetailResultWrapper', () => {
           <li>Item 1</li>
           <li>Item 2</li>
         </ul>
-      </MapDetailResultWrapper>
-    );
+      </MapDetailResultWrapper>,
+      { context: { store } }).dive();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -88,8 +94,7 @@ describe('MapDetailResultWrapper', () => {
         title="title"
         onMaximize={clickHandler}
         onPanoPreviewClick={clickHandler}
-      />
-    );
+      />, { context: { store } }).dive();
     expect(wrapper).toMatchSnapshot();
   });
 });

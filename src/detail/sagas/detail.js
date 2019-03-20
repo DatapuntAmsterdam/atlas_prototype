@@ -1,16 +1,15 @@
 import { select } from 'redux-saga/effects';
 import { getUserScopes } from '../../shared/ducks/user/user';
-import { getTemplateUrl, getParts } from '../services/endpoint-parser/endpoint-parser';
+import { getParts, getTemplateUrl } from '../services/endpoint-parser/endpoint-parser';
 import { getApiSpecificationData } from '../../shared/ducks/datasets/datasets';
 import formatDetailData from '../services/data-formatter/data-formatter';
 import { getByUrl } from '../../shared/services/api/api';
 
-
-export function* getDetailData(endpoint, mapDetail = {}) {
+export default function* getDetailData(endpoint, mapDetail = {}) {
   const includeSrc = getTemplateUrl(endpoint);
   const [category, subject] = getParts(endpoint);
 
- // TODO ensure api specification
+  // TODO ensure api specification
   const scopes = yield select(getUserScopes);
 
   if ((category === 'brk' && subject === 'subject' && !scopes.includes('BRK/RS')) ||
@@ -46,9 +45,4 @@ export function* getDetailData(endpoint, mapDetail = {}) {
       [subject]: formatedData.naam
     }
   };
-}
-
-/* istanbul ignore next */
-export default function* watchDetailRoute() {
-  // yield takeLatest([routing.dataDetail.type], fetchDetail);
 }

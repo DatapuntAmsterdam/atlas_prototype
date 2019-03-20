@@ -25,6 +25,10 @@ $icon-padding: 4px;
     background-color: $primary-contrast;
   }
 
+  &--disclaimer {
+    background-color: $secondary-gray60;
+  }
+
   &--message {
     color: $secondary-gray40;
     font-family: "Avenir LT W01 45 Book";
@@ -42,7 +46,7 @@ $icon-padding: 4px;
   }
 
   &__content {
-    line-height: $icon-dimension;
+    line-height: 2 * $base-whitespace;
     vertical-align: middle;
   }
 

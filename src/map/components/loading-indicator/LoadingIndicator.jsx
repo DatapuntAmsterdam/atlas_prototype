@@ -6,7 +6,7 @@ const LoadingIndicator = ({ loading }) => (
   <div className={`qa-loading-indicator ${loading ? 'is-loading' : ''}`}>
     <div className="c-loading-indicator c-loading-indicator--box">
       <img className="c-loading-indicator__icon" src="/assets/images/spinner.svg" alt="" />
-      <span className="c-loading-indicator__text">Bezig met laden...</span>
+      <span className="c-loading-indicator__text">Laden...</span>
     </div>
   </div>
 );

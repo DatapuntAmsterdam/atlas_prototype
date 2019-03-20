@@ -9,8 +9,12 @@ import { closeMapPanel, mapLoadingAction } from '../../ducks/map/actions';
 import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants';
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui';
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors';
-import fetchLegacyDetail from '../../../detail/sagas/detail';
-import { fetchDetailSuccess, clearMapDetail, showDetail, fetchDetailFailure } from '../../../shared/ducks/detail/actions';
+import {
+  clearMapDetail,
+  fetchDetailFailure,
+  fetchDetailSuccess,
+  showDetail
+} from '../../../shared/ducks/detail/actions';
 import { toNotFoundPage } from '../../../store/redux-first-router/actions';
 
 describe('watchFetchMapDetail', () => {
@@ -45,8 +49,6 @@ describe('fetchDetailEffect', () => {
       .next('endpoint')
       .put(getMapDetail('endpoint'))
       .next()
-      .call(fetchLegacyDetail)
-      .next()
       .isDone();
   });
 
@@ -64,8 +66,6 @@ describe('fetchDetailEffect', () => {
       .select(getDetailEndpoint)
       .next('endpoint')
       .put(getMapDetail('endpoint'))
-      .next()
-      .call(fetchLegacyDetail)
       .next()
       .isDone();
   });

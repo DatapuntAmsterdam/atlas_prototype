@@ -1,5 +1,4 @@
 import getState from '../redux/get-state';
-
 import mapLayers from '../../../map/services/map-layers/map-layers.config';
 
 const findLayer = (id) => mapLayers.find((mapLayer) => mapLayer.id === id);

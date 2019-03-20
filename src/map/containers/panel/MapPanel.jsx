@@ -22,7 +22,7 @@ class MapPanel extends React.Component {
     const {
       isMapPanelVisible, activeBaseLayer, mapBaseLayers, onBaseLayerToggle, mapLayers,
       onMapPanelHandleToggle, activeMapLayers, onMapPanelToggle, onLayerToggle,
-      onLayerVisibilityToggle, overlays, user, isEmbedOrPrint, zoomLevel,
+      onLayerVisibilityToggle, overlays, user, isPrint, zoomLevel,
       isMapPanelHandleVisible: mapPanelHandleVisisble
     } = this.props;
     return (
@@ -60,7 +60,7 @@ class MapPanel extends React.Component {
               overlays={overlays}
               user={user}
               zoomLevel={zoomLevel}
-              isEmbedOrPrint={isEmbedOrPrint}
+              isPrint={isPrint}
             />
           )}
           <MapPanelHandle
@@ -99,7 +99,7 @@ MapPanel.propTypes = {
   activeMapLayers: PropTypes.array, // eslint-disable-line
   isMapPanelHandleVisible: PropTypes.bool.isRequired,
   isMapPanelVisible: PropTypes.bool,
-  isEmbedOrPrint: PropTypes.bool.isRequired,
+  isPrint: PropTypes.bool.isRequired,
   map: PropTypes.object, // eslint-disable-line
   mapBaseLayers: PropTypes.object, // eslint-disable-line
   mapLayers: PropTypes.arrayOf(PropTypes.object),

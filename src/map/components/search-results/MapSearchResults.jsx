@@ -6,6 +6,7 @@ import MapSearchResultsCategory from './map-search-results-category/MapSearchRes
 import Notification from '../../../shared/components/notification/Notification';
 
 const MapSearchResults = ({
+  isEmbed,
   resultLimit,
   location,
   missingLayers,
@@ -76,6 +77,7 @@ const MapSearchResults = ({
             ))
           }
         </ul>
+        {!isEmbed &&
         <footer className="map-search-results__footer">
           <button
             className="map-search-results__button"
@@ -89,6 +91,7 @@ const MapSearchResults = ({
             Volledig weergeven
           </button>
         </footer>
+        }
       </div>
     </section>
   );
@@ -104,6 +107,7 @@ MapSearchResults.propTypes = {
   onItemClick: PropTypes.func.isRequired,
   onMaximize: PropTypes.func.isRequired,
   onPanoPreviewClick: PropTypes.func.isRequired,
+  isEmbed: PropTypes.bool.isRequired,
   resultLimit: PropTypes.number,
   panoUrl: PropTypes.string, // eslint-disable-line
   results: PropTypes.array // eslint-disable-line

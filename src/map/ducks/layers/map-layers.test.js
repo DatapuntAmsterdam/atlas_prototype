@@ -66,7 +66,7 @@ describe('selectors', () => {
   const mapLayers = [
     {
       id: 'biz',
-      url: 'maps/biz',
+      url: '/maps/biz',
       layers: ['biz_polygons'],
       detailUrl: 'geosearch/biz/',
       detailItem: 'biz',
@@ -75,7 +75,7 @@ describe('selectors', () => {
     {
       id: 'hvo',
       authScope: 'HR/R',
-      url: 'maps/handelsregister',
+      url: '/maps/handelsregister',
       layers: ['handel_vervoer_opslag', 'handel_vervoer_opslag_label'],
       detailUrl: 'handelsregister/geosearch/',
       detailItem: 'handel_vervoer_opslag'
@@ -106,10 +106,12 @@ describe('selectors', () => {
       expect(selected).toEqual([]);
     });
 
-    it('should return an array with layers without a authScope if there is no token', () => {
+    it('should return an array with layers with an undefined authScope if there is no token', () => {
       const selected = getLayers.resultFunc(overlays, '', mapLayers);
       expect(selected).toEqual([
         {
+          authScope: undefined,
+          bounds: undefined,
           id: 'biz',
           isVisible: true,
           overlayOptions: {
@@ -118,7 +120,9 @@ describe('selectors', () => {
             layers: ['biz_polygons'],
             transparent: true
           },
-          url: 'https://acc.map.data.amsterdam.nl/maps/biz'
+          url: 'https://acc.map.data.amsterdam.nl/maps/biz',
+          params: undefined,
+          type: undefined
         }
       ]);
     });

@@ -8,7 +8,7 @@ import { normalizeLocation } from '../../../shared/services/coordinate-reference
 import { toGeoSearch } from '../../../store/redux-first-router/actions';
 import PARAMETERS from '../../../store/parameters';
 import { requestNearestDetails } from '../../../shared/ducks/data-search/actions';
-import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui';
+import { getViewMode, isEmbedded, VIEW_MODE } from '../../../shared/ducks/ui/ui';
 
 const latitudeLongitudeToArray = (location) => [location.latitude, location.longitude];
 
@@ -34,6 +34,7 @@ export function* switchClickAction(action) {
     const zoom = yield select(getMapZoom);
     const layers = yield select(getLayers);
     const view = yield select(getViewMode);
+    const isEmbed = yield select(isEmbedded);
 
     if (layers.length) {
       yield put(
@@ -44,7 +45,7 @@ export function* switchClickAction(action) {
           view: (view !== VIEW_MODE.MAP) ? VIEW_MODE.SPLIT : VIEW_MODE.MAP
         })
       );
-    } else {
+    } else if (!isEmbed) {
       yield call(goToGeoSearch, location);
     }
   }

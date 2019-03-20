@@ -56,21 +56,21 @@ const layers = [
     legendItems: [
       {
         id: 'bgem',
-        notClickable: true,
+        noDetail: true,
         layer: 'burgerlijke_gemeente',
         selectable: true,
         title: 'Burgerlijke gemeente'
       },
       {
         id: 'kgem',
-        notClickable: true,
+        noDetail: true,
         layer: 'kadastrale_gemeente',
         selectable: true,
         title: 'Kadastrale gemeente'
       },
       {
         id: 'ksec',
-        notClickable: true,
+        noDetail: true,
         layer: 'kadastrale_sectie',
         selectable: true,
         title: 'Kadastrale sectie'
@@ -95,21 +95,21 @@ const activeLayers = [
     legendItems: [
       {
         id: 'bgem',
-        notClickable: true,
+        noDetail: true,
         layer: 'burgerlijke_gemeente',
         selectable: true,
         title: 'Burgerlijke gemeente'
       },
       {
         id: 'kgem',
-        notClickable: true,
+        noDetail: true,
         layer: 'kadastrale_gemeente',
         selectable: true,
         title: 'Kadastrale gemeente'
       },
       {
         id: 'ksec',
-        notClickable: true,
+        noDetail: true,
         layer: 'kadastrale_sectie',
         selectable: true,
         title: 'Kadastrale sectie 1'

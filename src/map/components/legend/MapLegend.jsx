@@ -20,14 +20,14 @@ class MapLegend extends React.Component {
       return legendItem.iconUrl;
     }
 
-    const url = MAP_CONFIG.OVERLAY_ROOT.slice(0, -1); // This removes last character '/'
-
     return [
-      url,
-      `${mapLayer.url}&`,
+      MAP_CONFIG.OVERLAY_ROOT,
+      `${mapLayer.url}?`,
+      `version=${MAP_CONFIG.VERSION_NUMBER}&`,
+      'service=WMS&',
       'request=GetLegendGraphic&',
-      'sld_version=1.1.0&',
-      `layer=${legendItem.layer || mapLayer.layers[0]}&`,
+      `sld_version=${MAP_CONFIG.SLD_VERSION}&`,
+      `layer=${(legendItem.layers && legendItem.layers[0]) || (mapLayer.layers && mapLayer.layers[0])}&`,
       'format=image/svg%2Bxml&',
       `rule=${encodeURIComponent(legendItem.imageRule || legendItem.title)}`
     ].join('');
@@ -55,7 +55,7 @@ class MapLegend extends React.Component {
 
   render() {
     const {
-      activeMapLayers, onLayerVisibilityToggle, user, zoomLevel, isEmbedOrPrint
+      activeMapLayers, onLayerVisibilityToggle, user, zoomLevel, isPrint
     } = this.props;
 
     return (
@@ -85,7 +85,7 @@ class MapLegend extends React.Component {
                     }
                   />
                   <h4 className="map-legend__category-title">{mapLayer.title}</h4>
-                  { !mapLayer.notClosable && <button
+                  {!mapLayer.notClosable && <button
                     className="map-legend__toggle map-legend__toggle--remove"
                     onClick={() => this.props.onLayerToggle(mapLayer)}
                   />}
@@ -106,7 +106,7 @@ class MapLegend extends React.Component {
                   <ul className="map-legend__items">
                     {mapLayer.legendItems.map((legendItem, legendItemIndex) => {
                       const legendItemIsVisible = this.determineLegendItemVisibility(legendItem);
-                      return (!legendItemIsVisible && isEmbedOrPrint) ? null : (
+                      return (!legendItemIsVisible && isPrint) ? null : (
                         <li
                           className="map-legend__item"
                           // eslint-disable-next-line react/no-array-index-key
@@ -150,7 +150,7 @@ class MapLegend extends React.Component {
 MapLegend.propTypes = {
   activeMapLayers: PropTypes.array, // eslint-disable-line
   onLayerToggle: PropTypes.func, // eslint-disable-line
-  isEmbedOrPrint: PropTypes.bool.isRequired,
+  isPrint: PropTypes.bool.isRequired,
   onLayerVisibilityToggle: PropTypes.func, // eslint-disable-line
   overlays: PropTypes.array, // eslint-disable-line
   user: PropTypes.object, // eslint-disable-line

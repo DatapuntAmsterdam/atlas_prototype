@@ -1,11 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapDetailParkeervak should render everything 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
-  subTitle=""
   title="Parkeervak"
 >
   <ul
@@ -24,5 +23,5 @@ exports[`MapDetailParkeervak should render everything 1`] = `
       value="bord"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;

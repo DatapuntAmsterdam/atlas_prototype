@@ -1,13 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapDetailWinkelgebied should render everything 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
   subTitle="Foo"
   title="Winkelgebied"
 >
+  <Notification
+    canClose={true}
+    className=""
+    level="info"
+  >
+    De grenzen van dit winkelgebied zijn indicatief. Er kunnen geen rechten aan worden ontleend.
+  </Notification>
   <ul
     className="map-detail-result__list"
   >
@@ -16,5 +23,5 @@ exports[`MapDetailWinkelgebied should render everything 1`] = `
       value="Foo foo"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;

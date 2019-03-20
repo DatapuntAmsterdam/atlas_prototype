@@ -2,7 +2,10 @@ import Marzipano from 'marzipano';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { PANORAMA_CONFIG } from '../panorama-api/panorama-api';
-import { degreesToRadians, radiansToDegrees } from '../../../shared/services/angle-conversion/angle-conversion';
+import {
+  degreesToRadians,
+  radiansToDegrees
+} from '../../../shared/services/angle-conversion/angle-conversion';
 import Hotspot from '../../components/Hotspot/Hotspot';
 
 /*
@@ -106,7 +109,7 @@ export function loadScene(viewer, onClickHandler, image, heading, pitch, fov, ho
     pinFirstLevel: true
   });
 
-   // Do not mutate someone else's data collection!
+  // Do not mutate someone else's data collection!
   const hotspotsObject = JSON.parse(JSON.stringify(hotspots));
 
   hotspotsObject

@@ -46,7 +46,7 @@ describe('The dp-loading-indicator', function () {
         expect(component.find('.c-loading-indicator img').attr('src')).toContain('.svg');
         // It's empty by design! The relevant text is shown right after the icon. Don't repeat the same text.
         expect(component.find('.c-loading-indicator img').attr('alt')).toBe('');
-        expect(component.find('.c-loading-indicator').text()).toContain('Bezig met laden');
+        expect(component.find('.c-loading-indicator').text()).toContain('Laden');
     });
 
     it('has an option to delay the showing of the spinner (prevent unnecessary screen flickering)', function () {

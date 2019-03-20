@@ -20,6 +20,7 @@ function commonConfig({ nodeEnv }) {
     },
     output: {
       filename: '[name].bundle.js',
+      chunkFilename: '[name].bundle.js',
       publicPath: '/',
       path: dist
     },
@@ -99,18 +100,6 @@ function commonConfig({ nodeEnv }) {
           loader: 'svg-react-loader'
         }
       ]
-    },
-    optimization: {
-      runtimeChunk: 'single',
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor',
-            chunks: 'all'
-          }
-        }
-      }
     },
     plugins: [
       new CleanWebpackPlugin([dist]),

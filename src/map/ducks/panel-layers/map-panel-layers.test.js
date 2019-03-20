@@ -62,16 +62,16 @@ describe('selectors', () => {
       maxZoom: 16,
       minZoom: 8,
       legendItems: [
-        { id: 'bgem', notClickable: true }
+        { id: 'bgem', noDetail: true }
       ],
-      notClickable: true,
+      noDetail: true,
       title: 'Kadastrale perceelsgrenzen',
       url: '/maps/brk?version=1.3.0&service=WMS'
     },
     {
       category: 'Verkeer en infrastructuur',
       id: 'pv',
-      notClickable: true,
+      noDetail: true,
       layers: ['alle_parkeervakken'],
       legendItems: [
         {
@@ -155,7 +155,7 @@ describe('selectors', () => {
       expect(selected).toEqual([
         {
           id: 'bgem',
-          notClickable: true
+          noDetail: true
         }
       ]);
     });

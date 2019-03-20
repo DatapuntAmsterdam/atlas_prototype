@@ -1,4 +1,4 @@
-import { all, call, put, select, take, takeLatest, throttle } from 'redux-saga/effects';
+import { all, call, put, select, takeLatest, throttle } from 'redux-saga/effects';
 import {
   fetchDataSelection,
   fetchMarkersFailure,
@@ -10,7 +10,7 @@ import {
 } from '../../ducks/data-selection/actions';
 import dataSelectionConfig from '../../services/data-selection/data-selection-config';
 import { getMarkers, query } from '../../services/data-selection/data-selection-api';
-import { getMapBoundingBox, getMapZoom } from '../../../map/ducks/map/selectors';
+import { getMapZoom } from '../../../map/ducks/map/selectors';
 import {
   ADD_FILTER,
   EMPTY_FILTERS,
@@ -61,6 +61,7 @@ import PARAMETERS from '../../../store/parameters';
 import drawToolConfig from '../../../map/services/draw-tool/draw-tool.config';
 import { getViewMode, SET_VIEW_MODE, VIEW_MODE } from '../../ducks/ui/ui';
 import PAGES from '../../../app/pages';
+import BOUNDING_BOX from '../../../map/services/bounding-box.constant';
 
 export function* mapBoundsEffect() {
   const page = yield select(getPage);
@@ -79,15 +80,11 @@ export function* requestMarkersEffect() {
     select(getDataset),
     select(getGeomarkersShape)
   ]);
-  let boundingBox = yield select(getMapBoundingBox);
-  if (!boundingBox) {
-    yield take(MAP_BOUNDING_BOX);
-    boundingBox = yield select(getMapBoundingBox);
-  }
+
   const mapZoom = yield select(getMapZoom);
   try {
     const markerData = yield call(getMarkers,
-      dataset, { shape, ...activeFilters }, mapZoom, boundingBox);
+      dataset, { shape, ...activeFilters }, mapZoom, BOUNDING_BOX.COORDINATES);
     yield put(fetchMarkersSuccess(markerData));
   } catch (e) {
     yield put(fetchMarkersFailure(e));
@@ -239,7 +236,7 @@ function* endMapLoading() {
 export default function* watchFetchDataSelection() {
   yield takeLatest(REMOVE_FILTER, clearShapeFilter);
   yield takeLatest(SET_GEOMETRY_FILTER, setGeometryFilters);
-  yield throttle(1500, MAP_BOUNDING_BOX, mapBoundsEffect);
+  yield throttle(5000, MAP_BOUNDING_BOX, mapBoundsEffect);
   yield takeLatest(
     [
       SET_VIEW_MODE,

@@ -44,7 +44,7 @@ exports[`MapPanel should render MapLegend if store contains active map layers 1`
           Object {},
         ]
       }
-      isEmbedOrPrint={false}
+      isPrint={false}
       onLayerToggle={[Function]}
       onLayerVisibilityToggle={[Function]}
       overlays={
@@ -139,9 +139,9 @@ exports[`MapPanel should render the container 1`] = `
 <MapPanel
   activeBaseLayer=""
   activeMapLayers={Array []}
-  isEmbedOrPrint={false}
   isMapPanelHandleVisible={true}
   isMapPanelVisible={true}
+  isPrint={false}
   map={Object {}}
   mapBaseLayers={Object {}}
   mapLayers={Array []}

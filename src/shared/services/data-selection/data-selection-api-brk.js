@@ -14,12 +14,12 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
     zoom: zoomLevel,
     bbox: JSON.stringify({
       _northEast: {
-        lat: boundingBox.northEast.latitude,
-        lng: boundingBox.northEast.longitude
+        lat: boundingBox.northEast[0],
+        lng: boundingBox.northEast[1]
       },
       _southWest: {
-        lat: boundingBox.southWest.latitude,
-        lng: boundingBox.southWest.longitude
+        lat: boundingBox.southWest[0],
+        lng: boundingBox.southWest[1]
       }
     })
   };

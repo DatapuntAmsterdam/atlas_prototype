@@ -1,8 +1,9 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import fetchNearestDetail from '../../services/nearest-detail/nearest-detail';
 import { REQUEST_NEAREST_DETAILS } from '../../../shared/ducks/data-search/constants';
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions';
 import { goToGeoSearch } from '../map-click/map-click';
+import { isEmbedded } from '../../../shared/ducks/ui/ui';
 
 export function* fetchNearestDetails(action) {
   const {
@@ -13,9 +14,10 @@ export function* fetchNearestDetails(action) {
   } = action.payload;
   try {
     const { uri } = yield call(fetchNearestDetail, location, layers, zoom);
+    const isEmbed = yield select(isEmbedded);
     if (uri) {
       yield put(toDetailFromEndpoint(uri, view));
-    } else {
+    } else if (!isEmbed) {
       yield call(goToGeoSearch, location);
     }
   } catch (error) {

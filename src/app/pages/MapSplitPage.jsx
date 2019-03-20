@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MapContainer from '../../map/containers/map/MapContainer';
-import DetailContainer from '../containers/DetailContainer/DetailContainer';
 
 import { getDetailEndpoint, shouldShowFullScreen } from '../../shared/ducks/detail/selectors';
 import { toDetailFromEndpoint as endpointActionCreator } from '../../store/redux-first-router/actions';
@@ -18,8 +17,10 @@ import {
 } from '../../shared/ducks/ui/ui';
 import { getPage } from '../../store/redux-first-router/selectors';
 import PAGES from '../pages';
-import PanoramaContainer from '../../panorama/containers/PanoramaContainer';
-import LocationSearchContainer from '../components/LocationSearch/LocationSearchContainer';
+
+const DetailContainer = React.lazy(() => import('../containers/DetailContainer/DetailContainer'));
+const LocationSearchContainer = React.lazy(() => import('../components/LocationSearch/LocationSearchContainer'));
+const PanoramaContainer = React.lazy(() => import('../../panorama/containers/PanoramaContainer'));
 
 /* istanbul ignore next */ // TODO: refactor, test
 const MapSplitPage = ({

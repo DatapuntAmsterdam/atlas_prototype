@@ -7,6 +7,7 @@
             bindings: {
                 hasPrintButton: '<',
                 hasEmbedButton: '<',
+                isHomepage: '<',
                 size: '=',
                 user: '<'
             },

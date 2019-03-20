@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapDetailGebiedenGebiedsgerichtWerken should render everything 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -16,5 +16,5 @@ exports[`MapDetailGebiedenGebiedsgerichtWerken should render everything 1`] = `
       value="A"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;

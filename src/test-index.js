@@ -96,7 +96,6 @@ import '../modules/shared/services/window-error-handler/window-error-handler.run
 import '../modules/shared/services/http-error-registrar/http-error-registrar.factory';
 import '../modules/shared/services/http-error-registrar/http-status.factory';
 import '../modules/shared/services/localization/localization.factory';
-import '../modules/shared/services/markdown-parser/markdown-parser.factory';
 import '../modules/shared/services/redux/store.factory';
 import '../modules/shared/services/storage/instance-storage.factory';
 import '../modules/shared/services/storage/storage.factory';
@@ -164,7 +163,6 @@ import '../modules/shared/components/uppercase-first-letter/uppercase-first-lett
 import '../modules/shared/components/coordinates/coordinates.filter.test';
 import '../modules/shared/components/dcatd-button/dcatd-button.component.test';
 import '../modules/shared/services/storage/storage.factory.test';
-import '../modules/shared/services/markdown-parser/markdown-parser.factory.test';
 import '../modules/shared/services/redux/store.factory.test';
 import '../modules/shared/services/window-error-handler/window-error-handler.factory.test';
 import '../modules/shared/services/http-error-registrar/http-error-registrar.factory.test';

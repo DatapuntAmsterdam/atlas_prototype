@@ -19,7 +19,7 @@ describe('MapLegend', () => {
       authenticated: true,
       scopes: ['authscope1']
     },
-    isEmbedOrPrint: false,
+    isPrint: false,
     activeMapLayers: [
       {
         title: 'title',

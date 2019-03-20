@@ -2,8 +2,7 @@
                c-menu__item--toggle
                qa-menu__toggle"
         ng-class="{ 'c-menu__item--toggle--active': isVisible }">
-    <button class="c-menu__link qa-menu__link"
-            ng-click="toggleDropdown()">
+    <button class="c-menu__link qa-menu__link" ng-click="toggleDropdown()" ng-if="!isHomepage">
         <span class="c-menu__title qa-menu__title">{{title}}</span>
     </button>
 

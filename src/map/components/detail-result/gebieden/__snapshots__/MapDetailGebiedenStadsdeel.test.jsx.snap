@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapDetailGebiedenStadsdeel should render everything 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -16,11 +16,11 @@ exports[`MapDetailGebiedenStadsdeel should render everything 1`] = `
       value="A"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailGebiedenStadsdeel should render grex 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[Function]}
   onPanoPreviewClick={[Function]}
   panoUrl="panoUrl"
@@ -58,5 +58,5 @@ exports[`MapDetailGebiedenStadsdeel should render grex 1`] = `
       </ul>
     </div>
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;

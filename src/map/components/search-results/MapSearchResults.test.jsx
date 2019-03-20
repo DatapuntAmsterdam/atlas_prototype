@@ -23,6 +23,7 @@ describe('MapSearchResults', () => {
     const clickHandler = jest.fn();
     shallow(
       <MapSearchResults
+        isEmbed={false}
         location={location}
         onItemClick={clickHandler}
         onMaximize={clickHandler}
@@ -38,6 +39,7 @@ describe('MapSearchResults', () => {
       const clickHandler = jest.fn();
       const wrapper = shallow(
         <MapSearchResults
+          isEmbed={false}
           location={{}}
           onItemClick={clickHandler}
           onMaximize={clickHandler}
@@ -58,11 +60,26 @@ describe('MapSearchResults', () => {
       const panoUrl = 'pano-url';
       const missingLayers = 'Layer 1, Layer 2';
       const results = [
-        { label: 'label', categoryLabel: 'category', uri: 'result-uri-1', type: 'monumenten/monument', results: [], subCategories: [] },
-        { label: 'label', categoryLabel: 'category', uri: 'result-uri-2', type: 'monumenten/monument', results: [], subCategories: [] }
+        {
+          label: 'label',
+          categoryLabel: 'category',
+          uri: 'result-uri-1',
+          type: 'monumenten/monument',
+          results: [],
+          subCategories: []
+        },
+        {
+          label: 'label',
+          categoryLabel: 'category',
+          uri: 'result-uri-2',
+          type: 'monumenten/monument',
+          results: [],
+          subCategories: []
+        }
       ];
       const wrapper = shallow(
         <MapSearchResults
+          isEmbed={false}
           count={count}
           location={location}
           onItemClick={clickHandler}
@@ -84,12 +101,34 @@ describe('MapSearchResults', () => {
       };
       const clickHandler = jest.fn();
       const results = [
-        { label: 'label', categoryLabel: 'category', uri: 'result-uri-1', type: 'bag/pand', results: [], subCategories: [] },
-        { label: 'label', categoryLabel: 'category', uri: 'result-uri-2', type: 'foo', results: [], subCategories: [] },
-        { label: 'label', categoryLabel: 'category', uri: 'result-uri-3', type: 'monumenten/monument', results: [], subCategories: [] }
+        {
+          label: 'label',
+          categoryLabel: 'category',
+          uri: 'result-uri-1',
+          type: 'bag/pand',
+          results: [],
+          subCategories: []
+        },
+        {
+          label: 'label',
+          categoryLabel: 'category',
+          uri: 'result-uri-2',
+          type: 'foo',
+          results: [],
+          subCategories: []
+        },
+        {
+          label: 'label',
+          categoryLabel: 'category',
+          uri: 'result-uri-3',
+          type: 'monumenten/monument',
+          results: [],
+          subCategories: []
+        }
       ];
       const wrapper = shallow(
         <MapSearchResults
+          isEmbed={false}
           count={count}
           location={location}
           onItemClick={clickHandler}
@@ -110,11 +149,26 @@ describe('MapSearchResults', () => {
       const clickHandler = jest.fn();
       const panoUrl = 'pano-url';
       const results = [
-        { label: 'label', categoryLabel: 'category', uri: 'result-uri-1', type: 'bag/pand', results: [], subCategories: [] },
-        { label: 'label', categoryLabel: 'category', uri: 'result-uri-2', type: 'bag/pand', results: [], subCategories: [] }
+        {
+          label: 'label',
+          categoryLabel: 'category',
+          uri: 'result-uri-1',
+          type: 'bag/pand',
+          results: [],
+          subCategories: []
+        },
+        {
+          label: 'label',
+          categoryLabel: 'category',
+          uri: 'result-uri-2',
+          type: 'bag/pand',
+          results: [],
+          subCategories: []
+        }
       ];
       const wrapper = shallow(
         <MapSearchResults
+          isEmbed={false}
           count={count}
           location={location}
           onItemClick={clickHandler}
@@ -135,9 +189,30 @@ describe('MapSearchResults', () => {
         panoUrl: 'other-pano-url',
         missingLayers: 'Layer 3',
         results: [
-          { label: 'label', categoryLabel: 'category', uri: 'result-uri-1', type: 'bag/pand', results: [], subCategories: [] },
-          { label: 'label', categoryLabel: 'category', uri: 'result-uri-2', type: 'bag/pand', results: [], subCategories: [] },
-          { label: 'label', categoryLabel: 'category', uri: 'result-uri-3', type: 'bag/pand', results: [], subCategories: [] }
+          {
+            label: 'label',
+            categoryLabel: 'category',
+            uri: 'result-uri-1',
+            type: 'bag/pand',
+            results: [],
+            subCategories: []
+          },
+          {
+            label: 'label',
+            categoryLabel: 'category',
+            uri: 'result-uri-2',
+            type: 'bag/pand',
+            results: [],
+            subCategories: []
+          },
+          {
+            label: 'label',
+            categoryLabel: 'category',
+            uri: 'result-uri-3',
+            type: 'bag/pand',
+            results: [],
+            subCategories: []
+          }
         ]
       });
       expect(wrapper).toMatchSnapshot();

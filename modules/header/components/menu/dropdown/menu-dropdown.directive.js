@@ -14,6 +14,7 @@ import { showEmbedPreview, showPrintMode } from '../../../../../src/shared/ducks
                 title: '@',
                 type: '@',
                 align: '@',
+                isHomepage: '<',
                 hasPrintButton: '<',
                 hasEmbedButton: '<'
             },

@@ -60,7 +60,7 @@ export const selectNotClickableVisibleMapLayers =
       activePanelLayers
         .map((mapLayer) => [mapLayer, ...mapLayer.legendItems])
         .reduce((accumulator, legendItems) => accumulator.concat(legendItems), [])
-        .filter((legendItem) => legendItem.notClickable)
+        .filter((legendItem) => legendItem.noDetail)
         .filter((legendItem) => overlays
           .some((overlay) => overlay.id === legendItem.id && overlay.isVisible))
     )

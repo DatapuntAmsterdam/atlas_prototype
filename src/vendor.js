@@ -3,7 +3,7 @@ import 'angular';
 import 'angular-aria';
 import 'angular-i18n/nl-nl';
 import 'angular-sanitize';
-import 'leaflet';  // Required to define window.L before leaflet plugins are imported
+import 'leaflet'; // Required to define window.L before leaflet plugins are imported
 import 'leaflet.markercluster';
 import 'leaflet-draw';
 import 'leaflet-rotatedmarker';

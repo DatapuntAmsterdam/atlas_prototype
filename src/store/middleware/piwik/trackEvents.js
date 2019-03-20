@@ -38,7 +38,13 @@ import {
 } from '../../../map/ducks/map/constants';
 import { getShapeMarkers } from '../../../map/ducks/map/selectors';
 import { getLabelObjectByTags } from '../../../panorama/ducks/selectors';
-import { NAVIGATE_HOME_REQUEST, REPORT_PROBLEM_REQUEST } from '../../../header/ducks/actions';
+import {
+  SHOW_MODAL,
+  CLOSE_MODAL,
+  NAVIGATE_HOME_REQUEST,
+  REPORT_FEEDBACK_REQUEST,
+  REPORT_PROBLEM_REQUEST
+} from '../../../header/ducks/actions';
 import {
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   SET_PANORAMA_TAGS,
@@ -328,14 +334,34 @@ const trackEvents = {
     null
   ]),
   // MENU
-  // MENU -> "terugmelden"
-  [REPORT_PROBLEM_REQUEST]: ({ title }) => [
+  // MENU -> TOGGLE MODAL ON
+  [SHOW_MODAL]: ({ title }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
-    'menu',
-    'menu-terugmelden',
+    'feedback',
+    'feedback-menu',
     title
   ],
-  // MENU
+  // MENU -> TOGGLE MODAL OFF
+  [CLOSE_MODAL]: () => [
+    PIWIK_CONSTANTS.TRACK_EVENT,
+    'feedback',
+    'feedback-verlaten',
+    null
+  ],
+  // MENU -> "terugmelden"
+  [REPORT_FEEDBACK_REQUEST]: () => [
+    PIWIK_CONSTANTS.TRACK_EVENT,
+    'feedback',
+    'feedback-terugmelden',
+    null
+  ],
+  // MENU -> "probleem"
+  [REPORT_PROBLEM_REQUEST]: () => [
+    PIWIK_CONSTANTS.TRACK_EVENT,
+    'feedback',
+    'feedback-probleem',
+    null
+  ],
   // MENU -> "embedden"
   [SHOW_EMBED_PREVIEW]: ({ title }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
@@ -343,7 +369,6 @@ const trackEvents = {
     'menu-embedversie',
     title
   ],
-  // MENU
   // MENU -> "printen"
   [SHOW_PRINT]: ({ title }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,

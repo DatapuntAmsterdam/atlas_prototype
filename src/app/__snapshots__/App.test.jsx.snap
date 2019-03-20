@@ -16,44 +16,52 @@ exports[`App should render the homepage 1`] = `
     }
   }
 >
-  <div
-    className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
+  <React.Suspense
+    fallback={
+      <LoadingIndicator
+        loading={true}
+      />
+    }
   >
-    <AngularWrapper
-      bindings={
-        Object {
-          "hasMaxWidth": true,
-          "isEmbedPreview": false,
-          "isHomePage": false,
-          "isPrintMode": false,
-          "isPrintOrEmbedOrPreview": false,
-          "user": Object {},
-        }
-      }
-      component="dpHeader"
-      dependencies={
-        Array [
-          "atlas",
-        ]
-      }
-      interpolateBindings={Object {}}
-      moduleName="dpHeaderWrapper"
-    />
     <div
-      className="c-dashboard__body "
+      className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
     >
+      <AngularWrapper
+        bindings={
+          Object {
+            "hasMaxWidth": true,
+            "isEmbedPreview": false,
+            "isHomePage": false,
+            "isPrintMode": false,
+            "isPrintOrEmbedOrPreview": false,
+            "user": Object {},
+          }
+        }
+        component="dpHeader"
+        dependencies={
+          Array [
+            "atlas",
+          ]
+        }
+        interpolateBindings={Object {}}
+        moduleName="dpHeaderWrapper"
+      />
       <div
-        className="u-grid u-full-height"
+        className="c-dashboard__body "
       >
         <div
-          className="u-row u-full-height"
+          className="u-grid u-full-height"
         >
-          <Connect(ContentPage) />
-          <Connect(ModalComponent) />
+          <div
+            className="u-row u-full-height"
+          >
+            <React.Lazy />
+            <Connect(ModalComponent) />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </React.Suspense>
 </ASCDefaultThemeProvider>
 `;
 
@@ -73,43 +81,51 @@ exports[`App should render the mapview 1`] = `
     }
   }
 >
-  <div
-    className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
+  <React.Suspense
+    fallback={
+      <LoadingIndicator
+        loading={true}
+      />
+    }
   >
-    <AngularWrapper
-      bindings={
-        Object {
-          "hasMaxWidth": true,
-          "isEmbedPreview": false,
-          "isHomePage": false,
-          "isPrintMode": false,
-          "isPrintOrEmbedOrPreview": false,
-          "user": Object {},
-        }
-      }
-      component="dpHeader"
-      dependencies={
-        Array [
-          "atlas",
-        ]
-      }
-      interpolateBindings={Object {}}
-      moduleName="dpHeaderWrapper"
-    />
     <div
-      className="c-dashboard__body "
+      className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
     >
+      <AngularWrapper
+        bindings={
+          Object {
+            "hasMaxWidth": true,
+            "isEmbedPreview": false,
+            "isHomePage": false,
+            "isPrintMode": false,
+            "isPrintOrEmbedOrPreview": false,
+            "user": Object {},
+          }
+        }
+        component="dpHeader"
+        dependencies={
+          Array [
+            "atlas",
+          ]
+        }
+        interpolateBindings={Object {}}
+        moduleName="dpHeaderWrapper"
+      />
       <div
-        className="u-grid u-full-height"
+        className="c-dashboard__body "
       >
         <div
-          className="u-row u-full-height"
+          className="u-grid u-full-height"
         >
-          <Connect(ContentPage) />
-          <Connect(ModalComponent) />
+          <div
+            className="u-row u-full-height"
+          >
+            <React.Lazy />
+            <Connect(ModalComponent) />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </React.Suspense>
 </ASCDefaultThemeProvider>
 `;

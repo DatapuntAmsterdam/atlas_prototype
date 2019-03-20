@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapDetailKadastraalObject should not render size 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -24,11 +24,11 @@ exports[`MapDetailKadastraalObject should not render size 1`] = `
       value=""
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailKadastraalObject should render everything 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -51,11 +51,11 @@ exports[`MapDetailKadastraalObject should render everything 1`] = `
       value="115 m²"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailKadastraalObject should render with zero value for size 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -78,11 +78,11 @@ exports[`MapDetailKadastraalObject should render with zero value for size 1`] = 
       value="0 m²"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailKadastraalObject should render without kadastrale gemeente 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -105,5 +105,5 @@ exports[`MapDetailKadastraalObject should render without kadastrale gemeente 1`]
       value="115 m²"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;

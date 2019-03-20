@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import classNames from 'classnames';
 import { AngularWrapper } from 'react-angular';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ThemeProvider } from '@datapunt/asc-ui';
-import ContentPage from './pages/ContentPage';
 import PAGES, { isCmsPage as pageIsCmsPage } from './pages';
 import './_app.scss';
-import DatasetDetailContainer from './containers/DatasetDetailContainer/DatasetDetailContainer';
 import {
   isEmbedded,
   isEmbedPreview,
@@ -16,17 +14,20 @@ import {
   isPrintOrEmbedMode
 } from '../shared/ducks/ui/ui';
 import { hasGlobalError } from '../shared/ducks/error/error-message';
-import Home from './pages/Home';
 import { getUser } from '../shared/ducks/user/user';
 import { getPage, isHomepage } from '../store/redux-first-router/selectors';
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe';
-import QuerySearchPage from './pages/QuerySearchPage';
-import DatasetPage from './pages/DatasetPage';
-import { DataSearchQuery } from './components/DataSearch';
-import MapSplitPage from './pages/MapSplitPage';
-import ActualityContainer from './containers/ActualityContainer';
 import GeneralErrorMessage from './components/PanelMessages/ErrorMessage/ErrorMessageContainer';
 import ModalComponent from './components/Modal';
+
+const ContentPage = React.lazy(() => import('./pages/ContentPage'));
+const Home = React.lazy(() => import('./pages/Home'));
+const { DataSearchQuery } = React.lazy(() => import('./components/DataSearch'));
+const QuerySearchPage = React.lazy(() => import('./pages/QuerySearchPage'));
+const DatasetPage = React.lazy(() => import('./pages/DatasetPage'));
+const ActualityContainer = React.lazy(() => import('./containers/ActualityContainer'));
+const DatasetDetailContainer = React.lazy(() => import('./containers/DatasetDetailContainer/DatasetDetailContainer'));
+const MapSplitPage = React.lazy(() => import('./pages/MapSplitPage'));
 
 // TodoReactMigration: implement logic
 const App = ({
@@ -87,73 +88,76 @@ const App = ({
         }
       }}
     >
-      <div
-        className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}
-      >
-        {!embedMode &&
-        <AngularWrapper
-          moduleName={'dpHeaderWrapper'}
-          component="dpHeader"
-          dependencies={['atlas']}
-          bindings={{
-            isHomePage: homePage,
-            hasMaxWidth,
-            user,
-            isPrintMode: printMode,
-            isEmbedPreview: embedPreviewMode,
-            isPrintOrEmbedOrPreview: printOrEmbedMode
-          }}
-        />
-        }
-        <div className={`c-dashboard__body ${bodyClasses}`}>
-          {visibilityError && <GeneralErrorMessage {...{ hasMaxWidth, isHomePage: homePage }} />}
-          {embedPreviewMode ?
-            <EmbedIframeComponent /> :
-            <div className="u-grid u-full-height">
-              <div className="u-row u-full-height">
-                {homePage && <Home showFooter />}
-
-                {(currentPage === PAGES.DATA_QUERY_SEARCH ||
-                  currentPage === PAGES.SEARCH_DATASETS
-                ) && <QuerySearchPage />}
-
-                {/* Todo: DP-6391 */}
-                {(currentPage === PAGES.DATA_SEARCH_CATEGORY) && (
-                  <div className="c-search-results u-grid">
-                    <DataSearchQuery />
-                  </div>
-                )}
-
-                {(currentPage === PAGES.ACTUALITY) && (
-                  <ActualityContainer />
-                )}
-
-                {(currentPage === PAGES.DATA ||
-                  currentPage === PAGES.PANORAMA ||
-                  currentPage === PAGES.DATA_DETAIL ||
-                  currentPage === PAGES.ADDRESSES ||
-                  currentPage === PAGES.ESTABLISHMENTS ||
-                  currentPage === PAGES.DATA_GEO_SEARCH ||
-                  currentPage === PAGES.CADASTRAL_OBJECTS)
-                && <MapSplitPage />
-                }
-
-                {currentPage === PAGES.DATASETS && <DatasetPage />}
-
-                {currentPage === PAGES.DATASET_DETAIL && (
-                  <DatasetDetailContainer />
-                )}
-
-                {isCmsPage && (
-                  <ContentPage />
-                )}
-
-                <ModalComponent />
-              </div>
-            </div>
+      <Suspense fallback={<React.Fragment />}>
+        <div
+          className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}
+        >
+          {!embedMode &&
+          <AngularWrapper
+            moduleName={'dpHeaderWrapper'}
+            component="dpHeader"
+            dependencies={['atlas']}
+            bindings={{
+              isHomePage: homePage,
+              hasMaxWidth,
+              user,
+              isPrintMode: printMode,
+              isEmbedPreview: embedPreviewMode,
+              isPrintOrEmbedOrPreview: printOrEmbedMode
+            }}
+          />
           }
+          <div className={`c-dashboard__body ${bodyClasses}`}>
+            {visibilityError && <GeneralErrorMessage {...{ hasMaxWidth, isHomePage: homePage }} />}
+            {embedPreviewMode ?
+              <EmbedIframeComponent /> :
+              <div className="u-grid u-full-height">
+                <div className="u-row u-full-height">
+                  {homePage && <Home showFooter />}
+
+                  {(currentPage === PAGES.DATA_QUERY_SEARCH ||
+                    currentPage === PAGES.SEARCH_DATASETS
+                  ) && <QuerySearchPage />}
+
+                  {/* Todo: DP-6391 */}
+                  {(currentPage === PAGES.DATA_SEARCH_CATEGORY) && (
+                    <div className="c-search-results u-grid">
+                      <DataSearchQuery />
+                    </div>
+                  )}
+
+                  {(currentPage === PAGES.ACTUALITY) && (
+                    <ActualityContainer />
+                  )}
+
+                  {(currentPage === PAGES.DATA ||
+                    currentPage === PAGES.PANORAMA ||
+                    currentPage === PAGES.DATA_DETAIL ||
+                    currentPage === PAGES.ADDRESSES ||
+                    currentPage === PAGES.ESTABLISHMENTS ||
+                    currentPage === PAGES.DATA_GEO_SEARCH ||
+                    currentPage === PAGES.CADASTRAL_OBJECTS)
+                  &&
+                  <MapSplitPage />
+                  }
+
+                  {currentPage === PAGES.DATASETS && <DatasetPage />}
+
+                  {currentPage === PAGES.DATASET_DETAIL && (
+                    <DatasetDetailContainer />
+                  )}
+
+                  {isCmsPage && (
+                    <ContentPage />
+                  )}
+
+                  <ModalComponent />
+                </div>
+              </div>
+            }
+          </div>
         </div>
-      </div>
+      </Suspense>
     </ThemeProvider>
   );
 };

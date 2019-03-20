@@ -5,10 +5,11 @@ import { getPage, hasUserAccesToPage } from '../../../store/redux-first-router/s
 import { fetchMarkersRequest, fetchMarkersSuccess } from '../../ducks/data-selection/actions';
 import { getFiltersWithoutShape } from '../../ducks/filters/filters';
 import { getDataset, getGeomarkersShape } from '../../ducks/data-selection/selectors';
-import { getMapBoundingBox, getMapZoom } from '../../../map/ducks/map/selectors';
+import { getMapZoom } from '../../../map/ducks/map/selectors';
 import { getMarkers } from '../../services/data-selection/data-selection-api';
 import PAGES from '../../../app/pages';
 import { waitForAuthentication } from '../user/user';
+import BOUNDING_BOX from '../../../map/services/bounding-box.constant';
 
 describe('data-selection sagas', () => {
   describe('mapBoundsEffect', () => {
@@ -57,11 +58,9 @@ describe('data-selection sagas', () => {
           select(getGeomarkersShape)
         ])
         .next([[], 'bag', {}])
-        .select(getMapBoundingBox)
-        .next([])
         .select(getMapZoom)
         .next(10)
-        .call(getMarkers, 'bag', { shape: {} }, 10, [])
+        .call(getMarkers, 'bag', { shape: {} }, 10, BOUNDING_BOX.COORDINATES)
         .next('result')
         .put(fetchMarkersSuccess('result'))
         .next()

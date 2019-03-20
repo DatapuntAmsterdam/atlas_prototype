@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapDetailAdressenVerblijfsobject should render \`Nee\` if aanduiding in onderzoek is \`false\` and show a red bullet 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -78,11 +78,11 @@ exports[`MapDetailAdressenVerblijfsobject should render \`Nee\` if aanduiding in
       value="onbekend"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailAdressenVerblijfsobject should render \`Nee\` if indicatie geconstateerd is \`false\` and show a red bullet 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -159,11 +159,11 @@ exports[`MapDetailAdressenVerblijfsobject should render \`Nee\` if indicatie gec
       value="onbekend"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailAdressenVerblijfsobject should render \`Nee\` if is nevenadres is \`true\` and show a blue bullet 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -250,11 +250,11 @@ exports[`MapDetailAdressenVerblijfsobject should render \`Nee\` if is nevenadres
       value="onbekend"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailAdressenVerblijfsobject should render everything 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -342,11 +342,11 @@ exports[`MapDetailAdressenVerblijfsobject should render everything 1`] = `
       value="15 m²"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailAdressenVerblijfsobject should render unknown with zero value for size 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -434,11 +434,11 @@ exports[`MapDetailAdressenVerblijfsobject should render unknown with zero value 
       value="onbekend"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailAdressenVerblijfsobject should render unknown without size 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -514,5 +514,5 @@ exports[`MapDetailAdressenVerblijfsobject should render unknown without size 1`]
       value="onbekend"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapDetailVestiging should not render \`bijzondere rechtstoestand\` 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -46,11 +46,11 @@ exports[`MapDetailVestiging should not render \`bijzondere rechtstoestand\` 1`] 
       value="Nevenvestiging"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailVestiging should render \`bijzondere rechtstoestand\` when \`surseance van betaling\` 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -111,11 +111,11 @@ exports[`MapDetailVestiging should render \`bijzondere rechtstoestand\` when \`s
       value="Surseance van betaling"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailVestiging should render everything 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -176,11 +176,11 @@ exports[`MapDetailVestiging should render everything 1`] = `
       value="Faillissement"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailVestiging should render everything with hoofdvestiging = false 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -225,15 +225,14 @@ exports[`MapDetailVestiging should render everything with hoofdvestiging = false
       value="Nevenvestiging"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailVestiging should render without label 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
-  subTitle=""
   title="Vestiging"
 >
   <Notification
@@ -243,5 +242,5 @@ exports[`MapDetailVestiging should render without label 1`] = `
   >
     Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.
   </Notification>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;

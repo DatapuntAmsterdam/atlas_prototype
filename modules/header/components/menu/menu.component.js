@@ -1,4 +1,5 @@
 import { authenticateError, authenticateRequest } from '../../../../src/shared/ducks/user/user';
+import { showModalAction } from '../../../../src/header/ducks/actions.js';
 import { routing } from '../../../../src/app/routes';
 
 (function () {
@@ -9,6 +10,7 @@ import { routing } from '../../../../src/app/routes';
         .component('dpMenu', {
             bindings: {
                 hasPrintButton: '<',
+                isHomepage: '<',
                 hasEmbedButton: '<',
                 size: '=',
                 user: '<'
@@ -29,6 +31,7 @@ import { routing } from '../../../../src/app/routes';
 
         vm.openFeedbackForm = () => {
             $window.dispatchEvent(openFeedbackFormEvent);
+            store.dispatch(showModalAction());
         };
 
         vm.login = () => {

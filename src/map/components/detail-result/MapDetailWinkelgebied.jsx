@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import MapDetailResultItem from './MapDetailResultItem';
 import MapDetailResultWrapper from './MapDetailResultWrapper';
+import Notification from '../../../shared/components/notification/Notification';
 
 const MapDetailWinkelgebied = ({ panoUrl, winkelgebied, onMaximize, onPanoPreviewClick }) => (
   <MapDetailResultWrapper
@@ -12,12 +13,17 @@ const MapDetailWinkelgebied = ({ panoUrl, winkelgebied, onMaximize, onPanoPrevie
     subTitle={winkelgebied.label}
     title="Winkelgebied"
   >
-    <ul className="map-detail-result__list">
-      <MapDetailResultItem
-        label="Categorie"
-        value={winkelgebied.category}
-      />
-    </ul>
+    <React.Fragment>
+      <Notification>
+        De grenzen van dit winkelgebied zijn indicatief. Er kunnen geen rechten aan worden ontleend.
+      </Notification>
+      <ul className="map-detail-result__list">
+        <MapDetailResultItem
+          label="Categorie"
+          value={winkelgebied.category}
+        />
+      </ul>
+    </React.Fragment>
   </MapDetailResultWrapper>
 );
 

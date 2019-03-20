@@ -11,7 +11,7 @@ const FEEDBACK_BODY = (location) => `Terugmeldingen voor de pagina: ${location}\
   Beschrijf zo volledig mogelijk van welk onjuist gegeven je een melding wilt maken:
   - Welk gegeven is kennelijk onjuist of ontbreekt?
   - Weet je wat het wel zou moeten zijn?
-  - Waarop is jouw constatering gebaseerd? Omschrijf de reden en voeg indien mogelijk relevante 
+  - Waarop is jouw constatering gebaseerd? Omschrijf de reden en voeg indien mogelijk relevante
   documenten in de bijlage toe (bijvoorbeeld: een bouwtekening, koopakte, et cetera).
   `;
 
@@ -21,7 +21,7 @@ const PROBLEM_BODY = (location) => `Probleem melden voor de pagina: ${location}\
   Beschrijf zo volledig mogelijk waar je tegenaan loopt:
   - Om welk onderdeel van de pagina gaat het?
   - Wat zie je op het scherm als je een probleem ondervindt?
-  - Heb je een suggestie hoe het anders zou kunnen? 
+  - Heb je een suggestie hoe het anders zou kunnen?
   `;
 
 const getMailtoLink = (recipient, subject, body) => `mailto:${recipient}
@@ -54,11 +54,12 @@ class ModalComponent extends Component {
 
   handleClose() {
     this.setState({ open: false });
+    this.props.closeModalAction();
   }
 
   render() {
     const { open } = this.state;
-    const { reportProblemAction } = this.props;
+    const { reportFeedbackAction, reportProblemAction } = this.props;
     return (
       <Modal
         aria-labelledby="feedback"
@@ -87,7 +88,7 @@ class ModalComponent extends Component {
           <Button
             as="a"
             color="primary"
-            onClick={reportProblemAction}
+            onClick={reportFeedbackAction}
             href={getMailtoLink(
               FEEDBACK_RECIPIENT,
               FEEDBACK_SUBJECT,
@@ -132,6 +133,8 @@ class ModalComponent extends Component {
 }
 
 ModalComponent.propTypes = {
+  closeModalAction: PropTypes.func.isRequired,
+  reportFeedbackAction: PropTypes.func.isRequired,
   reportProblemAction: PropTypes.func.isRequired
 };
 

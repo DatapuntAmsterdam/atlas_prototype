@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapDetailAdressenStandplaats should render \`Nee\` if aanduiding in onderzoek is \`false\` and show a red bullet 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -33,11 +33,11 @@ exports[`MapDetailAdressenStandplaats should render \`Nee\` if aanduiding in ond
       value="Nee"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailAdressenStandplaats should render \`Nee\` if indicatie geconstateerd is \`false\` and show a red bullet 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -69,11 +69,11 @@ exports[`MapDetailAdressenStandplaats should render \`Nee\` if indicatie geconst
       value="Ja"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;
 
 exports[`MapDetailAdressenStandplaats should render everything 1`] = `
-<MapDetailResultWrapper
+<Connect(MapDetailResultWrapper)
   onMaximize={[MockFunction]}
   onPanoPreviewClick={[MockFunction]}
   panoUrl="panoUrl"
@@ -116,5 +116,5 @@ exports[`MapDetailAdressenStandplaats should render everything 1`] = `
       value="Ja"
     />
   </ul>
-</MapDetailResultWrapper>
+</Connect(MapDetailResultWrapper)>
 `;

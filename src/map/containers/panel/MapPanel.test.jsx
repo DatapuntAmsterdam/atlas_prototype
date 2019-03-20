@@ -32,7 +32,7 @@ describe('MapPanel', () => {
     selection: {
       type: 'none'
     },
-    ui: { isMapPanelHandleVisible: true, isEmbed: false, isPrint: false }
+    ui: { isMapPanelHandleVisible: true, isEmbed: false, isPrintMode: false }
   });
 
   beforeEach(() => {
@@ -46,7 +46,7 @@ describe('MapPanel', () => {
         overlays={[{}]}
         zoomLevel={10}
         user={{}}
-        isEmbedOrPrint={false}
+        isPrint={false}
         isMapPanelVisible={false}
         onLayerToggle={jest.fn}
         onBaseLayerToggle={jest.fn}

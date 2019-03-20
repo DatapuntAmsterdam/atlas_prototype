@@ -1,14 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { isEmbedded } from '../../../shared/ducks/ui/ui';
 
 const MapDetailResultWrapper = ({
-  children, panoUrl, subTitle, title, onMaximize, onPanoPreviewClick
+  children, panoUrl, subTitle, title, onMaximize, onPanoPreviewClick, isEmbed
 }) => (
   <section className="map-detail-result">
     <header
       className={`
         map-detail-result__header
-        map-detail-result__header--${panoUrl ? 'pano' : 'no-pano'}
+        map-detail-result__header--${!isEmbed && panoUrl ? 'pano' : 'no-pano'}
       `}
     >
       {panoUrl && (
@@ -39,7 +41,7 @@ const MapDetailResultWrapper = ({
     </header>
     <div className="map-detail-result__scroll-wrapper">
       {children && (
-          [children]
+        [children]
       )}
       <footer className="map-search-results__footer">
         <button
@@ -66,6 +68,7 @@ MapDetailResultWrapper.defaultProps = {
 
 MapDetailResultWrapper.propTypes = {
   children: PropTypes.element,
+  isEmbed: PropTypes.bool.isRequired,
   panoUrl: PropTypes.string.isRequired,
   subTitle: PropTypes.string,
   title: PropTypes.string.isRequired,
@@ -73,4 +76,8 @@ MapDetailResultWrapper.propTypes = {
   onPanoPreviewClick: PropTypes.func
 };
 
-export default MapDetailResultWrapper;
+const mapStateToProps = (state) => ({
+  isEmbed: isEmbedded(state)
+});
+
+export default connect(mapStateToProps, null)(MapDetailResultWrapper);

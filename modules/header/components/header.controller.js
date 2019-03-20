@@ -1,4 +1,5 @@
 import { hasPrintMode, isMapActive } from '../../../src/shared/ducks/ui/ui';
+import { isHomepage } from '../../../src/store/redux-first-router/selectors';
 
 (function () {
     'use strict';
@@ -19,6 +20,7 @@ import { hasPrintMode, isMapActive } from '../../../src/shared/ducks/ui/ui';
             const state = store.getState();
 
             vm.hasPrintButton = hasPrintMode(state);
+            vm.isHomepage = isHomepage(state);
             vm.hasEmbedButton = isMapActive(state);
         }
     }

@@ -6,6 +6,9 @@ import './header/wrappers/header-search/HeaderSearchWrapper';
 // All third party dependencies
 import './vendor';
 
+// Polyfill for IE11
+import './polyfill';
+
 // Legacy sass
 import '../modules/shared/shared.scss';
 import '../modules/atlas/atlas.scss';
