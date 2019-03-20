@@ -48,6 +48,7 @@ import {
 import {
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   SET_PANORAMA_TAGS,
+  CLOSE_PANORAMA,
   FETCH_PANORAMA_REQUEST_EXTERNAL
 } from '../../../panorama/ducks/constants';
 import PAGES from '../../../app/pages';
@@ -80,15 +81,13 @@ const trackEvents = {
       null
     ] : [];
   },
-  // NAVIGATION -> NAVIGATE TO GEO SEARCH
-  [routing.dataGeoSearch.type]: function trackGeoSearch({ state }) {
-    return isPanoPage(state) ? [
-      PIWIK_CONSTANTS.TRACK_EVENT,
-      'navigation', // NAVIGATION -> CLICK CLOSE FROM PANORAMA
-      'panorama-verlaten',
-      null
-    ] : [];
-  },
+  // NAVIGATION -> CLICK CLOSE FROM PANORAMA
+  [CLOSE_PANORAMA]: () => [
+    PIWIK_CONSTANTS.TRACK_EVENT,
+    'navigation',
+    'panorama-verlaten',
+    null
+  ],
   // NAVIGATION -> CLOSE PRINT VIEW
   [HIDE_PRINT]: () => [
     PIWIK_CONSTANTS.TRACK_EVENT,

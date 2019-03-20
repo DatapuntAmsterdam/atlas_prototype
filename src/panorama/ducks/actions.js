@@ -55,7 +55,10 @@ export const fetchPanoramaError = (error) => ({
 });
 
 export const closePanorama = () => ({
-  type: CLOSE_PANORAMA
+  type: CLOSE_PANORAMA,
+  meta: {
+    tracking: true
+  }
 });
 export const setPanoramaLocation = (payload) => ({
   type: SET_PANORAMA_LOCATION,

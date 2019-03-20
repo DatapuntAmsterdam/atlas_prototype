@@ -49,13 +49,13 @@ export function* handlePanoramaRequest(fn, input, tags) {
         ? { [PARAMETERS.PANORAMA_TAGS]: tags.join() }
         : {};
 
-      const query = {
+      const additionalParams = {
         ...panoramaTags,
         [PARAMETERS.VIEW_CENTER]: viewCenter,
         [PARAMETERS.LOCATION]: location
       };
 
-      yield put(toPanorama(panoramaData.id, { query }));
+      yield put(toPanorama(panoramaData.id, { additionalParams }));
     }
     yield put(fetchPanoramaSuccess({ ...panoramaData, tags }));
   } catch (error) {
