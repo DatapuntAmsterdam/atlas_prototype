@@ -3,13 +3,16 @@ import { isEmbedded, isEmbedPreview, isPrintMode } from '../../../shared/ducks/u
 
 const CONSTANTS = {
   DIMENSION3: {
+    ID: 3,
     AUTHENTICATED: true,
     UNAUTHENTICATED: false
   },
   DIMENSION4: {
+    ID: 4,
     UNDEFINED: null
   },
   DIMENSION5: {
+    ID: 5,
     PRINT: 'print',
     EMBED: 'embed'
   }
@@ -26,8 +29,8 @@ export const authCustomDimensions = (state) => {
   }
 
   return [
-    { id: 3, value: authenticated }, // customDimension = 'Authenticated'
-    { id: 4, value: role } // customDimension = 'Role'
+    { id: CONSTANTS.DIMENSION3.ID, value: authenticated }, // customDimension = 'Authenticated'
+    { id: CONSTANTS.DIMENSION4.ID, value: role } // customDimension = 'Role'
   ];
 };
 
@@ -37,6 +40,6 @@ export const viewCustomDimensions = (query = {}, state) => {
   const printView = (!!query.print || isPrintMode(state)) ? CONSTANTS.DIMENSION5.PRINT : false;
 
   return [
-    { id: 5, value: embedView || printView } // customDimension = 'Version'
+    { id: CONSTANTS.DIMENSION5.ID, value: embedView || printView } // customDimension = 'Version'
   ];
 };
