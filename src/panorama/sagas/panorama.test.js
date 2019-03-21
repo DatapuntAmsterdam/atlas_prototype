@@ -90,8 +90,8 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
       testSaga(fetchPanoramaById, { payload: { id: 'id123' } })
         .next()
         .select(getPanoramaTags)
-        .next(['bla'])
-        .call(handlePanoramaRequest, getImageDataById, 'id123', ['bla'])
+        .next(['string'])
+        .call(handlePanoramaRequest, getImageDataById, 'id123', ['string'])
         .next()
         .isDone();
     });
@@ -102,8 +102,8 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
       testSaga(fetchPanoramaByLocation, { payload: [123, 321] })
         .next()
         .select(getPanoramaTags)
-        .next(['bla'])
-        .call(handlePanoramaRequest, getImageDataByLocation, [123, 321], ['bla'])
+        .next(['string'])
+        .call(handlePanoramaRequest, getImageDataByLocation, [123, 321], ['string'])
         .next()
         .isDone();
     });
@@ -113,9 +113,9 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
   describe('handlePanoramaRequest', () => {
     it('should dispatch a given function and dispatch FETCH_PANORAMA_SUCCESS, but not forward to new url', () => {
       const mockFn = jest.fn();
-      testSaga(handlePanoramaRequest, mockFn, 'id123', ['bla'])
+      testSaga(handlePanoramaRequest, mockFn, 'id123', ['string'])
         .next()
-        .call(mockFn, 'id123', ['bla'])
+        .call(mockFn, 'id123', ['string'])
         .next({ id: 'newId' })
         .select(getLocationPayload)
         .next({ id: 'newId' })
@@ -126,9 +126,9 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
         .next()
         .put({
           type: FETCH_PANORAMA_SUCCESS,
-          payload: { id: 'newId', tags: ['bla'] },
+          payload: { id: 'newId', tags: ['string'] },
           meta: {
-            tracking: { id: 'newId', tags: ['bla'] }
+            tracking: { id: 'newId', tags: ['string'] }
           }
         })
         .next()
@@ -137,9 +137,9 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
 
     it('should dispatch a given function and dispatch FETCH_PANORAMA_SUCCESS, and forward to new url', () => {
       const mockFn = jest.fn();
-      testSaga(handlePanoramaRequest, mockFn, 'id123', ['bla'])
+      testSaga(handlePanoramaRequest, mockFn, 'id123', ['string'])
         .next()
-        .call(mockFn, 'id123', ['bla'])
+        .call(mockFn, 'id123', ['string'])
         .next({ id: 'newId' })
         .select(getLocationPayload)
         .next({ id: 'oldId' })
@@ -157,15 +157,15 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
           payload: { id: 'newId' },
           meta: {
             preserve: true,
-            query: { tags: ['bla'].join(), center: [123, 321], locatie: [123, 321] }
+            additionalParams: { additionalParams: { tags: ['string'].join(), center: [123, 321], locatie: [123, 321] } }
           }
         })
         .next()
         .put({
           type: FETCH_PANORAMA_SUCCESS,
-          payload: { id: 'newId', tags: ['bla'] },
+          payload: { id: 'newId', tags: ['string'] },
           meta: {
-            tracking: { id: 'newId', tags: ['bla'] }
+            tracking: { id: 'newId', tags: ['string'] }
           }
         })
         .next()
@@ -174,9 +174,9 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
 
     it('should dispatch a given function and dispatch FETCH_PANORAMA_ERROR', () => {
       const mockFn = jest.fn();
-      testSaga(handlePanoramaRequest, mockFn, 'id123', ['bla'])
+      testSaga(handlePanoramaRequest, mockFn, 'id123', ['string'])
         .next()
-        .call(mockFn, 'id123', ['bla'])
+        .call(mockFn, 'id123', ['string'])
         .throw('error')
         .put({
           type: FETCH_PANORAMA_ERROR,
