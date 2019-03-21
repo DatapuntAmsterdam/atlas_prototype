@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 
 import MapEmbedButton from './MapEmbedButton';
 
+jest.useFakeTimers();
 jest.mock('../../../shared/services/embed-url/embed-url');
 
 describe('MapEmbedButton', () => {
@@ -11,7 +12,7 @@ describe('MapEmbedButton', () => {
     const wrapper = shallow(
       <MapEmbedButton />,
       { context: { store: configureMockStore()({}) } }
-    );
+    ).dive();
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -23,8 +24,8 @@ describe('MapEmbedButton', () => {
       <MapEmbedButton />,
       { context: { store: configureMockStore()({}) } }
     ).dive();
-    global.window.open = jest.fn();
     wrapper.find('button').simulate('click', mockEvent);
-    expect(global.window.open).toHaveBeenCalledTimes(1);
+    expect(setTimeout).toHaveBeenCalledTimes(1);
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 300);
   });
 });
