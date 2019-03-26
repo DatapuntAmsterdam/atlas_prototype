@@ -114,6 +114,7 @@ function commonConfig({ nodeEnv }) {
       }),
       new CopyWebpackPlugin([
         { from: './public/', to: './assets/' },
+        { from: './public/static/', to: './' },
         // Simply copy the leaflet styling for now
         { from: './node_modules/leaflet/dist/leaflet.css' },
         { from: './node_modules/leaflet-draw/dist/leaflet.draw.css' },
@@ -161,7 +162,7 @@ function commonConfig({ nodeEnv }) {
         favicon: './favicon.png',
         links: [
           {
-            href: 'https://fast.fonts.net/cssapi/3680cf49-2b05-4b8a-af28-fa9e27d2bed0.css',
+            href: '/3680cf49-2b05-4b8a-af28-fa9e27d2bed0.css',
             rel: 'stylesheet'
           },
           {
@@ -181,7 +182,8 @@ function commonConfig({ nodeEnv }) {
           '/leaflet.js',
           '/NonTiledLayer.js',
           '/proj4.js',
-          '/proj4leaflet.js'
+          '/proj4leaflet.js',
+          '/mtiFontTrackingCode.js'
         ]
       })
     ]
