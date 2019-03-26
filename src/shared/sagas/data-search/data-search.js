@@ -25,8 +25,8 @@ import {
   getNumberOfResults as getNrOfSearchResults,
   getNumberOfResultsPanel,
   loadMore as vanillaLoadMore,
-  replaceBuurtcombinatie,
-  search as vanillaSearch
+  querySearch,
+  replaceBuurtcombinatie
 } from '../../services/search/search';
 import { getPage } from '../../../store/redux-first-router/selectors';
 import { getMapZoom } from '../../../map/ducks/map/selectors';
@@ -77,7 +77,6 @@ function* setSearchResults(searchResults) {
   const numberOfResults = getNrOfSearchResults(searchResults);
   const query = yield select(getSearchQuery);
   const result = replaceBuurtcombinatie(searchResults);
-
   yield put(showSearchResults(result, query, numberOfResults));
 }
 
@@ -88,7 +87,7 @@ function* fetchQuerySearchResults() {
   const user = yield select(getUser);
   if (query) {
     const categorySlug = (isString(category) && category.length) ? category : undefined;
-    const { results, errors } = yield vanillaSearch(query, categorySlug, user);
+    const { results, errors } = yield call(querySearch, query, categorySlug, user);
     if (errors) {
       yield put(setGlobalError(ERROR_TYPES.GENERAL_ERROR));
     }

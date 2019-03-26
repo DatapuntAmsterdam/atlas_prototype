@@ -1,4 +1,4 @@
-import { call, takeLatest } from 'redux-saga/effects';
+import { all, call, takeEvery } from 'redux-saga/effects';
 import { routing } from '../../app/routes';
 import { fetchFetchPanoramaEffect } from '../../panorama/sagas/panorama';
 import {
@@ -13,6 +13,20 @@ import {
 } from '../../shared/sagas/dataset/dataset';
 import { fetchDetailEffect } from '../../map/sagas/detail/map-detail';
 
+const routeSagaMapping = [
+  [routing.panorama.type, fetchFetchPanoramaEffect],
+  [routing.dataGeoSearch.type, fetchGeoSearchResultsEffect],
+  [routing.addresses.type, fetchDataSelectionEffect],
+  [routing.establishments.type, fetchDataSelectionEffect],
+  [routing.cadastralObjects.type, fetchDataSelectionEffect],
+  [routing.datasets.type, fetchDatasetsEffect],
+  [routing.datasetDetail.type, fetchDatasetsOptionalEffect],
+  [routing.dataSearchCategory.type, fetchQuerySearchResultsEffect],
+  [routing.dataQuerySearch.type, fetchQuerySearchEffect],
+  [routing.searchDatasets.type, fetchQuerySearchEffect],
+  [routing.dataDetail.type, fetchDetailEffect]
+];
+
 const yieldOnFirstAction = (sideEffect) => (function* gen(action) {
   const { skipSaga, firstAction, forceSaga } = action.meta || {};
   if (!skipSaga && (firstAction || forceSaga)) {
@@ -21,38 +35,9 @@ const yieldOnFirstAction = (sideEffect) => (function* gen(action) {
 });
 
 export default function* routeSaga() {
-  yield takeLatest([routing.panorama.type], yieldOnFirstAction(
-    fetchFetchPanoramaEffect
-  ));
-  yield takeLatest([routing.dataGeoSearch.type], yieldOnFirstAction(
-    fetchGeoSearchResultsEffect
-  ));
-
-  yield takeLatest([
-    routing.addresses.type,
-    routing.establishments.type,
-    routing.cadastralObjects.type
-  ], yieldOnFirstAction(fetchDataSelectionEffect));
-
-  yield takeLatest([
-    routing.datasets.type
-  ], yieldOnFirstAction(fetchDatasetsEffect));
-
-  yield takeLatest([
-    routing.datasetDetail.type
-  ], yieldOnFirstAction(fetchDatasetsOptionalEffect));
-
-  yield takeLatest(
-    routing.dataSearchCategory.type,
-    yieldOnFirstAction(fetchQuerySearchResultsEffect)
+  yield all(
+    routeSagaMapping.map(([route, effect]) =>
+      takeEvery([route], yieldOnFirstAction(effect))
+    )
   );
-
-  yield takeLatest([
-    routing.dataQuerySearch.type,
-    routing.searchDatasets.type
-  ], yieldOnFirstAction(fetchQuerySearchEffect));
-
-  yield takeLatest([
-    routing.dataDetail.type
-  ], yieldOnFirstAction(fetchDetailEffect));
 }
