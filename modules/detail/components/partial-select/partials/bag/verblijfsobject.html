@@ -81,8 +81,8 @@
         </dp-panel>
 
         <dp-api-call
-            ng-if="user.scopes.includes('HR/R') && apiData.results.hoofdadres.landelijk_id"
-            endpoint="handelsregister/vestiging/?nummeraanduiding={{ apiData.results.hoofdadres.landelijk_id }}"
+            ng-if="user.scopes.includes('HR/R') && apiData.results.verblijfsobjectidentificatie"
+            endpoint="handelsregister/vestiging/?verblijfsobject={{ apiData.results.verblijfsobjectidentificatie }}"
             add-api-root="true"
             partial="lijst"
             user="user"
