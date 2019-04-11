@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render 1`] = `
+<div
+  className="u-fixed"
+>
+  <div
+    className="c-dashboard__heading o-max-width"
+  >
+    <div
+      className="o-max-width__inner"
+    >
+      <div
+        className="qa-dashboard__header"
+      >
+        <AngularWrapper
+          bindings={
+            Object {
+              "hasEmbedButton": true,
+              "hasMaxWidth": true,
+              "hasPrintButton": true,
+              "isHomepage": false,
+              "size": "short",
+              "user": Object {},
+            }
+          }
+          component="dpSiteHeader"
+          dependencies={
+            Array [
+              "atlas",
+            ]
+          }
+          interpolateBindings={Object {}}
+          moduleName="dpHeaderWrapper"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

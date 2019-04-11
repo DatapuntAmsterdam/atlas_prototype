@@ -100,6 +100,3 @@ import '../../modules/shared/services/user-settings/user-settings.factory';
 import '../../modules/shared/shared-config.factory';
 import '../../modules/shared/shared.vendor';
 import '../../modules/shared/services/combined-document-title/combined-document-title.factory';
-// Components from deprecated dashboard
-import '../../modules/header/components/header.controller';
-import '../../modules/header/components/header/header.component';

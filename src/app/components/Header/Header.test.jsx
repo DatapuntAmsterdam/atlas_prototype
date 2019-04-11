@@ -4,8 +4,19 @@ import Header from './Header';
 
 describe('Header', () => {
   it('should render', () => {
+    const props = {
+      embedPreviewMode: false,
+      hasEmbedButton: true,
+      hasMaxWidth: true,
+      hasPrintButton: true,
+      homePage: false,
+      printMode: false,
+      printOrEmbedMode: false,
+      user: {}
+    };
+
     const component = shallow(
-      <Header />
+      <Header {...props} />
     );
     expect(component).toMatchSnapshot();
   });

@@ -8,7 +8,6 @@ import './vendor';
 // All our modules' javascript
 import '../modules/atlas/atlas.module';
 import '../modules/atlas/atlas.run';
-import '../modules/header/components/header.controller';
 import '../modules/atlas/services/redux/store.run';
 import '../modules/data-selection/data-selection.module';
 import '../modules/data-selection/components/available-filters/available-filters.component';
@@ -173,7 +172,6 @@ import '../modules/shared/services/environment/environment.factory.test';
 import '../modules/shared/filters/filesize.filter.test';
 import '../modules/shared/filters/kebabcase.filter.test';
 import '../modules/shared/services/combined-document-title/combined-document-title.factory.test';
-import '../modules/header/components/header.controller.test';
 
 // Import the templates and inject them into angular
 const templates = require.context('../modules', true, /\.html$/);

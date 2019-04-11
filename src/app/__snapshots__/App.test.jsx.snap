@@ -22,25 +22,15 @@ exports[`App should render the homepage 1`] = `
     <div
       className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
     >
-      <AngularWrapper
-        bindings={
-          Object {
-            "hasMaxWidth": true,
-            "isEmbedPreview": false,
-            "isHomePage": false,
-            "isPrintMode": false,
-            "isPrintOrEmbedOrPreview": false,
-            "user": Object {},
-          }
-        }
-        component="dpHeader"
-        dependencies={
-          Array [
-            "atlas",
-          ]
-        }
-        interpolateBindings={Object {}}
-        moduleName="dpHeaderWrapper"
+      <Header
+        embedPreviewMode={false}
+        hasEmbedButton={false}
+        hasMaxWidth={true}
+        hasPrintButton={false}
+        homePage={false}
+        printMode={false}
+        printOrEmbedMode={false}
+        user={Object {}}
       />
       <div
         className="c-dashboard__body "
@@ -83,25 +73,15 @@ exports[`App should render the mapview 1`] = `
     <div
       className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
     >
-      <AngularWrapper
-        bindings={
-          Object {
-            "hasMaxWidth": true,
-            "isEmbedPreview": false,
-            "isHomePage": false,
-            "isPrintMode": false,
-            "isPrintOrEmbedOrPreview": false,
-            "user": Object {},
-          }
-        }
-        component="dpHeader"
-        dependencies={
-          Array [
-            "atlas",
-          ]
-        }
-        interpolateBindings={Object {}}
-        moduleName="dpHeaderWrapper"
+      <Header
+        embedPreviewMode={false}
+        hasEmbedButton={true}
+        hasMaxWidth={true}
+        hasPrintButton={true}
+        homePage={false}
+        printMode={false}
+        printOrEmbedMode={false}
+        user={Object {}}
       />
       <div
         className="c-dashboard__body "
