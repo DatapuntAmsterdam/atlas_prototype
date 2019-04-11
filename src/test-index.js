@@ -57,8 +57,6 @@ import '../modules/header/components/menu/dropdown/menu-dropdown.directive';
 import '../modules/header/components/menu/menu.component';
 import '../modules/header/components/print-button/print-button.component';
 import '../modules/header/components/site-header/site-header.component';
-import '../modules/header/header-config.constant';
-import '../modules/header/header.constant';
 import '../modules/page/page.module';
 import '../modules/page/components/catalogus-themes/catalogus-themes-config.constant';
 import '../modules/page/components/catalogus-themes/catalogus-themes.component';

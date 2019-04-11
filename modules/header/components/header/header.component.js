@@ -1,4 +1,5 @@
 import { hideEmbedMode, hidePrintMode } from '../../../../src/shared/ducks/ui/ui';
+import headerSize from '../../../../src/header/services/header-size/header-size.constant';
 
 (function () {
     'use strict';
@@ -19,9 +20,9 @@ import { hideEmbedMode, hidePrintMode } from '../../../../src/shared/ducks/ui/ui
             }
         });
 
-    DpHeaderController.$inject = ['$scope', 'HEADER'];
+    DpHeaderController.$inject = ['$scope'];
 
-    function DpHeaderController ($scope, HEADER) {
+    function DpHeaderController ($scope) {
         const vm = this;
 
         vm.hidePrintAction = hidePrintMode();
@@ -30,11 +31,9 @@ import { hideEmbedMode, hidePrintMode } from '../../../../src/shared/ducks/ui/ui
         $scope.$watch('vm.isHomePage', updateSize);
 
         function updateSize () {
-            vm.headerSize = vm.isHomePage ? HEADER.SIZE.TALL : HEADER.SIZE.SHORT;
+            vm.headerSize = vm.isHomePage ? headerSize.SIZE.TALL : headerSize.SIZE.SHORT;
         }
 
         updateSize();
     }
-
-    DpHeaderController.$inject = ['$scope', 'HEADER'];
 })();

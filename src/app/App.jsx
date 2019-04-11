@@ -11,7 +11,9 @@ import {
   isPrintMode,
   isPrintModeLandscape,
   isPrintOrEmbedMode,
-  hasOverflowScroll
+  hasOverflowScroll,
+  hasPrintMode,
+  isMapActive
 } from '../shared/ducks/ui/ui';
 import { hasGlobalError } from '../shared/ducks/error/error-message';
 import { getUser } from '../shared/ducks/user/user';
@@ -42,7 +44,9 @@ const App = ({
   overflowScroll,
   printModeLandscape,
   printOrEmbedMode,
-  user
+  user,
+  hasPrintButton,
+  hasEmbedButton
 }) => {
   const isCmsPage = pageIsCmsPage(currentPage);
   const hasMaxWidth = homePage || isCmsPage;
@@ -110,6 +114,8 @@ const App = ({
               printMode={printMode}
               embedPreviewMode={embedPreviewMode}
               printOrEmbedMode={printOrEmbedMode}
+              hasPrintButton={hasPrintButton}
+              hasEmbedButton={hasEmbedButton}
             />
           }
           <div className={`c-dashboard__body ${bodyClasses}`}>
@@ -183,7 +189,9 @@ App.propTypes = {
   printModeLandscape: PropTypes.bool.isRequired,
   embedPreviewMode: PropTypes.bool.isRequired,
   overflowScroll: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
+  user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  hasPrintButton: PropTypes.bool.isRequired,
+  hasEmbedButton: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -196,7 +204,9 @@ const mapStateToProps = (state) => ({
   overflowScroll: hasOverflowScroll(state),
   printOrEmbedMode: isPrintOrEmbedMode(state),
   user: getUser(state),
-  visibilityError: hasGlobalError(state)
+  visibilityError: hasGlobalError(state),
+  hasPrintButton: hasPrintMode(state),
+  hasEmbedButton: isMapActive(state)
 });
 
 const AppContainer = connect(mapStateToProps, null)(App);

@@ -1,5 +1,6 @@
 import { navigateHomeAction } from '../../../../src/header/ducks/actions';
 import { routing } from '../../../../src/app/routes';
+import headerSize from '../../../../src/header/services/header-size/header-size.constant';
 
 (function () {
     'use strict';
@@ -15,9 +16,9 @@ import { routing } from '../../../../src/app/routes';
             controllerAs: 'vm'
         });
 
-    DpLogoController.$inject = ['$scope', 'store', 'HEADER'];
+    DpLogoController.$inject = ['$scope', 'store'];
 
-    function DpLogoController ($scope, store, HEADER) {
+    function DpLogoController ($scope, store) {
         const vm = this;
 
         this.$onInit = function () {
@@ -28,8 +29,8 @@ import { routing } from '../../../../src/app/routes';
             vm.navigateHomeClick = () => store.dispatch(navigateHomeAction());
 
             function updateSize (size) {
-                vm.isTall = vm.size === HEADER.SIZE.TALL;
-                vm.isShort = vm.size === HEADER.SIZE.SHORT;
+                vm.isTall = vm.size === headerSize.SIZE.TALL;
+                vm.isShort = vm.size === headerSize.SIZE.SHORT;
             }
         };
     }
