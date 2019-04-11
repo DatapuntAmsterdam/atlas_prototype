@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import classNames from 'classnames';
-import { AngularWrapper } from 'react-angular';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ThemeProvider } from '@datapunt/asc-ui';
@@ -20,6 +19,7 @@ import { getPage, isHomepage } from '../store/redux-first-router/selectors';
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe';
 import GeneralErrorMessage from './components/PanelMessages/ErrorMessage/ErrorMessageContainer';
 import ModalComponent from './components/Modal';
+import Header from './components/Header/Header';
 
 const ContentPage = React.lazy(() => import('./pages/ContentPage'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -103,19 +103,14 @@ const App = ({
           className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}
         >
           {!embedMode &&
-          <AngularWrapper
-            moduleName={'dpHeaderWrapper'}
-            component="dpHeader"
-            dependencies={['atlas']}
-            bindings={{
-              isHomePage: homePage,
-              hasMaxWidth,
-              user,
-              isPrintMode: printMode,
-              isEmbedPreview: embedPreviewMode,
-              isPrintOrEmbedOrPreview: printOrEmbedMode
-            }}
-          />
+            <Header
+              homePage={homePage}
+              hasMaxWidth={hasMaxWidth}
+              user={user}
+              printMode={printMode}
+              embedPreviewMode={embedPreviewMode}
+              printOrEmbedMode={printOrEmbedMode}
+            />
           }
           <div className={`c-dashboard__body ${bodyClasses}`}>
             {visibilityError && <GeneralErrorMessage {...{ hasMaxWidth, isHomePage: homePage }} />}
@@ -147,8 +142,8 @@ const App = ({
                     currentPage === PAGES.ESTABLISHMENTS ||
                     currentPage === PAGES.DATA_GEO_SEARCH ||
                     currentPage === PAGES.CADASTRAL_OBJECTS)
-                  &&
-                  <MapSplitPage />
+                    &&
+                    <MapSplitPage />
                   }
 
                   {currentPage === PAGES.DATASETS && <DatasetPage />}
