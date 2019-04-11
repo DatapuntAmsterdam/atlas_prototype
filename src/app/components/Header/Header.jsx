@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AngularWrapper } from 'react-angular';
 import classNames from 'classnames';
-import headerSize from '../../../header/services/header-size/header-size.constant';
+import HEADER_SIZE from '../../../header/services/header-size/header-size.constant';
 import { hidePrintMode, hideEmbedMode } from '../../../shared/ducks/ui/ui';
 
 import './Header.scss';
@@ -26,7 +26,7 @@ const Header = ({
                 component="dpSiteHeader"
                 dependencies={['atlas']}
                 bindings={{
-                  size: homePage ? headerSize.SIZE.TALL : headerSize.SIZE.SHORT,
+                  size: homePage ? HEADER_SIZE.SIZE.TALL : HEADER_SIZE.SIZE.SHORT,
                   isHomepage: homePage,
                   hasMaxWidth,
                   user,

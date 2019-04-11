@@ -1,4 +1,4 @@
-import headerSize from '../../../../src/header/services/header-size/header-size.constant';
+import HEADER_SIZE from '../../../../src/header/services/header-size/header-size.constant';
 
 (function () {
     'use strict';
@@ -29,9 +29,9 @@ import headerSize from '../../../../src/header/services/header-size/header-size.
         $scope.$watch('vm.size', updateSize);
 
         function updateSize (size) {
-            vm.menuSize = vm.size === headerSize.SIZE.TALL ? headerSize.SIZE.SHORT : headerSize.SIZE.TALL;
-            vm.isTall = vm.size === headerSize.SIZE.TALL;
-            vm.isShort = vm.size === headerSize.SIZE.SHORT;
+            vm.menuSize = vm.size === HEADER_SIZE.SIZE.TALL ? HEADER_SIZE.SIZE.SHORT : HEADER_SIZE.SIZE.TALL;
+            vm.isTall = vm.size === HEADER_SIZE.SIZE.TALL;
+            vm.isShort = vm.size === HEADER_SIZE.SIZE.SHORT;
             $timeout(setSearchComponent);
         }
 

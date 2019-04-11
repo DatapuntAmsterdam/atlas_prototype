@@ -1,6 +1,6 @@
 import { navigateHomeAction } from '../../../../src/header/ducks/actions';
 import { routing } from '../../../../src/app/routes';
-import headerSize from '../../../../src/header/services/header-size/header-size.constant';
+import HEADER_SIZE from '../../../../src/header/services/header-size/header-size.constant';
 
 (function () {
     'use strict';
@@ -29,8 +29,8 @@ import headerSize from '../../../../src/header/services/header-size/header-size.
             vm.navigateHomeClick = () => store.dispatch(navigateHomeAction());
 
             function updateSize (size) {
-                vm.isTall = vm.size === headerSize.SIZE.TALL;
-                vm.isShort = vm.size === headerSize.SIZE.SHORT;
+                vm.isTall = vm.size === HEADER_SIZE.SIZE.TALL;
+                vm.isShort = vm.size === HEADER_SIZE.SIZE.SHORT;
             }
         };
     }
