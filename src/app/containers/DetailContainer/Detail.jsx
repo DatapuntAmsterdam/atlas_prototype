@@ -61,13 +61,13 @@ Detail.defaultProps = {
 
 Detail.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  user: PropTypes.shape({}).isRequired,
   endpoint: PropTypes.string.isRequired,
-  previewPanorama: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  previewPanorama: PropTypes.shape({}),
   isPreviewPanoramaLoading: PropTypes.bool,
   detailTemplateUrl: PropTypes.string,
-  detailData: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  detailFilterSelection: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  detailData: PropTypes.shape({}),
+  detailFilterSelection: PropTypes.shape({}),
   onFetchDetailRequest: PropTypes.func.isRequired
 };
 

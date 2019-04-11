@@ -42,7 +42,7 @@ const HomepageBlock = ({
 };
 
 HomepageBlock.propTypes = {
-  linkAction: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  linkAction: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.object,

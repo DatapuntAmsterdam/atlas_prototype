@@ -67,7 +67,7 @@ QuerySearch.defaultProps = {
 };
 
 QuerySearch.propTypes = {
-  user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  user: PropTypes.shape({}).isRequired,
   filters: PropTypes.shape({}).isRequired,
   isLoading: PropTypes.bool,
   query: PropTypes.string,

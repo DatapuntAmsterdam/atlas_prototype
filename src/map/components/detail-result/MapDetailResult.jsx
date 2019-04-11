@@ -289,7 +289,7 @@ MapDetailResult.propTypes = {
   panoUrl: PropTypes.string,
   onMaximize: PropTypes.func.isRequired,
   onPanoPreviewClick: PropTypes.func.isRequired,
-  result: PropTypes.object // eslint-disable-line react/forbid-prop-types
+  result: PropTypes.shape({})
 };
 
 export default MapDetailResult;

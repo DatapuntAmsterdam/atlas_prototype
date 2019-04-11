@@ -42,8 +42,8 @@ const AutoSuggestCategory = (props) => {
 AutoSuggestCategory.defaultProps = {};
 
 AutoSuggestCategory.propTypes = {
-  activeSuggestion: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  category: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  activeSuggestion: PropTypes.shape({}).isRequired,
+  category: PropTypes.shape({}).isRequired,
   onSuggestionSelection: PropTypes.func.isRequired,
   query: PropTypes.string.isRequired
 };

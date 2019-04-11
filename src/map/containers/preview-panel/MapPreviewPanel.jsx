@@ -106,11 +106,11 @@ MapPreviewPanel.defaultProps = {
 
 /* eslint-disable react/no-unused-prop-types */
 MapPreviewPanel.propTypes = {
-  detail: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  detailResult: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  detail: PropTypes.shape({}),
+  detailResult: PropTypes.shape({}),
   detailEndpoint: PropTypes.string,
   isEmbed: PropTypes.bool,
-  mapDetail: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  mapDetail: PropTypes.shape({}),
   missingLayers: PropTypes.string,
   detailLocation: PropTypes.arrayOf(PropTypes.string).isRequired,
   closePanel: PropTypes.func.isRequired,
@@ -118,12 +118,12 @@ MapPreviewPanel.propTypes = {
   // onMapPreviewPanelMaximizeSearch: PropTypes.func.isRequired,
   // onMapSearchResultsItemClick: PropTypes.func.isRequired,
   openPano: PropTypes.func.isRequired,
-  panoPreview: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  panoPreview: PropTypes.shape({}),
   searchResults: PropTypes.array, // eslint-disable-line react/forbid-prop-types
-  search: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  searchLocation: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  search: PropTypes.shape({}),
+  searchLocation: PropTypes.shape({}),
   searchLocationId: PropTypes.string,
-  user: PropTypes.object // eslint-disable-line react/forbid-prop-types
+  user: PropTypes.shape({})
 };
 
 export default MapPreviewPanel;

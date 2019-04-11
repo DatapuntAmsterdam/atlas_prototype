@@ -69,7 +69,7 @@ SearchList.defaultProps = {
 };
 
 SearchList.propTypes = {
-  categoryResults: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  categoryResults: PropTypes.shape({}).isRequired,
   hasLoadMore: PropTypes.bool,
   fetchMoreResults: PropTypes.func.isRequired,
   userScopes: PropTypes.arrayOf(PropTypes.string).isRequired,

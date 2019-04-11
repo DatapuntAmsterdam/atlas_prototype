@@ -189,7 +189,7 @@ App.propTypes = {
   printModeLandscape: PropTypes.bool.isRequired,
   embedPreviewMode: PropTypes.bool.isRequired,
   overflowScroll: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  user: PropTypes.shape({}).isRequired,
   hasPrintButton: PropTypes.bool.isRequired,
   hasEmbedButton: PropTypes.bool.isRequired
 };

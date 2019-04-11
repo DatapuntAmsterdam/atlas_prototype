@@ -171,7 +171,7 @@ SelectButton.defaultProps = {
 SelectButton.propTypes = {
   className: PropTypes.string,
   handleChange: PropTypes.func,
-  icon: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  icon: PropTypes.shape({}),
   isDisabled: PropTypes.bool,
   isExpanded: PropTypes.bool,
   label: PropTypes.string, // eslint-disable-line react/no-unused-prop-types

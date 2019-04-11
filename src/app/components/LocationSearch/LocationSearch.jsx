@@ -68,7 +68,7 @@ LocationSearch.propTypes = {
     latitude: PropTypes.number,
     longitude: PropTypes.number
   }).isRequired,
-  user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  user: PropTypes.shape({}).isRequired,
   searchResults: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
