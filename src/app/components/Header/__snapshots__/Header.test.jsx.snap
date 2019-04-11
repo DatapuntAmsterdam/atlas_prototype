@@ -1,6 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header should render 1`] = `
+exports[`Header should render the embed header 1`] = `
+<div
+  className=""
+>
+  <div
+    className="c-dashboard__heading o-max-width"
+  >
+    <div
+      className="o-max-width__inner"
+    >
+      <div
+        className="qa-dashboard__embed-header"
+      >
+        <AngularWrapper
+          bindings={
+            Object {
+              "closeAction": Object {
+                "meta": Object {
+                  "tracking": true,
+                },
+                "type": "ui/HIDE_EMBED_PREVIEW",
+              },
+            }
+          }
+          component="dpEmbedHeader"
+          dependencies={
+            Array [
+              "atlas",
+            ]
+          }
+          interpolateBindings={Object {}}
+          moduleName="dpHeaderWrapper"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header should render the main header 1`] = `
 <div
   className="u-fixed"
 >
@@ -25,6 +64,45 @@ exports[`Header should render 1`] = `
             }
           }
           component="dpSiteHeader"
+          dependencies={
+            Array [
+              "atlas",
+            ]
+          }
+          interpolateBindings={Object {}}
+          moduleName="dpHeaderWrapper"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header should render the print header 1`] = `
+<div
+  className=""
+>
+  <div
+    className="c-dashboard__heading o-max-width"
+  >
+    <div
+      className="o-max-width__inner"
+    >
+      <div
+        className="qa-dashboard__print-header"
+      >
+        <AngularWrapper
+          bindings={
+            Object {
+              "closeAction": Object {
+                "meta": Object {
+                  "tracking": true,
+                },
+                "type": "ui/HIDE_PRINT",
+              },
+            }
+          }
+          component="dpPrintHeader"
           dependencies={
             Array [
               "atlas",
