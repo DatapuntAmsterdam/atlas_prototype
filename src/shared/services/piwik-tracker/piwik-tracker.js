@@ -13,6 +13,7 @@ export default function piwikTracker(data = [], href, title, customDimensions = 
 
     window._paq.push(['setCustomUrl', href]);
     window._paq.push(['setDocumentTitle', title]);
+    window._paq.push(['enableHeartBeatTimer']); // accurately measure the time spent on the last pageview of a visit
     window._paq.push(data);
   }
 }

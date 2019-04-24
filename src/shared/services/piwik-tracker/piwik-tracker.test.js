@@ -13,9 +13,10 @@ describe('piwikTracker', () => {
     expect(global.window._paq.push).toHaveBeenCalledWith(['test']);
     expect(global.window._paq.push).toHaveBeenCalledWith(['setCustomUrl', 'foo']);
     expect(global.window._paq.push).toHaveBeenCalledWith(['setDocumentTitle', 'string']);
+    expect(global.window._paq.push).toHaveBeenCalledWith(['enableHeartBeatTimer']);
   });
 
-  it('should saet customDimensions', () => {
+  it('should set customDimensions', () => {
     piwikTracker(['test'], 'foo', 'string', [{ id: 1, value: 'test' }]);
 
     expect(global.window._paq.push).toHaveBeenCalledWith(['setCustomDimension', 1, 'test']);
