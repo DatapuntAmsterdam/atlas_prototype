@@ -14,7 +14,8 @@ describe('TabBar', () => {
   it('should render the container', () => {
     const store = configureMockStore()({ ...initialState });
     const props = {
-      // searchQuery: 'dam'
+      numberOfDataResults: 1,
+      numberOfDatasetResults: 1
     };
     const component = shallow(<TabBarContainer {...props} />, { context: { store } });
     expect(component).toMatchSnapshot();
@@ -25,7 +26,8 @@ describe('TabBar', () => {
     const props = {
       searchQuery: 'dam',
       showDatasetsButton: true,
-      totalNumberOfResults: 424,
+      numberOfDataResults: 204,
+      numberOfDatasetResults: 120,
       goToDatasets: jest.fn()
     };
 
@@ -37,7 +39,8 @@ describe('TabBar', () => {
     const props = {
       searchQuery: 'dam',
       showDatasetsButton: false,
-      totalNumberOfResults: 0,
+      numberOfDataResults: 0,
+      numberOfDatasetResults: 0,
       goToDatasets: jest.fn()
     };
 

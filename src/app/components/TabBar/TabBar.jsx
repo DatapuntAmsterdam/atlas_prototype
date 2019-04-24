@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TabBar = ({
-  totalNumberOfResults,
+  numberOfDataResults,
+  numberOfDatasetResults,
   goToDatasets,
   searchQuery,
   children,
@@ -10,12 +11,12 @@ const TabBar = ({
 }) => (
   <div>
     <h1 className="qa-tab-header__title c-tab-header__title">
-      {(totalNumberOfResults !== 0) && (
+      {(numberOfDataResults !== 0 || numberOfDatasetResults !== 0) && (
         <span className="c-tab-header__title__text">
           Resultaten met &apos;{searchQuery}&apos;
         </span>
       )}
-      {(totalNumberOfResults === 0) && (
+      {(numberOfDataResults === 0 && numberOfDatasetResults === 0) && (
         <span className="c-tab-header__title__text">
           Geen resultaten met &apos;{searchQuery}&apos;
         </span>
@@ -35,7 +36,6 @@ const TabBar = ({
 );
 
 TabBar.defaultProps = {
-  totalNumberOfResults: 1,
   showDatasetsButton: false,
   children: null
 };
@@ -45,7 +45,8 @@ TabBar.propTypes = {
   goToDatasets: PropTypes.func.isRequired,
   children: PropTypes.node,
   showDatasetsButton: PropTypes.bool,
-  totalNumberOfResults: PropTypes.number
+  numberOfDataResults: PropTypes.number.isRequired,
+  numberOfDatasetResults: PropTypes.number.isRequired
 };
 
 export default TabBar;

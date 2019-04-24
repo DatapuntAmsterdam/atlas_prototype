@@ -16,8 +16,9 @@ exports[`QuerySearch should render with results 1`] = `
     className="qa-data-selection-content"
   >
     <Connect(TabBar)
+      numberOfDataResults={1}
+      numberOfDatasetResults={1}
       showDatasetsButton={false}
-      totalNumberOfResults={2}
     >
       <Tabs
         currentTab="Datasets"

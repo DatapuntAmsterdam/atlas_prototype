@@ -25,7 +25,8 @@ const QuerySearch = ({
     {!isLoading && (
       <div className="qa-data-selection-content">
         <TabBar
-          totalNumberOfResults={numberOfDataResults + numberOfDatasetResults}
+          numberOfDataResults={numberOfDataResults}
+          numberOfDatasetResults={numberOfDatasetResults}
           showDatasetsButton={currentPage === PAGES.SEARCH_DATASETS}
         >
           <Tabs

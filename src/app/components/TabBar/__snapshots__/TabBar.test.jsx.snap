@@ -46,8 +46,9 @@ exports[`TabBar should render the component with results 1`] = `
 exports[`TabBar should render the container 1`] = `
 <TabBar
   goToDatasets={[Function]}
+  numberOfDataResults={1}
+  numberOfDatasetResults={1}
   searchQuery="dam"
   showDatasetsButton={false}
-  totalNumberOfResults={1}
 />
 `;
