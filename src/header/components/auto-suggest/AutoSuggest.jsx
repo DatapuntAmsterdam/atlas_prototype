@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SearchBar } from '@datapunt/asc-ui';
 import AutoSuggestCategory, { MORE_RESULTS_INDEX } from './AutoSuggestCategory';
 
 import './_auto-suggest.scss';
@@ -19,8 +20,8 @@ class AutoSuggest extends React.Component {
     this.navigateSuggestions = this.navigateSuggestions.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onInput = this.onInput.bind(this);
+    this.onSearch = this.onSearch.bind(this);
+    this.onTextChanged = this.onTextChanged.bind(this);
     this.onSuggestionSelection = this.onSuggestionSelection.bind(this);
     this.state = {
       originalQuery: '',
@@ -36,17 +37,16 @@ class AutoSuggest extends React.Component {
     }, 200);
   }
 
-  onInput(event) {
+  onTextChanged(text) {
     const {
       onTextInput,
       activeSuggestion
     } = this.props;
 
-    event.persist();
     if (activeSuggestion.index > -1) {
       this.resetActiveSuggestion();
     }
-    onTextInput(event.target.value);
+    onTextInput(text);
 
     this.setState({
       showSuggestions: true
@@ -74,23 +74,19 @@ class AutoSuggest extends React.Component {
 
     if (suggestion.index === MORE_RESULTS_INDEX) {
       this.resetActiveSuggestion();
-      this.onFormSubmit(event);
+      this.onSearch(event);
     } else {
       const shouldOpenInNewWindow = event.ctrlKey || event.metaKey;
       onSuggestionSelection(suggestion, shouldOpenInNewWindow);
 
       if (!shouldOpenInNewWindow) {
         this.clearQuery();
-        this.textInput.blur();
       }
     }
   }
 
-  onFormSubmit(event) {
+  onSearch() {
     const { onSubmit } = this.props;
-
-    event.preventDefault();
-    event.stopPropagation();
 
     this.setState({
       showSuggestions: false
@@ -100,7 +96,7 @@ class AutoSuggest extends React.Component {
     });
   }
 
-  navigateSuggestions(event) {
+  navigateSuggestions(event, inputRef) {
     const {
       activeSuggestion,
       numberOfSuggestions,
@@ -145,7 +141,7 @@ class AutoSuggest extends React.Component {
         this.setState({
           showSuggestions: false
         });
-        this.textInput.blur();
+        inputRef.blur();
         break;
       // Enter
       case 13:
@@ -179,60 +175,27 @@ class AutoSuggest extends React.Component {
 
   render() {
     const {
-      activeSuggestion,
-      highlightQuery,
-      legendTitle,
-      placeHolder,
+    activeSuggestion,
+    highlightQuery,
+    placeHolder,
       query,
-      suggestions
-    } = this.props;
+    suggestions
+ } = this.props;
     const {
       showSuggestions
     } = this.state;
 
     return (
-      <form
-        onSubmit={this.onFormSubmit}
-        className={
-          `auto-suggest
-          ${showSuggestions && suggestions.length ? 'auto-suggest__backdrop' : ''}`
-        }
+      <SearchBar
+        placeholder={placeHolder}
+        onTextChanged={this.onTextChanged}
+        onSearch={this.onSearch}
+        onBlur={this.onBlur}
+        onFocus={this.onFocus}
+        onKeyDown={this.navigateSuggestions}
+        text={query || ''}
       >
-        <fieldset>
-          {legendTitle && <legend className="u-sr-only">{legendTitle}</legend>}
-          <div className="auto-suggest-container">
-            <label htmlFor="auto-suggest__input" className="u-sr-only">zoektekst</label>
-            <input
-              autoCapitalize="off"
-              autoComplete="off"
-              autoCorrect="off"
-              className="auto-suggest__input"
-              id="auto-suggest__input"
-              onBlur={this.onBlur}
-              onFocus={this.onFocus}
-              onChange={this.onInput}
-              onKeyDown={this.navigateSuggestions}
-              placeholder={placeHolder}
-              ref={(input) => {
-                this.textInput = input;
-              }}
-              spellCheck="false"
-              type="text"
-              value={query || ''}
-            />
-
-            {query &&
-            <button
-              type="button"
-              className="qa-search-form__clear auto-suggest__clear"
-              onClick={this.clearQuery}
-              title="Wis zoektekst"
-            >
-              <span className="u-sr-only">Wis zoektekst</span>
-            </button>
-            }
-          </div>
-          {suggestions.length > 0 && showSuggestions &&
+        {suggestions.length > 0 && showSuggestions &&
           <div className="auto-suggest__dropdown">
             <h3 className="auto-suggest__tip">Enkele suggesties</h3>
             {suggestions.map((category) => (
@@ -246,16 +209,7 @@ class AutoSuggest extends React.Component {
             ))}
           </div>
           }
-          <button
-            className="auto-suggest__submit qa-search-form-submit"
-            disabled={!query}
-            title="Zoeken"
-            type="submit"
-          >
-            <span className="u-sr-only">Zoeken</span>
-          </button>
-        </fieldset>
-      </form>
+      </SearchBar>
     );
   }
 }
@@ -268,7 +222,6 @@ AutoSuggest.propTypes = {
     uri: PropTypes.string
   }).isRequired,
   highlightQuery: PropTypes.string,
-  legendTitle: PropTypes.string,
   numberOfSuggestions: PropTypes.number,
   onSubmit: PropTypes.func.isRequired,
   onSuggestionActivate: PropTypes.func.isRequired,
@@ -281,7 +234,6 @@ AutoSuggest.propTypes = {
 
 AutoSuggest.defaultProps = {
   highlightQuery: '',
-  legendTitle: '',
   numberOfSuggestions: 0,
   placeHolder: '',
   query: '',

@@ -110,7 +110,6 @@ class HeaderSearch extends React.Component {
       <AutoSuggest
         activeSuggestion={activeSuggestion}
         highlightQuery={typedQuery}
-        legendTitle={'Data zoeken'}
         numberOfSuggestions={numberOfSuggestions}
         onSubmit={this.onFormSubmit}
         onSuggestionActivate={onSuggestionActivate}

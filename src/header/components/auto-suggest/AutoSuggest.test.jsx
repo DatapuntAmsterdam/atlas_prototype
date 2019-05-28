@@ -79,20 +79,6 @@ const onSuggestionSelection = jest.fn();
 const onTextInput = jest.fn();
 
 describe('The AutoSuggest component', () => {
-  it('shows a legend if a title is provided', () => {
-    const legendTitle = 'title';
-    const autoSuggestComponent = mount(<AutoSuggest
-      activeSuggestion={{ index: -1 }}
-      onSubmit={onSubmit}
-      onSuggestionActivate={onSuggestionActivate}
-      onSuggestionSelection={onSuggestionSelection}
-      onTextInput={onTextInput}
-      legendTitle={legendTitle}
-    />);
-    const legend = autoSuggestComponent.find('legend');
-    expect(legend.text()).toBe(legendTitle);
-  });
-
   it('optionally fills the searchbox with a query', () => {
     // Without a query
     const autoSuggestComponent = mount(<AutoSuggest
