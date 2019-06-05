@@ -329,8 +329,11 @@ const mapLayers = [
         layers: ['vastgoed_appartementsrecht']
       }
     ],
-    title: 'Panden in gemeentelijk beheer',
-    url: '/maps/vastgoed'
+    title: 'Gemeentelijk eigendom',
+    url: '/maps/vastgoed',
+    detailUrl: 'geosearch/search/',
+    detailItem: 'pand',
+    detailIsShape: true
   },
   {
     category: THEMES.GEOGRAPHY_ONR,
