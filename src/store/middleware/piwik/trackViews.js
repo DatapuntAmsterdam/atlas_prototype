@@ -42,7 +42,14 @@ views = {
       document.referrer
     ];
   },
-  [routing.dataDetail.type]: function trackView({ firstAction = null, query = {}, href, title, state, tracking }) {
+  [routing.dataDetail.type]: function trackView({
+    firstAction = null,
+    query = {},
+    href,
+    title,
+    state,
+    tracking
+  }) {
     return (
       !firstAction && (tracking && tracking.id !== getDetail(state).id)
     ) ? [
