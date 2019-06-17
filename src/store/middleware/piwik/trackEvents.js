@@ -394,7 +394,7 @@ const trackEvents = {
   // "VERPLAATST" PAGE TRACK REFERRER
   [routing.verplaatst.type]: ({ href, title }) => [
     PIWIK_CONSTANTS.TRACK_EVENT,
-    'title', // PAGEVIEW -> VERPLAATS
+    title, // PAGEVIEW -> VERPLAATS
     href,
     document.referrer
   ]
