@@ -390,6 +390,13 @@ const trackEvents = {
     'menu',
     `menu-delen-${tracking}`,
     title
+  ],
+  // "VERPLAATST" PAGE TRACK REFERRER
+  [routing.verplaatst.type]: ({ href, title }) => [
+    PIWIK_CONSTANTS.TRACK_EVENT,
+    'title', // PAGEVIEW -> VERPLAATS
+    href,
+    document.referrer
   ]
 };
 

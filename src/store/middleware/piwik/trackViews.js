@@ -34,14 +34,6 @@ views = {
       null
     ] : [];
   },
-  [routing.verplaatst.type]: function trackView({ href, title }) {
-    return [
-      PIWIK_CONSTANTS.TRACK_VIEW,
-      title, // PAGEVIEW -> VERPLAATS
-      href,
-      document.referrer
-    ];
-  },
   [routing.dataDetail.type]: function trackView({
     firstAction = null,
     query = {},
