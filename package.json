@@ -35,7 +35,9 @@
     "test-jest": "cross-env NODE_ENV=development jest --config=./test/jest.unit.config.js --runInBand",
     "test-jest-watch": "cross-env NODE_ENV=development jest --config=./test/jest.unit.config.js --watch --onlyChanged --coverage --runInBand",
     "test-karma": "karma start",
-    "test-karma-watch": "karma start --no-single-run"
+    "test-karma-watch": "karma start --no-single-run",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@datapunt/asc-assets": "^0.7.1-beta.2",
@@ -90,7 +92,8 @@
     "redux-saga": "0.16.0",
     "redux-watch": "1.1.1",
     "remove-markdown": "0.3.0",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
@@ -168,7 +171,6 @@
     "rimraf": "2.6.3",
     "sass-lint": "1.12.1",
     "sass-loader": "7.1.0",
-    "snyk": "1.133.0",
     "svg-spritemap-webpack-plugin": "3.2.1",
     "uglifyjs-webpack-plugin": "2.1.1",
     "url-loader": "1.1.2",
@@ -181,5 +183,6 @@
     "hooks": {
       "pre-push": "npm run lint"
     }
-  }
+  },
+  "snyk": true
 }

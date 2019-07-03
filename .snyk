@@ -1,4 +1,62 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.1
+version: v1.13.5
 ignore: {}
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - '@datapunt/asc-core > styled-components > babel-plugin-styled-components > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - recharts > lodash:
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@svgr/webpack > @babel/core > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - recharts > react-smooth > lodash:
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > enzyme > cheerio > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-core > styled-components > babel-plugin-styled-components > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@svgr/webpack > @babel/core > @babel/traverse > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-core > styled-components > @babel/traverse > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@svgr/webpack > @svgr/plugin-jsx > @svgr/hast-util-to-babel-ast > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-core > styled-components > babel-plugin-styled-components > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-core > styled-components > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-core > styled-components > @babel/traverse > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@svgr/webpack > @babel/preset-env > @babel/plugin-transform-modules-umd > @babel/helper-module-transforms > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-core > styled-components > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - react-leaflet > lodash:
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-core > styled-components > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@svgr/webpack > @babel/preset-env > @babel/plugin-transform-classes > @babel/helper-replace-supers > @babel/helper-optimise-call-expression > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-core > styled-components > babel-plugin-styled-components > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-core > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-core > styled-components > @babel/traverse > @babel/generator > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-assets > @svgr/cli > @svgr/core > @svgr/plugin-jsx > @babel/core > @babel/template > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-core > styled-components > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-assets > @svgr/core > h2x-core > h2x-parse > jsdom > request-promise-native > request-promise-core > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@svgr/webpack > @svgr/plugin-jsx > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-assets > @svgr/core > h2x-core > h2x-parse > jsdom > request-promise-native > request-promise-core > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-assets > @svgr/cli > @svgr/core > @svgr/plugin-jsx > @babel/core > @babel/helpers > @babel/template > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-assets > @svgr/cli > @svgr/core > @svgr/plugin-jsx > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
+    - '@datapunt/asc-ui > @datapunt/asc-assets > @svgr/cli > @svgr/core > @svgr/plugin-jsx > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-03T23:09:07.348Z'
