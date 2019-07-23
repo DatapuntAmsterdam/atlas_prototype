@@ -36,9 +36,8 @@
     "test-karma-watch": "karma start --no-single-run"
   },
   "dependencies": {
-    "@datapunt/asc-assets": "^0.7.1-beta.2",
-    "@datapunt/asc-core": "^0.7.1-beta.1",
-    "@datapunt/asc-ui": "^0.7.1-beta.2",
+    "@datapunt/asc-assets": "^0.7.0-alpha.0",
+    "@datapunt/asc-ui": "^0.7.1-alpha.1",
     "@svgr/webpack": "^4.2.0",
     "angular": "1.6.9",
     "angular-aria": "~1.5.11",
@@ -73,9 +72,9 @@
     "proj4leaflet": "1.0.2",
     "prop-types": "15.6.2",
     "query-string": "6.2.0",
-    "react": "16.8.6",
+    "react": "^16.8.2",
     "react-angular": "https://github.com/Amsterdam/react-angular#master",
-    "react-dom": "16.8.6",
+    "react-dom": "16.8.2",
     "react-leaflet": "1.9.1",
     "react-leaflet-markercluster": "1.1.8",
     "react-redux": "5.1.1",
@@ -88,7 +87,9 @@
     "redux-saga": "0.16.0",
     "redux-watch": "1.1.1",
     "remove-markdown": "0.3.0",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "svg-url-loader": "^2.3.2",
+    "url-loader": "^1.1.2"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
@@ -110,6 +111,7 @@
     "babel-jest": "^24.1.0",
     "babel-loader": "8.0.5",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-inline-react-svg": "1.1.0",
     "babel-plugin-istanbul": "5.1.1",
     "babel-preset-react-app": "7.0.1",
     "clean-webpack-plugin": "1.0.1",

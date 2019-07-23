@@ -40,70 +40,42 @@ exports[`Header should render the embed header 1`] = `
 `;
 
 exports[`Header should render the main header 1`] = `
-<section
-  className="styled-header"
+<div
+  className="u-fixed"
 >
-  <Header
-    css={
-      Array [
-        "
-  ",
-        ".sc-gipzik",
-        " fieldset > ",
-        ".sc-jhAzac",
-        " {
-    flex-grow: 1;
-
-    ",
-        ".sc-hzDkRC",
-        " {
-      flex-grow: 0;
-      width: 100%;
-      max-width: 80%;
-    }
-  }
-
-  ",
-        ".sc-cMljjf",
-        " {
-    @media screen and ",
-        [Function],
-        " {
-      display: none;
-    }
-  }
-
-  ",
-        ".sc-jWBwVP",
-        " {
-    @media screen and ",
-        [Function],
-        " {
-      display: none;
-    }
-  }
-",
-      ]
-    }
-    fullWidth={true}
-    homeLink="/"
-    navigation={
-      <React.Fragment>
-        <Connect(HeaderSearch) />
-        <Connect(HeaderMenu)
-          onExpand={[Function]}
-          showAt="tabletM"
+  <div
+    className="c-dashboard__heading o-max-width"
+  >
+    <div
+      className="o-max-width__inner"
+    >
+      <div
+        className="qa-dashboard__header"
+      >
+        <AngularWrapper
+          bindings={
+            Object {
+              "hasEmbedButton": true,
+              "hasMaxWidth": true,
+              "hasPrintButton": true,
+              "isHomepage": false,
+              "size": "short",
+              "user": Object {},
+            }
+          }
+          component="dpSiteHeader"
+          dependencies={
+            Array [
+              "atlas",
+            ]
+          }
+          interpolateBindings={Object {}}
+          moduleName="dpHeaderWrapper"
         />
-        <MenuMobile
-          hideAt="tabletM"
-          onExpand={[Function]}
-        />
-      </React.Fragment>
-    }
-    tall={false}
-    title="City Data"
-  />
-</section>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Header should render the print header 1`] = `

@@ -14,6 +14,13 @@ import {
   toPanoramaAndPreserveQuery
 } from '../../store/redux-first-router/actions';
 
+const HOMEPAGE_CONFIG = {
+  PANORAMA: {
+    id: 'TMX7316010203-000719_pano_0000_000950',
+    heading: 226
+  }
+};
+
 const INSTRUCTION_LINKS = {
   BEDIENING: {
     route: routing.bediening.type,
@@ -131,9 +138,9 @@ const Home = ({ showFooter }) => (
                       classes="c-homepage__block--right"
                       linkAction={
                         toPanoramaAndPreserveQuery(
-                          undefined,
-                          undefined,
-                          undefined,
+                          HOMEPAGE_CONFIG.PANORAMA.id,
+                          HOMEPAGE_CONFIG.PANORAMA.heading,
+                          [],
                           'home'
                         )
                       }

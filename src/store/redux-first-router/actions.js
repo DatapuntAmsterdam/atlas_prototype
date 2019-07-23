@@ -67,26 +67,19 @@ export const toMap = (preserve = false) => ({
     preserve,
     additionalParams: {
       [PARAMETERS.VIEW]: VIEW_MODE.MAP
-    },
-    query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.MAP
     }
   }
 });
 
-export const toMapWithLegendOpen = () => {
-  const additionalParams = {
-    [PARAMETERS.VIEW]: VIEW_MODE.MAP,
-    [PARAMETERS.LEGEND]: true
-  };
-  return {
-    type: routing.data.type,
-    meta: {
-      additionalParams,
-      query: additionalParams
+export const toMapWithLegendOpen = () => ({
+  type: routing.data.type,
+  meta: {
+    additionalParams: {
+      [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+      [PARAMETERS.LEGEND]: true
     }
-  };
-};
+  }
+});
 
 export const toMapAndPreserveQuery = () => toMap(true);
 
@@ -97,12 +90,11 @@ export const toPanorama = (id, additionalParams = null) => ({
   },
   meta: {
     preserve: true,
-    additionalParams,
-    query: additionalParams
+    additionalParams
   }
 });
 
-export const toPanoramaAndPreserveQuery = (id = 'TMX7316010203-000719_pano_0000_000950', heading = 226, reference = [], pageReference = null) =>
+export const toPanoramaAndPreserveQuery = (id, heading, reference = [], pageReference = null) =>
   toPanorama(id, {
     heading,
     ...(reference.length === 3 ? { [PARAMETERS.DETAIL_REFERENCE]: reference } : {}),
@@ -205,9 +197,3 @@ export const toDatasetsTableWithFilter = (datasetType, filter) => ({
 export const toNotFoundPage = () => ({
   type: routing.niet_gevonden.type
 });
-
-export const toApisPage = () => ({ type: routing.apis.type });
-export const toPrivacyPage = () => ({ type: routing.privacy_beveiliging.type });
-export const toAvailabilityPage = () => ({ type: routing.beschikbaar_kwaliteit.type });
-export const toMaintentancePage = () => ({ type: routing.beheer_werkwijze.type });
-export const toHelpPage = () => ({ type: routing.help.type });

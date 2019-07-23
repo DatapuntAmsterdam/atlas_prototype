@@ -4,8 +4,6 @@ import { mount, shallow } from 'enzyme';
 import AutoSuggest from './AutoSuggest';
 import { MORE_RESULTS_INDEX } from './AutoSuggestCategory';
 
-jest.mock('./Search', () => () => <div><input type="text" id="auto-suggest__input" /></div>);
-
 const mockFilledState = {
   suggestions: [
     {
@@ -67,7 +65,13 @@ const mockFilledState = {
     category: 'Monumenten'
   }
 };
-const onInputEvent = { target: { value: 'd' }, persist: jest.fn() };
+
+const selectedSuggestion = {
+  uri: 'bag/openbareruimte/03630000003187/',
+  label: 'Damrak',
+  index: 2,
+  category: 'Straatnamen'
+};
 
 const onSubmit = jest.fn();
 const onSuggestionActivate = jest.fn();
@@ -98,7 +102,7 @@ describe('The AutoSuggest component', () => {
       onSuggestionSelection={onSuggestionSelection}
       onTextInput={onTextInput}
     />);
-    expect(autoSuggestComponent.instance().props.query).toBe('');
+    expect(autoSuggestComponent.instance().textInput.value).toBe('');
 
     // With a query
     const prefilledAutoSuggestComponent = mount(<AutoSuggest
@@ -113,7 +117,7 @@ describe('The AutoSuggest component', () => {
     prefilledAutoSuggestComponent.setProps({ query: mockFilledState.typedQuery });
     prefilledAutoSuggestComponent.update();
 
-    expect(prefilledAutoSuggestComponent.instance().props.query).toBe('dam');
+    expect(prefilledAutoSuggestComponent.instance().textInput.value).toBe('dam');
   });
 
   it('should call the prop function "onTextInput" on text input', () => {
@@ -125,9 +129,14 @@ describe('The AutoSuggest component', () => {
       onTextInput={onTextInput}
     />);
 
-    autoSuggestComponent.instance().onInput(onInputEvent);
+    // trigger the componentDidUpdate method
 
-    expect(onTextInput).toHaveBeenCalled();
+    const inputField = autoSuggestComponent.find('input#auto-suggest__input');
+    inputField.simulate('change', { target: { value: 'd' } });
+    inputField.simulate('change', { target: { value: 'a' } });
+    inputField.simulate('change', { target: { value: 'm' } });
+
+    expect(onTextInput).toHaveBeenCalledTimes(3);
   });
 
   it('should toggle the "showsuggestions" state on focus and blur of the input field', () => {
@@ -207,7 +216,11 @@ describe('The AutoSuggest component', () => {
 
     // trigger the componentDidUpdate method
     autoSuggestComponent.setProps({ query: mockFilledState.typedQuery });
-    autoSuggestComponent.instance().onFocus();
+    autoSuggestComponent.update();
+
+    const inputField = autoSuggestComponent.find('input#auto-suggest__input');
+    autoSuggestComponent.update();
+    inputField.simulate('focus');
     expect(onTextInput).toHaveBeenCalled();
   });
 
@@ -266,9 +279,58 @@ describe('The AutoSuggest component', () => {
 
       autoSuggestComponent.instance().resetActiveSuggestion = jest.fn();
 
-      autoSuggestComponent.instance().onInput(onInputEvent);
+      const inputField = autoSuggestComponent.find('input#auto-suggest__input');
+      inputField.simulate('change', { target: { value: 'd' } });
 
       expect(autoSuggestComponent.instance().resetActiveSuggestion).toHaveBeenCalled();
+    });
+  });
+
+  describe('when selecting a suggestion', () => {
+    const autoSuggestComponent = mount(<AutoSuggest
+      activeSuggestion={{ index: 0 }}
+      onSubmit={onSubmit}
+      onSuggestionActivate={onSuggestionActivate}
+      onSuggestionSelection={onSuggestionSelection}
+      onTextInput={onTextInput}
+      numberOfSuggestions={1}
+    />);
+
+    beforeEach(() => {
+    });
+
+    it('should request to open in new window when CTRL key is pressed.', () => {
+      const mockEvent = {
+        preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
+        ctrlKey: true,
+        metaKey: false
+      };
+
+      autoSuggestComponent.find('input#auto-suggest__input').simulate('focus');
+      autoSuggestComponent.find('input#auto-suggest__input').type('Dam');
+      autoSuggestComponent.setProps({ suggestions: mockFilledState.suggestions });
+      autoSuggestComponent.setState({ showSuggestions: true });
+      autoSuggestComponent.update();
+      autoSuggestComponent.find('.auto-suggest__dropdown-item').at(2).simulate('click', mockEvent);
+      expect(onSuggestionSelection).toHaveBeenCalledWith(selectedSuggestion, true);
+    });
+
+    it('should not request to open in new window when no CTRL key is pressed.', () => {
+      const mockEvent = {
+        preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
+        ctrlKey: false,
+        metaKey: false
+      };
+
+      autoSuggestComponent.find('input#auto-suggest__input').simulate('focus');
+      autoSuggestComponent.find('input#auto-suggest__input').type('Dam');
+      autoSuggestComponent.setProps({ suggestions: mockFilledState.suggestions });
+      autoSuggestComponent.setState({ showSuggestions: true });
+      autoSuggestComponent.update();
+      autoSuggestComponent.find('.auto-suggest__dropdown-item').at(2).simulate('click', mockEvent);
+      expect(onSuggestionSelection).toHaveBeenCalledWith(selectedSuggestion, false);
     });
   });
 

@@ -137,13 +137,6 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
 
     it('should dispatch a given function and dispatch FETCH_PANORAMA_SUCCESS, and forward to new url', () => {
       const mockFn = jest.fn();
-      const additionalParams = {
-        additionalParams: {
-          tags: ['string'].join(),
-          center: [123, 321],
-          locatie: [123, 321]
-        }
-      };
       testSaga(handlePanoramaRequest, mockFn, 'id123', ['string'])
         .next()
         .call(mockFn, 'id123', ['string'])
@@ -164,8 +157,7 @@ describe('fetchPanorma and fetchPanoramaByLocation', () => {
           payload: { id: 'newId' },
           meta: {
             preserve: true,
-            additionalParams,
-            query: additionalParams
+            additionalParams: { additionalParams: { tags: ['string'].join(), center: [123, 321], locatie: [123, 321] } }
           }
         })
         .next()

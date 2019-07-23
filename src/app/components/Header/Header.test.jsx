@@ -1,12 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Header from './Header';
-import { useAppReducer } from '../../utils/useAppReducer';
-
-jest.mock('../../utils/useAppReducer');
 
 describe('Header', () => {
-  useAppReducer.mockImplementation(() => ['a', { setBackDrop: jest.fn() }]);
   const props = {
     embedPreviewMode: false,
     hasEmbedButton: true,

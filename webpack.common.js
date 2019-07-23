@@ -27,11 +27,7 @@ function commonConfig({ nodeEnv }) {
     },
     resolve: {
       extensions: ['.js', '.jsx'],
-      modules: ['./node_modules'],
-      alias: {
-        react: path.resolve('./node_modules/react'),
-        ['react-dom']: path.resolve('./node_modules/react-dom')
-      }
+      modules: ['./node_modules']
     },
     module: {
       rules: [

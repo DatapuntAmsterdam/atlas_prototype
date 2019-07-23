@@ -13,7 +13,35 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={[MockFunction]}
+  onTextInput={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "d",
+        ],
+        Array [
+          "a",
+        ],
+        Array [
+          "m",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   placeHolder=""
   query="dam"
   queryFromUrl=""
@@ -71,97 +99,60 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
   }
 >
   <form
-    className="auto-suggest"
+    className="auto-suggest
+          "
     onSubmit={[Function]}
   >
     <fieldset>
-      <Component
-        activeSuggestion={
-          Object {
-            "index": -1,
-          }
-        }
-        highlightQuery=""
-        legendTitle=""
-        onOpenSearchBarToggle={[Function]}
-        onSuggestionSelection={[Function]}
-        openSearchBarToggle={false}
-        searchBarProps={
-          Object {
-            "autoCapitalize": "off",
-            "autoComplete": "off",
-            "autoCorrect": "off",
-            "id": "auto-suggest__input",
-            "label": "",
-            "onBlur": [Function],
-            "onChange": [Function],
-            "onFocus": [Function],
-            "onKeyDown": [Function],
-            "placeholder": "",
-            "value": "dam",
-          }
-        }
-        showSuggestions={false}
-        suggestions={
-          Array [
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Straatnamen",
-                  "index": 0,
-                  "label": "Dam",
-                  "uri": "bag/openbareruimte/03630000003186/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 1,
-                  "label": "Damloperspad",
-                  "uri": "bag/openbareruimte/03630000001038/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 2,
-                  "label": "Damrak",
-                  "uri": "bag/openbareruimte/03630000003187/",
-                },
-              ],
-              "label": "Straatnamen",
-              "total_results": 6,
-            },
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Monumenten",
-                  "index": 3,
-                  "label": "Damrak 1",
-                  "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 4,
-                  "label": "Dam 10",
-                  "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 5,
-                  "label": "Damrak 15",
-                  "uri": "monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/",
-                },
-              ],
-              "label": "Monumenten",
-              "total_results": 5,
-            },
-          ]
-        }
+      <div
+        className="auto-suggest-container"
       >
-        <div>
-          <input
-            id="auto-suggest__input"
-            type="text"
-          />
-        </div>
-      </Component>
+        <label
+          className="u-sr-only"
+          htmlFor="auto-suggest__input"
+        >
+          zoektekst
+        </label>
+        <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
+          className="auto-suggest__input"
+          id="auto-suggest__input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder=""
+          spellCheck="false"
+          type="text"
+          value="dam"
+        />
+        <button
+          className="qa-search-form__clear auto-suggest__clear"
+          onClick={[Function]}
+          title="Wis zoektekst"
+          type="button"
+        >
+          <span
+            className="u-sr-only"
+          >
+            Wis zoektekst
+          </span>
+        </button>
+      </div>
+      <button
+        className="auto-suggest__submit qa-search-form-submit"
+        disabled={false}
+        title="Zoeken"
+        type="submit"
+      >
+        <span
+          className="u-sr-only"
+        >
+          Zoeken
+        </span>
+      </button>
     </fieldset>
   </form>
 </AutoSuggest>
@@ -183,7 +174,35 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={[MockFunction]}
+  onTextInput={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "d",
+        ],
+        Array [
+          "a",
+        ],
+        Array [
+          "m",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   placeHolder=""
   query="dam"
   queryFromUrl=""
@@ -241,100 +260,60 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
   }
 >
   <form
-    className="auto-suggest"
+    className="auto-suggest
+          "
     onSubmit={[Function]}
   >
     <fieldset>
-      <Component
-        activeSuggestion={
-          Object {
-            "category": "Monumenten",
-            "index": 3,
-            "label": "Damrak 1",
-            "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-          }
-        }
-        highlightQuery="dam"
-        legendTitle=""
-        onOpenSearchBarToggle={[Function]}
-        onSuggestionSelection={[Function]}
-        openSearchBarToggle={false}
-        searchBarProps={
-          Object {
-            "autoCapitalize": "off",
-            "autoComplete": "off",
-            "autoCorrect": "off",
-            "id": "auto-suggest__input",
-            "label": "",
-            "onBlur": [Function],
-            "onChange": [Function],
-            "onFocus": [Function],
-            "onKeyDown": [Function],
-            "placeholder": "",
-            "value": "dam",
-          }
-        }
-        showSuggestions={false}
-        suggestions={
-          Array [
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Straatnamen",
-                  "index": 0,
-                  "label": "Dam",
-                  "uri": "bag/openbareruimte/03630000003186/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 1,
-                  "label": "Damloperspad",
-                  "uri": "bag/openbareruimte/03630000001038/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 2,
-                  "label": "Damrak",
-                  "uri": "bag/openbareruimte/03630000003187/",
-                },
-              ],
-              "label": "Straatnamen",
-              "total_results": 6,
-            },
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Monumenten",
-                  "index": 3,
-                  "label": "Damrak 1",
-                  "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 4,
-                  "label": "Dam 10",
-                  "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 5,
-                  "label": "Damrak 15",
-                  "uri": "monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/",
-                },
-              ],
-              "label": "Monumenten",
-              "total_results": 5,
-            },
-          ]
-        }
+      <div
+        className="auto-suggest-container"
       >
-        <div>
-          <input
-            id="auto-suggest__input"
-            type="text"
-          />
-        </div>
-      </Component>
+        <label
+          className="u-sr-only"
+          htmlFor="auto-suggest__input"
+        >
+          zoektekst
+        </label>
+        <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
+          className="auto-suggest__input"
+          id="auto-suggest__input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder=""
+          spellCheck="false"
+          type="text"
+          value="dam"
+        />
+        <button
+          className="qa-search-form__clear auto-suggest__clear"
+          onClick={[Function]}
+          title="Wis zoektekst"
+          type="button"
+        >
+          <span
+            className="u-sr-only"
+          >
+            Wis zoektekst
+          </span>
+        </button>
+      </div>
+      <button
+        className="auto-suggest__submit qa-search-form-submit"
+        disabled={false}
+        title="Zoeken"
+        type="submit"
+      >
+        <span
+          className="u-sr-only"
+        >
+          Zoeken
+        </span>
+      </button>
     </fieldset>
   </form>
 </AutoSuggest>
@@ -353,7 +332,35 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={[MockFunction]}
+  onTextInput={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "d",
+        ],
+        Array [
+          "a",
+        ],
+        Array [
+          "m",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   placeHolder=""
   query="dam"
   queryFromUrl=""
@@ -411,97 +418,60 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   }
 >
   <form
-    className="auto-suggest"
+    className="auto-suggest
+          "
     onSubmit={[Function]}
   >
     <fieldset>
-      <Component
-        activeSuggestion={
-          Object {
-            "index": -1,
-          }
-        }
-        highlightQuery=""
-        legendTitle=""
-        onOpenSearchBarToggle={[Function]}
-        onSuggestionSelection={[Function]}
-        openSearchBarToggle={false}
-        searchBarProps={
-          Object {
-            "autoCapitalize": "off",
-            "autoComplete": "off",
-            "autoCorrect": "off",
-            "id": "auto-suggest__input",
-            "label": "",
-            "onBlur": [Function],
-            "onChange": [Function],
-            "onFocus": [Function],
-            "onKeyDown": [Function],
-            "placeholder": "",
-            "value": "dam",
-          }
-        }
-        showSuggestions={false}
-        suggestions={
-          Array [
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Straatnamen",
-                  "index": 0,
-                  "label": "Dam",
-                  "uri": "bag/openbareruimte/03630000003186/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 1,
-                  "label": "Damloperspad",
-                  "uri": "bag/openbareruimte/03630000001038/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 2,
-                  "label": "Damrak",
-                  "uri": "bag/openbareruimte/03630000003187/",
-                },
-              ],
-              "label": "Straatnamen",
-              "total_results": 6,
-            },
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Monumenten",
-                  "index": 3,
-                  "label": "Damrak 1",
-                  "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 4,
-                  "label": "Dam 10",
-                  "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 5,
-                  "label": "Damrak 15",
-                  "uri": "monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/",
-                },
-              ],
-              "label": "Monumenten",
-              "total_results": 5,
-            },
-          ]
-        }
+      <div
+        className="auto-suggest-container"
       >
-        <div>
-          <input
-            id="auto-suggest__input"
-            type="text"
-          />
-        </div>
-      </Component>
+        <label
+          className="u-sr-only"
+          htmlFor="auto-suggest__input"
+        >
+          zoektekst
+        </label>
+        <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
+          className="auto-suggest__input"
+          id="auto-suggest__input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder=""
+          spellCheck="false"
+          type="text"
+          value="dam"
+        />
+        <button
+          className="qa-search-form__clear auto-suggest__clear"
+          onClick={[Function]}
+          title="Wis zoektekst"
+          type="button"
+        >
+          <span
+            className="u-sr-only"
+          >
+            Wis zoektekst
+          </span>
+        </button>
+      </div>
+      <button
+        className="auto-suggest__submit qa-search-form-submit"
+        disabled={false}
+        title="Zoeken"
+        type="submit"
+      >
+        <span
+          className="u-sr-only"
+        >
+          Zoeken
+        </span>
+      </button>
     </fieldset>
   </form>
 </AutoSuggest>
@@ -520,7 +490,35 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={[MockFunction]}
+  onTextInput={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "d",
+        ],
+        Array [
+          "a",
+        ],
+        Array [
+          "m",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   placeHolder=""
   query="dam"
   queryFromUrl=""
@@ -578,97 +576,60 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   }
 >
   <form
-    className="auto-suggest"
+    className="auto-suggest
+          "
     onSubmit={[Function]}
   >
     <fieldset>
-      <Component
-        activeSuggestion={
-          Object {
-            "index": -1,
-          }
-        }
-        highlightQuery=""
-        legendTitle=""
-        onOpenSearchBarToggle={[Function]}
-        onSuggestionSelection={[Function]}
-        openSearchBarToggle={false}
-        searchBarProps={
-          Object {
-            "autoCapitalize": "off",
-            "autoComplete": "off",
-            "autoCorrect": "off",
-            "id": "auto-suggest__input",
-            "label": "",
-            "onBlur": [Function],
-            "onChange": [Function],
-            "onFocus": [Function],
-            "onKeyDown": [Function],
-            "placeholder": "",
-            "value": "dam",
-          }
-        }
-        showSuggestions={false}
-        suggestions={
-          Array [
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Straatnamen",
-                  "index": 0,
-                  "label": "Dam",
-                  "uri": "bag/openbareruimte/03630000003186/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 1,
-                  "label": "Damloperspad",
-                  "uri": "bag/openbareruimte/03630000001038/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 2,
-                  "label": "Damrak",
-                  "uri": "bag/openbareruimte/03630000003187/",
-                },
-              ],
-              "label": "Straatnamen",
-              "total_results": 6,
-            },
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Monumenten",
-                  "index": 3,
-                  "label": "Damrak 1",
-                  "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 4,
-                  "label": "Dam 10",
-                  "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 5,
-                  "label": "Damrak 15",
-                  "uri": "monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/",
-                },
-              ],
-              "label": "Monumenten",
-              "total_results": 5,
-            },
-          ]
-        }
+      <div
+        className="auto-suggest-container"
       >
-        <div>
-          <input
-            id="auto-suggest__input"
-            type="text"
-          />
-        </div>
-      </Component>
+        <label
+          className="u-sr-only"
+          htmlFor="auto-suggest__input"
+        >
+          zoektekst
+        </label>
+        <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
+          className="auto-suggest__input"
+          id="auto-suggest__input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder=""
+          spellCheck="false"
+          type="text"
+          value="dam"
+        />
+        <button
+          className="qa-search-form__clear auto-suggest__clear"
+          onClick={[Function]}
+          title="Wis zoektekst"
+          type="button"
+        >
+          <span
+            className="u-sr-only"
+          >
+            Wis zoektekst
+          </span>
+        </button>
+      </div>
+      <button
+        className="auto-suggest__submit qa-search-form-submit"
+        disabled={false}
+        title="Zoeken"
+        type="submit"
+      >
+        <span
+          className="u-sr-only"
+        >
+          Zoeken
+        </span>
+      </button>
     </fieldset>
   </form>
 </AutoSuggest>
@@ -687,7 +648,35 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={[MockFunction]}
+  onTextInput={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "d",
+        ],
+        Array [
+          "a",
+        ],
+        Array [
+          "m",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   placeHolder=""
   query="dam"
   queryFromUrl=""
@@ -745,97 +734,60 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   }
 >
   <form
-    className="auto-suggest"
+    className="auto-suggest
+          "
     onSubmit={[Function]}
   >
     <fieldset>
-      <Component
-        activeSuggestion={
-          Object {
-            "index": -1,
-          }
-        }
-        highlightQuery=""
-        legendTitle=""
-        onOpenSearchBarToggle={[Function]}
-        onSuggestionSelection={[Function]}
-        openSearchBarToggle={false}
-        searchBarProps={
-          Object {
-            "autoCapitalize": "off",
-            "autoComplete": "off",
-            "autoCorrect": "off",
-            "id": "auto-suggest__input",
-            "label": "",
-            "onBlur": [Function],
-            "onChange": [Function],
-            "onFocus": [Function],
-            "onKeyDown": [Function],
-            "placeholder": "",
-            "value": "dam",
-          }
-        }
-        showSuggestions={false}
-        suggestions={
-          Array [
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Straatnamen",
-                  "index": 0,
-                  "label": "Dam",
-                  "uri": "bag/openbareruimte/03630000003186/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 1,
-                  "label": "Damloperspad",
-                  "uri": "bag/openbareruimte/03630000001038/",
-                },
-                Object {
-                  "category": "Straatnamen",
-                  "index": 2,
-                  "label": "Damrak",
-                  "uri": "bag/openbareruimte/03630000003187/",
-                },
-              ],
-              "label": "Straatnamen",
-              "total_results": 6,
-            },
-            Object {
-              "content": Array [
-                Object {
-                  "category": "Monumenten",
-                  "index": 3,
-                  "label": "Damrak 1",
-                  "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 4,
-                  "label": "Dam 10",
-                  "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/",
-                },
-                Object {
-                  "category": "Monumenten",
-                  "index": 5,
-                  "label": "Damrak 15",
-                  "uri": "monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/",
-                },
-              ],
-              "label": "Monumenten",
-              "total_results": 5,
-            },
-          ]
-        }
+      <div
+        className="auto-suggest-container"
       >
-        <div>
-          <input
-            id="auto-suggest__input"
-            type="text"
-          />
-        </div>
-      </Component>
+        <label
+          className="u-sr-only"
+          htmlFor="auto-suggest__input"
+        >
+          zoektekst
+        </label>
+        <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
+          className="auto-suggest__input"
+          id="auto-suggest__input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder=""
+          spellCheck="false"
+          type="text"
+          value="dam"
+        />
+        <button
+          className="qa-search-form__clear auto-suggest__clear"
+          onClick={[Function]}
+          title="Wis zoektekst"
+          type="button"
+        >
+          <span
+            className="u-sr-only"
+          >
+            Wis zoektekst
+          </span>
+        </button>
+      </div>
+      <button
+        className="auto-suggest__submit qa-search-form-submit"
+        disabled={false}
+        title="Zoeken"
+        type="submit"
+      >
+        <span
+          className="u-sr-only"
+        >
+          Zoeken
+        </span>
+      </button>
     </fieldset>
   </form>
 </AutoSuggest>
