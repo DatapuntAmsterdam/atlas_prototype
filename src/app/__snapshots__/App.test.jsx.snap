@@ -10,38 +10,45 @@ exports[`App should render the homepage 1`] = `
     }
   }
 >
-  <Suspense
-    fallback={<React.Fragment />}
+  <GlobalStyleComponent />
+  <AppStateProvider
+    initialState={
+      Object {
+        "ui": Object {
+          "nrOfBackdropTriggers": 0,
+        },
+      }
+    }
+    reducer={[Function]}
   >
-    <div
-      className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
+    <Suspense
+      fallback={<React.Fragment />}
     >
-      <Header
-        embedPreviewMode={false}
-        hasEmbedButton={false}
-        hasMaxWidth={true}
-        hasPrintButton={false}
-        homePage={false}
-        printMode={false}
-        printOrEmbedMode={false}
-        user={Object {}}
-      />
       <div
-        className="c-dashboard__body "
+        className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
       >
-        <div
-          className="u-grid u-full-height"
-        >
-          <div
-            className="u-row u-full-height"
-          >
-            <lazy />
-            <Connect(ModalComponent) />
-          </div>
-        </div>
+        <Header
+          embedPreviewMode={false}
+          hasEmbedButton={false}
+          hasMaxWidth={true}
+          hasPrintButton={false}
+          homePage={false}
+          printMode={false}
+          printOrEmbedMode={false}
+          user={Object {}}
+        />
+        <AppBody
+          bodyClasses=""
+          currentPage="NOT_FOUND"
+          embedPreviewMode={false}
+          hasMaxWidth={true}
+          homePage={false}
+          isCmsPage={true}
+          visibilityError={false}
+        />
       </div>
-    </div>
-  </Suspense>
+    </Suspense>
+  </AppStateProvider>
 </DefaultThemeProvider>
 `;
 
@@ -55,37 +62,44 @@ exports[`App should render the mapview 1`] = `
     }
   }
 >
-  <Suspense
-    fallback={<React.Fragment />}
+  <GlobalStyleComponent />
+  <AppStateProvider
+    initialState={
+      Object {
+        "ui": Object {
+          "nrOfBackdropTriggers": 0,
+        },
+      }
+    }
+    reducer={[Function]}
   >
-    <div
-      className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
+    <Suspense
+      fallback={<React.Fragment />}
     >
-      <Header
-        embedPreviewMode={false}
-        hasEmbedButton={true}
-        hasMaxWidth={true}
-        hasPrintButton={true}
-        homePage={false}
-        printMode={false}
-        printOrEmbedMode={false}
-        user={Object {}}
-      />
       <div
-        className="c-dashboard__body "
+        className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
       >
-        <div
-          className="u-grid u-full-height"
-        >
-          <div
-            className="u-row u-full-height"
-          >
-            <lazy />
-            <Connect(ModalComponent) />
-          </div>
-        </div>
+        <Header
+          embedPreviewMode={false}
+          hasEmbedButton={true}
+          hasMaxWidth={true}
+          hasPrintButton={true}
+          homePage={false}
+          printMode={false}
+          printOrEmbedMode={false}
+          user={Object {}}
+        />
+        <AppBody
+          bodyClasses=""
+          currentPage="NOT_FOUND"
+          embedPreviewMode={false}
+          hasMaxWidth={true}
+          homePage={false}
+          isCmsPage={true}
+          visibilityError={false}
+        />
       </div>
-    </div>
-  </Suspense>
+    </Suspense>
+  </AppStateProvider>
 </DefaultThemeProvider>
 `;

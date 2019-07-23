@@ -1,12 +1,18 @@
 @import "../../../shared/styles/config";
 
 $suggestion-offset: $base-font-size;
-$backdrop-color: rgba(0, 0, 0, .5);
 $clear-button-margin: 3px;
 
 // the input field
 .auto-suggest {
-  position: relative;
+  @media (min-width: 769px) {
+    position: relative;
+    width: 100%;
+  }
+
+  fieldset {
+    padding: 0;
+  }
 
   &-container {
     float: left;
@@ -100,35 +106,25 @@ $clear-button-margin: 3px;
     text-align: center;
   }
 
-  &__backdrop {
-    &::before {
-      background-color: $backdrop-color;
-      bottom: 0;
-      content: "";
-      display: block;
-      left: 0;
-      position: fixed;
-      right: 0;
-      top: $site-header-height;
-    }
-
-    .c-site-header--tall & {
-      &::before {
-        top: $site-header-height-tall + $site-header-toolbar-height;
-      }
-    }
-  }
-
   &__dropdown {
     background-color: $primary-light;
-    border: 2px solid $primary-dark;
-    border-top: 1px solid $primary-dark;
+    border: 1px solid $primary-dark;
+    border-top-width: 0;
     display: block;
     left: 0;
     padding-bottom: $base-whitespace * .5;
     position: absolute;
     right: $site-header-search-form-height + $base-whitespace * .5;
-    top: $site-header-search-form-height - 1px;
+    top: $site-header-search-form-height - 3px;
+
+    @media (max-width: 768px) {
+      top: 120px;
+      width: 100%;
+    }
+
+    @media (min-width: 769px) {
+      max-width: 80%;
+    }
 
     &-category {
       &:not(:first-of-type) {

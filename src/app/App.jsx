@@ -2,35 +2,26 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ThemeProvider } from '@datapunt/asc-ui';
-import PAGES, { isCmsPage as pageIsCmsPage } from './pages';
+import { GlobalStyle, ThemeProvider } from '@datapunt/asc-ui';
+import { isCmsPage as pageIsCmsPage } from './pages';
 import './_app.scss';
 import {
-  isEmbedded,
-  isEmbedPreview,
-  isPrintMode,
-  isPrintModeLandscape,
-  isPrintOrEmbedMode,
   hasOverflowScroll,
   hasPrintMode,
-  isMapActive
+  isEmbedded,
+  isEmbedPreview,
+  isMapActive,
+  isPrintMode,
+  isPrintModeLandscape,
+  isPrintOrEmbedMode
 } from '../shared/ducks/ui/ui';
 import { hasGlobalError } from '../shared/ducks/error/error-message';
 import { getUser } from '../shared/ducks/user/user';
 import { getPage, isHomepage } from '../store/redux-first-router/selectors';
-import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe';
-import GeneralErrorMessage from './components/PanelMessages/ErrorMessage/ErrorMessageContainer';
-import ModalComponent from './components/Modal';
 import Header from './components/Header/Header';
-
-const ContentPage = React.lazy(() => import('./pages/ContentPage'));
-const Home = React.lazy(() => import('./pages/Home'));
-const DataSearchQuery = React.lazy(() => import('./components/DataSearch/DataSearchQuery'));
-const QuerySearchPage = React.lazy(() => import('./pages/QuerySearchPage'));
-const DatasetPage = React.lazy(() => import('./pages/DatasetPage'));
-const ActualityContainer = React.lazy(() => import('./containers/ActualityContainer'));
-const DatasetDetailContainer = React.lazy(() => import('./containers/DatasetDetailContainer/DatasetDetailContainer'));
-const MapSplitPage = React.lazy(() => import('./pages/MapSplitPage'));
+import { AppStateProvider } from './utils/useAppReducer';
+import AppBody from './AppBody';
+import main, { initialState } from './react-reducers';
 
 // TodoReactMigration: implement logic
 const App = ({
@@ -96,11 +87,13 @@ const App = ({
         }
       }}
     >
-      <React.Suspense fallback={<React.Fragment />}>
-        <div
-          className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}
-        >
-          {!embedMode &&
+      <GlobalStyle />
+      <AppStateProvider initialState={initialState} reducer={main}>
+        <React.Suspense fallback={<React.Fragment />}>
+          <div
+            className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}
+          >
+            {!embedMode &&
             <Header
               homePage={homePage}
               hasMaxWidth={hasMaxWidth}
@@ -111,58 +104,21 @@ const App = ({
               hasPrintButton={hasPrintButton}
               hasEmbedButton={hasEmbedButton}
             />
-          }
-          <div className={`c-dashboard__body ${bodyClasses}`}>
-            {visibilityError && <GeneralErrorMessage {...{ hasMaxWidth, isHomePage: homePage }} />}
-            {embedPreviewMode ?
-              <EmbedIframeComponent /> :
-              <div className="u-grid u-full-height">
-                <div className="u-row u-full-height">
-                  {homePage && <Home showFooter />}
-
-                  {(currentPage === PAGES.DATA_QUERY_SEARCH ||
-                    currentPage === PAGES.SEARCH_DATASETS
-                  ) && <QuerySearchPage />}
-
-                  {/* Todo: DP-6391 */}
-                  {(currentPage === PAGES.DATA_SEARCH_CATEGORY) && (
-                    <div className="c-search-results u-grid">
-                      <DataSearchQuery />
-                    </div>
-                  )}
-
-                  {(currentPage === PAGES.ACTUALITY) && (
-                    <ActualityContainer />
-                  )}
-
-                  {(currentPage === PAGES.DATA ||
-                    currentPage === PAGES.PANORAMA ||
-                    currentPage === PAGES.DATA_DETAIL ||
-                    currentPage === PAGES.ADDRESSES ||
-                    currentPage === PAGES.ESTABLISHMENTS ||
-                    currentPage === PAGES.DATA_GEO_SEARCH ||
-                    currentPage === PAGES.CADASTRAL_OBJECTS)
-                    &&
-                    <MapSplitPage />
-                  }
-
-                  {currentPage === PAGES.DATASETS && <DatasetPage />}
-
-                  {currentPage === PAGES.DATASET_DETAIL && (
-                    <DatasetDetailContainer />
-                  )}
-
-                  {isCmsPage && (
-                    <ContentPage />
-                  )}
-
-                  <ModalComponent />
-                </div>
-              </div>
             }
+            <AppBody
+              {...{
+                visibilityError,
+                bodyClasses,
+                hasMaxWidth,
+                homePage,
+                currentPage,
+                embedPreviewMode,
+                isCmsPage
+              }}
+            />
           </div>
-        </div>
-      </React.Suspense>
+        </React.Suspense>
+      </AppStateProvider>
     </ThemeProvider>
   );
 };

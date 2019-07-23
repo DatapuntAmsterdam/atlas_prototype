@@ -116,7 +116,7 @@ class HeaderSearch extends React.Component {
         onSuggestionActivate={onSuggestionActivate}
         onSuggestionSelection={this.onSuggestionSelection}
         onTextInput={onGetSuggestions}
-        placeHolder={'Zoek data op adres, postcode, kadastrale aanduiding, etc. Of datasets op trefwoord.'}
+        placeHolder={'Zoek data op adres, gebied, etc. Of datasets op trefwoord.'}
         query={displayQuery || typedQuery}
         suggestions={suggestions}
       />
