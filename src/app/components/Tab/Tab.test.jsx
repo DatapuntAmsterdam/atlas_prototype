@@ -11,12 +11,12 @@ describe('Tab', () => {
 
   describe('the current tab', () => {
     it('should render', () => {
-      const tab = shallow(<Tab isCurrentTab label="myTab" onClick={onClick} />)
+      const tab = shallow(<Tab isSelected label="myTab" onClick={onClick} />)
       expect(tab).toMatchSnapshot()
     })
 
     it('should set the count', () => {
-      const tab = shallow(<Tab isCurrentTab count={42} label="myTab" onClick={onClick} />)
+      const tab = shallow(<Tab isSelected count={42} label="myTab" onClick={onClick} />)
       expect(tab.text()).toContain(42)
     })
   })

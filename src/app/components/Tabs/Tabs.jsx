@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Tabs = ({ children: childrenProp, currentTab }) => {
+const Tabs = ({ children: childrenProp, currentPage }) => {
   let childIndex = 0
   const children = React.Children.map(childrenProp, child => {
     if (!React.isValidElement(child)) {
       return null
     }
 
-    const childValue = child.props.label === undefined ? childIndex : child.props.label
-    const selected = childValue === currentTab
+    const childValue = child.props.page === undefined ? childIndex : child.props.page
+    const selected = childValue === currentPage
 
     childIndex += 1
     return React.cloneElement(child, {
-      isCurrentTab: selected,
+      isSelected: selected,
     })
   })
   return (
@@ -27,12 +27,11 @@ const Tabs = ({ children: childrenProp, currentTab }) => {
 
 Tabs.defaultProps = {
   children: null,
-  currentTab: false,
 }
 
 Tabs.propTypes = {
   children: PropTypes.node,
-  currentTab: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+  currentPage: PropTypes.string.isRequired,
 }
 
 export default Tabs

@@ -31,16 +31,18 @@ const QuerySearch = ({
           numberOfDataResults={numberOfDataResults}
           numberOfDatasetResults={numberOfDatasetResults}
         >
-          <Tabs currentTab={currentPage === PAGES.DATA_QUERY_SEARCH ? 'Data' : 'Datasets'}>
+          <Tabs currentPage={currentPage}>
             <Tab
               label="Data"
               count={numberOfDataResults}
               onClick={() => toDataPage(query, filters)}
+              page={PAGES.DATA_QUERY_SEARCH}
             />
             <Tab
               label="Datasets"
               count={numberOfDatasetResults}
               onClick={() => toDatasetPage(query, filters)}
+              page={PAGES.SEARCH_DATASETS}
             />
           </Tabs>
         </TabBar>
