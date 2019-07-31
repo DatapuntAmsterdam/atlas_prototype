@@ -78,3 +78,10 @@ export const isMapSplitPage = page =>
   page === PAGES.ESTABLISHMENTS ||
   page === PAGES.DATA_GEO_SEARCH ||
   page === PAGES.CADASTRAL_OBJECTS
+
+export const isQuerySearchPage = page =>
+  page === PAGES.DATA_QUERY_SEARCH ||
+  page === PAGES.SEARCH_DATASETS ||
+  page === PAGES.ARTICLES ||
+  page === PAGES.PUBLICATIONS ||
+  page === PAGES.SPECIALS

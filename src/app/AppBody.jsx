@@ -4,7 +4,12 @@ import PropTypes from 'prop-types'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
 import GeneralErrorMessage from './components/PanelMessages/ErrorMessage/ErrorMessageContainer'
 import { FeedbackModal, InfoModal } from './components/Modal'
-import PAGES, { isMapSplitPage, isOldCmsPage, isEditorialOverviewPage } from './pages'
+import PAGES, {
+  isMapSplitPage,
+  isOldCmsPage,
+  isEditorialOverviewPage,
+  isQuerySearchPage,
+} from './pages'
 import { useAppReducer } from './utils/useAppReducer'
 import LoadingIndicator from '../shared/components/loading-indicator/LoadingIndicator'
 
@@ -51,8 +56,7 @@ const AppBody = ({
             <div className="u-row u-full-height">
               {homePage && <Home showFooter />}
 
-              {(currentPage === PAGES.DATA_QUERY_SEARCH ||
-                currentPage === PAGES.SEARCH_DATASETS) && <QuerySearchPage />}
+              {isQuerySearchPage(currentPage) && <QuerySearchPage />}
 
               {/* Todo: DP-6391 */}
               {currentPage === PAGES.DATA_SEARCH_CATEGORY && (
