@@ -99,7 +99,7 @@ export const routing = {
   },
   articles: {
     title: 'Artikelen',
-    path: `/${MAIN_PATHS.ARTICLES}/`,
+    path: `/${MAIN_PATHS.ARTICLES}/zoek/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLES}`,
     page: PAGES.ARTICLES,
   },
@@ -201,7 +201,7 @@ export const routing = {
   },
   specials: {
     title: 'Specials',
-    path: `/${MAIN_PATHS.SPECIALS}/`,
+    path: `/${MAIN_PATHS.SPECIALS}/zoek/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.SPECIALS}`,
     page: PAGES.SPECIALS,
   },
@@ -213,7 +213,7 @@ export const routing = {
   },
   publications: {
     title: 'Publicaties',
-    path: `/${MAIN_PATHS.PUBLICATIONS}/`,
+    path: `/${MAIN_PATHS.PUBLICATIONS}/zoek/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.PUBLICATIONS}`,
     page: PAGES.PUBLICATIONS,
   },

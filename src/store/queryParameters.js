@@ -61,6 +61,8 @@ const routesWithSearch = [
   routing.dataQuerySearch.type,
   routing.dataSearchCategory.type,
   routing.searchDatasets.type,
+  routing.articles.type,
+  routing.publications.type,
 ]
 
 const routesWithDataSelection = [

@@ -9,40 +9,53 @@ import LoadingIndicator from '../../../shared/components/loading-indicator/Loadi
 import { DataSearchQuery } from '../DataSearch'
 import MoreResultsWhenLoggedIn from '../PanelMessages/MoreResultsWhenLoggedIn'
 import ShareBar from '../ShareBar/ShareBar'
+import {
+  toDataSearchQuery,
+  toDatasetSearch,
+  toArticlesSearch,
+  toPublicationsSearch,
+} from '../../../store/redux-first-router/actions'
 
 const EXCLUDED_RESULTS = 'kadastrale subjecten, maatschappelijke activiteiten en vestigingen'
 
 const QuerySearch = ({
   isLoading,
   query,
-  numberOfDataResults,
-  numberOfDatasetResults,
+  numberOfResults,
   currentPage,
-  toDataPage,
-  toDatasetPage,
   filters,
   user,
+  toSearchPage,
 }) => (
   <div className="c-data-selection c-dashboard__content">
     {isLoading && <LoadingIndicator />}
     {!isLoading && (
       <div className="qa-data-selection-content">
-        <TabBar
-          numberOfDataResults={numberOfDataResults}
-          numberOfDatasetResults={numberOfDatasetResults}
-        >
+        <TabBar numberOfResults={numberOfResults}>
           <Tabs currentPage={currentPage}>
             <Tab
               label="Data"
-              count={numberOfDataResults}
-              onClick={() => toDataPage(query, filters)}
+              count={numberOfResults}
+              onClick={() => toSearchPage(toDataSearchQuery, query, filters)}
               page={PAGES.DATA_QUERY_SEARCH}
             />
             <Tab
+              label="Publicaties"
+              count={numberOfResults}
+              onClick={() => toSearchPage(toPublicationsSearch, query, filters)}
+              page={PAGES.PUBLICATIONS}
+            />
+            <Tab
               label="Datasets"
-              count={numberOfDatasetResults}
-              onClick={() => toDatasetPage(query, filters)}
+              count={numberOfResults}
+              onClick={() => toSearchPage(toDatasetSearch, query, filters)}
               page={PAGES.SEARCH_DATASETS}
+            />
+            <Tab
+              label="Artikelen"
+              count={numberOfResults}
+              onClick={() => toSearchPage(toArticlesSearch, query, filters)}
+              page={PAGES.ARTICLES}
             />
           </Tabs>
         </TabBar>
@@ -50,7 +63,7 @@ const QuerySearch = ({
           {currentPage === PAGES.DATA_QUERY_SEARCH && (
             <div>
               <DataSearchQuery />
-              {!!numberOfDataResults &&
+              {!!numberOfResults &&
                 (!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
                   <MoreResultsWhenLoggedIn excludedResults={EXCLUDED_RESULTS} />
                 )}
@@ -81,10 +94,8 @@ QuerySearch.propTypes = {
   isLoading: PropTypes.bool,
   query: PropTypes.string,
   currentPage: PropTypes.string.isRequired,
-  toDatasetPage: PropTypes.func.isRequired,
-  toDataPage: PropTypes.func.isRequired,
-  numberOfDataResults: PropTypes.number.isRequired,
-  numberOfDatasetResults: PropTypes.number.isRequired,
+  numberOfResults: PropTypes.number.isRequired,
+  toSearchPage: PropTypes.func.isRequired,
 }
 
 export default QuerySearch

@@ -5,7 +5,7 @@ const Tab = ({ label, count, onClick, isSelected, page }) => (
   <li key={page} className={isSelected ? 'is-active' : ''}>
     {!isSelected && (
       <button type="button" onClick={onClick} className="o-tabs__tab o-tabs__tab--link">
-        {label} {count !== null && <span>({count})</span>}
+        {label}
       </button>
     )}
     {isSelected && (

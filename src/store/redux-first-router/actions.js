@@ -277,3 +277,27 @@ export const toPublicationDetail = (id, slug = '') => ({
     slug,
   },
 })
+
+export const toArticlesSearch = (additionalParams = null, skipSaga = false, forceSaga = false) => ({
+  type: routing.articles.type,
+  meta: {
+    preserve: true,
+    skipSaga,
+    forceSaga,
+    additionalParams,
+  },
+})
+
+export const toPublicationsSearch = (
+  additionalParams = null,
+  skipSaga = false,
+  forceSaga = false,
+) => ({
+  type: routing.publications.type,
+  meta: {
+    preserve: true,
+    skipSaga,
+    forceSaga,
+    additionalParams,
+  },
+})
