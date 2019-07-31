@@ -128,14 +128,15 @@ const DataSearch = ({
   )
 }
 
+DataSearch.defaultProps = {
+  category: null,
+}
+
 DataSearch.propTypes = {
   userAuthenticated: PropTypes.bool.isRequired,
   userScopes: PropTypes.arrayOf(PropTypes.string).isRequired,
   numberOfResults: PropTypes.number.isRequired,
-  category: PropTypes.oneOfType(
-    // eslint-disable-line react/require-default-props
-    [PropTypes.string, PropTypes.object],
-  ).isRequired,
+  category: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   setSearchCategory: PropTypes.func.isRequired,
   toDetail: PropTypes.func.isRequired,
   searchResults: PropTypes.arrayOf(PropTypes.object).isRequired,

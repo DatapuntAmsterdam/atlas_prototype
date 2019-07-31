@@ -3,7 +3,6 @@ import { routing } from '../../app/routes'
 import { fetchFetchPanoramaEffect } from '../../panorama/sagas/panorama'
 import {
   fetchGeoSearchResultsEffect,
-  fetchQuerySearchEffect,
   fetchQuerySearchResultsEffect,
 } from '../../shared/sagas/data-search/data-search'
 import { fetchDataSelectionEffect } from '../../shared/sagas/data-selection/data-selection'
@@ -22,8 +21,8 @@ const routeSagaMapping = [
   [routing.datasets.type, fetchDatasetsEffect],
   [routing.datasetDetail.type, fetchDatasetsOptionalEffect],
   [routing.dataSearchCategory.type, fetchQuerySearchResultsEffect],
-  [routing.dataQuerySearch.type, fetchQuerySearchEffect],
-  [routing.searchDatasets.type, fetchQuerySearchEffect],
+  [routing.dataQuerySearch.type, fetchQuerySearchResultsEffect],
+  [routing.searchDatasets.type, fetchDatasetsEffect],
   [routing.dataDetail.type, fetchDetailEffect],
 ]
 

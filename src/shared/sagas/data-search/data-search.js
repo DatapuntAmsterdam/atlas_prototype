@@ -1,4 +1,4 @@
-import { call, fork, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { getUser } from '../../ducks/user/user'
 import search from '../../../map/services/map-search/map-search'
 import geosearch from '../../services/search/geosearch'
@@ -34,7 +34,6 @@ import { getMapZoom } from '../../../map/ducks/map/selectors'
 import ActiveOverlaysClass from '../../services/active-overlays/active-overlays'
 import { waitForAuthentication } from '../user/user'
 import { SELECTION_TYPE, setSelection } from '../../ducks/selection/selection'
-import { fetchDatasetsEffect } from '../dataset/dataset'
 import { getViewMode, isMapPage, SET_VIEW_MODE, VIEW_MODE } from '../../ducks/ui/ui'
 import PAGES from '../../../app/pages'
 import { ERROR_TYPES, setGlobalError } from '../../ducks/error/error-message'
@@ -115,11 +114,6 @@ function* loadMore() {
   const storedResults = yield select(getSearchQueryResults)
   const results = yield vanillaLoadMore(storedResults[0])
   yield put(fetchMoreResultsSuccess([results]))
-}
-
-export function* fetchQuerySearchEffect() {
-  yield fork(fetchQuerySearchResultsEffect)
-  yield fork(fetchDatasetsEffect)
 }
 
 export default function* watchDataSearch() {
