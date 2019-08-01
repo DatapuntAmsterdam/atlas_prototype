@@ -56,6 +56,7 @@ import {
 import PAGES from '../../../app/pages'
 import PARAMETERS from '../../parameters'
 import { MATOMO_CONSTANTS } from './constants'
+import { FETCH_ARTICLES_SUCCESS, FETCH_PUBLICATIONS_SUCCESS } from '../../../shared/ducks/cms'
 
 const trackEvents = {
   // NAVIGATION
@@ -187,6 +188,37 @@ const trackEvents = {
   [FETCH_DATASETS_SUCCESS]: function trackDatasetSearch({ tracking, state }) {
     return getPage(state) === PAGES.SEARCH_DATASETS
       ? [MATOMO_CONSTANTS.TRACK_SEARCH, tracking.query, 'datasets', tracking.numberOfResults]
+      : []
+  },
+
+  // SITE SEARCH -> ARTICLES SWITCH TAB
+  [routing.searchArticles.type]: ({ firstAction = null, query }) => {
+    // TODO DP-7130
+    const searchQuery = 'searchArticles'
+    const numberOfResults = 0
+    return firstAction && (searchQuery && searchQuery.length > 0) && query.term === searchQuery
+      ? [MATOMO_CONSTANTS.TRACK_SEARCH, searchQuery, 'articles', numberOfResults]
+      : []
+  },
+  // SITE SEARCH -> ARTICLES INITIAL LOAD
+  [FETCH_ARTICLES_SUCCESS]: function trackDatasetSearch({ tracking, state }) {
+    return getPage(state) === PAGES.SEARCH_ARTICLES
+      ? [MATOMO_CONSTANTS.TRACK_SEARCH, tracking.query, 'articles', tracking.numberOfResults]
+      : []
+  },
+  // SITE SEARCH -> PUBLICATIONS SWITCH TAB
+  [routing.searchPublications.type]: ({ firstAction = null, query }) => {
+    // TODO DP-7130
+    const searchQuery = 'searchPublications'
+    const numberOfResults = 0
+    return firstAction && (searchQuery && searchQuery.length > 0) && query.term === searchQuery
+      ? [MATOMO_CONSTANTS.TRACK_SEARCH, searchQuery, 'publications', numberOfResults]
+      : []
+  },
+  // SITE SEARCH -> PUBLICATIONS INITIAL LOAD
+  [FETCH_PUBLICATIONS_SUCCESS]: function trackDatasetSearch({ tracking, state }) {
+    return getPage(state) === PAGES.SEARCH_PUBLICATIONS
+      ? [MATOMO_CONSTANTS.TRACK_SEARCH, tracking.query, 'publications', tracking.numberOfResults]
       : []
   },
   // DATASETS

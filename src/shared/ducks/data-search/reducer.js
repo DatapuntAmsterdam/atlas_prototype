@@ -16,6 +16,7 @@ import { routing } from '../../../app/routes'
 import { FETCH_DATA_SELECTION_REQUEST } from '../data-selection/constants'
 import paramsRegistry from '../../../store/params-registry'
 import { FETCH_DATASETS_SUCCESS } from '../datasets/data/data'
+import { FETCH_ARTICLES_REQUEST, FETCH_PUBLICATIONS_REQUEST } from '../cms'
 
 export { REDUCER_KEY as DATA_SEARCH_REDUCER }
 
@@ -125,6 +126,13 @@ export default function reducer(state = initialState, action) {
         numberOfResults: result && result.numberOfRecords,
       }
     }
+
+    case FETCH_ARTICLES_REQUEST:
+    case FETCH_PUBLICATIONS_REQUEST:
+      return {
+        ...enrichedState,
+        numberOfResults: 0,
+      }
 
     default:
       return enrichedState

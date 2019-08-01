@@ -40,7 +40,7 @@ exports[`QuerySearch should render with results 1`] = `
           isSelected={false}
           label="Publicaties"
           onClick={[Function]}
-          page="PUBLICATIONS"
+          page="SEARCH_PUBLICATIONS"
         />
         <Tab
           count={2}
@@ -54,7 +54,7 @@ exports[`QuerySearch should render with results 1`] = `
           isSelected={false}
           label="Artikelen"
           onClick={[Function]}
-          page="ARTICLES"
+          page="SEARCH_ARTICLES"
         />
       </Tabs>
     </Connect(TabBar)>
