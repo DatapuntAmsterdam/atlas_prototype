@@ -91,18 +91,6 @@ export const routing = {
     useHooks: true, // indicate to skip legacy documentHead and piwik middleware
     page: PAGES.CONSTRUCTION_FILE,
   },
-  articleDetail: {
-    title: 'Artikel',
-    path: `/${MAIN_PATHS.ARTICLES}/artikel/:id/:slug`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLE_DETAIL}`,
-    page: PAGES.ARTICLE_DETAIL,
-  },
-  articles: {
-    title: 'Artikelen',
-    path: `/${MAIN_PATHS.ARTICLES}/zoek/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLES}`,
-    page: PAGES.ARTICLES,
-  },
   nieuws: {
     title: 'Nieuws',
     path: `/${MAIN_PATHS.CONTENT}/nieuws/`,
@@ -193,17 +181,29 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_DETAIL}`,
     page: PAGES.DATA_DETAIL,
   },
-  specialDetail: {
-    title: 'Special',
-    path: `/${MAIN_PATHS.SPECIALS}/:type/:id/:slug`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.SPECIAL_DETAIL}`,
-    page: PAGES.SPECIAL_DETAIL,
+  articles: {
+    title: 'Artikelen',
+    path: `/${MAIN_PATHS.ARTICLES}/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLES}`,
+    page: PAGES.ARTICLES,
   },
-  specials: {
-    title: 'Specials',
-    path: `/${MAIN_PATHS.SPECIALS}/zoek/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.SPECIALS}`,
-    page: PAGES.SPECIALS,
+  articleDetail: {
+    title: 'Artikel',
+    path: `/${MAIN_PATHS.ARTICLES}/artikel/:id/:slug`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLE_DETAIL}`,
+    page: PAGES.ARTICLE_DETAIL,
+  },
+  searchArticles: {
+    title: 'Artikelen zoekresultaten',
+    path: `/${MAIN_PATHS.ARTICLES}/zoek/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.SEARCH_ARTICLES}`,
+    page: PAGES.SEARCH_ARTICLES,
+  },
+  publications: {
+    title: 'Publicaties',
+    path: `/${MAIN_PATHS.PUBLICATIONS}/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.PUBLICATIONS}`,
+    page: PAGES.PUBLICATIONS,
   },
   publicationDetail: {
     title: 'Publicatie',
@@ -211,11 +211,23 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.PUBLICATION_DETAIL}`,
     page: PAGES.PUBLICATION_DETAIL,
   },
-  publications: {
-    title: 'Publicaties',
+  searchPublications: {
+    title: 'Publicaties zoekresultaten',
     path: `/${MAIN_PATHS.PUBLICATIONS}/zoek/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.PUBLICATIONS}`,
-    page: PAGES.PUBLICATIONS,
+    type: `${ROUTER_NAMESPACE}/${PAGES.SEARCH_PUBLICATIONS}`,
+    page: PAGES.SEARCH_PUBLICATIONS,
+  },
+  specials: {
+    title: 'Specials',
+    path: `/${MAIN_PATHS.SPECIALS}/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.SPECIALS}`,
+    page: PAGES.SPECIALS,
+  },
+  specialDetail: {
+    title: 'Special',
+    path: `/${MAIN_PATHS.SPECIALS}/:type/:id/:slug`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.SPECIAL_DETAIL}`,
+    page: PAGES.SPECIAL_DETAIL,
   },
 }
 

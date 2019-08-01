@@ -6,17 +6,13 @@ import Tabs from '../Tabs/Tabs'
 import Tab from '../Tab/Tab'
 import Dataset from '../Dataset'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
-import { DataSearchQuery } from '../DataSearch'
-import MoreResultsWhenLoggedIn from '../PanelMessages/MoreResultsWhenLoggedIn'
-import ShareBar from '../ShareBar/ShareBar'
+import DataSearchQuery from '../DataSearch/DataSearchQuery'
 import {
   toDataSearchQuery,
   toDatasetSearch,
   toArticlesSearch,
   toPublicationsSearch,
 } from '../../../store/redux-first-router/actions'
-
-const EXCLUDED_RESULTS = 'kadastrale subjecten, maatschappelijke activiteiten en vestigingen'
 
 const QuerySearch = ({
   isLoading,
@@ -44,7 +40,7 @@ const QuerySearch = ({
                 label="Publicaties"
                 count={numberOfResults}
                 onClick={() => toSearchPage(toPublicationsSearch, query, filters)}
-                page={PAGES.PUBLICATIONS}
+                page={PAGES.SEARCH_PUBLICATIONS}
               />
               <Tab
                 label="Datasets"
@@ -56,28 +52,17 @@ const QuerySearch = ({
                 label="Artikelen"
                 count={numberOfResults}
                 onClick={() => toSearchPage(toArticlesSearch, query, filters)}
-                page={PAGES.ARTICLES}
+                page={PAGES.SEARCH_ARTICLES}
               />
             </Tabs>
           </TabBar>
           <div className="qa-search-results">
             {currentPage === PAGES.DATA_QUERY_SEARCH && (
-              <div>
-                <DataSearchQuery />
-                {!!numberOfResults &&
-                  (!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
-                    <MoreResultsWhenLoggedIn excludedResults={EXCLUDED_RESULTS} />
-                  )}
-                <div className="u-row">
-                  <div className="u-col-sm--12">
-                    <div className="u-margin__top--4">
-                      <ShareBar />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <DataSearchQuery numberOfResults={numberOfResults} user={user} />
             )}
             {currentPage === PAGES.SEARCH_DATASETS && <Dataset />}
+            {currentPage === PAGES.SEARCH_ARTICLES && <Dataset />}
+            {currentPage === PAGES.SEARCH_PUBLICATIONS && <Dataset />}
           </div>
         </div>
       )}

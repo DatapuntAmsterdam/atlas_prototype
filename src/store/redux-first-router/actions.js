@@ -279,7 +279,7 @@ export const toPublicationDetail = (id, slug = '') => ({
 })
 
 export const toArticlesSearch = (additionalParams = null, skipSaga = false, forceSaga = false) => ({
-  type: routing.articles.type,
+  type: routing.searchArticles.type,
   meta: {
     preserve: true,
     skipSaga,
@@ -293,7 +293,7 @@ export const toPublicationsSearch = (
   skipSaga = false,
   forceSaga = false,
 ) => ({
-  type: routing.publications.type,
+  type: routing.searchPublications.type,
   meta: {
     preserve: true,
     skipSaga,
