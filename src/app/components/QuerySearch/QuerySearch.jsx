@@ -13,6 +13,8 @@ import {
   toArticlesSearch,
   toPublicationsSearch,
 } from '../../../store/redux-first-router/actions'
+import { ArticleSearchContainer } from '../ArticleSearch'
+import { PublicationSearchContainer } from '../PublicationSearch'
 
 const QuerySearch = ({
   isLoading,
@@ -61,8 +63,8 @@ const QuerySearch = ({
               <DataSearchQuery numberOfResults={numberOfResults} user={user} />
             )}
             {currentPage === PAGES.SEARCH_DATASETS && <Dataset />}
-            {currentPage === PAGES.SEARCH_ARTICLES && <Dataset />}
-            {currentPage === PAGES.SEARCH_PUBLICATIONS && <Dataset />}
+            {currentPage === PAGES.SEARCH_ARTICLES && <ArticleSearchContainer />}
+            {currentPage === PAGES.SEARCH_PUBLICATIONS && <PublicationSearchContainer />}
           </div>
         </div>
       )}
