@@ -2,13 +2,6 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import QuerySearch from './QuerySearch'
 
-jest.mock('../../pages', () => ({
-  PAGES: {
-    SEARCH_DATASETS: 'datasets',
-    DATA_QUERY_SEARCH: 'data',
-  },
-}))
-
 describe('QuerySearch', () => {
   const props = {
     currentPage: 'data',
@@ -18,10 +11,7 @@ describe('QuerySearch', () => {
       scopes: [],
     },
     numberOfResults: 0,
-    numberOfDataResults: 0,
-    numberOfDatasetResults: 0,
-    toDataPage: jest.fn(),
-    toDatasetPage: jest.fn(),
+    toSearchPage: jest.fn(),
   }
 
   it('should not render while loading', () => {
@@ -34,8 +24,6 @@ describe('QuerySearch', () => {
       ...props,
       isLoading: false,
       numberOfResults: 2,
-      numberOfDataResults: 1,
-      numberOfDatasetResults: 1,
     }
     const component = shallow(<QuerySearch {...extendedProps} />)
     expect(component).toMatchSnapshot()
@@ -46,8 +34,6 @@ describe('QuerySearch', () => {
       ...props,
       isLoading: false,
       numberOfResults: 2,
-      numberOfDataResults: 1,
-      numberOfDatasetResults: 1,
     }
     const component = shallow(<QuerySearch {...extendedProps} />)
 
@@ -55,7 +41,7 @@ describe('QuerySearch', () => {
       .find('Tab')
       .at(0)
       .simulate('click')
-    expect(props.toDataPage).toHaveBeenCalled()
+    expect(props.toSearchPage).toHaveBeenCalled()
   })
 
   it('should fetch all dataset results on tab click', () => {
@@ -64,8 +50,6 @@ describe('QuerySearch', () => {
       currentPage: 'datasets',
       isLoading: false,
       numberOfResults: 2,
-      numberOfDataResults: 1,
-      numberOfDatasetResults: 1,
     }
     const component = shallow(<QuerySearch {...extendedProps} />)
 
@@ -73,6 +57,6 @@ describe('QuerySearch', () => {
       .find('Tab')
       .at(1)
       .simulate('click')
-    expect(props.toDatasetPage).toHaveBeenCalled()
+    expect(props.toSearchPage).toHaveBeenCalled()
   })
 })

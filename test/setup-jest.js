@@ -20,7 +20,7 @@ global.fetch = require('jest-fetch-mock')
 // TODO DP-7140 Remove when we upgrade to React >= 16.9
 const originalConsoleError = message => {
   // eslint-disable-line
-  throw new Error(message) // eslint-disable-line
+  // throw new Error(message) // eslint-disable-line
 }
 
 console.error = (...args) => {

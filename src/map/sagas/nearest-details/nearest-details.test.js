@@ -6,6 +6,10 @@ import fetchNearestDetail from '../../services/nearest-detail/nearest-detail'
 import { REQUEST_NEAREST_DETAILS } from '../../../shared/ducks/data-search/constants'
 import { goToGeoSearch } from '../map-click/map-click'
 
+import { VIEW_MODE, getViewMode } from '../../../shared/ducks/ui/ui'
+
+jest.mock('../../../shared/ducks/ui/ui')
+
 describe('watchFetchNearestDetails', () => {
   const action = { type: REQUEST_NEAREST_DETAILS }
 
@@ -31,8 +35,10 @@ describe('fetchNearestDetails', () => {
       view: 'kaart',
     },
   }
-  it('should call fetchNearestDetails and dispatch the correct actions if uri is returned', () =>
-    expectSaga(fetchNearestDetails, action)
+
+  it('should call fetchNearestDetails and dispatch the correct actions if uri is returned', () => {
+    getViewMode.mockReturnValueOnce(VIEW_MODE.MAP)
+    return expectSaga(fetchNearestDetails, action)
       .provide({
         call(effect, next) {
           if (effect.fn === fetchNearestDetail) {
@@ -42,7 +48,8 @@ describe('fetchNearestDetails', () => {
         },
       })
       .call(goToGeoSearch, action.payload.location)
-      .run())
+      .run()
+  })
 
   it('should call fetchNearestDetails and dispatch setGeolocation', () =>
     expectSaga(fetchNearestDetails, action)

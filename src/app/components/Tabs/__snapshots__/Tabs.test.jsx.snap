@@ -7,11 +7,11 @@ exports[`Tabs should handle component when there are invalid children 1`] = `
   >
     <ul>
       <bound fn
-        isCurrentTab={false}
+        isSelected={false}
         key=".1"
       />
       <li
-        isCurrentTab={false}
+        isSelected={false}
         key=".$Data"
         label="test-label"
       >
@@ -31,7 +31,7 @@ exports[`Tabs should render the component 1`] = `
   >
     <ul>
       <li
-        isCurrentTab={false}
+        isSelected={false}
         key=".$Dataset"
       >
         <span>
@@ -39,7 +39,7 @@ exports[`Tabs should render the component 1`] = `
         </span>
       </li>
       <li
-        isCurrentTab={false}
+        isSelected={false}
         key=".$Data"
         label="test-label"
       >

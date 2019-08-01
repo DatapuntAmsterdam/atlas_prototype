@@ -3,7 +3,7 @@
 exports[`Tab not the current tab should render 1`] = `
 <li
   className=""
-  key="myTab"
+  key="page"
 >
   <button
     className="o-tabs__tab o-tabs__tab--link"
@@ -11,12 +11,6 @@ exports[`Tab not the current tab should render 1`] = `
     type="button"
   >
     myTab
-     
-    <span>
-      (
-      0
-      )
-    </span>
   </button>
 </li>
 `;
@@ -24,7 +18,7 @@ exports[`Tab not the current tab should render 1`] = `
 exports[`Tab the current tab should render 1`] = `
 <li
   className="is-active"
-  key="myTab"
+  key="page"
 >
   <span
     className="qa-tab-header__active o-tabs__tab o-tabs__tab--active"

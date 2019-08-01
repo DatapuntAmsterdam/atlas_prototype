@@ -23,23 +23,38 @@ exports[`QuerySearch should render with results 1`] = `
     className="qa-data-selection-content"
   >
     <Connect(TabBar)
-      numberOfDataResults={1}
-      numberOfDatasetResults={1}
+      numberOfResults={2}
     >
       <Tabs
-        currentTab="Datasets"
+        currentPage="data"
       >
         <Tab
-          count={1}
-          isCurrentTab={false}
+          count={2}
+          isSelected={false}
           label="Data"
           onClick={[Function]}
+          page="DATA_QUERY_SEARCH"
         />
         <Tab
-          count={1}
-          isCurrentTab={false}
+          count={2}
+          isSelected={false}
+          label="Publicaties"
+          onClick={[Function]}
+          page="PUBLICATIONS"
+        />
+        <Tab
+          count={2}
+          isSelected={false}
           label="Datasets"
           onClick={[Function]}
+          page="SEARCH_DATASETS"
+        />
+        <Tab
+          count={2}
+          isSelected={false}
+          label="Artikelen"
+          onClick={[Function]}
+          page="ARTICLES"
         />
       </Tabs>
     </Connect(TabBar)>

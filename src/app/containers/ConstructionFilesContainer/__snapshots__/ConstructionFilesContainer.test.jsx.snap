@@ -224,10 +224,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
         storeSubscription={
           Subscription {
             "listeners": Object {
-              "clear": [Function],
-              "get": [Function],
               "notify": [Function],
-              "subscribe": [Function],
             },
             "onStateChange": [Function],
             "parentSub": undefined,
@@ -239,7 +236,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
               "replaceReducer": [Function],
               "subscribe": [Function],
             },
-            "unsubscribe": [Function],
+            "unsubscribe": null,
           }
         }
         user={
