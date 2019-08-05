@@ -1,4 +1,4 @@
-import { select } from 'redux-saga/effects'
+import { select, put } from 'redux-saga/effects'
 import { getUserScopes } from '../../shared/ducks/user/user'
 import { getParts, getTemplateUrl } from '../services/endpoint-parser/endpoint-parser'
 import { getApiSpecificationData } from '../../shared/ducks/datasets/datasets'
@@ -6,6 +6,7 @@ import formatDetailData from '../services/data-formatter/data-formatter'
 import { getByUrl } from '../../shared/services/api/api'
 import { VIEW_MODE, getViewMode } from '../../shared/ducks/ui/ui'
 import * as vastgoed from '../../shared/services/vastgoed/vastgoed'
+import { toDetailFromEndpoint } from '../../store/redux-first-router/actions'
 
 export default function* getDetailData(endpoint, mapDetail = {}) {
   const includeSrc = getTemplateUrl(endpoint)
@@ -66,6 +67,9 @@ export default function* getDetailData(endpoint, mapDetail = {}) {
       },
     }
   }
+
+  // Redirect without a view (fullscreen)
+  yield put(toDetailFromEndpoint(endpoint))
 
   return ''
 }
