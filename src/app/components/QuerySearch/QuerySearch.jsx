@@ -10,8 +10,8 @@ import DataSearchQuery from '../DataSearch/DataSearchQuery'
 import {
   toDataSearchQuery,
   toDatasetSearch,
-  toArticlesSearch,
-  toPublicationsSearch,
+  toArticleSearch,
+  toPublicationSearch,
 } from '../../../store/redux-first-router/actions'
 import { ArticleSearchContainer } from '../ArticleSearch'
 import { PublicationSearchContainer } from '../PublicationSearch'
@@ -41,7 +41,7 @@ const QuerySearch = ({
               <Tab
                 label="Publicaties"
                 count={numberOfResults}
-                onClick={() => toSearchPage(toPublicationsSearch, query, filters)}
+                onClick={() => toSearchPage(toPublicationSearch, query, filters)}
                 page={PAGES.PUBLICATION_SEARCH}
               />
               <Tab
@@ -53,7 +53,7 @@ const QuerySearch = ({
               <Tab
                 label="Artikelen"
                 count={numberOfResults}
-                onClick={() => toSearchPage(toArticlesSearch, query, filters)}
+                onClick={() => toSearchPage(toArticleSearch, query, filters)}
                 page={PAGES.ARTICLE_SEARCH}
               />
             </Tabs>

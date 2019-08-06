@@ -278,7 +278,7 @@ export const toPublicationDetail = (id, slug = '') => ({
   },
 })
 
-export const toArticlesSearch = (additionalParams = null, skipSaga = false, forceSaga = false) => ({
+export const toArticleSearch = (additionalParams = null, skipSaga = false, forceSaga = false) => ({
   type: routing.articleSearch.type,
   meta: {
     preserve: true,
@@ -288,7 +288,7 @@ export const toArticlesSearch = (additionalParams = null, skipSaga = false, forc
   },
 })
 
-export const toPublicationsSearch = (
+export const toPublicationSearch = (
   additionalParams = null,
   skipSaga = false,
   forceSaga = false,
