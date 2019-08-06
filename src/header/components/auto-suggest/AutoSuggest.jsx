@@ -155,6 +155,7 @@ class AutoSuggest extends React.Component {
     this.resetActiveSuggestion()
     this.setState({
       showSuggestions: false,
+      openSearchBarToggle: false,
     })
     onTextInput()
   }

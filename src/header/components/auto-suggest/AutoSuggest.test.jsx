@@ -354,6 +354,10 @@ describe('The AutoSuggest component', () => {
 
       expect(preventDefaultMock).not.toHaveBeenCalled()
       expect(autoSuggestComponent.instance().onSuggestionSelection).toHaveBeenCalled()
+
+      // the searchbar toggle and suggestions should be closed
+      expect(autoSuggestComponent.instance().state.openSearchBarToggle).toBe(false)
+      expect(autoSuggestComponent.instance().state.showSuggestions).toBe(false)
     })
 
     it('should not handle enter key when index for suggestions is below 0', () => {
