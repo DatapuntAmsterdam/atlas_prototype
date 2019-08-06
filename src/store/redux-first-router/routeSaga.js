@@ -15,18 +15,18 @@ import { fetchArticlesEffect, fetchPublicationsEffect } from '../../shared/sagas
 
 const routeSagaMapping = [
   [routing.panorama.type, fetchFetchPanoramaEffect],
-  [routing.dataGeoSearch.type, fetchGeoSearchResultsEffect],
+  [routing.dataSearchGeo.type, fetchGeoSearchResultsEffect],
   [routing.addresses.type, fetchDataSelectionEffect],
   [routing.establishments.type, fetchDataSelectionEffect],
   [routing.cadastralObjects.type, fetchDataSelectionEffect],
   [routing.datasets.type, fetchDatasetsEffect],
   [routing.datasetDetail.type, fetchDatasetsOptionalEffect],
   [routing.dataSearchCategory.type, fetchQuerySearchResultsEffect],
-  [routing.dataQuerySearch.type, fetchQuerySearchResultsEffect],
-  [routing.searchDatasets.type, fetchDatasetsEffect],
+  [routing.dataSearchQuery.type, fetchQuerySearchResultsEffect],
+  [routing.datasetSearch.type, fetchDatasetsEffect],
   [routing.dataDetail.type, fetchDetailEffect],
-  [routing.searchArticles.type, fetchArticlesEffect],
-  [routing.searchPublications.type, fetchPublicationsEffect],
+  [routing.articleSearch.type, fetchArticlesEffect],
+  [routing.publicationSearch.type, fetchPublicationsEffect],
 ]
 
 const yieldOnFirstAction = sideEffect =>

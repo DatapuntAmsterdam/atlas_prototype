@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Heading } from '@datapunt/asc-ui'
 import NoResultsForSearchType from '../Messages/NoResultsForSearchType'
 
 const ArticleSearch = ({ numberOfResults }) => {
@@ -11,7 +12,7 @@ const ArticleSearch = ({ numberOfResults }) => {
     <div className="qa-search-results-content">
       <div className="qa-search-result">
         <div>
-          <h1>Search results for articles</h1>
+          <Heading>Search results for articles</Heading>
         </div>
       </div>
     </div>

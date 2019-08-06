@@ -59,7 +59,7 @@ const PanoramaContainer = React.lazy(() => import('../../panorama/containers/Pan
 
       break
 
-    case PAGES.DATA_GEO_SEARCH:
+    case PAGES.DATA_SEARCH_GEO:
       Component = <LocationSearchContainer />
       mapProps = {
         showPreviewPanel: true,

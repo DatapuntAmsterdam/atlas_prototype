@@ -48,11 +48,11 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.CADASTRAL_OBJECTS}`,
     page: PAGES.CADASTRAL_OBJECTS,
   },
-  searchDatasets: {
+  datasetSearch: {
     title: 'Datasets zoekresultaten',
     path: `/${MAIN_PATHS.DATASETS}/zoek/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.SEARCH_DATASETS}`,
-    page: PAGES.SEARCH_DATASETS,
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATASET_SEARCH}`,
+    page: PAGES.DATASET_SEARCH,
   },
   datasetDetail: {
     title: 'Dataset',
@@ -60,17 +60,17 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.DATASET_DETAIL}`,
     page: PAGES.DATASET_DETAIL,
   },
-  dataQuerySearch: {
+  dataSearchQuery: {
     title: 'Data zoekresultaten',
     path: `/${MAIN_PATHS.DATA}/zoek/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_QUERY_SEARCH}`,
-    page: PAGES.DATA_QUERY_SEARCH,
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH_QUERY}`,
+    page: PAGES.DATA_SEARCH_QUERY,
   },
-  dataGeoSearch: {
+  dataSearchGeo: {
     title: 'Data zoekresultaten op locatie',
     path: `/${MAIN_PATHS.DATA}/geozoek/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_GEO_SEARCH}`,
-    page: PAGES.DATA_GEO_SEARCH,
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH_GEO}`,
+    page: PAGES.DATA_SEARCH_GEO,
   },
   dataSearchCategory: {
     title: 'Data zoekresultaten',
@@ -193,11 +193,11 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLE_DETAIL}`,
     page: PAGES.ARTICLE_DETAIL,
   },
-  searchArticles: {
+  articleSearch: {
     title: 'Artikelen zoekresultaten',
     path: `/${MAIN_PATHS.ARTICLES}/zoek/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.SEARCH_ARTICLES}`,
-    page: PAGES.SEARCH_ARTICLES,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLE_SEARCH}`,
+    page: PAGES.ARTICLE_SEARCH,
   },
   publications: {
     title: 'Publicaties',
@@ -211,11 +211,11 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.PUBLICATION_DETAIL}`,
     page: PAGES.PUBLICATION_DETAIL,
   },
-  searchPublications: {
+  publicationSearch: {
     title: 'Publicaties zoekresultaten',
     path: `/${MAIN_PATHS.PUBLICATIONS}/zoek/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.SEARCH_PUBLICATIONS}`,
-    page: PAGES.SEARCH_PUBLICATIONS,
+    type: `${ROUTER_NAMESPACE}/${PAGES.PUBLICATION_SEARCH}`,
+    page: PAGES.PUBLICATION_SEARCH,
   },
   specials: {
     title: 'Specials',

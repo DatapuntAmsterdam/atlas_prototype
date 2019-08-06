@@ -33,28 +33,28 @@ exports[`QuerySearch should render with results 1`] = `
           isSelected={false}
           label="Data"
           onClick={[Function]}
-          page="DATA_QUERY_SEARCH"
+          page="DATA_SEARCH_QUERY"
         />
         <Tab
           count={2}
           isSelected={false}
           label="Publicaties"
           onClick={[Function]}
-          page="SEARCH_PUBLICATIONS"
+          page="PUBLICATION_SEARCH"
         />
         <Tab
           count={2}
           isSelected={false}
           label="Datasets"
           onClick={[Function]}
-          page="SEARCH_DATASETS"
+          page="DATASET_SEARCH"
         />
         <Tab
           count={2}
           isSelected={false}
           label="Artikelen"
           onClick={[Function]}
-          page="SEARCH_ARTICLES"
+          page="SEARCH_AARTICLE_SEARCHRTICLES"
         />
       </Tabs>
     </Connect(TabBar)>

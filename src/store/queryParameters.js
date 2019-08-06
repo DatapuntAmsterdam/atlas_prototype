@@ -58,11 +58,11 @@ import paramsRegistry from './params-registry'
 import { getFileName } from '../shared/ducks/files/selectors'
 
 const routesWithSearch = [
-  routing.dataQuerySearch.type,
+  routing.dataSearchQuery.type,
   routing.dataSearchCategory.type,
-  routing.searchDatasets.type,
-  routing.searchArticles.type,
-  routing.searchPublications.type,
+  routing.datasetSearch.type,
+  routing.articleSearch.type,
+  routing.publicationSearch.type,
 ]
 
 const routesWithDataSelection = [
@@ -75,7 +75,7 @@ const routesWithMapActive = [
   ...routesWithDataSelection,
   routing.data.type,
   routing.panorama.type,
-  routing.dataGeoSearch.type,
+  routing.dataSearchGeo.type,
   routing.dataDetail.type,
 ]
 
@@ -134,7 +134,7 @@ export default paramsRegistry
     })
   })
   .addParameter(PARAMETERS.CATEGORY, routes => {
-    routes.add(routing.dataQuerySearch.type, DATA_SEARCH_REDUCER, 'category', {
+    routes.add(routing.dataSearchQuery.type, DATA_SEARCH_REDUCER, 'category', {
       defaultValue: dataSelectionInitialState.category,
       selector: getSearchCategory,
     })
@@ -335,7 +335,7 @@ export default paramsRegistry
         },
         false,
       )
-      .add(routing.dataGeoSearch.type, DATA_SEARCH_REDUCER, 'geoSearch', {
+      .add(routing.dataSearchGeo.type, DATA_SEARCH_REDUCER, 'geoSearch', {
         defaultValue: null,
         selector: getDataSearchLocation,
         encode: selectorResult => {

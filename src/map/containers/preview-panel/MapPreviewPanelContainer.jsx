@@ -25,7 +25,7 @@ import { getPanoramaPreview } from '../../../panorama/ducks/preview/panorama-pre
 const mapStateToProps = state => ({
   panoPreview: getPanoramaPreview(state),
   searchResults: getMapPanelResults(state),
-  dataQuerySearch: getDataSearch(state),
+  dataSearchQuery: getDataSearch(state),
   detailLocation: getDetailLocation(state),
   searchLocation: getDataSearchLocation(state),
   searchLocationId: getLocationId(state),

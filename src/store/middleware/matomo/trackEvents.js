@@ -126,7 +126,7 @@ const trackEvents = {
   [SET_VIEW_MODE]: ({ tracking, state }) => {
     const viewMode = getViewMode(state)
     switch (getPage(state)) {
-      case PAGES.DATA_GEO_SEARCH:
+      case PAGES.DATA_SEARCH_GEO:
         return [
           MATOMO_CONSTANTS.TRACK_EVENT,
           'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP Or SPLITSCREEN
@@ -163,7 +163,7 @@ const trackEvents = {
   },
   // SITE SEARCH
   // SITE SEARCH -> DATA SWITCH TAB
-  [routing.dataQuerySearch.type]: ({ firstAction = null, query, state }) => {
+  [routing.dataSearchQuery.type]: ({ firstAction = null, query, state }) => {
     const searchQuery = getSearchQuery(state)
     const numberOfResults = getNumberOfResults(state)
     return firstAction && (searchQuery && searchQuery.length > 0) && query.term === searchQuery
@@ -172,12 +172,12 @@ const trackEvents = {
   },
   // SITE SEARCH -> DATA INITIAL LOAD
   [FETCH_QUERY_SEARCH_RESULTS_SUCCESS]: function trackDataSearch({ tracking, state }) {
-    return getPage(state) === PAGES.DATA_QUERY_SEARCH
+    return getPage(state) === PAGES.DATA_SEARCH_QUERY
       ? [MATOMO_CONSTANTS.TRACK_SEARCH, tracking.query, 'data', tracking.numberOfResults]
       : []
   },
   // SITE SEARCH -> DATASETS SWITCH TAB
-  [routing.searchDatasets.type]: ({ firstAction = null, query, state }) => {
+  [routing.datasetSearch.type]: ({ firstAction = null, query, state }) => {
     const searchQuery = getDatasetsSearchQuery(state)
     const numberOfResults = getNumberOfDatasetsResults(state)
     return firstAction && (searchQuery && searchQuery.length > 0) && query.term === searchQuery
@@ -186,15 +186,15 @@ const trackEvents = {
   },
   // SITE SEARCH -> DATASETS INITIAL LOAD
   [FETCH_DATASETS_SUCCESS]: function trackDatasetSearch({ tracking, state }) {
-    return getPage(state) === PAGES.SEARCH_DATASETS
+    return getPage(state) === PAGES.DATASET_SEARCH
       ? [MATOMO_CONSTANTS.TRACK_SEARCH, tracking.query, 'datasets', tracking.numberOfResults]
       : []
   },
 
   // SITE SEARCH -> ARTICLES SWITCH TAB
-  [routing.searchArticles.type]: ({ firstAction = null, query }) => {
+  [routing.articleSearch.type]: ({ firstAction = null, query }) => {
     // TODO DP-7130
-    const searchQuery = 'searchArticles'
+    const searchQuery = 'articleSearch'
     const numberOfResults = 0
     return firstAction && (searchQuery && searchQuery.length > 0) && query.term === searchQuery
       ? [MATOMO_CONSTANTS.TRACK_SEARCH, searchQuery, 'articles', numberOfResults]
@@ -202,14 +202,14 @@ const trackEvents = {
   },
   // SITE SEARCH -> ARTICLES INITIAL LOAD
   [FETCH_ARTICLES_SUCCESS]: function trackDatasetSearch({ tracking, state }) {
-    return getPage(state) === PAGES.SEARCH_ARTICLES
+    return getPage(state) === PAGES.ARTICLE_SEARCH
       ? [MATOMO_CONSTANTS.TRACK_SEARCH, tracking.query, 'articles', tracking.numberOfResults]
       : []
   },
   // SITE SEARCH -> PUBLICATIONS SWITCH TAB
-  [routing.searchPublications.type]: ({ firstAction = null, query }) => {
+  [routing.publicationSearch.type]: ({ firstAction = null, query }) => {
     // TODO DP-7130
-    const searchQuery = 'searchPublications'
+    const searchQuery = 'publicationSearch'
     const numberOfResults = 0
     return firstAction && (searchQuery && searchQuery.length > 0) && query.term === searchQuery
       ? [MATOMO_CONSTANTS.TRACK_SEARCH, searchQuery, 'publications', numberOfResults]
@@ -217,7 +217,7 @@ const trackEvents = {
   },
   // SITE SEARCH -> PUBLICATIONS INITIAL LOAD
   [FETCH_PUBLICATIONS_SUCCESS]: function trackDatasetSearch({ tracking, state }) {
-    return getPage(state) === PAGES.SEARCH_PUBLICATIONS
+    return getPage(state) === PAGES.PUBLICATION_SEARCH
       ? [MATOMO_CONSTANTS.TRACK_SEARCH, tracking.query, 'publications', tracking.numberOfResults]
       : []
   },

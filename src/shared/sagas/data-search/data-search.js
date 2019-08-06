@@ -99,7 +99,7 @@ export function* fetchGeoSearchResultsEffect() {
   const isMap = yield select(isMapPage)
   const page = yield select(getPage)
 
-  if (page === PAGES.DATA_GEO_SEARCH) {
+  if (page === PAGES.DATA_SEARCH_GEO) {
     yield put(fetchMapSearchResultsRequest(location, isMap))
   }
 }

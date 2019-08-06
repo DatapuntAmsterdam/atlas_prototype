@@ -36,35 +36,35 @@ const QuerySearch = ({
                 label="Data"
                 count={numberOfResults}
                 onClick={() => toSearchPage(toDataSearchQuery, query, filters)}
-                page={PAGES.DATA_QUERY_SEARCH}
+                page={PAGES.DATA_SEARCH_QUERY}
               />
               <Tab
                 label="Publicaties"
                 count={numberOfResults}
                 onClick={() => toSearchPage(toPublicationsSearch, query, filters)}
-                page={PAGES.SEARCH_PUBLICATIONS}
+                page={PAGES.PUBLICATION_SEARCH}
               />
               <Tab
                 label="Datasets"
                 count={numberOfResults}
                 onClick={() => toSearchPage(toDatasetSearch, query, filters)}
-                page={PAGES.SEARCH_DATASETS}
+                page={PAGES.DATASET_SEARCH}
               />
               <Tab
                 label="Artikelen"
                 count={numberOfResults}
                 onClick={() => toSearchPage(toArticlesSearch, query, filters)}
-                page={PAGES.SEARCH_ARTICLES}
+                page={PAGES.ARTICLE_SEARCH}
               />
             </Tabs>
           </TabBar>
           <div className="qa-search-results">
-            {currentPage === PAGES.DATA_QUERY_SEARCH && (
+            {currentPage === PAGES.DATA_SEARCH_QUERY && (
               <DataSearchQuery numberOfResults={numberOfResults} user={user} />
             )}
-            {currentPage === PAGES.SEARCH_DATASETS && <Dataset />}
-            {currentPage === PAGES.SEARCH_ARTICLES && <ArticleSearchContainer />}
-            {currentPage === PAGES.SEARCH_PUBLICATIONS && <PublicationSearchContainer />}
+            {currentPage === PAGES.DATASET_SEARCH && <Dataset />}
+            {currentPage === PAGES.ARTICLE_SEARCH && <ArticleSearchContainer />}
+            {currentPage === PAGES.PUBLICATION_SEARCH && <PublicationSearchContainer />}
           </div>
         </div>
       )}

@@ -92,7 +92,7 @@ describe('AutoSuggestReducer Reducer', () => {
   it('should set the query from meta data', () => {
     expect(
       reducer(initialState, {
-        type: routing.dataQuerySearch.type,
+        type: routing.dataSearchQuery.type,
         meta: {
           query: { term: 'foo' },
         },
