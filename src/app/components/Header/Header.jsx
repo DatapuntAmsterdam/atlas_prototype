@@ -19,6 +19,7 @@ const style = homePage => css`
           })} {
           /* The "tall" header has a position relative on the homepage only, while the smaller header has a fixed position */
           position: relative;
+          margin: 0;
         }
       `}
   }
