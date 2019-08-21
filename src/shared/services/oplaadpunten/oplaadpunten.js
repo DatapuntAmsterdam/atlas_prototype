@@ -23,7 +23,7 @@ export default function fetchByUri(uri) {
 
     // eslint-disable-next-line no-nested-ternary
     const type = result.charging_cap_max
-      ? result.charging_cap_max >= 22
+      ? result.charging_cap_max >= 50
         ? CHARGER_TYPES.FAST
         : CHARGER_TYPES.REGULAR
       : null
