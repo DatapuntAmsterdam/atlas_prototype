@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
 
 const root = path.resolve(__dirname)
 const src = path.resolve(root, 'src')
@@ -207,6 +208,7 @@ function commonConfig(env) {
           GIT_COMMIT: JSON.stringify(process.env.GIT_COMMIT),
         },
       }),
+      new GenerateSW(),
     ],
   }
 }

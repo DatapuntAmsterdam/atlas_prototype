@@ -118,7 +118,7 @@ export function parseContents(contents) {
 }
 
 export default function getContents(type) {
-  const promise = new Promise(resolve => {
+  const promise = new Promise(async resolve => {
     const { key } = GOOGLE_SHEET_CMS
     const index = GOOGLE_SHEET_CMS.index[type]
     const getSheet = GOOGLE_SHEET_CMS.getStatic[getEnvironment(window.location.host)]
@@ -135,16 +135,13 @@ export default function getContents(type) {
         },
         entries: [],
       }
-      getSheet(key, index)
-        .then(contents => {
-          if (contents) {
-            result = parseContents(contents)
-          }
-        })
-        .finally(() => {
-          cache[key][index] = result
-          resolve(cache[key][index])
-        })
+      const contents = await getSheet(key, index)
+      if (contents) {
+        result = parseContents(contents)
+      }
+
+      cache[key][index] = result
+      resolve(cache[key][index])
     }
   })
 
