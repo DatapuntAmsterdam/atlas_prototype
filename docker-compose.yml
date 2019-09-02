@@ -13,7 +13,7 @@ services:
       target: build-deps
     environment:
     - NODE_ENV=development
-    command: npm run test
+    command: yarn lint & yarn test
 
   # test-e2e:
   #   build:
@@ -29,7 +29,7 @@ services:
   #     - USERNAME_EMPLOYEE_PLUS
   #     - PASSWORD_EMPLOYEE
   #     - PASSWORD_EMPLOYEE_PLUS
-  #   command: npm run test-e2e
+  #   command: yarn test-e2e
 
   test-e2e-aria:
     build:

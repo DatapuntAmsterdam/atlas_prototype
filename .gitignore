@@ -5,7 +5,6 @@ __diff_output__/
 .sass-cache
 build/
 dist/
-docs/
 node_modules/
 coverage/
 coverage-legacy/

@@ -2,19 +2,21 @@
 
 ## Requirements
 
+- [NodeJS > 8.x.x](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
 
 ## Installation
 
 Install all dependencies:
 
-    npm install
+    npm i -g yarn
+    yarn
 
 ## Development
 
 Start the application:
 
-    NODE_ENV=development npm start
+    yarn start
 
 Then, open the application in your browser at [localhost:8080](http://localhost:8080/).
 
@@ -23,25 +25,25 @@ Then, open the application in your browser at [localhost:8080](http://localhost:
 Karma & Jest unit and (Jest) integration test
 
 ```
-NODE_ENV=development npm test
+NODE_ENV=development yarn test
 ```
 
 Only Karma unit tests
 
 ```
-NODE_ENV=development npm run test-karma
+NODE_ENV=development yarn test-karma
 ```
 
 Only Jest unit tests
 
 ```
-NODE_ENV=development npm run test-jest
+NODE_ENV=development yarn test-jest
 ```
 
 Integration tests
 
 ```
-NODE_ENV=development npm run test-integration
+NODE_ENV=development yarn test-integration
 ```
 
 ### E2E testing
@@ -58,9 +60,9 @@ In order to test authentication the following environment variables must be set:
 They can simply be added by using the `export` command from the command line, or by adding these
 variables to `.bash_profile`.
 
-Make sure the app is running locally by running `npm start`.
-Then, in a second terminal, go to `cd test/e2e` and run `npm run start` (single run).
-Or open the UI using `npm run watch`.
+Make sure the app is running locally by running `yarn start`.
+Then, in a second terminal, go to `cd test/e2e` and run `yarn start` (single run).
+Or open the UI using `yarn watch`.
 
 Test using docker-compose:
 ```
@@ -69,14 +71,14 @@ docker-compose up --build test-e2e
 
 To test against production APIs you can use the same tasks, suffixed with `prod`:
 
-- Make sure the app is running locally by running `npm run start-prod`.
-- Then, in a second terminal, run `npm run test-e2e-prod` (single run).
-- Or open the UI using `npm run test-e2e-prod-watch`.
+- Make sure the app is running locally by running `yarn start-prod`.
+- Then, in a second terminal, run `yarn test-e2e-prod` (single run).
+- Or open the UI using `yarn test-e2e-prod-watch`.
 
 ### E2E Aria testing
 
 Make sure the app is running locally.
-Then run `npm run test-aria`.
+Then run `yarn test-aria`.
 
 Test using docker-compose:
 ```
@@ -85,8 +87,8 @@ docker-compose up --build test-e2e-aria
 
 ## Other useful commands
 
-- `npm run clean`
-- `npm run lint`
+- `yarn clean`
+- `yarn lint`
 
 ## Related projects
 
@@ -108,7 +110,7 @@ docker-compose up --build test-e2e-aria
 - [GitFlow](https://datasift.github.io/gitflow/IntroducingGitFlow.html) without tags and a release branch
 
 ## Known issues
-- on windows there is a bug in sass-lint that prevents `npm run lint` to fail when there are linting errors.
+- on windows there is a bug in sass-lint that prevents `yarn lint` to fail when there are linting errors.
   work-around: install sass-lint globally and run commands specified in the  `lint:style` script direct in a bash
   terminal
 
