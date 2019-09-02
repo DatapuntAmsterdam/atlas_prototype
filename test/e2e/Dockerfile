@@ -11,7 +11,7 @@ COPY package.json yarn.lock  /home/
 
 # Install all NPM dependencies, and:
 #  * Setting `CI=true` to stop cypress install progress from flooding the CI log
-RUN npm config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ && \
+RUN yarn config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ && \
     CI=true yarn && \
     yarn cache clean
 

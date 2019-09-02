@@ -10,10 +10,11 @@ COPY package.json yarn.lock /app/
 #  * Changing git URL because network is blocking git protocol...
 RUN git config --global url."https://".insteadOf git:// && \
     git config --global url."https://github.com/".insteadOf git@github.com: && \
-    npm config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ && \
+    yarn config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ && \
+    yarn config list && \
+    yarn config set unsafe-perm true && \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     yarn --production=false \
-        --unsafe-perm \
         --verbose \
         install && \
     yarn cache clean
