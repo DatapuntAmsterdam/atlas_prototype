@@ -23,7 +23,7 @@
     "prettier": "prettier --write \"./**/*.{js,jsx,scss,css}\"",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
     "start-prod": "cross-env NODE_ENV=production webpack-dev-server --config webpack.dev.js",
-    "test": "cross-env karma start && jest ",
+    "test": "concurrently \"karma start\" \"jest\"",
     "test-eslint": "eslint ./modules/ ./src/ ./test/cypress/",
     "test-jest": "cross-env NODE_ENV=development jest --runInBand",
     "test-jest-watch": "cross-env NODE_ENV=development jest --watch --onlyChanged --coverage --runInBand",
@@ -125,6 +125,7 @@
     "babel-plugin-istanbul": "5.1.1",
     "babel-preset-react-app": "7.0.1",
     "clean-webpack-plugin": "1.0.1",
+    "concurrently": "^4.1.2",
     "copy-webpack-plugin": "4.6.0",
     "css-loader": "2.1.0",
     "enzyme": "3.10.0",
@@ -190,7 +191,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn test-jest --bail && yarn test-karma",
+      "pre-push": "concurrently \"yarn test-jest --bail\" \"yarn test-karma\"",
       "pre-commit": "lint-staged",
       "post-merge": "./scripts/post-merge.sh"
     }

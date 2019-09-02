@@ -7,7 +7,7 @@ RUN apt-get update && \
 WORKDIR /home
 
 COPY asound.conf /etc/asound.conf
-COPY package.json package-lock.json  /home/
+COPY package.json yarn.lock  /home/
 
 # Install all NPM dependencies, and:
 #  * Setting `CI=true` to stop cypress install progress from flooding the CI log

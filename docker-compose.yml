@@ -13,7 +13,7 @@ services:
       target: build-deps
     environment:
     - NODE_ENV=development
-    command: yarn lint & yarn test
+    command: concurrently "yarn lint" "yarn test"
 
   # test-e2e:
   #   build:

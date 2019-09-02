@@ -4,7 +4,7 @@ LABEL maintainer="datapunt@amsterdam.nl"
 
 WORKDIR /app
 
-COPY package.json package-lock.json /app/
+COPY package.json yarn.lock /app/
 
 # Install all NPM dependencies, and:
 #  * Changing git URL because network is blocking git protocol...

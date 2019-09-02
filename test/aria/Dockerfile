@@ -15,7 +15,7 @@ RUN apt-get update && \
 
 WORKDIR /home
 
-COPY .babelrc package.json package-lock.json ./
+COPY .babelrc package.json yarn.lock ./
 
 # Install all NPM dependencies, and:
 #  * Changing git URL because network is blocking git protocol...
