@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'redux-first-router-link'
+import RouterLink from 'redux-first-router-link'
 
 import HomepageBlock from '../block/HomepageBlock'
 
@@ -44,14 +44,14 @@ const HomepageAddressBlock = () => (
         const { label, id, title } = BLOCK_ITEMS[key]
         return (
           <div key={key} className={`homepage-block__item ${extraClass}`}>
-            <Link
+            <RouterLink
               className="c-link homepage-block__link"
               title={title}
               to={toDatasetsTableWithFilter(DATASET_ROUTE_MAPPER[id])}
             >
               <span className={`homepage-block__icon homepage-block__icon--${id}`} />
               <span className="homepage-block__label">{label}</span>
-            </Link>
+            </RouterLink>
           </div>
         )
       })}

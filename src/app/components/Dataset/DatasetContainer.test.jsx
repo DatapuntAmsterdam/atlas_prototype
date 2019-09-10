@@ -22,7 +22,8 @@ const initialState = {
 describe('Dataset', () => {
   it('should render the container', () => {
     const store = configureMockStore()({ ...initialState })
-    const component = shallow(<DatasetContainer />, { context: { store } })
+    const component = shallow(<DatasetContainer store={store} />).dive()
+
     expect(component).toMatchSnapshot()
   })
 

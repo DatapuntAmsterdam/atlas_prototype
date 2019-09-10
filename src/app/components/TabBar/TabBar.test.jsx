@@ -17,9 +17,7 @@ describe('TabBar', () => {
       numberOfDataResults: 1,
       numberOfDatasetResults: 1,
     }
-    const component = shallow(<TabBar {...props} />, {
-      context: { store },
-    })
+    const component = shallow(<TabBar {...props} store={store} />).dive()
     expect(component).toMatchSnapshot()
   })
 
@@ -32,9 +30,9 @@ describe('TabBar', () => {
       goToDatasets: jest.fn(),
     }
 
-    const component = shallow(<TabBar {...props} />, {
-      context: { store },
-    })
+    const component = shallow(<TabBar {...props} store={store} />)
+      .dive()
+      .dive()
     expect(component).toMatchSnapshot()
   })
 
@@ -46,7 +44,9 @@ describe('TabBar', () => {
       goToDatasets: jest.fn(),
     }
 
-    const component = shallow(<TabBar {...props} />, { context: { store } })
+    const component = shallow(<TabBar {...props} store={store} />)
+      .dive()
+      .dive()
     expect(component).toMatchSnapshot()
   })
 })

@@ -3,7 +3,7 @@
 exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
 <ContextMenu
   alt="Actiemenu"
-  arrowIcon={<IconMock />}
+  arrowIcon={<SvgChevronDown />}
   data-test="context-menu"
   icon={
     <Icon
@@ -11,7 +11,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
       padding={4}
       size={24}
     >
-      <IconMock />
+      <SvgEllipsis />
     </Icon>
   }
   open={false}
@@ -25,7 +25,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
         padding={4}
         size={24}
       >
-        <IconMock />
+        <SvgPrint />
       </Icon>
     }
     onClick={[Function]}
@@ -43,7 +43,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
         padding={4}
         size={24}
       >
-        <IconMock />
+        <SvgDownload />
       </Icon>
     }
     onClick={[Function]}
@@ -62,7 +62,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
         padding={4}
         size={24}
       >
-        <IconMock />
+        <SvgDownload />
       </Icon>
     }
     onClick={[Function]}
@@ -82,7 +82,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
         padding={4}
         size={24}
       >
-        <IconMock />
+        <SvgDownload />
       </Icon>
     }
     onClick={[Function]}
@@ -98,7 +98,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
         padding={4}
         size={24}
       >
-        <IconMock />
+        <SvgFacebookPadded />
       </Icon>
     }
     key="1"
@@ -115,7 +115,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
         padding={4}
         size={24}
       >
-        <IconMock />
+        <SvgTwitter />
       </Icon>
     }
     key="2"
@@ -132,7 +132,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
         padding={4}
         size={24}
       >
-        <IconMock />
+        <SvgLinkedin />
       </Icon>
     }
     key="3"
@@ -149,7 +149,7 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
         padding={4}
         size={24}
       >
-        <IconMock />
+        <SvgEmail />
       </Icon>
     }
     key="4"

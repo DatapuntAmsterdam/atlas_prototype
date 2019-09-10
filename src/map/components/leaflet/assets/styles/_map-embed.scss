@@ -9,6 +9,10 @@
   }
 
   &__header-pano-button {
+    cursor: default;
+  }
+
+  &__header-pano {
     display: none;
   }
 }

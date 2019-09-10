@@ -20,14 +20,16 @@ describe('MapDetailResultWrapper', () => {
         subTitle="subTitle"
         onMaximize={clickHandler}
         onPanoPreviewClick={clickHandler}
+        store={store}
       >
         <ul>
           <li>Item 1</li>
           <li>Item 2</li>
         </ul>
       </MapDetailResultWrapper>,
-      { context: { store } },
-    ).dive()
+    )
+      .dive()
+      .dive()
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -40,6 +42,7 @@ describe('MapDetailResultWrapper', () => {
         subTitle="subTitle"
         onMaximize={clickHandler}
         onPanoPreviewClick={clickHandler}
+        store={store}
       >
         <ul>
           <li>Item 1</li>
@@ -47,7 +50,9 @@ describe('MapDetailResultWrapper', () => {
         </ul>
       </MapDetailResultWrapper>,
       { context: { store } },
-    ).dive()
+    )
+      .dive()
+      .dive()
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -60,14 +65,16 @@ describe('MapDetailResultWrapper', () => {
         subTitle=""
         onMaximize={clickHandler}
         onPanoPreviewClick={clickHandler}
+        store={store}
       >
         <ul>
           <li>Item 1</li>
           <li>Item 2</li>
         </ul>
       </MapDetailResultWrapper>,
-      { context: { store } },
-    ).dive()
+    )
+      .dive()
+      .dive()
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -79,14 +86,16 @@ describe('MapDetailResultWrapper', () => {
         title="title"
         onMaximize={clickHandler}
         onPanoPreviewClick={clickHandler}
+        store={store}
       >
         <ul>
           <li>Item 1</li>
           <li>Item 2</li>
         </ul>
       </MapDetailResultWrapper>,
-      { context: { store } },
-    ).dive()
+    )
+      .dive()
+      .dive()
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -94,13 +103,15 @@ describe('MapDetailResultWrapper', () => {
     const clickHandler = jest.fn()
     const wrapper = shallow(
       <MapDetailResultWrapper
+        store={store}
         panoUrl=""
         title="title"
         onMaximize={clickHandler}
         onPanoPreviewClick={clickHandler}
       />,
-      { context: { store } },
-    ).dive()
+    )
+      .dive()
+      .dive()
     expect(wrapper).toMatchSnapshot()
   })
 })

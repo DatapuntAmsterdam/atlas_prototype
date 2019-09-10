@@ -28,7 +28,7 @@ export const getPage = createSelector(
   getLocation,
   (location = {}) => {
     const key = Object.keys(routing).find(route => routing[route].type === location.type)
-    return (key && routing[key].page) || routing.niet_gevonden.page
+    return (key && routing[key].page) || ''
   },
 )
 export const isHomepage = createSelector(

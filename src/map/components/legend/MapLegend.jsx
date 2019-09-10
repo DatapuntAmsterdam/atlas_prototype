@@ -6,6 +6,7 @@ import { Checkbox } from '../../../shared/components/checkbox'
 import MAP_CONFIG from '../../services/map-config'
 
 import './_map-legend.scss'
+import LoginLinkContainer from '../../../app/components/Links/LoginLink/LoginLinkContainer'
 
 const isAuthorised = (layer, user) =>
   !layer.authScope || (user.authenticated && user.scopes.includes(layer.authScope))
@@ -106,7 +107,11 @@ class MapLegend extends React.Component {
                 </div>
                 {!isAuthorised(mapLayer, user) && (
                   <div className="map-legend__notification">
-                    <span>Zichtbaar na inloggen</span>
+                    <span>
+                      <LoginLinkContainer linkType="blank">
+                        Zichtbaar na inloggen
+                      </LoginLinkContainer>
+                    </span>
                   </div>
                 )}
                 {isAuthorised(mapLayer, user) && !isInsideZoomLevel(mapLayer, zoomLevel) && (

@@ -5,6 +5,54 @@ exports[`Detail should render 1`] = `
   className="qa-detail"
 >
   <AngularWrapper
+    angularInstance={
+      Object {
+        "$$csp": [Function],
+        "$$encodeUriQuery": [Function],
+        "$$encodeUriSegment": [Function],
+        "$$minErr": [Function],
+        "$$stringify": [Function],
+        "$interpolateMinErr": [Function],
+        "bind": [Function],
+        "bootstrap": [Function],
+        "callbacks": Object {
+          "$$counter": 0,
+        },
+        "copy": [Function],
+        "element": [Function],
+        "equals": [Function],
+        "errorHandlingConfig": [Function],
+        "extend": [Function],
+        "forEach": [Function],
+        "fromJson": [Function],
+        "getTestability": [Function],
+        "identity": [Function],
+        "injector": [Function],
+        "isArray": [Function],
+        "isDate": [Function],
+        "isDefined": [Function],
+        "isElement": [Function],
+        "isFunction": [Function],
+        "isNumber": [Function],
+        "isObject": [Function],
+        "isString": [Function],
+        "isUndefined": [Function],
+        "lowercase": [Function],
+        "merge": [Function],
+        "module": [Function],
+        "noop": [Function],
+        "reloadWithDebugInfo": [Function],
+        "toJson": [Function],
+        "uppercase": [Function],
+        "version": Object {
+          "codeName": "fiery-basilisk",
+          "dot": 9,
+          "full": "1.6.9",
+          "major": 1,
+          "minor": 6,
+        },
+      }
+    }
     bindings={
       Object {
         "detailData": Object {},

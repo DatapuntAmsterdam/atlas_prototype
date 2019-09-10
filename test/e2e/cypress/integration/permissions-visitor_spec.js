@@ -91,7 +91,7 @@ describe('visitor permissions', () => {
     cy.wait('@getObjectExpand')
     cy.wait('@getPanden')
     cy.wait('@getSitueringen')
-    cy.get(queries.headerTitle).contains('Nes 98')
+    cy.get(queries.headerTitle).contains('Dam 1')
     cy.get(queries.headerSubTitle).should($values => {
       expect($values).to.contain('Ligt in')
       expect($values).to.contain('Panoramabeeld')
@@ -216,7 +216,7 @@ describe('visitor permissions', () => {
       cy.wait('@getResults')
       cy.wait('@getNummeraanduiding')
       cy.wait('@getMonument')
-      cy.get(queries.headerTitle).contains('erdokska')
+      cy.get(queries.headerTitle).contains('Zwanenburgwal 44')
       cy.get(queries.warningPanelAngular).contains(
         'Medewerkers/ketenpartners van Gemeente Amsterdam',
       )
@@ -235,7 +235,7 @@ describe('visitor permissions', () => {
 
       cy.wait('@getResults')
       cy.wait('@getNummeraanduiding')
-      cy.get(queries.headerTitle).contains('Johan Broedeletstraat 20')
+      cy.get(queries.headerTitle).contains('Rollemanstraat 9')
       cy.get(queries.warningPanelAngular).contains(
         'Medewerkers/ketenpartners van Gemeente Amsterdam',
       )

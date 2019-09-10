@@ -1,8 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ArticleDetailPage should render 1`] = `
-<ArticleDetailPage
-  dispatch={[Function]}
-  id={6}
-/>
+exports[`ArticleDetailPage should render the publication when there are results 1`] = `
+<EditorialPage
+  description="intro"
+  documentTitle="Artikel: This is a title"
+  linkAction={
+    Object {
+      "payload": Object {
+        "id": 3,
+        "slug": "slug",
+      },
+      "type": "atlasRouter/ARTICLE_DETAIL",
+    }
+  }
+  loading={false}
+>
+  <div
+    className="article"
+  >
+    <Row
+      className="article__row"
+      debug={false}
+      debugColor="rgba(51,102,153,0.75)"
+      hasMargin={true}
+    >
+      <ContentContainer
+        className="content-container"
+      >
+        <Article>
+          <Row
+            className="article__row"
+            debug={false}
+            debugColor="rgba(51,102,153,0.75)"
+            hasMargin={true}
+          >
+            <EditorialContent>
+              <Column
+                debug={false}
+                debugColor="rgba(51,102,153,0.5)"
+                order={0}
+                push={
+                  Object {
+                    "big": 1,
+                    "large": 1,
+                    "medium": 0,
+                    "small": 0,
+                    "xLarge": 1,
+                  }
+                }
+                span={
+                  Object {
+                    "big": 5,
+                    "large": 11,
+                    "medium": 2,
+                    "small": 1,
+                    "xLarge": 11,
+                  }
+                }
+                wrap={true}
+              >
+                <Column
+                  debug={false}
+                  debugColor="rgba(51,102,153,0.5)"
+                  order={0}
+                  push={0}
+                  span={
+                    Object {
+                      "big": 4,
+                      "large": 7,
+                      "medium": 2,
+                      "small": 1,
+                      "xLarge": 7,
+                    }
+                  }
+                  wrap={false}
+                >
+                  <EditorialBody>
+                    <EditorialHeader
+                      title="This is a title"
+                    >
+                      <EditorialMetaList />
+                    </EditorialHeader>
+                    <Paragraph
+                      hasLongText={true}
+                      strong={true}
+                    >
+                      intro
+                    </Paragraph>
+                    <CustomHTMLBlock
+                      body={
+                        Object {
+                          "value": "body text",
+                        }
+                      }
+                    />
+                  </EditorialBody>
+                </Column>
+                <Column
+                  debug={false}
+                  debugColor="rgba(51,102,153,0.5)"
+                  order={0}
+                  push={
+                    Object {
+                      "big": 0,
+                      "large": 1,
+                      "medium": 0,
+                      "small": 0,
+                      "xLarge": 1,
+                    }
+                  }
+                  span={
+                    Object {
+                      "big": 2,
+                      "large": 3,
+                      "medium": 2,
+                      "small": 1,
+                      "xLarge": 3,
+                    }
+                  }
+                  wrap={false}
+                >
+                  <EditorialContent />
+                </Column>
+              </Column>
+            </EditorialContent>
+          </Row>
+        </Article>
+      </ContentContainer>
+    </Row>
+  </div>
+</EditorialPage>
 `;

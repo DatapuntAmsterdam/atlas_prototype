@@ -1,4 +1,4 @@
-@import "../../styles/config";
+@import '../../styles/config';
 
 $handle-height: 24px;
 
@@ -46,12 +46,14 @@ $handle-height: 24px;
 
     &:hover,
     &:focus {
-      .select-button__icon-collapse { // sass-lint:disable nesting-depth
-        @include icon-sprite("icon-arrow-up", $primary-dark, $primary-dark, $handle-height - 2px);
+      .select-button__icon-collapse {
+        // sass-lint:disable nesting-depth
+        @include icon-sprite('icon-arrow-up', $primary-dark, $primary-dark, $handle-height - 2px);
       }
 
-      .select-button__icon-expand { // sass-lint:disable nesting-depth
-        @include icon-sprite("icon-arrow-down", $primary-dark, $primary-dark, $handle-height - 2px);
+      .select-button__icon-expand {
+        // sass-lint:disable nesting-depth
+        @include icon-sprite('icon-arrow-down', $primary-dark, $primary-dark, $handle-height - 2px);
       }
     }
   }
@@ -62,17 +64,22 @@ $handle-height: 24px;
     width: $handle-height - 2px;
 
     &-collapse {
-      @include icon-sprite("icon-arrow-up", $secondary-gray60, $primary-dark, $handle-height - 2px);
+      @include icon-sprite('icon-arrow-up', $secondary-gray60, $primary-dark, $handle-height - 2px);
     }
 
     &-expand {
-      @include icon-sprite("icon-arrow-down", $secondary-gray60, $primary-dark, $handle-height - 2px);
+      @include icon-sprite(
+        'icon-arrow-down',
+        $secondary-gray60,
+        $primary-dark,
+        $handle-height - 2px
+      );
     }
   }
 
   &--enabled {
     .select-button__icon-expand {
-      @include icon-sprite("icon-arrow-down", $primary-dark, $primary-dark, $handle-height - 2px);
+      @include icon-sprite('icon-arrow-down', $primary-dark, $primary-dark, $handle-height - 2px);
     }
   }
 
@@ -134,7 +141,7 @@ $handle-height: 24px;
   &__label,
   &__drop-down-button {
     font-size: $s-font-size;
-    font-weight: 900;
+    font-weight: $bold-weight;
     padding-right: 10px;
     text-align: left;
     width: inherit;
@@ -150,7 +157,7 @@ $handle-height: 24px;
     background-color: transparent;
     border: none;
     font-size: $s-font-size;
-    font-weight: 400;
+    font-weight: $normal-weight;
     margin: 0;
     outline: none;
     padding: 7px 10px 7px 40px;

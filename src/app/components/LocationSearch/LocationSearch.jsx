@@ -10,6 +10,7 @@ import ShareBar from '../ShareBar/ShareBar'
 
 const EXCLUDED_RESULTS = 'vestigingen en grondexploitaties'
 
+/* istanbul ignore next */
 const LocationSearch = ({
   isLoading,
   layerWarning,

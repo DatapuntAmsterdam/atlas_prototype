@@ -6,7 +6,6 @@ import { isEmbedded, isEmbedPreview, isMapActive } from '../../../shared/ducks/u
 import { previewDataAvailable } from '../../../shared/ducks/selection/selection'
 import { getDrawingMode } from '../../ducks/map/selectors'
 
-jest.mock('../../../shared/services/matomo-tracker/matomo-tracker')
 jest.mock('../../../store/redux-first-router/selectors')
 jest.mock('../../../shared/ducks/selection/selection')
 jest.mock('../../../shared/ducks/ui/ui')
@@ -66,9 +65,11 @@ describe('MapContainer', () => {
 
   it('should render', () => {
     const store = configureMockStore()({ ...initialState })
-    const wrapper = shallow(<MapContainer isFullscreen={false} toggleFullscreen={() => {}} />, {
-      context: { store },
-    }).dive()
+    const wrapper = shallow(
+      <MapContainer isFullscreen={false} toggleFullscreen={() => {}} store={store} />,
+    )
+      .dive()
+      .dive()
 
     expect(wrapper).toMatchSnapshot()
   })
@@ -76,18 +77,22 @@ describe('MapContainer', () => {
   it('should render with drawingmode: draw', () => {
     getDrawingMode.mockImplementation(() => 'draw')
     const store = configureMockStore()({ ...initialState })
-    const wrapper = shallow(<MapContainer isFullscreen={false} toggleFullscreen={() => {}} />, {
-      context: { store },
-    }).dive()
+    const wrapper = shallow(
+      <MapContainer isFullscreen={false} toggleFullscreen={() => {}} store={store} />,
+    )
+      .dive()
+      .dive()
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('should set the leaflet instance state', () => {
     const store = configureMockStore()({ ...initialState })
-    const wrapper = shallow(<MapContainer isFullscreen={false} toggleFullscreen={() => {}} />, {
-      context: { store },
-    }).dive()
+    const wrapper = shallow(
+      <MapContainer isFullscreen={false} toggleFullscreen={() => {}} store={store} />,
+    )
+      .dive()
+      .dive()
     wrapper.instance().setLeafletInstance({})
     expect(wrapper.instance().state.leafletInstance).toBeTruthy()
     expect(wrapper.instance().state.leafletInstance.getBounds).toBeDefined()

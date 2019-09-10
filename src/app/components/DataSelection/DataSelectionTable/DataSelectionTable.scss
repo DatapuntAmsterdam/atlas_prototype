@@ -1,4 +1,4 @@
-@import "../../../../shared/styles/config";
+@import '../../../../shared/styles/config';
 
 .c-ds-table {
   $self: &;
@@ -7,12 +7,12 @@
 
   &__head {
     display: table-header-group;
-    font-weight: $bold-weight;
     white-space: nowrap;
 
     #{$self}__cell {
       border-bottom: 1px solid;
       border-top: 1px solid;
+      font-weight: $bold-weight;
       height: 26px;
       vertical-align: middle;
     }
@@ -22,7 +22,6 @@
     display: table-row-group;
 
     #{$self}__row {
-
       &--link {
         &:hover,
         &:focus {
@@ -47,7 +46,7 @@
     border-bottom: 1px solid $secondary-gray20;
     color: $primary-dark;
     display: table-cell;
-    font-weight: normal;
+    font-weight: $medium-weight;
     padding-bottom: $base-whitespace / 2;
     padding-left: $base-whitespace;
     padding-right: $base-whitespace * 2;

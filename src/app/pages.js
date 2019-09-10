@@ -60,7 +60,6 @@ export const isOldCmsPage = page =>
   page === PAGES.STATISTICS ||
   page === PAGES.LOGIN ||
   page === PAGES.MOVED ||
-  page === PAGES.NOT_FOUND ||
   page === PAGES.MANAGEMENT
 
 export const isEditorialDetailPage = page =>

@@ -18,6 +18,7 @@ exports[`Catalog should render without failing 1`] = `
           Object {
             "payload": Object {
               "id": 1,
+              "title": "1",
             },
             "type": "atlasRouter/DATASET_DETAIL",
           }

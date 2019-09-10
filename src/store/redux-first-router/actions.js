@@ -68,10 +68,11 @@ export const toDataSearchQuery = (
   },
 })
 
-export const toMap = (preserve = false) => ({
+export const toMap = (preserve = false, forceSaga = true) => ({
   type: routing.data.type,
   meta: {
     preserve,
+    forceSaga,
     additionalParams: {
       [PARAMETERS.VIEW]: VIEW_MODE.MAP,
     },
@@ -162,7 +163,16 @@ export const toDataSearchCategory = (searchQuery, category) => ({
     },
   },
 })
-export const toDatasets = () => ({ type: routing.datasets.type })
+
+export const toDatasets = (additionalParams = null, preserve = false, forceSaga = true) => ({
+  type: routing.datasets.type,
+  meta: {
+    preserve,
+    additionalParams,
+    forceSaga,
+  },
+})
+
 export const toDatasetSearch = (additionalParams = null, skipSaga = false, forceSaga = false) => ({
   type: routing.datasetSearch.type,
   meta: {

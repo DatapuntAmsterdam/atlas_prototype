@@ -17,6 +17,14 @@ describe('The date formatter service', () => {
     })
   })
 
+  it('only returns the requested fields', () => {
+    const date = { toLocaleDateString: jest.fn() }
+    formatDate(date, false, false)
+    expect(date.toLocaleDateString).toHaveBeenCalledWith('nl-NL', {
+      year: 'numeric',
+    })
+  })
+
   it('returns aan emty string wehn the date is not valid', () => {
     expect(dateToString('invalid date')).toEqual('')
     expect(dateToString()).toEqual('')

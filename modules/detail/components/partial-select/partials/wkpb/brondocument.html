@@ -7,8 +7,8 @@
         <dt>Bevoegd orgaan</dt>
         <dd>{{ object.bevoegd_orgaan }}</dd>
 
-        <dt ng-if-start="user.scopes.includes('WKPB/RBDU')">Documentnaam</dt>
-        <dd ng-if-end><a target="_blank" rel="noopener" ng-href="{{object.url}}" ng-if="object.url" class="o-btn o-btn--link">{{ object._display }}</a></dd>
+        <dt ng-if-start="user.scopes.includes('WKPB/RBDU')">Documentnaam</dt><dd ng-if-end>
+        <dp-wkpb-download-link ng-if="object.extern_url" label="object._display" url="object.extern_url"></dp-wkpb-download-link></dd>
         <dt>Persoonsgegevens afschermen</dt>
         <dd>{{ object.persoonsgegevens_afschermen | yesNo }}</dd>
     </dl>

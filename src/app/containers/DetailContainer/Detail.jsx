@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import angular from 'angular'
 import { AngularWrapper } from 'react-angular'
 import ShareBar from '../../components/ShareBar/ShareBar'
 import '../../angularModules'
@@ -22,6 +23,7 @@ const Detail = ({
       moduleName="dpDetailWrapper"
       component="dpDetail"
       dependencies={['atlas']}
+      angularInstance={angular}
       bindings={{
         isLoading,
         user,

@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import removeMd from 'remove-markdown'
-import Link from 'redux-first-router-link'
+import RouterLink from 'redux-first-router-link'
 import {
   aggregateFilter,
   kebapCaseFilter,
@@ -11,6 +11,7 @@ import {
   ucFirst,
 } from '../../Filters/Filters'
 import { routing } from '../../../routes'
+import useSlug from '../../../utils/useSlug'
 
 const arrayToObject = (array, keyField) =>
   array.reduce(
@@ -44,7 +45,8 @@ const Catalog = ({ content, catalogFilters }) => {
     const id = item['dct:identifier']
     const linkTo = {
       type: routing.datasetDetail.type,
-      payload: { id },
+      // Ideally we need to retrieve the slug from the API, but we convert this in the frontend for now
+      payload: { id, title: useSlug(item['dct:title'] || id) },
     }
 
     return {
@@ -62,7 +64,7 @@ const Catalog = ({ content, catalogFilters }) => {
       {items.map(row => (
         <div key={row.id} className="c-data-selection-catalog__list">
           <div className="c-data-selection-catalog__item qa-catalog-fetch-detail u-no-presentation">
-            <Link className="qa-dp-link" to={row.linkTo} tabIndex="-1">
+            <RouterLink className="qa-dp-link" to={row.linkTo} tabIndex="-1">
               <div className="c-data-selection-catalog__header">
                 <h2>{row.header}</h2>
                 <div>{modificationDateFilter(row.modified)}</div>
@@ -99,7 +101,7 @@ const Catalog = ({ content, catalogFilters }) => {
               <div className="c-data-selection-catalog__description">
                 {truncateHtmlAsTextFilter(row.description)}
               </div>
-            </Link>
+            </RouterLink>
           </div>
         </div>
       ))}

@@ -3,7 +3,7 @@ $icon-dimension: 24px;
 .c-panel {
   position: relative;
   margin: $base-whitespace * 1.5 0 $base-whitespace / 2 0;
-  padding: $base-whitespace * .6 $base-whitespace;
+  padding: $base-whitespace * 0.6 $base-whitespace;
   padding-left: $base-whitespace;
   background-color: $secondary-gray10;
 
@@ -26,28 +26,27 @@ $icon-dimension: 24px;
   }
 
   &--offsets-below-page-title {
-    margin-top: -(2 * $base-whitespace);
     margin-bottom: 3 * $base-whitespace;
   }
 
   &--warning {
-    padding: $base-whitespace * .6 $base-whitespace * .8;
+    padding: $base-whitespace * 0.6 $base-whitespace * 0.8;
     background-color: $darkish-blue;
     color: $primary-light;
   }
 
   &--danger {
-    padding: $base-whitespace * .6 $base-whitespace * .8;
+    padding: $base-whitespace * 0.6 $base-whitespace * 0.8;
     background-color: $primary-contrast;
     color: $primary-light;
   }
 
   &--small {
     margin: 0;
-    padding-top: $base-whitespace * .3;
-    padding-bottom: $base-whitespace * .4;
+    padding-top: $base-whitespace * 0.3;
+    padding-bottom: $base-whitespace * 0.4;
     padding-left: $base-whitespace;
-    line-height: $button-size - ($base-whitespace * .3) - ($base-whitespace * .4);
+    line-height: $button-size - ($base-whitespace * 0.3) - ($base-whitespace * 0.4);
   }
 
   &--tiny {
@@ -59,9 +58,9 @@ $icon-dimension: 24px;
   }
 
   &--can-close {
-    padding-top: $base-whitespace * .6;
+    padding-top: $base-whitespace * 0.6;
     padding-right: $button-size;
-    padding-bottom: $base-whitespace * .6;
+    padding-bottom: $base-whitespace * 0.6;
   }
 
   &__list {
@@ -86,20 +85,20 @@ $icon-dimension: 24px;
         height: 10px;
         border-radius: 50%;
         background-color: $red;
-        content: "";
+        content: '';
       }
     }
   }
 
   a {
-    font-weight: $normal-weight;
+    font-weight: $bold-weight;
     text-decoration: underline;
   }
 
   &--attention,
   &--info {
     .o-btn--close {
-      @include icon-sprite("icon-clear", $primary-dark, $primary-dark, $icon-dimension);
+      @include icon-sprite('icon-clear', $primary-dark, $primary-dark, $icon-dimension);
 
       &:hover,
       &:focus {

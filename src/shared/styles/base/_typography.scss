@@ -6,8 +6,7 @@ select,
 button {
   @include font-size($s-font);
   color: $primary-dark;
-  font-family: $base-font-family;
-  font-weight: normal;
+  font-weight: $normal-weight;
 }
 
 h1 {

@@ -1,17 +1,20 @@
 const path = require('path')
+const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const root = path.resolve(__dirname)
 const src = path.resolve(root, 'src')
 const legacy = path.resolve(root, 'modules')
 const dist = path.resolve(root, 'dist')
 
-function commonConfig() {
+function commonConfig(env) {
+  const buildId = env && env.buildId ? env.buildId : env.nodeEnv
+  const isDev = env.nodeEnv === 'development'
+
   return {
     context: root,
     entry: {
@@ -37,6 +40,7 @@ function commonConfig() {
           test: /\.jsx?$/,
           include: [src, legacy],
           use: 'babel-loader',
+          exclude: /\.stories\.jsx$/,
         },
         {
           test: /\.scss$/,
@@ -75,30 +79,34 @@ function commonConfig() {
           use: [
             {
               loader: '@svgr/webpack',
-              options: {
-                svgo: {
-                  plugins: [
-                    { removeViewBox: false },
-                    { removeDimensions: true },
-                    { removeDoctype: true },
-                    { removeComments: true },
-                    { removeMetadata: true },
-                    { removeEditorsNSData: true },
-                    { cleanupIDs: true },
-                    { removeRasterImages: true },
-                    { removeUselessDefs: true },
-                    { removeUnknownsAndDefaults: true },
-                    { removeUselessStrokeAndFill: true },
-                    { removeHiddenElems: true },
-                    { removeEmptyText: true },
-                    { removeEmptyAttrs: true },
-                    { removeEmptyContainers: true },
-                    { removeUnusedNS: true },
-                    { removeDesc: true },
-                    { prefixIds: true },
-                  ],
-                },
-              },
+              ...(!isDev // speeds up the build time by ~0.4s
+                ? {
+                    options: {
+                      svgo: {
+                        plugins: [
+                          { removeViewBox: false },
+                          { removeDimensions: true },
+                          { removeDoctype: true },
+                          { removeComments: true },
+                          { removeMetadata: true },
+                          { removeEditorsNSData: true },
+                          { cleanupIDs: true },
+                          { removeRasterImages: true },
+                          { removeUselessDefs: true },
+                          { removeUnknownsAndDefaults: true },
+                          { removeUselessStrokeAndFill: true },
+                          { removeHiddenElems: true },
+                          { removeEmptyText: true },
+                          { removeEmptyAttrs: true },
+                          { removeEmptyContainers: true },
+                          { removeUnusedNS: true },
+                          { removeDesc: true },
+                          { prefixIds: true },
+                        ],
+                      },
+                    },
+                  }
+                : {}),
             },
             'url-loader',
           ],
@@ -153,13 +161,6 @@ function commonConfig() {
           filename: path.join(__dirname, 'src/shared/styles/config/mixins/_sprites.scss'),
         },
       }),
-      new OptimizeCssAssetsPlugin({
-        cssProcessor: require('cssnano'),
-        cssProcessorPluginOptions: {
-          preset: ['default', { svgo: { exclude: true } }],
-        },
-        canPrint: true,
-      }),
       new CopyWebpackPlugin([
         { from: './public/', to: './assets/' },
         { from: './public/static/', to: './' },
@@ -176,23 +177,34 @@ function commonConfig() {
           from: '**/*',
           to: 'assets',
         },
+        {
+          from: './node_modules/@datapunt/asc-assets/lib/assets/Fonts',
+          to: 'Fonts',
+        },
+        {
+          from: './node_modules/@datapunt/asc-assets/lib/assets/scripts',
+          to: './',
+        },
       ]),
       new HtmlWebpackPlugin({
         inject: false,
         template: './index.ejs',
         minify: {
-          collapseWhitespace: true,
+          collapseWhitespace: !isDev,
         },
+        sortChunks: 'none',
         lang: 'nl',
         title: 'Dataportaal',
         favicon: './favicon.png',
-        links: [
-          {
-            href: '/3680cf49-2b05-4b8a-af28-fa9e27d2bed0.css',
-            rel: 'stylesheet',
-          },
-        ],
-        scripts: ['/mtiFontTrackingCode.js'],
+        scripts: ['/mtiFontTrackingCode.min.js'],
+      }),
+      new webpack.DefinePlugin({
+        VERSION: JSON.stringify(require('./package.json').version),
+        __BUILD_ID__: JSON.stringify(buildId),
+        'process.env': {
+          NODE_ENV: JSON.stringify(env.nodeEnv),
+          GIT_COMMIT: JSON.stringify(process.env.GIT_COMMIT),
+        },
       }),
     ],
   }

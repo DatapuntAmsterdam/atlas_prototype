@@ -18,7 +18,7 @@ import { boundsToString, getBounds, isBoundsAPoint, isValidBounds } from './serv
 import LoadingIndicator from '../loading-indicator/LoadingIndicator'
 import { DEFAULT_LAT, DEFAULT_LNG } from '../../ducks/map/constants'
 import RdGeoJson from './custom/geo-json/RdGeoJson'
-import mapLayerTypes from '../../services/map-layers/map-layer-types.config'
+import { mapLayerTypes } from '../../services/map-layers/map-layers.config'
 
 const isIE = false || !!window.document.documentMode
 if (isIE) {

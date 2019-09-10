@@ -1,5 +1,5 @@
-@import "../../../shared/components/toggle/toggle";
-@import "../../../shared/styles/utilities/screen-reader";
+@import '../../../shared/components/toggle/toggle';
+@import '../../../shared/styles/utilities/screen-reader';
 
 $icon-height: 24px;
 
@@ -51,7 +51,7 @@ $icon-height: 24px;
   &__category-text {
     color: $primary-dark;
     font-size: $s-font-size;
-    font-weight: 900;
+    font-weight: $bold-weight;
     margin: 0;
   }
 
@@ -59,7 +59,7 @@ $icon-height: 24px;
     border: 1px solid transparent;
     display: flex;
     font-size: $s-font-size;
-    font-weight: 400;
+    font-weight: $normal-weight;
     text-align: left;
     text-indent: 0;
 
@@ -81,7 +81,7 @@ $icon-height: 24px;
       cursor: pointer;
       display: flex;
       font-size: $s-font-size;
-      font-weight: 400;
+      font-weight: $normal-weight;
       justify-content: space-between;
       outline: none;
       overflow: hidden;
@@ -97,11 +97,11 @@ $icon-height: 24px;
         }
 
         .map-layers__toggle--add {
-          @include icon-sprite("icon-plus", $primary-dark, $primary-dark, $icon-height);
+          @include icon-sprite('icon-plus', $primary-dark, $primary-dark, $icon-height);
         }
 
         .map-layers__toggle--remove {
-          @include icon-sprite("icon-cross", $primary-dark, $primary-dark, $icon-height);
+          @include icon-sprite('icon-cross', $primary-dark, $primary-dark, $icon-height);
         }
       }
 
@@ -129,11 +129,11 @@ $icon-height: 24px;
     }
 
     &--add {
-      @include icon-sprite("icon-plus", $secondary-gray60, $primary-dark, $icon-height);
+      @include icon-sprite('icon-plus', $secondary-gray60, $primary-dark, $icon-height);
     }
 
     &--remove {
-      @include icon-sprite("icon-cross", $secondary-gray60, $primary-dark, $icon-height);
+      @include icon-sprite('icon-cross', $secondary-gray60, $primary-dark, $icon-height);
     }
 
     .map-layers__title--active &--add,

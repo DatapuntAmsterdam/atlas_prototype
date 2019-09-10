@@ -7,7 +7,7 @@ import {
 } from '../../ducks/detail/actions'
 import { closeMapPanel, mapLoadingAction } from '../../ducks/map/actions'
 import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { VIEW_MODE, setViewMode } from '../../../shared/ducks/ui/ui'
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors'
 import {
   clearMapDetail,
@@ -95,6 +95,36 @@ describe('fetchMapDetail', () => {
       .put(fetchMapDetailSuccess(action.endpoint, mapDetailMock))
       .next()
       .put(showDetail({ display: 'display', geometry: {} }))
+      .next()
+      .put(mapLoadingAction(false))
+      .next()
+      .next(action.endpoint)
+      .put(fetchDetailSuccess(action.endpoint))
+      .next()
+      .isDone()
+  })
+
+  it('should set the viewmode to full when no geometry is available and user is not authorized', () => {
+    const mapDetailMock = {
+      _display: 'display',
+      geometrie: null,
+      isAuthorized: true,
+    }
+    testSaga(fetchMapDetail)
+      .next()
+      .put(fetchDetailRequest())
+      .next()
+      .next() // waitForAuthentication
+      .next() // select
+      .next(action.endpoint) // select
+      .put(clearMapDetail())
+      .next()
+      .next(mapDetailMock) // fetchDetail
+      .put(fetchMapDetailSuccess(action.endpoint, mapDetailMock))
+      .next()
+      .put(showDetail({ display: 'display', geometry: null }))
+      .next()
+      .put(setViewMode(VIEW_MODE.FULL)) // set the viewmode to full
       .next()
       .put(mapLoadingAction(false))
       .next()

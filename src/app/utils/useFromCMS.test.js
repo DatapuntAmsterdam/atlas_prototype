@@ -1,6 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
 import useFromCMS from './useFromCMS'
-import cmsConfig from '../../shared/services/cms/cms-config'
 import { getByUrl } from '../../shared/services/api/api'
 import cmsNormalizer from '../../shared/services/cms/cms-normalizer'
 
@@ -12,12 +11,18 @@ describe('useFromCMS', () => {
   const id = 3
 
   const { replace } = window.location
+  const mockData = {
+    drupal_internal__nid: 100,
+  }
 
   beforeEach(() => {
     Object.defineProperty(window.location, 'replace', {
       configurable: true,
     })
     window.location.replace = jest.fn()
+
+    getByUrl.mockReturnValueOnce(Promise.resolve(mockData))
+    cmsNormalizer.mockReturnValueOnce(Promise.resolve({ data: [mockData] }))
   })
 
   afterEach(() => {
@@ -26,38 +31,73 @@ describe('useFromCMS', () => {
     window.location.replace = replace
   })
 
+  const mockCMSconfig = {
+    TEST: {
+      endpoint: () => `https://test.url/api`,
+      fields: ['field_slug'],
+    },
+  }
+
   it('should have correct initial values', async () => {
-    const { result } = renderHook(() => useFromCMS(id, cmsConfig.publication))
+    const { result } = renderHook(() => useFromCMS(mockCMSconfig.TEST, id))
+
     expect(result.current.loading).toBe(true)
     expect(result.current.results).toBeNull()
   })
 
   it('should return results when fetchData is called', async () => {
-    const mockData = {
-      drupal_internal__nid: 100,
-    }
-    getByUrl.mockReturnValueOnce(Promise.resolve(mockData))
-    cmsNormalizer.mockReturnValueOnce(Promise.resolve(mockData))
+    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(mockCMSconfig.TEST))
 
-    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(id, cmsConfig.publication))
     expect(result.current.loading).toBe(true)
     expect(result.current.results).toBeNull()
+
+    // call the fetchData function
+    result.current.fetchData()
+    expect(getByUrl).toHaveBeenCalledWith('https://test.url/api')
+
+    // wait until it resolves
     await waitForNextUpdate()
 
     expect(result.current.loading).toBe(false)
+    expect(result.current.results).toEqual({ data: [mockData] })
+  })
+
+  it('should return results when fetchData is called with an id', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(mockCMSconfig.TEST, id))
+
+    // call the fetchData function
+    result.current.fetchData()
+
+    // wait until it resolves
+    await waitForNextUpdate()
+
+    expect(result.current.results).toEqual(mockData)
+  })
+
+  it('should return results when fetchData is called with an endpoint', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(mockCMSconfig.TEST, id))
+
+    // call the fetchData function
+    result.current.fetchData('endpoint')
+
+    // wait until it resolves
+    await waitForNextUpdate()
+
     expect(result.current.results).toEqual(mockData)
   })
 
   it('should redirect to no found page when the data is not available', async () => {
-    const mockData = {
-      drupal_internal__nid: 100,
-    }
+    getByUrl.mockReset()
     getByUrl.mockReturnValueOnce(Promise.reject(mockData))
-    cmsNormalizer.mockReturnValueOnce(Promise.resolve(mockData))
 
-    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(id, cmsConfig.publication))
+    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(mockCMSconfig.TEST, id))
     expect(result.current.loading).toBe(true)
     expect(result.current.results).toBeNull()
+
+    // call the fetchData function
+    result.current.fetchData()
+    expect(getByUrl).toHaveBeenCalledWith('https://test.url/api')
+
     await waitForNextUpdate()
 
     expect(result.current.loading).toBe(false)

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 import React from 'react'
-import Link from 'redux-first-router-link'
+import RouterLink from 'redux-first-router-link'
 import getContents from '../../../shared/services/google-sheet/google-sheet'
 import { routing } from '../../routes'
 import formatDate from '../../../shared/services/date-formatter/date-formatter'
@@ -49,14 +49,14 @@ const CMSWidget = ({ type, limit }) => {
                         }}
                       />
                     ) : (
-                      <Link className="c-link" to={{ type: routing.nieuws.type }}>
+                      <RouterLink className="c-link" to={{ type: routing.nieuws.type }}>
                         <div
                           className="s-cms-widget-content s-cms-widget-content--inline"
                           dangerouslySetInnerHTML={{
                             __html: entry.verkorteTitel.html,
                           }}
                         />
-                      </Link>
+                      </RouterLink>
                     )}
                   </h2>
 
@@ -77,9 +77,9 @@ const CMSWidget = ({ type, limit }) => {
             <div className="u-clearfix" />
           </div>
           <div className="u-padding__left--3 c-homepage__news-show-more">
-            <Link to={{ type: routing.nieuws.type }} className="o-btn o-btn--link">
+            <RouterLink to={{ type: routing.nieuws.type }} className="o-btn o-btn--link">
               Nieuwsoverzicht
-            </Link>
+            </RouterLink>
           </div>
         </>
       ) : (

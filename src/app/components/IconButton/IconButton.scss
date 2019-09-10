@@ -1,4 +1,4 @@
-@import "../../../shared/styles/config";
+@import '../../../shared/styles/config';
 
 $icon-height: 24px;
 
@@ -12,7 +12,6 @@ $icon-height: 24px;
   position: absolute;
   right: $container-whitespace;
   top: $container-whitespace;
-  z-index: 150;
 
   &__left {
     left: $container-whitespace;
@@ -34,15 +33,14 @@ $icon-height: 24px;
   width: $icon-height;
 
   &--maximize {
-    @include icon-sprite("icon-maximize", $secondary-gray60, $primary-dark, $icon-height);
-
+    @include icon-sprite('icon-maximize', $secondary-gray60, $primary-dark, $icon-height);
   }
 
   &--minimize {
-    @include icon-sprite("icon-minimize", $secondary-gray60, $primary-dark, $icon-height);
+    @include icon-sprite('icon-minimize', $secondary-gray60, $primary-dark, $icon-height);
   }
 
   &--cross {
-    @include icon-sprite("icon-cross", $secondary-gray60, $primary-dark, 30px);
+    @include icon-sprite('icon-cross', $secondary-gray60, $primary-dark, 30px);
   }
 }

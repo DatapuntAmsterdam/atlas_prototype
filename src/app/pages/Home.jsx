@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'redux-first-router-link'
+import RouterLink from 'redux-first-router-link'
 import { routing } from '../routes'
 import Footer from '../components/Footer/Footer'
 import PreviewVideo from '../components/PreviewVideo/PreviewVideo'
@@ -143,12 +143,12 @@ const ABOUT_LINKS = {
                       <h2 className="c-homepage__news-instructions-title">Instructies</h2>
                       {Object.keys(INSTRUCTION_LINKS).map(key => (
                         <div key={key} className="c-user-content-widget__entry">
-                          <Link
+                          <RouterLink
                             to={{ type: INSTRUCTION_LINKS[key].route }}
                             className="o-btn o-btn--link qa-btn--link"
                           >
                             {INSTRUCTION_LINKS[key].title}
-                          </Link>
+                          </RouterLink>
                         </div>
                       ))}
                     </div>
@@ -210,7 +210,10 @@ const ABOUT_LINKS = {
                       <div className="c-user-content-widget__beleid-zie-ook">Over</div>
                       {Object.keys(ABOUT_LINKS).map(key => (
                         <div key={key} className="c-user-content-widget__entry">
-                          <Link to={{ type: ABOUT_LINKS[key].route }} className="o-btn o-btn--link">
+                          <RouterLink
+                            to={{ type: ABOUT_LINKS[key].route }}
+                            className="o-btn o-btn--link"
+                          >
                             <div
                               className={`c-user-content-widget__short
                                   s-cms-widget-content
@@ -218,7 +221,7 @@ const ABOUT_LINKS = {
                             >
                               <p>{ABOUT_LINKS[key].title}</p>
                             </div>
-                          </Link>
+                          </RouterLink>
                         </div>
                       ))}
                     </div>

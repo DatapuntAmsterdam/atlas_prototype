@@ -1,6 +1,10 @@
-import * as address from '../../../shared/services/adressen/adressen-nummeraanduiding'
-import * as monument from '../../../shared/services/monument/monument'
-import * as vestiging from '../../../shared/services/vestiging/vestiging'
+import {
+  fetchByPandId as fetchAddressByPandId,
+  fetchHoofdadresByLigplaatsId,
+  fetchHoofdadresByStandplaatsId,
+} from '../adressen-nummeraanduiding/adressen-nummeraanduiding'
+import { fetchByPandId as fetchMonumentByPandId } from '../monument/monument'
+import { fetchByPandId as fetchVestigingByPandId, fetchByAddressId } from '../vestiging/vestiging'
 
 import SHARED_CONFIG from '../../../shared/services/shared-config/shared-config'
 
@@ -34,34 +38,30 @@ const relatedResourcesByType = {
   'bag/ligplaats': [
     {
       fetch: ligplaatsId =>
-        address
-          .fetchHoofdadresByLigplaatsId(ligplaatsId)
-          .then(result => vestiging.fetchByAddressId(result.id)),
+        fetchHoofdadresByLigplaatsId(ligplaatsId).then(result => fetchByAddressId(result.id)),
       type: 'vestiging',
       authScope: 'HR/R',
     },
   ],
   'bag/pand': [
     {
-      fetch: address.fetchByPandId,
+      fetch: fetchAddressByPandId,
       type: 'pand/address',
     },
     {
-      fetch: vestiging.fetchByPandId,
+      fetch: fetchVestigingByPandId,
       type: 'vestiging',
       authScope: 'HR/R',
     },
     {
-      fetch: monument.fetchByPandId,
+      fetch: fetchMonumentByPandId,
       type: 'pand/monument',
     },
   ],
   'bag/standplaats': [
     {
       fetch: standplaatsId =>
-        address
-          .fetchHoofdadresByStandplaatsId(standplaatsId)
-          .then(result => vestiging.fetchByAddressId(result.id)),
+        fetchHoofdadresByStandplaatsId(standplaatsId).then(result => fetchByAddressId(result.id)),
       type: 'vestiging',
       authScope: 'HR/R',
     },

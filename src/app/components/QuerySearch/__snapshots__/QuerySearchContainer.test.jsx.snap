@@ -2,10 +2,20 @@
 
 exports[`QuerySearchContainer should render 1`] = `
 <QuerySearch
-  currentPage="NOT_FOUND"
+  currentPage=""
   filters={Object {}}
   isLoading={false}
   numberOfResults={1}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
   toSearchPage={[Function]}
   user={
     Object {

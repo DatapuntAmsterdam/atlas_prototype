@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import Link from 'redux-first-router-link'
+import RouterLink from 'redux-first-router-link'
 import {
   preserveQuery,
   toDatasets,
@@ -81,7 +81,7 @@ const HomepageDatasetsThemesBlock = () => {
                   <ul>
                     {column.themes.map(theme => (
                       <li key={theme.slug}>
-                        <Link
+                        <RouterLink
                           data-test="themes-block-link"
                           to={preserveQuery(toDatasetsWithFilter(), {
                             [PARAMETERS.FILTERS]: { groups: theme.slug },
@@ -89,7 +89,7 @@ const HomepageDatasetsThemesBlock = () => {
                           className={`qa-theme-link c-catalogus-themes__link c-catalogus-themes__icon c-catalogus-themes__icon--${theme.icon}`}
                         >
                           <div className="c-catalogus-themes__link__text">{theme.name}</div>
-                        </Link>
+                        </RouterLink>
                       </li>
                     ))}
                   </ul>

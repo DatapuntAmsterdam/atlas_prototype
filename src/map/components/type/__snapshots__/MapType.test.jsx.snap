@@ -58,8 +58,13 @@ exports[`MapType rendering should render select buttons with aerial value 1`] = 
     options={
       Array [
         Object {
-          "label": "Luchtfoto 2018",
+          "label": "Luchtfoto 2019",
           "selected": true,
+          "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2019_RD/{z}/{x}/{y}.jpeg",
+          "value": "lf2019",
+        },
+        Object {
+          "label": "Luchtfoto 2018",
           "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2018_RD/{z}/{x}/{y}.jpeg",
           "value": "lf2018",
         },
@@ -148,8 +153,13 @@ exports[`MapType rendering should render select buttons with topography value 1`
     options={
       Array [
         Object {
-          "label": "Luchtfoto 2018",
+          "label": "Luchtfoto 2019",
           "selected": true,
+          "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2019_RD/{z}/{x}/{y}.jpeg",
+          "value": "lf2019",
+        },
+        Object {
+          "label": "Luchtfoto 2018",
           "urlTemplate": "https://{s}.data.amsterdam.nl/lufo2018_RD/{z}/{x}/{y}.jpeg",
           "value": "lf2018",
         },

@@ -1,8 +1,5 @@
 import React from 'react'
-import { ReactComponent as FacebookPadded } from '@datapunt/asc-assets/lib/Icons/FacebookPadded.svg'
-import { ReactComponent as Twitter } from '@datapunt/asc-assets/lib/Icons/Twitter.svg'
-import { ReactComponent as Linkedin } from '@datapunt/asc-assets/lib/Icons/Linkedin.svg'
-import { ReactComponent as Email } from '@datapunt/asc-assets/lib/Icons/Email.svg'
+import { FacebookPadded, Twitter, Linkedin, Email } from '@datapunt/asc-assets'
 import { ContextMenuItem, Icon } from '@datapunt/asc-ui'
 import getShareUrl from '../../../shared/services/share-url/share-url'
 

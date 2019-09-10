@@ -1,6 +1,7 @@
 import React from 'react'
 import { AngularWrapper } from 'react-angular'
 import classNames from 'classnames'
+import angular from 'angular'
 import PropTypes from 'prop-types'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import DatasetActiveFilters from '../../containers/DatasetActiveFiltersContainer'
@@ -48,6 +49,7 @@ const Dataset = ({
                 moduleName="dpDataSelectionAvailableFiltersWrapper"
                 component="dpDataSelectionAvailableFilters"
                 dependencies={['atlas']}
+                angularInstance={angular}
                 bindings={{
                   availableFilters,
                   activeFilters,
@@ -68,6 +70,7 @@ const Dataset = ({
               moduleName="dpDataSelectionPaginationWrapper"
               component="dpDataSelectionPagination"
               dependencies={['atlas']}
+              angularInstance={angular}
               bindings={{
                 currentPage,
                 numberOfPages,

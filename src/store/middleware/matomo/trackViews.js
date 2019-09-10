@@ -64,8 +64,11 @@ views = {
   },
 }
 
-// Prevent tracking of the next routes.
+// Prevent tracking of the next routes as they're using the useMatomo hook to track their visits
 delete views[routing.datasetDetail.type]
+delete views[routing.articleDetail.type]
+delete views[routing.publicationDetail.type]
+delete views[routing.specialDetail.type]
 
 const trackViews = views
 

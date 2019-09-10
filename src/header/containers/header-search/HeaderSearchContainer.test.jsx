@@ -103,7 +103,9 @@ describe('HeaderSearchContainer', () => {
   it('does nothing on initial load', () => {
     const store = configureMockStore()({ ...initialState })
     jest.spyOn(store, 'dispatch')
-    shallow(<HeaderSearchContainer />, { context: { store } }).dive()
+    shallow(<HeaderSearchContainer store={store} />)
+      .dive()
+      .dive()
 
     expect(getSuggestionsAction).not.toHaveBeenCalled()
     expect(clearMapDetail).not.toHaveBeenCalled()
@@ -122,9 +124,9 @@ describe('HeaderSearchContainer', () => {
       }
 
       jest.spyOn(store, 'dispatch')
-      const headerSearch = shallow(<HeaderSearchContainer />, {
-        context: { store },
-      }).dive()
+      const headerSearch = shallow(<HeaderSearchContainer store={store} />)
+        .dive()
+        .dive()
 
       headerSearch.instance().onSuggestionSelection(suggestionMock, shouldOpenInNewWindow)
 
@@ -151,9 +153,9 @@ describe('HeaderSearchContainer', () => {
       }
 
       jest.spyOn(store, 'dispatch')
-      const headerSearch = shallow(<HeaderSearchContainer />, {
-        context: { store },
-      }).dive()
+      const headerSearch = shallow(<HeaderSearchContainer store={store} />)
+        .dive()
+        .dive()
 
       headerSearch.instance().onSuggestionSelection(selectedSuggestion, shouldOpenInNewWindow)
 
@@ -175,9 +177,9 @@ describe('HeaderSearchContainer', () => {
 
       jest.spyOn(store, 'dispatch')
 
-      const headerSearch = shallow(<HeaderSearchContainer />, {
-        context: { store },
-      }).dive()
+      const headerSearch = shallow(<HeaderSearchContainer store={store} />)
+        .dive()
+        .dive()
 
       headerSearch.instance().onSuggestionSelection(selectedSuggestion, shouldOpenInNewWindow)
 
@@ -211,9 +213,9 @@ describe('HeaderSearchContainer', () => {
         },
       })
 
-      const headerSearch = shallow(<HeaderSearchContainer />, {
-        context: { store },
-      }).dive()
+      const headerSearch = shallow(<HeaderSearchContainer store={store} />)
+        .dive()
+        .dive()
 
       jest.spyOn(store, 'dispatch')
       headerSearch.instance().onFormSubmit()
@@ -236,9 +238,9 @@ describe('HeaderSearchContainer', () => {
       })
       jest.spyOn(store, 'dispatch')
 
-      const headerSearch = shallow(<HeaderSearchContainer />, {
-        context: { store },
-      }).dive()
+      const headerSearch = shallow(<HeaderSearchContainer store={store} />)
+        .dive()
+        .dive()
 
       headerSearch.instance().onFormSubmit()
 
@@ -271,9 +273,9 @@ describe('HeaderSearchContainer', () => {
       })
       jest.spyOn(store, 'dispatch')
 
-      const headerSearch = shallow(<HeaderSearchContainer />, {
-        context: { store },
-      }).dive()
+      const headerSearch = shallow(<HeaderSearchContainer store={store} />)
+        .dive()
+        .dive()
 
       headerSearch.instance().onFormSubmit()
       expect(store.dispatch).toHaveBeenCalledWith(
@@ -297,7 +299,9 @@ describe('HeaderSearchContainer', () => {
         },
       })
 
-      shallow(<HeaderSearchContainer />, { context: { store } }).dive()
+      shallow(<HeaderSearchContainer store={store} />)
+        .dive()
+        .dive()
 
       expect(getSuggestionsAction).toHaveBeenCalled()
     })
@@ -307,7 +311,9 @@ describe('HeaderSearchContainer', () => {
         ...initialState,
       })
 
-      shallow(<HeaderSearchContainer />, { context: { store } }).dive()
+      shallow(<HeaderSearchContainer store={store} />)
+        .dive()
+        .dive()
 
       expect(getSuggestionsAction).not.toHaveBeenCalled()
     })
@@ -321,9 +327,7 @@ describe('HeaderSearchContainer', () => {
         ...initialState,
       })
 
-      const wrapper = shallow(<HeaderSearchContainer />, {
-        context: { store },
-      }).dive()
+      const wrapper = shallow(<HeaderSearchContainer store={store} />).dive()
       wrapper.setProps({
         prefillQuery: '123',
         isMapActive: true,
@@ -339,9 +343,7 @@ describe('HeaderSearchContainer', () => {
         ...initialState,
       })
 
-      const wrapper = shallow(<HeaderSearchContainer />, {
-        context: { store },
-      }).dive()
+      const wrapper = shallow(<HeaderSearchContainer store={store} />).dive()
       wrapper.setProps({
         prefillQuery: '',
         pageName: '',

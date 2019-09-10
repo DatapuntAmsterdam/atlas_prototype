@@ -1,7 +1,11 @@
-@import "../../../shared/styles/config";
+@import '../../../shared/styles/config';
 
 .iframe-container {
   position: relative;
   text-align: center;
   width: 100%;
+
+  & iframe {
+    min-height: 80vh;
+  }
 }

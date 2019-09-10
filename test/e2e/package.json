@@ -6,8 +6,7 @@
     "url": "git+https://github.com/Amsterdam/atlas.git"
   },
   "engines": {
-    "npm": ">=3",
-    "node": ">=5"
+    "node": ">=8"
   },
   "author": "Datapunt Amsterdam",
   "license": "MPL-2.0",
@@ -20,6 +19,6 @@
     "cross-env": "^5.2.0"
   },
   "devDependencies": {
-    "cypress": "^3.4.0"
+    "cypress": "^3.4.1"
   }
 }

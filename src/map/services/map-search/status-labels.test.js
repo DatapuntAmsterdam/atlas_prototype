@@ -28,10 +28,10 @@ describe('getStatusLabelAddress', () => {
       hoofdadres: true,
       vbo_status: {
         code: '18',
-        omschrijving: 'Verblijfsobject in gebruik',
+        omschrijving: 'a random, not normal status',
       },
     }
-    expect(getStatusLabelAddress(result)).toEqual('Verblijfsobject in gebruik')
+    expect(getStatusLabelAddress(result)).toEqual('a random, not normal status')
   })
 
   it('should return Nevenadres when is not hoofdadres ', () => {
@@ -39,9 +39,9 @@ describe('getStatusLabelAddress', () => {
       hoofdadres: false,
       vbo_status: {
         code: '18',
-        omschrijving: 'Verblijfsobject in gebruik',
+        omschrijving: 'a random, not normal status',
       },
     }
-    expect(getStatusLabelAddress(result)).toEqual('Verblijfsobject in gebruik Nevenadres')
+    expect(getStatusLabelAddress(result)).toEqual('a random, not normal status Nevenadres')
   })
 })

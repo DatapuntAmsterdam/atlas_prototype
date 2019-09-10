@@ -9,9 +9,7 @@ jest.mock('../../../shared/services/embed-url/embed-url')
 
 describe('MapEmbedButton', () => {
   it('should render the component', () => {
-    const wrapper = shallow(<MapEmbedButton />, {
-      context: { store: configureMockStore()({}) },
-    }).dive()
+    const wrapper = shallow(<MapEmbedButton store={configureMockStore()({})} />).dive()
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -19,9 +17,7 @@ describe('MapEmbedButton', () => {
     const mockEvent = {
       preventDefault: jest.fn(),
     }
-    const wrapper = shallow(<MapEmbedButton />, {
-      context: { store: configureMockStore()({}) },
-    }).dive()
+    const wrapper = shallow(<MapEmbedButton store={configureMockStore()({})} />).dive()
     wrapper.find('button').simulate('click', mockEvent)
     expect(setTimeout).toHaveBeenCalledTimes(1)
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 300)

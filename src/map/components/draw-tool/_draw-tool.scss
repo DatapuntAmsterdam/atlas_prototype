@@ -1,4 +1,4 @@
-@import "./../../../shared/styles/config";
+@import './../../../shared/styles/config';
 
 .draw-tool {
   display: flex;
@@ -37,10 +37,8 @@
   }
 }
 
-
 // this css selectors are longer because they mainly use the leaflet selectors
 // therefore the nesting-depth is disabled and no-duplicate-properties is disabled for ie compatibility
-
 
 .leaflet-dragging {
   // dragging the map
@@ -52,10 +50,9 @@
 .leaflet-marker-icon {
   // edit anchor
   &.leaflet-editing-icon {
-
     // sass-lint:disable no-duplicate-properties
     cursor: grab;
-    cursor: url("assets/images/cursors/grab.cur"), url("/assets/images/cursors/grab.cur"), pointer; // no grab icon for ie
+    cursor: url('assets/images/cursors/grab.cur'), url('/assets/images/cursors/grab.cur'), pointer; // no grab icon for ie
     // sass-lint:enable no-duplicate-properties
 
     height: 14px !important;
@@ -66,7 +63,8 @@
     .leaflet-dragging & {
       // sass-lint:disable no-duplicate-properties
       cursor: grabbing;
-      cursor: url("assets/images/cursors/grabbing.cur"), url("/assets/images/cursors/grabbing.cur"), pointer; // no grabbing icon for ie
+      cursor: url('assets/images/cursors/grabbing.cur'), url('/assets/images/cursors/grabbing.cur'),
+        pointer; // no grabbing icon for ie
       // sass-lint:enable no-duplicate-properties
     }
 
@@ -79,7 +77,8 @@
   &.o-highlight-cluster {
     // sass-lint:disable no-duplicate-properties
     cursor: zoom-in;
-    cursor: url("assets/images/cursors/zoom-in.cur"), url("/assets/images/cursors/zoom-in.cur"), pointer; // no zoom-in icon for ie
+    cursor: url('assets/images/cursors/zoom-in.cur'), url('/assets/images/cursors/zoom-in.cur'),
+      pointer; // no zoom-in icon for ie
     // sass-lint:enable no-duplicate-properties
 
     .leaflet-dragging & {
@@ -106,10 +105,12 @@
 
       // drawn polygon on the map
       &.c-map__leaflet-drawn-polygon {
-        cursor: url("assets/images/cursors/edit.cur"), url("/assets/images/cursors/edit.cur"), pointer;
+        cursor: url('assets/images/cursors/edit.cur'), url('/assets/images/cursors/edit.cur'),
+          pointer;
 
         .c-map--drawing-mode-edit & {
-          cursor: url("assets/images/cursors/save.cur"), url("/assets/images/cursors/save.cur"), pointer;
+          cursor: url('assets/images/cursors/save.cur'), url('/assets/images/cursors/save.cur'),
+            pointer;
         }
 
         .leaflet-dragging & {
@@ -202,7 +203,7 @@
 
   // TODO:, fix illegal BEM
   div {
-    font-weight: 900;
+    font-weight: $bold-weight;
     line-height: 24px;
     margin-left: 4px;
   }

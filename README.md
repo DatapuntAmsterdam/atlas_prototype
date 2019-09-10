@@ -29,19 +29,13 @@ NODE_ENV=development npm test
 Only Karma unit tests
 
 ```
-NODE_ENV=development npm run test-karma
+NODE_ENV=development npm run test:karma
 ```
 
 Only Jest unit tests
 
 ```
-NODE_ENV=development npm run test-jest
-```
-
-Integration tests
-
-```
-NODE_ENV=development npm run test-integration
+NODE_ENV=development npm run test:jest
 ```
 
 ### E2E testing
@@ -69,7 +63,7 @@ docker-compose up --build test-e2e
 
 To test against production APIs you can use the same tasks, suffixed with `prod`:
 
-- Make sure the app is running locally by running `npm run start-prod`.
+- Make sure the app is running locally by running `npm run start:prod`.
 - Then, in a second terminal, run `npm run test-e2e-prod` (single run).
 - Or open the UI using `npm run test-e2e-prod-watch`.
 

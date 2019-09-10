@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@datapunt/asc-core'
-import { breakpoint, ascDefaultTheme } from '@datapunt/asc-ui'
+import { breakpoint } from '@datapunt/asc-ui'
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -9,7 +9,7 @@ const StyledContainer = styled.div`
   margin-bottom: 20px;
   background-color: white;
 
-  @media screen and ${breakpoint('min-width', 'tabletM')({ theme: ascDefaultTheme })} {
+  @media screen and ${breakpoint('min-width', 'tabletM')} {
     margin-top: 54px;
     margin-bottom: 70px;
   }

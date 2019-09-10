@@ -60,7 +60,7 @@ describe('MapPanel', () => {
   })
 
   it('should render the container', () => {
-    expect(shallow(<MapPanelContainer />, { context: { store } })).toMatchSnapshot()
+    expect(shallow(<MapPanelContainer store={store} />).dive()).toMatchSnapshot()
   })
 
   it('should render MapType and MapLayers', () => {

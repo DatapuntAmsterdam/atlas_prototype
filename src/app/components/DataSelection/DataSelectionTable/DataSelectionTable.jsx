@@ -1,11 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'redux-first-router-link'
+import RouterLink from 'redux-first-router-link'
 import DataSelectionFormatter from '../DataSelectionFormatter/DataSelectionFormatter'
 import { routing } from '../../../routes'
 import { getDetailPageData } from '../../../../store/redux-first-router/actions'
-import './DataSelectionTable.scss'
 
 const DataSelectionTable = ({ content }) => {
   const buildLink = row => {
@@ -35,7 +34,7 @@ const DataSelectionTable = ({ content }) => {
         </div>
         <div className="c-ds-table__body">
           {content.body.map((row, i) => (
-            <Link
+            <RouterLink
               key={i}
               className="c-ds-table__row c-ds-table__row--link qa-table-link"
               to={buildLink(row)}
@@ -52,7 +51,7 @@ const DataSelectionTable = ({ content }) => {
                   />
                 </div>
               ))}
-            </Link>
+            </RouterLink>
           ))}
         </div>
       </div>

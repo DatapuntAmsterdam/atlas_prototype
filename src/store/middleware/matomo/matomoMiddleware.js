@@ -1,4 +1,4 @@
-import matomoTracker from '../../../shared/services/matomo-tracker/matomo-tracker'
+import MatomoTracker from '@datapunt/matomo-tracker-js'
 import { getEnvironment } from '../../../shared/environment'
 // eslint-disable-next-line import/no-cycle
 import trackEvents from './trackEvents'
@@ -7,34 +7,15 @@ import trackViews from './trackViews'
 import { authCustomDimensions, viewCustomDimensions } from './customDimensions'
 import { MATOMO_CONFIG } from './constants'
 
-// Initialize connection with Matomo
-export const initializeMatomo = () => {
-  const urlBase = 'https://analytics.data.amsterdam.nl/'
-
-  window._paq = window._paq || []
-
-  if (window._paq.length === 0) {
-    window._paq.push(['enableLinkTracking'])
-    window._paq.push(['setTrackerUrl', `${urlBase}matomo.php`])
-    window._paq.push(['setSiteId', MATOMO_CONFIG[getEnvironment(window.location.hostname)].SITE_ID])
-
-    const doc = document
-    const matomo = doc.createElement('script')
-    const scripts = doc.getElementsByTagName('script')[0]
-
-    matomo.type = 'text/javascript'
-    matomo.async = true
-    matomo.defer = true
-    matomo.src = `${urlBase}matomo.js`
-
-    scripts.parentNode.insertBefore(matomo, scripts)
-  }
-}
-
 // Execute Matomo actions
 const matomoMiddleware = ({ getState }) => next => action => {
-  initializeMatomo()
   const nextAction = action
+
+  // Initialize connection with Matomo
+  const MatomoInstance = new MatomoTracker({
+    urlBase: MATOMO_CONFIG.BASE_URL,
+    siteId: MATOMO_CONFIG[getEnvironment(window.location.hostname)].SITE_ID,
+  })
 
   const actionsToMatomo = []
   if (trackViews[action.type]) {
@@ -58,8 +39,8 @@ const matomoMiddleware = ({ getState }) => next => action => {
       ]
 
       actionsToMatomo.forEach(matomoAction => {
-        matomoTracker(
-          matomoAction({
+        MatomoInstance.track({
+          data: matomoAction({
             tracking,
             firstAction,
             query,
@@ -70,7 +51,7 @@ const matomoMiddleware = ({ getState }) => next => action => {
           href,
           title,
           customDimensions,
-        )
+        })
       })
     }
   }

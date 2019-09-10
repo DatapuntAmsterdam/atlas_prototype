@@ -8,7 +8,7 @@
 
         <dp-panel is-panel-visible="!vm.user.scopes.includes('BRK/RS')" type="warning" can-close="true" class-name="c-disabled-message">
             Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om kadastrale subjecten te bekijken. Om ook zakelijke rechten van natuurlijke personen te bekijken, moet je als medewerker bovendien speciale bevoegdheden hebben.
-            Zie <dp-link-to-page class-name="c-link--light"></dp-link-to-page>.
+            <dp-login-link></dp-login-link>
         </dp-panel>
 
         <div ng-if="vm.apiData">
@@ -97,7 +97,7 @@
             can-close="true"
             class-name="c-detail-kadastraal-subject__warning">
             Medewerkers met speciale bevoegdheden kunnen alle gegevens zien (ook zakelijke rechten).
-            Zie <dp-link-to-page class-name="c-link--light"></dp-link-to-page>.
+            <dp-login-link></dp-login-link>
         </dp-panel>
 
         <dp-api-call ng-if="vm.apiData.results.rechten.count" endpoint="{{vm.apiData.results.rechten.href}}" partial="brk/subject-rechten" user="vm.user"></dp-api-call>

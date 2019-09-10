@@ -41,8 +41,10 @@ $on-top-of-leaflet: 999;
   position: absolute;
   right: 0;
   top: 0;
-  transform: translateZ(0); //translateZ(0) is needed to fix a Firefox bug, see tg-1306 (black screen when scrolling)
-  z-index: $body-z-index;
+  transform: translateZ(
+    0
+  ); //translateZ(0) is needed to fix a Firefox bug, see tg-1306 (black screen when scrolling
+  z-index: $body-z-index; // This z-index is needed to make the map clickable even when detail panels are opened
 }
 
 .c-map__overlay-buttons {
@@ -53,7 +55,7 @@ $on-top-of-leaflet: 999;
 
 %overlay-button {
   float: left;
-  margin-right: $base-whitespace * .2;
+  margin-right: $base-whitespace * 0.2;
   z-index: $on-top-z-index;
 }
 
@@ -67,13 +69,14 @@ $on-top-of-leaflet: 999;
 .is-embed-preview {
   .c-map__leaflet {
     &:focus {
-      .c-map__focus-layer { // sass-lint:disable-line nesting-depth
+      .c-map__focus-layer {
+        // sass-lint:disable-line nesting-depth
         border: 1px solid $primary-dark;
       }
     }
   }
 }
 
-.qa-map {
+.c-map__wrapper {
   height: 100%;
 }

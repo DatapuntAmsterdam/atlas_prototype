@@ -13,9 +13,7 @@ describe('PanoramaPreviewContainer', () => {
   it('should render the container with the basic properties', () => {
     const store = configureMockStore()({ ...initialState })
     const props = {}
-    const component = shallow(<PanoramaPreviewContainer {...props} />, {
-      context: { store },
-    })
+    const component = shallow(<PanoramaPreviewContainer store={store} {...props} />).dive()
     expect(component).toMatchSnapshot()
   })
 })

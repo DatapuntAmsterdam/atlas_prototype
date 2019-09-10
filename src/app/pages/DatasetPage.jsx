@@ -1,5 +1,6 @@
 import React from 'react'
 import { AngularWrapper } from 'react-angular'
+import angular from 'angular'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import LoadingIndicator from '../../shared/components/loading-indicator/LoadingIndicator'
@@ -27,11 +28,12 @@ const DatasetPage = ({
   return (
     <div className="c-data-selection c-dashboard__content">
       {!isLoading && numberOfRecords && (
-        <div className="qa-data-selection-content">
+        <div className="c-data-selection-content qa-data-selection-content">
           <AngularWrapper
             moduleName="dpDataSelectionHeaderWrapper"
             component="dpDataSelectionHeader"
             dependencies={['atlas']}
+            angularInstance={angular}
             bindings={{
               dataset: DEFAULT_DATASET,
               availableFilters,

@@ -1,5 +1,5 @@
-@import "../../../shared/styles/config";
-@import "../../../shared/styles/utilities/screen-reader";
+@import '../../../shared/styles/config';
+@import '../../../shared/styles/utilities/screen-reader';
 
 $icon-height: 20px;
 
@@ -12,7 +12,7 @@ $icon-height: 20px;
 
   &__title {
     font-size: $s-font-size;
-    font-weight: 900;
+    font-weight: $bold-weight;
     line-height: 1.25;
     margin: 8px 0;
   }
@@ -45,22 +45,22 @@ $icon-height: 20px;
   width: $icon-height;
 
   &--topography {
-    @include icon-sprite("icon-topography", $secondary-gray60, $primary-dark, $icon-height);
+    @include icon-sprite('icon-topography', $secondary-gray60, $primary-dark, $icon-height);
   }
 
   &--aerial {
-    @include icon-sprite("icon-aerial", $secondary-gray60, $primary-dark, $icon-height);
+    @include icon-sprite('icon-aerial', $secondary-gray60, $primary-dark, $icon-height);
   }
 }
 
 .select-button--enabled {
   .icon {
     &--topography {
-      @include icon-sprite("icon-topography", $primary-dark, $primary-dark, $icon-height);
+      @include icon-sprite('icon-topography', $primary-dark, $primary-dark, $icon-height);
     }
 
     &--aerial {
-      @include icon-sprite("icon-aerial", $primary-dark, $primary-dark, $icon-height);
+      @include icon-sprite('icon-aerial', $primary-dark, $primary-dark, $icon-height);
     }
   }
 }
@@ -71,11 +71,11 @@ $icon-height: 20px;
   &:hover,
   &:focus {
     .icon--topography {
-      @include icon-sprite("icon-topography", $primary-dark, $primary-dark, $icon-height);
+      @include icon-sprite('icon-topography', $primary-dark, $primary-dark, $icon-height);
     }
 
     .icon--aerial {
-      @include icon-sprite("icon-aerial", $primary-dark, $primary-dark, $icon-height);
+      @include icon-sprite('icon-aerial', $primary-dark, $primary-dark, $icon-height);
     }
   }
 }

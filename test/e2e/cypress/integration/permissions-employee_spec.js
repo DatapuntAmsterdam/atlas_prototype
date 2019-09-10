@@ -114,7 +114,7 @@ describe('employee permissions', () => {
     cy.wait('@getObjectExpand')
     cy.wait('@getPanden')
     cy.wait('@getSitueringen')
-    cy.get(queries.headerTitle).contains('Nes 98')
+    cy.get(queries.headerTitle).contains('Dam 1')
     cy.get(queries.headerSubTitle).should($values => {
       expect($values).to.contain('Ligt in')
       expect($values).to.contain('Panoramabeeld')

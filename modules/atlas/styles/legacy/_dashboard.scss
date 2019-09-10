@@ -1,8 +1,13 @@
-$backdrop-color: rgba(0, 0, 0, .5);
+$backdrop-color: rgba(0, 0, 0, 0.5);
 
 .c-dashboard {
   height: 100%;
   background: $primary-light;
+
+  .styled-header {
+    display: flex;
+    justify-content: center;
+  }
 
   // Hack to add a green beam on the right side of the header. When the header will be refactored to
   // be inside the grid, this can be removed
@@ -19,12 +24,16 @@ $backdrop-color: rgba(0, 0, 0, .5);
           bottom: 0;
           width: 24px;
           background-color: $thema-6;
-          content: "";
+          content: '';
         }
       }
 
       max-width: 1920px;
     }
+  }
+
+  &__body {
+    height: initial;
   }
 }
 
@@ -64,25 +73,27 @@ $backdrop-color: rgba(0, 0, 0, .5);
     right: 0;
     bottom: 0;
     left: 0;
-    transition: opacity .2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
     background-color: $backdrop-color;
-    content: "";
+    content: '';
     opacity: 0;
     z-index: 101;
     pointer-events: none;
   }
 
   .c-dashboard--homepage & {
-    height: calc(100% - #{$dashboard-heading-height-homepage + $dashboard-toolbar-height + $dashboard-heading-shadow-height});
+    height: calc(
+      100% - #{$dashboard-heading-height-homepage + $dashboard-toolbar-height +
+        $dashboard-heading-shadow-height}
+    );
 
     @media (min-width: 1201px) {
-      top: $dashboard-heading-height-homepage + $dashboard-toolbar-height;
+      top: 0; /* The "tall" header has a position relative, while the smaller header has a fixed position */
     }
 
     &::before {
-      @media (min-width: 1201px) {
-        top: 158px;
-      }
+      /* Makes sure the backdrop is at the correct distance from the top */
+      top: 0;
     }
   }
 
@@ -102,7 +113,6 @@ $backdrop-color: rgba(0, 0, 0, .5);
 .c-dashboard__content {
   background-color: $primary-light;
 }
-
 
 .c-dashboard__page {
   position: relative;
@@ -182,7 +192,8 @@ $backdrop-color: rgba(0, 0, 0, .5);
   .c-dashboard__error {
     top: 55px;
     @media (min-width: 1200px) {
-      top: $dashboard-heading-height-homepage + $dashboard-toolbar-height + $dashboard-heading-shadow-height;
+      top: $dashboard-heading-height-homepage + $dashboard-toolbar-height +
+        $dashboard-heading-shadow-height;
     }
   }
 

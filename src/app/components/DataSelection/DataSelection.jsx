@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { AngularWrapper } from 'react-angular'
 import classNames from 'classnames'
+import angular from 'angular'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import NotAuthorizedMessage from '../PanelMessages/NotAuthorizedMessage'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
@@ -50,11 +51,12 @@ const DataSelection = ({
 
   return (
     <div className="c-data-selection c-dashboard__content">
-      <div className="qa-data-selection-content">
+      <div className="c-data-selection-content qa-data-selection-content">
         <AngularWrapper
           moduleName="dpDataSelectionHeaderWrapper"
           component="dpDataSelectionHeader"
           dependencies={['atlas']}
+          angularInstance={angular}
           bindings={{
             dataset,
             availableFilters,
@@ -87,6 +89,7 @@ const DataSelection = ({
                     <AngularWrapper
                       moduleName="dpSbiFilterWrapper"
                       component="dpSbiFilter"
+                      angularInstance={angular}
                       dependencies={['atlas']}
                       bindings={{
                         availableFilters,
@@ -99,6 +102,7 @@ const DataSelection = ({
                     moduleName="dpDataSelectionAvailableFiltersWrapper"
                     component="dpDataSelectionAvailableFilters"
                     dependencies={['atlas']}
+                    angularInstance={angular}
                     bindings={{
                       availableFilters,
                       activeFilters,
@@ -136,6 +140,7 @@ const DataSelection = ({
                       moduleName="dpDataSelectionPaginationWrapper"
                       component="dpDataSelectionPagination"
                       dependencies={['atlas']}
+                      angularInstance={angular}
                       bindings={{
                         currentPage,
                         numberOfPages,

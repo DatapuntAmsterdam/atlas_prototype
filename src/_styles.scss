@@ -1,5 +1,9 @@
+@import '~@datapunt/asc-assets/lib/assets/fonts.css';
 /* COMPONENTS */
-@import "./map/map";
+@import './map/map';
+
+/* Since we now use code-splitting / chunks, we need to load shared css in here to avoid warnings */
+@import './app/components/DataSelection/DataSelectionTable/DataSelectionTable'; // used by DataSelectionTable.jsx and ConstructionFileDetail.jsx
 
 /* SHARED */
-@import "./shared/styles/shared";
+@import './shared/styles/shared';

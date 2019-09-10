@@ -38,7 +38,7 @@ describe('AutoSuggestCategory', () => {
     }
   })
 
-  it('should render ellipsis when there are more then 3 results', () => {
+  it('should render ellipsis when the returned results are less than the total results', () => {
     const wrapper = shallow(<AutoSuggestCategory {...props} />)
 
     expect(wrapper).toMatchSnapshot()
@@ -64,7 +64,7 @@ describe('AutoSuggestCategory', () => {
     )
   })
 
-  it('should render no ellipsis when there are 3 or less results', () => {
+  it("should render no ellipsis when there aren't more results returned than the total results", () => {
     props.category.total_results = 3
     const wrapper = shallow(<AutoSuggestCategory {...props} />)
 

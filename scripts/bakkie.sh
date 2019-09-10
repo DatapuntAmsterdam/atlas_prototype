@@ -12,7 +12,7 @@ export NODE_ENV=test
 rm -rf node_modules
 npm install
 
-npm run build-test
+npm run build:test
 
 echo Publish distribution in web-dir
 OUTDIR=/var/www/html/atlas/builds/$1

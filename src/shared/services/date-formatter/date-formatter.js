@@ -6,13 +6,13 @@
  * @param {Date} date The Date instance.
  * @returns {string} The Dutch date string.
  */
-export default function formatDate(date) {
+export default function formatDate(date, day = true, month = true, year = true) {
   return (
     date &&
     date.toLocaleDateString('nl-NL', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
+      ...(day && { day: 'numeric' }),
+      ...(month && { month: 'long' }),
+      ...(year && { year: 'numeric' }),
     })
   )
 }

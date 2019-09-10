@@ -33,7 +33,7 @@ import {
 import IconButton from '../../app/components/IconButton/IconButton'
 import { getMapDetail } from '../../map/ducks/detail/actions'
 import { getMapOverlays } from '../../map/ducks/map/selectors'
-import { pageTypeToEndpoint } from '../../map/services/map-detail'
+import { pageTypeToEndpoint } from '../../map/services/map-detail/map-detail'
 import { isPrintMode, isPrintOrEmbedMode, setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui'
 
 class PanoramaContainer extends React.Component {

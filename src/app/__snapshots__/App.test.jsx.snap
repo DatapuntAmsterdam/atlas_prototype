@@ -1,95 +1,87 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App should render the homepage 1`] = `
-<DefaultThemeProvider
-  overrides={
-    Object {
-      "typography": Object {
-        "fontFamily": "\\"AvenirLT\\", Arial, sans-serif",
-      },
-    }
-  }
->
+<ThemeProvider>
   <GlobalStyleComponent />
-  <AppStateProvider
-    initialState={
-      Object {
-        "ui": Object {
-          "nrOfBackdropTriggers": 0,
-        },
-      }
-    }
-    reducer={[Function]}
+  <MatomoProvider
+    value={MatomoTracker {}}
   >
-    <div
-      className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
+    <AppStateProvider
+      initialState={
+        Object {
+          "ui": Object {
+            "backdropKeys": Array [],
+          },
+        }
+      }
+      reducer={[Function]}
     >
-      <Header
-        embedPreviewMode={false}
-        hasEmbedButton={false}
-        hasMaxWidth={true}
-        hasPrintButton={false}
-        homePage={false}
-        printMode={false}
-        printOrEmbedMode={false}
-        user={Object {}}
-      />
-      <AppBody
-        bodyClasses=""
-        currentPage="NOT_FOUND"
-        embedPreviewMode={false}
-        hasMaxWidth={true}
-        homePage={false}
-        visibilityError={false}
-      />
-    </div>
-  </AppStateProvider>
-</DefaultThemeProvider>
+      <div
+        className="c-dashboard c-dashboard--page-type-data "
+      >
+        <Connect(Header)
+          embedPreviewMode={false}
+          hasEmbedButton={false}
+          hasMaxWidth={false}
+          hasPrintButton={true}
+          homePage={false}
+          printMode={false}
+          printOrEmbedMode={false}
+          user={Object {}}
+        />
+        <AppBody
+          bodyClasses=""
+          currentPage="DATA"
+          embedPreviewMode={false}
+          hasMaxWidth={false}
+          homePage={false}
+          visibilityError={false}
+        />
+      </div>
+    </AppStateProvider>
+  </MatomoProvider>
+</ThemeProvider>
 `;
 
 exports[`App should render the mapview 1`] = `
-<DefaultThemeProvider
-  overrides={
-    Object {
-      "typography": Object {
-        "fontFamily": "\\"AvenirLT\\", Arial, sans-serif",
-      },
-    }
-  }
->
+<ThemeProvider>
   <GlobalStyleComponent />
-  <AppStateProvider
-    initialState={
-      Object {
-        "ui": Object {
-          "nrOfBackdropTriggers": 0,
-        },
-      }
-    }
-    reducer={[Function]}
+  <MatomoProvider
+    value={MatomoTracker {}}
   >
-    <div
-      className="c-dashboard c-dashboard--page-type-not-found c-dashboard--max-width"
+    <AppStateProvider
+      initialState={
+        Object {
+          "ui": Object {
+            "backdropKeys": Array [],
+          },
+        }
+      }
+      reducer={[Function]}
     >
-      <Header
-        embedPreviewMode={false}
-        hasEmbedButton={true}
-        hasMaxWidth={true}
-        hasPrintButton={true}
-        homePage={false}
-        printMode={false}
-        printOrEmbedMode={false}
-        user={Object {}}
-      />
-      <AppBody
-        bodyClasses=""
-        currentPage="NOT_FOUND"
-        embedPreviewMode={false}
-        hasMaxWidth={true}
-        homePage={false}
-        visibilityError={false}
-      />
-    </div>
-  </AppStateProvider>
-</DefaultThemeProvider>
+      <div
+        className="c-dashboard c-dashboard--page-type-data "
+      >
+        <Connect(Header)
+          embedPreviewMode={false}
+          hasEmbedButton={true}
+          hasMaxWidth={false}
+          hasPrintButton={true}
+          homePage={false}
+          printMode={false}
+          printOrEmbedMode={false}
+          user={Object {}}
+        />
+        <AppBody
+          bodyClasses=""
+          currentPage="DATA"
+          embedPreviewMode={false}
+          hasMaxWidth={false}
+          homePage={false}
+          visibilityError={false}
+        />
+      </div>
+    </AppStateProvider>
+  </MatomoProvider>
+</ThemeProvider>
 `;

@@ -61,13 +61,13 @@ $icon-height: 24px;
 
     &-title {
       font-size: $xs-font-size;
-      font-weight: 400;
+      font-weight: $normal-weight;
       line-height: 1;
     }
 
     &-subtitle {
       font-size: $s-font-size;
-      font-weight: 900;
+      font-weight: $bold-weight;
       line-height: 1;
       padding-top: 4px;
     }
@@ -79,14 +79,16 @@ $icon-height: 24px;
     overflow-y: auto;
 
     .c-dashboard__body--error & {
-      max-height: calc(100vh - #{$above-list-height + $below-list-height + $dashboard-error-height}); //NB: fix for IE
+      max-height: calc(
+        100vh - #{$above-list-height + $below-list-height + $dashboard-error-height}
+      ); //NB: fix for IE
     }
   }
 
   &__category-title {
     color: $primary-dark;
     font-size: $s-font-size;
-    font-weight: 900;
+    font-weight: $bold-weight;
     line-height: 1;
     margin-top: 8px;
     padding: 0 8px;
@@ -123,14 +125,22 @@ $icon-height: 24px;
 
     &-value {
       min-height: 20px;
-      overflow: hidden;
       padding-right: $base-whitespace;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+
+      &:not(&--multiline) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &--multiline {
+        // Makes sure long text is wrapped and text with line breaks is respected
+        white-space: pre-wrap;
+      }
 
       &::after {
         border-radius: 50%;
-        content: "";
+        content: '';
         display: none;
         height: 10px;
         margin-left: 5px;
@@ -175,7 +185,7 @@ $icon-height: 24px;
     border-radius: 0;
     color: $secondary-gray60;
     display: flex;
-    font-weight: 900;
+    font-weight: $bold-weight;
     justify-content: center;
     margin: auto;
     padding: 6px 16px 6px 8px;
@@ -186,7 +196,7 @@ $icon-height: 24px;
       color: $primary-light;
 
       &--maximize {
-        @include icon-sprite("icon-maximize", $primary-dark, $primary-dark, $icon-height);
+        @include icon-sprite('icon-maximize', $primary-dark, $primary-dark, $icon-height);
       }
     }
 
@@ -196,13 +206,12 @@ $icon-height: 24px;
       width: $icon-height;
 
       &--maximize {
-        @include icon-sprite("icon-maximize", $secondary-gray60, $primary-dark, $icon-height);
+        @include icon-sprite('icon-maximize', $secondary-gray60, $primary-dark, $icon-height);
       }
     }
   }
 
   .is-print-mode & {
-
     &__header {
       // There is no pano in print mode
       height: auto;

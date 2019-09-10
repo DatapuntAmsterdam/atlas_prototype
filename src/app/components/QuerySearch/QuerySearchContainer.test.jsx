@@ -31,7 +31,7 @@ const initialState = {
 describe('QuerySearchContainer', () => {
   it('should render', () => {
     const store = configureMockStore()({ ...initialState })
-    const component = shallow(<QuerySearchContainer />, { context: { store } })
+    const component = shallow(<QuerySearchContainer store={store} />).dive()
     expect(component).toMatchSnapshot()
   })
 })

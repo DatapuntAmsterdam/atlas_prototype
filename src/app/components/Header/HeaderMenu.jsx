@@ -1,7 +1,8 @@
 import React from 'react'
-import { MenuInline, MenuToggle, MenuFlyOut, MenuItem } from '@datapunt/asc-ui'
-import { ReactComponent as ChevronRight } from '@datapunt/asc-assets/lib/Icons/ChevronRight.svg'
+import { MenuInline, MenuToggle, MenuFlyOut, MenuItem, MenuButton } from '@datapunt/asc-ui'
+import { ChevronRight } from '@datapunt/asc-assets'
 import PropTypes from 'prop-types'
+import RouterLink from 'redux-first-router-link'
 import {
   toApisPage,
   toAvailabilityPage,
@@ -12,11 +13,10 @@ import {
   toPanoramaAndPreserveQuery,
   toPrivacyPage,
 } from '../../../store/redux-first-router/actions'
-import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import truncateString from '../../../shared/services/truncateString/truncateString'
 
 const toPanoramaAction = toPanoramaAndPreserveQuery(undefined, undefined, undefined, 'home')
-const toMapAction = toMap(true)
+const toMapAction = toMap()
 const toDatasetsAction = toDatasets()
 const toApisAction = toApisPage()
 const toPrivacyAction = toPrivacyPage()
@@ -29,38 +29,82 @@ const components = {
   mobile: MenuToggle,
 }
 
+const Link = ({ children, ...otherProps }) => (
+  <MenuButton $as={RouterLink} {...otherProps}>
+    {children}
+  </MenuButton>
+)
+
 const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) => {
   const Menu = components[type]
 
   return (
     <Menu {...props}>
       <MenuFlyOut label="Onderdelen">
-        <MenuItem {...linkAttributesFromAction(toMapAction)}>Kaart</MenuItem>
-        <MenuItem {...linkAttributesFromAction(toPanoramaAction)}>Panoramabeelden</MenuItem>
-        <MenuItem {...linkAttributesFromAction(toDatasetsAction)}>Datasets</MenuItem>
-        <MenuItem {...linkAttributesFromAction(toApisAction)}>Data services</MenuItem>
+        <MenuItem>
+          <Link iconLeft={<ChevronRight />} to={toMapAction}>
+            Kaart
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link iconLeft={<ChevronRight />} to={toPanoramaAction}>
+            Panoramabeelden
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link iconLeft={<ChevronRight />} to={toDatasetsAction}>
+            Datasets
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link iconLeft={<ChevronRight />} to={toApisAction}>
+            Data services
+          </Link>
+        </MenuItem>
       </MenuFlyOut>
       <MenuFlyOut label="Over">
-        <MenuItem {...linkAttributesFromAction(toPrivacyAction)}>
-          Privacy en informatiebeveiliging
+        <MenuItem>
+          <Link iconLeft={<ChevronRight />} to={toPrivacyAction}>
+            Privacy en informatiebeveiliging
+          </Link>
         </MenuItem>
-        <MenuItem {...linkAttributesFromAction(toAvailabilityAction)}>
-          Beschikbaarheid en kwaliteit data
+        <MenuItem>
+          <Link iconLeft={<ChevronRight />} to={toAvailabilityAction}>
+            Beschikbaarheid en kwaliteit data
+          </Link>
         </MenuItem>
-        <MenuItem {...linkAttributesFromAction(toMaintentanceAction)}>
-          Technisch beheer en werkwijze
+        <MenuItem>
+          <Link iconLeft={<ChevronRight />} to={toMaintentanceAction}>
+            Technisch beheer en werkwijze
+          </Link>
         </MenuItem>
-        <MenuItem href="mailto:datapunt@amsterdam.nl">Contact</MenuItem>
+        <MenuItem>
+          <MenuButton iconLeft={<ChevronRight />} href="mailto:datapunt@amsterdam.nl">
+            Contact
+          </MenuButton>
+        </MenuItem>
       </MenuFlyOut>
-      <MenuItem onClick={showFeedbackForm}>Feedback</MenuItem>
-      <MenuItem {...linkAttributesFromAction(toHelpAction)}>Help</MenuItem>
+      <MenuItem>
+        <MenuButton type="button" onClick={showFeedbackForm}>
+          Feedback
+        </MenuButton>
+      </MenuItem>
+      <MenuItem>
+        <Link to={toHelpAction}>Help</Link>
+      </MenuItem>
 
       {!user.authenticated ? (
-        <MenuItem onClick={login}>Inloggen</MenuItem>
+        <MenuItem>
+          <MenuButton type="button" onClick={login}>
+            Inloggen
+          </MenuButton>
+        </MenuItem>
       ) : (
         <MenuFlyOut data-test="login" label={truncateString(user.name, 9)}>
-          <MenuItem icon={<ChevronRight />} onClick={logout}>
-            Uitloggen
+          <MenuItem>
+            <MenuButton type="button" onClick={logout} iconLeft={<ChevronRight />}>
+              Uitloggen
+            </MenuButton>
           </MenuItem>
         </MenuFlyOut>
       )}

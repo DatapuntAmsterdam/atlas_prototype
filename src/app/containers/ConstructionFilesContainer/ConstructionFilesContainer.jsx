@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Heading } from '@datapunt/asc-ui'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { getFileName } from '../../../shared/ducks/files/selectors'
 import { getUser } from '../../../shared/ducks/user/user'
 import { SCOPES } from '../../../shared/services/auth/auth'
@@ -14,7 +15,6 @@ import ErrorMessage from '../../components/PanelMessages/ErrorMessage/ErrorMessa
 import { getByUrl } from '../../../shared/services/api/api'
 import './ConstructionFilesContainer.scss'
 import { ConstructionFiles as ContextMenu } from '../../components/ContextMenu'
-import useMatomo from '../../utils/useMatomo'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import withGrid from '../../utils/withGrid'
 
@@ -65,7 +65,7 @@ const ConstructionFilesContainer = ({ fileName, user, endpoint }) => {
     /* istanbul ignore next */
     () => {
       if (title) {
-        trackPageView(documentTitle)
+        trackPageView({ documentTitle })
       }
     },
     [documentTitle],
@@ -81,7 +81,12 @@ const ConstructionFilesContainer = ({ fileName, user, endpoint }) => {
   )
 
   const onDownloadFile = size => {
-    trackEvent(documentTitle, 'Download-bouwtekening', `bouwtekening-download-${size}`, fileName)
+    trackEvent({
+      documentTitle,
+      action: 'Download-bouwtekening',
+      name: `bouwtekening-download-${size}`,
+      value: fileName,
+    })
   }
 
   const noResultsTemplate = withGrid(<Heading as="em">Geen resultaten gevonden</Heading>)

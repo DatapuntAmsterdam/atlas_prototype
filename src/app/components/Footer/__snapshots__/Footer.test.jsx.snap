@@ -1,115 +1,134 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Footer should render 1`] = `
-<footer
-  className="c-dashboard__footer o-max-width"
->
-  <div
-    className="c-dashboard__footer-content u-row"
-  >
-    <div
-      className="u-col-sm--8"
+<Footer>
+  <FooterTop>
+    <Row
+      debug={false}
+      debugColor="rgba(51,102,153,0.75)"
+      hasMargin={true}
     >
-      <div
-        className="u-margin__left--2 c-dashboard__proclaimer"
+      <Column
+        debug={false}
+        debugColor="rgba(51,102,153,0.5)"
+        order={0}
+        push={0}
+        span={
+          Object {
+            "big": 4,
+            "large": 8,
+            "medium": 2,
+            "small": 1,
+            "xLarge": 8,
+          }
+        }
+        wrap={true}
       >
-        <h2
-          className="c-dashboard__proclaimer-header"
+        <FooterToggle
+          hideAt="tabletM"
+          title="Proclaimer"
         >
-          Proclaimer
-        </h2>
-        <p
-          className="c-dashboard__proclaimer-paragraph"
-        >
-          Gemeente Amsterdam biedt met City Data een voorziening waar data voor iedereen beschikbaar zijn en hergebruikt mogen worden. De gegevens worden aangeboden door gemeentelijke en externe partijen. De eigenaren van deze gegevens zijn primair verantwoordelijk voor de kwaliteit van hun gepubliceerde data. Opmerkingen en aanvullingen op de gegevens kunt u
-          <a
-            className="c-link--inverse"
-            href="mailto:terugmelding.basisinformatie@amsterdam.nl"
+          <FooterContent
+            indent={true}
           >
-            melden
-          </a>
-          .
-        </p>
-        <p
-          className="c-dashboard__proclaimer-paragraph"
+            <ProclaimerContent />
+          </FooterContent>
+        </FooterToggle>
+        <FooterContent
+          showAt="tabletM"
         >
-          <Connect(Link)
-            className="o-btn o-btn--link--inverse"
-            to={
-              Object {
-                "type": "atlasRouter/PROCLAIMER",
+          <FooterHeading
+            $as="h3"
+          >
+            Proclaimer
+          </FooterHeading>
+          <ProclaimerContent />
+        </FooterContent>
+      </Column>
+      <Column
+        debug={false}
+        debugColor="rgba(51,102,153,0.5)"
+        order={0}
+        push={
+          Object {
+            "big": 0,
+            "large": 1,
+            "medium": 0,
+            "small": 0,
+            "xLarge": 1,
+          }
+        }
+        span={
+          Object {
+            "big": 2,
+            "large": 3,
+            "medium": 2,
+            "small": 1,
+            "xLarge": 3,
+          }
+        }
+        wrap={true}
+      >
+        <FooterToggle
+          hideAt="tabletM"
+          title="Volg de gemeente"
+        >
+          <FooterContent
+            indent={true}
+          >
+            <FollowLinks />
+          </FooterContent>
+        </FooterToggle>
+        <FooterContent
+          showAt="tabletM"
+        >
+          <FooterHeading
+            $as="h3"
+          >
+            Volg de gemeente
+          </FooterHeading>
+          <FollowLinks />
+        </FooterContent>
+      </Column>
+    </Row>
+  </FooterTop>
+  <FooterBottom>
+    <Row
+      debug={false}
+      debugColor="rgba(51,102,153,0.75)"
+      hasMargin={true}
+    >
+      <Column
+        debug={false}
+        debugColor="rgba(51,102,153,0.5)"
+        order={0}
+        push={0}
+        span={
+          Object {
+            "big": 6,
+            "large": 10,
+            "medium": 2,
+            "small": 1,
+            "xLarge": 10,
+          }
+        }
+        wrap={true}
+      >
+        <Styled(List)>
+          <Styled(ListItem)>
+            <StyledLink
+              to={
+                Object {
+                  "type": "atlasRouter/PROCLAIMER",
+                }
               }
-            }
-          >
-            Lees de hele proclaimer
-          </Connect(Link)>
-        </p>
-      </div>
-    </div>
-    <div
-      className="u-col-sm--3 u-col-sm--offset-1"
-    >
-      <div
-        className="c-dashboard__social"
-      >
-        <h2
-          className="c-dashboard__social-header"
-        >
-          Volg de gemeente
-        </h2>
-        <div
-          className="c-dashboard__social-link"
-        >
-          <a
-            className="o-btn--link--inverse"
-            href="https://twitter.com/AmsterdamNL"
-            rel="external noopener noreferrer"
-            target="_blank"
-          >
-            Twitter
-          </a>
-        </div>
-        <div
-          className="c-dashboard__social-link"
-        >
-          <a
-            className="o-btn o-btn--link--inverse"
-            href="https://www.facebook.com/gemeenteamsterdam"
-            rel="external noopener noreferrer"
-            target="_blank"
-          >
-            Facebook
-          </a>
-        </div>
-        <div
-          className="c-dashboard__social-link"
-        >
-          <a
-            className="o-btn o-btn--link--inverse"
-            href="https://www.linkedin.com/company/gemeente-amsterdam"
-            rel="external noopener noreferrer"
-            target="_blank"
-          >
-            LinkedIn
-          </a>
-        </div>
-        <div
-          className="c-dashboard__social-link"
-        >
-          <a
-            className="o-btn o-btn--link--inverse"
-            href="https://github.com/Amsterdam"
-            rel="external noopener noreferrer"
-            target="_blank"
-          >
-            GitHub
-          </a>
-        </div>
-      </div>
-    </div>
-    <div
-      className="u-clearfix"
-    />
-  </div>
-</footer>
+            >
+              Privacy en cookies
+            </StyledLink>
+          </Styled(ListItem)>
+        </Styled(List)>
+      </Column>
+    </Row>
+  </FooterBottom>
+</Footer>
 `;

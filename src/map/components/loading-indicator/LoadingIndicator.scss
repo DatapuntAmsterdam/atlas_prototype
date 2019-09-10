@@ -1,4 +1,4 @@
-@import "../../../shared/styles/config";
+@import '../../../shared/styles/config';
 
 .c-dashboard--page-type-data {
   .c-loading-indicator__container {
@@ -18,7 +18,6 @@
   }
 
   .c-loading-indicator__box {
-    font-family: $base-font-family;
     font-size: $s-font-size;
     height: $base-whitespace * 3.5;
     left: 0;

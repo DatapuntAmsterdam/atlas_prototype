@@ -1,7 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ConstructionFilesContainer should render 1`] = `
-<DefaultThemeProvider>
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 36px;
+  height: 36px;
+  box-sizing: content-box;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.c4 > svg {
+  width: 36px;
+  height: 36px;
+}
+
+.c4 svg rect,
+.c4 svg polygon,
+.c4 svg path {
+  fill: #ec0000;
+}
+
+.c2 {
+  position: relative;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.c0 .c1 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.c3 {
+  width: 36px;
+  height: 36px;
+}
+
+.c3 svg {
+  -webkit-animation: rotating 1s linear infinite;
+  animation: rotating 1s linear infinite;
+}
+
+<ThemeProvider>
   <ThemeProvider
     theme={
       Object {
@@ -85,7 +143,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
         "maxGridWidth": 1430,
         "typography": Object {
           "a": Object {
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "1rem",
             "fontWeight": "inherit",
             "letterSpacing": "inherit",
@@ -93,7 +151,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "marginBottom": "0",
           },
           "em": Object {
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "16px",
             "fontWeight": 400,
             "letterSpacing": "inherit",
@@ -109,7 +167,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                 "lineHeight": "38px",
               },
             },
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "24px",
             "fontWeight": 700,
             "letterSpacing": "inherit",
@@ -123,7 +181,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                 "lineHeight": "30px",
               },
             },
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "20px",
             "fontWeight": 700,
             "letterSpacing": "inherit",
@@ -131,7 +189,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "marginBottom": "8px",
           },
           "h3": Object {
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "20px",
             "fontWeight": 700,
             "letterSpacing": "inherit",
@@ -139,7 +197,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "marginBottom": "8px",
           },
           "h4": Object {
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "18px",
             "fontWeight": 700,
             "letterSpacing": "inherit",
@@ -147,7 +205,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "marginBottom": "8px",
           },
           "h5": Object {
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "18px",
             "fontWeight": 400,
             "letterSpacing": "inherit",
@@ -155,11 +213,11 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "marginBottom": "0",
           },
           "h6": Object {
-            "defaultColor": "#000000",
-            "fontSize": "18px",
-            "fontWeight": 400,
+            "color": "#000000",
+            "fontSize": "16px",
+            "fontWeight": 500,
             "letterSpacing": "inherit",
-            "lineHeight": 1,
+            "lineHeight": 1.25,
             "marginBottom": "0",
           },
           "p": Object {
@@ -168,7 +226,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                 "marginBottom": "24px",
               },
             },
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "16px",
             "fontWeight": 400,
             "letterSpacing": "inherit",
@@ -176,7 +234,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "marginBottom": "20px",
           },
           "small": Object {
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "14px",
             "fontWeight": 400,
             "letterSpacing": "inherit",
@@ -184,7 +242,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "marginBottom": "0",
           },
           "span": Object {
-            "defaultColor": "#000000",
+            "color": "#000000",
             "fontSize": "14px",
             "fontWeight": 400,
             "letterSpacing": "inherit",
@@ -221,24 +279,6 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "subscribe": [Function],
           }
         }
-        storeSubscription={
-          Subscription {
-            "listeners": Object {
-              "notify": [Function],
-            },
-            "onStateChange": [Function],
-            "parentSub": undefined,
-            "store": Object {
-              "clearActions": [Function],
-              "dispatch": [Function],
-              "getActions": [Function],
-              "getState": [Function],
-              "replaceReducer": [Function],
-              "subscribe": [Function],
-            },
-            "unsubscribe": null,
-          }
-        }
         user={
           Object {
             "scopes": Array [
@@ -259,9 +299,9 @@ exports[`ConstructionFilesContainer should render 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-jhAzac",
+                  "componentId": "sc-hzDkRC",
                   "isStatic": false,
-                  "lastClassName": "enRXIj",
+                  "lastClassName": "c0",
                   "rules": Array [
                     "
   display: flex;
@@ -280,7 +320,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                     "
 
   ",
-                    ".sc-hzDkRC",
+                    ".c1",
                     " {
     ",
                     [Function],
@@ -296,7 +336,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                 "displayName": "styled.div",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-jhAzac",
+                "styledComponentId": "sc-hzDkRC",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -308,7 +348,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
             gutterY={20}
           >
             <div
-              className="sc-jhAzac enRXIj"
+              className="c0"
               direction="column"
             >
               <styled.div>
@@ -318,9 +358,9 @@ exports[`ConstructionFilesContainer should render 1`] = `
                       "$$typeof": Symbol(react.forward_ref),
                       "attrs": Array [],
                       "componentStyle": ComponentStyle {
-                        "componentId": "sc-hzDkRC",
+                        "componentId": "c1",
                         "isStatic": false,
-                        "lastClassName": "fPWdgX",
+                        "lastClassName": "c2",
                         "rules": Array [
                           "
   position: relative;
@@ -333,7 +373,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                       "displayName": "styled.div",
                       "foldedComponentIds": Array [],
                       "render": [Function],
-                      "styledComponentId": "sc-hzDkRC",
+                      "styledComponentId": "c1",
                       "target": "div",
                       "toString": [Function],
                       "warnTooManyClasses": [Function],
@@ -343,7 +383,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                   forwardedRef={null}
                 >
                   <div
-                    className="sc-hzDkRC fPWdgX"
+                    className="c1 c2"
                   >
                     <LoadingIndicator
                       IconComponent={
@@ -369,9 +409,9 @@ exports[`ConstructionFilesContainer should render 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-dNLxif",
+                                    "componentId": "sc-jwKygS",
                                     "isStatic": false,
-                                    "lastClassName": "dLqXgG",
+                                    "lastClassName": "c3",
                                     "rules": Array [
                                       "
   @keyframes rotating {
@@ -400,7 +440,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                                   "displayName": "styled.div",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-dNLxif",
+                                  "styledComponentId": "sc-jwKygS",
                                   "target": "div",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],
@@ -411,7 +451,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                               size={36}
                             >
                               <div
-                                className="sc-dNLxif dLqXgG"
+                                className="c3"
                                 size={36}
                               >
                                 <Icon
@@ -429,9 +469,9 @@ exports[`ConstructionFilesContainer should render 1`] = `
                                           "$$typeof": Symbol(react.forward_ref),
                                           "attrs": Array [],
                                           "componentStyle": ComponentStyle {
-                                            "componentId": "sc-ifAKCX",
+                                            "componentId": "sc-bxivhb",
                                             "isStatic": false,
-                                            "lastClassName": "kBatGK",
+                                            "lastClassName": "c4",
                                             "rules": Array [
                                               "
   display: ",
@@ -452,8 +492,9 @@ exports[`ConstructionFilesContainer should render 1`] = `
                                               ";
 
   & > svg {
-    width: inherit;
-    height: inherit;
+    ",
+                                              [Function],
+                                              "
   }
   
   ",
@@ -465,7 +506,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                                           "displayName": "styled.span",
                                           "foldedComponentIds": Array [],
                                           "render": [Function],
-                                          "styledComponentId": "sc-ifAKCX",
+                                          "styledComponentId": "sc-bxivhb",
                                           "target": "span",
                                           "toString": [Function],
                                           "warnTooManyClasses": [Function],
@@ -476,7 +517,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                                       size={36}
                                     >
                                       <span
-                                        className="sc-ifAKCX kBatGK"
+                                        className="c4"
                                         color="secondary"
                                         size={36}
                                       >
@@ -509,5 +550,5 @@ exports[`ConstructionFilesContainer should render 1`] = `
       </ConstructionFilesContainer>
     </Connect(ConstructionFilesContainer)>
   </ThemeProvider>
-</DefaultThemeProvider>
+</ThemeProvider>
 `;

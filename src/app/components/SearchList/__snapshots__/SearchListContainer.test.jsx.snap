@@ -11,6 +11,16 @@ exports[`SearchListContainer should render the container with the basic properti
   hasLoadMore={false}
   limit={1}
   searchResults={Array []}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
   userScopes={Array []}
 />
 `;

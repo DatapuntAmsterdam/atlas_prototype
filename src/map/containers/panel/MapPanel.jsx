@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ReactComponent as ChevronUp } from '@datapunt/asc-assets/lib/Icons/ChevronUp.svg'
+import { ChevronUp } from '@datapunt/asc-assets'
 import MapLayers from '../../components/layers/MapLayers'
 import MapLegend from '../../components/legend/MapLegend'
 import MapPanelHandle from '../../components/panel-handle/MapPanelHandle'

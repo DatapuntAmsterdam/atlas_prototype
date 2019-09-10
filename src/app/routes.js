@@ -56,7 +56,7 @@ export const routing = {
   },
   datasetDetail: {
     title: 'Dataset',
-    path: `/${MAIN_PATHS.DATASETS}/:id/`,
+    path: `/${MAIN_PATHS.DATASETS}/:id/:title/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATASET_DETAIL}`,
     page: PAGES.DATASET_DETAIL,
   },
@@ -90,6 +90,18 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.CONSTRUCTION_FILE}`,
     useHooks: true, // indicate to skip legacy documentHead and piwik middleware
     page: PAGES.CONSTRUCTION_FILE,
+  },
+  articleDetail: {
+    title: 'Artikel',
+    path: `/${MAIN_PATHS.ARTICLES}/artikel/:id/:slug/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLE_DETAIL}`,
+    page: PAGES.ARTICLE_DETAIL,
+  },
+  articles: {
+    title: 'Artikelen',
+    path: `/${MAIN_PATHS.ARTICLES}/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLES}`,
+    page: PAGES.ARTICLES,
   },
   nieuws: {
     title: 'Nieuws',
@@ -181,18 +193,6 @@ export const routing = {
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_DETAIL}`,
     page: PAGES.DATA_DETAIL,
   },
-  articles: {
-    title: 'Artikelen',
-    path: `/${MAIN_PATHS.ARTICLES}/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLES}`,
-    page: PAGES.ARTICLES,
-  },
-  articleDetail: {
-    title: 'Artikel',
-    path: `/${MAIN_PATHS.ARTICLES}/artikel/:id/:slug`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLE_DETAIL}`,
-    page: PAGES.ARTICLE_DETAIL,
-  },
   articleSearch: {
     title: 'Artikelen zoekresultaten',
     path: `/${MAIN_PATHS.ARTICLES}/zoek/`,
@@ -207,7 +207,7 @@ export const routing = {
   },
   publicationDetail: {
     title: 'Publicatie',
-    path: `/${MAIN_PATHS.PUBLICATIONS}/publicatie/:id/:slug`,
+    path: `/${MAIN_PATHS.PUBLICATIONS}/publicatie/:id/:slug/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.PUBLICATION_DETAIL}`,
     page: PAGES.PUBLICATION_DETAIL,
   },
@@ -225,11 +225,21 @@ export const routing = {
   },
   specialDetail: {
     title: 'Special',
-    path: `/${MAIN_PATHS.SPECIALS}/:type/:id/:slug`,
+    path: `/${MAIN_PATHS.SPECIALS}/:type/:id/:slug/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.SPECIAL_DETAIL}`,
     page: PAGES.SPECIAL_DETAIL,
   },
 }
+
+/**
+ * We need to check if the route paths have a trailing slash
+ */
+Object.values(routing).forEach(value => {
+  if (value.path.substring(value.path.length - 1) !== '/') {
+    // eslint-disable-next-line no-console
+    console.warn(`Route for "${value.title}" doesn't have trailing slash`)
+  }
+})
 
 // e.g. { home: '/' }, to be used by redux-first-router/connectRoutes
 const routes = Object.keys(routing).reduce((acc, key) => {

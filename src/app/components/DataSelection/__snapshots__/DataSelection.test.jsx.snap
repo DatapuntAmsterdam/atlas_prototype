@@ -5,9 +5,57 @@ exports[`DataSelection should render LoadingIndicator 1`] = `
   className="c-data-selection c-dashboard__content"
 >
   <div
-    className="qa-data-selection-content"
+    className="c-data-selection-content qa-data-selection-content"
   >
     <AngularWrapper
+      angularInstance={
+        Object {
+          "$$csp": [Function],
+          "$$encodeUriQuery": [Function],
+          "$$encodeUriSegment": [Function],
+          "$$minErr": [Function],
+          "$$stringify": [Function],
+          "$interpolateMinErr": [Function],
+          "bind": [Function],
+          "bootstrap": [Function],
+          "callbacks": Object {
+            "$$counter": 0,
+          },
+          "copy": [Function],
+          "element": [Function],
+          "equals": [Function],
+          "errorHandlingConfig": [Function],
+          "extend": [Function],
+          "forEach": [Function],
+          "fromJson": [Function],
+          "getTestability": [Function],
+          "identity": [Function],
+          "injector": [Function],
+          "isArray": [Function],
+          "isDate": [Function],
+          "isDefined": [Function],
+          "isElement": [Function],
+          "isFunction": [Function],
+          "isNumber": [Function],
+          "isObject": [Function],
+          "isString": [Function],
+          "isUndefined": [Function],
+          "lowercase": [Function],
+          "merge": [Function],
+          "module": [Function],
+          "noop": [Function],
+          "reloadWithDebugInfo": [Function],
+          "toJson": [Function],
+          "uppercase": [Function],
+          "version": Object {
+            "codeName": "fiery-basilisk",
+            "dot": 9,
+            "full": "1.6.9",
+            "major": 1,
+            "minor": 6,
+          },
+        }
+      }
       bindings={
         Object {
           "availableFilters": undefined,
@@ -47,9 +95,57 @@ exports[`DataSelection should render as gesplitst 1`] = `
   className="c-data-selection c-dashboard__content"
 >
   <div
-    className="qa-data-selection-content"
+    className="c-data-selection-content qa-data-selection-content"
   >
     <AngularWrapper
+      angularInstance={
+        Object {
+          "$$csp": [Function],
+          "$$encodeUriQuery": [Function],
+          "$$encodeUriSegment": [Function],
+          "$$minErr": [Function],
+          "$$stringify": [Function],
+          "$interpolateMinErr": [Function],
+          "bind": [Function],
+          "bootstrap": [Function],
+          "callbacks": Object {
+            "$$counter": 0,
+          },
+          "copy": [Function],
+          "element": [Function],
+          "equals": [Function],
+          "errorHandlingConfig": [Function],
+          "extend": [Function],
+          "forEach": [Function],
+          "fromJson": [Function],
+          "getTestability": [Function],
+          "identity": [Function],
+          "injector": [Function],
+          "isArray": [Function],
+          "isDate": [Function],
+          "isDefined": [Function],
+          "isElement": [Function],
+          "isFunction": [Function],
+          "isNumber": [Function],
+          "isObject": [Function],
+          "isString": [Function],
+          "isUndefined": [Function],
+          "lowercase": [Function],
+          "merge": [Function],
+          "module": [Function],
+          "noop": [Function],
+          "reloadWithDebugInfo": [Function],
+          "toJson": [Function],
+          "uppercase": [Function],
+          "version": Object {
+            "codeName": "fiery-basilisk",
+            "dot": 9,
+            "full": "1.6.9",
+            "major": 1,
+            "minor": 6,
+          },
+        }
+      }
       bindings={
         Object {
           "availableFilters": undefined,
@@ -87,6 +183,54 @@ exports[`DataSelection should render as gesplitst 1`] = `
               content={Object {}}
             />
             <AngularWrapper
+              angularInstance={
+                Object {
+                  "$$csp": [Function],
+                  "$$encodeUriQuery": [Function],
+                  "$$encodeUriSegment": [Function],
+                  "$$minErr": [Function],
+                  "$$stringify": [Function],
+                  "$interpolateMinErr": [Function],
+                  "bind": [Function],
+                  "bootstrap": [Function],
+                  "callbacks": Object {
+                    "$$counter": 0,
+                  },
+                  "copy": [Function],
+                  "element": [Function],
+                  "equals": [Function],
+                  "errorHandlingConfig": [Function],
+                  "extend": [Function],
+                  "forEach": [Function],
+                  "fromJson": [Function],
+                  "getTestability": [Function],
+                  "identity": [Function],
+                  "injector": [Function],
+                  "isArray": [Function],
+                  "isDate": [Function],
+                  "isDefined": [Function],
+                  "isElement": [Function],
+                  "isFunction": [Function],
+                  "isNumber": [Function],
+                  "isObject": [Function],
+                  "isString": [Function],
+                  "isUndefined": [Function],
+                  "lowercase": [Function],
+                  "merge": [Function],
+                  "module": [Function],
+                  "noop": [Function],
+                  "reloadWithDebugInfo": [Function],
+                  "toJson": [Function],
+                  "uppercase": [Function],
+                  "version": Object {
+                    "codeName": "fiery-basilisk",
+                    "dot": 9,
+                    "full": "1.6.9",
+                    "major": 1,
+                    "minor": 6,
+                  },
+                }
+              }
               bindings={
                 Object {
                   "currentPage": 1,
@@ -116,9 +260,57 @@ exports[`DataSelection should render as volledig 1`] = `
   className="c-data-selection c-dashboard__content"
 >
   <div
-    className="qa-data-selection-content"
+    className="c-data-selection-content qa-data-selection-content"
   >
     <AngularWrapper
+      angularInstance={
+        Object {
+          "$$csp": [Function],
+          "$$encodeUriQuery": [Function],
+          "$$encodeUriSegment": [Function],
+          "$$minErr": [Function],
+          "$$stringify": [Function],
+          "$interpolateMinErr": [Function],
+          "bind": [Function],
+          "bootstrap": [Function],
+          "callbacks": Object {
+            "$$counter": 0,
+          },
+          "copy": [Function],
+          "element": [Function],
+          "equals": [Function],
+          "errorHandlingConfig": [Function],
+          "extend": [Function],
+          "forEach": [Function],
+          "fromJson": [Function],
+          "getTestability": [Function],
+          "identity": [Function],
+          "injector": [Function],
+          "isArray": [Function],
+          "isDate": [Function],
+          "isDefined": [Function],
+          "isElement": [Function],
+          "isFunction": [Function],
+          "isNumber": [Function],
+          "isObject": [Function],
+          "isString": [Function],
+          "isUndefined": [Function],
+          "lowercase": [Function],
+          "merge": [Function],
+          "module": [Function],
+          "noop": [Function],
+          "reloadWithDebugInfo": [Function],
+          "toJson": [Function],
+          "uppercase": [Function],
+          "version": Object {
+            "codeName": "fiery-basilisk",
+            "dot": 9,
+            "full": "1.6.9",
+            "major": 1,
+            "minor": 6,
+          },
+        }
+      }
       bindings={
         Object {
           "availableFilters": undefined,
@@ -152,6 +344,54 @@ exports[`DataSelection should render as volledig 1`] = `
           className="u-col-sm--3 c-data-selection__available-filters"
         >
           <AngularWrapper
+            angularInstance={
+              Object {
+                "$$csp": [Function],
+                "$$encodeUriQuery": [Function],
+                "$$encodeUriSegment": [Function],
+                "$$minErr": [Function],
+                "$$stringify": [Function],
+                "$interpolateMinErr": [Function],
+                "bind": [Function],
+                "bootstrap": [Function],
+                "callbacks": Object {
+                  "$$counter": 0,
+                },
+                "copy": [Function],
+                "element": [Function],
+                "equals": [Function],
+                "errorHandlingConfig": [Function],
+                "extend": [Function],
+                "forEach": [Function],
+                "fromJson": [Function],
+                "getTestability": [Function],
+                "identity": [Function],
+                "injector": [Function],
+                "isArray": [Function],
+                "isDate": [Function],
+                "isDefined": [Function],
+                "isElement": [Function],
+                "isFunction": [Function],
+                "isNumber": [Function],
+                "isObject": [Function],
+                "isString": [Function],
+                "isUndefined": [Function],
+                "lowercase": [Function],
+                "merge": [Function],
+                "module": [Function],
+                "noop": [Function],
+                "reloadWithDebugInfo": [Function],
+                "toJson": [Function],
+                "uppercase": [Function],
+                "version": Object {
+                  "codeName": "fiery-basilisk",
+                  "dot": 9,
+                  "full": "1.6.9",
+                  "major": 1,
+                  "minor": 6,
+                },
+              }
+            }
             bindings={
               Object {
                 "activeFilters": Object {},
@@ -180,6 +420,54 @@ exports[`DataSelection should render as volledig 1`] = `
               content={Object {}}
             />
             <AngularWrapper
+              angularInstance={
+                Object {
+                  "$$csp": [Function],
+                  "$$encodeUriQuery": [Function],
+                  "$$encodeUriSegment": [Function],
+                  "$$minErr": [Function],
+                  "$$stringify": [Function],
+                  "$interpolateMinErr": [Function],
+                  "bind": [Function],
+                  "bootstrap": [Function],
+                  "callbacks": Object {
+                    "$$counter": 0,
+                  },
+                  "copy": [Function],
+                  "element": [Function],
+                  "equals": [Function],
+                  "errorHandlingConfig": [Function],
+                  "extend": [Function],
+                  "forEach": [Function],
+                  "fromJson": [Function],
+                  "getTestability": [Function],
+                  "identity": [Function],
+                  "injector": [Function],
+                  "isArray": [Function],
+                  "isDate": [Function],
+                  "isDefined": [Function],
+                  "isElement": [Function],
+                  "isFunction": [Function],
+                  "isNumber": [Function],
+                  "isObject": [Function],
+                  "isString": [Function],
+                  "isUndefined": [Function],
+                  "lowercase": [Function],
+                  "merge": [Function],
+                  "module": [Function],
+                  "noop": [Function],
+                  "reloadWithDebugInfo": [Function],
+                  "toJson": [Function],
+                  "uppercase": [Function],
+                  "version": Object {
+                    "codeName": "fiery-basilisk",
+                    "dot": 9,
+                    "full": "1.6.9",
+                    "major": 1,
+                    "minor": 6,
+                  },
+                }
+              }
               bindings={
                 Object {
                   "currentPage": 1,
@@ -222,9 +510,57 @@ exports[`DataSelection should render the container 1`] = `
   className="c-data-selection c-dashboard__content"
 >
   <div
-    className="qa-data-selection-content"
+    className="c-data-selection-content qa-data-selection-content"
   >
     <AngularWrapper
+      angularInstance={
+        Object {
+          "$$csp": [Function],
+          "$$encodeUriQuery": [Function],
+          "$$encodeUriSegment": [Function],
+          "$$minErr": [Function],
+          "$$stringify": [Function],
+          "$interpolateMinErr": [Function],
+          "bind": [Function],
+          "bootstrap": [Function],
+          "callbacks": Object {
+            "$$counter": 0,
+          },
+          "copy": [Function],
+          "element": [Function],
+          "equals": [Function],
+          "errorHandlingConfig": [Function],
+          "extend": [Function],
+          "forEach": [Function],
+          "fromJson": [Function],
+          "getTestability": [Function],
+          "identity": [Function],
+          "injector": [Function],
+          "isArray": [Function],
+          "isDate": [Function],
+          "isDefined": [Function],
+          "isElement": [Function],
+          "isFunction": [Function],
+          "isNumber": [Function],
+          "isObject": [Function],
+          "isString": [Function],
+          "isUndefined": [Function],
+          "lowercase": [Function],
+          "merge": [Function],
+          "module": [Function],
+          "noop": [Function],
+          "reloadWithDebugInfo": [Function],
+          "toJson": [Function],
+          "uppercase": [Function],
+          "version": Object {
+            "codeName": "fiery-basilisk",
+            "dot": 9,
+            "full": "1.6.9",
+            "major": 1,
+            "minor": 6,
+          },
+        }
+      }
       bindings={
         Object {
           "availableFilters": undefined,
@@ -276,9 +612,57 @@ exports[`DataSelection should show authorization message if user has no permissi
   className="c-data-selection c-dashboard__content"
 >
   <div
-    className="qa-data-selection-content"
+    className="c-data-selection-content qa-data-selection-content"
   >
     <AngularWrapper
+      angularInstance={
+        Object {
+          "$$csp": [Function],
+          "$$encodeUriQuery": [Function],
+          "$$encodeUriSegment": [Function],
+          "$$minErr": [Function],
+          "$$stringify": [Function],
+          "$interpolateMinErr": [Function],
+          "bind": [Function],
+          "bootstrap": [Function],
+          "callbacks": Object {
+            "$$counter": 0,
+          },
+          "copy": [Function],
+          "element": [Function],
+          "equals": [Function],
+          "errorHandlingConfig": [Function],
+          "extend": [Function],
+          "forEach": [Function],
+          "fromJson": [Function],
+          "getTestability": [Function],
+          "identity": [Function],
+          "injector": [Function],
+          "isArray": [Function],
+          "isDate": [Function],
+          "isDefined": [Function],
+          "isElement": [Function],
+          "isFunction": [Function],
+          "isNumber": [Function],
+          "isObject": [Function],
+          "isString": [Function],
+          "isUndefined": [Function],
+          "lowercase": [Function],
+          "merge": [Function],
+          "module": [Function],
+          "noop": [Function],
+          "reloadWithDebugInfo": [Function],
+          "toJson": [Function],
+          "uppercase": [Function],
+          "version": Object {
+            "codeName": "fiery-basilisk",
+            "dot": 9,
+            "full": "1.6.9",
+            "major": 1,
+            "minor": 6,
+          },
+        }
+      }
       bindings={
         Object {
           "availableFilters": undefined,

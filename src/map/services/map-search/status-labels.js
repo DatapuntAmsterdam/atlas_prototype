@@ -17,10 +17,22 @@ export const getStatusLabel = type => {
   return subTypesLabels[segment] ? subTypesLabels[segment] : ''
 }
 
-const statusCodes = ['18']
+export const NORMAL_PAND_STATUSSES = [
+  'Bouwvergunning verleend',
+  'Pand in gebruik (niet ingemeten)',
+  'Pand in gebruik',
+  'Verbouwing pand',
+  'Bouw gestart',
+]
+
+export const NORMAL_VBO_STATUSSES = [
+  'Verblijfsobject in gebruik (niet ingemeten)',
+  'Verblijfsobject in gebruik',
+  'Verbouwing verblijfsobject',
+]
 
 const shouldShowStatus = result =>
-  result.vbo_status && statusCodes.indexOf(result.vbo_status.code) > -1
+  result.vbo_status && !NORMAL_VBO_STATUSSES.includes(result.vbo_status.omschrijving)
 
 export const getStatusLabelAddress = result =>
   `${shouldShowStatus(result) ? `${result.vbo_status.omschrijving}` : ''}` +

@@ -77,7 +77,7 @@
 
         <dp-panel ng-if="!user.scopes.includes('HR/R')" is-panel-visible="true" can-close="true" type="warning">
             Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om vestigingen te bekijken.
-            Zie <dp-link-to-page class-name="c-link--light" />.
+            <dp-login-link></dp-login-link>
         </dp-panel>
 
         <dp-api-call
@@ -97,7 +97,7 @@
         <dp-panel is-panel-visible="!user.scopes.includes('BRK/RO')" type="warning" can-close="true">
             Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer gegevens te zien:
             zakelijke rechten en aantekeningen.
-            Zie <dp-link-to-page class-name="c-link--light" />.
+            <dp-login-link></dp-login-link>
         </dp-panel>
 
         <dp-api-call

@@ -35,7 +35,7 @@
                 >Lees verder op stelselpedia</a>
         </p>
     </dp-panel>
-    <dp-panel ng-if="vm.hasMetaData" is-panel-visible="vm.isVisible.meta" can-close="true" class-name="qa-metadata">
+    <dp-panel ng-if="vm.hasMetaData" is-panel-visible="vm.isVisible.meta" can-close="true" class-name="c-panel--offsets-below-page-title qa-metadata">
         <h3 class="c-panel__title">Metadata van {{vm.glossaryLabel | lowercase}}</h3>
         <dp-glossary-meta definition="{{vm.definition}}" api-data="vm.metaData"></dp-glossary-meta>
     </dp-panel>

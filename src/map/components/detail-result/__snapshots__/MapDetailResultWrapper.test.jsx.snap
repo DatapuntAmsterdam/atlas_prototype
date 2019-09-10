@@ -10,20 +10,28 @@ exports[`MapDetailResultWrapper should not render empty panoUrl 1`] = `
       map-detail-result__header--no-pano
     "
   >
-    <div
-      className="map-detail-result__header-container"
+    <button
+      className="map-detail-result__header-pano-button"
+      disabled={true}
+      onClick={[MockFunction]}
+      title="Geen Panoramabeeld beschikbaar"
+      type="button"
     >
-      <h1
-        className="map-detail-result__header-title"
+      <div
+        className="map-detail-result__header-container"
       >
-        title
-      </h1>
-      <h2
-        className="map-detail-result__header-subtitle"
-      >
-        subTitle
-      </h2>
-    </div>
+        <h1
+          className="map-detail-result__header-title"
+        >
+          title
+        </h1>
+        <h2
+          className="map-detail-result__header-subtitle"
+        >
+          subTitle
+        </h2>
+      </div>
+    </button>
   </header>
   <div
     className="map-detail-result__scroll-wrapper"
@@ -68,15 +76,23 @@ exports[`MapDetailResultWrapper should not render empty sub title 1`] = `
       map-detail-result__header--no-pano
     "
   >
-    <div
-      className="map-detail-result__header-container"
+    <button
+      className="map-detail-result__header-pano-button"
+      disabled={true}
+      onClick={[MockFunction]}
+      title="Geen Panoramabeeld beschikbaar"
+      type="button"
     >
-      <h1
-        className="map-detail-result__header-title"
+      <div
+        className="map-detail-result__header-container"
       >
-        title
-      </h1>
-    </div>
+        <h1
+          className="map-detail-result__header-title"
+        >
+          title
+        </h1>
+      </div>
+    </button>
   </header>
   <div
     className="map-detail-result__scroll-wrapper"
@@ -121,15 +137,23 @@ exports[`MapDetailResultWrapper should not render missing children 1`] = `
       map-detail-result__header--no-pano
     "
   >
-    <div
-      className="map-detail-result__header-container"
+    <button
+      className="map-detail-result__header-pano-button"
+      disabled={true}
+      onClick={[MockFunction]}
+      title="Geen Panoramabeeld beschikbaar"
+      type="button"
     >
-      <h1
-        className="map-detail-result__header-title"
+      <div
+        className="map-detail-result__header-container"
       >
-        title
-      </h1>
-    </div>
+        <h1
+          className="map-detail-result__header-title"
+        >
+          title
+        </h1>
+      </div>
+    </button>
   </header>
   <div
     className="map-detail-result__scroll-wrapper"
@@ -166,15 +190,23 @@ exports[`MapDetailResultWrapper should not render missing sub title 1`] = `
       map-detail-result__header--no-pano
     "
   >
-    <div
-      className="map-detail-result__header-container"
+    <button
+      className="map-detail-result__header-pano-button"
+      disabled={true}
+      onClick={[MockFunction]}
+      title="Geen Panoramabeeld beschikbaar"
+      type="button"
     >
-      <h1
-        className="map-detail-result__header-title"
+      <div
+        className="map-detail-result__header-container"
       >
-        title
-      </h1>
-    </div>
+        <h1
+          className="map-detail-result__header-title"
+        >
+          title
+        </h1>
+      </div>
+    </button>
   </header>
   <div
     className="map-detail-result__scroll-wrapper"
@@ -220,10 +252,7 @@ exports[`MapDetailResultWrapper should render everything 1`] = `
     "
   >
     <button
-      className="
-              map-detail-result__header-pano-button
-              map-detail-result__header-pano-button--enabled
-            "
+      className="map-detail-result__header-pano-button"
       disabled={false}
       onClick={[MockFunction]}
       title="Panoramabeeld tonen"
@@ -236,21 +265,21 @@ exports[`MapDetailResultWrapper should render everything 1`] = `
         src="panoUrl"
         width="438"
       />
+      <div
+        className="map-detail-result__header-container"
+      >
+        <h1
+          className="map-detail-result__header-title"
+        >
+          title
+        </h1>
+        <h2
+          className="map-detail-result__header-subtitle"
+        >
+          subTitle
+        </h2>
+      </div>
     </button>
-    <div
-      className="map-detail-result__header-container"
-    >
-      <h1
-        className="map-detail-result__header-title"
-      >
-        title
-      </h1>
-      <h2
-        className="map-detail-result__header-subtitle"
-      >
-        subTitle
-      </h2>
-    </div>
   </header>
   <div
     className="map-detail-result__scroll-wrapper"

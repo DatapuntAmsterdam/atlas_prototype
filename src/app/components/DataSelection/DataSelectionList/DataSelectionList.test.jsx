@@ -9,6 +9,7 @@ describe('DataSelectionList', () => {
     const store = configureMockStore()({})
     const component = shallow(
       <DataSelectionList
+        store={store}
         content={{
           body: [
             {
@@ -20,7 +21,6 @@ describe('DataSelectionList', () => {
         }}
         navigateToDetail={() => {}}
       />,
-      { context: { store } },
     ).dive()
 
     expect(component).toMatchSnapshot()

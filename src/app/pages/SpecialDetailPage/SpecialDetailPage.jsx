@@ -11,10 +11,14 @@ import { toSpecialDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 
 const SpecialDetailPage = ({ id }) => {
-  const { results, loading } = useFromCMS(id, cmsConfig.special)
+  const { fetchData, results, loading } = useFromCMS(cmsConfig.SPECIAL, id)
   const [iframeLoading, setIframeLoading] = React.useState(true)
   const [iframeHeight, setIframeHeight] = React.useState(0)
   const iframeRef = React.useRef(null)
+
+  React.useEffect(() => {
+    fetchData()
+  }, [id])
 
   const handleResize = () => {
     setIframeSize(setIframeHeight)
@@ -43,7 +47,7 @@ const SpecialDetailPage = ({ id }) => {
 
   const { field_iframe_link: iframeLink, field_slug: slug, field_special_type: type, title } =
     results || {}
-  const documentTitle = `Special: ${title}`
+  const documentTitle = title && `Special: ${title}`
   const linkAction = toSpecialDetail(id, type, slug)
 
   return (
@@ -52,7 +56,7 @@ const SpecialDetailPage = ({ id }) => {
         <Row>
           <ContentContainer>
             <Column wrap span={{ small: 12, medium: 12, big: 12, large: 12, xLarge: 12 }}>
-              {iframeLink && (
+              {iframeLink && iframeLink.uri && (
                 <iframe
                   src={iframeLink.uri}
                   title={title}

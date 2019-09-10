@@ -20,7 +20,7 @@
         <dp-panel is-panel-visible="!vm.user.scopes.includes('WKPB/RBDU')" type="warning" can-close="true">
             Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer gegevens te zien:
             documentnaam en link naar bestand.
-            Zie <dp-link-to-page class-name="c-link--light"></dp-link-to-page>.
+            <dp-login-link></dp-login-link>
         </dp-panel>
 
         <dp-api-call endpoint="{{vm.apiData.results.documenten.href}}" partial="wkpb/brondocument" user="vm.user"></dp-api-call>

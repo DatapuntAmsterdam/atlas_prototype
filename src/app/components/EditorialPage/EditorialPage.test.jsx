@@ -1,14 +1,14 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import EditorialPage from './EditorialPage'
-import useMatomo from '../../utils/useMatomo'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import Footer from '../Footer/Footer'
 
 jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')
 jest.mock('../../utils/useDocumentTitle')
-jest.mock('../../utils/useMatomo')
+jest.mock('@datapunt/matomo-tracker-react')
 jest.mock('../Footer/Footer')
 
 describe('EditorialPage', () => {
@@ -54,6 +54,6 @@ describe('EditorialPage', () => {
     component.setProps({ documentTitle: 'foo' })
 
     expect(mockSetDocumentTitle).toHaveBeenCalledWith('foo')
-    expect(mockTrackPageView).toHaveBeenCalledWith('foo')
+    expect(mockTrackPageView).toHaveBeenCalledWith({ documentTitle: 'foo' })
   })
 })

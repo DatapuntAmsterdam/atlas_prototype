@@ -95,12 +95,6 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
   >
     <fieldset>
       <Component
-        activeSuggestion={
-          Object {
-            "index": -1,
-          }
-        }
-        highlightQuery=""
         inputProps={
           Object {
             "autoCapitalize": "off",
@@ -112,7 +106,6 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
             "placeholder": "",
           }
         }
-        legendTitle=""
         onOpenSearchBarToggle={[Function]}
         onSuggestionSelection={[Function]}
         openSearchBarToggle={false}
@@ -289,15 +282,6 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
   >
     <fieldset>
       <Component
-        activeSuggestion={
-          Object {
-            "category": "Monumenten",
-            "index": 3,
-            "label": "Damrak 1",
-            "uri": "monumenten/monumenten/8e8ae1dd-78a2-4a5f-841d-1870631b7e33/",
-          }
-        }
-        highlightQuery="dam"
         inputProps={
           Object {
             "autoCapitalize": "off",
@@ -309,7 +293,6 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
             "placeholder": "",
           }
         }
-        legendTitle=""
         onOpenSearchBarToggle={[Function]}
         onSuggestionSelection={[Function]}
         openSearchBarToggle={false}
@@ -483,12 +466,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   >
     <fieldset>
       <Component
-        activeSuggestion={
-          Object {
-            "index": -1,
-          }
-        }
-        highlightQuery=""
         inputProps={
           Object {
             "autoCapitalize": "off",
@@ -500,7 +477,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
             "placeholder": "",
           }
         }
-        legendTitle=""
         onOpenSearchBarToggle={[Function]}
         onSuggestionSelection={[Function]}
         openSearchBarToggle={false}
@@ -674,12 +650,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   >
     <fieldset>
       <Component
-        activeSuggestion={
-          Object {
-            "index": -1,
-          }
-        }
-        highlightQuery=""
         inputProps={
           Object {
             "autoCapitalize": "off",
@@ -691,7 +661,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
             "placeholder": "",
           }
         }
-        legendTitle=""
         onOpenSearchBarToggle={[Function]}
         onSuggestionSelection={[Function]}
         openSearchBarToggle={false}
@@ -865,12 +834,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
   >
     <fieldset>
       <Component
-        activeSuggestion={
-          Object {
-            "index": -1,
-          }
-        }
-        highlightQuery=""
         inputProps={
           Object {
             "autoCapitalize": "off",
@@ -882,7 +845,6 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
             "placeholder": "",
           }
         }
-        legendTitle=""
         onOpenSearchBarToggle={[Function]}
         onSuggestionSelection={[Function]}
         openSearchBarToggle={false}

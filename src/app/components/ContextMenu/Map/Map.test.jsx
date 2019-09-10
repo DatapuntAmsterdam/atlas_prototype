@@ -24,9 +24,9 @@ describe('ContextMenu for Maps', () => {
   }
 
   const store = configureMockStore()({ ...initialState })
-  const component = shallow(<ContextMenu {...props} />, {
-    context: { store },
-  }).dive()
+  const component = shallow(<ContextMenu {...props} store={store} />)
+    .dive()
+    .dive()
 
   sharePage.mockImplementation(() => ({ type: 'action' }))
   showPrintMode.mockImplementation(() => ({ type: 'action' }))

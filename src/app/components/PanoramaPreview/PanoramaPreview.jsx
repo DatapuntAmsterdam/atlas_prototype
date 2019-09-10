@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { AngularWrapper } from 'react-angular'
+import angular from 'angular'
 import '../../angularModules'
 
 const PanoramaPreview = ({ panoramaPreview, isLoading }) => (
@@ -10,6 +11,7 @@ const PanoramaPreview = ({ panoramaPreview, isLoading }) => (
         moduleName="dpPanoramaThumbnailWrapper"
         component="dpPanoramaThumbnail"
         dependencies={['atlas']}
+        angularInstance={angular}
         bindings={{
           panorama: panoramaPreview,
           isLoading,

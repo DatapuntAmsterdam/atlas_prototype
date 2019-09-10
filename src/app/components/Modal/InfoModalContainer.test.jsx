@@ -25,9 +25,9 @@ describe('InfoModalContainer', () => {
   })
   it('should render the modal when there are results', () => {
     const store = configureMockStore()({ ui: { isEmbed: false } })
-    const component = shallow(<InfoModalContainer />, {
-      context: { store },
-    }).dive()
+    const component = shallow(<InfoModalContainer store={store} />)
+      .dive()
+      .dive()
 
     const modal = component.find('Modal')
     expect(modal.exists()).toBeTruthy()
@@ -35,9 +35,9 @@ describe('InfoModalContainer', () => {
 
   it('should always hide the modal on embed page', () => {
     const store = configureMockStore()({ ui: { isEmbed: true } })
-    const component = shallow(<InfoModalContainer />, {
-      context: { store },
-    }).dive()
+    const component = shallow(<InfoModalContainer store={store} />)
+      .dive()
+      .dive()
 
     const modal = component.find('Modal')
     expect(modal.exists()).toBeFalsy()
@@ -53,9 +53,9 @@ describe('InfoModalContainer', () => {
     }))
 
     const store = configureMockStore()({ ui: { isEmbed: false } })
-    const component = shallow(<InfoModalContainer />, {
-      context: { store },
-    }).dive()
+    const component = shallow(<InfoModalContainer store={store} />)
+      .dive()
+      .dive()
 
     const modal = component.find('Modal')
     expect(modal.exists()).toBeFalsy()

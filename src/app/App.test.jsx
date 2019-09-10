@@ -3,6 +3,8 @@ import { shallow } from 'enzyme'
 import configureMockStore from 'redux-mock-store'
 import App from './App'
 import { VIEW_MODE } from '../shared/ducks/ui/ui'
+import PAGES from './pages'
+import { ROUTER_NAMESPACE } from './routes'
 
 describe('App', () => {
   const initialState = {
@@ -19,12 +21,17 @@ describe('App', () => {
     error: {
       hassErrors: false,
     },
+    location: {
+      type: `${ROUTER_NAMESPACE}/${PAGES.DATA}`,
+    },
   }
 
   it('should render the homepage', () => {
     const store = configureMockStore()({ ...initialState })
 
-    const component = shallow(<App />, { context: { store } }).dive()
+    const component = shallow(<App store={store} />)
+      .dive()
+      .dive()
     expect(component).toMatchSnapshot()
   })
 
@@ -37,7 +44,9 @@ describe('App', () => {
       },
     })
 
-    const component = shallow(<App />, { context: { store } }).dive()
+    const component = shallow(<App store={store} />)
+      .dive()
+      .dive()
     expect(component).toMatchSnapshot()
   })
 })

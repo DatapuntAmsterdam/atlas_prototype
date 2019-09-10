@@ -81,7 +81,7 @@
     max-height: 200px;
     margin: 0;
     padding: 6px 16px 0;
-    transition: max-height .5s linear;
+    transition: max-height 0.5s linear;
     border-top: none;
     line-height: 20px;
     text-overflow: ellipsis;
@@ -94,4 +94,14 @@
 .c-key-value-list--in-panel {
   margin-right: -$button-size;
   margin-left: -$base-whitespace;
+}
+
+// Temporary, until the detail pages are refactored in DP-6691
+.c-key-value-list > div.c-key-value-item dt,
+.c-key-value-list > div.c-key-value-item dd {
+  border-top: 1px solid $secondary-gray20;
+}
+.c-key-value-list > div.c-key-value-item:first-of-type dt,
+.c-key-value-list > div.c-key-value-item:first-of-type dd {
+  border-top: none;
 }

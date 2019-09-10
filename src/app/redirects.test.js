@@ -4,6 +4,8 @@
 
 import resolveRedirects, { routesDictionary } from './redirects'
 
+jest.useFakeTimers()
+
 describe('redirects', () => {
   const { replace } = window.location
 
@@ -22,6 +24,9 @@ describe('redirects', () => {
     routesDictionary.forEach(route => {
       jsdom.reconfigure({ url: `https://www.someurl.com${route.from}` })
       resolveRedirects()
+
+      jest.runAllTimers() // mocks the timeout that try to prevent cancelling the Matomo requests
+
       expect(window.location.replace).toHaveBeenCalledWith(route.to)
     })
   })
@@ -33,6 +38,9 @@ describe('redirects', () => {
 
     jsdom.reconfigure({ url: 'https://www.someurl.com/foo/bar' })
     resolveRedirects()
+
+    jest.runAllTimers() // mocks the timeout that try to prevent cancelling the Matomo requests
+
     expect(window.location.replace).not.toHaveBeenCalled()
   })
 })

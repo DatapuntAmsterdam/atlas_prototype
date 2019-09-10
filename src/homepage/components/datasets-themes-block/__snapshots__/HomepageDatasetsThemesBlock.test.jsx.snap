@@ -8,6 +8,11 @@ exports[`HomepageDatasetsThemesBlock.test should render 1`] = `
   hasTallDescription={false}
   linkAction={
     Object {
+      "meta": Object {
+        "additionalParams": null,
+        "forceSaga": true,
+        "preserve": false,
+      },
       "type": "atlasRouter/DATASETS",
     }
   }

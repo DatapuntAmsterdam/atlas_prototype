@@ -1,4 +1,4 @@
-@import "../../../shared/styles/config";
+@import '../../../shared/styles/config';
 
 $suggestion-offset: $base-font-size;
 $clear-button-margin: 3px;
@@ -24,7 +24,7 @@ $clear-button-margin: 3px;
   &-container {
     float: left;
     position: relative;
-    width: calc(100% - #{$site-header-search-form-height + $base-whitespace * .5});
+    width: calc(100% - #{$site-header-search-form-height + $base-whitespace * 0.5});
   }
 
   &__input {
@@ -53,19 +53,22 @@ $clear-button-margin: 3px;
     }
 
     // sass-lint:disable no-vendor-prefixes no-css-comments
-    &:-ms-input-placeholder { /* IE11 */
+    &:-ms-input-placeholder {
+      /* IE11 */
       color: $secondary-gray60;
       font-weight: $normal-weight;
     }
 
-    &::-ms-input-placeholder { /* Edge */
+    &::-ms-input-placeholder {
+      /* Edge */
       // cannot change font attributes in edge here, so we have a lighter text color
       color: $secondary-gray40;
     }
 
     // sass-lint:enable no-vendor-prefixes no-css-comments
 
-    &::-ms-clear { //sass-lint:disable-line no-vendor-prefixes
+    &::-ms-clear {
+      //sass-lint:disable-line no-vendor-prefixes
       display: none;
     }
 
@@ -76,7 +79,7 @@ $clear-button-margin: 3px;
   }
 
   &__clear {
-    @include icon-sprite("icon-clear", $primary-dark, $primary-contrast);
+    @include icon-sprite('icon-clear', $primary-dark, $primary-contrast);
     cursor: pointer;
     height: $button-size - 1px;
     outline: none;
@@ -88,13 +91,13 @@ $clear-button-margin: 3px;
 
   &__submit {
     @include font-size($s-font);
-    @include icon-sprite("icon-search", $primary-light, $primary-light, $button-size);
+    @include icon-sprite('icon-search', $primary-light, $primary-light, $button-size);
     background-color: $primary-contrast;
     background-repeat: no-repeat;
     cursor: pointer;
     float: left;
     height: $site-header-search-form-height;
-    margin-left: $base-whitespace * .5;
+    margin-left: $base-whitespace * 0.5;
     width: $site-header-search-form-height;
 
     &:hover,
@@ -119,9 +122,9 @@ $clear-button-margin: 3px;
     border-top-width: 0;
     display: block;
     left: 0;
-    padding-bottom: $base-whitespace * .5;
+    padding-bottom: $base-whitespace * 0.5;
     position: absolute;
-    right: $site-header-search-form-height + $base-whitespace * .5;
+    right: $site-header-search-form-height + $base-whitespace * 0.5;
     top: $site-header-search-form-height - 3px;
 
     @media (max-width: 768px) {
@@ -153,7 +156,7 @@ $clear-button-margin: 3px;
       color: $primary-dark;
       cursor: pointer;
       display: block;
-      font-weight: $light-weight;
+      font-weight: $normal-weight;
       overflow: hidden;
       padding-bottom: $base-whitespace / 2;
       padding-top: $base-whitespace / 3;
@@ -168,7 +171,6 @@ $clear-button-margin: 3px;
         background-color: $secondary-gray10;
         font-weight: inherit;
       }
-
 
       &--row-height {
         display: table-cell;
@@ -186,7 +188,12 @@ $clear-button-margin: 3px;
       }
 
       .icon {
-        @include icon-sprite("icon-arrow-right", $primary-dark, $primary-dark, 2 * $base-whitespace + 2px);
+        @include icon-sprite(
+          'icon-arrow-right',
+          $primary-dark,
+          $primary-dark,
+          2 * $base-whitespace + 2px
+        );
         display: inline-block;
         height: 2 * $base-whitespace + 2px;
         margin-left: $base-whitespace / 2;
@@ -201,7 +208,6 @@ $clear-button-margin: 3px;
           padding-left: 3 * $base-whitespace - 2px;
         }
       }
-
     }
 
     &__highlight {

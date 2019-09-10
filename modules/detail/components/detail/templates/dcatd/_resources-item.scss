@@ -1,17 +1,17 @@
 /* sass-lint:disable property-sort-order */
 /* already in react sass lint style*/
-@import "./styles/config";
+@import './styles/config';
 
 .resources-item {
   font-size: $s-font-size;
-  font-weight: 400;
+  font-weight: $normal-weight;
   color: inherit;
   flex-grow: 1;
   position: relative;
   text-decoration: none;
 
   &__title {
-    font-weight: 900;
+    font-weight: $bold-weight;
     color: $brownish-grey;
     margin-bottom: 2px;
   }
@@ -37,7 +37,7 @@
     &::after {
       @extend %icon-arrow-right;
       bottom: -5px;
-      content: "";
+      content: '';
       display: inline-block;
       height: 35px;
       position: absolute;

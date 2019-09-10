@@ -11,6 +11,7 @@ import {
 import { getPanoramaPreview } from '../../../panorama/ducks/preview/panorama-preview'
 import LocationSearch from './LocationSearch'
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
   isLoading: isSearchLoading(state),
   user: getUser(state),

@@ -68,7 +68,7 @@ class MapContainer extends React.Component {
 
     const { leafletInstance } = this.state
     return (
-      <div className="qa-map">
+      <div className="c-map__wrapper">
         {/* Note: map must not be unmounted when showing the iframe */}
         {/* as it will reset the map's state */}
         <div className={`c-map c-map--drawing-mode-${drawMode} qa-map-container`}>

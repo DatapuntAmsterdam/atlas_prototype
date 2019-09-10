@@ -1,8 +1,9 @@
+/* eslint-disable no-case-declarations */
 export const REDUCER_KEY = 'ui'
 export const SET_BACKDROP = `${REDUCER_KEY}/SET_BACKDROP`
 
 export const initialState = {
-  nrOfBackdropTriggers: 0,
+  backdropKeys: [],
 }
 
 export default (state = initialState, action) => {
@@ -11,16 +12,13 @@ export default (state = initialState, action) => {
     // We do this so other triggers of show / hide backdrops won't overrule others while the
     // backdrop is active
     case SET_BACKDROP:
+      const { key, open } = action.payload
       return {
         ...state,
-        // eslint-disable-next-line no-nested-ternary
-        nrOfBackdropTriggers: action.payload
-          ? state.nrOfBackdropTriggers + 1
-          : state.nrOfBackdropTriggers
-          ? state.nrOfBackdropTriggers - 1
-          : 0,
+        backdropKeys: state.backdropKeys.includes(key)
+          ? state.backdropKeys.filter(backdropKey => (!open ? backdropKey !== key : backdropKey))
+          : [...state.backdropKeys, ...(open ? [key] : [])],
       }
-
     default:
       return state
   }

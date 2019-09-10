@@ -7,7 +7,14 @@
         <dp-glossary-header
             heading="{{apiData.results._display}}"
             definition="NUMMERAANDUIDING"
-            is-emphasized="apiData.results.status.code === '18'"
+            is-emphasized="
+            !apiData.results.ligplaats &&
+            !apiData.results.ligplaatsidentificatie &&
+            !apiData.results.standplaats &&
+            !apiData.results.standplaatsidentificatie &&
+            apiData.results.status.omschrijving !== 'Verblijfsobject in gebruik (niet ingemeten)' &&
+              apiData.results.status.omschrijving !== 'Verblijfsobject in gebruik' &&
+              apiData.results.status.omschrijving !== 'Verbouwing verblijfsobject'"
             meta-data="apiData">
         </dp-glossary-header>
 
@@ -17,8 +24,9 @@
               !apiData.results.ligplaatsidentificatie &&
               !apiData.results.standplaats &&
               !apiData.results.standplaatsidentificatie &&
-              apiData.results.status.code !== '20' &&
-              apiData.results.status.code !== '21'"
+              apiData.results.status.omschrijving !== 'Verblijfsobject in gebruik (niet ingemeten)' &&
+              apiData.results.status.omschrijving !== 'Verblijfsobject in gebruik' &&
+              apiData.results.status.omschrijving !== 'Verbouwing verblijfsobject'"
             is-panel-visible="true"
             class-name="c-panel--offsets-below-page-title"
             type="danger">

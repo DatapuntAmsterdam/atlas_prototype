@@ -25,9 +25,14 @@ describe('MapType rendering', () => {
     ],
     aerial: [
       {
+        value: 'lf2019',
+        label: 'Luchtfoto 2019',
+        selected: true,
+        urlTemplate: 'https://{s}.data.amsterdam.nl/lufo2019_RD/{z}/{x}/{y}.jpeg',
+      },
+      {
         value: 'lf2018',
         label: 'Luchtfoto 2018',
-        selected: true,
         urlTemplate: 'https://{s}.data.amsterdam.nl/lufo2018_RD/{z}/{x}/{y}.jpeg',
       },
       {

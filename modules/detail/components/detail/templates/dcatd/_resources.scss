@@ -1,12 +1,12 @@
 /* sass-lint:disable property-sort-order */
 /* already in react sass lint style*/
-@import "./styles/config";
+@import './styles/config';
 
 .resources {
   font-size: $s-font-size;
-  font-weight: 400;
+  font-weight: $normal-weight;
 
-  &-button  {
+  &-button {
     background-color: $white;
     border: 1px solid $pinkish-grey;
     height: 33px;
@@ -15,7 +15,8 @@
     &-new {
       @extend %icon-plus;
 
-      &:hover { // sass-lint:disable-line nesting-depth
+      &:hover {
+        // sass-lint:disable-line nesting-depth
         @extend %icon-plus-white;
       }
     }
@@ -23,7 +24,8 @@
     &-edit {
       @extend %icon-edit;
 
-      &:hover { // sass-lint:disable-line nesting-depth
+      &:hover {
+        // sass-lint:disable-line nesting-depth
         @extend %icon-edit-white;
       }
     }
@@ -51,7 +53,7 @@
         text-align: left;
       }
 
-      .resources-button-new  {
+      .resources-button-new {
         align-self: center;
       }
     }
@@ -82,10 +84,10 @@
         font-style: italic;
         margin: 0;
         padding: 22px 0;
-        text-align:  center;
+        text-align: center;
 
         &::before {
-          content: "Nog geen resources van dit type";
+          content: 'Nog geen resources van dit type';
         }
       }
     }

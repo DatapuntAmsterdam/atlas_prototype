@@ -55,9 +55,9 @@ describe('DataSelection', () => {
 
   it('should render the container', () => {
     const store = configureMockStore()({ ...initialState })
-    const component = shallow(<DataSelectionContainer />, {
-      context: { store },
-    }).dive()
+    const component = shallow(<DataSelectionContainer store={store} />)
+      .dive()
+      .dive()
     expect(component).toMatchSnapshot()
   })
 

@@ -2,6 +2,7 @@
 import { ENVIRONMENTS } from '../../../shared/environment'
 
 export const MATOMO_CONFIG = {
+  BASE_URL: 'https://analytics.data.amsterdam.nl/',
   [ENVIRONMENTS.PRODUCTION]: {
     SITE_ID: 1,
   },

@@ -12,7 +12,7 @@
           class-name="c-panel--offsets-below-page-title"
           type="warning">
             Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer gegevens te zien: type, architect en opdrachtgever, bouwjaar, oorspronkelijke functie, beschrijving en redengevende omschrijving.
-            Zie <dp-link-to-page class-name="c-link--light"></dp-link-to-page>.
+            <dp-login-link></dp-login-link>
         </dp-panel>
 
         <dl class="c-key-value-list">
@@ -29,7 +29,7 @@
             <dt>Opdrachtgever bouw</dt>
             <dd>{{ vm.apiData.results.opdrachtgever_bouw_monument }}</dd>
             <dt>Bouwjaar start bouwperiode</dt>
-            <dd>{{ bouwjaar_start_bouwperiode_monument }}</dd>
+            <dd>{{ vm.apiData.results.bouwjaar_start_bouwperiode_monument }}</dd>
             <dt>Oorspronkelijke functie</dt>
             <dd ng-if-end>{{ vm.apiData.results.oorspronkelijke_functie_monument }}</dd>
             <dt>In onderzoek</dt>

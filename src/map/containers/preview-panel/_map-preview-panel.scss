@@ -8,7 +8,7 @@ $button-height: 24px;
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  font-weight: 400;
+  font-weight: $normal-weight;
   margin-bottom: $map-preview-panel-bottom;
   margin-left: auto;
   margin-right: $container-whitespace;
@@ -42,19 +42,21 @@ $button-height: 24px;
     outline: none;
     width: $button-height;
 
-
     &:hover,
     &:focus {
-      .map-preview-panel__button-icon--close { //sass-lint:disable-line nesting-depth
-        @include icon-sprite("icon-clear", $primary-dark, $primary-dark, $button-height);
+      .map-preview-panel__button-icon--close {
+        //sass-lint:disable-line nesting-depth
+        @include icon-sprite('icon-clear', $primary-dark, $primary-dark, $button-height);
       }
 
-      .map-preview-panel__button-icon--maximize { //sass-lint:disable-line nesting-depth
-        @include icon-sprite("icon-maximize", $primary-dark, $primary-dark, $button-height);
+      .map-preview-panel__button-icon--maximize {
+        //sass-lint:disable-line nesting-depth
+        @include icon-sprite('icon-maximize', $primary-dark, $primary-dark, $button-height);
       }
 
-      .map-preview-panel__button-icon--plus { //sass-lint:disable-line nesting-depth
-        @include icon-sprite("icon-plus", $primary-contrast, $primary-contrast, $button-height);
+      .map-preview-panel__button-icon--plus {
+        //sass-lint:disable-line nesting-depth
+        @include icon-sprite('icon-plus', $primary-contrast, $primary-contrast, $button-height);
       }
     }
 
@@ -67,7 +69,8 @@ $button-height: 24px;
       &:focus {
         background-color: transparent !important; //override %hover-focus-button
 
-        .map-preview-panel__button-label { //sass-lint:disable-line nesting-depth
+        .map-preview-panel__button-label {
+          //sass-lint:disable-line nesting-depth
           color: $primary-contrast;
           text-decoration: underline;
         }
@@ -76,7 +79,7 @@ $button-height: 24px;
       .map-preview-panel__button-label {
         color: $secondary-gray60;
         font-size: $xs-font-size;
-        font-weight: 900;
+        font-weight: $bold-weight;
       }
     }
 
@@ -86,17 +89,17 @@ $button-height: 24px;
       width: $button-height;
 
       &--close {
-        @include icon-sprite("icon-clear", $secondary-gray60, $primary-dark, $button-height);
+        @include icon-sprite('icon-clear', $secondary-gray60, $primary-dark, $button-height);
         background-color: $primary-light;
       }
 
       &--maximize {
-        @include icon-sprite("icon-maximize", $secondary-gray60, $primary-dark, $button-height);
+        @include icon-sprite('icon-maximize', $secondary-gray60, $primary-dark, $button-height);
         background-color: $primary-light;
       }
 
       &--plus {
-        @include icon-sprite("icon-plus", $secondary-gray60, $primary-dark, $button-height);
+        @include icon-sprite('icon-plus', $secondary-gray60, $primary-dark, $button-height);
         background-color: $primary-light;
       }
     }
@@ -110,7 +113,8 @@ $button-height: 24px;
     min-height: 0; // NB: firefox fix https://stackoverflow.com/a/28639686
 
     // IE FIX
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { //sass-lint:disable-line no-vendor-prefixes
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      //sass-lint:disable-line no-vendor-prefixes
       -ms-flex: 0 0 auto; //sass-lint:disable-line no-vendor-prefixes
       -ms-flex-negative: 0; //sass-lint:disable-line no-vendor-prefixes
     }
@@ -137,7 +141,7 @@ $button-height: 24px;
       &::before {
         border-right: $map-preview-panel-max-width solid $primary-light;
         bottom: 0;
-        content: "";
+        content: '';
         display: block;
         left: 0;
         position: absolute;

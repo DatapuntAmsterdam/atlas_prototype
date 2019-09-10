@@ -1,329 +1,85 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { endpointTypes } from '../../services/map-detail'
-import MapDetailAdressenLigplaats from './adressen/MapDetailAdressenLigplaats'
-import MapDetailAdressenOpenbareRuimte from './adressen/MapDetailAdressenOpenbareRuimte'
-import MapDetailAdressenPand from './adressen/MapDetailAdressenPand'
-import MapDetailAdressenStandplaats from './adressen/MapDetailAdressenStandplaats'
-import MapDetailAdressenVerblijfsobject from './adressen/MapDetailAdressenVerblijfsobject'
-import MapDetailBedrijfsinvesteringszone from './MapDetailBedrijfsinvesteringszone'
-import MapDetailBekendmaking from './MapDetailBekendmaking'
-import MapDetailExplosievenGevrijwaardGebied from './explosieven/MapDetailExplosievenGevrijwaardGebied'
-import MapDetailExplosievenInslag from './explosieven/MapDetailExplosievenInslag'
-import MapDetailExplosievenUitgevoerdOnderzoek from './explosieven/MapDetailExplosievenUitgevoerdOnderzoek'
-import MapDetailExplosievenVerdachtGebied from './explosieven/MapDetailExplosievenVerdachtGebied'
-import MapDetailEvenement from './MapDetailEvenement'
-import MapDetailGebiedenBouwblok from './gebieden/MapDetailGebiedenBouwblok'
-import MapDetailGebiedenBuurt from './gebieden/MapDetailGebiedenBuurt'
-import MapDetailGebiedenGebiedsgerichtWerken from './gebieden/MapDetailGebiedenGebiedsgerichtWerken'
-import MapDetailGebiedenGrootstedelijk from './gebieden/MapDetailGebiedenGrootstedelijk'
-import MapDetailGebiedenStadsdeel from './gebieden/MapDetailGebiedenStadsdeel'
-import MapDetailGebiedenUnesco from './gebieden/MapDetailGebiedenUnesco'
-import MapDetailGebiedenWijk from './gebieden/MapDetailGebiedenWijk'
-import MapDetailGrondexploitatie from './MapDetailGrondexploitatie'
-import MapDetailKadastraalObject from './MapDetailKadastraalObject'
-import MapDetailMeetbout from './MapDetailMeetbout'
-import MapDetailMonument from './MapDetailMonument'
-import MapDetailNapPeilmerk from './MapDetailNapPeilmerk'
-import MapDetailOplaadpunt from './MapDetailOplaadpunt'
-import MapDetailParkeervak from './MapDetailParkeervak'
-import MapDetailParkeerzone from './MapDetailParkeerzone'
-import MapDetailParkeerzoneUitz from './MapDetailParkeerzoneUitz'
-import MapDetailVastgoed from './MapDetailVastgoed'
-import MapDetailVestiging from './MapDetailVestiging'
-import MapDetailWinkelgebied from './MapDetailWinkelgebied'
+import MapDetailResultItem from './MapDetailResultItem'
+import MapDetailResultWrapper from './MapDetailResultWrapper'
+import Notification from '../../../shared/components/notification/Notification'
 
-const MapDetailResult = ({ panoUrl, result, onMaximize, onPanoPreviewClick }) => {
-  switch (result.endpointType) {
-    case endpointTypes.adressenLigplaats:
-      return (
-        <MapDetailAdressenLigplaats
-          ligplaats={result}
-          onPanoPreviewClick={onPanoPreviewClick}
-          onMaximize={onMaximize}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.adressenNummeraanduiding:
-    case endpointTypes.adressenVerblijfsobject:
-      return (
-        <MapDetailAdressenVerblijfsobject
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          verblijfsobject={result}
-        />
-      )
-    case endpointTypes.adressenOpenbareRuimte:
-      return (
-        <MapDetailAdressenOpenbareRuimte
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          openbareRuimte={result}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.adressenPand:
-      return (
-        <MapDetailAdressenPand
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          pand={result}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.adressenStandplaats:
-      return (
-        <MapDetailAdressenStandplaats
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          standplaats={result}
-        />
-      )
-    case endpointTypes.bedrijfsinvesteringszone:
-      return (
-        <MapDetailBedrijfsinvesteringszone
-          bedrijfsinvesteringszone={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.bekendmakingen:
-      return (
-        <MapDetailBekendmaking
-          bekendmaking={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.explosievenGevrijwaardGebied:
-      return (
-        <MapDetailExplosievenGevrijwaardGebied
-          gevrijwaardGebied={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.explosievenInslag:
-      return (
-        <MapDetailExplosievenInslag
-          inslag={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.explosievenUitgevoerdOnderzoek:
-      return (
-        <MapDetailExplosievenUitgevoerdOnderzoek
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          uitgevoerdOnderzoek={result}
-        />
-      )
-    case endpointTypes.explosievenVerdachtGebied:
-      return (
-        <MapDetailExplosievenVerdachtGebied
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          verdachtGebied={result}
-        />
-      )
-    case endpointTypes.evenementen:
-      return (
-        <MapDetailEvenement
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          item={result}
-        />
-      )
-    case endpointTypes.gebiedenBouwblok:
-      return (
-        <MapDetailGebiedenBouwblok
-          bouwblok={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.gebiedenBuurt:
-      return (
-        <MapDetailGebiedenBuurt
-          buurt={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.gebiedenGebiedsgerichtWerken:
-      return (
-        <MapDetailGebiedenGebiedsgerichtWerken
-          gebiedsgerichtWerken={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.gebiedenGrootstedelijk:
-      return (
-        <MapDetailGebiedenGrootstedelijk
-          grootstedelijk={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.gebiedenStadsdeel:
-      return (
-        <MapDetailGebiedenStadsdeel
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          stadsdeel={result}
-        />
-      )
-    case endpointTypes.gebiedenUnesco:
-      return (
-        <MapDetailGebiedenUnesco
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          unesco={result}
-        />
-      )
-    case endpointTypes.gebiedenWijk:
-      return (
-        <MapDetailGebiedenWijk
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          wijk={result}
-        />
-      )
-    case endpointTypes.grondexploitatie:
-      return <MapDetailGrondexploitatie onMaximize={onMaximize} panoUrl={panoUrl} detail={result} />
-    case endpointTypes.kadastraalObject:
-      return (
-        <MapDetailKadastraalObject
-          kadastraalObject={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.meetbout:
-      return (
-        <MapDetailMeetbout
-          meetbout={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.monument:
-      return (
-        <MapDetailMonument
-          monument={result}
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-        />
-      )
-    case endpointTypes.napPeilmerk:
-      return (
-        <MapDetailNapPeilmerk
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          peilmerk={result}
-        />
-      )
-    case endpointTypes.oplaadpunten:
-      return (
-        <MapDetailOplaadpunt
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          oplaadpunt={result}
-        />
-      )
-    case endpointTypes.parkeervak:
-      return (
-        <MapDetailParkeervak
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          item={result}
-        />
-      )
-    case endpointTypes.parkeerzones:
-      return (
-        <MapDetailParkeerzone
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          item={result}
-        />
-      )
-    case endpointTypes.parkeerzonesUitz:
-      return (
-        <MapDetailParkeerzoneUitz
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          item={result}
-        />
-      )
-    case endpointTypes.vastgoed:
-      return (
-        <MapDetailVastgoed
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          item={result}
-        />
-      )
-    case endpointTypes.vestiging:
-      return (
-        <MapDetailVestiging
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          vestiging={result}
-        />
-      )
-    case endpointTypes.winkelgebied:
-      return (
-        <MapDetailWinkelgebied
-          onMaximize={onMaximize}
-          onPanoPreviewClick={onPanoPreviewClick}
-          panoUrl={panoUrl}
-          winkelgebied={result}
-        />
-      )
-    default:
-      return ''
-  }
-}
+const MapDetailResult = ({ panoUrl, result, onMaximize, onPanoPreviewClick }) => (
+  <MapDetailResultWrapper
+    panoUrl={panoUrl}
+    onMaximize={onMaximize}
+    onPanoPreviewClick={onPanoPreviewClick}
+    subTitle={result.subTitle}
+    title={result.title}
+  >
+    <>
+      {result.notifications &&
+        result.notifications.length &&
+        result.notifications.map(
+          (notification, index) =>
+            notification.value && (
+              <Notification
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                canClose={!!notification.canClose}
+                level={notification.level}
+              >
+                {notification.value}
+              </Notification>
+            ),
+        )}
+
+      <ul className="map-detail-result__list">
+        {result.items.length > 0 &&
+          result.items.map((item, index) =>
+            item.value && Array.isArray(item.value) ? (
+              <React.Fragment key={item.label}>
+                <h4 className="map-detail-result__category-title">{item.label}</h4>
+                {item.value.map((subItem, subIndex) => (
+                  <MapDetailResultItem
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={subIndex}
+                    hasMultiline={!!subItem.multiLine}
+                    link={subItem.link ? subItem.link : false}
+                    label={subItem.label}
+                    value={subItem.value}
+                    status={subItem.status}
+                  />
+                ))}
+              </React.Fragment>
+            ) : (
+              item.value && (
+                <MapDetailResultItem
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={index}
+                  hasMultiline={!!item.multiLine}
+                  link={item.link ? item.link : false}
+                  label={item.label}
+                  value={item.value}
+                  status={item.status}
+                />
+              )
+            ),
+          )}
+      </ul>
+    </>
+  </MapDetailResultWrapper>
+)
 
 MapDetailResult.defaultProps = {
   panoUrl: '',
-  result: {},
 }
 
 MapDetailResult.propTypes = {
   panoUrl: PropTypes.string,
+  result: PropTypes.shape({
+    title: PropTypes.string,
+    subTitle: PropTypes.string,
+    items: PropTypes.arrayOf(PropTypes.shape({})),
+  }).isRequired,
   onMaximize: PropTypes.func.isRequired,
   onPanoPreviewClick: PropTypes.func.isRequired,
-  result: PropTypes.shape({}),
 }
 
 export default MapDetailResult

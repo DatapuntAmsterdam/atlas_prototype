@@ -31,9 +31,9 @@ describe('DetailContainer', () => {
 
   it('should render', () => {
     const store = configureMockStore()({ ui: { isPrintMode: false } })
-    const component = shallow(<DetailContainer />, {
-      context: { store },
-    }).dive()
+    const component = shallow(<DetailContainer store={store} />)
+      .dive()
+      .dive()
     expect(component).toMatchSnapshot()
   })
 })

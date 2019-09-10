@@ -1,19 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Button,
-  Divider,
-  IconButton,
-  ListItem,
-  Modal,
-  TopBar,
-  Heading,
-  Paragraph,
-  Link,
-} from '@datapunt/asc-ui/lib/index'
-import { ReactComponent as Close } from '@datapunt/asc-assets/lib/Icons/Close.svg'
+import { Button, Divider, Modal, TopBar, Heading, Paragraph, Link } from '@datapunt/asc-ui'
+import { Close } from '@datapunt/asc-assets'
 import { routing } from '../../routes'
 import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
+import ModalBlock from './ModalBlock'
 
 const FEEDBACK_RECIPIENT = 'terugmelding.basisinformatie@amsterdam.nl'
 const FEEDBACK_SUBJECT = 'Terugmelding data.amsterdam.nl'
@@ -52,23 +43,21 @@ const FeedbackModalComponent = ({
     blurredNodeSelector="#root"
   >
     <TopBar>
-      <Heading as="h4">
+      <Heading $as="h4">
         Feedback
-        <IconButton onClick={handleClose}>
-          <Close />
-        </IconButton>
+        <Button variant="blank" type="button" size={30} onClick={handleClose} icon={<Close />} />
       </Heading>
     </TopBar>
     <Divider />
-    <ListItem>
-      <Heading as="h4">Onjuiste of ontbrekende gegevens?</Heading>
+    <ModalBlock>
+      <Heading $as="h4">Onjuiste of ontbrekende gegevens?</Heading>
       <Paragraph>
         We horen graag welke gegevens onjuist zijn of ontbreken. Voor medewerkers van de gemeente is
         dit &lsquo;terugmelden&lsquo; overigens verplicht.
       </Paragraph>
       <Button
-        as="a"
-        color="primary"
+        $as="a"
+        variant="primary"
         onClick={reportFeedbackAction}
         href={getMailtoLink(
           FEEDBACK_RECIPIENT,
@@ -78,27 +67,29 @@ const FeedbackModalComponent = ({
       >
         Onjuistheid terugmelden
       </Button>
-    </ListItem>
+    </ModalBlock>
     <Divider gutter />
-    <ListItem>
-      <Heading as="h4">Probleem of suggestie?</Heading>
+    <ModalBlock>
+      <Heading $as="h4">Probleem of suggestie?</Heading>
       <Paragraph>
         Als iets op deze pagina niet goed werkt, onduidelijk is of vragen oproept, geef het aan ons
         door.
       </Paragraph>
       <Button
-        as="a"
-        color="primary"
+        $as="a"
+        variant="primary"
         onClick={reportProblemAction}
         href={getMailtoLink(PROBLEM_RECIPIENT, PROBLEM_SUBJECT, PROBLEM_BODY(window.location.href))}
       >
         Probleem melden
       </Button>
-    </ListItem>
+    </ModalBlock>
     <Divider transparent />
-    <ListItem>
-      <Link href={routing.help.path}>Hulp nodig?</Link>
-    </ListItem>
+    <ModalBlock>
+      <Link linkType="inline" href={routing.help.path}>
+        Hulp nodig?
+      </Link>
+    </ModalBlock>
   </Modal>
 )
 

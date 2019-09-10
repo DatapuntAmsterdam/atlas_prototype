@@ -3,13 +3,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import OpenSeadragon from 'openseadragon'
 import PropTypes from 'prop-types'
-import { IconButton } from '@datapunt/asc-ui'
+import { Button } from '@datapunt/asc-ui'
 import { Close, Enlarge, Minimise } from '@datapunt/asc-assets'
 import ViewerControls from '../ViewerControls/ViewerControls'
 import { setCurrentFile } from '../../../shared/ducks/files/actions'
 import SHARED_CONFIG from '../../../shared/services/shared-config/shared-config'
 import './ImageViewer.scss'
 
+/* istanbul ignore next */
 const ImageViewer = ({ resetFileName, fileName, title, contextMenu }) => {
   const viewerRef = React.createRef()
   const [viewer, setViewerInstance] = React.useState(null)
@@ -48,23 +49,36 @@ const ImageViewer = ({ resetFileName, fileName, title, contextMenu }) => {
         <ViewerControls
           metaData={[title, fileName]}
           topRightComponent={
-            <IconButton
+            <Button
+              type="button"
+              variant="blank"
               title="Bouwtekening sluiten"
               size={32}
+              icon={<Close />}
               iconSize={15}
               onClick={resetFileName}
-            >
-              <Close />
-            </IconButton>
+            />
           }
           bottomRightComponent={
             <div>
-              <IconButton title="Inzoomen" size={32} iconSize={12} onClick={zoomIn}>
-                <Enlarge />
-              </IconButton>
-              <IconButton title="Uitzoomen" size={32} iconSize={12} onClick={zoomOut}>
-                <Minimise />
-              </IconButton>
+              <Button
+                type="button"
+                variant="blank"
+                title="Inzoomen"
+                size={32}
+                iconSize={12}
+                onClick={zoomIn}
+                icon={<Enlarge />}
+              />
+              <Button
+                type="button"
+                variant="blank"
+                title="Uitzoomen"
+                size={32}
+                iconSize={12}
+                onClick={zoomOut}
+                icon={<Minimise />}
+              />
             </div>
           }
           bottomLeftComponent={contextMenu}

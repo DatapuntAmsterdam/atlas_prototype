@@ -1,9 +1,6 @@
 import { createSelector } from 'reselect'
 import { REDUCER_KEY } from './constants'
-import { pageTypeToEndpoint } from '../../../map/services/map-detail'
-import { getViewMode, VIEW_MODE } from '../ui/ui'
-import PAGES from '../../../app/pages'
-import { getPage } from '../../../store/redux-first-router/selectors'
+import { pageTypeToEndpoint } from '../../../map/services/map-detail/map-detail'
 
 export const getDetail = state => state[REDUCER_KEY]
 export const getDetailGeometry = createSelector(
@@ -58,16 +55,4 @@ export const getDetailData = createSelector(
 export const getDetailFilterSelection = createSelector(
   getDetailObject,
   detailObject => detailObject && detailObject.filterSelection,
-)
-
-export const shouldShowFullScreen = createSelector(
-  getDetailGeometry,
-  getViewMode,
-  isDetailLoading,
-  getPage,
-  (geometry, viewMode, isLoading, currentPage) =>
-    !isLoading &&
-    (viewMode === VIEW_MODE.SPLIT || viewMode === VIEW_MODE.MAP) &&
-    !geometry &&
-    currentPage === PAGES.DATA_DETAIL,
 )

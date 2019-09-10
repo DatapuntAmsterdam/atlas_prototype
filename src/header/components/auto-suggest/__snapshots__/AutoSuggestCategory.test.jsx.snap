@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AutoSuggestCategory should render ellipsis when there are more then 3 results 1`] = `
+exports[`AutoSuggestCategory should render ellipsis when the returned results are less than the total results 1`] = `
 <div
   className="auto-suggest__dropdown-category"
 >
@@ -42,7 +42,7 @@ exports[`AutoSuggestCategory should render ellipsis when there are more then 3 r
 </div>
 `;
 
-exports[`AutoSuggestCategory should render no ellipsis when there are 3 or less results 1`] = `
+exports[`AutoSuggestCategory should render no ellipsis when there aren't more results returned than the total results 1`] = `
 <div
   className="auto-suggest__dropdown-category"
 >

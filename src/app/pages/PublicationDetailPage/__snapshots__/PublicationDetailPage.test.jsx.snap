@@ -70,11 +70,11 @@ exports[`PublicationDetailPage should render the publication when there are resu
             }
             wrap={false}
           >
-            <BlogContent>
-              <BlogHeader
+            <EditorialContent>
+              <EditorialHeader
                 title="This is a title"
               />
-              <BlogMetaList
+              <EditorialMetaList
                 fields={
                   Array [
                     Object {
@@ -96,7 +96,7 @@ exports[`PublicationDetailPage should render the publication when there are resu
                   ]
                 }
               />
-            </BlogContent>
+            </EditorialContent>
           </Column>
           <Column
             debug={false}
@@ -116,7 +116,6 @@ exports[`PublicationDetailPage should render the publication when there are resu
           >
             <DocumentCoverContentStyle
               description="Download PDF (file size)"
-              imageSrc="https://acc.cms.data.amsterdam.nl/undefined"
               onClick={[Function]}
             />
           </Column>
@@ -136,17 +135,11 @@ exports[`PublicationDetailPage should render the publication when there are resu
             }
             wrap={false}
           >
-            <BlogContent>
-              <Paragraph
-                hasLongText={true}
-                strong={true}
-              >
-                intro
-              </Paragraph>
+            <EditorialContent>
               <CustomHTMLBlock
-                body="body text"
+                body="<p>body text</p>"
               />
-            </BlogContent>
+            </EditorialContent>
           </Column>
         </Column>
       </Row>

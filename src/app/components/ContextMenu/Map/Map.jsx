@@ -3,11 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Print, Embed, Ellipsis, ChevronDown } from '@datapunt/asc-assets'
-import {
-  ContextMenu as ContextMenuComponent,
-  ContextMenuItem,
-  Icon,
-} from '@datapunt/asc-ui/lib/index'
+import { ContextMenu as ContextMenuComponent, ContextMenuItem, Icon } from '@datapunt/asc-ui'
 
 import socialItems from '../socialItems'
 import {

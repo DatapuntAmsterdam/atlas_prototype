@@ -20,6 +20,16 @@ exports[`HeaderSearchWrapper should render 1`] = `
   openDatasetSuggestion={[Function]}
   pageName=""
   prefillQuery=""
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [MockFunction],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
   suggestions={
     Array [
       Object {

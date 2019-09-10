@@ -159,7 +159,7 @@ describe('selectors', () => {
     })
   })
 
-  describe.skip('getGeometry', () => {
+  describe('getGeometry', () => {
     // TODO: refactor, remove or test
     it('should return geometry from detail', () => {
       const { currentEndpoint, byEndpoint } = mockParameters.mapDetail

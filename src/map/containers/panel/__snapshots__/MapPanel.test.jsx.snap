@@ -34,7 +34,7 @@ exports[`MapPanel should render MapLegend if store contains active map layers 1`
               map-panel__toggle--icon-expand
             "
       >
-        <IconMock />
+        <SvgChevronUp />
       </span>
     </button>
   </div>
@@ -115,7 +115,7 @@ exports[`MapPanel should render MapType and MapLayers 1`] = `
               map-panel__toggle--icon-expand
             "
       >
-        <IconMock />
+        <SvgChevronUp />
       </span>
     </button>
   </div>
@@ -162,6 +162,16 @@ exports[`MapPanel should render the container 1`] = `
         "isVisible": true,
       },
     ]
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
   }
   user={Object {}}
   zoomLevel={0}

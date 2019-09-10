@@ -35,7 +35,7 @@ COPY .babelrc \
 
 ENV NODE_ENV=production
 ARG BUILD_ENV=prod
-RUN npm run build-${BUILD_ENV}
+RUN npm run build:${BUILD_ENV}
 RUN echo "build= `date`" > /app/dist/version.txt
 
 # Test dependencies

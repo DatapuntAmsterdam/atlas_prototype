@@ -30,8 +30,10 @@ const reducer = (state = initialState, action) => {
         id: action.payload.id,
       }
 
+    case routing.data.type:
     case routing.home.type:
     case SET_GEOMETRY_FILTER:
+    case CLEAR_SELECTION:
       return {
         ...initialState,
       }
@@ -41,11 +43,6 @@ const reducer = (state = initialState, action) => {
         type: action.payload,
       }
 
-    case CLEAR_SELECTION: {
-      return {
-        type: SELECTION_TYPE.NONE,
-      }
-    }
     default:
       return state
   }

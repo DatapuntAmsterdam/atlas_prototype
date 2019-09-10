@@ -22,3 +22,5 @@ import './_styles.scss'
 
 // Actual app
 import './app/index'
+
+if (module.hot) module.hot.accept()

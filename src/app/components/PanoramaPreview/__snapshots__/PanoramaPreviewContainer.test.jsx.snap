@@ -5,5 +5,15 @@ exports[`PanoramaPreviewContainer should render the container with the basic pro
   dispatch={[Function]}
   isLoading={false}
   panoramaPreview={null}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
 />
 `;

@@ -6,7 +6,6 @@ import getAddresses from '../../../normalizations/construction-files/getAddresse
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import withGrid from '../../utils/withGrid'
 import { toDataDetail } from '../../../store/redux-first-router/actions'
-import '../DataSelection/DataSelectionTable/DataSelectionTable.scss'
 
 const ConstructionFileDetail = ({ results }) => {
   const {

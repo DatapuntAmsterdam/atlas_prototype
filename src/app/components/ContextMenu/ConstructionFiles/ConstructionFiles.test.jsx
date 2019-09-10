@@ -28,9 +28,7 @@ describe('ContextMenu for ConstructionFiles viewer', () => {
     sharePage.mockImplementation(() => ({ type: 'action' }))
 
     const store = configureMockStore()({ ...initialState })
-    component = shallow(<ConstructionFiles {...props} />, {
-      context: { store },
-    }).dive()
+    component = shallow(<ConstructionFiles {...props} store={store} />).dive()
   })
 
   it('should render', () => {

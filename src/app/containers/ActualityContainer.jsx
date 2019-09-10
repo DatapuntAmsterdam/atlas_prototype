@@ -1,5 +1,6 @@
 import React from 'react'
 import { AngularWrapper } from 'react-angular'
+import angular from 'angular'
 import '../angularModules'
 
 const ActualityContainer = () => (
@@ -13,6 +14,7 @@ const ActualityContainer = () => (
           <h1 className="o-header__title u-margin__bottom--3">Actualiteit</h1>
           <div className="qa-page">
             <AngularWrapper
+              angularInstance={angular}
               moduleName="dpMetadataWrapper"
               component="dpMetadata"
               dependencies={['atlas']}

@@ -5,7 +5,7 @@ const { VIEW, VIEW_CENTER } = PARAMETERS
 
 const columnRight = '.qa-dashboard__column--right'
 const homepage = '.c-homepage'
-const map = '.c-map'
+const map = '.qa-map-container'
 const notification = '.map-legend__notification'
 const scrollWrapper = '.scroll-wrapper'
 
@@ -74,7 +74,7 @@ describe('map module', () => {
       cy.checkPreviewPanel(['Dam 1', 'winkelfunctie'])
 
       // click somewhere in the map (not on a marker)
-      cy.get('.qa-map-container').click(560, 293)
+      cy.get(map).click(560, 293)
 
       cy.waitForGeoSearch()
       // check that the search icon is drawn on the map
@@ -163,7 +163,7 @@ describe('map module', () => {
 
       // click on the map
       cy.wait(250)
-      cy.get('.qa-map-container').click(702, 517)
+      cy.get(map).click(702, 517)
 
       cy.wait('@getSearchResults')
       cy.wait('@getMeetbout')

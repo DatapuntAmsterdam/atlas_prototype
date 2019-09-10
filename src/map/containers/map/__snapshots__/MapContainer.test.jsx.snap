@@ -2,7 +2,7 @@
 
 exports[`MapContainer should render 1`] = `
 <div
-  className="qa-map"
+  className="c-map__wrapper"
 >
   <div
     className="c-map c-map--drawing-mode-none qa-map-container"
@@ -30,7 +30,7 @@ exports[`MapContainer should render 1`] = `
 
 exports[`MapContainer should render with drawingmode: draw 1`] = `
 <div
-  className="qa-map"
+  className="c-map__wrapper"
 >
   <div
     className="c-map c-map--drawing-mode-draw qa-map-container"

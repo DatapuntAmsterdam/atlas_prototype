@@ -1,5 +1,5 @@
-@import "../../../shared/styles/config";
-@import "../../../shared/styles/config/variables/colors";
+@import '../../../shared/styles/config';
+@import '../../../shared/styles/config/variables/colors';
 
 $icon-height: 24px;
 
@@ -13,7 +13,7 @@ $icon-height: 24px;
   padding: 4px;
 
   &__icon {
-    @include icon-sprite("icon-measure", $secondary-gray60, $primary-dark, $icon-height);
+    @include icon-sprite('icon-measure', $secondary-gray60, $primary-dark, $icon-height);
     display: block;
     height: $icon-height;
     width: $icon-height;
@@ -22,7 +22,7 @@ $icon-height: 24px;
   &__label {
     align-self: center;
     color: $secondary-gray60;
-    font-weight: 900;
+    font-weight: $bold-weight;
     margin: 0 4px;
 
     &:empty {
@@ -37,7 +37,7 @@ $icon-height: 24px;
     }
 
     .toggle-drawing__icon {
-      @include icon-sprite("icon-measure", $primary-dark, $primary-dark, $icon-height);
+      @include icon-sprite('icon-measure', $primary-dark, $primary-dark, $icon-height);
     }
   }
 

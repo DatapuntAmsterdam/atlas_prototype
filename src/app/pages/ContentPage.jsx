@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import angular from 'angular'
 import { AngularWrapper } from 'react-angular'
 import { connect } from 'react-redux'
 import Footer from '../components/Footer/Footer'
@@ -18,6 +19,7 @@ import '../angularModules'
           <AngularWrapper
             moduleName="dpPageWrapper"
             component="dpPage"
+            angularInstance={angular}
             dependencies={['atlas']}
             interpolateBindings={{
               name: templateName,

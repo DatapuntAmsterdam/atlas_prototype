@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { css } from '@datapunt/asc-core'
-import { Header as HeaderComponent, styles, breakpoint, ascDefaultTheme } from '@datapunt/asc-ui'
+import { Header as HeaderComponent, styles, breakpoint } from '@datapunt/asc-ui'
 import HeaderSearchContainer from '../../../header/containers/header-search/HeaderSearchContainer'
 import { useAppReducer } from '../../utils/useAppReducer'
 import HeaderMenuContainer from './HeaderMenuContainer'
@@ -10,11 +10,19 @@ import HeaderMenuContainer from './HeaderMenuContainer'
 import EmbedHeader from './EmbedHeader'
 import PrintHeader from './PrintHeader'
 
-const style = css`
+const style = (theme, homePage) => css`
+  ${styles.HeaderWrapperStyle} {
+    ${homePage &&
+      css`
+        @media screen and ${breakpoint('min-width', 'laptopM')({ theme })} {
+          /* The "tall" header has a position relative on the homepage only, while the smaller header has a fixed position */
+          position: relative;
+          margin: 0;
+        }
+      `}
+  }
   ${styles.HeaderNavigationStyle} {
-    @media screen and ${breakpoint('min-width', 'tabletM')({
-        theme: ascDefaultTheme,
-      })} {
+    @media screen and ${breakpoint('min-width', 'tabletM')({ theme })} {
       justify-content: space-between;
     }
 
@@ -43,9 +51,12 @@ const Header = ({
   hideEmbedMode,
 }) => {
   const [, actions] = useAppReducer('ui')
-  const setBackDrop = payload => {
+  const setBackDrop = open => {
     actions.setBackDrop({
-      payload,
+      payload: {
+        open,
+        key: 'menu',
+      },
     })
   }
 
@@ -56,7 +67,7 @@ const Header = ({
           tall={homePage}
           title="City Data"
           homeLink="/"
-          css={style}
+          css={({ theme }) => style(theme, homePage)}
           fullWidth={!hasMaxWidth}
           navigation={
             <React.Fragment>

@@ -16,9 +16,7 @@ describe('PanoramaToggle', () => {
     currentLabel: '2018',
   }
   const store = configureMockStore()({})
-  const component = shallow(<PanoramaToggle {...props} />, {
-    context: { store },
-  }).dive()
+  const component = shallow(<PanoramaToggle {...props} store={store} />).dive()
 
   setPanoramaTags.mockImplementation(() => ({ type: 'action' }))
   fetchPanoramaRequestExternal.mockImplementation(() => ({ type: 'action' }))

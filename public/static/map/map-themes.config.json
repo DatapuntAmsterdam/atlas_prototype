@@ -1,0 +1,17 @@
+{
+  "PANORAMA": "Panoramabeelden",
+  "GEOGRAPHY_ONR": "Geografie: onroerende zaken",
+  "GEOGRAPHY_GEB": "Geografie: gebieden",
+  "GEOGRAPHY_HEIGHT": "Geografie: hoogte",
+  "ECONOMY_HARBOR": "Economie en haven",
+  "HISTORY": "Topografie: historisch",
+  "TRAFFIC": "Verkeer en infrastructuur",
+  "LIVING_ENV": "Wonen en leefomgeving",
+  "SAFETY": "Openbare orde en veiligheid",
+  "ORGANISATION": "Bestuur en organisatie",
+  "TOURISM": "Toerisme en cultuur",
+  "MIL_GROUND": "Milieu: bodem",
+  "MIL_SAFETY": "Milieu: externe veiligheid",
+  "MIL_ZONES": "Milieu: zones",
+  "URBAN": "Stedelijke ontwikkeling"
+}

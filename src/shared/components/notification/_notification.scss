@@ -1,4 +1,4 @@
-@import "../../styles/config";
+@import '../../styles/config';
 
 $icon-dimension: 24px;
 $icon-padding: 4px;
@@ -6,7 +6,7 @@ $icon-padding: 4px;
 .notification {
   color: $primary-light;
   display: flex;
-  font-weight: 400;
+  font-weight: $normal-weight;
   justify-content: space-between;
   margin: 0;
   padding: 6px $icon-padding * 2;
@@ -33,7 +33,7 @@ $icon-padding: 4px;
   &--message {
     color: $secondary-gray40;
     font-style: italic;
-    font-weight: 400;
+    font-weight: $normal-weight;
     padding: 0;
 
     &__content {
@@ -68,12 +68,12 @@ $icon-padding: 4px;
     &:hover,
     &:focus {
       .notification__button--close {
-        @include icon-sprite("icon-clear", $primary-dark, $primary-dark, $icon-dimension);
+        @include icon-sprite('icon-clear', $primary-dark, $primary-dark, $icon-dimension);
       }
     }
 
     &--close {
-      @include icon-sprite("icon-clear", $primary-light, $primary-dark, $icon-dimension);
+      @include icon-sprite('icon-clear', $primary-light, $primary-dark, $icon-dimension);
       display: block;
       height: $icon-dimension;
       width: $icon-dimension;

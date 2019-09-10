@@ -1,15 +1,15 @@
 import search, { fetchRelatedForUser } from './map-search'
 
-import * as address from '../../../shared/services/adressen/adressen-nummeraanduiding'
+import * as address from '../adressen-nummeraanduiding/adressen-nummeraanduiding'
 // import * as monument from '../../../shared/services/monument/monument';
-import * as vestiging from '../../../shared/services/vestiging/vestiging'
+import * as vestiging from '../vestiging/vestiging'
 
 import { getByUrl } from '../../../shared/services/api/api'
 
 jest.mock('../../../shared/services/api/api')
-jest.mock('../../../shared/services/adressen/adressen-nummeraanduiding')
-jest.mock('../../../shared/services/monument/monument')
-jest.mock('../../../shared/services/vestiging/vestiging')
+jest.mock('../adressen-nummeraanduiding/adressen-nummeraanduiding')
+jest.mock('../monument/monument')
+jest.mock('../vestiging/vestiging')
 
 describe('mapSearch service', () => {
   let user

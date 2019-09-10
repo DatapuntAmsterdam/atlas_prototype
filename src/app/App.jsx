@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { GlobalStyle, ThemeProvider } from '@datapunt/asc-ui'
+import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
 import { isOldCmsPage, isEditorialPage } from './pages'
 import './_app.scss'
 import {
@@ -18,10 +19,13 @@ import {
 import { hasGlobalError } from '../shared/ducks/error/error-message'
 import { getUser } from '../shared/ducks/user/user'
 import { getPage, isHomepage } from '../store/redux-first-router/selectors'
-import Header from './components/Header/Header'
+import Header from './components/Header'
 import { AppStateProvider } from './utils/useAppReducer'
 import AppBody from './AppBody'
 import main, { initialState } from './react-reducers'
+import { getEnvironment } from '../shared/environment'
+import { MATOMO_CONFIG } from '../store/middleware/matomo/constants'
+import { routing } from './routes'
 
 const App = ({
   isFullHeight,
@@ -40,6 +44,11 @@ const App = ({
 }) => {
   const editorialPage = isEditorialPage(currentPage)
   const hasMaxWidth = homePage || editorialPage || isOldCmsPage(currentPage)
+
+  // Redirect to the 404 page if currentPage isn't set
+  if (currentPage === '' && window) {
+    window.location.replace(routing.niet_gevonden.path)
+  }
 
   const rootClasses = classNames({
     'c-dashboard--max-width': hasMaxWidth,
@@ -82,41 +91,42 @@ const App = ({
   // Todo: don't use page types, this will be used
   const pageTypeClass = currentPage.toLowerCase().replace('_', '-')
 
+  const matomoInstance = createInstance({
+    urlBase: MATOMO_CONFIG.BASE_URL,
+    siteId: MATOMO_CONFIG[getEnvironment(window.location.hostname)].SITE_ID,
+  })
+
   return (
-    <ThemeProvider
-      overrides={{
-        typography: {
-          fontFamily: '"AvenirLT", Arial, sans-serif',
-        },
-      }}
-    >
+    <ThemeProvider>
       <GlobalStyle />
-      <AppStateProvider initialState={initialState} reducer={main}>
-        <div className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}>
-          {!embedMode && (
-            <Header
-              homePage={homePage}
-              hasMaxWidth={hasMaxWidth}
-              user={user}
-              printMode={printMode}
-              embedPreviewMode={embedPreviewMode}
-              printOrEmbedMode={printOrEmbedMode}
-              hasPrintButton={hasPrintButton}
-              hasEmbedButton={hasEmbedButton}
+      <MatomoProvider value={matomoInstance}>
+        <AppStateProvider initialState={initialState} reducer={main}>
+          <div className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}>
+            {!embedMode && (
+              <Header
+                homePage={homePage}
+                hasMaxWidth={hasMaxWidth}
+                user={user}
+                printMode={printMode}
+                embedPreviewMode={embedPreviewMode}
+                printOrEmbedMode={printOrEmbedMode}
+                hasPrintButton={hasPrintButton}
+                hasEmbedButton={hasEmbedButton}
+              />
+            )}
+            <AppBody
+              {...{
+                visibilityError,
+                bodyClasses,
+                hasMaxWidth,
+                homePage,
+                currentPage,
+                embedPreviewMode,
+              }}
             />
-          )}
-          <AppBody
-            {...{
-              visibilityError,
-              bodyClasses,
-              hasMaxWidth,
-              homePage,
-              currentPage,
-              embedPreviewMode,
-            }}
-          />
-        </div>
-      </AppStateProvider>
+          </div>
+        </AppStateProvider>
+      </MatomoProvider>
     </ThemeProvider>
   )
 }

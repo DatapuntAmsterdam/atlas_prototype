@@ -1,9 +1,12 @@
-@import "../../../shared/styles/config";
+@import '../../../shared/styles/config';
 
 .editorial-overview {
-  height: 100%;
+  min-height: 100%;
 
-  & > div {
+  &__body {
     background-color: $primary-light;
+    min-height: calc(100% - 278px);
+    position: relative;
+    width: 100%;
   }
 }

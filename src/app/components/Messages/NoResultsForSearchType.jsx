@@ -1,30 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'redux-first-router-link/dist/Link'
-import { routing } from '../../routes'
-import { BEDIENING_LOGIN_DEEPLINK } from '../../../shared/ducks/content/constants'
+import LoginLinkContainer from '../Links/LoginLink/LoginLinkContainer'
 
 const NoResultsForSearchType = ({ message, authMessage }) => {
-  const link = (
-    <Link
-      to={{
-        type: routing.bediening.type,
-        payload: { deeplink: BEDIENING_LOGIN_DEEPLINK } /* TODO DP-6485 */,
-      }}
-    >
-      Help &#62; Bediening &#62; Inloggen
-    </Link>
-  )
   return (
-    <div className="c-link__wrapper--inine-block">
+    <div className="-link__wrapper--inine-block">
       <div className="u-margin__bottom--1">Geen resultaten van deze soort</div>
-      {message}
-      {authMessage && (
-        <span>
-          &nbsp;Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer gegevens te
-          zien, zie {link}
-        </span>
-      )}
+      <div className="u-margin__bottom--1">
+        {message}
+        {authMessage && (
+          <>
+            <span>
+              &nbsp;Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer
+              gegevens te zien.
+            </span>
+          </>
+        )}
+      </div>
+      <LoginLinkContainer inverted={false} />
     </div>
   )
 }

@@ -14,8 +14,8 @@
           Toevoegen
           <span class="u-sr-only">Toevoegen</span>
         </dp-dcatd-button>
-        <h1 data-test="data-selection-heading" ng-if="vm.view === 'TABLE'">{{vm.datasetTitle}} ({{vm.numberOfRecords | number}})</h1>
-        <h1 data-test="data-selection-heading" ng-if="vm.view === 'CATALOG'">Datasets ({{vm.numberOfRecords | number}})</h1>
+        <h1 data-test="data-selection-heading" ng-if="vm.view === 'TABLE'">{{vm.datasetTitle}} <span ng-if="vm.numberOfRecords>0">({{vm.numberOfRecords | number}})</span></h1>
+        <h1 data-test="data-selection-heading" ng-if="vm.view === 'CATALOG'">Datasets <span ng-if="vm.numberOfRecords>0">({{vm.numberOfRecords | number}})</span></h1>
         <h1 data-test="data-selection-heading" ng-if="vm.view === 'LIST'">Resultaten</h1>
     </div>
 </div>

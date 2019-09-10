@@ -6,6 +6,7 @@ import configureStore from '../store/store'
 import routes from './routes'
 import resolveRedirects from './redirects'
 import ReduxContext from '../store/reduxContext'
+import './sentry'
 
 const store = configureStore(routes)
 
