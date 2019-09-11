@@ -16,9 +16,16 @@ exports[`Catalog should render without failing 1`] = `
         tabIndex="-1"
         to={
           Object {
+            "meta": Object {
+              "forceSaga": true,
+              "tracking": Object {
+                "event": "auto-suggest",
+                "query": undefined,
+              },
+            },
             "payload": Object {
               "id": 1,
-              "title": "1",
+              "slug": "foo",
             },
             "type": "atlasRouter/DATASET_DETAIL",
           }

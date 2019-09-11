@@ -284,12 +284,15 @@ const trackEvents = {
         ]
   },
   // MAP -> TOGGLE OVERLAYS
-  TOGGLE_MAP_OVERLAY: ({ tracking }) => [
-    MATOMO_CONSTANTS.TRACK_EVENT,
-    'kaartlaag',
-    tracking.category.toLowerCase().replace(/[: ][ ]*/g, '_'),
-    tracking.title,
-  ],
+  TOGGLE_MAP_OVERLAY: ({ tracking }) =>
+    tracking.category
+      ? [
+          MATOMO_CONSTANTS.TRACK_EVENT,
+          'kaartlaag',
+          tracking.category.toLowerCase().replace(/[: ][ ]*/g, '_'),
+          tracking.title,
+        ]
+      : [],
   // AUTHENTICATION
   // AUTHENTICATION BUTTON -> "inloggen" / "uitloggen"
   [AUTHENTICATE_USER_REQUEST]: ({ tracking, title }) => [

@@ -39,7 +39,7 @@ describe('normalizeFromCMS', () => {
     formatDate.mockReset()
   })
 
-  it('should return a normalized json', () => {
+  it('should return a normalized json for a list', () => {
     dateToString.mockReturnValue('15-03-2019')
     formatDate.mockReturnValue('15 Maart 2019')
 
@@ -50,6 +50,24 @@ describe('normalizeFromCMS', () => {
     expect(normalizedData[0].coverImageUrl).toBe(null)
     expect(normalizedData[0].teaserImageUrl).toBe(`${SHARED_CONFIG.CMS_ROOT}path/to/file`)
     expect(normalizedData[0].fileUrl).toBe(null)
+  })
+
+  it('should return a normalized json a single object', () => {
+    dateToString.mockReturnValue('15-03-2019')
+    formatDate.mockReturnValue('15 Maart 2019')
+
+    normalize.mockReset()
+    normalize.mockImplementation(() => ({
+      get: () => mockData,
+    }))
+
+    const normalizedData = cmsNormalizer('type', {}, ['field_slug', 'field_intro'])
+
+    expect(normalizedData.field_slug).toEqual(mockData.field_slug)
+    expect(normalizedData.field_intro).toEqual(mockData.field_intro)
+    expect(normalizedData.coverImageUrl).toBe(null)
+    expect(normalizedData.teaserImageUrl).toBe(`${SHARED_CONFIG.CMS_ROOT}path/to/file`)
+    expect(normalizedData.fileUrl).toBe(null)
   })
 
   it('should return a normalized json for publication', () => {

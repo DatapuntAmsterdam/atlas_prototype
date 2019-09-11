@@ -62,30 +62,6 @@ describe('useFromCMS', () => {
     expect(result.current.results).toEqual({ data: [mockData] })
   })
 
-  it('should return results when fetchData is called with an id', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(mockCMSconfig.TEST, id))
-
-    // call the fetchData function
-    result.current.fetchData()
-
-    // wait until it resolves
-    await waitForNextUpdate()
-
-    expect(result.current.results).toEqual(mockData)
-  })
-
-  it('should return results when fetchData is called with an endpoint', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useFromCMS(mockCMSconfig.TEST, id))
-
-    // call the fetchData function
-    result.current.fetchData('endpoint')
-
-    // wait until it resolves
-    await waitForNextUpdate()
-
-    expect(result.current.results).toEqual(mockData)
-  })
-
   it('should redirect to no found page when the data is not available', async () => {
     getByUrl.mockReset()
     getByUrl.mockReturnValueOnce(Promise.reject(mockData))

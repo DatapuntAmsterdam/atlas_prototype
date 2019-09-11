@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-/* this is configuration and shouldn't be tested as the components using this are tested */
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
 import gebiedenStadsdeel from './gebieden-stadsdeel/gebieden-stadsdeel'
 import vestiging from './vestiging/vestiging'

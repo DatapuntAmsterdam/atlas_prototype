@@ -1,9 +1,13 @@
 import SHARED_CONFIG from '../../../shared/services/shared-config/shared-config'
 import { getAuthHeaders } from '../../../shared/services/auth/auth'
 
+// Minimun length for typeahead query in backend is 3 characters
+const MIN_QUERY_LENGTH = 3
+
 function formatData(categories) {
   const numberOfResults = categories.reduce((acc, category) => acc + category.content.length, 0)
   let indexInTotal = -1
+
   const indexedCategories = categories.map(category => ({
     ...category,
     content: category.content.map(suggestion => {
@@ -24,8 +28,8 @@ function formatData(categories) {
 }
 
 function search(query) {
-  // Minimun length for typeahead query in backend is 3 characters
-  const uri = query && query.length >= 3 && `${SHARED_CONFIG.API_ROOT}typeahead?q=${query}`
+  const uri =
+    query && query.length >= MIN_QUERY_LENGTH && `${SHARED_CONFIG.API_ROOT}typeahead?q=${query}`
 
   if (uri) {
     return fetch(uri, { headers: getAuthHeaders() })

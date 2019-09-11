@@ -47,7 +47,7 @@
 
  */
 
-import MAP_CONFIG from '../map-config'
+import MAP_CONFIG from '../map.config'
 
 const mapLayers = require('../../../../public/static/map/map-layers.config.json')
 const mapThemes = require('../../../../public/static/map/map-themes.config.json')

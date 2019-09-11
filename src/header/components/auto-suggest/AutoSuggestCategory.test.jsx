@@ -60,6 +60,7 @@ describe('AutoSuggestCategory', () => {
         index: MORE_RESULTS_INDEX,
         label: '...',
       },
+      'Straatnamen',
       mockEvent,
     )
   })

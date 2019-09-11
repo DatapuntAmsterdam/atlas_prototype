@@ -27,7 +27,7 @@ import './ArticleDetailPage.scss'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import { toArticleDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
-import cmsConfig from '../../../shared/services/cms/cms-config'
+import cmsConfig from '../../../shared/services/cms/cms.config'
 import normalizeDownloadsObject from '../../../normalizations/cms/normalizeDownloadFiles'
 
 const ListItemContent = styled.div`

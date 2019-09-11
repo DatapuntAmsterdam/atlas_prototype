@@ -64,7 +64,7 @@ class SelectButton extends React.Component {
 
   handleOutsideClick(event) {
     // Ignore clicks on the component itself
-    if (this.node.contains(event.target)) {
+    if (this.node && this.node.contains(event.target)) {
       return
     }
 

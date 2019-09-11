@@ -14,7 +14,7 @@ import {
 import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import useFromCMS from '../../utils/useFromCMS'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
-import cmsConfig from '../../../shared/services/cms/cms-config'
+import cmsConfig from '../../../shared/services/cms/cms.config'
 import { toPublicationDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 

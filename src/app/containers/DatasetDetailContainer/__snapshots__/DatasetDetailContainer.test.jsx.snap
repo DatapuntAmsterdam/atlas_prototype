@@ -4,6 +4,10 @@ exports[`DatasetDetailContainer should render 1`] = `
 <div
   className="c-dashboard__content qa-detail"
 >
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+  />
   <AngularWrapper
     angularInstance={
       Object {

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import MapLeaflet from '../../components/leaflet/MapLeaflet'
-import MAP_CONFIG from '../../services/map-config'
+import MAP_CONFIG from '../../services/map.config'
 import {
   setSelectedLocation,
   updateBoundingBox,

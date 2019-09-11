@@ -12,10 +12,12 @@ import {
 } from '../../ducks/auto-suggest/auto-suggest'
 import { emptyFilters } from '../../../shared/ducks/filters/filters'
 import {
+  toArticleDetail,
   toDataSearchQuery,
   toDatasetDetail,
   toDatasetSearch,
   toDataSuggestion,
+  toPublicationDetail,
 } from '../../../store/redux-first-router/actions'
 import { isDatasetPage } from '../../../store/redux-first-router/selectors'
 import PARAMETERS from '../../../store/parameters'
@@ -71,6 +73,10 @@ const mapDispatchToProps = dispatch => ({
     ),
   openDataSuggestion: (suggestion, view) => dispatch(toDataSuggestion(suggestion, view)),
   openDatasetSuggestion: suggestion => dispatch(toDatasetDetail(suggestion)),
+  openEditorialSuggestion: (suggestion, type) =>
+    type === 'article'
+      ? dispatch(toArticleDetail(suggestion.id, suggestion.slug))
+      : dispatch(toPublicationDetail(suggestion.id, suggestion.slug)),
 })
 
 export default connect(

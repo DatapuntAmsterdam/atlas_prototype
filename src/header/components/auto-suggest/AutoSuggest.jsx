@@ -57,21 +57,17 @@ class AutoSuggest extends React.Component {
     }
   }
 
-  onSuggestionSelection(suggestion, event) {
+  onSuggestionSelection(suggestion, label, event) {
     const { onSuggestionSelection } = this.props
     event.preventDefault()
     event.stopPropagation()
 
     if (suggestion.index === MORE_RESULTS_INDEX) {
       this.resetActiveSuggestion()
-      this.onFormSubmit(event)
+      this.onFormSubmit(event, label)
     } else {
-      const shouldOpenInNewWindow = event.ctrlKey || event.metaKey
-      onSuggestionSelection(suggestion, shouldOpenInNewWindow)
-
-      if (!shouldOpenInNewWindow) {
-        this.clearQuery()
-      }
+      onSuggestionSelection(suggestion)
+      this.clearQuery()
     }
 
     this.setState({
@@ -79,7 +75,7 @@ class AutoSuggest extends React.Component {
     })
   }
 
-  onFormSubmit(event) {
+  onFormSubmit(event, label = null) {
     const { onSubmit, query } = this.props
 
     event.preventDefault()
@@ -93,7 +89,7 @@ class AutoSuggest extends React.Component {
       () => {
         if (query) {
           this.resetActiveSuggestion()
-          onSubmit()
+          onSubmit(label)
         }
       },
     )

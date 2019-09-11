@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import queryString from 'querystring'
 
 import { Checkbox } from '../../../shared/components/checkbox'
-import MAP_CONFIG from '../../services/map-config'
+import MAP_CONFIG from '../../services/map.config'
 
 import './_map-legend.scss'
 import LoginLinkContainer from '../../../app/components/Links/LoginLink/LoginLinkContainer'

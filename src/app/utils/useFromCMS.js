@@ -20,7 +20,7 @@ function useFromCMS(config, id = false) {
 
       const normalizedData = await cmsNormalizer(config.type, data, fields)
 
-      setResults(id ? normalizedData.data[0] : normalizedData)
+      setResults(normalizedData)
     } catch (e) {
       window.location.replace(routing.niet_gevonden.path)
     }

@@ -124,8 +124,7 @@ export const toPanoramaAndPreserveQuery = (
   })
 
 export const extractIdEndpoint = endpoint => {
-  const matches = endpoint.match(/\/([\w-]+)\/?$/)
-  return matches[1]
+  return endpoint.match(/(\w+)\/([\w-]+)\/?$/)
 }
 export const getDetailPageData = endpoint => {
   const matches = endpoint.match(/(\w+)\/([\w-]+)\/([\w\.-]+)\/?$/) // eslint-disable-line no-useless-escape
@@ -234,6 +233,14 @@ export const toArticleDetail = (id, slug = '') => ({
   },
 })
 
+export const toPublicationDetail = (id, slug = '') => ({
+  type: routing.publicationDetail.type,
+  payload: {
+    id,
+    slug,
+  },
+})
+
 export const toSpecialDetail = (id, type = '', slug = '') => ({
   type: routing.specialDetail.type,
   payload: {
@@ -279,14 +286,6 @@ export const toMaintentancePage = () => ({
   type: routing.beheer_werkwijze.type,
 })
 export const toHelpPage = () => ({ type: routing.help.type })
-
-export const toPublicationDetail = (id, slug = '') => ({
-  type: routing.publicationDetail.type,
-  payload: {
-    id,
-    slug,
-  },
-})
 
 export const toArticleSearch = (additionalParams = null, skipSaga = false, forceSaga = false) => ({
   type: routing.articleSearch.type,

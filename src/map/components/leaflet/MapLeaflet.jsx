@@ -146,9 +146,12 @@ class MapLeaflet extends React.Component {
     const { zoom } = this.props
     const mapBounds = this.MapElement.getBounds()
     const elementFits = mapBounds.contains(bounds)
+
     if (!elementFits) {
       const elementZoom = this.MapElement.getBoundsZoom(bounds)
-      if (!isBoundsAPoint(bounds) && elementZoom < zoom) {
+
+      // Important: in case the API returns a location point, the map shouldn't be using this as bounding box
+      if (!isBoundsAPoint(bounds) && !isBoundsAPoint(mapBounds) && elementZoom < zoom) {
         // pan and zoom to the geoJson element, only when not a point
         this.MapElement.fitBounds(bounds)
       } else {

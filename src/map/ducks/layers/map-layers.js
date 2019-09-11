@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 import { createUrlWithToken } from '../../../shared/services/api/api'
 import { getMapOverlays } from '../map/selectors'
-import MAP_CONFIG from '../../services/map-config'
+import MAP_CONFIG from '../../services/map.config'
 
 export const FETCH_MAP_LAYERS_REQUEST = 'FETCH_MAP_LAYERS_REQUEST'
 export const FETCH_MAP_LAYERS_SUCCESS = 'FETCH_MAP_LAYERS_SUCCESS'

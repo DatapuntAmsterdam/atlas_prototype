@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import AutoSuggest from '../../components/auto-suggest/AutoSuggest'
 import { extractIdEndpoint } from '../../../store/redux-first-router/actions'
+import useSlug from '../../../app/utils/useSlug'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 
 class HeaderSearch extends React.Component {
@@ -33,20 +34,28 @@ class HeaderSearch extends React.Component {
   }
 
   // Opens suggestion on mouseclick or enter
-  onSuggestionSelection(suggestion, shouldOpenInNewWindow) {
-    const { openDataSuggestion, openDatasetSuggestion, typedQuery, view } = this.props
+  onSuggestionSelection(suggestion) {
+    const {
+      openDataSuggestion,
+      openDatasetSuggestion,
+      openEditorialSuggestion,
+      typedQuery,
+      view,
+    } = this.props
 
-    if (shouldOpenInNewWindow) {
-      // const newWindow = window.open(`${window.location.href}`, '_blank');
-      // // setting uri to the window, as window.postMessage does not work for some reason
-      // // (webpack overrides the data it seems)
-      // newWindow.window.suggestionToLoadUri = suggestion.uri;
-    }
-
+    // Suggestion of type dataset, formerly known as "catalog"
     if (suggestion.uri.match(/^dcatd\//)) {
-      // Suggestion of type dataset, formerly known as "catalog"
-      const id = extractIdEndpoint(suggestion.uri)
-      openDatasetSuggestion({ id, typedQuery })
+      const [, , id] = extractIdEndpoint(suggestion.uri)
+      const slug = useSlug(suggestion.label)
+
+      openDatasetSuggestion({ id, slug, typedQuery })
+
+      // Suggestion of type article or publication
+    } else if (suggestion.uri.match(/jsonapi\/node\//)) {
+      const [, type, id] = extractIdEndpoint(suggestion.uri)
+      const slug = useSlug(suggestion.label)
+
+      openEditorialSuggestion({ id, slug }, type)
     } else {
       openDataSuggestion(
         {
@@ -59,7 +68,7 @@ class HeaderSearch extends React.Component {
     }
   }
 
-  onFormSubmit() {
+  onFormSubmit(label) {
     const {
       activeSuggestion,
       isDatasetView,
@@ -69,10 +78,13 @@ class HeaderSearch extends React.Component {
       onDataSearch,
     } = this.props
 
+    // Todo: ideally we should get a 'type' back from the backend...
+    const toDataset = isDatasetView || label === 'Datasets'
+
     if (activeSuggestion.index === -1) {
       // Load the search results
       onCleanDatasetOverview() // TODO, refactor: don't clean dataset on search
-      if (isDatasetView) {
+      if (toDataset) {
         onDatasetSearch(typedQuery)
       } else {
         onDataSearch(typedQuery)

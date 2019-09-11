@@ -2,14 +2,17 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import Catalog from './Catalog'
 import * as filters from '../../Filters/Filters'
+import useSlug from '../../../utils/useSlug'
 
 jest.mock('../../Filters/Filters')
+jest.mock('../../../utils/useSlug')
 
 // Todo: DP-6235
 describe('Catalog', () => {
   beforeEach(() => {
     filters.aggregateFilter.mockReturnValue([])
     filters.truncateHtmlAsTextFilter.mockReturnValue('Text...')
+    useSlug.mockReturnValue('foo')
   })
   it('should render without failing', () => {
     const component = shallow(

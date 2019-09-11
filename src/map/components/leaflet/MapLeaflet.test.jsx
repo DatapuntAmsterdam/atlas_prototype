@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import MapLeaflet from './MapLeaflet'
 
-import MAP_CONFIG from '../../services/map-config'
+import MAP_CONFIG from '../../services/map.config'
 
 import { boundsToString, getBounds, isValidBounds, isBoundsAPoint } from './services/bounds'
 import { markerPointType } from './services/icons.constant'
@@ -774,7 +774,7 @@ describe('MapLeaflet component', () => {
           expect(wrapperInstance.MapElement.panInsideBounds).toHaveBeenCalledWith(bounds)
         })
 
-        it('should pan to the element when the bounds represent a point', () => {
+        it('should not pan to the element when the map bounds represent a point', () => {
           wrapperInstance.MapElement.getNorthEast.mockImplementation(() => [1, 1])
           wrapperInstance.MapElement.getSouthWest.mockImplementation(() => [1, 1])
           wrapperInstance.fitActiveElement(bounds)

@@ -4,7 +4,7 @@ const cmsConfig = {
   ARTICLE: {
     type: 'article',
     endpoint: id =>
-      `${SHARED_CONFIG.CMS_ROOT}jsonapi/node/article?filter[drupal_internal__nid]=${id}&include=field_cover_image.field_media_image,field_downloads.field_file.field_media_file`,
+      `${SHARED_CONFIG.CMS_ROOT}jsonapi/node/article/${id}?include=field_cover_image.field_media_image,field_downloads.field_file.field_media_file`,
     fields: [
       'field_cover_image.field_media_image.uri',
       'field_downloads',
@@ -36,7 +36,7 @@ const cmsConfig = {
   PUBLICATION: {
     type: 'publication',
     endpoint: id =>
-      `${SHARED_CONFIG.CMS_ROOT}jsonapi/node/publication?filter[drupal_internal__nid]=${id}&include=field_cover_image.field_media_image,field_file.field_media_file`,
+      `${SHARED_CONFIG.CMS_ROOT}jsonapi/node/publication/${id}?include=field_cover_image.field_media_image,field_file.field_media_file`,
     fields: [
       'field_cover_image.field_media_image.uri',
       'field_file.field_media_file.uri',
@@ -67,8 +67,7 @@ const cmsConfig = {
   },
   SPECIAL: {
     type: 'special',
-    endpoint: id =>
-      `${SHARED_CONFIG.CMS_ROOT}jsonapi/node/special?filter[drupal_internal__nid]=${id}`,
+    endpoint: id => `${SHARED_CONFIG.CMS_ROOT}jsonapi/node/special/${id}`,
     fields: ['field_iframe_link', 'field_slug', 'field_special_type'],
   },
   SPECIALS: {

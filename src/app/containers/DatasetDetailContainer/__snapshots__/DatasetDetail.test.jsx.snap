@@ -4,6 +4,19 @@ exports[`DatasetDetail should render 1`] = `
 <div
   className="c-dashboard__content qa-detail"
 >
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+  >
+    <link
+      href="/foo/foo"
+      rel="canonical"
+    />
+    <meta
+      content="foo foo foo"
+      name="description"
+    />
+  </HelmetWrapper>
   <AngularWrapper
     angularInstance={
       Object {

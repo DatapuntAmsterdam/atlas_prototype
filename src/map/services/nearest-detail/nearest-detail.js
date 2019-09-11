@@ -1,6 +1,6 @@
 import { getByUrl } from '../../../shared/services/api/api'
 import SHARED_CONFIG from '../../../shared/services/shared-config/shared-config'
-import MAP_CONFIG from '../map-config'
+import MAP_CONFIG from '../map.config'
 import { getFeaturesFromResult } from '../map-search/map-search'
 
 const generateParams = (layer, location, zoom) => ({

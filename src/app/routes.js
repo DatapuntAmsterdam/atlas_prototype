@@ -2,7 +2,7 @@ import PAGES from './pages'
 
 export const ROUTER_NAMESPACE = 'atlasRouter'
 
-const MAIN_PATHS = {
+export const MAIN_PATHS = {
   ARTICLES: 'artikelen',
   DATA: 'data',
   DATASETS: 'datasets',
@@ -56,7 +56,7 @@ export const routing = {
   },
   datasetDetail: {
     title: 'Dataset',
-    path: `/${MAIN_PATHS.DATASETS}/:id/:title/`,
+    path: `/${MAIN_PATHS.DATASETS}/:id/:slug/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATASET_DETAIL}`,
     page: PAGES.DATASET_DETAIL,
   },

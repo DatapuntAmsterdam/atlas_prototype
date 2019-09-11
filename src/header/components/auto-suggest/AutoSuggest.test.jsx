@@ -248,8 +248,8 @@ describe('The AutoSuggest component', () => {
         stopPropagation: jest.fn(),
       }
       autoSuggestComponent.instance().onFormSubmit = jest.fn()
-      autoSuggestComponent.instance().onSuggestionSelection(suggestion, event)
-      expect(autoSuggestComponent.instance().onFormSubmit).toHaveBeenCalledWith(event)
+      autoSuggestComponent.instance().onSuggestionSelection(suggestion, 'Some label', event)
+      expect(autoSuggestComponent.instance().onFormSubmit).toHaveBeenCalledWith(event, 'Some label')
     })
   })
 

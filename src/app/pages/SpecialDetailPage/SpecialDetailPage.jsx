@@ -6,7 +6,7 @@ import setIframeSize from '../../../shared/services/set-iframe-size/setIframeSiz
 import useFromCMS from '../../utils/useFromCMS'
 import './SpecialDetailPage.scss'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
-import cmsConfig from '../../../shared/services/cms/cms-config'
+import cmsConfig from '../../../shared/services/cms/cms.config'
 import { toSpecialDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 

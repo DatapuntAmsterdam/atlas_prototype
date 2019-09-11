@@ -18,6 +18,7 @@ exports[`HeaderSearchWrapper should render 1`] = `
   onSuggestionActivate={[Function]}
   openDataSuggestion={[Function]}
   openDatasetSuggestion={[Function]}
+  openEditorialSuggestion={[Function]}
   pageName=""
   prefillQuery=""
   store={
