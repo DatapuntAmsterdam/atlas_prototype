@@ -341,6 +341,15 @@ Object {
         "selector": [Function],
         "stateKey": "filters",
       },
+      "atlasRouter/ARTICLE_SEARCH": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": Object {},
+        "encode": [Function],
+        "reducerKey": "filter",
+        "selector": [Function],
+        "stateKey": "filters",
+      },
       "atlasRouter/CADASTRAL_OBJECTS": Object {
         "addHistory": true,
         "decode": [Function],
@@ -387,15 +396,6 @@ Object {
         "stateKey": "filters",
       },
       "atlasRouter/PUBLICATION_SEARCH": Object {
-        "addHistory": true,
-        "decode": [Function],
-        "defaultValue": Object {},
-        "encode": [Function],
-        "reducerKey": "filter",
-        "selector": [Function],
-        "stateKey": "filters",
-      },
-      "atlasRouter/SEARCH_AARTICLE_SEARCHRTICLES": Object {
         "addHistory": true,
         "decode": [Function],
         "defaultValue": Object {},
@@ -468,6 +468,15 @@ Object {
   "lagen": Object {
     "routes": Object {
       "atlasRouter/ADDRESSES": Object {
+        "addHistory": false,
+        "decode": [Function],
+        "defaultValue": Array [],
+        "encode": [Function],
+        "reducerKey": "map",
+        "selector": [Function],
+        "stateKey": "overlays",
+      },
+      "atlasRouter/ARTICLE_SEARCH": Object {
         "addHistory": false,
         "decode": [Function],
         "defaultValue": Array [],
@@ -549,15 +558,6 @@ Object {
         "stateKey": "overlays",
       },
       "atlasRouter/PUBLICATION_SEARCH": Object {
-        "addHistory": false,
-        "decode": [Function],
-        "defaultValue": Array [],
-        "encode": [Function],
-        "reducerKey": "map",
-        "selector": [Function],
-        "stateKey": "overlays",
-      },
-      "atlasRouter/SEARCH_AARTICLE_SEARCHRTICLES": Object {
         "addHistory": false,
         "decode": [Function],
         "defaultValue": Array [],
@@ -1084,6 +1084,15 @@ Object {
   },
   "term": Object {
     "routes": Object {
+      "atlasRouter/ARTICLE_SEARCH": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": "",
+        "encode": [Function],
+        "reducerKey": "dataSearch",
+        "selector": [Function],
+        "stateKey": "query",
+      },
       "atlasRouter/DATASET_SEARCH": Object {
         "addHistory": true,
         "decode": [Function],
@@ -1103,15 +1112,6 @@ Object {
         "stateKey": "query",
       },
       "atlasRouter/PUBLICATION_SEARCH": Object {
-        "addHistory": true,
-        "decode": [Function],
-        "defaultValue": "",
-        "encode": [Function],
-        "reducerKey": "dataSearch",
-        "selector": [Function],
-        "stateKey": "query",
-      },
-      "atlasRouter/SEARCH_AARTICLE_SEARCHRTICLES": Object {
         "addHistory": true,
         "decode": [Function],
         "defaultValue": "",

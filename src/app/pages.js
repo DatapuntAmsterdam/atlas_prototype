@@ -20,7 +20,7 @@ const PAGES = {
   // cms pages
   ARTICLES: 'ARTICLES',
   ARTICLE_DETAIL: 'ARTICLE_DETAIL',
-  ARTICLE_SEARCH: 'SEARCH_AARTICLE_SEARCHRTICLES',
+  ARTICLE_SEARCH: 'ARTICLE_SEARCH',
   SPECIALS: 'SPECIALS',
   SPECIAL_DETAIL: 'SPECIAL_DETAIL',
   PUBLICATIONS: 'PUBLICATIONS',
@@ -49,7 +49,7 @@ export default PAGES
 export const isOldCmsPage = page =>
   page === PAGES.NEWS ||
   page === PAGES.HELP ||
-  page === PAGES.ACTUALITEIT ||
+  page === PAGES.ACTUALITY ||
   page === PAGES.PROCLAIMER ||
   page === PAGES.CONTROLS ||
   page === PAGES.CONTROLS ||

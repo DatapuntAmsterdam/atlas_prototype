@@ -11,7 +11,6 @@ import {
   fetchDatasetsOptionalEffect,
 } from '../../shared/sagas/dataset/dataset'
 import { fetchDetailEffect } from '../../map/sagas/detail/map-detail'
-import { fetchArticlesEffect, fetchPublicationsEffect } from '../../shared/sagas/cms/cms'
 
 const routeSagaMapping = [
   [routing.panorama.type, fetchFetchPanoramaEffect],
@@ -25,8 +24,6 @@ const routeSagaMapping = [
   [routing.dataSearchQuery.type, fetchQuerySearchResultsEffect],
   [routing.datasetSearch.type, fetchDatasetsEffect],
   [routing.dataDetail.type, fetchDetailEffect],
-  [routing.articleSearch.type, fetchArticlesEffect],
-  [routing.publicationSearch.type, fetchPublicationsEffect],
 ]
 
 const yieldOnFirstAction = sideEffect =>

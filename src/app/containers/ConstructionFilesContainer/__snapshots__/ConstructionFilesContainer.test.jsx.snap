@@ -217,7 +217,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
             "fontSize": "16px",
             "fontWeight": 500,
             "letterSpacing": "inherit",
-            "lineHeight": 1.25,
+            "lineHeight": "20px",
             "marginBottom": "0",
           },
           "p": Object {
@@ -299,7 +299,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                 "$$typeof": Symbol(react.forward_ref),
                 "attrs": Array [],
                 "componentStyle": ComponentStyle {
-                  "componentId": "sc-hzDkRC",
+                  "componentId": "sc-jhAzac",
                   "isStatic": false,
                   "lastClassName": "c0",
                   "rules": Array [
@@ -336,7 +336,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                 "displayName": "styled.div",
                 "foldedComponentIds": Array [],
                 "render": [Function],
-                "styledComponentId": "sc-hzDkRC",
+                "styledComponentId": "sc-jhAzac",
                 "target": "div",
                 "toString": [Function],
                 "warnTooManyClasses": [Function],
@@ -409,7 +409,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                                   "$$typeof": Symbol(react.forward_ref),
                                   "attrs": Array [],
                                   "componentStyle": ComponentStyle {
-                                    "componentId": "sc-jwKygS",
+                                    "componentId": "sc-btzYZH",
                                     "isStatic": false,
                                     "lastClassName": "c3",
                                     "rules": Array [
@@ -440,7 +440,7 @@ exports[`ConstructionFilesContainer should render 1`] = `
                                   "displayName": "styled.div",
                                   "foldedComponentIds": Array [],
                                   "render": [Function],
-                                  "styledComponentId": "sc-jwKygS",
+                                  "styledComponentId": "sc-btzYZH",
                                   "target": "div",
                                   "toString": [Function],
                                   "warnTooManyClasses": [Function],

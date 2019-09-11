@@ -6,12 +6,12 @@ describe('EditorialCard', () => {
   const mockDataItem = {
     id: 1,
     title: 'title',
-    field_intro: 'intro',
+    intro: 'intro',
     teaserImageUrl: 'thumbnail.jpg',
   }
 
   it('should display a cover image', () => {
-    const component = shallow(<EditorialCard href="link" dataItem={mockDataItem} />).dive()
+    const component = shallow(<EditorialCard href="link" {...mockDataItem} />).dive()
 
     const image = component.find('Image')
 
@@ -21,24 +21,18 @@ describe('EditorialCard', () => {
 
   it("should display a placeholder when there's no cover image", () => {
     const component = shallow(
-      <EditorialCard href="link" dataItem={{ ...mockDataItem, teaserImageUrl: false }} />,
+      <EditorialCard href="link" {...mockDataItem} teaserImageUrl={false} />,
     ).dive()
 
     const image = component.find('Image')
 
     expect(image.exists()).toBeTruthy()
-    expect(image.props().src).toBe('../assets/images/not_found_thumbnail.jpg')
+    expect(image.props().src).toBe('test-file-stub')
   })
 
   it("should display a tag when there's one provided", () => {
     const component = shallow(
-      <EditorialCard
-        href="link"
-        dataItem={{
-          ...mockDataItem,
-          field_special_type: 'foo',
-        }}
-      />,
+      <EditorialCard href="link" specialType="foo" {...mockDataItem} />,
     ).dive()
 
     const tag = component.find('Styled(Tag)')

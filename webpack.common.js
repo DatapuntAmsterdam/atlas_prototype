@@ -112,8 +112,8 @@ function commonConfig(env) {
           ],
         },
         {
-          test: /\.(png|svg|cur)$/,
-          include: [legacy],
+          test: /\.(jpg|png|svg|cur)$/,
+          include: [legacy, src],
           use: [
             {
               loader: 'file-loader',
