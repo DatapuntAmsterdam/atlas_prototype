@@ -28,12 +28,10 @@ $backdrop-color: rgba(0, 0, 0, 0.5);
         }
       }
 
-      max-width: 1920px;
+      // Temporary overwrite! When the header will be refactored to
+      // be inside the grid, this can be removed
+      max-width: 1430px;
     }
-  }
-
-  &__body {
-    height: initial;
   }
 }
 
@@ -53,7 +51,6 @@ $backdrop-color: rgba(0, 0, 0, 0.5);
 
 .c-dashboard__body {
   position: relative;
-  top: $dashboard-heading-height;
   height: calc(100% - #{$dashboard-heading-height});
   z-index: $body-z-index;
 

@@ -1,7 +1,7 @@
-@import "../../../shared/styles/config";
+@import '../../../shared/styles/config';
 
 .editorial-page {
-  min-height: 100%;
+  min-height: 50vh; // Makes sure the loading indicator is displayed inside the page
 
   &__body {
     background-color: $primary-light;
