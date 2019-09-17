@@ -1,104 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`QuerySearch should not render while loading 1`] = `
-<ContextProvider
-  value={
-    Array [
-      Object {
-        "error": false,
-        "loading": false,
-        "results": Array [],
-      },
-      [Function],
-    ]
-  }
+<div
+  className="c-data-selection c-dashboard__content"
 >
-  <ContextProvider
-    value={
-      Array [
-        Object {
-          "error": false,
-          "loading": false,
-          "results": Array [],
-        },
-        [Function],
-      ]
-    }
-  >
-    <div
-      className="c-data-selection c-dashboard__content"
-    >
-      <LoadingIndicator
-        IconComponent={
-          <Spinner
-            color="secondary"
-            size={36}
-          />
-        }
+  <LoadingIndicator
+    IconComponent={
+      <Spinner
+        color="secondary"
+        size={36}
       />
-    </div>
-  </ContextProvider>
-</ContextProvider>
+    }
+  />
+</div>
 `;
 
 exports[`QuerySearch should render with results 1`] = `
-<ContextProvider
-  value={
-    Array [
-      Object {
-        "error": false,
-        "loading": false,
-        "results": Array [],
-      },
-      [Function],
-    ]
-  }
+<div
+  className="c-data-selection c-dashboard__content"
 >
-  <ContextProvider
-    value={
-      Array [
-        Object {
-          "error": false,
-          "loading": false,
-          "results": Array [],
-        },
-        [Function],
-      ]
-    }
+  <div
+    className="qa-data-selection-content"
   >
-    <div
-      className="c-data-selection c-dashboard__content"
+    <Connect(TabBar)
+      numberOfResults={2}
     >
-      <div
-        className="qa-data-selection-content"
+      <Tabs
+        currentPage="data"
       >
-        <Connect(TabBar)
-          numberOfResults={2}
-        >
-          <Tabs
-            currentPage="data"
-          >
-            <Tab
-              count={2}
-              isSelected={false}
-              label="Data"
-              onClick={[Function]}
-              page="DATA_SEARCH_QUERY"
-            />
-            <Tab
-              count={2}
-              isSelected={false}
-              label="Datasets"
-              onClick={[Function]}
-              page="DATASET_SEARCH"
-            />
-          </Tabs>
-        </Connect(TabBar)>
-        <div
-          className="qa-search-results"
+        <Tab
+          count={2}
+          isSelected={false}
+          label="Data"
+          onClick={[Function]}
+          page="DATA_SEARCH_QUERY"
         />
-      </div>
-    </div>
-  </ContextProvider>
-</ContextProvider>
+        <Tab
+          count={2}
+          isSelected={false}
+          label="Datasets"
+          onClick={[Function]}
+          page="DATASET_SEARCH"
+        />
+      </Tabs>
+    </Connect(TabBar)>
+    <div
+      className="qa-search-results"
+    />
+  </div>
+</div>
 `;
