@@ -27,10 +27,6 @@ $backdrop-color: rgba(0, 0, 0, 0.5);
           content: '';
         }
       }
-
-      // Temporary overwrite! When the header will be refactored to
-      // be inside the grid, this can be removed
-      max-width: 1430px;
     }
   }
 }
