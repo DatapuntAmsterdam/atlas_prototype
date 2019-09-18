@@ -30,9 +30,9 @@
     "prettier": "prettier --write \"./**/*.{js,jsx,scss,css}\""
   },
   "dependencies": {
-    "@datapunt/asc-assets": "0.15.4",
-    "@datapunt/asc-core": "0.15.4",
-    "@datapunt/asc-ui": "0.15.4",
+    "@datapunt/asc-assets": "0.15.5",
+    "@datapunt/asc-core": "0.15.5",
+    "@datapunt/asc-ui": "0.15.5",
     "@datapunt/matomo-tracker-js": "0.0.11",
     "@datapunt/matomo-tracker-react": "0.0.11",
     "@sentry/browser": "5.6.1",
@@ -166,7 +166,6 @@
     "sass-loader": "7.3.1",
     "snyk": "1.217.3",
     "svg-spritemap-webpack-plugin": "3.2.1",
-    "tslib": "^1.10.0",
     "uglifyjs-webpack-plugin": "2.2.0",
     "url-loader": "2.1.0",
     "webpack": "4.39.2",
