@@ -12,9 +12,14 @@ const src = path.resolve(root, 'src')
 const legacy = path.resolve(root, 'modules')
 const dist = path.resolve(root, 'dist')
 
+const getApiUrl = acc => `https://${acc ? 'acc.' : ''}api.data.amsterdam.nl/`
+
 function commonConfig(env) {
   const buildId = env && env.buildId ? env.buildId : env.nodeEnv
   const isDev = env.nodeEnv === 'development'
+  const isAcc = env.nodeEnv === 'acceptance'
+
+  const apiUrl = getApiUrl(isAcc || isDev)
 
   return {
     context: root,
@@ -207,7 +212,37 @@ function commonConfig(env) {
           GIT_COMMIT: JSON.stringify(process.env.GIT_COMMIT),
         },
       }),
-      new GenerateSW(),
+      new GenerateSW({
+        importWorkboxFrom: 'local',
+        clientsClaim: true,
+        skipWaiting: true,
+        exclude: [/\.map$/],
+        navigateFallbackBlacklist: [
+          // Exclude any URLs whose last part seems to be a file extension
+          // as they're likely a resource and not a SPA route.
+          // URLs containing a "?" character won't be blacklisted as they're likely
+          // a route with query params (e.g. auth callbacks).
+          new RegExp('/[^/?]+\\.[^/]+$'),
+        ],
+        cleanupOutdatedCaches: true,
+        runtimeCaching: [
+          {
+            // To match cross-origin requests, use a RegExp that matches
+            // the start of the origin:
+            urlPattern: new RegExp(apiUrl),
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'api',
+              expiration: {
+                maxAgeSeconds: 60 * 60 * 24,
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+        ],
+      }),
     ],
   }
 }
