@@ -16,3 +16,8 @@ export const EDITORIAL_DETAIL_ACTIONS = {
   [PAGES.PUBLICATIONS]: toPublicationDetail,
   [PAGES.SPECIALS]: toSpecialDetail,
 }
+
+// Logic is that we don't show metadata in an editorial detail page
+export const EDITORIAL_FIELD_TYPE_VALUES = {
+  CONTENT: 'content',
+}

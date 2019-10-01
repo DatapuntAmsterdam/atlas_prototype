@@ -1,3 +1,3 @@
-import EditorialOverviewPageWrapper from './EditorialOverviewPageWrapper'
+import EditorialOverviewPage from './EditorialOverviewPage'
 
-export default EditorialOverviewPageWrapper
+export default EditorialOverviewPage

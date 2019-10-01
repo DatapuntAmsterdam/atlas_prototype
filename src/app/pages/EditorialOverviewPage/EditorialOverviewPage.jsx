@@ -1,82 +1,54 @@
+/* eslint-disable camelcase */
 import React from 'react'
-import styled from '@datapunt/asc-core'
-import { Button, CardContainer, Column, Heading, Row, themeColor, svgFill } from '@datapunt/asc-ui'
-import { Enlarge } from '@datapunt/asc-assets'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
-import EditorialCard from '../../components/EditorialCard'
+import { Column, Container, Row } from '@datapunt/asc-ui'
+import useFromCMS from '../../utils/useFromCMS'
+import cmsConfig from '../../../shared/config/cms.config'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
-import './EditorialOverviewPage.scss'
-import { EDITORIAL_TITLES } from './constants'
+import EditorialResults from '../../components/EditorialResults'
 
-const PageHeading = styled(Heading)`
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid ${themeColor('tint', 'level3')};
-`
+const EditorialOverviewPage = ({ type = '' }) => {
+  const { results, fetchData, loading } = useFromCMS(cmsConfig[type], undefined, false)
+  const [aggregatedData, setData] = React.useState([])
+  const [page, setPage] = React.useState(0)
+  const { data, links } = results || {}
 
-const EditorialCardContainer = styled(CardContainer)`
-  padding: 0;
-`
+  React.useEffect(() => {
+    ;(async () => {
+      await fetchData()
+    })()
+  }, [])
 
-const StyledButton = styled(Button)`
-  border-color: ${themeColor('tint', 'level7')};
-  color: ${themeColor('tint', 'level7')};
-  background: #fff;
-  ${svgFill('tint', 'level7')};
+  React.useEffect(() => {
+    if (data) {
+      setData([...aggregatedData, ...data])
+      setPage(page + 1)
+    }
+  }, [data])
 
-  &:hover,
-  &:focus {
-    outline: 0;
-    background: ${themeColor('tint', 'level3')};
-  }
-`
-
-const EditorialOverviewPage = ({ page, loading, results, type, links, onClickMore }) => (
-  <div className="editorial-overview__body">
-    <Row>
-      <ContentContainer>
-        <Column
-          wrap
-          span={{ small: 12, medium: 12, big: 12, large: 12, xLarge: 9 }}
-          push={{ small: 0, medium: 0, big: 0, large: 0, xLarge: 1 }}
-        >
-          <EditorialCardContainer>
-            {page === 0 && loading ? (
-              <LoadingIndicator style={{ position: 'inherit' }} />
-            ) : (
-              <>
-                <PageHeading $as="h1">{EDITORIAL_TITLES[type]}</PageHeading>
-
-                {results && results.map(result => <EditorialCard {...result} />)}
-                {page > 0 && loading && <LoadingIndicator />}
-                {links &&
-                  links.next &&
-                  links.next.href !== 'None' &&
-                  (loading ? (
-                    <LoadingIndicator style={{ position: 'inherit' }} />
-                  ) : (
-                    <StyledButton
-                      variant="primaryInverted"
-                      iconLeft={<Enlarge />}
-                      iconSize={12}
-                      onClick={() => {
-                        // Temporarily replace http:// as no changes will be made to JSON API
-                        // until GraphQL API becomes available
-                        const nextHref = links.next.href.replace('http://', 'https://')
-
-                        onClickMore(nextHref)
-                      }}
-                    >
-                      Toon meer
-                    </StyledButton>
-                  ))}
-              </>
-            )}
-          </EditorialCardContainer>
-        </Column>
-      </ContentContainer>
-    </Row>
-  </div>
-)
+  return (
+    <Container>
+      <Row>
+        <ContentContainer>
+          <Column
+            wrap
+            span={{ small: 12, medium: 12, big: 12, large: 12, xLarge: 9 }}
+            push={{ small: 0, medium: 0, big: 0, large: 0, xLarge: 1 }}
+          >
+            <EditorialResults
+              {...{
+                page,
+                loading,
+                results: aggregatedData,
+                type,
+                links,
+                onClickMore: fetchData,
+              }}
+            />
+          </Column>
+        </ContentContainer>
+      </Row>
+    </Container>
+  )
+}
 
 export default EditorialOverviewPage

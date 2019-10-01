@@ -6,6 +6,11 @@ import { routing } from '../../routes'
 import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
 import ModalBlock from './ModalBlock'
 
+export const openFeedbackForm = () => {
+  const openFeedbackFormEvent = new CustomEvent('openForm_feedbackModal')
+  window.dispatchEvent(openFeedbackFormEvent)
+}
+
 const FEEDBACK_RECIPIENT = 'terugmelding.basisinformatie@amsterdam.nl'
 const FEEDBACK_SUBJECT = 'Terugmelding data.amsterdam.nl'
 const FEEDBACK_BODY = location => `Onjuistheid terugmelden voor de pagina: ${location}\n

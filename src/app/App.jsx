@@ -2,8 +2,17 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { GlobalStyle, ThemeProvider } from '@datapunt/asc-ui'
+import styled from '@datapunt/asc-core'
+import {
+  GlobalStyle,
+  ThemeProvider,
+  Container,
+  themeColor,
+  themeSpacing,
+  breakpoint,
+} from '@datapunt/asc-ui'
 import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
+import Helmet from 'react-helmet'
 import { isOldCmsPage, isEditorialPage } from './pages'
 import './_app.scss'
 import {
@@ -26,6 +35,7 @@ import main, { initialState } from './react-reducers'
 import { getEnvironment } from '../shared/environment'
 import { MATOMO_CONFIG } from '../store/middleware/matomo/constants'
 import { routing } from './routes'
+import Footer from './components/Footer/Footer'
 
 const App = ({
   isFullHeight,
@@ -53,8 +63,6 @@ const App = ({
   const rootClasses = classNames({
     'c-dashboard--max-width': hasMaxWidth,
     'c-dashboard--full-height': isFullHeight,
-    'c-dashboard--homepage': homePage,
-    'c-dashboard--editorial': editorialPage,
   })
   const bodyClasses = classNames({
     'c-dashboard__body--error': visibilityError,
@@ -96,12 +104,40 @@ const App = ({
     siteId: MATOMO_CONFIG[getEnvironment(window.location.hostname)].SITE_ID,
   })
 
+  const StyledContainer = styled(Container)`
+    background-color: ${themeColor('tint', 'level1')};
+
+    position: relative;
+    @media screen and ${breakpoint('min-width', 'laptopM')} {
+      margin: 0 ${themeSpacing(6)};
+    }
+  `
+
+  function AppWrapper({ children }) {
+    return homePage || editorialPage ? (
+      <StyledContainer beamColor="valid">
+        <Helmet>
+          <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          />
+        </Helmet>
+        {children}
+        <Footer />
+      </StyledContainer>
+    ) : (
+      <div className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}>
+        {children}
+      </div>
+    )
+  }
+
   return (
     <ThemeProvider>
       <GlobalStyle />
       <MatomoProvider value={matomoInstance}>
         <AppStateProvider initialState={initialState} reducer={main}>
-          <div className={`c-dashboard c-dashboard--page-type-${pageTypeClass} ${rootClasses}`}>
+          <AppWrapper>
             {!embedMode && (
               <Header
                 homePage={homePage}
@@ -124,7 +160,7 @@ const App = ({
                 embedPreviewMode,
               }}
             />
-          </div>
+          </AppWrapper>
         </AppStateProvider>
       </MatomoProvider>
     </ThemeProvider>

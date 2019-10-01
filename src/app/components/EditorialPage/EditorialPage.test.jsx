@@ -4,12 +4,10 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import EditorialPage from './EditorialPage'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import useDocumentTitle from '../../utils/useDocumentTitle'
-import Footer from '../Footer/Footer'
 
 jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')
 jest.mock('../../utils/useDocumentTitle')
 jest.mock('@datapunt/matomo-tracker-react')
-jest.mock('../Footer/Footer')
 
 describe('EditorialPage', () => {
   let component
@@ -24,7 +22,6 @@ describe('EditorialPage', () => {
       setDocumentTitle: mockSetDocumentTitle,
     }))
     useMatomo.mockImplementation(() => ({ trackPageView: mockTrackPageView }))
-    Footer.mockImplementation(() => <></>)
 
     component = shallow(<EditorialPage linkAction={{}} />).dive()
   })

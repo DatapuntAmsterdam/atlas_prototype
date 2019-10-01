@@ -1,11 +1,12 @@
 import React from 'react'
 import { getByUrl } from '../../shared/services/api/api'
 import cmsNormalizer from '../../shared/services/cms/cms-normalizer'
-import { routing } from '../routes'
+import useNormalizedCMSResults from '../../normalizations/cms/useNormalizedCMSResults'
 
 function useFromCMS(config, id = false, normalize = true) {
   const [results, setResults] = React.useState(null)
   const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState(false)
 
   const fetchData = async endpoint => {
     setLoading(true)
@@ -19,13 +20,14 @@ function useFromCMS(config, id = false, normalize = true) {
       const data = await getByUrl(endpoint)
 
       let result = data
-
       if (normalize) {
-        result = await cmsNormalizer(config.type, data, fields)
+        result = await cmsNormalizer(data, fields)
       }
+
+      result = await useNormalizedCMSResults(result, config.type)
       setResults(result)
     } catch (e) {
-      window.location.replace(routing.niet_gevonden.path)
+      setError(true)
     }
 
     setLoading(false)
@@ -36,6 +38,7 @@ function useFromCMS(config, id = false, normalize = true) {
     loading,
     fetchData,
     results,
+    error,
   }
 }
 

@@ -6,8 +6,7 @@ import AutoSuggest from '../../components/auto-suggest/AutoSuggest'
 import { extractIdEndpoint } from '../../../store/redux-first-router/actions'
 import useSlug from '../../../app/utils/useSlug'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
-
-import { MAIN_PATHS } from '../../../app/routes'
+import { LABELS } from '../../services/auto-suggest/auto-suggest'
 
 class HeaderSearch extends React.Component {
   constructor(props) {
@@ -85,7 +84,7 @@ class HeaderSearch extends React.Component {
       onPublicationSearch,
     } = this.props
 
-    const { ARTICLES, DATASETS, PUBLICATIONS } = MAIN_PATHS
+    const { ARTICLES, DATASETS, PUBLICATIONS } = LABELS
 
     const searchAction = {
       [DATASETS]: onDatasetSearch,
@@ -98,7 +97,7 @@ class HeaderSearch extends React.Component {
       onCleanDatasetOverview() // TODO, refactor: don't clean dataset on search
 
       const searchType =
-        (label && label.toLowerCase()) ||
+        label ||
         (isDatasetPage
           ? DATASETS
           : isArticlePage

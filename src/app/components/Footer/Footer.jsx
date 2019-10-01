@@ -1,23 +1,22 @@
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
-import styled from '@datapunt/asc-core'
 import {
   Link,
-  Footer,
+  Footer as AscFooter,
   FooterBottom,
   FooterBottomLinkList,
   FooterContent,
   FooterHeading,
-  FooterLinkList,
   FooterBottomLinkListItem,
-  FooterLinkListItem,
   FooterToggle,
   FooterTop,
   Row,
   Column,
-  Paragraph,
 } from '@datapunt/asc-ui'
 import { routing } from '../../routes'
+import FollowLinks from './FollowLinks'
+import HelpLinks from './HelpLinks'
+import ColofonLinks from './ColofonLinks'
 
 const RouterLinkWrapper = ({ to, className, children }) => (
   <RouterLink to={to} className={className}>
@@ -31,120 +30,44 @@ const StyledLink = ({ children, ...otherProps }) => (
   </Link>
 )
 
-const ProclaimLink = styled(StyledLink)`
-  align-self: flex-start;
-`
-
-const FollowLinks = () => (
-  <FooterLinkList>
-    <FooterLinkListItem>
-      <Link
-        title="Twitter"
-        href="https://twitter.com/AmsterdamNL"
-        rel="external noopener noreferrer"
-        target="_blank"
-        variant="with-chevron"
-      >
-        Twitter
-      </Link>
-    </FooterLinkListItem>
-    <FooterLinkListItem>
-      <Link
-        title="Facebook"
-        href="https://www.facebook.com/gemeenteamsterdam"
-        rel="external noopener noreferrer"
-        target="_blank"
-        variant="with-chevron"
-      >
-        Facebook
-      </Link>
-    </FooterLinkListItem>
-    <FooterLinkListItem>
-      <Link
-        title="LinkedIn"
-        href="https://www.linkedin.com/company/gemeente-amsterdam"
-        rel="external noopener noreferrer"
-        target="_blank"
-        variant="with-chevron"
-      >
-        Linkedin
-      </Link>
-    </FooterLinkListItem>
-    <FooterLinkListItem>
-      <Link
-        title="GitHub"
-        href="https://github.com/Amsterdam"
-        rel="external noopener noreferrer"
-        target="_blank"
-        variant="with-chevron"
-      >
-        GitHub
-      </Link>
-    </FooterLinkListItem>
-  </FooterLinkList>
-)
-
-const ProclaimerContent = () => (
-  <>
-    <Paragraph indent>
-      Gemeente Amsterdam biedt met City Data een voorziening waar data voor iedereen beschikbaar
-      zijn en hergebruikt mogen worden. De gegevens worden aangeboden door gemeentelijke en externe
-      partijen. De eigenaren van deze gegevens zijn primair verantwoordelijk voor de kwaliteit van
-      hun gepubliceerde data. Opmerkingen en aanvullingen op de gegevens kunt u {` `}
-      <Link
-        color="inherit"
-        className="c-link--inverse"
-        title="Terugmelden"
-        href="mailto:terugmelding.basisinformatie@amsterdam.nl"
-      >
-        melden
-      </Link>
-      .
-    </Paragraph>
-    <ProclaimLink
-      color="#fff"
-      title="Lees de hele proclaimer"
-      variant="with-chevron"
-      to={{ type: routing.proclaimer.type }}
-    >
-      Lees de hele proclaimer
-    </ProclaimLink>
-  </>
-)
-
-const FooterComponent = () => (
-  <Footer>
+const Footer = ({ ...otherProps }) => (
+  <AscFooter {...otherProps}>
     <FooterTop>
       <Row>
-        <Column wrap span={{ small: 1, medium: 2, big: 4, large: 8, xLarge: 8 }}>
-          <>
-            <FooterToggle title="Proclaimer" hideAt="tabletM">
-              <FooterContent indent>
-                <ProclaimerContent />
-              </FooterContent>
-            </FooterToggle>
-            <FooterContent showAt="tabletM">
-              <FooterHeading $as="h3">Proclaimer</FooterHeading>
-              <ProclaimerContent />
+        <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
+          <FooterToggle title="Colofon" hideAt="tabletM">
+            <FooterContent indent>
+              <ColofonLinks />
             </FooterContent>
-          </>
+          </FooterToggle>
+          <FooterContent showAt="tabletM">
+            <FooterHeading $as="h3">Colofon</FooterHeading>
+            <ColofonLinks />
+          </FooterContent>
         </Column>
-        <Column
-          wrap
-          span={{ small: 1, medium: 2, big: 2, large: 3, xLarge: 3 }}
-          push={{ small: 0, medium: 0, big: 0, large: 1, xLarge: 1 }}
-        >
-          <>
-            <FooterToggle title="Volg de gemeente" hideAt="tabletM">
-              <FooterContent indent>
-                <FollowLinks />
-              </FooterContent>
-            </FooterToggle>
-            <FooterContent showAt="tabletM">
-              <FooterHeading $as="h3">Volg de gemeente</FooterHeading>
+        <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
+          <FooterToggle title="Volg de gemeente" hideAt="tabletM">
+            <FooterContent indent>
               <FollowLinks />
             </FooterContent>
-          </>
+          </FooterToggle>
+          <FooterContent showAt="tabletM">
+            <FooterHeading $as="h3">Volg de gemeente</FooterHeading>
+            <FollowLinks />
+          </FooterContent>
+        </Column>
+        <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
+          <FooterToggle title="Vragen?" hideAt="tabletM">
+            <FooterContent indent>
+              <HelpLinks />
+            </FooterContent>
+          </FooterToggle>
+          <FooterContent showAt="tabletM">
+            <FooterHeading $as="h3" styleAs="h3">
+              Vragen?
+            </FooterHeading>
+            <HelpLinks />
+          </FooterContent>
         </Column>
       </Row>
     </FooterTop>
@@ -159,7 +82,7 @@ const FooterComponent = () => (
         </Column>
       </Row>
     </FooterBottom>
-  </Footer>
+  </AscFooter>
 )
 
-export default FooterComponent
+export default Footer

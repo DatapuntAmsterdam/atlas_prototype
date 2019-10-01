@@ -18,7 +18,7 @@ import paramsRegistry from './params-registry'
 import './queryParameters'
 
 window.reducer = rootReducer
-const configureStore = routesMap => {
+const configureStore = (routesMap, storybook = false) => {
   const routingOptions = {
     querySerializer: queryString,
     restoreScroll: restoreScroll(),
@@ -37,18 +37,24 @@ const configureStore = routesMap => {
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   const sagaMiddleware = createSagaMiddleware()
-  const enhancer = composeEnhancers(
-    routeEnhancer,
-    applyMiddleware(
-      preserveUrlParametersMiddleware,
-      routeMiddleware,
-      urlParamsMiddleware,
-      setQueriesFromStateMiddleware,
-      documentHeadMiddleware,
-      matomoMiddleware,
-      sagaMiddleware,
-    ),
-  )
+
+  const allMiddleware = [
+    preserveUrlParametersMiddleware,
+    routeMiddleware,
+    urlParamsMiddleware,
+    setQueriesFromStateMiddleware,
+    documentHeadMiddleware,
+    matomoMiddleware,
+    sagaMiddleware,
+  ]
+
+  let middleware = allMiddleware
+
+  if (storybook) {
+    middleware = [routeMiddleware, documentHeadMiddleware, matomoMiddleware, sagaMiddleware]
+  }
+
+  const enhancer = composeEnhancers(routeEnhancer, applyMiddleware(...middleware))
 
   // Element that have a focus should blur on a route change. This prevents issues like
   // having a header menu open when the user navigates

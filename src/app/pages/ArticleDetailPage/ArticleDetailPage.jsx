@@ -1,9 +1,8 @@
-import styled from '@datapunt/asc-core'
+import styled, { css } from '@datapunt/asc-core'
 import {
   Article,
   EditorialBody,
   EditorialContent,
-  EditorialHeader,
   EditorialMetaList,
   EditorialSidebar,
   Column,
@@ -12,10 +11,11 @@ import {
   List,
   ListItem,
   Link,
-  Paragraph,
   Typography,
   Row,
   themeColor,
+  Paragraph,
+  themeSpacing,
 } from '@datapunt/asc-ui'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -27,8 +27,11 @@ import './ArticleDetailPage.scss'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import { toArticleDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
-import cmsConfig from '../../../shared/services/cms/cms.config'
+import cmsConfig from '../../../shared/config/cms.config'
 import normalizeDownloadsObject from '../../../normalizations/cms/normalizeDownloadFiles'
+import { routing } from '../../routes'
+import ShareBar from '../../components/ShareBar/ShareBar'
+import { EDITORIAL_FIELD_TYPE_VALUES } from '../EditorialOverviewPage/constants'
 
 const ListItemContent = styled.div`
   display: flex;
@@ -42,7 +45,7 @@ const ListItemContent = styled.div`
 
 /* istanbul ignore next */
 const ArticleDetailPage = ({ id }) => {
-  const { fetchData, results, loading } = useFromCMS(cmsConfig.ARTICLE, id)
+  const { fetchData, results, loading, error } = useFromCMS(cmsConfig.ARTICLE, id)
 
   React.useEffect(() => {
     fetchData()
@@ -50,16 +53,23 @@ const ArticleDetailPage = ({ id }) => {
 
   const {
     title,
-    date,
     localeDate,
+    localeDateFormatted,
     body,
-    coverImageUrl,
+    coverImage,
     field_downloads: downloads,
     field_links: links,
     field_byline: byline,
-    field_slug: slug,
-    field_intro: intro,
+    slug,
+    intro,
+    field_type: articleType,
   } = results || {}
+
+  React.useEffect(() => {
+    if (error) {
+      window.location.replace(routing.niet_gevonden.path)
+    }
+  }, [error])
 
   const documentTitle = title && `Artikel: ${title}`
   const linkAction = slug && toArticleDetail(id, slug)
@@ -70,12 +80,26 @@ const ArticleDetailPage = ({ id }) => {
     type: 'button',
   })`
     text-align: left;
+    background-color: ${themeColor(
+      'tint',
+      'level1',
+    )}; // Buttons are grey by default on Safari and Firefox
 
     small {
       text-transform: uppercase;
       color: ${themeColor('tint', 'level6')};
     }
   `
+
+  const StyledHeading = styled(Heading)`
+    ${({ isContentType }) =>
+      isContentType &&
+      css`
+        margin-bottom: ${themeSpacing(4)};
+      `}
+  `
+
+  const isContentType = articleType === EDITORIAL_FIELD_TYPE_VALUES.CONTENT
 
   return (
     <EditorialPage {...{ documentTitle, loading, linkAction }} description={intro}>
@@ -84,9 +108,9 @@ const ArticleDetailPage = ({ id }) => {
           <Row className="article__row">
             <ContentContainer>
               <Article
-                {...(coverImageUrl
+                {...(coverImage
                   ? {
-                      image: typeof coverImageUrl === 'string' ? coverImageUrl : undefined,
+                      image: typeof coverImage === 'string' ? coverImage : undefined,
                     }
                   : {})}
               >
@@ -99,16 +123,17 @@ const ArticleDetailPage = ({ id }) => {
                     >
                       <Column span={{ small: 1, medium: 2, big: 4, large: 7, xLarge: 7 }}>
                         <EditorialBody>
-                          <EditorialHeader title={title}>
+                          <StyledHeading $as="h1" isContentType={!isContentType}>
+                            {title}
+                          </StyledHeading>
+                          {isContentType && (
                             <EditorialMetaList
-                              dateTime={date}
-                              dateFormatted={localeDate}
+                              dateTime={localeDate}
+                              dateFormatted={localeDateFormatted}
                               fields={byline && [{ id: 1, label: byline }]}
                             />
-                          </EditorialHeader>
-                          <Paragraph strong hasLongText>
-                            {intro}
-                          </Paragraph>
+                          )}
+                          <Paragraph strong>{intro}</Paragraph>
                           <CustomHTMLBlock body={body} />
                         </EditorialBody>
                       </Column>
@@ -156,6 +181,12 @@ const ArticleDetailPage = ({ id }) => {
                           ) : null}
                         </EditorialSidebar>
                       </Column>
+                    </Column>
+                    <Column
+                      span={{ small: 1, medium: 2, big: 4, large: 11, xLarge: 11 }}
+                      push={{ small: 0, medium: 0, big: 1, large: 1, xLarge: 1 }}
+                    >
+                      <ShareBar topSpacing={6} />
                     </Column>
                   </EditorialContent>
                 </Row>

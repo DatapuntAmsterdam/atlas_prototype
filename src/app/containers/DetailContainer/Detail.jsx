@@ -14,7 +14,6 @@ const Detail = ({
   detailTemplateUrl,
   detailData,
   detailFilterSelection,
-  printMode,
   subType,
   id,
 }) => (
@@ -39,7 +38,7 @@ const Detail = ({
         endpoint,
       }}
     />
-    {!isLoading && !printMode && (
+    {!isLoading && (
       <div className="u-row">
         <div className="u-col-sm--12">
           <div className="u-margin__left--2 u-margin__bottom--1 qa-share-bar">
@@ -57,7 +56,6 @@ Detail.defaultProps = {
   detailTemplateUrl: undefined,
   detailData: undefined,
   detailFilterSelection: undefined,
-  printMode: false,
 }
 
 Detail.propTypes = {
@@ -67,7 +65,6 @@ Detail.propTypes = {
   id: PropTypes.string.isRequired,
   subType: PropTypes.string.isRequired,
   previewPanorama: PropTypes.shape({}),
-  printMode: PropTypes.bool,
   isPreviewPanoramaLoading: PropTypes.bool,
   detailTemplateUrl: PropTypes.string,
   detailData: PropTypes.shape({}),

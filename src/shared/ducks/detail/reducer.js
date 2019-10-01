@@ -16,7 +16,7 @@ import { shouldResetState } from '../../../store/redux-first-router/actions'
 export { REDUCER_KEY as DETAIL }
 
 export default function detailReducer(state = initialState, action) {
-  if (shouldResetState(action, [PAGES.DATA_DETAIL])) {
+  if (shouldResetState(action, [PAGES.DATA_DETAIL, PAGES.DATASET_DETAIL])) {
     return initialState
   }
 

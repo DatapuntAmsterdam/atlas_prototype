@@ -16,9 +16,7 @@ exports[`App should render the homepage 1`] = `
       }
       reducer={[Function]}
     >
-      <div
-        className="c-dashboard c-dashboard--page-type-data "
-      >
+      <AppWrapper>
         <Connect(Header)
           embedPreviewMode={false}
           hasEmbedButton={false}
@@ -37,7 +35,7 @@ exports[`App should render the homepage 1`] = `
           homePage={false}
           visibilityError={false}
         />
-      </div>
+      </AppWrapper>
     </AppStateProvider>
   </MatomoProvider>
 </ThemeProvider>
@@ -59,9 +57,7 @@ exports[`App should render the mapview 1`] = `
       }
       reducer={[Function]}
     >
-      <div
-        className="c-dashboard c-dashboard--page-type-data "
-      >
+      <AppWrapper>
         <Connect(Header)
           embedPreviewMode={false}
           hasEmbedButton={true}
@@ -80,7 +76,7 @@ exports[`App should render the mapview 1`] = `
           homePage={false}
           visibilityError={false}
         />
-      </div>
+      </AppWrapper>
     </AppStateProvider>
   </MatomoProvider>
 </ThemeProvider>

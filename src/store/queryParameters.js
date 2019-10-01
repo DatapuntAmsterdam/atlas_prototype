@@ -79,6 +79,13 @@ const routesWithMapActive = [
   routing.dataDetail.type,
 ]
 
+const routesWithCmsData = [
+  routing.articles.type,
+  routing.articleDetail.type,
+  routing.publications.type,
+  routing.publicationDetail.type,
+]
+
 export default paramsRegistry
   .addParameter(PARAMETERS.QUERY, routes => {
     routes.add(routesWithSearch, DATA_SEARCH_REDUCER, 'query', {
@@ -290,10 +297,20 @@ export default paramsRegistry
     })
   })
   .addParameter(PARAMETERS.PRINT, routes => {
-    routes.add(routesWithMapActive, UI, 'isPrintMode', {
-      defaultValue: UIInitialState.isPrintMode,
-      selector: isPrintMode,
-    })
+    routes.add(
+      [
+        ...routesWithMapActive,
+        ...routesWithSearch,
+        ...routesWithCmsData,
+        routing.datasetDetail.type,
+      ],
+      UI,
+      'isPrintMode',
+      {
+        defaultValue: UIInitialState.isPrintMode,
+        selector: isPrintMode,
+      },
+    )
   })
   .addParameter(PARAMETERS.LAYERS, routes => {
     routes.add(

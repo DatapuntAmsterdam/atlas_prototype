@@ -71,9 +71,11 @@ exports[`PublicationDetailPage should render the publication when there are resu
             wrap={false}
           >
             <EditorialContent>
-              <EditorialHeader
-                title="This is a title"
-              />
+              <Heading
+                $as="h1"
+              >
+                This is a title
+              </Heading>
               <EditorialMetaList
                 fields={
                   Array [
@@ -141,6 +143,26 @@ exports[`PublicationDetailPage should render the publication when there are resu
               />
             </EditorialContent>
           </Column>
+        </Column>
+        <Column
+          debug={false}
+          debugColor="rgba(51,102,153,0.5)"
+          order={0}
+          push={0}
+          span={
+            Object {
+              "big": 6,
+              "large": 12,
+              "medium": 2,
+              "small": 1,
+              "xLarge": 12,
+            }
+          }
+          wrap={false}
+        >
+          <Connect(ShareBar)
+            topSpacing={6}
+          />
         </Column>
       </Row>
     </ContentContainer>

@@ -5,6 +5,7 @@ import {
   isDatasetDetailPage,
   isDatasetPage,
   isPanoPage,
+  isHomepage,
 } from '../../../store/redux-first-router/selectors'
 import paramsRegistry from '../../../store/params-registry'
 import { getFileName } from '../files/selectors'
@@ -193,6 +194,7 @@ export const hasPrintMode = createSelector(
   isDataPage,
   isMapActive,
   isPanoPage,
+  isHomepage,
   getViewMode,
   (
     dataSelectionPage,
@@ -201,12 +203,15 @@ export const hasPrintMode = createSelector(
     dataPage,
     mapActive,
     panoPageActive,
+    homePageActive,
     viewMode,
   ) =>
-    ((!dataSelectionPage || viewMode === VIEW_MODE.SPLIT || viewMode === VIEW_MODE.MAP) &&
+    !homePageActive &&
+    (((!dataSelectionPage || viewMode === VIEW_MODE.SPLIT || viewMode === VIEW_MODE.MAP) &&
       (!datasetPage || datasetDetailPage) &&
       (dataPage || mapActive || viewMode === VIEW_MODE.SPLIT)) ||
-    panoPageActive,
+      panoPageActive ||
+      datasetPage),
 )
 
 export const hasEmbedMode = createSelector(

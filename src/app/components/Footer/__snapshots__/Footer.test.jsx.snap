@@ -15,23 +15,23 @@ exports[`Footer should render 1`] = `
         push={0}
         span={
           Object {
-            "big": 4,
-            "large": 8,
+            "big": 2,
+            "large": 4,
             "medium": 2,
             "small": 1,
-            "xLarge": 8,
+            "xLarge": 4,
           }
         }
         wrap={true}
       >
         <FooterToggle
           hideAt="tabletM"
-          title="Proclaimer"
+          title="Colofon"
         >
           <FooterContent
             indent={true}
           >
-            <ProclaimerContent />
+            <ColofonLinks />
           </FooterContent>
         </FooterToggle>
         <FooterContent
@@ -40,31 +40,23 @@ exports[`Footer should render 1`] = `
           <FooterHeading
             $as="h3"
           >
-            Proclaimer
+            Colofon
           </FooterHeading>
-          <ProclaimerContent />
+          <ColofonLinks />
         </FooterContent>
       </Column>
       <Column
         debug={false}
         debugColor="rgba(51,102,153,0.5)"
         order={0}
-        push={
-          Object {
-            "big": 0,
-            "large": 1,
-            "medium": 0,
-            "small": 0,
-            "xLarge": 1,
-          }
-        }
+        push={0}
         span={
           Object {
             "big": 2,
-            "large": 3,
+            "large": 4,
             "medium": 2,
             "small": 1,
-            "xLarge": 3,
+            "xLarge": 4,
           }
         }
         wrap={true}
@@ -88,6 +80,44 @@ exports[`Footer should render 1`] = `
             Volg de gemeente
           </FooterHeading>
           <FollowLinks />
+        </FooterContent>
+      </Column>
+      <Column
+        debug={false}
+        debugColor="rgba(51,102,153,0.5)"
+        order={0}
+        push={0}
+        span={
+          Object {
+            "big": 2,
+            "large": 4,
+            "medium": 2,
+            "small": 1,
+            "xLarge": 4,
+          }
+        }
+        wrap={true}
+      >
+        <FooterToggle
+          hideAt="tabletM"
+          title="Vragen?"
+        >
+          <FooterContent
+            indent={true}
+          >
+            <HelpLinks />
+          </FooterContent>
+        </FooterToggle>
+        <FooterContent
+          showAt="tabletM"
+        >
+          <FooterHeading
+            $as="h3"
+            styleAs="h3"
+          >
+            Vragen?
+          </FooterHeading>
+          <HelpLinks />
         </FooterContent>
       </Column>
     </Row>

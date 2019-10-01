@@ -9,31 +9,40 @@ import {
   Paragraph,
   Image,
   Tag,
-  breakpoint,
   themeColor,
+  themeSpacing,
 } from '@datapunt/asc-ui'
+import RouterLink from 'redux-first-router-link'
 
 const notFoundImage = require('./not_found_thumbnail.jpg')
 
 const CardHeading = styled(Heading)`
   border-bottom: 2px solid transparent;
   line-height: 22px;
-  margin-bottom: 12px;
+  margin-bottom: ${themeSpacing(3)};
   width: fit-content;
 `
 
-const StyledLink = styled(Link)`
-  margin-bottom: 16px;
+const StyledRouterLink = styled(RouterLink)`
+  margin-bottom: ${themeSpacing(4)};
   width: 100%;
 
   &:hover,
   &:focus {
+    background-color: inherit;
+
     ${CardHeading} {
       color: ${themeColor('secondary')};
       border-color: ${themeColor('secondary')};
     }
   }
 `
+
+const StyledLinkWrapper = ({ children, ...otherProps }) => (
+  <Link $as={StyledRouterLink} {...otherProps}>
+    {children}
+  </Link>
+)
 
 const StyledCard = styled(Card)`
   align-items: stretch;
@@ -44,30 +53,23 @@ const StyledCardHeading = styled(CardHeading)`
 `
 
 const StyledCardMedia = styled(CardMedia)`
-  width: 20%;
-  max-width: 160px;
-  max-height: 160px;
   flex: 1 0 auto;
+  border: 1px solid ${themeColor('tint', 'level3')};
+  height: 0%; // fix to reset the height given by the parent's display: flex;
+  min-width: ${themeSpacing(12)};
+  max-width: ${themeSpacing(40)};
+  width: 20%;
 
-  @media screen and ${breakpoint('max-width', 'laptopM')} {
-    height: 160px;
-    flex: 1 0 160px;
-  }
-
-  @media screen and ${breakpoint('max-width', 'tabletM')} {
-    height: 72px;
-    flex: 1 0 72px;
-  }
-
-  @media screen and ${breakpoint('max-width', 'mobileM')} {
-    height: 56px;
-    flex: 1 0 56px;
+  &::before {
+    padding-top: ${({ vertical }) => (vertical ? '145%' : '100%')};
   }
 `
 
 const StyledCardContent = styled(CardContent)`
+  display: flex;
+  flex-direction: column;
   padding: 0;
-  margin: 0 16px;
+  margin: ${themeSpacing(0, 4)};
   border-bottom: 1px solid ${themeColor('tint', 'level3')};
   position: relative;
 `
@@ -75,51 +77,58 @@ const StyledCardContent = styled(CardContent)`
 const StyledTag = styled(Tag)`
   display: inline-block;
   text-transform: capitalize;
+  margin-bottom: ${themeSpacing(2)};
+  padding: 2px; // needs to check if we need to implement this in asc-ui, as we also use the same padding on the homepage
 `
 
 const IntroText = styled(Paragraph)`
-  padding-bottom: 16px;
+  padding-bottom: ${themeSpacing(4)};
 `
 
 const MetaText = styled(Paragraph)`
   display: inline-block;
-  color: grey;
-  padding-bottom: 16px;
+  color: ${themeColor('tint', 'level5')};
+  padding-bottom: ${themeSpacing(4)};
   font-size: 14px;
   line-height: 1.25;
   text-transform: capitalize;
+  margin-top: auto;
 `
 
 const EditorialCard = ({
   id,
   title,
-  teaserImageUrl,
   shortTitle,
   teaser,
   intro,
   specialType,
   localeDate,
   localeDateFormatted,
-  href,
+  teaserImage,
+  imageIsVertical,
+  to,
 }) => (
-  <StyledLink key={id} href={href} linkType="blank">
+  <StyledLinkWrapper key={id} to={to} linkType="blank">
     <StyledCard horizontal>
-      <StyledCardMedia>
-        <Image src={teaserImageUrl || notFoundImage} alt={title} square />
+      <StyledCardMedia vertical={imageIsVertical}>
+        <Image src={teaserImage || notFoundImage} alt={title} square />
       </StyledCardMedia>
       <StyledCardContent>
         <StyledCardHeading $as="h4">{shortTitle || title}</StyledCardHeading>
+        {specialType && (
+          <StyledTag colorType="tint" colorSubtype="level3">
+            {specialType}
+          </StyledTag>
+        )}
         <IntroText>{teaser || intro}</IntroText>
-        {specialType ? (
-          <StyledTag>{specialType}</StyledTag>
-        ) : (
+        {localeDate && (
           <MetaText as="time" datetime={localeDate}>
             {localeDateFormatted}
           </MetaText>
         )}
       </StyledCardContent>
     </StyledCard>
-  </StyledLink>
+  </StyledLinkWrapper>
 )
 
 export default EditorialCard

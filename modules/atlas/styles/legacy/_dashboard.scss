@@ -5,37 +5,16 @@ $backdrop-color: rgba(0, 0, 0, 0.5);
   background: $primary-light;
 
   .styled-header {
+    width: 100%;
     display: flex;
     justify-content: center;
   }
 
-  &--max-width:not(&--editorial),
-  &--homepage {
+  &--max-width {
     #header {
       max-width: 1800px;
       header {
         max-width: 1600px;
-      }
-    }
-  }
-
-  // Hack to add a green beam on the right side of the header. When the header will be refactored to
-  // be inside the grid, this can be removed
-  &--editorial {
-    #header {
-      @media screen and (min-width: 1200px) {
-        width: calc(100% - 48px);
-
-        &::after {
-          display: block;
-          position: absolute;
-          top: 0;
-          right: -24px;
-          bottom: 0;
-          width: 24px;
-          background-color: $thema-6;
-          content: '';
-        }
       }
     }
   }

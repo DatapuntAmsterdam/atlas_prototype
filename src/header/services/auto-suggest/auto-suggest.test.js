@@ -1,4 +1,4 @@
-import autoSuggestSearch from './auto-suggest'
+import autoSuggestSearch, { orderAutoSuggestResults } from './auto-suggest'
 import { getAuthHeaders } from '../../../shared/services/auth/auth'
 
 jest.mock('../../../shared/services/auth/auth')
@@ -70,6 +70,35 @@ describe('The auto-suggest service', () => {
       expect(suggestions.data[1].content[1].label).toBe('Linnaeusstraat 2')
       expect(suggestions.data[1].content[1].uri).toBe('bag/verblijfsobject/124')
       expect(suggestions.data[1].content[1].index).toBe(2)
+    })
+  })
+
+  describe('sortAutoSuggestResults', () => {
+    it('should sort the autoresults like follows: data [multiple keys], publications, datasets, articles', () => {
+      const data = [{ label: 'foo' }, { label: 'bar' }, { label: 'baz' }]
+      const datasets = { label: 'Datasets' }
+      const publications = { label: 'Publicaties' }
+      const articles = { label: 'Artikelen' }
+
+      const expectationAll = [...data, publications, datasets, articles]
+      const expectationFew1 = [...data, datasets, articles]
+      const expectationFew2 = [...data, publications, datasets]
+      const expectationFew3 = [...data, publications, articles]
+      const expectationFew4 = [publications, datasets, articles]
+
+      expect(orderAutoSuggestResults([...data, articles, publications, datasets])).toEqual(
+        expectationAll,
+      )
+      expect(orderAutoSuggestResults([articles, ...data, datasets, publications])).toEqual(
+        expectationAll,
+      )
+      expect(orderAutoSuggestResults([publications, articles, ...data, datasets])).toEqual(
+        expectationAll,
+      )
+      expect(orderAutoSuggestResults([articles, datasets, ...data])).toEqual(expectationFew1)
+      expect(orderAutoSuggestResults([datasets, publications, ...data])).toEqual(expectationFew2)
+      expect(orderAutoSuggestResults([articles, publications, ...data])).toEqual(expectationFew3)
+      expect(orderAutoSuggestResults([datasets, articles, publications])).toEqual(expectationFew4)
     })
   })
 })

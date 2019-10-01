@@ -91,18 +91,6 @@ export const routing = {
     useHooks: true, // indicate to skip legacy documentHead and piwik middleware
     page: PAGES.CONSTRUCTION_FILE,
   },
-  articleDetail: {
-    title: 'Artikel',
-    path: `/${MAIN_PATHS.ARTICLES}/artikel/:slug/:id/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLE_DETAIL}`,
-    page: PAGES.ARTICLE_DETAIL,
-  },
-  articles: {
-    title: 'Artikelen',
-    path: `/${MAIN_PATHS.ARTICLES}/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLES}`,
-    page: PAGES.ARTICLES,
-  },
   nieuws: {
     title: 'Nieuws',
     path: `/${MAIN_PATHS.CONTENT}/nieuws/`,
@@ -192,6 +180,18 @@ export const routing = {
     path: `/${MAIN_PATHS.DATA}/:type/:subtype/:id/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA_DETAIL}`,
     page: PAGES.DATA_DETAIL,
+  },
+  articles: {
+    title: 'Artikelen',
+    path: `/${MAIN_PATHS.ARTICLES}/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLES}`,
+    page: PAGES.ARTICLES,
+  },
+  articleDetail: {
+    title: 'Artikel',
+    path: `/${MAIN_PATHS.ARTICLES}/artikel/:slug/:id/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ARTICLE_DETAIL}`,
+    page: PAGES.ARTICLE_DETAIL,
   },
   articleSearch: {
     title: 'Artikelen zoekresultaten',

@@ -17,7 +17,7 @@ const NoResultsForSearchType = ({ message, authMessage, hideLoginLink }) => {
           </>
         )}
       </div>
-      {!hideLoginLink && <LoginLinkContainer inverted={false} />}
+      {!hideLoginLink && authMessage && <LoginLinkContainer inverted={false} />}
     </div>
   )
 }

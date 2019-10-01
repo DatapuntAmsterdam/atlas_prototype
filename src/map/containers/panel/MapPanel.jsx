@@ -19,7 +19,7 @@ const MapPanel = ({
   onLayerVisibilityToggle,
   overlays,
   user,
-  isPrint,
+  printMode,
   zoomLevel,
   isMapPanelHandleVisible: mapPanelHandleVisisble,
 }) => {
@@ -78,7 +78,7 @@ const MapPanel = ({
             overlays={overlays}
             user={user}
             zoomLevel={zoomLevel}
-            isPrint={isPrint}
+            printMode={printMode}
           />
         )}
         <MapPanelHandle
@@ -116,7 +116,7 @@ MapPanel.propTypes = {
   activeMapLayers: PropTypes.array, // eslint-disable-line
   isMapPanelHandleVisible: PropTypes.bool.isRequired,
   isMapPanelVisible: PropTypes.bool,
-  isPrint: PropTypes.bool.isRequired,
+  printMode: PropTypes.bool.isRequired,
   map: PropTypes.object, // eslint-disable-line
   mapBaseLayers: PropTypes.object, // eslint-disable-line
   mapLayers: PropTypes.arrayOf(PropTypes.object),

@@ -2,33 +2,29 @@ import { renderHook } from '@testing-library/react-hooks'
 import useFromCMS from './useFromCMS'
 import { getByUrl } from '../../shared/services/api/api'
 import cmsNormalizer from '../../shared/services/cms/cms-normalizer'
+import useNormalizedCMSResults from '../../normalizations/cms/useNormalizedCMSResults'
 
 jest.mock('../../shared/services/api/api')
 jest.mock('../../shared/services/cms/cms-normalizer')
+jest.mock('../../normalizations/cms/useNormalizedCMSResults')
 jest.useFakeTimers()
 
 describe('useFromCMS', () => {
   const id = 3
 
-  const { replace } = window.location
   const mockData = {
-    drupal_internal__nid: 100,
+    uuid: 100,
   }
 
   beforeEach(() => {
-    Object.defineProperty(window.location, 'replace', {
-      configurable: true,
-    })
-    window.location.replace = jest.fn()
-
     getByUrl.mockReturnValueOnce(Promise.resolve(mockData))
-    cmsNormalizer.mockReturnValueOnce(Promise.resolve({ data: [mockData] }))
+    cmsNormalizer.mockReturnValueOnce(Promise.resolve(mockData))
+    useNormalizedCMSResults.mockReturnValueOnce(mockData)
   })
 
   afterEach(() => {
     getByUrl.mockReset()
     cmsNormalizer.mockReset()
-    window.location.replace = replace
   })
 
   const mockCMSconfig = {
@@ -58,11 +54,36 @@ describe('useFromCMS', () => {
     // wait until it resolves
     await waitForNextUpdate()
 
+    // handle the normalization
+    expect(useNormalizedCMSResults).toHaveBeenCalled()
+
     expect(result.current.loading).toBe(false)
-    expect(result.current.results).toEqual({ data: [mockData] })
+    expect(result.current.results).toEqual(mockData)
   })
 
-  it('should redirect to no found page when the data is not available', async () => {
+  it('should return results when fetchData is called and no normalization is required', async () => {
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useFromCMS(mockCMSconfig.TEST, undefined, false),
+    )
+
+    expect(result.current.loading).toBe(true)
+    expect(result.current.results).toBeNull()
+
+    // call the fetchData function
+    result.current.fetchData()
+    expect(getByUrl).toHaveBeenCalledWith('https://test.url/api')
+
+    // wait until it resolves
+    await waitForNextUpdate()
+
+    // don't handle the normalization
+    expect(cmsNormalizer).not.toHaveBeenCalled()
+
+    expect(result.current.loading).toBe(false)
+    expect(result.current.results).toEqual(mockData)
+  })
+
+  it('should return an error when thrown', async () => {
     getByUrl.mockReset()
     getByUrl.mockReturnValueOnce(Promise.reject(mockData))
 
@@ -78,6 +99,6 @@ describe('useFromCMS', () => {
 
     expect(result.current.loading).toBe(false)
     expect(result.current.results).toBeNull()
-    expect(window.location.replace).toHaveBeenCalledTimes(1)
+    expect(result.current.error).toBe(true)
   })
 })

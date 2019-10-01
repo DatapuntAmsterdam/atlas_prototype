@@ -9,9 +9,15 @@ jest.mock('../../../shared/ducks/ui/ui')
 describe('ShareBar', () => {
   const props = {
     hasPrintButton: false,
+    hideInPrintMode: true,
   }
 
-  const store = configureMockStore()({})
+  const store = configureMockStore()({
+    ui: {
+      isPrintMode: false,
+    },
+  })
+
   const component = shallow(<ShareBar {...props} store={store} />)
     .dive()
     .dive()

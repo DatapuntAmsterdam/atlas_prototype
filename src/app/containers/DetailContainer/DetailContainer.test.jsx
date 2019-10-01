@@ -30,7 +30,7 @@ describe('DetailContainer', () => {
   })
 
   it('should render', () => {
-    const store = configureMockStore()({ ui: { isPrintMode: false } })
+    const store = configureMockStore()()
     const component = shallow(<DetailContainer store={store} />)
       .dive()
       .dive()

@@ -2,17 +2,8 @@
 
 exports[`ArticleDetailPage should render the publication when there are results 1`] = `
 <EditorialPage
-  description="intro"
   documentTitle="Artikel: This is a title"
-  linkAction={
-    Object {
-      "payload": Object {
-        "id": 3,
-        "slug": "slug",
-      },
-      "type": "atlasRouter/ARTICLE_DETAIL",
-    }
-  }
+  linkAction={null}
   loading={false}
 >
   <div
@@ -76,17 +67,15 @@ exports[`ArticleDetailPage should render the publication when there are results 
                   wrap={false}
                 >
                   <EditorialBody>
-                    <EditorialHeader
-                      title="This is a title"
+                    <Styled(Heading)
+                      $as="h1"
+                      isContentType={true}
                     >
-                      <EditorialMetaList />
-                    </EditorialHeader>
+                      This is a title
+                    </Styled(Heading)>
                     <Paragraph
-                      hasLongText={true}
                       strong={true}
-                    >
-                      intro
-                    </Paragraph>
+                    />
                     <CustomHTMLBlock
                       body={
                         Object {
@@ -122,6 +111,34 @@ exports[`ArticleDetailPage should render the publication when there are results 
                 >
                   <EditorialContent />
                 </Column>
+              </Column>
+              <Column
+                debug={false}
+                debugColor="rgba(51,102,153,0.5)"
+                order={0}
+                push={
+                  Object {
+                    "big": 1,
+                    "large": 1,
+                    "medium": 0,
+                    "small": 0,
+                    "xLarge": 1,
+                  }
+                }
+                span={
+                  Object {
+                    "big": 4,
+                    "large": 11,
+                    "medium": 2,
+                    "small": 1,
+                    "xLarge": 11,
+                  }
+                }
+                wrap={false}
+              >
+                <Connect(ShareBar)
+                  topSpacing={6}
+                />
               </Column>
             </EditorialContent>
           </Row>

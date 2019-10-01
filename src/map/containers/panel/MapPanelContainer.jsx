@@ -35,7 +35,7 @@ const mapStateToProps = state => ({
   overlays: getMapOverlays(state),
   zoomLevel: getMapZoom(state),
   user: getUser(state),
-  isPrint: isPrintMode(state),
+  printMode: isPrintMode(state),
   isMapPanelVisible: isMapPanelActive(state),
 })
 

@@ -175,10 +175,14 @@ exports[`Dataset should render with search results 1`] = `
 `;
 
 exports[`Dataset should render without search results 1`] = `
-<NoResultsForSearchType
-  authMessage={false}
-  hideLoginLink={true}
-  message="Tip: maak de zoekcriteria minder specifiek. Of probeer in plaats van zoeken eens
-        de optie 'Alle datasets tonen' en filter vervolgens op thema."
-/>
+<Fragment>
+  <NoResultsForSearchType
+    authMessage={false}
+    hideLoginLink={true}
+    message={<NoDatasetsMessage />}
+  />
+  <Connect(ShareBar)
+    topSpacing={6}
+  />
+</Fragment>
 `;
