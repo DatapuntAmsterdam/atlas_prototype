@@ -10,10 +10,10 @@ module.exports = env => {
     MAP:
       'leaflet|leaflet-draw|leaflet-rotatedmarker|leaflet.markercluster|leaflet.nontiledlayer|proj4|proj4leaflet',
     DATAPUNT: '@datapunt',
-    BABEL: '@babel',
-    STYLED: 'styled-components|polished|style-loader|css-loader',
+    STYLED: 'styled-components|polished|style-loader|css-loader|sass-loader|postcss-loader',
     PANORAMA: 'marzipano',
-    POLYFILL: 'babel|objectFitPolyfill',
+    POLYFILL: '@babel/polyfill|objectFitPolyfill',
+    ANGULAR: 'angular|angular-aria|angular-i18n|angular-sanitize|react-angular',
     REACT:
       'react|react-dom|redux-first-router|redux-first-router-link|redux-first-router-restore-scroll|reselect|redux|@?redux-saga|react-redux|react-helmet|prop-types',
   }
@@ -54,6 +54,7 @@ module.exports = env => {
                 CHUNKS.REACT,
                 CHUNKS.PANORAMA,
                 CHUNKS.BBGA,
+                CHUNKS.ANGULAR,
               ].join('|')})/`,
             ),
             name: 'vendor',
@@ -99,6 +100,12 @@ module.exports = env => {
             test: getTestRegex(CHUNKS.REACT),
             name: 'react',
             chunks: 'all',
+            enforce: true,
+          },
+          angular: {
+            test: getTestRegex(CHUNKS.ANGULAR),
+            name: 'angular',
+            chunks: 'async',
             enforce: true,
           },
           main: {

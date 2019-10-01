@@ -12,14 +12,17 @@ const src = path.resolve(root, 'src')
 const legacy = path.resolve(root, 'modules')
 const dist = path.resolve(root, 'dist')
 
-const getApiUrl = acc => `https://${acc ? 'acc.' : ''}api.data.amsterdam.nl/`
-
 function commonConfig(env) {
   const buildId = env && env.buildId ? env.buildId : env.nodeEnv
   const isDev = env.nodeEnv === 'development'
   const isAcc = env.nodeEnv === 'acceptance'
 
-  const apiUrl = getApiUrl(isAcc || isDev)
+  // Todo: Put this in a .env file: https://datapunt.atlassian.net/browse/DP-7302
+  const getApiUrl = (prefix = '') =>
+    `https://${isAcc || isDev ? 'acc.' : ''}${prefix}data.amsterdam.nl/`
+
+  const apiUrl = getApiUrl('api.')
+  const cmsUrl = getApiUrl('cms.')
 
   return {
     context: root,
@@ -227,14 +230,25 @@ function commonConfig(env) {
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
-            // To match cross-origin requests, use a RegExp that matches
-            // the start of the origin:
             urlPattern: new RegExp(apiUrl),
             handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'api',
               expiration: {
-                maxAgeSeconds: 60 * 60 * 24,
+                maxAgeSeconds: 60 * 60 * 12, // 12h
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            urlPattern: new RegExp(`${cmsUrl}(?!/jsonapi/node/notification)`),
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'cms',
+              expiration: {
+                maxAgeSeconds: 60 * 60 * 12, // 12h
               },
               cacheableResponse: {
                 statuses: [0, 200],
