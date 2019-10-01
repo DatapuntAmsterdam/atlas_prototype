@@ -17,11 +17,12 @@ exports[`Header should render the embed header 1`] = `
 `;
 
 exports[`Header should render the main header 1`] = `
-<styled.section
+<section
+  className="styled-header"
   data-test="header"
 >
   <Styled(Header)
-    className="styled-header"
+    css={[Function]}
     fullWidth={false}
     homeLink="/"
     navigation={
@@ -42,7 +43,7 @@ exports[`Header should render the main header 1`] = `
     tall={false}
     title="City Data"
   />
-</styled.section>
+</section>
 `;
 
 exports[`Header should render the print header 1`] = `

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import HeaderMenu from './HeaderMenu'
 import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
-import { openFeedbackForm } from '../Modal/FeedbackModal'
 
 /* istanbul ignore next */
 const mapStateToProps = state => ({
@@ -10,7 +9,10 @@ const mapStateToProps = state => ({
 
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => ({
-  showFeedbackForm: openFeedbackForm,
+  showFeedbackForm: () => {
+    const openFeedbackFormEvent = new CustomEvent('openForm_feedbackModal')
+    window.dispatchEvent(openFeedbackFormEvent)
+  },
   login: () => {
     dispatch(authenticateRequest('inloggen'))
     window.auth.login()

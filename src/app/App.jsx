@@ -115,7 +115,7 @@ const App = ({
 
   function AppWrapper({ children }) {
     return homePage || editorialPage ? (
-      <StyledContainer beamColor="valid">
+      <StyledContainer beamColor={editorialPage && 'valid'}>
         <Helmet>
           <meta
             name="viewport"
