@@ -128,7 +128,7 @@ Cypress.Commands.add('logout', () => {
     .get(loginMenuItem)
     .click()
     .find('ul')
-    .find('a')
+    .find('button')
     .click()
 })
 

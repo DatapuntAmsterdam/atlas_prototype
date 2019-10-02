@@ -23,6 +23,8 @@ const routeSagaMapping = [
   [routing.datasetDetail.type, fetchDatasetsOptionalEffect],
   [routing.dataSearchCategory.type, fetchQuerySearchResultsEffect],
   [routing.dataSearchQuery.type, fetchQuerySearchEffect],
+  [routing.articleSearch.type, fetchQuerySearchEffect],
+  [routing.publicationSearch.type, fetchQuerySearchEffect],
   [routing.datasetSearch.type, fetchQuerySearchEffect],
   [routing.dataDetail.type, fetchDetailEffect],
 ]

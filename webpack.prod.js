@@ -140,34 +140,36 @@ module.exports = env => {
           new RegExp('/[^/?]+\\.[^/]+$'),
         ],
         cleanupOutdatedCaches: true,
-        runtimeCaching: [
-          {
-            urlPattern: new RegExp(apiUrl),
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'api',
-              expiration: {
-                maxAgeSeconds: 60 * 60 * 12, // 12h
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          {
-            urlPattern: new RegExp(`${cmsUrl}(?!/jsonapi/node/notification)`),
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'cms',
-              expiration: {
-                maxAgeSeconds: 60 * 60 * 12, // 12h
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-        ],
+        // Temporary disabled this, since we do not want to cache responses that require authorization
+        //
+        // runtimeCaching: [
+        //   {
+        //     urlPattern: new RegExp(apiUrl),
+        //     handler: 'StaleWhileRevalidate',
+        //     options: {
+        //       cacheName: 'api',
+        //       expiration: {
+        //         maxAgeSeconds: 60 * 60 * 12, // 12h
+        //       },
+        //       cacheableResponse: {
+        //         statuses: [0, 200],
+        //       },
+        //     },
+        //   },
+        //   {
+        //     urlPattern: new RegExp(`${cmsUrl}(?!/jsonapi/node/notification)`),
+        //     handler: 'StaleWhileRevalidate',
+        //     options: {
+        //       cacheName: 'cms',
+        //       expiration: {
+        //         maxAgeSeconds: 60 * 60 * 12, // 12h
+        //       },
+        //       cacheableResponse: {
+        //         statuses: [0, 200],
+        //       },
+        //     },
+        //   },
+        // ],
       }),
     ],
   })

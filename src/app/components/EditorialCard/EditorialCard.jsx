@@ -13,6 +13,7 @@ import {
   themeSpacing,
 } from '@datapunt/asc-ui'
 import RouterLink from 'redux-first-router-link'
+import PAGES from '../../pages'
 
 const notFoundImage = require('./not_found_thumbnail.jpg')
 
@@ -105,13 +106,19 @@ const EditorialCard = ({
   localeDate,
   localeDateFormatted,
   teaserImage,
+  coverImage,
+  currentPage,
   imageIsVertical,
   to,
 }) => (
   <StyledLinkWrapper key={id} to={to} linkType="blank">
     <StyledCard horizontal>
       <StyledCardMedia vertical={imageIsVertical}>
-        <Image src={teaserImage || notFoundImage} alt={title} square />
+        <Image
+          src={(currentPage === PAGES.PUBLICATIONS ? coverImage : teaserImage) || notFoundImage}
+          alt={title}
+          square
+        />
       </StyledCardMedia>
       <StyledCardContent>
         <div>

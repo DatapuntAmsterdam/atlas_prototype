@@ -33,8 +33,8 @@ const normalizeObject = (data, type) => {
 
   let localeDate = field_publication_date
 
-  let localeDateFormatted = field_publication_date && formatDate(new Date(field_publication_date))
-
+  let localeDateFormatted =
+    field_publication_date && formatDate(new Date(field_publication_date.replace(' ', 'T')))
   /**
    * Sometimes we don't get a field_publication_date, but only a field_publication_year and / or field_publication_month
    * Then we need to convert it to a locale date that only shows the year or year and month
@@ -83,6 +83,7 @@ const normalizeObject = (data, type) => {
     localeDateFormatted,
     slug,
     to,
+    currentPage: type,
     ...otherFields,
   }
 }

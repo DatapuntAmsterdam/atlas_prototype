@@ -81,15 +81,15 @@ const legacyRoutes = [
 ]
 const shortUrls = [
   {
-    from: '/themakaart/taxi',
+    from: '/themakaart/taxi/',
     to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=oovtig%3A1%7Cvezips%3A1%7Cmzt%3A0%7Cslpb%3A1%7Cslpnb%3A1%7Cbgt%3A1%7Ctar%3A1%7Cpvrts%3A1%7Cpvrll%3A1%7Cpvrpr%3A1&${LEGEND}=true`,
   },
   {
-    from: '/themakaart/veiligheid-en-overlast',
+    from: '/themakaart/veiligheid-en-overlast/',
     to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=oovorlv%3A1%7Coovoalco%3A1%7Coovctg%3A1%7Coovodlrs%3A1%7Coovoalg%3A1&${LEGEND}=true`,
   },
   {
-    from: '/datablog',
+    from: '/datablog/',
     to: 'https://amsterdam.github.io/datablog/',
   },
 ]
