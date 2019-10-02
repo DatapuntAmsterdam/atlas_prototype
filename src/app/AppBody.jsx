@@ -14,6 +14,7 @@ import PAGES, {
 } from './pages'
 import { useAppReducer } from './utils/useAppReducer'
 import LoadingIndicator from '../shared/components/loading-indicator/LoadingIndicator'
+import hasTouchCapabilities from '../shared/services/touch/has-touch-capabilities'
 
 const ContentPage = React.lazy(() => import('./pages/ContentPage'))
 const HomePage = React.lazy(() => import('./pages/HomePage'))
@@ -34,8 +35,12 @@ const EditorialOverviewPage = React.lazy(() => import('./pages/EditorialOverview
 const MapSplitPage = React.lazy(() => import('./pages/MapSplitPage'))
 const NotFound = React.lazy(() => import('./pages/NotFound'))
 
+const TouchableContainer = styled.div.attrs({
+  tabIndex: hasTouchCapabilities ? 0 : -1,
+})``
+
 // The Container from @datapunt/asc-ui isnt used here as the margins added do not match the ones in the design
-const Container = styled.div`
+const Container = styled(TouchableContainer)`
   // Should be moved to @datapunt/asc-ui project https://github.com/Amsterdam/amsterdam-styled-components/issues/133
   &::before {
     display: block;
@@ -92,7 +97,7 @@ const AppBody = ({
           {isEditorialOverviewPage(currentPage) && <EditorialOverviewPage type={currentPage} />}
         </Container>
       ) : (
-        <div className={`c-dashboard__body ${bodyClasses} ${extraBodyClasses}`}>
+        <TouchableContainer className={`c-dashboard__body ${bodyClasses} ${extraBodyClasses}`}>
           {visibilityError && <GeneralErrorMessage {...{ hasMaxWidth, isHomePage: homePage }} />}
           {embedPreviewMode ? (
             <EmbedIframeComponent />
@@ -122,7 +127,7 @@ const AppBody = ({
               </div>
             </div>
           )}
-        </div>
+        </TouchableContainer>
       )}
       <FeedbackModal id="feedbackModal" />
       <InfoModal id="infoModal" open />

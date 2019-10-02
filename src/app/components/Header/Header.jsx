@@ -9,8 +9,11 @@ import HeaderMenuContainer from './HeaderMenuContainer'
 
 import EmbedHeader from './EmbedHeader'
 import PrintHeader from './PrintHeader'
+import hasTouchCapabilities from '../../../shared/services/touch/has-touch-capabilities'
 
-const HeaderWrapper = styled.section`
+const HeaderWrapper = styled.section.attrs({
+  tabIndex: hasTouchCapabilities ? 0 : -1,
+})`
   width: 100%;
 
   // As position: sticky isn't supported on IE, this is needed to have position the header on top of the other contents
