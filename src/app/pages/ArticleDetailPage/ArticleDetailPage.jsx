@@ -133,7 +133,11 @@ const ArticleDetailPage = ({ id }) => {
                             />
                           )}
                           <Paragraph strong>{intro}</Paragraph>
-                          <CustomHTMLBlock body={body} />
+                          {/* https://datapunt.atlassian.net/browse/DP-7333
+                          Because our lovely cms isn't able to return secure urls, we need to fix it quick and dirty in the front-end for now */}
+                          {typeof body === 'string' && (
+                            <CustomHTMLBlock body={body.replace(/^http:\/\//i, 'https://')} />
+                          )}
                         </EditorialBody>
                       </Column>
                       <Column
