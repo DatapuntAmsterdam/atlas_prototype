@@ -105,6 +105,7 @@ docker-compose up --build test-e2e-aria
 - on windows there is a bug in sass-lint that prevents `npm run lint` to fail when there are linting errors.
   work-around: install sass-lint globally and run commands specified in the  `lint:style` script direct in a bash
   terminal
+- the module [`node-sass`](https://www.npmjs.com/package/node-sass) requires Node 12 when using version 4.12 and no longer works with Node 10.
 
 ## Thanks to
 <img src="/public/images/browserstack-logo@2x.png" height="60" title="BrowserStack Logo" alt="BrowserStack Logo" />
