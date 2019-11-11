@@ -2849,6 +2849,39 @@
         }
     },
     {
+        "category": "MIL_ETC",
+        "id": "asbest",
+        "layers": [
+            "daken"
+        ],
+        "legendItems": [
+            {
+                "title": "In slechte staat"
+            },
+            {
+                "title": "In matige staat"
+            },
+            {
+                "title": "Redelijk goed"
+            },
+            {
+                "title": "percelen",
+                "layers": ["percelen"]
+            }
+        ],
+        "title": "Asbestverdachte daken",
+        "url": "/maps/asbest",
+        "detailUrl": "geosearch/search/",
+        "detailItem": "kadastraal_object",
+        "detailIsShape": true,
+        "meta": {
+            "description": null,
+            "theme": null,
+            "datasetId": null,
+            "date": null
+        }
+    },
+    {
         "category": "ECONOMY_HARBOR",
         "id": "biz",
         "layers": [
