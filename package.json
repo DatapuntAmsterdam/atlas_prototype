@@ -37,7 +37,7 @@
     "@datapunt/matomo-tracker-js": "0.0.11",
     "@datapunt/matomo-tracker-react": "0.0.11",
     "@sentry/browser": "5.6.1",
-    "angular": "1.6.9",
+    "angular": "1.7.9",
     "angular-aria": "~1.5.11",
     "angular-i18n": "~1.5.11",
     "angular-sanitize": "~1.5.11",
