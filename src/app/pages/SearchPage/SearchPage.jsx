@@ -1,16 +1,16 @@
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash.get'
-import { useQuery } from 'urql'
 import { breakpoint, Column, Container, Row, themeSpacing } from '@datapunt/asc-ui'
 import styled from '@datapunt/asc-core'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import PageFilterBox from '../../components/PageFilterBox/PageFilterBox'
 import PAGES from '../../pages'
 import SearchFilters from '../../components/SearchFilters'
-import SEARCH_PAGE_CONFIG, { DATA_FILTERS, QUERY_TYPES } from './config'
+import SEARCH_PAGE_CONFIG, { DATA_FILTERS } from './config'
 import DatasetFilters from '../../components/SearchFilters/DatasetFilters'
 import SearchPageResults from './SearchPageResults'
+import usePagination from '../../utils/usePagination'
 
 const FilterColumn = styled(Column)`
   align-content: flex-start;
@@ -31,61 +31,26 @@ const FilterColumn = styled(Column)`
 `
 
 const SearchPage = ({ query, activeFilters, currentPage }) => {
-  const [currentGraphQLQuery, setCurrentGraphQLQuery] = useState(
-    SEARCH_PAGE_CONFIG[currentPage].query,
-  )
-  const [offset, setOffset] = useState(0)
   const [availableFilterBoxes, setAvailableFilterBoxes] = useState([])
   const [extraQuery, setExtraQuery] = useState({})
 
   // Todo: loadmore logic
   const limit = activeFilters && activeFilters.length > 0 ? undefined : 10 // undefined limit to show all results
 
-  const [{ fetching, data, error }] = useQuery({
-    query: currentGraphQLQuery,
-    variables: {
+  const [
+    { fetching, error },
+    { totalCount, aggregatedResults, filters },
+    fetchMore,
+    hasMore,
+  ] = usePagination(
+    SEARCH_PAGE_CONFIG[currentPage],
+    {
       q: query,
       limit,
-      from: offset,
       ...extraQuery,
     },
-  })
-
-  function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value)
-  }
-
-  const getResultsByKey = resolver => {
-    if (data && !fetching) {
-      // Check if this logic should be placed elsewhere, like by creating a specific query for the totalsearch
-      if (Array.isArray(resolver)) {
-        const allCounts = resolver.map(key => data[key] && data[key].totalCount)
-        const aggregatedAllCounts = allCounts.reduce((acc, cur) => acc + cur)
-
-        const allResults = resolver.map(key => {
-          const type = getKeyByValue(QUERY_TYPES, key)
-
-          return data[key]
-            ? { type, results: data[key].results, totalCount: data[key].totalCount, filters: [] }
-            : { type, results: [], filters: [] }
-        })
-
-        return {
-          totalCount: aggregatedAllCounts,
-          results: allResults,
-          filters: [],
-        }
-      }
-
-      if (data[resolver]) {
-        return data[resolver]
-      }
-    }
-
-    return { totalCount: 0, results: [], filters: [] }
-  }
-
-  const { totalCount, results, filters } = getResultsByKey(SEARCH_PAGE_CONFIG[currentPage].resolver)
+    limit,
+  )
 
   useEffect(() => {
     // Always reset the filterboxes when currentPage or data has changed
@@ -131,11 +96,7 @@ const SearchPage = ({ query, activeFilters, currentPage }) => {
       default:
         setAvailableFilterBoxes(null)
     }
-  }, [data, currentPage, activeFilters])
-
-  useEffect(() => {
-    setCurrentGraphQLQuery(SEARCH_PAGE_CONFIG[currentPage].query)
-  }, [currentPage])
+  }, [currentPage, activeFilters])
 
   return (
     <Container>
@@ -146,7 +107,15 @@ const SearchPage = ({ query, activeFilters, currentPage }) => {
             {availableFilterBoxes}
           </FilterColumn>
           <SearchPageResults
-            {...{ error, fetching, totalCount, results, currentPage, setOffset, offset }}
+            {...{
+              error,
+              fetching,
+              totalCount,
+              results: aggregatedResults,
+              currentPage,
+              hasMore,
+              fetchMore,
+            }}
           />
         </Row>
       </ContentContainer>

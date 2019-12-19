@@ -55,8 +55,8 @@ const dataSearch = `
   }
 `
 
-const datasetSearch = `
-  datasetSearch(q: $q, input: { limit: $limit, filters: $filters}) {
+export const datasetSearch = `
+  datasetSearch(q: $q, input: { limit: $limit, from: $from, filters: $filters}) {
     totalCount
     results {
       header
@@ -78,7 +78,7 @@ export const dataSearchQuery = `
   }
 `
 export const datasetSearchQuery = `
-  query DatasetSearch($q: String!, $limit: Int, $filters: [DatasetSearchFilter!]) {
+  query DatasetSearch($q: String!, $limit: Int, $from: Int, $filters: [DatasetSearchFilter!]) {
     ${datasetSearch}
   }
 `

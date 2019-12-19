@@ -82,7 +82,7 @@ const SearchFilters = ({
                 label={`${optionLabel} ${!!count && !hideCount ? `(${count})` : ''}`}
               >
                 <RadioOrCheckbox
-                  checked={isChecked(enumType)}
+                  checked={isChecked(enumType || id)}
                   variant="primary"
                   value={enumType || id}
                   onChange={e => onChange(e, !!enumType)}

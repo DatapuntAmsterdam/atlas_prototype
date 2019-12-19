@@ -10,6 +10,7 @@ import { EDITORIAL_TYPES } from '../EditorialOverviewPage/constants'
 import DataSearchResults from './DataSearchResults'
 import DatasetSearchResults from './DatasetSearchResults'
 import SearchHeading from '../../components/SearchHeading/SearchHeading'
+import LoadMoreButton from '../../components/LoadMoreButton/LoadMoreButton'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(18)};
@@ -40,7 +41,15 @@ const ResultColumn = styled(Column)`
   justify-content: flex-start;
 `
 
-const SearchPageResults = ({ error, fetching, totalCount, results, currentPage }) => {
+const SearchPageResults = ({
+  error,
+  fetching,
+  totalCount,
+  results,
+  currentPage,
+  hasMore,
+  fetchMore,
+}) => {
   const hasResults = !fetching && !!results.length
 
   const Results = () =>
@@ -69,6 +78,10 @@ const SearchPageResults = ({ error, fetching, totalCount, results, currentPage }
         )
       : getResultsComponent(currentPage, { results, loading: fetching })
 
+  const onLoadMore = () => {
+    fetchMore()
+  }
+
   return (
     <ResultColumn
       wrap
@@ -90,6 +103,7 @@ const SearchPageResults = ({ error, fetching, totalCount, results, currentPage }
               : 'Geen resultaten'}
           </StyledHeading>
           <Results />
+          {hasMore && <LoadMoreButton {...{ fetching }} onClick={onLoadMore} />}
         </>
       )}
     </ResultColumn>
