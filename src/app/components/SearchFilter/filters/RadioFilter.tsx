@@ -1,7 +1,7 @@
 import React from 'react'
 import { RadioGroup, Radio, Label } from '@datapunt/asc-ui'
 import { FilterProps } from '../models'
-import { getOptionValue, formatOptionLabel, formatAllOptionLabel } from '../utils'
+import { formatOptionLabel, formatAllOptionLabel } from '../utils'
 
 const RadioFilter: React.FC<FilterProps> = ({
   type,
@@ -30,14 +30,13 @@ const RadioFilter: React.FC<FilterProps> = ({
       </Label>
       {options.map(option => {
         const controlId = `${type}-${option.id}`
-        const value = getOptionValue(option)
 
         return (
           <Label key={controlId} htmlFor={controlId} label={formatOptionLabel(option, hideCount)}>
             <Radio
               id={controlId}
-              value={value}
-              checked={selection.includes(value)}
+              value={option.id}
+              checked={selection.includes(option.id)}
               onChange={onChange}
             />
           </Label>

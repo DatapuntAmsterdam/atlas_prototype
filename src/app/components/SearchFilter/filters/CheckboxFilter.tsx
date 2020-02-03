@@ -1,7 +1,7 @@
 import React from 'react'
 import { Checkbox, Label } from '@datapunt/asc-ui'
 import { FilterProps } from '../models'
-import { getOptionValue, formatOptionLabel } from '../utils'
+import { formatOptionLabel } from '../utils'
 
 const CheckboxFilter: React.FC<FilterProps> = ({
   type,
@@ -23,14 +23,13 @@ const CheckboxFilter: React.FC<FilterProps> = ({
     <>
       {options.map(option => {
         const controlId = `${type}-${option.id}`
-        const value = getOptionValue(option)
 
         return (
           <Label key={controlId} htmlFor={controlId} label={formatOptionLabel(option, hideCount)}>
             <Checkbox
               id={controlId}
-              value={value}
-              checked={selection.includes(value)}
+              value={option.id}
+              checked={selection.includes(option.id)}
               onChange={onChange}
             />
           </Label>

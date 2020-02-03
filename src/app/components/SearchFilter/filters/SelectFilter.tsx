@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from '@datapunt/asc-ui'
 import { FilterProps } from '../models'
-import { getOptionValue, formatOptionLabel, formatAllOptionLabel } from '../utils'
+import { formatOptionLabel, formatAllOptionLabel } from '../utils'
 
 const SelectFilter: React.FC<FilterProps> = ({
   type,
@@ -28,10 +28,9 @@ const SelectFilter: React.FC<FilterProps> = ({
       </option>
       {options.map(option => {
         const controlId = `${type}-${option.id}`
-        const value = getOptionValue(option)
 
         return (
-          <option key={controlId} value={value} selected={selection.includes(value)}>
+          <option key={controlId} value={option.id} selected={selection.includes(option.id)}>
             {formatOptionLabel(option, hideCount)}
           </option>
         )

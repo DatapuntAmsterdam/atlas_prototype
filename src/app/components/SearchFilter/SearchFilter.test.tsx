@@ -16,20 +16,17 @@ jest.mock('react-redux', () => ({
 const groupOptions: FilterOption[] = [
   {
     id: 'one',
-    enumType: null,
     label: 'One',
     count: 10,
   },
   {
     id: 'two',
     label: 'Two',
-    enumType: null,
     count: 5,
   },
   {
     id: 'three',
     label: 'Three',
-    enumType: 'facet:test',
     count: 15,
   },
 ]

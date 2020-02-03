@@ -1,4 +1,4 @@
-import { formatOptionLabel, formatAllOptionLabel, getOptionValue } from './utils'
+import { formatOptionLabel, formatAllOptionLabel } from './utils'
 import { FilterOption } from '../../models'
 
 describe('SearchFilter - Utilities', () => {
@@ -29,16 +29,6 @@ describe('SearchFilter - Utilities', () => {
 
     it('should format a label with a hidden count', () => {
       expect(formatAllOptionLabel(10, true)).toEqual('Alles')
-    })
-  })
-
-  describe('getOptionValue', () => {
-    it('should get the enum value if present', () => {
-      expect(getOptionValue({ enumType: 'foo:bar', id: 'bar' } as FilterOption)).toEqual('foo:bar')
-    })
-
-    it('should get the id if no enum value is present', () => {
-      expect(getOptionValue({ enumType: null, id: 'bar' } as FilterOption)).toEqual('bar')
     })
   })
 })

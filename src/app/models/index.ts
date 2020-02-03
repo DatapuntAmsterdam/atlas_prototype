@@ -13,7 +13,6 @@ export interface Filter {
 
 export interface FilterOption {
   id: string
-  enumType: string | null
   label: string
   count: number
 }

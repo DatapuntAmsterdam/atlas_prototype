@@ -4,7 +4,6 @@ const filters = `
     label
     filterType
     options {
-      enumType
       id
       label
       count

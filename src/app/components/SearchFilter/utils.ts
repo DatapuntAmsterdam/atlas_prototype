@@ -10,7 +10,3 @@ export function formatAllOptionLabel(totalCount: number, hideCount: boolean) {
     ? `Alles (${totalCount.toLocaleString(DEFAULT_LOCALE)})`
     : 'Alles'
 }
-
-export function getOptionValue({ enumType, id }: FilterOption) {
-  return enumType !== null ? enumType : id
-}
