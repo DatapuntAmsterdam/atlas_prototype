@@ -1,3 +1,5 @@
+import { DEFAULT_LOCALE } from '../../../../src/shared/config/locale.config'
+
 describe('The localization service', function() {
   let localization
   let originalIntl
@@ -27,14 +29,14 @@ describe('The localization service', function() {
       window.Intl = { NumberFormat: () => {} } // eslint-disable-line angular/window-service
 
       const options = { foo: 'bar' }
-      localization.toLocaleString(1.2, 'nl-NL', options)
+      localization.toLocaleString(1.2, DEFAULT_LOCALE, options)
 
-      expect(Number.prototype.toLocaleString).toHaveBeenCalledWith('nl-NL', options)
+      expect(Number.prototype.toLocaleString).toHaveBeenCalledWith(DEFAULT_LOCALE, options)
     })
 
     it('simply returns the number if toLocaleString does not support arguments', () => {
       const options = { foo: 'bar' }
-      expect(localization.toLocaleString(1.2, 'nl-NL', options)).toBe(1.2)
+      expect(localization.toLocaleString(1.2, DEFAULT_LOCALE, options)).toBe(1.2)
 
       expect(Number.prototype.toLocaleString).not.toHaveBeenCalled()
     })

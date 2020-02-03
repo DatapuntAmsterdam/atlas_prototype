@@ -1,3 +1,5 @@
+import { DEFAULT_LOCALE } from '../../../src/shared/config/locale.config'
+
 const precision = 1 // single decimal
 const base = 1024
 const log1024 = Math.log(base)
@@ -28,7 +30,7 @@ const largestUnit = units.length - 1 // index of units, === 'TB'
       power = Math.min(power, largestUnit)
 
       const number = (bytes / Math.pow(base, power)).toFixed(precision)
-      return `${localization.toLocaleString(number, 'nl-NL')} ${units[power]}`
+      return `${localization.toLocaleString(number, DEFAULT_LOCALE)} ${units[power]}`
     }
   }
 })()

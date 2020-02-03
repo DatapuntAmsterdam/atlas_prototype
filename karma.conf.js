@@ -16,6 +16,7 @@ const webpackConfig = {
     path: dist,
   },
   resolve: {
+    extensions: ['.ts', '.tsx', '.mjs', '.js', '.jsx'],
     modules: ['./node_modules'],
   },
   mode: 'development',
@@ -40,7 +41,7 @@ const webpackConfig = {
         ],
       },
       {
-        test: /\.jsx?$/,
+        test: /\.(t|j)sx?$/,
         include: [src, legacy, /atlas\.run\.js$/],
         use: {
           loader: 'babel-loader',

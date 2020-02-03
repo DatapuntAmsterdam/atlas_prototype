@@ -24,7 +24,7 @@ import { TYPES as EDITORIAL_TYPES } from '../../../shared/config/cms.config'
 export const MAX_RESULTS = 50
 export const DEFAULT_LIMIT = 10
 
-export const DATA_FILTERS = 'dataTypes'
+export const DATA_FILTERS = 'types'
 
 export const TYPES = {
   SEARCH: 'search',

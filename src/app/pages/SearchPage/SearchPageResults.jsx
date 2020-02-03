@@ -16,6 +16,7 @@ import ActionButton from '../../components/ActionButton/ActionButton'
 import SearchResults, { SearchResultsSkeleton } from './SearchResultsComponent'
 import SearchResultsOverview, { SearchResultsOverviewSkeleton } from './SearchResults'
 import SearchSort from './SearchSort'
+import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(4)};
@@ -99,7 +100,7 @@ const SearchPageResults = ({
       return isOverviewPage ? label : `${label} met '${query}'`
     }
 
-    const countFormatted = count.toLocaleString('nl-NL')
+    const countFormatted = count.toLocaleString(DEFAULT_LOCALE)
 
     return isOverviewPage
       ? `${label} (${countFormatted})`

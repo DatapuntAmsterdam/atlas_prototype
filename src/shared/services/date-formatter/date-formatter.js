@@ -1,3 +1,5 @@
+import { DEFAULT_LOCALE } from '../../config/locale.config'
+
 /**
  * Converts a date object to a Dutch date string.
  *
@@ -9,7 +11,7 @@
 export default function formatDate(date, day = true, month = true, year = true) {
   return (
     date &&
-    date.toLocaleDateString('nl-NL', {
+    date.toLocaleDateString(DEFAULT_LOCALE, {
       ...(day && { day: 'numeric' }),
       ...(month && { month: 'long' }),
       ...(year && { year: 'numeric' }),

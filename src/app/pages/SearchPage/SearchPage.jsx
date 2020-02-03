@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useState } from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import get from 'lodash.get'
 import { clearAllBodyScrollLocks, enableBodyScroll } from 'body-scroll-lock'
 import {
   breakpoint,
@@ -21,7 +20,6 @@ import ContentContainer from '../../components/ContentContainer/ContentContainer
 import PageFilterBox from '../../components/PageFilterBox/PageFilterBox'
 import SEARCH_PAGE_CONFIG, {
   DEFAULT_LIMIT,
-  DATA_FILTERS,
   DATA_SEARCH_PAGES,
   DATASET_SEARCH_PAGES,
   EDITORIAL_SEARCH_PAGES,
@@ -174,29 +172,15 @@ const SearchPage = ({ isOverviewPage, currentPage, query }) => {
   }, [showFilter, currentPage])
 
   useEffect(() => {
-    // Always reset the filterboxes when currentPage or data has changed
-    if (DATA_SEARCH_PAGES.includes(currentPage)) {
-      const types = get(activeFilters.find(({ type }) => type === DATA_FILTERS), 'values', null)
-      setExtraQuery({
-        types,
-      })
+    const isSearchPage = [
+      ...EDITORIAL_SEARCH_PAGES,
+      ...DATASET_SEARCH_PAGES,
+      ...DATA_SEARCH_PAGES,
+    ].includes(currentPage)
 
-      setShowLoadMore(!!types)
-    } else if (
-      EDITORIAL_SEARCH_PAGES.includes(currentPage) ||
-      DATASET_SEARCH_PAGES.includes(currentPage)
-    ) {
+    if (isSearchPage) {
       setShowLoadMore(true)
-      setExtraQuery({
-        filters:
-          activeFilters.length > 0
-            ? activeFilters.map(({ type, values }) => ({
-                type,
-                values: Array.isArray(values) ? values : [values],
-                multiSelect: Array.isArray(values),
-              }))
-            : null,
-      })
+      setExtraQuery({ filters: activeFilters })
     } else {
       setExtraQuery({})
       setShowLoadMore(false)
@@ -206,7 +190,7 @@ const SearchPage = ({ isOverviewPage, currentPage, query }) => {
   const Filters = (
     <FilterColumn wrap span={{ small: 0, medium: 0, big: 0, large: 4, xLarge: 3 }}>
       {!isOverviewPage && <PageFilterBox {...{ query, currentPage }} />}
-      <SearchPageFilters {...{ currentPage, filters, totalCount, query }} />
+      <SearchPageFilters filters={filters} totalCount={totalCount} />
     </FilterColumn>
   )
 

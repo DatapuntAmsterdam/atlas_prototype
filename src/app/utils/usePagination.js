@@ -112,11 +112,9 @@ const usePagination = (config, input, sortString, limit, initialFrom) => {
     variables: { limit, from, sort, ...input },
   })
 
-  // Reset the state when changing the query, searchQuery or filters
-  // Todo: consider unify types and filters
   useLayoutEffect(() => {
     dispatch({ type: RESET, payload: initialState })
-  }, [config.query, input.q, input.types, input.filters])
+  }, [config.query, input.q, input.filters])
 
   const fetchMore = useCallback(() => {
     dispatch({ type: SET_LIMIT, payload: limit })

@@ -16,6 +16,7 @@ import DataSelectionList from './DataSelectionList/DataSelectionList'
 import ShareBar from '../ShareBar/ShareBar'
 import Notification from '../../../shared/components/notification/Notification'
 import '../../angularModules'
+import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 
 const DataSelection = ({
   view,
@@ -120,7 +121,7 @@ const DataSelection = ({
                     <div className="qa-message-clustered-markers">
                       <p className="c-panel__paragraph">
                         {`Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan ${MAX_NUMBER_OF_CLUSTERED_MARKERS.toLocaleString(
-                          'nl-NL',
+                          DEFAULT_LOCALE,
                         )} resultaten tegelijk kan weergeven (om technische redenen).`}
                       </p>
                       <p className="c-panel__paragraph">

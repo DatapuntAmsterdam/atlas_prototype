@@ -40,7 +40,7 @@ const StyledButton = styled(Button)`
 const DocumentCover = ({ imageSrc, onClick, title, description, loading, ...otherProps }) => (
   <DocumentCoverStyle {...otherProps}>
     <DocumentCoverContentStyle>
-      <StyledImage src={imageSrc} alt="" />
+      <StyledImage src={imageSrc} alt={title} />
       <StyledButton
         variant="primary"
         onClick={onClick}

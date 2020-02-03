@@ -17,6 +17,7 @@ import DataIcon from './DataIcon'
 import PARAMETERS from '../../../store/parameters'
 import { DATA_FILTERS } from '../../pages/SearchPage/config'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 
 const StyledLink = styled(Link)`
   cursor: pointer;
@@ -88,7 +89,7 @@ const DataCard = ({ type, label, count, results, ...otherProps }) => (
               false,
               true,
             )}
-          >{`${label} (${count.toLocaleString('nl-NL')})`}</StyledLink>
+          >{`${label} (${count.toLocaleString(DEFAULT_LOCALE)})`}</StyledLink>
         </Heading>
       </div>
 

@@ -10,6 +10,7 @@ import DataIcon from './DataIcon'
 import PARAMETERS from '../../../store/parameters'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import ErrorMessage from '../HomePage/ErrorMessage'
+import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 
 const List = styled.ul`
   margin-bottom: ${({ showLoadMore }) => !showLoadMore && themeSpacing(6)};
@@ -54,7 +55,7 @@ const showSubtype = (type, subtype) =>
 const DataList = ({ type, label, count, results, showLoadMore }) => (
   <div>
     <SearchHeading
-      label={`${label} (${count.toLocaleString('nl-NL')})`}
+      label={`${label} (${count.toLocaleString(DEFAULT_LOCALE)})`}
       icon={
         <StyledIcon>
           <DataIcon type={type} />

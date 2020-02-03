@@ -7,6 +7,7 @@ import SearchLink from '../../components/Links/SearchLink/SearchLink'
 import SearchResults, { SearchResultsSkeleton } from './SearchResultsComponent'
 import NoSearchResults from '../../components/NoSearchResults'
 import ErrorMessage from '../../components/HomePage/ErrorMessage'
+import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 
 const ResultsComponent = styled.div`
   margin-bottom: ${themeSpacing(8)};
@@ -36,7 +37,9 @@ const SearchResultsOverview = ({ query, totalCount, results, errors, loading }) 
           <ResultItem key={resultItemType}>
             <SearchHeading
               label={`${label}${
-                resultItemTotalCount > 0 ? ` (${resultItemTotalCount.toLocaleString('nl-NL')})` : ''
+                resultItemTotalCount > 0
+                  ? ` (${resultItemTotalCount.toLocaleString(DEFAULT_LOCALE)})`
+                  : ''
               }`}
             />
             <ResultsComponent>
