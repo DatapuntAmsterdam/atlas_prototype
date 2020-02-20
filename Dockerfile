@@ -35,7 +35,7 @@ COPY .babelrc \
       favicon.png \
       /app/
 
-ARG NODE_ENV=production
+ARG NODE_ENV=acceptance
 
 RUN npm run build:${NODE_ENV}
 RUN echo "build= `date`" > /app/dist/version.txt
