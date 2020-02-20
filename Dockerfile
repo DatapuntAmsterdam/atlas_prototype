@@ -49,7 +49,7 @@ COPY test /app/test
 
 # Web server image
 FROM nginx:1.12.2-alpine
-ARG NODE_ENV=production
+ARG NODE_ENV=acceptance
 COPY nginx-${NODE_ENV}.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/
 COPY --from=build-deps /app/dist /usr/share/nginx/html
