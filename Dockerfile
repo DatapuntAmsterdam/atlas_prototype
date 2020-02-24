@@ -26,14 +26,15 @@ RUN npm run generate:sitemap
 COPY src /app/src
 COPY modules /app/modules
 COPY scripts /app/scripts
-COPY .babelrc \
-     .eslintrc.js \
+COPY .eslintrc.js \
      .eslintignore \
      .prettierrc \
      .prettierignore \
-      webpack.* \
-      favicon.png \
-      /app/
+     babel.config.js \
+     webpack.* \
+     index.ejs \
+     favicon.png \
+     /app/
 
 ARG NODE_ENV=production
 
