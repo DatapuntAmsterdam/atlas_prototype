@@ -33,9 +33,8 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
     Printen
   </ContextMenuItem>
   <ContextMenuItem
-    as="a"
+    as="button"
     download="filename.jpg_small"
-    href="https://acc.images.data.amsterdam.nl/iiif/2/edepot:filename.jpg/full/800,/0/default.jpg"
     icon={
       <Icon
         inline={true}
@@ -46,15 +45,12 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
       </Icon>
     }
     onClick={[Function]}
-    role="button"
-    target="_blank"
   >
     Download klein
   </ContextMenuItem>
   <ContextMenuItem
-    as="a"
+    as="button"
     download="filename.jpg_large"
-    href="https://acc.images.data.amsterdam.nl/iiif/2/edepot:filename.jpg/full/1600,/0/default.jpg"
     icon={
       <Icon
         inline={true}
@@ -65,16 +61,13 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
       </Icon>
     }
     onClick={[Function]}
-    role="button"
-    target="_blank"
   >
     Download groot
   </ContextMenuItem>
   <ContextMenuItem
-    as="a"
+    as="button"
     divider={true}
     download="filename.jpg_original"
-    href="https://acc.images.data.amsterdam.nl/iiif/2/edepot:filename.jpg/full/full/0/default.jpg"
     icon={
       <Icon
         inline={true}
@@ -85,8 +78,6 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
       </Icon>
     }
     onClick={[Function]}
-    role="button"
-    target="_blank"
   >
     Download origineel
   </ContextMenuItem>

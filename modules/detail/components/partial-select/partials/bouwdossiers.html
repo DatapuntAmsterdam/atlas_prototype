@@ -6,11 +6,11 @@
         <dp-message>(Nog) geen bouwdossiers beschikbaar</dp-message>
     </p>
     <ul class="o-list">
-        <li ng-repeat="object in apiData.results">
+        <li ng-repeat="object in apiData.results | orderBy:'-datering'">
             <dp-redux-link
                 to="object._links.self.href | constructionFilesEndpointAction"
                 link-class="o-btn o-btn--link"
-            >{{ object.dossier_type | dpUppercaseFirstLetter }} - {{ object.datering | date:'yyyy' }}
+            >{{ object.stadsdeel }}{{ object.dossiernr }} {{ object.datering | date:'yyyy' }} {{ object.dossier_type }} 
             </dp-redux-link>
         </li>
     </ul>

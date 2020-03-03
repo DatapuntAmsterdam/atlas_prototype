@@ -4,12 +4,12 @@ import fileSaver from 'file-saver'
 function useDownload() {
   const [loading, setLoading] = React.useState(false)
 
-  async function downloadFile(url) {
+  async function downloadFile(url, options = {}) {
     setLoading(true)
 
     const fileName = url.split('/').pop()
 
-    fetch(url)
+    fetch(url, options)
       .then((response) => response.blob())
       .then((blob) => {
         fileSaver(blob, fileName)

@@ -5,8 +5,6 @@ import { Heading } from '@datapunt/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { getFileName } from '../../../shared/ducks/files/selectors'
 import { getUser } from '../../../shared/ducks/user/user'
-import { SCOPES } from '../../../shared/services/auth/auth'
-import NotAuthorizedMessage from '../../components/PanelMessages/NotAuthorizedMessage'
 import ConstructionFileDetail from '../../components/ConstructionFileDetail/ConstructionFileDetail'
 import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
@@ -22,7 +20,7 @@ const ImageViewer = React.lazy(() => import('../../components/ImageViewer/ImageV
 const ERROR_MESSAGE =
   'Er kunnen door een technische storing helaas geen bouwdossiers worden getoond. Probeer het later nog eens.'
 
-const ConstructionFilesContainer = ({ fileName, user, endpoint }) => {
+const ConstructionFilesContainer = ({ fileName, endpoint }) => {
   const [results, setResults] = React.useState(null)
   const [errorMessage, setErrorMessage] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
@@ -90,35 +88,28 @@ const ConstructionFilesContainer = ({ fileName, user, endpoint }) => {
 
   const noResultsTemplate = withGrid(<Heading as="em">Geen resultaten gevonden</Heading>)
 
-  const notAuthorizedTemplate = withGrid(<NotAuthorizedMessage type="bouwdossiers" />)
-
   const loadingTemplate = withGrid(<LoadingIndicator />)
 
-  // eslint-disable-next-line no-nested-ternary
-  return user.scopes.includes(SCOPES['BD/R']) ? (
-    errorMessage ? (
-      <ErrorMessage errorMessage={errorMessage} />
-    ) : (
-      <>
-        {imageViewerActive && (
-          <ImageViewer
-            {...{ fileName, title }}
-            contextMenu={<ContextMenu onDownload={onDownloadFile} fileName={fileName} />}
-          />
-        )}
-        {loading && loadingTemplate}
-        {!loading &&
-          !fileName &&
-          (results ? <ConstructionFileDetail results={results} /> : noResultsTemplate)}
-      </>
-    )
+  return errorMessage ? (
+    <ErrorMessage errorMessage={errorMessage} />
   ) : (
-    notAuthorizedTemplate
+    <>
+      {imageViewerActive && (
+        <ImageViewer
+          {...{ fileName, title }}
+          contextMenu={<ContextMenu onDownload={onDownloadFile} fileName={fileName} />}
+        />
+      )}
+      {loading && loadingTemplate}
+      {!loading &&
+        !fileName &&
+        (results ? <ConstructionFileDetail results={results} /> : noResultsTemplate)}
+    </>
   )
 }
 
 ConstructionFilesContainer.propTypes = {
-  fileName: PropTypes.string,
+  fileName: PropTypes.string.isRequired,
   user: PropTypes.shape({}).isRequired,
   endpoint: PropTypes.string.isRequired,
 }

@@ -17,8 +17,9 @@ $offset: 10px;
     pointer-events: all;
     position: absolute;
 
-    button {
-      // These styles are temporary, until we move to the new amsterdam style
+    // These styles are temporary, until we move to the new amsterdam style
+    & > button,
+    & > div > button {
       border: 1px solid $secondary-gray20;
       box-shadow: 2px 2px 0 0 $secondary-gray40;
 

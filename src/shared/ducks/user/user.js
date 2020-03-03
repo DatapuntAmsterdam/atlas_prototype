@@ -54,6 +54,7 @@ export const userCheckedAuthentication = createSelector(
   (user) => user.hasCheckedAuthentication,
 )
 export const userIsAuthenticated = createSelector(getUser, (user) => user.authenticated)
+export const getUserToken = createSelector(getUser, (user) => user.accessToken)
 export const getUserScopes = createSelector(getUser, (user) => user.scopes)
 export const authenticateUserSuccess = (accessToken, name, scopes, reload) => {
   const meta = !reload ? { tracking: scopes } : null

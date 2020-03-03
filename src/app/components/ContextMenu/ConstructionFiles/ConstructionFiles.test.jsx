@@ -6,15 +6,22 @@ import { sharePage } from '../../../../shared/ducks/ui/ui'
 
 jest.mock('../../../../shared/ducks/ui/ui')
 
+// Mock the access token
+jest.mock('../../../../shared/services/redux/get-state', () =>
+  jest.fn(() => ({ user: { accessToken: 'token' } })),
+)
+
+// Mock the useDownload hook
+const mockOnDownload = jest.fn()
+jest.mock('../../../utils/useDownload', () => jest.fn(() => [, mockOnDownload]))
+
 describe('ContextMenu for ConstructionFiles viewer', () => {
   let component
-  const mockOnDownload = jest.fn()
   const mockOpenPrintMode = jest.fn()
 
   beforeEach(() => {
     const props = {
       fileName: 'filename.jpg',
-      onDownload: mockOnDownload,
       openPrintMode: mockOpenPrintMode,
     }
     const initialState = {
@@ -39,12 +46,12 @@ describe('ContextMenu for ConstructionFiles viewer', () => {
     const downloadButton = component.find('ContextMenuItem')
 
     downloadButton.at(1).simulate('click')
-    expect(mockOnDownload).toHaveBeenCalledWith('klein')
+    expect(mockOnDownload).toHaveBeenCalledTimes(1)
 
     downloadButton.at(2).simulate('click')
-    expect(mockOnDownload).toHaveBeenCalledWith('groot')
+    expect(mockOnDownload).toHaveBeenCalledTimes(2)
 
     downloadButton.at(3).simulate('click')
-    expect(mockOnDownload).toHaveBeenCalledWith('origineel')
+    expect(mockOnDownload).toHaveBeenCalledTimes(3)
   })
 })

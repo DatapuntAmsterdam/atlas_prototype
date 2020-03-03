@@ -2,18 +2,26 @@
 import React from 'react'
 import { PropTypes } from 'prop-types'
 import RouterLink from 'redux-first-router-link'
-import styled from 'styled-components'
+import styled from '@datapunt/asc-core'
 import { GridContainer, GridItem, Heading, themeSpacing, themeColor, Link } from '@datapunt/asc-ui'
 import { Minimise, Enlarge } from '@datapunt/asc-assets'
 import { toConstructionFileViewer } from '../../../store/redux-first-router/actions'
 import ActionButton from '../ActionButton/ActionButton'
 import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
 import Notification from '../../../shared/components/notification/Notification'
+import getState from '../../../shared/services/redux/get-state'
+import { SCOPES } from '../../../shared/services/auth/auth'
+
+// This can be deleted when the Notifications will be refactored to be styled-components
+const StyledNotification = styled(Notification)`
+  margin-bottom: ${themeSpacing(5)} !important;
+`
 
 const GalleryGridContainer = styled(GridContainer)`
-  border-bottom: 1px solid ${themeColor('tint', 'level3')};
-  padding-bottom: ${themeSpacing(5)};
-  padding-top: ${themeSpacing(10)};
+border-bottom: 1px solid ${themeColor('tint', 'level3')}
+  padding-bottom: ${themeSpacing(5)}
+  padding-top: ${themeSpacing(10)}
+
 `
 
 const StyledHeading = styled(Heading)`
@@ -49,6 +57,11 @@ const Gallery = ({ title, allThumbnails, id, maxLength, access }) => {
   const lessThumbnails = allThumbnails.slice(0, maxLength)
   const [thumbnails, setThumbnails] = React.useState(lessThumbnails)
 
+  const { scopes } = getState().user
+
+  const hasRights = scopes.includes(SCOPES['BD/R'])
+  const hasExtendedRights = scopes.includes(SCOPES['BD/X'])
+
   const hasMore = allThumbnails.length > maxLength
   const restricted = access === 'RESTRICTED'
 
@@ -58,13 +71,23 @@ const Gallery = ({ title, allThumbnails, id, maxLength, access }) => {
         <StyledHeading color="secondary" forwardedAs="h3">
           {title} {hasMore && `(${allThumbnails.length})`}
         </StyledHeading>
-        {restricted ? (
-          <Notification type="warning">
-            Deze bouwdossiers zijn alleen beschikbaar voor medewerkers/ketenpartners met extra
-            bevoegdheden
-          </Notification>
-        ) : thumbnails && thumbnails.length ? (
+        {thumbnails && thumbnails.length ? (
           <>
+            {!hasRights && !hasExtendedRights ? (
+              <StyledNotification type="warning">
+                Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om bouwdossiers te
+                bekijken.
+              </StyledNotification>
+            ) : (
+              restricted &&
+              !hasExtendedRights && (
+                <StyledNotification type="warning">
+                  Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen
+                  inloggen om alle bouwdossiers te bekijken.
+                </StyledNotification>
+              )
+            )}
+
             <StyledGridContainer
               as="ul"
               wrap="wrap"
@@ -100,7 +123,11 @@ const Gallery = ({ title, allThumbnails, id, maxLength, access }) => {
                       title={fileTitle}
                     >
                       <IIIFThumbnail
-                        src={`${process.env.IIIF_ROOT}iiif/2/edepot:${fileName}/square/500,500/0/default.jpg`}
+                        src={
+                          hasExtendedRights || (!restricted && hasRights)
+                            ? `${process.env.IIIF_ROOT}iiif/2/edepot:${fileName}/square/300,300/0/default.jpg`
+                            : '/assets/images/not_found_thumbnail.jpg' // use the default not found image when user has no rights
+                        }
                         title={fileTitle}
                       />
                     </StyledLink>
