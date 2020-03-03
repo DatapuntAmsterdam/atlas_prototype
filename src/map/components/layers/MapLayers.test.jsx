@@ -1,11 +1,14 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import MapLayers from './MapLayers'
+
+jest.mock('@datapunt/matomo-tracker-react')
 
 const panelLayers = [
   {
     id: 'id1',
-    title: 'Foo',
+    title: 'foo',
     mapLayers: [
       {
         id: 'id3',
@@ -47,6 +50,12 @@ const panelLayers = [
 const activeLayers = [panelLayers[0]]
 
 describe('MapLayer', () => {
+  const mockTrackEvent = jest.fn()
+
+  beforeEach(() => {
+    useMatomo.mockImplementationOnce(() => ({ trackEvent: mockTrackEvent }))
+  })
+
   it('should render', () => {
     const component = shallow(
       <MapLayers
@@ -69,6 +78,7 @@ describe('MapLayer', () => {
 
   it('should call onLayerToggle when user clicks on button', () => {
     const onLayerToggleMock = jest.fn()
+
     const component = shallow(
       <MapLayers
         activeMapLayers={activeLayers}
@@ -80,6 +90,15 @@ describe('MapLayer', () => {
     const button = component.find('button').at(0)
     button.simulate('click')
 
-    expect(onLayerToggleMock).toHaveBeenCalled()
+    const firstCollection = panelLayers[0]
+    const firstLayer = firstCollection.mapLayers[0]
+
+    expect(onLayerToggleMock).toHaveBeenCalledWith(firstLayer)
+
+    expect(mockTrackEvent).toHaveBeenCalledWith({
+      category: 'kaartlaag',
+      action: firstCollection.title,
+      name: firstLayer.title,
+    })
   })
 })

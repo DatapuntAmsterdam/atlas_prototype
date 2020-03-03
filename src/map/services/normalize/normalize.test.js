@@ -21,6 +21,11 @@ import formatDate from '../../../shared/services/date-formatter/date-formatter'
 
 jest.mock('../../../shared/services/date-formatter/date-formatter')
 
+// The default locale must be mocked to prevent issues with locale settings of machines
+jest.mock('../../../shared/config/locale.config', () => ({
+  DEFAULT_LOCALE: 'nl-NL',
+}))
+
 describe('normalize', () => {
   describe('normalizes "oplaadpunten', () => {
     let input
@@ -280,7 +285,7 @@ ${input.gebruiksdoel[1]}`,
       output = kadastraalObject(input)
 
       expect(output).toMatchObject({
-        size: '1.121 m²',
+        size: '1,121 m²',
       })
 
       input = {}

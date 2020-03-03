@@ -136,8 +136,12 @@ export default function resolveRedirects() {
   }
 
   // Track "themakaarten"
+  // TODO: As soon as the collections can be found in the search, this must be double checked to prevent duplicate logs in Matomo
   if (shortUrls.includes(matchingRedirect)) {
-    matomoInstance.trackEvent({ category: 'kaartlaag', action: 'visit', name: currentPath })
+    // Get the title of the "themakaart" from the currentPath
+    const action = currentPath.split('/')[2]
+
+    matomoInstance.trackEvent({ category: 'kaartlaag', action })
   }
 
   // Tries to prevent cancelling the network request to Matomo, arbitrary number that allows Matomo some time to load

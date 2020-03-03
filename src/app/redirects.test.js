@@ -3,8 +3,11 @@
  */
 
 import resolveRedirects, { REDIRECTS } from './redirects'
+import matomoInstance from './matomo'
 
 jest.useFakeTimers()
+
+jest.mock('./matomo')
 
 const expectWithNewRoute = (route, expectation, cb) => {
   jsdom.reconfigure({ url: route })
@@ -20,6 +23,8 @@ const expectWithNewRoute = (route, expectation, cb) => {
 }
 
 describe('redirects', () => {
+  const trackMock = jest.spyOn(matomoInstance, 'trackEvent')
+
   it('should redirect matched routes', () => {
     REDIRECTS.forEach(route => {
       expectWithNewRoute(`https://www.someurl.com${route.from}`, window.location.replace, expect =>
@@ -56,5 +61,24 @@ describe('redirects', () => {
 
     expect(window.location.replace).not.toHaveBeenCalled()
     window.location = location
+  })
+
+  it('should redirect matched routes', () => {
+    REDIRECTS.forEach(route => {
+      if (route.from.startsWith('/themakaart')) {
+        resolveRedirects()
+
+        // Get the title of the "themakaart" from the currentPath
+        const action = route.from.split('/')[2]
+
+        expect(trackMock).toHaveBeenCalledWith(
+          expect.objectContaining({
+            action,
+          }),
+        )
+
+        jest.runAllTimers()
+      }
+    })
   })
 })

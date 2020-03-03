@@ -17,7 +17,7 @@ exports[`MapLayer should render 1`] = `
       <h4
         className="map-layers__category-text"
       >
-        Foo
+        foo
       </h4>
       <ul>
         <li
@@ -91,7 +91,7 @@ exports[`MapLayer should render without active layers 1`] = `
       <h4
         className="map-layers__category-text"
       >
-        Foo
+        foo
       </h4>
       <ul>
         <li
