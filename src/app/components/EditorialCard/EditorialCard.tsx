@@ -12,7 +12,6 @@ import {
   themeSpacing,
 } from '@datapunt/asc-ui'
 import getImageFromCms from '../../utils/getImageFromCms'
-import getContentTypeLabel from '../../utils/getContentTypeLabel'
 import { CmsType, SpecialType } from '../../../shared/config/cms.config'
 
 const notFoundImage = '/assets/images/not_found_thumbnail.jpg'
@@ -180,7 +179,7 @@ const EditorialCard: React.FC<EditorialCardProps> = ({
     imageIsVertical ? imageDimensions[1] : imageDimensions[0],
   )
 
-  const contentTypeLabel = getContentTypeLabel(type, specialType)
+  const contentTypeLabel = specialType || type
 
   return (
     <StyledLink {...{ title, linkType: 'blank', compact, ...otherProps }}>

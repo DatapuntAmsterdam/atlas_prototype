@@ -15,7 +15,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import getImageFromCms from '../../utils/getImageFromCms'
 import focusOutline from '../shared/focusOutline'
-import getContentTypeLabel from '../../utils/getContentTypeLabel'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(2)};
@@ -90,7 +89,7 @@ const EditorialBlockCard = ({
   linkProps,
   showContentType,
 }) => {
-  const contentTypeLabel = type ? getContentTypeLabel(type, specialType) : null
+  const contentTypeLabel = specialType || type
 
   return (
     <StyledLink {...linkProps} linkType="blank">
