@@ -7,7 +7,7 @@ describe('auth module', () => {
       cy.get(HEADER_MENU.rootMobile)
         .click()
         .get(`${HEADER_MENU.rootMobile} ${HEADER_MENU.login}`)
-        .contains('atlas.emp...')
+        .contains('n.druif@a...')
       cy.logout()
     })
   })

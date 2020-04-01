@@ -1,3 +1,4 @@
 .env
+cypress.env.json
 .git
 node_modules/

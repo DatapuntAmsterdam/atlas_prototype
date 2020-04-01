@@ -1,28 +1,22 @@
-import { SEARCH } from '../support/selectors'
-import { queries } from '../support/permissions-constants'
+import { ADDRESS_PAGE, DATA_SEARCH, MAP, SEARCH, TABLES } from '../support/selectors'
 
 describe('data search module', () => {
-  before(() => {
-    cy.login()
-  })
-
-  after(() => {
-    cy.logout()
-  })
-
   it('user should see suggestions', () => {
     // open the autocomplete panel and select the first dataset option and route the correct address
     cy.server()
+    cy.route('/typeahead?q=dam').as('getResults')
+    cy.route('/bag/v1.1/openbareruimte/*').as('getItem')
+    cy.route('POST', '/cms_search/graphql/').as('graphql')
+    cy.route('/jsonapi/node/list/*').as('jsonapi')
 
-    cy.route('/typeahead?q=Dam').as('getResults')
-    cy.route('/bag/openbareruimte/*').as('getItem')
-
+    cy.hidePopup()
     cy.visit('/')
-    cy.get('#auto-suggest__input').focus().type('Dam')
+
+    cy.get(SEARCH.input).focus().type('Dam')
 
     cy.wait('@getResults')
-    cy.get('.auto-suggest').should('exist').and('be.visible')
-    cy.get(queries.autoSuggestHeader)
+    cy.get(DATA_SEARCH.autoSuggest).should('exist').and('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestHeader)
       .contains('Straatnamen')
       .siblings('ul')
       .children('li')
@@ -33,78 +27,89 @@ describe('data search module', () => {
         const firstValue = $el[0].innerText
         cy.get('h4').contains('Straatnamen').siblings('ul').children('li').first().click()
         cy.wait('@getItem')
-        cy.get('.o-header__title').contains(firstValue).should('exist').and('be.visible')
+        cy.wait('@graphql')
+        cy.wait('@jsonapi')
+
+        cy.get(DATA_SEARCH.headerTitle).contains(firstValue).should('exist').and('be.visible')
       })
   })
 
   it('should open the address detail ', () => {
     cy.server()
     cy.defineGeoSearchRoutes()
+    cy.defineAddressDetailRoutes()
 
     // Use regular expressions in the route to match the spaces
-    cy.route(/\/typeahead\?q=Ad Windighof 2/).as('getResults')
-    cy.route('/bag/verblijfsobject/*').as('getVerblijfsobject')
-    cy.route('/bag/pand/*').as('getPand')
-    cy.route('/monumenten/monumenten/*').as('getMonumenten')
-    cy.route('/handelsregister/vestiging/*').as('getVestiging')
-    cy.route('/panorama/thumbnail/*').as('getPanoThumbnail')
-    cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding')
+    cy.route(/\/typeahead\?q=ad windighof 2/).as('getResults')
 
     // ensure the viewport is always the same in this test, so the clicks can be aligned properly
     cy.viewport(1000, 660)
     cy.visit('/')
-    // type in search and click on autosuggest item
-    cy.get('#auto-suggest__input').focus().type('Ad Windighof 2')
+    cy.hidePopup()
+    cy.get(DATA_SEARCH.autoSuggestInput).focus().type('Ad Windighof 2')
 
     cy.wait('@getResults')
-    cy.get('.auto-suggest').contains('Ad Windighof 2').click()
+    cy.get(DATA_SEARCH.autoSuggestDropdown).contains('Ad Windighof 2').click({ force: true })
 
     // check that the large right column is visible and shows the correct data
     cy.wait('@getVerblijfsobject')
     // Rendering after this request takes some time on server
     cy.wait(500)
-    cy.get('.qa-dashboard__column--right').should('exist').and('be.visible')
-    cy.get('.qa-dashboard__column--right')
-      .get('.qa-title span')
+    cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
+    cy.get(ADDRESS_PAGE.resultsPanel)
+      .get(TABLES.detailTitle)
       .contains('Ad Windighof 2')
       .and('have.css', 'font-style')
       .and('match', /normal/)
-    cy.get('.qa-dashboard__column--right').get('dl').contains('1087HE')
+    cy.get(ADDRESS_PAGE.resultsPanel).get('dl').contains('1087HE')
 
-    cy.wait('@getPanoThumbnail')
-    cy.get('.qa-dashboard__column--right')
-      .get('img.c-panorama-thumbnail--img')
+    cy.wait('@getPanorama')
+    cy.get(ADDRESS_PAGE.resultsPanel)
+      .get(ADDRESS_PAGE.panoramaThumbnail)
       .should('exist')
       .and('be.visible')
 
-    // click in map (there is a marker on this position)
-    cy.get('.qa-map-container').click(166, 304)
+    cy.get(MAP.mapZoomIn).click()
+    cy.get(MAP.mapZoomIn).click()
+    cy.get(MAP.mapContainer).click(166, 304)
 
     // check that the address is open in right column
     cy.waitForGeoSearch()
-    cy.get('.qa-list-item-link').contains('Ad Windighof 2').should('exist').and('be.visible')
+    cy.get(ADDRESS_PAGE.resultsListItem)
+      .contains('Ad Windighof 2')
+      .should('exist')
+      .and('be.visible')
   })
 
   describe('user should be able to submit', () => {
     beforeEach(() => {
       cy.server()
-      cy.defineSearchRoutes()
+      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.route('/jsonapi/node/list/*').as('jsonapi')
+      cy.hidePopup()
+
       cy.visit('/')
-      cy.get('#auto-suggest__input').trigger('focus')
+      cy.get(SEARCH.input).trigger('focus')
     })
 
     it('should submit the search and give results', () => {
       cy.get(SEARCH.input).type('Park')
       cy.get(SEARCH.form).submit()
-      cy.waitForSearch()
-      cy.get('.o-list').should('exist').and('be.visible')
+
+      cy.wait(['@graphql', '@graphql'])
+      cy.wait('@jsonapi')
+
+      cy.contains("Alle zoekresultaten met 'Park' (")
     })
 
     it('should submit the search and give no results', () => {
-      cy.get('#auto-suggest__input').type('NORESULTS')
-      cy.get('.auto-suggest').submit()
-      cy.waitForSearch()
-      cy.get('.o-list').should('have.length', 0)
+      cy.get(SEARCH.input).type('NORESULTS')
+      cy.get(DATA_SEARCH.autoSuggest).submit()
+      cy.wait(['@graphql', '@graphql'])
+      cy.wait('@jsonapi')
+
+      cy.contains("Er zijn geen resultaten gevonden met 'NORESULTS'.").should('be.visible')
+      cy.contains('Maak de zoekcriteria eventueel minder specifiek.').should('be.visible')
     })
   })
 })

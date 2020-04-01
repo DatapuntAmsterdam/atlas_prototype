@@ -11,14 +11,12 @@
   "author": "Datapunt Amsterdam",
   "license": "MPL-2.0",
   "scripts": {
-    "start": "cross-env API_ROOT=https://acc.api.data.amsterdam.nl node ./cypress-run.js",
-    "watch": "cross-env API_ROOT=https://acc.api.data.amsterdam.nl node ./cypress-watch.js"
+    "start": "node ./cypress-run.js",
+    "watch": "node ./cypress-watch.js"
   },
   "dependencies": {
-    "bluebird": "3.5.5",
-    "cross-env": "^5.2.0"
-  },
-  "devDependencies": {
-    "cypress": "^3.4.1"
+    "cypress": "^4.4.0",
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3"
   }
 }

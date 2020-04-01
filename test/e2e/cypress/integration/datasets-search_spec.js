@@ -1,7 +1,4 @@
-import { SEARCH } from '../support/selectors'
-
-const datasetsTab = '.o-tabs__tab--link'
-const datasetsCard = '.c-data-selection-catalog__item'
+import { DATA_SEARCH, SEARCH } from '../support/selectors'
 
 describe('datasets search module', () => {
   before(() => {
@@ -13,32 +10,36 @@ describe('datasets search module', () => {
   })
 
   describe('user should be able to search and see results', () => {
-    it('should open the datasets results', () => {
+    beforeEach(() => {
       cy.server()
-      cy.defineSearchRoutes()
+      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.route('/jsonapi/node/list/**').as('jsonapi')
+      cy.hidePopup()
 
       cy.visit('/')
+      cy.wait('@jsonapi')
+    })
+
+    it('should open the datasets results', () => {
       cy.get(SEARCH.input).trigger('focus')
       cy.get(SEARCH.input).type('Park')
-      cy.get('.auto-suggest').submit()
-      cy.waitForSearch()
+      cy.get(DATA_SEARCH.autoSuggest).submit()
+      cy.url().should('include', '/zoek/?term=Park')
+      cy.wait(['@graphql', '@graphql'])
 
-      cy.get(datasetsTab).contains('Datasets').click()
-      cy.get(datasetsCard).should('exist').and('be.visible')
+      // Check if datasets are visible
+      cy.get('h2').should('be.visible').and('contain', 'Datasets')
     })
 
     it('should not open the datasets results because there are no results', () => {
-      cy.server()
-      cy.defineSearchRoutes()
-
-      cy.visit('/')
       cy.get(SEARCH.input).trigger('focus')
       cy.get(SEARCH.input).type('NORESULTS')
-      cy.get('.auto-suggest').submit()
-      cy.waitForSearch()
+      cy.get(DATA_SEARCH.autoSuggest).submit()
+      cy.url().should('include', '/zoek/?term=NORESULTS')
+      cy.wait(['@graphql', '@graphql'])
 
-      cy.get(datasetsTab).should('not.exist').and('not.be.visible')
-      cy.get(datasetsCard).should('not.exist').and('not.be.visible')
+      // Check if datasets are NOT visible
+      cy.get('h2').contains('Datasets').should('not.exist')
     })
   })
 })
