@@ -1,23 +1,7 @@
 import stateTokenGenerator from '../../src/state-token-generator'
 import { HEADER_MENU } from './selectors'
 
-const checkEnvironmentVariablesSet = () => {
-  const variables = [
-    'API_ROOT',
-    'USERNAME_EMPLOYEE',
-    'USERNAME_EMPLOYEE_PLUS',
-    'PASSWORD_EMPLOYEE',
-    'PASSWORD_EMPLOYEE_PLUS',
-  ]
-  variables.forEach((variable) => {
-    if (Cypress.env(variable) === undefined) {
-      throw new Error(`Environment variable not set: ${variable}`)
-    }
-  })
-}
-
-// eslint-disable-next-line import/prefer-default-export
-export const USER_TOKENS = {}
+const USER_TOKENS = {}
 
 Cypress.Commands.add('login', (type = 'EMPLOYEE_PLUS') => {
   const baseUrl = Cypress.config('baseUrl')
@@ -30,8 +14,6 @@ Cypress.Commands.add('login', (type = 'EMPLOYEE_PLUS') => {
       .invoke('setItem', 'accessToken', USER_TOKENS[type])
       .then(() => cy.visit(baseUrl))
   }
-
-  checkEnvironmentVariablesSet()
 
   const stateToken = stateTokenGenerator()
 
@@ -97,6 +79,7 @@ Cypress.Commands.add('login', (type = 'EMPLOYEE_PLUS') => {
         // Replace redirect URI from earlier (localhost:3000) with baseUrl
         const originalUrl = response.headers.location
         const returnUrl = originalUrl.replace(redirectUri, baseUrl)
+        cy.hidePopup()
         return cy.visit(returnUrl)
       })
 

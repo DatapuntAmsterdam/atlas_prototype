@@ -15,3 +15,5 @@ phantomjsdriver.log
 .vscode/
 .sb/
 sitemap.xml
+
+/test/e2e/cypress.env.json

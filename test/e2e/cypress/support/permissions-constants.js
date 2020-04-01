@@ -4,9 +4,9 @@ import PARAMETERS from '../../../../src/store/parameters'
 const { VIEW, VIEW_CENTER, LEGEND, ZOOM, LOCATION } = PARAMETERS
 
 const urls = {
-  address: `${routing.data.path}bag/verblijfsobject/id0363010003761571?${LEGEND}=false&${ZOOM}=16`,
+  address: `${routing.data.path}bag/verblijfsobject/id0363010000749400?${LEGEND}=false&${ZOOM}=16`,
   business: `${routing.data.path}brk/object/idNL.KAD.OnroerendeZaak.11460857510001?${LEGEND}=false&${ZOOM}=16`,
-  gemeentelijkeBeperking: `${routing.data.path}wkpb/beperking/id1006388`,
+  gemeentelijkeBeperking: `${routing.data.path}wkpb/beperking/id9230`,
   geoSearch: `${routing.data.path}geozoek?${LOCATION}=52.3736166%2C4.8943521`,
   ligplaats: `${routing.data.path}bag/ligplaats/id0363020000881621`,
   maatschappelijkeActiviteit: `${routing.data.path}handelsregister/maatschappelijkeactiviteit/id01029509`,
@@ -17,7 +17,7 @@ const urls = {
   nietNatuurlijk: `${routing.data.path}brk/subject/idNL.KAD.Persoon.423186718`,
   pand: `${routing.data.path}bag/pand/id0363100012168052`,
   parkeervak: `${routing.data.path}parkeervakken/parkeervakken/id121403487278/`,
-  standplaats: `${routing.data.path}bag/standplaats/id0363030000831980`,
+  standplaats: `${routing.data.path}bag/standplaats/id0363030000930866`,
   vestiging: `${routing.data.path}handelsregister/vestiging/id000003579875/?modus=gesplitst`,
   vestigingenTabel: `${routing.data.path}hr/vestigingen?${VIEW}=volledig&${LEGEND}=false&${ZOOM}=11`,
 }
@@ -53,12 +53,12 @@ const values = {
   kadastraleSubjecten: 'Kadastrale subjecten',
   legendCafeValue: 'Café',
   legendPermissionNotification: 'Zichtbaar na inloggen',
-  ligplaatsVestigingName: 'alac',
+  ligplaatsVestigingName: 'Caffeine Holding',
   maatschappelijkeActiviteitName: 'om B',
   maatschappelijkeActiviteitVestigingName: 'om B',
   pandVestigingName: 'ller',
   redengevendeOmschrijving: 'Redengevende omschrijving',
-  standplaatsVestigingName: 'us B',
+  standplaatsVestigingName: 'RH-Infra',
   parkeervakId: '121403487278',
   type: 'Type',
   vestigingName: 'om B',

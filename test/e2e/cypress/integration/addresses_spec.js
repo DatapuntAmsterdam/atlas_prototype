@@ -1,41 +1,30 @@
 import { getCountFromHeader } from '../support/helper-functions'
-import { DATA_SELECTION_TABLE, HEADINGS } from '../support/selectors'
-
-const ADDRESS_PAGE_SELECTORS = {
-  pageUrl: '/data/bag/adressen/?modus=volledig',
-  mapContainer: 'qa-map-container',
-  dataSelection: '.c-data-selection',
-}
-
-const { pageUrl, mapContainer, dataSelection } = ADDRESS_PAGE_SELECTORS
+import { ADDRESS_PAGE, DATA_SELECTION_TABLE, HEADINGS, MAP, TABLES } from '../support/selectors'
 
 describe('addresses module', () => {
   beforeEach(() => {
     cy.server()
     cy.route('/dataselectie/bag/*').as('getResults')
 
-    // go to the addresses table
-    cy.visit(pageUrl)
+    cy.hidePopup()
 
-    // the address table should be visible
-    cy.get(dataSelection).should('exist').and('be.visible')
+    cy.visit('/data/bag/adressen/?modus=volledig')
+    cy.get(ADDRESS_PAGE.dataSelection).should('exist').and('be.visible')
   })
 
   describe('user should see the addresses table in full mode', () => {
     it('should open the address catalogus', () => {
-      // the title should contain Adressen
       cy.get(HEADINGS.dataSelectionHeading).contains('Adressen').should('exist').and('be.visible')
 
-      // the map view is not visible
-      cy.get(mapContainer).should('not.exist')
+      cy.get(ADDRESS_PAGE.mapContainer).should('not.exist')
     })
   })
 
   describe('user should be able to add a filter', () => {
     it('should add the filter to the active filters and filter the results', () => {
       // get the first category
-      cy.get('.qa-available-filters')
-        .find('.c-data-selection-available-filters__category')
+      cy.get(TABLES.filterPanel)
+        .find(TABLES.filterCategories)
         .first()
         .then((group) => {
           // get the innerText of the nested h2
@@ -43,18 +32,16 @@ describe('addresses module', () => {
           // get the innerText of the first nested li
           const selectedFilter = group[0].children[1].children[0].innerText
           // click the filter that contains the selectedFilter variable
-          cy.get('.c-data-selection-available-filters__item')
-            .find('.qa-option-label')
-            .contains(selectedFilter)
-            .click()
+          cy.get(TABLES.filterItem).find(TABLES.filterLabel).contains(selectedFilter).click()
 
           cy.wait('@getResults')
 
           // the filter should be added to the active filters (stadsdeel)
-          cy.get('.c-data-selection-active-filters__listitem')
+          cy.get(TABLES.activeFilterItem)
             .find('span')
             .contains(selectedFilter)
             .should('exist')
+            .scrollIntoView()
             .and('be.visible')
 
           // get the position of the category in the th's of the table
@@ -76,12 +63,7 @@ describe('addresses module', () => {
 
   describe('user should be able to navigate to the address detail view', () => {
     beforeEach(() => {
-      cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding')
-      cy.route('/bag/verblijfsobject/*').as('getVerblijfsobject')
-      cy.route('/bag/pand/?verblijfsobjecten__id=*').as('getPanden')
-      cy.route('/brk/object-expand/?verblijfsobjecten__id=*').as('getObjectExpand')
-      cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen')
-      cy.route('/monumenten/monumenten/*').as('getMonument')
+      cy.defineAddressDetailRoutes()
     })
     it('should open the detail view with the correct address', () => {
       cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`)
@@ -96,19 +78,10 @@ describe('addresses module', () => {
               // click on the firstItem to open address preview panel
               cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click()
 
-              // request the detail information
-              cy.wait('@getNummeraanduiding')
-              cy.wait('@getVerblijfsobject')
-              cy.wait('@getPanden')
-              cy.wait('@getObjectExpand')
-              cy.wait('@getSitueringen')
-              cy.wait('@getMonument')
+              cy.waitForAdressDetail()
 
-              // the detail view should exist
-              cy.get('.qa-detail').should('exist').and('be.visible')
-              // the selectedGroup should exist
+              cy.get(TABLES.detailPane).should('exist').and('be.visible')
               cy.get('dt').contains(selectedGroup).should('exist').and('be.visible')
-              // the selectedValue should exist as a sibling
               cy.get('dt')
                 .contains(selectedGroup)
                 .siblings('dd')
@@ -130,27 +103,24 @@ describe('addresses module', () => {
               // click on the firstItem to open address preview panel
               cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click()
               // the detail view should exist
-              cy.get('.qa-detail').should('exist').and('be.visible')
+              cy.get(TABLES.detailPane).should('exist').and('be.visible')
               // the map view maximize button should exist
-              cy.get('button.icon-button__right').should('exist')
+              cy.get(ADDRESS_PAGE.buttonMaximizeMap).should('exist')
               // click on the maximize button to open the map view
-              cy.get('button.icon-button__right').first().click()
+              cy.get(ADDRESS_PAGE.buttonMaximizeMap).first().click()
 
               cy.wait('@getNummeraanduiding')
               cy.wait('@getVerblijfsobject')
 
               // the preview panel should exist
-              cy.get('.map-preview-panel').should('exist').and('be.visible')
+              cy.get(MAP.mapPreviewPanel).should('exist').and('be.visible')
               // the preview panel has the right title
-              cy.get('.map-detail-result__header-subtitle')
+              cy.get(ADDRESS_PAGE.mapDetailResultHeader)
                 .contains(selectedValue)
                 .should('exist')
                 .and('be.visible')
               // the show more button should exist and be visible
-              cy.get('.map-search-results__button')
-                .should('exist')
-                .scrollIntoView()
-                .and('be.visible')
+              cy.get(ADDRESS_PAGE.buttonShowMore).should('exist').scrollIntoView().and('be.visible')
             })
         })
     })
@@ -158,25 +128,15 @@ describe('addresses module', () => {
 
   describe('user should be able to view a cursor in the leaflet map', () => {
     it('should open the detail view with a leaflet map and a cursor', () => {
-      cy.route('/bag/nummeraanduiding/*').as('getNummeraanduiding')
-      cy.route('/bag/verblijfsobject/*').as('getVerblijfsobject')
-      cy.route('/bag/pand/?verblijfsobjecten__id=*').as('getPanden')
-      cy.route('/brk/object-expand/?verblijfsobjecten__id=*').as('getObjectExpand')
-      cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen')
-      cy.route('/monumenten/monumenten/*').as('getMonument')
+      cy.defineAddressDetailRoutes()
 
       // click on the first item in the table
       cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click()
 
-      cy.wait('@getNummeraanduiding')
-      cy.wait('@getVerblijfsobject')
-      cy.wait('@getPanden')
-      cy.wait('@getObjectExpand')
-      cy.wait('@getSitueringen')
-      cy.wait('@getMonument')
+      cy.waitForAdressDetail()
 
       // the cursor should still be rendered inside the leaflet map
-      cy.get('.leaflet-marker-icon').should('exist').and('be.visible')
+      cy.get(ADDRESS_PAGE.iconMapMarker).should('exist').and('be.visible')
     })
   })
 
@@ -192,7 +152,7 @@ describe('addresses module', () => {
       })
 
       // click on "AMC" in the left filter menu
-      cy.get('.c-data-selection-available-filters__item').contains('AMC').click()
+      cy.get(TABLES.filterItem).contains('AMC').click()
       cy.wait('@getResults')
 
       // Expect the number in the title after filtering to be smaller than the number before
@@ -203,24 +163,21 @@ describe('addresses module', () => {
       })
 
       // click on "kaart weergeven"
-      cy.get('.c-toggle-view-button.qa-dp-link').click()
+      cy.get(ADDRESS_PAGE.buttonOpenMap).click()
       cy.wait('@getGeoResults')
 
       // map should be visible now
-      cy.get('.qa-map-container').should('exist').and('be.visible')
+      cy.get(ADDRESS_PAGE.mapContainer).should('exist').and('be.visible')
       // , with large right column
-      cy.get('.qa-dashboard__column--right').should('exist').and('be.visible')
+      cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
       // count the number of cluster icons on the map
-      cy.get('.o-highlight-cluster').then((items) => {
+      cy.get(ADDRESS_PAGE.iconCluster).then((items) => {
         expect(items.length).to.gte(1)
       })
       // list should be visible in right column
-      cy.get('ul.o-list').should('exist').and('be.visible')
+      cy.get(ADDRESS_PAGE.resultsList).should('exist').and('be.visible')
       // active filter should show
-      cy.get('.c-data-selection-active-filters__listitem')
-        .contains('AMC')
-        .should('exist')
-        .and('be.visible')
+      cy.get(TABLES.activeFilterItem).contains('AMC').should('exist').and('be.visible')
     })
   })
 })
