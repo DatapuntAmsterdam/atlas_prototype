@@ -91,7 +91,7 @@ export const getLayers = createSelector(
       const matchingPanelLayer = panelLayers.find(
         (panelLayer) =>
           panelLayer.id === layer.id ||
-          panelLayer.legendItems.some((legendItem) => legendItem.id === layer.id),
+          panelLayer?.legendItems?.some((legendItem) => legendItem.id === layer.id),
       )
       return (
         matchingPanelLayer &&
