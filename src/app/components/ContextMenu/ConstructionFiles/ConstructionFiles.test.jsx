@@ -13,7 +13,7 @@ jest.mock('../../../../shared/services/redux/get-state', () =>
 
 // Mock the useDownload hook
 const mockOnDownload = jest.fn()
-jest.mock('../../../utils/useDownload', () => jest.fn(() => [, mockOnDownload]))
+jest.mock('../../../utils/useDownload', () => jest.fn(() => [false, mockOnDownload]))
 
 describe('ContextMenu for ConstructionFiles viewer', () => {
   let component
