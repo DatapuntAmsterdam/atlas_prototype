@@ -117,9 +117,9 @@ const SearchPageResults = ({
 
     const countFormatted = count.toLocaleString(DEFAULT_LOCALE)
 
-    return hasQuery
-      ? `${label} met '${query}' (${countFormatted} resultaten)`
-      : `${label} (${countFormatted} resultaten)`
+    return `${label} ${hasQuery ? `met '${query}'` : ''} (${countFormatted} ${
+      count === 1 ? 'resultaat' : 'resultaten'
+    })`
   }
 
   const ResultsComponent =
