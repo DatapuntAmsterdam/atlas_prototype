@@ -43,19 +43,28 @@ const CardList: React.FC<CardListProps> = ({ title, loading, results }) => (
       </StyledHeading>
       <div>
         {results.map(
-          ({ id, type, specialType, shortTitle, title: cardTitle, linkProps, teaserImage }) => (
+          ({
+            id,
+            type,
+            specialType,
+            shortTitle,
+            title: cardTitle,
+            linkProps,
+            teaserImage,
+            coverImage,
+          }) => (
             <EditorialCard
               {...{
+                ...linkProps, // !important: linkProps also contains `title`
                 key: id,
                 id,
                 type,
                 specialType,
                 title: shortTitle || cardTitle,
-                image: teaserImage,
+                image: teaserImage || coverImage,
                 imageDimensions: [44, 44],
                 compact: true, // Important: renders a simplified version of this card
                 showContentType: true,
-                ...linkProps,
               }}
             />
           ),
