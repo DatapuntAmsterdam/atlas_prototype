@@ -60,8 +60,8 @@ const LayerButton = styled.div.attrs({
   & > ${styles.IconStyle} {
     margin-right: 3px;
     transition: transform 0.2s ease-in-out;
-    ${({ open }) =>
-      open &&
+    ${({ isOpen }) =>
+      isOpen &&
       css`
         transform: rotate(180deg);
       `}
@@ -99,8 +99,22 @@ const MapLegend = ({
   title,
   overlays,
 }) => {
+  const ref = React.createRef()
+
   const isPrintOrEmbedView = useSelector(isPrintOrEmbedMode)
-  const [open, setOpen] = useState(isPrintOrEmbedView ?? false)
+  const [isOpen, setOpen] = useState(isPrintOrEmbedView ?? false)
+
+  // Open the MapLegend and scroll it into the current view
+  const handleSetOpen = (open) => {
+    if (open && ref.current) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+
+    setOpen(open)
+  }
 
   // Todo: This need to be refactored on redux level, so MapLayers and LegendItems will get a isVisible option there.
   const mapLayers = useMemo(
@@ -134,7 +148,7 @@ const MapLegend = ({
 
   // Effect if all layers are unchecked manually within a collection
   useEffect(() => {
-    setOpen(!allInvisible)
+    handleSetOpen(!allInvisible)
   }, [allInvisible])
 
   const handleOnChangeCollection = (e) => {
@@ -151,19 +165,19 @@ const MapLegend = ({
           .filter(({ isVisible }) => !isVisible)
           .forEach((legendItem) => onLayerVisibilityToggle(legendItem.id, false))
       })
-      setOpen(true)
+      handleSetOpen(true)
     } else {
       activeMapLayers.forEach((mapLayer) => {
         onLayerToggle(mapLayer)
       })
-      setOpen(e.currentTarget.checked)
+      handleSetOpen(e.currentTarget.checked)
     }
   }
 
   return (
     <>
       {(!isPrintOrEmbedView || (isPrintOrEmbedView && !allInvisible)) && (
-        <LayerButton onClick={() => setOpen(!open)} open={open}>
+        <LayerButton ref={ref} onClick={() => handleSetOpen(!isOpen)} isOpen={isOpen}>
           <TitleWrapper>
             <CollectionLabel key={title} htmlFor={title} label={title}>
               <StyledCheckbox
@@ -181,7 +195,7 @@ const MapLegend = ({
           </Icon>
         </LayerButton>
       )}
-      {open && (
+      {isOpen && (
         <ul className="map-legend">
           {mapLayers &&
             mapLayers.map((mapLayer, mapLayerIndex) => {

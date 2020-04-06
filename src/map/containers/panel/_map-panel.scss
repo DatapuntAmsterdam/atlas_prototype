@@ -130,6 +130,7 @@
     overflow-x: hidden;
     overflow-y: auto; // NB: Workaround to force smooth scrolling on Chrome
     will-change: transform;
+    background-color: $primary-light;
 
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
       //sass-lint:disable-line no-vendor-prefixes

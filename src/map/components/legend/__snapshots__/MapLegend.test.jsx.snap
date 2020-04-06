@@ -3,8 +3,8 @@
 exports[`MapLegend should render the component 1`] = `
 <Fragment>
   <styled.div
+    isOpen={false}
     onClick={[Function]}
-    open={false}
   >
     <styled.div>
       <Styled(Styled(Label))>
