@@ -178,7 +178,7 @@ describe('employee PLUS permissions', () => {
     cy.wait('@getNummeraanduidingen')
     cy.wait('@getVestigingen')
     cy.wait('@getPanorama')
-    cy.get(queries.mapSearchResultsCategoryHeader).contains(values.vestigingen)
+    cy.get(MAP.mapSearchResultsCategoryHeader).contains(values.vestigingen)
   })
 
   it('7D. Should show a plus employee all information in a "ligplaats" search', () => {

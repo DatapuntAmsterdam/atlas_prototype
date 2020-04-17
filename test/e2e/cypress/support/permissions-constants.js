@@ -35,7 +35,6 @@ const queries = {
   mapLayersCategory: '.map-layers__category',
   mapDetailResultHeaderSubTitle: '.map-detail-result__header-subtitle',
   mapDetailResultItem: '.map-detail-result__item',
-  mapSearchResultsCategoryHeader: '.map-search-results-category__header',
   natuurlijkPersoon: 'dl.qa-natuurlijk-persoon',
   nietNatuurlijkPersoon: 'dl.qa-niet-natuurlijk-persoon',
   searchHeader: '.qa-search-header',

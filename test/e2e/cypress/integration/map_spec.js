@@ -69,7 +69,7 @@ describe('map module', () => {
         .and('be.visible')
         .and('have.attr', 'src', `${svgMapPath}detail.svg`)
       cy.get(MAP.mapPreviewPanelVisible)
-        .get(MAP.mapDetailPanoramaHeader)
+        .get(MAP.mapDetailPanoramaHeaderImage)
         .should('exist')
         .and('be.visible')
       cy.checkPreviewPanel(['Type adres', 'Hoofdadres'])
@@ -147,7 +147,7 @@ describe('map module', () => {
       cy.get('button.icon-button__right').first().click()
 
       cy.get(MAP.mapPreviewPanelVisible)
-        .get(MAP.mapDetailPanoramaHeader)
+        .get(MAP.mapDetailPanoramaHeaderImage)
         .should('exist')
         .and('be.visible')
       cy.checkPreviewPanel(['Nieuwmarkt 25', '10581111'])

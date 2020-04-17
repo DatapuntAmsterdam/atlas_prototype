@@ -169,7 +169,7 @@ describe('employee permissions', () => {
     cy.get(queries.warningPanel).should('not.exist')
     cy.get(queries.headerSubTitle).contains(values.vestigingen)
     cy.get('.qa-toggle-fullscreen').click()
-    cy.get(queries.mapSearchResultsCategoryHeader).contains(values.vestigingen)
+    cy.get(MAP.mapSearchResultsCategoryHeader).contains(values.vestigingen)
   })
 
   it('7D. Should show an employee all information in a "ligplaats" search', () => {

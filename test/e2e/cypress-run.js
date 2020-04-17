@@ -54,31 +54,10 @@ return glob(`${SCRIPTS_FOLDER}/**/*`, {
             totalSkipped: results.totalSkipped,
           })
 
-<<<<<<< HEAD
-    return cypress
-      .run({
-        spec,
-        config: {
-          integrationFolder: SCRIPTS_FOLDER,
-        },
-      })
-      .then((results) => {
-        numFailed += results.totalFailed
-        summary.push({
-          name: spec.split('/')[spec.split('/').length - 1],
-          totalDuration: results.totalDuration,
-          totalSuites: results.totalSuites,
-          totalTests: results.totalTests,
-          totalFailed: results.totalFailed,
-          totalPassed: results.totalPassed,
-          totalPending: results.totalPending,
-          totalSkipped: results.totalSkipped,
-=======
           return name
         })
         .catch((name) => {
           console.warn('Failed test', name)
->>>>>>> b194010f47a12c9f32803ad30d5a613868e3adc7
         })
     }
   })

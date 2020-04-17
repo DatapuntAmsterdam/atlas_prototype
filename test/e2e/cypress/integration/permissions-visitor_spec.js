@@ -155,7 +155,7 @@ describe('visitor permissions', () => {
     // click on the maximize button to open the map view
     cy.get('button.icon-button__right').first().click()
     cy.wait(250)
-    cy.get(queries.mapSearchResultsCategoryHeader).should('not.contain', values.vestigingen)
+    cy.get(MAP.mapSearchResultsCategoryHeader).should('not.contain', values.vestigingen)
   })
 
   it('7D. Should show a visitor limited information in a "ligplaats" search', () => {
