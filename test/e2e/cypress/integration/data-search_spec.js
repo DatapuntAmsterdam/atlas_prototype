@@ -44,8 +44,8 @@ describe('data search module', () => {
 
     // ensure the viewport is always the same in this test, so the clicks can be aligned properly
     cy.viewport(1000, 660)
-    cy.visit('/')
     cy.hidePopup()
+    cy.visit('/')
     cy.get(DATA_SEARCH.autoSuggestInput).focus().type('Ad Windighof 2')
 
     cy.wait('@getResults')

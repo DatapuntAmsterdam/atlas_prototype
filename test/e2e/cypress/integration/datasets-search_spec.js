@@ -39,7 +39,7 @@ describe('datasets search module', () => {
       cy.wait(['@graphql', '@graphql'])
 
       // Check if datasets are NOT visible
-      cy.get('h2').contains('Datasets').should('not.exist')
+      cy.contains('Datasets').should('not.be.visible')
     })
   })
 })
