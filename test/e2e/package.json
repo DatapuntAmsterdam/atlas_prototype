@@ -15,9 +15,14 @@
     "watch": "node ./cypress-watch.js"
   },
   "dependencies": {
+<<<<<<< HEAD
     "bluebird": "3.7.2",
     "cypress": "^4.4.0",
     "prettier": "^2.0.2",
+=======
+    "cypress": "^4.4.0",
+    "prettier": "^2.0.4",
+>>>>>>> b194010f47a12c9f32803ad30d5a613868e3adc7
     "typescript": "^3.8.3"
   }
 }
