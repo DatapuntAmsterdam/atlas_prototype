@@ -34,11 +34,11 @@ export const DATA_SEARCH = {
   mapLayersCategory: '.map-layers__category',
   mapDetailResultHeaderSubTitle: '.map-detail-result__header-subtitle',
   mapDetailResultItem: '.map-detail-result__item',
-  mapSearchResultsCategoryHeader: '.map-search-results-category__header',
   natuurlijkPersoon: 'dl.qa-natuurlijk-persoon',
   nietNatuurlijkPersoon: 'dl.qa-niet-natuurlijk-persoon',
   scrollWrapper: '.scroll-wrapper',
   searchHeader: '.qa-search-header',
+  searchResultsGrid: '.c-search-results',
   warningPanel: '.c-panel',
   warningPanelAngular: '.c-panel--warning',
 }
@@ -95,11 +95,16 @@ export const MAP = {
   iconMapMarker: '.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive',
   imageLayer: '.leaflet-image-layer',
   mapContainer: '.leaflet-container',
+  mapDetailResultPanel: '.map-detail-result',
   mapLegend: '.map-legend',
+  mapMaximize: '.rc-icon-button',
   mapPanel: '.map-panel',
   mapPreviewPanel: '.map-preview-panel',
   mapPreviewPanelVisible: '.map-preview-panel.map-preview-panel--visible',
-  mapDetailPanoramaHeader: 'img.map-detail-result__header-pano',
+  mapDetailPanoramaHeader: '.map-search-results__header-pano',
+  mapDetailPanoramaHeaderImage: 'img.map-detail-result__header-pano',
+  mapSearchResultsCategoryHeader: '.map-search-results-category__header',
+  mapSearchResultsPanel: '.map-search-results',
   mapSelectedObject: '.leaflet-interactive',
   mapOverlayPane: '.leaflet-overlay-pane',
   mapZoomIn: '.leaflet-control-zoom-in',
@@ -107,6 +112,7 @@ export const MAP = {
 }
 
 export const PANORAMA = {
+  buttonClosePanorama: '.c-panorama > .icon-button__right > .rc-icon-button',
   homepage: '.c-homepage',
   markerPane: '.leaflet-marker-pane',
   statusBarCoordinates: '.c-panorama-status-bar__coordinates',
