@@ -31,7 +31,7 @@
     "prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,scss,css}\""
   },
   "dependencies": {
-    "@datapunt/asc-assets": "^0.19.2-alpha.25",
+    "@datapunt/asc-assets": "^0.19.2-esm.18",
     "@datapunt/asc-ui": "^0.19.2-alpha.25",
     "@datapunt/matomo-tracker-js": "0.1.1",
     "@datapunt/matomo-tracker-react": "0.1.1",
