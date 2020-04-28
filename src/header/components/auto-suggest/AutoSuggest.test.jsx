@@ -4,6 +4,12 @@ import { mount, shallow } from 'enzyme'
 import AutoSuggest from './AutoSuggest'
 import { MORE_RESULTS_INDEX } from './AutoSuggestCategory'
 
+jest.mock('../../../app/pages/SearchPage/config', () => ({
+  TYPES: {
+    DATA: 'data',
+  },
+}))
+
 jest.mock('./Search', () => () => (
   <div>
     <input type="text" id="auto-suggest__input" />
@@ -19,21 +25,25 @@ const mockFilledState = {
           label: 'Dam',
           index: 0,
           category: 'Straatnamen',
+          type: 'data',
         },
         {
           uri: 'bag/openbareruimte/03630000001038/',
           label: 'Damloperspad',
           index: 1,
           category: 'Straatnamen',
+          type: 'data',
         },
         {
           uri: 'bag/openbareruimte/03630000003187/',
           label: 'Damrak',
           index: 2,
           category: 'Straatnamen',
+          type: 'data',
         },
       ],
       label: 'Straatnamen',
+      type: 'data',
       total_results: 6,
     },
     {
@@ -43,22 +53,26 @@ const mockFilledState = {
           label: 'Damrak 1',
           index: 3,
           category: 'Monumenten',
+          type: 'data',
         },
         {
           uri: 'monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/',
           label: 'Dam 10',
           index: 4,
           category: 'Monumenten',
+          type: 'data',
         },
         {
           uri: 'monumenten/monumenten/f93e31ba-89eb-4784-87e1-d32c33b5236d/',
           label: 'Damrak 15',
           index: 5,
           category: 'Monumenten',
+          type: 'data',
         },
       ],
       label: 'Monumenten',
       total_results: 5,
+      type: 'data',
     },
   ],
   typedQuery: 'dam',
@@ -69,6 +83,7 @@ const mockFilledState = {
     label: 'Damrak 1',
     index: 3,
     category: 'Monumenten',
+    type: 'data',
   },
 }
 const onInputEvent = { currentTarget: { value: 'd' }, persist: jest.fn() }
@@ -242,14 +257,14 @@ describe('The AutoSuggest component', () => {
         />,
       )
 
-      const suggestion = { index: MORE_RESULTS_INDEX }
+      const suggestion = { index: MORE_RESULTS_INDEX, type: 'some type' }
       const event = {
         preventDefault: jest.fn(),
         stopPropagation: jest.fn(),
       }
       autoSuggestComponent.instance().onFormSubmit = jest.fn()
-      autoSuggestComponent.instance().onSuggestionSelection(suggestion, 'Some label', event)
-      expect(autoSuggestComponent.instance().onFormSubmit).toHaveBeenCalledWith(event, 'Some label')
+      autoSuggestComponent.instance().onSuggestionSelection(suggestion, event)
+      expect(autoSuggestComponent.instance().onFormSubmit).toHaveBeenCalledWith(event, 'some type')
     })
   })
 

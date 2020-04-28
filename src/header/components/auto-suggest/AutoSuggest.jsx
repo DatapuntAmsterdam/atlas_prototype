@@ -61,14 +61,14 @@ class AutoSuggest extends React.Component {
     }
   }
 
-  onSuggestionSelection(suggestion, label, event) {
+  onSuggestionSelection(suggestion, event) {
     const { onSuggestionSelection } = this.props
     event.preventDefault()
     event.stopPropagation()
 
     if (suggestion.index === MORE_RESULTS_INDEX) {
       this.resetActiveSuggestion()
-      this.onFormSubmit(event, label)
+      this.onFormSubmit(event, suggestion?.type)
     } else {
       onSuggestionSelection(suggestion)
       this.clearQuery()
@@ -79,7 +79,7 @@ class AutoSuggest extends React.Component {
     })
   }
 
-  onFormSubmit(event, label = null) {
+  onFormSubmit(event, type = null) {
     const { onSubmit, query } = this.props
 
     event.preventDefault()
@@ -93,7 +93,7 @@ class AutoSuggest extends React.Component {
       () => {
         if (query) {
           this.resetActiveSuggestion()
-          onSubmit(label)
+          onSubmit(type)
         }
       },
     )
@@ -146,7 +146,7 @@ class AutoSuggest extends React.Component {
       // Enter
       case 13:
         if (activeSuggestion.index > -1) {
-          this.onSuggestionSelection(activeSuggestion, activeSuggestion.label, event)
+          this.onSuggestionSelection(activeSuggestion, event)
         }
         break
       default:

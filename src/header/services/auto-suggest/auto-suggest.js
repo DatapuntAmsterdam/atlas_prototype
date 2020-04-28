@@ -1,23 +1,12 @@
 import { getAuthHeaders } from '../../../shared/services/auth/auth'
+import { CmsType } from '../../../shared/config/cms.config'
+import SearchType from '../../../app/pages/SearchPage/constants'
 
 // Minimun length for typeahead query in backend is 3 characters
 const MIN_QUERY_LENGTH = 3
 
-// These strings correspond to the labels defined in the typeahead API.
-export const LABELS = {
-  PUBLICATIONS: 'Publicaties',
-  DATASETS: 'Datasets',
-  ARTICLES: 'Artikelen',
-  DATA: 'Data',
-  SPECIALS: 'Specials',
-  COLLECTIONS: 'Dossiers',
-  MAP: 'Kaarten',
-  MAP_LAYERS: 'Kaartlagen',
-  MAP_COLLECTIONS: 'Kaartcollecties',
-}
-
 // Sort order of the data results. These strings correspond to the labels defined in the typeahead API.
-export const SORT_ORDER_DATA = [
+export const LABELS_DATA = [
   'Straatnamen',
   'Adressen',
   'Openbare ruimtes',
@@ -31,17 +20,21 @@ export const SORT_ORDER_DATA = [
   'Monumenten',
 ]
 
-// Sort order of the autosuggest results
-export const SORT_ORDER = [
-  LABELS.COLLECTIONS,
-  LABELS.SPECIALS,
-  LABELS.MAP_LAYERS,
-  LABELS.MAP_COLLECTIONS,
-  ...SORT_ORDER_DATA,
-  LABELS.DATASETS,
-  LABELS.PUBLICATIONS,
-  LABELS.ARTICLES,
-]
+// Sort order of the map results. These strings correspond to the labels defined in the typeahead API.
+export const LABELS_MAP = ['Kaartcollecties', 'Kaartlagen']
+
+// These strings correspond to the labels defined in the typeahead API, and reflect the correct order in the autosuggest results
+export const LABELS = {
+  [CmsType.Collection]: 'Dossiers',
+  [CmsType.Special]: 'Specials',
+  [SearchType.Map]: LABELS_MAP,
+  [SearchType.Data]: LABELS_DATA,
+  [SearchType.Dataset]: 'Datasets',
+  [CmsType.Publication]: 'Publicaties',
+  [CmsType.Article]: 'Artikelen',
+}
+
+export const SORT_ORDER = Object.values(LABELS).flat()
 
 /**
  * Orders the array by the object's labels in the order defined the SORT_ORDER const
@@ -49,7 +42,8 @@ export const SORT_ORDER = [
  * @returns {*[]}
  */
 export const orderAutoSuggestResults = (results) => {
-  const order = Object.values(SORT_ORDER)
+  // Sort order of the autosuggest results
+  const order = SORT_ORDER
 
   const dataPart = results.filter((category) => !order.includes(category.label))
   const orderedPart = order.reduce((acc, label) => {
@@ -62,25 +56,36 @@ export const orderAutoSuggestResults = (results) => {
   return [...dataPart, ...orderedPart]
 }
 
+function getKeyByValue(object, value) {
+  return Object.keys(object).find((key) => object[key] === value)
+}
+
 function formatData(categories) {
   const numberOfResults = categories.reduce((acc, category) => acc + category.content.length, 0)
   const sortedCategories = orderAutoSuggestResults(categories)
 
   let indexInTotal = -1
 
-  const indexedCategories = sortedCategories.map((category) => ({
-    ...category,
-    content: category.content.map((suggestion) => {
-      indexInTotal += 1
-      return {
-        category: category.label,
-        index: indexInTotal,
-        label: suggestion._display,
-        uri: suggestion.uri,
-        type: suggestion.type,
-      }
-    }),
-  }))
+  const indexedCategories = sortedCategories.map((category) => {
+    const type =
+      getKeyByValue(LABELS, category.label) ||
+      (LABELS_MAP.includes(category.label) ? SearchType.Map : SearchType.Data)
+
+    return {
+      ...category,
+      type,
+      content: category.content.map((suggestion) => {
+        indexInTotal += 1
+        return {
+          category: category.label,
+          index: indexInTotal,
+          label: suggestion._display,
+          uri: suggestion.uri,
+          type,
+        }
+      }),
+    }
+  })
 
   return {
     count: numberOfResults,

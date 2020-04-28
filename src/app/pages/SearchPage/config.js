@@ -24,18 +24,12 @@ import {
   specialSearchQuery,
 } from './documents.graphql'
 import MapSearchResults from './MapSearchResults'
+import SearchType from './constants'
 
 export const MAX_RESULTS = 50
 export const DEFAULT_LIMIT = 10
 
 export const DATA_FILTERS = 'dataTypes'
-
-export const TYPES = {
-  SEARCH: 'search',
-  DATA: 'data',
-  DATASET: 'dataset',
-  MAP: 'map',
-}
 
 // This object is used to define the sort order of the search page
 const SEARCH_TYPES_CONFIG = {
@@ -62,7 +56,7 @@ const SEARCH_TYPES_CONFIG = {
     query: mapSearchQuery,
     to: toMapSearch,
     label: routing.mapSearch.title,
-    type: TYPES.MAP,
+    type: SearchType.Map,
     component: MapSearchResults,
     hideOverviewHeading: true,
   },
@@ -71,7 +65,7 @@ const SEARCH_TYPES_CONFIG = {
     query: dataSearchQuery,
     to: toDataSearch,
     label: routing.dataSearch.title,
-    type: TYPES.DATA,
+    type: SearchType.Data,
     component: DataSearchResults,
     hideOverviewHeading: false,
   },
@@ -80,7 +74,7 @@ const SEARCH_TYPES_CONFIG = {
     query: datasetSearchQuery,
     to: toDatasetSearch,
     label: routing.datasetSearch.title,
-    type: TYPES.DATASET,
+    type: SearchType.Dataset,
     component: DatasetSearchResults,
     hideOverviewHeading: false,
   },
@@ -118,7 +112,7 @@ export default {
     to: toSearch,
     query: searchQuery,
     label: routing.search.title,
-    type: TYPES.SEARCH,
+    type: SearchType.Search,
     hideOverviewHeading: false,
   },
   ...SEARCH_TYPES_CONFIG,

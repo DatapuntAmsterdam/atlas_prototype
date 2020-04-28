@@ -7,8 +7,8 @@ import PARAMETERS from '../../../store/parameters'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint } from '../../../store/redux-first-router/actions'
 import AutoSuggest from '../../components/auto-suggest/AutoSuggest'
-import { LABELS } from '../../services/auto-suggest/auto-suggest'
 import { CmsType } from '../../../shared/config/cms.config'
+import SearchType from '../../../app/pages/SearchPage/constants'
 
 class HeaderSearch extends React.Component {
   constructor(props) {
@@ -49,24 +49,28 @@ class HeaderSearch extends React.Component {
     } = this.props
 
     // Suggestion of type dataset, formerly known as "catalog"
-    if (suggestion.uri.match(/^dcatd\//)) {
+    if (suggestion.type === SearchType.Dataset) {
       const [, , id] = extractIdEndpoint(suggestion.uri)
       const slug = useSlug(suggestion.label)
 
       openDatasetSuggestion({ id, slug, typedQuery })
-
+    } else if (
       // Suggestion coming from the cms
-    } else if (suggestion.uri.match(/jsonapi\/node\//)) {
-      const [, type, id] = extractIdEndpoint(suggestion.uri)
+      suggestion.type === CmsType.Article ||
+      suggestion.type === CmsType.Publication ||
+      suggestion.type === CmsType.Collection ||
+      suggestion.type === CmsType.Special
+    ) {
+      const [, , id] = extractIdEndpoint(suggestion.uri)
       const slug = useSlug(suggestion.label)
 
       let subType = ''
-      if (type === CmsType.Special) {
+      if (suggestion.type === CmsType.Special) {
         ;[, subType] = suggestion.label.match(/\(([^()]*)\)$/)
       }
 
-      openEditorialSuggestion({ id, slug }, type, subType)
-    } else if (suggestion.type === 'map-layer' || suggestion.type === 'map-collection') {
+      openEditorialSuggestion({ id, slug }, suggestion.type, subType)
+    } else if (suggestion.type === SearchType.Map) {
       const { searchParams } = new URL(suggestion.uri, window.location.origin)
 
       openMapSuggestion({
@@ -86,7 +90,7 @@ class HeaderSearch extends React.Component {
     }
   }
 
-  onFormSubmit(label) {
+  onFormSubmit(type) {
     const {
       activeSuggestion,
       isDatasetPage,
@@ -108,16 +112,15 @@ class HeaderSearch extends React.Component {
       onMapSearch,
     } = this.props
 
-    const { ARTICLES, DATASETS, PUBLICATIONS, DATA, SPECIALS, COLLECTIONS, MAP } = LABELS
-
     const searchAction = {
-      [DATASETS]: onDatasetSearch,
-      [ARTICLES]: onArticleSearch,
-      [PUBLICATIONS]: onPublicationSearch,
-      [DATA]: onDataSearch,
-      [SPECIALS]: onSpecialSearch,
-      [COLLECTIONS]: onCollectionSearch,
-      [MAP]: onMapSearch,
+      [SearchType.Dataset]: onDatasetSearch,
+      [CmsType.Article]: onArticleSearch,
+      [CmsType.Publication]: onPublicationSearch,
+      [SearchType.Data]: onDataSearch,
+      [CmsType.Special]: onSpecialSearch,
+      [CmsType.Collection]: onCollectionSearch,
+      [SearchType.Map]: onMapSearch,
+      [SearchType.Search]: onSearch,
     }
 
     if (activeSuggestion.index === -1) {
@@ -125,22 +128,22 @@ class HeaderSearch extends React.Component {
       onCleanDatasetOverview() // TODO, refactor: don't clean dataset on search
 
       const searchType =
-        label ||
+        type ||
         (isDatasetPage
-          ? DATASETS
+          ? SearchType.Dataset
           : isDataPage
-          ? DATA
+          ? SearchType.Data
           : isArticlePage
-          ? ARTICLES
+          ? CmsType.Article
           : isPublicationPage
-          ? PUBLICATIONS
+          ? CmsType.Publication
           : isSpecialPage
-          ? SPECIALS
+          ? CmsType.Special
           : isCollectionPage
-          ? COLLECTIONS
+          ? CmsType.Collection
           : isMapPage
-          ? MAP
-          : null)
+          ? SearchType.Map
+          : SearchType.Search)
 
       const actionFn = searchAction[searchType]
 

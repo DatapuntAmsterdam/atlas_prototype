@@ -8,12 +8,12 @@ import AutoSuggestItem from './AutoSuggestItem'
 export const MORE_RESULTS_INDEX = 999
 
 const AutoSuggestCategory = ({ category, activeSuggestion, query, onSuggestionSelection }) => {
-  const { label, content, total_results: totalResults } = category
+  const { label, content, total_results: totalResults, type } = category
 
   let suggestions = content
 
   if (totalResults > content.length) {
-    suggestions = [...content, { label: '...', index: MORE_RESULTS_INDEX }]
+    suggestions = [...content, { label: '...', index: MORE_RESULTS_INDEX, type }]
   }
 
   return (
@@ -25,7 +25,7 @@ const AutoSuggestCategory = ({ category, activeSuggestion, query, onSuggestionSe
             key={suggestion.label + suggestion.index}
             isActive={activeSuggestion && activeSuggestion.index === suggestion.index}
             onSuggestionSelection={(e) => {
-              onSuggestionSelection(suggestion, label, e)
+              onSuggestionSelection(suggestion, e)
             }}
             content={suggestion.label}
             query={query}

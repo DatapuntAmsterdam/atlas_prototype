@@ -2,6 +2,12 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import AutoSuggestCategory, { MORE_RESULTS_INDEX } from './AutoSuggestCategory'
 
+jest.mock('../../../app/pages/SearchPage/config', () => ({
+  TYPES: {
+    DATA: 'data',
+  },
+}))
+
 describe('AutoSuggestCategory', () => {
   let props
   beforeEach(() => {
@@ -11,6 +17,7 @@ describe('AutoSuggestCategory', () => {
       },
       category: {
         label: 'Straatnamen',
+        type: 'data',
         content: [
           {
             category: 'Straatnamen',
@@ -56,8 +63,8 @@ describe('AutoSuggestCategory', () => {
       {
         index: MORE_RESULTS_INDEX,
         label: '...',
+        type: 'data',
       },
-      'Straatnamen',
       mockEvent,
     )
   })

@@ -4,8 +4,8 @@ import { shallow } from 'enzyme'
 import HeaderSearch from './HeaderSearch'
 import { extractIdEndpoint } from '../../../store/redux-first-router/actions'
 import useSlug from '../../../app/utils/useSlug'
-import { LABELS } from '../../services/auto-suggest/auto-suggest'
 import { CmsType } from '../../../shared/config/cms.config'
+import SearchType from '../../../app/pages/SearchPage/constants'
 
 jest.mock('../../../store/redux-first-router/actions')
 jest.mock('../../../app/utils/useSlug')
@@ -64,7 +64,7 @@ describe('The HeaderSearch component', () => {
       const autosuggest = component.find('AutoSuggest')
 
       // execute this.onFormSubmit()
-      autosuggest.props().onSubmit(LABELS.DATASETS)
+      autosuggest.props().onSubmit(SearchType.Dataset)
 
       expect(mockOnDatasetSearch).toHaveBeenCalledWith(typedQuery)
     })
@@ -73,7 +73,7 @@ describe('The HeaderSearch component', () => {
       const autosuggest = component.find('AutoSuggest')
 
       // execute this.onFormSubmit()
-      autosuggest.props().onSubmit(LABELS.ARTICLES)
+      autosuggest.props().onSubmit(CmsType.Article)
 
       expect(mockOnArticleSearch).toHaveBeenCalledWith(typedQuery)
     })
@@ -82,7 +82,7 @@ describe('The HeaderSearch component', () => {
       const autosuggest = component.find('AutoSuggest')
 
       // execute this.onFormSubmit()
-      autosuggest.props().onSubmit(LABELS.PUBLICATIONS)
+      autosuggest.props().onSubmit(CmsType.Publication)
 
       expect(mockOnPublicationSearch).toHaveBeenCalledWith(typedQuery)
     })
@@ -91,7 +91,7 @@ describe('The HeaderSearch component', () => {
       const autosuggest = component.find('AutoSuggest')
 
       // execute this.onFormSubmit()
-      autosuggest.props().onSubmit(LABELS.SPECIALS)
+      autosuggest.props().onSubmit(CmsType.Special)
 
       expect(mockOnSpecialSearch).toHaveBeenCalledWith(typedQuery)
     })
@@ -100,7 +100,7 @@ describe('The HeaderSearch component', () => {
       const autosuggest = component.find('AutoSuggest')
 
       // execute this.onFormSubmit()
-      autosuggest.props().onSubmit(LABELS.COLLECTIONS)
+      autosuggest.props().onSubmit(CmsType.Collection)
 
       expect(mockOnCollectionSearch).toHaveBeenCalledWith(typedQuery)
     })
@@ -136,6 +136,7 @@ describe('The HeaderSearch component', () => {
         label: 'foo',
         index: 1,
         category: 'Straatnamen',
+        type: SearchType.Dataset,
       }
 
       const autosuggest = component.find('AutoSuggest')
@@ -159,6 +160,7 @@ describe('The HeaderSearch component', () => {
         label: 'foo',
         index: 1,
         category: 'Straatnamen',
+        type: CmsType.Article,
       }
 
       const autosuggest = component.find('AutoSuggest')
@@ -187,6 +189,7 @@ describe('The HeaderSearch component', () => {
         label: `foo (${MOCK_SUBTYPE})`,
         index: 1,
         category: 'Straatnamen',
+        type: CmsType.Special,
       }
 
       const autosuggest = component.find('AutoSuggest')

@@ -28,6 +28,7 @@ import {
   isDatasetPage,
   isPublicationPage,
   isSpecialPage,
+  isMapPage as isMapSearchPage,
 } from '../../../store/redux-first-router/selectors'
 import {
   getActiveSuggestions,
@@ -49,7 +50,7 @@ const mapStateToProps = (state) => ({
   isPublicationPage: isPublicationPage(state),
   isSpecialPage: isSpecialPage(state),
   isCollectionPage: isCollectionPage(state),
-  isMapPage: isMapPage(state),
+  isMapPage: isMapPage(state) || isMapSearchPage(state),
   view: getViewMode(state),
   isMapActive: isMapPage(state),
   numberOfSuggestions: getNumberOfSuggestions(state),
