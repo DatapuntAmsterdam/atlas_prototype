@@ -1,6 +1,7 @@
-import { RESET_FILE } from './constants'
+import { SET_CURRENT_FILE } from './constants'
 
 // eslint-disable-next-line import/prefer-default-export
-export const resetFile = () => ({
-  type: RESET_FILE,
+export const setCurrentFile = (payload) => ({
+  type: SET_CURRENT_FILE,
+  payload,
 })

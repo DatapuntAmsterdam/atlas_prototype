@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Heading } from '@datapunt/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { getFileName, getFileUrl } from '../../../shared/ducks/files/selectors'
+import { getFileName } from '../../../shared/ducks/files/selectors'
 import { getUser } from '../../../shared/ducks/user/user'
 import ConstructionFileDetail from '../../components/ConstructionFileDetail/ConstructionFileDetail'
 import { getLocationPayload } from '../../../store/redux-first-router/selectors'
@@ -20,7 +20,7 @@ const ImageViewer = React.lazy(() => import('../../components/ImageViewer/ImageV
 const ERROR_MESSAGE =
   'Er kunnen door een technische storing helaas geen bouwdossiers worden getoond. Probeer het later nog eens.'
 
-const ConstructionFilesContainer = ({ fileName, fileUrl, endpoint }) => {
+const ConstructionFilesContainer = ({ fileName, endpoint }) => {
   const [results, setResults] = React.useState(null)
   const [errorMessage, setErrorMessage] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
@@ -96,10 +96,8 @@ const ConstructionFilesContainer = ({ fileName, fileUrl, endpoint }) => {
     <>
       {imageViewerActive && (
         <ImageViewer
-          {...{ fileName, fileUrl, title }}
-          contextMenu={
-            <ContextMenu onDownload={onDownloadFile} fileName={fileName} fileUrl={fileUrl} />
-          }
+          {...{ fileName, title }}
+          contextMenu={<ContextMenu onDownload={onDownloadFile} fileName={fileName} />}
         />
       )}
       {loading && loadingTemplate}
@@ -118,7 +116,6 @@ ConstructionFilesContainer.propTypes = {
 
 const mapStateToProps = (state) => ({
   fileName: getFileName(state),
-  fileUrl: getFileUrl(state),
   endpoint: `${process.env.API_ROOT}stadsarchief/bouwdossier/${getLocationPayload(state).id.replace(
     'id',
     '',

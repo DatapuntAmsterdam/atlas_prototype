@@ -6,12 +6,12 @@ import PropTypes from 'prop-types'
 import { Button } from '@datapunt/asc-ui'
 import { Close, Enlarge, Minimise } from '@datapunt/asc-assets'
 import ViewerControls from '../ViewerControls/ViewerControls'
-import { resetFile } from '../../../shared/ducks/files/actions'
+import { setCurrentFile } from '../../../shared/ducks/files/actions'
 import './ImageViewer.scss'
 import getState from '../../../shared/services/redux/get-state'
 
 /* istanbul ignore next */
-const ImageViewer = ({ handleResetFile, fileName, fileUrl, title, contextMenu }) => {
+const ImageViewer = ({ resetFileName, fileName, title, contextMenu }) => {
   const viewerRef = React.createRef()
   const [viewer, setViewerInstance] = React.useState(null)
 
@@ -32,7 +32,7 @@ const ImageViewer = ({ handleResetFile, fileName, fileUrl, title, contextMenu })
       ajaxHeaders: {
         authorization: `Bearer ${accessToken || ''}`,
       },
-      tileSources: [`${fileUrl}/info.json`],
+      tileSources: [`${process.env.IIIF_ROOT}iiif/2/edepot:${fileName}/info.json`],
     }).addHandler('open', ({ eventSource }) => {
       setViewerInstance(eventSource)
     })
@@ -62,7 +62,7 @@ const ImageViewer = ({ handleResetFile, fileName, fileUrl, title, contextMenu })
               size={32}
               icon={<Close />}
               iconSize={15}
-              onClick={handleResetFile}
+              onClick={resetFileName}
             />
           }
           bottomRightComponent={
@@ -103,14 +103,14 @@ ImageViewer.defaultProps = {
 ImageViewer.propTypes = {
   fileName: PropTypes.string,
   title: PropTypes.string,
-  handleResetFile: PropTypes.func.isRequired,
+  resetFileName: PropTypes.func.isRequired,
   contextMenu: PropTypes.node,
 }
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      handleResetFile: resetFile,
+      resetFileName: () => setCurrentFile(''),
     },
     dispatch,
   )

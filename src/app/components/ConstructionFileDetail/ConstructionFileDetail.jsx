@@ -77,7 +77,7 @@ const ConstructionFileDetail = ({ results }) => {
               key={barcode}
               id={id}
               title={subdossierTitle}
-              allFiles={files}
+              allThumbnails={files}
               max={6}
               access={access}
             />

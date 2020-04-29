@@ -9,7 +9,7 @@ jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFr
 describe('Gallery', () => {
   let component
 
-  const MOCK_FILES = Array(10).fill({ filename: 'test123', url: 'img.jpg' })
+  const fullArrayOfThumbnails = Array(10).fill('img.jpg')
 
   const setState = jest.fn()
   const useStateSpy = jest.spyOn(React, 'useState')
@@ -23,7 +23,12 @@ describe('Gallery', () => {
     }))
 
     component = shallow(
-      <Gallery id="foo1234" allFiles={MOCK_FILES} onClick={jest.fn} title="Title!" />,
+      <Gallery
+        id="foo1234"
+        allThumbnails={fullArrayOfThumbnails}
+        onClick={jest.fn}
+        title="Title!"
+      />,
     )
   })
 
@@ -33,6 +38,6 @@ describe('Gallery', () => {
 
   it('should be able toggle between showing 6 or all results', () => {
     component.find('ActionButton').simulate('click')
-    expect(setState).toHaveBeenCalledWith(MOCK_FILES)
+    expect(setState).toHaveBeenCalledWith(fullArrayOfThumbnails)
   })
 })

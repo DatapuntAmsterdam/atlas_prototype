@@ -35,7 +35,7 @@ import {
   initialState as filesInitialState,
   REDUCER_KEY as FILES,
 } from '../shared/ducks/files/constants'
-import { getFileName, getFileUrl } from '../shared/ducks/files/selectors'
+import { getFileName } from '../shared/ducks/files/selectors'
 import {
   getFiltersWithoutShape,
   initialState as filterInitialState,
@@ -245,18 +245,6 @@ export default paramsRegistry
       {
         defaultValue: filesInitialState.fileName,
         selector: getFileName,
-      },
-      true,
-    )
-  })
-  .addParameter(PARAMETERS.FILE_URL, (routes) => {
-    routes.add(
-      routing.constructionFile.type,
-      FILES,
-      'fileUrl',
-      {
-        defaultValue: filesInitialState.fileUrl,
-        selector: getFileUrl,
       },
       true,
     )

@@ -270,7 +270,7 @@ export const toCollectionDetail = (id, slug = '') => ({
   },
 })
 
-export const toConstructionFileViewer = (id, fileName, fileUrl) => ({
+export const toConstructionFileViewer = (id, fileName) => ({
   type: routing.constructionFile.type,
   payload: {
     id,
@@ -278,7 +278,6 @@ export const toConstructionFileViewer = (id, fileName, fileUrl) => ({
   meta: {
     query: {
       [PARAMETERS.FILE]: fileName,
-      [PARAMETERS.FILE_URL]: fileUrl,
     },
   },
 })

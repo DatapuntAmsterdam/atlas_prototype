@@ -53,25 +53,25 @@ const StyledLink = styled(Link)`
 `
 
 // Todo: replace the "encodeURIComponent(file.match(/SU(.*)/g)" when files are on the proper server
-const Gallery = ({ title, allFiles, id, maxLength, access }) => {
-  const lessFiles = allFiles.slice(0, maxLength)
-  const [files, setFiles] = React.useState(lessFiles)
+const Gallery = ({ title, allThumbnails, id, maxLength, access }) => {
+  const lessThumbnails = allThumbnails.slice(0, maxLength)
+  const [thumbnails, setThumbnails] = React.useState(lessThumbnails)
 
   const { scopes } = getState().user
 
   const hasRights = scopes.includes(SCOPES['BD/R'])
   const hasExtendedRights = scopes.includes(SCOPES['BD/X'])
 
-  const hasMore = allFiles.length > maxLength
+  const hasMore = allThumbnails.length > maxLength
   const restricted = access === 'RESTRICTED'
 
   return (
     <GalleryGridContainer key={title} direction="column" gutterX={20}>
       <GridItem>
         <StyledHeading color="secondary" forwardedAs="h3">
-          {title} {hasMore && `(${allFiles.length})`}
+          {title} {hasMore && `(${allThumbnails.length})`}
         </StyledHeading>
-        {files && files.length ? (
+        {thumbnails && thumbnails.length ? (
           <>
             {!hasRights && !hasExtendedRights ? (
               <StyledNotification type="warning">
@@ -96,51 +96,56 @@ const Gallery = ({ title, allFiles, id, maxLength, access }) => {
               hasMarginBottom={hasMore}
               collapse
             >
-              {files.map(({ filename: fileName, url: fileUrl }) => (
-                <GridItem
-                  key={fileName}
-                  as="li"
-                  square
-                  width={[
-                    '100%',
-                    '100%',
-                    '100%',
-                    '50%',
-                    '50%',
-                    `${100 / 3}%`,
-                    `${100 / 6}%`,
-                    `${100 / 6}%`,
-                    '315px',
-                  ]}
-                >
-                  <StyledLink
-                    forwardedAs={RouterLink}
-                    to={toConstructionFileViewer(id, fileName, fileUrl)}
-                    title={fileName}
+              {thumbnails.map((file) => {
+                const fileTitle = file.match(/[^/]*$/g)[0]
+                const fileName = file.replace(/\//g, '-') // Replace all forward slashes to create a filename that can be read by the server
+
+                return (
+                  <GridItem
+                    key={file}
+                    as="li"
+                    square
+                    width={[
+                      '100%',
+                      '100%',
+                      '100%',
+                      '50%',
+                      '50%',
+                      `${100 / 3}%`,
+                      `${100 / 6}%`,
+                      `${100 / 6}%`,
+                      '315px',
+                    ]}
                   >
-                    <IIIFThumbnail
-                      src={
-                        hasExtendedRights || (!restricted && hasRights)
-                          ? fileUrl
-                          : '/assets/images/not_found_thumbnail.jpg' // use the default not found image when user has no rights
-                      }
-                      title={fileName}
-                    />
-                  </StyledLink>
-                </GridItem>
-              ))}
+                    <StyledLink
+                      forwardedAs={RouterLink}
+                      to={toConstructionFileViewer(id, fileName)}
+                      title={fileTitle}
+                    >
+                      <IIIFThumbnail
+                        src={
+                          hasExtendedRights || (!restricted && hasRights)
+                            ? `${process.env.IIIF_ROOT}iiif/2/edepot:${fileName}/square/300,300/0/default.jpg`
+                            : '/assets/images/not_found_thumbnail.jpg' // use the default not found image when user has no rights
+                        }
+                        title={fileTitle}
+                      />
+                    </StyledLink>
+                  </GridItem>
+                )
+              })}
             </StyledGridContainer>
             {hasMore &&
-              (allFiles.length !== files.length ? (
+              (allThumbnails.length !== thumbnails.length ? (
                 <ActionButton
                   iconLeft={<Enlarge />}
-                  onClick={() => setFiles(allFiles)}
-                  label={`Toon alle (${allFiles.length})`}
+                  onClick={() => setThumbnails(allThumbnails)}
+                  label={`Toon alle (${allThumbnails.length})`}
                 />
               ) : (
                 <ActionButton
                   iconLeft={<Minimise />}
-                  onClick={() => setFiles(lessFiles)}
+                  onClick={() => setThumbnails(lessThumbnails)}
                   label="Minder tonen"
                 />
               ))}
@@ -159,12 +164,7 @@ Gallery.defaultProps = {
 
 Gallery.propTypes = {
   title: PropTypes.string.isRequired,
-  allFiles: PropTypes.arrayOf(
-    PropTypes.shape({
-      filename: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  allThumbnails: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.string.isRequired,
   maxLength: PropTypes.number,
 }
