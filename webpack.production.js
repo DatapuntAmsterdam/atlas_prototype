@@ -10,7 +10,7 @@ module.exports = () => {
     DATAPUNT: '@datapunt',
     STYLED: 'styled-components|polished|style-loader|css-loader|sass-loader|postcss-loader',
     PANORAMA: 'marzipano',
-    POLYFILL: '@babel/polyfill|objectFitPolyfill',
+    POLYFILL: '@babel/polyfill|objectFitPolyfill|core-js',
     ANGULAR: 'angular|angular-aria|angular-sanitize|react-angular',
     REACT:
       'react|react-dom|redux-first-router|redux-first-router-link|redux-first-router-restore-scroll|reselect|redux|@?redux-saga|react-redux|react-helmet|prop-types',

@@ -29,6 +29,7 @@ function commonConfig() {
         'isomorphic-fetch',
         'core-js/features/url',
         'core-js/features/url-search-params',
+        'core-js/features/array/flat',
         '@babel/polyfill',
         './src/index.js',
       ],
