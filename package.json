@@ -160,7 +160,7 @@
     "jest-environment-node": "25.5.0",
     "jest-fetch-mock": "3.0.3",
     "jest-styled-components": "7.0.2",
-    "karma": "5.0.2",
+    "karma": "5.0.3",
     "karma-babel-preprocessor": "8.0.1",
     "karma-coverage": "2.0.2",
     "karma-coverage-istanbul-reporter": "2.1.1",
