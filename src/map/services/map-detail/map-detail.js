@@ -13,11 +13,12 @@ export const pageEndpointTypeMapping = {
   'bag/nummeraanduiding/': 'bag/v1.1/nummeraanduiding/',
   'bag/pand/': 'bag/v1.1/pand/',
   'bag/woonplaats/': 'bag/v1.1/woonplaats/',
+  'fietspaaltjes/fietspaaltjes/': 'v1/fietspaaltjes/fietspaaltjes/',
 }
 
 export const pageTypeToEndpoint = (type, subtype, id) => {
-  const endpoinType = pageEndpointTypeMapping[`${type}/${subtype}/`] || `${type}/${subtype}/`
-  return `${process.env.API_ROOT}${endpoinType}${id}/`
+  const endpointType = pageEndpointTypeMapping[`${type}/${subtype}/`] || `${type}/${subtype}/`
+  return `${process.env.API_ROOT}${endpointType}${id}/`
 }
 
 export const getEndpointTypeForResult = (endpointType, detail) => {

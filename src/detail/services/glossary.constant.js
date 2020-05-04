@@ -145,6 +145,12 @@ const GLOSSARY = {
       url: null,
       meta: [],
     },
+    FIETSPAALTJE: {
+      ...categoryLabels.fietspaaltje,
+      description: '',
+      url: null,
+      meta: [],
+    },
     FUNCTIEVERVULLING: {
       singular: 'Functievervulling',
       plural: 'Functievervullingen',

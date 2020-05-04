@@ -1,15 +1,13 @@
+import { getByUrl } from '../../../shared/services/api/api'
 import {
   fetchByPandId as fetchAddressByPandId,
   fetchHoofdadresByLigplaatsId,
   fetchHoofdadresByStandplaatsId,
 } from '../adressen-nummeraanduiding/adressen-nummeraanduiding'
-import { fetchByPandId as fetchMonumentByPandId } from '../monument/monument'
-import { fetchByPandId as fetchVestigingByPandId, fetchByAddressId } from '../vestiging/vestiging'
-
-import transformResultByType from './transform-result-by-type'
-
 import { createMapSearchResultsModel } from '../map-search-results/map-search-results'
-import { getByUrl } from '../../../shared/services/api/api'
+import { fetchByPandId as fetchMonumentByPandId } from '../monument/monument'
+import { fetchByAddressId, fetchByPandId as fetchVestigingByPandId } from '../vestiging/vestiging'
+import transformResultByType from './transform-result-by-type'
 
 const endpoints = [
   { uri: 'geosearch/nap/', radius: 25 },
@@ -30,6 +28,7 @@ const endpoints = [
   { uri: 'geosearch/bekendmakingen/', radius: 25 },
   { uri: 'geosearch/evenementen/', radius: 25 },
   { uri: 'geosearch/reclamebelasting/', radius: 25 },
+  { uri: 'geosearch/', radius: 25, extra_params: { datasets: 'fietspaaltjes' } },
 ]
 
 const relatedResourcesByType = {

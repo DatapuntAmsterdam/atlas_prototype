@@ -1,4 +1,5 @@
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
+import categoryLabels from './map-search/category-labels'
 import {
   adressenPand,
   adressenVerblijfsobject,
@@ -16,7 +17,6 @@ import {
   winkelgebied,
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
-import categoryLabels from './map-search/category-labels'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -28,12 +28,12 @@ export const endpointTypes = {
   bedrijfsinvesteringszone: 'vsd/biz/',
   bekendmakingen: 'vsd/bekendmakingen/',
   constructionFiles: 'stadsarchief/bouwdossier/',
+  evenementen: 'vsd/evenementen/',
   explosievenGevrijwaardGebied: 'milieuthemas/explosieven/gevrijwaardgebied/',
   explosievenInslag: 'milieuthemas/explosieven/inslagen/',
   explosievenUitgevoerdOnderzoek: 'milieuthemas/explosieven/uitgevoerdonderzoek/',
   explosievenVerdachtGebied: 'milieuthemas/explosieven/verdachtgebied/',
-  evenementen: 'vsd/evenementen/',
-  reclamebelasting: 'vsd/reclamebelasting/',
+  fietspaaltjes: 'fietspaaltjes/fietspaaltjes',
   gebiedenBouwblok: 'gebieden/bouwblok/',
   gebiedenBuurt: 'gebieden/buurt/',
   gebiedenGebiedsgerichtWerken: 'gebieden/gebiedsgerichtwerken/',
@@ -52,6 +52,7 @@ export const endpointTypes = {
   parkeervak: 'parkeervakken/parkeervakken/',
   parkeerzones: 'vsd/parkeerzones/',
   parkeerzonesUitz: 'vsd/parkeerzones_uitz/',
+  reclamebelasting: 'vsd/reclamebelasting/',
   vastgoed: 'vsd/vastgoed',
   vestiging: 'handelsregister/vestiging/',
   winkelgebied: 'vsd/winkgeb',
@@ -355,6 +356,27 @@ const servicesByEndpointType = {
         { label: 'Hoofdgroep', value: result.type },
         { label: 'Subsoort', value: result.subtype },
         { label: 'Opmerkingen', value: result.opmerkingen, multiLine: true },
+      ],
+    }),
+  },
+  [endpointTypes.fietspaaltjes]: {
+    mapDetail: (result) => ({
+      title: categoryLabels.fietspaaltje.singular,
+      subTitle: result.id,
+      items: [
+        { label: 'Type', value: result.type.join(', ') },
+        { label: 'Noodzaak', value: result.noodzaak.join(', ') },
+        { label: 'Uiterlijk', value: result.uiterlijk.join(', ') },
+        { label: 'Soort', value: result.soortPaaltje.join(', ') },
+        { label: 'Ruimte', value: result.ruimte.join(', ') },
+        { label: 'Markering', value: result.markering.join(', ') },
+        { label: 'Soort weg', value: result.soortWeg.join(', ') },
+        { label: 'Paaltjes weg', value: result.paaltjesWeg.join(', ') },
+        { label: 'Zicht in donker', value: result.zichtInDonker.join(', ') },
+        { label: 'Locatie', value: result.at },
+        { label: 'Straat', value: result.street },
+        { label: 'Gebied', value: result.area },
+        { label: 'Aantal', value: result.count },
       ],
     }),
   },
