@@ -2,18 +2,19 @@ import mapFetch from '../map-fetch/map-fetch'
 import servicesByEndpointType, { endpointTypes } from '../map-services.config'
 
 export const pageEndpointTypeMapping = {
+  'bag/ligplaats/': 'bag/v1.1/ligplaats/',
+  'bag/nummeraanduiding/': 'bag/v1.1/nummeraanduiding/',
+  'bag/openbareruimte/': 'bag/v1.1/openbareruimte/',
+  'bag/pand/': 'bag/v1.1/pand/',
+  'bag/standplaats/': 'bag/v1.1/standplaats/',
+  'bag/verblijfsobject/': 'bag/v1.1/verblijfsobject/',
+  'bag/woonplaats/': 'bag/v1.1/woonplaats/',
   'explosieven/gevrijwaardgebied/': 'milieuthemas/explosieven/gevrijwaardgebied/',
   'explosieven/inslagen/': 'milieuthemas/explosieven/inslagen/',
   'explosieven/uitgevoerdonderzoek/': 'milieuthemas/explosieven/uitgevoerdonderzoek/',
   'explosieven/verdachtgebied/': 'milieuthemas/explosieven/verdachtgebied/',
-  'bag/ligplaats/': 'bag/v1.1/ligplaats/',
-  'bag/standplaats/': 'bag/v1.1/standplaats/',
-  'bag/verblijfsobject/': 'bag/v1.1/verblijfsobject/',
-  'bag/openbareruimte/': 'bag/v1.1/openbareruimte/',
-  'bag/nummeraanduiding/': 'bag/v1.1/nummeraanduiding/',
-  'bag/pand/': 'bag/v1.1/pand/',
-  'bag/woonplaats/': 'bag/v1.1/woonplaats/',
   'fietspaaltjes/fietspaaltjes/': 'v1/fietspaaltjes/fietspaaltjes/',
+  'grex/projecten/': 'v1/grex/projecten/',
 }
 
 export const pageTypeToEndpoint = (type, subtype, id) => {

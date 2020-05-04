@@ -6,6 +6,7 @@ import {
   bekendmakingen,
   evenementen,
   explosieven,
+  grexProject,
   kadastraalObject,
   meetbout,
   monument,
@@ -41,6 +42,7 @@ export const endpointTypes = {
   gebiedenStadsdeel: 'gebieden/stadsdeel/',
   gebiedenUnesco: 'gebieden/unesco/',
   gebiedenWijk: 'gebieden/buurtcombinatie/',
+  grondexploitaties: 'grex/projecten',
   kadastraalObject: 'brk/object/',
   kadastraalSubject: 'brk/subject/',
   maatschappelijkeActiviteiten: 'handelsregister/maatschappelijkeactiviteit/',
@@ -452,6 +454,19 @@ const servicesByEndpointType = {
       title: 'Wijk',
       subTitle: result._display,
       items: [{ label: 'Code', value: result.code }],
+    }),
+  },
+  [endpointTypes.grondexploitaties]: {
+    normalization: grexProject,
+    mapDetail: (result) => ({
+      title: categoryLabels.grondexploitatie.singular,
+      subTitle: result.plannaam,
+      items: [
+        { label: 'Nummer', value: result.id },
+        { label: 'Status', value: result.planstatusFormatted },
+        { label: 'Startdatum', value: result.startdatum },
+        { label: 'Oppervlakte', value: result.oppervlakteFormatted },
+      ],
     }),
   },
   [endpointTypes.kadastraalObject]: {

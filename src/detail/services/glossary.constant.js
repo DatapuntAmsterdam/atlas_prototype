@@ -189,6 +189,12 @@ const GLOSSARY = {
       url: null,
       meta: [],
     },
+    GRONDEXPLOITATIE: {
+      ...categoryLabels.grondexploitatie,
+      description: '',
+      url: null,
+      meta: [],
+    },
     GROOTSTEDELIJKGEBIED: {
       singular: 'Grootstedelijk gebied',
       plural: 'Grootstedelijke gebieden',

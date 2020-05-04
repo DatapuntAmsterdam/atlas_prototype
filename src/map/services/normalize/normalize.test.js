@@ -1,23 +1,23 @@
+import formatDate from '../../../shared/services/date-formatter/date-formatter'
 import {
-  oplaadpunten,
-  napPeilmerk,
   adressenPand,
   adressenVerblijfsobject,
-  kadastraalObject,
   bekendmakingen,
-  explosieven,
   evenementen,
-  vastgoed,
+  explosieven,
+  grexProject,
+  kadastraalObject,
+  meetbout,
+  monument,
+  napPeilmerk,
+  oplaadpunten,
+  parkeerzones,
   reclamebelasting,
   societalActivities,
+  vastgoed,
   winkelgebied,
-  parkeerzones,
-  monument,
-  meetbout,
   YEAR_UNKNOWN,
 } from './normalize'
-
-import formatDate from '../../../shared/services/date-formatter/date-formatter'
 
 jest.mock('../../../shared/services/date-formatter/date-formatter')
 
@@ -618,6 +618,30 @@ ${input.gebruiksdoel[1]}`,
       expect(output).toMatchObject({
         localeDate: '1 januari 2020',
       })
+    })
+  })
+
+  describe('normalize grex projects', () => {
+    it('should format the planstatus', () => {
+      expect(grexProject({ planstatus: 'A', oppervlakte: 0 }).planstatusFormatted).toEqual(
+        'Actueel',
+      )
+      expect(grexProject({ planstatus: 'T', oppervlakte: 0 }).planstatusFormatted).toEqual(
+        'Toekomstig',
+      )
+      expect(grexProject({ planstatus: 'NOPE', oppervlakte: 0 }).planstatusFormatted).toEqual(
+        'NOPE',
+      )
+    })
+
+    it('should format the oppervlakte', () => {
+      expect(grexProject({ planstatus: 'A', oppervlakte: 12 }).oppervlakteFormatted).toEqual(
+        '12 m²',
+      )
+    })
+
+    it('should pass along other properties', () => {
+      expect(grexProject({ planstatus: 'A', oppervlakte: 12, foo: 'bar' }).foo).toEqual('bar')
     })
   })
 })

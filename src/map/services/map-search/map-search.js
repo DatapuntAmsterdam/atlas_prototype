@@ -29,6 +29,7 @@ const endpoints = [
   { uri: 'geosearch/evenementen/', radius: 25 },
   { uri: 'geosearch/reclamebelasting/', radius: 25 },
   { uri: 'geosearch/', radius: 25, extra_params: { datasets: 'fietspaaltjes' } },
+  { uri: 'geosearch/', radius: 25, extra_params: { datasets: 'grex,projecten' } },
 ]
 
 const relatedResourcesByType = {

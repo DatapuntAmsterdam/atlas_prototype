@@ -1,7 +1,7 @@
-import formatNumber from '../../../shared/services/number-formatter/number-formatter'
-import formatDate from '../../../shared/services/date-formatter/date-formatter'
-import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
+import formatDate from '../../../shared/services/date-formatter/date-formatter'
+import formatNumber from '../../../shared/services/number-formatter/number-formatter'
+import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
 
 export const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 
@@ -99,10 +99,7 @@ export const adressenVerblijfsobject = (result) => {
     gebruiksdoelen: ((result.gebruiksdoel && result.gebruiksdoel.slice(0, 5)) || [])
       .map((item) => item)
       .join('\n'),
-    size:
-      result.oppervlakte > 1
-        ? `${result.oppervlakte.toLocaleString(DEFAULT_LOCALE)} m²`
-        : 'onbekend',
+    size: result.oppervlakte > 1 ? formatSquareMetre(result.oppervlakte) : 'onbekend',
   }
 
   return normalize(result, additionalFields)
@@ -110,10 +107,7 @@ export const adressenVerblijfsobject = (result) => {
 
 export const kadastraalObject = (result) => {
   const additionalFields = {
-    size:
-      result.grootte || result.grootte === 0
-        ? `${result.grootte.toLocaleString(DEFAULT_LOCALE)} m²`
-        : '',
+    size: result.grootte || result.grootte === 0 ? formatSquareMetre(result.grootte) : '',
     cadastralName: result.kadastrale_gemeente ? result.kadastrale_gemeente.naam : false,
     name: result.kadastrale_gemeente ? result.kadastrale_gemeente.gemeente._display : false,
   }
@@ -213,6 +207,29 @@ export const reclamebelasting = (result) => {
   }
 
   return { ...result, ...additionalFields }
+}
+
+export const grexProject = (result) => {
+  const planstatusFormatted = (() => {
+    switch (result.planstatus) {
+      case 'A':
+        return 'Actueel'
+      case 'T':
+        return 'Toekomstig'
+      default:
+        // eslint-disable-next-line no-console
+        console.warn(`Unable to format planstatus, unknown value '${result.planstatus}'.`)
+        return result.planstatus
+    }
+  })()
+
+  const oppervlakteFormatted = formatSquareMetre(result.oppervlakte)
+
+  return { ...result, planstatusFormatted, oppervlakteFormatted }
+}
+
+function formatSquareMetre(value) {
+  return `${value.toLocaleString(DEFAULT_LOCALE)} m²`
 }
 
 export default normalize
