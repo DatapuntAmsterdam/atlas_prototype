@@ -61,7 +61,7 @@ describe('panorama module', () => {
     it('should set the panoramabeelden as active layers in the map-panel legenda', () => {
       // open the the map panel (closed initially)
       cy.get(MAP.toggleMapPanel).click()
-      cy.get(MAP.checkboxPanoramabeelden).should('be.checked')
+      cy.get(MAP.checkboxPanoramabeelden).should('have.attr', 'checked')
     })
 
     it('should set the layers in the leaflet map', () => {
@@ -147,6 +147,7 @@ describe('panorama module', () => {
 
       cy.get(ADDRESS_PAGE.buttonMaximizeMap).should('exist')
       // click on the maximize button to open the map view
+      cy.wait(1000)
       cy.get(ADDRESS_PAGE.buttonMaximizeMap).last().click()
 
       cy.wait('@getOpenbareRuimte')

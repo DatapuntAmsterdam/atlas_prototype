@@ -76,9 +76,9 @@ describe('Search for addres not logged in', () => {
     // Zoom in and click on building
     cy.get(MAP.mapZoomIn).click()
     cy.wait(700)
-    cy.get(MAP.mapZoomIn).click()
+    cy.get(MAP.mapZoomIn).click({ force: true })
     cy.wait(700)
-    cy.get(MAP.mapZoomIn).click()
+    cy.get(MAP.mapZoomIn).click({ force: true })
     cy.wait(700)
     cy.get(MAP.mapContainer).click(1139, 424)
     cy.waitForGeoSearch()
@@ -277,7 +277,7 @@ describe('Open dataset and publication', () => {
     cy.server()
     cy.route('/typeahead?q=oost').as('getResults')
 
-    // Search keyword Oost
+    // Search keyword Oost, results contain only datasets
     cy.get(SEARCH.input).focus().type('Oost{enter}')
     cy.wait('@getResults')
     cy.contains("Datasets met 'Oost' (")

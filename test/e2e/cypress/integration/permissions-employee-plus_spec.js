@@ -67,7 +67,7 @@ describe('employee PLUS permissions', () => {
     cy.wait('@getObjectExpand')
     cy.wait('@getNummeraanduidingen')
     cy.get(queries.warningPanel).should('not.exist')
-    cy.get(queries.headerTitle).contains('575 A')
+    cy.get(queries.headerTitle).contains('6661')
     cy.get(queries.headerSubTitle).contains(values.aantekeningen)
   })
 

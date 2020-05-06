@@ -31,9 +31,6 @@ export const DATA_SEARCH = {
   headerSubTitle: '.o-header__subtitle',
   infoNotification: '.notification--info',
   keyValueList: '.c-key-value-list',
-  legendItem: '.map-legend__title',
-  legendNotification: '.map-legend__notification',
-  legendToggleItem: '.map-layers__toggle-title',
   listItem: 'li',
   mapLayersCategory: '.map-layers__category',
   mapDetailResultHeaderSubTitle: '.map-detail-result__header-subtitle',
@@ -92,7 +89,7 @@ export const HOMEPAGE = {
 
 export const MAP = {
   buttonEnlarge: 'button.map-preview-panel__button[title="Volledige weergave tonen"]',
-  checkboxPanoramabeelden: '#pano-panobi',
+  checkboxPanoramabeelden: '#Panoramabeelden',
   checkboxHoogte: '#Hoogte',
   checkboxGebiedsindeling: '#Gebiedsindeling',
   checkboxVestigingen: '#Vestigingen',
@@ -101,6 +98,9 @@ export const MAP = {
   embedButton: '[data-test=embed-button]',
   iconMapMarker: '.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive',
   imageLayer: '.leaflet-image-layer',
+  legendItem: '.map-legend__title',
+  legendNotification: '.map-legend__notification',
+  legendToggleItem: '.map-layers__toggle-title',
   mapContainer: '.leaflet-container',
   mapDetailResultPanel: '.map-detail-result',
   mapLegend: '.map-legend',

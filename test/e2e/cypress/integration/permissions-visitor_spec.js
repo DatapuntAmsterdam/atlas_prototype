@@ -49,7 +49,7 @@ describe('visitor permissions', () => {
     cy.wait('@getObjectExpand')
     cy.wait('@getNummeraanduidingen')
     cy.get(queries.warningPanelAngular).contains('Medewerkers/ketenpartners van Gemeente Amsterdam')
-    cy.get(queries.headerTitle).contains('A 0001')
+    cy.get(queries.headerTitle).contains('G 0000')
     cy.get(queries.headerSubTitle).should(($values) => {
       expect($values).to.not.contain(values.aantekeningen)
     })

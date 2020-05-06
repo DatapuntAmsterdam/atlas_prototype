@@ -5,7 +5,7 @@ const { VIEW, VIEW_CENTER, LEGEND, ZOOM, LOCATION } = PARAMETERS
 
 const urls = {
   address: `${routing.data.path}bag/verblijfsobject/id0363010000749400?${LEGEND}=false&${ZOOM}=16`,
-  business: `${routing.data.path}brk/object/idNL.KAD.OnroerendeZaak.11460857510001?${LEGEND}=false&${ZOOM}=16`,
+  business: `${routing.data.path}brk/object/idNL.KAD.OnroerendeZaak.11460666170000?${LEGEND}=false&${ZOOM}=16`,
   gemeentelijkeBeperking: `${routing.data.path}wkpb/beperking/id9230`,
   geoSearch: `${routing.data.path}geozoek?${LOCATION}=52.3736166%2C4.8943521`,
   ligplaats: `${routing.data.path}bag/ligplaats/id0363020000881621`,
