@@ -110,7 +110,7 @@ describe('map module', () => {
       cy.get('#Hoogte').check()
       cy.contains('Meetbouten - Zaksnelheid').click()
       // cy.get(DATA_SEARCH.scrollWrapper).scrollTo('t')
-      cy.get(DATA_SEARCH.legendNotification)
+      cy.get(MAP.legendNotification)
         .first()
         .scrollIntoView()
         .contains('Zichtbaar bij verder inzoomen')
@@ -120,7 +120,7 @@ describe('map module', () => {
       // wait for the second click
       cy.wait(250)
       cy.get(MAP.mapZoomIn).click()
-      cy.get(DATA_SEARCH.legendNotification).should('not.be.visible')
+      cy.get(MAP.legendNotification).should('not.be.visible')
       cy.get('.map-legend__items').should('exist').and('be.visible')
 
       cy.wait(250)
@@ -213,6 +213,57 @@ describe('map module', () => {
       cy.get(MAP.toggleMapPanel).click()
       cy.get(MAP.mapPanel).should('have.class', 'map-panel--expanded')
       cy.get(DATA_SEARCH.scrollWrapper).should('exist').and('be.visible')
+    })
+  })
+
+  describe('user should be able to see kadastrale objecten on the map', () => {
+    it('should add open the map panel component', () => {
+      cy.server()
+      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.hidePopup()
+      cy.visit(`/`)
+      cy.get(HOMEPAGE.navigationBlockKaart).click()
+      cy.wait('@graphql')
+      cy.wait('@graphql')
+      cy.url().should('include', '/data/?modus=kaart&legenda=true')
+      cy.get(MAP.mapContainer).should('be.visible')
+
+      // Legend and checkboxes are not visible
+      cy.get(MAP.mapLegend).should('not.be.visible')
+      cy.contains('Kadastrale perceelsgrenzen').should('not.be.visible')
+      cy.contains('Kadastrale eigenaren').should('not.be.visible')
+      cy.contains('Kadastrale erfpachtuitgevers').should('not.be.visible')
+      cy.contains('Gemeentelijk eigendom').should('not.be.visible')
+      cy.contains('Gemeentelijke beperkingen (WKPB)').should('not.be.visible')
+      cy.get(MAP.legendNotification).should('not.be.visible')
+      cy.contains('Panden ouder dan 1960').should('not.be.visible')
+      cy.contains('Panden naar bouwjaar').should('not.be.visible')
+
+      cy.get('.map-panel-handle > :nth-child(4)').click('right')
+
+      // Legend and checkboxes are visible
+      cy.get(MAP.mapLegend).should('be.visible')
+      cy.contains('Kadastrale perceelsgrenzen').should('be.visible')
+      cy.contains('Kadastrale eigenaren').should('be.visible')
+      cy.contains('Kadastrale erfpachtuitgevers').should('be.visible')
+      cy.contains('Gemeentelijk eigendom').should('be.visible')
+      cy.contains('Gemeentelijke beperkingen (WKPB)').should('be.visible')
+      cy.get(MAP.legendNotification).should('be.visible')
+      cy.contains('Panden ouder dan 1960').should('be.visible')
+      cy.contains('Panden naar bouwjaar').should('be.visible')
+
+      // Checkboxes related to Kadastrale perceelsgrenzen are not visible
+      cy.contains('Burgerlijke gemeente').should('not.be.visible')
+      cy.contains('Kadastrale gemeente').should('not.be.visible')
+      cy.contains('Kadastrale sectie').should('not.be.visible')
+      cy.contains('Kadastraal object').should('not.be.visible')
+    })
+    it('should add open the map panel component', () => {
+      cy.server()
+      cy.hidePopup()
+      cy.visit(`/`)
+      cy.get(DATA_SEARCH.autoSuggestInput).focus().type('dam 1')
+      cy.wait(1000)
     })
   })
 })
