@@ -60,7 +60,7 @@ describe('datasets module', () => {
     it('should show the results of theme Bestuur', () => {
       cy.get('h1').should('contain', 'Zoek op thema').and('be.visible')
 
-      // click on the link to go to the datasets witha specified catalogus theme
+      // click on the link to go to the datasets with a specified catalogus theme
       cy.get('a[href*="/zoek/"]:contains("Bestuur")').click()
 
       // check url on filter with theme
