@@ -1,12 +1,13 @@
+import { logout } from '../auth/auth'
+import { encodeQueryParams } from '../query-string-parser/query-string-parser'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
-import { encodeQueryParams } from '../query-string-parser/query-string-parser'
-import { logout } from '../auth/auth'
 
 export const getAccessToken = () => getState().user.accessToken
 
 export const generateParams = (data) =>
   Object.entries(data)
+    .filter(([, value]) => value !== null && value !== undefined)
     .map((pair) => pair.map(encodeURIComponent).join('='))
     .join('&')
 

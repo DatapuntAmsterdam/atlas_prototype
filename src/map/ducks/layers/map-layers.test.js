@@ -1,8 +1,8 @@
 import reducer, {
+  fetchMapLayers,
   FETCH_MAP_LAYERS_FAILURE,
   FETCH_MAP_LAYERS_REQUEST,
   FETCH_MAP_LAYERS_SUCCESS,
-  fetchMapLayers,
   getAccessToken,
   getLayers,
   getMapLayers,
@@ -69,7 +69,9 @@ describe('selectors', () => {
       url: '/maps/biz',
       layers: ['biz_polygons'],
       detailUrl: 'geosearch/biz/',
-      detailItem: 'biz',
+      detailParams: {
+        item: 'biz',
+      },
       detailIsShape: true,
     },
     {
@@ -78,7 +80,9 @@ describe('selectors', () => {
       url: '/maps/handelsregister',
       layers: ['handel_vervoer_opslag', 'handel_vervoer_opslag_label'],
       detailUrl: 'handelsregister/geosearch/',
-      detailItem: 'handel_vervoer_opslag',
+      detailParams: {
+        item: 'handel_vervoer_opslag',
+      },
     },
   ]
   const token = 'abc123'

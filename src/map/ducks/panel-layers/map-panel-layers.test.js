@@ -1,13 +1,13 @@
 import reducer, {
+  fetchPanelLayers,
   FETCH_PANEL_ITEMS_FAILURE,
   FETCH_PANEL_ITEMS_REQUEST,
   FETCH_PANEL_ITEMS_SUCCESS,
-  fetchPanelLayers,
+  getActiveMapLayers,
   getActiveMapLayersWithinZoom,
   getMapPanelLayers,
   selectActivePanelLayers,
   selectNotClickableVisibleMapLayers,
-  getActiveMapLayers,
 } from './map-panel-layers'
 
 const initialState = {
@@ -75,7 +75,9 @@ describe('selectors', () => {
           title: 'Foo Layer',
           url: '/maps/layer',
           detailUrl: 'geosearch/search/',
-          detailItem: 'foo',
+          detailParams: {
+            item: 'foo',
+          },
         },
         {
           id: 'id2',

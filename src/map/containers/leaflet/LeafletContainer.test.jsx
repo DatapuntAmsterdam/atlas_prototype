@@ -1,8 +1,24 @@
+import { shallow } from 'enzyme'
 import React from 'react'
 import configureMockStore from 'redux-mock-store'
-import { shallow } from 'enzyme'
-
-import LeafletContainer from './LeafletContainer'
+import {
+  getBrkMarkers,
+  getClusterMarkers,
+  getGeoJsons,
+} from '../../../shared/ducks/data-selection/selectors'
+import {
+  fetchMapBaseLayers,
+  FETCH_MAP_BASE_LAYERS_REQUEST,
+  getUrlTemplate,
+} from '../../ducks/base-layers/map-base-layers'
+import { fetchMapLayers, FETCH_MAP_LAYERS_REQUEST } from '../../ducks/layers/map-layers'
+import {
+  setSelectedLocation,
+  updateBoundingBox,
+  updatePan,
+  updateZoom,
+} from '../../ducks/map/actions'
+import { MAP_BOUNDING_BOX, MAP_PAN } from '../../ducks/map/constants'
 import {
   getActiveBaseLayer,
   getCenter,
@@ -14,30 +30,12 @@ import {
   isMapLoading,
   isMarkerActive,
 } from '../../ducks/map/selectors'
-
-import { MAP_BOUNDING_BOX, MAP_PAN } from '../../ducks/map/constants'
 import {
-  setSelectedLocation,
-  updateBoundingBox,
-  updatePan,
-  updateZoom,
-} from '../../ducks/map/actions'
-import {
-  FETCH_MAP_BASE_LAYERS_REQUEST,
-  fetchMapBaseLayers,
-  getUrlTemplate,
-} from '../../ducks/base-layers/map-base-layers'
-import { FETCH_MAP_LAYERS_REQUEST, fetchMapLayers } from '../../ducks/layers/map-layers'
-import {
-  FETCH_PANEL_ITEMS_REQUEST,
   fetchPanelLayers,
+  FETCH_PANEL_ITEMS_REQUEST,
 } from '../../ducks/panel-layers/map-panel-layers'
 import { isDrawingActive } from '../../services/draw-tool/draw-tool'
-import {
-  getBrkMarkers,
-  getClusterMarkers,
-  getGeoJsons,
-} from '../../../shared/ducks/data-selection/selectors'
+import LeafletContainer from './LeafletContainer'
 
 jest.mock('../../../shared/ducks/data-selection/selectors')
 jest.mock('../../ducks/base-layers/map-base-layers')
@@ -58,7 +56,9 @@ describe('LeafletContainer', () => {
           url: 'maps/biz',
           layers: ['biz_polygons'],
           detailUrl: 'geosearch/biz/',
-          detailItem: 'biz',
+          detailParams: {
+            item: 'biz',
+          },
           detailIsShape: true,
         },
       ],

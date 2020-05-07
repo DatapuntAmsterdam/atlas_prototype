@@ -1,19 +1,18 @@
 import { expectSaga, testSaga } from 'redux-saga-test-plan'
 import { composeProviders } from 'redux-saga-test-plan/providers'
-
-import watchMapClick, { goToGeoSearch, switchClickAction } from './map-click'
+import { getImageDataByLocation } from '../../../panorama/services/panorama-api/panorama-api'
+import { requestNearestDetails } from '../../../shared/ducks/data-search/actions'
+import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection'
+import { getViewMode, isEmbedded, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { getPage } from '../../../store/redux-first-router/selectors'
+import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/constants'
+import { getMapZoom } from '../../ducks/map/selectors'
 import {
   getActiveMapLayers,
   getLayers,
   getMapPanelLayers,
 } from '../../ducks/panel-layers/map-panel-layers'
-import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/constants'
-import { getMapZoom } from '../../ducks/map/selectors'
-import { requestNearestDetails } from '../../../shared/ducks/data-search/actions'
-import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection'
-import { getImageDataByLocation } from '../../../panorama/services/panorama-api/panorama-api'
-import { getPage } from '../../../store/redux-first-router/selectors'
-import { getViewMode, isEmbedded, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import watchMapClick, { goToGeoSearch, switchClickAction } from './map-click'
 
 describe('watchMapClick', () => {
   const action = { type: SET_MAP_CLICK_LOCATION }
@@ -41,7 +40,9 @@ describe('switchClickAction', () => {
       url: 'maps/brk?service=wms',
       layers: ['kadastraal_object', 'kadastraal_object_label'],
       detailUrl: 'geosearch/search/',
-      detailItem: 'kadastraal_object',
+      detailParams: {
+        item: 'kadastraal_object',
+      },
       detailIsShape: true,
     },
   ]

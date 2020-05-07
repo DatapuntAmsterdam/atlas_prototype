@@ -1,11 +1,11 @@
 import { getByUrl } from '../../../shared/services/api/api'
-import MAP_CONFIG from '../map.config'
 import { getFeaturesFromResult } from '../map-search/map-search'
+import MAP_CONFIG from '../map.config'
 
 const generateParams = (layer, location, zoom) => ({
+  ...layer.detailParams,
   lat: location.latitude,
   lon: location.longitude,
-  item: layer.detailItem,
   radius: layer.detailIsShape
     ? 0
     : Math.round(2 ** (MAP_CONFIG.BASE_LAYER_OPTIONS.maxZoom - zoom) / 2),
