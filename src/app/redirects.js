@@ -2,11 +2,12 @@ import PARAMETERS from '../store/parameters'
 import { routing, MAIN_PATHS } from './routes'
 import { CONTENT_REDIRECT_LINKS, SHORTLINKS } from '../shared/config/config'
 import matomoInstance from './matomo'
+import redirectToAddress from './utils/redirectToAddress'
 
 const { VIEW, VIEW_CENTER, LAYERS, LEGEND, ZOOM, EMBED } = PARAMETERS
 
 // This are the known broken legacy links
-const legacyRoutes = [
+export const legacyRoutes = [
   // https://www.parool.nl/amsterdam/kaart-met-onontplofte-bommen-in-amsterdam-nu-openbaar~a4539314/
   {
     from:
@@ -81,7 +82,7 @@ const legacyRoutes = [
     to: `${routing.data.path}?${VIEW}=kaart`,
   },
 ]
-const shortUrls = [
+export const shortUrls = [
   {
     from: '/themakaart/taxi/',
     to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=themtaxi-bgt%3A1%7Cthemtaxi-tar%3A1%7Cthemtaxi-pvrts%3A1%7Cthemtaxi-mzt%3A1%7Cthemtaxi-oovtig%3A1%7Cthemtaxi-vezips%3A1%7Cthemtaxi-slpnb%3A1%7Cthemtaxi-slpb%3A1%7Cthemtaxi-nlpnb%3A1%7Cthemtaxi-nlpb%3A1&${LEGEND}=true`,
@@ -114,7 +115,7 @@ const shortUrls = [
   },
 ]
 
-const articleUrls = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({
+export const articleUrls = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({
   from: item.from,
   to: routing.articleDetail.path
     .replace(':slug', item.to.slug)
@@ -128,14 +129,22 @@ const overviewPaths = [
   MAIN_PATHS.DATASETS,
 ]
 
-const overviewUrls = overviewPaths.map((pathName) => ({
+export const overviewUrls = overviewPaths.map((pathName) => ({
   from: `/${pathName}/`,
   to: `/${pathName}/zoek/`,
 }))
 
-export const REDIRECTS = [...legacyRoutes, ...shortUrls, ...articleUrls, ...overviewUrls]
+export const webHooks = [
+  {
+    from: `/adres/zoek${window.location.search}`,
+    to: `/data/bag/verblijfsobject/`,
+    load: redirectToAddress,
+  },
+]
 
-export default function resolveRedirects() {
+const REDIRECTS = [...legacyRoutes, ...shortUrls, ...articleUrls, ...overviewUrls, ...webHooks]
+
+export default async function resolveRedirects() {
   const currentPath = normalizePath(
     `${window.location.pathname}${window.location.search}${window.location.hash}`,
   )
@@ -145,13 +154,36 @@ export default function resolveRedirects() {
     return false
   }
 
+  // Retrieve the data needed for the webhook
+  // When migrating to a SSR or static application an actual implementation of webhooks can be created
+  if (webHooks.includes(matchingRedirect)) {
+    const dataId = await matchingRedirect.load(window.location.search)
+
+    if (dataId) {
+      const redirectTo = `${matchingRedirect.to}${dataId}/`
+
+      matomoInstance.trackEvent({
+        category: 'webhook',
+        action: 'adres-postcode',
+        name: redirectTo,
+      })
+
+      // Tries to prevent cancelling the network request to Matomo, arbitrary number that allows Matomo some time to load
+      window.setTimeout(() => window.location.replace(redirectTo), 1000)
+    }
+
+    return !!dataId
+  }
+
   // Track "themakaarten"
   // TODO: As soon as the collections can be found in the search, this must be double checked to prevent duplicate logs in Matomo
   if (shortUrls.includes(matchingRedirect)) {
-    // Get the title of the "themakaart" from the currentPath
-    const action = currentPath.split('/')[2]
+    if (matchingRedirect.from.startsWith('/themakaart')) {
+      // Get the title of the "themakaart" from the currentPath
+      const action = currentPath.split('/')[2]
 
-    matomoInstance.trackEvent({ category: 'kaartlaag', action })
+      matomoInstance.trackEvent({ category: 'kaartlaag', action })
+    }
   }
 
   // Tries to prevent cancelling the network request to Matomo, arbitrary number that allows Matomo some time to load

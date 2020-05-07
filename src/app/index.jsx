@@ -16,14 +16,16 @@ if ('serviceWorker' in navigator) {
   })
 }
 
-const store = configureStore(routes)
-const hasToRedirect = resolveRedirects()
+// If there are no redirects for the current url, render the application
+resolveRedirects().then((hasToRedirect) => {
+  if (!hasToRedirect) {
+    const store = configureStore(routes)
 
-if (!hasToRedirect) {
-  renderApp()
-}
+    renderApp(store)
+  }
+})
 
-function renderApp() {
+function renderApp(store) {
   // eslint-disable-next-line no-undef,no-console
   console.log(`CityData: version: ${VERSION}, build: ${process.env.NODE_ENV}`)
 

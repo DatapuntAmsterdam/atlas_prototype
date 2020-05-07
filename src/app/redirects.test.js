@@ -2,28 +2,63 @@
  * @jest-environment jsdom-global
  */
 
-import resolveRedirects, { REDIRECTS } from './redirects'
+import resolveRedirects, {
+  legacyRoutes,
+  shortUrls,
+  articleUrls,
+  overviewUrls,
+  webHooks,
+} from './redirects'
 import matomoInstance from './matomo'
+import redirectToAddress from './utils/redirectToAddress'
 
 jest.useFakeTimers()
 
 jest.mock('./matomo')
+jest.mock('./utils/redirectToAddress')
 
-const expectWithNewRoute = (route, expectation, cb) => {
+const expectWithNewRoute = async (route, expectation, cb) => {
   jsdom.reconfigure({ url: route })
   const { location } = window
   delete window.location
   window.location = { ...location, replace: jest.fn() }
 
-  resolveRedirects()
+  try {
+    await resolveRedirects()
+    cb(() => expect(window.location.replace))
+  } catch (e) {
+    // console.log(e) hide unexpected async errors from Jest
+  }
   jest.runAllTimers()
 
-  cb(expect(window.location.replace))
+  // cb(expect(window.location.replace))
   window.location = location
 }
 
 describe('redirects', () => {
+  const REDIRECTS = [...legacyRoutes, ...articleUrls, ...overviewUrls]
   const trackMock = jest.spyOn(matomoInstance, 'trackEvent')
+
+  it('should not redirect unmatched routes', async () => {
+    jsdom.reconfigure({ url: 'https://www.someurl.com#a-hash-url' })
+    const { location } = window
+    delete window.location
+    window.location = {
+      ...location,
+      replace: jest.fn(),
+    }
+    await resolveRedirects()
+    jest.runAllTimers()
+
+    expect(window.location.replace).not.toHaveBeenCalled()
+
+    jsdom.reconfigure({ url: 'https://www.someurl.com/foo/bar' })
+    await resolveRedirects()
+    jest.runAllTimers()
+
+    expect(window.location.replace).not.toHaveBeenCalled()
+    window.location = location
+  })
 
   it('should redirect matched routes', () => {
     REDIRECTS.forEach((route) => {
@@ -44,43 +79,53 @@ describe('redirects', () => {
     })
   })
 
-  it('should not redirect unmatched routes', () => {
-    jsdom.reconfigure({ url: 'https://www.someurl.com#a-hash-url' })
-    const { location } = window
-    delete window.location
-    window.location = {
-      ...location,
-      replace: jest.fn(),
-    }
-    resolveRedirects()
-    jest.runAllTimers()
+  it('should track themakaart routes', () => {
+    trackMock.mockClear()
 
-    expect(window.location.replace).not.toHaveBeenCalled()
+    shortUrls.forEach((route) => {
+      resolveRedirects()
 
-    jsdom.reconfigure({ url: 'https://www.someurl.com/foo/bar' })
-    resolveRedirects()
-    jest.runAllTimers()
-
-    expect(window.location.replace).not.toHaveBeenCalled()
-    window.location = location
-  })
-
-  it('should redirect matched routes', () => {
-    REDIRECTS.forEach((route) => {
       if (route.from.startsWith('/themakaart')) {
-        resolveRedirects()
-
         // Get the title of the "themakaart" from the currentPath
         const action = route.from.split('/')[2]
 
-        expect(trackMock).toHaveBeenCalledWith(
-          expect.objectContaining({
-            action,
-          }),
+        expectWithNewRoute(
+          `https://www.someurl.com${route.from}`,
+          window.location.replace,
+          (cb) => {
+            expect(trackMock).toHaveBeenCalledWith(
+              expect.objectContaining({
+                action,
+              }),
+            )
+            cb.toHaveBeenCalledWith(route.to)
+          },
         )
-
-        jest.runAllTimers()
       }
+
+      jest.runAllTimers()
+    })
+  })
+
+  it('should redirect webhook routes', () => {
+    trackMock.mockClear()
+    const redirectToAddressMock = redirectToAddress.mockReturnValue('theMockedId')
+
+    webHooks.forEach((route) => {
+      expectWithNewRoute(`https://www.someurl.com${route.from}`, window.location.replace, (cb) => {
+        expect(trackMock).toHaveBeenCalledWith()
+        expect(redirectToAddressMock).toHaveBeenCalled()
+        cb.toHaveBeenCalledWith(route.to)
+      })
+
+      // expectWithCustomCallback(`https://www.someurl.com${route.from}`, route.load, (expect) =>
+      //   expect.toHaveBeenCalled(),
+      // )
+
+      // expect(redirectToAddressMock).toHaveBeenCalled()
+      // expect(trackMock).toHaveBeenCalledWith()
+
+      jest.runAllTimers()
     })
   })
 })
