@@ -160,7 +160,7 @@ const MapLegend = ({
       const action = mapLayer.title.toLowerCase().replace(/[: ][ ]*/g, '_')
 
       // eslint-disable-next-line no-unused-expressions
-      mapLayer?.legendItems.forEach(({ title: legendItemTitle }) =>
+      mapLayer?.legendItems?.forEach(({ title: legendItemTitle }) =>
         trackEvent({
           category: 'kaartlaag',
           action,
