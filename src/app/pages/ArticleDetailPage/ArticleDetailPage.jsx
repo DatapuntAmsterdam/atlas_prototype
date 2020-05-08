@@ -111,6 +111,12 @@ const StyledAccordion = styled(Accordion)`
   margin-top: ${themeSpacing(2)};
 `
 
+const StyledLink = styled(Link)`
+  & > * {
+    pointer-events: none;
+  }
+`
+
 /* istanbul ignore next */
 const ArticleDetailPage = ({ id }) => {
   const { fetchData, results, loading, error } = useFromCMS(cmsConfig.ARTICLE, id)
@@ -258,9 +264,9 @@ const ArticleDetailPage = ({ id }) => {
                             <List>
                               {links.map(({ uri, title: linkTitle }) => (
                                 <ListItem key={uri}>
-                                  <Link variant="with-chevron" href={`${uri}`}>
+                                  <StyledLink variant="with-chevron" href={`${uri}`}>
                                     <span>{linkTitle}</span>
-                                  </Link>
+                                  </StyledLink>
                                 </ListItem>
                               ))}
                             </List>

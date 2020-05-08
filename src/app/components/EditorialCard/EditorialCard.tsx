@@ -78,6 +78,7 @@ const StyledLink = styled(Link)`
 const StyledCard = styled(Card)`
   align-items: stretch;
   background-color: inherit;
+  pointer-events: none; /* Make sure the right anchor click is registered */
 
   ${({ highlighted }) =>
     highlighted &&

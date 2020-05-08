@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
 import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import { FeedbackModal } from './components/Modal'
@@ -42,6 +43,10 @@ const AppBody = ({
   embedPreviewMode,
 }) => {
   const query = useSelector(getQuery)
+
+  const { enableLinkTracking } = useMatomo()
+  enableLinkTracking()
+
   return hasGrid ? (
     <>
       <AppContainer id="main" className="main-container">
