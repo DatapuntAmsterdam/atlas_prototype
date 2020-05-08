@@ -93,7 +93,7 @@ const PublicationDetailPage = ({ id }) => {
                 </Column>
                 <Column span={{ small: 1, medium: 4, big: 3, large: 6, xLarge: 6 }}>
                   <EditorialContent>
-                    {intro && <Paragraph strong>{intro}</Paragraph>}
+                    {intro && <Paragraph strong dangerouslySetInnerHTML={{ __html: intro }} />}
                     {body && <CustomHTMLBlock body={body} />}
                   </EditorialContent>
                 </Column>

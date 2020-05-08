@@ -103,7 +103,7 @@ const DatasetCard = ({
         </div>
 
         <div>
-          <StyledParagraph>{teaser}</StyledParagraph>
+          <StyledParagraph dangerouslySetInnerHTML={{ __html: teaser }} />
         </div>
 
         <div>
