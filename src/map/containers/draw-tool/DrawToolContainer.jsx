@@ -78,8 +78,10 @@ class DrawToolContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    const { onMapClear } = this.props
-    onMapClear()
+    const { onMapClear, drawingMode } = this.props
+
+    // Only clear the map when drawing mode was enabled
+    if (drawingMode !== drawToolConfig.DRAWING_MODE.NONE) onMapClear()
   }
 
   onFinishShape(polygon) {

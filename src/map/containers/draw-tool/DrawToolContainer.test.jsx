@@ -96,9 +96,16 @@ describe('DrawToolContainer', () => {
     })
 
     describe('componentWillUnmount', () => {
-      it('should dispatch MAP_CLEAR', () => {
+      it('should dispatch MAP_CLEAR when drawing mode is enabled', () => {
+        wrapper.setProps({ drawingMode: drawToolConfig.DRAWING_MODE.DRAW })
         wrapper.unmount()
         expect(store.dispatch).toHaveBeenCalledWith(mapClear())
+      })
+
+      it('and should not dispatch MAP_CLEAR otherwise', () => {
+        wrapper.setProps({ drawingMode: drawToolConfig.DRAWING_MODE.NONE })
+        wrapper.unmount()
+        expect(store.dispatch).not.toHaveBeenCalledWith(mapClear())
       })
     })
 
