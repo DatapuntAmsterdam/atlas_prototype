@@ -218,7 +218,7 @@ const EditorialCard: React.FC<EditorialCardProps> = ({
 
           {description && (
             <div>
-              <IntroText>{description}</IntroText>
+              <IntroText dangerouslySetInnerHTML={{ __html: description }} />
             </div>
           )}
 

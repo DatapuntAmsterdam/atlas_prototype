@@ -2,7 +2,7 @@
 import get from 'lodash.get'
 import { createSelector } from 'reselect'
 import { REDUCER_KEY } from './constants'
-import { detailPointType } from '../../../map/components/leaflet/services/icons.constant'
+import { detailPointType } from '../../../map/ducks/map/constants'
 
 export const getDataSelection = (state) => state[REDUCER_KEY]
 export const getDataSelectionPage = createSelector(

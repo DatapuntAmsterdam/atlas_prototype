@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import MapContainer from '../../../map/containers/map/MapContainer'
 
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors'
 import { toDetailFromEndpoint as endpointActionCreator } from '../../../store/redux-first-router/actions'
@@ -33,6 +32,14 @@ const PanoramaContainer = React.lazy(() => import('../../../panorama/containers/
 }) => {
   let mapProps = {}
   let Component = null
+
+  let MapComponent = () => null
+
+  if (typeof window !== 'undefined') {
+    // eslint-disable-next-line global-require
+    MapComponent = require('../../../map/containers/map/MapContainer').default
+  }
+
   switch (currentPage) {
     case PAGES.DATA_DETAIL:
       Component = <DataDetailPage />
@@ -83,7 +90,7 @@ const PanoramaContainer = React.lazy(() => import('../../../panorama/containers/
   }
 
   if (viewMode === VIEW_MODE.MAP) {
-    return <MapContainer {...mapProps} />
+    return <MapComponent {...mapProps} />
   }
   if (Component) {
     if (viewMode === VIEW_MODE.FULL) {
@@ -94,7 +101,7 @@ const PanoramaContainer = React.lazy(() => import('../../../panorama/containers/
       return (
         <SplitScreen
           leftComponent={
-            <MapContainer
+            <MapComponent
               isFullscreen={false}
               toggleFullscreen={() => setViewMode(VIEW_MODE.MAP)}
             />

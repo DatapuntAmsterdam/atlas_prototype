@@ -6,7 +6,7 @@ import MapLeaflet from './MapLeaflet'
 import MAP_CONFIG from '../../services/map.config'
 
 import { boundsToString, getBounds, isValidBounds, isBoundsAPoint } from './services/bounds'
-import { markerPointType } from './services/icons.constant'
+import { markerPointType } from '../../ducks/map/constants'
 
 jest.mock('./services/bounds')
 

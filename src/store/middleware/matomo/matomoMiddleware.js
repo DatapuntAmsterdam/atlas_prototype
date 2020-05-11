@@ -6,6 +6,10 @@ import matomoInstance from '../../../app/matomo'
 // Execute Matomo actions
 const matomoMiddleware = ({ getState }) => (next) => (action) => {
   const nextAction = action
+  if (typeof window === 'undefined') {
+    next(nextAction)
+    return
+  }
 
   const actionsToMatomo = []
   if (trackViews[action.type]) {

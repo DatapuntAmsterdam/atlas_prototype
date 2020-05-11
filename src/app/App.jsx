@@ -101,7 +101,7 @@ const App = ({
     isSearchPage(currentPage)
 
   // Redirect to the 404 page if currentPage isn't set
-  if (currentPage === '' && window) {
+  if (currentPage === '' && typeof window !== 'undefined') {
     window.location.replace(routing.niet_gevonden.path)
   }
 
@@ -110,31 +110,33 @@ const App = ({
     'c-dashboard__body--overflow': overflowScroll,
   })
 
-  // Todo: preferably don't modify html class, now needed since these classes add height: auto to
-  // html and body
-  const printAndEmbedClasses = [
-    'is-print-mode',
-    'is-print-mode--landscape',
-    'is-embed',
-    'is-embed-preview',
-  ]
-  const printEmbedModeClasses = classNames({
-    [printAndEmbedClasses[0]]: printMode,
-    [printAndEmbedClasses[1]]: printModeLandscape,
-    [printAndEmbedClasses[2]]: embedMode,
-    [printAndEmbedClasses[3]]: embedPreviewMode,
-  })
-
-  // Adding/removing multiple classes as string doesn't seem to work in IE11.
-  // Add/remove them one by one.
-  printAndEmbedClasses.forEach((element) => {
-    document.documentElement.classList.remove(element)
-  })
-
-  if (printEmbedModeClasses) {
-    printEmbedModeClasses.split(' ').forEach((element) => {
-      document.documentElement.classList.add(element)
+  if (typeof window !== 'undefined') {
+    // Todo: preferably don't modify html class, now needed since these classes add height: auto to
+    // html and body
+    const printAndEmbedClasses = [
+      'is-print-mode',
+      'is-print-mode--landscape',
+      'is-embed',
+      'is-embed-preview',
+    ]
+    const printEmbedModeClasses = classNames({
+      [printAndEmbedClasses[0]]: printMode,
+      [printAndEmbedClasses[1]]: printModeLandscape,
+      [printAndEmbedClasses[2]]: embedMode,
+      [printAndEmbedClasses[3]]: embedPreviewMode,
     })
+
+    // Adding/removing multiple classes as string doesn't seem to work in IE11.
+    // Add/remove them one by one.
+    printAndEmbedClasses.forEach((element) => {
+      document.documentElement.classList.remove(element)
+    })
+
+    if (printEmbedModeClasses) {
+      printEmbedModeClasses.split(' ').forEach((element) => {
+        document.documentElement.classList.add(element)
+      })
+    }
   }
 
   return (

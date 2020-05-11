@@ -219,14 +219,18 @@ class ParamsRegistry {
     }, {})
     const orderedQuery = ParamsRegistry.orderQuery(query)
     const searchQuery = queryString.stringify(orderedQuery)
-    const currentPath = window.location.pathname
 
-    // the history should be changed only when the url string is changed
-    // this check prevents recording history changes on every action.
-    // We need to decode both query's, because we cannot be sure if the queries contains encoded characters
-    const recordHistory = decodeURI(searchQuery) !== decodeURI(window.location.search.substring(1))
-    if (recordHistory && this.history) {
-      this.history.replace(`${currentPath}?${searchQuery}`)
+    if (typeof window !== 'undefined') {
+      const currentPath = window.location.pathname
+
+      // the history should be changed only when the url string is changed
+      // this check prevents recording history changes on every action.
+      // We need to decode both query's, because we cannot be sure if the queries contains encoded characters
+      const recordHistory =
+        decodeURI(searchQuery) !== decodeURI(window.location.search.substring(1))
+      if (recordHistory && this.history) {
+        this.history.replace(`${currentPath}?${searchQuery}`)
+      }
     }
 
     return searchQuery

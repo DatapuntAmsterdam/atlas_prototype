@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './App'
 import configureStore from '../store/store'
-import routes from './routes'
 import resolveRedirects from './redirects'
 import './sentry'
 
@@ -19,7 +18,7 @@ if ('serviceWorker' in navigator) {
 // If there are no redirects for the current url, render the application
 resolveRedirects().then((hasToRedirect) => {
   if (!hasToRedirect) {
-    const store = configureStore(routes)
+    const store = configureStore()
 
     renderApp(store)
   }

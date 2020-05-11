@@ -1,10 +1,16 @@
+/* eslint-disable global-require */
 import React from 'react'
 import PropTypes from 'prop-types'
-import angular from 'angular'
 import { AngularWrapper } from 'react-angular'
 import { Helmet } from 'react-helmet'
 import ShareBar from '../../components/ShareBar/ShareBar'
-import '../../angularModules'
+
+let angularInstance = null
+
+if (typeof window !== 'undefined') {
+  require('../../angularModules')
+  angularInstance = require('angular')
+}
 
 const DatasetDetail = ({
   isLoading,
@@ -22,12 +28,12 @@ const DatasetDetail = ({
         {action && action.href && <link rel="canonical" href={action.href} />}
         {description && <meta name="description" content={description} />}
       </Helmet>
-      {!isLoading && (
+      {!isLoading && angularInstance && (
         <AngularWrapper
           moduleName="dpDetailWrapper"
           component="dpDetail"
           dependencies={['atlas']}
-          angularInstance={angular}
+          angularInstance={angularInstance}
           bindings={{
             isLoading,
             catalogFilters,

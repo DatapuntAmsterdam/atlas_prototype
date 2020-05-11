@@ -35,3 +35,9 @@ export const initialState = {
   marker: null,
   markerIcon: MARKER_ICON,
 }
+export const geoSearchType = 'geoSearchType'
+export const dataSelectionType = 'dataSelectionType'
+export const detailPointType = 'detailPointType'
+export const panoramaPersonType = 'panoramaPersonType'
+export const panoramaOrientationType = 'panoramaOrientationType'
+export const markerPointType = 'markerPointType'

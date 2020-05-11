@@ -82,6 +82,3 @@ export default function MapLayersReducer(state = initialState, action) {
 }
 
 export const fetchMapLayers = () => ({ type: FETCH_MAP_LAYERS_REQUEST })
-
-window.reducers = window.reducers || {}
-window.reducers.MapLayersReducer = MapLayersReducer

@@ -60,13 +60,6 @@ const SearchPage = ({ currentPage, query }) => {
 
   const currentPageHasChanged = useCompare(currentPage)
 
-  // Close the filterbox when changing the page
-  useEffect(() => {
-    if (currentPageHasChanged) {
-      setShowFilter(false)
-    }
-  }, [currentPage])
-
   // Enable / disable body lock when opening the filter on mobile
   useEffect(() => {
     const action = showFilter || currentPageHasChanged ? clearAllBodyScrollLocks : enableBodyScroll

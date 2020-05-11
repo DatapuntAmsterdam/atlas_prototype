@@ -1,9 +1,6 @@
 import { createSelector } from 'reselect'
-import {
-  panoramaOrientationType,
-  panoramaPersonType,
-} from '../../map/components/leaflet/services/icons.constant'
 import { PANO_LABELS, REDUCER_KEY } from './constants'
+import { panoramaOrientationType, panoramaPersonType } from '../../map/ducks/map/constants'
 
 export const getPanorama = (state) => state[REDUCER_KEY] || {}
 export const getPanoramaLocation = createSelector(getPanorama, (panorama) =>

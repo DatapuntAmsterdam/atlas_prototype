@@ -10,15 +10,28 @@ import { GeoJSON, Map, ScaleControl, TileLayer, ZoomControl } from 'react-leafle
 import CustomMarker from './custom/marker/CustomMarker'
 import ClusterGroup from './custom/cluster-group/ClusterGroup'
 import NonTiledLayer from './custom/non-tiled-layer'
-import icons from './services/icons.constant'
 import geoJsonConfig from './services/geo-json-config.constant'
 import markerConfig from './services/marker-config.constant'
 import createClusterIcon from './services/cluster-icon'
 import { boundsToString, getBounds, isBoundsAPoint, isValidBounds } from './services/bounds'
 import LoadingIndicator from '../loading-indicator/LoadingIndicator'
-import { DEFAULT_LAT, DEFAULT_LNG } from '../../ducks/map/constants'
+import {
+  dataSelectionType,
+  DEFAULT_LAT,
+  DEFAULT_LNG,
+  detailPointType,
+  geoSearchType,
+  markerPointType,
+  panoramaOrientationType,
+  panoramaPersonType,
+} from '../../ducks/map/constants'
 import RdGeoJson from './custom/geo-json/RdGeoJson'
 import MAP_CONFIG from '../../services/map.config'
+import searchIcon from './services/search-icon'
+import dataSelectionIcon from './services/data-selection-icon'
+import detailIcon from './services/detail-icon'
+import { panoramaOrientationIcon, panoramaPersonIcon } from './services/panorama-icon'
+import locationIcon from './services/location-icon'
 
 const isIE = false || !!window.document.documentMode
 if (isIE) {
@@ -34,6 +47,15 @@ const convertBounds = (map) => {
     northEast: [leafletBounds._northEast.lat, leafletBounds._northEast.lng],
     southWest: [leafletBounds._southWest.lat, leafletBounds._southWest.lng],
   }
+}
+
+const ICONS = {
+  [geoSearchType]: searchIcon,
+  [dataSelectionType]: dataSelectionIcon,
+  [detailPointType]: detailIcon,
+  [panoramaPersonType]: panoramaPersonIcon,
+  [panoramaOrientationType]: panoramaOrientationIcon,
+  [markerPointType]: ({ type }) => locationIcon(type),
 }
 
 class MapLeaflet extends React.Component {
@@ -288,7 +310,7 @@ class MapLeaflet extends React.Component {
                   ref={markerConfig[item.type].requestFocus && this.setActiveElement}
                   position={item.position}
                   key={item.position.toString() + item.type}
-                  icon={icons[item.type](item.iconData)}
+                  icon={ICONS[item.type](item.iconData)}
                   zIndexOffset={100}
                   rotationAngle={item.heading || 0}
                 />
@@ -301,7 +323,7 @@ class MapLeaflet extends React.Component {
                   ref={markerConfig[item.type].requestFocus && this.setActiveElement}
                   position={item.position}
                   key={item.position.toString() + item.type}
-                  icon={icons[item.type](item.iconData)}
+                  icon={ICONS[item.type](item.iconData)}
                   zIndexOffset={100}
                   rotationAngle={item.heading || 0}
                 />
@@ -311,7 +333,7 @@ class MapLeaflet extends React.Component {
             <CustomMarker
               position={marker.position}
               key={marker.toString()}
-              icon={icons[marker.type](marker.iconData)}
+              icon={ICONS[marker.type](marker.iconData)}
             />
           )}
           {geoJsons.map(

@@ -1,6 +1,5 @@
 import BOUNDING_BOX from './bounding-box.constant'
 import { ENVIRONMENTS } from '../../shared/environment'
-import getCrs from './crs-service'
 
 const BOUNDS = [BOUNDING_BOX.COORDINATES.southWest, BOUNDING_BOX.COORDINATES.northEast]
 
@@ -12,7 +11,6 @@ const defaultConfig = {
     bounds: BOUNDS,
   },
   MAP_OPTIONS: {
-    crs: getCrs(),
     maxBounds: BOUNDS,
     // 1.0 makes the bounds fully solid, preventing the user from dragging outside the bounds
     maxBoundsViscosity: 1.0,

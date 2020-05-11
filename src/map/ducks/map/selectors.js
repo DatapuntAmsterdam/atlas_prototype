@@ -2,12 +2,12 @@ import { createSelector } from 'reselect'
 
 import { getPanoramaLocation, getPanoramaMarkers } from '../../../panorama/ducks/selectors'
 import { getGeoJson as getDetailGeoJson } from '../detail/selectors'
-import { geoSearchType, markerPointType } from '../../components/leaflet/services/icons.constant'
 import { getDetail } from '../../../shared/ducks/detail/selectors'
 import drawToolConfig from '../../services/draw-tool/draw-tool.config'
 import { getDataSearchLocation } from '../../../shared/ducks/data-search/selectors'
 import { isGeoSearch } from '../../../shared/ducks/selection/selection'
 import { areMarkersLoading } from '../../../shared/ducks/data-selection/selectors'
+import { geoSearchType, markerPointType } from './constants'
 
 export const getMap = (state) => state.map
 export const getActiveBaseLayer = createSelector(getMap, (mapState) => mapState.baseLayer)

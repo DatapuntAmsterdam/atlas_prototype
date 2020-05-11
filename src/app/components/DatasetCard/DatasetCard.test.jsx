@@ -20,7 +20,7 @@ describe('DatasetCard', () => {
 
     const paragraph = component.find('Styled(Paragraph)')
     expect(paragraph.exists()).toBeTruthy()
-    expect(paragraph.props().children).toBe(mockDatasetItem.teaser)
+    expect(paragraph.props()?.dangerouslySetInnerHTML?.__html).toBe(mockDatasetItem.teaser)
   })
 
   it('should display the date', () => {

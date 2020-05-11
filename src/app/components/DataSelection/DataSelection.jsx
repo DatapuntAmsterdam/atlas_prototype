@@ -1,8 +1,8 @@
+/* eslint-disable global-require */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { AngularWrapper } from 'react-angular'
 import classNames from 'classnames'
-import angular from 'angular'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import NotAuthorizedMessage from '../PanelMessages/NotAuthorizedMessage'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
@@ -15,8 +15,14 @@ import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
 import DataSelectionList from './DataSelectionList/DataSelectionList'
 import ShareBar from '../ShareBar/ShareBar'
 import Notification from '../../../shared/components/notification/Notification'
-import '../../angularModules'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
+
+let angularInstance = null
+
+if (typeof window !== 'undefined') {
+  require('../../angularModules')
+  angularInstance = require('angular')
+}
 
 const DataSelection = ({
   view,
@@ -53,23 +59,25 @@ const DataSelection = ({
   return (
     <div className="c-data-selection c-dashboard__content">
       <div className="c-data-selection-content qa-data-selection-content">
-        <AngularWrapper
-          moduleName="dpDataSelectionHeaderWrapper"
-          component="dpDataSelectionHeader"
-          dependencies={['atlas']}
-          angularInstance={angular}
-          bindings={{
-            dataset,
-            availableFilters,
-            geometryFilter,
-            filters: activeFilters,
-            isLoading,
-            numberOfRecords,
-            showHeader,
-            user,
-            view: VIEWS_TO_PARAMS[view],
-          }}
-        />
+        {angularInstance && (
+          <AngularWrapper
+            moduleName="dpDataSelectionHeaderWrapper"
+            component="dpDataSelectionHeader"
+            dependencies={['atlas']}
+            angularInstance={require('angular')}
+            bindings={{
+              dataset,
+              availableFilters,
+              geometryFilter,
+              filters: activeFilters,
+              isLoading,
+              numberOfRecords,
+              showHeader,
+              user,
+              view: VIEWS_TO_PARAMS[view],
+            }}
+          />
+        )}
 
         {isLoading && <LoadingIndicator />}
 
@@ -86,11 +94,11 @@ const DataSelection = ({
             <div className="u-row">
               {showFilters && (
                 <div className="u-col-sm--3 c-data-selection__available-filters">
-                  {dataset === 'hr' && (
+                  {dataset === 'hr' && angularInstance && (
                     <AngularWrapper
                       moduleName="dpSbiFilterWrapper"
                       component="dpSbiFilter"
-                      angularInstance={angular}
+                      angularInstance={angularInstance}
                       dependencies={['atlas']}
                       bindings={{
                         availableFilters,
@@ -98,20 +106,21 @@ const DataSelection = ({
                       }}
                     />
                   )}
-
-                  <AngularWrapper
-                    moduleName="dpDataSelectionAvailableFiltersWrapper"
-                    component="dpDataSelectionAvailableFilters"
-                    dependencies={['atlas']}
-                    angularInstance={angular}
-                    bindings={{
-                      availableFilters,
-                      activeFilters,
-                    }}
-                    interpolateBindings={{
-                      dataset,
-                    }}
-                  />
+                  {angularInstance && (
+                    <AngularWrapper
+                      moduleName="dpDataSelectionAvailableFiltersWrapper"
+                      component="dpDataSelectionAvailableFilters"
+                      dependencies={['atlas']}
+                      angularInstance={angularInstance}
+                      bindings={{
+                        availableFilters,
+                        activeFilters,
+                      }}
+                      interpolateBindings={{
+                        dataset,
+                      }}
+                    />
+                  )}
                 </div>
               )}
               <div className={widthClass}>
@@ -137,17 +146,19 @@ const DataSelection = ({
                   <div>
                     {view === VIEW_MODE.FULL && <DataSelectionTable content={data} />}
                     {view === VIEW_MODE.SPLIT && <DataSelectionList content={data} />}
-                    <AngularWrapper
-                      moduleName="dpDataSelectionPaginationWrapper"
-                      component="dpDataSelectionPagination"
-                      dependencies={['atlas']}
-                      angularInstance={angular}
-                      bindings={{
-                        currentPage,
-                        numberOfPages,
-                        setPage,
-                      }}
-                    />
+                    {angularInstance && (
+                      <AngularWrapper
+                        moduleName="dpDataSelectionPaginationWrapper"
+                        component="dpDataSelectionPagination"
+                        dependencies={['atlas']}
+                        angularInstance={angularInstance}
+                        bindings={{
+                          currentPage,
+                          numberOfPages,
+                          setPage,
+                        }}
+                      />
+                    )}
                     {view === VIEW_MODE.FULL && (
                       <div className="u-row">
                         <div className="u-col-sm--12">

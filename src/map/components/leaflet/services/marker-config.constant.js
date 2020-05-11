@@ -1,11 +1,11 @@
 import {
-  geoSearchType,
   dataSelectionType,
   detailPointType,
-  panoramaPersonType,
-  panoramaOrientationType,
+  geoSearchType,
   markerPointType,
-} from './icons.constant'
+  panoramaOrientationType,
+  panoramaPersonType,
+} from '../../../ducks/map/constants'
 
 const markerConfig = {
   [geoSearchType]: { requestFocus: true },

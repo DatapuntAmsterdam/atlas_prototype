@@ -11,7 +11,7 @@ addDecorator(withA11y)
 // automatically import all files ending in *.stories.jsx or *.stories.tsx
 const req = require.context('../src', true, /\.stories\.(j|t)sx$/)
 
-const store = configureStore(routes, true)
+const store = configureStore(true)
 
 const extendedTheme = {
   globalStyle: ``,

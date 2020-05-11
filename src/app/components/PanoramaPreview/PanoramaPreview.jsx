@@ -1,22 +1,30 @@
+/* eslint-disable global-require */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { AngularWrapper } from 'react-angular'
-import angular from 'angular'
-import '../../angularModules'
+
+let angularInstance = null
+
+if (typeof window !== 'undefined') {
+  require('../../angularModules')
+  angularInstance = require('angular')
+}
 
 const PanoramaPreview = ({ panoramaPreview, isLoading }) => (
   <div className="c-search-results__thumbnail-container">
     <div className="c-search-results__thumbnail">
-      <AngularWrapper
-        moduleName="dpPanoramaThumbnailWrapper"
-        component="dpPanoramaThumbnail"
-        dependencies={['atlas']}
-        angularInstance={angular}
-        bindings={{
-          panorama: panoramaPreview,
-          isLoading,
-        }}
-      />
+      {angularInstance ? (
+        <AngularWrapper
+          moduleName="dpPanoramaThumbnailWrapper"
+          component="dpPanoramaThumbnail"
+          dependencies={['atlas']}
+          angularInstance={angularInstance}
+          bindings={{
+            panorama: panoramaPreview,
+            isLoading,
+          }}
+        />
+      ) : null}
     </div>
   </div>
 )

@@ -108,18 +108,20 @@ let tokenData = {}
  * service.
  */
 function handleError(code, description) {
-  sessionStorage.removeItem(STATE_TOKEN)
+  if (typeof window !== 'undefined') {
+    sessionStorage.removeItem(STATE_TOKEN)
 
-  // Remove parameters from the URL, as set by the error callback from the
-  // OAuth2 authorization service, to clean up the URL.
-  window.location.assign(
-    `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
-  )
+    // Remove parameters from the URL, as set by the error callback from the
+    // OAuth2 authorization service, to clean up the URL.
+    window.location.assign(
+      `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
+    )
 
-  throw new Error(
-    'Authorization service responded with error ' +
-      `${code} [${description}] (${ERROR_MESSAGES[code]})`,
-  )
+    throw new Error(
+      'Authorization service responded with error ' +
+        `${code} [${description}] (${ERROR_MESSAGES[code]})`,
+    )
+  }
 }
 
 /**
@@ -127,9 +129,11 @@ function handleError(code, description) {
  * service.
  */
 function catchError() {
-  const params = queryStringParser(window.location.search)
-  if (params && params.error) {
-    handleError(params.error, params.error_description)
+  if (typeof window !== 'undefined') {
+    const params = queryStringParser(window.location.search)
+    if (params && params.error) {
+      handleError(params.error, params.error_description)
+    }
   }
 }
 
@@ -144,7 +148,7 @@ function catchError() {
  * null otherwise.
  */
 function getAccessTokenFromParams(params) {
-  if (!params) {
+  if (!params || typeof window === 'undefined') {
     return null
   }
 
@@ -173,6 +177,9 @@ function getAccessTokenFromParams(params) {
  * Gets the access token and return path, and clears the session storage.
  */
 function handleCallback() {
+  if (typeof window === 'undefined') {
+    return
+  }
   const params = queryStringParser(window.location.hash.substring(1)) // Remove # from hash string
   const accessToken = getAccessTokenFromParams(params)
   if (accessToken) {
@@ -193,6 +200,10 @@ function handleCallback() {
  * @returns {string} The access token.
  */
 export function getAccessToken() {
+  if (typeof window === 'undefined') {
+    return false
+  }
+
   return sessionStorage.getItem(ACCESS_TOKEN)
 }
 
@@ -293,12 +304,14 @@ export function getAuthHeaders() {
   return accessToken ? { Authorization: `Bearer ${getAccessToken()}` } : {}
 }
 
-window.auth = {
-  getAccessToken,
-  login,
-  logout,
-  initAuth,
-  getReturnPath,
-  getScopes,
-  getName,
+if (typeof window !== 'undefined') {
+  window.auth = {
+    getAccessToken,
+    login,
+    logout,
+    initAuth,
+    getReturnPath,
+    getScopes,
+    getName,
+  }
 }

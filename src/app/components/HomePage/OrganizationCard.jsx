@@ -49,7 +49,7 @@ const OrganizationCard = ({ loading, title, shortTitle, teaser, intro, linkProps
       <StyledHeading forwardedAs="h4" styleAs="h3">
         {shortTitle || title}
       </StyledHeading>
-      <StyledParagraph>{teaser || intro}</StyledParagraph>
+      <StyledParagraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />
 
       <div>
         <OverviewLink linkProps={linkProps} label="Lees meer" />

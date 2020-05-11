@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import '../angularModules'
 import LoadingIndicator from '../../shared/components/loading-indicator/LoadingIndicator'
 import { getByUri } from '../../shared/services/api/api'
 

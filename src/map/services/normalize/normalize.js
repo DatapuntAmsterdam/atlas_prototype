@@ -216,6 +216,10 @@ export const grexProject = (result) => {
         return 'Actueel'
       case 'T':
         return 'Toekomstig'
+      case 'H':
+        return 'Historisch'
+      case 'F':
+        return 'Financieel'
       default:
         // eslint-disable-next-line no-console
         console.warn(`Unable to format planstatus, unknown value '${result.planstatus}'.`)

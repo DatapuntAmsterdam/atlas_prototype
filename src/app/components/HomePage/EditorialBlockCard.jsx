@@ -104,7 +104,7 @@ const EditorialBlockCard = ({
           <StyledHeading forwardedAs="h4" styleAs="h3">
             {shortTitle || title}
           </StyledHeading>
-          <Paragraph>{teaser || intro}</Paragraph>
+          <Paragraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />
         </StyledCardContent>
         <StyledCardMedia>
           {teaserImage && (

@@ -29,9 +29,13 @@ import {
   getClusterMarkers,
   getGeoJsons,
 } from '../../../shared/ducks/data-selection/selectors'
+import getCrs from '../../services/crs-service'
 
 const baseLayerOptions = MAP_CONFIG.BASE_LAYER_OPTIONS
-const mapOptions = MAP_CONFIG.MAP_OPTIONS
+const mapOptions = {
+  crs: getCrs(),
+  ...MAP_CONFIG.MAP_OPTIONS,
+}
 const scaleControlOptions = MAP_CONFIG.SCALE_OPTIONS
 const zoomControlOptions = MAP_CONFIG.ZOOM_OPTIONS
 

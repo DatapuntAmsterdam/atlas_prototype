@@ -30,10 +30,8 @@ const PROBLEM_BODY = (location) => `Probleem melden voor de pagina: ${location}\
   - Wat zie je op het scherm als je een probleem ondervindt?
   - Heb je een suggestie hoe het anders zou kunnen?
   `
-
-const getMailtoLink = (recipient, subject, body) => `mailto:${recipient}
-?subject=${window.encodeURIComponent(subject)}
-&body=${window.encodeURIComponent(body)}`
+const getMailtoLink = (recipient, subject, body) =>
+  `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 
 const FeedbackModalComponent = ({
   open,
@@ -76,7 +74,7 @@ const FeedbackModalComponent = ({
         href={getMailtoLink(
           FEEDBACK_RECIPIENT,
           FEEDBACK_SUBJECT,
-          FEEDBACK_BODY(window.location.href),
+          FEEDBACK_BODY(typeof window !== 'undefined' ? window.location.href : ''),
         )}
       >
         Onjuistheid terugmelden
@@ -94,7 +92,11 @@ const FeedbackModalComponent = ({
         title="Probleem melden"
         variant="primary"
         onClick={reportProblemAction}
-        href={getMailtoLink(PROBLEM_RECIPIENT, PROBLEM_SUBJECT, PROBLEM_BODY(window.location.href))}
+        href={getMailtoLink(
+          PROBLEM_RECIPIENT,
+          PROBLEM_SUBJECT,
+          PROBLEM_BODY(typeof window !== 'undefined' ? window.location.href : ''),
+        )}
       >
         Probleem melden
       </Button>

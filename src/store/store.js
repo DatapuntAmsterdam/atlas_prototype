@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory, createMemoryHistory } from 'history'
 import { connectRoutes } from 'redux-first-router'
 import restoreScroll from 'redux-first-router-restore-scroll'
 import queryString from 'querystring'
@@ -16,9 +16,17 @@ import preserveUrlParametersMiddleware from './middleware/preserveUrlParametersM
 import setQueriesFromStateMiddleware from './middleware/setQueriesFromStateMiddleware'
 import paramsRegistry from './params-registry'
 import './queryParameters'
+import routes from '../app/routes'
 
-window.reducer = rootReducer
-const configureStore = (routesMap, storybook = false) => {
+const configureStore = (storybook = false, req) => {
+  const routesMap = routes
+
+  const ssrOptions = req
+    ? {
+        initialEntries: [req.path],
+      }
+    : {}
+
   const routingOptions = {
     querySerializer: queryString,
     restoreScroll: restoreScroll({
@@ -27,7 +35,8 @@ const configureStore = (routesMap, storybook = false) => {
       },
     }),
     initialDispatch: false,
-    createHistory: createBrowserHistory,
+    createHistory: typeof window === 'undefined' ? createMemoryHistory : createBrowserHistory,
+    ...ssrOptions,
   }
   const {
     reducer: routeReducer,
@@ -39,7 +48,10 @@ const configureStore = (routesMap, storybook = false) => {
 
   paramsRegistry.history = history
 
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+  const composeEnhancers =
+    typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : compose
   const sagaMiddleware = createSagaMiddleware()
 
   const allMiddleware = [
@@ -68,7 +80,11 @@ const configureStore = (routesMap, storybook = false) => {
     }
   })
 
-  window.reduxStore = createStore(rootReducer(routeReducer), undefined, enhancer)
+  const store = createStore(rootReducer(routeReducer), undefined, enhancer)
+
+  if (typeof window !== 'undefined') {
+    window.reduxStore = store
+  }
 
   sagaMiddleware.run(rootSaga)
 
@@ -85,9 +101,9 @@ const configureStore = (routesMap, storybook = false) => {
   }
 
   initialRouteDispatch()
-  window.reduxStore.dispatch(authenticateReload())
+  store.dispatch(authenticateReload())
 
-  return window.reduxStore
+  return store
 }
 
 export default configureStore

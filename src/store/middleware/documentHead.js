@@ -21,7 +21,9 @@ const documentHead = () => (next) => (action) => {
     const getTitle = get(titleResolver, 'getTitle', getDefaultDocumentTitle(page))
     const pageTitle = getTitle(action, getDefaultDocumentTitle(page)())
 
-    document.title = `${pageTitle} - ${TITLE_SUFFIX}`
+    if (typeof document !== 'undefined') {
+      document.title = `${pageTitle} - ${TITLE_SUFFIX}`
+    }
   }
   return next(action)
 }

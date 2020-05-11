@@ -118,10 +118,9 @@ ConstructionFilesContainer.propTypes = {
 const mapStateToProps = (state) => ({
   fileName: getFileName(state),
   fileUrl: getFileUrl(state),
-  endpoint: `${process.env.API_ROOT}stadsarchief/bouwdossier/${getLocationPayload(state).id.replace(
-    'id',
-    '',
-  )}/`,
+  endpoint: `${process.env.API_ROOT}iiif-metadata/bouwdossier/${getLocationPayload(
+    state,
+  ).id.replace('id', '')}/`,
   user: getUser(state),
 })
 
