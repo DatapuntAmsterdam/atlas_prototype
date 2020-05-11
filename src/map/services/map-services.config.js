@@ -362,25 +362,35 @@ const servicesByEndpointType = {
     }),
   },
   [endpointTypes.fietspaaltjes]: {
-    mapDetail: (result) => ({
-      title: categoryLabels.fietspaaltje.singular,
-      subTitle: result.id,
-      items: [
-        { label: 'Type', value: result.type.join(', ') },
-        { label: 'Noodzaak', value: result.noodzaak.join(', ') },
-        { label: 'Uiterlijk', value: result.uiterlijk.join(', ') },
-        { label: 'Omschrijving', value: result.soortPaaltje.join(', ') },
-        { label: 'Ruimte', value: result.ruimte.join(', ') },
-        { label: 'Markering', value: result.markering.join(', ') },
-        { label: 'Soort weg', value: result.soortWeg.join(', ') },
-        { label: 'Status', value: result.paaltjesWeg.join(', ') },
-        { label: 'Zichtbaarheid', value: result.zichtInDonker.join(', ') },
-        { label: 'Locatie', value: result.at },
-        { label: 'Straat', value: result.street },
-        { label: 'Gebied', value: result.area },
-        { label: 'Aantal', value: result.count },
-      ],
-    }),
+    mapDetail: (result) => {
+      function formatList(items) {
+        if (items instanceof Array) {
+          return items.join(', ')
+        }
+
+        return items
+      }
+
+      return {
+        title: categoryLabels.fietspaaltje.singular,
+        subTitle: result.id,
+        items: [
+          { label: 'Type', value: formatList(result.type) },
+          { label: 'Noodzaak', value: formatList(result.noodzaak) },
+          { label: 'Uiterlijk', value: formatList(result.uiterlijk) },
+          { label: 'Omschrijving', value: formatList(result.soortPaaltje) },
+          { label: 'Ruimte', value: formatList(result.ruimte) },
+          { label: 'Markering', value: formatList(result.markering) },
+          { label: 'Soort weg', value: formatList(result.soortWeg) },
+          { label: 'Status', value: formatList(result.paaltjesWeg) },
+          { label: 'Zichtbaarheid', value: formatList(result.zichtInDonker) },
+          { label: 'Locatie', value: result.at },
+          { label: 'Straat', value: result.street },
+          { label: 'Gebied', value: result.area },
+          { label: 'Aantal', value: result.count },
+        ],
+      }
+    },
   },
   [endpointTypes.evenementen]: {
     normalization: evenementen,
