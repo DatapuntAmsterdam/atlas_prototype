@@ -8,7 +8,7 @@ pipeline {
     COMMIT_HASH = GIT_COMMIT.substring(0, 8)
     PROJECT_PREFIX = "${BRANCH_NAME}_${COMMIT_HASH}_${BUILD_NUMBER}_"
 
-    IMAGE_FRONTEND_BASE = "repo.data.amsterdam.nl/atlas/app"
+    IMAGE_FRONTEND_BASE = "docker-registry.data.amsterdam.nl/atlas/app"
     IMAGE_FRONTEND_BUILD = "${IMAGE_FRONTEND_BASE}:${BUILD_NUMBER}"
     IMAGE_FRONTEND_ACCEPTANCE = "${IMAGE_FRONTEND_BASE}:acceptance"
     IMAGE_FRONTEND_PRODUCTION = "${IMAGE_FRONTEND_BASE}:production"
