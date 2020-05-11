@@ -13,7 +13,6 @@ export default {
   PANORAMA_TAGS: 'tags',
   PITCH: 'pitch',
   FILTERS: 'filters',
-  SEARCH_FILTERS: 'zoek-filters',
   DETAIL_REFERENCE: 'detail-ref',
   PAGE_REFERENCE: 'page-ref',
   EMBED_PREVIEW: 'embed-preview',
