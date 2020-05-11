@@ -97,7 +97,7 @@ pipeline {
     // }
 
     stage('Build A') {
-      when { expression { BRANCH_NAME ==~ /(master|develop)/ } }
+      when { expression { BRANCH_NAME ==~ /(master|develop|new_registry)/ } }
       options {
         timeout(time: 30, unit: 'MINUTES')
       }
