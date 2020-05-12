@@ -22,7 +22,7 @@ import { getDetailLocation } from '../../../store/redux-first-router/selectors'
 import {
   toMapAndPreserveQuery,
   toPanoramaAndPreserveQuery,
-  toDataDetailPage,
+  toDataDetail,
 } from '../../../store/redux-first-router/actions'
 import { isGeoSearch } from '../../../shared/ducks/selection/selection'
 import { setViewMode } from '../../../shared/ducks/ui/ui'
@@ -100,7 +100,7 @@ describe('MapPreviewPanelContainer', () => {
     getMapDetail.mockImplementation(() => ({ type: FETCH_MAP_DETAIL_REQUEST }))
     getDetailLocation.mockImplementation(() => ['123', '321'])
     toPanoramaAndPreserveQuery.mockImplementation(() => ({ type: 'sometype' }))
-    toDataDetailPage.mockImplementation(() => ({ type: 'sometype' }))
+    toDataDetail.mockImplementation(() => ({ type: 'sometype' }))
     toMapAndPreserveQuery.mockImplementation(() => ({ type: 'sometype' }))
     setViewMode.mockImplementation(() => ({ type: 'sometype' }))
     fetchPanoramaPreview.mockImplementation(() => ({

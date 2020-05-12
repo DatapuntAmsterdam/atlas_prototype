@@ -35,6 +35,7 @@ const toSearchOfType = (type) => (
 
 export const toDataDetail = (detailReference, additionalParams = null, tracking = true) => {
   const [id, type, subtype] = detailReference
+
   return preserveQuery(
     {
       type: routing.dataDetail.type,
@@ -163,11 +164,6 @@ export const toDetailFromEndpoint = (endpoint, view) => {
     [PARAMETERS.VIEW]: view,
   })
 }
-
-export const toDataDetailPage = ({ type, subtype, id }, view) =>
-  toDataDetail([id, type, subtype], {
-    [PARAMETERS.VIEW]: view,
-  })
 
 export const toConstructionFilesFromEndpoint = (endpoint) => {
   const { id } = getDetailPageData(endpoint)

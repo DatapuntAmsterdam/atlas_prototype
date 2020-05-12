@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  toDataDetailPage,
+  toDataDetail,
   toPanoramaAndPreserveQuery,
   toMapAndPreserveQuery,
   toDetailFromEndpoint,
@@ -22,6 +22,7 @@ import {
   isSearchLoading,
 } from '../../../shared/ducks/data-search/selectors'
 import { getPanoramaPreview } from '../../../panorama/ducks/preview/panorama-preview'
+import PARAMETERS from '../../../store/parameters'
 
 const mapStateToProps = (state) => ({
   panoPreview: getPanoramaPreview(state),
@@ -52,7 +53,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch,
   ),
   openPreviewDetail: (detail) => dispatch(toDetailFromEndpoint(detail, VIEW_MODE.MAP)),
-  openDetail: (detail) => dispatch(toDataDetailPage(detail, VIEW_MODE.SPLIT)),
+  openDetail: ({ id, type, subtype }) =>
+    dispatch(
+      toDataDetail([id, type, subtype], {
+        [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
+        [PARAMETERS.LEGEND]: false,
+      }),
+    ),
 })
 
 /* eslint-enable react/no-unused-prop-types */
