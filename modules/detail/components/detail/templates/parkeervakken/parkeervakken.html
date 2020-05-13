@@ -1,16 +1,29 @@
+<div>
+  <div class="c-detail__block">
+    <dp-glossary-header heading="{{ vm.apiData.results.subTitle }}" definition="PARKEERVAKKEN">
+    </dp-glossary-header>
 
-<div class="detail-page__content--main">
-    <div class="c-detail__block">
-        <dp-glossary-header heading="{{vm.apiData.results.id}}" definition="PARKEERVAKKEN">
-        </dp-glossary-header>
+    <dl class="c-key-value-list u-margin__bottom--2">
+      <div class="c-key-value-item" ng-repeat="item in vm.apiData.results.items" ng-if="item.type === 'default' && item.value">
+        <dt>{{ item.label }}</dt>
+        <dd>{{ item.value }}</dd>
+      </div>
+    </dl>
 
-        <dl class="c-key-value-list">
-            <dt>Straatnaam</dt>
-            <dd>{{ vm.apiData.results.straatnaam }}</dd>
-            <dt>Type</dt>
-            <dd>{{ vm.apiData.results.e_type_desc }}</dd>
-            <dt>Bord</dt>
-            <dd>{{ vm.apiData.results.bord }}</dd>
-        </dl>
+    <div class="u-margin__bottom--2" ng-repeat="item in vm.apiData.results.items" ng-if="item.type === 'table' && item.values.length > 0">
+      <h3 class="o-header__subtitle qa-subtitle u-margin__bottom--1" ng-if="item.label">
+        {{ item.label }}
+      </h3>
+      <table class="c-table">
+        <tr class="c-table__header-row">
+          <th class="c-table__field c-table__header-field" ng-repeat="heading in item.headings" >
+            {{ heading.label }}
+          </th>
+        </tr>
+        <tr class="c-table__content-row" ng-repeat="value in item.values">
+          <td class="c-table__field c-table__content-field" ng-repeat="heading in item.headings">{{ value[heading.key] }}</td>
+        </tr>
+      </table>
     </div>
+  </div>
 </div>

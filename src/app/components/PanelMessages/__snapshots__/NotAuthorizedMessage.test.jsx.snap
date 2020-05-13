@@ -2,9 +2,6 @@
 
 exports[`NotAuthorizedMessage should render everything 1`] = `
 <Notification
-  canClose={true}
-  className=""
-  level="info"
   type="warning"
 >
   <div>

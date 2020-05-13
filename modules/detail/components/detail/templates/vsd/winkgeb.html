@@ -13,7 +13,7 @@
     </dp-panel>
 
     <dl class="c-key-value-list">
-      <div class="c-key-value-item" ng-repeat="item in vm.apiData.results.items">
+      <div class="c-key-value-item" ng-repeat="item in vm.apiData.results.items" ng-if="item.value">
         <dt>{{ item.label }}</dt>
         <dd>{{ item.value }}</dd>
       </div>

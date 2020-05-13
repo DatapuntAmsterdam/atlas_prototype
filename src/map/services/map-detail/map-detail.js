@@ -15,6 +15,7 @@ export const pageEndpointTypeMapping = {
   'explosieven/verdachtgebied/': 'milieuthemas/explosieven/verdachtgebied/',
   'fietspaaltjes/fietspaaltjes/': 'v1/fietspaaltjes/fietspaaltjes/',
   'grex/projecten/': 'v1/grex/projecten/',
+  'parkeervakken/parkeervakken/': 'v1/parkeervakken/parkeervakken/',
 }
 
 export const pageTypeToEndpoint = (type, subtype, id) => {

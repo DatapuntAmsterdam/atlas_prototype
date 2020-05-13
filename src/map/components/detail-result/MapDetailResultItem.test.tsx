@@ -1,71 +1,77 @@
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
+import { DetailResultItem, DetailResultItemType } from '../../types/details'
 import MapDetailResultItem from './MapDetailResultItem'
 
 describe('MapDetailResultItem', () => {
   let component
-  let props
+  let item: DetailResultItem
 
   afterEach(() => {
     jest.resetAllMocks()
   })
 
   it('should display the item', () => {
-    props = {
+    item = {
+      type: DetailResultItemType.Default,
       label: 'label',
       value: 'value',
     }
 
-    component = shallow(<MapDetailResultItem {...props} />)
+    component = shallow(<MapDetailResultItem item={item} />)
 
     expect(component.find('li').exists()).toBeTruthy()
   })
 
   it('should not display the item without value', () => {
-    props = {
+    item = {
+      type: DetailResultItemType.Default,
       label: 'label',
     }
 
-    component = shallow(<MapDetailResultItem {...props} />)
+    component = shallow(<MapDetailResultItem item={item} />)
 
     expect(component.find('li').exists()).toBeFalsy()
   })
 
   it('should display the item with a multiline', () => {
-    props = {
+    item = {
+      type: DetailResultItemType.Default,
       label: 'label',
       value: 'value',
-      hasMultiline: true,
+      multiLine: true,
     }
 
-    component = shallow(<MapDetailResultItem {...props} />)
+    component = shallow(<MapDetailResultItem item={item} />)
 
     expect(component.find('.map-detail-result__item-value--multiline').exists()).toBeTruthy()
   })
 
   it('should display the item with a status', () => {
-    props = {
+    item = {
+      type: DetailResultItemType.Default,
       label: 'label',
       value: 'value',
       status: 'foo',
     }
 
-    component = shallow(<MapDetailResultItem {...props} />)
+    component = shallow(<MapDetailResultItem item={item} />)
 
-    expect(component.find(`.map-detail-result__item-value--${props.status}`).exists()).toBeTruthy()
+    expect(component.find(`.map-detail-result__item-value--${item.status}`).exists()).toBeTruthy()
   })
 
   it('should make the item clickable', () => {
-    props = {
+    item = {
+      type: DetailResultItemType.Default,
       label: 'label',
       value: 'value',
       link: 'foo',
     }
 
-    component = shallow(<MapDetailResultItem {...props} />)
+    component = shallow(<MapDetailResultItem item={item} />)
 
     expect(component.find('a').exists()).toBeTruthy()
-    expect(component.find('a').props().children).toBe(props.value)
-    expect(component.find('a').props().href).toBe(props.link)
+    expect(component.find('a').props().children).toBe(item.value)
+    expect(component.find('a').props().href).toBe(item.link)
   })
 })

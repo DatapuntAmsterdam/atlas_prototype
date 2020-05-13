@@ -2,12 +2,7 @@
 
 exports[`Notification should add the notification level as class name 1`] = `
 <div
-  className="
-        
-        notification
-        notification--alert
-        qa-notification
-      "
+  className=" notification notification--alert qa-notification"
 >
   <span
     className="notification__content"
@@ -28,12 +23,7 @@ exports[`Notification should add the notification level as class name 1`] = `
 
 exports[`Notification should be able to render \`a\` elements 1`] = `
 <div
-  className="
-        
-        notification
-        notification--info
-        qa-notification
-      "
+  className=" notification notification--info qa-notification"
 >
   <span
     className="notification__content"
@@ -58,12 +48,7 @@ exports[`Notification should be able to render \`a\` elements 1`] = `
 
 exports[`Notification should not show the close button for the message level 1`] = `
 <div
-  className="
-        
-        notification
-        notification--message
-        qa-notification
-      "
+  className=" notification notification--message qa-notification"
 >
   <span
     className="notification__content"
@@ -75,12 +60,7 @@ exports[`Notification should not show the close button for the message level 1`]
 
 exports[`Notification should not show the close button when disabled 1`] = `
 <div
-  className="
-        
-        notification
-        notification--info
-        qa-notification
-      "
+  className=" notification notification--info qa-notification"
 >
   <span
     className="notification__content"
@@ -92,12 +72,7 @@ exports[`Notification should not show the close button when disabled 1`] = `
 
 exports[`Notification should render the provided message 1`] = `
 <div
-  className="
-        
-        notification
-        notification--info
-        qa-notification
-      "
+  className=" notification notification--info qa-notification"
 >
   <span
     className="notification__content"

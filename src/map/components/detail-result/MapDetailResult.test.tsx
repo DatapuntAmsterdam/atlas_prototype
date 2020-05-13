@@ -1,5 +1,6 @@
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
+import { DetailResult, DetailResultItemType } from '../../types/details'
 import MapDetailResult from './MapDetailResult'
 
 describe('MapDetailResult', () => {
@@ -18,7 +19,7 @@ describe('MapDetailResult', () => {
 
     component = shallow(
       <MapDetailResult
-        result={result}
+        result={(result as unknown) as DetailResult}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
@@ -36,7 +37,7 @@ describe('MapDetailResult', () => {
 
     component = shallow(
       <MapDetailResult
-        result={result}
+        result={(result as unknown) as DetailResult}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
@@ -51,6 +52,7 @@ describe('MapDetailResult', () => {
       notifications: [],
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'label',
           value: 'value',
         },
@@ -59,7 +61,7 @@ describe('MapDetailResult', () => {
 
     component = shallow(
       <MapDetailResult
-        result={result}
+        result={(result as unknown) as DetailResult}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
@@ -74,6 +76,7 @@ describe('MapDetailResult', () => {
       notifications: [],
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'label',
           value: false,
         },
@@ -82,7 +85,7 @@ describe('MapDetailResult', () => {
 
     component = shallow(
       <MapDetailResult
-        result={result}
+        result={(result as unknown) as DetailResult}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
@@ -97,9 +100,11 @@ describe('MapDetailResult', () => {
       notifications: [],
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'label',
           value: [
             {
+              type: DetailResultItemType.Default,
               label: 'sublabel',
               value: 'value',
             },
@@ -110,7 +115,7 @@ describe('MapDetailResult', () => {
 
     component = shallow(
       <MapDetailResult
-        result={result}
+        result={(result as unknown) as DetailResult}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}

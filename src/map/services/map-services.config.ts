@@ -1,3 +1,4 @@
+import { DetailResult, DetailResultItemType } from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
 import categoryLabels from './map-search/category-labels'
 import {
@@ -63,18 +64,26 @@ export const endpointTypes = {
   woonplaats: 'bag/v1.1/woonplaats',
 }
 
-const servicesByEndpointType = {
+export interface ServiceDefinition {
+  authScope?: string
+  normalization?: (result: any) => any
+  mapDetail: (result: any) => DetailResult
+}
+
+const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.adressenLigplaats]: {
     mapDetail: (result) => ({
       title: 'Adres (ligplaats)',
       subTitle: result._display,
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'Indicatie geconstateerd',
           value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
           status: result.indicatie_geconstateerd ? 'alert' : '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Aanduiding in onderzoek',
           value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
           status: result.aanduiding_in_onderzoek ? 'alert' : '',
@@ -99,35 +108,42 @@ const servicesByEndpointType = {
       subTitle: result._display,
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'Gebruiksdoel',
           value: result.verblijfsobject ? result.verblijfsobject.gebruiksdoelen : false,
           multiLine: true,
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Soort object (feitelijk gebruik)',
           value: result.verblijfsobject ? result.verblijfsobject.gebruik : false,
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Status',
           value: result.verblijfsobject ? result.verblijfsobject.status : false,
           status: result.verblijfsobject && result.verblijfsobject.statusLevel,
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Type adres',
           value: result.type_adres,
           status: result.isNevenadres ? 'info' : '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Indicatie geconstateerd',
           value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
           status: result.indicatie_geconstateerd ? 'alert' : '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Aanduiding in onderzoek',
           value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
           status: result.aanduiding_in_onderzoek ? 'alert' : '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Oppervlakte',
           value: result.verblijfsobject ? result.verblijfsobject.size : false,
         },
@@ -162,53 +178,64 @@ const servicesByEndpointType = {
       subTitle: result._display,
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'Gebruiksdoel',
           value: result.gebruiksdoelen,
           multiLine: true,
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Soort object (feitelijk gebruik)',
           value: result.gebruik || '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Status',
           value: result.status ? result.status : false,
           status: result.statusLevel,
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Type adres',
           value: result.typeAdres,
           status: result.isNevenadres ? 'info' : '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Indicatie geconstateerd',
           value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
           status: result.indicatie_geconstateerd ? 'alert' : '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Aanduiding in onderzoek',
           value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
           status: result.aanduiding_in_onderzoek ? 'alert' : '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Oppervlakte',
           value: result.size,
         },
       ],
       notifications: [
         {
+          type: DetailResultItemType.Default,
           value: result.statusLevel ? `Status: ${result.status}` : false,
           level: result.statusLevel,
         },
         {
+          type: DetailResultItemType.Default,
           value: result.isNevenadres ? 'Dit is een nevenadres' : false,
           level: 'info',
         },
         {
+          type: DetailResultItemType.Default,
           value: result.indicatie_geconstateerd ? 'Indicatie geconstateerd' : false,
           level: 'alert',
         },
         {
+          type: DetailResultItemType.Default,
           value: result.aanduiding_in_onderzoek ? 'In onderzoek' : false,
           level: 'alert',
         },
@@ -219,7 +246,13 @@ const servicesByEndpointType = {
     mapDetail: (result) => ({
       title: result.type,
       subTitle: result._display,
-      items: [{ label: 'Naam 24-posities (NEN)', value: result.naam_24_posities }],
+      items: [
+        {
+          type: DetailResultItemType.Default,
+          label: 'Naam 24-posities (NEN)',
+          value: result.naam_24_posities,
+        },
+      ],
     }),
   },
   [endpointTypes.adressenPand]: {
@@ -229,14 +262,17 @@ const servicesByEndpointType = {
       subTitle: result._display,
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'Oorspronkelijk bouwjaar',
           value: result.year,
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Naam',
           value: result.pandnaam,
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Status',
           value: result.status ? result.status : false,
           status: result.statusLevel,
@@ -256,11 +292,13 @@ const servicesByEndpointType = {
       subTitle: result._display,
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'Indicatie geconstateerd',
           value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
           status: result.indicatie_geconstateerd ? 'alert' : '',
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Aanduiding in onderzoek',
           value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
           status: result.aanduiding_in_onderzoek ? 'alert' : '',
@@ -283,10 +321,22 @@ const servicesByEndpointType = {
       title: categoryLabels.bedrijfsinvesteringszone.singular,
       subTitle: result._display,
       items: [
-        { label: 'Type', value: result.biz_type },
-        { label: 'Heffingsgrondslag', value: result.heffingsgrondslag },
-        { label: 'Jaarlijkse heffing', value: result.heffing_display },
-        { label: 'Aantal heffingsplichtigen', value: result.bijdrageplichtigen },
+        { type: DetailResultItemType.Default, label: 'Type', value: result.biz_type },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Heffingsgrondslag',
+          value: result.heffingsgrondslag,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Jaarlijkse heffing',
+          value: result.heffing_display,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Aantal heffingsplichtigen',
+          value: result.bijdrageplichtigen,
+        },
       ],
     }),
   },
@@ -296,11 +346,21 @@ const servicesByEndpointType = {
       title: categoryLabels.bekendmakingen.singular,
       subTitle: result._display,
       items: [
-        { label: 'Datum', value: result.date },
-        { label: 'Categorie', value: result.categorie },
-        { label: 'Onderwerp', value: result.onderwerp },
-        { label: 'Beschrijving', value: result.beschrijving, multiLine: true },
-        { label: 'Meer informatie', value: result.url, link: result.url },
+        { type: DetailResultItemType.Default, label: 'Datum', value: result.date },
+        { type: DetailResultItemType.Default, label: 'Categorie', value: result.categorie },
+        { type: DetailResultItemType.Default, label: 'Onderwerp', value: result.onderwerp },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Beschrijving',
+          value: result.beschrijving,
+          multiLine: true,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Meer informatie',
+          value: result.url,
+          link: result.url,
+        },
       ],
     }),
   },
@@ -317,10 +377,15 @@ const servicesByEndpointType = {
       title: 'Gevrijwaard gebied',
       subTitle: result._display,
       items: [
-        { label: 'Datum rapport', value: result.date },
-        { label: 'Soort handeling', value: result.type },
-        { label: 'Bron', value: result.bron },
-        { label: 'Opmerkingen', value: result.opmerkingen, multiLine: true },
+        { type: DetailResultItemType.Default, label: 'Datum rapport', value: result.date },
+        { type: DetailResultItemType.Default, label: 'Soort handeling', value: result.type },
+        { type: DetailResultItemType.Default, label: 'Bron', value: result.bron },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Opmerkingen',
+          value: result.opmerkingen,
+          multiLine: true,
+        },
       ],
     }),
   },
@@ -330,10 +395,10 @@ const servicesByEndpointType = {
       title: 'Inslag',
       subTitle: result._display,
       items: [
-        { label: 'Datum van inslag', value: result.date },
-        { label: 'Soort handeling', value: result.type },
-        { label: 'Bron', value: result.bron, multiLine: true },
-        { label: 'Opmerkingen', value: result.opmerkingen },
+        { type: DetailResultItemType.Default, label: 'Datum van inslag', value: result.date },
+        { type: DetailResultItemType.Default, label: 'Soort handeling', value: result.type },
+        { type: DetailResultItemType.Default, label: 'Bron', value: result.bron, multiLine: true },
+        { type: DetailResultItemType.Default, label: 'Opmerkingen', value: result.opmerkingen },
       ],
     }),
   },
@@ -343,10 +408,18 @@ const servicesByEndpointType = {
       title: 'Reeds uitgevoerd CE onderzoek',
       subTitle: result._display,
       items: [
-        { label: 'Datum rapport', value: result.date },
-        { label: 'Soort rapportage', value: result.type },
-        { label: 'Onderzoeksgebied', value: result.onderzoeksgebied },
-        { label: 'Verdacht gebied', value: result.verdacht_gebied },
+        { type: DetailResultItemType.Default, label: 'Datum rapport', value: result.date },
+        { type: DetailResultItemType.Default, label: 'Soort rapportage', value: result.type },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Onderzoeksgebied',
+          value: result.onderzoeksgebied,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Verdacht gebied',
+          value: result.verdacht_gebied,
+        },
       ],
     }),
   },
@@ -355,15 +428,20 @@ const servicesByEndpointType = {
       title: 'Verdacht gebied',
       subTitle: result._display,
       items: [
-        { label: 'Hoofdgroep', value: result.type },
-        { label: 'Subsoort', value: result.subtype },
-        { label: 'Opmerkingen', value: result.opmerkingen, multiLine: true },
+        { type: DetailResultItemType.Default, label: 'Hoofdgroep', value: result.type },
+        { type: DetailResultItemType.Default, label: 'Subsoort', value: result.subtype },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Opmerkingen',
+          value: result.opmerkingen,
+          multiLine: true,
+        },
       ],
     }),
   },
   [endpointTypes.fietspaaltjes]: {
     mapDetail: (result) => {
-      function formatList(items) {
+      function formatList(items: string[] | null) {
         if (items instanceof Array) {
           return items.join(', ')
         }
@@ -375,16 +453,44 @@ const servicesByEndpointType = {
         title: categoryLabels.fietspaaltje.singular,
         subTitle: result.id,
         items: [
-          { label: 'Type', value: formatList(result.type) },
-          { label: 'Aantal', value: result.count },
-          { label: 'Noodzaak', value: formatList(result.noodzaak) },
-          { label: 'Uiterlijk', value: formatList(result.uiterlijk) },
-          { label: 'Omschrijving', value: formatList(result.soortPaaltje) },
-          { label: 'Ruimte', value: formatList(result.ruimte) },
-          { label: 'Markering', value: formatList(result.markering) },
-          { label: 'Soort weg', value: formatList(result.soortWeg) },
-          { label: 'Status', value: formatList(result.paaltjesWeg) },
-          { label: 'Zichtbaarheid', value: formatList(result.zichtInDonker) },
+          { type: DetailResultItemType.Default, label: 'Type', value: formatList(result.type) },
+          { type: DetailResultItemType.Default, label: 'Aantal', value: result.count },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Noodzaak',
+            value: formatList(result.noodzaak),
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Uiterlijk',
+            value: formatList(result.uiterlijk),
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Omschrijving',
+            value: formatList(result.soortPaaltje),
+          },
+          { type: DetailResultItemType.Default, label: 'Ruimte', value: formatList(result.ruimte) },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Markering',
+            value: formatList(result.markering),
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Soort weg',
+            value: formatList(result.soortWeg),
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Status',
+            value: formatList(result.paaltjesWeg),
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Zichtbaarheid',
+            value: formatList(result.zichtInDonker),
+          },
         ],
       }
     },
@@ -395,10 +501,15 @@ const servicesByEndpointType = {
       title: categoryLabels.evenementen.singular,
       subTitle: result.titel,
       items: [
-        { label: 'Startdatum', value: result.startDate },
-        { label: 'Einddatum', value: result.endDate },
-        { label: 'Omschrijving', value: result.omschrijving },
-        { label: 'Meer informatie', value: result.url, link: result.url },
+        { type: DetailResultItemType.Default, label: 'Startdatum', value: result.startDate },
+        { type: DetailResultItemType.Default, label: 'Einddatum', value: result.endDate },
+        { type: DetailResultItemType.Default, label: 'Omschrijving', value: result.omschrijving },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Meer informatie',
+          value: result.url,
+          link: result.url,
+        },
       ],
     }),
   },
@@ -408,9 +519,19 @@ const servicesByEndpointType = {
       title: categoryLabels.reclamebelasting.singular,
       subTitle: result._display,
       items: [
-        { label: 'Tarief per', value: result.localeDate },
-        { label: 'Website', value: result.website, link: result.website },
-        { label: 'Tarieven', value: result.tarieven, link: result.tarieven },
+        { type: DetailResultItemType.Default, label: 'Tarief per', value: result.localeDate },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Website',
+          value: result.website,
+          link: result.website,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Tarieven',
+          value: result.tarieven,
+          link: result.tarieven,
+        },
       ],
     }),
   },
@@ -425,14 +546,14 @@ const servicesByEndpointType = {
     mapDetail: (result) => ({
       title: 'Buurt',
       subTitle: result._display,
-      items: [{ label: 'Code', value: result.volledige_code }],
+      items: [{ type: DetailResultItemType.Default, label: 'Code', value: result.volledige_code }],
     }),
   },
   [endpointTypes.gebiedenGebiedsgerichtWerken]: {
     mapDetail: (result) => ({
       title: 'Gebiedsgerichtwerken-gebied',
       subTitle: result._display,
-      items: [{ label: 'Code', value: result.code }],
+      items: [{ type: DetailResultItemType.Default, label: 'Code', value: result.code }],
     }),
   },
   [endpointTypes.gebiedenGrootstedelijk]: {
@@ -446,7 +567,7 @@ const servicesByEndpointType = {
     mapDetail: (result) => ({
       title: 'Stadsdeel',
       subTitle: result._display,
-      items: [{ label: 'Code', value: result.code }],
+      items: [{ type: DetailResultItemType.Default, label: 'Code', value: result.code }],
     }),
   },
   [endpointTypes.gebiedenUnesco]: {
@@ -460,7 +581,7 @@ const servicesByEndpointType = {
     mapDetail: (result) => ({
       title: 'Wijk',
       subTitle: result._display,
-      items: [{ label: 'Code', value: result.code }],
+      items: [{ type: DetailResultItemType.Default, label: 'Code', value: result.code }],
     }),
   },
   [endpointTypes.grondexploitaties]: {
@@ -469,10 +590,14 @@ const servicesByEndpointType = {
       title: categoryLabels.grondexploitatie.singular,
       subTitle: result.plannaam,
       items: [
-        { label: 'Nummer', value: result.id },
-        { label: 'Status', value: result.planstatusFormatted },
-        { label: 'Startdatum', value: result.startdatum },
-        { label: 'Oppervlakte', value: result.oppervlakteFormatted },
+        { type: DetailResultItemType.Default, label: 'Nummer', value: result.id },
+        { type: DetailResultItemType.Default, label: 'Status', value: result.planstatusFormatted },
+        { type: DetailResultItemType.Default, label: 'Startdatum', value: result.startdatum },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Oppervlakte',
+          value: result.oppervlakteFormatted,
+        },
       ],
     }),
   },
@@ -483,14 +608,16 @@ const servicesByEndpointType = {
       subTitle: result._display,
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'Kadastrale gemeente',
           value: result.cadastralName,
         },
         {
+          type: DetailResultItemType.Default,
           label: 'Gemeente',
           value: result.name,
         },
-        { label: 'Grootte', value: result.size },
+        { type: DetailResultItemType.Default, label: 'Grootte', value: result.size },
       ],
     }),
   },
@@ -500,8 +627,8 @@ const servicesByEndpointType = {
       title: categoryLabels.meetbout.singular,
       subTitle: result.meetboutidentificatie,
       items: [
-        { label: 'Adres', value: result.adres },
-        { label: 'Zaksnelheid (mm/j)', value: result.speed },
+        { type: DetailResultItemType.Default, label: 'Adres', value: result.adres },
+        { type: DetailResultItemType.Default, label: 'Zaksnelheid (mm/j)', value: result.speed },
       ],
     }),
   },
@@ -511,9 +638,9 @@ const servicesByEndpointType = {
       title: categoryLabels.monument.singular,
       subTitle: result._display,
       items: [
-        { label: 'Nummer', value: result.monumentnummer },
-        { label: 'Type', value: result.monumenttype },
-        { label: 'Status', value: result.monumentstatus },
+        { type: DetailResultItemType.Default, label: 'Nummer', value: result.monumentnummer },
+        { type: DetailResultItemType.Default, label: 'Type', value: result.monumenttype },
+        { type: DetailResultItemType.Default, label: 'Status', value: result.monumentstatus },
       ],
     }),
   },
@@ -523,9 +650,9 @@ const servicesByEndpointType = {
       title: categoryLabels.monument.singular,
       subTitle: result._display,
       items: [
-        { label: 'Nummer', value: result.monumentnummer },
-        { label: 'Type', value: result.monumenttype },
-        { label: 'Status', value: result.monumentstatus },
+        { type: DetailResultItemType.Default, label: 'Nummer', value: result.monumentnummer },
+        { type: DetailResultItemType.Default, label: 'Type', value: result.monumenttype },
+        { type: DetailResultItemType.Default, label: 'Status', value: result.monumentstatus },
       ],
     }),
   },
@@ -535,10 +662,19 @@ const servicesByEndpointType = {
       title: categoryLabels.napPeilmerk.singular,
       subTitle: result.peilmerkidentificatie,
       items: [
-        { label: 'Hoogte NAP', value: result.height },
-        { label: 'Omschrijving', value: result.omschrijving, multiLine: true },
-        { label: 'Windrichting', value: result.windrichting },
-        { label: 'Muurvlakcoördinaten (cm)', value: result.wallCoordinates },
+        { type: DetailResultItemType.Default, label: 'Hoogte NAP', value: result.height },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Omschrijving',
+          value: result.omschrijving,
+          multiLine: true,
+        },
+        { type: DetailResultItemType.Default, label: 'Windrichting', value: result.windrichting },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Muurvlakcoördinaten (cm)',
+          value: result.wallCoordinates,
+        },
       ],
     }),
   },
@@ -548,23 +684,47 @@ const servicesByEndpointType = {
       title: categoryLabels.oplaadpunten.singular,
       subTitle: result._display,
       items: [
-        { label: 'Adres', value: result.address },
-        { label: 'Aantal', value: result.quantity },
-        { label: 'Soort', value: result.type },
-        { label: 'Capaciteit', value: result.charging_capability },
-        { label: 'Connectortype', value: result.connector_type },
-        { label: 'Status', value: result.currentStatus },
+        { type: DetailResultItemType.Default, label: 'Adres', value: result.address },
+        { type: DetailResultItemType.Default, label: 'Aantal', value: result.quantity },
+        { type: DetailResultItemType.Default, label: 'Soort', value: result.type },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Capaciteit',
+          value: result.charging_capability,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Connectortype',
+          value: result.connector_type,
+        },
+        { type: DetailResultItemType.Default, label: 'Status', value: result.currentStatus },
       ],
     }),
   },
   [endpointTypes.parkeervak]: {
+    normalization(result) {
+      // TODO: Temporary fix, can be removed once 'geom' has been renamed to 'geometry' in the API response.
+      return { ...result, geometry: result.geometry ?? result.geom }
+    },
     mapDetail: (result) => ({
       title: categoryLabels.parkeervak.singular,
       subTitle: result.id,
       items: [
-        { label: 'Straat', value: result.straatnaam },
-        { label: 'Type', value: result.e_type_desc },
-        { label: 'Bord', value: result.bord },
+        { type: DetailResultItemType.Default, label: 'Straat', value: result.straatnaam },
+        {
+          type: DetailResultItemType.Table,
+          label: 'Regimes',
+          headings: [
+            { label: 'Dagen', key: 'dagen' },
+            { label: 'Tijdstip', key: 'tijdstip' },
+            { label: 'Bord', key: 'bord' },
+          ],
+          values: result.regimes.map((regime: any) => ({
+            ...regime,
+            tijdstip: `${regime.beginTijd} - ${regime.eindTijd}`,
+            dagen: regime.dagen.join(', '),
+          })),
+        },
       ],
     }),
   },
@@ -573,7 +733,14 @@ const servicesByEndpointType = {
     mapDetail: (result) => ({
       title: categoryLabels.parkeerzones.singular,
       subTitle: result._display,
-      items: [{ label: 'Omschrijving', value: result.gebied_omschrijving, multiLine: true }],
+      items: [
+        {
+          type: DetailResultItemType.Default,
+          label: 'Omschrijving',
+          value: result.gebied_omschrijving,
+          multiLine: true,
+        },
+      ],
     }),
   },
   [endpointTypes.parkeerzonesUitz]: {
@@ -581,7 +748,14 @@ const servicesByEndpointType = {
     mapDetail: (result) => ({
       title: categoryLabels.parkeerzonesUitz.singular,
       subTitle: result._display,
-      items: [{ label: 'Omschrijving', value: result.omschrijving, multiLine: true }],
+      items: [
+        {
+          type: DetailResultItemType.Default,
+          label: 'Omschrijving',
+          value: result.omschrijving,
+          multiLine: true,
+        },
+      ],
     }),
   },
   [endpointTypes.vastgoed]: {
@@ -590,9 +764,13 @@ const servicesByEndpointType = {
       title: 'Gemeentelijk eigendom',
       subTitle: result._display,
       items: [
-        { label: 'Bouwjaar', value: result.construction_year },
-        { label: 'Monumentstatus', value: result.monumental_status },
-        { label: 'Status', value: result.status },
+        { type: DetailResultItemType.Default, label: 'Bouwjaar', value: result.construction_year },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Monumentstatus',
+          value: result.monumental_status,
+        },
+        { type: DetailResultItemType.Default, label: 'Status', value: result.status },
       ],
     }),
   },
@@ -606,28 +784,34 @@ const servicesByEndpointType = {
             subTitle: result._display,
             items: [
               {
+                type: DetailResultItemType.Default,
                 label: 'KvK-nummer',
                 value: result.kvkNumber,
               },
               {
+                type: DetailResultItemType.Default,
                 label: 'Vestigingsnummer',
                 value: result.vestigingsnummer,
               },
               {
+                type: DetailResultItemType.Default,
                 label: 'Bezoekadres',
                 value: result.bezoekadres.volledig_adres,
                 multiLine: true,
               },
               {
+                type: DetailResultItemType.Default,
                 label: 'SBI-code en -omschrijving',
                 value: result.activities,
                 multiLine: true,
               },
               {
+                type: DetailResultItemType.Default,
                 label: 'Type',
                 value: result.type,
               },
               {
+                type: DetailResultItemType.Default,
                 label: 'Soort bijzondere rechtstoestand',
                 value:
                   result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label
@@ -677,6 +861,7 @@ const servicesByEndpointType = {
       ],
       items: [
         {
+          type: DetailResultItemType.Default,
           label: 'Categorie',
           value: result.categorie_naam ? `${result.categorie_naam} (${result.categorie})` : false, // check where to normalize
         },

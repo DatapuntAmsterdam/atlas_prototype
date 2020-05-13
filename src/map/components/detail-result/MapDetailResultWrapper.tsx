@@ -1,9 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { isEmbedded } from '../../../shared/ducks/ui/ui'
 
-const MapDetailResultWrapper = ({
+export interface MapDetailResultWrapperProps {
+  panoUrl?: string
+  title: string
+  subTitle?: string
+  onMaximize: () => void
+  onPanoPreviewClick: () => void
+  children: React.ReactNode
+  isEmbed: boolean
+}
+
+const MapDetailResultWrapper: React.FC<MapDetailResultWrapperProps> = ({
   children,
   panoUrl,
   subTitle,
@@ -42,7 +51,7 @@ const MapDetailResultWrapper = ({
       </button>
     </header>
     <div className="map-detail-result__scroll-wrapper">
-      {children && [children]}
+      {children}
       <footer className="map-search-results__footer">
         <button
           type="button"
@@ -63,24 +72,9 @@ const MapDetailResultWrapper = ({
   </section>
 )
 
-MapDetailResultWrapper.defaultProps = {
-  children: null,
-  subTitle: '',
-  onPanoPreviewClick: /* istanbul ignore next */ () => null,
-}
-
-MapDetailResultWrapper.propTypes = {
-  children: PropTypes.element,
-  isEmbed: PropTypes.bool.isRequired,
-  panoUrl: PropTypes.string.isRequired,
-  subTitle: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  onMaximize: PropTypes.func.isRequired,
-  onPanoPreviewClick: PropTypes.func,
-}
-
-const mapStateToProps = (state) => ({
+// TODO: Replace 'any' type with 'RootState' type once store is fully typed.
+const mapStateToProps = (state: any) => ({
   isEmbed: isEmbedded(state),
 })
 
-export default connect(mapStateToProps, null)(MapDetailResultWrapper)
+export default connect(mapStateToProps)(MapDetailResultWrapper)

@@ -4,7 +4,7 @@
     </dp-glossary-header>
 
     <dl class="c-key-value-list">
-      <div class="c-key-value-item" ng-repeat="item in vm.apiData.results.items">
+      <div class="c-key-value-item" ng-repeat="item in vm.apiData.results.items" ng-if="item.value">
         <dt ng-if="$index < 4">{{ item.label }}</dt>
         <dd ng-if="$index < 4">{{ item.value }}</dd>
       </div>
