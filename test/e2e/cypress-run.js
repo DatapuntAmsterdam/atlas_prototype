@@ -27,7 +27,7 @@ function formatDuration(duration) {
   return `${hours}:${minutes}:${seconds}`
 }
 
-return glob(`${SCRIPTS_FOLDER}/**/*`, {
+return glob(`${SCRIPTS_FOLDER}/permissions-employee_spec.js`, {
   nodir: true,
   realpath: true,
 })

@@ -12,38 +12,20 @@ services:
       context: .
       target: build-deps
     environment:
-    - NODE_ENV=development
+      - NODE_ENV=development
     command: npm run test
 
-  # test-e2e:
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: ./test/e2e/
-  #   links:
-  #     - atlas:acc.data.amsterdam.nl
-  #   environment:
-  #     # Note that baseUrl must be formatted so
-  #     # calls to API pass CORS check!
-  #     - CYPRESS_baseUrl=https://acc.data.amsterdam.nl
-  #     - USERNAME_EMPLOYEE
-  #     - USERNAME_EMPLOYEE_PLUS
-  #     - PASSWORD_EMPLOYEE
-  #     - PASSWORD_EMPLOYEE_PLUS
-  #   command: npm run test-e2e
-
-  test-e2e-aria:
+  test-e2e:
     build:
       dockerfile: Dockerfile
-      context: ./test/aria/
-    links:
-      - atlas:atlas
+      context: ./test/e2e/
     environment:
-      - BASE_URL=http://atlas:80
+      - API_ROOT=https://api.acc.data.amsterdam.nl
       - USERNAME_EMPLOYEE
       - USERNAME_EMPLOYEE_PLUS
       - PASSWORD_EMPLOYEE
       - PASSWORD_EMPLOYEE_PLUS
-    command: ./test-e2e-aria.sh
+    command: npm start
 
   # test-health-checks:
   #   image: repo.data.amsterdam.nl/datapunt/atlas-health-checks:latest

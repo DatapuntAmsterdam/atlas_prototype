@@ -1,5 +1,119 @@
-import { routing } from '../../../../src/app/routes'
-import PARAMETERS from '../../../../src/store/parameters'
+const MAIN_PATHS = {
+  ARTICLES: 'artikelen',
+  DATA: 'data',
+  DATASETS: 'datasets',
+  CONTENT: 'content',
+  PUBLICATIONS: 'publicaties',
+  SPECIALS: 'specials',
+  COLLECTIONS: 'dossiers',
+  MAP: 'kaarten',
+}
+
+const routing = {
+  home: {
+    path: '/',
+  },
+  data: {
+    path: `/${MAIN_PATHS.DATA}/`,
+  },
+  addresses: {
+    path: `/${MAIN_PATHS.DATA}/bag/adressen/`,
+  },
+  establishments: {
+    path: `/${MAIN_PATHS.DATA}/hr/vestigingen/`,
+  },
+  cadastralObjects: {
+    path: `/${MAIN_PATHS.DATA}/brk/kadastrale-objecten/`,
+  },
+  datasetSearch: {
+    path: `/${MAIN_PATHS.DATASETS}/zoek/`,
+  },
+  datasetDetail: {
+    path: `/${MAIN_PATHS.DATASETS}/:id/:slug*/`, // slug here is optional by appending "*"
+  },
+  search: {
+    path: `/zoek/`,
+  },
+  dataSearch: {
+    path: `/${MAIN_PATHS.DATA}/zoek/`,
+  },
+  dataSearchGeo: {
+    path: `/${MAIN_PATHS.DATA}/geozoek/`,
+  },
+  panorama: {
+    path: `/${MAIN_PATHS.DATA}/panorama/:id/`,
+  },
+  constructionFile: {
+    path: `/${MAIN_PATHS.DATA}/stadsarchief/bouwdossier/:id/`,
+  },
+  actuality: {
+    path: `/${MAIN_PATHS.CONTENT}/actualiteit/`,
+  },
+  inloggen: {
+    path: `/${MAIN_PATHS.CONTENT}/inloggen/`,
+  },
+  niet_gevonden: {
+    path: '/niet-gevonden/',
+  },
+  dataDetail: {
+    path: `/${MAIN_PATHS.DATA}/:type/:subtype/:id/`,
+  },
+  articleDetail: {
+    path: `/${MAIN_PATHS.ARTICLES}/artikel/:slug/:id/`,
+  },
+  articleSearch: {
+    path: `/${MAIN_PATHS.ARTICLES}/zoek/`,
+  },
+  specialSearch: {
+    path: `/${MAIN_PATHS.SPECIALS}/zoek/`,
+  },
+  publicationDetail: {
+    path: `/${MAIN_PATHS.PUBLICATIONS}/publicatie/:slug/:id/`,
+  },
+  publicationSearch: {
+    path: `/${MAIN_PATHS.PUBLICATIONS}/zoek/`,
+  },
+  specialDetail: {
+    path: `/${MAIN_PATHS.SPECIALS}/:type/:slug/:id/`,
+  },
+  collectionDetail: {
+    path: `/${MAIN_PATHS.COLLECTIONS}/dossier/:slug/:id/`,
+  },
+  collectionSearch: {
+    path: `/${MAIN_PATHS.COLLECTIONS}/zoek/`,
+  },
+  mapSearch: {
+    path: `/${MAIN_PATHS.MAP}/zoek/`,
+  },
+}
+const PARAMETERS = {
+  QUERY: 'term',
+  SORT: 'sortering',
+  MAP_BACKGROUND: 'achtergrond',
+  PAGE: 'pagina',
+  GEO: 'geo',
+  VIEW: 'modus',
+  CATEGORY: 'categorie',
+  VIEW_CENTER: 'center',
+  ZOOM: 'zoom',
+  LEGEND: 'legenda',
+  HEADING: 'heading',
+  PANORAMA_TAGS: 'tags',
+  PITCH: 'pitch',
+  FILTERS: 'filters',
+  DETAIL_REFERENCE: 'detail-ref',
+  PAGE_REFERENCE: 'page-ref',
+  EMBED_PREVIEW: 'embed-preview',
+  EMBED: 'embed',
+  PRINT: 'print',
+  LAYERS: 'lagen',
+  LOCATION: 'locatie',
+  FILE: 'bestand',
+  FILE_URL: 'bestandUrl',
+  MARKER: 'marker',
+  MARKER_ICON: 'marker-icon',
+  MAP_LINK: 'map-link',
+}
 
 const { VIEW, VIEW_CENTER, LEGEND, ZOOM, LOCATION } = PARAMETERS
 

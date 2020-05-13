@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost:3000",
+  "baseUrl": "https://acc.data.amsterdam.nl",
   "fixturesFolder": "cypress/fixtures",
   "integrationFolder": "cypress/integration",
   "pluginsFile": "cypress/plugins/index.js",
