@@ -128,6 +128,28 @@ pipeline {
       }
     }
 
+    stage('Running E2E tests on acc') {
+      options {
+        timeout(time: 60, unit: 'MINUTES')
+      }
+      environment {
+        PROJECT                = "${PROJECT_PREFIX}e2e"
+        API_ROOT               = 'https://api.acc.data.amsterdam.nl'
+        USERNAME_EMPLOYEE      = 'atlas.employee@amsterdam.nl'
+        USERNAME_EMPLOYEE_PLUS = 'atlas.employee.plus@amsterdam.nl'
+        PASSWORD_EMPLOYEE      = credentials('PASSWORD_EMPLOYEE')
+        PASSWORD_EMPLOYEE_PLUS = credentials('PASSWORD_EMPLOYEE_PLUS')
+      }
+      steps {
+        sh "docker-compose -p ${PROJECT} up --build"
+      }
+      post {
+        always {
+           sh "docker-compose -p ${PROJECT} down -v || true"
+        }
+      }
+    }
+
     stage('Build P (Master)') {
       when { expression { BRANCH_NAME ==~ /(master|develop)/ } }
       options {
