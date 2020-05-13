@@ -85,19 +85,19 @@ export const legacyRoutes = [
 export const shortUrls = [
   {
     from: '/themakaart/taxi/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=themtaxi-bgt%3A1%7Cthemtaxi-tar%3A1%7Cthemtaxi-pvrts%3A1%7Cthemtaxi-mzt%3A1%7Cthemtaxi-oovtig%3A1%7Cthemtaxi-vezips%3A1%7Cthemtaxi-slpnb%3A1%7Cthemtaxi-slpb%3A1%7Cthemtaxi-nlpnb%3A1%7Cthemtaxi-nlpb%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=themtaxi-bgt%3A1|themtaxi-tar%3A1|themtaxi-pvrts%3A1|themtaxi-mzt%3A1|themtaxi-oovtig%3A1|themtaxi-vezips%3A1|themtaxi-slpnb%3A1|themtaxi-slpb%3A1|themtaxi-nlpnb%3A1|themtaxi-nlpb%3A1&${LEGEND}=true`,
   },
   {
     from: '/themakaart/veiligheid-en-overlast/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=veilov-oovoalg%3A1%7Cveilov-oovodlrs%3A1%7Cveilov-oovctg%3A1%7Cveilov-oovoalco%3A1%7Cveilov-oovorlv%3A1%7Cveilov-oovtig%3A1%7Cveilov-vwrk%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=veilov-oovoalg%3A1|veilov-oovodlrs%3A1|veilov-oovctg%3A1|veilov-oovoalco%3A1|veilov-oovorlv%3A1|veilov-oovtig%3A1|veilov-vwrk%3A1&${LEGEND}=true`,
   },
   {
     from: '/themakaart/logistiek/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=logistk-rtsvr%3A1%7Clogistk-pvrll%3A1%7Clogistk-mzb%3A1%7Clogistk-mvw%3A1%7Clogistk-mzva%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=logistk-rtsur%3A1%7Clogistk-rtstgs%3A1%7Clogistk-rtsgs%3A1%7Clogistk-rtsvr75%3A1%7Clogistk-pvrll%3A1%7Clogistk-mzb%3A1%7Clogistk-mvw%3A1%7Clogistk-mzva%3A1&${LEGEND}=true`,
   },
   {
     from: '/themakaart/ondergrond/',
-    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=vondrgd-aardgasbel%3A1%7Condrgd-aardgas1let%3A1%7Condrgd-aardgas100let%3A1%7Condrgd-aardgaspr106%3A1%7Condrgd-aardgas%3A1%7Condrgd-exuo%3A1%7Condrgd-exgg%3A1%7Condrgd-exvg%3A1%7Condrgd-gbhv%3A1%7Condrgd-gbep%3A1%7Condrgd-gbgg%3A1%7Condrgd-gbgs%3A1%7Condrgd-gbos%3A1%7Condrgd-gboh%3A1%7Condrgd-gbwu%3A1%7Condrgd-gbkw%3A1%7Condrgd-gbvv%3A1%7Condrgd-mvlpgst%3A1%7Condrgd-mvlpgs%3A1%7Condrgd-mvlpgtgrp%3A1%7Condrgd-mvlpgtris%3A1%7Condrgd-mvlpgt%3A1%7Condrgd-mvlpgvgeb%3A1%7Condrgd-mvlpgv106%3A1%7Condrgd-mvlpgv105%3A1%7Condrgd-mvlpgeb%3A1%7Condrgd-mvlpga%3A1%7Condrgd-exin%3A1%7Condrgd-mbgm%3A1%7Condrgd-mbaig%3A1%7Condrgd-mbgwm%3A1%7Condrgd-mbz%3A1%7Condrgd-mbs%3A1%7Condrgd-mbr%3A1%7Condrgd-vezips%3A1&${LEGEND}=true`,
+    to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=ondrgd-aardgasbel%3A1|ondrgd-aardgas1let%3A1|ondrgd-aardgas100let%3A1|ondrgd-aardgaspr106%3A1|ondrgd-aardgas%3A1|ondrgd-exuo%3A1|ondrgd-exgg%3A1|ondrgd-exvg%3A1|ondrgd-gbhv%3A1|ondrgd-gbep%3A1|ondrgd-gbgg%3A1|ondrgd-gbgs%3A1|ondrgd-gbos%3A1|ondrgd-gboh%3A1|ondrgd-gbwu%3A1|ondrgd-gbkw%3A1|ondrgd-gbvv%3A1|ondrgd-mvlpgst%3A1|ondrgd-mvlpgs%3A1|ondrgd-mvlpgtgrp%3A1|ondrgd-mvlpgtris%3A1|ondrgd-mvlpgt%3A1|ondrgd-mvlpgvgeb%3A1|ondrgd-mvlpgv106%3A1|ondrgd-mvlpgv105%3A1|ondrgd-mvlpgeb%3A1|ondrgd-mvlpga%3A1|ondrgd-exin%3A1|ondrgd-mbgm%3A1|ondrgd-mbaig%3A1|ondrgd-mbgwm%3A1|ondrgd-mbz%3A1|ondrgd-mbs%3A1|ondrgd-mbr%3A1|ondrgd-vezips%3A1&${LEGEND}=true`,
   },
   {
     from: '/datablog/',
