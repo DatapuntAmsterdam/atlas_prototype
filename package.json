@@ -69,7 +69,7 @@
     "marzipano": "git+https://github.com/Amsterdam/marzipano.git#master",
     "objectFitPolyfill": "2.3.0",
     "openseadragon": "2.4.2",
-    "proj4": "2.6.1",
+    "proj4": "2.6.2",
     "proj4leaflet": "1.0.2",
     "prop-types": "15.7.2",
     "react": "16.13.1",
