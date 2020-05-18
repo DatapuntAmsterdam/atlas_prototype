@@ -19,7 +19,7 @@
   function DpParentRelationsController(PARENT_RELATIONS_CONFIG) {
     const vm = this
 
-    vm.$onChanges = (changes) => {
+    vm.$onChanges = () => {
       vm.parentRelations = PARENT_RELATIONS_CONFIG.keyOrder
         .map((key) => ({
           data: vm.content[key] || vm.content[`_${key}`] || null,

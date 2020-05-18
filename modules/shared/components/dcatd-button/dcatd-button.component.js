@@ -12,7 +12,7 @@ import redirectToDcatd from '../../../../src/app/utils/redirectToDcatd'
 
   DpDcatdButtonController.$inject = ['$scope', '$window']
 
-  function DpDcatdButtonController($scope, $window) {
+  function DpDcatdButtonController() {
     const vm = this
 
     vm.onClick = () => redirectToDcatd(vm.id)

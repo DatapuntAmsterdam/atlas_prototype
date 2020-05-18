@@ -1,19 +1,19 @@
-const path = require('path')
-const webpack = require('webpack')
-const { root, dist, src, legacy } = require('./webpack.common.js')
+import { Config as KarmaConfig, ConfigOptions as KarmaConfigOptions } from 'karma'
+import path from 'path'
+import webpack, { Configuration as WebpackConfig } from 'webpack'
+import env from './test/load-env'
+import { distPath, legacyPath, rootPath, srcPath } from './webpack.common'
 
-const env = require('./test/load-env')
-
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next])
+const envKeys = Object.entries(env as { [key: string]: string }).reduce((prev, [key, value]) => {
+  prev[`process.env.${key}`] = JSON.stringify(value)
   return prev
-}, {})
+}, {} as { [key: string]: string })
 
-const webpackConfig = {
-  context: root,
+const webpackConfig: WebpackConfig = {
+  context: rootPath,
   output: {
     filename: 'test.bundle.js',
-    path: dist,
+    path: distPath,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.mjs', '.js', '.jsx'],
@@ -25,12 +25,12 @@ const webpackConfig = {
     rules: [
       {
         test: /\.html$/,
-        include: [legacy],
+        include: [legacyPath],
         use: 'html-loader',
       },
       {
         test: /\.(run\.js|scss|png|svg|cur)$/,
-        include: [src, legacy],
+        include: [srcPath, legacyPath],
         use: [
           {
             loader: 'file-loader',
@@ -42,7 +42,7 @@ const webpackConfig = {
       },
       {
         test: /\.(t|j)sx?$/,
-        include: [src, legacy, /atlas\.run\.js$/],
+        include: [srcPath, legacyPath, /atlas\.run\.js$/],
         use: {
           loader: 'babel-loader',
           options: {
@@ -77,7 +77,7 @@ const webpackConfig = {
   ],
 }
 
-module.exports = function (config) {
+export default (config: KarmaConfig) => {
   config.set({
     plugins: ['@metahub/karma-jasmine-jquery', 'karma-*'],
     frameworks: ['jasmine-jquery', 'jasmine'],
@@ -101,7 +101,7 @@ module.exports = function (config) {
     preprocessors: {
       'src/test-index.js': ['webpack', 'sourcemap'],
     },
-    webpack: webpackConfig,
+    webpack: webpackConfig as any,
     mochaReporter: {
       output: 'minimal',
     },
@@ -120,5 +120,5 @@ module.exports = function (config) {
     },
     browsers: ['PhantomJS'],
     singleRun: true,
-  })
+  } as KarmaConfigOptions)
 }

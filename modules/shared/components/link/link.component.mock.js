@@ -1,7 +1,4 @@
 import isDefined from '../../../../src/shared/services/is-defined'
-
-// This component is just an mock of the dp-link component
-// Is only used in the tests to simplify the test process
 ;(function () {
   angular.module('dpShared').directive('dpLink', dpLinkDirective)
 
@@ -24,7 +21,7 @@ import isDefined from '../../../../src/shared/services/is-defined'
     }
 
     /* istanbul igonre next */
-    function linkFn(scope, element) {
+    function linkFn(scope) {
       scope.className = scope.className || 'o-btn o-btn--link'
       scope.click = clickHandler
 

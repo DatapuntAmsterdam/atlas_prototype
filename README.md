@@ -63,6 +63,7 @@ Then, in a second terminal, go to `cd test/e2e` and run `npm run start` (single 
 Or open the UI using `npm run watch`.
 
 Test using docker-compose:
+
 ```
 docker-compose up --build test-e2e
 ```
@@ -87,7 +88,10 @@ docker-compose up --build test-e2e-aria
 ### Analyzing a production bundle
 
 ```bash
-npm run analyze
+# Analyze the modern browser bundle (ES2015+)
+npm run analyze:modern
+# Analyze the legacy browser bundle (ES5)
+npm run analyze:legacy
 ```
 
 ## Other useful commands
@@ -100,6 +104,7 @@ npm run analyze
 - API health checks used in this project buid pipeline: https://github.com/Amsterdam/atlas-health-checks
 
 ## Techniques used
+
 - AngularJS
 - React
 - Redux
@@ -107,6 +112,7 @@ npm run analyze
 - D3
 
 ## Conventions used
+
 - John Papa Angular style guide (https://github.com/johnpapa/angular-styleguide/tree/master/a1)
 - EditorConfig (http://editorconfig.org/)
 - BEM (http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
@@ -115,9 +121,11 @@ npm run analyze
 - [GitFlow](https://datasift.github.io/gitflow/IntroducingGitFlow.html) without tags and a release branch
 
 ## Known issues
+
 - on windows there is a bug in sass-lint that prevents `npm run lint` to fail when there are linting errors.
-  work-around: install sass-lint globally and run commands specified in the  `lint:style` script direct in a bash
+  work-around: install sass-lint globally and run commands specified in the `lint:style` script direct in a bash
   terminal
 
 ## Thanks to
+
 <img src="/public/images/browserstack-logo@2x.png" height="60" title="BrowserStack Logo" alt="BrowserStack Logo" />

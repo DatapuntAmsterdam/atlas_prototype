@@ -17,11 +17,19 @@ import {
 import { getPage } from '../../../store/redux-first-router/selectors'
 import PAGES from '../../pages'
 
-const DataDetailPage = React.lazy(() => import('../DataDetailPage/DataDetailPage'))
-const LocationSearchContainer = React.lazy(() =>
-  import('../../components/LocationSearch/LocationSearchContainer'),
+const DataDetailPage = React.lazy(() =>
+  import(/* webpackChunkName: "DataDetailPage" */ '../DataDetailPage/DataDetailPage'),
 )
-const PanoramaContainer = React.lazy(() => import('../../../panorama/containers/PanoramaContainer')) // TODO: refactor, test
+const LocationSearchContainer = React.lazy(() =>
+  import(
+    /* webpackChunkName: "LocationSearchContainer" */ '../../components/LocationSearch/LocationSearchContainer'
+  ),
+)
+const PanoramaContainer = React.lazy(() =>
+  import(
+    /* webpackChunkName: "PanoramaContainer" */ '../../../panorama/containers/PanoramaContainer'
+  ),
+) // TODO: refactor, test
 
 /* istanbul ignore next */ const MapSplitPage = ({
   hasSelection,

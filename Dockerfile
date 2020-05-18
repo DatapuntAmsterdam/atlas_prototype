@@ -41,7 +41,7 @@ RUN npm run build:${NODE_ENV}
 RUN echo "build= `date`" > /app/dist/version.txt
 
 # Test dependencies
-COPY karma.conf.js \
+COPY karma.conf.ts \
      jest.config.js \
      /app/
 COPY test /app/test

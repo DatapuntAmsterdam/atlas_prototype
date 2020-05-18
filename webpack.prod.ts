@@ -1,32 +1,39 @@
-const merge = require('webpack-merge')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { commonConfig } = require('./webpack.common.js')
-const TerserPlugin = require('terser-webpack-plugin')
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
+import merge from 'webpack-merge'
+import { createConfig } from './webpack.common'
 
-module.exports = () => {
-  const CHUNKS = {
-    MAP:
-      'leaflet|leaflet-draw|leaflet-rotatedmarker|leaflet.markercluster|leaflet.nontiledlayer|proj4|proj4leaflet',
-    DATAPUNT: '@datapunt',
-    STYLED: 'styled-components|polished|style-loader|css-loader|sass-loader|postcss-loader',
-    PANORAMA: 'marzipano',
-    POLYFILL: '@babel/polyfill|objectFitPolyfill|core-js',
-    ANGULAR: 'angular|angular-aria|angular-sanitize|react-angular',
-    REACT:
-      'react|react-dom|redux-first-router|redux-first-router-link|redux-first-router-restore-scroll|reselect|redux|@?redux-saga|react-redux|react-helmet|prop-types',
-  }
+const CHUNKS = {
+  MAP:
+    'leaflet|leaflet-draw|leaflet-rotatedmarker|leaflet.markercluster|leaflet.nontiledlayer|proj4|proj4leaflet',
+  DATAPUNT: '@datapunt',
+  STYLED: 'styled-components|polished|style-loader|css-loader|sass-loader|postcss-loader',
+  PANORAMA: 'marzipano',
+  POLYFILL: 'objectFitPolyfill|core-js|core-js-pure',
+  ANGULAR: 'angular|angular-aria|angular-sanitize|react-angular',
+  REACT:
+    'react|react-dom|redux-first-router|redux-first-router-link|redux-first-router-restore-scroll|reselect|redux|@?redux-saga|react-redux|react-helmet|prop-types',
+}
 
-  const getTestRegex = (path) => new RegExp(`/node_modules/(${path})/`)
+const getTestRegex = (path: string) => new RegExp(`/node_modules/(${path})/`)
 
-  return merge(commonConfig(), {
+export default [
+  createConfig({ legacy: false, mode: 'production' }),
+  createConfig({ legacy: true, mode: 'production' }),
+].map((config) =>
+  merge(config, {
     output: {
-      filename: '[name].[hash].js',
-      chunkFilename: '[name].[chunkhash].bundle.js',
+      filename: config.name === 'legacy' ? '[name].[hash]-legacy.js' : '[name].[hash].js',
+      chunkFilename:
+        config.name === 'legacy' ? '[name].[chunkhash]-legacy.js' : '[name].[chunkhash].js',
     },
-    mode: 'production',
     devtool: 'source-map',
     optimization: {
-      minimizer: [new TerserPlugin()],
+      minimizer: [
+        new TerserPlugin({
+          sourceMap: true,
+        }),
+      ],
       splitChunks: {
         chunks: 'all',
         minSize: 30000,
@@ -44,7 +51,6 @@ module.exports = () => {
                 CHUNKS.STYLED,
                 CHUNKS.REACT,
                 CHUNKS.PANORAMA,
-                CHUNKS.BBGA,
                 CHUNKS.ANGULAR,
               ].join('|')})/`,
             ),
@@ -66,12 +72,6 @@ module.exports = () => {
           map: {
             test: getTestRegex(CHUNKS.MAP),
             name: 'map',
-            chunks: 'async',
-            enforce: true,
-          },
-          bbga: {
-            test: getTestRegex(CHUNKS.BBGA),
-            name: 'bbga',
             chunks: 'async',
             enforce: true,
           },
@@ -107,6 +107,11 @@ module.exports = () => {
         },
       },
     },
-    plugins: [new MiniCssExtractPlugin('main.[contenthash].css')],
-  })
-}
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css',
+        chunkFilename: '[id].[contenthash].css',
+      }),
+    ],
+  }),
+)

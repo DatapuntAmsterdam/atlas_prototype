@@ -1,11 +1,12 @@
-const merge = require('webpack-merge')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { commonConfig, dist } = require('./webpack.common.js')
+import merge from 'webpack-merge'
+import { createConfig, distPath } from './webpack.common'
 
-module.exports = () =>
-  merge(commonConfig(), {
-    mode: 'development',
-    devtool: 'cheap-module-eval-source-map',
+export default [
+  createConfig({ legacy: false, mode: 'development' }),
+  createConfig({ legacy: true, mode: 'development' }),
+].map((config) =>
+  merge(config, {
+    devtool: 'inline-source-map',
     devServer: {
       historyApiFallback: {
         // allow "." character in URL path: https://stackoverflow.com/a/38576357
@@ -13,7 +14,7 @@ module.exports = () =>
         disableDotRule: true,
       },
       disableHostCheck: true,
-      contentBase: dist,
+      contentBase: distPath,
       compress: true,
       hot: true,
       port: 3000,
@@ -26,5 +27,5 @@ module.exports = () =>
         },
       },
     },
-    plugins: [new MiniCssExtractPlugin()],
-  })
+  }),
+)

@@ -1,15 +1,14 @@
-import styled from 'styled-components'
-import { Theme, Column, Link, Row, themeSpacing } from '@datapunt/asc-ui'
-import { perceivedLoading } from '@datapunt/asc-ui/lib/utils/themeUtils'
+import { Column, Link, perceivedLoading, Row, Theme, themeSpacing } from '@datapunt/asc-ui'
 import React, { useState } from 'react'
 import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
 import { useQuery } from 'urql'
 import PARAMETERS from '../../../store/parameters'
 import { toSearch } from '../../../store/redux-first-router/actions'
 import { Filter, FilterOption } from '../../models/filter'
 import { ActiveFilter } from '../../pages/SearchPage/SearchPageDucks'
-import BlockHeading from './BlockHeading'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import BlockHeading from './BlockHeading'
 
 const getFiltersQuery = `
   query {
