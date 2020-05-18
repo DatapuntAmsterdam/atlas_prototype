@@ -118,7 +118,7 @@
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "angular-mocks": "~1.7.9",
-    "autoprefixer": "9.7.6",
+    "autoprefixer": "9.8.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "26.0.1",
     "babel-loader": "8.1.0",
