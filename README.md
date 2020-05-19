@@ -79,8 +79,15 @@ Make sure the app is running locally.
 Then run `npm run test-aria`.
 
 Test using docker-compose:
+
 ```
 docker-compose up --build test-e2e-aria
+```
+
+### Analyzing a production bundle
+
+```bash
+npm run analyze
 ```
 
 ## Other useful commands
