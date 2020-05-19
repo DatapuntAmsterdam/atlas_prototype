@@ -116,7 +116,7 @@
     "@types/storybook__react": "^5.2.1",
     "@types/styled-components": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "angular-mocks": "~1.7.9",
     "autoprefixer": "9.8.0",
     "babel-eslint": "10.1.0",
