@@ -17,6 +17,7 @@ import {
   reclamebelasting,
   vastgoed,
   winkelgebied,
+  parkeervak,
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
 import NotificationLevel from '../../app/models/notification'
@@ -703,10 +704,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.parkeervak]: {
-    normalization(result) {
-      // TODO: Temporary fix, can be removed once 'geom' has been renamed to 'geometry' in the API response.
-      return { ...result, geometry: result.geometry ?? result.geom }
-    },
+    normalization: parkeervak,
     mapDetail: (result) => ({
       title: categoryLabels.parkeervak.singular,
       subTitle: result.id,
@@ -716,15 +714,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           type: DetailResultItemType.Table,
           label: 'Regimes',
           headings: [
-            { label: 'Dagen', key: 'dagen' },
+            { label: 'Dagen', key: 'dagenFormatted' },
             { label: 'Tijdstip', key: 'tijdstip' },
             { label: 'Bord', key: 'bord' },
           ],
-          values: result.regimes.map((regime: any) => ({
-            ...regime,
-            tijdstip: `${regime.beginTijd} - ${regime.eindTijd}`,
-            dagen: regime.dagen.join(', '),
-          })),
+          values: result.regimes,
         },
       ],
     }),

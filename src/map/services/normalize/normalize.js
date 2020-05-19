@@ -237,6 +237,31 @@ export const grexProject = (result) => {
   return { ...result, planstatusFormatted, oppervlakteFormatted }
 }
 
+export const parkeervak = (result) => {
+  const TIME_SEPERATOR = ':'
+
+  function formatTime(time) {
+    const parts = time.split(TIME_SEPERATOR)
+
+    // Remove seconds from time if present (e.g. 20:00:00 => 20:00)
+    if (parts.length === 3) {
+      return parts.slice(0, -1).join(TIME_SEPERATOR)
+    }
+
+    return time
+  }
+
+  // TODO: Temporary fix, can be removed once 'geom' has been renamed to 'geometry' in the API response.
+  const geometry = result.geometry ?? result.geom
+  const regimes = result.regimes.map((regime) => ({
+    ...regime,
+    tijdstip: `${formatTime(regime.beginTijd)} - ${formatTime(regime.eindTijd)}`,
+    dagenFormatted: regime.dagen.join(', '),
+  }))
+
+  return { ...result, geometry, regimes }
+}
+
 function formatSquareMetre(value) {
   return `${value.toLocaleString(DEFAULT_LOCALE)} m²`
 }
