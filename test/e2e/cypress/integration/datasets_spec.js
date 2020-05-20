@@ -83,7 +83,7 @@ describe('datasets module', () => {
       cy.wait('@graphql')
 
       cy.contains('Datasets (')
-
+      cy.wait(500)
       // Count amount of Datasets
       cy.get('h1')
         .contains('Datasets')
@@ -106,232 +106,234 @@ describe('datasets module', () => {
         })
     })
   })
-})
 
-describe('user should be able to search and see results', () => {
-  beforeEach(() => {
-    cy.server()
-    cy.route('POST', '/cms_search/graphql/').as('graphql')
-    cy.route('/jsonapi/node/list/**').as('jsonapi')
-    cy.hidePopup()
+  describe('user should be able to search and see results', () => {
+    beforeEach(() => {
+      cy.server()
+      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.route('/jsonapi/node/list/**').as('jsonapi')
+      cy.hidePopup()
 
-    cy.visit('/')
-    cy.wait('@jsonapi')
+      cy.visit('/')
+      cy.wait('@jsonapi')
+    })
+
+    it('should open the datasets results', () => {
+      cy.get(SEARCH.input).trigger('focus')
+      cy.get(SEARCH.input).type('Park')
+      cy.get(DATA_SEARCH.autoSuggest).submit()
+      cy.url().should('include', '/zoek/?term=Park')
+      cy.wait(['@graphql', '@graphql'])
+
+      // Check if datasets are visible
+      cy.get('h2').should('be.visible').and('contain', 'Datasets')
+    })
+
+    it('should not open the datasets results because there are no results', () => {
+      cy.get(SEARCH.input).trigger('focus')
+      cy.get(SEARCH.input).type('NORESULTS')
+      cy.get(DATA_SEARCH.autoSuggest).submit()
+      cy.url().should('include', '/zoek/?term=NORESULTS')
+      cy.wait(['@graphql', '@graphql'])
+
+      // Check if datasets are NOT visible
+      cy.contains('Datasets').should('not.be.visible')
+    })
+    it('should show only datasets after filtering', () => {
+      cy.server()
+      cy.route(`typeahead?q=vergunningen`).as('typeaheadResults')
+      cy.get(SEARCH.input).trigger('focus')
+      cy.get(SEARCH.input).type('Vergunningen')
+      cy.wait('@typeaheadResults')
+      cy.get(DATA_SEARCH.autoSuggestHeader)
+        .contains('Datasets')
+        .siblings('ul')
+        .children('li')
+        .first()
+        .click()
+
+      // Check if dataset is shown
+      cy.get(DATA_SETS.headerDataset).should('contain', 'Dataset').and('be.visible')
+      cy.get(DATA_SETS.headerDataset).should('contain', 'Resources').and('be.visible')
+      cy.get(DATA_SETS.headerDataset).should('contain', 'Details').and('be.visible')
+      cy.get(DATA_SETS.headerDataset).should('contain', "Thema's").and('be.visible')
+      cy.get(DATA_SETS.headerDataset).should('contain', 'Tags').and('be.visible')
+      cy.get(DATA_SETS.headerDataset).should('contain', 'Licentie').and('be.visible')
+      cy.get(DATA_SETS.datasetItem).should('be.visible')
+
+      cy.get(SEARCH.input).type('Vergunningen{enter}')
+
+      cy.contains("Datasets met 'Vergunningen' (").should('be.visible')
+      cy.should('not.contain', "Alle zoekresultaten met 'Vergunningen'")
+    })
   })
 
-  it('should open the datasets results', () => {
-    cy.get(SEARCH.input).trigger('focus')
-    cy.get(SEARCH.input).type('Park')
-    cy.get(DATA_SEARCH.autoSuggest).submit()
-    cy.url().should('include', '/zoek/?term=Park')
-    cy.wait(['@graphql', '@graphql'])
+  describe('Create, change and delete a dataset', () => {
+    beforeEach(() => {
+      cy.server()
+      cy.hidePopup()
+    })
 
-    // Check if datasets are visible
-    cy.get('h2').should('be.visible').and('contain', 'Datasets')
-  })
+    before(() => {
+      cy.login('EMPLOYEE_PLUS')
+    })
 
-  it('should not open the datasets results because there are no results', () => {
-    cy.get(SEARCH.input).trigger('focus')
-    cy.get(SEARCH.input).type('NORESULTS')
-    cy.get(DATA_SEARCH.autoSuggest).submit()
-    cy.url().should('include', '/zoek/?term=NORESULTS')
-    cy.wait(['@graphql', '@graphql'])
+    after(() => {
+      cy.logout()
+    })
 
-    // Check if datasets are NOT visible
-    cy.contains('Datasets').should('not.be.visible')
-  })
-  it('should show only datasets after filtering', () => {
-    cy.server()
-    cy.route(`typeahead?q=vergunningen`).as('typeaheadResults')
-    cy.get(SEARCH.input).trigger('focus')
-    cy.get(SEARCH.input).type('Vergunningen')
-    cy.wait('@typeaheadResults')
-    cy.get(DATA_SEARCH.autoSuggestHeader)
-      .contains('Datasets')
-      .siblings('ul')
-      .children('li')
-      .first()
-      .click()
+    it('Should edit a dataset', () => {
+      cy.server()
+      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.route('/jsonapi/node/list/**').as('jsonapi')
+      cy.route('/dcatd/openapi').as('getOpenapi')
+      cy.route('/dcatd/datasets/*').as('getDataset')
+      cy.route('PUT', '/dcatd/datasets/*').as('putDataset')
+      // click on the link to go to the datasets without a specified catalogus theme
+      cy.get('[data-test=navigation-block] > [href="/datasets/zoek/"]').should('be.visible').click()
 
-    // Check if dataset is shown
-    cy.get(DATA_SETS.headerDataset).should('contain', 'Dataset').and('be.visible')
-    cy.get(DATA_SETS.headerDataset).should('contain', 'Resources').and('be.visible')
-    cy.get(DATA_SETS.headerDataset).should('contain', 'Details').and('be.visible')
-    cy.get(DATA_SETS.headerDataset).should('contain', "Thema's").and('be.visible')
-    cy.get(DATA_SETS.headerDataset).should('contain', 'Tags').and('be.visible')
-    cy.get(DATA_SETS.headerDataset).should('contain', 'Licentie').and('be.visible')
-    cy.get(DATA_SETS.datasetItem).should('be.visible')
+      cy.wait('@graphql')
+      cy.url().should('include', '/datasets/zoek')
 
-    cy.get(SEARCH.input).type('Vergunningen{enter}')
+      cy.contains('Datasets (')
 
-    cy.contains("Datasets met 'Vergunningen' (").should('be.visible')
-    cy.should('not.contain', "Alle zoekresultaten met 'Vergunningen'")
-  })
-})
+      // Check if there are 20 results shown
+      cy.get(DATA_SETS.dataSetLink).should('have.length', 20).should('be.visible')
 
-describe('Create, change and delete a dataset', () => {
-  beforeEach(() => {
-    cy.server()
-    cy.hidePopup()
-  })
+      // Open first result
+      cy.contains('Gasten en overnachtingen in Amsterdam').first().click()
 
-  before(() => {
-    cy.login('EMPLOYEE_PLUS')
-  })
+      // Change the dataset
+      cy.contains('Wijzigen').click()
+      cy.wait('@getOpenapi')
+      cy.wait('@getDataset')
 
-  after(() => {
-    cy.logout()
-  })
+      cy.get(`#${CSS.escape('dataset_dct:title')}`)
+        .clear()
+        .type('Gasten en overnachtingen in Rotterdam, de MRA en Nederland 2012-2019')
+      cy.get(`#${CSS.escape('dataset_overheidds:doel')}`)
+        .clear()
+        .type('Verzamelen statistiekjes')
+      cy.get(`#${CSS.escape('dataset_ams:spatialDescription')}`)
+        .clear()
+        .type('Metropoolregio Rotterdam')
+      cy.get(`#${CSS.escape('dataset_ams:owner')} > .search`).type('Amsterdam Marketing{enter}')
 
-  it('Should edit a dataset', () => {
-    cy.server()
-    cy.route('POST', '/cms_search/graphql/').as('graphql')
-    cy.route('/jsonapi/node/list/**').as('jsonapi')
-    cy.route('/dcatd/openapi').as('getOpenapi')
-    cy.route('/dcatd/datasets/*').as('getDataset')
-    cy.route('PUT', '/dcatd/datasets/*').as('putDataset')
-    // click on the link to go to the datasets without a specified catalogus theme
-    cy.get('[data-test=navigation-block] > [href="/datasets/zoek/"]').should('be.visible').click()
+      cy.contains('Opslaan').click()
+      cy.wait('@putDataset')
+      cy.wait('@getOpenapi')
+      cy.wait('@getDataset')
 
-    cy.wait('@graphql')
-    cy.url().should('include', '/datasets/zoek')
+      cy.contains('Gasten en overnachtingen in Rotterdam, de MRA en Nederland 2012-2019')
+      cy.contains('Verzamelen statistiekjes')
+      cy.contains('Metropoolregio Rotterdam')
+      cy.contains('Amsterdam Marketing')
 
-    cy.contains('Datasets (')
+      // Revert changes in dataset
+      cy.contains('Wijzigen').click()
+      cy.wait('@getOpenapi')
+      cy.wait('@getDataset')
 
-    // Check if there are 20 results shown
-    cy.get(DATA_SETS.dataSetLink).should('have.length', 20).should('be.visible')
+      cy.get(`#${CSS.escape('dataset_dct:title')}`)
+        .clear()
+        .type('Gasten en overnachtingen in Amsterdam, de MRA en Nederland 2012-2019')
+      cy.get(`#${CSS.escape('dataset_overheidds:doel')}`)
+        .clear()
+        .type('Verzamelen statistieken')
+      cy.get(`#${CSS.escape('dataset_ams:spatialDescription')}`)
+        .clear()
+        .type('Metropoolregio Amsterdam')
+      cy.get(`#${CSS.escape('dataset_ams:owner')} > .search`).type(
+        'Gemeente Amsterdam, Onderzoek, Informatie en Statistiek{enter}',
+      )
 
-    // Open first result
-    cy.contains('Gasten en overnachtingen in Amsterdam').first().click()
+      cy.contains('Opslaan').click()
+      cy.wait('@putDataset')
+      cy.wait('@getOpenapi')
+      cy.wait('@getDataset')
 
-    // Change the dataset
-    cy.contains('Wijzigen').click()
-    cy.wait('@getOpenapi')
-    cy.wait('@getDataset')
+      cy.contains('Gasten en overnachtingen in Amsterdam, de MRA en Nederland 2012-2019')
+      cy.contains('Verzamelen statistieken')
+      cy.contains('Metropoolregio Amsterdam')
+      cy.contains('Gemeente Amsterdam, Onderzoek, Informatie en Statistiek')
+    })
+    it('Should create a new dataset', () => {
+      cy.server()
+      cy.route('/dcatd/datasets').as('getDatasets')
+      cy.route('POST', '/dcatd/datasets').as('postDataset')
+      cy.visit('/dcatd_admin#/datasets')
+      cy.wait('@getDatasets')
 
-    cy.get(`#${CSS.escape('dataset_dct:title')}`)
-      .clear()
-      .type('Gasten en overnachtingen in Rotterdam, de MRA en Nederland 2012-2019')
-    cy.get(`#${CSS.escape('dataset_overheidds:doel')}`)
-      .clear()
-      .type('Verzamelen statistiekjes')
-    cy.get(`#${CSS.escape('dataset_ams:spatialDescription')}`)
-      .clear()
-      .type('Metropoolregio Rotterdam')
-    cy.get(`#${CSS.escape('dataset_ams:owner')} > .search`).type('Amsterdam Marketing{enter}')
+      cy.contains('Dataset aanmaken').click()
 
-    cy.contains('Opslaan').click()
-    cy.wait('@putDataset')
-    cy.wait('@getOpenapi')
-    cy.wait('@getDataset')
+      cy.get(`#${CSS.escape('dataset_dct:title')}`)
+        .clear()
+        .type('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam')
 
-    cy.contains('Gasten en overnachtingen in Rotterdam, de MRA en Nederland 2012-2019')
-    cy.contains('Verzamelen statistiekjes')
-    cy.contains('Metropoolregio Rotterdam')
-    cy.contains('Amsterdam Marketing')
+      cy.get(`#${CSS.escape('dataset_dct:description')}`)
+        .clear()
+        .type('Diverse datasets met statistieken van Onderzoek, Informatie en Statistiek.')
 
-    // Revert changes in dataset
-    cy.contains('Wijzigen').click()
-    cy.wait('@getOpenapi')
-    cy.wait('@getDataset')
+      cy.get(`#${CSS.escape('dataset_ams:status')}`).select('Beschikbaar')
 
-    cy.get(`#${CSS.escape('dataset_dct:title')}`)
-      .clear()
-      .type('Gasten en overnachtingen in Amsterdam, de MRA en Nederland 2012-2019')
-    cy.get(`#${CSS.escape('dataset_overheidds:doel')}`)
-      .clear()
-      .type('Verzamelen statistieken')
-    cy.get(`#${CSS.escape('dataset_ams:spatialDescription')}`)
-      .clear()
-      .type('Metropoolregio Amsterdam')
-    cy.get(`#${CSS.escape('dataset_ams:owner')} > .search`).type(
-      'Gemeente Amsterdam, Onderzoek, Informatie en Statistiek{enter}',
-    )
+      cy.get(`#${CSS.escape('dataset_overheidds:doel')}`)
+        .clear()
+        .type('Verzamelen statistieken.')
 
-    cy.contains('Opslaan').click()
-    cy.wait('@putDataset')
-    cy.wait('@getOpenapi')
-    cy.wait('@getDataset')
+      cy.get(`#${CSS.escape('dataset_ams:temporalUnit')}`).select('Realtime')
 
-    cy.contains('Gasten en overnachtingen in Amsterdam, de MRA en Nederland 2012-2019')
-    cy.contains('Verzamelen statistieken')
-    cy.contains('Metropoolregio Amsterdam')
-    cy.contains('Gemeente Amsterdam, Onderzoek, Informatie en Statistiek')
-  })
-  it('Should create a new dataset', () => {
-    cy.server()
-    cy.route('/dcatd/datasets').as('getDatasets')
-    cy.route('POST', '/dcatd/datasets').as('postDataset')
-    cy.visit('/dcatd_admin#/datasets')
-    cy.wait('@getDatasets')
+      cy.get(`#${CSS.escape('dataset_dcat:contactPoint_vcard:fn')}`)
+        .clear()
+        .type('Loekie de Leeuw')
 
-    cy.contains('Dataset aanmaken').click()
+      cy.get(`#${CSS.escape('dataset_ams:owner')} > .search`).type(
+        'Gemeente Amsterdam, Onderzoek, Informatie en Statistiek{enter}',
+      )
 
-    cy.get(`#${CSS.escape('dataset_dct:title')}`)
-      .clear()
-      .type('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam')
+      cy.get(`#${CSS.escape('dataset_dct:publisher_foaf:name')}`)
+        .clear()
+        .type('Paul de Leeuw')
 
-    cy.get(`#${CSS.escape('dataset_dct:description')}`)
-      .clear()
-      .type('Diverse datasets met statistieken van Onderzoek, Informatie en Statistiek.')
+      cy.get(`#${CSS.escape('dataset_dcat:theme')}`).type('Bevolking{enter}')
 
-    cy.get(`#${CSS.escape('dataset_ams:status')}`).select('Beschikbaar')
+      cy.get(`#${CSS.escape('dataset_dcat:theme')} > .dropdown`).click()
 
-    cy.get(`#${CSS.escape('dataset_overheidds:doel')}`)
-      .clear()
-      .type('Verzamelen statistieken.')
+      cy.get(`#${CSS.escape('dataset_dcat:keyword')}`).type('Kerncijfers{enter}')
 
-    cy.get(`#${CSS.escape('dataset_ams:temporalUnit')}`).select('Realtime')
+      cy.get(`#${CSS.escape('dataset_dcat:keyword')} > .dropdown`).click()
 
-    cy.get(`#${CSS.escape('dataset_dcat:contactPoint_vcard:fn')}`)
-      .clear()
-      .type('Loekie de Leeuw')
+      cy.contains('Opslaan').click()
+      cy.wait('@getDatasets')
+      cy.url().should('include', '/dcatd_admin#/datasets')
+      cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam')
+      cy.visit('/')
+      cy.get('[data-test=navigation-block] > [href="/datasets/zoek/"]').should('be.visible').click()
+      cy.url().should('include', '/datasets/zoek')
 
-    cy.get(`#${CSS.escape('dataset_ams:owner')} > .search`).type(
-      'Gemeente Amsterdam, Onderzoek, Informatie en Statistiek{enter}',
-    )
+      cy.contains('Datasets (')
 
-    cy.get(`#${CSS.escape('dataset_dct:publisher_foaf:name')}`)
-      .clear()
-      .type('Paul de Leeuw')
-
-    cy.get(`#${CSS.escape('dataset_dcat:theme')}`).type('Bevolking{enter}')
-
-    cy.get(`#${CSS.escape('dataset_dcat:theme')} > .dropdown`).click()
-
-    cy.get(`#${CSS.escape('dataset_dcat:keyword')}`).type('Kerncijfers{enter}')
-
-    cy.get(`#${CSS.escape('dataset_dcat:keyword')} > .dropdown`).click()
-
-    cy.contains('Opslaan').click()
-    cy.wait('@getDatasets')
-    cy.url().should('include', '/dcatd_admin#/datasets')
-    cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam')
-    cy.visit('/')
-    cy.get('[data-test=navigation-block] > [href="/datasets/zoek/"]').should('be.visible').click()
-    cy.url().should('include', '/datasets/zoek')
-
-    cy.contains('Datasets (')
-
-    cy.get(SEARCH.input).trigger('focus')
-    cy.get(SEARCH.input).type('leeuw')
-    cy.get(DATA_SEARCH.autoSuggest).submit()
-    cy.url().should('include', '/zoek/?term=leeuw')
-    cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam')
-  })
-  it('Should delete a dataset', () => {
-    cy.server()
-    cy.route('/dcatd/datasets').as('getDatasets')
-    cy.route('POST', '/dcatd/datasets/*').as('postDataset')
-    cy.route('/dcatd/openapi').as('getOpenapi')
-    cy.visit('/dcatd_admin#/datasets')
-    cy.wait('@getDatasets')
-    cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam').click()
-    cy.contains('Dataset verwijderen').click()
-    cy.get('.actions > .dcatd-form-button-submit').click()
-    cy.get('.actions > .dcatd-form-button').click()
-    cy.contains('Dataset verwijderen').click()
-    cy.get('.actions > .dcatd-form-button-submit').click()
-    cy.visit('/')
+      cy.get(SEARCH.input).trigger('focus')
+      cy.get(SEARCH.input).type('leeuw')
+      cy.get(DATA_SEARCH.autoSuggest).submit()
+      cy.url().should('include', '/zoek/?term=leeuw')
+      cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam')
+    })
+    it.skip('Should delete a dataset', () => {
+      cy.server()
+      cy.route('/dcatd/datasets').as('getDatasets')
+      cy.route('POST', '/dcatd/datasets/*').as('postDataset')
+      cy.route('/dcatd/openapi').as('getOpenapi')
+      cy.route('/jsonapi/node/list/**').as('jsonapi')
+      cy.visit('/dcatd_admin#/datasets')
+      cy.wait('@getDatasets')
+      cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam').click()
+      cy.contains('Dataset verwijderen').click()
+      cy.get('.actions > .dcatd-form-button-submit').click()
+      cy.get('.actions > .dcatd-form-button').click()
+      cy.contains('Dataset verwijderen').click()
+      cy.get('.actions > .dcatd-form-button-submit').click()
+      cy.visit('/')
+      cy.wait('@jsonapi')
+    })
   })
 })

@@ -23,7 +23,7 @@ describe('embed module', () => {
     // the embed preview parameter should be present in the url
     cy.url().should(
       'include',
-      `?${VIEW}=kaart&${VIEW_CENTER}=52.3617139%2C4.8888734&${EMBED_PREVIEW}=true&${LEGEND}=true`,
+      `?${VIEW}=kaart&${VIEW_CENTER}=52.3617139%2C4.8888734&${EMBED_PREVIEW}=true&lagen=bgem%3A1%7Ckgem%3A1%7Cksec%3A0%7Ckot%3A0%7Chgte-dtm%3A1%7Chgte-dsm%3A1%7Chgte-nap%3A1%7Chgte-mbs%3A1%7Chgte-mbz%3A1%7Chgte-mbr%3A1&${LEGEND}=true`,
     )
   })
 
@@ -37,7 +37,7 @@ describe('embed module', () => {
     // the button to go back to the application should exist
     cy.get(MAP.embedButton).contains('data.amsterdam.nl').should('exist').and('be.visible')
     // this link has layers active
-    cy.get(MAP.imageLayer).should('exist').and('be.visible')
+    cy.get(MAP.imageLayer).should('exist')
     cy.get(MAP.mapLegend).should('be.visible')
     cy.get('[type=checkbox]').should('have.length', 10).and('be.checked')
     cy.get('#gebind-ggw').uncheck()

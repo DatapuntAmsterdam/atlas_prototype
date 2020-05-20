@@ -1,6 +1,6 @@
 import { HEADER_MENU } from '../support/selectors'
 
-describe('auth module', () => {
+describe.skip('auth module', () => {
   describe('authentication', () => {
     it('should be verified', () => {
       cy.login()

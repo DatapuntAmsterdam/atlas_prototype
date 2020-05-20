@@ -56,6 +56,7 @@ describe('panorama module', () => {
     it('should render the leaflet map and set the marker', () => {
       // the canvas inside de marzipano viewer should exist and be visible
       cy.get(PANORAMA.markerPane).find('img').should('exist').and('be.visible')
+      cy.get(MAP.imageLayer).should('not.exist')
     })
 
     it('should set the panoramabeelden as active layers in the map-panel legenda', () => {
@@ -65,7 +66,7 @@ describe('panorama module', () => {
     })
 
     it('should set the layers in the leaflet map', () => {
-      cy.get(MAP.imageLayer).should('exist').and('be.visible')
+      cy.get(MAP.imageLayer).should('exist')
     })
 
     it('should change the coordinates when clicked on the map', () => {
