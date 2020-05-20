@@ -100,6 +100,7 @@ export const MAP = {
   checkboxKadastraleSectie: '#onrzk-ksec',
   checkboxKadastraalObject: '#onrzk-kot',
   checkboxKadastralePercelen: '#onrzk-kdstrl',
+  checkboxOndergrond: '#ondrgd-mbz',
   checkboxPanoramabeelden: '#Panoramabeelden',
   checkboxVestigingen: '#Vestigingen',
   checkboxVestigingBouw: '#vstgn-bouw',
