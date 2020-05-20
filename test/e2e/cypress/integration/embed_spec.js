@@ -23,13 +23,13 @@ describe('embed module', () => {
     // the embed preview parameter should be present in the url
     cy.url().should(
       'include',
-      `?${VIEW}=kaart&${VIEW_CENTER}=52.3617139%2C4.8888734&${EMBED_PREVIEW}=true&lagen=bgem%3A1%7Ckgem%3A1%7Cksec%3A0%7Ckot%3A0%7Chgte-dtm%3A1%7Chgte-dsm%3A1%7Chgte-nap%3A1%7Chgte-mbs%3A1%7Chgte-mbz%3A1%7Chgte-mbr%3A1&${LEGEND}=true`,
+      `?${VIEW}=kaart&${VIEW_CENTER}=52.3617139%2C4.8888734&${EMBED_PREVIEW}=true&${LAYERS}=bgem%3A1%7Ckgem%3A1%7Cksec%3A0%7Ckot%3A0%7Chgte-dtm%3A1%7Chgte-dsm%3A1%7Chgte-nap%3A1%7Chgte-mbs%3A1%7Chgte-mbz%3A1%7Chgte-mbr%3A1&${LEGEND}=true`,
     )
   })
 
   it('should show the user the embed view of the map', () => {
     cy.visit(
-      `/data/?modus=kaart&center=52.3617139%2C4.8888734&embed=true&lagen=gebind-buurt%3A1%7Cgebind-bc%3A1%7Cgebind-sd%3A1%7Cgebind-bbn%3A1%7Cgebind-ggwpg%3A1%7Cgebind-ggwg%3A1%7Cgebind-ggro%3A1%7Cgebind-ggra%3A1&legenda=true&zoom=9`,
+      `/data/?${VIEW}=kaart&${VIEW_CENTER}=52.3617139%2C4.8888734&embed=true&${LAYERS}=gebind-buurt%3A1%7Cgebind-bc%3A1%7Cgebind-sd%3A1%7Cgebind-bbn%3A1%7Cgebind-ggwpg%3A1%7Cgebind-ggwg%3A1%7Cgebind-ggro%3A1%7Cgebind-ggra%3A1&${LEGEND}=true&zoom=9`,
     )
     cy.wait('@graphql')
     // the header should be hidden
