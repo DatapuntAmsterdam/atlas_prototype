@@ -1,4 +1,3 @@
-/* globals BBGA */
 import * as d3 from 'd3'
 ;(function () {
   angular.module('dpDetail').config(configuration)
@@ -6,7 +5,6 @@ import * as d3 from 'd3'
   configuration.$inject = ['$provide']
 
   function configuration($provide) {
-    $provide.constant('BBGA', BBGA)
     $provide.constant('d3', d3)
   }
 })()

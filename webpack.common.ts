@@ -148,9 +148,6 @@ export function createConfig(options: CreateConfigOptions): Configuration {
           test: /\.html$/,
           use: {
             loader: 'html-loader',
-            options: {
-              esModule: true,
-            },
           },
         },
         {

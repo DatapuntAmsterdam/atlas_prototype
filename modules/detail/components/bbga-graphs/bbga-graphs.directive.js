@@ -1,9 +1,14 @@
+/* globals BBGA */
 ;(function () {
   angular.module('dpDetail').directive('dpBbgaGraphs', dpBbgaGraphsDirective)
 
-  dpBbgaGraphsDirective.$inject = ['BBGA', 'bbgaDataService']
+  dpBbgaGraphsDirective.$inject = ['bbgaDataService']
 
-  function dpBbgaGraphsDirective(BBGA, bbgaDataService) {
+  function bootstrapBBGA() {
+    return import(/* webpackChunkName: "BBGA" */ 'imports-loader?d3!bbga_visualisatie_d3')
+  }
+
+  function dpBbgaGraphsDirective(bbgaDataService) {
     return {
       restrict: 'E',
       scope: {
@@ -14,7 +19,9 @@
       link: linkFunction,
     }
 
-    function linkFunction(scope, element) {
+    async function linkFunction(scope, element) {
+      await bootstrapBBGA()
+
       bbgaDataService
         .getGraphData('PERSONEN', scope.gebiedHeading, scope.gebiedCode)
         .then(function (data) {
