@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ReactResizeDetector from 'react-resize-detector'
 import 'leaflet' // Required to define window.L before leaflet plugins are imported
 import 'leaflet.markercluster'
@@ -44,6 +43,7 @@ import {
   panoramaPersonIcon,
 } from '../../../map/components/leaflet/services/panorama-icon'
 import locationIcon from '../../../map/components/leaflet/services/location-icon'
+import { MapContext } from './MapContainer'
 
 const isIE = false || !!window.document.documentMode
 if (isIE) {
@@ -241,9 +241,11 @@ class MapLeaflet extends React.Component {
       isLoading,
       showMapLink,
       isZoomControlVisible,
-      baseLayer: bassLayer,
+      baseLayer,
     } = this.props
     const { pendingLayers } = this.state
+
+    console.log('This is leaflets baselayer', baseLayer)
 
     const tmsLayers = layers.filter((layer) => layer.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
     const nonTmsLayers = layers.filter((layer) => layer.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
@@ -289,9 +291,9 @@ class MapLeaflet extends React.Component {
                 },
               }}
               options={{
-                subdomains: bassLayer.baseLayerOptions.subdomains,
-                minZoom: bassLayer.baseLayerOptions.minZoom,
-                maxZoom: bassLayer.baseLayerOptions.maxZoom,
+                subdomains: baseLayer.baseLayerOptions.subdomains,
+                minZoom: baseLayer.baseLayerOptions.minZoom,
+                maxZoom: baseLayer.baseLayerOptions.maxZoom,
                 opacity: visibleToOpacity(isVisible),
                 tms: true,
                 bounds,
@@ -429,41 +431,6 @@ MapLeaflet.defaultProps = {
   onDragEnd: () => 'dragend',
   onResizeEnd: () => 'resizeend',
   onZoomEnd: () => 'zoomend',
-}
-
-MapLeaflet.propTypes = {
-  baseLayer: PropTypes.shape({
-    urlTemplate: PropTypes.string,
-    baseLayerOptions: PropTypes.shape({}),
-  }),
-  center: PropTypes.arrayOf(PropTypes.number),
-  clusterMarkers: PropTypes.arrayOf(PropTypes.shape({})),
-  geoJsons: PropTypes.arrayOf(PropTypes.shape({})),
-  rdGeoJsons: PropTypes.arrayOf(PropTypes.shape({})),
-  getLeafletInstance: PropTypes.func.isRequired,
-  brkMarkers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  isZoomControlVisible: PropTypes.bool,
-  mapOptions: PropTypes.shape({}),
-  markers: PropTypes.arrayOf(PropTypes.shape({})),
-  marker: PropTypes.shape({}),
-  layers: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      isVisible: PropTypes.bool.isRequired,
-      overlayOptions: PropTypes.shape({}),
-      transparent: PropTypes.bool,
-      url: PropTypes.string.isRequired,
-    }),
-  ),
-  onClick: PropTypes.func,
-  onDragEnd: PropTypes.func,
-  onResizeEnd: PropTypes.func,
-  onZoomEnd: PropTypes.func,
-  scaleControlOptions: PropTypes.shape({}),
-  zoomControlOptions: PropTypes.shape({}),
-  zoom: PropTypes.number,
-  isLoading: PropTypes.bool,
-  showMapLink: PropTypes.bool,
 }
 
 export default MapLeaflet

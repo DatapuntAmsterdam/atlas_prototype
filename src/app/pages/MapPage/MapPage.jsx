@@ -9,12 +9,12 @@ import { isEmbedded, isPrintOrEmbedMode, isMapLinkVisible } from '../../../share
 import ToggleFullscreen from '../../components/ToggleFullscreen/ToggleFullscreen'
 import { Map as ContextMenu } from '../../components/ContextMenu'
 
-import LeafletContainer from './LeafletContainer'
 import MapPreviewPanelContainer from '../../../map/containers/preview-panel/MapPreviewPanelContainer'
 import MapEmbedButton from '../../../map/components/map-embed-button/MapEmbedButton'
 import { previewDataAvailable as previewDataAvailableSelector } from '../../../shared/ducks/selection/selection'
 import { getDrawingMode } from '../../../map/ducks/map/selectors'
-import MapPanelContainer from '../../../map/containers/panel/MapPanelContainer'
+import MapPanelContainer from './MapPanelContainer'
+import MapLeafletContainer from './MapLeafletContainer'
 
 export const overrideLeafletGetBounds = (map) => {
   // We override here the getBounds method of Leaflet
@@ -72,7 +72,7 @@ class MapContainer extends React.Component {
         {/* Note: map must not be unmounted when showing the iframe */}
         {/* as it will reset the map's state */}
         <div className={`c-map c-map--drawing-mode-${drawMode} qa-map-container`}>
-          <LeafletContainer
+          <MapLeafletContainer
             getLeafletInstance={this.setLeafletInstance}
             showMapLink={showMapLink}
           />

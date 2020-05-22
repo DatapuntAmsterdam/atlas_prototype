@@ -20,71 +20,74 @@ const MapPanel = ({
   user,
   printMode,
   zoomLevel,
-  isMapPanelHandleVisible,
-}) => (
-  <section
-    aria-label={
-      isMapPanelVisible
-        ? 'Kaartlagen legenda, Kaartlagen verbergen'
-        : 'Kaartlagen legenda, Kaartlagen tonen'
-    }
-    aria-expanded={isMapPanelVisible}
-    className={`
+}) => {
+  console.log('overlays', overlays)
+
+  return (
+    <section
+      aria-label={
+        isMapPanelVisible
+          ? 'Kaartlagen legenda, Kaartlagen verbergen'
+          : 'Kaartlagen legenda, Kaartlagen tonen'
+      }
+      aria-expanded={isMapPanelVisible}
+      className={`
           map-panel
           map-panel--${isMapPanelVisible ? 'expanded' : 'collapsed'}
           map-panel--has${activeMapLayers.length > 0 ? '' : '-no'}-active-layers
         `}
-  >
-    <div className="map-panel__heading">
-      <button
-        type="button"
-        className="map-panel__toggle"
-        onClick={onMapPanelToggle}
-        title={isMapPanelVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen'}
-      >
-        <span className="map-panel__heading-icon" />
-        <h2 className="map-panel__heading-title" aria-hidden="true">
-          Kaartlagen
-        </h2>
-        <span
-          className={`
+    >
+      <div className="map-panel__heading">
+        <button
+          type="button"
+          className="map-panel__toggle"
+          onClick={onMapPanelToggle}
+          title={isMapPanelVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen'}
+        >
+          <span className="map-panel__heading-icon" />
+          <h2 className="map-panel__heading-title" aria-hidden="true">
+            Kaartlagen
+          </h2>
+          <span
+            className={`
               map-panel__toggle--icon
               map-panel__toggle--icon-${isMapPanelVisible ? 'collapse' : 'expand'}
             `}
+          >
+            <ChevronUp />
+          </span>
+        </button>
+      </div>
+      <div className="scroll-wrapper">
+        <MapPanelHandle
+          {...{
+            isMapPanelHandleVisible: true, // TODO: find out if we actually need these (and from where its used)
+            onMapPanelHandleToggle,
+          }}
         >
-          <ChevronUp />
-        </span>
-      </button>
-    </div>
-    <div className="scroll-wrapper">
-      <MapPanelHandle
-        {...{
-          isMapPanelHandleVisible,
-          onMapPanelHandleToggle,
-        }}
-      >
-        <MapType
-          activeBaseLayer={activeBaseLayer}
-          baseLayers={mapBaseLayers}
-          onBaseLayerToggle={onBaseLayerToggle}
-        />
-        {panelLayers.map(({ id, mapLayers, title }) => (
-          <MapLegend
-            key={id}
-            activeMapLayers={mapLayers}
-            onLayerToggle={onLayerToggle}
-            onLayerVisibilityToggle={onLayerVisibilityToggle}
-            overlays={overlays}
-            user={user}
-            title={title}
-            zoomLevel={zoomLevel}
-            printMode={printMode}
+          <MapType
+            activeBaseLayer={activeBaseLayer}
+            baseLayers={mapBaseLayers}
+            onBaseLayerToggle={onBaseLayerToggle}
           />
-        ))}
-      </MapPanelHandle>
-    </div>
-  </section>
-)
+          {panelLayers.map(({ id, mapLayers, title }) => (
+            <MapLegend
+              key={id}
+              activeMapLayers={mapLayers}
+              onLayerToggle={onLayerToggle}
+              onLayerVisibilityToggle={onLayerVisibilityToggle}
+              overlays={overlays}
+              user={user}
+              title={title}
+              zoomLevel={zoomLevel}
+              printMode={printMode}
+            />
+          ))}
+        </MapPanelHandle>
+      </div>
+    </section>
+  )
+}
 
 MapPanel.defaultProps = {
   activeMapLayers: [],

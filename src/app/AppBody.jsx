@@ -27,7 +27,7 @@ const CollectionDetailPage = React.lazy(() => import('./pages/CollectionDetailPa
 const MapSplitPage = React.lazy(() => import('./pages/MapSplitPage'))
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'))
 const SearchPage = React.lazy(() => import('./pages/SearchPage/index'))
-const MapPage = React.lazy(() => import('./pages/MapPage/MapPage'))
+const MapContainer = React.lazy(() => import('./pages/MapPage/MapContainer'))
 
 // The Container from @datapunt/asc-ui isnt used here as the margins added do not match the ones in the design
 const AppContainer = styled.div`
@@ -78,7 +78,7 @@ const AppBody = ({
       </Helmet>
       <Suspense fallback={<LoadingIndicator style={{ top: '200px' }} />}>
         {currentPage === PAGES.MAP ? (
-          <MapPage />
+          <MapContainer />
         ) : (
           <div className={`c-dashboard__body ${bodyClasses}`}>
             <NotificationAlert />

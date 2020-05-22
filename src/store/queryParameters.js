@@ -474,3 +474,13 @@ export function decodeLayers(value) {
     }
   })
 }
+
+export function encodeLayers(values) {
+  if (!values || !values.length > 0) {
+    return []
+  }
+
+  console.log('values', values)
+
+  return values.map(({ id, isVisible }) => `${id}:${isVisible ? 1 : 0}`).join('|')
+}
