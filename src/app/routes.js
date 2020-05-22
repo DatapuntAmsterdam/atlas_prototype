@@ -10,7 +10,8 @@ export const MAIN_PATHS = {
   PUBLICATIONS: 'publicaties',
   SPECIALS: 'specials',
   COLLECTIONS: 'dossiers',
-  MAP: 'kaarten',
+  MAPS: 'kaarten',
+  MAP: 'kaart',
 }
 
 export const routing = {
@@ -161,9 +162,15 @@ export const routing = {
   },
   mapSearch: {
     title: 'Kaarten',
-    path: `/${MAIN_PATHS.MAP}/zoek/`,
+    path: `/${MAIN_PATHS.MAPS}/zoek/`,
     type: `${ROUTER_NAMESPACE}/${PAGES.MAP_SEARCH}`,
     page: PAGES.MAP_SEARCH,
+  },
+  map: {
+    title: 'Kaart',
+    path: `/${MAIN_PATHS.MAP}/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.MAP}`,
+    page: PAGES.MAP,
   },
 }
 

@@ -6,15 +6,15 @@ import { LatLngBounds } from 'leaflet'
 import { isEmbedded, isPrintOrEmbedMode, isMapLinkVisible } from '../../../shared/ducks/ui/ui'
 
 // import DrawTool from '../draw-tool/DrawToolContainer'
-import ToggleFullscreen from '../../../app/components/ToggleFullscreen/ToggleFullscreen'
-import { Map as ContextMenu } from '../../../app/components/ContextMenu'
+import ToggleFullscreen from '../../components/ToggleFullscreen/ToggleFullscreen'
+import { Map as ContextMenu } from '../../components/ContextMenu'
 
-import LeafletContainer from '../leaflet/LeafletContainer'
-import MapPanelContainer from '../panel/MapPanelContainer'
-import MapPreviewPanelContainer from '../preview-panel/MapPreviewPanelContainer'
-import MapEmbedButton from '../../components/map-embed-button/MapEmbedButton'
+import LeafletContainer from './LeafletContainer'
+import MapPreviewPanelContainer from '../../../map/containers/preview-panel/MapPreviewPanelContainer'
+import MapEmbedButton from '../../../map/components/map-embed-button/MapEmbedButton'
 import { previewDataAvailable as previewDataAvailableSelector } from '../../../shared/ducks/selection/selection'
-import { getDrawingMode } from '../../ducks/map/selectors'
+import { getDrawingMode } from '../../../map/ducks/map/selectors'
+import MapPanelContainer from '../../../map/containers/panel/MapPanelContainer'
 
 export const overrideLeafletGetBounds = (map) => {
   // We override here the getBounds method of Leaflet

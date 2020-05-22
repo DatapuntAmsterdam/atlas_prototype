@@ -27,6 +27,7 @@ const CollectionDetailPage = React.lazy(() => import('./pages/CollectionDetailPa
 const MapSplitPage = React.lazy(() => import('./pages/MapSplitPage'))
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'))
 const SearchPage = React.lazy(() => import('./pages/SearchPage/index'))
+const MapPage = React.lazy(() => import('./pages/MapPage/MapPage'))
 
 // The Container from @datapunt/asc-ui isnt used here as the margins added do not match the ones in the design
 const AppContainer = styled.div`
@@ -47,6 +48,8 @@ const AppBody = ({
   const { enableLinkTracking } = useMatomo()
   enableLinkTracking()
 
+  console.log('currentpage', currentPage, PAGES.MAP)
+
   return hasGrid ? (
     <>
       <AppContainer id="main" className="main-container">
@@ -59,6 +62,7 @@ const AppBody = ({
           {currentPage === PAGES.COLLECTION_DETAIL && <CollectionDetailPage />}
           {currentPage === PAGES.ACTUALITY && <ActualityContainer />}
           {currentPage === PAGES.NOT_FOUND && <NotFoundPage />}
+
           {isSearchPage(currentPage) && <SearchPage currentPage={currentPage} query={query} />}
         </Suspense>
       </AppContainer>
@@ -73,23 +77,27 @@ const AppBody = ({
         <meta name="viewport" content="width=1024, user-scalable=yes" />
       </Helmet>
       <Suspense fallback={<LoadingIndicator style={{ top: '200px' }} />}>
-        <div className={`c-dashboard__body ${bodyClasses}`}>
-          <NotificationAlert />
-          {visibilityError && <ErrorAlert />}
-          {embedPreviewMode ? (
-            <EmbedIframeComponent />
-          ) : (
-            <div className="u-grid u-full-height u-overflow--y-auto">
-              <div className="u-row u-full-height">
-                {isMapSplitPage(currentPage) && <MapSplitPage />}
+        {currentPage === PAGES.MAP ? (
+          <MapPage />
+        ) : (
+          <div className={`c-dashboard__body ${bodyClasses}`}>
+            <NotificationAlert />
+            {visibilityError && <ErrorAlert />}
+            {embedPreviewMode ? (
+              <EmbedIframeComponent />
+            ) : (
+              <div className="u-grid u-full-height u-overflow--y-auto">
+                <div className="u-row u-full-height">
+                  {isMapSplitPage(currentPage) && <MapSplitPage />}
 
-                {currentPage === PAGES.CONSTRUCTION_FILE && <ConstructionFilesContainer />}
+                  {currentPage === PAGES.CONSTRUCTION_FILE && <ConstructionFilesContainer />}
 
-                {currentPage === PAGES.DATASET_DETAIL && <DatasetDetailContainer />}
+                  {currentPage === PAGES.DATASET_DETAIL && <DatasetDetailContainer />}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
         <FeedbackModal id="feedbackModal" />
       </Suspense>
     </>

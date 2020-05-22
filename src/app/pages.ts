@@ -29,6 +29,7 @@ const PAGES = {
   COLLECTION_SEARCH: 'COLLECTION_SEARCH',
 
   // map pages
+  MAP: 'MAP',
   MAP_SEARCH: 'MAP_SEARCH',
 
   // text pages
