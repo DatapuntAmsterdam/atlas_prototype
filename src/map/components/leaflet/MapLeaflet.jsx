@@ -3,15 +3,13 @@ import PropTypes from 'prop-types'
 import ReactResizeDetector from 'react-resize-detector'
 import 'leaflet' // Required to define window.L before leaflet plugins are imported
 import 'leaflet.markercluster'
+import 'leaflet-draw'
 import 'leaflet-rotatedmarker'
-import 'leaflet.nontiledlayer'
-import styled from 'styled-components'
-import { TileLayer, GeoJSON } from '@datapunt/react-maps'
-import { constants, components } from '@datapunt/amsterdam-react-maps'
-import { ViewerContainer } from '@datapunt/asc-ui'
+import { GeoJSON, Map, ScaleControl, TileLayer, ZoomControl } from 'react-leaflet'
+
 import CustomMarker from './custom/marker/CustomMarker'
 import ClusterGroup from './custom/cluster-group/ClusterGroup'
-// import NonTiledLayer from './custom/non-tiled-layer'
+import NonTiledLayer from './custom/non-tiled-layer'
 import geoJsonConfig from './services/geo-json-config.constant'
 import markerConfig from './services/marker-config.constant'
 import createClusterIcon from './services/cluster-icon'
@@ -60,17 +58,6 @@ const ICONS = {
   [markerPointType]: ({ type }) => locationIcon(type),
 }
 
-const StyledViewerContainer = styled(ViewerContainer)`
-  z-index: 400;
-`
-
-const { Marker, BaseLayer, NonTiledLayer, Scale, Zoom, Map, GeoJSONLayer } = components
-
-const StyledMap = styled(Map)`
-  width: 100%;
-  height: 100vh;
-`
-
 class MapLeaflet extends React.Component {
   constructor(props) {
     super(props)
@@ -89,8 +76,8 @@ class MapLeaflet extends React.Component {
     const { getLeafletInstance } = this.props
 
     this.setMapElement = (element) => {
-      if (element) {
-        this.MapElement = element
+      if (element && element.leafletElement) {
+        this.MapElement = element.leafletElement
         getLeafletInstance(this.MapElement)
       }
     }
@@ -218,6 +205,7 @@ class MapLeaflet extends React.Component {
     const {
       center,
       clusterMarkers,
+      baseLayer,
       geoJsons,
       rdGeoJsons,
       layers,
@@ -231,8 +219,8 @@ class MapLeaflet extends React.Component {
       isLoading,
       showMapLink,
       isZoomControlVisible,
-      baseLayer: bassLayer,
     } = this.props
+
     const { pendingLayers } = this.state
 
     const tmsLayers = layers.filter((layer) => layer.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
@@ -256,102 +244,96 @@ class MapLeaflet extends React.Component {
         }}
         onResize={this.handleResize}
       >
-        <StyledMap
-          // ref={this.setMapElement}
-          // onDraw={this.draw}
-          // onLayerRemove={({ layer }) => this.handleLoaded(layer)}
-          setInstance={this.setMapElement}
-          events={{
-            zoomend: this.onZoomEnd,
-            click: this.onClick,
-          }}
+        <Map
+          ref={this.setMapElement}
+          onZoomEnd={this.onZoomEnd}
+          onClick={this.onClick}
+          onDragEnd={this.onDragEnd}
+          onDraw={this.draw}
+          center={center}
+          zoom={zoom}
+          onLayerRemove={({ layer }) => this.handleLoaded(layer)}
+          {...mapOptions}
         >
+          <TileLayer
+            {...baseLayer.baseLayerOptions}
+            url={baseLayer.urlTemplate}
+            {...loadingHandlers}
+          />
           {tmsLayers.map(({ id: key, isVisible, url, bounds }) => (
             <TileLayer
-              key={key}
-              args={[url]}
-              events={{
-                loading: () => {
-                  console.log('loading................')
-                },
-                load: () => {
-                  console.log('loading................')
-                },
-              }}
-              options={{
-                subdomains: bassLayer.baseLayerOptions.subdomains,
-                minZoom: bassLayer.baseLayerOptions.minZoom,
-                maxZoom: bassLayer.baseLayerOptions.maxZoom,
-                opacity: visibleToOpacity(isVisible),
-                tms: true,
+              {...{
+                key,
+                url,
                 bounds,
               }}
+              tms
+              subdomains={baseLayer.baseLayerOptions.subdomains}
+              minZoom={baseLayer.baseLayerOptions.minZoom}
+              maxZoom={baseLayer.baseLayerOptions.maxZoom}
+              zoom={zoom}
+              opacity={visibleToOpacity(isVisible)}
+              {...loadingHandlers}
             />
           ))}
 
           {nonTmsLayers.map(({ id: key, isVisible, url, params, overlayOptions }) => (
             <NonTiledLayer
               {...{
-                url,
                 key,
+                url,
                 params,
               }}
-              options={{
-                ...overlayOptions,
-                opacity: visibleToOpacity(isVisible),
-              }}
+              {...overlayOptions}
+              opacity={visibleToOpacity(isVisible)}
+              {...loadingHandlers}
             />
           ))}
-          {/*{Boolean(clusterMarkers.length) && (*/}
-          {/*  <ClusterGroup*/}
-          {/*    markers={clusterMarkers}*/}
-          {/*    showCoverageOnHover={false}*/}
-          {/*    iconCreateFunction={createClusterIcon}*/}
-          {/*    spiderfyOnMaxZoom={false}*/}
-          {/*    animate={false}*/}
-          {/*    maxClusterRadius={50}*/}
-          {/*    chunkedLoading*/}
-          {/*    getMarkerGroupBounds={this.onClusterGroupBounds}*/}
-          {/*    ref={this.setActiveElement}*/}
-          {/*    disableClusteringAtZoom={baseLayer.baseLayerOptions.maxZoom}*/}
-          {/*  />*/}
-          {/*)}*/}
+          {Boolean(clusterMarkers.length) && (
+            <ClusterGroup
+              markers={clusterMarkers}
+              showCoverageOnHover={false}
+              iconCreateFunction={createClusterIcon}
+              spiderfyOnMaxZoom={false}
+              animate={false}
+              maxClusterRadius={50}
+              chunkedLoading
+              getMarkerGroupBounds={this.onClusterGroupBounds}
+              ref={this.setActiveElement}
+              disableClusteringAtZoom={baseLayer.baseLayerOptions.maxZoom}
+            />
+          )}
           {markers.map(
             (item) =>
               Boolean(item.position) && (
-                <Marker
-                  // ref={markerConfig[item.type].requestFocus && this.setActiveElement}
-                  latLng={{ lat: item.position[0], lng: item.position[1] }}
-                  key={item.position[0].toString() + item.type}
-                  options={{
-                    zIndexOffset: 100,
-                    icon: ICONS[item.type](item.iconData)
-                  }}
-                  // rotationAngle={item.heading || 0}
+                <CustomMarker
+                  ref={markerConfig[item.type].requestFocus && this.setActiveElement}
+                  position={item.position}
+                  key={item.position.toString() + item.type}
+                  icon={ICONS[item.type](item.iconData)}
+                  zIndexOffset={100}
+                  rotationAngle={item.heading || 0}
                 />
               ),
           )}
           {brkMarkers.map(
             (item) =>
               Boolean(item.position) && (
-                <Marker
-                  // ref={markerConfig[item.type].requestFocus && this.setActiveElement}
-                  latLng={{ lat: item.position[0], lng: item.position[1] }}
-                  key={item.position[0].toString() + item.type}
-                  options={{
-                    icon: ICONS[item.type](item.iconData),
-                    zIndexOffset: 100,
-                  }}
-                  // rotationAngle={item.heading || 0}
+                <CustomMarker
+                  ref={markerConfig[item.type].requestFocus && this.setActiveElement}
+                  position={item.position}
+                  key={item.position.toString() + item.type}
+                  icon={ICONS[item.type](item.iconData)}
+                  zIndexOffset={100}
+                  rotationAngle={item.heading || 0}
                 />
               ),
           )}
           {marker && (
-            <Marker
-              latLng={{ lat: marker.position[0], lng: marker.position[1] }}
-              options={{
-                icon: ICONS[marker.type](marker.iconData),
-              }}
+            <CustomMarker
+              position={marker.position}
+              key={marker.toString()}
+              icon={ICONS[marker.type](marker.iconData)}
             />
           )}
           {geoJsons.map(
@@ -375,21 +357,13 @@ class MapLeaflet extends React.Component {
                 />
               ),
           )}
-          <Scale
-            options={{
-              position: 'bottomright',
-              metric: true,
-              imperial: false,
-            }}
-          />
-
-          <StyledViewerContainer bottomRight={isZoomControlVisible ? <Zoom /> : null} />
-          <BaseLayer />
+          <ScaleControl {...scaleControlOptions} />
+          {isZoomControlVisible && <ZoomControl {...zoomControlOptions} />}
           <LoadingIndicator
             loading={isLoading || pendingLayers.length > 0}
             showMapLink={showMapLink}
           />
-        </StyledMap>
+        </Map>
       </ReactResizeDetector>
     )
   }

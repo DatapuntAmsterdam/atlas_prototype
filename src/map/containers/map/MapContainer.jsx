@@ -5,7 +5,7 @@ import { LatLngBounds } from 'leaflet'
 
 import { isEmbedded, isPrintOrEmbedMode, isMapLinkVisible } from '../../../shared/ducks/ui/ui'
 
-// import DrawTool from '../draw-tool/DrawToolContainer'
+import DrawTool from '../draw-tool/DrawToolContainer'
 import ToggleFullscreen from '../../../app/components/ToggleFullscreen/ToggleFullscreen'
 import { Map as ContextMenu } from '../../../app/components/ContextMenu'
 
@@ -76,7 +76,7 @@ class MapContainer extends React.Component {
             getLeafletInstance={this.setLeafletInstance}
             showMapLink={showMapLink}
           />
-          {/* {leafletInstance && <DrawTool leafletInstance={leafletInstance} />} */}
+          {leafletInstance && <DrawTool leafletInstance={leafletInstance} />}
           {toggleFullscreen && (
             <ToggleFullscreen
               isFullscreen={isFullscreen}
