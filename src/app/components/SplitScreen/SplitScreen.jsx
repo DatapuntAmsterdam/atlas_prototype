@@ -1,5 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types' // TODO: refactor, test
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  width: 100%; // Fix for IE11
+`
 
 /* istanbul ignore next */ const SplitScreen = ({ leftComponent, rightComponent, printMode }) => (
   <div className="c-dashboard__column-holder">
@@ -23,7 +28,7 @@ import PropTypes from 'prop-types' // TODO: refactor, test
       `}
     >
       {/* Quickfix: extra div to make sure layout doesn't break due to legacy css mess */}
-      <div>{rightComponent}</div>
+      <Wrapper>{rightComponent}</Wrapper>
     </div>
   </div>
 )

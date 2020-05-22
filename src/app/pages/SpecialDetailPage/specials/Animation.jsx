@@ -82,12 +82,13 @@ const Animation = ({ contentLink, title, results }) => {
           <EditorialContent>
             {intro && <Paragraph strong dangerouslySetInnerHTML={{ __html: intro }} />}
             {body && <CustomHTMLBlock body={body} />}
-            {links?.length &&
-              links.map(({ uri, title: linkTitle }) => (
-                <StyledLink variant="with-chevron" href={uri} title={linkTitle} target="_blank">
-                  {linkTitle}
-                </StyledLink>
-              ))}
+            {links?.length
+              ? links.map(({ uri, title: linkTitle }) => (
+                  <StyledLink variant="with-chevron" href={uri} title={linkTitle} target="_blank">
+                    {linkTitle}
+                  </StyledLink>
+                ))
+              : null}
           </EditorialContent>
         </Column>
       </Column>
