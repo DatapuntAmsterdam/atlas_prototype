@@ -1,9 +1,9 @@
-;(function () {
-  angular.module('dpShared').filter('kebabcase', kebabCase)
+import angular from 'angular'
 
-  function kebabCase() {
-    return function (input) {
-      return input ? input.toLowerCase().replace(/[: ][ ]*/g, '-') : ''
-    }
+angular.module('dpShared').filter('kebabcase', kebabCase)
+
+function kebabCase() {
+  return function (input) {
+    return input ? input.toLowerCase().replace(/[: ][ ]*/g, '-') : ''
   }
-})()
+}

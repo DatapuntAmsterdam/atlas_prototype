@@ -1,22 +1,22 @@
-;(function () {
-  angular.module('dpDetail').component('dpWkpbDownloadLink', {
-    bindings: {
-      url: '<',
-      label: '<',
-    },
-    templateUrl: 'modules/detail/components/wkpb-download-link/wkpb-download-link.html',
-    controller: DpWkpbDownloadLinkController,
-    controllerAs: 'vm',
-  })
+import angular from 'angular'
 
-  DpWkpbDownloadLinkController.$inject = ['api']
+angular.module('dpDetail').component('dpWkpbDownloadLink', {
+  bindings: {
+    url: '<',
+    label: '<',
+  },
+  templateUrl: 'modules/detail/components/wkpb-download-link/wkpb-download-link.html',
+  controller: DpWkpbDownloadLinkController,
+  controllerAs: 'vm',
+})
 
-  function DpWkpbDownloadLinkController(api) {
-    const vm = this
+DpWkpbDownloadLinkController.$inject = ['api']
 
-    /* istanbul ignore next */
-    this.$onInit = function () {
-      api.createUrlWithToken(vm.url).then((tokenUrl) => (vm.downloadUrl = tokenUrl))
-    }
+function DpWkpbDownloadLinkController(api) {
+  const vm = this
+
+  /* istanbul ignore next */
+  this.$onInit = function () {
+    api.createUrlWithToken(vm.url).then((tokenUrl) => (vm.downloadUrl = tokenUrl))
   }
-})()
+}

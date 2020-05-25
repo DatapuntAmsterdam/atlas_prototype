@@ -1,9 +1,9 @@
-;(function () {
-  angular.module('dpShared').factory('store', storeFactory)
+import angular from 'angular'
 
-  storeFactory.$inject = ['$window']
+angular.module('dpShared').factory('store', storeFactory)
 
-  function storeFactory($window) {
-    return $window.reduxStore
-  }
-})()
+storeFactory.$inject = ['$window']
+
+function storeFactory($window) {
+  return $window.reduxStore
+}

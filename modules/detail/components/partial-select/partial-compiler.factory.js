@@ -1,29 +1,29 @@
-;(function () {
-  angular.module('dpDetail').factory('partialCompiler', partialCompilerFactory)
+import angular from 'angular'
 
-  partialCompilerFactory.$inject = ['$q', '$compile', '$rootScope', '$templateRequest']
+angular.module('dpDetail').factory('partialCompiler', partialCompilerFactory)
 
-  function partialCompilerFactory($q, $compile, $rootScope, $templateRequest) {
-    return {
-      getHtml,
-    }
+partialCompilerFactory.$inject = ['$q', '$compile', '$rootScope', '$templateRequest']
 
-    function getHtml(templateUrl, sharedScope) {
-      return $templateRequest(templateUrl).then(function (template) {
-        const q = $q.defer()
+function partialCompilerFactory($q, $compile, $rootScope, $templateRequest) {
+  return {
+    getHtml,
+  }
 
-        const html = $compile(template)(sharedScope)
+  function getHtml(templateUrl, sharedScope) {
+    return $templateRequest(templateUrl).then(function (template) {
+      const q = $q.defer()
 
-        $rootScope.$applyAsync(function () {
-          /*
+      const html = $compile(template)(sharedScope)
+
+      $rootScope.$applyAsync(function () {
+        /*
                      Wait for the next digest cycle (making this function asynchronous), the variables should be
                      rendered inside the template before returning the HTML.
                      */
-          q.resolve(html)
-        })
-
-        return q.promise
+        q.resolve(html)
       })
-    }
+
+      return q.promise
+    })
   }
-})()
+}

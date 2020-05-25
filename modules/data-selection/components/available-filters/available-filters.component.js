@@ -1,3 +1,4 @@
+import angular from 'angular'
 import { addFilter } from '../../../../src/shared/ducks/filters/filters'
 import DATA_SELECTION_CONFIG from '../../../../src/shared/services/data-selection/data-selection-config'
 

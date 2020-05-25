@@ -1,9 +1,9 @@
-;(function () {
-  angular.module('dpShared').run(runBlock)
+import angular from 'angular'
 
-  runBlock.$inject = ['windowErrorHandler']
+angular.module('dpShared').run(runBlock)
 
-  function runBlock(windowErrorHandler) {
-    windowErrorHandler()
-  }
-})()
+runBlock.$inject = ['windowErrorHandler']
+
+function runBlock(windowErrorHandler) {
+  windowErrorHandler()
+}

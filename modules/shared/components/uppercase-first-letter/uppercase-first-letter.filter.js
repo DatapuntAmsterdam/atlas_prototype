@@ -1,9 +1,9 @@
-;(function () {
-  angular.module('dpShared').filter('dpUppercaseFirstLetter', dpUppercaseFirstLetterFilter)
+import angular from 'angular'
 
-  function dpUppercaseFirstLetterFilter() {
-    return function (input) {
-      return input.substring(0, 1).toUpperCase() + input.substring(1)
-    }
+angular.module('dpShared').filter('dpUppercaseFirstLetter', dpUppercaseFirstLetterFilter)
+
+function dpUppercaseFirstLetterFilter() {
+  return function (input) {
+    return input.substring(0, 1).toUpperCase() + input.substring(1)
   }
-})()
+}

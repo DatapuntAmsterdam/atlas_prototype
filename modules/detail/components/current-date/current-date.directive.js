@@ -1,19 +1,19 @@
-;(function () {
-  angular.module('dpDetail').directive('dpCurrentDate', dpCurrentDateDirective)
+import angular from 'angular'
 
-  function dpCurrentDateDirective() {
-    return {
-      restrict: 'E',
-      scope: true,
-      templateUrl: 'modules/detail/components/current-date/current-date.html',
-      controller: DpCurrentDateController,
-      controllerAs: 'vm',
-    }
+angular.module('dpDetail').directive('dpCurrentDate', dpCurrentDateDirective)
+
+function dpCurrentDateDirective() {
+  return {
+    restrict: 'E',
+    scope: true,
+    templateUrl: 'modules/detail/components/current-date/current-date.html',
+    controller: DpCurrentDateController,
+    controllerAs: 'vm',
   }
+}
 
-  function DpCurrentDateController() {
-    const vm = this
+function DpCurrentDateController() {
+  const vm = this
 
-    vm.currentDate = new Date()
-  }
-})()
+  vm.currentDate = new Date()
+}

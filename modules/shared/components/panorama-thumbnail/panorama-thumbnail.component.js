@@ -1,38 +1,38 @@
+import angular from 'angular'
+import SHARED_CONFIG from '../../../../src/shared/services/shared-config/shared-config'
 import { toPanoramaAndPreserveQuery } from '../../../../src/store/redux-first-router/actions'
 import { getDetailLocation } from '../../../../src/store/redux-first-router/selectors'
-import SHARED_CONFIG from '../../../../src/shared/services/shared-config/shared-config'
-;(function () {
-  angular.module('dpShared').component('dpPanoramaThumbnail', {
-    bindings: {
-      panorama: '<',
-      isLoading: '<',
-    },
-    templateUrl: 'modules/shared/components/panorama-thumbnail/panorama-thumbnail.html',
-    controller: DpPanoramaThumbnailController,
-    controllerAs: 'vm',
-  })
 
-  DpPanoramaThumbnailController.$inject = ['store']
+angular.module('dpShared').component('dpPanoramaThumbnail', {
+  bindings: {
+    panorama: '<',
+    isLoading: '<',
+  },
+  templateUrl: 'modules/shared/components/panorama-thumbnail/panorama-thumbnail.html',
+  controller: DpPanoramaThumbnailController,
+  controllerAs: 'vm',
+})
 
-  function DpPanoramaThumbnailController(store) {
-    const vm = this
-    const state = store.getState()
+DpPanoramaThumbnailController.$inject = ['store']
 
-    const reference = getDetailLocation(state)
-    vm.radius = SHARED_CONFIG.RADIUS
+function DpPanoramaThumbnailController(store) {
+  const vm = this
+  const state = store.getState()
 
-    function setLinkTo(panorama) {
-      if (panorama) {
-        vm.linkTo = toPanoramaAndPreserveQuery(panorama.id, panorama.heading, reference)
-      }
-    }
+  const reference = getDetailLocation(state)
+  vm.radius = SHARED_CONFIG.RADIUS
 
-    this.$onInit = function () {
-      setLinkTo(vm.panorama)
-    }
-
-    this.$onChanges = function () {
-      setLinkTo(vm.panorama)
+  function setLinkTo(panorama) {
+    if (panorama) {
+      vm.linkTo = toPanoramaAndPreserveQuery(panorama.id, panorama.heading, reference)
     }
   }
-})()
+
+  this.$onInit = function () {
+    setLinkTo(vm.panorama)
+  }
+
+  this.$onChanges = function () {
+    setLinkTo(vm.panorama)
+  }
+}

@@ -1,33 +1,32 @@
-import 'angular'
+import angular from 'angular'
 import 'angular-aria'
 import 'angular-i18n/nl-nl'
 import 'angular-sanitize'
-;(function () {
-  const moduleDependencies = [
-    // Main modules
-    'dpDetail',
-    'dpDataSelection',
 
-    // Shared module
-    'dpShared',
-    'ngAria',
-  ]
+const moduleDependencies = [
+  // Main modules
+  'dpDetail',
+  'dpDataSelection',
 
-  // eslint-disable-next-line angular/di
-  angular.module('atlas', moduleDependencies).config(['$provide', urlChangeProvider])
+  // Shared module
+  'dpShared',
+  'ngAria',
+]
 
-  urlChangeProvider.$inject = ['$provide']
-  /* istanbul ignore next */
-  function urlChangeProvider($provide) {
-    $provide.decorator('$browser', [
-      '$delegate',
-      function ($delegate) {
-        $delegate.onUrlChange = function () {}
-        $delegate.url = function () {
-          return ''
-        }
-        return $delegate
-      },
-    ])
-  }
-})()
+// eslint-disable-next-line angular/di
+angular.module('atlas', moduleDependencies).config(['$provide', urlChangeProvider])
+
+urlChangeProvider.$inject = ['$provide']
+/* istanbul ignore next */
+function urlChangeProvider($provide) {
+  $provide.decorator('$browser', [
+    '$delegate',
+    function ($delegate) {
+      $delegate.onUrlChange = function () {}
+      $delegate.url = function () {
+        return ''
+      }
+      return $delegate
+    },
+  ])
+}

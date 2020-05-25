@@ -4,70 +4,70 @@ import { setDataset } from '../../../../src/shared/ducks/data-selection/actions'
 import { DATASETS, VIEWS_TO_PARAMS } from '../../../../src/shared/ducks/data-selection/constants'
 import { VIEW_MODE } from '../../../../src/shared/ducks/ui/ui'
 import { dcatdScopes } from '../../../../src/shared/services/auth/auth'
-;(function () {
-  angular.module('dpDataSelection').component('dpDataSelectionHeader', {
-    bindings: {
-      geometryFilter: '<',
-      dataset: '<',
-      availableFilters: '<',
-      filters: '<',
-      isLoading: '<',
-      numberOfRecords: '<',
-      showHeader: '<',
-      user: '<',
-      view: '<',
-    },
-    templateUrl: 'modules/data-selection/components/header/header.html',
-    controllerAs: 'vm',
-    controller: DpDataSelectionHeaderController,
-  })
+import angular from 'angular'
 
-  DpDataSelectionHeaderController.$inject = ['$scope']
+angular.module('dpDataSelection').component('dpDataSelectionHeader', {
+  bindings: {
+    geometryFilter: '<',
+    dataset: '<',
+    availableFilters: '<',
+    filters: '<',
+    isLoading: '<',
+    numberOfRecords: '<',
+    showHeader: '<',
+    user: '<',
+    view: '<',
+  },
+  templateUrl: 'modules/data-selection/components/header/header.html',
+  controllerAs: 'vm',
+  controller: DpDataSelectionHeaderController,
+})
 
-  function DpDataSelectionHeaderController($scope) {
-    const vm = this
+DpDataSelectionHeaderController.$inject = ['$scope']
 
-    $scope.$watchGroup(
-      [
-        'vm.dataset',
-        'vm.geometryFilter',
-        'vm.view',
-        'vm.numberOfRecords',
-        'vm.filters',
-        'vm.isLoading',
-      ],
-      setHeader,
-    )
+function DpDataSelectionHeaderController($scope) {
+  const vm = this
 
-    function setHeader() {
-      const isListView = vm.view === VIEWS_TO_PARAMS[VIEW_MODE.SPLIT]
-      const config = DATA_SELECTION_CONFIG.datasets[vm.dataset]
-      const exportAuthScope = config.AUTH_SCOPE
-      vm.showButtons = vm.dataset !== 'dcatd'
-      vm.showDownloadButton =
-        vm.view !== VIEWS_TO_PARAMS[VIEW_MODE.SPLIT] &&
-        vm.numberOfRecords > 0 &&
-        (!exportAuthScope || vm.user.scopes.includes(exportAuthScope))
-      vm.showTabs = isListView
+  $scope.$watchGroup(
+    [
+      'vm.dataset',
+      'vm.geometryFilter',
+      'vm.view',
+      'vm.numberOfRecords',
+      'vm.filters',
+      'vm.isLoading',
+    ],
+    setHeader,
+  )
 
-      vm.canEditDataset = vm.user.scopes.some((scope) => dcatdScopes.includes(scope))
-      vm.showNumberOfRecords =
-        vm.numberOfRecords > 0 && DATA_SELECTION_CONFIG.datasets[vm.dataset].SHOW_NUMBER_OF_RECORDS
-      vm.datasetTitle = DATA_SELECTION_CONFIG.datasets[vm.dataset].TITLE
+  function setHeader() {
+    const isListView = vm.view === VIEWS_TO_PARAMS[VIEW_MODE.SPLIT]
+    const config = DATA_SELECTION_CONFIG.datasets[vm.dataset]
+    const exportAuthScope = config.AUTH_SCOPE
+    vm.showButtons = vm.dataset !== 'dcatd'
+    vm.showDownloadButton =
+      vm.view !== VIEWS_TO_PARAMS[VIEW_MODE.SPLIT] &&
+      vm.numberOfRecords > 0 &&
+      (!exportAuthScope || vm.user.scopes.includes(exportAuthScope))
+    vm.showTabs = isListView
 
-      const tabs = [DATASETS.BAG, DATASETS.HR]
+    vm.canEditDataset = vm.user.scopes.some((scope) => dcatdScopes.includes(scope))
+    vm.showNumberOfRecords =
+      vm.numberOfRecords > 0 && DATA_SELECTION_CONFIG.datasets[vm.dataset].SHOW_NUMBER_OF_RECORDS
+    vm.datasetTitle = DATA_SELECTION_CONFIG.datasets[vm.dataset].TITLE
 
-      /* istanbul ignore next */
-      if (features.eigendommen) {
-        tabs.push(DATASETS.BRK)
-      }
+    const tabs = [DATASETS.BAG, DATASETS.HR]
 
-      vm.tabs = tabs.map((dataset) => ({
-        dataset,
-        title: DATA_SELECTION_CONFIG.datasets[dataset].TITLE_TAB,
-        tabAction: setDataset(dataset),
-        isActive: vm.dataset === dataset,
-      }))
+    /* istanbul ignore next */
+    if (features.eigendommen) {
+      tabs.push(DATASETS.BRK)
     }
+
+    vm.tabs = tabs.map((dataset) => ({
+      dataset,
+      title: DATA_SELECTION_CONFIG.datasets[dataset].TITLE_TAB,
+      tabAction: setDataset(dataset),
+      isActive: vm.dataset === dataset,
+    }))
   }
-})()
+}

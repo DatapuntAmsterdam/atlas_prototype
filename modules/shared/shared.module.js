@@ -1,3 +1,3 @@
-;(function () {
-  angular.module('dpShared', [])
-})()
+import angular from 'angular'
+
+angular.module('dpShared', [])

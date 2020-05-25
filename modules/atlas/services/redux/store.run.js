@@ -1,11 +1,11 @@
-;(function () {
-  angular.module('atlas').run(runBlock)
+import angular from 'angular'
 
-  runBlock.$inject = ['$timeout', '$rootScope', '$window']
+angular.module('atlas').run(runBlock)
 
-  function runBlock($timeout, $rootScope, $window) {
-    $window.reduxStore.subscribe(() => {
-      $timeout(() => $rootScope.$digest())
-    })
-  }
-})()
+runBlock.$inject = ['$timeout', '$rootScope', '$window']
+
+function runBlock($timeout, $rootScope, $window) {
+  $window.reduxStore.subscribe(() => {
+    $timeout(() => $rootScope.$digest())
+  })
+}
