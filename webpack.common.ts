@@ -13,6 +13,8 @@ import { Configuration, DefinePlugin } from 'webpack'
 const modernModules = [
   path.resolve(__dirname, 'node_modules/@datapunt/asc-assets'),
   path.resolve(__dirname, 'node_modules/@datapunt/asc-ui'),
+  path.resolve(__dirname, 'node_modules/body-scroll-lock'),
+  path.resolve(__dirname, 'node_modules/escape-string-regexp'),
 ]
 
 const env = dotenv.config().parsed ?? {}
@@ -98,6 +100,7 @@ export function createConfig(options: CreateConfigOptions): Configuration {
                 '@babel/preset-typescript',
               ],
               plugins: [
+                'transform-commonjs-es2015-modules',
                 [
                   '@babel/plugin-transform-runtime',
                   {
@@ -185,27 +188,22 @@ export function createConfig(options: CreateConfigOptions): Configuration {
         // Prevent multiple cleanups, since we're using multiple configs (see: https://github.com/johnagan/clean-webpack-plugin/issues/122).
         cleanOnceBeforeBuildPatterns: [],
       }),
-      new CopyWebpackPlugin([
-        { from: './public/', to: './assets/' },
-        { from: './public/static/', to: './' },
-        // Dumb copy of all assets for now
-        // All root assets files
-        {
-          context: 'modules/shared/assets',
-          from: '*',
-          to: 'assets',
-        },
-        // All assets in sub folders
-        {
-          context: 'modules/shared/assets',
-          from: '**/*',
-          to: 'assets',
-        },
-        {
-          from: './node_modules/@datapunt/asc-assets/static/fonts',
-          to: '',
-        },
-      ]),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: './public/', to: './assets/' },
+          { from: './public/static/', to: './' },
+          // All assets in sub folders
+          {
+            context: 'modules/shared/assets',
+            from: '**/*',
+            to: 'assets',
+          },
+          {
+            from: './node_modules/@datapunt/asc-assets/static/fonts',
+            to: '',
+          },
+        ],
+      }),
       new DefinePlugin({
         VERSION: JSON.stringify(require('./package.json').version),
         ...envKeys,

@@ -8,6 +8,7 @@ describe('The dp-sbi-filter component', () => {
   let availableFilters
 
   beforeEach(() => {
+    // eslint-disable-next-line no-import-assign
     dataSelectionConfig.default = {
       datasets: {
         my_special_dataset: {

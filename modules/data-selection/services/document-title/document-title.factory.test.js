@@ -7,6 +7,7 @@ describe('The dpDataSelectionDocumentTitle factory', function () {
   let mockedFilters
 
   beforeEach(function () {
+    // eslint-disable-next-line no-import-assign
     dataSelectionConfig.default = {
       datasets: {
         bag: {

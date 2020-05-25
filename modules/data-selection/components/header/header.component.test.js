@@ -1,5 +1,5 @@
-import * as dataSelectionConfig from '../../../../src/shared/services/data-selection/data-selection-config'
 import { setDataset } from '../../../../src/shared/ducks/data-selection/actions'
+import * as dataSelectionConfig from '../../../../src/shared/services/data-selection/data-selection-config'
 
 describe('The dp-data-selection-header', () => {
   const anonymousUser = {
@@ -70,6 +70,7 @@ describe('The dp-data-selection-header', () => {
       },
     )
 
+    // eslint-disable-next-line no-import-assign
     dataSelectionConfig.default = config
 
     angular.mock.inject((_$compile_, _$rootScope_, _store_) => {

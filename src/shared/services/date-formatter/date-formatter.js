@@ -31,8 +31,3 @@ export function dateToString(date) {
   const month = `0${date.getMonth() + 1}`.slice(-2)
   return date && `${day}-${month}-${date.getFullYear()}`
 }
-
-export function ymdToDate(dateString) {
-  const date = parseInt(dateString, 0)
-  return new Date(date / 10000, (date % 10000) / 100, date % 100)
-}

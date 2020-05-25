@@ -35,6 +35,7 @@ describe('The dp-data-selection-available-filters component', function () {
       store = _store_
     })
 
+    // eslint-disable-next-line no-import-assign
     dataSelectionConfig.default = config
 
     availableFilters = [
