@@ -3,6 +3,7 @@ import ReactResizeDetector from 'react-resize-detector'
 import 'leaflet' // Required to define window.L before leaflet plugins are imported
 import 'leaflet.markercluster'
 import 'leaflet-rotatedmarker'
+import 'leaflet-draw'
 import 'leaflet.nontiledlayer'
 import styled from 'styled-components'
 import { TileLayer, GeoJSON } from '@datapunt/react-maps'
