@@ -1,12 +1,17 @@
-import L, { LatLng, LatLngTuple, Polygon, Polyline } from 'leaflet'
-import React, { useEffect, useState } from 'react'
+import L, { LatLngTuple, Polygon, Polyline } from 'leaflet'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ViewerContainer } from '@datapunt/asc-ui'
 import { components } from '@datapunt/amsterdam-react-maps'
 import useStateRef from '@datapunt/amsterdam-react-maps/lib/utils/useStateRef'
-import getDataSelection from './getDataSelection'
+import DrawTool from './Components/DrawTool'
+import MapPanelContainer from './MapPanelContainer'
+import MAP_CONFIG from '../../../map/services/map.config'
+import MapContext from './MapContext'
 
-const { Map, DrawTool, BaseLayer, MarkerClusterGroup } = components
+// Find out why the import is not found
+// @ts-ignore
+const { Map, BaseLayer, MarkerClusterGroup, NonTiledLayer } = components
 
 const StyledMap = styled(Map)`
   width: 100%;
@@ -18,6 +23,17 @@ const StyledViewerContainer = styled(ViewerContainer)`
   z-index: 400;
   height: calc(100% - 50px);
   top: 50px;
+`
+
+// This can be deleted once we use the new MapDrawer / MapPanel
+const MapPanelContainerWrapper = styled.div`
+  position: relative;
+  max-height: 80vh;
+  overflow: auto;
+  & > section {
+    position: relative;
+    max-height: 100%;
+  }
 `
 
 type extraLayerTypes = {
@@ -38,123 +54,47 @@ type MarkerGroup = {
   markers: LatLngTuple[]
 }
 
-const DATA_SELECTION_ENDPOINT = 'https://api.data.amsterdam.nl/dataselectie/bag/geolocation/'
-
-const MapWithDrawTool: React.FC = () => {
+const MapPage: React.FC = () => {
   const [showDrawTool, setShowDrawTool] = useState(true)
-  const [mapInstance, setMapInstance] = useState<L.Map>()
+  const [, setMapInstance] = useState<L.Map>()
   const [markerGroups, setMarkerGroups, markerGroupsRef] = useStateRef<MarkerGroup[]>([])
 
-  const fetchData = async (latLngs: LatLng[][]) =>
-    getDataSelection(DATA_SELECTION_ENDPOINT, {
-      shape: JSON.stringify(latLngs[0].map(({ lat, lng }) => [lng, lat])),
-    })
+  const { activeMapLayers, mapLayers, overlays, getOverlays } = React.useContext(MapContext)
 
-  const getMarkerGroup = async (layer: ExtendedLayer): Promise<null | void> => {
-    if (!(layer instanceof Polygon)) {
-      return null
-    }
-    try {
-      const latLngs = layer.getLatLngs() as LatLng[][]
-      const res = await fetchData(latLngs)
+  // const tmsLayers = layers.filter((layer) => layer.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
+  const nonTmsLayers =
+    overlays && overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
 
-      if (markerGroupsRef.current) {
-        setMarkerGroups([
-          ...markerGroupsRef.current.filter(({ id }) => id !== layer.id),
-          {
-            id: layer.id,
-            markers: res.markers,
-          },
-        ])
-      }
-    } catch (e) {
-      // Handle error
-      // eslint-disable-next-line no-console
-      console.warn(e)
-    }
-  }
-
-  const editVertex = async (e: L.DrawEvents.EditVertex) => {
-    await getMarkerGroup(e.poly as ExtendedLayer)
-  }
-
-  const getTotalDistance = (latLngs: LatLng[]) => {
-    return latLngs.reduce(
-      (total, latlng, i) => {
-        if (i > 0) {
-          const dist = latlng.distanceTo(latLngs[i - 1])
-          return total + dist
-        }
-        return total
-      },
-      latLngs.length > 2 ? latLngs[0].distanceTo(latLngs[latLngs.length - 1]) : 0,
-    )
-  }
-
-  const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer) => {
-    const latLngs = layer.getLatLngs().flat().flat()
-    const distance = getTotalDistance(latLngs)
-
-    let toolTipText: string
-
-    if (distance >= 1000) {
-      toolTipText = `${L.GeometryUtil.formattedNumber(`${distance / 1000}`, 2)} km`
-    } else {
-      toolTipText = `${L.GeometryUtil.formattedNumber(`${distance}`, 2)} m`
-    }
-
-    if (layer instanceof Polygon) {
-      toolTipText = `${L.GeometryUtil.readableArea(L.GeometryUtil.geodesicArea(latLngs), true, {
-        m: 1,
-      })}, ${toolTipText}`
-    }
-    if (toolTipText) {
-      layer.bindTooltip(toolTipText, { direction: 'bottom' }).openTooltip()
-    }
-  }
-
-  useEffect(() => {
-    if (mapInstance) {
-      // @ts-ignore
-      mapInstance.on(L.Draw.Event.EDITVERTEX, editVertex)
-    }
-
-    return () => {
-      if (mapInstance) {
-        // @ts-ignore
-        mapInstance.off(L.Draw.Event.EDITVERTEX, editVertex)
-      }
-    }
-  }, [mapInstance])
+  React.useEffect(() => {
+    if (activeMapLayers && activeMapLayers?.length) getOverlays()
+  }, [activeMapLayers])
 
   return (
-    <StyledMap setInstance={setMapInstance}>
-      {showDrawTool &&
-        markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
-      <BaseLayer />
-      <StyledViewerContainer
-        topRight={
-          <DrawTool
-            onDrawEnd={async (layer: ExtendedLayer) => {
-              await getMarkerGroup(layer)
-              bindDistanceAndAreaToTooltip(layer)
-            }}
-            onDelete={(layersInEditMode) => {
-              const editLayerIds = layersInEditMode.map(({ id }) => id)
-
-              // remove the markerGroups.
-              if (markerGroupsRef.current) {
-                setMarkerGroups(
-                  markerGroupsRef.current.filter(({ id }) => !editLayerIds.includes(id)),
-                )
-              }
-            }}
-            onToggle={setShowDrawTool}
-          />
-        }
-      />
-    </StyledMap>
+    <>
+      <StyledMap setInstance={setMapInstance}>
+        {showDrawTool &&
+          markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
+        <BaseLayer />
+        {nonTmsLayers?.map(({ url, overlayOptions: options, id }) => (
+          <NonTiledLayer key={id} url={url} options={options} />
+        ))}
+        <StyledViewerContainer
+          bottomLeft={
+            <MapPanelContainerWrapper>
+              <MapPanelContainer />
+            </MapPanelContainerWrapper>
+          }
+          topRight={
+            <DrawTool
+              onToggle={setShowDrawTool}
+              setMarkerGroups={setMarkerGroups}
+              markerGroupsRef={markerGroupsRef}
+            />
+          }
+        />
+      </StyledMap>
+    </>
   )
 }
 
-export default MapWithDrawTool
+export default MapPage
