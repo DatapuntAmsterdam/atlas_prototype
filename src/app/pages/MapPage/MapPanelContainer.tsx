@@ -16,7 +16,7 @@ const MapPanelComponent = () => {
     setActiveBaseLayer,
     setActiveMapLayers,
     setVisibleMapLayers,
-    setMapPanelVisible,
+    toggleMapPanel,
   } = React.useContext(MapContext)
 
   // Get the user from the Redux state for now
@@ -48,7 +48,7 @@ const MapPanelComponent = () => {
       onBaseLayerToggle={setActiveBaseLayer}
       onLayerToggle={onLayerToggle}
       onLayerVisibilityToggle={setVisibleMapLayers}
-      onMapPanelToggle={setMapPanelVisible}
+      onMapPanelToggle={toggleMapPanel}
       isMapPanelVisible={isMapPanelVisible}
       zoomLevel={zoomLevel}
       user={user}

@@ -1,5 +1,5 @@
-import L, { LatLngTuple, Polygon, Polyline } from 'leaflet'
-import React, { useState } from 'react'
+import L, { LatLngTuple, Polygon, Polyline, LeafletMouseEvent } from 'leaflet'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { ViewerContainer } from '@datapunt/asc-ui'
 import { components } from '@datapunt/amsterdam-react-maps'
@@ -8,10 +8,11 @@ import DrawTool from './Components/DrawTool'
 import MapPanelContainer from './MapPanelContainer'
 import MAP_CONFIG from '../../../map/services/map.config'
 import MapContext from './MapContext'
+import handleMapClick from './utils/handleMapClick'
 
 // Find out why the import is not found
 // @ts-ignore
-const { Map, BaseLayer, MarkerClusterGroup, NonTiledLayer } = components
+const { Map, BaseLayer, MarkerClusterGroup, NonTiledLayer, Marker } = components
 
 const StyledMap = styled(Map)`
   width: 100%;
@@ -56,18 +57,39 @@ type MarkerGroup = {
 
 const MapPage: React.FC = () => {
   const [showDrawTool, setShowDrawTool] = useState(true)
-  const [, setMapInstance] = useState<L.Map>()
+  const [mapInstance, setMapInstance] = useState<L.Map>()
   const [markerGroups, setMarkerGroups, markerGroupsRef] = useStateRef<MarkerGroup[]>([])
 
-  const { activeMapLayers, mapLayers, overlays, getOverlays } = React.useContext(MapContext)
+  const {
+    location,
+    activeMapLayers,
+    mapLayers,
+    overlays,
+    getOverlays,
+    setLocation,
+  } = React.useContext(MapContext)
 
   // const tmsLayers = layers.filter((layer) => layer.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
   const nonTmsLayers =
     overlays && overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (activeMapLayers && activeMapLayers?.length) getOverlays()
+
+    getOverlays(activeMapLayers, mapLayers, {})
   }, [activeMapLayers])
+
+  useEffect(() => {
+    if (mapInstance) {
+      mapInstance.on('click', (e: LeafletMouseEvent) => handleMapClick(e, setLocation, overlays))
+    }
+
+    return () => {
+      if (mapInstance) {
+        mapInstance.off('click', (e: LeafletMouseEvent) => handleMapClick(e, setLocation, overlays))
+      }
+    }
+  }, [mapInstance, overlays])
 
   return (
     <>
@@ -75,6 +97,7 @@ const MapPage: React.FC = () => {
         {showDrawTool &&
           markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
         <BaseLayer />
+        {location && <Marker latLng={location} />}
         {nonTmsLayers?.map(({ url, overlayOptions: options, id }) => (
           <NonTiledLayer key={id} url={url} options={options} />
         ))}

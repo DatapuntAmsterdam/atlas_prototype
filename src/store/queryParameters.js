@@ -460,6 +460,27 @@ export default paramsRegistry
     )
   })
 
+export function decodeLocation(value) {
+  if (!value) {
+    return {}
+  }
+
+  const [lat, lng] = value.split(',')
+
+  return {
+    lat,
+    lng,
+  }
+}
+
+export function encodeLocation({ lat, lng }) {
+  if (!lat || !lng) {
+    return ''
+  }
+
+  return `${lat},${lng}`
+}
+
 export function decodeLayers(value) {
   if (!value) {
     return []
