@@ -33,7 +33,7 @@
     "analyze:legacy": "TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack.analyze.ts --env.config=legacy"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.6",
+    "@babel/runtime": "^7.10.0",
     "@datapunt/asc-assets": "^0.19.2-alpha.136",
     "@datapunt/asc-ui": "^0.19.2-alpha.136",
     "@datapunt/matomo-tracker-js": "0.1.4",
