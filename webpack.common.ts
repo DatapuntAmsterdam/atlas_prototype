@@ -198,10 +198,6 @@ export function createConfig(options: CreateConfigOptions): Configuration {
             from: '**/*',
             to: 'assets',
           },
-          {
-            from: './node_modules/@datapunt/asc-assets/static/fonts',
-            to: '',
-          },
         ],
       }),
       new DefinePlugin({
@@ -233,7 +229,8 @@ export function createConfig(options: CreateConfigOptions): Configuration {
         description:
           'Data en informatie is dé website voor iedereen die op zoek is naar objectieve, betrouwbare en actuele data en informatie over Amsterdam.',
         favicon: './favicon.png',
-        scripts: ['/mtiFontTrackingCode.min.js'],
+        styles: ['https://static.amsterdam.nl/fonts/fonts.css'],
+        scripts: ['https://static.amsterdam.nl/fonts/mtiFontTrackingCode.min.js'],
         root: env.ROOT,
         minify:
           options.mode === 'production'

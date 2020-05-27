@@ -34,6 +34,10 @@
         <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet">
     <% } %>
 
+    <% for (let item of htmlWebpackPlugin.options.styles) { %>
+      <link href="<%= item %>" rel="stylesheet">
+    <% } %>
+
     <style>
       #root-loading-indicator {
         display: flex;
