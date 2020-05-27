@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.0",
-    "@datapunt/asc-assets": "^0.19.2-alpha.136",
+    "@datapunt/asc-assets": "^0.19.2-beta.2",
     "@datapunt/asc-ui": "^0.19.2-beta.2",
     "@datapunt/matomo-tracker-js": "0.1.4",
     "@datapunt/matomo-tracker-react": "0.1.4",
