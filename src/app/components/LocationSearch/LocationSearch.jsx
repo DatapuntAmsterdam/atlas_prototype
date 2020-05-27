@@ -1,14 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { Alert, themeSpacing } from '@datapunt/asc-ui'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
 import PanoramaPreview from '../PanoramaPreview'
 import { DataSearchLocation } from '../DataSearch'
-import NoDetailsAvailable from '../PanelMessages/NoDetailsAvailable'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
-import MoreResultsWhenLoggedIn from '../PanelMessages/MoreResultsWhenLoggedIn'
+import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
 import ShareBar from '../ShareBar/ShareBar'
+import NotificationLevel from '../../models/notification'
 
 const EXCLUDED_RESULTS = 'vestigingen'
+
+const StyledAlert = styled(Alert)`
+  margin-bottom: ${themeSpacing(5)};
+`
 
 /* istanbul ignore next */
 const LocationSearch = ({
@@ -21,6 +27,7 @@ const LocationSearch = ({
   panoramaPreview,
 }) => {
   const { x: rdX, y: rdY } = wgs84ToRd(location)
+
   return (
     <div className="c-search-results u-grid">
       {isLoading && <LoadingIndicator />}
@@ -40,7 +47,13 @@ const LocationSearch = ({
             </h2>
           </div>
 
-          {layerWarning && <NoDetailsAvailable {...{ layerWarning }} />}
+          {layerWarning && (
+            <StyledAlert
+              level={NotificationLevel.Attention}
+              compact
+              dismissible
+            >{`Geen details beschikbaar van: ${layerWarning}`}</StyledAlert>
+          )}
 
           {!!numberOfResults && panoramaPreview && <PanoramaPreview />}
 

@@ -1,17 +1,17 @@
-;(function () {
-  angular.module('dpDetail').filter('filename', filenameFilter)
+import angular from 'angular'
 
-  function filenameFilter() {
-    return function (input) {
-      const parts = input.split('/')
+angular.module('dpDetail').filter('filename', filenameFilter)
 
-      const lastPart = parts[parts.length - 1]
+function filenameFilter() {
+  return function (input) {
+    const parts = input.split('/')
 
-      // Check if the end of the string matches with a dot followed by 3 or 4 letters
-      if (lastPart.match(/\.[a-z|A-Z]{3,4}$/)) {
-        return lastPart
-      }
-      return input
+    const lastPart = parts[parts.length - 1]
+
+    // Check if the end of the string matches with a dot followed by 3 or 4 letters
+    if (lastPart.match(/\.[a-z|A-Z]{3,4}$/)) {
+      return lastPart
     }
+    return input
   }
-})()
+}

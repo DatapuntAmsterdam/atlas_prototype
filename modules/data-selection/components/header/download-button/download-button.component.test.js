@@ -1,6 +1,6 @@
+import { DOWNLOAD_DATA_SELECTION } from '../../../../../src/shared/ducks/data-selection/constants'
 import * as dataSelectionConfig from '../../../../../src/shared/services/data-selection/data-selection-config'
 import isDefined from '../../../../../src/shared/services/is-defined'
-import { DOWNLOAD_DATA_SELECTION } from '../../../../../src/shared/ducks/data-selection/constants'
 
 describe('The dp-data-selection-download-button component', function () {
   let $compile
@@ -47,6 +47,7 @@ describe('The dp-data-selection-download-button component', function () {
       },
     })
 
+    // eslint-disable-next-line no-import-assign
     dataSelectionConfig.default = config
 
     angular.mock.inject(function (_$compile_, _$q_, _$rootScope_, _store_, _api_) {

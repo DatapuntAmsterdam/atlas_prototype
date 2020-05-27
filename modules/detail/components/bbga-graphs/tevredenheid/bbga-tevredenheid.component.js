@@ -1,39 +1,39 @@
-;(function () {
-  angular.module('dpDetail').component('dpBbgaTevredenheid', {
-    templateUrl: 'modules/detail/components/bbga-graphs/tevredenheid/bbga-tevredenheid.html',
-    bindings: {
-      gebiedHeading: '@',
-      gebiedCode: '@',
-    },
-    controller: DpBbgaTevredenheid,
-    controllerAs: 'vm',
-  })
+import angular from 'angular'
 
-  DpBbgaTevredenheid.$inject = ['BBGA_TEVREDENHEID_CONFIG', 'bbgaDataService']
+angular.module('dpDetail').component('dpBbgaTevredenheid', {
+  templateUrl: 'modules/detail/components/bbga-graphs/tevredenheid/bbga-tevredenheid.html',
+  bindings: {
+    gebiedHeading: '@',
+    gebiedCode: '@',
+  },
+  controller: DpBbgaTevredenheid,
+  controllerAs: 'vm',
+})
 
-  function DpBbgaTevredenheid(BBGA_TEVREDENHEID_CONFIG, bbgaDataService) {
-    const vm = this
+DpBbgaTevredenheid.$inject = ['BBGA_TEVREDENHEID_CONFIG', 'bbgaDataService']
 
-    this.$onInit = function () {
-      bbgaDataService
-        .getGraphData('TEVREDENHEID', vm.gebiedHeading, vm.gebiedCode)
-        .then(function (bbgaData) {
-          vm.tableData = []
+function DpBbgaTevredenheid(BBGA_TEVREDENHEID_CONFIG, bbgaDataService) {
+  const vm = this
 
-          BBGA_TEVREDENHEID_CONFIG.forEach(function (rowConfig) {
-            if (angular.isNumber(bbgaData[rowConfig.variable].data[0].waarde)) {
-              vm.tableData.push({
-                label: rowConfig.label,
-                meta: bbgaData[rowConfig.variable].meta,
-                data: bbgaData[rowConfig.variable].data,
-              })
-            }
-          })
+  this.$onInit = function () {
+    bbgaDataService
+      .getGraphData('TEVREDENHEID', vm.gebiedHeading, vm.gebiedCode)
+      .then(function (bbgaData) {
+        vm.tableData = []
 
-          if (vm.tableData.length) {
-            vm.year = vm.tableData[0].meta.jaar
+        BBGA_TEVREDENHEID_CONFIG.forEach(function (rowConfig) {
+          if (angular.isNumber(bbgaData[rowConfig.variable].data[0].waarde)) {
+            vm.tableData.push({
+              label: rowConfig.label,
+              meta: bbgaData[rowConfig.variable].meta,
+              data: bbgaData[rowConfig.variable].data,
+            })
           }
         })
-    }
+
+        if (vm.tableData.length) {
+          vm.year = vm.tableData[0].meta.jaar
+        }
+      })
   }
-})()
+}

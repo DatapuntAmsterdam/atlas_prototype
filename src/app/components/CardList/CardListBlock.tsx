@@ -24,7 +24,7 @@ const StyledColumn = styled(Column)`
   margin-right: ${themeSpacing(5)};
   margin-bottom: ${themeSpacing(8)};
 
-  :last-of-type {
+  :nth-child(4n) {
     margin-right: 0;
   }
 
@@ -51,8 +51,8 @@ const CardListBlock: React.FC<Props> = ({ results, loading, ...otherProps }) => 
         small: 1,
         medium: 2,
         big: 6,
-        large: results.length * 3,
-        xLarge: results.length * 3,
+        large: 12,
+        xLarge: 12,
       }}
     >
       <StyledInnerRow halign="flex-start" hasMargin={false}>

@@ -9,6 +9,7 @@ type NearestDetail = {
 export default async function handleMapClick(
   e: LeafletMouseEvent,
   setLocation: Function,
+  setDetailUrl: Function,
   activeOverlays: MapStateProps['overlays'] | undefined,
 ) {
   if (activeOverlays && activeOverlays.length > 0) {
@@ -24,10 +25,11 @@ export default async function handleMapClick(
     )
 
     if (uri) {
-      console.log('should load detail view', uri)
+      // get the detail information including the geojson
+      setDetailUrl(uri)
     }
   } else {
-    console.log('should geosearch and set point', e.latlng.lat)
+    // get the geo search information
     setLocation(e.latlng)
   }
 }

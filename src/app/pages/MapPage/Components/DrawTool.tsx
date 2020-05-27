@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { components } from '@datapunt/amsterdam-react-maps'
 import getDataSelection from '../getDataSelection'
 
-// Find out why the import is not found
-// @ts-ignore
 const { DrawTool: DrawToolComponent } = components
 
 type extraLayerTypes = {

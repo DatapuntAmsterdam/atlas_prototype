@@ -14,10 +14,4 @@
 @import 'styles/components/indented-list';
 @import 'styles/components/key-value-list';
 
-.is-print-mode,
-.is-embed-preview,
-.is-embed {
-  @import 'components/detail/detail-print';
-}
-
 @import 'components/detail/templates/dcatd/datasets';

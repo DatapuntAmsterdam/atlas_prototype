@@ -18,7 +18,7 @@ describe('parcel-ownership (eigendommen) module', () => {
 
     describe('user should not be able to view the kadaster data', () => {
       it('should show a notification that the user must authenticate', () => {
-        cy.get(TABLES.warningPanel).contains(
+        cy.contains(
           'Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met zakelijk rechthebbenden te bekijken.',
         )
       })

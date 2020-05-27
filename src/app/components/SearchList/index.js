@@ -1,1 +1,1 @@
-export { default } from './SearchListContainer'
+export { default } from './SearchList'

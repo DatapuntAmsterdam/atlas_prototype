@@ -19,6 +19,11 @@ export type Location = {
   lng: number
 }
 
+export type Geometry = {
+  type: string
+  coordinates: Array<Array<string>>
+}
+
 export type MapStateProps = {
   baseLayers: Array<Object> // Add auto typegeneration
   panelLayers: Array<Object> // Add auto typegeneration
@@ -30,6 +35,8 @@ export type MapStateProps = {
   zoomLevel: number
   viewCenter: Array<number>
   location?: Location
+  detailUrl?: string
+  geometry?: Geometry
 }
 
 export type MapContextProps = {

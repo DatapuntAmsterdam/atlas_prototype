@@ -208,7 +208,7 @@ describe('The http error registrar', () => {
 
   it('calls the local error handler before the global one', () => {
     const url = 'http://api-domain.amsterdam.nl/404'
-    $http.get(url).catch((data) => {
+    $http.get(url).catch(() => {
       callbackCalled = true
     })
 

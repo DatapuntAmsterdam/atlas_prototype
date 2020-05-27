@@ -3,8 +3,6 @@
 import 'core-js'
 import 'regenerator-runtime/runtime'
 import angular from 'angular'
-// All third party dependencies
-import './vendor'
 // All our modules' javascript
 import '../modules/atlas/atlas.module'
 import '../modules/atlas/atlas.run'
@@ -100,7 +98,6 @@ import '../modules/detail/components/detail/detail.component.test'
 import '../modules/detail/components/yes-no/yes-no.filter.test'
 import '../modules/detail/components/bbga-graphs/bbga-data.factory.test'
 import '../modules/detail/components/bbga-graphs/tevredenheid/bbga-tevredenheid.component.test'
-import '../modules/detail/components/bbga-graphs/bbga-graphs.directive.test'
 import '../modules/detail/services/geometry/geometry.factory.test'
 import '../modules/detail/services/date-converter/date-converter.factory.test'
 import '../modules/shared/components/expand-collapse/expand-collapse.directive.test'

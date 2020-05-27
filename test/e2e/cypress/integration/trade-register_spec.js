@@ -24,7 +24,9 @@ describe('trade-register (vestigingen) module', () => {
     describe('user should not be able to view the trade register', () => {
       it('should show a notification that the user must authenticate', () => {
         // a warning notification should be shown that the user must authenticate
-        cy.get(DATA_SEARCH.infoNotification).should('exist').and('be.visible')
+        cy.contains(
+          'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.',
+        ).and('be.visible')
       })
 
       it('should not show the table with results', () => {

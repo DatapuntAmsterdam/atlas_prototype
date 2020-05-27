@@ -16,7 +16,7 @@ import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
 import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import NoSearchResults from '../NoSearchResults'
-import MoreResultsWhenLoggedIn from '../PanelMessages/MoreResultsWhenLoggedIn'
+import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'
 
 const EDITORIAL_OVERVIEW_ACTIONS = {

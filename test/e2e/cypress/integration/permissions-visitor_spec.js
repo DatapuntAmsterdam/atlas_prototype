@@ -116,7 +116,9 @@ describe('visitor permissions', () => {
 
   it('7A. Should NOT allow a visitor to view "Vestigingen"', () => {
     cy.visit(urls.vestigingenTabel)
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam')
+    cy.contains(
+      'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.',
+    )
     cy.get(DATA_SELECTION_TABLE.table).should('not.exist')
   })
 
@@ -148,7 +150,9 @@ describe('visitor permissions', () => {
     cy.wait('@getMonumenten')
     cy.wait('@getNummeraanduidingen')
     cy.get('.o-header').contains('121437.46, 487418.76 (52.3736166, 4.8943521)')
-    cy.get(queries.warningPanel).contains('Medewerkers/ketenpartners van Gemeente Amsterdam')
+    cy.contains(
+      'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te vinden: vestigingen.',
+    )
     cy.get(queries.headerSubTitle).contains(values.vestigingen).should('not.exist')
     // the map view maximize button should exist
     cy.get('button.icon-button__right')

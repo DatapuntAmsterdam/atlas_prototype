@@ -1,10 +1,19 @@
 import React from 'react'
-import { Select } from '@datapunt/asc-ui'
+import { Select, Label } from '@datapunt/asc-ui'
+import styled from 'styled-components'
 import { FilterProps } from '../models'
 import { formatOptionLabel, formatAllOptionLabel } from '../utils'
 
+const StyledLabel = styled(Label)`
+  height: 0px;
+  padding: 0px;
+  margin: 0px;
+  color: transparent;
+`
+
 const SelectFilter: React.FC<FilterProps> = ({
   type,
+  label,
   options,
   totalCount,
   hideCount,
@@ -24,20 +33,23 @@ const SelectFilter: React.FC<FilterProps> = ({
   const currentValue = selection.length > 0 ? selection[0] : ''
 
   return (
-    <Select id={type} data-testid={type} onChange={onChange} value={currentValue}>
-      <option key={`${type}-all`} value="">
-        {formatAllOptionLabel(totalCount, hideCount)}
-      </option>
-      {options.map((option) => {
-        const controlId = `${type}-${option.id}`
+    <>
+      <StyledLabel htmlFor={type} label={label} />
+      <Select id={type} data-testid={type} onChange={onChange} value={currentValue}>
+        <option key={`${type}-all`} value="">
+          {formatAllOptionLabel(totalCount, hideCount)}
+        </option>
+        {options.map((option) => {
+          const controlId = `${type}-${option.id}`
 
-        return (
-          <option key={controlId} value={option.id}>
-            {formatOptionLabel(option, hideCount)}
-          </option>
-        )
-      })}
-    </Select>
+          return (
+            <option key={controlId} value={option.id}>
+              {formatOptionLabel(option, hideCount)}
+            </option>
+          )
+        })}
+      </Select>
+    </>
   )
 }
 

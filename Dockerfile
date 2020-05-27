@@ -31,7 +31,10 @@ COPY .babelrc \
      .eslintignore \
      .prettierrc \
      .prettierignore \
+      index.ejs \
       webpack.* \
+      tsconfig.json \
+      tsconfig.webpack.json \
       favicon.png \
       /app/
 
@@ -41,7 +44,7 @@ RUN npm run build:${NODE_ENV}
 RUN echo "build= `date`" > /app/dist/version.txt
 
 # Test dependencies
-COPY karma.conf.js \
+COPY karma.conf.ts \
      jest.config.js \
      /app/
 COPY test /app/test

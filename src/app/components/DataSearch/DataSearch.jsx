@@ -1,10 +1,15 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Panel from '../Panel/Panel'
+import styled from 'styled-components'
+import { Alert, Paragraph, themeSpacing } from '@datapunt/asc-ui'
 import SearchList from '../SearchList'
-import NoResultsForSearchType from '../Messages/NoResultsForSearchType'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import NotificationLevel from '../../models/notification'
+
+const StyledAlert = styled(Alert)`
+  margin-bottom: ${themeSpacing(5)};
+`
 
 const DataSearch = ({
   userAuthenticated,
@@ -15,10 +20,10 @@ const DataSearch = ({
 }) => {
   if (numberOfResults === 0) {
     return (
-      <NoResultsForSearchType
-        message="Tip: maak de zoekcriteria minder specifiek."
-        authMessage={!userAuthenticated}
-      />
+      <>
+        <Paragraph>Geen resultaten van deze soort</Paragraph>
+        <Paragraph>Tip: maak de zoekcriteria minder specifiek</Paragraph>
+      </>
     )
   }
   return (
@@ -47,9 +52,9 @@ const DataSearch = ({
                         </h2>
                       </div>
                       {!!result.warning && (
-                        <Panel isPanelVisible={!!result.warning} canClose type="warning">
+                        <StyledAlert level={NotificationLevel.Attention} compact dismissible>
                           {result.warning}
-                        </Panel>
+                        </StyledAlert>
                       )}
                       <SearchList categoryResults={result} limit={10} />
                       {result.count > 10 && (

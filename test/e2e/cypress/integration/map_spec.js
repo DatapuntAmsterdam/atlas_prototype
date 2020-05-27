@@ -216,10 +216,13 @@ describe('map module', () => {
     })
   })
 
-  describe('user should be able to see kadastrale objecten on the map', () => {
-    it('should add open the map panel component', () => {
+  describe('Should see less when logged in', () => {
+    it('should add a layer to the map', () => {
       cy.server()
       cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.route(/\/typeahead\?q=spuistraat 59a/).as('getTypeaheadResults')
+      cy.route('/panorama/thumbnail/*').as('getPanorama')
+      cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()
@@ -239,7 +242,7 @@ describe('map module', () => {
       cy.contains('Panden ouder dan 1960').should('not.be.visible')
       cy.contains('Panden naar bouwjaar').should('not.be.visible')
 
-      cy.get('.map-panel-handle > :nth-child(4)').click('right')
+      cy.get('.map-panel-handle > :nth-child(3)').click('right')
 
       // Legend and checkboxes are visible
       cy.get(MAP.mapLegend).should('be.visible')
@@ -253,17 +256,141 @@ describe('map module', () => {
       cy.contains('Panden naar bouwjaar').should('be.visible')
 
       // Checkboxes related to Kadastrale perceelsgrenzen are not visible
-      cy.contains('Burgerlijke gemeente').should('not.be.visible')
-      cy.contains('Kadastrale gemeente').should('not.be.visible')
-      cy.contains('Kadastrale sectie').should('not.be.visible')
-      cy.contains('Kadastraal object').should('not.be.visible')
+      cy.get(MAP.checkboxBurgerlijkeGemeente).should('not.be.visible')
+      cy.get(MAP.checkboxKadastraleGemeente).should('not.be.visible')
+      cy.get(MAP.checkboxKadastraleSectie).should('not.be.visible')
+      cy.get(MAP.checkboxKadastraalObject).should('not.be.visible')
+
+      cy.get(MAP.mapZoomIn).click()
+      cy.get(MAP.mapOverlayPane).children().should('not.exist')
+      cy.get(MAP.imageLayer).should('not.exist')
+      cy.get(MAP.checkboxKadastralePercelen).click()
+
+      // Checkboxes related to Kadastrale perceelsgrenzen are visible
+      cy.get(MAP.checkboxBurgerlijkeGemeente).should('be.visible').and('be.checked')
+      cy.get(MAP.checkboxKadastraleGemeente).should('be.visible').and('be.checked')
+      cy.get(MAP.checkboxKadastraleSectie).should('be.visible').and('be.checked')
+      cy.get(MAP.checkboxKadastraalObject).should('be.visible').and('be.checked')
+
+      // Check if layers exists
+      cy.get(MAP.imageLayer).should('have.length', 4)
+
+      cy.get(MAP.checkboxKadastralePercelen).click()
+      cy.get(MAP.mapOverlayPane).children().should('not.exist')
+      cy.get(MAP.checkboxKadastralePercelen).click()
+
+      cy.get(MAP.checkboxKadastraleGemeente).uncheck()
+      cy.get(MAP.checkboxKadastraleSectie).uncheck()
+
+      // Check if 2 layers are visible and 2 are not visible, based on opacity
+      cy.get(MAP.imageLayer)
+        .eq(0)
+        .should('have.attr', 'style', 'opacity: 100; visibility: visible;')
+      cy.get(MAP.imageLayer)
+        .eq(3)
+        .should('have.attr', 'style', 'opacity: 100; visibility: visible;')
+      cy.get(MAP.imageLayer).eq(1).should('have.attr', 'style', 'opacity: 0; visibility: visible;')
+      cy.get(MAP.imageLayer).eq(2).should('have.attr', 'style', 'opacity: 0; visibility: visible;')
+
+      // TODO
+
+      cy.get(MAP.iconMapMarker).should('not.be.visible')
+
+      cy.get(DATA_SEARCH.autoSuggestInput).focus().type('Spuistraat 59A')
+
+      cy.wait('@getTypeaheadResults')
+      cy.get(DATA_SEARCH.autoSuggest).contains('Spuistraat 59A').click()
+      cy.wait('@getVerblijfsobject')
+      cy.wait('@getPanorama')
+      cy.get(MAP.mapZoomIn).click({ force: true })
+      cy.get(MAP.mapDetailResultPanel).should('exist').and('be.visible')
+      cy.get(MAP.iconMapMarker).should('be.visible')
+
+      cy.get(`#${CSS.escape('Onroerende zaken')}`).click()
+      cy.get(`#${CSS.escape('Onroerende zaken')}`).click()
+      cy.get(MAP.imageLayer).should('not.exist')
     })
-    it('should add open the map panel component', () => {
+    it('should see no layers vestigingen on the map if not logged in', () => {
       cy.server()
+      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.route(/\/typeahead\?q=spuistraat 59a/).as('getTypeaheadResults')
+      cy.route('/panorama/thumbnail/*').as('getPanorama')
+      cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
       cy.hidePopup()
       cy.visit(`/`)
-      cy.get(DATA_SEARCH.autoSuggestInput).focus().type('dam 1')
-      cy.wait(1000)
+      cy.get(HOMEPAGE.navigationBlockKaart).click()
+      cy.wait('@graphql')
+      cy.wait('@graphql')
+      cy.url().should('include', '/data/?modus=kaart&legenda=true')
+      cy.get(MAP.mapContainer).should('be.visible')
+
+      cy.get('.map-panel-handle > :nth-child(20)').click('right')
+
+      cy.get(MAP.checkboxVestigingBouw).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingCultuur).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingFinance).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingHandel).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingHoreca).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingIt).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingLandbouw).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingOverheid).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingPersDiensverlening).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingProductie).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingZakDienstverlening).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingOverige).check().should('be.checked')
+
+      // All 12 layers are visible after login
+      cy.get(MAP.legendNotification)
+        .should('contain', 'Zichtbaar na inloggen')
+        .and('have.length', 12)
+    })
+  })
+  describe('Should see more when logged in', () => {
+    before(() => {
+      cy.login()
+    })
+
+    after(() => {
+      cy.logout()
+    })
+    it('Should see vestigingen on the map', () => {
+      cy.server()
+      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.route(/\/typeahead\?q=spuistraat 59a/).as('getTypeaheadResults')
+      cy.route('/panorama/thumbnail/*').as('getPanorama')
+      cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
+      cy.hidePopup()
+      cy.visit(`/`)
+      cy.get(HOMEPAGE.navigationBlockKaart).click()
+      cy.wait('@graphql')
+      cy.wait('@graphql')
+      cy.url().should('include', '/data/?modus=kaart&legenda=true')
+      cy.get(MAP.mapContainer).should('be.visible')
+
+      cy.get('.map-panel-handle > :nth-child(20)').click('right')
+      cy.get(MAP.imageLayer).should('not.exist')
+
+      cy.get(MAP.checkboxVestigingBouw).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingCultuur).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingFinance).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingHandel).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingHoreca).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingIt).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingLandbouw).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingOverheid).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingPersDiensverlening).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingProductie).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingZakDienstverlening).check().should('be.checked')
+      cy.get(MAP.checkboxVestigingOverige).check().should('be.checked')
+
+      // Selection of layers results in 12
+      cy.get(MAP.imageLayer).should('exist').and('have.length', 12)
+
+      // All 12 layers are visible after login
+      cy.get(MAP.mapLegendItems).should('have.length', 12)
+
+      // No message to first login
+      cy.get(MAP.legendNotification).should('not.be.visible')
     })
   })
 })

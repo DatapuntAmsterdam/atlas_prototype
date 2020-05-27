@@ -1,19 +1,26 @@
 /* eslint-disable no-nested-ternary */
 import { Enlarge, Minimise } from '@datapunt/asc-assets'
-import { GridContainer, GridItem, Heading, Link, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import {
+  GridContainer,
+  GridItem,
+  Heading,
+  Link,
+  themeColor,
+  themeSpacing,
+  Alert,
+} from '@datapunt/asc-ui'
 import { PropTypes } from 'prop-types'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import Notification from '../../../shared/components/notification/Notification'
 import { SCOPES } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
 import { toConstructionFileViewer } from '../../../store/redux-first-router/actions'
 import ActionButton from '../ActionButton/ActionButton'
 import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
+import NotificationLevel from '../../models/notification'
 
-// This can be deleted when the Notifications will be refactored to be styled-components
-const StyledNotification = styled(Notification)`
+const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)} !important;
 `
 
@@ -74,17 +81,17 @@ const Gallery = ({ title, allFiles, id, maxLength, access }) => {
         {files && files.length ? (
           <>
             {!hasRights && !hasExtendedRights ? (
-              <StyledNotification type="warning">
+              <StyledAlert level={NotificationLevel.Attention} compact dismissible>
                 Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om bouwdossiers te
                 bekijken.
-              </StyledNotification>
+              </StyledAlert>
             ) : (
               restricted &&
               !hasExtendedRights && (
-                <StyledNotification type="warning">
+                <StyledAlert level={NotificationLevel.Attention} compact dismissible>
                   Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen
                   inloggen om alle bouwdossiers te bekijken.
-                </StyledNotification>
+                </StyledAlert>
               )
             )}
 

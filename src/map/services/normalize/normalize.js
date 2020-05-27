@@ -2,6 +2,7 @@ import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import formatDate from '../../../shared/services/date-formatter/date-formatter'
 import formatNumber from '../../../shared/services/number-formatter/number-formatter'
 import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
+import NotificationLevel from '../../../app/models/notification'
 
 export const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 
@@ -74,7 +75,11 @@ export const adressenPand = (result) => {
   const additionalFields = {
     statusLevel:
       // eslint-disable-next-line no-nested-ternary
-      result.status ? (NORMAL_PAND_STATUSSES.includes(result.status) ? '' : 'info') : false,
+      result.status
+        ? NORMAL_PAND_STATUSSES.includes(result.status)
+          ? ''
+          : NotificationLevel.Attention
+        : false,
     isNevenadres: !result.hoofdadres,
     year:
       result.oorspronkelijk_bouwjaar !== `${YEAR_UNKNOWN}`
@@ -92,7 +97,7 @@ export const adressenVerblijfsobject = (result) => {
       result.status && result.status
         ? NORMAL_VBO_STATUSSES.includes(result.status)
           ? ''
-          : 'alert'
+          : NotificationLevel.Error
         : false,
     isNevenadres: !result.hoofdadres,
     typeAdres: result.hoofdadres ? result.hoofdadres.type_adres : 'Nevenadres',
@@ -230,6 +235,29 @@ export const grexProject = (result) => {
   const oppervlakteFormatted = formatSquareMetre(result.oppervlakte)
 
   return { ...result, planstatusFormatted, oppervlakteFormatted }
+}
+
+export const parkeervak = (result) => {
+  const TIME_SEPERATOR = ':'
+
+  function formatTime(time) {
+    const parts = time.split(TIME_SEPERATOR)
+
+    // Remove seconds from time if present (e.g. 20:00:00 => 20:00)
+    if (parts.length === 3) {
+      return parts.slice(0, -1).join(TIME_SEPERATOR)
+    }
+
+    return time
+  }
+
+  const regimes = result.regimes.map((regime) => ({
+    ...regime,
+    tijdstip: `${formatTime(regime.beginTijd)} - ${formatTime(regime.eindTijd)}`,
+    dagenFormatted: regime.dagen.join(', '),
+  }))
+
+  return { ...result, regimes }
 }
 
 function formatSquareMetre(value) {

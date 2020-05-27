@@ -3,10 +3,10 @@ describe('the storage factory', function () {
   const keys = {}
   const $windowWithoutStorage = {
     sessionStorage: {
-      getItem(key) {
+      getItem() {
         throw new Error('getItem does not work')
       },
-      setItem(key, value) {
+      setItem(key) {
         keys[key] = 'no session storage'
       },
       removeItem(key) {

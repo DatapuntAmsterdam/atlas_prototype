@@ -40,7 +40,6 @@
   padding-right: $base-whitespace * 2;
   padding-top: $base-whitespace / 2;
   text-align: left;
-  vertical-align: top;
   white-space: nowrap;
 
   &--link {
@@ -60,22 +59,23 @@
   }
 }
 
+.c-table__header-field,
+.c-table__content-field {
+  height: 42px;
+  vertical-align: middle;
+}
+
 .c-table__header-row {
-  background-color: $secondary-gray40;
-  color: $primary-light;
+  color: $primary-dark;
 }
 
 .c-table__header-field {
-  @include font-size-responsive($m-header-font);
-
   border: none;
-  font-weight: $medium-weight;
-  height: $button-size;
+  font-weight: $bold-weight;
   padding: {
     bottom: 0;
     top: 0;
   }
-  vertical-align: middle;
 }
 
 .c-table__content-row {

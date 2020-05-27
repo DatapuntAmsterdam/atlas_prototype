@@ -56,6 +56,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ filter, totalCount, hideCou
     <FilterBox label={label}>
       <FilterContent
         type={type}
+        label={label}
         options={options}
         totalCount={totalCount}
         hideCount={hideCount}

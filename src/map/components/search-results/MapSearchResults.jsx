@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { Alert } from '@datapunt/asc-ui'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
-import Notification from '../../../shared/components/notification/Notification'
+import NotificationLevel from '../../../app/models/notification'
 
 const MapSearchResults = ({
   isEmbed,
@@ -65,7 +65,11 @@ const MapSearchResults = ({
         <ul className="map-search-results__list">
           {missingLayers && (
             <li>
-              <Notification>{`Geen details beschikbaar van: ${missingLayers}`}</Notification>
+              <Alert
+                level={NotificationLevel.Attention}
+                dismissible
+                compact
+              >{`Geen details beschikbaar van: ${missingLayers}`}</Alert>
             </li>
           )}
           {limitResults(results).map((mainCategory) => (

@@ -1,14 +1,16 @@
 import L, { LatLngTuple, Polygon, Polyline, LeafletMouseEvent } from 'leaflet'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { ViewerContainer } from '@datapunt/asc-ui'
+import { ViewerContainer, Spinner } from '@datapunt/asc-ui'
 import { components } from '@datapunt/amsterdam-react-maps'
 import useStateRef from '@datapunt/amsterdam-react-maps/lib/utils/useStateRef'
 import DrawTool from './Components/DrawTool'
+import GeoJSON from './Components/GeoJSON'
 import MapPanelContainer from './MapPanelContainer'
 import MAP_CONFIG from '../../../map/services/map.config'
 import MapContext from './MapContext'
 import handleMapClick from './utils/handleMapClick'
+import MapPreviewPanelContainer from './MapPreviewPanelContainer'
 
 // Find out why the import is not found
 // @ts-ignore
@@ -16,6 +18,11 @@ const { Map, BaseLayer, MarkerClusterGroup, NonTiledLayer, Marker } = components
 
 const StyledMap = styled(Map)`
   width: 100%;
+  height: calc(100% - 50px);
+  top: 50px;
+`
+
+const MapView = styled.div`
   height: calc(100% - 50px);
   top: 50px;
 `
@@ -28,12 +35,12 @@ const StyledViewerContainer = styled(ViewerContainer)`
 
 // This can be deleted once we use the new MapDrawer / MapPanel
 const MapPanelContainerWrapper = styled.div`
-  position: relative;
-  max-height: 80vh;
-  overflow: auto;
+  bottom: 20px;
+  position: absolute;
+
   & > section {
     position: relative;
-    max-height: 100%;
+    max-height: 80vh;
   }
 `
 
@@ -56,6 +63,7 @@ type MarkerGroup = {
 }
 
 const MapPage: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const [showDrawTool, setShowDrawTool] = useState(true)
   const [mapInstance, setMapInstance] = useState<L.Map>()
   const [markerGroups, setMarkerGroups, markerGroupsRef] = useStateRef<MarkerGroup[]>([])
@@ -67,6 +75,8 @@ const MapPage: React.FC = () => {
     overlays,
     getOverlays,
     setLocation,
+    setDetailUrl,
+    geometry,
   } = React.useContext(MapContext)
 
   // const tmsLayers = layers.filter((layer) => layer.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
@@ -81,42 +91,63 @@ const MapPage: React.FC = () => {
 
   useEffect(() => {
     if (mapInstance) {
-      mapInstance.on('click', (e: LeafletMouseEvent) => handleMapClick(e, setLocation, overlays))
+      mapInstance.on('click', (e: LeafletMouseEvent) =>
+        handleMapClick(e, setLocation, setDetailUrl, overlays),
+      )
     }
 
     return () => {
       if (mapInstance) {
-        mapInstance.off('click', (e: LeafletMouseEvent) => handleMapClick(e, setLocation, overlays))
+        mapInstance.off('click', (e: LeafletMouseEvent) =>
+          handleMapClick(e, setLocation, setDetailUrl, overlays),
+        )
       }
     }
   }, [mapInstance, overlays])
 
   return (
-    <>
-      <StyledMap setInstance={setMapInstance}>
+    <MapView>
+      <StyledMap
+        setInstance={setMapInstance}
+        events={{
+          loading: () => setIsLoading(true),
+          load: () => setIsLoading(false),
+        }}
+      >
         {showDrawTool &&
           markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
         <BaseLayer />
         {location && <Marker latLng={location} />}
+        {geometry && <GeoJSON geometry={geometry} />}
         {nonTmsLayers?.map(({ url, overlayOptions: options, id }) => (
-          <NonTiledLayer key={id} url={url} options={options} />
+          <NonTiledLayer
+            key={id}
+            url={url}
+            options={options}
+            events={{
+              loading: () => setIsLoading(true),
+              load: () => setIsLoading(false),
+            }}
+          />
         ))}
         <StyledViewerContainer
-          bottomLeft={
-            <MapPanelContainerWrapper>
-              <MapPanelContainer />
-            </MapPanelContainerWrapper>
-          }
+          bottomRight={isLoading ? <Spinner /> : null}
           topRight={
-            <DrawTool
-              onToggle={setShowDrawTool}
-              setMarkerGroups={setMarkerGroups}
-              markerGroupsRef={markerGroupsRef}
-            />
+            <>
+              <DrawTool
+                onToggle={setShowDrawTool}
+                setMarkerGroups={setMarkerGroups}
+                markerGroupsRef={markerGroupsRef}
+              />
+              <MapPreviewPanelContainer />
+            </>
           }
         />
       </StyledMap>
-    </>
+      <MapPanelContainerWrapper>
+        <MapPanelContainer />
+      </MapPanelContainerWrapper>
+    </MapView>
   )
 }
 

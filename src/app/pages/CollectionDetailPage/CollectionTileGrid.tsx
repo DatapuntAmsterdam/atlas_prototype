@@ -18,11 +18,7 @@ const FullColumnTileGridItem = styled(TileGridItem)`
 
 const StyledHeading = styled(Heading)`
   color: ${themeColor('tint', 'level1')};
-`
-
-const StyledParagraph = styled(Paragraph)`
-  color: ${themeColor('tint', 'level1')};
-  margin-top: ${themeSpacing(4)};
+  margin-bottom: ${themeSpacing(4)};
 `
 
 type Props = {
@@ -82,17 +78,15 @@ const CollectionTileGrid: React.FC<Props> = ({ results, loading, title, descript
   <TileGrid grid={GRID_TEMPLATE}>
     <FullColumnTileGridItem span={{ mobileL: [2, 2] }}>
       <Tile as="div" isLoading={loading}>
-        {/*
-              // @ts-ignore */}
-        <StyledHeading forwardedAs="strong" styleAs="h1">
+        <Heading forwardedAs="strong" styleAs="h1">
           Dossier
-        </StyledHeading>
-        <Heading gutterBottom={20} as="h3" styleAs="h1">
-          {title}
         </Heading>
         {/*
         // @ts-ignore */}
-        <StyledParagraph strong dangerouslySetInnerHTML={{ __html: description }} />
+        <StyledHeading forwardedAs="h3" styleAs="h1">
+          {title}
+        </StyledHeading>
+        <Paragraph strong dangerouslySetInnerHTML={{ __html: description }} />
       </Tile>
     </FullColumnTileGridItem>
     {results.map(({ id, linkProps, teaserImage, shortTitle, title: tileTitle }, i) => {

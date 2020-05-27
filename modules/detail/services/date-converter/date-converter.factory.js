@@ -1,17 +1,17 @@
-;(function () {
-  angular.module('dpDetail').factory('dateConverter', dateConverterFactory)
+import angular from 'angular'
 
-  dateConverterFactory.$inject = ['d3']
+angular.module('dpDetail').factory('dateConverter', dateConverterFactory)
 
-  function dateConverterFactory(d3) {
-    return {
-      ymdToDate,
-    }
+dateConverterFactory.$inject = ['d3']
 
-    function ymdToDate(input) {
-      const parseDate = d3.time.format('%Y-%m-%d').parse
-
-      return parseDate(input)
-    }
+function dateConverterFactory(d3) {
+  return {
+    ymdToDate,
   }
-})()
+
+  function ymdToDate(input) {
+    const parseDate = d3.time.format('%Y-%m-%d').parse
+
+    return parseDate(input)
+  }
+}

@@ -1,3 +1,3 @@
-;(function () {
-  angular.module('dpDetail', ['ngSanitize', 'dpShared'])
-})()
+import angular from 'angular'
+
+angular.module('dpDetail', ['ngSanitize', 'dpShared'])

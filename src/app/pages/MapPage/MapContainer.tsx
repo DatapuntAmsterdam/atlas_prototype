@@ -19,6 +19,7 @@ import MapContext, {
   ActiveMapLayer,
   MapLayer,
   Location,
+  Geometry
 } from './MapContext'
 import MAP_CONFIG from '../../../map/services/map.config'
 import { createUrlWithToken } from '../../../shared/services/api/api'
@@ -56,6 +57,8 @@ type Action =
   | { type: 'setMapPanelVisible'; payload: boolean }
   | { type: 'setOverlays'; payload: Array<Object> }
   | { type: 'setLocation'; payload: Location }
+  | { type: 'setDetailUrl'; payload: String }
+  | { type: 'setGeometry'; payload: Geometry }
 
 const reducer = (state: MapStateProps, action: Action): MapStateProps => {
   switch (action.type) {
@@ -124,6 +127,16 @@ const reducer = (state: MapStateProps, action: Action): MapStateProps => {
         ...state,
         location: action.payload,
       }
+    case 'setDetailUrl':
+      return {
+        ...state,
+        detailUrl: action.payload,
+      }
+      case 'setGeometry':
+      return {
+        ...state,
+        geometry: action.payload,
+      }
     default:
       return state
   }
@@ -157,6 +170,17 @@ const MapContextProvider: React.FC<MapContextProps & { children: React.ReactNode
     if (payload?.lat && payload?.lng) {
       dispatch({ type: 'setLocation', payload })
       setParams('locatie', encodeLocation(payload))
+    }
+  }
+
+  function setDetailUrl(payload: string) {
+    dispatch({ type: 'setDetailUrl', payload })
+    setParams('detailUrl', payload)
+  }
+
+  function setGeometry(payload: Geometry) {
+    if (payload?.type && payload?.coordinates) {
+      dispatch({ type: 'setGeometry', payload })
     }
   }
 
@@ -259,11 +283,13 @@ const MapContextProvider: React.FC<MapContextProps & { children: React.ReactNode
     const isMapHandleVisible = getParams('legenda')
     const activeMapLayers = getParams('lagen')
     const location = getParams('locatie')
+    const detailUrl = getParams('detailUrl')
 
     if (isMapHandleVisible) setMapPanelVisible(isMapHandleVisible === 'true')
     if (activeMapLayers) setActiveMapLayers(decodeLayers(activeMapLayers))
     // @ts-ignore fix the destruction of the location from the url
     if (location) setLocation(decodeLocation(location))
+    if (detailUrl) setDetailUrl(detailUrl)
   }, [])
 
   // This can be refactored if the mapLayers are added in batches
@@ -279,6 +305,8 @@ const MapContextProvider: React.FC<MapContextProps & { children: React.ReactNode
         setActiveMapLayers,
         setVisibleMapLayers,
         setLocation,
+        setDetailUrl,
+        setGeometry,
         toggleMapPanel,
         getBaseLayers,
         getPanelLayers,

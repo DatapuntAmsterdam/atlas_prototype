@@ -1,30 +1,30 @@
-;(function () {
-  angular.module('dpDetail').directive('dpPartialSelect', dpPartialSelectDirective)
+import angular from 'angular'
 
-  dpPartialSelectDirective.$inject = ['partialCompiler']
+angular.module('dpDetail').directive('dpPartialSelect', dpPartialSelectDirective)
 
-  function dpPartialSelectDirective(partialCompiler) {
-    return {
-      restrict: 'E',
-      scope: {
-        partial: '@',
-        apiData: '=',
-        loadMoreFn: '=',
-        user: '<',
-        subType: '<',
-        id: '<',
-      },
-      link: linkFunction,
-    }
+dpPartialSelectDirective.$inject = ['partialCompiler']
 
-    function linkFunction(scope, element) {
-      scope.apiUrl = process.env.API_ROOT
-      const templateUrl = `modules/detail/components/partial-select/partials/${scope.partial}.html`
-
-      partialCompiler.getHtml(templateUrl, scope).then(function (partial) {
-        scope.loadMore = scope.loadMoreFn
-        element.append(partial)
-      })
-    }
+function dpPartialSelectDirective(partialCompiler) {
+  return {
+    restrict: 'E',
+    scope: {
+      partial: '@',
+      apiData: '=',
+      loadMoreFn: '=',
+      user: '<',
+      subType: '<',
+      id: '<',
+    },
+    link: linkFunction,
   }
-})()
+
+  function linkFunction(scope, element) {
+    scope.apiUrl = process.env.API_ROOT
+    const templateUrl = `modules/detail/components/partial-select/partials/${scope.partial}.html`
+
+    partialCompiler.getHtml(templateUrl, scope).then(function (partial) {
+      scope.loadMore = scope.loadMoreFn
+      element.append(partial)
+    })
+  }
+}

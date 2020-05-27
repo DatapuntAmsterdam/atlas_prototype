@@ -40,11 +40,12 @@ $backdrop-color: rgba(0, 0, 0, 0.5);
     }
   }
 }
-
-.c-dashboard__column-holder,
-.c-dashboard__column {
-  height: 100%;
-  display: flex;
+html:not(.is-print-mode) {
+  .c-dashboard__column-holder,
+  .c-dashboard__column {
+    height: 100%;
+    display: flex;
+  }
 }
 
 .c-dashboard__content {

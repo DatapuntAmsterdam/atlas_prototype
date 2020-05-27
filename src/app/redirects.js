@@ -113,6 +113,10 @@ export const shortUrls = [
     from: '/dossier/toerisme/',
     to: `/dossiers/dossier/toerisme/${SHORTLINKS.COLLECTIONS.TOURISM.id[process.env.NODE_ENV]}`,
   },
+  {
+    from: '/dossier/wonen/',
+    to: `/dossiers/dossier/wonen/${SHORTLINKS.COLLECTIONS.HOUSING.id[process.env.NODE_ENV]}`,
+  },
 ]
 
 export const articleUrls = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({

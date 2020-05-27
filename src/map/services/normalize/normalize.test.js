@@ -18,6 +18,7 @@ import {
   winkelgebied,
   YEAR_UNKNOWN,
 } from './normalize'
+import NotificationLevel from '../../../app/models/notification'
 
 jest.mock('../../../shared/services/date-formatter/date-formatter')
 
@@ -177,7 +178,7 @@ describe('normalize', () => {
       output = adressenPand(input)
 
       expect(output).toMatchObject({
-        statusLevel: 'info',
+        statusLevel: NotificationLevel.Attention,
         year: input.oorspronkelijk_bouwjaar,
       })
 
@@ -212,7 +213,7 @@ describe('normalize', () => {
       output = adressenVerblijfsobject(input)
 
       expect(output).toMatchObject({
-        statusLevel: 'alert',
+        statusLevel: NotificationLevel.Error,
         isNevenadres: false,
         typeAdres: input.hoofdadres.type_adres,
         size: 'onbekend',

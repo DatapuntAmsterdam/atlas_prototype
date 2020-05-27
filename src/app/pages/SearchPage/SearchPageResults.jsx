@@ -1,10 +1,12 @@
 import {
+  Alert,
   breakpoint,
   Button,
   Column,
   CompactPager,
   Divider,
   Heading,
+  Paragraph,
   themeColor,
   themeSpacing,
 } from '@datapunt/asc-ui'
@@ -13,12 +15,12 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import PARAMETERS from '../../../store/parameters'
-import MaxSearchPageMessage from '../../components/PanelMessages/MaxSearchPageMessage'
 import PAGES from '../../pages'
 import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES } from './config'
 import SearchResultsOverview from './SearchResultsOverview'
 import { SearchResultsOverviewSkeleton, SearchResultsSkeleton } from './SearchResultsSkeleton'
 import SearchSort from './SearchSort'
+import NotificationLevel from '../../models/notification'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(4)};
@@ -76,7 +78,7 @@ const SearchResultsWrapper = styled.div`
   margin-bottom: ${themeSpacing(10)};
 `
 
-const StyledErrorMessage = styled(MaxSearchPageMessage)`
+const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(10)};
 `
 
@@ -174,7 +176,17 @@ const SearchPageResults = ({
             </SearchResultsWrapper>
           )}
           {pageInfo && pageInfo.hasLimitedResults && !pageInfo.hasNextPage && (
-            <StyledErrorMessage />
+            <>
+              <StyledAlert level={NotificationLevel.Attention} dismissible>
+                <Paragraph>
+                  Er zijn meer resultaten, om technische redenen kunnen alleen de eerste 10 pagina’s
+                  worden getoond.
+                </Paragraph>
+                <Paragraph>
+                  Tip: Verfijn de zoekopdracht om het het aantal resultaten te verkleinen.
+                </Paragraph>
+              </StyledAlert>
+            </>
           )}
           {pageInfo && results.length > 0 && (
             // TODO: Check if the CompactPager component is structured correctly..

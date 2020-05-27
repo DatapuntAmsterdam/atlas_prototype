@@ -148,7 +148,10 @@ export const extractIdEndpoint = (endpoint) => {
   return endpoint.match(/(\w+)\/([\w-]+)\/?$/)
 }
 export const getDetailPageData = (endpoint) => {
-  let matches = endpoint.replace('bag/v1.1/', 'bag/') // Clean URL if this is using the new BAG v1.1 API
+  // TODO: Add endpoint mapping when new router is introduced
+  let matches = endpoint
+    .replace('bag/v1.1/', 'bag/') // Clean URL if this is using the new BAG v1.1 API
+    .replace('iiif-metadata/', 'stadsarchief/') // Clean URL if this is using the new IIIF Metadata API
   // eslint-disable-next-line no-useless-escape
   matches = matches.match(/(\w+)\/([\w-]+)\/([\w\.-]+)\/?$/)
 

@@ -1,11 +1,11 @@
-;(function () {
-  angular.module('dpDetail').filter('dpDate', dpDateFilter)
+import angular from 'angular'
 
-  dpDateFilter.$inject = ['dateFilter']
+angular.module('dpDetail').filter('dpDate', dpDateFilter)
 
-  function dpDateFilter(dateFilter) {
-    return function (input) {
-      return dateFilter(input, 'd MMMM yyyy')
-    }
+dpDateFilter.$inject = ['dateFilter']
+
+function dpDateFilter(dateFilter) {
+  return function (input) {
+    return dateFilter(input, 'd MMMM yyyy')
   }
-})()
+}

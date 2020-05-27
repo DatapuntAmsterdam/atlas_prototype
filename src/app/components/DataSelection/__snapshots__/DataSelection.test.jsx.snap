@@ -588,11 +588,12 @@ exports[`DataSelection should render the container 1`] = `
       moduleName="dpDataSelectionHeaderWrapper"
     />
     <Connect(DataSelectionActiveFilters) />
-    <NoResultsForSearchType
-      authMessage={false}
-      hideLoginLink={false}
-      message="Tip: verwijder een of meer criteria"
-    />
+    <Paragraph>
+      Geen resultaten van deze soort
+    </Paragraph>
+    <Paragraph>
+      Tip: verwijder een of meer criteria
+    </Paragraph>
     <div
       className="u-grid qa-data-grid"
     >
@@ -687,10 +688,16 @@ exports[`DataSelection should show authorization message if user has no permissi
       moduleName="dpDataSelectionHeaderWrapper"
     />
     <Connect(DataSelectionActiveFilters) />
-    <NotAuthorizedMessage
-      scopeError=""
-      type="maatschappelijke activiteiten en vestigingen"
-    />
+    <Alert
+      compact={true}
+      dismissible={true}
+      level="attention"
+    >
+      <Paragraph>
+        Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken. 
+      </Paragraph>
+      <Connect(LoginLink) />
+    </Alert>
   </div>
 </div>
 `;

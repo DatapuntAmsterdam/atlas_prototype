@@ -3,6 +3,7 @@ import { Alert, Paragraph } from '@datapunt/asc-ui'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getMessage } from '../../../shared/ducks/error/error-message'
+import { isPrintMode } from '../../../shared/ducks/ui/ui'
 
 const StyledAlert = styled(Alert)`
   /* Ensure outline is visible when element is in focus */
@@ -13,12 +14,13 @@ const StyledAlert = styled(Alert)`
 
 const ErrorAlert: React.FC = () => {
   const message: string = useSelector(getMessage)
+  const printMode = useSelector(isPrintMode)
 
-  return (
+  return !printMode ? (
     <StyledAlert dismissible compact level="error">
       <Paragraph>{message}</Paragraph>
     </StyledAlert>
-  )
+  ) : null
 }
 
 export default ErrorAlert

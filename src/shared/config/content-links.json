@@ -336,6 +336,13 @@
           "acceptance": "21d21e58-aff7-406c-a565-129e1fe1a7cb",
           "production": "fdcc54a1-5aa7-4ddf-af16-1c28a99b8c5f"
         }
+      },
+      "HOUSING":{
+        "id": {
+          "development": "5bfec111-c3a8-43c0-9db7-294527d9fbfc",
+          "acceptance": "5bfec111-c3a8-43c0-9db7-294527d9fbfc",
+          "production": "2db4e140-6fc2-41e2-bd7b-3f017d00e976"
+        }
       }
     }
   }

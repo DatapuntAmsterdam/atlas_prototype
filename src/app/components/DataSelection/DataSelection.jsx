@@ -3,19 +3,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { AngularWrapper } from 'react-angular'
 import classNames from 'classnames'
+import { Alert, Paragraph, themeSpacing, Heading } from '@datapunt/asc-ui'
+import styled from 'styled-components'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
-import NotAuthorizedMessage from '../PanelMessages/NotAuthorizedMessage'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
 import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer'
-import MaxPageMessage from '../PanelMessages/MaxPageMessage'
-import NoResultsForSearchType from '../Messages/NoResultsForSearchType'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { VIEWS_TO_PARAMS } from '../../../shared/ducks/data-selection/constants'
 import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
 import DataSelectionList from './DataSelectionList/DataSelectionList'
 import ShareBar from '../ShareBar/ShareBar'
-import Notification from '../../../shared/components/notification/Notification'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
+import { SCOPES } from '../../../shared/services/auth/auth'
+import LoginLinkContainer from '../Links/LoginLink/LoginLinkContainer'
+import NotificationLevel from '../../models/notification'
 
 let angularInstance = null
 
@@ -23,6 +24,10 @@ if (typeof window !== 'undefined') {
   require('../../angularModules')
   angularInstance = require('angular')
 }
+
+const StyledAlert = styled(Alert)`
+  margin-bottom: ${themeSpacing(5)};
+`
 
 const DataSelection = ({
   view,
@@ -84,7 +89,10 @@ const DataSelection = ({
         {!isLoading && <DataSelectionActiveFilters />}
 
         {!isLoading && !numberOfRecords && !authError && !authScopeError ? (
-          <NoResultsForSearchType message="Tip: verwijder een of meer criteria" />
+          <>
+            <Paragraph>Geen resultaten van deze soort</Paragraph>
+            <Paragraph>Tip: verwijder een of meer criteria</Paragraph>
+          </>
         ) : (
           ''
         )}
@@ -124,22 +132,32 @@ const DataSelection = ({
                 </div>
               )}
               <div className={widthClass}>
-                {showMessageMaxPages && <MaxPageMessage maxAvailablePages={MAX_AVAILABLE_PAGES} />}
+                {showMessageMaxPages && (
+                  <StyledAlert level={NotificationLevel.Attention} compact dismissible>
+                    <Heading forwardedAs="h3">Deze pagina kan niet worden getoond</Heading>
+                    <Paragraph>
+                      {`Alleen de eerste ${MAX_AVAILABLE_PAGES} pagina's kunnen worden weergegeven
+                        (om technische redenen). Bij downloaden worden wel alle resultaten
+                        opgenomen.`}
+                    </Paragraph>
+                    <Paragraph>
+                      Tip: Gebruik de download-knop om alle resultaten te bekijken. Of voeg meer
+                      filtercriteria toe voor specifiekere resultaten.
+                    </Paragraph>
+                  </StyledAlert>
+                )}
                 {showMessageClusteredMarkers && (
-                  <Notification level="info" canClose={false}>
-                    <div className="qa-message-clustered-markers">
-                      <p className="c-panel__paragraph">
-                        {`Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan ${MAX_NUMBER_OF_CLUSTERED_MARKERS.toLocaleString(
-                          DEFAULT_LOCALE,
-                        )} resultaten tegelijk kan weergeven (om technische redenen).`}
-                      </p>
-                      <p className="c-panel__paragraph">
-                        Tip: Bekijk de lijst resultaten in kleinere delen. Dit kan door een voor een
-                        filtercriteria toe te voegen (bijv. de verschillende wijken uit de
-                        selectie).
-                      </p>
-                    </div>
-                  </Notification>
+                  <StyledAlert level={NotificationLevel.Attention} compact>
+                    <Paragraph>
+                      {`Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan ${MAX_NUMBER_OF_CLUSTERED_MARKERS.toLocaleString(
+                        DEFAULT_LOCALE,
+                      )} resultaten tegelijk kan weergeven (om technische redenen).`}
+                    </Paragraph>
+                    <Paragraph>
+                      Tip: Bekijk de lijst resultaten in kleinere delen. Dit kan door een voor een
+                      filtercriteria toe te voegen (bijv. de verschillende wijken uit de selectie).
+                    </Paragraph>
+                  </StyledAlert>
                 )}
 
                 {numberOfRecords > 0 ? (
@@ -177,7 +195,15 @@ const DataSelection = ({
           </div>
         )}
         {!isLoading && (authError || authScopeError) && (
-          <NotAuthorizedMessage scopeError={datasetScope} />
+          <Alert level={NotificationLevel.Attention} compact dismissible>
+            <Paragraph>
+              {datasetScope === SCOPES['BRK/RSN']
+                ? `Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met
+            zakelijk rechthebbenden te bekijken. `
+                : `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken. `}
+            </Paragraph>
+            <LoginLinkContainer />
+          </Alert>
         )}
       </div>
     </div>

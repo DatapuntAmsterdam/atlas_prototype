@@ -14,7 +14,9 @@ import { ConstructionFiles as ContextMenu } from '../../components/ContextMenu'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import withGrid from '../../utils/withGrid'
 
-const ImageViewer = React.lazy(() => import('../../components/ImageViewer/ImageViewer'))
+const ImageViewer = React.lazy(() =>
+  import(/* webpackChunkName: "ImageViewer" */ '../../components/ImageViewer/ImageViewer'),
+)
 
 const ERROR_MESSAGE =
   'Er kunnen door een technische storing helaas geen bouwdossiers worden getoond. Probeer het later nog eens.'

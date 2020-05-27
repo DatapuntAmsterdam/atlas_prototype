@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Alert } from '@datapunt/asc-ui'
 import { useSelector } from 'react-redux'
-import { isEmbedded } from '../../../shared/ducks/ui/ui'
+import { isEmbedded, isPrintMode } from '../../../shared/ducks/ui/ui'
 import useDataFetching from '../../utils/useDataFetching'
 import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'
 import { InfoModal } from '../Modal'
@@ -25,8 +25,12 @@ const StyledAlert = styled(Alert)`
 const NotificationAlert: React.FC = () => {
   const hide = useSelector(isEmbedded)
   const { fetchData, results } = useDataFetching()
+  const printMode = useSelector(isPrintMode)
 
   React.useEffect(() => {
+    if (printMode) {
+      return
+    }
     // Limit = 1 because this prevents us from getting multiple notifications
     const endpoint = `${process.env.CMS_ROOT}jsonapi/node/notification?filter[field_active]=1&page[limit]=1`
     ;(async () => {
@@ -34,7 +38,7 @@ const NotificationAlert: React.FC = () => {
     })()
   }, [])
 
-  if (!hide && !getCookie(COOKIE_NAME) && results) {
+  if (!printMode && !hide && !getCookie(COOKIE_NAME) && results) {
     const { title, body, field_notification_type, field_position, field_notification_title } =
       results?.data[0]?.attributes || {}
 

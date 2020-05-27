@@ -12,22 +12,44 @@ import LoadingIndicator from '../shared/components/loading-indicator/LoadingIndi
 import { getQuery } from './pages/SearchPage/SearchPageDucks'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 
-const HomePage = React.lazy(() => import('./pages/HomePage'))
-const ActualityContainer = React.lazy(() => import('./containers/ActualityContainer'))
+const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
+const ActualityContainer = React.lazy(() =>
+  import(/* webpackChunkName: "ActualityContainer" */ './containers/ActualityContainer'),
+)
 const DatasetDetailContainer = React.lazy(() =>
-  import('./containers/DatasetDetailContainer/DatasetDetailContainer'),
+  import(
+    /* webpackChunkName: "DatasetDetailContainer" */ './containers/DatasetDetailContainer/DatasetDetailContainer'
+  ),
 )
 const ConstructionFilesContainer = React.lazy(() =>
-  import('./containers/ConstructionFilesContainer/ConstructionFilesContainer'),
+  import(
+    /* webpackChunkName: "ConstructionFilesContainer" */ './containers/ConstructionFilesContainer/ConstructionFilesContainer'
+  ),
 )
-const ArticleDetailPage = React.lazy(() => import('./pages/ArticleDetailPage'))
-const PublicationDetailPage = React.lazy(() => import('./pages/PublicationDetailPage'))
-const SpecialDetailPage = React.lazy(() => import('./pages/SpecialDetailPage'))
-const CollectionDetailPage = React.lazy(() => import('./pages/CollectionDetailPage'))
-const MapSplitPage = React.lazy(() => import('./pages/MapSplitPage'))
-const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'))
-const SearchPage = React.lazy(() => import('./pages/SearchPage/index'))
-const MapContainer = React.lazy(() => import('./pages/MapPage/MapContainer'))
+const ArticleDetailPage = React.lazy(() =>
+  import(/* webpackChunkName: "ArticleDetailPage" */ './pages/ArticleDetailPage'),
+)
+const PublicationDetailPage = React.lazy(() =>
+  import(/* webpackChunkName: "PublicationDetailPage" */ './pages/PublicationDetailPage'),
+)
+const SpecialDetailPage = React.lazy(() =>
+  import(/* webpackChunkName: "SpecialDetailPage" */ './pages/SpecialDetailPage'),
+)
+const CollectionDetailPage = React.lazy(() =>
+  import(/* webpackChunkName: "CollectionDetailPage" */ './pages/CollectionDetailPage'),
+)
+const MapSplitPage = React.lazy(() =>
+  import(/* webpackChunkName: "MapSplitPage" */ './pages/MapSplitPage'),
+)
+const MapContainer = React.lazy(() =>
+  import(/* webpackChunkName: "MapContainer" */ './pages/MapPage/MapContainer'),
+)
+const NotFoundPage = React.lazy(() =>
+  import(/* webpackChunkName: "NotFoundPage" */ './pages/NotFoundPage'),
+)
+const SearchPage = React.lazy(() =>
+  import(/* webpackChunkName: "SearchPage" */ './pages/SearchPage/index'),
+)
 
 // The Container from @datapunt/asc-ui isnt used here as the margins added do not match the ones in the design
 const AppContainer = styled.div`
@@ -47,8 +69,6 @@ const AppBody = ({
 
   const { enableLinkTracking } = useMatomo()
   enableLinkTracking()
-
-  console.log('currentpage', currentPage, PAGES.MAP)
 
   return hasGrid ? (
     <>
