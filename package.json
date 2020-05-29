@@ -192,7 +192,7 @@
     "style-loader": "^1.2.1",
     "svg-spritemap-webpack-plugin": "3.5.6",
     "terser-webpack-plugin": "^3.0.2",
-    "ts-node": "^8.10.1",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.3",
     "url-loader": "4.1.0",
     "webpack": "4.43.0",
