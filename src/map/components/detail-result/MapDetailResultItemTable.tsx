@@ -13,16 +13,18 @@ const MapDetailResultItemTable: React.FC<MapDetailResultItemTableProps> = ({ ite
       <Fragment key={index}>
         <Divider />
         <ul className="map-detail-result__list">
-          {item.headings.map((heading) => {
-            return (
-              <li className="map-detail-result__item">
-                <section className="map-detail-result__item-content">
-                  <div className="map-detail-result__item-label">{heading.label}</div>
-                  <div className="map-detail-result__item-value">{value[heading.key]}</div>
-                </section>
-              </li>
-            )
-          })}
+          {item.headings
+            .filter((heading) => !!value[heading.key])
+            .map((heading) => {
+              return (
+                <li className="map-detail-result__item">
+                  <section className="map-detail-result__item-content">
+                    <div className="map-detail-result__item-label">{heading.label}</div>
+                    <div className="map-detail-result__item-value">{value[heading.key]}</div>
+                  </section>
+                </li>
+              )
+            })}
         </ul>
       </Fragment>
     ))}
