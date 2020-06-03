@@ -1,5 +1,5 @@
 import React from 'react'
-import { components } from '@datapunt/amsterdam-react-maps'
+import { components } from '@datapunt/arm-core'
 import { Geometry } from '../MapContext'
 
 // Find out why the import is not found
@@ -11,8 +11,6 @@ type Props = {
 }
 
 const GeoJSON: React.FC<Props> = ({ geometry }) => {
-  console.log('hiiiiii', geometry)
-
   return (
     <RDGeoJSON
       geometry={geometry}

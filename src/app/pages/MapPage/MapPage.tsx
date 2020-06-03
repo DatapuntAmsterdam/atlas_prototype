@@ -2,8 +2,9 @@ import L, { LatLngTuple, Polygon, Polyline, LeafletMouseEvent } from 'leaflet'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { ViewerContainer, Spinner } from '@datapunt/asc-ui'
-import { components } from '@datapunt/amsterdam-react-maps'
-import useStateRef from '@datapunt/amsterdam-react-maps/lib/utils/useStateRef'
+import { components, utils } from '@datapunt/arm-core'
+import { NonTiledLayer } from '@datapunt/arm-nontiled'
+import { MarkerClusterGroup } from '@datapunt/arm-cluster'
 import DrawTool from './Components/DrawTool'
 import GeoJSON from './Components/GeoJSON'
 import MapPanelContainer from './MapPanelContainer'
@@ -13,8 +14,8 @@ import handleMapClick from './utils/handleMapClick'
 import MapPreviewPanelContainer from './MapPreviewPanelContainer'
 
 // Find out why the import is not found
-// @ts-ignore
-const { Map, BaseLayer, MarkerClusterGroup, NonTiledLayer, Marker } = components
+const { Map, BaseLayer, Marker } = components
+const { useStateRef } = utils
 
 const StyledMap = styled(Map)`
   width: 100%;

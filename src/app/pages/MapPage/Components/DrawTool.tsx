@@ -1,9 +1,7 @@
 import L, { LatLng, LatLngTuple, Polygon, Polyline } from 'leaflet'
 import React, { useEffect, useState } from 'react'
-import { components } from '@datapunt/amsterdam-react-maps'
+import { DrawTool as DrawToolComponent } from '@datapunt/arm-draw'
 import getDataSelection from '../getDataSelection'
-
-const { DrawTool: DrawToolComponent } = components
 
 type extraLayerTypes = {
   id: string

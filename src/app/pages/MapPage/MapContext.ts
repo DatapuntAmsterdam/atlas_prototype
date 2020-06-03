@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { MapLayer as MapLayerProps } from '@datapunt/amsterdam-react-maps/lib/constants'
+import { MapLayer as MapLayerProps } from '@datapunt/arm-core/es/constants'
 
 export type ActiveMapLayer = {
   id: string
