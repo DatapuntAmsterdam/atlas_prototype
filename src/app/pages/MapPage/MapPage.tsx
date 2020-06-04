@@ -1,8 +1,8 @@
 import L, { LatLngTuple, Polygon, Polyline, LeafletMouseEvent } from 'leaflet'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { ViewerContainer, Spinner } from '@datapunt/asc-ui'
-import { components, utils } from '@datapunt/arm-core'
+import { ViewerContainer, Spinner, themeSpacing } from '@datapunt/asc-ui'
+import { Map, BaseLayer, Marker, BaseLayerToggle, useStateRef } from '@datapunt/arm-core'
 import { NonTiledLayer } from '@datapunt/arm-nontiled'
 import { MarkerClusterGroup } from '@datapunt/arm-cluster'
 import DrawTool from './Components/DrawTool'
@@ -13,14 +13,14 @@ import MapContext from './MapContext'
 import handleMapClick from './utils/handleMapClick'
 import MapPreviewPanelContainer from './MapPreviewPanelContainer'
 
-// Find out why the import is not found
-const { Map, BaseLayer, Marker } = components
-const { useStateRef } = utils
-
 const StyledMap = styled(Map)`
   width: 100%;
   height: calc(100% - 50px);
   top: 50px;
+`
+
+const BottomLeftHolder = styled.div`
+  display: flex;
 `
 
 const MapView = styled.div`
@@ -37,9 +37,11 @@ const StyledViewerContainer = styled(ViewerContainer)`
 // This can be deleted once we use the new MapDrawer / MapPanel
 const MapPanelContainerWrapper = styled.div`
   bottom: 20px;
-  position: absolute;
+  margin-right: ${themeSpacing(2)};
 
   & > section {
+    left: 0;
+    bottom: 0;
     position: relative;
     max-height: 80vh;
   }
@@ -133,6 +135,17 @@ const MapPage: React.FC = () => {
         ))}
         <StyledViewerContainer
           bottomRight={isLoading ? <Spinner /> : null}
+          bottomLeft={
+            <BottomLeftHolder>
+              <MapPanelContainerWrapper>
+                <MapPanelContainer />
+              </MapPanelContainerWrapper>
+              <BaseLayerToggle
+                onChangeLayer={(id, type) => console.log(id, type)}
+                activeLayer="luchtfoto"
+              />
+            </BottomLeftHolder>
+          }
           topRight={
             <>
               <DrawTool
@@ -145,9 +158,6 @@ const MapPage: React.FC = () => {
           }
         />
       </StyledMap>
-      <MapPanelContainerWrapper>
-        <MapPanelContainer />
-      </MapPanelContainerWrapper>
     </MapView>
   )
 }
