@@ -17,7 +17,7 @@ const categoryLabelsByType = {
   'gebieden/gebiedsgerichtwerken': categoryLabels.gebied,
   'gebieden/grootstedelijkgebied': categoryLabels.gebied,
   'gebieden/stadsdeel': categoryLabels.gebied,
-  'gebieden/unesco': categoryLabels.gebied,
+  'gebieden/unesco': categoryLabels.unesco,
   'grex/projecten': categoryLabels.grondexploitatie,
   'kadaster/kadastraal_object': categoryLabels.kadastraalObject,
   'meetbouten/meetbout': categoryLabels.meetbout,

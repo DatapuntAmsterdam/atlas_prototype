@@ -444,8 +444,7 @@ const GLOSSARY = {
       meta: [],
     },
     UNESCO: {
-      singular: 'UNESCO',
-      plural: 'UNESCO',
+      ...categoryLabels.unesco,
       description:
         'De Amsterdamse grachtengordel staat op de UNESCO Werelderfgoedlijst, ' +
         'wat betekent dat er internationale erkenning is van het bijzondere karakter van dit deel ' +

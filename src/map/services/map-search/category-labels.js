@@ -107,6 +107,10 @@ const categoryLabels = {
     singular: 'Straatnaam',
     plural: 'Straatnamen',
   },
+  unesco: {
+    singular: 'UNESCO',
+    plural: 'UNESCO',
+  },
   vastgoed: {
     singular: 'Vastgoed',
     plural: 'Vastgoed',
