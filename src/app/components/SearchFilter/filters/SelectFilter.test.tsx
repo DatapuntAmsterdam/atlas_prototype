@@ -23,8 +23,8 @@ describe('SelectFilter', () => {
 
   it('should render an option to disable the filter and select it by default', () => {
     const props: FilterProps = { ...defaultProps, onSelectionChange: () => {} }
-    const { getByText } = render(<SelectFilter {...props} />)
-    const node = getByText('Alles') as HTMLOptionElement
+    const { getAllByText } = render(<SelectFilter {...props} />)
+    const node = getAllByText('Alles')[0] as HTMLOptionElement
 
     expect(node.tagName).toEqual('OPTION')
     expect(node.getAttribute('value')).toEqual('')
@@ -33,11 +33,11 @@ describe('SelectFilter', () => {
 
   it('should render a list of options without selection', () => {
     const props: FilterProps = { ...defaultProps, options, onSelectionChange: () => {} }
-    const { getByText } = render(<SelectFilter {...props} />)
+    const { getAllByText } = render(<SelectFilter {...props} />)
 
-    const firstNode = getByText('First') as HTMLOptionElement
-    const secondNode = getByText('Second') as HTMLOptionElement
-    const lastNode = getByText('Last') as HTMLOptionElement
+    const firstNode = getAllByText('First')[0] as HTMLOptionElement
+    const secondNode = getAllByText('Second')[0] as HTMLOptionElement
+    const lastNode = getAllByText('Last')[0] as HTMLOptionElement
     ;[firstNode, secondNode, lastNode].forEach((node, index) => {
       const option = options[index]
 
@@ -50,8 +50,8 @@ describe('SelectFilter', () => {
   it('should render a list of options with selection', () => {
     const selection = ['second']
     const props: FilterProps = { ...defaultProps, options, selection, onSelectionChange: () => {} }
-    const { getByText } = render(<SelectFilter {...props} />)
-    const secondNode = getByText('Second') as HTMLOptionElement
+    const { getAllByText } = render(<SelectFilter {...props} />)
+    const secondNode = getAllByText('Second')[0] as HTMLOptionElement
 
     expect(secondNode.selected).toEqual(true)
   })

@@ -53,9 +53,6 @@ const StyledHeader = styled(HeaderComponent)`
   }
 `
 
-const MenuDefault = (props) => <HeaderMenuContainer {...props} type="default" />
-const MenuMobile = (props) => <HeaderMenuContainer {...props} type="mobile" align="right" />
-
 const Header = ({
   homePage,
   printOrEmbedMode,
@@ -78,8 +75,18 @@ const Header = ({
           navigation={
             <>
               <HeaderSearchContainer />
-              <MenuDefault data-test="header-menu-default" showAt="laptopM" />
-              <MenuMobile data-test="header-menu-mobile" hideAt="laptopM" />
+              <HeaderMenuContainer
+                type="default"
+                data-test="header-menu-default"
+                tall={homePage}
+                showAt="laptopM"
+              />
+              <HeaderMenuContainer
+                type="mobile"
+                align="right"
+                data-test="header-menu-mobile"
+                hideAt="laptopM"
+              />
             </>
           }
         />

@@ -43,7 +43,7 @@ describe('datasets module', () => {
       cy.get(DATA_SETS.dataSetLink).should('have.length', 20).should('be.visible')
 
       // Open first result
-      cy.get(DATA_SETS.dataSetLink).first().click()
+      cy.get(DATA_SETS.dataSetLink).last().click()
 
       // check detail titles
       cy.get('h3').should('be.visible').and('contain', 'Dataset')
@@ -257,7 +257,7 @@ describe('datasets module', () => {
       cy.contains('Metropoolregio Amsterdam')
       cy.contains('Gemeente Amsterdam, Onderzoek, Informatie en Statistiek')
     })
-    it('Should create a new dataset', () => {
+    it.skip('Should create a new dataset', () => {
       cy.server()
       cy.route('/dcatd/datasets').as('getDatasets')
       cy.route('POST', '/dcatd/datasets').as('postDataset')

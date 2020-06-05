@@ -37,7 +37,7 @@ const Animation = ({ contentLink, title, results }) => {
     localeDateFormatted,
     field_subtitle_link: subtitleLink,
     field_subtitle_default: enableSubtitleByDefault,
-    field_links: links,
+    links,
   } = results
   const subtitleUri = subtitleLink?.uri
 

@@ -22,14 +22,12 @@ describe('search module', () => {
     })
 
     it('should be able to navigate throught results with arrow keys', () => {
-      // Without wait, the test failt because it is too fast.
-      cy.wait(500)
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}{downarrow}{downarrow}')
-      cy.get(DATA_SEARCH.autosuggestDropdownActive).should('contain', 'Bodemkwaliteit')
+      cy.get(DATA_SEARCH.autosuggestDropdownItemActive).should('contain', 'Bodemkwaliteit')
       cy.get(SEARCH.input).should('have.value', 'Bodemkwaliteit')
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}')
-      cy.get(DATA_SEARCH.autosuggestDropdownInActive).contains('Bodemkwaliteit')
-      cy.get(DATA_SEARCH.autosuggestDropdownActive).contains('Panoramabeelden')
+      cy.get(DATA_SEARCH.autosuggestDropdownItemInActive).contains('Bodemkwaliteit')
+      cy.get(DATA_SEARCH.autosuggestDropdownItemActive).contains('Panoramabeelden')
     })
 
     it('should go to the search result page when selecting the "..." option', () => {

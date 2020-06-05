@@ -6,26 +6,26 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
   arrowIcon={<SvgChevronDown />}
   data-test="context-menu"
   icon={
-    <Icon
+    <styled.span
       inline={true}
       padding={4}
       size={24}
     >
       <SvgEllipsis />
-    </Icon>
+    </styled.span>
   }
   position="bottom"
   tabindex={0}
 >
   <ContextMenuItem
     icon={
-      <Icon
+      <styled.span
         inline={true}
         padding={4}
         size={24}
       >
         <SvgPrint />
-      </Icon>
+      </styled.span>
     }
     onClick={[Function]}
     role="button"
@@ -37,13 +37,13 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
     disabled={false}
     download="filename.jpg_small"
     icon={
-      <Icon
+      <styled.span
         inline={true}
         padding={4}
         size={24}
       >
         <SvgDownload />
-      </Icon>
+      </styled.span>
     }
     onClick={[Function]}
   >
@@ -54,13 +54,13 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
     disabled={false}
     download="filename.jpg_large"
     icon={
-      <Icon
+      <styled.span
         inline={true}
         padding={4}
         size={24}
       >
         <SvgDownload />
-      </Icon>
+      </styled.span>
     }
     onClick={[Function]}
   >
@@ -72,13 +72,13 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
     divider={true}
     download="filename.jpg_original"
     icon={
-      <Icon
+      <styled.span
         inline={true}
         padding={4}
         size={24}
       >
         <SvgDownload />
-      </Icon>
+      </styled.span>
     }
     onClick={[Function]}
   >
@@ -86,13 +86,13 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
   </ContextMenuItem>
   <ContextMenuItem
     icon={
-      <Icon
+      <styled.span
         inline={true}
         padding={4}
         size={24}
       >
         <SvgFacebookPadded />
-      </Icon>
+      </styled.span>
     }
     key="1"
     onClick={[Function]}
@@ -103,13 +103,13 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
   </ContextMenuItem>
   <ContextMenuItem
     icon={
-      <Icon
+      <styled.span
         inline={true}
         padding={4}
         size={24}
       >
         <SvgTwitter />
-      </Icon>
+      </styled.span>
     }
     key="2"
     onClick={[Function]}
@@ -120,13 +120,13 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
   </ContextMenuItem>
   <ContextMenuItem
     icon={
-      <Icon
+      <styled.span
         inline={true}
         padding={4}
         size={24}
       >
         <SvgLinkedin />
-      </Icon>
+      </styled.span>
     }
     key="3"
     onClick={[Function]}
@@ -137,13 +137,13 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
   </ContextMenuItem>
   <ContextMenuItem
     icon={
-      <Icon
+      <styled.span
         inline={true}
         padding={4}
         size={24}
       >
         <SvgEmail />
-      </Icon>
+      </styled.span>
     }
     key="4"
     onClick={[Function]}

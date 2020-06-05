@@ -37,7 +37,7 @@ const StyledErrorMessage = styled(ErrorMessage)`
 
 const PlaceholderLink = styled(StyledLink)`
   color: transparent;
-  ${perceivedLoading()}
+  // ${perceivedLoading()}
 `
 
 const ContentHolder: React.FC = ({ children }) => (

@@ -133,7 +133,7 @@ const ArticleDetailPage = ({ id }) => {
     body,
     coverImage,
     field_downloads: downloads,
-    field_links: links,
+    links,
     field_byline: byline,
     field_accordions: accordions,
     slug,

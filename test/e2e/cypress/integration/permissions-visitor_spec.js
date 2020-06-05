@@ -1,5 +1,5 @@
 import { queries, urls, values } from '../support/permissions-constants'
-import { DATA_SELECTION_TABLE, MAP } from '../support/selectors'
+import { DATA_SEARCH, DATA_SELECTION_TABLE, MAP } from '../support/selectors'
 
 describe('visitor permissions', () => {
   beforeEach(() => {
@@ -7,17 +7,34 @@ describe('visitor permissions', () => {
     cy.hidePopup()
   })
 
-  it('1. Should NOT show "Kadastrale subjecten" in the autocomplete', () => {
+  it('0. Should NOT show "Kadastrale subjecten" in the autocomplete', () => {
     cy.route('/typeahead?q=bakker').as('getResults')
     cy.visit('/')
 
-    cy.get('#auto-suggest__input').focus().type('bakker')
+    cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker')
 
     cy.wait('@getResults')
-    cy.get('.auto-suggest__tip').should('exist').and('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestTip).should('exist').and('be.visible')
     cy.get(queries.autoSuggestHeader).should(($values) => {
-      expect($values).to.not.contain(values.kadastraleSubjecten)
+      expect($values)
+        .to.not.contain(values.kadastraleSubjecten)
+        .and.to.not.contain(values.vestigingen)
+        .and.to.not.contain(values.maatschappelijkeActiviteiten)
     })
+  })
+
+  it('1. Should NOT show "Kadastrale subjecten" and "Vestigingen" in the results', () => {
+    cy.route('/typeahead?q=bakker').as('getResults')
+    cy.visit('/')
+
+    cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
+
+    cy.wait('@getResults')
+    cy.contains('Vestigingen (').should('not.be.visible')
+    cy.contains('Maatschappelijke activiteiten (').should('not.be.visible')
+    cy.contains('Kadastrale subjecten (').should('not.be.visible')
+    cy.contains('Aafje Cornelia Bakker').should('not.be.visible')
+    cy.contains('Bakker & Toledo Holding B.V.').should('not.be.visible')
   })
 
   it('2A. Should NOT allow a visitor to view a natural subject', () => {
@@ -53,6 +70,11 @@ describe('visitor permissions', () => {
     cy.get(queries.headerSubTitle).should(($values) => {
       expect($values).to.not.contain(values.aantekeningen)
     })
+    cy.get(`${DATA_SEARCH.keyValueList}> dt`).should('not.contain', 'Koopsom')
+    cy.get(`${DATA_SEARCH.keyValueList}> dt`).should('not.contain', 'Koopjaar')
+    cy.get(`${DATA_SEARCH.keyValueList}> dt`).should('not.contain', 'Cultuur bebouwd')
+    cy.get(`${DATA_SEARCH.keyValueList}> dt`).should('not.contain', 'Cultuur onbebouwd')
+    cy.get(`${DATA_SEARCH.keyValueList}> dt`).should('not.contain', 'Zakelijke rechten')
   })
 
   it('4. Should show a visitor limited info for an address', () => {

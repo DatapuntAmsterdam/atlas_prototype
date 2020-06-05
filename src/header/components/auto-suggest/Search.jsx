@@ -1,22 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { SearchBar, SearchBarToggle, BackDrop, breakpoint } from '@datapunt/asc-ui'
+import {
+  SearchBar,
+  SearchBarToggle,
+  BackDrop,
+  breakpoint,
+  showAboveBackDrop,
+} from '@datapunt/asc-ui'
+import CONSTANTS from '../../../shared/config/constants'
+
+const Z_INDEX_OFFSET = 2 // Set a custom offset
 
 const StyledSearchBar = styled(SearchBar)`
   position: relative;
+  background: #FFF;
+
+  ${({ expanded }) => showAboveBackDrop(expanded)({ zIndexOffset: Z_INDEX_OFFSET })}
 
   @media screen and ${breakpoint('min-width', 'tabletM')} {
     width: 80%;
-  }
-`
-
-// Actually we don't want the BackDrop to even render the Portal, but having multiple instances of components with BackDrops is stil something that can't be handled better so long the AutoSuggest component is still in this project
-const StyledBackDrop = styled(BackDrop)`
-  display: ${({ expanded }) => (expanded ? 'initial' : 'none')};
-
-  @media screen and ${breakpoint('max-width', 'tabletM')} {
-    display: none;
   }
 `
 
@@ -37,20 +40,25 @@ const Search = ({
     <>
       <StyledSearchBar
         showAt="tabletM"
+        data-testid="StyledSearchBar"
         inputProps={inputProps}
         {...searchBarProps}
         aria-haspopup="true"
         aria-expanded={expanded}
-        onMouseLeave={onBlur} // the onMouseLeave event is needed here as the MenuInline component has onMouseEnter/onMouseLeave events and we don't want a menu and the AutoSuggest to be opened at the same time
+        expanded={expanded}
       >
-        <StyledBackDrop
-          data-testid="backDrop"
-          expanded={expanded}
-          onMouseEnter={onBlur} // The BackDrop is rendered as a Portal, therefore the onMouseLeave event isn't fired when entering it and we must call this event instead
-          hideOverFlow={false}
-        />
         {children}
       </StyledSearchBar>
+      {expanded && (
+        <BackDrop
+          backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
+          data-testid="backDrop"
+          expanded={expanded}
+          onClick={onBlur}
+          zIndexOffset={Z_INDEX_OFFSET}
+        />
+      )}
+
       <SearchBarToggle
         title={inputProps.placeholder}
         hideAt="tabletM"

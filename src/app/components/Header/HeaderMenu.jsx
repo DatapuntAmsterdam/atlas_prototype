@@ -1,17 +1,31 @@
 import React from 'react'
-import { MenuInline, MenuToggle, MenuFlyOut, MenuItem, MenuButton } from '@datapunt/asc-ui'
+import {
+  MenuInline,
+  MenuToggle,
+  MenuFlyOut,
+  MenuItem,
+  MenuButton,
+  themeColor,
+} from '@datapunt/asc-ui'
 import { ChevronRight } from '@datapunt/asc-assets'
 import PropTypes from 'prop-types'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
 import { toArticleDetail } from '../../../store/redux-first-router/actions'
 import truncateString from '../../../shared/services/truncateString/truncateString'
 import navigationLinks from '../HomePage/services/navigationLinks'
 
 import { HEADER_LINKS } from '../../../shared/config/config'
+import CONSTANTS from '../../../shared/config/constants'
+
+const StyledMenuInline = styled(MenuInline)`
+  background-color: ${({ tall, theme }) =>
+    tall ? themeColor('tint', 'level2')({ theme }) : themeColor('tint', 'level1')({ theme })};
+`
 
 const components = {
-  default: MenuInline,
+  default: StyledMenuInline,
   mobile: MenuToggle,
 }
 
@@ -20,7 +34,13 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
   const { trackEvent } = useMatomo()
   const Menu = components[type]
   return (
-    <Menu {...props} open={menuOpen} hasBackDrop onExpand={setMenuOpen}>
+    <Menu
+      {...props}
+      open={menuOpen}
+      hasBackDrop
+      onExpand={setMenuOpen}
+      backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
+    >
       <MenuFlyOut label="Onderdelen">
         {navigationLinks.map(({ id, title, to }) => (
           <MenuButton

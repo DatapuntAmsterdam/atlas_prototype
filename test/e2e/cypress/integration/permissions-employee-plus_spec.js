@@ -1,5 +1,5 @@
 import { queries, urls, values } from '../support/permissions-constants'
-import { DATA_SELECTION_TABLE, MAP } from '../support/selectors'
+import { DATA_SEARCH, DATA_SELECTION_TABLE, MAP } from '../support/selectors'
 
 describe('employee PLUS permissions', () => {
   beforeEach(() => {
@@ -15,17 +15,39 @@ describe('employee PLUS permissions', () => {
     cy.logout()
   })
 
-  it('1. Should show "Kadastrale subjecten" for medewerker plus in the autocomplete', () => {
+  it('0. Should show "Kadastrale subjecten" for medewerker plus in the autocomplete', () => {
     cy.route('/typeahead?q=bakker').as('getResults')
     cy.visit('/')
 
-    cy.get('#auto-suggest__input').focus().click().type('bakker')
+    cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
 
     cy.wait('@getResults')
-    cy.get('.auto-suggest__dropdown').get('h4').invoke('width').should('be.gt', 0)
-    cy.get('.auto-suggest__tip').should('exist').and('be.visible')
-    cy.get('.auto-suggest__dropdown').contains(values.kadastraleSubjecten)
-    cy.get('.auto-suggest__dropdown-item').contains('Aafje Cornelia Bakker')
+    cy.get(DATA_SEARCH.autoSuggestDropdown).get('h4').invoke('width').should('be.gt', 0)
+    cy.get(DATA_SEARCH.autoSuggestTip).should('exist').and('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestDropdown).contains(values.vestigingen).should('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestDropdown)
+      .contains(values.maatschappelijkeActiviteiten)
+      .should('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestDropdown)
+      .contains(values.kadastraleSubjecten)
+      .should('be.visible')
+    cy.get(DATA_SEARCH.autosuggestDropdownItemInActive)
+    cy.get(DATA_SEARCH.autosuggestDropdownItemInActive)
+      .contains('Aafje Cornelia Bakker')
+      .should('be.visible')
+  })
+
+  it('1. Should NOT show "Kadastrale subjecten" and "Vestigingen" in the results', () => {
+    cy.route('/typeahead?q=bakker').as('getResults')
+    cy.visit('/')
+
+    cy.get('#auto-suggest__input').focus().type('bakker{enter}')
+
+    cy.wait('@getResults')
+    cy.contains('Vestigingen (').should('be.visible')
+    cy.contains('Maatschappelijke activiteiten (').should('be.visible')
+    cy.contains('Kadastrale subjecten (').should('be.visible')
+    cy.contains('Aafje Cornelia Bakker').should('be.visible')
   })
 
   it('2A. Should allow a plus employee to view everything of natural subject', () => {
@@ -38,7 +60,7 @@ describe('employee PLUS permissions', () => {
     cy.wait('@getZakelijkeRechten')
     cy.get(queries.warningPanel).should('not.exist')
     cy.get(queries.headerTitle).contains('Bakker')
-    cy.get(queries.natuurlijkPersoon).should('exist').and('be.visible')
+    cy.get(queries.natuurlijkPersoon).should('be.visible')
     cy.get('.qa-kadastraal-subject-recht').contains('Eigendom (recht van)')
   })
 
@@ -52,7 +74,7 @@ describe('employee PLUS permissions', () => {
     cy.wait('@getZakelijkeRechten')
     cy.get(queries.warningPanel).should('not.exist')
     cy.get(queries.headerTitle).contains('ledo Ho')
-    cy.get(queries.nietNatuurlijkPersoon).should('exist').and('be.visible')
+    cy.get(queries.nietNatuurlijkPersoon).should('be.visible')
     cy.get('.qa-kadastraal-subject-recht').contains('Eigendom')
   })
 
@@ -69,6 +91,11 @@ describe('employee PLUS permissions', () => {
     cy.get(queries.warningPanel).should('not.exist')
     cy.get(queries.headerTitle).contains('6661')
     cy.get(queries.headerSubTitle).contains(values.aantekeningen)
+    cy.contains('Koopsom').should('be.visible')
+    cy.contains('Koopjaar').should('be.visible')
+    cy.contains('Cultuur bebouwd').should('be.visible')
+    cy.contains('Cultuur onbebouwd').should('be.visible')
+    cy.contains('Zakelijke rechten').scrollIntoView().should('be.visible')
   })
 
   it('4. Should show a plus employee all info for an address', () => {

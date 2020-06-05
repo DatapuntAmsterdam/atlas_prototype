@@ -20,13 +20,17 @@ export const ADDRESS_PAGE = {
 
 export const DATA_SEARCH = {
   autoSuggest: '.auto-suggest',
+  autoSuggestCategory: '.auto-suggest__dropdown-category__heading',
   autoSuggestDropdown: '.auto-suggest__dropdown',
-  autosuggestDropdownActive: '.auto-suggest__dropdown-item--active',
-  autosuggestDropdownInActive: '.auto-suggest__dropdown-item--inactive',
+  autoSuggestDropDownItem: '.auto-suggest__dropdown-item',
+  autosuggestDropdownItemActive: '.auto-suggest__dropdown-item--active',
+  autosuggestDropdownItemInActive: '.auto-suggest__dropdown-item--inactive',
   autoSuggestDropdownCategories: '.auto-suggest__dropdown-category li',
   autoSuggestDropdownHighlighted: '.auto-suggest__dropdown__highlight',
   autoSuggestInput: '#auto-suggest__input',
   autoSuggestHeader: 'h4.qa-auto-suggest-header',
+  autoSuggestTip: '.auto-suggest__tip',
+  buttonSearch: '[aria-label="Search..."]',
   headerTitle: '.o-header__title',
   headerSubTitle: '.o-header__subtitle',
   infoNotification: '.notification--info',
@@ -40,6 +44,9 @@ export const DATA_SEARCH = {
   scrollWrapper: '.scroll-wrapper',
   searchHeader: '.qa-search-header',
   searchResultsGrid: '.c-search-results',
+  searchResultsCategory: '[class*=SearchHeading__StyledHeading]',
+  searchResultsCard: '[class*=EditorialCard__StyledHeading]',
+  searchResultsLink: '[class*="StyledParagraphLink"]',
   warningPanel: '.c-panel',
   warningPanelAngular: '.c-panel--warning',
 }
@@ -57,6 +64,13 @@ export const DATA_SETS = {
   datasetItem: '.resources-type__content-item',
   dataSetLink: '[data-test=DatasetCard]',
   headerDataset: '.o-header__subtitle',
+}
+
+export const DRAWING = {
+  buttonDrawingOn: '.toggle-drawing__icon',
+  labelDrawing: '.toggle-drawing__label',
+  clusterIcon: '.o-highlight-cluster',
+  mapPolygon: '.c-map__leaflet-drawn-polygon',
 }
 
 export const HEADER = {
@@ -89,6 +103,10 @@ export const HOMEPAGE = {
   navigationBlockTabellen: '[data-test=navigation-block] > [href*="/artikelen/artikel/tabellen/"]',
   organizationBlock: '[data-test=organization-block]',
   specialBlock: '[data-test=special-block]',
+}
+
+export const LINKS = {
+  kadastraleObjecten: 'data/brk/kadastrale-objecten/',
 }
 
 export const MAP = {
@@ -166,6 +184,7 @@ export const SEARCH = {
 
 export const TABLES = {
   activeFilterItem: '.c-data-selection-active-filters__listitem',
+  activeFilterRemove: '.c-data-selection-active-filters--remove-filter',
   detailPane: '.qa-detail',
   detailTitle: 'h2.o-header__title',
   filterCategories: '.c-data-selection-available-filters__category',

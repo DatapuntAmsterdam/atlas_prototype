@@ -6,6 +6,7 @@ import RouterLink from 'redux-first-router-link'
 import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
 import ModalBlock from './ModalBlock'
 import { toHelpPage } from '../../../store/redux-first-router/actions'
+import CONSTANTS from '../../../shared/config/constants'
 
 export const openFeedbackForm = () => {
   const openFeedbackFormEvent = new CustomEvent('openForm_feedbackModal')
@@ -45,6 +46,7 @@ const FeedbackModalComponent = ({
     open={open}
     onClose={handleClose}
     hideOverFlow={false}
+    backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
   >
     <TopBar>
       <Heading as="h4">

@@ -1,5 +1,5 @@
 import { queries, urls, values } from '../support/permissions-constants'
-import { DATA_SELECTION_TABLE, MAP } from '../support/selectors'
+import { DATA_SEARCH, DATA_SELECTION_TABLE, MAP } from '../support/selectors'
 
 describe('employee permissions', () => {
   beforeEach(() => {
@@ -15,16 +15,38 @@ describe('employee permissions', () => {
     cy.logout()
   })
 
-  it('1. Should show "Kadastrale subjecten" for medewerker in the autocomplete', () => {
+  it('0. Should show "Kadastrale subjecten" for medewerker in the autocomplete', () => {
     cy.route('/typeahead?q=bakker').as('getResults')
     cy.visit('/')
 
-    cy.get('#auto-suggest__input').focus().click().type('bakker')
+    cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
 
     cy.wait('@getResults')
-    cy.get('.auto-suggest__tip').should('exist').and('be.visible')
-    cy.get('.auto-suggest__dropdown').contains(values.kadastraleSubjecten)
-    cy.get('.auto-suggest__dropdown-item').contains(' & Toledo Holding B.V.')
+    cy.get(DATA_SEARCH.autoSuggestDropdown).get('h4').invoke('width').should('be.gt', 0)
+    cy.get(DATA_SEARCH.autoSuggestTip).should('exist').and('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestDropdown).contains(values.vestigingen).should('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestDropdown)
+      .contains(values.maatschappelijkeActiviteiten)
+      .should('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestDropdown)
+      .contains(values.kadastraleSubjecten)
+      .should('be.visible')
+    cy.get(DATA_SEARCH.autosuggestDropdownItemInActive)
+      .contains(' & Toledo Holding B.V.')
+      .should('be.visible')
+  })
+
+  it('1. Should NOT show "Kadastrale subjecten" and "Vestigingen" in the results', () => {
+    cy.route('/typeahead?q=bakker').as('getResults')
+    cy.visit('/')
+
+    cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
+
+    cy.wait('@getResults')
+    cy.contains('Vestigingen (').should('be.visible')
+    cy.contains('Maatschappelijke activiteiten (').should('be.visible')
+    cy.contains('Kadastrale subjecten (').should('be.visible')
+    cy.contains('Bakker & Toledo Holding B.V.').should('be.visible')
   })
 
   it('2A. Should allow an employee to view a natural person but not the "Zakelijke rechten"', () => {
@@ -36,7 +58,7 @@ describe('employee permissions', () => {
       'Medewerkers met speciale bevoegdheden kunnen alle gegevens zien (ook zakelijke rechten).',
     )
     cy.get(queries.headerTitle).contains('akker')
-    cy.get(queries.natuurlijkPersoon).should('exist').and('be.visible')
+    cy.get(queries.natuurlijkPersoon).should('be.visible')
   })
 
   it('2B. Should allow an employee to view a non-natural subject', () => {
@@ -46,7 +68,7 @@ describe('employee permissions', () => {
     cy.wait('@getResults')
     cy.get(queries.warningPanel).should('not.exist')
     cy.get(queries.headerTitle).contains('er & T')
-    cy.get(queries.nietNatuurlijkPersoon).should('exist').and('be.visible')
+    cy.get(queries.nietNatuurlijkPersoon).should('be.visible')
   })
 
   it('3. Should show an employee all info for a cadastral subject', () => {
@@ -61,6 +83,11 @@ describe('employee permissions', () => {
     cy.get(queries.warningPanel).should('not.exist')
     cy.get(queries.headerTitle).contains('6661')
     cy.get(queries.headerSubTitle).contains(values.aantekeningen)
+    cy.contains('Koopsom').should('be.visible')
+    cy.contains('Koopjaar').should('be.visible')
+    cy.contains('Cultuur bebouwd').should('be.visible')
+    cy.contains('Cultuur onbebouwd').should('be.visible')
+    cy.contains('Zakelijke rechten').scrollIntoView().should('be.visible')
   })
 
   it('4. Should show an employee all info for an address', () => {

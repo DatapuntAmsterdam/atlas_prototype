@@ -67,7 +67,7 @@ const CollectionDetailPage: React.FC = () => {
               href={results?.field_link?.uri}
               title={results?.field_link?.title}
             >
-              Meer over {results?.title}
+              {results?.field_link?.title || `Meer over ${results?.title}`}
             </Link>
           )}
         </Row>

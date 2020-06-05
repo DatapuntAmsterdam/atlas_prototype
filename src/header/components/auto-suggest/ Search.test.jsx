@@ -20,22 +20,22 @@ describe('Search', () => {
   })
 
   it('should not show the backdrop by default', () => {
-    const { getByTestId } = render(
+    const { queryByTestId } = render(
       <ThemeProvider>
         <Search {...props} />
       </ThemeProvider>,
     )
 
-    expect(getByTestId('backDrop')).toHaveStyleRule('display', 'none')
+    expect(queryByTestId('backDrop')).toBeFalsy()
   })
 
   it('should show the backdrop when the component receives the right props', () => {
-    const { getByTestId } = render(
+    const { queryByTestId } = render(
       <ThemeProvider>
         <Search {...{ ...props, expanded: true }} />
       </ThemeProvider>,
     )
 
-    expect(getByTestId('backDrop')).toHaveStyleRule('display', 'initial')
+    expect(queryByTestId('backDrop')).toBeTruthy()
   })
 })

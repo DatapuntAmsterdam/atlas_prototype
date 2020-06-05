@@ -23,6 +23,11 @@ export const EDITORIAL_FIELD_TYPE_VALUES = {
   CONTENT: 'content',
 }
 
+// Drupal JSONapi encodes `&` in URLs, which React can't handle https://github.com/facebook/react/issues/6873#issuecomment-227906893
+function cleanupDrupalUri(uri) {
+  return uri.replace(/&amp;/g, '&')
+}
+
 const normalizeObject = (data) => {
   const {
     uuid,
@@ -40,6 +45,7 @@ const normalizeObject = (data) => {
     field_file,
     media_image_url,
     field_link,
+    field_links,
     field_related,
     ...otherFields
   } = data
@@ -57,7 +63,7 @@ const normalizeObject = (data) => {
   // By default use the internal router, fallback on a div if there's no link.
   // If there's an externalUrl set, override the linkProps.
   let linkProps = to ? { to, forwardedAs: RouterLink } : { forwardedAs: 'div' }
-  const externalUrl = field_link?.uri?.replace(/&amp;/g, '&') // Drupal JSONapi encodes `&` in URLs, which React can't handle https://github.com/facebook/react/issues/6873#issuecomment-227906893
+  const externalUrl = field_link?.uri ? cleanupDrupalUri(field_link?.uri) : null
 
   linkProps = externalUrl ? { href: externalUrl, forwardedAs: 'a' } : linkProps
   linkProps = { ...linkProps, title } // Add the title attribute by default
@@ -102,6 +108,11 @@ const normalizeObject = (data) => {
     related = reformattedRelatedResults.map((dataItem) => normalizeObject(dataItem, type))
   }
 
+  let links = []
+  if (field_links) {
+    links = field_links.map((link) => ({ ...link, uri: cleanupDrupalUri(link.uri) }))
+  }
+
   return {
     key: uuid,
     id: uuid,
@@ -122,6 +133,7 @@ const normalizeObject = (data) => {
     to,
     linkProps,
     related,
+    links,
     ...otherFields,
   }
 }
