@@ -40,7 +40,7 @@
     "@datapunt/matomo-tracker-react": "0.1.4",
     "@sentry/browser": "5.16.1",
     "angular": "1.7.9",
-    "angular-aria": "~1.7.9",
+    "angular-aria": "~1.8.0",
     "angular-i18n": "~1.7.9",
     "angular-sanitize": "~1.7.9",
     "bbga_visualisatie_d3": "git+https://github.com/Amsterdam/bbga_visualisatie_d3.git#master",
