@@ -8,8 +8,15 @@
         <dt>Kenmerk</dt>
         <dd>{{vm.apiData.results.kenmerk}}</dd>
 
-        <dt>Datum van inslag</dt>
-        <dd>{{vm.apiData.results.datum_inslag | dpDate}}</dd>
+        <ng-container ng-if="vm.apiData.results.datum">
+          <dt>Datum</dt>
+          <dd>{{vm.apiData.results.datum | dpDate}}</dd>
+        </ng-container>
+
+        <ng-container ng-if="vm.apiData.results.datum_inslag">
+          <dt>Datum van inslag</dt>
+          <dd>{{vm.apiData.results.datum_inslag | dpDate}}</dd>
+        </ng-container>
 
         <dt>Soort handeling</dt>
         <dd>{{vm.apiData.results.type}}</dd>

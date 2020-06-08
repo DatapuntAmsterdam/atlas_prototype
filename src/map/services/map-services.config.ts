@@ -397,7 +397,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       title: 'Inslag',
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Datum van inslag', value: result.date },
+        { type: DetailResultItemType.Default, label: 'Datum', value: result.datum },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Datum van inslag',
+          value: result.datum_inslag,
+        },
         { type: DetailResultItemType.Default, label: 'Soort handeling', value: result.type },
         { type: DetailResultItemType.Default, label: 'Bron', value: result.bron, multiLine: true },
         { type: DetailResultItemType.Default, label: 'Opmerkingen', value: result.opmerkingen },

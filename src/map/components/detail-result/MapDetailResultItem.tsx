@@ -1,4 +1,5 @@
 import React from 'react'
+import formatDate from '../../../shared/services/date-formatter/date-formatter'
 import { DetailResultItemDefault } from '../../types/details'
 
 export interface MapDetailResultItemProps {
@@ -6,7 +7,9 @@ export interface MapDetailResultItemProps {
 }
 
 const MapDetailResultItem: React.FC<MapDetailResultItemProps> = ({ item }) => {
-  return item.value ? (
+  const value = item.value instanceof Date ? formatDate(item.value) : item.value
+
+  return value ? (
     <li className="map-detail-result__item">
       <section className="map-detail-result__item-content">
         <div className="map-detail-result__item-label">{item.label}</div>
@@ -26,10 +29,10 @@ const MapDetailResultItem: React.FC<MapDetailResultItemProps> = ({ item }) => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              {item.value}
+              {value}
             </a>
           ) : (
-            item.value
+            value
           )}
         </div>
       </section>
