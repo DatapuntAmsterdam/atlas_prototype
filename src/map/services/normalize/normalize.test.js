@@ -1,3 +1,4 @@
+import NotificationLevel from '../../../app/models/notification'
 import formatDate from '../../../shared/services/date-formatter/date-formatter'
 import {
   adressenPand,
@@ -11,6 +12,7 @@ import {
   monument,
   napPeilmerk,
   oplaadpunten,
+  parkeervak,
   parkeerzones,
   reclamebelasting,
   societalActivities,
@@ -18,7 +20,6 @@ import {
   winkelgebied,
   YEAR_UNKNOWN,
 } from './normalize'
-import NotificationLevel from '../../../app/models/notification'
 
 jest.mock('../../../shared/services/date-formatter/date-formatter')
 
@@ -643,6 +644,28 @@ ${input.gebruiksdoel[1]}`,
 
     it('should pass along other properties', () => {
       expect(grexProject({ planstatus: 'A', oppervlakte: 12, foo: 'bar' }).foo).toEqual('bar')
+    })
+  })
+
+  describe('normalizes "parkeervakken"', () => {
+    it('returns the formatted days', () => {
+      const output = parkeervak({
+        regimes: [{ dagen: ['ma', 'di', 'do'], beginTijd: '00:00:00', eindTijd: '12:00:00' }],
+      })
+
+      expect(output).toMatchObject({
+        regimes: [{ dagenFormatted: 'ma, di, do' }],
+      })
+    })
+
+    it('returns the formatted time', () => {
+      const output = parkeervak({
+        regimes: [{ beginTijd: '00:00:00', eindTijd: '12:00:00', dagen: [] }],
+      })
+
+      expect(output).toMatchObject({
+        regimes: [{ tijdstip: '00:00 - 12:00', dagen: [] }],
+      })
     })
   })
 })

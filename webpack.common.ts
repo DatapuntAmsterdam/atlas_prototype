@@ -11,11 +11,12 @@ import { Configuration, DefinePlugin } from 'webpack'
 // Some dependencies are written in ES2015+ syntax and will need to be included explicitly.
 // Adding them to this config will transpile and add polyfills to the code if necessary.
 const modernModules = [
-  path.resolve(__dirname, 'node_modules/@datapunt/asc-assets'),
-  path.resolve(__dirname, 'node_modules/@datapunt/asc-ui'),
-  path.resolve(__dirname, 'node_modules/body-scroll-lock'),
-  path.resolve(__dirname, 'node_modules/escape-string-regexp'),
-]
+  '@datapunt/asc-assets',
+  '@datapunt/asc-ui',
+  'body-scroll-lock',
+  'escape-string-regexp',
+  'redux-first-router',
+].map((entry) => `${path.resolve(__dirname, 'node_modules', entry)}/`)
 
 const env = dotenv.config().parsed ?? {}
 const envKeys = Object.entries(env).reduce((prev, [key, value]) => {
@@ -27,12 +28,22 @@ export interface CreateConfigOptions {
   /**
    * If enabled a build optimized for legacy browsers with ES5 code and various polyfills will be created,
    * otherwise a more modern build using ES2015 syntax will be used with less polyfills.
+   *
+   * @default false
    */
-  legacy: boolean
+  legacy?: boolean
+  /**
+   * If only a single build is needed, e.g. only building a single variant during development to speed up the build.
+   *
+   * @default false
+   */
+  singleBuild?: boolean
   /**
    * Enable production optimizations or development hints.
+   *
+   * @default 'none'
    */
-  mode: Configuration['mode']
+  mode?: Configuration['mode']
 }
 
 export const rootPath = path.resolve(__dirname)
@@ -62,7 +73,12 @@ const svgoConfig = {
   prefixIds: true,
 }
 
-export function createConfig(options: CreateConfigOptions): Configuration {
+export function createConfig(additionalOptions: CreateConfigOptions): Configuration {
+  const options: Required<CreateConfigOptions> = {
+    ...{ legacy: false, singleBuild: false, mode: 'none' },
+    ...additionalOptions,
+  }
+
   return {
     mode: options.mode,
     name: options.legacy ? 'legacy' : 'modern',
@@ -222,7 +238,7 @@ export function createConfig(options: CreateConfigOptions): Configuration {
         esModule: true,
       }),
       new HtmlWebpackPlugin({
-        inject: false,
+        inject: options.singleBuild,
         template: 'index.ejs',
         lang: 'nl',
         title: 'Data en informatie - Amsterdam',
@@ -244,7 +260,7 @@ export function createConfig(options: CreateConfigOptions): Configuration {
               }
             : false,
       }),
-      new HtmlWebpackMultiBuildPlugin(),
+      ...(!options.singleBuild ? [new HtmlWebpackMultiBuildPlugin()] : []),
     ],
   }
 }

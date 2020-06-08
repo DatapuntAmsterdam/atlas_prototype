@@ -56,7 +56,7 @@ describe('panorama module', () => {
     it('should render the leaflet map and set the marker', () => {
       // the canvas inside de marzipano viewer should exist and be visible
       cy.get(PANORAMA.markerPane).find('img').should('exist').and('be.visible')
-      cy.get(MAP.imageLayer).should('not.exist')
+      cy.get(MAP.imageLayer).should('exist')
     })
 
     it('should set the panoramabeelden as active layers in the map-panel legenda', () => {
@@ -173,7 +173,7 @@ describe('panorama module', () => {
       cy.wait('@getPanoThumbnail')
       cy.wait('@getResults')
       cy.get(ADDRESS_PAGE.panoramaThumbnail).should('exist').and('be.visible')
-      cy.contains('Leidsegracht')
+      cy.contains('Elandsgracht')
     })
   })
 })

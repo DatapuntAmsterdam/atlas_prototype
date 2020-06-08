@@ -28,6 +28,7 @@ exports[`DatasetDetail should render 1`] = `
         "$$stringify": [Function],
         "$$uppercase": [Function],
         "$interpolateMinErr": [Function],
+        "UNSAFE_restoreLegacyJqLiteXHTMLReplacement": [Function],
         "bind": [Function],
         "bootstrap": [Function],
         "callbacks": Object {
@@ -58,11 +59,11 @@ exports[`DatasetDetail should render 1`] = `
         "reloadWithDebugInfo": [Function],
         "toJson": [Function],
         "version": Object {
-          "codeName": "pollution-eradication",
-          "dot": 9,
-          "full": "1.7.9",
+          "codeName": "nested-vaccination",
+          "dot": 0,
+          "full": "1.8.0",
           "major": 1,
-          "minor": 7,
+          "minor": 8,
         },
       }
     }

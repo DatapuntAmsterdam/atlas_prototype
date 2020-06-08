@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import queryString from 'querystring'
 import { ChevronDown } from '@datapunt/asc-assets'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -100,21 +100,7 @@ const MapLegend = ({
 }) => {
   const ref = React.createRef()
   const { trackEvent } = useMatomo()
-
   const isPrintOrEmbedView = useSelector(isPrintOrEmbedMode)
-  const [isOpen, setOpen] = useState(isPrintOrEmbedView ?? false)
-
-  // Open the MapLegend and scroll it into the current view
-  const handleSetOpen = (open) => {
-    if (open && ref.current) {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
-    }
-
-    setOpen(open)
-  }
 
   // Todo: This need to be refactored on redux level, so MapLayers and LegendItems will get a isVisible option there.
   const mapLayers = useMemo(
@@ -144,6 +130,8 @@ const MapLegend = ({
     [overlays, activeMapLayers],
   )
 
+  const [isOpen, setOpen] = useState(isPrintOrEmbedView ?? false)
+
   const allInvisible = mapLayers.every(({ isVisible }) => !isVisible)
   const collectionIndeterminate =
     mapLayers.some(
@@ -170,6 +158,34 @@ const MapLegend = ({
     }
   }
 
+  // Open the MapLegend and scroll it into the current view
+  const handleSetOpen = useCallback(
+    (open) => {
+      if (open && ref.current) {
+        ref.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      }
+
+      setOpen(open)
+    },
+    [ref.current],
+  )
+
+  // Check if some of the maplayers are opened on first render
+  const hasOpenMapLayers = mapLayers.some(
+    ({ isVisible, legendItems }) =>
+      isVisible === true ||
+      (isVisible === true &&
+        legendItems.some(({ isVisible: legendItemIsVisible }) => legendItemIsVisible === true)), // legenditems could be visible in another MapLegend
+  )
+
+  // Open the maplegend if some of the maplayers are opened
+  useEffect(() => {
+    if (hasOpenMapLayers) handleSetOpen(true)
+  }, [hasOpenMapLayers])
+
   const handleOnChangeCollection = (e) => {
     // We want to check all the layers when user clicks on an indeterminate checkbox
     if (!e.currentTarget.checked && collectionIndeterminate) {
@@ -195,21 +211,6 @@ const MapLegend = ({
       handleSetOpen(e.currentTarget.checked)
     }
   }
-
-  useEffect(() => {
-    // Open the panel when some of the layers are visible
-    if (
-      !isOpen &&
-      mapLayers.some(
-        ({ isVisible, legendItems }) =>
-          isVisible === true ||
-          (isVisible === true &&
-            legendItems.some(({ isVisible: legendItemIsVisible }) => legendItemIsVisible === true)), // legenditems could be visible in another MapLegend
-      )
-    ) {
-      handleSetOpen(true)
-    }
-  }, [mapLayers, isOpen])
 
   return (
     <>

@@ -14,6 +14,8 @@
 // ***********************************************************
 
 import './authentication-commands'
+import './hide-popup'
+import './hooks'
 import './preview-panel-commands'
 import './routing-commands'
-import './hide-popup'
+import './search-commands'

@@ -1,5 +1,5 @@
-export default (results) =>
-  results.adressen.reduce(
+export default (addresses) =>
+  addresses.reduce(
     (acc, address) => [
       ...acc,
       ...address.nummeraanduidingen.reduce(

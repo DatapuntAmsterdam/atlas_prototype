@@ -70,22 +70,22 @@ const navigationLinks = [
   },
   {
     id: 6,
-    to: toCollectionSearch(),
+    to: toCollectionSearch(null, false, false, false),
     title: routes.collectionSearch.title,
   },
   {
     id: 7,
-    to: toSpecialSearch(),
+    to: toSpecialSearch(null, false, false, false),
     title: routes.specialSearch.title,
   },
   {
     id: 9,
-    to: toMapSearch(),
+    to: toMapSearch(null, false, false, false),
     title: routes.mapSearch.title,
   },
   {
     id: 3,
-    to: toDatasetSearch(),
+    to: toDatasetSearch(null, false, false, false),
     CardIcon: () => (
       <Icon size={48}>
         <Data />
@@ -96,7 +96,7 @@ const navigationLinks = [
   },
   {
     id: 2,
-    to: toPublicationSearch(),
+    to: toPublicationSearch(null, false, false, false),
     CardIcon: () => (
       <Icon size={48}>
         <DocumentText />
@@ -107,7 +107,7 @@ const navigationLinks = [
   },
   {
     id: 8,
-    to: toArticleSearch(),
+    to: toArticleSearch(null, false, false, false),
     title: routes.articleSearch.title,
   },
 ]

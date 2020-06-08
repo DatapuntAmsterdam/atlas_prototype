@@ -53,6 +53,7 @@ const values = {
   legendCafeValue: 'Café',
   legendPermissionNotification: 'Zichtbaar na inloggen',
   ligplaatsVestigingName: 'Caffeine Holding',
+  maatschappelijkeActiviteiten: 'Maatschappelijke activiteiten',
   maatschappelijkeActiviteitName: 'om B',
   maatschappelijkeActiviteitVestigingName: 'om B',
   pandVestigingName: 'ller',

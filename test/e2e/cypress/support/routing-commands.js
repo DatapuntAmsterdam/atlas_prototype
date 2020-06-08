@@ -21,7 +21,7 @@ Cypress.Commands.add('defineAddressDetailRoutes', () => {
   cy.route('/panorama/thumbnail/*').as('getPanorama')
   cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen')
   cy.route('/monumenten/monumenten/*').as('getMonument')
-  cy.route('/stadsarchief/bouwdossier/?verblijfsobject*').as('getBouwdossier')
+  cy.route('/bouwdossiers/bouwdossier/?verblijfsobject*').as('getBouwdossier')
 })
 
 Cypress.Commands.add('defineSearchRoutes', () => {

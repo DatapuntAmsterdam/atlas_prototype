@@ -1,8 +1,8 @@
+import NotificationLevel from '../../../app/models/notification'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import formatDate from '../../../shared/services/date-formatter/date-formatter'
 import formatNumber from '../../../shared/services/number-formatter/number-formatter'
 import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
-import NotificationLevel from '../../../app/models/notification'
 
 export const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 

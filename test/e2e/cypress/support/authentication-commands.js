@@ -101,14 +101,14 @@ Cypress.Commands.add('logout', () => {
   cy.get(loginMenuItem)
     .then((element) => {
       if (!element.is(':visible')) {
-        cy.get(`${HEADER_MENU.rootMobile}`).click()
+        cy.get(`${HEADER_MENU.rootMobile}`).click({ force: true })
       }
     })
     .get(loginMenuItem)
-    .click()
+    .click({ force: true })
     .find('ul')
     .find('button')
-    .click()
+    .click({ force: true })
 })
 
 // Cypress doesn’t recognize `window.fetch` calls as XHR requests, which makes

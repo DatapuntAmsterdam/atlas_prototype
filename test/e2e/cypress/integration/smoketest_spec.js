@@ -281,6 +281,7 @@ describe('Smoketest', () => {
     it('Should open a publication', () => {
       cy.server()
       cy.route('/typeahead?q=oost').as('getResults')
+      cy.route('/jsonapi/node/publication/*').as('getPublication')
 
       // Search keyword Oost, results contain only datasets
       cy.get(SEARCH.input).focus().type('Oost{enter}')
@@ -296,6 +297,7 @@ describe('Smoketest', () => {
       cy.contains("Publicaties met 'Oost' (")
       cy.get(PUBLICATIONS.sortDropdown).select('Publicatiedatum oplopend')
       cy.get('[href*="/publicaties/publicatie/"]').first().click()
+      cy.wait('@getPublication')
 
       // Download button available
       cy.contains('Download PDF (').should('be.visible')

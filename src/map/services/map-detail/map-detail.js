@@ -16,7 +16,7 @@ export const pageEndpointTypeMapping = {
   'fietspaaltjes/fietspaaltjes/': 'v1/fietspaaltjes/fietspaaltjes/',
   'grex/projecten/': 'v1/grex/projecten/',
   'parkeervakken/parkeervakken/': 'v1/parkeervakken/parkeervakken/',
-  'stadsarchief/bouwdossier/': 'iiif-metadata/bouwdossier/',
+  'bouwdossiers/bouwdossier/': 'iiif-metadata/bouwdossier/',
 }
 
 export const pageTypeToEndpoint = (type, subtype, id) => {

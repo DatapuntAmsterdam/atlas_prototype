@@ -4,6 +4,7 @@ import { Divider, Button, Modal, TopBar, Heading, Paragraph } from '@datapunt/as
 import { Close } from '@datapunt/asc-assets'
 import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
 import ModalBlock from './ModalBlock'
+import CONSTANTS from '../../../shared/config/constants'
 
 const InfoModal = ({ open, handleClose, title, body }) => (
   <Modal
@@ -12,6 +13,7 @@ const InfoModal = ({ open, handleClose, title, body }) => (
     open={open}
     onClose={handleClose}
     hideOverFlow={false}
+    backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
   >
     <TopBar>
       <Heading style={{ flexGrow: 1 }} as="h4">
