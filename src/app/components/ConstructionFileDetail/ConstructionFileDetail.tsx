@@ -179,6 +179,7 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
                 <SubHeading
                   hasMarginBottom={false}
                   forwardedAs="h3"
+                  data-testid="DocumentsHeading"
                 >{`${documentTitle} (${files.length})`}</SubHeading>
               </ContentBlock>
               {oloLiaanNumber && (

@@ -36,9 +36,15 @@ describe('ConstructionFileDetail', () => {
     }
 
     component = shallow(<ConstructionFileDetail {...mockResults} />)
+
+    expect(component.at(0).find('[data-testid="DocumentsHeading"]').at(0)).toBeTruthy()
+    expect(
+      component.at(0).find('[data-testid="DocumentsHeading"]').at(0).props().children,
+    ).toContain(mockResults.documenten[0].subdossier_titel)
+
     expect(component.at(0).find('Gallery').at(0)).toBeTruthy()
-    expect(component.at(0).find('Gallery').at(0).props().title).toBe(
-      mockResults.documenten[0].subdossier_titel,
+    expect(component.at(0).find('Gallery').at(0).props().allFiles).toBe(
+      mockResults.documenten[0].bestanden,
     )
   })
 
