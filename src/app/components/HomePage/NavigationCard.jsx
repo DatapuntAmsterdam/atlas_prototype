@@ -1,5 +1,4 @@
 import { ChevronRight } from '@datapunt/asc-assets'
-import styled from 'styled-components'
 import {
   breakpoint,
   Card,
@@ -18,6 +17,7 @@ import {
 import PropTypes from 'prop-types'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
 import focusOutline from '../shared/focusOutline'
 
 const StyledHeading = styled(Heading)`
@@ -50,7 +50,7 @@ const StyledLink = styled(Link)`
       text-decoration: underline;}
 
     ${styles.IconStyle} {
-      ${svgFill('secondary')};
+      ${svgFill(themeColor('secondary'))};
     }
   }
 
