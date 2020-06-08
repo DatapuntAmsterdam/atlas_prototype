@@ -3,20 +3,21 @@ import MapPreviewPanel from '../../../map/containers/preview-panel/MapPreviewPan
 import MapContext from './MapContext'
 import fetchDetail from '../../../map/services/map-detail/map-detail'
 
-const MapPreviewPanelContainer = () => {
+const MapPreviewPanelContainer: React.FC = () => {
   const { detailUrl, setGeometry } = React.useContext(MapContext)
   const [detail, setDetail] = React.useState({})
 
-  const getDetail = React.useCallback(async (endpoint, user = {}) => {
+  const getDetail = React.useCallback(async (endpoint: string, user = {}) => {
     const detailResult = await fetchDetail(endpoint, user)
 
+    const geometry = detailResult?.geometrie || detailResult?.geometry
+
     if (detailResult) setDetail(detailResult)
-    if (detailResult?.geometrie) setGeometry(detailResult.geometrie)
-    
+    if (geometry) setGeometry(geometry)
   }, [])
 
   React.useEffect(() => {
-    getDetail(detailUrl)
+    if (detailUrl) getDetail(detailUrl)
   }, [detailUrl])
 
   return (
@@ -33,8 +34,3 @@ const MapPreviewPanelContainer = () => {
 }
 
 export default MapPreviewPanelContainer
-
-
-
-
-

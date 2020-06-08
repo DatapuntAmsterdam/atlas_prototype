@@ -1,9 +1,11 @@
 import L, { LatLngTuple, Polygon, Polyline, LeafletMouseEvent } from 'leaflet'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { ViewerContainer, Spinner } from '@datapunt/asc-ui'
-import { components } from '@datapunt/amsterdam-react-maps'
-import useStateRef from '@datapunt/amsterdam-react-maps/lib/utils/useStateRef'
+import { ViewerContainer, Spinner, themeSpacing } from '@datapunt/asc-ui'
+import { Map, BaseLayer, Marker, BaseLayerToggle, useStateRef } from '@datapunt/arm-core'
+import { TileLayer } from '@datapunt/react-maps'
+import { NonTiledLayer } from '@datapunt/arm-nontiled'
+import { MarkerClusterGroup } from '@datapunt/arm-cluster'
 import DrawTool from './Components/DrawTool'
 import GeoJSON from './Components/GeoJSON'
 import MapPanelContainer from './MapPanelContainer'
@@ -12,14 +14,14 @@ import MapContext from './MapContext'
 import handleMapClick from './utils/handleMapClick'
 import MapPreviewPanelContainer from './MapPreviewPanelContainer'
 
-// Find out why the import is not found
-// @ts-ignore
-const { Map, BaseLayer, MarkerClusterGroup, NonTiledLayer, Marker } = components
-
 const StyledMap = styled(Map)`
   width: 100%;
   height: calc(100% - 50px);
   top: 50px;
+`
+
+const BottomLeftHolder = styled.div`
+  display: flex;
 `
 
 const MapView = styled.div`
@@ -36,9 +38,11 @@ const StyledViewerContainer = styled(ViewerContainer)`
 // This can be deleted once we use the new MapDrawer / MapPanel
 const MapPanelContainerWrapper = styled.div`
   bottom: 20px;
-  position: absolute;
+  margin-right: ${themeSpacing(2)};
 
   & > section {
+    left: 0;
+    bottom: 0;
     position: relative;
     max-height: 80vh;
   }
@@ -79,14 +83,15 @@ const MapPage: React.FC = () => {
     geometry,
   } = React.useContext(MapContext)
 
-  // const tmsLayers = layers.filter((layer) => layer.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
-  const nonTmsLayers =
-    overlays && overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
+  const tmsLayers = overlays.filter((overlay) => overlay.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
+  const nonTmsLayers = overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
 
   useEffect(() => {
-    if (activeMapLayers && activeMapLayers?.length) getOverlays()
-
-    getOverlays(activeMapLayers, mapLayers, {})
+    if (activeMapLayers?.length) {
+      getOverlays()
+    } else {
+      getOverlays(activeMapLayers, mapLayers, {})
+    }
   }, [activeMapLayers])
 
   useEffect(() => {
@@ -119,7 +124,18 @@ const MapPage: React.FC = () => {
         <BaseLayer />
         {location && <Marker latLng={location} />}
         {geometry && <GeoJSON geometry={geometry} />}
-        {nonTmsLayers?.map(({ url, overlayOptions: options, id }) => (
+        {tmsLayers.map(({ url, overlayOptions: options, id }) => (
+          <TileLayer
+            key={id}
+            url={url}
+            options={options}
+            events={{
+              loading: () => setIsLoading(true),
+              load: () => setIsLoading(false),
+            }}
+          />
+        ))}
+        {nonTmsLayers.map(({ url, overlayOptions: options, id }) => (
           <NonTiledLayer
             key={id}
             url={url}
@@ -132,6 +148,19 @@ const MapPage: React.FC = () => {
         ))}
         <StyledViewerContainer
           bottomRight={isLoading ? <Spinner /> : null}
+          bottomLeft={
+            <BottomLeftHolder>
+              <MapPanelContainerWrapper>
+                <MapPanelContainer />
+              </MapPanelContainerWrapper>
+              <BaseLayerToggle
+                onChangeLayer={(id, type) => {
+                  // console.log(id, type)
+                }}
+                activeLayer="luchtfoto"
+              />
+            </BottomLeftHolder>
+          }
           topRight={
             <>
               <DrawTool
@@ -144,9 +173,6 @@ const MapPage: React.FC = () => {
           }
         />
       </StyledMap>
-      <MapPanelContainerWrapper>
-        <MapPanelContainer />
-      </MapPanelContainerWrapper>
     </MapView>
   )
 }

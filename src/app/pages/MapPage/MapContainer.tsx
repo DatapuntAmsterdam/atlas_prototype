@@ -14,17 +14,18 @@ import getState from '../../../shared/services/redux/get-state'
 import MapPage from './MapPage'
 import MapContext, {
   MapContextProps,
-  MapStateProps,
+  MapState,
   initialState,
   ActiveMapLayer,
   MapLayer,
   Location,
-  Geometry
+  Geometry,
+  Overlay,
 } from './MapContext'
 import MAP_CONFIG from '../../../map/services/map.config'
 import { createUrlWithToken } from '../../../shared/services/api/api'
 
-function getParams(param: string): string {
+function getParam(param: string): string {
   if (typeof window !== 'undefined') {
     const searchParams = new URLSearchParams(window.location.search)
     return searchParams.get(param) || ''
@@ -36,7 +37,7 @@ function getParams(param: string): string {
 function setParams(param: string, value: string) {
   if (typeof window !== 'undefined') {
     const searchParams = new URLSearchParams(window.location.search)
-    searchParams.set(param, value || '')
+    searchParams.set(param, value)
 
     window.history.pushState(
       {},
@@ -51,16 +52,16 @@ type Action =
   | { type: 'setActiveBaseLayer'; payload: string }
   | { type: 'getBaseLayers'; payload: Array<Object> }
   | { type: 'getPanelLayers'; payload: Array<Object> }
-  | { type: 'getMapLayers'; payload: Array<Object> }
+  | { type: 'getMapLayers'; payload: Array<MapLayer> }
   | { type: 'setActiveMapLayers'; payload: Array<ActiveMapLayer> }
   | { type: 'setVisibleMapLayers'; payload: ActiveMapLayer }
   | { type: 'setMapPanelVisible'; payload: boolean }
-  | { type: 'setOverlays'; payload: Array<Object> }
+  | { type: 'setOverlays'; payload: Array<Overlay> }
   | { type: 'setLocation'; payload: Location }
-  | { type: 'setDetailUrl'; payload: String }
+  | { type: 'setDetailUrl'; payload: string }
   | { type: 'setGeometry'; payload: Geometry }
 
-const reducer = (state: MapStateProps, action: Action): MapStateProps => {
+const reducer = (state: MapState, action: Action): MapState => {
   switch (action.type) {
     case 'setActiveBaseLayer':
       return {
@@ -132,7 +133,7 @@ const reducer = (state: MapStateProps, action: Action): MapStateProps => {
         ...state,
         detailUrl: action.payload,
       }
-      case 'setGeometry':
+    case 'setGeometry':
       return {
         ...state,
         geometry: action.payload,
@@ -142,9 +143,7 @@ const reducer = (state: MapStateProps, action: Action): MapStateProps => {
   }
 }
 
-const MapContextProvider: React.FC<MapContextProps & { children: React.ReactNode }> = ({
-  children,
-}) => {
+const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
 
   function setActiveBaseLayer(payload: string) {
@@ -167,7 +166,7 @@ const MapContextProvider: React.FC<MapContextProps & { children: React.ReactNode
   }
 
   function setLocation(payload: Location) {
-    if (payload?.lat && payload?.lng) {
+    if (payload.lat && payload.lng) {
       dispatch({ type: 'setLocation', payload })
       setParams('locatie', encodeLocation(payload))
     }
@@ -179,7 +178,7 @@ const MapContextProvider: React.FC<MapContextProps & { children: React.ReactNode
   }
 
   function setGeometry(payload: Geometry) {
-    if (payload?.type && payload?.coordinates) {
+    if (payload.type && payload.coordinates) {
       dispatch({ type: 'setGeometry', payload })
     }
   }
@@ -280,10 +279,10 @@ const MapContextProvider: React.FC<MapContextProps & { children: React.ReactNode
 
   // Load the state from the query parameters
   React.useEffect(() => {
-    const isMapHandleVisible = getParams('legenda')
-    const activeMapLayers = getParams('lagen')
-    const location = getParams('locatie')
-    const detailUrl = getParams('detailUrl')
+    const isMapHandleVisible = getParam('legenda')
+    const activeMapLayers = getParam('lagen')
+    const location = getParam('locatie')
+    const detailUrl = getParam('detailUrl')
 
     if (isMapHandleVisible) setMapPanelVisible(isMapHandleVisible === 'true')
     if (activeMapLayers) setActiveMapLayers(decodeLayers(activeMapLayers))

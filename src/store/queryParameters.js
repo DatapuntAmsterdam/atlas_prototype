@@ -501,7 +501,5 @@ export function encodeLayers(values) {
     return []
   }
 
-  console.log('values', values)
-
   return values.map(({ id, isVisible }) => `${id}:${isVisible ? 1 : 0}`).join('|')
 }

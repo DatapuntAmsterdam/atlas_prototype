@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { MapLayer as MapLayerProps } from '@datapunt/amsterdam-react-maps/lib/constants'
+import { MapLayer as MapLayerProps } from '@datapunt/arm-core/es/constants'
 
 export type ActiveMapLayer = {
   id: string
@@ -24,13 +24,20 @@ export type Geometry = {
   coordinates: Array<Array<string>>
 }
 
-export type MapStateProps = {
-  baseLayers: Array<Object> // Add auto typegeneration
-  panelLayers: Array<Object> // Add auto typegeneration
-  mapLayers: Array<MapLayer> // Add auto typegeneration
+export type Overlay = {
+  type: string
+  url: string
+  overlayOptions: Object
+  id: string
+}
+
+export type MapState = {
+  baseLayers: Array<Object> // TODO: Add auto typegeneration
+  panelLayers: Array<Object> // TODO: Add auto typegeneration
+  mapLayers: Array<MapLayer> // TODO: Add auto typegeneration
   activeBaseLayer: string
   activeMapLayers: Array<ActiveMapLayer>
-  overlays: Array<Object> // Add auto typegeneration
+  overlays: Array<Overlay> // TODO: Add auto typegeneration
   isMapPanelVisible: boolean
   zoomLevel: number
   viewCenter: Array<number>
@@ -40,15 +47,18 @@ export type MapStateProps = {
 }
 
 export type MapContextProps = {
-  setActiveBaseLayer: Function
-  setActiveMapLayers: Function
-  setVisibleMapLayers: Function
-  setLocation: Function
-  toggleMapPanel: Function
-  getBaseLayers: Function
-  getPanelLayers: Function
-  getMapLayers: Function
-} & MapStateProps
+  setActiveBaseLayer: (ActiveBaseLayer: string) => void
+  setActiveMapLayers: (ActiveMapLayer: Array<ActiveMapLayer>) => void
+  setVisibleMapLayers: (mapLayers: Array<MapLayer>) => void
+  setLocation: (location: Location) => void
+  setGeometry: (geometry: Geometry) => void
+  setDetailUrl: (url: string) => void
+  toggleMapPanel: () => void
+  getBaseLayers: () => void
+  getPanelLayers: () => void
+  getMapLayers: () => void
+  getOverlays: () => void
+} & MapState
 
 const DEFAULT_LAT = 52.3731081
 const DEFAULT_LNG = 4.8932945
@@ -66,11 +76,14 @@ export const initialState: MapContextProps = {
   setActiveBaseLayer: () => {},
   setActiveMapLayers: () => {},
   setVisibleMapLayers: () => {},
+  setGeometry: () => {},
   setLocation: () => {},
+  setDetailUrl: () => {},
   toggleMapPanel: () => {},
   getBaseLayers: () => {},
   getPanelLayers: () => {},
   getMapLayers: () => {},
+  getOverlays: () => {},
 }
 
 const MapContext = createContext<MapContextProps>(initialState)

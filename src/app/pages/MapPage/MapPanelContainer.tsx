@@ -5,7 +5,7 @@ import MapContext from './MapContext'
 import MapPanel from '../../../map/containers/panel/MapPanel'
 import getState from '../../../shared/services/redux/get-state'
 
-const MapPanelComponent = () => {
+const MapPanelComponent: React.FC = () => {
   const {
     baseLayers,
     panelLayers,
@@ -22,22 +22,27 @@ const MapPanelComponent = () => {
   // Get the user from the Redux state for now
   const { user } = getState()
 
-  function onLayerToggle(payload: {
-    // Add auto type generation
-    id: string
-    legendItems: Array<{ id: string; notSelectable: boolean }>
-  }) {
-    if (setActiveMapLayers)
-      setActiveMapLayers(
-        payload.legendItems?.some(({ notSelectable }) => !notSelectable) &&
-          payload.legendItems.length > 0
-          ? payload.legendItems.map(({ id: legendItemId }) => ({
-              id: legendItemId,
-              isVisible: true,
-            }))
-          : [{ id: payload.id, isVisible: true }],
-      )
-  }
+  const onLayerToggle = React.useCallback(
+    ({
+      id,
+      legendItems,
+    }: {
+      // Add auto type generation
+      id: string
+      legendItems: Array<{ id: string; notSelectable: boolean }>
+    }) => {
+      if (setActiveMapLayers)
+        setActiveMapLayers(
+          legendItems?.some(({ notSelectable }) => !notSelectable) && legendItems.length > 0
+            ? legendItems.map(({ id: legendItemId }) => ({
+                id: legendItemId,
+                isVisible: true,
+              }))
+            : [{ id, isVisible: true }],
+        )
+    },
+    [setActiveMapLayers],
+  )
 
   return (
     <MapPanel
