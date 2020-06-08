@@ -154,9 +154,9 @@ const MapPage: React.FC = () => {
                 <MapPanelContainer />
               </MapPanelContainerWrapper>
               <BaseLayerToggle
-                onChangeLayer={(id, type) => {
-                  // console.log(id, type)
-                }}
+                // onChangeLayer={(id, type) => {
+                //   console.log(id, type)
+                // }}
                 activeLayer="luchtfoto"
               />
             </BottomLeftHolder>

@@ -55,10 +55,10 @@ const configureStore = (storybook = false, req) => {
   const sagaMiddleware = createSagaMiddleware()
 
   const allMiddleware = [
-    // preserveUrlParametersMiddleware,
+    preserveUrlParametersMiddleware,
     routeMiddleware,
     urlParamsMiddleware,
-    // setQueriesFromStateMiddleware,
+    setQueriesFromStateMiddleware,
     documentHeadMiddleware,
     matomoMiddleware,
     sagaMiddleware,
