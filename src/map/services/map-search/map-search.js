@@ -30,10 +30,6 @@ const endpoints = [
   { uri: 'geosearch/reclamebelasting/', radius: 25 },
   { uri: 'geosearch/', radius: 25, extra_params: { datasets: 'fietspaaltjes' } },
   { uri: 'geosearch/', radius: 25, extra_params: { datasets: 'grex,projecten' } },
-  { uri: 'geosearch/search/', radius: 25, extra_params: { item: 'unesco' } },
-  { uri: 'geosearch/search/', radius: 25, extra_params: { item: 'gevrijwaardgebied' } },
-  { uri: 'geosearch/search/', radius: 25, extra_params: { item: 'uitgevoerdonderzoek' } },
-  { uri: 'geosearch/search/', radius: 25, extra_params: { item: 'verdachtgebied' } },
 ]
 
 const relatedResourcesByType = {
