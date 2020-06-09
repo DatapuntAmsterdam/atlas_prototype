@@ -2,8 +2,6 @@ version: '3.5'
 services:
   atlas: # NGINX
     build:
-      args:
-        - NODE_ENV=acceptance
       context: .
     ipc: host
 
@@ -11,8 +9,8 @@ services:
     build:
       context: .
       target: build-deps
-    environment:
-    - NODE_ENV=development
+      args:
+        - NODE_ENV=acceptance
     command: npm run test
 
   # test-e2e:
