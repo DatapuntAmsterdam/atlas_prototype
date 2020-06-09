@@ -101,15 +101,6 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
   const id = `${district}${fileNumber}`
   const addressList = getAddresses(addresses)
 
-  const {
-    locatie_aanduiding: locationLabel,
-    straat: street,
-    huisnummer_letter: houseNumber,
-    huisnummer_toevoeging: houseNumberAddition,
-    huisnummer_van: houseNumberStarting,
-    huisnummer_tot: houseNumberEnd,
-  } = addresses[0] || {}
-
   return (
     <PageWrapper>
       <ContentBlock>
@@ -142,24 +133,6 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
           <TableRow>
             <TableCell>OLO of liaan nummer</TableCell>
             <TableCell>{oloLiaanNumber}</TableCell>
-          </TableRow>
-        )}
-        {locationLabel ? (
-          <TableRow>
-            <TableCell>Locatie</TableCell>
-            <TableCell>{locationLabel}</TableCell>
-          </TableRow>
-        ) : (
-          <TableRow>
-            <TableCell>Adres</TableCell>
-            <TableCell>
-              {street}{' '}
-              {houseNumberStarting && houseNumberEnd
-                ? `${houseNumberStarting}${
-                    houseNumberEnd !== houseNumberStarting ? `-${houseNumberEnd}` : ''
-                  }`
-                : `${houseNumber}${houseNumberAddition || ''}`}
-            </TableCell>
           </TableRow>
         )}
       </Table>
@@ -212,20 +185,21 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
       {addressList.length && (
         <ContentBlock>
           <SubHeading forwardedAs="h3">Adressen</SubHeading>
-
           <List>
-            {addressList.map(({ id: addressId, label }: { id: string; label: string }) => (
-              <ListItem key={addressId}>
-                <Link
-                  as={RouterLink}
-                  variant="with-chevron"
-                  to={toDataDetail([addressId, 'bag', 'nummeraanduiding'])}
-                  title={label}
-                >
-                  <span>{label}</span>
-                </Link>
-              </ListItem>
-            ))}
+            {addressList.map(
+              ({ id: addressId, label, type }: { id: string; label: string; type: string }) => (
+                <ListItem key={addressId}>
+                  <Link
+                    as={RouterLink}
+                    variant="with-chevron"
+                    to={toDataDetail([addressId, 'bag', type])}
+                    title={label}
+                  >
+                    <span>{label}</span>
+                  </Link>
+                </ListItem>
+              ),
+            )}
           </List>
         </ContentBlock>
       )}
