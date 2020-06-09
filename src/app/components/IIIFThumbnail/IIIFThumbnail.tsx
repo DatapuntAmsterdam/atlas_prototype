@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Card, CardMedia, Image, CardContent, themeSpacing } from '@datapunt/asc-ui'
+import { Card, CardMedia, Image, CardContent, themeColor, themeSpacing } from '@datapunt/asc-ui'
 import getState from '../../../shared/services/redux/get-state'
 
 type Thumbnail = {
@@ -8,7 +8,12 @@ type Thumbnail = {
   title: string
 }
 
+const StyledCard = styled(Card)`
+  border: 1px solid ${themeColor('tint', 'level3')};
+`
+
 const StyledCardContent = styled(CardContent)`
+  overflow-wrap: break-word;
   position: absolute;
   bottom: 0;
   padding: ${themeSpacing(2, 3)}
@@ -54,7 +59,7 @@ const IIIFThumbnail = ({ src, title }: Thumbnail) => {
   }, [src])
 
   return (
-    <Card data-testid="Card" isLoading={!!loading}>
+    <StyledCard data-testid="Card" isLoading={!!loading}>
       <CardMedia>
         {!loading && (
           <Image
@@ -68,7 +73,7 @@ const IIIFThumbnail = ({ src, title }: Thumbnail) => {
         )}
       </CardMedia>
       <StyledCardContent data-testid="CardContent">{title}</StyledCardContent>
-    </Card>
+    </StyledCard>
   )
 }
 

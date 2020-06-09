@@ -98,7 +98,8 @@ const Gallery: React.FC<GalleryProps> = ({ allFiles, id, access }) => {
 
           <StyledRow hasMarginBottom={hasMore} hasMargin={false} hasMaxWidth={false}>
             {files.map(({ filename: fileName, url: fileUrl }) => {
-              const disabled = (!hasRights && !hasExtendedRights) || (restricted && !hasRights)
+              const disabled =
+                (!hasRights && !hasExtendedRights) || (restricted && !hasExtendedRights)
 
               return (
                 <StyledColumn
