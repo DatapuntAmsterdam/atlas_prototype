@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { Link, styles, svgFill, themeColor } from '@datapunt/asc-ui'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { authenticateRequest } from '../../../../shared/ducks/user/user'
 
 const StyledLinkInverted = styled(Link)`
@@ -10,7 +10,7 @@ const StyledLinkInverted = styled(Link)`
   background-color: transparent;
 
   ${styles.IconStyle} {
-    ${svgFill('tint', 'level1')};
+    ${svgFill(themeColor('tint', 'level1'))};
   }
 
   &:hover {
@@ -19,7 +19,7 @@ const StyledLinkInverted = styled(Link)`
     text-decoration: underline;
 
     ${styles.IconStyle} {
-      ${svgFill('tint', 'level1')};
+      ${svgFill(themeColor('tint', 'level1'))};
     }
   }
 `

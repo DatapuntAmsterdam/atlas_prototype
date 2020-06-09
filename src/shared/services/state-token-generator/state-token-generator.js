@@ -9,7 +9,7 @@
  * @returns {string} 16 random Ascii characters, empty in case the
  * `crypto` library is not available.
  */
-export default function () {
+export default function stateTokenGenerator() {
   // Backwards compatible with msCrypto in IE11
   const cryptoLib = window.crypto || window.msCrypto // eslint-disable-line no-undef
 

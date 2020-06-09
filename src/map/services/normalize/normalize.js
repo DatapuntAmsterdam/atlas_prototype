@@ -131,7 +131,8 @@ export const bekendmakingen = (result) => {
 
 export const explosieven = (result) => {
   const additionalFields = {
-    date: formatDate(new Date(result.datum)),
+    datum: result.datum ? new Date(result.datum) : null,
+    datum_inslag: result.datum_inslag ? new Date(result.datum_inslag) : null,
   }
 
   return normalize(result, additionalFields)

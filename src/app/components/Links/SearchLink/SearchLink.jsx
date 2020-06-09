@@ -1,14 +1,14 @@
+import { Link, styles, svgFill, themeColor } from '@datapunt/asc-ui'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import { Link, themeColor, svgFill, styles } from '@datapunt/asc-ui'
 
 const StyledLink = styled(Link)`
   color: ${themeColor('primary')};
   cursor: pointer;
 
   ${styles.IconStyle} {
-    ${svgFill('primary')}
+    ${svgFill(themeColor('primary'))}
   }
 `
 

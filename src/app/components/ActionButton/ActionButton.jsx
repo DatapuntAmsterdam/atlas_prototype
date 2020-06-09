@@ -1,6 +1,6 @@
+import { Button, svgFill, themeColor } from '@datapunt/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
-import { Button, svgFill, themeColor } from '@datapunt/asc-ui'
 
 const StyledButton = styled(Button)`
   border-color: ${themeColor('tint', 'level7')};

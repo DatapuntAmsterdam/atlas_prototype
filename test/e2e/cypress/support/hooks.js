@@ -13,6 +13,7 @@ function enableFetchWorkaround() {
   })
 
   Cypress.on('window:before:load', (win) => {
+    /* eslint-disable no-param-reassign */
     delete win.fetch
     // since the application code does not ship with a polyfill
     // load a polyfilled "fetch" from the test

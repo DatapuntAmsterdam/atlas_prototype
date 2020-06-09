@@ -24,7 +24,7 @@ export type DetailResultItem = DetailResultItemDefault | DetailResultItemTable
 export interface DetailResultItemDefault {
   type: DetailResultItemType.Default
   label: string
-  value?: string | number | boolean | DetailResultItemDefault[]
+  value?: string | number | boolean | Date | DetailResultItemDefault[]
   link?: string
   multiLine?: boolean
   status?: string
