@@ -186,20 +186,18 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
         <ContentBlock>
           <SubHeading forwardedAs="h3">Adressen</SubHeading>
           <List>
-            {addressList.map(
-              ({ id: addressId, label, type }: { id: string; label: string; type: string }) => (
-                <ListItem key={addressId}>
-                  <Link
-                    as={RouterLink}
-                    variant="with-chevron"
-                    to={toDataDetail([addressId, 'bag', type])}
-                    title={label}
-                  >
-                    <span>{label}</span>
-                  </Link>
-                </ListItem>
-              ),
-            )}
+            {addressList.map(({ id: addressId, label, type }) => (
+              <ListItem key={addressId}>
+                <Link
+                  as={RouterLink}
+                  variant="with-chevron"
+                  to={toDataDetail([addressId, 'bag', type])}
+                  title={label}
+                >
+                  <span>{label}</span>
+                </Link>
+              </ListItem>
+            ))}
           </List>
         </ContentBlock>
       )}
