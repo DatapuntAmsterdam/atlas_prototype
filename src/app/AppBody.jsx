@@ -90,33 +90,35 @@ const AppBody = ({
     </>
   ) : (
     <>
-      <Helmet>
-        {/* The viewport must be reset for "old" pages that don't incorporate the grid.
-        1024 is an arbirtrary number as the browser doesn't actually care about the exact number,
-        but only needs to know it's significantly bigger than the actual viewport */}
-        <meta name="viewport" content="width=1024, user-scalable=yes" />
-      </Helmet>
       <Suspense fallback={<LoadingIndicator style={{ top: '200px' }} />}>
         {currentPage === PAGES.MAP ? (
           <MapContainer />
         ) : (
-          <div className={`c-dashboard__body ${bodyClasses}`}>
-            <NotificationAlert />
-            {visibilityError && <ErrorAlert />}
-            {embedPreviewMode ? (
-              <EmbedIframeComponent />
-            ) : (
-              <div className="u-grid u-full-height u-overflow--y-auto">
-                <div className="u-row u-full-height">
-                  {isMapSplitPage(currentPage) && <MapSplitPage />}
+          <>
+            <Helmet>
+              {/* The viewport must be reset for "old" pages that don't incorporate the grid.
+        1024 is an arbirtrary number as the browser doesn't actually care about the exact number,
+        but only needs to know it's significantly bigger than the actual viewport */}
+              <meta name="viewport" content="width=1024, user-scalable=yes" />
+            </Helmet>
+            <div className={`c-dashboard__body ${bodyClasses}`}>
+              <NotificationAlert />
+              {visibilityError && <ErrorAlert />}
+              {embedPreviewMode ? (
+                <EmbedIframeComponent />
+              ) : (
+                <div className="u-grid u-full-height u-overflow--y-auto">
+                  <div className="u-row u-full-height">
+                    {isMapSplitPage(currentPage) && <MapSplitPage />}
 
-                  {currentPage === PAGES.CONSTRUCTION_FILE && <ConstructionFilesContainer />}
+                    {currentPage === PAGES.CONSTRUCTION_FILE && <ConstructionFilesContainer />}
 
-                  {currentPage === PAGES.DATASET_DETAIL && <DatasetDetailContainer />}
+                    {currentPage === PAGES.DATASET_DETAIL && <DatasetDetailContainer />}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          </>
         )}
         <FeedbackModal id="feedbackModal" />
       </Suspense>

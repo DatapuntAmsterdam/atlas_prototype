@@ -1,5 +1,6 @@
 import L, { LatLng, LatLngTuple, Polygon, Polyline } from 'leaflet'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useMapInstance } from '@datapunt/react-maps'
 import { DrawTool as DrawToolComponent } from '@datapunt/arm-draw'
 import getDataSelection from '../getDataSelection'
 
@@ -69,8 +70,7 @@ const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer) => {
 }
 
 const DrawTool: React.FC<Props> = ({ onToggle, setMarkerGroups, markerGroupsRef }) => {
-  const [mapInstance] = useState<L.Map>()
-
+  const mapInstance = useMapInstance()
   const fetchData = async (latLngs: LatLng[][]) =>
     getDataSelection(DATA_SELECTION_ENDPOINT, {
       shape: JSON.stringify(latLngs[0].map(({ lat, lng }) => [lng, lat])),

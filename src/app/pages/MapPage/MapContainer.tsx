@@ -165,9 +165,10 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
     setParams('legenda', isVisible.toString())
   }
 
-  function setLocation(payload: Location) {
-    if (payload.lat && payload.lng) {
-      dispatch({ type: 'setLocation', payload })
+  function setLocation(payload: Location | null) {
+    dispatch({ type: 'setLocation', payload })
+
+    if (payload) {
       setParams('locatie', encodeLocation(payload))
     }
   }

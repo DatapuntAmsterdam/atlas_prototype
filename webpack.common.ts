@@ -13,6 +13,12 @@ import { Configuration, DefinePlugin } from 'webpack'
 const modernModules = [
   '@datapunt/asc-assets',
   '@datapunt/asc-ui',
+  '@datapunt/react-maps',
+  '@datapunt/react-maps',
+  '@datapunt/arm-core',
+  '@datapunt/arm-nontiled',
+  '@datapunt/arm-draw',
+  '@datapunt/arm-cluster',
   'body-scroll-lock',
   'escape-string-regexp',
   'redux-first-router',

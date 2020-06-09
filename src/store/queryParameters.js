@@ -468,8 +468,8 @@ export function decodeLocation(value) {
   const [lat, lng] = value.split(',')
 
   return {
-    lat,
-    lng,
+    lat: parseFloat(lat),
+    lng: parseFloat(lng),
   }
 }
 

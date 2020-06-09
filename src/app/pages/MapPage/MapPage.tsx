@@ -1,77 +1,53 @@
-import L, { LatLngTuple, Polygon, Polyline, LeafletMouseEvent } from 'leaflet'
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
-import { ViewerContainer, Spinner, themeSpacing } from '@datapunt/asc-ui'
-import { Map, BaseLayer, Marker, BaseLayerToggle, useStateRef } from '@datapunt/arm-core'
+import React, { useEffect, useMemo, useState } from 'react'
+import styled, { createGlobalStyle } from 'styled-components'
+import { hooks } from '@datapunt/asc-ui'
 import { TileLayer } from '@datapunt/react-maps'
-import { NonTiledLayer } from '@datapunt/arm-nontiled'
+// import { NonTiledLayer } from '@datapunt/arm-nontiled'
+import { BaseLayer, constants, Map, mapPanelComponents, useStateRef } from '@datapunt/arm-core'
 import { MarkerClusterGroup } from '@datapunt/arm-cluster'
-import DrawTool from './Components/DrawTool'
+import { PositionPerSnapPoint } from '@datapunt/arm-core/es/components/MapPanel/constants'
 import GeoJSON from './Components/GeoJSON'
-import MapPanelContainer from './MapPanelContainer'
-import MAP_CONFIG from '../../../map/services/map.config'
 import MapContext from './MapContext'
+import ViewerContainer from './Components/ViewerContainer'
+import PointSearchMarker from './Components/PointSearchMarker'
+import { MarkerGroup, Overlay, SnapPoint } from './types'
+import PointSearchResults from './Components/PointSearchResults'
+import MapLegend from './Components/MapLegend'
 import handleMapClick from './utils/handleMapClick'
-import MapPreviewPanelContainer from './MapPreviewPanelContainer'
+import MAP_CONFIG from '../../../map/services/map.config'
+
+const { MapPanel, MapPanelDrawer, MapPanelProvider } = mapPanelComponents
+const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
 const StyledMap = styled(Map)`
   width: 100%;
-  height: calc(100% - 50px);
-  top: 50px;
-`
-
-const BottomLeftHolder = styled.div`
-  display: flex;
+  height: 100%;
 `
 
 const MapView = styled.div`
   height: calc(100% - 50px);
-  top: 50px;
+  position: relative;
 `
 
-const StyledViewerContainer = styled(ViewerContainer)`
-  z-index: 400;
-  height: calc(100% - 50px);
-  top: 50px;
-`
-
-// This can be deleted once we use the new MapDrawer / MapPanel
-const MapPanelContainerWrapper = styled.div`
-  bottom: 20px;
-  margin-right: ${themeSpacing(2)};
-
-  & > section {
-    left: 0;
-    bottom: 0;
-    position: relative;
-    max-height: 80vh;
+const GlobalStyle = createGlobalStyle`
+  body {
+    touch-action: none;
+    overflow: hidden; // This will prevent the scrollBar on iOS due to navigation bar
   }
 `
 
-type extraLayerTypes = {
-  id: string
-  editing: {
-    _enabled: boolean
-    disable: () => void
-  }
-}
-
-type PolygonType = extraLayerTypes & Polygon
-type PolylineType = extraLayerTypes & Polyline
-
-export type ExtendedLayer = PolygonType | PolylineType
-
-type MarkerGroup = {
-  id: string
-  markers: LatLngTuple[]
+export const MAP_PANEL_SNAP_POSITIONS: PositionPerSnapPoint = {
+  [SnapPoint.Full]: '40%',
+  [SnapPoint.Halfway]: '40%',
+  [SnapPoint.Closed]: '30px',
 }
 
 const MapPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [showDrawTool, setShowDrawTool] = useState(true)
-  const [mapInstance, setMapInstance] = useState<L.Map>()
   const [markerGroups, setMarkerGroups, markerGroupsRef] = useStateRef<MarkerGroup[]>([])
-
+  const [currentOverlay, setCurrentOverlay] = useState<Overlay>(Overlay.None)
+  const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const {
     location,
     activeMapLayers,
@@ -84,7 +60,20 @@ const MapPage: React.FC = () => {
   } = React.useContext(MapContext)
 
   const tmsLayers = overlays.filter((overlay) => overlay.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
-  const nonTmsLayers = overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
+  // Todo: uncomment when loading nontiled lib issue in arm-nontiled is fixed
+  // const nonTmsLayers = overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
+
+  useEffect(() => {
+    if (!location) {
+      setCurrentOverlay(Overlay.None)
+    } else {
+      setCurrentOverlay(Overlay.Results)
+    }
+  }, [location])
+
+  const MapPanelOrDrawer = useMemo(() => (showDesktopVariant ? MapPanel : MapPanelDrawer), [
+    showDesktopVariant,
+  ])
 
   useEffect(() => {
     if (activeMapLayers?.length) {
@@ -94,26 +83,14 @@ const MapPage: React.FC = () => {
     }
   }, [activeMapLayers])
 
-  useEffect(() => {
-    if (mapInstance) {
-      mapInstance.on('click', (e: LeafletMouseEvent) =>
-        handleMapClick(e, setLocation, setDetailUrl, overlays),
-      )
-    }
-
-    return () => {
-      if (mapInstance) {
-        mapInstance.off('click', (e: LeafletMouseEvent) =>
-          handleMapClick(e, setLocation, setDetailUrl, overlays),
-        )
-      }
-    }
-  }, [mapInstance, overlays])
-
   return (
     <MapView>
+      <GlobalStyle />
       <StyledMap
-        setInstance={setMapInstance}
+        options={{
+          ...DEFAULT_AMSTERDAM_MAPS_OPTIONS,
+          center: location || DEFAULT_AMSTERDAM_MAPS_OPTIONS.center,
+        }}
         events={{
           loading: () => setIsLoading(true),
           load: () => setIsLoading(false),
@@ -122,7 +99,6 @@ const MapPage: React.FC = () => {
         {showDrawTool &&
           markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
         <BaseLayer />
-        {location && <Marker latLng={location} />}
         {geometry && <GeoJSON geometry={geometry} />}
         {tmsLayers.map(({ url, overlayOptions: options, id }) => (
           <TileLayer
@@ -135,43 +111,63 @@ const MapPage: React.FC = () => {
             }}
           />
         ))}
-        {nonTmsLayers.map(({ url, overlayOptions: options, id }) => (
-          <NonTiledLayer
-            key={id}
-            url={url}
-            options={options}
-            events={{
-              loading: () => setIsLoading(true),
-              load: () => setIsLoading(false),
+        {/* Todo: uncomment when loading nontiled lib issue in arm-nontiled is fixed */}
+        {/* {nonTmsLayers.map(({ url, overlayOptions: options, id }) => ( */}
+        {/*   <NonTiledLayer */}
+        {/*     key={id} */}
+        {/*     url={url} */}
+        {/*     options={options} */}
+        {/*     events={{ */}
+        {/*       loading: () => setIsLoading(true), */}
+        {/*       load: () => setIsLoading(false), */}
+        {/*     }} */}
+        {/*   /> */}
+        {/* ))} */}
+        <MapPanelProvider
+          mapPanelSnapPositions={MAP_PANEL_SNAP_POSITIONS}
+          variant={showDesktopVariant ? 'panel' : 'drawer'}
+          initialPosition={SnapPoint.Closed}
+          topOffset={50}
+        >
+          <MapPanelOrDrawer>
+            {!showDrawTool && (
+              <PointSearchMarker
+                onClick={(e) => handleMapClick(e, setLocation, setDetailUrl, overlays)}
+                currentLatLng={location}
+              />
+            )}
+            {currentOverlay === Overlay.Legend && (
+              <MapLegend
+                stackOrder={2}
+                animate
+                onClose={() => {
+                  setCurrentOverlay(location ? Overlay.Results : Overlay.None)
+                }}
+              />
+            )}
+            {location && (
+              <PointSearchResults
+                {...{
+                  setLocation,
+                  currentOverlay,
+                  location,
+                }}
+              />
+            )}
+            <MapLegend />
+          </MapPanelOrDrawer>
+          <ViewerContainer
+            {...{
+              setCurrentOverlay,
+              currentOverlay,
+              showDesktopVariant,
+              markerGroupsRef,
+              isLoading,
+              setShowDrawTool,
+              setMarkerGroups,
             }}
           />
-        ))}
-        <StyledViewerContainer
-          bottomRight={isLoading ? <Spinner /> : null}
-          bottomLeft={
-            <BottomLeftHolder>
-              <MapPanelContainerWrapper>
-                <MapPanelContainer />
-              </MapPanelContainerWrapper>
-              <BaseLayerToggle
-                // onChangeLayer={(id, type) => {
-                //   console.log(id, type)
-                // }}
-                activeLayer="luchtfoto"
-              />
-            </BottomLeftHolder>
-          }
-          topRight={
-            <>
-              <DrawTool
-                onToggle={setShowDrawTool}
-                setMarkerGroups={setMarkerGroups}
-                markerGroupsRef={markerGroupsRef}
-              />
-              <MapPreviewPanelContainer />
-            </>
-          }
-        />
+        </MapPanelProvider>
       </StyledMap>
     </MapView>
   )

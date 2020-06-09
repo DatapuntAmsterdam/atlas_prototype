@@ -7,7 +7,7 @@ const StyledButton = styled(Button)`
   color: ${themeColor('tint', 'level7')};
   background: ${themeColor('tint', 'level1')};
   align-self: flex-start;
-  ${svgFill('tint', 'level7')};
+  ${svgFill(themeColor('tint', 'level7'))};
 
   &:hover,
   &:focus {
