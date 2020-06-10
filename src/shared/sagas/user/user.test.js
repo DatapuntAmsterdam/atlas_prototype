@@ -1,12 +1,12 @@
 import { expectSaga, testSaga } from 'redux-saga-test-plan'
-import * as auth from '../../services/auth/auth'
-
 import {
-  AUTHENTICATE_USER_REQUEST,
-  AUTHENTICATE_USER_RELOAD,
-  authenticateUserSuccess,
   authenticateFailed,
+  authenticateRequest,
+  authenticateUserSuccess,
+  AUTHENTICATE_USER_RELOAD,
+  AUTHENTICATE_USER_REQUEST,
 } from '../../ducks/user/user'
+import * as auth from '../../services/auth/auth'
 import watchAuthenticationRequest, { authenticateUser, waitForAuthentication } from './user'
 
 jest.mock('../../services/auth/auth')
@@ -30,14 +30,14 @@ describe('authenticateUser', () => {
     auth.getAccessToken.mockImplementation(() => 'token')
     auth.getName.mockImplementation(() => 'name')
     auth.getScopes.mockImplementation(() => ['scope'])
-    expectSaga(authenticateUser)
+    expectSaga(authenticateUser, authenticateRequest('inloggen'))
       .put(authenticateUserSuccess('token', 'name', ['scope']))
       .run()
   })
 
   it('should dispatch succes when the user is authorized ', () => {
     auth.getAccessToken.mockImplementation(() => null)
-    expectSaga(authenticateUser).put(authenticateFailed()).run()
+    expectSaga(authenticateUser, authenticateRequest('inloggen')).put(authenticateFailed()).run()
   })
 })
 
