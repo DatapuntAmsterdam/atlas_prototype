@@ -15,13 +15,14 @@ const ConstructionFiles = ({ openSharePage, fileName, fileUrl, openPrintMode, on
   const [loading, downloadFile] = useDownload()
   const handleDownload = (trackEvent, imageUrl) => async () => {
     await downloadFile(imageUrl, {
-      method: 'post',
+      method: 'get',
       headers: new Headers({
         Authorization: `Bearer ${accessToken}`,
       }),
     })
     onDownload(trackEvent)
   }
+
   return (
     <ContextMenu
       data-test="context-menu"
@@ -77,7 +78,7 @@ const ConstructionFiles = ({ openSharePage, fileName, fileUrl, openPrintMode, on
         disabled={loading}
         download={`${fileName}_original`}
         divider
-        onClick={handleDownload('origineel', `${fileUrl}/full/full/0/default.jpg`)}
+        onClick={handleDownload('origineel', `${fileUrl}?source_file=true`)}
         icon={
           <Icon inline size={24} padding={4}>
             <Download />

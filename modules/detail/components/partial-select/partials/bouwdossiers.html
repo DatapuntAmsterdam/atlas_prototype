@@ -6,7 +6,7 @@
         <dp-message>(Nog) geen bouwdossiers beschikbaar</dp-message>
     </p>
     <ul class="o-list">
-        <li ng-repeat="object in apiData.results | orderBy:'-datering'">
+        <li ng-repeat="object in apiData.results | orderBy:'-datering':reverse">
             <dp-redux-link
                 to="object._links.self.href | constructionFilesEndpointAction"
                 link-class="o-btn o-btn--link"

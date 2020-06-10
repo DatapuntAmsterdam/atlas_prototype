@@ -4,7 +4,7 @@ import RouterLink from 'redux-first-router-link'
 import { Heading, themeSpacing, themeColor, List, ListItem, Link } from '@datapunt/asc-ui'
 import styled from 'styled-components'
 import Gallery from '../Gallery/Gallery'
-import getAddresses from '../../../normalizations/construction-files/getAddresses'
+import getAddresses, { Address } from '../../../normalizations/construction-files/getAddresses'
 import { toDataDetail } from '../../../store/redux-first-router/actions'
 
 export type ConstructionFileImage = {
@@ -22,17 +22,6 @@ type ConstructionFile = {
   oorspronkelijk_pad?: string
 }
 
-type ConstructionFileAddress = {
-  straat?: string
-  huisnummer_letter?: string
-  huisnummer_toevoeging?: string
-  huisnummer_van?: string
-  huisnummer_tot?: string
-  locatie_aanduiding?: string
-  nummeraanduidingen: Array<string>
-  nummeraanduidingen_label: Array<string>
-}
-
 type ConstructionFileDetailProps = {
   titel: string
   documenten: Array<ConstructionFile>
@@ -41,7 +30,7 @@ type ConstructionFileDetailProps = {
   dossier_type: string
   dossiernr: number
   stadsdeel: string
-  adressen: Array<ConstructionFileAddress>
+  adressen: Array<Address>
   olo_liaan_nummer?: string
   document_omschrijving?: string
 }
@@ -89,7 +78,7 @@ const TableCell = styled.div`
 
 const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
   titel: title,
-  documenten: documents,
+  documenten,
   adressen: addresses,
   stadsdeel: district,
   datering: date,
@@ -100,6 +89,9 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
 }) => {
   const id = `${district}${fileNumber}`
   const addressList = getAddresses(addresses)
+
+  // Sort alphabetically
+  const documents = documenten.sort((a, b) => a.subdossier_titel.localeCompare(b.subdossier_titel))
 
   return (
     <PageWrapper>

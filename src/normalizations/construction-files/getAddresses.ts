@@ -2,10 +2,10 @@
 function formatAddress(
   locationLabel: string,
   street: string,
-  houseNumberLetter: string,
-  houseNumberAddition: string,
-  houseNumberStarting: number,
-  houseNumberEnd: number,
+  houseNumberLetter?: string,
+  houseNumberAddition?: string,
+  houseNumberStarting?: number,
+  houseNumberEnd?: number,
 ) {
   if (locationLabel) {
     return locationLabel
@@ -18,23 +18,25 @@ function formatAddress(
       houseNumberEnd !== houseNumberStarting ? `-${houseNumberEnd}` : ''
     }`
   } else {
-    label += ` ${houseNumberStarting || ''}${houseNumberAddition || ''}${houseNumberLetter || ''}`
+    label += ` ${houseNumberStarting || ''}${houseNumberLetter || ''}${
+      houseNumberAddition ? `-${houseNumberAddition}` : ''
+    }`
   }
 
   return label
 }
 
-type Address = {
+export type Address = {
   nummeraanduidingen: Array<string>
   nummeraanduidingen_label: Array<string>
   verblijfsobjecten: Array<string>
   verblijfsobjecten_label: Array<string>
   locatie_aanduiding: string
   straat: string
-  huisnummer_letter: string
-  huisnummer_toevoeging: string
-  huisnummer_van: number
-  huisnummer_tot: number
+  huisnummer_letter?: string
+  huisnummer_toevoeging?: string
+  huisnummer_van?: number
+  huisnummer_tot?: number
 }
 
 type AddressResult = {
