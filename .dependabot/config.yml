@@ -7,12 +7,6 @@ update_configs:
       - match:
           dependency_name: "d3"
       - match:
-          dependency_name: "leaflet"
-      - match:
-          dependency_name: "leaflet-draw"
-      - match:
-          dependency_name: "leaflet.nontiledlayer"
-      - match:
           dependency_name: "react-leaflet"
       - match:
           dependency_name: "redux-saga"
