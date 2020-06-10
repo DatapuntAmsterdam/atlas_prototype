@@ -83,15 +83,15 @@ const Gallery: React.FC<GalleryProps> = ({ allFiles, id, access }) => {
         <>
           {!hasRights && !hasExtendedRights ? (
             <StyledAlert level={NotificationLevel.Attention} dismissible>
-              Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om bouwdossiers te
-              bekijken.
+              Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om bouw- en
+              omgevingsdossiers te bekijken.
             </StyledAlert>
           ) : (
             restricted &&
             !hasExtendedRights && (
               <StyledAlert level={NotificationLevel.Attention} dismissible>
                 Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen
-                inloggen om alle bouwdossiers te bekijken.
+                inloggen om alle bouw- en omgevingsdossiers te bekijken.
               </StyledAlert>
             )
           )}

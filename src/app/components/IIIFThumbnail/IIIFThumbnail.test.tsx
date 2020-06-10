@@ -32,7 +32,7 @@ describe('IIIFThumbnail', () => {
   it('should set the loading skeleton when the src is being fetched', async () => {
     const component = shallow(<IIIFThumbnail src="" title="foo" />) // We want to test the props that are set on a component, this is something testing-library doesn't support, as it prefers to test the DOM
 
-    const card = component.find('Card')
+    const card = component.find('Styled(Card)')
     expect(card.props()).toMatchObject({ isLoading: true })
   })
 

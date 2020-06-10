@@ -24,7 +24,7 @@ const StyledRow = styled(Row)`
 `
 
 const ERROR_MESSAGE =
-  'Er kunnen door een technische storing helaas geen bouwdossiers worden getoond. Probeer het later nog eens.'
+  'Er kunnen door een technische storing helaas geen bouw- en omgevingsdossiers worden getoond. Probeer het later nog eens.'
 
 const ConstructionFilesContainer = ({ fileName, fileUrl, endpoint }) => {
   const [results, setResults] = React.useState(null)

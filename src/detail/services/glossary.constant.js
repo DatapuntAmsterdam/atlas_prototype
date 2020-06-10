@@ -274,12 +274,10 @@ const GLOSSARY = {
       meta: ['monument_aanwijzingsdatum', 'identificerende_sleutel_monument'],
     },
     BOUWDOSSIER: {
-      singular: 'Bouwdossier',
-      plural: 'Bouwdossiers',
+      singular: 'Bouw- en omgevingsdossier',
+      plural: 'Bouw- en omgevingsdossiers',
       description:
-        'Een bouwdossier bevat de behandeling van de aanvraag tot een bouwvergunning ' +
-        '(waaronder ook splitsings-, reclame- en sloopvergunningen), de vergunningverlening ervan ' +
-        ' met de bijbehorende bouwtekeningen en het toezicht en de handhaving daarop.',
+        'Een Bouwdossier of Wabo dossier bevat de documenten die bij de behandeling van een aanvraag voor het veranderen van de omgeving zijn vastgelegd. Het kan daarbij gaan om bouwen, verbouwen, veranderen van het gebruik van ruimte, brandveilig gebruik, reclame aanbrengen, kappen van bomen, slopen van gebouwen, het samenvoegen van gebouwen, wijzigingen van huisnummers etc.',
       url: null,
       meta: [],
     },

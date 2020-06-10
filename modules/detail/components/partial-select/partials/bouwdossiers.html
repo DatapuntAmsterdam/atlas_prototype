@@ -3,7 +3,7 @@
         {{apiData.count}}</h4>
 
     <p ng-if="!apiData.results.length">
-        <dp-message>(Nog) geen bouwdossiers beschikbaar</dp-message>
+        <dp-message>(Nog) geen bouw- en omgevingsdossiers beschikbaar</dp-message>
     </p>
     <ul class="o-list">
         <li ng-repeat="object in apiData.results | orderBy:'-datering':reverse">

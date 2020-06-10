@@ -52,6 +52,8 @@ describe('ConstructionFileDetail', () => {
     const mockAdres = {
       nummeraanduidingen: ['1234'],
       nummeraanduidingen_label: ['foo'],
+      verblijfsobjecten: [],
+      verblijfsobjecten_label: [],
     }
 
     mockResults = {
