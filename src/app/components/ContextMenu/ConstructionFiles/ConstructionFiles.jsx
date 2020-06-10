@@ -9,7 +9,14 @@ import { sharePage, showPrintMode } from '../../../../shared/ducks/ui/ui'
 import useDownload from '../../../utils/useDownload'
 import getState from '../../../../shared/services/redux/get-state'
 
-const ConstructionFiles = ({ openSharePage, fileName, fileUrl, openPrintMode, onDownload }) => {
+const ConstructionFiles = ({
+  openSharePage,
+  fileName,
+  fileUrl,
+  openPrintMode,
+  onDownload,
+  isImage,
+}) => {
   const { accessToken } = getState().user
 
   const [loading, downloadFile] = useDownload()
@@ -47,38 +54,45 @@ const ConstructionFiles = ({ openSharePage, fileName, fileUrl, openPrintMode, on
       >
         Printen
       </ContextMenuItem>
-      <ContextMenuItem
-        as="button"
-        disabled={loading}
-        download={`${fileName}_small`}
-        onClick={handleDownload('klein', `${fileUrl}/full/800,/0/default.jpg`)}
-        icon={
-          <Icon inline size={24} padding={4}>
-            <Download />
-          </Icon>
-        }
-      >
-        Download klein
-      </ContextMenuItem>
-      <ContextMenuItem
-        as="button"
-        disabled={loading}
-        download={`${fileName}_large`}
-        onClick={handleDownload('groot', `${fileUrl}/full/1600,/0/default.jpg`)}
-        icon={
-          <Icon inline size={24} padding={4}>
-            <Download />
-          </Icon>
-        }
-      >
-        Download groot
-      </ContextMenuItem>
+      {isImage && (
+        <>
+          <ContextMenuItem
+            as="button"
+            disabled={loading}
+            download={`${fileName}_small`}
+            onClick={handleDownload('klein', `${fileUrl}/full/800,/0/default.jpg`)}
+            icon={
+              <Icon inline size={24} padding={4}>
+                <Download />
+              </Icon>
+            }
+          >
+            Download klein
+          </ContextMenuItem>
+          <ContextMenuItem
+            as="button"
+            disabled={loading}
+            download={`${fileName}_large`}
+            onClick={handleDownload('groot', `${fileUrl}/full/1600,/0/default.jpg`)}
+            icon={
+              <Icon inline size={24} padding={4}>
+                <Download />
+              </Icon>
+            }
+          >
+            Download groot
+          </ContextMenuItem>
+        </>
+      )}
       <ContextMenuItem
         as="button"
         disabled={loading}
         download={`${fileName}_original`}
         divider
-        onClick={handleDownload('origineel', `${fileUrl}?source_file=true`)}
+        onClick={handleDownload(
+          'origineel',
+          isImage ? `${fileUrl}/full/full/0/default.jpg` : `${fileUrl}?source_file=true`, // If the file is not an image the source file should be downloadable
+        )}
         icon={
           <Icon inline size={24} padding={4}>
             <Download />
@@ -98,6 +112,7 @@ ConstructionFiles.propTypes = {
   onDownload: PropTypes.func.isRequired,
   fileName: PropTypes.string.isRequired,
   fileUrl: PropTypes.string.isRequired,
+  isImage: PropTypes.bool.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) =>

@@ -8,13 +8,17 @@ import { Close, Enlarge, Minimise } from '@datapunt/asc-assets'
 import ViewerControls from '../ViewerControls/ViewerControls'
 import { resetFile } from '../../../shared/ducks/files/actions'
 import getState from '../../../shared/services/redux/get-state'
+import { ConstructionFiles as ContextMenu } from '../ContextMenu'
 
 /* istanbul ignore next */
-const ImageViewer = ({ handleResetFile, fileName, fileUrl, title, contextMenu }) => {
+const ImageViewer = ({ handleResetFile, fileName, fileUrl, title, onDownloadFile }) => {
   const viewerRef = React.createRef()
   const [viewer, setViewerInstance] = React.useState(null)
 
   const { accessToken } = getState().user
+
+  const fileExtension = fileName.split('.').pop()
+  const isImage = !!fileExtension.toLowerCase().match(/(jpg|jpeg|png|gif)/)
 
   React.useEffect(() => {
     // Todo: retrieve the document title from the filename (filter)
@@ -86,7 +90,14 @@ const ImageViewer = ({ handleResetFile, fileName, fileUrl, title, contextMenu })
               />
             </div>
           }
-          bottomLeftComponent={contextMenu}
+          bottomLeftComponent={
+            <ContextMenu
+              onDownload={onDownloadFile}
+              fileName={fileName}
+              fileUrl={fileUrl}
+              isImage={isImage}
+            />
+          }
         />
       )}
     </>
@@ -96,14 +107,13 @@ const ImageViewer = ({ handleResetFile, fileName, fileUrl, title, contextMenu })
 ImageViewer.defaultProps = {
   fileName: '',
   title: '',
-  contextMenu: null,
 }
 
 ImageViewer.propTypes = {
   fileName: PropTypes.string,
   title: PropTypes.string,
   handleResetFile: PropTypes.func.isRequired,
-  contextMenu: PropTypes.node,
+  onDownloadFile: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) =>

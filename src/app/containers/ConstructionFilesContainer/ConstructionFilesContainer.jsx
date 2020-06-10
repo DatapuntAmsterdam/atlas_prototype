@@ -11,7 +11,6 @@ import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
 import ErrorAlert from '../../components/ErrorAlert/ErrorAlert'
 import { getByUrl } from '../../../shared/services/api/api'
-import { ConstructionFiles as ContextMenu } from '../../components/ContextMenu'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 
 const ImageViewer = React.lazy(() =>
@@ -108,14 +107,7 @@ const ConstructionFilesContainer = ({ fileName, fileUrl, endpoint }) => {
     <ErrorAlert errorMessage={errorMessage} />
   ) : (
     <>
-      {imageViewerActive && (
-        <ImageViewer
-          {...{ fileName, fileUrl, title }}
-          contextMenu={
-            <ContextMenu onDownload={onDownloadFile} fileName={fileName} fileUrl={fileUrl} />
-          }
-        />
-      )}
+      {imageViewerActive && <ImageViewer {...{ fileName, fileUrl, title, onDownloadFile }} />}
       {loading && loadingTemplate}
       {!loading &&
         !fileName &&

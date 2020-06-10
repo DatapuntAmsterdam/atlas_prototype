@@ -23,6 +23,7 @@ describe('ContextMenu for ConstructionFiles viewer', () => {
     const props = {
       fileName: 'filename.jpg',
       openPrintMode: mockOpenPrintMode,
+      isImage: true,
     }
     const initialState = {
       map: {
