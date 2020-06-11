@@ -990,10 +990,10 @@
     "@datapunt/arm-core" "^0.2.8-alpha.8+f86af24"
     leaflet.markercluster "^1.4.1"
 
-"@datapunt/arm-core@^0.2.8-alpha.8", "@datapunt/arm-core@^0.2.8-alpha.8+f86af24":
-  version "0.2.8-alpha.8"
-  resolved "https://registry.yarnpkg.com/@datapunt/arm-core/-/arm-core-0.2.8-alpha.8.tgz#20fee50789becb02aca35c9ec35b187aee1510cc"
-  integrity sha512-D8GHjcVgGYrEqCO+apaNOV4Cl7UbZyA6U6q4Kyd1khxyZeWdqR2zWWHwFw8fq5t96ves2g/LidlPm5lsVnrKwA==
+"@datapunt/arm-core@^0.2.8-alpha.17+7d58609", "@datapunt/arm-core@^0.2.8-alpha.8", "@datapunt/arm-core@^0.2.8-alpha.8+f86af24":
+  version "0.2.8-alpha.17"
+  resolved "https://registry.yarnpkg.com/@datapunt/arm-core/-/arm-core-0.2.8-alpha.17.tgz#0c19af38832bda4654a6dd159b2a193453181369"
+  integrity sha512-6Kyun9ssCR5zfPdnfLhsyWlSXWAYqb//z4/fRf5+DXxEpyXjQ130d3Kcp4M0I90icUyrSt6hN6rwS3C//ZdGdg==
   dependencies:
     geojson "^0.5.0"
     leaflet "^1.6.0"
@@ -1001,12 +1001,12 @@
     proj4leaflet "^1.0.2"
     uuid "^8.1.0"
 
-"@datapunt/arm-draw@^0.2.8-alpha.8":
-  version "0.2.8-alpha.8"
-  resolved "https://registry.yarnpkg.com/@datapunt/arm-draw/-/arm-draw-0.2.8-alpha.8.tgz#9522c2b7a0113849f45355d128acc53b3cdf2d8b"
-  integrity sha512-FrvZ7c0aorQ99/siYQO8ljDBS8VS+n7E7wBb6mTIqWFQOUcqGOT/+/C+mvML4Vd9tAwFOyjotX+lYZliN9zjyg==
+"@datapunt/arm-draw@^0.2.8-alpha.17":
+  version "0.2.8-alpha.17"
+  resolved "https://registry.yarnpkg.com/@datapunt/arm-draw/-/arm-draw-0.2.8-alpha.17.tgz#de3f5fed6fe754a0ad50b154239a7900eeb80e18"
+  integrity sha512-f5XuYLvAdDMLhFZWldarWbCKXR3urI1JZCbx8fmpbYDmS178aYpo09BUlCmDeIEkSNkw3ys/yqFD+DjbSBjOdg==
   dependencies:
-    "@datapunt/arm-core" "^0.2.8-alpha.8+f86af24"
+    "@datapunt/arm-core" "^0.2.8-alpha.17+7d58609"
     leaflet-draw "^1.0.4"
     uuid "^8.1.0"
 
