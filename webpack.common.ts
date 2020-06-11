@@ -111,8 +111,12 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
                   '@babel/preset-env',
                   {
                     modules: false,
-                    useBuiltIns: 'usage',
-                    corejs: 3,
+                    ...(!options.legacy
+                      ? {
+                          useBuiltIns: 'usage',
+                          corejs: 3,
+                        }
+                      : null),
                     targets: {
                       esmodules: !options.legacy,
                     },
