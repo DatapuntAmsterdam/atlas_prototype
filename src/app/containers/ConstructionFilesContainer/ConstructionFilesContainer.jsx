@@ -85,8 +85,8 @@ const ConstructionFilesContainer = ({ fileName, fileUrl, endpoint }) => {
   const onDownloadFile = (size) => {
     trackEvent({
       documentTitle,
-      action: 'Download-bouwtekening',
-      name: `bouwtekening-download-${size}`,
+      category: 'download-bouwtekening',
+      action: `bouwtekening-download-${size}`,
       value: fileName,
     })
   }

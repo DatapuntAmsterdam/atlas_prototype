@@ -21,12 +21,16 @@ const ConstructionFiles = ({
 
   const [loading, downloadFile] = useDownload()
   const handleDownload = (trackEvent, imageUrl) => async () => {
-    await downloadFile(imageUrl, {
-      method: 'get',
-      headers: new Headers({
-        Authorization: `Bearer ${accessToken}`,
-      }),
-    })
+    await downloadFile(
+      imageUrl,
+      {
+        method: 'get',
+        headers: new Headers({
+          Authorization: `Bearer ${accessToken}`,
+        }),
+      },
+      fileName,
+    )
     onDownload(trackEvent)
   }
 
@@ -60,7 +64,7 @@ const ConstructionFiles = ({
             as="button"
             disabled={loading}
             download={`${fileName}_small`}
-            onClick={handleDownload('klein', `${fileUrl}/full/800,/0/default.jpg`)}
+            onClick={handleDownload('klein', `${fileUrl}/full/800,/0/default.jpg`, fileName)}
             icon={
               <Icon inline size={24} padding={4}>
                 <Download />
@@ -73,7 +77,7 @@ const ConstructionFiles = ({
             as="button"
             disabled={loading}
             download={`${fileName}_large`}
-            onClick={handleDownload('groot', `${fileUrl}/full/1600,/0/default.jpg`)}
+            onClick={handleDownload('groot', `${fileUrl}/full/1600,/0/default.jpg`, fileName)}
             icon={
               <Icon inline size={24} padding={4}>
                 <Download />
@@ -92,6 +96,7 @@ const ConstructionFiles = ({
         onClick={handleDownload(
           'origineel',
           isImage ? `${fileUrl}/full/full/0/default.jpg` : `${fileUrl}?source_file=true`, // If the file is not an image the source file should be downloadable
+          fileName,
         )}
         icon={
           <Icon inline size={24} padding={4}>
