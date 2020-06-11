@@ -35,7 +35,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.2",
     "@datapunt/arm-cluster": "^0.2.8-alpha.8",
-    "@datapunt/arm-core": "^0.2.8-alpha.8",
+    "@datapunt/arm-core": "^0.2.8-alpha.17",
     "@datapunt/arm-draw": "^0.2.8-alpha.8",
     "@datapunt/arm-nontiled": "^0.2.8-alpha.8",
     "@datapunt/asc-assets": "^0.20.0",
