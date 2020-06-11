@@ -982,18 +982,18 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@datapunt/arm-cluster@^0.2.8-alpha.8":
-  version "0.2.8-alpha.8"
-  resolved "https://registry.yarnpkg.com/@datapunt/arm-cluster/-/arm-cluster-0.2.8-alpha.8.tgz#dd2160408554c866a9a26efaf82b9a68c09d64d9"
-  integrity sha512-GBZTeCEruRjzADABJPddXBGch9YULPbPL3PjO1P3PYUzMZPOuhSreHNf+VsxdhafnBXbstJ0hqi8Qxq+d6pL/A==
+"@datapunt/arm-cluster@^0.2.8-alpha.17":
+  version "0.2.8-alpha.17"
+  resolved "https://registry.yarnpkg.com/@datapunt/arm-cluster/-/arm-cluster-0.2.8-alpha.17.tgz#1d5fc0a404505584573393b56b9dc2361ac8948d"
+  integrity sha512-AiK3cADoAsG7vr7j762i4CgyArbIYAKHI81eZsr0fTaK3aTEfXBhSmqKi/bRr9yxuQXZP4m9O+uoCRrOiFw7wQ==
   dependencies:
-    "@datapunt/arm-core" "^0.2.8-alpha.8+f86af24"
+    "@datapunt/arm-core" "^0.2.8-alpha.17+7d58609"
     leaflet.markercluster "^1.4.1"
 
-"@datapunt/arm-core@^0.2.8-alpha.8", "@datapunt/arm-core@^0.2.8-alpha.8+f86af24":
-  version "0.2.8-alpha.8"
-  resolved "https://registry.yarnpkg.com/@datapunt/arm-core/-/arm-core-0.2.8-alpha.8.tgz#20fee50789becb02aca35c9ec35b187aee1510cc"
-  integrity sha512-D8GHjcVgGYrEqCO+apaNOV4Cl7UbZyA6U6q4Kyd1khxyZeWdqR2zWWHwFw8fq5t96ves2g/LidlPm5lsVnrKwA==
+"@datapunt/arm-core@^0.2.8-alpha.17+7d58609", "@datapunt/arm-core@^0.2.8-alpha.8", "@datapunt/arm-core@^0.2.8-alpha.8+f86af24":
+  version "0.2.8-alpha.17"
+  resolved "https://registry.yarnpkg.com/@datapunt/arm-core/-/arm-core-0.2.8-alpha.17.tgz#0c19af38832bda4654a6dd159b2a193453181369"
+  integrity sha512-6Kyun9ssCR5zfPdnfLhsyWlSXWAYqb//z4/fRf5+DXxEpyXjQ130d3Kcp4M0I90icUyrSt6hN6rwS3C//ZdGdg==
   dependencies:
     geojson "^0.5.0"
     leaflet "^1.6.0"
