@@ -16,6 +16,7 @@ const StyledCardContent = styled(CardContent)`
   overflow-wrap: break-word;
   position: absolute;
   bottom: 0;
+  left: 0;
   padding: ${themeSpacing(2, 3)}
   min-height: inherit;
   background-color: rgba(255, 255, 255, .67);
