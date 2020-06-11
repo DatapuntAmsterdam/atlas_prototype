@@ -2,6 +2,7 @@ import angular from 'angular'
 import 'angular-aria'
 import 'angular-i18n/nl-nl'
 import 'angular-sanitize'
+import { ENVIRONMENTS } from '../../src/shared/environment'
 
 const moduleDependencies = [
   // Main modules
@@ -21,7 +22,7 @@ try {
   angular.UNSAFE_restoreLegacyJqLiteXHTMLReplacement()
 } catch (e) {
   // eslint-disable-next-line no-console, angular/log
-  console.warn(e)
+  if (process.env.NODE_ENV !== ENVIRONMENTS.PRODUCTION) console.warn(e)
 }
 
 urlChangeProvider.$inject = ['$provide']
