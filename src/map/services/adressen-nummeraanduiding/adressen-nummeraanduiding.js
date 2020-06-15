@@ -1,4 +1,4 @@
-import { getByUrl } from '../../../shared/services/api/api'
+import { fetchWithToken } from '../../../shared/services/api/api'
 import mapFetch from '../map-fetch/map-fetch'
 import { adressenVerblijfsobject } from '../normalize/normalize'
 
@@ -37,7 +37,7 @@ export function fetchByPandId(pandId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&')
 
-  return getByUrl(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
+  return fetchWithToken(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
     (data) => data.results,
   )
 }
@@ -51,11 +51,12 @@ export function fetchByLigplaatsId(ligplaatsId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&')
 
-  return getByUrl(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then((data) =>
-    data.results.map((result) => ({
-      ...result,
-      id: result.landelijk_id,
-    })),
+  return fetchWithToken(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
+    (data) =>
+      data.results.map((result) => ({
+        ...result,
+        id: result.landelijk_id,
+      })),
   )
 }
 
@@ -74,11 +75,12 @@ export function fetchByStandplaatsId(standplaatsId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&')
 
-  return getByUrl(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then((data) =>
-    data.results.map((result) => ({
-      ...result,
-      id: result.landelijk_id,
-    })),
+  return fetchWithToken(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
+    (data) =>
+      data.results.map((result) => ({
+        ...result,
+        id: result.landelijk_id,
+      })),
   )
 }
 

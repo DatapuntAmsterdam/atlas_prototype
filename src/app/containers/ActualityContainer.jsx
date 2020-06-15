@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import LoadingIndicator from '../../shared/components/loading-indicator/LoadingIndicator'
-import { getByUri } from '../../shared/services/api/api'
+import { fetchWithoutToken } from '../../shared/services/api/api'
 
 const ActualityContainer = () => {
   const [loading, setLoading] = useState(false)
@@ -8,7 +8,7 @@ const ActualityContainer = () => {
 
   useEffect(() => {
     setLoading(true)
-    getByUri(`${process.env.API_ROOT}metadata/`)
+    fetchWithoutToken(`${process.env.API_ROOT}metadata/`)
       .then(setSources)
       .finally(() => {
         setLoading(false)

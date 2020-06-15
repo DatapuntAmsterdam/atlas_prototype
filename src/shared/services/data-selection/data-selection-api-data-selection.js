@@ -1,4 +1,4 @@
-import { getByUrl } from '../api/api'
+import { fetchWithToken } from '../api/api'
 
 const formatFilters = (rawData) =>
   Object.keys(rawData).reduce((acc, key) => {
@@ -30,13 +30,15 @@ const formatData = (config, rawData) =>
   })
 
 export function getMarkers(config, activeFilters) {
-  return getByUrl(process.env.API_ROOT + config.ENDPOINT_MARKERS, activeFilters).then((data) => ({
-    clusterMarkers: data.object_list
-      // eslint-disable-next-line no-underscore-dangle
-      .map((object) => object._source.centroid)
-      .filter((x) => x)
-      .map(([lon, lat]) => [lat, lon]),
-  }))
+  return fetchWithToken(process.env.API_ROOT + config.ENDPOINT_MARKERS, activeFilters).then(
+    (data) => ({
+      clusterMarkers: data.object_list
+        // eslint-disable-next-line no-underscore-dangle
+        .map((object) => object._source.centroid)
+        .filter((x) => x)
+        .map(([lon, lat]) => [lat, lon]),
+    }),
+  )
 }
 
 export function query(config, view, activeFilters, page, search, shape = '[]') {
@@ -57,7 +59,7 @@ export function query(config, view, activeFilters, page, search, shape = '[]') {
   }
 
   const uri = config.ENDPOINT_PREVIEW[view] || config.ENDPOINT_PREVIEW
-  return getByUrl(process.env.API_ROOT + uri, searchParams).then((data) => {
+  return fetchWithToken(process.env.API_ROOT + uri, searchParams).then((data) => {
     const newData = { ...data }
     if (searchPage !== page) {
       // Requested page was out of api reach, dumping data

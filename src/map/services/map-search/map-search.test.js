@@ -1,6 +1,5 @@
-import { getByUrl } from '../../../shared/services/api/api'
+import { fetchWithToken } from '../../../shared/services/api/api'
 import * as address from '../adressen-nummeraanduiding/adressen-nummeraanduiding'
-// import * as monument from '../../../shared/services/monument/monument';
 import * as vestiging from '../vestiging/vestiging'
 import search, { fetchRelatedForUser } from './map-search'
 
@@ -22,7 +21,7 @@ describe('mapSearch service', () => {
 
   describe('search action', () => {
     it('should return results from search for bommen', async () => {
-      getByUrl.mockReturnValue(
+      fetchWithToken.mockReturnValue(
         Promise.resolve({
           features: [
             {
@@ -64,7 +63,7 @@ describe('mapSearch service', () => {
     })
 
     it('should return results and ignore the ignore the failing calls (http 500 errors)', async () => {
-      getByUrl.mockImplementation((url) => {
+      fetchWithToken.mockImplementation((url) => {
         if (url.indexOf('/nap/') > 0) {
           return Promise.reject()
         }

@@ -1,9 +1,9 @@
 // Todo: fix / add tests
-import { getByUrl } from '../api/api'
+import { fetchWithToken } from '../api/api'
 import { formatLinks } from './search-formatter'
 
 export function loadMore(category) {
-  return getByUrl(category.next).then((nextPageData) => {
+  return fetchWithToken(category.next).then((nextPageData) => {
     // Don't change the input, create a new variable
     const output = {}
 

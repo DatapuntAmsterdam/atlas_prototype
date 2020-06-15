@@ -1,7 +1,7 @@
 import identity from 'lodash.identity'
+import { fetchWithToken } from '../api/api'
 import generateId from '../state-token-generator/state-token-generator'
 import { query as DSQuery } from './data-selection-api-data-selection'
-import { getByUrl } from '../api/api'
 
 export function query(config, view, activeFilters, page, search, geometryFilter) {
   return DSQuery(config, view, activeFilters, page, search, geometryFilter)
@@ -23,7 +23,7 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
     }),
   }
   return boundingBox
-    ? getByUrl(process.env.API_ROOT + config.ENDPOINT_MARKERS, params).then((data) => ({
+    ? fetchWithToken(process.env.API_ROOT + config.ENDPOINT_MARKERS, params).then((data) => ({
         geoJsons: [
           data.eigenpercelen && {
             geoJson: data.eigenpercelen,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getByUrl } from '../../shared/services/api/api'
+import { fetchWithToken } from '../../shared/services/api/api'
 
 function useDataFetching() {
   const [results, setResults] = React.useState(null)
@@ -9,7 +9,7 @@ function useDataFetching() {
   async function fetchData(endpoint: string) {
     setLoading(true)
     try {
-      const data = await getByUrl(endpoint)
+      const data = await fetchWithToken(endpoint)
       setResults(data)
     } catch (e) {
       setErrorMessage(e.message)

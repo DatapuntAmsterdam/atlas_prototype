@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks'
-import useFromCMS from './useFromCMS'
-import { getByUrl } from '../../shared/services/api/api'
-import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
 import useNormalizedCMSResults from '../../normalizations/cms/useNormalizedCMSResults'
+import { fetchWithToken } from '../../shared/services/api/api'
+import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
+import useFromCMS from './useFromCMS'
 
 jest.mock('../../shared/services/api/api')
 jest.mock('../../shared/services/cms/cms-json-api-normalizer')
@@ -17,13 +17,13 @@ describe('useFromCMS', () => {
   }
 
   beforeEach(() => {
-    getByUrl.mockReturnValueOnce(Promise.resolve(mockData))
+    fetchWithToken.mockReturnValueOnce(Promise.resolve(mockData))
     cmsJsonApiNormalizer.mockReturnValueOnce(Promise.resolve(mockData))
     useNormalizedCMSResults.mockReturnValueOnce(mockData)
   })
 
   afterEach(() => {
-    getByUrl.mockReset()
+    fetchWithToken.mockReset()
     cmsJsonApiNormalizer.mockReset()
   })
 
@@ -49,7 +49,7 @@ describe('useFromCMS', () => {
 
     // call the fetchData function
     result.current.fetchData()
-    expect(getByUrl).toHaveBeenCalledWith('https://test.url/api')
+    expect(fetchWithToken).toHaveBeenCalledWith('https://test.url/api')
 
     // wait until it resolves
     await waitForNextUpdate()
@@ -71,7 +71,7 @@ describe('useFromCMS', () => {
 
     // call the fetchData function
     result.current.fetchData()
-    expect(getByUrl).toHaveBeenCalledWith('https://test.url/api')
+    expect(fetchWithToken).toHaveBeenCalledWith('https://test.url/api')
 
     // wait until it resolves
     await waitForNextUpdate()
@@ -84,8 +84,8 @@ describe('useFromCMS', () => {
   })
 
   it('should return an error when thrown', async () => {
-    getByUrl.mockReset()
-    getByUrl.mockReturnValueOnce(Promise.reject(mockData))
+    fetchWithToken.mockReset()
+    fetchWithToken.mockReturnValueOnce(Promise.reject(mockData))
 
     const { result, waitForNextUpdate } = renderHook(() => useFromCMS(mockCMSconfig.TEST, id))
     expect(result.current.loading).toBe(true)
@@ -93,7 +93,7 @@ describe('useFromCMS', () => {
 
     // call the fetchData function
     result.current.fetchData()
-    expect(getByUrl).toHaveBeenCalledWith('https://test.url/api')
+    expect(fetchWithToken).toHaveBeenCalledWith('https://test.url/api')
 
     await waitForNextUpdate()
 

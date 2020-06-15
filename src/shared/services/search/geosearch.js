@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle,no-param-reassign */
 import identity from 'lodash.identity'
-import SEARCH_CONFIG from './search-config'
-import { getByUrl } from '../api/api'
-import { formatCategory } from './search-formatter'
-import geosearchFormatter from './geosearch-formatter'
 import { getFeaturesFromResult } from '../../../map/services/map-search/map-search'
+import { fetchWithToken } from '../api/api'
+import geosearchFormatter from './geosearch-formatter'
+import SEARCH_CONFIG from './search-config'
+import { formatCategory } from './search-formatter'
 
 function isNumber(value) {
   return typeof value === 'number'
@@ -38,10 +38,10 @@ function getRelatedObjects(geosearchResults, user) {
     if (plaatsEndpoint && user.scopes.includes('HR/R')) {
       // Only fetching 'vestigingen' for a standplaats/ligplaats, so
       // we check for employee status here already
-      getByUrl(plaatsEndpoint).then((plaats) => {
+      fetchWithToken(plaatsEndpoint).then((plaats) => {
         const vestigingenUri = `${process.env.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${plaats.hoofdadres.landelijk_id}`
 
-        getByUrl(vestigingenUri).then((vestigingen) => {
+        fetchWithToken(vestigingenUri).then((vestigingen) => {
           const formatted =
             vestigingen && vestigingen.count ? formatCategory('vestiging', vestigingen) : null
           const labelLigplaats = plaats.ligplaatsidentificatie ? ' binnen deze ligplaats' : null
@@ -72,11 +72,11 @@ function getRelatedObjects(geosearchResults, user) {
     } else if (pandEndpoint) {
       // pand matched, remove monumenten from top results
       geosearchResults = geosearchResults.filter((item) => item.slug !== 'monument')
-      getByUrl(pandEndpoint).then((pand) => {
+      fetchWithToken(pandEndpoint).then((pand) => {
         const vestigingenUri = `handelsregister/vestiging/?pand=${pand.pandidentificatie}`
 
         const requests = [
-          getByUrl(pand._adressen.href).then((objecten) => {
+          fetchWithToken(pand._adressen.href).then((objecten) => {
             // In verblijfsobjecten the status field is really a vbo_status field
             // Rename this field to allow for tranparant processing of the search results
             objecten.results.forEach((result) => {
@@ -94,14 +94,14 @@ function getRelatedObjects(geosearchResults, user) {
               : null
             return extended
           }),
-          getByUrl(pand._monumenten.href).then((objecten) =>
+          fetchWithToken(pand._monumenten.href).then((objecten) =>
             objecten && objecten.count ? formatCategory('monument', objecten) : null,
           ),
         ]
 
         if (user.scopes.includes('HR/R')) {
           requests.push(
-            getByUrl(`${process.env.API_ROOT}${vestigingenUri}`).then((vestigingen) => {
+            fetchWithToken(`${process.env.API_ROOT}${vestigingenUri}`).then((vestigingen) => {
               const formatted =
                 vestigingen && vestigingen.count ? formatCategory('vestiging', vestigingen) : null
               const extended = formatted
@@ -144,7 +144,7 @@ export default function geosearch(location, user) {
 
     if (!endpoint.authScope || isInScope) {
       const searchParams = {
-        ...endpoint.extra_params,
+        ...endpoint.params,
         lat: Array.isArray(location) ? location[0] : location.latitude,
         lon: Array.isArray(location) ? location[1] : location.longitude,
       }
@@ -153,7 +153,7 @@ export default function geosearch(location, user) {
         searchParams.radius = endpoint.radius
       }
 
-      const request = getByUrl(
+      const request = fetchWithToken(
         `${process.env.API_ROOT}${endpoint.uri}`,
         searchParams,
         false,

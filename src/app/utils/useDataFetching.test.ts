@@ -1,6 +1,10 @@
 import { act } from 'react-dom/test-utils'
-import useDataFetching from './useDataFetching'
 import testHook from '../../../test/test-hook'
+import useDataFetching from './useDataFetching'
+
+jest.mock('../../shared/services/api/api', () => ({
+  fetchWithToken: () => Promise.resolve({}),
+}))
 
 jest.useFakeTimers()
 
@@ -8,7 +12,7 @@ let mockUseDataFetching
 describe('useDataFetching', () => {
   beforeEach(() => {
     testHook(() => {
-      mockUseDataFetching = useDataFetching('name')
+      mockUseDataFetching = useDataFetching()
     })
   })
 

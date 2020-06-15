@@ -1,9 +1,7 @@
-import fetchByGeoLocation from './vastgoed'
-
-import { getByUrl } from '../../../shared/services/api/api'
-
+import { fetchWithToken } from '../../../shared/services/api/api'
 import mapFetch from '../map-fetch/map-fetch'
 import { vastgoed } from '../normalize/normalize'
+import fetchByGeoLocation from './vastgoed'
 
 jest.mock('../../../shared/services/api/api')
 jest.mock('../../../shared/services/shared-config/shared-config')
@@ -28,7 +26,7 @@ describe('The vastgoed resource', () => {
   }
 
   afterEach(() => {
-    getByUrl.mockReset()
+    fetchWithToken.mockReset()
   })
 
   it('fetches the vastgoed geosearch', async () => {
@@ -40,7 +38,7 @@ describe('The vastgoed resource', () => {
     const mockLocation = { latitude: 123, longitude: 456 }
     const mockFeature = { feature: 'This is the feature info' }
 
-    getByUrl.mockImplementation(() => vastgoedMock)
+    fetchWithToken.mockImplementation(() => vastgoedMock)
     mapFetch.mockImplementation(() => mockFeature)
     vastgoed.mockImplementation(() => {})
 

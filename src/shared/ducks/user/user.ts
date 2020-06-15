@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import { RootState } from '../../../reducers/root'
 
 export const REDUCER_KEY = 'user'
 export const AUTHENTICATE_USER_REQUEST = 'user/AUTHENTICATE_USER_REQUEST'
@@ -99,8 +100,7 @@ export default function userReducer(state = initialState, action: UserAction): U
  *
  * @param state The root state of the store.
  */
-// TODO: Replace 'any' type with 'RootState' type once store is fully typed.
-export const getUser = (state: any): UserState => state[REDUCER_KEY]
+export const getUser = (state: RootState): UserState => state[REDUCER_KEY]
 
 /**
  * Check if the user has attempted to authenticate, possibly resulting in either a successful or unsuccessfully authenticated state.

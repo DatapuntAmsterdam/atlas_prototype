@@ -1,17 +1,17 @@
 /* eslint-disable camelcase */
-import { LatLng, LatLngTuple } from 'leaflet'
-import React, { useEffect, useState, useCallback } from 'react'
 import { useStateRef } from '@datapunt/arm-core'
-import { v4 as uuidv4 } from 'uuid'
+import { LatLng, LatLngTuple } from 'leaflet'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import DataSelectionContext from './DataSelectionContext'
+import { v4 as uuidv4 } from 'uuid'
+import { getUserScopes } from '../../../shared/ducks/user/user'
+import { fetchWithToken } from '../../../shared/services/api/api'
 import config, {
   AuthScope,
   DataSelectionMapVisualizationType,
   DataSelectionType,
 } from './Components/config'
-import { getByUrl } from '../../../shared/services/api/api'
-import { getUserScopes } from '../../../shared/ducks/user/user'
+import DataSelectionContext from './DataSelectionContext'
 
 const generateParams = (data: { [key: string]: any }) =>
   Object.entries(data)
@@ -74,7 +74,7 @@ async function getMapVisualization(
   params: { [key: string]: string },
   type: DataSelectionType,
 ): Promise<MapVisualizationResponse> {
-  return getByUrl(`${config[type].endpointMapVisualization}?${generateParams(params)}`).then(
+  return fetchWithToken(`${config[type].endpointMapVisualization}?${generateParams(params)}`).then(
     ({ object_list: data, eigenpercelen, niet_eigenpercelen, extent }) => {
       switch (type) {
         case DataSelectionType.BAG:
@@ -134,47 +134,49 @@ async function getData(
   params: { [key: string]: string },
   type: DataSelectionType,
 ): Promise<DataSelectionResponse> {
-  return getByUrl(`${config[type].endpointData}?${generateParams(params)}`).then((result: any) => {
-    switch (type) {
-      case DataSelectionType.BAG:
-        return {
-          totalCount: result?.object_count,
-          results: result?.object_list.map(
-            ({
-              landelijk_id,
-              _openbare_ruimte_naam,
-              huisnummer,
-              huisnummer_toevoeging,
-              huisletter,
-            }: any) => ({
-              id: landelijk_id || uuidv4(),
-              name: `${_openbare_ruimte_naam} ${huisnummer}${huisletter && ` ${huisletter}`}${
-                huisnummer_toevoeging && `-${huisnummer_toevoeging}`
-              }`.trim(),
-            }),
-          ),
-        }
-      case DataSelectionType.HR:
-        return {
-          totalCount: result?.object_count,
-          results: result?.object_list.map(({ handelsnaam, vestiging_id }: any) => ({
-            id: vestiging_id || uuidv4(),
-            name: handelsnaam,
-          })),
-        }
-      case DataSelectionType.BRK:
-        return {
-          totalCount: result?.object_count,
-          results: result?.object_list.map(({ aanduiding, kadastraal_object_id }: any) => ({
-            id: kadastraal_object_id || uuidv4(),
-            name: aanduiding,
-          })),
-        }
+  return fetchWithToken(`${config[type].endpointData}?${generateParams(params)}`).then(
+    (result: any) => {
+      switch (type) {
+        case DataSelectionType.BAG:
+          return {
+            totalCount: result?.object_count,
+            results: result?.object_list.map(
+              ({
+                landelijk_id,
+                _openbare_ruimte_naam,
+                huisnummer,
+                huisnummer_toevoeging,
+                huisletter,
+              }: any) => ({
+                id: landelijk_id || uuidv4(),
+                name: `${_openbare_ruimte_naam} ${huisnummer}${huisletter && ` ${huisletter}`}${
+                  huisnummer_toevoeging && `-${huisnummer_toevoeging}`
+                }`.trim(),
+              }),
+            ),
+          }
+        case DataSelectionType.HR:
+          return {
+            totalCount: result?.object_count,
+            results: result?.object_list.map(({ handelsnaam, vestiging_id }: any) => ({
+              id: vestiging_id || uuidv4(),
+              name: handelsnaam,
+            })),
+          }
+        case DataSelectionType.BRK:
+          return {
+            totalCount: result?.object_count,
+            results: result?.object_list.map(({ aanduiding, kadastraal_object_id }: any) => ({
+              id: kadastraal_object_id || uuidv4(),
+              name: aanduiding,
+            })),
+          }
 
-      default:
-        return {} as any
-    }
-  })
+        default:
+          return {} as any
+      }
+    },
+  )
 }
 
 const DataSelectionProvider: React.FC = ({ children }) => {

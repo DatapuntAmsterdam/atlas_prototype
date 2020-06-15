@@ -1,4 +1,4 @@
-import { getByUrl } from '../../../shared/services/api/api'
+import { fetchWithToken } from '../../../shared/services/api/api'
 import getCenter from '../../../shared/services/geo-json/geo-json'
 
 export const PANORAMA_CONFIG = {
@@ -85,7 +85,7 @@ const imageData = (response) => {
 
 function fetchPanorama(url) {
   const promise = new Promise((resolve, reject) => {
-    getByUrl(url)
+    fetchWithToken(url)
       .then((json) => json._embedded.adjacencies)
       .then((data) => {
         resolve(imageData(data))
@@ -118,7 +118,7 @@ export function getImageDataByLocation(location, tags) {
   const limitResults = 'limit_results=1'
 
   const promise = new Promise((resolve, reject) => {
-    getByUrl(`${getLocationUrl}&${standardRadius}&${newestInRange}&${limitResults}`)
+    fetchWithToken(`${getLocationUrl}&${standardRadius}&${newestInRange}&${limitResults}`)
       .then((json) => json._embedded.panoramas[0])
       .then((data) => {
         if (data) {
@@ -127,7 +127,7 @@ export function getImageDataByLocation(location, tags) {
         } else {
           // there is no pano nearby search with a large radius and go to it
           resolve(
-            getByUrl(`${getLocationUrl}&${largeRadius}&${limitResults}`)
+            fetchWithToken(`${getLocationUrl}&${largeRadius}&${limitResults}`)
               .then((json) => json._embedded.panoramas[0])
               .then((_data) => getAdjacencies(_data._links.adjacencies.href, adjacenciesParams)),
           )

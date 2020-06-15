@@ -1,18 +1,7 @@
-import { generateParams, createUrlWithToken, getWithToken } from './api'
+import { createUrlWithToken, fetchWithToken } from './api'
 
 describe('Api service', () => {
-  describe('generateParams', () => {
-    it('should create a url query from an object', () => {
-      expect(
-        generateParams({
-          entryOne: 'foo',
-          entryTwo: 'bar',
-        }),
-      ).toEqual('entryOne=foo&entryTwo=bar')
-    })
-  })
-
-  describe('getWithToken', () => {
+  describe('fetchWithToken', () => {
     beforeEach(() => {
       fetch.resetMocks()
     })
@@ -24,14 +13,15 @@ describe('Api service', () => {
     it('should return the response from fetch', async () => {
       fetch.mockResponseOnce(JSON.stringify(response))
 
-      const result = await getWithToken(
+      const result = await fetchWithToken(
         'http://localhost/',
         {
           entryOne: 'foo',
           entryTwo: 'bar',
         },
-        false,
-        'token12345',
+        undefined,
+        undefined,
+        '',
       )
 
       expect(result).toEqual(response)
@@ -41,14 +31,15 @@ describe('Api service', () => {
       fetch.mockResponseOnce(JSON.stringify(response), { status: 503 })
 
       return expect(
-        getWithToken(
+        fetchWithToken(
           'http://localhost/',
           {
             entryOne: 'foo',
             entryTwo: 'bar',
           },
-          false,
-          'token12345',
+          undefined,
+          undefined,
+          '',
         ),
       ).rejects.toThrow('Service Unavailable')
     })
@@ -58,20 +49,20 @@ describe('Api service', () => {
 
       const controller = new AbortController()
       const { signal } = controller
-      await getWithToken(
+
+      await fetchWithToken(
         'http://localhost/',
         {
           entryOne: 'foo',
           entryTwo: 'bar',
         },
         signal,
+        undefined,
         'token12345',
       )
 
       expect('signal' in fetch.mock.calls[0][1]).toBe(true)
-      expect(fetch.mock.calls[0][1].headers).toEqual({
-        Authorization: 'Bearer token12345',
-      })
+      expect(fetch.mock.calls[0][1].headers.get('Authorization')).toEqual('Bearer token12345')
     })
   })
 
@@ -79,13 +70,13 @@ describe('Api service', () => {
     it('should create an url with authorization token', () => {
       const result = createUrlWithToken('http://localhost?foo=data', 'token1234')
 
-      expect(result).toEqual('http://localhost?foo=data&access_token=token1234')
+      expect(result).toEqual('http://localhost/?foo=data&access_token=token1234')
     })
 
     it('should create an url without authorization token', () => {
       const result = createUrlWithToken('http://localhost?foo=data', '')
 
-      expect(result).toEqual('http://localhost?foo=data')
+      expect(result).toEqual('http://localhost/?foo=data')
     })
   })
 })

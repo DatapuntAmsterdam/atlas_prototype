@@ -1,5 +1,5 @@
+import { fetchWithoutToken } from '../../shared/services/api/api'
 import queryStringParser from '../../shared/services/query-string-parser/query-string-parser'
-import { getByUri } from '../../shared/services/api/api'
 
 async function redirectToAddress(locationSearch: string): Promise<string> {
   const { postcode, huisnummer, huisletter = '', huisnummerToevoeging = '' } = queryStringParser(
@@ -11,7 +11,7 @@ async function redirectToAddress(locationSearch: string): Promise<string> {
     return ''
   }
 
-  const { count, _embedded: data } = await getByUri(
+  const { count, _embedded: data } = await fetchWithoutToken(
     `${process.env.API_ROOT}v1/bag/nummeraanduiding/?postcode=${postcode}&huisletter=${huisletter}&huisnummerToevoeging=${huisnummerToevoeging}&huisnummer=${huisnummer}`,
   )
 

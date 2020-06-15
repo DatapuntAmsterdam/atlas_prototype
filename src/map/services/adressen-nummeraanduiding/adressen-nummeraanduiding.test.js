@@ -1,13 +1,12 @@
+import { fetchWithToken } from '../../../shared/services/api/api'
+import mapFetch from '../map-fetch/map-fetch'
+import { adressenVerblijfsobject } from '../normalize/normalize'
 import normalize, {
   fetchByLigplaatsId,
-  fetchHoofdadresByLigplaatsId,
   fetchByStandplaatsId,
+  fetchHoofdadresByLigplaatsId,
   fetchHoofdadresByStandplaatsId,
 } from './adressen-nummeraanduiding'
-import { adressenVerblijfsobject } from '../normalize/normalize'
-import { getByUrl } from '../../../shared/services/api/api'
-
-import mapFetch from '../map-fetch/map-fetch'
 
 jest.mock('../../../shared/services/api/api')
 jest.mock('../normalize/normalize')
@@ -15,7 +14,7 @@ jest.mock('../map-fetch/map-fetch')
 
 describe('The adressen nummeraanduiding resource', () => {
   afterEach(() => {
-    getByUrl.mockReset()
+    fetchWithToken.mockReset()
     mapFetch.mockReset()
   })
 
@@ -78,7 +77,7 @@ describe('The adressen nummeraanduiding resource', () => {
   })
 
   it('can fetch nummeraanduidingen by ligplaats id, adds `id` attribute', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -108,12 +107,12 @@ describe('The adressen nummeraanduiding resource', () => {
       ])
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('ligplaats=abc123')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('ligplaats=abc123')
     return promise
   })
 
   it('can fetch the hoofdadres by ligplaats id', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -142,12 +141,12 @@ describe('The adressen nummeraanduiding resource', () => {
       })
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('ligplaats=abc123')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('ligplaats=abc123')
     return promise
   })
 
   it('fetching the hoofdadres by ligplaats id when not available', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -166,12 +165,12 @@ describe('The adressen nummeraanduiding resource', () => {
       expect(response).not.toBeDefined()
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('ligplaats=abc123')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('ligplaats=abc123')
     return promise
   })
 
   it('can fetch nummeraanduidingen by standplaats id, adds `id` attribute', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -201,12 +200,12 @@ describe('The adressen nummeraanduiding resource', () => {
       ])
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('standplaats=abc123')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('standplaats=abc123')
     return promise
   })
 
   it('can fetch the hoofdadres by standplaats id', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -235,12 +234,12 @@ describe('The adressen nummeraanduiding resource', () => {
       })
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('standplaats=abc123')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('standplaats=abc123')
     return promise
   })
 
   it('fetching the hoofdadres by standplaats id when not available', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -259,7 +258,7 @@ describe('The adressen nummeraanduiding resource', () => {
       expect(response).not.toBeDefined()
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('standplaats=abc123')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('standplaats=abc123')
     return promise
   })
 })

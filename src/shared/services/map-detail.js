@@ -1,10 +1,9 @@
-import getCenter from './geo-json/geo-json'
+import { fetchWithToken } from './api/api'
 import { rdToWgs84 } from './coordinate-reference-system/crs-converter'
-
-import { getByUrl } from './api/api'
+import getCenter from './geo-json/geo-json'
 
 export default function fetchByUri(uri, normalization) {
-  return getByUrl(uri).then((result) => {
+  return fetchWithToken(uri).then((result) => {
     const geometryCenter = result.geometrie && getCenter(result.geometrie)
     const wgs84Center = geometryCenter ? rdToWgs84(geometryCenter) : null
 

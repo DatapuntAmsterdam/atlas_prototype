@@ -1,4 +1,4 @@
-import { getByUrl } from '../api/api'
+import { fetchWithToken } from '../api/api'
 
 /** Matches the key (enum) of a type to a label (enumName) */
 function getOptions(propertyType) {
@@ -39,6 +39,6 @@ function getCatalogFilters(data) {
 }
 
 export default async function fetchApiSpecification() {
-  const data = await getByUrl(`${process.env.API_ROOT}dcatd/openapi`)
+  const data = await fetchWithToken(`${process.env.API_ROOT}dcatd/openapi`)
   return getCatalogFilters(data)
 }
