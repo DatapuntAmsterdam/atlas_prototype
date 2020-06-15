@@ -55,7 +55,6 @@ type Action =
   | { type: 'getMapLayers'; payload: Array<MapLayer> }
   | { type: 'setActiveMapLayers'; payload: Array<ActiveMapLayer> }
   | { type: 'setVisibleMapLayers'; payload: ActiveMapLayer }
-  | { type: 'setMapPanelVisible'; payload: boolean }
   | { type: 'setOverlays'; payload: Array<Overlay> }
   | { type: 'setLocation'; payload: Location }
   | { type: 'setDetailUrl'; payload: string }
@@ -113,11 +112,6 @@ const reducer = (state: MapState, action: Action): MapState => {
             overlay.id === action.payload.id ? action.payload.isVisible : overlay.isVisible,
         })),
       }
-    case 'setMapPanelVisible':
-      return {
-        ...state,
-        isMapPanelVisible: action.payload,
-      }
     case 'setOverlays':
       return {
         ...state,
@@ -148,6 +142,7 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
 
   function setActiveBaseLayer(payload: string) {
     dispatch({ type: 'setActiveBaseLayer', payload })
+    setParams('achtergrond', payload)
   }
 
   // Add auto type generation

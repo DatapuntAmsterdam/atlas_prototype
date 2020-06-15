@@ -38,7 +38,6 @@ export type MapState = {
   activeBaseLayer: string
   activeMapLayers: Array<ActiveMapLayer>
   overlays: Array<Overlay> // TODO: Add auto typegeneration
-  isMapPanelVisible: boolean
   zoomLevel: number
   viewCenter: Array<number>
   location?: Location
@@ -53,7 +52,6 @@ export type MapContextProps = {
   setLocation: (location: Location) => void
   setGeometry: (geometry: Geometry) => void
   setDetailUrl: (url: string) => void
-  toggleMapPanel: () => void
   getBaseLayers: () => void
   getPanelLayers: () => void
   getMapLayers: () => void
@@ -65,7 +63,6 @@ const DEFAULT_LNG = 4.8932945
 
 export const initialState: MapContextProps = {
   activeBaseLayer: 'topografie',
-  isMapPanelVisible: false,
   activeMapLayers: [],
   baseLayers: [],
   panelLayers: [],
@@ -79,7 +76,6 @@ export const initialState: MapContextProps = {
   setGeometry: () => {},
   setLocation: () => {},
   setDetailUrl: () => {},
-  toggleMapPanel: () => {},
   getBaseLayers: () => {},
   getPanelLayers: () => {},
   getMapLayers: () => {},

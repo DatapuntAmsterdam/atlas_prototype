@@ -62,11 +62,13 @@ const MapPanel = ({
           onMapPanelHandleToggle,
         }}
       >
-        <MapType
-          activeBaseLayer={activeBaseLayer}
-          baseLayers={mapBaseLayers}
-          onBaseLayerToggle={onBaseLayerToggle}
-        />
+        {mapBaseLayers && (
+          <MapType
+            activeBaseLayer={activeBaseLayer}
+            baseLayers={mapBaseLayers}
+            onBaseLayerToggle={onBaseLayerToggle}
+          />
+        )}
         {panelLayers.map(({ id, mapLayers, title }) => (
           <MapLegend
             key={id}
