@@ -37,7 +37,7 @@
     "@datapunt/arm-cluster": "^0.2.8-alpha.21",
     "@datapunt/arm-core": "^0.2.8-alpha.8",
     "@datapunt/arm-draw": "^0.2.8-alpha.8",
-    "@datapunt/arm-nontiled": "^0.2.8-alpha.8",
+    "@datapunt/arm-nontiled": "^0.2.8-alpha.21",
     "@datapunt/asc-assets": "^0.20.0",
     "@datapunt/asc-ui": "^0.20.1-alpha.11",
     "@datapunt/matomo-tracker-js": "0.1.5",
