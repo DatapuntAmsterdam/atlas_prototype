@@ -1,5 +1,6 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import HtmlWebpackMultiBuildPlugin from 'html-webpack-multi-build-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
@@ -269,6 +270,14 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           : false,
       }),
       ...(!options.singleBuild ? [new HtmlWebpackMultiBuildPlugin()] : []),
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          diagnosticOptions: {
+            semantic: true,
+            syntactic: true,
+          },
+        },
+      }),
     ],
   }
 }
