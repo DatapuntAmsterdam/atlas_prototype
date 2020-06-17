@@ -5,7 +5,7 @@ import { TileLayer } from '@datapunt/react-maps'
 import { NonTiledLayer } from '@datapunt/arm-nontiled'
 import { BaseLayer, constants, Map, mapPanelComponents } from '@datapunt/arm-core'
 import { PositionPerSnapPoint } from '@datapunt/arm-core/es/components/MapPanel/constants'
-import RDGeoJSON from './Components/RDGeoJSON'
+import GeoJSON from './Components/GeoJSON'
 import MapContext from './MapContext'
 import ViewerContainer from './Components/ViewerContainer'
 import PointSearchMarker from './Components/PointSearchMarker'
@@ -51,6 +51,7 @@ const MapPage: React.FC = () => {
   const {
     location,
     activeMapLayers,
+    activeBaseLayer,
     mapLayers,
     overlays,
     getOverlays,
@@ -93,8 +94,16 @@ const MapPage: React.FC = () => {
           load: () => setIsLoading(false),
         }}
       >
-        <BaseLayer />
-        {geometry && <RDGeoJSON geometry={geometry} />}
+        {showDrawTool &&
+          markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
+
+        <BaseLayer
+          baseLayer={
+            // TODO: Fix bug that prevents the client to set a value for the baseLayer
+            activeBaseLayer
+          }
+        />
+        {geometry && <GeoJSON geometry={geometry} />}
         {tmsLayers.map(({ url, overlayOptions: options, id }) => (
           <TileLayer
             key={id}

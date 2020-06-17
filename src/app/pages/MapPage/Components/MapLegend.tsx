@@ -39,7 +39,6 @@ const MapLegend: React.FC = ({ ...otherProps }) => {
     zoomLevel,
     setActiveMapLayers,
     setVisibleMapLayers,
-    toggleMapPanel,
   } = React.useContext(MapContext)
 
   // Get the user from the Redux state for now
@@ -74,7 +73,6 @@ const MapLegend: React.FC = ({ ...otherProps }) => {
         overlays={activeMapLayers}
         onLayerToggle={onLayerToggle}
         onLayerVisibilityToggle={setVisibleMapLayers}
-        onMapPanelToggle={toggleMapPanel}
         isMapPanelVisible
         zoomLevel={zoomLevel}
         user={user}
