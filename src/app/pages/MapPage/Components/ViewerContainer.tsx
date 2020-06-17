@@ -5,7 +5,6 @@ import { Overlay } from '@datapunt/arm-core/lib/components/MapPanel/constants'
 import { Zoom, mapPanelComponents } from '@datapunt/arm-core'
 import MapPreviewPanelContainer from '../MapPreviewPanelContainer'
 import DrawTool from './DrawTool'
-import { MarkerGroup } from '../types'
 import BaseLayerToggle from './BaseLayerToggle'
 import MapContext from '../MapContext'
 
@@ -38,8 +37,6 @@ type Props = {
   setCurrentOverlay: (overlay: Overlay) => void
   showDesktopVariant: boolean
   setShowDrawTool: (arg: boolean) => void
-  setMarkerGroups: (arg: MarkerGroup[]) => void
-  markerGroupsRef: React.RefObject<any>
   isLoading: boolean
 }
 
@@ -52,9 +49,8 @@ const ViewerContainer: React.FC<Props> = ({
   setCurrentOverlay,
   showDesktopVariant,
   setShowDrawTool,
-  setMarkerGroups,
-  markerGroupsRef,
   isLoading,
+  showDrawTool,
   ...otherProps
 }) => {
   const { detailUrl } = useContext(MapContext)
@@ -78,15 +74,7 @@ const ViewerContainer: React.FC<Props> = ({
           bottomLeft={
             <MapPanelLegendButton {...{ showDesktopVariant, currentOverlay, setCurrentOverlay }} />
           }
-          topRight={
-            <>
-              <DrawTool
-                onToggle={setShowDrawTool}
-                setMarkerGroups={setMarkerGroups}
-                markerGroupsRef={markerGroupsRef}
-              />
-            </>
-          }
+          topRight={<DrawTool onToggle={setShowDrawTool} />}
         />
       ) : (
         <StyledViewerContainer
@@ -107,11 +95,7 @@ const ViewerContainer: React.FC<Props> = ({
           }
           topRight={
             <>
-              <DrawTool
-                onToggle={setShowDrawTool}
-                setMarkerGroups={setMarkerGroups}
-                markerGroupsRef={markerGroupsRef}
-              />
+              <DrawTool isOpen={showDrawTool} onToggle={setShowDrawTool} />
               {detailUrl && <MapPreviewPanelContainer />}
             </>
           }

@@ -1,8 +1,10 @@
 import L, { LatLng, LatLngTuple, Polygon, Polyline } from 'leaflet'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useMapInstance } from '@datapunt/react-maps'
 import { DrawTool as DrawToolComponent } from '@datapunt/arm-draw'
-import getDataSelection from '../getDataSelection'
+import { mapPanelComponents, usePanToLatLng } from '@datapunt/arm-core'
+import { SnapPoint } from '../types'
+import DataSelectionContext from '../DataSelectionContext'
 
 type extraLayerTypes = {
   id: string
@@ -19,16 +21,22 @@ export type ExtendedLayer = PolygonType | PolylineType
 
 type MarkerGroup = {
   id: string
-  markers: LatLngTuple[]
+  markers: [
+    {
+      id: string
+      latLng: LatLngTuple[]
+    },
+  ]
 }
 
 type Props = {
   onToggle: (showDrawing: boolean) => void
   setMarkerGroups: (markerGroups: MarkerGroup[]) => void
+  setDataSelectionResults: (results: any) => void
   markerGroupsRef: React.RefObject<MarkerGroup[]>
 }
 
-const DATA_SELECTION_ENDPOINT = 'https://api.data.amsterdam.nl/dataselectie/bag/geolocation/'
+const { MapPanelContext } = mapPanelComponents
 
 const getTotalDistance = (latLngs: LatLng[]) => {
   return latLngs.reduce(
@@ -43,7 +51,7 @@ const getTotalDistance = (latLngs: LatLng[]) => {
   )
 }
 
-const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer) => {
+const setDistance = (layer: ExtendedLayer) => {
   const latLngs = layer
     .getLatLngs()
     // @ts-ignore
@@ -64,46 +72,49 @@ const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer) => {
       m: 1,
     })}, ${toolTipText}`
   }
-  if (toolTipText) {
-    layer.bindTooltip(toolTipText, { direction: 'bottom' }).openTooltip()
-  }
+
+  return toolTipText
 }
 
-const DrawTool: React.FC<Props> = ({ onToggle, setMarkerGroups, markerGroupsRef }) => {
+const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer, toolTipText) => {
+  layer.bindTooltip(toolTipText, { direction: 'bottom' }).openTooltip()
+}
+
+const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
+  const { setPositionFromSnapPoint, variant } = useContext(MapPanelContext)
+  const { fetchData, fetchMapVisualization, mapVisualization, removeDataSelection } = useContext(
+    DataSelectionContext,
+  )
   const mapInstance = useMapInstance()
-  const fetchData = async (latLngs: LatLng[][]) =>
-    getDataSelection(DATA_SELECTION_ENDPOINT, {
-      shape: JSON.stringify(latLngs[0].map(({ lat, lng }) => [lng, lat])),
-    })
+  const { pan } = usePanToLatLng()
 
-  const getMarkerGroup = async (layer: ExtendedLayer): Promise<null | void> => {
-    if (!(layer instanceof Polygon)) {
-      return null
-    }
-    try {
+  const getData = async (layer: ExtendedLayer, distanceText: string) => {
+    if (layer instanceof Polygon) {
+      setPositionFromSnapPoint(SnapPoint.Halfway)
       const latLngs = layer.getLatLngs() as LatLng[][]
-      const res = await fetchData(latLngs)
-
-      if (markerGroupsRef.current) {
-        setMarkerGroups([
-          ...markerGroupsRef.current.filter(({ id }) => id !== layer.id),
-          {
-            id: layer.id,
-            markers: res.markers,
-          },
-        ])
-      }
-    } catch (e) {
-      // Handle error
-      // eslint-disable-next-line no-console
-      console.warn(e)
+      const firstDrawingPoint = latLngs[0][0]
+      await fetchMapVisualization(latLngs, layer.id)
+      await fetchData(
+        layer.getLatLngs() as LatLng[][],
+        layer.id,
+        {
+          size: 20,
+          page: 1,
+        },
+        {
+          layer,
+          distanceText,
+        },
+      )
+      pan(firstDrawingPoint, variant === 'drawer' ? 'vertical' : 'horizontal', 20)
     }
-
-    return null
   }
 
   const editVertex = async (e: L.DrawEvents.EditVertex) => {
-    await getMarkerGroup(e.poly as ExtendedLayer)
+    const layer = e.poly as ExtendedLayer
+    const distanceText = setDistance(layer)
+    bindDistanceAndAreaToTooltip(layer, distanceText)
+    await getData(layer, distanceText)
   }
 
   useEffect(() => {
@@ -123,17 +134,19 @@ const DrawTool: React.FC<Props> = ({ onToggle, setMarkerGroups, markerGroupsRef 
   return (
     <DrawToolComponent
       onDrawEnd={async (layer: ExtendedLayer) => {
-        await getMarkerGroup(layer)
-        bindDistanceAndAreaToTooltip(layer)
+        const distanceText = setDistance(layer)
+        bindDistanceAndAreaToTooltip(layer, distanceText)
+        await getData(layer, distanceText)
       }}
       onDelete={(layersInEditMode: Array<ExtendedLayer>) => {
         const editLayerIds = layersInEditMode.map(({ id }) => id)
 
         // remove the markerGroups.
-        if (markerGroupsRef.current) {
-          setMarkerGroups(markerGroupsRef.current.filter(({ id }) => !editLayerIds.includes(id)))
+        if (mapVisualization) {
+          removeDataSelection(editLayerIds)
         }
       }}
+      isOpen={isOpen}
       onToggle={onToggle}
     />
   )

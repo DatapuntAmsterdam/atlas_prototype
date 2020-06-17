@@ -2,19 +2,20 @@ import React, { useEffect, useMemo, useState } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import { hooks } from '@datapunt/asc-ui'
 import { TileLayer } from '@datapunt/react-maps'
-// import { NonTiledLayer } from '@datapunt/arm-nontiled'
-import { BaseLayer, constants, Map, mapPanelComponents, useStateRef } from '@datapunt/arm-core'
-import { MarkerClusterGroup } from '@datapunt/arm-cluster'
+import { NonTiledLayer } from '@datapunt/arm-nontiled'
+import { BaseLayer, constants, Map, mapPanelComponents } from '@datapunt/arm-core'
 import { PositionPerSnapPoint } from '@datapunt/arm-core/es/components/MapPanel/constants'
-import GeoJSON from './Components/GeoJSON'
+import RDGeoJSON from './Components/RDGeoJSON'
 import MapContext from './MapContext'
 import ViewerContainer from './Components/ViewerContainer'
 import PointSearchMarker from './Components/PointSearchMarker'
-import { MarkerGroup, Overlay, SnapPoint } from './types'
+import { Overlay, SnapPoint } from './types'
 import PointSearchResults from './Components/PointSearchResults'
 import MapLegend from './Components/MapLegend'
 import handleMapClick from './utils/handleMapClick'
 import MAP_CONFIG from '../../../map/services/map.config'
+import DataSelectionProvider from './DataSelectionProvider'
+import DrawContent from './Components/DrawContent'
 
 const { MapPanel, MapPanelDrawer, MapPanelProvider } = mapPanelComponents
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
@@ -37,15 +38,14 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export const MAP_PANEL_SNAP_POSITIONS: PositionPerSnapPoint = {
-  [SnapPoint.Full]: '40%',
-  [SnapPoint.Halfway]: '40%',
+  [SnapPoint.Full]: '480px',
+  [SnapPoint.Halfway]: '480px',
   [SnapPoint.Closed]: '30px',
 }
 
 const MapPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [showDrawTool, setShowDrawTool] = useState(true)
-  const [markerGroups, setMarkerGroups, markerGroupsRef] = useStateRef<MarkerGroup[]>([])
+  const [showDrawTool, setShowDrawTool] = useState(false)
   const [currentOverlay, setCurrentOverlay] = useState<Overlay>(Overlay.None)
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const {
@@ -61,16 +61,13 @@ const MapPage: React.FC = () => {
   } = React.useContext(MapContext)
 
   const tmsLayers = overlays.filter((overlay) => overlay.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
-  // Todo: uncomment when loading nontiled lib issue in arm-nontiled is fixed
-  // const nonTmsLayers = overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
+  const nonTmsLayers = overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
 
   useEffect(() => {
-    if (!location) {
-      setCurrentOverlay(Overlay.None)
-    } else {
-      setCurrentOverlay(Overlay.Results)
+    if (currentOverlay !== Overlay.Legend) {
+      setCurrentOverlay(location || showDrawTool ? Overlay.Results : Overlay.None)
     }
-  }, [location])
+  }, [location, showDrawTool, currentOverlay])
 
   const MapPanelOrDrawer = useMemo(() => (showDesktopVariant ? MapPanel : MapPanelDrawer), [
     showDesktopVariant,
@@ -97,16 +94,13 @@ const MapPage: React.FC = () => {
           load: () => setIsLoading(false),
         }}
       >
-        {showDrawTool &&
-          markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
-
         <BaseLayer
           baseLayer={
             // TODO: Fix bug that prevents the client to set a value for the baseLayer
             activeBaseLayer
           }
         />
-        {geometry && <GeoJSON geometry={geometry} />}
+        {geometry && <RDGeoJSON geometry={geometry} />}
         {tmsLayers.map(({ url, overlayOptions: options, id }) => (
           <TileLayer
             key={id}
@@ -118,62 +112,63 @@ const MapPage: React.FC = () => {
             }}
           />
         ))}
-        {/* Todo: uncomment when loading nontiled lib issue in arm-nontiled is fixed */}
-        {/* {nonTmsLayers.map(({ url, overlayOptions: options, id }) => ( */}
-        {/*   <NonTiledLayer */}
-        {/*     key={id} */}
-        {/*     url={url} */}
-        {/*     options={options} */}
-        {/*     events={{ */}
-        {/*       loading: () => setIsLoading(true), */}
-        {/*       load: () => setIsLoading(false), */}
-        {/*     }} */}
-        {/*   /> */}
-        {/* ))} */}
+        {nonTmsLayers.map(({ url, overlayOptions: options, id }) => (
+          <NonTiledLayer
+            key={id}
+            url={url}
+            options={options}
+            events={{
+              loading: () => setIsLoading(true),
+              load: () => setIsLoading(false),
+            }}
+          />
+        ))}
         <MapPanelProvider
           mapPanelSnapPositions={MAP_PANEL_SNAP_POSITIONS}
           variant={showDesktopVariant ? 'panel' : 'drawer'}
           initialPosition={SnapPoint.Closed}
           topOffset={50}
         >
-          <MapPanelOrDrawer>
-            {!showDrawTool && (
-              <PointSearchMarker
-                onClick={(e) => handleMapClick(e, setLocation, setDetailUrl, overlays)}
-                currentLatLng={location}
-              />
-            )}
-            {currentOverlay === Overlay.Legend && (
-              <MapLegend
-                stackOrder={2}
-                animate
-                onClose={() => {
-                  setCurrentOverlay(location ? Overlay.Results : Overlay.None)
-                }}
-              />
-            )}
-            {location && (
-              <PointSearchResults
-                {...{
-                  setLocation,
-                  currentOverlay,
-                  location,
-                }}
-              />
-            )}
-            <MapLegend />
-          </MapPanelOrDrawer>
-          <ViewerContainer
-            {...{
-              setCurrentOverlay,
-              currentOverlay,
-              showDesktopVariant,
-              markerGroupsRef,
-              isLoading,
-              setShowDrawTool,
-              setMarkerGroups,
-            }}
-          />
+          <DataSelectionProvider>
+            <MapPanelOrDrawer>
+              {!showDrawTool && (
+                <PointSearchMarker
+                  onClick={(e) => handleMapClick(e, setLocation, setDetailUrl, overlays)}
+                  currentLatLng={location}
+                />
+              )}
+              {currentOverlay === Overlay.Legend && (
+                <MapLegend
+                  stackOrder={2}
+                  animate
+                  onClose={() => {
+                    setCurrentOverlay(location ? Overlay.Results : Overlay.None)
+                  }}
+                />
+              )}
+              {!showDrawTool && location && (
+                <PointSearchResults
+                  {...{
+                    setLocation,
+                    currentOverlay,
+                    location,
+                  }}
+                />
+              )}
+              <DrawContent {...{ showDrawTool, currentOverlay, setShowDrawTool }} />
+              <MapLegend stackOrder={1} />
+            </MapPanelOrDrawer>
+            <ViewerContainer
+              {...{
+                setCurrentOverlay,
+                currentOverlay,
+                showDesktopVariant,
+                isLoading,
+                setShowDrawTool,
+                showDrawTool,
+              }}
+            />
+          </DataSelectionProvider>
         </MapPanelProvider>
       </StyledMap>
     </MapView>
