@@ -56,6 +56,7 @@ import {
 } from '../shared/services/coordinate-reference-system'
 import PARAMETERS from './parameters'
 import paramsRegistry from './params-registry'
+import getParam from '../app/utils/getParam'
 
 const routesWithSearch = [
   routing.search.type,
@@ -212,10 +213,15 @@ export default paramsRegistry
     )
   })
   .addParameter(PARAMETERS.MAP_BACKGROUND, (routes) => {
-    routes.add(routesWithMapActive, MAP, 'baseLayer', {
-      defaultValue: mapInitialState.baseLayer,
-      selector: getActiveBaseLayer,
-    })
+    routes
+      .add(routesWithMapActive, MAP, 'baseLayer', {
+        defaultValue: mapInitialState.baseLayer,
+        selector: getActiveBaseLayer,
+      })
+      .add(routing.map.type, null, '', {
+        defaultValue: null,
+        selector: () => getParam(PARAMETERS.MAP_BACKGROUND),
+      })
   })
   .addParameter(PARAMETERS.PANORAMA_TAGS, (routes) => {
     routes.add(routing.panorama.type, PANORAMA, 'tags', {
@@ -357,26 +363,31 @@ export default paramsRegistry
     )
   })
   .addParameter(PARAMETERS.LAYERS, (routes) => {
-    routes.add(
-      [...routesWithMapActive, ...routesWithSearch],
-      MAP,
-      'overlays',
-      {
-        defaultValue: mapInitialState.overlays,
-        decode: (val) => decodeLayers(val),
-        selector: getMapOverlays,
-        encode: (selectorResult) => {
-          if (!selectorResult) {
-            return ''
-          }
+    routes
+      .add(
+        [...routesWithMapActive, ...routesWithSearch],
+        MAP,
+        'overlays',
+        {
+          defaultValue: mapInitialState.overlays,
+          decode: (val) => decodeLayers(val),
+          selector: getMapOverlays,
+          encode: (selectorResult) => {
+            if (!selectorResult) {
+              return ''
+            }
 
-          return selectorResult
-            .map((overlay) => `${overlay.id}:${overlay.isVisible ? 1 : 0}`)
-            .join('|')
+            return selectorResult
+              .map((overlay) => `${overlay.id}:${overlay.isVisible ? 1 : 0}`)
+              .join('|')
+          },
         },
-      },
-      false,
-    )
+        false,
+      )
+      .add(routing.map.type, null, '', {
+        defaultValue: null,
+        selector: () => getParam(PARAMETERS.LAYERS),
+      })
   })
   .addParameter(PARAMETERS.LOCATION, (routes) => {
     routes
@@ -418,6 +429,10 @@ export default paramsRegistry
           }
           return null
         },
+      })
+      .add(routing.map.type, null, '', {
+        defaultValue: null,
+        selector: () => getParam(PARAMETERS.LOCATION),
       })
   })
   .addParameter(PARAMETERS.MARKER, (routes) => {

@@ -133,7 +133,8 @@ class ParamsRegistry {
       add: (routes, reducerKey, stateKey, reducerObject, addHistory = true) => {
         ;[...(Array.isArray(routes) ? [...routes] : [routes])].forEach((route) => {
           if (!reducerKey || typeof stateKey === 'undefined') {
-            throw new Error(
+            // eslint-disable-next-line no-console
+            console.warn(
               `Param "${param}" with route "${route}" must contain a reducerKey and stateKey`,
             )
           }

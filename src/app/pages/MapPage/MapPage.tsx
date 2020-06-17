@@ -51,6 +51,7 @@ const MapPage: React.FC = () => {
   const {
     location,
     activeMapLayers,
+    activeBaseLayer,
     mapLayers,
     overlays,
     getOverlays,
@@ -98,7 +99,13 @@ const MapPage: React.FC = () => {
       >
         {showDrawTool &&
           markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
-        <BaseLayer />
+
+        <BaseLayer
+          baseLayer={
+            // TODO: Fix bug that prevents the client to set a value for the baseLayer
+            activeBaseLayer
+          }
+        />
         {geometry && <GeoJSON geometry={geometry} />}
         {tmsLayers.map(({ url, overlayOptions: options, id }) => (
           <TileLayer
