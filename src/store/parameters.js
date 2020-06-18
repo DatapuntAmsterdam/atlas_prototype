@@ -4,6 +4,7 @@ export default {
   MAP_BACKGROUND: 'achtergrond',
   PAGE: 'pagina',
   GEO: 'geo',
+  DRAWING_GEOMETRY: 'tekening',
   VIEW: 'modus',
   CATEGORY: 'categorie',
   VIEW_CENTER: 'center',

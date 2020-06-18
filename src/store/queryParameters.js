@@ -223,6 +223,12 @@ export default paramsRegistry
         selector: () => getParam(PARAMETERS.MAP_BACKGROUND),
       })
   })
+  .addParameter(PARAMETERS.DRAWING_GEOMETRY, (routes) => {
+    routes.add(routing.map.type, null, '', {
+      defaultValue: null,
+      selector: () => getParam(PARAMETERS.DRAWING_GEOMETRY),
+    })
+  })
   .addParameter(PARAMETERS.PANORAMA_TAGS, (routes) => {
     routes.add(routing.panorama.type, PANORAMA, 'tags', {
       defaultValue: panoramaInitialState.tags,
@@ -517,4 +523,32 @@ export function encodeLayers(values) {
   }
 
   return values.map(({ id, isVisible }) => `${id}:${isVisible ? 1 : 0}`).join('|')
+}
+
+export function decodeBounds(value) {
+  if (!value) {
+    return []
+  }
+
+  return value.split('|').map((entry) => {
+    const [coordinates] = entry.split(':')
+    const [lat, lng] = coordinates.split(',')
+
+    return {
+      lat,
+      lng,
+    }
+  })
+}
+
+export function encodeBounds(values) {
+  if (!values || !values.length > 0) {
+    return []
+  }
+
+  return values
+    .map(({ lat, lng }) => {
+      return `${lat},${lng}`
+    })
+    .join('|')
 }

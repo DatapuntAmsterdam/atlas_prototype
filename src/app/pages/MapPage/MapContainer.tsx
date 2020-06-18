@@ -9,6 +9,8 @@ import {
   decodeLayers,
   encodeLocation,
   decodeLocation,
+  encodeBounds,
+  decodeBounds,
 } from '../../../store/queryParameters'
 import getState from '../../../shared/services/redux/get-state'
 import MapPage from './MapPage'
@@ -21,6 +23,7 @@ import MapContext, {
   Location,
   Geometry,
   Overlay,
+  DrawingGeometry,
 } from './MapContext'
 import MAP_CONFIG from '../../../map/services/map.config'
 import { createUrlWithToken } from '../../../shared/services/api/api'
@@ -52,6 +55,7 @@ type Action =
   | { type: 'setLocation'; payload: Location }
   | { type: 'setDetailUrl'; payload: string }
   | { type: 'setGeometry'; payload: Geometry }
+  | { type: 'setDrawingGeometry'; payload: DrawingGeometry }
 
 const reducer = (state: MapState, action: Action): MapState => {
   switch (action.type) {
@@ -125,6 +129,11 @@ const reducer = (state: MapState, action: Action): MapState => {
         ...state,
         geometry: action.payload,
       }
+    case 'setDrawingGeometry':
+      return {
+        ...state,
+        drawingGeometry: action.payload,
+      }
     default:
       return state
   }
@@ -163,6 +172,12 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
     if (payload.type && payload.coordinates) {
       dispatch({ type: 'setGeometry', payload })
     }
+  }
+
+  function setDrawingGeometry(payload: DrawingGeometry) {
+    dispatch({ type: 'setDrawingGeometry', payload })
+
+    if (payload) setParams(PARAMETERS.DRAWING_GEOMETRY, encodeBounds(payload))
   }
 
   async function getBaseLayers() {
@@ -260,6 +275,7 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
   const location = getParam(PARAMETERS.LOCATION)
   const detailUrl = getParam('detailUrl')
   const baseLayer = getParam(PARAMETERS.MAP_BACKGROUND)
+  const drawingGeometry = getParam(PARAMETERS.DRAWING_GEOMETRY)
 
   React.useEffect(() => {
     if (baseLayer) setActiveBaseLayer(baseLayer)
@@ -267,7 +283,8 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
     // @ts-ignore fix the destruction of the location from the url
     if (location) setLocation(decodeLocation(location))
     if (detailUrl) setDetailUrl(detailUrl)
-  }, [baseLayer, activeMapLayers, location, detailUrl])
+    if (drawingGeometry) setDrawingGeometry(decodeBounds(drawingGeometry))
+  }, [baseLayer, activeMapLayers, location, detailUrl, drawingGeometry])
 
   // This can be refactored if the mapLayers are added in batches
   React.useEffect(() => {
@@ -284,6 +301,7 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
         setLocation,
         setDetailUrl,
         setGeometry,
+        setDrawingGeometry,
         getBaseLayers,
         getPanelLayers,
         getMapLayers,

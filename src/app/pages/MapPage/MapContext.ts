@@ -24,6 +24,8 @@ export type Geometry = {
   coordinates: Array<Array<string>>
 }
 
+export type DrawingGeometry = Array<{ lat: number; lng: number }>
+
 export type Overlay = {
   type: string
   url: string
@@ -43,6 +45,7 @@ export type MapState = {
   location?: Location
   detailUrl?: string
   geometry?: Geometry
+  drawingGeometry?: DrawingGeometry
 }
 
 export type MapContextProps = {
@@ -51,6 +54,7 @@ export type MapContextProps = {
   setVisibleMapLayers: (id: string, isVisible: boolean) => void
   setLocation: (location: Location) => void
   setGeometry: (geometry: Geometry) => void
+  setDrawingGeometry: (drawingGeometery: DrawingGeometry) => void
   setDetailUrl: (url: string) => void
   getBaseLayers: () => void
   getPanelLayers: () => void
@@ -74,6 +78,7 @@ export const initialState: MapContextProps = {
   setActiveMapLayers: () => {},
   setVisibleMapLayers: () => {},
   setGeometry: () => {},
+  setDrawingGeometry: () => {},
   setLocation: () => {},
   setDetailUrl: () => {},
   getBaseLayers: () => {},
