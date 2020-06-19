@@ -208,6 +208,26 @@ export default {
       features: ['parkeervakken/parkeervakken'],
     },
     {
+      ...categoryLabels.precarioShips,
+      slug: 'precariobelasting-woonschepen',
+      features: ['precariobelasting/woonschepen'],
+    },
+    {
+      ...categoryLabels.precarioComVessels,
+      slug: 'precariobelasting-bedrijfsvaartuigen',
+      features: ['precariobelasting/bedrijfsvaartuigen'],
+    },
+    {
+      ...categoryLabels.precarioPassVessels,
+      slug: 'precariobelasting-passagiersvaartuigen',
+      features: ['precariobelasting/passagiersvaartuigen'],
+    },
+    {
+      ...categoryLabels.precarioTerraces,
+      slug: 'precariobelasting-terrassen',
+      features: ['precariobelasting/terrassen'],
+    },
+    {
       ...categoryLabels.bekendmakingen,
       slug: 'bekendmakingen',
       features: ['vsd/bekendmakingen'],

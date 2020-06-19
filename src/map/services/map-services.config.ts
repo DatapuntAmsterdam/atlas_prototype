@@ -57,6 +57,10 @@ export const endpointTypes = {
   parkeervak: 'parkeervakken/parkeervakken/',
   parkeerzones: 'vsd/parkeerzones/',
   parkeerzonesUitz: 'vsd/parkeerzones_uitz/',
+  precarioShips: 'v1/precariobelasting/woonschepen/',
+  precarioComVessels: 'v1/precariobelasting/bedrijfsvaartuigen/',
+  precarioPassVessels: 'v1/precariobelasting/passagiersvaartuigen/',
+  precarioTerraces: 'v1/precariobelasting/terrassen/',
   reclamebelasting: 'vsd/reclamebelasting/',
   vastgoed: 'vsd/vastgoed',
   vestiging: 'handelsregister/vestiging/',
@@ -931,6 +935,133 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       title: 'Woonplaats',
       subTitle: result._display,
       items: [],
+    }),
+  },
+  [endpointTypes.precarioShips]: {
+    mapDetail: (result) => ({
+      title: categoryLabels.precarioShips.singular,
+      subTitle: result.display,
+      items: [
+        {
+          type: DetailResultItemType.Default,
+          label: 'Categorie',
+          value: result.categorie,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Jaar',
+          value: result.jaar,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Stadsdeel',
+          value: result.stadsdeel,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Tarief per jaar per m2',
+          value: result.tariefPerJaarPerM2,
+        },
+      ],
+    }),
+  },
+  [endpointTypes.precarioComVessels]: {
+    mapDetail: (result) => ({
+      title: categoryLabels.precarioComVessels.singular,
+      subTitle: result.display,
+      items: [
+        {
+          type: DetailResultItemType.Default,
+          label: 'Categorie',
+          value: result.categorie,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Jaar',
+          value: result.jaar,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Stadsdeel',
+          value: result.stadsdeel,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Tarief per jaar per m2',
+          value: result.tariefPerJaarPerM2,
+        },
+      ],
+    }),
+  },
+  [endpointTypes.precarioPassVessels]: {
+    mapDetail: (result) => ({
+      title: categoryLabels.precarioPassVessels.singular,
+      subTitle: result.display,
+      items: [
+        {
+          type: DetailResultItemType.Default,
+          label: 'Categorie',
+          value: result.categorie,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Jaar',
+          value: result.jaar,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Gebied',
+          value: result.gebied,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Tarief per jaar per m2',
+          value: result.tariefPerJaarPerM2,
+        },
+      ],
+    }),
+  },
+  [endpointTypes.precarioTerraces]: {
+    mapDetail: (result) => ({
+      title: categoryLabels.precarioTerraces.singular,
+      subTitle: result.display,
+      items: [
+        {
+          type: DetailResultItemType.Default,
+          label: 'Categorie',
+          value: result.categorie,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Jaar',
+          value: result.jaar,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Stadsdeel',
+          value: result.stadsdeel,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Gebied',
+          value: result.gebied,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Overdekt terras per jaar per m2',
+          value: result.tariefOverdektTerrasPerJaarPerM2,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Onverdekt terras per zomerseizoen per m2',
+          value: result.tariefOnoverdektTerrasPerZomerseizoenPerM2,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Onoverdekt terras per winterseizoen per m2',
+          value: result.tariefOnoverdektTerrasPerWinterseizoenPerM2,
+        },
+      ],
     }),
   },
 }

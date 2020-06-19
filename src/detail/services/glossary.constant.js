@@ -375,6 +375,22 @@ const GLOSSARY = {
       url: null,
       meta: [],
     },
+    PRECARIOSHIPS: {
+      ...categoryLabels.precarioShips,
+      description: '',
+    },
+    PRECARIOCOMVESSELS: {
+      ...categoryLabels.precarioComVessels,
+      description: '',
+    },
+    PRECARIOPASSVESSELS: {
+      ...categoryLabels.precarioPassVessels,
+      description: '',
+    },
+    PRECARIOTERRACES: {
+      ...categoryLabels.precarioTerraces,
+      description: '',
+    },
     ROLLAAG: {
       singular: 'Rollaag',
       plural: 'Rollagen',

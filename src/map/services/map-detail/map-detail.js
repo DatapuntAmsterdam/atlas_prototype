@@ -17,6 +17,10 @@ export const pageEndpointTypeMapping = {
   'grex/projecten/': 'v1/grex/projecten/',
   'parkeervakken/parkeervakken/': 'v1/parkeervakken/parkeervakken/',
   'bouwdossiers/bouwdossier/': 'iiif-metadata/bouwdossier/',
+  'precariobelasting/woonschepen/': 'v1/precariobelasting/woonschepen/',
+  'precariobelasting/bedrijfsvaartuigen/': 'v1/precariobelasting/bedrijfsvaartuigen/',
+  'precariobelasting/passagiersvaartuigen/': 'v1/precariobelasting/passagiersvaartuigen/',
+  'precariobelasting/terrassen/': 'v1/precariobelasting/terrassen/',
 }
 
 export const pageTypeToEndpoint = (type, subtype, id) => {

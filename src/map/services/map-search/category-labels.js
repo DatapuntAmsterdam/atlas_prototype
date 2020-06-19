@@ -99,6 +99,22 @@ const categoryLabels = {
     singular: 'Uitzondering parkeervergunninggebied',
     plural: 'Uitzondering parkeervergunninggebieden',
   },
+  precarioShips: {
+    singular: 'Precario woonschip',
+    plural: 'Precario woonschepen',
+  },
+  precarioComVessels: {
+    singular: 'Precario bedrijfsvaartuig',
+    plural: 'Precario bedrijfsvaartuigen',
+  },
+  precarioPassVessels: {
+    singular: 'Precario passagiersvaartuig',
+    plural: 'Precario passagiersvaartuigen',
+  },
+  precarioTerraces: {
+    singular: 'Precario terras',
+    plural: 'Precario terrassen',
+  },
   standplaats: {
     singular: 'Adres',
     plural: 'Adressen',
