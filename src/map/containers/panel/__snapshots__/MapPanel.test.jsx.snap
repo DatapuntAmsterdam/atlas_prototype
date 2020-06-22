@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MapPanel should render MapLegend if store contains active map layers 1`] = `
-<section
+<div
   aria-expanded={false}
   aria-label="Kaartlagen legenda, Kaartlagen tonen"
   className="
@@ -63,11 +63,11 @@ exports[`MapPanel should render MapLegend if store contains active map layers 1`
       />
     </MapPanelHandle>
   </div>
-</section>
+</div>
 `;
 
 exports[`MapPanel should render MapType and MapLayers 1`] = `
-<section
+<div
   aria-expanded={false}
   aria-label="Kaartlagen legenda, Kaartlagen tonen"
   className="
@@ -118,7 +118,7 @@ exports[`MapPanel should render MapType and MapLayers 1`] = `
       />
     </MapPanelHandle>
   </div>
-</section>
+</div>
 `;
 
 exports[`MapPanel should render the container 1`] = `

@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { ChevronUp } from '@datapunt/asc-assets'
+import PropTypes from 'prop-types'
+import React from 'react'
 import MapLegend from '../../components/legend/MapLegend'
 import MapPanelHandle from '../../components/panel-handle/MapPanelHandle'
 import MapType from '../../components/type/MapType'
@@ -21,7 +21,7 @@ const MapPanel = ({
   printMode,
   zoomLevel,
 }) => (
-  <section
+  <div
     aria-label={
       isMapPanelVisible
         ? 'Kaartlagen legenda, Kaartlagen verbergen'
@@ -84,7 +84,7 @@ const MapPanel = ({
         ))}
       </MapPanelHandle>
     </div>
-  </section>
+  </div>
 )
 
 MapPanel.defaultProps = {
