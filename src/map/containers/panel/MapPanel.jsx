@@ -20,7 +20,7 @@ const MapPanel = ({
   user = {},
   zoomLevel = 0,
 }) => (
-  <section
+  <div
     aria-label={
       isMapPanelVisible
         ? 'Kaartlagen legenda, Kaartlagen verbergen'
@@ -83,7 +83,7 @@ const MapPanel = ({
         ))}
       </MapPanelHandle>
     </div>
-  </section>
+  </div>
 )
 
 MapPanel.defaultProps = {

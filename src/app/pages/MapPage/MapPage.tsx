@@ -94,9 +94,6 @@ const MapPage: React.FC = () => {
           load: () => setIsLoading(false),
         }}
       >
-        {showDrawTool &&
-          markerGroups.map(({ markers, id }) => <MarkerClusterGroup key={id} markers={markers} />)}
-
         <BaseLayer
           baseLayer={
             // TODO: Fix bug that prevents the client to set a value for the baseLayer
@@ -142,7 +139,7 @@ const MapPage: React.FC = () => {
               )}
               {currentOverlay === Overlay.Legend && (
                 <MapLegend
-                  stackOrder={2}
+                  stackOrder={3}
                   animate
                   onClose={() => {
                     setCurrentOverlay(location ? Overlay.Results : Overlay.None)
@@ -159,7 +156,7 @@ const MapPage: React.FC = () => {
                 />
               )}
               <DrawContent {...{ showDrawTool, currentOverlay, setShowDrawTool }} />
-              <MapLegend stackOrder={1} />
+              <MapLegend />
             </MapPanelOrDrawer>
             <ViewerContainer
               {...{

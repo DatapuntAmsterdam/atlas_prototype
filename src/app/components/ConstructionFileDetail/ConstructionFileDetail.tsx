@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import Gallery from '../Gallery/Gallery'
 import getAddresses, { Address } from '../../../normalizations/construction-files/getAddresses'
 import { toDataDetail } from '../../../store/redux-first-router/actions'
+import DefinitionList, { DefinitionListItem } from '../DefinitionList'
 
 export type ConstructionFileImage = {
   filename: string
@@ -51,31 +52,6 @@ const SubHeading = styled(Heading)`
     hasMarginBottom ? themeSpacing(2) : 0};
 `
 
-const Table = styled.div`
-  width: 100%;
-  margin-bottom: ${themeSpacing(2)};
-`
-
-const TableRow = styled.div`
-  display: flex;
-  margin-bottom: ${themeSpacing(2)};
-
-  &:not(:last-child) {
-    border-bottom: 1px solid ${themeColor('tint', 'level4')};
-  }
-`
-
-const TableCell = styled.div`
-  padding: ${themeSpacing(1, 5)};
-  white-space: normal;
-  font-weight: 500;
-  width: 70%;
-
-  &:first-child {
-    width: 30%;
-  }
-`
-
 const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
   titel: title,
   documenten,
@@ -100,34 +76,16 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
         <Heading forwardedAs="h1">{title}</Heading>
       </ContentBlock>
 
-      <Table>
-        <TableRow>
-          <TableCell>Titel</TableCell>
-          <TableCell>{title}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Datering</TableCell>
-          <TableCell>{date}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Type</TableCell>
-          <TableCell>{fileType}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Dossiernummer</TableCell>
-          <TableCell>{fileNumber}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Openbaarheid</TableCell>
-          <TableCell>{access}</TableCell>
-        </TableRow>
+      <DefinitionList>
+        <DefinitionListItem term="Titel" description={title} />
+        <DefinitionListItem term="Datering" description={date} />
+        <DefinitionListItem term="Type" description={fileType} />
+        <DefinitionListItem term="Dossiernummer" description={fileNumber} />
+        <DefinitionListItem term="Openbaarheid" description={access} />
         {oloLiaanNumber && (
-          <TableRow>
-            <TableCell>OLO of liaan nummer</TableCell>
-            <TableCell>{oloLiaanNumber}</TableCell>
-          </TableRow>
+          <DefinitionListItem term="OLO of liaan nummer" description={oloLiaanNumber} />
         )}
-      </Table>
+      </DefinitionList>
 
       {documents.length &&
         documents.map(
@@ -148,26 +106,17 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
                 >{`${documentTitle} (${files.length})`}</SubHeading>
               </ContentBlock>
               {oloLiaanNumber && (
-                <Table>
+                <DefinitionList>
                   {description && (
-                    <TableRow>
-                      <TableCell>Beschrijving</TableCell>
-                      <TableCell>{description}</TableCell>
-                    </TableRow>
+                    <DefinitionListItem term="Beschrijving" description={description} />
                   )}
                   {filePath && (
-                    <TableRow>
-                      <TableCell>Oorspronkelijk pad</TableCell>
-                      <TableCell>{filePath}</TableCell>
-                    </TableRow>
+                    <DefinitionListItem term="Oorspronkelijk pad" description={filePath} />
                   )}
                   {documentAccess && (
-                    <TableRow>
-                      <TableCell>Openbaarheid</TableCell>
-                      <TableCell>{documentAccess}</TableCell>
-                    </TableRow>
+                    <DefinitionListItem term="Openbaarheid" description={documentAccess} />
                   )}
-                </Table>
+                </DefinitionList>
               )}
               <Gallery key={barcode} id={id} allFiles={files} access={documentAccess} />
             </>
@@ -178,15 +127,15 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
         <ContentBlock>
           <SubHeading forwardedAs="h3">Adressen</SubHeading>
           <List>
-            {addressList.map(({ id: addressId, label, type }) => (
+            {addressList.map(({ id: addressId, label: term, type }) => (
               <ListItem key={addressId}>
                 <Link
                   as={RouterLink}
                   variant="with-chevron"
                   to={toDataDetail([addressId, 'bag', type])}
-                  title={label}
+                  title={term}
                 >
-                  <span>{label}</span>
+                  <span>{term}</span>
                 </Link>
               </ListItem>
             ))}
