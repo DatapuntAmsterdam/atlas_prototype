@@ -41,7 +41,10 @@ describe('MapPanel', () => {
         activeBaseLayer=""
         activeMapLayers={[]}
         isMapPanelHandleVisible
-        mapBaseLayers={{}}
+        mapBaseLayers={{
+          aerial: [{}],
+          topo: [{}],
+        }}
         mapLayers={[]}
         overlays={[{}]}
         zoomLevel={10}

@@ -11,7 +11,7 @@ import { mapPanelComponents, usePanToLatLng } from '@datapunt/arm-core'
 import { themeColor, ascDefaultTheme } from '@datapunt/asc-ui'
 import { SnapPoint } from '../types'
 import DataSelectionContext from '../DataSelectionContext'
-import MapContext from '../MapContext'
+import MapContext, { SimpleGeometry } from '../MapContext'
 
 type MarkerGroup = {
   id: string
@@ -137,10 +137,9 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
     }
   }, [mapInstance])
 
-  const setInitialDrawing = (polybounds: Array<{ lat: number; lng: number }>) => {
-    function createPolyline(coordinates: Array<{ lat: number; lng: number }>): PolylineType {
-      // @ts-ignore
-      const bounds = coordinates.map(({ lat, lng }) => [lat, lng]) as LatLng[]
+  const setInitialDrawing = (polybounds: Array<SimpleGeometry>) => {
+    function createPolyline(coordinates: Array<SimpleGeometry>): PolylineType {
+      const bounds = (coordinates.map(({ lat, lng }) => [lat, lng]) as unknown) as LatLng[]
 
       return L.polyline(bounds, {
         color: themeColor('support', 'invalid')({ theme: ascDefaultTheme }),
@@ -148,9 +147,8 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
       }) as PolylineType
     }
 
-    function createPolygon(coordinates: Array<{ lat: number; lng: number }>): PolygonType {
-      // @ts-ignore
-      const bounds = coordinates.map(({ lat, lng }) => [lat, lng]) as LatLng[]
+    function createPolygon(coordinates: Array<SimpleGeometry>): PolygonType {
+      const bounds = (coordinates.map(({ lat, lng }) => [lat, lng]) as unknown) as LatLng[]
 
       return L.polygon(bounds, {
         color: themeColor('support', 'invalid')({ theme: ascDefaultTheme }),

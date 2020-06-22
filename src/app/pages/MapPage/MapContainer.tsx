@@ -50,7 +50,7 @@ type Action =
   | { type: 'getPanelLayers'; payload: Array<Object> }
   | { type: 'getMapLayers'; payload: Array<MapLayer> }
   | { type: 'setActiveMapLayers'; payload: Array<ActiveMapLayer> }
-  | { type: 'setVisibleMapLayers'; payload: ActiveMapLayer }
+  | { type: 'setVisibleMapLayer'; payload: ActiveMapLayer }
   | { type: 'setOverlays'; payload: Array<Overlay> }
   | { type: 'setLocation'; payload: Location }
   | { type: 'setDetailUrl'; payload: string }
@@ -99,7 +99,7 @@ const reducer = (state: MapState, action: Action): MapState => {
               })),
             ],
       }
-    case 'setVisibleMapLayers':
+    case 'setVisibleMapLayer':
       // TODO: simplify this in the new MapPanel
       return {
         ...state,
@@ -152,8 +152,8 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
     dispatch({ type: 'setActiveMapLayers', payload })
   }
 
-  function setVisibleMapLayers(id: string, isVisible: boolean) {
-    dispatch({ type: 'setVisibleMapLayers', payload: { id, isVisible: !isVisible } })
+  function setVisibleMapLayer(id: string, isVisible: boolean) {
+    dispatch({ type: 'setVisibleMapLayer', payload: { id, isVisible: !isVisible } })
     setParams('lagen', encodeLayers([...state.activeMapLayers, { id, isVisible: !isVisible }]))
   }
 
@@ -297,7 +297,7 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
         ...state,
         setActiveBaseLayer,
         setActiveMapLayers,
-        setVisibleMapLayers,
+        setVisibleMapLayer,
         setLocation,
         setDetailUrl,
         setGeometry,

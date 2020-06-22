@@ -47,7 +47,16 @@ exports[`MapPanel should render MapLegend if store contains active map layers 1`
     >
       <MapType
         activeBaseLayer=""
-        baseLayers={Object {}}
+        baseLayers={
+          Object {
+            "aerial": Array [
+              Object {},
+            ],
+            "topo": Array [
+              Object {},
+            ],
+          }
+        }
         onBaseLayerToggle={[Function]}
       />
       <MapLegend
@@ -113,7 +122,16 @@ exports[`MapPanel should render MapType and MapLayers 1`] = `
     >
       <MapType
         activeBaseLayer=""
-        baseLayers={Object {}}
+        baseLayers={
+          Object {
+            "aerial": Array [
+              Object {},
+            ],
+            "topo": Array [
+              Object {},
+            ],
+          }
+        }
         onBaseLayerToggle={[Function]}
       />
     </MapPanelHandle>

@@ -243,28 +243,6 @@ describe('ParamsRegistry singleton', () => {
   })
 
   describe('reducer settings passed to the route', () => {
-    it('should throw an error if reducerKey or stateKey is not given', () => {
-      expect(() =>
-        paramsRegistry.addParameter('foo', (routes) => {
-          routes.add('/bar')
-        }),
-      ).toThrow('Param "foo" with route "/bar" must contain a reducerKey and stateKe')
-
-      expect(() =>
-        paramsRegistry.addParameter('foo', (routes) => {
-          routes.add('/bar', 'reducerKey')
-        }),
-      ).toThrow('Param "foo" with route "/bar" must contain a reducerKey and stateKe')
-    })
-
-    it('should not throw an error when reducerKey and stateKey are set', () => {
-      expect(() =>
-        paramsRegistry.addParameter('foo', (routes) => {
-          routes.add('/bar', 'reducerKey', 'stateKey')
-        }),
-      ).not.toThrow()
-    })
-
     it('should throw an error when an key is set that is other than the allowed keys', () => {
       expect(() =>
         paramsRegistry.addParameter('foo', (routes) => {

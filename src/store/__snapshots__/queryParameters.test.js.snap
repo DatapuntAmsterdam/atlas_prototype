@@ -58,6 +58,15 @@ Object {
         "selector": [Function],
         "stateKey": "baseLayer",
       },
+      "atlasRouter/MAP": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": null,
+        "encode": [Function],
+        "reducerKey": null,
+        "selector": [Function],
+        "stateKey": "",
+      },
       "atlasRouter/PANORAMA": Object {
         "addHistory": true,
         "decode": [Function],
@@ -588,6 +597,15 @@ Object {
         "selector": [Function],
         "stateKey": "overlays",
       },
+      "atlasRouter/MAP": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": null,
+        "encode": [Function],
+        "reducerKey": null,
+        "selector": [Function],
+        "stateKey": "",
+      },
       "atlasRouter/MAP_SEARCH": Object {
         "addHistory": false,
         "decode": [Function],
@@ -712,6 +730,15 @@ Object {
         "reducerKey": "dataSearch",
         "selector": [Function],
         "stateKey": "geoSearch",
+      },
+      "atlasRouter/MAP": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": null,
+        "encode": [Function],
+        "reducerKey": null,
+        "selector": [Function],
+        "stateKey": "",
       },
       "atlasRouter/PANORAMA": Object {
         "addHistory": false,
@@ -1393,6 +1420,19 @@ Object {
         "reducerKey": "panorama",
         "selector": [Function],
         "stateKey": "tags",
+      },
+    },
+  },
+  "tekening": Object {
+    "routes": Object {
+      "atlasRouter/MAP": Object {
+        "addHistory": true,
+        "decode": [Function],
+        "defaultValue": null,
+        "encode": [Function],
+        "reducerKey": null,
+        "selector": [Function],
+        "stateKey": "",
       },
     },
   },

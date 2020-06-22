@@ -61,7 +61,7 @@ const MapPanel = ({
           onMapPanelHandleToggle,
         }}
       >
-        {mapBaseLayers?.aerial?.length && (
+        {mapBaseLayers?.aerial?.length && mapBaseLayers?.topo?.length && (
           <MapType
             activeBaseLayer={activeBaseLayer}
             baseLayers={mapBaseLayers}
