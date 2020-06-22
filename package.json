@@ -39,7 +39,7 @@
     "@datapunt/arm-draw": "^0.2.8-alpha.49",
     "@datapunt/arm-nontiled": "^0.2.8-alpha.49",
     "@datapunt/asc-assets": "^0.20.0",
-    "@datapunt/asc-ui": "^0.20.1-alpha.11",
+    "@datapunt/asc-ui": "^0.21.1",
     "@datapunt/matomo-tracker-js": "0.1.5",
     "@datapunt/matomo-tracker-react": "0.1.4",
     "@datapunt/react-maps": "^0.8.2-alpha.0",
