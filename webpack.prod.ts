@@ -1,4 +1,3 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import merge from 'webpack-merge'
 import { createConfig } from './webpack.common'
@@ -107,11 +106,5 @@ export default [
         },
       },
     },
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css',
-        chunkFilename: '[id].[contenthash].css',
-      }),
-    ],
   }),
 )

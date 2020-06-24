@@ -85,6 +85,9 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
     ...additionalOptions,
   }
 
+  const isProd = options.mode === 'production'
+  const isDev = options.mode === 'development'
+
   return {
     mode: options.mode,
     name: options.legacy ? 'legacy' : 'modern',
@@ -150,7 +153,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                hmr: options.mode === 'development',
+                hmr: isDev,
               },
             },
             {
@@ -185,7 +188,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
             {
               loader: '@svgr/webpack',
               options: {
-                svgo: options.mode === 'production',
+                svgo: isProd,
                 svgoConfig,
               },
             },
@@ -246,6 +249,8 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       }),
       new MiniCssExtractPlugin({
         esModule: true,
+        filename: isProd ? '[name].[contenthash].css' : '[name].css',
+        chunkFilename: isProd ? '[name].[contenthash].css' : '[name].css',
       }),
       new HtmlWebpackPlugin({
         inject: options.singleBuild,
@@ -259,7 +264,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         scripts: ['https://static.amsterdam.nl/fonts/mtiFontTrackingCode.min.js'],
         root: env.ROOT,
         minify:
-          options.mode === 'production'
+          isProd
             ? {
                 collapseWhitespace: true,
                 removeComments: true,
