@@ -12,6 +12,9 @@ import { themeColor, ascDefaultTheme } from '@datapunt/asc-ui'
 import { Overlay, SnapPoint } from '../types'
 import DataSelectionContext from '../DataSelectionContext'
 import MapContext, { SimpleGeometry } from '../MapContext'
+import getParam from '../../../utils/getParam'
+import { decodeBounds } from '../../../../store/queryParameters'
+import PARAMETERS from '../../../../store/parameters'
 
 type MarkerGroup = {
   id: string
@@ -162,10 +165,13 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
   }
 
   const initalDrawnItem = useMemo(() => {
-    if (drawingGeometry) return setInitialDrawing(drawingGeometry)
+    // Get the drawing geometry from the url here, before the context is updated to prevent newly drawm geometries to be pushed to the DrawToolComponent
+    const initialDrawingGeometry = getParam(PARAMETERS.DRAWING_GEOMETRY)
 
-    return ''
-  }, [drawingGeometry])
+    if (initialDrawingGeometry) return setInitialDrawing(decodeBounds(initialDrawingGeometry))
+
+    return null
+  }, [])
 
   return (
     <DrawToolComponent
