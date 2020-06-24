@@ -31,11 +31,13 @@
     <% } %>
 
     <% for (let key in htmlWebpackPlugin.files.css) { %>
-        <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet">
+      <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet">
     <% } %>
 
     <% for (let item of htmlWebpackPlugin.options.styles) { %>
-      <link href="<%= item %>" rel="stylesheet">
+      <!-- Make sure that non-critical styles are not blocking the page load -->
+      <link rel="preload" href="<%= item %>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="<%= item %>"></noscript>
     <% } %>
 
     <style>
