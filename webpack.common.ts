@@ -8,6 +8,16 @@ import path from 'path'
 import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin'
 import { Configuration, DefinePlugin } from 'webpack'
 
+
+/**
+ * Gets the absolute path to a module in the `node_modules` directory.
+ *
+ * @param name The name of the module, e.g. `lodash`.
+ */
+function modulePath(name: string) {
+  return `${path.resolve(__dirname, 'node_modules', name)}/`
+}
+
 // Some dependencies are written in ES2015+ syntax and will need to be included explicitly.
 // Adding them to this config will transpile and add polyfills to the code if necessary.
 const modernModules = [
@@ -22,7 +32,7 @@ const modernModules = [
   'body-scroll-lock',
   'escape-string-regexp',
   'redux-first-router',
-].map((entry) => `${path.resolve(__dirname, 'node_modules', entry)}/`)
+].map(modulePath)
 
 export interface CreateConfigOptions {
   /**
@@ -144,12 +154,12 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         {
           test: /\.(sc|c)ss$/,
           use: [
-            {
+            (isDev ? 'style-loader' : {
               loader: MiniCssExtractPlugin.loader,
               options: {
                 hmr: isDev,
               },
-            },
+            }),
             {
               loader: 'css-loader',
               options: {
@@ -161,7 +171,16 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
               loader: 'postcss-loader',
               options: {
                 sourceMap: true,
-                plugins: [require('autoprefixer')],
+                plugins: [
+                  require('autoprefixer'),
+                  ...(isProd ? [require('cssnano')({
+                    preset: ['default', {
+                      // Disable SVGO since some of our SVG assets aren't too great.
+                      // TODO: Can be removed once we remove the legacy Angular code.
+                      svgo: false,
+                    }],
+                  })] : [])
+                ],
               },
             },
             {
