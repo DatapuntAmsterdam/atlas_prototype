@@ -1,7 +1,7 @@
 module.exports = {
   displayName: 'unit',
   rootDir: './',
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!**/*.constant.js',
