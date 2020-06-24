@@ -22,26 +22,6 @@ const urls = {
   vestigingenTabel: `${routing.data.path}hr/vestigingen?${VIEW}=volledig&${LEGEND}=false&${ZOOM}=11`,
 }
 
-const queries = {
-  autoSuggestHeader: 'h4.qa-auto-suggest-header',
-  headerTitle: '.o-header__title',
-  headerSubTitle: '.o-header__subtitle',
-  infoNotification: '.notification--info',
-  keyValueList: '.c-key-value-list',
-  legendItem: '.map-legend__title',
-  legendNotification: '.map-legend__notification',
-  legendToggleItem: '.map-layers__toggle-title',
-  listItem: 'li',
-  mapLayersCategory: '.map-layers__category',
-  mapDetailResultHeaderSubTitle: '.map-detail-result__header-subtitle',
-  mapDetailResultItem: '.map-detail-result__item',
-  natuurlijkPersoon: 'dl.qa-natuurlijk-persoon',
-  nietNatuurlijkPersoon: 'dl.qa-niet-natuurlijk-persoon',
-  searchHeader: '.qa-search-header',
-  warningPanel: '.notification--info',
-  warningPanelAngular: '.c-panel--warning',
-}
-
 const values = {
   aantekeningen: 'Aantekeningen',
   bedrijvenInvloedsgebieden: 'Bedrijven - Invloedsgebieden',
@@ -67,4 +47,4 @@ const values = {
   zakelijkeRechten: 'Zakelijke rechten',
 }
 
-export { queries, urls, values }
+export { urls, values }

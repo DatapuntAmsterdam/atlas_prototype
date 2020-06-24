@@ -1,5 +1,5 @@
+import { fetchWithoutToken } from '../../shared/services/api/api'
 import queryStringParser from '../../shared/services/query-string-parser/query-string-parser'
-import { getByUri } from '../../shared/services/api/api'
 import redirectToAddress from './redirectToAddress'
 
 jest.mock('../../shared/services/query-string-parser/query-string-parser')
@@ -22,7 +22,7 @@ describe('getUnauthorizedLabels', () => {
       postcode: 1,
       huisnummer: 1,
     })
-    const getByUriMock = getByUri.mockReturnValue({
+    const fetchWithoutTokenMock = fetchWithoutToken.mockReturnValue({
       count: 2,
       _embedded: {},
     })
@@ -32,7 +32,7 @@ describe('getUnauthorizedLabels', () => {
     const output = await redirectToAddress(input)
 
     expect(queryStringParserMock).toHaveBeenCalledWith(input)
-    expect(getByUriMock).toHaveBeenCalled()
+    expect(fetchWithoutTokenMock).toHaveBeenCalled()
     expect(output).toEqual('')
   })
 
@@ -41,7 +41,7 @@ describe('getUnauthorizedLabels', () => {
       postcode: 1,
       huisnummer: 1,
     })
-    const getByUriMock = getByUri.mockReturnValue({
+    const fetchWithoutTokenMock = fetchWithoutToken.mockReturnValue({
       count: 1,
       _embedded: {
         nummeraanduiding: [{ verblijfsobjectId: 1 }],
@@ -53,7 +53,7 @@ describe('getUnauthorizedLabels', () => {
     const output = await redirectToAddress(input)
 
     expect(queryStringParserMock).toHaveBeenCalledWith(input)
-    expect(getByUriMock).toHaveBeenCalled()
+    expect(fetchWithoutTokenMock).toHaveBeenCalled()
     expect(output).toEqual('id1')
   })
 })

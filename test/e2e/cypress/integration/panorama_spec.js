@@ -10,16 +10,13 @@ describe('panorama module', () => {
     cy.route('POST', '/cms_search/graphql/').as('graphql')
     cy.route('/jsonapi/node/list/**').as('jsonapi')
     cy.hidePopup()
-
     cy.visit('/')
-
     cy.wait('@jsonapi')
-
     cy.get(HOMEPAGE.navigationBlockPanorama)
     cy.get(PANORAMA.panorama).should('not.exist')
-
     cy.get(HOMEPAGE.navigationBlockPanorama).click()
     cy.wait('@getResults')
+    cy.wait('@jsonapi')
   })
 
   describe('user should be able to navigate to the panorama from the homepage', () => {
@@ -39,7 +36,7 @@ describe('panorama module', () => {
           cy.get(PANORAMA.statusBarCoordinates).first().contains(coordinates).should('exist')
 
           // the click the first hotspot
-          cy.get('.qa-hotspot-button:visible').first().click()
+          cy.get('.qa-hotspot-button:visible').first().click({ force: true })
 
           cy.wait('@getResults')
           // the coordinates should be different
@@ -170,8 +167,7 @@ describe('panorama module', () => {
       cy.get(ADDRESS_PAGE.buttonMaximizeMap).last().click()
 
       // should show the openbareruimte again
-      cy.wait('@getPanoThumbnail')
-      cy.wait('@getResults')
+      cy.waitForGeoSearch()
       cy.get(ADDRESS_PAGE.panoramaThumbnail).should('exist').and('be.visible')
       cy.contains('Elandsgracht')
     })

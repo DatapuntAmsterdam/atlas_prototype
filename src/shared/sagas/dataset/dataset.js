@@ -1,21 +1,21 @@
-import { call, put, select, takeLatest, take, race } from 'redux-saga/effects'
+import { call, put, race, select, take, takeLatest } from 'redux-saga/effects'
+import formatDetailData from '../../../detail/services/data-formatter/data-formatter'
+import { getParts, getTemplateUrl } from '../../../detail/services/endpoint-parser/endpoint-parser'
+import { toNotFoundPage } from '../../../store/redux-first-router/actions'
 import {
-  FETCH_API_SPECIFICATION_REQUEST,
-  FETCH_API_SPECIFICATION_SUCCESS,
-  fetchApiSpecificationRequest,
   fetchApiSpecificationFailure,
+  fetchApiSpecificationRequest,
   fetchApiSpecificationSuccess,
   FETCH_API_SPECIFICATION_FAILURE,
+  FETCH_API_SPECIFICATION_REQUEST,
+  FETCH_API_SPECIFICATION_SUCCESS,
 } from '../../ducks/datasets/apiSpecification/apiSpecification'
 import { getApiSpecificationData } from '../../ducks/datasets/datasets'
+import { fetchDetailRequest, fetchDetailSuccess } from '../../ducks/detail/actions'
+import { getUserScopes } from '../../ducks/user/user'
+import { fetchWithToken } from '../../services/api/api'
 import getApiSpecification from '../../services/datasets-filters/datasets-filters'
 import { waitForAuthentication } from '../user/user'
-import { fetchDetailSuccess, fetchDetailRequest } from '../../ducks/detail/actions'
-import formatDetailData from '../../../detail/services/data-formatter/data-formatter'
-import { getUserScopes } from '../../ducks/user/user'
-import { getParts, getTemplateUrl } from '../../../detail/services/endpoint-parser/endpoint-parser'
-import { getByUrl } from '../../services/api/api'
-import { toNotFoundPage } from '../../../store/redux-first-router/actions'
 
 /* istanbul ignore next */
 export function* ensureCatalogFilters() {
@@ -38,7 +38,7 @@ export function* getDatasetData(endpoint) {
   const catalogFilters = yield select(getApiSpecificationData)
 
   try {
-    const data = yield getByUrl(`${endpoint}`)
+    const data = yield fetchWithToken(`${endpoint}`)
 
     const formatedData = {
       ...formatDetailData(data, category, subject, catalogFilters, scopes),

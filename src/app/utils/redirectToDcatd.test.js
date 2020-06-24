@@ -39,6 +39,6 @@ describe('redirectToDcatd', () => {
 
     redirectToDcatd(id)
 
-    expect(window.location.assign).toHaveBeenCalledWith(`/dcatd_admin#/datasets/${id}`)
+    expect(window.location.assign).toHaveBeenCalledWith(`/dcatd_admin/#/datasets/${id}`)
   })
 })

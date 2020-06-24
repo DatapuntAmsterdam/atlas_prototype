@@ -1,15 +1,15 @@
+import { fetchWithToken } from '../../../shared/services/api/api'
 import { fetchByPandId } from './monument'
-import { getByUrl } from '../../../shared/services/api/api'
 
 jest.mock('../../../shared/services/api/api')
 
 describe('The monument resource', () => {
   afterEach(() => {
-    getByUrl.mockReset()
+    fetchWithToken.mockReset()
   })
 
   it('can fetch monumenten by pand id', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -37,7 +37,7 @@ describe('The monument resource', () => {
       ])
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('betreft_pand=1')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('betreft_pand=1')
     return promise
   })
 })

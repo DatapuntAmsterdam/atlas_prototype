@@ -20,7 +20,7 @@ const MapPanel = ({
   user = {},
   zoomLevel = 0,
 }) => (
-  <section
+  <div
     aria-label={
       isMapPanelVisible
         ? 'Kaartlagen legenda, Kaartlagen verbergen'
@@ -61,7 +61,7 @@ const MapPanel = ({
           onMapPanelHandleToggle,
         }}
       >
-        {mapBaseLayers?.aerial?.length && (
+        {mapBaseLayers?.aerial?.length && mapBaseLayers?.topo?.length && (
           <MapType
             activeBaseLayer={activeBaseLayer}
             baseLayers={mapBaseLayers}
@@ -83,7 +83,7 @@ const MapPanel = ({
         ))}
       </MapPanelHandle>
     </div>
-  </section>
+  </div>
 )
 
 MapPanel.defaultProps = {

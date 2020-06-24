@@ -112,7 +112,7 @@ describe('Smoketest', () => {
       cy.get(MAP.mapSearchResultsItem).should('contain', 'Damrak').and('be.visible')
       // cy.get(MAP.mapSearchResultsCategoryHeader).should('contain', 'Winkelgebied')
       // cy.get(MAP.mapSearchResultsItem).should('contain', 'Dam/Magna Plaza').and('be.visible')
-      cy.get(MAP.mapSearchResultsCategoryHeader).should('contain', 'Bekendmaking')
+      // cy.get(MAP.mapSearchResultsCategoryHeader).should('contain', 'Bekendmaking')
       cy.get(MAP.mapSearchResultsCategoryHeader)
         .should('contain', 'Reclamebelastingtarief')
         .and('be.visible')
@@ -202,6 +202,7 @@ describe('Smoketest', () => {
       // Open vestigingen table, should see vestigingen
       cy.get(ADDRESS_PAGE.linkVestigingen).contains('In tabel weergeven').click()
       cy.wait('@getBuurtCombinatie')
+      cy.wait('@getHrData')
       cy.contains(
         'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.',
       ).should('not.be.visible')
@@ -241,7 +242,6 @@ describe('Smoketest', () => {
       cy.route('/dcatd/datasets/*').as('getDataset')
       cy.visit('/')
 
-      // Search keyword Oost
       cy.get(SEARCH.input).focus().type('Oost{enter}')
 
       cy.wait('@getResults')
@@ -270,12 +270,12 @@ describe('Smoketest', () => {
       // Open first dataset
       cy.get(DATA_SETS.dataSetLink).first().click()
       cy.wait('@getDataset')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Dataset').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Resources').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Details').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', "Thema's").and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Tags').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Licentie').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Dataset').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Resources').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Details').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', "Thema's").and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Tags').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Licentie').and('be.visible')
       cy.get(DATA_SETS.datasetItem).should('be.visible')
     })
     it('Should open a publication', () => {
@@ -323,12 +323,12 @@ describe('Smoketest', () => {
       cy.contains("Datasets met 'Oost' (")
       cy.go('back')
       cy.wait('@getDataset')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Dataset').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Resources').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Details').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', "Thema's").and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Tags').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Licentie').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Dataset').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Resources').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Details').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', "Thema's").and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Tags').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Licentie').and('be.visible')
       cy.go('back')
       cy.wait('@getResults')
       cy.contains("Datasets met 'Oost' (")

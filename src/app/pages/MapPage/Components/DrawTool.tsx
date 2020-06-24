@@ -9,9 +9,12 @@ import {
 } from '@datapunt/arm-draw'
 import { mapPanelComponents, usePanToLatLng } from '@datapunt/arm-core'
 import { themeColor, ascDefaultTheme } from '@datapunt/asc-ui'
-import { SnapPoint } from '../types'
+import { Overlay, SnapPoint } from '../types'
 import DataSelectionContext from '../DataSelectionContext'
-import MapContext from '../MapContext'
+import MapContext, { SimpleGeometry } from '../MapContext'
+import getParam from '../../../utils/getParam'
+import { decodeBounds } from '../../../../store/queryParameters'
+import PARAMETERS from '../../../../store/parameters'
 
 type MarkerGroup = {
   id: string
@@ -26,6 +29,7 @@ type MarkerGroup = {
 type Props = {
   isOpen: boolean
   onToggle: (showDrawing: boolean) => void
+  setCurrentOverlay: (overlay: Overlay) => void
   setMarkerGroups: (markerGroups: MarkerGroup[]) => void
   setDataSelectionResults: (results: any) => void
   markerGroupsRef: React.RefObject<MarkerGroup[]>
@@ -75,7 +79,7 @@ const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer, toolTipText: string)
   layer.bindTooltip(toolTipText, { direction: 'bottom' }).openTooltip()
 }
 
-const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
+const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
   const { setPositionFromSnapPoint, variant } = useContext(MapPanelContext)
   const { fetchData, fetchMapVisualization, mapVisualization, removeDataSelection } = useContext(
     DataSelectionContext,
@@ -88,8 +92,9 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
   const getData = async (layer: ExtendedLayer, distanceText: string) => {
     const latLngs = layer.getLatLngs()
     if (
-      drawingGeometry &&
-      drawingGeometry.map((latLng) => L.latLng(latLng)).toString() !== latLngs[0].toString()
+      !drawingGeometry ||
+      (drawingGeometry &&
+        drawingGeometry.map((latLng) => L.latLng(latLng)).toString() !== latLngs[0].toString())
     ) {
       setDrawingGeometry(latLngs[0])
     }
@@ -137,10 +142,9 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
     }
   }, [mapInstance])
 
-  const setInitialDrawing = (polybounds: Array<{ lat: number; lng: number }>) => {
-    function createPolyline(coordinates: Array<{ lat: number; lng: number }>): PolylineType {
-      // @ts-ignore
-      const bounds = coordinates.map(({ lat, lng }) => [lat, lng]) as LatLng[]
+  const setInitialDrawing = (polybounds: Array<SimpleGeometry>) => {
+    function createPolyline(coordinates: Array<SimpleGeometry>): PolylineType {
+      const bounds = (coordinates.map(({ lat, lng }) => [lat, lng]) as unknown) as LatLng[]
 
       return L.polyline(bounds, {
         color: themeColor('support', 'invalid')({ theme: ascDefaultTheme }),
@@ -148,9 +152,8 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
       }) as PolylineType
     }
 
-    function createPolygon(coordinates: Array<{ lat: number; lng: number }>): PolygonType {
-      // @ts-ignore
-      const bounds = coordinates.map(({ lat, lng }) => [lat, lng]) as LatLng[]
+    function createPolygon(coordinates: Array<SimpleGeometry>): PolygonType {
+      const bounds = (coordinates.map(({ lat, lng }) => [lat, lng]) as unknown) as LatLng[]
 
       return L.polygon(bounds, {
         color: themeColor('support', 'invalid')({ theme: ascDefaultTheme }),
@@ -162,10 +165,13 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
   }
 
   const initalDrawnItem = useMemo(() => {
-    if (drawingGeometry) return setInitialDrawing(drawingGeometry)
+    // Get the drawing geometry from the url here, before the context is updated to prevent newly drawm geometries to be pushed to the DrawToolComponent
+    const initialDrawingGeometry = getParam(PARAMETERS.DRAWING_GEOMETRY)
 
-    return ''
-  }, [drawingGeometry])
+    if (initialDrawingGeometry) return setInitialDrawing(decodeBounds(initialDrawingGeometry))
+
+    return null
+  }, [])
 
   return (
     <DrawToolComponent
@@ -183,9 +189,12 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen }) => {
           removeDataSelection(editLayerIds)
         }
       }}
-      isOpen={isOpen}
+      isOpen={isOpen || drawingGeometry}
       onToggle={onToggle}
       drawnItem={initalDrawnItem}
+      onDrawStart={() => {
+        setCurrentOverlay(Overlay.Results)
+      }}
     />
   )
 }

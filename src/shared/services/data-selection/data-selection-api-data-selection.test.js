@@ -1,6 +1,6 @@
 import * as api from '../api/api'
-import * as dataSelectionConfig from './data-selection-config'
 import { getMarkers, query } from './data-selection-api-data-selection'
+import * as dataSelectionConfig from './data-selection-config'
 
 let mockedApiResponse
 let mockedApiMarkersResponse
@@ -107,7 +107,7 @@ describe('DataSelection api', () => {
     }
 
     dataSelectionConfig.default = config
-    api.getByUrl = jest.fn((uri) => {
+    api.fetchWithToken = jest.fn((uri) => {
       if (uri === `${process.env.API_ROOT}zwembaden/markers/`) {
         return Promise.resolve(mockedApiMarkersResponse)
       }
@@ -118,7 +118,7 @@ describe('DataSelection api', () => {
   it('calls the api factory with the active filters, page and shape as searchParams', async () => {
     // Without active filters
     query(config, 'LIST', {}, 1, 'search', '[[3,12]]')
-    expect(api.getByUrl).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/`, {
+    expect(api.fetchWithToken).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/`, {
       page: 1,
       dataset: 'ves',
       shape: '[[3,12]]',
@@ -126,7 +126,7 @@ describe('DataSelection api', () => {
 
     // With active filters
     query(config, 'TABLE', { water: 'Verwarmd' }, 2)
-    expect(api.getByUrl).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/`, {
+    expect(api.fetchWithToken).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/`, {
       water: 'Verwarmd',
       page: 2,
       dataset: 'ves',
@@ -310,12 +310,15 @@ describe('DataSelection api', () => {
     it('calls the api factory with the active filters as searchParams', () => {
       // Without filters
       getMarkers(config, {})
-      expect(api.getByUrl).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/markers/`, {})
+      expect(api.fetchWithToken).toHaveBeenCalledWith(
+        `${process.env.API_ROOT}zwembaden/markers/`,
+        {},
+      )
 
       // With filters
       getMarkers(config, { water: 'Verwarmd' })
 
-      expect(api.getByUrl).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/markers/`, {
+      expect(api.fetchWithToken).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/markers/`, {
         water: 'Verwarmd',
       })
     })

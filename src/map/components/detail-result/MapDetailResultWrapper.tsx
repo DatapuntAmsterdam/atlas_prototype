@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { RootState } from '../../../reducers/root'
 import { isEmbedded } from '../../../shared/ducks/ui/ui'
 
 export interface MapDetailResultWrapperProps {
@@ -72,8 +73,7 @@ const MapDetailResultWrapper: React.FC<MapDetailResultWrapperProps> = ({
   </section>
 )
 
-// TODO: Replace 'any' type with 'RootState' type once store is fully typed.
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   isEmbed: isEmbedded(state),
 })
 

@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useState, useCallback } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import queryString from 'querystring'
 import { ChevronDown } from '@datapunt/asc-assets'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import styled, { css } from 'styled-components'
 import {
-  Paragraph,
   Checkbox,
   Icon,
   Label,
+  Paragraph,
   styles,
   themeColor,
   themeSpacing,
@@ -158,32 +158,30 @@ const MapLegend = ({
     }
   }
 
-  // Open the MapLegend and scroll it into the current view
-  const handleSetOpen = useCallback(
-    (open) => {
-      if (open && ref.current) {
-        ref.current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        })
-      }
-
-      setOpen(open)
-    },
-    [ref.current],
-  )
+  useEffect(() => {
+    if (isOpen && ref.current) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+  }, [ref.current, isOpen])
 
   // Check if some of the maplayers are opened on first render
-  const hasOpenMapLayers = mapLayers.some(
-    ({ isVisible, legendItems }) =>
-      isVisible === true ||
-      (isVisible === true &&
-        legendItems.some(({ isVisible: legendItemIsVisible }) => legendItemIsVisible === true)), // legenditems could be visible in another MapLegend
+  const hasOpenMapLayers = useMemo(
+    () =>
+      mapLayers.some(
+        ({ isVisible, legendItems }) =>
+          isVisible === true ||
+          (isVisible === true &&
+            legendItems.some(({ isVisible: legendItemIsVisible }) => legendItemIsVisible === true)), // legenditems could be visible in another MapLegend
+      ),
+    [mapLayers],
   )
 
   // Open the maplegend if some of the maplayers are opened
   useEffect(() => {
-    if (hasOpenMapLayers) handleSetOpen(true)
+    if (hasOpenMapLayers) setOpen(true)
   }, [hasOpenMapLayers])
 
   const handleOnChangeCollection = (e) => {
@@ -203,12 +201,12 @@ const MapLegend = ({
               .forEach((legendItem) => onLayerVisibilityToggle(legendItem.id, false))
           : null
       })
-      handleSetOpen(true)
+      setOpen(true)
     } else {
       activeMapLayers.forEach((mapLayer) => {
         handleLayerToggle(e.currentTarget.checked, mapLayer)
       })
-      handleSetOpen(e.currentTarget.checked)
+      setOpen(e.currentTarget.checked)
     }
   }
 
@@ -216,7 +214,7 @@ const MapLegend = ({
     <>
       {(!isPrintOrEmbedView ||
         (isPrintOrEmbedView && mapLayers.some(({ isEmbedded }) => isEmbedded))) && ( // Also display the collection title when maplayer is embedded
-        <LayerButton ref={ref} onClick={() => handleSetOpen(!isOpen)} isOpen={isOpen}>
+        <LayerButton ref={ref} onClick={() => setOpen(!isOpen)} isOpen={isOpen}>
           <TitleWrapper>
             <CollectionLabel key={title} htmlFor={title} label={title}>
               {!isPrintOrEmbedView ? (

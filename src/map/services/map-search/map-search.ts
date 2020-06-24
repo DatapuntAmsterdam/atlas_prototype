@@ -1,4 +1,5 @@
-import { getByUrl } from '../../../shared/services/api/api'
+import { UserState } from '../../../shared/ducks/user/user'
+import { fetchWithToken } from '../../../shared/services/api/api'
 import {
   fetchByPandId as fetchAddressByPandId,
   fetchHoofdadresByLigplaatsId,
@@ -9,7 +10,14 @@ import { fetchByPandId as fetchMonumentByPandId } from '../monument/monument'
 import { fetchByAddressId, fetchByPandId as fetchVestigingByPandId } from '../vestiging/vestiging'
 import transformResultByType from './transform-result-by-type'
 
-const endpoints = [
+interface Endpoint {
+  uri: string
+  radius?: number
+  authScope?: string
+  params?: { [key: string]: string }
+}
+
+const endpoints: Endpoint[] = [
   { uri: 'geosearch/nap/', radius: 25 },
   { uri: 'geosearch/bag/' },
   { uri: 'geosearch/munitie/' },
@@ -17,7 +25,7 @@ const endpoints = [
   {
     uri: 'geosearch/monumenten/',
     radius: 25,
-    extra_params: {
+    params: {
       monumenttype: 'isnot_pand_bouwblok',
     },
   },
@@ -28,8 +36,8 @@ const endpoints = [
   { uri: 'geosearch/bekendmakingen/', radius: 25 },
   { uri: 'geosearch/evenementen/', radius: 25 },
   { uri: 'geosearch/reclamebelasting/', radius: 25 },
-  { uri: 'geosearch/', radius: 25, extra_params: { datasets: 'fietspaaltjes' } },
-  { uri: 'geosearch/', radius: 25, extra_params: { datasets: 'grex,projecten' } },
+  { uri: 'geosearch/', radius: 25, params: { datasets: 'fietspaaltjes' } },
+  { uri: 'geosearch/', radius: 25, params: { datasets: 'grex,projecten' } },
 ]
 
 const relatedResourcesByType = {
@@ -114,46 +122,70 @@ export const fetchRelatedForUser = (user) => (data) => {
   )
 }
 
-export default function search(location, user) {
+export interface MapSearchResponse {
+  errors: boolean
+  results: MapSearchCategory[]
+}
+
+export interface MapSearchCategory {
+  type: string
+  categoryLabel: string
+  subCategories: MapSearchCategory[]
+  results: MapSearchResult[]
+}
+
+export interface MapSearchResult {
+  type: string
+  categoryLabel: string
+  label: string
+}
+
+export default function mapSearch(
+  location: { latitude: number; longitude: number },
+  user: UserState,
+): Promise<MapSearchResponse> {
   const errorType = 'error'
-  const allRequests = []
+  const allRequests: Promise<any>[] = []
 
   endpoints.forEach((endpoint) => {
-    const isInScope = endpoint.authScope && user.scopes && user.scopes.includes(endpoint.authScope)
+    const isInScope = !endpoint.authScope || user.scopes.includes(endpoint.authScope)
 
-    if (!endpoint.authScope || isInScope) {
-      const searchParams = {
-        ...endpoint.extra_params,
-        lat: location.latitude,
-        lon: location.longitude,
-        radius: endpoint.radius || 0,
-      }
-
-      const queryString = Object.keys(searchParams)
-        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
-        .join('&')
-
-      const request = getByUrl(`${process.env.API_ROOT}${endpoint.uri}?${queryString}`)
-        .then((result) => ({
-          features: getFeaturesFromResult(endpoint.uri, result),
-        }))
-        .then(fetchRelatedForUser(user))
-        .then(
-          (features) => features.map((feature) => transformResultByType(feature)),
-          (code) => ({
-            type: errorType,
-            code,
-          }),
-        )
-      allRequests.push(request)
+    if (!isInScope) {
+      return
     }
+
+    const searchParams = new URLSearchParams({
+      ...endpoint.params,
+      lat: location.latitude.toString(),
+      lon: location.longitude.toString(),
+      radius: (endpoint.radius ?? 0).toString(),
+    })
+
+    const request = fetchWithToken(
+      `${process.env.API_ROOT}${endpoint.uri}?${searchParams.toString()}`,
+    )
+      .then((result) => ({
+        features: getFeaturesFromResult(endpoint.uri, result),
+      }))
+      .then(fetchRelatedForUser(user))
+      .then(
+        (features) => features.map((feature: any) => transformResultByType(feature)),
+        (code) => ({
+          type: errorType,
+          code,
+        }),
+      )
+
+    allRequests.push(request)
   })
 
+  // ignore the failing calls
   const allResults = Promise.all(
     allRequests.map((p) =>
       p.then((result) => Promise.resolve(result)).catch(() => Promise.resolve([])),
     ),
-  ) // ignore the failing calls
+  )
+
   return allResults
     .then((results) => [].concat.apply([], [...results]))
     .then((results) => ({

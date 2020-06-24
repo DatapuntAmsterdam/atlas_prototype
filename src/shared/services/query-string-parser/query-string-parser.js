@@ -1,3 +1,4 @@
+// TODO: Replace this with the 'URLSearchParams' API.
 /**
  * Converts a query string to an object data structure.
  *

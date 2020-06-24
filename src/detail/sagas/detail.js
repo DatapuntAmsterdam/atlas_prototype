@@ -1,9 +1,9 @@
 import { select } from 'redux-saga/effects'
-import { getUserScopes } from '../../shared/ducks/user/user'
-import { getByUrl } from '../../shared/services/api/api'
-import { VIEW_MODE, getViewMode } from '../../shared/ducks/ui/ui'
 import fetchByGeoLocation from '../../map/services/vastgoed/vastgoed'
 import { getDetail } from '../../shared/ducks/detail/selectors'
+import { getViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui'
+import { getUserScopes } from '../../shared/ducks/user/user'
+import { fetchWithToken } from '../../shared/services/api/api'
 
 export default function* getDetailData(endpoint, mapDetail = {}) {
   const { type, subtype } = yield select(getDetail)
@@ -50,7 +50,7 @@ export default function* getDetailData(endpoint, mapDetail = {}) {
     }
 
     // When the detail pages for Angular are refactored, the data can be retrieved in a similar fashion as for the MapDetail pages
-    const data = yield getByUrl(endpoint)
+    const data = yield fetchWithToken(endpoint)
     const formatedData = {
       ...mapDetail,
       ...data,

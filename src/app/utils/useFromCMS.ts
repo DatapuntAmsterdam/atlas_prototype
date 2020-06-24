@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { To } from 'redux-first-router-link'
-import { getByUrl } from '../../shared/services/api/api'
-import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
 import useNormalizedCMSResults from '../../normalizations/cms/useNormalizedCMSResults'
+import { fetchWithToken } from '../../shared/services/api/api'
+import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
 
 export type CMSConfig = {
   endpoint: (id?: string) => string
@@ -51,7 +51,7 @@ function useFromCMS<T = CMSResultItem[]>(
       }
 
       const { fields } = config
-      const data = await getByUrl(endpoint)
+      const data = await fetchWithToken(endpoint)
 
       let result = data
       if (normalizeFromJSONApi) {

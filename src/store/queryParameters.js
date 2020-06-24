@@ -535,8 +535,8 @@ export function decodeBounds(value) {
     const [lat, lng] = coordinates.split(',')
 
     return {
-      lat,
-      lng,
+      lat: parseFloat(lat),
+      lng: parseFloat(lng),
     }
   })
 }

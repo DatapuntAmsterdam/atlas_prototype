@@ -940,7 +940,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.precarioShips]: {
     mapDetail: (result) => ({
       title: categoryLabels.precarioShips.singular,
-      subTitle: result.display,
+      subTitle: result.gebied,
       items: [
         {
           type: DetailResultItemType.Default,
@@ -968,7 +968,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.precarioComVessels]: {
     mapDetail: (result) => ({
       title: categoryLabels.precarioComVessels.singular,
-      subTitle: result.display,
+      subTitle: result.gebied,
       items: [
         {
           type: DetailResultItemType.Default,
@@ -996,7 +996,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.precarioPassVessels]: {
     mapDetail: (result) => ({
       title: categoryLabels.precarioPassVessels.singular,
-      subTitle: result.display,
+      subTitle: result.gebied,
       items: [
         {
           type: DetailResultItemType.Default,
@@ -1024,7 +1024,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.precarioTerraces]: {
     mapDetail: (result) => ({
       title: categoryLabels.precarioTerraces.singular,
-      subTitle: result.display,
+      subTitle: result.gebied,
       items: [
         {
           type: DetailResultItemType.Default,

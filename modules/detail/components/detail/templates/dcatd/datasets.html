@@ -5,17 +5,14 @@
             <h3 class="o-header__subtitle">
                 <span>Dataset</span>
                 <div class="o-header__buttongroup" ng-if="vm.apiData.results.canEditDataset">
-                    <dp-dcatd-button id="{{ vm.apiData.results.editDatasetId }}" type="wijzigen">
+                    <dp-dcatd-button id="{{ vm.apiData.results.editDatasetId }}" type="wijzigen" class="dcatd-button--edit">
                       Wijzigen
                       <span class="u-sr-only">Wijzigen</span>
                     </dp-dcatd-button>
-
-                    <dp-link
-                       type="atlasRouter/DATASETS"
-                       class-name="c-tab-header__reset-button qa-go-to-catalogus">
-                       Alle datasets tonen
-                       <span class="u-sr-only">Alle datasets tonen</span>
-                    </dp-link>
+                    <dp-dcatd-button id="" type="tonen" class="dcatd-button--list">
+                      Alle datasets tonen
+                      <span class="u-sr-only">Alle datasets tonen</span>
+                    </dp-dcatd-button>
                 </div>
             </h3>
             <h2 class="o-header__title u-margin__bottom--3 ">{{vm.apiData.results["dct:title"]}}</h2>

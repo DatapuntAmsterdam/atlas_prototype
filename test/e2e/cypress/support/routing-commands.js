@@ -21,7 +21,7 @@ Cypress.Commands.add('defineAddressDetailRoutes', () => {
   cy.route('/panorama/thumbnail/*').as('getPanorama')
   cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen')
   cy.route('/monumenten/monumenten/*').as('getMonument')
-  cy.route('/bouwdossiers/bouwdossier/?verblijfsobject*').as('getBouwdossier')
+  cy.route('*/bouwdossier/*').as('getBouwdossier')
 })
 
 Cypress.Commands.add('defineSearchRoutes', () => {
@@ -62,6 +62,7 @@ Cypress.Commands.add('waitForAdressDetail', () => {
   cy.wait('@getPanorama')
   cy.wait('@getSitueringen')
   cy.wait('@getMonument')
+  cy.wait('@getBouwdossier')
 })
 
 Cypress.Commands.add('waitForSearch', (type = 'EMPLOYEE_PLUS') => {

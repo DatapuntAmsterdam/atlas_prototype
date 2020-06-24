@@ -1,14 +1,13 @@
-import normalize, { fetchByPandId, fetchByAddressId } from './vestiging'
+import { fetchWithToken } from '../../../shared/services/api/api'
 import mapFetch from '../map-fetch/map-fetch'
-
-import { getByUrl } from '../../../shared/services/api/api'
+import normalize, { fetchByAddressId, fetchByPandId } from './vestiging'
 
 jest.mock('../../../shared/services/api/api')
 jest.mock('../map-fetch/map-fetch')
 
 describe('The vestiging resource', () => {
   afterEach(() => {
-    getByUrl.mockReset()
+    fetchWithToken.mockReset()
   })
 
   it('normalizes a vestiging', async () => {
@@ -45,7 +44,7 @@ describe('The vestiging resource', () => {
   })
 
   it('can fetch a vestiging by pand id', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -73,12 +72,12 @@ describe('The vestiging resource', () => {
       ])
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('pand=1')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('pand=1')
     return promise
   })
 
   it('can fetch a vestiging by address id', () => {
-    getByUrl.mockReturnValueOnce(
+    fetchWithToken.mockReturnValueOnce(
       Promise.resolve({
         results: [
           {
@@ -106,7 +105,7 @@ describe('The vestiging resource', () => {
       ])
     })
 
-    expect(getByUrl.mock.calls[0][0]).toContain('nummeraanduiding=0')
+    expect(fetchWithToken.mock.calls[0][0]).toContain('nummeraanduiding=0')
     return promise
   })
 })

@@ -90,7 +90,7 @@ export default {
     {
       uri: 'geosearch/monumenten/',
       radius: 25,
-      extra_params: {
+      params: {
         monumenttype: 'isnot_pand_bouwblok',
       },
     },

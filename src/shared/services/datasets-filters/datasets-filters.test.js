@@ -4,7 +4,7 @@ import mockApiData from './datasets-filters.mock'
 describe('fetchApiSpecification', () => {
   const state = {
     user: {
-      accessToken: null,
+      accessToken: '',
     },
   }
   global.reduxStore = {

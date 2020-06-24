@@ -1,10 +1,9 @@
-import getCenter from '../../../shared/services/geo-json/geo-json'
+import { fetchWithToken } from '../../../shared/services/api/api'
 import { rdToWgs84 } from '../../../shared/services/coordinate-reference-system/crs-converter'
-
-import { getByUrl } from '../../../shared/services/api/api'
+import getCenter from '../../../shared/services/geo-json/geo-json'
 
 export default async function fetchByUri(uri, detail = false, normalization = false) {
-  const result = await getByUrl(uri)
+  const result = await fetchWithToken(uri)
 
   // as some APIs return data in a different format than the frontend wants to display
   // some API results are normalized or even enhanced with results from additional API calls

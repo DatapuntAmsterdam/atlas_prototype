@@ -8,7 +8,6 @@ export const ADDRESS_PAGE = {
   iconMapMarker: '.leaflet-marker-icon',
   linkVestigingen: '.qa-hr',
   mapContainer: '.qa-map-container',
-  mapDetailResultHeader: '.map-detail-result__header-subtitle',
   notification: '.notification__content',
   panoramaThumbnail: 'img.c-panorama-thumbnail--img',
   resultsList: 'ul.o-list',
@@ -45,8 +44,10 @@ export const DATA_SEARCH = {
   searchHeader: '.qa-search-header',
   searchResultsGrid: '.c-search-results',
   searchResultsCategory: '[class*=SearchHeading__StyledHeading]',
-  searchResultsCard: '[class*=EditorialCard__StyledHeading]',
-  searchResultsLink: '[class*="StyledParagraphLink"]',
+  searchResultsDatasetCard: '[class*=DatasetCard__StyledHeading]',
+  searchResultsEditorialCard: '[class*=EditorialCard__StyledHeading]',
+  searchResultsLink: '[class*=LinkStyle__LinkContent]',
+  searchResultsParagraphLink: '[class*="StyledParagraphLink"]',
   warningPanel: '.c-panel',
   warningPanelAngular: '.c-panel--warning',
 }
@@ -63,7 +64,6 @@ export const DATA_SELECTION_TABLE = {
 export const DATA_SETS = {
   datasetItem: '.resources-type__content-item',
   dataSetLink: '[data-test=DatasetCard]',
-  headerDataset: '.o-header__subtitle',
 }
 
 export const DRAWING = {
@@ -158,6 +158,18 @@ export const MAP = {
   mapSelectedObject: '.leaflet-interactive',
   mapZoomIn: '.leaflet-control-zoom-in',
   toggleMapPanel: '.map-panel__toggle',
+  toggleFullScreen: '.qa-toggle-fullscreen',
+}
+
+export const MAP_LAYERS = {
+  checkboxOnroerendeZaken: '#Onroerende zaken',
+  checkboxOZKadastralePerceelsgrenzen: '#',
+  checkboxOZKadastraleEigenaren: '#',
+  checkboxOZKadastraleErfpachtuitgevers: '#',
+  checkboxOZGemeentelijkEigendom: '#',
+  checkboxOZGemeentelijkeBeperkingen: '#',
+  checkboxOZPandenOuderDan1960: '#',
+  checkboxOZPandenNaarBouwjaar: '#',
 }
 
 export const PANORAMA = {
@@ -195,4 +207,5 @@ export const TABLES = {
   tableValue: '.qa-table-value',
   warningPanel: '.c-panel__paragraph',
   vestigingLink: '.qa-table-link',
+  zakelijkRecht: '.qa-kadastraal-subject-recht',
 }

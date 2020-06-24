@@ -1,16 +1,16 @@
+import { Heading, Row, themeSpacing } from '@datapunt/asc-ui'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { Heading, themeSpacing, Row } from '@datapunt/asc-ui'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import styled from 'styled-components'
+import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
 import { getFileName, getFileUrl } from '../../../shared/ducks/files/selectors'
 import { getUser } from '../../../shared/ducks/user/user'
-import ConstructionFileDetail from '../../components/ConstructionFileDetail/ConstructionFileDetail'
+import { fetchWithToken } from '../../../shared/services/api/api'
 import { getLocationPayload } from '../../../store/redux-first-router/selectors'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
+import ConstructionFileDetail from '../../components/ConstructionFileDetail/ConstructionFileDetail'
 import ErrorAlert from '../../components/ErrorAlert/ErrorAlert'
-import { getByUrl } from '../../../shared/services/api/api'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 
 const ImageViewer = React.lazy(() =>
@@ -39,7 +39,7 @@ const ConstructionFilesContainer = ({ fileName, fileUrl, endpoint }) => {
   async function fetchConstructionFiles() {
     setLoading(true)
     try {
-      const data = await getByUrl(endpoint)
+      const data = await fetchWithToken(endpoint)
       setResults(data)
     } catch (e) {
       setErrorMessage(ERROR_MESSAGE)

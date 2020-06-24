@@ -96,6 +96,7 @@ describe('datasets module', () => {
       cy.get(`#${CSS.escape('theme-theme:bestuur')}`).check()
 
       // Count amount of Datasets again and check against previous
+      cy.wait('@graphql')
       cy.wait(500)
       cy.get('h1')
         .contains('Datasets')
@@ -153,12 +154,12 @@ describe('datasets module', () => {
         .click()
 
       // Check if dataset is shown
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Dataset').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Resources').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Details').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', "Thema's").and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Tags').and('be.visible')
-      cy.get(DATA_SETS.headerDataset).should('contain', 'Licentie').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Dataset').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Resources').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Details').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', "Thema's").and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Tags').and('be.visible')
+      cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Licentie').and('be.visible')
       cy.get(DATA_SETS.datasetItem).should('be.visible')
 
       cy.get(SEARCH.input).type('Vergunningen{enter}')
@@ -168,7 +169,7 @@ describe('datasets module', () => {
     })
   })
 
-  describe('Create, change and delete a dataset', () => {
+  describe.skip('Create, change and delete a dataset', () => {
     beforeEach(() => {
       cy.server()
       cy.hidePopup()

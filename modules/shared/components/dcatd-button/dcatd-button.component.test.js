@@ -58,7 +58,7 @@ describe('The dp-dcatd-button component', () => {
     )
 
     expect($window.location.assign).toHaveBeenCalledWith(
-      '/dcatd_admin#/datasets/id-van-te-wijzigen-dataset',
+      '/dcatd_admin/#/datasets/id-van-te-wijzigen-dataset',
     )
   })
 })

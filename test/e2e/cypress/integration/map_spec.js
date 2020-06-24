@@ -292,8 +292,6 @@ describe('map module', () => {
       cy.get(MAP.imageLayer).eq(1).should('have.attr', 'style', 'opacity: 0; visibility: visible;')
       cy.get(MAP.imageLayer).eq(2).should('have.attr', 'style', 'opacity: 0; visibility: visible;')
 
-      // TODO
-
       cy.get(MAP.iconMapMarker).should('not.be.visible')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().type('Spuistraat 59A')

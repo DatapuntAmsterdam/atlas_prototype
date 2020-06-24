@@ -1,5 +1,5 @@
+import { fetchWithToken } from '../../../shared/services/api/api'
 import fetchByUri from './map-fetch'
-import { getByUrl } from '../../../shared/services/api/api'
 
 jest.mock('../../../shared/services/api/api')
 jest.mock('../../../shared/services/geo-json/geo-json')
@@ -15,12 +15,12 @@ describe('map-fetch', () => {
       _display: 'label',
     }
 
-    getByUrl.mockImplementation(() => mockResult)
+    fetchWithToken.mockImplementation(() => mockResult)
     const detail = jest.fn()
 
     const result = await fetchByUri(uri, detail)
 
-    expect(getByUrl).toHaveBeenCalledWith(uri)
+    expect(fetchWithToken).toHaveBeenCalledWith(uri)
     expect(detail).toHaveBeenCalledWith(mockResult)
 
     expect(result).toMatchObject({ geometrie: 'geometrie', label: 'label', location: [0, 1] })
@@ -39,7 +39,7 @@ describe('map-fetch', () => {
       _display: 'label',
     }
 
-    getByUrl.mockImplementation(() => mockResult)
+    fetchWithToken.mockImplementation(() => mockResult)
     // The detail function returns a further normalized result
     const detail = jest.fn((result) => ({ field: result.field }))
 

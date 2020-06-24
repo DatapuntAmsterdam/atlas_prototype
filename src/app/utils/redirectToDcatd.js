@@ -10,7 +10,7 @@ function redirectToDcatd(id) {
     `${document.location.origin}${routing.datasetSearch.path}`,
   )
 
-  window.location.assign(`/dcatd_admin#/datasets/${id}`)
+  window.location.assign(`/dcatd_admin/#/datasets/${id}`)
 }
 
 export default redirectToDcatd

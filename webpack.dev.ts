@@ -18,7 +18,7 @@ export default [createConfig({ legacy: false, singleBuild: true, mode: 'developm
         port: 3000,
         proxy: {
           '/dcatd_admin': {
-            target: 'http://localhost:3000',
+            target: 'http://localhost:3001',
             secure: false,
             changeOrigin: true,
             logLevel: 'debug',

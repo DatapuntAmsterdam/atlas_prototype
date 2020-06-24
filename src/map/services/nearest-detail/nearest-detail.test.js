@@ -1,5 +1,5 @@
+import { fetchWithToken } from '../../../shared/services/api/api'
 import fetchNearestDetail, { sortResults } from './nearest-detail'
-import { getByUrl } from '../../../shared/services/api/api'
 
 jest.mock('../../../shared/services/api/api')
 
@@ -53,7 +53,7 @@ describe('fetchNearestDetail', () => {
   })
 
   it('should sadsa', async () => {
-    getByUrl.mockImplementation(() =>
+    fetchWithToken.mockImplementation(() =>
       Promise.resolve({
         features: [
           {

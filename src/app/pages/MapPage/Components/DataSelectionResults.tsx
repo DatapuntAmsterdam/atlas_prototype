@@ -3,6 +3,7 @@ import {
   Accordion,
   AccordionWrapper,
   Alert,
+  breakpoint,
   Button,
   CompactPager,
   hooks,
@@ -29,6 +30,7 @@ import config, { AuthScope, DataSelectionType } from './config'
 import { getUserScopes } from '../../../../shared/ducks/user/user'
 import LoginLinkContainer from '../../../components/Links/LoginLink/LoginLinkContainer'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage'
+import { DEFAULT_LOCALE } from '../../../../shared/config/locale.config'
 
 const { MapPanelContent } = mapPanelComponents
 
@@ -64,7 +66,6 @@ const StyledCompactPager = styled(CompactPager)`
   width: 100%;
 `
 
-const StyledAlert = styled(Alert)``
 const AccordionContent = styled.div`
   min-height: 100px;
   display: flex;
@@ -81,7 +82,6 @@ const StyledAccordion = styled(Accordion)`
 
 const Wrapper = styled.div`
   display: flex;
-  padding-top: ${themeSpacing(1)};
   justify-content: space-between;
 `
 const StyledLabel = styled(Label)`
@@ -95,8 +95,14 @@ const TableRouterLink = styled(RouterLink)`
   flex-shrink: 0;
 `
 
+const StyledAlert = styled(Alert)`
+  margin-top: ${themeSpacing(2)};
+`
+
 const StyledSelect = styled(Select)`
-  min-height: 44px;
+  @media screen and ${breakpoint('min-width', 'tabletS')} {
+    min-height: 44px;
+  }
 `
 
 const StyledSpinner = styled(Spinner)`
@@ -176,6 +182,14 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
     setType(selectedOption)
   }, [])
 
+  const totalNumberOfResults = useMemo(
+    () =>
+      dataSelectionWithMarkers
+        .reduce((acc, { totalCount }) => acc + totalCount, 0)
+        .toLocaleString(DEFAULT_LOCALE),
+    [dataSelectionWithMarkers],
+  )
+
   const handleFetchData = useCallback(
     (id: string, page?: number) => {
       const selection = dataSelectionWithMarkers.find(({ id: dataId }) => id === dataId)
@@ -201,7 +215,7 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
 
   return (
     <StyledMapPanelContent
-      title="Resultaten"
+      title={`Resultaten${totalNumberOfResults && `: ${totalNumberOfResults}`}`}
       animate
       stackOrder={currentOverlay === Overlay.Results ? 2 : 1}
       onClose={() => {
@@ -248,7 +262,7 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
         )}
       </Wrapper>
       {forbidden ? (
-        <Alert level={NotificationLevel.Attention} compact dismissible>
+        <StyledAlert level={NotificationLevel.Attention} compact dismissible>
           <Paragraph>
             {userScopes.includes(AuthScope.BRK)
               ? `Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met
@@ -256,7 +270,7 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
               : `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken. `}
           </Paragraph>
           <LoginLinkContainer />
-        </Alert>
+        </StyledAlert>
       ) : (
         <AccordionWrapper>
           {dataSelectionWithMarkers.map(({ id, result, size, page, totalCount, mapData }, i) => (
@@ -267,7 +281,7 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
                       isOpen: true,
                     }
                   : {})}
-                title={`Polygoon ${i + 1}: ${mapData?.distanceText}`}
+                title={`Selectie ${i + 1}: ${mapData?.distanceText}`}
                 onMouseEnter={() => {
                   if (mapData?.layer) {
                     mapData.layer.setStyle({

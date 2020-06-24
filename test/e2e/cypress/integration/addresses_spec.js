@@ -1,5 +1,12 @@
 import { getCountFromHeader } from '../support/helper-functions'
-import { ADDRESS_PAGE, DATA_SELECTION_TABLE, HEADINGS, MAP, TABLES } from '../support/selectors'
+import {
+  ADDRESS_PAGE,
+  DATA_SELECTION_TABLE,
+  HEADINGS,
+  MAP,
+  TABLES,
+  DATA_SEARCH,
+} from '../support/selectors'
 
 describe('addresses module', () => {
   beforeEach(() => {
@@ -115,7 +122,7 @@ describe('addresses module', () => {
               // the preview panel should exist
               cy.get(MAP.mapPreviewPanel).should('exist').and('be.visible')
               // the preview panel has the right title
-              cy.get(ADDRESS_PAGE.mapDetailResultHeader)
+              cy.get(DATA_SEARCH.mapDetailResultHeaderSubTitle)
                 .contains(selectedValue)
                 .should('exist')
                 .and('be.visible')

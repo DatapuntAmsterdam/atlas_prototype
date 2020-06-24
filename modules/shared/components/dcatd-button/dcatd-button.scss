@@ -1,10 +1,25 @@
-.dcatd-button {
-  float: right;
+.dcatd-button--edit {
+  button {
+    float: right;
 
-  @include header-button('edit', 14px);
+    @include header-button('edit', 14px);
 
-  &::before {
-    margin-top: 6px;
-    margin-right: 5px;
+    &::before {
+      margin-top: 6px;
+      margin-right: 5px;
+    }
+  }
+}
+
+.dcatd-button--list {
+  button {
+    float: right;
+
+    @include header-button('datasets', 14px);
+
+    &::before {
+      margin-top: 6px;
+      margin-right: 5px;
+    }
   }
 }

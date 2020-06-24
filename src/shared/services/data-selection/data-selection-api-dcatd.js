@@ -1,4 +1,4 @@
-import { getByUrl } from '../api/api'
+import { fetchWithToken } from '../api/api'
 
 const propertyName = {
   status: '/properties/ams:status',
@@ -147,15 +147,17 @@ export function query(
   searchParams.offset = (page - 1) * config.MAX_ITEMS_PER_PAGE
   searchParams.limit = config.MAX_ITEMS_PER_PAGE
 
-  return getByUrl(process.env.API_ROOT + config.ENDPOINT_PREVIEW, searchParams).then((data) => ({
-    numberOfPages: Math.ceil(data['void:documents'] / config.MAX_ITEMS_PER_PAGE),
-    numberOfRecords: data['void:documents'],
-    filters:
-      Object.keys(catalogFilters).length === 0
-        ? {}
-        : formatFilters(data['ams:facet_info'], catalogFilters),
-    data: formatData(config, data['dcat:dataset']),
-  }))
+  return fetchWithToken(process.env.API_ROOT + config.ENDPOINT_PREVIEW, searchParams).then(
+    (data) => ({
+      numberOfPages: Math.ceil(data['void:documents'] / config.MAX_ITEMS_PER_PAGE),
+      numberOfRecords: data['void:documents'],
+      filters:
+        Object.keys(catalogFilters).length === 0
+          ? {}
+          : formatFilters(data['ams:facet_info'], catalogFilters),
+      data: formatData(config, data['dcat:dataset']),
+    }),
+  )
 }
 
 export default {
