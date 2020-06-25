@@ -45,7 +45,7 @@
     "@datapunt/react-maps": "^0.8.2-alpha.0",
     "@sentry/browser": "5.17.0",
     "@types/leaflet": "^1.5.12",
-    "@types/leaflet-draw": "^1.0.2",
+    "@types/leaflet-draw": "^1.0.3",
     "@types/uuid": "^8.0.0",
     "angular": "1.8.0",
     "angular-aria": "~1.8.0",
