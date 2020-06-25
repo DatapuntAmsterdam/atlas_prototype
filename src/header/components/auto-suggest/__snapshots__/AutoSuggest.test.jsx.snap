@@ -7,28 +7,11 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
       "index": -1,
     }
   }
-  highlightQuery=""
-  legendTitle=""
   numberOfSuggestions={6}
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          "d",
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
-  placeHolder=""
+  onTextInput={[MockFunction]}
   query="dam"
   suggestions={
     Array [
@@ -209,27 +192,11 @@ exports[`The AutoSuggest component should allow the user to navigate with the ke
     }
   }
   highlightQuery="dam"
-  legendTitle=""
   numberOfSuggestions={6}
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          "d",
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
-  placeHolder=""
+  onTextInput={[MockFunction]}
   query="dam"
   suggestions={
     Array [
@@ -405,28 +372,10 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
       "index": -1,
     }
   }
-  highlightQuery=""
-  legendTitle=""
-  numberOfSuggestions={0}
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          "d",
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
-  placeHolder=""
+  onTextInput={[MockFunction]}
   query="dam"
   suggestions={
     Array [
@@ -602,28 +551,10 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
       "index": -1,
     }
   }
-  highlightQuery=""
-  legendTitle=""
-  numberOfSuggestions={0}
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          "d",
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
-  placeHolder=""
+  onTextInput={[MockFunction]}
   query="dam"
   suggestions={
     Array [
@@ -799,28 +730,10 @@ exports[`The AutoSuggest component should toggle the "showsuggestions" state on 
       "index": -1,
     }
   }
-  highlightQuery=""
-  legendTitle=""
-  numberOfSuggestions={0}
   onSubmit={[MockFunction]}
   onSuggestionActivate={[MockFunction]}
   onSuggestionSelection={[MockFunction]}
-  onTextInput={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          "d",
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
-  placeHolder=""
+  onTextInput={[MockFunction]}
   query="dam"
   suggestions={
     Array [
