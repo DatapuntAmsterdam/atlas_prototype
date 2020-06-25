@@ -43,7 +43,7 @@ describe('MapPanel', () => {
         isMapPanelHandleVisible
         mapBaseLayers={{
           aerial: [{}],
-          topo: [{}],
+          topography: [{}],
         }}
         mapLayers={[]}
         overlays={[{}]}
