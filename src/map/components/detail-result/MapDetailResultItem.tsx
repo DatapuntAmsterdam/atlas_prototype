@@ -14,9 +14,7 @@ const MapDetailResultItem: React.FC<MapDetailResultItemProps> = ({ item }) => {
       <section className="map-detail-result__item-content">
         <div className="map-detail-result__item-label">{item.label}</div>
         <div
-          className={`map-detail-result__item-value${
-            item.multiLine ? '--multiline' : ''
-          }           ${
+          className={`map-detail-result__item-value ${
             item.status && item.status.length > 0
               ? `map-detail-result__item-value--${item.status}`
               : ''

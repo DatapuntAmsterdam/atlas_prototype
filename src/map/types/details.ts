@@ -26,7 +26,6 @@ export interface DetailResultItemDefault {
   label: string
   value?: string | number | boolean | Date | DetailResultItemDefault[]
   link?: string
-  multiLine?: boolean
   status?: string
 }
 

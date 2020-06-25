@@ -34,19 +34,6 @@ describe('MapDetailResultItem', () => {
     expect(component.find('li').exists()).toBeFalsy()
   })
 
-  it('should display the item with a multiline', () => {
-    item = {
-      type: DetailResultItemType.Default,
-      label: 'label',
-      value: 'value',
-      multiLine: true,
-    }
-
-    component = shallow(<MapDetailResultItem item={item} />)
-
-    expect(component.find('.map-detail-result__item-value--multiline').exists()).toBeTruthy()
-  })
-
   it('should display the item with a status', () => {
     item = {
       type: DetailResultItemType.Default,

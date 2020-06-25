@@ -132,21 +132,8 @@ $icon-height: 24px;
         text-transform: capitalize;
       }
 
-      &:not(&--multiline) {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      &--multiline {
-        // Makes sure long text is wrapped and text with line breaks is respected
-        white-space: pre-wrap;
-
-        &::first-letter {
-          // Capitalize when the data doesn't do this already
-          text-transform: capitalize;
-        }
-      }
+      // Makes sure long text is wrapped and text with line breaks is respected
+      white-space: pre-wrap;
 
       &::after {
         border-radius: 50%;
