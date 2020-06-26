@@ -1,11 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import AutoSuggestItem from './AutoSuggestItem'
-
-// Todo: Please consider rewriting the way we keep track on the active (selected) item in the
-// autosuggest result list. Now we use an (arbitrary) high number for more results button ("..."),
-// so this wont conflict with the activeSuggestion indexes.
-export const MORE_RESULTS_INDEX = 999
+import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
 
 const AutoSuggestCategory = ({ category, activeSuggestion, query, onSuggestionSelection }) => {
   const { label, content, total_results: totalResults, type } = category

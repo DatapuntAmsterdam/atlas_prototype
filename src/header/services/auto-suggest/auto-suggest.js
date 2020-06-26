@@ -5,6 +5,11 @@ import SearchType from '../../../app/pages/SearchPage/constants'
 // Minimun length for typeahead query in backend is 3 characters
 const MIN_QUERY_LENGTH = 3
 
+// Todo: Please consider rewriting the way we keep track on the active (selected) item in the
+// autosuggest result list. Now we use an (arbitrary) high number for more results button ("..."),
+// so this wont conflict with the activeSuggestion indexes.
+export const MORE_RESULTS_INDEX = 999
+
 // Sort order of the data results. These strings correspond to the labels defined in the typeahead API.
 export const LABELS_DATA = [
   'Straatnamen',
@@ -60,32 +65,40 @@ function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] === value)
 }
 
-function formatData(categories) {
+function formatData(categories, categoryType) {
   const numberOfResults = categories.reduce((acc, category) => acc + category.content.length, 0)
   const sortedCategories = orderAutoSuggestResults(categories)
+    .map((category) => {
+      const type =
+        getKeyByValue(LABELS, category.label) ||
+        (LABELS_MAP.includes(category.label) ? SearchType.Map : SearchType.Data)
+
+      return { ...category, type }
+    })
+    .filter(({ type }) => {
+      // Filter out the matching categoryTypes
+      if (categoryType && categoryType !== type) {
+        return false
+      }
+
+      return true
+    })
 
   let indexInTotal = -1
 
-  const indexedCategories = sortedCategories.map((category) => {
-    const type =
-      getKeyByValue(LABELS, category.label) ||
-      (LABELS_MAP.includes(category.label) ? SearchType.Map : SearchType.Data)
-
-    return {
-      ...category,
-      type,
-      content: category.content.map((suggestion) => {
-        indexInTotal += 1
-        return {
-          category: category.label,
-          index: indexInTotal,
-          label: suggestion._display,
-          uri: suggestion.uri,
-          type,
-        }
-      }),
-    }
-  })
+  const indexedCategories = sortedCategories.map((category) => ({
+    ...category,
+    content: category.content.map((suggestion) => {
+      indexInTotal += 1
+      return {
+        category: category.label,
+        index: indexInTotal,
+        label: suggestion._display,
+        uri: suggestion.uri,
+        type: category.type,
+      }
+    }),
+  }))
 
   return {
     count: numberOfResults,
@@ -93,16 +106,17 @@ function formatData(categories) {
   }
 }
 
-function search(query) {
+async function search({ query, type }) {
   const uri =
     query &&
     query.length >= MIN_QUERY_LENGTH &&
     `${process.env.API_ROOT}typeahead?q=${typeof query === 'string' ? query.toLowerCase() : ''}` // Todo: temporary fix, real fix: DP-7365
 
   if (uri) {
-    return fetch(uri, { headers: getAuthHeaders() })
-      .then((response) => response.json())
-      .then((response) => formatData(response))
+    const response = await fetch(uri, { headers: getAuthHeaders() })
+    const json = await response.json()
+
+    return formatData(json, type)
   }
   return {}
 }

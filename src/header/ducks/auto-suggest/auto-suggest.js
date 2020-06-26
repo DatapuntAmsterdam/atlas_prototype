@@ -38,10 +38,10 @@ export default function AutoSuggestReducer(state = initialState, action) {
       return {
         ...enrichedState,
         count: 0,
-        displayQuery: action.query,
+        displayQuery: action.payload.query,
         error: '',
         isLoading: true,
-        typedQuery: action.query,
+        typedQuery: action.payload.query,
       }
     case FETCH_SUGGESTIONS_SUCCESS:
       return {
@@ -90,9 +90,9 @@ export const setActiveSuggestionAction = (suggestion = { index: -1 }) => ({
   suggestion,
 })
 
-export const getSuggestionsAction = (query = '') => ({
+export const getSuggestionsAction = (query, type) => ({
   type: FETCH_SUGGESTIONS_REQUEST,
-  query,
+  payload: { query, type },
 })
 
 // Selectors

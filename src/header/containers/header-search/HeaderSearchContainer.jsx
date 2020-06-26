@@ -1,24 +1,16 @@
+/* eslint-disable no-nested-ternary */
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { CmsType } from '../../../shared/config/cms.config'
 import { emptyFilters } from '../../../shared/ducks/filters/filters'
 import { getViewMode, isMapPage } from '../../../shared/ducks/ui/ui'
-import PARAMETERS from '../../../store/parameters'
 import {
   toArticleDetail,
-  toArticleSearch,
   toCollectionDetail,
-  toCollectionSearch,
-  toDataSearch,
   toDatasetDetail,
-  toDatasetSearch,
   toDataSuggestion,
-  toMapSearch,
   toMapWithLegendOpen,
   toPublicationDetail,
-  toPublicationSearch,
-  toSearch,
-  toSpecialSearch,
   toSpecialDetail,
 } from '../../../store/redux-first-router/actions'
 import {
@@ -40,17 +32,11 @@ import {
   setActiveSuggestionAction,
 } from '../../ducks/auto-suggest/auto-suggest'
 import HeaderSearch from './HeaderSearch'
+import SearchType from '../../../app/pages/SearchPage/constants'
 
 const mapStateToProps = (state) => ({
   activeSuggestion: getActiveSuggestions(state),
   displayQuery: getDisplayQuery(state),
-  isDataPage: isDataPage(state),
-  isDatasetPage: isDatasetPage(state),
-  isArticlePage: isArticlePage(state),
-  isPublicationPage: isPublicationPage(state),
-  isSpecialPage: isSpecialPage(state),
-  isCollectionPage: isCollectionPage(state),
-  isMapPage: isMapPage(state) || isMapSearchPage(state),
   view: getViewMode(state),
   isMapActive: isMapPage(state),
   numberOfSuggestions: getNumberOfSuggestions(state),
@@ -63,6 +49,21 @@ const mapStateToProps = (state) => ({
     : '',
   suggestions: getAutoSuggestSuggestions(state),
   typedQuery: getTypedQuery(state),
+  pageType: isDatasetPage(state)
+    ? SearchType.Dataset
+    : isDataPage(state)
+    ? SearchType.Data
+    : isArticlePage(state)
+    ? CmsType.Article
+    : isPublicationPage(state)
+    ? CmsType.Publication
+    : isSpecialPage(state)
+    ? CmsType.Special
+    : isCollectionPage(state)
+    ? CmsType.Collection
+    : isMapPage(state) || isMapSearchPage(state)
+    ? SearchType.Map
+    : SearchType.Search,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -74,86 +75,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     dispatch,
   ),
-  onSearch: (query) =>
-    dispatch(
-      toSearch(
-        {
-          [PARAMETERS.QUERY]: query,
-        },
-        false,
-        true,
-      ),
-    ),
-  onDatasetSearch: (query) =>
-    dispatch(
-      toDatasetSearch(
-        {
-          [PARAMETERS.QUERY]: query,
-        },
-        false,
-        true,
-      ),
-    ),
-  onDataSearch: (query) =>
-    dispatch(
-      toDataSearch(
-        {
-          [PARAMETERS.QUERY]: query,
-        },
-        false,
-        true,
-      ),
-    ),
-  onArticleSearch: (query) =>
-    dispatch(
-      toArticleSearch(
-        {
-          [PARAMETERS.QUERY]: query,
-        },
-        false,
-        true,
-      ),
-    ),
-  onPublicationSearch: (query) =>
-    dispatch(
-      toPublicationSearch(
-        {
-          [PARAMETERS.QUERY]: query,
-        },
-        false,
-        true,
-      ),
-    ),
-  onSpecialSearch: (query) =>
-    dispatch(
-      toSpecialSearch(
-        {
-          [PARAMETERS.QUERY]: query,
-        },
-        false,
-        true,
-      ),
-    ),
-  onCollectionSearch: (query) =>
-    dispatch(
-      toCollectionSearch(
-        {
-          [PARAMETERS.QUERY]: query,
-        },
-        false,
-        true,
-      ),
-    ),
-  onMapSearch: (query) =>
-    dispatch(
-      toMapSearch(
-        {
-          [PARAMETERS.QUERY]: query,
-        },
-        false,
-        true,
-      ),
-    ),
   openDataSuggestion: (suggestion, view) => dispatch(toDataSuggestion(suggestion, view)),
   openDatasetSuggestion: (suggestion) => dispatch(toDatasetDetail(suggestion)),
   openEditorialSuggestion: (suggestion, type, subType) => {

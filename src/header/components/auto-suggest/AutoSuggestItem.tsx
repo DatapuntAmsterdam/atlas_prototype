@@ -1,9 +1,19 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import escapeStringRegexp from 'escape-string-regexp'
 
-const AutoSuggestItem = (props) => {
-  const { isActive, onSuggestionSelection, query, content } = props
+type AutoSuggestItemProps = {
+  content: string
+  isActive?: boolean
+  onSuggestionSelection: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  query: string
+}
+
+const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
+  isActive = false,
+  onSuggestionSelection,
+  query,
+  content,
+}) => {
   const highlightedSuggestion =
     content &&
     content.replace(
@@ -29,6 +39,7 @@ const AutoSuggestItem = (props) => {
       <button
         type="button"
         className={`
+          // TODO: get rid of SCSSS here
           auto-suggest__dropdown-item
           auto-suggest__dropdown-item--${isActive ? 'active' : 'inactive'}
         `}
@@ -38,17 +49,6 @@ const AutoSuggestItem = (props) => {
       </button>
     </li>
   )
-}
-
-AutoSuggestItem.defaultProps = {
-  isActive: false,
-}
-
-AutoSuggestItem.propTypes = {
-  content: PropTypes.string.isRequired,
-  isActive: PropTypes.bool,
-  onSuggestionSelection: PropTypes.func.isRequired,
-  query: PropTypes.string.isRequired,
 }
 
 export default AutoSuggestItem
