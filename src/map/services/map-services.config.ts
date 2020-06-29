@@ -62,6 +62,7 @@ export const endpointTypes = {
   precarioPassVessels: 'v1/precariobelasting/passagiersvaartuigen/',
   precarioTerraces: 'v1/precariobelasting/terrassen/',
   reclamebelasting: 'vsd/reclamebelasting/',
+  tunnels: 'v1/hoofdroutes/tunnels_gevaarlijke_stoffen/',
   vastgoed: 'vsd/vastgoed',
   vestiging: 'handelsregister/vestiging/',
   winkelgebied: 'vsd/winkgeb',
@@ -1050,6 +1051,24 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           type: DetailResultItemType.Default,
           label: 'Onoverdekt terras per winterseizoen per m2',
           value: result.tariefOnoverdektTerrasPerWinterseizoenPerM2,
+        },
+      ],
+    }),
+  },
+  [endpointTypes.tunnels]: {
+    mapDetail: (result) => ({
+      title: categoryLabels.tunnels.singular,
+      subTitle: result.title,
+      items: [
+        {
+          type: DetailResultItemType.Default,
+          label: 'Titel',
+          value: result.title,
+        },
+        {
+          type: DetailResultItemType.Default,
+          label: 'Categorie',
+          value: result.categorie,
         },
       ],
     }),

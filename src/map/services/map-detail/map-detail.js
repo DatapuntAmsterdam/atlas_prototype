@@ -21,6 +21,7 @@ export const pageEndpointTypeMapping = {
   'precariobelasting/bedrijfsvaartuigen/': 'v1/precariobelasting/bedrijfsvaartuigen/',
   'precariobelasting/passagiersvaartuigen/': 'v1/precariobelasting/passagiersvaartuigen/',
   'precariobelasting/terrassen/': 'v1/precariobelasting/terrassen/',
+  'hoofdroutes/tunnels_gevaarlijke_stoffen/': 'v1/hoofdroutes/tunnels_gevaarlijke_stoffen/',
 }
 
 export const pageTypeToEndpoint = (type, subtype, id) => {

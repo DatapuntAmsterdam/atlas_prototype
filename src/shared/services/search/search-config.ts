@@ -228,6 +228,11 @@ export default {
       features: ['precariobelasting/terrassen'],
     },
     {
+      ...categoryLabels.tunnels,
+      slug: 'tunnels-gevaarlijke-stoffen',
+      features: ['hoofdroutes/tunnels_gevaarlijke_stoffen/'],
+    },
+    {
       ...categoryLabels.bekendmakingen,
       slug: 'bekendmakingen',
       features: ['vsd/bekendmakingen'],

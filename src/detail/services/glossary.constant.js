@@ -435,6 +435,10 @@ const GLOSSARY = {
         'https://www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/kadastraal-subject/',
       meta: ['id'],
     },
+    TUNNELS: {
+      ...categoryLabels.tunnels,
+      description: '',
+    },
     UITGEVOERDONDERZOEK: {
       singular: 'Reeds uitgevoerd CE onderzoek',
       plural: 'Reeds uitgevoerde CE onderzoeken',

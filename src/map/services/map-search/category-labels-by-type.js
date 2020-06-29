@@ -30,6 +30,7 @@ const categoryLabelsByType = {
   'precariobelasting/bedrijfsvaartuigen': categoryLabels.precarioComVessels,
   'precariobelasting/passagiersvaartuigen': categoryLabels.precarioPassVessels,
   'precariobelasting/terrassen': categoryLabels.precarioTerraces,
+  'hoofdroutes/tunnels_gevaarlijke_stoffen': categoryLabels.tunnels,
   vestiging: categoryLabels.vestiging,
   'vsd/bekendmakingen': categoryLabels.bekendmakingen,
   'vsd/biz': categoryLabels.bedrijfsinvesteringszone,

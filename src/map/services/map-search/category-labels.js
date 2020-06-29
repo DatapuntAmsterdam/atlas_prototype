@@ -123,6 +123,10 @@ const categoryLabels = {
     singular: 'Straatnaam',
     plural: 'Straatnamen',
   },
+  tunnels: {
+    singular: 'Tunnels gevaarlijke stoffen',
+    plural: 'Tunnels gevaarlijke stoffen',
+  },
   unesco: {
     singular: 'UNESCO',
     plural: 'UNESCO',
