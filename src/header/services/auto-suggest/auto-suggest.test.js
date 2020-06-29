@@ -41,8 +41,9 @@ describe('The auto-suggest service', () => {
 
   afterEach(() => {})
 
-  it('search query must be at least three characters', () => {
-    expect(autoSuggestSearch('li')).toEqual({})
+  it('search query must be at least three characters', async () => {
+    const value = await autoSuggestSearch('li')
+    expect(value).toEqual({})
   })
 
   it('can search and format data', () => {

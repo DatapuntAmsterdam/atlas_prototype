@@ -4,6 +4,7 @@ exports[`AutoSuggestItem should render the item 1`] = `
 <li>
   <button
     className="
+          // TODO: get rid of SCSSS here
           auto-suggest__dropdown-item
           auto-suggest__dropdown-item--inactive
         "
@@ -16,7 +17,7 @@ exports[`AutoSuggestItem should render the item 1`] = `
       <span
         className="icon"
       />
-      <span
+      <div
         dangerouslySetInnerHTML={
           Object {
             "__html": "<span class=\\"auto-suggest__dropdown__highlight\\">Dam</span> 10",

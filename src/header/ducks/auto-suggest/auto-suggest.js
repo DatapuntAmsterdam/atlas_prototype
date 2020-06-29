@@ -90,7 +90,7 @@ export const setActiveSuggestionAction = (suggestion = { index: -1 }) => ({
   suggestion,
 })
 
-export const getSuggestionsAction = (query, type) => ({
+export const getSuggestionsAction = (query = '', type = '') => ({
   type: FETCH_SUGGESTIONS_REQUEST,
   payload: { query, type },
 })

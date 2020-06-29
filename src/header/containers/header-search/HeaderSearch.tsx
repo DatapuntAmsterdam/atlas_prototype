@@ -10,7 +10,11 @@ import { CmsType } from '../../../shared/config/cms.config'
 import SearchType from '../../../app/pages/SearchPage/constants'
 import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import SearchBar from '../../../app/components/SearchBar'
-import AutoSuggest, { Suggestion, SuggestionList } from '../../components/auto-suggest/AutoSuggest'
+import AutoSuggest, {
+  SearchCategory,
+  Suggestion,
+  SuggestionList,
+} from '../../components/auto-suggest/AutoSuggest'
 import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
 
 // TODO: Add the screen reader only "styling" to asc-ui
@@ -29,8 +33,6 @@ const getSuggestionByIndex = (searchResults: SuggestionList, suggestionIndex: nu
   searchResults
     .reduce<Array<Suggestion>>((flatResults, category) => [...flatResults, ...category.content], [])
     .find((flatSuggestion) => flatSuggestion.index === suggestionIndex)
-
-type SearchCategory = CmsType | SearchType
 
 type HeaderSearchProps = {
   activeSuggestion: Suggestion
@@ -181,6 +183,12 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
     }
   }
 
+  function onClear() {
+    onSuggestionActivate()
+    setShowSuggestions(false)
+    onGetSuggestions('', null)
+  }
+
   function navigateSuggestions(e: React.KeyboardEvent<HTMLInputElement>) {
     switch (e.keyCode) {
       // Arrow up
@@ -188,30 +196,31 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
         // By default the up arrow puts the cursor at the
         // beginning of the input, we don't want that!
         e.preventDefault()
+
         if (!showSuggestions || !numberOfSuggestions) {
           return
         }
 
         onSuggestionActivate(
-          getSuggestionByIndex(suggestions, Math.max(activeSuggestion.index - 1, -1)),
+          getSuggestionByIndex(suggestions, Math.max(activeSuggestion?.index - 1, -1)),
         )
         break
       // Arrow down
       case 40:
-        if (!showSuggestions || !numberOfSuggestions) {
+        if (!numberOfSuggestions) {
           return
         }
+
         onSuggestionActivate(
           getSuggestionByIndex(
             suggestions,
-            Math.min(activeSuggestion.index + 1, numberOfSuggestions - 1),
+            Math.min(activeSuggestion?.index + 1, numberOfSuggestions - 1),
           ),
         )
         break
       // Escape
       case 27:
-        onSuggestionActivate()
-        setShowSuggestions(false)
+        onClear()
         break
       // Enter
       case 13:
@@ -248,7 +257,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
     }
   }, [onGetSuggestions, prefillQuery, searchCategory])
 
-  const showSearchBox = useMemo(() => suggestions.length > 0 && showSuggestions, [
+  const showAutoSuggest = useMemo(() => suggestions.length > 0 && showSuggestions, [
     suggestions,
     showSuggestions,
   ])
@@ -264,12 +273,12 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
       <StyledLegend className="u-sr-only">Data zoeken</StyledLegend>
       <SearchBar
         {...{
-          expanded: showSearchBox,
+          expanded: showAutoSuggest,
           suggestions,
           onBlur,
           onFocus,
           onChange: onInput,
-          onClear: () => onGetSuggestions('', null),
+          onClear,
           onKeyDown: navigateSuggestions,
           value: query || '',
           openSearchBarToggle,
@@ -278,7 +287,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
         }}
         onOpenSearchBarToggle={setOpenSearchBarToggle}
       >
-        {showSearchBox && (
+        {showAutoSuggest && (
           <AutoSuggest
             suggestions={suggestions}
             activeSuggestion={activeSuggestion}

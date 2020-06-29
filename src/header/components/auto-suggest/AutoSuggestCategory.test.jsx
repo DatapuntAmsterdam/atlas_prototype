@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import AutoSuggestCategory, { MORE_RESULTS_INDEX } from './AutoSuggestCategory'
+import AutoSuggestCategory from './AutoSuggestCategory'
+import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
 
 jest.mock('../../../app/pages/SearchPage/config', () => ({
   TYPES: {
@@ -38,7 +39,7 @@ describe('AutoSuggestCategory', () => {
             uri: 'bag/openbareruimte/03630000003187/',
           },
         ],
-        total_results: 6,
+        totalResults: 6,
       },
       onSuggestionSelection: jest.fn(),
       query: 'dam',
@@ -70,7 +71,7 @@ describe('AutoSuggestCategory', () => {
   })
 
   it("should render no ellipsis when there aren't more results returned than the total results", () => {
-    props.category.total_results = 3
+    props.category.totalResults = 3
     const wrapper = shallow(<AutoSuggestCategory {...props} />)
 
     expect(wrapper).toMatchSnapshot()

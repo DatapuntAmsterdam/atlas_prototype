@@ -25,7 +25,7 @@ describe('AutoSuggestReducer Reducer', () => {
     expect(
       reducer(initialState, {
         type: FETCH_SUGGESTIONS_REQUEST,
-        query: 'query',
+        payload: { query: 'query' },
       }),
     ).toEqual({
       count: 0,
@@ -133,7 +133,7 @@ describe('The set active suggestion action', () => {
 
 it('should return the right action', () => {
   expect(getSuggestionsAction()).toEqual({
-    query: '',
+    payload: { query: '', type: '' },
     type: FETCH_SUGGESTIONS_REQUEST,
   })
 })

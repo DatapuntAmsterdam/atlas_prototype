@@ -190,14 +190,27 @@ $clear-button-margin: 3px;
         height: 2 * $base-whitespace + 2px;
         margin-left: $base-whitespace / 2;
         position: relative;
-        top: 2px;
         vertical-align: sub;
         width: 2 * $base-whitespace + 2px;
       }
 
-      div > span {
-        &:only-child {
-          padding-left: 3 * $base-whitespace - 2px;
+      // TODO: Refactor this to <Link /> component when the SCSS for this project is deleted
+      & > div {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        & > div {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: calc(100% - #{2 * $base-whitespace + 2px});
+        }
+
+        & > span {
+          &:only-child {
+            padding-left: 3 * $base-whitespace - 2px;
+          }
         }
       }
     }

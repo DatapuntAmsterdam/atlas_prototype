@@ -25,7 +25,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
   const listItem = (
     <div className={`${ellipsis ? 'auto-suggest__dropdown-item--row-height' : ''}`}>
       {!ellipsis ? <span className="icon" /> : ''}
-      <span
+      <div
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: highlightedSuggestion,

@@ -28,7 +28,7 @@ exports[`Header should render the main header 1`] = `
     logo={[Function]}
     navigation={
       <React.Fragment>
-        <Memo(Connect(HeaderSearch)) />
+        <Unknown />
         <Memo(Connect(HeaderMenu))
           data-test="header-menu-default"
           showAt="laptopM"

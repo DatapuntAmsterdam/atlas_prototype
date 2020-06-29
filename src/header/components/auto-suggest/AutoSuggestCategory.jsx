@@ -4,7 +4,7 @@ import AutoSuggestItem from './AutoSuggestItem'
 import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
 
 const AutoSuggestCategory = ({ category, activeSuggestion, query, onSuggestionSelection }) => {
-  const { label, content, total_results: totalResults, type } = category
+  const { label, content, totalResults, type } = category
 
   let suggestions = content
 

@@ -88,6 +88,7 @@ function formatData(categories, categoryType) {
 
   const indexedCategories = sortedCategories.map((category) => ({
     ...category,
+    totalResults: category.total_results,
     content: category.content.map((suggestion) => {
       indexInTotal += 1
       return {

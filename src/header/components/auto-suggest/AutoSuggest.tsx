@@ -3,18 +3,19 @@ import AutoSuggestCategory from './AutoSuggestCategory'
 import { CmsType } from '../../../shared/config/cms.config'
 import SearchType from '../../../app/pages/SearchPage/constants'
 
+export type SearchCategory = CmsType | SearchType
+
 export type Suggestion = {
   category: string
   index: number
   label: string
   uri: string
-  type: CmsType | SearchType
+  type: SearchCategory
 }
 
 export type SuggestionList = Array<{
   label: string
-  // eslint-disable-next-line camelcase
-  total_results: number
+  totalResults: number
   content: Array<Suggestion>
   type: string
 }>

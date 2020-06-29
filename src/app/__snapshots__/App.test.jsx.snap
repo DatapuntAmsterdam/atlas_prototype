@@ -36,7 +36,7 @@ exports[`App should render the homepage 1`] = `
         hasMaxWidth={false}
         isFullHeight={false}
       >
-        <Connect(Header)
+        <Component
           embedPreviewMode={false}
           hasMaxWidth={false}
           homePage={false}
@@ -93,7 +93,7 @@ exports[`App should render the mapview 1`] = `
         hasMaxWidth={false}
         isFullHeight={false}
       >
-        <Connect(Header)
+        <Component
           embedPreviewMode={false}
           hasMaxWidth={false}
           homePage={false}

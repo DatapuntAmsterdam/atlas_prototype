@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'
 import {
   SearchBar as SearchBarComponent,
@@ -11,6 +11,7 @@ import {
 } from '@datapunt/asc-ui'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
+import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 
 const Z_INDEX_OFFSET = 2 // Set a custom offset
 
@@ -41,14 +42,10 @@ type SearchBarProps = {
   onOpenSearchBarToggle: Function
   openSearchBarToggle: boolean
   value: string
-  onBlur: () => void
-  onFocus: () => void
-  onChange: (e: React.KeyboardEvent<HTMLInputElement>) => void
   onClear: () => void
-  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
-  searchCategory: string
-  setSearchCategory: () => void
-}
+  searchCategory: SearchCategory
+  setSearchCategory: Dispatch<SetStateAction<SearchCategory>>
+} & React.InputHTMLAttributes<HTMLInputElement>
 
 const SearchBar: React.FC<SearchBarProps> = ({
   expanded,
@@ -88,7 +85,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     <>
       <SearchBarWrapper expanded={expanded}>
         <Hidden maxBreakpoint="tabletM">
-          <SearchBarFilter searchCategor={searchCategory} setSearchCategory={setSearchCategory} />
+          <SearchBarFilter searchCategory={searchCategory} setSearchCategory={setSearchCategory} />
         </Hidden>
         <StyledSearchBar
           showAt="tabletM"

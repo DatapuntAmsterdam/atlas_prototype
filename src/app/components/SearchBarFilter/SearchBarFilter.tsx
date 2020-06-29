@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { Select, Label } from '@datapunt/asc-ui'
 import styled from 'styled-components'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
-import { CmsType } from '../../../shared/config/cms.config'
-import SearchType from '../../pages/SearchPage/constants'
+import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 
 // TODO: Add the screen reader only "styling" to asc-ui
 const StyledLabel = styled(Label)`
@@ -22,8 +21,8 @@ const StyledSelect = styled(Select)`
 `
 
 type SearchBarFilterProps = {
-  searchCategory: CmsType | SearchType
-  setSearchCategory: () => void
+  searchCategory: SearchCategory
+  setSearchCategory: Dispatch<SetStateAction<SearchCategory>>
 }
 
 const SearchBarFilter: React.FC<SearchBarFilterProps> = ({ searchCategory, setSearchCategory }) => {
@@ -46,7 +45,12 @@ const SearchBarFilter: React.FC<SearchBarFilterProps> = ({ searchCategory, setSe
   return (
     <>
       <StyledLabel htmlFor="category" label="Zoek op categorie" />
-      <StyledSelect id="category" value={searchCategory} onChange={onSetSearchCategory}>
+      <StyledSelect
+        data-testid="SearchBarFilter"
+        id="category"
+        value={searchCategory}
+        onChange={onSetSearchCategory}
+      >
         {AVAILABLE_FILTERS.map(({ type, label }) => {
           return (
             <option key={type} value={type}>

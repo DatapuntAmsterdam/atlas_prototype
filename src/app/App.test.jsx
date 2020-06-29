@@ -1,3 +1,4 @@
+// TODO: Delete test or rewrite to be usefull
 import React from 'react'
 import { shallow } from 'enzyme'
 import configureMockStore from 'redux-mock-store'
@@ -5,6 +6,9 @@ import App from './App'
 import { VIEW_MODE } from '../shared/ducks/ui/ui'
 import PAGES from './pages'
 import { ROUTER_NAMESPACE } from './routes'
+
+// Mock the Header component as the multiple dive() methods complicate the rendering
+jest.mock('./components/Header', () => () => <div />)
 
 describe('App', () => {
   const initialState = {
