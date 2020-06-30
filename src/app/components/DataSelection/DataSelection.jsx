@@ -214,6 +214,7 @@ DataSelection.defaultProps = {
   results: {},
 }
 
+/* eslint-disable react/forbid-prop-types */
 DataSelection.propTypes = {
   view: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,

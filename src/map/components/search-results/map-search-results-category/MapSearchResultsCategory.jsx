@@ -1,9 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-
-import MapSearchResultsItem from '../map-search-results-item/MapSearchResultsItem'
-
+import React from 'react'
 import categoryLabelsByType from '../../../services/map-search/category-labels-by-type'
+import MapSearchResultsItem from '../map-search-results-item/MapSearchResultsItem'
 
 const getStatusLabel = (result) =>
   result.statusLabel && result.statusLabel.length > 0 ? `(${result.statusLabel})` : ''
@@ -59,6 +57,7 @@ MapSearchResultsCategory.defaultProps = {
   isSubcategory: false,
 }
 
+/* eslint-disable react/forbid-prop-types */
 MapSearchResultsCategory.propTypes = {
   category: PropTypes.shape({
     categoryLabel: PropTypes.string.isRequired,

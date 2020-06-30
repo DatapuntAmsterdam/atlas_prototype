@@ -1,13 +1,11 @@
-import React from 'react'
+import get from 'lodash.get'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import get from 'lodash.get'
-
+import { endDataSelection, setGeometryFilter } from '../../../shared/ducks/data-selection/actions'
+import { getDataSelection } from '../../../shared/ducks/data-selection/selectors'
 import DrawTool from '../../components/draw-tool/DrawTool'
-import drawToolConfig from '../../services/draw-tool/draw-tool.config'
-
-import { currentShape, initialize, isEnabled, setPolygon } from '../../services/draw-tool/draw-tool'
 import {
   mapClear,
   mapEmptyGeometry,
@@ -18,11 +16,11 @@ import {
   getDrawingMode,
   getGeometry,
   getShapeDistanceTxt,
-  isDrawingEnabled,
   getShapeMarkers,
+  isDrawingEnabled,
 } from '../../ducks/map/selectors'
-import { endDataSelection, setGeometryFilter } from '../../../shared/ducks/data-selection/actions'
-import { getDataSelection } from '../../../shared/ducks/data-selection/selectors'
+import { currentShape, initialize, isEnabled, setPolygon } from '../../services/draw-tool/draw-tool'
+import drawToolConfig from '../../services/draw-tool/draw-tool.config'
 
 const mapStateToProps = (state) => ({
   drawingMode: getDrawingMode(state),
@@ -135,6 +133,7 @@ class DrawToolContainer extends React.Component {
   }
 }
 
+/* eslint-disable react/forbid-prop-types */
 DrawToolContainer.propTypes = {
   drawingMode: PropTypes.string.isRequired,
   shapeMarkers: PropTypes.number.isRequired,

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { toDetailFromEndpoint } from '../../../../store/redux-first-router/actions'
@@ -38,6 +38,7 @@ const DataSelectionList = ({ content, navigateToDetail }) => (
   </ul>
 )
 
+/* eslint-disable react/forbid-prop-types */
 DataSelectionList.propTypes = {
   content: PropTypes.shape({
     head: PropTypes.array,

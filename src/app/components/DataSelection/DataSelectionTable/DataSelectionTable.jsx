@@ -1,10 +1,10 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import RouterLink from 'redux-first-router-link'
-import DataSelectionFormatter from '../DataSelectionFormatter/DataSelectionFormatter'
-import { routing } from '../../../routes'
 import { getDetailPageData } from '../../../../store/redux-first-router/actions'
+import { routing } from '../../../routes'
+import DataSelectionFormatter from '../DataSelectionFormatter/DataSelectionFormatter'
 
 const DataSelectionTable = ({ content }) => {
   const buildLink = (row) => {
@@ -59,6 +59,7 @@ const DataSelectionTable = ({ content }) => {
   )
 }
 
+/* eslint-disable react/forbid-prop-types */
 DataSelectionTable.propTypes = {
   content: PropTypes.shape({
     head: PropTypes.array,
