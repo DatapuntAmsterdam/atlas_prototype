@@ -47,7 +47,6 @@ type HeaderSearchProps = {
   openMapSuggestion: Function
   onGetSuggestions: Function
   onSuggestionActivate: Function
-  onSearch: Function
   prefillQuery?: string
   suggestions?: SuggestionList
   typedQuery: string
@@ -68,7 +67,6 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
   view,
   pageType,
   onCleanDatasetOverview,
-  onSearch,
   prefillQuery = '',
   displayQuery = '',
 }) => {
@@ -159,13 +157,12 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
           to(
             {
               [PARAMETERS.QUERY]: typedQuery,
+              [PARAMETERS.PAGE]: 1, // reset the page number on search
             },
             false,
             true,
           ),
         )
-      } else {
-        onSearch(typedQuery)
       }
     }
   }

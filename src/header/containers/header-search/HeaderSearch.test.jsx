@@ -16,7 +16,13 @@ jest.mock('../../../store/redux-first-router/actions')
 jest.mock('../../../app/utils/useSlug')
 
 const mockOnSpecialSearch = jest.fn()
+const mockOnSearch = jest.fn()
 jest.mock('../../../app/pages/SearchPage/config', () => ({
+  search: {
+    label: 'Search label',
+    type: 'search',
+    to: () => mockOnSearch,
+  },
   special: {
     label: 'Special label',
     type: 'special',
@@ -26,7 +32,6 @@ jest.mock('../../../app/pages/SearchPage/config', () => ({
 
 describe('The HeaderSearch component', () => {
   const typedQuery = 'foo'
-  const mockOnSearch = jest.fn()
   const mockOpenDataSuggestion = jest.fn()
   const mockOpenDatasetSuggestion = jest.fn()
   const mockOpenEditorialSuggestion = jest.fn()
@@ -36,6 +41,7 @@ describe('The HeaderSearch component', () => {
   const props = {
     typedQuery,
     view: 'split',
+    pageType: SearchType.Search,
     onCleanDatasetOverview: jest.fn(),
     onSearch: mockOnSearch,
     openDataSuggestion: mockOpenDataSuggestion,
@@ -62,7 +68,7 @@ describe('The HeaderSearch component', () => {
         stopPropagation: () => {},
       })
 
-      expect(mockOnSearch).toHaveBeenCalledWith(typedQuery)
+      expect(mockDispatch).toHaveBeenCalledWith(mockOnSearch)
     })
 
     it('and opens the correct search page', () => {
@@ -336,7 +342,7 @@ describe('The HeaderSearch component', () => {
       const autosuggest = component.find('AutoSuggest')
 
       expect(autosuggest.exists()).toBe(true)
-      expect(mockOnSearch).toHaveBeenCalled()
+      expect(mockDispatch).toHaveBeenCalledWith(mockOnSearch)
     })
 
     it('should handle enter key with filter on', () => {
