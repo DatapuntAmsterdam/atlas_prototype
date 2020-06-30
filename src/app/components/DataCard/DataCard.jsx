@@ -1,21 +1,21 @@
 import {
-  Heading,
-  Link,
-  themeColor,
-  themeSpacing,
-  Icon,
   Card,
   CardContent,
   CardMedia,
+  Heading,
+  Icon,
+  Link,
   Paragraph,
+  themeColor,
+  themeSpacing,
 } from '@datapunt/asc-ui'
-import styled from 'styled-components'
-import RouterLink from 'redux-first-router-link'
 import React from 'react'
-import { toDataSearchType, toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
-import DataIcon from './DataIcon'
+import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
-import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
+import { toDataSearchType, toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
+import formatCount from '../../utils/formatCount'
+import DataIcon from './DataIcon'
 
 const StyledLink = styled(Link)`
   cursor: pointer;
@@ -81,7 +81,7 @@ const DataCard = ({ type, label, count, results, ...otherProps }) => (
           <StyledLink
             forwardedAs={RouterLink}
             to={toDataSearchType(type)}
-          >{`${label} (${count.toLocaleString(DEFAULT_LOCALE)})`}</StyledLink>
+          >{`${label} (${formatCount(count)})`}</StyledLink>
         </Heading>
       </div>
 

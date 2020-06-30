@@ -3,6 +3,7 @@ import { getStatusLabel, getStatusLabelAddress } from './status-labels'
 
 const getDefault = (feature) => ({
   categoryLabel: categoryLabelsByType[feature.properties.type].singular,
+  categoryLabelPlural: categoryLabelsByType[feature.properties.type].plural,
   label: feature.properties.display,
   parent: feature.properties.parent,
   type: feature.properties.type,
@@ -24,6 +25,7 @@ const getOpenbareRuimte = (item) => ({
 
 const getParkeervak = (feature) => ({
   categoryLabel: categoryLabelsByType[feature.properties.type].singular,
+  categoryLabelPlural: categoryLabelsByType[feature.properties.type].plural,
   label: feature.properties.display,
   parent: null,
   type: feature.properties.type,

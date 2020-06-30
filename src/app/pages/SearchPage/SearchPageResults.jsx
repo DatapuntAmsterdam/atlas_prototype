@@ -13,14 +13,14 @@ import {
 import React, { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import PARAMETERS from '../../../store/parameters'
+import NotificationLevel from '../../models/notification'
 import PAGES from '../../pages'
+import formatCount from '../../utils/formatCount'
 import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES } from './config'
 import SearchResultsOverview from './SearchResultsOverview'
 import { SearchResultsOverviewSkeleton, SearchResultsSkeleton } from './SearchResultsSkeleton'
 import SearchSort from './SearchSort'
-import NotificationLevel from '../../models/notification'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(4)};
@@ -122,9 +122,7 @@ const SearchPageResults = ({
       return hasQuery ? `${label} met '${query}'` : label
     }
 
-    const countFormatted = count.toLocaleString(DEFAULT_LOCALE)
-
-    return `${label} ${hasQuery ? `met '${query}'` : ''} (${countFormatted} ${
+    return `${label} ${hasQuery ? `met '${query}'` : ''} (${formatCount(count)} ${
       count === 1 ? 'resultaat' : 'resultaten'
     })`
   }

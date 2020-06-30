@@ -3,11 +3,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconMap } from '../../../../shared/assets/icons/data/IconMap.svg'
 import { ReactComponent as IconMapLayers } from '../../../../shared/assets/icons/IconMapLayers.svg'
-import { DEFAULT_LOCALE } from '../../../../shared/config/locale.config'
 import { toMapSearch, toMapSearchType } from '../../../../store/redux-first-router/actions'
 import SearchLink from '../../../components/Links/SearchLink/SearchLink'
 import NoSearchResults from '../../../components/NoSearchResults'
 import SearchHeading from '../../../components/SearchHeading/SearchHeading'
+import formatCount from '../../../utils/formatCount'
 import MapCollectionSearchResults from './MapCollectionSearchResults'
 import MapLayerSearchResults from './MapLayerSearchResults'
 
@@ -99,10 +99,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   return (
     (results.length > 0 && (
       <>
-        <SearchHeading
-          label={`${label} (${totalCount.toLocaleString(DEFAULT_LOCALE)})`}
-          icon={icon}
-        />
+        <SearchHeading label={`${label} (${formatCount(totalCount)})`} icon={icon} />
         <ResultsComponent results={results} />
         {!withPagination && !isOverviewPage && totalCount > results.length && (
           <>

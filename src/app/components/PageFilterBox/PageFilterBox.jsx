@@ -1,14 +1,14 @@
-import React, { memo } from 'react'
 import { FilterOption } from '@datapunt/asc-ui'
+import React, { memo } from 'react'
 import RouterLink from 'redux-first-router-link'
 import { useQuery } from 'urql'
-import FilterBox from '../FilterBox'
-import { routing } from '../../routes'
-import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
 import isDefined from '../../../shared/services/is-defined'
 import PARAMETERS from '../../../store/parameters'
-import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
+import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
 import { totalCountSearch } from '../../pages/SearchPage/documents.graphql'
+import { routing } from '../../routes'
+import formatCount from '../../utils/formatCount'
+import FilterBox from '../FilterBox'
 
 const ACTIVE_LINK_PROPS = { active: true, as: 'div' }
 
@@ -65,8 +65,8 @@ export default memo(({ currentPage, query }) => {
         >
           {SEARCH_PAGE_CONFIG[page].label}{' '}
           {page === routing.search.page
-            ? isDefined(totalCount) && `(${totalCount.toLocaleString(DEFAULT_LOCALE)})`
-            : isDefined(count) && `(${count.toLocaleString(DEFAULT_LOCALE)})`}
+            ? isDefined(totalCount) && `(${formatCount(totalCount)})`
+            : isDefined(count) && `(${formatCount(count)})`}
         </FilterOption>
       ))}
     </FilterBox>

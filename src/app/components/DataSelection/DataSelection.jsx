@@ -1,22 +1,22 @@
 /* eslint-disable global-require */
-import React from 'react'
-import PropTypes from 'prop-types'
-import { AngularWrapper } from 'react-angular'
+import { Alert, Heading, Paragraph, themeSpacing } from '@datapunt/asc-ui'
 import classNames from 'classnames'
-import { Alert, Paragraph, themeSpacing, Heading } from '@datapunt/asc-ui'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { AngularWrapper } from 'react-angular'
 import styled from 'styled-components'
-import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
-import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { VIEWS_TO_PARAMS } from '../../../shared/ducks/data-selection/constants'
-import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
-import DataSelectionList from './DataSelectionList/DataSelectionList'
-import ShareBar from '../ShareBar/ShareBar'
-import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
+import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { SCOPES } from '../../../shared/services/auth/auth'
-import LoginLinkContainer from '../Links/LoginLink/LoginLinkContainer'
+import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
+import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer'
 import NotificationLevel from '../../models/notification'
+import formatCount from '../../utils/formatCount'
+import LoginLinkContainer from '../Links/LoginLink/LoginLinkContainer'
+import ShareBar from '../ShareBar/ShareBar'
+import DataSelectionList from './DataSelectionList/DataSelectionList'
+import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
 
 let angularInstance = null
 
@@ -149,8 +149,8 @@ const DataSelection = ({
                 {showMessageClusteredMarkers && (
                   <StyledAlert level={NotificationLevel.Attention} compact>
                     <Paragraph>
-                      {`Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan ${MAX_NUMBER_OF_CLUSTERED_MARKERS.toLocaleString(
-                        DEFAULT_LOCALE,
+                      {`Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan ${formatCount(
+                        MAX_NUMBER_OF_CLUSTERED_MARKERS,
                       )} resultaten tegelijk kan weergeven (om technische redenen).`}
                     </Paragraph>
                     <Paragraph>

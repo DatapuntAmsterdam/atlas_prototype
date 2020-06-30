@@ -1,11 +1,11 @@
 import { themeSpacing } from '@datapunt/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
-import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import SearchLink from '../../components/Links/SearchLink/SearchLink'
 import NoSearchResults from '../../components/NoSearchResults'
 import SearchHeading from '../../components/SearchHeading/SearchHeading'
+import formatCount from '../../utils/formatCount'
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import SEARCH_PAGE_CONFIG from './config'
@@ -53,9 +53,7 @@ const SearchResultsOverview = ({ query, totalCount, results, errors, loading }) 
             {!hideOverviewHeading && (
               <SearchHeading
                 label={`${label}${
-                  resultItemTotalCount > 0
-                    ? ` (${resultItemTotalCount.toLocaleString(DEFAULT_LOCALE)})`
-                    : ''
+                  resultItemTotalCount > 0 ? ` (${formatCount(resultItemTotalCount)})` : ''
                 }`}
               />
             )}

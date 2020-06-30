@@ -130,6 +130,7 @@ export interface MapSearchResponse {
 export interface MapSearchCategory {
   type: string
   categoryLabel: string
+  categoryLabelPlural: string
   subCategories: MapSearchCategory[]
   results: MapSearchResult[]
 }
@@ -137,7 +138,9 @@ export interface MapSearchCategory {
 export interface MapSearchResult {
   type: string
   categoryLabel: string
+  categoryLabelPlural: string
   label: string
+  statusLabel: string
 }
 
 export default function mapSearch(

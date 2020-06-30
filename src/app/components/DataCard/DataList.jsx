@@ -2,9 +2,9 @@ import { breakpoint, Link, themeSpacing } from '@datapunt/asc-ui'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { toDataSearchType, toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
+import formatCount from '../../utils/formatCount'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import SearchLink from '../Links/SearchLink/SearchLink'
 import SearchHeading from '../SearchHeading/SearchHeading'
@@ -30,10 +30,7 @@ const StyledErrorMessage = styled(ErrorMessage)`
 
 const DataList = ({ type, label, count, results, withPagination }) => (
   <div>
-    <SearchHeading
-      label={`${label} (${count.toLocaleString(DEFAULT_LOCALE)})`}
-      icon={<DataIcon type={type} />}
-    />
+    <SearchHeading label={`${label} (${formatCount(count)})`} icon={<DataIcon type={type} />} />
 
     {results ? (
       <List hasMarginBottom={!withPagination}>

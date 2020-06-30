@@ -19,7 +19,7 @@ const getSubCategories = (items, type) => items.filter((subCategory) => subCateg
 
 export const createMapSearchResultsModel = (allResults, isSubCategory = false) =>
   sortByCategoryTypeOrder(filterNonPandMonuments(allResults)).reduce((newList, currentValue) => {
-    const { categoryLabel, type, parent } = currentValue
+    const { categoryLabel, categoryLabelPlural, type, parent } = currentValue
 
     // if the category already exists or if the category has a parent
     // and isSubCategory is false return the newList
@@ -44,6 +44,7 @@ export const createMapSearchResultsModel = (allResults, isSubCategory = false) =
       ...newList,
       {
         categoryLabel,
+        categoryLabelPlural,
         type,
         results,
         subCategories:

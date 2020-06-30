@@ -14,6 +14,7 @@ describe('transformResultByType', () => {
     }
     expect(transformResultByType(result)).toEqual({
       categoryLabel: 'Gebied',
+      categoryLabelPlural: 'Gebieden',
       label: 'Centrum',
       parent: undefined,
       statusLabel: 'stadsdeel',
@@ -38,6 +39,7 @@ describe('transformResultByType', () => {
     }
     expect(transformResultByType(result)).toEqual({
       categoryLabel: 'Adres',
+      categoryLabelPlural: 'Adressen',
       isNevenadres: false,
       label: 'Singel 190-2',
       parent: 'bag/pand',
@@ -61,6 +63,7 @@ describe('transformResultByType', () => {
     }
     expect(transformResultByType(result)).toEqual({
       categoryLabel: 'Openbare ruimte',
+      categoryLabelPlural: 'Openbare ruimtes',
       label: 'Torensteeg',
       parent: undefined,
       statusLabel: '',
@@ -82,6 +85,7 @@ describe('transformResultByType', () => {
     }
     expect(transformResultByType(result)).toEqual({
       categoryLabel: 'Openbare ruimte',
+      categoryLabelPlural: 'Openbare ruimtes',
       label: 'Torensteeg',
       parent: undefined,
       statusLabel: 'NotWeg',

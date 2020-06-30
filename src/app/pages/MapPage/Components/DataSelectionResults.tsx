@@ -1,4 +1,5 @@
-import React, { useContext, useState, useMemo, useCallback, useEffect } from 'react'
+import { mapPanelComponents, Marker } from '@datapunt/arm-core'
+import { Table } from '@datapunt/asc-assets'
 import {
   Accordion,
   AccordionWrapper,
@@ -16,21 +17,20 @@ import {
   themeColor,
   themeSpacing,
 } from '@datapunt/asc-ui'
-import { Table } from '@datapunt/asc-assets'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+import L, { LatLng } from 'leaflet'
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import RouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
-import L, { LatLng } from 'leaflet'
-import { mapPanelComponents, Marker } from '@datapunt/arm-core'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { useSelector } from 'react-redux'
-import { Overlay } from '../types'
-import DataSelectionContext from '../DataSelectionContext'
-import NotificationLevel from '../../../models/notification'
-import config, { AuthScope, DataSelectionType } from './config'
 import { getUserScopes } from '../../../../shared/ducks/user/user'
-import LoginLinkContainer from '../../../components/Links/LoginLink/LoginLinkContainer'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage'
-import { DEFAULT_LOCALE } from '../../../../shared/config/locale.config'
+import LoginLinkContainer from '../../../components/Links/LoginLink/LoginLinkContainer'
+import NotificationLevel from '../../../models/notification'
+import formatCount from '../../../utils/formatCount'
+import DataSelectionContext from '../DataSelectionContext'
+import { Overlay } from '../types'
+import config, { AuthScope, DataSelectionType } from './config'
 
 const { MapPanelContent } = mapPanelComponents
 
@@ -184,9 +184,7 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
 
   const totalNumberOfResults = useMemo(
     () =>
-      dataSelectionWithMarkers
-        .reduce((acc, { totalCount }) => acc + totalCount, 0)
-        .toLocaleString(DEFAULT_LOCALE),
+      formatCount(dataSelectionWithMarkers.reduce((acc, { totalCount }) => acc + totalCount, 0)),
     [dataSelectionWithMarkers],
   )
 

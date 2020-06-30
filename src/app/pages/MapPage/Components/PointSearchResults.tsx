@@ -5,10 +5,13 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import mapSearch, {
+  MapSearchCategory,
   MapSearchResponse,
   MapSearchResult,
 } from '../../../../map/services/map-search/map-search'
 import { getUser } from '../../../../shared/ducks/user/user'
+import formatNumber from '../../../../shared/services/number-formatter/number-formatter'
+import MoreResultsWhenLoggedIn from '../../../components/Alerts/MoreResultsWhenLoggedIn'
 import ShowMore from '../../../components/ShowMore'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import { Overlay } from '../types'
@@ -62,6 +65,16 @@ const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
 `
 
+const StatusLabel = styled.span`
+  font-weight: normal;
+`
+
+const StyledMoreResultsWhenLoggedIn = styled(MoreResultsWhenLoggedIn)`
+  margin-top: ${themeSpacing(4)};
+`
+
+const EXCLUDED_RESULTS = 'vestigingen'
+
 const PointSearchResults: React.FC<PointSearchResultsProps> = ({
   setLocation,
   currentOverlay,
@@ -96,6 +109,9 @@ const PointSearchResults: React.FC<PointSearchResultsProps> = ({
       </CoordinatesText>
       <PanoramaPreview location={location} radius={180} aspect={2.5} />
       {renderResult(result)}
+      {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
+        <StyledMoreResultsWhenLoggedIn excludedResults={EXCLUDED_RESULTS} />
+      )}
     </StyledMapPanelContent>
   )
 }
@@ -118,12 +134,12 @@ function renderResponse({ results }: MapSearchResponse) {
 
   return results.map((category) => (
     <React.Fragment key={category.type}>
-      <CategoryHeading as="h2">{category.categoryLabel}</CategoryHeading>
+      <CategoryHeading as="h2">{formatCategoryTitle(category)}</CategoryHeading>
       {renderResultItems(category.results)}
       {category.subCategories.map((subCategory) => (
         <SubCategoryBlock key={category.type + subCategory.type}>
-          <CategoryHeading as="h3">{category.categoryLabel}</CategoryHeading>
-          {renderResultItems(category.results)}
+          <CategoryHeading as="h3">{formatCategoryTitle(subCategory)}</CategoryHeading>
+          {renderResultItems(subCategory.results)}
         </SubCategoryBlock>
       ))}
     </React.Fragment>
@@ -137,10 +153,21 @@ function renderResultItems(results: MapSearchResult[]) {
         // TODO: Actually link to the details page for the result.
         <ResultLink key={result.type + result.label} href="/" variant="with-chevron">
           {result.label}
+          {result.statusLabel && (
+            <>
+              &nbsp;<StatusLabel>({result.statusLabel})</StatusLabel>
+            </>
+          )}
         </ResultLink>
       ))}
     </ShowMore>
   )
+}
+
+function formatCategoryTitle(category: MapSearchCategory) {
+  return category.results.length > 1
+    ? `${category.categoryLabelPlural} (${formatNumber(category.results.length)})`
+    : category.categoryLabel
 }
 
 export default PointSearchResults
