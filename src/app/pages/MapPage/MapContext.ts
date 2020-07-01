@@ -1,5 +1,5 @@
-import { createContext } from 'react'
 import { MapLayer as MapLayerProps } from '@datapunt/arm-core/es/constants'
+import { createContext } from 'react'
 
 export type ActiveMapLayer = {
   id: string
@@ -44,7 +44,7 @@ export type MapState = {
   overlays: Array<Overlay> // TODO: Add auto typegeneration
   zoomLevel: number
   viewCenter: Array<number>
-  location?: Location
+  location: Location | null
   detailUrl?: string
   geometry?: Geometry
   drawingGeometry?: DrawingGeometry
@@ -75,6 +75,7 @@ export const initialState: MapContextProps = {
   mapLayers: [],
   overlays: [],
   viewCenter: [DEFAULT_LAT, DEFAULT_LNG],
+  location: null,
   zoomLevel: 11,
   setActiveBaseLayer: () => {},
   setActiveMapLayers: () => {},

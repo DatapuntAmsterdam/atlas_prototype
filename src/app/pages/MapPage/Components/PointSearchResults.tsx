@@ -37,18 +37,24 @@ const CoordinatesText = styled.span`
 `
 
 const CategoryHeading = styled(Heading)`
-  margin-top: ${themeSpacing(6)};
   margin-bottom: ${themeSpacing(2)};
   color: ${themeColor('secondary', 'main')};
 `
 
 const ResultLink = styled(Link)`
   width: 100%;
-  margin-bottom: ${themeSpacing(1)};
+  padding: ${themeSpacing(1)} 0;
+  /* TODO: Remove this once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/727 */
+  font-size: 16px;
+  line-height: 20px;
+`
+
+const CategoryBlock = styled.div`
+  margin-bottom: ${themeSpacing(6)};
 `
 
 const SubCategoryBlock = styled.div`
-  padding: ${themeSpacing(1, 0, 1, 4)};
+  padding: ${themeSpacing(4, 0, 2, 4)};
   margin-bottom: ${themeSpacing(1)};
   border-left: 2px solid ${themeColor('tint', 'level4')};
   border-bottom: 1px solid ${themeColor('tint', 'level4')};
@@ -71,6 +77,10 @@ const StatusLabel = styled.span`
 
 const StyledMoreResultsWhenLoggedIn = styled(MoreResultsWhenLoggedIn)`
   margin-top: ${themeSpacing(4)};
+`
+
+const StyledPanoramaPreview = styled(PanoramaPreview)`
+  margin-bottom: ${themeSpacing(6)};
 `
 
 const EXCLUDED_RESULTS = 'vestigingen'
@@ -107,7 +117,7 @@ const PointSearchResults: React.FC<PointSearchResultsProps> = ({
       <CoordinatesText>
         <strong>Locatie:</strong> {location.lat}, {location.lng}
       </CoordinatesText>
-      <PanoramaPreview location={location} radius={180} aspect={2.5} />
+      <StyledPanoramaPreview location={location} radius={180} aspect={2.5} />
       {renderResult(result)}
       {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
         <StyledMoreResultsWhenLoggedIn excludedResults={EXCLUDED_RESULTS} />
@@ -133,7 +143,7 @@ function renderResponse({ results }: MapSearchResponse) {
   }
 
   return results.map((category) => (
-    <React.Fragment key={category.type}>
+    <CategoryBlock key={category.type}>
       <CategoryHeading as="h2">{formatCategoryTitle(category)}</CategoryHeading>
       {renderResultItems(category.results)}
       {category.subCategories.map((subCategory) => (
@@ -142,7 +152,7 @@ function renderResponse({ results }: MapSearchResponse) {
           {renderResultItems(subCategory.results)}
         </SubCategoryBlock>
       ))}
-    </React.Fragment>
+    </CategoryBlock>
   ))
 }
 

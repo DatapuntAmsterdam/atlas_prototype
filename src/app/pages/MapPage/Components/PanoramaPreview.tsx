@@ -2,8 +2,12 @@ import { Link, perceivedLoading, themeColor, themeSpacing } from '@datapunt/asc-
 import { LatLng } from 'leaflet'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { FetchPanoramaOptions, getPanoramaThumbnail } from '../../../../api/panorama/thumbnail'
-import usePromise, { PromiseStatus } from '../../../utils/usePromise'
+import {
+  FetchPanoramaOptions,
+  getPanoramaThumbnail,
+  PanoramaThumbnail,
+} from '../../../../api/panorama/thumbnail'
+import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLng
@@ -53,6 +57,7 @@ const PanoramaPreview: React.FC<PanoramaPreviewProps> = ({
   horizon,
   aspect,
   radius,
+  ...otherProps
 }) => {
   const result = usePromise(
     useMemo(
@@ -68,41 +73,29 @@ const PanoramaPreview: React.FC<PanoramaPreviewProps> = ({
     ),
   )
 
+  return <PreviewContainer {...otherProps}>{renderResult(result)}</PreviewContainer>
+}
+
+function renderResult(result: PromiseResult<PanoramaThumbnail | null>) {
   if (result.status === PromiseStatus.Pending) {
-    return renderSkeleton()
+    return <PreviewSkeleton />
   }
 
   if (result.status === PromiseStatus.Rejected) {
-    return renderMessage('Kon panoramabeeld niet laden.')
+    return <PreviewMessage>Kon panoramabeeld niet laden.</PreviewMessage>
   }
 
   if (!result.value) {
-    return renderMessage('Geen panoramabeeld beschikbaar.')
+    return <PreviewMessage>Geen panoramabeeld beschikbaar.</PreviewMessage>
   }
 
   return (
-    <PreviewContainer>
+    <>
       <PreviewImage src={result.value.url} alt="Voorvertoning van panoramabeeld" />
       <PreviewLink href="/" variant="with-chevron">
         Bekijk panoramabeeld
       </PreviewLink>
-    </PreviewContainer>
-  )
-}
-
-function renderSkeleton() {
-  return (
-    <PreviewContainer>
-      <PreviewSkeleton />
-    </PreviewContainer>
-  )
-}
-
-function renderMessage(message: string) {
-  return (
-    <PreviewContainer>
-      <PreviewMessage>{message}</PreviewMessage>
-    </PreviewContainer>
+    </>
   )
 }
 
