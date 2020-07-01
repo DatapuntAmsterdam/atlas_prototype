@@ -8,6 +8,7 @@ import {
   showAboveBackDrop,
   styles,
   Hidden,
+  constants,
 } from '@datapunt/asc-ui'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
@@ -24,7 +25,7 @@ const SearchBarWrapper = styled.div`
     showAboveBackDrop(expanded)({ zIndexOffset: Z_INDEX_OFFSET })}
 
   ${styles.SelectWrapperStyle} {
-    height: 36px; // TODO: find out why height from the select is 40px and the searchfield is 36px... And where this should be changed
+    height: ${constants.SEARCH_BAR_HEIGHT}px;
     max-width: 30%;
   }
 
