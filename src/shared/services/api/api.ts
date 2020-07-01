@@ -22,21 +22,23 @@ const handleErrors = (response: Response, reloadOnUnauthorized: boolean) => {
   return response
 }
 
+// TODO: Change parameters of fetchWithToken to match regular Fetch API.
 export const fetchWithToken = <T = any>(
   url: string,
   params?: UrlParams,
   cancel?: AbortSignal,
   reloadOnUnauthorized = false,
+  headers?: Headers,
   token = getAccessToken(),
 ): Promise<T> => {
-  const headers = new Headers()
+  const requestHeaders = headers ?? new Headers()
 
   if (token.length > 0) {
-    headers.set('Authorization', SHARED_CONFIG.AUTH_HEADER_PREFIX + token)
+    requestHeaders.set('Authorization', SHARED_CONFIG.AUTH_HEADER_PREFIX + token)
   }
 
   const options: RequestInit = {
-    headers,
+    headers: requestHeaders,
   }
 
   if (cancel) {

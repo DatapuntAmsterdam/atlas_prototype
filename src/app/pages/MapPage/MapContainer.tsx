@@ -1,3 +1,5 @@
+import { Geometry } from 'geojson'
+import { LatLngLiteral } from 'leaflet'
 import React from 'react'
 import {
   getMapBaseLayers as fetchBaseLayers,
@@ -19,10 +21,7 @@ import {
 import getParam from '../../utils/getParam'
 import MapContext, {
   ActiveMapLayer,
-  DrawingGeometry,
-  Geometry,
   initialState,
-  Location,
   MapContextProps,
   MapLayer,
   MapState,
@@ -55,10 +54,10 @@ type Action =
   | { type: 'setActiveMapLayers'; payload: Array<ActiveMapLayer> }
   | { type: 'setVisibleMapLayer'; payload: ActiveMapLayer }
   | { type: 'setOverlays'; payload: Array<Overlay> }
-  | { type: 'setLocation'; payload: Location | null }
+  | { type: 'setLocation'; payload: LatLngLiteral | null }
   | { type: 'setDetailUrl'; payload: string }
   | { type: 'setGeometry'; payload: Geometry }
-  | { type: 'setDrawingGeometry'; payload: DrawingGeometry }
+  | { type: 'setDrawingGeometry'; payload: LatLngLiteral[] }
 
 const reducer = (state: MapState, action: Action): MapState => {
   switch (action.type) {
@@ -160,7 +159,7 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
     setParam('lagen', encodeLayers([...state.activeMapLayers, { id, isVisible: !isVisible }]))
   }
 
-  function setLocation(location: Location | null) {
+  function setLocation(location: LatLngLiteral | null) {
     dispatch({ type: 'setLocation', payload: location })
     setParam(PARAMETERS.LOCATION, location ? encodeLocation(location) : null)
   }
@@ -171,12 +170,10 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
   }
 
   function setGeometry(payload: Geometry) {
-    if (payload.type && payload.coordinates) {
-      dispatch({ type: 'setGeometry', payload })
-    }
+    dispatch({ type: 'setGeometry', payload })
   }
 
-  function setDrawingGeometry(payload: DrawingGeometry) {
+  function setDrawingGeometry(payload: LatLngLiteral[]) {
     dispatch({ type: 'setDrawingGeometry', payload })
 
     if (payload) setParam(PARAMETERS.DRAWING_GEOMETRY, encodeBounds(payload))

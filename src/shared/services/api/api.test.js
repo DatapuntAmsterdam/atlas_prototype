@@ -21,6 +21,7 @@ describe('Api service', () => {
         },
         undefined,
         undefined,
+        undefined,
         '',
       )
 
@@ -37,6 +38,7 @@ describe('Api service', () => {
             entryOne: 'foo',
             entryTwo: 'bar',
           },
+          undefined,
           undefined,
           undefined,
           '',
@@ -58,11 +60,31 @@ describe('Api service', () => {
         },
         signal,
         undefined,
+        undefined,
         'token12345',
       )
 
       expect('signal' in fetch.mock.calls[0][1]).toBe(true)
       expect(fetch.mock.calls[0][1].headers.get('Authorization')).toEqual('Bearer token12345')
+    })
+
+    it('should pass custom headers along', async () => {
+      fetch.mockResponseOnce(JSON.stringify(response))
+
+      const headers = new Headers({
+        Test: 'foo',
+      })
+
+      await fetchWithToken(
+        'http://localhost/',
+        undefined,
+        undefined,
+        undefined,
+        headers,
+        'token12345',
+      )
+
+      expect(fetch.mock.calls[0][1].headers.get('Test')).toEqual('foo')
     })
   })
 

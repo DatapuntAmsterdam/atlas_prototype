@@ -7,13 +7,13 @@ import {
 } from '@datapunt/arm-draw'
 import { ascDefaultTheme, themeColor } from '@datapunt/asc-ui'
 import { useMapInstance } from '@datapunt/react-maps'
-import L, { LatLng, LatLngTuple, Polygon } from 'leaflet'
+import L, { LatLng, LatLngLiteral, LatLngTuple, Polygon } from 'leaflet'
 import React, { useContext, useEffect, useMemo } from 'react'
 import PARAMETERS from '../../../../store/parameters'
 import { decodeBounds } from '../../../../store/queryParameters'
 import getParam from '../../../utils/getParam'
 import DataSelectionContext from '../DataSelectionContext'
-import MapContext, { SimpleGeometry } from '../MapContext'
+import MapContext from '../MapContext'
 import { Overlay, SnapPoint } from '../types'
 
 type MarkerGroup = {
@@ -140,8 +140,8 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
     }
   }, [mapInstance])
 
-  const setInitialDrawing = (polybounds: Array<SimpleGeometry>) => {
-    function createPolyline(coordinates: Array<SimpleGeometry>): PolylineType {
+  const setInitialDrawing = (polybounds: LatLngLiteral[]) => {
+    function createPolyline(coordinates: LatLngLiteral[]): PolylineType {
       const bounds = (coordinates.map(({ lat, lng }) => [lat, lng]) as unknown) as LatLng[]
 
       return L.polyline(bounds, {
@@ -150,7 +150,7 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
       }) as PolylineType
     }
 
-    function createPolygon(coordinates: Array<SimpleGeometry>): PolygonType {
+    function createPolygon(coordinates: LatLngLiteral[]): PolygonType {
       const bounds = (coordinates.map(({ lat, lng }) => [lat, lng]) as unknown) as LatLng[]
 
       return L.polygon(bounds, {

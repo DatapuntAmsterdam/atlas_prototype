@@ -1,4 +1,5 @@
 import NotificationLevel from '../../app/models/notification'
+import formatDate from '../../shared/services/date-formatter/date-formatter'
 import { DetailResult, DetailResultItemType } from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
 import categoryLabels from './map-search/category-labels'
@@ -72,6 +73,10 @@ export const endpointTypes = {
 }
 
 export interface ServiceDefinition {
+  // TODO: 'type' should be required once all service definitions have one.
+  type?: string
+  // TODO: 'endpoint' should be required once all service definitions have one.
+  endpoint?: string
   authScope?: string
   normalization?: (result: any) => any
   mapDetail: (result: any) => DetailResult
@@ -322,48 +327,41 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.bedrijfsinvesteringszone]: {
+    type: 'vsd/biz',
+    endpoint: 'vsd/biz',
     mapDetail: (result) => ({
       title: categoryLabels.bedrijfsinvesteringszone.singular,
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Type', value: result.biz_type },
         {
-          type: DetailResultItemType.Default,
-          label: 'Heffingsgrondslag',
-          value: result.heffingsgrondslag,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Jaarlijkse heffing',
-          value: result.heffing_display,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Aantal heffingsplichtigen',
-          value: result.bijdrageplichtigen,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Type', description: result.biz_type },
+            { term: 'Heffingsgrondslag', description: result.heffingsgrondslag },
+            { term: 'Jaarlijkse heffing', description: result.heffing_display },
+            { term: 'Aantal heffingsplichtigen', description: result.bijdrageplichtigen },
+          ].filter(hasDescription),
         },
       ],
     }),
   },
   [endpointTypes.bekendmakingen]: {
     normalization: bekendmakingen,
+    type: 'vsd/bekendmakingen',
+    endpoint: 'vsd/bekendmakingen',
     mapDetail: (result) => ({
       title: categoryLabels.bekendmakingen.singular,
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Datum', value: result.date },
-        { type: DetailResultItemType.Default, label: 'Categorie', value: result.categorie },
-        { type: DetailResultItemType.Default, label: 'Onderwerp', value: result.onderwerp },
         {
-          type: DetailResultItemType.Default,
-          label: 'Beschrijving',
-          value: result.beschrijving,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Meer informatie',
-          value: result.url,
-          link: result.url,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Datum', description: result.date },
+            { term: 'Categorie', description: result.categorie },
+            { term: 'Onderwerp', description: result.onderwerp },
+            { term: 'Beschrijving', description: result.beschrijving },
+            { term: 'Meer informatie', description: result.url, link: result.url },
+          ].filter(hasDescription),
         },
       ],
     }),
@@ -376,77 +374,93 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.explosievenGevrijwaardGebied]: {
+    type: 'explosieven/gevrijwaardgebied',
+    endpoint: 'milieuthemas/explosieven/gevrijwaardgebied',
     normalization: explosieven,
     mapDetail: (result) => ({
       title: 'Gevrijwaard gebied',
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Datum rapport', value: result.date },
-        { type: DetailResultItemType.Default, label: 'Soort handeling', value: result.type },
-        { type: DetailResultItemType.Default, label: 'Bron', value: result.bron },
         {
-          type: DetailResultItemType.Default,
-          label: 'Opmerkingen',
-          value: result.opmerkingen,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Datum rapport', description: result.date && formatDate(result.date) },
+            { term: 'Soort handeling', description: result.type },
+            { term: 'Bron', description: result.bron },
+            {
+              term: 'Opmerkingen',
+              description: result.opmerkingen,
+            },
+          ].filter(hasDescription),
         },
       ],
     }),
   },
   [endpointTypes.explosievenInslag]: {
+    type: 'explosieven/inslagen',
+    endpoint: 'milieuthemas/explosieven/inslagen',
     normalization: explosieven,
     mapDetail: (result) => ({
       title: 'Inslag',
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Datum', value: result.datum },
         {
-          type: DetailResultItemType.Default,
-          label: 'Datum van inslag',
-          value: result.datum_inslag,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Datum', description: result.datum },
+            {
+              term: 'Datum van inslag',
+              description: result.datum_inslag && formatDate(result.datum_inslag),
+            },
+            { term: 'Soort handeling', description: result.type },
+            { term: 'Bron', description: result.bron },
+            { term: 'Opmerkingen', description: result.opmerkingen },
+          ].filter(hasDescription),
         },
-        { type: DetailResultItemType.Default, label: 'Soort handeling', value: result.type },
-        { type: DetailResultItemType.Default, label: 'Bron', value: result.bron },
-        { type: DetailResultItemType.Default, label: 'Opmerkingen', value: result.opmerkingen },
       ],
     }),
   },
   [endpointTypes.explosievenUitgevoerdOnderzoek]: {
+    type: 'explosieven/uitgevoerdonderzoek',
+    endpoint: 'milieuthemas/explosieven/uitgevoerdonderzoek',
     normalization: explosieven,
     mapDetail: (result) => ({
       title: 'Reeds uitgevoerd CE onderzoek',
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Datum rapport', value: result.date },
-        { type: DetailResultItemType.Default, label: 'Soort rapportage', value: result.type },
         {
-          type: DetailResultItemType.Default,
-          label: 'Onderzoeksgebied',
-          value: result.onderzoeksgebied,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Verdacht gebied',
-          value: result.verdacht_gebied,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Datum rapport', description: result.date && formatDate(result.date) },
+            { term: 'Soort rapportage', description: result.type },
+            { term: 'Onderzoeksgebied', description: result.onderzoeksgebied },
+            { term: 'Verdacht gebied', description: result.verdacht_gebied },
+          ].filter(hasDescription),
         },
       ],
     }),
   },
   [endpointTypes.explosievenVerdachtGebied]: {
+    type: 'explosieven/verdachtgebied',
+    endpoint: 'milieuthemas/explosieven/verdachtgebied',
     mapDetail: (result) => ({
       title: 'Verdacht gebied',
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Hoofdgroep', value: result.type },
-        { type: DetailResultItemType.Default, label: 'Subsoort', value: result.subtype },
         {
-          type: DetailResultItemType.Default,
-          label: 'Opmerkingen',
-          value: result.opmerkingen,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Hoofdgroep', description: result.type },
+            { term: 'Subsoort', description: result.subtype },
+            { term: 'Opmerkingen', description: result.opmerkingen },
+          ].filter(hasDescription),
         },
       ],
     }),
   },
   [endpointTypes.fietspaaltjes]: {
+    type: 'fietspaaltjes/fietspaaltjes',
+    endpoint: 'v1/fietspaaltjes/fietspaaltjes',
     mapDetail: (result) => {
       function formatList(items: string[] | null) {
         if (items instanceof Array) {
@@ -460,84 +474,60 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         title: categoryLabels.fietspaaltje.singular,
         subTitle: result.id,
         items: [
-          { type: DetailResultItemType.Default, label: 'Type', value: formatList(result.type) },
-          { type: DetailResultItemType.Default, label: 'Aantal', value: result.count },
           {
-            type: DetailResultItemType.Default,
-            label: 'Noodzaak',
-            value: formatList(result.noodzaak),
-          },
-          {
-            type: DetailResultItemType.Default,
-            label: 'Uiterlijk',
-            value: formatList(result.uiterlijk),
-          },
-          {
-            type: DetailResultItemType.Default,
-            label: 'Omschrijving',
-            value: formatList(result.soortPaaltje),
-          },
-          { type: DetailResultItemType.Default, label: 'Ruimte', value: formatList(result.ruimte) },
-          {
-            type: DetailResultItemType.Default,
-            label: 'Markering',
-            value: formatList(result.markering),
-          },
-          {
-            type: DetailResultItemType.Default,
-            label: 'Soort weg',
-            value: formatList(result.soortWeg),
-          },
-          {
-            type: DetailResultItemType.Default,
-            label: 'Status',
-            value: formatList(result.paaltjesWeg),
-          },
-          {
-            type: DetailResultItemType.Default,
-            label: 'Zichtbaarheid',
-            value: formatList(result.zichtInDonker),
+            type: DetailResultItemType.DefinitionList,
+            entries: [
+              { term: 'Type', description: formatList(result.type) },
+              { term: 'Aantal', description: result.count },
+              { term: 'Noodzaak', description: formatList(result.noodzaak) },
+              { term: 'Uiterlijk', description: formatList(result.uiterlijk) },
+              { term: 'Omschrijving', description: formatList(result.soortPaaltje) },
+              { term: 'Ruimte', description: formatList(result.ruimte) },
+              { term: 'Markering', description: formatList(result.markering) },
+              { term: 'Soort weg', description: formatList(result.soortWeg) },
+              { term: 'Status', description: formatList(result.paaltjesWeg) },
+              { term: 'Zichtbaarheid', description: formatList(result.zichtInDonker) },
+            ].filter(hasDescription),
           },
         ],
       }
     },
   },
   [endpointTypes.evenementen]: {
+    type: 'vsd/evenementen',
+    endpoint: 'vsd/evenementen',
     normalization: evenementen,
     mapDetail: (result) => ({
       title: categoryLabels.evenementen.singular,
       subTitle: result.titel,
       items: [
-        { type: DetailResultItemType.Default, label: 'Startdatum', value: result.startDate },
-        { type: DetailResultItemType.Default, label: 'Einddatum', value: result.endDate },
-        { type: DetailResultItemType.Default, label: 'Omschrijving', value: result.omschrijving },
         {
-          type: DetailResultItemType.Default,
-          label: 'Meer informatie',
-          value: result.url,
-          link: result.url,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Startdatum', description: result.startDate },
+            { term: 'Einddatum', description: result.endDate },
+            { term: 'Omschrijving', description: result.omschrijving },
+            { term: 'Meer informatie', description: result.url, link: result.url },
+          ].filter(hasDescription),
         },
       ],
     }),
   },
   [endpointTypes.reclamebelasting]: {
+    type: 'vsd/reclamebelasting',
+    endpoint: 'vsd/reclamebelasting',
     normalization: reclamebelasting,
     mapDetail: (result) => ({
       title: categoryLabels.reclamebelasting.singular,
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Tarief per', value: result.localeDate },
         {
-          type: DetailResultItemType.Default,
-          label: 'Website',
-          value: result.website,
-          link: result.website,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Tarieven',
-          value: result.tarieven,
-          link: result.tarieven,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Tarief per', description: result.localeDate },
+            { term: 'Website', description: result.website, link: result.website },
+            { term: 'Tarieven', description: result.tarieven, link: result.tarieven },
+          ].filter(hasDescription),
         },
       ],
     }),
@@ -578,6 +568,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.gebiedenUnesco]: {
+    type: 'gebieden/unesco',
+    endpoint: 'gebieden/unesco',
     mapDetail: (result) => ({
       title: 'UNESCO',
       subTitle: result._display,
@@ -592,18 +584,21 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.grondexploitaties]: {
+    type: 'grex/projecten',
+    endpoint: 'v1/grex/projecten',
     normalization: grexProject,
     mapDetail: (result) => ({
       title: categoryLabels.grondexploitatie.singular,
       subTitle: result.plannaam,
       items: [
-        { type: DetailResultItemType.Default, label: 'Nummer', value: result.id },
-        { type: DetailResultItemType.Default, label: 'Status', value: result.planstatusFormatted },
-        { type: DetailResultItemType.Default, label: 'Startdatum', value: result.startdatum },
         {
-          type: DetailResultItemType.Default,
-          label: 'Oppervlakte',
-          value: result.oppervlakteFormatted,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Nummer', description: result.id },
+            { term: 'Status', description: result.planstatusFormatted },
+            { term: 'Startdatum', description: result.startdatum },
+            { term: 'Oppervlakte', description: result.oppervlakteFormatted },
+          ].filter(hasDescription),
         },
       ],
     }),
@@ -685,25 +680,24 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.oplaadpunten]: {
+    type: 'vsd/oplaadpunten',
+    endpoint: 'vsd/oplaadpunten',
     normalization: oplaadpunten,
     mapDetail: (result) => ({
       title: categoryLabels.oplaadpunten.singular,
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Adres', value: result.address },
-        { type: DetailResultItemType.Default, label: 'Aantal', value: result.quantity },
-        { type: DetailResultItemType.Default, label: 'Soort', value: result.type },
         {
-          type: DetailResultItemType.Default,
-          label: 'Capaciteit',
-          value: result.charging_capability,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Adres', description: result.address },
+            { term: 'Aantal', description: result.quantity },
+            { term: 'Soort', description: result.type },
+            { term: 'Capaciteit', description: result.charging_capability },
+            { term: 'Connectortype', description: result.connector_type },
+            { term: 'Status', description: result.currentStatus },
+          ].filter(hasDescription),
         },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Connectortype',
-          value: result.connector_type,
-        },
-        { type: DetailResultItemType.Default, label: 'Status', value: result.currentStatus },
       ],
     }),
   },
@@ -729,29 +723,35 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.parkeerzones]: {
+    type: 'vsd/parkeerzones',
+    endpoint: 'vsd/parkeerzones',
     normalization: parkeerzones,
     mapDetail: (result) => ({
       title: categoryLabels.parkeerzones.singular,
       subTitle: result._display,
       items: [
         {
-          type: DetailResultItemType.Default,
-          label: 'Omschrijving',
-          value: result.gebied_omschrijving,
+          type: DetailResultItemType.DefinitionList,
+          entries: [{ term: 'Omschrijving', description: result.gebied_omschrijving }].filter(
+            hasDescription,
+          ),
         },
       ],
     }),
   },
   [endpointTypes.parkeerzonesUitz]: {
+    type: 'vsd/parkeerzones_uitz',
+    endpoint: 'vsd/parkeerzones_uitz',
     normalization: parkeerzones,
     mapDetail: (result) => ({
       title: categoryLabels.parkeerzonesUitz.singular,
       subTitle: result._display,
       items: [
         {
-          type: DetailResultItemType.Default,
-          label: 'Omschrijving',
-          value: result.omschrijving,
+          type: DetailResultItemType.DefinitionList,
+          entries: [{ term: 'Omschrijving', description: result.omschrijving }].filter(
+            hasDescription,
+          ),
         },
       ],
     }),
@@ -834,6 +834,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           }
         : {
             title: categoryLabels.vestiging.singular,
+            subTitle: 'Authenticatie vereist',
             items: [],
             notifications: [
               {
@@ -845,6 +846,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           },
   },
   [endpointTypes.winkelgebied]: {
+    type: 'vsd/winkgeb',
+    endpoint: 'vsd/winkgeb',
     normalization: winkelgebied,
     mapDetail: (result) => ({
       title: categoryLabels.winkelgebied.singular,
@@ -858,9 +861,15 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       ],
       items: [
         {
-          type: DetailResultItemType.Default,
-          label: 'Categorie',
-          value: result.categorie_naam ? `${result.categorie_naam} (${result.categorie})` : false, // check where to normalize
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            {
+              term: 'Categorie',
+              description: result.categorie_naam
+                ? `${result.categorie_naam} (${result.categorie})`
+                : undefined,
+            },
+          ].filter(hasDescription),
         },
       ],
     }),
@@ -890,6 +899,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           }
         : {
             title: categoryLabels.kadastraalSubject.singular,
+            subTitle: 'Authenticatie vereist',
             items: [],
             notifications: [
               {
@@ -911,6 +921,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           }
         : {
             title: categoryLabels.mac.singular,
+            subTitle: 'Authenticatie vereist',
             items: [],
             notifications: [
               {
@@ -1076,3 +1087,14 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
 }
 
 export default servicesByEndpointType
+
+// TODO: Remove 'servicesByEndpointType' and export 'serviceDefinitions' only.
+const serviceDefinitions = Object.values(servicesByEndpointType)
+
+export function getServiceDefinitions() {
+  return serviceDefinitions
+}
+
+function hasDescription({ description }: { description: any }) {
+  return !!description
+}

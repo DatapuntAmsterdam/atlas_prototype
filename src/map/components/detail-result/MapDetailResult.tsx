@@ -1,9 +1,10 @@
+import { Alert, Link } from '@datapunt/asc-ui'
 import React, { Fragment } from 'react'
-import { Alert } from '@datapunt/asc-ui'
 import {
   DetailResult,
   DetailResultItem,
   DetailResultItemDefault,
+  DetailResultItemDefinitionList,
   DetailResultItemTable,
   DetailResultItemType,
 } from '../../types/details'
@@ -40,7 +41,6 @@ const MapDetailResult: React.FC<MapDetailResultProps> = ({
 
         return (
           <Alert
-            compact
             key={notification.value}
             dismissible={notification.canClose}
             level={notification.level}
@@ -61,6 +61,8 @@ function renderItem(item: DetailResultItem, index: number) {
   switch (item.type) {
     case DetailResultItemType.Default:
       return renderDefaultItem(item)
+    case DetailResultItemType.DefinitionList:
+      return renderDefinitionListItem(item)
     case DetailResultItemType.Table:
       return renderTableItem(item, index)
     default:
@@ -87,6 +89,25 @@ function renderDefaultItem(item: DetailResultItemDefault) {
   }
 
   return <MapDetailResultItem key={item.label} item={item} />
+}
+
+function renderDefinitionListItem(item: DetailResultItemDefinitionList) {
+  return item.entries.map((entry) => (
+    <li key={entry.term + entry.description} className="map-detail-result__item">
+      <section className="map-detail-result__item-content">
+        <div className="map-detail-result__item-label">{entry.term}</div>
+        <div className="map-detail-result__item-value">
+          {entry.link ? (
+            <Link href={entry.link} variant="with-chevron" target="_blank">
+              {entry.description}
+            </Link>
+          ) : (
+            entry.description
+          )}
+        </div>
+      </section>
+    </li>
+  ))
 }
 
 function renderTableItem(item: DetailResultItemTable, index: number) {

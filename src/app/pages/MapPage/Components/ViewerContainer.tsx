@@ -3,8 +3,6 @@ import { Overlay } from '@datapunt/arm-core/lib/components/MapPanel/constants'
 import { Spinner, ViewerContainer as ViewerContainerComponent } from '@datapunt/asc-ui'
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components'
-import MapContext from '../MapContext'
-import MapPreviewPanelContainer from '../MapPreviewPanelContainer'
 import BaseLayerToggle from './BaseLayerToggle'
 import DrawTool from './DrawTool'
 
@@ -36,6 +34,7 @@ type Props = {
   showDesktopVariant: boolean
   setShowDrawTool: (arg: boolean) => void
   isLoading: boolean
+  showDrawTool: boolean
 }
 
 const BottomLeftHolder = styled.div`
@@ -51,7 +50,6 @@ const ViewerContainer: React.FC<Props> = ({
   showDrawTool,
   ...otherProps
 }) => {
-  const { detailUrl } = useContext(MapContext)
   const { drawerPosition, draggable } = useContext(MapPanelContext)
   const height = parseInt(drawerPosition, 10) < window.innerHeight / 2 ? '50%' : drawerPosition
 
@@ -92,14 +90,11 @@ const ViewerContainer: React.FC<Props> = ({
             </BottomLeftHolder>
           }
           topRight={
-            <>
-              <DrawTool
-                isOpen={showDrawTool}
-                onToggle={setShowDrawTool}
-                setCurrentOverlay={setCurrentOverlay}
-              />
-              {detailUrl && <MapPreviewPanelContainer />}
-            </>
+            <DrawTool
+              isOpen={showDrawTool}
+              onToggle={setShowDrawTool}
+              setCurrentOverlay={setCurrentOverlay}
+            />
           }
         />
       )}

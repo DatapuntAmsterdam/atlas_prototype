@@ -3,8 +3,13 @@
         <dp-loading-indicator is-loading="vm.isLoading" use-delay="true" show-inline="true"></dp-loading-indicator>
     </div>
 
-    <div ng-if="!vm.isLoading"
+    <div ng-if="!vm.isLoading && !vm.isGeneric"
         ng-include="vm.includeSrc"
+        class="qa-detail-content">
+    </div>
+
+    <div ng-if="!vm.isLoading && vm.isGeneric"
+        ng-include="'modules/detail/components/detail/templates/generic-details.html'"
         class="qa-detail-content">
     </div>
 </div>

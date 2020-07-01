@@ -14,12 +14,12 @@ import formatNumber from '../../../../shared/services/number-formatter/number-fo
 import MoreResultsWhenLoggedIn from '../../../components/Alerts/MoreResultsWhenLoggedIn'
 import ShowMore from '../../../components/ShowMore'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
+import PanoramaPreview from '../Components/PanoramaPreview'
 import { Overlay } from '../types'
-import PanoramaPreview from './PanoramaPreview'
 
 const RESULT_LIMIT = 10
 
-export interface PointSearchResultsProps {
+export interface PointSearchPanelProps {
   setLocation: (latLng: LatLng | null) => void
   location: LatLng
   currentOverlay: Overlay
@@ -79,7 +79,7 @@ const StyledPanoramaPreview = styled(PanoramaPreview)`
 
 const EXCLUDED_RESULTS = 'vestigingen'
 
-const PointSearchResults: React.FC<PointSearchResultsProps> = ({
+const PointSearchPanel: React.FC<PointSearchPanelProps> = ({
   setLocation,
   currentOverlay,
   location,
@@ -127,7 +127,7 @@ function renderResult(result: PromiseResult<MapSearchResponse>) {
     case PromiseStatus.Rejected:
       return <Message>Resultaten konden niet geladen worden.</Message>
     default:
-      return <LoadingSpinner />
+      return <LoadingSpinner size={32} />
   }
 }
 
@@ -174,4 +174,4 @@ function formatCategoryTitle(category: MapSearchCategory) {
     : category.categoryLabel
 }
 
-export default PointSearchResults
+export default PointSearchPanel

@@ -20,10 +20,11 @@ import DrawContent from './Components/DrawContent'
 import GeoJSON from './Components/GeoJSON'
 import MapLegend from './Components/MapLegend'
 import PointSearchMarker from './Components/PointSearchMarker'
-import PointSearchResults from './Components/PointSearchResults'
 import ViewerContainer from './Components/ViewerContainer'
 import DataSelectionProvider from './DataSelectionProvider'
 import MapContext from './MapContext'
+import DetailPanel from './panels/DetailPanel'
+import PointSearchPanel from './panels/PointSearchPanel'
 import { Overlay, SnapPoint } from './types'
 import handleMapClick from './utils/handleMapClick'
 
@@ -59,6 +60,7 @@ const MapPage: React.FC = () => {
     activeBaseLayer,
     mapLayers,
     overlays,
+    detailUrl,
     getOverlays,
     setLocation,
     setDetailUrl,
@@ -158,8 +160,8 @@ const MapPage: React.FC = () => {
                     }}
                   />
                 )}
-                {!showDrawTool && location && (
-                  <PointSearchResults
+                {!showDrawTool && !detailUrl && location && (
+                  <PointSearchPanel
                     {...{
                       setLocation,
                       currentOverlay,
@@ -167,8 +169,9 @@ const MapPage: React.FC = () => {
                     }}
                   />
                 )}
+                {detailUrl && <DetailPanel detailUrl={detailUrl} />}
                 <DrawContent {...{ showDrawTool, currentOverlay, setShowDrawTool }} />
-                <MapLegend />
+                {!detailUrl && <MapLegend />}
               </MapPanelOrDrawer>
               <ViewerContainer
                 {...{

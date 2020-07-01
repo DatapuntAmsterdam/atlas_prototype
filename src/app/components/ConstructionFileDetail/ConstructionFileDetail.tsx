@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
+import { Heading, Link, List, ListItem, themeColor, themeSpacing } from '@datapunt/asc-ui'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
-import { Heading, themeSpacing, themeColor, List, ListItem, Link } from '@datapunt/asc-ui'
 import styled from 'styled-components'
-import Gallery from '../Gallery/Gallery'
 import getAddresses, { Address } from '../../../normalizations/construction-files/getAddresses'
 import { toDataDetail } from '../../../store/redux-first-router/actions'
 import DefinitionList, { DefinitionListItem } from '../DefinitionList'
+import Gallery from '../Gallery/Gallery'
 
 export type ConstructionFileImage = {
   filename: string
@@ -52,6 +52,10 @@ const SubHeading = styled(Heading)`
     hasMarginBottom ? themeSpacing(2) : 0};
 `
 
+const StyledDefinitionList = styled(DefinitionList)`
+  margin-bottom: ${themeSpacing(2)};
+`
+
 const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
   titel: title,
   documenten,
@@ -76,16 +80,16 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
         <Heading forwardedAs="h1">{title}</Heading>
       </ContentBlock>
 
-      <DefinitionList>
-        <DefinitionListItem term="Titel" description={title} />
-        <DefinitionListItem term="Datering" description={date} />
-        <DefinitionListItem term="Type" description={fileType} />
-        <DefinitionListItem term="Dossiernummer" description={fileNumber} />
-        <DefinitionListItem term="Openbaarheid" description={access} />
+      <StyledDefinitionList>
+        <DefinitionListItem term="Titel">{title}</DefinitionListItem>
+        <DefinitionListItem term="Datering">{date}</DefinitionListItem>
+        <DefinitionListItem term="Type">{fileType}</DefinitionListItem>
+        <DefinitionListItem term="Dossiernummer">{fileNumber}</DefinitionListItem>
+        <DefinitionListItem term="Openbaarheid">{access}</DefinitionListItem>
         {oloLiaanNumber && (
-          <DefinitionListItem term="OLO of liaan nummer" description={oloLiaanNumber} />
+          <DefinitionListItem term="OLO of liaan nummer">{oloLiaanNumber}</DefinitionListItem>
         )}
-      </DefinitionList>
+      </StyledDefinitionList>
 
       {documents.length &&
         documents.map(
@@ -106,17 +110,17 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
                 >{`${documentTitle} (${files.length})`}</SubHeading>
               </ContentBlock>
               {oloLiaanNumber && (
-                <DefinitionList>
+                <StyledDefinitionList>
                   {description && (
-                    <DefinitionListItem term="Beschrijving" description={description} />
+                    <DefinitionListItem term="Beschrijving">{description}</DefinitionListItem>
                   )}
                   {filePath && (
-                    <DefinitionListItem term="Oorspronkelijk pad" description={filePath} />
+                    <DefinitionListItem term="Oorspronkelijk pad">{filePath}</DefinitionListItem>
                   )}
                   {documentAccess && (
-                    <DefinitionListItem term="Openbaarheid" description={documentAccess} />
+                    <DefinitionListItem term="Openbaarheid">{documentAccess}</DefinitionListItem>
                   )}
-                </DefinitionList>
+                </StyledDefinitionList>
               )}
               <Gallery key={barcode} id={id} allFiles={files} access={documentAccess} />
             </>
