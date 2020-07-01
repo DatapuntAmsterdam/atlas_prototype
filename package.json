@@ -104,7 +104,7 @@
     "uuid": "^8.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.3",
+    "@babel/core": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/preset-env": "^7.10.3",
     "@babel/preset-react": "^7.10.4",
