@@ -1,10 +1,9 @@
-import React from 'react'
 import { breakpoint, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import React from 'react'
 import styled from 'styled-components'
 
 type Props = {
   term: string
-  description: string | number
 }
 
 const DefinitionListItemWrapper = styled.div`
@@ -31,10 +30,10 @@ const DefinitionListDescription = styled.dd`
   width: 70%;
 `
 
-const DefinitionListItem: React.FC<Props> = ({ term, description }) => (
+const DefinitionListItem: React.FC<Props> = ({ term, children }) => (
   <DefinitionListItemWrapper>
     <DefinitionListTerm>{term}</DefinitionListTerm>
-    <DefinitionListDescription>{description}</DefinitionListDescription>
+    <DefinitionListDescription>{children}</DefinitionListDescription>
   </DefinitionListItemWrapper>
 )
 

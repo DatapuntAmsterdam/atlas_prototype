@@ -1,0 +1,28 @@
+<div class="c-detail__block">
+  <dp-glossary-header heading="{{ vm.apiData.results.subTitle }}" subtitle="{{ vm.apiData.results.title }}"></dp-glossary-header>
+  <dp-panel
+    ng-if="vm.apiData.results.notifications"
+    ng-repeat="notification in vm.apiData.results.notifications"
+    class-name="c-panel--offsets-below-page-title"
+    is-panel-visible="true"
+    can-close="notification.canClose || false"
+    type="warning">
+    {{ notification.value }}
+  </dp-panel>
+  <ng-container ng-repeat="item in vm.apiData.results.items">
+    <dl ng-if="item.type === 'definition-list'" class="c-key-value-list">
+      <div class="c-key-value-item" ng-repeat="entry in item.entries">
+        <dt>{{ entry.term }}</dt>
+        <dd ng-if="!entry.link">{{ entry.description }}</dd>
+        <dd ng-if="entry.link">
+          <a
+            class="o-btn o-btn--link c-key-value-list__value-inline"
+            target="_blank"
+            ng-href="{{ entry.link }}">
+            {{ entry.description }}
+          </a>
+        </dd>
+      </div>
+    </dl>
+  </ng-container>
+</div>

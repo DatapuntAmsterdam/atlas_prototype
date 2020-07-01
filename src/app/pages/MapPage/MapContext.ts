@@ -1,4 +1,6 @@
 import { MapLayer as MapLayerProps } from '@datapunt/arm-core/es/constants'
+import { Geometry } from 'geojson'
+import { LatLngLiteral } from 'leaflet'
 import { createContext } from 'react'
 
 export type ActiveMapLayer = {
@@ -13,20 +15,6 @@ export type MapLayer = {
   authScope?: string
   layers: Array<string>
 } & MapLayerProps
-
-export type Location = {
-  lat: number
-  lng: number
-}
-
-export type Geometry = {
-  type: string
-  coordinates: Array<Array<string>>
-}
-
-export type SimpleGeometry = { lat: number; lng: number }
-
-export type DrawingGeometry = Array<SimpleGeometry>
 
 export type Overlay = {
   type: string
@@ -44,20 +32,20 @@ export type MapState = {
   overlays: Array<Overlay> // TODO: Add auto typegeneration
   zoomLevel: number
   viewCenter: Array<number>
-  location: Location | null
-  detailUrl?: string
+  location: LatLngLiteral | null
+  detailUrl: string | null
   geometry?: Geometry
-  drawingGeometry?: DrawingGeometry
+  drawingGeometry?: LatLngLiteral[]
 }
 
 export type MapContextProps = {
   setActiveBaseLayer: (ActiveBaseLayer: string) => void
   setActiveMapLayers: (ActiveMapLayer: Array<ActiveMapLayer>) => void
   setVisibleMapLayer: (id: string, isVisible: boolean) => void
-  setLocation: (location: Location) => void
+  setLocation: (location: LatLngLiteral) => void
   setGeometry: (geometry: Geometry) => void
-  setDrawingGeometry: (drawingGeometery: DrawingGeometry) => void
-  setDetailUrl: (url: string) => void
+  setDrawingGeometry: (drawingGeometery: LatLngLiteral[]) => void
+  setDetailUrl: (detailUrl: string | null) => void
   getBaseLayers: () => void
   getPanelLayers: () => void
   getMapLayers: () => void
@@ -76,6 +64,7 @@ export const initialState: MapContextProps = {
   overlays: [],
   viewCenter: [DEFAULT_LAT, DEFAULT_LNG],
   location: null,
+  detailUrl: null,
   zoomLevel: 11,
   setActiveBaseLayer: () => {},
   setActiveMapLayers: () => {},

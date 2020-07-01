@@ -1,6 +1,6 @@
 <div class="o-header">
     <h3 class="o-header__subtitle qa-subtitle">
-        {{vm.glossaryLabel}}
+        {{vm.subtitle ? vm.subtitle : vm.glossaryLabel}}
     </h3>
     <h2 ng-if="vm.heading" class="o-header__title u-margin__bottom--3 qa-title {{vm.isEmphasized ? 'o-header__title--emphasized' : ''}}">
         <span ng-bind-html="vm.htmlHeading"></span>

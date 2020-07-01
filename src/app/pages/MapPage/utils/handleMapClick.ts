@@ -1,6 +1,6 @@
-import { LeafletMouseEvent } from 'leaflet'
-import { MapState, Location } from '../MapContext'
+import { LatLngLiteral, LeafletMouseEvent } from 'leaflet'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
+import { MapState } from '../MapContext'
 
 type NearestDetail = {
   uri: string
@@ -8,7 +8,7 @@ type NearestDetail = {
 
 export default async function handleMapClick(
   e: LeafletMouseEvent,
-  setLocation: (location: Location) => void,
+  setLocation: (location: LatLngLiteral) => void,
   setDetailUrl: (url: string) => void,
   activeOverlays: MapState['overlays'] | undefined,
 ) {

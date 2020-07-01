@@ -1,5 +1,6 @@
 import angular from 'angular'
 import removeMd from 'remove-markdown'
+import { getServiceDefinitions } from '../../../../src/map/services/map-services.config'
 import { downloadDatasetResource } from '../../../../src/shared/ducks/detail/actions'
 
 angular.module('dpDetail').component('dpDetail', {
@@ -21,6 +22,18 @@ angular.module('dpDetail').component('dpDetail', {
   controllerAs: 'vm',
 })
 
+const genericDetailTypes = getServiceDefinitions()
+  .map((service) => service.type)
+  .filter((type) => !!type)
+
+function isGenericTemplate(templateUrl) {
+  if (!templateUrl) {
+    return templateUrl
+  }
+
+  return genericDetailTypes.some((type) => templateUrl.includes(type))
+}
+
 DpDetailController.$inject = ['store']
 
 function DpDetailController(store) {
@@ -40,6 +53,7 @@ function DpDetailController(store) {
     if (!(detailTemplateUrl && detailData)) return
     if (detailTemplateUrl && detailTemplateUrl.previousValue !== detailTemplateUrl.currentValue) {
       vm.includeSrc = detailTemplateUrl.currentValue
+      vm.isGeneric = isGenericTemplate(detailTemplateUrl.currentValue)
     }
 
     if (detailData && detailData.previousValue !== detailData.currentValue) {

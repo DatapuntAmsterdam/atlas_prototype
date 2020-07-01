@@ -1,5 +1,5 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@datapunt/asc-ui'
-import { LatLng } from 'leaflet'
+import { LatLngLiteral } from 'leaflet'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import {
@@ -10,7 +10,7 @@ import {
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
-  location: LatLng
+  location: LatLngLiteral
 }
 
 const PreviewContainer = styled.div`

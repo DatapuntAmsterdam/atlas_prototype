@@ -8,6 +8,7 @@ function dpGlossaryHeaderDirective() {
     restrict: 'E',
     scope: {
       heading: '@',
+      subtitle: '@',
       definition: '@',
       isEmphasized: '<',
       usePlural: '=',
@@ -38,11 +39,17 @@ function DpGlossaryHeaderController($scope, $sce, GLOSSARY) {
       vm.hasMetaData = isDefined(vm.metaData)
     })
 
-    vm.glossaryLabel = vm.usePlural
-      ? GLOSSARY.DEFINITIONS[vm.definition].plural
-      : GLOSSARY.DEFINITIONS[vm.definition].singular
-    vm.glossaryDescription = $sce.trustAsHtml(GLOSSARY.DEFINITIONS[vm.definition].description)
-    vm.stelselpediaUrl = GLOSSARY.DEFINITIONS[vm.definition].url
+    if (vm.definition) {
+      vm.glossaryLabel = vm.usePlural
+        ? GLOSSARY.DEFINITIONS[vm.definition].plural
+        : GLOSSARY.DEFINITIONS[vm.definition].singular
+      vm.glossaryDescription = $sce.trustAsHtml(GLOSSARY.DEFINITIONS[vm.definition].description)
+      vm.stelselpediaUrl = GLOSSARY.DEFINITIONS[vm.definition].url
+    } else {
+      vm.glossaryLabel = ''
+      vm.glossaryDescription = ''
+      vm.stelselpediaUrl = ''
+    }
 
     vm.hasHelp = !!vm.glossaryDescription
     vm.hasMetaData = isDefined(vm.metaData)

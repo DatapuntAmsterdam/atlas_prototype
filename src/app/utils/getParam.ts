@@ -1,8 +1,7 @@
-export default function getParam(param: string): string | null {
-  if (typeof window !== 'undefined') {
-    const searchParams = new URLSearchParams(window.location.search)
-    return searchParams.get(param) || ''
+export default function getParam(param: string) {
+  if (typeof window === 'undefined') {
+    return null
   }
 
-  return null
+  return new URLSearchParams(window.location.search).get(param)
 }

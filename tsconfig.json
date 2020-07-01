@@ -4,6 +4,8 @@
     "jsx": "react",
     "allowJs": true,
     "esModuleInterop": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": ["ES2020"]
   }
 }
