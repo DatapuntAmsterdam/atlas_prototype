@@ -31,6 +31,7 @@ const StyledMap = styled(Map)`
 const MapView = styled.div`
   height: calc(100% - 50px);
   position: relative;
+  z-index: 0;
 `
 
 const GlobalStyle = createGlobalStyle`
