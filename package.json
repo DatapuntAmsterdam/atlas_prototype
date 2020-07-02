@@ -33,7 +33,7 @@
     "analyze:legacy": "TS_NODE_PROJECT=tsconfig.webpack.json webpack --config webpack.analyze.ts --env.config=legacy"
   },
   "dependencies": {
-    "@babel/runtime": "^7.10.3",
+    "@babel/runtime": "^7.10.4",
     "@datapunt/arm-cluster": "^0.2.8-alpha.49",
     "@datapunt/arm-core": "^0.2.8-alpha.49",
     "@datapunt/arm-draw": "^0.2.8-alpha.63",
