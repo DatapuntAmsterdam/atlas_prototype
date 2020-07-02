@@ -1,26 +1,32 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
-import { Alert, Heading, hooks, Link } from '@datapunt/asc-ui'
-import RouterLink from 'redux-first-router-link'
-import { TileLayer } from '@datapunt/react-maps'
-import { NonTiledLayer } from '@datapunt/arm-nontiled'
-import { BaseLayer, constants, Map, mapPanelComponents } from '@datapunt/arm-core'
+import {
+  BaseLayer,
+  constants,
+  Map,
+  MapPanel,
+  MapPanelDrawer,
+  MapPanelProvider,
+} from '@datapunt/arm-core'
 import { PositionPerSnapPoint } from '@datapunt/arm-core/es/components/MapPanel/constants'
-import GeoJSON from './Components/GeoJSON'
-import MapContext from './MapContext'
-import ViewerContainer from './Components/ViewerContainer'
-import PointSearchMarker from './Components/PointSearchMarker'
-import { Overlay, SnapPoint } from './types'
-import PointSearchResults from './Components/PointSearchResults'
-import MapLegend from './Components/MapLegend'
-import handleMapClick from './utils/handleMapClick'
+import { NonTiledLayer } from '@datapunt/arm-nontiled'
+import { Alert, Heading, hooks, Link } from '@datapunt/asc-ui'
+import { TileLayer } from '@datapunt/react-maps'
+import React, { useEffect, useMemo, useState } from 'react'
+import RouterLink from 'redux-first-router-link'
+import styled, { createGlobalStyle } from 'styled-components'
 import MAP_CONFIG from '../../../map/services/map.config'
-import DataSelectionProvider from './DataSelectionProvider'
-import DrawContent from './Components/DrawContent'
-import NotificationLevel from '../../models/notification'
 import { toMap } from '../../../store/redux-first-router/actions'
+import NotificationLevel from '../../models/notification'
+import DrawContent from './Components/DrawContent'
+import GeoJSON from './Components/GeoJSON'
+import MapLegend from './Components/MapLegend'
+import PointSearchMarker from './Components/PointSearchMarker'
+import PointSearchResults from './Components/PointSearchResults'
+import ViewerContainer from './Components/ViewerContainer'
+import DataSelectionProvider from './DataSelectionProvider'
+import MapContext from './MapContext'
+import { Overlay, SnapPoint } from './types'
+import handleMapClick from './utils/handleMapClick'
 
-const { MapPanel, MapPanelDrawer, MapPanelProvider } = mapPanelComponents
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
 const StyledMap = styled(Map)`

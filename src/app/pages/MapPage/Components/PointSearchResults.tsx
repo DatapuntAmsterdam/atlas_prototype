@@ -1,4 +1,4 @@
-import { mapPanelComponents } from '@datapunt/arm-core'
+import { MapPanelContent } from '@datapunt/arm-core'
 import { Heading, Link, Paragraph, Spinner, themeColor, themeSpacing } from '@datapunt/asc-ui'
 import { LatLng } from 'leaflet'
 import React, { useMemo } from 'react'
@@ -17,7 +17,6 @@ import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/useProm
 import { Overlay } from '../types'
 import PanoramaPreview from './PanoramaPreview'
 
-const { MapPanelContent } = mapPanelComponents
 const RESULT_LIMIT = 10
 
 export interface PointSearchResultsProps {
@@ -25,11 +24,6 @@ export interface PointSearchResultsProps {
   location: LatLng
   currentOverlay: Overlay
 }
-
-const StyledMapPanelContent = styled(MapPanelContent)`
-  width: 100%;
-  padding: 0;
-`
 
 const CoordinatesText = styled.span`
   display: block;
@@ -106,7 +100,7 @@ const PointSearchResults: React.FC<PointSearchResultsProps> = ({
   )
 
   return (
-    <StyledMapPanelContent
+    <MapPanelContent
       title="Resultaten"
       animate
       stackOrder={currentOverlay === Overlay.Results ? 2 : 1}
@@ -122,7 +116,7 @@ const PointSearchResults: React.FC<PointSearchResultsProps> = ({
       {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
         <StyledMoreResultsWhenLoggedIn excludedResults={EXCLUDED_RESULTS} />
       )}
-    </StyledMapPanelContent>
+    </MapPanelContent>
   )
 }
 

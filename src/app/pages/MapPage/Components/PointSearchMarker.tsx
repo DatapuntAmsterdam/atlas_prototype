@@ -1,10 +1,8 @@
-import { LatLng, LeafletMouseEvent } from 'leaflet'
+import { MapPanelContext, Marker as ARMMarker, usePanToLatLng } from '@datapunt/arm-core'
 import { useMapInstance } from '@datapunt/react-maps'
-import { usePanToLatLng, mapPanelComponents, Marker as ARMMarker } from '@datapunt/arm-core'
+import { LatLng, LeafletMouseEvent } from 'leaflet'
 import React, { useContext, useEffect } from 'react'
 import { SnapPoint } from '../types'
-
-const { MapPanelContext } = mapPanelComponents
 
 const PointSearchMarker: React.FC<{
   onClick: (e: LeafletMouseEvent) => void

@@ -1,14 +1,9 @@
+import { MapPanelContent } from '@datapunt/arm-core'
 import React from 'react'
-import { mapPanelComponents } from '@datapunt/arm-core'
-
 import styled from 'styled-components'
-import MapContext from '../MapContext'
-
-// This is the "old" MapPanel that will be replaced
 import MapPanel from '../../../../map/containers/panel/MapPanel'
 import getState from '../../../../shared/services/redux/get-state'
-
-const { MapPanelContent } = mapPanelComponents
+import MapContext from '../MapContext'
 
 const StyledMapPanelContent = styled(MapPanelContent)`
   .map-panel {

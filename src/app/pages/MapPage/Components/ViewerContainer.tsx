@@ -1,20 +1,18 @@
-import React, { useContext } from 'react'
-import { ViewerContainer as ViewerContainerComponent, Spinner } from '@datapunt/asc-ui'
-import styled, { css } from 'styled-components'
+import { MapPanelContext, MapPanelLegendButton, Zoom } from '@datapunt/arm-core'
 import { Overlay } from '@datapunt/arm-core/lib/components/MapPanel/constants'
-import { Zoom, mapPanelComponents } from '@datapunt/arm-core'
-import MapPreviewPanelContainer from '../MapPreviewPanelContainer'
-import DrawTool from './DrawTool'
-import BaseLayerToggle from './BaseLayerToggle'
+import { Spinner, ViewerContainer as ViewerContainerComponent } from '@datapunt/asc-ui'
+import React, { useContext } from 'react'
+import styled, { css } from 'styled-components'
 import MapContext from '../MapContext'
+import MapPreviewPanelContainer from '../MapPreviewPanelContainer'
+import BaseLayerToggle from './BaseLayerToggle'
+import DrawTool from './DrawTool'
 
 type StyledViewerContainerProps = {
   left?: string
   height?: string
   ignoreTransition: boolean
 }
-
-const { MapPanelLegendButton, MapPanelContext } = mapPanelComponents
 
 const StyledViewerContainer = styled(ViewerContainerComponent).attrs<StyledViewerContainerProps>(
   ({ height, left }) => ({

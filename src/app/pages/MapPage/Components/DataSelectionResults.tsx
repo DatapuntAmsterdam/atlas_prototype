@@ -1,4 +1,4 @@
-import { mapPanelComponents, Marker } from '@datapunt/arm-core'
+import { MapPanelContent, Marker } from '@datapunt/arm-core'
 import { Table } from '@datapunt/asc-assets'
 import {
   Accordion,
@@ -31,8 +31,6 @@ import formatCount from '../../../utils/formatCount'
 import DataSelectionContext from '../DataSelectionContext'
 import { Overlay } from '../types'
 import config, { AuthScope, DataSelectionType } from './config'
-
-const { MapPanelContent } = mapPanelComponents
 
 const ResultLink = styled(RouterLink)`
   width: 100%;
