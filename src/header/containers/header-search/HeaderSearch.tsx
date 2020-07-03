@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import useSlug from '../../../app/utils/useSlug'
@@ -28,6 +28,8 @@ const StyledLegend = styled.legend`
   position: absolute;
   width: 1px;
 `
+
+const SEARCH_CATEGORY_KEY = 'searchCategory'
 
 const getSuggestionByIndex = (searchResults: SuggestionList, suggestionIndex: number) =>
   searchResults
@@ -73,9 +75,24 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
   const dispatch = useDispatch()
   const [openSearchBarToggle, setOpenSearchBarToggle] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [searchCategory, setSearchCategory] = useState<SearchCategory>(pageType)
+  const [searchCategory, setSearchCategory] = useState(
+    sessionStorage.getItem(SEARCH_CATEGORY_KEY) || pageType,
+  )
 
   const query = displayQuery || typedQuery
+
+  function handleSetSearchCategory(category: SearchCategory) {
+    setSearchCategory(category)
+    sessionStorage.setItem(SEARCH_CATEGORY_KEY, category)
+  }
+
+  useEffect(() => {
+    if (pageType) handleSetSearchCategory(pageType)
+  }, [pageType])
+
+  useEffect(() => {
+    handleSetSearchCategory(searchCategory)
+  }, [searchCategory])
 
   // Opens suggestion on mouseclick or enter
   function onSuggestionSelection(suggestion: Suggestion) {
@@ -248,7 +265,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
     setOpenSearchBarToggle(false)
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (prefillQuery) {
       onGetSuggestions(prefillQuery, searchCategory === SearchType.Search ? null : searchCategory)
     }

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Select, Label } from '@datapunt/asc-ui'
 import styled from 'styled-components'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
@@ -25,22 +25,34 @@ type SearchBarFilterProps = {
   setSearchCategory: Dispatch<SetStateAction<SearchCategory>>
 }
 
+type SearchBarFilterOptions = {
+  type: SearchCategory
+  label: string
+}
+
+const AVAILABLE_FILTERS: Array<SearchBarFilterOptions> = Object.values(SEARCH_PAGE_CONFIG).map(
+  ({ type, label }) => ({
+    type,
+    label,
+  }),
+)
+
 const SearchBarFilter: React.FC<SearchBarFilterProps> = ({ searchCategory, setSearchCategory }) => {
-  const AVAILABLE_FILTERS = Object.keys(SEARCH_PAGE_CONFIG).map((key) => {
-    const { type, label } = SEARCH_PAGE_CONFIG[key]
-    return {
-      type,
-      label,
-    }
-  })
+  const [selectedValue, setSelectedValue] = useState(searchCategory)
 
   function onSetSearchCategory(e: React.ChangeEvent<HTMLSelectElement>) {
     e.preventDefault()
     e.stopPropagation()
 
-    const { value } = e.currentTarget
+    const value = e.currentTarget.value as SearchCategory
     setSearchCategory(value)
   }
+
+  useEffect(() => {
+    if (searchCategory) {
+      setSelectedValue(searchCategory)
+    }
+  }, [searchCategory])
 
   return (
     <>
@@ -48,7 +60,7 @@ const SearchBarFilter: React.FC<SearchBarFilterProps> = ({ searchCategory, setSe
       <StyledSelect
         data-testid="SearchBarFilter"
         id="category"
-        value={searchCategory}
+        value={selectedValue || ''}
         onChange={onSetSearchCategory}
       >
         {AVAILABLE_FILTERS.map(({ type, label }) => {
