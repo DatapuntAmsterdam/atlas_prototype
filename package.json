@@ -198,7 +198,7 @@
     "redux-saga-test-plan": "3.7.0",
     "rimraf": "3.0.2",
     "sass": "^1.26.9",
-    "sass-loader": "^9.0.0",
+    "sass-loader": "^9.0.1",
     "style-loader": "^1.2.1",
     "svg-spritemap-webpack-plugin": "3.5.6",
     "terser-webpack-plugin": "^3.0.6",
