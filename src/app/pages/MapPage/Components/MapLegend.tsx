@@ -1,11 +1,14 @@
 import { MapPanelContent } from '@datapunt/arm-core'
 import React from 'react'
+
 import styled from 'styled-components'
 import MapPanel from '../../../../map/containers/panel/MapPanel'
 import getState from '../../../../shared/services/redux/get-state'
 import MapContext from '../MapContext'
 
 const StyledMapPanelContent = styled(MapPanelContent)`
+  overflow: hidden; // This can be removed if the new design for the legend is added
+
   .map-panel {
     max-height: 100%;
     height: 100%;
