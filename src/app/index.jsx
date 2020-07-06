@@ -26,7 +26,7 @@ resolveRedirects().then((hasToRedirect) => {
 
 function renderApp(store) {
   // eslint-disable-next-line no-undef,no-console
-  console.log(`CityData: version: ${VERSION}, build: ${process.env.NODE_ENV}`)
+  console.log(`CityData: version: ${VERSION}, build: ${process.env.DEPLOY_ENV}`)
 
   ReactDOM.render(
     <Provider store={store}>

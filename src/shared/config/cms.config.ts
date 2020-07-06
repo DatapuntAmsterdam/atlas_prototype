@@ -124,7 +124,7 @@ const cmsConfig = {
   HOME_SPECIALS: {
     endpoint: () =>
       `${process.env.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.SPECIALS.id[process.env.NODE_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.SPECIALS.id[process.env.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',
@@ -142,7 +142,7 @@ const cmsConfig = {
   HOME_COLLECTIONS: {
     endpoint: () =>
       `${process.env.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.COLLECTIONS.id[process.env.NODE_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.COLLECTIONS.id[process.env.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',
@@ -157,7 +157,7 @@ const cmsConfig = {
   HOME_ORGANIZATION: {
     endpoint: () =>
       `${process.env.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ORGANIZATION.id[process.env.NODE_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.ORGANIZATION.id[process.env.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -172,7 +172,7 @@ const cmsConfig = {
   HOME_ABOUT: {
     endpoint: () =>
       `${process.env.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ABOUT.id[process.env.NODE_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.ABOUT.id[process.env.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -186,7 +186,7 @@ const cmsConfig = {
   HOME_ABOUT_DATA: {
     endpoint: () =>
       `${process.env.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ABOUT_DATA.id[process.env.NODE_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.ABOUT_DATA.id[process.env.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -200,7 +200,7 @@ const cmsConfig = {
   HOME_HIGHLIGHT: {
     endpoint: () =>
       `${process.env.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.HIGHLIGHT.id[process.env.NODE_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.HIGHLIGHT.id[process.env.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',
