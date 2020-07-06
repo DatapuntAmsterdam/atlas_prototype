@@ -30,7 +30,7 @@ import handleMapClick from './utils/handleMapClick'
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
 const MapView = styled.div`
-  height: calc(100% - 50px);
+  height: 100%;
   position: relative;
   z-index: 0;
 `

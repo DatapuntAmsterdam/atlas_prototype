@@ -1,6 +1,8 @@
 $backdrop-color: rgba(0, 0, 0, 0.5);
 
 .c-dashboard {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   background: $primary-light;
 
