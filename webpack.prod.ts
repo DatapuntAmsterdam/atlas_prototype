@@ -26,6 +26,7 @@ export default [
       chunkFilename:
         config.name === 'legacy' ? '[name].[chunkhash]-legacy.js' : '[name].[chunkhash].js',
     },
+    mode: 'production',
     devtool: 'source-map',
     optimization: {
       minimizer: [

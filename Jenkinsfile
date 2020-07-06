@@ -42,20 +42,9 @@ pipeline {
       }
       steps {
         script {
-          // TODO: We should not be using 'NODE_ENV' for this as it is also used to optimize the build itself.
-          // Build a production version on the production branch.
-          if (BRANCH_NAME == PRODUCTION_BRANCH) {
-            sh "docker build -t ${IMAGE_FRONTEND_BUILD} " +
-                '--shm-size 1G ' +
-                '--build-arg NODE_ENV=production ' +
-                '.'
-          // Otherwise build an acceptance version for any other branch.
-          } else {
-            sh "docker build -t ${IMAGE_FRONTEND_BUILD} " +
-                '--shm-size 1G ' +
-                '--build-arg NODE_ENV=acceptance ' +
-                '.'
-          }
+          sh "docker build -t ${IMAGE_FRONTEND_BUILD} " +
+            '--shm-size 1G ' +
+            '.'
         }
 
         // Push the image for this specific build.

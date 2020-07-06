@@ -9,8 +9,6 @@ services:
     build:
       context: .
       target: build-deps
-      args:
-        - NODE_ENV=acceptance
     command: npm run test
 
   # test-e2e:

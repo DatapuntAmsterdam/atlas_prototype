@@ -1,7 +1,5 @@
 const dotenv = require('dotenv')
 
 module.exports = dotenv.config({
-  path: './.env.acceptance',
+  path: './.env',
 }).parsed
-
-process.env.NODE_ENV = 'acceptance'

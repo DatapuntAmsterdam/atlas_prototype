@@ -43,7 +43,7 @@ const navigationLinks = [
   {
     id: 4,
     to: toArticleDetail(
-      NAVIGATION_LINKS.DATA_IN_TABLES.id[process.env.NODE_ENV],
+      NAVIGATION_LINKS.DATA_IN_TABLES.id[process.env.DEPLOY_ENV],
       NAVIGATION_LINKS.DATA_IN_TABLES.slug,
     ),
     CardIcon: () => (
@@ -57,7 +57,7 @@ const navigationLinks = [
   {
     id: 5,
     to: toArticleDetail(
-      NAVIGATION_LINKS.DATA_SERVICES.id[process.env.NODE_ENV],
+      NAVIGATION_LINKS.DATA_SERVICES.id[process.env.DEPLOY_ENV],
       NAVIGATION_LINKS.DATA_SERVICES.slug,
     ),
     CardIcon: () => (

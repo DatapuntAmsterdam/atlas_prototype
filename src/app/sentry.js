@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser'
 
-const environment = process.env.NODE_ENV
+const environment = process.env.DEPLOY_ENV
 const release = process.env.GIT_COMMIT
 
 if (environment !== 'development') {

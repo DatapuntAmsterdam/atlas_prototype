@@ -69,9 +69,9 @@ const MAP_CONFIG = {
   ...defaultConfig,
   BASE_LAYER_OPTIONS: {
     ...defaultConfig.BASE_LAYER_OPTIONS,
-    ...environmentConfig[process.env.NODE_ENV].BASE_LAYER_OPTIONS,
+    ...environmentConfig[process.env.DEPLOY_ENV].BASE_LAYER_OPTIONS,
   },
-  OVERLAY_ROOT: environmentConfig[process.env.NODE_ENV].OVERLAY_ROOT,
+  OVERLAY_ROOT: environmentConfig[process.env.DEPLOY_ENV].OVERLAY_ROOT,
 }
 
 export default MAP_CONFIG
