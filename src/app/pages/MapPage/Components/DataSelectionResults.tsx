@@ -230,7 +230,9 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
           onChange={handleOnChangeType}
         >
           {Object.entries(config).map(([dataSelectionType, { title }]) => (
-            <option value={dataSelectionType}>{title}</option>
+            <option key={dataSelectionType} value={dataSelectionType}>
+              {title}
+            </option>
           ))}
         </StyledSelect>
         {showDesktopVariant ? (
