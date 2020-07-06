@@ -32,7 +32,7 @@ type Props = {
   currentOverlay: Overlay
   setCurrentOverlay: (overlay: Overlay) => void
   showDesktopVariant: boolean
-  setShowDrawTool: (arg: boolean) => void
+  handleToggleDrawTool: (show: boolean) => void
   isLoading: boolean
   showDrawTool: boolean
 }
@@ -45,7 +45,7 @@ const ViewerContainer: React.FC<Props> = ({
   currentOverlay,
   setCurrentOverlay,
   showDesktopVariant,
-  setShowDrawTool,
+  handleToggleDrawTool,
   isLoading,
   showDrawTool,
   ...otherProps
@@ -70,7 +70,13 @@ const ViewerContainer: React.FC<Props> = ({
           bottomLeft={
             <MapPanelLegendButton {...{ showDesktopVariant, currentOverlay, setCurrentOverlay }} />
           }
-          topRight={<DrawTool onToggle={setShowDrawTool} />}
+          topRight={
+            <DrawTool
+              isOpen={showDrawTool}
+              onToggle={handleToggleDrawTool}
+              setCurrentOverlay={setCurrentOverlay}
+            />
+          }
         />
       ) : (
         <StyledViewerContainer
@@ -92,7 +98,7 @@ const ViewerContainer: React.FC<Props> = ({
           topRight={
             <DrawTool
               isOpen={showDrawTool}
-              onToggle={setShowDrawTool}
+              onToggle={handleToggleDrawTool}
               setCurrentOverlay={setCurrentOverlay}
             />
           }

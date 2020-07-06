@@ -35,7 +35,7 @@ export type MapState = {
   location: LatLngLiteral | null
   detailUrl: string | null
   geometry?: Geometry
-  drawingGeometry?: LatLngLiteral[]
+  drawingGeometries?: LatLngLiteral[][]
 }
 
 export type MapContextProps = {
@@ -44,8 +44,9 @@ export type MapContextProps = {
   setVisibleMapLayer: (id: string, isVisible: boolean) => void
   setLocation: (location: LatLngLiteral) => void
   setGeometry: (geometry: Geometry) => void
-  setDrawingGeometry: (drawingGeometery: LatLngLiteral[]) => void
-  setDetailUrl: (detailUrl: string | null) => void
+  setDrawingGeometries: (drawingGeometries: LatLngLiteral[][]) => void
+  resetDrawingGeometries: () => void
+  setDetailUrl: (url: string) => void
   getBaseLayers: () => void
   getPanelLayers: () => void
   getMapLayers: () => void
@@ -63,6 +64,7 @@ export const initialState: MapContextProps = {
   mapLayers: [],
   overlays: [],
   viewCenter: [DEFAULT_LAT, DEFAULT_LNG],
+  drawingGeometries: [],
   location: null,
   detailUrl: null,
   zoomLevel: 11,
@@ -70,7 +72,8 @@ export const initialState: MapContextProps = {
   setActiveMapLayers: () => {},
   setVisibleMapLayer: () => {},
   setGeometry: () => {},
-  setDrawingGeometry: () => {},
+  resetDrawingGeometries: () => {},
+  setDrawingGeometries: () => {},
   setLocation: () => {},
   setDetailUrl: () => {},
   getBaseLayers: () => {},

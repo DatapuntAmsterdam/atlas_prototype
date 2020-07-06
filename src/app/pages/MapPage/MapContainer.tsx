@@ -35,7 +35,7 @@ function setParam(name: string, value: string | null) {
 
   const url = new URL(window.location.href)
 
-  if (value) {
+  if (value && value.length) {
     url.searchParams.set(name, value)
   } else {
     url.searchParams.delete(name)
@@ -56,7 +56,8 @@ type Action =
   | { type: 'setLocation'; payload: LatLngLiteral | null }
   | { type: 'setDetailUrl'; payload: string }
   | { type: 'setGeometry'; payload: Geometry }
-  | { type: 'setDrawingGeometry'; payload: LatLngLiteral[] }
+  | { type: 'setDrawingGeometries'; payload: LatLngLiteral[][] }
+  | { type: 'resetDrawingGeometries' }
 
 const reducer = (state: MapState, action: Action): MapState => {
   switch (action.type) {
@@ -130,10 +131,15 @@ const reducer = (state: MapState, action: Action): MapState => {
         ...state,
         geometry: action.payload,
       }
-    case 'setDrawingGeometry':
+    case 'setDrawingGeometries':
       return {
         ...state,
-        drawingGeometry: action.payload,
+        drawingGeometries: action.payload,
+      }
+    case 'resetDrawingGeometries':
+      return {
+        ...state,
+        drawingGeometries: [],
       }
     default:
       return state
@@ -172,10 +178,13 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
     dispatch({ type: 'setGeometry', payload })
   }
 
-  function setDrawingGeometry(payload: LatLngLiteral[]) {
-    dispatch({ type: 'setDrawingGeometry', payload })
+  function setDrawingGeometries(payload: LatLngLiteral[][]) {
+    dispatch({ type: 'setDrawingGeometries', payload })
+  }
 
-    if (payload) setParam(PARAMETERS.DRAWING_GEOMETRY, encodeBounds(payload))
+  function resetDrawingGeometries() {
+    dispatch({ type: 'resetDrawingGeometries' })
+    setParam(PARAMETERS.DRAWING_GEOMETRY, null)
   }
 
   async function getBaseLayers() {
@@ -273,7 +282,7 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
   const location = getParam(PARAMETERS.LOCATION)
   const detailUrl = getParam('detailUrl')
   const baseLayer = getParam(PARAMETERS.MAP_BACKGROUND)
-  const drawingGeometry = getParam(PARAMETERS.DRAWING_GEOMETRY)
+  const drawingGeometries = getParam(PARAMETERS.DRAWING_GEOMETRY)
 
   React.useEffect(() => {
     if (baseLayer) setActiveBaseLayer(baseLayer)
@@ -282,13 +291,19 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
     // @ts-ignore fix the destruction of the location from the url
     if (location) setLocation(decodeLocation(location))
     if (detailUrl) setDetailUrl(detailUrl)
-    if (drawingGeometry) setDrawingGeometry(decodeBounds(drawingGeometry))
-  }, [baseLayer, activeMapLayers, location, detailUrl, drawingGeometry])
+  }, [baseLayer, activeMapLayers, location, detailUrl])
 
   // This can be refactored if the mapLayers are added in batches
   React.useEffect(() => {
     if (state.activeMapLayers.length) setParam('lagen', encodeLayers(state.activeMapLayers))
   }, [state.activeMapLayers])
+
+  React.useEffect(() => {
+    // Compare state and url query for the drawing geometry
+    if (encodeBounds(state.drawingGeometries) !== decodeBounds(drawingGeometries)) {
+      setParam(PARAMETERS.DRAWING_GEOMETRY, encodeBounds(state.drawingGeometries))
+    }
+  }, [state.drawingGeometries, drawingGeometries])
 
   return (
     <MapContext.Provider
@@ -300,7 +315,8 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
         setLocation,
         setDetailUrl,
         setGeometry,
-        setDrawingGeometry,
+        setDrawingGeometries,
+        resetDrawingGeometries,
         getBaseLayers,
         getPanelLayers,
         getMapLayers,

@@ -1,3 +1,5 @@
+import React, { useState, useEffect, useMemo } from 'react'
+import RouterLink from 'redux-first-router-link'
 import {
   BaseLayer,
   constants,
@@ -10,13 +12,8 @@ import { PositionPerSnapPoint } from '@datapunt/arm-core/es/components/MapPanel/
 import { NonTiledLayer } from '@datapunt/arm-nontiled'
 import { Alert, Heading, hooks, Link } from '@datapunt/asc-ui'
 import { TileLayer } from '@datapunt/react-maps'
-import React, { useEffect, useMemo, useState } from 'react'
-import RouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
-import MAP_CONFIG from '../../../map/services/map.config'
-import { toMap } from '../../../store/redux-first-router/actions'
-import NotificationLevel from '../../models/notification'
-import DrawContent from './Components/DrawContent'
+
 import GeoJSON from './Components/GeoJSON'
 import PointSearchMarker from './Components/PointSearchMarker'
 import ViewerContainer from './Components/ViewerContainer'
@@ -27,6 +24,10 @@ import LegendPanel from './panels/LegendPanel'
 import PointSearchPanel from './panels/PointSearchPanel'
 import { Overlay, SnapPoint } from './types'
 import handleMapClick from './utils/handleMapClick'
+import MAP_CONFIG from '../../../map/services/map.config'
+import { toMap } from '../../../store/redux-first-router/actions'
+import NotificationLevel from '../../models/notification'
+import DrawContent from './Components/DrawContent'
 
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
@@ -64,8 +65,17 @@ const MapPage: React.FC = () => {
     getOverlays,
     setLocation,
     setDetailUrl,
+    resetDrawingGeometries,
     geometry,
   } = React.useContext(MapContext)
+
+  const handleToggleDrawTool = React.useCallback((show: boolean) => {
+    setShowDrawTool(show)
+
+    if (!show) {
+      resetDrawingGeometries()
+    }
+  }, [])
 
   const tmsLayers = overlays.filter((overlay) => overlay.type === MAP_CONFIG.MAP_LAYER_TYPES.TMS)
   const nonTmsLayers = overlays.filter((overlay) => overlay.type !== MAP_CONFIG.MAP_LAYER_TYPES.TMS)
@@ -179,7 +189,7 @@ const MapPage: React.FC = () => {
                   currentOverlay,
                   showDesktopVariant,
                   isLoading,
-                  setShowDrawTool,
+                  handleToggleDrawTool,
                   showDrawTool,
                 }}
               />
