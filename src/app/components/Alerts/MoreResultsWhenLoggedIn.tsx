@@ -1,7 +1,7 @@
 import { Alert, Heading, Paragraph } from '@datapunt/asc-ui'
 import React from 'react'
 import NotificationLevel from '../../models/notification'
-import LoginLinkContainer from '../Links/LoginLink/LoginLinkContainer'
+import LoginLink from '../Links/LoginLink/LoginLink'
 
 export interface MoreResultsWhenLoggedInProps {
   excludedResults?: string
@@ -18,7 +18,7 @@ const MoreResultsWhenLoggedIn: React.FC<MoreResultsWhenLoggedInProps> = ({
         excludedResults ? `: ${excludedResults}` : ''
       }. `}
     </Paragraph>
-    <LoginLinkContainer />
+    <LoginLink />
   </Alert>
 )
 

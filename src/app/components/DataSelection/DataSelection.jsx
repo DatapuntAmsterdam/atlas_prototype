@@ -13,7 +13,7 @@ import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-
 import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer'
 import NotificationLevel from '../../models/notification'
 import formatCount from '../../utils/formatCount'
-import LoginLinkContainer from '../Links/LoginLink/LoginLinkContainer'
+import LoginLink from '../Links/LoginLink/LoginLink'
 import ShareBar from '../ShareBar/ShareBar'
 import DataSelectionList from './DataSelectionList/DataSelectionList'
 import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
@@ -202,7 +202,7 @@ const DataSelection = ({
             zakelijk rechthebbenden te bekijken. `
                 : `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken. `}
             </Paragraph>
-            <LoginLinkContainer />
+            <LoginLink />
           </Alert>
         )}
       </div>

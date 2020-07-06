@@ -1,7 +1,7 @@
+import environment from '../../../environment'
+import accessTokenParser from '../access-token-parser/access-token-parser'
 import queryStringParser from '../query-string-parser/query-string-parser'
 import stateTokenGenerator from '../state-token-generator/state-token-generator'
-import accessTokenParser from '../access-token-parser/access-token-parser'
-import environment from '../../../environment'
 
 // A map of the error keys, that the OAuth2 authorization service can
 // return, to a full description
@@ -305,6 +305,7 @@ export function getAuthHeaders() {
   return accessToken ? { Authorization: `Bearer ${getAccessToken()}` } : {}
 }
 
+// TODO: Get rid of these globals and use exported methods instead.
 if (typeof window !== 'undefined') {
   window.auth = {
     getAccessToken,

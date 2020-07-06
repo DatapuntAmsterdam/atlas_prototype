@@ -25,7 +25,7 @@ import RouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
 import { getUserScopes } from '../../../../shared/ducks/user/user'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage'
-import LoginLinkContainer from '../../../components/Links/LoginLink/LoginLinkContainer'
+import LoginLink from '../../../components/Links/LoginLink/LoginLink'
 import NotificationLevel from '../../../models/notification'
 import formatCount from '../../../utils/formatCount'
 import DataSelectionContext from '../DataSelectionContext'
@@ -267,7 +267,7 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
             zakelijk rechthebbenden te bekijken. `
               : `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken. `}
           </Paragraph>
-          <LoginLinkContainer />
+          <LoginLink />
         </StyledAlert>
       ) : (
         <AccordionWrapper>

@@ -1,8 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import queryString from 'querystring'
 import { ChevronDown } from '@datapunt/asc-assets'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import styled, { css } from 'styled-components'
 import {
   Checkbox,
   Icon,
@@ -12,11 +8,14 @@ import {
   themeColor,
   themeSpacing,
 } from '@datapunt/asc-ui'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+import queryString from 'querystring'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import MAP_CONFIG from '../../services/map.config'
-import LoginLinkContainer from '../../../app/components/Links/LoginLink/LoginLinkContainer'
-
+import styled, { css } from 'styled-components'
+import LoginLink from '../../../app/components/Links/LoginLink/LoginLink'
 import { isPrintOrEmbedMode } from '../../../shared/ducks/ui/ui'
+import MAP_CONFIG from '../../services/map.config'
 
 const isAuthorised = (layer, user) =>
   !layer.authScope || (user.authenticated && user.scopes.includes(layer.authScope))
@@ -314,9 +313,7 @@ const MapLegend = ({
                     {!isAuthorised(mapLayer, user) && (
                       <div className="map-legend__notification">
                         <span>
-                          <LoginLinkContainer linkType="blank">
-                            Zichtbaar na inloggen
-                          </LoginLinkContainer>
+                          <LoginLink variant="blank">Zichtbaar na inloggen</LoginLink>
                         </span>
                       </div>
                     )}

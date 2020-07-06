@@ -703,7 +703,7 @@ exports[`DataSelection should show authorization message if user has no permissi
       <Paragraph>
         Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken. 
       </Paragraph>
-      <Connect(LoginLink) />
+      <LoginLink />
     </Alert>
   </div>
 </div>
