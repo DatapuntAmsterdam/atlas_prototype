@@ -12,7 +12,6 @@ import getState from '../../../shared/services/redux/get-state'
 import PARAMETERS from '../../../store/parameters'
 import {
   decodeBounds,
-  decodeLayers,
   decodeLocation,
   encodeBounds,
   encodeLayers,
@@ -278,7 +277,8 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
 
   React.useEffect(() => {
     if (baseLayer) setActiveBaseLayer(baseLayer)
-    if (activeMapLayers) setActiveMapLayers(decodeLayers(activeMapLayers))
+    // TODO: Find a better way to keep track of state changes
+    // if (activeMapLayers) setActiveMapLayers(decodeLayers(activeMapLayers))
     // @ts-ignore fix the destruction of the location from the url
     if (location) setLocation(decodeLocation(location))
     if (detailUrl) setDetailUrl(detailUrl)

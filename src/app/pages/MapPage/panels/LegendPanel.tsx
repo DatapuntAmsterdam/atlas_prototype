@@ -27,7 +27,7 @@ const StyledMapPanelContent = styled(MapPanelContent)`
   }
 `
 
-const MapLegend: React.FC = ({ ...otherProps }) => {
+const LegendPanel: React.FC = ({ ...otherProps }) => {
   const {
     panelLayers,
     activeMapLayers,
@@ -76,4 +76,4 @@ const MapLegend: React.FC = ({ ...otherProps }) => {
   )
 }
 
-export default MapLegend
+export default LegendPanel
