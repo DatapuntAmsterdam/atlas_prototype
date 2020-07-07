@@ -1,6 +1,6 @@
 const fetch = require('isomorphic-fetch')
 
-const API_ENDPOINT = `https://${process.env.API_ROOT}cms_search/graphql/`
+const API_ENDPOINT = 'https://api.data.amsterdam.nl/cms_search/graphql/'
 
 function useSlug(text) {
   return text

@@ -298,7 +298,7 @@ export const toNotFoundPage = () => ({
 })
 
 export const toHelpPage = () =>
-  toArticleDetail(HEADER_LINKS.HELP.id[process.env.NODE_ENV], HEADER_LINKS.HELP.slug)
+  toArticleDetail(HEADER_LINKS.HELP.id[process.env.DEPLOY_ENV], HEADER_LINKS.HELP.slug)
 
 export const toPublicationSearch = toSearchOfType(routing.publicationSearch.type)
 export const toArticleSearch = toSearchOfType(routing.articleSearch.type)
