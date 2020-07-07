@@ -53,10 +53,21 @@ describe('The HeaderSearch component', () => {
 
   let component
   beforeEach(() => {
+    Object.defineProperty(window, 'sessionStorage', {
+      value: {
+        setItem: jest.fn(),
+        getItem: jest.fn(),
+      },
+    })
+
     component = shallow(<HeaderSearch {...props} />)
 
     extractIdEndpoint.mockImplementationOnce(() => ['id1', 'id2', 'id3'])
     useSlug.mockImplementationOnce(() => 'foo')
+  })
+
+  afterEach(() => {
+    mockDispatch.mockClear()
   })
 
   describe('submits the form', () => {
@@ -73,6 +84,10 @@ describe('The HeaderSearch component', () => {
 
     it('and opens the correct search page', () => {
       component = shallow(<HeaderSearch {...{ ...props, pageType: CmsType.Special }} />)
+
+      // Set the pageType to specials
+      component.setProps({ pageType: CmsType.Special })
+
       const autosuggest = component.find('[data-test="search-form"]')
 
       autosuggest.simulate('submit', {
@@ -333,15 +348,19 @@ describe('The HeaderSearch component', () => {
       const searchBar = component.find('SearchBar')
 
       searchBar.props().onChange({ currentTarget: typedQuery })
-      searchBar.props().onKeyDown({
-        keyCode: 13,
-        preventDefault: () => {},
-      })
 
       // Select the suggest from autosuggest
       const autosuggest = component.find('AutoSuggest')
 
       expect(autosuggest.exists()).toBe(true)
+
+      searchBar.props().onKeyDown({
+        keyCode: 13,
+        preventDefault: () => {},
+      })
+
+      component.setProps({ activeSuggestion: { index: 1 } })
+
       expect(mockDispatch).toHaveBeenCalledWith(mockOnSearch)
     })
 

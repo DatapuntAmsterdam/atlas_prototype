@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { CmsType } from '../../../shared/config/cms.config'
 import { emptyFilters } from '../../../shared/ducks/filters/filters'
-import { getViewMode, isMapPage } from '../../../shared/ducks/ui/ui'
+import { getViewMode, isMapActive } from '../../../shared/ducks/ui/ui'
 import {
   toArticleDetail,
   toCollectionDetail,
@@ -13,15 +13,7 @@ import {
   toPublicationDetail,
   toSpecialDetail,
 } from '../../../store/redux-first-router/actions'
-import {
-  isArticlePage,
-  isCollectionPage,
-  isDataPage,
-  isDatasetPage,
-  isPublicationPage,
-  isSpecialPage,
-  isMapPage as isMapSearchPage,
-} from '../../../store/redux-first-router/selectors'
+import { getPage } from '../../../store/redux-first-router/selectors'
 import {
   getActiveSuggestions,
   getAutoSuggestSuggestions,
@@ -33,12 +25,12 @@ import {
 } from '../../ducks/auto-suggest/auto-suggest'
 import HeaderSearch from './HeaderSearch'
 import SearchType from '../../../app/pages/SearchPage/constants'
+import PAGES from '../../../app/pages'
 
 const mapStateToProps = (state) => ({
   activeSuggestion: getActiveSuggestions(state),
   displayQuery: getDisplayQuery(state),
   view: getViewMode(state),
-  isMapActive: isMapPage(state),
   numberOfSuggestions: getNumberOfSuggestions(state),
   pageName: state.page ? state.page.name : '',
   // eslint-disable-next-line no-nested-ternary
@@ -49,21 +41,23 @@ const mapStateToProps = (state) => ({
     : '',
   suggestions: getAutoSuggestSuggestions(state),
   typedQuery: getTypedQuery(state),
-  pageType: isDatasetPage(state)
-    ? SearchType.Dataset
-    : isDataPage(state)
+  pageType: isMapActive(state)
     ? SearchType.Data
-    : isArticlePage(state)
+    : getPage(state) === PAGES.DATA_SEARCH
+    ? SearchType.Data
+    : getPage(state) === PAGES.DATASET_SEARCH
+    ? SearchType.Dataset
+    : getPage(state) === PAGES.ARTICLE_SEARCH
     ? CmsType.Article
-    : isPublicationPage(state)
+    : getPage(state) === PAGES.PUBLICATION_SEARCH
     ? CmsType.Publication
-    : isSpecialPage(state)
+    : getPage(state) === PAGES.SPECIAL_SEARCH
     ? CmsType.Special
-    : isCollectionPage(state)
+    : getPage(state) === PAGES.COLLECTION_SEARCH
     ? CmsType.Collection
-    : isMapPage(state) || isMapSearchPage(state)
+    : getPage(state) === PAGES.MAP_SEARCH
     ? SearchType.Map
-    : SearchType.Search,
+    : null,
 })
 
 const mapDispatchToProps = (dispatch) => ({

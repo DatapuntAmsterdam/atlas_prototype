@@ -75,8 +75,8 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
   const dispatch = useDispatch()
   const [openSearchBarToggle, setOpenSearchBarToggle] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [searchCategory, setSearchCategory] = useState(
-    sessionStorage.getItem(SEARCH_CATEGORY_KEY) || pageType,
+  const [searchCategory, setSearchCategory] = useState<SearchCategory | null>(
+    sessionStorage.getItem(SEARCH_CATEGORY_KEY) || pageType || SearchType.Search,
   )
 
   const query = displayQuery || typedQuery
@@ -89,10 +89,6 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
   useEffect(() => {
     if (pageType) handleSetSearchCategory(pageType)
   }, [pageType])
-
-  useEffect(() => {
-    handleSetSearchCategory(searchCategory)
-  }, [searchCategory])
 
   // Opens suggestion on mouseclick or enter
   function onSuggestionSelection(suggestion: Suggestion) {
@@ -238,9 +234,13 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
         break
       // Enter
       case 13:
+        // If a suggestion is selected use thsat one, otherwise submit the form
         if (activeSuggestion?.index > -1) {
           onSuggestionSelection(activeSuggestion)
+        } else {
+          handleSubmit()
         }
+
         break
       default:
         break
@@ -297,7 +297,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
           value: query || '',
           openSearchBarToggle,
           searchCategory,
-          setSearchCategory,
+          setSearchCategory: handleSetSearchCategory,
         }}
         onOpenSearchBarToggle={setOpenSearchBarToggle}
       >
