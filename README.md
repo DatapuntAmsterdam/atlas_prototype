@@ -29,19 +29,19 @@ Then, open the application in your browser at [localhost:3000](http://localhost:
 Karma & Jest unit and (Jest) integration test
 
 ```
-npm test
+NODE_ENV=development npm test
 ```
 
 Only Karma unit tests
 
 ```
-npm run test:karma
+NODE_ENV=development npm run test:karma
 ```
 
 Only Jest unit tests
 
 ```
-npm run test:jest
+NODE_ENV=development npm run test:jest
 ```
 
 ### E2E testing

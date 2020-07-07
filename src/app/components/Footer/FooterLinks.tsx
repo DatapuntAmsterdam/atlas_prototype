@@ -28,7 +28,7 @@ const FooterLinks: React.FC<{ links: FooterLink[] }> = ({ children, links }) => 
   <List>
     {links &&
       links.map(({ title, id, href, onClick, slug }) => {
-        const linkId = !href ? id[process.env.DEPLOY_ENV] || id : id
+        const linkId = !href ? id[process.env.NODE_ENV] : id
 
         return (
           <ListItem key={linkId}>

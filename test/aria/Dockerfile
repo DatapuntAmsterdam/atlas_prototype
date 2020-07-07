@@ -30,3 +30,5 @@ RUN git config --global url."https://".insteadOf git:// && \
 
 COPY run.sh ./
 COPY test ./test
+
+ENV NODE_ENV=production

@@ -24,7 +24,7 @@ export const MATOMO_CONSTANTS = {
 // Initialize connection with Matomo
 export default new MatomoTracker({
   urlBase: MATOMO_CONFIG.BASE_URL,
-  siteId: MATOMO_CONFIG[process.env.DEPLOY_ENV].SITE_ID,
+  siteId: MATOMO_CONFIG[process.env.NODE_ENV].SITE_ID,
   heartBeat: {
     active: true,
     seconds: 10, // Set the heartbeat time differently to test high bounce rate in the first 10 seconds

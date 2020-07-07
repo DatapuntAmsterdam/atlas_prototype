@@ -22,7 +22,7 @@ try {
   angular.UNSAFE_restoreLegacyJqLiteXHTMLReplacement()
 } catch (e) {
   // eslint-disable-next-line no-console, angular/log
-  if (process.env.DEPLOY_ENV !== ENVIRONMENTS.PRODUCTION) console.warn(e)
+  if (process.env.NODE_ENV !== ENVIRONMENTS.PRODUCTION) console.warn(e)
 }
 
 urlChangeProvider.$inject = ['$provide']

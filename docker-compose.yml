@@ -10,15 +10,8 @@ services:
       context: .
       target: build-deps
       args:
-        DEPLOY_ENV: acceptance
+        - NODE_ENV=acceptance
     command: npm run test
-    environment:
-      DEPLOY_ENV: acceptance
-      IIIF_ROOT: https://acc.images.data.amsterdam.nl/
-      API_ROOT: https://acc.api.data.amsterdam.nl/
-      CMS_ROOT: https://acc.cms.data.amsterdam.nl/
-      GRAPHQL_ENDPOINT: https://acc.api.data.amsterdam.nl/cms_search/graphql/
-      ROOT: https://acc.data.amsterdam.nl/
 
   # test-e2e:
   #   build:

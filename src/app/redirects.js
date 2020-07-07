@@ -110,16 +110,16 @@ export const shortUrls = [
   {
     from: '/dossier/economie/',
     to: `/dossiers/dossier/corona-en-de-economie/${
-      SHORTLINKS.COLLECTIONS.ECONOMY.id[process.env.DEPLOY_ENV]
+      SHORTLINKS.COLLECTIONS.ECONOMY.id[process.env.NODE_ENV]
     }`,
   },
   {
     from: '/dossier/toerisme/',
-    to: `/dossiers/dossier/toerisme/${SHORTLINKS.COLLECTIONS.TOURISM.id[process.env.DEPLOY_ENV]}`,
+    to: `/dossiers/dossier/toerisme/${SHORTLINKS.COLLECTIONS.TOURISM.id[process.env.NODE_ENV]}`,
   },
   {
     from: '/dossier/wonen/',
-    to: `/dossiers/dossier/wonen/${SHORTLINKS.COLLECTIONS.HOUSING.id[process.env.DEPLOY_ENV]}`,
+    to: `/dossiers/dossier/wonen/${SHORTLINKS.COLLECTIONS.HOUSING.id[process.env.NODE_ENV]}`,
   },
 ]
 
@@ -127,7 +127,7 @@ export const articleUrls = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({
   from: item.from,
   to: routing.articleDetail.path
     .replace(':slug', item.to.slug)
-    .replace(':id', item.to.id[process.env.DEPLOY_ENV]),
+    .replace(':id', item.to.id[process.env.NODE_ENV]),
 }))
 
 const overviewPaths = [

@@ -1,7 +1,13 @@
 import { Config as KarmaConfig, ConfigOptions as KarmaConfigOptions } from 'karma'
 import path from 'path'
 import webpack, { Configuration as WebpackConfig } from 'webpack'
+import env from './test/load-env'
 import { distPath, legacyPath, rootPath, srcPath } from './webpack.common'
+
+const envKeys = Object.entries(env as { [key: string]: string }).reduce((prev, [key, value]) => {
+  prev[`process.env.${key}`] = JSON.stringify(value)
+  return prev
+}, {} as { [key: string]: string })
 
 const webpackConfig: WebpackConfig = {
   context: rootPath,
@@ -64,14 +70,10 @@ const webpackConfig: WebpackConfig = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin([
-      'DEPLOY_ENV',
-      'IIIF_ROOT',
-      'API_ROOT',
-      'CMS_ROOT',
-      'GRAPHQL_ENDPOINT',
-      'ROOT',
-    ]),
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(require('./package.json').version),
+      ...envKeys,
+    }),
   ],
 }
 
