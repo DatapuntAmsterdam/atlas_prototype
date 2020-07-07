@@ -1,156 +1,167 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
-<ContextMenu
-  alt="Actiemenu"
-  arrowIcon={<SvgChevronDown />}
-  data-test="context-menu"
-  icon={
-    <styled.span
-      inline={true}
-      padding={4}
-      size={24}
-    >
-      <SvgEllipsis />
-    </styled.span>
-  }
-  position="bottom"
-  tabindex={0}
+<styled.div
+  onBlur={[Function]}
+  onKeyDown={[Function]}
 >
-  <ContextMenuItem
-    icon={
-      <styled.span
-        inline={true}
-        padding={4}
-        size={24}
-      >
-        <SvgPrint />
-      </styled.span>
-    }
-    onClick={[Function]}
-    role="button"
-  >
-    Printen
-  </ContextMenuItem>
-  <ContextMenuItem
-    as="button"
+  <ContextMenuButton
+    arrowIcon={<SvgChevronDown />}
+    data-test="context-menu"
+    data-testid="toggle"
     disabled={false}
-    download="filename.jpg_small"
     icon={
       <styled.span
         inline={true}
         padding={4}
         size={24}
       >
-        <SvgDownload />
+        <SvgEllipsis />
       </styled.span>
     }
     onClick={[Function]}
+    open={false}
+    position="bottom"
+    tabIndex={0}
+    title="Actiemenu"
+  />
+  <ForwardRef
+    onClose={[Function]}
+    open={false}
+    position="bottom"
   >
-    Download klein
-  </ContextMenuItem>
-  <ContextMenuItem
-    as="button"
-    disabled={false}
-    download="filename.jpg_large"
-    icon={
-      <styled.span
-        inline={true}
-        padding={4}
-        size={24}
-      >
-        <SvgDownload />
-      </styled.span>
-    }
-    onClick={[Function]}
-  >
-    Download groot
-  </ContextMenuItem>
-  <ContextMenuItem
-    as="button"
-    disabled={false}
-    divider={true}
-    download="filename.jpg_original"
-    icon={
-      <styled.span
-        inline={true}
-        padding={4}
-        size={24}
-      >
-        <SvgDownload />
-      </styled.span>
-    }
-    onClick={[Function]}
-  >
-    Download origineel
-  </ContextMenuItem>
-  <ContextMenuItem
-    icon={
-      <styled.span
-        inline={true}
-        padding={4}
-        size={24}
-      >
-        <SvgFacebookPadded />
-      </styled.span>
-    }
-    key="1"
-    onClick={[Function]}
-    role="button"
-  >
-    Deel via 
-    Facebook
-  </ContextMenuItem>
-  <ContextMenuItem
-    icon={
-      <styled.span
-        inline={true}
-        padding={4}
-        size={24}
-      >
-        <SvgTwitter />
-      </styled.span>
-    }
-    key="2"
-    onClick={[Function]}
-    role="button"
-  >
-    Deel via 
-    Twitter
-  </ContextMenuItem>
-  <ContextMenuItem
-    icon={
-      <styled.span
-        inline={true}
-        padding={4}
-        size={24}
-      >
-        <SvgLinkedin />
-      </styled.span>
-    }
-    key="3"
-    onClick={[Function]}
-    role="button"
-  >
-    Deel via 
-    Linkedin
-  </ContextMenuItem>
-  <ContextMenuItem
-    icon={
-      <styled.span
-        inline={true}
-        padding={4}
-        size={24}
-      >
-        <SvgEmail />
-      </styled.span>
-    }
-    key="4"
-    onClick={[Function]}
-    role="button"
-  >
-    Deel via 
-    E-mail
-  </ContextMenuItem>
-</ContextMenu>
+    <ContextMenuItem
+      icon={
+        <styled.span
+          inline={true}
+          padding={4}
+          size={24}
+        >
+          <SvgPrint />
+        </styled.span>
+      }
+      onClick={[Function]}
+      role="button"
+    >
+      Printen
+    </ContextMenuItem>
+    <ContextMenuItem
+      download="filename.jpg_small"
+      forwardedAs="button"
+      icon={
+        <styled.span
+          inline={true}
+          padding={4}
+          size={24}
+        >
+          <SvgDownload />
+        </styled.span>
+      }
+      onClick={[Function]}
+    >
+      Download klein
+    </ContextMenuItem>
+    <ContextMenuItem
+      download="filename.jpg_large"
+      forwardedAs="button"
+      icon={
+        <styled.span
+          inline={true}
+          padding={4}
+          size={24}
+        >
+          <SvgDownload />
+        </styled.span>
+      }
+      onClick={[Function]}
+    >
+      Download groot
+    </ContextMenuItem>
+    <ContextMenuItem
+      divider={true}
+      download="filename.jpg_original"
+      forwardedAs="button"
+      icon={
+        <styled.span
+          inline={true}
+          padding={4}
+          size={24}
+        >
+          <SvgDownload />
+        </styled.span>
+      }
+      onClick={[Function]}
+    >
+      Download origineel
+    </ContextMenuItem>
+    <ContextMenuItem
+      icon={
+        <styled.span
+          inline={true}
+          padding={4}
+          size={24}
+        >
+          <SvgFacebookPadded />
+        </styled.span>
+      }
+      key="1"
+      onClick={[Function]}
+      role="button"
+    >
+      Deel via 
+      Facebook
+    </ContextMenuItem>
+    <ContextMenuItem
+      icon={
+        <styled.span
+          inline={true}
+          padding={4}
+          size={24}
+        >
+          <SvgTwitter />
+        </styled.span>
+      }
+      key="2"
+      onClick={[Function]}
+      role="button"
+    >
+      Deel via 
+      Twitter
+    </ContextMenuItem>
+    <ContextMenuItem
+      icon={
+        <styled.span
+          inline={true}
+          padding={4}
+          size={24}
+        >
+          <SvgLinkedin />
+        </styled.span>
+      }
+      key="3"
+      onClick={[Function]}
+      role="button"
+    >
+      Deel via 
+      Linkedin
+    </ContextMenuItem>
+    <ContextMenuItem
+      icon={
+        <styled.span
+          inline={true}
+          padding={4}
+          size={24}
+        >
+          <SvgEmail />
+        </styled.span>
+      }
+      key="4"
+      onClick={[Function]}
+      role="button"
+    >
+      Deel via 
+      E-mail
+    </ContextMenuItem>
+  </ForwardRef>
+</styled.div>
 `;

@@ -48,7 +48,11 @@ const CollectionDetailPage: React.FC = () => {
     <ContentContainer>
       {error ? (
         <StyledRow>
-          <ErrorMessage onClick={() => fetchData()} />
+          <ErrorMessage
+            message="Er is een fout opgetreden bij het laden van dit blok."
+            buttonLabel="Probeer opnieuw"
+            buttonOnClick={fetchData}
+          />
         </StyledRow>
       ) : (
         <Row>

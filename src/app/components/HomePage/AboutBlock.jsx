@@ -99,7 +99,13 @@ const AboutBlock = () => {
           </StyledHeading>
 
           <StyledRow hasMargin={false} showError={errorAboutData}>
-            {errorAboutData && <ErrorMessage onClick={() => {}} />}
+            {errorAboutData && (
+              <ErrorMessage
+                message="Er is een fout opgetreden bij het laden van dit blok."
+                buttonLabel="Probeer opnieuw"
+                buttonOnClick={fetchDataAboutData}
+              />
+            )}
             {resultsAboutData?.length
               ? resultsAboutData.map((aboutData, index) => (
                   <StyledCardColumn
@@ -119,7 +125,13 @@ const AboutBlock = () => {
           </StyledHeading>
 
           <StyledRow hasMargin={false} showError={errorAbout}>
-            {errorAbout && <ErrorMessage onClick={() => {}} />}
+            {errorAbout && (
+              <ErrorMessage
+                message="Er is een fout opgetreden bij het laden van dit blok."
+                buttonLabel="Probeer opnieuw"
+                buttonOnClick={fetchDataAbout}
+              />
+            )}
             {resultsAbout?.length
               ? resultsAbout.map((about, index) => (
                   <StyledCardColumn

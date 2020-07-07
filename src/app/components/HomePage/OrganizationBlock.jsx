@@ -61,7 +61,13 @@ const OrganizationBlock = () => {
         </StyledHeading>
       </Row>
       <StyledRow hasMargin={false} showError={error}>
-        {error && <ErrorMessage />}
+        {error && (
+          <ErrorMessage
+            message="Er is een fout opgetreden bij het laden van dit blok."
+            buttonLabel="Probeer opnieuw"
+            buttonOnClick={fetchData}
+          />
+        )}
         {results?.length
           ? results.map((result) => (
               <Column

@@ -1,19 +1,15 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import configureMockStore from 'redux-mock-store'
 import ConstructionFiles from './ConstructionFiles'
 import { sharePage } from '../../../../shared/ducks/ui/ui'
 
+const mockHandleDownload = jest.fn()
+const mockDispatch = jest.fn()
+
+jest.mock('react-redux', () => ({
+  useDispatch: () => mockDispatch,
+}))
 jest.mock('../../../../shared/ducks/ui/ui')
-
-// Mock the access token
-jest.mock('../../../../shared/services/redux/get-state', () =>
-  jest.fn(() => ({ user: { accessToken: 'token' } })),
-)
-
-// Mock the useDownload hook
-const mockOnDownload = jest.fn()
-jest.mock('../../../utils/useDownload', () => jest.fn(() => [false, mockOnDownload]))
 
 describe('ContextMenu for ConstructionFiles viewer', () => {
   let component
@@ -24,19 +20,11 @@ describe('ContextMenu for ConstructionFiles viewer', () => {
       fileName: 'filename.jpg',
       openPrintMode: mockOpenPrintMode,
       isImage: true,
-    }
-    const initialState = {
-      map: {
-        mapPanelActive: true,
-      },
-      ui: {
-        viewMode: 'print',
-      },
+      handleDownload: mockHandleDownload,
     }
     sharePage.mockImplementation(() => ({ type: 'action' }))
 
-    const store = configureMockStore()({ ...initialState })
-    component = shallow(<ConstructionFiles {...props} store={store} />).dive()
+    component = shallow(<ConstructionFiles {...props} />).dive()
   })
 
   it('should render', () => {
@@ -44,15 +32,17 @@ describe('ContextMenu for ConstructionFiles viewer', () => {
   })
 
   it('should handle the onClick events', () => {
+    mockHandleDownload.mockClear()
+
     const downloadButton = component.find('ContextMenuItem')
 
     downloadButton.at(1).simulate('click')
-    expect(mockOnDownload).toHaveBeenCalledTimes(1)
+    expect(mockHandleDownload).toHaveBeenCalledTimes(1)
 
     downloadButton.at(2).simulate('click')
-    expect(mockOnDownload).toHaveBeenCalledTimes(2)
+    expect(mockHandleDownload).toHaveBeenCalledTimes(2)
 
     downloadButton.at(3).simulate('click')
-    expect(mockOnDownload).toHaveBeenCalledTimes(3)
+    expect(mockHandleDownload).toHaveBeenCalledTimes(3)
   })
 })

@@ -331,14 +331,16 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
                   {delayedLoadingIds.includes(id) && !errorIds.includes(id) && <StyledSpinner />}
                   {!delayedLoadingIds.length && errorIds.includes(id) && (
                     <ErrorMessage
-                      onClick={async () => {
-                        await handleFetchData(mapData?.layer?.id)
+                      message="Er is een fout opgetreden bij het laden van dit blok."
+                      buttonLabel="Probeer opnieuw"
+                      buttonOnClick={() => {
+                        handleFetchData(mapData?.layer?.id)
                       }}
                     />
                   )}
                 </AccordionContent>
                 {totalCount === 0 && (
-                  <StyledAlert level={NotificationLevel.Attention} compact>
+                  <StyledAlert level={NotificationLevel.Attention}>
                     Er zijn geen resultaten
                   </StyledAlert>
                 )}

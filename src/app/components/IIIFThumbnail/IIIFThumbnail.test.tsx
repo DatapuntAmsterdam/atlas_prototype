@@ -40,6 +40,7 @@ describe('IIIFThumbnail', () => {
     ;(fetch as jest.Mock).mockReturnValueOnce(
       Promise.resolve({
         ok: false,
+        blob: () => Promise.resolve(new Blob('image')),
       }),
     )
     const { findByTestId } = render(<IIIFThumbnail src="" title="foo" />)
@@ -54,7 +55,7 @@ describe('IIIFThumbnail', () => {
     const mockFetch = (fetch as jest.Mock).mockReturnValueOnce(
       Promise.resolve({
         ok: true,
-        blob: () => Promise.resolve(new Blob()),
+        blob: () => Promise.resolve({}),
       }),
     )
     const src = 'this.a.endpoint'
@@ -66,10 +67,10 @@ describe('IIIFThumbnail', () => {
       headers: { authorization: `Bearer ${mockAccessToken}` },
     })
 
+    const image = (await findByTestId('Image')) as HTMLImageElement
+
     // Response.ok is true, so construct the image url using the blob
     expect(mockCreateObjectURL).toHaveBeenCalled()
-
-    const image = (await findByTestId('Image')) as HTMLImageElement
 
     expect(image.src).toContain(mockImageUrl)
   })

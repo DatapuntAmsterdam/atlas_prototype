@@ -41,6 +41,8 @@
     "@datapunt/react-maps": "^0.8.2-alpha.0",
     "@sentry/browser": "5.19.0",
     "@turf/turf": "^5.1.6",
+    "@types/file-saver": "^2.0.1",
+    "@types/openseadragon": "^2.4.5",
     "angular": "1.8.0",
     "angular-aria": "~1.8.0",
     "angular-i18n": "~1.7.9",

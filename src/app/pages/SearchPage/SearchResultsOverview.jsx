@@ -71,7 +71,11 @@ const SearchResultsOverview = ({ query, totalCount, results, errors, loading }) 
                   }}
                 />
               ) : (
-                <ErrorMessage />
+                <ErrorMessage
+                  message="Er is een fout opgetreden bij het laden van dit blok."
+                  buttonLabel="Probeer opnieuw"
+                  buttonOnClick={() => window.location.reload()}
+                />
               )}
             </ResultsComponent>
             {hasResults && (

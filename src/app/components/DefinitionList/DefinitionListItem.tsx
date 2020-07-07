@@ -29,8 +29,8 @@ const DefinitionListDescription = styled.dd`
   width: 70%;
 `
 
-const DefinitionListItem: React.FC<Props> = ({ term, children }) => (
-  <DefinitionListItemWrapper>
+const DefinitionListItem: React.FC<Props> = ({ term, children, ...otherProps }) => (
+  <DefinitionListItemWrapper {...otherProps}>
     <DefinitionListTerm>{term}</DefinitionListTerm>
     <DefinitionListDescription>{children}</DefinitionListDescription>
   </DefinitionListItemWrapper>

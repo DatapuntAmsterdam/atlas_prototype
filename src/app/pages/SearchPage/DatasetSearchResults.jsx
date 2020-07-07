@@ -80,7 +80,11 @@ const DatasetSearchResults = ({ query, label, results, errors, isOverviewPage })
   }
 
   return hasLoadingError ? (
-    <ErrorMessage />
+    <ErrorMessage
+      message="Er is een fout opgetreden bij het laden van dit blok."
+      buttonLabel="Probeer opnieuw"
+      buttonOnClick={() => window.location.reload()}
+    />
   ) : (
     <NoSearchResults query={query} label={label} to={toDatasetSearch(null, false, false, false)} />
   )

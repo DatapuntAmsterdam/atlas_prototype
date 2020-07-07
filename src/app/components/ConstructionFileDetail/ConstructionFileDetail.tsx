@@ -23,7 +23,7 @@ type ConstructionFile = {
   oorspronkelijk_pad?: string
 }
 
-type ConstructionFileDetailProps = {
+export type ConstructionFileDetailProps = {
   titel: string
   documenten: Array<ConstructionFile>
   datering: string
@@ -45,15 +45,17 @@ const PageWrapper = styled.div`
   padding-bottom: ${themeSpacing(18)};
 `
 
-const SubHeading = styled(Heading)`
+const SubHeading = styled(Heading)<{ hasMarginBottom?: boolean }>`
   color: ${themeColor('secondary')};
-  // @ts-ignore the marginBottom prop cannot be set on Heading
-  margin-bottom: ${({ hasMarginBottom }: { hasMarginBottom?: boolean }) =>
-    hasMarginBottom ? themeSpacing(2) : 0};
+  margin-bottom: ${({ hasMarginBottom }) => (hasMarginBottom ? themeSpacing(2) : 0)};
 `
 
 const StyledDefinitionList = styled(DefinitionList)`
   margin-bottom: ${themeSpacing(2)};
+`
+
+const StyledDefinitionListItem = styled(DefinitionListItem)`
+  padding-left: ${themeSpacing(5)}; // Align the terms on the left with the page content
 `
 
 const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
@@ -81,13 +83,15 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
       </ContentBlock>
 
       <StyledDefinitionList>
-        <DefinitionListItem term="Titel">{title}</DefinitionListItem>
-        <DefinitionListItem term="Datering">{date}</DefinitionListItem>
-        <DefinitionListItem term="Type">{fileType}</DefinitionListItem>
-        <DefinitionListItem term="Dossiernummer">{fileNumber}</DefinitionListItem>
-        <DefinitionListItem term="Openbaarheid">{access}</DefinitionListItem>
+        <StyledDefinitionListItem term="Titel">{title}</StyledDefinitionListItem>
+        <StyledDefinitionListItem term="Datering">{date}</StyledDefinitionListItem>
+        <StyledDefinitionListItem term="Type">{fileType}</StyledDefinitionListItem>
+        <StyledDefinitionListItem term="Dossiernummer">{fileNumber}</StyledDefinitionListItem>
+        <StyledDefinitionListItem term="Openbaarheid">{access}</StyledDefinitionListItem>
         {oloLiaanNumber && (
-          <DefinitionListItem term="OLO of liaan nummer">{oloLiaanNumber}</DefinitionListItem>
+          <StyledDefinitionListItem term="OLO of liaan nummer">
+            {oloLiaanNumber}
+          </StyledDefinitionListItem>
         )}
       </StyledDefinitionList>
 
@@ -101,7 +105,7 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
             document_omschrijving: description,
             oorspronkelijk_pad: filePath,
           }) => (
-            <>
+            <React.Fragment key={barcode}>
               <ContentBlock>
                 <SubHeading
                   hasMarginBottom={false}
@@ -112,18 +116,24 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
               {oloLiaanNumber && (
                 <StyledDefinitionList>
                   {description && (
-                    <DefinitionListItem term="Beschrijving">{description}</DefinitionListItem>
+                    <StyledDefinitionListItem term="Beschrijving">
+                      {description}
+                    </StyledDefinitionListItem>
                   )}
                   {filePath && (
-                    <DefinitionListItem term="Oorspronkelijk pad">{filePath}</DefinitionListItem>
+                    <StyledDefinitionListItem term="Oorspronkelijk pad">
+                      {filePath}
+                    </StyledDefinitionListItem>
                   )}
                   {documentAccess && (
-                    <DefinitionListItem term="Openbaarheid">{documentAccess}</DefinitionListItem>
+                    <StyledDefinitionListItem term="Openbaarheid">
+                      {documentAccess}
+                    </StyledDefinitionListItem>
                   )}
                 </StyledDefinitionList>
               )}
               <Gallery key={barcode} id={id} allFiles={files} access={documentAccess} />
-            </>
+            </React.Fragment>
           ),
         )}
 
