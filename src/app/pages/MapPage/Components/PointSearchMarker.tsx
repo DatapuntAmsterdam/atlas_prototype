@@ -29,7 +29,7 @@ const PointSearchMarker: React.FC<{
     return () => {
       mapInstance.off('click', clickHandler)
     }
-  }, [mapInstance])
+  }, [mapInstance, onClick])
 
   // Use this logic to automatically pan the map to the center of the marker when the drawer is positioned in the middle
   useEffect(() => {

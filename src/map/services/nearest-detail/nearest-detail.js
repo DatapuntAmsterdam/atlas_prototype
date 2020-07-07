@@ -44,5 +44,5 @@ export default async function fetchNearestDetail(location, layers, zoom) {
       )
     ).reduce(/* istanbul ignore next */ (a, b) => [...a, ...b]),
   )
-  return results[0] ? results[0] : ''
+  return results[0] ? results[0] : null
 }

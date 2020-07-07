@@ -1,9 +1,11 @@
 import { LatLngLiteral, LeafletMouseEvent } from 'leaflet'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
+import joinUrl from '../../../utils/joinUrl'
 import { MapState } from '../MapContext'
 
-type NearestDetail = {
-  uri: string
+interface NearestDetail {
+  id: string
+  type: string
 }
 
 export default async function handleMapClick(
@@ -18,15 +20,17 @@ export default async function handleMapClick(
       (activeOverlay) => activeOverlay.detailUrl,
     )
 
-    const { uri }: NearestDetail = await fetchNearestDetail(
+    const nearestDetail: NearestDetail | null = await fetchNearestDetail(
       { latitude: e.latlng.lat, longitude: e.latlng.lng },
       activeOverlaysWithInstanceAPI,
       8,
     )
 
-    if (uri) {
-      // get the detail information including the geojson
-      setDetailUrl(uri)
+    if (nearestDetail) {
+      const detailUrl = joinUrl(nearestDetail.type, nearestDetail.id)
+      setDetailUrl(detailUrl)
+    } else {
+      setLocation(e.latlng)
     }
   } else {
     // get the geo search information
