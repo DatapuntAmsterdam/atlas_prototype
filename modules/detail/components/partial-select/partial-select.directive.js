@@ -1,4 +1,5 @@
 import angular from 'angular'
+import environment from '../../../../src/environment'
 
 angular.module('dpDetail').directive('dpPartialSelect', dpPartialSelectDirective)
 
@@ -19,7 +20,7 @@ function dpPartialSelectDirective(partialCompiler) {
   }
 
   function linkFunction(scope, element) {
-    scope.apiUrl = process.env.API_ROOT
+    scope.apiUrl = environment.API_ROOT
     const templateUrl = `modules/detail/components/partial-select/partials/${scope.partial}.html`
 
     partialCompiler.getHtml(templateUrl, scope).then(function (partial) {

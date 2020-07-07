@@ -25,7 +25,6 @@ RUN npm run generate:sitemap
 # Build dependencies
 COPY src /app/src
 COPY modules /app/modules
-COPY scripts /app/scripts
 COPY .babelrc \
     .eslintrc.js \
     .eslintignore \
@@ -38,8 +37,7 @@ COPY .babelrc \
     favicon.png \
     /app/
 
-ARG NODE_ENV=${NODE_ENV}
-RUN npm run build:${NODE_ENV}
+RUN npm run build
 RUN echo "build= `date`" > /app/dist/version.txt
 
 # Test dependencies
@@ -48,10 +46,12 @@ COPY karma.conf.ts \
     /app/
 COPY test /app/test
 
-
 # Web server image
 FROM nginx:1.19-alpine
-ARG NODE_ENV=${NODE_ENV}
-COPY nginx-${NODE_ENV}.conf /etc/nginx/nginx.conf
+ARG DEPLOY_ENV=${DEPLOY_ENV}
+COPY scripts/startup.sh startup.sh
+COPY nginx-${DEPLOY_ENV}.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/
 COPY --from=build-deps /app/dist /usr/share/nginx/html
+
+CMD sh startup.sh

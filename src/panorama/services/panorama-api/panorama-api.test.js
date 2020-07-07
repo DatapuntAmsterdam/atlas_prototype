@@ -6,6 +6,7 @@ import {
   getStreetViewUrl,
   PANORAMA_CONFIG,
 } from './panorama-api'
+import environment from '../../../environment'
 
 jest.mock('../../../shared/services/api/api')
 
@@ -122,7 +123,7 @@ describe('The Panorama Api', () => {
       const { newestInRange } = getLocationHistoryParams(null, undefined)
 
       expect(fetchWithToken).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}`,
+        `${environment.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}`,
       )
     })
 
@@ -149,7 +150,7 @@ describe('The Panorama Api', () => {
       )
 
       expect(fetchWithToken).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}${prefix}` +
+        `${environment.API_ROOT}${prefix}` +
           `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`,
       )
     })
@@ -163,7 +164,7 @@ describe('The Panorama Api', () => {
       )
 
       expect(fetchWithToken).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}${prefix}` +
+        `${environment.API_ROOT}${prefix}` +
           `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`,
       )
     })
@@ -233,7 +234,7 @@ describe('The Panorama Api', () => {
       )
 
       expect(fetchWithToken).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}${prefix}` +
+        `${environment.API_ROOT}${prefix}` +
           `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`,
       )
     })
@@ -245,7 +246,7 @@ describe('The Panorama Api', () => {
       const { tagsQuery, newestInRange } = getLocationHistoryParams(null, history)
 
       expect(fetchWithToken).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}${tagsQuery}`,
+        `${environment.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}${tagsQuery}`,
       )
     })
 
@@ -257,14 +258,14 @@ describe('The Panorama Api', () => {
       )
 
       expect(fetchWithToken).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}${prefix}` +
+        `${environment.API_ROOT}${prefix}` +
           `/?${locationRange}${tagsQuery}&${standardRadius}&${newestInRange}&limit_results=1`,
       )
 
       getImageDataById('ABC', 0)
 
       expect(fetchWithToken).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}`,
+        `${environment.API_ROOT}${prefix}/ABC/${suffix}/?${newestInRange}`,
       )
     })
   })

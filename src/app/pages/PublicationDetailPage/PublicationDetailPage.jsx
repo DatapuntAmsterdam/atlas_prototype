@@ -21,6 +21,7 @@ import ShareBar from '../../components/ShareBar/ShareBar'
 import getImageFromCms from '../../utils/getImageFromCms'
 import DocumentCover from '../../components/DocumentCover/DocumentCover'
 import useDownload from '../../utils/useDownload'
+import environment from '../../../environment'
 
 const PublicationDetailPage = ({ id }) => {
   const { fetchData, results, loading, error } = useFromCMS(cmsConfig.PUBLICATION, id)
@@ -94,7 +95,7 @@ const PublicationDetailPage = ({ id }) => {
                         action: 'publicatie-download',
                         name: title,
                       })
-                      downloadFile(`${process.env.CMS_ROOT}${fileUrl && fileUrl.substring(1)}`)
+                      downloadFile(`${environment.CMS_ROOT}${fileUrl && fileUrl.substring(1)}`)
                     }}
                   />
                 </Column>

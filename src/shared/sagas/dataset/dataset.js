@@ -16,6 +16,7 @@ import { getUserScopes } from '../../ducks/user/user'
 import { fetchWithToken } from '../../services/api/api'
 import getApiSpecification from '../../services/datasets-filters/datasets-filters'
 import { waitForAuthentication } from '../user/user'
+import environment from '../../../environment'
 
 /* istanbul ignore next */
 export function* ensureCatalogFilters() {
@@ -64,7 +65,7 @@ export function* getDatasetData(endpoint) {
 export function* fetchDatasetEffect(action) {
   yield call(waitForAuthentication)
   yield put(fetchDetailRequest(true)) // Set the loading state
-  const endpoint = `${process.env.API_ROOT}dcatd/datasets/${action.payload.id}`
+  const endpoint = `${environment.API_ROOT}dcatd/datasets/${action.payload.id}`
 
   const detailData = yield call(getDatasetData, endpoint)
 

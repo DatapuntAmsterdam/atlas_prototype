@@ -1,4 +1,5 @@
 import { fetchWithToken } from '../api/api'
+import environment from '../../../environment'
 
 const formatFilters = (rawData) =>
   Object.keys(rawData).reduce((acc, key) => {
@@ -15,8 +16,8 @@ const formatFilters = (rawData) =>
 
 const getDetailEndpoint = (config, rawDataRow) =>
   rawDataRow.dataset === 'mac'
-    ? `${process.env.API_ROOT}handelsregister/maatschappelijkeactiviteit/${rawDataRow.kvk_nummer}/`
-    : `${process.env.API_ROOT}${config.ENDPOINT_DETAIL}${rawDataRow[config.PRIMARY_KEY]}/`
+    ? `${environment.API_ROOT}handelsregister/maatschappelijkeactiviteit/${rawDataRow.kvk_nummer}/`
+    : `${environment.API_ROOT}${config.ENDPOINT_DETAIL}${rawDataRow[config.PRIMARY_KEY]}/`
 
 const formatData = (config, rawData) =>
   rawData.map((rawDataRow) => {
@@ -30,7 +31,7 @@ const formatData = (config, rawData) =>
   })
 
 export function getMarkers(config, activeFilters) {
-  return fetchWithToken(process.env.API_ROOT + config.ENDPOINT_MARKERS, activeFilters).then(
+  return fetchWithToken(environment.API_ROOT + config.ENDPOINT_MARKERS, activeFilters).then(
     (data) => ({
       clusterMarkers: data.object_list
         // eslint-disable-next-line no-underscore-dangle
@@ -59,7 +60,7 @@ export function query(config, view, activeFilters, page, search, shape = '[]') {
   }
 
   const uri = config.ENDPOINT_PREVIEW[view] || config.ENDPOINT_PREVIEW
-  return fetchWithToken(process.env.API_ROOT + uri, searchParams).then((data) => {
+  return fetchWithToken(environment.API_ROOT + uri, searchParams).then((data) => {
     const newData = { ...data }
     if (searchPage !== page) {
       // Requested page was out of api reach, dumping data

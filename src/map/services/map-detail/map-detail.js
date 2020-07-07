@@ -1,5 +1,6 @@
 import mapFetch from '../map-fetch/map-fetch'
 import servicesByEndpointType, { endpointTypes } from '../map-services.config'
+import environment from '../../../environment'
 
 export const pageEndpointTypeMapping = {
   'bag/ligplaats/': 'bag/v1.1/ligplaats/',
@@ -26,7 +27,7 @@ export const pageEndpointTypeMapping = {
 
 export const pageTypeToEndpoint = (type, subtype, id) => {
   const endpointType = pageEndpointTypeMapping[`${type}/${subtype}/`] || `${type}/${subtype}/`
-  return `${process.env.API_ROOT}${endpointType}${id}/`
+  return `${environment.API_ROOT}${endpointType}${id}/`
 }
 
 export const getEndpointTypeForResult = (endpointType, detail) => {

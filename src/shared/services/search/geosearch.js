@@ -5,6 +5,7 @@ import { fetchWithToken } from '../api/api'
 import geosearchFormatter from './geosearch-formatter'
 import SEARCH_CONFIG from './search-config'
 import { formatCategory } from './search-formatter'
+import environment from '../../../environment'
 
 function isNumber(value) {
   return typeof value === 'number'
@@ -39,7 +40,7 @@ function getRelatedObjects(geosearchResults, user) {
       // Only fetching 'vestigingen' for a standplaats/ligplaats, so
       // we check for employee status here already
       fetchWithToken(plaatsEndpoint).then((plaats) => {
-        const vestigingenUri = `${process.env.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${plaats.hoofdadres.landelijk_id}`
+        const vestigingenUri = `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${plaats.hoofdadres.landelijk_id}`
 
         fetchWithToken(vestigingenUri).then((vestigingen) => {
           const formatted =
@@ -101,7 +102,7 @@ function getRelatedObjects(geosearchResults, user) {
 
         if (user.scopes.includes('HR/R')) {
           requests.push(
-            fetchWithToken(`${process.env.API_ROOT}${vestigingenUri}`).then((vestigingen) => {
+            fetchWithToken(`${environment.API_ROOT}${vestigingenUri}`).then((vestigingen) => {
               const formatted =
                 vestigingen && vestigingen.count ? formatCategory('vestiging', vestigingen) : null
               const extended = formatted
@@ -154,7 +155,7 @@ export default function geosearch(location, user) {
       }
 
       const request = fetchWithToken(
-        `${process.env.API_ROOT}${endpoint.uri}`,
+        `${environment.API_ROOT}${endpoint.uri}`,
         searchParams,
         false,
         true,

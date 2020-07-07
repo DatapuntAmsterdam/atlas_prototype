@@ -83,5 +83,18 @@
     <% for (let item of htmlWebpackPlugin.options.scripts) { %>
       <script src="<%= item %>"></script>
     <% } %>
+
+    <% if (htmlWebpackPlugin.options.mode === 'production') { %>
+      <script id="environment" type="application/json">
+        {
+          "DEPLOY_ENV": "${DEPLOY_ENV}",
+          "IIIF_ROOT": "${IIIF_ROOT}",
+          "API_ROOT": "${API_ROOT}",
+          "GRAPHQL_ENDPOINT": "${GRAPHQL_ENDPOINT}",
+          "ROOT": "${ROOT}",
+          "CMS_ROOT": "${CMS_ROOT}"
+        }
+      </script>
+    <% } %>
   </body>
 </html>

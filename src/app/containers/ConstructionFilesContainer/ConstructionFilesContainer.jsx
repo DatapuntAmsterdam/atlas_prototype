@@ -12,6 +12,7 @@ import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import ConstructionFileDetail from '../../components/ConstructionFileDetail/ConstructionFileDetail'
 import ErrorAlert from '../../components/ErrorAlert/ErrorAlert'
 import useDocumentTitle from '../../utils/useDocumentTitle'
+import environment from '../../../environment'
 
 const ImageViewer = React.lazy(() =>
   import(/* webpackChunkName: "ImageViewer" */ '../../components/ImageViewer/ImageViewer'),
@@ -125,7 +126,7 @@ ConstructionFilesContainer.propTypes = {
 const mapStateToProps = (state) => ({
   fileName: getFileName(state),
   fileUrl: getFileUrl(state),
-  endpoint: `${process.env.API_ROOT}iiif-metadata/bouwdossier/${getLocationPayload(
+  endpoint: `${environment.API_ROOT}iiif-metadata/bouwdossier/${getLocationPayload(
     state,
   ).id.replace('id', '')}/`,
   user: getUser(state),

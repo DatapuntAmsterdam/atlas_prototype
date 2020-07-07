@@ -1,9 +1,10 @@
 import joinUrl from '../../../app/utils/joinUrl'
 import { ServiceDefinition } from '../map-services.config'
+import environment from '../../../environment'
 
 // eslint-disable-next-line import/prefer-default-export
 export function getDetailUrl(serviceDefinition: ServiceDefinition, id: string) {
-  const apiRoot = process.env.API_ROOT
+  const apiRoot = environment.API_ROOT
 
   if (!apiRoot) {
     throw new Error('Unable to format URL, missing API_ROOT environment variable.')

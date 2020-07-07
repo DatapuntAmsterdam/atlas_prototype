@@ -2,6 +2,7 @@ import angular from 'angular'
 import { downloadDataSelection } from '../../../../../src/shared/ducks/data-selection/actions'
 import DATA_SELECTION_CONFIG from '../../../../../src/shared/services/data-selection/data-selection-config'
 import isDefined from '../../../../../src/shared/services/is-defined'
+import environment from '../../../../../src/environment'
 
 angular.module('dpDataSelection').component('dpDataSelectionDownloadButton', {
   bindings: {
@@ -25,7 +26,7 @@ function DpDataSelectionDownloadButtonController($window, $scope, api, store) {
   function setDownloadUrl() {
     filterParams.length = 0
 
-    let url = process.env.API_ROOT + DATA_SELECTION_CONFIG.datasets[vm.dataset].ENDPOINT_EXPORT
+    let url = environment.API_ROOT + DATA_SELECTION_CONFIG.datasets[vm.dataset].ENDPOINT_EXPORT
 
     DATA_SELECTION_CONFIG.datasets[vm.dataset].FILTERS.forEach(function (filter) {
       if (angular.isString(vm.activeFilters[filter.slug])) {

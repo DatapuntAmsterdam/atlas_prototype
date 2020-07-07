@@ -1,7 +1,9 @@
+import environment from '../../environment'
+
 const mapBaseLayers = require('../../../public/static/map/map-base-layers.config.json')
 
 async function fetchMap(resolver, query) {
-  const result = await fetch(process.env.GRAPHQL_ENDPOINT, {
+  const result = await fetch(environment.GRAPHQL_ENDPOINT, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',

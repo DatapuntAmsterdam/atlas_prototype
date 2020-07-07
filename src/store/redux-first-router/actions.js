@@ -3,6 +3,7 @@ import { HEADER_LINKS } from '../../shared/config/config'
 import { DATASET_ROUTE_MAPPER } from '../../shared/ducks/data-selection/constants'
 import { VIEW_MODE } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../parameters'
+import environment from '../../environment'
 
 export const preserveQuery = (action, additionalParams = null) => ({
   ...action,
@@ -298,7 +299,7 @@ export const toNotFoundPage = () => ({
 })
 
 export const toHelpPage = () =>
-  toArticleDetail(HEADER_LINKS.HELP.id[process.env.NODE_ENV], HEADER_LINKS.HELP.slug)
+  toArticleDetail(HEADER_LINKS.HELP.id[environment.DEPLOY_ENV], HEADER_LINKS.HELP.slug)
 
 export const toPublicationSearch = toSearchOfType(routing.publicationSearch.type)
 export const toArticleSearch = toSearchOfType(routing.articleSearch.type)

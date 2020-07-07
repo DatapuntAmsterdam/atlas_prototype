@@ -2,6 +2,7 @@ import { fetchWithToken } from '../../../shared/services/api/api'
 import mapFetch from '../map-fetch/map-fetch'
 import { vastgoed } from '../normalize/normalize'
 import fetchByGeoLocation from './vastgoed'
+import environment from '../../../environment'
 
 jest.mock('../../../shared/services/api/api')
 jest.mock('../../../shared/services/shared-config/shared-config')
@@ -46,7 +47,7 @@ describe('The vastgoed resource', () => {
 
     // Will retrieve the information for the second feature
     expect(mapFetch).toHaveBeenCalledWith(
-      `${process.env.API_ROOT}vsd/vastgoed/${vastgoedMock.features[1].properties.id}/`,
+      `${environment.API_ROOT}vsd/vastgoed/${vastgoedMock.features[1].properties.id}/`,
       false,
       vastgoed,
     )

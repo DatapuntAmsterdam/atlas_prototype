@@ -15,6 +15,7 @@ import {
 import queryStringParser from '../query-string-parser/query-string-parser'
 import stateTokenGenerator from '../state-token-generator/state-token-generator'
 import parseAccessToken from '../access-token-parser/access-token-parser'
+import environment from '../../../environment'
 
 jest.mock('../query-string-parser/query-string-parser')
 jest.mock('../state-token-generator/state-token-generator')
@@ -267,7 +268,7 @@ describe('The auth service', () => {
       login()
 
       expect(assignMock).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=${encodedScopes}&state=123StateToken&redirect_uri=https%3A%2F%2Fdata.amsterdam.nl%2F`,
+        `${environment.API_ROOT}oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=${encodedScopes}&state=123StateToken&redirect_uri=https%3A%2F%2Fdata.amsterdam.nl%2F`,
       )
       window.location = location
     })

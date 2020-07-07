@@ -11,6 +11,7 @@ import DatasetDetail from './DatasetDetail'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import { toDatasetDetail } from '../../../store/redux-first-router/actions'
 import useSlug from '../../utils/useSlug'
+import environment from '../../../environment'
 
 const mapStateToProps = (state) => {
   const isLoading = isDetailLoading(state)
@@ -19,7 +20,7 @@ const mapStateToProps = (state) => {
     isLoading,
     catalogFilters: getApiSpecificationData(state),
     user: getUser(state),
-    endpoint: `${process.env.API_ROOT}dcatd/datasets/${getLocationPayload(state).id}`,
+    endpoint: `${environment.API_ROOT}dcatd/datasets/${getLocationPayload(state).id}`,
     // construct the canonical href and meta description using the result from the api
 
     action:

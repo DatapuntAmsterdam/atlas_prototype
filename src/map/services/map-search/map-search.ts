@@ -9,6 +9,7 @@ import { createMapSearchResultsModel } from '../map-search-results/map-search-re
 import { fetchByPandId as fetchMonumentByPandId } from '../monument/monument'
 import { fetchByAddressId, fetchByPandId as fetchVestigingByPandId } from '../vestiging/vestiging'
 import transformResultByType from './transform-result-by-type'
+import environment from '../../../environment'
 
 interface Endpoint {
   uri: string
@@ -86,7 +87,7 @@ export const getFeaturesFromResult = (endpointType, result) => {
       properties: {
         display: item.id,
         type: 'parkeervakken/parkeervakken',
-        uri: process.env.API_ROOT + item._links.self.href.substring(1),
+        uri: environment.API_ROOT + item._links.self.href.substring(1),
       },
     }))
   }
@@ -165,7 +166,7 @@ export default function mapSearch(
     })
 
     const request = fetchWithToken(
-      `${process.env.API_ROOT}${endpoint.uri}?${searchParams.toString()}`,
+      `${environment.API_ROOT}${endpoint.uri}?${searchParams.toString()}`,
     )
       .then((result) => ({
         features: getFeaturesFromResult(endpoint.uri, result),

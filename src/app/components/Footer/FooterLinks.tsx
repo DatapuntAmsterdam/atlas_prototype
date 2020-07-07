@@ -4,6 +4,7 @@ import { Link, List, ListItem } from '@datapunt/asc-ui'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { toArticleDetail } from '../../../store/redux-first-router/actions'
+import environment from '../../../environment'
 
 export type FooterLink = {
   title: string
@@ -28,7 +29,7 @@ const FooterLinks: React.FC<{ links: FooterLink[] }> = ({ children, links }) => 
   <List>
     {links &&
       links.map(({ title, id, href, onClick, slug }) => {
-        const linkId = !href ? id[process.env.NODE_ENV] : id
+        const linkId = !href ? id[environment.DEPLOY_ENV] || id : id
 
         return (
           <ListItem key={linkId}>

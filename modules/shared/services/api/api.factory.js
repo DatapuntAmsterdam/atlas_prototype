@@ -1,6 +1,7 @@
 import angular from 'angular'
 import { encodeQueryParams } from '../../../../src/shared/services/query-string-parser/query-string-parser'
 import SHARED_CONFIG from '../../../../src/shared/services/shared-config/shared-config'
+import environment from '../../../../src/environment'
 
 angular.module('dpShared').factory('api', apiFactory)
 
@@ -119,6 +120,6 @@ function apiFactory($injector, $interval, $q, $http) {
   }
 
   function getByUri(uri, params) {
-    return getByUrl(process.env.API_ROOT + uri, params, undefined)
+    return getByUrl(environment.API_ROOT + uri, params, undefined)
   }
 }

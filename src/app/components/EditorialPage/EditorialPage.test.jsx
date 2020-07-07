@@ -4,6 +4,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import EditorialPage from './EditorialPage'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import useDocumentTitle from '../../utils/useDocumentTitle'
+import environment from '../../../environment'
 
 jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')
 jest.mock('../../utils/useDocumentTitle')
@@ -39,7 +40,7 @@ describe('EditorialPage', () => {
   it('should set the canonical title', () => {
     const link = component.find('link')
     expect(link).toBeTruthy()
-    expect(link.props().href).toBe(`${process.env.ROOT}this.is.alink`)
+    expect(link.props().href).toBe(`${environment.ROOT}this.is.alink`)
   })
 
   it('should set the document title and send to analytics', () => {

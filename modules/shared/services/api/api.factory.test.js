@@ -1,3 +1,5 @@
+import environment from '../../../../src/environment'
+
 describe('The api factory', function () {
   let $rootScope
   let $interval
@@ -10,8 +12,8 @@ describe('The api factory', function () {
   let isLoggedIn
   let clearHttpCache
 
-  const mockUrl1 = `${process.env.API_ROOT}bag/verblijfsobject/123/`
-  const mockUrl2 = `${process.env.API_ROOT}bag/verblijfsobject/456/`
+  const mockUrl1 = `${environment.API_ROOT}bag/verblijfsobject/123/`
+  const mockUrl2 = `${environment.API_ROOT}bag/verblijfsobject/456/`
 
   beforeEach(function () {
     angular.mock.module('dpShared', {

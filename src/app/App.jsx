@@ -36,6 +36,7 @@ import { routing } from './routes'
 import Footer from './components/Footer/Footer'
 import getState from '../shared/services/redux/get-state'
 import matomoInstance from './matomo'
+import environment from '../environment'
 
 const StyledContainer = styled(Container)`
   min-height: 100%;
@@ -50,7 +51,7 @@ const StyledContainer = styled(Container)`
 `
 
 const graphQLClient = createClient({
-  url: `${process.env.GRAPHQL_ENDPOINT}`,
+  url: `${environment.GRAPHQL_ENDPOINT}`,
   fetchOptions: () => {
     const token = getState().user.accessToken
     return {

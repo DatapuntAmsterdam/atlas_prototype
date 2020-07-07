@@ -1,5 +1,6 @@
 import { LatLngLiteral } from 'leaflet'
 import { fetchWithToken } from '../../../shared/services/api/api'
+import environment from '../../../environment'
 
 export interface FetchPanoramaOptions {
   /**
@@ -95,7 +96,7 @@ export async function getPanoramaThumbnail(
   }
 
   const response = await fetchWithToken<RawResponse>(
-    `${process.env.API_ROOT}panorama/thumbnail/?${searchParams.toString()}`,
+    `${environment.API_ROOT}panorama/thumbnail/?${searchParams.toString()}`,
   )
 
   return transformResponse(response)

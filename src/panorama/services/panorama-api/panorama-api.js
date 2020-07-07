@@ -1,5 +1,6 @@
 import { fetchWithToken } from '../../../shared/services/api/api'
 import getCenter from '../../../shared/services/geo-json/geo-json'
+import environment from '../../../environment'
 
 export const PANORAMA_CONFIG = {
   PANORAMA_ENDPOINT_PREFIX: 'panorama/panoramas',
@@ -114,7 +115,7 @@ export function getImageDataByLocation(location, tags) {
     standardRadius,
     tagsQuery,
   } = getLocationHistoryParams(location, tags)
-  const getLocationUrl = `${process.env.API_ROOT}${prefix}/?${locationRange}${tagsQuery}`
+  const getLocationUrl = `${environment.API_ROOT}${prefix}/?${locationRange}${tagsQuery}`
   const limitResults = 'limit_results=1'
 
   const promise = new Promise((resolve, reject) => {
@@ -142,7 +143,7 @@ export function getImageDataByLocation(location, tags) {
 export function getImageDataById(id, tags) {
   const { adjacenciesParams } = getLocationHistoryParams(null, tags)
 
-  return fetchPanorama(`${process.env.API_ROOT}${prefix}/${id}/${suffix}/?${adjacenciesParams}`)
+  return fetchPanorama(`${environment.API_ROOT}${prefix}/${id}/${suffix}/?${adjacenciesParams}`)
 }
 
 export function getStreetViewUrl(location, heading) {

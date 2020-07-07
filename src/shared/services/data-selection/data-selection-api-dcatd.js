@@ -1,4 +1,5 @@
 import { fetchWithToken } from '../api/api'
+import environment from '../../../environment'
 
 const propertyName = {
   status: '/properties/ams:status',
@@ -10,7 +11,7 @@ const propertyName = {
 }
 
 const getDetailEndpoint = (config, rawDataRow) =>
-  `${process.env.API_ROOT}${config.ENDPOINT_DETAIL}/${rawDataRow[config.PRIMARY_KEY]}`
+  `${environment.API_ROOT}${config.ENDPOINT_DETAIL}/${rawDataRow[config.PRIMARY_KEY]}`
 
 const getFacetOptions = (facet, filterCatalog, namespace) =>
   Object.keys(facet).map((option) => {
@@ -147,7 +148,7 @@ export function query(
   searchParams.offset = (page - 1) * config.MAX_ITEMS_PER_PAGE
   searchParams.limit = config.MAX_ITEMS_PER_PAGE
 
-  return fetchWithToken(process.env.API_ROOT + config.ENDPOINT_PREVIEW, searchParams).then(
+  return fetchWithToken(environment.API_ROOT + config.ENDPOINT_PREVIEW, searchParams).then(
     (data) => ({
       numberOfPages: Math.ceil(data['void:documents'] / config.MAX_ITEMS_PER_PAGE),
       numberOfRecords: data['void:documents'],

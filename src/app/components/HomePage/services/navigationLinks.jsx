@@ -14,6 +14,7 @@ import {
 } from '../../../../store/redux-first-router/actions'
 import { NAVIGATION_LINKS } from '../../../../shared/config/config'
 import { routing as routes } from '../../../routes'
+import environment from '../../../../environment'
 
 // The id's also represent the order in which they are displayed in the NavigationBlock on the homepage
 // The order of how the items are placed in the array, is the order for the Menu
@@ -43,7 +44,7 @@ const navigationLinks = [
   {
     id: 4,
     to: toArticleDetail(
-      NAVIGATION_LINKS.DATA_IN_TABLES.id[process.env.NODE_ENV],
+      NAVIGATION_LINKS.DATA_IN_TABLES.id[environment.DEPLOY_ENV],
       NAVIGATION_LINKS.DATA_IN_TABLES.slug,
     ),
     CardIcon: () => (
@@ -57,7 +58,7 @@ const navigationLinks = [
   {
     id: 5,
     to: toArticleDetail(
-      NAVIGATION_LINKS.DATA_SERVICES.id[process.env.NODE_ENV],
+      NAVIGATION_LINKS.DATA_SERVICES.id[environment.DEPLOY_ENV],
       NAVIGATION_LINKS.DATA_SERVICES.slug,
     ),
     CardIcon: () => (

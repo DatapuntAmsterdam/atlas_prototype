@@ -1,6 +1,5 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import dotenv from 'dotenv'
 import HtmlWebpackMultiBuildPlugin from 'html-webpack-multi-build-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
@@ -23,12 +22,6 @@ const modernModules = [
   'escape-string-regexp',
   'redux-first-router',
 ].map((entry) => `${path.resolve(__dirname, 'node_modules', entry)}/`)
-
-const env = dotenv.config().parsed ?? {}
-const envKeys = Object.entries(env).reduce((prev, [key, value]) => {
-  prev[`process.env.${key}`] = JSON.stringify(value)
-  return prev
-}, {} as { [key: string]: string })
 
 export interface CreateConfigOptions {
   /**
@@ -231,7 +224,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       }),
       new DefinePlugin({
         VERSION: JSON.stringify(require('./package.json').version),
-        ...envKeys,
       }),
       new SVGSpritemapPlugin(['src/shared/assets/icons/**/*.svg'], {
         output: {
@@ -262,18 +254,18 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         favicon: './favicon.png',
         styles: ['https://static.amsterdam.nl/fonts/fonts.css'],
         scripts: ['https://static.amsterdam.nl/fonts/mtiFontTrackingCode.min.js'],
-        root: env.ROOT,
-        minify:
-          isProd
-            ? {
-                collapseWhitespace: true,
-                removeComments: true,
-                removeRedundantAttributes: true,
-                removeScriptTypeAttributes: false,
-                removeStyleLinkTypeAttributes: true,
-                useShortDoctype: true,
-              }
-            : false,
+        root: 'https://data.amsterdam.nl/',
+        mode: options.mode,
+        minify: isProd
+          ? {
+              collapseWhitespace: true,
+              removeComments: true,
+              removeRedundantAttributes: true,
+              removeScriptTypeAttributes: false,
+              removeStyleLinkTypeAttributes: true,
+              useShortDoctype: true,
+            }
+          : false,
       }),
       ...(!options.singleBuild ? [new HtmlWebpackMultiBuildPlugin()] : []),
     ],

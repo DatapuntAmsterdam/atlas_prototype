@@ -1,6 +1,7 @@
 import * as api from '../api/api'
 import { getMarkers, query } from './data-selection-api-data-selection'
 import * as dataSelectionConfig from './data-selection-config'
+import environment from '../../../environment'
 
 let mockedApiResponse
 let mockedApiMarkersResponse
@@ -108,7 +109,7 @@ describe('DataSelection api', () => {
 
     dataSelectionConfig.default = config
     api.fetchWithToken = jest.fn((uri) => {
-      if (uri === `${process.env.API_ROOT}zwembaden/markers/`) {
+      if (uri === `${environment.API_ROOT}zwembaden/markers/`) {
         return Promise.resolve(mockedApiMarkersResponse)
       }
       return Promise.resolve(mockedApiResponse)
@@ -118,7 +119,7 @@ describe('DataSelection api', () => {
   it('calls the api factory with the active filters, page and shape as searchParams', async () => {
     // Without active filters
     query(config, 'LIST', {}, 1, 'search', '[[3,12]]')
-    expect(api.fetchWithToken).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/`, {
+    expect(api.fetchWithToken).toHaveBeenCalledWith(`${environment.API_ROOT}zwembaden/`, {
       page: 1,
       dataset: 'ves',
       shape: '[[3,12]]',
@@ -126,7 +127,7 @@ describe('DataSelection api', () => {
 
     // With active filters
     query(config, 'TABLE', { water: 'Verwarmd' }, 2)
-    expect(api.fetchWithToken).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/`, {
+    expect(api.fetchWithToken).toHaveBeenCalledWith(`${environment.API_ROOT}zwembaden/`, {
       water: 'Verwarmd',
       page: 2,
       dataset: 'ves',
@@ -222,7 +223,7 @@ describe('DataSelection api', () => {
     expect(output.data[0]).toEqual({
       _links: {
         self: {
-          href: `${process.env.API_ROOT}api_endpoint/zwembaden/1/`,
+          href: `${environment.API_ROOT}api_endpoint/zwembaden/1/`,
         },
       },
       _openbare_ruimte_naam: 'Binnenkant',
@@ -238,7 +239,7 @@ describe('DataSelection api', () => {
     expect(output.data[1]).toEqual({
       _links: {
         self: {
-          href: `${process.env.API_ROOT}api_endpoint/zwembaden/2/`,
+          href: `${environment.API_ROOT}api_endpoint/zwembaden/2/`,
         },
       },
       _openbare_ruimte_naam: 'Binnenkant',
@@ -256,7 +257,7 @@ describe('DataSelection api', () => {
     expect(output.data[2]).toEqual({
       _links: {
         self: {
-          href: `${process.env.API_ROOT}api_endpoint/zwembaden/3/`,
+          href: `${environment.API_ROOT}api_endpoint/zwembaden/3/`,
         },
       },
       _openbare_ruimte_naam: 'Binnenkant',
@@ -274,7 +275,7 @@ describe('DataSelection api', () => {
     expect(output.data[3]).toEqual({
       _links: {
         self: {
-          href: `${process.env.API_ROOT}handelsregister/maatschappelijkeactiviteit/34392003/`,
+          href: `${environment.API_ROOT}handelsregister/maatschappelijkeactiviteit/34392003/`,
         },
       },
       handelsnaam: 'De Appel',
@@ -311,14 +312,14 @@ describe('DataSelection api', () => {
       // Without filters
       getMarkers(config, {})
       expect(api.fetchWithToken).toHaveBeenCalledWith(
-        `${process.env.API_ROOT}zwembaden/markers/`,
+        `${environment.API_ROOT}zwembaden/markers/`,
         {},
       )
 
       // With filters
       getMarkers(config, { water: 'Verwarmd' })
 
-      expect(api.fetchWithToken).toHaveBeenCalledWith(`${process.env.API_ROOT}zwembaden/markers/`, {
+      expect(api.fetchWithToken).toHaveBeenCalledWith(`${environment.API_ROOT}zwembaden/markers/`, {
         water: 'Verwarmd',
       })
     })

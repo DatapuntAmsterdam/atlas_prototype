@@ -37,6 +37,7 @@ import EditorialResults from '../../components/EditorialResults'
 import useDownload from '../../utils/useDownload'
 import { EDITORIAL_FIELD_TYPE_VALUES } from '../../../normalizations/cms/useNormalizedCMSResults'
 import { CmsType } from '../../../shared/config/cms.config'
+import environment from '../../../environment'
 
 const ListItemContent = styled.div`
   display: flex;
@@ -253,7 +254,7 @@ const ArticleDetailPage = ({ id }) => {
                                         action: 'artikel-download',
                                         name: fileName,
                                       })
-                                      downloadFile(`${process.env.CMS_ROOT}${url}`)
+                                      downloadFile(`${environment.CMS_ROOT}${url}`)
                                     }}
                                     variant="with-chevron"
                                   >

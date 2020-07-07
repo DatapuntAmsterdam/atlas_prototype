@@ -18,6 +18,7 @@ import navigationLinks from '../HomePage/services/navigationLinks'
 
 import { HEADER_LINKS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
+import environment from '../../../environment'
 
 const StyledMenuInline = styled(MenuInline)`
   background-color: ${({ tall, theme }) =>
@@ -64,7 +65,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
       <MenuFlyOut label="Over OIS">
         {HEADER_LINKS &&
           HEADER_LINKS.ABOUT.map(({ title, id, slug }) => {
-            const linkId = id[process.env.NODE_ENV]
+            const linkId = id[environment.DEPLOY_ENV]
 
             return (
               <MenuItem key={linkId}>
@@ -115,7 +116,10 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
               })
             }}
             title={HEADER_LINKS.HELP.title}
-            to={toArticleDetail(HEADER_LINKS.HELP.id[process.env.NODE_ENV], HEADER_LINKS.HELP.slug)}
+            to={toArticleDetail(
+              HEADER_LINKS.HELP.id[environment.DEPLOY_ENV],
+              HEADER_LINKS.HELP.slug,
+            )}
           >
             {HEADER_LINKS.HELP.title}
           </MenuButton>

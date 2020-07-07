@@ -1,4 +1,5 @@
 import angular from 'angular'
+import environment from '../../../../src/environment'
 
 angular.module('dpDetail').component('dpWkpbLink', {
   bindings: {
@@ -13,6 +14,6 @@ function DpWkpbLinkController() {
   const vm = this
 
   this.$onInit = function () {
-    vm.wkpbEndpoint = `${process.env.ROOT}brk/object-wkpb/${vm.brkId}/`
+    vm.wkpbEndpoint = `${environment.ROOT}brk/object-wkpb/${vm.brkId}/`
   }
 }

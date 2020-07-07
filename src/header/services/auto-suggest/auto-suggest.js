@@ -1,6 +1,7 @@
 import { getAuthHeaders } from '../../../shared/services/auth/auth'
 import { CmsType } from '../../../shared/config/cms.config'
 import SearchType from '../../../app/pages/SearchPage/constants'
+import environment from '../../../environment'
 
 // Minimun length for typeahead query in backend is 3 characters
 const MIN_QUERY_LENGTH = 3
@@ -111,7 +112,7 @@ async function search({ query, type }) {
   const uri =
     query &&
     query.length >= MIN_QUERY_LENGTH &&
-    `${process.env.API_ROOT}typeahead?q=${typeof query === 'string' ? query.toLowerCase() : ''}` // Todo: temporary fix, real fix: DP-7365
+    `${environment.API_ROOT}typeahead?q=${typeof query === 'string' ? query.toLowerCase() : ''}` // Todo: temporary fix, real fix: DP-7365
 
   if (uri) {
     const response = await fetch(uri, { headers: getAuthHeaders() })

@@ -1,5 +1,6 @@
 import BOUNDING_BOX from './bounding-box.constant'
 import { ENVIRONMENTS } from '../../shared/environment'
+import environment from '../../environment'
 
 const BOUNDS = [BOUNDING_BOX.COORDINATES.southWest, BOUNDING_BOX.COORDINATES.northEast]
 
@@ -69,9 +70,9 @@ const MAP_CONFIG = {
   ...defaultConfig,
   BASE_LAYER_OPTIONS: {
     ...defaultConfig.BASE_LAYER_OPTIONS,
-    ...environmentConfig[process.env.NODE_ENV].BASE_LAYER_OPTIONS,
+    ...environmentConfig[environment.DEPLOY_ENV].BASE_LAYER_OPTIONS,
   },
-  OVERLAY_ROOT: environmentConfig[process.env.NODE_ENV].OVERLAY_ROOT,
+  OVERLAY_ROOT: environmentConfig[environment.DEPLOY_ENV].OVERLAY_ROOT,
 }
 
 export default MAP_CONFIG

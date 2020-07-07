@@ -8,6 +8,7 @@ import useDocumentTitle from '../../utils/useDocumentTitle'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
 import getImageFromCms from '../../utils/getImageFromCms'
+import environment from '../../../environment'
 
 const BodyStyle = styled.div`
   background-color: ${themeColor('level', 'level1')}
@@ -36,7 +37,7 @@ const EditorialPage = ({
 
   const href = linkAction && linkAttributesFromAction(linkAction).href
 
-  const canonical = href && `${process.env.ROOT}${href.substr(1)}`
+  const canonical = href && `${environment.ROOT}${href.substr(1)}`
 
   const ogImage = image && getImageFromCms(image, 600, 300)
 

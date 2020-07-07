@@ -12,6 +12,7 @@ import {
 } from '@datapunt/asc-ui'
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
+import environment from '../../../../environment'
 
 const CardContainer = styled.div`
   display: flex;
@@ -122,7 +123,7 @@ const MapCollectionCard: React.FC<MapCollectionCardProps> = ({ result }) => {
     <CardWrapper>
       <StyledCard>
         <CardHeader href={result.href}>
-          <CardImage src={process.env.CMS_ROOT + result.meta.thumbnail} alt="" />
+          <CardImage src={environment.CMS_ROOT + result.meta.thumbnail} alt="" />
           <CardHeadingContainer>
             <CardHeaderIcon inline size={16}>
               <MapLayers />

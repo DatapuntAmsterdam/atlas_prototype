@@ -1,3 +1,5 @@
+import environment from '../../environment'
+
 const isString = (any) => typeof any === 'string'
 /**
  *
@@ -22,7 +24,7 @@ const getImageFromCms = (
   extension = isString(src) && src.split('.').pop(),
 ) => {
   if (isString(src)) {
-    return `${process.env.CMS_ROOT}assets/${resize}/${width}/${height}/${gravity}/${enlarge}/${btoa(
+    return `${environment.CMS_ROOT}assets/${resize}/${width}/${height}/${gravity}/${enlarge}/${btoa(
       src,
     )}.${extension}`
   }

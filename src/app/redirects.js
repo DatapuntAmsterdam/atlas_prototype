@@ -3,6 +3,7 @@ import { routing, MAIN_PATHS } from './routes'
 import { CONTENT_REDIRECT_LINKS, SHORTLINKS } from '../shared/config/config'
 import matomoInstance from './matomo'
 import redirectToAddress from './utils/redirectToAddress'
+import environment from '../environment'
 
 const { VIEW, VIEW_CENTER, LAYERS, LEGEND, ZOOM, EMBED } = PARAMETERS
 
@@ -110,16 +111,16 @@ export const shortUrls = [
   {
     from: '/dossier/economie/',
     to: `/dossiers/dossier/corona-en-de-economie/${
-      SHORTLINKS.COLLECTIONS.ECONOMY.id[process.env.NODE_ENV]
+      SHORTLINKS.COLLECTIONS.ECONOMY.id[environment.DEPLOY_ENV]
     }`,
   },
   {
     from: '/dossier/toerisme/',
-    to: `/dossiers/dossier/toerisme/${SHORTLINKS.COLLECTIONS.TOURISM.id[process.env.NODE_ENV]}`,
+    to: `/dossiers/dossier/toerisme/${SHORTLINKS.COLLECTIONS.TOURISM.id[environment.DEPLOY_ENV]}`,
   },
   {
     from: '/dossier/wonen/',
-    to: `/dossiers/dossier/wonen/${SHORTLINKS.COLLECTIONS.HOUSING.id[process.env.NODE_ENV]}`,
+    to: `/dossiers/dossier/wonen/${SHORTLINKS.COLLECTIONS.HOUSING.id[environment.DEPLOY_ENV]}`,
   },
 ]
 
@@ -127,7 +128,7 @@ export const articleUrls = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({
   from: item.from,
   to: routing.articleDetail.path
     .replace(':slug', item.to.slug)
-    .replace(':id', item.to.id[process.env.NODE_ENV]),
+    .replace(':id', item.to.id[environment.DEPLOY_ENV]),
 }))
 
 const overviewPaths = [

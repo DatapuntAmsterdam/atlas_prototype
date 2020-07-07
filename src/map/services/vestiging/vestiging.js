@@ -1,5 +1,6 @@
 import { fetchWithToken } from '../../../shared/services/api/api'
 import mapFetch from '../map-fetch/map-fetch'
+import environment from '../../../environment'
 
 const normalize = async (result) => {
   let societalActivities
@@ -39,7 +40,7 @@ export function fetchByPandId(pandId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&')
 
-  return fetchWithToken(`${process.env.API_ROOT}handelsregister/vestiging/?${queryString}`).then(
+  return fetchWithToken(`${environment.API_ROOT}handelsregister/vestiging/?${queryString}`).then(
     (data) => data.results,
   )
 }
@@ -53,7 +54,7 @@ export function fetchByAddressId(addressId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&')
 
-  return fetchWithToken(`${process.env.API_ROOT}handelsregister/vestiging/?${queryString}`).then(
+  return fetchWithToken(`${environment.API_ROOT}handelsregister/vestiging/?${queryString}`).then(
     (data) => data.results,
   )
 }

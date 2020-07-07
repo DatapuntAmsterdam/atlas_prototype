@@ -1,6 +1,7 @@
 import { fetchWithToken } from '../../../shared/services/api/api'
 import mapFetch from '../map-fetch/map-fetch'
 import { adressenVerblijfsobject } from '../normalize/normalize'
+import environment from '../../../environment'
 
 const normalize = async (result) => {
   let verblijfsobject
@@ -37,7 +38,7 @@ export function fetchByPandId(pandId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&')
 
-  return fetchWithToken(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
+  return fetchWithToken(`${environment.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
     (data) => data.results,
   )
 }
@@ -51,7 +52,7 @@ export function fetchByLigplaatsId(ligplaatsId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&')
 
-  return fetchWithToken(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
+  return fetchWithToken(`${environment.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
     (data) =>
       data.results.map((result) => ({
         ...result,
@@ -75,7 +76,7 @@ export function fetchByStandplaatsId(standplaatsId) {
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(searchParams[key])}`)
     .join('&')
 
-  return fetchWithToken(`${process.env.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
+  return fetchWithToken(`${environment.API_ROOT}bag/v1.1/nummeraanduiding/?${queryString}`).then(
     (data) =>
       data.results.map((result) => ({
         ...result,

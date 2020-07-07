@@ -7,6 +7,7 @@ import { isEmbedded, isPrintMode } from '../../../shared/ducks/ui/ui'
 import useDataFetching from '../../utils/useDataFetching'
 import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'
 import { InfoModal } from '../Modal'
+import environment from '../../../environment'
 
 const COOKIE_NAME = 'showNotificationAlert'
 
@@ -32,7 +33,7 @@ const NotificationAlert: React.FC = () => {
       return
     }
     // Limit = 1 because this prevents us from getting multiple notifications
-    const endpoint = `${process.env.CMS_ROOT}jsonapi/node/notification?filter[field_active]=1&page[limit]=1`
+    const endpoint = `${environment.CMS_ROOT}jsonapi/node/notification?filter[field_active]=1&page[limit]=1`
     ;(async () => {
       await fetchData(endpoint)
     })()
