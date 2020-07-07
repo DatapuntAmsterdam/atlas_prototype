@@ -107,7 +107,13 @@ const EditorialResults = ({
           {!hasLoadingError && unauthorizedLabels.length > 0 && (
             <MoreResultsWhenLoggedIn excludedResults={unauthorizedLabels.join(', ')} />
           )}
-          {hasLoadingError && <ErrorMessage />}
+          {hasLoadingError && (
+            <ErrorMessage
+              message="Er is een fout opgetreden bij het laden van dit blok."
+              buttonLabel="Probeer opnieuw"
+              buttonOnClick={() => window.location.reload()}
+            />
+          )}
         </>
       )}
     </EditorialCardContainer>

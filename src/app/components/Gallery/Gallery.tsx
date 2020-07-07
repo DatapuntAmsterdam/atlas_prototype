@@ -40,9 +40,11 @@ const StyledLink = styled(Link)`
   ${({ disabled }: { disabled: boolean }) =>
     disabled &&
     css`
-      pointer-events: none;
-      cursor: default;
-      display: inline-block; // to make disable pointer-events on IE
+      cursor: no-drop;
+
+      & * {
+        cursor: no-drop;
+      }
     `}
 
   // To make the link square
@@ -111,7 +113,7 @@ const Gallery: React.FC<GalleryProps> = ({ allFiles, id, access }) => {
                   {/*
                   // @ts-ignore */}
                   <StyledLink
-                    forwardedAs={RouterLink}
+                    forwardedAs={disabled ? 'span' : RouterLink}
                     to={toConstructionFileViewer(id, fileName, fileUrl)}
                     title={fileName}
                     disabled={disabled}

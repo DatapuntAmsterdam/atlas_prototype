@@ -3,7 +3,7 @@ import { breakpoint, Button, Paragraph, themeColor, themeSpacing } from '@datapu
 import React from 'react'
 
 const ErrorMessageStyle = styled.div`
-  ${({ absolute }) =>
+  ${({ absolute }: { absolute: boolean }) =>
     absolute &&
     css`
       position: absolute;
@@ -42,15 +42,31 @@ export const ErrorBackgroundCSS = css`
   }
 `
 
-const ErrorMessage = ({
-  onClick = () => window.location.reload(),
+type ErrorMessageProps = {
+  message: string
+  buttonOnClick: () => void
+  buttonLabel: string
+  buttonIcon?: React.ReactNode
+  absolute?: boolean
+}
+
+const ErrorMessage: React.FC<ErrorMessageProps> = ({
+  message,
+  buttonLabel,
+  buttonOnClick,
+  buttonIcon,
   absolute = false,
-  ...otherProps
 }) => (
-  <ErrorMessageStyle absolute={absolute} {...otherProps}>
-    <Paragraph>Er is een fout opgetreden bij het laden van dit blok.</Paragraph>
-    <Button type="button" onClick={onClick} variant="primary" taskflow={false}>
-      Probeer opnieuw
+  <ErrorMessageStyle absolute={absolute}>
+    <Paragraph>{message}</Paragraph>
+    <Button
+      type="button"
+      onClick={buttonOnClick}
+      iconLeft={buttonIcon}
+      variant="primary"
+      taskflow={false}
+    >
+      {buttonLabel}
     </Button>
   </ErrorMessageStyle>
 )

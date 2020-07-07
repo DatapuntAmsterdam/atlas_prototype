@@ -54,7 +54,14 @@ const EditorialBlock = ({ title, list, showMoreProps = {}, showContentType = fal
         </Column>
       </Row>
       <CardRow showError={error}>
-        {error && <ErrorMessage absolute />}
+        {error && (
+          <ErrorMessage
+            absolute
+            message="Er is een fout opgetreden bij het laden van dit blok."
+            buttonLabel="Probeer opnieuw"
+            buttonOnClick={fetchData}
+          />
+        )}
         <Row hasMargin={false}>
           {specials.length
             ? specials.map((special, index) => (

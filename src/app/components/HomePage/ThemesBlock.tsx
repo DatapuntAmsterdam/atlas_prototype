@@ -89,7 +89,11 @@ const ThemesBlock: React.FC = () => {
     return (
       <ContentHolder>
         <Column span={12}>
-          <StyledErrorMessage onClick={() => executeQuery()} />
+          <StyledErrorMessage
+            message="Er is een fout opgetreden bij het laden van dit blok."
+            buttonLabel="Probeer opnieuw"
+            buttonOnClick={executeQuery}
+          />
         </Column>
       </ContentHolder>
     )

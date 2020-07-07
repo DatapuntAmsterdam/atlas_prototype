@@ -15,6 +15,7 @@ const StyledCard = styled(Card)`
 const StyledCardContent = styled(CardContent)`
   overflow-wrap: break-word;
   position: absolute;
+  cursor: default;
   bottom: 0;
   left: 0;
   padding: ${themeSpacing(2, 3)}
@@ -44,11 +45,13 @@ const IIIFThumbnail = ({ src, title }: Thumbnail) => {
 
           return response.blob()
         })
-        .then((images) => {
+        .then((image) => {
           setLoading(false)
 
           // Then create a local URL for that image and pass it to the local state
-          return setLocalImage(URL.createObjectURL(images))
+          const localUrl = image ? ((URL.createObjectURL(image) as unknown) as string) : ''
+
+          return setLocalImage(localUrl)
         })
         .catch(() => {
           setLoading(false)

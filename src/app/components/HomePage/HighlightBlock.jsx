@@ -83,7 +83,14 @@ const HighlightBlock = () => {
   return (
     <>
       <HighlightBlockStyle showError={error} data-test="highlight-block">
-        {error && <ErrorMessage absolute />}
+        {error && (
+          <ErrorMessage
+            absolute
+            message="Er is een fout opgetreden bij het laden van dit blok."
+            buttonLabel="Probeer opnieuw"
+            buttonOnClick={fetchData}
+          />
+        )}
         <HighlightBlockInnerStyle>
           <ImageCardWrapperLarge>
             <HighlightCard

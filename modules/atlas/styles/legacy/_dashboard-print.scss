@@ -18,6 +18,7 @@ $dashboard-heading-padding-print-version: 46px;
 .c-dashboard__body {
   top: auto;
   height: calc(100% - #{$dashboard-heading-height-print-version});
+  width: 100%;
   margin-left: auto;
   padding: $base-whitespace;
   border: 2px solid $secondary-gray40;

@@ -5,8 +5,8 @@ const DefinitionListWrapper = styled.dl`
   width: 100%;
 `
 
-const DefinitionList: React.FC = ({ children }) => (
-  <DefinitionListWrapper>{children}</DefinitionListWrapper>
+const DefinitionList: React.FC = ({ children, ...otherProps }) => (
+  <DefinitionListWrapper {...otherProps}>{children}</DefinitionListWrapper>
 )
 
 export default DefinitionList

@@ -47,7 +47,11 @@ const DataList = ({ type, label, count, results, withPagination }) => (
         ))}
       </List>
     ) : (
-      <StyledErrorMessage />
+      <StyledErrorMessage
+        message="Er is een fout opgetreden bij het laden van dit blok."
+        buttonLabel="Probeer opnieuw"
+        buttonOnClick={() => window.location.reload()}
+      />
     )}
     {!withPagination && results && count > results.length && (
       <SearchLink
