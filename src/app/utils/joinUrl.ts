@@ -14,11 +14,11 @@ export default function joinUrl(...paths: string[]) {
   const normalizedPaths = paths.map((path) => {
     let normalizedPath = path
 
-    while (normalizedPath.startsWith(PATH_SEPARATOR)) {
+    while (normalizedPath[0] === PATH_SEPARATOR) {
       normalizedPath = normalizedPath.slice(1)
     }
 
-    while (normalizedPath.endsWith(PATH_SEPARATOR)) {
+    while (normalizedPath[normalizedPath.length - 1] === PATH_SEPARATOR) {
       normalizedPath = normalizedPath.slice(0, -1)
     }
 

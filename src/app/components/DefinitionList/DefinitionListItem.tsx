@@ -8,7 +8,7 @@ type Props = {
 
 const DefinitionListItemWrapper = styled.div`
   display: flex;
-  margin-bottom: ${themeSpacing(2)};
+  padding: ${themeSpacing(2)} 0;
   border-bottom: 1px solid ${themeColor('tint', 'level4')};
 
   @media screen and ${breakpoint('max-width', 'mobileL')} {
@@ -17,15 +17,14 @@ const DefinitionListItemWrapper = styled.div`
 `
 
 const DefinitionListTerm = styled.dt`
+  margin-right: ${themeSpacing(2)};
   color: ${themeColor('tint', 'level5')};
   font-weight: 500;
-  padding: ${themeSpacing(1, 5)};
   white-space: normal;
   width: 30%;
 `
 
 const DefinitionListDescription = styled.dd`
-  padding: ${themeSpacing(1, 5)};
   white-space: normal;
   width: 70%;
 `
