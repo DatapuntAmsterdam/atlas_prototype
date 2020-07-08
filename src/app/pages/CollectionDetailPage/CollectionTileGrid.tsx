@@ -103,7 +103,7 @@ const CollectionTileGrid: React.FC<Props> = ({ results, loading, title, descript
               ...linkProps,
               isLoading: loading,
               span,
-              backgroundImage: teaserImage || '/assets/images/not_found_thumbnail.jpg',
+              backgroundImage: teaserImage,
             }}
           >
             <TileLabel>

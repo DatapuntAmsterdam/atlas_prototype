@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { breakpoint, themeColor } from '@datapunt/asc-ui'
+import { breakpoint, themeColor, themeSpacing } from '@datapunt/asc-ui'
 
 const TileLabel = styled.div`
-  padding: 8px 14px;
+  padding: ${themeSpacing(2, 3)};
   background-color: ${themeColor('tint', 'level1')};
   position: absolute;
   bottom: 56px;
@@ -11,7 +11,7 @@ const TileLabel = styled.div`
   word-break: break-word;
 
   @media screen and ${breakpoint('min-width', 'tabletM')} {
-    padding: 16px;
+    padding: ${themeSpacing(4)};
   }
 `
 

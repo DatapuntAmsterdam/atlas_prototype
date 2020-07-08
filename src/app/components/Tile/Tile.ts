@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { breakpoint, perceivedLoading, themeColor, Link, themeSpacing } from '@datapunt/asc-ui'
 import { SizeOnBreakpoint } from '../TileGrid/TileGridStyle'
 import getImageFromCms from '../../utils/getImageFromCms'
+import TileLabel from './TileLabel'
 
 type TileProps = {
   backgroundImage?: string
@@ -23,18 +24,22 @@ const Tile = styled(Link)<TileProps>`
   background-position: center;
 
   ${({ backgroundImage, span, isLoading }) =>
-    backgroundImage && span && !isLoading
+    span && !isLoading
       ? css`
           ${span &&
           Object.entries(span).map(
             ([brkPoint, size]: [any, any]) => css`
-              background-image: url(${getImageFromCms(backgroundImage, 400, 300)});
+              background-image: url(${backgroundImage
+                ? getImageFromCms(backgroundImage, 400, 300)
+                : `${process.env.ROOT}assets/images/not_found_thumbnail.jpg`});
               @media screen and ${breakpoint('min-width', brkPoint)} {
-                background-image: url(${getImageFromCms(
-                  backgroundImage,
-                  size[1] === 2 ? 600 : 300,
-                  size[0] === 2 ? 600 : 300,
-                )});
+                background-image: url(${backgroundImage
+                  ? getImageFromCms(
+                      backgroundImage,
+                      size[1] === 2 ? 600 : 300,
+                      size[0] === 2 ? 600 : 300,
+                    )
+                  : `${process.env.ROOT}assets/images/not_found_thumbnail.jpg`});
               }
             `,
           )}
@@ -63,6 +68,11 @@ const Tile = styled(Link)<TileProps>`
     bottom: 0;
     border-bottom-color: white;
     border-right-color: white;
+  }
+
+  // Overwrite settings in asc-ui due to https://github.com/Amsterdam/amsterdam-styled-components/issues/773
+  ${TileLabel} {
+    margin: 0px;
   }
 `
 
