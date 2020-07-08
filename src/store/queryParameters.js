@@ -525,22 +525,20 @@ export function encodeLayers(values) {
   return values.map(({ id, isVisible }) => `${id}:${isVisible ? 1 : 0}`).join('|')
 }
 
-export function decodeBounds(values) {
-  if (!values) {
+export function decodeBounds(value) {
+  if (!value) {
     return []
   }
 
-  return values.split('|').map((value) =>
-    value.split('-').map((entry) => {
-      const [coordinates] = entry.split(':')
-      const [lat, lng] = coordinates.split(',')
+  return value.split('|').map((entry) => {
+    const [coordinates] = entry.split(':')
+    const [lat, lng] = coordinates.split(',')
 
-      return {
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
-      }
-    }),
-  )
+    return {
+      lat: parseFloat(lat),
+      lng: parseFloat(lng),
+    }
+  })
 }
 
 export function encodeBounds(values) {
@@ -549,8 +547,8 @@ export function encodeBounds(values) {
   }
 
   return values
-    .map(
-      (value) => value.map(({ lat, lng }) => `${lat},${lng}`).join('-'), // seperates coordinates within one shape
-    )
-    .join('|') // seperates different shapes
+    .map(({ lat, lng }) => {
+      return `${lat},${lng}`
+    })
+    .join('|')
 }

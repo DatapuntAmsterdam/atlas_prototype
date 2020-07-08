@@ -5,16 +5,15 @@ import {
   PolygonType,
   PolylineType,
 } from '@datapunt/arm-draw'
-import { themeColor, ascDefaultTheme } from '@datapunt/asc-ui'
-import L, { Polygon, LatLng, LatLngTuple, LatLngLiteral } from 'leaflet'
+import { ascDefaultTheme, themeColor } from '@datapunt/asc-ui'
 import { useMapInstance } from '@datapunt/react-maps'
-
+import L, { LatLng, LatLngLiteral, LatLngTuple, Polygon } from 'leaflet'
 import React, { useContext, useEffect, useMemo } from 'react'
 import PARAMETERS from '../../../../store/parameters'
 import { decodeBounds } from '../../../../store/queryParameters'
 import getParam from '../../../utils/getParam'
 import DataSelectionContext from '../DataSelectionContext'
-import MapContext, { DrawingGeometry } from '../MapContext'
+import MapContext from '../MapContext'
 import { Overlay, SnapPoint } from '../types'
 
 type MarkerGroup = {
@@ -83,22 +82,25 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
   const { fetchData, fetchMapVisualization, mapVisualization, removeDataSelection } = useContext(
     DataSelectionContext,
   )
-  const { drawingGeometries, setDrawingGeometry } = useContext(MapContext)
+  const { drawingGeometry, setDrawingGeometry } = useContext(MapContext)
 
   const mapInstance = useMapInstance()
   const { pan } = usePanToLatLng()
 
   const getData = async (layer: ExtendedLayer, distanceText: string) => {
     const latLngs = layer.getLatLngs()
-
-    // convert the geometry to match a type that only contains lat/lng
-    const drawingGeometry = latLngs[0] as DrawingGeometry
-    setDrawingGeometry(drawingGeometry)
+    if (
+      !drawingGeometry ||
+      (drawingGeometry &&
+        drawingGeometry.map((latLng) => L.latLng(latLng)).toString() !== latLngs[0].toString())
+    ) {
+      setDrawingGeometry(latLngs[0])
+    }
 
     if (layer instanceof Polygon) {
       setPositionFromSnapPoint(SnapPoint.Halfway)
 
-      const firstDrawingPoint = latLngs[0] as LatLng
+      const firstDrawingPoint = latLngs[0]
       await fetchMapVisualization(latLngs, layer.id)
       await fetchData(
         latLngs,
@@ -160,15 +162,12 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
     return polybounds.length > 2 ? createPolygon(polybounds) : createPolyline(polybounds)
   }
 
-  const initialDrawnItems = useMemo(() => {
+  const initalDrawnItem = useMemo(() => {
     // Get the drawing geometry from the url here, before the context is updated to prevent newly drawm geometries to be pushed to the DrawToolComponent
-    const initialDrawingGeometries = getParam(PARAMETERS.DRAWING_GEOMETRY)
+    const initialDrawingGeometry = getParam(PARAMETERS.DRAWING_GEOMETRY)
 
-    if (initialDrawingGeometries) {
-      return decodeBounds(initialDrawingGeometries).map((initialDrawingGeometry: DrawingGeometry) =>
-        setInitialDrawing(initialDrawingGeometry),
-      )
-    }
+    if (initialDrawingGeometry) return setInitialDrawing(decodeBounds(initialDrawingGeometry))
+
     return null
   }, [])
 
@@ -188,9 +187,9 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
           removeDataSelection(editLayerIds)
         }
       }}
-      isOpen={isOpen || !!drawingGeometries}
+      isOpen={isOpen || drawingGeometry}
       onToggle={onToggle}
-      drawnItems={initialDrawnItems && initialDrawnItems}
+      drawnItem={initalDrawnItem}
       onDrawStart={() => {
         setCurrentOverlay(Overlay.Results)
       }}

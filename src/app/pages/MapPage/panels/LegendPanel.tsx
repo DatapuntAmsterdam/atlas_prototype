@@ -1,6 +1,5 @@
 import { MapPanelContent } from '@datapunt/arm-core'
 import React from 'react'
-
 import styled from 'styled-components'
 import MapPanel from '../../../../map/containers/panel/MapPanel'
 import getState from '../../../../shared/services/redux/get-state'

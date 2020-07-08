@@ -253,7 +253,6 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     setState = true,
   ): Promise<MapVisualization | null> => {
     const result = await fetchResults<MapVisualizationResponse>(getMapVisualization, latLngs)
-
     if (result) {
       const newMapVisualization = {
         id,
