@@ -42,17 +42,7 @@ pipeline {
       }
       steps {
         script {
-          if (BRANCH_NAME == PRODUCTION_BRANCH) {
-            sh "docker build -t ${IMAGE_FRONTEND_BUILD} " +
-              '--shm-size 1G ' +
-              '--build-arg DEPLOY_ENV=production ' +
-              '.'
-          } else {
-            sh "docker build -t ${IMAGE_FRONTEND_BUILD} " +
-              '--shm-size 1G ' +
-              '--build-arg DEPLOY_ENV=acceptance ' +
-              '.'
-          }
+          sh "docker build -t ${IMAGE_FRONTEND_BUILD} --shm-size 1G ."
         }
 
         sh "docker push ${IMAGE_FRONTEND_BUILD}"

@@ -48,9 +48,8 @@ COPY test /app/test
 
 # Web server image
 FROM nginx:1.19-alpine
-ARG DEPLOY_ENV=${DEPLOY_ENV}
 COPY scripts/startup.sh startup.sh
-COPY nginx-${DEPLOY_ENV}.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/
 COPY --from=build-deps /app/dist /usr/share/nginx/html
 
