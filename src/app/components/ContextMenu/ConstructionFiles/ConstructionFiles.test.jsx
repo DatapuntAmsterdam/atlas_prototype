@@ -1,12 +1,15 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import configureMockStore from 'redux-mock-store'
 import ConstructionFiles from './ConstructionFiles'
 import { sharePage } from '../../../../shared/ducks/ui/ui'
 
-jest.mock('../../../../shared/ducks/ui/ui')
-
 const mockHandleDownload = jest.fn()
+const mockDispatch = jest.fn()
+
+jest.mock('react-redux', () => ({
+  useDispatch: () => mockDispatch,
+}))
+jest.mock('../../../../shared/ducks/ui/ui')
 
 describe('ContextMenu for ConstructionFiles viewer', () => {
   let component
@@ -19,18 +22,9 @@ describe('ContextMenu for ConstructionFiles viewer', () => {
       isImage: true,
       handleDownload: mockHandleDownload,
     }
-    const initialState = {
-      map: {
-        mapPanelActive: true,
-      },
-      ui: {
-        viewMode: 'print',
-      },
-    }
     sharePage.mockImplementation(() => ({ type: 'action' }))
 
-    const store = configureMockStore()({ ...initialState })
-    component = shallow(<ConstructionFiles {...props} store={store} />).dive()
+    component = shallow(<ConstructionFiles {...props} />).dive()
   })
 
   it('should render', () => {
