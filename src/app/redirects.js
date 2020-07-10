@@ -136,6 +136,8 @@ const overviewPaths = [
   MAIN_PATHS.PUBLICATIONS,
   MAIN_PATHS.SPECIALS,
   MAIN_PATHS.DATASETS,
+  MAIN_PATHS.COLLECTIONS,
+  MAIN_PATHS.DATA,
 ]
 
 export const overviewUrls = overviewPaths.map((pathName) => ({
