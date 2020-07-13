@@ -6,7 +6,7 @@ import {
   PolylineType,
 } from '@datapunt/arm-draw'
 import { themeColor, ascDefaultTheme } from '@datapunt/asc-ui'
-import L, { Polygon, LatLng, LatLngTuple, LatLngLiteral } from 'leaflet'
+import L, { Polygon, LatLng, LatLngTuple, LatLngLiteral, LatLngBoundsLiteral } from 'leaflet'
 import { useMapInstance } from '@datapunt/react-maps'
 import React, { useContext, useEffect, useMemo } from 'react'
 import PARAMETERS from '../../../../store/parameters'
@@ -79,7 +79,12 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
   const { fetchData, fetchMapVisualization, mapVisualization, removeDataSelection } = useContext(
     DataSelectionContext,
   )
-  const { drawingGeometries, setDrawingGeometries, resetDrawingGeometries } = useContext(MapContext)
+  const {
+    drawingGeometries,
+    addDrawingGeometry,
+    deleteDrawingGeometry,
+    resetDrawingGeometries,
+  } = useContext(MapContext)
 
   const mapInstance = useMapInstance()
   const { pan } = usePanToLatLng()
@@ -89,9 +94,7 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
 
     // convert the geometry to match a type that only contains lat/lng
     const drawingGeometry = latLngs[0] as LatLngLiteral[]
-    setDrawingGeometries(
-      drawingGeometries?.length ? [...drawingGeometries, drawingGeometry] : [drawingGeometry],
-    )
+    addDrawingGeometry(drawingGeometry)
 
     if (layer instanceof Polygon) {
       setPositionFromSnapPoint(SnapPoint.Halfway)
@@ -134,14 +137,9 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
       removeDataSelection(editLayerIds)
     }
 
-    // Filter out the layer that was deleted
-    const newDrawingGeometries = drawingGeometries?.filter(
-      (geometry) => JSON.stringify(geometry) !== JSON.stringify(editLayerBounds[0]),
-    )
-
-    // Set or reset the drawing geometries
-    if (newDrawingGeometries?.length) {
-      setDrawingGeometries(newDrawingGeometries)
+    // Delete or reset the drawing geometries
+    if (editLayerBounds?.length) {
+      deleteDrawingGeometry(editLayerBounds[0])
     } else {
       resetDrawingGeometries()
     }
@@ -194,6 +192,13 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
     }
     return null
   }, [])
+
+  useEffect(() => {
+    if (mapInstance && drawingGeometries?.length) {
+      // Center the map
+      mapInstance.fitBounds((drawingGeometries as unknown) as LatLngBoundsLiteral)
+    }
+  }, [mapInstance, drawingGeometries])
 
   return (
     <DrawToolComponent

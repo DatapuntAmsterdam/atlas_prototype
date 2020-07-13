@@ -56,7 +56,8 @@ type Action =
   | { type: 'setLocation'; payload: LatLngLiteral | null }
   | { type: 'setDetailUrl'; payload: string }
   | { type: 'setGeometry'; payload: Geometry }
-  | { type: 'setDrawingGeometries'; payload: LatLngLiteral[][] }
+  | { type: 'addDrawingGeometry'; payload: LatLngLiteral[] }
+  | { type: 'deleteDrawingGeometry'; payload: LatLngLiteral[] }
   | { type: 'resetDrawingGeometries' }
 
 const reducer = (state: MapState, action: Action): MapState => {
@@ -131,10 +132,19 @@ const reducer = (state: MapState, action: Action): MapState => {
         ...state,
         geometry: action.payload,
       }
-    case 'setDrawingGeometries':
+    case 'addDrawingGeometry':
       return {
         ...state,
-        drawingGeometries: action.payload,
+        drawingGeometries: state.drawingGeometries?.length
+          ? [...state.drawingGeometries, action.payload]
+          : [action.payload],
+      }
+    case 'deleteDrawingGeometry':
+      return {
+        ...state,
+        drawingGeometries: state.drawingGeometries?.filter(
+          (drawingGeometry) => JSON.stringify(drawingGeometry) !== JSON.stringify(action.payload),
+        ),
       }
     case 'resetDrawingGeometries':
       return {
@@ -178,8 +188,12 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
     dispatch({ type: 'setGeometry', payload })
   }
 
-  function setDrawingGeometries(payload: LatLngLiteral[][]) {
-    dispatch({ type: 'setDrawingGeometries', payload })
+  function addDrawingGeometry(payload: LatLngLiteral[]) {
+    dispatch({ type: 'addDrawingGeometry', payload })
+  }
+
+  function deleteDrawingGeometry(payload: LatLngLiteral[]) {
+    dispatch({ type: 'deleteDrawingGeometry', payload })
   }
 
   function resetDrawingGeometries() {
@@ -315,7 +329,8 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
         setLocation,
         setDetailUrl,
         setGeometry,
-        setDrawingGeometries,
+        addDrawingGeometry,
+        deleteDrawingGeometry,
         resetDrawingGeometries,
         getBaseLayers,
         getPanelLayers,
