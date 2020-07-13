@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/browser'
 import environment from '../environment'
 
 const deployEnv = environment.DEPLOY_ENV
-const release = environment.GIT_COMMIT
+const release = process.env.GIT_COMMIT
 
 if (deployEnv !== 'development') {
   Sentry.init({
