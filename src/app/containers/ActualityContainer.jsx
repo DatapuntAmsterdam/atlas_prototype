@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import LoadingIndicator from '../../shared/components/loading-indicator/LoadingIndicator'
-import { fetchWithoutToken } from '../../shared/services/api/api'
+import styled from 'styled-components'
 import environment from '../../environment'
+import { fetchWithoutToken } from '../../shared/services/api/api'
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
+
+const StyledLoadingSpinner = styled(LoadingSpinner)`
+  position: absolute;
+  top: 200px;
+`
 
 const ActualityContainer = () => {
   const [loading, setLoading] = useState(false)
@@ -27,7 +33,7 @@ const ActualityContainer = () => {
             <h1 className="o-header__title u-margin__bottom--3">Actualiteit</h1>
             <div className="qa-page">
               {loading ? (
-                <LoadingIndicator style={{ top: '200px' }} />
+                <StyledLoadingSpinner />
               ) : (
                 sources && (
                   <table className="c-table">

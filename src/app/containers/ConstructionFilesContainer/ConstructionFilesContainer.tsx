@@ -1,19 +1,19 @@
-import { Heading, Row, themeSpacing, Paragraph, Alert } from '@datapunt/asc-ui'
+import { Alert, Heading, Paragraph, Row, themeSpacing } from '@datapunt/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { useState, useEffect, lazy } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { lazy, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
+import environment from '../../../environment'
+import { resetFile } from '../../../shared/ducks/files/actions'
 import { getFileName, getFileUrl } from '../../../shared/ducks/files/selectors'
+import { isPrintMode } from '../../../shared/ducks/ui/ui'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import ConstructionFileDetail, {
   ConstructionFileDetailProps as Results,
 } from '../../components/ConstructionFileDetail/ConstructionFileDetail'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import useDocumentTitle from '../../utils/useDocumentTitle'
-import environment from '../../../environment'
-import { isPrintMode } from '../../../shared/ducks/ui/ui'
-import { resetFile } from '../../../shared/ducks/files/actions'
 
 const ImageViewer = lazy(() =>
   import(/* webpackChunkName: "ImageViewer" */ '../../components/ImageViewer/ImageViewer'),
@@ -102,7 +102,7 @@ const ConstructionFilesContainer = () => {
 
   const loadingTemplate = (
     <StyledRow>
-      <LoadingIndicator loading />
+      <LoadingSpinner />
     </StyledRow>
   )
 

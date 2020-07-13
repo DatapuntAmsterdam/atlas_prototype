@@ -1,23 +1,23 @@
-import styled from 'styled-components'
 import { CardContainer } from '@datapunt/asc-ui'
-import RouterLink from 'redux-first-router-link'
 import React, { memo } from 'react'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
+import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
+import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
   toArticleSearch,
+  toCollectionSearch,
   toPublicationSearch,
   toSpecialSearch,
-  toCollectionSearch,
 } from '../../../store/redux-first-router/actions'
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
+import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
 import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import NoSearchResults from '../NoSearchResults'
-import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
-import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'
 
 const EDITORIAL_OVERVIEW_ACTIONS = {
   [CmsType.Article]: toArticleSearch,
@@ -51,7 +51,7 @@ const EditorialResults = ({
   return (
     <EditorialCardContainer className={className}>
       {loading ? (
-        <LoadingIndicator style={{ position: 'inherit' }} />
+        <LoadingSpinner />
       ) : (
         <>
           {!hasLoadingError &&

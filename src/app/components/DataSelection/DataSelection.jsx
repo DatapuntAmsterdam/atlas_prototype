@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { AngularWrapper } from 'react-angular'
 import styled from 'styled-components'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
 import { VIEWS_TO_PARAMS } from '../../../shared/ducks/data-selection/constants'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { SCOPES } from '../../../shared/services/auth/auth'
@@ -14,6 +13,7 @@ import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFilt
 import NotificationLevel from '../../models/notification'
 import formatCount from '../../utils/formatCount'
 import LoginLink from '../Links/LoginLink/LoginLink'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import ShareBar from '../ShareBar/ShareBar'
 import DataSelectionList from './DataSelectionList/DataSelectionList'
 import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
@@ -84,7 +84,7 @@ const DataSelection = ({
           />
         )}
 
-        {isLoading && <LoadingIndicator />}
+        {isLoading && <LoadingSpinner />}
 
         {!isLoading && <DataSelectionActiveFilters />}
 

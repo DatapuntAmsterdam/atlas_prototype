@@ -1,16 +1,16 @@
-import React, { Suspense } from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import React, { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
+import styled from 'styled-components'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
 import ErrorAlert from './components/ErrorAlert/ErrorAlert'
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import { FeedbackModal } from './components/Modal'
-import PAGES, { isMapSplitPage, isSearchPage } from './pages'
-import LoadingIndicator from '../shared/components/loading-indicator/LoadingIndicator'
-import { getQuery } from './pages/SearchPage/SearchPageDucks'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
+import PAGES, { isMapSplitPage, isSearchPage } from './pages'
+import { getQuery } from './pages/SearchPage/SearchPageDucks'
 
 const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityContainer = React.lazy(() =>
@@ -57,6 +57,11 @@ const AppContainer = styled.div`
   min-height: 50vh; // IE11: Makes sure the loading indicator is displayed in the Container
 `
 
+const StyledLoadingSpinner = styled(LoadingSpinner)`
+  position: absolute;
+  top: 200px;
+`
+
 const AppBody = ({
   visibilityError,
   bodyClasses,
@@ -74,7 +79,7 @@ const AppBody = ({
     <>
       <AppContainer id="main" className="main-container">
         <NotificationAlert />
-        <Suspense fallback={<LoadingIndicator style={{ top: '200px' }} />}>
+        <Suspense fallback={<StyledLoadingSpinner />}>
           {homePage && <HomePage />}
           {currentPage === PAGES.ARTICLE_DETAIL && <ArticleDetailPage />}
           {currentPage === PAGES.SPECIAL_DETAIL && <SpecialDetailPage />}
@@ -90,7 +95,7 @@ const AppBody = ({
     </>
   ) : (
     <>
-      <Suspense fallback={<LoadingIndicator style={{ top: '200px' }} />}>
+      <Suspense fallback={<StyledLoadingSpinner />}>
         {currentPage === PAGES.MAP ? (
           <MapContainer />
         ) : (

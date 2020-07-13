@@ -1,5 +1,5 @@
 import { MapPanelContent } from '@datapunt/arm-core'
-import { Alert, Link, Paragraph, Spinner, themeSpacing } from '@datapunt/asc-ui'
+import { Alert, Link, Paragraph, themeSpacing } from '@datapunt/asc-ui'
 import React, { Fragment, useContext, useEffect, useMemo } from 'react'
 import styled from 'styled-components'
 import {
@@ -14,6 +14,7 @@ import {
   DetailResultItemType,
 } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import PanoramaPreview from '../Components/PanoramaPreview'
 import MapContext from '../MapContext'
@@ -22,10 +23,7 @@ export interface DetailPanelProps {
   detailUrl: string
 }
 
-const LoadingSpinner = styled(Spinner)`
-  display: flex;
-  justify-content: center;
-  width: 100%;
+const StyledLoadingSpinner = styled(LoadingSpinner)`
   margin: ${themeSpacing(4)} 0;
 `
 
@@ -74,7 +72,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
 
 function renderPanelContents(result: PromiseResult<MapDetails | null>) {
   if (result.status === PromiseStatus.Pending) {
-    return <LoadingSpinner size={32} />
+    return <StyledLoadingSpinner />
   }
 
   if (result.status === PromiseStatus.Rejected) {

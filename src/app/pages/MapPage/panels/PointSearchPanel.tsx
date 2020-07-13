@@ -1,5 +1,5 @@
 import { MapPanelContent } from '@datapunt/arm-core'
-import { Heading, Link, Paragraph, Spinner, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@datapunt/asc-ui'
 import { LatLng } from 'leaflet'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
@@ -12,6 +12,7 @@ import mapSearch, {
 import { getUser } from '../../../../shared/ducks/user/user'
 import formatNumber from '../../../../shared/services/number-formatter/number-formatter'
 import MoreResultsWhenLoggedIn from '../../../components/Alerts/MoreResultsWhenLoggedIn'
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import ShowMore from '../../../components/ShowMore'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import PanoramaPreview from '../Components/PanoramaPreview'
@@ -54,10 +55,7 @@ const SubCategoryBlock = styled.div`
   border-bottom: 1px solid ${themeColor('tint', 'level4')};
 `
 
-const LoadingSpinner = styled(Spinner)`
-  display: flex;
-  justify-content: center;
-  width: 100%;
+const StyledLoadingSpinner = styled(LoadingSpinner)`
   margin: ${themeSpacing(4)} 0;
 `
 
@@ -127,7 +125,7 @@ function renderResult(result: PromiseResult<MapSearchResponse>) {
     case PromiseStatus.Rejected:
       return <Message>Resultaten konden niet geladen worden.</Message>
     default:
-      return <LoadingSpinner size={32} />
+      return <StyledLoadingSpinner />
   }
 }
 

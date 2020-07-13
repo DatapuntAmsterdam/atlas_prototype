@@ -1,14 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Helmet } from 'react-helmet'
-import styled from 'styled-components'
 import { Container, themeColor } from '@datapunt/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import useDocumentTitle from '../../utils/useDocumentTitle'
-import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
-import getImageFromCms from '../../utils/getImageFromCms'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import styled from 'styled-components'
 import environment from '../../../environment'
+import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
+import getImageFromCms from '../../utils/getImageFromCms'
+import useDocumentTitle from '../../utils/useDocumentTitle'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const BodyStyle = styled.div`
   background-color: ${themeColor('level', 'level1')}
@@ -61,7 +61,7 @@ const EditorialPage = ({
         {ogImage && <meta name="twitter:image" content={ogImage} />}
       </Helmet>
       <BodyStyle>
-        {loading && <LoadingIndicator />}
+        {loading && <LoadingSpinner />}
         {children}
       </BodyStyle>
     </Container>

@@ -1,10 +1,10 @@
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
 import configureMockStore from 'redux-mock-store'
-import DataSelection from './DataSelection'
-import DataSelectionContainer from './DataSelectionContainer'
 import { DATASETS } from '../../../shared/ducks/data-selection/constants'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import DataSelection from './DataSelection'
+import DataSelectionContainer from './DataSelectionContainer'
 
 const initialState = {
   filter: { filters: {} },
@@ -71,7 +71,7 @@ describe('DataSelection', () => {
     expect(component).toMatchSnapshot()
   })
 
-  it('should render LoadingIndicator', () => {
+  it('should render the loading state', () => {
     const component = setup({ isLoading: true })
     expect(component).toMatchSnapshot()
   })

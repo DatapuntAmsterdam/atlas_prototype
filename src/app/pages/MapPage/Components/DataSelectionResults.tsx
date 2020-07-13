@@ -12,9 +12,6 @@ import {
   Link,
   Paragraph,
   Select,
-  Spinner,
-  svgFill,
-  themeColor,
   themeSpacing,
 } from '@datapunt/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -26,6 +23,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import { getUserScopes } from '../../../../shared/ducks/user/user'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage'
 import LoginLink from '../../../components/Links/LoginLink/LoginLink'
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import NotificationLevel from '../../../models/notification'
 import formatCount from '../../../utils/formatCount'
 import DataSelectionContext from '../DataSelectionContext'
@@ -100,16 +98,6 @@ const StyledAlert = styled(Alert)`
 const StyledSelect = styled(Select)`
   @media screen and ${breakpoint('min-width', 'tabletS')} {
     min-height: 44px;
-  }
-`
-
-const StyledSpinner = styled(Spinner)`
-  ${svgFill(themeColor('secondary'))}
-  &,
-  & span,
-  & svg {
-    width: 30px;
-    height: 30px;
   }
 `
 
@@ -330,7 +318,9 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
                       )}
                     </>
                   )}
-                  {delayedLoadingIds.includes(id) && !errorIds.includes(id) && <StyledSpinner />}
+                  {delayedLoadingIds.includes(id) && !errorIds.includes(id) && (
+                    <LoadingSpinner size={30} />
+                  )}
                   {!delayedLoadingIds.length && errorIds.includes(id) && (
                     <ErrorMessage
                       message="Er is een fout opgetreden bij het laden van dit blok."

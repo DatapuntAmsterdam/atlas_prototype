@@ -1,10 +1,10 @@
-import React from 'react'
 import get from 'lodash.get'
 import PropTypes from 'prop-types'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
+import React from 'react'
+import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
+import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import MapDetailResult from '../../components/detail-result/MapDetailResult'
 import MapSearchResults from '../../components/search-results/MapSearchResults'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 
 const previewPanelSearchResultLimit = 3
 
@@ -64,7 +64,7 @@ class MapPreviewPanel extends React.Component {
               map-preview-panel__body--${isLoading ? 'loading' : 'loaded'}
             `}
           >
-            {isLoading && <LoadingIndicator />}
+            {isLoading && <LoadingSpinner />}
             {isDetailPage && (
               <MapDetailResult
                 panoUrl={props.panoPreview.url}

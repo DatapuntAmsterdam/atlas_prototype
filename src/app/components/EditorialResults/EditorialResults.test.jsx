@@ -1,7 +1,7 @@
-import React from 'react'
 import { shallow } from 'enzyme'
-import EditorialResults, { IMAGE_SIZE } from './EditorialResults'
+import React from 'react'
 import { CmsType } from '../../../shared/config/cms.config'
+import EditorialResults, { IMAGE_SIZE } from './EditorialResults'
 
 describe('EditorialResults', () => {
   let component
@@ -22,12 +22,14 @@ describe('EditorialResults', () => {
     component = shallow(
       <EditorialResults type={CmsType.Article} loading results={[]} errors={[]} />,
     )
-    expect(component.find('LoadingIndicator').exists()).toBe(true)
+
+    expect(component.find('Styled(Spinner)').exists()).toBe(true)
 
     component = shallow(
       <EditorialResults type={CmsType.Article} loading={false} results={[]} errors={[]} />,
     )
-    expect(component.find('LoadingIndicator').exists()).toBe(false)
+
+    expect(component.find('Styled(Spinner)').exists()).toBe(false)
   })
 
   it('should render the cards', () => {

@@ -1,20 +1,18 @@
+import { ChevronDown, Download, Ellipsis, Print } from '@datapunt/asc-assets'
+import { ContextMenu, ContextMenuItem, Icon } from '@datapunt/asc-ui'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { ChevronDown, Ellipsis, Print, Download } from '@datapunt/asc-assets'
-import { ContextMenu, ContextMenuItem, Icon } from '@datapunt/asc-ui'
-import socialItems from '../socialItems'
 import { sharePage, showPrintMode } from '../../../../shared/ducks/ui/ui'
+import socialItems from '../socialItems'
 
 type ConstructionFilesProps = {
   handleDownload: (imageUrl: string, size: string) => void
-  fileName: string
   fileUrl: string
   isImage: boolean
   downloadLoading: boolean
 }
 
 const ConstructionFiles: React.FC<ConstructionFilesProps> = ({
-  fileName,
   fileUrl,
   handleDownload,
   downloadLoading,
@@ -52,9 +50,7 @@ const ConstructionFiles: React.FC<ConstructionFilesProps> = ({
       {isImage && (
         <>
           <ContextMenuItem
-            forwardedAs="button"
             disabled={downloadLoading}
-            download={`${fileName}_small`}
             onClick={() => handleDownload(`${fileUrl}/full/800,/0/default.jpg`, 'klein')}
             icon={
               <Icon inline size={24} padding={4}>
@@ -64,11 +60,8 @@ const ConstructionFiles: React.FC<ConstructionFilesProps> = ({
           >
             Download klein
           </ContextMenuItem>
-
           <ContextMenuItem
-            forwardedAs="button"
             disabled={downloadLoading}
-            download={`${fileName}_large`}
             onClick={() => handleDownload(`${fileUrl}/full/1600,/0/default.jpg`, 'groot')}
             icon={
               <Icon inline size={24} padding={4}>
@@ -81,9 +74,7 @@ const ConstructionFiles: React.FC<ConstructionFilesProps> = ({
         </>
       )}
       <ContextMenuItem
-        forwardedAs="button"
         disabled={downloadLoading}
-        download={`${fileName}_original`}
         divider
         onClick={() =>
           handleDownload(

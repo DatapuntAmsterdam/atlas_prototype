@@ -46,8 +46,6 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
       Printen
     </ContextMenuItem>
     <ContextMenuItem
-      download="filename.jpg_small"
-      forwardedAs="button"
       icon={
         <styled.span
           inline={true}
@@ -62,8 +60,6 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
       Download klein
     </ContextMenuItem>
     <ContextMenuItem
-      download="filename.jpg_large"
-      forwardedAs="button"
       icon={
         <styled.span
           inline={true}
@@ -79,8 +75,6 @@ exports[`ContextMenu for ConstructionFiles viewer should render 1`] = `
     </ContextMenuItem>
     <ContextMenuItem
       divider={true}
-      download="filename.jpg_original"
-      forwardedAs="button"
       icon={
         <styled.span
           inline={true}

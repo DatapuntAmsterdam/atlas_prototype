@@ -1,15 +1,15 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react'
-import OpenSeadragon, { Viewer } from 'openseadragon'
-import styled, { css } from 'styled-components'
+import { Close, Download, Enlarge, Minimise } from '@datapunt/asc-assets'
 import { Button, themeColor } from '@datapunt/asc-ui'
-import { Close, Enlarge, Minimise, Download } from '@datapunt/asc-assets'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import ViewerControls from '../ViewerControls/ViewerControls'
+import OpenSeadragon, { Viewer } from 'openseadragon'
+import React from 'react'
+import styled, { css } from 'styled-components'
 import getState from '../../../shared/services/redux/get-state'
+import useDownload from '../../utils/useDownload'
 import { ConstructionFiles as ContextMenu } from '../ContextMenu'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
-import useDownload from '../../utils/useDownload'
+import ViewerControls from '../ViewerControls/ViewerControls'
 
 const ImageViewerContainer = styled.div<{ printMode: boolean }>`
   background-color: ${themeColor('tint', 'level5')};
@@ -159,7 +159,6 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
             <ContextMenu
               handleDownload={handleDownload}
               downloadLoading={downloadLoading}
-              fileName={fileName}
               fileUrl={fileUrl}
               isImage={isImage}
             />

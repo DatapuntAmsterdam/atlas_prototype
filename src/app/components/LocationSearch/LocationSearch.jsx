@@ -1,14 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { Alert, themeSpacing } from '@datapunt/asc-ui'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
-import PanoramaPreview from '../PanoramaPreview'
-import { DataSearchLocation } from '../DataSearch'
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
-import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
-import ShareBar from '../ShareBar/ShareBar'
 import NotificationLevel from '../../models/notification'
+import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
+import { DataSearchLocation } from '../DataSearch'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import PanoramaPreview from '../PanoramaPreview'
+import ShareBar from '../ShareBar/ShareBar'
 
 const EXCLUDED_RESULTS = 'vestigingen'
 
@@ -30,7 +30,7 @@ const LocationSearch = ({
 
   return (
     <div className="c-search-results u-grid">
-      {isLoading && <LoadingIndicator />}
+      {isLoading && <LoadingSpinner />}
 
       {!isLoading && (
         <div>

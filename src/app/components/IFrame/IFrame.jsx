@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import setIframeSize from '../../../shared/services/set-iframe-size/setIframeSize'
-import LoadingIndicator from '../../../shared/components/loading-indicator/LoadingIndicator'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const IFrameContainer = styled.div`
   position: relative;
@@ -44,7 +43,7 @@ const IFrame = ({ contentLink, title }) => {
 
   return (
     <IFrameContainer>
-      {iframeLoading && <LoadingIndicator />}
+      {iframeLoading && <LoadingSpinner />}
       {contentLink && contentLink.uri && (
         <iframe
           src={contentLink.uri}
