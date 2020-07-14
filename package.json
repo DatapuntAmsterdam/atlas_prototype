@@ -73,7 +73,7 @@
     "lodash.isequal": "4.5.0",
     "lodash.isundefined": "3.0.1",
     "lodash.throttle": "4.1.1",
-    "marked": "^1.1.0",
+    "marked": "^1.1.1",
     "marzipano": "^0.9.1",
     "objectFitPolyfill": "2.3.0",
     "openseadragon": "2.4.2",
