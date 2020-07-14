@@ -108,8 +108,8 @@ const ThemesBlock: React.FC = () => {
           <Column key={option.id} span={colSpan}>
             <StyledLink
               forwardedAs={RouterLink}
-              to={toSearch({ [PARAMETERS.FILTERS]: filters })}
               variant="with-chevron"
+              {...({ to: toSearch({ [PARAMETERS.FILTERS]: filters }) } as any)}
             >
               {option.label}
             </StyledLink>

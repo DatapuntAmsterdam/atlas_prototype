@@ -29,7 +29,10 @@ export function* waitForAuthentication() {
   const didAuthCheck = yield select(userCheckedAuthentication)
 
   if (!didAuthCheck) {
-    yield race([take(AUTHENTICATE_USER_SUCCESS), take(AUTHENTICATE_USER_FAILED)])
+    yield race({
+      success: take(AUTHENTICATE_USER_SUCCESS),
+      failed: take(AUTHENTICATE_USER_FAILED),
+    })
   }
 }
 

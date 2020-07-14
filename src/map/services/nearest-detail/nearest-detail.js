@@ -1,6 +1,6 @@
+import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import MAP_CONFIG from '../map.config'
-import environment from '../../../environment'
 
 const generateParams = (layer, location, zoom) => ({
   ...layer.detailParams,

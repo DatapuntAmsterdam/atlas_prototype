@@ -1,15 +1,15 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import SearchBar from '../../../app/components/SearchBar'
+import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
+import SearchType from '../../../app/pages/SearchPage/constants'
 import useSlug from '../../../app/utils/useSlug'
+import { CmsType } from '../../../shared/config/cms.config'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import PARAMETERS from '../../../store/parameters'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint } from '../../../store/redux-first-router/actions'
-import { CmsType } from '../../../shared/config/cms.config'
-import SearchType from '../../../app/pages/SearchPage/constants'
-import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
-import SearchBar from '../../../app/components/SearchBar'
 import AutoSuggest, {
   SearchCategory,
   Suggestion,
@@ -36,19 +36,43 @@ const getSuggestionByIndex = (searchResults: SuggestionList, suggestionIndex: nu
     .reduce<Array<Suggestion>>((flatResults, category) => [...flatResults, ...category.content], [])
     .find((flatSuggestion) => flatSuggestion.index === suggestionIndex)
 
+interface DataSuggestion {
+  endpoint: string
+  category: string
+  typedQuery: string
+}
+
+interface DatasetSuggestion {
+  id: string
+  slug: string
+  typedQuery: string
+}
+
+interface EditorialSuggestion {
+  id: string
+  slug: string
+}
+
+interface MapSuggestion {
+  view: string | null
+  legend: boolean
+  // TODO: Improve this type.
+  layers: any
+}
+
 type HeaderSearchProps = {
   activeSuggestion: Suggestion
   displayQuery?: string
   view: string
   isMapActive: boolean
   numberOfSuggestions?: number
-  onCleanDatasetOverview: Function
-  openDataSuggestion: Function
-  openDatasetSuggestion: Function
-  openEditorialSuggestion: Function
-  openMapSuggestion: Function
-  onGetSuggestions: Function
-  onSuggestionActivate: Function
+  onCleanDatasetOverview: () => void
+  openDataSuggestion: (suggestion: DataSuggestion, view: string) => void
+  openDatasetSuggestion: (suggestion: DatasetSuggestion) => void
+  openEditorialSuggestion: (suggestion: EditorialSuggestion, type: CmsType, subType: string) => void
+  openMapSuggestion: (suggestion: MapSuggestion) => void
+  onGetSuggestions: (query: string, searchCategory: SearchCategory | null) => void
+  onSuggestionActivate: (suggestion?: Suggestion) => void
   prefillQuery?: string
   suggestions?: SuggestionList
   typedQuery: string
@@ -75,8 +99,10 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
   const dispatch = useDispatch()
   const [openSearchBarToggle, setOpenSearchBarToggle] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [searchCategory, setSearchCategory] = useState<SearchCategory | null>(
-    sessionStorage.getItem(SEARCH_CATEGORY_KEY) || pageType || SearchType.Search,
+  const [searchCategory, setSearchCategory] = useState<SearchCategory>(
+    (sessionStorage.getItem(SEARCH_CATEGORY_KEY) as SearchCategory) ||
+      pageType ||
+      SearchType.Search,
   )
 
   const query = displayQuery || typedQuery
@@ -134,7 +160,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
     }
   }
 
-  function onInput(e: React.KeyboardEvent<HTMLInputElement>) {
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (activeSuggestion?.index > -1) {
       onSuggestionActivate()
     }
@@ -286,19 +312,16 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
     <form onSubmit={onFormSubmit} className="auto-suggest" data-test="search-form">
       <StyledLegend className="u-sr-only">Data zoeken</StyledLegend>
       <SearchBar
-        {...{
-          expanded: showAutoSuggest,
-          suggestions,
-          onBlur,
-          onFocus,
-          onChange: onInput,
-          onClear,
-          onKeyDown: navigateSuggestions,
-          value: query || '',
-          openSearchBarToggle,
-          searchCategory,
-          setSearchCategory: handleSetSearchCategory,
-        }}
+        expanded={showAutoSuggest}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onChange={onChange}
+        onClear={onClear}
+        onKeyDown={navigateSuggestions}
+        value={query || ''}
+        openSearchBarToggle={openSearchBarToggle}
+        searchCategory={searchCategory}
+        setSearchCategory={setSearchCategory}
         onOpenSearchBarToggle={setOpenSearchBarToggle}
       >
         {showAutoSuggest && (

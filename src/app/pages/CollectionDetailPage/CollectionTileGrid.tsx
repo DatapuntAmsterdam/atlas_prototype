@@ -1,5 +1,3 @@
-import React from 'react'
-import styled from 'styled-components'
 import {
   CompactThemeProvider,
   Heading,
@@ -7,9 +5,11 @@ import {
   themeColor,
   themeSpacing,
 } from '@datapunt/asc-ui'
+import React from 'react'
+import styled from 'styled-components'
 import { Tile, TileLabel } from '../../components/Tile'
-import { SizeOnBreakpoint, TileGridItem } from '../../components/TileGrid/TileGridStyle'
 import TileGrid from '../../components/TileGrid/TileGrid'
+import { SizeOnBreakpoint, TileGridItem } from '../../components/TileGrid/TileGridStyle'
 import { CMSResultItem } from '../../utils/useFromCMS'
 
 const FullColumnTileGridItem = styled(TileGridItem)`
@@ -86,7 +86,7 @@ const CollectionTileGrid: React.FC<Props> = ({ results, loading, title, descript
         <StyledHeading forwardedAs="h3" styleAs="h1">
           {title}
         </StyledHeading>
-        <Paragraph strong dangerouslySetInnerHTML={{ __html: description }} />
+        {description && <Paragraph strong dangerouslySetInnerHTML={{ __html: description }} />}
       </Tile>
     </FullColumnTileGridItem>
     {results.map(({ id, linkProps, teaserImage, shortTitle, title: tileTitle }, i) => {

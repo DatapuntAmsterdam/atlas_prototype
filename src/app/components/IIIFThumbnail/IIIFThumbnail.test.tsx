@@ -1,6 +1,6 @@
-import React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { cleanup, render } from '@testing-library/react'
 import { shallow } from 'enzyme'
+import React from 'react'
 import IIIFThumbnail from './IIIFThumbnail'
 
 const mockAccessToken = 'ABC'
@@ -16,7 +16,7 @@ declare global {
   namespace NodeJS {
     interface Global {
       URL: {
-        createObjectURL: Function
+        createObjectURL: () => void
       }
     }
   }

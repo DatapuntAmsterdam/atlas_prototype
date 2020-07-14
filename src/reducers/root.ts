@@ -23,7 +23,7 @@ import UiReducer, { UI } from '../shared/ducks/ui/ui'
 import UserReducer, { REDUCER_KEY as USER } from '../shared/ducks/user/user'
 import { LOCATION } from '../store/redux-first-router/constants'
 
-const rootReducer = (routeReducer) => (oldState = {}, action) => {
+const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => {
   const mapLayers = combineReducers({
     layers: MapLayersReducer,
     baseLayers: MapBaseLayersReducer,

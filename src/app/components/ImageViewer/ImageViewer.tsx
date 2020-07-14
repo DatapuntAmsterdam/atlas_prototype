@@ -55,7 +55,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
 
   React.useEffect(() => {
     const viewer = OpenSeadragon({
-      element: viewerRef.current,
+      element: viewerRef.current || undefined,
       preserveViewport: true,
       visibilityRatio: 1.0,
       minZoomLevel: 0,
@@ -92,7 +92,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
     const targetZoomLevel = viewerInstance?.viewport ? viewerInstance.viewport.getZoom() - 1 : 1
     const newZoomLevel = targetZoomLevel < 1 ? 1 : targetZoomLevel
 
-    if (viewerInstance) viewerInstance.zoomTo(newZoomLevel)
+    if (viewerInstance) viewerInstance.viewport.zoomTo(newZoomLevel)
   }
 
   const handleDownload = async (imageUrl: string, size: string) => {

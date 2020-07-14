@@ -39,15 +39,15 @@ export type MapState = {
 }
 
 export type MapContextProps = {
-  setActiveBaseLayer: (ActiveBaseLayer: string) => void
+  setActiveBaseLayer: (activeBaseLayer: string) => void
   setActiveMapLayers: (ActiveMapLayer: Array<ActiveMapLayer>) => void
   setVisibleMapLayer: (id: string, isVisible: boolean) => void
-  setLocation: (location: LatLngLiteral) => void
+  setLocation: (location: LatLngLiteral | null) => void
   setGeometry: (geometry: Geometry) => void
   addDrawingGeometry: (drawingGeometry: LatLngLiteral[] | LatLngLiteral[][]) => void
   deleteDrawingGeometry: (drawingGeometry: LatLngLiteral[]) => void
   resetDrawingGeometries: () => void
-  setDetailUrl: (url: string) => void
+  setDetailUrl: (url: string | null) => void
   getBaseLayers: () => void
   getPanelLayers: () => void
   getMapLayers: () => void

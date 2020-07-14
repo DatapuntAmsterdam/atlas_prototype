@@ -2,6 +2,7 @@
 import React from 'react'
 import { To } from 'redux-first-router-link'
 import useNormalizedCMSResults from '../../normalizations/cms/useNormalizedCMSResults'
+import { CmsType, SpecialType } from '../../shared/config/cms.config'
 import { fetchWithToken } from '../../shared/services/api/api'
 import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
 
@@ -13,8 +14,8 @@ export type CMSConfig = {
 // More fields should be added to this type when other CMS content pages are migrated to TypeScript
 export type CMSResultItem = {
   id: string
-  type: string
-  specialType: string | null
+  type: CmsType
+  specialType: SpecialType | null
   title: string
   shortTitle?: string
   teaser: string
@@ -26,7 +27,7 @@ export type CMSResultItem = {
 
 export type CMSResults<T> = {
   loading: boolean
-  fetchData: Function
+  fetchData: (endpoint?: string) => Promise<T | undefined>
   error: boolean
   results?: T
 }
@@ -40,7 +41,7 @@ function useFromCMS<T = CMSResultItem[]>(
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
 
-  const fetchData = async (endpoint: string) => {
+  const fetchData = async (endpoint?: string) => {
     setLoading(true)
     setError(false)
     setResults(undefined)

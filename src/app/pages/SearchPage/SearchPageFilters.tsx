@@ -1,5 +1,4 @@
 import { Close } from '@datapunt/asc-assets'
-import styled from 'styled-components'
 import {
   breakpoint,
   Button,
@@ -12,16 +11,17 @@ import {
   TopBar,
 } from '@datapunt/asc-ui'
 import React, { ReactElement } from 'react'
+import styled from 'styled-components'
+import CONSTANTS from '../../../shared/config/constants'
 import PageFilterBox from '../../components/PageFilterBox/PageFilterBox'
 import SearchFilter from '../../components/SearchFilter'
 import { Filter } from '../../models/filter'
-import CONSTANTS from '../../../shared/config/constants'
 
 interface SearchPageFiltersProps {
   filters: Filter[]
   totalCount: number
   hideCount: boolean
-  setShowFilter: Function
+  setShowFilter: (show: boolean) => void
   query: string
   currentPage: string
   showFilter: boolean

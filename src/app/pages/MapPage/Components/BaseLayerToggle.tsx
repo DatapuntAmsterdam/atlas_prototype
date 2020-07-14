@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
-
 import { BaseLayerToggle as BaseLayerToggleComponent } from '@datapunt/arm-core'
+import { BaseLayerType } from '@datapunt/arm-core/lib/components/BaseLayerToggle'
+import React, { useContext } from 'react'
 import MapContext from '../MapContext'
 
 type Props = {}
@@ -10,7 +10,7 @@ const BaseLayerToggle: React.FC<Props> = () => {
 
   return (
     <BaseLayerToggleComponent
-      activeLayer={activeBaseLayer} // TODO: Should take the id instead of the type
+      activeLayer={activeBaseLayer as BaseLayerType} // TODO: Should take the id instead of the type
       onChangeLayer={(id) => setActiveBaseLayer(id)}
     />
   )

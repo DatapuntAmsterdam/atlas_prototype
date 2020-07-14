@@ -1,15 +1,15 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react'
 import { Link, List, ListItem } from '@datapunt/asc-ui'
+import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import { toArticleDetail } from '../../../store/redux-first-router/actions'
 import environment from '../../../environment'
+import { toArticleDetail } from '../../../store/redux-first-router/actions'
 
 export type FooterLink = {
   title: string
   id:
-    | number
+    | string
     | {
         development: string
         acceptance: string

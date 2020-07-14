@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { useStateRef } from '@datapunt/arm-core'
+import { Feature } from 'geojson'
 import { LatLng, LatLngTuple } from 'leaflet'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -13,17 +14,7 @@ import config, {
 } from './Components/config'
 import DataSelectionContext from './DataSelectionContext'
 
-const generateParams = (data: { [key: string]: any }) =>
-  Object.entries(data)
-    .filter(([, value]) => value !== null && value !== undefined)
-    .map((pair) => pair.map(encodeURIComponent).join('='))
-    .join('&')
-
-export type MapVisualization = {
-  id: string
-} & MapVisualizationResponse
-
-type MapData = {
+export interface MapData {
   layer: any
   distanceText: string
 }
@@ -39,25 +30,28 @@ export type DataSelection = {
   mapData?: MapData
 }
 
-export type MapVisualizationResponse = {
-  type: DataSelectionMapVisualizationType
-  data:
-    | [
-        {
-          id: string
-          latLng: LatLngTuple[]
-        },
-      ]
-    | [
-        {
-          type: string
-          name: string
-          geometry: {
-            coordinates: LatLngTuple[][]
-          }
-        },
-      ]
+export interface NamedFeature extends Feature {
+  name: string
 }
+
+export interface MapVisualizationGeoJSON {
+  id: string
+  type: DataSelectionMapVisualizationType.GeoJSON
+  data: NamedFeature[]
+}
+
+export interface Marker {
+  id: string
+  latLng: LatLngTuple
+}
+
+export interface MapVisualizationMarkers {
+  id: string
+  type: DataSelectionMapVisualizationType.Markers
+  data: Marker[]
+}
+
+export type MapVisualization = MapVisualizationGeoJSON | MapVisualizationMarkers
 
 export type DataSelectionResult = Array<{
   id: string
@@ -69,114 +63,131 @@ export type DataSelectionResponse = {
   results: DataSelectionResult
 }
 
+export interface PaginationParams {
+  size: number
+  page: number
+}
+
 // Todo: next 2 methods could be moved to graphQL layer
 async function getMapVisualization(
   params: { [key: string]: string },
   type: DataSelectionType,
-): Promise<MapVisualizationResponse> {
-  return fetchWithToken(`${config[type].endpointMapVisualization}?${generateParams(params)}`).then(
-    ({ object_list: data, eigenpercelen, niet_eigenpercelen, extent }) => {
-      switch (type) {
-        case DataSelectionType.BAG:
-        case DataSelectionType.HR:
-          return {
-            type: DataSelectionMapVisualizationType.Markers,
-            data: data.map(
-              ({
-                _source: { centroid },
-                _id: id,
-              }: {
-                _source: { centroid: [number, number] }
-                _id: string
-              }) => ({
-                id: type === DataSelectionType.HR ? id.split('ves').pop() : id,
-                latLng: [centroid[1], centroid[0]],
-              }),
-            ),
-          }
-        case DataSelectionType.BRK:
-          return {
-            type: DataSelectionMapVisualizationType.GeoJSON,
-            data: [
-              {
-                type: 'Feature',
-                name: 'dataSelection',
-                geometry: eigenpercelen,
-              },
-              {
-                type: 'Feature',
-                name: 'dataSelectionAlternate',
-                geometry: niet_eigenpercelen,
-              },
-              {
-                type: 'Feature',
-                name: 'dataSelectionBounds',
-                geometry: {
-                  coordinates: [
-                    [
-                      [extent[0], extent[1]],
-                      [extent[2], extent[3]],
-                    ],
-                  ],
-                  type: 'Polygon',
-                },
-              },
-            ],
-          }
-        default:
-          return {} as any
-      }
-    },
+): Promise<MapVisualization> {
+  const searchParams = new URLSearchParams(params)
+  const { object_list: data, eigenpercelen, niet_eigenpercelen, extent } = await fetchWithToken(
+    `${config[type].endpointMapVisualization}?${searchParams.toString()}`,
   )
+
+  switch (type) {
+    case DataSelectionType.BAG:
+    case DataSelectionType.HR: {
+      const response: MapVisualizationMarkers = {
+        id: '',
+        type: DataSelectionMapVisualizationType.Markers,
+        data: data.map(
+          ({
+            _source: { centroid },
+            _id: id,
+          }: {
+            _source: { centroid: [number, number] }
+            _id: string
+          }) => ({
+            id: type === DataSelectionType.HR ? id.split('ves').pop() : id,
+            latLng: [centroid[1], centroid[0]],
+          }),
+        ),
+      }
+
+      return response
+    }
+    case DataSelectionType.BRK: {
+      const response: MapVisualizationGeoJSON = {
+        id: '',
+        type: DataSelectionMapVisualizationType.GeoJSON,
+        data: [
+          {
+            type: 'Feature',
+            name: 'dataSelection',
+            geometry: eigenpercelen,
+            properties: null,
+          },
+          {
+            type: 'Feature',
+            name: 'dataSelectionAlternate',
+            geometry: niet_eigenpercelen,
+            properties: null,
+          },
+          {
+            type: 'Feature',
+            name: 'dataSelectionBounds',
+            geometry: {
+              coordinates: [
+                [
+                  [extent[0], extent[1]],
+                  [extent[2], extent[3]],
+                ],
+              ],
+              type: 'Polygon',
+            },
+            properties: null,
+          },
+        ],
+      }
+
+      return response
+    }
+    default:
+      throw new Error(
+        `Unable to get map visualization, encountered an unknown data selection type '${type}'.`,
+      )
+  }
 }
 
 async function getData(
   params: { [key: string]: string },
   type: DataSelectionType,
 ): Promise<DataSelectionResponse> {
-  return fetchWithToken(`${config[type].endpointData}?${generateParams(params)}`).then(
-    (result: any) => {
-      switch (type) {
-        case DataSelectionType.BAG:
-          return {
-            totalCount: result?.object_count,
-            results: result?.object_list.map(
-              ({
-                landelijk_id,
-                _openbare_ruimte_naam,
-                huisnummer,
-                huisnummer_toevoeging,
-                huisletter,
-              }: any) => ({
-                id: landelijk_id || uuidv4(),
-                name: `${_openbare_ruimte_naam} ${huisnummer}${huisletter && ` ${huisletter}`}${
-                  huisnummer_toevoeging && `-${huisnummer_toevoeging}`
-                }`.trim(),
-              }),
-            ),
-          }
-        case DataSelectionType.HR:
-          return {
-            totalCount: result?.object_count,
-            results: result?.object_list.map(({ handelsnaam, vestiging_id }: any) => ({
-              id: vestiging_id || uuidv4(),
-              name: handelsnaam,
-            })),
-          }
-        case DataSelectionType.BRK:
-          return {
-            totalCount: result?.object_count,
-            results: result?.object_list.map(({ aanduiding, kadastraal_object_id }: any) => ({
-              id: kadastraal_object_id || uuidv4(),
-              name: aanduiding,
-            })),
-          }
+  const searchParams = new URLSearchParams(params)
+  const result = await fetchWithToken(`${config[type].endpointData}?${searchParams.toString()}`)
 
-        default:
-          return {} as any
+  switch (type) {
+    case DataSelectionType.BAG:
+      return {
+        totalCount: result?.object_count,
+        results: result?.object_list.map(
+          ({
+            landelijk_id,
+            _openbare_ruimte_naam,
+            huisnummer,
+            huisnummer_toevoeging,
+            huisletter,
+          }: any) => ({
+            id: landelijk_id || uuidv4(),
+            name: `${_openbare_ruimte_naam} ${huisnummer}${huisletter && ` ${huisletter}`}${
+              huisnummer_toevoeging && `-${huisnummer_toevoeging}`
+            }`.trim(),
+          }),
+        ),
       }
-    },
-  )
+    case DataSelectionType.HR:
+      return {
+        totalCount: result?.object_count,
+        results: result?.object_list.map(({ handelsnaam, vestiging_id }: any) => ({
+          id: vestiging_id || uuidv4(),
+          name: handelsnaam,
+        })),
+      }
+    case DataSelectionType.BRK:
+      return {
+        totalCount: result?.object_count,
+        results: result?.object_list.map(({ aanduiding, kadastraal_object_id }: any) => ({
+          id: kadastraal_object_id || uuidv4(),
+          name: aanduiding,
+        })),
+      }
+    default:
+      throw new Error(`Unable to get data, encountered an unknown data selection type '${type}'.`)
+  }
 }
 
 const DataSelectionProvider: React.FC = ({ children }) => {
@@ -192,10 +203,10 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     config[type].authScope === AuthScope.None ? false : !userScopes.includes(config[type].authScope)
 
   const fetchResults = async <T,>(
-    fn: Function,
+    fn: (params: { [key: string]: string }, type: DataSelectionType) => void,
     latLngs: LatLng[][],
     id?: string,
-    extraParams?: Object,
+    extraParams?: { [key: string]: string },
   ): Promise<T | void> => {
     if (forbidden) {
       return undefined
@@ -204,10 +215,17 @@ const DataSelectionProvider: React.FC = ({ children }) => {
       if (id) {
         setLoadingIds([...loadingIdsRef.current, id])
       }
+
       const params = {
         shape: JSON.stringify(latLngs[0].map(({ lat, lng }) => [lng, lat])),
+        ...extraParams,
       }
-      return await fn({ ...params, ...extraParams }, typeRef.current)
+
+      if (!typeRef.current) {
+        throw new Error(`No data selection type set.`)
+      }
+
+      return await fn(params, typeRef.current)
     } catch (e) {
       if (id) {
         setErrorIds([...errorIds, id])
@@ -252,12 +270,12 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     id: string,
     setState = true,
   ): Promise<MapVisualization | null> => {
-    const result = await fetchResults<MapVisualizationResponse>(getMapVisualization, latLngs)
+    const result = await fetchResults<MapVisualization>(getMapVisualization, latLngs)
 
     if (result) {
       const newMapVisualization = {
-        id,
         ...result,
+        id,
       }
 
       if (setState) {
@@ -273,14 +291,15 @@ const DataSelectionProvider: React.FC = ({ children }) => {
   const fetchDataSelection = async (
     latLngs: LatLng[][],
     id: string,
-    paginationParams: {
-      size: number
-      page: number
-    },
+    paginationParams: PaginationParams,
     mapData?: MapData,
     setState = true,
   ): Promise<DataSelection | null> => {
-    const result = await fetchResults<DataSelectionResponse>(getData, latLngs, id, paginationParams)
+    const result = await fetchResults<DataSelectionResponse>(getData, latLngs, id, {
+      size: paginationParams.size.toString(),
+      page: paginationParams.page.toString(),
+    })
+
     if (result) {
       const existingData = dataSelectionRef?.current?.find(({ id: dataId }) => dataId === id)
       const newData = {
@@ -332,7 +351,7 @@ const DataSelectionProvider: React.FC = ({ children }) => {
         fetchData: fetchDataSelection,
         fetchMapVisualization,
         removeDataSelection,
-        mapVisualization,
+        mapVisualizations: mapVisualization,
         dataSelection,
         setType,
         type,

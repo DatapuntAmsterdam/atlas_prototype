@@ -1,6 +1,6 @@
 import { MapPanelContent } from '@datapunt/arm-core'
 import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@datapunt/asc-ui'
-import { LatLng } from 'leaflet'
+import { LatLngLiteral } from 'leaflet'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -19,12 +19,6 @@ import PanoramaPreview from '../Components/PanoramaPreview'
 import { Overlay } from '../types'
 
 const RESULT_LIMIT = 10
-
-export interface PointSearchPanelProps {
-  setLocation: (latLng: LatLng | null) => void
-  location: LatLng
-  currentOverlay: Overlay
-}
 
 const CoordinatesText = styled.span`
   display: block;
@@ -76,6 +70,12 @@ const StyledPanoramaPreview = styled(PanoramaPreview)`
 `
 
 const EXCLUDED_RESULTS = 'vestigingen'
+
+export interface PointSearchPanelProps {
+  setLocation: (latLng: LatLngLiteral | null) => void
+  location: LatLngLiteral
+  currentOverlay: Overlay
+}
 
 const PointSearchPanel: React.FC<PointSearchPanelProps> = ({
   setLocation,

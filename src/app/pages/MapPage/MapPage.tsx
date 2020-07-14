@@ -1,5 +1,3 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import RouterLink from 'redux-first-router-link'
 import {
   BaseLayer,
   constants,
@@ -12,8 +10,13 @@ import { PositionPerSnapPoint } from '@datapunt/arm-core/es/components/MapPanel/
 import { NonTiledLayer } from '@datapunt/arm-nontiled'
 import { Alert, Heading, hooks, Link } from '@datapunt/asc-ui'
 import { TileLayer } from '@datapunt/react-maps'
+import React, { useEffect, useMemo, useState } from 'react'
+import RouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
-
+import MAP_CONFIG from '../../../map/services/map.config'
+import { toMap } from '../../../store/redux-first-router/actions'
+import NotificationLevel from '../../models/notification'
+import DrawContent from './Components/DrawContent'
 import GeoJSON from './Components/GeoJSON'
 import PointSearchMarker from './Components/PointSearchMarker'
 import ViewerContainer from './Components/ViewerContainer'
@@ -24,10 +27,6 @@ import LegendPanel from './panels/LegendPanel'
 import PointSearchPanel from './panels/PointSearchPanel'
 import { Overlay, SnapPoint } from './types'
 import handleMapClick from './utils/handleMapClick'
-import MAP_CONFIG from '../../../map/services/map.config'
-import { toMap } from '../../../store/redux-first-router/actions'
-import NotificationLevel from '../../models/notification'
-import DrawContent from './Components/DrawContent'
 
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
@@ -57,9 +56,9 @@ const MapPage: React.FC = () => {
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const {
     location,
+    mapLayers,
     activeMapLayers,
     activeBaseLayer,
-    mapLayers,
     overlays,
     detailUrl,
     getOverlays,
@@ -123,10 +122,9 @@ const MapPage: React.FC = () => {
             }
           />
           {geometry && <GeoJSON geometry={geometry} />}
-          {tmsLayers.map(({ url, overlayOptions: options, id }) => (
+          {tmsLayers.map(({ overlayOptions: options, id }) => (
             <TileLayer
               key={id}
-              url={url}
               options={options}
               events={{
                 loading: () => setIsLoading(true),
@@ -135,15 +133,7 @@ const MapPage: React.FC = () => {
             />
           ))}
           {nonTmsLayers.map(({ url, overlayOptions: options, id }) => (
-            <NonTiledLayer
-              key={id}
-              url={url}
-              options={options}
-              events={{
-                loading: () => setIsLoading(true),
-                load: () => setIsLoading(false),
-              }}
-            />
+            <NonTiledLayer key={id} url={url} options={options} />
           ))}
           <MapPanelProvider
             mapPanelSnapPositions={MAP_PANEL_SNAP_POSITIONS}
@@ -170,15 +160,17 @@ const MapPage: React.FC = () => {
                 )}
                 {!showDrawTool && !detailUrl && location && (
                   <PointSearchPanel
-                    {...{
-                      setLocation,
-                      currentOverlay,
-                      location,
-                    }}
+                    setLocation={setLocation}
+                    currentOverlay={currentOverlay}
+                    location={location}
                   />
                 )}
                 {detailUrl && <DetailPanel detailUrl={detailUrl} />}
-                <DrawContent {...{ showDrawTool, currentOverlay, setShowDrawTool }} />
+                <DrawContent
+                  showDrawTool={showDrawTool}
+                  currentOverlay={currentOverlay}
+                  setShowDrawTool={setShowDrawTool}
+                />
                 {!detailUrl && <LegendPanel />}
               </MapPanelOrDrawer>
               <ViewerContainer

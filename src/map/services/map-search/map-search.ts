@@ -1,3 +1,5 @@
+import { FeatureCollection, Geometry } from 'geojson'
+import environment from '../../../environment'
 import { UserState } from '../../../shared/ducks/user/user'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import {
@@ -9,7 +11,6 @@ import { createMapSearchResultsModel } from '../map-search-results/map-search-re
 import { fetchByPandId as fetchMonumentByPandId } from '../monument/monument'
 import { fetchByAddressId, fetchByPandId as fetchVestigingByPandId } from '../vestiging/vestiging'
 import transformResultByType from './transform-result-by-type'
-import environment from '../../../environment'
 
 interface Endpoint {
   uri: string
@@ -42,10 +43,17 @@ const endpoints: Endpoint[] = [
   { uri: 'geosearch/', radius: 25, params: { datasets: 'bouwstroompunten' } },
 ]
 
-const relatedResourcesByType = {
+interface RelatedResource {
+  type: string
+  authScope?: string
+  // TODO: Provide a better return type here.
+  fetch: (id: string) => Promise<any[]>
+}
+
+const relatedResourcesByType: { [key: string]: RelatedResource[] } = {
   'bag/ligplaats': [
     {
-      fetch: (ligplaatsId) =>
+      fetch: (ligplaatsId: string) =>
         fetchHoofdadresByLigplaatsId(ligplaatsId).then((result) => fetchByAddressId(result.id)),
       type: 'vestiging',
       authScope: 'HR/R',
@@ -68,7 +76,7 @@ const relatedResourcesByType = {
   ],
   'bag/standplaats': [
     {
-      fetch: (standplaatsId) =>
+      fetch: (standplaatsId: string) =>
         fetchHoofdadresByStandplaatsId(standplaatsId).then((result) => fetchByAddressId(result.id)),
       type: 'vestiging',
       authScope: 'HR/R',
@@ -76,24 +84,34 @@ const relatedResourcesByType = {
   ],
 }
 
-export const fetchRelatedForUser = (user) => (data) => {
-  const item = data.features.find((feature) => relatedResourcesByType[feature.properties.type])
-  if (!item) {
+interface MapFeatureProperties {
+  id: string
+  type: string
+}
+
+export const fetchRelatedForUser = (user: UserState) => (
+  data: FeatureCollection<Geometry, MapFeatureProperties>,
+) => {
+  const relatableFeature = data.features.find(
+    (feature) => relatedResourcesByType[feature.properties.type],
+  )
+
+  if (!relatableFeature) {
     return data.features
   }
 
-  const resources = relatedResourcesByType[item.properties.type]
+  const resources = relatedResourcesByType[relatableFeature.properties.type]
   const requests = resources.map((resource) =>
     resource.authScope && (!user.authenticated || !user.scopes.includes(resource.authScope))
       ? []
-      : resource.fetch(item.properties.id).then((results) =>
+      : resource.fetch(relatableFeature.properties.id).then((results) =>
           results.map((result) => ({
             ...result,
             properties: {
               uri: result._links.self.href,
               display: result._display,
               type: resource.type,
-              parent: item.properties.type,
+              parent: relatableFeature.properties.type,
             },
           })),
         ),
@@ -146,7 +164,7 @@ export default function mapSearch(
       radius: (endpoint.radius ?? 0).toString(),
     })
 
-    const request = fetchWithToken(
+    const request = fetchWithToken<FeatureCollection<Geometry, MapFeatureProperties>>(
       `${environment.API_ROOT}${endpoint.uri}?${searchParams.toString()}`,
     )
       .then(fetchRelatedForUser(user))
@@ -168,9 +186,10 @@ export default function mapSearch(
     ),
   )
 
+  // TODO: Improve typing of this method
   return allResults
     .then((results) => [].concat.apply([], [...results]))
-    .then((results) => ({
+    .then((results: any[]) => ({
       results: createMapSearchResultsModel(
         results.filter((result) => result && result.type !== errorType),
       ),

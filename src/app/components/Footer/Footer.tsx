@@ -1,5 +1,3 @@
-import React from 'react'
-import styled from 'styled-components'
 import {
   Column,
   CompactThemeProvider,
@@ -14,10 +12,11 @@ import {
   Row,
   themeSpacing,
 } from '@datapunt/asc-ui'
-import FooterLinks, { FooterLink } from './FooterLinks'
-
+import React from 'react'
+import styled from 'styled-components'
 import { FOOTER_LINKS } from '../../../shared/config/config'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
+import FooterLinks, { FooterLink } from './FooterLinks'
 
 const StyledLink = styled(Link)`
   margin-bottom: ${themeSpacing(3)};
@@ -34,7 +33,7 @@ const helpLinks: FooterLink[] = [
     title: 'Feedback geven',
     id: 'feedback_3',
     onClick: openFeedbackForm,
-  } as FooterLink,
+  },
 ].sort((a, b) => (a.order > b.order ? 1 : -1))
 
 const Footer: React.FC = () => (

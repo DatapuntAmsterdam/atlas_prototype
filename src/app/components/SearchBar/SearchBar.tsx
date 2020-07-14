@@ -1,18 +1,18 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import styled from 'styled-components'
 import {
-  SearchBar as SearchBarComponent,
-  SearchBarToggle,
   BackDrop,
   breakpoint,
+  constants,
+  Hidden,
+  SearchBar as SearchBarComponent,
+  SearchBarToggle,
   showAboveBackDrop,
   styles,
-  Hidden,
-  constants,
 } from '@datapunt/asc-ui'
+import React, { Dispatch, SetStateAction } from 'react'
+import styled from 'styled-components'
+import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
-import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 
 const Z_INDEX_OFFSET = 2 // Set a custom offset
 
@@ -38,15 +38,16 @@ const StyledSearchBar = styled(SearchBarComponent)`
   width: 100%;
 `
 
-type SearchBarProps = {
+type SearchBarProps = React.InputHTMLAttributes<HTMLInputElement> & {
   expanded: boolean
-  onOpenSearchBarToggle: Function
+  onOpenSearchBarToggle: (open: boolean) => void
   openSearchBarToggle: boolean
   value: string
   onClear: () => void
+  onBlur: () => void
   searchCategory: SearchCategory
   setSearchCategory: Dispatch<SetStateAction<SearchCategory>>
-} & React.InputHTMLAttributes<HTMLInputElement>
+}
 
 const SearchBar: React.FC<SearchBarProps> = ({
   expanded,

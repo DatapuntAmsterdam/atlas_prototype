@@ -80,7 +80,7 @@ const IntroText = styled.span`
   margin-bottom: ${themeSpacing(2)};
 `
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(Button)<{ hasMarginBottom: boolean }>`
   height: auto;
   padding: 0;
   margin-top: ${themeSpacing(4)};
@@ -134,7 +134,7 @@ const MapCollectionCard: React.FC<MapCollectionCardProps> = ({ result }) => {
         <StyledCardContent>
           <IntroText>Deze kaartcollectie bevat de volgende kaartlagen:</IntroText>
           <List>
-            {visibleLayers.map((layer) => (
+            {visibleLayers.map((layer: any) => (
               <li key={layer.id}>{layer.title}</li>
             ))}
           </List>
@@ -148,7 +148,7 @@ const MapCollectionCard: React.FC<MapCollectionCardProps> = ({ result }) => {
           )}
           {expanded && (
             <List>
-              {hiddenLayers.map((layer) => (
+              {hiddenLayers.map((layer: any) => (
                 <li key={layer.id}>{layer.title}</li>
               ))}
             </List>

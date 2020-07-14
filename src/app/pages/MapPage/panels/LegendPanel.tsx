@@ -1,6 +1,5 @@
-import { MapPanelContent } from '@datapunt/arm-core'
+import { MapPanelContent, MapPanelContentProps } from '@datapunt/arm-core'
 import React from 'react'
-
 import styled from 'styled-components'
 import MapPanel from '../../../../map/containers/panel/MapPanel'
 import getState from '../../../../shared/services/redux/get-state'
@@ -30,7 +29,9 @@ const StyledMapPanelContent = styled(MapPanelContent)`
   }
 `
 
-const LegendPanel: React.FC = ({ ...otherProps }) => {
+export interface LegendPanelProps extends Omit<MapPanelContentProps, 'title'> {}
+
+const LegendPanel: React.FC<LegendPanelProps> = ({ ...otherProps }) => {
   const {
     panelLayers,
     activeMapLayers,
@@ -66,6 +67,7 @@ const LegendPanel: React.FC = ({ ...otherProps }) => {
 
   return (
     <StyledMapPanelContent title="Legenda" {...otherProps}>
+      {/* @ts-ignore */}
       <MapPanel
         panelLayers={panelLayers}
         overlays={activeMapLayers}

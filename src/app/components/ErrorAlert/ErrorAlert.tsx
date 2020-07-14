@@ -1,5 +1,5 @@
-import React from 'react'
 import { Alert, Paragraph } from '@datapunt/asc-ui'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getMessage } from '../../../shared/ducks/error/error-message'
@@ -17,7 +17,7 @@ const ErrorAlert: React.FC = () => {
   const printMode = useSelector(isPrintMode)
 
   return !printMode ? (
-    <StyledAlert dismissible compact level="error">
+    <StyledAlert dismissible level="error">
       <Paragraph>{message}</Paragraph>
     </StyledAlert>
   ) : null

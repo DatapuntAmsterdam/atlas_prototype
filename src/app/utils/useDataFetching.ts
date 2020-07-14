@@ -1,8 +1,8 @@
 import React from 'react'
 import { fetchWithToken } from '../../shared/services/api/api'
 
-function useDataFetching() {
-  const [results, setResults] = React.useState(null)
+function useDataFetching<T = any>() {
+  const [results, setResults] = React.useState<T | null>(null)
   const [errorMessage, setErrorMessage] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
 

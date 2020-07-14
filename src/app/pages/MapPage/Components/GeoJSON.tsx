@@ -1,41 +1,34 @@
-import React, { useEffect, useState } from 'react'
 import { useMapInstance } from '@datapunt/react-maps'
+import { Geometry } from 'geojson'
 import L from 'leaflet'
-import { Geometry } from '../MapContext'
+import React, { useEffect, useState } from 'react'
 
 type Props = {
   geometry: Geometry
-  options: any
-  setInstance?: (instance: any) => void
+  options?: L.GeoJSONOptions
+  onAdd?: (instance: L.GeoJSON) => void
 }
 
-const GeoJSON: React.FC<Props> = ({ geometry, options, setInstance: setInstanceProp }) => {
-  const [instance, setInstance] = useState()
-
+const GeoJSON: React.FC<Props> = ({ geometry, options, onAdd }) => {
+  const [instance, setInstance] = useState<L.GeoJSON>()
   const mapInstance = useMapInstance()
 
   useEffect(() => {
     if (!mapInstance) {
       return undefined
     }
-    ;(async () => {
-      if (instance) {
-        return
-      }
-      const geo = L.geoJSON([geometry], options)
 
-      geo.addTo(mapInstance)
-      setInstance(geo)
-      if (setInstanceProp) {
-        setInstanceProp(geo)
-      }
-    })()
+    const geoJSON = L.geoJSON(geometry, options).addTo(mapInstance)
+
+    setInstance(geoJSON)
+
+    if (onAdd) {
+      onAdd(geoJSON)
+    }
 
     return () => {
-      if (instance && mapInstance) {
-        instance.removeFrom(mapInstance)
-        setInstance(undefined)
-      }
+      geoJSON.removeFrom(mapInstance)
+      setInstance(undefined)
     }
   }, [instance, mapInstance, geometry])
 

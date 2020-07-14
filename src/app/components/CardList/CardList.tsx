@@ -1,8 +1,8 @@
-import React from 'react'
 import { Card, CardContent, Heading, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import React from 'react'
 import styled from 'styled-components'
-import EditorialCard from '../EditorialCard'
 import { CMSResultItem } from '../../utils/useFromCMS'
+import EditorialCard from '../EditorialCard'
 
 const StyledCard = styled(Card)`
   border-top: 2px solid;
@@ -36,8 +36,7 @@ type CardListProps = {
 const CardList: React.FC<CardListProps> = ({ title, loading, results }) => (
   <StyledCard isLoading={loading}>
     <StyledCardContent>
-      {/*
-          // @ts-ignore */}
+      {/* @ts-ignore */}
       <StyledHeading forwardedAs="h4" styleAs="h3">
         {title}
       </StyledHeading>
@@ -54,18 +53,15 @@ const CardList: React.FC<CardListProps> = ({ title, loading, results }) => (
             coverImage,
           }) => (
             <EditorialCard
-              {...{
-                ...linkProps, // !important: linkProps also contains `title`
-                key: id,
-                id,
-                type,
-                specialType,
-                title: shortTitle || cardTitle,
-                image: teaserImage || coverImage,
-                imageDimensions: [44, 44],
-                compact: true, // Important: renders a simplified version of this card
-                showContentType: true,
-              }}
+              {...linkProps}
+              key={id}
+              type={type}
+              specialType={specialType || undefined}
+              title={shortTitle || cardTitle}
+              image={teaserImage || coverImage}
+              imageDimensions={[44, 44]}
+              compact
+              showContentType
             />
           ),
         )}

@@ -6,6 +6,10 @@
     "esModuleInterop": true,
     "downlevelIteration": true,
     "suppressImplicitAnyIndexErrors": true,
-    "lib": ["ES2020"]
+    "lib": ["ES2020", "DOM"],
+    "typeRoots": [
+      "src/typings",
+      "node_modules/@types"
+    ]
   }
 }

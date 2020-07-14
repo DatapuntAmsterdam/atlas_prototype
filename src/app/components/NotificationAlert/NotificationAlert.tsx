@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
-import React from 'react'
-import styled from 'styled-components'
 import { Alert } from '@datapunt/asc-ui'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { isEmbedded, isPrintMode } from '../../../shared/ducks/ui/ui'
-import useDataFetching from '../../utils/useDataFetching'
-import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'
-import { InfoModal } from '../Modal'
+import styled from 'styled-components'
 import environment from '../../../environment'
+import { isEmbedded, isPrintMode } from '../../../shared/ducks/ui/ui'
+import { createCookie, getCookie } from '../../../shared/services/cookie/cookie'
+import useDataFetching from '../../utils/useDataFetching'
+import { InfoModal } from '../Modal'
 
 const COOKIE_NAME = 'showNotificationAlert'
 
@@ -48,7 +48,6 @@ const NotificationAlert: React.FC = () => {
         <StyledAlert
           dismissible
           heading={field_notification_title}
-          compact
           level={field_notification_type || 'attention'}
           onDismiss={() => createCookie(COOKIE_NAME, '8')}
         >

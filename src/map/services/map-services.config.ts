@@ -1,6 +1,6 @@
 import NotificationLevel from '../../app/models/notification'
 import formatDate from '../../shared/services/date-formatter/date-formatter'
-import { DetailResult, DetailResultItemType } from '../types/details'
+import { DetailResult, DetailResultItemType, DetailResultNotification } from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
 import categoryLabels from './map-search/category-labels'
 import {
@@ -85,173 +85,203 @@ export interface ServiceDefinition {
 
 const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.adressenLigplaats]: {
-    mapDetail: (result) => ({
-      title: 'Adres (ligplaats)',
-      subTitle: result._display,
-      items: [
-        {
-          type: DetailResultItemType.Default,
-          label: 'Indicatie geconstateerd',
-          value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
-          status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Aanduiding in onderzoek',
-          value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
-          status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
-        },
-      ],
-      notifications: [
-        {
-          value: result.indicatie_geconstateerd ? 'Indicatie geconstateerd' : false,
+    mapDetail: (result) => {
+      const notifications: DetailResultNotification[] = []
+
+      if (result.indicatie_geconstateerd) {
+        notifications.push({
+          value: 'Indicatie geconstateerd',
           level: NotificationLevel.Error,
-        },
-        {
-          value: result.aanduiding_in_onderzoek ? 'In onderzoek' : false,
+        })
+      }
+
+      if (result.aanduiding_in_onderzoek) {
+        notifications.push({
+          value: 'In onderzoek',
           level: NotificationLevel.Error,
-        },
-      ],
-    }),
+        })
+      }
+
+      return {
+        notifications,
+        title: 'Adres (ligplaats)',
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.Default,
+            label: 'Indicatie geconstateerd',
+            value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Aanduiding in onderzoek',
+            value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
+          },
+        ],
+      }
+    },
   },
   [endpointTypes.adressenNummeraanduiding]: {
     normalization: adressenNummeraanduiding,
-    mapDetail: (result) => ({
-      title: 'Adres (verblijfsobject)',
-      subTitle: result._display,
-      items: [
-        {
-          type: DetailResultItemType.Default,
-          label: 'Gebruiksdoel',
-          value: result.verblijfsobject ? result.verblijfsobject.gebruiksdoelen : false,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Soort object (feitelijk gebruik)',
-          value: result.verblijfsobject ? result.verblijfsobject.gebruik : false,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Status',
-          value: result.verblijfsobject ? result.verblijfsobject.status : false,
-          status: result.verblijfsobject && result.verblijfsobject.statusLevel,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Type adres',
-          value: result.type_adres,
-          status: result.isNevenadres ? NotificationLevel.Attention : '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Indicatie geconstateerd',
-          value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
-          status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Aanduiding in onderzoek',
-          value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
-          status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Oppervlakte',
-          value: result.verblijfsobject ? result.verblijfsobject.size : false,
-        },
-      ],
-      notifications: [
-        {
-          value:
-            result.verblijfsobject && result.verblijfsobject.statusLevel
-              ? `Status: ${result.verblijfsobject.status}`
-              : false,
-          level: result.verblijfsobject && result.verblijfsobject.statusLevel,
-        },
-        {
-          value: result.isNevenadres ? 'Dit is een nevenadres' : false,
+    mapDetail: (result) => {
+      const notifications: DetailResultNotification[] = []
+
+      if (result.verblijfsobject && result.verblijfsobject.statusLevel) {
+        notifications.push({
+          value: `Status: ${result.verblijfsobject.status}`,
           level: NotificationLevel.Attention,
-        },
-        {
-          value: result.indicatie_geconstateerd ? 'Indicatie geconstateerd' : false,
+        })
+      }
+
+      if (result.isNevenadres) {
+        notifications.push({
+          value: 'Dit is een nevenadres',
+          level: NotificationLevel.Attention,
+        })
+      }
+
+      if (result.indicatie_geconstateerd) {
+        notifications.push({
+          value: 'Indicatie geconstateerd',
           level: NotificationLevel.Error,
-        },
-        {
-          value: result.aanduiding_in_onderzoek ? 'In onderzoek' : false,
+        })
+      }
+
+      if (result.aanduiding_in_onderzoek) {
+        notifications.push({
+          value: 'In onderzoek',
           level: NotificationLevel.Error,
-        },
-      ],
-    }),
+        })
+      }
+
+      return {
+        notifications,
+        title: 'Adres (verblijfsobject)',
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.Default,
+            label: 'Gebruiksdoel',
+            value: result.verblijfsobject ? result.verblijfsobject.gebruiksdoelen : false,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Soort object (feitelijk gebruik)',
+            value: result.verblijfsobject ? result.verblijfsobject.gebruik : false,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Status',
+            value: result.verblijfsobject ? result.verblijfsobject.status : false,
+            status: result.verblijfsobject && result.verblijfsobject.statusLevel,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Type adres',
+            value: result.type_adres,
+            status: result.isNevenadres ? NotificationLevel.Attention : '',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Indicatie geconstateerd',
+            value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
+            status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Aanduiding in onderzoek',
+            value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
+            status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Oppervlakte',
+            value: result.verblijfsobject ? result.verblijfsobject.size : false,
+          },
+        ],
+      }
+    },
   },
   [endpointTypes.adressenVerblijfsobject]: {
     normalization: adressenVerblijfsobject,
-    mapDetail: (result) => ({
-      title: 'Adres (verblijfsobject)',
-      subTitle: result._display,
-      items: [
-        {
-          type: DetailResultItemType.Default,
-          label: 'Gebruiksdoel',
-          value: result.gebruiksdoelen,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Soort object (feitelijk gebruik)',
-          value: result.gebruik || '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Status',
-          value: result.status ? result.status : false,
-          status: result.statusLevel,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Type adres',
-          value: result.typeAdres,
-          status: result.isNevenadres ? NotificationLevel.Attention : '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Indicatie geconstateerd',
-          value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
-          status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Aanduiding in onderzoek',
-          value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
-          status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Oppervlakte',
-          value: result.size,
-        },
-      ],
-      notifications: [
-        {
-          type: DetailResultItemType.Default,
-          value: result.statusLevel ? `Status: ${result.status}` : false,
-          level: result.statusLevel,
-        },
-        {
-          type: DetailResultItemType.Default,
-          value: result.isNevenadres ? 'Dit is een nevenadres' : false,
+    mapDetail: (result) => {
+      const notifications: DetailResultNotification[] = []
+
+      if (result.statusLevel) {
+        notifications.push({
+          value: result.status,
+          level: result.statusLevel ?? NotificationLevel.Attention,
+        })
+      }
+
+      if (result.isNevenadres) {
+        notifications.push({
+          value: 'Dit is een nevenadres',
           level: NotificationLevel.Attention,
-        },
-        {
-          type: DetailResultItemType.Default,
-          value: result.indicatie_geconstateerd ? 'Indicatie geconstateerd' : false,
+        })
+      }
+
+      if (result.indicatie_geconstateerd) {
+        notifications.push({
+          value: 'Indicatie geconstateerd',
           level: NotificationLevel.Error,
-        },
-        {
-          type: DetailResultItemType.Default,
-          value: result.aanduiding_in_onderzoek ? 'In onderzoek' : false,
+        })
+      }
+
+      if (result.aanduiding_in_onderzoek) {
+        notifications.push({
+          value: 'In onderzoek',
           level: NotificationLevel.Error,
-        },
-      ],
-    }),
+        })
+      }
+
+      return {
+        notifications,
+        title: 'Adres (verblijfsobject)',
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.Default,
+            label: 'Gebruiksdoel',
+            value: result.gebruiksdoelen,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Soort object (feitelijk gebruik)',
+            value: result.gebruik || '',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Status',
+            value: result.status ? result.status : false,
+            status: result.statusLevel,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Type adres',
+            value: result.typeAdres,
+            status: result.isNevenadres ? NotificationLevel.Attention : '',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Indicatie geconstateerd',
+            value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
+            status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Aanduiding in onderzoek',
+            value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
+            status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Oppervlakte',
+            value: result.size,
+          },
+        ],
+      }
+    },
   },
   [endpointTypes.adressenOpenbareRuimte]: {
     mapDetail: (result) => ({
@@ -268,64 +298,79 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   },
   [endpointTypes.adressenPand]: {
     normalization: adressenPand,
-    mapDetail: (result) => ({
-      title: categoryLabels.pand.singular,
-      subTitle: result._display,
-      items: [
-        {
-          type: DetailResultItemType.Default,
-          label: 'Oorspronkelijk bouwjaar',
-          value: result.year,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Naam',
-          value: result.pandnaam,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Status',
-          value: result.status ? result.status : false,
-          status: result.statusLevel,
-        },
-      ],
-      notifications: [
-        {
-          value: result.statusLevel ? result.status : false,
-          level: result.statusLevel ? result.statusLevel : '',
-        },
-      ],
-    }),
+    mapDetail: (result) => {
+      const notifications: DetailResultNotification[] = []
+
+      if (result.statusLevel) {
+        notifications.push({
+          value: result.status,
+          level: result.statusLevel ?? NotificationLevel.Attention,
+        })
+      }
+
+      return {
+        notifications,
+        title: categoryLabels.pand.singular,
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.Default,
+            label: 'Oorspronkelijk bouwjaar',
+            value: result.year,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Naam',
+            value: result.pandnaam,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Status',
+            value: result.status ? result.status : false,
+            status: result.statusLevel,
+          },
+        ],
+      }
+    },
   },
   [endpointTypes.adressenStandplaats]: {
-    mapDetail: (result) => ({
-      title: 'Adres (standplaats)',
-      subTitle: result._display,
-      items: [
-        {
-          type: DetailResultItemType.Default,
-          label: 'Indicatie geconstateerd',
-          value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
-          status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Aanduiding in onderzoek',
-          value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
-          status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
-        },
-      ],
-      notifications: [
-        {
-          value: result.indicatie_geconstateerd ? 'Indicatie geconstateerd' : false,
+    mapDetail: (result) => {
+      const notifications: DetailResultNotification[] = []
+
+      if (result.indicatie_geconstateerd) {
+        notifications.push({
+          value: 'Indicatie geconstateerd',
           level: NotificationLevel.Error,
-        },
-        {
-          value: result.aanduiding_in_onderzoek ? 'In onderzoek' : false,
+        })
+      }
+
+      if (result.aanduiding_in_onderzoek) {
+        notifications.push({
+          value: 'In onderzoek',
           level: NotificationLevel.Error,
-        },
-      ],
-    }),
+        })
+      }
+
+      return {
+        notifications,
+        title: 'Adres (standplaats)',
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.Default,
+            label: 'Indicatie geconstateerd',
+            value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
+            status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Aanduiding in onderzoek',
+            value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
+            status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
+          },
+        ],
+      }
+    },
   },
   [endpointTypes.bedrijfsinvesteringszone]: {
     type: 'vsd/biz',
@@ -815,75 +860,84 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.vestiging]: {
     authScope: 'HR/R',
     normalization: vestiging,
-    mapDetail: (result) =>
-      result
-        ? {
-            title: categoryLabels.vestiging.singular,
-            subTitle: result._display,
-            items: [
-              {
-                type: DetailResultItemType.Default,
-                label: 'KvK-nummer',
-                value: result.kvkNumber,
-              },
-              {
-                type: DetailResultItemType.Default,
-                label: 'Vestigingsnummer',
-                value: result.vestigingsnummer,
-              },
-              {
-                type: DetailResultItemType.Default,
-                label: 'Bezoekadres',
-                value: result.bezoekadres.volledig_adres,
-              },
-              {
-                type: DetailResultItemType.Default,
-                label: 'SBI-code en -omschrijving',
-                value: result.activities,
-              },
-              {
-                type: DetailResultItemType.Default,
-                label: 'Type',
-                value: result.type,
-              },
-              {
-                type: DetailResultItemType.Default,
-                label: 'Soort bijzondere rechtstoestand',
-                value:
-                  result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label
-                    ? result.bijzondereRechtstoestand.label
-                    : false,
-                status: NotificationLevel.Error,
-              },
-            ],
-            notifications: [
-              {
-                value:
-                  result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label
-                    ? result.bijzondereRechtstoestand.label
-                    : false,
-                level: NotificationLevel.Error,
-              },
-              {
-                value: !result._display
-                  ? 'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.'
-                  : false,
-                level: NotificationLevel.Attention,
-              },
-            ],
-          }
-        : {
-            title: categoryLabels.vestiging.singular,
-            subTitle: 'Authenticatie vereist',
-            items: [],
-            notifications: [
-              {
-                value:
-                  'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.',
-                level: NotificationLevel.Attention,
-              },
-            ],
+    mapDetail: (result) => {
+      if (!result) {
+        return {
+          title: categoryLabels.vestiging.singular,
+          subTitle: 'Authenticatie vereist',
+          items: [],
+          notifications: [
+            {
+              value:
+                'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.',
+              level: NotificationLevel.Attention,
+            },
+          ],
+        }
+      }
+
+      const notifications: DetailResultNotification[] = []
+
+      if (result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label) {
+        notifications.push({
+          value:
+            result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label
+              ? result.bijzondereRechtstoestand.label
+              : false,
+          level: NotificationLevel.Error,
+        })
+      }
+
+      if (!result._display) {
+        notifications.push({
+          value:
+            'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.',
+          level: NotificationLevel.Attention,
+        })
+      }
+
+      return {
+        notifications,
+        title: categoryLabels.vestiging.singular,
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.Default,
+            label: 'KvK-nummer',
+            value: result.kvkNumber,
           },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Vestigingsnummer',
+            value: result.vestigingsnummer,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Bezoekadres',
+            value: result.bezoekadres.volledig_adres,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'SBI-code en -omschrijving',
+            value: result.activities,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Type',
+            value: result.type,
+          },
+          {
+            type: DetailResultItemType.Default,
+            label: 'Soort bijzondere rechtstoestand',
+            value:
+              result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label
+                ? result.bijzondereRechtstoestand.label
+                : false,
+            status: NotificationLevel.Error,
+          },
+        ],
+      }
+    },
   },
   [endpointTypes.winkelgebied]: {
     type: 'vsd/winkgeb',

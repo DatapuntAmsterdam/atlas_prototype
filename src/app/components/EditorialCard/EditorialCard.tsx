@@ -1,20 +1,20 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
 import {
   ascDefaultTheme,
   Card,
   CardContent,
   CardMedia,
-  Link,
   Heading,
-  Paragraph,
   Image,
+  Link,
+  Paragraph,
   themeColor,
   themeSpacing,
 } from '@datapunt/asc-ui'
-import getImageFromCms, { Resize } from '../../utils/getImageFromCms'
-import getContentTypeLabel from '../../utils/getContentTypeLabel'
+import React from 'react'
+import styled, { css } from 'styled-components'
 import { CmsType, SpecialType } from '../../../shared/config/cms.config'
+import getContentTypeLabel from '../../utils/getContentTypeLabel'
+import getImageFromCms, { Resize } from '../../utils/getImageFromCms'
 
 const notFoundImage = '/assets/images/not_found_thumbnail.jpg'
 
@@ -157,7 +157,7 @@ interface EditorialCardProps {
   type: CmsType
   specialType?: SpecialType
   date?: string
-  image: string
+  image?: string
   imageDimensions?: [number, number]
   compact?: boolean
   showContentType?: boolean
@@ -177,31 +177,12 @@ const EditorialCard: React.FC<EditorialCardProps> = ({
   highlighted = false,
   ...otherProps
 }) => {
-  const imageIsVertical = imageDimensions[0] !== imageDimensions[1] // Image dimensions indicate whether the image is square or not
-
-  const { srcSet, sizes } = getImageSize(
-    image,
-    imageIsVertical ? 'fit' : 'fill',
-    imageIsVertical ? imageDimensions[1] : imageDimensions[0],
-  )
-
   const contentTypeLabel = getContentTypeLabel(type, specialType)
 
   return (
     <StyledLink {...{ title, linkType: 'blank', ...otherProps }}>
       <StyledCard horizontal highlighted={highlighted}>
-        <StyledCardMedia
-          imageDimensions={imageDimensions}
-          vertical={imageIsVertical}
-          highlighted={highlighted}
-        >
-          <Image
-            {...(image ? { ...srcSet, ...sizes } : {})}
-            src={getImageFromCms(image, imageDimensions[0], imageDimensions[1]) || notFoundImage}
-            alt={title}
-            square
-          />
-        </StyledCardMedia>
+        {image && renderCardMedia({ title, highlighted, image, imageDimensions })}
         <StyledCardContent highlighted={highlighted}>
           {showContentType && contentTypeLabel && (
             <div>
@@ -223,6 +204,7 @@ const EditorialCard: React.FC<EditorialCardProps> = ({
 
           {date && (
             <div>
+              {/* @ts-ignore */}
               <MetaText forwardedAs="time" data-test="metaText" datetime={date}>
                 {specialType === SpecialType.Dashboard || specialType === SpecialType.Story
                   ? `Laatst gewijzigd: ${date}`
@@ -233,6 +215,37 @@ const EditorialCard: React.FC<EditorialCardProps> = ({
         </StyledCardContent>
       </StyledCard>
     </StyledLink>
+  )
+}
+
+interface CardMediaProps {
+  title: string
+  highlighted: boolean
+  image: string
+  imageDimensions: [number, number]
+}
+
+function renderCardMedia({ title, highlighted, image, imageDimensions }: CardMediaProps) {
+  const imageIsVertical = imageDimensions[0] !== imageDimensions[1] // Image dimensions indicate whether the image is square or not
+  const { srcSet, sizes } = getImageSize(
+    image,
+    imageIsVertical ? 'fit' : 'fill',
+    imageIsVertical ? imageDimensions[1] : imageDimensions[0],
+  )
+
+  return (
+    <StyledCardMedia
+      imageDimensions={imageDimensions}
+      vertical={imageIsVertical}
+      highlighted={highlighted}
+    >
+      <Image
+        {...(image ? { ...srcSet, ...sizes } : {})}
+        src={getImageFromCms(image, imageDimensions[0], imageDimensions[1]) || notFoundImage}
+        alt={title}
+        square
+      />
+    </StyledCardMedia>
   )
 }
 

@@ -5,25 +5,15 @@ import {
   PolygonType,
   PolylineType,
 } from '@datapunt/arm-draw'
-import { themeColor, ascDefaultTheme } from '@datapunt/asc-ui'
-import L, { Polygon, LatLng, LatLngTuple, LatLngLiteral, LatLngBoundsLiteral } from 'leaflet'
+import { ascDefaultTheme, themeColor } from '@datapunt/asc-ui'
 import { useMapInstance } from '@datapunt/react-maps'
+import L, { LatLng, LatLngBoundsLiteral, LatLngLiteral, Polygon } from 'leaflet'
 import React, { useContext, useEffect, useMemo } from 'react'
 import PARAMETERS from '../../../../store/parameters'
 import DataSelectionContext from '../DataSelectionContext'
 import MapContext from '../MapContext'
 import { Overlay, SnapPoint } from '../types'
 import paramsRegistry from '../../../../store/params-registry'
-
-type MarkerGroup = {
-  id: string
-  markers: [
-    {
-      id: string
-      latLng: LatLngTuple[]
-    },
-  ]
-}
 
 type Props = {
   isOpen: boolean
@@ -75,9 +65,12 @@ const bindDistanceAndAreaToTooltip = (layer: ExtendedLayer, toolTipText: string)
 
 const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
   const { setPositionFromSnapPoint, variant } = useContext(MapPanelContext)
-  const { fetchData, fetchMapVisualization, mapVisualization, removeDataSelection } = useContext(
-    DataSelectionContext,
-  )
+  const {
+    fetchData,
+    fetchMapVisualization,
+    mapVisualizations: mapVisualization,
+    removeDataSelection,
+  } = useContext(DataSelectionContext)
   const {
     drawingGeometries,
     addDrawingGeometry,
@@ -91,17 +84,19 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
   const drawnItemsGroup = useMemo(() => new L.FeatureGroup(), [])
 
   const getData = async (layer: ExtendedLayer, distanceText: string) => {
-    const latLngs = layer.getLatLngs()
+    const latLngs = layer.getLatLngs() as LatLng[][]
 
     // convert the geometry to match a type that only contains lat/lng
     const drawingGeometry =
-      layer instanceof Polygon ? (latLngs[0] as LatLngLiteral[]) : (latLngs as LatLngLiteral[])
+      layer instanceof Polygon
+        ? (latLngs[0] as LatLngLiteral[])
+        : ((latLngs as unknown) as LatLngLiteral[])
     addDrawingGeometry(drawingGeometry)
 
     if (layer instanceof Polygon) {
       setPositionFromSnapPoint(SnapPoint.Halfway)
 
-      const firstDrawingPoint = latLngs[0] as LatLng
+      const firstDrawingPoint = latLngs[0]
       await fetchMapVisualization(latLngs, layer.id)
       await fetchData(
         latLngs,
@@ -115,7 +110,8 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
           distanceText,
         },
       )
-      pan(firstDrawingPoint, variant === 'drawer' ? 'vertical' : 'horizontal', 20)
+
+      pan(firstDrawingPoint[0], variant === 'drawer' ? 'vertical' : 'horizontal', 20)
     }
   }
 
@@ -143,7 +139,7 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
 
     // Delete or reset the drawing geometries
     if (editLayerBounds?.length) {
-      deleteDrawingGeometry(editLayerBounds[0])
+      deleteDrawingGeometry([editLayerBounds[0]])
     } else {
       resetDrawingGeometries()
     }

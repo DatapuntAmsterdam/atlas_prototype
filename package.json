@@ -38,7 +38,7 @@
     "@datapunt/asc-ui": "^0.22.0",
     "@datapunt/matomo-tracker-js": "0.1.5",
     "@datapunt/matomo-tracker-react": "0.1.4",
-    "@datapunt/react-maps": "^0.8.2-alpha.0",
+    "@datapunt/react-maps": "^0.8.3-alpha",
     "@sentry/browser": "5.20.0",
     "@turf/turf": "^5.1.6",
     "@types/file-saver": "^2.0.1",
@@ -96,7 +96,7 @@
     "remove-markdown": "0.3.0",
     "reselect": "4.0.0",
     "styled-components": "^5.1.1",
-    "urql": "^1.9.7",
+    "urql": "^1.9.8",
     "uuid": "^8.2.0"
   },
   "devDependencies": {
@@ -199,8 +199,8 @@
     "redux-mock-store": "1.5.4",
     "redux-saga-test-plan": "3.7.0",
     "rimraf": "3.0.2",
-    "sass": "^1.26.9",
-    "sass-loader": "^9.0.1",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
     "svg-spritemap-webpack-plugin": "3.5.7",
     "terser-webpack-plugin": "^3.0.7",

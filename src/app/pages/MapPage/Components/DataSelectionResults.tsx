@@ -15,7 +15,7 @@ import {
   themeSpacing,
 } from '@datapunt/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import L, { LatLng } from 'leaflet'
+import L, { LatLng, LatLngExpression } from 'leaflet'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import RouterLink from 'redux-first-router-link'
@@ -103,6 +103,7 @@ const StyledSelect = styled(Select)`
 
 type Props = {
   currentOverlay: Overlay
+  setShowDrawTool: (show: boolean) => void
 }
 
 const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool }) => {
@@ -110,7 +111,7 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
   const [highlightMarker, setHighlightMarker] = useState<LatLng | null>(null)
   const {
     dataSelection,
-    mapVisualization,
+    mapVisualizations: mapVisualization,
     fetchData,
     type,
     setType,
@@ -121,7 +122,9 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
   const userScopes = useSelector(getUserScopes)
   const { trackEvent } = useMatomo()
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
-  const memoHighlightMaker = useMemo(() => highlightMarker || [0, 0], [highlightMarker])
+  const memoHighlightMaker = useMemo<LatLngExpression>(() => highlightMarker || [0, 0], [
+    highlightMarker,
+  ])
 
   // Effect to delay the loading states, this is to prevent the results block to collapse and re-open in a short time
   useEffect(() => {
@@ -151,6 +154,8 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
             type !== DataSelectionType.BRK && mapVisualization
               ? mapVisualization
                   .find(({ id: markerGroupId }) => markerGroupId === id)
+                  // TODO: Fix these typing issues.
+                  // @ts-ignore
                   ?.data?.find(({ id: markerId }: { id: string }) => markerId === location.id)
               : null,
         })),
@@ -180,15 +185,15 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
       if (selection) {
         ;(async () => {
           await fetchData(
-            selection?.mapData?.layer?.getLatLngs() as LatLng[][],
-            selection?.mapData?.layer?.id,
+            selection.mapData?.layer?.getLatLngs() as LatLng[][],
+            selection.mapData?.layer?.id,
             {
               size: selection.size,
               page: page || selection.page,
             },
             {
-              layer: selection?.mapData?.layer,
-              distanceText: selection?.mapData?.distanceText,
+              layer: selection.mapData?.layer,
+              distanceText: selection.mapData?.distanceText || '',
             },
           )
         })()
@@ -223,32 +228,38 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
             </option>
           ))}
         </StyledSelect>
+
         {showDesktopVariant ? (
-          <Button
-            as={TableRouterLink}
-            variant="primaryInverted"
-            title="Resultaten in tabel weergeven"
-            type="button"
-            to={config[type].toTableAction}
-            iconLeft={<Table />}
-          >
-            Tabel weergeven
-          </Button>
+          <>
+            {/* @ts-ignore */}
+            <Button
+              as={TableRouterLink}
+              variant="primaryInverted"
+              title="Resultaten in tabel weergeven"
+              type="button"
+              iconLeft={<Table />}
+              {...({ to: config[type].toTableAction } as any)}
+            >
+              Tabel weergeven
+            </Button>
+          </>
         ) : (
-          <Button
-            as={TableRouterLink}
-            type="button"
-            variant="primaryInverted"
-            title="Resultaten in tabel weergeven"
-            size={40}
-            icon={<Table />}
-            iconSize={25}
-            to={config[type].toTableAction}
-          />
+          <>
+            <Button
+              as={TableRouterLink}
+              type="button"
+              variant="primaryInverted"
+              title="Resultaten in tabel weergeven"
+              size={40}
+              icon={<Table />}
+              iconSize={25}
+              {...({ to: config[type].toTableAction } as any)}
+            />
+          </>
         )}
       </Wrapper>
       {forbidden ? (
-        <StyledAlert level={NotificationLevel.Attention} compact dismissible>
+        <StyledAlert level={NotificationLevel.Attention} dismissible>
           <Paragraph>
             {userScopes.includes(AuthScope.BRK)
               ? `Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met

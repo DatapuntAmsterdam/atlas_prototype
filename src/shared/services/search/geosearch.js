@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle,no-param-reassign */
 import identity from 'lodash.identity'
+import environment from '../../../environment'
 import { fetchWithToken } from '../api/api'
 import geosearchFormatter from './geosearch-formatter'
 import SEARCH_CONFIG from './search-config'
 import { formatCategory } from './search-formatter'
-import environment from '../../../environment'
 
 function isNumber(value) {
   return typeof value === 'number'
@@ -159,6 +159,7 @@ export default function geosearch(location, user) {
         false,
         true,
       ).catch(() => ({ features: [] })) // empty features on failure of api call
+
       allRequests.push(request)
     }
   })
