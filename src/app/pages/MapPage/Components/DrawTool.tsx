@@ -93,7 +93,8 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
     const latLngs = layer.getLatLngs()
 
     // convert the geometry to match a type that only contains lat/lng
-    const drawingGeometry = latLngs[0] as LatLngLiteral[]
+    const drawingGeometry =
+      layer instanceof Polygon ? (latLngs[0] as LatLngLiteral[]) : (latLngs as LatLngLiteral[])
     addDrawingGeometry(drawingGeometry)
 
     if (layer instanceof Polygon) {
@@ -130,7 +131,9 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
     const editLayerBounds = layersInEditMode.map((layer) => {
       const coordinates = layer.getLatLngs()
 
-      return coordinates[0] as LatLngLiteral
+      return layer instanceof Polygon
+        ? (coordinates[0] as LatLngLiteral)
+        : ((coordinates as unknown) as LatLngLiteral)
     })
     // remove the markerGroups.
     if (mapVisualization) {
@@ -164,7 +167,7 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
       const bounds = (coordinates.map(({ lat, lng }) => [lat, lng]) as unknown) as LatLng[]
 
       return L.polyline(bounds, {
-        color: themeColor('support', 'invalid')({ theme: ascDefaultTheme }),
+        color: themeColor('support', 'valid')({ theme: ascDefaultTheme }),
         bubblingMouseEvents: false,
       }) as PolylineType
     }

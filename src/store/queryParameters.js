@@ -549,8 +549,10 @@ export function encodeBounds(values) {
   }
 
   return values
-    .map(
-      (value) => value.map(({ lat, lng }) => `${lat},${lng}`).join('-'), // seperates coordinates within one shape
+    .map((value) =>
+      Array.isArray(value)
+        ? value.map(({ lat, lng }) => `${lat},${lng}`).join('-') // seperates coordinates within one shape
+        : `${value.lat},${value.lng}`,
     )
     .join('|') // seperates different shapes
 }
