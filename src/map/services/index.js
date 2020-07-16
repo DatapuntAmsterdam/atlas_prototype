@@ -30,7 +30,7 @@ export async function getMapLayers() {
 }
 
 export async function getPanelLayers() {
-  const query = `{ mapCollectionSearch(input: { limit: 9999 }) { results { id title mapLayers { id title legendItems { id title url params layers iconUrl imageRule notSelectable noDetail } authScope imageRule iconUrl url params layers detailUrl detailParams { item, datasets } detailIsShape type noDetail minZoom maxZoom } } } }`
+  const query = `{ mapCollectionSearch(input: { limit: 9999 }) { results { id title mapLayers { id title legendItems { ... on MapLayer { id title url params layers iconUrl imageRule notSelectable noDetail } ... on LegendItem { title iconUrl imageRule notSelectable } } authScope imageRule iconUrl url params layers detailUrl detailParams { item, datasets } detailIsShape type noDetail minZoom maxZoom } } } }`
   const { results: mapPanelLayerResults } = await fetchMap('mapCollectionSearch', query)
 
   return mapPanelLayerResults
