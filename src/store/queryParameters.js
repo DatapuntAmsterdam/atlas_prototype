@@ -56,7 +56,6 @@ import {
 } from '../shared/services/coordinate-reference-system'
 import PARAMETERS from './parameters'
 import paramsRegistry from './params-registry'
-import getParam from '../app/utils/getParam'
 
 const routesWithSearch = [
   routing.search.type,
@@ -220,13 +219,15 @@ export default paramsRegistry
       })
       .add(routing.map.type, null, '', {
         defaultValue: null,
-        selector: () => getParam(PARAMETERS.MAP_BACKGROUND),
+        selector: () => paramsRegistry.getParam(PARAMETERS.MAP_BACKGROUND),
       })
   })
   .addParameter(PARAMETERS.DRAWING_GEOMETRY, (routes) => {
     routes.add(routing.map.type, null, '', {
       defaultValue: null,
-      selector: () => getParam(PARAMETERS.DRAWING_GEOMETRY),
+      selector: () => paramsRegistry.getParam(PARAMETERS.DRAWING_GEOMETRY),
+      encode: (val) => (val ? encodeBounds(val) : null),
+      decode: (val) => (val ? decodeBounds(val) : null),
     })
   })
   .addParameter(PARAMETERS.PANORAMA_TAGS, (routes) => {
@@ -392,7 +393,9 @@ export default paramsRegistry
       )
       .add(routing.map.type, null, '', {
         defaultValue: null,
-        selector: () => getParam(PARAMETERS.LAYERS),
+        selector: () => paramsRegistry.getParam(PARAMETERS.LAYERS),
+        encode: (val) => (val ? encodeLayers(val) : null),
+        decode: (val) => (val ? decodeLayers(val) : null),
       })
   })
   .addParameter(PARAMETERS.LOCATION, (routes) => {
@@ -438,7 +441,9 @@ export default paramsRegistry
       })
       .add(routing.map.type, null, '', {
         defaultValue: null,
-        selector: () => getParam(PARAMETERS.LOCATION),
+        selector: () => paramsRegistry.getParam(PARAMETERS.LOCATION),
+        encode: (val) => (val ? encodeLocation(val) : ''),
+        decode: (val) => (val ? decodeLocation(val) : ''),
       })
   })
   .addParameter(PARAMETERS.MARKER, (routes) => {

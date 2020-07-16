@@ -10,11 +10,10 @@ import L, { Polygon, LatLng, LatLngTuple, LatLngLiteral, LatLngBoundsLiteral } f
 import { useMapInstance } from '@datapunt/react-maps'
 import React, { useContext, useEffect, useMemo } from 'react'
 import PARAMETERS from '../../../../store/parameters'
-import { decodeBounds } from '../../../../store/queryParameters'
-import getParam from '../../../utils/getParam'
 import DataSelectionContext from '../DataSelectionContext'
 import MapContext from '../MapContext'
 import { Overlay, SnapPoint } from '../types'
+import paramsRegistry from '../../../../store/params-registry'
 
 type MarkerGroup = {
   id: string
@@ -88,6 +87,8 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
 
   const mapInstance = useMapInstance()
   const { pan } = usePanToLatLng()
+
+  const drawnItemsGroup = useMemo(() => new L.FeatureGroup(), [])
 
   const getData = async (layer: ExtendedLayer, distanceText: string) => {
     const latLngs = layer.getLatLngs()
@@ -186,10 +187,10 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
 
   const initialDrawnItems = useMemo(() => {
     // Get the drawing geometry from the url here, before the context is updated to prevent newly drawm geometries to be pushed to the DrawToolComponent
-    const initialDrawingGeometries = getParam(PARAMETERS.DRAWING_GEOMETRY)
+    const initialDrawingGeometries = paramsRegistry.getParam(PARAMETERS.DRAWING_GEOMETRY)
 
     if (initialDrawingGeometries) {
-      return decodeBounds(initialDrawingGeometries).map((initialDrawingGeometry: LatLngLiteral[]) =>
+      return initialDrawingGeometries.map((initialDrawingGeometry: LatLngLiteral[]) =>
         setInitialDrawing(initialDrawingGeometry),
       )
     }
@@ -202,6 +203,19 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
       mapInstance.fitBounds((drawingGeometries as unknown) as LatLngBoundsLiteral)
     }
   }, [mapInstance, drawingGeometries])
+
+  // Look for changes in the history
+  useEffect(() => {
+    paramsRegistry.history.listen((_location: any, action: string) => {
+      if (action === 'POP') {
+        resetDrawingGeometries()
+        onToggle(false)
+
+        // Clear the featureGroup passed to the DrawTool
+        drawnItemsGroup.clearLayers()
+      }
+    })
+  }, [paramsRegistry.history])
 
   return (
     <DrawToolComponent
@@ -218,6 +232,7 @@ const DrawTool: React.FC<Props> = ({ onToggle, isOpen, setCurrentOverlay }) => {
       onDrawStart={() => {
         setCurrentOverlay(Overlay.Results)
       }}
+      drawnItemsGroup={drawnItemsGroup}
     />
   )
 }

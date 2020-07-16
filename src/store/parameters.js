@@ -5,6 +5,7 @@ export default {
   PAGE: 'pagina',
   GEO: 'geo',
   DRAWING_GEOMETRY: 'tekening',
+  DETAIL: 'detail',
   VIEW: 'modus',
   CATEGORY: 'categorie',
   VIEW_CENTER: 'center',

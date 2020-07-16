@@ -91,12 +91,10 @@ const MapPage: React.FC = () => {
   ])
 
   useEffect(() => {
-    if (activeMapLayers?.length) {
+    if (activeMapLayers?.length && mapLayers?.length) {
       getOverlays()
-    } else {
-      getOverlays(activeMapLayers, mapLayers, {})
     }
-  }, [activeMapLayers])
+  }, [activeMapLayers, mapLayers])
 
   return (
     <>

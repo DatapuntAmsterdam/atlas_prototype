@@ -2,6 +2,7 @@ import get from 'lodash.get'
 import isUndefined from 'lodash.isundefined'
 import queryString from 'querystring'
 import PARAMETERS from '../parameters'
+import getState from '../../shared/services/redux/get-state'
 
 /**
  * ParamsRegistry manages the relations between url parameters, reducers and routes.
@@ -307,6 +308,63 @@ class ParamsRegistry {
           }
         : acc
     }, {})
+  }
+
+  /**
+   * Set the param to the location in the history object
+   * @param name
+   * @param value
+   * @param replace
+   * @returns void
+   */
+  setParam(param, value, replace = false) {
+    if (typeof window === 'undefined') {
+      return
+    }
+    const url = new URL(window.location.href)
+
+    // Get the route from the redux state
+    const { type: routeType } = getState().location
+    const { encode, defaultValue } =
+      (this.queryParamResult[param] && this.queryParamResult[param].routes[routeType]) || {}
+
+    // Encode the value if needed
+    const paramValue = encode ? encode(value) : value
+
+    // Make sure the parameter is not updated when equal to current or default value
+    if (paramValue === url.searchParams.get(param) || paramValue === defaultValue) {
+      return
+    }
+
+    if (paramValue) {
+      url.searchParams.set(param, paramValue)
+    } else {
+      url.searchParams.delete(param)
+    }
+
+    // Set the action
+    const action = replace ? 'replace' : 'push'
+
+    // use the history object from the param registry
+    // https://github.com/ReactTraining/history/blob/v4/docs/GettingStarted.md
+    this.historyObject[action](url.pathname + url.search)
+  }
+
+  /**
+   * Get the requested param from the history object and decode it
+   * @param param
+   * @returns void
+   */
+  getParam(param) {
+    const value = new URLSearchParams(this.historyObject.location.search).get(param)
+
+    // Get the route from the redux state
+    const { type: routeType } = getState().location
+    const { decode } =
+      (this.queryParamResult[param] && this.queryParamResult[param].routes[routeType]) || {}
+
+    // Return the (decoded) value
+    return decode ? decode(value) : value
   }
 
   set history(history) {
