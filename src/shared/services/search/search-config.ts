@@ -96,7 +96,7 @@ export default {
     },
     { uri: 'geosearch/biz/' },
     { uri: 'geosearch/winkgeb/' },
-    { uri: 'parkeervakken/geosearch/' },
+    { uri: 'geosearch/', params: { datasets: 'parkeervakken' } },
     { uri: 'geosearch/oplaadpunten/' },
     { uri: 'geosearch/bekendmakingen/', radius: 25 },
     { uri: 'geosearch/evenementen/', radius: 25 },

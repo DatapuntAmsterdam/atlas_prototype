@@ -1,5 +1,4 @@
 import { fetchWithToken } from '../../../shared/services/api/api'
-import { getFeaturesFromResult } from '../map-search/map-search'
 import MAP_CONFIG from '../map.config'
 import environment from '../../../environment'
 
@@ -39,8 +38,8 @@ export default async function fetchNearestDetail(location, layers, zoom) {
         layers.map(async (layer) => {
           const params = generateParams(layer, location, zoom)
           const result = await fetchWithToken(environment.API_ROOT + layer.detailUrl, params)
-          const features = getFeaturesFromResult(layer.detailUrl, result)
-          return retrieveLayers(features, layer.detailIsShape)
+
+          return retrieveLayers(result.features, layer.detailIsShape)
         }),
       )
     ).reduce(/* istanbul ignore next */ (a, b) => [...a, ...b]),
