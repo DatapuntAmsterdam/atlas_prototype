@@ -48,7 +48,7 @@ describe('mapSearch service', () => {
         {
           categoryLabel: 'Explosief',
           categoryLabelPlural: 'Explosieven',
-          results: Array(13).fill({
+          results: Array(14).fill({
             // !!!!IMPORTANT: UPDATE WITH +1 WHEN ADDING NEW GEOSEARCH
             categoryLabel: 'Explosief',
             categoryLabelPlural: 'Explosieven',
@@ -95,7 +95,7 @@ describe('mapSearch service', () => {
         {
           categoryLabel: 'Explosief',
           categoryLabelPlural: 'Explosieven',
-          results: Array(12).fill({
+          results: Array(13).fill({
             // !!!!IMPORTANT: UPDATE WITH +1 WHEN ADDING NEW GEOSEARCH
             categoryLabel: 'Explosief',
             categoryLabelPlural: 'Explosieven',
@@ -114,7 +114,7 @@ describe('mapSearch service', () => {
     it('should return results based on user scope', async () => {
       const data = await search({ latitude: 1, longitude: 0 }, {})
 
-      expect(data.results[0].results.length).toBe(12) // !!!!IMPORTANT: UPDATE WITH +1 WHEN ADDING NEW GEOSEARCH
+      expect(data.results[0].results.length).toBe(13) // !!!!IMPORTANT: UPDATE WITH +1 WHEN ADDING NEW GEOSEARCH
     })
   })
 

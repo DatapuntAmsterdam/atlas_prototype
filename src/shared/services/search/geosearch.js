@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle,no-param-reassign */
 import identity from 'lodash.identity'
-import { getFeaturesFromResult } from '../../../map/services/map-search/map-search'
 import { fetchWithToken } from '../api/api'
 import geosearchFormatter from './geosearch-formatter'
 import SEARCH_CONFIG from './search-config'
@@ -159,10 +158,7 @@ export default function geosearch(location, user) {
         searchParams,
         false,
         true,
-      ).then(
-        (data) => ({ features: getFeaturesFromResult(endpoint.uri, data) }),
-        () => ({ features: [] }),
-      ) // empty features on failure of api call
+      ).catch(() => ({ features: [] })) // empty features on failure of api call
       allRequests.push(request)
     }
   })

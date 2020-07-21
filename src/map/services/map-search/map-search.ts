@@ -32,7 +32,7 @@ const endpoints: Endpoint[] = [
   },
   { uri: 'geosearch/biz/' },
   { uri: 'geosearch/winkgeb/' },
-  { uri: 'parkeervakken/geosearch/' },
+  { uri: 'geosearch/', params: { datasets: 'parkeervakken' } },
   { uri: 'geosearch/oplaadpunten/', radius: 25 },
   { uri: 'geosearch/bekendmakingen/', radius: 25 },
   { uri: 'geosearch/evenementen/', radius: 25 },
@@ -73,26 +73,6 @@ const relatedResourcesByType = {
       authScope: 'HR/R',
     },
   ],
-}
-
-export const geosearchTypes = {
-  parkeervakken: 'parkeervakken/geosearch/',
-}
-
-// this handles the geosearch endpoints that are not included in the geosearch api
-// and don't implement the geosearch api interface
-export const getFeaturesFromResult = (endpointType, result) => {
-  if (endpointType === geosearchTypes.parkeervakken) {
-    return result.map((item) => ({
-      properties: {
-        display: item.id,
-        type: 'parkeervakken/parkeervakken',
-        uri: environment.API_ROOT + item._links.self.href.substring(1),
-      },
-    }))
-  }
-
-  return result.features
 }
 
 export const fetchRelatedForUser = (user) => (data) => {
@@ -168,9 +148,6 @@ export default function mapSearch(
     const request = fetchWithToken(
       `${environment.API_ROOT}${endpoint.uri}?${searchParams.toString()}`,
     )
-      .then((result) => ({
-        features: getFeaturesFromResult(endpoint.uri, result),
-      }))
       .then(fetchRelatedForUser(user))
       .then(
         (features) => features.map((feature: any) => transformResultByType(feature)),
