@@ -1,4 +1,4 @@
-import merge from 'webpack-merge'
+import { merge } from 'webpack-merge'
 import { createConfig, distPath } from './webpack.common'
 
 export default [createConfig({ legacy: false, singleBuild: true, mode: 'development' })].map(

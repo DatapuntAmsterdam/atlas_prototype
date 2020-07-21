@@ -1,5 +1,5 @@
 import TerserPlugin from 'terser-webpack-plugin'
-import merge from 'webpack-merge'
+import { merge } from 'webpack-merge'
 import { createConfig } from './webpack.common'
 
 const CHUNKS = {

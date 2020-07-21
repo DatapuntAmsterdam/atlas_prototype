@@ -1,5 +1,5 @@
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
-import merge from 'webpack-merge'
+import { merge } from 'webpack-merge'
 import configs from './webpack.prod'
 
 export default (env: { [key: string]: string }) => {
