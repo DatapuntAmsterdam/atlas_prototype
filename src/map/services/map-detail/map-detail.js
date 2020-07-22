@@ -10,6 +10,7 @@ export const pageEndpointTypeMapping = {
   'bag/standplaats/': 'bag/v1.1/standplaats/',
   'bag/verblijfsobject/': 'bag/v1.1/verblijfsobject/',
   'bag/woonplaats/': 'bag/v1.1/woonplaats/',
+  'bouwstroompunten/bouwstroompunten/': 'v1/bouwstroompunten/bouwstroompunten/',
   'explosieven/gevrijwaardgebied/': 'milieuthemas/explosieven/gevrijwaardgebied/',
   'explosieven/inslagen/': 'milieuthemas/explosieven/inslagen/',
   'explosieven/uitgevoerdonderzoek/': 'milieuthemas/explosieven/uitgevoerdonderzoek/',

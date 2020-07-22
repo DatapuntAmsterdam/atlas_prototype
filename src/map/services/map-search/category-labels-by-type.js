@@ -10,6 +10,7 @@ const categoryLabelsByType = {
   'bommenkaart/gevrijwaardgebied': categoryLabels.explosief,
   'bommenkaart/uitgevoerdonderzoek': categoryLabels.explosief,
   'bommenkaart/verdachtgebied': categoryLabels.explosief,
+  'bouwstroompunten/bouwstroompunten': categoryLabels.bouwstroompunten,
   'fietspaaltjes/fietspaaltjes': categoryLabels.fietspaaltje,
   'gebieden/bouwblok': categoryLabels.gebied,
   'gebieden/buurt': categoryLabels.gebied,

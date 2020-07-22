@@ -39,6 +39,7 @@ const endpoints: Endpoint[] = [
   { uri: 'geosearch/reclamebelasting/', radius: 25 },
   { uri: 'geosearch/', radius: 25, params: { datasets: 'fietspaaltjes' } },
   { uri: 'geosearch/', radius: 25, params: { datasets: 'grex,projecten' } },
+  { uri: 'geosearch/', radius: 25, params: { datasets: 'bouwstroompunten' } },
 ]
 
 const relatedResourcesByType = {
