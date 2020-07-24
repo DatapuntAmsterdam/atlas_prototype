@@ -175,7 +175,7 @@
     "husky": "4.2.5",
     "identity-obj-proxy": "3.0.0",
     "imports-loader": "^1.1.0",
-    "jasmine-core": "3.5.0",
+    "jasmine-core": "3.6.0",
     "jest": "26.1.0",
     "jest-environment-jsdom": "26.1.0",
     "jest-environment-jsdom-global": "2.0.4",
