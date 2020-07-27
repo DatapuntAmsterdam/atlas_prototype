@@ -233,7 +233,7 @@ class MapLeaflet extends React.Component {
     return (
       <ReactResizeDetector
         handleWidth
-        handleHeigh
+        handleHeight
         style={{
           bottom: '0',
           left: '0',
