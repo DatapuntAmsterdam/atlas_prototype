@@ -2,8 +2,7 @@
 
 exports[`MapLeaflet component should render brkMarkers 1`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -20,6 +19,7 @@ exports[`MapLeaflet component should render brkMarkers 1`] = `
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -136,8 +136,7 @@ exports[`MapLeaflet component should render brkMarkers 1`] = `
 
 exports[`MapLeaflet component should render clusters 1`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -154,6 +153,7 @@ exports[`MapLeaflet component should render clusters 1`] = `
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -301,8 +301,7 @@ exports[`MapLeaflet component should render clusters 1`] = `
 
 exports[`MapLeaflet component should render clusters 2`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -319,6 +318,7 @@ exports[`MapLeaflet component should render clusters 2`] = `
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -466,8 +466,7 @@ exports[`MapLeaflet component should render clusters 2`] = `
 
 exports[`MapLeaflet component should render map with base layer and update base layer if props change 1`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -484,6 +483,7 @@ exports[`MapLeaflet component should render map with base layer and update base 
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -592,8 +592,7 @@ exports[`MapLeaflet component should render map with base layer and update base 
 
 exports[`MapLeaflet component should render map with base layer and update base layer if props change 2`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -610,6 +609,7 @@ exports[`MapLeaflet component should render map with base layer and update base 
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -718,8 +718,7 @@ exports[`MapLeaflet component should render map with base layer and update base 
 
 exports[`MapLeaflet component should render map with coordinates in lat/lon 1`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -736,6 +735,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 1`] 
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -814,8 +814,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 1`] 
 
 exports[`MapLeaflet component should render map with coordinates in lat/lon 2`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -832,6 +831,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 2`] 
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -1053,8 +1053,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 2`] 
 
 exports[`MapLeaflet component should render map with coordinates in lat/lon 3`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -1071,6 +1070,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 3`] 
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -1257,8 +1257,7 @@ exports[`MapLeaflet component should render map with coordinates in lat/lon 3`] 
 
 exports[`MapLeaflet component should render map with geoJSON with RD coordinates 1`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -1275,6 +1274,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -1353,8 +1353,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
 
 exports[`MapLeaflet component should render map with geoJSON with RD coordinates 2`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -1371,6 +1370,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -1477,8 +1477,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
 
 exports[`MapLeaflet component should render map with geoJSON with RD coordinates 3`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -1495,6 +1494,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -1602,8 +1602,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
 
 exports[`MapLeaflet component should render map with geoJSON with RD coordinates 4`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -1620,6 +1619,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -1802,8 +1802,7 @@ exports[`MapLeaflet component should render map with geoJSON with RD coordinates
 
 exports[`MapLeaflet component should render map with without layers and add/remove layers if props change 1`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -1820,6 +1819,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -1898,8 +1898,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
 
 exports[`MapLeaflet component should render map with without layers and add/remove layers if props change 2`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -1916,6 +1915,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -2008,8 +2008,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
 
 exports[`MapLeaflet component should render map with without layers and add/remove layers if props change 3`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -2026,6 +2025,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -2104,8 +2104,7 @@ exports[`MapLeaflet component should render map with without layers and add/remo
 
 exports[`MapLeaflet component should render markers 1`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -2122,6 +2121,7 @@ exports[`MapLeaflet component should render markers 1`] = `
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
@@ -2632,8 +2632,7 @@ exports[`MapLeaflet component should render markers 1`] = `
 
 exports[`MapLeaflet component should render markers 2`] = `
 <ResizeDetector
-  handleHeigh={true}
-  handleHeight={false}
+  handleHeight={true}
   handleWidth={true}
   nodeType="div"
   onResize={[Function]}
@@ -2650,6 +2649,7 @@ exports[`MapLeaflet component should render markers 2`] = `
     }
   }
   targetDomEl={null}
+  targetRef={null}
 >
   <Map
     attributionControl={false}
