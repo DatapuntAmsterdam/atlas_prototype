@@ -19,30 +19,13 @@ pipeline {
   }
 
   stages {
-    stage('Unit tests') {
-      options {
-        timeout(time: 30, unit: 'MINUTES')
-      }
-      environment {
-        PROJECT = "${PROJECT_PREFIX}unit"
-      }
-      steps {
-        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit test-unit"
-      }
-      post {
-        always {
-          sh "docker-compose -p ${PROJECT} down -v || true"
-        }
-      }
-    }
-
     stage('Build and push Docker image') {
       options {
         timeout(time: 30, unit: 'MINUTES')
       }
       steps {
         script {
-          sh "docker build -t ${IMAGE_FRONTEND_BUILD} --shm-size 1G ."
+          sh "docker build -t ${IMAGE_FRONTEND_BUILD} --build-arg GIT_COMMIT=${GIT_COMMIT} --shm-size 1G ."
         }
 
         sh "docker push ${IMAGE_FRONTEND_BUILD}"
