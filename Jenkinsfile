@@ -42,7 +42,7 @@ pipeline {
       }
       steps {
         script {
-          sh "docker build -t ${IMAGE_FRONTEND_BUILD} --shm-size 1G ."
+          sh "docker build -t ${IMAGE_FRONTEND_BUILD} --build-arg GIT_COMMIT=${GIT_COMMIT} --shm-size 1G ."
         }
 
         sh "docker push ${IMAGE_FRONTEND_BUILD}"
