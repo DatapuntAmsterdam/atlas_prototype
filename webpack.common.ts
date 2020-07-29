@@ -291,6 +291,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       ...(!options.singleBuild ? [new HtmlWebpackMultiBuildPlugin()] : []),
       new ForkTsCheckerWebpackPlugin({
         typescript: {
+          memoryLimit: 4096,
           diagnosticOptions: {
             semantic: true,
             syntactic: true,
