@@ -2,7 +2,7 @@
 
     <div class="resources-type" ng-repeat="resourceType in vm.apiData.results.resources">
         <div class="resources-type__header">
-            <span class="resources-type__header-title">{{resourceType.type | optionLabel: vm.catalogFilters.resourceTypes}}</span>
+            <h4 class="resources-type__header-title">{{resourceType.type | optionLabel: vm.catalogFilters.resourceTypes}}</h4>
         </div>
         <div class="resources-type__content" ng-repeat="resource in resourceType.rows">
             <div class="resources-type__content-item">
