@@ -58,17 +58,20 @@ export default memo(({ currentPage, query }) => {
 
   return (
     <FilterBox label="Categorieën">
-      {FILTERS.map(({ page, to, title, count }) => (
-        <FilterOption
-          key={page}
-          {...(currentPage === page ? ACTIVE_LINK_PROPS : { as: RouterLink, to, title })}
-        >
-          {SEARCH_PAGE_CONFIG[page].label}{' '}
-          {page === routing.search.page
-            ? isDefined(totalCount) && `(${formatCount(totalCount)})`
-            : isDefined(count) && `(${formatCount(count)})`}
-        </FilterOption>
-      ))}
+      <ul>
+        {FILTERS.map(({ page, to, title, count }) => (
+          <li key={page}>
+            <FilterOption
+              {...(currentPage === page ? ACTIVE_LINK_PROPS : { as: RouterLink, to, title })}
+            >
+              {SEARCH_PAGE_CONFIG[page].label}{' '}
+              {page === routing.search.page
+                ? isDefined(totalCount) && `(${formatCount(totalCount)})`
+                : isDefined(count) && `(${formatCount(count)})`}
+            </FilterOption>
+          </li>
+        ))}
+      </ul>
     </FilterBox>
   )
 })
