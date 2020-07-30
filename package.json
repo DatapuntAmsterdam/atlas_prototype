@@ -143,7 +143,7 @@
     "autoprefixer": "^9.8.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
-    "babel-plugin-styled-components": "^1.10.7",
+    "babel-plugin-styled-components": "^1.11.0",
     "babel-plugin-transform-commonjs-es2015-modules": "^4.0.1",
     "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^5.2.0",
