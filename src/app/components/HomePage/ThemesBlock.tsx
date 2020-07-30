@@ -1,4 +1,4 @@
-import { Column, Link, perceivedLoading, Row, Theme, themeSpacing } from '@datapunt/asc-ui'
+import { Link, perceivedLoading, themeSpacing } from '@datapunt/asc-ui'
 import React, { useState } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
@@ -22,11 +22,6 @@ const getFiltersQuery = `
   }
 `
 
-const StyledRow = styled(Row)`
-  width: 100%;
-  align-content: flex-start;
-`
-
 const StyledLink = styled(Link)`
   margin-bottom: ${themeSpacing(4)};
 `
@@ -35,16 +30,37 @@ const StyledErrorMessage = styled(ErrorMessage)`
   margin: 0 auto;
 `
 
-const PlaceholderLink = styled(StyledLink)`
+const PlaceholderLink = styled.div`
   color: transparent;
-  // ${perceivedLoading()}
+  height: 36px; // link height + 16px margin bottom
+  pre {
+    width: 90%;
+    height: 20px; // link height
+    ${perceivedLoading()}
+  }
+`
+
+const StyledUl = styled.ul`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+`
+
+const ContentHolderStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `
 
 const ContentHolder: React.FC = ({ children }) => (
-  <StyledRow hasMargin={false}>
-    <BlockHeading forwardedAs="h1">Zoek op thema</BlockHeading>
+  <ContentHolderStyle>
+    {/*
+    // @ts-ignore */}
+    <BlockHeading forwardedAs="h2" styleAs="h1">
+      Zoek op thema
+    </BlockHeading>
     {children}
-  </StyledRow>
+  </ContentHolderStyle>
 )
 
 const PlaceholderContent: React.FC = () => {
@@ -64,7 +80,6 @@ const THEME_TYPE = 'theme'
 const PLACEHOLDER_RANGE = [...Array(12).keys()]
 
 const ThemesBlock: React.FC = () => {
-  const colSpan: Theme.TypeSpan = { small: 1, medium: 2, big: 3, large: 3, xLarge: 3 }
   const [{ fetching, error, data }, executeQuery] = useQuery<{ filters: PartialFilter[] }>({
     query: getFiltersQuery,
   })
@@ -73,11 +88,13 @@ const ThemesBlock: React.FC = () => {
   if (fetching) {
     return (
       <ContentHolder>
-        {PLACEHOLDER_RANGE.map((index) => (
-          <Column key={index} span={colSpan}>
-            <PlaceholderContent key={index} />
-          </Column>
-        ))}
+        <StyledUl>
+          {PLACEHOLDER_RANGE.map((index) => (
+            <li key={index}>
+              <PlaceholderContent />
+            </li>
+          ))}
+        </StyledUl>
       </ContentHolder>
     )
   }
@@ -88,34 +105,34 @@ const ThemesBlock: React.FC = () => {
   if (error || !themeFilter) {
     return (
       <ContentHolder>
-        <Column span={12}>
-          <StyledErrorMessage
-            message="Er is een fout opgetreden bij het laden van dit blok."
-            buttonLabel="Probeer opnieuw"
-            buttonOnClick={executeQuery}
-          />
-        </Column>
+        <StyledErrorMessage
+          message="Er is een fout opgetreden bij het laden van dit blok."
+          buttonLabel="Probeer opnieuw"
+          buttonOnClick={executeQuery}
+        />
       </ContentHolder>
     )
   }
 
   return (
     <ContentHolder>
-      {themeFilter.options.map((option) => {
-        const filters: ActiveFilter[] = [{ type: THEME_TYPE, values: [option.id] }]
+      <StyledUl>
+        {themeFilter.options.map((option) => {
+          const filters: ActiveFilter[] = [{ type: THEME_TYPE, values: [option.id] }]
 
-        return (
-          <Column key={option.id} span={colSpan}>
-            <StyledLink
-              forwardedAs={RouterLink}
-              variant="with-chevron"
-              {...({ to: toSearch({ [PARAMETERS.FILTERS]: filters }) } as any)}
-            >
-              {option.label}
-            </StyledLink>
-          </Column>
-        )
-      })}
+          return (
+            <li key={option.label}>
+              <StyledLink
+                forwardedAs={RouterLink}
+                variant="with-chevron"
+                {...({ to: toSearch({ [PARAMETERS.FILTERS]: filters }) } as any)}
+              >
+                {option.label}
+              </StyledLink>
+            </li>
+          )
+        })}
+      </StyledUl>
     </ContentHolder>
   )
 }

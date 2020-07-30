@@ -15,11 +15,16 @@ export type CMSConfig = {
 export type CMSResultItem = {
   id: string
   type: CmsType
-  specialType: SpecialType | null
+  specialType?: SpecialType
   title: string
   shortTitle?: string
   teaser: string
-  linkProps: Object
+  linkProps?: {
+    to?: To
+    forwardedAs?: never
+    title: string
+    href?: string
+  }
   teaserImage?: string
   coverImage?: string
   to?: To

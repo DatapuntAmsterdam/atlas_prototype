@@ -11,11 +11,11 @@ import {
   themeColor,
   themeSpacing,
 } from '@datapunt/asc-ui'
-import PropTypes from 'prop-types'
 import React from 'react'
 import getImageFromCms from '../../utils/getImageFromCms'
 import focusOutline from '../shared/focusOutline'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
+import { CMSResultItem } from '../../utils/useFromCMS'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(2)};
@@ -44,7 +44,11 @@ const StyledLink = styled(Link)`
   }
 `
 
-const StyledCard = styled(Card)`
+type StyledCardProps = {
+  showError?: boolean
+}
+
+const StyledCard = styled(Card)<StyledCardProps>`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -77,23 +81,34 @@ const ContentType = styled(Paragraph)`
   line-height: 16px;
 `
 
-const EditorialBlockCard = ({
-  loading,
-  showError,
-  shortTitle,
-  title,
+const EditorialBlockCard: React.FC<
+  CMSResultItem &
+    StyledCardProps & {
+      loading?: boolean
+      showContentType?: boolean
+      intro?: string
+    }
+> = ({
+  loading = false,
+  showError = false,
+  shortTitle = '',
+  title = '',
   specialType,
-  type,
-  teaser,
-  intro,
-  teaserImage,
+  teaser = '',
+  intro = '',
+  teaserImage = '',
   linkProps,
+  type,
   showContentType,
 }) => {
-  const contentTypeLabel = type ? getContentTypeLabel(type, specialType) : null
+  const contentTypeLabel = type && specialType ? getContentTypeLabel(type, specialType) : null
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { title: unusedTitle, ...linkPropsWithoutTitle } = linkProps || {}
 
   return (
-    <StyledLink {...linkProps} linkType="blank">
+    // Don't use the title attribute here, as we already use a heading that can be read by screen readers
+    <StyledLink {...linkPropsWithoutTitle} linkType="blank">
       <StyledCard horizontal animateLoading={!showError} isLoading={loading} showError={showError}>
         <StyledCardContent>
           {showContentType && contentTypeLabel && (
@@ -101,43 +116,16 @@ const EditorialBlockCard = ({
               <ContentType data-test="contentType">{contentTypeLabel}</ContentType>
             </div>
           )}
-          <StyledHeading forwardedAs="h4" styleAs="h3">
-            {shortTitle || title}
-          </StyledHeading>
+          <StyledHeading forwardedAs="h3">{shortTitle || title}</StyledHeading>
           <Paragraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />
         </StyledCardContent>
         <StyledCardMedia>
-          {teaserImage && (
-            <Image src={getImageFromCms(teaserImage, 160, 160)} alt={shortTitle || title} square />
-          )}
+          {/* Empty alt text necessary so screen-readers know this can be ignored, as it's already wrapped in a link with a heading */}
+          {teaserImage && <Image alt="" src={getImageFromCms(teaserImage, 160, 160)} square />}
         </StyledCardMedia>
       </StyledCard>
     </StyledLink>
   )
-}
-
-EditorialBlockCard.defaultProps = {
-  loading: false,
-  showError: false,
-  shortTitle: '',
-  title: '',
-  specialType: '',
-  teaser: '',
-  intro: '',
-  teaserImage: '',
-  to: {},
-}
-
-EditorialBlockCard.propTypes = {
-  loading: PropTypes.bool,
-  showError: PropTypes.bool,
-  specialType: PropTypes.string,
-  title: PropTypes.string,
-  shortTitle: PropTypes.string,
-  teaser: PropTypes.string,
-  intro: PropTypes.string,
-  teaserImage: PropTypes.string,
-  to: PropTypes.shape({}),
 }
 
 export default EditorialBlockCard

@@ -46,9 +46,7 @@ const StyledParagraph = styled(Paragraph)`
 const OrganizationCard = ({ loading, title, shortTitle, teaser, intro, linkProps }) => (
   <StyledCard isLoading={loading}>
     <StyledCardContent>
-      <StyledHeading forwardedAs="h4" styleAs="h3">
-        {shortTitle || title}
-      </StyledHeading>
+      <StyledHeading forwardedAs="h3">{shortTitle || title}</StyledHeading>
       <StyledParagraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />
 
       <div>

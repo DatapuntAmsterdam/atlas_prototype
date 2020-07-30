@@ -50,7 +50,9 @@ const EditorialBlock = ({ title, list, showMoreProps = {}, showContentType = fal
     <CardContainer data-test="special-block">
       <Row hasMargin={false}>
         <Column wrap span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
-          <BlockHeading forwardedAs="h1">{title}</BlockHeading>
+          <BlockHeading styleAs="h1" forwardedAs="h2">
+            {title}
+          </BlockHeading>
         </Column>
       </Row>
       <CardRow showError={error}>

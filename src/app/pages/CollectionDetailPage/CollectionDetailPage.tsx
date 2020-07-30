@@ -10,6 +10,7 @@ import { cmsConfig } from '../../../shared/config/config'
 import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import CollectionTileGrid from './CollectionTileGrid'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
+import useDocumentTitle from '../../utils/useDocumentTitle'
 
 const StyledRow = styled(Row)`
   // To center the ErrorMessage
@@ -33,6 +34,7 @@ type CollectionResult = {
 
 const CollectionDetailPage: React.FC = () => {
   const { id } = useSelector(getLocationPayload)
+  const { setDocumentTitle } = useDocumentTitle()
   const { results, fetchData, loading, error } = useFromCMS<CollectionResult>(
     cmsConfig.CMS_COLLECTION_DETAIL,
     id,
@@ -41,6 +43,12 @@ const CollectionDetailPage: React.FC = () => {
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    if (results?.title) {
+      setDocumentTitle(`Dossier: ${results.title}`)
+    }
+  }, [results])
 
   const listResults = results?.field_blocks ?? []
   const tileResults = results?.field_items ?? []

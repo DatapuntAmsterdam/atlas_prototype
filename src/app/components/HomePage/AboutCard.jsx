@@ -50,9 +50,7 @@ const AboutCard = ({ loading, shortTitle, title, teaser, intro, linkProps }) => 
   <StyledLink {...linkProps} linkType="blank">
     <StyledCard backgroundColor="level2" shadow isLoading={loading}>
       <StyledCardContent>
-        <Heading as="h4" styleAs="h3">
-          {shortTitle || title}
-        </Heading>
+        <Heading as="h3">{shortTitle || title}</Heading>
         <Paragraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />
       </StyledCardContent>
     </StyledCard>

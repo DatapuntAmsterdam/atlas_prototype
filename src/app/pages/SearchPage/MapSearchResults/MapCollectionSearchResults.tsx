@@ -128,7 +128,11 @@ const MapCollectionCard: React.FC<MapCollectionCardProps> = ({ result }) => {
             <CardHeaderIcon inline size={16}>
               <MapLayers />
             </CardHeaderIcon>
-            <CardHeaderHeading as="h4">{result.title}</CardHeaderHeading>
+            {/*
+            // @ts-ignore */}
+            <CardHeaderHeading as="h3" styleAs="h4">
+              {result.title}
+            </CardHeaderHeading>
           </CardHeadingContainer>
         </CardHeader>
         <StyledCardContent>

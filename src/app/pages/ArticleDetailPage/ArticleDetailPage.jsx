@@ -203,7 +203,7 @@ const ArticleDetailPage = ({ id }) => {
                                 field_accordion_intro: accordionIntro,
                                 field_accordion_label: accordionLabel,
                               }) => (
-                                <>
+                                <React.Fragment key={accordionTitle}>
                                   {accordionTitle && (
                                     <StyledAccordionHeading forwardedAs="h3">
                                       {accordionTitle}
@@ -217,7 +217,7 @@ const ArticleDetailPage = ({ id }) => {
                                       <CustomHTMLBlock body={accordionContent.processed} />
                                     </StyledAccordion>
                                   )}
-                                </>
+                                </React.Fragment>
                               ),
                             )}
                           </AccordionWrapper>

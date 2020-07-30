@@ -81,11 +81,7 @@ const CollectionTileGrid: React.FC<Props> = ({ results, loading, title, descript
         <Heading forwardedAs="strong" styleAs="h1">
           Dossier
         </Heading>
-        {/*
-        // @ts-ignore */}
-        <StyledHeading forwardedAs="h3" styleAs="h1">
-          {title}
-        </StyledHeading>
+        <StyledHeading forwardedAs="h1">{title}</StyledHeading>
         {description && <Paragraph strong dangerouslySetInnerHTML={{ __html: description }} />}
       </Tile>
     </FullColumnTileGridItem>

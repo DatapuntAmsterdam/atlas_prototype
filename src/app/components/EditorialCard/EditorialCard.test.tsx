@@ -31,14 +31,14 @@ describe('EditorialCard', () => {
   it('should display the correct title', () => {
     const { container } = render(<EditorialCard {...mockDataItem} />)
 
-    const heading = container.querySelector('h4')
+    const heading = container.querySelector('h3')
     expect(heading?.textContent).toBe(mockDataItem.title)
   })
 
   it("should display a placeholder when there's no cover image", () => {
-    // @ts-ignore
-    getImageFromCms.mockImplementation(() => null)
-    const { container } = render(<EditorialCard {...mockDataItem} />)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { image: unusedImage, ...mockDataItems } = mockDataItem
+    const { container } = render(<EditorialCard {...mockDataItems} />)
 
     const image = container.querySelector('img')
 

@@ -23,17 +23,13 @@ const getImageSize = (image: string, resize: Resize, imageSize: number) => {
   const small = Math.round(imageSize * 0.5)
   const medium = imageSize
 
-  const srcSet = {
-    srcSet: `${getImageFromCms(image, small, small, resize)} ${small}w,
-             ${getImageFromCms(image, medium, medium, resize)} ${medium}w`,
-  }
+  const srcSet = `${getImageFromCms(image, small, small, resize)} ${small}w,
+             ${getImageFromCms(image, medium, medium, resize)} ${medium}w`
 
-  const sizes = {
-    sizes: `
+  const sizes = `
       ${ascDefaultTheme.breakpoints.mobileL('max-width')} ${small}px,
       ${ascDefaultTheme.breakpoints.tabletM('max-width')} ${medium}px,
-    `,
-  }
+    `
 
   return {
     srcSet,
@@ -42,17 +38,13 @@ const getImageSize = (image: string, resize: Resize, imageSize: number) => {
 }
 
 interface CardMediaProps {
-  title: string
   highlighted: boolean
-  image: string
+  vertical?: boolean
+  image?: string
   imageDimensions: [number, number]
 }
 
-const StyledCardMedia = styled(CardMedia)<{
-  highlighted: boolean
-  vertical: boolean
-  imageDimensions: number[]
-}>`
+const StyledCardMedia = styled(CardMedia)<CardMediaProps>`
   @media screen and ${breakpoint('max-width', 'tabletM')} {
     max-width: 80px;
     max-height: 80px;
@@ -75,18 +67,12 @@ const StyledCardMedia = styled(CardMedia)<{
 `
 
 const CustomCardMedia: React.FC<CardMediaProps> = ({
-  title,
   highlighted,
   image,
   imageDimensions,
   ...otherProps
 }) => {
   const imageIsVertical = imageDimensions[0] !== imageDimensions[1] // Image dimensions indicate whether the image is square or not
-  const { srcSet, sizes } = getImageSize(
-    image,
-    imageIsVertical ? 'fit' : 'fill',
-    imageIsVertical ? imageDimensions[1] : imageDimensions[0],
-  )
 
   return (
     <StyledCardMedia
@@ -95,10 +81,17 @@ const CustomCardMedia: React.FC<CardMediaProps> = ({
       highlighted={highlighted}
       {...otherProps}
     >
+      {/* Empty alt text necessary so screen-readers know this can be ignored, as it's already wrapped in a link with a heading */}
       <Image
-        {...(image ? { ...srcSet, ...sizes } : {})}
-        src={getImageFromCms(image, imageDimensions[0], imageDimensions[1]) || notFoundImage}
-        alt={title}
+        alt=""
+        {...(image
+          ? getImageSize(
+              image,
+              imageIsVertical ? 'fit' : 'fill',
+              imageIsVertical ? imageDimensions[1] : imageDimensions[0],
+            )
+          : {})}
+        src={image ? getImageFromCms(image, imageDimensions[0], imageDimensions[1]) : notFoundImage}
         square
       />
     </StyledCardMedia>
@@ -109,10 +102,14 @@ const StyledHeading = styled(Heading)<{ compact: boolean }>`
   // By forwarding this component as h4, we need to overwrite the style rules in src/shared/styles/base/_typography.scss
   line-height: 22px;
   margin-bottom: ${({ compact }) => (compact ? themeSpacing(2) : themeSpacing(3))};
-  ${({ compact }) => compact && 'font-size: 16px;'}
   width: fit-content;
   display: inline-block;
   font-weight: bold;
+  ${({ compact }) =>
+    compact &&
+    css`
+      font-size: 16px;
+    `}
 `
 
 const ContentType = styled(Paragraph)`
@@ -232,9 +229,10 @@ const EditorialCard: React.FC<EditorialCardProps> = ({
   const contentTypeLabel = getContentTypeLabel(type, specialType)
 
   return (
-    <StyledLink {...{ title, linkType: 'blank', ...otherProps }}>
+    // Don't use the title attribute here, as we already use a heading that can be read by screen readers
+    <StyledLink {...{ linkType: 'blank', ...otherProps }}>
       <StyledCard horizontal highlighted={highlighted}>
-        {image && <CustomCardMedia {...{ title, highlighted, image, imageDimensions }} />}
+        <CustomCardMedia {...{ highlighted, image, imageDimensions }} />
         <StyledCardContent highlighted={highlighted}>
           {showContentType && contentTypeLabel && (
             <div>
@@ -243,7 +241,9 @@ const EditorialCard: React.FC<EditorialCardProps> = ({
           )}
 
           <div>
-            <StyledHeading forwardedAs={compact ? 'span' : 'h4'} compact={compact}>
+            {/*
+            // @ts-ignore */}
+            <StyledHeading forwardedAs={compact ? 'span' : 'h3'} styleAs="h4" compact={compact}>
               {title}
             </StyledHeading>
           </div>

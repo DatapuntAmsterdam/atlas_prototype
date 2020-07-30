@@ -98,7 +98,9 @@ const NavigationCard = ({ CardIcon, to, title, description }) => (
         <CardIcon />
       </StyledCardMedia>
       <StyledCardContent>
-        <StyledHeading forwardedAs="h4">{title}</StyledHeading>
+        <StyledHeading styleAs="h4" forwardedAs="h3">
+          {title}
+        </StyledHeading>
         <StyledParagraph>{description}</StyledParagraph>
       </StyledCardContent>
       <StyledCardActions>

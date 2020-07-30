@@ -39,7 +39,7 @@ const navigationLinks = [
         <Pano />
       </Icon>
     ),
-    title: 'Panoramabeelden',
+    title: decodeHTML('Panorama&shy;beelden'),
     description: 'Kijk 360 graden in het rond',
   },
   {

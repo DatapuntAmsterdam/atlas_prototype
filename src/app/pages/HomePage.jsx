@@ -47,7 +47,9 @@ const HomePage = () => (
     <ContentContainer>
       <StyledRow valign="flex-start">
         <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
-          <Heading>Uitgelicht</Heading>
+          <Heading as="h2" styleAs="h1">
+            Uitgelicht
+          </Heading>
         </Column>
         <HighlightColumn wrap span={{ small: 1, medium: 2, big: 6, large: 8, xLarge: 8 }}>
           <HighlightBlock />
@@ -66,9 +68,7 @@ const HomePage = () => (
         </Column>
       </StyledRow>
       <StyledRow>
-        <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
-          <ThemesBlock />
-        </Column>
+        <ThemesBlock />
       </StyledRow>
       <StyledRow>
         <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>

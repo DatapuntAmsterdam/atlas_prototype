@@ -77,7 +77,7 @@ const DataCard = ({ type, label, count, results, ...otherProps }) => (
     </StyledCardMedia>
     <StyledCardContent>
       <div>
-        <Heading as="h4">
+        <Heading as="h3" styleAs="h4">
           <StyledLink
             forwardedAs={RouterLink}
             to={toDataSearchType(type)}

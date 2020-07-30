@@ -93,7 +93,9 @@ const DatasetCard = ({
     <StyledCard horizontal>
       <StyledCardContent>
         <div>
-          <StyledHeading forwardedAs="h4">{shortTitle}</StyledHeading>
+          <StyledHeading styleAs="h4" forwardedAs="h3">
+            {shortTitle}
+          </StyledHeading>
         </div>
 
         <div>
