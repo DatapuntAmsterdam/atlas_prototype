@@ -2,6 +2,7 @@
   $self: &;
   display: inline-table;
   width: 100%;
+  border-collapse: collapse;
 
   &__head {
     display: table-header-group;
@@ -13,6 +14,7 @@
       font-weight: $bold-weight;
       height: 26px;
       vertical-align: middle;
+      text-align: start;
     }
   }
 
@@ -38,6 +40,7 @@
   &__row {
     display: table-row;
     text-decoration: none;
+    position: relative;
   }
 
   &__cell {

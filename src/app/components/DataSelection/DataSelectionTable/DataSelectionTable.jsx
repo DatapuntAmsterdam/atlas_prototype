@@ -1,10 +1,21 @@
 /* eslint-disable react/no-array-index-key */
+import { outlineWhenFocused } from '@datapunt/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
 import { getDetailPageData } from '../../../../store/redux-first-router/actions'
 import { routing } from '../../../routes'
 import DataSelectionFormatter from '../DataSelectionFormatter/DataSelectionFormatter'
+
+const TableRowLink = styled(RouterLink)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  ${outlineWhenFocused()}
+`
 
 const DataSelectionTable = ({ content }) => {
   const buildLink = (row) => {
@@ -22,25 +33,21 @@ const DataSelectionTable = ({ content }) => {
   return (
     content.body &&
     content.body.length > 0 && (
-      <div className="c-ds-table">
-        <div className="c-ds-table__head">
-          <div className="c-ds-table__row c-ds-table__row--link">
+      <table className="c-ds-table">
+        <thead className="c-ds-table__head">
+          <tr className="c-ds-table__row c-ds-table__row--link">
             {content.head.map((field, i) => (
-              <div key={i} className="c-ds-table__cell">
+              <th key={i} className="c-ds-table__cell">
                 {field}
-              </div>
+              </th>
             ))}
-          </div>
-        </div>
-        <div className="c-ds-table__body">
+          </tr>
+        </thead>
+        <tbody className="c-ds-table__body">
           {content.body.map((row, i) => (
-            <RouterLink
-              key={i}
-              className="c-ds-table__row c-ds-table__row--link qa-table-link"
-              to={buildLink(row)}
-            >
+            <tr key={i} className="c-ds-table__row c-ds-table__row--link qa-table-link">
               {row.content.map((variables, j) => (
-                <div
+                <td
                   key={`${variables[0].value}_${variables[0].key}_${j}`}
                   className="c-ds-table__cell"
                 >
@@ -49,12 +56,13 @@ const DataSelectionTable = ({ content }) => {
                     formatter={content.formatters[j]}
                     template={content.templates[j]}
                   />
-                </div>
+                </td>
               ))}
-            </RouterLink>
+              <TableRowLink to={buildLink(row)} />
+            </tr>
           ))}
-        </div>
-      </div>
+        </tbody>
+      </table>
     )
   )
 }
