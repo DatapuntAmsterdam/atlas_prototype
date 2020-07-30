@@ -1,4 +1,4 @@
-import { Link, perceivedLoading, themeSpacing } from '@datapunt/asc-ui'
+import { Link, outlineWhenFocused, perceivedLoading, themeSpacing } from '@datapunt/asc-ui'
 import React, { useState } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
@@ -7,9 +7,11 @@ import PARAMETERS from '../../../store/parameters'
 import { toSearch } from '../../../store/redux-first-router/actions'
 import { Filter, FilterOption } from '../../models/filter'
 import { ActiveFilter } from '../../pages/SearchPage/SearchPageDucks'
+import useUniqueId from '../../utils/useUniqueId'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import BlockHeading from './BlockHeading'
 
+// TODO: Generate types for this GQL query.
 const getFiltersQuery = `
   query {
     filters {
@@ -46,22 +48,27 @@ const StyledUl = styled.ul`
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 `
 
-const ContentHolderStyle = styled.div`
+const ContentHolderStyle = styled.nav`
   display: flex;
   flex-direction: column;
   width: 100%;
+  ${outlineWhenFocused()}
 `
 
-const ContentHolder: React.FC = ({ children }) => (
-  <ContentHolderStyle>
-    {/*
-    // @ts-ignore */}
-    <BlockHeading forwardedAs="h2" styleAs="h1">
-      Zoek op thema
-    </BlockHeading>
-    {children}
-  </ContentHolderStyle>
-)
+const ContentHolder: React.FC = ({ children }) => {
+  const headingId = useUniqueId('themes-heading')
+
+  return (
+    <ContentHolderStyle tabIndex={0} aria-describedby={headingId}>
+      {/*
+      // @ts-ignore */}
+      <BlockHeading id={headingId} forwardedAs="h2" styleAs="h1">
+        Zoek op thema
+      </BlockHeading>
+      {children}
+    </ContentHolderStyle>
+  )
+}
 
 const PlaceholderContent: React.FC = () => {
   const [numChars] = useState(getRandomInRange(8, 16))
