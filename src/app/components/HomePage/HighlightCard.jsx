@@ -1,18 +1,18 @@
-import styled from 'styled-components'
 import {
   breakpoint,
-  Heading,
   ImageCard,
   ImageCardContent,
   Link,
   styles,
   themeColor,
+  Typography,
 } from '@datapunt/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
+import styled from 'styled-components'
 import focusOutline from '../shared/focusOutline'
 
-const HighlightCardHeadingStyle = styled(Heading)`
+const HighlightCardHeadingStyle = styled(Typography)`
   margin: 0;
 
   // Hard overwrite specifically for this component
@@ -65,7 +65,7 @@ const HighlightCard = ({
       alt={shortTitle || title}
     >
       <ImageCardContent>
-        <HighlightCardHeadingStyle forwardedAs="h3" styleAs={styleAs || 'h4'}>
+        <HighlightCardHeadingStyle forwardedAs="span" styleAs={styleAs || 'h4'}>
           {shortTitle || title}
         </HighlightCardHeadingStyle>
       </ImageCardContent>
