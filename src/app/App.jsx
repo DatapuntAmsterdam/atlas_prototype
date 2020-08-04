@@ -1,25 +1,26 @@
-import React from 'react'
+import {
+  breakpoint,
+  Container,
+  GlobalStyle,
+  themeColor,
+  ThemeProvider,
+  themeSpacing,
+} from '@datapunt/asc-ui'
+import { MatomoProvider } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import {
-  GlobalStyle,
-  ThemeProvider,
-  Container,
-  themeColor,
-  themeSpacing,
-  breakpoint,
-} from '@datapunt/asc-ui'
-import { MatomoProvider } from '@datapunt/matomo-tracker-react'
-import {
-  Provider as GraphQLProvider,
-  createClient,
   cacheExchange,
-  fetchExchange,
+  createClient,
   dedupExchange,
+  fetchExchange,
+  Provider as GraphQLProvider,
 } from 'urql'
-import { isContentPage, isSearchPage, isEditorialDetailPage } from './pages'
+import environment from '../environment'
+import { hasGlobalError } from '../shared/ducks/error/error-message'
 import {
   hasOverflowScroll,
   isEmbedded,
@@ -28,15 +29,15 @@ import {
   isPrintModeLandscape,
   isPrintOrEmbedMode,
 } from '../shared/ducks/ui/ui'
-import { hasGlobalError } from '../shared/ducks/error/error-message'
-import { getPage, isHomepage } from '../store/redux-first-router/selectors'
-import Header from './components/Header'
-import AppBody from './AppBody'
-import { routing } from './routes'
-import Footer from './components/Footer/Footer'
 import getState from '../shared/services/redux/get-state'
+import { getPage, isHomepage } from '../store/redux-first-router/selectors'
+import AppBody from './AppBody'
+import Footer from './components/Footer/Footer'
+import Header from './components/Header'
 import matomoInstance from './matomo'
-import environment from '../environment'
+import { isContentPage, isEditorialDetailPage, isSearchPage } from './pages'
+import { routing } from './routes'
+import theme from './theme'
 
 const StyledContainer = styled(Container)`
   min-height: 100%;
@@ -141,7 +142,7 @@ const App = ({
   }
 
   return (
-    <ThemeProvider>
+    <ThemeProvider overrides={theme}>
       <GlobalStyle />
       <MatomoProvider value={matomoInstance}>
         <GraphQLProvider value={graphQLClient}>
