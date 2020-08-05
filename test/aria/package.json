@@ -26,6 +26,6 @@
     "chalk": "2.3.0",
     "p-all": "1.0.0",
     "pa11y": "5.0.4",
-    "pa11y-reporter-cli": "^1.0.0"
+    "pa11y-reporter-cli": "^2.0.0"
   }
 }
