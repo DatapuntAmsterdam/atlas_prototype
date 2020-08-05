@@ -101,6 +101,27 @@ const MapLegend = ({
   const { trackEvent } = useMatomo()
   const isPrintOrEmbedView = useSelector(isPrintOrEmbedMode)
 
+  function trackLayerEnabled(mapLayer) {
+    // Sanitize the collection title to use it as action
+    const action = mapLayer.title.toLowerCase().replace(/[: ][ ]*/g, '_')
+
+    if (!mapLayer.legendItems || mapLayer.legendItems.length === 0) {
+      trackEvent({
+        category: 'kaartlaag',
+        action,
+        name: mapLayer.title,
+      })
+    } else {
+      mapLayer.legendItems.forEach(({ title: legendItemTitle }) =>
+        trackEvent({
+          category: 'kaartlaag',
+          action,
+          name: legendItemTitle,
+        }),
+      )
+    }
+  }
+
   // Todo: This need to be refactored on redux level, so MapLayers and LegendItems will get a isVisible option there.
   const mapLayers = useMemo(
     () =>
@@ -143,17 +164,7 @@ const MapLegend = ({
 
     // Only track the event when the mapLayer gets checked
     if (checked) {
-      // Sanitize the collection title to use it as action
-      const action = mapLayer.title.toLowerCase().replace(/[: ][ ]*/g, '_')
-
-      // eslint-disable-next-line no-unused-expressions
-      mapLayer?.legendItems?.forEach(({ title: legendItemTitle }) =>
-        trackEvent({
-          category: 'kaartlaag',
-          action,
-          name: legendItemTitle,
-        }),
-      )
+      trackLayerEnabled(mapLayer)
     }
   }
 
