@@ -12,3 +12,11 @@ update_configs:
           dependency_name: "redux-saga"
       - match:
           dependency_name: "leaflet-draw"
+
+  - package_manager: "javascript"
+    directory: "/test/e2e/package.json"
+    update_schedule: "daily"
+
+  - package_manager: "javascript"
+    directory: "/test/aria/package.json"
+    update_schedule: "daily"
