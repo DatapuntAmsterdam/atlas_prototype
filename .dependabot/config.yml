@@ -16,7 +16,3 @@ update_configs:
   - package_manager: "javascript"
     directory: "/test/e2e"
     update_schedule: "daily"
-
-  - package_manager: "javascript"
-    directory: "/test/aria"
-    update_schedule: "daily"

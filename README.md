@@ -46,44 +46,22 @@ npm run test:jest
 
 ### E2E testing
 
-End to end test can either run against a local server or through docker-compose.
+In order to E2E test the application make sure you have a development server running locally:
 
-In order to test authentication the following environment variables must be set:
-
-- `PASSWORD_EMPLOYEE`
-- `PASSWORD_EMPLOYEE_PLUS`
-- `USERNAME_EMPLOYEE`
-- `USERNAME_EMPLOYEE_PLUS`
-
-They can simply be added by using the `export` command from the command line, or by adding these
-variables to `.bash_profile`.
-
-Make sure the app is running locally by running `npm start`.
-Then, in a second terminal, go to `cd test/e2e` and run `npm run start` (single run).
-Or open the UI using `npm run watch`.
-
-Test using docker-compose:
-
-```
-docker-compose up --build test-e2e
+```bash
+npm run start
 ```
 
-To test against production APIs you can use the same tasks, suffixed with `prod`:
+> Note: Due to a missing polyfill for the Fetch API you will have to run your build with `legacy` set to `true` in the build config.
 
-- Make sure the app is running locally by running `npm run start:prod`.
-- Then, in a second terminal, run `npm run test-e2e-prod` (single run).
-- Or open the UI using `npm run test-e2e-prod-watch`.
-
-### E2E Aria testing
-
-Make sure the app is running locally.
-Then run `npm run test-aria`.
-
-Test using docker-compose:
+After doing this open up a new terminal and run the following commands:
 
 ```
-docker-compose up --build test-e2e-aria
+cd test/e2e
+npm run start
 ```
+
+This will start the E2E test, if you want to watch for changes you can also run `npm run watch` instead.
 
 ### Analyzing a production bundle
 

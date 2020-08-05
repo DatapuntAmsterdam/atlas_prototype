@@ -2,9 +2,7 @@
 .git
 .sass-cache
 build
-/node_modules/
-/test/aria/node_modules/
-/test/e2e/node_modules/
+node_modules/
 coverage/
 coverage-legacy/
 dist/
