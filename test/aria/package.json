@@ -23,7 +23,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
     "babel-preset-env": "^1.7.0",
-    "chalk": "2.3.0",
+    "chalk": "4.1.0",
     "p-all": "1.0.0",
     "pa11y": "5.0.4",
     "pa11y-reporter-cli": "^1.0.0"
