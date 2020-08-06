@@ -117,7 +117,7 @@
     "@types/cssnano": "^4.0.0",
     "@types/enzyme": "^3.10.5",
     "@types/geojson": "^7946.0.7",
-    "@types/jest": "^26.0.8",
+    "@types/jest": "^26.0.9",
     "@types/karma": "^5.0.0",
     "@types/leaflet": "^1.5.17",
     "@types/leaflet-draw": "^1.0.3",
