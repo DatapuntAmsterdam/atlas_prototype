@@ -66,7 +66,7 @@ $icon-height: 24px;
     }
 
     & + * {
-      margin-left: 10px;
+      margin-left: 8px !important;
     }
 
     & > img {
@@ -98,7 +98,6 @@ $icon-height: 24px;
   &__toggle {
     @extend %__toggle; // sass-lint:disable-line placeholder-name-format
     margin-left: 10px;
-    outline: none;
 
     &--remove {
       @include icon-sprite('icon-cross', $secondary-gray60, $primary-dark, $icon-height);

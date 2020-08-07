@@ -3,11 +3,6 @@
 
   height: $button-size;
   width: $button-size;
-
-  &:hover,
-  &:focus {
-    outline: none;
-  }
 }
 
 %icon-button-text {

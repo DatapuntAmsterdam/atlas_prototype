@@ -45,7 +45,6 @@ $tab-v-padding: 7px;
         &:hover, // sass-lint:disable-line nesting-depth
         &:focus {
           background-color: $secondary-gray10;
-          outline: none;
         }
       }
     }
@@ -62,11 +61,6 @@ $tab-v-padding: 7px;
         position: absolute;
         right: 0;
         z-index: 1;
-      }
-
-      &:hover,
-      &:focus {
-        outline: none;
       }
     }
   }

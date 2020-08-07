@@ -3,7 +3,6 @@
   border-color: $primary-dark;
   color: $primary-dark;
   fill: $primary-dark;
-  outline: none;
 
   svg {
     fill: $primary-dark;
@@ -21,6 +20,5 @@
   &:hover,
   &:focus {
     background-color: $secondary-gray10;
-    outline: none;
   }
 }

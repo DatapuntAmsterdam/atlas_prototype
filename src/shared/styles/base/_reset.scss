@@ -29,12 +29,3 @@ input {
     }
   }
 }
-
-:focus {
-  outline: none;
-}
-
-::-moz-focus-inner {
-  // sass-lint:disable-line no-vendor-prefixes
-  border: none;
-}

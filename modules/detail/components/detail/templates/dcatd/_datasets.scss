@@ -88,8 +88,6 @@
 
     &:hover,
     &:focus {
-      outline: none;
-
       .resources-type__content-item {
         background-color: $secondary-gray10;
       }

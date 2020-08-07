@@ -13,7 +13,6 @@ import {
 } from '@datapunt/asc-ui'
 import React from 'react'
 import getImageFromCms from '../../utils/getImageFromCms'
-import focusOutline from '../shared/focusOutline'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
 import { CMSResultItem } from '../../utils/useFromCMS'
 
@@ -39,8 +38,6 @@ const StyledLink = styled(Link)`
   &:focus {
     background: none;
     position: relative;
-
-    ${focusOutline()}
   }
 `
 

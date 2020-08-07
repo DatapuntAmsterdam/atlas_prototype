@@ -1,5 +1,4 @@
 /* eslint-disable react/no-array-index-key */
-import { outlineWhenFocused } from '@datapunt/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
@@ -14,7 +13,6 @@ const TableRowLink = styled(RouterLink)`
   left: 0;
   width: 100%;
   height: 100%;
-  ${outlineWhenFocused()}
 `
 
 const DataSelectionTable = ({ content }) => {
