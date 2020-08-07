@@ -17,7 +17,6 @@
   &:hover,
   &:focus {
     background-color: $secondary-gray20;
-    outline: none;
   }
 
   &::before {
@@ -103,7 +102,6 @@
   &:focus {
     background-color: $secondary-gray20;
     color: $primary-dark;
-    outline: none;
 
     &::after {
       border: 1px solid $primary-dark;
@@ -135,7 +133,6 @@
   &:focus {
     background-color: $secondary-gray20;
     color: $secondary-gray60;
-    outline: none;
 
     &::after {
       border-color: $primary-dark;

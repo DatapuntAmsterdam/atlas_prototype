@@ -22,11 +22,6 @@ $icon-height: 24px;
     &-pano-button {
       height: 100%;
       width: 100%;
-
-      &:focus {
-        outline: 2px solid $primary-dark;
-        outline-offset: -2px;
-      }
     }
 
     &-pano-button--disabled {

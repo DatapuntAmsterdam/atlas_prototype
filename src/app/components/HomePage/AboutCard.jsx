@@ -11,7 +11,6 @@ import {
 } from '@datapunt/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import focusOutline from '../shared/focusOutline'
 
 const StyledCard = styled(Card)`
   width: 100%;
@@ -41,8 +40,6 @@ const StyledLink = styled(Link)`
   &:focus {
     background: none;
     position: relative;
-
-    ${focusOutline()}
   }
 `
 

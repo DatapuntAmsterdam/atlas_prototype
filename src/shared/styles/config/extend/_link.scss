@@ -20,16 +20,11 @@ $link-offset: 3px;
   &:hover,
   &:focus {
     color: $primary-contrast;
-    outline: none;
     text-decoration: underline;
   }
 
   &:active {
     color: $primary-contrast;
-
-    &:focus {
-      outline: none;
-    }
   }
 }
 

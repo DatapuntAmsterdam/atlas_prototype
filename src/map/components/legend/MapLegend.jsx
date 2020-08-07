@@ -35,8 +35,7 @@ const CollectionLabel = styled(StyledLabel)`
 `
 
 const StyledCheckbox = styled(Checkbox)`
-  padding: 0px;
-  padding-right: ${themeSpacing(2)};
+  margin-left: ${themeSpacing(-1)};
 `
 
 const NonSelectableLegendParagraph = styled(Paragraph)`
@@ -152,12 +151,13 @@ const MapLegend = ({
 
   const [isOpen, setOpen] = useState(isPrintOrEmbedView ?? false)
 
-  const allInvisible = mapLayers.every(({ isVisible }) => !isVisible)
+  const allVisible = mapLayers.every(({ isVisible }) => isVisible)
+  const someVisible = mapLayers.some(({ isVisible }) => isVisible)
   const collectionIndeterminate =
     mapLayers.some(
       ({ isVisible, legendItems }) =>
         !isVisible || legendItems.some(({ isVisible: legendVisibility }) => !legendVisibility),
-    ) && !allInvisible
+    ) && someVisible
 
   const handleLayerToggle = (checked, mapLayer) => {
     onLayerToggle(mapLayer)
@@ -196,7 +196,7 @@ const MapLegend = ({
 
   const handleOnChangeCollection = (e) => {
     // We want to check all the layers when user clicks on an indeterminate checkbox
-    if (!e.currentTarget.checked && collectionIndeterminate) {
+    if (collectionIndeterminate) {
       mapLayers
         .filter(({ isVisible }) => !isVisible)
         .forEach((mapLayer) => {
@@ -233,7 +233,7 @@ const MapLegend = ({
                   className="checkbox"
                   name={title}
                   indeterminate={collectionIndeterminate}
-                  checked={!allInvisible}
+                  checked={allVisible}
                   onChange={handleOnChangeCollection}
                 />
               ) : null}

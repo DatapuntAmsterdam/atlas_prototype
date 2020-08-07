@@ -11,7 +11,6 @@ import {
   Tag,
 } from '@datapunt/asc-ui'
 import RouterLink from 'redux-first-router-link'
-import focusOutline from '../shared/focusOutline'
 
 const StyledHeading = styled(Heading)`
   border-bottom: 2px solid transparent;
@@ -38,8 +37,6 @@ const StyledLink = styled(Link)`
   &:focus {
     background: none;
     position: relative;
-
-    ${focusOutline()}
   }
 `
 
