@@ -13,6 +13,7 @@ import styled from 'styled-components'
 import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
+import { IDS } from '../../../shared/config/config'
 
 const Z_INDEX_OFFSET = 2 // Set a custom offset
 
@@ -77,7 +78,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     autoCapitalize: 'off',
     autoComplete: 'off',
     autoCorrect: 'off',
-    id: 'auto-suggest__input',
+    id: IDS.searchbar,
     'data-test': 'search-input',
     placeholder: placeHolder,
   }

@@ -1,5 +1,11 @@
 import cmsConfig from './cms.config'
 
+const IDS = {
+  main: 'main',
+  footer: 'footer',
+  searchbar: 'auto-suggest__input',
+}
+
 const {
   FOOTER: FOOTER_LINKS,
   HEADER: HEADER_LINKS,
@@ -17,4 +23,5 @@ export {
   HOMEPAGE_LINKS,
   CONTENT_REDIRECT_LINKS,
   SHORTLINKS,
+  IDS,
 }
