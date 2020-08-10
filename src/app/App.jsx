@@ -10,6 +10,7 @@ import {
   themeColor,
   themeSpacing,
   breakpoint,
+  Button,
 } from '@datapunt/asc-ui'
 import { MatomoProvider } from '@datapunt/matomo-tracker-react'
 import {
@@ -37,6 +38,7 @@ import Footer from './components/Footer/Footer'
 import getState from '../shared/services/redux/get-state'
 import matomoInstance from './matomo'
 import environment from '../environment'
+import { IDS } from '../shared/config/config'
 
 const StyledContainer = styled(Container)`
   min-height: 100%;
@@ -47,6 +49,18 @@ const StyledContainer = styled(Container)`
 
   @media screen and ${breakpoint('min-width', 'laptopM')} {
     margin: 0 ${themeSpacing(6)};
+  }
+`
+
+const SkipNavigationLink = styled(Button)`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 30; // on top of header
+  transform: translateY(-100%) translateX(-50%);
+  transition: transform 0.3s;
+  &:focus {
+    transform: translateY(0%) translateX(-50%);
   }
 `
 
@@ -146,6 +160,31 @@ const App = ({
       <MatomoProvider value={matomoInstance}>
         <GraphQLProvider value={graphQLClient}>
           <AppWrapper {...{ currentPage, isFullHeight, hasMaxWidth }}>
+            <SkipNavigationLink
+              variant="primary"
+              title="Direct naar: inhoud"
+              forwardedAs="a"
+              href={`#${IDS.main}`}
+            >
+              Direct naar: inhoud
+            </SkipNavigationLink>
+            <SkipNavigationLink
+              variant="primary"
+              title="Direct naar: zoeken"
+              onClick={() => {
+                document.getElementById(IDS.searchbar).focus()
+              }}
+            >
+              Direct naar: zoeken
+            </SkipNavigationLink>
+            <SkipNavigationLink
+              variant="primary"
+              title="Direct naar: footer"
+              forwardedAs="a"
+              href={`#${IDS.footer}`}
+            >
+              Direct naar: footer
+            </SkipNavigationLink>
             {!embedMode && (
               <Header
                 {...{ homePage, hasMaxWidth, printMode, embedPreviewMode, printOrEmbedMode }}

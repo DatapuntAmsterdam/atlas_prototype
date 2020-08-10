@@ -15,6 +15,7 @@ import PAGES, { isMapSplitPage, isSearchPage } from './pages'
 import { getQuery } from './pages/SearchPage/SearchPageDucks'
 import isIE from './utils/isIE'
 import { toArticleDetail } from '../store/redux-first-router/actions'
+import { IDS } from '../shared/config/config'
 
 const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityContainer = React.lazy(() =>
@@ -56,7 +57,7 @@ const SearchPage = React.lazy(() =>
 )
 
 // The Container from @datapunt/asc-ui isnt used here as the margins added do not match the ones in the design
-const AppContainer = styled.div`
+const AppContainer = styled.main`
   flex-grow: 1;
   min-height: 50vh; // IE11: Makes sure the loading indicator is displayed in the Container
 `
@@ -88,7 +89,7 @@ const AppBody = ({
 
   return hasGrid ? (
     <>
-      <AppContainer id="main" className="main-container">
+      <AppContainer id={IDS.main} className="main-container">
         <NotificationAlert />
         {isIE && (
           <StyledAlert level="attention">
