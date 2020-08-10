@@ -44,7 +44,7 @@ exports[`Header should render the main header 1`] = `
       </React.Fragment>
     }
     tall={false}
-    title="Data en informatie"
+    title="Data en informatie van de gemeente Amsterdam"
   />
 </styled.section>
 `;
