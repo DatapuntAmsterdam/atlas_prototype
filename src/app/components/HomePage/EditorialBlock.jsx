@@ -93,6 +93,7 @@ const EditorialBlock = ({ title, list, showMoreProps = {}, showContentType = fal
             <OverviewLink
               linkProps={{ to: showMoreProps.to(), forwardedAs: RouterLink }}
               label={showMoreProps.label}
+              title={showMoreProps.label}
             />
           </Column>
         </Row>

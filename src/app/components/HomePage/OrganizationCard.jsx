@@ -50,7 +50,13 @@ const OrganizationCard = ({ loading, title, shortTitle, teaser, intro, linkProps
       <StyledParagraph dangerouslySetInnerHTML={{ __html: teaser || intro }} />
 
       <div>
-        <OverviewLink linkProps={linkProps} label="Lees meer" />
+        <OverviewLink
+          linkProps={{
+            ...linkProps,
+            title: `Lees meer over ${shortTitle || title}`, // More descriptive title attribute (A11Y)
+          }}
+          label="Lees meer"
+        />
       </div>
     </StyledCardContent>
   </StyledCard>

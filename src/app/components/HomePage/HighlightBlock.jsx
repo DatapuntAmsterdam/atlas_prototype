@@ -129,6 +129,7 @@ const HighlightBlock = () => {
       <OverviewLink
         linkProps={{ to: toArticleSearch(), forwardedAs: RouterLink }}
         label="Bekijk overzicht"
+        title="Bekijk het overzicht van alle artikelen"
       />
     </>
   )

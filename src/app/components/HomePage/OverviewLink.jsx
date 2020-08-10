@@ -12,7 +12,7 @@ const StyledLink = styled(Link)`
 `
 
 const OverviewLink = ({ label, linkProps }) => (
-  <StyledLink tabIndex={0} linkType="with-chevron" {...linkProps} title={label}>
+  <StyledLink tabIndex={0} linkType="with-chevron" {...linkProps}>
     {label}
   </StyledLink>
 )
