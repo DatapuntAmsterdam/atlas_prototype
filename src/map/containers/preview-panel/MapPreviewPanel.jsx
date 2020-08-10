@@ -67,7 +67,7 @@ class MapPreviewPanel extends React.Component {
             {isLoading && <LoadingSpinner />}
             {isDetailPage && (
               <MapDetailResult
-                panoUrl={props.panoPreview.url}
+                panoUrl={props.panoPreview?.url}
                 onMaximize={openDetailEndpoint}
                 onPanoPreviewClick={this.onPanoPreviewClick}
                 result={props.detailResult}
@@ -80,7 +80,7 @@ class MapPreviewPanel extends React.Component {
                 onItemClick={props.openPreviewDetail}
                 onMaximize={onMaximize}
                 onPanoPreviewClick={this.onPanoPreviewClick}
-                panoUrl={props.panoPreview.url}
+                panoUrl={props.panoPreview?.url}
                 resultLimit={previewPanelSearchResultLimit}
                 results={props.searchResults}
                 isEmbed={props.isEmbed}
