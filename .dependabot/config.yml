@@ -12,6 +12,8 @@ update_configs:
           dependency_name: "redux-saga"
       - match:
           dependency_name: "leaflet-draw"
+      - match:
+          dependency_name: "imports-loader"
 
   - package_manager: "javascript"
     directory: "/test/e2e"
