@@ -6,9 +6,7 @@ angular.module('dpDetail').directive('dpBbgaGraphs', dpBbgaGraphsDirective)
 dpBbgaGraphsDirective.$inject = ['bbgaDataService']
 
 function bootstrapBBGA() {
-  return import(
-    /* webpackChunkName: "BBGA" */ 'imports-loader?imports=default|d3|d3!bbga_visualisatie_d3'
-  )
+  return import(/* webpackChunkName: "BBGA" */ 'imports-loader?d3!bbga_visualisatie_d3')
 }
 
 function dpBbgaGraphsDirective(bbgaDataService) {
