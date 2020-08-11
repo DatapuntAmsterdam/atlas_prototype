@@ -178,7 +178,7 @@
     "html-webpack-plugin": "^4.3.0",
     "husky": "4.2.5",
     "identity-obj-proxy": "3.0.0",
-    "imports-loader": "^1.1.0",
+    "imports-loader": "^0.8.0",
     "jasmine-core": "3.6.0",
     "jest": "26.2.2",
     "jest-environment-jsdom": "26.2.0",
