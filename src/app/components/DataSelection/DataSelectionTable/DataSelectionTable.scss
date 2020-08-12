@@ -38,6 +38,12 @@
   }
 
   &__row {
+    /*
+     * Workaround for Chrome not supporting relative positions on table row elements. More information:
+     * - https://bugs.chromium.org/p/chromium/issues/detail?id=417223
+     * - https://stackoverflow.com/questions/8501727/table-row-wont-contain-elements-with-positionabsolute
+     */
+    transform: scale(1);
     display: table-row;
     text-decoration: none;
     position: relative;
