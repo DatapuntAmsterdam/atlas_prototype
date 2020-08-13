@@ -8,7 +8,6 @@ import path from 'path'
 import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin'
 import { Configuration, DefinePlugin } from 'webpack'
 
-
 /**
  * Gets the absolute path to a module in the `node_modules` directory.
  *

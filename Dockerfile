@@ -1,5 +1,6 @@
 # Build
 FROM node:12 AS build-deps
+ARG GIT_COMMIT
 LABEL maintainer="datapunt@amsterdam.nl"
 
 WORKDIR /app
@@ -37,7 +38,7 @@ COPY .babelrc \
     favicon.png \
     /app/
 
-RUN npm run build
+RUN GIT_COMMIT=$GIT_COMMIT npm run build
 RUN echo "build= `date`" > /app/dist/version.txt
 
 # Test dependencies
