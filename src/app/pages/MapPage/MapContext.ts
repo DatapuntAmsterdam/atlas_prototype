@@ -1,6 +1,6 @@
 import { MapLayer as MapLayerProps } from '@datapunt/arm-core/es/constants'
 import { Geometry } from 'geojson'
-import { LatLngLiteral } from 'leaflet'
+import { LatLngLiteral, TileLayerOptions, WMSOptions } from 'leaflet'
 import { createContext } from 'react'
 
 export type ActiveMapLayer = {
@@ -16,12 +16,32 @@ export type MapLayer = {
   layers: Array<string>
 } & MapLayerProps
 
-export type Overlay = {
-  type: string
-  url: string
-  overlayOptions: Object
-  id: string
+export enum OverlayType {
+  Wms = 'wms',
+  Tms = 'tms',
 }
+
+export interface WmsOverlay {
+  type: OverlayType.Wms
+  id: string
+  url: string
+  overlayOptions: WMSOptions
+  params?: {
+    [key: string]: string
+  }
+}
+
+export interface TmsOverlay {
+  type: OverlayType.Tms
+  id: string
+  url: string
+  overlayOptions: TileLayerOptions
+  params?: {
+    [key: string]: string
+  }
+}
+
+export type Overlay = WmsOverlay | TmsOverlay
 
 export type MapState = {
   baseLayers: Array<Object> // TODO: Add auto typegeneration
