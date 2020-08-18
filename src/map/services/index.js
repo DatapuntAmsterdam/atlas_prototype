@@ -30,6 +30,7 @@ export async function getMapLayers() {
         title
         legendItems {
           ... on MapLayer {
+            __typename
             id
           }
         }
