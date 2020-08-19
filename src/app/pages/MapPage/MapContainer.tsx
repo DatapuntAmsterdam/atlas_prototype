@@ -251,6 +251,7 @@ const MapContextProvider: React.FC<MapContextProps> = ({ children }) => {
       type: layer.type,
       params,
       url,
+      layer,
       options: {
         ...MAP_CONFIG.OVERLAY_OPTIONS,
         layers: layer.layers?.join(','),

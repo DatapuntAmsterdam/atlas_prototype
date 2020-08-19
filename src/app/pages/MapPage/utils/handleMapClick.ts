@@ -14,26 +14,30 @@ export default async function handleMapClick(
   setDetailUrl: (url: string) => void,
   activeOverlays: MapState['overlays'] | undefined,
 ) {
-  if (activeOverlays && activeOverlays.length > 0) {
-    const activeOverlaysWithInstanceAPI = activeOverlays.filter(
-      // @ts-ignore TODO: auto generate types
-      (activeOverlay) => activeOverlay.detailUrl,
-    )
+  if (!activeOverlays) {
+    setLocation(e.latlng)
+    return
+  }
 
-    const nearestDetail: NearestDetail | null = await fetchNearestDetail(
-      { latitude: e.latlng.lat, longitude: e.latlng.lng },
-      activeOverlaysWithInstanceAPI,
-      8,
-    )
+  const layers = activeOverlays
+    .filter((overlay) => overlay.layer.detailUrl)
+    .map((overlay) => overlay.layer)
 
-    if (nearestDetail) {
-      const detailUrl = joinUrl(nearestDetail.type, nearestDetail.id)
-      setDetailUrl(detailUrl)
-    } else {
-      setLocation(e.latlng)
-    }
+  if (layers.length === 0) {
+    setLocation(e.latlng)
+    return
+  }
+
+  const nearestDetail: NearestDetail | null = await fetchNearestDetail(
+    { latitude: e.latlng.lat, longitude: e.latlng.lng },
+    layers,
+    8,
+  )
+
+  if (nearestDetail) {
+    const detailUrl = joinUrl(nearestDetail.type, nearestDetail.id)
+    setDetailUrl(detailUrl)
   } else {
-    // get the geo search information
     setLocation(e.latlng)
   }
 }

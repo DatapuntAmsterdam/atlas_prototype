@@ -69,6 +69,7 @@ export interface WmsOverlay {
   id: string
   url: string
   options: WMSOptions
+  layer: MapLayer
   params?: {
     [key: string]: string
   }
@@ -79,6 +80,7 @@ export interface TmsOverlay {
   id: string
   url: string
   options: TileLayerOptions
+  layer: MapLayer
   params?: {
     [key: string]: string
   }
