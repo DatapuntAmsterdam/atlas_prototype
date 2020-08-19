@@ -80,6 +80,29 @@ export const getLayers = createSelector(
       .filter((layer) => layer),
 )
 
+export const getLayersRaw = createSelector(
+  [getMapOverlays, getAccessToken, getMapLayers],
+  (overlays, token, layers) =>
+    overlays
+      .map((overlay) => {
+        const layer = findLayer(layers, overlay.id)
+
+        if (!layer) {
+          return false
+        }
+
+        const legendLayers = (layer.legendItems ?? [])
+          .map((legendItem) => legendItem.id)
+          .filter((id) => !!id)
+          .map((id) => findLayer(layers, id))
+          .filter((legendLayer) => !!legendLayer)
+
+        return [layer, ...legendLayers]
+      })
+      .flat()
+      .filter((layer) => layer),
+)
+
 export default function MapLayersReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_MAP_LAYERS_REQUEST:
