@@ -1,6 +1,7 @@
+import path from 'path'
 import TerserPlugin from 'terser-webpack-plugin'
 import { merge } from 'webpack-merge'
-import { createConfig } from './webpack.common'
+import { createConfig, srcPath } from './webpack.common'
 
 const CHUNKS = {
   MAP:
@@ -21,6 +22,11 @@ export default [
   createConfig({ legacy: true, mode: 'production' }),
 ].map((config) =>
   merge(config, {
+    resolve: {
+      alias: {
+        [path.resolve(srcPath, 'environment.ts')]: path.resolve(srcPath, 'environment.prod.ts'),
+      },
+    },
     output: {
       filename: config.name === 'legacy' ? '[name].[hash]-legacy.js' : '[name].[hash].js',
       chunkFilename:
