@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect'
+
 import { createUrlWithToken } from '../../../shared/services/api/api'
-import MAP_CONFIG from '../../services/map.config'
 import { getMapOverlays } from '../map/selectors'
+import MAP_CONFIG from '../../services/map.config'
 
 export const FETCH_MAP_LAYERS_REQUEST = 'FETCH_MAP_LAYERS_REQUEST'
 export const FETCH_MAP_LAYERS_SUCCESS = 'FETCH_MAP_LAYERS_SUCCESS'
@@ -13,7 +14,7 @@ const initialState = {
   error: null,
 }
 
-const findLayer = (layers, id) =>
+export const findLayer = (layers, id) =>
   layers.find((mapLayer) => {
     const mapLayerId = id.split('-')
 
@@ -21,41 +22,19 @@ const findLayer = (layers, id) =>
     return mapLayer.id === (mapLayerId[1] || mapLayerId[0])
   })
 
+const generateLayer = (layers, overlay, url, params, type, bounds) => ({
+  ...overlay,
+  url,
+  overlayOptions: {
+    ...MAP_CONFIG.OVERLAY_OPTIONS,
+    layers: findLayer(layers, overlay.id).layers,
+  },
+  type,
+  params,
+  bounds,
+})
 export const getMapLayers = (state) => state.mapLayers.layers.items
 export const getAccessToken = (state) => state.user.accessToken
-
-const generateLayer = (overlay, layer, token) => {
-  if (!layer.url) {
-    return false
-  }
-
-  if (layer.authScope && !token) {
-    return false
-  }
-
-  return {
-    id: layer.id,
-    type: layer.type,
-    params: layer.params,
-    bounds: layer.bounds,
-    url: generateUrl(layer, token),
-    isVisible: overlay.isVisible,
-    overlayOptions: {
-      ...MAP_CONFIG.OVERLAY_OPTIONS,
-      layers: layer.layers,
-    },
-  }
-}
-
-function generateUrl(layer, token) {
-  const url = layer.external ? layer.url : `${MAP_CONFIG.OVERLAY_ROOT}${layer.url}`
-
-  if (layer.authScope) {
-    return createUrlWithToken(url, token)
-  }
-
-  return url
-}
 
 export const getLayers = createSelector(
   [getMapOverlays, getAccessToken, getMapLayers],
@@ -63,20 +42,26 @@ export const getLayers = createSelector(
     overlays
       .map((overlay) => {
         const layer = findLayer(layers, overlay.id)
-
         if (!layer) {
           return false
         }
 
-        const legendLayers = (layer.legendItems ?? [])
-          .map((legendItem) => legendItem.id)
-          .filter((id) => !!id)
-          .map((id) => findLayer(layers, id))
-          .filter((legendLayer) => !!legendLayer)
-
-        return [layer, ...legendLayers].map((item) => generateLayer(overlay, item, token))
+        const layerUrl = layer.external ? layer.url : `${MAP_CONFIG.OVERLAY_ROOT}${layer.url}`
+        if (!layer.authScope) {
+          return generateLayer(layers, overlay, layerUrl, layer.params, layer.type, layer.bounds)
+        }
+        if (token) {
+          return generateLayer(
+            layers,
+            overlay,
+            createUrlWithToken(layerUrl, token),
+            layer.params,
+            layer.type,
+            layer.bounds,
+          )
+        }
+        return false
       })
-      .flat()
       .filter((layer) => layer),
 )
 
