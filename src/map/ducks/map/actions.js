@@ -1,21 +1,21 @@
 import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system'
 import {
-  MAP_EMPTY_GEOMETRY,
-  MAP_UPDATE_SHAPE,
-  MAP_SET_DRAWING_MODE,
-  MAP_END_DRAWING,
-  MAP_CLEAR,
-  MAP_ZOOM,
-  TOGGLE_MAP_PANEL,
   CLOSE_MAP_PANEL,
+  MAP_BOUNDING_BOX,
+  MAP_CLEAR,
+  MAP_EMPTY_GEOMETRY,
+  MAP_END_DRAWING,
+  MAP_LOADING,
+  MAP_PAN,
+  MAP_SET_DRAWING_MODE,
+  MAP_UPDATE_SHAPE,
+  MAP_ZOOM,
   SET_MAP_BASE_LAYER,
+  SET_MAP_CLICK_LOCATION,
+  TOGGLE_MAP_EMBED,
   TOGGLE_MAP_OVERLAY,
   TOGGLE_MAP_OVERLAY_VISIBILITY,
-  MAP_PAN,
-  SET_MAP_CLICK_LOCATION,
-  MAP_BOUNDING_BOX,
-  MAP_LOADING,
-  TOGGLE_MAP_EMBED,
+  TOGGLE_MAP_PANEL,
 } from './constants'
 
 // Actions
@@ -44,10 +44,8 @@ export const toggleMapOverlay = (payload) => ({
   type: TOGGLE_MAP_OVERLAY,
   payload: {
     mapLayers:
-      // Only mapLayers with selectable legendItems must be added as overlay
-      payload.legendItems?.some(({ notSelectable }) => !notSelectable) &&
-      payload.legendItems.length > 0
-        ? payload.legendItems.map(({ id: legendItemId }) => legendItemId)
+      payload.legendItems && payload.legendItems.length > 0
+        ? payload.legendItems.map((legendItem) => legendItem.id)
         : [payload.id],
   },
   meta: {
