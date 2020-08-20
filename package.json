@@ -185,7 +185,7 @@
     "jest-environment-jsdom-global": "2.0.4",
     "jest-environment-node": "26.3.0",
     "jest-fetch-mock": "3.0.3",
-    "jest-styled-components": "7.0.2",
+    "jest-styled-components": "7.0.3",
     "karma": "5.1.1",
     "karma-babel-preprocessor": "8.0.1",
     "karma-coverage": "2.0.3",
