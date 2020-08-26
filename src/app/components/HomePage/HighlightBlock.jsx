@@ -55,9 +55,9 @@ const ImageCardWrapperSmall = styled.div`
   }
 
   @media screen and ${breakpoint('min-width', 'mobileL')} and ${breakpoint(
-  'max-width',
-  'tabletM',
-)} {
+      'max-width',
+      'tabletM',
+    )} {
     flex-basis: 100%;
     flex-direction: row;
 
@@ -67,7 +67,7 @@ const ImageCardWrapperSmall = styled.div`
   }
 
   @media screen and ${breakpoint('max-width', 'mobileL')} {
-flex-basis: 100%;
+    flex-basis: 100%;
   }
 `
 

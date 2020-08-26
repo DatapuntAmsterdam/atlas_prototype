@@ -15,8 +15,8 @@ import ConstructionFileDetail, {
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 
-const ImageViewer = lazy(() =>
-  import(/* webpackChunkName: "ImageViewer" */ '../../components/ImageViewer/ImageViewer'),
+const ImageViewer = lazy(
+  () => import(/* webpackChunkName: "ImageViewer" */ '../../components/ImageViewer/ImageViewer'),
 )
 
 const StyledRow = styled(Row)`
