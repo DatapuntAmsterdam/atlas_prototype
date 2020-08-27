@@ -9,10 +9,12 @@ const MapPanel = ({
   onBaseLayerToggle,
   onMapPanelHandleToggle,
   onMapPanelToggle,
-  onLayerToggle,
-  onLayerVisibilityToggle,
+  onLayerToggle = () => {},
+  onLayerVisibilityToggle = () => {},
   overlays,
   printMode,
+  onAddLayers,
+  onRemoveLayers,
   activeMapLayers = [],
   isMapPanelVisible = true,
   mapBaseLayers = {},
@@ -70,6 +72,8 @@ const MapPanel = ({
         )}
         {panelLayers.map(({ id, mapLayers, title }) => (
           <MapLegend
+            onAddLayers={onAddLayers}
+            onRemoveLayers={onRemoveLayers}
             key={id}
             activeMapLayers={mapLayers}
             onLayerToggle={onLayerToggle}

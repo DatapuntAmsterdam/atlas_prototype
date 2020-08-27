@@ -8,18 +8,20 @@ const MapPanelHandle = ({ isMapPanelHandleVisible, onMapPanelHandleToggle, child
     map-panel-handle--${isMapPanelHandleVisible ? 'visible' : 'hidden'}
   `}
   >
-    <button
-      type="button"
-      className={`
+    {onMapPanelHandleToggle && (
+      <button
+        type="button"
+        className={`
         map-panel-handle__toggle
         map-panel-handle__toggle--${isMapPanelHandleVisible ? 'icon-collapse' : 'icon-expand'}
       `}
-      onClick={onMapPanelHandleToggle}
-    >
-      <span className="u-sr-only">
-        {isMapPanelHandleVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen'}
-      </span>
-    </button>
+        onClick={onMapPanelHandleToggle}
+      >
+        <span className="u-sr-only">
+          {isMapPanelHandleVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen'}
+        </span>
+      </button>
+    )}
     {isMapPanelHandleVisible && children}
   </div>
 )
@@ -27,7 +29,11 @@ const MapPanelHandle = ({ isMapPanelHandleVisible, onMapPanelHandleToggle, child
 MapPanelHandle.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   isMapPanelHandleVisible: PropTypes.bool.isRequired,
-  onMapPanelHandleToggle: PropTypes.func.isRequired,
+  onMapPanelHandleToggle: PropTypes.func,
+}
+
+MapPanelHandle.defaultProps = {
+  onMapPanelHandleToggle: undefined,
 }
 
 export default MapPanelHandle

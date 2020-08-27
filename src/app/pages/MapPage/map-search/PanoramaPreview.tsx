@@ -69,7 +69,7 @@ const PanoramaPreview: React.FC<PanoramaPreviewProps> = ({
           aspect,
           radius,
         }),
-      [location, width, fov, horizon, aspect, radius],
+      [location.lat, location.lng, width, fov, horizon, aspect, radius],
     ),
   )
 

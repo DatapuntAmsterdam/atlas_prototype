@@ -1,10 +1,10 @@
-import environment from '../../../../environment'
+import environment from '../../../environment'
 import {
   toAdresses,
   toCadastralObjects,
   toDetailFromEndpoint,
   toEstablishments,
-} from '../../../../store/redux-first-router/actions'
+} from '../../../store/redux-first-router/actions'
 
 // Because we use these types as id's in option values (select), we need to convert them to strings
 export enum DataSelectionType {

@@ -1,6 +1,6 @@
 import { LatLng } from 'leaflet'
 import { createContext } from 'react'
-import { DataSelectionType } from './Components/config'
+import { DataSelectionType } from '../config'
 import { DataSelection, MapData, MapVisualization, PaginationParams } from './DataSelectionProvider'
 
 type DataSelectionContextValues = {

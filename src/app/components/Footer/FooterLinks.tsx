@@ -10,6 +10,7 @@ export type FooterLink = {
   title: string
   id:
     | string
+    | number
     | {
         development: string
         acceptance: string

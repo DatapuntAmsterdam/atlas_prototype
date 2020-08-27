@@ -3,6 +3,8 @@ import isUndefined from 'lodash.isundefined'
 import queryString from 'querystring'
 import PARAMETERS from '../parameters'
 import getState from '../../shared/services/redux/get-state'
+import PAGES from '../../app/pages'
+import { ROUTER_NAMESPACE } from '../../app/routes'
 
 /**
  * ParamsRegistry manages the relations between url parameters, reducers and routes.
@@ -193,7 +195,10 @@ class ParamsRegistry {
   }
 
   setQueriesFromState(currentLocationType, state, nextAction) {
-    if (this.isRouterType(nextAction)) {
+    if (
+      this.isRouterType(nextAction) ||
+      currentLocationType === `${ROUTER_NAMESPACE}/${PAGES.MAP}`
+    ) {
       return undefined
     }
     const query = Object.entries(this.result).reduce((acc, [parameter, paramObject]) => {

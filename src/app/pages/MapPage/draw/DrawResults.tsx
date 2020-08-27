@@ -26,9 +26,10 @@ import LoginLink from '../../../components/Links/LoginLink/LoginLink'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import NotificationLevel from '../../../models/notification'
 import formatCount from '../../../utils/formatCount'
-import DataSelectionContext from '../DataSelectionContext'
+import DataSelectionContext from './DataSelectionContext'
 import { Overlay } from '../types'
-import config, { AuthScope, DataSelectionType } from './config'
+import config, { AuthScope, DataSelectionType } from '../config'
+import MapContext from '../MapContext'
 
 const ResultLink = styled(RouterLink)`
   width: 100%;
@@ -63,7 +64,6 @@ const StyledCompactPager = styled(CompactPager)`
 `
 
 const AccordionContent = styled.div`
-  min-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,10 +103,9 @@ const StyledSelect = styled(Select)`
 
 type Props = {
   currentOverlay: Overlay
-  setShowDrawTool: (show: boolean) => void
 }
 
-const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool }) => {
+const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
   const [delayedLoadingIds, setDelayedLoadingIds] = useState<string[]>([])
   const [highlightMarker, setHighlightMarker] = useState<LatLng | null>(null)
   const {
@@ -119,6 +118,7 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
     loadingIds,
     errorIds,
   } = useContext(DataSelectionContext)
+  const { setShowDrawTool } = useContext(MapContext)
   const userScopes = useSelector(getUserScopes)
   const { trackEvent } = useMatomo()
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
@@ -356,4 +356,4 @@ const DataSelectionResults: React.FC<Props> = ({ currentOverlay, setShowDrawTool
   )
 }
 
-export default DataSelectionResults
+export default DrawResults

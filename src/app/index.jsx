@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 import environment from '../environment'
 import configureStore from '../store/store'
 import App from './App'
@@ -19,7 +20,7 @@ if ('serviceWorker' in navigator) {
 // If there are no redirects for the current url, render the application
 resolveRedirects().then((hasToRedirect) => {
   if (!hasToRedirect) {
-    const store = configureStore()
+    const { store } = configureStore()
 
     renderApp(store)
   }
@@ -35,7 +36,9 @@ function renderApp(store) {
 
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>,
     document.getElementById('root'),
   )

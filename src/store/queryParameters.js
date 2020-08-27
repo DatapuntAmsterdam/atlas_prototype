@@ -56,7 +56,6 @@ import {
 } from '../shared/services/coordinate-reference-system'
 import PARAMETERS from './parameters'
 import paramsRegistry from './params-registry'
-import { initialState as MapContextInitialState } from '../app/pages/MapPage/MapContext'
 
 const routesWithSearch = [
   routing.search.type,
@@ -213,22 +212,9 @@ export default paramsRegistry
     )
   })
   .addParameter(PARAMETERS.MAP_BACKGROUND, (routes) => {
-    routes
-      .add(routesWithMapActive, MAP, 'baseLayer', {
-        defaultValue: mapInitialState.baseLayer,
-        selector: getActiveBaseLayer,
-      })
-      .add(routing.map.type, null, '', {
-        defaultValue: MapContextInitialState.activeBaseLayer,
-        selector: () => paramsRegistry.getParam(PARAMETERS.MAP_BACKGROUND),
-      })
-  })
-  .addParameter(PARAMETERS.DRAWING_GEOMETRY, (routes) => {
-    routes.add(routing.map.type, null, '', {
-      defaultValue: [],
-      selector: () => paramsRegistry.getParam(PARAMETERS.DRAWING_GEOMETRY),
-      encode: (val) => (val ? encodeBounds(val) : null),
-      decode: (val) => (val ? decodeBounds(val) : null),
+    routes.add(routesWithMapActive, MAP, 'baseLayer', {
+      defaultValue: mapInitialState.baseLayer,
+      selector: getActiveBaseLayer,
     })
   })
   .addParameter(PARAMETERS.PANORAMA_TAGS, (routes) => {
@@ -371,33 +357,26 @@ export default paramsRegistry
     )
   })
   .addParameter(PARAMETERS.LAYERS, (routes) => {
-    routes
-      .add(
-        [...routesWithMapActive, ...routesWithSearch],
-        MAP,
-        'overlays',
-        {
-          defaultValue: mapInitialState.overlays,
-          decode: (val) => decodeLayers(val),
-          selector: getMapOverlays,
-          encode: (selectorResult) => {
-            if (!selectorResult) {
-              return ''
-            }
+    routes.add(
+      [...routesWithMapActive, ...routesWithSearch],
+      MAP,
+      'overlays',
+      {
+        defaultValue: mapInitialState.overlays,
+        decode: (val) => decodeLayers(val),
+        selector: getMapOverlays,
+        encode: (selectorResult) => {
+          if (!selectorResult) {
+            return ''
+          }
 
-            return selectorResult
-              .map((overlay) => `${overlay.id}:${overlay.isVisible ? 1 : 0}`)
-              .join('|')
-          },
+          return selectorResult
+            .map((overlay) => `${overlay.id}:${overlay.isVisible ? 1 : 0}`)
+            .join('|')
         },
-        false,
-      )
-      .add(routing.map.type, null, '', {
-        defaultValue: null,
-        selector: () => paramsRegistry.getParam(PARAMETERS.LAYERS),
-        encode: (val) => (val ? encodeLayers(val) : null),
-        decode: (val) => (val ? decodeLayers(val) : null),
-      })
+      },
+      false,
+    )
   })
   .addParameter(PARAMETERS.LOCATION, (routes) => {
     routes
@@ -439,12 +418,6 @@ export default paramsRegistry
           }
           return null
         },
-      })
-      .add(routing.map.type, null, '', {
-        defaultValue: null,
-        selector: () => paramsRegistry.getParam(PARAMETERS.LOCATION),
-        encode: (val) => (val ? encodeLocation(val) : ''),
-        decode: (val) => (val ? decodeLocation(val) : ''),
       })
   })
   .addParameter(PARAMETERS.MARKER, (routes) => {

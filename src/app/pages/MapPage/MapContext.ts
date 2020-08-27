@@ -1,5 +1,5 @@
 import { Geometry } from 'geojson'
-import { LatLngLiteral, TileLayerOptions, WMSOptions } from 'leaflet'
+import { TileLayerOptions, WMSOptions } from 'leaflet'
 import { createContext } from 'react'
 
 export type ActiveMapLayer = {
@@ -89,66 +89,35 @@ export interface TmsOverlay {
 export type Overlay = WmsOverlay | TmsOverlay
 
 export type MapState = {
-  baseLayers: Array<Object> // TODO: Add auto typegeneration
   panelLayers: Array<Object> // TODO: Add auto typegeneration
   mapLayers: Array<MapLayer> // TODO: Add auto typegeneration
-  activeBaseLayer: string
-  activeMapLayers: Array<ActiveMapLayer>
-  overlays: Array<Overlay> // TODO: Add auto typegeneration
-  zoomLevel: number
-  viewCenter: Array<number>
-  location: LatLngLiteral | null
+  legendLeafletLayers: Array<Overlay> // TODO: Add auto typegeneration
   detailUrl: string | null
   geometry?: Geometry
-  drawingGeometries?: LatLngLiteral[][]
+  showDrawTool: boolean
+  showDrawContent: boolean
 }
 
 export type MapContextProps = {
-  setActiveBaseLayer: (activeBaseLayer: string) => void
-  setActiveMapLayers: (ActiveMapLayer: Array<ActiveMapLayer>) => void
-  setVisibleMapLayer: (id: string, isVisible: boolean) => void
-  setLocation: (location: LatLngLiteral | null) => void
   setGeometry: (geometry: Geometry) => void
-  addDrawingGeometry: (drawingGeometry: LatLngLiteral[]) => void
-  addDrawingGeometries: (drawingGeometries: LatLngLiteral[][]) => void
-  deleteDrawingGeometry: (drawingGeometry: LatLngLiteral[]) => void
-  resetDrawingGeometries: () => void
   setDetailUrl: (url: string | null) => void
-  getBaseLayers: () => void
+  setShowDrawTool: (showDrawing: boolean) => void
   getPanelLayers: () => void
   getMapLayers: () => void
-  getOverlays: () => void
 } & MapState
 
-const DEFAULT_LAT = 52.3731081
-const DEFAULT_LNG = 4.8932945
-
 export const initialState: MapContextProps = {
-  activeBaseLayer: 'topografie',
-  activeMapLayers: [],
-  baseLayers: [],
   panelLayers: [],
   mapLayers: [],
-  overlays: [],
-  viewCenter: [DEFAULT_LAT, DEFAULT_LNG],
-  drawingGeometries: [],
-  location: null,
+  legendLeafletLayers: [],
   detailUrl: null,
-  zoomLevel: 11,
-  setActiveBaseLayer: () => {},
-  setActiveMapLayers: () => {},
-  setVisibleMapLayer: () => {},
+  showDrawTool: false,
+  showDrawContent: false,
   setGeometry: () => {},
-  resetDrawingGeometries: () => {},
-  addDrawingGeometry: () => {},
-  addDrawingGeometries: () => {},
-  deleteDrawingGeometry: () => {},
-  setLocation: () => {},
   setDetailUrl: () => {},
-  getBaseLayers: () => {},
+  setShowDrawTool: () => {},
   getPanelLayers: () => {},
   getMapLayers: () => {},
-  getOverlays: () => {},
 }
 
 const MapContext = createContext<MapContextProps>(initialState)

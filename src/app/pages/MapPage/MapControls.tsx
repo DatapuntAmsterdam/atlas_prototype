@@ -3,8 +3,8 @@ import { Overlay } from '@datapunt/arm-core/lib/components/MapPanel/constants'
 import { Spinner, ViewerContainer as ViewerContainerComponent } from '@datapunt/asc-ui'
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components'
-import BaseLayerToggle from './BaseLayerToggle'
-import DrawTool from './DrawTool'
+import BaseLayerToggle from './controls/BaseLayerToggle'
+import DrawTool from './draw/DrawTool'
 
 type StyledViewerContainerProps = {
   left?: string
@@ -32,22 +32,18 @@ type Props = {
   currentOverlay: Overlay
   setCurrentOverlay: (overlay: Overlay) => void
   showDesktopVariant: boolean
-  handleToggleDrawTool: (show: boolean) => void
   isLoading: boolean
-  showDrawTool: boolean
 }
 
 const BottomLeftHolder = styled.div`
   display: flex;
 `
 
-const ViewerContainer: React.FC<Props> = ({
+const MapControls: React.FC<Props> = ({
   currentOverlay,
   setCurrentOverlay,
   showDesktopVariant,
-  handleToggleDrawTool,
   isLoading,
-  showDrawTool,
   ...otherProps
 }) => {
   const { drawerPosition, draggable } = useContext(MapPanelContext)
@@ -70,13 +66,7 @@ const ViewerContainer: React.FC<Props> = ({
           bottomLeft={
             <MapPanelLegendButton {...{ showDesktopVariant, currentOverlay, setCurrentOverlay }} />
           }
-          topRight={
-            <DrawTool
-              isOpen={showDrawTool}
-              onToggle={handleToggleDrawTool}
-              setCurrentOverlay={setCurrentOverlay}
-            />
-          }
+          topRight={<DrawTool setCurrentOverlay={setCurrentOverlay} />}
         />
       ) : (
         <StyledViewerContainer
@@ -95,17 +85,11 @@ const ViewerContainer: React.FC<Props> = ({
               <BaseLayerToggle />
             </BottomLeftHolder>
           }
-          topRight={
-            <DrawTool
-              isOpen={showDrawTool}
-              onToggle={handleToggleDrawTool}
-              setCurrentOverlay={setCurrentOverlay}
-            />
-          }
+          topRight={<DrawTool setCurrentOverlay={setCurrentOverlay} />}
         />
       )}
     </>
   )
 }
 
-export default ViewerContainer
+export default MapControls

@@ -16,7 +16,7 @@ import {
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
-import PanoramaPreview from '../Components/PanoramaPreview'
+import PanoramaPreview from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
 
 export interface DetailPanelProps {

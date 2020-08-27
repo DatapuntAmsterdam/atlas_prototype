@@ -15,8 +15,10 @@ import MoreResultsWhenLoggedIn from '../../../components/Alerts/MoreResultsWhenL
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import ShowMore from '../../../components/ShowMore'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
-import PanoramaPreview from '../Components/PanoramaPreview'
+import PanoramaPreview from './PanoramaPreview'
 import { Overlay } from '../types'
+import useParam from '../../../utils/useParam'
+import { locationParam } from '../../../query-params'
 
 const RESULT_LIMIT = 10
 
@@ -71,18 +73,14 @@ const StyledPanoramaPreview = styled(PanoramaPreview)`
 
 const EXCLUDED_RESULTS = 'vestigingen'
 
-export interface PointSearchPanelProps {
-  setLocation: (latLng: LatLngLiteral | null) => void
+export interface MapSearchPanelProps {
   location: LatLngLiteral
   currentOverlay: Overlay
 }
 
-const PointSearchPanel: React.FC<PointSearchPanelProps> = ({
-  setLocation,
-  currentOverlay,
-  location,
-}) => {
+const MapSearchResults: React.FC<MapSearchPanelProps> = ({ currentOverlay, location }) => {
   const user = useSelector(getUser)
+  const [, setLocation] = useParam(locationParam)
   const result = usePromise(
     useMemo(
       () =>
@@ -172,4 +170,4 @@ function formatCategoryTitle(category: MapSearchCategory) {
     : category.categoryLabel
 }
 
-export default PointSearchPanel
+export default MapSearchResults

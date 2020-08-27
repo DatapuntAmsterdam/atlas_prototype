@@ -95,6 +95,8 @@ const MapLegend = ({
   onLayerToggle,
   title,
   overlays,
+  onRemoveLayers,
+  onAddLayers,
 }) => {
   const ref = React.createRef()
   const { trackEvent } = useMatomo()
@@ -194,9 +196,31 @@ const MapLegend = ({
     if (hasOpenMapLayers) setOpen(true)
   }, [hasOpenMapLayers])
 
+  const addOrRemoveLayer = (checked, layers, onlyInvisible = false) => {
+    const layersToFilter = onlyInvisible ? layers.filter(({ isVisible }) => !isVisible) : layers
+    const filteredMapLayers = layersToFilter
+      .map((mapLayer) => {
+        if (mapLayer?.legendItems?.length && mapLayer?.legendItems?.every(({ id }) => id)) {
+          return mapLayer?.legendItems?.map((legendItem) => legendItem.id)
+        }
+        return mapLayer.id
+      })
+      .flat()
+      .filter((id) => id)
+
+    if (checked) {
+      if (onAddLayers) {
+        onAddLayers(filteredMapLayers)
+      }
+    } else if (onRemoveLayers) {
+      onRemoveLayers(filteredMapLayers)
+    }
+  }
+
   const handleOnChangeCollection = (e) => {
     // We want to check all the layers when user clicks on an indeterminate checkbox
     if (collectionIndeterminate) {
+      addOrRemoveLayer(e.currentTarget.checked, mapLayers, true)
       mapLayers
         .filter(({ isVisible }) => !isVisible)
         .forEach((mapLayer) => {
@@ -217,6 +241,7 @@ const MapLegend = ({
         handleLayerToggle(e.currentTarget.checked, mapLayer)
       })
       setOpen(e.currentTarget.checked)
+      addOrRemoveLayer(e.currentTarget.checked, activeMapLayers)
     }
   }
 
@@ -292,12 +317,13 @@ const MapLegend = ({
                             id={mapLayer.id}
                             className="checkbox"
                             variant="tertiary"
-                            checked={layerIsChecked}
+                            checked={layerIsChecked && !layerIsIndeterminate}
                             indeterminate={layerIsIndeterminate}
                             name={mapLayer.title}
                             onChange={
                               /* istanbul ignore next */
                               (e) => {
+                                addOrRemoveLayer(e.currentTarget.checked, [mapLayer])
                                 // Sometimes we dont want the active maplayers to be deleted from the query parameters in the url
                                 if (isPrintOrEmbedView || layerIsIndeterminate) {
                                   return mapLayer.legendItems.length > 0 &&
@@ -324,7 +350,7 @@ const MapLegend = ({
                     {!isAuthorised(mapLayer, user) && (
                       <div className="map-legend__notification">
                         <span>
-                          <LoginLink variant="blank">Zichtbaar na inloggen</LoginLink>
+                          <LoginLink inList={false}>Zichtbaar na inloggen</LoginLink>
                         </span>
                       </div>
                     )}
@@ -381,11 +407,20 @@ const MapLegend = ({
                                           name={legendItem.title}
                                           onChange={
                                             /* istanbul ignore next */
-                                            () =>
+                                            () => {
                                               onLayerVisibilityToggle(
                                                 legendItem.id,
                                                 legendItemIsVisible,
                                               )
+
+                                              if (!legendItemIsVisible) {
+                                                if (onAddLayers) {
+                                                  onAddLayers([legendItem.id])
+                                                }
+                                              } else if (onRemoveLayers) {
+                                                onRemoveLayers([legendItem.id])
+                                              }
+                                            }
                                           }
                                         />
                                       ) : (

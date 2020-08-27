@@ -103,7 +103,7 @@ const configureStore = (storybook = false, req) => {
   initialRouteDispatch()
   store.dispatch(authenticateReload())
 
-  return store
+  return { store, history }
 }
 
 export default configureStore

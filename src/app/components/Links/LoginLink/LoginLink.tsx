@@ -1,5 +1,4 @@
 import { Link } from '@datapunt/asc-ui'
-import { LinkVariant } from '@datapunt/asc-ui/lib/components/Link/LinkStyle'
 import React, { MouseEvent, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
@@ -13,10 +12,10 @@ const StyledLink = styled(Link)`
 `
 
 export interface LoginLinkProps {
-  variant?: LinkVariant
+  inList?: boolean
 }
 
-export const LoginLink: React.FC<LoginLinkProps> = ({ variant = 'with-chevron', children }) => {
+export const LoginLink: React.FC<LoginLinkProps> = ({ inList = true, children }) => {
   const dispatch = useDispatch()
   const handleLogin = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -26,7 +25,7 @@ export const LoginLink: React.FC<LoginLinkProps> = ({ variant = 'with-chevron', 
 
   // TODO: Since this is not a navigational element a Button should be used here.
   return (
-    <StyledLink data-testid="link" variant={variant} onClick={handleLogin} darkBackground>
+    <StyledLink data-testid="link" inList={inList} onClick={handleLogin} darkBackground>
       {children || 'Inloggen'}
     </StyledLink>
   )

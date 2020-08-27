@@ -1,9 +1,12 @@
 import { MapPanelContent, MapPanelContentProps } from '@datapunt/arm-core'
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import MapPanel from '../../../../map/containers/panel/MapPanel'
-import getState from '../../../../shared/services/redux/get-state'
 import MapContext from '../MapContext'
+import useParam from '../../../utils/useParam'
+import { mapLayersParam, zoomParam } from '../../../query-params'
+import { getUser } from '../../../../shared/ducks/user/user'
 
 const StyledMapPanelContent = styled(MapPanelContent)`
   overflow: hidden; // This can be removed if the new design for the legend is added
@@ -32,37 +35,14 @@ const StyledMapPanelContent = styled(MapPanelContent)`
 export interface LegendPanelProps extends Omit<MapPanelContentProps, 'title'> {}
 
 const LegendPanel: React.FC<LegendPanelProps> = ({ ...otherProps }) => {
-  const {
-    panelLayers,
-    activeMapLayers,
-    zoomLevel,
-    setActiveMapLayers,
-    setVisibleMapLayer,
-  } = React.useContext(MapContext)
+  const { panelLayers } = React.useContext(MapContext)
+  const user = useSelector(getUser)
+  const [zoomLevel] = useParam(zoomParam)
+  const [activeLayers, setActiveMapLayers] = useParam(mapLayersParam)
 
-  // Get the user from the Redux state for now
-  const { user } = getState()
-
-  const onLayerToggle = React.useCallback(
-    ({
-      id,
-      legendItems,
-    }: {
-      // Add auto type generation
-      id: string
-      legendItems: Array<{ id: string; notSelectable: boolean }>
-    }) => {
-      if (setActiveMapLayers)
-        setActiveMapLayers(
-          legendItems?.some(({ notSelectable }) => !notSelectable) && legendItems.length > 0
-            ? legendItems.map(({ id: legendItemId }) => ({
-                id: legendItemId,
-                isVisible: true,
-              }))
-            : [{ id, isVisible: true }],
-        )
-    },
-    [setActiveMapLayers],
+  const overlays = useMemo(
+    () => activeLayers?.map((layer) => ({ id: layer, isVisible: true })) || [],
+    [activeLayers],
   )
 
   return (
@@ -70,9 +50,15 @@ const LegendPanel: React.FC<LegendPanelProps> = ({ ...otherProps }) => {
       {/* @ts-ignore */}
       <MapPanel
         panelLayers={panelLayers}
-        overlays={activeMapLayers}
-        onLayerToggle={onLayerToggle}
-        onLayerVisibilityToggle={setVisibleMapLayer}
+        overlays={overlays}
+        onAddLayers={(mapLayers: string[]) => {
+          if (mapLayers) {
+            setActiveMapLayers([...(activeLayers || []), ...mapLayers])
+          }
+        }}
+        onRemoveLayers={(mapLayers: string[]) => {
+          setActiveMapLayers(activeLayers?.filter((layer) => !mapLayers.includes(layer)) || [])
+        }}
         isMapPanelVisible
         zoomLevel={zoomLevel}
         user={user}

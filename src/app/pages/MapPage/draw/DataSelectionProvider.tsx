@@ -5,13 +5,9 @@ import { LatLng, LatLngTuple } from 'leaflet'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
-import { getUserScopes } from '../../../shared/ducks/user/user'
-import { fetchWithToken } from '../../../shared/services/api/api'
-import config, {
-  AuthScope,
-  DataSelectionMapVisualizationType,
-  DataSelectionType,
-} from './Components/config'
+import { getUserScopes } from '../../../../shared/ducks/user/user'
+import { fetchWithToken } from '../../../../shared/services/api/api'
+import config, { AuthScope, DataSelectionMapVisualizationType, DataSelectionType } from '../config'
 import DataSelectionContext from './DataSelectionContext'
 
 export interface MapData {
@@ -322,9 +318,13 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     return null
   }
 
-  const removeDataSelection = (idToRemove: string[]) => {
-    setMapVisualizationState(mapVisualization.filter(({ id }) => !idToRemove.includes(id)))
-    setDataSelectionState(dataSelection.filter(({ id }) => !idToRemove.includes(id)))
+  const removeDataSelection = (idsToRemove: string[]) => {
+    if (mapVisualizationRef.current && dataSelectionRef.current) {
+      setMapVisualizationState(
+        mapVisualizationRef.current.filter(({ id }) => !idsToRemove.includes(id)),
+      )
+      setDataSelectionState(dataSelectionRef.current.filter(({ id }) => !idsToRemove.includes(id)))
+    }
   }
 
   // Re-fetch from new endpoints when type changes
