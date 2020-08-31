@@ -18,7 +18,6 @@ import getLeafletLayers from './utils/getLeafletLayers'
 type Action =
   | { type: 'setPanelLayers'; payload: MapCollection[] }
   | { type: 'setMapLayers'; payload: MapLayer[] }
-  | { type: 'setDetailUrl'; payload: string | null }
   | { type: 'setGeometry'; payload: Geometry }
 
 const reducer = (state: MapState, action: Action): MapState => {
@@ -33,18 +32,11 @@ const reducer = (state: MapState, action: Action): MapState => {
         ...state,
         mapLayers: action.payload,
       }
-
-    case 'setDetailUrl':
-      return {
-        ...state,
-        detailUrl: action.payload,
-      }
     case 'setGeometry':
       return {
         ...state,
         geometry: action.payload,
       }
-
     default:
       return state
   }
@@ -62,10 +54,6 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
     () => (activeMapLayers ? getLeafletLayers(activeMapLayers, state.mapLayers, user) : []),
     [activeMapLayers, state.mapLayers, user],
   )
-
-  function setDetailUrl(payload: string | null) {
-    dispatch({ type: 'setDetailUrl', payload })
-  }
 
   function setGeometry(payload: Geometry) {
     dispatch({ type: 'setGeometry', payload })
@@ -107,7 +95,6 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
       value={{
         ...state,
         legendLeafletLayers,
-        setDetailUrl,
         setGeometry,
         getPanelLayers,
         getMapLayers,

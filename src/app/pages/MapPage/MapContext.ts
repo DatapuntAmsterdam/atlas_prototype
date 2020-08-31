@@ -36,7 +36,6 @@ export type MapState = {
   panelLayers: MapCollection[]
   mapLayers: MapLayer[]
   legendLeafletLayers: Overlay[]
-  detailUrl: string | null
   geometry?: Geometry
   showDrawTool: boolean
   showDrawContent: boolean
@@ -44,7 +43,6 @@ export type MapState = {
 
 export type MapContextProps = {
   setGeometry: (geometry: Geometry) => void
-  setDetailUrl: (url: string | null) => void
   setShowDrawTool: (showDrawing: boolean) => void
   getPanelLayers: () => void
   getMapLayers: () => void
@@ -54,11 +52,9 @@ export const initialState: MapContextProps = {
   panelLayers: [],
   mapLayers: [],
   legendLeafletLayers: [],
-  detailUrl: null,
   showDrawTool: false,
   showDrawContent: false,
   setGeometry: () => {},
-  setDetailUrl: () => {},
   setShowDrawTool: () => {},
   getPanelLayers: () => {},
   getMapLayers: () => {},

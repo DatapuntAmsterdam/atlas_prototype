@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useMemo } from 'react'
 import { MapPanel, MapPanelDrawer } from '@datapunt/arm-core'
 import { hooks } from '@datapunt/asc-ui'
-import MapSearchMarker from './map-search/MapSearchMarker'
-import { Overlay } from './types'
-import LegendPanel from './legend/LegendPanel'
-import MapSearchResults from './map-search/MapSearchResults'
-import DetailPanel from './detail/DetailPanel'
-import MapContext from './MapContext'
+import React, { useContext, useEffect, useMemo } from 'react'
+import { detailUrlParam, locationParam } from '../../query-params'
 import useParam from '../../utils/useParam'
-import { locationParam } from '../../query-params'
-import DrawResults from './draw/DrawResults'
+import DetailPanel from './detail/DetailPanel'
 import DataSelectionContext from './draw/DataSelectionContext'
+import DrawResults from './draw/DrawResults'
+import LegendPanel from './legend/LegendPanel'
+import MapSearchMarker from './map-search/MapSearchMarker'
+import MapSearchResults from './map-search/MapSearchResults'
+import MapContext from './MapContext'
+import { Overlay } from './types'
 
 type Props = {
   setCurrentOverlay: (overlay: Overlay) => void
@@ -19,7 +19,8 @@ type Props = {
 
 const MapPanelContent: React.FC<Props> = ({ setCurrentOverlay, currentOverlay }) => {
   const [locationTuple] = useParam(locationParam)
-  const { detailUrl, showDrawTool, showDrawContent } = React.useContext(MapContext)
+  const [detailUrl] = useParam(detailUrlParam)
+  const { showDrawTool, showDrawContent } = React.useContext(MapContext)
   const { dataSelection } = useContext(DataSelectionContext)
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
 

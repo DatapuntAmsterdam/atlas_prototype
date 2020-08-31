@@ -15,6 +15,8 @@ import {
 } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
+import { detailUrlParam } from '../../../query-params'
+import useParam from '../../../utils/useParam'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import PanoramaPreview from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
@@ -37,7 +39,8 @@ const Spacer = styled.div`
 `
 
 const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
-  const { setDetailUrl, setGeometry } = useContext(MapContext)
+  const [, setDetailUrl] = useParam(detailUrlParam)
+  const { setGeometry } = useContext(MapContext)
   const result = usePromise(
     useMemo(() => {
       const detailParams = parseDetailPath(detailUrl)

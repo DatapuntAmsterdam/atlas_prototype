@@ -1,7 +1,7 @@
-import { LatLngLiteral, LatLngTuple } from 'leaflet'
 import { constants } from '@datapunt/arm-core'
-import { UrlParam } from './utils/useParam'
+import { LatLngLiteral, LatLngTuple } from 'leaflet'
 import { normalizeCoordinate } from '../shared/services/coordinate-reference-system'
+import { UrlParam } from './utils/useParam'
 
 export type BaseLayer =
   | 'topografie'
@@ -91,4 +91,11 @@ export const baseLayerParam: UrlParam<BaseLayer> = {
   defaultValue: 'topografie',
   decode: (val) => val as BaseLayer,
   encode: (val) => val.toString(),
+}
+
+export const detailUrlParam: UrlParam<string | null> = {
+  name: 'detailUrl',
+  defaultValue: null,
+  decode: (value) => value,
+  encode: (value) => value,
 }

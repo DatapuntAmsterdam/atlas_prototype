@@ -2,12 +2,12 @@ import { MapPanelContext, Marker as ARMMarker, usePanToLatLng } from '@datapunt/
 import { useMapInstance } from '@datapunt/react-maps'
 import { LeafletMouseEvent } from 'leaflet'
 import React, { useContext, useEffect } from 'react'
-import { SnapPoint } from '../types'
-import MapContext from '../MapContext'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
+import { detailUrlParam, locationParam } from '../../../query-params'
 import joinUrl from '../../../utils/joinUrl'
 import useParam from '../../../utils/useParam'
-import { locationParam } from '../../../query-params'
+import MapContext from '../MapContext'
+import { SnapPoint } from '../types'
 
 interface NearestDetail {
   id: string
@@ -15,7 +15,8 @@ interface NearestDetail {
 }
 
 const MapSearchMarker: React.FC = () => {
-  const { legendLeafletLayers, setDetailUrl } = React.useContext(MapContext)
+  const [, setDetailUrl] = useParam(detailUrlParam)
+  const { legendLeafletLayers } = React.useContext(MapContext)
   const [location, setLocation] = useParam(locationParam)
 
   async function handleMapClick(e: LeafletMouseEvent) {
