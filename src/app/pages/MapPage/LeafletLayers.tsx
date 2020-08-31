@@ -1,11 +1,15 @@
-import React, { useContext, useMemo } from 'react'
-import { TileLayer } from '@datapunt/react-maps'
 import { NonTiledLayer } from '@datapunt/arm-nontiled'
-import MapContext, { TmsOverlay, WmsOverlay } from './MapContext'
+import { TileLayer } from '@datapunt/react-maps'
+import React, { useContext, useMemo } from 'react'
 import GeoJSON from '../../components/LeafletComponents/GeoJSON'
 import DrawMapVisualization from './draw/DrawMapVisualization'
+import MapContext, { TmsOverlay, WmsOverlay } from './MapContext'
 
-const LeafletLayers: React.FC<{ setIsLoading: Function }> = ({ setIsLoading }) => {
+export interface LeafletLayersProps {
+  setIsLoading: (isLoading: boolean) => void
+}
+
+const LeafletLayers: React.FC<LeafletLayersProps> = ({ setIsLoading }) => {
   const { legendLeafletLayers, geometry, showDrawContent } = useContext(MapContext)
 
   const tmsLayers = useMemo(
