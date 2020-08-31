@@ -1,10 +1,17 @@
-import * as matomo from '@datapunt/matomo-tracker-react'
 import { cleanup, fireEvent, render } from '@testing-library/react'
 import * as React from 'react'
 import * as reactRedux from 'react-redux'
 import { Filter, FilterOption, FilterType } from '../../models/filter'
 import * as ducks from '../../pages/SearchPage/SearchPageDucks'
 import SearchFilter, { getFilterComponent } from './SearchFilter'
+
+const mockTrackEvent = jest.fn()
+
+jest.mock('@datapunt/matomo-tracker-react', () => ({
+  useMatomo: () => ({
+    trackEvent: mockTrackEvent,
+  }),
+}))
 
 jest.mock('../../pages/SearchPage/SearchPageDucks')
 
@@ -131,24 +138,6 @@ describe('SearchFilter', () => {
   })
 
   describe('Matomo tracking', () => {
-    let trackEventMock: jest.Mock
-    let useMatomoSpy: jest.SpyInstance
-
-    beforeEach(() => {
-      trackEventMock = jest.fn()
-      useMatomoSpy = jest.spyOn(matomo, 'useMatomo').mockImplementation(
-        () =>
-          ({
-            trackEvent: trackEventMock,
-          } as any),
-      )
-    })
-
-    afterEach(() => {
-      useMatomoSpy.mockClear()
-      trackEventMock.mockClear()
-    })
-
     it('should track changes added to selection using Matomo', () => {
       const { getByLabelText } = render(
         <SearchFilter filter={checkboxFilter} hideCount={false} totalCount={totalCount} />,
@@ -158,7 +147,7 @@ describe('SearchFilter', () => {
 
       fireEvent.click(inputNodeOne)
 
-      expect(trackEventMock).toHaveBeenCalledWith({
+      expect(mockTrackEvent).toHaveBeenCalledWith({
         category: 'search',
         action: 'enable-filter',
         name: 'group-one',
@@ -175,7 +164,7 @@ describe('SearchFilter', () => {
 
       fireEvent.click(inputNodeOne)
 
-      expect(trackEventMock).toHaveBeenCalledWith({
+      expect(mockTrackEvent).toHaveBeenCalledWith({
         category: 'search',
         action: 'disable-filter',
         name: 'group-one',
