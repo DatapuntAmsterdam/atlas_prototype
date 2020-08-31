@@ -1,7 +1,8 @@
 import { TileLayerOptions } from 'leaflet'
-import { MapLayer, Overlay } from '../MapContext'
+import { MapLayer } from '../../../../map/services'
 import MAP_CONFIG from '../../../../map/services/map.config'
 import { createUrlWithToken } from '../../../../shared/services/api/api'
+import { Overlay } from '../MapContext'
 
 const findLayer = (layers: MapLayer[], id: string) => {
   const idParts = id.split('-').reverse()

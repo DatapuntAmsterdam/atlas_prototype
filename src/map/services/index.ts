@@ -2,7 +2,74 @@ import environment from '../../environment'
 
 const mapBaseLayers = require('../../../public/static/map/map-base-layers.config.json')
 
-async function fetchMap(resolver, query) {
+// TODO: Generate these types from the GraphQL schema.
+export interface MapLayer {
+  __typename: 'MapLayer'
+  id: string
+  title: string
+  type: MapLayerType
+  noDetail: boolean
+  minZoom: number
+  maxZoom: number
+  layers?: string[]
+  url?: string
+  params?: string
+  detailUrl: string
+  detailParams?: DetailParams
+  detailIsShape?: boolean
+  iconUrl?: string
+  imageRule?: string
+  notSelectable: boolean
+  external?: boolean
+  bounds: [number[]]
+  authScope?: string
+  category?: string
+  legendItems?: MapLayerLegendItem[]
+  meta: Meta
+  href: string
+}
+
+export interface LegendItem {
+  __typename: 'LegendItem'
+  title: string
+  iconUrl?: string
+  imageRule?: string
+  notSelectable: boolean
+}
+
+export type MapLayerLegendItem = MapLayer | LegendItem
+
+export type MapLayerType = 'wms' | 'tms'
+
+export interface DetailParams {
+  item: string
+  datasets: string
+}
+
+export interface Meta {
+  description?: string
+  themes: Theme[]
+  datasetIds?: number[]
+  thumbnail?: string
+  date?: string
+}
+
+export interface Theme {
+  id: string
+  title: string
+}
+
+export interface MapCollection {
+  id: string
+  title: string
+  mapLayers: MapLayer[]
+}
+
+interface FetchMapResult<T> {
+  results: T[]
+}
+
+async function fetchMap<T>(resolver: string, query: string): Promise<FetchMapResult<T>> {
   const result = await fetch(environment.GRAPHQL_ENDPOINT, {
     method: 'post',
     headers: {
@@ -18,7 +85,14 @@ async function fetchMap(resolver, query) {
   return json.data[resolver]
 }
 
-export function getMapBaseLayers() {
+export interface MapBaseLayer {
+  value: string
+  category: string
+  label: string
+  urlTemplate: string
+}
+
+export function getMapBaseLayers(): MapBaseLayer[] {
   return mapBaseLayers
 }
 
@@ -51,9 +125,7 @@ export async function getMapLayers() {
     }
   }`
 
-  const { results: mapLayerResults } = await fetchMap('mapLayerSearch', query)
-
-  return mapLayerResults
+  return (await fetchMap<MapLayer>('mapLayerSearch', query)).results
 }
 
 export async function getPanelLayers() {
@@ -105,7 +177,5 @@ export async function getPanelLayers() {
     }
   }`
 
-  const { results: mapPanelLayerResults } = await fetchMap('mapCollectionSearch', query)
-
-  return mapPanelLayerResults
+  return (await fetchMap<MapCollection>('mapCollectionSearch', query)).results
 }
