@@ -1,6 +1,7 @@
 import { MapPanel, MapPanelDrawer } from '@datapunt/arm-core'
 import { hooks } from '@datapunt/asc-ui'
-import React, { useContext, useEffect, useMemo } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { LatLngLiteral } from 'leaflet'
 import { detailUrlParam, locationParam } from '../../query-params'
 import useParam from '../../utils/useParam'
 import DetailPanel from './detail/DetailPanel'
@@ -12,27 +13,27 @@ import MapSearchResults from './map-search/MapSearchResults'
 import MapContext from './MapContext'
 import { Overlay } from './types'
 
-type Props = {
+export interface MapPanelContentProps {
   setCurrentOverlay: (overlay: Overlay) => void
   currentOverlay: Overlay
 }
 
-const MapPanelContent: React.FC<Props> = ({ setCurrentOverlay, currentOverlay }) => {
+const MapPanelContent: React.FC<MapPanelContentProps> = ({ setCurrentOverlay, currentOverlay }) => {
   const [locationTuple] = useParam(locationParam)
   const [detailUrl] = useParam(detailUrlParam)
-  const { showDrawTool, showDrawContent } = React.useContext(MapContext)
+  const { showDrawTool, showDrawContent } = useContext(MapContext)
   const { dataSelection } = useContext(DataSelectionContext)
+  // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
+  const MapPanelOrDrawer = showDesktopVariant ? MapPanel : MapPanelDrawer
 
-  const MapPanelOrDrawer = useMemo(() => (showDesktopVariant ? MapPanel : MapPanelDrawer), [
-    showDesktopVariant,
-  ]) as React.FC
-
-  const location = locationTuple ? { lat: locationTuple[0], lng: locationTuple[1] } : null
+  const location: LatLngLiteral | null = locationTuple
+    ? { lat: locationTuple[0], lng: locationTuple[1] }
+    : null
 
   useEffect(() => {
     if (currentOverlay !== Overlay.Legend) {
-      setCurrentOverlay(location || showDrawTool ? Overlay.Results : Overlay.None)
+      setCurrentOverlay(location ?? showDrawTool ? Overlay.Results : Overlay.None)
     }
   }, [location, showDrawTool, currentOverlay])
 
