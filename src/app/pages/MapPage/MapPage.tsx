@@ -1,12 +1,11 @@
 import { constants, Map as MapComponent, MapPanelProvider, useStateRef } from '@datapunt/arm-core'
 import { PositionPerSnapPoint } from '@datapunt/arm-core/es/components/MapPanel/constants'
 import { Alert, Heading, hooks, Link } from '@datapunt/asc-ui'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
 import L from 'leaflet'
 import { toMap } from '../../../store/redux-first-router/actions'
-import NotificationLevel from '../../models/notification'
 import MapControls from './MapControls'
 import LeafletLayers from './LeafletLayers'
 import DataSelectionProvider from './draw/DataSelectionProvider'
@@ -39,17 +38,17 @@ const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
 const MapPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [currentOverlay, setCurrentOverlay] = useState<Overlay>(Overlay.None)
-  const { showDrawTool } = React.useContext(MapContext)
+  const [currentOverlay, setCurrentOverlay] = useState(Overlay.None)
+  const { showDrawTool } = useContext(MapContext)
+  // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
-
   const [center, setCenter] = useParam(centerParam)
   const [zoom, setZoom] = useParam(zoomParam)
 
   return (
     <>
-      <Alert level={NotificationLevel.Attention} dismissible>
+      <Alert level="attention" dismissible>
         <Heading as="h3">Let op: Deze nieuwe interactieve kaart is nog in aanbouw.</Heading>
         <Link darkBackground to={toMap()} as={RouterLink} inList>
           Naar de oude kaart
@@ -61,8 +60,8 @@ const MapPage: React.FC = () => {
           setInstance={setMapInstance}
           options={{
             ...DEFAULT_AMSTERDAM_MAPS_OPTIONS,
-            zoom: zoom || DEFAULT_AMSTERDAM_MAPS_OPTIONS.zoom,
-            center: center || DEFAULT_AMSTERDAM_MAPS_OPTIONS.center,
+            zoom: zoom ?? DEFAULT_AMSTERDAM_MAPS_OPTIONS.zoom,
+            center: center ?? DEFAULT_AMSTERDAM_MAPS_OPTIONS.center,
           }}
           events={{
             zoomend: () => {
