@@ -1,39 +1,38 @@
 import { BaseLayerToggle as BaseLayerToggleComponent } from '@datapunt/arm-core'
 import React, { useMemo } from 'react'
-import mapBaseLayerConfig from '../../../../../public/static/map/map-base-layers.config.json'
 import useParam from '../../../utils/useParam'
 import { BaseLayer, baseLayerParam } from '../../../query-params'
+import { getMapBaseLayers, MapBaseLayer } from '../../../../map/services'
 
-type Props = {}
-
-const aerialLayers = mapBaseLayerConfig
+const aerialLayers = getMapBaseLayers()
   .filter(({ category }) => category === 'aerial')
-  .map(({ value, urlTemplate, label }) => ({
-    id: value,
-    urlTemplate,
-    label,
-  }))
-const topoLayers = mapBaseLayerConfig
+  .map((baseLayer) => toMapLayer(baseLayer))
+
+const topoLayers = getMapBaseLayers()
   .filter(({ category }) => category === 'topography')
-  .map(({ value, urlTemplate, label }) => ({
+  .map((baseLayer) => toMapLayer(baseLayer))
+
+// TODO: Use the 'MapLayer' type when exported by ARM, see: https://github.com/Amsterdam/amsterdam-react-maps/issues/728
+function toMapLayer({ value, urlTemplate, label }: MapBaseLayer) {
+  return {
     id: value,
     urlTemplate,
     label,
-  }))
+  }
+}
 
 const topoIds = topoLayers.map(({ id }) => id)
 const aerialIds = aerialLayers.map(({ id }) => id)
 
-/**
- * Todo: Refactor BaseLayerToggle to use an object instead of array of MapBaseLayers
- */
-const BaseLayerToggle: React.FC<Props> = () => {
+// TODO: Refactor BaseLayerToggle to use an object instead of array of MapBaseLayers
+const BaseLayerToggle: React.FC = () => {
   const [activeBaseLayer, setActiveBaseLayer] = useParam(baseLayerParam)
 
   const aerialIndex = useMemo(
     () => (aerialIds.includes(activeBaseLayer) && aerialIds.indexOf(activeBaseLayer)) || 0,
     [activeBaseLayer],
   )
+
   const topoIndex = useMemo(
     () => (topoIds.includes(activeBaseLayer) && topoIds.indexOf(activeBaseLayer)) || 0,
     [activeBaseLayer],

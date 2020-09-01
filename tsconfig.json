@@ -2,7 +2,6 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react",
-    "resolveJsonModule": true,
     "allowJs": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
