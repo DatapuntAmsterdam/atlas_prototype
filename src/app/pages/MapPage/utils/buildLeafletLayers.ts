@@ -1,6 +1,7 @@
 import { TileLayerOptions } from 'leaflet'
 import { MapLayer } from '../../../../map/services'
 import MAP_CONFIG from '../../../../map/services/map.config'
+import { UserState } from '../../../../shared/ducks/user/user'
 import { createUrlWithToken } from '../../../../shared/services/api/api'
 import { Overlay } from '../MapContext'
 
@@ -52,29 +53,28 @@ function generateUrl(layer: MapLayer, token: string) {
   return url
 }
 
-const getLeafletLayers = (activeMapLayers: string[], mapLayers: MapLayer[], user: any) => {
-  if (activeMapLayers?.length) {
-    return activeMapLayers
-      .map((activeMapLayer) => {
-        const layer = findLayer(mapLayers, activeMapLayer)
+export default function buildLeafletLayers(
+  activeMapLayers: string[],
+  mapLayers: MapLayer[],
+  user: UserState,
+) {
+  return activeMapLayers
+    .map((activeMapLayer) => {
+      const layer = findLayer(mapLayers, activeMapLayer)
 
-        if (!layer) {
-          return null
-        }
+      if (!layer) {
+        return null
+      }
 
-        const legendLayers = (layer.legendItems ?? [])
-          // eslint-disable-next-line no-underscore-dangle
-          .map((legendItem) => (legendItem.__typename === 'MapLayer' ? legendItem.id : null))
-          .filter((id): id is string => !!id)
-          .map((id) => findLayer(mapLayers, id))
-          .filter((legendLayer): legendLayer is MapLayer => !!legendLayer)
+      const legendLayers = (layer.legendItems ?? [])
+        // eslint-disable-next-line no-underscore-dangle
+        .map((legendItem) => (legendItem.__typename === 'MapLayer' ? legendItem.id : null))
+        .filter((id): id is string => !!id)
+        .map((id) => findLayer(mapLayers, id))
+        .filter((legendLayer): legendLayer is MapLayer => !!legendLayer)
 
-        return [layer, ...legendLayers].map((item) => generateOverlay(item, user.accessToken))
-      })
-      .flat()
-      .filter((layer): layer is Overlay => !!layer)
-  }
-  return []
+      return [layer, ...legendLayers].map((item) => generateOverlay(item, user.accessToken))
+    })
+    .flat()
+    .filter((layer): layer is Overlay => !!layer)
 }
-
-export default getLeafletLayers

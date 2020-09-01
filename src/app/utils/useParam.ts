@@ -1,6 +1,6 @@
 import deepEqual from 'deep-equal'
-import { useHistory, useLocation } from 'react-router-dom'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 type callbackFn<T> = (val: T) => T
 type SetValueFn<T> = (value: T | callbackFn<T>, method?: 'push' | 'replace') => void
