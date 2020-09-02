@@ -49,6 +49,12 @@ export interface CreateConfigOptions {
    */
   singleBuild?: boolean
   /**
+   * If enabled all TypeScript code will be type-checked in the compilation process.
+   *
+   * @default true
+   */
+  checkTypes?: boolean
+  /**
    * Enable production optimizations or development hints.
    *
    * @default 'none'
@@ -85,7 +91,7 @@ const svgoConfig = {
 
 export function createConfig(additionalOptions: CreateConfigOptions): Configuration {
   const options: Required<CreateConfigOptions> = {
-    ...{ legacy: false, singleBuild: false, mode: 'none' },
+    ...{ legacy: false, singleBuild: false, checkTypes: true, mode: 'none' },
     ...additionalOptions,
   }
 
@@ -289,15 +295,17 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           : false,
       }),
       ...(!options.singleBuild ? [new HtmlWebpackMultiBuildPlugin()] : []),
-      new ForkTsCheckerWebpackPlugin({
-        typescript: {
-          memoryLimit: 4096,
-          diagnosticOptions: {
-            semantic: true,
-            syntactic: true,
+      ...(options.checkTypes ? [
+        new ForkTsCheckerWebpackPlugin({
+          typescript: {
+            memoryLimit: 4096,
+            diagnosticOptions: {
+              semantic: true,
+              syntactic: true,
+            },
           },
-        },
-      }),
+        }),
+      ] : []),
     ],
   }
 }
