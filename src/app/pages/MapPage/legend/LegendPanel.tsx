@@ -1,5 +1,5 @@
 import { MapPanelContent, MapPanelContentProps } from '@datapunt/arm-core'
-import React, { useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import MapPanel from '../../../../map/containers/panel/MapPanel'
@@ -35,15 +35,14 @@ const StyledMapPanelContent = styled(MapPanelContent)`
 export interface LegendPanelProps extends Omit<MapPanelContentProps, 'title'> {}
 
 const LegendPanel: React.FC<LegendPanelProps> = ({ ...otherProps }) => {
-  const { panelLayers } = React.useContext(MapContext)
+  const { panelLayers } = useContext(MapContext)
   const user = useSelector(getUser)
   const [zoomLevel] = useParam(zoomParam)
   const [activeLayers, setActiveMapLayers] = useParam(mapLayersParam)
 
-  const overlays = useMemo(
-    () => activeLayers?.map((layer) => ({ id: layer, isVisible: true })) || [],
-    [activeLayers],
-  )
+  const overlays = useMemo(() => activeLayers.map((layer) => ({ id: layer, isVisible: true })), [
+    activeLayers,
+  ])
 
   return (
     <StyledMapPanelContent title="Legenda" {...otherProps}>
@@ -53,11 +52,11 @@ const LegendPanel: React.FC<LegendPanelProps> = ({ ...otherProps }) => {
         overlays={overlays}
         onAddLayers={(mapLayers: string[]) => {
           if (mapLayers) {
-            setActiveMapLayers([...(activeLayers || []), ...mapLayers])
+            setActiveMapLayers([...activeLayers, ...mapLayers])
           }
         }}
         onRemoveLayers={(mapLayers: string[]) => {
-          setActiveMapLayers(activeLayers?.filter((layer) => !mapLayers.includes(layer)) || [])
+          setActiveMapLayers(activeLayers.filter((layer) => !mapLayers.includes(layer)))
         }}
         isMapPanelVisible
         zoomLevel={zoomLevel}
