@@ -71,8 +71,7 @@ const MapPage: React.FC = () => {
             },
             moveend: () => {
               if (mapInstanceRef?.current) {
-                const { lat, lng } = mapInstanceRef.current.getCenter()
-                setCenter([lat, lng], 'replace')
+                setCenter(mapInstanceRef.current.getCenter(), 'replace')
               }
             },
             loading: () => {

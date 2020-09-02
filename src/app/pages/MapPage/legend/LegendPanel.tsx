@@ -44,6 +44,7 @@ const LegendPanel: React.FC<LegendPanelProps> = ({ ...otherProps }) => {
     activeLayers,
   ])
 
+  // TODO: Replace 'MapPanel' with something better.
   return (
     <StyledMapPanelContent title="Legenda" {...otherProps}>
       {/* @ts-ignore */}

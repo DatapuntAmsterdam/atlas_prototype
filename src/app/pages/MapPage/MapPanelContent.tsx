@@ -1,7 +1,6 @@
 import { MapPanel, MapPanelDrawer } from '@datapunt/arm-core'
 import { hooks } from '@datapunt/asc-ui'
 import React, { useContext, useEffect } from 'react'
-import { LatLngLiteral } from 'leaflet'
 import { detailUrlParam, locationParam } from '../../query-params'
 import useParam from '../../utils/useParam'
 import DetailPanel from './detail/DetailPanel'
@@ -19,17 +18,13 @@ export interface MapPanelContentProps {
 }
 
 const MapPanelContent: React.FC<MapPanelContentProps> = ({ setCurrentOverlay, currentOverlay }) => {
-  const [locationTuple] = useParam(locationParam)
+  const [location] = useParam(locationParam)
   const [detailUrl] = useParam(detailUrlParam)
   const { showDrawTool, showDrawContent } = useContext(MapContext)
   const { dataSelection } = useContext(DataSelectionContext)
   // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const MapPanelOrDrawer = showDesktopVariant ? MapPanel : MapPanelDrawer
-
-  const location: LatLngLiteral | null = locationTuple
-    ? { lat: locationTuple[0], lng: locationTuple[1] }
-    : null
 
   useEffect(() => {
     if (currentOverlay !== Overlay.Legend) {

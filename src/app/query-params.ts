@@ -41,13 +41,29 @@ export interface MapLayer {
 
 const COORDINATE_PRECISION = 7
 
-export const centerParam: UrlParam<LatLngTuple> = {
+function encodeLatLngLiteral(value: LatLngLiteral) {
+  return [value.lat, value.lng]
+    .map((coordinate) => normalizeCoordinate(coordinate, COORDINATE_PRECISION))
+    .join(',')
+}
+
+function decodeLatLngLiteral(value: string): LatLngLiteral {
+  const [lat, lng] = value.split(',').map((part) => parseFloat(part))
+
+  return {
+    lat,
+    lng,
+  }
+}
+
+// TODO: Remove this cast when this issue is resolved: https://github.com/Amsterdam/amsterdam-react-maps/issues/727
+const defaultCenter = DEFAULT_AMSTERDAM_MAPS_OPTIONS.center as LatLngTuple
+
+export const centerParam: UrlParam<LatLngLiteral> = {
   name: 'center',
-  // TODO: Remove this cast when this issue is resolved: https://github.com/Amsterdam/amsterdam-react-maps/issues/727
-  defaultValue: DEFAULT_AMSTERDAM_MAPS_OPTIONS.center as LatLngTuple,
-  decode: (value) => value.split(',').map((ltLng) => parseFloat(ltLng)) as LatLngTuple,
-  encode: (value) =>
-    value.map((coordinate) => normalizeCoordinate(coordinate, COORDINATE_PRECISION)).join(','),
+  defaultValue: { lat: defaultCenter[0], lng: defaultCenter[1] },
+  decode: decodeLatLngLiteral,
+  encode: encodeLatLngLiteral,
 }
 
 export const zoomParam: UrlParam<number> = {
@@ -58,14 +74,11 @@ export const zoomParam: UrlParam<number> = {
   encode: (value) => value.toString(),
 }
 
-export const locationParam: UrlParam<LatLngTuple | null> = {
+export const locationParam: UrlParam<LatLngLiteral | null> = {
   name: 'locatie',
   defaultValue: null,
-  decode: (value) => value.split(',').map((ltLng) => parseFloat(ltLng)) as LatLngTuple,
-  encode: (value) =>
-    value
-      ? value.map((coordinate) => normalizeCoordinate(coordinate, COORDINATE_PRECISION)).join(',')
-      : null,
+  decode: decodeLatLngLiteral,
+  encode: (value) => (value ? encodeLatLngLiteral(value) : null),
 }
 
 export const polygonParam: UrlParam<PolyDrawing[]> = {

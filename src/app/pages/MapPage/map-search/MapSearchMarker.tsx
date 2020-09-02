@@ -6,7 +6,7 @@ import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-
 import { detailUrlParam, locationParam } from '../../../query-params'
 import joinUrl from '../../../utils/joinUrl'
 import useParam from '../../../utils/useParam'
-import MapContext from '../MapContext'
+import MapContext, { Overlay } from '../MapContext'
 import { SnapPoint } from '../types'
 
 interface NearestDetail {
@@ -16,34 +16,10 @@ interface NearestDetail {
 
 const MapSearchMarker: React.FC = () => {
   const [, setDetailUrl] = useParam(detailUrlParam)
-  const { legendLeafletLayers } = React.useContext(MapContext)
+  const { legendLeafletLayers } = useContext(MapContext)
   const [location, setLocation] = useParam(locationParam)
-
-  async function handleMapClick(e: LeafletMouseEvent) {
-    if (legendLeafletLayers && legendLeafletLayers.length > 0) {
-      const activeOverlaysWithInstanceAPI = legendLeafletLayers.filter(
-        // @ts-ignore TODO: auto generate types
-        (activeOverlay) => activeOverlay.detailUrl,
-      )
-
-      const nearestDetail: NearestDetail | null = await fetchNearestDetail(
-        { latitude: e.latlng.lat, longitude: e.latlng.lng },
-        activeOverlaysWithInstanceAPI,
-        8,
-      )
-
-      if (nearestDetail) {
-        const detailUrl = joinUrl(nearestDetail.type, nearestDetail.id)
-        setDetailUrl(detailUrl)
-      } else {
-        setLocation([e.latlng.lat, e.latlng.lng])
-      }
-    } else {
-      // get the geo search information
-      setLocation([e.latlng.lat, e.latlng.lng])
-    }
-  }
-
+  const mapInstance = useMapInstance()
+  const { pan } = usePanToLatLng()
   const {
     drawerPosition,
     setPositionFromSnapPoint,
@@ -51,33 +27,54 @@ const MapSearchMarker: React.FC = () => {
     variant,
   } = useContext(MapPanelContext)
 
-  const mapInstance = useMapInstance()
-  const { pan } = usePanToLatLng()
+  async function handleMapClick(e: LeafletMouseEvent, activeOverlays: Overlay[]) {
+    const layers = activeOverlays
+      .filter((overlay) => !!overlay.layer.detailUrl)
+      .map((overlay) => overlay.layer)
+
+    if (layers.length === 0) {
+      setLocation(e.latlng)
+      return
+    }
+
+    const nearestDetail: NearestDetail | null = await fetchNearestDetail(
+      { latitude: e.latlng.lat, longitude: e.latlng.lng },
+      layers,
+      8,
+    )
+
+    if (nearestDetail) {
+      const detailUrl = joinUrl(nearestDetail.type, nearestDetail.id)
+      setDetailUrl(detailUrl)
+    } else {
+      setLocation(e.latlng)
+    }
+  }
+
   useEffect(() => {
     if (!mapInstance) {
       return undefined
     }
+
     const clickHandler = (e: LeafletMouseEvent) => {
       setPositionFromSnapPoint(SnapPoint.Halfway)
-      handleMapClick(e)
+      handleMapClick(e, legendLeafletLayers)
     }
+
     mapInstance.on('click', clickHandler)
 
     return () => {
       mapInstance.off('click', clickHandler)
     }
-  }, [mapInstance])
+  }, [mapInstance, legendLeafletLayers])
 
   // Use this logic to automatically pan the map to the center of the marker when the drawer is positioned in the middle
   useEffect(() => {
     if (matchPositionWithSnapPoint(SnapPoint.Halfway) && location) {
-      pan(
-        { lat: location[0], lng: location[1] },
-        variant === 'drawer' ? 'vertical' : 'horizontal',
-        20,
-      )
+      pan(location, variant === 'drawer' ? 'vertical' : 'horizontal', 20)
     }
   }, [drawerPosition, location])
+
   return location ? <ARMMarker latLng={location} /> : null
 }
 

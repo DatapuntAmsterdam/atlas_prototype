@@ -14,7 +14,7 @@ export interface MapLayer {
   layers?: string[]
   url?: string
   params?: string
-  detailUrl: string
+  detailUrl?: string
   detailParams?: DetailParams
   detailIsShape?: boolean
   iconUrl?: string
