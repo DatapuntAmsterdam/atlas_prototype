@@ -319,6 +319,10 @@ const DataSelectionProvider: React.FC = ({ children }) => {
   }
 
   const removeDataSelection = (idsToRemove: string[]) => {
+    if (idsToRemove.length === 0) {
+      return
+    }
+
     if (mapVisualizationRef.current && dataSelectionRef.current) {
       setMapVisualizationState(
         mapVisualizationRef.current.filter(({ id }) => !idsToRemove.includes(id)),

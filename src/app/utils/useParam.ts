@@ -2,8 +2,8 @@ import deepEqual from 'deep-equal'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-type callbackFn<T> = (val: T) => T
-type SetValueFn<T> = (value: T | callbackFn<T>, method?: 'push' | 'replace') => void
+type SetValueCallback<T> = (val: T) => T | null
+type SetValueFn<T> = (value: T | null | SetValueCallback<T>, method?: 'push' | 'replace') => void
 
 export interface UrlParam<T> {
   name: string
@@ -13,7 +13,7 @@ export interface UrlParam<T> {
   showDefaultValueInQuery?: boolean
 }
 
-const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T | null>] => {
+const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {
   const history = useHistory()
   const location = useLocation()
 
@@ -33,7 +33,7 @@ const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T | null>] => {
     stateRef.current = state
   }, [stateRef, state])
 
-  const setValue = useCallback<SetValueFn<T | null>>(
+  const setValue = useCallback<SetValueFn<T>>(
     (valueOrFn, method = 'push') => {
       const newParams = new URLSearchParams(window.location.search)
       // @ts-ignore
