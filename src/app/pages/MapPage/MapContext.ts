@@ -1,9 +1,9 @@
-import { Geometry } from 'geojson'
+import { Feature } from 'geojson'
 import { TileLayerOptions, WMSOptions } from 'leaflet'
 import { createContext } from 'react'
 import { MapCollection, MapLayer } from '../../../map/services'
 
-export type ActiveMapLayer = {
+export interface ActiveMapLayer {
   id: string
   isVisible: boolean
 }
@@ -32,21 +32,21 @@ export interface TmsOverlay {
 
 export type Overlay = WmsOverlay | TmsOverlay
 
-export type MapState = {
+export interface MapState {
   panelLayers: MapCollection[]
   mapLayers: MapLayer[]
   legendLeafletLayers: Overlay[]
-  geometry?: Geometry
+  detailFeature: Feature | null
   showDrawTool: boolean
   showDrawContent: boolean
 }
 
-export type MapContextProps = {
-  setGeometry: (geometry: Geometry) => void
+export interface MapContextProps extends MapState {
+  setDetailFeature: (feature: Feature) => void
   setShowDrawTool: (showDrawing: boolean) => void
   getPanelLayers: () => void
   getMapLayers: () => void
-} & MapState
+}
 
 export const initialState: MapContextProps = {
   panelLayers: [],
@@ -54,7 +54,8 @@ export const initialState: MapContextProps = {
   legendLeafletLayers: [],
   showDrawTool: false,
   showDrawContent: false,
-  setGeometry: () => {},
+  detailFeature: null,
+  setDetailFeature: () => {},
   setShowDrawTool: () => {},
   getPanelLayers: () => {},
   getMapLayers: () => {},

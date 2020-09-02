@@ -31,7 +31,7 @@ const detailGeometryOptions: GeoJSONOptions = {
 }
 
 const LeafletLayers: React.FC<LeafletLayersProps> = ({ setIsLoading }) => {
-  const { legendLeafletLayers, geometry, showDrawContent } = useContext(MapContext)
+  const { legendLeafletLayers, detailFeature, showDrawContent } = useContext(MapContext)
 
   const tmsLayers = useMemo(
     () => legendLeafletLayers.filter((overlay): overlay is TmsOverlay => overlay.type === 'tms'),
@@ -46,9 +46,10 @@ const LeafletLayers: React.FC<LeafletLayersProps> = ({ setIsLoading }) => {
   return (
     <>
       {showDrawContent && <DrawMapVisualization />}
-      {geometry && (
+      {detailFeature && (
         <GeoJSON
-          args={[geometry]}
+          key={detailFeature.id}
+          args={[detailFeature]}
           options={detailGeometryOptions}
           setInstance={(layer) => layer.bringToBack()}
         />

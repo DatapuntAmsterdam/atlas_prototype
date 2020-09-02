@@ -1,5 +1,5 @@
-import { Geometry } from 'geojson'
-import React, { useMemo, useReducer, useState } from 'react'
+import { Feature } from 'geojson'
+import React, { useEffect, useMemo, useReducer, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
   getMapLayers as fetchMapLayers,
@@ -17,7 +17,7 @@ import buildLeafletLayers from './utils/buildLeafletLayers'
 type Action =
   | { type: 'setPanelLayers'; payload: MapCollection[] }
   | { type: 'setMapLayers'; payload: MapLayer[] }
-  | { type: 'setGeometry'; payload: Geometry }
+  | { type: 'setDetailFeature'; payload: Feature }
 
 const reducer = (state: MapState, action: Action): MapState => {
   switch (action.type) {
@@ -31,10 +31,10 @@ const reducer = (state: MapState, action: Action): MapState => {
         ...state,
         mapLayers: action.payload,
       }
-    case 'setGeometry':
+    case 'setDetailFeature':
       return {
         ...state,
-        geometry: action.payload,
+        detailFeature: action.payload,
       }
     default:
       return state
@@ -54,8 +54,8 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
     [activeMapLayers, state.mapLayers, user],
   )
 
-  function setGeometry(payload: Geometry) {
-    dispatch({ type: 'setGeometry', payload })
+  function setDetailFeature(payload: Feature) {
+    dispatch({ type: 'setDetailFeature', payload })
   }
 
   async function getPanelLayers() {
@@ -78,13 +78,9 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
 
   const [polygons] = useParam(polygonParam)
   const [polylines] = useParam(polylineParam)
+  const showDrawContent = polygons.length > 0 || polylines.length > 0
 
-  const showDrawContent = useMemo(() => !!(polygons?.length || polylines?.length), [
-    polygons,
-    polylines,
-  ])
-
-  React.useEffect(() => {
+  useEffect(() => {
     getPanelLayers()
     getMapLayers()
   }, [])
@@ -94,7 +90,7 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
       value={{
         ...state,
         legendLeafletLayers,
-        setGeometry,
+        setDetailFeature,
         getPanelLayers,
         getMapLayers,
         showDrawTool,
