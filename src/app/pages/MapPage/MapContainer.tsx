@@ -8,7 +8,7 @@ import {
   MapLayer,
 } from '../../../map/services'
 import { getUser } from '../../../shared/ducks/user/user'
-import { mapLayersParam, polygonParam, polylineParam } from '../../query-params'
+import { mapLayersParam, polygonsParam, polylinesParam } from '../../query-params'
 import useParam from '../../utils/useParam'
 import MapContext, { initialState, MapContextProps, MapState } from './MapContext'
 import MapPage from './MapPage'
@@ -44,9 +44,10 @@ const reducer = (state: MapState, action: Action): MapState => {
 const MapContainer: React.FC<MapContextProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [activeMapLayers] = useParam(mapLayersParam)
-  const [polyline] = useParam(polylineParam)
-  const [polygon] = useParam(polygonParam)
-  const [showDrawTool, setShowDrawTool] = useState(!!(polyline || polygon))
+  const [polylines] = useParam(polylinesParam)
+  const [polygons] = useParam(polygonsParam)
+  const showDrawContent = polygons.length > 0 || polylines.length > 0
+  const [showDrawTool, setShowDrawTool] = useState(showDrawContent)
   const user = useSelector(getUser)
 
   const legendLeafletLayers = useMemo(
@@ -75,10 +76,6 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
       payload: mapLayers,
     })
   }
-
-  const [polygons] = useParam(polygonParam)
-  const [polylines] = useParam(polylineParam)
-  const showDrawContent = polygons.length > 0 || polylines.length > 0
 
   useEffect(() => {
     getPanelLayers()

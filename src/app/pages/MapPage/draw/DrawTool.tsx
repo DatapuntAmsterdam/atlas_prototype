@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { MapPanelContext } from '@datapunt/arm-core'
 import {
   DrawTool as DrawToolComponent,
@@ -13,7 +12,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import DataSelectionContext from './DataSelectionContext'
 import { Overlay, SnapPoint } from '../types'
 import useParam from '../../../utils/useParam'
-import { PolyDrawing, polygonParam, polylineParam } from '../../../query-params'
+import { PolyDrawing, polygonsParam, polylinesParam } from '../../../query-params'
 import MapContext from '../MapContext'
 
 function getTotalDistance(latLngs: LatLng[]) {
@@ -78,8 +77,8 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
     removeDataSelection,
   } = useContext(DataSelectionContext)
 
-  const [polygons, setPolygons] = useParam(polygonParam)
-  const [polylines, setPolylines] = useParam(polylineParam)
+  const [polygons, setPolygons] = useParam(polygonsParam)
+  const [polylines, setPolylines] = useParam(polylinesParam)
 
   const [initialDrawnItems, setInitialDrawnItems] = useState([
     ...polygons.map((drawing) => createPolyLayer(drawing)),

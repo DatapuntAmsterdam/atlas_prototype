@@ -81,14 +81,14 @@ export const locationParam: UrlParam<LatLngLiteral | null> = {
   encode: (value) => (value ? encodeLatLngLiteral(value) : null),
 }
 
-export const polygonParam: UrlParam<PolyDrawing[]> = {
+export const polygonsParam: UrlParam<PolyDrawing[]> = {
   name: 'polygonen',
   defaultValue: [],
   decode: (value) => JSON.parse(value),
   encode: (value) => (value.length > 0 ? JSON.stringify(value) : null),
 }
 
-export const polylineParam: UrlParam<PolyDrawing[]> = {
+export const polylinesParam: UrlParam<PolyDrawing[]> = {
   name: 'meten',
   defaultValue: [],
   decode: (value) => JSON.parse(value),
