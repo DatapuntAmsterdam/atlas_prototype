@@ -81,18 +81,26 @@ export const locationParam: UrlParam<LatLngLiteral | null> = {
   encode: (value) => (value ? encodeLatLngLiteral(value) : null),
 }
 
+function encodePolyDrawing(value: PolyDrawing[]) {
+  return value.length > 0 ? JSON.stringify(value) : null
+}
+
+function decodePolyDrawing(value: string) {
+  return JSON.parse(value)
+}
+
 export const polygonsParam: UrlParam<PolyDrawing[]> = {
   name: 'polygonen',
   defaultValue: [],
-  decode: (value) => JSON.parse(value),
-  encode: (value) => (value.length > 0 ? JSON.stringify(value) : null),
+  decode: decodePolyDrawing,
+  encode: encodePolyDrawing,
 }
 
 export const polylinesParam: UrlParam<PolyDrawing[]> = {
   name: 'meten',
   defaultValue: [],
-  decode: (value) => JSON.parse(value),
-  encode: (value) => (value.length > 0 ? JSON.stringify(value) : null),
+  decode: decodePolyDrawing,
+  encode: encodePolyDrawing,
 }
 
 export const mapLayersParam: UrlParam<string[]> = {
