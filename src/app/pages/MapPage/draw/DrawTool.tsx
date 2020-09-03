@@ -119,9 +119,9 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
       const distanceText = getDistanceLabel(layer)
       bindDistanceAndAreaToTooltip(layer, distanceText)
 
-      const setPoly = layer instanceof Polygon ? setPolygons : setPolylines
+      const setPolys = layer instanceof Polygon ? setPolygons : setPolylines
 
-      setPoly(
+      setPolys(
         (polys) =>
           polys.map((poly) => {
             if (poly.id !== layer.id) {
