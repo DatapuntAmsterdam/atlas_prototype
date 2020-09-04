@@ -8,7 +8,7 @@ import {
   MapLayer,
 } from '../../../map/services'
 import { getUser } from '../../../shared/ducks/user/user'
-import { mapLayersParam, polygonsParam, polylinesParam } from '../../query-params'
+import { mapLayersParam, polygonsParam, polylinesParam } from './query-params'
 import useParam from '../../utils/useParam'
 import MapContext, { initialState, MapContextProps, MapState } from './MapContext'
 import MapPage from './MapPage'

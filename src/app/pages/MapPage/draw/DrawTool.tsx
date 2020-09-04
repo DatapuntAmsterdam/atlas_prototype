@@ -12,7 +12,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import DataSelectionContext from './DataSelectionContext'
 import { Overlay, SnapPoint } from '../types'
 import useParam from '../../../utils/useParam'
-import { PolyDrawing, polygonsParam, polylinesParam } from '../../../query-params'
+import { PolyDrawing, polygonsParam, polylinesParam } from '../query-params'
 import MapContext from '../MapContext'
 
 function getTotalDistance(latLngs: LatLng[]) {

@@ -1,7 +1,7 @@
 import { constants } from '@datapunt/arm-core'
 import { LatLngLiteral, LatLngTuple } from 'leaflet'
-import { normalizeCoordinate } from '../shared/services/coordinate-reference-system'
-import { UrlParam } from './utils/useParam'
+import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system'
+import { UrlParam } from '../../utils/useParam'
 
 // TODO: Refactor this default export once this issue is resolved: https://github.com/Amsterdam/amsterdam-react-maps/issues/727
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants

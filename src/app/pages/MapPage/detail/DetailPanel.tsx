@@ -15,7 +15,7 @@ import {
 } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
-import { detailUrlParam } from '../../../query-params'
+import { detailUrlParam } from '../query-params'
 import useParam from '../../../utils/useParam'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import PanoramaPreview from '../map-search/PanoramaPreview'

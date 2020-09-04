@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import MapPanel from '../../../../map/containers/panel/MapPanel'
 import MapContext from '../MapContext'
 import useParam from '../../../utils/useParam'
-import { mapLayersParam, zoomParam } from '../../../query-params'
+import { mapLayersParam, zoomParam } from '../query-params'
 import { getUser } from '../../../../shared/ducks/user/user'
 
 const StyledMapPanelContent = styled(MapPanelContent)`

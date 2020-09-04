@@ -18,7 +18,7 @@ import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/useProm
 import PanoramaPreview from './PanoramaPreview'
 import { Overlay } from '../types'
 import useParam from '../../../utils/useParam'
-import { locationParam } from '../../../query-params'
+import { locationParam } from '../query-params'
 
 const RESULT_LIMIT = 10
 

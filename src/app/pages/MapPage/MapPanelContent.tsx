@@ -1,7 +1,7 @@
 import { MapPanel, MapPanelDrawer } from '@datapunt/arm-core'
 import { hooks } from '@datapunt/asc-ui'
 import React, { useContext, useEffect } from 'react'
-import { detailUrlParam, locationParam } from '../../query-params'
+import { detailUrlParam, locationParam } from './query-params'
 import useParam from '../../utils/useParam'
 import DetailPanel from './detail/DetailPanel'
 import DataSelectionContext from './draw/DataSelectionContext'

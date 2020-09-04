@@ -1,7 +1,7 @@
 import { BaseLayerToggle as BaseLayerToggleComponent } from '@datapunt/arm-core'
 import React, { useMemo } from 'react'
 import useParam from '../../../utils/useParam'
-import { BaseLayer, baseLayerParam } from '../../../query-params'
+import { BaseLayer, baseLayerParam } from '../query-params'
 import { getMapBaseLayers, MapBaseLayer } from '../../../../map/services'
 
 const aerialLayers = getMapBaseLayers()

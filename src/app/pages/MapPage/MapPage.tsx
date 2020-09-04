@@ -13,7 +13,7 @@ import MapContext from './MapContext'
 import { Overlay, SnapPoint } from './types'
 import MapPanelContent from './MapPanelContent'
 import useParam from '../../utils/useParam'
-import { centerParam, zoomParam } from '../../query-params'
+import { centerParam, zoomParam } from './query-params'
 
 const MapView = styled.div`
   height: 100%;
