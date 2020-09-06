@@ -83,7 +83,7 @@ const MapPage: React.FC = () => {
           }}
         >
           <DataSelectionProvider>
-            <LeafletLayers setIsLoading={setIsLoading} />
+            <LeafletLayers />
             <MapPanelProvider
               mapPanelSnapPositions={MAP_PANEL_SNAP_POSITIONS}
               variant={showDesktopVariant ? 'panel' : 'drawer'}

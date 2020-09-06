@@ -5,10 +5,7 @@ import React, { useContext, useMemo } from 'react'
 import ICON_CONFIG from '../../../map/components/leaflet/services/icon-config.constant'
 import DrawMapVisualization from './draw/DrawMapVisualization'
 import MapContext, { TmsOverlay, WmsOverlay } from './MapContext'
-
-export interface LeafletLayersProps {
-  setIsLoading: (isLoading: boolean) => void
-}
+import MAP_CONFIG from '../../../map/services/map.config'
 
 const detailGeometryStyle = {
   color: 'red',
@@ -30,9 +27,8 @@ const detailGeometryOptions: GeoJSONOptions = {
   },
 }
 
-const LeafletLayers: React.FC<LeafletLayersProps> = ({ setIsLoading }) => {
+const LeafletLayers: React.FC = () => {
   const { legendLeafletLayers, detailFeature, showDrawContent } = useContext(MapContext)
-
   const tmsLayers = useMemo(
     () => legendLeafletLayers.filter((overlay): overlay is TmsOverlay => overlay.type === 'tms'),
     [legendLeafletLayers],
@@ -54,13 +50,14 @@ const LeafletLayers: React.FC<LeafletLayersProps> = ({ setIsLoading }) => {
           setInstance={(layer) => layer.bringToBack()}
         />
       )}
-      {tmsLayers.map(({ options, id }) => (
+      {tmsLayers.map(({ id, url, options }) => (
         <TileLayer
           key={id}
-          options={options}
-          events={{
-            loading: () => setIsLoading(true),
-            load: () => setIsLoading(false),
+          args={[url]}
+          // @ts-ignore
+          options={{
+            ...MAP_CONFIG.BASE_LAYER_OPTIONS,
+            ...options,
           }}
         />
       ))}
