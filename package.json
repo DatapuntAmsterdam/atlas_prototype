@@ -97,7 +97,7 @@
     "redux-saga": "0.16.0",
     "remove-markdown": "0.3.0",
     "reselect": "4.0.0",
-    "styled-components": "^5.1.1",
+    "styled-components": "^5.2.0",
     "urql": "^1.10.0",
     "uuid": "^8.3.0"
   },
