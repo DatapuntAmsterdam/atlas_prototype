@@ -37,7 +37,7 @@
     "@datapunt/asc-assets": "^0.23.0",
     "@datapunt/asc-ui": "^0.23.0",
     "@datapunt/matomo-tracker-js": "0.2.0",
-    "@datapunt/matomo-tracker-react": "0.2.0",
+    "@datapunt/matomo-tracker-react": "0.2.1",
     "@datapunt/react-maps": "^0.8.4-alpha.1",
     "@sentry/browser": "5.22.3",
     "@turf/turf": "^5.1.6",
