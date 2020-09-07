@@ -22,6 +22,7 @@ import {
   winkelgebied,
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
+import getFileName from '../../app/utils/getFileName'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -383,10 +384,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         {
           type: DetailResultItemType.DefinitionList,
           entries: [
+            { term: 'Naam', description: result._display },
             { term: 'Type', description: result.biz_type },
             { term: 'Heffingsgrondslag', description: result.heffingsgrondslag },
             { term: 'Jaarlijkse heffing', description: result.heffing_display },
             { term: 'Aantal heffingsplichtigen', description: result.bijdrageplichtigen },
+            { term: 'Website', description: result.website, link: result.website },
+            { term: 'Verordening', description: result.verordening, link: result.verordening },
           ].filter(hasDescription),
         },
       ],
@@ -503,9 +507,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         {
           type: DetailResultItemType.DefinitionList,
           entries: [
-            { term: 'Datum rapport', description: result.date && formatDate(result.date) },
+            { term: 'Kenmerk', description: result.kenmerk },
             { term: 'Soort handeling', description: result.type },
             { term: 'Bron', description: result.bron },
+            { term: 'Datum rapport', description: result.date && formatDate(result.date) },
+            { term: 'Intekening', description: result.intekening },
             {
               term: 'Opmerkingen',
               description: result.opmerkingen,
@@ -526,14 +532,22 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         {
           type: DetailResultItemType.DefinitionList,
           entries: [
-            { term: 'Datum', description: result.datum },
+            { term: 'Kenmerk', description: result.kenmerk },
+            { term: 'Datum brondocument', description: result.datum && formatDate(result.datum) },
             {
               term: 'Datum van inslag',
               description: result.datum_inslag && formatDate(result.datum_inslag),
             },
             { term: 'Soort handeling', description: result.type },
             { term: 'Bron', description: result.bron },
+            { term: 'Intekening', description: result.intekening },
+            { term: 'Nouwkeurigheid', description: result.nouwkeurig },
             { term: 'Opmerkingen', description: result.opmerkingen },
+            {
+              term: 'Oorlogsincidentrapport',
+              description: getFileName(result.pdf),
+              link: result.pdf,
+            },
           ].filter(hasDescription),
         },
       ],
@@ -550,10 +564,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         {
           type: DetailResultItemType.DefinitionList,
           entries: [
-            { term: 'Datum rapport', description: result.date && formatDate(result.date) },
+            { term: 'Kenmerk', description: result.kenmerk },
             { term: 'Soort rapportage', description: result.type },
             { term: 'Onderzoeksgebied', description: result.onderzoeksgebied },
+            { term: 'Opdrachtnemer', description: result.opdrachtnemer },
+            { term: 'Opdrachtgever', description: result.opdrachtgever },
             { term: 'Verdacht gebied', description: result.verdacht_gebied },
+            { term: 'Datum rapport', description: result.datum && formatDate(result.datum) },
           ].filter(hasDescription),
         },
       ],
@@ -569,9 +586,22 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         {
           type: DetailResultItemType.DefinitionList,
           entries: [
+            { term: 'Kenmerk', description: result.kenmerk },
             { term: 'Hoofdgroep', description: result.type },
             { term: 'Subsoort', description: result.subtype },
+            { term: 'Kaliber', description: result.kaliber },
+            { term: 'Kaliber', description: result.kaliber },
+            { term: 'Aantallen', description: result.aantal },
+            { term: 'Verschijning', description: result.verschijning },
+            { term: 'Afbakening', description: result.afbakening },
+            { term: 'Horizontaal', description: result.horizontaal },
+            { term: 'Cartografie', description: result.cartografie },
             { term: 'Opmerkingen', description: result.opmerkingen },
+            {
+              term: 'Oorlogshandelingsrapport',
+              description: getFileName(result.pdf),
+              link: result.pdf,
+            },
           ].filter(hasDescription),
         },
       ],
@@ -624,7 +654,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           type: DetailResultItemType.DefinitionList,
           entries: [
             { term: 'Startdatum', description: result.startDate },
+            { term: 'Starttijd', description: result.startTime },
             { term: 'Einddatum', description: result.endDate },
+            { term: 'Eindtijd', description: result.endTime },
             { term: 'Omschrijving', description: result.omschrijving },
             { term: 'Meer informatie', description: result.url, link: result.url },
           ].filter(hasDescription),
