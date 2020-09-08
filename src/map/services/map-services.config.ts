@@ -586,10 +586,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         {
           type: DetailResultItemType.DefinitionList,
           entries: [
-            { term: 'Kenmerk', description: result.kenmerk },
             { term: 'Hoofdgroep', description: result.type },
             { term: 'Subsoort', description: result.subtype },
-            { term: 'Kaliber', description: result.kaliber },
             { term: 'Kaliber', description: result.kaliber },
             { term: 'Aantallen', description: result.aantal },
             { term: 'Verschijning', description: result.verschijning },
