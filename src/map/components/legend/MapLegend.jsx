@@ -251,18 +251,17 @@ const MapLegend = ({
         (isPrintOrEmbedView && mapLayers.some(({ isEmbedded }) => isEmbedded))) && ( // Also display the collection title when maplayer is embedded
         <LayerButton ref={ref} onClick={() => setOpen(!isOpen)} isOpen={isOpen}>
           <TitleWrapper>
-            <CollectionLabel key={title} htmlFor={title} label={title}>
-              {!isPrintOrEmbedView ? (
-                <StyledCheckbox
-                  id={title}
-                  className="checkbox"
-                  name={title}
-                  indeterminate={collectionIndeterminate}
-                  checked={allVisible}
-                  onChange={handleOnChangeCollection}
-                />
-              ) : null}
-            </CollectionLabel>
+            {!isPrintOrEmbedView ? (
+              <StyledCheckbox
+                className="checkbox"
+                name={title}
+                indeterminate={collectionIndeterminate}
+                checked={allVisible}
+                onChange={handleOnChangeCollection}
+                aria-label={title}
+              />
+            ) : null}
+            <CollectionLabel key={title} label={title} />
           </TitleWrapper>
           <Icon size={15}>
             <ChevronDown />
