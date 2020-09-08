@@ -67,9 +67,7 @@ export const selectActivePanelLayers = createSelector(
 export const getActiveMapLayersWithinZoom = createSelector(
   [getMapZoom, selectActivePanelLayers],
   (zoomLevel, activePanelLayers) =>
-    activePanelLayers.filter(
-      (mapLayer) => zoomLevel >= mapLayer.minZoom && zoomLevel <= mapLayer.maxZoom,
-    ),
+    activePanelLayers.filter((mapLayer) => zoomLevel >= mapLayer.minZoom),
 )
 
 export const selectNotClickableVisibleMapLayers = createSelector(
@@ -93,11 +91,7 @@ export const getLayers = createSelector(
           panelLayer.id === layer.id ||
           panelLayer?.legendItems?.some((legendItem) => legendItem.id === layer.id),
       )
-      return (
-        matchingPanelLayer &&
-        zoom <= matchingPanelLayer.maxZoom &&
-        zoom >= matchingPanelLayer.minZoom
-      )
+      return matchingPanelLayer && zoom >= matchingPanelLayer.minZoom
     }),
 )
 

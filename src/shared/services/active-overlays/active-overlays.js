@@ -11,7 +11,7 @@ export class ActiveOverlays {
     return this.allOverlays.filter((overlay) => ActiveOverlays.isAuthorised(overlay))
   }
 
-  // Todo: this always returns false: look into mapLayers, since it doesn't have a minZoom / maxZoom
+  // Todo: this always returns false: look into mapLayers, since it doesn't have a minZoom
   static isVisibleAtCurrentZoom(overlay, zoomLevel) {
     const { map, mapLayers } = getState()
     const { items: mapLayerItems } = mapLayers.layers
@@ -21,7 +21,7 @@ export class ActiveOverlays {
       return false
     }
     const zoom = zoomLevel || map.zoom
-    return zoom >= layer.minZoom && zoom <= layer.maxZoom
+    return zoom >= layer.minZoom
   }
 
   static isAuthorised(overlay) {

@@ -154,11 +154,6 @@ describe('selectors', () => {
       expect(selected).toEqual([mapPanelLayers[1]])
     })
 
-    it('should filter out mapLayers if the current zoom of the map is bigger then the maxZoom of the layer', () => {
-      const selected = getActiveMapLayersWithinZoom.resultFunc(20, mapPanelLayers)
-      expect(selected).toEqual([])
-    })
-
     it('should filter out mapLayers if the current zoom of the map is smaller then the minZoom of the layer', () => {
       const selected = getActiveMapLayersWithinZoom.resultFunc(6, mapPanelLayers)
       expect(selected).toEqual([])

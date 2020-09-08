@@ -10,7 +10,6 @@ export interface MapLayer {
   type: MapLayerType
   noDetail: boolean
   minZoom: number
-  maxZoom: number
   layers?: string[]
   url?: string
   params?: string
@@ -171,7 +170,6 @@ export async function getPanelLayers() {
           type
           noDetail
           minZoom
-          maxZoom
         }
       }
     }

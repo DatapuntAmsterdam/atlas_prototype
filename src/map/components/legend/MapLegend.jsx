@@ -20,9 +20,6 @@ import MAP_CONFIG from '../../services/map.config'
 const isAuthorised = (layer, user) =>
   !layer.authScope || (user.authenticated && user.scopes.includes(layer.authScope))
 
-const isInsideZoomLevel = (layer, zoomLevel) =>
-  zoomLevel >= layer.minZoom && zoomLevel <= layer.maxZoom
-
 const TitleWrapper = styled.div`
   display: flex;
 `
@@ -353,18 +350,12 @@ const MapLegend = ({
                         </span>
                       </div>
                     )}
-                    {isAuthorised(mapLayer, user) && !isInsideZoomLevel(mapLayer, zoomLevel) && (
-                      <div className="map-legend__notification">
-                        <span>
-                          {`Zichtbaar bij verder ${
-                            zoomLevel < mapLayer.minZoom ? 'inzoomen' : 'uitzoomen'
-                          }`}
-                        </span>
-                      </div>
+                    {isAuthorised(mapLayer, user) && zoomLevel < mapLayer.minZoom && (
+                      <div className="map-legend__notification">Zichtbaar bij verder inzoomen</div>
                     )}
                     {isAuthorised(mapLayer, user) &&
                       layerIsChecked &&
-                      isInsideZoomLevel(mapLayer, zoomLevel) &&
+                      zoomLevel >= mapLayer.minZoom &&
                       !mapLayer.disabled && (
                         <ul className="map-legend__items">
                           {hasLegendItems

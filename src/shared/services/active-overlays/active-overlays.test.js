@@ -1,6 +1,5 @@
-import ActiveOverlaysDefault, { ActiveOverlays } from './active-overlays'
-
 import getState from '../redux/get-state'
+import ActiveOverlaysDefault, { ActiveOverlays } from './active-overlays'
 
 jest.mock('../redux/get-state')
 
@@ -37,7 +36,7 @@ describe('ActiveOverlays', () => {
   })
 
   describe('static isVisibleAtCurrentZoom', () => {
-    it("should return false is layer is not in mapLayers or when layer doesn't have a minZoom or maxZoom", () => {
+    it("should return false is layer is not in mapLayers or when layer doesn't have a minZoom", () => {
       expect(ActiveOverlays.isVisibleAtCurrentZoom('hvo', 2)).toBe(false)
       expect(ActiveOverlays.isVisibleAtCurrentZoom('bladie', 1)).toBe(false)
     })
