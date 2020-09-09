@@ -61,7 +61,7 @@
     "history": "4.10.1",
     "isomorphic-fetch": "2.2.1",
     "json-api-normalize": "1.1.5",
-    "leaflet": "1.6.0",
+    "leaflet": "1.7.1",
     "leaflet-draw": "1.0.4",
     "leaflet-rotatedmarker": "0.2.0",
     "leaflet.markercluster": "1.4.1",
