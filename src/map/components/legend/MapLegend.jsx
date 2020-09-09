@@ -16,9 +16,7 @@ import styled, { css } from 'styled-components'
 import LoginLink from '../../../app/components/Links/LoginLink/LoginLink'
 import { isPrintOrEmbedMode } from '../../../shared/ducks/ui/ui'
 import MAP_CONFIG from '../../services/map.config'
-
-const isAuthorised = (layer, user) =>
-  !layer.authScope || (user.authenticated && user.scopes.includes(layer.authScope))
+import { isAuthorised } from '../../utils/map-layer'
 
 const TitleWrapper = styled.div`
   display: flex;

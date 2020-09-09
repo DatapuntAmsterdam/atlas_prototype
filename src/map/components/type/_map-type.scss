@@ -1,10 +1,10 @@
 $icon-height: 20px;
 
 .map-type {
-  margin: 8px 8px 16px;
+  margin: 8px 8px 8px;
 
   @media screen and (min-width: $breakpoint-md) {
-    margin: 12px 12px 24px;
+    margin: 12px 12px 12px;
   }
 
   &__title {
@@ -26,6 +26,10 @@ $icon-height: 20px;
 
     &--topography {
       margin-right: 10px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
 

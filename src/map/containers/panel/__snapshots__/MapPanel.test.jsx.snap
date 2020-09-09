@@ -5,10 +5,10 @@ exports[`MapPanel should render MapLegend if store contains active map layers 1`
   aria-expanded={false}
   aria-label="Kaartlagen legenda, Kaartlagen tonen"
   className="
-          map-panel
-          map-panel--collapsed
-          map-panel--has-no-active-layers
-        "
+            map-panel
+            map-panel--collapsed
+            map-panel--has-no-active-layers
+          "
 >
   <div
     className="map-panel__heading"
@@ -30,9 +30,9 @@ exports[`MapPanel should render MapLegend if store contains active map layers 1`
       </h2>
       <span
         className="
-              map-panel__toggle--icon
-              map-panel__toggle--icon-expand
-            "
+                map-panel__toggle--icon
+                map-panel__toggle--icon-expand
+              "
       >
         <SvgChevronUp />
       </span>
@@ -80,10 +80,10 @@ exports[`MapPanel should render MapType and MapLayers 1`] = `
   aria-expanded={false}
   aria-label="Kaartlagen legenda, Kaartlagen tonen"
   className="
-          map-panel
-          map-panel--collapsed
-          map-panel--has-no-active-layers
-        "
+            map-panel
+            map-panel--collapsed
+            map-panel--has-no-active-layers
+          "
 >
   <div
     className="map-panel__heading"
@@ -105,9 +105,9 @@ exports[`MapPanel should render MapType and MapLayers 1`] = `
       </h2>
       <span
         className="
-              map-panel__toggle--icon
-              map-panel__toggle--icon-expand
-            "
+                map-panel__toggle--icon
+                map-panel__toggle--icon-expand
+              "
       >
         <SvgChevronUp />
       </span>
