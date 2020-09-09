@@ -9,11 +9,13 @@ import {
   themeSpacing,
 } from '@datapunt/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import classNames from 'classnames'
 import queryString from 'querystring'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import LoginLink from '../../../app/components/Links/LoginLink/LoginLink'
+import { ReactComponent as SearchPlus } from '../../../shared/assets/icons/search-plus.svg'
 import { isPrintOrEmbedMode } from '../../../shared/ducks/ui/ui'
 import MAP_CONFIG from '../../services/map.config'
 import { isAuthorised } from '../../utils/map-layer'
@@ -292,7 +294,12 @@ const MapLegend = ({
                     }selectable-legend
                   `}
                     >
-                      <StyledLabel key={mapLayer.id} htmlFor={mapLayer.id} label={mapLayer.title}>
+                      <StyledLabel
+                        className="map-legend__label"
+                        key={mapLayer.id}
+                        htmlFor={mapLayer.id}
+                        label={mapLayer.title}
+                      >
                         <StyledCheckbox
                           id={mapLayer.id}
                           className="checkbox"
@@ -325,8 +332,22 @@ const MapLegend = ({
                           }
                         />
                       </StyledLabel>
+                      {isAuthorised(mapLayer, user) &&
+                        layerIsChecked &&
+                        zoomLevel < mapLayer.minZoom && (
+                          <div
+                            className={classNames('map-legend__visibility', {
+                              'map-legend__visibility--no-legend-image': hasLegendItems,
+                            })}
+                            title="Kaartlaag zichtbaar bij verder inzoomen"
+                          >
+                            <Icon size={16} color={themeColor('primary', 'main')}>
+                              <SearchPlus />
+                            </Icon>
+                          </div>
+                        )}
                       {!hasLegendItems ? (
-                        <div className="map-legend__image map-legend__image--selectable">
+                        <div className="map-legend__image">
                           <img
                             alt={mapLayer.title}
                             src={constructLegendIconUrl(mapLayer, mapLayer)}
@@ -341,72 +362,62 @@ const MapLegend = ({
                         </span>
                       </div>
                     )}
-                    {isAuthorised(mapLayer, user) && zoomLevel < mapLayer.minZoom && (
-                      <div className="map-legend__notification">Zichtbaar bij verder inzoomen</div>
-                    )}
-                    {isAuthorised(mapLayer, user) &&
-                      layerIsChecked &&
-                      zoomLevel >= mapLayer.minZoom &&
-                      !mapLayer.disabled && (
-                        <ul className="map-legend__items">
-                          {hasLegendItems
-                            ? mapLayer.legendItems.map((legendItem, legendItemIndex) => {
-                                const legendItemIsVisible = legendItem.isVisible
-                                const LegendLabel = !legendItem.notSelectable
-                                  ? StyledLabel
-                                  : NonSelectableLegendParagraph
-                                return !legendItemIsVisible && printMode ? null : (
-                                  <li
-                                    className="map-legend__item"
-                                    // eslint-disable-next-line react/no-array-index-key
-                                    key={legendItemIndex}
+                    {isAuthorised(mapLayer, user) && layerIsChecked && !mapLayer.disabled && (
+                      <ul className="map-legend__items">
+                        {hasLegendItems
+                          ? mapLayer.legendItems.map((legendItem) => {
+                              const legendItemIsVisible = legendItem.isVisible
+                              const LegendLabel = !legendItem.notSelectable
+                                ? StyledLabel
+                                : NonSelectableLegendParagraph
+                              return !legendItemIsVisible && printMode ? null : (
+                                <li className="map-legend__item" key={legendItem.id}>
+                                  <LegendLabel
+                                    className="map-legend__label"
+                                    htmlFor={legendItem.id}
+                                    label={legendItem.title}
                                   >
-                                    <LegendLabel
-                                      key={legendItem.id}
-                                      htmlFor={legendItem.id}
-                                      label={legendItem.title}
-                                    >
-                                      {!legendItem.notSelectable ? (
-                                        <StyledCheckbox
-                                          id={legendItem.id}
-                                          className="checkbox"
-                                          variant="tertiary"
-                                          checked={legendItemIsVisible}
-                                          name={legendItem.title}
-                                          onChange={
-                                            /* istanbul ignore next */
-                                            () => {
-                                              onLayerVisibilityToggle(
-                                                legendItem.id,
-                                                legendItemIsVisible,
-                                              )
+                                    {!legendItem.notSelectable ? (
+                                      <StyledCheckbox
+                                        id={legendItem.id}
+                                        className="checkbox"
+                                        variant="tertiary"
+                                        checked={legendItemIsVisible}
+                                        name={legendItem.title}
+                                        onChange={
+                                          /* istanbul ignore next */
+                                          () => {
+                                            onLayerVisibilityToggle(
+                                              legendItem.id,
+                                              legendItemIsVisible,
+                                            )
 
-                                              if (!legendItemIsVisible) {
-                                                if (onAddLayers) {
-                                                  onAddLayers([legendItem.id])
-                                                }
-                                              } else if (onRemoveLayers) {
-                                                onRemoveLayers([legendItem.id])
+                                            if (!legendItemIsVisible) {
+                                              if (onAddLayers) {
+                                                onAddLayers([legendItem.id])
                                               }
+                                            } else if (onRemoveLayers) {
+                                              onRemoveLayers([legendItem.id])
                                             }
                                           }
-                                        />
-                                      ) : (
-                                        legendItem.title
-                                      )}
-                                    </LegendLabel>
-                                    <div className="map-legend__image">
-                                      <img
-                                        alt={legendItem.title}
-                                        src={constructLegendIconUrl(mapLayer, legendItem)}
+                                        }
                                       />
-                                    </div>
-                                  </li>
-                                )
-                              })
-                            : null}
-                        </ul>
-                      )}
+                                    ) : (
+                                      legendItem.title
+                                    )}
+                                  </LegendLabel>
+                                  <div className="map-legend__image">
+                                    <img
+                                      alt={legendItem.title}
+                                      src={constructLegendIconUrl(mapLayer, legendItem)}
+                                    />
+                                  </div>
+                                </li>
+                              )
+                            })
+                          : null}
+                      </ul>
+                    )}
                   </li>
                 )
               })}

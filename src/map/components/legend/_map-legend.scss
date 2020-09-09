@@ -54,13 +54,25 @@ $icon-height: 24px;
     display: flex;
   }
 
+  &__label {
+    margin-right: auto !important;
+  }
+
+  &__visibility {
+    margin-left: 12px;
+
+    &--no-legend-image {
+      margin-right: 28px;
+    }
+  }
+
   &__image {
     box-sizing: content-box;
     display: inline-block;
     height: 16px;
     line-height: 16px;
     width: 16px;
-    margin-left: auto;
+    margin-left: 12px;
 
     & + * {
       margin-left: 8px !important;
