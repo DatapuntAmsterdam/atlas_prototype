@@ -46,7 +46,7 @@ $icon-height: 24px;
   }
 
   &__items {
-    padding: 0 4px 4px;
+    margin-left: 16px;
   }
 
   &__item {
@@ -60,10 +60,7 @@ $icon-height: 24px;
     height: 16px;
     line-height: 16px;
     width: 16px;
-
-    &--not-selectable {
-      margin-right: 12px;
-    }
+    margin-left: auto;
 
     & + * {
       margin-left: 8px !important;

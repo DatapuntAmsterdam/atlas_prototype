@@ -295,53 +295,46 @@ const MapLegend = ({
                   `}
                     >
                       <StyledLabel key={mapLayer.id} htmlFor={mapLayer.id} label={mapLayer.title}>
-                        <>
-                          {!hasLegendItems ? (
-                            <div
-                              className={`
-                            map-legend__image
-                            map-legend__image--selectable
-                          `}
-                            >
-                              <img
-                                alt={mapLayer.title}
-                                src={constructLegendIconUrl(mapLayer, mapLayer)}
-                              />
-                            </div>
-                          ) : null}
-                          <StyledCheckbox
-                            id={mapLayer.id}
-                            className="checkbox"
-                            variant="tertiary"
-                            checked={layerIsChecked && !layerIsIndeterminate}
-                            indeterminate={layerIsIndeterminate}
-                            name={mapLayer.title}
-                            onChange={
-                              /* istanbul ignore next */
-                              (e) => {
-                                addOrRemoveLayer(e.currentTarget.checked, [mapLayer])
-                                // Sometimes we dont want the active maplayers to be deleted from the query parameters in the url
-                                if (isPrintOrEmbedView || layerIsIndeterminate) {
-                                  return mapLayer.legendItems.length > 0 &&
-                                    mapLayer.legendItems.some(({ id }) => id !== null)
-                                    ? mapLayer.legendItems
-                                        .filter(({ isVisible }) =>
-                                          layerIsIndeterminate ? !isVisible : true,
+                        <StyledCheckbox
+                          id={mapLayer.id}
+                          className="checkbox"
+                          variant="tertiary"
+                          checked={layerIsChecked && !layerIsIndeterminate}
+                          indeterminate={layerIsIndeterminate}
+                          name={mapLayer.title}
+                          onChange={
+                            /* istanbul ignore next */
+                            (e) => {
+                              addOrRemoveLayer(e.currentTarget.checked, [mapLayer])
+                              // Sometimes we dont want the active maplayers to be deleted from the query parameters in the url
+                              if (isPrintOrEmbedView || layerIsIndeterminate) {
+                                return mapLayer.legendItems.length > 0 &&
+                                  mapLayer.legendItems.some(({ id }) => id !== null)
+                                  ? mapLayer.legendItems
+                                      .filter(({ isVisible }) =>
+                                        layerIsIndeterminate ? !isVisible : true,
+                                      )
+                                      .forEach(({ id }) => {
+                                        onLayerVisibilityToggle(
+                                          id,
+                                          layerIsIndeterminate ? false : !e.currentTarget.checked,
                                         )
-                                        .forEach(({ id }) => {
-                                          onLayerVisibilityToggle(
-                                            id,
-                                            layerIsIndeterminate ? false : !e.currentTarget.checked,
-                                          )
-                                        })
-                                    : onLayerVisibilityToggle(mapLayer.id, !e.currentTarget.checked)
-                                }
-                                return handleLayerToggle(e.currentTarget.checked, mapLayer)
+                                      })
+                                  : onLayerVisibilityToggle(mapLayer.id, !e.currentTarget.checked)
                               }
+                              return handleLayerToggle(e.currentTarget.checked, mapLayer)
                             }
-                          />
-                        </>
+                          }
+                        />
                       </StyledLabel>
+                      {!hasLegendItems ? (
+                        <div className="map-legend__image map-legend__image--selectable">
+                          <img
+                            alt={mapLayer.title}
+                            src={constructLegendIconUrl(mapLayer, mapLayer)}
+                          />
+                        </div>
+                      ) : null}
                     </div>
                     {!isAuthorised(mapLayer, user) && (
                       <div className="map-legend__notification">
@@ -375,19 +368,6 @@ const MapLegend = ({
                                       htmlFor={legendItem.id}
                                       label={legendItem.title}
                                     >
-                                      <div
-                                        className={`
-                            map-legend__image
-                            map-legend__image--${
-                              legendItem.notSelectable ? 'not-selectable' : 'selectable'
-                            }
-                          `}
-                                      >
-                                        <img
-                                          alt={legendItem.title}
-                                          src={constructLegendIconUrl(mapLayer, legendItem)}
-                                        />
-                                      </div>
                                       {!legendItem.notSelectable ? (
                                         <StyledCheckbox
                                           id={legendItem.id}
@@ -417,6 +397,12 @@ const MapLegend = ({
                                         legendItem.title
                                       )}
                                     </LegendLabel>
+                                    <div className="map-legend__image">
+                                      <img
+                                        alt={legendItem.title}
+                                        src={constructLegendIconUrl(mapLayer, legendItem)}
+                                      />
+                                    </div>
                                   </li>
                                 )
                               })
