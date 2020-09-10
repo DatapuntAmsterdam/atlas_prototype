@@ -98,7 +98,7 @@
     "remove-markdown": "0.3.0",
     "reselect": "4.0.0",
     "styled-components": "^5.2.0",
-    "urql": "^1.10.0",
+    "urql": "^1.10.1",
     "uuid": "^8.3.0"
   },
   "devDependencies": {
