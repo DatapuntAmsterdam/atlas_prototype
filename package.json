@@ -39,7 +39,7 @@
     "@datapunt/matomo-tracker-js": "0.2.1",
     "@datapunt/matomo-tracker-react": "0.2.1",
     "@datapunt/react-maps": "^0.8.4-alpha.1",
-    "@sentry/browser": "5.22.3",
+    "@sentry/browser": "5.23.0",
     "@turf/turf": "^5.1.6",
     "@types/file-saver": "^2.0.1",
     "@types/openseadragon": "^2.4.5",
