@@ -343,6 +343,20 @@
           "acceptance": "5bfec111-c3a8-43c0-9db7-294527d9fbfc",
           "production": "2db4e140-6fc2-41e2-bd7b-3f017d00e976"
         }
+      },
+      "EDUCATION":{
+        "id": {
+          "development": "ba42bfa3-4cf6-43ba-bb33-589c5dacefa7",
+          "acceptance": "ba42bfa3-4cf6-43ba-bb33-589c5dacefa7",
+          "production": "400f5adf-a728-4a6d-8dfe-5d14866fb576"
+        }
+      },
+      "CORONA":{
+        "id": {
+          "development": "054e6a90-f02a-4805-b449-4a7849da38a9",
+          "acceptance": "054e6a90-f02a-4805-b449-4a7849da38a9",
+          "production": "e6d25646-a296-4af9-8081-9fe454db2b02"
+        }
       }
     }
   }

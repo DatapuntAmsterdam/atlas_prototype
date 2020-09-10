@@ -122,6 +122,18 @@ export const shortUrls = [
     from: '/dossier/wonen/',
     to: `/dossiers/dossier/wonen/${SHORTLINKS.COLLECTIONS.HOUSING.id[environment.DEPLOY_ENV]}`,
   },
+  {
+    from: '/schoolloopbanen/',
+    to: `/specials/dashboard/dashboard-schoolloopbanen/${
+      SHORTLINKS.COLLECTIONS.EDUCATION.id[environment.DEPLOY_ENV]
+    }`,
+  },
+  {
+    from: '/coronamonitor/',
+    to: `/specials/dashboard/dashboard-corona/${
+      SHORTLINKS.COLLECTIONS.CORONA.id[environment.DEPLOY_ENV]
+    }`,
+  },
 ]
 
 export const articleUrls = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({
