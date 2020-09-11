@@ -1,24 +1,23 @@
-import React from 'react'
+import { ChevronRight } from '@datapunt/asc-assets'
 import {
-  MenuInline,
-  MenuToggle,
-  MenuFlyOut,
-  MenuItem,
   MenuButton,
+  MenuFlyOut,
+  MenuInline,
+  MenuItem,
+  MenuToggle,
   themeColor,
 } from '@datapunt/asc-ui'
-import { ChevronRight } from '@datapunt/asc-assets'
-import PropTypes from 'prop-types'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import { toArticleDetail } from '../../../store/redux-first-router/actions'
-import truncateString from '../../../shared/services/truncateString/truncateString'
-import navigationLinks from '../HomePage/services/navigationLinks'
-
+import environment from '../../../environment'
 import { HEADER_LINKS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
-import environment from '../../../environment'
+import truncateString from '../../../shared/services/truncateString/truncateString'
+import { toArticleDetail } from '../../../store/redux-first-router/actions'
+import navigationLinks from '../HomePage/services/navigationLinks'
 
 const StyledMenuInline = styled(MenuInline)`
   background-color: ${({ tall, theme }) =>
@@ -30,10 +29,15 @@ const components = {
   mobile: MenuToggle,
 }
 
+function dropFocus() {
+  document.activeElement?.blur()
+}
+
 const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) => {
-  const [menuOpen, setMenuOpen] = React.useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const { trackEvent } = useMatomo()
   const Menu = components[type]
+
   return (
     <Menu
       {...props}
@@ -51,6 +55,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
                 action: 'main-menu',
                 name: title,
               })
+              dropFocus()
             }}
             as={RouterLink}
             iconLeft={<ChevronRight />}
@@ -76,6 +81,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
                       action: 'main-menu',
                       name: title,
                     })
+                    dropFocus()
                   }}
                   as={RouterLink}
                   iconLeft={<ChevronRight />}
@@ -99,6 +105,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
             })
             await setMenuOpen(false)
             showFeedbackForm()
+            dropFocus()
           }}
         >
           Feedback
@@ -114,6 +121,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
                 action: 'main-menu',
                 name: HEADER_LINKS.HELP.title,
               })
+              dropFocus()
             }}
             title={HEADER_LINKS.HELP.title}
             to={toArticleDetail(
@@ -136,6 +144,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
                 action: 'main-menu',
                 name: 'Login',
               })
+              dropFocus()
             }}
           >
             Inloggen
@@ -153,6 +162,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
                   action: 'main-menu',
                   name: 'Logout',
                 })
+                dropFocus()
               }}
               iconLeft={<ChevronRight />}
             >
