@@ -2,6 +2,7 @@ import { LatLngLiteral } from 'leaflet'
 import NotificationLevel from '../../app/models/notification'
 import getFileName from '../../app/utils/getFileName'
 import environment from '../../environment'
+import { DEFAULT_LOCALE } from '../../shared/config/locale.config'
 import { fetchWithToken } from '../../shared/services/api/api'
 import formatDate from '../../shared/services/date-formatter/date-formatter'
 import {
@@ -816,22 +817,32 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.napPeilmerk]: {
+    type: 'nap/peilmerk',
+    endpoint: 'nap/peilmerk',
     normalization: napPeilmerk,
     mapDetail: (result) => ({
       title: categoryLabels.napPeilmerk.singular,
       subTitle: result.peilmerkidentificatie,
       items: [
-        { type: DetailResultItemType.Default, label: 'Hoogte NAP', value: result.height },
         {
-          type: DetailResultItemType.Default,
-          label: 'Omschrijving',
-          value: result.omschrijving,
-        },
-        { type: DetailResultItemType.Default, label: 'Windrichting', value: result.windrichting },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Muurvlakcoördinaten (cm)',
-          value: result.wallCoordinates,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            {
+              term: 'Hoogte NAP',
+              description: result.hoogte_nap
+                ? `${parseFloat(result.hoogte_nap).toLocaleString(DEFAULT_LOCALE)} m`
+                : undefined,
+            },
+            { term: 'Jaar', description: result.jaar },
+            { term: 'Omschrijving', description: result.omschrijving },
+            { term: 'Windrichting', description: result.windrichting },
+            {
+              term: 'Muurvlakcoördinaten (cm)',
+              description: `${result.x_muurvlak}, ${result.y_muurvlak}`,
+            },
+            { term: 'Merk', description: result.merk },
+            { term: 'RWS nummer', description: result.rws_nummer },
+          ].filter(hasDescription),
         },
       ],
     }),
