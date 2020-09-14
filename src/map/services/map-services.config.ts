@@ -75,7 +75,7 @@ export const endpointTypes = {
   parkeerzonesUitz: 'vsd/parkeerzones_uitz/',
   precarioShips: 'v1/precariobelasting/woonschepen/',
   precarioComVessels: 'v1/precariobelasting/bedrijfsvaartuigen/',
-  precarioPassVessels: 'v1/precariobelasting/passagiersvaartuigen/',
+  precarioPassVessels: 'precariobelasting/passagiersvaartuigen',
   precarioTerraces: 'precariobelasting/terrassen',
   reclamebelasting: 'vsd/reclamebelasting/',
   tunnels: 'hoofdroutes/tunnels_gevaarlijke_stoffen',
@@ -1232,29 +1232,32 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.precarioPassVessels]: {
+    type: 'precariobelasting/passagiersvaartuigen',
+    endpoint: 'v1/precariobelasting/passagiersvaartuigen',
     mapDetail: (result) => ({
       title: categoryLabels.precarioPassVessels.singular,
       subTitle: result.gebied,
       items: [
         {
-          type: DetailResultItemType.Default,
-          label: 'Categorie',
-          value: result.categorie,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Jaar',
-          value: result.jaar,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Gebied',
-          value: result.gebied,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Tarief per jaar per m2',
-          value: result.tariefPerJaarPerM2,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            {
+              term: 'Categorie',
+              description: result.categorie,
+            },
+            {
+              term: 'Jaar',
+              description: result.jaar,
+            },
+            {
+              term: 'Gebied',
+              description: result.gebied,
+            },
+            {
+              term: 'Tarief per jaar per m2',
+              description: result.tariefPerJaarPerM2,
+            },
+          ].filter(hasDescription),
         },
       ],
     }),
