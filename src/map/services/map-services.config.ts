@@ -1,14 +1,26 @@
+import { LatLngLiteral } from 'leaflet'
 import NotificationLevel from '../../app/models/notification'
+import getFileName from '../../app/utils/getFileName'
+import environment from '../../environment'
+import { fetchWithToken } from '../../shared/services/api/api'
 import formatDate from '../../shared/services/date-formatter/date-formatter'
-import { DetailResult, DetailResultItemType, DetailResultNotification } from '../types/details'
+import {
+  DetailResult,
+  DetailResultItem,
+  DetailResultItemType,
+  DetailResultNotification,
+} from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
 import categoryLabels from './map-search/category-labels'
+import { fetchDetailData } from './map/fetchDetails'
+import { getServiceDefinition } from './map/getServiceDefinition'
 import {
   adressenPand,
   adressenVerblijfsobject,
   bekendmakingen,
   evenementen,
   explosieven,
+  formatSquareMetre,
   grexProject,
   kadastraalObject,
   meetbout,
@@ -22,7 +34,6 @@ import {
   winkelgebied,
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
-import getFileName from '../../app/utils/getFileName'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -82,7 +93,7 @@ export interface ServiceDefinition {
   endpoint?: string
   authScope?: string
   normalization?: (result: any) => any
-  mapDetail: (result: any) => DetailResult
+  mapDetail: (result: any, location: LatLngLiteral) => DetailResult | Promise<DetailResult>
 }
 
 const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
@@ -906,20 +917,76 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.vastgoed]: {
+    type: 'vsd/vastgoed',
+    endpoint: 'vsd/vastgoed',
     normalization: vastgoed,
-    mapDetail: (result) => ({
-      title: 'Gemeentelijk eigendom',
-      subTitle: result._display,
-      items: [
-        { type: DetailResultItemType.Default, label: 'Bouwjaar', value: result.construction_year },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Monumentstatus',
-          value: result.monumental_status,
-        },
-        { type: DetailResultItemType.Default, label: 'Status', value: result.status },
-      ],
-    }),
+    mapDetail: async (result, location) => {
+      // TODO: What is happening here is a bit rediculous, but it was migrated from existing code.
+      // Basically we do a GeoSearch which returns all the nearby buildings that are on this location.
+      // This will in some cases return a bunch of buildings on the exact same location, since they share the same space (see the Geometery)
+      // It's a bit dumb since our initial GeoSearch to see if the user clicked something already returns all of these.
+      // Either way this is needed because we need to put some identifier in the URL so it might as well be the first one we find.
+      // Technically we should really have some kind of model in the API to hold these collections so we can identify them with a single identifier.
+      // Really more of a task for the API team to figure this one out...
+      const { features } = await fetchWithToken(
+        `${environment.API_ROOT}geosearch/vastgoed/?${new URLSearchParams({
+          lat: location.lat.toString(),
+          lon: location.lng.toString(),
+          item: 'vastgoed',
+          radius: '0',
+        }).toString()}`,
+      )
+
+      const serviceDefinition = getServiceDefinition('vsd/vastgoed')
+
+      if (!serviceDefinition) {
+        throw new Error('Unable to retrieve service defintition for vastgoed details.')
+      }
+
+      const units = await Promise.all(
+        features.map(
+          async ({ properties }: { properties: { id: string } }) =>
+            (await fetchDetailData(serviceDefinition, properties.id)).data,
+        ),
+      )
+
+      const additionalItems: DetailResultItem[] = units.map((unit: any) => ({
+        type: DetailResultItemType.DefinitionList,
+        title: unit._display,
+        entries: [
+          { term: 'Verhuurde eenheid', description: unit.vhe_adres },
+          { term: 'Gebruiksdoel', description: unit.bag_verblijfsobject_gebruiksdoelen },
+          {
+            term: 'Oppervlakte (indicatie)',
+            description: unit.oppervlakte > 0 ? formatSquareMetre(unit.oppervlakte) : 'Onbekend',
+          },
+          { term: 'Monumentstatus', description: unit.monumental_status },
+          { term: 'Status', description: unit.status },
+          { term: 'Contractueel gebruik', description: unit.huurtype },
+        ].filter(hasDescription),
+      }))
+
+      return {
+        title: 'Gemeentelijk eigendom',
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.DefinitionList,
+            entries: [
+              { term: 'Bouwjaar', description: result.construction_year },
+              { term: 'Aantal verhuurde eenheden', description: additionalItems.length },
+              { term: 'Monumentstatus', description: result.monumental_status },
+              { term: 'Status', description: result.status },
+            ].filter(hasDescription),
+          },
+          {
+            type: DetailResultItemType.Heading,
+            value: `Verhuurde eenheden (${additionalItems.length})`,
+          },
+          ...additionalItems,
+        ],
+      }
+    },
   },
   [endpointTypes.vestiging]: {
     authScope: 'HR/R',

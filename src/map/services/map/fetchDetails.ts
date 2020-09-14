@@ -9,22 +9,24 @@ import { getDetailUrl } from './getDetailUrl'
 
 // TODO: Write some tests for this method.
 
-export interface MapDetails {
-  result: DetailResult
+export interface DetailResponse {
+  data: any
   geometry: Geometry
   location: LatLngLiteral
 }
 
 /**
- * Retrieves map details for a specific id from the service definition and applies any normalization if needed.
+ * Retrieves detail data for a specific id from the service definition and applies any normalization if needed.
  *
  * @param serviceDefinition The service definition to retrieve the map detail with.
  * @param id The id of the map details item.
  */
-export async function fetchDetails(
+export async function fetchDetailData(
   serviceDefinition: ServiceDefinition,
   id: string,
-): Promise<MapDetails> {
+): Promise<DetailResponse> {
+  // TODO: Handle a possibly 'unauthorized' scenario.
+
   const detailUrl = getDetailUrl(serviceDefinition, id)
   // TODO: Remove this when we no longer have v1 endpoints.
   const supportsCrs = serviceDefinition.endpoint?.startsWith('v1')
@@ -33,7 +35,6 @@ export async function fetchDetails(
   // TODO: Fetching logic should be added to the service definition in order to make this code type-safe.
   const responseData = await fetchWithToken(detailUrl, undefined, undefined, undefined, headers, '')
   const normalizedData = serviceDefinition.normalization?.(responseData) ?? responseData
-  const result = serviceDefinition.mapDetail(normalizedData)
 
   // TODO: Once fetching logic becomes part of the service definition it should always return the 'geometry' uniformly.
   let geometry: Geometry =
@@ -67,7 +68,32 @@ export async function fetchDetails(
   }
 
   return {
-    result,
+    data: normalizedData,
+    geometry,
+    location,
+  }
+}
+
+export interface MapDetails {
+  data: DetailResult
+  geometry: Geometry
+  location: LatLngLiteral
+}
+
+/**
+ * Converts the detail data response to one that can be displayed in the detail pages.
+ *
+ * @param serviceDefinition The service definition to use to convert the response.
+ * @param response The response to convert.
+ */
+export async function toMapDetails(
+  serviceDefinition: ServiceDefinition,
+  { data, location, geometry }: DetailResponse,
+): Promise<MapDetails> {
+  const detailData = serviceDefinition.mapDetail(data, location)
+
+  return {
+    data: detailData instanceof Promise ? await detailData : detailData,
     geometry,
     location,
   }

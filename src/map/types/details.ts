@@ -20,12 +20,14 @@ export enum DetailResultItemType {
   Default = 'default',
   DefinitionList = 'definition-list',
   Table = 'table',
+  Heading = 'heading',
 }
 
 export type DetailResultItem =
   | DetailResultItemDefault
   | DetailResultItemDefinitionList
   | DetailResultItemTable
+  | DetailResultItemHeading
 
 // TODO: Drop 'DetailResultItemDefault' in favor of 'DetailResultItemDefinitionList'
 export interface DetailResultItemDefault {
@@ -38,6 +40,7 @@ export interface DetailResultItemDefault {
 
 export interface DetailResultItemDefinitionList {
   type: DetailResultItemType.DefinitionList
+  title?: string
   entries: DetailResultItemDefinitionListEntry[]
 }
 
@@ -60,3 +63,8 @@ export interface DetailResultItemTableHeading {
 }
 
 export type DetailResultItemTableValue = { [key: string]: any }
+
+export interface DetailResultItemHeading {
+  type: DetailResultItemType.Heading
+  value: string
+}

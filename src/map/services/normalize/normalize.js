@@ -261,7 +261,7 @@ export const parkeervak = (result) => {
   return { ...result, regimes }
 }
 
-function formatSquareMetre(value) {
+export function formatSquareMetre(value) {
   return `${formatCount(value)} m²`
 }
 

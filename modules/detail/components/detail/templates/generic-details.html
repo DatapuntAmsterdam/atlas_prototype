@@ -9,20 +9,31 @@
     type="warning">
     {{ notification.value }}
   </dp-panel>
+  <dp-panorama-thumbnail panorama="vm.previewPanorama" is-loading="vm.isPreviewPanoramaLoading"></dp-panorama-thumbnail>
   <ng-container ng-repeat="item in vm.apiData.results.items">
-    <dl ng-if="item.type === 'definition-list'" class="c-key-value-list">
-      <div class="c-key-value-item" ng-repeat="entry in item.entries">
-        <dt>{{ entry.term }}</dt>
-        <dd ng-if="!entry.link">{{ entry.description }}</dd>
-        <dd ng-if="entry.link">
-          <a
-            class="o-btn o-btn--link c-key-value-list__value-inline"
-            target="_blank"
-            ng-href="{{ entry.link }}">
-            {{ entry.description }}
-          </a>
-        </dd>
-      </div>
-    </dl>
+    <ng-container ng-if="item.type === 'heading'">
+      <h2 class="o-header__subtitle qa-search-header">
+        {{ item.value }}
+      </h2>
+      <br>
+    </ng-container>
+
+    <div ng-if="item.type === 'definition-list'" class="c-search-results__block">
+      <h3 ng-if="item.title" class="o-header__subtitle o-header__subtitle--dark">{{ item.title }}</h3>
+      <dl class="c-key-value-list">
+        <div class="c-key-value-item" ng-repeat="entry in item.entries">
+          <dt>{{ entry.term }}</dt>
+          <dd ng-if="!entry.link">{{ entry.description }}</dd>
+          <dd ng-if="entry.link">
+            <a
+              class="o-btn o-btn--link c-key-value-list__value-inline"
+              target="_blank"
+              ng-href="{{ entry.link }}">
+              {{ entry.description }}
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </div>
   </ng-container>
 </div>

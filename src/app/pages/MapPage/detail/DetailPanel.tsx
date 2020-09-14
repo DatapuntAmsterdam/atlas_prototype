@@ -1,25 +1,27 @@
 import { MapPanelContent } from '@datapunt/arm-core'
-import { Alert, Link, Paragraph, themeSpacing } from '@datapunt/asc-ui'
+import { Alert, Heading, Link, Paragraph, themeColor, themeSpacing } from '@datapunt/asc-ui'
 import React, { Fragment, useContext, useMemo } from 'react'
 import styled from 'styled-components'
 import {
-  fetchDetails,
+  fetchDetailData,
   getServiceDefinition,
   MapDetails,
   parseDetailPath,
+  toMapDetails,
 } from '../../../../map/services/map'
 import {
   DetailResultItem,
   DetailResultItemDefinitionList,
+  DetailResultItemHeading,
   DetailResultItemType,
 } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
-import { detailUrlParam } from '../query-params'
 import useParam from '../../../utils/useParam'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import PanoramaPreview from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
+import { detailUrlParam } from '../query-params'
 
 export interface DetailPanelProps {
   detailUrl: string
@@ -50,7 +52,8 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
         return Promise.resolve(null)
       }
 
-      const details = await fetchDetails(serviceDefinition, detailParams.id)
+      const data = await fetchDetailData(serviceDefinition, detailParams.id)
+      const details = await toMapDetails(serviceDefinition, data)
 
       setDetailFeature({
         id: detailParams.id,
@@ -63,7 +66,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
     }, [detailUrl]),
   )
 
-  const subTitle = (result.status === PromiseStatus.Fulfilled && result.value?.result.title) || ''
+  const subTitle = (result.status === PromiseStatus.Fulfilled && result.value?.data.title) || ''
 
   return (
     <MapPanelContent
@@ -97,7 +100,7 @@ function renderDetails(details: MapDetails | null) {
     <>
       <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
       <Spacer />
-      {details.result.notifications?.map((notification) => (
+      {details.data.notifications?.map((notification) => (
         <Fragment key={notification.value}>
           <Alert level={notification.level} dismissible={notification.canClose}>
             {notification.value}
@@ -105,7 +108,7 @@ function renderDetails(details: MapDetails | null) {
           <Spacer />
         </Fragment>
       ))}
-      {details.result.items.map((item, index) => (
+      {details.data.items.map((item, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <Fragment key={item.type + index}>
           {renderItem(item)}
@@ -120,6 +123,8 @@ function renderItem(item: DetailResultItem) {
   switch (item.type) {
     case DetailResultItemType.DefinitionList:
       return renderDefinitionListItem(item)
+    case DetailResultItemType.Heading:
+      return renderHeadingItem(item)
     default:
       throw new Error('Unable to render map detail pane, encountered unknown item type.')
   }
@@ -127,25 +132,37 @@ function renderItem(item: DetailResultItem) {
 
 function renderDefinitionListItem(item: DetailResultItemDefinitionList) {
   return (
-    <DefinitionList>
-      {item.entries.map(({ term, description, link }) => (
-        <DefinitionListItem term={term}>
-          {link ? (
-            <Link href={link} inList target="_blank">
-              {description}
-            </Link>
-          ) : (
-            description
-          )}
-        </DefinitionListItem>
-      ))}
-    </DefinitionList>
+    <>
+      {item.title && <Heading forwardedAs="h4">{item.title}</Heading>}
+      <DefinitionList>
+        {item.entries.map(({ term, description, link }) => (
+          <DefinitionListItem term={term}>
+            {link ? (
+              <Link href={link} inList target="_blank">
+                {description}
+              </Link>
+            ) : (
+              description
+            )}
+          </DefinitionListItem>
+        ))}
+      </DefinitionList>
+    </>
   )
+}
+
+const StyledHeading = styled(Heading)`
+  color: ${themeColor('secondary')};
+  margin: 0;
+`
+
+function renderHeadingItem(item: DetailResultItemHeading) {
+  return <StyledHeading forwardedAs="h3">{item.value}</StyledHeading>
 }
 
 function getPanelTitle(result: PromiseResult<MapDetails | null>) {
   if (result.status === PromiseStatus.Fulfilled && result.value) {
-    return result.value.result.subTitle
+    return result.value.data.subTitle
   }
 
   return 'Detailweergave'

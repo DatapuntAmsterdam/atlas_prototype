@@ -17,13 +17,23 @@ export default async function fetchByUri(uri, detail = false, normalization = fa
 
   const geometryCenter = geometry && getCenter(geometry)
   const wgs84Center = geometryCenter ? rdToWgs84(geometryCenter) : null
+  let location = result.location || wgs84Center
 
-  const returnFields = detail ? detail(normalizedData || result) : normalizedData || result
+  // Some methods do not accept a standard LatLngLiteral, so we need to spread this over.
+  location = {
+    ...location,
+    lat: location.latitude,
+    lng: location.longitude,
+  }
+
+  const mapDetails = detail ? detail(normalizedData || result, location) : normalizedData || result
+  const details = mapDetails instanceof Promise ? await mapDetails : mapDetails
+
   return {
     label: result._display,
-    ...returnFields,
+    ...details,
     // "label" may be overwritten by the result or normalizedData, but the location and geometry are constructed above
-    location: result.location || wgs84Center,
     geometrie: geometry,
+    location,
   }
 }

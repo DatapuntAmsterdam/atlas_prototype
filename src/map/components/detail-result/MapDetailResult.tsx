@@ -1,10 +1,12 @@
-import { Alert, Link } from '@datapunt/asc-ui'
+import { Alert, Heading, Link, themeColor } from '@datapunt/asc-ui'
 import React, { Fragment } from 'react'
+import styled from 'styled-components'
 import {
   DetailResult,
   DetailResultItem,
   DetailResultItemDefault,
   DetailResultItemDefinitionList,
+  DetailResultItemHeading,
   DetailResultItemTable,
   DetailResultItemType,
 } from '../../types/details'
@@ -62,9 +64,11 @@ function renderItem(item: DetailResultItem, index: number) {
     case DetailResultItemType.Default:
       return renderDefaultItem(item)
     case DetailResultItemType.DefinitionList:
-      return renderDefinitionListItem(item)
+      return renderDefinitionListItem(item, index)
     case DetailResultItemType.Table:
       return renderTableItem(item, index)
+    case DetailResultItemType.Heading:
+      return renderHeadingItem(item, index)
     default:
       throw new Error('Unable to render map detail pane, encountered unknown item type.')
   }
@@ -91,27 +95,53 @@ function renderDefaultItem(item: DetailResultItemDefault) {
   return <MapDetailResultItem key={item.label} item={item} />
 }
 
-function renderDefinitionListItem(item: DetailResultItemDefinitionList) {
-  return item.entries.map((entry) => (
-    <li key={entry.term + entry.description} className="map-detail-result__item">
-      <section className="map-detail-result__item-content">
-        <div className="map-detail-result__item-label">{entry.term}</div>
-        <div className="map-detail-result__item-value">
-          {entry.link ? (
-            <Link href={entry.link} inList target="_blank">
-              {entry.description}
-            </Link>
-          ) : (
-            entry.description
-          )}
-        </div>
-      </section>
-    </li>
-  ))
+const DefinitionListHeading = styled(Heading)`
+  margin: 0;
+`
+
+function renderDefinitionListItem(item: DetailResultItemDefinitionList, index: number) {
+  return (
+    <>
+      {item.title && (
+        <li key={index} className="map-detail-result__item">
+          <DefinitionListHeading forwardedAs="h4">{item.title}</DefinitionListHeading>
+        </li>
+      )}
+      {item.entries.map((entry) => (
+        <li key={entry.term + entry.description} className="map-detail-result__item">
+          <section className="map-detail-result__item-content">
+            <div className="map-detail-result__item-label">{entry.term}</div>
+            <div className="map-detail-result__item-value">
+              {entry.link ? (
+                <Link href={entry.link} inList target="_blank">
+                  {entry.description}
+                </Link>
+              ) : (
+                entry.description
+              )}
+            </div>
+          </section>
+        </li>
+      ))}
+    </>
+  )
 }
 
 function renderTableItem(item: DetailResultItemTable, index: number) {
   return <MapDetailResultItemTable key={index} item={item} />
+}
+
+const StyledHeading = styled(Heading)`
+  margin: 0;
+  color: ${themeColor('secondary')};
+`
+
+function renderHeadingItem(item: DetailResultItemHeading, index: number) {
+  return (
+    <li key={index} className="map-detail-result__item">
+      <StyledHeading forwardedAs="h3">{item.value}</StyledHeading>
+    </li>
+  )
 }
 
 export default MapDetailResult
