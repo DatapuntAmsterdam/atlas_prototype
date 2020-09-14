@@ -178,16 +178,18 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
               loader: 'postcss-loader',
               options: {
                 sourceMap: true,
-                plugins: [
-                  require('autoprefixer'),
-                  ...(isProd ? [require('cssnano')({
-                    preset: ['default', {
-                      // Disable SVGO since some of our SVG assets aren't too great.
-                      // TODO: Can be removed once we remove the legacy Angular code.
-                      svgo: false,
-                    }],
-                  })] : [])
-                ],
+                postcssOptions: {
+                  plugins: [
+                    require('autoprefixer'),
+                    ...(isProd ? [require('cssnano')({
+                      preset: ['default', {
+                        // Disable SVGO since some of our SVG assets aren't too great.
+                        // TODO: Can be removed once we remove the legacy Angular code.
+                        svgo: false,
+                      }],
+                    })] : [])
+                  ],
+                }
               },
             },
             {
