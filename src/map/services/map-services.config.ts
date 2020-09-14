@@ -76,7 +76,7 @@ export const endpointTypes = {
   precarioShips: 'v1/precariobelasting/woonschepen/',
   precarioComVessels: 'v1/precariobelasting/bedrijfsvaartuigen/',
   precarioPassVessels: 'v1/precariobelasting/passagiersvaartuigen/',
-  precarioTerraces: 'v1/precariobelasting/terrassen/',
+  precarioTerraces: 'precariobelasting/terrassen',
   reclamebelasting: 'vsd/reclamebelasting/',
   tunnels: 'hoofdroutes/tunnels_gevaarlijke_stoffen',
   vastgoed: 'vsd/vastgoed',
@@ -1260,44 +1260,44 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.precarioTerraces]: {
+    type: 'precariobelasting/terrassen',
+    endpoint: 'v1/precariobelasting/terrassen',
     mapDetail: (result) => ({
       title: categoryLabels.precarioTerraces.singular,
       subTitle: result.gebied,
       items: [
         {
-          type: DetailResultItemType.Default,
-          label: 'Categorie',
-          value: result.categorie,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Jaar',
-          value: result.jaar,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Stadsdeel',
-          value: result.stadsdeel,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Gebied',
-          value: result.gebied,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Overdekt terras per jaar per m2',
-          value: result.tariefOverdektTerrasPerJaarPerM2,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Onverdekt terras per zomerseizoen per m2',
-          value: result.tariefOnoverdektTerrasPerZomerseizoenPerM2,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Onoverdekt terras per winterseizoen per m2',
-          value: result.tariefOnoverdektTerrasPerWinterseizoenPerM2,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            {
+              term: 'Categorie',
+              description: result.categorie,
+            },
+            {
+              term: 'Jaar',
+              description: result.jaar,
+            },
+            {
+              term: 'Stadsdeel',
+              description: result.stadsdeel,
+            },
+            {
+              term: 'Gebied',
+              description: result.gebied,
+            },
+            {
+              term: 'Overdekt terras per jaar per m2',
+              description: result.tariefOverdektTerrasPerJaarPerM2,
+            },
+            {
+              term: 'Onverdekt terras per zomerseizoen per m2',
+              description: result.tariefOnoverdektTerrasPerZomerseizoenPerM2,
+            },
+            {
+              term: 'Onoverdekt terras per winterseizoen per m2',
+              description: result.tariefOnoverdektTerrasPerWinterseizoenPerM2,
+            },
+          ].filter(hasDescription),
         },
       ],
     }),
