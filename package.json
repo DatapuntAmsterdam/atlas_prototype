@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@datapunt/arm-cluster": "0.3.6-alpha.243",
+    "@datapunt/arm-cluster": "0.3.6-alpha.287",
     "@datapunt/arm-core": "0.3.6-alpha.287",
     "@datapunt/arm-draw": "0.3.6-alpha.287",
     "@datapunt/arm-nontiled": "0.3.6-alpha.287",
@@ -124,6 +124,8 @@
     "@types/karma": "^5.0.0",
     "@types/leaflet": "^1.5.17",
     "@types/leaflet-draw": "^1.0.3",
+    "@types/leaflet-rotatedmarker": "^0.2.1",
+    "@types/lodash.throttle": "^4.1.6",
     "@types/mini-css-extract-plugin": "^0.9.1",
     "@types/node": "^14.10.2",
     "@types/proj4": "^2.5.0",

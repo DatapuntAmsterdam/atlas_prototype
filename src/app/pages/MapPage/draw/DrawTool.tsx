@@ -257,6 +257,14 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
   }, [showDrawTool])
 
   useEffect(() => {
+    if (!polylines.length && !polygons.length) {
+      setShowDrawTool(false)
+    } else {
+      setShowDrawTool(true)
+    }
+  }, [polylines, polygons])
+
+  useEffect(() => {
     initialDrawnItems.forEach((layer) => {
       const distanceText = getDistanceLabel(layer)
       bindDistanceAndAreaToTooltip(layer, distanceText)

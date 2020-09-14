@@ -13,8 +13,8 @@ import { RD, WGS84 } from '../../../map/services/crs-config'
  */
 export function wgs84ToRd(wgs84Coordinates) {
   const rdCoordinates = proj4(RD.projection, [
-    wgs84Coordinates.longitude,
-    wgs84Coordinates.latitude,
+    wgs84Coordinates.longitude || wgs84Coordinates.lng,
+    wgs84Coordinates.latitude || wgs84Coordinates.lat,
   ])
   return {
     x: rdCoordinates[0],

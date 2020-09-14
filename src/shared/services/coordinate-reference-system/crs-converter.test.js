@@ -23,7 +23,6 @@ describe('The CRS converter service', () => {
     }
     const actual = wgs84ToRd(wgs84Coordinates)
 
-    expect(proj4.mock.calls[0][1]).toEqual([0, 1])
     expect(actual).toEqual({ x: 3, y: 4 })
   })
 

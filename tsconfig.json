@@ -14,5 +14,6 @@
       "src/typings",
       "node_modules/@types"
     ]
-  }
+  },
+  "include": ["src"]
 }

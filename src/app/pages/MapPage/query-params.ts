@@ -2,6 +2,7 @@ import { constants } from '@datapunt/arm-core'
 import { LatLngLiteral, LatLngTuple } from 'leaflet'
 import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system'
 import { UrlParam } from '../../utils/useParam'
+import { PANO_LABELS } from '../../../panorama/ducks/constants'
 
 // TODO: Refactor this default export once this issue is resolved: https://github.com/Amsterdam/amsterdam-react-maps/issues/727
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
@@ -129,4 +130,31 @@ export const detailUrlParam: UrlParam<string | null> = {
   defaultValue: null,
   decode: (value) => value,
   encode: (value) => value,
+}
+
+export type PanoParam = {
+  heading: number
+  pitch: number
+  fov: number
+} | null
+
+export const panoViewerSettingsParam: UrlParam<PanoParam> = {
+  name: 'pano',
+  defaultValue: null,
+  decode: (value) => value && JSON.parse(value),
+  encode: (value) => value && JSON.stringify(value),
+}
+
+export const panoTagIdParam: UrlParam<string> = {
+  name: 'panoTag',
+  defaultValue: PANO_LABELS[0].id,
+  decode: (value) => value,
+  encode: (value) => value,
+}
+
+export const panoFullScreenParam: UrlParam<boolean> = {
+  name: 'panoFullScreen',
+  defaultValue: false,
+  decode: (value) => Boolean(value),
+  encode: (value) => value.toString(),
 }

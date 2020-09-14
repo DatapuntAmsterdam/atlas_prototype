@@ -1,5 +1,6 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@datapunt/asc-ui'
 import { LatLngLiteral } from 'leaflet'
+import { Link as RouterLink } from 'react-router-dom'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import {
@@ -8,6 +9,9 @@ import {
   PanoramaThumbnail,
 } from '../../../../api/panorama/thumbnail'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
+import buildQueryString from '../../../utils/buildQueryString'
+import { panoViewerSettingsParam } from '../query-params'
+import { PANORAMA_CONFIG } from '../../../../panorama/services/panorama-api/panorama-api'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral
@@ -89,10 +93,23 @@ function renderResult(result: PromiseResult<PanoramaThumbnail | null>) {
     return <PreviewMessage>Geen panoramabeeld beschikbaar.</PreviewMessage>
   }
 
+  const panoramaUrl = buildQueryString([
+    [
+      panoViewerSettingsParam,
+      { heading: result.value.heading, pitch: 0, fov: PANORAMA_CONFIG.DEFAULT_FOV },
+    ],
+  ])
+
   return (
     <>
       <PreviewImage src={result.value.url} alt="Voorvertoning van panoramabeeld" />
-      <PreviewLink href="/" inList>
+      {/*
+      // @ts-ignore */}
+      <PreviewLink
+        forwardedAs={RouterLink}
+        to={`${window.location.pathname}?${panoramaUrl}`}
+        inList
+      >
         Bekijk panoramabeeld
       </PreviewLink>
     </>

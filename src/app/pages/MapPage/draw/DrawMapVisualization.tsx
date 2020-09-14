@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { MarkerClusterGroup } from '@datapunt/arm-cluster'
+import { MarkerClusterGroup, createClusterMarkers } from '@datapunt/arm-cluster'
 import { GeoJSON } from '@datapunt/react-maps'
 import { DataSelectionMapVisualizationType } from '../config'
 import geoJsonConfig from '../../../../map/components/leaflet/services/geo-json-config.constant'
@@ -28,7 +28,9 @@ const DrawMapVisualization: React.FC = () => {
             return (
               <MarkerClusterGroup
                 key={mapVisualization.id}
-                markers={mapVisualization.data.map(({ latLng }) => latLng)}
+                markers={createClusterMarkers({
+                  markers: mapVisualization.data.map(({ latLng }) => latLng),
+                })}
               />
             )
           default:

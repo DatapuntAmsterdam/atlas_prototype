@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 
 const Hotspot = ({ year, size, angle }) => (
   <div className="hotspot">
-    <button type="button" className={`c-hotspot c-hotspot--year-${year} qa-hotspot-button`}>
+    <button
+      type="button"
+      className={`c-hotspot c-hotspot--year-${year} qa-hotspot-button`}
+      tabIndex={-1}
+    >
       <div
         className="qa-hotspot-rotation"
         style={{

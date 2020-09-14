@@ -7,7 +7,6 @@ import DetailPanel from './detail/DetailPanel'
 import DataSelectionContext from './draw/DataSelectionContext'
 import DrawResults from './draw/DrawResults'
 import LegendPanel from './legend/LegendPanel'
-import MapSearchMarker from './map-search/MapSearchMarker'
 import MapSearchResults from './map-search/MapSearchResults'
 import MapContext from './MapContext'
 import { Overlay } from './types'
@@ -34,7 +33,6 @@ const MapPanelContent: React.FC<MapPanelContentProps> = ({ setCurrentOverlay, cu
 
   return (
     <MapPanelOrDrawer>
-      {!showDrawTool && <MapSearchMarker />}
       {currentOverlay === Overlay.Legend && (
         <LegendPanel
           stackOrder={3}

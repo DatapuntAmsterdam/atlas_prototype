@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system/crs-converter'
 import { dateToString } from '../../../shared/services/date-formatter/date-formatter'
 
+// Todo AfterBeta: can be removed if ViewerInfoBar is implemented in ConstructionFiles viewer
 const convertLocation = (location) => {
   const [latitude, longitude] = location
   const { x: rdX, y: rdY } = wgs84ToRd({ latitude, longitude })

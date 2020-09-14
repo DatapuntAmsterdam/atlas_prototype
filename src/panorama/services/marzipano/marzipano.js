@@ -123,6 +123,11 @@ export function loadScene(viewer, onClickHandler, image, heading, pitch, fov, ho
   Return the orientation values according to the view in Marzipano
 */
 export function getOrientation(viewer) {
+  if (!viewer.view()) {
+    // eslint-disable-next-line no-console
+    console.warn('Viewer needs a view by creating a scene')
+    return {}
+  }
   const heading = radiansToDegrees(viewer.view().yaw())
   const pitch = radiansToDegrees(viewer.view().pitch())
   const fov = radiansToDegrees(viewer.view().fov())
