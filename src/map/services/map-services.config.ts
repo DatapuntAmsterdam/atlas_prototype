@@ -78,7 +78,7 @@ export const endpointTypes = {
   precarioPassVessels: 'v1/precariobelasting/passagiersvaartuigen/',
   precarioTerraces: 'v1/precariobelasting/terrassen/',
   reclamebelasting: 'vsd/reclamebelasting/',
-  tunnels: 'v1/hoofdroutes/tunnels_gevaarlijke_stoffen/',
+  tunnels: 'hoofdroutes/tunnels_gevaarlijke_stoffen',
   vastgoed: 'vsd/vastgoed',
   vestiging: 'handelsregister/vestiging/',
   winkelgebied: 'vsd/winkgeb',
@@ -1303,19 +1303,18 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.tunnels]: {
+    type: 'hoofdroutes/tunnels_gevaarlijke_stoffen',
+    endpoint: 'v1/hoofdroutes/tunnels_gevaarlijke_stoffen',
     mapDetail: (result) => ({
       title: categoryLabels.tunnels.singular,
       subTitle: result.title,
       items: [
         {
-          type: DetailResultItemType.Default,
-          label: 'Titel',
-          value: result.title,
-        },
-        {
-          type: DetailResultItemType.Default,
-          label: 'Categorie',
-          value: result.categorie,
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            { term: 'Titel', description: result.title },
+            { term: 'Categorie', description: result.categorie },
+          ].filter(hasDescription),
         },
       ],
     }),
