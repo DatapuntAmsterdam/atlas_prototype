@@ -47,7 +47,7 @@ const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {
 
       history[method]({ ...location, search: newParams.toString() })
     },
-    [stateRef],
+    [stateRef, location],
   )
 
   return [state, setValue]

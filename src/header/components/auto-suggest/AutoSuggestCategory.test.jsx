@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import AutoSuggestCategory from './AutoSuggestCategory'
-import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
 
 jest.mock('../../../app/pages/SearchPage/config', () => ({
   TYPES: {
@@ -46,35 +45,17 @@ describe('AutoSuggestCategory', () => {
     }
   })
 
-  it('should render ellipsis when the returned results are less than the total results', () => {
+  it('should render a "more results" link when the returned results are less than the total results', () => {
     const wrapper = shallow(<AutoSuggestCategory {...props} />)
 
-    expect(wrapper).toMatchSnapshot()
     const items = wrapper.find('AutoSuggestItem')
     expect(items.length).toBe(4)
   })
 
-  it('should handle the click on an ellipsis option', () => {
-    const wrapper = shallow(<AutoSuggestCategory {...props} />)
-
-    const mockEvent = { event: 'event' }
-    const itemWrapper = wrapper.find('AutoSuggestItem').at(3).dive()
-    itemWrapper.find('button').simulate('click', mockEvent)
-    expect(props.onSuggestionSelection).toHaveBeenCalledWith(
-      {
-        index: MORE_RESULTS_INDEX,
-        label: '...',
-        type: 'data',
-      },
-      mockEvent,
-    )
-  })
-
-  it("should render no ellipsis when there aren't more results returned than the total results", () => {
+  it("should not render a 'more results' link when there aren't more results returned than the total results", () => {
     props.category.totalResults = 3
     const wrapper = shallow(<AutoSuggestCategory {...props} />)
 
-    expect(wrapper).toMatchSnapshot()
     const items = wrapper.find('AutoSuggestItem')
     expect(items.length).toBe(3)
   })

@@ -1,6 +1,6 @@
 import { FilterOption } from '@datapunt/asc-ui'
 import React, { memo } from 'react'
-import RouterLink from 'redux-first-router-link'
+import { Link } from 'react-router-dom'
 import { useQuery } from 'urql'
 import isDefined from '../../../shared/services/is-defined'
 import PARAMETERS from '../../../store/parameters'
@@ -59,10 +59,16 @@ export default memo(({ currentPage, query }) => {
   return (
     <FilterBox label="Categorieën">
       <ul>
-        {FILTERS.map(({ page, to, title, count }) => (
+        {FILTERS.map(({ page, path, title, count }) => (
           <li key={page}>
             <FilterOption
-              {...(currentPage === page ? ACTIVE_LINK_PROPS : { as: RouterLink, to, title })}
+              {...(currentPage === page
+                ? ACTIVE_LINK_PROPS
+                : {
+                    as: Link,
+                    to: { pathname: path, search: query ? `?term=${query}` : '' },
+                    title,
+                  })}
             >
               {SEARCH_PAGE_CONFIG[page].label}{' '}
               {page === routing.search.page

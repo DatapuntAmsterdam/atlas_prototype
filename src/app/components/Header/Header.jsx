@@ -9,7 +9,7 @@ import {
   breakpoint,
   showAboveBackDrop,
 } from '@datapunt/asc-ui'
-import HeaderSearchContainer from '../../../header/containers/header-search/HeaderSearchContainer'
+import HeaderSearch from '../../../header/containers/header-search/HeaderSearch'
 import HeaderMenuContainer from './HeaderMenuContainer'
 
 import EmbedHeader from './EmbedHeader'
@@ -74,7 +74,7 @@ const Header = ({
           logo={AmsterdamLogo}
           navigation={
             <>
-              <HeaderSearchContainer />
+              <HeaderSearch />
               <HeaderMenuContainer
                 type="default"
                 data-test="header-menu-default"

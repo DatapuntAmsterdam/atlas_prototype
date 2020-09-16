@@ -112,6 +112,8 @@ $clear-button-margin: 3px;
     padding-bottom: $base-whitespace * 0.5;
     position: absolute;
     right: $site-header-search-form-height + $base-whitespace * 0.5;
+    max-height: calc(100vh - 160px); // 160 is max height of the header
+    overflow: auto;
 
     // Makes sure the autosuggest box starts behind the SearchBar
     top: $site-header-search-form-height - 5px;
@@ -156,6 +158,14 @@ $clear-button-margin: 3px;
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 100%;
+      text-decoration: none;
+
+      &--more-results {
+        padding-left: 8px;
+        font-size: 14px;
+        text-decoration: underline;
+        color: $secondary-gray60;
+      }
 
       &:hover,
       &--active {

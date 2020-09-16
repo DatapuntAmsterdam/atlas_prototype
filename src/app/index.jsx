@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { Router } from 'react-router'
 import environment from '../environment'
 import configureStore from '../store/store'
 import App from './App'
@@ -20,13 +20,13 @@ if ('serviceWorker' in navigator) {
 // If there are no redirects for the current url, render the application
 resolveRedirects().then((hasToRedirect) => {
   if (!hasToRedirect) {
-    const { store } = configureStore()
+    const { store, history } = configureStore()
 
-    renderApp(store)
+    renderApp(store, history)
   }
 })
 
-function renderApp(store) {
+function renderApp(store, history) {
   // eslint-disable-next-line no-console
   console.log(
     `Dataportaal: version: ${process.env.VERSION}, deploy env: ${environment.DEPLOY_ENV}${
@@ -36,7 +36,9 @@ function renderApp(store) {
 
   ReactDOM.render(
     <Provider store={store}>
-      <Router>
+      {/* Normally we would use the router from 'react-router-dom', but since we gradually migrate from
+      redux-first-router to react-router, we need to share the history */}
+      <Router history={history}>
         <App />
       </Router>
     </Provider>,

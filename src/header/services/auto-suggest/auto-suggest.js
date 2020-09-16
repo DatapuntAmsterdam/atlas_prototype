@@ -4,7 +4,7 @@ import SearchType from '../../../app/pages/SearchPage/constants'
 import environment from '../../../environment'
 
 // Minimun length for typeahead query in backend is 3 characters
-const MIN_QUERY_LENGTH = 3
+export const MIN_QUERY_LENGTH = 3
 
 // Todo: Please consider rewriting the way we keep track on the active (selected) item in the
 // autosuggest result list. Now we use an (arbitrary) high number for more results button ("..."),
@@ -78,11 +78,7 @@ function formatData(categories, categoryType) {
     })
     .filter(({ type }) => {
       // Filter out the matching categoryTypes
-      if (categoryType && categoryType !== type) {
-        return false
-      }
-
-      return true
+      return !(categoryType && categoryType !== type)
     })
 
   let indexInTotal = -1
@@ -108,19 +104,15 @@ function formatData(categories, categoryType) {
   }
 }
 
-async function search({ query, type }) {
-  const uri =
-    query &&
-    query.length >= MIN_QUERY_LENGTH &&
-    `${environment.API_ROOT}typeahead?q=${typeof query === 'string' ? query.toLowerCase() : ''}` // Todo: temporary fix, real fix: DP-7365
+function search({ query = '', type }) {
+  const uri = `${environment.API_ROOT}typeahead?q=${query.toLowerCase()}`
 
-  if (uri) {
-    const response = await fetch(uri, { headers: getAuthHeaders() })
-    const json = await response.json()
-
-    return formatData(json, type)
-  }
-  return {}
+  return fetch(uri, { headers: getAuthHeaders() })
+    .then((response) => response?.json())
+    .then((json) => formatData(json, type))
+    .catch((e) => {
+      throw new Error(`Error fetching from typeahead: ${e}`)
+    })
 }
 
 export default search

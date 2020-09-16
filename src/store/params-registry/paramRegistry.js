@@ -195,12 +195,24 @@ class ParamsRegistry {
   }
 
   setQueriesFromState(currentLocationType, state, nextAction) {
+    // Temporary fix to allow new params (using the useParam hook)
+    const allowedNewParams = ['searchFilter', 'term']
+    const currentParams = [...new URLSearchParams(window.location.search)]
     if (
       this.isRouterType(nextAction) ||
       currentLocationType === `${ROUTER_NAMESPACE}/${PAGES.MAP}`
     ) {
       return undefined
     }
+    const newParams = currentParams.reduce((acc, [key, value]) => {
+      if (allowedNewParams.includes(key)) {
+        return {
+          ...acc,
+          [key]: value,
+        }
+      }
+      return acc
+    }, {})
     const query = Object.entries(this.result).reduce((acc, [parameter, paramObject]) => {
       const reducerObject = get(paramObject, `[routes][${currentLocationType}]`, null)
       if (reducerObject) {
@@ -224,7 +236,8 @@ class ParamsRegistry {
 
       return acc
     }, {})
-    const orderedQuery = ParamsRegistry.orderQuery(query)
+    const concatQuery = { ...newParams, ...query }
+    const orderedQuery = ParamsRegistry.orderQuery(concatQuery)
     const searchQuery = queryString.stringify(orderedQuery)
 
     if (typeof window !== 'undefined') {
@@ -317,7 +330,7 @@ class ParamsRegistry {
 
   /**
    * Set the param to the location in the history object
-   * @param name
+   * @param param
    * @param value
    * @param replace
    * @returns void

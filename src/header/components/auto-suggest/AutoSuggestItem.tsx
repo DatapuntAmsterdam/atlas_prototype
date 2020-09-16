@@ -1,52 +1,165 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import Link, { To } from 'redux-first-router-link'
+import { useSelector } from 'react-redux'
 import escapeStringRegexp from 'escape-string-regexp'
+import SearchType from '../../../app/pages/SearchPage/constants'
+import {
+  extractIdEndpoint,
+  toArticleDetail,
+  toCollectionDetail,
+  toDatasetDetail,
+  toDataSuggestion,
+  toMapWithLegendOpen,
+  toPublicationDetail,
+  toSpecialDetail,
+} from '../../../store/redux-first-router/actions'
+import useSlug from '../../../app/utils/useSlug'
+import { CmsType } from '../../../shared/config/cms.config'
+import PARAMETERS from '../../../store/parameters'
+import { decodeLayers } from '../../../store/queryParameters'
+import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
+import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
+import { Suggestion } from '../../containers/header-search/HeaderSearch'
 
 type AutoSuggestItemProps = {
   content: string
-  isActive?: boolean
-  onSuggestionSelection: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-  query: string
+  searchCategory: string
+  suggestion: Suggestion
+  highlightValue: string
 }
 
 const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
-  isActive = false,
-  onSuggestionSelection,
-  query,
   content,
+  suggestion,
+  searchCategory,
+  highlightValue,
 }) => {
   const highlightedSuggestion =
     content &&
     content.replace(
-      new RegExp(`(${escapeStringRegexp(query.trim())})`, 'gi'),
+      new RegExp(`(${escapeStringRegexp(highlightValue.trim())})`, 'gi'),
       '<span class="auto-suggest__dropdown__highlight">$1</span>',
     )
-  const ellipsis = content === '...'
+  const moreResults = suggestion.index === MORE_RESULTS_INDEX
 
-  const listItem = (
-    <div className={`${ellipsis ? 'auto-suggest__dropdown-item--row-height' : ''}`}>
-      {!ellipsis ? <span className="icon" /> : ''}
-      <div
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: highlightedSuggestion,
-        }}
-      />
-    </div>
-  )
+  const view = useSelector(getViewMode)
+
+  const openEditorialSuggestion = (
+    { id, slug }: { id: string; slug: string },
+    type: string,
+    subType: string,
+  ): To => {
+    switch (type) {
+      case CmsType.Article:
+        return toArticleDetail(id, slug)
+      case CmsType.Collection:
+        return toCollectionDetail(id, slug)
+      case CmsType.Publication:
+        return toPublicationDetail(id, slug)
+      case CmsType.Special:
+        return toSpecialDetail(id, subType, slug)
+      default:
+        throw new Error(`Unable to open editorial suggestion, unknown type '${type}'.`)
+    }
+  }
+
+  const to = useMemo(() => {
+    // "More in category" Link
+    if (suggestion.index === MORE_RESULTS_INDEX) {
+      const searchType = suggestion.type || searchCategory
+
+      const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
+        ({ type: configType }) => searchType === configType,
+      )
+
+      if (actionType) {
+        const { to: toFn } = actionType
+        return toFn(
+          {
+            [PARAMETERS.QUERY]: highlightValue,
+            [PARAMETERS.PAGE]: 1, // reset the page number on search
+            ...(suggestion.subType
+              ? {
+                  [PARAMETERS.FILTERS]: [
+                    {
+                      type: 'dataTypes',
+                      values: [suggestion.subType],
+                    },
+                  ],
+                }
+              : {}),
+          },
+          false,
+          true,
+          false,
+        )
+      }
+    } else if (suggestion.type === SearchType.Dataset) {
+      const [, , id] = extractIdEndpoint(suggestion.uri)
+      const slug = useSlug(suggestion.label)
+
+      return toDatasetDetail({ id, slug, highlightValue })
+    } else if (
+      // Suggestion coming from the cms
+      suggestion.type === CmsType.Article ||
+      suggestion.type === CmsType.Publication ||
+      suggestion.type === CmsType.Collection ||
+      suggestion.type === CmsType.Special
+    ) {
+      const [, , id] = extractIdEndpoint(suggestion.uri)
+      const slug = useSlug(suggestion.label)
+
+      let subType = ''
+      if (suggestion.type === CmsType.Special) {
+        ;[, subType] = suggestion.label.match(/\(([^()]*)\)$/)
+      }
+
+      return openEditorialSuggestion({ id, slug }, suggestion.type, subType)
+    } else if (suggestion.type === SearchType.Map) {
+      const { searchParams } = new URL(suggestion.uri, window.location.origin)
+
+      return toMapWithLegendOpen(decodeLayers(searchParams.get(PARAMETERS.LAYERS)))
+    } else {
+      return toDataSuggestion(
+        {
+          endpoint: suggestion.uri,
+          category: suggestion.category,
+          highlightValue,
+        },
+        view === VIEW_MODE.FULL ? VIEW_MODE.SPLIT : view,
+      )
+    }
+
+    return null
+  }, [
+    extractIdEndpoint,
+    useSlug,
+    openEditorialSuggestion,
+    decodeLayers,
+    searchCategory,
+    highlightValue,
+  ])
 
   return (
     <li>
-      <button
-        type="button"
+      <Link
         className={`
-          // TODO: get rid of SCSSS here
           auto-suggest__dropdown-item
-          auto-suggest__dropdown-item--${isActive ? 'active' : 'inactive'}
+          ${moreResults ? 'auto-suggest__dropdown-item--more-results' : ''}
         `}
-        onClick={onSuggestionSelection}
+        to={to}
       >
-        {listItem}
-      </button>
+        <div>
+          {!moreResults ? <span className="icon" /> : ''}
+          <div
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: highlightedSuggestion,
+            }}
+          />
+        </div>
+      </Link>
     </li>
   )
 }

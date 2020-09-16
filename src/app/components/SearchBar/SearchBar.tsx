@@ -8,9 +8,8 @@ import {
   showAboveBackDrop,
   styles,
 } from '@datapunt/asc-ui'
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
 import { IDS } from '../../../shared/config/config'
@@ -41,13 +40,9 @@ const StyledSearchBar = styled(SearchBarComponent)`
 
 type SearchBarProps = React.InputHTMLAttributes<HTMLInputElement> & {
   expanded: boolean
-  onOpenSearchBarToggle: (open: boolean) => void
-  openSearchBarToggle: boolean
   value: string
   onClear: () => void
   onBlur: () => void
-  searchCategory: SearchCategory
-  setSearchCategory: Dispatch<SetStateAction<SearchCategory>>
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -58,11 +53,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onClear,
   onKeyDown,
   value,
-  openSearchBarToggle,
-  onOpenSearchBarToggle,
   children,
-  searchCategory,
-  setSearchCategory,
 }) => {
   const searchBarProps = {
     onBlur,
@@ -87,7 +78,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     <>
       <SearchBarWrapper expanded={expanded}>
         <Hidden maxBreakpoint="tabletM">
-          <SearchBarFilter searchCategory={searchCategory} setSearchCategory={setSearchCategory} />
+          <SearchBarFilter />
         </Hidden>
         <StyledSearchBar
           showAt="tabletM"
@@ -113,8 +104,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <SearchBarToggle
         title={inputProps.placeholder}
         hideAt="tabletM"
-        onOpen={onOpenSearchBarToggle}
-        open={openSearchBarToggle}
         inputProps={inputProps}
         searchBarProps={searchBarProps}
         aria-haspopup="true"

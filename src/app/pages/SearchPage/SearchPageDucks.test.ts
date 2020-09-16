@@ -3,7 +3,6 @@ import reducer, {
   setSort,
   setFilterValues,
   SearchPageState,
-  getQuery,
   REDUCER_KEY,
   getSort,
   ActiveFilter,
@@ -70,13 +69,6 @@ describe('SearchPageDucks', () => {
       state = reducer(state, setFilterValues('test', []))
 
       expect(state.activeFilters).toEqual([])
-    })
-  })
-
-  describe('getQuery', () => {
-    it('should get the query', () => {
-      const state = reducer({ query: 'test' } as SearchPageState, {} as any)
-      expect(getQuery({ [REDUCER_KEY]: state })).toEqual('test')
     })
   })
 

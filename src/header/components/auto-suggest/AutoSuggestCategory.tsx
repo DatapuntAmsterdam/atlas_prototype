@@ -1,17 +1,35 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import AutoSuggestItem from './AutoSuggestItem'
 import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
+import { Suggestion } from '../../containers/header-search/HeaderSearch'
 
-const AutoSuggestCategory = ({ category, activeSuggestion, query, onSuggestionSelection }) => {
+type Props = {
+  category: {
+    label: string
+    content: Suggestion[]
+    totalResults: number
+    type: string
+  }
+  searchCategory: string
+  highlightValue: string
+}
+
+const AutoSuggestCategory: React.FC<Props> = ({ category, searchCategory, highlightValue }) => {
   const { label, content, totalResults, type } = category
 
   let suggestions = content
 
   if (totalResults > content.length) {
-    suggestions = [...content, { label: '...', index: MORE_RESULTS_INDEX, type }]
+    suggestions = [
+      ...content,
+      {
+        label: `Meer resultaten in '${label}'`,
+        index: MORE_RESULTS_INDEX,
+        type,
+        subType: type === 'data' && label.toLowerCase(),
+      } as Suggestion,
+    ]
   }
-
   return (
     <div className="auto-suggest__dropdown-category">
       <h4 className="auto-suggest__dropdown-category__heading qa-auto-suggest-header">{label}</h4>
@@ -19,26 +37,15 @@ const AutoSuggestCategory = ({ category, activeSuggestion, query, onSuggestionSe
         {suggestions.map((suggestion) => (
           <AutoSuggestItem
             key={suggestion.label + suggestion.index}
-            isActive={activeSuggestion && activeSuggestion.index === suggestion.index}
-            onSuggestionSelection={(e) => {
-              onSuggestionSelection(suggestion, e)
-            }}
+            suggestion={suggestion}
             content={suggestion.label}
-            query={query}
+            searchCategory={searchCategory}
+            highlightValue={highlightValue}
           />
         ))}
       </ul>
     </div>
   )
-}
-
-AutoSuggestCategory.defaultProps = {}
-
-AutoSuggestCategory.propTypes = {
-  activeSuggestion: PropTypes.shape({}).isRequired,
-  category: PropTypes.shape({}).isRequired,
-  onSuggestionSelection: PropTypes.func.isRequired,
-  query: PropTypes.string.isRequired,
 }
 
 export default AutoSuggestCategory

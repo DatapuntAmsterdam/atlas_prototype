@@ -41,14 +41,9 @@ describe('The auto-suggest service', () => {
 
   afterEach(() => {})
 
-  it('search query must be at least three characters', async () => {
-    const value = await autoSuggestSearch('li')
-    expect(value).toEqual({})
-  })
-
   it('can search and format data', () => {
     fetch.mockResponseOnce(JSON.stringify(mockedResults))
-    autoSuggestSearch('linnae').then((suggestions) => {
+    autoSuggestSearch({ query: 'linnae' }).then((suggestions) => {
       expect(suggestions.count).toBe(3)
       expect(suggestions.data.length).toBe(2)
 

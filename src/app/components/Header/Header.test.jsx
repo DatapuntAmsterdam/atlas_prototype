@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import Header from './Header'
 
 // Mock the HeaderSearchContainer component as its not relevant for this test
-jest.mock('../../../header/containers/header-search/HeaderSearchContainer', () => () => <div />)
+jest.mock('../../../header/containers/header-search/HeaderSearch', () => () => <div />)
 
 describe('Header', () => {
   const props = {

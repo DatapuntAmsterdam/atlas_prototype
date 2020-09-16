@@ -1,6 +1,5 @@
 import rootReducer from './root'
 
-import * as AutoSuggestReducer from '../header/ducks/auto-suggest/auto-suggest'
 import * as DataSelectionReducer from '../shared/ducks/data-selection/reducer'
 import * as Datasets from '../shared/ducks/datasets/datasets'
 import * as DataSelectionCatalogReducer from '../shared/ducks/datasets/apiSpecification/apiSpecification'
@@ -20,7 +19,6 @@ import * as SelectionReducer from '../shared/ducks/selection/selection'
 import * as DetailReducer from '../shared/ducks/detail/reducer'
 
 describe('the root reducer', () => {
-  AutoSuggestReducer.default = () => 'autoSuggest'
   DataSelectionReducer.default = () => 'dataSelection'
   DataSelectionCatalogReducer.default = () => 'catalogFilters'
   ErrorMessageReducer.default = () => 'error'

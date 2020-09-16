@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import SearchPageReducer, { REDUCER_KEY as SEARCH } from '../app/pages/SearchPage/SearchPageDucks'
-import AutoSuggestReducer from '../header/ducks/auto-suggest/auto-suggest'
 import MapBaseLayersReducer from '../map/ducks/base-layers/map-base-layers'
 import MapDetailReducer from '../map/ducks/detail/reducer'
 import MapLayersReducer from '../map/ducks/layers/map-layers'
@@ -41,7 +40,6 @@ const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => 
     [UI]: UiReducer,
     [USER]: UserReducer,
     mapLayers,
-    autoSuggest: AutoSuggestReducer,
     [LOCATION]: routeReducer,
     [DETAIL]: DetailReducer,
     [DATA_SEARCH_REDUCER]: DataSearchReducer,

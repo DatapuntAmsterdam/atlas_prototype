@@ -1,6 +1,5 @@
 import { all, fork } from 'redux-saga/effects'
 import watchFetchPanoPreview from './panorama/sagas/preview/panorama-preview'
-import watchFetchSuggestions from './header/sagas/auto-suggest/auto-suggest'
 import watchDataSearch from './shared/sagas/data-search/data-search'
 import watchFetchMapBaseLayers from './map/sagas/map-base-layers'
 import watchFetchMapLayers from './map/sagas/map-layers'
@@ -18,7 +17,6 @@ import watchErrors from './shared/sagas/error/error'
 export default function* rootSaga() {
   yield all([
     fork(watchFetchPanoPreview),
-    fork(watchFetchSuggestions),
     fork(watchDataSearch),
     fork(watchFetchMapBaseLayers),
     fork(watchFetchMapLayers),
