@@ -326,23 +326,6 @@ describe('The HeaderSearch component', () => {
       expect(mockOnSuggestionActivate).toHaveBeenCalled() // suggestion is selected
     })
 
-    it('should handle escape key', () => {
-      // Find the searchbar and open it to display the autosuggest component
-      const searchBar = component.find('SearchBar')
-
-      searchBar.props().onChange({ currentTarget: typedQuery })
-      searchBar.props().onKeyDown({
-        keyCode: 27,
-        preventDefault: () => {},
-      })
-
-      // Select the suggest from autosuggest
-      const autosuggest = component.find('AutoSuggest')
-
-      expect(autosuggest.exists()).toBe(false)
-      expect(mockOnGetSuggestions).toHaveBeenCalledWith('', null) // clear the search
-    })
-
     it('should handle enter key', () => {
       // Find the searchbar and open it to display the autosuggest component
       const searchBar = component.find('SearchBar')

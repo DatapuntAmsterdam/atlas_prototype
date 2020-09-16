@@ -177,6 +177,9 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
     e.stopPropagation()
 
     handleSubmit()
+
+    // @ts-ignore
+    document.activeElement?.blur()
   }
 
   function handleSubmit(type: SearchCategory | null = null) {
@@ -253,10 +256,6 @@ const HeaderSearch: React.FC<HeaderSearchProps> = ({
             Math.min(activeSuggestion?.index + 1, numberOfSuggestions - 1),
           ),
         )
-        break
-      // Escape
-      case 27:
-        onClear()
         break
       // Enter
       case 13:
