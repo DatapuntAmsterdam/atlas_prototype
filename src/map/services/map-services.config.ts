@@ -93,7 +93,7 @@ export interface ServiceDefinition {
   // TODO: 'endpoint' should be required once all service definitions have one.
   endpoint?: string
   authScope?: string
-  normalization?: (result: any) => any
+  normalization?: (result: any) => any | Promise<any>
   mapDetail: (result: any, location: LatLngLiteral) => DetailResult | Promise<DetailResult>
 }
 
