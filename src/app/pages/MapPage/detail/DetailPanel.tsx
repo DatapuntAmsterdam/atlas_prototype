@@ -13,10 +13,12 @@ import {
   DetailResultItem,
   DetailResultItemDefinitionList,
   DetailResultItemHeading,
+  DetailResultItemTable,
   DetailResultItemType,
 } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
+import { Table, TableData, TableHeader, TableRow } from '../../../components/Table'
 import useParam from '../../../utils/useParam'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import PanoramaPreview from '../map-search/PanoramaPreview'
@@ -125,6 +127,8 @@ function renderItem(item: DetailResultItem) {
       return renderDefinitionListItem(item)
     case DetailResultItemType.Heading:
       return renderHeadingItem(item)
+    case DetailResultItemType.Table:
+      return renderTableItem(item)
     default:
       throw new Error('Unable to render map detail pane, encountered unknown item type.')
   }
@@ -158,6 +162,36 @@ const StyledHeading = styled(Heading)`
 
 function renderHeadingItem(item: DetailResultItemHeading) {
   return <StyledHeading forwardedAs="h3">{item.value}</StyledHeading>
+}
+
+const TableWrapper = styled.div`
+  width: 100%;
+  overflow-x: scroll;
+`
+
+function renderTableItem(item: DetailResultItemTable) {
+  return (
+    <>
+      {item.label && <Heading forwardedAs="h4">{item.label}</Heading>}
+      <TableWrapper>
+        <Table>
+          <TableRow header>
+            {item.headings.map((heading) => (
+              <TableHeader key={heading.key}>{heading.label}</TableHeader>
+            ))}
+          </TableRow>
+          {item.values.map((value, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <TableRow key={index}>
+              {item.headings.map((heading) => (
+                <TableData key={heading.key}>{value[heading.key]}</TableData>
+              ))}
+            </TableRow>
+          ))}
+        </Table>
+      </TableWrapper>
+    </>
+  )
 }
 
 function getPanelTitle(result: PromiseResult<MapDetails | null>) {

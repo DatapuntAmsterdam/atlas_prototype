@@ -870,12 +870,17 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.parkeervak]: {
+    type: 'parkeervakken/parkeervakken',
+    endpoint: 'v1/parkeervakken/parkeervakken',
     normalization: parkeervak,
     mapDetail: (result) => ({
       title: categoryLabels.parkeervak.singular,
       subTitle: result.id,
       items: [
-        { type: DetailResultItemType.Default, label: 'Straat', value: result.straatnaam },
+        {
+          type: DetailResultItemType.DefinitionList,
+          entries: [{ term: 'Straat', description: result.straatnaam }],
+        },
         {
           type: DetailResultItemType.Table,
           label: 'Regimes',
