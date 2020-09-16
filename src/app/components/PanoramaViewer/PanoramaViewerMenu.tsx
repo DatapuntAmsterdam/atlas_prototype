@@ -1,18 +1,14 @@
-import React from 'react'
-import { Checkmark, ChevronDown, ExternalLink } from '@datapunt/asc-assets'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { ContextMenu, ContextMenuItem, Icon, themeSpacing } from '@datapunt/asc-ui'
 import { ControlButton } from '@datapunt/arm-core'
+import { Checkmark, ChevronDown, ExternalLink } from '@datapunt/asc-assets'
+import { ContextMenu, ContextMenuItem, Icon, themeSpacing } from '@datapunt/asc-ui'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+import React from 'react'
 import styled from 'styled-components'
-import { getStreetViewUrl } from '../../../panorama/services/panorama-api/panorama-api'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
-import useParam from '../../utils/useParam'
-import {
-  locationParam,
-  panoViewerSettingsParam,
-  panoTagIdParam,
-} from '../../pages/MapPage/query-params'
+import { getStreetViewUrl } from '../../../panorama/services/panorama-api/panorama-api'
 import { ReactComponent as Clock } from '../../../shared/assets/icons/Clock.svg'
+import { locationParam, panoParam, panoTagParam } from '../../pages/MapPage/query-params'
+import useParam from '../../utils/useParam'
 
 export const getLabel = (id: string): string =>
   PANO_LABELS.find(({ id: labelId }) => labelId === id)?.label || PANO_LABELS[0].label
@@ -46,13 +42,13 @@ const ContextMenuButton = styled(ControlButton)`
 
 const PanoramaViewerMenu: React.FC = () => {
   const [location] = useParam(locationParam)
-  const [panoViewerSettings] = useParam(panoViewerSettingsParam)
-  const [panoTagId, setPanoTagId] = useParam(panoTagIdParam)
+  const [pano] = useParam(panoParam)
+  const [panoTag, setPanoTag] = useParam(panoTagParam)
   const { trackEvent } = useMatomo()
 
   const handleOpenPanoramaExternal = () => {
     if (location) {
-      const url = getStreetViewUrl([location.lat, location.lng], panoViewerSettings?.heading)
+      const url = getStreetViewUrl([location.lat, location.lng], pano?.heading)
 
       trackEvent({
         category: 'panorama-set',
@@ -70,7 +66,7 @@ const PanoramaViewerMenu: React.FC = () => {
           <Clock />
         </Icon>
       }
-      label={getLabel(panoTagId)}
+      label={getLabel(panoTag)}
       position="bottom"
       variant="blank"
       forwardedAs={ContextMenuButton}
@@ -80,9 +76,9 @@ const PanoramaViewerMenu: React.FC = () => {
           key={id}
           divider={index === PANO_LABELS.length - 1}
           role="button"
-          onClick={() => setPanoTagId(id)}
+          onClick={() => setPanoTag(id)}
           icon={
-            panoTagId === id ? (
+            panoTag === id ? (
               <CheckmarkIcon inline size={12}>
                 <Checkmark />
               </CheckmarkIcon>

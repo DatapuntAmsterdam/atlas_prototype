@@ -1,19 +1,19 @@
 import { constants, Map as MapComponent, MapPanelProvider, useStateRef } from '@datapunt/arm-core'
 import { PositionPerSnapPoint } from '@datapunt/arm-core/es/components/MapPanel/constants'
 import { hooks } from '@datapunt/asc-ui'
+import L from 'leaflet'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import styled, { createGlobalStyle, css } from 'styled-components'
-import L from 'leaflet'
-import MapControls from './MapControls'
-import LeafletLayers from './LeafletLayers'
-import DataSelectionProvider from './draw/DataSelectionProvider'
-import MapContext from './MapContext'
-import { Overlay, SnapPoint } from './types'
-import MapPanelContent from './MapPanelContent'
-import useParam from '../../utils/useParam'
-import { centerParam, mapLayersParam, panoViewerSettingsParam, zoomParam } from './query-params'
 import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
+import useParam from '../../utils/useParam'
+import DataSelectionProvider from './draw/DataSelectionProvider'
+import LeafletLayers from './LeafletLayers'
+import MapContext from './MapContext'
+import MapControls from './MapControls'
 import MapMarkers from './MapMarkers'
+import MapPanelContent from './MapPanelContent'
+import { centerParam, mapLayersParam, panoParam, zoomParam } from './query-params'
+import { Overlay, SnapPoint } from './types'
 
 const MapView = styled.div`
   height: 100%;
@@ -69,12 +69,12 @@ const MapPage: React.FC = () => {
   const [mapInstance, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
   const [zoom, setZoom] = useParam(zoomParam)
-  const [panoViewerSettings] = useParam(panoViewerSettingsParam)
+  const [pano] = useParam(panoParam)
   const [activeLayers, setActiveLayers] = useParam(mapLayersParam)
   // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
 
-  const panoActive = !!panoViewerSettings
+  const panoActive = !!pano
 
   // This is necessary to call, because we resize the map dynamically
   // https://leafletjs.com/reference-1.7.1.html#map-invalidatesize
@@ -82,7 +82,7 @@ const MapPage: React.FC = () => {
     if (mapInstanceRef.current) {
       mapInstanceRef.current.invalidateSize()
     }
-  }, [panoFullScreen, panoViewerSettings, mapInstanceRef])
+  }, [panoFullScreen, pano, mapInstanceRef])
 
   // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
   useEffect(() => {

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { useStateRef } from '@datapunt/arm-core'
 import throttle from 'lodash.throttle'
 import Marzipano from 'marzipano'
-import { useStateRef } from '@datapunt/arm-core'
+import React, { useEffect, useState } from 'react'
 import { getOrientation } from '../../panorama/services/marzipano/marzipano'
 import { PanoParam } from '../pages/MapPage/query-params'
 
 const useMarzipano = (ref: React.MutableRefObject<any>) => {
   const [marzipanoViewer, setMarzipanoInstance, marzipanoViewerRef] = useStateRef<any>(null)
-  const [currentMarzipanoView, setCurrentMarzipanoView] = useState<PanoParam>(null)
+  const [currentMarzipanoView, setCurrentMarzipanoView] = useState<PanoParam | null>(null)
 
   const updateOrientation = () => {
     if (marzipanoViewerRef.current) {

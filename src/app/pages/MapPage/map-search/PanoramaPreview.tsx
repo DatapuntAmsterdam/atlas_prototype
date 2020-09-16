@@ -1,17 +1,17 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@datapunt/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import { Link as RouterLink } from 'react-router-dom'
 import React, { useMemo } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   FetchPanoramaOptions,
   getPanoramaThumbnail,
   PanoramaThumbnail,
 } from '../../../../api/panorama/thumbnail'
-import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
-import buildQueryString from '../../../utils/buildQueryString'
-import { panoViewerSettingsParam } from '../query-params'
 import { PANORAMA_CONFIG } from '../../../../panorama/services/panorama-api/panorama-api'
+import buildQueryString from '../../../utils/buildQueryString'
+import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
+import { panoParam } from '../query-params'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral
@@ -94,10 +94,7 @@ function renderResult(result: PromiseResult<PanoramaThumbnail | null>) {
   }
 
   const panoramaUrl = buildQueryString([
-    [
-      panoViewerSettingsParam,
-      { heading: result.value.heading, pitch: 0, fov: PANORAMA_CONFIG.DEFAULT_FOV },
-    ],
+    [panoParam, { heading: result.value.heading, pitch: 0, fov: PANORAMA_CONFIG.DEFAULT_FOV }],
   ])
 
   return (

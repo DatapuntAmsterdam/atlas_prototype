@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { loadScene } from '../../../panorama/services/marzipano/marzipano'
-import useParam from '../../utils/useParam'
-import {
-  locationParam,
-  panoFullScreenParam,
-  panoViewerSettingsParam,
-  panoTagIdParam,
-} from '../../pages/MapPage/query-params'
 import {
   getImageDataById,
   getImageDataByLocation,
 } from '../../../panorama/services/panorama-api/panorama-api'
-import PanoramaViewerControls from './PanoramaViewerControls'
+import {
+  locationParam,
+  panoFullScreenParam,
+  panoParam,
+  panoTagParam,
+} from '../../pages/MapPage/query-params'
 import useMarzipano from '../../utils/useMarzipano'
-import { PANO_LABELS } from '../../../panorama/ducks/constants'
+import useParam from '../../utils/useParam'
+import PanoramaViewerControls from './PanoramaViewerControls'
 
 const MarzipanoView = styled.div`
   height: 100%;
@@ -35,8 +35,8 @@ const PanoramaStyle = styled.div<Props>`
 const PanoramaViewer: React.FC = () => {
   const ref = useRef(null)
   const [panoImageDate, setPanoImageDate] = useState()
-  const [panoViewerSettings, setPanoViewerSettings] = useParam(panoViewerSettingsParam)
-  const [panoTagId, setPanoTagId] = useParam(panoTagIdParam)
+  const [pano, setPano] = useParam(panoParam)
+  const [panoTag, setPanoTag] = useParam(panoTagParam)
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
   const [location, setLocation] = useParam(locationParam)
   const { marzipanoViewer, currentMarzipanoView } = useMarzipano(ref)
@@ -45,35 +45,35 @@ const PanoramaViewer: React.FC = () => {
     async (id: string) => {
       const newPanos = await getImageDataById(
         id,
-        PANO_LABELS.find(({ id: labelId }) => labelId === panoTagId)?.tags,
+        PANO_LABELS.find(({ id: labelId }) => labelId === panoTag)?.tags,
       )
       setLocation({ lat: newPanos.location[0], lng: newPanos.location[1] })
     },
-    [setLocation, panoTagId],
+    [setLocation, panoTag],
   )
 
   const fetchPanoramaImage = useCallback(
     (res) => {
-      if (panoViewerSettings) {
+      if (pano) {
         setPanoImageDate(res.date)
         loadScene(
           marzipanoViewer,
           onClickHotspot,
           res.image,
-          panoViewerSettings.heading,
-          panoViewerSettings.pitch,
-          panoViewerSettings.fov,
+          pano.heading,
+          pano.pitch,
+          pano.fov,
           res.hotspots,
         )
       }
     },
-    [panoViewerSettings, setPanoImageDate, marzipanoViewer, onClickHotspot],
+    [pano, setPanoImageDate, marzipanoViewer, onClickHotspot],
   )
 
   // Update the URL queries when the view changes
   useEffect(() => {
     if (currentMarzipanoView) {
-      setPanoViewerSettings(currentMarzipanoView, 'replace')
+      setPano(currentMarzipanoView, 'replace')
     }
   }, [currentMarzipanoView])
 
@@ -82,7 +82,7 @@ const PanoramaViewer: React.FC = () => {
   useEffect(() => {
     if (marzipanoViewer) {
       marzipanoViewer.updateSize() // Updates the stage size to fill the containing element.
-      if (panoViewerSettings && marzipanoViewer.view()) {
+      if (pano && marzipanoViewer.view()) {
         setTimeout(() => {
           marzipanoViewer.view().setFov(100) // some high number, the viewer itself will set the max FOV
         }, 0)
@@ -92,22 +92,22 @@ const PanoramaViewer: React.FC = () => {
 
   // Fetch image when the location changes
   useEffect(() => {
-    if (marzipanoViewer && location && panoViewerSettings) {
+    if (marzipanoViewer && location && pano) {
       ;(async () => {
         const res = await getImageDataByLocation(
           [location.lat, location.lng],
-          PANO_LABELS.find(({ id }) => id === panoTagId)?.tags,
+          PANO_LABELS.find(({ id }) => id === panoTag)?.tags,
         )
         fetchPanoramaImage(res)
       })()
     }
-  }, [marzipanoViewer, location, panoTagId])
+  }, [marzipanoViewer, location, panoTag])
 
   const onClose = useCallback(() => {
-    setPanoViewerSettings(null)
+    setPano(null)
     setPanoFullScreen(false)
-    setPanoTagId(null)
-  }, [setPanoViewerSettings, setPanoTagId, setPanoFullScreen])
+    setPanoTag(null)
+  }, [setPano, setPanoTag, setPanoFullScreen])
 
   return (
     <PanoramaStyle panoFullScreen={panoFullScreen}>

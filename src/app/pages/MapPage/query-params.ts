@@ -1,8 +1,8 @@
 import { constants } from '@datapunt/arm-core'
 import { LatLngLiteral, LatLngTuple } from 'leaflet'
+import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system'
 import { UrlParam } from '../../utils/useParam'
-import { PANO_LABELS } from '../../../panorama/ducks/constants'
 
 // TODO: Refactor this default export once this issue is resolved: https://github.com/Amsterdam/amsterdam-react-maps/issues/727
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
@@ -38,6 +38,12 @@ export interface PolyDrawing {
 export interface MapLayer {
   id: string
   isVisible: boolean
+}
+
+export interface PanoParam {
+  heading: number
+  pitch: number
+  fov: number
 }
 
 const COORDINATE_PRECISION = 7
@@ -132,20 +138,14 @@ export const detailUrlParam: UrlParam<string | null> = {
   encode: (value) => value,
 }
 
-export type PanoParam = {
-  heading: number
-  pitch: number
-  fov: number
-} | null
-
-export const panoViewerSettingsParam: UrlParam<PanoParam> = {
+export const panoParam: UrlParam<PanoParam | null> = {
   name: 'pano',
   defaultValue: null,
   decode: (value) => value && JSON.parse(value),
   encode: (value) => value && JSON.stringify(value),
 }
 
-export const panoTagIdParam: UrlParam<string> = {
+export const panoTagParam: UrlParam<string> = {
   name: 'panoTag',
   defaultValue: PANO_LABELS[0].id,
   decode: (value) => value,

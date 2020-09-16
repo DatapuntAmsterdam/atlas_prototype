@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Icon, Marker as MarkerType } from 'leaflet'
 import { Marker } from '@datapunt/arm-core'
-import useParam from '../../utils/useParam'
-import { panoViewerSettingsParam } from '../../pages/MapPage/query-params'
-import useMapClick from '../../utils/useMapClick'
-import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
-import { MarkerProps } from '../../pages/MapPage/MapMarkers'
+import { Icon, Marker as MarkerType } from 'leaflet'
 import 'leaflet-rotatedmarker'
+import React, { useEffect, useState } from 'react'
+import { MarkerProps } from '../../pages/MapPage/MapMarkers'
+import { panoParam } from '../../pages/MapPage/query-params'
+import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
+import useMapClick from '../../utils/useMapClick'
+import useParam from '../../utils/useParam'
 
 const orientationIcon = new Icon({
   iconUrl: '/assets/images/map/panorama-orientation.svg',
@@ -22,7 +22,7 @@ const pawnIcon = new Icon({
 
 const PanoramaViewerMarker: React.FC<MarkerProps> = ({ location, setLocation }) => {
   const [orientationMarker, setOrientationMarker] = useState<MarkerType>()
-  const [panoViewerSettings] = useParam(panoViewerSettingsParam)
+  const [pano] = useParam(panoParam)
   // Todo, be able to give a x & y offset (when MapPanel is open)
   useMapCenterToMarker(location)
 
@@ -31,10 +31,10 @@ const PanoramaViewerMarker: React.FC<MarkerProps> = ({ location, setLocation }) 
   })
 
   useEffect(() => {
-    if (orientationMarker && panoViewerSettings) {
-      orientationMarker.setRotationAngle(panoViewerSettings.heading)
+    if (orientationMarker && pano) {
+      orientationMarker.setRotationAngle(pano.heading)
     }
-  }, [orientationMarker, panoViewerSettings])
+  }, [orientationMarker, pano])
 
   return location ? (
     <>
