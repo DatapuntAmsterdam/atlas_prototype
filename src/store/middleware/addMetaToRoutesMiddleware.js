@@ -1,4 +1,4 @@
-import get from 'lodash.get'
+import { get } from 'lodash'
 import paramsRegistry from '../params-registry'
 
 let nrOfRoutesDispatched = 0

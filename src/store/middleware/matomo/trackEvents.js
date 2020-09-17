@@ -1,4 +1,4 @@
-import get from 'lodash.get'
+import { get } from 'lodash'
 import { MATOMO_CONSTANTS } from '../../../app/matomo'
 import PAGES from '../../../app/pages'
 import { routing } from '../../../app/routes'

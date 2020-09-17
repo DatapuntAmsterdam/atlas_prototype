@@ -22,11 +22,7 @@ const MarzipanoView = styled.div`
   position: relative;
 `
 
-type Props = {
-  panoFullScreen: boolean
-}
-
-const PanoramaStyle = styled.div<Props>`
+const PanoramaStyle = styled.div<{ panoFullScreen: boolean }>`
   height: ${({ panoFullScreen }) => (panoFullScreen ? '100%' : '50%')};
   position: relative;
   order: -1; // Put the PanoramaViewer above the Map
@@ -34,7 +30,7 @@ const PanoramaStyle = styled.div<Props>`
 
 const PanoramaViewer: React.FC = () => {
   const ref = useRef(null)
-  const [panoImageDate, setPanoImageDate] = useState()
+  const [panoImageDate, setPanoImageDate] = useState<string>()
   const [pano, setPano] = useParam(panoParam)
   const [panoTag, setPanoTag] = useParam(panoTagParam)
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)

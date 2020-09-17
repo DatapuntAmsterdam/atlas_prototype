@@ -1,13 +1,6 @@
-import get from 'lodash.get'
-// TODO: R: clean file, overlay complex and contains state
-
 /* eslint-disable no-use-before-define,no-underscore-dangle */
 /* global L */
-
-import defer from 'lodash.defer'
-import isEqual from 'lodash.isequal'
-import debounce from 'lodash.debounce'
-
+import { debounce, defer, get, isEqual } from 'lodash'
 import { isBusy, start } from '../suppress/suppress'
 import drawToolConfig from './draw-tool.config'
 

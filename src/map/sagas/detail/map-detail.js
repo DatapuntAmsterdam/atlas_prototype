@@ -1,19 +1,6 @@
-import get from 'lodash.get'
+import { get } from 'lodash'
 import { call, put, select, takeLatest } from 'redux-saga/effects'
-
-import {
-  fetchMapDetailFailure,
-  fetchMapDetailSuccess,
-  getMapDetail,
-} from '../../ducks/detail/actions'
-import { closeMapPanel, mapLoadingAction } from '../../ducks/map/actions'
 import getDetailData from '../../../detail/sagas/detail'
-import fetchDetail from '../../services/map-detail/map-detail'
-import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants'
-import { getUser } from '../../../shared/ducks/user/user'
-import { waitForAuthentication } from '../../../shared/sagas/user/user'
-import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors'
-import { VIEW_MODE, setViewMode } from '../../../shared/ducks/ui/ui'
 import {
   clearMapDetail,
   fetchDetailFailure,
@@ -21,10 +8,22 @@ import {
   fetchDetailSuccess,
   showDetail,
 } from '../../../shared/ducks/detail/actions'
+import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors'
+import { setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { getUser } from '../../../shared/ducks/user/user'
+import { waitForAuthentication } from '../../../shared/sagas/user/user'
+import getGeometry from '../../../shared/services/geometry/geometry'
 import PARAMETER from '../../../store/parameters'
 import { toNotFoundPage } from '../../../store/redux-first-router/actions'
-import getGeometry from '../../../shared/services/geometry/geometry'
+import {
+  fetchMapDetailFailure,
+  fetchMapDetailSuccess,
+  getMapDetail,
+} from '../../ducks/detail/actions'
+import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants'
 import { getCurrentEndpoint } from '../../ducks/detail/selectors'
+import { closeMapPanel, mapLoadingAction } from '../../ducks/map/actions'
+import fetchDetail from '../../services/map-detail/map-detail'
 
 export function* fetchMapDetail() {
   yield put(fetchDetailRequest())

@@ -17,3 +17,5 @@ phantomjsdriver.log
 sitemap.xml
 /test/e2e/cypress.env.json
 yarn.lock
+.yalc/
+yalc.lock

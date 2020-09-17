@@ -1,7 +1,7 @@
-import get from 'lodash.get'
+import { get } from 'lodash'
 import { routing } from '../../app/routes'
-import titleActionMapping from '../../shared/services/document-title/document-title'
 import { FETCH_DETAIL_SUCCESS } from '../../shared/ducks/detail/constants'
+import titleActionMapping from '../../shared/services/document-title/document-title'
 
 const TITLE_SUFFIX = 'Data en informatie - Amsterdam'
 const TITLE_DEFAULT = 'Data en informatie - Amsterdam'

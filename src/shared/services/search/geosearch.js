@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle,no-param-reassign */
-import identity from 'lodash.identity'
+import { identity } from 'lodash'
 import environment from '../../../environment'
 import { fetchWithToken } from '../api/api'
 import geosearchFormatter from './geosearch-formatter'

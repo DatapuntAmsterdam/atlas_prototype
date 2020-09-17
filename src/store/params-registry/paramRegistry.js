@@ -1,10 +1,9 @@
-import get from 'lodash.get'
-import isUndefined from 'lodash.isundefined'
+import { get, isUndefined } from 'lodash'
 import queryString from 'querystring'
-import PARAMETERS from '../parameters'
-import getState from '../../shared/services/redux/get-state'
 import PAGES from '../../app/pages'
 import { ROUTER_NAMESPACE } from '../../app/routes'
+import getState from '../../shared/services/redux/get-state'
+import PARAMETERS from '../parameters'
 
 /**
  * ParamsRegistry manages the relations between url parameters, reducers and routes.

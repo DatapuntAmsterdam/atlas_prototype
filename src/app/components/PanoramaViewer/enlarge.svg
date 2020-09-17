@@ -1,6 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-	 viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
-<polygon points="6.7,27.3 12.7,27.3 12.7,25.3 8.1,25.3 12.6,20.8 11.2,19.4 6.7,23.9 6.7,19.3 4.7,19.3 4.7,25.3 4.7,27.3 "/>
-<polygon points="25.3,4.7 19.3,4.7 19.3,6.7 23.9,6.7 19.3,11.2 20.7,12.7 25.3,8.1 25.3,12.7 27.3,12.7 27.3,6.7 27.3,4.7 "/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M6.7 27.3h6v-2H8.1l4.5-4.5-1.4-1.4-4.5 4.5v-4.6h-2v8zM25.3 4.7h-6v2h4.6l-4.6 4.5 1.4 1.5 4.6-4.6v4.6h2v-8z"/></svg>

@@ -1,7 +1,7 @@
-import identity from 'lodash.identity'
-import DATA_SELECTION_CONFIG from './data-selection-config'
+import { identity } from 'lodash'
 import isDefined from '../is-defined'
 import isObject from '../is-object'
+import DATA_SELECTION_CONFIG from './data-selection-config'
 
 function formatFilters(dataset, rawData) {
   const formattedFilters = DATA_SELECTION_CONFIG.datasets[dataset].FILTERS

@@ -1,20 +1,23 @@
 import { useStateRef } from '@datapunt/arm-core'
-import throttle from 'lodash.throttle'
+import { throttle } from 'lodash'
 import Marzipano from 'marzipano'
 import React, { useEffect, useState } from 'react'
 import { getOrientation } from '../../panorama/services/marzipano/marzipano'
 import { PanoParam } from '../pages/MapPage/query-params'
 
-const useMarzipano = (ref: React.MutableRefObject<any>) => {
+const useMarzipano = (ref: React.MutableRefObject<HTMLElement>) => {
   const [marzipanoViewer, setMarzipanoInstance, marzipanoViewerRef] = useStateRef<any>(null)
   const [currentMarzipanoView, setCurrentMarzipanoView] = useState<PanoParam | null>(null)
 
   const updateOrientation = () => {
     if (marzipanoViewerRef.current) {
-      const { heading, pitch, fov } = getOrientation(marzipanoViewerRef.current)
-      if (heading && pitch && fov) {
-        setCurrentMarzipanoView({ heading, pitch, fov })
-      }
+      return
+    }
+
+    const { heading, pitch, fov } = getOrientation(marzipanoViewerRef.current)
+
+    if (heading && pitch && fov) {
+      setCurrentMarzipanoView({ heading, pitch, fov })
     }
   }
   const updateOrientationThrottled = throttle(updateOrientation, 300, {
@@ -26,6 +29,7 @@ const useMarzipano = (ref: React.MutableRefObject<any>) => {
     if (!ref.current) {
       return undefined
     }
+
     const viewer = new Marzipano.Viewer(ref.current, {
       stageType: null,
       stage: {
@@ -33,7 +37,9 @@ const useMarzipano = (ref: React.MutableRefObject<any>) => {
         width: 960,
       },
     })
+
     setMarzipanoInstance(viewer)
+
     viewer.addEventListener('viewChange', updateOrientationThrottled)
 
     return () => {

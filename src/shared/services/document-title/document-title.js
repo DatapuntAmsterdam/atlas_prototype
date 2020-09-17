@@ -1,9 +1,9 @@
-import get from 'lodash.get'
-import GLOSSARY from '../../../detail/services/glossary.constant'
+import { get } from 'lodash'
 import { routing } from '../../../app/routes'
-import { VIEW_MODE } from '../../ducks/ui/ui'
-import { FETCH_DETAIL_SUCCESS } from '../../ducks/detail/constants'
+import GLOSSARY from '../../../detail/services/glossary.constant'
 import PARAMETERS from '../../../store/parameters'
+import { FETCH_DETAIL_SUCCESS } from '../../ducks/detail/constants'
+import { VIEW_MODE } from '../../ducks/ui/ui'
 
 export const mapDocumentTitle = (action, defaultTitle) => {
   let pageTitle = defaultTitle

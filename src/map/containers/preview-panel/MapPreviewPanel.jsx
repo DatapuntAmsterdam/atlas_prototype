@@ -1,4 +1,4 @@
-import get from 'lodash.get'
+import { get } from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'

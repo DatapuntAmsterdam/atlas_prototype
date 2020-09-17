@@ -1,8 +1,8 @@
 // Selectors
-import get from 'lodash.get'
+import { get } from 'lodash'
 import { createSelector } from 'reselect'
-import { REDUCER_KEY } from './constants'
 import { detailPointType } from '../../../map/ducks/map/constants'
+import { REDUCER_KEY } from './constants'
 
 export const getDataSelection = (state) => state[REDUCER_KEY]
 export const getDataSelectionPage = createSelector(

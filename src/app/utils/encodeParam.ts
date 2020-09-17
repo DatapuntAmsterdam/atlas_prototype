@@ -1,7 +1,7 @@
 import deepEqual from 'deep-equal'
 import { UrlParam } from './useParam'
 
-function encodeParam<T>(urlParam: UrlParam<T>, value: T | null) {
+function encodeParam<T>(urlParam: UrlParam<T>, value: T) {
   const encodedValue = value && urlParam.encode(value)
   const newValue = deepEqual(urlParam.defaultValue, value) ? null : encodedValue
   return newValue

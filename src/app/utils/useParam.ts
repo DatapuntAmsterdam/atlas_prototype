@@ -30,10 +30,8 @@ const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {
 
   const setValue = useCallback<SetValueFn<T>>((valueOrFn, method = 'push') => {
     const value = valueOrFn instanceof Function ? valueOrFn(stateRef.current) : valueOrFn
+    const newValue = value ? encodeParam(urlParam, value) : null
     const newParams = new URLSearchParams(window.location.search)
-
-    // Hide the default value in the URL
-    const newValue = encodeParam(urlParam, value)
 
     if (newValue) {
       newParams.set(urlParam.name, newValue)

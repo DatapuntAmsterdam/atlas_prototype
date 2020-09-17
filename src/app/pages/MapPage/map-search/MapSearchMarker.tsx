@@ -1,15 +1,15 @@
 import { MapPanelContext, Marker as ARMMarker } from '@datapunt/arm-core'
+import { useMapEvents } from '@datapunt/react-maps'
 import { LeafletMouseEvent } from 'leaflet'
 import React, { useContext } from 'react'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
-import { detailUrlParam } from '../query-params'
 import joinUrl from '../../../utils/joinUrl'
+import useMapCenterToMarker from '../../../utils/useMapCenterToMarker'
 import useParam from '../../../utils/useParam'
 import MapContext, { Overlay } from '../MapContext'
-import { SnapPoint } from '../types'
-import useMapClick from '../../../utils/useMapClick'
-import useMapCenterToMarker from '../../../utils/useMapCenterToMarker'
 import { MarkerProps } from '../MapMarkers'
+import { detailUrlParam } from '../query-params'
+import { SnapPoint } from '../types'
 
 interface NearestDetail {
   id: string
@@ -48,13 +48,12 @@ const MapSearchMarker: React.FC<MarkerProps> = ({ location, setLocation }) => {
     }
   }
 
-  useMapClick(
-    (e: LeafletMouseEvent) => {
+  useMapEvents({
+    click: (event) => {
       setPositionFromSnapPoint(SnapPoint.Halfway)
-      handleMapClick(e, legendLeafletLayers)
+      handleMapClick(event, legendLeafletLayers)
     },
-    [legendLeafletLayers],
-  )
+  })
 
   return location ? <ARMMarker latLng={location} /> : null
 }
