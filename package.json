@@ -120,7 +120,7 @@
     "@types/deep-equal": "^1.0.1",
     "@types/enzyme": "^3.10.6",
     "@types/geojson": "^7946.0.7",
-    "@types/jest": "^26.0.13",
+    "@types/jest": "^26.0.14",
     "@types/karma": "^5.0.0",
     "@types/leaflet": "^1.5.17",
     "@types/leaflet-draw": "^1.0.3",
