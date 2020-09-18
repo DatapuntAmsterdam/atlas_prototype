@@ -1,14 +1,14 @@
-import React, { forwardRef, useMemo } from 'react'
 import { Button, Paragraph, themeSpacing } from '@datapunt/asc-ui'
+import React, { forwardRef, useMemo } from 'react'
 import styled from 'styled-components'
-import AutoSuggestCategory from './AutoSuggestCategory'
-import { CmsType } from '../../../shared/config/cms.config'
-import SearchType from '../../../app/pages/SearchPage/constants'
-import { LABELS } from '../../services/auto-suggest/auto-suggest'
-import useParam from '../../../app/utils/useParam'
-import { searchFilterParam } from '../../../app/pages/SearchPage/searchBarFilterParam'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
+import SearchType from '../../../app/pages/SearchPage/constants'
+import { searchFilterParam } from '../../../app/pages/SearchPage/query-params'
+import useParam from '../../../app/utils/useParam'
+import { CmsType } from '../../../shared/config/cms.config'
 import { SuggestionList } from '../../containers/header-search/HeaderSearch'
+import { LABELS } from '../../services/auto-suggest/auto-suggest'
+import AutoSuggestCategory from './AutoSuggestCategory'
 
 export type SearchCategory = CmsType | SearchType
 

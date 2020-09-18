@@ -3,8 +3,10 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React, { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
-import styled from 'styled-components'
 import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
+import { IDS } from '../shared/config/config'
+import { toArticleDetail } from '../store/redux-first-router/actions'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
 import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
@@ -12,10 +14,6 @@ import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 import PAGES, { isMapSplitPage, isSearchPage } from './pages'
 import isIE from './utils/isIE'
-import { toArticleDetail } from '../store/redux-first-router/actions'
-import { IDS } from '../shared/config/config'
-import useParam from './utils/useParam'
-import { searchQueryParam } from './pages/SearchPage/searchBarFilterParam'
 
 const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityContainer = React.lazy(() =>
@@ -83,8 +81,6 @@ const AppBody = ({
   currentPage,
   embedPreviewMode,
 }) => {
-  const [query] = useParam(searchQueryParam)
-
   const { enableLinkTracking } = useMatomo()
   enableLinkTracking()
 
@@ -128,7 +124,7 @@ const AppBody = ({
               {currentPage === PAGES.ACTUALITY && <ActualityContainer />}
               {currentPage === PAGES.NOT_FOUND && <NotFoundPage />}
 
-              {isSearchPage(currentPage) && <SearchPage currentPage={currentPage} query={query} />}
+              {isSearchPage(currentPage) && <SearchPage currentPage={currentPage} />}
             </Suspense>
           </AppContainer>
           <FeedbackModal id="feedbackModal" />

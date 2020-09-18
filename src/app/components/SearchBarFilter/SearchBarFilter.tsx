@@ -1,10 +1,10 @@
-import React from 'react'
 import { Label, Select } from '@datapunt/asc-ui'
+import React from 'react'
 import styled from 'styled-components'
-import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
 import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
+import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
+import { searchFilterParam } from '../../pages/SearchPage/query-params'
 import useParam from '../../utils/useParam'
-import { searchFilterParam } from '../../pages/SearchPage/searchBarFilterParam'
 
 // TODO: Add the screen reader only "styling" to asc-ui
 const StyledLabel = styled(Label)`

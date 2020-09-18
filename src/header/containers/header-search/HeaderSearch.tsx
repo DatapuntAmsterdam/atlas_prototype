@@ -1,17 +1,14 @@
 import React, { useCallback, useRef, useState } from 'react'
-import styled from 'styled-components'
 import { useHistory } from 'react-router'
+import styled from 'styled-components'
 import SearchBar from '../../../app/components/SearchBar'
-import SearchType from '../../../app/pages/SearchPage/constants'
-import AutoSuggest, { SearchCategory } from '../../components/auto-suggest/AutoSuggest'
-import useParam from '../../../app/utils/useParam'
-import {
-  searchFilterParam,
-  searchQueryParam,
-} from '../../../app/pages/SearchPage/searchBarFilterParam'
-import search, { MIN_QUERY_LENGTH } from '../../services/auto-suggest/auto-suggest'
-import useTraverseList from '../../../app/utils/useTraverseList'
 import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
+import SearchType from '../../../app/pages/SearchPage/constants'
+import { searchFilterParam, searchQueryParam } from '../../../app/pages/SearchPage/query-params'
+import useParam from '../../../app/utils/useParam'
+import useTraverseList from '../../../app/utils/useTraverseList'
+import AutoSuggest, { SearchCategory } from '../../components/auto-suggest/AutoSuggest'
+import search, { MIN_QUERY_LENGTH } from '../../services/auto-suggest/auto-suggest'
 
 // TODO: Add the screen reader only "styling" to asc-ui
 const StyledLegend = styled.legend`
@@ -52,8 +49,8 @@ const HeaderSearch: React.FC = () => {
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<SuggestionList>([])
-  const [inputValue, setInputValue] = useState(searchQuery || '')
-  const [highlightValue, setHighlightValue] = useState(searchQuery || '')
+  const [inputValue, setInputValue] = useState(searchQuery)
+  const [highlightValue, setHighlightValue] = useState(searchQuery)
   const [selectedElement, setSelectedElement] = useState<HTMLElement | null>(null)
 
   const ref = useRef<HTMLDivElement>(null)

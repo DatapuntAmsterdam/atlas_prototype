@@ -6,8 +6,10 @@ import ContentContainer from '../../components/ContentContainer/ContentContainer
 import { isAllResultsPage, isDataSearchPage, isMapSearchPage } from '../../pages'
 import useCompare from '../../utils/useCompare'
 import useDocumentTitle from '../../utils/useDocumentTitle'
+import useParam from '../../utils/useParam'
 import useSelectors from '../../utils/useSelectors'
 import SEARCH_PAGE_CONFIG, { DEFAULT_LIMIT } from './config'
+import { searchQueryParam } from './query-params'
 import { getActiveFilters, getPage, getSort } from './SearchPageDucks'
 import SearchPageFilters from './SearchPageFilters'
 import SearchPageResults from './SearchPageResults'
@@ -27,11 +29,12 @@ function getSortIntput(sortString) {
 
 /* TODO: Write tests for the Hooks used in this component */
 /* istanbul ignore next */
-const SearchPage = ({ currentPage, query }) => {
+const SearchPage = ({ currentPage }) => {
   const [initialLoading, setInitialLoading] = useState(true)
   const [showFilter, setShowFilter] = useState(false)
   const [sort, page, activeFilters] = useSelectors([getSort, getPage, getActiveFilters])
 
+  const [query] = useParam(searchQueryParam)
   const hasQuery = query.trim().length > 0
   const defaultSort = !hasQuery ? 'date:desc' : ''
   const withPagination = isPaginatable(currentPage, activeFilters)
