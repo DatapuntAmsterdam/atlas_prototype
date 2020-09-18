@@ -1,27 +1,12 @@
 import get from 'lodash.get'
+import { MATOMO_CONSTANTS } from '../../../app/matomo'
+import PAGES from '../../../app/pages'
 import { routing } from '../../../app/routes'
 import {
-  getPage,
-  isDataSelectionPage,
-  isDatasetPage,
-  isPanoPage,
-} from '../../redux-first-router/selectors'
-import { DOWNLOAD_DATA_SELECTION } from '../../../shared/ducks/data-selection/constants'
-import {
-  AUTHENTICATE_USER_REQUEST,
-  AUTHENTICATE_USER_SUCCESS,
-} from '../../../shared/ducks/user/user'
-import { ADD_FILTER, REMOVE_FILTER } from '../../../shared/ducks/filters/filters'
-import {
-  getViewMode,
-  HIDE_EMBED_PREVIEW,
-  HIDE_PRINT,
-  SET_VIEW_MODE,
-  SHOW_EMBED_PREVIEW,
-  SHOW_PRINT,
-  VIEW_MODE,
-  SHARE_PAGE,
-} from '../../../shared/ducks/ui/ui'
+  CLOSE_MODAL,
+  REPORT_FEEDBACK_REQUEST,
+  REPORT_PROBLEM_REQUEST,
+} from '../../../header/ducks/actions'
 import {
   MAP_SET_DRAWING_MODE,
   SET_MAP_BASE_LAYER,
@@ -29,24 +14,37 @@ import {
   TOGGLE_MAP_EMBED,
 } from '../../../map/ducks/map/constants'
 import { getShapeMarkers } from '../../../map/ducks/map/selectors'
-import { getLabelObjectByTags } from '../../../panorama/ducks/selectors'
 import {
-  SHOW_MODAL,
-  CLOSE_MODAL,
-  NAVIGATE_HOME_REQUEST,
-  REPORT_FEEDBACK_REQUEST,
-  REPORT_PROBLEM_REQUEST,
-} from '../../../header/ducks/actions'
-import {
-  FETCH_PANORAMA_HOTSPOT_REQUEST,
-  SET_PANORAMA_TAGS,
   CLOSE_PANORAMA,
+  FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST_EXTERNAL,
+  SET_PANORAMA_TAGS,
 } from '../../../panorama/ducks/constants'
-import PAGES from '../../../app/pages'
-import PARAMETERS from '../../parameters'
+import { getLabelObjectByTags } from '../../../panorama/ducks/selectors'
+import { DOWNLOAD_DATA_SELECTION } from '../../../shared/ducks/data-selection/constants'
 import { DOWNLOAD_DATASET_RESOURCE } from '../../../shared/ducks/detail/constants'
-import { MATOMO_CONSTANTS } from '../../../app/matomo'
+import { ADD_FILTER, REMOVE_FILTER } from '../../../shared/ducks/filters/filters'
+import {
+  getViewMode,
+  HIDE_EMBED_PREVIEW,
+  HIDE_PRINT,
+  SET_VIEW_MODE,
+  SHARE_PAGE,
+  SHOW_EMBED_PREVIEW,
+  SHOW_PRINT,
+  VIEW_MODE,
+} from '../../../shared/ducks/ui/ui'
+import {
+  AUTHENTICATE_USER_REQUEST,
+  AUTHENTICATE_USER_SUCCESS,
+} from '../../../shared/ducks/user/user'
+import PARAMETERS from '../../parameters'
+import {
+  getPage,
+  isDataSelectionPage,
+  isDatasetPage,
+  isPanoPage,
+} from '../../redux-first-router/selectors'
 
 /* istanbul ignore next */
 const trackEvents = {
@@ -98,13 +96,6 @@ const trackEvents = {
     'navigation',
     'embedversie-verlaten',
     null,
-  ],
-  // NAVIGATION -> CLICK LOGO
-  [NAVIGATE_HOME_REQUEST]: ({ title }) => [
-    MATOMO_CONSTANTS.TRACK_EVENT,
-    'navigation',
-    'home',
-    title,
   ],
   // NAVIGATION -> TOGGLE FROM EMBEDDED MAP
   [TOGGLE_MAP_EMBED]: () => [
@@ -279,8 +270,6 @@ const trackEvents = {
     null,
   ],
   // MENU
-  // MENU -> TOGGLE MODAL ON
-  [SHOW_MODAL]: ({ title }) => [MATOMO_CONSTANTS.TRACK_EVENT, 'feedback', 'feedback-menu', title],
   // MENU -> TOGGLE MODAL OFF
   [CLOSE_MODAL]: () => [MATOMO_CONSTANTS.TRACK_EVENT, 'feedback', 'feedback-verlaten', null],
   // MENU -> "terugmelden"
