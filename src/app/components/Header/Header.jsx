@@ -1,18 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import styled, { css } from 'styled-components'
 import {
   AmsterdamLogo,
-  Header as HeaderComponent,
-  styles,
   breakpoint,
+  Header as HeaderComponent,
   showAboveBackDrop,
+  styles,
 } from '@datapunt/asc-ui'
-import HeaderSearch from '../../../header/containers/header-search/HeaderSearch'
-import HeaderMenuContainer from './HeaderMenuContainer'
-
+import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled, { css } from 'styled-components'
+import HeaderSearch from '../../../header/components/HeaderSearch'
 import EmbedHeader from './EmbedHeader'
+import HeaderMenuContainer from './HeaderMenuContainer'
 import PrintHeader from './PrintHeader'
 
 const stickyStyle = css`

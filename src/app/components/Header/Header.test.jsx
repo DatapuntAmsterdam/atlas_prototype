@@ -1,9 +1,9 @@
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
 import Header from './Header'
 
 // Mock the HeaderSearchContainer component as its not relevant for this test
-jest.mock('../../../header/containers/header-search/HeaderSearch', () => () => <div />)
+jest.mock('../../../header/components/HeaderSearch', () => () => <div />)
 
 describe('Header', () => {
   const props = {

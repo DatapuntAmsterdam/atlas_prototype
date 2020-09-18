@@ -1,8 +1,14 @@
-import React, { useMemo } from 'react'
-import Link, { To } from 'redux-first-router-link'
-import { useSelector } from 'react-redux'
 import escapeStringRegexp from 'escape-string-regexp'
+import React, { useMemo } from 'react'
+import { useSelector } from 'react-redux'
+import Link, { To } from 'redux-first-router-link'
+import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import SearchType from '../../../app/pages/SearchPage/constants'
+import useSlug from '../../../app/utils/useSlug'
+import { CmsType } from '../../../shared/config/cms.config'
+import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import PARAMETERS from '../../../store/parameters'
+import { decodeLayers } from '../../../store/queryParameters'
 import {
   extractIdEndpoint,
   toArticleDetail,
@@ -13,14 +19,8 @@ import {
   toPublicationDetail,
   toSpecialDetail,
 } from '../../../store/redux-first-router/actions'
-import useSlug from '../../../app/utils/useSlug'
-import { CmsType } from '../../../shared/config/cms.config'
-import PARAMETERS from '../../../store/parameters'
-import { decodeLayers } from '../../../store/queryParameters'
-import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
-import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
-import { Suggestion } from '../../containers/header-search/HeaderSearch'
+import { Suggestion } from '../HeaderSearch'
 
 type AutoSuggestItemProps = {
   content: string

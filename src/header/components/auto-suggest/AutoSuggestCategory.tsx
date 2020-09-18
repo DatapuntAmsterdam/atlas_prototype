@@ -1,7 +1,7 @@
 import React from 'react'
-import AutoSuggestItem from './AutoSuggestItem'
 import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
-import { Suggestion } from '../../containers/header-search/HeaderSearch'
+import { Suggestion } from '../HeaderSearch'
+import AutoSuggestItem from './AutoSuggestItem'
 
 type Props = {
   category: {

@@ -6,8 +6,8 @@ import SearchType from '../../../app/pages/SearchPage/constants'
 import { searchFilterParam } from '../../../app/pages/SearchPage/query-params'
 import useParam from '../../../app/utils/useParam'
 import { CmsType } from '../../../shared/config/cms.config'
-import { SuggestionList } from '../../containers/header-search/HeaderSearch'
 import { LABELS } from '../../services/auto-suggest/auto-suggest'
+import { SuggestionList } from '../HeaderSearch'
 import AutoSuggestCategory from './AutoSuggestCategory'
 
 export type SearchCategory = CmsType | SearchType

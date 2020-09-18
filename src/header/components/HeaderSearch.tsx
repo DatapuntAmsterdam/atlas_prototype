@@ -1,14 +1,14 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
-import SearchBar from '../../../app/components/SearchBar'
-import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
-import SearchType from '../../../app/pages/SearchPage/constants'
-import { searchFilterParam, searchQueryParam } from '../../../app/pages/SearchPage/query-params'
-import useParam from '../../../app/utils/useParam'
-import useTraverseList from '../../../app/utils/useTraverseList'
-import AutoSuggest, { SearchCategory } from '../../components/auto-suggest/AutoSuggest'
-import search, { MIN_QUERY_LENGTH } from '../../services/auto-suggest/auto-suggest'
+import SearchBar from '../../app/components/SearchBar'
+import SEARCH_PAGE_CONFIG from '../../app/pages/SearchPage/config'
+import SearchType from '../../app/pages/SearchPage/constants'
+import { searchFilterParam, searchQueryParam } from '../../app/pages/SearchPage/query-params'
+import useParam from '../../app/utils/useParam'
+import useTraverseList from '../../app/utils/useTraverseList'
+import search, { MIN_QUERY_LENGTH } from '../services/auto-suggest/auto-suggest'
+import AutoSuggest, { SearchCategory } from './auto-suggest/AutoSuggest'
 
 // TODO: Add the screen reader only "styling" to asc-ui
 const StyledLegend = styled.legend`
