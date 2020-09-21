@@ -7,11 +7,6 @@ import { fetchWithToken } from '../../../shared/services/api/api'
 // Minimun length for typeahead query in backend is 3 characters
 export const MIN_QUERY_LENGTH = 3
 
-// Todo: Please consider rewriting the way we keep track on the active (selected) item in the
-// autosuggest result list. Now we use an (arbitrary) high number for more results button ("..."),
-// so this wont conflict with the activeSuggestion indexes.
-export const MORE_RESULTS_INDEX = 999
-
 // Sort order of the data results. These strings correspond to the labels defined in the typeahead API.
 export const LABELS_DATA = [
   'Straatnamen',

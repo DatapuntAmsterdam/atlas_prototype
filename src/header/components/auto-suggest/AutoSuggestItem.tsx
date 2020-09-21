@@ -4,7 +4,6 @@ import { LocationDescriptorObject } from 'history'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import SearchType from '../../../app/pages/SearchPage/constants'
 import { getRoute, routing } from '../../../app/routes'
 import useSlug from '../../../app/utils/useSlug'
@@ -13,14 +12,10 @@ import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import PARAMETERS from '../../../store/parameters'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
-import {
-  AutoSuggestSearchContent,
-  MORE_RESULTS_INDEX,
-} from '../../services/auto-suggest/auto-suggest'
+import { AutoSuggestSearchContent } from '../../services/auto-suggest/auto-suggest'
 
-type AutoSuggestItemProps = {
+export interface AutoSuggestItemProps {
   content: string
-  searchCategory: string
   suggestion: AutoSuggestSearchContent
   highlightValue: string
   inputValue?: string
@@ -30,19 +25,10 @@ type AutoSuggestItemProps = {
 const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
   content,
   suggestion,
-  searchCategory,
   highlightValue,
   inputValue,
   label,
 }) => {
-  const highlightedSuggestion =
-    content &&
-    content.replace(
-      new RegExp(`(${escapeStringRegexp(highlightValue.trim())})`, 'gi'),
-      '<span class="auto-suggest__dropdown__highlight">$1</span>',
-    )
-  const moreResults = suggestion.index === MORE_RESULTS_INDEX
-
   const view = useSelector(getViewMode)
   const { trackEvent } = useMatomo()
 
@@ -64,31 +50,9 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
         throw new Error(`Unable to open editorial suggestion, unknown type '${type}'.`)
     }
   }
-  const searchType = suggestion.type || searchCategory
 
-  const to: LocationDescriptorObject | null = useMemo(() => {
-    // "More in category" Link
-    if (suggestion.index === MORE_RESULTS_INDEX) {
-      const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
-        ({ type: configType }) => searchType === configType,
-      )
-
-      if (actionType) {
-        const { path } = actionType
-        return {
-          pathname: path,
-          search: new URLSearchParams({
-            [PARAMETERS.QUERY]: `${inputValue}`,
-            [PARAMETERS.PAGE]: '1', // reset the page number on search
-            ...(suggestion.subType
-              ? {
-                  [PARAMETERS.FILTERS]: `dataTypes;${suggestion.subType}`,
-                }
-              : {}),
-          }).toString(),
-        }
-      }
-    } else if (suggestion.type === SearchType.Dataset) {
+  const to: LocationDescriptorObject = useMemo(() => {
+    if (suggestion.type === SearchType.Dataset) {
       const [, , id] = extractIdEndpoint(suggestion.uri)
       const slug = useSlug(suggestion.label)
 
@@ -98,7 +62,9 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
           [PARAMETERS.QUERY]: `${inputValue}`,
         }).toString(),
       }
-    } else if (
+    }
+
+    if (
       // Suggestion coming from the cms
       suggestion.type === CmsType.Article ||
       suggestion.type === CmsType.Publication ||
@@ -109,6 +75,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
       const slug = useSlug(suggestion.label)
 
       let subType = ''
+
       if (suggestion.type === CmsType.Special) {
         ;[, subType] = suggestion.label.match(/\(([^()]*)\)$/)
       }
@@ -119,7 +86,9 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
           [PARAMETERS.QUERY]: `${inputValue}`,
         }).toString(),
       }
-    } else if (suggestion.type === SearchType.Map) {
+    }
+
+    if (suggestion.type === SearchType.Map) {
       const { searchParams } = new URL(suggestion.uri, window.location.origin)
 
       return {
@@ -131,35 +100,28 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
           [PARAMETERS.LAYERS]: searchParams.get(PARAMETERS.LAYERS) || '',
         }).toString(),
       }
-    } else {
-      const { type, subtype, id } = getDetailPageData(suggestion.uri)
-      // suggestion.category TRACK
-      return {
-        pathname: getRoute(routing.dataDetail.path, type, subtype, `id${id}`),
-        search: new URLSearchParams({
-          [PARAMETERS.VIEW]: view,
-          [PARAMETERS.QUERY]: `${inputValue}`,
-        }).toString(),
-      }
     }
 
-    return null
-  }, [
-    extractIdEndpoint,
-    useSlug,
-    openEditorialSuggestion,
-    decodeLayers,
-    searchType,
+    const { type, subtype, id } = getDetailPageData(suggestion.uri)
+    // suggestion.category TRACK
+    return {
+      pathname: getRoute(routing.dataDetail.path, type, subtype, `id${id}`),
+      search: new URLSearchParams({
+        [PARAMETERS.VIEW]: view,
+        [PARAMETERS.QUERY]: `${inputValue}`,
+      }).toString(),
+    }
+  }, [extractIdEndpoint, useSlug, openEditorialSuggestion, decodeLayers, highlightValue])
+
+  const htmlContent = useMemo(() => highlightSuggestion(content, highlightValue), [
+    content,
     highlightValue,
   ])
 
-  return to ? (
+  return (
     <li>
       <Link
-        className={`
-          auto-suggest__dropdown-item
-          ${moreResults ? 'auto-suggest__dropdown-item--more-results' : ''}
-        `}
+        className="auto-suggest__dropdown-item"
         onClick={() => {
           trackEvent({
             category: 'auto-suggest',
@@ -170,17 +132,24 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
         to={to}
       >
         <div>
-          {!moreResults ? <span className="icon" /> : ''}
+          <span className="icon" />
           <div
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
-              __html: highlightedSuggestion,
+              __html: htmlContent,
             }}
           />
         </div>
       </Link>
     </li>
-  ) : null
+  )
+}
+
+function highlightSuggestion(content: string, highlightValue: string) {
+  return content.replace(
+    new RegExp(`(${escapeStringRegexp(highlightValue.trim())})`, 'gi'),
+    '<span class="auto-suggest__dropdown__highlight">$1</span>',
+  )
 }
 
 export default AutoSuggestItem

@@ -12,15 +12,6 @@ import AutoSuggestCategory from './AutoSuggestCategory'
 
 export type SearchCategory = CmsType | SearchType
 
-type AutoSuggestProps = {
-  suggestions: AutoSuggestSearchResult[]
-  loading: boolean
-  highlightValue: string
-  setSearchBarFilterValue: (value: string) => void
-  searchBarFilterValue: string
-  inputValue?: string
-}
-
 const NoResults = styled(Paragraph)`
   padding: 0 ${themeSpacing(2)};
   margin: ${themeSpacing(1)} 0;
@@ -29,6 +20,15 @@ const NoResults = styled(Paragraph)`
 const ResetFilterButton = styled(Button)`
   margin: ${themeSpacing(2)};
 `
+
+export interface AutoSuggestProps {
+  suggestions: AutoSuggestSearchResult[]
+  loading: boolean
+  highlightValue: string
+  setSearchBarFilterValue: (value: string) => void
+  searchBarFilterValue: string
+  inputValue: string
+}
 
 const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
   (
