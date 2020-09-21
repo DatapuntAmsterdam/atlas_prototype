@@ -1,7 +1,9 @@
 import escapeStringRegexp from 'escape-string-regexp'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import Link, { To } from 'redux-first-router-link'
+import { Link } from 'react-router-dom'
+import { LocationDescriptorObject } from 'history'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import SearchType from '../../../app/pages/SearchPage/constants'
 import useSlug from '../../../app/utils/useSlug'
@@ -9,24 +11,18 @@ import { CmsType } from '../../../shared/config/cms.config'
 import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import PARAMETERS from '../../../store/parameters'
 import { decodeLayers } from '../../../store/queryParameters'
-import {
-  extractIdEndpoint,
-  toArticleDetail,
-  toCollectionDetail,
-  toDatasetDetail,
-  toDataSuggestion,
-  toMapWithLegendOpen,
-  toPublicationDetail,
-  toSpecialDetail,
-} from '../../../store/redux-first-router/actions'
+import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
 import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
 import { Suggestion } from '../HeaderSearch'
+import { getRoute, routing } from '../../../app/routes'
 
 type AutoSuggestItemProps = {
   content: string
   searchCategory: string
   suggestion: Suggestion
   highlightValue: string
+  inputValue?: string
+  label: string
 }
 
 const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
@@ -34,6 +30,8 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
   suggestion,
   searchCategory,
   highlightValue,
+  inputValue,
+  label,
 }) => {
   const highlightedSuggestion =
     content &&
@@ -44,62 +42,60 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
   const moreResults = suggestion.index === MORE_RESULTS_INDEX
 
   const view = useSelector(getViewMode)
+  const { trackEvent } = useMatomo()
 
   const openEditorialSuggestion = (
     { id, slug }: { id: string; slug: string },
     type: string,
     subType: string,
-  ): To => {
+  ) => {
     switch (type) {
       case CmsType.Article:
-        return toArticleDetail(id, slug)
+        return getRoute(routing.articleDetail.path, slug, id)
       case CmsType.Collection:
-        return toCollectionDetail(id, slug)
+        return getRoute(routing.collectionDetail.path, slug, id)
       case CmsType.Publication:
-        return toPublicationDetail(id, slug)
+        return getRoute(routing.publicationDetail.path, slug, id)
       case CmsType.Special:
-        return toSpecialDetail(id, subType, slug)
+        return getRoute(routing.specialDetail.path, subType, slug, id)
       default:
         throw new Error(`Unable to open editorial suggestion, unknown type '${type}'.`)
     }
   }
+  const searchType = suggestion.type || searchCategory
 
-  const to = useMemo(() => {
+  const to: LocationDescriptorObject | null = useMemo(() => {
     // "More in category" Link
     if (suggestion.index === MORE_RESULTS_INDEX) {
-      const searchType = suggestion.type || searchCategory
-
       const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
         ({ type: configType }) => searchType === configType,
       )
 
       if (actionType) {
-        const { to: toFn } = actionType
-        return toFn(
-          {
-            [PARAMETERS.QUERY]: highlightValue,
-            [PARAMETERS.PAGE]: 1, // reset the page number on search
+        const { path } = actionType
+        return {
+          pathname: path,
+          search: new URLSearchParams({
+            [PARAMETERS.QUERY]: `${inputValue}`,
+            [PARAMETERS.PAGE]: '1', // reset the page number on search
             ...(suggestion.subType
               ? {
-                  [PARAMETERS.FILTERS]: [
-                    {
-                      type: 'dataTypes',
-                      values: [suggestion.subType],
-                    },
-                  ],
+                  [PARAMETERS.FILTERS]: `dataTypes;${suggestion.subType}`,
                 }
               : {}),
-          },
-          false,
-          true,
-          false,
-        )
+          }).toString(),
+        }
       }
     } else if (suggestion.type === SearchType.Dataset) {
       const [, , id] = extractIdEndpoint(suggestion.uri)
       const slug = useSlug(suggestion.label)
 
-      return toDatasetDetail({ id, slug, highlightValue })
+      return {
+        pathname: getRoute(routing.datasetDetail.path, { id, slug }),
+        search: new URLSearchParams({
+          [PARAMETERS.QUERY]: `${inputValue}`,
+        }).toString(),
+      }
     } else if (
       // Suggestion coming from the cms
       suggestion.type === CmsType.Article ||
@@ -115,20 +111,34 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
         ;[, subType] = suggestion.label.match(/\(([^()]*)\)$/)
       }
 
-      return openEditorialSuggestion({ id, slug }, suggestion.type, subType)
+      return {
+        pathname: openEditorialSuggestion({ id, slug }, suggestion.type, subType),
+        search: new URLSearchParams({
+          [PARAMETERS.QUERY]: `${inputValue}`,
+        }).toString(),
+      }
     } else if (suggestion.type === SearchType.Map) {
       const { searchParams } = new URL(suggestion.uri, window.location.origin)
 
-      return toMapWithLegendOpen(decodeLayers(searchParams.get(PARAMETERS.LAYERS)))
+      return {
+        pathname: routing.data.path,
+        search: new URLSearchParams({
+          [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+          [PARAMETERS.QUERY]: `${inputValue}`,
+          [PARAMETERS.LEGEND]: 'true',
+          [PARAMETERS.LAYERS]: searchParams.get(PARAMETERS.LAYERS) || '',
+        }).toString(),
+      }
     } else {
-      return toDataSuggestion(
-        {
-          endpoint: suggestion.uri,
-          category: suggestion.category,
-          highlightValue,
-        },
-        view === VIEW_MODE.FULL ? VIEW_MODE.SPLIT : view,
-      )
+      const { type, subtype, id } = getDetailPageData(suggestion.uri)
+      // suggestion.category TRACK
+      return {
+        pathname: getRoute(routing.dataDetail.path, type, subtype, `id${id}`),
+        search: new URLSearchParams({
+          [PARAMETERS.VIEW]: view,
+          [PARAMETERS.QUERY]: `${inputValue}`,
+        }).toString(),
+      }
     }
 
     return null
@@ -137,17 +147,24 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
     useSlug,
     openEditorialSuggestion,
     decodeLayers,
-    searchCategory,
+    searchType,
     highlightValue,
   ])
 
-  return (
+  return to ? (
     <li>
       <Link
         className={`
           auto-suggest__dropdown-item
           ${moreResults ? 'auto-suggest__dropdown-item--more-results' : ''}
         `}
+        onClick={() => {
+          trackEvent({
+            category: 'auto-suggest',
+            name: content,
+            action: label,
+          })
+        }}
         to={to}
       >
         <div>
@@ -161,7 +178,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
         </div>
       </Link>
     </li>
-  )
+  ) : null
 }
 
 export default AutoSuggestItem

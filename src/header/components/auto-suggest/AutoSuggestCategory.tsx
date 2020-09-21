@@ -12,9 +12,15 @@ type Props = {
   }
   searchCategory: string
   highlightValue: string
+  inputValue?: string
 }
 
-const AutoSuggestCategory: React.FC<Props> = ({ category, searchCategory, highlightValue }) => {
+const AutoSuggestCategory: React.FC<Props> = ({
+  category,
+  searchCategory,
+  highlightValue,
+  inputValue,
+}) => {
   const { label, content, totalResults, type } = category
 
   let suggestions = content
@@ -41,6 +47,8 @@ const AutoSuggestCategory: React.FC<Props> = ({ category, searchCategory, highli
             content={suggestion.label}
             searchCategory={searchCategory}
             highlightValue={highlightValue}
+            inputValue={inputValue}
+            label={label}
           />
         ))}
       </ul>

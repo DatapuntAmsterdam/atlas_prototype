@@ -31,6 +31,13 @@ const PanoramaContainer = React.lazy(() =>
   ),
 ) // TODO: refactor, test
 
+let MapComponent = () => null
+
+if (typeof window !== 'undefined') {
+  // eslint-disable-next-line global-require
+  MapComponent = require('../../../map/containers/map/MapContainer').default
+}
+
 /* istanbul ignore next */ const MapSplitPage = ({
   hasSelection,
   currentPage,
@@ -40,13 +47,6 @@ const PanoramaContainer = React.lazy(() =>
 }) => {
   let mapProps = {}
   let Component = null
-
-  let MapComponent = () => null
-
-  if (typeof window !== 'undefined') {
-    // eslint-disable-next-line global-require
-    MapComponent = require('../../../map/containers/map/MapContainer').default
-  }
 
   switch (currentPage) {
     case PAGES.DATA_DETAIL:

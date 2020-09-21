@@ -28,7 +28,7 @@ const NoResults = styled(Paragraph)`
 `
 
 const ResetFilterButton = styled(Button)`
-  margin: ${themeSpacing(1)};
+  margin: ${themeSpacing(2)};
 `
 
 const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
@@ -68,6 +68,7 @@ const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
               highlightValue={highlightValue}
               category={category}
               searchCategory={searchBarFilterValue}
+              inputValue={inputValue}
             />
           ))}
         {!loading && !suggestions.length && (
