@@ -52,6 +52,8 @@ type SearchBarProps = React.InputHTMLAttributes<HTMLInputElement> & {
   value: string
   onClear: () => void
   onBlur: () => void
+  setSearchBarFilterValue: (value: string) => void
+  searchBarFilterValue: string
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -63,6 +65,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onKeyDown,
   value,
   children,
+  setSearchBarFilterValue,
+  searchBarFilterValue,
 }) => {
   const searchBarProps = {
     onBlur,
@@ -87,7 +91,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     <>
       <SearchBarWrapper expanded={expanded}>
         <Hidden maxBreakpoint="tabletM">
-          <SearchBarFilter />
+          <SearchBarFilter setValue={setSearchBarFilterValue} value={searchBarFilterValue} />
         </Hidden>
         <StyledSearchBar
           showAt="tabletM"

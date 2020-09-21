@@ -1,10 +1,9 @@
 import { Label, Select } from '@datapunt/asc-ui'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
-import { searchFilterParam } from '../../pages/SearchPage/query-params'
-import useParam from '../../utils/useParam'
+import useControlledState from '../../utils/useControlledState'
 
 // TODO: Add the screen reader only "styling" to asc-ui
 const StyledLabel = styled(Label)`
@@ -34,25 +33,34 @@ const AVAILABLE_FILTERS: Array<SearchBarFilterOptions> = Object.values(SEARCH_PA
   }),
 )
 
-const SearchBarFilter: React.FC = () => {
-  const [selectedValue, setSelectedValue] = useParam(searchFilterParam)
+type Props = {
+  value: string
+  setValue: (value: string) => void
+}
+
+export const LOCAL_STORAGE_KEY = 'search_filters'
+
+const SearchBarFilter: React.FC<Props> = ({ value, setValue }) => {
+  const [selectedValue, setSelectedValue] = useControlledState(value, setValue)
 
   function onSetSearchCategory(e: React.ChangeEvent<HTMLSelectElement>) {
     e.preventDefault()
     e.stopPropagation()
 
-    const value = e.currentTarget.value as SearchCategory
-    if (value !== selectedValue) {
-      setSelectedValue(value, 'replace')
-    }
+    setSelectedValue(e.currentTarget.value as SearchCategory)
   }
+
+  useEffect(() => {
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, selectedValue)
+  }, [selectedValue])
+
   return (
     <>
       <StyledLabel htmlFor="category" label="Zoek op categorie" />
       <StyledSelect
         data-testid="SearchBarFilter"
         id="category"
-        value={selectedValue || ''}
+        value={selectedValue}
         onChange={onSetSearchCategory}
       >
         {AVAILABLE_FILTERS.map(({ type, label }) => {

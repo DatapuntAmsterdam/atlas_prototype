@@ -196,7 +196,7 @@ class ParamsRegistry {
 
   setQueriesFromState(currentLocationType, state, nextAction) {
     // Temporary fix to allow new params (using the useParam hook)
-    const allowedNewParams = ['searchFilter', 'term']
+    const allowedNewParams = ['term']
     const currentParams = [...new URLSearchParams(window.location.search)]
     if (
       this.isRouterType(nextAction) ||

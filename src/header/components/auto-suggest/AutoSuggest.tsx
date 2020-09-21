@@ -1,14 +1,15 @@
 import { Button, Paragraph, themeSpacing } from '@datapunt/asc-ui'
 import React, { forwardRef, useMemo } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
 import SearchType from '../../../app/pages/SearchPage/constants'
-import { searchFilterParam } from '../../../app/pages/SearchPage/query-params'
-import useParam from '../../../app/utils/useParam'
 import { CmsType } from '../../../shared/config/cms.config'
 import { LABELS } from '../../services/auto-suggest/auto-suggest'
 import { SuggestionList } from '../HeaderSearch'
 import AutoSuggestCategory from './AutoSuggestCategory'
+import { routing } from '../../../app/routes'
+import { searchQueryParam } from '../../../app/pages/SearchPage/query-params'
 
 export type SearchCategory = CmsType | SearchType
 
@@ -16,6 +17,9 @@ type AutoSuggestProps = {
   suggestions: SuggestionList
   loading: boolean
   highlightValue: string
+  setSearchBarFilterValue: (value: string) => void
+  searchBarFilterValue: string
+  inputValue?: string
 }
 
 const NoResults = styled(Paragraph)`
@@ -28,10 +32,20 @@ const ResetFilterButton = styled(Button)`
 `
 
 const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
-  ({ suggestions = [], loading, highlightValue }, ref) => {
-    const [searchCategory, setSearchFilter] = useParam(searchFilterParam)
+  (
+    {
+      suggestions = [],
+      loading,
+      highlightValue,
+      setSearchBarFilterValue,
+      searchBarFilterValue,
+      inputValue,
+    },
+    ref,
+  ) => {
+    const history = useHistory()
     const searchCategoryLabel = useMemo(() => {
-      switch (searchCategory) {
+      switch (searchBarFilterValue) {
         case 'data':
           return 'Data'
 
@@ -39,9 +53,9 @@ const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
           return 'Kaarten'
 
         default:
-          return LABELS[searchCategory]
+          return LABELS[searchBarFilterValue]
       }
-    }, [searchCategory])
+    }, [searchBarFilterValue])
 
     return (
       <div className="auto-suggest__dropdown" ref={ref}>
@@ -53,7 +67,7 @@ const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
               key={category.label}
               highlightValue={highlightValue}
               category={category}
-              searchCategory={searchCategory}
+              searchCategory={searchBarFilterValue}
             />
           ))}
         {!loading && !suggestions.length && (
@@ -62,10 +76,17 @@ const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
             {searchCategoryLabel && `in categorie "${searchCategoryLabel}"`}
           </NoResults>
         )}
-        {!loading && searchCategory !== SearchType.Search && (
+        {!loading && searchBarFilterValue !== SearchType.Search && (
           <ResetFilterButton
             variant="textButton"
-            onClick={() => setSearchFilter(SearchType.Search, 'replace')}
+            onClick={() => {
+              // Side effect: clear the searchbar filter and navigate to main search page
+              setSearchBarFilterValue(SearchType.Search)
+              history.push({
+                pathname: routing.search.path,
+                search: `${searchQueryParam.name}=${inputValue}`,
+              })
+            }}
           >
             Alle zoekresultaten weergeven
           </ResetFilterButton>

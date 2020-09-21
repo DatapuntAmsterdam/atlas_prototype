@@ -4,11 +4,12 @@ import styled from 'styled-components'
 import SearchBar from '../../app/components/SearchBar'
 import SEARCH_PAGE_CONFIG from '../../app/pages/SearchPage/config'
 import SearchType from '../../app/pages/SearchPage/constants'
-import { searchFilterParam, searchQueryParam } from '../../app/pages/SearchPage/query-params'
+import { searchQueryParam } from '../../app/pages/SearchPage/query-params'
 import useParam from '../../app/utils/useParam'
 import useTraverseList from '../../app/utils/useTraverseList'
 import autoSuggestSearch, { MIN_QUERY_LENGTH } from '../services/auto-suggest/auto-suggest'
 import AutoSuggest, { SearchCategory } from './auto-suggest/AutoSuggest'
+import { LOCAL_STORAGE_KEY } from '../../app/components/SearchBarFilter/SearchBarFilter'
 
 // TODO: Add the screen reader only "styling" to asc-ui
 const StyledLegend = styled.legend`
@@ -43,7 +44,6 @@ const ACTIVE_ITEM_CLASS = 'auto-suggest__dropdown-item--active'
 const HeaderSearch: React.FC = () => {
   const history = useHistory()
 
-  const [searchCategory] = useParam(searchFilterParam)
   const [searchQuery, setSearchQuery] = useParam(searchQueryParam)
 
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -52,6 +52,9 @@ const HeaderSearch: React.FC = () => {
   const [inputValue, setInputValue] = useState(searchQuery)
   const [highlightValue, setHighlightValue] = useState(searchQuery)
   const [selectedElement, setSelectedElement] = useState<HTMLElement | null>(null)
+  const [searchBarFilterValue, setSearchBarFilterValue] = useState(
+    window.localStorage.getItem(LOCAL_STORAGE_KEY) || SearchType.Search,
+  )
 
   const ref = useRef<HTMLDivElement>(null)
   const { keyDown } = useTraverseList(
@@ -78,7 +81,7 @@ const HeaderSearch: React.FC = () => {
       setHighlightValue(val)
       autoSuggestSearch({
         query: val,
-        type: searchCategory === SearchType.Search ? undefined : searchCategory,
+        type: searchBarFilterValue === SearchType.Search ? undefined : searchBarFilterValue,
       })
         .then((res) => {
           setResults(res.data as SuggestionList)
@@ -87,7 +90,7 @@ const HeaderSearch: React.FC = () => {
           setLoading(false)
         })
     },
-    [inputValue, setLoading, setResults, searchCategory],
+    [inputValue, setLoading, setResults, searchBarFilterValue],
   )
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,7 +115,6 @@ const HeaderSearch: React.FC = () => {
     } else {
       const queryString = {
         term: inputValue.trim(),
-        searchFilter: searchCategory,
       }
       const query = new URLSearchParams(
         Object.entries(queryString).reduce(
@@ -121,7 +123,7 @@ const HeaderSearch: React.FC = () => {
         ),
       )
       const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
-        ({ type: configType }) => searchCategory === configType,
+        ({ type: configType }) => searchBarFilterValue === configType,
       )
       if (actionType) {
         history.push({ pathname: actionType.path, search: query ? `?${query}` : '' })
@@ -163,13 +165,18 @@ const HeaderSearch: React.FC = () => {
         onClear={onClear}
         onKeyDown={keyDown}
         value={inputValue}
+        setSearchBarFilterValue={setSearchBarFilterValue}
+        searchBarFilterValue={searchBarFilterValue}
       >
         {showSuggestions && (
           <AutoSuggest
+            searchBarFilterValue={searchBarFilterValue}
+            setSearchBarFilterValue={setSearchBarFilterValue}
             highlightValue={highlightValue}
             ref={ref}
             loading={loading}
             suggestions={results}
+            inputValue={inputValue}
           />
         )}
       </SearchBar>
