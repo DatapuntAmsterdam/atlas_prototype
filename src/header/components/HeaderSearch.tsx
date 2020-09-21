@@ -119,7 +119,7 @@ const HeaderSearch: React.FC = () => {
     // Arbitrary 200 ms timeout here, needed since onBlur is triggered before the user can actually click on a link
     setTimeout(() => {
       setShowSuggestions(false)
-    }, 200)
+    }, 300)
   }
 
   const onFocus = () => {

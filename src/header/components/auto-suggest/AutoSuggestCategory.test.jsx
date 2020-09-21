@@ -49,7 +49,7 @@ describe('AutoSuggestCategory', () => {
     const wrapper = shallow(<AutoSuggestCategory {...props} />)
 
     const items = wrapper.find('AutoSuggestItem')
-    expect(items.length).toBe(4)
+    expect(items.length).toBe(3)
   })
 
   it("should not render a 'more results' link when there aren't more results returned than the total results", () => {
