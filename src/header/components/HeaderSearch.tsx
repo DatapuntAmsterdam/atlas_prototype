@@ -94,7 +94,7 @@ const HeaderSearch: React.FC = () => {
     setInputValue(e.target.value)
     setSelectedElement(null)
 
-    if (e.target.value?.length > MIN_QUERY_LENGTH) {
+    if (e.target.value?.length >= MIN_QUERY_LENGTH) {
       setShowSuggestions(true)
       fetchResults(e.target.value)
     } else {
