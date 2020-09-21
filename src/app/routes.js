@@ -190,4 +190,15 @@ const routes = Object.keys(routing).reduce((acc, key) => {
   return acc
 }, {})
 
+export function getRoute(path, ...args) {
+  let count = -1
+  return path.replace(/:[a-zA-Z?]+/g, (match) => {
+    count += 1
+    return args[count] !== undefined ? args[count] : match
+  })
+}
+
+export const mapSearchPagePaths = `(${routing.search.path}|${routing.dataSearch.path}|${routing.articleSearch.path}|${routing.publicationSearch.path}|${routing.specialSearch.path}|${routing.collectionSearch.path}|${routing.mapSearch.path})`
+export const mapSplitPagePaths = `(${routing.data.path}|${routing.panorama.path}|${routing.dataDetail.path}|${routing.addresses.path}|${routing.establishments.path}|${routing.dataSearchGeo.path}|${routing.cadastralObjects.path})`
+
 export default routes

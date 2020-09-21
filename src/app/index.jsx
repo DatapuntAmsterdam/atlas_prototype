@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router } from 'react-router'
+import { Router } from 'react-router-dom'
 import environment from '../environment'
 import configureStore from '../store/store'
 import App from './App'

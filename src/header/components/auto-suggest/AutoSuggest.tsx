@@ -67,7 +67,7 @@ const AutoSuggest = forwardRef<HTMLDivElement, AutoSuggestProps>(
             variant="textButton"
             onClick={() => setSearchFilter(SearchType.Search, 'replace')}
           >
-            Verwijder filter &quot;{searchCategoryLabel}&quot;
+            Alle zoekresultaten weergeven
           </ResetFilterButton>
         )}
       </div>

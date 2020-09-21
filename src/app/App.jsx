@@ -109,6 +109,7 @@ const App = ({
   printModeLandscape,
   printOrEmbedMode,
 }) => {
+  // Todo: match with react-router paths
   const hasMaxWidth =
     homePage ||
     isEditorialDetailPage(currentPage) ||
@@ -195,7 +196,6 @@ const App = ({
                 hasGrid: hasMaxWidth,
                 visibilityError,
                 bodyClasses,
-                homePage,
                 currentPage,
                 embedPreviewMode,
               }}

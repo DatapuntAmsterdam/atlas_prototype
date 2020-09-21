@@ -3,17 +3,18 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React, { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
-import RouterLink from 'redux-first-router-link'
+import { Route, Switch } from 'react-router'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { IDS } from '../shared/config/config'
-import { toArticleDetail } from '../store/redux-first-router/actions'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
 import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
-import PAGES, { isMapSplitPage, isSearchPage } from './pages'
+import PAGES from './pages'
 import isIE from './utils/isIE'
+import { getRoute, mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
 
 const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityContainer = React.lazy(() =>
@@ -73,14 +74,7 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
   top: 200px;
 `
 
-const AppBody = ({
-  visibilityError,
-  bodyClasses,
-  hasGrid,
-  homePage,
-  currentPage,
-  embedPreviewMode,
-}) => {
+const AppBody = ({ visibilityError, bodyClasses, hasGrid, currentPage, embedPreviewMode }) => {
   const { enableLinkTracking } = useMatomo()
   enableLinkTracking()
 
@@ -104,9 +98,10 @@ const AppBody = ({
                 </Paragraph>{' '}
                 <Link
                   as={RouterLink}
-                  to={toArticleDetail(
-                    '11206c96-91d6-4f6a-9666-68e577797865',
+                  to={getRoute(
+                    routing.articleDetail.path,
                     'internet-explorer-binnenkort-niet-meer-ondersteund',
+                    '11206c96-91d6-4f6a-9666-68e577797865',
                   )}
                   inList
                   darkBackground
@@ -116,15 +111,24 @@ const AppBody = ({
               </StyledAlert>
             )}
             <Suspense fallback={<StyledLoadingSpinner />}>
-              {homePage && <HomePage />}
-              {currentPage === PAGES.ARTICLE_DETAIL && <ArticleDetailPage />}
-              {currentPage === PAGES.SPECIAL_DETAIL && <SpecialDetailPage />}
-              {currentPage === PAGES.PUBLICATION_DETAIL && <PublicationDetailPage />}
-              {currentPage === PAGES.COLLECTION_DETAIL && <CollectionDetailPage />}
-              {currentPage === PAGES.ACTUALITY && <ActualityContainer />}
-              {currentPage === PAGES.NOT_FOUND && <NotFoundPage />}
-
-              {isSearchPage(currentPage) && <SearchPage currentPage={currentPage} />}
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path={routing.articleDetail.path} exact component={ArticleDetailPage} />
+                <Route
+                  path={routing.publicationDetail.path}
+                  exact
+                  component={PublicationDetailPage}
+                />
+                <Route path={routing.specialDetail.path} exact component={SpecialDetailPage} />
+                <Route
+                  path={routing.collectionDetail.path}
+                  exact
+                  component={CollectionDetailPage}
+                />
+                <Route path={routing.actuality.path} exact component={ActualityContainer} />
+                <Route path={routing.niet_gevonden.path} exact component={NotFoundPage} />
+                <Route path={mapSearchPagePaths} component={SearchPage} />
+              </Switch>
             </Suspense>
           </AppContainer>
           <FeedbackModal id="feedbackModal" />
@@ -150,11 +154,19 @@ const AppBody = ({
                   ) : (
                     <div className="u-grid u-full-height u-overflow--y-auto">
                       <div className="u-row u-full-height">
-                        {isMapSplitPage(currentPage) && <MapSplitPage />}
-
-                        {currentPage === PAGES.CONSTRUCTION_FILE && <ConstructionFilesContainer />}
-
-                        {currentPage === PAGES.DATASET_DETAIL && <DatasetDetailContainer />}
+                        <Switch>
+                          <Route
+                            path={routing.constructionFile.path}
+                            exact
+                            component={ConstructionFilesContainer}
+                          />
+                          <Route
+                            path={routing.datasetDetail.path}
+                            exact
+                            component={DatasetDetailContainer}
+                          />
+                          <Route path={mapSplitPagePaths} component={MapSplitPage} />
+                        </Switch>
                       </div>
                     </div>
                   )}
@@ -173,7 +185,6 @@ AppBody.propTypes = {
   visibilityError: PropTypes.bool.isRequired,
   bodyClasses: PropTypes.string.isRequired,
   hasGrid: PropTypes.bool.isRequired,
-  homePage: PropTypes.bool.isRequired,
   currentPage: PropTypes.string.isRequired,
   embedPreviewMode: PropTypes.bool.isRequired,
 }

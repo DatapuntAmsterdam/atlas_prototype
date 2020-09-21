@@ -2,6 +2,7 @@ import { Container, Row } from '@datapunt/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { clearAllBodyScrollLocks, enableBodyScroll } from 'body-scroll-lock'
 import React, { memo, useEffect, useState } from 'react'
+import { getPage as getCurrentPage } from '../../../store/redux-first-router/selectors'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import { isAllResultsPage, isDataSearchPage, isMapSearchPage } from '../../pages'
 import useCompare from '../../utils/useCompare'
@@ -29,10 +30,15 @@ function getSortIntput(sortString) {
 
 /* TODO: Write tests for the Hooks used in this component */
 /* istanbul ignore next */
-const SearchPage = ({ currentPage }) => {
+const SearchPage = () => {
   const [initialLoading, setInitialLoading] = useState(true)
   const [showFilter, setShowFilter] = useState(false)
-  const [sort, page, activeFilters] = useSelectors([getSort, getPage, getActiveFilters])
+  const [sort, page, activeFilters, currentPage] = useSelectors([
+    getSort,
+    getPage,
+    getActiveFilters,
+    getCurrentPage,
+  ])
 
   const [query] = useParam(searchQueryParam)
   const hasQuery = query.trim().length > 0

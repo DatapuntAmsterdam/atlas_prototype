@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 import configureMockStore from 'redux-mock-store'
 import App from './App'
 import { VIEW_MODE } from '../shared/ducks/ui/ui'
@@ -59,9 +60,11 @@ describe('App', () => {
 
     render(
       <Provider store={newStore}>
-        {/*
-        // @ts-ignore */}
-        <App />
+        <Router>
+          {/*
+          // @ts-ignore */}
+          <App />
+        </Router>
       </Provider>,
     )
     expect(replaceMock).toHaveBeenCalled()
@@ -70,9 +73,11 @@ describe('App', () => {
   it('should render', () => {
     const { container } = render(
       <Provider store={store}>
-        {/*
-        // @ts-ignore */}
-        <App />
+        <Router>
+          {/*
+          // @ts-ignore */}
+          <App />
+        </Router>
       </Provider>,
     )
     const firstChild = container.firstChild as HTMLElement
@@ -82,9 +87,11 @@ describe('App', () => {
   it('should render the header', () => {
     const { getByTestId } = render(
       <Provider store={store}>
-        {/*
-        // @ts-ignore */}
-        <App />
+        <Router>
+          {/*
+          // @ts-ignore */}
+          <App />
+        </Router>
       </Provider>,
     )
     expect(getByTestId('header')).toBeDefined()
@@ -93,9 +100,11 @@ describe('App', () => {
   it('should render skip navigation buttons (A11Y)', () => {
     const { getByTitle } = render(
       <Provider store={store}>
-        {/*
-        // @ts-ignore */}
-        <App />
+        <Router>
+          {/*
+          // @ts-ignore */}
+          <App />
+        </Router>
       </Provider>,
     )
     expect(getByTitle('Direct naar: inhoud')).toBeDefined()
