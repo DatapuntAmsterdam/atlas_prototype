@@ -7,7 +7,7 @@ import SearchType from '../../app/pages/SearchPage/constants'
 import { searchFilterParam, searchQueryParam } from '../../app/pages/SearchPage/query-params'
 import useParam from '../../app/utils/useParam'
 import useTraverseList from '../../app/utils/useTraverseList'
-import search, { MIN_QUERY_LENGTH } from '../services/auto-suggest/auto-suggest'
+import autoSuggestSearch, { MIN_QUERY_LENGTH } from '../services/auto-suggest/auto-suggest'
 import AutoSuggest, { SearchCategory } from './auto-suggest/AutoSuggest'
 
 // TODO: Add the screen reader only "styling" to asc-ui
@@ -76,9 +76,9 @@ const HeaderSearch: React.FC = () => {
     (val: string) => {
       setLoading(true)
       setHighlightValue(val)
-      search({
+      autoSuggestSearch({
         query: val,
-        type: searchCategory === SearchType.Search ? null : searchCategory,
+        type: searchCategory === SearchType.Search ? undefined : searchCategory,
       })
         .then((res) => {
           setResults(res.data as SuggestionList)

@@ -1,5 +1,5 @@
-import autoSuggestSearch, { orderAutoSuggestResults, SORT_ORDER } from './auto-suggest'
 import { getAuthHeaders } from '../../../shared/services/auth/auth'
+import autoSuggestSearch, { sortResponse, SORT_ORDER } from './auto-suggest'
 
 jest.mock('../../../shared/services/auth/auth')
 
@@ -69,18 +69,18 @@ describe('The auto-suggest service', () => {
     })
   })
 
-  describe('sortAutoSuggestResults', () => {
-    it('should sort the autoresults when all labels are returned', () => {
+  describe('sortResponse', () => {
+    it('should sort the response when all labels are returned', () => {
       const results = SORT_ORDER.map((key) => ({ label: key })).sort(
         (a, b) => b.label.localeCompare(a.label), // sort alphabetically to scrumble results
       )
 
       const expected = SORT_ORDER.map((key) => ({ label: key }))
 
-      expect(orderAutoSuggestResults(results)).toEqual(expected)
+      expect(sortResponse(results)).toEqual(expected)
     })
 
-    it('should sort the autoresults when the first four labels are returned', () => {
+    it('should sort the response when the first four labels are returned', () => {
       const results = SORT_ORDER.map((key) => ({ label: key }))
         .slice(0, 4)
         .sort(
@@ -89,10 +89,10 @@ describe('The auto-suggest service', () => {
 
       const expected = SORT_ORDER.map((key) => ({ label: key })).slice(0, 4)
 
-      expect(orderAutoSuggestResults(results)).toEqual(expected)
+      expect(sortResponse(results)).toEqual(expected)
     })
 
-    it('should sort the autoresults when the last four labels are returned', () => {
+    it('should sort the response when the last four labels are returned', () => {
       const results = SORT_ORDER.map((key) => ({ label: key }))
         .slice(4)
         .sort(
@@ -101,7 +101,7 @@ describe('The auto-suggest service', () => {
 
       const expected = SORT_ORDER.map((key) => ({ label: key })).slice(4)
 
-      expect(orderAutoSuggestResults(results)).toEqual(expected)
+      expect(sortResponse(results)).toEqual(expected)
     })
   })
 })
