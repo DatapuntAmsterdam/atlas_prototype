@@ -1,20 +1,12 @@
-import { Label, Select } from '@datapunt/asc-ui'
+import { Label, Select, srOnlyStyle } from '@datapunt/asc-ui'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
 import useControlledState from '../../utils/useControlledState'
 
-// TODO: Add the screen reader only "styling" to asc-ui
 const StyledLabel = styled(Label)`
-  border-width: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+  ${srOnlyStyle}
 `
 
 const StyledSelect = styled(Select)`

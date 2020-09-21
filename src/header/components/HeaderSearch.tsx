@@ -1,3 +1,4 @@
+import { srOnlyStyle } from '@datapunt/asc-ui'
 import React, { useCallback, useRef, useState } from 'react'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
@@ -13,14 +14,7 @@ import { LOCAL_STORAGE_KEY } from '../../app/components/SearchBarFilter/SearchBa
 
 // TODO: Add the screen reader only "styling" to asc-ui
 const StyledLegend = styled.legend`
-  border-width: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+  ${srOnlyStyle}
 `
 
 export type Suggestion = {
