@@ -62,8 +62,7 @@ export function sortResponse(response: TypeaheadItem[]) {
 function formatResponse(
   response: TypeaheadItem[],
   itemType: string | undefined,
-): AutoSuggestSearchResult {
-  const numberOfResults = response.reduce((acc, item) => acc + item.content.length, 0)
+): AutoSuggestSearchResult[] {
   const sortedResponse = sortResponse(response)
     .map((item) => {
       // Base the type on the label returned from the API.
@@ -95,10 +94,7 @@ function formatResponse(
     }),
   }))
 
-  return {
-    count: numberOfResults,
-    data: indexedResponse,
-  }
+  return indexedResponse
 }
 
 // TODO: Generate these types from the OpenAPI spec: https://api.data.amsterdam.nl/typeahead/openapi
@@ -121,19 +117,14 @@ export interface SearchOptions {
 }
 
 // TODO: Revisit the interfaces below if they can be more like the source they came from.
-interface AutoSuggestSearchResult {
-  count: number
-  data: AutoSuggestSearchData[]
-}
-
-interface AutoSuggestSearchData {
+export interface AutoSuggestSearchResult {
   type: string
   label: string
   totalResults: number
   content: AutoSuggestSearchContent[]
 }
 
-interface AutoSuggestSearchContent {
+export interface AutoSuggestSearchContent {
   category: string
   index: number
   label: string
