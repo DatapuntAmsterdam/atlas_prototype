@@ -1,25 +1,27 @@
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import escapeStringRegexp from 'escape-string-regexp'
+import { LocationDescriptorObject } from 'history'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { LocationDescriptorObject } from 'history'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import SearchType from '../../../app/pages/SearchPage/constants'
+import { getRoute, routing } from '../../../app/routes'
 import useSlug from '../../../app/utils/useSlug'
 import { CmsType } from '../../../shared/config/cms.config'
 import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import PARAMETERS from '../../../store/parameters'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
-import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
-import { Suggestion } from '../HeaderSearch'
-import { getRoute, routing } from '../../../app/routes'
+import {
+  AutoSuggestSearchContent,
+  MORE_RESULTS_INDEX,
+} from '../../services/auto-suggest/auto-suggest'
 
 type AutoSuggestItemProps = {
   content: string
   searchCategory: string
-  suggestion: Suggestion
+  suggestion: AutoSuggestSearchContent
   highlightValue: string
   inputValue?: string
   label: string

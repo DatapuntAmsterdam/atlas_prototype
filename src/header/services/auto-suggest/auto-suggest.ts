@@ -90,6 +90,7 @@ function formatResponse(
         label: content._display,
         uri: content.uri,
         type: item.type,
+        subType: (item.type === 'data' && content._display.toLowerCase()) || undefined,
       }
     }),
   }))
@@ -130,6 +131,7 @@ export interface AutoSuggestSearchContent {
   label: string
   uri: string
   type: string
+  subType?: string
 }
 
 export default async function autoSuggestSearch({ query, type }: SearchOptions) {

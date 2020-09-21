@@ -4,17 +4,16 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
 import SearchType from '../../../app/pages/SearchPage/constants'
-import { CmsType } from '../../../shared/config/cms.config'
-import { LABELS } from '../../services/auto-suggest/auto-suggest'
-import { SuggestionList } from '../HeaderSearch'
-import AutoSuggestCategory from './AutoSuggestCategory'
-import { routing } from '../../../app/routes'
 import { searchQueryParam } from '../../../app/pages/SearchPage/query-params'
+import { routing } from '../../../app/routes'
+import { CmsType } from '../../../shared/config/cms.config'
+import { AutoSuggestSearchResult, LABELS } from '../../services/auto-suggest/auto-suggest'
+import AutoSuggestCategory from './AutoSuggestCategory'
 
 export type SearchCategory = CmsType | SearchType
 
 type AutoSuggestProps = {
-  suggestions: SuggestionList
+  suggestions: AutoSuggestSearchResult[]
   loading: boolean
   highlightValue: string
   setSearchBarFilterValue: (value: string) => void

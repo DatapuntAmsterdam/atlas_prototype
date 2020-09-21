@@ -1,15 +1,13 @@
 import React from 'react'
-import { MORE_RESULTS_INDEX } from '../../services/auto-suggest/auto-suggest'
-import { Suggestion } from '../HeaderSearch'
+import {
+  AutoSuggestSearchContent,
+  AutoSuggestSearchResult,
+  MORE_RESULTS_INDEX,
+} from '../../services/auto-suggest/auto-suggest'
 import AutoSuggestItem from './AutoSuggestItem'
 
 type Props = {
-  category: {
-    label: string
-    content: Suggestion[]
-    totalResults: number
-    type: string
-  }
+  category: AutoSuggestSearchResult
   searchCategory: string
   highlightValue: string
   inputValue?: string
@@ -26,15 +24,17 @@ const AutoSuggestCategory: React.FC<Props> = ({
   let suggestions = content
 
   if (totalResults > content.length) {
-    suggestions = [
-      ...content,
-      {
-        label: `Meer resultaten in '${label}'`,
-        index: MORE_RESULTS_INDEX,
-        type,
-        subType: type === 'data' && label.toLowerCase(),
-      } as Suggestion,
-    ]
+    // TODO: This should not be an actual suggestion, rather just an extra element on the list.
+    const moreResultsSuggestion: AutoSuggestSearchContent = {
+      category: '',
+      uri: '',
+      label: `Meer resultaten in '${label}'`,
+      index: MORE_RESULTS_INDEX,
+      type,
+      subType: (type === 'data' && label.toLowerCase()) || undefined,
+    }
+
+    suggestions = [...content, moreResultsSuggestion]
   }
   return (
     <div className="auto-suggest__dropdown-category">
