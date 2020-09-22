@@ -1,10 +1,10 @@
-import styled, { css } from 'styled-components'
-import { breakpoint, Column, Heading, Row, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import { breakpoint, Column, Heading, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
-import AboutCard from './AboutCard'
-import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
-import useFromCMS from '../../utils/useFromCMS'
+import styled, { css } from 'styled-components'
 import { cmsConfig } from '../../../shared/config/config'
+import useFromCMS from '../../utils/useFromCMS'
+import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
+import AboutCard from './AboutCard'
 
 const AboutBlockStyle = styled.div`
   width: 100%;

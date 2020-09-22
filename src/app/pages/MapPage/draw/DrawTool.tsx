@@ -1,12 +1,12 @@
-import { MapPanelContext } from '@datapunt/arm-core'
+import { MapPanelContext } from '@amsterdam/arm-core'
 import {
   DrawTool as DrawToolComponent,
   ExtendedLayer,
   PolygonType,
   PolylineType,
-} from '@datapunt/arm-draw'
-import { ascDefaultTheme, themeColor } from '@datapunt/asc-ui'
-import { useMapInstance } from '@datapunt/react-maps'
+} from '@amsterdam/arm-draw'
+import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
+import { useMapInstance } from '@amsterdam/react-maps'
 import L, { LatLng, LatLngLiteral, Polygon } from 'leaflet'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import useParam from '../../../utils/useParam'

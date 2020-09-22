@@ -1,4 +1,4 @@
-import { Button, Paragraph, themeSpacing } from '@datapunt/asc-ui'
+import { Button, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import React, { forwardRef, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'

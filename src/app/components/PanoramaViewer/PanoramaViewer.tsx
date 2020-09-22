@@ -29,7 +29,7 @@ const PanoramaStyle = styled.div<{ panoFullScreen: boolean }>`
 `
 
 const PanoramaViewer: React.FC = () => {
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [panoImageDate, setPanoImageDate] = useState<string>()
   const [pano, setPano] = useParam(panoParam)
   const [panoTag, setPanoTag] = useParam(panoTagParam)

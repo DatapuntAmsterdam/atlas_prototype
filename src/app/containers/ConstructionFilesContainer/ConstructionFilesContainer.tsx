@@ -1,4 +1,4 @@
-import { Alert, Heading, Paragraph, Row, themeSpacing } from '@datapunt/asc-ui'
+import { Alert, Heading, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import React, { lazy, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'

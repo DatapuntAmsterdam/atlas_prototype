@@ -1,16 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
 import {
   Card,
   CardContent,
-  Link,
   Heading,
+  Link,
   Paragraph,
+  Tag,
   themeColor,
   themeSpacing,
-  Tag,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
+import React from 'react'
 import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
 
 const StyledHeading = styled(Heading)`
   border-bottom: 2px solid transparent;

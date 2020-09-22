@@ -1,14 +1,14 @@
+import { Heading, Link, Paragraph } from '@amsterdam/asc-ui'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import RouterLink from 'redux-first-router-link'
-import { Heading, Link, Paragraph } from '@datapunt/asc-ui'
-import { StyledList, StyledListItem } from './NoSearchResults'
 import { authenticateRequest } from '../../../shared/ducks/user/user'
 import {
   toAdresses,
   toCadastralObjects,
   toEstablishments,
 } from '../../../store/redux-first-router/actions'
+import { StyledList, StyledListItem } from './NoSearchResults'
 import { formatNoResultsMessage } from './utils'
 
 const NoDataSearchResults = ({ query, unauthorized }) => {

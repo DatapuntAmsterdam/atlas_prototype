@@ -1,4 +1,4 @@
-import { Link, styles, svgFill, themeColor } from '@datapunt/asc-ui'
+import { Link, styles, svgFill, themeColor } from '@amsterdam/asc-ui'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'

@@ -1,5 +1,5 @@
+import { breakpoint, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { breakpoint, themeColor, themeSpacing } from '@datapunt/asc-ui'
 
 const TileLabel = styled.div`
   padding: ${themeSpacing(2, 3)};

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Alert } from '@datapunt/asc-ui'
+import { Alert } from '@amsterdam/asc-ui'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'

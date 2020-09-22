@@ -1,4 +1,4 @@
-import { ChevronDown } from '@datapunt/asc-assets'
+import { ChevronDown } from '@amsterdam/asc-assets'
 import {
   Checkbox,
   Icon,
@@ -7,7 +7,7 @@ import {
   styles,
   themeColor,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import queryString from 'querystring'

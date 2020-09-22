@@ -1,5 +1,3 @@
-import React from 'react'
-import { connect } from 'react-redux'
 import {
   Column,
   CustomHTMLBlock,
@@ -8,19 +6,21 @@ import {
   Heading,
   Paragraph,
   Row,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { getLocationPayload } from '../../../store/redux-first-router/selectors'
-import useFromCMS from '../../utils/useFromCMS'
-import EditorialPage from '../../components/EditorialPage/EditorialPage'
+import React from 'react'
+import { connect } from 'react-redux'
+import environment from '../../../environment'
 import { cmsConfig } from '../../../shared/config/config'
 import { toPublicationDetail } from '../../../store/redux-first-router/actions'
+import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
+import DocumentCover from '../../components/DocumentCover/DocumentCover'
+import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import ShareBar from '../../components/ShareBar/ShareBar'
 import getImageFromCms from '../../utils/getImageFromCms'
-import DocumentCover from '../../components/DocumentCover/DocumentCover'
 import useDownload from '../../utils/useDownload'
-import environment from '../../../environment'
+import useFromCMS from '../../utils/useFromCMS'
 
 const PublicationDetailPage = ({ id }) => {
   const { fetchData, results, loading, error } = useFromCMS(cmsConfig.PUBLICATION, id)

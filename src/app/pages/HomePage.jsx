@@ -1,23 +1,23 @@
+import {
+  breakpoint,
+  Column,
+  CompactThemeProvider,
+  Heading,
+  Row,
+  themeSpacing,
+} from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
-import {
-  Row,
-  Column,
-  Heading,
-  CompactThemeProvider,
-  breakpoint,
-  themeSpacing,
-} from '@datapunt/asc-ui'
-import HighlightBlock from '../components/HomePage/HighlightBlock'
-import NavigationBlock from '../components/HomePage/NavigationBlock'
-import EditorialBlock from '../components/HomePage/EditorialBlock'
-import OrganizationBlock from '../components/HomePage/OrganizationBlock'
-import AboutBlock from '../components/HomePage/AboutBlock'
-import ShareBar from '../components/ShareBar/ShareBar'
-import ContentContainer from '../components/ContentContainer/ContentContainer'
-import ThemesBlock from '../components/HomePage/ThemesBlock'
 import { cmsConfig } from '../../shared/config/config'
 import { toCollectionSearch } from '../../store/redux-first-router/actions'
+import ContentContainer from '../components/ContentContainer/ContentContainer'
+import AboutBlock from '../components/HomePage/AboutBlock'
+import EditorialBlock from '../components/HomePage/EditorialBlock'
+import HighlightBlock from '../components/HomePage/HighlightBlock'
+import NavigationBlock from '../components/HomePage/NavigationBlock'
+import OrganizationBlock from '../components/HomePage/OrganizationBlock'
+import ThemesBlock from '../components/HomePage/ThemesBlock'
+import ShareBar from '../components/ShareBar/ShareBar'
 
 const HighlightColumn = styled(Column)`
   // aligns the HighlightsBlock with the NavigationBlock

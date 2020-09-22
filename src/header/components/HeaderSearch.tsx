@@ -1,4 +1,4 @@
-import { srOnlyStyle } from '@datapunt/asc-ui'
+import { srOnlyStyle } from '@amsterdam/asc-ui'
 import React, { useCallback, useRef, useState } from 'react'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'

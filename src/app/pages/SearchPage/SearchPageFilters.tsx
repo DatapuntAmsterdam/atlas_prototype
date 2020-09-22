@@ -1,4 +1,4 @@
-import { Close } from '@datapunt/asc-assets'
+import { Close } from '@amsterdam/asc-assets'
 import {
   breakpoint,
   Button,
@@ -9,7 +9,7 @@ import {
   themeColor,
   themeSpacing,
   TopBar,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 import CONSTANTS from '../../../shared/config/constants'

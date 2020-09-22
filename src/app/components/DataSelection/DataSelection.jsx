@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import { Alert, Heading, Paragraph, themeSpacing } from '@datapunt/asc-ui'
+import { Alert, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'

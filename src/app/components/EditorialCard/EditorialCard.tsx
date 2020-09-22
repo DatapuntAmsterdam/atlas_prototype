@@ -10,7 +10,7 @@ import {
   Paragraph,
   themeColor,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { CmsType, SpecialType } from '../../../shared/config/cms.config'

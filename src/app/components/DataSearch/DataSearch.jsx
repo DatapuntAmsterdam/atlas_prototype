@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react'
+import { Alert, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
-import { Alert, Paragraph, themeSpacing } from '@datapunt/asc-ui'
-import SearchList from '../SearchList'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import NotificationLevel from '../../models/notification'
+import SearchList from '../SearchList'
 
 const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)};

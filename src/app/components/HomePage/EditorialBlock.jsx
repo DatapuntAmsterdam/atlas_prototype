@@ -1,12 +1,12 @@
-import styled from 'styled-components'
-import { breakpoint, CardContainer, Column, Row, styles, themeColor } from '@datapunt/asc-ui'
+import { breakpoint, CardContainer, Column, Row, styles, themeColor } from '@amsterdam/asc-ui'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
 import useFromCMS from '../../utils/useFromCMS'
-import BlockHeading from './BlockHeading'
 import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
-import OverviewLink from './OverviewLink'
+import BlockHeading from './BlockHeading'
 import EditorialBlockCard from './EditorialBlockCard'
+import OverviewLink from './OverviewLink'
 
 const CardRow = styled.div`
   ${({ showError }) => showError && ErrorBackgroundCSS}

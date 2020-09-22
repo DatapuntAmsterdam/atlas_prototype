@@ -1,19 +1,19 @@
-import styled from 'styled-components'
 import {
   breakpoint,
   CardContainer,
   Column,
   Heading,
   Row,
+  styles,
   themeColor,
   themeSpacing,
-  styles,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React from 'react'
+import styled from 'styled-components'
+import { cmsConfig } from '../../../shared/config/config'
+import useFromCMS from '../../utils/useFromCMS'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import OrganizationCard from './OrganizationCard'
-import useFromCMS from '../../utils/useFromCMS'
-import { cmsConfig } from '../../../shared/config/config'
 
 const StyledCardContainer = styled(CardContainer)`
   background-color: ${themeColor('tint', 'level2')};

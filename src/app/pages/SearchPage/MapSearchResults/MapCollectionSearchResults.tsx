@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp, MapLayers } from '@datapunt/asc-assets'
+import { ChevronDown, ChevronUp, MapLayers } from '@amsterdam/asc-assets'
 import {
   breakpoint,
   Button,
@@ -9,7 +9,7 @@ import {
   Link,
   themeColor,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import environment from '../../../../environment'

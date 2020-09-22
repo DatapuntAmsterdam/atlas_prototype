@@ -1,4 +1,4 @@
-import { Label, Select, srOnlyStyle } from '@datapunt/asc-ui'
+import { Label, Select, srOnlyStyle } from '@amsterdam/asc-ui'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'

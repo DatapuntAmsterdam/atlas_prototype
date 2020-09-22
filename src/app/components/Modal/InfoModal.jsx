@@ -1,10 +1,10 @@
-import React from 'react'
+import { Close } from '@amsterdam/asc-assets'
+import { Button, Divider, Heading, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import { Divider, Button, Modal, TopBar, Heading, Paragraph } from '@datapunt/asc-ui'
-import { Close } from '@datapunt/asc-assets'
-import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
-import ModalBlock from './ModalBlock'
+import React from 'react'
 import CONSTANTS from '../../../shared/config/constants'
+import ModalBlock from './ModalBlock'
+import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
 
 const InfoModal = ({ open, handleClose, title, body }) => (
   <Modal

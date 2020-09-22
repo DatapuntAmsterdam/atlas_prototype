@@ -1,15 +1,15 @@
-import { Enlarge, Minimise } from '@datapunt/asc-assets'
-import { Row, Column, Heading, Link, themeColor, themeSpacing, Alert } from '@datapunt/asc-ui'
+import { Enlarge, Minimise } from '@amsterdam/asc-assets'
+import { Alert, Column, Heading, Link, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled, { css } from 'styled-components'
 import { SCOPES } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
 import { toConstructionFileViewer } from '../../../store/redux-first-router/actions'
-import ActionButton from '../ActionButton/ActionButton'
-import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
 import NotificationLevel from '../../models/notification'
+import ActionButton from '../ActionButton/ActionButton'
 import { ConstructionFileImage } from '../ConstructionFileDetail/ConstructionFileDetail'
+import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
 
 const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)} !important;

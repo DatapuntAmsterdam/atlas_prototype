@@ -1,9 +1,9 @@
+import { breakpoint, Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import styled, { css } from 'styled-components'
-import { breakpoint, perceivedLoading, themeColor, Link, themeSpacing } from '@datapunt/asc-ui'
-import { SizeOnBreakpoint } from '../TileGrid/TileGridStyle'
-import getImageFromCms from '../../utils/getImageFromCms'
-import TileLabel from './TileLabel'
 import environment from '../../../environment'
+import getImageFromCms from '../../utils/getImageFromCms'
+import { SizeOnBreakpoint } from '../TileGrid/TileGridStyle'
+import TileLabel from './TileLabel'
 
 type TileProps = {
   backgroundImage?: string

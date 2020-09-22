@@ -1,5 +1,5 @@
+import { Column, Row } from '@amsterdam/asc-ui'
 import React from 'react'
-import { Row, Column } from '@datapunt/asc-ui'
 import NavigationBlock from '../NavigationBlock'
 
 export default {

@@ -1,4 +1,4 @@
-import { themeSpacing } from '@datapunt/asc-ui'
+import { themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconMap } from '../../../../shared/assets/icons/data/IconMap.svg'

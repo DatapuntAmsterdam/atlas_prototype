@@ -1,4 +1,4 @@
-import { Link, perceivedLoading, themeSpacing } from '@datapunt/asc-ui'
+import { Link, perceivedLoading, themeSpacing } from '@amsterdam/asc-ui'
 import React, { useState } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'

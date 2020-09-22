@@ -7,12 +7,12 @@ import {
   SearchBarToggle,
   showAboveBackDrop,
   styles,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
+import { IDS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
-import { IDS } from '../../../shared/config/config'
 
 const Z_INDEX_OFFSET = 2 // Set a custom offset
 

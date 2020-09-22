@@ -1,15 +1,15 @@
-import React from 'react'
 import {
   Column,
-  Paragraph,
   CustomHTMLBlock,
   EditorialContent,
-  Heading,
   EditorialMetaList,
+  Heading,
+  Link,
+  Paragraph,
   themeColor,
   themeSpacing,
-  Link,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
+import React from 'react'
 import styled from 'styled-components'
 import ShareBar from '../../../components/ShareBar/ShareBar'
 import Video from '../../../components/Video/Video'

@@ -119,7 +119,7 @@ $clear-button-margin: 3px;
     top: $site-header-search-form-height - 5px;
 
     @media (max-width: 768px) {
-      top: 70px; // This is the height of the SearchBarMenu from @datapunt/asc-ui
+      top: 70px; // This is the height of the SearchBarMenu from @amsterdam/asc-ui
       width: 100%;
       border-left-width: 0;
       border-right-width: 0;

@@ -1,6 +1,6 @@
+import { Email, FacebookPadded, Linkedin, Twitter } from '@amsterdam/asc-assets'
+import { ContextMenuItem, Icon } from '@amsterdam/asc-ui'
 import React from 'react'
-import { FacebookPadded, Twitter, Linkedin, Email } from '@datapunt/asc-assets'
-import { ContextMenuItem, Icon } from '@datapunt/asc-ui'
 import getShareUrl from '../../../shared/services/share-url/share-url'
 
 const socialItemsArray = [

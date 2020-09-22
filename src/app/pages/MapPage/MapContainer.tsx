@@ -1,7 +1,7 @@
+import { Alert, Heading, hooks, Link } from '@amsterdam/asc-ui'
 import { Feature } from 'geojson'
 import React, { useEffect, useMemo, useReducer, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Alert, Heading, hooks, Link } from '@datapunt/asc-ui'
 import { Link as RouterLink } from 'react-router-dom'
 import {
   getMapLayers as fetchMapLayers,
@@ -10,12 +10,12 @@ import {
   MapLayer,
 } from '../../../map/services'
 import { getUser } from '../../../shared/ducks/user/user'
-import { mapLayersParam, panoFullScreenParam, polygonsParam, polylinesParam } from './query-params'
+import { toMap } from '../../../store/redux-first-router/actions'
 import useParam from '../../utils/useParam'
 import MapContext, { initialState, MapContextProps, MapState } from './MapContext'
 import MapPage from './MapPage'
+import { mapLayersParam, panoFullScreenParam, polygonsParam, polylinesParam } from './query-params'
 import buildLeafletLayers from './utils/buildLeafletLayers'
-import { toMap } from '../../../store/redux-first-router/actions'
 
 type Action =
   | { type: 'setPanelLayers'; payload: MapCollection[] }

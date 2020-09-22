@@ -1,7 +1,7 @@
-import React from 'react'
+import { Download } from '@amsterdam/asc-assets'
+import { Spinner } from '@amsterdam/asc-ui'
 import { shallow } from 'enzyme'
-import { Download } from '@datapunt/asc-assets'
-import { Spinner } from '@datapunt/asc-ui'
+import React from 'react'
 import DocumentCover from './DocumentCover'
 
 describe('DocumentCover', () => {

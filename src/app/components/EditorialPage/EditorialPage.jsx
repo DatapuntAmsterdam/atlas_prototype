@@ -1,4 +1,4 @@
-import { Container, themeColor } from '@datapunt/asc-ui'
+import { Container, themeColor } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -6,10 +6,10 @@ import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import environment from '../../../environment'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
+import { routing } from '../../routes'
 import getImageFromCms from '../../utils/getImageFromCms'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import { routing } from '../../routes'
 
 const BodyStyle = styled.div`
   background-color: ${themeColor('level', 'level1')}

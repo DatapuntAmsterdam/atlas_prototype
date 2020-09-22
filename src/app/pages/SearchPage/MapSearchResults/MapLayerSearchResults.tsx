@@ -1,4 +1,4 @@
-import { Link, themeSpacing } from '@datapunt/asc-ui'
+import { Link, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
 

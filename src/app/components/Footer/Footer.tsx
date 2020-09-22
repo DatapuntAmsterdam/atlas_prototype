@@ -11,7 +11,7 @@ import {
   Paragraph,
   Row,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
 import { FOOTER_LINKS, IDS } from '../../../shared/config/config'

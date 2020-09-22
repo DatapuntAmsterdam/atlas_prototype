@@ -1,4 +1,4 @@
-import { Link } from '@datapunt/asc-ui'
+import { Link } from '@amsterdam/asc-ui'
 import React, { MouseEvent, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'

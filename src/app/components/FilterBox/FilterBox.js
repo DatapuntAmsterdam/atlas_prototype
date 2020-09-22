@@ -1,5 +1,5 @@
+import { FilterBox as ASCFilterBox, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { FilterBox as ASCFilterBox, themeSpacing } from '@datapunt/asc-ui'
 
 const FilterBox = styled(ASCFilterBox)`
   width: 100%;

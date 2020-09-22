@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import {
   Card,
   CardContent,
@@ -8,9 +7,10 @@ import {
   styles,
   themeColor,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
+import styled from 'styled-components'
 
 const StyledCard = styled(Card)`
   width: 100%;

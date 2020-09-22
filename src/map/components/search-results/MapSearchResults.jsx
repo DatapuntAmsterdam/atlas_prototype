@@ -1,9 +1,9 @@
-import React from 'react'
+import { Alert } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import { Alert } from '@datapunt/asc-ui'
+import React from 'react'
+import NotificationLevel from '../../../app/models/notification'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
-import NotificationLevel from '../../../app/models/notification'
 
 const MapSearchResults = ({
   isEmbed,

@@ -1,15 +1,15 @@
-import { Column, Row } from '@datapunt/asc-ui'
+import { Column, Row } from '@amsterdam/asc-ui'
 import React from 'react'
 import { connect } from 'react-redux'
-import { getLocationPayload } from '../../../store/redux-first-router/selectors'
-import useFromCMS from '../../utils/useFromCMS'
-import EditorialPage from '../../components/EditorialPage/EditorialPage'
+import { SpecialType } from '../../../shared/config/cms.config'
 import { cmsConfig } from '../../../shared/config/config'
 import { toSpecialDetail } from '../../../store/redux-first-router/actions'
+import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
+import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import IFrame from '../../components/IFrame/IFrame'
+import useFromCMS from '../../utils/useFromCMS'
 import Animation from './specials/Animation'
-import { SpecialType } from '../../../shared/config/cms.config'
 
 const SpecialDetailPage = ({ id }) => {
   const { fetchData, results, loading, error } = useFromCMS(cmsConfig.SPECIAL, id)

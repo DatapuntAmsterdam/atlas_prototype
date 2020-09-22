@@ -1,20 +1,20 @@
+import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
+import { Icon } from '@amsterdam/asc-ui'
 import React from 'react'
-import { Api, Data, DocumentText, Map, Pano, Table } from '@datapunt/asc-assets'
-import { Icon } from '@datapunt/asc-ui'
-import {
-  toPanoramaAndPreserveQuery,
-  toArticleDetail,
-  toDatasetSearch,
-  toMapWithLegendOpen,
-  toPublicationSearch,
-  toCollectionSearch,
-  toSpecialSearch,
-  toArticleSearch,
-  toMapSearch,
-} from '../../../../store/redux-first-router/actions'
-import { NAVIGATION_LINKS } from '../../../../shared/config/config'
-import { routing as routes } from '../../../routes'
 import environment from '../../../../environment'
+import { NAVIGATION_LINKS } from '../../../../shared/config/config'
+import {
+  toArticleDetail,
+  toArticleSearch,
+  toCollectionSearch,
+  toDatasetSearch,
+  toMapSearch,
+  toMapWithLegendOpen,
+  toPanoramaAndPreserveQuery,
+  toPublicationSearch,
+  toSpecialSearch,
+} from '../../../../store/redux-first-router/actions'
+import { routing as routes } from '../../../routes'
 import decodeHTML from '../../../utils/decodeHTML'
 
 // The id's also represent the order in which they are displayed in the NavigationBlock on the homepage

@@ -1,4 +1,4 @@
-import { Alert, Heading, Paragraph } from '@datapunt/asc-ui'
+import { Alert, Heading, Paragraph } from '@amsterdam/asc-ui'
 import React from 'react'
 import NotificationLevel from '../../models/notification'
 import LoginLink from '../Links/LoginLink/LoginLink'

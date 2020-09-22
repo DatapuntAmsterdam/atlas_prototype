@@ -1,12 +1,12 @@
-import { MapPanelContent, MapPanelContentProps } from '@datapunt/arm-core'
+import { MapPanelContent, MapPanelContentProps } from '@amsterdam/arm-core'
 import React, { useContext, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import MapPanel from '../../../../map/containers/panel/MapPanel'
-import MapContext from '../MapContext'
-import useParam from '../../../utils/useParam'
-import { mapLayersParam, zoomParam } from '../query-params'
 import { getUser } from '../../../../shared/ducks/user/user'
+import useParam from '../../../utils/useParam'
+import MapContext from '../MapContext'
+import { mapLayersParam, zoomParam } from '../query-params'
 
 const StyledMapPanelContent = styled(MapPanelContent)`
   overflow: hidden; // This can be removed if the new design for the legend is added

@@ -1,5 +1,5 @@
+import { Link } from '@amsterdam/asc-ui'
 import React from 'react'
-import { Link } from '@datapunt/asc-ui'
 import RouterLink from 'redux-first-router-link'
 
 const ActionLink = ({ to, children, ...otherProps }) => (

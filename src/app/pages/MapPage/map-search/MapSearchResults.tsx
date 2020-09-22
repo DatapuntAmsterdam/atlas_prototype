@@ -1,5 +1,5 @@
-import { MapPanelContent } from '@datapunt/arm-core'
-import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import { MapPanelContent } from '@amsterdam/arm-core'
+import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
@@ -14,11 +14,11 @@ import formatNumber from '../../../../shared/services/number-formatter/number-fo
 import MoreResultsWhenLoggedIn from '../../../components/Alerts/MoreResultsWhenLoggedIn'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import ShowMore from '../../../components/ShowMore'
-import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
-import PanoramaPreview from './PanoramaPreview'
-import { Overlay } from '../types'
 import useParam from '../../../utils/useParam'
+import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import { locationParam } from '../query-params'
+import { Overlay } from '../types'
+import PanoramaPreview from './PanoramaPreview'
 
 const RESULT_LIMIT = 10
 

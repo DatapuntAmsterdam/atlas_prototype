@@ -1,4 +1,4 @@
-import { Spinner, themeColor } from '@datapunt/asc-ui'
+import { Spinner, themeColor } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 
 export const DEFAULT_SIZE = 36

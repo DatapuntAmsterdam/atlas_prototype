@@ -1,4 +1,4 @@
-import { useMapInstance } from '@datapunt/react-maps'
+import { useMapInstance } from '@amsterdam/react-maps'
 import { LatLngLiteral } from 'leaflet'
 import { useEffect } from 'react'
 

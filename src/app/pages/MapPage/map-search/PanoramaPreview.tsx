@@ -1,4 +1,4 @@
-import { Link, perceivedLoading, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
 import React, { useMemo } from 'react'
 import { Link as RouterLink } from 'react-router-dom'

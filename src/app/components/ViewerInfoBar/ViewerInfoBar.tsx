@@ -1,7 +1,7 @@
+import { breakpoint, themeSpacing } from '@amsterdam/asc-ui'
+import { LatLngLiteral } from 'leaflet'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { LatLngLiteral } from 'leaflet'
-import { breakpoint, themeSpacing } from '@datapunt/asc-ui'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import { dateToString } from '../../../shared/services/date-formatter/date-formatter'
 

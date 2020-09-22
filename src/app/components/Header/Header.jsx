@@ -4,7 +4,7 @@ import {
   Header as HeaderComponent,
   showAboveBackDrop,
   styles,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -40,7 +40,7 @@ const HeaderWrapper = styled.section`
 
 const StyledHeader = styled(HeaderComponent)`
   ${styles.HeaderNavigationStyle} {
-    // This must be added to the @datapunt/asc-ui project https://github.com/Amsterdam/amsterdam-styled-components/issues/165
+    // This must be added to the @amsterdam/asc-ui project https://github.com/Amsterdam/amsterdam-styled-components/issues/165
     @media screen and ${breakpoint('min-width', 'desktop')} {
       margin-left: 29px;
       margin-right: 29px;

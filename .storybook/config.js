@@ -1,10 +1,9 @@
-import React from 'react'
-import { addDecorator, configure } from '@storybook/react'
-import { GlobalStyle, ThemeProvider } from '@datapunt/asc-ui'
+import { GlobalStyle, ThemeProvider } from '@amsterdam/asc-ui'
 import { withA11y } from '@storybook/addon-a11y'
+import { addDecorator, configure } from '@storybook/react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import configureStore from '../src/store/store'
-import routes from '../src/app/routes'
 
 addDecorator(withA11y)
 

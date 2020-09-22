@@ -1,4 +1,4 @@
-import { Alert, Link, Paragraph } from '@datapunt/asc-ui'
+import { Alert, Link, Paragraph } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React, { Suspense } from 'react'
@@ -13,8 +13,8 @@ import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 import PAGES from './pages'
-import isIE from './utils/isIE'
 import { getRoute, mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
+import isIE from './utils/isIE'
 
 const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityContainer = React.lazy(() =>
@@ -55,7 +55,7 @@ const SearchPage = React.lazy(() =>
   import(/* webpackChunkName: "SearchPage" */ './pages/SearchPage/index'),
 )
 
-// The Container from @datapunt/asc-ui isnt used here as the margins added do not match the ones in the design
+// The Container from @amsterdam/asc-ui isnt used here as the margins added do not match the ones in the design
 // Tabindex is IE11 fix for skipnavigation focus
 const AppContainer = styled.main.attrs({ tabIndex: -1 })`
   flex-grow: 1;

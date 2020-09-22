@@ -1,5 +1,5 @@
-import { ChevronUp, Info } from '@datapunt/asc-assets'
-import { Alert, Icon, themeSpacing } from '@datapunt/asc-ui'
+import { ChevronUp, Info } from '@amsterdam/asc-assets'
+import { Alert, Icon, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
 import MapLegend from '../../components/legend/MapLegend'

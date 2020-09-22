@@ -4,7 +4,7 @@ import {
   Paragraph,
   themeColor,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
 import { Tile, TileLabel } from '../../components/Tile'

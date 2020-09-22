@@ -1,8 +1,8 @@
+import { Label, Select } from '@amsterdam/asc-ui'
 import React from 'react'
-import { Select, Label } from '@datapunt/asc-ui'
 import styled from 'styled-components'
 import { FilterProps } from '../models'
-import { formatOptionLabel, formatAllOptionLabel } from '../utils'
+import { formatAllOptionLabel, formatOptionLabel } from '../utils'
 
 const StyledLabel = styled(Label)`
   height: 0px;

@@ -9,7 +9,7 @@ import {
   Paragraph,
   themeColor,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React, { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'

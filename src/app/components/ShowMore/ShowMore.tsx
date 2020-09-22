@@ -1,5 +1,5 @@
-import { ChevronDown, ChevronUp } from '@datapunt/asc-assets'
-import { Button, Icon, svgFill, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import { ChevronDown, ChevronUp } from '@amsterdam/asc-assets'
+import { Button, Icon, svgFill, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React, { Children, useState } from 'react'
 import styled from 'styled-components'
 

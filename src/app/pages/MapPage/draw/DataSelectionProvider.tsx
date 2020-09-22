@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { useStateRef } from '@datapunt/arm-core'
+import { useStateRef } from '@amsterdam/arm-core'
 import { Feature } from 'geojson'
 import { LatLng, LatLngTuple } from 'leaflet'
 import React, { useCallback, useEffect, useState } from 'react'

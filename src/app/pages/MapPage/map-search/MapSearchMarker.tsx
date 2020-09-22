@@ -1,5 +1,5 @@
-import { MapPanelContext, Marker as ARMMarker } from '@datapunt/arm-core'
-import { useMapEvents } from '@datapunt/react-maps'
+import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
+import { useMapEvents } from '@amsterdam/react-maps'
 import { LeafletMouseEvent } from 'leaflet'
 import React, { useContext } from 'react'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'

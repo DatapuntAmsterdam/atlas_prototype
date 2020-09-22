@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { Link, List, ListItem } from '@datapunt/asc-ui'
+import { Link, List, ListItem } from '@amsterdam/asc-ui'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'

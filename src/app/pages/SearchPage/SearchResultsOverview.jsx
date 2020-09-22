@@ -1,4 +1,4 @@
-import { themeSpacing } from '@datapunt/asc-ui'
+import { themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'

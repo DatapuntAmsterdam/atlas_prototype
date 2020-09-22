@@ -1,14 +1,14 @@
-import styled from 'styled-components'
-import { breakpoint, styles, themeSpacing } from '@datapunt/asc-ui'
+import { breakpoint, styles, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'
+import styled from 'styled-components'
 import { cmsConfig } from '../../../shared/config/config'
 import { toArticleSearch } from '../../../store/redux-first-router/actions'
+import getImageFromCms from '../../utils/getImageFromCms'
 import useFromCMS from '../../utils/useFromCMS'
 import ErrorMessage, { ErrorBackgroundCSS } from '../ErrorMessage/ErrorMessage'
 import HighlightCard from './HighlightCard'
 import OverviewLink from './OverviewLink'
-import getImageFromCms from '../../utils/getImageFromCms'
 
 const HighlightBlockStyle = styled.div`
   position: relative;

@@ -1,6 +1,6 @@
-import React from 'react'
+import { Heading } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import { Heading } from '@datapunt/asc-ui'
+import React from 'react'
 import { SelectButton } from '../../../shared/components/select-button'
 
 function hasLayer(activeBaseLayer, baseLayers) {

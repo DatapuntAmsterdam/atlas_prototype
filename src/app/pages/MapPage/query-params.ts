@@ -1,4 +1,4 @@
-import { constants } from '@datapunt/arm-core'
+import { constants } from '@amsterdam/arm-core'
 import { LatLngLiteral, LatLngTuple } from 'leaflet'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { normalizeCoordinate } from '../../../shared/services/coordinate-reference-system'

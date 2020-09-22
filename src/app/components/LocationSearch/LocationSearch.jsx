@@ -1,4 +1,4 @@
-import { Alert, themeSpacing } from '@datapunt/asc-ui'
+import { Alert, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'

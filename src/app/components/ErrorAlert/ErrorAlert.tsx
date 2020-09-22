@@ -1,4 +1,4 @@
-import { Alert, Paragraph } from '@datapunt/asc-ui'
+import { Alert, Paragraph } from '@amsterdam/asc-ui'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'

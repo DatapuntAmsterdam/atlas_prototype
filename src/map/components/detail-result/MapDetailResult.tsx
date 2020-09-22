@@ -1,4 +1,4 @@
-import { Alert, Heading, Link, themeColor } from '@datapunt/asc-ui'
+import { Alert, Heading, Link, themeColor } from '@amsterdam/asc-ui'
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import {

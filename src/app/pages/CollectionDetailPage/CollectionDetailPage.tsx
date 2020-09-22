@@ -1,16 +1,16 @@
 /* eslint-disable camelcase */
+import { Link, Row, themeSpacing } from '@amsterdam/asc-ui'
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { Link, Row, themeSpacing } from '@datapunt/asc-ui'
 import { useSelector } from 'react-redux'
-import CardListBlock, { CMSCollectionList } from '../../components/CardList/CardListBlock'
-import ContentContainer from '../../components/ContentContainer/ContentContainer'
-import useFromCMS, { CMSResultItem } from '../../utils/useFromCMS'
+import styled from 'styled-components'
 import { cmsConfig } from '../../../shared/config/config'
 import { getLocationPayload } from '../../../store/redux-first-router/selectors'
-import CollectionTileGrid from './CollectionTileGrid'
+import CardListBlock, { CMSCollectionList } from '../../components/CardList/CardListBlock'
+import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import useDocumentTitle from '../../utils/useDocumentTitle'
+import useFromCMS, { CMSResultItem } from '../../utils/useFromCMS'
+import CollectionTileGrid from './CollectionTileGrid'
 
 const StyledRow = styled(Row)`
   // To center the ErrorMessage

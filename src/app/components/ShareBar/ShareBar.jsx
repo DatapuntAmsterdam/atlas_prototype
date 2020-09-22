@@ -1,11 +1,11 @@
-import React from 'react'
+import { Email, Facebook, Linkedin, Print, Twitter } from '@amsterdam/asc-assets'
+import { ShareButton, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled, { css } from 'styled-components'
-import { Facebook, Twitter, Linkedin, Email, Print } from '@datapunt/asc-assets'
-import { ShareButton, themeSpacing } from '@datapunt/asc-ui'
-import { hasPrintMode, showPrintMode, sharePage, isPrintMode } from '../../../shared/ducks/ui/ui'
+import { hasPrintMode, isPrintMode, sharePage, showPrintMode } from '../../../shared/ducks/ui/ui'
 import getShareUrl from '../../../shared/services/share-url/share-url'
 
 const ShareBarContainer = styled.div`

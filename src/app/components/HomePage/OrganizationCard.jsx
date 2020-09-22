@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
-import { Card, CardContent, Heading, Paragraph, themeSpacing } from '@datapunt/asc-ui'
+import { Card, CardContent, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
+import styled, { css } from 'styled-components'
 import OverviewLink from './OverviewLink'
 
 const StyledCard = styled(Card)`

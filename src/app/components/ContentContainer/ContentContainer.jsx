@@ -1,7 +1,7 @@
-import React from 'react'
+import { breakpoint, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
-import { breakpoint, themeSpacing } from '@datapunt/asc-ui'
 
 const StyledContainer = styled.div`
   width: 100%;

@@ -1,6 +1,5 @@
 import React from 'react'
-
-// Check if these icons must be moved to @datapunt/asc-assets
+// Check if these icons must be moved to @amsterdam/asc-assets
 import { ReactComponent as IconBuilding } from '../../../shared/assets/icons/data/IconBuilding.svg'
 import { ReactComponent as IconChurch } from '../../../shared/assets/icons/data/IconChurch.svg'
 import { ReactComponent as IconConstruction } from '../../../shared/assets/icons/data/IconConstruction.svg'

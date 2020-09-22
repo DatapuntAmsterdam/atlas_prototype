@@ -1,8 +1,8 @@
+import { Column, Heading, Link, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
-import { Row, Column, Heading, Paragraph, Link, themeSpacing } from '@datapunt/asc-ui'
-import ShareBar from '../components/ShareBar/ShareBar'
 import ContentContainer from '../components/ContentContainer/ContentContainer'
+import ShareBar from '../components/ShareBar/ShareBar'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(5)};

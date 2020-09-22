@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { breakpoint, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import { breakpoint, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
+import styled from 'styled-components'
 import NavigationCard from './NavigationCard'
 import navigationLinks from './services/navigationLinks'
 

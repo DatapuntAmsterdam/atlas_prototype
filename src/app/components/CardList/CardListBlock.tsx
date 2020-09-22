@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
+import { breakpoint, Column, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
-import { Row, Column, themeColor, themeSpacing, breakpoint } from '@datapunt/asc-ui'
 import styled from 'styled-components'
-import CardList from './CardList'
 import { CMSResultItem } from '../../utils/useFromCMS'
+import CardList from './CardList'
 
 export type CMSCollectionList = { field_title: string; field_content: CMSResultItem[] }
 

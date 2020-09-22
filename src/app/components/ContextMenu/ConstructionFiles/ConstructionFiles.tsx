@@ -1,5 +1,5 @@
-import { ChevronDown, Download, Ellipsis, Print } from '@datapunt/asc-assets'
-import { ContextMenu, ContextMenuItem, Icon } from '@datapunt/asc-ui'
+import { ChevronDown, Download, Ellipsis, Print } from '@amsterdam/asc-assets'
+import { ContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { sharePage, showPrintMode } from '../../../../shared/ducks/ui/ui'

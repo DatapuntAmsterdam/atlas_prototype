@@ -6,7 +6,7 @@ import {
   styles,
   themeColor,
   Typography,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'

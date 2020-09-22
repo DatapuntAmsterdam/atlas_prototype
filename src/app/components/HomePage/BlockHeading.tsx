@@ -1,5 +1,5 @@
+import { breakpoint, Heading, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { Heading, breakpoint, themeSpacing } from '@datapunt/asc-ui'
 
 const BlockHeading = styled(Heading)`
   width: 100%;

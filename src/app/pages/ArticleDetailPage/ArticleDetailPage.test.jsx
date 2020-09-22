@@ -1,11 +1,11 @@
-import React from 'react'
-import { mount, shallow } from 'enzyme'
-import configureMockStore from 'redux-mock-store'
-import { ThemeProvider } from '@datapunt/asc-ui'
+import { ThemeProvider } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import ArticleDetailPage from './ArticleDetailPage'
-import useFromCMS from '../../utils/useFromCMS'
+import { mount, shallow } from 'enzyme'
+import React from 'react'
+import configureMockStore from 'redux-mock-store'
 import useDocumentTitle from '../../utils/useDocumentTitle'
+import useFromCMS from '../../utils/useFromCMS'
+import ArticleDetailPage from './ArticleDetailPage'
 
 jest.mock('../../utils/useFromCMS')
 jest.mock('../../utils/useDocumentTitle')

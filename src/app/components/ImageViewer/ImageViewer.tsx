@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import { Close, Download, Enlarge, Minimise } from '@datapunt/asc-assets'
-import { Button, themeColor } from '@datapunt/asc-ui'
+import { Close, Download, Enlarge, Minimise } from '@amsterdam/asc-assets'
+import { Button, themeColor } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import OpenSeadragon, { Viewer } from 'openseadragon'
 import React from 'react'

@@ -1,4 +1,4 @@
-import { Container, Row } from '@datapunt/asc-ui'
+import { Container, Row } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { clearAllBodyScrollLocks, enableBodyScroll } from 'body-scroll-lock'
 import React, { memo, useEffect, useState } from 'react'

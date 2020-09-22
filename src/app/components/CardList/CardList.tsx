@@ -1,4 +1,4 @@
-import { Card, CardContent, Heading, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import { Card, CardContent, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
 import { CMSResultItem } from '../../utils/useFromCMS'

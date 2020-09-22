@@ -1,4 +1,3 @@
-import styled, { css } from 'styled-components'
 import {
   breakpoint,
   Card,
@@ -10,10 +9,11 @@ import {
   Paragraph,
   themeColor,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import React from 'react'
-import getImageFromCms from '../../utils/getImageFromCms'
+import styled, { css } from 'styled-components'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
+import getImageFromCms from '../../utils/getImageFromCms'
 import { CMSResultItem } from '../../utils/useFromCMS'
 
 const StyledHeading = styled(Heading)`

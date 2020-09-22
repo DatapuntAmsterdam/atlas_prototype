@@ -1,4 +1,4 @@
-import { Heading, Link, List, Paragraph, themeSpacing, Typography } from '@datapunt/asc-ui'
+import { Heading, Link, List, Paragraph, themeSpacing, Typography } from '@amsterdam/asc-ui'
 import React from 'react'
 import RouterLink, { To } from 'redux-first-router-link'
 import styled from 'styled-components'

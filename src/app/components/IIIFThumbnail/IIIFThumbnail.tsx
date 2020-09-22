@@ -1,6 +1,6 @@
+import { Card, CardContent, CardMedia, Image, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
-import { Card, CardMedia, Image, CardContent, themeColor, themeSpacing } from '@datapunt/asc-ui'
 import getState from '../../../shared/services/redux/get-state'
 
 type Thumbnail = {

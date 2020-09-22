@@ -21,15 +21,15 @@ function modulePath(name: string) {
 // Some dependencies are written in ES2015+ syntax and will need to be included explicitly.
 // Adding them to this config will transpile and add polyfills to the code if necessary.
 const modernModules = [
-  '@datapunt/arm-cluster',
-  '@datapunt/arm-core',
-  '@datapunt/arm-draw',
-  '@datapunt/arm-nontiled',
-  '@datapunt/asc-assets',
-  '@datapunt/asc-ui',
+  '@amsterdam/arm-cluster',
+  '@amsterdam/arm-core',
+  '@amsterdam/arm-draw',
+  '@amsterdam/arm-nontiled',
+  '@amsterdam/asc-assets',
+  '@amsterdam/asc-ui',
   '@datapunt/matomo-tracker-js',
   '@datapunt/matomo-tracker-react',
-  '@datapunt/react-maps',
+  '@amsterdam/react-maps',
   'body-scroll-lock',
   'escape-string-regexp',
   'redux-first-router',

@@ -1,12 +1,12 @@
-import React from 'react'
+import { Close } from '@amsterdam/asc-assets'
+import { Button, Divider, Heading, Link, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import { Button, Divider, Modal, TopBar, Heading, Paragraph, Link } from '@datapunt/asc-ui'
-import { Close } from '@datapunt/asc-assets'
+import React from 'react'
 import RouterLink from 'redux-first-router-link'
-import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
-import ModalBlock from './ModalBlock'
-import { toHelpPage } from '../../../store/redux-first-router/actions'
 import CONSTANTS from '../../../shared/config/constants'
+import { toHelpPage } from '../../../store/redux-first-router/actions'
+import ModalBlock from './ModalBlock'
+import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
 
 export const openFeedbackForm = () => {
   const openFeedbackFormEvent = new CustomEvent('openForm_feedbackModal')

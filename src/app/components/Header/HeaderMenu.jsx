@@ -1,4 +1,4 @@
-import { ChevronRight } from '@datapunt/asc-assets'
+import { ChevronRight } from '@amsterdam/asc-assets'
 import {
   MenuButton,
   MenuFlyOut,
@@ -6,7 +6,7 @@ import {
   MenuItem,
   MenuToggle,
   themeColor,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'

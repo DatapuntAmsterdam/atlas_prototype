@@ -1,13 +1,13 @@
-import React from 'react'
-import { mount, shallow } from 'enzyme'
-import configureMockStore from 'redux-mock-store'
-import { ThemeProvider } from '@datapunt/asc-ui'
+import { ThemeProvider } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import PublicationDetailPage from './PublicationDetailPage'
-import useFromCMS from '../../utils/useFromCMS'
+import { mount, shallow } from 'enzyme'
+import React from 'react'
+import configureMockStore from 'redux-mock-store'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import useDownload from '../../utils/useDownload'
+import useFromCMS from '../../utils/useFromCMS'
+import PublicationDetailPage from './PublicationDetailPage'
 
 jest.mock('../../utils/useFromCMS')
 jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')

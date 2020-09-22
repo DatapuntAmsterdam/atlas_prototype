@@ -1,11 +1,9 @@
-import React from 'react'
+import { ChevronDown, Ellipsis, Embed, Print } from '@amsterdam/asc-assets'
+import { ContextMenu as ContextMenuComponent, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Print, Embed, Ellipsis, ChevronDown } from '@datapunt/asc-assets'
-import { ContextMenu as ContextMenuComponent, ContextMenuItem, Icon } from '@datapunt/asc-ui'
-
-import socialItems from '../socialItems'
 import {
   hasEmbedMode,
   hasPrintMode,
@@ -13,6 +11,7 @@ import {
   showEmbedPreview,
   showPrintMode,
 } from '../../../../shared/ducks/ui/ui'
+import socialItems from '../socialItems'
 
 const Map = ({
   openSharePage,

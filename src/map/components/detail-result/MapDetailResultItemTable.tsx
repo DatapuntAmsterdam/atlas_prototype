@@ -1,4 +1,4 @@
-import { Divider } from '@datapunt/asc-ui'
+import { Divider } from '@amsterdam/asc-ui'
 import React, { Fragment } from 'react'
 import { DetailResultItemTable } from '../../types/details'
 

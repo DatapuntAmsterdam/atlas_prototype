@@ -1,5 +1,5 @@
-import { MapPanelContent } from '@datapunt/arm-core'
-import { Alert, Heading, Link, Paragraph, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import { MapPanelContent } from '@amsterdam/arm-core'
+import { Alert, Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React, { Fragment, useContext, useMemo } from 'react'
 import styled from 'styled-components'
 import {

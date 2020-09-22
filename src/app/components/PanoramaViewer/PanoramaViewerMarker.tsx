@@ -1,5 +1,5 @@
-import { Marker } from '@datapunt/arm-core'
-import { useMapEvents } from '@datapunt/react-maps'
+import { Marker } from '@amsterdam/arm-core'
+import { useMapEvents } from '@amsterdam/react-maps'
 import { Icon, Marker as LeafletMarker } from 'leaflet'
 import 'leaflet-rotatedmarker'
 import React, { useEffect, useState } from 'react'

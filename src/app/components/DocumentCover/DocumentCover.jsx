@@ -1,7 +1,7 @@
+import { Download } from '@amsterdam/asc-assets'
+import { breakpoint, Button, Image, Spinner, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
-import { Button, Spinner, Image, themeColor, themeSpacing, breakpoint } from '@datapunt/asc-ui'
-import { Download } from '@datapunt/asc-assets'
 
 const DocumentCoverStyle = styled.div`
   display: flex;

@@ -1,4 +1,4 @@
-import { ChevronRight } from '@datapunt/asc-assets'
+import { ChevronRight } from '@amsterdam/asc-assets'
 import {
   breakpoint,
   Card,
@@ -13,7 +13,7 @@ import {
   svgFill,
   themeColor,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import RouterLink from 'redux-first-router-link'

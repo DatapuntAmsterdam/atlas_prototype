@@ -1,5 +1,5 @@
+import { Container, Row } from '@amsterdam/asc-ui'
 import React from 'react'
-import { Container, Row } from '@datapunt/asc-ui'
 import CollectionTileGrid from '../../pages/CollectionDetailPage/CollectionTileGrid'
 import { CMSResultItem } from '../../utils/useFromCMS'
 

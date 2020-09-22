@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@datapunt/asc-ui'
+import { ThemeProvider } from '@amsterdam/asc-ui'
 import { render } from '@testing-library/react'
 import React from 'react'
 import SearchBar from './SearchBar'

@@ -1,4 +1,4 @@
-import { Checkbox, Label } from '@datapunt/asc-ui'
+import { Checkbox, Label } from '@amsterdam/asc-ui'
 import React from 'react'
 import { FilterProps } from '../models'
 import { formatOptionLabel } from '../utils'

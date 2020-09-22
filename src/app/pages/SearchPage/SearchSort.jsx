@@ -1,9 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
+import { breakpoint, Label, Select, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { breakpoint, Label, Select, themeColor, themeSpacing } from '@datapunt/asc-ui'
+import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setSort, setPage } from './SearchPageDucks'
+import styled from 'styled-components'
+import { setPage, setSort } from './SearchPageDucks'
 
 const SelectboxWrapper = styled.div`
   display: flex;

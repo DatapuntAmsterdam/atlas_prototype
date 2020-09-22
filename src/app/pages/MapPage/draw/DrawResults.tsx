@@ -1,5 +1,5 @@
-import { MapPanelContent, Marker } from '@datapunt/arm-core'
-import { Table } from '@datapunt/asc-assets'
+import { MapPanelContent, Marker } from '@amsterdam/arm-core'
+import { Table } from '@amsterdam/asc-assets'
 import {
   Accordion,
   AccordionWrapper,
@@ -13,7 +13,7 @@ import {
   Paragraph,
   Select,
   themeSpacing,
-} from '@datapunt/asc-ui'
+} from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import L, { LatLng, LatLngExpression } from 'leaflet'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
@@ -26,10 +26,10 @@ import LoginLink from '../../../components/Links/LoginLink/LoginLink'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import NotificationLevel from '../../../models/notification'
 import formatCount from '../../../utils/formatCount'
-import DataSelectionContext from './DataSelectionContext'
-import { Overlay } from '../types'
 import config, { AuthScope, DataSelectionType } from '../config'
 import MapContext from '../MapContext'
+import { Overlay } from '../types'
+import DataSelectionContext from './DataSelectionContext'
 
 const ResultLink = styled(RouterLink)`
   width: 100%;

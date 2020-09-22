@@ -1,5 +1,5 @@
+import { Link, Paragraph } from '@amsterdam/asc-ui'
 import React from 'react'
-import { Paragraph, Link } from '@datapunt/asc-ui'
 import ContentPage from './ContentPage'
 
 const NotFoundPage = () => (
