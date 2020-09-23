@@ -59,7 +59,7 @@
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "history": "4.10.1",
-    "isomorphic-fetch": "2.2.1",
+    "isomorphic-fetch": "3.0.0",
     "json-api-normalize": "1.1.5",
     "leaflet": "1.7.1",
     "leaflet-draw": "1.0.0",
