@@ -161,7 +161,7 @@
     "eslint-config-standard": "14.1.1",
     "eslint-formatter-pretty": "4.0.0",
     "eslint-plugin-angular": "4.0.1",
-    "eslint-plugin-cypress": "2.11.1",
+    "eslint-plugin-cypress": "2.11.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jasmine": "4.1.1",
     "eslint-plugin-jsx-a11y": "6.3.1",
