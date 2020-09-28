@@ -68,7 +68,7 @@
     "leaflet.nontiledlayer": "1.0.8",
     "lint-staged": "10.4.0",
     "lodash": "^4.17.20",
-    "marked": "^1.1.1",
+    "marked": "^1.2.0",
     "marzipano": "^0.9.1",
     "objectFitPolyfill": "2.3.0",
     "openseadragon": "2.4.2",
