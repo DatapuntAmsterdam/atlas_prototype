@@ -109,7 +109,7 @@
     "@storybook/storybook-deployer": "^2.8.6",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/react": "^11.0.4",
-    "@testing-library/react-hooks": "3.4.1",
+    "@testing-library/react-hooks": "3.4.2",
     "@types/cssnano": "^4.0.0",
     "@types/deep-equal": "^1.0.1",
     "@types/enzyme": "^3.10.7",
