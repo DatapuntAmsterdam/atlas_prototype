@@ -1,6 +1,7 @@
 import { Alert, Heading, Link, themeColor } from '@amsterdam/asc-ui'
-import React, { Fragment } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import styled from 'styled-components'
+import { v4 as uuid } from 'uuid'
 import {
   DetailResult,
   DetailResultItem,
@@ -70,12 +71,14 @@ function renderItem(item: DetailResultItem, index: number) {
     case DetailResultItemType.Heading:
       return renderHeadingItem(item, index)
     default:
-      throw new Error('Unable to render map detail pane, encountered unknown item type.')
+      // Don't throw error if component doesn't exist
+      return null
   }
 }
 
 function renderDefaultItem(item: DetailResultItemDefault) {
-  const { value } = item
+  const { value, title } = item
+  const uid = useMemo(() => uuid(), [])
 
   // TODO: This should be changed so that items without values are never added in the first place.
   // Skip items that have empty values.
@@ -85,14 +88,14 @@ function renderDefaultItem(item: DetailResultItemDefault) {
 
   if (Array.isArray(value)) {
     return (
-      <Fragment key={item.label}>
-        <h4 className="map-detail-result__category-title">{item.label}</h4>
+      <Fragment key={uid}>
+        <h4 className="map-detail-result__category-title">{title}</h4>
         {value.map((subItem) => renderDefaultItem(subItem))}
       </Fragment>
     )
   }
 
-  return <MapDetailResultItem key={item.label} item={item} />
+  return <MapDetailResultItem key={uid} item={item} />
 }
 
 const DefinitionListHeading = styled(Heading)`
@@ -139,7 +142,7 @@ const StyledHeading = styled(Heading)`
 function renderHeadingItem(item: DetailResultItemHeading, index: number) {
   return (
     <li key={index} className="map-detail-result__item">
-      <StyledHeading forwardedAs="h3">{item.value}</StyledHeading>
+      <StyledHeading forwardedAs="h3">{item.title}</StyledHeading>
     </li>
   )
 }

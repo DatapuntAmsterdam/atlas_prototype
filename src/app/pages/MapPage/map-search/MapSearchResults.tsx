@@ -3,6 +3,7 @@ import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/a
 import { LatLngLiteral } from 'leaflet'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import mapSearch, {
   MapSearchCategory,
@@ -19,6 +20,8 @@ import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/useProm
 import { locationParam } from '../query-params'
 import { Overlay } from '../types'
 import PanoramaPreview from './PanoramaPreview'
+import buildDetailUrl from '../detail/buildDetailUrl'
+import { getDetailPageData } from '../../../../store/redux-first-router/actions'
 
 const RESULT_LIMIT = 10
 
@@ -149,17 +152,25 @@ function renderResponse({ results }: MapSearchResponse) {
 function renderResultItems(results: MapSearchResult[]) {
   return (
     <ShowMore limit={RESULT_LIMIT}>
-      {results.map((result) => (
-        // TODO: Actually link to the details page for the result.
-        <ResultLink key={result.type + result.label} href="/" inList>
-          {result.label}
-          {result.statusLabel && (
-            <>
-              &nbsp;<StatusLabel>({result.statusLabel})</StatusLabel>
-            </>
-          )}
-        </ResultLink>
-      ))}
+      {results.map((result) => {
+        const { type, subtype, id } = getDetailPageData(result.uri)
+        return (
+          // @ts-ignore
+          <ResultLink
+            key={result.type + result.label}
+            forwardedAs={RouterLink}
+            to={buildDetailUrl(`${type}/${subtype}/${id}`)}
+            inList
+          >
+            {result.label}
+            {result.statusLabel && (
+              <>
+                &nbsp;<StatusLabel>({result.statusLabel})</StatusLabel>
+              </>
+            )}
+          </ResultLink>
+        )
+      })}
     </ShowMore>
   )
 }

@@ -1,0 +1,65 @@
+import React, { useState } from 'react'
+import { Alert, Button, Heading, Link, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
+import styled from 'styled-components'
+import { ReactComponent as Stelselpedia } from '../../../../shared/assets/icons/stelselpedia.svg'
+import { ReactComponent as Metadata } from '../../../../shared/assets/icons/metadata.svg'
+import DetailDefinitionList from './DetailDefinitionList'
+import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
+import DetailSpacer from './DetailSpacer'
+import { Definition } from '../../../../detail/services/glossary.constant'
+
+const StyledAlert = styled(Alert)`
+  margin: ${themeSpacing(2, 0)};
+`
+
+export enum InfoBoxType {
+  Question = 'question',
+  Exclamation = 'exclamation',
+}
+
+export type InfoBoxProps = {
+  type?: InfoBoxType
+  meta?: DetailResultItemDefinitionListEntry[]
+} & Pick<Definition, 'url' | 'description' | 'plural'>
+
+const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, type, description, url, meta }) => {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Button
+        type="button"
+        variant="blank"
+        title="Meer info"
+        size={32}
+        iconSize={26}
+        onClick={() => setOpen(!open)}
+        // Todo: add questionmark icon here
+        icon={type === InfoBoxType.Exclamation ? <Metadata /> : <Stelselpedia />}
+      />
+      {open && (
+        <StyledAlert dismissible onDismiss={() => setOpen(false)} level="normal">
+          <Heading styleAs="h3" as="h6">
+            Uitleg over {plural}
+          </Heading>
+          {description && <Paragraph>{description}</Paragraph>}
+          {url && (
+            <Link href={url} target="_blank" inList>
+              Lees verder op stelselpedia
+            </Link>
+          )}
+          {!!meta?.length && (
+            <>
+              <DetailSpacer />
+              <Heading styleAs="h3" as="h6">
+                Metadata
+              </Heading>
+              <DetailDefinitionList entries={meta} />
+            </>
+          )}
+        </StyledAlert>
+      )}
+    </>
+  )
+}
+
+export default DetailInfoBox

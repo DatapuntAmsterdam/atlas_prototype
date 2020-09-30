@@ -17,7 +17,7 @@ export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral
 }
 
-const PreviewContainer = styled.div`
+export const PreviewContainer = styled.div`
   position: relative;
   width: 100%;
   height: 160px;

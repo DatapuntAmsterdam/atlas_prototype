@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle,camelcase */
 import { LatLngLiteral } from 'leaflet'
 import NotificationLevel from '../../app/models/notification'
 import getFileName from '../../app/utils/getFileName'
@@ -8,13 +9,14 @@ import formatDate from '../../shared/services/date-formatter/date-formatter'
 import {
   DetailResult,
   DetailResultItem,
+  DetailResultItemDefinitionListEntry,
+  DetailResultItemPaginatedData,
   DetailResultItemType,
   DetailResultNotification,
 } from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
 import categoryLabels from './map-search/category-labels'
-import { fetchDetailData } from './map/fetchDetails'
-import { getServiceDefinition } from './map/getServiceDefinition'
+import { fetchDetailData, getServiceDefinition } from './map'
 import {
   adressenPand,
   adressenVerblijfsobject,
@@ -35,6 +37,11 @@ import {
   winkelgebied,
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
+import { getListFromApi } from '../../app/pages/MapPage/detail/api'
+import GLOSSARY, { Definition } from '../../detail/services/glossary.constant'
+import { getDetailPageData } from '../../store/redux-first-router/actions'
+import { InfoBoxProps, InfoBoxType } from '../../app/pages/MapPage/detail/DetailInfoBox'
+import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -96,6 +103,100 @@ export interface ServiceDefinition {
   normalization?: (result: any) => any | Promise<any>
   mapDetail: (result: any, location: LatLngLiteral) => DetailResult | Promise<DetailResult>
 }
+
+const buildMetaData = (
+  result: any,
+  metadata?: Array<keyof typeof GLOSSARY.META>,
+): DetailResultItemDefinitionListEntry[] =>
+  metadata?.length
+    ? metadata
+        .map((meta) => ({
+          term: GLOSSARY.META[meta].label,
+          // @ts-ignore
+          description: GLOSSARY.META[meta].filter
+            ? // @ts-ignore
+              GLOSSARY.META[meta].filter!(result[meta])
+            : result[meta],
+        }))
+        .filter(({ description }) => description)
+    : []
+
+const getInfoBox = (
+  { description, url, plural }: Partial<Definition>,
+  type: InfoBoxType = InfoBoxType.Question,
+): InfoBoxProps => ({
+  description,
+  url,
+  plural,
+  type,
+})
+
+const getPaginatedListBlock = (
+  result: any,
+  apiUrl: string,
+  { description, url, plural }: Definition,
+  gridArea: string = 'auto / 1 / auto / 1',
+  pageSize: number = 10,
+): DetailResultItemPaginatedData => ({
+  type: DetailResultItemType.PaginatedData,
+  getData: getListFromApi(result, apiUrl),
+  pageSize,
+  gridArea,
+  toView: (data: any) => ({
+    title: plural,
+    type: DetailResultItemType.LinkList,
+    links: data,
+    infoBox: getInfoBox({ description, url, plural }),
+  }),
+})
+
+const getLocationDefinitionListBlock = (result: any, gridArea: string) => {
+  const buurt = {
+    config: GLOSSARY.DEFINITIONS.BUURT,
+    value: result.buurt || result._buurt,
+  }
+  const wijk = {
+    config: GLOSSARY.DEFINITIONS.BUURTCOMBINATIE,
+    value: result.buurtcombinatie || result._buurtcombinatie,
+  }
+  const stadsdeel = {
+    config: GLOSSARY.DEFINITIONS.STADSDEEL,
+    value: result.stadsdeel || result._stadsdeel,
+  }
+
+  const gebiedsgerichtwerken = {
+    config: GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN,
+    value: result.gebiedsgerichtwerken || result._gebiedsgerichtwerken,
+  }
+
+  const items = [stadsdeel, wijk, buurt, gebiedsgerichtwerken].filter((item) => item.value)
+
+  return {
+    title: 'Ligt in',
+    type: DetailResultItemType.DefinitionList,
+    entries: items.map(({ config, value }) => {
+      const { type, subtype, id } = getDetailPageData(value._links.self.href)
+      return {
+        term: config.singular,
+        description: value._display,
+        link: buildDetailUrl(`${type}/${subtype}/${id}`),
+      }
+    }),
+    gridArea,
+  }
+}
+
+const gebiedInBeeldBlock = {
+  type: DetailResultItemType.LinkList,
+  title: 'Gebied in beeld',
+  links: [
+    {
+      external: true,
+      url: 'https://gebiedinbeeld.amsterdam.nl/#/dashboard',
+      title: 'Ga naar gebied in beeld',
+    },
+  ],
+} as any // Todo: fix type error
 
 const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.adressenLigplaats]: {
@@ -175,41 +276,41 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           {
             type: DetailResultItemType.Default,
-            label: 'Gebruiksdoel',
+            title: 'Gebruiksdoel',
             value: result.verblijfsobject ? result.verblijfsobject.gebruiksdoelen : false,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Soort object (feitelijk gebruik)',
+            title: 'Soort object (feitelijk gebruik)',
             value: result.verblijfsobject ? result.verblijfsobject.gebruik : false,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Status',
+            title: 'Status',
             value: result.verblijfsobject ? result.verblijfsobject.status : false,
             status: result.verblijfsobject && result.verblijfsobject.statusLevel,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Type adres',
+            title: 'Type adres',
             value: result.type_adres,
             status: result.isNevenadres ? NotificationLevel.Attention : '',
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Indicatie geconstateerd',
+            title: 'Indicatie geconstateerd',
             value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
             status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Aanduiding in onderzoek',
+            title: 'Aanduiding in onderzoek',
             value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
             status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Oppervlakte',
+            title: 'Oppervlakte',
             value: result.verblijfsobject ? result.verblijfsobject.size : false,
           },
         ],
@@ -256,41 +357,41 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           {
             type: DetailResultItemType.Default,
-            label: 'Gebruiksdoel',
+            title: 'Gebruiksdoel',
             value: result.gebruiksdoelen,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Soort object (feitelijk gebruik)',
+            title: 'Soort object (feitelijk gebruik)',
             value: result.gebruik || '',
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Status',
+            title: 'Status',
             value: result.status ? result.status : false,
             status: result.statusLevel,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Type adres',
+            title: 'Type adres',
             value: result.typeAdres,
             status: result.isNevenadres ? NotificationLevel.Attention : '',
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Indicatie geconstateerd',
+            title: 'Indicatie geconstateerd',
             value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
             status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Aanduiding in onderzoek',
+            title: 'Aanduiding in onderzoek',
             value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
             status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Oppervlakte',
+            title: 'Oppervlakte',
             value: result.size,
           },
         ],
@@ -304,7 +405,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.Default,
-          label: 'Naam 24-posities (NEN)',
+          title: 'Naam 24-posities (NEN)',
           value: result.naam_24_posities,
         },
       ],
@@ -329,17 +430,17 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           {
             type: DetailResultItemType.Default,
-            label: 'Oorspronkelijk bouwjaar',
+            title: 'Oorspronkelijk bouwjaar',
             value: result.year,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Naam',
+            title: 'Naam',
             value: result.pandnaam,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Status',
+            title: 'Status',
             value: result.status ? result.status : false,
             status: result.statusLevel,
           },
@@ -372,13 +473,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           {
             type: DetailResultItemType.Default,
-            label: 'Indicatie geconstateerd',
+            title: 'Indicatie geconstateerd',
             value: result.indicatie_geconstateerd ? 'Ja' : 'Nee',
             status: result.indicatie_geconstateerd ? NotificationLevel.Error : '',
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Aanduiding in onderzoek',
+            title: 'Aanduiding in onderzoek',
             value: result.aanduiding_in_onderzoek ? 'Ja' : 'Nee',
             status: result.aanduiding_in_onderzoek ? NotificationLevel.Error : '',
           },
@@ -691,27 +792,78 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.gebiedenBouwblok]: {
+    type: 'gebieden/bouwblok',
+    endpoint: 'gebieden/bouwblok',
     mapDetail: (result) => ({
       title: categoryLabels.bouwblok.singular,
       subTitle: result._display,
-      items: [],
+      items: [
+        getLocationDefinitionListBlock(result, '1 / 1 / 3 / 1'),
+        getPaginatedListBlock(result, result?.panden?.href, GLOSSARY.DEFINITIONS.PAND),
+        getPaginatedListBlock(result, result?.meetbouten, GLOSSARY.DEFINITIONS.MEETBOUT),
+      ],
     }),
   },
   [endpointTypes.gebiedenBuurt]: {
+    type: 'gebieden/buurt',
+    endpoint: 'gebieden/buurt',
     mapDetail: (result) => ({
       title: 'Buurt',
       subTitle: result._display,
-      items: [{ type: DetailResultItemType.Default, label: 'Code', value: result.volledige_code }],
+      infobox: {
+        ...getInfoBox(GLOSSARY.DEFINITIONS.BUURT, InfoBoxType.Exclamation),
+        meta: buildMetaData(result, GLOSSARY.DEFINITIONS.BUURT.meta),
+      },
+      items: [
+        {
+          type: DetailResultItemType.DefinitionList,
+          entries: [{ term: 'Volledige code', description: result.volledige_code }],
+          gridArea: '1 / 1 / 1 / 2',
+        },
+        getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
+        getPaginatedListBlock(result, result?.bouwblokken?.href, GLOSSARY.DEFINITIONS.BOUWBLOK),
+        {
+          type: DetailResultItemType.ShowInTable,
+          filters: {
+            key: 'buurt_naam',
+            value: result.naam,
+          },
+        },
+        gebiedInBeeldBlock,
+      ],
     }),
   },
   [endpointTypes.gebiedenGebiedsgerichtWerken]: {
-    mapDetail: (result) => ({
-      title: 'Gebiedsgerichtwerken-gebied',
-      subTitle: result._display,
-      items: [{ type: DetailResultItemType.Default, label: 'Code', value: result.code }],
-    }),
+    type: 'gebieden/gebiedsgerichtwerken',
+    endpoint: 'gebieden/gebiedsgerichtwerken',
+    mapDetail: (result) => {
+      return {
+        title: 'Gebiedsgerichtwerken-gebied',
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.DefinitionList,
+            entries: [{ term: 'Code', description: result.code }],
+            gridArea: '1 / 1 / 1 / 3',
+          },
+          getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
+
+          {
+            type: DetailResultItemType.ShowInTable,
+            filters: {
+              key: 'ggw_naam',
+              value: result.naam,
+            },
+          },
+          gebiedInBeeldBlock,
+          getPaginatedListBlock(result, result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
+        ],
+      }
+    },
   },
   [endpointTypes.gebiedenGrootstedelijk]: {
+    type: 'gebieden/grootstedelijkgebied',
+    endpoint: 'gebieden/grootstedelijkgebied',
     mapDetail: (result) => ({
       title: 'Grootstedelijk gebied',
       subTitle: result._display,
@@ -719,11 +871,37 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.gebiedenStadsdeel]: {
-    mapDetail: (result) => ({
-      title: 'Stadsdeel',
-      subTitle: result._display,
-      items: [{ type: DetailResultItemType.Default, label: 'Code', value: result.code }],
-    }),
+    type: 'gebieden/stadsdeel',
+    endpoint: 'gebieden/stadsdeel',
+    mapDetail: (result) => {
+      return {
+        title: 'Stadsdeel',
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.DefinitionList,
+            title: 'Code',
+            gridArea: '1 / 1 / 1 / 3',
+            entries: [
+              { term: 'Code', description: result.code },
+              { term: 'Gemeente', description: result.gemeente._display },
+            ],
+          },
+          getPaginatedListBlock(
+            result,
+            result?.buurtcombinaties?.href,
+            GLOSSARY.DEFINITIONS.BUURTCOMBINATIE,
+            '2 / 1 / 3 / 2',
+          ),
+          getPaginatedListBlock(
+            result,
+            result?.gebiedsgerichtwerken?.href,
+            GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN,
+          ),
+          gebiedInBeeldBlock,
+        ],
+      }
+    },
   },
   [endpointTypes.gebiedenUnesco]: {
     type: 'gebieden/unesco',
@@ -735,11 +913,31 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.gebiedenWijk]: {
-    mapDetail: (result) => ({
-      title: 'Wijk',
-      subTitle: result._display,
-      items: [{ type: DetailResultItemType.Default, label: 'Code', value: result.code }],
-    }),
+    type: 'gebieden/buurtcombinatie',
+    endpoint: 'gebieden/buurtcombinatie',
+    mapDetail: (result) => {
+      return {
+        title: 'Wijk',
+        subTitle: result._display,
+        items: [
+          {
+            type: DetailResultItemType.DefinitionList,
+            entries: [{ term: 'Code', description: result.code }],
+            gridArea: '1 / 1 / 1 / 3',
+          },
+          getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
+          getPaginatedListBlock(result, result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
+          {
+            type: DetailResultItemType.ShowInTable,
+            filters: {
+              key: 'buurtcombinatie_naam',
+              value: result.naam,
+            },
+          },
+          gebiedInBeeldBlock,
+        ],
+      }
+    },
   },
   [endpointTypes.grondexploitaties]: {
     type: 'grex/projecten',
@@ -769,15 +967,15 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.Default,
-          label: 'Kadastrale gemeente',
+          title: 'Kadastrale gemeente',
           value: result.cadastralName,
         },
         {
           type: DetailResultItemType.Default,
-          label: 'Gemeente',
+          title: 'Gemeente',
           value: result.name,
         },
-        { type: DetailResultItemType.Default, label: 'Grootte', value: result.size },
+        { type: DetailResultItemType.Default, title: 'Grootte', value: result.size },
       ],
     }),
   },
@@ -787,8 +985,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       title: categoryLabels.meetbout.singular,
       subTitle: result.meetboutidentificatie,
       items: [
-        { type: DetailResultItemType.Default, label: 'Adres', value: result.adres },
-        { type: DetailResultItemType.Default, label: 'Zaksnelheid (mm/j)', value: result.speed },
+        { type: DetailResultItemType.Default, title: 'Adres', value: result.adres },
+        { type: DetailResultItemType.Default, title: 'Zaksnelheid (mm/j)', value: result.speed },
       ],
     }),
   },
@@ -798,9 +996,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       title: categoryLabels.monument.singular,
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Nummer', value: result.monumentnummer },
-        { type: DetailResultItemType.Default, label: 'Type', value: result.monumenttype },
-        { type: DetailResultItemType.Default, label: 'Status', value: result.monumentstatus },
+        { type: DetailResultItemType.Default, title: 'Nummer', value: result.monumentnummer },
+        { type: DetailResultItemType.Default, title: 'Type', value: result.monumenttype },
+        { type: DetailResultItemType.Default, title: 'Status', value: result.monumentstatus },
       ],
     }),
   },
@@ -810,9 +1008,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       title: categoryLabels.monument.singular,
       subTitle: result._display,
       items: [
-        { type: DetailResultItemType.Default, label: 'Nummer', value: result.monumentnummer },
-        { type: DetailResultItemType.Default, label: 'Type', value: result.monumenttype },
-        { type: DetailResultItemType.Default, label: 'Status', value: result.monumentstatus },
+        { type: DetailResultItemType.Default, title: 'Nummer', value: result.monumentnummer },
+        { type: DetailResultItemType.Default, title: 'Type', value: result.monumenttype },
+        { type: DetailResultItemType.Default, title: 'Status', value: result.monumentstatus },
       ],
     }),
   },
@@ -883,15 +1081,15 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         },
         {
           type: DetailResultItemType.Table,
-          label: 'Regimes',
+          title: 'Regimes',
           headings: [
-            { label: 'Dagen', key: 'dagenFormatted' },
-            { label: 'Tijdstip', key: 'tijdstip' },
-            { label: 'Type', key: 'eTypeDescription' },
-            { label: 'Bord', key: 'bord' },
-            { label: 'Einddatum', key: 'eindDatum' },
-            { label: 'Opmerking', key: 'opmerking' },
-            { label: 'Begindatum', key: 'beginDatum' },
+            { title: 'Dagen', key: 'dagenFormatted' },
+            { title: 'Tijdstip', key: 'tijdstip' },
+            { title: 'Type', key: 'eTypeDescription' },
+            { title: 'Bord', key: 'bord' },
+            { title: 'Einddatum', key: 'eindDatum' },
+            { title: 'Opmerking', key: 'opmerking' },
+            { title: 'Begindatum', key: 'beginDatum' },
           ],
           values: result.regimes,
         },
@@ -988,6 +1186,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           {
             type: DetailResultItemType.DefinitionList,
+            gridArea: '2 / 1 / 3 / 2',
             entries: [
               { term: 'Bouwjaar', description: result.construction_year },
               { term: 'Aantal verhuurde eenheden', description: additionalItems.length },
@@ -997,7 +1196,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           },
           {
             type: DetailResultItemType.Heading,
-            value: `Verhuurde eenheden (${additionalItems.length})`,
+            title: `Verhuurde eenheden (${additionalItems.length})`,
           },
           ...additionalItems,
         ],
@@ -1025,11 +1224,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
 
       const notifications: DetailResultNotification[] = []
 
-      if (result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label) {
+      if (result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.title) {
         notifications.push({
           value:
-            result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label
-              ? result.bijzondereRechtstoestand.label
+            result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.title
+              ? result.bijzondereRechtstoestand.title
               : false,
           level: NotificationLevel.Error,
         })
@@ -1050,35 +1249,35 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           {
             type: DetailResultItemType.Default,
-            label: 'KvK-nummer',
+            title: 'KvK-nummer',
             value: result.kvkNumber,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Vestigingsnummer',
+            title: 'Vestigingsnummer',
             value: result.vestigingsnummer,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Bezoekadres',
+            title: 'Bezoekadres',
             value: result.bezoekadres.volledig_adres,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'SBI-code en -omschrijving',
+            title: 'SBI-code en -omschrijving',
             value: result.activities,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Type',
+            title: 'Type',
             value: result.type,
           },
           {
             type: DetailResultItemType.Default,
-            label: 'Soort bijzondere rechtstoestand',
+            title: 'Soort bijzondere rechtstoestand',
             value:
-              result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.label
-                ? result.bijzondereRechtstoestand.label
+              result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.title
+                ? result.bijzondereRechtstoestand.title
                 : false,
             status: NotificationLevel.Error,
           },
@@ -1189,6 +1388,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.DefinitionList,
+          gridArea: '2 / 1 / 3 / 2',
           entries: [
             {
               term: 'Categorie',
@@ -1342,6 +1542,19 @@ const serviceDefinitions = Object.values(servicesByEndpointType)
 
 export function getServiceDefinitions() {
   return serviceDefinitions
+}
+
+export const genericDetailTypes = getServiceDefinitions()
+  .map((service) => service.type)
+  .filter((type) => !!type)
+
+export function isGenericTemplate(templateUrl?: string) {
+  if (!templateUrl) {
+    return templateUrl
+  }
+
+  // @ts-ignore
+  return genericDetailTypes.some((type) => templateUrl.includes(type))
 }
 
 function hasDescription({ description }: { description: any }) {

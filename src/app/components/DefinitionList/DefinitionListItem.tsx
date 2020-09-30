@@ -9,7 +9,9 @@ type Props = {
 const DefinitionListItemWrapper = styled.div`
   display: flex;
   padding: ${themeSpacing(2)} 0;
-  border-bottom: 1px solid ${themeColor('tint', 'level4')};
+  &:not(:last-of-type) {
+    border-bottom: 1px solid ${themeColor('tint', 'level4')};
+  }
 
   @media screen and ${breakpoint('max-width', 'mobileL')} {
     flex-direction: column;

@@ -102,11 +102,11 @@ describe('MapDetailResult', () => {
       items: [
         {
           type: DetailResultItemType.Default,
-          label: 'label',
+          title: 'label',
           value: [
             {
               type: DetailResultItemType.Default,
-              label: 'sublabel',
+              title: 'sublabel',
               value: 'value',
             },
           ],

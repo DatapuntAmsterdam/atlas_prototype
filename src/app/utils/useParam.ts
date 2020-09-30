@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import encodeParam from './encodeParam'
+import buildParamQuery from './buildParamQuery'
 
 type SetValueCallback<T> = (val: T) => T | null
 type SetValueFn<T> = (value: T | null | SetValueCallback<T>, method?: 'push' | 'replace') => void
@@ -31,16 +32,7 @@ const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {
   const setValue = useCallback<SetValueFn<T>>((valueOrFn, method = 'push') => {
     const value = valueOrFn instanceof Function ? valueOrFn(stateRef.current) : valueOrFn
     const newValue = value ? encodeParam(urlParam, value) : null
-    const newParams = new URLSearchParams(window.location.search)
-
-    if (newValue) {
-      newParams.set(urlParam.name, newValue)
-    } else {
-      newParams.delete(urlParam.name)
-    }
-
-    // We don't want the order to change, so always sort them before updating the URL
-    newParams.sort()
+    const newParams = buildParamQuery<T>(urlParam, newValue)
 
     history[method]({ ...location, search: newParams.toString() })
   }, [])

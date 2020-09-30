@@ -137,6 +137,7 @@ export interface MapSearchCategory {
 
 export interface MapSearchResult {
   type: string
+  uri?: string
   categoryLabel: string
   categoryLabelPlural: string
   label: string

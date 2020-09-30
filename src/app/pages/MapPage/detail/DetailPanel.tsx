@@ -1,7 +1,8 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
-import { Alert, Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React, { Fragment, useContext, useMemo } from 'react'
-import styled from 'styled-components'
+import { Alert, Button, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
+import { Enlarge, Minimise } from '@amsterdam/asc-assets'
+import React, { Fragment, useContext, useMemo, useState } from 'react'
+import styled, { css } from 'styled-components'
 import {
   fetchDetailData,
   getServiceDefinition,
@@ -11,21 +12,24 @@ import {
 } from '../../../../map/services/map'
 import {
   DetailResultItem,
-  DetailResultItemDefinitionList,
-  DetailResultItemHeading,
-  DetailResultItemTable,
+  DetailResultItemPaginatedData,
   DetailResultItemType,
 } from '../../../../map/types/details'
-import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
-import { Table, TableData, TableHeader, TableRow } from '../../../components/Table'
 import useParam from '../../../utils/useParam'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
-import PanoramaPreview from '../map-search/PanoramaPreview'
+import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
 import { detailUrlParam } from '../query-params'
+import DetailTable from './DetailTable'
+import DetailHeading from './DetailHeading'
+import DetailDefinitionList from './DetailDefinitionList'
+import DetailLinkList from './DetailLinkList'
+import DetailInfoBox from './DetailInfoBox'
+import DetailShowInTable from './DetailShowInTable'
+import DetailSpacer from './DetailSpacer'
 
-export interface DetailPanelProps {
+interface DetailPanelProps {
   detailUrl: string
 }
 
@@ -37,10 +41,68 @@ const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
 `
 
-const Spacer = styled.div`
-  width: 100%;
-  height: ${themeSpacing(4)};
+const ShowMoreButton = styled(Button)`
+  margin-top: ${themeSpacing(1)};
 `
+
+// Todo: remove gridArea when legacy map is removed
+const ItemWrapper = styled.div<{ gridArea?: string }>`
+  display: flex;
+  flex-direction: column;
+  ${({ gridArea }) =>
+    gridArea &&
+    css`
+      grid-area: ${gridArea} !important;
+    `}
+`
+export const HeadingWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`
+
+export const InfoBoxWrapper = styled.div``
+
+// Todo AfterBeta: legacyLayout can be removed
+const Wrapper = styled.div<LegacyLayout>`
+  ${({ legacyLayout }) =>
+    legacyLayout &&
+    css`
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: auto;
+      gap: ${themeSpacing(3, 2)};
+
+      ${PreviewContainer} {
+        grid-area: 2 / 2 / 3 / 3;
+
+        & + ${DetailSpacer} {
+          display: none;
+        }
+      }
+
+      & > * {
+        grid-column: 1 / span 2;
+      }
+    `}
+`
+
+type LegacyLayout = {
+  legacyLayout?: boolean
+}
+
+export const PanelContents: React.FC<
+  { result: PromiseResult<MapDetails | null> } & LegacyLayout
+> = ({ result, legacyLayout }) => {
+  if (result.status === PromiseStatus.Pending) {
+    return <StyledLoadingSpinner />
+  }
+
+  if (result.status === PromiseStatus.Rejected) {
+    return <Message>Details konden niet geladen worden.</Message>
+  }
+  return <RenderDetails legacyLayout={legacyLayout} details={result.value} />
+}
 
 const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
   const [, setDetailUrl] = useParam(detailUrlParam)
@@ -76,125 +138,144 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
       subTitle={subTitle}
       onClose={() => setDetailUrl(null)}
     >
-      {renderPanelContents(result)}
+      <PanelContents result={result} />
     </MapPanelContent>
   )
 }
 
-function renderPanelContents(result: PromiseResult<MapDetails | null>) {
-  if (result.status === PromiseStatus.Pending) {
-    return <StyledLoadingSpinner />
+const Item: React.FC<{ item: DetailResultItem }> = ({ item }) => {
+  let component = null
+  switch (item.type) {
+    case DetailResultItemType.DefinitionList:
+      component = <DetailDefinitionList entries={item.entries} />
+      break
+    case DetailResultItemType.Heading:
+      component = <DetailHeading>{item.title}</DetailHeading>
+      break
+    case DetailResultItemType.Table:
+      component = <DetailTable item={item} />
+      break
+    case DetailResultItemType.LinkList:
+      component = <DetailLinkList item={item} />
+      break
+    case DetailResultItemType.PaginatedData:
+      component = <PaginatedData item={item} />
+      break
+    case DetailResultItemType.ShowInTable:
+      component = <DetailShowInTable item={item} />
+      break
+    default:
+      throw new Error('Unable to render map detail pane, encountered unknown item type.')
   }
 
-  if (result.status === PromiseStatus.Rejected) {
+  // Todo: remove Heading type
+  return component && item.type !== DetailResultItemType.Heading ? (
+    <div>
+      {item.title && (
+        <HeadingWrapper>
+          {/*
+          // @ts-ignore */}
+          <DetailHeading styleAs="h4">{item.title}</DetailHeading>
+          {item.infoBox && <DetailInfoBox {...item.infoBox} />}
+        </HeadingWrapper>
+      )}
+
+      {component}
+    </div>
+  ) : null
+}
+
+function PaginatedData({
+  item,
+}: {
+  item: DetailResultItemPaginatedData
+}): React.ReactElement | null {
+  // Unfortunately we cannot use "-1", as apparently wont work for some API's
+  const INFINITE_PAGE_SIZE = 999
+
+  const [pageSize, setPaginatedUrl] = useState(item.pageSize)
+  const promiseResult = usePromise(
+    useMemo(async () => item.getData(undefined, pageSize), [pageSize]),
+  )
+
+  if (promiseResult.status === PromiseStatus.Fulfilled && promiseResult.value) {
+    const result = item.toView(promiseResult?.value.data)
+
+    const showMoreButton =
+      promiseResult?.value?.count > promiseResult?.value?.data?.length ||
+      pageSize === INFINITE_PAGE_SIZE
+    const showMoreText = `Toon alle ${
+      promiseResult?.value?.count
+    } ${result.title?.toLocaleLowerCase()}`
+    const showLessText = 'Toon minder'
+
+    const showMore = pageSize !== INFINITE_PAGE_SIZE
+
+    return (
+      <>
+        <Item item={result} />
+        {showMoreButton && (
+          <ShowMoreButton
+            variant="textButton"
+            iconSize={12}
+            iconLeft={showMore ? <Enlarge /> : <Minimise />}
+            onClick={() => {
+              setPaginatedUrl(showMore ? INFINITE_PAGE_SIZE : item.pageSize)
+            }}
+          >
+            {showMore ? showMoreText : showLessText}
+          </ShowMoreButton>
+        )}
+      </>
+    )
+  }
+
+  if (promiseResult.status === PromiseStatus.Pending) {
+    return <StyledLoadingSpinner />
+  }
+  if (promiseResult.status === PromiseStatus.Rejected) {
     return <Message>Details konden niet geladen worden.</Message>
   }
 
-  return renderDetails(result.value)
+  return null
 }
 
-function renderDetails(details: MapDetails | null) {
+const RenderDetails: React.FC<{ details: MapDetails | null } & LegacyLayout> = ({
+  details,
+  legacyLayout,
+}) => {
   if (!details) {
     return <Message>Geen detailweergave beschikbaar.</Message>
   }
-
   return (
-    <>
+    <Wrapper legacyLayout={legacyLayout}>
       <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
-      <Spacer />
+      <DetailSpacer />
       {details.data.notifications?.map((notification) => (
         <Fragment key={notification.value}>
           <Alert level={notification.level} dismissible={notification.canClose}>
             {notification.value}
           </Alert>
-          <Spacer />
+          <DetailSpacer />
         </Fragment>
       ))}
       {details.data.items.map((item, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Fragment key={item.type + index}>
-          {renderItem(item)}
-          <Spacer />
-        </Fragment>
+        <ItemWrapper
+          // eslint-disable-next-line react/no-array-index-key
+          key={item.type + index}
+          className={item.type}
+          // @ts-ignore
+          gridArea={item.gridArea}
+        >
+          <Item item={item} />
+          <DetailSpacer />
+        </ItemWrapper>
       ))}
-    </>
+    </Wrapper>
   )
 }
 
-function renderItem(item: DetailResultItem) {
-  switch (item.type) {
-    case DetailResultItemType.DefinitionList:
-      return renderDefinitionListItem(item)
-    case DetailResultItemType.Heading:
-      return renderHeadingItem(item)
-    case DetailResultItemType.Table:
-      return renderTableItem(item)
-    default:
-      throw new Error('Unable to render map detail pane, encountered unknown item type.')
-  }
-}
-
-function renderDefinitionListItem(item: DetailResultItemDefinitionList) {
-  return (
-    <>
-      {item.title && <Heading forwardedAs="h4">{item.title}</Heading>}
-      <DefinitionList>
-        {item.entries.map(({ term, description, link }) => (
-          <DefinitionListItem term={term}>
-            {link ? (
-              <Link href={link} inList target="_blank">
-                {description}
-              </Link>
-            ) : (
-              description
-            )}
-          </DefinitionListItem>
-        ))}
-      </DefinitionList>
-    </>
-  )
-}
-
-const StyledHeading = styled(Heading)`
-  color: ${themeColor('secondary')};
-  margin: 0;
-`
-
-function renderHeadingItem(item: DetailResultItemHeading) {
-  return <StyledHeading forwardedAs="h3">{item.value}</StyledHeading>
-}
-
-const TableWrapper = styled.div`
-  width: 100%;
-  overflow-x: scroll;
-`
-
-function renderTableItem(item: DetailResultItemTable) {
-  return (
-    <>
-      {item.label && <Heading forwardedAs="h4">{item.label}</Heading>}
-      <TableWrapper>
-        <Table>
-          <TableRow header>
-            {item.headings.map((heading) => (
-              <TableHeader key={heading.key}>{heading.label}</TableHeader>
-            ))}
-          </TableRow>
-          {item.values.map((value, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <TableRow key={index}>
-              {item.headings.map((heading) => (
-                <TableData key={heading.key}>{value[heading.key]}</TableData>
-              ))}
-            </TableRow>
-          ))}
-        </Table>
-      </TableWrapper>
-    </>
-  )
-}
-
-function getPanelTitle(result: PromiseResult<MapDetails | null>) {
+export function getPanelTitle(result: PromiseResult<MapDetails | null>) {
   if (result.status === PromiseStatus.Fulfilled && result.value) {
     return result.value.data.subTitle
   }

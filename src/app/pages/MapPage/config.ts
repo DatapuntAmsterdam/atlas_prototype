@@ -5,6 +5,7 @@ import {
   toDetailFromEndpoint,
   toEstablishments,
 } from '../../../store/redux-first-router/actions'
+import { routing } from '../../routes'
 
 // Because we use these types as id's in option values (select), we need to convert them to strings
 export enum DataSelectionType {
@@ -28,6 +29,7 @@ export default {
   [DataSelectionType.BAG]: {
     authScope: AuthScope.None,
     title: 'Adressen',
+    path: routing.addresses.path,
     toTableAction: toAdresses(),
     toDetailAction: (id: string) =>
       toDetailFromEndpoint(`${environment.API_ROOT}bag/nummeraanduiding/${id}`),
@@ -37,6 +39,7 @@ export default {
   [DataSelectionType.HR]: {
     authScope: AuthScope.HR,
     title: 'Vestigingen',
+    path: routing.establishments.path,
     toTableAction: toEstablishments(),
     toDetailAction: (id: string) =>
       toDetailFromEndpoint(`${environment.API_ROOT}handelsregister/vestiging/${id}`),
@@ -46,6 +49,7 @@ export default {
   [DataSelectionType.BRK]: {
     authScope: AuthScope.BRK,
     title: 'Kadastrale objecten',
+    path: routing.cadastralObjects.path,
     toTableAction: toCadastralObjects(),
     toDetailAction: (id: string) => toDetailFromEndpoint(`${environment.API_ROOT}brk/object/${id}`),
     endpointData: `${environment.API_ROOT}dataselectie/brk/kot/`,
