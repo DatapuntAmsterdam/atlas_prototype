@@ -129,7 +129,7 @@ function buildMetaData(
 
 const getInfoBox = (
   { description, url, plural }: Partial<Definition>,
-  type: InfoBoxType = InfoBoxType.Question,
+  type = InfoBoxType.Question,
 ): InfoBoxProps => ({
   description,
   url,
@@ -140,8 +140,8 @@ const getInfoBox = (
 const getPaginatedListBlock = (
   apiUrl: string,
   { description, url, plural }: Definition,
-  gridArea: string = 'auto / 1 / auto / 3',
-  pageSize: number = 10,
+  gridArea = 'auto / 1 / auto / 3',
+  pageSize = 10,
 ): DetailResultItemPaginatedData => ({
   type: DetailResultItemType.PaginatedData,
   getData: getListFromApi(apiUrl),
