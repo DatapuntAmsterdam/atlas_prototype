@@ -107,22 +107,25 @@ export interface ServiceDefinition {
   mapDetail: (result: any, location: LatLngLiteral) => DetailResult | Promise<DetailResult>
 }
 
-const buildMetaData = (
+function buildMetaData(
   result: any,
   metadata?: Array<keyof typeof GLOSSARY.META>,
-): DetailResultItemDefinitionListEntry[] =>
-  metadata?.length
-    ? metadata
-        .map((meta) => ({
-          term: GLOSSARY.META[meta].label,
-          // @ts-ignore
-          description: GLOSSARY.META[meta].filter
-            ? // @ts-ignore
-              GLOSSARY.META[meta].filter!(result[meta])
-            : result[meta],
-        }))
-        .filter(({ description }) => description)
-    : []
+): DetailResultItemDefinitionListEntry[] {
+  if (!metadata) {
+    return []
+  }
+
+  return metadata
+    .map((metaKey) => {
+      const meta = GLOSSARY.META[metaKey]
+
+      return {
+        term: meta.label,
+        description: 'filter' in meta ? meta.filter(result[metaKey]) : result[metaKey],
+      }
+    })
+    .filter(({ description }) => description)
+}
 
 const getInfoBox = (
   { description, url, plural }: Partial<Definition>,
