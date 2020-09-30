@@ -1,6 +1,6 @@
 import { Link, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import React, { useMemo } from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import React, { useMemo } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { DetailResultItemLinkList } from '../../../../map/types/details'
@@ -15,7 +15,11 @@ const StyledLink = styled(Link)`
   margin-bottom: ${themeSpacing(2)};
 `
 
-const DetailLinkList: React.FC<{ item: DetailResultItemLinkList }> = ({ item, ...otherProps }) => {
+export interface DetailLinkListProps {
+  item: DetailResultItemLinkList
+}
+
+const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) => {
   const location = useLocation()
   const { trackEvent } = useMatomo()
 
