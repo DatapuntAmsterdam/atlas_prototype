@@ -155,7 +155,7 @@ const getPaginatedListBlock = (
   }),
 })
 
-const getLocationDefinitionListBlock = (result: any, gridArea: string) => {
+const getLocationDefinitionListBlock = (result: any, gridArea: string): DetailResultItem => {
   const buurt = {
     config: GLOSSARY.DEFINITIONS.BUURT,
     value: result.buurt || result._buurt,
