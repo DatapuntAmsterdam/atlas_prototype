@@ -1,10 +1,9 @@
 import { Link, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
+import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { useMemo } from 'react'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { DetailResultItemLinkList } from '../../../../map/types/details'
-import buildDetailUrl from './buildDetailUrl'
 
 export const LinkList = styled.div`
   display: flex;
@@ -20,24 +19,13 @@ export interface DetailLinkListProps {
 }
 
 const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) => {
-  const location = useLocation()
   const { trackEvent } = useMatomo()
 
-  const links = useMemo(
-    () =>
-      item.links.map((link) => {
-        const url = link.external ? link.url : buildDetailUrl(link.url)
-        return {
-          ...link,
-          url,
-        }
-      }),
-    [location, item],
-  )
-
-  return links.length ? (
+  return item.links.length ? (
     <LinkList {...otherProps}>
-      {links.map(({ url, title, external }) => (
+      {/*
+      // @ts-ignore */}
+      {item.links.map(({ url, to, title }) => (
         // @ts-ignore
         <StyledLink
           inList
@@ -48,7 +36,7 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
               name: title,
             })
           }}
-          {...(external ? { target: '_blank', href: url } : { forwardedAs: RouterLink, to: url })}
+          {...(url ? { target: '_blank', href: url } : { forwardedAs: RouterLink, to })}
         >
           {title}
         </StyledLink>

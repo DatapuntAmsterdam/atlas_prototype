@@ -26,7 +26,6 @@ import DetailHeading from './DetailHeading'
 import DetailDefinitionList from './DetailDefinitionList'
 import DetailLinkList from './DetailLinkList'
 import DetailInfoBox from './DetailInfoBox'
-import DetailShowInTable from './DetailShowInTable'
 import DetailSpacer from './DetailSpacer'
 
 interface DetailPanelProps {
@@ -160,9 +159,6 @@ const Item: React.FC<{ item: DetailResultItem }> = ({ item }) => {
       break
     case DetailResultItemType.PaginatedData:
       component = <PaginatedData item={item} />
-      break
-    case DetailResultItemType.ShowInTable:
-      component = <DetailShowInTable item={item} />
       break
     default:
       throw new Error('Unable to render map detail pane, encountered unknown item type.')

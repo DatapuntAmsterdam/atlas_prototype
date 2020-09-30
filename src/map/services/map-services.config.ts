@@ -10,6 +10,7 @@ import {
   DetailResult,
   DetailResultItem,
   DetailResultItemDefinitionListEntry,
+  DetailResultItemLinkList,
   DetailResultItemPaginatedData,
   DetailResultItemType,
   DetailResultNotification,
@@ -42,6 +43,8 @@ import GLOSSARY, { Definition } from '../../detail/services/glossary.constant'
 import { getDetailPageData } from '../../store/redux-first-router/actions'
 import { InfoBoxProps, InfoBoxType } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
+import config, { DataSelectionType } from '../../app/pages/MapPage/config'
+import PARAMETERS from '../../store/parameters'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -174,10 +177,10 @@ const getLocationDefinitionListBlock = (result: any, gridArea: string) => {
   return {
     title: 'Ligt in',
     type: DetailResultItemType.DefinitionList,
-    entries: items.map(({ config, value }) => {
+    entries: items.map(({ config: { singular }, value }) => {
       const { type, subtype, id } = getDetailPageData(value._links.self.href)
       return {
-        term: config.singular,
+        term: singular,
         description: value._display,
         link: buildDetailUrl(`${type}/${subtype}/${id}`),
       }
@@ -186,12 +189,71 @@ const getLocationDefinitionListBlock = (result: any, gridArea: string) => {
   }
 }
 
+const getShowInTableBlock = (filters: {
+  key: string
+  value: string
+}): DetailResultItemLinkList[] => [
+  {
+    type: DetailResultItemType.LinkList,
+    title: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.plural,
+    infoBox: getInfoBox({
+      description: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.description,
+      url: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.url,
+      plural: GLOSSARY.DEFINITIONS.NUMMERAANDUIDING.plural,
+    }),
+    links: [
+      {
+        to: {
+          pathname: config[DataSelectionType.BAG].path,
+          search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
+        },
+        title: 'In tabel weergeven',
+      },
+    ],
+  },
+  {
+    type: DetailResultItemType.LinkList,
+    title: GLOSSARY.DEFINITIONS.VESTIGING.plural,
+    infoBox: getInfoBox({
+      description: GLOSSARY.DEFINITIONS.VESTIGING.description,
+      url: GLOSSARY.DEFINITIONS.VESTIGING.url,
+      plural: GLOSSARY.DEFINITIONS.VESTIGING.plural,
+    }),
+    links: [
+      {
+        to: {
+          pathname: config[DataSelectionType.BAG].path,
+          search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
+        },
+        title: 'In tabel weergeven',
+      },
+    ],
+  },
+  {
+    type: DetailResultItemType.LinkList,
+    title: GLOSSARY.DEFINITIONS.OBJECT.plural,
+    infoBox: getInfoBox({
+      description: GLOSSARY.DEFINITIONS.OBJECT.description,
+      url: GLOSSARY.DEFINITIONS.OBJECT.url,
+      plural: GLOSSARY.DEFINITIONS.OBJECT.plural,
+    }),
+    links: [
+      {
+        to: {
+          pathname: config[DataSelectionType.BAG].path,
+          search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
+        },
+        title: 'In tabel weergeven',
+      },
+    ],
+  },
+]
+
 const gebiedInBeeldBlock = {
   type: DetailResultItemType.LinkList,
   title: 'Gebied in beeld',
   links: [
     {
-      external: true,
       url: 'https://gebiedinbeeld.amsterdam.nl/#/dashboard',
       title: 'Ga naar gebied in beeld',
     },
@@ -822,13 +884,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         },
         getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
         getPaginatedListBlock(result, result?.bouwblokken?.href, GLOSSARY.DEFINITIONS.BOUWBLOK),
-        {
-          type: DetailResultItemType.ShowInTable,
-          filters: {
-            key: 'buurt_naam',
-            value: result.naam,
-          },
-        },
+        ...getShowInTableBlock({
+          key: 'buurt_naam',
+          value: result.naam,
+        }),
         gebiedInBeeldBlock,
       ],
     }),
@@ -847,14 +906,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             gridArea: '1 / 1 / 1 / 3',
           },
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
-
-          {
-            type: DetailResultItemType.ShowInTable,
-            filters: {
-              key: 'ggw_naam',
-              value: result.naam,
-            },
-          },
+          ...getShowInTableBlock({
+            key: 'ggw_naam',
+            value: result.naam,
+          }),
           gebiedInBeeldBlock,
           getPaginatedListBlock(result, result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
         ],
@@ -927,13 +982,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           },
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
           getPaginatedListBlock(result, result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
-          {
-            type: DetailResultItemType.ShowInTable,
-            filters: {
-              key: 'buurtcombinatie_naam',
-              value: result.naam,
-            },
-          },
+          ...getShowInTableBlock({
+            key: 'buurtcombinatie_naam',
+            value: result.naam,
+          }),
           gebiedInBeeldBlock,
         ],
       }
