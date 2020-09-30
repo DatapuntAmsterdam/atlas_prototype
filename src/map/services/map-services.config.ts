@@ -259,7 +259,7 @@ const gebiedInBeeldBlock: DetailResultItemLinkList = {
   ],
 }
 
-const getMainMetaBlock = (result: any, definition: Definition) => ({
+const getMainMetaBlock = (result: any, definition: Definition): InfoBoxProps => ({
   ...getInfoBox(definition, InfoBoxType.Exclamation),
   meta: buildMetaData(result, definition.meta),
 })
