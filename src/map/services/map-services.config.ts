@@ -248,7 +248,7 @@ const getShowInTableBlock = (filters: {
   },
 ]
 
-const gebiedInBeeldBlock = {
+const gebiedInBeeldBlock: DetailResultItemLinkList = {
   type: DetailResultItemType.LinkList,
   title: 'Gebied in beeld',
   links: [
@@ -257,7 +257,7 @@ const gebiedInBeeldBlock = {
       title: 'Ga naar gebied in beeld',
     },
   ],
-} as any // Todo: fix type error
+}
 
 const getMainMetaBlock = (result: any, definition: Definition) => ({
   ...getInfoBox(definition, InfoBoxType.Exclamation),
