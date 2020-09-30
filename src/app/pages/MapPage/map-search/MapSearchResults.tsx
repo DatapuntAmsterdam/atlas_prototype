@@ -157,10 +157,7 @@ function renderResultItems(results: MapSearchResult[]) {
         <ResultLink
           key={result.type + result.label}
           forwardedAs={RouterLink}
-          to={{
-            pathname: buildDetailUrl(getDetailPageData(result.uri)),
-            search: window.location.search,
-          }}
+          to={buildDetailUrl(getDetailPageData(result.uri))}
           inList
         >
           {result.label}

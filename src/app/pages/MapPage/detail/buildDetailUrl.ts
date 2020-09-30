@@ -7,8 +7,11 @@ import { detailUrlParam } from '../query-params'
  * @param urlPart
  */
 const buildDetailUrl = ({ type, subtype, id }: { type: string; subtype: string; id: string }) => {
-  return window.location.pathname === '/kaart'
-    ? `?${buildParamQuery(detailUrlParam, `${type}/${subtype}/${id}`).toString()}`
+  return window.location.pathname === '/kaart' || window.location.pathname === '/kaart/'
+    ? {
+        pathname: routing.map.path,
+        search: buildParamQuery(detailUrlParam, `${type}/${subtype}/${id}`).toString(),
+      }
     : getRoute(routing.dataDetail.path, type, subtype, `id${id}`)
 }
 

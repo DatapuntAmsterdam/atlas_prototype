@@ -9,7 +9,7 @@ describe('getDetailUrl', () => {
     } as ServiceDefinition
 
     expect(getDetailUrl(serviceDefinition, '1234')).toEqual(
-      `${environment.API_ROOT}v1/grex/projecten/1234`,
+      `${environment.API_ROOT}v1/grex/projecten/1234/`,
     )
   })
 })
