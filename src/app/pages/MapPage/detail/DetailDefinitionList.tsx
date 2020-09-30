@@ -1,11 +1,13 @@
-import React from 'react'
 import { Link } from '@amsterdam/asc-ui'
+import React from 'react'
 import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 
-const DetailDefinitionList: React.FC<{ entries: DetailResultItemDefinitionListEntry[] }> = ({
-  entries,
-}) => (
+export interface DetailDefinitionListProps {
+  entries: DetailResultItemDefinitionListEntry[]
+}
+
+const DetailDefinitionList: React.FC<DetailDefinitionListProps> = ({ entries }) => (
   <DefinitionList>
     {entries.map(({ term, description, link }) => (
       <DefinitionListItem term={term}>
