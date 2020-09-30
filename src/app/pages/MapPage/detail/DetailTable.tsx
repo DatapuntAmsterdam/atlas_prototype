@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import React from 'react'
+import styled from 'styled-components'
 import { DetailResultItemTable } from '../../../../map/types/details'
 import { Table, TableData, TableHeader, TableRow } from '../../../components/Table'
 
@@ -8,7 +8,11 @@ const TableWrapper = styled.div`
   overflow-x: scroll;
 `
 
-const DetailTable: React.FC<{ item: DetailResultItemTable }> = ({ item }) => (
+export interface DetailTableProps {
+  item: DetailResultItemTable
+}
+
+const DetailTable: React.FC<DetailTableProps> = ({ item }) => (
   <TableWrapper>
     <Table>
       <TableRow header>
