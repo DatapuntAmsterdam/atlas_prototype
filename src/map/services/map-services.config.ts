@@ -1,11 +1,18 @@
 /* eslint-disable no-underscore-dangle,camelcase */
 import { LatLngLiteral } from 'leaflet'
 import NotificationLevel from '../../app/models/notification'
+import config, { DataSelectionType } from '../../app/pages/MapPage/config'
+import { getListFromApi } from '../../app/pages/MapPage/detail/api'
+import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
+import { InfoBoxProps, InfoBoxType } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import getFileName from '../../app/utils/getFileName'
+import GLOSSARY, { Definition } from '../../detail/services/glossary.constant'
 import environment from '../../environment'
 import { DEFAULT_LOCALE } from '../../shared/config/locale.config'
 import { fetchWithToken } from '../../shared/services/api/api'
 import formatDate from '../../shared/services/date-formatter/date-formatter'
+import PARAMETERS from '../../store/parameters'
+import { getDetailPageData } from '../../store/redux-first-router/actions'
 import {
   DetailResult,
   DetailResultItem,
@@ -16,8 +23,8 @@ import {
   DetailResultNotification,
 } from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
-import categoryLabels from './map-search/category-labels'
 import { fetchDetailData, getServiceDefinition } from './map'
+import categoryLabels from './map-search/category-labels'
 import {
   adressenPand,
   adressenVerblijfsobject,
@@ -38,13 +45,6 @@ import {
   winkelgebied,
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
-import { getListFromApi } from '../../app/pages/MapPage/detail/api'
-import GLOSSARY, { Definition } from '../../detail/services/glossary.constant'
-import { getDetailPageData } from '../../store/redux-first-router/actions'
-import { InfoBoxProps, InfoBoxType } from '../../app/pages/MapPage/detail/DetailInfoBox'
-import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
-import config, { DataSelectionType } from '../../app/pages/MapPage/config'
-import PARAMETERS from '../../store/parameters'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -135,14 +135,13 @@ const getInfoBox = (
 })
 
 const getPaginatedListBlock = (
-  result: any,
   apiUrl: string,
   { description, url, plural }: Definition,
   gridArea: string = 'auto / 1 / auto / 1',
   pageSize: number = 10,
 ): DetailResultItemPaginatedData => ({
   type: DetailResultItemType.PaginatedData,
-  getData: getListFromApi(result, apiUrl),
+  getData: getListFromApi(apiUrl),
   pageSize,
   gridArea,
   toView: (data: any) => ({
@@ -861,8 +860,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       subTitle: result._display,
       items: [
         getLocationDefinitionListBlock(result, '1 / 1 / 3 / 1'),
-        getPaginatedListBlock(result, result?.panden?.href, GLOSSARY.DEFINITIONS.PAND),
-        getPaginatedListBlock(result, result?.meetbouten, GLOSSARY.DEFINITIONS.MEETBOUT),
+        getPaginatedListBlock(result?.panden?.href, GLOSSARY.DEFINITIONS.PAND),
+        getPaginatedListBlock(result?.meetbouten, GLOSSARY.DEFINITIONS.MEETBOUT),
       ],
     }),
   },
@@ -883,7 +882,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           gridArea: '1 / 1 / 1 / 2',
         },
         getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
-        getPaginatedListBlock(result, result?.bouwblokken?.href, GLOSSARY.DEFINITIONS.BOUWBLOK),
+        getPaginatedListBlock(result?.bouwblokken?.href, GLOSSARY.DEFINITIONS.BOUWBLOK),
         ...getShowInTableBlock({
           key: 'buurt_naam',
           value: result.naam,
@@ -911,7 +910,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             value: result.naam,
           }),
           gebiedInBeeldBlock,
-          getPaginatedListBlock(result, result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
+          getPaginatedListBlock(result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
         ],
       }
     },
@@ -943,13 +942,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             ],
           },
           getPaginatedListBlock(
-            result,
             result?.buurtcombinaties?.href,
             GLOSSARY.DEFINITIONS.BUURTCOMBINATIE,
             '2 / 1 / 3 / 2',
           ),
           getPaginatedListBlock(
-            result,
             result?.gebiedsgerichtwerken?.href,
             GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN,
           ),
@@ -981,7 +978,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             gridArea: '1 / 1 / 1 / 3',
           },
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
-          getPaginatedListBlock(result, result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
+          getPaginatedListBlock(result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
           ...getShowInTableBlock({
             key: 'buurtcombinatie_naam',
             value: result.naam,

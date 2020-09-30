@@ -114,26 +114,3 @@ export type DetailResultItemTableValue = { [key: string]: any }
 export interface DetailResultItemHeading extends DefaultDetailResultItem {
   type: DetailResultItemType.Heading
 }
-
-// Api
-
-interface ApiLinkObject {
-  self: {
-    href: string
-  }
-}
-
-interface ApiPaginateLinkObject extends ApiLinkObject {
-  next: {
-    href?: string
-  }
-  previous: {
-    href?: string
-  }
-}
-
-export interface BouwblokkenResolvedResult {
-  count: number
-  results: Array<{ dataset: string; id: string; _display: string; _links: ApiLinkObject }>
-  _links: ApiPaginateLinkObject
-}
