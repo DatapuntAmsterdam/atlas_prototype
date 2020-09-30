@@ -868,7 +868,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => ({
       title: 'Buurt',
       subTitle: result._display,
-      infobox: {
+      infoBox: {
         ...getInfoBox(GLOSSARY.DEFINITIONS.BUURT, InfoBoxType.Exclamation),
         meta: buildMetaData(result, GLOSSARY.DEFINITIONS.BUURT.meta),
       },

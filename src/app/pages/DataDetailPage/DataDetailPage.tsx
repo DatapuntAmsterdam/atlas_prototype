@@ -155,7 +155,7 @@ const Detail: React.FC<Props> = ({
           <DetailHeading>{result.value?.data.title}</DetailHeading>
           <HeadingWrapper>
             <Heading as="h1">{getPanelTitle(result)}</Heading>
-            {!!result?.value?.data?.infobox && <DetailInfoBox {...result?.value?.data?.infobox} />}
+            {!!result?.value?.data?.infoBox && <DetailInfoBox {...result?.value?.data?.infoBox} />}
           </HeadingWrapper>
           <PanelContents legacyLayout result={result} />
         </DetailWrapper>

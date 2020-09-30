@@ -5,13 +5,11 @@ import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 
 export interface DetailResult {
   title: string
-  substring?: string
   subTitle?: string
   authScope?: string
   items: DetailResultItem[]
   notifications?: DetailResultNotification[]
-  meta?: any[]
-  infobox?: InfoBoxProps
+  infoBox?: InfoBoxProps
 }
 
 export interface DetailResultNotification {
@@ -25,10 +23,8 @@ export enum DetailResultItemType {
   DefinitionList = 'definition-list',
   Table = 'table',
   LinkList = 'link-list',
-  DataProvider = 'data-provider',
   Heading = 'heading',
   PaginatedData = 'paginated-data',
-  ShowInTable = 'show-in-table',
 }
 
 export type DetailResultItem =
@@ -52,7 +48,7 @@ export interface InternalLink {
 
 export type Link = ExternalLink | InternalLink
 
-export type PaginatedData<T> = {
+export interface PaginatedData<T> {
   data: T
   count: number
   next: string | null
@@ -77,7 +73,6 @@ export interface DetailResultItemDefault {
 
 export interface DetailResultItemDefinitionList extends DefaultDetailResultItem {
   type: DetailResultItemType.DefinitionList
-
   entries: DetailResultItemDefinitionListEntry[]
 }
 
