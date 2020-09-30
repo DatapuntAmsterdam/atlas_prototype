@@ -39,10 +39,17 @@ export type DetailResultItem =
   | DetailResultItemHeading
   | DetailResultItemPaginatedData
 
-type LinkDefaults = { title: string }
-type ExternalLink = LinkDefaults & { url: string }
-// Todo: when types are fixed in @types/react-router-dom, use Pick<LinkProps> instead
-type InternalLink = LinkDefaults & { to: { pathname: string; search?: string } | string }
+export interface ExternalLink {
+  title: string
+  url: string
+}
+
+export interface InternalLink {
+  title: string
+  // TODO: when types are fixed in @types/react-router-dom, use Pick<LinkProps> instead
+  to: { pathname: string; search?: string } | string
+}
+
 export type Link = ExternalLink | InternalLink
 
 export type PaginatedData<T> = {
