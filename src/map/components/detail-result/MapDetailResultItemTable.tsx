@@ -19,7 +19,7 @@ const MapDetailResultItemTable: React.FC<MapDetailResultItemTableProps> = ({ ite
               return (
                 <li className="map-detail-result__item">
                   <section className="map-detail-result__item-content">
-                    <div className="map-detail-result__item-label">{heading.label}</div>
+                    <div className="map-detail-result__item-label">{heading.title}</div>
                     <div className="map-detail-result__item-value">{value[heading.key]}</div>
                   </section>
                 </li>

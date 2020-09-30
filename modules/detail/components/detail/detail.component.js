@@ -1,5 +1,4 @@
 import angular from 'angular'
-import { getServiceDefinitions } from '../../../../src/map/services/map-services.config'
 
 angular.module('dpDetail').component('dpDetail', {
   bindings: {
@@ -20,18 +19,6 @@ angular.module('dpDetail').component('dpDetail', {
   controllerAs: 'vm',
 })
 
-const genericDetailTypes = getServiceDefinitions()
-  .map((service) => service.type)
-  .filter((type) => !!type)
-
-function isGenericTemplate(templateUrl) {
-  if (!templateUrl) {
-    return templateUrl
-  }
-
-  return genericDetailTypes.some((type) => templateUrl.includes(type))
-}
-
 function DpDetailController() {
   const vm = this
 
@@ -42,7 +29,6 @@ function DpDetailController() {
     if (!(detailTemplateUrl && detailData)) return
     if (detailTemplateUrl && detailTemplateUrl.previousValue !== detailTemplateUrl.currentValue) {
       vm.includeSrc = detailTemplateUrl.currentValue
-      vm.isGeneric = isGenericTemplate(detailTemplateUrl.currentValue)
     }
 
     if (detailData && detailData.previousValue !== detailData.currentValue) {

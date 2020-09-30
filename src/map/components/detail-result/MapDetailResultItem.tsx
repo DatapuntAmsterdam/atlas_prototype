@@ -12,7 +12,7 @@ const MapDetailResultItem: React.FC<MapDetailResultItemProps> = ({ item }) => {
   return value ? (
     <li className="map-detail-result__item">
       <section className="map-detail-result__item-content">
-        <div className="map-detail-result__item-label">{item.label}</div>
+        <div className="map-detail-result__item-label">{item.title}</div>
         <div
           className={`map-detail-result__item-value ${
             item.status && item.status.length > 0
