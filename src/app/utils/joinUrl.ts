@@ -25,5 +25,5 @@ export default function joinUrl(...paths: string[]) {
     return normalizedPath
   })
 
-  return normalizedPaths.join(PATH_SEPARATOR)
+  return `${normalizedPaths.join(PATH_SEPARATOR)}/`
 }
