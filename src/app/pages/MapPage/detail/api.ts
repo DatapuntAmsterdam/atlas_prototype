@@ -1,6 +1,7 @@
 import { Link, PaginatedData } from '../../../../map/types/details'
 import { fetchWithToken } from '../../../../shared/services/api/api'
 import { getDetailPageData } from '../../../../store/redux-first-router/actions'
+import buildDetailUrl from './buildDetailUrl'
 
 interface ApiLinkObject {
   self: {
@@ -37,14 +38,10 @@ export const getListFromApi = (defaultUrl: string) => async (
   }
 
   return {
-    data: response.results.map(({ _display, _links }) => {
-      const { type, subtype, id } = getDetailPageData(_links.self.href)
-
-      return {
-        to: `${type}/${subtype}/${id}`,
-        title: _display,
-      }
-    }),
+    data: response.results.map(({ _display, _links }) => ({
+      to: buildDetailUrl(getDetailPageData(_links.self.href)),
+      title: _display,
+    })),
     count: response.count,
     previous: response._links.previous.href || null,
     next: response._links.next.href || null,

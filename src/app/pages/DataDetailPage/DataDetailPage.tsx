@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import React, { useEffect, useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import { Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
@@ -24,10 +24,16 @@ import {
 import useCompare from '../../utils/useCompare'
 import { isGenericTemplate } from '../../../map/services/map-services.config'
 import usePromise, { PromiseStatus } from '../../utils/usePromise'
-import { fetchDetailData, getServiceDefinition, toMapDetails } from '../../../map/services/map'
+import {
+  fetchDetailData,
+  getDetailUrl,
+  getServiceDefinition,
+  toMapDetails,
+} from '../../../map/services/map'
 import { getPanelTitle, HeadingWrapper, PanelContents } from '../MapPage/detail/DetailPanel'
 import DetailHeading from '../MapPage/detail/DetailHeading'
 import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
+import { getMapDetail } from '../../../map/ducks/detail/actions'
 
 let angularInstance: any = null
 
@@ -88,14 +94,16 @@ const Detail: React.FC<Props> = ({
   // Todo: temp fix. React-router doesn't unmount and mount the component, where redux-first-router did
   const idIsUpdated = useCompare(id)
   const isFirstRun = useRef(true)
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    if (idIsUpdated && !isFirstRun.current) {
+    if (idIsUpdated && !isFirstRun.current && !isGenericTemplate(detailTemplateUrl)) {
       window.location.reload()
     }
     if (isFirstRun.current) {
       isFirstRun.current = false
     }
-  }, [idIsUpdated, id])
+  }, [idIsUpdated, id, detailTemplateUrl])
 
   const result = usePromise(
     useMemo(async () => {
@@ -105,8 +113,11 @@ const Detail: React.FC<Props> = ({
         return Promise.resolve(null)
       }
 
+      const detailUrl = getDetailUrl(serviceDefinition, id)
       const data = await fetchDetailData(serviceDefinition, id)
 
+      // Legacy, needed to, for example, update the GeoJSON's on the map
+      dispatch(getMapDetail(detailUrl))
       return toMapDetails(serviceDefinition, data)
     }, [type, subType, id]),
   )

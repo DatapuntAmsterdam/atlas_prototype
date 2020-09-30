@@ -176,14 +176,11 @@ const getLocationDefinitionListBlock = (result: any, gridArea: string) => {
   return {
     title: 'Ligt in',
     type: DetailResultItemType.DefinitionList,
-    entries: items.map(({ config: { singular }, value }) => {
-      const { type, subtype, id } = getDetailPageData(value._links.self.href)
-      return {
-        term: singular,
-        description: value._display,
-        link: buildDetailUrl(`${type}/${subtype}/${id}`),
-      }
-    }),
+    entries: items.map(({ config: { singular }, value }) => ({
+      term: singular,
+      description: value._display,
+      link: buildDetailUrl(getDetailPageData(value._links.self.href)),
+    })),
     gridArea,
   }
 }

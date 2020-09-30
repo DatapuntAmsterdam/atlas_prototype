@@ -152,25 +152,25 @@ function renderResponse({ results }: MapSearchResponse) {
 function renderResultItems(results: MapSearchResult[]) {
   return (
     <ShowMore limit={RESULT_LIMIT}>
-      {results.map((result) => {
-        const { type, subtype, id } = getDetailPageData(result.uri)
-        return (
-          // @ts-ignore
-          <ResultLink
-            key={result.type + result.label}
-            forwardedAs={RouterLink}
-            to={buildDetailUrl(`${type}/${subtype}/${id}`)}
-            inList
-          >
-            {result.label}
-            {result.statusLabel && (
-              <>
-                &nbsp;<StatusLabel>({result.statusLabel})</StatusLabel>
-              </>
-            )}
-          </ResultLink>
-        )
-      })}
+      {results.map((result) => (
+        // @ts-ignore
+        <ResultLink
+          key={result.type + result.label}
+          forwardedAs={RouterLink}
+          to={{
+            pathname: buildDetailUrl(getDetailPageData(result.uri)),
+            search: window.location.search,
+          }}
+          inList
+        >
+          {result.label}
+          {result.statusLabel && (
+            <>
+              &nbsp;<StatusLabel>({result.statusLabel})</StatusLabel>
+            </>
+          )}
+        </ResultLink>
+      ))}
     </ShowMore>
   )
 }
