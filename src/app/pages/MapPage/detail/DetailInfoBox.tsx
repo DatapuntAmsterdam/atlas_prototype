@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { Alert, Button, Heading, Link, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
+import {
+  Alert,
+  Button,
+  Heading,
+  Link,
+  Paragraph,
+  themeColor,
+  themeSpacing,
+} from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import { ReactComponent as Stelselpedia } from '../../../../shared/assets/icons/stelselpedia.svg'
 import { ReactComponent as Metadata } from '../../../../shared/assets/icons/metadata.svg'
@@ -10,6 +18,10 @@ import { Definition } from '../../../../detail/services/glossary.constant'
 
 const StyledAlert = styled(Alert)`
   margin: ${themeSpacing(2, 0)};
+`
+
+const StyledButton = styled(Button)`
+  border: 1px solid ${themeColor('tint', 'level3')};
 `
 
 export enum InfoBoxType {
@@ -26,7 +38,7 @@ const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, type, description, url,
   const [open, setOpen] = useState(false)
   return (
     <>
-      <Button
+      <StyledButton
         type="button"
         variant="blank"
         title="Meer info"

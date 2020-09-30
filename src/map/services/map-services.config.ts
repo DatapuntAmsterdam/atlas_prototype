@@ -137,7 +137,7 @@ const getInfoBox = (
 const getPaginatedListBlock = (
   apiUrl: string,
   { description, url, plural }: Definition,
-  gridArea: string = 'auto / 1 / auto / 1',
+  gridArea: string = 'auto / 1 / auto / 3',
   pageSize: number = 10,
 ): DetailResultItemPaginatedData => ({
   type: DetailResultItemType.PaginatedData,
@@ -255,6 +255,11 @@ const gebiedInBeeldBlock = {
     },
   ],
 } as any // Todo: fix type error
+
+const getMainMetaBlock = (result: any, definition: Definition) => ({
+  ...getInfoBox(definition, InfoBoxType.Exclamation),
+  meta: buildMetaData(result, definition.meta),
+})
 
 const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.adressenLigplaats]: {
@@ -855,6 +860,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => ({
       title: categoryLabels.bouwblok.singular,
       subTitle: result._display,
+      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.BOUWBLOK),
       items: [
         getLocationDefinitionListBlock(result, '1 / 1 / 3 / 1'),
         getPaginatedListBlock(result?.panden?.href, GLOSSARY.DEFINITIONS.PAND),
@@ -868,10 +874,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => ({
       title: 'Buurt',
       subTitle: result._display,
-      infoBox: {
-        ...getInfoBox(GLOSSARY.DEFINITIONS.BUURT, InfoBoxType.Exclamation),
-        meta: buildMetaData(result, GLOSSARY.DEFINITIONS.BUURT.meta),
-      },
+      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.BUURT),
       items: [
         {
           type: DetailResultItemType.DefinitionList,
@@ -895,6 +898,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       return {
         title: 'Gebiedsgerichtwerken-gebied',
         subTitle: result._display,
+        infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN),
         items: [
           {
             type: DetailResultItemType.DefinitionList,
@@ -917,6 +921,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     endpoint: 'gebieden/grootstedelijkgebied',
     mapDetail: (result) => ({
       title: 'Grootstedelijk gebied',
+      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.GROOTSTEDELIJKGEBIED),
       subTitle: result._display,
       items: [],
     }),
@@ -924,39 +929,39 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.gebiedenStadsdeel]: {
     type: 'gebieden/stadsdeel',
     endpoint: 'gebieden/stadsdeel',
-    mapDetail: (result) => {
-      return {
-        title: 'Stadsdeel',
-        subTitle: result._display,
-        items: [
-          {
-            type: DetailResultItemType.DefinitionList,
-            title: 'Code',
-            gridArea: '1 / 1 / 1 / 3',
-            entries: [
-              { term: 'Code', description: result.code },
-              { term: 'Gemeente', description: result.gemeente._display },
-            ],
-          },
-          getPaginatedListBlock(
-            result?.buurtcombinaties?.href,
-            GLOSSARY.DEFINITIONS.BUURTCOMBINATIE,
-            '2 / 1 / 3 / 2',
-          ),
-          getPaginatedListBlock(
-            result?.gebiedsgerichtwerken?.href,
-            GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN,
-          ),
-          gebiedInBeeldBlock,
-        ],
-      }
-    },
+    mapDetail: (result) => ({
+      title: 'Stadsdeel',
+      subTitle: result._display,
+      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.STADSDEEL),
+      items: [
+        {
+          type: DetailResultItemType.DefinitionList,
+          title: 'Code',
+          gridArea: '1 / 1 / 1 / 3',
+          entries: [
+            { term: 'Code', description: result.code },
+            { term: 'Gemeente', description: result.gemeente._display },
+          ],
+        },
+        getPaginatedListBlock(
+          result?.buurtcombinaties?.href,
+          GLOSSARY.DEFINITIONS.BUURTCOMBINATIE,
+          '2 / 1 / 3 / 2',
+        ),
+        getPaginatedListBlock(
+          result?.gebiedsgerichtwerken?.href,
+          GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN,
+        ),
+        gebiedInBeeldBlock,
+      ],
+    }),
   },
   [endpointTypes.gebiedenUnesco]: {
     type: 'gebieden/unesco',
     endpoint: 'gebieden/unesco',
     mapDetail: (result) => ({
       title: 'UNESCO',
+      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.UNESCO),
       subTitle: result._display,
       items: [],
     }),
@@ -967,6 +972,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => {
       return {
         title: 'Wijk',
+        infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.BUURTCOMBINATIE),
         subTitle: result._display,
         items: [
           {

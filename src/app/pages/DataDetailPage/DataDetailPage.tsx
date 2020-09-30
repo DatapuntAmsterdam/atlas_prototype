@@ -63,6 +63,10 @@ const DetailWrapper = styled(Container)`
   padding: ${themeSpacing(0, 4)};
 `
 
+const TypeHeading = styled(DetailHeading)`
+  margin-bottom: 0;
+`
+
 const DetailContainer: React.FC<{ isLoading: boolean }> = ({ isLoading, children }) => (
   <div className="qa-detail">
     {children}
@@ -152,7 +156,7 @@ const Detail: React.FC<Props> = ({
     return (
       <DetailContainer isLoading={isLoading}>
         <DetailWrapper>
-          <DetailHeading>{result.value?.data.title}</DetailHeading>
+          <TypeHeading>{result.value?.data.title}</TypeHeading>
           <HeadingWrapper>
             <Heading as="h1">{getPanelTitle(result)}</Heading>
             {!!result?.value?.data?.infoBox && <DetailInfoBox {...result?.value?.data?.infoBox} />}
