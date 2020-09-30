@@ -9,8 +9,9 @@ const PATH_SEPARATOR = '/'
  * ```
  *
  * @param paths The paths of the URL to combine.
+ * @param trailing If the returned value should have a trailing slash
  */
-export default function joinUrl(...paths: string[]) {
+export default function joinUrl(paths: string[], trailing = true) {
   const normalizedPaths = paths.map((path) => {
     let normalizedPath = path
 
@@ -25,5 +26,5 @@ export default function joinUrl(...paths: string[]) {
     return normalizedPath
   })
 
-  return `${normalizedPaths.join(PATH_SEPARATOR)}/`
+  return `${normalizedPaths.join(PATH_SEPARATOR)}${trailing ? '/' : ''}`
 }

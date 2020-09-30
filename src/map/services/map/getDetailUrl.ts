@@ -11,5 +11,5 @@ export function getDetailUrl(serviceDefinition: ServiceDefinition, id: string) {
     throw new Error('Unable to format URL, missing endpoint in service definition.')
   }
 
-  return joinUrl(apiRoot, serviceDefinition.endpoint, id)
+  return joinUrl([apiRoot, serviceDefinition.endpoint, id])
 }

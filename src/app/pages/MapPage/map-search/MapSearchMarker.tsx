@@ -41,7 +41,7 @@ const MapSearchMarker: React.FC<MarkerProps> = ({ location, setLocation }) => {
     )
 
     if (nearestDetail) {
-      const detailUrl = joinUrl(nearestDetail.type, nearestDetail.id)
+      const detailUrl = joinUrl([nearestDetail.type, nearestDetail.id])
       setDetailUrl(detailUrl)
     } else {
       setLocation(e.latlng)
