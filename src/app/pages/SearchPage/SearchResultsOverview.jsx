@@ -31,7 +31,7 @@ const SearchResultsOverview = ({ query, totalCount, results, errors, loading }) 
         const {
           label,
           component: ResultComponent,
-          to,
+          path,
           type,
           resolver,
           hideOverviewHeading,
@@ -79,7 +79,13 @@ const SearchResultsOverview = ({ query, totalCount, results, errors, loading }) 
               )}
             </ResultsComponent>
             {hasResults && (
-              <SearchLink to={to()} label={`Resultaten tonen binnen de categorie '${label}'`} />
+              <SearchLink
+                to={{
+                  pathname: path,
+                  search: window.location.search,
+                }}
+                label={`Resultaten tonen binnen de categorie '${label}'`}
+              />
             )}
           </ResultItem>
         ) : null
