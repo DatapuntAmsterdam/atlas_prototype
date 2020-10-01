@@ -110,6 +110,7 @@
     "@svgr/webpack": "^5.4.0",
     "@testing-library/react": "^11.0.4",
     "@testing-library/react-hooks": "3.4.2",
+    "@types/body-scroll-lock": "^2.6.1",
     "@types/cssnano": "^4.0.0",
     "@types/deep-equal": "^1.0.1",
     "@types/enzyme": "^3.10.7",

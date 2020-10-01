@@ -2,7 +2,6 @@ import { Container, Row } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { clearAllBodyScrollLocks, enableBodyScroll } from 'body-scroll-lock'
 import React, { memo, useEffect, useState } from 'react'
-import { getPage as getCurrentPage } from '../../../store/redux-first-router/selectors'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import { isAllResultsPage, isDataSearchPage, isMapSearchPage } from '../../pages'
 import useCompare from '../../utils/useCompare'
@@ -11,12 +10,13 @@ import useParam from '../../utils/useParam'
 import useSelectors from '../../utils/useSelectors'
 import SEARCH_PAGE_CONFIG, { DEFAULT_LIMIT } from './config'
 import { searchQueryParam } from './query-params'
-import { getActiveFilters, getPage, getSort } from './SearchPageDucks'
+import { ActiveFilter, getActiveFilters, getPage, getSort } from './SearchPageDucks'
 import SearchPageFilters from './SearchPageFilters'
 import SearchPageResults from './SearchPageResults'
 import usePagination from './usePagination'
+import useCurrentPage from '../../utils/useCurrentPage'
 
-function getSortIntput(sortString) {
+function getSortIntput(sortString: string) {
   let sort
   if (sortString && sortString.length) {
     const [field, order] = sortString.split(':')
@@ -33,12 +33,9 @@ function getSortIntput(sortString) {
 const SearchPage = () => {
   const [initialLoading, setInitialLoading] = useState(true)
   const [showFilter, setShowFilter] = useState(false)
-  const [sort, page, activeFilters, currentPage] = useSelectors([
-    getSort,
-    getPage,
-    getActiveFilters,
-    getCurrentPage,
-  ])
+  const [sort, page, activeFilters] = useSelectors([getSort, getPage, getActiveFilters])
+
+  const currentPage = useCurrentPage()
 
   const [query] = useParam(searchQueryParam)
   const hasQuery = query.trim().length > 0
@@ -55,7 +52,7 @@ const SearchPage = () => {
   }, [documentTitle])
 
   const { fetching, errors, totalCount, filters, results, pageInfo } = usePagination(
-    SEARCH_PAGE_CONFIG[currentPage].query,
+    SEARCH_PAGE_CONFIG[currentPage]?.query,
     {
       q: query,
       page: withPagination ? page : null, // In case the pagination doesn't gets deleted when changing routes
@@ -64,7 +61,7 @@ const SearchPage = () => {
       withPagination, // Without this no PageInfo will be returned, so the CompactPager won't be rendered
       filters: activeFilters,
     },
-    SEARCH_PAGE_CONFIG[currentPage].resolver,
+    SEARCH_PAGE_CONFIG[currentPage]?.resolver,
   )
 
   const currentPageHasChanged = useCompare(currentPage)
@@ -72,7 +69,7 @@ const SearchPage = () => {
   // Enable / disable body lock when opening the filter on mobile
   useEffect(() => {
     const action = showFilter || currentPageHasChanged ? clearAllBodyScrollLocks : enableBodyScroll
-    action()
+    action(document.body)
   }, [showFilter, currentPage])
 
   // Only the initial loading state should render the skeleton components, this prevents unwanted flickering when changing query variables
@@ -128,7 +125,7 @@ const SearchPage = () => {
  * @param currentPage The currently active page.
  * @param activeFilters The currently active filter.
  */
-function isPaginatable(currentPage, activeFilters) {
+function isPaginatable(currentPage: string, activeFilters: ActiveFilter[]) {
   // The data and map search pages can only be paginated if a subset of data is selected.
   if (isDataSearchPage(currentPage) || isMapSearchPage(currentPage)) {
     return activeFilters.length > 0

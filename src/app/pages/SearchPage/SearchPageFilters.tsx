@@ -25,7 +25,7 @@ interface SearchPageFiltersProps {
   query: string
   currentPage: string
   showFilter: boolean
-  fetching: boolean
+  fetching?: boolean
 }
 
 const FilterColumn = styled(Column)`
