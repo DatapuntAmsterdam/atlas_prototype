@@ -39,9 +39,34 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
             </StyledLink>
           )
         }
+
+        if (item.skipRouter) {
+          const href =
+            typeof link.to === 'string' ? link.to : `${link.to.pathname}?${link.to.search}`
+          return (
+            // @ts-ignore
+            <StyledLink
+              inList
+              onClick={() => {
+                trackClick(link)
+              }}
+              href={href}
+            >
+              {link.title}
+            </StyledLink>
+          )
+        }
+
         return (
           // @ts-ignore
-          <StyledLink inList onClick={() => trackClick(link)} forwardedAs={RouterLink} to={link.to}>
+          <StyledLink
+            inList
+            onClick={() => {
+              trackClick(link)
+            }}
+            forwardedAs={RouterLink}
+            to={link.to}
+          >
             {link.title}
           </StyledLink>
         )

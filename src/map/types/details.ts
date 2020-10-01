@@ -86,6 +86,7 @@ export interface DetailResultItemPaginatedData extends DefaultDetailResultItem {
 export interface DetailResultItemLinkList extends DefaultDetailResultItem {
   type: DetailResultItemType.LinkList
   links: Link[]
+  skipRouter?: boolean
 }
 
 export interface DetailResultItemDefinitionListEntry {

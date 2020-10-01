@@ -140,16 +140,20 @@ const getInfoBox = (
 const getPaginatedListBlock = (
   apiUrl: string,
   { description, url, plural }: Definition,
-  gridArea = 'auto / 1 / auto / 3',
-  pageSize = 10,
+  settings?: {
+    gridArea?: string
+    pageSize?: number
+    skipRouter?: boolean
+  },
 ): DetailResultItemPaginatedData => ({
   type: DetailResultItemType.PaginatedData,
   getData: getListFromApi(apiUrl),
-  pageSize,
-  gridArea,
+  pageSize: settings?.pageSize || 10,
+  gridArea: settings?.gridArea || 'auto / 1 / auto / 3',
   toView: (data: any) => ({
     title: plural,
     type: DetailResultItemType.LinkList,
+    skipRouter: settings?.skipRouter || false,
     links: data,
     infoBox: getInfoBox({ description, url, plural }),
   }),
@@ -866,8 +870,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.BOUWBLOK),
       items: [
         getLocationDefinitionListBlock(result, '1 / 1 / 3 / 1'),
-        getPaginatedListBlock(result?.panden?.href, GLOSSARY.DEFINITIONS.PAND),
-        getPaginatedListBlock(result?.meetbouten, GLOSSARY.DEFINITIONS.MEETBOUT),
+        getPaginatedListBlock(result?.panden?.href, GLOSSARY.DEFINITIONS.PAND, {
+          skipRouter: true,
+        }),
+        getPaginatedListBlock(result?.meetbouten, GLOSSARY.DEFINITIONS.MEETBOUT, {
+          skipRouter: true,
+        }),
       ],
     }),
   },
@@ -949,7 +957,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         getPaginatedListBlock(
           result?.buurtcombinaties?.href,
           GLOSSARY.DEFINITIONS.BUURTCOMBINATIE,
-          '2 / 1 / 3 / 2',
+          {
+            gridArea: '2 / 1 / 3 / 2',
+          },
         ),
         getPaginatedListBlock(
           result?.gebiedsgerichtwerken?.href,

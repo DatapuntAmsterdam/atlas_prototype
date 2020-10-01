@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import { connect, useDispatch } from 'react-redux'
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
 // @ts-ignore
@@ -21,7 +21,6 @@ import {
   getType,
   isDetailLoading,
 } from '../../../shared/ducks/detail/selectors'
-import useCompare from '../../utils/useCompare'
 import { isGenericTemplate } from '../../../map/services/map-services.config'
 import usePromise, { PromiseStatus } from '../../utils/usePromise'
 import {
@@ -95,19 +94,7 @@ const Detail: React.FC<Props> = ({
   type,
   id,
 }) => {
-  // Todo: temp fix. React-router doesn't unmount and mount the component, where redux-first-router did
-  const idIsUpdated = useCompare(id)
-  const isFirstRun = useRef(true)
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (idIsUpdated && !isFirstRun.current && !isGenericTemplate(detailTemplateUrl)) {
-      window.location.reload()
-    }
-    if (isFirstRun.current) {
-      isFirstRun.current = false
-    }
-  }, [idIsUpdated, id, detailTemplateUrl])
 
   const result = usePromise(
     useMemo(async () => {
