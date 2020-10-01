@@ -16,13 +16,17 @@ import SearchBarFilter from '../SearchBarFilter'
 
 const Z_INDEX_OFFSET = 2 // Set a custom offset
 
-// Todo: fix z-index issue with overlay in ASC eventually
+// TODO: Fix z-index issue with overlay in ASC eventually
 const StyledSearchBarToggle = styled(SearchBarToggle)`
   z-index: 23;
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
+
+  & > button {
+    margin-right: 50px;
+  }
 `
 
 const SearchBarWrapper = styled.div`

@@ -24,9 +24,14 @@ const StyledMenuInline = styled(MenuInline)`
     tall ? themeColor('tint', 'level2')({ theme }) : themeColor('tint', 'level1')({ theme })};
 `
 
+// TODO: Fix z-index issue with overlay in ASC eventually
+const StyledMenuToggle = styled(MenuToggle)`
+  z-index: 24;
+`
+
 const components = {
   default: StyledMenuInline,
-  mobile: MenuToggle,
+  mobile: StyledMenuToggle,
 }
 
 function dropFocus() {
