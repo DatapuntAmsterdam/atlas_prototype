@@ -9,7 +9,6 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { ReactComponent as Stelselpedia } from '../../../../shared/assets/icons/stelselpedia.svg'
 import { ReactComponent as Metadata } from '../../../../shared/assets/icons/metadata.svg'
 import DetailDefinitionList from './DetailDefinitionList'
 import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
@@ -24,17 +23,11 @@ const StyledButton = styled(Button)`
   border: 1px solid ${themeColor('tint', 'level3')};
 `
 
-export enum InfoBoxType {
-  Question = 'question',
-  Exclamation = 'exclamation',
-}
-
 export type InfoBoxProps = {
-  type?: InfoBoxType
   meta?: DetailResultItemDefinitionListEntry[]
 } & Pick<Definition, 'url' | 'description' | 'plural'>
 
-const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, type, description, url, meta }) => {
+const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta }) => {
   const [open, setOpen] = useState(false)
   return (
     <>
@@ -46,7 +39,7 @@ const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, type, description, url,
         iconSize={26}
         onClick={() => setOpen(!open)}
         // Todo: add questionmark icon here
-        icon={type === InfoBoxType.Exclamation ? <Metadata /> : <Stelselpedia />}
+        icon={<Metadata />}
       />
       {open && (
         <StyledAlert dismissible onDismiss={() => setOpen(false)} level="normal">

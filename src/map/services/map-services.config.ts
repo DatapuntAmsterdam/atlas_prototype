@@ -4,7 +4,7 @@ import NotificationLevel from '../../app/models/notification'
 import config, { DataSelectionType } from '../../app/pages/MapPage/config'
 import { getListFromApi } from '../../app/pages/MapPage/detail/api'
 import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
-import { InfoBoxProps, InfoBoxType } from '../../app/pages/MapPage/detail/DetailInfoBox'
+import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import getFileName from '../../app/utils/getFileName'
 import GLOSSARY, { Definition } from '../../detail/services/glossary.constant'
 import environment from '../../environment'
@@ -127,14 +127,10 @@ function buildMetaData(
     .filter(({ description }) => description)
 }
 
-const getInfoBox = (
-  { description, url, plural }: Partial<Definition>,
-  type = InfoBoxType.Question,
-): InfoBoxProps => ({
+const getInfoBox = ({ description, url, plural }: Partial<Definition>): InfoBoxProps => ({
   description,
   url,
   plural,
-  type,
 })
 
 const getPaginatedListBlock = (
@@ -264,7 +260,7 @@ const gebiedInBeeldBlock: DetailResultItemLinkList = {
 }
 
 const getMainMetaBlock = (result: any, definition: Definition): InfoBoxProps => ({
-  ...getInfoBox(definition, InfoBoxType.Exclamation),
+  ...getInfoBox(definition),
   meta: buildMetaData(result, definition.meta),
 })
 
