@@ -3,9 +3,9 @@ import escapeStringRegexp from 'escape-string-regexp'
 import { LocationDescriptorObject } from 'history'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { generatePath, Link } from 'react-router-dom'
 import SearchType from '../../../app/pages/SearchPage/constants'
-import { getRoute, routing } from '../../../app/routes'
+import { routing } from '../../../app/routes'
 import useSlug from '../../../app/utils/useSlug'
 import { CmsType } from '../../../shared/config/cms.config'
 import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
@@ -39,13 +39,13 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
   ) => {
     switch (type) {
       case CmsType.Article:
-        return getRoute(routing.articleDetail.path, slug, id)
+        return generatePath(routing.articleDetail.path, { slug, id })
       case CmsType.Collection:
-        return getRoute(routing.collectionDetail.path, slug, id)
+        return generatePath(routing.collectionDetail.path, { slug, id })
       case CmsType.Publication:
-        return getRoute(routing.publicationDetail.path, slug, id)
+        return generatePath(routing.publicationDetail.path, { slug, id })
       case CmsType.Special:
-        return getRoute(routing.specialDetail.path, subType, slug, id)
+        return generatePath(routing.specialDetail.path, { type: subType, slug, id })
       default:
         throw new Error(`Unable to open editorial suggestion, unknown type '${type}'.`)
     }
@@ -57,7 +57,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
       const slug = useSlug(suggestion.label)
 
       return {
-        pathname: getRoute(routing.datasetDetail.path, { id, slug }),
+        pathname: generatePath(routing.datasetDetail.path, { id, slug }),
         search: new URLSearchParams({
           [PARAMETERS.QUERY]: `${inputValue}`,
         }).toString(),
@@ -103,9 +103,10 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
     }
 
     const { type, subtype, id } = getDetailPageData(suggestion.uri)
+
     // suggestion.category TRACK
     return {
-      pathname: getRoute(routing.dataDetail.path, type, subtype, `id${id}`),
+      pathname: generatePath(routing.dataDetail.path, { type, subtype, id: `id${id}` }),
       search: new URLSearchParams({
         [PARAMETERS.VIEW]: view,
         [PARAMETERS.QUERY]: `${inputValue}`,

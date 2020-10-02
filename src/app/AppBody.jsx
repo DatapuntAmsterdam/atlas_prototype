@@ -3,7 +3,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React, { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
-import { Route, Switch } from 'react-router'
+import { generatePath, Route, Switch } from 'react-router'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { IDS } from '../shared/config/config'
@@ -13,7 +13,7 @@ import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 import PAGES from './pages'
-import { getRoute, mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
+import { mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
 import isIE from './utils/isIE'
 
 const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
@@ -98,11 +98,10 @@ const AppBody = ({ visibilityError, bodyClasses, hasGrid, currentPage, embedPrev
                 </Paragraph>{' '}
                 <Link
                   as={RouterLink}
-                  to={getRoute(
-                    routing.articleDetail.path,
-                    'internet-explorer-binnenkort-niet-meer-ondersteund',
-                    '11206c96-91d6-4f6a-9666-68e577797865',
-                  )}
+                  to={generatePath(routing.articleDetail.path, {
+                    slug: 'internet-explorer-binnenkort-niet-meer-ondersteund',
+                    id: '11206c96-91d6-4f6a-9666-68e577797865',
+                  })}
                   inList
                   darkBackground
                 >
