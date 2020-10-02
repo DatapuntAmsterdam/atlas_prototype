@@ -14,7 +14,16 @@ export const MAIN_PATHS = {
   MAP: 'kaart',
 }
 
-export const routing = {
+// TODO: Refactor this file once redux-first-router has been removed from the project.
+export interface Route {
+  title: string
+  path: string
+  type: string
+  page: string
+  useHooks?: boolean
+}
+
+export const routing: { [key: string]: Route } = {
   home: {
     title: 'Home',
     path: '/',

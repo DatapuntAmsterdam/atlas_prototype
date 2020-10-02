@@ -15,7 +15,7 @@ import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
 import redirectToDcatd from '../../utils/redirectToDcatd'
-import useSlug from '../../utils/useSlug'
+import toSlug from '../../utils/toSlug'
 
 const DatasetCardContainer = styled.div`
   margin-bottom: ${themeSpacing(8)};
@@ -61,7 +61,7 @@ const DatasetSearchResults = ({ query, label, results, errors, isOverviewPage })
               key: id,
               to: toDatasetDetail({
                 id,
-                slug: useSlug(header) || '',
+                slug: toSlug(header) || '',
               }),
               shortTitle: header,
               teaser,

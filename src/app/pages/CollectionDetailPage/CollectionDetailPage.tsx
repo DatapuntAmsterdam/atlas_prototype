@@ -1,10 +1,9 @@
 /* eslint-disable camelcase */
 import { Link, Row, themeSpacing } from '@amsterdam/asc-ui'
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { cmsConfig } from '../../../shared/config/config'
-import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import CardListBlock, { CMSCollectionList } from '../../components/CardList/CardListBlock'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
@@ -32,8 +31,12 @@ type CollectionResult = {
   field_items: CMSResultItem[]
 }
 
+interface CollectionDetailPageParams {
+  id: string
+}
+
 const CollectionDetailPage: React.FC = () => {
-  const { id } = useSelector(getLocationPayload)
+  const { id } = useParams<CollectionDetailPageParams>()
   const { setDocumentTitle } = useDocumentTitle()
   const { results, fetchData, loading, error } = useFromCMS<CollectionResult>(
     cmsConfig.CMS_COLLECTION_DETAIL,
@@ -42,7 +45,7 @@ const CollectionDetailPage: React.FC = () => {
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [id])
 
   useEffect(() => {
     if (results?.title) {

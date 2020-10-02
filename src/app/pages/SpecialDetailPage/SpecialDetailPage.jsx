@@ -1,20 +1,20 @@
 import { Column, Row } from '@amsterdam/asc-ui'
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { SpecialType } from '../../../shared/config/cms.config'
 import { cmsConfig } from '../../../shared/config/config'
 import { toSpecialDetail } from '../../../store/redux-first-router/actions'
-import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import IFrame from '../../components/IFrame/IFrame'
 import useFromCMS from '../../utils/useFromCMS'
 import Animation from './specials/Animation'
 
-const SpecialDetailPage = ({ id }) => {
+const SpecialDetailPage = () => {
+  const { id } = useParams()
   const { fetchData, results, loading, error } = useFromCMS(cmsConfig.SPECIAL, id)
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData()
   }, [id])
 
@@ -42,11 +42,4 @@ const SpecialDetailPage = ({ id }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  const { id } = getLocationPayload(state)
-  return {
-    id,
-  }
-}
-
-export default connect(mapStateToProps, null)(SpecialDetailPage)
+export default SpecialDetailPage

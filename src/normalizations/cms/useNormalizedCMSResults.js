@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 import RouterLink from 'redux-first-router-link'
-import useSlug from '../../app/utils/useSlug'
-import formatDate from '../../shared/services/date-formatter/date-formatter'
-import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
+import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
+import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
+import formatDate from '../../shared/services/date-formatter/date-formatter'
 import {
   toArticleDetail,
+  toCollectionDetail,
   toPublicationDetail,
   toSpecialDetail,
-  toCollectionDetail,
 } from '../../store/redux-first-router/actions'
 
 export const EDITORIAL_DETAIL_ACTIONS = {
@@ -50,7 +50,7 @@ const normalizeObject = (data) => {
     ...otherFields
   } = data
 
-  const slug = useSlug(title)
+  const slug = toSlug(title)
 
   // The type SPECIALS has a different url structure
   // eslint-disable-next-line no-nested-ternary

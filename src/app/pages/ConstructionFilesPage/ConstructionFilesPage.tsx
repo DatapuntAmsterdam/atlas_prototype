@@ -1,14 +1,14 @@
 import { Alert, Heading, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { lazy, useEffect, useState } from 'react'
+import React, { FunctionComponent, lazy, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import environment from '../../../environment'
 import { resetFile } from '../../../shared/ducks/files/actions'
 import { getFileName, getFileUrl } from '../../../shared/ducks/files/selectors'
 import { isPrintMode } from '../../../shared/ducks/ui/ui'
 import { fetchWithToken } from '../../../shared/services/api/api'
-import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import ConstructionFileDetail, {
   ConstructionFileDetailProps as Results,
 } from '../../components/ConstructionFileDetail/ConstructionFileDetail'
@@ -27,7 +27,12 @@ const StyledRow = styled(Row)`
 const ERROR_MESSAGE =
   'Er kunnen door een technische storing helaas geen bouw- en omgevingsdossiers worden getoond. Probeer het later nog eens.'
 
-const ConstructionFilesContainer = () => {
+interface ConstructionFilesPageParams {
+  id: string
+}
+
+const ConstructionFilesPage: FunctionComponent = () => {
+  const { id } = useParams<ConstructionFilesPageParams>()
   const [results, setResults] = useState<Results | null>(null)
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
@@ -42,15 +47,13 @@ const ConstructionFilesContainer = () => {
   const fileName: string = useSelector(getFileName)
   const fileUrl: string = useSelector(getFileUrl)
   const printMode: boolean = useSelector(isPrintMode)
-  const locationPayload: { id: string } = useSelector(getLocationPayload)
-
   const { titel: title } = results || {}
 
   async function fetchConstructionFiles() {
     setLoading(true)
     try {
       const data = await fetchWithToken(
-        `${environment.API_ROOT}iiif-metadata/bouwdossier/${locationPayload.id.replace('id', '')}/`,
+        `${environment.API_ROOT}iiif-metadata/bouwdossier/${id.replace('id', '')}/`,
       )
       setResults(data)
     } catch (e) {
@@ -61,7 +64,7 @@ const ConstructionFilesContainer = () => {
 
   useEffect(() => {
     fetchConstructionFiles()
-  }, [])
+  }, [id])
 
   // Effect to update the documentTitle
   useEffect(
@@ -123,4 +126,4 @@ const ConstructionFilesContainer = () => {
   )
 }
 
-export default ConstructionFilesContainer
+export default ConstructionFilesPage

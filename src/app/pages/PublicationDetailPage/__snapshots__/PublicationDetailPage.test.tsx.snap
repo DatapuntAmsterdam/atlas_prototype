@@ -6,7 +6,7 @@ exports[`PublicationDetailPage should render the publication when there are resu
   linkAction={
     Object {
       "payload": Object {
-        "id": 3,
+        "id": "foo",
         "slug": "",
       },
       "type": "atlasRouter/PUBLICATION_DETAIL",
@@ -118,7 +118,7 @@ exports[`PublicationDetailPage should render the publication when there are resu
           >
             <DocumentCover
               description="Download PDF (file size)"
-              loading=""
+              loading={false}
               onClick={[Function]}
               title="This is a title"
             />

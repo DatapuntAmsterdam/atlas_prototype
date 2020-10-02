@@ -1,13 +1,13 @@
-import React from 'react'
 import { shallow } from 'enzyme'
-import DatasetSearchResults from './DatasetSearchResults'
-import getState from '../../../shared/services/redux/get-state'
-import useSlug from '../../utils/useSlug'
-import { modificationDateFilter } from '../../components/Filters/Filters'
+import React from 'react'
 import { dcatdScopes } from '../../../shared/services/auth/auth'
+import getState from '../../../shared/services/redux/get-state'
+import { modificationDateFilter } from '../../components/Filters/Filters'
+import toSlug from '../../utils/toSlug'
+import DatasetSearchResults from './DatasetSearchResults'
 
 jest.mock('../../../shared/services/redux/get-state')
-jest.mock('../../utils/useSlug')
+jest.mock('../../utils/toSlug')
 jest.mock('../../components/Filters/Filters')
 
 describe('DatasetSearchResults', () => {
@@ -18,7 +18,7 @@ describe('DatasetSearchResults', () => {
     getState.mockImplementation(() => ({
       user: null,
     }))
-    useSlug.mockImplementation(() => mockSlug)
+    toSlug.mockImplementation(() => mockSlug)
     modificationDateFilter.mockImplementation(() => mockDate)
   })
 

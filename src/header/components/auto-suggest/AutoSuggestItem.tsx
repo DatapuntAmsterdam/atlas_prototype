@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { generatePath, Link } from 'react-router-dom'
 import SearchType from '../../../app/pages/SearchPage/constants'
 import { routing } from '../../../app/routes'
-import useSlug from '../../../app/utils/useSlug'
+import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
 import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import PARAMETERS from '../../../store/parameters'
@@ -54,7 +54,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
   const to: LocationDescriptorObject = useMemo(() => {
     if (suggestion.type === SearchType.Dataset) {
       const [, , id] = extractIdEndpoint(suggestion.uri)
-      const slug = useSlug(suggestion.label)
+      const slug = toSlug(suggestion.label)
 
       return {
         pathname: generatePath(routing.datasetDetail.path, { id, slug }),
@@ -72,7 +72,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
       suggestion.type === CmsType.Special
     ) {
       const [, , id] = extractIdEndpoint(suggestion.uri)
-      const slug = useSlug(suggestion.label)
+      const slug = toSlug(suggestion.label)
 
       let subType = ''
 
@@ -112,7 +112,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
         [PARAMETERS.QUERY]: `${inputValue}`,
       }).toString(),
     }
-  }, [extractIdEndpoint, useSlug, openEditorialSuggestion, decodeLayers, highlightValue])
+  }, [extractIdEndpoint, openEditorialSuggestion, decodeLayers, highlightValue])
 
   const htmlContent = useMemo(() => highlightSuggestion(content, highlightValue), [
     content,

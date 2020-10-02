@@ -17,18 +17,14 @@ import { mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
 import isIE from './utils/isIE'
 
 const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
-const ActualityContainer = React.lazy(() =>
-  import(/* webpackChunkName: "ActualityContainer" */ './containers/ActualityContainer'),
+const ActualityPage = React.lazy(() =>
+  import(/* webpackChunkName: "ActualityPage" */ './pages/ActualityPage'),
 )
-const DatasetDetailContainer = React.lazy(() =>
-  import(
-    /* webpackChunkName: "DatasetDetailContainer" */ './containers/DatasetDetailContainer/DatasetDetailContainer'
-  ),
+const DatasetDetailPage = React.lazy(() =>
+  import(/* webpackChunkName: "DatasetDetailPage" */ './pages/DatasetDetailPage'),
 )
-const ConstructionFilesContainer = React.lazy(() =>
-  import(
-    /* webpackChunkName: "ConstructionFilesContainer" */ './containers/ConstructionFilesContainer/ConstructionFilesContainer'
-  ),
+const ConstructionFilesPage = React.lazy(() =>
+  import(/* webpackChunkName: "ConstructionFilesPage" */ './pages/ConstructionFilesPage'),
 )
 const ArticleDetailPage = React.lazy(() =>
   import(/* webpackChunkName: "ArticleDetailPage" */ './pages/ArticleDetailPage'),
@@ -124,7 +120,7 @@ const AppBody = ({ visibilityError, bodyClasses, hasGrid, currentPage, embedPrev
                   exact
                   component={CollectionDetailPage}
                 />
-                <Route path={routing.actuality.path} exact component={ActualityContainer} />
+                <Route path={routing.actuality.path} exact component={ActualityPage} />
                 <Route path={routing.niet_gevonden.path} exact component={NotFoundPage} />
                 <Route path={mapSearchPagePaths} component={SearchPage} />
               </Switch>
@@ -157,12 +153,12 @@ const AppBody = ({ visibilityError, bodyClasses, hasGrid, currentPage, embedPrev
                           <Route
                             path={routing.constructionFile.path}
                             exact
-                            component={ConstructionFilesContainer}
+                            component={ConstructionFilesPage}
                           />
                           <Route
                             path={routing.datasetDetail.path}
                             exact
-                            component={DatasetDetailContainer}
+                            component={DatasetDetailPage}
                           />
                           <Route path={mapSplitPagePaths} component={MapSplitPage} />
                         </Switch>

@@ -8,12 +8,11 @@ import {
   Row,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import environment from '../../../environment'
 import { cmsConfig } from '../../../shared/config/config'
 import { toPublicationDetail } from '../../../store/redux-first-router/actions'
-import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DocumentCover from '../../components/DocumentCover/DocumentCover'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
@@ -22,12 +21,13 @@ import getImageFromCms from '../../utils/getImageFromCms'
 import useDownload from '../../utils/useDownload'
 import useFromCMS from '../../utils/useFromCMS'
 
-const PublicationDetailPage = ({ id }) => {
+const PublicationDetailPage = () => {
+  const { id } = useParams()
   const { fetchData, results, loading, error } = useFromCMS(cmsConfig.PUBLICATION, id)
   const [downloadLoading, downloadFile] = useDownload()
   const { trackEvent } = useMatomo()
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData()
   }, [id])
 
@@ -111,11 +111,4 @@ const PublicationDetailPage = ({ id }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  const { id } = getLocationPayload(state)
-  return {
-    id,
-  }
-}
-
-export default connect(mapStateToProps, null)(PublicationDetailPage)
+export default PublicationDetailPage

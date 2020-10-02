@@ -20,8 +20,8 @@ import {
   Typography,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { useMemo } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import environment from '../../../environment'
 import normalizeDownloadsObject from '../../../normalizations/cms/normalizeDownloadFiles'
@@ -30,7 +30,6 @@ import useNormalizedCMSResults, {
 } from '../../../normalizations/cms/useNormalizedCMSResults'
 import { cmsConfig } from '../../../shared/config/config'
 import { toArticleDetail } from '../../../store/redux-first-router/actions'
-import { getLocationPayload } from '../../../store/redux-first-router/selectors'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import EditorialResults from '../../components/EditorialResults'
@@ -133,11 +132,12 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
   margin-left: ${themeSpacing(2)};
 `
 
-const ArticleDetailPage = ({ id }) => {
+const ArticleDetailPage = () => {
+  const { id } = useParams()
   const { fetchData, results, loading, error } = useFromCMS(cmsConfig.ARTICLE, id)
   const [downloadLoading, downloadFile] = useDownload()
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData()
   }, [id])
 
@@ -313,11 +313,4 @@ const ArticleDetailPage = ({ id }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  const { id } = getLocationPayload(state)
-  return {
-    id,
-  }
-}
-
-export default connect(mapStateToProps, null)(ArticleDetailPage)
+export default ArticleDetailPage
