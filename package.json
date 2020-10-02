@@ -53,7 +53,7 @@
     "core-js": "3.6.5",
     "custom-event-polyfill": "^1.0.7",
     "d3": "3.5.17",
-    "deep-equal": "^2.0.3",
+    "deep-equal": "^2.0.4",
     "escape-string-regexp": "^4.0.0",
     "file-saver": "^2.0.2",
     "graphql": "^15.3.0",
