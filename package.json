@@ -39,7 +39,7 @@
     "@babel/runtime": "^7.11.2",
     "@datapunt/matomo-tracker-js": "0.2.1",
     "@datapunt/matomo-tracker-react": "0.2.1",
-    "@sentry/browser": "5.24.2",
+    "@sentry/browser": "5.25.0",
     "@turf/turf": "^5.1.6",
     "@types/file-saver": "^2.0.1",
     "@types/openseadragon": "^2.4.5",
