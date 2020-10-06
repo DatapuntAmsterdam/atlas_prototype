@@ -1,5 +1,4 @@
 // Selectors
-import { get } from 'lodash'
 import { createSelector } from 'reselect'
 import { detailPointType } from '../../../map/ducks/map/constants'
 import { REDUCER_KEY } from './constants'
@@ -50,8 +49,9 @@ export const getGeoJsons = createSelector([getMapMarkers], (markers) =>
 )
 
 export const getShapeFilter = createSelector(getDataSelection, (dataSelection) => {
-  const markers = get(dataSelection, 'geometryFilter.markers')
-  const description = get(dataSelection, 'geometryFilter.description')
+  const markers = dataSelection?.geometryFilter?.markers
+  const description = dataSelection?.geometryFilter?.description
+
   return markers && description
     ? {
         shape: {

@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle,no-param-reassign */
-import { identity } from 'lodash'
 import environment from '../../../environment'
 import { fetchWithToken } from '../api/api'
 import geosearchFormatter from './geosearch-formatter'
@@ -121,7 +120,7 @@ function getRelatedObjects(geosearchResults, user) {
 
         Promise.all(requests).then((results) => {
           const geosearchResultsCopy = [...geosearchResults]
-          const filteredResults = results.filter(identity)
+          const filteredResults = results.filter((result) => result)
 
           if (filteredResults.length) {
             geosearchResultsCopy[pandCategoryIndex].subResults = filteredResults

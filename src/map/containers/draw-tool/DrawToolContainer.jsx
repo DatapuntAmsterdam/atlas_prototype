@@ -1,4 +1,3 @@
-import { get } from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -112,9 +111,7 @@ class DrawToolContainer extends React.Component {
 
   getMarkers() {
     const { geometry, dataSelection } = this.props
-    return geometry && geometry.length > 0
-      ? geometry
-      : get(dataSelection, 'geometryFilter.markers', [])
+    return geometry?.length > 0 ? geometry : dataSelection?.geometryFilter?.markers ?? []
   }
 
   render() {

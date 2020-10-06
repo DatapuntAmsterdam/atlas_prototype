@@ -1,5 +1,4 @@
 import angular from 'angular'
-import { get } from 'lodash'
 import { setGlobalError } from '../../../../src/shared/ducks/error/error-message'
 
 angular.module('dpShared').factory('httpStatus', httpStatusFactory)
@@ -18,7 +17,8 @@ function httpStatusFactory($window) {
   }
 
   function registerError(errorType) {
-    const dispatch = get($window, 'reduxStore.dispatch')
+    const dispatch = $window?.reduxStore?.dispatch
+
     if (dispatch) {
       dispatch(setGlobalError(errorType))
     }

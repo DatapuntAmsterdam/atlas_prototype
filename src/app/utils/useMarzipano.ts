@@ -1,5 +1,5 @@
 import { useStateRef } from '@amsterdam/arm-core'
-import { throttle } from 'lodash'
+import throttle from 'lodash.throttle'
 import Marzipano from 'marzipano'
 import { RefObject, useEffect, useState } from 'react'
 import { getOrientation } from '../../panorama/services/marzipano/marzipano'

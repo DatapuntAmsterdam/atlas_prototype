@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { throttle } from 'lodash'
+import throttle from 'lodash.throttle'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'

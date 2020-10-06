@@ -1,4 +1,3 @@
-import { get } from 'lodash'
 import { MATOMO_CONSTANTS } from '../../../app/matomo'
 import PAGES from '../../../app/pages'
 import { routing } from '../../../app/routes'
@@ -58,7 +57,7 @@ const trackEvents = {
           tracking.query,
         ]
       : // eslint-disable-next-line no-nested-ternary
-      getViewMode(state) === VIEW_MODE.MAP && get(query, `${PARAMETERS.VIEW}`) === undefined
+      getViewMode(state) === VIEW_MODE.MAP && query[PARAMETERS.VIEW] === undefined
       ? [
           MATOMO_CONSTANTS.TRACK_EVENT,
           'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP
@@ -68,7 +67,7 @@ const trackEvents = {
       : // eslint-disable-next-line no-nested-ternary
       !firstAction &&
         getViewMode(state) === VIEW_MODE.SPLIT &&
-        get(query, `${PARAMETERS.VIEW}`) === VIEW_MODE.MAP
+        query[PARAMETERS.VIEW] === VIEW_MODE.MAP
       ? [
           MATOMO_CONSTANTS.TRACK_EVENT,
           'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM SPLITSCREEN

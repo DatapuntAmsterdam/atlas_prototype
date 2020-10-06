@@ -1,9 +1,9 @@
-import deepEqual from 'deep-equal'
+import isEqual from 'lodash.isequal'
 import { UrlParam } from './useParam'
 
 function encodeParam<T>(urlParam: UrlParam<T>, value: T) {
   const encodedValue = value && urlParam.encode(value)
-  const newValue = deepEqual(urlParam.defaultValue, value) ? null : encodedValue
+  const newValue = isEqual(urlParam.defaultValue, value) ? null : encodedValue
   return newValue
 }
 

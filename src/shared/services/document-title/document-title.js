@@ -1,4 +1,3 @@
-import { get } from 'lodash'
 import { routing } from '../../../app/routes'
 import GLOSSARY from '../../../detail/services/glossary.constant'
 import PARAMETERS from '../../../store/parameters'
@@ -7,8 +6,9 @@ import { VIEW_MODE } from '../../ducks/ui/ui'
 
 export const mapDocumentTitle = (action, defaultTitle) => {
   let pageTitle = defaultTitle
-  const view = get(action, `meta.query[${PARAMETERS.VIEW}]`, '')
-  const embed = get(action, `meta.query[${PARAMETERS.EMBED}]`, 'false')
+  const view = action?.meta?.query?.[PARAMETERS.VIEW] ?? ''
+  const embed = action?.meta?.query?.[PARAMETERS.EMBED] ?? 'false'
+
   if (view === VIEW_MODE.MAP) {
     pageTitle = 'Grote kaart'
   }
@@ -24,7 +24,7 @@ export const detailDocumentTitle = (action, defaultTitle = 'UNKNOWN') => {
     action.payload.subtype && action.payload.subtype.toUpperCase().replace(/-/g, '_')
   const glossaryDefinition = GLOSSARY.DEFINITIONS[glossaryKey]
   let label = glossaryDefinition ? glossaryDefinition.singular : defaultTitle
-  const embed = get(action, `meta.query[${PARAMETERS.EMBED}]`, 'false')
+  const embed = action?.meta?.query?.[PARAMETERS.EMBED] ?? 'false'
 
   if (embed === 'true') {
     label = `${label} | Embedded`
@@ -43,8 +43,9 @@ export const detailDocumentTitleWithName = (action) => {
   // We fill the title for details in 2 steps
   let title = document.title.replace(' - Data en informatie - Amsterdam', '')
 
-  const isDataset = !!get(action, 'payload.data.editDatasetId', null)
-  if (isDataset && title.indexOf(':') === -1) {
+  const dataSetId = action?.payload?.data?.editDatasetId ?? null
+
+  if (dataSetId !== null && title.indexOf(':') === -1) {
     title = `${title}: ${action.payload.data._display}`
   }
 

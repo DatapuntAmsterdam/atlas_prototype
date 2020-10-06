@@ -1,4 +1,3 @@
-import { identity } from 'lodash'
 import isDefined from '../is-defined'
 import isObject from '../is-object'
 import DATA_SELECTION_CONFIG from './data-selection-config'
@@ -52,7 +51,7 @@ function recurGetContent(path, rawData) {
     const key = path[0]
     const rawValue = rawData[key]
 
-    return Array.isArray(rawValue) ? rawValue.filter(identity).join(' | ') : rawValue
+    return Array.isArray(rawValue) ? rawValue.filter((part) => part).join(' | ') : rawValue
   }
   const key = path[0]
   const rawValue = rawData[key]

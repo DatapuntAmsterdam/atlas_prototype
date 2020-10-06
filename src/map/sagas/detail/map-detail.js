@@ -1,4 +1,3 @@
-import { get } from 'lodash'
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import getDetailData from '../../../detail/sagas/detail'
 import {
@@ -64,8 +63,9 @@ export function* fetchMapDetail() {
 }
 
 export function* fetchDetailEffect(action) {
-  const oldView = get(action, `meta.location.prev.query[${PARAMETER.VIEW}]`, null)
-  const newView = get(action, `meta.location.current.query[${PARAMETER.VIEW}]`, null)
+  const oldView = action?.meta?.location?.prev?.query?.[PARAMETER.VIEW] ?? null
+  const newView = action?.meta?.location?.current?.query?.[PARAMETER.VIEW] ?? null
+
   if (oldView !== newView && newView === VIEW_MODE.SPLIT) {
     yield put(closeMapPanel())
   }

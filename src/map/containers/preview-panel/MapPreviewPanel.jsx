@@ -1,4 +1,3 @@
-import { get } from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
@@ -21,8 +20,7 @@ class MapPreviewPanel extends React.Component {
 
   render() {
     const { props } = this
-    const isLoading = get(props, 'dataSearch.isLoading') || get(props, 'mapDetail.isLoading')
-
+    const isLoading = props?.dataSearch?.isLoading ?? props?.mapDetail?.isLoading
     const isDetailPage =
       !props.isSearchPreview && !isLoading && props.detail && props.mapDetail && props.detailResult
 

@@ -1,4 +1,3 @@
-import { identity } from 'lodash'
 import environment from '../../../environment'
 import { fetchWithToken } from '../api/api'
 import generateId from '../state-token-generator/state-token-generator'
@@ -49,7 +48,7 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
             id: generateId(),
             type: 'dataSelectionBounds',
           },
-        ].filter(identity),
+        ].filter((item) => item),
         markers: data.appartementen.map((appartement) => ({
           iconData: {
             zoomLevel,
