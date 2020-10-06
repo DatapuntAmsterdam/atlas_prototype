@@ -1,37 +1,36 @@
 /* eslint-disable global-require */
-import { Alert, Button, Heading, Paragraph, Tab, Tabs, themeSpacing } from '@amsterdam/asc-ui'
 import { Map, Table } from '@amsterdam/asc-assets'
+import { Alert, Button, Heading, Paragraph, Tab, Tabs, themeSpacing } from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { AngularWrapper } from 'react-angular'
-import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
-import Link from 'redux-first-router-link'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory, useLocation } from 'react-router-dom'
+import Link from 'redux-first-router-link'
+import styled from 'styled-components'
+import { setPage as setDatasetPage } from '../../../shared/ducks/data-selection/actions'
 import { DATASETS, VIEWS_TO_PARAMS } from '../../../shared/ducks/data-selection/constants'
-import { setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
-import { SCOPES } from '../../../shared/services/auth/auth'
-import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
-import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer'
-import NotificationLevel from '../../models/notification'
-import formatCount from '../../utils/formatCount'
-import LoginLink from '../Links/LoginLink/LoginLink'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import ShareBar from '../ShareBar/ShareBar'
-import DataSelectionList from './DataSelectionList/DataSelectionList'
-import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
-import DataSelectionDownloadButton from './DataSelectionDownloadButton'
-import useParam from '../../utils/useParam'
-import { viewParam } from '../../pages/MapPage/query-params'
-import useGetUrl from '../../utils/useGetUrl'
 import {
   getDataSelection,
   getDataSelectionResult,
 } from '../../../shared/ducks/data-selection/selectors'
 import { getFilters } from '../../../shared/ducks/filters/filters'
+import { setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { getUser, getUserScopes } from '../../../shared/ducks/user/user'
-import { setPage as setDatasetPage } from '../../../shared/ducks/data-selection/actions'
+import { SCOPES } from '../../../shared/services/auth/auth'
+import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
+import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer'
+import NotificationLevel from '../../models/notification'
+import { viewParam } from '../../pages/MapPage/query-params'
+import formatCount from '../../utils/formatCount'
+import useParam from '../../utils/useParam'
+import LoginLink from '../Links/LoginLink/LoginLink'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import ShareBar from '../ShareBar/ShareBar'
+import DataSelectionDownloadButton from './DataSelectionDownloadButton'
+import DataSelectionList from './DataSelectionList/DataSelectionList'
+import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
 
 let angularInstance = null
 
@@ -49,9 +48,9 @@ const StyledTabs = styled(Tabs)`
 `
 
 const DataSelection = () => {
+  const location = useLocation()
   const history = useHistory()
   const [view] = useParam(viewParam)
-  const { getFromPath } = useGetUrl()
 
   const { isLoading, dataset, authError, page: currentPage } = useSelector(getDataSelection)
   const dispatch = useDispatch()
@@ -169,7 +168,10 @@ const DataSelection = () => {
                     : ''
                 }`}
                 onClick={() => {
-                  history.push(getFromPath(tab.path))
+                  history.push({
+                    ...location,
+                    pathname: tab.path,
+                  })
                 }}
               />
             ))}
