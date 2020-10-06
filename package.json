@@ -189,7 +189,7 @@
     "jest": "26.5.0",
     "jest-environment-jsdom": "26.5.2",
     "jest-environment-jsdom-global": "2.0.4",
-    "jest-environment-node": "26.5.0",
+    "jest-environment-node": "26.5.2",
     "jest-fetch-mock": "3.0.3",
     "jest-styled-components": "7.0.3",
     "karma": "5.2.3",
