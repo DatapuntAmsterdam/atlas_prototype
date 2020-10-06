@@ -15,6 +15,6 @@ describe('getMetadata', () => {
 
     await expect(getMetadata()).resolves.toEqual(response)
 
-    expect(mockedFetchWithoutToken).toHaveBeenCalledWith(`${environment.API_ROOT}metadata`)
+    expect(mockedFetchWithoutToken).toHaveBeenCalledWith(`${environment.API_ROOT}metadata/`)
   })
 })

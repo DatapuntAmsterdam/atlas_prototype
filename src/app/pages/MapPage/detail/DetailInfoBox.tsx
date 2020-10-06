@@ -38,7 +38,6 @@ const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta 
         size={32}
         iconSize={26}
         onClick={() => setOpen(!open)}
-        // Todo: add questionmark icon here
         icon={<Metadata />}
       />
       {open && (

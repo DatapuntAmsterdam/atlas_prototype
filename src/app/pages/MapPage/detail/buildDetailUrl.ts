@@ -1,4 +1,5 @@
-import { getRoute, routing } from '../../../routes'
+import { generatePath } from 'react-router-dom'
+import { routing } from '../../../routes'
 import buildParamQuery from '../../../utils/buildParamQuery'
 import { detailUrlParam } from '../query-params'
 
@@ -12,7 +13,7 @@ const buildDetailUrl = ({ type, subtype, id }: { type: string; subtype: string; 
         pathname: routing.map.path,
         search: buildParamQuery(detailUrlParam, `${type}/${subtype}/${id}`).toString(),
       }
-    : getRoute(routing.dataDetail.path, type, subtype, `id${id}`)
+    : generatePath(routing.dataDetail.path, { type, subtype, id: `id${id}` })
 }
 
 export default buildDetailUrl

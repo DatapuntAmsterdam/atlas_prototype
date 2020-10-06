@@ -19,5 +19,5 @@ export interface Metadata {
  * API documentation: https://api.data.amsterdam.nl/metadata/
  */
 export async function getMetadata() {
-  return fetchWithoutToken<Metadata[]>(joinUrl(environment.API_ROOT, 'metadata'))
+  return fetchWithoutToken<Metadata[]>(joinUrl([environment.API_ROOT, 'metadata']))
 }

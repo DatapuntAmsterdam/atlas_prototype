@@ -40,10 +40,12 @@ export interface ExternalLink {
   url: string
 }
 
+type To = { pathname: string; search?: string } | string
+
 export interface InternalLink {
   title: string
   // TODO: when types are fixed in @types/react-router-dom, use Pick<LinkProps> instead
-  to: { pathname: string; search?: string } | string
+  to: To
 }
 
 export type Link = ExternalLink | InternalLink
@@ -92,7 +94,7 @@ export interface DetailResultItemLinkList extends DefaultDetailResultItem {
 export interface DetailResultItemDefinitionListEntry {
   term: string
   description: string
-  link?: string
+  link?: To
 }
 
 export interface DetailResultItemTable extends DefaultDetailResultItem {

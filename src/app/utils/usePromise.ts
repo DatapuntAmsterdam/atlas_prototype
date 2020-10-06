@@ -50,11 +50,7 @@ export default function usePromise<T = any>(promise: Promise<T>) {
 
     promise
       .then((value) => !ignoreResult && setResult({ status: PromiseStatus.Fulfilled, value }))
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.warn(error)
-        return !ignoreResult && setResult({ status: PromiseStatus.Rejected, error })
-      })
+      .catch((error) => !ignoreResult && setResult({ status: PromiseStatus.Rejected, error }))
 
     return () => {
       ignoreResult = true

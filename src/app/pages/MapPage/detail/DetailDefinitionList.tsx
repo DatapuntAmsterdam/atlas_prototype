@@ -10,7 +10,7 @@ export interface DetailDefinitionListProps {
 const DetailDefinitionList: React.FC<DetailDefinitionListProps> = ({ entries }) => (
   <DefinitionList>
     {entries.map(({ term, description, link }) => (
-      <DefinitionListItem term={term}>
+      <DefinitionListItem term={term} key={term}>
         {link ? (
           <Link href={link} inList>
             {description}

@@ -1,14 +1,7 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
-import styled from 'styled-components'
 import { getMetadata } from '../../../api/metadata'
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import usePromise, { PromiseStatus } from '../../utils/usePromise'
-
-const StyledLoadingSpinner = styled(LoadingSpinner)`
-  position: absolute;
-  top: 200px;
-`
+import PageTemplate from '../../components/PageTemplate/PageTemplate'
 
 const ActualityPage: FunctionComponent = () => (
   <div className="c-page">
@@ -30,47 +23,39 @@ function renderContents() {
   const [retryCount, setRetryCount] = useState(0)
   const result = usePromise(useMemo(() => getMetadata(), [retryCount]))
 
-  if (result.status === PromiseStatus.Pending) {
-    return <StyledLoadingSpinner />
-  }
-
-  if (result.status === PromiseStatus.Rejected) {
-    return (
-      <ErrorMessage
-        message="Er is een fout opgetreden bij het laden van de actualiteiten."
-        buttonLabel="Probeer opnieuw"
-        buttonOnClick={() => setRetryCount(retryCount + 1)}
-      />
-    )
-  }
-
   return (
-    <table className="c-table">
-      <thead>
-        <tr className="c-table__header-row">
-          <th className="c-table__field c-table__header-field" scope="col">
-            Thema
-          </th>
-          <th className="c-table__field c-table__header-field" scope="col">
-            Actualisatie (aanmaak producten)
-          </th>
-          <th className="c-table__field c-table__header-field" scope="col">
-            Peildatum gegevens
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {result.value.map((source) => (
-          <tr className="c-table__content-row">
-            {source.title && (
-              <td className="c-table__field c-table__content-field">{source.title}</td>
-            )}
-            <td className="c-table__field c-table__content-field">{source.update_frequency}</td>
-            <td className="c-table__field c-table__content-field">{source.data_modified_date}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <PageTemplate result={result} onRetry={() => setRetryCount(retryCount + 1)}>
+      {result.status === PromiseStatus.Fulfilled && (
+        <table className="c-table">
+          <thead>
+            <tr className="c-table__header-row">
+              <th className="c-table__field c-table__header-field" scope="col">
+                Thema
+              </th>
+              <th className="c-table__field c-table__header-field" scope="col">
+                Actualisatie (aanmaak producten)
+              </th>
+              <th className="c-table__field c-table__header-field" scope="col">
+                Peildatum gegevens
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {result.value.map((source) => (
+              <tr className="c-table__content-row">
+                {source.title && (
+                  <td className="c-table__field c-table__content-field">{source.title}</td>
+                )}
+                <td className="c-table__field c-table__content-field">{source.update_frequency}</td>
+                <td className="c-table__field c-table__content-field">
+                  {source.data_modified_date}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </PageTemplate>
   )
 }
 

@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
-import { connect, useDispatch } from 'react-redux'
-import React, { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
 // @ts-ignore
@@ -33,6 +33,7 @@ import { getPanelTitle, HeadingWrapper, PanelContents } from '../MapPage/detail/
 import DetailHeading from '../MapPage/detail/DetailHeading'
 import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
 import { getMapDetail } from '../../../map/ducks/detail/actions'
+import PageTemplate from '../../components/PageTemplate/PageTemplate'
 
 let angularInstance: any = null
 
@@ -81,20 +82,21 @@ const DetailContainer: React.FC<{ isLoading: boolean }> = ({ isLoading, children
   </div>
 )
 
-const Detail: React.FC<Props> = ({
-  isLoading,
-  user,
-  endpoint,
-  previewPanorama,
-  isPreviewPanoramaLoading,
-  detailTemplateUrl,
-  detailData,
-  detailFilterSelection,
-  subType,
-  type,
-  id,
-}) => {
+const Detail: React.FC<Props> = () => {
   const dispatch = useDispatch()
+  const [retryCount, setRetryCount] = useState(0)
+
+  const isLoading = useSelector(isDetailLoading)
+  const user = useSelector(getUser)
+  const endpoint = useSelector(getDetailEndpoint)
+  const subType = useSelector(getSubType)
+  const type = useSelector(getType)
+  const id = useSelector(getID)
+  const previewPanorama = useSelector(getPanoramaPreview)
+  const isPreviewPanoramaLoading = useSelector(isPanoramaPreviewLoading)
+  const detailTemplateUrl = useSelector(getDetailTemplateUrl)
+  const detailData = useSelector(getDetailData)
+  const detailFilterSelection = useSelector(getDetailFilterSelection)
 
   const result = usePromise(
     useMemo(async () => {
@@ -110,7 +112,7 @@ const Detail: React.FC<Props> = ({
       // Legacy, needed to, for example, update the GeoJSON's on the map
       dispatch(getMapDetail(detailUrl))
       return toMapDetails(serviceDefinition, data)
-    }, [type, subType, id]),
+    }, [type, subType, id, retryCount]),
   )
 
   if (!isGenericTemplate(detailTemplateUrl) && angularInstance) {
@@ -139,37 +141,24 @@ const Detail: React.FC<Props> = ({
       </DetailContainer>
     )
   }
-  if (result.status === PromiseStatus.Fulfilled) {
-    return (
-      <DetailContainer isLoading={isLoading}>
-        <DetailWrapper>
-          <TypeHeading>{result.value?.data.title}</TypeHeading>
-          <HeadingWrapper>
-            <Heading as="h1">{getPanelTitle(result)}</Heading>
-            {!!result?.value?.data?.infoBox && <DetailInfoBox {...result?.value?.data?.infoBox} />}
-          </HeadingWrapper>
-          <PanelContents legacyLayout result={result} />
-        </DetailWrapper>
-      </DetailContainer>
-    )
-  }
-
-  return null
+  return (
+    <PageTemplate result={result} onRetry={() => setRetryCount(retryCount + 1)}>
+      {result.status === PromiseStatus.Fulfilled && (
+        <DetailContainer isLoading={isLoading}>
+          <DetailWrapper>
+            <TypeHeading>{result.value?.data.title}</TypeHeading>
+            <HeadingWrapper>
+              <Heading as="h1">{getPanelTitle(result)}</Heading>
+              {!!result?.value?.data?.infoBox && (
+                <DetailInfoBox {...result?.value?.data?.infoBox} />
+              )}
+            </HeadingWrapper>
+            <PanelContents legacyLayout result={result} />
+          </DetailWrapper>
+        </DetailContainer>
+      )}
+    </PageTemplate>
+  )
 }
 
-const mapStateToProps = (state: any) => ({
-  isLoading: isDetailLoading(state),
-  user: getUser(state),
-  endpoint: getDetailEndpoint(state),
-  subType: getSubType(state),
-  type: getType(state),
-  id: getID(state),
-  previewPanorama: getPanoramaPreview(state),
-  isPreviewPanoramaLoading: isPanoramaPreviewLoading(state),
-  detailTemplateUrl: getDetailTemplateUrl(state),
-  detailData: getDetailData(state),
-  detailFilterSelection: getDetailFilterSelection(state),
-})
-
-// @ts-ignore
-export default connect(mapStateToProps)(Detail)
+export default Detail

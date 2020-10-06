@@ -34,7 +34,13 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
       {item.links.map((link) => {
         if ('url' in link) {
           return (
-            <StyledLink inList onClick={() => trackClick(link)} target="_blank" href={link.url}>
+            <StyledLink
+              key={link.url}
+              inList
+              onClick={() => trackClick(link)}
+              target="_blank"
+              href={link.url}
+            >
               {link.title}
             </StyledLink>
           )
@@ -46,6 +52,7 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
           return (
             // @ts-ignore
             <StyledLink
+              key={href}
               inList
               onClick={() => {
                 trackClick(link)
