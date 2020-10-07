@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import throttle from 'lodash.throttle'
+import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -40,7 +40,7 @@ class PanoramaContainer extends React.Component {
     this.hotspotClickHandler = this.hotspotClickHandler.bind(this)
     this.loadPanoramaScene = this.loadPanoramaScene.bind(this)
 
-    this.updateOrientationThrottled = throttle(this.updateOrientation, 300, {
+    this.updateOrientationThrottled = debounce(this.updateOrientation, 300, {
       leading: true,
       trailing: true,
     })
