@@ -19,19 +19,4 @@ describe('useMarzipano', () => {
 
     expect(resultWithRef.current.marzipanoViewer).not.toBeNull()
   })
-
-  it('returns currentMarzipanoView', () => {
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-
-    const ref = { current: div }
-
-    const { result } = renderHook(() => useMarzipano(ref))
-
-    expect(result.current.currentMarzipanoView).toBeNull()
-
-    result.current.marzipanoViewer.lookTo()
-
-    expect(result.current.currentMarzipanoView).not.toBeNull()
-  })
 })
