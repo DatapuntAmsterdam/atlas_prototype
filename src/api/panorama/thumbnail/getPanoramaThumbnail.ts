@@ -1,6 +1,7 @@
 import { LatLngLiteral } from 'leaflet'
-import { fetchWithToken } from '../../../shared/services/api/api'
 import environment from '../../../environment'
+import { fetchWithToken } from '../../../shared/services/api/api'
+import { PanoramaThumbnail } from './types'
 
 export interface FetchPanoramaOptions {
   /**
@@ -33,18 +34,6 @@ export interface FetchPanoramaOptions {
    * @default 20
    */
   radius?: number
-}
-
-export interface PanoramaThumbnail {
-  /**
-   * The identifier of the associated panorama.
-   */
-  id: string
-  heading: number
-  /**
-   * URL to the image preview.
-   */
-  url: string
 }
 
 type RawResponse =
@@ -108,6 +97,7 @@ function transformResponse(response: RawResponse): PanoramaThumbnail | null {
     return null
   }
 
+  // TODO: Remove this transformation of 'pano_id' once all legacy code has been removed.
   return {
     id: response.pano_id,
     heading: response.heading,
