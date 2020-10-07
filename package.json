@@ -130,7 +130,7 @@
     "@types/proj4": "^2.5.0",
     "@types/react-helmet": "^6.1.0",
     "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
+    "@types/react-router-dom": "^5.1.6",
     "@types/redux-first-router-link": "^1.4.4",
     "@types/redux-mock-store": "^1.0.2",
     "@types/remove-markdown": "^0.1.1",
