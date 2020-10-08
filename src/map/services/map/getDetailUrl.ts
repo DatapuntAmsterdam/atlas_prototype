@@ -1,6 +1,6 @@
 import joinUrl from '../../../app/utils/joinUrl'
-import { ServiceDefinition } from '../map-services.config'
 import environment from '../../../environment'
+import { ServiceDefinition } from '../map-services.config'
 
 // eslint-disable-next-line import/prefer-default-export
 export function getDetailUrl(serviceDefinition: ServiceDefinition, id: string) {
@@ -11,5 +11,5 @@ export function getDetailUrl(serviceDefinition: ServiceDefinition, id: string) {
     throw new Error('Unable to format URL, missing endpoint in service definition.')
   }
 
-  return joinUrl([apiRoot, serviceDefinition.endpoint, id])
+  return joinUrl([apiRoot, serviceDefinition.endpoint, id], true)
 }

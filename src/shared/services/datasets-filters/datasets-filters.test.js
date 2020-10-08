@@ -1,4 +1,4 @@
-import fetchApiSpecification from './datasets-filters'
+import getDatasetFilters from './datasets-filters'
 import mockApiData from './datasets-filters.mock'
 
 describe('fetchApiSpecification', () => {
@@ -13,7 +13,7 @@ describe('fetchApiSpecification', () => {
 
   it('should return the correct data', async () => {
     fetch.mockResponseOnce(JSON.stringify(mockApiData))
-    const result = await fetchApiSpecification()
+    const result = await getDatasetFilters()
     expect(result).toMatchSnapshot()
   })
 })

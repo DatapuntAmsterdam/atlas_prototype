@@ -12,7 +12,6 @@ import PanoPreviewReducer, {
 import PanoramaReducer, { PANORAMA } from '../panorama/ducks/reducer'
 import DataSearchReducer, { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer'
 import DataSelectionReducer, { DATA_SELECTION } from '../shared/ducks/data-selection/reducer'
-import DatasetReducer, { DATASETS } from '../shared/ducks/datasets/datasets'
 import DetailReducer, { DETAIL } from '../shared/ducks/detail/reducer'
 import ErrorMessageReducer, { REDUCER_KEY as ERROR } from '../shared/ducks/error/error-message'
 import FilesReducer, { FILES_REDUCER } from '../shared/ducks/files/reducer'
@@ -45,7 +44,6 @@ const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => 
     [DATA_SEARCH_REDUCER]: DataSearchReducer,
     [SELECTION]: SelectionReducer,
     [DATA_SELECTION]: DataSelectionReducer,
-    [DATASETS]: DatasetReducer,
     [FILES_REDUCER]: FilesReducer,
     [SEARCH]: SearchPageReducer,
   })

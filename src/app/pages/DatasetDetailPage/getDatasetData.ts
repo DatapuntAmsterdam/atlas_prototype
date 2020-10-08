@@ -1,6 +1,3 @@
-import marked from 'marked'
-import { dcatdScopes } from '../../../shared/services/auth/auth'
-
 const formatCatalogData = (data, catalogFilters) => {
   const { resourceTypes } = catalogFilters
   if (!resourceTypes || !data) {
@@ -30,7 +27,7 @@ const formatCatalogData = (data, catalogFilters) => {
     )
 }
 
-export const formatData = (data, subject, catalogFilters) => {
+const formatData = (data, subject, catalogFilters) => {
   if (subject === 'datasets') {
     return formatCatalogData(data, catalogFilters) // dcat data
   }
@@ -55,5 +52,3 @@ const formatDetailData = (rawData, category, subject, catalogFilters, scopes) =>
   }
   return data
 }
-
-export default formatDetailData

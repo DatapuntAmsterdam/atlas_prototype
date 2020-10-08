@@ -1,25 +1,23 @@
 import { testSaga } from 'redux-saga-test-plan'
-import watchErrors, { excludeUnauthorizedErrorEffect, setErrorsEffect } from './error'
-import { FETCH_GEO_SEARCH_RESULTS_FAILURE } from '../../ducks/data-search/constants'
 import { FETCH_PANORAMA_ERROR } from '../../../panorama/ducks/constants'
-import { FETCH_DETAIL_FAILURE } from '../../ducks/detail/constants'
-import { FETCH_API_SPECIFICATION_FAILURE } from '../../ducks/datasets/apiSpecification/apiSpecification'
+import { FETCH_GEO_SEARCH_RESULTS_FAILURE } from '../../ducks/data-search/constants'
 import {
-  FETCH_MARKERS_FAILURE,
   FETCH_DATA_SELECTION_FAILURE,
+  FETCH_MARKERS_FAILURE,
 } from '../../ducks/data-selection/constants'
-import { setGlobalError, ERROR_TYPES } from '../../ducks/error/error-message'
+import { FETCH_DETAIL_FAILURE } from '../../ducks/detail/constants'
+import { ERROR_TYPES, setGlobalError } from '../../ducks/error/error-message'
+import watchErrors, { excludeUnauthorizedErrorEffect, setErrorsEffect } from './error'
 
 describe('watchErrors', () => {
   it('should watch the error actions and call set errors', () => {
-    const action = { type: FETCH_API_SPECIFICATION_FAILURE }
+    const action = { type: FETCH_GEO_SEARCH_RESULTS_FAILURE }
 
     testSaga(watchErrors)
       .next()
       .takeLatestEffect(
         [
           FETCH_MARKERS_FAILURE,
-          FETCH_API_SPECIFICATION_FAILURE,
           FETCH_GEO_SEARCH_RESULTS_FAILURE,
           FETCH_PANORAMA_ERROR,
           FETCH_DETAIL_FAILURE,

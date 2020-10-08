@@ -5,18 +5,22 @@ import { DEFAULT_LOCALE } from '../../config/locale.config'
  *
  * E.g.: `2020-12-01` => '1 januari 2020'
  *
- * @param {Date} date The Date instance.
+ * @param {Date | string} date The Date instance.
  * @returns {string} The Dutch date string.
  */
 export default function formatDate(date, day = true, month = true, year = true) {
-  return (
-    date &&
-    date.toLocaleDateString(DEFAULT_LOCALE, {
-      ...(day && { day: 'numeric' }),
-      ...(month && { month: 'long' }),
-      ...(year && { year: 'numeric' }),
-    })
-  )
+  // TODO: Remove this check, TypeScript should take care of it.
+  if (!date) {
+    return null
+  }
+
+  const dateInstance = typeof date === 'string' ? new Date(date) : date
+
+  return dateInstance.toLocaleDateString(DEFAULT_LOCALE, {
+    ...(day && { day: 'numeric' }),
+    ...(month && { month: 'long' }),
+    ...(year && { year: 'numeric' }),
+  })
 }
 
 function isValidDate(date) {

@@ -1,9 +1,15 @@
-import { fetchWithToken } from '../api/api'
+import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
+import { fetchWithToken } from '../api/api'
+
+export interface DatasetFilterOption {
+  id: string
+  label: string
+}
 
 /** Matches the key (enum) of a type to a label (enumName) */
-function getOptions(propertyType) {
-  return propertyType.enum.map((item, i) => {
+function getOptions(propertyType: any): DatasetFilterOption[] {
+  return propertyType.enum.map((item: string, i: number) => {
     const index = propertyType.enum[i].indexOf(':')
     return {
       id: index === -1 ? propertyType.enum[i] : propertyType.enum[i].substring(index + 1),
@@ -12,7 +18,7 @@ function getOptions(propertyType) {
   })
 }
 
-function getCatalogFilters(data) {
+function toDatasetFilters(data: any) {
   const dcatDocProperties = data.components.schemas['dcat-dataset'].properties
   const themaProperties = dcatDocProperties['dcat:theme'].items
   const distributionProperties = dcatDocProperties['dcat:distribution'].items.properties
@@ -24,7 +30,7 @@ function getCatalogFilters(data) {
     formatTypes: getOptions(distributionProperties['dcat:mediaType']),
     serviceTypes: getOptions(distributionProperties['ams:serviceType']),
     resourceTypes: getOptions(distributionProperties['ams:resourceType']),
-    ownerTypes: ownerProperties.map((item) => ({
+    ownerTypes: ownerProperties.map((item: string) => ({
       id: item,
       label: item,
     })),
@@ -39,7 +45,7 @@ function getCatalogFilters(data) {
   return datasetsFilters
 }
 
-export default async function fetchApiSpecification() {
-  const data = await fetchWithToken(`${environment.API_ROOT}dcatd/openapi`)
-  return getCatalogFilters(data)
+export default async function getDatasetFilters() {
+  const data = await fetchWithToken(joinUrl([environment.API_ROOT, 'dcatd/openapi']))
+  return toDatasetFilters(data)
 }
