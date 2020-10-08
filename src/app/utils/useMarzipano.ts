@@ -3,17 +3,17 @@ import debounce from 'lodash.debounce'
 import Marzipano from 'marzipano'
 import { RefObject, useEffect, useState, useCallback } from 'react'
 import { getOrientation } from '../../panorama/services/marzipano/marzipano'
-import { PanoParam } from '../pages/MapPage/query-params'
+import { Pano } from '../pages/MapPage/query-params'
 
 const useMarzipano = (
   ref: RefObject<HTMLElement>,
 ): {
   marzipanoViewer: any
   marzipanoViewerRef: RefObject<HTMLElement>
-  currentMarzipanoView: any
+  currentMarzipanoView: Pano | null
 } => {
   const [marzipanoViewer, setMarzipanoInstance, marzipanoViewerRef] = useStateRef<any>(null)
-  const [currentMarzipanoView, setCurrentMarzipanoView] = useState<PanoParam | null>(null)
+  const [currentMarzipanoView, setCurrentMarzipanoView] = useState<Pano | null>(null)
 
   const updateOrientation = useCallback(() => {
     if (marzipanoViewerRef.current) {
@@ -27,7 +27,7 @@ const useMarzipano = (
     }
   }, [])
 
-  const updateOrientationThrottled = debounce(updateOrientation, 300, {
+  const updateOrientationDebounced = debounce(updateOrientation, 300, {
     leading: true,
     trailing: true,
   })
@@ -48,7 +48,7 @@ const useMarzipano = (
 
     setMarzipanoInstance(viewer)
 
-    viewer.addEventListener('viewChange', updateOrientationThrottled)
+    viewer.addEventListener('viewChange', updateOrientationDebounced)
 
     return () => {
       if (marzipanoViewerRef.current) {

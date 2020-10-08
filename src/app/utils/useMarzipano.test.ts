@@ -11,7 +11,6 @@ describe('useMarzipano', () => {
     expect(result.current.marzipanoViewer).toBeNull()
 
     const div = document.createElement('div')
-    document.body.appendChild(div)
 
     const actualRef = { current: div }
 
