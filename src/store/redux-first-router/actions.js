@@ -31,7 +31,6 @@ const toSearchOfType = (type) => (
     skipSaga,
     forceSaga,
     additionalParams,
-    query: additionalParams,
   },
 })
 

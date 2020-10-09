@@ -8,6 +8,7 @@ export const SET_FILTER_VALUES = 'search/SET_FILTER_VALUES'
 
 export interface SearchPageState {
   activeFilters: ActiveFilter[]
+  query: string
   sort: string | null
   page: number
 }
@@ -27,6 +28,7 @@ type SearchPageAction = ReturnType<typeof setSort | typeof setPage | typeof setF
 
 export const initialState: SearchPageState = {
   activeFilters: [],
+  query: '',
   sort: null,
   page: 1,
 }
@@ -94,6 +96,7 @@ type StoreValue = { [REDUCER_KEY]: SearchPageState }
 export const getSort = ({ [REDUCER_KEY]: { sort } }: StoreValue) => sort
 export const getPage = ({ [REDUCER_KEY]: { page } }: StoreValue) => page
 
+export const getQuery = ({ [REDUCER_KEY]: { query } }: StoreValue) => query && query.toString()
 export const getActiveFilters = ({ [REDUCER_KEY]: { activeFilters } }: StoreValue) => activeFilters
 
 export const getFilterValues = (type: string) => ({

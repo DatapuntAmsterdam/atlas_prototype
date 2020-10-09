@@ -2,6 +2,7 @@ import {
   getActiveFilters,
   getPage,
   getSort,
+  getQuery,
   REDUCER_KEY as SEARCH_REDUCER,
 } from '../app/pages/SearchPage/SearchPageDucks'
 import { routing } from '../app/routes'
@@ -90,6 +91,12 @@ const routesWithCmsData = [
 
 /* istanbul ignore next */
 export default paramsRegistry
+  .addParameter(PARAMETERS.QUERY, (routes) => {
+    routes.add(routesWithSearch, SEARCH_REDUCER, 'query', {
+      selector: getQuery,
+      defaultValue: '',
+    })
+  })
   .addParameter(PARAMETERS.SORT, (routes) => {
     routes.add(routesWithSearch, SEARCH_REDUCER, 'sort', {
       selector: getSort,
