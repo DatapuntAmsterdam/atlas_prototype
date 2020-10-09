@@ -51,7 +51,7 @@ const DataSearchResults: React.FC<DataSearchResultsProps> = ({
   const Card = compact ? DataCard : DataList
 
   // Get the total count for all data types
-  const totalCount = results.length ? results.reduce((acc: number, { count }) => acc + count, 0) : 0
+  const totalCount = results.length ? results.reduce((acc, { count }) => acc + count, 0) : 0
 
   // Get the errors and labels for this page.
   const matchingErrors = getErrorsForPath(errors, ['dataSearch'])
