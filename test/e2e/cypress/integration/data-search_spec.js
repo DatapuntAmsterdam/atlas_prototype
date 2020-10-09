@@ -4,7 +4,7 @@ describe('data search module', () => {
   it('user should see suggestions', () => {
     // open the autocomplete panel and select the first dataset option and route the correct address
     cy.server()
-    cy.route('/typeahead?q=dam').as('getResults')
+    cy.route('/typeahead/?q=dam').as('getResults')
     cy.route('/bag/v1.1/openbareruimte/*').as('getItem')
     cy.route('POST', '/cms_search/graphql/').as('graphql')
     cy.route('/jsonapi/node/list/*').as('jsonapi')
@@ -40,7 +40,7 @@ describe('data search module', () => {
     cy.defineAddressDetailRoutes()
 
     // Use regular expressions in the route to match the spaces
-    cy.route(/\/typeahead\?q=ad windighof 2/).as('getResults')
+    cy.route('typeahead/?q=ad+windighof+2').as('getResults')
 
     // ensure the viewport is always the same in this test, so the clicks can be aligned properly
     cy.viewport(1000, 660)

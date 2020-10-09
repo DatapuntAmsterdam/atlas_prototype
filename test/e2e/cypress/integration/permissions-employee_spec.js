@@ -16,7 +16,7 @@ describe('employee permissions', () => {
   })
 
   it('0. Should show "Kadastrale subjecten" for medewerker in the autocomplete', () => {
-    cy.route('/typeahead?q=bakker').as('getResults')
+    cy.route('/typeahead/?q=bakker').as('getResults')
     cy.visit('/')
 
     cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
@@ -30,14 +30,13 @@ describe('employee permissions', () => {
       .should('be.visible')
     cy.get(DATA_SEARCH.autoSuggestDropdown)
       .contains(values.kadastraleSubjecten)
+      .scrollIntoView()
       .should('be.visible')
-    cy.get(DATA_SEARCH.autosuggestDropdownItemInActive)
-      .contains(' & Toledo Holding B.V.')
-      .should('be.visible')
+    cy.get(DATA_SEARCH.autoSuggestDropdown).contains(' & Toledo Holding B.V.').should('be.visible')
   })
 
   it('1. Should show "Kadastrale subjecten" and "Vestigingen" in the results', () => {
-    cy.route('/typeahead?q=bakker').as('getResults')
+    cy.route('/typeahead/?q=bakker').as('getResults')
     cy.visit('/')
 
     cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')

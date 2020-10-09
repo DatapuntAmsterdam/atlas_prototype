@@ -3,7 +3,7 @@ import { DATA_SEARCH, MAP, SEARCH } from '../support/selectors'
 describe('search module', () => {
   beforeEach(() => {
     cy.server()
-    cy.route(`typeahead?q=dam`).as('typeaheadResults')
+    cy.route(`typeahead/?q=dam`).as('typeaheadResults')
     cy.route('/bag/v1.1./openbareruimte/*').as('getDetail')
     cy.route('/jsonapi/node/list/**').as('jsonapi')
     cy.route('POST', '/cms_search/graphql/').as('graphql')
@@ -23,19 +23,18 @@ describe('search module', () => {
     })
 
     it('should be able to navigate throught results with arrow keys', () => {
-      cy.wait(1500)
+      cy.wait(1000)
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}{downarrow}{downarrow}{downarrow}', {
         delay: 60,
       })
-      cy.get(DATA_SEARCH.autosuggestDropdownItemActive).should('contain', 'Bodemkwaliteit')
-      cy.get(SEARCH.input).should('have.value', 'Bodemkwaliteit')
+      cy.get(DATA_SEARCH.autosuggestDropdownItemActive).should('contain', 'Panoramabeelden')
+      cy.get(SEARCH.input).should('have.value', 'Panoramabeelden')
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}')
-      cy.get(DATA_SEARCH.autosuggestDropdownItemInActive).contains('Bodemkwaliteit')
-      cy.get(DATA_SEARCH.autosuggestDropdownItemActive).contains('Panoramabeelden')
+      cy.get(DATA_SEARCH.autosuggestDropdownItemActive).contains('Cameratoezichtgebieden')
     })
 
-    it('should go to the search result page when selecting the "..." option', () => {
-      cy.contains('...').first().click()
+    it('should go to the search result page when selecting the link with more results', () => {
+      cy.contains('Meer resultaten in').first().click()
 
       cy.wait('@graphql')
       cy.wait('@graphql')

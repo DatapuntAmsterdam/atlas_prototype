@@ -142,11 +142,13 @@ describe('datasets module', () => {
 
     it('should show only datasets after filtering', () => {
       cy.server()
-      cy.route(`typeahead?q=vergunningen`).as('typeaheadResults')
+      cy.route(`typeahead/?q=vergunningen`).as('typeaheadResults')
       cy.route('/dcatd/datasets/*').as('getDataset')
       cy.get(SEARCH.input).trigger('focus')
       cy.get(SEARCH.input).type('Vergunningen')
       cy.wait('@typeaheadResults')
+      cy.wait(500)
+      cy.get(DATA_SEARCH.autoSuggest).click()
       cy.get(DATA_SEARCH.autoSuggestHeader)
         .contains('Datasets')
         .siblings('ul')
@@ -167,7 +169,7 @@ describe('datasets module', () => {
       cy.get(DATA_SETS.datasetItem).should('be.visible')
 
       cy.get(DATA_SEARCH.searchBarFilter).select('Datasets')
-      cy.get(SEARCH.input).type('Vergunningen{enter}')
+      cy.get(SEARCH.input).clear().type('Vergunningen{enter}')
 
       cy.contains("Datasets met 'Vergunningen' (").should('be.visible')
       cy.should('not.contain', "Alle zoekresultaten met 'Vergunningen'")
