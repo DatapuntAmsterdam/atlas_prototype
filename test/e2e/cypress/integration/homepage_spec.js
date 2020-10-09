@@ -1,4 +1,4 @@
-import { HEADER, HEADER_MENU, HOMEPAGE, SEARCH } from '../support/selectors'
+import { HEADER, HEADER_MENU, HOMEPAGE } from '../support/selectors'
 
 describe('Homepage module', () => {
   const sizes = ['iphone-x', 'ipad-2', 'macbook-15']
@@ -210,13 +210,21 @@ describe('Homepage module', () => {
       })
       it('Should check the footer', () => {
         cy.get(HOMEPAGE.footerBlock).eq(0).find('h3').contains('Colofon')
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Databeleid"]').first().click({ force: true })
+        cy.get(HOMEPAGE.footerBlock)
+          .eq(0)
+          .find('[title="Databeleid"]')
+          .first()
+          .click({ force: true })
         cy.url().should('include', '/artikelen/artikel/amsterdam-en-data/')
         cy.go('back')
         cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Bronnen"]').first().click({ force: true })
         cy.url().should('include', '/artikelen/artikel/bronnen/')
         cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Over deze site"]').first().click({ force: true })
+        cy.get(HOMEPAGE.footerBlock)
+          .eq(0)
+          .find('[title="Over deze site"]')
+          .first()
+          .click({ force: true })
         cy.url().should('include', '/artikelen/artikel/over-deze-site/')
         cy.go('back')
         cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Over OIS"]').first().click({ force: true })
@@ -231,10 +239,16 @@ describe('Homepage module', () => {
         cy.get(HOMEPAGE.footerBlock).find('[title="GitHub"]').should('exist')
 
         cy.get(HOMEPAGE.footerBlock).find('h3').contains('Vragen')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Veelgestelde vragen"]').first().click({ force: true })
+        cy.get(HOMEPAGE.footerBlock)
+          .find('[title="Veelgestelde vragen"]')
+          .first()
+          .click({ force: true })
         cy.url().should('include', '/artikelen/artikel/veelgestelde-vragen/')
         cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Contact opnemen"]').first().click({ force: true })
+        cy.get(HOMEPAGE.footerBlock)
+          .find('[title="Contact opnemen"]')
+          .first()
+          .click({ force: true })
         cy.url().should('include', '/artikelen/artikel/contact/')
         cy.go('back')
         cy.get(HOMEPAGE.footerBlock).find('[title="Feedback geven"]').first().click({ force: true })
