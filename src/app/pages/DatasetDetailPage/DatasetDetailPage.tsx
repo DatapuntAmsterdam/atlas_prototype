@@ -9,32 +9,37 @@ import {
   Row,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import classNames from 'classnames'
 import React, { FunctionComponent, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import removeMd from 'remove-markdown'
 import styled from 'styled-components'
 import { DcatTemporal, getDatasetById } from '../../../api/dcatd/datasets'
 import { getUserScopes } from '../../../shared/ducks/user/user'
-import getDatasetFilters from '../../../shared/services/datasets-filters/datasets-filters'
+import { dcatdScopes } from '../../../shared/services/auth/auth'
+import getDatasetFilters, {
+  DatasetFilterOption,
+} from '../../../shared/services/datasets-filters/datasets-filters'
 import formatDate from '../../../shared/services/date-formatter/date-formatter'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DefinitionList, { DefinitionListItem } from '../../components/DefinitionList'
 import ShareBar from '../../components/ShareBar/ShareBar'
+import redirectToDcatd from '../../utils/redirectToDcatd'
 import usePromise from '../../utils/usePromise'
 
 function kebabCase(input: string) {
   return input.toLowerCase().replace(/[: ][ ]*/g, '-')
 }
 
-// TODO: Refactor this method
-const optionLabel = (input: string, list: { id: string; label: string }[], namespace?: string) => {
-  // returns the label of an option from an option list
-  // the list array elements contain at least the id and label properties
-  const prefix = typeof namespace !== 'undefined' ? `${namespace}:` : ''
-  const index = list && list.findIndex((item) => prefix + item.id === input)
-  return index > -1 ? list[index].label : input
+/**
+ * Gets the label by the identifier of the specified options, if no option could be found it will default to the id.
+ *
+ * @param id The identifier of the option to match.
+ * @param options The options to get the label from.
+ */
+function getOptionLabel(id: string, options: DatasetFilterOption[]) {
+  return options.find((item) => item.id === id)?.label ?? id
 }
 
 function getFileSize(bytes: number) {
@@ -112,8 +117,27 @@ const DatasetDetailPage: FunctionComponent = () => {
   const datasetResult = usePromise(useMemo(() => getDatasetById(id), [id]))
   const datasetFiltersResult = usePromise(useMemo(() => getDatasetFilters(), []))
   const userScopes = useSelector(getUserScopes)
+  const canEdit = useMemo(() => userScopes.some((scope) => dcatdScopes.includes(scope)), [
+    userScopes,
+  ])
 
-  // TODO: Handle loading and error states.
+  const resources = useMemo(() => {
+    if (datasetResult.status !== 'fulfilled' || datasetFiltersResult.status !== 'fulfilled') {
+      return []
+    }
+
+    const { value: dataset } = datasetResult
+    const { value: catalogFilters } = datasetFiltersResult
+
+    return catalogFilters.resourceTypes
+      .map((resourceType) => ({
+        type: resourceType.id,
+        rows: dataset['dcat:distribution'].filter(
+          (row) => row['ams:resourceType'] === resourceType.id,
+        ),
+      }))
+      .filter((resource) => resource.rows.length > 0)
+  }, [datasetResult, datasetFiltersResult])
 
   if (datasetResult.status !== 'fulfilled' || datasetFiltersResult.status !== 'fulfilled') {
     return null
@@ -121,15 +145,12 @@ const DatasetDetailPage: FunctionComponent = () => {
 
   const { value: dataset } = datasetResult
   const { value: catalogFilters } = datasetFiltersResult
+  const datasetId = dataset['dct:identifier']
 
   return (
     <div className="qa-detail">
       <Helmet>
-        {/* TODO: Add the proper href. */}
-        <link rel="canonical" href="" />
-        {dataset['dct:description'] && (
-          <meta name="description" content={dataset['dct:description']} />
-        )}
+        <meta name="description" content={dataset['dct:description']} />
       </Helmet>
       <ContentContainer>
         <Container>
@@ -139,13 +160,12 @@ const DatasetDetailPage: FunctionComponent = () => {
                 <div className="o-header">
                   <h3 className="o-header__subtitle">
                     <span>Dataset</span>
-                    {dataset.canEditDataset && (
+                    {canEdit && datasetId && (
                       <div className="o-header__buttongroup">
-                        {/* TODO: Turn this into a link */}
                         <Button
                           type="button"
                           className="dcatd-button--edit"
-                          onClick={() => redirectToDcatd(dataset.editDatasetId)}
+                          onClick={() => redirectToDcatd(datasetId)}
                         >
                           Wijzigen
                           <span className="u-sr-only">Wijzigen</span>
@@ -174,99 +194,104 @@ const DatasetDetailPage: FunctionComponent = () => {
                 <h3 className="o-header__subtitle">Resources</h3>
 
                 <div className="resources">
-                  {dataset.resources.map((resourceType: any) => (
-                    <div className="resources-type" key={resourceType.type}>
+                  {resources.map((resource) => (
+                    <div className="resources-type" key={resource.type}>
                       <div className="resources-type__header">
                         <h4 className="resources-type__header-title">
-                          {optionLabel(resourceType.type, catalogFilters.resourceTypes)}
+                          {getOptionLabel(resource.type, catalogFilters.resourceTypes)}
                         </h4>
                       </div>
-                      {resourceType.rows.map((resource: any) => (
-                        <div className="resources-type__content" key={resource['dc:identifier']}>
+                      {resource.rows.map((row) => (
+                        <div className="resources-type__content" key={row['dc:identifier']}>
                           <div className="resources-type__content-item">
                             <a
                               className="resources-item"
-                              href={resource['ams:purl']}
+                              href={row['ams:purl']}
                               rel="noreferrer"
                               target="_blank"
                               onClick={() => {
                                 trackEvent({
                                   category: 'Download',
                                   action: dataset['dct:title'],
-                                  name: resource['ams:purl'],
+                                  name: row['ams:purl'],
                                 })
                               }}
                             >
                               <div className="resources-item__left">
-                                <div className="resources-item__title">{resource['dct:title']}</div>
+                                <div className="resources-item__title">{row['dct:title']}</div>
 
                                 <div className="resources-item__description">
-                                  {resource['ams:distributionType'] === 'file' && (
+                                  {row['ams:distributionType'] === 'file' &&
+                                    row['dcat:mediaType'] && (
+                                      <span
+                                        className={classNames(
+                                          'c-data-selection-file-type',
+                                          'c-data-selection-file-type__name',
+                                          `c-data-selection-file-type__format-${kebabCase(
+                                            getOptionLabel(
+                                              row['dcat:mediaType'],
+                                              catalogFilters.formatTypes,
+                                            ),
+                                          )}`,
+                                        )}
+                                      >
+                                        {getOptionLabel(
+                                          row['dcat:mediaType'],
+                                          catalogFilters.formatTypes,
+                                        )}
+                                      </span>
+                                    )}
+                                  {row['ams:distributionType'] === 'api' && (
                                     <span
-                                      className={`c-data-selection-file-type
-                                                 c-data-selection-file-type__name
-                                                 c-data-selection-file-type__format-${kebabCase(
-                                                   optionLabel(
-                                                     resource['dcat:mediaType'],
-                                                     catalogFilters.formatTypes,
-                                                   ),
-                                                 )}`}
-                                    >
-                                      {optionLabel(
-                                        resource['dcat:mediaType'],
-                                        catalogFilters.formatTypes,
+                                      className={classNames(
+                                        'c-data-selection-file-type',
+                                        'c-data-selection-file-type__name',
+                                        `c-data-selection-file-type__format-${kebabCase(
+                                          getOptionLabel(
+                                            row['dcat:serviceType'],
+                                            catalogFilters.serviceTypes,
+                                          ),
+                                        )}`,
                                       )}
-                                    </span>
-                                  )}
-                                  {resource['ams:distributionType'] === 'api' && (
-                                    <span
-                                      className={`c-data-selection-file-type
-                                                 c-data-selection-file-type__name
-                                                 c-data-selection-file-type__format-${kebabCase(
-                                                   optionLabel(
-                                                     resource['ams:serviceType'],
-                                                     catalogFilters.serviceTypes,
-                                                   ),
-                                                 )}`}
                                     >
-                                      {optionLabel(
-                                        resource['ams:serviceType'],
+                                      {getOptionLabel(
+                                        row['ams:serviceType'],
                                         catalogFilters.serviceTypes,
                                       )}
                                     </span>
                                   )}
-                                  {resource['ams:distributionType'] === 'web' && (
+                                  {row['ams:distributionType'] === 'web' && (
                                     <span
-                                      className={`c-data-selection-file-type
-                                                 c-data-selection-file-type__name
-                                                 c-data-selection-file-type__format-${optionLabel(
-                                                   resource['ams:distributionType'],
-                                                   catalogFilters.distributionTypes,
-                                                 )}`}
+                                      className={classNames(
+                                        'c-data-selection-file-type',
+                                        'c-data-selection-file-type__name',
+                                        `c-data-selection-file-type__format-${kebabCase(
+                                          getOptionLabel(
+                                            row['dcat:distributionType'],
+                                            catalogFilters.distributionTypes,
+                                          ),
+                                        )}`,
+                                      )}
                                     >
-                                      {optionLabel(
-                                        resource['ams:distributionType'],
+                                      {getOptionLabel(
+                                        row['ams:distributionType'],
                                         catalogFilters.distributionTypes,
                                       )}
                                     </span>
                                   )}
-                                  <div>
-                                    {resource['dct:description']
-                                      ? removeMd(resource['dct:description'])
-                                      : resource['ams:purl']}
-                                  </div>
+                                  <div>{row['dct:description']}</div>
                                 </div>
                               </div>
                               <div className="resources-item__right">
                                 <div className="resources-item__modified">
-                                  {resource['dct:modified'] && (
-                                    <span>gewijzigd op {formatDate(resource['dct:modified'])}</span>
+                                  {row['dct:modified'] && (
+                                    <span>gewijzigd op {formatDate(row['dct:modified'])}</span>
                                   )}
                                 </div>
                                 <div className="resources-item__navigation">
-                                  {resource['dcat:byteSize'] > 0 && (
+                                  {row['dcat:byteSize'] && row['dcat:byteSize'] > 0 && (
                                     <div className="resources-item__navigation-file-size">
-                                      {getFileSize(resource['dcat:byteSize'])}
+                                      {getFileSize(row['dcat:byteSize'])}
                                     </div>
                                   )}
                                   <div className="resources-item__navigation-arrow" />
@@ -307,7 +332,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                     )}
                     {dataset['dct:accrualPeriodicity'] && (
                       <DefinitionListItem term="Wijzigingsfrequentie">
-                        {optionLabel(
+                        {getOptionLabel(
                           dataset['dct:accrualPeriodicity'],
                           catalogFilters.accrualPeriodicities,
                         )}
@@ -330,7 +355,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                     )}
                     {dataset['ams:spatialUnit'] && (
                       <DefinitionListItem term="Gebiedseenheid">
-                        {optionLabel(dataset['ams:spatialUnit'], catalogFilters.spatialUnits)}
+                        {getOptionLabel(dataset['ams:spatialUnit'], catalogFilters.spatialUnits)}
                       </DefinitionListItem>
                     )}
                     {dataset['overheid:grondslag'] && (
@@ -340,11 +365,11 @@ const DatasetDetailPage: FunctionComponent = () => {
                     )}
                     {dataset['dct:language'] && (
                       <DefinitionListItem term="Taal">
-                        {optionLabel(dataset['dct:language'], catalogFilters.languages)}
+                        {getOptionLabel(dataset['dct:language'], catalogFilters.languages)}
                       </DefinitionListItem>
                     )}
                     <DefinitionListItem term="Eigenaar">
-                      {optionLabel(dataset['ams:owner'], catalogFilters.ownerTypes)}
+                      {getOptionLabel(dataset['ams:owner'], catalogFilters.ownerTypes)}
                     </DefinitionListItem>
                     <DefinitionListItem term="Inhoudelijk contactpersoon">
                       {dataset['dcat:contactPoint']['vcard:hasEmail'] && (
@@ -401,12 +426,11 @@ const DatasetDetailPage: FunctionComponent = () => {
 
                 <div className="c-detail__block u-padding__bottom--1 u-margin__top--3">
                   <h3 className="o-header__subtitle">Thema&apos;s</h3>
-
                   <div className="catalog-themes">
                     {dataset['dcat:theme'].map((group: string) => (
                       <div className="catalog-theme" key={group}>
                         <span className="catalog-theme__detail-icon--{{group.substring(6)}} catalog-theme__label">
-                          {optionLabel(group.split(':')[1], catalogFilters.groupTypes)}
+                          {getOptionLabel(group.split(':')[1], catalogFilters.groupTypes)}
                         </span>
                       </div>
                     ))}
@@ -430,7 +454,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                 <div className="c-detail__block u-padding__bottom--1">
                   <h3 className="o-header__subtitle">Licentie</h3>
                   {dataset['ams:license'] && (
-                    <div>{optionLabel(dataset['ams:license'], catalogFilters.licenseTypes)}</div>
+                    <div>{getOptionLabel(dataset['ams:license'], catalogFilters.licenseTypes)}</div>
                   )}
                 </div>
               </Content>

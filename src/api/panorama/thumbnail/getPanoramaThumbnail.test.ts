@@ -9,7 +9,7 @@ jest.mock('../../../shared/services/api/api')
 const mockedFetchWithToken = mocked(fetchWithToken, true)
 
 describe('getPanoramaThumbnail', () => {
-  const apiUrl = joinUrl([environment.API_ROOT, '/panorama/thumbnail/'])
+  const apiUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail'])
   const validResponse = {
     pano_id: 'pano_id',
     heading: 'heading',

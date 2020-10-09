@@ -85,7 +85,7 @@ export async function getPanoramaThumbnail(
   }
 
   const response = await fetchWithToken<RawResponse>(
-    `${environment.API_ROOT}panorama/thumbnail/?${searchParams.toString()}`,
+    `${environment.API_ROOT}panorama/thumbnail?${searchParams.toString()}`,
   )
 
   return transformResponse(response)

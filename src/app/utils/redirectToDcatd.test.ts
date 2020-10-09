@@ -1,8 +1,8 @@
+import { routing } from '../routes'
 import redirectToDcatd, {
   DCATD_DETAIL_REDIRECT_URL,
   DCATD_LIST_REDIRECT_URL,
 } from './redirectToDcatd'
-import { routing } from '../routes'
 
 describe('redirectToDcatd', () => {
   beforeEach(() => {
@@ -18,7 +18,7 @@ describe('redirectToDcatd', () => {
     })
   })
 
-  it('should set the variables to redirect in the session storage', () => {
+  it('sets the variables to redirect in the session storage', () => {
     const id = '123'
 
     redirectToDcatd(id)
@@ -34,7 +34,7 @@ describe('redirectToDcatd', () => {
     )
   })
 
-  it('should redirect the user', () => {
+  it('redirects the user', () => {
     const id = '123'
 
     redirectToDcatd(id)

@@ -1,4 +1,5 @@
 import { mocked } from 'ts-jest/utils'
+import joinUrl from '../../app/utils/joinUrl'
 import environment from '../../environment'
 import { fetchWithoutToken } from '../../shared/services/api/api'
 import { getMetadata } from './getMetadata'
@@ -15,6 +16,8 @@ describe('getMetadata', () => {
 
     await expect(getMetadata()).resolves.toEqual(response)
 
-    expect(mockedFetchWithoutToken).toHaveBeenCalledWith(`${environment.API_ROOT}metadata/`)
+    expect(mockedFetchWithoutToken).toHaveBeenCalledWith(
+      joinUrl([environment.API_ROOT, 'metadata']),
+    )
   })
 })
