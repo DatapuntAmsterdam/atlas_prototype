@@ -1,4 +1,5 @@
 import { LatLngLiteral } from 'leaflet'
+import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import { PanoramaThumbnail } from './types'
@@ -85,7 +86,7 @@ export async function getPanoramaThumbnail(
   }
 
   const response = await fetchWithToken<RawResponse>(
-    `${environment.API_ROOT}panorama/thumbnail?${searchParams.toString()}`,
+    `${joinUrl([environment.API_ROOT, 'panorama/thumbnail'])}?${searchParams.toString()}`,
   )
 
   return transformResponse(response)
