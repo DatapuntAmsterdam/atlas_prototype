@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`trackEvents matches the snapshot 1`] = `
+Object {
+  "@@redux-first-router/NOT_FOUND": [Function],
+  "MAP_SET_DRAWING_MODE": [Function],
+  "SET_MAP_BASE_LAYER": [Function],
+  "SET_MAP_CLICK_LOCATION": [Function],
+  "TOGGLE_MAP_EMBED": [Function],
+  "atlasRouter/DATA_DETAIL": [Function],
+  "filter/ADD_FILTER": [Function],
+  "filter/REMOVE_FILTER": [Function],
+  "header/CLOSE_MODAL": [Function],
+  "header/REPORT_FEEDBACK_REQUEST": [Function],
+  "header/REPORT_PROBLEM_REQUEST": [Function],
+  "panorama/CLOSE_PANORAMA": [Function],
+  "panorama/FETCH_PANORAMA_HOTSPOT_REQUEST": [Function],
+  "panorama/FETCH_PANORAMA_REQUEST_EXTERNAL": [Function],
+  "panorama/FETCH_PANORAMA_REQUEST_TOGGLE": [Function],
+  "ui/HIDE_EMBED_PREVIEW": [Function],
+  "ui/HIDE_PRINT": [Function],
+  "ui/SET_VIEW_MODE": [Function],
+  "ui/SHARE_PAGE": [Function],
+  "ui/SHOW_EMBED_PREVIEW": [Function],
+  "ui/SHOW_PRINT": [Function],
+  "user/AUTHENTICATE_USER_REQUEST": [Function],
+  "user/AUTHENTICATE_USER_SUCCESS": [Function],
+}
+`;
