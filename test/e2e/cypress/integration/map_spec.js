@@ -1,6 +1,6 @@
 import PARAMETERS from '../../../../src/store/parameters'
 import { routing } from '../../../../src/app/routes'
-import { ADDRESS_PAGE, DATA_SEARCH, HOMEPAGE, MAP, MAP_LAYERS, SEARCH } from '../support/selectors'
+import { ADDRESS_PAGE, DATA_SEARCH, HOMEPAGE, MAP, MAP_LAYERS } from '../support/selectors'
 
 const { VIEW, VIEW_CENTER } = PARAMETERS
 
