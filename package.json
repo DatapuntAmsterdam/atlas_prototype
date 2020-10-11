@@ -43,7 +43,7 @@
     "@turf/turf": "^5.1.6",
     "@types/file-saver": "^2.0.1",
     "@types/openseadragon": "^2.4.5",
-    "angular": "1.8.0",
+    "angular": "1.8.1",
     "angular-aria": "~1.8.1",
     "angular-i18n": "~1.7.9",
     "angular-sanitize": "~1.8.1",
