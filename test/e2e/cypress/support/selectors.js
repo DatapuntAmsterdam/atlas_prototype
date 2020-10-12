@@ -6,7 +6,7 @@ export const ADDRESS_PAGE = {
   detailPage: '.c-detail',
   iconCluster: '.o-highlight-cluster',
   iconMapMarker: '.leaflet-marker-icon',
-  linkVestigingen: '.qa-hr',
+  linkTable: '[class*="DetailLinkList__LinkList"]',
   mapContainer: '.qa-map-container',
   notification: '.notification__content',
   panoramaThumbnail: 'img.c-panorama-thumbnail--img',
@@ -29,6 +29,7 @@ export const DATA_SEARCH = {
   autoSuggestInput: '#auto-suggest__input',
   autoSuggestHeader: 'h4.qa-auto-suggest-header',
   autoSuggestTip: '.auto-suggest__tip',
+  buttonFilteren: '[class*=SearchPageResults__FilterButton]',
   headerTitle: '.o-header__title',
   headerSubTitle: '.o-header__subtitle',
   infoNotification: '.notification--info',
@@ -73,6 +74,15 @@ export const DRAWING = {
   labelDrawing: '.toggle-drawing__label',
   clusterIcon: '.o-highlight-cluster',
   mapPolygon: '.c-map__leaflet-drawn-polygon',
+  buttonDrawTool: '[class*="DrawToolBare__DrawToolButton"]',
+  buttonRemove: '[class*="DrawToolBare__RemoveButton"]',
+  clusterSymbol: '[class*="clustergroup"]',
+  dropdownResults: '[data-testid="sort-select"]',
+  dropdownResultsSelectedValue: '[data-testid="selectedValue"]',
+  linkDrawresult: '[class*="DrawResults__ResultLink"]',
+  panelDrawTool: '[class*="DrawToolBare__DrawToolPanel"]',
+  polygon: '[class="leaflet-interactive"]',
+  tooltip: '[class*=leaflet-tooltip-bottom]',
 }
 
 export const HEADER = {

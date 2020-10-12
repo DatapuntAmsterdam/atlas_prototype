@@ -31,7 +31,7 @@ describe('trade-register (vestigingen) module', () => {
 
       it('should not show the table with results', () => {
         // the table with results should not exist
-        cy.get(DATA_SELECTION_TABLE.table).should('not.exist').and('not.be.visible')
+        cy.get(DATA_SELECTION_TABLE.table).should('not.exist')
       })
     })
   })
@@ -56,7 +56,7 @@ describe('trade-register (vestigingen) module', () => {
 
     describe('user should be able to view the trade register', () => {
       it('should not show a notification', () => {
-        cy.get(DATA_SEARCH.infoNotification).should('not.exist').and('not.be.visible')
+        cy.get(DATA_SEARCH.infoNotification).should('not.exist')
       })
 
       it('should show the table with results', () => {

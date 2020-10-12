@@ -1,11 +1,12 @@
 import { getCountFromHeader } from '../support/helper-functions'
 import {
   ADDRESS_PAGE,
+  DATA_SEARCH,
   DATA_SELECTION_TABLE,
   HEADINGS,
   MAP,
+  SEARCH,
   TABLES,
-  DATA_SEARCH,
 } from '../support/selectors'
 
 describe('addresses module', () => {
@@ -170,7 +171,7 @@ describe('addresses module', () => {
       })
 
       // click on "kaart weergeven"
-      cy.get(ADDRESS_PAGE.buttonOpenMap).click()
+      cy.contains('Kaart weergeven').click()
       cy.wait('@getGeoResults')
 
       // map should be visible now
@@ -186,5 +187,29 @@ describe('addresses module', () => {
       // active filter should show
       cy.get(TABLES.activeFilterItem).contains('AMC').should('exist').and('be.visible')
     })
+  })
+})
+describe('user should be able to open more addresses', () => {
+  it('should show the addresses', () => {
+    cy.server()
+    cy.route('/typeahead/?q=dam+20').as('getResults')
+    cy.route('POST', '/cms_search/graphql/').as('graphql')
+    cy.route('/jsonapi/node/list/*').as('jsonapi')
+    cy.route('/bag/v1.1/pand/*').as('getPand')
+    cy.defineGeoSearchRoutes()
+    cy.defineAddressDetailRoutes()
+    cy.visit('/')
+
+    cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
+    cy.get(SEARCH.input).focus().type('Dam 20{enter}')
+    cy.wait('@getResults')
+    cy.wait(['@graphql', '@graphql'])
+    cy.wait('@jsonapi')
+    cy.contains('Adressen (').click()
+    // Failes when bug is fixed
+    cy.contains('Geen resultaten')
+    cy.go('back')
+    cy.contains("Resultaten tonen binnen de categorie 'Data'").click()
+    cy.contains("Data met 'Dam 20' (7 resultaten)")
   })
 })

@@ -6,18 +6,18 @@ import { isDatasetDetailPage } from '../../redux-first-router/selectors'
 
 let views = Object.entries(routing).reduce((acc, [, value]) => ({
   ...acc,
-  [value.type]: function trackView({ firstAction = null, query = {}, href, title }) {
-    return firstAction || !!query.print ? [MATOMO_CONSTANTS.TRACK_VIEW, title, href, null] : []
+  [value.type]: function trackView({ isFirstAction = null, query = {}, href, title }) {
+    return isFirstAction || !!query.print ? [MATOMO_CONSTANTS.TRACK_VIEW, title, href, null] : []
   },
 }))
 
 views = {
   ...views,
-  [routing.home.type]: function trackView({ firstAction = null, query = {}, href, title }) {
-    return firstAction || !!query.print ? [MATOMO_CONSTANTS.TRACK_VIEW, title, href, null] : []
+  [routing.home.type]: function trackView({ isFirstAction = null, query = {}, href, title }) {
+    return isFirstAction || !!query.print ? [MATOMO_CONSTANTS.TRACK_VIEW, title, href, null] : []
   },
-  [routing.data.type]: function trackView({ firstAction = null, query = {}, href, title }) {
-    return firstAction || !!query.print
+  [routing.data.type]: function trackView({ isFirstAction = null, query = {}, href, title }) {
+    return isFirstAction || !!query.print
       ? [
           MATOMO_CONSTANTS.TRACK_VIEW,
           title, // PAGEVIEW -> MAP
@@ -27,7 +27,7 @@ views = {
       : []
   },
   [routing.dataDetail.type]: function trackView({
-    firstAction = null,
+    isFirstAction = null,
     query = {},
     href,
     title,
@@ -35,14 +35,14 @@ views = {
     tracking,
   }) {
     // eslint-disable-next-line no-nested-ternary
-    return !firstAction && tracking && tracking.id !== getDetail(state).id
+    return !isFirstAction && tracking && tracking.id !== getDetail(state).id
       ? [
           MATOMO_CONSTANTS.TRACK_VIEW,
           title, // PAGEVIEW -> DETAIL VIEW CLICK THROUGH VIEWS
           href,
           null,
         ]
-      : firstAction || !!query.print
+      : isFirstAction || !!query.print
       ? [
           MATOMO_CONSTANTS.TRACK_VIEW,
           title, // PAGEVIEW -> DETAIL VIEW INITIAL LOAD

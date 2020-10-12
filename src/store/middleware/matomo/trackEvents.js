@@ -43,45 +43,60 @@ import {
   isPanoPage,
 } from '../../redux-first-router/selectors'
 
+export const TRACK_ACTION_NAVIGATION = 'navigation'
+export const TRACK_CATEGORY_AUTO_SUGGEST = 'auto-suggest'
+export const TRACK_NAME_ENLARGE_DETAIL_MAP = 'detail-kaart-vergroten'
+export const TRACK_NAME_FULL_DETAIL = 'detail-volledig-weergeven'
+export const TRACK_NAME_LEAVE_PANO = 'panorama-verlaten'
+
 /* istanbul ignore next */
 const trackEvents = {
   // NAVIGATION
   // NAVIGATION -> NAVIGATE TO DATA DETAIL
-  [routing.dataDetail.type]: function trackDataDetail({ firstAction, query, tracking, state }) {
-    // eslint-disable-next-line no-nested-ternary
-    return tracking && tracking.event === 'auto-suggest'
-      ? [
-          MATOMO_CONSTANTS.TRACK_EVENT,
-          'auto-suggest', // NAVIGATION -> SELECT AUTOSUGGEST OPTION
-          tracking.category,
-          tracking.query,
-        ]
-      : // eslint-disable-next-line no-nested-ternary
-      getViewMode(state) === VIEW_MODE.MAP && query[PARAMETERS.VIEW] === undefined
-      ? [
-          MATOMO_CONSTANTS.TRACK_EVENT,
-          'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP
-          'detail-volledig-weergeven',
-          null,
-        ]
-      : // eslint-disable-next-line no-nested-ternary
-      !firstAction &&
-        getViewMode(state) === VIEW_MODE.SPLIT &&
-        query[PARAMETERS.VIEW] === VIEW_MODE.MAP
-      ? [
-          MATOMO_CONSTANTS.TRACK_EVENT,
-          'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM SPLITSCREEN
-          'detail-kaart-vergroten',
-          null,
-        ]
-      : isPanoPage(state)
-      ? [
-          MATOMO_CONSTANTS.TRACK_EVENT,
-          'navigation', // NAVIGATION -> CLICK CLOSE FROM PANORAMA
-          'panorama-verlaten',
-          null,
-        ]
-      : []
+  [routing.dataDetail.type]: function trackDataDetail({ isFirstAction, query, tracking, state }) {
+    if (tracking?.event === 'auto-suggest') {
+      return [
+        MATOMO_CONSTANTS.TRACK_EVENT,
+        'auto-suggest', // NAVIGATION -> SELECT AUTOSUGGEST OPTION
+        tracking.category,
+        tracking.query,
+      ]
+    }
+
+    const viewMode = getViewMode(state)
+
+    if (viewMode === VIEW_MODE.MAP && query?.[PARAMETERS.VIEW] === undefined) {
+      return [
+        MATOMO_CONSTANTS.TRACK_EVENT,
+        'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP
+        'detail-volledig-weergeven',
+        null,
+      ]
+    }
+
+    if (
+      !isFirstAction &&
+      viewMode === VIEW_MODE.SPLIT &&
+      query?.[PARAMETERS.VIEW] === VIEW_MODE.MAP
+    ) {
+      return [
+        MATOMO_CONSTANTS.TRACK_EVENT,
+        'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM SPLITSCREEN
+        'detail-kaart-vergroten',
+        null,
+      ]
+    }
+
+    if (isPanoPage(state)) {
+      return [
+        MATOMO_CONSTANTS.TRACK_EVENT,
+        'navigation', // NAVIGATION -> CLICK CLOSE FROM PANORAMA
+        'panorama-verlaten',
+        null,
+      ]
+    }
+
+    return []
   },
   // NAVIGATION -> CLICK CLOSE FROM PANORAMA
   [CLOSE_PANORAMA]: () => [MATOMO_CONSTANTS.TRACK_EVENT, 'navigation', 'panorama-verlaten', null],
@@ -90,14 +105,14 @@ const trackEvents = {
   // NAVIGATION -> CLOSE EMBED VIEW
   [HIDE_EMBED_PREVIEW]: () => [
     MATOMO_CONSTANTS.TRACK_EVENT,
-    'navigation',
+    TRACK_ACTION_NAVIGATION,
     'embedversie-verlaten',
     null,
   ],
   // NAVIGATION -> TOGGLE FROM EMBEDDED MAP
   [TOGGLE_MAP_EMBED]: () => [
     MATOMO_CONSTANTS.TRACK_EVENT,
-    'navigation',
+    TRACK_ACTION_NAVIGATION,
     'embedkaart-naar-portaal',
     null,
   ],
@@ -108,7 +123,7 @@ const trackEvents = {
       case PAGES.DATA_SEARCH_GEO:
         return [
           MATOMO_CONSTANTS.TRACK_EVENT,
-          'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP Or SPLITSCREEN
+          TRACK_ACTION_NAVIGATION, // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP Or SPLITSCREEN
           `georesultaten-${viewMode === VIEW_MODE.MAP ? 'volledig-weergeven' : 'kaart-vergroten'}`,
           null,
         ]
@@ -118,7 +133,7 @@ const trackEvents = {
         if (typeof tracking === 'boolean') {
           view = viewMode === VIEW_MODE.MAP ? 'kaart-verkleinen' : 'kaart-vergroten'
         }
-        return [MATOMO_CONSTANTS.TRACK_EVENT, 'navigation', `panorama-${view}`, null]
+        return [MATOMO_CONSTANTS.TRACK_EVENT, TRACK_ACTION_NAVIGATION, `panorama-${view}`, null]
       }
 
       case PAGES.ADDRESSES:
@@ -128,13 +143,13 @@ const trackEvents = {
         if (typeof tracking === 'boolean') {
           view = viewMode === VIEW_MODE.MAP ? 'kaart-verkleinen' : 'kaart-vergroten'
         }
-        return [MATOMO_CONSTANTS.TRACK_EVENT, 'navigation', `dataselectie-${view}`, null]
+        return [MATOMO_CONSTANTS.TRACK_EVENT, TRACK_ACTION_NAVIGATION, `dataselectie-${view}`, null]
       }
 
       default:
         return [
           MATOMO_CONSTANTS.TRACK_EVENT,
-          'navigation',
+          TRACK_ACTION_NAVIGATION,
           `detail-${viewMode === VIEW_MODE.MAP ? 'volledig-weergeven' : 'kaart-vergroten'}`,
           null,
         ]

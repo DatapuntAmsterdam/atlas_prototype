@@ -6,9 +6,6 @@ on:
       - master
       - develop
   pull_request:
-    branches:
-      - master
-      - develop
 
 jobs:
   build:
@@ -18,6 +15,7 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
+        job: [lint, test, build]
 
     steps:
       - uses: actions/checkout@v2
@@ -25,6 +23,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Cache node modules
         uses: actions/cache@v2
         env:
@@ -37,11 +36,9 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+
       - name: install
-        run: npm install
-      - name: lint
-        run: npm run lint
-      - name: test
-        run: npm test
-      - name: build
-        run: npm run build
+        run: npm ci
+
+      - name: Run ${{ matrix.job }}
+        run: npm run ${{ matrix.job }}

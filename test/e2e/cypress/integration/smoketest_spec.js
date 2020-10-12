@@ -12,14 +12,14 @@ import {
 } from '../support/selectors'
 
 describe('Smoketest', () => {
-  describe('Search for addres not logged in', () => {
+  describe('Search for address not logged in', () => {
     beforeEach(() => {
       cy.viewport(1920, 1080)
       cy.hidePopup()
     })
     it('Should show the details of an address', () => {
       cy.server()
-      cy.route('/typeahead?q=dam 1').as('getResults')
+      cy.route('/typeahead/?q=dam+1').as('getResults')
       cy.route('POST', '/cms_search/graphql/').as('graphql')
       cy.route('/jsonapi/node/list/*').as('jsonapi')
       cy.route('/bag/v1.1/pand/*').as('getPand')
@@ -133,7 +133,8 @@ describe('Smoketest', () => {
 
       // Open details of Burgwallen-Oude Zijde'
       cy.contains('Burgwallen-Oude Zijde', { timeout: 40000 }).click()
-      cy.get(ADDRESS_PAGE.linkVestigingen, { timeout: 40000 })
+      cy.get(ADDRESS_PAGE.linkTable, { timeout: 40000 })
+        .eq(1)
         .contains('In tabel weergeven')
         .click({ force: true })
     })
@@ -178,7 +179,7 @@ describe('Smoketest', () => {
         '/dataselectie/hr/geolocation/?shape=[]&buurtcombinatie_naam=Burgwallen-Oude+Zijde',
       ).as('getHrDataGeo')
       cy.route(
-        '//dataselectie/hr/?page=1&dataset=ves&shape=[]&buurtcombinatie_naam=Burgwallen-Oude+Zijde',
+        '/dataselectie/hr/?page=1&dataset=ves&shape=[]&buurtcombinatie_naam=Burgwallen-Oude+Zijde',
       ).as('getHrData')
       cy.route(
         '/dataselectie/brk/kot/?page=1&dataset=ves&shape=[]&buurtcombinatie_naam=Burgwallen-Oude+Zijde',
@@ -186,19 +187,22 @@ describe('Smoketest', () => {
       cy.route(
         '/dataselectie/brk/?page=1&dataset=ves&shape=[]&buurtcombinatie_naam=Burgwallen-Oude+Zijde',
       ).as('getBRK2')
-      cy.route('/typeahead?q=dam 1').as('getResults')
-      cy.route('/gebieden/buurt/?buurtcombinatie=3630012052036').as('getBuurtCombinatie')
+      cy.route('/typeahead/?q=dam+1').as('getResults')
+      cy.route('/gebieden/buurt/?buurtcombinatie=3630012052036*').as('getBuurtCombinatie')
 
       // Search for an address
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
       cy.get(SEARCH.input).focus().type('Dam 1')
-      cy.get(DATA_SEARCH.autoSuggestDropdownHighlighted).contains('Dam 1').click()
+      cy.wait('@getResults')
+      cy.get(
+        '[href*="/data/bag/verblijfsobject/id0363010003761571/?modus=gesplitst&term=Dam+1"]',
+      ).click()
       cy.waitForAdressDetail()
       cy.contains('Burgwallen-Oude Zijde').click()
       cy.url('contains', '/data/gebieden/buurtcombinatie/id3630012052036/')
 
       // Open vestigingen table, should see vestigingen
-      cy.get(ADDRESS_PAGE.linkVestigingen).contains('In tabel weergeven').click()
+      cy.get(ADDRESS_PAGE.linkTable).eq(1).contains('In tabel weergeven').click()
       cy.wait('@getBuurtCombinatie')
       cy.wait('@getHrData')
       cy.contains(
@@ -235,7 +239,7 @@ describe('Smoketest', () => {
     })
     it('Should open a dataset', () => {
       cy.server()
-      cy.route('/typeahead?q=oost').as('getResults')
+      cy.route('/typeahead/?q=oost').as('getResults')
       cy.route('POST', '/cms_search/graphql/').as('graphql')
       cy.route('/jsonapi/node/list/*').as('jsonapi')
       cy.route('/dcatd/datasets/*').as('getDataset')
@@ -276,18 +280,18 @@ describe('Smoketest', () => {
     })
     it('Should open a publication', () => {
       cy.server()
-      cy.route('/typeahead?q=oost').as('getResults')
+      cy.route('/typeahead/?q=oost').as('getResults')
       cy.route('/jsonapi/node/publication/*').as('getPublication')
+      cy.route('POST', '/cms_search/graphql/').as('graphql')
 
       // Search keyword Oost, results contain only datasets
       cy.get(SEARCH.input).focus().clear().type('Oost{enter}')
       cy.wait('@getResults')
-      cy.contains("Datasets met 'Oost' (")
 
       // Filter publications
       cy.contains('Filteren').click()
       cy.get('[role="dialog"]').find('[href*="/publicaties/zoek/"]').click()
-      cy.wait('@getResults')
+      cy.wait('@graphql')
       cy.contains('resultaten tonen').click()
       cy.url('contains', '/publicaties/zoek/?term=Oost')
       cy.contains("Publicaties met 'Oost' (")
@@ -307,7 +311,7 @@ describe('Smoketest', () => {
     })
     it('Should go back to previous pages', () => {
       cy.server()
-      cy.route('/typeahead?q=oost').as('getResults')
+      cy.route('/typeahead/?q=oost').as('getResults')
       cy.route('/dcatd/datasets/*').as('getDataset')
 
       // Go Back to all previous pages
@@ -316,7 +320,7 @@ describe('Smoketest', () => {
       cy.go('back')
       cy.contains("Publicaties met 'Oost' (")
       cy.go('back')
-      cy.contains("Datasets met 'Oost' (")
+      cy.contains("Alle zoekresultaten met 'Oost' (")
       cy.go('back')
       cy.wait('@getDataset')
       cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Dataset').and('be.visible')
@@ -326,11 +330,9 @@ describe('Smoketest', () => {
       cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Tags').and('be.visible')
       cy.get(DATA_SEARCH.headerSubTitle).should('contain', 'Licentie').and('be.visible')
       cy.go('back')
-      cy.wait('@getResults')
       cy.contains("Datasets met 'Oost' (")
       cy.go('back')
       cy.contains("Alle zoekresultaten met 'Oost' (").should('be.visible')
-      cy.go('back')
       cy.go('back')
 
       // Back to the homepage
