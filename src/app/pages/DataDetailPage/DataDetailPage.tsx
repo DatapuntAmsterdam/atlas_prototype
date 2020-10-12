@@ -1,46 +1,15 @@
-/* eslint-disable global-require */
-import { useDispatch, useSelector } from 'react-redux'
-import React, { useMemo, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
 import { Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
 // @ts-ignore
-import { AngularWrapper } from 'react-angular'
 import ShareBar from '../../components/ShareBar/ShareBar'
-import { getUser } from '../../../shared/ducks/user/user'
-import {
-  getPanoramaPreview,
-  isPanoramaPreviewLoading,
-} from '../../../panorama/ducks/preview/panorama-preview'
-import {
-  getDetailData,
-  getDetailEndpoint,
-  getDetailFilterSelection,
-  getDetailTemplateUrl,
-  getID,
-  getSubType,
-  getType,
-  isDetailLoading,
-} from '../../../shared/ducks/detail/selectors'
-import { isGenericTemplate } from '../../../map/services/map-services.config'
-import usePromise, { PromiseStatus } from '../../utils/usePromise'
-import {
-  fetchDetailData,
-  getDetailUrl,
-  getServiceDefinition,
-  toMapDetails,
-} from '../../../map/services/map'
 import { getPanelTitle, HeadingWrapper, PanelContents } from '../MapPage/detail/DetailPanel'
 import DetailHeading from '../MapPage/detail/DetailHeading'
 import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
-import { getMapDetail } from '../../../map/ducks/detail/actions'
-import PageTemplate from '../../components/PageTemplate/PageTemplate'
-
-let angularInstance: any = null
-
-if (typeof window !== 'undefined') {
-  require('../../angularModules')
-  angularInstance = require('angular')
-}
+import PromiseResult from '../../components/PromiseTemplate/PromiseResult'
+import useDataDetail from './useDataDetail'
+import { DetailInfo } from '../../../map/types/details'
 
 type Props = {
   isLoading: boolean
@@ -67,97 +36,30 @@ const TypeHeading = styled(DetailHeading)`
   margin-bottom: 0;
 `
 
-const DetailContainer: React.FC<{ isLoading: boolean }> = ({ isLoading, children }) => (
-  <div className="qa-detail">
-    {children}
-    {!isLoading && (
-      <div className="u-row">
-        <div className="u-col-sm--12">
-          <div className="u-margin__left--2 u-margin__bottom--1 qa-share-bar">
-            <ShareBar />
-          </div>
-        </div>
-      </div>
-    )}
-  </div>
-)
+interface Params extends DetailInfo {
+  subtype: string
+}
 
 const Detail: React.FC<Props> = () => {
-  const dispatch = useDispatch()
-  const [retryCount, setRetryCount] = useState(0)
+  const { id: rawId, subtype: subType, type } = useParams<Params>()
+  const id = rawId.includes('id') ? rawId.substr(2) : rawId
 
-  const isLoading = useSelector(isDetailLoading)
-  const user = useSelector(getUser)
-  const endpoint = useSelector(getDetailEndpoint)
-  const subType = useSelector(getSubType)
-  const type = useSelector(getType)
-  const id = useSelector(getID)
-  const previewPanorama = useSelector(getPanoramaPreview)
-  const isPreviewPanoramaLoading = useSelector(isPanoramaPreviewLoading)
-  const detailTemplateUrl = useSelector(getDetailTemplateUrl)
-  const detailData = useSelector(getDetailData)
-  const detailFilterSelection = useSelector(getDetailFilterSelection)
+  const { result: promise, onRetry } = useDataDetail(id, subType, type)
 
-  const result = usePromise(
-    useMemo(async () => {
-      const serviceDefinition = getServiceDefinition(`${type}/${subType}`)
-
-      if (!serviceDefinition) {
-        return Promise.resolve(null)
-      }
-
-      const detailUrl = getDetailUrl(serviceDefinition, id)
-      const data = await fetchDetailData(serviceDefinition, id)
-
-      // Legacy, needed to, for example, update the GeoJSON's on the map
-      dispatch(getMapDetail(detailUrl))
-      return toMapDetails(serviceDefinition, data)
-    }, [type, subType, id, retryCount]),
-  )
-
-  if (!isGenericTemplate(detailTemplateUrl) && angularInstance) {
-    return (
-      <DetailContainer isLoading={isLoading}>
-        <AngularWrapper
-          moduleName="dpDetailWrapper"
-          component="dpDetail"
-          dependencies={['atlas']}
-          angularInstance={angularInstance}
-          bindings={{
-            isLoading,
-            user,
-            previewPanorama,
-            isPreviewPanoramaLoading,
-            detailTemplateUrl,
-            detailData,
-            detailFilterSelection,
-            subType,
-            id,
-          }}
-          interpolateBindings={{
-            endpoint,
-          }}
-        />
-      </DetailContainer>
-    )
-  }
   return (
-    <PageTemplate result={result} onRetry={() => setRetryCount(retryCount + 1)}>
-      {result.status === PromiseStatus.Fulfilled && (
-        <DetailContainer isLoading={isLoading}>
-          <DetailWrapper>
-            <TypeHeading>{result.value?.data.title}</TypeHeading>
-            <HeadingWrapper>
-              <Heading as="h1">{getPanelTitle(result)}</Heading>
-              {!!result?.value?.data?.infoBox && (
-                <DetailInfoBox {...result?.value?.data?.infoBox} />
-              )}
-            </HeadingWrapper>
-            <PanelContents legacyLayout result={result} />
-          </DetailWrapper>
-        </DetailContainer>
+    <PromiseResult<any> promise={promise} onRetry={onRetry}>
+      {({ result }) => (
+        <DetailWrapper>
+          <TypeHeading>{result.value?.data.title}</TypeHeading>
+          <HeadingWrapper>
+            <Heading as="h1">{getPanelTitle(result)}</Heading>
+            {!!result?.value?.data?.infoBox && <DetailInfoBox {...result?.value?.data?.infoBox} />}
+          </HeadingWrapper>
+          <PanelContents legacyLayout result={result} />
+          <ShareBar />
+        </DetailWrapper>
       )}
-    </PageTemplate>
+    </PromiseResult>
   )
 }
 

@@ -6,7 +6,7 @@ import {
   toMapAndPreserveQuery,
   toDetailFromEndpoint,
 } from '../../../store/redux-first-router/actions'
-import { getDetailLocation } from '../../../store/redux-first-router/selectors'
+import { getDetailLocation, getPage } from '../../../store/redux-first-router/selectors'
 
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers'
 import { selectLatestMapDetail } from '../../ducks/detail/selectors'
@@ -28,6 +28,7 @@ const mapStateToProps = (state) => ({
   panoPreview: getPanoramaPreview(state),
   searchResults: getMapPanelResults(state),
   dataSearch: getDataSearch(state),
+  currentPage: getPage(state),
   detailLocation: getDetailLocation(state),
   searchLocation: getDataSearchLocation(state),
   searchLocationId: getLocationId(state),

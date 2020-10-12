@@ -1,7 +1,5 @@
 import { Link, PaginatedData } from '../../../../map/types/details'
 import { fetchWithToken } from '../../../../shared/services/api/api'
-import { getDetailPageData } from '../../../../store/redux-first-router/actions'
-import buildDetailUrl from './buildDetailUrl'
 
 interface ApiLinkObject {
   self: {
@@ -25,11 +23,15 @@ interface BouwblokkenResolvedResult {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const getListFromApi = (defaultUrl: string) => async (
-  url?: string,
-  pageSize = 10,
-): Promise<PaginatedData<Link[]> | null> => {
-  const endpoint = new URL(url ?? defaultUrl)
+export const getListFromApi = (
+  defaultUrl: string | null,
+  normalize?: (data: any[]) => any[],
+) => async (url?: string, pageSize = 10): Promise<PaginatedData<Link[]> | null> => {
+  const fetchUrl = url ?? defaultUrl
+  if (!fetchUrl) {
+    return null
+  }
+  const endpoint = new URL(fetchUrl)
   endpoint.searchParams.set('page_size', pageSize.toString())
   const response = await fetchWithToken<BouwblokkenResolvedResult>(endpoint.toString())
 
@@ -37,11 +39,10 @@ export const getListFromApi = (defaultUrl: string) => async (
     return null
   }
 
+  const results = normalize ? normalize(response.results) : response.results
+
   return {
-    data: response.results.map(({ _display, _links }) => ({
-      to: buildDetailUrl(getDetailPageData(_links.self.href)),
-      title: _display,
-    })),
+    data: results,
     count: response.count,
     previous: response._links.previous.href || null,
     next: response._links.next.href || null,

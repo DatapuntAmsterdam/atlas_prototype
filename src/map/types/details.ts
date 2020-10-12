@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import NotificationLevel from '../../app/models/notification'
 import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 
@@ -13,31 +14,34 @@ export interface DetailResult {
 }
 
 export interface DetailResultNotification {
-  value: string
+  value: string | ReactNode
+  id: string | number
   level: NotificationLevel
   canClose?: boolean
 }
 
 export enum DetailResultItemType {
-  Default = 'default',
   DefinitionList = 'definition-list',
   Table = 'table',
   LinkList = 'link-list',
-  Heading = 'heading',
   PaginatedData = 'paginated-data',
 }
 
 export type DetailResultItem =
-  | DetailResultItemDefault
   | DetailResultItemDefinitionList
   | DetailResultItemLinkList
   | DetailResultItemTable
-  | DetailResultItemHeading
   | DetailResultItemPaginatedData
 
 export interface ExternalLink {
   title: string
   url: string
+}
+
+export interface DetailInfo {
+  id: string
+  subType: string
+  type: string
 }
 
 type To = { pathname: string; search?: string } | string
@@ -64,43 +68,34 @@ export interface DefaultDetailResultItem {
   title?: string | null
 }
 
-// TODO: Drop 'DetailResultItemDefault' in favor of 'DetailResultItemDefinitionList'
-export interface DetailResultItemDefault {
-  type: DetailResultItemType.Default
-  title?: string | null
-  value?: string | number | boolean | Date | DetailResultItemDefault[]
-  link?: string
-  status?: string
-}
-
 export interface DetailResultItemDefinitionList extends DefaultDetailResultItem {
   type: DetailResultItemType.DefinitionList
-  entries: DetailResultItemDefinitionListEntry[]
+  entries?: DetailResultItemDefinitionListEntry[]
 }
 
 export interface DetailResultItemPaginatedData extends DefaultDetailResultItem {
   type: DetailResultItemType.PaginatedData
   getData: (url?: string, pageSize?: number) => Promise<PaginatedData<any> | null>
   pageSize: number
-  toView: (data: any) => DetailResultItem
+  toView: (data?: any[]) => DetailResultItem
 }
 
 export interface DetailResultItemLinkList extends DefaultDetailResultItem {
   type: DetailResultItemType.LinkList
-  links: Link[]
-  skipRouter?: boolean
+  links?: Link[]
 }
 
 export interface DetailResultItemDefinitionListEntry {
   term: string
-  description: string
+  description?: string
   link?: To
+  alert?: string
 }
 
 export interface DetailResultItemTable extends DefaultDetailResultItem {
   type: DetailResultItemType.Table
   headings: DetailResultItemTableHeading[]
-  values: DetailResultItemTableValue[]
+  values?: DetailResultItemTableValue[]
 }
 
 export interface DetailResultItemTableHeading extends DefaultDetailResultItem {
@@ -108,7 +103,3 @@ export interface DetailResultItemTableHeading extends DefaultDetailResultItem {
 }
 
 export type DetailResultItemTableValue = { [key: string]: any }
-
-export interface DetailResultItemHeading extends DefaultDetailResultItem {
-  type: DetailResultItemType.Heading
-}

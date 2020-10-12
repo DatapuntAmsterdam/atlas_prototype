@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
-import { getMetadata } from '../../../api/metadata'
-import usePromise, { PromiseStatus } from '../../utils/usePromise'
-import PageTemplate from '../../components/PageTemplate/PageTemplate'
+import { getMetadata, Metadata } from '../../../api/metadata'
+import PromiseResult from '../../components/PromiseTemplate/PromiseResult'
 
 const ActualityPage: FunctionComponent = () => (
   <div className="c-page">
@@ -21,11 +20,11 @@ const ActualityPage: FunctionComponent = () => (
 
 function renderContents() {
   const [retryCount, setRetryCount] = useState(0)
-  const result = usePromise(useMemo(() => getMetadata(), [retryCount]))
+  const promise = useMemo(() => getMetadata(), [retryCount])
 
   return (
-    <PageTemplate result={result} onRetry={() => setRetryCount(retryCount + 1)}>
-      {result.status === PromiseStatus.Fulfilled && (
+    <PromiseResult<Metadata[]> promise={promise} onRetry={() => setRetryCount(retryCount + 1)}>
+      {({ result }) => (
         <table className="c-table">
           <thead>
             <tr className="c-table__header-row">
@@ -55,7 +54,7 @@ function renderContents() {
           </tbody>
         </table>
       )}
-    </PageTemplate>
+    </PromiseResult>
   )
 }
 

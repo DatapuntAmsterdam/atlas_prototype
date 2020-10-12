@@ -22,6 +22,7 @@ import {
 } from './normalize'
 
 jest.mock('../../../app/utils/formatDate')
+jest.mock('../../../shared/services/api/api')
 
 describe('normalize', () => {
   // This must be mocked to prevent issues with locale settings of machines
@@ -274,12 +275,12 @@ ${input.gebruiksdoel[1]}`,
   describe('normalizes "kadastraalObject', () => {
     let input
     let output
-    it('returns the size', () => {
+    it('returns the size', async () => {
       input = {
         grootte: 0,
       }
 
-      output = kadastraalObject(input)
+      output = await kadastraalObject(input)
 
       expect(output).toMatchObject({
         size: '0 m²',
@@ -307,7 +308,7 @@ ${input.gebruiksdoel[1]}`,
       })
     })
 
-    it('returns the names', () => {
+    it('returns the names', async () => {
       input = {
         kadastrale_gemeente: {
           naam: 'naam',
@@ -317,7 +318,7 @@ ${input.gebruiksdoel[1]}`,
         },
       }
 
-      output = kadastraalObject(input)
+      output = await kadastraalObject(input)
 
       expect(output).toMatchObject({
         cadastralName: input.kadastrale_gemeente.naam,

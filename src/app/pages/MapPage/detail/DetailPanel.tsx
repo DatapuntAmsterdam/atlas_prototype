@@ -1,7 +1,7 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Alert, Button, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
-import React, { Fragment, useContext, useMemo, useState } from 'react'
+import React, { Fragment, FunctionComponent, useContext, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import {
   fetchDetailData,
@@ -17,7 +17,10 @@ import {
 } from '../../../../map/types/details'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import useParam from '../../../utils/useParam'
-import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
+import usePromise, {
+  PromiseResult as PromiseResultType,
+  PromiseStatus,
+} from '../../../utils/usePromise'
 import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
 import { detailUrlParam } from '../query-params'
@@ -27,6 +30,7 @@ import DetailDefinitionList from './DetailDefinitionList'
 import DetailLinkList from './DetailLinkList'
 import DetailInfoBox from './DetailInfoBox'
 import DetailSpacer from './DetailSpacer'
+import PromiseResult from '../../../components/PromiseTemplate/PromiseResult'
 
 interface DetailPanelProps {
   detailUrl: string
@@ -92,7 +96,7 @@ type LegacyLayout = {
 }
 
 export const PanelContents: React.FC<
-  { result: PromiseResult<MapDetails | null> } & LegacyLayout
+  { result: PromiseResultType<MapDetails | null> } & LegacyLayout
 > = ({ result, legacyLayout }) => {
   if (result.status === PromiseStatus.Pending) {
     return <StyledLoadingSpinner />
@@ -110,19 +114,19 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
   const result = usePromise(
     useMemo(async () => {
       const detailParams = parseDetailPath(detailUrl)
-      const serviceDefinition = getServiceDefinition(detailParams.type)
+      const serviceDefinition = getServiceDefinition(`${detailParams.type}/${detailParams.subType}`)
 
       if (!serviceDefinition) {
         return Promise.resolve(null)
       }
 
       const data = await fetchDetailData(serviceDefinition, detailParams.id)
-      const details = await toMapDetails(serviceDefinition, data)
+      const details = await toMapDetails(serviceDefinition, data, detailParams)
 
       setDetailFeature({
         id: detailParams.id,
         type: 'Feature',
-        geometry: details.geometry,
+        geometry: details.geometry as any,
         properties: null,
       })
 
@@ -149,9 +153,6 @@ const Item: React.FC<{ item: DetailResultItem }> = ({ item }) => {
     case DetailResultItemType.DefinitionList:
       component = <DetailDefinitionList entries={item.entries} />
       break
-    case DetailResultItemType.Heading:
-      component = <DetailHeading>{item.title}</DetailHeading>
-      break
     case DetailResultItemType.Table:
       component = <DetailTable item={item} />
       break
@@ -165,8 +166,7 @@ const Item: React.FC<{ item: DetailResultItem }> = ({ item }) => {
       throw new Error('Unable to render map detail pane, encountered unknown item type.')
   }
 
-  // Todo: remove Heading type
-  return component && item.type !== DetailResultItemType.Heading ? (
+  return component ? (
     <div>
       {item.title && (
         <HeadingWrapper>
@@ -182,59 +182,77 @@ const Item: React.FC<{ item: DetailResultItem }> = ({ item }) => {
   ) : null
 }
 
+type PaginatedResultType = {
+  promiseResult: PromiseFulfilledResult<any>
+  pageSize: number
+  setPaginatedUrl: (number: number) => void
+  item: DetailResultItemPaginatedData
+}
+
+const PaginatedResult: FunctionComponent<PaginatedResultType> = ({
+  promiseResult,
+  pageSize,
+  setPaginatedUrl,
+  item,
+}) => {
+  // Unfortunately we cannot use "-1", as apparently wont work for some API's
+  const INFINITE_PAGE_SIZE = 999
+  const result = item.toView(promiseResult?.value?.data)
+
+  if (!result) {
+    return null
+  }
+
+  const showMoreButton =
+    promiseResult?.value?.count > promiseResult?.value?.data?.length ||
+    pageSize === INFINITE_PAGE_SIZE
+  const showMoreText = `Toon alle ${
+    promiseResult?.value?.count
+  } ${result.title?.toLocaleLowerCase()}`
+  const showLessText = 'Toon minder'
+
+  const showMore = pageSize !== INFINITE_PAGE_SIZE
+
+  return (
+    <>
+      <Item item={result} />
+      {showMoreButton && (
+        <ShowMoreButton
+          variant="textButton"
+          iconSize={12}
+          iconLeft={showMore ? <Enlarge /> : <Minimise />}
+          onClick={() => {
+            setPaginatedUrl(showMore ? INFINITE_PAGE_SIZE : item.pageSize)
+          }}
+        >
+          {showMore ? showMoreText : showLessText}
+        </ShowMoreButton>
+      )}
+    </>
+  )
+}
+
+// Todo: It's currently not possible to show the title / infobox when promise is rejected
 function PaginatedData({
   item,
 }: {
   item: DetailResultItemPaginatedData
 }): React.ReactElement | null {
-  // Unfortunately we cannot use "-1", as apparently wont work for some API's
-  const INFINITE_PAGE_SIZE = 999
-
   const [pageSize, setPaginatedUrl] = useState(item.pageSize)
-  const promiseResult = usePromise(
-    useMemo(async () => item.getData(undefined, pageSize), [pageSize]),
+  const promise = useMemo(async () => item.getData(undefined, pageSize), [pageSize])
+
+  return (
+    <PromiseResult<any> promise={promise}>
+      {({ result }) => (
+        <PaginatedResult
+          promiseResult={result}
+          pageSize={pageSize}
+          item={item}
+          setPaginatedUrl={setPaginatedUrl}
+        />
+      )}
+    </PromiseResult>
   )
-
-  if (promiseResult.status === PromiseStatus.Fulfilled && promiseResult.value) {
-    const result = item.toView(promiseResult?.value.data)
-
-    const showMoreButton =
-      promiseResult?.value?.count > promiseResult?.value?.data?.length ||
-      pageSize === INFINITE_PAGE_SIZE
-    const showMoreText = `Toon alle ${
-      promiseResult?.value?.count
-    } ${result.title?.toLocaleLowerCase()}`
-    const showLessText = 'Toon minder'
-
-    const showMore = pageSize !== INFINITE_PAGE_SIZE
-
-    return (
-      <>
-        <Item item={result} />
-        {showMoreButton && (
-          <ShowMoreButton
-            variant="textButton"
-            iconSize={12}
-            iconLeft={showMore ? <Enlarge /> : <Minimise />}
-            onClick={() => {
-              setPaginatedUrl(showMore ? INFINITE_PAGE_SIZE : item.pageSize)
-            }}
-          >
-            {showMore ? showMoreText : showLessText}
-          </ShowMoreButton>
-        )}
-      </>
-    )
-  }
-
-  if (promiseResult.status === PromiseStatus.Pending) {
-    return <StyledLoadingSpinner />
-  }
-  if (promiseResult.status === PromiseStatus.Rejected) {
-    return <Message>Details konden niet geladen worden.</Message>
-  }
-
-  return null
 }
 
 const RenderDetails: React.FC<{ details: MapDetails | null } & LegacyLayout> = ({
@@ -246,7 +264,9 @@ const RenderDetails: React.FC<{ details: MapDetails | null } & LegacyLayout> = (
   }
   return (
     <Wrapper legacyLayout={legacyLayout}>
-      <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
+      {details.location && (
+        <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
+      )}
       <DetailSpacer />
       {details.data.notifications?.map((notification) => (
         <Fragment key={notification.value}>
@@ -256,23 +276,25 @@ const RenderDetails: React.FC<{ details: MapDetails | null } & LegacyLayout> = (
           <DetailSpacer />
         </Fragment>
       ))}
-      {details.data.items.map((item, index) => (
-        <ItemWrapper
-          // eslint-disable-next-line react/no-array-index-key
-          key={item.type + index}
-          className={item.type}
-          // @ts-ignore
-          gridArea={item.gridArea}
-        >
-          <Item item={item} />
-          <DetailSpacer />
-        </ItemWrapper>
-      ))}
+      {details.data.items
+        .filter((item) => item)
+        .map((item, index) => (
+          <ItemWrapper
+            // eslint-disable-next-line react/no-array-index-key
+            key={item.type + index}
+            className={item.type}
+            // @ts-ignore
+            gridArea={item.gridArea}
+          >
+            <Item item={item} />
+            <DetailSpacer />
+          </ItemWrapper>
+        ))}
     </Wrapper>
   )
 }
 
-export function getPanelTitle(result: PromiseResult<MapDetails | null>) {
+export function getPanelTitle(result: PromiseResultType<MapDetails | null>) {
   if (result.status === PromiseStatus.Fulfilled && result.value) {
     return result.value.data.subTitle
   }

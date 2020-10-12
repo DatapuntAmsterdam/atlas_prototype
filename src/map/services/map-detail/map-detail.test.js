@@ -50,21 +50,21 @@ describe('map-detail', () => {
 
     mapFetch.mockImplementationOnce(() => mockDetail)
 
-    const result = await fetchDetail(endpointTypes.adressenNummeraanduiding, {})
-
-    const { normalization, mapDetail } = servicesByEndpointType[
-      endpointTypes.adressenNummeraanduiding
-    ]
+    const definition = servicesByEndpointType[endpointTypes.adressenNummeraanduiding]
+    const detailInfo = { id: 'foo', subType: 'bar', type: 'baz' }
+    const result = await fetchDetail(
+      endpointTypes.adressenNummeraanduiding,
+      definition,
+      undefined,
+      detailInfo,
+    )
 
     expect(mapFetch).toHaveBeenCalledWith(
       endpointTypes.adressenNummeraanduiding,
-      mapDetail,
-      normalization,
+      detailInfo,
+      definition,
     )
 
-    expect(result).toMatchObject({
-      ...mockDetail,
-      endpointType: endpointTypes.adressenNummeraanduiding,
-    })
+    expect(result).toMatchObject(mockDetail)
   })
 })

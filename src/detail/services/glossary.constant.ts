@@ -92,11 +92,11 @@ export type Definition = {
   authLevel?: string
 }
 
-type DefinitionList = {
-  [label: string]: Definition
+function typeHelper<K extends PropertyKey>(obj: Record<K, Definition>): Record<K, Definition> {
+  return obj
 }
 
-const DEFINITIONS: DefinitionList = {
+const DEFINITIONS = typeHelper({
   A_PERCEEL: {
     singular: 'A-perceel',
     plural: 'A-percelen',
@@ -621,7 +621,7 @@ const DEFINITIONS: DefinitionList = {
       'persoon op een zaak kan hebben is eigendom.',
     url: 'https://www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-4/',
   },
-}
+})
 
 const GLOSSARY = {
   DEFINITIONS,
