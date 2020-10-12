@@ -20,7 +20,7 @@ const matomoMiddleware = ({ getState }) => (next) => (action) => {
   }
 
   if (actionsToMatomo.length) {
-    const { firstAction, location, query, tracking } = action.meta || {}
+    const { isFirstAction, location, query, tracking } = action.meta || {}
     const state = getState()
 
     const { href } = window.location
@@ -40,7 +40,7 @@ const matomoMiddleware = ({ getState }) => (next) => (action) => {
         matomoInstance.track({
           data: matomoAction({
             tracking,
-            firstAction,
+            isFirstAction,
             query,
             state,
             title: titleForMatomo,

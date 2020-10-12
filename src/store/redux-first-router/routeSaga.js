@@ -18,8 +18,8 @@ const routeSagaMapping = [
 
 const yieldOnFirstAction = (sideEffect) =>
   function* gen(action) {
-    const { skipSaga, firstAction, forceSaga } = action.meta || {}
-    if (!skipSaga && (firstAction || forceSaga)) {
+    const { skipSaga, isFirstAction, forceSaga } = action.meta || {}
+    if (!skipSaga && (isFirstAction || forceSaga)) {
       yield call(sideEffect, action)
     }
   }

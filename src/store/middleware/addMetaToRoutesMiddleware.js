@@ -8,13 +8,13 @@ const addMetaToRoutesMiddleware = ({ getState }) => (next) => (action) => {
       nrOfRoutesDispatched = 0
     }
 
-    const firstAction = nrOfRoutesDispatched === 0
+    const isFirstAction = nrOfRoutesDispatched === 0
 
     nrOfRoutesDispatched += 1
     const nextAction = action
     const meta = {
       ...(nextAction && nextAction.meta ? { ...nextAction.meta } : {}),
-      ...(firstAction ? { firstAction } : {}),
+      ...(isFirstAction ? { isFirstAction } : {}),
     }
     return next({
       ...nextAction,

@@ -27,16 +27,16 @@ describe('addMetaToRoutesMiddleware', () => {
     expect(next).toHaveBeenCalledWith(action)
   })
 
-  it("should add firstAction to the action's meta", () => {
+  it("should add isFirstAction to the action's meta", () => {
     const action = { type: 'some type' }
     addMetaToRoutesMiddleware(store)(next)(action)
     expect(next).toHaveBeenCalledWith({
       ...action,
-      meta: { firstAction: true },
+      meta: { isFirstAction: true },
     })
   })
 
-  it("should not add firstAction to the action's meta if locationType is equal to action.type are the same", () => {
+  it("should not add isFirstAction to the action's meta if locationType is equal to action.type are the same", () => {
     setState({
       location: {
         type: 'some type',

@@ -69,7 +69,6 @@
     "lodash.debounce": "^4.0.8",
     "lodash.defer": "^4.1.0",
     "lodash.isequal": "^4.5.0",
-    "lodash.throttle": "^4.1.1",
     "marked": "^1.2.0",
     "marzipano": "^0.9.1",
     "objectFitPolyfill": "2.3.0",
@@ -124,7 +123,6 @@
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.defer": "^4.1.6",
     "@types/lodash.isequal": "^4.5.5",
-    "@types/lodash.throttle": "^4.1.6",
     "@types/mini-css-extract-plugin": "^0.9.1",
     "@types/node": "^14.11.8",
     "@types/proj4": "^2.5.0",
@@ -229,7 +227,6 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "concurrently \"npm run test:jest -- --bail\" \"npm run test:karma\"",
       "pre-commit": "lint-staged",
       "post-merge": "./scripts/post-merge.sh"
     }

@@ -40,7 +40,7 @@ export interface MapLayer {
   isVisible: boolean
 }
 
-export interface PanoParam {
+export interface Pano {
   heading: number
   pitch: number
   fov: number
@@ -138,7 +138,7 @@ export const detailUrlParam: UrlParam<string | null> = {
   encode: (value) => value,
 }
 
-export const panoParam: UrlParam<PanoParam | null> = {
+export const panoParam: UrlParam<Pano | null> = {
   name: 'pano',
   defaultValue: null,
   decode: (value) => value && JSON.parse(value),
