@@ -69,7 +69,6 @@
     "lodash.debounce": "^4.0.8",
     "lodash.defer": "^4.1.0",
     "lodash.isequal": "^4.5.0",
-    "lodash.throttle": "^4.1.1",
     "marzipano": "^0.9.1",
     "objectFitPolyfill": "2.3.0",
     "openseadragon": "2.4.2",
