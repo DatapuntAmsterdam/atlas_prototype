@@ -8,11 +8,6 @@ exports[`StatusBar should render 1`] = `
     className="c-panorama-status-bar__items"
   >
     <div
-      className="c-panorama-status-bar__history"
-    >
-      <span />
-    </div>
-    <div
       className="c-panorama-status-bar__coordinates"
     >
       <span>

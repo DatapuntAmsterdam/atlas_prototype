@@ -1,5 +1,5 @@
 import NotificationLevel from '../../../app/models/notification'
-import formatDate from '../../../shared/services/date-formatter/date-formatter'
+import formatDate from '../../../app/utils/formatDate'
 import {
   adressenPand,
   adressenVerblijfsobject,
@@ -21,7 +21,7 @@ import {
   YEAR_UNKNOWN,
 } from './normalize'
 
-jest.mock('../../../shared/services/date-formatter/date-formatter')
+jest.mock('../../../app/utils/formatDate')
 
 describe('normalize', () => {
   // This must be mocked to prevent issues with locale settings of machines

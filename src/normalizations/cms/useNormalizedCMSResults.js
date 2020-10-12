@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import RouterLink from 'redux-first-router-link'
+import formatDate from '../../app/utils/formatDate'
 import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
 import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
-import formatDate from '../../shared/services/date-formatter/date-formatter'
 import {
   toArticleDetail,
   toCollectionDetail,

@@ -1,7 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+import formatDate from '../../../app/utils/formatDate'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system/crs-converter'
-import { dateToString } from '../../../shared/services/date-formatter/date-formatter'
 
 // Todo AfterBeta: can be removed if ViewerInfoBar is implemented in ConstructionFiles viewer
 const convertLocation = (location) => {
@@ -15,9 +15,17 @@ const convertLocation = (location) => {
 const StatusBar = ({ date, location }) => (
   <div className="c-panorama-status-bar">
     <div className="c-panorama-status-bar__items">
-      <div className="c-panorama-status-bar__history">
-        <span>{dateToString(date)}</span>
-      </div>
+      {date instanceof Date && (
+        <div className="c-panorama-status-bar__history">
+          <span>
+            {formatDate(date, {
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+            })}
+          </span>
+        </div>
+      )}
       <div className="c-panorama-status-bar__coordinates">
         <span>{convertLocation(location)}</span>
       </div>

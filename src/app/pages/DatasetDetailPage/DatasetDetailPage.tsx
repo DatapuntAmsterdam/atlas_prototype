@@ -21,10 +21,10 @@ import { dcatdScopes } from '../../../shared/services/auth/auth'
 import getDatasetFilters, {
   DatasetFilterOption,
 } from '../../../shared/services/datasets-filters/datasets-filters'
-import formatDate from '../../../shared/services/date-formatter/date-formatter'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DefinitionList, { DefinitionListItem } from '../../components/DefinitionList'
 import ShareBar from '../../components/ShareBar/ShareBar'
+import formatDate from '../../utils/formatDate'
 import redirectToDcatd from '../../utils/redirectToDcatd'
 import usePromise from '../../utils/usePromise'
 
@@ -325,11 +325,11 @@ const DatasetDetailPage: FunctionComponent = () => {
                       </DefinitionListItem>
                     )}
                     <DefinitionListItem term="Publicatiedatum">
-                      {formatDate(dataset['foaf:isPrimaryTopicOf']['dct:issued'])}
+                      {formatDate(new Date(dataset['foaf:isPrimaryTopicOf']['dct:issued']))}
                     </DefinitionListItem>
                     {dataset['ams:sort_modified'] && (
                       <DefinitionListItem term="Wijzigingsdatum">
-                        {formatDate(dataset['ams:sort_modified'])}
+                        {formatDate(new Date(dataset['ams:sort_modified']))}
                       </DefinitionListItem>
                     )}
                     {dataset['dct:accrualPeriodicity'] && (

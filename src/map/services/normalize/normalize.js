@@ -1,6 +1,6 @@
 import NotificationLevel from '../../../app/models/notification'
 import formatCount from '../../../app/utils/formatCount'
-import formatDate from '../../../shared/services/date-formatter/date-formatter'
+import formatDate from '../../../app/utils/formatDate'
 import formatNumber from '../../../shared/services/number-formatter/number-formatter'
 import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
 

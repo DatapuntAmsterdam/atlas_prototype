@@ -1,11 +1,9 @@
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
+import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system/crs-converter'
 import StatusBar from './StatusBar'
 
-import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system/crs-converter'
-
 jest.mock('../../../shared/services/coordinate-reference-system/crs-converter')
-jest.mock('../../../shared/services/date-formatter/date-formatter')
 
 describe('StatusBar', () => {
   it('should render', () => {

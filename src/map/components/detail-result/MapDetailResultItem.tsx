@@ -1,12 +1,12 @@
-import React from 'react'
-import formatDate from '../../../shared/services/date-formatter/date-formatter'
+import React, { FunctionComponent } from 'react'
+import formatDate from '../../../app/utils/formatDate'
 import { DetailResultItemDefault } from '../../types/details'
 
 export interface MapDetailResultItemProps {
   item: DetailResultItemDefault
 }
 
-const MapDetailResultItem: React.FC<MapDetailResultItemProps> = ({ item }) => {
+const MapDetailResultItem: FunctionComponent<MapDetailResultItemProps> = ({ item }) => {
   const value = item.value instanceof Date ? formatDate(item.value) : item.value
 
   return value ? (

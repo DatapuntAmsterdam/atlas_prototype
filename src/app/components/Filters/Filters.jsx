@@ -1,4 +1,4 @@
-import { dateToString } from '../../../shared/services/date-formatter/date-formatter'
+import formatDate from '../../utils/formatDate'
 
 export const aggregateFilter = (input) => {
   const result = input.reduce((aggregation, value) => {
@@ -36,9 +36,15 @@ export const bagAddressFilter = (input) => {
 }
 
 export const dateFilter = (input) => {
-  if (!input) return ''
-  const date = new Date(input)
-  return date && dateToString(date)
+  if (!input) {
+    return ''
+  }
+
+  return formatDate(new Date(input), {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  })
 }
 
 // Only return the address to form the label. The `non_mailing`

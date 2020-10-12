@@ -1,3 +1,4 @@
+import formatDate from '../../utils/formatDate'
 import {
   aggregateFilter,
   alignRightFilter,
@@ -11,7 +12,8 @@ import {
   verblijfsObjectGevormdFilter,
   zipCodeFilter,
 } from './Filters'
-import * as formatters from '../../../shared/services/date-formatter/date-formatter'
+
+jest.mock('../../utils/formatDate')
 
 describe('Filters', () => {
   describe('aggregate filter', () => {
@@ -144,16 +146,22 @@ describe('Filters', () => {
   describe('date filter', () => {
     it('returns empty string when date is unknown', () => {
       const output = dateFilter()
-      jest.spyOn(formatters, 'dateToString')
-      expect(formatters.dateToString).not.toHaveBeenCalled()
+      const formatDateMock = formatDate.mockImplementationOnce(() => '01-02-2018')
+
+      expect(formatDateMock).not.toHaveBeenCalled()
       expect(output).toBe('')
+
+      formatDate.mockClear()
     })
 
     it('returns the date in dutch format', () => {
-      const input = '2018-02-01'
-      const output = dateFilter(input)
-      expect(formatters.dateToString).toHaveBeenCalled()
+      const output = dateFilter('2018-02-01')
+      const formatDateMock = formatDate.mockImplementationOnce(() => '01-02-2018')
+
+      expect(formatDateMock).toHaveBeenCalled()
       expect(output).toBe('01-02-2018')
+
+      formatDate.mockClear()
     })
   })
   describe('hr bezoekadres filter', () => {

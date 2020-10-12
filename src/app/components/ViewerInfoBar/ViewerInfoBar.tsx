@@ -3,7 +3,7 @@ import { LatLngLiteral } from 'leaflet'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
-import { dateToString } from '../../../shared/services/date-formatter/date-formatter'
+import formatDate from '../../utils/formatDate'
 
 const ViewerInfoBarStyle = styled.div`
   background-color: rgba(255, 255, 255, 0.3);
@@ -28,7 +28,17 @@ type Props = {
 
 const ViewerInfoBar: React.FC<Props> = ({ location, date }) => {
   const { x: rdX, y: rdY } = useMemo(() => wgs84ToRd(location), [location])
-  const formattedDate = useMemo(() => dateToString(date), [date])
+  const formattedDate = useMemo(
+    () =>
+      date
+        ? formatDate(new Date(date), {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+          })
+        : null,
+    [date],
+  )
   const formattedLocation = `${rdX.toFixed(2)}, ${rdY.toFixed(2)} (${location.lat.toFixed(
     7,
   )}, ${location.lng.toFixed(7)})`
