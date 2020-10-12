@@ -1,7 +1,7 @@
 import { useStateRef } from '@amsterdam/arm-core'
 import debounce from 'lodash.debounce'
 import Marzipano from 'marzipano'
-import { RefObject, useEffect, useState, useCallback } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 import { getOrientation } from '../../panorama/services/marzipano/marzipano'
 import { Pano } from '../pages/MapPage/query-params'
 
@@ -15,7 +15,7 @@ const useMarzipano = (
   const [marzipanoViewer, setMarzipanoInstance, marzipanoViewerRef] = useStateRef<any>(null)
   const [currentMarzipanoView, setCurrentMarzipanoView] = useState<Pano | null>(null)
 
-  const updateOrientation = useCallback(() => {
+  const updateOrientation = () => {
     if (marzipanoViewerRef.current) {
       return
     }
@@ -25,7 +25,7 @@ const useMarzipano = (
     if (heading && pitch && fov) {
       setCurrentMarzipanoView({ heading, pitch, fov })
     }
-  }, [])
+  }
 
   const updateOrientationDebounced = debounce(updateOrientation, 300, {
     leading: true,
