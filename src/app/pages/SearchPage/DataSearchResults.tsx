@@ -15,7 +15,7 @@ const CardWrapper = styled.div<{ compact: boolean }>`
   margin-bottom: ${({ compact }) => (compact ? themeSpacing(2) : themeSpacing(8))};
 `
 
-interface SingleResult {
+interface DataResult {
   endpoint: string
   id: string
   label: string
@@ -24,10 +24,10 @@ interface SingleResult {
   __typename: 'DataResult'
 }
 
-interface DataSearchResults {
+interface CombinedDataResult {
   count: number
   label: string
-  results: SingleResult[]
+  results: DataResult[]
   type: string
   __typename: 'CombinedDataResult'
 }
@@ -35,7 +35,7 @@ interface DataSearchResults {
 export interface DataSearchResultsProps {
   page: string
   query: string
-  results: DataSearchResults[]
+  results: CombinedDataResult[]
   errors: GraphQLFormattedError<ErrorExtensions>[]
   compact: boolean
   withPagination: boolean
@@ -51,7 +51,7 @@ const DataSearchResults: React.FC<DataSearchResultsProps> = ({
   const Card = compact ? DataCard : DataList
 
   // Get the total count for all data types
-  const totalCount = results.length ? results.reduce((acc, { count }) => acc + count, 0) : 0
+  const totalCount = results.reduce((acc, { count }) => acc + count, 0)
 
   // Get the errors and labels for this page.
   const matchingErrors = getErrorsForPath(errors, ['dataSearch'])
