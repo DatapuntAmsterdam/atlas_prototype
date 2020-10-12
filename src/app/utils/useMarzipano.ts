@@ -1,13 +1,19 @@
 import { useStateRef } from '@amsterdam/arm-core'
-import throttle from 'lodash.throttle'
+import debounce from 'lodash.debounce'
 import Marzipano from 'marzipano'
 import { RefObject, useEffect, useState } from 'react'
 import { getOrientation } from '../../panorama/services/marzipano/marzipano'
-import { PanoParam } from '../pages/MapPage/query-params'
+import { Pano } from '../pages/MapPage/query-params'
 
-const useMarzipano = (ref: RefObject<HTMLElement>) => {
+const useMarzipano = (
+  ref: RefObject<HTMLElement>,
+): {
+  marzipanoViewer: any
+  marzipanoViewerRef: RefObject<HTMLElement>
+  currentMarzipanoView: Pano | null
+} => {
   const [marzipanoViewer, setMarzipanoInstance, marzipanoViewerRef] = useStateRef<any>(null)
-  const [currentMarzipanoView, setCurrentMarzipanoView] = useState<PanoParam | null>(null)
+  const [currentMarzipanoView, setCurrentMarzipanoView] = useState<Pano | null>(null)
 
   const updateOrientation = () => {
     if (marzipanoViewerRef.current) {
@@ -20,7 +26,8 @@ const useMarzipano = (ref: RefObject<HTMLElement>) => {
       setCurrentMarzipanoView({ heading, pitch, fov })
     }
   }
-  const updateOrientationThrottled = throttle(updateOrientation, 300, {
+
+  const updateOrientationDebounced = debounce(updateOrientation, 300, {
     leading: true,
     trailing: true,
   })
@@ -31,7 +38,8 @@ const useMarzipano = (ref: RefObject<HTMLElement>) => {
     }
 
     const viewer = new Marzipano.Viewer(ref.current, {
-      stageType: null,
+      // Set a stage type that is supported in the test environment
+      stageType: process.env.NODE_ENV === 'test' ? 'css' : 'webgl',
       stage: {
         preserveDrawingBuffer: true,
         width: 960,
@@ -40,7 +48,7 @@ const useMarzipano = (ref: RefObject<HTMLElement>) => {
 
     setMarzipanoInstance(viewer)
 
-    viewer.addEventListener('viewChange', updateOrientationThrottled)
+    viewer.addEventListener('viewChange', updateOrientationDebounced)
 
     return () => {
       if (marzipanoViewerRef.current) {
