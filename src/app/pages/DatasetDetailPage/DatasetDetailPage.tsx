@@ -158,7 +158,10 @@ const DatasetDetailPage: FunctionComponent = () => {
             <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
               <Content className="dataset-detail">
                 <div className="o-header">
-                  <h3 className="o-header__subtitle">
+                  <h1 className="o-header__title u-margin__top--0 u-margin__bottom--1">
+                    {dataset['dct:title']}
+                  </h1>
+                  <h2 className="o-header__subtitle u-margin__bottom--2">
                     <span>Dataset</span>
                     {canEdit && datasetId && (
                       <div className="o-header__buttongroup">
@@ -172,8 +175,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                         </Button>
                       </div>
                     )}
-                  </h3>
-                  <h2 className="o-header__title u-margin__bottom--3 ">{dataset['dct:title']}</h2>
+                  </h2>
                 </div>
                 <StyledCustomHTMLBlock body={dataset['dct:description']} />
 
@@ -191,15 +193,15 @@ const DatasetDetailPage: FunctionComponent = () => {
                   )}
                 </div>
 
-                <h3 className="o-header__subtitle">Resources</h3>
+                <h2 className="o-header__subtitle">Resources</h2>
 
                 <div className="resources">
                   {resources.map((resource) => (
                     <div className="resources-type" key={resource.type}>
                       <div className="resources-type__header">
-                        <h4 className="resources-type__header-title">
+                        <h3 className="resources-type__header-title">
                           {getOptionLabel(resource.type, catalogFilters.resourceTypes)}
-                        </h4>
+                        </h3>
                       </div>
                       {resource.rows.map((row) => (
                         <div className="resources-type__content" key={row['dc:identifier']}>
@@ -306,7 +308,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                 </div>
 
                 <div>
-                  <h3 className="o-header__subtitle">Details</h3>
+                  <h2 className="o-header__subtitle">Details</h2>
 
                   <DefinitionList>
                     <DefinitionListItem term="Doel">
@@ -425,7 +427,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                 </div>
 
                 <div className="c-detail__block u-padding__bottom--1 u-margin__top--3">
-                  <h3 className="o-header__subtitle">Thema&apos;s</h3>
+                  <h2 className="o-header__subtitle">Thema&apos;s</h2>
                   <div className="catalog-themes">
                     {dataset['dcat:theme'].map((group: string) => (
                       <div className="catalog-theme" key={group}>
@@ -438,7 +440,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                 </div>
 
                 <div className="c-detail__block u-padding__bottom--1">
-                  <h3 className="o-header__subtitle">Tags</h3>
+                  <h2 className="o-header__subtitle">Tags</h2>
                   <ul>
                     {dataset['dcat:keyword'].map((tag: string) => (
                       <li className="u-inline" key={tag}>
@@ -452,7 +454,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                 </div>
 
                 <div className="c-detail__block u-padding__bottom--1">
-                  <h3 className="o-header__subtitle">Licentie</h3>
+                  <h2 className="o-header__subtitle">Licentie</h2>
                   {dataset['ams:license'] && (
                     <div>{getOptionLabel(dataset['ams:license'], catalogFilters.licenseTypes)}</div>
                   )}
