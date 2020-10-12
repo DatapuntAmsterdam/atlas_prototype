@@ -1,4 +1,4 @@
-import { HEADER, HEADER_MENU, HOMEPAGE, SEARCH } from '../support/selectors'
+import { HEADER, HEADER_MENU, HOMEPAGE } from '../support/selectors'
 
 describe('Homepage module', () => {
   const sizes = ['iphone-x', 'ipad-2', 'macbook-15']
@@ -25,7 +25,6 @@ describe('Homepage module', () => {
         cy.get(HEADER.logoAmsterdamTitle).should('contain', 'Data en informatie').and('be.visible')
         cy.get(HEADER.headerTitle).should('contain', 'Data en informatie').and('be.visible')
         cy.get(HEADER_MENU.rootDefault).should('exist')
-        cy.get(SEARCH.form).should('be.visible')
         cy.checkSearchbar(size)
       })
       it('Should check all menu items', () => {
@@ -211,16 +210,24 @@ describe('Homepage module', () => {
       })
       it('Should check the footer', () => {
         cy.get(HOMEPAGE.footerBlock).eq(0).find('h3').contains('Colofon')
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Databeleid"]').click({ force: true })
+        cy.get(HOMEPAGE.footerBlock)
+          .eq(0)
+          .find('[title="Databeleid"]')
+          .first()
+          .click({ force: true })
         cy.url().should('include', '/artikelen/artikel/amsterdam-en-data/')
         cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Bronnen"]').click({ force: true })
+        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Bronnen"]').first().click({ force: true })
         cy.url().should('include', '/artikelen/artikel/bronnen/')
         cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Over deze site"]').click({ force: true })
+        cy.get(HOMEPAGE.footerBlock)
+          .eq(0)
+          .find('[title="Over deze site"]')
+          .first()
+          .click({ force: true })
         cy.url().should('include', '/artikelen/artikel/over-deze-site/')
         cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Over OIS"]').click({ force: true })
+        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Over OIS"]').first().click({ force: true })
         cy.url().should('include', '/artikelen/artikel/over-ois/')
         cy.go('back')
 
@@ -232,16 +239,22 @@ describe('Homepage module', () => {
         cy.get(HOMEPAGE.footerBlock).find('[title="GitHub"]').should('exist')
 
         cy.get(HOMEPAGE.footerBlock).find('h3').contains('Vragen')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Veelgestelde vragen"]').click({ force: true })
+        cy.get(HOMEPAGE.footerBlock)
+          .find('[title="Veelgestelde vragen"]')
+          .first()
+          .click({ force: true })
         cy.url().should('include', '/artikelen/artikel/veelgestelde-vragen/')
         cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Contact opnemen"]').click({ force: true })
+        cy.get(HOMEPAGE.footerBlock)
+          .find('[title="Contact opnemen"]')
+          .first()
+          .click({ force: true })
         cy.url().should('include', '/artikelen/artikel/contact/')
         cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Feedback geven"]').click({ force: true })
+        cy.get(HOMEPAGE.footerBlock).find('[title="Feedback geven"]').first().click({ force: true })
         cy.get('[class*="ModalStyle__ModalFocus"]').should('be.visible')
         cy.get('[title="Sluit"]').click()
-        cy.get(HOMEPAGE.footerBlock).find('[title="Uitleg gebruik"]').click({ force: true })
+        cy.get(HOMEPAGE.footerBlock).find('[title="Uitleg gebruik"]').first().click({ force: true })
         cy.url().should('include', '/artikelen/artikel/wat-kun-je-hier/')
         cy.go('back')
 

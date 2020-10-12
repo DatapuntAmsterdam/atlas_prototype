@@ -14,7 +14,7 @@ describe('visitor permissions', () => {
   })
 
   it('0. Should NOT show "Kadastrale subjecten" in the autocomplete', () => {
-    cy.route('/typeahead?q=bakker').as('getResults')
+    cy.route('/typeahead/?q=bakker').as('getResults')
     cy.visit('/')
 
     cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker')
@@ -30,7 +30,7 @@ describe('visitor permissions', () => {
   })
 
   it('1. Should NOT show "Kadastrale subjecten" and "Vestigingen" in the results', () => {
-    cy.route('/typeahead?q=bakker').as('getResults')
+    cy.route('/typeahead/?q=bakker').as('getResults')
     cy.visit('/')
 
     cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')

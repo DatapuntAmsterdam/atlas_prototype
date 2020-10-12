@@ -54,7 +54,7 @@ describe('parcel-ownership (eigendommen) module', () => {
       })
 
       it('should not show a notification', () => {
-        cy.get(TABLES.warningPanel).should('not.exist').and('not.be.visible')
+        cy.get(TABLES.warningPanel).should('not.exist')
       })
 
       it('should show the table with results', () => {
