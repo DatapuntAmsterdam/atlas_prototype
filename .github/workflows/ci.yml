@@ -45,7 +45,7 @@ jobs:
       - name: install
         run: npm ci
 
-     - name: Run ${{ matrix.job }}
+      - name: Run ${{ matrix.job }}
         run: npm run ${{ matrix.job }}
 
       - name: Upload coverage report
