@@ -229,7 +229,6 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "concurrently \"npm run test:jest -- --bail\" \"npm run test:karma\"",
       "pre-commit": "lint-staged",
       "post-merge": "./scripts/post-merge.sh"
     }
