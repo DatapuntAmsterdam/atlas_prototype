@@ -287,7 +287,9 @@ const DatasetDetailPage: FunctionComponent = () => {
                               <div className="resources-item__right">
                                 <div className="resources-item__modified">
                                   {row['dct:modified'] && (
-                                    <span>gewijzigd op {formatDate(row['dct:modified'])}</span>
+                                    <span>
+                                      gewijzigd op {formatDate(new Date(row['dct:modified']))}
+                                    </span>
                                   )}
                                 </div>
                                 <div className="resources-item__navigation">
