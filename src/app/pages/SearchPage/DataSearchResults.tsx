@@ -15,19 +15,19 @@ const CardWrapper = styled.div<{ compact: boolean }>`
   margin-bottom: ${({ compact }) => (compact ? themeSpacing(2) : themeSpacing(8))};
 `
 
-type SingleResult = {
-  endpoint: String
-  id: String
-  label: String
-  subtype: String
-  type: String
+interface SingleResult {
+  endpoint: string
+  id: string
+  label: string
+  subtype: string
+  type: string
   __typename: 'DataResult'
 }
 
-type DataSearchResults = {
+interface DataSearchResults {
   count: number
   label: string
-  results: Array<SingleResult>
+  results: SingleResult[]
   type: string
   __typename: 'CombinedDataResult'
 }
@@ -35,7 +35,7 @@ type DataSearchResults = {
 export interface DataSearchResultsProps {
   page: string
   query: string
-  results: Array<DataSearchResults>
+  results: DataSearchResults[]
   errors: GraphQLFormattedError<ErrorExtensions>[]
   compact: boolean
   withPagination: boolean
