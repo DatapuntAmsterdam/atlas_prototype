@@ -4,7 +4,7 @@
 @import 'components/panorama-thumbnail/panorama-thumbnail';
 @import 'components/tab-header/tab-header';
 @import '../atlas/atlas.scss';
-@import '../data-selection/data-selection.scss';
+@import 'modules/atlas/styles/legacy/data-selection/data-selection';
 @import '../detail/detail.scss';
 
 .is-print-mode,
