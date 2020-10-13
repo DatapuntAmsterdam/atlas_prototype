@@ -25,6 +25,7 @@ export enum DetailResultItemType {
   Table = 'table',
   LinkList = 'link-list',
   PaginatedData = 'paginated-data',
+  GroupedItems = 'grouped-items',
 }
 
 export type DetailResultItem =
@@ -32,6 +33,7 @@ export type DetailResultItem =
   | DetailResultItemLinkList
   | DetailResultItemTable
   | DetailResultItemPaginatedData
+  | DetailResultItemGroupedItems
 
 export interface ExternalLink {
   title: string
@@ -71,6 +73,11 @@ export interface DefaultDetailResultItem {
 export interface DetailResultItemDefinitionList extends DefaultDetailResultItem {
   type: DetailResultItemType.DefinitionList
   entries?: DetailResultItemDefinitionListEntry[]
+}
+
+export interface DetailResultItemGroupedItems extends DefaultDetailResultItem {
+  type: DetailResultItemType.GroupedItems
+  entries: DetailResultItem[]
 }
 
 export interface DetailResultItemPaginatedData extends DefaultDetailResultItem {

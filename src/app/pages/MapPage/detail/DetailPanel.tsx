@@ -12,6 +12,7 @@ import {
 } from '../../../../map/services/map'
 import {
   DetailResultItem,
+  DetailResultItemGroupedItems,
   DetailResultItemPaginatedData,
   DetailResultItemType,
 } from '../../../../map/types/details'
@@ -95,7 +96,7 @@ type LegacyLayout = {
   legacyLayout?: boolean
 }
 
-export const PanelContents: React.FC<
+export const PanelContents: FunctionComponent<
   { result: PromiseResultType<MapDetails | null> } & LegacyLayout
 > = ({ result, legacyLayout }) => {
   if (result.status === PromiseStatus.Pending) {
@@ -108,7 +109,7 @@ export const PanelContents: React.FC<
   return <RenderDetails legacyLayout={legacyLayout} details={result.value} />
 }
 
-const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
+const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
   const [, setDetailUrl] = useParam(detailUrlParam)
   const { setDetailFeature } = useContext(MapContext)
   const result = usePromise(
@@ -147,7 +148,21 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ detailUrl }) => {
   )
 }
 
-const Item: React.FC<{ item: DetailResultItem }> = ({ item }) => {
+const GroupedItems: FunctionComponent<{ item: DetailResultItemGroupedItems }> = ({ item }) => (
+  <>
+    {item.entries.map((groupedItem) => (
+      <>
+        <Item item={groupedItem} subItem />
+        <DetailSpacer />
+      </>
+    ))}
+  </>
+)
+
+const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = ({
+  item,
+  subItem,
+}) => {
   let component = null
   switch (item.type) {
     case DetailResultItemType.DefinitionList:
@@ -162,6 +177,9 @@ const Item: React.FC<{ item: DetailResultItem }> = ({ item }) => {
     case DetailResultItemType.PaginatedData:
       component = <PaginatedData item={item} />
       break
+    case DetailResultItemType.GroupedItems:
+      component = <GroupedItems item={item} />
+      break
     default:
       throw new Error('Unable to render map detail pane, encountered unknown item type.')
   }
@@ -170,9 +188,7 @@ const Item: React.FC<{ item: DetailResultItem }> = ({ item }) => {
     <div>
       {item.title && (
         <HeadingWrapper>
-          {/*
-          // @ts-ignore */}
-          <DetailHeading styleAs="h4">{item.title}</DetailHeading>
+          <DetailHeading styleAs={subItem ? 'h6' : 'h4'}>{item.title}</DetailHeading>
           {item.infoBox && <DetailInfoBox {...item.infoBox} />}
         </HeadingWrapper>
       )}
@@ -232,7 +248,7 @@ const PaginatedResult: FunctionComponent<PaginatedResultType> = ({
   )
 }
 
-// Todo: It's currently not possible to show the title / infobox when promise is rejected
+// Todo: DI-1204: It's currently not possible to show the title / infobox when promise is rejected
 function PaginatedData({
   item,
 }: {
@@ -255,7 +271,7 @@ function PaginatedData({
   )
 }
 
-const RenderDetails: React.FC<{ details: MapDetails | null } & LegacyLayout> = ({
+const RenderDetails: FunctionComponent<{ details: MapDetails | null } & LegacyLayout> = ({
   details,
   legacyLayout,
 }) => {
@@ -269,7 +285,7 @@ const RenderDetails: React.FC<{ details: MapDetails | null } & LegacyLayout> = (
       )}
       <DetailSpacer />
       {details.data.notifications?.map((notification) => (
-        <Fragment key={notification.value}>
+        <Fragment key={notification.id}>
           <Alert level={notification.level} dismissible={notification.canClose}>
             {notification.value}
           </Alert>

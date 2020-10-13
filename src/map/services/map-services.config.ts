@@ -108,8 +108,7 @@ export const endpointTypes = {
 
 export interface ServiceDefinition {
   type: string
-  // TODO: 'endpoint' should be required once all service definitions have one.
-  endpoint?: string
+  endpoint: string
   authScope?: string
   definition?: Definition
   normalization?: (result: any) => any | Promise<any>
@@ -171,6 +170,7 @@ const getPaginatedListBlock = (
   type: DetailResultItemType.PaginatedData,
   getData: getListFromApi(apiUrl, settings?.normalize),
   pageSize: settings?.pageSize || 10,
+  // Todo: AfterBeta: gridArea can be removed
   gridArea: settings?.gridArea || 'auto / 1 / auto / 3',
   toView: (data) => {
     const results = data?.map((result: any) => ({
@@ -643,6 +643,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres.landelijk_id}`,
             GLOSSARY.DEFINITIONS.VESTIGING,
           ),
+          // Todo: DI-1207 Create sub link list (example: /data/bag/verblijfsobject/id0363010000665114/)
           getPaginatedListBlock(result.kadastrale_objecten.href, GLOSSARY.DEFINITIONS.OBJECT),
           getPaginatedListBlock(
             `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${result.hoofdadres.landelijk_id}`,
@@ -1629,7 +1630,6 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           {
             type: DetailResultItemType.DefinitionList,
-            gridArea: '2 / 1 / 3 / 2',
             entries: [
               { term: 'Bouwjaar', description: result.construction_year },
               { term: 'Aantal verhuurde eenheden', description: additionalItems.length },
@@ -1637,12 +1637,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               { term: 'Status', description: result.status },
             ],
           },
-          // Todo: show this
-          // {
-          //   type: DetailResultItemType.Default,
-          //   title: `Verhuurde eenheden (${additionalItems.length})`,
-          // },
-          ...additionalItems,
+          {
+            type: DetailResultItemType.GroupedItems,
+            title: `Verhuurde eenheden (${additionalItems.length})`,
+            entries: additionalItems,
+          },
         ],
       }
     },
