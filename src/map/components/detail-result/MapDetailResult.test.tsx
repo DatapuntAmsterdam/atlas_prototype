@@ -65,7 +65,7 @@ describe('MapDetailResult', () => {
         items: [
           {
             type: DetailResultItemType.DefinitionList,
-            label: 'label',
+            title: 'label',
             entries: [
               {
                 term: 'foo',
@@ -86,7 +86,7 @@ describe('MapDetailResult', () => {
       />,
     )
 
-    expect(component.find('MapDetailResultItem').exists()).toBeTruthy()
+    expect(component.find('.map-detail-result__list').exists()).toBeTruthy()
   })
 
   it('should display the items without value', () => {
@@ -148,7 +148,6 @@ describe('MapDetailResult', () => {
       />,
     )
 
-    expect(component.find('h4').exists()).toBeTruthy()
-    expect(component.find('h4').props().children).toBe('label')
+    expect(component.find('.map-detail-result__list').exists()).toBeTruthy()
   })
 })

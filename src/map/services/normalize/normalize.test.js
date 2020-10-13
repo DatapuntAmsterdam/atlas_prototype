@@ -293,7 +293,7 @@ ${input.gebruiksdoel[1]}`,
       const mockedLocaleString = '1,21212'
       localeStringMock.mockImplementationOnce(() => mockedLocaleString)
 
-      output = kadastraalObject(input)
+      output = await kadastraalObject(input)
 
       expect(output).toMatchObject({
         size: `${mockedLocaleString} m²`, // mocked
@@ -301,7 +301,7 @@ ${input.gebruiksdoel[1]}`,
 
       input = {}
 
-      output = kadastraalObject(input)
+      output = await kadastraalObject(input)
 
       expect(output).toMatchObject({
         size: '',
@@ -327,7 +327,7 @@ ${input.gebruiksdoel[1]}`,
 
       input = {}
 
-      output = kadastraalObject(input)
+      output = await kadastraalObject(input)
 
       expect(output).toMatchObject({
         cadastralName: false,
