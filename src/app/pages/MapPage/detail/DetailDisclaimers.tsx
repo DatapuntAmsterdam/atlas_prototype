@@ -1,6 +1,7 @@
 import React from 'react'
 import { Heading, Link, List, ListItem, Paragraph } from '@amsterdam/asc-ui'
 import NotificationLevel from '../../../models/notification'
+import { DetailResultNotification } from '../../../../map/types/details'
 
 const HRDisplaimer = () => {
   return (
@@ -54,14 +55,14 @@ const WKPBDisclaimer = () => {
   )
 }
 
-export const hrNotification = {
+export const hrNotification: DetailResultNotification = {
   id: 10,
   level: NotificationLevel.Normal,
   canClose: true,
   value: <HRDisplaimer />,
 }
 
-export const wkpbNotification = {
+export const wkpbNotification: DetailResultNotification = {
   id: 20,
   level: NotificationLevel.Normal,
   canClose: true,

@@ -22,11 +22,10 @@ interface BouwblokkenResolvedResult {
   _links: ApiPaginateLinkObject
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export const getListFromApi = (
-  defaultUrl: string | null,
-  normalize?: (data: any[]) => any[],
-) => async (url?: string, pageSize = 10): Promise<PaginatedData<Link[]> | null> => {
+const getListFromApi = (defaultUrl: string | null, normalize?: (data: any[]) => any[]) => async (
+  url?: string,
+  pageSize = 10,
+): Promise<PaginatedData<Link[]> | null> => {
   const fetchUrl = url ?? defaultUrl
   if (!fetchUrl) {
     return null
@@ -48,3 +47,5 @@ export const getListFromApi = (
     next: response._links.next.href || null,
   }
 }
+
+export default getListFromApi

@@ -2,7 +2,7 @@
 import { LatLngLiteral } from 'leaflet'
 import NotificationLevel from '../../app/models/notification'
 import config, { DataSelectionType } from '../../app/pages/MapPage/config'
-import { getListFromApi } from '../../app/pages/MapPage/detail/api'
+import getListFromApi from '../../app/pages/MapPage/detail/getListFromApi'
 import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
 import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import formatDate from '../../app/utils/formatDate'

@@ -12,7 +12,7 @@ import useDocumentTitle from '../../utils/useDocumentTitle'
 
 const StyledLoadingSpinner = styled(LoadingSpinner)`
   position: absolute;
-  top: 200px;
+  top: 50%;
 `
 
 export interface PageTemplateProps<T> {
