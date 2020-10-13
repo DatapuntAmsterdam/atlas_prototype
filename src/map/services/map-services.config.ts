@@ -459,6 +459,7 @@ const getVerblijfsObjectBlock = (result: any): DetailResultItemDefinitionList =>
   ],
 })
 
+// Todo: DI-1208 Split this page into seperate files grouped by type
 const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.adressenLigplaats]: {
     type: 'bag/ligplaats',

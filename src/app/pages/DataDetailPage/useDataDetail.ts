@@ -10,6 +10,7 @@ import { getUser, getUserScopes } from '../../../shared/ducks/user/user'
 import { getCurrentEndpoint } from '../../../map/ducks/detail/selectors'
 import { AuthError } from '../../../shared/services/api/errors'
 
+// Todo: AfterBeta: can be removed
 const useDataDetail = (id: string, subType: string, type: string) => {
   const dispatch = useDispatch()
   const [retryCount, setRetryCount] = useState(0)
