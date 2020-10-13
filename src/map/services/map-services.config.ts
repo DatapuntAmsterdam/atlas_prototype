@@ -50,7 +50,7 @@ import {
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
 import convertCoordinates from '../../shared/services/coordinate-reference-system/convertCoordinates'
-import { hrNotification, wkpbNotification } from '../../app/pages/MapPage/detail/DetailDisclaimers'
+import wkpbNotification from '../../app/pages/MapPage/detail/DetailWKPBDisclaimer'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -1654,7 +1654,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     definition: GLOSSARY.DEFINITIONS.VESTIGING,
     normalization: vestiging,
     mapDetail: (result) => {
-      const notifications: DetailResultNotification[] = [hrNotification]
+      const notifications: DetailResultNotification[] = []
 
       if (result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.title) {
         notifications.push({
