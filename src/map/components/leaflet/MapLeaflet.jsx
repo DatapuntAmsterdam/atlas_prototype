@@ -57,6 +57,7 @@ const ICONS = {
   [markerPointType]: ({ type }) => locationIcon(type),
 }
 
+// Todo: AfterBeta: can be removed
 class MapLeaflet extends React.Component {
   constructor(props) {
     super(props)
