@@ -41,8 +41,9 @@ const MapDetailResult: React.FC<MapDetailResultProps> = ({
       onMaximize={onMaximize}
       onPanoPreviewClick={onPanoPreviewClick}
     >
-      {result?.data?.notifications?.map((notification) =>
-        notification.value ? (
+      {result?.data?.notifications
+        ?.filter(({ value }) => value)
+        ?.map((notification) => (
           <Alert
             key={notification.id}
             dismissible={notification.canClose}
@@ -50,8 +51,7 @@ const MapDetailResult: React.FC<MapDetailResultProps> = ({
           >
             {notification.value}
           </Alert>
-        ) : null,
-      )}
+        ))}
 
       <ul className="map-detail-result__list">
         {result?.data?.items?.map((item, index) => renderItem(item, index))}

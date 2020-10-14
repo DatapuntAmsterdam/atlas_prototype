@@ -1,14 +1,12 @@
-import { Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
 import React from 'react'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
+import { Container, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { DetailInfo } from '../../../map/types/details'
 import PromiseResult from '../../components/PromiseTemplate/PromiseResult'
-// @ts-ignore
 import ShareBar from '../../components/ShareBar/ShareBar'
-import DetailHeading from '../MapPage/detail/DetailHeading'
-import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
 import { getPanelTitle, HeadingWrapper, PanelContents } from '../MapPage/detail/DetailPanel'
+import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
 import useDataDetail from './useDataDetail'
 
 type Props = {
@@ -32,8 +30,10 @@ const DetailWrapper = styled(Container)`
   padding: ${themeSpacing(0, 4)};
 `
 
-const TypeHeading = styled(DetailHeading)`
+const DetailType = styled.strong`
   margin-bottom: 0;
+  color: ${themeColor('secondary')};
+  font-size: 21px;
 `
 
 interface Params extends DetailInfo {
@@ -50,10 +50,10 @@ const Detail: React.FC<Props> = () => {
     <PromiseResult<any> promise={promise} onRetry={onRetry}>
       {(result) => (
         <DetailWrapper>
-          <TypeHeading>{result.value?.data.title}</TypeHeading>
+          <DetailType>{result.value?.data.title}</DetailType>
           <HeadingWrapper>
-            <Heading as="h1">{getPanelTitle(result)}</Heading>
-            {!!result?.value?.data?.infoBox && <DetailInfoBox {...result?.value?.data?.infoBox} />}
+            <Heading>{getPanelTitle(result)}</Heading>
+            {result?.value?.data?.infoBox && <DetailInfoBox {...result?.value?.data?.infoBox} />}
           </HeadingWrapper>
           <PanelContents legacyLayout result={result} />
           <ShareBar />

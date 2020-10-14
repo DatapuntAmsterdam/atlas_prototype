@@ -151,10 +151,10 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
 const GroupedItems: FunctionComponent<{ item: DetailResultItemGroupedItems }> = ({ item }) => (
   <>
     {item.entries.map((groupedItem) => (
-      <>
+      <Fragment key={groupedItem.title}>
         <Item item={groupedItem} subItem />
         <DetailSpacer />
-      </>
+      </Fragment>
     ))}
   </>
 )
