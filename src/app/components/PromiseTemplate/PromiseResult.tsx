@@ -1,14 +1,14 @@
 import { Alert, Button, Heading, Paragraph } from '@amsterdam/asc-ui'
-import React, { ReactElement } from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import React, { ReactElement } from 'react'
 import styled from 'styled-components'
+import { AuthError } from '../../../shared/services/api/errors'
+import { login } from '../../../shared/services/auth/auth'
+import NotificationLevel from '../../models/notification'
+import useDocumentTitle from '../../utils/useDocumentTitle'
 import usePromise, { PromiseFulfilledResult, PromiseStatus } from '../../utils/usePromise'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import NotificationLevel from '../../models/notification'
-import { AuthError } from '../../../shared/services/api/errors'
-import { login } from '../../../shared/services/auth/auth'
-import useDocumentTitle from '../../utils/useDocumentTitle'
 
 const StyledLoadingSpinner = styled(LoadingSpinner)`
   position: absolute;
@@ -36,38 +36,39 @@ const PromiseResult: <T>(p: PageTemplateProps<T>) => React.ReactElement<PageTemp
   const { trackEvent } = useMatomo()
   const { documentTitle } = useDocumentTitle()
 
+  if (result.status === PromiseStatus.Fulfilled) {
+    return children({ result })
+  }
+
   if (result.status === PromiseStatus.Pending) {
     return <StyledLoadingSpinner />
   }
 
-  if (result.status === PromiseStatus.Rejected) {
-    if (result.error instanceof AuthError && result.error.code === 401) {
-      return (
-        <Alert level={NotificationLevel.Attention} dismissible>
-          <Heading forwardedAs="h3">Meer resultaten na inloggen</Heading>
-          <Paragraph>{result.error.message}</Paragraph>
-          <Button
-            variant="textButton"
-            onClick={() => {
-              trackEvent({ category: 'login', name: documentTitle, action: 'inloggen' })
-              login()
-            }}
-          >
-            Inloggen
-          </Button>
-        </Alert>
-      )
-    }
+  if (result.error instanceof AuthError && result.error.code === 401) {
     return (
-      <ErrorMessage
-        message={errorMessage || 'Er is een fout opgetreden bij het laden van dit blok'}
-        buttonLabel="Probeer opnieuw"
-        buttonOnClick={onRetry || onReload}
-      />
+      <Alert level={NotificationLevel.Attention} dismissible>
+        <Heading forwardedAs="h3">Meer resultaten na inloggen</Heading>
+        <Paragraph>{result.error.message}</Paragraph>
+        <Button
+          variant="textButton"
+          onClick={() => {
+            trackEvent({ category: 'login', name: documentTitle, action: 'inloggen' })
+            login()
+          }}
+        >
+          Inloggen
+        </Button>
+      </Alert>
     )
   }
 
-  return children({ result })
+  return (
+    <ErrorMessage
+      message={errorMessage || 'Er is een fout opgetreden bij het laden van dit blok'}
+      buttonLabel="Probeer opnieuw"
+      buttonOnClick={onRetry || onReload}
+    />
+  )
 }
 
 export default PromiseResult
