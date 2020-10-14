@@ -6,20 +6,36 @@ import {
   Heading,
   Paragraph,
   Row,
+  themeColor,
+  themeSpacing,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
 import environment from '../../../environment'
 import { cmsConfig } from '../../../shared/config/config'
+import useNormalizedCMSResults from '../../../normalizations/cms/useNormalizedCMSResults'
 import { toPublicationDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DocumentCover from '../../components/DocumentCover/DocumentCover'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
+import EditorialResults from '../../components/EditorialResults'
 import ShareBar from '../../components/ShareBar/ShareBar'
 import getImageFromCms from '../../utils/getImageFromCms'
 import useDownload from '../../utils/useDownload'
 import useFromCMS from '../../utils/useFromCMS'
+
+const Divider = styled.div`
+  width: 200px;
+  height: 3px;
+  background-color: ${themeColor('secondary')};
+  margin: ${themeSpacing(8, 0, 6)};
+`
+
+const StyledEditorialResults = styled(EditorialResults)`
+  margin-bottom: ${themeSpacing(25)};
+`
 
 const PublicationDetailPage = () => {
   const { id } = useParams()
@@ -43,6 +59,7 @@ const PublicationDetailPage = () => {
     field_intro: intro,
     field_language: lang,
     slug,
+    related,
   } = results || {}
 
   const documentTitle = title && `Publicatie: ${title}`
@@ -99,6 +116,20 @@ const PublicationDetailPage = () => {
                     {body && <CustomHTMLBlock body={body} />}
                   </EditorialContent>
                 </Column>
+
+                {related && related.length ? (
+                  <Column span={{ small: 1, medium: 4, big: 4, large: 7, xLarge: 7 }}>
+                    <EditorialContent>
+                      <Divider />
+                      <StyledEditorialResults
+                        headingLevel="h2"
+                        results={useNormalizedCMSResults(related)}
+                        errors={[]}
+                        title="Verder lezen"
+                      />
+                    </EditorialContent>
+                  </Column>
+                ) : null}
               </Column>
               <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
                 <ShareBar topSpacing={6} />
