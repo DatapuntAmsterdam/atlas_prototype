@@ -184,7 +184,7 @@ const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = (
     }
   })()
 
-  return component ? (
+  return (
     <div>
       {item.title && (
         <HeadingWrapper>
@@ -195,7 +195,7 @@ const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = (
 
       {component}
     </div>
-  ) : null
+  )
 }
 
 type PaginatedResultType = {
