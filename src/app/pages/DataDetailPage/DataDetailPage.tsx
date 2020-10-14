@@ -1,15 +1,15 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useParams } from 'react-router-dom'
 import { Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import { DetailInfo } from '../../../map/types/details'
+import PromiseResult from '../../components/PromiseTemplate/PromiseResult'
 // @ts-ignore
 import ShareBar from '../../components/ShareBar/ShareBar'
-import { getPanelTitle, HeadingWrapper, PanelContents } from '../MapPage/detail/DetailPanel'
 import DetailHeading from '../MapPage/detail/DetailHeading'
 import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
-import PromiseResult from '../../components/PromiseTemplate/PromiseResult'
+import { getPanelTitle, HeadingWrapper, PanelContents } from '../MapPage/detail/DetailPanel'
 import useDataDetail from './useDataDetail'
-import { DetailInfo } from '../../../map/types/details'
 
 type Props = {
   isLoading: boolean
@@ -48,7 +48,7 @@ const Detail: React.FC<Props> = () => {
 
   return (
     <PromiseResult<any> promise={promise} onRetry={onRetry}>
-      {({ result }) => (
+      {(result) => (
         <DetailWrapper>
           <TypeHeading>{result.value?.data.title}</TypeHeading>
           <HeadingWrapper>

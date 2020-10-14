@@ -1,6 +1,6 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
-import { Alert, Button, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
+import { Alert, Button, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import React, { Fragment, FunctionComponent, useContext, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import {
@@ -17,6 +17,7 @@ import {
   DetailResultItemType,
 } from '../../../../map/types/details'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
+import PromiseResult from '../../../components/PromiseTemplate/PromiseResult'
 import useParam from '../../../utils/useParam'
 import usePromise, {
   PromiseResult as PromiseResultType,
@@ -25,13 +26,12 @@ import usePromise, {
 import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
 import { detailUrlParam } from '../query-params'
-import DetailTable from './DetailTable'
-import DetailHeading from './DetailHeading'
 import DetailDefinitionList from './DetailDefinitionList'
-import DetailLinkList from './DetailLinkList'
+import DetailHeading from './DetailHeading'
 import DetailInfoBox from './DetailInfoBox'
+import DetailLinkList from './DetailLinkList'
 import DetailSpacer from './DetailSpacer'
-import PromiseResult from '../../../components/PromiseTemplate/PromiseResult'
+import DetailTable from './DetailTable'
 
 interface DetailPanelProps {
   detailUrl: string
@@ -259,7 +259,7 @@ function PaginatedData({
 
   return (
     <PromiseResult<any> promise={promise}>
-      {({ result }) => (
+      {(result) => (
         <PaginatedResult
           promiseResult={result}
           pageSize={pageSize}

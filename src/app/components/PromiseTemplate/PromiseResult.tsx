@@ -4,7 +4,6 @@ import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 import { AuthError } from '../../../shared/services/api/errors'
 import { login } from '../../../shared/services/auth/auth'
-import NotificationLevel from '../../models/notification'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import usePromise, { PromiseFulfilledResult, PromiseStatus } from '../../utils/usePromise'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
@@ -16,17 +15,17 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
 `
 
 export interface PageTemplateProps<T> {
-  promise: Promise<any>
+  promise: Promise<T>
   onRetry?: () => void
   errorMessage?: string
-  children: ({ result }: { result: PromiseFulfilledResult<T> }) => ReactElement
+  children: (result: PromiseFulfilledResult<T>) => ReactElement | null
 }
 
 const onReload = () => {
   window.location.reload()
 }
 
-const PromiseResult: <T>(p: PageTemplateProps<T>) => React.ReactElement<PageTemplateProps<T>> = ({
+const PromiseResult: <T>(props: PageTemplateProps<T>) => ReactElement | null = ({
   promise,
   onRetry,
   errorMessage,
@@ -37,7 +36,7 @@ const PromiseResult: <T>(p: PageTemplateProps<T>) => React.ReactElement<PageTemp
   const { documentTitle } = useDocumentTitle()
 
   if (result.status === PromiseStatus.Fulfilled) {
-    return children({ result })
+    return children(result)
   }
 
   if (result.status === PromiseStatus.Pending) {
@@ -46,7 +45,7 @@ const PromiseResult: <T>(p: PageTemplateProps<T>) => React.ReactElement<PageTemp
 
   if (result.error instanceof AuthError && result.error.code === 401) {
     return (
-      <Alert level={NotificationLevel.Attention} dismissible>
+      <Alert level="attention" dismissible>
         <Heading forwardedAs="h3">Meer resultaten na inloggen</Heading>
         <Paragraph>{result.error.message}</Paragraph>
         <Button
@@ -64,9 +63,9 @@ const PromiseResult: <T>(p: PageTemplateProps<T>) => React.ReactElement<PageTemp
 
   return (
     <ErrorMessage
-      message={errorMessage || 'Er is een fout opgetreden bij het laden van dit blok'}
+      message={errorMessage ?? 'Er is een fout opgetreden bij het laden van dit blok'}
       buttonLabel="Probeer opnieuw"
-      buttonOnClick={onRetry || onReload}
+      buttonOnClick={onRetry ?? onReload}
     />
   )
 }

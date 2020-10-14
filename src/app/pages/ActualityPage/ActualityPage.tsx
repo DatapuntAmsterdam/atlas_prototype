@@ -24,7 +24,7 @@ function renderContents() {
 
   return (
     <PromiseResult<Metadata[]> promise={promise} onRetry={() => setRetryCount(retryCount + 1)}>
-      {({ result }) => (
+      {({ value }) => (
         <table className="c-table">
           <thead>
             <tr className="c-table__header-row">
@@ -40,7 +40,7 @@ function renderContents() {
             </tr>
           </thead>
           <tbody>
-            {result.value.map((source) => (
+            {value.map((source) => (
               <tr className="c-table__content-row">
                 {source.title && (
                   <td className="c-table__field c-table__content-field">{source.title}</td>
