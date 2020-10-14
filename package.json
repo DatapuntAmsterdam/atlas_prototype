@@ -116,7 +116,7 @@
     "@types/geojson": "^7946.0.7",
     "@types/jest": "^26.0.14",
     "@types/karma": "^5.0.0",
-    "@types/leaflet": "^1.5.18",
+    "@types/leaflet": "^1.5.19",
     "@types/leaflet-draw": "^1.0.3",
     "@types/leaflet-rotatedmarker": "^0.2.1",
     "@types/lodash.debounce": "^4.0.6",
