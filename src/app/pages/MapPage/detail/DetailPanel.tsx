@@ -167,26 +167,22 @@ const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = (
   item,
   subItem,
 }) => {
-  let component = null
-  switch (item.type) {
-    case DetailResultItemType.DefinitionList:
-      component = <DetailDefinitionList entries={item.entries} />
-      break
-    case DetailResultItemType.Table:
-      component = <DetailTable item={item} />
-      break
-    case DetailResultItemType.LinkList:
-      component = <DetailLinkList item={item} />
-      break
-    case DetailResultItemType.PaginatedData:
-      component = <PaginatedData item={item} />
-      break
-    case DetailResultItemType.GroupedItems:
-      component = <GroupedItems item={item} />
-      break
-    default:
-      throw new Error('Unable to render map detail pane, encountered unknown item type.')
-  }
+  const component = (() => {
+    switch (item.type) {
+      case DetailResultItemType.DefinitionList:
+        return <DetailDefinitionList entries={item.entries} />
+      case DetailResultItemType.Table:
+        return <DetailTable item={item} />
+      case DetailResultItemType.LinkList:
+        return <DetailLinkList item={item} />
+      case DetailResultItemType.PaginatedData:
+        return <PaginatedData item={item} />
+      case DetailResultItemType.GroupedItems:
+        return <GroupedItems item={item} />
+      default:
+        throw new Error('Unable to render map detail pane, encountered unknown item type.')
+    }
+  })()
 
   return component ? (
     <div>
