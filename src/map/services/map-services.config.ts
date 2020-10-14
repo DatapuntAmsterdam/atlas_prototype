@@ -1737,7 +1737,6 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
               {
                 term: 'Coördinaten',
-                // eslint-disable-next-line no-nested-ternary
                 description: convertCoordinates(result.bezoekadres.geometrie.coordinates, 'RD'),
               },
             ],
