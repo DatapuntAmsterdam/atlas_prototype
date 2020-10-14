@@ -1,6 +1,6 @@
 import { Alert, CustomHTMLBlock, Link, ShowMoreShowLess } from '@amsterdam/asc-ui'
+import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import React from 'react'
 import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 
@@ -12,7 +12,7 @@ const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`
   white-space: pre-line;
 `
 
-const DetailDefinitionList: React.FC<DetailDefinitionListProps> = ({ entries }) => (
+const DetailDefinitionList: FunctionComponent<DetailDefinitionListProps> = ({ entries }) => (
   <DefinitionList>
     {entries?.map(({ term, description, link, alert }) => (
       <DefinitionListItem term={term} key={term}>
