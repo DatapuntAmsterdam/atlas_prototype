@@ -14,23 +14,27 @@ const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`
 
 const DetailDefinitionList: FunctionComponent<DetailDefinitionListProps> = ({ entries }) => (
   <DefinitionList>
-    {entries?.map(({ term, description, link, alert }) => (
-      <DefinitionListItem term={term} key={term}>
-        {/* eslint-disable-next-line no-nested-ternary */}
-        {link ? (
-          <Link href={link} inList>
-            {description}
-          </Link>
-        ) : description && description.length > 300 ? (
-          <ShowMoreShowLess maxHeight="200px">
-            <StyledCustomHTMLBlock body={description} />
-          </ShowMoreShowLess>
-        ) : (
-          description
-        )}
-        {alert && <Alert>{alert}</Alert>}
-      </DefinitionListItem>
-    ))}
+    {entries?.map(({ term, description, link, alert }) => {
+      const renderShowMoreShowLess = !link && description && description.length > 300
+      const renderLink = link && !renderShowMoreShowLess
+      const renderDescription = !link && !renderShowMoreShowLess
+      return (
+        <DefinitionListItem term={term} key={term}>
+          {renderShowMoreShowLess && (
+            <ShowMoreShowLess maxHeight="200px">
+              <StyledCustomHTMLBlock body={description} />
+            </ShowMoreShowLess>
+          )}
+          {renderLink && (
+            <Link href={link} inList>
+              {description}
+            </Link>
+          )}
+          {renderDescription && description}
+          {alert && <Alert>{alert}</Alert>}
+        </DefinitionListItem>
+      )
+    })}
   </DefinitionList>
 )
 
