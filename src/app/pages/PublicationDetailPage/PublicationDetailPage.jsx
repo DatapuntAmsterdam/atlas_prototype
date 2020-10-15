@@ -26,7 +26,7 @@ import getImageFromCms from '../../utils/getImageFromCms'
 import useDownload from '../../utils/useDownload'
 import useFromCMS from '../../utils/useFromCMS'
 
-const Divider = styled.div`
+const Divider = styled.hr`
   width: 200px;
   height: 3px;
   background-color: ${themeColor('secondary')};
@@ -117,7 +117,7 @@ const PublicationDetailPage = () => {
                   </EditorialContent>
                 </Column>
 
-                {related && related.length ? (
+                {related?.length ? (
                   <Column span={{ small: 1, medium: 4, big: 4, large: 7, xLarge: 7 }}>
                     <EditorialContent>
                       <Divider />
