@@ -85,7 +85,7 @@ const META = {
 
 export type Definition = {
   singular: string
-  plural?: string | null
+  plural: string
   description?: string | null
   url?: string | null
   meta?: Array<keyof typeof META>
@@ -397,7 +397,7 @@ const DEFINITIONS = typeHelper({
   },
   OBJECT_WKPB: {
     singular: 'WKPB-uittreksel',
-    plural: null,
+    plural: 'WKPB-uittreksel',
     description: null,
     url: null,
     meta: [],

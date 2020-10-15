@@ -18,7 +18,7 @@ import {
   PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
-import PromiseResult from '../../../components/PromiseTemplate/PromiseResult'
+import PromiseResult from '../../../components/PromiseResult/PromiseResult'
 import useParam from '../../../utils/useParam'
 import usePromise, {
   PromiseResult as PromiseResultType,
@@ -215,14 +215,17 @@ const PaginatedResult: FunctionComponent<PaginatedResultProps> = ({
   setPaginatedUrl,
   item,
 }) => {
+  const resultItem = item.toView(result.data)
   const showMoreButton = result.count > result.data.length ?? pageSize === INFINITE_PAGE_SIZE
-  const showMoreText = `Toon alle ${result.count} ${result.title.toLocaleLowerCase()}`
+  const showMoreText = `Toon alle ${result.count} ${
+    resultItem.title ? resultItem.title.toLocaleLowerCase() : 'resultaten'
+  }`
   const showLessText = 'Toon minder'
   const showMore = pageSize !== INFINITE_PAGE_SIZE
 
   return (
     <>
-      <Item item={item.toView(result.data)} />
+      <Item item={resultItem} />
       {showMoreButton && (
         <ShowMoreButton
           variant="textButton"

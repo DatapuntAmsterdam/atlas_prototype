@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
 import { getMetadata, Metadata } from '../../../api/metadata'
-import PromiseResult from '../../components/PromiseTemplate/PromiseResult'
+import PromiseResult from '../../components/PromiseResult/PromiseResult'
 
 const ActualityPage: FunctionComponent = () => (
   <div className="c-page">

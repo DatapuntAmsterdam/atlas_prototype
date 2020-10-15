@@ -137,7 +137,7 @@ function buildMetaData(
   })
 }
 
-const getInfoBox = ({ description, url, plural }: Partial<Definition>): InfoBoxProps => ({
+const getInfoBox = ({ description, url, plural }: Omit<InfoBoxProps, 'meta'>): InfoBoxProps => ({
   description,
   url,
   plural,

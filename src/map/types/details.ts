@@ -67,7 +67,7 @@ export interface DefaultDetailResultItem {
   infoBox?: InfoBoxProps
   // Todo: remove gridArea when legacy map is removed
   gridArea?: string
-  title?: string | null
+  title?: string
 }
 
 export interface DetailResultItemDefinitionList extends DefaultDetailResultItem {
