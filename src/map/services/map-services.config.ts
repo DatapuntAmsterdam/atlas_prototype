@@ -49,7 +49,7 @@ import {
   winkelgebied,
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
-import convertCoordinates from '../../shared/services/coordinate-reference-system/convertCoordinates'
+import getRdAndWgs84Coordinates from '../../shared/services/coordinate-reference-system/getRdAndWgs84Coordinates'
 import wkpbNotification from '../../app/pages/MapPage/detail/DetailWKPBDisclaimer'
 
 export const endpointTypes = {
@@ -454,7 +454,7 @@ const getVerblijfsObjectBlock = (result: any): DetailResultItemDefinitionList =>
     },
     {
       term: 'Coördinaten',
-      description: convertCoordinates(result.geometrie.coordinates, 'RD'),
+      description: getRdAndWgs84Coordinates(result.geometrie.coordinates, 'RD'),
     },
   ],
 })
@@ -1737,7 +1737,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
               {
                 term: 'Coördinaten',
-                description: convertCoordinates(result.bezoekadres.geometrie.coordinates, 'RD'),
+                description: getRdAndWgs84Coordinates(
+                  result.bezoekadres.geometrie.coordinates,
+                  'RD',
+                ),
               },
             ],
           },
