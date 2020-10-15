@@ -122,7 +122,7 @@
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.defer": "^4.1.6",
     "@types/lodash.isequal": "^4.5.5",
-    "@types/mini-css-extract-plugin": "^0.9.1",
+    "@types/mini-css-extract-plugin": "^1.0.0",
     "@types/node": "^14.11.8",
     "@types/proj4": "^2.5.0",
     "@types/react-helmet": "^6.1.0",
