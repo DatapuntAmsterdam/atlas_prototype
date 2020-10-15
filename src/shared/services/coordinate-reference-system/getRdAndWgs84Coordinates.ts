@@ -1,39 +1,40 @@
 import { Position } from 'geojson'
-import { rdToWgs84, wgs84ToRd } from './crs-converter'
+import { RdCoordinate, rdToWgs84, wgs84ToRd, Wsg84Coordinate } from './crs-converter'
 
-function getRdAndWgs84Coordinates(location: Position, type: 'RD' | 'WGS84') {
+function coordinateToTuple(coordinate: Wsg84Coordinate | RdCoordinate) {
+  return [
+    'latitude' in coordinate ? coordinate.latitude : coordinate.x,
+    'longitude' in coordinate ? coordinate.longitude : coordinate.y,
+  ]
+}
+
+export default function getRdAndWgs84Coordinates(location: Position, type: 'RD' | 'WGS84') {
   if (location.length !== 2) {
     return ''
   }
 
-  const wgs84Location =
-    type === 'WGS84'
-      ? {
-          latitude: location[0],
-          longitude: location[1],
-        }
-      : rdToWgs84({
-          x: location[0],
-          y: location[1],
-        })
-
   const rdLocation =
     type === 'RD'
-      ? {
-          x: location[0],
-          y: location[1],
-        }
-      : wgs84ToRd({
-          lat: location[0],
-          lng: location[1],
-        })
+      ? location
+      : coordinateToTuple(
+          wgs84ToRd({
+            lat: location[0],
+            lng: location[1],
+          }),
+        )
 
-  const formattedRdLocation = `${rdLocation.x.toFixed(2)}, ${rdLocation.y.toFixed(2)}`
-  const formattedWgs84Location = `${wgs84Location.latitude.toFixed(
-    7,
-  )}, ${wgs84Location.longitude.toFixed(7)}`
+  const wgs84Location =
+    type === 'WGS84'
+      ? location
+      : coordinateToTuple(
+          rdToWgs84({
+            x: location[0],
+            y: location[1],
+          }),
+        )
+
+  const formattedRdLocation = rdLocation.map((x) => x.toFixed(2)).join(', ')
+  const formattedWgs84Location = wgs84Location.map((x) => x.toFixed(7)).join(', ')
 
   return `${formattedRdLocation} (${formattedWgs84Location})`
 }
-
-export default getRdAndWgs84Coordinates
