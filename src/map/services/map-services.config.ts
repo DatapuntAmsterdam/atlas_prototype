@@ -23,6 +23,8 @@ import {
   DetailResultItemPaginatedData,
   DetailResultItemType,
   DetailResultNotification,
+  ExtraApiResults,
+  PotentialApiResult,
 } from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
 import { fetchDetailData, getServiceDefinition } from './map'
@@ -113,7 +115,7 @@ export interface ServiceDefinition {
   definition?: Definition
   normalization?: (result: any) => any | Promise<any>
   mapDetail: (
-    result: any,
+    result: PotentialApiResult & ExtraApiResults,
     detailInfo: DetailInfo,
     location?: LatLngLiteral,
   ) => DetailResult | Promise<DetailResult>
@@ -158,8 +160,8 @@ const getLinkListBlock = (
 })
 
 const getPaginatedListBlock = (
-  apiUrl: string | null,
   definition: Definition,
+  apiUrl?: string | null,
   settings?: {
     gridArea?: string
     pageSize?: number
@@ -232,7 +234,7 @@ const getLocationDefinitionListBlock = (result: any, gridArea: string): DetailRe
 
 const getShowInTableBlock = (filters: {
   key: string
-  value: string
+  value?: string | null
 }): DetailResultItemLinkList[] => [
   {
     type: DetailResultItemType.LinkList,
@@ -326,8 +328,8 @@ const getBagDefinitionList = (result?: any): DetailResultItemDefinitionList => (
 
 const getConstructionFileList = (detailInfo: DetailInfo) =>
   getPaginatedListBlock(
-    `${environment.API_ROOT}iiif-metadata/bouwdossier/?${detailInfo.subType}=${detailInfo.id}`,
     GLOSSARY.DEFINITIONS.BOUWDOSSIER,
+    `${environment.API_ROOT}iiif-metadata/bouwdossier/?${detailInfo.subType}=${detailInfo.id}`,
     {
       pageSize: 25,
       displayFormatter: ({ stadsdeel, dossiernr, datering, dossier_type }: any) =>
@@ -513,8 +515,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             ],
           },
           getPaginatedListBlock(
-            `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres.landelijk_id}`,
             GLOSSARY.DEFINITIONS.VESTIGING,
+            `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres?.landelijk_id}`,
           ),
         ],
       }
@@ -527,10 +529,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result, detailInfo) => {
       const notifications: DetailResultNotification[] = []
 
-      if (result.verblijfsobject && result.verblijfsobject.statusLevel) {
+      if (result.verblijfsobject && result.verblijfsobject?.statusLevel) {
         notifications.push({
           id: 1,
-          value: `Status: ${result.verblijfsobject.status}`,
+          value: `Status: ${result.verblijfsobject?.status}`,
           level: NotificationLevel.Attention,
         })
       }
@@ -569,22 +571,22 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getBagDefinitionList(result),
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 1'),
           getVerblijfsObjectBlock(verblijfsobjectData),
-          getPaginatedListBlock(verblijfsobjectData?.panden?.href, GLOSSARY.DEFINITIONS.PAND),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.PAND, verblijfsobjectData?.panden?.href),
           getPaginatedListBlock(
-            `${environment.API_ROOT}handelsregister/vestiging/?pand=${verblijfsobjectData.hoofdadres.landelijk_id}`,
             GLOSSARY.DEFINITIONS.VESTIGING,
+            `${environment.API_ROOT}handelsregister/vestiging/?pand=${verblijfsobjectData?.hoofdadres?.landelijk_id}`,
           ),
           getPaginatedListBlock(
-            verblijfsobjectData.kadastrale_objecten.href,
             GLOSSARY.DEFINITIONS.OBJECT,
+            verblijfsobjectData?.kadastrale_objecten?.href,
           ),
           getPaginatedListBlock(
-            `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${verblijfsobjectData.hoofdadres.landelijk_id}`,
             GLOSSARY.DEFINITIONS.MONUMENTEN,
+            `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${verblijfsobjectData?.hoofdadres?.landelijk_id}`,
           ),
           getConstructionFileList(detailInfo),
-          getPaginatedListBlock(result?.standplaats, GLOSSARY.DEFINITIONS.STANDPLAATS),
-          getPaginatedListBlock(result?.ligplaats, GLOSSARY.DEFINITIONS.LIGPLAATS),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.STANDPLAATS, result?.standplaats),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.LIGPLAATS, result?.ligplaats),
         ],
       }
     },
@@ -600,7 +602,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 1,
           value: result.status,
-          level: result.statusLevel ?? NotificationLevel.Attention,
+          level: NotificationLevel.Attention,
         })
       }
 
@@ -638,17 +640,17 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getBagDefinitionList(nummeraanduidingData),
           getLocationDefinitionListBlock(nummeraanduidingData, '2 / 1 / 3 / 1'),
           getVerblijfsObjectBlock(result),
-          getPaginatedListBlock(result?.adressen?.href, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
-          getPaginatedListBlock(result?.panden?.href, GLOSSARY.DEFINITIONS.PAND),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?.adressen?.href),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.PAND, result?.panden?.href),
           getPaginatedListBlock(
-            `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres.landelijk_id}`,
             GLOSSARY.DEFINITIONS.VESTIGING,
+            `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres?.landelijk_id}`,
           ),
           // Todo: DI-1207 Create sub link list (example: /data/bag/verblijfsobject/id0363010000665114/)
-          getPaginatedListBlock(result.kadastrale_objecten.href, GLOSSARY.DEFINITIONS.OBJECT),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.OBJECT, result.kadastrale_objecten?.href),
           getPaginatedListBlock(
-            `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${result.hoofdadres.landelijk_id}`,
             GLOSSARY.DEFINITIONS.MONUMENTEN,
+            `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${result.hoofdadres?.landelijk_id}`,
           ),
           getConstructionFileList(detailInfo),
         ],
@@ -668,8 +670,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Naam 24-posities (NEN)', description: result.naam_24_posities },
             {
               term: 'Woonplaats',
-              description: result.woonplaats._display,
-              link: buildDetailUrl(getDetailPageData(result.woonplaats?._links?.self.href)),
+              description: result.woonplaats?._display,
+              link: buildDetailUrl(getDetailPageData(result.woonplaats?._links?.self?.href)),
             },
             { term: 'Type', description: result.type },
             { term: 'Status', description: result.status },
@@ -694,7 +696,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 1,
           value: result.status,
-          level: result.statusLevel ?? NotificationLevel.Attention,
+          level: NotificationLevel.Attention,
         })
       }
 
@@ -723,12 +725,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             ],
           },
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
-          getPaginatedListBlock(result?._adressen?.href, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href),
           getPaginatedListBlock(
-            `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.pandidentificatie}`,
             GLOSSARY.DEFINITIONS.VESTIGING,
+            `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.pandidentificatie}`,
           ),
-          getPaginatedListBlock(result?._monumenten?.href, GLOSSARY.DEFINITIONS.MONUMENTEN),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.MONUMENTEN, result?._monumenten?.href),
         ],
       }
     },
@@ -785,12 +787,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             ],
           },
           getPaginatedListBlock(
-            `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${result.hoofdadres.landelijk_id}`,
             GLOSSARY.DEFINITIONS.VESTIGING,
+            `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${result.hoofdadres?.landelijk_id}`,
           ),
           getPaginatedListBlock(
-            `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${result.landelijk_id}`,
             GLOSSARY.DEFINITIONS.MONUMENTEN,
+            `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${result.landelijk_id}`,
           ),
         ],
       }
@@ -855,7 +857,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Beschikbare aansluiting(en)',
-              description: result.beschikbareAansluitingen.map((item: string) => item).join('\n'),
+              description: result.beschikbareAansluitingen?.map((item: string) => item).join('\n'),
             },
             {
               term: 'Beheerorganisatie',
@@ -911,7 +913,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           entries: [
             { term: 'Soort handeling', description: result.type },
             { term: 'Bron', description: result.bron },
-            { term: 'Datum rapport', description: result.date && formatDate(result.date) },
+            {
+              term: 'Datum rapport',
+              description: result.date && formatDate(new Date(result.date)),
+            },
             { term: 'Intekening', description: result.intekening },
             {
               term: 'Opmerkingen',
@@ -933,10 +938,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         {
           type: DetailResultItemType.DefinitionList,
           entries: [
-            { term: 'Datum brondocument', description: result.datum && formatDate(result.datum) },
+            {
+              term: 'Datum brondocument',
+              description: result.datum && formatDate(new Date(result.datum)),
+            },
             {
               term: 'Datum van inslag',
-              description: result.datum_inslag && formatDate(result.datum_inslag),
+              description: result.datum_inslag && formatDate(new Date(result.datum_inslag)),
             },
             { term: 'Soort handeling', description: result.type },
             { term: 'Bron', description: result.bron },
@@ -945,8 +953,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Opmerkingen', description: result.opmerkingen },
             {
               term: 'Oorlogsincidentrapport',
-              description: getFileName(result.pdf),
-              link: result.pdf,
+              description: result.pdf && getFileName(result.pdf),
+              link: result.pdf && result.pdf,
             },
           ],
         },
@@ -969,7 +977,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Opdrachtnemer', description: result.opdrachtnemer },
             { term: 'Opdrachtgever', description: result.opdrachtgever },
             { term: 'Verdacht gebied', description: result.verdacht_gebied },
-            { term: 'Datum rapport', description: result.datum && formatDate(result.datum) },
+            {
+              term: 'Datum rapport',
+              description: result.datum && formatDate(new Date(result.datum)),
+            },
           ],
         },
       ],
@@ -996,8 +1007,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Opmerkingen', description: result.opmerkingen },
             {
               term: 'Oorlogshandelingsrapport',
-              description: getFileName(result.pdf),
-              link: result.pdf,
+              description: result.pdf && getFileName(result.pdf),
+              link: result.pdf && result.pdf,
             },
           ],
         },
@@ -1023,16 +1034,22 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           {
             type: DetailResultItemType.DefinitionList,
             entries: [
-              { term: 'Type', description: formatList(result.type) },
+              { term: 'Type', description: result.type && formatList(result.type) },
               { term: 'Aantal', description: result.count },
-              { term: 'Noodzaak', description: formatList(result.noodzaak) },
-              { term: 'Uiterlijk', description: formatList(result.uiterlijk) },
-              { term: 'Omschrijving', description: formatList(result.soortPaaltje) },
-              { term: 'Ruimte', description: formatList(result.ruimte) },
-              { term: 'Markering', description: formatList(result.markering) },
-              { term: 'Soort weg', description: formatList(result.soortWeg) },
-              { term: 'Status', description: formatList(result.paaltjesWeg) },
-              { term: 'Zichtbaarheid', description: formatList(result.zichtInDonker) },
+              { term: 'Noodzaak', description: result.noodzaak && formatList(result.noodzaak) },
+              { term: 'Uiterlijk', description: result.uiterlijk && formatList(result.uiterlijk) },
+              {
+                term: 'Omschrijving',
+                description: result.soortPaaltje && formatList(result.soortPaaltje),
+              },
+              { term: 'Ruimte', description: result.ruimte && formatList(result.ruimte) },
+              { term: 'Markering', description: result.markering && formatList(result.markering) },
+              { term: 'Soort weg', description: result.soortWeg && formatList(result.soortWeg) },
+              { term: 'Status', description: result.paaltjesWeg && formatList(result.paaltjesWeg) },
+              {
+                term: 'Zichtbaarheid',
+                description: result.zichtInDonker && formatList(result.zichtInDonker),
+              },
             ],
           },
         ],
@@ -1089,8 +1106,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.BOUWBLOK),
       items: [
         getLocationDefinitionListBlock(result, '1 / 1 / 3 / 1'),
-        getPaginatedListBlock(result?.panden?.href, GLOSSARY.DEFINITIONS.PAND),
-        getPaginatedListBlock(result?.meetbouten, GLOSSARY.DEFINITIONS.MEETBOUT),
+        getPaginatedListBlock(GLOSSARY.DEFINITIONS.PAND, result?.panden?.href),
+        getPaginatedListBlock(GLOSSARY.DEFINITIONS.MEETBOUT, result?.meetbouten),
       ],
     }),
   },
@@ -1108,7 +1125,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           gridArea: '1 / 1 / 1 / 2',
         },
         getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
-        getPaginatedListBlock(result?.bouwblokken?.href, GLOSSARY.DEFINITIONS.BOUWBLOK),
+        getPaginatedListBlock(GLOSSARY.DEFINITIONS.BOUWBLOK, result?.bouwblokken?.href),
         ...getShowInTableBlock({
           key: 'buurt_naam',
           value: result.naam,
@@ -1137,7 +1154,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             value: result.naam,
           }),
           gebiedInBeeldBlock,
-          getPaginatedListBlock(result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.BUURT, result?.buurten?.href),
         ],
       }
     },
@@ -1162,23 +1179,22 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.DefinitionList,
-          title: 'Code',
           gridArea: '1 / 1 / 1 / 3',
           entries: [
             { term: 'Code', description: result.code },
-            { term: 'Gemeente', description: result.gemeente._display },
+            { term: 'Gemeente', description: result.gemeente?._display },
           ],
         },
         getPaginatedListBlock(
-          result?.buurtcombinaties?.href,
           GLOSSARY.DEFINITIONS.BUURTCOMBINATIE,
+          result?.buurtcombinaties?.href,
           {
             gridArea: '2 / 1 / 3 / 2',
           },
         ),
         getPaginatedListBlock(
-          result?.gebiedsgerichtwerken?.href,
           GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN,
+          result?.gebiedsgerichtwerken?.href,
         ),
         gebiedInBeeldBlock,
       ],
@@ -1209,7 +1225,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             gridArea: '1 / 1 / 1 / 3',
           },
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
-          getPaginatedListBlock(result?.buurten?.href, GLOSSARY.DEFINITIONS.BUURT),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.BUURT, result?.buurten?.href),
           ...getShowInTableBlock({
             key: 'buurtcombinatie_naam',
             value: result.naam,
@@ -1252,18 +1268,21 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           {
             type: DetailResultItemType.DefinitionList,
             entries: [
-              { term: 'Kadastrale gemeentecode', description: result.kadastrale_gemeente._display },
-              { term: 'Sectie', description: result.sectie.sectie },
+              {
+                term: 'Kadastrale gemeentecode',
+                description: result.kadastrale_gemeente?._display,
+              },
+              { term: 'Sectie', description: result.sectie?.sectie },
               { term: 'Objectnummer', description: result.objectnummer },
               { term: 'Indexletter', description: result.indexletter },
               { term: 'Indexnummer', description: result.indexnummer },
               {
                 term: 'Kadastrale gemeente',
-                description: result.kadastrale_gemeente.naam,
+                description: result.kadastrale_gemeente?.naam,
               },
               {
                 term: 'Gemeente',
-                description: result.kadastrale_gemeente.gemeente._display,
+                description: result.kadastrale_gemeente?.gemeente._display,
               },
               {
                 term: 'Grootte',
@@ -1272,7 +1291,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
               {
                 term: 'Koopsom',
-                description: result.koopsom?.toLocaleString(DEFAULT_LOCALE),
+                description: result.koopsom && result.koopsom.toLocaleString(DEFAULT_LOCALE),
               },
               { term: 'Koopjaar', description: result.koopjaar },
               {
@@ -1290,7 +1309,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getLinkListBlock(GLOSSARY.DEFINITIONS.AANTEKENING, brkData?.aantekeningen),
           getLinkListBlock(GLOSSARY.DEFINITIONS.ONTSTAAN_UIT, brkData?.ontstaan_uit),
           getLinkListBlock(GLOSSARY.DEFINITIONS.BETROKKEN_BIJ, brkData?.betrokken_bij),
-          getPaginatedListBlock(result?._adressen?.href, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href),
         ],
       }
     },
@@ -1321,7 +1340,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Coördinaten',
-              description: result.geometrie.coordinates,
+              description: result.geometrie?.coordinates,
             },
             {
               term: 'Bouwblok',
@@ -1421,19 +1440,19 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           ],
         },
         getPaginatedListBlock(
-          result.ligt_in_complex?._links.self.href,
           GLOSSARY.DEFINITIONS.COMPLEXEN,
+          result.ligt_in_complex?._links?.self?.href,
         ),
         getPaginatedListBlock(
-          result.heeft_als_grondslag_beperking?._links.self.href,
           GLOSSARY.DEFINITIONS.BEPERKING,
+          result.heeft_als_grondslag_beperking?._links?.self?.href,
         ),
         getLinkListBlock(
           GLOSSARY.DEFINITIONS.PAND,
           result.betreft_pand,
           (res: any) => res.pandidentificatie,
         ),
-        getPaginatedListBlock(result.heeft_situeringen?.href, GLOSSARY.DEFINITIONS.ADRES),
+        getPaginatedListBlock(GLOSSARY.DEFINITIONS.ADRES, result.heeft_situeringen?.href),
       ],
     }),
   },
@@ -1451,10 +1470,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           entries: [
             { term: 'Nummer', description: result.monumentnummer_complex },
             { term: 'Naam', description: result.complexnaam },
-            { term: 'Beschrijving', description: result.beschrijving_complex.trim() },
+            { term: 'Beschrijving', description: result.beschrijving_complex?.trim() },
           ],
         },
-        getPaginatedListBlock(result.monumenten.href, GLOSSARY.DEFINITIONS.MONUMENTEN),
+        getPaginatedListBlock(GLOSSARY.DEFINITIONS.MONUMENTEN, result.monumenten?.href),
       ],
     }),
   },
@@ -1682,7 +1701,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
               {
                 term: 'KvK-nummer',
-                description: result.maatschappelijke_activiteit.match(/([^/]*)\/*$/)[1],
+                description:
+                  result.maatschappelijke_activiteit &&
+                  // @ts-ignore
+                  result.maatschappelijke_activiteit.match(/([^/]*)\/*$/)[1],
               },
               {
                 term: 'Vestigingsnummer',
@@ -1706,41 +1728,42 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
               {
                 term: 'Bezoekadres',
-                description: result.bezoekadres.volledig_adres,
+                description: result.bezoekadres?.volledig_adres,
                 alert:
-                  result.bezoekadres.correctie &&
-                  `Officieel BAG-adres niet bekend, schatting: ${result.bezoekadres.query_string}`,
+                  result.bezoekadres?.correctie &&
+                  `Officieel BAG-adres niet bekend, schatting: ${result.bezoekadres?.query_string}`,
               },
               {
                 term: 'SBI-code en -omschrijving',
                 description: result.activiteiten
-                  .map(({ sbi_code, sbi_omschrijving }: any) => `${sbi_code}: ${sbi_omschrijving}`)
+                  ?.map(({ sbi_code, sbi_omschrijving }) => `${sbi_code}: ${sbi_omschrijving}`)
                   .join(', '),
               },
               {
                 term: 'Datum aanvang',
-                description: new Date(result.datum_aanvang).toLocaleDateString(DEFAULT_LOCALE, {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                }),
+                description:
+                  result.datum_aanvang &&
+                  new Date(result.datum_aanvang).toLocaleDateString(DEFAULT_LOCALE, {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  }),
               },
               {
                 term: 'Soort bijzondere rechtstoestand',
                 // eslint-disable-next-line no-nested-ternary
-                description: result._bijzondere_rechts_toestand.faillissement
+                description: result._bijzondere_rechts_toestand?.faillissement
                   ? 'Faillissement'
-                  : result._bijzondere_rechts_toestand.status === 'Voorlopig' ||
-                    result._bijzondere_rechts_toestand.status === 'Definitief'
+                  : result._bijzondere_rechts_toestand?.status === 'Voorlopig' ||
+                    result._bijzondere_rechts_toestand?.status === 'Definitief'
                   ? 'Surseance van betaling'
                   : '',
               },
               {
                 term: 'Coördinaten',
-                description: getRdAndWgs84Coordinates(
-                  result.bezoekadres.geometrie.coordinates,
-                  'RD',
-                ),
+                description:
+                  result.bezoekadres?.geometrie?.coordinates &&
+                  getRdAndWgs84Coordinates(result.bezoekadres.geometrie.coordinates, 'RD'),
               },
             ],
           },
@@ -1805,13 +1828,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             entries: [
               {
                 term: 'Beperkingcode',
-                description: result.beperkingcode.code,
+                description: result.beperkingcode?.code,
                 link:
                   'https://www.amsterdam.nl/stelselpedia/wkpb-index/handboek-inwinnen/codes-wetten/',
               },
               {
                 term: 'Omschrijving',
-                description: result.beperkingcode.omschrijving,
+                description: result.beperkingcode?.omschrijving,
               },
             ],
           },
@@ -1846,7 +1869,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               ],
             }),
           },
-          getPaginatedListBlock(result.kadastrale_objecten.href, GLOSSARY.DEFINITIONS.OBJECT),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.OBJECT, result.kadastrale_objecten?.href),
         ],
       }
     },
@@ -1876,9 +1899,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
               {
                 term: 'Adres',
-                description: result.verblijfsobjecten
-                  .map(({ _display }: any) => _display)
-                  .join(', '),
+                description: result.verblijfsobjecten?.map(({ _display }) => _display).join(', '),
               },
               {
                 term: 'Kadaster',
@@ -1892,11 +1913,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             entries: [
               {
                 term: 'Gemeentecode',
-                description: result.kadastrale_gemeente._display,
+                description: result.kadastrale_gemeente?._display,
               },
               {
                 term: 'Sectie',
-                description: result.sectie.sectie,
+                description: result.sectie?.sectie,
               },
               {
                 term: 'Objectnummer',
@@ -1912,19 +1933,23 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
               {
                 term: 'Perceeloppervlakte',
-                description: `${parseInt(result.grootte, 10).toLocaleString(DEFAULT_LOCALE)} m²`,
+                description:
+                  result.grootte &&
+                  `${parseInt(result.grootte, 10).toLocaleString(DEFAULT_LOCALE)} m²`,
               },
               {
                 term: 'Toestandsdatum',
-                description: new Date(result.toestandsdatum).toLocaleDateString(DEFAULT_LOCALE, {
-                  month: '2-digit',
-                  day: '2-digit',
-                  year: 'numeric',
-                }),
+                description:
+                  result.toestandsdatum &&
+                  new Date(result.toestandsdatum).toLocaleDateString(DEFAULT_LOCALE, {
+                    month: '2-digit',
+                    day: '2-digit',
+                    year: 'numeric',
+                  }),
               },
             ],
           },
-          ...result.beperkingen.map((beperking: any) => ({
+          ...result.beperkingen?.map((beperking) => ({
             title: 'Gemeentelijke publiekrechtelijke beperking',
             type: DetailResultItemType.DefinitionList,
             entries: [
@@ -1934,22 +1959,21 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
               {
                 term: 'Beperkingcode',
-                description: beperking.beperkingcode.code,
+                description: beperking.beperkingcode?.code,
               },
               {
                 term: 'Korte omschrijving',
-                description: beperking.beperkingcode.omschrijving,
+                description: beperking.beperkingcode?.omschrijving,
               },
               {
                 term: 'Datum in werking',
-                description: new Date(beperking.datum_in_werking).toLocaleDateString(
-                  DEFAULT_LOCALE,
-                  {
+                description:
+                  beperking.datum_in_werking &&
+                  new Date(beperking.datum_in_werking).toLocaleDateString(DEFAULT_LOCALE, {
                     month: '2-digit',
                     day: '2-digit',
                     year: 'numeric',
-                  },
-                ),
+                  }),
               },
             ],
           })),
@@ -2033,7 +2057,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Geboortedatum',
-              description: new Date(result.geboortedatum).toLocaleDateString(DEFAULT_LOCALE, {
+              description: new Date(result.geboortedatum || '').toLocaleDateString(DEFAULT_LOCALE, {
                 month: '2-digit',
                 day: '2-digit',
                 year: 'numeric',
@@ -2049,11 +2073,14 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Datum van overlijden',
-              description: new Date(result.overlijdensdatum).toLocaleDateString(DEFAULT_LOCALE, {
-                month: '2-digit',
-                day: '2-digit',
-                year: 'numeric',
-              }),
+              description: new Date(result.overlijdensdatum || '').toLocaleDateString(
+                DEFAULT_LOCALE,
+                {
+                  month: '2-digit',
+                  day: '2-digit',
+                  year: 'numeric',
+                },
+              ),
             },
             {
               term: 'Woonadres',
@@ -2079,7 +2106,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
           ],
         },
-        getPaginatedListBlock(result.rechten.href, GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT),
+        getPaginatedListBlock(GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT, result.rechten?.href),
       ],
     }),
   },
@@ -2112,7 +2139,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               term: 'Handelsnaam',
               description:
                 result.onderneming?.handelsnamen
-                  ?.map(({ handelsnaam }: any) => handelsnaam)
+                  ?.map(({ handelsnaam }) => handelsnaam)
                   ?.join(', ') || result.naam,
             },
             {
@@ -2135,7 +2162,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Datum aanvang',
-              description: new Date(result.datum_aanvang).toLocaleDateString(DEFAULT_LOCALE, {
+              description: new Date(result.datum_aanvang || '').toLocaleDateString(DEFAULT_LOCALE, {
                 month: '2-digit',
                 day: '2-digit',
                 year: 'numeric',
@@ -2155,11 +2182,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         },
         result.functieVervullingUrl &&
           getPaginatedListBlock(
-            result.functieVervullingUrl,
             GLOSSARY.DEFINITIONS.FUNCTIEVERVULLING,
+            result.functieVervullingUrl,
           ),
         result.vestigingen?.href &&
-          getPaginatedListBlock(result.vestigingen.href, GLOSSARY.DEFINITIONS.VESTIGING),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.VESTIGING, result.vestigingen.href),
       ],
     }),
   },
@@ -2171,10 +2198,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       subTitle: result._display,
       infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.WOONPLAATS),
       items: [
-        getPaginatedListBlock(result.openbare_ruimtes.href, GLOSSARY.DEFINITIONS.OPENBARERUIMTE, {
-          pageSize: 25,
-          gridArea: '2 / 1 / 3 / 2',
-        }),
+        result.openbare_ruimtes &&
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.OPENBARERUIMTE, result.openbare_ruimtes.href, {
+            pageSize: 25,
+            gridArea: '2 / 1 / 3 / 2',
+          }),
       ],
     }),
   },

@@ -22,7 +22,7 @@ interface BouwblokkenResolvedResult {
   _links: ApiPaginateLinkObject
 }
 
-const getListFromApi = (defaultUrl: string | null, normalize?: (data: any[]) => any[]) => async (
+const getListFromApi = (defaultUrl?: string | null, normalize?: (data: any[]) => any[]) => async (
   url?: string,
   pageSize = 10,
 ): Promise<PaginatedData<Link[]> | null> => {
