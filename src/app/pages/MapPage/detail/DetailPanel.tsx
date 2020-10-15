@@ -200,8 +200,7 @@ const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = (
 }
 
 interface PaginatedResultProps {
-  // TODO: Remove 'null'
-  result: PaginatedDataType<any> | null
+  result: PaginatedDataType<any>
   pageSize: number
   setPaginatedUrl: (number: number) => void
   item: DetailResultItemPaginatedData
@@ -216,10 +215,6 @@ const PaginatedResult: FunctionComponent<PaginatedResultProps> = ({
   setPaginatedUrl,
   item,
 }) => {
-  if (!result) {
-    return null
-  }
-
   const showMoreButton = result.count > result.data.length ?? pageSize === INFINITE_PAGE_SIZE
   const showMoreText = `Toon alle ${result.count} ${result.title.toLocaleLowerCase()}`
   const showLessText = 'Toon minder'
@@ -255,14 +250,20 @@ const PaginatedData: FunctionComponent<PaginatedDataProps> = ({ item }) => {
 
   return (
     <PromiseResult promise={promise}>
-      {(result) => (
-        <PaginatedResult
-          result={result.value}
-          pageSize={pageSize}
-          item={item}
-          setPaginatedUrl={setPaginatedUrl}
-        />
-      )}
+      {(result) => {
+        if (!result.value) {
+          return null
+        }
+
+        return (
+          <PaginatedResult
+            result={result.value}
+            pageSize={pageSize}
+            item={item}
+            setPaginatedUrl={setPaginatedUrl}
+          />
+        )
+      }}
     </PromiseResult>
   )
 }
