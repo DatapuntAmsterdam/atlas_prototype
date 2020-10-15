@@ -15,6 +15,7 @@ import {
   DetailResultItemGroupedItems,
   DetailResultItemPaginatedData,
   DetailResultItemType,
+  PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import PromiseResult from '../../../components/PromiseTemplate/PromiseResult'
@@ -198,40 +199,35 @@ const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = (
   )
 }
 
-type PaginatedResultType = {
-  promiseResult: PromiseFulfilledResult<any>
+interface PaginatedResultProps {
+  // TODO: Remove 'null'
+  result: PaginatedDataType<any> | null
   pageSize: number
   setPaginatedUrl: (number: number) => void
   item: DetailResultItemPaginatedData
 }
 
-const PaginatedResult: FunctionComponent<PaginatedResultType> = ({
-  promiseResult,
+// Unfortunately we cannot use "-1", as apparently wont work for some API's
+const INFINITE_PAGE_SIZE = 999
+
+const PaginatedResult: FunctionComponent<PaginatedResultProps> = ({
+  result,
   pageSize,
   setPaginatedUrl,
   item,
 }) => {
-  // Unfortunately we cannot use "-1", as apparently wont work for some API's
-  const INFINITE_PAGE_SIZE = 999
-  const result = item.toView(promiseResult?.value?.data)
-
   if (!result) {
     return null
   }
 
-  const showMoreButton =
-    promiseResult?.value?.count > promiseResult?.value?.data?.length ||
-    pageSize === INFINITE_PAGE_SIZE
-  const showMoreText = `Toon alle ${
-    promiseResult?.value?.count
-  } ${result.title?.toLocaleLowerCase()}`
+  const showMoreButton = result.count > result.data.length ?? pageSize === INFINITE_PAGE_SIZE
+  const showMoreText = `Toon alle ${result.count} ${result.title.toLocaleLowerCase()}`
   const showLessText = 'Toon minder'
-
   const showMore = pageSize !== INFINITE_PAGE_SIZE
 
   return (
     <>
-      <Item item={result} />
+      <Item item={item.toView(result.data)} />
       {showMoreButton && (
         <ShowMoreButton
           variant="textButton"
@@ -248,20 +244,20 @@ const PaginatedResult: FunctionComponent<PaginatedResultType> = ({
   )
 }
 
-// Todo: DI-1204: It's currently not possible to show the title / infobox when promise is rejected
-function PaginatedData({
-  item,
-}: {
+interface PaginatedDataProps {
   item: DetailResultItemPaginatedData
-}): React.ReactElement | null {
+}
+
+// Todo: DI-1204: It's currently not possible to show the title / infobox when promise is rejected
+const PaginatedData: FunctionComponent<PaginatedDataProps> = ({ item }) => {
   const [pageSize, setPaginatedUrl] = useState(item.pageSize)
-  const promise = useMemo(async () => item.getData(undefined, pageSize), [pageSize])
+  const promise = useMemo(() => item.getData(undefined, pageSize), [pageSize])
 
   return (
-    <PromiseResult<any> promise={promise}>
+    <PromiseResult promise={promise}>
       {(result) => (
         <PaginatedResult
-          promiseResult={result}
+          result={result.value}
           pageSize={pageSize}
           item={item}
           setPaginatedUrl={setPaginatedUrl}
