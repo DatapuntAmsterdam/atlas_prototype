@@ -16,27 +16,32 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
   }
   return (
     <DefinitionList>
-      {entries.map(({ term, description, link, alert }) => {
-        const renderShowMoreShowLess = !link && description && description.length > 300
-        const renderLink = link && !renderShowMoreShowLess
-        const renderDescription = !link && !renderShowMoreShowLess
-        return (
-          <DefinitionListItem term={term} key={term}>
-            {renderShowMoreShowLess && (
-              <ShowMoreShowLess maxHeight="200px">
-                <StyledCustomHTMLBlock body={description} />
-              </ShowMoreShowLess>
-            )}
-            {renderLink && (
-              <Link href={link} inList>
-                {description}
-              </Link>
-            )}
-            {renderDescription && description}
-            {alert && <Alert>{alert}</Alert>}
-          </DefinitionListItem>
-        )
-      })}
+      {entries
+        .map(({ term, description, link, alert }) => {
+          if (!description) {
+            return undefined
+          }
+          const renderShowMoreShowLess = !link && description && description.length > 300
+          const renderLink = link && !renderShowMoreShowLess
+          const renderDescription = !link && !renderShowMoreShowLess
+          return (
+            <DefinitionListItem term={term} key={term}>
+              {renderShowMoreShowLess && (
+                <ShowMoreShowLess maxHeight="200px">
+                  <StyledCustomHTMLBlock body={description} />
+                </ShowMoreShowLess>
+              )}
+              {renderLink && (
+                <Link href={link} inList>
+                  {description}
+                </Link>
+              )}
+              {renderDescription && description}
+              {alert && <Alert>{alert}</Alert>}
+            </DefinitionListItem>
+          )
+        })
+        .filter((value) => value)}
     </DefinitionList>
   )
 }

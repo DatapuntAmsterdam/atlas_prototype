@@ -61,7 +61,7 @@ const MapDetailResult: React.FC<MapDetailResultProps> = ({
 }
 
 function renderItem(item: DetailResultItem, index: number) {
-  switch (item.type) {
+  switch (item?.type) {
     case DetailResultItemType.DefinitionList:
       return renderDefinitionListItem(item, index)
     case DetailResultItemType.Table:

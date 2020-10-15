@@ -25,7 +25,7 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
     trackEvent({
       category: 'detail-page',
       action: 'navigate',
-      name: link.title,
+      name: link.title || 'unknown',
     })
   }
 

@@ -156,7 +156,7 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
 const GroupedItems: FunctionComponent<{ item: DetailResultItemGroupedItems }> = ({ item }) => (
   <>
     {item.entries.map((groupedItem) => (
-      <Fragment key={groupedItem.title}>
+      <Fragment key={groupedItem?.title}>
         <Item item={groupedItem} subItem />
         <DetailSpacer />
       </Fragment>
@@ -169,7 +169,7 @@ const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = (
   subItem,
 }) => {
   const component = (() => {
-    switch (item.type) {
+    switch (item?.type) {
       case DetailResultItemType.DefinitionList:
         return <DetailDefinitionList entries={item.entries} />
       case DetailResultItemType.Table:
@@ -218,7 +218,7 @@ const PaginatedResult: FunctionComponent<PaginatedResultProps> = ({
   const resultItem = item.toView(result.data)
   const showMoreButton = result.count > result.data.length ?? pageSize === INFINITE_PAGE_SIZE
   const showMoreText = `Toon alle ${result.count} ${
-    resultItem.title ? resultItem.title.toLocaleLowerCase() : 'resultaten'
+    resultItem?.title ? resultItem.title.toLocaleLowerCase() : 'resultaten'
   }`
   const showLessText = 'Toon minder'
   const showMore = pageSize !== INFINITE_PAGE_SIZE
@@ -294,11 +294,10 @@ const RenderDetails: FunctionComponent<{ details: MapDetails | null } & LegacyLa
       ))}
       {details.data.items
         .filter((item) => item)
-        .map((item, index) => (
+        .map((item) => (
           <ItemWrapper
-            // eslint-disable-next-line react/no-array-index-key
-            key={item.type + index}
-            className={item.type}
+            key={item?.title}
+            className={item?.type}
             // @ts-ignore
             gridArea={item.gridArea}
           >

@@ -8,7 +8,10 @@ function getRdAndWgs84Coordinates(location: Position, type: 'RD' | 'WGS84') {
 
   const wgs84Location =
     type === 'WGS84'
-      ? location
+      ? {
+          latitude: location[0],
+          longitude: location[1],
+        }
       : rdToWgs84({
           x: location[0],
           y: location[1],
@@ -16,14 +19,19 @@ function getRdAndWgs84Coordinates(location: Position, type: 'RD' | 'WGS84') {
 
   const rdLocation =
     type === 'RD'
-      ? location
+      ? {
+          x: location[0],
+          y: location[1],
+        }
       : wgs84ToRd({
           lat: location[0],
           lng: location[1],
         })
 
-  const formattedRdLocation = `${rdLocation[0].toFixed(2)}, ${rdLocation[1].toFixed(2)}`
-  const formattedWgs84Location = `${wgs84Location[0].toFixed(7)}, ${wgs84Location[1].toFixed(7)}`
+  const formattedRdLocation = `${rdLocation.x.toFixed(2)}, ${rdLocation.y.toFixed(2)}`
+  const formattedWgs84Location = `${wgs84Location.latitude.toFixed(
+    7,
+  )}, ${wgs84Location.longitude.toFixed(7)}`
 
   return `${formattedRdLocation} (${formattedWgs84Location})`
 }

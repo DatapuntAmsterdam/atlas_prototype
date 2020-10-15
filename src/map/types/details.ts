@@ -8,7 +8,7 @@ import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 
 export interface DetailResult {
   title: string
-  subTitle?: string
+  subTitle?: string | null
   authScope?: string
   items: DetailResultItem[]
   notifications?: DetailResultNotification[]
@@ -36,6 +36,8 @@ export type DetailResultItem =
   | DetailResultItemTable
   | DetailResultItemPaginatedData
   | DetailResultItemGroupedItems
+  | undefined
+  | null
 
 export interface ExternalLink {
   title: string
@@ -51,7 +53,7 @@ export interface DetailInfo {
 type To = { pathname: string; search?: string } | string
 
 export interface InternalLink {
-  title: string
+  title?: string | null
   // TODO: when types are fixed in @types/react-router-dom, use Pick<LinkProps> instead
   to: To
 }
@@ -96,8 +98,8 @@ export interface DetailResultItemLinkList extends DefaultDetailResultItem {
 
 export interface DetailResultItemDefinitionListEntry {
   term: string
-  description?: string
-  link?: To
+  description?: string | null
+  link?: To | null
   alert?: string
 }
 
@@ -298,7 +300,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   rws_nummer?: string | null
   address?: string | null
   quantity?: string | null
-  type?: string[] | null
+  type?: string | string[] | null
   charging_capability?: string | null
   connector_type?: string | null
   currentStatus?: string | null
