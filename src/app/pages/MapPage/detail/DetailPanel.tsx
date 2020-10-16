@@ -122,7 +122,7 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
         return Promise.resolve(null)
       }
 
-      const data = await fetchDetailData(serviceDefinition, detailParams.id as string)
+      const data = await fetchDetailData(serviceDefinition, detailParams.id)
       const details = await toMapDetails(serviceDefinition, data, detailParams)
 
       if (details.geometry) {
@@ -153,7 +153,11 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
   )
 }
 
-const GroupedItems: FunctionComponent<{ item: DetailResultItemGroupedItems }> = ({ item }) => (
+interface GroupedItemsProps {
+  item: DetailResultItemGroupedItems
+}
+
+const GroupedItems: FunctionComponent<GroupedItemsProps> = ({ item }) => (
   <>
     {item.entries.map((groupedItem) => (
       <Fragment key={groupedItem?.title}>
@@ -271,13 +275,15 @@ const PaginatedData: FunctionComponent<PaginatedDataProps> = ({ item }) => {
   )
 }
 
-const RenderDetails: FunctionComponent<{ details: MapDetails | null } & LegacyLayout> = ({
-  details,
-  legacyLayout,
-}) => {
+export interface RenderDetailsProps extends LegacyLayout {
+  details: MapDetails | null
+}
+
+const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyLayout }) => {
   if (!details) {
     return <Message>Geen detailweergave beschikbaar.</Message>
   }
+
   return (
     <Wrapper legacyLayout={legacyLayout}>
       {details.location && (
