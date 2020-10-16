@@ -1,6 +1,5 @@
 import { fetchWithToken } from '../../../shared/services/api/api'
 import mapFetch from '../map-fetch/map-fetch'
-import { adressenVerblijfsobject } from '../normalize/normalize'
 import normalize, {
   fetchByLigplaatsId,
   fetchByStandplaatsId,
@@ -36,12 +35,8 @@ describe('The adressen nummeraanduiding resource', () => {
     }
 
     const result = await normalize(mockNummeraanduiding)
-    mapFetch.mockImplementationOnce(() => mockVerblijsfobject)
-    expect(mapFetch).toHaveBeenCalledWith(
-      mockNummeraanduiding.verblijfsobject,
-      false,
-      adressenVerblijfsobject,
-    )
+    fetchWithToken.mockImplementationOnce(() => mockVerblijsfobject)
+    expect(fetchWithToken).toHaveBeenCalledWith(mockNummeraanduiding.verblijfsobject)
 
     expect(result).toEqual({
       geometry: 'geo',

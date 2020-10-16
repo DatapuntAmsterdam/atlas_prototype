@@ -1,5 +1,4 @@
 import { fetchWithToken } from '../../../shared/services/api/api'
-import mapFetch from '../map-fetch/map-fetch'
 import normalize, { fetchByAddressId, fetchByPandId } from './vestiging'
 
 jest.mock('../../../shared/services/api/api')
@@ -31,7 +30,7 @@ describe('The vestiging resource', () => {
 
     const result = await normalize(mockVestiging)
 
-    expect(mapFetch).toHaveBeenCalledWith(mockVestiging.maatschappelijke_activiteit)
+    expect(fetchWithToken).toHaveBeenCalledWith(mockVestiging.maatschappelijke_activiteit)
 
     expect(result).toMatchObject({
       activities: `${mockVestiging.activiteiten[0].sbi_code}: ${mockVestiging.activiteiten[0].sbi_omschrijving}`,

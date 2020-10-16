@@ -1,12 +1,11 @@
 import { fetchWithToken } from '../../../shared/services/api/api'
-import mapFetch from '../map-fetch/map-fetch'
 import environment from '../../../environment'
 
 const normalize = async (result) => {
   let societalActivities
 
   if (result.maatschappelijke_activiteit) {
-    societalActivities = await mapFetch(result.maatschappelijke_activiteit)
+    societalActivities = await fetchWithToken(result.maatschappelijke_activiteit)
   }
 
   const additionalFields = {

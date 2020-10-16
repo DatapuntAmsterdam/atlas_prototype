@@ -10,21 +10,4 @@ export const getDetailEndpoint = createSelector(getDetail, (detail) => {
   }
   return undefined
 })
-export const getSubType = createSelector(getDetail, (detail) => detail.subtype)
-export const getID = createSelector(getDetail, (detail) => detail.id)
-export const getType = createSelector(getDetail, (detail) => detail.type)
 export const getDetailDisplay = createSelector(getDetail, (detail) => detail && detail.display)
-export const isDetailLoading = createSelector(getDetail, (detail) => detail && detail.isLoading)
-
-export const getView = createSelector(getDetail, (detail) => detail && detail.view)
-
-export const getDetailTemplateUrl = createSelector(
-  getDetail,
-  (detail) => detail && detail.includeSrc,
-)
-export const getDetailData = createSelector(getDetail, (detail) => detail && detail.data)
-
-export const getDetailFilterSelection = createSelector(
-  getDetail,
-  (detail) => detail && detail.filterSelection,
-)

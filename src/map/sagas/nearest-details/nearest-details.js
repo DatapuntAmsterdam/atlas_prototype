@@ -14,7 +14,7 @@ export function* fetchNearestDetails(action) {
 
     if (uri) {
       yield put(toDetailFromEndpoint(uri, view))
-    } else if (!isEmbed) {
+    } else if (!isEmbed && location) {
       yield call(goToGeoSearch, location)
     }
   } catch (error) {
