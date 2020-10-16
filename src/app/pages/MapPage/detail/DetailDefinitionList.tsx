@@ -19,11 +19,13 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
       {entries
         .map(({ term, description, link, alert }) => {
           if (!description) {
-            return undefined
+            return null
           }
-          const renderShowMoreShowLess = !link && description && description.length > 300
+
+          const renderShowMoreShowLess = !link && description.length > 300
           const renderLink = link && !renderShowMoreShowLess
           const renderDescription = !link && !renderShowMoreShowLess
+
           return (
             <DefinitionListItem term={term} key={term}>
               {renderShowMoreShowLess && (
