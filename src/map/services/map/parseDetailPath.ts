@@ -7,7 +7,7 @@ const PATH_SEPARATOR = '/'
  *
  * @param detailPath The detail URL to parse.
  */
-function parseDetailPath(detailPath: string): DetailInfo {
+export default function parseDetailPath(detailPath: string): DetailInfo {
   const parts = detailPath.split(PATH_SEPARATOR).filter((part) => part.length > 0)
   let id = parts.pop() ?? ''
 
@@ -21,5 +21,3 @@ function parseDetailPath(detailPath: string): DetailInfo {
     subType: parts[1],
   }
 }
-
-export default parseDetailPath

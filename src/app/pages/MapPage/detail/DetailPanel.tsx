@@ -153,7 +153,11 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
   )
 }
 
-const GroupedItems: FunctionComponent<{ item: DetailResultItemGroupedItems }> = ({ item }) => (
+interface GroupedItemsProps {
+  item: DetailResultItemGroupedItems
+}
+
+const GroupedItems: FunctionComponent<GroupedItemsProps> = ({ item }) => (
   <>
     {item.entries.map((groupedItem) => (
       <Fragment key={groupedItem?.title}>
@@ -164,10 +168,12 @@ const GroupedItems: FunctionComponent<{ item: DetailResultItemGroupedItems }> = 
   </>
 )
 
-const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = ({
-  item,
-  subItem,
-}) => {
+export interface ItemProps {
+  item: DetailResultItem
+  subItem?: boolean
+}
+
+const Item: FunctionComponent<ItemProps> = ({ item, subItem }) => {
   const component = (() => {
     switch (item?.type) {
       case DetailResultItemType.DefinitionList:
@@ -271,13 +277,15 @@ const PaginatedData: FunctionComponent<PaginatedDataProps> = ({ item }) => {
   )
 }
 
-const RenderDetails: FunctionComponent<{ details: MapDetails | null } & LegacyLayout> = ({
-  details,
-  legacyLayout,
-}) => {
+export interface RenderDetailsProps extends LegacyLayout {
+  details: MapDetails | null
+}
+
+const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyLayout }) => {
   if (!details) {
     return <Message>Geen detailweergave beschikbaar.</Message>
   }
+
   return (
     <Wrapper legacyLayout={legacyLayout}>
       {details.location && (
@@ -292,19 +300,18 @@ const RenderDetails: FunctionComponent<{ details: MapDetails | null } & LegacyLa
           <DetailSpacer />
         </Fragment>
       ))}
-      {details.data.items
-        .filter((item) => item)
-        .map((item) => (
-          <ItemWrapper
-            key={item?.title}
-            className={item?.type}
-            // @ts-ignore
-            gridArea={item.gridArea}
-          >
+      {details.data.items.map((item) => {
+        if (!item) {
+          return null
+        }
+
+        return (
+          <ItemWrapper key={item.title} className={item.type} gridArea={item.gridArea}>
             <Item item={item} />
             <DetailSpacer />
           </ItemWrapper>
-        ))}
+        )
+      })}
     </Wrapper>
   )
 }
