@@ -116,7 +116,7 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
   const result = usePromise(
     useMemo(async () => {
       const detailParams = parseDetailPath(detailUrl)
-      const serviceDefinition = getServiceDefinition(`${detailParams.type}/${detailParams.subType}`)
+      const serviceDefinition = getServiceDefinition(detailParams.type)
 
       if (!serviceDefinition) {
         return Promise.resolve(null)

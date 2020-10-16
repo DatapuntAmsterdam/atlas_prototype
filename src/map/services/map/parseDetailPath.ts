@@ -3,7 +3,6 @@ const PATH_SEPARATOR = '/'
 export interface DetailParams {
   id: string
   type: string
-  subType: string
 }
 
 /**
@@ -21,8 +20,7 @@ function parseDetailPath(detailPath: string): DetailParams {
 
   return {
     id,
-    type: parts[0],
-    subType: parts[1],
+    type: parts.join(PATH_SEPARATOR),
   }
 }
 
