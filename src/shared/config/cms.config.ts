@@ -20,6 +20,12 @@ export enum SpecialType {
   Story = 'dataverhaal',
 }
 
+export const routingKey = {
+  article: 'articleDetail',
+  collection: 'collectionDetail',
+  publication: 'publicationDetail',
+}
+
 const cmsConfig = {
   ARTICLE: {
     endpoint: (id?: string) =>

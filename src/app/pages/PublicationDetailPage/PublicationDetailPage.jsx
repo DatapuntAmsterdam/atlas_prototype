@@ -17,6 +17,7 @@ import { generatePath } from 'react-router'
 import { routing } from '../../routes'
 import environment from '../../../environment'
 import { cmsConfig } from '../../../shared/config/config'
+import { routingKey } from '../../../shared/config/cms.config'
 import { toPublicationDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DocumentCover from '../../components/DocumentCover/DocumentCover'
@@ -105,17 +106,17 @@ const PublicationDetailPage = () => {
                     {body && <CustomHTMLBlock body={body} />}
                     {related?.length ? (
                       <List>
-                        {related.map((item) => (
-                          <ListItem key={item.id}>
+                        {related.map(({ id: linkId, title: linkTitle, type, to }) => (
+                          <ListItem key={linkId}>
                             <Link
                               as={RouterLink}
-                              to={generatePath(routing.articleDetail.path, {
-                                slug: item.to.payload.slug,
-                                id: item.to.payload.id,
+                              to={generatePath(routing[routingKey[type]].path, {
+                                slug: to.payload.slug,
+                                id: to.payload.id,
                               })}
                               inList
                             >
-                              {item.title}
+                              {linkTitle}
                             </Link>
                           </ListItem>
                         ))}
