@@ -29,6 +29,9 @@ const MapDetailResult: React.FC<MapDetailResultProps> = ({
   onPanoPreviewClick,
 }) => {
   const { id: rawId, subtype: subType, type } = useParams<DetailInfo & { subtype: string }>()
+  if (!rawId || !subType || !type) {
+    return null
+  }
   const id = rawId.includes('id') ? rawId.substr(2) : rawId
 
   // Todo: need to trigger this to dispatch certain redux actions (Legacy)

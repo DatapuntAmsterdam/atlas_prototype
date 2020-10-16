@@ -30,6 +30,9 @@ interface DataDetailPageParams extends Omit<DetailInfo, 'subType'> {
 
 const DataDetailPage: FunctionComponent = () => {
   const { id: rawId, subtype: subType, type } = useParams<DataDetailPageParams>()
+  if (!rawId || !subType || !type) {
+    return null
+  }
   const id = rawId.includes('id') ? rawId.substr(2) : rawId
   const { result: promise, onRetry } = useDataDetail(id, subType, type)
 

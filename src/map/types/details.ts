@@ -44,10 +44,11 @@ export interface ExternalLink {
   url: string
 }
 
+// Todo: probably remove optionals when redux-first-router is removed
 export interface DetailInfo {
-  id: string
-  subType: string
-  type: string
+  id?: string
+  subType?: string
+  type?: string
 }
 
 type To = { pathname: string; search?: string } | string

@@ -20,7 +20,7 @@ import { getMapZoom } from '../../../map/ducks/map/selectors'
 import ActiveOverlaysClass from '../../services/active-overlays/active-overlays'
 import { waitForAuthentication } from '../user/user'
 import { SELECTION_TYPE, setSelection } from '../../ducks/selection/selection'
-import { getViewMode, isMapPage, SET_VIEW_MODE, VIEW_MODE } from '../../ducks/ui/ui'
+import { getViewMode, isMapPage, VIEW_MODE } from '../../ducks/ui/ui'
 import PAGES from '../../../app/pages'
 import { ERROR_TYPES, setGlobalError } from '../../ducks/error/error-message'
 
@@ -34,7 +34,7 @@ export function* fetchMapSearchResults() {
     yield call(waitForAuthentication)
     const user = yield select(getUser)
 
-    if (view === VIEW_MODE.SPLIT || view === VIEW_MODE.FULL) {
+    if ((view === VIEW_MODE.SPLIT || view === VIEW_MODE.FULL) && location) {
       const geoSearchResults = yield call(geosearch, location, user)
       const results = replaceBuurtcombinatie(geoSearchResults)
       yield put(fetchMapSearchResultsSuccessList(results, getNrOfSearchResults(geoSearchResults)))
@@ -64,5 +64,4 @@ export function* fetchGeoSearchResultsEffect() {
 
 export default function* watchDataSearch() {
   yield takeLatest(FETCH_GEO_SEARCH_RESULTS_REQUEST, fetchMapSearchResults)
-  yield takeLatest(SET_VIEW_MODE, fetchGeoSearchResultsEffect)
 }

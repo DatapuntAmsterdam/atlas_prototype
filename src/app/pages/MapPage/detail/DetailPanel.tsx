@@ -122,7 +122,7 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
         return Promise.resolve(null)
       }
 
-      const data = await fetchDetailData(serviceDefinition, detailParams.id)
+      const data = await fetchDetailData(serviceDefinition, detailParams.id as string)
       const details = await toMapDetails(serviceDefinition, data, detailParams)
 
       if (details.geometry) {
