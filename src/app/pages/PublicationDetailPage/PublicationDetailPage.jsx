@@ -6,36 +6,25 @@ import {
   Heading,
   Paragraph,
   Row,
-  themeColor,
-  themeSpacing,
+  List,
+  ListItem,
+  Link,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import styled from 'styled-components'
+import { useParams, Link as RouterLink } from 'react-router-dom'
+import { generatePath } from 'react-router'
+import { routing } from '../../routes'
 import environment from '../../../environment'
 import { cmsConfig } from '../../../shared/config/config'
-import useNormalizedCMSResults from '../../../normalizations/cms/useNormalizedCMSResults'
 import { toPublicationDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DocumentCover from '../../components/DocumentCover/DocumentCover'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
-import EditorialResults from '../../components/EditorialResults'
 import ShareBar from '../../components/ShareBar/ShareBar'
 import getImageFromCms from '../../utils/getImageFromCms'
 import useDownload from '../../utils/useDownload'
 import useFromCMS from '../../utils/useFromCMS'
-
-const Divider = styled.hr`
-  width: 200px;
-  height: 3px;
-  background-color: ${themeColor('secondary')};
-  margin: ${themeSpacing(8, 0, 6)};
-`
-
-const StyledEditorialResults = styled(EditorialResults)`
-  margin-bottom: ${themeSpacing(25)};
-`
 
 const PublicationDetailPage = () => {
   const { id } = useParams()
@@ -114,22 +103,26 @@ const PublicationDetailPage = () => {
                   <EditorialContent>
                     {intro && <Paragraph strong dangerouslySetInnerHTML={{ __html: intro }} />}
                     {body && <CustomHTMLBlock body={body} />}
+                    {related?.length ? (
+                      <List>
+                        {related.map((item) => (
+                          <ListItem key={item.id}>
+                            <Link
+                              as={RouterLink}
+                              to={generatePath(routing.articleDetail.path, {
+                                slug: item.to.payload.slug,
+                                id: item.to.payload.id,
+                              })}
+                              inList
+                            >
+                              {item.title}
+                            </Link>
+                          </ListItem>
+                        ))}
+                      </List>
+                    ) : null}
                   </EditorialContent>
                 </Column>
-
-                {related?.length ? (
-                  <Column span={{ small: 1, medium: 4, big: 4, large: 7, xLarge: 7 }}>
-                    <EditorialContent>
-                      <Divider />
-                      <StyledEditorialResults
-                        headingLevel="h2"
-                        results={useNormalizedCMSResults(related)}
-                        errors={[]}
-                        title="Verder lezen"
-                      />
-                    </EditorialContent>
-                  </Column>
-                ) : null}
               </Column>
               <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
                 <ShareBar topSpacing={6} />
