@@ -168,10 +168,12 @@ const GroupedItems: FunctionComponent<GroupedItemsProps> = ({ item }) => (
   </>
 )
 
-const Item: FunctionComponent<{ item: DetailResultItem; subItem?: boolean }> = ({
-  item,
-  subItem,
-}) => {
+export interface ItemProps {
+  item: DetailResultItem
+  subItem?: boolean
+}
+
+const Item: FunctionComponent<ItemProps> = ({ item, subItem }) => {
   const component = (() => {
     switch (item?.type) {
       case DetailResultItemType.DefinitionList:
