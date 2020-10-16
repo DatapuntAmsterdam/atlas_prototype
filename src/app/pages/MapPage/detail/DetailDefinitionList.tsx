@@ -18,20 +18,18 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
 
   return (
     <DefinitionList>
-      {entries
-        .map(({ term, description, link, alert }) => {
-          if (!description) {
-            return null
-          }
+      {entries.map(({ term, description, link, alert }) => {
+        if (!description) {
+          return null
+        }
 
-          return (
-            <DefinitionListItem term={term} key={term}>
-              {renderDescription(description, link)}
-              {alert && <Alert>{alert}</Alert>}
-            </DefinitionListItem>
-          )
-        })
-        .filter((value) => value)}
+        return (
+          <DefinitionListItem term={term} key={term}>
+            {renderDescription(description, link)}
+            {alert && <Alert>{alert}</Alert>}
+          </DefinitionListItem>
+        )
+      })}
     </DefinitionList>
   )
 }
