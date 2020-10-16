@@ -6,7 +6,7 @@ import NotificationLevel from '../../../app/models/notification'
 import { MapDetails } from '../../services/map'
 
 jest.mock('react-router-dom', () => ({
-  useParams: () => ({ id: 'foo' }),
+  useParams: () => ({ id: 'foo', type: 'bar', subtype: 'baz' }),
 }))
 
 jest.mock('../../../app/pages/DataDetailPage/useDataDetail')
