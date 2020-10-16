@@ -8,7 +8,6 @@ import path from 'path'
 import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin'
 import { Configuration, DefinePlugin } from 'webpack'
 
-
 /**
  * Gets the absolute path to a module in the `node_modules` directory.
  *
@@ -65,7 +64,6 @@ export interface CreateConfigOptions {
 
 export const rootPath = path.resolve(__dirname)
 export const srcPath = path.resolve(__dirname, 'src')
-export const legacyPath = path.resolve(__dirname, 'modules')
 export const distPath = path.resolve(__dirname, 'dist')
 
 const svgoConfig = {
@@ -115,7 +113,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       rules: [
         {
           test: /\.(t|j)sx?$/,
-          include: [srcPath, legacyPath, ...modernModules],
+          include: [srcPath, ...modernModules],
           use: {
             loader: 'babel-loader',
             options: {
@@ -161,12 +159,14 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         {
           test: /\.(sc|c)ss$/,
           use: [
-            (isDev ? 'style-loader' : {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                hmr: isDev,
-              },
-            }),
+            isDev
+              ? 'style-loader'
+              : {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                    hmr: isDev,
+                  },
+                },
             {
               loader: 'css-loader',
               options: {
@@ -181,15 +181,22 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
                 postcssOptions: {
                   plugins: [
                     require('autoprefixer'),
-                    ...(isProd ? [require('cssnano')({
-                      preset: ['default', {
-                        // Disable SVGO since some of our SVG assets aren't too great.
-                        // TODO: Can be removed once we remove the legacy Angular code.
-                        svgo: false,
-                      }],
-                    })] : [])
+                    ...(isProd
+                      ? [
+                          require('cssnano')({
+                            preset: [
+                              'default',
+                              {
+                                // Disable SVGO since some of our SVG assets aren't too great.
+                                // TODO: Can be removed once we remove the legacy Angular code.
+                                svgo: false,
+                              },
+                            ],
+                          }),
+                        ]
+                      : []),
                   ],
-                }
+                },
               },
             },
             {
@@ -298,17 +305,19 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           : false,
       }),
       ...(!options.singleBuild ? [new HtmlWebpackMultiBuildPlugin()] : []),
-      ...(options.checkTypes ? [
-        new ForkTsCheckerWebpackPlugin({
-          typescript: {
-            memoryLimit: 4096,
-            diagnosticOptions: {
-              semantic: true,
-              syntactic: true,
-            },
-          },
-        }),
-      ] : []),
+      ...(options.checkTypes
+        ? [
+            new ForkTsCheckerWebpackPlugin({
+              typescript: {
+                memoryLimit: 4096,
+                diagnosticOptions: {
+                  semantic: true,
+                  syntactic: true,
+                },
+              },
+            }),
+          ]
+        : []),
     ],
   }
 }

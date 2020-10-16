@@ -1,9 +1,0 @@
-.c-stelselpedia__button {
-  @extend %icon--border-hover;
-  @include icon('stelselpedia', $secondary-gray60, $primary-dark);
-}
-
-.c-metadata__button {
-  @extend %icon--border-hover;
-  @include icon('metadata', $secondary-gray60, $primary-dark);
-}

@@ -116,13 +116,13 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
   const result = usePromise(
     useMemo(async () => {
       const detailParams = parseDetailPath(detailUrl)
-      const serviceDefinition = getServiceDefinition(detailParams.type)
+      const serviceDefinition = getServiceDefinition(`${detailParams.type}/${detailParams.subType}`)
 
       if (!serviceDefinition) {
         return Promise.resolve(null)
       }
 
-      const data = await fetchDetailData(serviceDefinition, detailParams.id)
+      const data = await fetchDetailData(serviceDefinition, detailParams.id as string)
       const details = await toMapDetails(serviceDefinition, data, detailParams)
 
       if (details.geometry) {
