@@ -6,7 +6,7 @@ import { isEmbedded } from '../../../shared/ducks/ui/ui'
 export interface MapDetailResultWrapperProps {
   panoUrl?: string
   title: string
-  subTitle?: string
+  subTitle?: string | null
   onMaximize: () => void
   onPanoPreviewClick: () => void
   children: React.ReactNode

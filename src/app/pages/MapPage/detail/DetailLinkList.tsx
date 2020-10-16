@@ -25,11 +25,11 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
     trackEvent({
       category: 'detail-page',
       action: 'navigate',
-      name: link.title,
+      name: link.title || 'unknown',
     })
   }
 
-  return item.links.length ? (
+  return item.links?.length ? (
     <LinkList {...otherProps}>
       {item.links.map((link) => {
         if ('url' in link) {
@@ -40,24 +40,6 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
               onClick={() => trackClick(link)}
               target="_blank"
               href={link.url}
-            >
-              {link.title}
-            </StyledLink>
-          )
-        }
-
-        if (item.skipRouter) {
-          const href =
-            typeof link.to === 'string' ? link.to : `${link.to.pathname}?${link.to.search}`
-          return (
-            // @ts-ignore
-            <StyledLink
-              key={href}
-              inList
-              onClick={() => {
-                trackClick(link)
-              }}
-              href={href}
             >
               {link.title}
             </StyledLink>

@@ -1,8 +1,15 @@
 import { shallow } from 'enzyme'
 import React from 'react'
-import { DetailResult, DetailResultItemType } from '../../types/details'
+import { DetailResultItemType } from '../../types/details'
 import MapDetailResult from './MapDetailResult'
 import NotificationLevel from '../../../app/models/notification'
+import { MapDetails } from '../../services/map'
+
+jest.mock('react-router-dom', () => ({
+  useParams: () => ({ id: 'foo', type: 'bar', subtype: 'baz' }),
+}))
+
+jest.mock('../../../app/pages/DataDetailPage/useDataDetail')
 
 describe('MapDetailResult', () => {
   let component
@@ -11,16 +18,17 @@ describe('MapDetailResult', () => {
   afterEach(() => {
     jest.resetAllMocks()
   })
-
   it('should display the notifications', () => {
     result = {
-      notifications: [{ level: NotificationLevel.Attention, value: 'notification' }],
-      items: [],
+      data: {
+        notifications: [{ level: NotificationLevel.Attention, value: 'notification' }],
+        items: [],
+      },
     }
 
     component = shallow(
       <MapDetailResult
-        result={(result as unknown) as DetailResult}
+        result={(result as unknown) as MapDetails}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
@@ -32,13 +40,15 @@ describe('MapDetailResult', () => {
 
   it('should not display the notifications without value', () => {
     result = {
-      notifications: [{ level: 'alert', value: false }],
-      items: [],
+      data: {
+        notifications: [{ level: 'alert', value: false }],
+        items: [],
+      },
     }
 
     component = shallow(
       <MapDetailResult
-        result={(result as unknown) as DetailResult}
+        result={(result as unknown) as MapDetails}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
@@ -50,43 +60,57 @@ describe('MapDetailResult', () => {
 
   it('should display the items', () => {
     result = {
-      notifications: [],
-      items: [
-        {
-          type: DetailResultItemType.Default,
-          label: 'label',
-          value: 'value',
-        },
-      ],
+      data: {
+        notifications: [],
+        items: [
+          {
+            type: DetailResultItemType.DefinitionList,
+            title: 'label',
+            entries: [
+              {
+                term: 'foo',
+                description: 'bar',
+              },
+            ],
+          },
+        ],
+      },
     }
 
     component = shallow(
       <MapDetailResult
-        result={(result as unknown) as DetailResult}
+        result={(result as unknown) as MapDetails}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
       />,
     )
 
-    expect(component.find('MapDetailResultItem').exists()).toBeTruthy()
+    expect(component.find('.map-detail-result__list').exists()).toBeTruthy()
   })
 
   it('should display the items without value', () => {
     result = {
-      notifications: [],
-      items: [
-        {
-          type: DetailResultItemType.Default,
-          label: 'label',
-          value: false,
-        },
-      ],
+      data: {
+        notifications: [],
+        items: [
+          {
+            type: DetailResultItemType.DefinitionList,
+            label: 'label',
+            entries: [
+              {
+                term: 'foo',
+                description: 'bar',
+              },
+            ],
+          },
+        ],
+      },
     }
 
     component = shallow(
       <MapDetailResult
-        result={(result as unknown) as DetailResult}
+        result={(result as unknown) as MapDetails}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
@@ -98,33 +122,32 @@ describe('MapDetailResult', () => {
 
   it('should display the items with a label when nested', () => {
     result = {
-      notifications: [],
-      items: [
-        {
-          type: DetailResultItemType.Default,
-          title: 'label',
-          value: [
-            {
-              type: DetailResultItemType.Default,
-              title: 'sublabel',
-              value: 'value',
-            },
-          ],
-        },
-      ],
+      data: {
+        notifications: [],
+        items: [
+          {
+            type: DetailResultItemType.DefinitionList,
+            title: 'label',
+            entries: [
+              {
+                term: 'foo',
+                description: 'bar',
+              },
+            ],
+          },
+        ],
+      },
     }
 
     component = shallow(
       <MapDetailResult
-        result={(result as unknown) as DetailResult}
+        result={(result as unknown) as MapDetails}
         panoUrl="panoUrl"
         onMaximize={jest.fn()}
         onPanoPreviewClick={jest.fn()}
       />,
     )
 
-    expect(component.find('MapDetailResultItem').exists()).toBeTruthy()
-    expect(component.find('h4').exists()).toBeTruthy()
-    expect(component.find('h4').props().children).toBe('label')
+    expect(component.find('.map-detail-result__list').exists()).toBeTruthy()
   })
 })

@@ -1,4 +1,4 @@
-import { parseDetailPath } from './parseDetailPath'
+import parseDetailPath from './parseDetailPath'
 
 describe('parseDetailPath', () => {
   it('should parse the url', () => {

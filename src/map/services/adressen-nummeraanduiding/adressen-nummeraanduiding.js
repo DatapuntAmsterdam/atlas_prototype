@@ -1,32 +1,19 @@
 import { fetchWithToken } from '../../../shared/services/api/api'
-import mapFetch from '../map-fetch/map-fetch'
-import { adressenVerblijfsobject } from '../normalize/normalize'
 import environment from '../../../environment'
+import { adressenVerblijfsobject } from '../normalize/normalize'
 
 const normalize = async (result) => {
-  let verblijfsobject
+  let verblijfsobjectData
   if (result.verblijfsobject) {
-    verblijfsobject = await mapFetch(result.verblijfsobject, false, adressenVerblijfsobject)
+    verblijfsobjectData = adressenVerblijfsobject(await fetchWithToken(result.verblijfsobject))
   }
-
   const additionalFields = {
-    ...((await verblijfsobject)
-      ? {
-          verblijfsobject: {
-            gebruiksdoelen: verblijfsobject.gebruiksdoelen,
-            gebruik: verblijfsobject.gebruik || '',
-            status: verblijfsobject.status || '',
-            size: verblijfsobject.size,
-            statusLevel: verblijfsobject.statusLevel,
-          },
-        }
-      : {}),
     isNevenadres: result.type_adres === 'Nevenadres',
     // eslint-disable-next-line no-underscore-dangle
     geometry: result._geometrie,
   }
 
-  return { ...result, ...additionalFields }
+  return { ...result, ...additionalFields, verblijfsobjectData }
 }
 
 export function fetchByPandId(pandId) {

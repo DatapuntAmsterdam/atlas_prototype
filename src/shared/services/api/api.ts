@@ -1,6 +1,7 @@
 import { logout } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
+import { AuthError } from './errors'
 
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
@@ -13,6 +14,13 @@ export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
 const handleErrors = (response: Response, reloadOnUnauthorized: boolean) => {
   if (response.status >= 400 && response.status <= 401 && reloadOnUnauthorized) {
     logout()
+  }
+
+  if (response.status === 401) {
+    throw new AuthError(
+      response.status,
+      `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om deze data te bekijken.`,
+    )
   }
 
   if (!response.ok) {

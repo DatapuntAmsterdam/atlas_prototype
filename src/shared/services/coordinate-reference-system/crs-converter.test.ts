@@ -1,21 +1,24 @@
 import proj4 from 'proj4'
+import { mocked } from 'ts-jest/utils'
 import {
-  wgs84ToRd,
-  rdToWgs84,
-  parseLocationString,
   normalizeCoordinate,
   normalizeLocation,
+  parseLocationString,
+  rdToWgs84,
+  wgs84ToRd,
 } from './crs-converter'
 
 jest.mock('proj4')
 
+const mockedProj4 = mocked(proj4, true)
+
 describe('The CRS converter service', () => {
   afterEach(() => {
-    proj4.mockReset()
+    mockedProj4.mockReset()
   })
 
   it('can convert from WGS84 to RD coordinates', () => {
-    proj4.mockImplementation(() => [3, 4])
+    mockedProj4.mockImplementation(() => [3, 4])
 
     const wgs84Coordinates = {
       latitude: 1,
@@ -27,12 +30,12 @@ describe('The CRS converter service', () => {
   })
 
   it('can convert from RD to WGS84 coordinates', () => {
-    proj4.mockImplementation(() => [3, 4])
+    mockedProj4.mockImplementation(() => [3, 4])
 
     const rdCoordinates = { x: 1, y: 0 }
     const actual = rdToWgs84(rdCoordinates)
 
-    expect(proj4.mock.calls[0][2]).toEqual([1, 0])
+    expect(mockedProj4.mock.calls[0][2]).toEqual([1, 0])
     expect(actual).toEqual({
       latitude: 4,
       longitude: 3,

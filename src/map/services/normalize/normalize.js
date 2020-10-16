@@ -3,6 +3,7 @@ import formatCount from '../../../app/utils/formatCount'
 import formatDate from '../../../app/utils/formatDate'
 import formatNumber from '../../../shared/services/number-formatter/number-formatter'
 import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
+import { fetchWithToken } from '../../../shared/services/api/api'
 
 export const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 
@@ -57,6 +58,33 @@ export const meetbout = (result) => {
   return normalize(result, additionalFields)
 }
 
+export const meetboutTable = (data) =>
+  data.map((item) =>
+    Object.entries(item).reduce((acc, [key, value]) => {
+      let newValue = value
+      // Numeric values
+      if (['hoogte_nap', 'zakking', 'zakkingssnelheid', 'zakking_cumulatief'].includes(key)) {
+        newValue = parseInt(value, 10).toFixed(3)
+        if (newValue >= 0) {
+          newValue = `+${newValue}`
+        }
+      }
+
+      if (key === 'datum') {
+        newValue = new Date(newValue).toLocaleDateString('nl-NL', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+        })
+      }
+
+      return {
+        ...acc,
+        [key]: newValue,
+      }
+    }, {}),
+  )
+
 export const napPeilmerk = (result) => {
   const additionalFields = {
     wallCoordinates:
@@ -110,11 +138,21 @@ export const adressenVerblijfsobject = (result) => {
   return normalize(result, additionalFields)
 }
 
-export const kadastraalObject = (result) => {
+export const addNummeraanduiding = async (result) => {
+  return {
+    ...result,
+    nummeraanduidingData: await fetchWithToken(result?.hoofdadres._links.self.href),
+  }
+}
+
+export const kadastraalObject = async (result) => {
   const additionalFields = {
     size: result.grootte || result.grootte === 0 ? formatSquareMetre(result.grootte) : '',
     cadastralName: result.kadastrale_gemeente ? result.kadastrale_gemeente.naam : false,
     name: result.kadastrale_gemeente ? result.kadastrale_gemeente.gemeente._display : false,
+    brkData: await fetchWithToken(
+      result?._links?.self?.href?.replace('brk/object', 'brk/object-expand'),
+    ),
   }
 
   return normalize(result, additionalFields)

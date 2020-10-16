@@ -1,6 +1,8 @@
 import mapFetch from '../map-fetch/map-fetch'
-import servicesByEndpointType, { endpointTypes } from '../map-services.config'
+import { endpointTypes, ServiceDefinition } from '../map-services.config'
 import environment from '../../../environment'
+import { UserState } from '../../../shared/ducks/user/user'
+import { DetailInfo } from '../../types/details'
 
 export const pageEndpointTypeMapping = {
   'bag/ligplaats/': 'bag/v1.1/ligplaats/',
@@ -31,12 +33,12 @@ export const pageEndpointTypeMapping = {
   'covid_19/gebiedsverbod/': 'v1/covid_19/gebiedsverbod/',
 }
 
-export const pageTypeToEndpoint = (type, subtype, id) => {
+export const pageTypeToEndpoint = (type: string, subtype: string, id: string) => {
   const endpointType = pageEndpointTypeMapping[`${type}/${subtype}/`] || `${type}/${subtype}/`
   return `${environment.API_ROOT}${endpointType}${id}/`
 }
 
-export const getEndpointTypeForResult = (endpointType, detail) => {
+export const getEndpointTypeForResult = (endpointType: string, detail: any) => {
   if (endpointType === endpointTypes.adressenNummeraanduiding) {
     if (detail.ligplaats) {
       return endpointTypes.adressenLigplaats
@@ -49,21 +51,19 @@ export const getEndpointTypeForResult = (endpointType, detail) => {
   return endpointType
 }
 
-export default async function fetchDetail(endpoint, user) {
-  const endpointType = Object.keys(servicesByEndpointType).find((type) => endpoint.includes(type))
-  const endpointConfig = endpointType && servicesByEndpointType[endpointType]
-  const authScope = endpointConfig && endpointConfig.authScope
+export default async function fetchDetail(
+  result: any,
+  serviceDefinition: ServiceDefinition,
+  user: UserState,
+  detailInfo: DetailInfo,
+) {
+  const { authScope } = serviceDefinition
   const isAuthorized = !authScope || user.scopes.includes(authScope)
 
-  const detail = isAuthorized
-    ? await mapFetch(endpoint, endpointConfig.mapDetail, endpointConfig.normalization)
-    : endpointConfig.mapDetail(isAuthorized)
-
-  const endpointTypeForResult = getEndpointTypeForResult(endpointType, detail)
+  const detail = await mapFetch(result, detailInfo, serviceDefinition)
 
   return {
     ...detail,
     isAuthorized,
-    endpointType: endpointTypeForResult,
   }
 }

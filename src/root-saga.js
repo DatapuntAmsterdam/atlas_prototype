@@ -1,5 +1,4 @@
 import { all, fork } from 'redux-saga/effects'
-import watchFetchMapDetail from './map/sagas/detail'
 import watchFetchMapBaseLayers from './map/sagas/map-base-layers'
 import watchMapClick from './map/sagas/map-click'
 import watchFetchMapLayers from './map/sagas/map-layers'
@@ -20,7 +19,6 @@ export default function* rootSaga() {
     fork(watchFetchMapBaseLayers),
     fork(watchFetchMapLayers),
     fork(watchFetchMapPanelLayers),
-    fork(watchFetchMapDetail),
     fork(watchFetchPanorama),
     fork(watchClosePanorama),
     fork(watchMapClick),

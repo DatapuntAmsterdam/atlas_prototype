@@ -1,15 +1,16 @@
-import { fetchWithToken } from '../../../shared/services/api/api'
 import { rdToWgs84 } from '../../../shared/services/coordinate-reference-system/crs-converter'
 import getCenter from '../../../shared/services/geo-json/geo-json'
 import { ServiceDefinition } from '../map-services.config'
+import { DetailInfo } from '../../types/details'
 
 export default async function mapFetch(
-  uri: string,
-  detail?: ServiceDefinition['mapDetail'],
-  normalization?: ServiceDefinition['normalization'],
+  result: any,
+  detailInfo: DetailInfo,
+  serviceDefinition: ServiceDefinition,
 ) {
-  const result = await fetchWithToken(uri)
-  const normalizedResult = normalization ? await normalization(result) : null
+  const normalizedResult = serviceDefinition.normalization
+    ? await serviceDefinition.normalization(result)
+    : null
   const geometry = result.geometrie ?? result.geometry ?? normalizedResult?.geometry ?? null
   const geometryCenter = geometry && getCenter(geometry)
   const wgs84Center = geometryCenter ? rdToWgs84(geometryCenter) : null
@@ -24,13 +25,15 @@ export default async function mapFetch(
     }
   }
 
-  const details = await (detail
-    ? detail(normalizedResult ?? result, location)
-    : normalizedResult ?? result)
+  const details = await serviceDefinition.mapDetail(
+    normalizedResult ?? result,
+    detailInfo,
+    location,
+  )
 
   return {
+    data: details,
     label: result._display,
-    ...details,
     // "label" may be overwritten by the result or normalizedData, but the location and geometry are constructed above
     geometrie: geometry,
     location,
