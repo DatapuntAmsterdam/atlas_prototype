@@ -4,6 +4,7 @@ import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinne
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import MapDetailResult from '../../components/detail-result/MapDetailResult'
 import MapSearchResults from '../../components/search-results/MapSearchResults'
+import PAGES from '../../../app/pages'
 
 const previewPanelSearchResultLimit = 3
 
@@ -21,8 +22,7 @@ class MapPreviewPanel extends React.Component {
   render() {
     const { props } = this
     const isLoading = props?.dataSearch?.isLoading ?? props?.mapDetail?.isLoading
-    const isDetailPage =
-      !props.isSearchPreview && !isLoading && props.detail && props.mapDetail && props.detailResult
+    const isDetailPage = props.currentPage === PAGES.DATA_DETAIL
 
     const openDetailEndpoint = () => props.openDetail(props.detail)
     const onMaximize = () => props.onSearchMaximize(VIEW_MODE.SPLIT)
@@ -110,6 +110,7 @@ MapPreviewPanel.propTypes = {
   detail: PropTypes.shape({}),
   detailResult: PropTypes.shape({}),
   isEmbed: PropTypes.bool,
+  currentPage: PropTypes.string.isRequired,
   mapDetail: PropTypes.shape({}),
   missingLayers: PropTypes.string,
   detailLocation: PropTypes.arrayOf(PropTypes.string).isRequired,
