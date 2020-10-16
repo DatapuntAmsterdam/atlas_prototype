@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
-import { ReactNode } from 'react'
 import { Position } from 'geojson'
+import { LocationDescriptor } from 'history'
+import { ReactNode } from 'react'
 import NotificationLevel from '../../app/models/notification'
 import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 
@@ -51,12 +52,10 @@ export interface DetailInfo {
   type?: string
 }
 
-type To = { pathname: string; search?: string } | string
-
 export interface InternalLink {
   title?: string | null
   // TODO: when types are fixed in @types/react-router-dom, use Pick<LinkProps> instead
-  to: To
+  to: LocationDescriptor
 }
 
 export type Link = ExternalLink | InternalLink
@@ -100,7 +99,7 @@ export interface DetailResultItemLinkList extends DefaultDetailResultItem {
 export interface DetailResultItemDefinitionListEntry {
   term: string
   description?: string | null
-  link?: To | null
+  link?: LocationDescriptor | null
   alert?: string
 }
 
