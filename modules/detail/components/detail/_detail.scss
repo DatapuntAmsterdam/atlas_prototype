@@ -34,21 +34,4 @@
       }
     }
   }
-
-  dp-panorama-thumbnail {
-    display: block;
-    max-width: 400px;
-  }
-}
-
-.c-disabled-message {
-  margin-top: $base-whitespace * 1.5;
-}
-
-.c-detail__data-selection-link {
-  .is-embed &,
-  .is-embed-preview &,
-  .is-print-mode & {
-    display: none;
-  }
 }
