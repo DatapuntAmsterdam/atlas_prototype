@@ -6,7 +6,7 @@ import { AuthError } from './errors'
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
 
-const getAccessToken = () => getState()?.user?.accessToken
+const getAccessToken = () => getState().user.accessToken
 
 export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
   fetch(uri).then((response) => response.json())
@@ -41,7 +41,7 @@ export const fetchWithToken = <T = any>(
 ): Promise<T> => {
   const requestHeaders = headers ?? new Headers()
 
-  if (token?.length > 0) {
+  if (token.length > 0) {
     requestHeaders.set('Authorization', SHARED_CONFIG.AUTH_HEADER_PREFIX + token)
   }
 
