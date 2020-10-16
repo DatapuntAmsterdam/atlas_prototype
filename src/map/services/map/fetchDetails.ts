@@ -7,7 +7,7 @@ import { DetailResult } from '../../types/details'
 import { RD, WGS84 } from '../crs-config'
 import { ServiceDefinition } from '../map-services.config'
 import { getDetailUrl } from './getDetailUrl'
-import { DetailParams } from './parseDetailPath'
+import { DetailUrlParams } from './parseDetailPath'
 
 // TODO: Write some tests for this method.
 
@@ -95,14 +95,14 @@ export interface MapDetails {
  *
  * @param serviceDefinition The service definition to use to convert the response.
  * @param response The response to convert.
- * @param detailInfo The description of the detail page.
+ * @param detailParams The params of the detail page.
  */
 export async function toMapDetails(
   serviceDefinition: ServiceDefinition,
   { data, location, geometry }: DetailResponse,
-  detailInfo: DetailParams,
+  detailParams: DetailUrlParams,
 ): Promise<MapDetails> {
-  const detailData = serviceDefinition.mapDetail(data, detailInfo, location)
+  const detailData = serviceDefinition.mapDetail(data, detailParams, location)
   const dataResult = detailData instanceof Promise ? await detailData : detailData
   return {
     data: dataResult,
