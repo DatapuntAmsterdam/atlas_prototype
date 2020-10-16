@@ -298,19 +298,18 @@ const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyL
           <DetailSpacer />
         </Fragment>
       ))}
-      {details.data.items
-        .filter((item) => item)
-        .map((item) => (
-          <ItemWrapper
-            key={item?.title}
-            className={item?.type}
-            // @ts-ignore
-            gridArea={item.gridArea}
-          >
+      {details.data.items.map((item) => {
+        if (!item) {
+          return null
+        }
+
+        return (
+          <ItemWrapper key={item.title} className={item.type} gridArea={item.gridArea}>
             <Item item={item} />
             <DetailSpacer />
           </ItemWrapper>
-        ))}
+        )
+      })}
     </Wrapper>
   )
 }

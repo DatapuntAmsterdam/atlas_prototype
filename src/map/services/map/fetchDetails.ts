@@ -2,11 +2,12 @@ import center from '@turf/center'
 import { Geometry, Position } from 'geojson'
 import { LatLngLiteral } from 'leaflet'
 import { fetchWithToken } from '../../../shared/services/api/api'
-import { DetailInfo, DetailResult } from '../../types/details'
+import { getAccessToken } from '../../../shared/services/auth/auth'
+import { DetailResult } from '../../types/details'
 import { RD, WGS84 } from '../crs-config'
 import { ServiceDefinition } from '../map-services.config'
 import { getDetailUrl } from './getDetailUrl'
-import { getAccessToken } from '../../../shared/services/auth/auth'
+import { DetailParams } from './parseDetailPath'
 
 // TODO: Write some tests for this method.
 
@@ -94,12 +95,12 @@ export interface MapDetails {
  *
  * @param serviceDefinition The service definition to use to convert the response.
  * @param response The response to convert.
- * @param detailInfo Object containing id, type and subType (eg. { id: '123', type: 'bag', subType: 'adressen'})
+ * @param detailInfo The description of the detail page.
  */
 export async function toMapDetails(
   serviceDefinition: ServiceDefinition,
   { data, location, geometry }: DetailResponse,
-  detailInfo: DetailInfo,
+  detailInfo: DetailParams,
 ): Promise<MapDetails> {
   const detailData = serviceDefinition.mapDetail(data, detailInfo, location)
   const dataResult = detailData instanceof Promise ? await detailData : detailData
