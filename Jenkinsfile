@@ -11,8 +11,8 @@ pipeline {
     IMAGE_FRONTEND_BASE = 'docker-registry.data.amsterdam.nl/atlas/app'
     IMAGE_FRONTEND_BUILD = "${IMAGE_FRONTEND_BASE}:${BUILD_NUMBER}"
     IMAGE_FRONTEND_ACCEPTANCE = "${IMAGE_FRONTEND_BASE}:acceptance"
+    IMAGE_FRONTEND_PREPRODUCTION = "${IMAGE_FRONTEND_BASE}:preproduction"
     IMAGE_FRONTEND_PRODUCTION = "${IMAGE_FRONTEND_BASE}:production"
-    IMAGE_FRONTEND_LATEST = "${IMAGE_FRONTEND_BASE}:latest"
 
     PLAYBOOK = 'deploy.yml'
 
@@ -26,29 +26,8 @@ pipeline {
         timeout(time: 30, unit: 'MINUTES')
       }
       steps {
-        script {
-          sh "docker build -t ${IMAGE_FRONTEND_BUILD} --shm-size 1G ."
-        }
-
+        sh "docker build -t ${IMAGE_FRONTEND_BUILD} --shm-size 1G ."
         sh "docker push ${IMAGE_FRONTEND_BUILD}"
-
-        script {
-          // Tag and push the image for production and latest if on production branch.
-          if (BRANCH_NAME == PRODUCTION_BRANCH) {
-            sh "docker tag ${IMAGE_FRONTEND_BUILD} ${IMAGE_FRONTEND_PRODUCTION}"
-            sh "docker tag ${IMAGE_FRONTEND_BUILD} ${IMAGE_FRONTEND_LATEST}"
-            sh "docker push ${IMAGE_FRONTEND_PRODUCTION}"
-            sh "docker push ${IMAGE_FRONTEND_LATEST}"
-          }
-        }
-
-        script {
-          // Tag and push the image for acceptance and latest if on acceptance branch.
-          if (BRANCH_NAME == ACCEPTANCE_BRANCH) {
-            sh "docker tag ${IMAGE_FRONTEND_BUILD} ${IMAGE_FRONTEND_ACCEPTANCE}"
-            sh "docker push ${IMAGE_FRONTEND_ACCEPTANCE}"
-          }
-        }
       }
     }
 
@@ -58,6 +37,8 @@ pipeline {
         timeout(time: 5, unit: 'MINUTES')
       }
       steps {
+        sh "docker tag ${IMAGE_FRONTEND_BUILD} ${IMAGE_FRONTEND_ACCEPTANCE}"
+        sh "docker push ${IMAGE_FRONTEND_ACCEPTANCE}"
         build job: 'Subtask_Openstack_Playbook', parameters: [
           [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
           [$class: 'StringParameterValue', name: 'PLAYBOOK', value: "${PLAYBOOK}"],
@@ -72,8 +53,10 @@ pipeline {
         timeout(time: 5, unit: 'MINUTES')
       }
       steps {
+        sh "docker tag ${IMAGE_FRONTEND_BUILD} ${IMAGE_FRONTEND_PREPRODUCTION}"
+        sh "docker push ${IMAGE_FRONTEND_PREPRODUCTION}"
         build job: 'Subtask_Openstack_Playbook', parameters: [
-          [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
+          [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
           [$class: 'StringParameterValue', name: 'PLAYBOOK', value: "${PLAYBOOK}"],
           [$class: 'StringParameterValue', name: 'PLAYBOOKPARAMS', value: "-e cmdb_id=app_dataportaal_pre"]
         ]
@@ -96,6 +79,8 @@ pipeline {
         timeout(time: 5, unit: 'MINUTES')
       }
       steps {
+        sh "docker tag ${IMAGE_FRONTEND_BUILD} ${IMAGE_FRONTEND_PRODUCTION}"
+        sh "docker push ${IMAGE_FRONTEND_PRODUCTION}"
         build job: 'Subtask_Openstack_Playbook', parameters: [
           [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
           [$class: 'StringParameterValue', name: 'PLAYBOOK', value: "${PLAYBOOK}"],
