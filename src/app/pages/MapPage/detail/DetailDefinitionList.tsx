@@ -18,23 +18,17 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
 
   return (
     <DefinitionList>
-      {entries.map(({ term, description, link, alert }) => {
-        if (!description) {
-          return null
-        }
-
-        return (
-          <DefinitionListItem term={term} key={term}>
-            {renderDescription(description, link)}
-            {alert && <Alert>{alert}</Alert>}
-          </DefinitionListItem>
-        )
-      })}
+      {entries.map(({ term, description, link, alert }) => (
+        <DefinitionListItem term={term} key={term}>
+          {renderDescription(description, link)}
+          {alert && <Alert>{alert}</Alert>}
+        </DefinitionListItem>
+      ))}
     </DefinitionList>
   )
 }
 
-function renderDescription(description: string, link?: LocationDescriptor | null) {
+function renderDescription(description?: string | null, link?: LocationDescriptor | null) {
   if (link) {
     return (
       <Link href={link} inList>
@@ -43,7 +37,7 @@ function renderDescription(description: string, link?: LocationDescriptor | null
     )
   }
 
-  if (description.length > 300) {
+  if (description && description.length > 300) {
     return (
       <ShowMoreShowLess maxHeight="200px">
         <StyledCustomHTMLBlock body={description} />
