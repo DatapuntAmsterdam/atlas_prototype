@@ -22,10 +22,10 @@ interface BouwblokkenResolvedResult {
   _links: ApiPaginateLinkObject
 }
 
-const getListFromApi = (defaultUrl?: string | null, normalize?: (data: any[]) => any[]) => async (
-  url?: string,
-  pageSize = 10,
-): Promise<PaginatedData<Link[]> | null> => {
+const getListFromApi = (
+  defaultUrl?: string | null,
+  normalize?: (data: any[]) => any[] | Promise<any>,
+) => async (url?: string, pageSize = 10): Promise<PaginatedData<Link[]> | null> => {
   const fetchUrl = url ?? defaultUrl
   if (!fetchUrl) {
     return null
@@ -38,7 +38,7 @@ const getListFromApi = (defaultUrl?: string | null, normalize?: (data: any[]) =>
     return null
   }
 
-  const results = normalize ? normalize(response.results) : response.results
+  const results = normalize ? await normalize(response.results) : response.results
 
   return {
     data: results,

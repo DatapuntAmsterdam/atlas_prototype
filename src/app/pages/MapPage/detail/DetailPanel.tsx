@@ -288,7 +288,7 @@ const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyL
 
   return (
     <Wrapper legacyLayout={legacyLayout}>
-      {details.location && (
+      {details.location && !details.data.noPanorama && (
         <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
       )}
       <DetailSpacer />
