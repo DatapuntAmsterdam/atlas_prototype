@@ -9,24 +9,24 @@ export default async function mapFetch(
   serviceDefinition: ServiceDefinition,
 ) {
   const normalizedResult = serviceDefinition.normalization
-    ? await serviceDefinition.normalization(result)
+    ? await serviceDefinition.normalization(result.data)
     : null
   const geometry = result.geometrie ?? result.geometry ?? normalizedResult?.geometry ?? null
   const geometryCenter = geometry && getCenter(geometry)
   const wgs84Center = geometryCenter ? rdToWgs84(geometryCenter) : null
-  let location = normalizedResult?.location ?? wgs84Center ?? null
+  let location = result?.location ?? wgs84Center ?? null
 
   // Some methods do not accept a standard LatLngLiteral, so we need to spread this over.
   if (location) {
     location = {
       ...location,
-      lat: location.latitude,
-      lng: location.longitude,
+      lat: location.latitude ?? location.lng,
+      lng: location.longitude ?? location.lng,
     }
   }
 
   const details = await serviceDefinition.mapDetail(
-    normalizedResult ?? result,
+    normalizedResult ?? result.data,
     detailInfo,
     location,
   )

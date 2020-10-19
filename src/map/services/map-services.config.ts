@@ -351,6 +351,7 @@ const getMainMetaBlock = (result: any, definition: Definition): InfoBoxProps => 
 const getCovidBlock = (result: any): DetailResult => ({
   title: 'COVID-19 Maatregelen',
   subTitle: result.naam,
+  noPanorama: true,
   items: [
     {
       type: DetailResultItemType.DefinitionList,
@@ -1560,6 +1561,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => ({
       title: categoryLabels.parkeervak.singular,
       subTitle: result.id,
+      noPanorama: true,
       items: [
         {
           type: DetailResultItemType.DefinitionList,

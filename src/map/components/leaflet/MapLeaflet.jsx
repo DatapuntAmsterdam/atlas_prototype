@@ -81,7 +81,6 @@ class MapLeaflet extends React.Component {
         getLeafletInstance(this.MapElement)
       }
     }
-
     this.setActiveElement = (element) => {
       if (element) {
         this.activeElement = element.leafletElement
@@ -230,7 +229,6 @@ class MapLeaflet extends React.Component {
       onLoading: ({ sourceTarget }) => this.handleLoading(sourceTarget),
       onLoad: ({ sourceTarget }) => this.handleLoaded(sourceTarget),
     }
-
     return (
       <ReactResizeDetector
         handleWidth

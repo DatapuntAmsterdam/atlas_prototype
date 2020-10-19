@@ -48,7 +48,7 @@ const useDataDetail = (id: string, subType: string, type: string) => {
 
       dispatch(clearMapDetail())
 
-      const mapDetail: any = await fetchDetail(data.data, serviceDefinition, user, {
+      const mapDetail: any = await fetchDetail(data, serviceDefinition, user, {
         type,
         subType,
         id,
