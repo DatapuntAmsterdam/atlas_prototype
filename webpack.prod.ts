@@ -23,6 +23,7 @@ export default [
   createConfig({ legacy: true, mode: 'production' }),
 ].map((config) =>
   merge(config, {
+    bail: true,
     resolve: {
       alias: {
         [path.resolve(srcPath, 'environment.ts')]: path.resolve(srcPath, 'environment.prod.ts'),
