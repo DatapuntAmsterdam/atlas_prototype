@@ -165,7 +165,7 @@ const getPaginatedListBlock = (
     gridArea?: string
     pageSize?: number
     displayFormatter?: (data: any) => string
-    normalize?: (data: any[]) => any[]
+    normalize?: (data: any[]) => any[] | Promise<any>
   },
 ): DetailResultItemPaginatedData => ({
   type: DetailResultItemType.PaginatedData,
@@ -264,7 +264,7 @@ const getShowInTableBlock = (filters: {
     links: [
       {
         to: {
-          pathname: config[DataSelectionType.BAG].path,
+          pathname: config[DataSelectionType.HR].path,
           search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
         },
         title: 'In tabel weergeven',
@@ -282,7 +282,7 @@ const getShowInTableBlock = (filters: {
     links: [
       {
         to: {
-          pathname: config[DataSelectionType.BAG].path,
+          pathname: config[DataSelectionType.BRK].path,
           search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
         },
         title: 'In tabel weergeven',
@@ -490,7 +490,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications,
         title: 'Adres (ligplaats)',
         subTitle: result._display,
-        infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
+        infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
           getBagDefinitionList(nummeraanduidingData),
           getLocationDefinitionListBlock(nummeraanduidingData, '2 / 1 / 3 / 1'),
@@ -634,7 +634,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications,
         title: 'Adres (verblijfsobject)',
         subTitle: result._display,
-        infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
+        infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
           getBagDefinitionList(nummeraanduidingData),
           getLocationDefinitionListBlock(nummeraanduidingData, '2 / 1 / 3 / 1'),
@@ -650,6 +650,18 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.MONUMENTEN,
             `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${result.hoofdadres?.landelijk_id}`,
+            {
+              // This is pretty terrible, but if a result has the key 'hoort_bij_monument', it should fetch data
+              // that is linked to that and show that in the frontend instead.
+              normalize: async (resultToNormalize: any) =>
+                Promise.all(
+                  resultToNormalize?.map(async (res: any) =>
+                    res?.hoort_bij_monument
+                      ? fetchWithToken(res?.hoort_bij_monument?._links?.self?.href)
+                      : res,
+                  ),
+                ),
+            },
           ),
           getConstructionFileList(detailInfo),
         ],
@@ -660,7 +672,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'bag/openbareruimte',
     endpoint: 'bag/v1.1/openbareruimte',
     mapDetail: (result) => ({
-      title: result.type as string,
+      title: GLOSSARY.DEFINITIONS.OPENBARERUIMTE.singular,
       subTitle: result._display,
       items: [
         {
@@ -703,6 +715,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications,
         title: categoryLabels.pand.singular,
         subTitle: result._display,
+        infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.PAND),
         items: [
           {
             type: DetailResultItemType.DefinitionList,
@@ -763,6 +776,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications,
         title: 'Adres (standplaats)',
         subTitle: result._display,
+        infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
           getBagDefinitionList(nummeraanduidingData),
           getLocationDefinitionListBlock(nummeraanduidingData, '2 / 1 / 3 / 1'),
@@ -1195,6 +1209,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           GLOSSARY.DEFINITIONS.GEBIEDSGERICHTWERKEN,
           result?.gebiedsgerichtwerken?.href,
         ),
+        ...getShowInTableBlock({
+          key: 'stadsdeel_naam',
+          value: result.naam,
+        }),
         gebiedInBeeldBlock,
       ],
     }),
@@ -1392,6 +1410,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     endpoint: 'monumenten/monumenten',
     mapDetail: (result) => ({
       title: categoryLabels.monument.singular,
+      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.MONUMENTEN),
       subTitle: result._display,
       items: [
         {
@@ -1404,6 +1423,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Naam',
               description: result?.monumentnaam,
+            },
+            {
+              term: 'Status',
+              description: result?.monumentstatus,
             },
             {
               term: 'Type',
@@ -1427,7 +1450,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'In onderzoek',
-              description: result?.in_onderzoek,
+              description: result?.in_onderzoek === 'J' ? 'Ja' : 'Nee',
             },
             {
               term: 'Beschrijving',
@@ -2036,6 +2059,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => ({
       title: 'Woonplaats',
       subTitle: result._display,
+      noPanorama: true,
       infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.WOONPLAATS),
       items: [
         result.openbare_ruimtes
@@ -2044,7 +2068,6 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               result.openbare_ruimtes.href,
               {
                 pageSize: 25,
-                gridArea: '2 / 1 / 3 / 2',
               },
             )
           : undefined,

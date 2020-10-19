@@ -11,6 +11,7 @@ export interface DetailResult {
   title: string
   subTitle?: string | null
   authScope?: string
+  noPanorama?: boolean
   items: DetailResultItem[]
   notifications?: DetailResultNotification[]
   infoBox?: InfoBoxProps
@@ -393,6 +394,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   meetbouten?: string | null
   monumentnummer?: string | null
   monumentnaam?: string | null
+  monumentstatus?: string | null
   metingen?: ApiLink | null
   monumenttype?: string | null
   architect_ontwerp_monument?: string | null
