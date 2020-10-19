@@ -21,23 +21,6 @@ pipeline {
   }
 
   stages {
-    stage('Unit tests') {
-      options {
-        timeout(time: 30, unit: 'MINUTES')
-      }
-      environment {
-        PROJECT = "${PROJECT_PREFIX}unit"
-      }
-      steps {
-        sh "docker-compose -p ${PROJECT} up --build --exit-code-from test-unit test-unit"
-      }
-      post {
-        always {
-          sh "docker-compose -p ${PROJECT} down -v || true"
-        }
-      }
-    }
-
     stage('Build and push Docker image') {
       options {
         timeout(time: 30, unit: 'MINUTES')
