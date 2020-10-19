@@ -3,15 +3,14 @@ import L from 'leaflet'
 import 'proj4'
 import 'proj4leaflet'
 
-import { getRdObject } from '../../../../services/crs-service'
 import ICON_CONFIG from '../../services/icon-config.constant'
 
+// Todo: AfterBeta: can be removed
 class RdGeoJson extends GeoJSON {
   createLeafletElement() {
     const { data, style } = this.props
     const geometry = {
       ...data.geometry,
-      crs: getRdObject(),
     }
     const customStyle = {
       color: 'red',
