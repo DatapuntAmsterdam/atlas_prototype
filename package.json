@@ -198,7 +198,7 @@
     "karma-sourcemap-loader": "0.3.8",
     "karma-webpack": "4.0.2",
     "mini-css-extract-plugin": "^1.0.0",
-    "postcss": "^8.0.9",
+    "postcss": "^8.1.2",
     "postcss-loader": "^4.0.4",
     "prettier": "2.1.2",
     "react-test-renderer": "16.14.0",
