@@ -221,7 +221,7 @@ const getShowInTableBlock = (filters: {
     links: [
       {
         to: {
-          pathname: config[DataSelectionType.BAG].path,
+          pathname: config[DataSelectionType.HR].path,
           search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
         },
         title: 'In tabel weergeven',
@@ -239,7 +239,7 @@ const getShowInTableBlock = (filters: {
     links: [
       {
         to: {
-          pathname: config[DataSelectionType.BAG].path,
+          pathname: config[DataSelectionType.BRK].path,
           search: `${PARAMETERS.VIEW}=volledig&${PARAMETERS.FILTERS}={"${filters.key}":"${filters.value}"}`,
         },
         title: 'In tabel weergeven',
