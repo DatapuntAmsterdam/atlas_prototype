@@ -197,7 +197,7 @@
     "karma-phantomjs-launcher": "1.0.4",
     "karma-sourcemap-loader": "0.3.8",
     "karma-webpack": "4.0.2",
-    "mini-css-extract-plugin": "^1.0.0",
+    "mini-css-extract-plugin": "^1.1.0",
     "postcss": "^8.1.2",
     "postcss-loader": "^4.0.4",
     "prettier": "2.1.2",
