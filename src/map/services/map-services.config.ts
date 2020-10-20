@@ -1258,7 +1258,6 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => ({
       title: categoryLabels.grondexploitatie.singular,
       subTitle: result.plannaam,
-      noPanorama: true,
       items: [
         {
           type: DetailResultItemType.DefinitionList,

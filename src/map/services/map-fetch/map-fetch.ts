@@ -20,7 +20,7 @@ export default async function mapFetch(
   if (location) {
     location = {
       ...location,
-      lat: location.latitude ?? location.lng,
+      lat: location.latitude ?? location.lat,
       lng: location.longitude ?? location.lng,
     }
   }
