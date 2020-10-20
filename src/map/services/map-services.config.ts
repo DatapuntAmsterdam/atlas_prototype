@@ -102,8 +102,6 @@ export const endpointTypes = {
   vastgoed: 'vsd/vastgoed',
   vestiging: 'handelsregister/vestiging/',
   winkelgebied: 'vsd/winkgeb',
-  wkpbBeperking: 'wkpb/beperking',
-  wkpbUitreksel: 'brk/object-wkpb',
   woonplaats: 'bag/v1.1/woonplaats',
 }
 
@@ -1260,6 +1258,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => ({
       title: categoryLabels.grondexploitatie.singular,
       subTitle: result.plannaam,
+      noPanorama: true,
       items: [
         {
           type: DetailResultItemType.DefinitionList,
