@@ -132,7 +132,7 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                           }
                         >
                           <span className="c-data-selection-available-filters__item-label">
-                            <span className="qa-option-label">{option.label ?? '(geen)'}</span>
+                            <span className="qa-option-label">{option.label || '(geen)'}</span>
                             {showOptionCounts && <span>({option.count})</span>}
                           </span>
                         </button>
