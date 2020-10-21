@@ -4,13 +4,12 @@ import { LocationDescriptor } from 'history'
 import { ReactNode } from 'react'
 import NotificationLevel from '../../app/models/notification'
 import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
+import AuthScope from '../../shared/services/api/authScope'
 
 // TODO: Revisit the type information here once the map services have been made type safe (also come up with shorter names).
-
 export interface DetailResult {
   title: string
   subTitle?: string | null
-  authScope?: string
   noPanorama?: boolean
   items: DetailResultItem[]
   notifications?: DetailResultNotification[]
@@ -30,6 +29,15 @@ export enum DetailResultItemType {
   LinkList = 'link-list',
   PaginatedData = 'paginated-data',
   GroupedItems = 'grouped-items',
+}
+
+export interface DetailAuthentication {
+  authScopes?: AuthScope[]
+  authScopeRequired?: boolean
+  /**
+   * A string explaining which info is hidden from the unauthorized user
+   */
+  authExcludedInfo?: string
 }
 
 export type DetailResultItem =
@@ -68,7 +76,7 @@ export interface PaginatedData<T> {
   previous: string | null
 }
 
-export interface DefaultDetailResultItem {
+export interface DefaultDetailResultItem extends DetailAuthentication {
   infoBox?: InfoBoxProps
   // Todo: remove gridArea when legacy map is removed
   gridArea?: string

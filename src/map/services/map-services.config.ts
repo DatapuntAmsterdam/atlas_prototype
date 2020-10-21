@@ -14,6 +14,7 @@ import { fetchWithToken } from '../../shared/services/api/api'
 import PARAMETERS from '../../store/parameters'
 import { getDetailPageData } from '../../store/redux-first-router/actions'
 import {
+  DetailAuthentication,
   DetailInfo,
   DetailResult,
   DetailResultItem,
@@ -52,6 +53,7 @@ import {
 } from './normalize/normalize'
 import vestiging from './vestiging/vestiging'
 import getRdAndWgs84Coordinates from '../../shared/services/coordinate-reference-system/getRdAndWgs84Coordinates'
+import AuthScope from '../../shared/services/api/authScope'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -105,10 +107,9 @@ export const endpointTypes = {
   woonplaats: 'bag/v1.1/woonplaats',
 }
 
-export interface ServiceDefinition {
+export interface ServiceDefinition extends DetailAuthentication {
   type: string
   endpoint: string
-  authScope?: string
   definition?: Definition
   normalization?: (result: any) => any | Promise<any>
   mapDetail: (
@@ -164,27 +165,28 @@ const getPaginatedListBlock = (
     pageSize?: number
     displayFormatter?: (data: any) => string
     normalize?: (data: any[]) => any[] | Promise<any>
-  },
+  } & DetailAuthentication,
 ): DetailResultItemPaginatedData => ({
   type: DetailResultItemType.PaginatedData,
   getData: getListFromApi(apiUrl, settings?.normalize),
   pageSize: settings?.pageSize || 10,
   // Todo: AfterBeta: gridArea can be removed
   gridArea: settings?.gridArea || 'auto / 1 / auto / 3',
+  infoBox: getInfoBox({
+    description: definition.description,
+    url: definition.url,
+    plural: definition.plural,
+  }),
+  title: definition.plural,
+  ...settings,
   toView: (data) => {
     const results = data?.map((result: any) => ({
       to: buildDetailUrl(getDetailPageData(result._links.self.href)),
       title: settings?.displayFormatter ? settings.displayFormatter(result) : result._display,
     }))
     return {
-      title: definition.plural,
       type: DetailResultItemType.LinkList,
       links: results,
-      infoBox: getInfoBox({
-        description: definition.description,
-        url: definition.url,
-        plural: definition.plural,
-      }),
     }
   },
 })
@@ -378,7 +380,7 @@ const getCovidBlock = (result: any): DetailResult => ({
 
 const getVerblijfsObjectBlock = (result: any): DetailResultItemDefinitionList => ({
   type: DetailResultItemType.DefinitionList,
-  title: GLOSSARY.DEFINITIONS.LIGPLAATS.singular,
+  title: GLOSSARY.DEFINITIONS.VERBLIJFSOBJECT.singular,
   infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.VERBLIJFSOBJECT),
   entries: [
     {
@@ -643,9 +645,15 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres?.landelijk_id}`,
+            {
+              authScopes: [AuthScope.HR_R],
+              authScopeRequired: true,
+            },
           ),
           // Todo: DI-1207 Create sub link list (example: /data/bag/verblijfsobject/id0363010000665114/)
-          getPaginatedListBlock(GLOSSARY.DEFINITIONS.OBJECT, result.kadastrale_objecten?.href),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.OBJECT, result.kadastrale_objecten?.href, {
+            authScopes: [AuthScope.BD_R],
+          }),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.MONUMENTEN,
             `${environment.API_ROOT}monumenten/situeringen/?betreft_nummeraanduiding=${result.hoofdadres?.landelijk_id}`,
@@ -673,6 +681,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     mapDetail: (result) => ({
       title: GLOSSARY.DEFINITIONS.OPENBARERUIMTE.singular,
       subTitle: result._display,
+      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.OPENBARERUIMTE),
       items: [
         {
           type: DetailResultItemType.DefinitionList,
@@ -740,6 +749,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.pandidentificatie}`,
+            {
+              authScopes: [AuthScope.HR_R],
+            },
           ),
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.MONUMENTEN, result?._monumenten?.href),
         ],
@@ -801,6 +813,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${result.hoofdadres?.landelijk_id}`,
+            {
+              authScopes: [AuthScope.HR_R],
+            },
           ),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.MONUMENTEN,
@@ -1280,9 +1295,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       return {
         title: categoryLabels.kadastraalObject.singular,
         subTitle: result._display,
+        infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.OBJECT),
         items: [
           {
             type: DetailResultItemType.DefinitionList,
+            authScopes: [AuthScope.BRK_RO],
+            authExcludedInfo:
+              'koopsom, koopjaar en cultuur (on)bebouwd; zakelijke rechten en aantekeningen',
             entries: [
               {
                 term: 'Kadastrale gemeentecode',
@@ -1387,9 +1406,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           type: DetailResultItemType.PaginatedData,
           pageSize: 10,
           getData: getListFromApi(result?.metingen?.href, meetboutTable),
+          title: 'Regimes',
           toView: (data) => ({
             type: DetailResultItemType.Table,
-            title: 'Regimes',
             headings: [
               { title: 'Datum', key: 'datum' },
               { title: 'Hoogte NAP', key: 'hoogte_nap' },
@@ -1414,6 +1433,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.DefinitionList,
+          authExcludedInfo:
+            'type, architect en opdrachtgever, bouwjaar, oorspronkelijke functie, beschrijving en redengevende omschrijving',
+          authScopes: [AuthScope.MON_RDM],
           entries: [
             {
               term: 'Nummer',
@@ -1489,6 +1511,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.DefinitionList,
+          authScopes: [AuthScope.MON_RBC],
+          authExcludedInfo: 'beschrijving',
           entries: [
             { term: 'Nummer', description: result.monumentnummer_complex },
             { term: 'Naam', description: result.complexnaam },
@@ -1594,9 +1618,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.DefinitionList,
-          entries: [{ term: 'Omschrijving', description: result.gebied_omschrijving }].filter(
-            hasDescription,
-          ),
+          entries: [{ term: 'Omschrijving', description: result.gebied_omschrijving }],
         },
       ],
     }),
@@ -1611,9 +1633,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.DefinitionList,
-          entries: [{ term: 'Omschrijving', description: result.omschrijving }].filter(
-            hasDescription,
-          ),
+          entries: [{ term: 'Omschrijving', description: result.omschrijving }],
         },
       ],
     }),
@@ -1694,8 +1714,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.vestiging]: {
     type: 'handelsregister/vestiging',
     endpoint: 'handelsregister/vestiging',
-    authScope: 'HR/R',
     definition: GLOSSARY.DEFINITIONS.VESTIGING,
+    authScopes: [AuthScope.HR_R],
+    authScopeRequired: true,
     normalization: vestiging,
     mapDetail: (result) => {
       const notifications: DetailResultNotification[] = []
@@ -1838,10 +1859,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     }),
   },
   [endpointTypes.kadastraalSubject]: {
-    authScope: 'BRK/RS',
     type: 'brk/subject',
     endpoint: 'brk/subject',
     definition: GLOSSARY.DEFINITIONS.SUBJECT,
+    authScopes: [AuthScope.BRK_RS],
+    authScopeRequired: true,
+    authExcludedInfo: `kadastrale subjecten. Om ook zakelijke rechten van natuurlijke personen te bekijken, moet je als medewerker bovendien speciale bevoegdheden hebben.`,
     mapDetail: (result) => ({
       title: categoryLabels.kadastraalSubject.singular,
       subTitle: result._display,
@@ -1974,8 +1997,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
   [endpointTypes.maatschappelijkeActiviteiten]: {
     type: 'handelsregister/maatschappelijkeactiviteit',
     endpoint: 'handelsregister/maatschappelijkeactiviteit',
-    authScope: 'HR/R',
     definition: GLOSSARY.DEFINITIONS.MAATSCHAPPELIJKEACTIVITEIT,
+    authScopes: [AuthScope.HR_R],
+    authScopeRequired: true,
     normalization: async (data) => {
       if (data.eigenaar) {
         const extraData = await fetchWithToken(data.eigenaar)
@@ -2250,8 +2274,4 @@ export function isGenericTemplate(templateUrl?: string) {
 
   // @ts-ignore
   return genericDetailTypes.some((type) => templateUrl.includes(type))
-}
-
-function hasDescription({ description }: { description: any }) {
-  return !!description
 }

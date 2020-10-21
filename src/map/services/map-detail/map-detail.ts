@@ -1,8 +1,5 @@
-import mapFetch from '../map-fetch/map-fetch'
-import { endpointTypes, ServiceDefinition } from '../map-services.config'
+import { endpointTypes } from '../map-services.config'
 import environment from '../../../environment'
-import { UserState } from '../../../shared/ducks/user/user'
-import { DetailInfo } from '../../types/details'
 
 export const pageEndpointTypeMapping = {
   'bag/ligplaats/': 'bag/v1.1/ligplaats/',
@@ -49,21 +46,4 @@ export const getEndpointTypeForResult = (endpointType: string, detail: any) => {
     return endpointTypes.adressenNummeraanduiding
   }
   return endpointType
-}
-
-export default async function fetchDetail(
-  result: any,
-  serviceDefinition: ServiceDefinition,
-  user: UserState,
-  detailInfo: DetailInfo,
-) {
-  const { authScope } = serviceDefinition
-  const isAuthorized = !authScope || user.scopes.includes(authScope)
-
-  const detail = await mapFetch(result, detailInfo, serviceDefinition)
-
-  return {
-    ...detail,
-    isAuthorized,
-  }
 }

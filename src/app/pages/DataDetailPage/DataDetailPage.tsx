@@ -6,7 +6,7 @@ import { DetailInfo } from '../../../map/types/details'
 import PromiseResult from '../../components/PromiseResult/PromiseResult'
 import ShareBar from '../../components/ShareBar/ShareBar'
 import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
-import { getPanelTitle, HeadingWrapper, PanelContents } from '../MapPage/detail/DetailPanel'
+import { HeadingWrapper, RenderDetails } from '../MapPage/detail/DetailPanel'
 import useDataDetail from './useDataDetail'
 
 const DetailWrapper = styled(Container)`
@@ -42,10 +42,10 @@ const DataDetailPage: FunctionComponent = () => {
         <DetailWrapper>
           <DetailType>{result.value?.data.title}</DetailType>
           <HeadingWrapper>
-            <Heading>{getPanelTitle(result)}</Heading>
+            <Heading>{result.value.data.subTitle || 'Detailweergave'}</Heading>
             {result?.value?.data?.infoBox && <DetailInfoBox {...result?.value?.data?.infoBox} />}
           </HeadingWrapper>
-          <PanelContents legacyLayout result={result} />
+          <RenderDetails legacyLayout details={result.value} />
           <ShareBar />
         </DetailWrapper>
       )}

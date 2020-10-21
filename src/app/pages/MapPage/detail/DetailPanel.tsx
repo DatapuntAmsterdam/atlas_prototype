@@ -17,30 +17,25 @@ import {
   DetailResultItemType,
   PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
-import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
 import useParam from '../../../utils/useParam'
-import usePromise, {
-  PromiseResult as PromiseResultType,
-  PromiseStatus,
-} from '../../../utils/usePromise'
 import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
 import { detailUrlParam } from '../query-params'
 import DetailDefinitionList from './DetailDefinitionList'
 import DetailHeading from './DetailHeading'
-import DetailInfoBox from './DetailInfoBox'
+import DetailInfoBox, { InfoBoxProps } from './DetailInfoBox'
 import DetailLinkList from './DetailLinkList'
 import DetailSpacer from './DetailSpacer'
 import DetailTable from './DetailTable'
+import { AuthError } from '../../../../shared/services/api/errors'
+import useAuthScope from '../../../utils/useAuthScope'
+import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
+import MoreResultsWhenLoggedIn from '../../../components/Alerts/MoreResultsWhenLoggedIn'
 
 interface DetailPanelProps {
   detailUrl: string
 }
-
-const StyledLoadingSpinner = styled(LoadingSpinner)`
-  margin: ${themeSpacing(4)} 0;
-`
 
 const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
@@ -48,6 +43,10 @@ const Message = styled(Paragraph)`
 
 const ShowMoreButton = styled(Button)`
   margin-top: ${themeSpacing(1)};
+`
+
+const StyledMoreResultsWhenLoggedIn = styled(MoreResultsWhenLoggedIn)`
+  order: -1; // Make sure the alert is always on top and not pushed down because of grid
 `
 
 // Todo: remove gridArea when legacy map is removed
@@ -97,59 +96,59 @@ type LegacyLayout = {
   legacyLayout?: boolean
 }
 
-export const PanelContents: FunctionComponent<
-  { result: PromiseResultType<MapDetails | null> } & LegacyLayout
-> = ({ result, legacyLayout }) => {
-  if (result.status === PromiseStatus.Pending) {
-    return <StyledLoadingSpinner />
-  }
-
-  if (result.status === PromiseStatus.Rejected) {
-    return <Message>Details konden niet geladen worden.</Message>
-  }
-  return <RenderDetails legacyLayout={legacyLayout} details={result.value} />
-}
-
 const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
   const [, setDetailUrl] = useParam(detailUrlParam)
   const { setDetailFeature } = useContext(MapContext)
-  const result = usePromise(
-    useMemo(async () => {
-      const detailParams = parseDetailPath(detailUrl)
-      const serviceDefinition = getServiceDefinition(`${detailParams.type}/${detailParams.subType}`)
+  const { isUserAuthorized } = useAuthScope()
+  const promise = useMemo(async () => {
+    const detailParams = parseDetailPath(detailUrl)
+    const serviceDefinition = getServiceDefinition(`${detailParams.type}/${detailParams.subType}`)
 
-      if (!serviceDefinition) {
-        return Promise.resolve(null)
-      }
+    // Todo: Redirect to 404?
+    if (!serviceDefinition) {
+      return Promise.resolve(null)
+    }
 
-      const data = await fetchDetailData(serviceDefinition, detailParams.id as string)
-      const details = await toMapDetails(serviceDefinition, data, detailParams)
+    const userIsAuthorized = isUserAuthorized(serviceDefinition.authScopes)
 
-      if (details.geometry) {
-        setDetailFeature({
-          id: detailParams.id,
-          type: 'Feature',
-          geometry: details.geometry,
-          properties: null,
-        })
-      } else {
-        setDetailFeature(null)
-      }
+    if (!userIsAuthorized && serviceDefinition.authScopeRequired) {
+      const error = new AuthError(401, serviceDefinition.authExcludedInfo || '')
+      return Promise.reject(error)
+    }
 
-      return details
-    }, [detailUrl]),
-  )
+    const data = await fetchDetailData(serviceDefinition, detailParams.id as string)
+    const details = await toMapDetails(serviceDefinition, data, detailParams)
 
-  const subTitle = (result.status === PromiseStatus.Fulfilled && result.value?.data.title) || ''
+    if (details.geometry) {
+      setDetailFeature({
+        id: detailParams.id,
+        type: 'Feature',
+        geometry: details.geometry,
+        properties: null,
+      })
+    } else {
+      setDetailFeature(null)
+    }
+
+    return {
+      ...details,
+      showAuthAlert: !userIsAuthorized,
+      authExcludedInfo: serviceDefinition.authExcludedInfo,
+    }
+  }, [detailUrl])
 
   return (
-    <MapPanelContent
-      title={getPanelTitle(result)}
-      subTitle={subTitle}
-      onClose={() => setDetailUrl(null)}
-    >
-      <PanelContents result={result} />
-    </MapPanelContent>
+    <PromiseResult promise={promise}>
+      {({ value }) => (
+        <MapPanelContent
+          title={value?.data.subTitle || 'Detailweergave'}
+          subTitle={value?.data.title || ''}
+          onClose={() => setDetailUrl(null)}
+        >
+          <RenderDetails details={value} />
+        </MapPanelContent>
+      )}
+    </PromiseResult>
   )
 }
 
@@ -168,12 +167,33 @@ const GroupedItems: FunctionComponent<GroupedItemsProps> = ({ item }) => (
   </>
 )
 
-export interface ItemProps {
-  item: DetailResultItem
+interface HeaderProps {
   subItem?: boolean
+  title: string
+  infoBox?: InfoBoxProps
 }
 
-const Item: FunctionComponent<ItemProps> = ({ item, subItem }) => {
+const Header: FunctionComponent<HeaderProps> = ({ title, subItem, infoBox }) => (
+  <HeadingWrapper>
+    <DetailHeading styleAs={subItem ? 'h6' : 'h4'}>{title}</DetailHeading>
+    {infoBox && <DetailInfoBox {...infoBox} />}
+  </HeadingWrapper>
+)
+
+export interface ItemProps {
+  item: DetailResultItem
+  /**
+   * Indicate if the Item to render is inside of an other component and thus the header should be lower in hierarchy
+   */
+  subItem?: boolean
+  /**
+   * In case of rendering an Item from PaginatedData component, we want to hide the header otherwise
+   * it will render 2 times
+   */
+  hideHeader?: boolean
+}
+
+const Item: FunctionComponent<ItemProps> = ({ item, subItem, hideHeader }) => {
   const component = (() => {
     switch (item?.type) {
       case DetailResultItemType.DefinitionList:
@@ -192,16 +212,18 @@ const Item: FunctionComponent<ItemProps> = ({ item, subItem }) => {
   })()
 
   return (
-    <div>
-      {item.title && (
-        <HeadingWrapper>
-          <DetailHeading styleAs={subItem ? 'h6' : 'h4'}>{item.title}</DetailHeading>
-          {item.infoBox && <DetailInfoBox {...item.infoBox} />}
-        </HeadingWrapper>
+    <>
+      {item.title && !hideHeader && (
+        <Header title={item.title} infoBox={item.infoBox} subItem={subItem} />
       )}
-
-      {component}
-    </div>
+      <AuthenticationWrapper
+        authScopes={item?.authScopes}
+        excludedResults={item?.authExcludedInfo || item.title}
+        authScopeRequired={item.authScopeRequired}
+      >
+        {() => component}
+      </AuthenticationWrapper>
+    </>
   )
 }
 
@@ -231,7 +253,7 @@ const PaginatedResult: FunctionComponent<PaginatedResultProps> = ({
 
   return (
     <>
-      <Item item={resultItem} />
+      <Item item={resultItem} hideHeader />
       {showMoreButton && (
         <ShowMoreButton
           variant="textButton"
@@ -252,7 +274,6 @@ interface PaginatedDataProps {
   item: DetailResultItemPaginatedData
 }
 
-// Todo: DI-1204: It's currently not possible to show the title / infobox when promise is rejected
 const PaginatedData: FunctionComponent<PaginatedDataProps> = ({ item }) => {
   const [pageSize, setPaginatedUrl] = useState(item.pageSize)
   const promise = useMemo(() => item.getData(undefined, pageSize), [pageSize])
@@ -278,16 +299,19 @@ const PaginatedData: FunctionComponent<PaginatedDataProps> = ({ item }) => {
 }
 
 export interface RenderDetailsProps extends LegacyLayout {
-  details: MapDetails | null
+  details: (MapDetails & { showAuthAlert: boolean; authExcludedInfo?: string }) | null
 }
 
-const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyLayout }) => {
+export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyLayout }) => {
   if (!details) {
+    // Todo: redirect to 404?
     return <Message>Geen detailweergave beschikbaar.</Message>
   }
-
   return (
     <Wrapper legacyLayout={legacyLayout}>
+      {details.showAuthAlert && (
+        <StyledMoreResultsWhenLoggedIn excludedResults={details.authExcludedInfo} />
+      )}
       {details.location && !details.data.noPanorama && (
         <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
       )}
@@ -314,14 +338,6 @@ const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyL
       })}
     </Wrapper>
   )
-}
-
-export function getPanelTitle(result: PromiseResultType<MapDetails | null>) {
-  if (result.status === PromiseStatus.Fulfilled && result.value) {
-    return result.value.data.subTitle
-  }
-
-  return 'Detailweergave'
 }
 
 export default DetailPanel

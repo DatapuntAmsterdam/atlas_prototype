@@ -1,13 +1,10 @@
-import { Alert, Button, Heading, Paragraph } from '@amsterdam/asc-ui'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 import { AuthError } from '../../../shared/services/api/errors'
-import { login } from '../../../shared/services/auth/auth'
-import useDocumentTitle from '../../utils/useDocumentTitle'
 import usePromise, { PromiseFulfilledResult, PromiseStatus } from '../../utils/usePromise'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
 
 const StyledLoadingSpinner = styled(LoadingSpinner)`
   position: absolute;
@@ -32,8 +29,6 @@ const PromiseResult: <T>(props: PageTemplateProps<T>) => ReactElement | null = (
   children,
 }) => {
   const result = usePromise(promise)
-  const { trackEvent } = useMatomo()
-  const { documentTitle } = useDocumentTitle()
 
   if (result.status === PromiseStatus.Fulfilled) {
     return children(result)
@@ -44,21 +39,7 @@ const PromiseResult: <T>(props: PageTemplateProps<T>) => ReactElement | null = (
   }
 
   if (result.error instanceof AuthError && result.error.code === 401) {
-    return (
-      <Alert level="attention" dismissible>
-        <Heading forwardedAs="h3">Meer resultaten na inloggen</Heading>
-        <Paragraph>{result.error.message}</Paragraph>
-        <Button
-          variant="textButton"
-          onClick={() => {
-            trackEvent({ category: 'login', name: documentTitle, action: 'inloggen' })
-            login()
-          }}
-        >
-          Inloggen
-        </Button>
-      </Alert>
-    )
+    return <MoreResultsWhenLoggedIn excludedResults={result.error.message} />
   }
 
   return (

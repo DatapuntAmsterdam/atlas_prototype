@@ -356,7 +356,7 @@ const MapLegend = ({
                     {!isAuthorised(mapLayer, user) && (
                       <div className="map-legend__notification">
                         <span>
-                          <LoginLink inList={false}>Zichtbaar na inloggen</LoginLink>
+                          <LoginLink showChevron={false}>Zichtbaar na inloggen</LoginLink>
                         </span>
                       </div>
                     )}
