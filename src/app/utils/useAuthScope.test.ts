@@ -7,13 +7,13 @@ describe('useAuthScope', () => {
   it('isUserAuthorized should return a boolean whether user is authorized or not', () => {
     jest
       .spyOn(reactRedux, 'useSelector')
-      .mockImplementation(() => [AuthScope.HR_R, AuthScope.BRK_RS, AuthScope.BD_R])
+      .mockImplementation(() => [AuthScope.HrR, AuthScope.BrkRs, AuthScope.BdR])
     const { result } = renderHook(() => useAuthScope())
-    expect(result.current.isUserAuthorized([AuthScope.BRK_RS])).toBe(true)
-    expect(result.current.isUserAuthorized([AuthScope.BRK_RS, AuthScope.HR_R])).toBe(true)
+    expect(result.current.isUserAuthorized([AuthScope.BrkRs])).toBe(true)
+    expect(result.current.isUserAuthorized([AuthScope.BrkRs, AuthScope.HrR])).toBe(true)
 
     // Not in scope
-    expect(result.current.isUserAuthorized([AuthScope.BRK_RO])).toBe(false)
-    expect(result.current.isUserAuthorized([AuthScope.CAT_R, AuthScope.BD_X])).toBe(false)
+    expect(result.current.isUserAuthorized([AuthScope.BrkRo])).toBe(false)
+    expect(result.current.isUserAuthorized([AuthScope.CatR, AuthScope.BdX])).toBe(false)
   })
 })

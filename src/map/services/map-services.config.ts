@@ -646,13 +646,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres?.landelijk_id}`,
             {
-              authScopes: [AuthScope.HR_R],
+              authScopes: [AuthScope.HrR],
               authScopeRequired: true,
             },
           ),
           // Todo: DI-1207 Create sub link list (example: /data/bag/verblijfsobject/id0363010000665114/)
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.OBJECT, result.kadastrale_objecten?.href, {
-            authScopes: [AuthScope.BD_R],
+            authScopes: [AuthScope.BdR],
           }),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.MONUMENTEN,
@@ -750,7 +750,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.pandidentificatie}`,
             {
-              authScopes: [AuthScope.HR_R],
+              authScopes: [AuthScope.HrR],
             },
           ),
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.MONUMENTEN, result?._monumenten?.href),
@@ -814,7 +814,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${result.hoofdadres?.landelijk_id}`,
             {
-              authScopes: [AuthScope.HR_R],
+              authScopes: [AuthScope.HrR],
             },
           ),
           getPaginatedListBlock(
@@ -1290,6 +1290,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     normalization: (result) => kadastraalObject(result),
     type: 'brk/object',
     endpoint: 'brk/object',
+    authScopes: [AuthScope.BrkRo],
+    authExcludedInfo:
+      'koopsom, koopjaar en cultuur (on)bebouwd; zakelijke rechten en aantekeningen',
     mapDetail: (result) => {
       const { brkData } = result
       return {
@@ -1299,9 +1302,6 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           {
             type: DetailResultItemType.DefinitionList,
-            authScopes: [AuthScope.BRK_RO],
-            authExcludedInfo:
-              'koopsom, koopjaar en cultuur (on)bebouwd; zakelijke rechten en aantekeningen',
             entries: [
               {
                 term: 'Kadastrale gemeentecode',
@@ -1435,7 +1435,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           type: DetailResultItemType.DefinitionList,
           authExcludedInfo:
             'type, architect en opdrachtgever, bouwjaar, oorspronkelijke functie, beschrijving en redengevende omschrijving',
-          authScopes: [AuthScope.MON_RDM],
+          authScopes: [AuthScope.MonRdm],
           entries: [
             {
               term: 'Nummer',
@@ -1511,7 +1511,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       items: [
         {
           type: DetailResultItemType.DefinitionList,
-          authScopes: [AuthScope.MON_RBC],
+          authScopes: [AuthScope.MonRbc],
           authExcludedInfo: 'beschrijving',
           entries: [
             { term: 'Nummer', description: result.monumentnummer_complex },
@@ -1715,7 +1715,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'handelsregister/vestiging',
     endpoint: 'handelsregister/vestiging',
     definition: GLOSSARY.DEFINITIONS.VESTIGING,
-    authScopes: [AuthScope.HR_R],
+    authScopes: [AuthScope.HrR],
     authScopeRequired: true,
     normalization: vestiging,
     mapDetail: (result) => {
@@ -1862,7 +1862,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'brk/subject',
     endpoint: 'brk/subject',
     definition: GLOSSARY.DEFINITIONS.SUBJECT,
-    authScopes: [AuthScope.BRK_RS],
+    authScopes: [AuthScope.BrkRs],
     authScopeRequired: true,
     authExcludedInfo: `kadastrale subjecten. Om ook zakelijke rechten van natuurlijke personen te bekijken, moet je als medewerker bovendien speciale bevoegdheden hebben.`,
     mapDetail: (result) => ({
@@ -1998,7 +1998,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     type: 'handelsregister/maatschappelijkeactiviteit',
     endpoint: 'handelsregister/maatschappelijkeactiviteit',
     definition: GLOSSARY.DEFINITIONS.MAATSCHAPPELIJKEACTIVITEIT,
-    authScopes: [AuthScope.HR_R],
+    authScopes: [AuthScope.HrR],
     authScopeRequired: true,
     normalization: async (data) => {
       if (data.eigenaar) {

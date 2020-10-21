@@ -25,17 +25,23 @@ interface BouwblokkenResolvedResult {
 const getListFromApi = (
   defaultUrl?: string | null,
   normalize?: (data: any[]) => any[] | Promise<any>,
-) => async (url?: string, pageSize = 10): Promise<PaginatedData<Link[]> | null> => {
+) => async (url?: string, pageSize = 10): Promise<PaginatedData<Link[]>> => {
+  const emptyResult = {
+    data: [],
+    count: 0,
+    previous: null,
+    next: null,
+  }
   const fetchUrl = url ?? defaultUrl
   if (!fetchUrl) {
-    return null
+    return emptyResult
   }
   const endpoint = new URL(fetchUrl)
   endpoint.searchParams.set('page_size', pageSize.toString())
   const response = await fetchWithToken<BouwblokkenResolvedResult>(endpoint.toString())
 
   if (!response) {
-    return null
+    return emptyResult
   }
 
   const results = normalize ? await normalize(response.results) : response.results
