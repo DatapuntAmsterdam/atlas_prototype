@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import PromiseResult from '../../components/PromiseResult/PromiseResult'
 import ShareBar from '../../components/ShareBar/ShareBar'
 import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
-import { DataDetailPageParams, HeadingWrapper, RenderDetails } from '../MapPage/detail/DetailPanel'
+import { HeadingWrapper, RenderDetails } from '../MapPage/detail/DetailPanel'
 import useDataDetail from './useDataDetail'
 
 const DetailWrapper = styled(Container)`

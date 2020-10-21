@@ -1,5 +1,5 @@
-import { BaseLayerToggle as BaseLayerToggleComponent } from '@amsterdam/arm-core'
 import { useMemo, FunctionComponent } from 'react'
+import { BaseLayerToggle } from '@amsterdam/arm-core'
 import { getMapBaseLayers, MapBaseLayer } from '../../../../map/services'
 import useParam from '../../../utils/useParam'
 import { BaseLayer, baseLayerParam } from '../query-params'
@@ -25,7 +25,7 @@ const topoIds = topoLayers.map(({ id }) => id)
 const aerialIds = aerialLayers.map(({ id }) => id)
 
 // TODO: Refactor BaseLayerToggle to use an object instead of array of MapBaseLayers
-const BaseLayerToggle: FunctionComponent = () => {
+const BaseLayerControl: FunctionComponent = () => {
   const [activeBaseLayer, setActiveBaseLayer] = useParam(baseLayerParam)
 
   const aerialIndex = useMemo(
@@ -39,7 +39,7 @@ const BaseLayerToggle: FunctionComponent = () => {
   )
 
   return (
-    <BaseLayerToggleComponent
+    <BaseLayerToggle
       aerialLayers={aerialLayers}
       topoLayers={topoLayers}
       aerialDefaultIndex={aerialIndex}
@@ -57,4 +57,4 @@ const BaseLayerToggle: FunctionComponent = () => {
   )
 }
 
-export default BaseLayerToggle
+export default BaseLayerControl

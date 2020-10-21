@@ -1,4 +1,3 @@
-import { MapPanelContent } from '@amsterdam/arm-core'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import { Fragment, FunctionComponent, useContext, useEffect, useState } from 'react'
@@ -11,7 +10,6 @@ import {
   toMapDetails,
 } from '../../../../map/services/map'
 import {
-  DetailInfo,
   DetailResultItem,
   DetailResultItemGroupedItems,
   DetailResultItemPaginatedData,
@@ -20,21 +18,23 @@ import {
   PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
 import { AuthError } from '../../../../shared/services/api/customError'
-import AuthAlert from '../../../components/Alerts/AuthAlert'
 import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
-import Spacer from '../../../components/Spacer/Spacer'
-import { routing } from '../../../routes'
 import useAuthScope from '../../../utils/useAuthScope'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
-import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
+import useParam from '../../../utils/useParam'
+import { DrawerPanelHeader, DrawerPanelProps, LargeDrawerPanel } from '../components/DrawerPanel'
 import MapContext from '../MapContext'
-import { panoFovParam, panoHeadingParam, panoPitchParam } from '../query-params'
+import PanoramaPreview, { PreviewContainer } from '../PanoramaPreview'
 import DetailDefinitionList from './DetailDefinitionList'
 import DetailHeading from './DetailHeading'
 import DetailInfoBox from './DetailInfoBox'
 import DetailLinkList from './DetailLinkList'
 import DetailTable from './DetailTable'
+
+interface DetailPanelProps extends DrawerPanelProps {
+  detailUrl: string
+}
 
 const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
@@ -101,13 +101,8 @@ type LegacyLayout = {
   legacyLayout?: boolean
 }
 
-// TODO: 'subType' should be replaced with the 'subType' property on 'DetailInfo'
-// This should happen when the old Angular and Redux Router code has been deleted.
-export interface DataDetailPageParams extends Omit<DetailInfo, 'subType'> {
-  subtype: string
-}
-
-const DetailPanel: FunctionComponent = () => {
+const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl, ...otherProps }) => {
+  const [, setDetailUrl] = useParam(detailUrlPa)
   const { setDetailFeature } = useContext(MapContext)
   const { isUserAuthorized } = useAuthScope()
   const { type, subtype: subType, id } = useParams<DataDetailPageParams>()
@@ -159,29 +154,19 @@ const DetailPanel: FunctionComponent = () => {
   }, [])
 
   return (
-    <PromiseResult factory={() => getDetailData()} deps={[]}>
-      {({ value }) => (
-        <>
-          <MapPanelContent
-            title={value?.data.subTitle || 'Detailweergave'}
-            subTitle={value?.data.title || ''}
-            onClose={() => {
-              history.push({
-                pathname: routing.dataSearchGeo.path,
-                search: buildQueryString([
-                  [panoPitchParam, null],
-                  [panoHeadingParam, null],
-                  [panoFovParam, null],
-                ]),
-              })
-            }}
-          >
-            {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
+    <LargeDrawerPanel {...otherProps}>
+      <PromiseResult promise={promise}>
+        {({ value }) => (
+          <>
+            <DrawerPanelHeader onClose={() => setDetailUrl(null)}>
+              <h2>{value?.data.subTitle ?? 'Detailweergave'}</h2>
+              {value?.data.title && <h3>{value.data.title || ''}</h3>}
+            </DrawerPanelHeader>
             <RenderDetails details={value} />
-          </MapPanelContent>
-        </>
-      )}
-    </PromiseResult>
+          </>
+        )}
+      </PromiseResult>
+    </LargeDrawerPanel>
   )
 }
 

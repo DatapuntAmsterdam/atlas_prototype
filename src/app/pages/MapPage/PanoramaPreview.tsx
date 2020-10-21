@@ -4,13 +4,15 @@ import { FunctionComponent, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-import { FetchPanoramaOptions, getPanoramaThumbnail } from '../../../../api/panorama/thumbnail'
-import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
-import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
-import { PANO_LAYERS } from '../../../components/PanoramaViewer/PanoramaViewer'
-import pickLinkComponent from '../../../utils/pickLinkComponent'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
-import usePromise, { PromiseStatus } from '../../../utils/usePromise'
+import { FetchPanoramaOptions, getPanoramaThumbnail } from '../../../api/panorama/thumbnail'
+import { ForbiddenError } from '../../../shared/services/api/customError'
+import { toPanoramaAndPreserveQuery } from '../../../store/redux-first-router/actions'
+import { getDetailLocation } from '../../../store/redux-first-router/selectors'
+import PanoAlert from '../../components/PanoAlert/PanoAlert'
+import { PANO_LAYERS } from '../../components/PanoramaViewer/PanoramaViewer'
+import useBuildQueryString from '../../utils/useBuildQueryString'
+import useParam from '../../utils/useParam'
+import usePromise, { PromiseStatus } from '../../utils/usePromise'
 import {
   locationParam,
   mapLayersParam,
@@ -18,10 +20,7 @@ import {
   panoHeadingParam,
   panoPitchParam,
   zoomParam,
-} from '../query-params'
-import useParam from '../../../utils/useParam'
-import { ForbiddenError } from '../../../../shared/services/api/customError'
-import PanoAlert from '../../../components/PanoAlert/PanoAlert'
+} from './query-params'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral

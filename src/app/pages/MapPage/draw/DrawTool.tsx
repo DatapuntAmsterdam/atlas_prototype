@@ -1,4 +1,3 @@
-import { MapPanelContext } from '@amsterdam/arm-core'
 import {
   DrawTool as DrawToolComponent,
   ExtendedLayer,
@@ -18,13 +17,12 @@ import {
   useState,
 } from 'react'
 import { useHistory } from 'react-router-dom'
+import { routing } from '../../../routes'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 import useParam from '../../../utils/useParam'
 import MapContext from '../MapContext'
 import { PolyDrawing, polygonParam, polylineParam } from '../query-params'
-import { Overlay, SnapPoint } from '../types'
 import DataSelectionContext from './DataSelectionContext'
-import { routing } from '../../../routes'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -73,17 +71,11 @@ const createPolyLayer = (drawing: PolyDrawing, line = false): PolylineType | Pol
   return polygon
 }
 
-export interface DrawToolProps {
-  setCurrentOverlay: (overlay: Overlay) => void
-}
-
-const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
-  const { setPositionFromSnapPoint } = useContext(MapPanelContext)
-  const { setShowDrawTool } = useContext(MapContext)
+const DrawTool: FunctionComponent = () => {
+  const { showDrawTool, setShowDrawTool } = useContext(MapContext)
   const {
     fetchData,
     fetchMapVisualization,
-    dataSelection,
     mapVisualizations: mapVisualization,
     removeDataSelection,
   } = useContext(DataSelectionContext)
@@ -256,12 +248,6 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
     }
   }, [])
 
-  useEffect(() => {
-    if (dataSelection) {
-      setPositionFromSnapPoint(SnapPoint.Halfway)
-    }
-  }, [dataSelection])
-
   return (
     <DrawToolComponent
       onDrawEnd={handleOnDrawEnd}
@@ -275,9 +261,6 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
         })
       }}
       drawnItems={initialDrawnItems}
-      onDrawStart={() => {
-        setCurrentOverlay(Overlay.Results)
-      }}
       drawnItemsGroup={drawnItemsGroup}
     />
   )

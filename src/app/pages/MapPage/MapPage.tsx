@@ -1,17 +1,15 @@
-import { constants, Map as MapComponent, MapPanelProvider, useStateRef } from '@amsterdam/arm-core'
-import { PositionPerSnapPoint } from '@amsterdam/arm-core/es/components/MapPanel/constants'
+import { constants, Map as MapComponent, useStateRef } from '@amsterdam/arm-core'
 import { hooks } from '@amsterdam/asc-ui'
 import L from 'leaflet'
 import { FunctionComponent, useCallback, useContext, useEffect, useState } from 'react'
-import styled, { createGlobalStyle, css } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
+import MapContainer from '../../../map/containers/map/MapContainer'
 import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'
 import DataSelectionProvider from './draw/DataSelectionProvider'
 import LeafletLayers from './LeafletLayers'
 import MapContext from './MapContext'
-import MapControls from './MapControls'
 import MapMarkers from './MapMarkers'
-import MapPanelContent from './MapPanelContent'
 import {
   centerParam,
   locationParam,
@@ -19,13 +17,8 @@ import {
   panoPitchParam,
   zoomParam,
 } from './query-params'
-import { Overlay, SnapPoint } from './types'
 
-const MapView = styled.div`
-  height: 100%;
-  position: relative;
-  z-index: 0;
-  overflow: hidden;
+const StyledMapContainer = styled(MapContainer)`
   display: flex;
   flex-direction: column;
 `
@@ -43,27 +36,24 @@ const GlobalStyle = createGlobalStyle<{
   .leaflet-container {
     position: sticky !important;
     height: ${({ panoActive }) => (panoActive ? '50%' : '100%')};
-    ${({ panoFullScreen }) =>
-      panoFullScreen &&
-      css`
-        display: none;
-      `}
   }
 `
 
-export const MAP_PANEL_SNAP_POSITIONS: PositionPerSnapPoint = {
-  [SnapPoint.Full]: '480px',
-  [SnapPoint.Halfway]: '480px',
-  [SnapPoint.Closed]: '30px',
-}
-
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
+
+// Todo: get ID's from request
+const PANO_LAYERS = [
+  'pano-pano2020bi',
+  'pano-pano2019bi',
+  'pano-pano2018bi',
+  'pano-pano2017bi',
+  'pano-pano2016bi',
+]
 
 const MapPage: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [currentOverlay, setCurrentOverlay] = useState(Overlay.None)
   const { panoFullScreen } = useContext(MapContext)
-  const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
+  const [mapInstance, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
   const [zoom, setZoom] = useParam(zoomParam)
   const [location] = useParam(locationParam)
@@ -73,16 +63,8 @@ const MapPage: FunctionComponent = () => {
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const panoActive = panoHeading !== null && location !== null
 
-  // This is necessary to call, because we resize the map dynamically
-  // https://leafletjs.com/reference-1.7.1.html#map-invalidatesize
-  useEffect(() => {
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.invalidateSize()
-    }
-  }, [panoFullScreen, panoPitch, mapInstanceRef])
-
   return (
-    <MapView>
+    <StyledMapContainer>
       <GlobalStyle panoActive={panoActive} panoFullScreen={panoFullScreen} />
       <MapComponent
         setInstance={setMapInstance}
@@ -90,6 +72,7 @@ const MapPage: FunctionComponent = () => {
           ...DEFAULT_AMSTERDAM_MAPS_OPTIONS,
           zoom: zoom ?? DEFAULT_AMSTERDAM_MAPS_OPTIONS.zoom,
           center: center ?? DEFAULT_AMSTERDAM_MAPS_OPTIONS.center,
+          attributionControl: false,
         }}
         events={{
           zoomend: useCallback(() => {
@@ -112,33 +95,12 @@ const MapPage: FunctionComponent = () => {
       >
         <DataSelectionProvider>
           <LeafletLayers />
-          <MapPanelProvider
-            mapPanelSnapPositions={MAP_PANEL_SNAP_POSITIONS}
-            variant={showDesktopVariant ? 'panel' : 'drawer'}
-            initialPosition={SnapPoint.Closed}
-            topOffset={50}
-          >
-            {panoActive && <PanoramaViewer />}
-            <MapMarkers panoActive={panoActive} />
-            {!panoFullScreen ? (
-              <>
-                <MapControls
-                  setCurrentOverlay={setCurrentOverlay}
-                  currentOverlay={currentOverlay}
-                  showDesktopVariant={showDesktopVariant}
-                  isLoading={isLoading}
-                  panoActive={panoActive}
-                />
-                <MapPanelContent
-                  currentOverlay={currentOverlay}
-                  setCurrentOverlay={setCurrentOverlay}
-                />
-              </>
-            ) : null}
-          </MapPanelProvider>
+          {panoActive && <PanoramaViewer />}
+          <MapMarkers panoActive={panoActive} />
+          <MapPanelContent showDesktopVariant={showDesktopVariant} />
         </DataSelectionProvider>
       </MapComponent>
-    </MapView>
+    </StyledMapContainer>
   )
 }
 

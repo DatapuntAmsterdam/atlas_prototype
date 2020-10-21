@@ -1,8 +1,8 @@
-import { ControlButton, MapPanelContext } from '@amsterdam/arm-core'
 import { Close } from '@amsterdam/asc-assets'
-import { breakpoint, ViewerContainer } from '@amsterdam/asc-ui'
-import { useContext, FunctionComponent } from 'react'
+import { breakpoint, Button, ViewerContainer } from '@amsterdam/asc-ui'
+import { FunctionComponent, useContext } from 'react'
 import styled from 'styled-components'
+import Control from '../../pages/MapPage/components/Control'
 import MapContext from '../../pages/MapPage/MapContext'
 import { locationParam } from '../../pages/MapPage/query-params'
 import useParam from '../../utils/useParam'
@@ -17,7 +17,7 @@ export interface PanoramaViewerControlsProps {
   panoImageDate?: string
 }
 
-const ResizeButton = styled(ControlButton)`
+const ResizeButton = styled(Button)`
   @media screen and ${breakpoint('max-width', 'tabletM')} {
     display: none; // below tabletM is always full screen, so no need to show this button
   }
@@ -28,22 +28,22 @@ const PanoramaViewerControls: FunctionComponent<PanoramaViewerControlsProps> = (
   onClose,
   panoImageDate,
 }) => {
-  const { drawerPosition } = useContext(MapPanelContext)
   const { panoFullScreen, setPanoFullScreen } = useContext(MapContext)
   const [location] = useParam(locationParam)
 
+  // TODO: Add the pano viewer to the map overlay.
+
   return (
     <ViewerContainer
-      // @ts-ignore
-      style={!panoFullScreen ? { left: drawerPosition } : {}}
       topRight={
-        <>
-          <ControlButton
+        <Control>
+          <Button
             type="button"
             variant="blank"
             title="Panorama sluiten"
             size={44}
             iconSize={25}
+            // @ts-ignore
             onClick={onClose}
             data-testid="panoramaViewerCloseButton"
             icon={<Close />}
@@ -60,7 +60,7 @@ const PanoramaViewerControls: FunctionComponent<PanoramaViewerControlsProps> = (
             }}
             icon={panoFullScreen ? <Reduce /> : <Enlarge />}
           />
-        </>
+        </Control>
       }
       bottomLeft={<PanoramaViewerMenu />}
       bottomRight={

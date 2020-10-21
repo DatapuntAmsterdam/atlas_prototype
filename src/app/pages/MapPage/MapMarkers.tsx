@@ -2,7 +2,7 @@ import { LatLngLiteral } from 'leaflet'
 import { useContext, FunctionComponent } from 'react'
 import PanoramaViewerMarker from '../../components/PanoramaViewer/PanoramaViewerMarker'
 import useParam from '../../utils/useParam'
-import MapSearchMarker from './map-search/MapSearchMarker'
+import LocationSearchMarker from './location-search/LocationSearchMarker'
 import MapContext from './MapContext'
 import { locationParam } from './query-params'
 
@@ -21,7 +21,9 @@ const MapMarkers: FunctionComponent<MapMarkersProps> = ({ panoActive }) => {
 
   return (
     <>
-      {!panoActive && !showDrawTool && <MapSearchMarker location={location} />}
+      {!panoActive && !showDrawTool && (
+        <LocationSearchMarker location={location} setLocation={setLocation} />
+      )}
       {panoActive && <PanoramaViewerMarker location={location} setLocation={setLocation} />}
     </>
   )

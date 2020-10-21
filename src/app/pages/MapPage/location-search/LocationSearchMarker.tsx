@@ -1,25 +1,22 @@
-import { MapPanelContext, Marker as ARMMarker } from '@amsterdam/arm-core'
+import { Marker as ARMMarker } from '@amsterdam/arm-core'
 import { useMapEvents } from '@amsterdam/react-maps'
 import { LeafletMouseEvent } from 'leaflet'
-import { useContext, useEffect, useRef, FunctionComponent } from 'react'
+import React, { FunctionComponent, useContext, useEffect, useRef } from 'react'
 import { generatePath, useHistory } from 'react-router-dom'
 import fetchNearestDetail from '../../../../map/services/nearest-detail/nearest-detail'
+import { routing } from '../../../routes'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 import useMapCenterToMarker from '../../../utils/useMapCenterToMarker'
 import MapContext, { Overlay } from '../MapContext'
 import { MarkerProps } from '../MapMarkers'
 import { locationParam } from '../query-params'
-import { SnapPoint } from '../types'
-import { routing } from '../../../routes'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
 
-const MapSearchMarker: FunctionComponent<MarkerProps> = ({ location }) => {
+const LocationSearchMarker: FunctionComponent<MarkerProps> = ({ location }) => {
   const { legendLeafletLayers } = useContext(MapContext)
   const history = useHistory()
   const { buildQueryString } = useBuildQueryString()
 
   useMapCenterToMarker(location)
-
-  const { setPositionFromSnapPoint } = useContext(MapPanelContext)
 
   const legendLeafletLayersRef = useRef<Overlay[]>(legendLeafletLayers)
 
@@ -58,13 +55,13 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ location }) => {
   }
 
   useMapEvents({
-    click: async (event) => {
-      setPositionFromSnapPoint(SnapPoint.Halfway)
-      await handleMapClick(event)
+    click: (event) => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      handleMapClick(event)
     },
   })
 
   return location ? <ARMMarker latLng={location} /> : null
 }
 
-export default MapSearchMarker
+export default LocationSearchMarker

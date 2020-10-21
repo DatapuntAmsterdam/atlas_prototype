@@ -1,10 +1,11 @@
 import { ChevronUp, Info } from '@amsterdam/asc-assets'
 import { Alert, Icon, themeSpacing } from '@amsterdam/asc-ui'
+import classNames from 'classnames'
 import styled from 'styled-components'
+import MapLayers from '../../../shared/assets/icons/icon-map-layers.svg'
 import MapLegend from '../../components/legend/MapLegend'
 import MapType from '../../components/type/MapType'
 import { isAuthorised } from '../../utils/map-layer'
-import MapLayers from '../../../shared/assets/icons/icon-map-layers.svg'
 
 const ZoomInAlert = styled(Alert)`
   width: calc(100% - ${themeSpacing(6)});
@@ -36,6 +37,7 @@ const MapPanel = ({
   panelLayers = [],
   user = {},
   zoomLevel = 0,
+  className = '',
 }) => {
   const someLayersRequireZoom = activeMapLayers.some(
     (mapLayer) => isAuthorised(mapLayer, user) && zoomLevel < mapLayer.minZoom,
@@ -50,11 +52,12 @@ const MapPanel = ({
           : 'Kaartlagen legenda, Kaartlagen tonen'
       }
       aria-expanded={isMapPanelVisible}
-      className={`
-            map-panel
-            map-panel--${isMapPanelVisible ? 'expanded' : 'collapsed'}
-            map-panel--has${activeMapLayers.length > 0 ? '' : '-no'}-active-layers
-          `}
+      className={classNames(
+        'map-panel',
+        `map-panel--${isMapPanelVisible ? 'expanded' : 'collapsed'}`,
+        `map-panel--has${activeMapLayers.length > 0 ? '' : '-no'}-active-layers`,
+        className,
+      )}
     >
       <div className="map-panel__heading">
         <button

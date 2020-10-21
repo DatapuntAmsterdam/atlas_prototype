@@ -1,4 +1,4 @@
-import { MapPanelContent, Marker } from '@amsterdam/arm-core'
+import { Marker } from '@amsterdam/arm-core'
 import { Table } from '@amsterdam/asc-assets'
 import {
   AccordionWrapper,
@@ -16,7 +16,6 @@ import {
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import L, { LatLng, LatLngExpression, LatLngTuple } from 'leaflet'
-import { useHistory, Link as RouterLink } from 'react-router-dom'
 import {
   Fragment,
   FunctionComponent,
@@ -27,6 +26,7 @@ import {
   useState,
 } from 'react'
 import { useSelector } from 'react-redux'
+import { Link as RouterLink, useHistory } from 'react-router-dom'
 import ReduxRouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
 import { getUserScopes } from '../../../../shared/ducks/user/user'
@@ -34,22 +34,15 @@ import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage'
 import LoginLink from '../../../components/Links/LoginLink/LoginLink'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import formatCount from '../../../utils/formatCount'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
+import { DrawerPanelHeader, DrawerPanelProps, LargeDrawerPanel } from '../components/DrawerPanel'
 import config, { AuthScope, DataSelectionType } from '../config'
 import MapContext from '../MapContext'
-import { Overlay } from '../types'
 import DataSelectionContext from './DataSelectionContext'
-import { routing } from '../../../routes'
-import useBuildQueryString from '../../../utils/useBuildQueryString'
-import { polygonParam, polylineParam } from '../query-params'
 
 const ResultLink = styled(ReduxRouterLink)`
   width: 100%;
   margin-bottom: ${themeSpacing(2)};
-`
-
-const StyledMapPanelContent = styled(MapPanelContent)`
-  width: 100%;
-  height: 100%;
 `
 
 const StyledMarker = styled(Marker)`
@@ -103,11 +96,7 @@ const StyledSelect = styled(Select)`
   }
 `
 
-export interface DrawResultsProps {
-  currentOverlay: Overlay
-}
-
-const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) => {
+const DrawResultsPanel: FunctionComponent<DrawerPanelProps> = ({ ...otherProps }) => {
   const [delayedLoadingIds, setDelayedLoadingIds] = useState<string[]>([])
   const [highlightMarker, setHighlightMarker] = useState<LatLngTuple | null>(null)
   const {
@@ -210,18 +199,13 @@ const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) =>
   )
 
   return (
-    <StyledMapPanelContent
-      title={`Resultaten${totalNumberOfResults && `: ${totalNumberOfResults}`}`}
-      animate
-      stackOrder={currentOverlay === Overlay.Results ? 2 : 1}
-      onClose={() => {
-        setShowDrawTool(false)
-        history.push({
-          pathname: routing.dataSearchGeo_TEMP.path,
-          search: buildQueryString(undefined, [polylineParam, polygonParam]),
-        })
-      }}
-    >
+    <LargeDrawerPanel {...otherProps}>
+      <DrawerPanelHeader onClose={() => setShowDrawTool(false)}>
+        <Heading as="h2" styleAs="h1">
+          {`Resultaten${totalNumberOfResults && `: ${totalNumberOfResults}`}`}
+        </Heading>
+      </DrawerPanelHeader>
+
       <GlobalStyle />
       <StyledMarker latLng={memoHighlightMaker} options={{ icon: highlightIcon }} />
 
@@ -337,8 +321,8 @@ const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) =>
           ))}
         </AccordionWrapper>
       )}
-    </StyledMapPanelContent>
+    </LargeDrawerPanel>
   )
 }
 
-export default DrawResults
+export default DrawResultsPanel

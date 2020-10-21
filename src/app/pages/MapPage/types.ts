@@ -6,12 +6,6 @@ export enum SnapPoint {
   Closed,
 }
 
-export enum Overlay {
-  Results,
-  Legend,
-  None,
-}
-
 export type MarkerGroup = {
   id: string
   markers: LatLngTuple[]

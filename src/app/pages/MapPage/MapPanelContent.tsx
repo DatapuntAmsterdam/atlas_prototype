@@ -1,72 +1,86 @@
-import { MapPanel, MapPanelDrawer } from '@amsterdam/arm-core'
-import { hooks } from '@amsterdam/asc-ui'
-import { useContext, useEffect, FunctionComponent } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import MapContext from './MapContext'
+import React, { FunctionComponent, useContext, useState } from 'react'
 import useParam from '../../utils/useParam'
+import DrawerOverlay, { DeviceMode, DrawerControl, DrawerState } from './components/DrawerOverlay'
+import LegendControl from './components/LegendControl'
+import ZoomControl from './components/ZoomControl'
+import BaseLayerControl from './controls/BaseLayerControl'
 import DetailPanel from './detail/DetailPanel'
-import DataSelectionContext from './draw/DataSelectionContext'
-import DrawResults from './draw/DrawResults'
+import DrawResultsPanel from './draw/DrawResultsPanel'
+import DrawTool from './draw/DrawTool'
 import LegendPanel from './legend/LegendPanel'
-import MapSearchResults from './map-search/MapSearchResults'
-import { locationParam } from './query-params'
-import { Overlay } from './types'
-import { routing } from '../../routes'
+import LocationSearchPanel from './location-search/LocationSearchPanel'
+import MapContext from './MapContext'
+import { detailUrlParam, legendOpenParam, locationParam, panoParam } from './query-params'
 
 export interface MapPanelContentProps {
-  setCurrentOverlay: (overlay: Overlay) => void
-  currentOverlay: Overlay
+  showDesktopVariant: boolean
 }
 
-const MapPanelContent: FunctionComponent<MapPanelContentProps> = ({
-  setCurrentOverlay,
-  currentOverlay,
-}) => {
+const MapPanelContent: FunctionComponent<MapPanelContentProps> = ({ showDesktopVariant }) => {
+  const { showDrawContent } = useContext(MapContext)
+  const [panelState, setPanelState] = useState(DrawerState.Closed)
+  const [legendOpen, setLegendOpen] = useParam(legendOpenParam)
+  const [detailUrl] = useParam(detailUrlParam)
   const [location] = useParam(locationParam)
-  const { showDrawTool, showDrawContent } = useContext(MapContext)
-  const { dataSelection } = useContext(DataSelectionContext)
-  // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
-  const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
-  const MapPanelOrDrawer = showDesktopVariant ? MapPanel : MapPanelDrawer
+  const [pano] = useParam(panoParam)
+  const mode = showDesktopVariant ? DeviceMode.Desktop : DeviceMode.Mobile
 
-  useEffect(() => {
-    if (currentOverlay !== Overlay.Legend) {
-      setCurrentOverlay(location ?? showDrawTool ? Overlay.Results : Overlay.None)
-    }
-  }, [location, showDrawTool, currentOverlay])
+  const controls: DrawerControl[] = [
+    {
+      id: 'legend',
+      hAlign: 'left',
+      vAlign: showDesktopVariant ? 'top' : 'bottom',
+      node: (
+        <LegendControl
+          showDesktopVariant={showDesktopVariant}
+          onToggle={() => {
+            setLegendOpen(!legendOpen)
 
-  return (
-    <MapPanelOrDrawer>
-      {currentOverlay === Overlay.Legend && (
-        <LegendPanel
-          stackOrder={3}
-          animate
-          onClose={() => {
-            setCurrentOverlay(location ? Overlay.Results : Overlay.None)
+            if (!legendOpen) {
+              setPanelState(DrawerState.Open)
+            }
           }}
         />
-      )}
-      <Switch>
-        <Route path={[routing.dataSearchGeo_TEMP.path, routing.panorama_TEMP.path]}>
-          <MapSearchResults currentOverlay={currentOverlay} />
-        </Route>
-        <Route path={[routing.dataDetail_TEMP.path]}>
-          <DetailPanel />
-        </Route>
-        <Route
-          path={[
-            routing.addresses_TEMP.path,
-            routing.establishments_TEMP.path,
-            routing.cadastralObjects_TEMP.path,
-          ]}
-          exact
-        >
-          <DrawResults currentOverlay={currentOverlay} />
-        </Route>
-      </Switch>
-      {showDrawContent && dataSelection.length && <DrawResults currentOverlay={currentOverlay} />}
-      <LegendPanel />
-    </MapPanelOrDrawer>
+      ),
+    },
+    {
+      id: 'base-layer',
+      hAlign: 'left',
+      vAlign: showDesktopVariant ? 'bottom' : 'top',
+      node: <BaseLayerControl />,
+    },
+  ]
+
+  if (showDesktopVariant) {
+    controls.push({
+      id: 'zoom',
+      hAlign: 'right',
+      vAlign: 'bottom',
+      node: <ZoomControl />,
+    })
+  }
+
+  if (!pano) {
+    controls.push({
+      id: 'drawtool',
+      hAlign: 'right',
+      vAlign: 'top',
+      node: <DrawTool />,
+    })
+  }
+
+  return (
+    <DrawerOverlay
+      mode={mode}
+      controls={controls}
+      state={panelState}
+      onStateChange={(state) => setPanelState(state)}
+    >
+      {location && <LocationSearchPanel location={location} />}
+      {detailUrl && <DetailPanel detailUrl={detailUrl} />}
+      {legendOpen && <LegendPanel />}
+      {showDrawContent && <DrawResultsPanel />}
+    </DrawerOverlay>
   )
 }
 

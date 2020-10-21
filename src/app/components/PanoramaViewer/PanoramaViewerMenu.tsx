@@ -1,6 +1,5 @@
-import { ControlButton } from '@amsterdam/arm-core'
 import { Checkmark, ChevronDown, ExternalLink } from '@amsterdam/asc-assets'
-import { ContextMenu, ContextMenuItem, Icon, themeSpacing } from '@amsterdam/asc-ui'
+import { Button, ContextMenu, ContextMenuItem, Icon, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
@@ -35,7 +34,7 @@ const StyledContextMenuItem = styled(ContextMenuItem)`
   }
 `
 
-const ContextMenuButton = styled(ControlButton)`
+const ContextMenuButton = styled(Button)`
   border: none; // By default is has a border, but when used in Map context it should not have it
   height: 44px; // To match the other buttons
 `
