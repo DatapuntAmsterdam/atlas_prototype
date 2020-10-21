@@ -1889,7 +1889,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Woonadres',
-              description: `${result.woonadres?.openbareruimte_naam} ${result.woonadres?.huisnummer} ${result.woonadres?.huisletter} ${result.woonadres?.toevoeging} ${result.woonadres?.postcode} ${result.woonadres?.woonplaats}`,
+              description:
+                result.woonadres?.openbareruimte_naam &&
+                `${result.woonadres?.openbareruimte_naam} ${result.woonadres?.huisnummer} ${result.woonadres?.huisletter} ${result.woonadres?.toevoeging} ${result.woonadres?.postcode} ${result.woonadres?.woonplaats}`,
             },
             {
               term: 'Woonadres buitenland',
@@ -1899,7 +1901,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Postadres',
-              description: `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.woonplaats}`,
+              description:
+                result.postadres?.openbareruimte_naam &&
+                `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.woonplaats}`,
             },
             {
               term: 'Postadres buitenland',
@@ -1909,7 +1913,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Postadres postbus',
-              description: `Postbus ${result.postadres?.postbus_nummer} ${result.postadres?.postbus_postcode} ${result.postadres?.postbus_woonplaats}`,
+              description:
+                result.postadres?.postbus_nummer &&
+                `Postbus ${result.postadres?.postbus_nummer} ${result.postadres?.postbus_postcode} ${result.postadres?.postbus_woonplaats}`,
             },
           ],
         },
@@ -1935,14 +1941,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
                 },
                 {
                   term: 'Geboortedatum',
-                  description: new Date(result.geboortedatum || '').toLocaleDateString(
-                    DEFAULT_LOCALE,
-                    {
+                  description:
+                    result.geboortedatum &&
+                    new Date(result.geboortedatum).toLocaleDateString(DEFAULT_LOCALE, {
                       month: '2-digit',
                       day: '2-digit',
                       year: 'numeric',
-                    },
-                  ),
+                    }),
                 },
                 {
                   term: 'Geboorteplaats',
@@ -1954,14 +1959,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
                 },
                 {
                   term: 'Datum van overlijden',
-                  description: new Date(result.overlijdensdatum || '').toLocaleDateString(
-                    DEFAULT_LOCALE,
-                    {
+                  description:
+                    result.overlijdensdatum &&
+                    new Date(result.overlijdensdatum).toLocaleDateString(DEFAULT_LOCALE, {
                       month: '2-digit',
                       day: '2-digit',
                       year: 'numeric',
-                    },
-                  ),
+                    }),
                 },
                 {
                   term: 'Woonadres',
@@ -1969,15 +1973,21 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
                 },
                 {
                   term: 'Woonadres buitenland',
-                  description: `${result.woonadres?.buitenland_adres} ${result.woonadres?.buitenland_woonplaats} ${result.woonadres?.buitenland_naam} ${result.woonadres?.buitenland_land?.omschrijving}`,
+                  description:
+                    result.woonadres?.buitenland_adres &&
+                    `${result.woonadres?.buitenland_adres} ${result.woonadres?.buitenland_woonplaats} ${result.woonadres?.buitenland_naam} ${result.woonadres?.buitenland_land?.omschrijving}`,
                 },
                 {
                   term: 'Postadres',
-                  description: `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.postcode} ${result.postadres?.woonplaats}`,
+                  description:
+                    result.postadres?.openbareruimte_naam &&
+                    `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.postcode} ${result.postadres?.woonplaats}`,
                 },
                 {
                   term: 'Postadres buitenland',
-                  description: `${result.postadres?.buitenland_adres} ${result.postadres?.buitenland_woonplaats} ${result.postadres?.buitenland_naam} ${result.postadres?.buitenland_land?.omschrijving}`,
+                  description:
+                    result.postadres?.buitenland_adres &&
+                    `${result.postadres?.buitenland_adres} ${result.postadres?.buitenland_woonplaats} ${result.postadres?.buitenland_naam} ${result.postadres?.buitenland_land?.omschrijving}`,
                 },
                 {
                   term: 'Postadres postbus',
@@ -2045,11 +2055,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             },
             {
               term: 'Datum aanvang',
-              description: new Date(result.datum_aanvang || '').toLocaleDateString(DEFAULT_LOCALE, {
-                month: '2-digit',
-                day: '2-digit',
-                year: 'numeric',
-              }),
+              description:
+                result.datum_aanvang &&
+                new Date(result.datum_aanvang).toLocaleDateString(DEFAULT_LOCALE, {
+                  month: '2-digit',
+                  day: '2-digit',
+                  year: 'numeric',
+                }),
             },
             {
               term: 'Soort bijzondere rechtstoestand',

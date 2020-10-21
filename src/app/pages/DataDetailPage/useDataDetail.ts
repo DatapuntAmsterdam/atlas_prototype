@@ -63,7 +63,7 @@ const useDataDetail = (id: string, subType: string, type: string) => {
       )
       // When a detail doesn't have a geometry, it can only be displayed in VIEWMODE.FULL
       // Some endpoints only return a geometry when the user is authenticated e.g. authorized to view it
-      if (mapDetail.isAuthorized && !geometry) {
+      if (!geometry) {
         dispatch(setViewMode(VIEW_MODE.FULL))
       }
       return {
