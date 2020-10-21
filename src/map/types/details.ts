@@ -108,7 +108,8 @@ export interface DetailResultItemLinkList extends DefaultDetailResultItem {
 export interface DetailResultItemDefinitionListEntry {
   term: string
   description?: string | null
-  link?: LocationDescriptor | null
+  href?: LocationDescriptor | null
+  to?: string | { pathname: string; search?: string }
   alert?: string
 }
 

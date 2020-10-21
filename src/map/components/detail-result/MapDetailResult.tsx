@@ -1,7 +1,8 @@
 import { Alert, Heading, Link } from '@amsterdam/asc-ui'
 import React from 'react'
 import styled from 'styled-components'
-import { useParams } from 'react-router-dom'
+import { LocationDescriptor } from 'history'
+import { Link as RouterLink, useParams } from 'react-router-dom'
 import {
   DetailInfo,
   DetailResultItem,
@@ -94,19 +95,37 @@ function renderDefinitionListItem(item: DetailResultItemDefinitionList, index: n
             <section className="map-detail-result__item-content">
               <div className="map-detail-result__item-label">{entry.term}</div>
               <div className="map-detail-result__item-value">
-                {entry.link ? (
-                  <Link href={entry.link} inList target="_blank">
-                    {entry.description}
-                  </Link>
-                ) : (
-                  entry.description
-                )}
+                {renderDescription(entry.description, entry.href, entry.to)}
               </div>
             </section>
           </li>
         ))}
     </>
   )
+}
+
+function renderDescription(
+  description?: string | null,
+  href?: LocationDescriptor | null,
+  to?: string | { pathname: string; search?: string },
+) {
+  if (href) {
+    return (
+      <Link href={href} inList>
+        {description}
+      </Link>
+    )
+  }
+
+  if (to) {
+    return (
+      <Link as={RouterLink} to={to} href={href} inList>
+        {description}
+      </Link>
+    )
+  }
+
+  return description
 }
 
 function renderTableItem(item: DetailResultItemTable, index: number) {

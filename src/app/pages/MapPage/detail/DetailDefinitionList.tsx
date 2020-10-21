@@ -1,7 +1,8 @@
 import { Alert, CustomHTMLBlock, Link, ShowMoreShowLess } from '@amsterdam/asc-ui'
-import { LocationDescriptor } from 'history'
 import React, { FunctionComponent } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { LocationDescriptor } from 'history'
 import { DetailResultItemDefinitionList } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 
@@ -18,9 +19,9 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
 
   return (
     <DefinitionList>
-      {entries.map(({ term, description, link, alert }) => (
+      {entries.map(({ term, description, href, alert, to }) => (
         <DefinitionListItem term={term} key={term}>
-          {renderDescription(description, link)}
+          {renderDescription(description, href, to)}
           {alert && <Alert>{alert}</Alert>}
         </DefinitionListItem>
       ))}
@@ -28,10 +29,22 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
   )
 }
 
-function renderDescription(description?: string | null, link?: LocationDescriptor | null) {
-  if (link) {
+function renderDescription(
+  description?: string | null,
+  href?: LocationDescriptor | null,
+  to?: string | { pathname: string; search?: string },
+) {
+  if (href) {
     return (
-      <Link href={link} inList>
+      <Link href={href} inList>
+        {description}
+      </Link>
+    )
+  }
+
+  if (to) {
+    return (
+      <Link as={RouterLink} to={to} href={href} inList>
         {description}
       </Link>
     )

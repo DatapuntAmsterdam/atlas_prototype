@@ -225,7 +225,7 @@ const getLocationDefinitionListBlock = (result: any, gridArea: string): DetailRe
     entries: items.map(({ config: { singular }, value }) => ({
       term: singular,
       description: value._display,
-      link: buildDetailUrl(getDetailPageData(value._links.self.href)),
+      to: buildDetailUrl(getDetailPageData(value._links.self.href)),
     })),
     gridArea,
   }
@@ -308,9 +308,7 @@ const getBagDefinitionList = (result?: any): DetailResultItemDefinitionList => (
     {
       term: 'Naam openbare ruimte',
       description: result?.openbare_ruimte._display,
-      link: result
-        ? buildDetailUrl(getDetailPageData(result?.openbare_ruimte._links.self.href))
-        : '',
+      to: result ? buildDetailUrl(getDetailPageData(result?.openbare_ruimte._links.self.href)) : '',
     },
     { term: 'Huisnummer', description: result?.huisnummer },
     { term: 'Huisletter', description: result?.huisletter },
@@ -319,7 +317,7 @@ const getBagDefinitionList = (result?: any): DetailResultItemDefinitionList => (
     {
       term: 'Woonplaats',
       description: result?.woonplaats._display,
-      link: result ? buildDetailUrl(getDetailPageData(result?.woonplaats?._links?.self.href)) : '',
+      to: result ? buildDetailUrl(getDetailPageData(result?.woonplaats?._links?.self.href)) : '',
     },
     { term: 'Type adres', description: result?.type_adres },
   ],
@@ -371,7 +369,7 @@ const getCovidBlock = (result: any): DetailResult => ({
         {
           term: 'Besluit',
           description: result.url,
-          link: result.url,
+          href: result.url,
         },
       ],
     },
@@ -690,7 +688,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Woonplaats',
               description: result.woonplaats?._display,
-              link: buildDetailUrl(getDetailPageData(result.woonplaats?._links?.self?.href)),
+              to: buildDetailUrl(getDetailPageData(result.woonplaats?._links?.self?.href)),
             },
             { term: 'Type', description: result.type as string },
             { term: 'Status', description: result.status },
@@ -840,8 +838,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Heffingsgrondslag', description: result.heffingsgrondslag },
             { term: 'Jaarlijkse heffing', description: result.heffing_display },
             { term: 'Aantal heffingsplichtigen', description: result.bijdrageplichtigen },
-            { term: 'Website', description: result.website, link: result.website },
-            { term: 'Verordening', description: result.verordening, link: result.verordening },
+            { term: 'Website', description: result.website, href: result.website },
+            { term: 'Verordening', description: result.verordening, href: result.verordening },
           ],
         },
       ],
@@ -862,7 +860,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Categorie', description: result.categorie },
             { term: 'Onderwerp', description: result.onderwerp },
             { term: 'Beschrijving', description: result.beschrijving },
-            { term: 'Meer informatie', description: result.url, link: result.url },
+            { term: 'Meer informatie', description: result.url, href: result.url },
           ],
         },
       ],
@@ -981,7 +979,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Oorlogsincidentrapport',
               description: result.pdf && getFileName(result.pdf),
-              link: result.pdf && result.pdf,
+              href: result.pdf && result.pdf,
             },
           ],
         },
@@ -1035,7 +1033,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Oorlogshandelingsrapport',
               description: result.pdf && getFileName(result.pdf),
-              link: result.pdf && result.pdf,
+              href: result.pdf && result.pdf,
             },
           ],
         },
@@ -1099,7 +1097,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Einddatum', description: result.endDate },
             { term: 'Eindtijd', description: result.endTime },
             { term: 'Omschrijving', description: result.omschrijving },
-            { term: 'Meer informatie', description: result.url, link: result.url },
+            { term: 'Meer informatie', description: result.url, href: result.url },
           ],
         },
       ],
@@ -1117,8 +1115,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           type: DetailResultItemType.DefinitionList,
           entries: [
             { term: 'Tarief per', description: result.localeDate },
-            { term: 'Website', description: result.website, link: result.website },
-            { term: 'Tarieven', description: result.tarieven, link: result.tarieven },
+            { term: 'Website', description: result.website, href: result.website },
+            { term: 'Tarieven', description: result.tarieven, href: result.tarieven },
           ],
         },
       ],
@@ -1381,7 +1379,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Bouwblok',
               description: result.bouwblok,
-              link: buildDetailUrl(getDetailPageData(result.bouwblok_link)),
+              to: buildDetailUrl(getDetailPageData(result.bouwblok_link)),
             },
             {
               term: 'Bouwblokzijde',
@@ -1394,7 +1392,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Stadsdeel',
               description: result.stadsdeel,
-              link: buildDetailUrl(getDetailPageData(result.stadsdeel_link)),
+              to: buildDetailUrl(getDetailPageData(result.stadsdeel_link)),
             },
             {
               term: 'Indicatie beveiligd',
