@@ -34,6 +34,7 @@ const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta 
       <StyledButton
         type="button"
         variant="blank"
+        data-testid="detail-infobox"
         title="Meer info"
         size={32}
         iconSize={26}

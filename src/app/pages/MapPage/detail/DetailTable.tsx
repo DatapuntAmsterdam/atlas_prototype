@@ -13,7 +13,7 @@ export interface DetailTableProps {
 }
 
 const DetailTable: React.FC<DetailTableProps> = ({ item }) => (
-  <TableWrapper>
+  <TableWrapper data-testid="detail-table">
     <Table>
       <TableRow header>
         {item.headings.map((heading) => (

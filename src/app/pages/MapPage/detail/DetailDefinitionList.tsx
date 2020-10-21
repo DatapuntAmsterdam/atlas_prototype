@@ -18,7 +18,7 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
   }
 
   return (
-    <DefinitionList>
+    <DefinitionList data-testid="detail-definition-list">
       {entries.map(({ term, description, href, alert, to }) => (
         <DefinitionListItem term={term} key={term}>
           {renderDescription(description, href, to)}

@@ -30,7 +30,7 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
   }
 
   return item.links?.length ? (
-    <LinkList {...otherProps}>
+    <LinkList {...otherProps} data-testid="detail-linklist">
       {item.links.map((link) => {
         if ('url' in link) {
           return (
@@ -62,7 +62,7 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
       })}
     </LinkList>
   ) : (
-    <Paragraph>Geen resultaten gevonden</Paragraph>
+    <Paragraph data-testid="detail-linklist">Geen resultaten gevonden</Paragraph>
   )
 }
 

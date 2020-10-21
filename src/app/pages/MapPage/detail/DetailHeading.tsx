@@ -9,7 +9,7 @@ const StyledHeading = styled(Heading)`
 `
 
 const DetailHeading: React.FC<ComponentProps<typeof Heading>> = ({ children, ...otherProps }) => (
-  <StyledHeading forwardedAs="h4" styleAs="h2" {...otherProps}>
+  <StyledHeading data-testid="detail-heading" forwardedAs="h4" styleAs="h2" {...otherProps}>
     {children}
   </StyledHeading>
 )
