@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import NotificationLevel from '../../../app/models/notification'
 import formatCount from '../../../app/utils/formatCount'
 import formatDate from '../../../app/utils/formatDate'
@@ -146,13 +147,20 @@ export const addNummeraanduiding = async (result) => {
 }
 
 export const kadastraalObject = async (result) => {
+  const brk = await fetchWithToken(
+    result?._links?.self?.href?.replace('brk/object', 'brk/object-expand'),
+  )
   const additionalFields = {
     size: result.grootte || result.grootte === 0 ? formatSquareMetre(result.grootte) : '',
     cadastralName: result.kadastrale_gemeente ? result.kadastrale_gemeente.naam : false,
     name: result.kadastrale_gemeente ? result.kadastrale_gemeente.gemeente._display : false,
-    brkData: await fetchWithToken(
-      result?._links?.self?.href?.replace('brk/object', 'brk/object-expand'),
-    ),
+    brkData: {
+      ...brk,
+      rechten: brk.rechten.map((recht) => ({
+        ...recht.kadastraal_subject,
+        _display: recht?._display,
+      })),
+    },
   }
 
   return normalize(result, additionalFields)

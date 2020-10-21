@@ -65,6 +65,8 @@ const useDataDetail = (id: string, subType: string, type: string) => {
       // Some endpoints only return a geometry when the user is authenticated e.g. authorized to view it
       if (!geometry) {
         dispatch(setViewMode(VIEW_MODE.FULL))
+      } else {
+        dispatch(setViewMode(VIEW_MODE.SPLIT))
       }
       return {
         ...mapDetail,

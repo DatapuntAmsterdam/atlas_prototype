@@ -1337,7 +1337,8 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             ],
           },
           getLinkListBlock(GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT, brkData?.rechten),
-          getLinkListBlock(GLOSSARY.DEFINITIONS.BEPERKING, brkData?.beperkingen),
+          // Todo: DI-1145
+          // getLinkListBlock(GLOSSARY.DEFINITIONS.BEPERKING, brkData?.beperkingen),
           getLinkListBlock(GLOSSARY.DEFINITIONS.AANTEKENING, brkData?.aantekeningen),
           getLinkListBlock(GLOSSARY.DEFINITIONS.ONTSTAAN_UIT, brkData?.ontstaan_uit),
           getLinkListBlock(GLOSSARY.DEFINITIONS.BETROKKEN_BIJ, brkData?.betrokken_bij),
