@@ -16,12 +16,6 @@ module.exports = {
       },
     },
   },
-  overrides: [
-    {
-      files: ['**/*.ts{x}'],
-      parser: '@typescript-eslint/parser',
-    },
-  ],
   rules: {
     'no-console': 'error',
     'prettier/prettier': 'error',
