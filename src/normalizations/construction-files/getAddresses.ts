@@ -14,11 +14,11 @@ function formatAddress(
   let label = street
 
   if (houseNumberStarting && houseNumberEnd) {
-    label += ` ${houseNumberStarting}${
+    label = `${label} ${houseNumberStarting}${
       houseNumberEnd !== houseNumberStarting ? `-${houseNumberEnd}` : ''
     }`
   } else {
-    label += ` ${houseNumberStarting || ''}${houseNumberLetter || ''}${
+    label = `${label} ${houseNumberStarting || ''}${houseNumberLetter || ''}${
       houseNumberAddition ? `-${houseNumberAddition}` : ''
     }`
   }
@@ -27,8 +27,6 @@ function formatAddress(
 }
 
 export type Address = {
-  nummeraanduidingen: Array<string>
-  nummeraanduidingen_label: Array<string>
   verblijfsobjecten: Array<string>
   verblijfsobjecten_label: Array<string>
   locatie_aanduiding: string
@@ -45,52 +43,46 @@ type AddressResult = {
   label: string
 }
 
-export default function getAddresses(results: Array<Address>) {
-  return results.reduce<Array<AddressResult>>(
-    (
-      acc,
-      {
-        nummeraanduidingen,
-        nummeraanduidingen_label,
-        verblijfsobjecten,
-        verblijfsobjecten_label,
-        locatie_aanduiding,
-        straat,
-        huisnummer_letter,
-        huisnummer_toevoeging,
-        huisnummer_van,
-        huisnummer_tot,
-      },
-    ) => [
-      ...acc,
-      ...nummeraanduidingen.reduce<Array<AddressResult>>(
-        (acc2, nummeraanduiding, i) => [
-          ...acc2,
-          { id: nummeraanduiding, type: 'nummeraanduiding', label: nummeraanduidingen_label[i] },
-        ],
-        [],
-      ),
-      ...verblijfsobjecten.reduce<Array<AddressResult>>(
-        (acc2, verblijfsobject, i) => [
-          ...acc2,
-          {
-            id: verblijfsobject,
-            type: 'verblijfsobject',
-            label:
-              verblijfsobjecten_label[i] ||
-              formatAddress(
-                locatie_aanduiding,
-                straat,
-                huisnummer_letter,
-                huisnummer_toevoeging,
-                huisnummer_van,
-                huisnummer_tot,
-              ),
-          },
-        ],
-        [],
-      ),
-    ],
-    [],
-  )
-}
+const getAddresses = (results: Address[]): any[] =>
+  results
+    .reduce<Array<AddressResult>>(
+      (
+        reducedResults,
+        {
+          verblijfsobjecten,
+          verblijfsobjecten_label,
+          locatie_aanduiding,
+          straat,
+          huisnummer_letter,
+          huisnummer_toevoeging,
+          huisnummer_van,
+          huisnummer_tot,
+        },
+      ) => [
+        ...reducedResults,
+        ...verblijfsobjecten.reduce<Array<AddressResult>>(
+          (reducedVerblijfsobjecten, verblijfsobject, i) => [
+            ...reducedVerblijfsobjecten,
+            {
+              id: verblijfsobject,
+              type: 'verblijfsobject',
+              label:
+                verblijfsobjecten_label[i] ||
+                formatAddress(
+                  locatie_aanduiding,
+                  straat,
+                  huisnummer_letter,
+                  huisnummer_toevoeging,
+                  huisnummer_van,
+                  huisnummer_tot,
+                ),
+            },
+          ],
+          [],
+        ),
+      ],
+      [],
+    )
+    .sort((a, b) => a.label.localeCompare(b.label))
+
+export default getAddresses
