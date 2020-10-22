@@ -48,7 +48,7 @@ pipeline {
     }
 
     stage('Deploy to pre-production') {
-      when { branch 'remove-angular' }
+      when { branch PRODUCTION_BRANCH }
       options {
         timeout(time: 5, unit: 'MINUTES')
       }
