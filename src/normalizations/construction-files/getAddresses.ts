@@ -48,7 +48,7 @@ type AddressResult = {
 export default function getAddresses(results: Array<Address>) {
   return results.reduce<Array<AddressResult>>(
     (
-      acc,
+      reducedResults,
       {
         nummeraanduidingen,
         nummeraanduidingen_label,
@@ -61,36 +61,38 @@ export default function getAddresses(results: Array<Address>) {
         huisnummer_van,
         huisnummer_tot,
       },
-    ) => [
-      ...acc,
-      ...nummeraanduidingen.reduce<Array<AddressResult>>(
-        (acc2, nummeraanduiding, i) => [
-          ...acc2,
-          { id: nummeraanduiding, type: 'nummeraanduiding', label: nummeraanduidingen_label[i] },
-        ],
-        [],
-      ),
-      ...verblijfsobjecten.reduce<Array<AddressResult>>(
-        (acc2, verblijfsobject, i) => [
-          ...acc2,
-          {
-            id: verblijfsobject,
-            type: 'verblijfsobject',
-            label:
-              verblijfsobjecten_label[i] ||
-              formatAddress(
-                locatie_aanduiding,
-                straat,
-                huisnummer_letter,
-                huisnummer_toevoeging,
-                huisnummer_van,
-                huisnummer_tot,
-              ),
-          },
-        ],
-        [],
-      ),
-    ],
+    ) => {
+      return [
+        ...reducedResults,
+        ...nummeraanduidingen.reduce<Array<AddressResult>>(
+          (reducedNummeraanduidingen, nummeraanduiding, i) => [
+            ...reducedNummeraanduidingen,
+            { id: nummeraanduiding, type: 'nummeraanduiding', label: nummeraanduidingen_label[i] },
+          ],
+          [],
+        ),
+        ...verblijfsobjecten.reduce<Array<AddressResult>>(
+          (reducedVerblijfsobjecten, verblijfsobject, i) => [
+            ...reducedVerblijfsobjecten,
+            {
+              id: verblijfsobject,
+              type: 'verblijfsobject',
+              label:
+                verblijfsobjecten_label[i] ||
+                formatAddress(
+                  locatie_aanduiding,
+                  straat,
+                  huisnummer_letter,
+                  huisnummer_toevoeging,
+                  huisnummer_van,
+                  huisnummer_tot,
+                ),
+            },
+          ],
+          [],
+        ),
+      ]
+    },
     [],
   )
 }
