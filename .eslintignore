@@ -2,5 +2,3 @@
 /scripts/
 /test/dyson/
 **/__snapshots__/
-.eslintrc.js
-jest.config.js
