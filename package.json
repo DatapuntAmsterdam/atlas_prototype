@@ -12,6 +12,7 @@
     "build-storybook": "build-storybook -c .storybook -o .sb",
     "clean": "npm run clean:dirs",
     "clean:dirs": "rimraf ./node_modules ./coverage ./coverage-legacy ./dist ./build",
+    "deploy:demo": "./scripts/deploy-demo.sh",
     "deploy-storybook": "storybook-to-ghpages",
     "generate:sitemap": "node ./sitemap-generator/index.js",
     "lint": "npm run lint:js",
