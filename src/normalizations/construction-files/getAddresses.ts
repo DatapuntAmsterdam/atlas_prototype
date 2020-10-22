@@ -43,9 +43,9 @@ type AddressResult = {
   label: string
 }
 
-const getAddresses = (results: Address[]): any[] =>
+const getAddresses = (results: Address[]): AddressResult[] =>
   results
-    .reduce<Array<AddressResult>>(
+    .reduce<AddressResult[]>(
       (
         reducedResults,
         {
@@ -60,7 +60,7 @@ const getAddresses = (results: Address[]): any[] =>
         },
       ) => [
         ...reducedResults,
-        ...verblijfsobjecten.reduce<Array<AddressResult>>(
+        ...verblijfsobjecten.reduce<AddressResult[]>(
           (reducedVerblijfsobjecten, verblijfsobject, i) => [
             ...reducedVerblijfsobjecten,
             {
