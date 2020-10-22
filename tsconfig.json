@@ -3,6 +3,7 @@
     "./src/**/*"
   ],
   "compilerOptions": {
+    "inlineSourceMap": true,
     "strict": true,
     "jsx": "react",
     "allowJs": true,

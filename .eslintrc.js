@@ -12,10 +12,16 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.ts', '.tsx', '.mjs', '.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
       },
     },
   },
+  overrides: [
+    {
+      files: ['**/*.ts{x}'],
+      parser: '@typescript-eslint/parser',
+    },
+  ],
   rules: {
     'no-console': 'error',
     'prettier/prettier': 'error',

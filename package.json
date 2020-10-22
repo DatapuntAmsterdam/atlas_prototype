@@ -19,9 +19,10 @@
     "start": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.dev.ts",
     "start:prod": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.prod.ts",
     "storybook": "start-storybook -p 6007",
-    "test": "concurrently \"npm run test:karma\" \"jest\"",
-    "test:jest": "jest --coverage",
-    "test:jest:watch": "npm run test:jest -- --watch --onlyChanged",
+    "pretest": "rimraf ./coverage ./coverage-legacy",
+    "test": "concurrently \"npm run test:karma\" \"npm run test:jest\"",
+    "test:jest": "npx jest --coverage",
+    "test:jest:watch": "npx jest --watch --onlyChanged",
     "test:karma": "cross-env TS_NODE_TRANSPILE_ONLY=true karma start",
     "test:karma:watch": "npm run test:karma -- --no-single-run",
     "prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,scss,css}\"",
@@ -232,12 +233,10 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "eslint",
-      "git add"
+      "eslint"
     ],
     "*.scss": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   }
 }
