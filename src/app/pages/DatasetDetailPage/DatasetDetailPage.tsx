@@ -28,8 +28,8 @@ import formatDate from '../../utils/formatDate'
 import redirectToDcatd from '../../utils/redirectToDcatd'
 import usePromise from '../../utils/usePromise'
 
-function kebabCase(input: string) {
-  return input.toLowerCase().replace(/[: ][ ]*/g, '-')
+function kebabCase(input?: string) {
+  return input?.toLowerCase().replace(/[: ][ ]*/g, '-')
 }
 
 /**
