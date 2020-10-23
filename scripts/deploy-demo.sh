@@ -7,15 +7,11 @@ if [[ $SEVER_NUMBER -lt 0 || $SEVER_NUMBER -gt 3 ]]
   exit 1
 fi
 
-SOURCE_BRANCH=$(git branch --show-current)
+SOURCE_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 TARGET_BRANCH="demo$SEVER_NUMBER"
 
 echo "Pushing $SOURCE_BRANCH to $TARGET_BRANCH."
 
-git branch -D $TARGET_BRANCH
-git checkout -b $TARGET_BRANCH
-
-git push --no-verify --force --set-upstream origin $TARGET_BRANCH
-git checkout $SOURCE_BRANCH
+git push origin +$SOURCE_BRANCH:$TARGET_BRANCH
 
 echo "Done. Your branch will be deployed to https://demo$SEVER_NUMBER.data.amsterdam.nl soon."
