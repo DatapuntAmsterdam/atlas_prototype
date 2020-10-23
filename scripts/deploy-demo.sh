@@ -10,8 +10,6 @@ fi
 SOURCE_BRANCH=$(git branch --show-current)
 TARGET_BRANCH="demo$SEVER_NUMBER"
 
-echo "Pushing $SOURCE_BRANCH to $TARGET_BRANCH."
-
 git push origin +$SOURCE_BRANCH:$TARGET_BRANCH
 
 echo "Done. Your branch will be deployed to https://demo$SEVER_NUMBER.data.amsterdam.nl soon."
