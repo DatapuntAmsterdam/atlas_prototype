@@ -1,7 +1,8 @@
+import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import accessTokenParser from '../access-token-parser/access-token-parser'
 import queryStringParser from '../query-string-parser/query-string-parser'
 import stateTokenGenerator from '../state-token-generator/state-token-generator'
+import parseAccessToken, { ParsedToken } from './parseAccessToken'
 
 // A map of the error keys, that the OAuth2 authorization service can
 // return, to a full description
@@ -81,10 +82,6 @@ const scopes = [
   // Catalogus (Dcatd) admin
   ...dcatdScopes,
 ]
-export const encodedScopes = encodeURIComponent(scopes.join(' '))
-// The URI we need to redirect to for communication with the OAuth2
-// authorization service
-export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=${encodedScopes}`
 
 // The keys of values we need to store in the session storage
 //
@@ -98,17 +95,17 @@ export const STATE_TOKEN = 'stateToken'
 // containing user scopes and name
 export const ACCESS_TOKEN = 'accessToken'
 
-let returnPath
-let tokenData = {}
+let returnPath = ''
+let tokenData: ParsedToken | null = null
 
 /**
  * Finishes an error from the OAuth2 authorization service.
  *
- * @param code {string} Error code as returned from the service.
- * @param description {string} Error description as returned from the
+ * @param code Error code as returned from the service.
+ * @param description Error description as returned from the
  * service.
  */
-function handleError(code, description) {
+function handleError(code: string, description: string) {
   if (typeof window !== 'undefined') {
     sessionStorage.removeItem(STATE_TOKEN)
 
@@ -144,11 +141,11 @@ function catchError() {
  * Only does so in case the params form a valid callback from the OAuth2
  * authorization service.
  *
- * @param {Object.<string, string>} params The parameters returned.
- * @return {string} The access token in case the params for a valid callback,
+ * @param params The parameters returned.
+ * @return The access token in case the params for a valid callback,
  * null otherwise.
  */
-function getAccessTokenFromParams(params) {
+function getAccessTokenFromParams(params: { [key: string]: string }) {
   if (!params || typeof window === 'undefined') {
     return null
   }
@@ -184,9 +181,9 @@ function handleCallback() {
   const params = queryStringParser(window.location.hash.substring(1)) // Remove # from hash string
   const accessToken = getAccessTokenFromParams(params)
   if (accessToken) {
-    tokenData = accessTokenParser(accessToken)
+    tokenData = parseAccessToken(accessToken)
     sessionStorage.setItem(ACCESS_TOKEN, accessToken)
-    returnPath = sessionStorage.getItem(RETURN_PATH)
+    returnPath = sessionStorage.getItem(RETURN_PATH) ?? ''
     sessionStorage.removeItem(RETURN_PATH)
     sessionStorage.removeItem(STATE_TOKEN)
     // Clean up URL; remove query and hash
@@ -212,11 +209,8 @@ export function getAccessToken() {
  * Redirects to the OAuth2 authorization service.
  */
 export function login() {
-  // Get the URI the OAuth2 authorization service needs to use as callback
-  const callback = encodeURIComponent(`${window.location.protocol}//${window.location.host}/`)
   // Get a random string to prevent CSRF
   const stateToken = stateTokenGenerator()
-  const encodedStateToken = encodeURIComponent(stateToken)
 
   if (!stateToken) {
     throw new Error('crypto library is not available on the current browser')
@@ -228,9 +222,17 @@ export function login() {
   // Set RETURN_PATH and ACCESS_TOKEN on login
   sessionStorage.setItem(RETURN_PATH, window.location.href)
   sessionStorage.setItem(STATE_TOKEN, stateToken)
-  window.location.assign(
-    `${environment.API_ROOT}${AUTH_PATH}&state=${encodedStateToken}&redirect_uri=${callback}`,
-  )
+
+  const url = new URL(joinUrl([environment.API_ROOT, 'oauth2/authorize']))
+
+  url.searchParams.set('idp_id', 'datapunt')
+  url.searchParams.set('response_type', 'token')
+  url.searchParams.set('client_id', 'citydata')
+  url.searchParams.set('scope', scopes.join(' '))
+  url.searchParams.set('state', stateToken)
+  url.searchParams.set('redirect_uri', `${window.location.origin}/`)
+
+  window.location.assign(url.toString())
 }
 
 export function logout() {
@@ -245,11 +247,11 @@ export function logout() {
 function restoreAccessToken() {
   const accessToken = getAccessToken()
   if (accessToken) {
-    const parsedToken = accessTokenParser(accessToken)
+    const parsedToken = parseAccessToken(accessToken)
     const now = Math.floor(new Date().getTime() / 1000)
 
-    if (!parsedToken.expiresAt || parsedToken.expiresAt <= now) {
-      tokenData = {}
+    if (!parsedToken || parsedToken.expiresAt <= now) {
+      tokenData = null
       logout()
       return false
     }
@@ -287,11 +289,11 @@ export function getReturnPath() {
 }
 
 export function getScopes() {
-  return tokenData.scopes || []
+  return tokenData?.scopes ?? []
 }
 
 export function getName() {
-  return tokenData.name || ''
+  return tokenData?.name ?? ''
 }
 
 /**
@@ -303,17 +305,4 @@ export function getName() {
 export function getAuthHeaders() {
   const accessToken = getAccessToken()
   return accessToken ? { Authorization: `Bearer ${getAccessToken()}` } : {}
-}
-
-// TODO: Get rid of these globals and use exported methods instead.
-if (typeof window !== 'undefined') {
-  window.auth = {
-    getAccessToken,
-    login,
-    logout,
-    initAuth,
-    getReturnPath,
-    getScopes,
-    getName,
-  }
 }

@@ -2,24 +2,16 @@
  * @jest-environment jsdom-global
  */
 
-import {
-  encodedScopes,
-  getAuthHeaders,
-  getName,
-  getReturnPath,
-  getScopes,
-  initAuth,
-  login,
-  logout,
-} from './auth'
+import joinUrl from '../../../app/utils/joinUrl'
+import environment from '../../../environment'
 import queryStringParser from '../query-string-parser/query-string-parser'
 import stateTokenGenerator from '../state-token-generator/state-token-generator'
-import parseAccessToken from '../access-token-parser/access-token-parser'
-import environment from '../../../environment'
+import { getAuthHeaders, getName, getReturnPath, getScopes, initAuth, login, logout } from './auth'
+import parseAccessToken from './parseAccessToken'
 
 jest.mock('../query-string-parser/query-string-parser')
 jest.mock('../state-token-generator/state-token-generator')
-jest.mock('../access-token-parser/access-token-parser')
+jest.mock('./parseAccessToken')
 
 const notExpiredTimestamp = () => Math.floor(new Date().getTime() / 1000) + 1000
 
@@ -261,14 +253,16 @@ describe('The auth service', () => {
       window.location = {
         reload: jest.fn(),
         assign: assignMock,
-        protocol: 'https:',
-        host: 'data.amsterdam.nl',
+        origin: 'https://data.amsterdam.nl',
       }
 
       login()
 
       expect(assignMock).toHaveBeenCalledWith(
-        `${environment.API_ROOT}oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=${encodedScopes}&state=123StateToken&redirect_uri=https%3A%2F%2Fdata.amsterdam.nl%2F`,
+        joinUrl([
+          environment.API_ROOT,
+          'oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=BRK%2FRS+BRK%2FRSN+BRK%2FRO+WKPB%2FRBDU+MON%2FRBC+MON%2FRDM+HR%2FR+BD%2FR+BD%2FX+BD%2FR+CAT%2FR+CAT%2FW&state=123StateToken&redirect_uri=https%3A%2F%2Fdata.amsterdam.nl%2F',
+        ]),
       )
       window.location = location
     })
@@ -342,7 +336,7 @@ describe('The auth service', () => {
   })
 
   describe('getScopes', () => {
-    it('should return a an empty array', () => {
+    it('returns an empty value for an invalid token', () => {
       savedAccessToken = '123AccessToken'
       initAuth()
       const authHeaders = getScopes()
@@ -350,7 +344,7 @@ describe('The auth service', () => {
       expect(authHeaders).toEqual([])
     })
 
-    it('should return the scopes', () => {
+    it('returns the scopes', () => {
       parseAccessToken.mockImplementation(() => ({
         ...notExpiredAccesToken,
         scopes: 'scopes!',
@@ -365,7 +359,7 @@ describe('The auth service', () => {
   })
 
   describe('getName', () => {
-    it('should return a an empty string', () => {
+    it('returns an empty value for an invalid token', () => {
       savedAccessToken = '123AccessToken'
       initAuth()
       const authHeaders = getName()
@@ -373,7 +367,7 @@ describe('The auth service', () => {
       expect(authHeaders).toEqual('')
     })
 
-    it('should return the scopes', () => {
+    it('returns the name', () => {
       parseAccessToken.mockImplementation(() => ({
         ...notExpiredAccesToken,
         name: 'name!',
