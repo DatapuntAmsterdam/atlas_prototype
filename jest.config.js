@@ -1,9 +1,8 @@
 module.exports = {
   displayName: 'unit',
   rootDir: './',
-  collectCoverage: false,
   collectCoverageFrom: [
-    'src/**/*.{js,jsx}',
+    'src/**/*.{js,jsx,ts,tsx}',
     '!**/*.constant.js',
     '!**/*.config.js',
     '!**/*.{integration}.test.{js,jsx}',
@@ -16,13 +15,13 @@ module.exports = {
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      statements: 75,
-      branches: 50,
-      functions: 67,
-      lines: 75,
+      statements: 58.09,
+      branches: 44.87,
+      functions: 51.51,
+      lines: 57.75,
     },
   },
-  coverageReporters: process.env.CI ? ['html', 'text'] : ['lcov'],
+  coverageReporters: process.env.CI ? ['text'] : ['lcov'],
   moduleNameMapper: {
     '^.+\\.(css|scss)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':

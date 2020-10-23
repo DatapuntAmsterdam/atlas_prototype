@@ -72,6 +72,14 @@ npm run analyze:modern
 npm run analyze:legacy
 ```
 
+### Deploying to a demo server
+
+There are three demo servers that can be deployed to, to deploy to one of these servers run the following command on your branch.
+
+```bash
+npm run deploy:demo
+```
+
 ## Other useful commands
 
 - `npm run clean`
