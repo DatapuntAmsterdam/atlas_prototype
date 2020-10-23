@@ -3,11 +3,6 @@ import React from 'react'
 import AuthAlert from './AuthAlert'
 
 describe('AuthAlert', () => {
-  it('should render everything', () => {
-    const component = shallow(<AuthAlert />)
-    expect(component).toMatchSnapshot()
-  })
-
   it('should render with an additional message', () => {
     const excludedResults = 'Lorem ipsum'
     const component = shallow(<AuthAlert excludedResults={excludedResults} />)
