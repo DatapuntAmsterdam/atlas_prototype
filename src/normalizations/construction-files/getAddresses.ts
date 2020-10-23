@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 function formatAddress(
-  locationLabel: string,
-  street: string,
+  locationLabel?: string,
+  street?: string,
   houseNumberLetter?: string,
   houseNumberAddition?: string,
   houseNumberStarting?: number,
@@ -26,24 +26,28 @@ function formatAddress(
   return label
 }
 
-export type Address = {
-  verblijfsobjecten: Array<string>
-  verblijfsobjecten_label: Array<string>
-  locatie_aanduiding: string
+export type Adressen = {
   straat: string
-  huisnummer_letter?: string
-  huisnummer_toevoeging?: string
   huisnummer_van?: number
   huisnummer_tot?: number
+  nummeraanduidingen: string[]
+  nummeraanduidingen_label: string[]
+  panden: string[]
+  verblijfsobjecten: string[]
+  verblijfsobjecten_label: string[]
+  openbareruimte_id: string
+  huisnummer_letter?: string
+  huisnummer_toevoeging?: string
+  locatie_aanduiding?: string
 }
 
 type AddressResult = {
   id: string
-  type: 'nummeraanduiding' | 'verblijfsobject'
+  type: 'verblijfsobject'
   label: string
 }
 
-const getAddresses = (results: Address[]): AddressResult[] =>
+const getAddresses = (results: Adressen[]): AddressResult[] =>
   results
     .reduce<AddressResult[]>(
       (

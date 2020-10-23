@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import { Heading, Link, List, ListItem, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import getAddresses, { Address } from '../../../normalizations/construction-files/getAddresses'
+import getAddresses, { Adressen } from '../../../normalizations/construction-files/getAddresses'
 import { toDataDetail } from '../../../store/redux-first-router/actions'
 import DefinitionList, { DefinitionListItem } from '../DefinitionList'
 import Gallery from '../Gallery/Gallery'
@@ -13,41 +13,60 @@ export type ConstructionFileImage = {
   url: string
 }
 
-// eslint-disable camelcase
-type ConstructionFile = {
-  barcode: string
-  bestanden: Array<ConstructionFileImage>
-  subdossier_titel: string
-  access: 'RESTRICTED' | 'PUBLIC'
-  document_omschrijving?: string
-  oorspronkelijk_pad?: string
-}
+type Access = 'RESTRICTED' | 'PUBLIC'
+type Status = 'Aanvraag' | 'Behandeling' | null
 
-export type ConstructionFileDetailProps = {
+export type Bouwdossier = {
   titel: string
-  documenten: Array<ConstructionFile>
-  datering: string
-  access: 'RESTRICTED' | 'PUBLIC'
-  dossier_type: string
   dossiernr: number
   stadsdeel: string
-  adressen: Array<Address>
-  olo_liaan_nummer?: string
-  document_omschrijving?: string
+  datering: string
+  dossier_type: string
+  dossier_status?: Status
+  olo_liaan_nummer?: number | null
+  access: Access
+  activiteiten: any[]
+  documenten: Documenten[]
+  adressen: Adressen[]
 }
 
+type Links = {
+  self: Self
+}
+
+type Self = {
+  href: string
+}
+
+type Documenten = {
+  subdossier_titel: string
+  barcode: string
+  bestanden: Bestanden[]
+  oorspronkelijk_pad: string[]
+  document_omschrijving?: string
+  access: Access
+}
+
+type Bestanden = {
+  filename: string
+  url: string
+}
 const ContentBlock = styled.div`
-  display: block;
   padding: ${themeSpacing(5)};
 `
 
-const PageWrapper = styled.div`
+const Header = styled.header`
+  padding: ${themeSpacing(5)};
+`
+
+const PageWrapper = styled.article`
   padding-bottom: ${themeSpacing(18)};
 `
 
 const SubHeading = styled(Heading)<{ hasMarginBottom?: boolean }>`
   color: ${themeColor('secondary')};
   margin-bottom: ${({ hasMarginBottom }) => (hasMarginBottom ? themeSpacing(2) : 0)};
+  font-weight: bold;
 `
 
 const StyledDefinitionList = styled(DefinitionList)`
@@ -58,7 +77,7 @@ const StyledDefinitionListItem = styled(DefinitionListItem)`
   padding-left: ${themeSpacing(5)}; // Align the terms on the left with the page content
 `
 
-const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
+const ConstructionFileDetail: FunctionComponent<Bouwdossier> = ({
   titel: title,
   documenten,
   adressen: addresses,
@@ -72,40 +91,41 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
   const id = `${district}${fileNumber}`
   const addressList = getAddresses(addresses)
 
-  // Sort alphabetically
-  const documents = documenten.sort((a, b) => a.subdossier_titel.localeCompare(b.subdossier_titel))
-
   return (
     <PageWrapper>
-      <ContentBlock>
-        <SubHeading forwardedAs="h3">Bouw- en omgevingsdossiers</SubHeading>
-        <Heading forwardedAs="h1">{title}</Heading>
-      </ContentBlock>
+      <Header>
+        <SubHeading forwardedAs="p">Bouw- en omgevingsdossiers</SubHeading>
+        <Heading>{title}</Heading>
+      </Header>
 
-      <StyledDefinitionList>
+      <StyledDefinitionList data-testid="definitionList">
         <StyledDefinitionListItem term="Titel">{title}</StyledDefinitionListItem>
         <StyledDefinitionListItem term="Datering">{date}</StyledDefinitionListItem>
         <StyledDefinitionListItem term="Type">{fileType}</StyledDefinitionListItem>
         <StyledDefinitionListItem term="Dossiernummer">{fileNumber}</StyledDefinitionListItem>
         <StyledDefinitionListItem term="Openbaarheid">{access}</StyledDefinitionListItem>
         {oloLiaanNumber && (
-          <StyledDefinitionListItem term="OLO of liaan nummer">
+          <StyledDefinitionListItem term="OLO of liaan nummer" data-testid="oloLiaanNumber">
             {oloLiaanNumber}
           </StyledDefinitionListItem>
         )}
       </StyledDefinitionList>
 
-      {documents.length &&
-        documents.map(
-          ({
-            barcode,
-            bestanden: files,
-            subdossier_titel: documentTitle,
-            access: documentAccess,
-            document_omschrijving: description,
-            oorspronkelijk_pad: filePath,
-          }) => (
-            <React.Fragment key={barcode}>
+      {documenten
+        .sort((a, b) => a.subdossier_titel.localeCompare(b.subdossier_titel))
+        .map(
+          (
+            {
+              barcode,
+              bestanden: files,
+              subdossier_titel: documentTitle,
+              access: documentAccess,
+              document_omschrijving: description,
+              oorspronkelijk_pad: filePath,
+            },
+            index,
+          ) => (
+            <div data-testid={`constructionDocuments-${index}`} key={barcode}>
               <ContentBlock>
                 <SubHeading
                   hasMarginBottom={false}
@@ -114,15 +134,15 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
                 >{`${documentTitle} (${files.length})`}</SubHeading>
               </ContentBlock>
               {oloLiaanNumber && (
-                <StyledDefinitionList>
+                <StyledDefinitionList data-testid="oloLiaanNumberDocumentDescription">
                   {description && (
                     <StyledDefinitionListItem term="Beschrijving">
                       {description}
                     </StyledDefinitionListItem>
                   )}
-                  {filePath && (
+                  {filePath?.length && (
                     <StyledDefinitionListItem term="Oorspronkelijk pad">
-                      {filePath}
+                      {filePath.join(', ')}
                     </StyledDefinitionListItem>
                   )}
                   {documentAccess && (
@@ -132,13 +152,19 @@ const ConstructionFileDetail: React.FC<ConstructionFileDetailProps> = ({
                   )}
                 </StyledDefinitionList>
               )}
-              <Gallery key={barcode} id={id} allFiles={files} access={documentAccess} />
-            </React.Fragment>
+              <Gallery
+                data-testid="filesGallery"
+                key={barcode}
+                id={id}
+                allFiles={files}
+                access={documentAccess}
+              />
+            </div>
           ),
         )}
 
       {addressList.length && (
-        <ContentBlock>
+        <ContentBlock data-testid="constructionFileAddresses">
           <SubHeading forwardedAs="h3">Adressen</SubHeading>
           <List>
             {addressList.map(({ id: addressId, label: term, type }) => (

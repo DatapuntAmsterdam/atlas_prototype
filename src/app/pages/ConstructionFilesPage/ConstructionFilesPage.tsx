@@ -10,7 +10,7 @@ import { getFileName, getFileUrl } from '../../../shared/ducks/files/selectors'
 import { isPrintMode } from '../../../shared/ducks/ui/ui'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import ConstructionFileDetail, {
-  ConstructionFileDetailProps as Results,
+  Bouwdossier as Results,
 } from '../../components/ConstructionFileDetail/ConstructionFileDetail'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import useDocumentTitle from '../../utils/useDocumentTitle'

@@ -69,7 +69,7 @@ type GalleryProps = {
 }
 const MAX_LENGTH = 6
 
-const Gallery: React.FC<GalleryProps> = ({ allFiles, id, access }) => {
+const Gallery: React.FC<GalleryProps> = ({ allFiles, id, access, ...rest }) => {
   const lessFiles = allFiles.slice(0, MAX_LENGTH)
   const [files, setFiles] = React.useState(lessFiles)
 
@@ -82,7 +82,7 @@ const Gallery: React.FC<GalleryProps> = ({ allFiles, id, access }) => {
   const restricted = access === 'RESTRICTED'
 
   return (
-    <GalleryContainer key={id}>
+    <GalleryContainer key={id} data-testid={rest['data-testid']}>
       {files.length ? (
         <>
           {!hasRights && !hasExtendedRights ? (
