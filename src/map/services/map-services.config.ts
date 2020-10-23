@@ -514,7 +514,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           },
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
-            `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres?.landelijk_id}`,
+            `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${result.hoofdadres?.landelijk_id}`,
+            {
+              authScopes: [AuthScope.HrR],
+              authScopeRequired: true,
+            },
           ),
         ],
       }
@@ -573,10 +577,18 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${verblijfsobjectData?.hoofdadres?.landelijk_id}`,
+            {
+              authScopes: [AuthScope.HrR],
+              authScopeRequired: true,
+            },
           ),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.OBJECT,
             verblijfsobjectData?.kadastrale_objecten?.href,
+            {
+              authScopes: [AuthScope.BdR],
+              authScopeRequired: true,
+            },
           ),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.MONUMENTEN,
@@ -749,6 +761,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.pandidentificatie}`,
             {
               authScopes: [AuthScope.HrR],
+              authScopeRequired: true,
             },
           ),
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.MONUMENTEN, result?._monumenten?.href),
@@ -813,6 +826,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${result.hoofdadres?.landelijk_id}`,
             {
               authScopes: [AuthScope.HrR],
+              authScopeRequired: true,
             },
           ),
           getPaginatedListBlock(
@@ -1999,7 +2013,17 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               ],
             }
           : undefined,
-        getPaginatedListBlock(GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT, result.rechten?.href),
+        getPaginatedListBlock(
+          GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT,
+          result.rechten?.href,
+          result?.is_natuurlijk_persoon
+            ? {
+                authScopes: [AuthScope.BrkRsn],
+                authScopeRequired: true,
+                specialAuthLevel: true,
+              }
+            : undefined,
+        ),
       ],
     }),
   },

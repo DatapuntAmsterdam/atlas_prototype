@@ -4,7 +4,7 @@ import { AuthError } from '../../../shared/services/api/errors'
 import usePromise, { PromiseFulfilledResult, PromiseStatus } from '../../utils/usePromise'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
+import AuthAlert from '../Alerts/AuthAlert'
 
 const StyledLoadingSpinner = styled(LoadingSpinner)`
   position: absolute;
@@ -39,7 +39,7 @@ const PromiseResult: <T>(props: PageTemplateProps<T>) => ReactElement | null = (
   }
 
   if (result.error instanceof AuthError && result.error.code === 401) {
-    return <MoreResultsWhenLoggedIn excludedResults={result.error.message} />
+    return <AuthAlert excludedResults={result.error.message} />
   }
 
   return (

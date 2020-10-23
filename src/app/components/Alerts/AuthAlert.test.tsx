@@ -1,16 +1,16 @@
 import { shallow } from 'enzyme'
 import React from 'react'
-import MoreResultsWhenLoggedIn from './MoreResultsWhenLoggedIn'
+import AuthAlert from './AuthAlert'
 
-describe('MoreResultsWhenLoggedIn', () => {
+describe('AuthAlert', () => {
   it('should render everything', () => {
-    const component = shallow(<MoreResultsWhenLoggedIn />)
+    const component = shallow(<AuthAlert />)
     expect(component).toMatchSnapshot()
   })
 
   it('should render with an additional message', () => {
     const excludedResults = 'Lorem ipsum'
-    const component = shallow(<MoreResultsWhenLoggedIn excludedResults={excludedResults} />)
+    const component = shallow(<AuthAlert excludedResults={excludedResults} />)
 
     expect(component.find('Paragraph').at(0).props().children).toContain('over: Lorem ipsum.')
   })

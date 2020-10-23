@@ -13,11 +13,6 @@ import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map
 import { FETCH_MAP_DETAIL_REQUEST } from '../../ducks/detail/constants'
 import { getMapDetail } from '../../ducks/detail/actions'
 import { selectLatestMapDetail } from '../../ducks/detail/selectors'
-import {
-  FETCH_PANORAMA_PREVIEW_REQUEST,
-  fetchPanoramaPreview,
-} from '../../../panorama/ducks/preview/panorama-preview'
-import { getLocationId } from '../../ducks/map/selectors'
 import { getDetailLocation } from '../../../store/redux-first-router/selectors'
 import {
   toMapAndPreserveQuery,
@@ -33,7 +28,6 @@ jest.mock('../../ducks/panel-layers/map-panel-layers')
 jest.mock('../../../shared/ducks/data-search/actions')
 jest.mock('../../ducks/detail/actions')
 jest.mock('../../ducks/detail/selectors')
-jest.mock('../../../panorama/ducks/preview/panorama-preview')
 jest.mock('../../ducks/map/selectors')
 jest.mock('../../../shared/ducks/selection/selection')
 jest.mock('../../../store/redux-first-router/selectors')
@@ -103,9 +97,6 @@ describe('MapPreviewPanelContainer', () => {
     toDataDetail.mockImplementation(() => ({ type: 'sometype' }))
     toMapAndPreserveQuery.mockImplementation(() => ({ type: 'sometype' }))
     setViewMode.mockImplementation(() => ({ type: 'sometype' }))
-    fetchPanoramaPreview.mockImplementation(() => ({
-      type: FETCH_PANORAMA_PREVIEW_REQUEST,
-    }))
     selectNotClickableVisibleMapLayers.mockImplementation(() => [])
     isGeoSearch.mockImplementation((state) => !(state.detail && state.detail.endpoint))
     isSearchLoading.mockReturnValue(false)
@@ -113,7 +104,6 @@ describe('MapPreviewPanelContainer', () => {
 
   afterEach(() => {
     getMapDetail.mockReset()
-    fetchPanoramaPreview.mockReset()
     selectLatestMapDetail.mockReset()
     selectNotClickableVisibleMapLayers.mockReset()
   })
@@ -138,29 +128,5 @@ describe('MapPreviewPanelContainer', () => {
     wrapper.find('.map-preview-panel__button').at(1).simulate('click')
 
     expect(store.dispatch).toHaveBeenCalledWith(toMapAndPreserveQuery())
-  })
-
-  describe('onPanoPreviewClick', () => {
-    it('should dispatch', () => {
-      const store = configureMockStore()({
-        ...initialState,
-        panorama: {
-          location: {
-            latitude: 123,
-            longitude: 321,
-          },
-          previews: {
-            '123,321': 'location',
-          },
-        },
-      })
-      getLocationId.mockImplementation(() => '123,321')
-      jest.spyOn(store, 'dispatch')
-      const wrapper = shallow(<MapPreviewPanelContainer store={store} />)
-        .dive()
-        .dive()
-      wrapper.instance().onPanoPreviewClick()
-      expect(store.dispatch).toHaveBeenCalledWith(toPanoramaAndPreserveQuery())
-    })
   })
 })

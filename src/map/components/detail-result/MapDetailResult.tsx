@@ -14,21 +14,14 @@ import MapDetailResultItemTable from './MapDetailResultItemTable'
 import MapDetailResultWrapper from './MapDetailResultWrapper'
 import useDataDetail from '../../../app/pages/DataDetailPage/useDataDetail'
 import { MapDetails } from '../../services/map'
+import PromiseResult from '../../../app/components/PromiseResult/PromiseResult'
 
 export interface MapDetailResultProps {
-  panoUrl?: string
-  result: MapDetails
   onMaximize: () => void
-  onPanoPreviewClick: () => void
 }
 
 // Todo: AfterBeta can be removed
-const MapDetailResult: React.FC<MapDetailResultProps> = ({
-  panoUrl,
-  result,
-  onMaximize,
-  onPanoPreviewClick,
-}) => {
+const MapDetailResult: React.FC<MapDetailResultProps> = ({ onMaximize }) => {
   const { id: rawId, subtype: subType, type } = useParams<DetailInfo & { subtype: string }>()
   if (!rawId || !subType || !type) {
     return null
@@ -36,32 +29,35 @@ const MapDetailResult: React.FC<MapDetailResultProps> = ({
   const id = rawId.includes('id') ? rawId.substr(2) : rawId
 
   // Todo: need to trigger this to dispatch certain redux actions (Legacy)
-  useDataDetail(id, subType, type)
-  return result ? (
-    <MapDetailResultWrapper
-      panoUrl={panoUrl}
-      subTitle={result?.data?.subTitle}
-      title={result?.data?.title}
-      onMaximize={onMaximize}
-      onPanoPreviewClick={onPanoPreviewClick}
-    >
-      {result?.data?.notifications
-        ?.filter(({ value }) => value)
-        ?.map((notification) => (
-          <Alert
-            key={notification.id}
-            dismissible={notification.canClose}
-            level={notification.level}
-          >
-            {notification.value}
-          </Alert>
-        ))}
+  const { result: promise } = useDataDetail<MapDetails>(id, subType, type)
+  return (
+    <PromiseResult promise={promise}>
+      {({ value }) => (
+        <MapDetailResultWrapper
+          location={value.location}
+          subTitle={value?.data?.subTitle}
+          title={value?.data?.title}
+          onMaximize={onMaximize}
+        >
+          {value?.data?.notifications
+            ?.filter(({ value: val }: any) => val)
+            ?.map((notification: any) => (
+              <Alert
+                key={notification.id}
+                dismissible={notification.canClose}
+                level={notification.level}
+              >
+                {notification.value}
+              </Alert>
+            ))}
 
-      <ul className="map-detail-result__list">
-        {result?.data?.items?.map((item, index) => renderItem(item, index))}
-      </ul>
-    </MapDetailResultWrapper>
-  ) : null
+          <ul className="map-detail-result__list">
+            {value.data?.items?.map((item: any, index: number) => renderItem(item, index))}
+          </ul>
+        </MapDetailResultWrapper>
+      )}
+    </PromiseResult>
+  )
 }
 
 function renderItem(item: DetailResultItem, index: number) {

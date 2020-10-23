@@ -10,16 +10,3 @@
     }
   }
 }
-
-.dcatd-button--list {
-  button {
-    float: right;
-
-    @include header-button('datasets', 14px);
-
-    &::before {
-      margin-top: 6px;
-      margin-right: 5px;
-    }
-  }
-}

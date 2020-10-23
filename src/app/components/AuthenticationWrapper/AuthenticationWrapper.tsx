@@ -1,11 +1,10 @@
 import React, { FunctionComponent, ReactElement } from 'react'
 import AuthScope from '../../../shared/services/api/authScope'
 import useAuthScope from '../../utils/useAuthScope'
-import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
+import AuthAlert, { AuthAlertProps } from '../Alerts/AuthAlert'
 
-type Props = {
+interface Props extends AuthAlertProps {
   authScopes?: AuthScope[]
-  excludedResults?: string
   authScopeRequired?: boolean
   /**
    * Whether the alert should rendered first. Default: false
@@ -18,6 +17,7 @@ const AuthenticationWrapper: FunctionComponent<Props> = ({
   authScopes,
   excludedResults,
   authScopeRequired,
+  specialAuthLevel,
   children,
   alertFirst,
 }) => {
@@ -25,7 +25,7 @@ const AuthenticationWrapper: FunctionComponent<Props> = ({
   const userIsAuthorized = isUserAuthorized(authScopes)
   const showAlert = !userIsAuthorized
 
-  const alert = showAlert && <MoreResultsWhenLoggedIn excludedResults={excludedResults} />
+  const alert = showAlert && <AuthAlert {...{ specialAuthLevel, excludedResults }} />
   const result = (userIsAuthorized || !authScopeRequired) && children()
   return (
     <>

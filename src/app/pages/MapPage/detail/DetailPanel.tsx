@@ -26,12 +26,12 @@ import DetailDefinitionList from './DetailDefinitionList'
 import DetailHeading from './DetailHeading'
 import DetailInfoBox, { InfoBoxProps } from './DetailInfoBox'
 import DetailLinkList from './DetailLinkList'
-import DetailSpacer from './DetailSpacer'
 import DetailTable from './DetailTable'
 import { AuthError } from '../../../../shared/services/api/errors'
 import useAuthScope from '../../../utils/useAuthScope'
 import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
-import MoreResultsWhenLoggedIn from '../../../components/Alerts/MoreResultsWhenLoggedIn'
+import AuthAlert from '../../../components/Alerts/AuthAlert'
+import Spacer from '../../../components/Spacer/Spacer'
 
 interface DetailPanelProps {
   detailUrl: string
@@ -45,7 +45,7 @@ const ShowMoreButton = styled(Button)`
   margin-top: ${themeSpacing(1)};
 `
 
-const StyledMoreResultsWhenLoggedIn = styled(MoreResultsWhenLoggedIn)`
+const StyledAuthAlert = styled(AuthAlert)`
   order: -1; // Make sure the alert is always on top and not pushed down because of grid
 `
 
@@ -81,7 +81,7 @@ const Wrapper = styled.div<LegacyLayout>`
       ${PreviewContainer} {
         grid-area: 2 / 2 / 3 / 3;
 
-        & + ${DetailSpacer} {
+        & + ${Spacer} {
           display: none;
         }
       }
@@ -161,7 +161,7 @@ const GroupedItems: FunctionComponent<GroupedItemsProps> = ({ item }) => (
     {item.entries.map((groupedItem) => (
       <Fragment key={groupedItem?.title}>
         <Item item={groupedItem} subItem />
-        <DetailSpacer />
+        <Spacer />
       </Fragment>
     ))}
   </>
@@ -220,6 +220,7 @@ const Item: FunctionComponent<ItemProps> = ({ item, subItem, hideHeader }) => {
         authScopes={item?.authScopes}
         excludedResults={item?.authExcludedInfo || item.title}
         authScopeRequired={item.authScopeRequired}
+        specialAuthLevel={item.specialAuthLevel}
       >
         {() => component}
       </AuthenticationWrapper>
@@ -309,19 +310,17 @@ export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, 
   }
   return (
     <Wrapper legacyLayout={legacyLayout}>
-      {details.showAuthAlert && (
-        <StyledMoreResultsWhenLoggedIn excludedResults={details.authExcludedInfo} />
-      )}
+      {details.showAuthAlert && <StyledAuthAlert excludedResults={details.authExcludedInfo} />}
       {details.location && !details.data.noPanorama && (
         <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
       )}
-      <DetailSpacer />
+      <Spacer />
       {details.data.notifications?.map((notification) => (
         <Fragment key={notification.id}>
           <Alert level={notification.level} dismissible={notification.canClose}>
             {notification.value}
           </Alert>
-          <DetailSpacer />
+          <Spacer />
         </Fragment>
       ))}
       {details.data.items.map((item) => {
@@ -332,7 +331,7 @@ export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, 
         return (
           <ItemWrapper key={item.title} className={item.type} gridArea={item.gridArea}>
             <Item item={item} />
-            <DetailSpacer />
+            <Spacer />
           </ItemWrapper>
         )
       })}

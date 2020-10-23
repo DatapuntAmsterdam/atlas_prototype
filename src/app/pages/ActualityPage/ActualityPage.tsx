@@ -1,21 +1,22 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
+import { Column, Container, Heading, Row } from '@amsterdam/asc-ui'
 import { getMetadata, Metadata } from '../../../api/metadata'
 import PromiseResult from '../../components/PromiseResult/PromiseResult'
+import ContentContainer from '../../components/ContentContainer/ContentContainer'
 
 const ActualityPage: FunctionComponent = () => (
-  <div className="c-page">
-    <div
-      style={{ display: 'block' }}
-      className="c-dashboard__column  u-col-sm--12 qa-dashboard__column--right"
-    >
-      <div className="c-dashboard__page o-max-width">
-        <div className="c-dashboard__page-inner c-dashboard__content o-max-width__inner u-gutter">
-          <h1 className="o-header__title u-margin__bottom--3">Actualiteit</h1>
-          <div className="qa-page">{renderContents()}</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ContentContainer>
+    <Container>
+      <Row>
+        <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
+          <div>
+            <Heading>Actualiteit</Heading>
+            <div className="qa-page">{renderContents()}</div>
+          </div>
+        </Column>
+      </Row>
+    </Container>
+  </ContentContainer>
 )
 
 function renderContents() {

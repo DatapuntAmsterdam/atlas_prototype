@@ -17,10 +17,7 @@ const handleErrors = (response: Response, reloadOnUnauthorized: boolean) => {
   }
 
   if (response.status === 401) {
-    throw new AuthError(
-      response.status,
-      `Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om deze data te bekijken.`,
-    )
+    throw new AuthError(response.status, '')
   }
 
   if (!response.ok) {

@@ -6,7 +6,7 @@ import { dcatdScopes } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
 import { toDatasetDetail, toDatasetSearch } from '../../../store/redux-first-router/actions'
 import ActionButton from '../../components/ActionButton/ActionButton'
-import MoreResultsWhenLoggedIn from '../../components/Alerts/MoreResultsWhenLoggedIn'
+import AuthAlert from '../../components/Alerts/AuthAlert'
 import DatasetCard from '../../components/DatasetCard'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { modificationDateFilter } from '../../components/Filters/Filters'
@@ -73,7 +73,7 @@ const DatasetSearchResults = ({ query, label, results, errors, isOverviewPage })
         ))}
 
         {unauthorizedLabels.length > 0 && (
-          <MoreResultsWhenLoggedIn excludedResults={unauthorizedLabels.join(', ')} />
+          <AuthAlert excludedResults={unauthorizedLabels.join(', ')} />
         )}
       </DatasetCardContainer>
     )

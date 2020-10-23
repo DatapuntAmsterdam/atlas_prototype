@@ -156,7 +156,7 @@ export const kadastraalObject = async (result) => {
     name: result.kadastrale_gemeente ? result.kadastrale_gemeente.gemeente._display : false,
     brkData: {
       ...brk,
-      rechten: brk.rechten.map((recht) => ({
+      rechten: brk?.rechten?.map((recht) => ({
         ...recht.kadastraal_subject,
         _display: recht?._display,
       })),

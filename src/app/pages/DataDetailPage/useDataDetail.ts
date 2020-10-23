@@ -4,17 +4,25 @@ import { fetchDetailData, getServiceDefinition } from '../../../map/services/map
 import { clearMapDetail, showDetail } from '../../../shared/ducks/detail/actions'
 import { fetchMapDetailSuccess } from '../../../map/ducks/detail/actions'
 import getGeometry from '../../../shared/services/geometry/geometry'
-import { setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { getViewMode, setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { getCurrentEndpoint } from '../../../map/ducks/detail/selectors'
 import { AuthError } from '../../../shared/services/api/errors'
 import mapFetch from '../../../map/services/map-fetch/map-fetch'
 import useAuthScope from '../../utils/useAuthScope'
 
 // Todo: AfterBeta: can be removed
-const useDataDetail = (id: string, subType: string, type: string) => {
+const useDataDetail = <T = any>(
+  id: string,
+  subType: string,
+  type: string,
+): {
+  result: Promise<T>
+  onRetry: () => void
+} => {
   const dispatch = useDispatch()
   const [retryCount, setRetryCount] = useState(0)
 
+  const view = useSelector(getViewMode)
   const currentEndpoint = useSelector(getCurrentEndpoint)
 
   const onRetry = useCallback(() => {
@@ -65,7 +73,7 @@ const useDataDetail = (id: string, subType: string, type: string) => {
       // Some endpoints only return a geometry when the user is authenticated e.g. authorized to view it
       if (!geometry) {
         dispatch(setViewMode(VIEW_MODE.FULL))
-      } else {
+      } else if (view !== VIEW_MODE.MAP) {
         dispatch(setViewMode(VIEW_MODE.SPLIT))
       }
       return {

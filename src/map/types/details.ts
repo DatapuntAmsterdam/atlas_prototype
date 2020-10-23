@@ -34,6 +34,7 @@ export enum DetailResultItemType {
 export interface DetailAuthentication {
   authScopes?: AuthScope[]
   authScopeRequired?: boolean
+  specialAuthLevel?: boolean
   /**
    * A string explaining which info is hidden from the unauthorized user
    */

@@ -21,11 +21,9 @@ import {
   getMapPanelResults,
   isSearchLoading,
 } from '../../../shared/ducks/data-search/selectors'
-import { getPanoramaPreview } from '../../../panorama/ducks/preview/panorama-preview'
 import PARAMETERS from '../../../store/parameters'
 
 const mapStateToProps = (state) => ({
-  panoPreview: getPanoramaPreview(state),
   searchResults: getMapPanelResults(state),
   dataSearch: getDataSearch(state),
   currentPage: getPage(state),
