@@ -7,7 +7,7 @@ if [[ $SEVER_NUMBER -lt 0 || $SEVER_NUMBER -gt 3 ]]
   exit 1
 fi
 
-SOURCE_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+SOURCE_BRANCH=$(git branch --show-current)
 TARGET_BRANCH="demo$SEVER_NUMBER"
 
 echo "Pushing $SOURCE_BRANCH to $TARGET_BRANCH."
