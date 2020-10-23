@@ -1,7 +1,7 @@
 {
   "include": [
     "./src/**/*",
-    "./test/**/*",
+    "./test/*",
   ],
   "compilerOptions": {
     "strict": true,

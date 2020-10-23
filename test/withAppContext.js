@@ -8,6 +8,10 @@ import configureStore from '../src/store/store'
 
 const { store, history } = configureStore()
 
+/**
+ * HOC that wraps a component in the necessary providers so that the component can access theming,
+ * the store and can use routing.
+ */
 const withAppContext = (Component) => (
   <ThemeProvider>
     <Provider store={store}>
