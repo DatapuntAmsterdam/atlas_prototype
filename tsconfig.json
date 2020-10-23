@@ -13,6 +13,7 @@
     "typeRoots": [
       "src/typings",
       "node_modules/@types"
-    ]
+    ],
+    "resolveJsonModule": true
   }
 }

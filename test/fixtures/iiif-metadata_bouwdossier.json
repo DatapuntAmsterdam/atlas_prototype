@@ -2,8 +2,8 @@
   "_links": {
     "self": { "href": "https://acc.api.data.amsterdam.nl/iiif-metadata/bouwdossier/SA84102/" }
   },
-  "titel": "Keizersgracht 646 A - 646 G",
-  "_display": "84102 - Keizersgracht 646 A - 646 G",
+  "titel": "Some address or another 646 A - 646 G",
+  "_display": "84102 - Some address or another 646 A - 646 G",
   "dossiernr": 84102,
   "stadsdeel": "SA",
   "datering": "1994-01-01",
@@ -41,7 +41,7 @@
   ],
   "adressen": [
     {
-      "straat": "Keizersgracht",
+      "straat": "Some address or another",
       "huisnummer_van": 646,
       "huisnummer_tot": 646,
       "nummeraanduidingen": [
@@ -54,13 +54,13 @@
         "0363200000447586"
       ],
       "nummeraanduidingen_label": [
-        "Keizersgracht 646B",
-        "Keizersgracht 646G",
-        "Keizersgracht 646D",
-        "Keizersgracht 646F",
-        "Keizersgracht 646A",
-        "Keizersgracht 646C",
-        "Keizersgracht 646E"
+        "Some address or another 646B",
+        "Some address or another 646G",
+        "Some address or another 646D",
+        "Some address or another 646F",
+        "Some address or another 646A",
+        "Some address or another 646C",
+        "Some address or another 646E"
       ],
       "panden": ["0363100012165075"],
       "verblijfsobjecten": [
@@ -73,13 +73,13 @@
         "0363010000686758"
       ],
       "verblijfsobjecten_label": [
-        "Keizersgracht 646E",
-        "Keizersgracht 646G",
-        "Keizersgracht 646D",
-        "Keizersgracht 646C",
-        "Keizersgracht 646A",
-        "Keizersgracht 646F",
-        "Keizersgracht 646B"
+        "Some address or another 646E",
+        "Some address or another 646G",
+        "Some address or another 646D",
+        "Some address or another 646C",
+        "Some address or another 646A",
+        "Some address or another 646F",
+        "Some address or another 646B"
       ],
       "openbareruimte_id": "0363300000003984",
       "huisnummer_letter": null,
