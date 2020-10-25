@@ -40,7 +40,7 @@
     "@amsterdam/react-maps": "^0.10.0",
     "@babel/runtime": "^7.12.1",
     "@datapunt/matomo-tracker-js": "0.3.1",
-    "@datapunt/matomo-tracker-react": "0.3.0",
+    "@datapunt/matomo-tracker-react": "0.3.1",
     "@sentry/browser": "5.27.1",
     "@turf/turf": "^5.1.6",
     "@types/file-saver": "^2.0.1",
