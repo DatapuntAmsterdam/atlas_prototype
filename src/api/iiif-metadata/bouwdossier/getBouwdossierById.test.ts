@@ -18,7 +18,7 @@ describe('getBouwdossierById', () => {
     await expect(getBouwdossierById(id)).resolves.toEqual(response)
 
     expect(mockedFetchWithoutToken).toHaveBeenCalledWith(
-      joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id]),
+      joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id, '/']),
     )
   })
 })

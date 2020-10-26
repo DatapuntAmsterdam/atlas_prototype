@@ -10,4 +10,6 @@ import { Bouwdossier } from './types'
  */
 // eslint-disable-next-line import/prefer-default-export
 export const getBouwdossierById = (id: string) =>
-  fetchWithToken<Bouwdossier>(joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id]))
+  fetchWithToken<Bouwdossier>(
+    joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id, '/']),
+  )
