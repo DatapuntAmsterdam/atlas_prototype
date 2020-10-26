@@ -11,10 +11,7 @@ import ConstructionFileDetail from '../../components/ConstructionFileDetail/Cons
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import usePromise, { PromiseStatus } from '../../utils/usePromise'
-import {
-  getBouwdossierById,
-  Bouwdossier as BouwdossierType,
-} from '../../../api/iiif-metadata/bouwdossier'
+import { getBouwdossierById, Bouwdossier } from '../../../api/iiif-metadata/bouwdossier'
 
 const ImageViewer = lazy(
   () => import(/* webpackChunkName: "ImageViewer" */ '../../components/ImageViewer/ImageViewer'),
@@ -34,7 +31,7 @@ interface ConstructionFilesPageParams {
 
 const ConstructionFilesPage: FunctionComponent = () => {
   const { id } = useParams<ConstructionFilesPageParams>()
-  const [results, setResults] = useState<BouwdossierType | null>(null)
+  const [results, setResults] = useState<Bouwdossier | null>(null)
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(true)
   const [imageViewerActive, setImageViewerActive] = useState(false)

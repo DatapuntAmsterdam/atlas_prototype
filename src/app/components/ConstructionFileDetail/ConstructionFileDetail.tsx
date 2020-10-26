@@ -5,7 +5,7 @@ import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import getAddresses from '../../../normalizations/construction-files/getAddresses'
 import { toDataDetail } from '../../../store/redux-first-router/actions'
-import { Bouwdossier as BouwdossierType } from '../../../api/iiif-metadata/bouwdossier'
+import { Bouwdossier } from '../../../api/iiif-metadata/bouwdossier'
 import DefinitionList, { DefinitionListItem } from '../DefinitionList'
 import Gallery from '../Gallery/Gallery'
 
@@ -35,7 +35,7 @@ const StyledDefinitionListItem = styled(DefinitionListItem)`
   padding-left: ${themeSpacing(5)}; // Align the terms on the left with the page content
 `
 
-const ConstructionFileDetail: FunctionComponent<BouwdossierType> = ({
+const ConstructionFileDetail: FunctionComponent<Bouwdossier> = ({
   titel: title,
   documenten,
   adressen: addresses,
