@@ -1,8 +1,8 @@
 import { mocked } from 'ts-jest/utils'
+import { getBouwdossierById } from '.'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
-import { getBouwdossierById } from '.'
 
 jest.mock('../../../shared/services/api/api')
 
@@ -18,7 +18,7 @@ describe('getBouwdossierById', () => {
     await expect(getBouwdossierById(id)).resolves.toEqual(response)
 
     expect(mockedFetchWithoutToken).toHaveBeenCalledWith(
-      joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id, '/']),
+      joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id], true),
     )
   })
 })
