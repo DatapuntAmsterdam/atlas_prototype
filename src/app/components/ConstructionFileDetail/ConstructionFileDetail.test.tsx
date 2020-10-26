@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, within } from '@testing-library/react'
 
-import bouwdossierFixture from '../../../api/iiif-metadata/bouwdossier/fixtures/bouwdossier'
+import bouwdossierFixture from '../../../api/iiif-metadata/bouwdossier/fixture'
 import withAppContext from '../../utils/withAppContext'
 
 import ConstructionFileDetail from './ConstructionFileDetail'

@@ -35,10 +35,10 @@ export type Bouwdossier = {
   access: BouwdossierAccess
   activiteiten: string[]
   adressen: Adres[]
-  datering: Date
+  datering: string | true
   documenten: Document[]
   dossier_status?: BouwdossierStatus | null
-  dossier_type: string
+  dossier_type: string | null
   dossiernr: number
   olo_liaan_nummer?: number | null
   stadsdeel: string
