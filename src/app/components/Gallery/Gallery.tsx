@@ -1,6 +1,6 @@
+import React, { FunctionComponent } from 'react'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Column, Heading, Link, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled, { css } from 'styled-components'
 import { SCOPES } from '../../../shared/services/auth/auth'
@@ -8,7 +8,7 @@ import getState from '../../../shared/services/redux/get-state'
 import { toConstructionFileViewer } from '../../../store/redux-first-router/actions'
 import NotificationLevel from '../../models/notification'
 import ActionButton from '../ActionButton/ActionButton'
-import { ConstructionFileImage } from '../ConstructionFileDetail/ConstructionFileDetail'
+import { Bestanden, BouwdossierAccess } from '../../../api/iiif-metadata/bouwdossier'
 import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
 
 const StyledAlert = styled(Alert)`
@@ -63,13 +63,14 @@ const StyledLink = styled(Link)`
 `
 
 type GalleryProps = {
-  allFiles: Array<ConstructionFileImage>
+  allFiles: Bestanden[]
   id: string
-  access: 'RESTRICTED' | 'PUBLIC'
+  access: BouwdossierAccess
 }
+
 const MAX_LENGTH = 6
 
-const Gallery: React.FC<GalleryProps> = ({ allFiles, id, access, ...rest }) => {
+const Gallery: FunctionComponent<GalleryProps> = ({ allFiles, id, access, ...rest }) => {
   const lessFiles = allFiles.slice(0, MAX_LENGTH)
   const [files, setFiles] = React.useState(lessFiles)
 

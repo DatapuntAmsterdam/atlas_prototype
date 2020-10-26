@@ -1,3 +1,5 @@
+import { Adressen } from '../../api/iiif-metadata/bouwdossier'
+
 /* eslint-disable camelcase */
 function formatAddress(
   locationLabel?: string,
@@ -26,28 +28,13 @@ function formatAddress(
   return label
 }
 
-export type Adressen = {
-  straat: string
-  huisnummer_van?: number
-  huisnummer_tot?: number
-  nummeraanduidingen: string[]
-  nummeraanduidingen_label: string[]
-  panden: string[]
-  verblijfsobjecten: string[]
-  verblijfsobjecten_label: string[]
-  openbareruimte_id: string
-  huisnummer_letter?: string
-  huisnummer_toevoeging?: string
-  locatie_aanduiding?: string
-}
-
 type AddressResult = {
   id: string
   type: 'verblijfsobject'
   label: string
 }
 
-const getAddresses = (results: Adressen[]): AddressResult[] =>
+const getAddresses = (results: Adressen[]) =>
   results
     .reduce<AddressResult[]>(
       (

@@ -3,54 +3,12 @@ import { Heading, Link, List, ListItem, themeColor, themeSpacing } from '@amster
 import React, { FunctionComponent } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import getAddresses, { Adressen } from '../../../normalizations/construction-files/getAddresses'
+import getAddresses from '../../../normalizations/construction-files/getAddresses'
 import { toDataDetail } from '../../../store/redux-first-router/actions'
+import { Bouwdossier as BouwdossierType } from '../../../api/iiif-metadata/bouwdossier'
 import DefinitionList, { DefinitionListItem } from '../DefinitionList'
 import Gallery from '../Gallery/Gallery'
 
-export type ConstructionFileImage = {
-  filename: string
-  url: string
-}
-
-type Access = 'RESTRICTED' | 'PUBLIC'
-type Status = 'Aanvraag' | 'Behandeling' | null
-
-export type Bouwdossier = {
-  titel: string
-  dossiernr: number
-  stadsdeel: string
-  datering: string
-  dossier_type: string
-  dossier_status?: Status
-  olo_liaan_nummer?: number | null
-  access: Access
-  activiteiten: any[]
-  documenten: Documenten[]
-  adressen: Adressen[]
-}
-
-type Links = {
-  self: Self
-}
-
-type Self = {
-  href: string
-}
-
-type Documenten = {
-  subdossier_titel: string
-  barcode: string
-  bestanden: Bestanden[]
-  oorspronkelijk_pad: string[]
-  document_omschrijving?: string
-  access: Access
-}
-
-type Bestanden = {
-  filename: string
-  url: string
-}
 const ContentBlock = styled.div`
   padding: ${themeSpacing(5)};
 `
@@ -77,7 +35,7 @@ const StyledDefinitionListItem = styled(DefinitionListItem)`
   padding-left: ${themeSpacing(5)}; // Align the terms on the left with the page content
 `
 
-const ConstructionFileDetail: FunctionComponent<Bouwdossier> = ({
+const ConstructionFileDetail: FunctionComponent<BouwdossierType> = ({
   titel: title,
   documenten,
   adressen: addresses,
