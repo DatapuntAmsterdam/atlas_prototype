@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom'
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import '@testing-library/jest-dom'
 
-import configureStore from '../store/store'
+import configureStore from '../../store/store'
 
 const { store, history } = configureStore()
 
