@@ -54,13 +54,13 @@
         "0363200000447586"
       ],
       "nummeraanduidingen_label": [
-        "Some address or another 646B",
-        "Some address or another 646G",
-        "Some address or another 646D",
-        "Some address or another 646F",
-        "Some address or another 646A",
-        "Some address or another 646C",
-        "Some address or another 646E"
+        "Some address or whatnot 646B",
+        "Some address or whatnot 646G",
+        "Some address or whatnot 646D",
+        "Some address or whatnot 646F",
+        "Some address or whatnot 646A",
+        "Some address or whatnot 646C",
+        "Some address or whatnot 646E"
       ],
       "panden": ["0363100012165075"],
       "verblijfsobjecten": [
@@ -73,13 +73,13 @@
         "0363010000686758"
       ],
       "verblijfsobjecten_label": [
-        "Some address or another 646E",
-        "Some address or another 646G",
-        "Some address or another 646D",
-        "Some address or another 646C",
-        "Some address or another 646A",
-        "Some address or another 646F",
-        "Some address or another 646B"
+        "Some address or whatnot 646E",
+        "Some address or whatnot 646G",
+        "Some address or whatnot 646D",
+        "Some address or whatnot 646C",
+        "Some address or whatnot 646A",
+        "Some address or whatnot 646F",
+        "Some address or whatnot 646B"
       ],
       "openbareruimte_id": "0363300000003984",
       "huisnummer_letter": null,

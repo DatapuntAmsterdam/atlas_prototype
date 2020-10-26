@@ -1,31 +1,31 @@
 import { Adressen } from '../../api/iiif-metadata/bouwdossier'
 
 /* eslint-disable camelcase */
-function formatAddress(
-  locationLabel?: string,
-  street?: string,
-  houseNumberLetter?: string,
-  houseNumberAddition?: string,
-  houseNumberStarting?: number,
-  houseNumberEnd?: number,
-) {
-  if (locationLabel) {
-    return locationLabel
+export const formatAddress = ({
+  locatie_aanduiding,
+  straat,
+  huisnummer_letter,
+  huisnummer_toevoeging,
+  huisnummer_van,
+  huisnummer_tot,
+}: Adressen) => {
+  if (locatie_aanduiding) {
+    return locatie_aanduiding
   }
 
-  let label = street
+  let label = straat
 
-  if (houseNumberStarting && houseNumberEnd) {
-    label = `${label} ${houseNumberStarting}${
-      houseNumberEnd !== houseNumberStarting ? `-${houseNumberEnd}` : ''
+  if (huisnummer_van && huisnummer_tot) {
+    label = `${label} ${huisnummer_van}${
+      huisnummer_tot !== huisnummer_van ? `-${huisnummer_tot}` : ''
     }`
   } else {
-    label = `${label} ${houseNumberStarting || ''}${houseNumberLetter || ''}${
-      houseNumberAddition ? `-${houseNumberAddition}` : ''
+    label = `${label} ${huisnummer_van || ''}${huisnummer_letter || ''}${
+      huisnummer_toevoeging ? `-${huisnummer_toevoeging}` : ''
     }`
   }
 
-  return label
+  return label.trim()
 }
 
 type AddressResult = {
@@ -37,36 +37,15 @@ type AddressResult = {
 const getAddresses = (results: Adressen[]) =>
   results
     .reduce<AddressResult[]>(
-      (
-        reducedResults,
-        {
-          verblijfsobjecten,
-          verblijfsobjecten_label,
-          locatie_aanduiding,
-          straat,
-          huisnummer_letter,
-          huisnummer_toevoeging,
-          huisnummer_van,
-          huisnummer_tot,
-        },
-      ) => [
+      (reducedResults, adres) => [
         ...reducedResults,
-        ...verblijfsobjecten.reduce<AddressResult[]>(
+        ...adres.verblijfsobjecten.reduce<AddressResult[]>(
           (reducedVerblijfsobjecten, verblijfsobject, i) => [
             ...reducedVerblijfsobjecten,
             {
               id: verblijfsobject,
               type: 'verblijfsobject',
-              label:
-                verblijfsobjecten_label[i] ||
-                formatAddress(
-                  locatie_aanduiding,
-                  straat,
-                  huisnummer_letter,
-                  huisnummer_toevoeging,
-                  huisnummer_van,
-                  huisnummer_tot,
-                ),
+              label: adres.verblijfsobjecten_label[i] || formatAddress(adres),
             },
           ],
           [],
