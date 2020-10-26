@@ -17,7 +17,7 @@ Cypress.Commands.add('defineAddressDetailRoutes', () => {
   cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
   cy.route('/bag/v1.1/pand/?verblijfsobjecten__id=*').as('getPanden')
   cy.route('/brk/object-expand/?verblijfsobjecten__id=*').as('getObjectExpand')
-  cy.route('/panorama/thumbnail/*').as('getPanorama')
+  cy.route('/panorama/thumbnail?*').as('getPanorama')
   cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen')
   cy.route('/monumenten/monumenten/*').as('getMonument')
   cy.route('*/bouwdossier/*').as('getBouwdossier')

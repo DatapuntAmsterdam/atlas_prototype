@@ -16,7 +16,7 @@ describe('employee PLUS permissions', () => {
   })
 
   it('0. Should show "Kadastrale subjecten" for medewerker plus in the autocomplete', () => {
-    cy.route('/typeahead/?q=bakker').as('getResults')
+    cy.route('/typeahead?q=bakker').as('getResults')
     cy.visit('/')
 
     cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
@@ -36,7 +36,7 @@ describe('employee PLUS permissions', () => {
   })
 
   it('1. Should show "Kadastrale subjecten" and "Vestigingen" in the results', () => {
-    cy.route('/typeahead/?q=bakker').as('getResults')
+    cy.route('/typeahead?q=bakker').as('getResults')
     cy.visit('/')
 
     cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
@@ -172,7 +172,7 @@ describe('employee PLUS permissions', () => {
     cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
     cy.route('/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
     cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen')
-    cy.route('/panorama/thumbnail/*').as('getPanorama')
+    cy.route('/panorama/thumbnail?*').as('getPanorama')
 
     cy.visit(urls.geoSearch)
 

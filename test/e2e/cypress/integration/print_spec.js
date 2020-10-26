@@ -13,8 +13,8 @@ describe('print module', () => {
     cy.wait('@jsonapi')
   })
   it('Should search a meetbout and print the information', () => {
-    cy.route('/typeahead/?q=10581111').as('getTypeAhead')
-    cy.route('/panorama/thumbnail/?*').as('getPanoThumbnail')
+    cy.route('/typeahead?q=10581111').as('getTypeAhead')
+    cy.route('/panorama/thumbnail?*').as('getPanoThumbnail')
     cy.get(DATA_SEARCH.autoSuggestInput).type('10581111')
     cy.wait('@getTypeAhead')
     cy.wait(500)

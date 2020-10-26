@@ -42,7 +42,7 @@ describe('map module', () => {
       cy.defineAddressDetailRoutes()
 
       // Use regular expression to match spaces
-      cy.route('/typeahead/?q=dam+1').as('getTypeaheadResults')
+      cy.route('/typeahead?q=dam+1').as('getTypeaheadResults')
 
       // ensure the viewport is always the same in this test, so the clicks can be aligned properly
       cy.viewport(1000, 660)
@@ -128,8 +128,8 @@ describe('map module', () => {
     it('should add a layer to the map', () => {
       cy.server()
       cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/typeahead/?q=spuistraat+59a').as('getTypeaheadResults')
-      cy.route('/panorama/thumbnail/*').as('getPanorama')
+      cy.route('/typeahead?q=spuistraat+59a').as('getTypeaheadResults')
+      cy.route('/panorama/thumbnail?*').as('getPanorama')
       cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
       cy.hidePopup()
       cy.visit(`/`)
@@ -250,9 +250,6 @@ describe('map module', () => {
     it('should see no layers vestigingen on the map if not logged in', () => {
       cy.server()
       cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/typeahead/?q=spuistraat+59a').as('getTypeaheadResults')
-      cy.route('/panorama/thumbnail/*').as('getPanorama')
-      cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()
@@ -301,9 +298,6 @@ describe('map module', () => {
     it('Should see vestigingen on the map', () => {
       cy.server()
       cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/typeahead/?q=spuistraat+59a').as('getTypeaheadResults')
-      cy.route('/panorama/thumbnail/*').as('getPanorama')
-      cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()

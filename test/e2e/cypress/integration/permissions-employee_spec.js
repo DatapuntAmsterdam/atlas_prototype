@@ -16,7 +16,7 @@ describe('employee permissions', () => {
   })
 
   it('0. Should show "Kadastrale subjecten" for medewerker in the autocomplete', () => {
-    cy.route('/typeahead/?q=bakker').as('getResults')
+    cy.route('/typeahead?q=bakker').as('getResults')
     cy.visit('/')
 
     cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
@@ -36,7 +36,7 @@ describe('employee permissions', () => {
   })
 
   it('1. Should show "Kadastrale subjecten" and "Vestigingen" in the results', () => {
-    cy.route('/typeahead/?q=bakker').as('getResults')
+    cy.route('/typeahead?q=bakker').as('getResults')
     cy.visit('/')
 
     cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
@@ -172,7 +172,7 @@ describe('employee permissions', () => {
     cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
     cy.route('/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
     cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen')
-    cy.route('/panorama/thumbnail/?*').as('getPanorama')
+    cy.route('/panorama/thumbnail?*').as('getPanorama')
 
     cy.visit(urls.geoSearch)
 
@@ -193,14 +193,14 @@ describe('employee permissions', () => {
   it('7D. Should show an employee all information in a "ligplaats" search', () => {
     cy.route('/bag/v1.1/ligplaats/*').as('getLigplaats')
     cy.route('/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
-    cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getMonument')
-    cy.route('/handelsregister/vestiging/?nummeraanduiding=*').as('getVestigingen')
+    // cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getMonument')
+    cy.route('/handelsregister/vestiging/?*').as('getVestigingen')
 
     cy.visit(urls.ligplaats)
 
     cy.wait('@getLigplaats')
     cy.wait('@getNummeraanduiding')
-    cy.wait('@getMonument')
+    // cy.wait('@getMonument')
     cy.wait('@getVestigingen')
     cy.get(DATA_SEARCH.headerTitle).contains('Zwanenburgwal 44')
     cy.get(DATA_SEARCH.infoNotification).should('not.exist')
