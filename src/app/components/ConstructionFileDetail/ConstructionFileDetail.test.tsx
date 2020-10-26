@@ -2,7 +2,7 @@ import React from 'react'
 import { render, within } from '@testing-library/react'
 
 import bouwdossierData from '../../../api/iiif-metadata/bouwdossier/fixtures/bouwdossier.json'
-import withAppContext from '../../../../test/withAppContext'
+import withAppContext from '../../withAppContext'
 
 import ConstructionFileDetail from './ConstructionFileDetail'
 
