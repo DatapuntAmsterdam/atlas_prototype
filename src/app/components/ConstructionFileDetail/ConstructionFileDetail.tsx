@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { Heading, Link, List, ListItem, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import getAddresses from '../../../normalizations/construction-files/getAddresses'
@@ -48,6 +48,10 @@ const ConstructionFileDetail: FunctionComponent<BouwdossierType> = ({
 }) => {
   const id = `${district}${fileNumber}`
   const addressList = getAddresses(addresses)
+  const sortedDocuments = useMemo(
+    () => documenten.sort((a, b) => a.subdossier_titel.localeCompare(b.subdossier_titel)),
+    [documenten],
+  )
 
   return (
     <PageWrapper>
@@ -69,57 +73,55 @@ const ConstructionFileDetail: FunctionComponent<BouwdossierType> = ({
         )}
       </StyledDefinitionList>
 
-      {documenten
-        .sort((a, b) => a.subdossier_titel.localeCompare(b.subdossier_titel))
-        .map(
-          (
-            {
-              barcode,
-              bestanden: files,
-              subdossier_titel: documentTitle,
-              access: documentAccess,
-              document_omschrijving: description,
-              oorspronkelijk_pad: filePath,
-            },
-            index,
-          ) => (
-            <div data-testid={`constructionDocuments-${index}`} key={barcode}>
-              <ContentBlock>
-                <SubHeading
-                  hasMarginBottom={false}
-                  forwardedAs="h3"
-                  data-testid="DocumentsHeading"
-                >{`${documentTitle} (${files.length})`}</SubHeading>
-              </ContentBlock>
-              {oloLiaanNumber && (
-                <StyledDefinitionList data-testid="oloLiaanNumberDocumentDescription">
-                  {description && (
-                    <StyledDefinitionListItem term="Beschrijving">
-                      {description}
-                    </StyledDefinitionListItem>
-                  )}
-                  {filePath?.length && (
-                    <StyledDefinitionListItem term="Oorspronkelijk pad">
-                      {filePath.join(', ')}
-                    </StyledDefinitionListItem>
-                  )}
-                  {documentAccess && (
-                    <StyledDefinitionListItem term="Openbaarheid">
-                      {documentAccess}
-                    </StyledDefinitionListItem>
-                  )}
-                </StyledDefinitionList>
-              )}
-              <Gallery
-                data-testid="filesGallery"
-                key={barcode}
-                id={id}
-                allFiles={files}
-                access={documentAccess}
-              />
-            </div>
-          ),
-        )}
+      {sortedDocuments.map(
+        (
+          {
+            barcode,
+            bestanden: files,
+            subdossier_titel: documentTitle,
+            access: documentAccess,
+            document_omschrijving: description,
+            oorspronkelijk_pad: filePath,
+          },
+          index,
+        ) => (
+          <div data-testid={`constructionDocuments-${index}`} key={barcode}>
+            <ContentBlock>
+              <SubHeading
+                hasMarginBottom={false}
+                forwardedAs="h3"
+                data-testid="DocumentsHeading"
+              >{`${documentTitle} (${files.length})`}</SubHeading>
+            </ContentBlock>
+            {oloLiaanNumber && (
+              <StyledDefinitionList data-testid="oloLiaanNumberDocumentDescription">
+                {description && (
+                  <StyledDefinitionListItem term="Beschrijving">
+                    {description}
+                  </StyledDefinitionListItem>
+                )}
+                {filePath?.length && (
+                  <StyledDefinitionListItem term="Oorspronkelijk pad">
+                    {filePath.join(', ')}
+                  </StyledDefinitionListItem>
+                )}
+                {documentAccess && (
+                  <StyledDefinitionListItem term="Openbaarheid">
+                    {documentAccess}
+                  </StyledDefinitionListItem>
+                )}
+              </StyledDefinitionList>
+            )}
+            <Gallery
+              data-testid="filesGallery"
+              key={barcode}
+              id={id}
+              allFiles={files}
+              access={documentAccess}
+            />
+          </div>
+        ),
+      )}
 
       {addressList.length && (
         <ContentBlock data-testid="constructionFileAddresses">
