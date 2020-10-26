@@ -57,7 +57,7 @@
     "d3": "3.5.17",
     "escape-string-regexp": "^4.0.0",
     "file-saver": "^2.0.2",
-    "graphql": "^15.3.0",
+    "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
     "history": "4.10.1",
     "isomorphic-fetch": "3.0.0",
