@@ -17,6 +17,8 @@ describe('Smoketest', () => {
       cy.viewport(1920, 1080)
       cy.hidePopup()
     })
+
+    // Note: might fail occasionally
     it('Should show the details of an address', () => {
       cy.server()
       cy.route('/typeahead?q=dam+1').as('getResults')
@@ -138,6 +140,7 @@ describe('Smoketest', () => {
         .contains('In tabel weergeven')
         .click({ force: true })
     })
+    // Note: might fail occasionally
     it('Should see no vestigingen or kadastrale objecten ', () => {
       // Check if vestigingen and kadstrale objecten are not visible, because user is not logged in
       cy.contains(
@@ -172,6 +175,7 @@ describe('Smoketest', () => {
       cy.logout()
     })
 
+    // Note: might fail occasionally
     it('Should show vestigingen and Kadastrale objecten if user is logged in', () => {
       cy.server()
       cy.defineAddressDetailRoutes()

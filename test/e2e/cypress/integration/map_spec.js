@@ -1,6 +1,14 @@
 import PARAMETERS from '../../../../src/store/parameters'
 import { routing } from '../../../../src/app/routes'
-import { ADDRESS_PAGE, DATA_SEARCH, HOMEPAGE, MAP, MAP_LAYERS } from '../support/selectors'
+import {
+  ADDRESS_PAGE,
+  COMPONENTS,
+  DATA_DETAIL,
+  DATA_SEARCH,
+  HOMEPAGE,
+  MAP,
+  MAP_LAYERS,
+} from '../support/selectors'
 
 const { VIEW, VIEW_CENTER } = PARAMETERS
 
@@ -35,6 +43,7 @@ describe('map module', () => {
     })
   })
   describe('user should be able to interact with the map', () => {
+    // Note: might fail occasionally
     it('should show results based on the interaction with the map', () => {
       const svgMapPath = '/assets/images/map/'
       cy.server()
@@ -83,20 +92,13 @@ describe('map module', () => {
       // become visible
       cy.get(MAP.buttonEnlarge).click()
       cy.get(ADDRESS_PAGE.resultsPanel).should('be.visible')
-      cy.wait('@getNummeraanduiding')
-      cy.wait('@getPanden')
-      cy.wait('@getObjectExpand')
-      cy.wait('@getSitueringen')
-      cy.wait('@getMonument')
-      cy.get(ADDRESS_PAGE.resultsPanel)
-        .get(ADDRESS_PAGE.resultsPanelTitle)
-        .contains('Beursplein 15')
-      cy.get(ADDRESS_PAGE.resultsPanel).get('dl').contains('1012JW')
+
+      cy.waitForAdressDetail()
+
+      cy.get(DATA_DETAIL.heading).contains('Beursplein 15')
+      cy.get(DATA_DETAIL.main).get('dl').contains('1012JW')
       cy.wait('@getPanorama')
-      cy.get(ADDRESS_PAGE.resultsPanel)
-        .get(ADDRESS_PAGE.panoramaThumbnail)
-        .should('exist')
-        .and('be.visible')
+      cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
     })
   })
 
@@ -125,6 +127,7 @@ describe('map module', () => {
       cy.get(MAP.mapOverlayPane).children().should('exist')
       cy.get(MAP.mapOverlayPane).find('canvas').should('exist')
     })
+    // Note: might fail occasionally
     it('should add a layer to the map', () => {
       cy.server()
       cy.route('POST', '/cms_search/graphql/').as('graphql')

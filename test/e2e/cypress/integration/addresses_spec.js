@@ -1,6 +1,7 @@
 import { getCountFromHeader } from '../support/helper-functions'
 import {
   ADDRESS_PAGE,
+  DATA_DETAIL,
   DATA_SEARCH,
   DATA_SELECTION_TABLE,
   HEADINGS,
@@ -88,7 +89,7 @@ describe('addresses module', () => {
 
               cy.waitForAdressDetail()
 
-              cy.get(TABLES.detailPane).should('exist').and('be.visible')
+              cy.get(DATA_DETAIL.main).should('exist').and('be.visible')
               cy.get('dt').contains(selectedGroup).should('exist').and('be.visible')
               cy.get('dt')
                 .contains(selectedGroup)
@@ -111,7 +112,7 @@ describe('addresses module', () => {
               // click on the firstItem to open address preview panel
               cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click()
               // the detail view should exist
-              cy.get(TABLES.detailPane).should('exist').and('be.visible')
+              cy.get(DATA_DETAIL.main).should('exist').and('be.visible')
               // the map view maximize button should exist
               cy.get(ADDRESS_PAGE.buttonMaximizeMap).should('exist')
               // click on the maximize button to open the map view
@@ -189,10 +190,12 @@ describe('addresses module', () => {
     })
   })
 })
+
 describe('user should be able to open more addresses', () => {
+  // Note: might fail occasionally
   it('should show the addresses', () => {
     cy.server()
-    cy.route('/typeahead/?q=dam+20').as('getResults')
+    cy.route('/typeahead?q=dam+20').as('getResults')
     cy.route('POST', '/cms_search/graphql/').as('graphql')
     cy.route('/jsonapi/node/list/*').as('jsonapi')
     cy.route('/bag/v1.1/pand/*').as('getPand')
@@ -202,7 +205,6 @@ describe('user should be able to open more addresses', () => {
 
     cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
     cy.get(SEARCH.input).focus().type('Dam 20{enter}')
-    cy.wait('@getResults')
     cy.wait(['@graphql', '@graphql'])
     cy.wait('@jsonapi')
     cy.contains('Adressen (').click()

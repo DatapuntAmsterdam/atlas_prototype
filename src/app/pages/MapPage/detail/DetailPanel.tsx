@@ -245,7 +245,7 @@ const PaginatedResult: FunctionComponent<PaginatedResultProps> = ({
   item,
 }) => {
   const resultItem = item.toView(result.data)
-  const showMoreButton = result.count > result.data.length ?? pageSize === INFINITE_PAGE_SIZE
+  const showMoreButton = result.count > result.data?.length ?? pageSize === INFINITE_PAGE_SIZE
   const showMoreText = `Toon alle ${result.count} ${
     resultItem?.title ? resultItem.title.toLocaleLowerCase() : 'resultaten'
   }`
@@ -309,7 +309,7 @@ export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, 
     return <Message>Geen detailweergave beschikbaar.</Message>
   }
   return (
-    <Wrapper legacyLayout={legacyLayout}>
+    <Wrapper legacyLayout={legacyLayout} data-testid="data-detail">
       {details.showAuthAlert && <StyledAuthAlert excludedResults={details.authExcludedInfo} />}
       {details.location && !details.data.noPanorama && (
         <PanoramaPreview location={details.location} radius={180} aspect={2.5} />

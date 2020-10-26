@@ -84,7 +84,7 @@ const PanoramaPreview: React.FC<PanoramaPreviewProps> = ({
   const legacyReference = useSelector(getDetailLocation)
 
   return (
-    <PreviewContainer {...otherProps}>
+    <PreviewContainer {...otherProps} data-testid="panorama-preview">
       {renderResult(result, location, legacyReference)}
     </PreviewContainer>
   )

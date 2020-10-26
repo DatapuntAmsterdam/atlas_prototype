@@ -1,6 +1,15 @@
 /* eslint-disable global-require */
 import { Map, Table } from '@amsterdam/asc-assets'
-import { Alert, Button, Heading, Paragraph, Tab, Tabs, themeSpacing } from '@amsterdam/asc-ui'
+import {
+  Alert,
+  Button,
+  Container,
+  Heading,
+  Paragraph,
+  Tab,
+  Tabs,
+  themeSpacing,
+} from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -39,6 +48,13 @@ const StyledAlert = styled(Alert)`
 
 const StyledTabs = styled(Tabs)`
   margin-bottom: ${themeSpacing(2)};
+`
+
+const StyledContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  margin: ${themeSpacing(4, 0)};
+  padding: ${themeSpacing(0, 4)};
 `
 
 const DataSelection = () => {
@@ -94,7 +110,7 @@ const DataSelection = () => {
   const initialTab = tabs.find(({ isActive }) => isActive)?.dataset
 
   return (
-    <div className="c-data-selection c-dashboard__content">
+    <StyledContainer className="c-data-selection">
       <div className="c-data-selection-content qa-data-selection-content">
         {showHeader && (
           <div className="qa-header u-margin__bottom--3">
@@ -266,7 +282,7 @@ const DataSelection = () => {
           </Alert>
         )}
       </div>
-    </div>
+    </StyledContainer>
   )
 }
 

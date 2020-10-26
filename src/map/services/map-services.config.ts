@@ -148,7 +148,7 @@ const getLinkListBlock = (
   result?: any,
   displayFormatter?: (data: any) => string,
 ): DetailResultItemLinkList => ({
-  title: definition.singular,
+  title: definition.plural,
   type: DetailResultItemType.LinkList,
   links: result?.map((res: any) => ({
     to: buildDetailUrl(getDetailPageData(res._links.self.href)),
@@ -156,6 +156,12 @@ const getLinkListBlock = (
   })),
   infoBox: getInfoBox(definition),
 })
+
+const typeAddressDisplayFormatter = (result: any) => {
+  return result.type_adres !== 'Hoofdadres'
+    ? `${result._display} (${result.type_adres})`
+    : result._display
+}
 
 const getPaginatedListBlock = (
   definition: Definition,
@@ -587,7 +593,6 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             verblijfsobjectData?.kadastrale_objecten?.href,
             {
               authScopes: [AuthScope.BdR],
-              authScopeRequired: true,
             },
           ),
           getPaginatedListBlock(
@@ -650,7 +655,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getBagDefinitionList(nummeraanduidingData),
           getLocationDefinitionListBlock(nummeraanduidingData, '2 / 1 / 3 / 1'),
           getVerblijfsObjectBlock(result),
-          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?.adressen?.href),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?.adressen?.href, {
+            displayFormatter: typeAddressDisplayFormatter,
+          }),
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.PAND, result?.panden?.href),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
@@ -755,7 +762,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             ],
           },
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 2'),
-          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href, {
+            displayFormatter: typeAddressDisplayFormatter,
+          }),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.pandidentificatie}`,
@@ -1356,7 +1365,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getLinkListBlock(GLOSSARY.DEFINITIONS.AANTEKENING, brkData?.aantekeningen),
           getLinkListBlock(GLOSSARY.DEFINITIONS.ONTSTAAN_UIT, brkData?.ontstaan_uit),
           getLinkListBlock(GLOSSARY.DEFINITIONS.BETROKKEN_BIJ, brkData?.betrokken_bij),
-          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href),
+          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href, {
+            displayFormatter: typeAddressDisplayFormatter,
+          }),
         ],
       }
     },
@@ -1877,63 +1888,65 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     definition: GLOSSARY.DEFINITIONS.SUBJECT,
     authScopes: [AuthScope.BrkRs],
     authScopeRequired: true,
-    authExcludedInfo: `kadastrale subjecten. Om ook zakelijke rechten van natuurlijke personen te bekijken, moet je als medewerker bovendien speciale bevoegdheden hebben.`,
+    authExcludedInfo: `kadastrale subjecten. Om ook zakelijke rechten van natuurlijke personen te bekijken, moet je als medewerker bovendien speciale bevoegdheden hebben`,
     mapDetail: (result) => ({
       title: categoryLabels.kadastraalSubject.singular,
       subTitle: result._display,
       infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.SUBJECT),
       items: [
-        {
-          type: DetailResultItemType.DefinitionList,
-          entries: [
-            {
-              term: 'Statutaire zetel',
-              description: result.statutaire_zetel,
-            },
-            {
-              term: 'Rechtsvorm',
-              description: result.rechtsvorm?.omschrijving,
-            },
-            {
-              term: 'RSIN',
-              description: result.rsin,
-            },
-            {
-              term: 'KvK nummer',
-              description: result.kvknummer,
-            },
-            {
-              term: 'Woonadres',
-              description:
-                result.woonadres?.openbareruimte_naam &&
-                `${result.woonadres?.openbareruimte_naam} ${result.woonadres?.huisnummer} ${result.woonadres?.huisletter} ${result.woonadres?.toevoeging} ${result.woonadres?.postcode} ${result.woonadres?.woonplaats}`,
-            },
-            {
-              term: 'Woonadres buitenland',
-              description:
-                result.woonadres?.buitenland_adres &&
-                `${result.woonadres?.buitenland_adres} ${result.woonadres?.buitenland_woonplaats} ${result.woonadres?.buitenland_naam} ${result.woonadres?.buitenland_land?.omschrijving}`,
-            },
-            {
-              term: 'Postadres',
-              description:
-                result.postadres?.openbareruimte_naam &&
-                `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.woonplaats}`,
-            },
-            {
-              term: 'Postadres buitenland',
-              description:
-                result.postadres?.buitenland_adres &&
-                `${result.postadres?.buitenland_adres} ${result.postadres?.buitenland_woonplaats} ${result.postadres?.buitenland_naam} ${result.postadres?.buitenland_land?.omschrijving}`,
-            },
-            {
-              term: 'Postadres postbus',
-              description:
-                result.postadres?.postbus_nummer &&
-                `Postbus ${result.postadres?.postbus_nummer} ${result.postadres?.postbus_postcode} ${result.postadres?.postbus_woonplaats}`,
-            },
-          ],
-        },
+        !result?.is_natuurlijk_persoon
+          ? {
+              type: DetailResultItemType.DefinitionList,
+              entries: [
+                {
+                  term: 'Statutaire zetel',
+                  description: result.statutaire_zetel,
+                },
+                {
+                  term: 'Rechtsvorm',
+                  description: result.rechtsvorm?.omschrijving,
+                },
+                {
+                  term: 'RSIN',
+                  description: result.rsin,
+                },
+                {
+                  term: 'KvK nummer',
+                  description: result.kvknummer,
+                },
+                {
+                  term: 'Woonadres',
+                  description:
+                    result.woonadres?.openbareruimte_naam &&
+                    `${result.woonadres?.openbareruimte_naam} ${result.woonadres?.huisnummer} ${result.woonadres?.huisletter} ${result.woonadres?.toevoeging} ${result.woonadres?.postcode} ${result.woonadres?.woonplaats}`,
+                },
+                {
+                  term: 'Woonadres buitenland',
+                  description:
+                    result.woonadres?.buitenland_adres &&
+                    `${result.woonadres?.buitenland_adres} ${result.woonadres?.buitenland_woonplaats} ${result.woonadres?.buitenland_naam} ${result.woonadres?.buitenland_land?.omschrijving}`,
+                },
+                {
+                  term: 'Postadres',
+                  description:
+                    result.postadres?.openbareruimte_naam &&
+                    `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.woonplaats}`,
+                },
+                {
+                  term: 'Postadres buitenland',
+                  description:
+                    result.postadres?.buitenland_adres &&
+                    `${result.postadres?.buitenland_adres} ${result.postadres?.buitenland_woonplaats} ${result.postadres?.buitenland_naam} ${result.postadres?.buitenland_land?.omschrijving}`,
+                },
+                {
+                  term: 'Postadres postbus',
+                  description:
+                    result.postadres?.postbus_nummer &&
+                    `Postbus ${result.postadres?.postbus_nummer} ${result.postadres?.postbus_postcode} ${result.postadres?.postbus_woonplaats}`,
+                },
+              ],
+            }
+          : undefined,
         result.is_natuurlijk_persoon
           ? {
               type: DetailResultItemType.DefinitionList,

@@ -8,10 +8,10 @@ interface ApiLinkObject {
 }
 
 interface ApiPaginateLinkObject extends ApiLinkObject {
-  next: {
+  next?: {
     href?: string
   }
-  previous: {
+  previous?: {
     href?: string
   }
 }
@@ -44,13 +44,15 @@ const getListFromApi = (
     return emptyResult
   }
 
-  const results = normalize ? await normalize(response.results) : response.results
+  const results = normalize
+    ? await normalize(response.results || [response])
+    : response.results || [response]
 
   return {
     data: results,
     count: response.count,
-    previous: response._links.previous.href || null,
-    next: response._links.next.href || null,
+    previous: response._links?.previous?.href || null,
+    next: response._links?.next?.href || null,
   }
 }
 

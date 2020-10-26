@@ -1,10 +1,18 @@
-import { ADDRESS_PAGE, DATA_SEARCH, MAP, SEARCH, TABLES } from '../support/selectors'
+import {
+  ADDRESS_PAGE,
+  COMPONENTS,
+  DATA_DETAIL,
+  DATA_SEARCH,
+  GEO_SEARCH,
+  MAP,
+  SEARCH,
+} from '../support/selectors'
 
 describe('data search module', () => {
   it('user should see suggestions', () => {
     // open the autocomplete panel and select the first dataset option and route the correct address
     cy.server()
-    cy.route('/typeahead/?q=dam').as('getResults')
+    cy.route('/typeahead?q=dam').as('getResults')
     cy.route('/bag/v1.1/openbareruimte/*').as('getItem')
     cy.route('POST', '/cms_search/graphql/').as('graphql')
     cy.route('/jsonapi/node/list/*').as('jsonapi')
@@ -30,7 +38,7 @@ describe('data search module', () => {
         cy.wait('@graphql')
         cy.wait('@jsonapi')
 
-        cy.get(DATA_SEARCH.headerTitle).contains(firstValue).should('exist').and('be.visible')
+        cy.get(DATA_DETAIL.heading).contains(firstValue).should('exist').and('be.visible')
       })
   })
 
@@ -40,7 +48,7 @@ describe('data search module', () => {
     cy.defineAddressDetailRoutes()
 
     // Use regular expressions in the route to match the spaces
-    cy.route('typeahead/?q=ad+windighof+2').as('getResults')
+    cy.route('typeahead?q=ad+windighof+2').as('getResults')
 
     // ensure the viewport is always the same in this test, so the clicks can be aligned properly
     cy.viewport(1000, 660)
@@ -56,18 +64,11 @@ describe('data search module', () => {
     // Rendering after this request takes some time on server
     cy.wait(500)
     cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
-    cy.get(ADDRESS_PAGE.resultsPanel)
-      .get(TABLES.detailTitle)
-      .contains('Ad Windighof 2')
-      .and('have.css', 'font-style')
-      .and('match', /normal/)
+    cy.get(ADDRESS_PAGE.resultsPanel).get(DATA_DETAIL.heading).contains('Ad Windighof 2')
     cy.get(ADDRESS_PAGE.resultsPanel).get('dl').contains('1087HE')
 
     cy.wait('@getPanorama')
-    cy.get(ADDRESS_PAGE.resultsPanel)
-      .get(ADDRESS_PAGE.panoramaThumbnail)
-      .should('exist')
-      .and('be.visible')
+    cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
 
     cy.get(MAP.mapZoomIn).click()
     cy.get(MAP.mapZoomIn).click()
@@ -75,10 +76,7 @@ describe('data search module', () => {
 
     // check that the address is open in right column
     cy.waitForGeoSearch()
-    cy.get(ADDRESS_PAGE.resultsListItem)
-      .contains('Ad Windighof 2')
-      .should('exist')
-      .and('be.visible')
+    cy.get(GEO_SEARCH.listItem).contains('Ad Windighof 2').should('exist').and('be.visible')
   })
 })
 describe('user should be able to submit', () => {
