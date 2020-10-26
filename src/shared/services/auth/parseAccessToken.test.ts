@@ -1,13 +1,13 @@
-import accessTokenParser from './access-token-parser'
+import parseAccessToken from './parseAccessToken'
 
 /* eslint-disable max-len */
 const testAccessToken =
   'abc.eyJuYmYiOjE0ODc4NDMxMjgsImV4cCI6MTQ4Nzg0MzMyOCwianRpIjoiand0SWQiLCJzY29wZXMiOlsiSFIvUiIsIkJSSy9SUyJdLCJpc3MiOiJpc3N1ZXIiLCJzdWIiOiJuYW1lIiwiaWF0IjoxNDg3ODQzMDI4fQ==.xyz'
 /* eslint-enable max-len */
 
-describe('The access token parser service', () => {
-  it('turns an access token into an object', () => {
-    expect(accessTokenParser(testAccessToken)).toEqual({
+describe('parseAccessToken', () => {
+  it('parses an access token', () => {
+    expect(parseAccessToken(testAccessToken)).toEqual({
       issuer: 'issuer',
       name: 'name',
       issuedAt: 1487843028,
@@ -18,7 +18,7 @@ describe('The access token parser service', () => {
     })
   })
 
-  it('should return an empty object', () => {
-    expect(accessTokenParser([])).toEqual({})
+  it('returns an empty value for an invalid token', () => {
+    expect(parseAccessToken('fubar')).toEqual(null)
   })
 })

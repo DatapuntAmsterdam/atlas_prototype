@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
-import HeaderMenu from './HeaderMenu'
 import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
+import { login, logout } from '../../../shared/services/auth/auth'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
+import HeaderMenu from './HeaderMenu'
 
 /* istanbul ignore next */
 const mapStateToProps = (state) => ({
@@ -13,11 +14,11 @@ const mapDispatchToProps = (dispatch) => ({
   showFeedbackForm: openFeedbackForm,
   login: () => {
     dispatch(authenticateRequest('inloggen'))
-    window.auth.login()
+    login()
   },
   logout: () => {
     dispatch(authenticateRequest('uitloggen'))
-    window.auth.logout()
+    logout()
   },
 })
 

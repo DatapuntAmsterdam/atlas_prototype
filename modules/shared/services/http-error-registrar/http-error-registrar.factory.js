@@ -1,4 +1,5 @@
 import { ERROR_TYPES } from '../../../../src/shared/ducks/error/error-message'
+import { logout } from '../../../../src/shared/services/auth/auth'
 ;(function () {
   angular
     .module('dpShared')
@@ -38,7 +39,7 @@ import { ERROR_TYPES } from '../../../../src/shared/ducks/error/error-message'
           }
 
           if (statusCode === 401) {
-            $window.auth.logout()
+            logout()
             return
           }
 
