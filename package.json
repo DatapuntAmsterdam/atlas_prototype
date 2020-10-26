@@ -67,7 +67,7 @@
     "leaflet-rotatedmarker": "0.2.0",
     "leaflet.markercluster": "1.4.1",
     "leaflet.nontiledlayer": "1.0.8",
-    "lint-staged": "10.4.2",
+    "lint-staged": "10.5.0",
     "lodash.debounce": "^4.0.8",
     "lodash.defer": "^4.1.0",
     "lodash.isequal": "^4.5.0",
