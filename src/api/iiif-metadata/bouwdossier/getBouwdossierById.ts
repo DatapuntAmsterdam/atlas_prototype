@@ -9,5 +9,5 @@ import { Bouwdossier } from './types'
  * API documentation: https://api.data.amsterdam.nl/iiif-metadata/bouwdossier
  */
 // eslint-disable-next-line import/prefer-default-export
-export const getBouwdossier = async (id: string) =>
+export const getBouwdossierById = (id: string) =>
   fetchWithToken<Bouwdossier>(joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id]))

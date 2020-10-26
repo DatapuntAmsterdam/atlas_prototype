@@ -12,7 +12,7 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import usePromise, { PromiseStatus } from '../../utils/usePromise'
 import {
-  getBouwdossier,
+  getBouwdossierById,
   Bouwdossier as BouwdossierType,
 } from '../../../api/iiif-metadata/bouwdossier'
 
@@ -49,7 +49,9 @@ const ConstructionFilesPage: FunctionComponent = () => {
   const fileUrl: string = useSelector(getFileUrl)
   const printMode: boolean = useSelector(isPrintMode)
 
-  const bouwdossierResult = usePromise(useMemo(() => getBouwdossier(id.replace('id', '')), [id]))
+  const bouwdossierResult = usePromise(
+    useMemo(() => getBouwdossierById(id.replace('id', '')), [id]),
+  )
   const { titel: title } = results || {}
 
   useEffect(() => {

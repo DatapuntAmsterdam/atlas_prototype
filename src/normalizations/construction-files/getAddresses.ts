@@ -1,4 +1,4 @@
-import { Adressen } from '../../api/iiif-metadata/bouwdossier'
+import { Adres } from '../../api/iiif-metadata/bouwdossier'
 
 /* eslint-disable camelcase */
 export const formatAddress = ({
@@ -8,7 +8,7 @@ export const formatAddress = ({
   huisnummer_toevoeging,
   huisnummer_van,
   huisnummer_tot,
-}: Adressen) => {
+}: Adres) => {
   if (locatie_aanduiding) {
     return locatie_aanduiding
   }
@@ -34,7 +34,7 @@ type AddressResult = {
   label: string
 }
 
-const getAddresses = (results: Adressen[]) =>
+const getAddresses = (results: Adres[]) =>
   results
     .reduce<AddressResult[]>(
       (reducedResults, adres) => [

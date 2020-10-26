@@ -2,26 +2,26 @@
 export type BouwdossierStatus = 'Aanvraag' | 'Behandeling'
 export type BouwdossierAccess = 'RESTRICTED' | 'PUBLIC'
 
-export type Bestanden = {
+export type Bestand = {
   filename: string
   url: string
 }
 
-export type Documenten = {
+export type Document = {
   access: BouwdossierAccess
-  barcode: string
-  bestanden: Bestanden[]
-  document_omschrijving?: string
+  barcode: string | null
+  bestanden: Bestand[]
+  document_omschrijving: string | null
   oorspronkelijk_pad: string[]
-  subdossier_titel: string
+  subdossier_titel: string | null
 }
 
-export type Adressen = {
-  huisnummer_letter?: string
-  huisnummer_toevoeging?: string
-  huisnummer_tot?: number
-  huisnummer_van?: number
-  locatie_aanduiding?: string
+export type Adres = {
+  huisnummer_letter?: string | null
+  huisnummer_toevoeging?: string | null
+  huisnummer_tot?: number | null
+  huisnummer_van?: number | null
+  locatie_aanduiding?: string | null
   nummeraanduidingen_label: string[]
   nummeraanduidingen: string[]
   openbareruimte_id: string
@@ -33,10 +33,10 @@ export type Adressen = {
 
 export type Bouwdossier = {
   access: BouwdossierAccess
-  activiteiten: any[]
-  adressen: Adressen[]
-  datering: string
-  documenten: Documenten[]
+  activiteiten: string[]
+  adressen: Adres[]
+  datering: Date
+  documenten: Document[]
   dossier_status?: BouwdossierStatus | null
   dossier_type: string
   dossiernr: number

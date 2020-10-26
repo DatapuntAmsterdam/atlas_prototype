@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, within } from '@testing-library/react'
 
-import bouwdossierData from '../../../api/iiif-metadata/bouwdossier/fixtures/bouwdossier.json'
+import bouwdossierFixture from '../../../api/iiif-metadata/bouwdossier/fixtures/bouwdossier'
 import withAppContext from '../../utils/withAppContext'
 
 import ConstructionFileDetail from './ConstructionFileDetail'
@@ -13,9 +13,6 @@ jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFr
 jest.mock('../Gallery/Gallery', () => ({ allFiles, ...rest }: { allFiles: any }) => (
   <span {...rest} />
 ))
-
-// convert JSON data to JSON data so that the typescript compiler can parse it (not doing so will show a warning on the use of string literal types)
-const bouwdossierFixture = JSON.parse(JSON.stringify(bouwdossierData))
 
 describe('ConstructionFileDetail', () => {
   it('should set the title', () => {

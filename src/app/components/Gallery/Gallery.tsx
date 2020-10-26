@@ -8,7 +8,7 @@ import getState from '../../../shared/services/redux/get-state'
 import { toConstructionFileViewer } from '../../../store/redux-first-router/actions'
 import NotificationLevel from '../../models/notification'
 import ActionButton from '../ActionButton/ActionButton'
-import { Bestanden, BouwdossierAccess } from '../../../api/iiif-metadata/bouwdossier'
+import { Bestand, BouwdossierAccess } from '../../../api/iiif-metadata/bouwdossier'
 import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
 
 const StyledAlert = styled(Alert)`
@@ -63,7 +63,7 @@ const StyledLink = styled(Link)`
 `
 
 type GalleryProps = {
-  allFiles: Bestanden[]
+  allFiles: Bestand[]
   id: string
   access: BouwdossierAccess
 }

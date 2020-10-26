@@ -49,7 +49,8 @@ const ConstructionFileDetail: FunctionComponent<BouwdossierType> = ({
   const id = `${district}${fileNumber}`
   const addressList = getAddresses(addresses)
   const sortedDocuments = useMemo(
-    () => documenten.sort((a, b) => a.subdossier_titel.localeCompare(b.subdossier_titel)),
+    () =>
+      documenten.sort((a, b) => (a.subdossier_titel || '').localeCompare(b.subdossier_titel || '')),
     [documenten],
   )
 

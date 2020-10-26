@@ -1,2 +1,2 @@
-export * from './getBouwdossier'
+export * from './getBouwdossierById'
 export * from './types'

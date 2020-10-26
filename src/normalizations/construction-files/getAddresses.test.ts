@@ -1,9 +1,7 @@
 import cloneDeep from 'lodash.clonedeep'
-import bouwdossierData from '../../api/iiif-metadata/bouwdossier/fixtures/bouwdossier.json'
+import bouwdossierFixture from '../../api/iiif-metadata/bouwdossier/fixtures/bouwdossier'
 
 import getAddresses, { formatAddress } from './getAddresses'
-
-const bouwdossierFixture = JSON.parse(JSON.stringify(bouwdossierData))
 
 describe('getAddresses', () => {
   it('returns a sorted list of addresses', () => {
