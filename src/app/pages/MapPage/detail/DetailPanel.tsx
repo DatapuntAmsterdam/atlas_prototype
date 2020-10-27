@@ -210,7 +210,7 @@ const Item: FunctionComponent<ItemProps> = ({ item, subItem, hideHeader }) => {
         return (
           <List variant="bullet">
             {item?.entries?.map((entry) => (
-              <ListItem>{entry}</ListItem>
+              <ListItem key={entry}>{entry}</ListItem>
             ))}
           </List>
         )

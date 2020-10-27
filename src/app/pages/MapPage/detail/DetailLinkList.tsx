@@ -55,6 +55,7 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
             }}
             forwardedAs={RouterLink}
             to={link.to}
+            key={link.title}
           >
             {link.title}
           </StyledLink>
