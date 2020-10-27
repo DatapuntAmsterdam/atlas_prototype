@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  atlas:
+    build:
+      context: .
+      args:
+        - DEPLOY_ENV=acceptance
+        - DOCKER_REGISTRY=docker-registry.data.amsterdam.nl:5000
+        - DOCKER_REGISTRY_PATH=/ois/
+        - DOCKER_IMAGE=atlas
+        - DOCKER_IMAGE_TAG=latest
+    ports:
+      - "3001:80"
+    environment:
+      - TZ=Europe/Amsterdam

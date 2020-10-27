@@ -1,30 +1,26 @@
-# Build
+################################
+# Base
+################################
 FROM node:12 AS build-deps
 LABEL maintainer="datapunt@amsterdam.nl"
 
 WORKDIR /app
 
-COPY package.json package-lock.json .env.* /app/
-COPY sitemap-generator /app/sitemap-generator
-COPY public /app/public
+COPY sitemap-generator ./sitemap-generator
 
+COPY public ./public
 
-# Install all NPM dependencies, and:
-#  * Changing git URL because network is blocking git protocol...
+COPY package.json package-lock.json /app/
+
 RUN git config --global url."https://".insteadOf git:// && \
-    git config --global url."https://github.com/".insteadOf git@github.com: && \
-    #    npm config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ && \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    npm --production=false \
-    --unsafe-perm \
-    --verbose \
-    ci
+    git config --global url."https://github.com/".insteadOf git@github.com:
+
+RUN npm ci
 
 RUN npm run generate:sitemap
 
-# Build dependencies
-COPY src /app/src
 COPY modules /app/modules
+
 COPY .babelrc \
     .eslintrc.js \
     .eslintignore \
@@ -37,20 +33,28 @@ COPY .babelrc \
     favicon.png \
     /app/
 
+COPY src /app/src
+
+ARG DEPLOY_ENV
+ENV DEPLOY_ENV ${DEPLOY_ENV}
+
+RUN echo "deploy_env: ${DEPLOY_ENV}"
+
 RUN npm run build
-RUN echo "build= `date`" > /app/dist/version.txt
 
-# Test dependencies
-COPY karma.conf.ts \
-    jest.config.js \
-    /app/
-COPY test /app/test
+ARG BUILD_NUMBER=0
+RUN echo "build ${BUILD_NUMBER} - `date`" > ./dist/version.txt
 
-# Web server image
+################################
+# Deploy
+################################
 FROM nginx:1.19-alpine
-COPY scripts/startup.sh /app/startup.sh
+
+COPY scripts/startup.sh /usr/local/bin/startup.sh
+RUN chmod +x /usr/local/bin/startup.sh
+
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/
 COPY --from=build-deps /app/dist /usr/share/nginx/html
 
-CMD sh /app/startup.sh
+CMD ["/usr/local/bin/startup.sh"]
