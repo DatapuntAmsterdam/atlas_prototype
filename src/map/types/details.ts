@@ -24,6 +24,7 @@ export interface DetailResultNotification {
 }
 
 export enum DetailResultItemType {
+  BulletList = 'bullet-list',
   DefinitionList = 'definition-list',
   Table = 'table',
   LinkList = 'link-list',
@@ -47,6 +48,7 @@ export type DetailResultItem =
   | DetailResultItemTable
   | DetailResultItemPaginatedData
   | DetailResultItemGroupedItems
+  | DetailResultItemBulletList
   | undefined
   | null
 
@@ -104,6 +106,11 @@ export interface DetailResultItemPaginatedData extends DefaultDetailResultItem {
 export interface DetailResultItemLinkList extends DefaultDetailResultItem {
   type: DetailResultItemType.LinkList
   links?: Link[]
+}
+
+export interface DetailResultItemBulletList extends DefaultDetailResultItem {
+  type: DetailResultItemType.BulletList
+  entries?: string[]
 }
 
 export interface DetailResultItemDefinitionListEntry {
@@ -414,7 +421,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   in_onderzoek?: string | null
   beschrijving_monument?: string | null
   redengevende_omschrijving_monument?: string | null
-  aantekeningen?: string | null
+  aantekeningen?: Array<{ opgelegd_door: null | { _display: string }; _display: string }>
   ontstaan_uit?: string | null
   betrokken_bij?: string | null
 }

@@ -1360,9 +1360,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             ],
           },
           getLinkListBlock(GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT, brkData?.rechten),
-          // Todo: DI-1145
-          // getLinkListBlock(GLOSSARY.DEFINITIONS.BEPERKING, brkData?.beperkingen),
-          getLinkListBlock(GLOSSARY.DEFINITIONS.AANTEKENING, brkData?.aantekeningen),
+          {
+            type: DetailResultItemType.BulletList,
+            title: GLOSSARY.DEFINITIONS.AANTEKENING.plural,
+            entries: brkData?.aantekeningen?.map(({ _display, opgelegd_door }) =>
+              opgelegd_door ? `${_display}, opgelegd door: ${opgelegd_door._display}` : _display,
+            ),
+          },
           getLinkListBlock(GLOSSARY.DEFINITIONS.ONTSTAAN_UIT, brkData?.ontstaan_uit),
           getLinkListBlock(GLOSSARY.DEFINITIONS.BETROKKEN_BIJ, brkData?.betrokken_bij),
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href, {

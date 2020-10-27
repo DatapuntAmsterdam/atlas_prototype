@@ -1,6 +1,6 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
-import { Alert, Button, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
+import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import React, { Fragment, FunctionComponent, useContext, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import {
@@ -206,6 +206,14 @@ const Item: FunctionComponent<ItemProps> = ({ item, subItem, hideHeader }) => {
         return <PaginatedData item={item} />
       case DetailResultItemType.GroupedItems:
         return <GroupedItems item={item} />
+      case DetailResultItemType.BulletList:
+        return (
+          <List variant="bullet">
+            {item?.entries?.map((entry) => (
+              <ListItem>{entry}</ListItem>
+            ))}
+          </List>
+        )
       default:
         throw new Error('Unable to render map detail pane, encountered unknown item type.')
     }
