@@ -51,9 +51,16 @@ export const oplaadpunten = (result) => {
   return normalize(result, additionalFields)
 }
 
-export const meetbout = (result) => {
+export const meetbout = async (result) => {
+  let rollaagImage
+  if (result.rollaag) {
+    const rollaag = await fetchWithToken(result.rollaag)
+    rollaagImage = rollaag.afbeelding
+  }
+
   const additionalFields = {
     speed: result.zakkingssnelheid ? formatNumber(result.zakkingssnelheid) : '',
+    rollaagImage,
   }
 
   return normalize(result, additionalFields)

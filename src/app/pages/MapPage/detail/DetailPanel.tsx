@@ -49,6 +49,10 @@ const StyledAuthAlert = styled(AuthAlert)`
   order: -1; // Make sure the alert is always on top and not pushed down because of grid
 `
 
+const StyledImage = styled.img`
+  width: 100%;
+`
+
 // Todo: remove gridArea when legacy map is removed
 const ItemWrapper = styled.div<{ gridArea?: string }>`
   display: flex;
@@ -206,6 +210,8 @@ const Item: FunctionComponent<ItemProps> = ({ item, subItem, hideHeader }) => {
         return <PaginatedData item={item} />
       case DetailResultItemType.GroupedItems:
         return <GroupedItems item={item} />
+      case DetailResultItemType.Image:
+        return item.src ? <StyledImage alt={item.title} src={item.src} /> : null
       case DetailResultItemType.BulletList:
         return (
           <List variant="bullet">

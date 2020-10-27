@@ -30,6 +30,7 @@ export enum DetailResultItemType {
   LinkList = 'link-list',
   PaginatedData = 'paginated-data',
   GroupedItems = 'grouped-items',
+  Image = 'image',
 }
 
 export interface DetailAuthentication {
@@ -49,6 +50,7 @@ export type DetailResultItem =
   | DetailResultItemPaginatedData
   | DetailResultItemGroupedItems
   | DetailResultItemBulletList
+  | DetailResultItemImage
   | undefined
   | null
 
@@ -111,6 +113,11 @@ export interface DetailResultItemLinkList extends DefaultDetailResultItem {
 export interface DetailResultItemBulletList extends DefaultDetailResultItem {
   type: DetailResultItemType.BulletList
   entries?: string[]
+}
+
+export interface DetailResultItemImage extends DefaultDetailResultItem {
+  type: DetailResultItemType.Image
+  src?: string
 }
 
 export interface DetailResultItemDefinitionListEntry {
@@ -430,4 +437,5 @@ export type ExtraApiResults = {
   nummeraanduidingData?: PotentialApiResult
   brkData?: PotentialApiResult
   verblijfsobjectData?: PotentialApiResult
+  rollaagImage?: string
 }

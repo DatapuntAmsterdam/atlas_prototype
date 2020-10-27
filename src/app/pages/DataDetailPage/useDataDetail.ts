@@ -37,7 +37,7 @@ const useDataDetail = <T = any>(
       const userIsAuthorized = isUserAuthorized(serviceDefinition?.authScopes)
 
       if (!serviceDefinition) {
-        const error = new AuthError(401, 'Not authorized')
+        const error = new AuthError(401, '')
         return Promise.reject(error)
       }
 

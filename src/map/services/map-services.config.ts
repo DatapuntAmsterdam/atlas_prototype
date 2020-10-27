@@ -1447,6 +1447,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             values: data,
           }),
         },
+        {
+          type: DetailResultItemType.Image,
+          title: 'Rollaag',
+          src: result.rollaagImage,
+        },
       ],
     }),
   },
@@ -1612,6 +1617,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       title: categoryLabels.parkeervak.singular,
       subTitle: result.id,
       noPanorama: true,
+      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.PARKEERVAKKEN),
       items: [
         {
           type: DetailResultItemType.DefinitionList,
@@ -1893,156 +1899,170 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     authScopes: [AuthScope.BrkRs],
     authScopeRequired: true,
     authExcludedInfo: `kadastrale subjecten. Om ook zakelijke rechten van natuurlijke personen te bekijken, moet je als medewerker bovendien speciale bevoegdheden hebben`,
-    mapDetail: (result) => ({
-      title: categoryLabels.kadastraalSubject.singular,
-      subTitle: result._display,
-      infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.SUBJECT),
-      items: [
-        !result?.is_natuurlijk_persoon
-          ? {
-              type: DetailResultItemType.DefinitionList,
-              entries: [
-                {
-                  term: 'Statutaire zetel',
-                  description: result.statutaire_zetel,
-                },
-                {
-                  term: 'Rechtsvorm',
-                  description: result.rechtsvorm?.omschrijving,
-                },
-                {
-                  term: 'RSIN',
-                  description: result.rsin,
-                },
-                {
-                  term: 'KvK nummer',
-                  description: result.kvknummer,
-                },
-                {
-                  term: 'Woonadres',
-                  description:
-                    result.woonadres?.openbareruimte_naam &&
-                    `${result.woonadres?.openbareruimte_naam} ${result.woonadres?.huisnummer} ${result.woonadres?.huisletter} ${result.woonadres?.toevoeging} ${result.woonadres?.postcode} ${result.woonadres?.woonplaats}`,
-                },
-                {
-                  term: 'Woonadres buitenland',
-                  description:
-                    result.woonadres?.buitenland_adres &&
-                    `${result.woonadres?.buitenland_adres} ${result.woonadres?.buitenland_woonplaats} ${result.woonadres?.buitenland_naam} ${result.woonadres?.buitenland_land?.omschrijving}`,
-                },
-                {
-                  term: 'Postadres',
-                  description:
-                    result.postadres?.openbareruimte_naam &&
-                    `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.woonplaats}`,
-                },
-                {
-                  term: 'Postadres buitenland',
-                  description:
-                    result.postadres?.buitenland_adres &&
-                    `${result.postadres?.buitenland_adres} ${result.postadres?.buitenland_woonplaats} ${result.postadres?.buitenland_naam} ${result.postadres?.buitenland_land?.omschrijving}`,
-                },
-                {
-                  term: 'Postadres postbus',
-                  description:
-                    result.postadres?.postbus_nummer &&
-                    `Postbus ${result.postadres?.postbus_nummer} ${result.postadres?.postbus_postcode} ${result.postadres?.postbus_woonplaats}`,
-                },
-              ],
-            }
-          : undefined,
-        result.is_natuurlijk_persoon
-          ? {
-              type: DetailResultItemType.DefinitionList,
-              entries: [
-                {
-                  term: 'Voornamen',
-                  description: result.voornamen,
-                },
-                {
-                  term: 'Voorvoegsels',
-                  description: result.voorvoegsels,
-                },
-                {
-                  term: 'Geslachtsnaam',
-                  description: result.naam,
-                },
-                {
-                  term: 'Geslacht',
-                  description: result.geslacht?.omschrijving,
-                },
-                {
-                  term: 'Geboortedatum',
-                  description:
-                    result.geboortedatum &&
-                    new Date(result.geboortedatum).toLocaleDateString(DEFAULT_LOCALE, {
-                      month: '2-digit',
-                      day: '2-digit',
-                      year: 'numeric',
-                    }),
-                },
-                {
-                  term: 'Geboorteplaats',
-                  description: result.geboorteplaats,
-                },
-                {
-                  term: 'Geboorteland',
-                  description: result.geboorteland?.omschrijving,
-                },
-                {
-                  term: 'Datum van overlijden',
-                  description:
-                    result.overlijdensdatum &&
-                    new Date(result.overlijdensdatum).toLocaleDateString(DEFAULT_LOCALE, {
-                      month: '2-digit',
-                      day: '2-digit',
-                      year: 'numeric',
-                    }),
-                },
-                {
-                  term: 'Woonadres',
-                  description: `${result.woonadres?.openbareruimte_naam} ${result.woonadres?.huisnummer} ${result.woonadres?.huisletter} ${result.woonadres?.toevoeging} ${result.woonadres?.postcode} ${result.woonadres?.woonplaats}`,
-                },
-                {
-                  term: 'Woonadres buitenland',
-                  description:
-                    result.woonadres?.buitenland_adres &&
-                    `${result.woonadres?.buitenland_adres} ${result.woonadres?.buitenland_woonplaats} ${result.woonadres?.buitenland_naam} ${result.woonadres?.buitenland_land?.omschrijving}`,
-                },
-                {
-                  term: 'Postadres',
-                  description:
-                    result.postadres?.openbareruimte_naam &&
-                    `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.postcode} ${result.postadres?.woonplaats}`,
-                },
-                {
-                  term: 'Postadres buitenland',
-                  description:
-                    result.postadres?.buitenland_adres &&
-                    `${result.postadres?.buitenland_adres} ${result.postadres?.buitenland_woonplaats} ${result.postadres?.buitenland_naam} ${result.postadres?.buitenland_land?.omschrijving}`,
-                },
-                {
-                  term: 'Postadres postbus',
-                  description:
-                    result.postadres?.postbus_nummer &&
-                    `Postbus ${result.postadres?.postbus_nummer} ${result.postadres?.postbus_postcode} ${result.postadres?.postbus_woonplaats}`,
-                },
-              ],
-            }
-          : undefined,
-        getPaginatedListBlock(
-          GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT,
-          result.rechten?.href,
-          result?.is_natuurlijk_persoon
+    mapDetail: (result) => {
+      const zakelijkRechtNormalizer = (res: { object_href?: string }[]) =>
+        res?.map((obj) => ({
+          ...obj,
+          _links: {
+            self: {
+              href: obj.object_href,
+            },
+          },
+        }))
+      return {
+        title: categoryLabels.kadastraalSubject.singular,
+        subTitle: result._display,
+        infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.SUBJECT),
+        items: [
+          !result?.is_natuurlijk_persoon
             ? {
-                authScopes: [AuthScope.BrkRsn],
-                authScopeRequired: true,
-                specialAuthLevel: true,
+                type: DetailResultItemType.DefinitionList,
+                entries: [
+                  {
+                    term: 'Statutaire zetel',
+                    description: result.statutaire_zetel,
+                  },
+                  {
+                    term: 'Rechtsvorm',
+                    description: result.rechtsvorm?.omschrijving,
+                  },
+                  {
+                    term: 'RSIN',
+                    description: result.rsin,
+                  },
+                  {
+                    term: 'KvK nummer',
+                    description: result.kvknummer,
+                  },
+                  {
+                    term: 'Woonadres',
+                    description:
+                      result.woonadres?.openbareruimte_naam &&
+                      `${result.woonadres?.openbareruimte_naam} ${result.woonadres?.huisnummer} ${result.woonadres?.huisletter} ${result.woonadres?.toevoeging} ${result.woonadres?.postcode} ${result.woonadres?.woonplaats}`,
+                  },
+                  {
+                    term: 'Woonadres buitenland',
+                    description:
+                      result.woonadres?.buitenland_adres &&
+                      `${result.woonadres?.buitenland_adres} ${result.woonadres?.buitenland_woonplaats} ${result.woonadres?.buitenland_naam} ${result.woonadres?.buitenland_land?.omschrijving}`,
+                  },
+                  {
+                    term: 'Postadres',
+                    description:
+                      result.postadres?.openbareruimte_naam &&
+                      `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.woonplaats}`,
+                  },
+                  {
+                    term: 'Postadres buitenland',
+                    description:
+                      result.postadres?.buitenland_adres &&
+                      `${result.postadres?.buitenland_adres} ${result.postadres?.buitenland_woonplaats} ${result.postadres?.buitenland_naam} ${result.postadres?.buitenland_land?.omschrijving}`,
+                  },
+                  {
+                    term: 'Postadres postbus',
+                    description:
+                      result.postadres?.postbus_nummer &&
+                      `Postbus ${result.postadres?.postbus_nummer} ${result.postadres?.postbus_postcode} ${result.postadres?.postbus_woonplaats}`,
+                  },
+                ],
               }
             : undefined,
-        ),
-      ],
-    }),
+          result.is_natuurlijk_persoon
+            ? {
+                type: DetailResultItemType.DefinitionList,
+                entries: [
+                  {
+                    term: 'Voornamen',
+                    description: result.voornamen,
+                  },
+                  {
+                    term: 'Voorvoegsels',
+                    description: result.voorvoegsels,
+                  },
+                  {
+                    term: 'Geslachtsnaam',
+                    description: result.naam,
+                  },
+                  {
+                    term: 'Geslacht',
+                    description: result.geslacht?.omschrijving,
+                  },
+                  {
+                    term: 'Geboortedatum',
+                    description:
+                      result.geboortedatum &&
+                      new Date(result.geboortedatum).toLocaleDateString(DEFAULT_LOCALE, {
+                        month: '2-digit',
+                        day: '2-digit',
+                        year: 'numeric',
+                      }),
+                  },
+                  {
+                    term: 'Geboorteplaats',
+                    description: result.geboorteplaats,
+                  },
+                  {
+                    term: 'Geboorteland',
+                    description: result.geboorteland?.omschrijving,
+                  },
+                  {
+                    term: 'Datum van overlijden',
+                    description:
+                      result.overlijdensdatum &&
+                      new Date(result.overlijdensdatum).toLocaleDateString(DEFAULT_LOCALE, {
+                        month: '2-digit',
+                        day: '2-digit',
+                        year: 'numeric',
+                      }),
+                  },
+                  {
+                    term: 'Woonadres',
+                    description: `${result.woonadres?.openbareruimte_naam} ${result.woonadres?.huisnummer} ${result.woonadres?.huisletter} ${result.woonadres?.toevoeging} ${result.woonadres?.postcode} ${result.woonadres?.woonplaats}`,
+                  },
+                  {
+                    term: 'Woonadres buitenland',
+                    description:
+                      result.woonadres?.buitenland_adres &&
+                      `${result.woonadres?.buitenland_adres} ${result.woonadres?.buitenland_woonplaats} ${result.woonadres?.buitenland_naam} ${result.woonadres?.buitenland_land?.omschrijving}`,
+                  },
+                  {
+                    term: 'Postadres',
+                    description:
+                      result.postadres?.openbareruimte_naam &&
+                      `${result.postadres?.openbareruimte_naam} ${result.postadres?.huisnummer} ${result.postadres?.huisletter} ${result.postadres?.toevoeging} ${result.postadres?.postcode} ${result.postadres?.woonplaats}`,
+                  },
+                  {
+                    term: 'Postadres buitenland',
+                    description:
+                      result.postadres?.buitenland_adres &&
+                      `${result.postadres?.buitenland_adres} ${result.postadres?.buitenland_woonplaats} ${result.postadres?.buitenland_naam} ${result.postadres?.buitenland_land?.omschrijving}`,
+                  },
+                  {
+                    term: 'Postadres postbus',
+                    description:
+                      result.postadres?.postbus_nummer &&
+                      `Postbus ${result.postadres?.postbus_nummer} ${result.postadres?.postbus_postcode} ${result.postadres?.postbus_woonplaats}`,
+                  },
+                ],
+              }
+            : undefined,
+          getPaginatedListBlock(
+            GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT,
+            result.rechten?.href,
+            result?.is_natuurlijk_persoon
+              ? {
+                  authScopes: [AuthScope.BrkRsn],
+                  authScopeRequired: true,
+                  specialAuthLevel: true,
+                  normalize: zakelijkRechtNormalizer,
+                }
+              : {
+                  normalize: zakelijkRechtNormalizer,
+                },
+          ),
+        ],
+      }
+    },
   },
   [endpointTypes.maatschappelijkeActiviteiten]: {
     type: 'handelsregister/maatschappelijkeactiviteit',
