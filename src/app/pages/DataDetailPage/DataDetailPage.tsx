@@ -42,7 +42,9 @@ const DataDetailPage: FunctionComponent = () => {
         <DetailWrapper>
           <DetailType>{result.value?.data.title}</DetailType>
           <HeadingWrapper>
-            <Heading>{result.value.data.subTitle || 'Detailweergave'}</Heading>
+            <Heading data-testid="data-detail-heading">
+              {result.value.data.subTitle || 'Detailweergave'}
+            </Heading>
             {result?.value?.data?.infoBox && <DetailInfoBox {...result?.value?.data?.infoBox} />}
           </HeadingWrapper>
           <RenderDetails legacyLayout details={result.value} />

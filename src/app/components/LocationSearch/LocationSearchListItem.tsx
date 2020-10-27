@@ -21,6 +21,7 @@ export type Result = {
 
 const showSubtype = (categorySlug?: unknown, result?: Result) =>
   typeof categorySlug === 'string' &&
+  result?.subtypeLabel &&
   (categorySlug === 'ligplaats' ||
     categorySlug === 'standplaats' ||
     (categorySlug === 'openbareruimte' && result?.subtype !== 'weg') ||
@@ -51,7 +52,7 @@ type Props = {
 }
 
 const LocationSearchListItem: FunctionComponent<Props> = ({ result, category }) => (
-  <ListItem>
+  <ListItem data-testid="geosearch-listitem">
     <Link as={RouterLink} inList to={result.linkTo}>
       {result.label}
       <ExtraInfo>{getExtraInfo(result)}</ExtraInfo>

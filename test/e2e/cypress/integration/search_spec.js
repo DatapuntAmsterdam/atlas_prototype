@@ -3,7 +3,7 @@ import { DATA_SEARCH, MAP, SEARCH } from '../support/selectors'
 describe('search module', () => {
   beforeEach(() => {
     cy.server()
-    cy.route(`typeahead/?q=dam`).as('typeaheadResults')
+    cy.route(`typeahead?q=dam`).as('typeaheadResults')
     cy.route('/bag/v1.1./openbareruimte/*').as('getDetail')
     cy.route('/jsonapi/node/list/**').as('jsonapi')
     cy.route('POST', '/cms_search/graphql/').as('graphql')

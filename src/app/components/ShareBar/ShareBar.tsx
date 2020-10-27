@@ -43,7 +43,7 @@ const ShareBar: React.FC<Props> = ({ hideInPrintMode, ...otherProps }) => {
 
   const showShareBar = (hideInPrintMode && !printMode) || !hideInPrintMode
   return showShareBar ? (
-    <ShareBarContainer {...otherProps}>
+    <ShareBarContainer {...otherProps} data-testid="sharebar">
       <ShareButton
         // @ts-ignore
         type="button"

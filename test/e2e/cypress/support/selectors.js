@@ -55,6 +55,24 @@ export const DATA_SEARCH = {
   warningPanelAngular: '.c-panel--warning',
 }
 
+export const GEO_SEARCH = {
+  listItem: '[data-testid="geosearch-listitem"]',
+}
+
+export const DATA_DETAIL = {
+  main: '[data-testid="data-detail"]',
+  heading: '[data-testid="data-detail-heading"]',
+  subHeading: '[data-testid="data-detail-subheading"]',
+  definitionList: '[data-testid="detail-definition-list"]',
+  linkList: '[data-testid="detail-linklist"]',
+}
+
+export const COMPONENTS = {
+  panoramaPreview: '[data-testid="panorama-preview"]',
+  authAlert: '[data-testid="auth-alert"]',
+  shareBar: '[data-testid="sharebar"]',
+}
+
 export const DATA_SELECTION_TABLE = {
   table: '.c-ds-table',
   head: '.c-ds-table__head',
@@ -429,7 +447,6 @@ export const SEARCH = {
 export const TABLES = {
   activeFilterItem: '.c-data-selection-active-filters__listitem',
   activeFilterRemove: '.c-data-selection-active-filters--remove-filter',
-  detailPane: '.qa-detail',
   detailTitle: 'h2.o-header__title',
   filterCategories: '.c-data-selection-available-filters__category',
   filterItem: '.c-data-selection-available-filters__item',

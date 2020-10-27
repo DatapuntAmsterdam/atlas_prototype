@@ -17,9 +17,11 @@ describe('Smoketest', () => {
       cy.viewport(1920, 1080)
       cy.hidePopup()
     })
+
+    // Note: might fail occasionally
     it('Should show the details of an address', () => {
       cy.server()
-      cy.route('/typeahead/?q=dam+1').as('getResults')
+      cy.route('/typeahead?q=dam+1').as('getResults')
       cy.route('POST', '/cms_search/graphql/').as('graphql')
       cy.route('/jsonapi/node/list/*').as('jsonapi')
       cy.route('/bag/v1.1/pand/*').as('getPand')
@@ -138,6 +140,7 @@ describe('Smoketest', () => {
         .contains('In tabel weergeven')
         .click({ force: true })
     })
+    // Note: might fail occasionally
     it('Should see no vestigingen or kadastrale objecten ', () => {
       // Check if vestigingen and kadstrale objecten are not visible, because user is not logged in
       cy.contains(
@@ -152,7 +155,7 @@ describe('Smoketest', () => {
       ).should('be.visible')
       cy.get(DATA_SEARCH.linklogin).should('be.visible')
       cy.get(TABLES.tableValue).should('not.be.visible')
-      cy.get(ADDRESS_PAGE.tab, { timeout: 40000 })
+      cy.get(ADDRESS_PAGE.tabKadastraleObjecten, { timeout: 30000 })
         .contains('Kadastrale objecten')
         .click({ force: true })
       cy.url('contains', '/data/brk/kadastrale-objecten/')
@@ -172,6 +175,7 @@ describe('Smoketest', () => {
       cy.logout()
     })
 
+    // Note: might fail occasionally
     it('Should show vestigingen and Kadastrale objecten if user is logged in', () => {
       cy.server()
       cy.defineAddressDetailRoutes()
@@ -187,7 +191,7 @@ describe('Smoketest', () => {
       cy.route(
         '/dataselectie/brk/?page=1&dataset=ves&shape=[]&buurtcombinatie_naam=Burgwallen-Oude+Zijde',
       ).as('getBRK2')
-      cy.route('/typeahead/?q=dam+1').as('getResults')
+      cy.route('/typeahead?q=dam+1').as('getResults')
       cy.route('/gebieden/buurt/?buurtcombinatie=3630012052036*').as('getBuurtCombinatie')
 
       // Search for an address
@@ -202,7 +206,10 @@ describe('Smoketest', () => {
       cy.url('contains', '/data/gebieden/buurtcombinatie/id3630012052036/')
 
       // Open vestigingen table, should see vestigingen
-      cy.get(ADDRESS_PAGE.linkTable).eq(1).contains('In tabel weergeven').click()
+      cy.get(ADDRESS_PAGE.linkTable, { timeout: 40000 })
+        .eq(1)
+        .contains('In tabel weergeven')
+        .click()
       cy.wait('@getBuurtCombinatie')
       cy.wait('@getHrData')
       cy.contains(
@@ -220,7 +227,7 @@ describe('Smoketest', () => {
       cy.get(TABLES.tableValue, { timeout: 40000 }).should('be.visible')
 
       // Open kadastrale objecten table, should see kadastrale objecten
-      cy.get(ADDRESS_PAGE.tab).eq(2).click({ force: true })
+      cy.get(ADDRESS_PAGE.tabKadastraleObjecten).click({ force: true })
       cy.wait('@getBRK')
       cy.url('contains', '/data/brk/kadastrale-objecten/')
       cy.get(TABLES.tableValue).should('be.visible')
@@ -239,7 +246,7 @@ describe('Smoketest', () => {
     })
     it('Should open a dataset', () => {
       cy.server()
-      cy.route('/typeahead/?q=oost').as('getResults')
+      cy.route('/typeahead?q=oost').as('getResults')
       cy.route('POST', '/cms_search/graphql/').as('graphql')
       cy.route('/jsonapi/node/list/*').as('jsonapi')
       cy.route('/dcatd/datasets/*').as('getDataset')
@@ -280,7 +287,7 @@ describe('Smoketest', () => {
     })
     it('Should open a publication', () => {
       cy.server()
-      cy.route('/typeahead/?q=oost').as('getResults')
+      cy.route('/typeahead?q=oost').as('getResults')
       cy.route('/jsonapi/node/publication/*').as('getPublication')
       cy.route('POST', '/cms_search/graphql/').as('graphql')
 
@@ -311,7 +318,7 @@ describe('Smoketest', () => {
     })
     it('Should go back to previous pages', () => {
       cy.server()
-      cy.route('/typeahead/?q=oost').as('getResults')
+      cy.route('/typeahead?q=oost').as('getResults')
       cy.route('/dcatd/datasets/*').as('getDataset')
 
       // Go Back to all previous pages
