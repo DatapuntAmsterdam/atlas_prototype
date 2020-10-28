@@ -1,8 +1,11 @@
 import React, { FunctionComponent, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Button, Heading, Link, themeColor } from '@amsterdam/asc-ui'
+import styled from 'styled-components'
 import { addFilter as addFilterAction } from '../../../shared/ducks/filters/filters'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
+import { ReactComponent as Metadata } from '../../../shared/assets/icons/metadata.svg'
 
 export type Filter = {
   options: Array<{ id: string; label: string; count: number }>
@@ -23,6 +26,16 @@ type Props = {
   activeFilters: ActiveFilter
   dataset: string
 }
+
+const StyledHeading = styled(Heading)`
+  display: flex;
+  justify-content: space-between;
+  color: ${themeColor('tint', 'level7')};
+`
+
+const InfoButton = styled(Button)`
+  border: 1px solid ${themeColor('tint', 'level4')};
+`
 
 // Note, this component has been migrated from legacy angularJS code
 // Todo: this can be removed when we implement the new interactive table
@@ -94,20 +107,26 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
           (filter) =>
             hasInactiveFilterOptions(filter) && (
               <div className="c-data-selection-available-filters__category">
-                <h2 className="c-data-selection-available-filters__category-label qa-category-header">
+                <StyledHeading as="h3">
                   <span>{filter.label}</span>
                   {filter.info_url && (
-                    <a
-                      className="o-header__button c-stelselpedia__button"
+                    <InfoButton
+                      type="button"
+                      variant="blank"
+                      data-testid="detail-infobox"
+                      forwardedAs={Link}
+                      size={28}
+                      iconSize={18}
+                      icon={<Metadata />}
                       title="Uitleg tonen"
                       href={filter.info_url}
                       rel="noreferrer noopener"
                       target="_blank"
                     >
                       Uitleg tonen
-                    </a>
+                    </InfoButton>
                   )}
-                </h2>
+                </StyledHeading>
 
                 <ul>
                   {[...filter.options]
