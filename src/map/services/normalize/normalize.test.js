@@ -598,12 +598,12 @@ ${input.gebruiksdoel[1]}`,
   describe('normalizes "meetbout', () => {
     let input
     let output
-    it('returns the speed', () => {
+    it('returns the speed', async () => {
       input = {
         zakkingssnelheid: 0.1212121212,
       }
 
-      output = meetbout(input)
+      output = await meetbout(input)
 
       expect(output).toMatchObject({
         speed: '0,121',

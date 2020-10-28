@@ -26,17 +26,17 @@ describe('The Detail DocumentTitle service', () => {
     it('combines a GLOSSARY label with a specific display variable', () => {
       const action = {
         payload: {
-          type: 'wkpb',
-          subtype: 'beperking',
+          type: 'bag',
+          subtype: 'standplaats',
         },
       }
-      expect(detailDocumentTitle(action)).toBe('Gemeentelijke beperking')
+      expect(detailDocumentTitle(action)).toBe('Standplaats')
     })
 
     it('falls back to glossary key when no definition can be found', () => {
       const action = {
         payload: {
-          type: 'wkpb',
+          type: 'bag',
           subtype: 'unknown',
         },
       }
@@ -46,7 +46,7 @@ describe('The Detail DocumentTitle service', () => {
     it('falls back to glossary key when no definition can be found', () => {
       const action = {
         payload: {
-          type: 'wkpb',
+          type: 'bag',
           subtype: 'unknown',
         },
       }
