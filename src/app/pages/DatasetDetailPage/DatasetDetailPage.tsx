@@ -95,7 +95,7 @@ function getTimePeriodLabel(period: DcatTemporal) {
 
 // TODO: remove when Typography is aligned https://github.com/Amsterdam/amsterdam-styled-components/issues/727
 const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`
-  white-space: pre; /* Some content contains whitespace which needs to be preserved. */
+  white-space: pre-wrap; /* Some content contains whitespace which needs to be preserved. */
   margin-bottom: ${themeSpacing(4)};
 
   & * {
