@@ -1520,10 +1520,6 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           GLOSSARY.DEFINITIONS.COMPLEXEN,
           result.ligt_in_complex?._links?.self?.href,
         ),
-        getPaginatedListBlock(
-          GLOSSARY.DEFINITIONS.BEPERKING,
-          result.heeft_als_grondslag_beperking?._links?.self?.href,
-        ),
         getLinkListBlock(
           GLOSSARY.DEFINITIONS.PAND,
           result.betreft_pand,

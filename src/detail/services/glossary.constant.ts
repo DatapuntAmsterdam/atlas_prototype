@@ -134,12 +134,6 @@ const DEFINITIONS = typeHelper({
     url: null,
     meta: [],
   },
-  BEPERKING: {
-    ...categoryLabels.gemeentelijkeBeperking,
-    description: 'Lijst van beperkingen op een gebruiksrecht.',
-    url: 'https://www.amsterdam.nl/stelselpedia/wkpb-index/catalogus/beperking/#objectkenmerken',
-    meta: ['datum_in_werking', 'datum_einde'],
-  },
   BETROKKEN_BIJ: {
     singular: 'Betrokken bij',
     plural: 'Betrokken bij',
