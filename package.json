@@ -202,7 +202,7 @@
     "karma-sourcemap-loader": "0.3.8",
     "karma-webpack": "4.0.2",
     "lodash.clonedeep": "^4.5.0",
-    "mini-css-extract-plugin": "^1.2.0",
+    "mini-css-extract-plugin": "^1.2.1",
     "postcss": "^8.1.4",
     "postcss-loader": "^4.0.4",
     "prettier": "2.1.2",
