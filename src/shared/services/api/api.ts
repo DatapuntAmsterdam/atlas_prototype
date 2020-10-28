@@ -1,7 +1,7 @@
 import { logout } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
-import { AuthError } from './errors'
+import { AuthError, NotFoundError } from './errors'
 
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
@@ -18,6 +18,10 @@ const handleErrors = (response: Response, reloadOnUnauthorized: boolean) => {
 
   if (response.status === 401) {
     throw new AuthError(response.status, '')
+  }
+
+  if (response.status === 404) {
+    throw new NotFoundError(response.status, response.statusText)
   }
 
   if (!response.ok) {

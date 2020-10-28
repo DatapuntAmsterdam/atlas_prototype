@@ -1,14 +1,16 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { fetchDetailData, getServiceDefinition } from '../../../map/services/map'
 import { clearMapDetail, showDetail } from '../../../shared/ducks/detail/actions'
 import { fetchMapDetailSuccess } from '../../../map/ducks/detail/actions'
 import getGeometry from '../../../shared/services/geometry/geometry'
 import { getViewMode, setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { getCurrentEndpoint } from '../../../map/ducks/detail/selectors'
-import { AuthError } from '../../../shared/services/api/errors'
+import { AuthError, NotFoundError } from '../../../shared/services/api/errors'
 import mapFetch from '../../../map/services/map-fetch/map-fetch'
 import useAuthScope from '../../utils/useAuthScope'
+import { routing } from '../../routes'
 
 // Todo: AfterBeta: can be removed
 const useDataDetail = <T = any>(
@@ -20,6 +22,7 @@ const useDataDetail = <T = any>(
   onRetry: () => void
 } => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const [retryCount, setRetryCount] = useState(0)
 
   const view = useSelector(getViewMode)
@@ -37,8 +40,8 @@ const useDataDetail = <T = any>(
       const userIsAuthorized = isUserAuthorized(serviceDefinition?.authScopes)
 
       if (!serviceDefinition) {
-        const error = new AuthError(401, '')
-        return Promise.reject(error)
+        history.push(routing.niet_gevonden.path)
+        return Promise.reject()
       }
 
       if (!userIsAuthorized && serviceDefinition.authScopeRequired) {
@@ -46,7 +49,15 @@ const useDataDetail = <T = any>(
         return Promise.reject(error)
       }
 
-      const data = await fetchDetailData(serviceDefinition, id)
+      let data
+      try {
+        data = await fetchDetailData(serviceDefinition, id)
+      } catch (e) {
+        if (e instanceof NotFoundError) {
+          history.push(routing.niet_gevonden.path)
+          return Promise.reject()
+        }
+      }
 
       dispatch(clearMapDetail())
 
