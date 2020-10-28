@@ -1,21 +1,21 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
 import React, { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import LegacyLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
 import {
   FetchPanoramaOptions,
   getPanoramaThumbnail,
   PanoramaThumbnail,
 } from '../../../../api/panorama/thumbnail'
 import { PANORAMA_CONFIG } from '../../../../panorama/services/panorama-api/panorama-api'
+import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
+import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
 import buildQueryString from '../../../utils/buildQueryString'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
 import { locationParam, panoParam } from '../query-params'
-import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
-import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral
@@ -24,6 +24,7 @@ export interface PanoramaPreviewProps extends FetchPanoramaOptions {
 export const PreviewContainer = styled.div`
   position: relative;
   width: 100%;
+  max-width: 400px; /* Preview images have an aspect ratio of 5 : 2 */
   height: 160px;
 `
 
