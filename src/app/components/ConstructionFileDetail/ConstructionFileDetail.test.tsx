@@ -1,75 +1,108 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { render, within } from '@testing-library/react'
+
+import bouwdossierFixture from '../../../api/iiif-metadata/bouwdossier/fixture'
+import withAppContext from '../../utils/withAppContext'
+
 import ConstructionFileDetail from './ConstructionFileDetail'
 
 jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')
 
+// mocking Gallery component to prevent having to write async test case functions and to await the fetch result from the Gallery component
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+jest.mock('../Gallery/Gallery', () => ({ allFiles, ...rest }: { allFiles: any }) => (
+  <span {...rest} />
+))
+
 describe('ConstructionFileDetail', () => {
-  let mockResults = {
-    titel: 'title',
-    documenten: [],
-    datering: 'date',
-    dossier_type: 'fileType',
-    dossiernr: 1,
-    stadsdeel: 'district',
-    adressen: [],
-  }
-  let component = shallow(<ConstructionFileDetail {...mockResults} />)
+  it('should set the title', () => {
+    const { container, getByText } = render(
+      withAppContext(<ConstructionFileDetail {...bouwdossierFixture} />),
+    )
+    const h1 = container.querySelector('h1')
 
-  const setState = jest.fn()
-  const useStateSpy = jest.spyOn(React, 'useState')
-  useStateSpy.mockImplementation((init) => [init, setState])
-
-  it('returns the component', () => {
-    expect(component.at(0).exists()).toBeTruthy()
+    expect(getByText('Bouw- en omgevingsdossiers')).toBeInTheDocument()
+    expect(h1).toHaveTextContent(bouwdossierFixture.titel)
   })
 
-  it('should set the title', () => {
-    expect(component.at(0).find('Heading').at(0)).toBeTruthy()
-    expect(component.at(0).find('Heading').at(0).props().children).toBe(mockResults.titel)
+  it('should render a definition list', () => {
+    const { getByTestId } = render(
+      withAppContext(<ConstructionFileDetail {...bouwdossierFixture} />),
+    )
+
+    const definitionList = getByTestId('definitionList')
+    const listElements = ['titel', 'datering', 'dossier_type', 'dossiernr', 'access']
+
+    listElements.forEach((element) => {
+      const definitionDescription = within(definitionList).getByText(
+        `${bouwdossierFixture[element]}`,
+      )
+      expect(definitionDescription).toBeInTheDocument()
+    })
+  })
+
+  it('should render olo_liaan_nummer', () => {
+    const { getByTestId, queryByTestId, rerender } = render(
+      withAppContext(
+        <ConstructionFileDetail {...{ ...bouwdossierFixture, olo_liaan_nummer: undefined }} />,
+      ),
+    )
+
+    expect(queryByTestId('oloLiaanNumber')).not.toBeInTheDocument()
+
+    // eslint-disable-next-line camelcase
+    const olo_liaan_nummer = 'Foo bar'
+
+    rerender(
+      withAppContext(<ConstructionFileDetail {...{ ...bouwdossierFixture, olo_liaan_nummer }} />),
+    )
+
+    expect(getByTestId('oloLiaanNumber')).toBeInTheDocument()
   })
 
   it('should render the subfiles', () => {
-    mockResults = {
-      ...mockResults,
-      documenten: [{ subdossier_titel: 'documenten', bestanden: [] }],
-    }
+    const { getAllByTestId, getByTestId, getByText, rerender } = render(
+      withAppContext(
+        <ConstructionFileDetail {...{ ...bouwdossierFixture, olo_liaan_nummer: undefined }} />,
+      ),
+    )
 
-    component = shallow(<ConstructionFileDetail {...mockResults} />)
+    expect(getByTestId('DocumentsHeading')).toBeInTheDocument()
 
-    expect(component.at(0).find('[data-testid="DocumentsHeading"]').at(0)).toBeTruthy()
-    expect(
-      component.at(0).find('[data-testid="DocumentsHeading"]').at(0).props().children,
-    ).toContain(mockResults.documenten[0].subdossier_titel)
+    bouwdossierFixture.documenten.forEach((doc: any, index: number) => {
+      expect(getByText(`${doc.subdossier_titel} (${doc.bestanden.length})`)).toBeInTheDocument()
+      const filesGallery = within(getByTestId(`constructionDocuments-${index}`)).getByTestId(
+        'filesGallery',
+      )
+      expect(filesGallery).toBeInTheDocument()
+      expect(
+        within(getByTestId(`constructionDocuments-${index}`)).queryAllByTestId(
+          'oloLiaanNumberDocumentDescription',
+        ),
+      ).toHaveLength(0)
+    })
 
-    expect(component.at(0).find('Gallery').at(0)).toBeTruthy()
-    expect(component.at(0).find('Gallery').at(0).props().allFiles).toBe(
-      mockResults.documenten[0].bestanden,
+    // eslint-disable-next-line camelcase
+    const olo_liaan_nummer = 'Zork'
+
+    rerender(
+      withAppContext(<ConstructionFileDetail {...{ ...bouwdossierFixture, olo_liaan_nummer }} />),
+    )
+
+    expect(getAllByTestId('oloLiaanNumberDocumentDescription')).toHaveLength(
+      bouwdossierFixture.documenten.length,
     )
   })
 
   it('should render the addresses', () => {
-    const mockAdres = {
-      nummeraanduidingen: ['1234'],
-      nummeraanduidingen_label: ['foo'],
-      verblijfsobjecten: [],
-      verblijfsobjecten_label: [],
-    }
-
-    mockResults = {
-      ...mockResults,
-      adressen: [mockAdres],
-    }
-
-    component = shallow(<ConstructionFileDetail {...mockResults} />)
-
-    expect(component.at(0).find('List').at(0)).toBeTruthy()
-    expect(component.at(0).find('Link').at(0)).toBeTruthy()
-    expect(component.at(0).find('Link').at(0).props().title).toBe(
-      mockAdres.nummeraanduidingen_label[0],
+    const { queryByTestId, getByTestId, rerender } = render(
+      withAppContext(<ConstructionFileDetail {...{ ...bouwdossierFixture, adressen: [] }} />),
     )
-    expect(component.at(0).find('Link').at(0).props().children).toEqual(
-      <span>{mockAdres.nummeraanduidingen_label[0]}</span>,
-    )
+
+    expect(queryByTestId('constructionFileAddresses')).not.toBeInTheDocument()
+
+    rerender(withAppContext(<ConstructionFileDetail {...bouwdossierFixture} />))
+
+    expect(getByTestId('constructionFileAddresses')).toBeInTheDocument()
   })
 })

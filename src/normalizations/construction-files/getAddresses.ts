@@ -1,96 +1,58 @@
+import { Adres } from '../../api/iiif-metadata/bouwdossier'
+
 /* eslint-disable camelcase */
-function formatAddress(
-  locationLabel: string,
-  street: string,
-  houseNumberLetter?: string,
-  houseNumberAddition?: string,
-  houseNumberStarting?: number,
-  houseNumberEnd?: number,
-) {
-  if (locationLabel) {
-    return locationLabel
+export const formatAddress = ({
+  locatie_aanduiding,
+  straat,
+  huisnummer_letter,
+  huisnummer_toevoeging,
+  huisnummer_van,
+  huisnummer_tot,
+}: Adres) => {
+  if (locatie_aanduiding) {
+    return locatie_aanduiding
   }
 
-  let label = street
+  let label = straat
 
-  if (houseNumberStarting && houseNumberEnd) {
-    label += ` ${houseNumberStarting}${
-      houseNumberEnd !== houseNumberStarting ? `-${houseNumberEnd}` : ''
+  if (huisnummer_van && huisnummer_tot) {
+    label = `${label} ${huisnummer_van}${
+      huisnummer_tot !== huisnummer_van ? `-${huisnummer_tot}` : ''
     }`
   } else {
-    label += ` ${houseNumberStarting || ''}${houseNumberLetter || ''}${
-      houseNumberAddition ? `-${houseNumberAddition}` : ''
+    label = `${label} ${huisnummer_van || ''}${huisnummer_letter || ''}${
+      huisnummer_toevoeging ? `-${huisnummer_toevoeging}` : ''
     }`
   }
 
-  return label
-}
-
-export type Address = {
-  nummeraanduidingen: Array<string>
-  nummeraanduidingen_label: Array<string>
-  verblijfsobjecten: Array<string>
-  verblijfsobjecten_label: Array<string>
-  locatie_aanduiding: string
-  straat: string
-  huisnummer_letter?: string
-  huisnummer_toevoeging?: string
-  huisnummer_van?: number
-  huisnummer_tot?: number
+  return label.trim()
 }
 
 type AddressResult = {
   id: string
-  type: 'nummeraanduiding' | 'verblijfsobject'
+  type: 'verblijfsobject'
   label: string
 }
 
-export default function getAddresses(results: Array<Address>) {
-  return results.reduce<Array<AddressResult>>(
-    (
-      acc,
-      {
-        nummeraanduidingen,
-        nummeraanduidingen_label,
-        verblijfsobjecten,
-        verblijfsobjecten_label,
-        locatie_aanduiding,
-        straat,
-        huisnummer_letter,
-        huisnummer_toevoeging,
-        huisnummer_van,
-        huisnummer_tot,
-      },
-    ) => [
-      ...acc,
-      ...nummeraanduidingen.reduce<Array<AddressResult>>(
-        (acc2, nummeraanduiding, i) => [
-          ...acc2,
-          { id: nummeraanduiding, type: 'nummeraanduiding', label: nummeraanduidingen_label[i] },
-        ],
-        [],
-      ),
-      ...verblijfsobjecten.reduce<Array<AddressResult>>(
-        (acc2, verblijfsobject, i) => [
-          ...acc2,
-          {
-            id: verblijfsobject,
-            type: 'verblijfsobject',
-            label:
-              verblijfsobjecten_label[i] ||
-              formatAddress(
-                locatie_aanduiding,
-                straat,
-                huisnummer_letter,
-                huisnummer_toevoeging,
-                huisnummer_van,
-                huisnummer_tot,
-              ),
-          },
-        ],
-        [],
-      ),
-    ],
-    [],
-  )
-}
+const getAddresses = (results: Adres[]) =>
+  results
+    .reduce<AddressResult[]>(
+      (reducedResults, adres) => [
+        ...reducedResults,
+        ...adres.verblijfsobjecten.reduce<AddressResult[]>(
+          (reducedVerblijfsobjecten, verblijfsobject, i) => [
+            ...reducedVerblijfsobjecten,
+            {
+              id: verblijfsobject,
+              type: 'verblijfsobject',
+              label: adres.verblijfsobjecten_label[i] || formatAddress(adres),
+            },
+          ],
+          [],
+        ),
+      ],
+      [],
+    )
+    .sort((a, b) => a.label.localeCompare(b.label))
+
+export default getAddresses
