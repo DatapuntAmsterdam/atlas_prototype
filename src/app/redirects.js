@@ -2,7 +2,7 @@ import PARAMETERS from '../store/parameters'
 import { routing, MAIN_PATHS } from './routes'
 import { CONTENT_REDIRECT_LINKS, SHORTLINKS } from '../shared/config/config'
 import matomoInstance from './matomo'
-import redirectToAddress from './utils/redirectToAddress'
+import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
 import environment from '../environment'
 
 const { VIEW, VIEW_CENTER, LAYERS, LEGEND, ZOOM, EMBED } = PARAMETERS
@@ -161,7 +161,7 @@ export const webHooks = [
   {
     from: `/adres/zoek${window.location.search}`,
     to: `/data/bag/verblijfsobject/`,
-    load: redirectToAddress,
+    load: getVerblijfsobjectIdFromAddressQuery,
   },
 ]
 
@@ -192,7 +192,7 @@ export default async function resolveRedirects() {
       })
 
       // Tries to prevent cancelling the network request to Matomo, arbitrary number that allows Matomo some time to load
-      window.setTimeout(() => window.location.replace(redirectTo), 1000)
+      window.setTimeout(() => window.location.replace(redirectTo), 0)
     }
 
     return !!dataId
