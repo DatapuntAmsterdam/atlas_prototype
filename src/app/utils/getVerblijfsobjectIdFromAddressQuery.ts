@@ -1,5 +1,10 @@
 import { getNummeraanduidingByAddress } from '../../api/v1/bag/nummeraanduiding'
 
+/**
+ * Get a verblijfsobject id from a URL or search string
+ *
+ * @param {String} locationSearch - Full URL or search string
+ */
 const getVerblijfsobjectIdFromAddressQuery = async (locationSearch: string): Promise<string> => {
   const result = await getNummeraanduidingByAddress(locationSearch)
 

@@ -13,8 +13,8 @@ type ReceiveFields = {
  *
  * API documentation: https://api.data.amsterdam.nl/v1/bag/nummeraanduiding
  *
- * @param {string} queryParams - Full URL or search string
- * @param {string} receiveFields - comma separated (no spaces) values indicating which fields should be returned from the API request
+ * @param {String} queryParams - Full URL or search string
+ * @param {String} receiveFields - comma separated (no spaces) values indicating which fields should be returned from the API request
  */
 // eslint-disable-next-line import/prefer-default-export
 export const getNummeraanduidingByAddress = (
