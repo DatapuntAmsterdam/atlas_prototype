@@ -431,6 +431,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   aantekeningen?: Array<{ opgelegd_door: null | { _display: string }; _display: string }>
   ontstaan_uit?: string | null
   betrokken_bij?: string | null
+  verblijfsobjectidentificatie?: string | null
 }
 
 export type ExtraApiResults = {

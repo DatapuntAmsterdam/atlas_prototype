@@ -661,7 +661,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.PAND, result?.panden?.href),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
-            `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.hoofdadres?.landelijk_id}`,
+            `${environment.API_ROOT}handelsregister/vestiging/?verblijfsobject=${result.verblijfsobjectidentificatie}`,
             {
               authScopes: [AuthScope.HrR],
               authScopeRequired: true,
@@ -1434,7 +1434,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           type: DetailResultItemType.PaginatedData,
           pageSize: 10,
           getData: getListFromApi(result?.metingen?.href, meetboutTable),
-          title: 'Regimes',
+          title: 'Metingen',
           toView: (data) => ({
             type: DetailResultItemType.Table,
             headings: [
@@ -1447,11 +1447,13 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             values: data,
           }),
         },
-        {
-          type: DetailResultItemType.Image,
-          title: 'Rollaag',
-          src: result.rollaagImage,
-        },
+        result.rollaagImage
+          ? {
+              type: DetailResultItemType.Image,
+              title: 'Rollaag',
+              src: result.rollaagImage,
+            }
+          : undefined,
       ],
     }),
   },
