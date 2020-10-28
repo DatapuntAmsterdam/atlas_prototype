@@ -211,7 +211,11 @@ const Item: FunctionComponent<ItemProps> = ({ item, subItem, hideHeader }) => {
       case DetailResultItemType.GroupedItems:
         return <GroupedItems item={item} />
       case DetailResultItemType.Image:
-        return item.src ? <StyledImage alt={item.title} src={item.src} /> : null
+        return item.src ? (
+          <StyledImage alt={item.title} src={item.src} />
+        ) : (
+          <Paragraph>Geen rollaag beschikbaar</Paragraph>
+        )
       case DetailResultItemType.BulletList:
         return (
           <List variant="bullet">

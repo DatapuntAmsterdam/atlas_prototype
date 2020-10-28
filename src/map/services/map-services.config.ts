@@ -1447,13 +1447,11 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             values: data,
           }),
         },
-        result.rollaagImage
-          ? {
-              type: DetailResultItemType.Image,
-              title: 'Rollaag',
-              src: result.rollaagImage,
-            }
-          : undefined,
+        {
+          type: DetailResultItemType.Image,
+          title: 'Rollaag',
+          src: result.rollaagImage,
+        },
       ],
     }),
   },
