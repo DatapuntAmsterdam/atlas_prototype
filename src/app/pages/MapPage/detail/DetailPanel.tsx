@@ -217,12 +217,14 @@ const Item: FunctionComponent<ItemProps> = ({ item, subItem, hideHeader }) => {
           <Paragraph>Geen rollaag beschikbaar</Paragraph>
         )
       case DetailResultItemType.BulletList:
-        return (
+        return item?.entries ? (
           <List variant="bullet">
-            {item?.entries?.map((entry) => (
+            {item.entries.map((entry) => (
               <ListItem key={entry}>{entry}</ListItem>
             ))}
           </List>
+        ) : (
+          <Paragraph>Geen resultaat gevonden</Paragraph>
         )
       default:
         throw new Error('Unable to render map detail pane, encountered unknown item type.')
