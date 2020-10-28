@@ -1369,9 +1369,24 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           },
           getLinkListBlock(GLOSSARY.DEFINITIONS.ONTSTAAN_UIT, brkData?.ontstaan_uit),
           getLinkListBlock(GLOSSARY.DEFINITIONS.BETROKKEN_BIJ, brkData?.betrokken_bij),
-          getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href, {
-            displayFormatter: typeAddressDisplayFormatter,
-          }),
+          /**
+           There is no _adressen.count variable. But this check is still valid, because:
+           - A pand has 0-n verblijfsobjecten
+           - A verblijfsobject has 1-n adressen
+           - An adres is always related to a verblijfsobject
+           So; there are no adressen if there are no verblijfsobjecten. And if there are any verblijfsobjecten there must
+           be at least one adres for each verblijfsobject as well.
+           */
+          // @ts-ignore
+          result.verblijfsobjecten?.count
+            ? getPaginatedListBlock(
+                GLOSSARY.DEFINITIONS.NUMMERAANDUIDING,
+                result?._adressen?.href,
+                {
+                  displayFormatter: typeAddressDisplayFormatter,
+                },
+              )
+            : undefined,
         ],
       }
     },

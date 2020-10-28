@@ -350,7 +350,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
       } & ApiDescription)
     | null
   kadastrale_objecten?: ApiLink | null
-  verblijfsobjecten?: ApiDisplay[] | null
+  verblijfsobjecten?: ApiDisplay[] | { count?: number | null } | null
   kadastrale_gemeente?: ({ gemeente: { _display?: string }; naam?: string } & ApiDisplay) | null
   sectie?: {
     sectie?: string
