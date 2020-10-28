@@ -1,9 +1,11 @@
 import { getCountFromHeader } from '../support/helper-functions'
 import {
   ADDRESS_PAGE,
+  COMPONENTS,
   DATA_DETAIL,
   DATA_SEARCH,
   DATA_SELECTION_TABLE,
+  GEO_SEARCH,
   HEADINGS,
   MAP,
   SEARCH,
@@ -211,5 +213,40 @@ describe('user should be able to open more addresses', () => {
     cy.contains('Adressen (7)')
     cy.go('back')
     cy.contains("Resultaten tonen binnen de categorie 'Data'").click()
+  })
+})
+describe('open address', () => {
+  it('should open the address detail panel', () => {
+    cy.server()
+    cy.defineGeoSearchRoutes()
+    cy.defineAddressDetailRoutes()
+    cy.route('typeahead?q=ad+windighof+2').as('getResults')
+
+    // ensure the viewport is always the same in this test, so the clicks can be aligned properly
+    cy.viewport(1000, 660)
+    cy.hidePopup()
+    cy.visit('/')
+    cy.get(DATA_SEARCH.autoSuggestInput).focus().type('Ad Windighof 2')
+
+    cy.wait('@getResults')
+    cy.get(DATA_SEARCH.autoSuggestDropdown).contains('Ad Windighof 2').click({ force: true })
+    cy.wait('@getVerblijfsobject')
+
+    // Rendering after this request takes some time on server
+    cy.wait(500)
+    cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
+    cy.get(ADDRESS_PAGE.resultsPanel).get(DATA_DETAIL.heading).contains('Ad Windighof 2')
+    cy.get(ADDRESS_PAGE.resultsPanel).get('dl').contains('1087HE')
+
+    cy.wait('@getPanorama')
+    cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
+
+    cy.get(MAP.mapZoomIn).click()
+    cy.get(MAP.mapZoomIn).click()
+    cy.get(MAP.mapContainer).click(166, 304)
+
+    // check that the address is open in right column
+    cy.waitForGeoSearch()
+    cy.get(GEO_SEARCH.listItem).contains('Ad Windighof 2').should('exist').and('be.visible')
   })
 })

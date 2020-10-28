@@ -18,6 +18,20 @@ export const ADDRESS_PAGE = {
   tabKadastraleObjecten: '#tab-brk',
 }
 
+export const COMPONENTS = {
+  panoramaPreview: '[data-testid="panorama-preview"]',
+  authAlert: '[data-testid="auth-alert"]',
+  shareBar: '[data-testid="sharebar"]',
+}
+
+export const DATA_DETAIL = {
+  main: '[data-testid="data-detail"]',
+  heading: '[data-testid="data-detail-heading"]',
+  subHeading: '[data-testid="data-detail-subheading"]',
+  definitionList: '[data-testid="detail-definition-list"]',
+  linkList: '[data-testid="detail-linklist"]',
+}
+
 export const DATA_SEARCH = {
   autoSuggest: '.auto-suggest',
   autoSuggestCategory: '.auto-suggest__dropdown-category__heading',
@@ -54,24 +68,6 @@ export const DATA_SEARCH = {
   sortDropdown: '[data-testid="sort-select"]',
   warningPanel: '.c-panel',
   warningPanelAngular: '.c-panel--warning',
-}
-
-export const GEO_SEARCH = {
-  listItem: '[data-testid="geosearch-listitem"]',
-}
-
-export const DATA_DETAIL = {
-  main: '[data-testid="data-detail"]',
-  heading: '[data-testid="data-detail-heading"]',
-  subHeading: '[data-testid="data-detail-subheading"]',
-  definitionList: '[data-testid="detail-definition-list"]',
-  linkList: '[data-testid="detail-linklist"]',
-}
-
-export const COMPONENTS = {
-  panoramaPreview: '[data-testid="panorama-preview"]',
-  authAlert: '[data-testid="auth-alert"]',
-  shareBar: '[data-testid="sharebar"]',
 }
 
 export const DATA_SELECTION_TABLE = {
@@ -113,6 +109,10 @@ export const DRAWING = {
   panelDrawTool: '[class*="DrawToolBare__DrawToolPanel"]',
   polygon: '[class="leaflet-interactive"]',
   tooltip: '[class*=leaflet-tooltip-bottom]',
+}
+
+export const GEO_SEARCH = {
+  listItem: '[data-testid="geosearch-listitem"]',
 }
 
 export const HEADER = {
