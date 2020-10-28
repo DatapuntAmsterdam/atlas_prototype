@@ -41,7 +41,6 @@ describe('employee PLUS permissions', () => {
     cy.get(DATA_SEARCH.autoSuggestDropdown).contains('Aafje Cornelia Bakker').should('be.visible')
   })
 
-  // Note: might fail occasionally
   it('1. Should show "Kadastrale subjecten" and "Vestigingen" in the results', () => {
     cy.route('/typeahead?q=bakker').as('getResults')
     cy.visit('/')
@@ -83,7 +82,6 @@ describe('employee PLUS permissions', () => {
     cy.get(DATA_DETAIL.linkList).contains('Eigendom (recht van)')
   })
 
-  // Note: might fail occasionally
   it('3. Should show a plus employee all info for a cadastral object', () => {
     cy.route('/brk/object/*').as('getObject')
     cy.route('/brk/object-expand/*').as('getObjectExpand')
@@ -97,6 +95,7 @@ describe('employee PLUS permissions', () => {
     cy.get(DATA_SEARCH.infoNotification).should('not.exist')
     cy.get(DATA_DETAIL.heading).contains('6661')
     cy.get(DATA_DETAIL.subHeading).contains(values.aantekeningen)
+    cy.contains('Besluit op basis van Monumentenwet 1988')
     cy.contains('Koopsom').should('be.visible')
     cy.contains('Koopjaar').should('be.visible')
     cy.contains('Cultuur bebouwd').should('be.visible')
@@ -140,12 +139,12 @@ describe('employee PLUS permissions', () => {
     cy.get(DATA_SELECTION_TABLE.table).contains('Handelsnaam')
   })
 
-  // Note: might fail occasionally
   it('7B. Should show a plus employee all "Pand" information', () => {
     cy.route('/bag/v1.1/pand/*').as('getPand')
     cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
     cy.route('/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
     cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen')
+    cy.route('panorama/thumbnail?*').as('getPanorama')
 
     cy.visit(urls.pand)
 
@@ -153,9 +152,10 @@ describe('employee PLUS permissions', () => {
     cy.wait('@getMonumenten')
     cy.wait('@getNummeraanduidingen')
     cy.wait('@getVestigingen')
+    cy.wait('@getPanorama')
     cy.get(DATA_DETAIL.heading).contains('100012')
     cy.get(DATA_SEARCH.infoNotification).should('not.exist')
-    cy.get(DATA_SEARCH.listItem).contains(values.pandVestigingName)
+    cy.get(DATA_DETAIL.linkList).should('have.length', 3).contains(values.pandVestigingName)
   })
 
   it('7C. Should show a plus employee all information in a Geo search', () => {
@@ -179,8 +179,9 @@ describe('employee PLUS permissions', () => {
     cy.get('h2').contains(values.vestigingen).should('be.visible')
 
     cy.get(MAP.toggleFullScreen).click()
-    // cy.waitForGeoSearch()
-    cy.get(MAP.mapSearchResultsCategoryHeader).contains(values.vestigingen).should('be.visible')
+    cy.get(MAP.mapSearchResultsCategoryHeader)
+      .contains(values.vestigingen, { timeout: 30000 })
+      .should('be.visible')
   })
 
   it('7D. Should show a plus employee all information in a "ligplaats" search', () => {
@@ -198,20 +199,21 @@ describe('employee PLUS permissions', () => {
     cy.get(DATA_DETAIL.linkList).contains(values.ligplaatsVestigingName)
   })
 
-  // Note: might fail occasionally
   it('7E. Should show a plus employee all information in "standplaats" search', () => {
     cy.route('/bag/v1.1/standplaats/*').as('getStandplaat')
     cy.route('/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
     cy.route('/handelsregister/vestiging/?nummeraanduiding=*').as('getVestigingen')
+    cy.route('/panorama/thumbnail?*').as('getPanorama')
 
     cy.visit(urls.standplaats)
 
     cy.wait('@getStandplaat')
     cy.wait('@getNummeraanduiding')
     cy.wait('@getVestigingen')
+    cy.wait('@getPanorama')
     cy.get(DATA_DETAIL.heading).contains('Rollemanstraat')
     cy.get(DATA_SEARCH.infoNotification).should('not.exist')
-    cy.get(DATA_DETAIL.linkList).contains(values.standplaatsVestigingName)
+    cy.get(DATA_DETAIL.linkList).should('have.length', 2).contains(values.standplaatsVestigingName)
   })
 
   it('7F. Should allow a plus employee to view "vestiging"', () => {
@@ -231,7 +233,6 @@ describe('employee PLUS permissions', () => {
     cy.get(DATA_SEARCH.mapDetailResultHeaderSubTitle).contains(values.vestigingName)
   })
 
-  // Note: might fail occasionally
   it('7G. Should allow a plus employee to view "maatschappelijke activiteit"', () => {
     cy.route('/handelsregister/maatschappelijkeactiviteit/*').as('getMaatschappelijkeActiviteit')
     cy.route('/handelsregister/persoon/*').as('getPersoon')
@@ -248,16 +249,20 @@ describe('employee PLUS permissions', () => {
     cy.wait('@getFunctievervullingen')
     cy.get(DATA_DETAIL.heading).contains(values.maatschappelijkeActiviteitName)
     cy.get(DATA_SEARCH.infoNotification).should('not.exist')
-    cy.get(DATA_SEARCH.keyValueList).contains(values.maatschappelijkeActiviteitVestigingName)
+    cy.get(DATA_DETAIL.linkList)
+      .should('have.length', 2)
+      .contains(values.maatschappelijkeActiviteitVestigingName)
   })
 
   it('8A. Should show a plus employee all information in "monument"', () => {
     cy.route('/monumenten/monumenten/*').as('getMonument')
+    cy.route('/monumenten/complexen/**').as('getComplex')
     cy.route('/monumenten/situeringen/?monument_id=*').as('getSitueringen')
 
     cy.visit(urls.monument)
 
     cy.wait('@getMonument')
+    cy.wait('@getComplex')
     cy.wait('@getSitueringen')
     cy.get(DATA_DETAIL.heading).contains('Museumtuin met hekwerken en bouwfragmenten')
     cy.get(DATA_SEARCH.infoNotification).should('not.exist')
@@ -276,6 +281,6 @@ describe('employee PLUS permissions', () => {
     cy.wait('@getMonumenten')
     cy.get(DATA_DETAIL.heading).contains('Hortus Botanicus').should('be.visible')
     cy.get(DATA_SEARCH.infoNotification).should('not.exist')
-    cy.get(DATA_DETAIL.definitionList).contains(values.beschrijving)
+    cy.contains(values.beschrijving)
   })
 })

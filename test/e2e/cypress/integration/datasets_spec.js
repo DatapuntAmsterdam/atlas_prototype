@@ -153,7 +153,7 @@ describe('datasets module', () => {
         .contains('Datasets')
         .siblings('ul')
         .children('li')
-        .first()
+        .eq(2)
         .click()
       cy.wait('@getDataset')
 

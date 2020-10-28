@@ -192,7 +192,6 @@ describe('addresses module', () => {
 })
 
 describe('user should be able to open more addresses', () => {
-  // Note: might fail occasionally
   it('should show the addresses', () => {
     cy.server()
     cy.route('/typeahead?q=dam+20').as('getResults')
@@ -208,10 +207,9 @@ describe('user should be able to open more addresses', () => {
     cy.wait(['@graphql', '@graphql'])
     cy.wait('@jsonapi')
     cy.contains('Adressen (').click()
-    // Failes when bug is fixed
-    cy.contains('Geen resultaten')
+    cy.contains("Data met 'Dam 20' (7 resultaten)")
+    cy.contains('Adressen (7)')
     cy.go('back')
     cy.contains("Resultaten tonen binnen de categorie 'Data'").click()
-    cy.contains("Data met 'Dam 20' (7 resultaten)")
   })
 })

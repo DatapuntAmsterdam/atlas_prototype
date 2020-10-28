@@ -15,6 +15,7 @@ export const ADDRESS_PAGE = {
   resultsPanel: '.qa-dashboard__column--right',
   resultsPanelTitle: '.qa-title',
   tab: '.o-tabs__tab',
+  tabKadastraleObjecten: '#tab-brk',
 }
 
 export const DATA_SEARCH = {
@@ -44,7 +45,7 @@ export const DATA_SEARCH = {
   scrollWrapper: '.scroll-wrapper',
   searchBarFilter: '[data-testid="SearchBarFilter"]',
   searchHeader: '.qa-search-header',
-  searchResultsGrid: '.c-search-results',
+  searchResultsGrid: '[data-testid="geosearch-page"]',
   searchResultsCategory: '[class*=SearchHeading__StyledHeading]',
   searchResultsDatasetCard: '[class*=DatasetCard__StyledHeading]',
   searchResultsEditorialCard: '[class*=EditorialCard__StyledHeading]',
@@ -85,6 +86,17 @@ export const DATA_SELECTION_TABLE = {
 export const DATA_SETS = {
   datasetItem: '.resources-type__content-item',
   dataSetLink: '[data-test=DatasetCard]',
+}
+
+export const DETAIL_PANEL = {
+  buttonClose: '[aria-label="Sluiten"]',
+  buttonInfo: '[data-testid="detail-infobox"]',
+  definitionList: '[data-testid="detail-definition-list"]',
+  definitionListDescription: '[class*="DefinitionListDescription"]',
+  definitionListTerm: '[class*="DefinitionListTerm"]',
+  panelTypeTitle: '[class*=DataDetailPage__DetailType]',
+  panelSubject: '[class*="DetailPanel__Heading"] h1',
+  panoramaPreview: '[class*="PanoramaPreview__PreviewContainer"]',
 }
 
 export const DRAWING = {
@@ -181,7 +193,7 @@ export const MAP = {
   legendNotification: '.map-legend__notification',
   legendToggleItem: '.map-layers__toggle-title',
   mapContainer: '.leaflet-container',
-  mapDetailPanoramaHeader: '.map-search-results__header-pano',
+  mapDetailPanoramaHeader: '.map-detail-result__header-pano',
   mapDetailPanoramaHeaderImage: 'img.map-detail-result__header-pano',
   mapDetailResultPanel: '.map-detail-result',
   mapLegend: '.map-legend',

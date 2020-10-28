@@ -43,7 +43,6 @@ describe('map module', () => {
     })
   })
   describe('user should be able to interact with the map', () => {
-    // Note: might fail occasionally
     it('should show results based on the interaction with the map', () => {
       const svgMapPath = '/assets/images/map/'
       cy.server()
@@ -127,7 +126,6 @@ describe('map module', () => {
       cy.get(MAP.mapOverlayPane).children().should('exist')
       cy.get(MAP.mapOverlayPane).find('canvas').should('exist')
     })
-    // Note: might fail occasionally
     it('should add a layer to the map', () => {
       cy.server()
       cy.route('POST', '/cms_search/graphql/').as('graphql')
@@ -148,7 +146,6 @@ describe('map module', () => {
       cy.contains('Kadastrale eigenaren').should('not.be.visible')
       cy.contains('Kadastrale erfpachtuitgevers').should('not.be.visible')
       cy.contains('Gemeentelijk eigendom').should('not.be.visible')
-      cy.contains('Gemeentelijke beperkingen (WKPB)').should('not.be.visible')
       cy.get(MAP.zoomInAlert).should('not.be.visible')
       cy.contains('Panden ouder dan 1960').should('not.be.visible')
       cy.contains('Panden naar bouwjaar').should('not.be.visible')
@@ -165,7 +162,6 @@ describe('map module', () => {
       cy.contains('Kadastrale eigenaren').should('be.visible')
       cy.contains('Kadastrale erfpachtuitgevers').should('be.visible')
       cy.contains('Gemeentelijk eigendom').should('be.visible')
-      cy.contains('Gemeentelijke beperkingen (WKPB)').should('be.visible')
       cy.get(MAP_LAYERS.checkboxOZGemeentelijkeBeperkingen).check()
 
       cy.get(MAP.zoomInAlert)

@@ -82,9 +82,7 @@ describe('visitor permissions', () => {
       )
       .should('be.visible')
     cy.get(DATA_DETAIL.heading).contains('G 0000')
-    cy.get(DATA_DETAIL.subHeading).should(($values) => {
-      expect($values).to.not.contain(values.aantekeningen)
-    })
+    cy.contains('Besluit op basis van Monumentenwet 1988').should('not.be.visible')
     // Todo: can we simplify this?
     cy.get(`${DATA_DETAIL.definitionList}> dt`).should('not.contain', 'Koopsom')
     cy.get(`${DATA_DETAIL.definitionList}> dt`).should('not.contain', 'Koopjaar')
@@ -153,8 +151,7 @@ describe('visitor permissions', () => {
     cy.get(DATA_SEARCH.listItem).should('not.contain', values.pandVestigingName)
   })
 
-  // Todo: fix this test
-  it.skip('7C. Should show a visitor limited information in a Geo search', () => {
+  it('7C. Should show a visitor limited information in a Geo search', () => {
     cy.defineGeoSearchRoutes()
     cy.route('/bag/v1.1/pand/*').as('getPand')
     cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
@@ -166,9 +163,11 @@ describe('visitor permissions', () => {
     cy.wait('@getPand')
     cy.wait('@getMonumenten')
     cy.wait('@getNummeraanduidingen')
-    cy.get(DATA_DETAIL.subHeading).contains('121437.46, 487418.76 (52.3736166, 4.8943521)')
-    cy.get(COMPONENTS.authAlert).contains(VESTIGINGEN_ALERT)
-    cy.get(DATA_DETAIL.subHeading).contains(values.vestigingen).should('not.exist')
+    cy.contains('121437.46, 487418.76 (52.3736166, 4.8943521)')
+    cy.get(COMPONENTS.authAlert).contains(
+      'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: vestigingen.',
+    )
+    cy.get('h2').contains('values.vestigingen').should('not.exist')
     cy.get(ADDRESS_PAGE.buttonMaximizeMap).first().click()
     cy.waitForGeoSearch()
     cy.get(MAP.mapSearchResultsCategoryHeader).should('not.contain', values.vestigingen)
@@ -201,11 +200,14 @@ describe('visitor permissions', () => {
     cy.get(DATA_SEARCH.listItem).should('not.contain', values.standplaatsVestigingName)
   })
 
-  // Note: might fail occasionally
   it('7F. Should NOT allow a visitor to view "vestiging"', () => {
     cy.visit(urls.vestiging)
     cy.get(DATA_DETAIL.heading).should('not.exist')
-    cy.get(COMPONENTS.authAlert).contains(VESTIGINGEN_ALERT).should('be.visible')
+    cy.get(COMPONENTS.authAlert)
+      .contains(
+        'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden.',
+      )
+      .should('be.visible')
     cy.get(DATA_SEARCH.keyValueList).should('not.exist')
   })
 
