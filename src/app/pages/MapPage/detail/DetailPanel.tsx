@@ -217,7 +217,7 @@ const Item: FunctionComponent<ItemProps> = ({ item, subItem, hideHeader }) => {
           <Paragraph>Geen rollaag beschikbaar</Paragraph>
         )
       case DetailResultItemType.BulletList:
-        return item?.entries ? (
+        return item?.entries?.length ? (
           <List variant="bullet">
             {item.entries.map((entry) => (
               <ListItem key={entry}>{entry}</ListItem>
