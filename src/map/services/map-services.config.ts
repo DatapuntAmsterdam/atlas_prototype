@@ -158,9 +158,32 @@ const getLinkListBlock = (
 })
 
 const typeAddressDisplayFormatter = (result: any) => {
-  return result.type_adres !== 'Hoofdadres'
-    ? `${result._display} (${result.type_adres})`
-    : result._display
+  let extraInfo = ''
+  if (result.type_adres && result.type_adres !== 'Hoofdadres') {
+    extraInfo = `${result?.type_adres} `
+  }
+  if (result.situering_nummeraanduiding) {
+    if (result.situering_nummeraanduiding === 'Actueel/Bij') {
+      extraInfo = `${extraInfo}(gelegen bij) `
+    }
+    if (result.situering_nummeraanduiding === 'Actueel/Tegenover') {
+      extraInfo = `${extraInfo}(gelegen tegenover) `
+    }
+    if (result.situering_nummeraanduiding === 'Actueel/Via') {
+      extraInfo = `${extraInfo}(betreden via) `
+    }
+  }
+
+  if (
+    result.vbo_status &&
+    result.vbo_status !== 'Verblijfsobject in gebruik (niet ingemeten)' &&
+    result.vbo_status !== 'Verblijfsobject in gebruik' &&
+    result.vbo_status.status !== 'Verbouwing verblijfsobject'
+  ) {
+    extraInfo = `${extraInfo}(${result?.vbo_status.toLowerCase()})`
+  }
+
+  return result.type_adres !== 'Hoofdadres' ? `${result._display} ${extraInfo}` : result._display
 }
 
 const getPaginatedListBlock = (
@@ -1540,7 +1563,14 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           result.betreft_pand,
           (res: any) => res.pandidentificatie,
         ),
-        getPaginatedListBlock(GLOSSARY.DEFINITIONS.ADRES, result.heeft_situeringen?.href),
+        getPaginatedListBlock(GLOSSARY.DEFINITIONS.ADRES, result.heeft_situeringen?.href, {
+          normalize: (data: any[]) =>
+            data.map((object) => ({
+              ...object,
+              _links: object?.betreft_nummeraanduiding?._links,
+            })),
+          displayFormatter: typeAddressDisplayFormatter,
+        }),
       ],
     }),
   },
