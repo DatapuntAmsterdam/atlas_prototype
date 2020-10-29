@@ -115,7 +115,7 @@
     "@types/body-scroll-lock": "^2.6.1",
     "@types/classnames": "^2.2.10",
     "@types/cssnano": "^4.0.0",
-    "@types/enzyme": "^3.10.7",
+    "@types/enzyme": "^3.10.8",
     "@types/geojson": "^7946.0.7",
     "@types/jest": "^26.0.15",
     "@types/karma": "^5.0.0",
