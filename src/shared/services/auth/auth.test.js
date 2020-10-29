@@ -6,7 +6,16 @@ import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import queryStringParser from '../query-string-parser/query-string-parser'
 import stateTokenGenerator from '../state-token-generator/state-token-generator'
-import { getAuthHeaders, getName, getReturnPath, getScopes, initAuth, login, logout } from './auth'
+import {
+  getAuthHeaders,
+  getName,
+  getReturnPath,
+  getScopes,
+  initAuth,
+  login,
+  logout,
+  isAuthenticated,
+} from './auth'
 import parseAccessToken from './parseAccessToken'
 
 jest.mock('../query-string-parser/query-string-parser')
@@ -46,6 +55,17 @@ describe('The auth service', () => {
       },
     })
 
+    Object.defineProperties(global, {
+      location: {
+        writable: true,
+        value: {
+          ...global.location,
+          assign: jest.fn(),
+          reload: jest.fn(),
+        },
+      },
+    })
+
     jest.spyOn(global.sessionStorage, 'getItem')
     jest.spyOn(global.sessionStorage, 'removeItem')
     jest.spyOn(global.sessionStorage, 'setItem')
@@ -63,11 +83,17 @@ describe('The auth service', () => {
     savedAccessToken = ''
   })
 
+  afterEach(() => {
+    global.location.assign.mockRestore()
+    global.location.reload.mockRestore()
+  })
+
   describe('init funtion', () => {
     describe('receiving response errors from the auth service', () => {
       it('throws an error', () => {
         const queryString = '?error=invalid_request&error_description=invalid%20request'
-        jsdom.reconfigure({ url: `https://data.amsterdam.nl/${queryString}` })
+
+        global.location.search = queryString
         queryObject = {
           error: 'invalid_request',
           error_description: 'invalid request',
@@ -378,6 +404,66 @@ describe('The auth service', () => {
       const authHeaders = getName()
 
       expect(authHeaders).toEqual('name!')
+    })
+  })
+
+  describe('isAuthenticated', () => {
+    const actual = jest.requireActual('./parseAccessToken').default
+
+    /* tokens generated with https://www.jsonwebtoken.io/ */
+    // token contains 'exp' prop with a date in the past
+    const expiredToken =
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImp0aSI6IjZhNTc3NzZlLTczYWYtNDM3ZS1hMmJiLThmYTkxYWVhN2QxYSIsImlhdCI6MTU4ODE2Mjk2MywiZXhwIjoxMjQyMzQzfQ.RbJHkXRPmFZMYDJs-gxhk7vWYlIYZi8uik83Q0V1nas'
+
+    // token doesn't have 'exp' prop
+    const invalidToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+
+    // token contains 'exp' prop with a date far into the future
+    const validToken =
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImp0aSI6ImMxOWRhNDgwLTAyM2UtNGM2YS04NDM2LWNhMzNkYzZjYzVlMyIsImlhdCI6MTU4ODE2NDUyMCwiZXhwIjoxNTg4MTY4MTQ1MH0.LMA3E950H0EACrvME7Gps1Y-Q43Fux1q8YCJUl9pbYE'
+
+    beforeEach(() => {
+      parseAccessToken.mockImplementation(actual)
+    })
+
+    it('returns false for expired token', () => {
+      global.sessionStorage.getItem.mockImplementation((key) => {
+        switch (key) {
+          case 'accessToken':
+            return expiredToken
+          default:
+            return ''
+        }
+      })
+
+      expect(isAuthenticated()).toEqual(false)
+    })
+
+    it('returns false for invalid token', () => {
+      global.sessionStorage.getItem.mockImplementation((key) => {
+        switch (key) {
+          case 'accessToken':
+            return invalidToken
+          default:
+            return ''
+        }
+      })
+
+      expect(isAuthenticated()).toEqual(false)
+    })
+
+    it('returns true for valid token', () => {
+      global.sessionStorage.getItem.mockImplementation((key) => {
+        switch (key) {
+          case 'accessToken':
+            return validToken
+          default:
+            return ''
+        }
+      })
+
+      expect(isAuthenticated()).toEqual(true)
     })
   })
 })
