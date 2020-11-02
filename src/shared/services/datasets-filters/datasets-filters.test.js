@@ -1,7 +1,11 @@
+import fetch from 'jest-fetch-mock'
+
 import getDatasetFilters from './datasets-filters'
 import mockApiData from './datasets-filters.mock'
 
 describe('fetchApiSpecification', () => {
+  beforeAll(fetch.enableMocks)
+
   const state = {
     user: {
       accessToken: '',

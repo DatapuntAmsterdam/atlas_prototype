@@ -1,3 +1,5 @@
+import fetch from 'jest-fetch-mock'
+
 import { getAuthHeaders } from '../../../shared/services/auth/auth'
 import autoSuggestSearch, { sortResponse, SORT_ORDER } from './auto-suggest'
 
@@ -35,6 +37,8 @@ const mockedResults = [
 ]
 
 describe('The auto-suggest service', () => {
+  beforeAll(fetch.enableMocks)
+
   beforeEach(() => {
     getAuthHeaders.mockImplementation(() => ({}))
   })

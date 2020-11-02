@@ -1,11 +1,13 @@
-import { createUrlWithToken, fetchWithToken } from './api'
+import fetch from 'jest-fetch-mock'
+
+import { createUrlWithToken, fetchWithToken, fetchProxy } from './api'
 
 describe('Api service', () => {
-  describe('fetchWithToken', () => {
-    beforeEach(() => {
-      fetch.resetMocks()
-    })
+  beforeAll(fetch.enableMocks)
 
+  beforeEach(fetch.resetMocks)
+
+  describe('fetchWithToken', () => {
     const response = {
       data: 'hello',
     }
@@ -99,6 +101,52 @@ describe('Api service', () => {
       const result = createUrlWithToken('http://localhost?foo=data', '')
 
       expect(result).toEqual('http://localhost/?foo=data')
+    })
+  })
+
+  describe('fetchProxy', () => {
+    beforeEach(() => {
+      fetch.resetMocks()
+      fetch.mockResponse(JSON.stringify({ foo: 'bar' }))
+    })
+
+    it('should perform request', async () => {
+      expect(fetch).not.toHaveBeenCalled()
+
+      const url = 'https://www.domain.com/'
+      const response = await fetchProxy(url)
+
+      expect(fetch).toHaveBeenCalledWith(url, expect.objectContaining({ method: 'GET' }))
+      expect(response).toEqual({ foo: 'bar' })
+    })
+
+    it('should append query string to request URL', async () => {
+      expect(fetch).not.toHaveBeenCalled()
+
+      const params = {
+        foo: 'bar',
+        qux: 'zork',
+      }
+      const url = 'https://www.domain2.com/'
+      await fetchProxy(url, { params })
+
+      expect(fetch).toHaveBeenCalledWith(
+        expect.stringContaining('foo=bar&qux=zork'),
+        expect.objectContaining({ method: 'GET' }),
+      )
+    })
+
+    it('should append auth headers to request', async () => {
+      expect(fetch).not.toHaveBeenCalled()
+
+      const url = 'https://www.domain3.com/'
+      const rawHeaders = {
+        'Content-Type': 'application/json',
+      }
+      await fetchProxy(url, { headers: rawHeaders })
+
+      const headers = new Headers(rawHeaders)
+      expect(fetch.mock.calls[0][1].headers).toEqual({ ...headers })
     })
   })
 })

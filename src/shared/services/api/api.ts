@@ -1,8 +1,13 @@
-import { logout } from '../auth/auth'
+import { logout, getAuthHeaders } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
 import { AuthError, NotFoundError } from './errors'
 
+type FetchProxy = {
+  params?: UrlParams
+  headers?: Headers
+  reloadOnUnauthorized?: boolean
+}
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
 
@@ -74,4 +79,28 @@ export const createUrlWithToken = (url: string, token: string) => {
   }
 
   return parsedUrl.toString()
+}
+
+export const fetchProxy = <T = any>(
+  url: string,
+  { params, headers, reloadOnUnauthorized = false }: FetchProxy = {},
+): Promise<T> => {
+  const requestHeaders = new Headers(headers)
+
+  const options: RequestInit = {
+    headers: {
+      ...requestHeaders,
+      ...getAuthHeaders(),
+    },
+    method: 'GET',
+  }
+
+  const searchParams = new URLSearchParams(params)
+
+  const fullUrl = new URL(url)
+  fullUrl.search = searchParams.toString()
+
+  return fetch(fullUrl.href, options)
+    .then((response) => handleErrors(response, reloadOnUnauthorized))
+    .then((response) => response.json())
 }

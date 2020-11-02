@@ -1,6 +1,8 @@
 import { cleanup, render } from '@testing-library/react'
 import { shallow } from 'enzyme'
 import React from 'react'
+import fetch from 'jest-fetch-mock'
+
 import IIIFThumbnail from './IIIFThumbnail'
 
 const mockAccessToken = 'ABC'
@@ -27,6 +29,8 @@ const mockCreateObjectURL = jest.fn(() => mockImageUrl)
 global.URL.createObjectURL = mockCreateObjectURL
 
 describe('IIIFThumbnail', () => {
+  beforeAll(fetch.enableMocks)
+
   beforeEach(() => cleanup())
 
   it('should set the loading skeleton when the src is being fetched', async () => {
