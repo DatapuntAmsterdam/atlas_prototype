@@ -1,14 +1,43 @@
-@import 'components/loading-indicator/loading-indicator';
-@import 'components/message/message';
-@import 'components/panel/panel';
-@import 'components/panorama-thumbnail/panorama-thumbnail';
-@import 'components/tab-header/tab-header';
-@import '../atlas/atlas.scss';
-@import '../data-selection/data-selection.scss';
-@import '../detail/detail.scss';
+@import 'modules/shared/legacy/loading-indicator';
+@import 'modules/shared/legacy/message';
+@import 'modules/shared/legacy/panel';
+@import 'modules/shared/legacy/tab-header';
+@import 'modules/shared/legacy/utilities/fixed';
+@import 'modules/shared/legacy/utilities/full-height';
+@import 'modules/shared/legacy/utilities/gutter';
+@import 'modules/shared/legacy/max-width';
+@import './legacy/dashboard';
+@import './legacy/active-filters';
+@import './legacy/search-results';
+@import './legacy/dcatd/dcatd-button';
+@import './legacy/dcatd/datasets';
+
+.is-print-mode {
+  @import './legacy/dashboard-print';
+}
+
+.is-embed {
+  @import './legacy/dashboard-embed';
+}
+
+@import './legacy/dashboard-embed-preview';
 
 .is-print-mode,
 .is-embed-preview,
 .is-embed {
-  @import 'components/loading-indicator/loading-indicator-print';
+  @import 'modules/shared/legacy/utilities/page-break';
+}
+
+@import './legacy/data-selection/data-selection';
+@import 'modules/shared/legacy/padding';
+@import 'modules/shared/legacy/description-list';
+
+@import 'modules/shared/legacy/detail';
+
+@import 'modules/shared/legacy/indented-list';
+
+.is-print-mode,
+.is-embed-preview,
+.is-embed {
+  @import 'modules/shared/legacy/loading-indicator-print';
 }

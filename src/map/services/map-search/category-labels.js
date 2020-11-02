@@ -43,10 +43,6 @@ const categoryLabels = {
     singular: 'Gebied',
     plural: 'Gebieden',
   },
-  gemeentelijkeBeperking: {
-    singular: 'Gemeentelijke beperking',
-    plural: 'Gemeentelijke beperkingen',
-  },
   grondexploitatie: {
     singular: 'Grondexploitatie',
     plural: 'Grondexploitaties',

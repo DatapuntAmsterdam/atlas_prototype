@@ -10,15 +10,10 @@ exports[`MapSearchResults rendering should filter external monumenten on pand re
           map-search-results__header--no-pano
         "
   >
-    <button
-      className="
-            map-search-results__header-pano-button
-            map-search-results__header-pano-button--disabled
-          "
-      disabled={true}
-      onClick={[MockFunction]}
+    <Styled(Link)
+      as="div"
       title="Geen Panoramabeeld beschikbaar"
-      type="button"
+      to={null}
     >
       <div
         className="map-search-results__header-container"
@@ -34,7 +29,7 @@ exports[`MapSearchResults rendering should filter external monumenten on pand re
           locatie 1.12, 654.32
         </h2>
       </div>
-    </button>
+    </Styled(Link)>
   </header>
   <div
     className="map-search-results__scroll-wrapper"
@@ -126,15 +121,10 @@ exports[`MapSearchResults rendering should render empty results 1`] = `
           map-search-results__header--no-pano
         "
   >
-    <button
-      className="
-            map-search-results__header-pano-button
-            map-search-results__header-pano-button--disabled
-          "
-      disabled={true}
-      onClick={[MockFunction]}
+    <Styled(Link)
+      as="div"
       title="Geen Panoramabeeld beschikbaar"
-      type="button"
+      to={null}
     >
       <div
         className="map-search-results__header-container"
@@ -150,7 +140,7 @@ exports[`MapSearchResults rendering should render empty results 1`] = `
           locatie 1.12, 654.32
         </h2>
       </div>
-    </button>
+    </Styled(Link)>
   </header>
   <div
     className="map-search-results__scroll-wrapper"
@@ -187,26 +177,14 @@ exports[`MapSearchResults rendering should render results 1`] = `
   <header
     className="
           map-search-results__header
-          map-search-results__header--pano
+          map-search-results__header--no-pano
         "
   >
-    <button
-      className="
-            map-search-results__header-pano-button
-            map-search-results__header-pano-button--enabled
-          "
-      disabled={false}
-      onClick={[MockFunction]}
-      title="Panoramabeeld tonen"
-      type="button"
+    <Styled(Link)
+      as="div"
+      title="Geen Panoramabeeld beschikbaar"
+      to={null}
     >
-      <img
-        alt="Panoramabeeld"
-        className="map-search-results__header-pano"
-        height="292"
-        src="pano-url"
-        width="438"
-      />
       <div
         className="map-search-results__header-container"
       >
@@ -221,7 +199,7 @@ exports[`MapSearchResults rendering should render results 1`] = `
           locatie 1.12, 654.32
         </h2>
       </div>
-    </button>
+    </Styled(Link)>
   </header>
   <div
     className="map-search-results__scroll-wrapper"
@@ -302,26 +280,14 @@ exports[`MapSearchResults rendering should update results 1`] = `
   <header
     className="
           map-search-results__header
-          map-search-results__header--pano
+          map-search-results__header--no-pano
         "
   >
-    <button
-      className="
-            map-search-results__header-pano-button
-            map-search-results__header-pano-button--enabled
-          "
-      disabled={false}
-      onClick={[MockFunction]}
-      title="Panoramabeeld tonen"
-      type="button"
+    <Styled(Link)
+      as="div"
+      title="Geen Panoramabeeld beschikbaar"
+      to={null}
     >
-      <img
-        alt="Panoramabeeld"
-        className="map-search-results__header-pano"
-        height="292"
-        src="pano-url"
-        width="438"
-      />
       <div
         className="map-search-results__header-container"
       >
@@ -336,7 +302,7 @@ exports[`MapSearchResults rendering should update results 1`] = `
           locatie 1.12, 654.32
         </h2>
       </div>
-    </button>
+    </Styled(Link)>
   </header>
   <div
     className="map-search-results__scroll-wrapper"
@@ -408,26 +374,14 @@ exports[`MapSearchResults rendering should update results 2`] = `
   <header
     className="
           map-search-results__header
-          map-search-results__header--pano
+          map-search-results__header--no-pano
         "
   >
-    <button
-      className="
-            map-search-results__header-pano-button
-            map-search-results__header-pano-button--enabled
-          "
-      disabled={false}
-      onClick={[MockFunction]}
-      title="Panoramabeeld tonen"
-      type="button"
+    <Styled(Link)
+      as="div"
+      title="Geen Panoramabeeld beschikbaar"
+      to={null}
     >
-      <img
-        alt="Panoramabeeld"
-        className="map-search-results__header-pano"
-        height="292"
-        src="other-pano-url"
-        width="438"
-      />
       <div
         className="map-search-results__header-container"
       >
@@ -442,7 +396,7 @@ exports[`MapSearchResults rendering should update results 2`] = `
           locatie 1.12, 654.32
         </h2>
       </div>
-    </button>
+    </Styled(Link)>
   </header>
   <div
     className="map-search-results__scroll-wrapper"

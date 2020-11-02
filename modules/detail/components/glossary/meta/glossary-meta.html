@@ -1,5 +1,0 @@
-<dl class="c-key-value-list c-key-value-list--in-panel" ng-if="vm.metaFields">
-    <dt ng-repeat-start="metaField in vm.metaFields">{{metaField.label}}</dt>
-    <dd ng-if="metaField.type !== 'date'">{{metaField.value}}</dd>
-    <dd ng-repeat-end ng-if="metaField.type === 'date'">{{metaField.value | date: "dd-MM-yyyy"}}</dd>
-</dl>

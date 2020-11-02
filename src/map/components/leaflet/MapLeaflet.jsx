@@ -57,6 +57,7 @@ const ICONS = {
   [markerPointType]: ({ type }) => locationIcon(type),
 }
 
+// Todo: AfterBeta: can be removed
 class MapLeaflet extends React.Component {
   constructor(props) {
     super(props)
@@ -80,7 +81,6 @@ class MapLeaflet extends React.Component {
         getLeafletInstance(this.MapElement)
       }
     }
-
     this.setActiveElement = (element) => {
       if (element) {
         this.activeElement = element.leafletElement
@@ -229,7 +229,6 @@ class MapLeaflet extends React.Component {
       onLoading: ({ sourceTarget }) => this.handleLoading(sourceTarget),
       onLoad: ({ sourceTarget }) => this.handleLoaded(sourceTarget),
     }
-
     return (
       <ReactResizeDetector
         handleWidth

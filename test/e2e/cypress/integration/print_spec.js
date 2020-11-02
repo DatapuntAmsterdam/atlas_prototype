@@ -1,4 +1,14 @@
-import { ADDRESS_PAGE, DATA_SEARCH, HOMEPAGE, MAP, MAP_LAYERS, PRINT } from '../support/selectors'
+import {
+  COMPONENTS,
+  DATA_DETAIL,
+  DATA_SEARCH,
+  HOMEPAGE,
+  MAP,
+  MAP_LAYERS,
+  PRINT,
+} from '../support/selectors'
+
+const PRINT_BUTTON = `${COMPONENTS.shareBar} button[title="Print deze pagina"]`
 
 describe('print module', () => {
   beforeEach(() => {
@@ -12,9 +22,10 @@ describe('print module', () => {
     cy.visit('/')
     cy.wait('@jsonapi')
   })
+
   it('Should search a meetbout and print the information', () => {
-    cy.route('/typeahead/?q=10581111').as('getTypeAhead')
-    cy.route('/panorama/thumbnail/?*').as('getPanoThumbnail')
+    cy.route('/typeahead?q=10581111').as('getTypeAhead')
+    cy.route('/panorama/thumbnail?*').as('getPanoThumbnail')
     cy.get(DATA_SEARCH.autoSuggestInput).type('10581111')
     cy.wait('@getTypeAhead')
     cy.wait(500)
@@ -22,14 +33,14 @@ describe('print module', () => {
     cy.wait('@getResults')
     cy.wait('@getMeeting')
     cy.wait('@getPanoThumbnail')
-    cy.get(ADDRESS_PAGE.panoramaThumbnail).should('exist').and('be.visible')
-    cy.get(ADDRESS_PAGE.resultsPanelTitle).should('exist').and('be.visible').contains('10581111')
-    cy.get(PRINT.printLink).first().should('exist').click()
+    cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
+    cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('10581111')
+    cy.get(PRINT_BUTTON).first().should('exist').click()
     cy.get(PRINT.headerTitle).should('exist').and('be.visible')
     cy.get(PRINT.buttonClosePrint).click()
     cy.get(PRINT.headerTitle).should('not.exist')
-    cy.get(ADDRESS_PAGE.panoramaThumbnail).should('exist').and('be.visible')
-    cy.get(ADDRESS_PAGE.resultsPanelTitle).should('exist').and('be.visible').contains('10581111')
+    cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
+    cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('10581111')
   })
   it('Should click on a map to open meetbout information and print the information', () => {
     cy.route('POST', '/cms_search/graphql/').as('graphql')
@@ -53,13 +64,13 @@ describe('print module', () => {
     cy.contains('10581112').click()
     cy.wait('@getResults')
     cy.wait('@getMeeting')
-    cy.get(ADDRESS_PAGE.panoramaThumbnail).should('exist').and('be.visible')
-    cy.get(ADDRESS_PAGE.resultsPanelTitle).should('exist').and('be.visible').contains('10581112')
-    cy.get(PRINT.printLink).first().should('exist').click()
+    cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
+    cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('10581112')
+    cy.get(PRINT_BUTTON).first().should('exist').click()
     cy.get(PRINT.headerTitle).should('exist').and('be.visible')
     cy.get(PRINT.buttonClosePrint).click()
     cy.get(PRINT.headerTitle).should('not.exist')
-    cy.get(ADDRESS_PAGE.panoramaThumbnail).should('exist').and('be.visible')
-    cy.get(ADDRESS_PAGE.resultsPanelTitle).should('exist').and('be.visible').contains('10581112')
+    cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
+    cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('10581112')
   })
 })

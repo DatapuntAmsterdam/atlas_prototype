@@ -20,7 +20,7 @@ import buildLeafletLayers from './utils/buildLeafletLayers'
 type Action =
   | { type: 'setPanelLayers'; payload: MapCollection[] }
   | { type: 'setMapLayers'; payload: MapLayer[] }
-  | { type: 'setDetailFeature'; payload: Feature }
+  | { type: 'setDetailFeature'; payload: Feature | null }
 
 const reducer = (state: MapState, action: Action): MapState => {
   switch (action.type) {
@@ -64,7 +64,7 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
     [activeMapLayers, state.mapLayers, user],
   )
 
-  function setDetailFeature(payload: Feature) {
+  function setDetailFeature(payload: Feature | null) {
     dispatch({ type: 'setDetailFeature', payload })
   }
 

@@ -1,0 +1,37 @@
+.c-detail {
+  padding: $detail-padding;
+  background-color: $primary-light;
+
+  // Needs to be nested to gain more importance over `o-btn`
+  & .c-detail__table-link {
+    display: block;
+    line-height: inherit;
+    word-wrap: break-word;
+  }
+}
+
+.c-detail__block {
+  @extend %list-block;
+
+  .c-detail__block {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  &.c-detail__block--container {
+    @extend %list-block-container;
+  }
+
+  .s-indented-list {
+    .c-detail__block {
+      @extend %list-block-indented;
+
+      .c-detail__block {
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+    }
+  }
+}

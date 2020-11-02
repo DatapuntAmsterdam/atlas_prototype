@@ -4,7 +4,16 @@ import { shallow } from 'enzyme'
 import MapSearchResults from './MapSearchResults'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 
+jest.mock('redux-first-router-link', () => ({
+  _esModule: true,
+  default: jest.fn,
+}))
+
 jest.mock('../../../shared/services/coordinate-reference-system')
+
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(() => []),
+}))
 
 describe('MapSearchResults', () => {
   beforeEach(() => {
@@ -27,7 +36,6 @@ describe('MapSearchResults', () => {
         location={location}
         onItemClick={clickHandler}
         onMaximize={clickHandler}
-        onPanoPreviewClick={clickHandler}
         results={[]}
       />,
     )
@@ -43,7 +51,6 @@ describe('MapSearchResults', () => {
           location={{}}
           onItemClick={clickHandler}
           onMaximize={clickHandler}
-          onPanoPreviewClick={clickHandler}
           results={[]}
         />,
       )
@@ -57,7 +64,6 @@ describe('MapSearchResults', () => {
         longitude: 329.123,
       }
       const clickHandler = jest.fn()
-      const panoUrl = 'pano-url'
       const missingLayers = 'Layer 1, Layer 2'
       const results = [
         {
@@ -83,10 +89,8 @@ describe('MapSearchResults', () => {
           count={count}
           location={location}
           onItemClick={clickHandler}
-          panoUrl={panoUrl}
           missingLayers={missingLayers}
           onMaximize={clickHandler}
-          onPanoPreviewClick={clickHandler}
           results={results}
         />,
       )
@@ -133,7 +137,6 @@ describe('MapSearchResults', () => {
           location={location}
           onItemClick={clickHandler}
           onMaximize={clickHandler}
-          onPanoPreviewClick={clickHandler}
           results={results}
         />,
       )
@@ -147,7 +150,6 @@ describe('MapSearchResults', () => {
         longitude: 329.123,
       }
       const clickHandler = jest.fn()
-      const panoUrl = 'pano-url'
       const results = [
         {
           label: 'label',
@@ -172,9 +174,7 @@ describe('MapSearchResults', () => {
           count={count}
           location={location}
           onItemClick={clickHandler}
-          panoUrl={panoUrl}
           onMaximize={clickHandler}
-          onPanoPreviewClick={clickHandler}
           results={results}
         />,
       )

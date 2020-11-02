@@ -1,11 +1,12 @@
 import { logout } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
+import { AuthError, NotFoundError } from './errors'
 
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
 
-const getAccessToken = () => getState().user.accessToken
+const getAccessToken = () => getState()?.user?.accessToken
 
 export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
   fetch(uri).then((response) => response.json())
@@ -13,6 +14,14 @@ export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
 const handleErrors = (response: Response, reloadOnUnauthorized: boolean) => {
   if (response.status >= 400 && response.status <= 401 && reloadOnUnauthorized) {
     logout()
+  }
+
+  if (response.status === 401) {
+    throw new AuthError(response.status, '')
+  }
+
+  if (response.status === 404) {
+    throw new NotFoundError(response.status, response.statusText)
   }
 
   if (!response.ok) {
@@ -33,7 +42,7 @@ export const fetchWithToken = <T = any>(
 ): Promise<T> => {
   const requestHeaders = headers ?? new Headers()
 
-  if (token.length > 0) {
+  if (token?.length > 0) {
     requestHeaders.set('Authorization', SHARED_CONFIG.AUTH_HEADER_PREFIX + token)
   }
 

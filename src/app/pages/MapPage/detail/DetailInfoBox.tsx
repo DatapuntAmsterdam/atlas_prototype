@@ -12,8 +12,8 @@ import styled from 'styled-components'
 import { ReactComponent as Metadata } from '../../../../shared/assets/icons/metadata.svg'
 import DetailDefinitionList from './DetailDefinitionList'
 import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
-import DetailSpacer from './DetailSpacer'
 import { Definition } from '../../../../detail/services/glossary.constant'
+import Spacer from '../../../components/Spacer/Spacer'
 
 const StyledAlert = styled(Alert)`
   margin: ${themeSpacing(2, 0)};
@@ -34,6 +34,7 @@ const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta 
       <StyledButton
         type="button"
         variant="blank"
+        data-testid="detail-infobox"
         title="Meer info"
         size={32}
         iconSize={26}
@@ -53,7 +54,7 @@ const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta 
           )}
           {!!meta?.length && (
             <>
-              <DetailSpacer />
+              <Spacer />
               <Heading styleAs="h3" as="h6">
                 Metadata
               </Heading>

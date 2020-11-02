@@ -7,6 +7,7 @@ import {
   CustomHTMLBlock,
   Link,
   Row,
+  themeSpacing,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
@@ -94,6 +95,9 @@ function getTimePeriodLabel(period: DcatTemporal) {
 
 // TODO: remove when Typography is aligned https://github.com/Amsterdam/amsterdam-styled-components/issues/727
 const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`
+  white-space: pre-wrap; /* Some content contains whitespace which needs to be preserved. */
+  margin-bottom: ${themeSpacing(4)};
+
   & * {
     @media screen and ${breakpoint('min-width', 'laptop')} {
       font-size: 16px !important;
@@ -281,7 +285,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                                       )}
                                     </span>
                                   )}
-                                  <div>{row['dct:description']}</div>
+                                  <div>{row['dct:description'] ?? row['ams:purl']}</div>
                                 </div>
                               </div>
                               <div className="resources-item__right">
@@ -293,11 +297,12 @@ const DatasetDetailPage: FunctionComponent = () => {
                                   )}
                                 </div>
                                 <div className="resources-item__navigation">
-                                  {row['dcat:byteSize'] && row['dcat:byteSize'] > 0 && (
-                                    <div className="resources-item__navigation-file-size">
-                                      {getFileSize(row['dcat:byteSize'])}
-                                    </div>
-                                  )}
+                                  {row['dcat:byteSize'] !== undefined &&
+                                    row['dcat:byteSize'] > 0 && (
+                                      <div className="resources-item__navigation-file-size">
+                                        {getFileSize(row['dcat:byteSize'])}
+                                      </div>
+                                    )}
                                   <div className="resources-item__navigation-arrow" />
                                 </div>
                               </div>
@@ -369,7 +374,10 @@ const DatasetDetailPage: FunctionComponent = () => {
                     )}
                     {dataset['dct:language'] && (
                       <DefinitionListItem term="Taal">
-                        {getOptionLabel(dataset['dct:language'], catalogFilters.languages)}
+                        {getOptionLabel(
+                          dataset['dct:language'].split(':').pop() ?? '',
+                          catalogFilters.languages,
+                        )}
                       </DefinitionListItem>
                     )}
                     <DefinitionListItem term="Eigenaar">

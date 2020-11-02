@@ -13,14 +13,14 @@ export interface DetailTableProps {
 }
 
 const DetailTable: React.FC<DetailTableProps> = ({ item }) => (
-  <TableWrapper>
+  <TableWrapper data-testid="detail-table">
     <Table>
       <TableRow header>
         {item.headings.map((heading) => (
           <TableHeader key={heading.key}>{heading.title}</TableHeader>
         ))}
       </TableRow>
-      {item.values.map((value, index) => (
+      {item.values?.map((value, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <TableRow key={index}>
           {item.headings.map((heading) => (

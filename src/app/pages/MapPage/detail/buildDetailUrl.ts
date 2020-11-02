@@ -13,7 +13,10 @@ const buildDetailUrl = ({ type, subtype, id }: { type: string; subtype: string; 
         pathname: routing.map.path,
         search: buildParamQuery(detailUrlParam, `${type}/${subtype}/${id}`).toString(),
       }
-    : generatePath(routing.dataDetail.path, { type, subtype, id: `id${id}` })
+    : {
+        pathname: generatePath(routing.dataDetail.path, { type, subtype, id: `id${id}` }),
+        search: window.location.search,
+      }
 }
 
 export default buildDetailUrl

@@ -20,9 +20,9 @@ import PAGES from '../../pages'
 const DataDetailPage = React.lazy(() =>
   import(/* webpackChunkName: "DataDetailPage" */ '../DataDetailPage/DataDetailPage'),
 )
-const LocationSearchContainer = React.lazy(() =>
+const LocationSearch = React.lazy(() =>
   import(
-    /* webpackChunkName: "LocationSearchContainer" */ '../../components/LocationSearch/LocationSearchContainer'
+    /* webpackChunkName: "LocationSearchContainer" */ '../../components/LocationSearch/LocationSearch'
   ),
 )
 const PanoramaContainer = React.lazy(() =>
@@ -74,7 +74,7 @@ if (typeof window !== 'undefined') {
       break
 
     case PAGES.DATA_SEARCH_GEO:
-      Component = <LocationSearchContainer />
+      Component = <LocationSearch />
       mapProps = {
         showPreviewPanel: true,
       }

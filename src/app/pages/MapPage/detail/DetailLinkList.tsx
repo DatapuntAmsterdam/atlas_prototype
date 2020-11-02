@@ -25,12 +25,12 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
     trackEvent({
       category: 'detail-page',
       action: 'navigate',
-      name: link.title,
+      name: link.title || 'unknown',
     })
   }
 
-  return item.links.length ? (
-    <LinkList {...otherProps}>
+  return item.links?.length ? (
+    <LinkList {...otherProps} data-testid="detail-linklist">
       {item.links.map((link) => {
         if ('url' in link) {
           return (
@@ -46,24 +46,6 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
           )
         }
 
-        if (item.skipRouter) {
-          const href =
-            typeof link.to === 'string' ? link.to : `${link.to.pathname}?${link.to.search}`
-          return (
-            // @ts-ignore
-            <StyledLink
-              key={href}
-              inList
-              onClick={() => {
-                trackClick(link)
-              }}
-              href={href}
-            >
-              {link.title}
-            </StyledLink>
-          )
-        }
-
         return (
           // @ts-ignore
           <StyledLink
@@ -73,6 +55,7 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
             }}
             forwardedAs={RouterLink}
             to={link.to}
+            key={link.title}
           >
             {link.title}
           </StyledLink>
@@ -80,7 +63,7 @@ const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) 
       })}
     </LinkList>
   ) : (
-    <Paragraph>Geen resultaten gevonden</Paragraph>
+    <Paragraph data-testid="detail-linklist">Geen resultaten gevonden</Paragraph>
   )
 }
 
