@@ -319,7 +319,7 @@ const DatasetDetailPage: FunctionComponent = () => {
 
                   <DefinitionList>
                     <DefinitionListItem term="Doel">
-                      <StyledCustomHTMLBlock body={dataset['overheid:doel']} />
+                      <StyledCustomHTMLBlock body={dataset['overheidds:doel']} />
                     </DefinitionListItem>
                     {dataset['dcat:landingPage'] && (
                       <DefinitionListItem term="Meer informatie">
