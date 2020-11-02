@@ -296,6 +296,21 @@ export function getName() {
   return tokenData?.name ?? ''
 }
 
+export const isAuthenticated = () => {
+  const accessToken = getAccessToken()
+
+  if (!accessToken) return false
+
+  const decoded = parseAccessToken(accessToken)
+
+  if (!decoded?.expiresAt) return false
+
+  const now = Date.now()
+  const hasExpired = decoded.expiresAt * 1000 < now
+
+  return !hasExpired
+}
+
 /**
  * Creates an instance of the native JS `Headers` class containing the
  * authorization headers needed for an API call.
@@ -303,6 +318,7 @@ export function getName() {
  * @returns {Object<string, string>} The headers needed for an API call.
  */
 export function getAuthHeaders() {
-  const accessToken = getAccessToken()
-  return accessToken ? { Authorization: `Bearer ${getAccessToken()}` } : {}
+  if (!isAuthenticated()) return {}
+
+  return { Authorization: `Bearer ${getAccessToken()}` }
 }

@@ -1,4 +1,4 @@
-import { logout } from '../auth/auth'
+import { logout, getAuthHeaders } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
 
@@ -65,4 +65,36 @@ export const createUrlWithToken = (url: string, token: string) => {
   }
 
   return parsedUrl.toString()
+}
+
+type FetchProxy = {
+  params?: UrlParams
+  headers?: Headers
+  reloadOnUnauthorized?: boolean
+}
+
+export const fetchProxy = <T = any>(
+  url: string,
+  { params, headers, reloadOnUnauthorized = false }: FetchProxy = {},
+): Promise<T> => {
+  const controller = new AbortController()
+  const requestHeaders = new Headers(headers)
+
+  const options: RequestInit = {
+    headers: {
+      ...requestHeaders,
+      ...getAuthHeaders(),
+    },
+    method: 'GET',
+    signal: controller.signal,
+  }
+
+  const searchParams = new URLSearchParams(params)
+
+  const fullUrl = new URL(url)
+  fullUrl.search = searchParams.toString()
+
+  return fetch(fullUrl.href, options)
+    .then((response) => handleErrors(response, reloadOnUnauthorized))
+    .then((response) => response.json())
 }
