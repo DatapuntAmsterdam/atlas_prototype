@@ -35,8 +35,6 @@ const mockedResults = [
 ]
 
 describe('The auto-suggest service', () => {
-  beforeAll(fetch.enableMocks)
-
   beforeEach(() => {
     getAuthHeaders.mockImplementation(() => ({}))
   })

@@ -1,8 +1,6 @@
 import { createUrlWithToken, fetchWithToken, fetchProxy } from './api'
 
 describe('Api service', () => {
-  beforeAll(fetch.enableMocks)
-
   beforeEach(fetch.resetMocks)
 
   describe('fetchWithToken', () => {
