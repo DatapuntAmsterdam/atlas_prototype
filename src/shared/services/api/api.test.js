@@ -1,5 +1,3 @@
-import fetch from 'jest-fetch-mock'
-
 import { createUrlWithToken, fetchWithToken, fetchProxy } from './api'
 
 describe('Api service', () => {

@@ -1,5 +1,3 @@
-import fetch from 'jest-fetch-mock'
-
 import getDatasetFilters from './datasets-filters'
 import mockApiData from './datasets-filters.mock'
 

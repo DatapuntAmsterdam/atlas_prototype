@@ -1,5 +1,3 @@
-import fetch from 'jest-fetch-mock'
-
 import { getAuthHeaders } from '../../../shared/services/auth/auth'
 import autoSuggestSearch, { sortResponse, SORT_ORDER } from './auto-suggest'
 
