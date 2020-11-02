@@ -68,6 +68,7 @@ export const HeadingWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: ${themeSpacing(7)};
 `
 
 export const InfoBoxWrapper = styled.div``
@@ -81,9 +82,10 @@ const Wrapper = styled.div<LegacyLayout>`
       grid-template-columns: 1fr 1fr;
       grid-auto-rows: auto;
       gap: ${themeSpacing(3, 2)};
+      margin-bottom: ${themeSpacing(8)};
 
       ${PreviewContainer} {
-        grid-area: 2 / 2 / 3 / 3;
+        grid-area: 2 / auto / 3 / auto;
 
         & + ${Spacer} {
           display: none;
