@@ -15,13 +15,13 @@ describe('getNummeraanduidingByAddress', () => {
     mockedFetchWithoutToken.mockReset()
   })
 
-  it('returns null', () => {
-    expect(getNummeraanduidingByAddress('')).toBeNull()
-    expect(getNummeraanduidingByAddress('foobarbaz')).toBeNull()
-    expect(getNummeraanduidingByAddress('?postcode=&huisnummer=')).toBeNull()
-    expect(getNummeraanduidingByAddress('postcode=&huisnummer=')).toBeNull()
+  it('returns null', async () => {
+    expect(await getNummeraanduidingByAddress('')).toBeNull()
+    expect(await getNummeraanduidingByAddress('foobarbaz')).toBeNull()
+    expect(await getNummeraanduidingByAddress('?postcode=&huisnummer=')).toBeNull()
+    expect(await getNummeraanduidingByAddress('postcode=&huisnummer=')).toBeNull()
     expect(
-      getNummeraanduidingByAddress('https://data.amsterdam.nl/zoek/?postcode=&huisnummer='),
+      await getNummeraanduidingByAddress('https://data.amsterdam.nl/zoek/?postcode=&huisnummer='),
     ).toBeNull()
   })
 

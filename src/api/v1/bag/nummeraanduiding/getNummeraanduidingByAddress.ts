@@ -20,7 +20,7 @@ export const getNummeraanduidingByAddress = (
   const searchParams = new URLSearchParams(paramsString)
 
   if (!searchParams.get('postcode') || !searchParams.get('huisnummer')) {
-    return null
+    return Promise.resolve(null)
   }
 
   if (receiveFields) {
