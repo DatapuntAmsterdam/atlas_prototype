@@ -30,7 +30,7 @@ module.exports = {
   },
   setupFiles: ['dotenv/config', 'raf/polyfill', './test/setup-jest.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
-  setupFilesAfterEnv: ['./test/mocks.js'],
+  setupFilesAfterEnv: ['./test/mocks.js', './test/setup-env.js'],
   testURL: 'http://localhost:3000/',
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/modules/', '/node_modules/', '/test/'],
