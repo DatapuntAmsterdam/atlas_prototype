@@ -352,6 +352,11 @@ const DatasetDetailPage: FunctionComponent = () => {
                         {getTimePeriodLabel(dataset['dct:temporal'])}
                       </DefinitionListItem>
                     )}
+                    {dataset['ams:temporalUnit'] && (
+                      <DefinitionListItem term="Tijdseenheid">
+                        {getOptionLabel(dataset['ams:temporalUnit'], catalogFilters.temporalUnits)}
+                      </DefinitionListItem>
+                    )}
                     {dataset['ams:spatialDescription'] && (
                       <DefinitionListItem term="Omschrijving gebied">
                         {dataset['ams:spatialDescription']}
