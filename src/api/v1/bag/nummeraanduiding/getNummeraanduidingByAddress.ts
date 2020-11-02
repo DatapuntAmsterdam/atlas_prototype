@@ -1,12 +1,7 @@
 import joinUrl from '../../../../app/utils/joinUrl'
 import environment from '../../../../environment'
-import queryStringParser from '../../../../shared/services/query-string-parser/query-string-parser'
 import { fetchWithoutToken } from '../../../../shared/services/api/api'
 import { Root as Nummeraanduiding } from './types'
-
-type ReceiveFields = {
-  _fields: string
-}
 
 /**
  * Retrieve nummeraanduiding
