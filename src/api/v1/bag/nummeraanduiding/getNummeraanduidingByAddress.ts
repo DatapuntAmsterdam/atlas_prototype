@@ -22,7 +22,7 @@ export const getNummeraanduidingByAddress = (
   receiveFields?: string,
 ): Promise<Nummeraanduiding> | null => {
   const paramsString = queryParams.substr(queryParams.indexOf('?'))
-  const searchParams = new URLSearchParams(queryStringParser(paramsString))
+  const searchParams = new URLSearchParams(paramsString)
 
   if (!searchParams.get('postcode') || !searchParams.get('huisnummer')) {
     return null
