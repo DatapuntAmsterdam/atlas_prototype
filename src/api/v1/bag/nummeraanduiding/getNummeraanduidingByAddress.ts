@@ -20,7 +20,7 @@ type ReceiveFields = {
 export const getNummeraanduidingByAddress = (
   queryParams: string,
   receiveFields?: string,
-): Promise<Nummeraanduiding> | null => {
+): Promise<Nummeraanduiding | null> => {
   const paramsString = queryParams.substr(queryParams.indexOf('?'))
   const searchParams = new URLSearchParams(paramsString)
 
