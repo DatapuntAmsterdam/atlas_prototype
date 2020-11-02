@@ -8,8 +8,8 @@ import { Root as Nummeraanduiding } from './types'
  *
  * API documentation: https://api.data.amsterdam.nl/v1/bag/nummeraanduiding
  *
- * @param {String} queryParams - Full URL or search string
- * @param {String} receiveFields - comma separated (no spaces) values indicating which fields should be returned from the API request
+ * @param queryParams - Full URL or search string
+ * @param receiveFields - comma separated (no spaces) values indicating which fields should be returned from the API request
  */
 // eslint-disable-next-line import/prefer-default-export
 export const getNummeraanduidingByAddress = (
