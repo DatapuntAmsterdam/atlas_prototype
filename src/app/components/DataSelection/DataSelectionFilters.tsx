@@ -99,12 +99,14 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
   }
 
   const showOptionCounts = DATA_SELECTION_CONFIG.datasets[dataset].SHOW_FILTER_OPTION_COUNTS
+  const activeFilterSlugs = Object.keys(activeFilters)
 
   return (
     <div className="qa-available-filters c-data-selection-available-filters">
       <>
         {availableFilters.map(
           (filter) =>
+            !activeFilterSlugs.includes(filter.slug) &&
             hasInactiveFilterOptions(filter) && (
               <div className="c-data-selection-available-filters__category">
                 <StyledHeading as="h3">

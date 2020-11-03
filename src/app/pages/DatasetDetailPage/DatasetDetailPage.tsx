@@ -1,3 +1,4 @@
+import { DocumentEdit } from '@amsterdam/asc-assets'
 import {
   Alert,
   breakpoint,
@@ -170,12 +171,12 @@ const DatasetDetailPage: FunctionComponent = () => {
                     {canEdit && datasetId && (
                       <div className="o-header__buttongroup">
                         <Button
+                          variant="primaryInverted"
                           type="button"
-                          className="dcatd-button--edit"
+                          iconLeft={<DocumentEdit />}
                           onClick={() => redirectToDcatd(datasetId)}
                         >
                           Wijzigen
-                          <span className="u-sr-only">Wijzigen</span>
                         </Button>
                       </div>
                     )}
