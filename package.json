@@ -33,7 +33,7 @@
     "@amsterdam/asc-assets": "^0.25.2",
     "@amsterdam/asc-ui": "^0.25.2",
     "@amsterdam/react-maps": "^0.10.0",
-    "@babel/runtime": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
     "@datapunt/matomo-tracker-js": "0.3.1",
     "@datapunt/matomo-tracker-react": "0.3.1",
     "@sentry/browser": "5.27.2",
