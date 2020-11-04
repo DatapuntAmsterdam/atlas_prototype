@@ -2,7 +2,7 @@ import SearchType from '../../../app/pages/SearchPage/constants'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import { CmsType } from '../../../shared/config/cms.config'
-import { fetchWithToken } from '../../../shared/services/api/api'
+import { fetchProxy } from '../../../shared/services/api/api'
 
 // Minimun length for typeahead query in backend is 3 characters
 export const MIN_QUERY_LENGTH = 3
@@ -54,10 +54,10 @@ export function sortResponse(response: TypeaheadItem[]) {
   return [...dataPart, ...orderedPart]
 }
 
-function formatResponse(
+export const formatResponse = (
   response: TypeaheadItem[],
   itemType: string | undefined,
-): AutoSuggestSearchResult[] {
+): AutoSuggestSearchResult[] => {
   const sortedResponse = sortResponse(response)
     .map((item) => {
       // Base the type on the label returned from the API.
@@ -131,7 +131,7 @@ export interface AutoSuggestSearchContent {
 
 export default async function autoSuggestSearch({ query, type }: SearchOptions) {
   const url = joinUrl([environment.API_ROOT, 'typeahead'])
-  const response = await fetchWithToken<TypeaheadItem[]>(url, { q: query.toLowerCase() })
+  const response = await fetchProxy<TypeaheadItem[]>(url, { params: { q: query.toLowerCase() } })
 
   return formatResponse(response, type)
 }
