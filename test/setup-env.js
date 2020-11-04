@@ -7,4 +7,7 @@ beforeAll(() => server.listen())
 // (which is important for test isolation):
 afterEach(() => server.resetHandlers())
 
-afterAll(() => server.close())
+afterAll(() => {
+  global.unsetAuthentication()
+  server.close()
+})
