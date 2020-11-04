@@ -14,7 +14,7 @@ const getAccessToken = () => getState()?.user?.accessToken
 export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
   fetch(uri).then((response) => response.json())
 
-const handleErrors = (response: Response, reloadOnUnauthorized: boolean = false) => {
+const handleErrors = (response: Response, reloadOnUnauthorized = false) => {
   if (response.status >= 400 && response.status <= 401 && reloadOnUnauthorized) {
     logout()
   }
