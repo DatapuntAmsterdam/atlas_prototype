@@ -3,10 +3,8 @@ import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
 import { AuthError, NotFoundError } from './errors'
 
-type FetchProxy = {
-  params?: UrlParams
-  headers?: Headers
-  reloadOnUnauthorized?: boolean
+interface FetchOptions extends RequestInit {
+  searchParams?: UrlParams
 }
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
@@ -16,7 +14,7 @@ const getAccessToken = () => getState()?.user?.accessToken
 export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
   fetch(uri).then((response) => response.json())
 
-const handleErrors = (response: Response, reloadOnUnauthorized: boolean) => {
+const handleErrors = (response: Response, reloadOnUnauthorized: boolean = false) => {
   if (response.status >= 400 && response.status <= 401 && reloadOnUnauthorized) {
     logout()
   }
@@ -81,26 +79,24 @@ export const createUrlWithToken = (url: string, token: string) => {
   return parsedUrl.toString()
 }
 
-export const fetchProxy = <T = any>(
-  url: string,
-  { params, headers, reloadOnUnauthorized = false }: FetchProxy = {},
-): Promise<T> => {
+export const fetchProxy = <T = any>(url: string, init: FetchOptions = {}): Promise<T> => {
+  const { headers, searchParams, ...otherOptions } = init
   const requestHeaders = new Headers(headers)
 
   const options: RequestInit = {
+    ...otherOptions,
     headers: {
       ...requestHeaders,
       ...getAuthHeaders(),
     },
-    method: 'GET',
   }
 
-  const searchParams = new URLSearchParams(params)
-
   const fullUrl = new URL(url)
-  fullUrl.search = searchParams.toString()
+  const params = new URLSearchParams(searchParams)
 
-  return fetch(fullUrl.href, options)
-    .then((response) => handleErrors(response, reloadOnUnauthorized))
+  fullUrl.search = params.toString()
+
+  return fetch(fullUrl.toString(), options)
+    .then((response) => handleErrors(response))
     .then((response) => response.json())
 }

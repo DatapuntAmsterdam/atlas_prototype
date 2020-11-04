@@ -1,7 +1,7 @@
 import { createUrlWithToken, fetchWithToken, fetchProxy } from './api'
 
 describe('Api service', () => {
-  beforeEach(fetch.resetMocks)
+  beforeEach(global.fetch.resetMocks)
 
   describe('fetchWithToken', () => {
     const response = {
@@ -9,7 +9,7 @@ describe('Api service', () => {
     }
 
     it('should return the response from fetch', async () => {
-      fetch.mockResponseOnce(JSON.stringify(response))
+      global.fetch.mockResponseOnce(JSON.stringify(response))
 
       const result = await fetchWithToken(
         'http://localhost/',
@@ -27,7 +27,7 @@ describe('Api service', () => {
     })
 
     it('should not return the response from fetch when service is unavailable', async () => {
-      fetch.mockResponseOnce(JSON.stringify(response), { status: 503 })
+      global.fetch.mockResponseOnce(JSON.stringify(response), { status: 503 })
 
       return expect(
         fetchWithToken(
@@ -45,7 +45,7 @@ describe('Api service', () => {
     })
 
     it('should pass a signal: true to fetch options and add the token to the header', async () => {
-      fetch.mockResponseOnce(JSON.stringify(response))
+      global.fetch.mockResponseOnce(JSON.stringify(response))
 
       const controller = new AbortController()
       const { signal } = controller
@@ -62,12 +62,14 @@ describe('Api service', () => {
         'token12345',
       )
 
-      expect('signal' in fetch.mock.calls[0][1]).toBe(true)
-      expect(fetch.mock.calls[0][1].headers.get('Authorization')).toEqual('Bearer token12345')
+      expect('signal' in global.fetch.mock.calls[0][1]).toBe(true)
+      expect(global.fetch.mock.calls[0][1].headers.get('Authorization')).toEqual(
+        'Bearer token12345',
+      )
     })
 
     it('should pass custom headers along', async () => {
-      fetch.mockResponseOnce(JSON.stringify(response))
+      global.fetch.mockResponseOnce(JSON.stringify(response))
 
       const headers = new Headers({
         Test: 'foo',
@@ -82,7 +84,7 @@ describe('Api service', () => {
         'token12345',
       )
 
-      expect(fetch.mock.calls[0][1].headers.get('Test')).toEqual('foo')
+      expect(global.fetch.mock.calls[0][1].headers.get('Test')).toEqual('foo')
     })
   })
 
@@ -102,38 +104,41 @@ describe('Api service', () => {
 
   describe('fetchProxy', () => {
     beforeEach(() => {
-      fetch.resetMocks()
-      fetch.mockResponse(JSON.stringify({ foo: 'bar' }))
+      global.fetch.resetMocks()
+      global.fetch.mockResponse(JSON.stringify({ foo: 'bar' }))
     })
 
     it('should perform request', async () => {
-      expect(fetch).not.toHaveBeenCalled()
+      expect(global.fetch).not.toHaveBeenCalled()
 
       const url = 'https://www.domain.com/'
       const response = await fetchProxy(url)
 
-      expect(fetch).toHaveBeenCalledWith(url, expect.objectContaining({ method: 'GET' }))
+      expect(global.fetch).toHaveBeenCalledWith(
+        url,
+        expect.objectContaining({ headers: expect.anything() }),
+      )
       expect(response).toEqual({ foo: 'bar' })
     })
 
     it('should append query string to request URL', async () => {
-      expect(fetch).not.toHaveBeenCalled()
+      expect(global.fetch).not.toHaveBeenCalled()
 
-      const params = {
+      const searchParams = {
         foo: 'bar',
         qux: 'zork',
       }
       const url = 'https://www.domain2.com/'
-      await fetchProxy(url, { params })
+      await fetchProxy(url, { searchParams })
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(global.fetch).toHaveBeenCalledWith(
         expect.stringContaining('foo=bar&qux=zork'),
-        expect.objectContaining({ method: 'GET' }),
+        expect.objectContaining({ headers: expect.anything() }),
       )
     })
 
     it('should append auth headers to request', async () => {
-      expect(fetch).not.toHaveBeenCalled()
+      expect(global.fetch).not.toHaveBeenCalled()
 
       const url = 'https://www.domain3.com/'
       const rawHeaders = {
@@ -142,7 +147,7 @@ describe('Api service', () => {
       await fetchProxy(url, { headers: rawHeaders })
 
       const headers = new Headers(rawHeaders)
-      expect(fetch.mock.calls[0][1].headers).toEqual({ ...headers })
+      expect(global.fetch.mock.calls[0][1].headers).toEqual({ ...headers })
     })
   })
 })
