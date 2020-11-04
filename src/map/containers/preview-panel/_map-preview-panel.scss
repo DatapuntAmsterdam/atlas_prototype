@@ -109,7 +109,7 @@ $button-height: 24px;
     flex: 1 1 0%;
     flex-direction: column;
     height: calc(100% - 33px);
-    min-height: 0; // NB: firefox fix https://stackoverflow.com/a/28639686
+    min-height: 70px;
 
     // IE FIX
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {

@@ -13,7 +13,7 @@ import {
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
-import MoreResultsWhenLoggedIn from '../Alerts/MoreResultsWhenLoggedIn'
+import AuthAlert from '../Alerts/AuthAlert'
 import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
@@ -107,7 +107,7 @@ const EditorialResults = ({
             />
           )}
           {!hasLoadingError && unauthorizedLabels.length > 0 && (
-            <MoreResultsWhenLoggedIn excludedResults={unauthorizedLabels.join(', ')} />
+            <AuthAlert excludedResults={unauthorizedLabels.join(', ')} />
           )}
           {hasLoadingError && (
             <ErrorMessage

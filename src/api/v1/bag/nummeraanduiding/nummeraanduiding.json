@@ -1,0 +1,91 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://acc.api.data.amsterdam.nl/v1/bag/nummeraanduiding/"
+    },
+    "next": {
+      "href": null
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "_embedded": {
+    "nummeraanduiding": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://acc.api.data.amsterdam.nl/v1/bag/nummeraanduiding/0363200000006743/?format=json",
+            "title": "0363200000006743"
+          }
+        },
+        "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduiding",
+        "id": "0363200000006743",
+        "bronId": null,
+        "bron": null,
+        "type": "01",
+        "status": "Naamgeving uitgegeven",
+        "postcode": "1016KR",
+        "ligplaatsId": null,
+        "ligplaats": null,
+        "typeAdres": "Hoofdadres",
+        "vervallen": null,
+        "huisletter": "A",
+        "huisnummer": 13,
+        "landelijkId": "0363200000006743",
+        "standplaatsId": null,
+        "standplaats": null,
+        "dateModified": "2020-10-26T01:02:47.825643",
+        "documentNummer": "GV00000402",
+        "openbareRuimteId": "0363300000002531",
+        "openbareRuimte": "https://acc.api.data.amsterdam.nl/v1/bag/openbareruimte/0363300000002531/?format=json",
+        "beginGeldigheid": "1931-01-01",
+        "documentMutatie": "1931-01-01",
+        "eindeGeldigheid": null,
+        "verblijfsobjectId": "0363010000543926",
+        "verblijfsobject": "https://acc.api.data.amsterdam.nl/v1/bag/verblijfsobject/0363010000543926/?format=json",
+        "huisnummerToevoeging": "H"
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "https://acc.api.data.amsterdam.nl/v1/bag/nummeraanduiding/0363200000467956/?format=json",
+            "title": "0363200000467956"
+          }
+        },
+        "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduiding",
+        "id": "0363200000467956",
+        "bronId": null,
+        "bron": null,
+        "type": "01",
+        "status": "Naamgeving uitgegeven",
+        "postcode": "1016KR",
+        "ligplaatsId": null,
+        "ligplaats": null,
+        "typeAdres": "Hoofdadres",
+        "vervallen": null,
+        "huisletter": "A",
+        "huisnummer": 13,
+        "landelijkId": "0363200000467956",
+        "standplaatsId": null,
+        "standplaats": null,
+        "dateModified": "2020-10-26T01:04:43.386296",
+        "documentNummer": "GV00000402",
+        "openbareRuimteId": "0363300000002531",
+        "openbareRuimte": "https://acc.api.data.amsterdam.nl/v1/bag/openbareruimte/0363300000002531/?format=json",
+        "beginGeldigheid": "1931-01-01",
+        "documentMutatie": "1931-01-01",
+        "eindeGeldigheid": null,
+        "verblijfsobjectId": "0363010000980408",
+        "verblijfsobject": "https://acc.api.data.amsterdam.nl/v1/bag/verblijfsobject/0363010000980408/?format=json",
+        "huisnummerToevoeging": "1"
+      }
+    ]
+  },
+  "page": {
+    "number": 1,
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1
+  }
+}

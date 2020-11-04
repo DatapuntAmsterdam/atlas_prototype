@@ -85,18 +85,18 @@ const META = {
 
 export type Definition = {
   singular: string
-  plural?: string | null
+  plural: string
   description?: string | null
   url?: string | null
   meta?: Array<keyof typeof META>
   authLevel?: string
 }
 
-type DefinitionList = {
-  [label: string]: Definition
+function typeHelper<K extends PropertyKey>(obj: Record<K, Definition>): Record<K, Definition> {
+  return obj
 }
 
-const DEFINITIONS: DefinitionList = {
+const DEFINITIONS = typeHelper({
   A_PERCEEL: {
     singular: 'A-perceel',
     plural: 'A-percelen',
@@ -133,12 +133,6 @@ const DEFINITIONS: DefinitionList = {
     description: null,
     url: null,
     meta: [],
-  },
-  BEPERKING: {
-    ...categoryLabels.gemeentelijkeBeperking,
-    description: 'Lijst van beperkingen op een gebruiksrecht.',
-    url: 'https://www.amsterdam.nl/stelselpedia/wkpb-index/catalogus/beperking/#objectkenmerken',
-    meta: ['datum_in_werking', 'datum_einde'],
   },
   BETROKKEN_BIJ: {
     singular: 'Betrokken bij',
@@ -397,7 +391,7 @@ const DEFINITIONS: DefinitionList = {
   },
   OBJECT_WKPB: {
     singular: 'WKPB-uittreksel',
-    plural: null,
+    plural: 'WKPB-uittreksel',
     description: null,
     url: null,
     meta: [],
@@ -621,7 +615,7 @@ const DEFINITIONS: DefinitionList = {
       'persoon op een zaak kan hebben is eigendom.',
     url: 'https://www.amsterdam.nl/stelselpedia/brk-index/catalog-brk-levering/objectklasse-4/',
   },
-}
+})
 
 const GLOSSARY = {
   DEFINITIONS,

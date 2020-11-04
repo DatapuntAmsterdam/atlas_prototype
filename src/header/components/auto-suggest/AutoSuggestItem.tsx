@@ -103,6 +103,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
     }
 
     const { type, subtype, id } = getDetailPageData(suggestion.uri)
+    const currentSearchParams = new URLSearchParams(window.location.search)
 
     // suggestion.category TRACK
     return {
@@ -110,6 +111,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
       search: new URLSearchParams({
         [PARAMETERS.VIEW]: view,
         [PARAMETERS.QUERY]: `${inputValue}`,
+        [PARAMETERS.LAYERS]: currentSearchParams.get(PARAMETERS.LAYERS) || '',
       }).toString(),
     }
   }, [extractIdEndpoint, openEditorialSuggestion, decodeLayers, highlightValue])

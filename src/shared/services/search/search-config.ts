@@ -130,11 +130,6 @@ export default {
       features: ['kadaster/kadastraal_object'],
     },
     {
-      ...categoryLabels.gemeentelijkeBeperking,
-      slug: 'gemeentelijke-beperking',
-      features: ['wkpb/beperking'],
-    },
-    {
       ...categoryLabels.gebied,
       slug: 'gebied',
       features: [

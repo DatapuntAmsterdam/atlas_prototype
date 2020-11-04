@@ -199,10 +199,10 @@ function handleCallback() {
  */
 export function getAccessToken() {
   if (typeof window === 'undefined') {
-    return false
+    return ''
   }
 
-  return sessionStorage.getItem(ACCESS_TOKEN)
+  return sessionStorage.getItem(ACCESS_TOKEN) ?? ''
 }
 
 /**

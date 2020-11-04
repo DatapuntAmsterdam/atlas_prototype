@@ -2,7 +2,7 @@ import { themeSpacing } from '@amsterdam/asc-ui'
 import { GraphQLFormattedError } from 'graphql'
 import React from 'react'
 import styled from 'styled-components'
-import MoreResultsWhenLoggedIn from '../../components/Alerts/MoreResultsWhenLoggedIn'
+import AuthAlert from '../../components/Alerts/AuthAlert'
 import DataCard, { DataList } from '../../components/DataCard'
 import { NoDataSearchResults } from '../../components/NoSearchResults'
 import { ErrorExtensions } from '../../models/graphql'
@@ -75,7 +75,7 @@ const DataSearchResults: React.FC<DataSearchResultsProps> = ({
       })}
       <>
         {unauthorizedLabels.length > 0 && (
-          <MoreResultsWhenLoggedIn excludedResults={unauthorizedLabels.join(', ')} />
+          <AuthAlert excludedResults={unauthorizedLabels.join(', ')} />
         )}
       </>
     </>

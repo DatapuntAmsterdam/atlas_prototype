@@ -6,9 +6,6 @@ import MapLayersReducer from '../map/ducks/layers/map-layers'
 import { REDUCER_KEY as MAP } from '../map/ducks/map/constants'
 import MapReducer from '../map/ducks/map/reducer'
 import MapPanelLayersReducer from '../map/ducks/panel-layers/map-panel-layers'
-import PanoPreviewReducer, {
-  REDUCER_KEY as PANO_PREVIEW,
-} from '../panorama/ducks/preview/panorama-preview'
 import PanoramaReducer, { PANORAMA } from '../panorama/ducks/reducer'
 import DataSearchReducer, { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer'
 import DataSelectionReducer, { DATA_SELECTION } from '../shared/ducks/data-selection/reducer'
@@ -34,7 +31,6 @@ const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => 
     [FILTER]: FiltersReducer,
     [MAP]: MapReducer,
     mapDetail: MapDetailReducer,
-    [PANO_PREVIEW]: PanoPreviewReducer,
     [PANORAMA]: PanoramaReducer,
     [UI]: UiReducer,
     [USER]: UserReducer,

@@ -40,7 +40,6 @@ const categoryLabelsByType = {
   'vsd/reclamebelasting': categoryLabels.reclamebelasting,
   'vsd/vastgoed': categoryLabels.vastgoed,
   'vsd/winkgeb': categoryLabels.winkelgebied,
-  'wkpb/beperking': categoryLabels.gemeentelijkeBeperking,
 }
 
 export default categoryLabelsByType

@@ -1,15 +1,22 @@
 /* eslint-disable global-require */
 import { Map, Table } from '@amsterdam/asc-assets'
-import { Alert, Button, Heading, Paragraph, Tab, Tabs, themeSpacing } from '@amsterdam/asc-ui'
+import {
+  Alert,
+  Button,
+  Container,
+  Heading,
+  Paragraph,
+  Tab,
+  Tabs,
+  themeSpacing,
+} from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { AngularWrapper } from 'react-angular'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 import Link from 'redux-first-router-link'
 import styled from 'styled-components'
-import { setPage as setDatasetPage } from '../../../shared/ducks/data-selection/actions'
 import { DATASETS, VIEWS_TO_PARAMS } from '../../../shared/ducks/data-selection/constants'
 import {
   getDataSelection,
@@ -31,13 +38,9 @@ import ShareBar from '../ShareBar/ShareBar'
 import DataSelectionDownloadButton from './DataSelectionDownloadButton'
 import DataSelectionList from './DataSelectionList/DataSelectionList'
 import DataSelectionTable from './DataSelectionTable/DataSelectionTable'
-
-let angularInstance = null
-
-if (typeof window !== 'undefined') {
-  require('../../angularModules')
-  angularInstance = require('angular')
-}
+import LegacyPagination from './LegacyPagination'
+import DataSelectionFilters from './DataSelectionFilters'
+import DataSelectionSbiFilters from './DataSelectionSbiFilters'
 
 const StyledAlert = styled(Alert)`
   margin-bottom: ${themeSpacing(5)};
@@ -47,13 +50,19 @@ const StyledTabs = styled(Tabs)`
   margin-bottom: ${themeSpacing(2)};
 `
 
+const StyledContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  margin: ${themeSpacing(4, 0)};
+  padding: ${themeSpacing(0, 4)};
+`
+
 const DataSelection = () => {
   const location = useLocation()
   const history = useHistory()
   const [view] = useParam(viewParam)
 
   const { isLoading, dataset, authError, page: currentPage } = useSelector(getDataSelection)
-  const dispatch = useDispatch()
 
   const activeFilters = useSelector(getFilters)
   const results = useSelector(getDataSelectionResult)
@@ -101,7 +110,7 @@ const DataSelection = () => {
   const initialTab = tabs.find(({ isActive }) => isActive)?.dataset
 
   return (
-    <div className="c-data-selection c-dashboard__content">
+    <StyledContainer className="c-data-selection">
       <div className="c-data-selection-content qa-data-selection-content">
         {showHeader && (
           <div className="qa-header u-margin__bottom--3">
@@ -196,33 +205,13 @@ const DataSelection = () => {
             <div className="u-row">
               {showFilters && (
                 <div className="u-col-sm--3 c-data-selection__available-filters">
-                  {dataset === 'hr' && angularInstance && (
-                    <AngularWrapper
-                      moduleName="dpSbiFilterWrapper"
-                      component="dpSbiFilter"
-                      angularInstance={angularInstance}
-                      dependencies={['atlas']}
-                      bindings={{
-                        availableFilters,
-                        activeFilters,
-                      }}
+                  {dataset === 'hr' && (
+                    <DataSelectionSbiFilters
+                      availableFilters={availableFilters}
+                      activeFilters={activeFilters}
                     />
                   )}
-                  {angularInstance && (
-                    <AngularWrapper
-                      moduleName="dpDataSelectionAvailableFiltersWrapper"
-                      component="dpDataSelectionAvailableFilters"
-                      dependencies={['atlas']}
-                      angularInstance={angularInstance}
-                      bindings={{
-                        availableFilters,
-                        activeFilters,
-                      }}
-                      interpolateBindings={{
-                        dataset,
-                      }}
-                    />
-                  )}
+                  <DataSelectionFilters {...{ availableFilters, activeFilters, dataset }} />
                 </div>
               )}
               <div className={widthClass}>
@@ -258,19 +247,12 @@ const DataSelection = () => {
                   <div>
                     {view === VIEW_MODE.FULL && <DataSelectionTable content={data} />}
                     {view === VIEW_MODE.SPLIT && <DataSelectionList content={data} />}
-                    {angularInstance && (
-                      <AngularWrapper
-                        moduleName="dpDataSelectionPaginationWrapper"
-                        component="dpDataSelectionPagination"
-                        dependencies={['atlas']}
-                        angularInstance={angularInstance}
-                        bindings={{
-                          currentPage,
-                          numberOfPages,
-                          setPage: (page) => dispatch(setDatasetPage(page)),
-                        }}
-                      />
-                    )}
+                    <LegacyPagination
+                      {...{
+                        currentPage,
+                        numberOfPages,
+                      }}
+                    />
                     {view === VIEW_MODE.FULL && (
                       <div className="u-row">
                         <div className="u-col-sm--12">
@@ -300,7 +282,7 @@ const DataSelection = () => {
           </Alert>
         )}
       </div>
-    </div>
+    </StyledContainer>
   )
 }
 

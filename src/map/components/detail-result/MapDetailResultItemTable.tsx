@@ -8,23 +8,21 @@ export interface MapDetailResultItemTableProps {
 
 const MapDetailResultItemTable: React.FC<MapDetailResultItemTableProps> = ({ item }) => (
   <>
-    {item.values.map((value, index) => (
+    {item.values?.map((value, index) => (
       // eslint-disable-next-line react/no-array-index-key
       <Fragment key={index}>
         <Divider />
         <ul className="map-detail-result__list">
           {item.headings
             .filter((heading) => !!value[heading.key])
-            .map((heading) => {
-              return (
-                <li className="map-detail-result__item">
-                  <section className="map-detail-result__item-content">
-                    <div className="map-detail-result__item-label">{heading.title}</div>
-                    <div className="map-detail-result__item-value">{value[heading.key]}</div>
-                  </section>
-                </li>
-              )
-            })}
+            .map((heading) => (
+              <li className="map-detail-result__item">
+                <section className="map-detail-result__item-content">
+                  <div className="map-detail-result__item-label">{heading.title}</div>
+                  <div className="map-detail-result__item-value">{value[heading.key]}</div>
+                </section>
+              </li>
+            ))}
         </ul>
       </Fragment>
     ))}

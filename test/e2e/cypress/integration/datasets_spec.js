@@ -48,12 +48,12 @@ describe('datasets module', () => {
       cy.wait('@getDataset')
 
       // check detail titles
-      cy.get('h3').should('be.visible').and('contain', 'Dataset')
-      cy.get('h3').should('be.visible').and('contain', 'Resources')
-      cy.get('h3').should('be.visible').and('contain', 'Details')
-      cy.get('h3').should('be.visible').and('contain', "Thema's")
-      cy.get('h3').should('be.visible').and('contain', 'Tags')
-      cy.get('h3').should('be.visible').and('contain', 'Licentie')
+      cy.get('h2').should('be.visible').and('contain', 'Dataset')
+      cy.get('h2').should('be.visible').and('contain', 'Resources')
+      cy.get('h2').should('be.visible').and('contain', 'Details')
+      cy.get('h2').should('be.visible').and('contain', "Thema's")
+      cy.get('h2').should('be.visible').and('contain', 'Tags')
+      cy.get('h2').should('be.visible').and('contain', 'Licentie')
 
       // as downloading is not testable, we check for the presence of href
       cy.get('.resources-item').should('exist').and('be.visible').and('have.attr', 'href')
@@ -142,7 +142,7 @@ describe('datasets module', () => {
 
     it('should show only datasets after filtering', () => {
       cy.server()
-      cy.route(`typeahead/?q=vergunningen`).as('typeaheadResults')
+      cy.route(`typeahead?q=vergunningen`).as('typeaheadResults')
       cy.route('/dcatd/datasets/*').as('getDataset')
       cy.get(SEARCH.input).trigger('focus')
       cy.get(SEARCH.input).type('Vergunningen')
@@ -153,7 +153,7 @@ describe('datasets module', () => {
         .contains('Datasets')
         .siblings('ul')
         .children('li')
-        .first()
+        .eq(2)
         .click()
       cy.wait('@getDataset')
 

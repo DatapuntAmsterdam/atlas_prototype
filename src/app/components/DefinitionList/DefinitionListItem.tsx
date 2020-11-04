@@ -23,6 +23,7 @@ const DefinitionListTerm = styled.dt`
   color: ${themeColor('tint', 'level5')};
   font-weight: 500;
   white-space: normal;
+  word-break: break-word;
   width: 30%;
 `
 

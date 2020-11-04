@@ -2,17 +2,18 @@ import center from '@turf/center'
 import { Geometry, Position } from 'geojson'
 import { LatLngLiteral } from 'leaflet'
 import { fetchWithToken } from '../../../shared/services/api/api'
-import { DetailResult } from '../../types/details'
+import { DetailInfo, DetailResult } from '../../types/details'
 import { RD, WGS84 } from '../crs-config'
 import { ServiceDefinition } from '../map-services.config'
 import { getDetailUrl } from './getDetailUrl'
+import { getAccessToken } from '../../../shared/services/auth/auth'
 
 // TODO: Write some tests for this method.
 
 export interface DetailResponse {
   data: any
-  geometry: Geometry
-  location: LatLngLiteral
+  geometry?: Geometry
+  location?: LatLngLiteral
 }
 
 /**
@@ -33,51 +34,59 @@ export async function fetchDetailData(
   // Add request headers to retrieve coordinates in WGS84.
   const headers = new Headers(supportsCrs ? { 'Accept-Crs': 'EPSG:4258' } : undefined)
   // TODO: Fetching logic should be added to the service definition in order to make this code type-safe.
-  const responseData = await fetchWithToken(detailUrl, undefined, undefined, undefined, headers, '')
-  const normalizedData = serviceDefinition.normalization?.(responseData) ?? responseData
+  const responseData = await fetchWithToken(
+    detailUrl,
+    undefined,
+    undefined,
+    undefined,
+    headers,
+    getAccessToken(),
+  )
+
+  const normalizedData = (await serviceDefinition.normalization?.(responseData)) ?? responseData
 
   // TODO: Once fetching logic becomes part of the service definition it should always return the 'geometry' uniformly.
-  let geometry: Geometry =
-    responseData.geometrie || responseData.geometry || normalizedData.geometry
-
-  // TODO: This check can be removed once the API calls have been made type safe.
-  if (!geometry) {
-    throw new Error('Unable to fetch map details, the API did not return any geometry.')
-  }
+  let geometry: Geometry | undefined =
+    responseData.geometrie ||
+    // eslint-disable-next-line no-underscore-dangle
+    responseData._geometrie ||
+    responseData.geometry ||
+    normalizedData.geometry
 
   // Convert RD geometry to standard WGS84.
-  if (!supportsCrs) {
+  if (!supportsCrs && geometry) {
     geometry = await convertGeometry(geometry)
   }
 
-  if (geometry.type === 'GeometryCollection') {
+  if (geometry?.type === 'GeometryCollection') {
     throw new Error(
       `Unable to fetch map details, cannot parse geometry of type '${geometry.type}'.`,
     )
   }
 
-  const centerCoordinates = center(geometry).geometry?.coordinates
+  const centerCoordinates = geometry ? center(geometry as any).geometry?.coordinates : undefined
 
-  if (!centerCoordinates) {
+  if (!centerCoordinates && geometry) {
     throw new Error('Unable to fetch map details, cannot parse center of geometry.')
-  }
-
-  const location: LatLngLiteral = {
-    lng: centerCoordinates[0],
-    lat: centerCoordinates[1],
   }
 
   return {
     data: normalizedData,
     geometry,
-    location,
+    location:
+      centerCoordinates &&
+      ({
+        lng: centerCoordinates[0],
+        lat: centerCoordinates[1],
+      } as LatLngLiteral),
   }
 }
 
 export interface MapDetails {
   data: DetailResult
-  geometry: Geometry
-  location: LatLngLiteral
+  geometry?: Geometry
+  geometrie?: Geometry
+  location?: LatLngLiteral
 }
 
 /**
@@ -85,15 +94,19 @@ export interface MapDetails {
  *
  * @param serviceDefinition The service definition to use to convert the response.
  * @param response The response to convert.
+ * @param detailInfo Object containing id, type and subType (eg. { id: '123', type: 'bag', subType: 'adressen'})
  */
 export async function toMapDetails(
   serviceDefinition: ServiceDefinition,
   { data, location, geometry }: DetailResponse,
+  detailInfo: DetailInfo,
 ): Promise<MapDetails> {
-  const detailData = serviceDefinition.mapDetail(data, location)
-
+  const detailData = serviceDefinition.mapDetail(data, detailInfo, location)
+  const dataResult = detailData instanceof Promise ? await detailData : detailData
   return {
-    data: detailData instanceof Promise ? await detailData : detailData,
+    data: dataResult,
+    // Todo: remove 'geometrie' when new map is in use
+    geometrie: geometry,
     geometry,
     location,
   }

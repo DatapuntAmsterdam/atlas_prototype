@@ -1,6 +1,5 @@
-import fetchDetail, { pageTypeToEndpoint, getEndpointTypeForResult } from './map-detail'
-import mapFetch from '../map-fetch/map-fetch'
-import servicesByEndpointType, { endpointTypes } from '../map-services.config'
+import { getEndpointTypeForResult, pageTypeToEndpoint } from './map-detail'
+import { endpointTypes } from '../map-services.config'
 
 jest.mock('../map-fetch/map-fetch')
 
@@ -43,28 +42,5 @@ describe('map-detail', () => {
     })
 
     expect(result).toBe(endpointTypes.adressenStandplaats)
-  })
-
-  it('should fetch the detail based on the endpoint', async () => {
-    const mockDetail = { detail: { field: 'detail' } }
-
-    mapFetch.mockImplementationOnce(() => mockDetail)
-
-    const result = await fetchDetail(endpointTypes.adressenNummeraanduiding, {})
-
-    const { normalization, mapDetail } = servicesByEndpointType[
-      endpointTypes.adressenNummeraanduiding
-    ]
-
-    expect(mapFetch).toHaveBeenCalledWith(
-      endpointTypes.adressenNummeraanduiding,
-      mapDetail,
-      normalization,
-    )
-
-    expect(result).toMatchObject({
-      ...mockDetail,
-      endpointType: endpointTypes.adressenNummeraanduiding,
-    })
   })
 })

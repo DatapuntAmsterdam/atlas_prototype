@@ -1,0 +1,105 @@
+/* sass-lint:disable property-sort-order */
+/* already in react sass lint style*/
+@import '../../config';
+
+.resources-item {
+  font-size: $s-font-size;
+  font-weight: $normal-weight;
+  color: inherit;
+  flex-grow: 1;
+  position: relative;
+  text-decoration: none;
+
+  &__title {
+    font-weight: $bold-weight;
+    color: $brownish-grey;
+    margin-bottom: 2px;
+  }
+
+  &__modified {
+    color: $warm-grey;
+    font-size: $xs-font-size;
+    line-height: 23px;
+    margin-bottom: 2px;
+
+    &:empty {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &__file-size {
+    bottom: 0;
+    position: absolute;
+    right: 60px;
+
+    &::after {
+      @extend %icon-arrow-right;
+      bottom: -5px;
+      content: '';
+      display: inline-block;
+      height: 35px;
+      position: absolute;
+      width: 35px;
+    }
+  }
+
+  &__file-type {
+    background-color: $warm-grey;
+    color: $black;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 16px;
+    margin-right: 10px;
+    padding: 0 5px;
+
+    &--xlsx {
+      background-color: $thema-6;
+    }
+
+    &--pdf {
+      background-color: $red;
+    }
+
+    &--csv {
+      background-color: $thema-2;
+    }
+
+    &--json {
+      background-color: $thema-1;
+    }
+
+    &--geojson {
+      background-color: $warm-grey; /* no color yet */
+    }
+
+    &--shp {
+      background-color: $warm-grey; /* no color yet */
+    }
+
+    &--wms {
+      background-color: $warm-grey; /* no color yet */
+    }
+
+    &--wfs {
+      background-color: $warm-grey; /* no color yet */
+    }
+
+    &--xml {
+      background-color: $thema-4;
+    }
+
+    &--html {
+      background-color: $thema-9;
+    }
+
+    &--zip {
+      background-color: $brownish-grey;
+    }
+
+    &--api {
+      background-color: $thema-15;
+    }
+  }
+}

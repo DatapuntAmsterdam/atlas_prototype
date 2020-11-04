@@ -43,7 +43,7 @@ export interface MapState {
 }
 
 export interface MapContextProps extends MapState {
-  setDetailFeature: (feature: Feature) => void
+  setDetailFeature: (feature: Feature | null) => void
   setShowDrawTool: (showDrawing: boolean) => void
   getPanelLayers: () => void
   getMapLayers: () => void

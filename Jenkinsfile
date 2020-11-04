@@ -11,7 +11,6 @@ pipeline {
     IMAGE_FRONTEND_BASE = 'docker-registry.data.amsterdam.nl/atlas/app'
     IMAGE_FRONTEND_BUILD = "${IMAGE_FRONTEND_BASE}:${BUILD_NUMBER}"
     IMAGE_FRONTEND_ACCEPTANCE = "${IMAGE_FRONTEND_BASE}:acceptance"
-    IMAGE_FRONTEND_PREPRODUCTION = "${IMAGE_FRONTEND_BASE}:preproduction"
     IMAGE_FRONTEND_PRODUCTION = "${IMAGE_FRONTEND_BASE}:production"
 
     PLAYBOOK = 'deploy.yml'
@@ -43,22 +42,6 @@ pipeline {
           [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
           [$class: 'StringParameterValue', name: 'PLAYBOOK', value: "${PLAYBOOK}"],
           [$class: 'StringParameterValue', name: 'PLAYBOOKPARAMS', value: "-e cmdb_id=app_dataportaal"]
-        ]
-      }
-    }
-
-    stage('Deploy to pre-production') {
-      when { branch PRODUCTION_BRANCH }
-      options {
-        timeout(time: 5, unit: 'MINUTES')
-      }
-      steps {
-        sh "docker tag ${IMAGE_FRONTEND_BUILD} ${IMAGE_FRONTEND_PREPRODUCTION}"
-        sh "docker push ${IMAGE_FRONTEND_PREPRODUCTION}"
-        build job: 'Subtask_Openstack_Playbook', parameters: [
-          [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-          [$class: 'StringParameterValue', name: 'PLAYBOOK', value: "${PLAYBOOK}"],
-          [$class: 'StringParameterValue', name: 'PLAYBOOKPARAMS', value: "-e cmdb_id=app_dataportaal_pre"]
         ]
       }
     }
