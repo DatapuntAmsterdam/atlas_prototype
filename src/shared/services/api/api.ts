@@ -85,7 +85,7 @@ export const fetchProxy = <T = any>(url: string, init: FetchOptions = {}): Promi
   const authHeaders = Object.entries(getAuthHeaders())
 
   authHeaders.forEach(([name, value]) => {
-    requestHeaders.append(name, value)
+    if (value) requestHeaders.append(name, value)
   })
 
   const options: RequestInit = {
