@@ -82,13 +82,15 @@ export const createUrlWithToken = (url: string, token: string) => {
 export const fetchProxy = <T = any>(url: string, init: FetchOptions = {}): Promise<T> => {
   const { headers, searchParams, ...otherOptions } = init
   const requestHeaders = new Headers(headers)
+  const authHeaders = Object.entries(getAuthHeaders())
+
+  authHeaders.forEach(([name, value]) => {
+    requestHeaders.append(name, value)
+  })
 
   const options: RequestInit = {
     ...otherOptions,
-    headers: {
-      ...requestHeaders,
-      ...getAuthHeaders(),
-    },
+    headers: requestHeaders,
   }
 
   const fullUrl = new URL(url)

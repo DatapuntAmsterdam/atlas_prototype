@@ -1,7 +1,16 @@
 import { createUrlWithToken, fetchWithToken, fetchProxy } from './api'
+import * as auth from '../auth/auth'
+
+jest.mock('../auth/auth', () => jest.requireActual('../auth/auth'))
+
+const getAuthHeadersSpy = jest.spyOn(auth, 'getAuthHeaders').mockImplementation(() => ({}))
 
 describe('Api service', () => {
   beforeEach(global.fetch.resetMocks)
+
+  afterEach(() => {
+    getAuthHeadersSpy.mockReset()
+  })
 
   describe('fetchWithToken', () => {
     const response = {
@@ -106,6 +115,7 @@ describe('Api service', () => {
     beforeEach(() => {
       global.fetch.resetMocks()
       global.fetch.mockResponse(JSON.stringify({ foo: 'bar' }))
+      getAuthHeadersSpy.mockImplementation(() => ({ Authorization: 'Bearer something' }))
     })
 
     it('should perform request', async () => {
@@ -146,8 +156,14 @@ describe('Api service', () => {
       }
       await fetchProxy(url, { headers: rawHeaders })
 
-      const headers = new Headers(rawHeaders)
-      expect(global.fetch.mock.calls[0][1].headers).toEqual({ ...headers })
+      const headers = new Headers({ ...rawHeaders, Authorization: 'Bearer something' })
+      const requestHeader = [...global.fetch.mock.calls[0][1].headers.entries()]
+
+      expect([...headers.entries()]).toEqual(requestHeader)
+      expect(global.fetch).toHaveBeenCalledWith(
+        url,
+        expect.objectContaining({ headers: expect.anything() }),
+      )
     })
   })
 })
