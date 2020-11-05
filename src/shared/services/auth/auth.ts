@@ -303,11 +303,9 @@ export function getName() {
  * @returns The headers needed for an API call.
  */
 export const getAuthHeaders = () => {
-  const accessToken = getAccessToken()
+  if (!isAuthenticated()) return {}
 
-  if (!accessToken) return {}
-
-  return { Authorization: `Bearer ${accessToken}` }
+  return { Authorization: `Bearer ${getAccessToken()}` }
 }
 
 export function isAuthenticated() {
