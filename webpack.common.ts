@@ -7,6 +7,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
 import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin'
 import { Configuration, DefinePlugin } from 'webpack'
+import Dotenv from 'dotenv-webpack'
 
 
 /**
@@ -309,6 +310,9 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           },
         }),
       ] : []),
+      new Dotenv({
+        path: './.env-docker'
+      }),
     ],
   }
 }

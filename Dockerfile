@@ -21,7 +21,8 @@ RUN npm run generate:sitemap
 
 COPY modules /app/modules
 
-COPY .babelrc \
+COPY .env-docker \
+    .babelrc \
     .eslintrc.js \
     .eslintignore \
     .prettierrc \
