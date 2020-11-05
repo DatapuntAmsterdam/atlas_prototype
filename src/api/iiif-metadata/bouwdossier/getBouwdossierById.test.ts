@@ -2,22 +2,18 @@ import { mocked } from 'ts-jest/utils'
 import { getBouwdossierById } from '.'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import { fetchWithToken } from '../../../shared/services/api/api'
+import { fetchProxy } from '../../../shared/services/api/api'
 
 jest.mock('../../../shared/services/api/api')
 
-const mockedFetchWithToken = mocked(fetchWithToken, true)
+const mockedFetchProxy = mocked(fetchProxy, true)
 
 describe('getBouwdossierById', () => {
-  const response = [{ foo: 'bar' }]
-
-  it('makes a request and returns the response', async () => {
-    mockedFetchWithToken.mockReturnValueOnce(Promise.resolve(response))
-
+  it('makes a request and returns the response', () => {
     const id = 'foobarbaz'
-    await expect(getBouwdossierById(id)).resolves.toEqual(response)
+    getBouwdossierById(id)
 
-    expect(mockedFetchWithToken).toHaveBeenCalledWith(
+    expect(mockedFetchProxy).toHaveBeenCalledWith(
       joinUrl([environment.API_ROOT, 'iiif-metadata', 'bouwdossier', id], true),
     )
   })
