@@ -1,8 +1,8 @@
 import { LatLngLiteral } from 'leaflet'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import { fetchWithToken } from '../../../shared/services/api/api'
-import { PanoramaThumbnail } from './types'
+import { fetchProxy } from '../../../shared/services/api/api'
+import { FormattedPanoramaThumbnail, PanoramaThumbnail } from './types'
 
 export interface FetchPanoramaOptions {
   /**
@@ -36,15 +36,6 @@ export interface FetchPanoramaOptions {
    */
   radius?: number
 }
-
-type RawResponse =
-  | {
-      // eslint-disable-next-line camelcase
-      pano_id: string
-      heading: number
-      url: string
-    }
-  | []
 
 // TODO: Write method overloads for getting the thumbnail by the panorama id and RD coordinates (see API docs).
 // TODO: Add support for providing RD coordinates (see API docs)
@@ -85,14 +76,15 @@ export async function getPanoramaThumbnail(
     searchParams.set('radius', options?.radius.toString())
   }
 
-  const response = await fetchWithToken<RawResponse>(
-    `${joinUrl([environment.API_ROOT, 'panorama/thumbnail'])}?${searchParams.toString()}`,
+  const response = await fetchProxy<PanoramaThumbnail>(
+    joinUrl([environment.API_ROOT, 'panorama/thumbnail']),
+    { params: searchParams },
   )
 
   return transformResponse(response)
 }
 
-function transformResponse(response: RawResponse): PanoramaThumbnail | null {
+function transformResponse(response: PanoramaThumbnail): FormattedPanoramaThumbnail | null {
   // Because of a bug in the API empty responses are returned as an empty array.
   if (response instanceof Array) {
     return null
