@@ -199,10 +199,10 @@ function handleCallback() {
  */
 export function getAccessToken() {
   if (typeof window === 'undefined') {
-    return false
+    return ''
   }
 
-  return sessionStorage.getItem(ACCESS_TOKEN)
+  return sessionStorage.getItem(ACCESS_TOKEN) ?? ''
 }
 
 /**
@@ -305,4 +305,19 @@ export function getName() {
 export function getAuthHeaders() {
   const accessToken = getAccessToken()
   return accessToken ? { Authorization: `Bearer ${getAccessToken()}` } : {}
+}
+
+export function isAuthenticated() {
+  const accessToken = getAccessToken()
+
+  if (!accessToken) return false
+
+  const decoded = parseAccessToken(accessToken)
+
+  if (!decoded?.expiresAt) return false
+
+  const now = Date.now()
+  const hasExpired = decoded.expiresAt * 1000 < now
+
+  return !hasExpired
 }

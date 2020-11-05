@@ -1,33 +1,31 @@
-import { Link } from '@amsterdam/asc-ui'
-import React, { MouseEvent, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
-import { authenticateRequest } from '../../../../shared/ducks/user/user'
+import { Button } from '@amsterdam/asc-ui'
+import { ChevronRight } from '@amsterdam/asc-assets'
+import React from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { login } from '../../../../shared/services/auth/auth'
-
-const StyledLink = styled(Link)`
-  &:hover {
-    cursor: pointer;
-  }
-`
+import useDocumentTitle from '../../../utils/useDocumentTitle'
 
 export interface LoginLinkProps {
-  inList?: boolean
+  showChevron?: boolean
 }
 
-export const LoginLink: React.FC<LoginLinkProps> = ({ inList = true, children }) => {
-  const dispatch = useDispatch()
-  const handleLogin = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    dispatch(authenticateRequest('inloggen'))
-    login()
-  }, [])
+export const LoginLink: React.FC<LoginLinkProps> = ({ showChevron = true, children }) => {
+  const { trackEvent } = useMatomo()
+  const { documentTitle } = useDocumentTitle()
 
-  // TODO: Since this is not a navigational element a Button should be used here.
   return (
-    <StyledLink data-testid="link" inList={inList} onClick={handleLogin} darkBackground>
+    <Button
+      data-testid="link"
+      variant="textButton"
+      iconLeft={showChevron && <ChevronRight />}
+      iconSize={12}
+      onClick={() => {
+        trackEvent({ category: 'login', name: documentTitle, action: 'inloggen' })
+        login()
+      }}
+    >
       {children || 'Inloggen'}
-    </StyledLink>
+    </Button>
   )
 }
 

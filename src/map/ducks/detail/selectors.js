@@ -8,7 +8,7 @@ import { isDataDetailPage, isPanoPage } from '../../../store/redux-first-router/
 
 const shouldShowGeoJson = () => isDataDetailPage || isPanoPage
 
-const mapDetailSelector = (state) => state.mapDetail
+export const mapDetailSelector = (state) => state.mapDetail
 
 export const getCurrentEndpoint = createSelector(
   mapDetailSelector,

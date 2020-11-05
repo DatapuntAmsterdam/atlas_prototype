@@ -1,4 +1,4 @@
-import { HOMEPAGE, DATA_SEARCH, DATA_SELECTION_TABLE, TABLES } from '../support/selectors'
+import { HOMEPAGE, DATA_SEARCH, DATA_SELECTION_TABLE, DATA_DETAIL } from '../support/selectors'
 
 describe('trade-register (vestigingen) module', () => {
   describe('user should be able to navigate to the trade-register from the homepage', () => {
@@ -70,7 +70,7 @@ describe('trade-register (vestigingen) module', () => {
         cy.route('/handelsregister/vestiging/*').as('getVestiging')
         cy.get('tr').eq(1).click()
         cy.wait('@getVestiging')
-        cy.get(TABLES.detailPane).should('exist').and('be.visible')
+        cy.get(DATA_DETAIL.main).should('exist').and('be.visible')
       })
     })
   })

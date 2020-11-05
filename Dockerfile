@@ -32,9 +32,11 @@ COPY .env-docker \
     tsconfig.json \
     tsconfig.webpack.json \
     favicon.png \
+    jest.config.js \
     /app/
 
 COPY src /app/src
+COPY test /app/test
 
 ARG DEPLOY_ENV
 ENV DEPLOY_ENV ${DEPLOY_ENV}

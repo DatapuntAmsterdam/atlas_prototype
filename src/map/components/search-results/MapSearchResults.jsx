@@ -1,9 +1,17 @@
-import { Alert } from '@amsterdam/asc-ui'
+import { Alert, Link } from '@amsterdam/asc-ui'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import React from 'react'
 import NotificationLevel from '../../../app/models/notification'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
+import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
+
+const StyledLink = styled(Link)`
+  padding: 0;
+  height: 100%;
+  width: 100%;
+`
 
 const MapSearchResults = ({
   isEmbed,
@@ -11,10 +19,8 @@ const MapSearchResults = ({
   location,
   missingLayers,
   onItemClick,
-  panoUrl,
   results,
   onMaximize,
-  onPanoPreviewClick,
 }) => {
   const rdCoordinates = wgs84ToRd(location)
 
@@ -26,30 +32,27 @@ const MapSearchResults = ({
       showMore: category.results.length > resultLimit,
     }))
 
+  const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location)
+
   return (
     <section className="map-search-results">
       <header
         className={`
           map-search-results__header
-          map-search-results__header--${panoUrl ? 'pano' : 'no-pano'}
+          map-search-results__header--${panoramaUrl ? 'pano' : 'no-pano'}
         `}
       >
-        <button
-          type="button"
-          className={`
-            map-search-results__header-pano-button
-            map-search-results__header-pano-button--${panoUrl ? 'enabled' : 'disabled'}
-          `}
-          disabled={!panoUrl}
-          onClick={onPanoPreviewClick}
-          title={panoUrl ? 'Panoramabeeld tonen' : 'Geen Panoramabeeld beschikbaar'}
+        <StyledLink
+          to={link}
+          as={linkComponent}
+          title={panoramaUrl ? 'Panoramabeeld tonen' : 'Geen Panoramabeeld beschikbaar'}
         >
-          {panoUrl && (
+          {panoramaUrl && (
             <img
               alt="Panoramabeeld"
-              className="map-search-results__header-pano"
+              className="map-detail-result__header-pano"
               height="292"
-              src={panoUrl}
+              src={panoramaUrl}
               width="438"
             />
           )}
@@ -59,7 +62,7 @@ const MapSearchResults = ({
               {`locatie ${rdCoordinates.x.toFixed(2)}, ${rdCoordinates.y.toFixed(2)}`}
             </h2>
           </div>
-        </button>
+        </StyledLink>
       </header>
       <div className="map-search-results__scroll-wrapper">
         <ul className="map-search-results__list">
@@ -113,10 +116,8 @@ MapSearchResults.propTypes = {
   missingLayers: PropTypes.string, // eslint-disable-line
   onItemClick: PropTypes.func.isRequired,
   onMaximize: PropTypes.func.isRequired,
-  onPanoPreviewClick: PropTypes.func.isRequired,
   isEmbed: PropTypes.bool.isRequired,
   resultLimit: PropTypes.number,
-  panoUrl: PropTypes.string, // eslint-disable-line
   results: PropTypes.array, // eslint-disable-line
 }
 

@@ -1,31 +1,31 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
-import { getMetadata } from '../../../api/metadata'
-import usePromise, { PromiseStatus } from '../../utils/usePromise'
-import PageTemplate from '../../components/PageTemplate/PageTemplate'
+import { Column, Container, Heading, Row } from '@amsterdam/asc-ui'
+import { getMetadata, Metadata } from '../../../api/metadata'
+import PromiseResult from '../../components/PromiseResult/PromiseResult'
+import ContentContainer from '../../components/ContentContainer/ContentContainer'
 
 const ActualityPage: FunctionComponent = () => (
-  <div className="c-page">
-    <div
-      style={{ display: 'block' }}
-      className="c-dashboard__column  u-col-sm--12 qa-dashboard__column--right"
-    >
-      <div className="c-dashboard__page o-max-width">
-        <div className="c-dashboard__page-inner c-dashboard__content o-max-width__inner u-gutter">
-          <h1 className="o-header__title u-margin__bottom--3">Actualiteit</h1>
-          <div className="qa-page">{renderContents()}</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ContentContainer>
+    <Container>
+      <Row>
+        <Column span={{ small: 1, medium: 2, big: 6, large: 12, xLarge: 12 }}>
+          <div>
+            <Heading>Actualiteit</Heading>
+            <div className="qa-page">{renderContents()}</div>
+          </div>
+        </Column>
+      </Row>
+    </Container>
+  </ContentContainer>
 )
 
 function renderContents() {
   const [retryCount, setRetryCount] = useState(0)
-  const result = usePromise(useMemo(() => getMetadata(), [retryCount]))
+  const promise = useMemo(() => getMetadata(), [retryCount])
 
   return (
-    <PageTemplate result={result} onRetry={() => setRetryCount(retryCount + 1)}>
-      {result.status === PromiseStatus.Fulfilled && (
+    <PromiseResult<Metadata[]> promise={promise} onRetry={() => setRetryCount(retryCount + 1)}>
+      {({ value }) => (
         <table className="c-table">
           <thead>
             <tr className="c-table__header-row">
@@ -41,7 +41,7 @@ function renderContents() {
             </tr>
           </thead>
           <tbody>
-            {result.value.map((source) => (
+            {value.map((source) => (
               <tr className="c-table__content-row">
                 {source.title && (
                   <td className="c-table__field c-table__content-field">{source.title}</td>
@@ -55,7 +55,7 @@ function renderContents() {
           </tbody>
         </table>
       )}
-    </PageTemplate>
+    </PromiseResult>
   )
 }
 

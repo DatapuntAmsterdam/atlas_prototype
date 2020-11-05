@@ -1,7 +1,4 @@
-export interface DetailUrlParams {
-  id: string
-  type: string
-}
+import { DetailInfo } from '../../types/details'
 
 const PATH_SEPARATOR = '/'
 
@@ -10,7 +7,7 @@ const PATH_SEPARATOR = '/'
  *
  * @param detailPath The detail URL to parse.
  */
-export function parseDetailPath(detailPath: string): DetailUrlParams {
+export default function parseDetailPath(detailPath: string): DetailInfo {
   const parts = detailPath.split(PATH_SEPARATOR).filter((part) => part.length > 0)
   let id = parts.pop() ?? ''
 
@@ -20,6 +17,7 @@ export function parseDetailPath(detailPath: string): DetailUrlParams {
 
   return {
     id,
-    type: parts.join(PATH_SEPARATOR),
+    type: parts[0],
+    subType: parts[1],
   }
 }

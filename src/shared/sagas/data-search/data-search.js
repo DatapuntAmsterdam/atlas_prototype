@@ -20,27 +20,28 @@ import { getMapZoom } from '../../../map/ducks/map/selectors'
 import ActiveOverlaysClass from '../../services/active-overlays/active-overlays'
 import { waitForAuthentication } from '../user/user'
 import { SELECTION_TYPE, setSelection } from '../../ducks/selection/selection'
-import { getViewMode, isMapPage, SET_VIEW_MODE, VIEW_MODE } from '../../ducks/ui/ui'
+import { isMapPage } from '../../ducks/ui/ui'
 import PAGES from '../../../app/pages'
 import { ERROR_TYPES, setGlobalError } from '../../ducks/error/error-message'
 
 // Todo: DP-6390
 export function* fetchMapSearchResults() {
   const zoom = yield select(getMapZoom)
-  const view = yield select(getViewMode)
   const location = yield select(getDataSearchLocation)
   try {
     yield put(setSelection(SELECTION_TYPE.POINT))
     yield call(waitForAuthentication)
     const user = yield select(getUser)
 
-    if (view === VIEW_MODE.SPLIT || view === VIEW_MODE.FULL) {
+    if (location) {
       const geoSearchResults = yield call(geosearch, location, user)
       const results = replaceBuurtcombinatie(geoSearchResults)
       yield put(fetchMapSearchResultsSuccessList(results, getNrOfSearchResults(geoSearchResults)))
-    } else {
-      const { results, errors } = yield call(search, location, user)
-      yield put(fetchMapSearchResultsSuccessPanel(results, getNumberOfResultsPanel(results)))
+
+      const { results: resultsPanel, errors } = yield call(search, location, user)
+      yield put(
+        fetchMapSearchResultsSuccessPanel(resultsPanel, getNumberOfResultsPanel(resultsPanel)),
+      )
 
       if (errors) {
         yield put(setGlobalError(ERROR_TYPES.GENERAL_ERROR))
@@ -64,5 +65,4 @@ export function* fetchGeoSearchResultsEffect() {
 
 export default function* watchDataSearch() {
   yield takeLatest(FETCH_GEO_SEARCH_RESULTS_REQUEST, fetchMapSearchResults)
-  yield takeLatest(SET_VIEW_MODE, fetchGeoSearchResultsEffect)
 }

@@ -1,3 +1,4 @@
+import { DocumentEdit } from '@amsterdam/asc-assets'
 import {
   Alert,
   breakpoint,
@@ -10,6 +11,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
+import marked from 'marked'
 import React, { FunctionComponent, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
@@ -102,6 +104,16 @@ const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`
   }
 `
 
+interface MarkdownProps {
+  children: string
+}
+
+const Markdown: FunctionComponent<MarkdownProps> = ({ children }) => {
+  const formattedContent = useMemo(() => marked(children), [children])
+
+  return <StyledCustomHTMLBlock body={formattedContent} />
+}
+
 const Content = styled.div`
   width: 100%;
 `
@@ -166,19 +178,18 @@ const DatasetDetailPage: FunctionComponent = () => {
                     {canEdit && datasetId && (
                       <div className="o-header__buttongroup">
                         <Button
+                          variant="primaryInverted"
                           type="button"
-                          className="dcatd-button--edit"
+                          iconLeft={<DocumentEdit />}
                           onClick={() => redirectToDcatd(datasetId)}
                         >
                           Wijzigen
-                          <span className="u-sr-only">Wijzigen</span>
                         </Button>
                       </div>
                     )}
                   </h2>
                 </div>
-                <StyledCustomHTMLBlock body={dataset['dct:description']} />
-
+                <Markdown>{dataset['dct:description']}</Markdown>
                 <div>
                   {['gepland', 'in_onderzoek', 'niet_beschikbaar'].includes(
                     dataset['ams:status'],
@@ -281,7 +292,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                                       )}
                                     </span>
                                   )}
-                                  <div>{row['dct:description']}</div>
+                                  <div>{row['dct:description'] ?? row['ams:purl']}</div>
                                 </div>
                               </div>
                               <div className="resources-item__right">
@@ -293,11 +304,12 @@ const DatasetDetailPage: FunctionComponent = () => {
                                   )}
                                 </div>
                                 <div className="resources-item__navigation">
-                                  {row['dcat:byteSize'] && row['dcat:byteSize'] > 0 && (
-                                    <div className="resources-item__navigation-file-size">
-                                      {getFileSize(row['dcat:byteSize'])}
-                                    </div>
-                                  )}
+                                  {row['dcat:byteSize'] !== undefined &&
+                                    row['dcat:byteSize'] > 0 && (
+                                      <div className="resources-item__navigation-file-size">
+                                        {getFileSize(row['dcat:byteSize'])}
+                                      </div>
+                                    )}
                                   <div className="resources-item__navigation-arrow" />
                                 </div>
                               </div>
@@ -314,7 +326,7 @@ const DatasetDetailPage: FunctionComponent = () => {
 
                   <DefinitionList>
                     <DefinitionListItem term="Doel">
-                      <StyledCustomHTMLBlock body={dataset['overheid:doel']} />
+                      <Markdown>{dataset['overheidds:doel']}</Markdown>
                     </DefinitionListItem>
                     {dataset['dcat:landingPage'] && (
                       <DefinitionListItem term="Meer informatie">
@@ -347,6 +359,11 @@ const DatasetDetailPage: FunctionComponent = () => {
                         {getTimePeriodLabel(dataset['dct:temporal'])}
                       </DefinitionListItem>
                     )}
+                    {dataset['ams:temporalUnit'] && (
+                      <DefinitionListItem term="Tijdseenheid">
+                        {getOptionLabel(dataset['ams:temporalUnit'], catalogFilters.temporalUnits)}
+                      </DefinitionListItem>
+                    )}
                     {dataset['ams:spatialDescription'] && (
                       <DefinitionListItem term="Omschrijving gebied">
                         {dataset['ams:spatialDescription']}
@@ -364,12 +381,15 @@ const DatasetDetailPage: FunctionComponent = () => {
                     )}
                     {dataset['overheid:grondslag'] && (
                       <DefinitionListItem term="Juridische grondslag">
-                        <StyledCustomHTMLBlock body={dataset['overheid:grondslag']} />
+                        <Markdown>{dataset['overheid:grondslag']}</Markdown>
                       </DefinitionListItem>
                     )}
                     {dataset['dct:language'] && (
                       <DefinitionListItem term="Taal">
-                        {getOptionLabel(dataset['dct:language'], catalogFilters.languages)}
+                        {getOptionLabel(
+                          dataset['dct:language'].split(':').pop() ?? '',
+                          catalogFilters.languages,
+                        )}
                       </DefinitionListItem>
                     )}
                     <DefinitionListItem term="Eigenaar">

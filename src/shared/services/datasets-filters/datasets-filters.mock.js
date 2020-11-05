@@ -892,7 +892,6 @@ const mockApiData = {
                 'gemeentebegroting',
                 'gemeentefonds',
                 'gemeentelijk monument',
-                'gemeentelijke beperkingenregistratie',
                 'gemeenteraad',
                 'gemeenteraadsleden',
                 'gemeenterekening',

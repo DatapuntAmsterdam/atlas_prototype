@@ -10,12 +10,12 @@ import resolveRedirects, {
   webHooks,
 } from './redirects'
 import matomoInstance from './matomo'
-import redirectToAddress from './utils/redirectToAddress'
+import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
 
 jest.useFakeTimers()
 
 jest.mock('./matomo')
-jest.mock('./utils/redirectToAddress')
+jest.mock('./utils/getVerblijfsobjectIdFromAddressQuery')
 
 const expectWithNewRoute = async (route, expectation, cb) => {
   jsdom.reconfigure({ url: route })
@@ -26,12 +26,12 @@ const expectWithNewRoute = async (route, expectation, cb) => {
   try {
     await resolveRedirects()
     cb(() => expect(window.location.replace))
-  } catch (e) {
-    // console.log(e) hide unexpected async errors from Jest
+  } catch {
+    // no-op
   }
+
   jest.runAllTimers()
 
-  // cb(expect(window.location.replace))
   window.location = location
 }
 
@@ -109,7 +109,9 @@ describe('redirects', () => {
 
   it('should redirect webhook routes', () => {
     trackMock.mockClear()
-    const redirectToAddressMock = redirectToAddress.mockReturnValue('theMockedId')
+    const redirectToAddressMock = getVerblijfsobjectIdFromAddressQuery.mockReturnValue(
+      'theMockedId',
+    )
 
     webHooks.forEach((route) => {
       expectWithNewRoute(`https://www.someurl.com${route.from}`, window.location.replace, (cb) => {
@@ -117,13 +119,6 @@ describe('redirects', () => {
         expect(redirectToAddressMock).toHaveBeenCalled()
         cb.toHaveBeenCalledWith(route.to)
       })
-
-      // expectWithCustomCallback(`https://www.someurl.com${route.from}`, route.load, (expect) =>
-      //   expect.toHaveBeenCalled(),
-      // )
-
-      // expect(redirectToAddressMock).toHaveBeenCalled()
-      // expect(trackMock).toHaveBeenCalledWith()
 
       jest.runAllTimers()
     })

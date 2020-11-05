@@ -42,11 +42,6 @@ function shallowRenderComponent() {
 }
 
 describe('RdGeoJson component', () => {
-  it('should call geoJson with expected arguments', () => {
-    shallowRenderComponent()
-    expect(leafletModule.Proj.geoJson.mock.calls).toMatchSnapshot()
-  })
-
   it('should call super.componentWillUnmount', () => {
     const component = shallowRenderComponent()
     component.instance().componentWillUnmount()

@@ -21,7 +21,6 @@ Object {
     "panelLayers": "panelLayers",
   },
   "panorama": "panorama",
-  "panoramaPreview": "panoramaPreview",
   "search": Object {
     "activeFilters": Array [],
     "page": 1,

@@ -1,0 +1,29 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://acc.api.data.amsterdam.nl/v1/bag/nummeraanduiding/"
+    },
+    "next": {
+      "href": null
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "_embedded": {
+    "nummeraanduiding": [
+      {
+        "verblijfsobjectId": "0363010000543926"
+      },
+      {
+        "verblijfsobjectId": "0363010000980408"
+      }
+    ]
+  },
+  "page": {
+    "number": 1,
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1
+  }
+}

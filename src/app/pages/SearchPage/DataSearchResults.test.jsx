@@ -23,7 +23,7 @@ describe('DataSearchResults', () => {
       />,
     )
 
-    expect(component.find('MoreResultsWhenLoggedIn').exists()).toBeFalsy()
+    expect(component.find('AuthAlert').exists()).toBeFalsy()
     expect(component.find('DataCard').exists()).toBeTruthy()
   })
 
@@ -40,7 +40,7 @@ describe('DataSearchResults', () => {
       />,
     )
 
-    expect(component.find('MoreResultsWhenLoggedIn').exists()).toBeFalsy()
+    expect(component.find('AuthAlert').exists()).toBeFalsy()
     expect(component.find('DataList').exists()).toBeTruthy()
   })
 
@@ -66,7 +66,7 @@ describe('DataSearchResults', () => {
       />,
     )
 
-    const unauthorizedMessage = component.find('MoreResultsWhenLoggedIn')
+    const unauthorizedMessage = component.find('AuthAlert')
 
     expect(unauthorizedMessage.exists()).toBeTruthy()
     expect(unauthorizedMessage.props()).toMatchObject({

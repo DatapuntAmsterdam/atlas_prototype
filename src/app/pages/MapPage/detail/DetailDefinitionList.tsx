@@ -1,26 +1,64 @@
-import { Link } from '@amsterdam/asc-ui'
-import React from 'react'
-import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
+import { Alert, CustomHTMLBlock, Link, ShowMoreShowLess } from '@amsterdam/asc-ui'
+import React, { FunctionComponent } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import styled from 'styled-components'
+import { LocationDescriptor } from 'history'
+import { DetailResultItemDefinitionList } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 
-export interface DetailDefinitionListProps {
-  entries: DetailResultItemDefinitionListEntry[]
+const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`
+  white-space: pre-line;
+`
+
+const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionList, 'entries'>> = ({
+  entries,
+}) => {
+  if (!entries) {
+    return null
+  }
+
+  return (
+    <DefinitionList data-testid="detail-definition-list">
+      {entries.map(({ term, description, href, alert, to }) => (
+        <DefinitionListItem term={term} key={term}>
+          {renderDescription(description, href, to)}
+          {alert && <Alert>{alert}</Alert>}
+        </DefinitionListItem>
+      ))}
+    </DefinitionList>
+  )
 }
 
-const DetailDefinitionList: React.FC<DetailDefinitionListProps> = ({ entries }) => (
-  <DefinitionList>
-    {entries.map(({ term, description, link }) => (
-      <DefinitionListItem term={term} key={term}>
-        {link ? (
-          <Link href={link} inList>
-            {description}
-          </Link>
-        ) : (
-          description
-        )}
-      </DefinitionListItem>
-    ))}
-  </DefinitionList>
-)
+function renderDescription(
+  description?: string | null,
+  href?: LocationDescriptor | null,
+  to?: string | { pathname: string; search?: string },
+) {
+  if (href) {
+    return (
+      <Link href={href} inList>
+        {description}
+      </Link>
+    )
+  }
+
+  if (to) {
+    return (
+      <Link as={RouterLink} to={to} href={href} inList>
+        {description}
+      </Link>
+    )
+  }
+
+  if (description && description.length > 300) {
+    return (
+      <ShowMoreShowLess maxHeight="200px">
+        <StyledCustomHTMLBlock body={description} />
+      </ShowMoreShowLess>
+    )
+  }
+
+  return description
+}
 
 export default DetailDefinitionList

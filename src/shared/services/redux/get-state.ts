@@ -12,7 +12,7 @@ declare global {
 const getState = () => {
   if (typeof window !== 'undefined') {
     // Unfortunately some components / services cannot use the useStore hook
-    return window.reduxStore.getState()
+    return window.reduxStore?.getState()
   }
   const store = useStore<RootState>()
   return store.getState()

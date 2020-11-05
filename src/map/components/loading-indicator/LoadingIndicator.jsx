@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
+// Todo: AfterBeta: can be removed
 const LoadingIndicator = ({ loading, showMapLink }) => {
   const loadingIndicatorClasses = classNames({
     'c-loading-indicator__container': true,

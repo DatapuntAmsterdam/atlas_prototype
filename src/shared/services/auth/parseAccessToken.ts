@@ -11,7 +11,7 @@ interface DecodedToken {
 function decodeToken(token: string): DecodedToken | null {
   try {
     return JSON.parse(window.atob(token.split('.')[1].replace('-', '+').replace('_', '/')))
-  } catch (e) {
+  } catch {
     return null
   }
 }

@@ -1,9 +1,0 @@
-<div>
-    <dp-partial-select ng-if="vm.apiData" id="vm.id" sub-type="vm.subType" api-data="vm.apiData" load-more-fn="vm.loadMore" partial="{{vm.partial}}" user="vm.user">
-    </dp-partial-select>
-
-    <p ng-if="vm.noResultMessage && vm.apiData.count === 0" class="c-detail__block"><dp-message>{{vm.noResultMessage}}</dp-message></p>
-
-    <dp-loading-indicator is-loading="vm.isLoading" use-delay="vm.useLoadingIndicatorDelay" show-inline="true">
-    </dp-loading-indicator>
-</div>
