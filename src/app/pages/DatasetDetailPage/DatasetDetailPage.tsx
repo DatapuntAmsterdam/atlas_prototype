@@ -8,10 +8,10 @@ import {
   CustomHTMLBlock,
   Link,
   Row,
-  themeSpacing,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
+import marked from 'marked'
 import React, { FunctionComponent, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
@@ -96,9 +96,6 @@ function getTimePeriodLabel(period: DcatTemporal) {
 
 // TODO: remove when Typography is aligned https://github.com/Amsterdam/amsterdam-styled-components/issues/727
 const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`
-  white-space: pre-wrap; /* Some content contains whitespace which needs to be preserved. */
-  margin-bottom: ${themeSpacing(4)};
-
   & * {
     @media screen and ${breakpoint('min-width', 'laptop')} {
       font-size: 16px !important;
@@ -106,6 +103,16 @@ const StyledCustomHTMLBlock = styled(CustomHTMLBlock)`
     }
   }
 `
+
+interface MarkdownProps {
+  children: string
+}
+
+const Markdown: FunctionComponent<MarkdownProps> = ({ children }) => {
+  const formattedContent = useMemo(() => marked(children), [children])
+
+  return <StyledCustomHTMLBlock body={formattedContent} />
+}
 
 const Content = styled.div`
   width: 100%;
@@ -182,8 +189,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                     )}
                   </h2>
                 </div>
-                <StyledCustomHTMLBlock body={dataset['dct:description']} />
-
+                <Markdown>{dataset['dct:description']}</Markdown>
                 <div>
                   {['gepland', 'in_onderzoek', 'niet_beschikbaar'].includes(
                     dataset['ams:status'],
@@ -320,7 +326,7 @@ const DatasetDetailPage: FunctionComponent = () => {
 
                   <DefinitionList>
                     <DefinitionListItem term="Doel">
-                      <StyledCustomHTMLBlock body={dataset['overheidds:doel']} />
+                      <Markdown>{dataset['overheidds:doel']}</Markdown>
                     </DefinitionListItem>
                     {dataset['dcat:landingPage'] && (
                       <DefinitionListItem term="Meer informatie">
@@ -375,7 +381,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                     )}
                     {dataset['overheid:grondslag'] && (
                       <DefinitionListItem term="Juridische grondslag">
-                        <StyledCustomHTMLBlock body={dataset['overheid:grondslag']} />
+                        <Markdown>{dataset['overheid:grondslag']}</Markdown>
                       </DefinitionListItem>
                     )}
                     {dataset['dct:language'] && (
