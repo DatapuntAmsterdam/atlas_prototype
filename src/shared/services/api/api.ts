@@ -1,8 +1,11 @@
-import { logout } from '../auth/auth'
+import { logout, getAuthHeaders } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
 import { AuthError, NotFoundError } from './errors'
 
+interface FetchOptions extends RequestInit {
+  searchParams?: UrlParams
+}
 // TODO: Refactor this type to only allow 'URLSearchParams'.
 export type UrlParams = URLSearchParams | { [key: string]: string }
 
@@ -11,7 +14,7 @@ const getAccessToken = () => getState()?.user?.accessToken
 export const fetchWithoutToken = <T = any>(uri: string): Promise<T> =>
   fetch(uri).then((response) => response.json())
 
-const handleErrors = (response: Response, reloadOnUnauthorized: boolean) => {
+const handleErrors = (response: Response, reloadOnUnauthorized = false) => {
   if (response.status >= 400 && response.status <= 401 && reloadOnUnauthorized) {
     logout()
   }
@@ -74,4 +77,28 @@ export const createUrlWithToken = (url: string, token: string) => {
   }
 
   return parsedUrl.toString()
+}
+
+export const fetchProxy = <T = any>(url: string, init: FetchOptions = {}): Promise<T> => {
+  const { headers, searchParams, ...otherOptions } = init
+  const requestHeaders = new Headers(headers)
+  const authHeaders = Object.entries(getAuthHeaders())
+
+  authHeaders.forEach(([name, value]) => {
+    if (value) requestHeaders.append(name, value)
+  })
+
+  const options: RequestInit = {
+    ...otherOptions,
+    headers: requestHeaders,
+  }
+
+  const fullUrl = new URL(url)
+  const params = new URLSearchParams(searchParams)
+
+  fullUrl.search = params.toString()
+
+  return fetch(fullUrl.toString(), options)
+    .then((response) => handleErrors(response))
+    .then((response) => response.json())
 }

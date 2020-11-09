@@ -131,7 +131,10 @@ export interface AutoSuggestSearchContent {
 
 export default async function autoSuggestSearch({ query, type }: SearchOptions) {
   const url = joinUrl([environment.API_ROOT, 'typeahead'])
-  const response = await fetchWithToken<TypeaheadItem[]>(url, { q: query.toLowerCase() })
+  const response = await fetchWithToken<TypeaheadItem[]>(url, {
+    q: query.toLowerCase(),
+    features: '1',
+  })
 
   return formatResponse(response, type)
 }
