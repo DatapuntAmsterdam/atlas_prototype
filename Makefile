@@ -4,12 +4,8 @@
 # PHONY prevents filenames being used as targets
 .PHONY: help info rebuild status start stop logs restart build shell
 
-# constants
-ENVIRONMENTS := development acceptance preproduction production
-
 # globals which can be overriden by setting make variables on the CLI
-IMAGE_TAG ?= latest
-ENVIRONMENT ?= development
+DEBUG ?= false
 
 _MAKEFILE_BUILTIN_VARIABLES := .DEFAULT_GOAL CURDIR MAKEFLAGS MAKEFILE_LIST SHELL
 
@@ -29,11 +25,11 @@ help: ## show this help screen
 info: ## dump Makefile variables to screen
 	@echo -e $(_MAKEFILE_VARIABLES)
 
-build: ## build Docker Compose images. Usage: `make ENVIRONMENT=preproduction build`
-	docker-compose build --build-arg DEPLOY_ENV=${ENVIRONMENT}
+build: ## build Docker Compose images
+	docker-compose build --build-arg DEBUG=${DEBUG}
 
 start: ## start single Docker Compose service
-	docker-compose up -d --remove-orphans
+	docker-compose up --remove-orphans
 
 stop: ## stop Docker Compose
 	docker-compose down -v --remove-orphans

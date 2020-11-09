@@ -4,13 +4,15 @@ services:
   atlas:
     build:
       context: .
-      args:
-        - DEPLOY_ENV=acceptance
-        - DOCKER_REGISTRY=docker-registry.data.amsterdam.nl:5000
-        - DOCKER_REGISTRY_PATH=/ois/
-        - DOCKER_IMAGE=atlas
-        - DOCKER_IMAGE_TAG=latest
+
     ports:
-      - "3001:80"
+      - "3000:80"
+
     environment:
+      - DEPLOY_ENV=production
       - TZ=Europe/Amsterdam
+      - API_ROOT=https://api.data.amsterdam.nl/
+      - CMS_ROOT=https://cms.data.amsterdam.nl/
+      - IIIF_ROOT=https://images.data.amsterdam.nl/
+      - GRAPHQL_ENDPOINT=https://api.data.amsterdam.nl/cms_search/graphql/
+      - ROOT=http://localhost:3000/

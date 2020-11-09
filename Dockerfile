@@ -21,16 +21,11 @@ RUN npm run generate:sitemap
 
 COPY modules /app/modules
 
-COPY .env-docker \
-    .babelrc \
-    .eslintrc.js \
-    .eslintignore \
-    .prettierrc \
-    .prettierignore \
+COPY .babelrc \
+    .browserslistrc \
     index.ejs \
     webpack.* \
-    tsconfig.json \
-    tsconfig.webpack.json \
+    tsconfig.* \
     favicon.png \
     jest.config.js \
     /app/
@@ -38,10 +33,8 @@ COPY .env-docker \
 COPY src /app/src
 COPY test /app/test
 
-ARG DEPLOY_ENV
-ENV DEPLOY_ENV ${DEPLOY_ENV}
-
-RUN echo "deploy_env: ${DEPLOY_ENV}"
+ARG DEBUG=false
+ENV DEBUG ${DEBUG}
 
 RUN npm run build
 

@@ -1,8 +1,13 @@
+.dependabot
 .env
 .git
+.github
 .sass-cache
-build
-node_modules/
+.storybook
+.yalc
+build/
 coverage/
 coverage-legacy/
 dist/
+docs/
+node_modules/

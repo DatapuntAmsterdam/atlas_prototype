@@ -17,6 +17,7 @@ const CHUNKS = {
 }
 
 const getTestRegex = (path: string) => new RegExp(`/node_modules/(${path})/`)
+const debugMode = process.env.DEBUG === 'true'
 
 export default [
   createConfig({ legacy: false, mode: 'production' }),
@@ -39,7 +40,13 @@ export default [
       minimizer: [
         new TerserPlugin({
           terserOptions: {
+            compress: {
+              drop_console: !debugMode,
+              drop_debugger: !debugMode,
+            },
             sourceMap: true,
+            mangle: !debugMode,
+            keep_fnames: debugMode,
           }
         }),
       ],
