@@ -159,7 +159,7 @@ export const overviewUrls = overviewPaths.map((pathName) => ({
 
 export const webHooks = [
   {
-    from: `/adres/zoek${window.location.search}`,
+    from: `/adres/zoek/${window.location.search}`,
     to: `/data/bag/verblijfsobject/`,
     load: getVerblijfsobjectIdFromAddressQuery,
   },
