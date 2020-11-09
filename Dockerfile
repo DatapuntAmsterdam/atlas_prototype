@@ -27,7 +27,6 @@ COPY .babelrc \
     webpack.* \
     tsconfig.* \
     favicon.png \
-    jest.config.js \
     /app/
 
 COPY src /app/src
