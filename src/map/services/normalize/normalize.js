@@ -5,6 +5,7 @@ import formatDate from '../../../app/utils/formatDate'
 import formatNumber from '../../../shared/services/number-formatter/number-formatter'
 import { NORMAL_PAND_STATUSSES, NORMAL_VBO_STATUSSES } from '../map-search/status-labels'
 import { fetchWithToken } from '../../../shared/services/api/api'
+import environment from '../../../environment'
 
 export const YEAR_UNKNOWN = 1005 // The API returns 1005 when a year is unknown
 
@@ -107,7 +108,16 @@ export const napPeilmerk = (result) => {
   return normalize(result, additionalFields)
 }
 
-export const adressenPand = (result) => {
+export const adressenPand = async (result) => {
+  const garbageContainersResult = await fetchWithToken(
+    `${environment.API_ROOT}v1/huishoudelijkafval/bag_object_loopafstand/`,
+    {
+      format: 'json',
+      bagObjectType: 'pand',
+      bagObjectId: result?.pandidentificatie,
+    },
+  )
+  const garbageContainers = garbageContainersResult?._embedded?.bag_object_loopafstand
   const additionalFields = {
     statusLevel:
       // eslint-disable-next-line no-nested-ternary
@@ -117,6 +127,7 @@ export const adressenPand = (result) => {
           : NotificationLevel.Attention
         : false,
     isNevenadres: !result.hoofdadres,
+    garbageContainers,
     year:
       result.oorspronkelijk_bouwjaar !== `${YEAR_UNKNOWN}`
         ? result.oorspronkelijk_bouwjaar

@@ -439,4 +439,5 @@ export type ExtraApiResults = {
   brkData?: PotentialApiResult
   verblijfsobjectData?: PotentialApiResult
   rollaagImage?: string
+  garbageContainers?: PotentialApiResult[]
 }
