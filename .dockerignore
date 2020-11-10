@@ -1,13 +1,18 @@
-.dependabot
-.env
-.git
-.github
-.sass-cache
-.storybook
-.yalc
-build/
-coverage/
-coverage-legacy/
-dist/
-docs/
-node_modules/
+## Ignore everything by default
+*
+
+
+## Allow specific files and folders
+!.babelrc
+!.browserslistrc
+!*.conf
+!favicon.png
+!index.ejs
+!modules/
+!package*
+!public/
+!scripts/
+!sitemap-generator/
+!src/
+!tsconfig.*
+!webpack.*
