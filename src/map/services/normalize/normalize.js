@@ -116,6 +116,7 @@ export const adressenPand = async (result) => {
       bagObjectId: result?.pandidentificatie,
     },
   )
+  // eslint-disable-next-line no-underscore-dangle
   const garbageContainers = garbageContainersResult?._embedded?.bag_object_loopafstand
   const additionalFields = {
     statusLevel:
