@@ -15,7 +15,8 @@ COPY package.json package-lock.json /app/
 RUN git config --global url."https://".insteadOf git:// && \
     git config --global url."https://github.com/".insteadOf git@github.com:
 
-RUN npm ci
+RUN npm ci && \
+    npm cache clean --force
 
 RUN npm run generate:sitemap
 
