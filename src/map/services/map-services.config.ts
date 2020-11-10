@@ -886,6 +886,15 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href, {
             displayFormatter: typeAddressDisplayFormatter,
           }),
+          {
+            type: DetailResultItemType.Table,
+            title: 'Afvalcontainers',
+            headings: [
+              { title: 'Type', key: 'fractieOmschrijving' },
+              { title: 'Loopafstand (Meter)', key: 'loopafstand' },
+            ],
+            values: result.garbageContainers as any,
+          },
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.pandidentificatie}`,

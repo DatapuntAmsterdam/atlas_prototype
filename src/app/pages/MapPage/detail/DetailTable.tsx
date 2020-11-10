@@ -1,25 +1,29 @@
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
+import { Paragraph } from '@amsterdam/asc-ui'
 import { DetailResultItemTable } from '../../../../map/types/details'
 import { Table, TableData, TableHeader, TableRow } from '../../../components/Table'
 
 const TableWrapper = styled.div`
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
 `
 
 export interface DetailTableProps {
   item: DetailResultItemTable
 }
 
-const DetailTable: FunctionComponent<DetailTableProps> = ({ item }) => (
+const DetailTable: FunctionComponent<DetailTableProps> = ({ item }) => item.values?.length ? (
   <TableWrapper data-testid="detail-table">
     <Table>
-      <TableRow header>
-        {item.headings.map((heading) => (
-          <TableHeader key={heading.key}>{heading.title}</TableHeader>
-        ))}
-      </TableRow>
+      <thead>
+        <TableRow header>
+          {item.headings.map((heading) => (
+            <TableHeader key={heading.key}>{heading.title}</TableHeader>
+          ))}
+        </TableRow>
+      </thead>
+      <tbody>
       {item.values?.map((value, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <TableRow key={index}>
@@ -28,8 +32,11 @@ const DetailTable: FunctionComponent<DetailTableProps> = ({ item }) => (
           ))}
         </TableRow>
       ))}
+      </tbody>
     </Table>
   </TableWrapper>
+) : (
+  <Paragraph>Geen resultaten gevonden</Paragraph>
 )
 
 export default DetailTable
