@@ -10,7 +10,7 @@ COPY sitemap-generator ./sitemap-generator
 
 COPY public ./public
 
-COPY package.json package-lock.json /app/
+COPY package.json package-lock.json ./
 
 RUN git config --global url."https://".insteadOf git:// && \
     git config --global url."https://github.com/".insteadOf git@github.com:
@@ -28,18 +28,16 @@ COPY .babelrc \
     webpack.* \
     tsconfig.* \
     favicon.png \
-    /app/
+    ./
 
-COPY src /app/src
-COPY test /app/test
+COPY src ./src
 
 ARG DEBUG=false
 ENV DEBUG ${DEBUG}
 
 RUN npm run build
 
-ARG BUILD_NUMBER=0
-RUN echo "build ${BUILD_NUMBER} - `date`" > ./dist/version.txt
+RUN echo "`date`" > ./dist/version.txt
 
 ################################
 # Deploy
