@@ -89,6 +89,35 @@ class MapLeaflet extends React.Component {
     }
   }
 
+  handleResize() {
+    const { onResizeEnd } = this.props
+    this.MapElement.invalidateSize()
+    onResizeEnd({
+      boundingBox: convertBounds(this.MapElement),
+    })
+    if (this.activeElement) {
+      this.fitActiveElement(getBounds(this.activeElement))
+    }
+  }
+
+  handleLoading(layer) {
+    const { _leaflet_id: leafletId } = layer
+
+    this.setState((state) => ({
+      pendingLayers: !state.pendingLayers.includes(leafletId)
+        ? [...state.pendingLayers, leafletId]
+        : state.pendingLayers,
+    }))
+  }
+
+  handleLoaded(layer) {
+    const { _leaflet_id: leafletId } = layer
+
+    this.setState((state) => ({
+      pendingLayers: state.pendingLayers.filter((layerId) => layerId !== leafletId),
+    }))
+  }
+
   onZoomEnd(event) {
     const { onZoomEnd } = this.props
     onZoomEnd({
@@ -120,17 +149,6 @@ class MapLeaflet extends React.Component {
 
   onClusterGroupBounds(bounds) {
     this.fitActiveElement(bounds)
-  }
-
-  handleResize() {
-    const { onResizeEnd } = this.props
-    this.MapElement.invalidateSize()
-    onResizeEnd({
-      boundingBox: convertBounds(this.MapElement),
-    })
-    if (this.activeElement) {
-      this.fitActiveElement(getBounds(this.activeElement))
-    }
   }
 
   checkIfActiveElementNeedsUpdate(element) {
@@ -180,24 +198,6 @@ class MapLeaflet extends React.Component {
         this.MapElement.panInsideBounds(bounds)
       }
     }
-  }
-
-  handleLoading(layer) {
-    const { _leaflet_id: leafletId } = layer
-
-    this.setState((state) => ({
-      pendingLayers: !state.pendingLayers.includes(leafletId)
-        ? [...state.pendingLayers, leafletId]
-        : state.pendingLayers,
-    }))
-  }
-
-  handleLoaded(layer) {
-    const { _leaflet_id: leafletId } = layer
-
-    this.setState((state) => ({
-      pendingLayers: state.pendingLayers.filter((layerId) => layerId !== leafletId),
-    }))
   }
 
   render() {
