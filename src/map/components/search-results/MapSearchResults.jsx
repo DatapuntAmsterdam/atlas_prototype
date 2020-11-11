@@ -2,7 +2,6 @@ import { Alert, Link } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import React from 'react'
-import NotificationLevel from '../../../app/models/notification'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
 import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
@@ -69,7 +68,7 @@ const MapSearchResults = ({
           {missingLayers && (
             <li>
               <Alert
-                level={NotificationLevel.Attention}
+                level="info"
                 dismissible
                 compact
               >{`Geen details beschikbaar van: ${missingLayers}`}</Alert>

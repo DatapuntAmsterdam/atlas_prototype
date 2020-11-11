@@ -24,7 +24,6 @@ import { getUserScopes } from '../../../../shared/ducks/user/user'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage'
 import LoginLink from '../../../components/Links/LoginLink/LoginLink'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
-import NotificationLevel from '../../../models/notification'
 import formatCount from '../../../utils/formatCount'
 import config, { AuthScope, DataSelectionType } from '../config'
 import MapContext from '../MapContext'
@@ -259,7 +258,7 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
         )}
       </Wrapper>
       {forbidden ? (
-        <StyledAlert level={NotificationLevel.Attention} dismissible>
+        <StyledAlert level="info" dismissible>
           <Paragraph>
             {userScopes.includes(AuthScope.BRK)
               ? `Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met
@@ -343,9 +342,7 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
                   )}
                 </AccordionContent>
                 {totalCount === 0 && (
-                  <StyledAlert level={NotificationLevel.Attention}>
-                    Er zijn geen resultaten
-                  </StyledAlert>
+                  <StyledAlert level="info">Er zijn geen resultaten</StyledAlert>
                 )}
               </StyledAccordion>
             </React.Fragment>

@@ -28,7 +28,6 @@ import { getUser, getUserScopes } from '../../../shared/ducks/user/user'
 import { SCOPES } from '../../../shared/services/auth/auth'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import DataSelectionActiveFilters from '../../containers/DataSelectionActiveFiltersContainer'
-import NotificationLevel from '../../models/notification'
 import { viewParam } from '../../pages/MapPage/query-params'
 import formatCount from '../../utils/formatCount'
 import useParam from '../../utils/useParam'
@@ -216,7 +215,7 @@ const DataSelection = () => {
               )}
               <div className={widthClass}>
                 {showMessageMaxPages && (
-                  <StyledAlert level={NotificationLevel.Attention} compact dismissible>
+                  <StyledAlert level="info" compact dismissible>
                     <Heading forwardedAs="h3">Deze pagina kan niet worden getoond</Heading>
                     <Paragraph>
                       {`Alleen de eerste ${MAX_AVAILABLE_PAGES} pagina's kunnen worden weergegeven
@@ -230,7 +229,7 @@ const DataSelection = () => {
                   </StyledAlert>
                 )}
                 {showMessageClusteredMarkers && (
-                  <StyledAlert level={NotificationLevel.Attention} compact>
+                  <StyledAlert level="info" compact>
                     <Paragraph>
                       {`Deze resultaten worden niet getoond op de kaart, omdat deze niet meer dan ${formatCount(
                         MAX_NUMBER_OF_CLUSTERED_MARKERS,
@@ -271,7 +270,7 @@ const DataSelection = () => {
           </div>
         )}
         {!isLoading && (authError || authScopeError) && (
-          <Alert level={NotificationLevel.Attention} compact dismissible>
+          <Alert level="info" compact dismissible>
             <Paragraph>
               {datasetScope === SCOPES['BRK/RSN']
                 ? `Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met

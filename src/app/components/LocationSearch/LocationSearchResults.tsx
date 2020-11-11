@@ -5,7 +5,6 @@ import React, { Fragment, FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
-import NotificationLevel from '../../models/notification'
 import LocationSearchList from './LocationSearchList'
 import { getUserScopes } from '../../../shared/ducks/user/user'
 import { getNumberOfResults } from '../../../shared/ducks/data-search/selectors'
@@ -61,7 +60,7 @@ const LocationSearchResults: FunctionComponent<Props> = ({ searchResults }) => {
                 {result.count === 0 && <span>{result.plural}</span>}
               </StyledHeading>
               {!!result.warning && (
-                <StyledAlert level={NotificationLevel.Attention} dismissible>
+                <StyledAlert level="info" dismissible>
                   {result.warning}
                 </StyledAlert>
               )}

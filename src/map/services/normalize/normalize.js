@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import NotificationLevel from '../../../app/models/notification'
 import formatCount from '../../../app/utils/formatCount'
 import formatDate from '../../../app/utils/formatDate'
 import formatNumber from '../../../shared/services/number-formatter/number-formatter'
@@ -110,12 +109,7 @@ export const napPeilmerk = (result) => {
 export const adressenPand = (result) => {
   const additionalFields = {
     statusLevel:
-      // eslint-disable-next-line no-nested-ternary
-      result.status
-        ? NORMAL_PAND_STATUSSES.includes(result.status)
-          ? ''
-          : NotificationLevel.Attention
-        : false,
+      result.status && !NORMAL_PAND_STATUSSES.includes(result.status) ? 'info' : undefined,
     isNevenadres: !result.hoofdadres,
     year:
       result.oorspronkelijk_bouwjaar !== `${YEAR_UNKNOWN}`
@@ -129,12 +123,7 @@ export const adressenPand = (result) => {
 export const adressenVerblijfsobject = (result) => {
   const additionalFields = {
     statusLevel:
-      // eslint-disable-next-line no-nested-ternary
-      result.status && result.status
-        ? NORMAL_VBO_STATUSSES.includes(result.status)
-          ? ''
-          : NotificationLevel.Error
-        : false,
+      result.status && !NORMAL_VBO_STATUSSES.includes(result.status) ? 'error' : undefined,
     isNevenadres: !result.hoofdadres,
     typeAdres: result.hoofdadres ? result.hoofdadres.type_adres : 'Nevenadres',
     gebruiksdoelen: ((result.gebruiksdoel && result.gebruiksdoel.slice(0, 5)) || [])

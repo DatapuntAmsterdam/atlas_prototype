@@ -93,7 +93,7 @@ const MapPanel = ({
             />
           )}
           {someLayersRequireZoom && (
-            <ZoomInAlert level="attention">
+            <ZoomInAlert level="info">
               <ZoomInAlertContent>
                 <Icon>
                   <Info />

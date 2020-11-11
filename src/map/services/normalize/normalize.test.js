@@ -1,4 +1,3 @@
-import NotificationLevel from '../../../app/models/notification'
 import formatDate from '../../../app/utils/formatDate'
 import {
   adressenPand,
@@ -183,7 +182,7 @@ describe('normalize', () => {
       output = adressenPand(input)
 
       expect(output).toMatchObject({
-        statusLevel: NotificationLevel.Attention,
+        statusLevel: 'info',
         year: input.oorspronkelijk_bouwjaar,
       })
 
@@ -194,7 +193,7 @@ describe('normalize', () => {
       output = adressenPand(input)
 
       expect(output).toMatchObject({
-        statusLevel: false,
+        statusLevel: undefined,
         year: 'onbekend',
       })
     })
@@ -218,7 +217,7 @@ describe('normalize', () => {
       output = adressenVerblijfsobject(input)
 
       expect(output).toMatchObject({
-        statusLevel: NotificationLevel.Error,
+        statusLevel: 'error',
         isNevenadres: false,
         typeAdres: input.hoofdadres.type_adres,
         size: 'onbekend',
@@ -235,7 +234,7 @@ describe('normalize', () => {
       output = adressenVerblijfsobject(input)
 
       expect(output).toMatchObject({
-        statusLevel: false,
+        statusLevel: undefined,
         isNevenadres: true,
         typeAdres: 'Nevenadres',
         size: `${mockedLocaleString} m²`, // mocked
