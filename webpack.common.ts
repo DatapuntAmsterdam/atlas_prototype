@@ -163,9 +163,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
               ? 'style-loader'
               : {
                   loader: MiniCssExtractPlugin.loader,
-                  options: {
-                    hmr: isDev,
-                  },
                 },
             {
               loader: 'css-loader',
@@ -277,7 +274,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         },
       }),
       new MiniCssExtractPlugin({
-        esModule: true,
         filename: isProd ? '[name].[contenthash].css' : '[name].css',
         chunkFilename: isProd ? '[name].[contenthash].css' : '[name].css',
       }),
