@@ -1,0 +1,26 @@
+{
+  "panelType": "Kadastraal subject",
+  "panelHeading": "Bakker & Toledo Holding B.V.",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Statutaire zetel": "OOSTZAAN",
+        "Rechtsvorm": "Besloten vennootschap",
+        "RSIN": "822730790",
+        "KvK nummer": "50417703",
+        "Woonadres": "Rietschoot 106 1511WN OOSTZAAN",
+        "Woonadres buitenland": "",
+        "Postadres": "",
+        "Postadres buitenland": "",
+        "Postadres postbus": ""
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Zakelijke rechten",
+      "items": ["OZN00C03755A0008 - Eigendom (recht van) (1/1)"]
+    }
+  ]
+}

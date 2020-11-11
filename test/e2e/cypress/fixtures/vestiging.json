@@ -1,0 +1,27 @@
+{
+  "panelType": "Vestiging",
+  "panelHeading": "Havom B.V. - Nieuwe Looiersstraat 45 3",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Eerste handelsnaam": "Havom B.V.",
+        "KvK-nummer": "01029509",
+        "Vestigingsnummer": "000003579875",
+        "Type vestiging": "Hoofdvestiging",
+        "Postadres": "Nieuwe Looiersstraat 45 3 1017VB Amsterdam",
+        "Bezoekadres": "Nieuwe Looiersstraat 45 3 1017VB Amsterdam",
+        "SBI-code en -omschrijving": "6420: Financiële holdings",
+        "Datum aanvang": "1 maart 1988",
+        "Soort bijzondere rechtstoestand": "",
+        "Coördinaten": "121414.00, 485978.00 (52.3606667, 4.8941516)"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Maatschappelijke activiteit",
+      "items": ["Havom B.V."]
+    }
+  ]
+}

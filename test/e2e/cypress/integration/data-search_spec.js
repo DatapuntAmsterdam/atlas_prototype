@@ -4,7 +4,7 @@ describe('Search data', () => {
   describe('Autosuggest', () => {
     beforeEach(() => {
       cy.server()
-      cy.route('/typeahead?q=dam').as('getResults')
+      cy.route('/typeahead?q=dam*').as('getResults')
       cy.route('/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
       cy.route('/jsonapi/node/list/**').as('jsonapi')
       cy.route('POST', '/cms_search/graphql/').as('graphql')

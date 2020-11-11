@@ -1,0 +1,40 @@
+{
+  "panelType": "Gebiedsgerichtwerken-gebied",
+  "panelHeading": "Noord-West (DX17)",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Code": "DX17"
+      }
+    },
+    {
+      "subheading": "Ligt in",
+      "items": {
+        "Stadsdeel": "Noord (N)"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Adressen",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Vestigingen",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Kadastrale objecten",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Feiten en cijfers over deze buurt",
+      "items": ["Ga naar Gebied in beeld"]
+    },
+    {
+      "subheading": "Buurten",
+      "items": ["Banne Noordoost (N70d)", "De Bongerd (N65d)"]
+    }
+  ]
+}

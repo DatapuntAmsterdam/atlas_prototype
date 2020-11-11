@@ -6,7 +6,7 @@ describe('Drawing', () => {
       cy.hidePopup()
       cy.visit('/kaart')
     })
-    it('Should draw multiple polygons on the map and delete one', () => {
+    it('Should draw multiple polygons on the map and delete them', () => {
       cy.server()
       cy.route('/dataselectie/bag/geolocation/*').as('getBagGeolocation')
       cy.route('/dataselectie/bag/?shape*').as('getBagShape')
@@ -48,10 +48,19 @@ describe('Drawing', () => {
       cy.get(MAP.mapContainer).click(860, 320)
       cy.get(MAP.mapContainer).click(805, 203)
       cy.get(MAP.mapContainer).click(750, 320)
-
       cy.get(DRAWING.polygon).should('have.length', 2).and('be.visible')
+
       // Delete first polygon
       cy.get(MAP.mapContainer).click(660, 320)
+      cy.get(DRAWING.buttonRemove).click()
+      cy.get(DRAWING.polygon).should('have.length', 1).and('be.visible')
+      cy.get(DRAWING.buttonDrawTool).first().click()
+      cy.get(DRAWING.clusterSymbol).should('not.be.visible')
+      cy.get(DRAWING.linkDrawresult).should('not.be.visible')
+
+      // Delete second polygon
+      cy.get(DRAWING.buttonDrawTool).click()
+      cy.get(MAP.mapContainer).click(860, 320)
       cy.get(DRAWING.buttonRemove).click()
       cy.get(DRAWING.polygon).should('have.length', 1).and('be.visible')
       cy.get(DRAWING.buttonDrawTool).first().click()

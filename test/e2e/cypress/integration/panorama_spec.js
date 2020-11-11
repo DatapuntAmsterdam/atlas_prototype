@@ -102,7 +102,7 @@ describe('panorama module', () => {
       cy.defineGeoSearchRoutes()
       cy.route('/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
       cy.route('/panorama/thumbnail?*').as('getPanoThumbnail')
-      cy.route('/typeahead?q=leidsegracht').as('getSuggestions')
+      cy.route('/typeahead?q=leidsegracht*').as('getSuggestions')
 
       cy.viewport(1000, 660)
       cy.get(PANORAMA.markerPane).find('img').should('exist').and('be.visible')
