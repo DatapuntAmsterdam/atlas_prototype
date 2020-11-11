@@ -45,8 +45,6 @@ export default [
               drop_debugger: !debugMode,
             },
             sourceMap: true,
-            mangle: !debugMode,
-            keep_fnames: debugMode,
           }
         }),
       ],
