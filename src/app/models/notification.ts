@@ -1,6 +1,6 @@
 export enum NotificationLevel {
-  Attention = 'attention',
-  Normal = 'normal',
+  Attention = 'info',
+  Normal = 'neutral',
   Warning = 'warning',
   Error = 'error',
 }

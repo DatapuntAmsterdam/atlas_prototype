@@ -211,7 +211,7 @@ exports[`MapSearchResults rendering should render results 1`] = `
         <Alert
           compact={true}
           dismissible={true}
-          level="attention"
+          level="info"
         >
           Geen details beschikbaar van: Layer 1, Layer 2
         </Alert>
@@ -408,7 +408,7 @@ exports[`MapSearchResults rendering should update results 2`] = `
         <Alert
           compact={true}
           dismissible={true}
-          level="attention"
+          level="info"
         >
           Geen details beschikbaar van: Layer 3
         </Alert>

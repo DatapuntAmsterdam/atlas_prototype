@@ -14,6 +14,7 @@ import DetailDefinitionList from './DetailDefinitionList'
 import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
 import { Definition } from '../../../../detail/services/glossary.constant'
 import Spacer from '../../../components/Spacer/Spacer'
+import NotificationLevel from '../../../models/notification'
 
 const StyledAlert = styled(Alert)`
   margin: ${themeSpacing(2, 0)};
@@ -42,7 +43,7 @@ const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta 
         icon={<Metadata />}
       />
       {open && (
-        <StyledAlert dismissible onDismiss={() => setOpen(false)} level="normal">
+        <StyledAlert dismissible onDismiss={() => setOpen(false)} level={NotificationLevel.Normal}>
           <Heading styleAs="h3" as="h6">
             Uitleg over {plural}
           </Heading>

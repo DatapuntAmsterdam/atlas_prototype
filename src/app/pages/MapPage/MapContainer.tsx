@@ -16,6 +16,7 @@ import MapContext, { initialState, MapContextProps, MapState } from './MapContex
 import MapPage from './MapPage'
 import { mapLayersParam, panoFullScreenParam, polygonsParam, polylinesParam } from './query-params'
 import buildLeafletLayers from './utils/buildLeafletLayers'
+import NotificationLevel from '../../models/notification'
 
 type Action =
   | { type: 'setPanelLayers'; payload: MapCollection[] }
@@ -106,7 +107,7 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
         setPanoFullScreen,
       }}
     >
-      <Alert level="attention" dismissible>
+      <Alert level={NotificationLevel.Attention} dismissible>
         <Heading as="h3">Let op: Deze nieuwe interactieve kaart is nog in aanbouw.</Heading>
         <Link darkBackground to={toMap()} as={RouterLink} inList>
           Naar de oude kaart
