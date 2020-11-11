@@ -71,9 +71,9 @@ export const meetboutTable = (data) =>
   data.map((item) =>
     Object.entries(item).reduce((acc, [key, value]) => {
       let newValue = value
-      // Numeric values
+      // Floating point values
       if (['hoogte_nap', 'zakking', 'zakkingssnelheid', 'zakking_cumulatief'].includes(key)) {
-        newValue = parseInt(value, 10).toFixed(3)
+        newValue = parseFloat(value).toFixed(3)
         if (newValue >= 0) {
           newValue = `+${newValue}`
         }

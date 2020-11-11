@@ -19,7 +19,10 @@ import {
   vastgoed,
   winkelgebied,
   YEAR_UNKNOWN,
+  meetboutTable,
 } from './normalize'
+
+import meetbouwMetingFixture from '../../../api/meetbouten/meting/fixture'
 
 jest.mock('../../../app/utils/formatDate')
 jest.mock('../../../shared/services/api/api')
@@ -680,6 +683,20 @@ ${input.gebruiksdoel[1]}`,
       expect(output).toMatchObject({
         regimes: [{ tijdstip: '00:00 - 12:00', dagen: [] }],
       })
+    })
+  })
+
+  describe('meetboutTable', () => {
+    it('returns converted floating point values', () => {
+      const metingData = meetbouwMetingFixture.results
+      const output = expect.arrayContaining([
+        expect.objectContaining({
+          zakking: expect.stringContaining('+'),
+          zakking_cumulatief: expect.stringContaining('+'),
+          zakkingssnelheid: expect.stringContaining('+'),
+        }),
+      ])
+      expect(meetboutTable(metingData)).toEqual(output)
     })
   })
 })
