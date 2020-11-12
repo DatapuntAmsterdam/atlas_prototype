@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga'
 import routes from '../app/routes'
 import rootReducer from '../reducers/root'
 import rootSaga from '../root-saga'
-import '../shared/ducks/error/error-message'
+// import '../shared/ducks/error/error-message'
 import { authenticateReload } from '../shared/ducks/user/user'
 import * as auth from '../shared/services/auth/auth'
 import urlParamsMiddleware from './middleware/addMetaToRoutesMiddleware'
@@ -16,7 +16,7 @@ import matomoMiddleware from './middleware/matomo/matomoMiddleware'
 import preserveUrlParametersMiddleware from './middleware/preserveUrlParametersMiddleware'
 import setQueriesFromStateMiddleware from './middleware/setQueriesFromStateMiddleware'
 import paramsRegistry from './params-registry'
-import './queryParameters'
+// import './queryParameters'
 
 const configureStore = (storybook = false, req) => {
   const routesMap = routes

@@ -2,6 +2,7 @@ import path from 'path'
 import TerserPlugin from 'terser-webpack-plugin'
 import { merge } from 'webpack-merge'
 import { createConfig, srcPath } from './webpack.common'
+import { GenerateSW, InjectManifest } from 'workbox-webpack-plugin'
 
 const CHUNKS = {
   MAP:
@@ -45,7 +46,7 @@ export default [
               drop_debugger: !debugMode,
             },
             sourceMap: true,
-          }
+          },
         }),
       ],
       splitChunks: {
@@ -128,5 +129,23 @@ export default [
         },
       },
     },
+    plugins: [
+      new GenerateSW({
+        mode: 'none',
+        swDest: 'sw.js',
+        clientsClaim: true,
+        skipWaiting: true,
+        inlineWorkboxRuntime: true,
+        navigateFallbackDenylist: [
+          // Exclude any URLs whose last part seems to be a file extension
+          // as they're likely a resource and not a SPA route.
+          // URLs containing a "?" character won't be denied as they're likely
+          // a route with query params (e.g. auth callbacks).
+          new RegExp('/[^/?]+\\.[^/]+$'),
+        ],
+        exclude: [/\.map$/, /manifest$/, /\.htaccess$/, /service-worker\.js$/, /index\.html$/],
+        cleanupOutdatedCaches: true,
+      }),
+    ],
   }),
 )

@@ -10,7 +10,7 @@ if (!config) {
 
 export default merge(config, {
   plugins: [new BundleAnalyzerPlugin()],
-  optimization: {
-    concatenateModules: false,
-  },
+  // optimization: {
+  //   concatenateModules: false,
+  // },
 })

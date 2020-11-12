@@ -62,6 +62,13 @@
         }
       }
     </style>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+        })
+      }
+    </script>
   </head>
   <body>
     <div id="root" class="root">
@@ -76,9 +83,9 @@
       <script type="module" src="<%= htmlWebpackPlugin.options.modernScripts[key] %>"></script>
     <% } %>
 
-    <% for (let key in htmlWebpackPlugin.options.legacyScripts) { %>
+    <!-- <% for (let key in htmlWebpackPlugin.options.legacyScripts) { %>
       <script nomodule src="<%= htmlWebpackPlugin.options.legacyScripts[key] %>"></script>
-    <% } %>
+    <% } %> -->
 
     <% for (let item of htmlWebpackPlugin.options.scripts) { %>
       <script src="<%= item %>"></script>
