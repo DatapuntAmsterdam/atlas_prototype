@@ -3,7 +3,6 @@ import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
-import NotificationLevel from '../../models/notification'
 import AuthAlert from '../Alerts/AuthAlert'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import ShareBar from '../ShareBar/ShareBar'
@@ -75,7 +74,7 @@ const LocationSearch: FunctionComponent = () => {
           </HeadingWrapper>
           {layerWarning && (
             <StyledAlert
-              level={NotificationLevel.Attention}
+              level="info"
               dismissible
             >{`Geen details beschikbaar van: ${layerWarning}`}</StyledAlert>
           )}

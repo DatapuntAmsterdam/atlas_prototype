@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/Amsterdam/atlas.git"
   },
-  "version": "3.20.0",
+  "version": "3.20.1",
   "scripts": {
     "build": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config ./webpack.prod.ts",
     "build-storybook": "build-storybook -c .storybook -o .sb",
@@ -30,8 +30,8 @@
     "@amsterdam/arm-core": "^0.4.0",
     "@amsterdam/arm-draw": "^0.4.0",
     "@amsterdam/arm-nontiled": "^0.4.0",
-    "@amsterdam/asc-assets": "^0.26.0",
-    "@amsterdam/asc-ui": "^0.26.0",
+    "@amsterdam/asc-assets": "^0.26.1",
+    "@amsterdam/asc-ui": "^0.26.1",
     "@amsterdam/react-maps": "^0.10.0",
     "@babel/runtime": "^7.12.5",
     "@datapunt/matomo-tracker-js": "0.3.1",

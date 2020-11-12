@@ -86,7 +86,7 @@ const AppBody = ({ visibilityError, bodyClasses, hasGrid, currentPage, embedPrev
           <AppContainer id={IDS.main} className="main-container">
             <NotificationAlert />
             {isIE && (
-              <StyledAlert level="attention">
+              <StyledAlert level="info">
                 <Paragraph>
                   <strong>Let op: </strong>Let op: deze website ondersteunt Internet Explorer niet
                   langer. We raden je aan een andere browser te gebruiken.

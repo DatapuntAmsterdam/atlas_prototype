@@ -48,7 +48,7 @@ const NotificationAlert: React.FC = () => {
         <StyledAlert
           dismissible
           heading={field_notification_title}
-          level={field_notification_type || 'attention'}
+          level={field_notification_type || 'info'}
           onDismiss={() => createCookie(COOKIE_NAME, '8')}
         >
           <Content dangerouslySetInnerHTML={{ __html: body.value }} />

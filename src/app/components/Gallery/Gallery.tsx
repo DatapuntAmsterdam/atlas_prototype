@@ -6,7 +6,6 @@ import styled, { css } from 'styled-components'
 import { SCOPES } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
 import { toConstructionFileViewer } from '../../../store/redux-first-router/actions'
-import NotificationLevel from '../../models/notification'
 import ActionButton from '../ActionButton/ActionButton'
 import { Bestand, BouwdossierAccess } from '../../../api/iiif-metadata/bouwdossier'
 import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
@@ -87,14 +86,14 @@ const Gallery: FunctionComponent<GalleryProps> = ({ allFiles, id, access, ...oth
       {files.length ? (
         <>
           {!hasRights && !hasExtendedRights ? (
-            <StyledAlert level={NotificationLevel.Attention} dismissible>
+            <StyledAlert level="info" dismissible>
               Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om bouw- en
               omgevingsdossiers te bekijken.
             </StyledAlert>
           ) : (
             restricted &&
             !hasExtendedRights && (
-              <StyledAlert level={NotificationLevel.Attention} dismissible>
+              <StyledAlert level="info" dismissible>
                 Medewerkers/ketenpartners van Gemeente Amsterdam met extra bevoegdheden kunnen
                 inloggen om alle bouw- en omgevingsdossiers te bekijken.
               </StyledAlert>
