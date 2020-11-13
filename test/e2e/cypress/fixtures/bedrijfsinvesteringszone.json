@@ -1,0 +1,19 @@
+{
+  "panelType": "Bedrijfsinvesteringszone",
+  "panelHeading": "Dam",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Naam": "Dam",
+        "Type": "gebruikers/eigenaren",
+        "Heffingsgrondslag": "heffing op basis van waardeklassen",
+        "Jaarlijkse heffing": "",
+        "Aantal heffingsplichtigen": "68",
+        "Website": "http://www.damamsterdam.nl",
+        "Verordening": "https://decentrale.regelgeving.overheid.nl/cvdr/xhtmloutput/Historie/Amsterdam/613336/CVDR613336_1.html"
+      }
+    }
+  ],
+  "linkLists": []
+}

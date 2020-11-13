@@ -308,7 +308,7 @@ describe('Check if all map layers are visible when selected', () => {
     cy.get(MAP_LAYERS.checkboxLogistiek).uncheck({ force: true }).should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
   })
-  it.only('Should check Ondergrond layers', () => {
+  it('Should check Ondergrond layers', () => {
     cy.checkMapLayerCategory('Ondergrond')
     cy.get(MAP.mapZoomIn).click()
 
@@ -474,6 +474,51 @@ describe('Check if all map layers are visible when selected', () => {
 
     cy.get(MAP_LAYERS.checkboxBelastingen).uncheck({ force: true }).should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
+  })
+})
+describe('Check map layers logged in', () => {
+  beforeEach(() => {
+    cy.server()
+    cy.hidePopup()
+  })
+  before(() => {
+    cy.login('EMPLOYEE')
+  })
+
+  after(() => {
+    cy.logout()
+  })
+  it('Should allow an employee to view map layers "Vestigingen"', () => {
+    cy.visit('/data/?modus=kaart&legenda=true')
+    cy.checkMapLayerCategory('Vestigingen')
+    cy.get(MAP.legendNotification).should('not.contain', 'Zichtbaar na inloggen')
+    cy.checkMapLayer('Bouw', MAP_LAYERS.checkboxVestigingBouw, 1)
+    cy.checkMapLayer('Cultuur, sport, recreatie', MAP_LAYERS.checkboxVestigingCultuur, 2)
+    cy.checkMapLayer(
+      'Financiële dienstv., verhuur van (on)roerend goed',
+      MAP_LAYERS.checkboxVestigingFinance,
+      3,
+    )
+    cy.checkMapLayer('Handel, vervoer, opslag', MAP_LAYERS.checkboxVestigingHandel, 4)
+    cy.checkMapLayer('Horeca', MAP_LAYERS.checkboxVestigingHoreca, 5)
+    cy.checkMapLayer('Informatie, telecommunicatie', MAP_LAYERS.checkboxVestigingIt, 6)
+    cy.checkMapLayer('Landbouw', MAP_LAYERS.checkboxVestigingLandbouw, 7)
+    cy.checkMapLayer('Overheid, onderwijs, zorg', MAP_LAYERS.checkboxVestigingOverheid, 8)
+    cy.checkMapLayer(
+      'Persoonlijke dienstverlening',
+      MAP_LAYERS.checkboxVestigingPersDiensverlening,
+      9,
+    )
+    cy.checkMapLayer('Productie, installatie, reparatie', MAP_LAYERS.checkboxVestigingProductie, 10)
+    cy.checkMapLayer(
+      'Zakelijke dienstverlening',
+      MAP_LAYERS.checkboxVestigingZakDienstverlening,
+      11,
+    )
+    cy.checkMapLayer('Overige', MAP_LAYERS.checkboxVestigingOverige, 12)
+    cy.get(MAP_LAYERS.checkboxVestigingen).uncheck({ force: true }).should('not.be.checked')
+    cy.get(MAP.imageLayer).should('not.exist')
+
   })
 })
 describe('Check if all map layers are fetched by an url', () => {

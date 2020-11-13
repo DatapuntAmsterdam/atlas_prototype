@@ -5,7 +5,6 @@ import {
   DATA_SELECTION_TABLE,
   DETAIL_PANEL,
   MAP,
-  MAP_LAYERS,
 } from '../support/selectors'
 
 describe('employee permissions', () => {
@@ -255,7 +254,7 @@ describe('employee permissions', () => {
     })
   })
   describe('Gebieden information', () => {
-    it('1. Panel bouwblok ', () => {
+    it('1. Should allow an employee to view "bouwblok"', () => {
       cy.route('/gebieden/bouwblok/*').as('getBouwblok')
       cy.route('/bag/v1.1/pand/?bouwblok*').as('getPand')
       cy.route('/meetbouten/meetbout/?bouwbloknummer*').as('getMeetbout')
@@ -271,7 +270,7 @@ describe('employee permissions', () => {
 
       cy.checkInfoBoxes(['Bouwblokken', 'Panden', 'Meetbouten'])
     })
-    it('2. panel buurt', () => {
+    it('2. Should allow an employee to view "buurt"', () => {
       cy.route('/gebieden/buurt/*').as('getBuurt')
       cy.route('/gebieden/bouwblok/?buurt=*').as('getBouwblok')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
@@ -293,7 +292,7 @@ describe('employee permissions', () => {
         'Kadastrale objecten',
       ])
     })
-    it('panel gebiedsgerichtwerken-gebied', () => {
+    it('3. Should allow an employee to view "gebiedsgerichtwerken-gebied"', () => {
       cy.route('/gebieden/gebiedsgerichtwerken/*').as('getGebiedsgerichtwerken')
       cy.route('/gebieden/buurt/?gebiedsgerichtwerken*').as('getBuurt')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
@@ -315,7 +314,7 @@ describe('employee permissions', () => {
         'Buurten',
       ])
     })
-    it('panel stadsdeel', () => {
+    it('4. Should allow an employee to view "stadsdeel"', () => {
       cy.route('/gebieden/stadsdeel/*').as('getstadsdeel')
       cy.route('gebieden/buurtcombinatie/?stadsdeel=*').as('getBuurtcombinatie')
       cy.route('/gebieden/gebiedsgerichtwerken/?stadsdeel*').as('getGebiedsgerichtwerken')
@@ -340,7 +339,7 @@ describe('employee permissions', () => {
         'Kadastrale objecten',
       ])
     })
-    it('panel buurtcombinatie', () => {
+    it('5. Should allow an employee to view "buurtcombinatie"', () => {
       cy.route('/gebieden/buurtcombinatie/*').as('getBuurtcombinatie')
       cy.route('/gebieden/buurt/?buurtcombinatie*').as('getBuurt')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
@@ -356,7 +355,7 @@ describe('employee permissions', () => {
 
       cy.checkInfoBoxes(['Wijken', 'Buurten', 'Adressen', 'Vestigingen', 'Kadastrale objecten'])
     })
-    it('panel grootstedelijk gebied', () => {
+    it('6. Should allow an employee to view "grootstedelijk gebied"', () => {
       cy.route('/gebieden/grootstedelijkgebied/*').as('getGrootstedelijkgebied')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
       cy.visit('data/gebieden/grootstedelijkgebied/idzuidelijke-ijoever_od/')
@@ -369,11 +368,11 @@ describe('employee permissions', () => {
 
       cy.checkInfoBoxes(['Grootstedelijke gebieden'])
     })
-    it.only('panel unesco', () => {
+    it('7. Should allow an employee to view "unesco"', () => {
       cy.route('/gebieden/unesco/kernzone/').as('getUnesco')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
       cy.visit('data/gebieden/unesco/idkernzone/?lagen=culterf-unesco%3A1&zoom=9')
-      cy.wait('getUnesco')
+      cy.wait('@getUnesco')
       cy.wait('@getPanorama')
 
       cy.checkListItems('../fixtures/unesco.json')
@@ -383,68 +382,119 @@ describe('employee permissions', () => {
       cy.checkInfoBoxes(['UNESCO'])
     })
   })
-  describe('Geo information', () => {
-    it('6. Should allow an employee to view map layers', () => {
-      cy.visit(urls.map)
-      cy.get(MAP.toggleMapPanel).click()
-      cy.get(MAP_LAYERS.checkboxGebiedsindeling).check({ force: true })
-      cy.get(MAP_LAYERS.checkboxHoogte).check({ force: true })
-      cy.get(MAP_LAYERS.checkboxVestigingen).check({ force: true })
-      cy.get(MAP.legendNotification).should('not.contain', values.legendPermissionNotification)
-    })
-    it('7C. Should show an employee all information in a Geo search', () => {
-      cy.defineGeoSearchRoutes()
-      cy.route('/bag/v1.1/pand/*').as('getPand')
-      cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
-      cy.route('/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
-      cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen')
+  describe('Monumenten en complexen', () => {
+    it('1. Should show an employee all information in "monument"', () => {
+      cy.route('/monumenten/monumenten/*').as('getMonument')
+      cy.route('/monumenten/situeringen/?monument_id=*').as('getSitueringen')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
 
-      cy.visit(urls.geoSearch)
-
-      cy.waitForGeoSearch()
-      cy.wait('@getPand')
-      cy.wait('@getMonumenten')
-      cy.wait('@getNummeraanduidingen')
-      cy.wait('@getVestigingen')
-      cy.wait('@getPanorama')
-
-      cy.get(DATA_SEARCH.infoNotification).should('not.exist')
-      cy.get('h2').contains(values.vestigingen).should('be.visible')
-      cy.get(MAP.toggleFullScreen).click()
-      cy.waitForGeoSearch()
-      cy.get(MAP.mapSearchResultsCategoryHeader)
-        .contains(values.vestigingen, { timeout: 30000 })
-        .should('be.visible')
-    })
-    it('8A. Should show an employee all information in "monument"', () => {
-      cy.route('/monumenten/monumenten/*').as('getMonument')
-      cy.route('/monumenten/complexen/**').as('getComplex')
-      cy.route('/monumenten/situeringen/?monument_id=*').as('getSitueringen')
-
-      cy.visit(urls.monument)
+      cy.visit('data/monumenten/monumenten/id3cf53160-d8bf-4447-93ba-1eb03a35cfe4/')
 
       cy.wait('@getMonument')
-      cy.wait('@getComplex')
       cy.wait('@getSitueringen')
-      cy.get(DATA_DETAIL.heading).contains('Museumtuin met hekwerken en bouwfragmenten')
-      cy.get(DATA_SEARCH.infoNotification).should('not.exist')
-      cy.contains(values.redengevendeOmschrijving)
-      cy.get(MAP.toggleFullScreen).click()
-      cy.get(DATA_SEARCH.mapDetailResultItem).contains(values.type)
+      cy.wait('@getPanorama')
+
+      cy.checkListItems('../fixtures/monument.json')
+
+      cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
+
+      cy.checkInfoBoxes(['Monumenten', 'Complexen', 'Panden', 'Adressen'])
     })
 
-    it('8B. Should show an employee all information in "monument complex"', () => {
+    it('2. Should show an employee all information in "monument complex"', () => {
       cy.route('/monumenten/complexen/*').as('getComplex')
       cy.route('/monumenten/monumenten/?complex_id=*').as('getMonumenten')
 
-      cy.visit(urls.monumentComplex)
+      cy.visit('data/monumenten/complexen/id182a9861-4052-4127-8300-6450cd75b6a5')
 
       cy.wait('@getComplex')
       cy.wait('@getMonumenten')
-      cy.get(DATA_DETAIL.heading).contains('Hortus Botanicus').should('be.visible')
-      cy.get(DATA_SEARCH.infoNotification).should('not.exist')
-      cy.contains(values.beschrijving)
+
+      cy.checkListItems('../fixtures/complex.json')
+
+      cy.checkInfoBoxes(['Complexen', 'Monumenten'])
+    })
+  })
+  describe('Vsd', () => {
+    it('1. panel bedrijfinvesteringszone', () => {
+      cy.route('/vsd/biz/*').as('getBiz')
+      cy.route('/panorama/thumbnail?*').as('getPanorama')
+
+      cy.visit('data/vsd/biz/id11/?lagen=wnklgeb-biz%3A1')
+
+      cy.wait('@getBiz')
+      cy.wait('@getPanorama')
+
+      cy.checkListItems('../fixtures/bedrijfsinvesteringszone.json')
+
+      cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
+    })
+    it('2. panel bekendmaking', () => {
+      cy.route('/vsd/bekendmakingen/4115/').as('getBekendmaking')
+      cy.route('/panorama/thumbnail?*').as('getPanorama')
+
+      cy.visit('data/vsd/bekendmakingen/id4115/')
+
+      cy.wait('@getBekendmaking')
+      cy.wait('@getPanorama')
+
+      cy.checkListItems('../fixtures/bekendmaking.json')
+
+      cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
+    })
+    it('3. panel winkelgebied', () => {
+      cy.route('/vsd/winkgeb/3/').as('getWinkelgebied')
+      cy.route('/panorama/thumbnail?*').as('getPanorama')
+
+      cy.visit('data/vsd/winkgeb/id3/')
+
+      cy.wait('@getWinkelgebied')
+      cy.wait('@getPanorama')
+
+      cy.checkListItems('../fixtures/winkelgebied.json')
+
+      cy.contains(
+        'De grenzen van dit winkelgebied zijn indicatief. Er kunnen geen rechten aan worden ontleend.',
+      ).should('be.visible')
+      cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
+    })
+    it('4. panel evenement', () => {
+      cy.route('/vsd/evenementen/*').as('getEvenement')
+
+      cy.visit('data/vsd/evenementen/id65438/')
+
+      cy.wait('@getEvenement')
+
+      cy.checkListItems('../fixtures/evenement.json')
+
+      cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
+    })
+    it('5. panel oplaadpunten', () => {
+      cy.route('/vsd/oplaadpunten/*').as('getOplaadpunt')
+      cy.route('/panorama/thumbnail?*').as('getPanorama')
+
+      cy.visit('data/vsd/oplaadpunten/id4422/')
+
+      cy.wait('@getOplaadpunt')
+      cy.wait('@getPanorama')
+
+      cy.checkListItems('../fixtures/oplaadpunt.json')
+
+      cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
+    })
+    it('panel parkeerzones', () => {
+      cy.visit('')
+    })
+    it('panel parkeerzones uitzondering', () => {
+      cy.visit('data/vsd/parkeerzones_uitz/id23')
+    })
+    it('panel reclamebelasting', () => {
+      cy.visit('data/vsd/reclamebelasting/id2/')
+    })
+    it('panel vastgoed', () => {
+      cy.visit('data/vsd/vastgoed/id1122/')
+    })
+  })
     })
   })
 })

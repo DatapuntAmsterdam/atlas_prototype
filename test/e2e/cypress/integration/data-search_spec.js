@@ -155,4 +155,43 @@ describe('Search data', () => {
       cy.get(DATA_SEARCH.autoSuggestHeader).should('have.length', 1).and('have.text', 'Artikelen')
     })
   })
+  describe('Data search with employee permissions', () => {
+    beforeEach(() => {
+      cy.server()
+      cy.hidePopup()
+    })
+    before(() => {
+      cy.login('EMPLOYEE')
+    })
+
+    after(() => {
+      cy.logout()
+    })
+    it('Should show an employee all information in a Geo search', () => {
+      cy.defineGeoSearchRoutes()
+      cy.route('/bag/v1.1/pand/*').as('getPand')
+      cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
+      cy.route('/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
+      cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen')
+      cy.route('/panorama/thumbnail?*').as('getPanorama')
+
+      cy.visit('data/geozoek?locatie=52.3736166%2C4.8943521')
+
+      cy.waitForGeoSearch()
+      cy.wait('@getPand')
+      cy.wait('@getMonumenten')
+      cy.wait('@getNummeraanduidingen')
+      cy.wait('@getVestigingen')
+      cy.wait('@getPanorama')
+
+      cy.get(DATA_SEARCH.infoNotification).should('not.exist')
+      cy.get('h2').contains('Vestigingen').should('be.visible')
+      cy.get(MAP.toggleFullScreen).click()
+      cy.waitForGeoSearch()
+      cy.get(MAP.mapSearchResultsCategoryHeader)
+        .contains('Vestigingen', { timeout: 30000 })
+        .should('be.visible')
+      cy.contains('Louis Vuitton')
+    })
+  })
 })
