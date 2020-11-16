@@ -495,6 +495,4 @@ describe('employee permissions', () => {
       cy.visit('data/vsd/vastgoed/id1122/')
     })
   })
-    })
-  })
 })
