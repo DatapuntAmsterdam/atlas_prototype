@@ -279,8 +279,6 @@ describe('employee permissions', () => {
       cy.wait('@getBouwblok')
       cy.wait('@getPanorama')
 
-      cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
-
       cy.checkListItems('../fixtures/buurt.json')
       cy.checkLinkItems('../fixtures/buurt.json')
 
@@ -291,6 +289,8 @@ describe('employee permissions', () => {
         'Vestigingen',
         'Kadastrale objecten',
       ])
+
+      cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
     })
     it('3. Should allow an employee to view "gebiedsgerichtwerken-gebied"', () => {
       cy.route('/gebieden/gebiedsgerichtwerken/*').as('getGebiedsgerichtwerken')
@@ -369,9 +369,9 @@ describe('employee permissions', () => {
       cy.checkInfoBoxes(['Grootstedelijke gebieden'])
     })
     it('7. Should allow an employee to view "unesco"', () => {
-      cy.route('/gebieden/unesco/kernzone/').as('getUnesco')
+      cy.route('/gebieden/unesco/*').as('getUnesco')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
-      cy.visit('data/gebieden/unesco/idkernzone/?lagen=culterf-unesco%3A1&zoom=9')
+      cy.visit('data/gebieden/unesco/idbufferzone/')
       cy.wait('@getUnesco')
       cy.wait('@getPanorama')
 

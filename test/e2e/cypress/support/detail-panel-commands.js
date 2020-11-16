@@ -37,40 +37,30 @@ Cypress.Commands.add('checkListItems', (fixturePath) => {
   cy.fixture(fixturePath).then((json) => {
     // Check panel type and subject of the panel
     cy.checkPanelHeader(fixturePath)
-
     // Check for every itemlist all key-value pairs
-    const amountOfLists = Object.keys(json.definitionLists).length
-    let itemNumber
-    let listNumber
-    for (listNumber = 0; listNumber < amountOfLists; listNumber += 1) {
+    // eslint-disable-next-line no-unused-vars
+    Object.entries(json.definitionLists).forEach(([keyA, valueA], indexA) => {
       // Check subheader of a itemlist
-      cy.checkSubheader(fixturePath, listNumber)
-      const keys = Object.keys(json.definitionLists[listNumber].items)
-      const values = Object.values(json.definitionLists[listNumber].items)
-
-      for (itemNumber = 0; itemNumber < values.length; itemNumber += 1) {
-        // check if key-value pair is visible in the UI
-        cy.checkTermAndDefinition(listNumber, keys[itemNumber], values[itemNumber])
-      }
-    }
+      cy.checkSubheader(fixturePath, indexA)
+      Object.entries(valueA.items).forEach(([keyB, valueB]) => {
+        // Check if key-value pair is visible in the UI
+        cy.checkTermAndDefinition(indexA, keyB, valueB)
+      })
+    })
   })
 })
 
 Cypress.Commands.add('checkLinkItems', (fixturePath) => {
   cy.fixture(fixturePath).then((json) => {
     // Check for every itemlist all key-value pairs
-    const amountOfLists = Object.keys(json.linkLists).length
-    let itemNumber
-    let listNumber
-    for (listNumber = 0; listNumber < amountOfLists; listNumber += 1) {
+    Object.entries(json.linkLists).forEach(([keyA, valueA], indexA) => {
       // Check subheader of a itemlist
-      cy.checkSubheaderLinkList(fixturePath, listNumber)
-      const values = Object.values(json.linkLists[listNumber].items)
-
-      for (itemNumber = 0; itemNumber < values.length; itemNumber += 1) {
-        cy.get(DATA_DETAIL.linkList).should('contain', values[itemNumber])
-      }
-    }
+      cy.checkSubheaderLinkList(fixturePath, indexA)
+      Object.entries(valueA.items).forEach(([keyB, valueB], indexB) => {
+        // Check if key-value pair is visible in the UI
+        cy.get(DATA_DETAIL.linkList).should('contain', valueB[indexB])
+      })
+    })
   })
 })
 
@@ -96,7 +86,9 @@ Cypress.Commands.add('checkSubheaderLinkList', (fixturePath, linklistNumber) => 
 
 Cypress.Commands.add('checkPanelHeader', (fixturePath) => {
   cy.fixture(fixturePath).then((json) => {
-    cy.get(DETAIL_PANEL.panelTypeTitle).contains(json.panelType).should('be.visible')
-    cy.get(DETAIL_PANEL.panelSubject).contains(json.panelHeading).should('be.visible')
+    if (json.panelHeading) {
+      cy.get(DETAIL_PANEL.panelTypeTitle).contains(json.panelType).should('be.visible')
+      cy.get(DETAIL_PANEL.panelSubject).contains(json.panelHeading).should('be.visible')
+    }
   })
 })
