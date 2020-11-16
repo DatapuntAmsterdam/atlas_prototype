@@ -58,9 +58,9 @@ Cypress.Commands.add('checkLinkItems', (fixturePath) => {
       // Check subheader of a itemlist
       cy.checkSubheaderLinkList(fixturePath, indexA)
       // eslint-disable-next-line no-unused-vars
-      Object.entries(valueA.items).forEach(([keyB, valueB], indexB) => {
+      Object.entries(valueA.items).forEach(([keyB, valueB]) => {
         // Check if key-value pair is visible in the UI
-        cy.get(DATA_DETAIL.linkList).should('contain', valueB[indexB])
+        cy.get(DATA_DETAIL.linkList).should('contain', valueB)
       })
     })
   })
