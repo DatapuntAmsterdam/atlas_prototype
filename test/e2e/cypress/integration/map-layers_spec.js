@@ -518,7 +518,6 @@ describe('Check map layers logged in', () => {
     cy.checkMapLayer('Overige', MAP_LAYERS.checkboxVestigingOverige, 12)
     cy.get(MAP_LAYERS.checkboxVestigingen).uncheck({ force: true }).should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
-
   })
 })
 describe('Check if all map layers are fetched by an url', () => {
