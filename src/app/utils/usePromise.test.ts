@@ -100,8 +100,8 @@ describe('usePromise', () => {
       usePromise(() => nextNumber(), [retryCount]),
     )
 
-    await waitForNextUpdate()
     rerender()
+    await waitForNextUpdate()
 
     expect(result.current).toEqual({
       status: PromiseStatus.Fulfilled,

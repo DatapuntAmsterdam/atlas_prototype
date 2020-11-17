@@ -28,7 +28,7 @@ export interface PromiseRejectedResult {
 export type PromiseFactoryFn<T> = () => Promise<T>
 
 /**
- * Takes a function that creates a promise and returns it's resolved or rejected value together with the status of the promise.
+ * Takes a function that creates a promise and returns its resolved or rejected value together with the status of the promise.
  * When passing in a promise make sure that the dependencies are passed as well:
  *
  * ```ts
