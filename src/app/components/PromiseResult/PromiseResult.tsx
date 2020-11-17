@@ -24,7 +24,7 @@ export interface PageTemplateProps<T> {
 
 const PromiseResult: <T>(props: PageTemplateProps<T>) => ReactElement | null = ({
   factory,
-  deps = [],
+  deps,
   errorMessage,
   children,
 }) => {
