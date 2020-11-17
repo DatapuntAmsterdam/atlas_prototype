@@ -38,8 +38,7 @@ export default [createConfig({ legacy: false, mode: 'production', singleBuild: t
         chunkIds: 'named',
         runtimeChunk: false,
         splitChunks: {
-          maxAsyncRequests: 15,
-          maxInitialRequests: 15,
+          maxInitialRequests: 20,
           chunks: 'async',
           maxSize: 125000,
           minChunks: 1,
@@ -69,7 +68,7 @@ export default [createConfig({ legacy: false, mode: 'production', singleBuild: t
             {
               // All responses from the static assets server
               // Can be cache for a longer period of time, because of the nature of those assets
-              urlPattern: /.+static\.amsterdam\.nl\/.+$/,
+              urlPattern: /static\.amsterdam\.nl\/.+$/,
               handler: 'CacheFirst',
               options: {
                 cacheableResponse: {
@@ -83,7 +82,7 @@ export default [createConfig({ legacy: false, mode: 'production', singleBuild: t
             },
             {
               // Exclude all requests to the tracking script
-              urlPattern: /.+analytics\.data\.amsterdam\.nl\/(?!matomo\.php).+$/,
+              urlPattern: /analytics\.data\.amsterdam\.nl\/(?!matomo\.php).+$/,
               handler: 'CacheFirst',
               options: {
                 cacheableResponse: {
@@ -97,7 +96,7 @@ export default [createConfig({ legacy: false, mode: 'production', singleBuild: t
             },
             {
               // All images coming from the CMS since they have `cache-control: no-cache` headers and have relatively large file sizes
-              urlPattern: /.+cms\.data\.amsterdam\.nl\/[^.]+\.(?:png|jpg|jpeg|svg)$/,
+              urlPattern: /cms\.data\.amsterdam\.nl\/[^.]+\.(png|jpg|jpeg|svg)$/,
               handler: 'CacheFirst',
               options: {
                 cacheableResponse: {
@@ -112,7 +111,7 @@ export default [createConfig({ legacy: false, mode: 'production', singleBuild: t
             },
             {
               // All responses from the CMS, apart from the notification endpoint
-              urlPattern: /.+cms\.data\.amsterdam.nl\/jsonapi\/node\/(?!notification).+$/,
+              urlPattern: /cms\.data\.amsterdam.nl\/jsonapi\/node\/(?!notification).+$/,
               handler: 'StaleWhileRevalidate',
               options: {
                 cacheableResponse: {
@@ -126,7 +125,7 @@ export default [createConfig({ legacy: false, mode: 'production', singleBuild: t
             },
             {
               // Every call to the API, except oAuth2
-              urlPattern: /.+api\.data\.amsterdam\.nl\/(?!oauth2).+$/,
+              urlPattern: /api\.data\.amsterdam\.nl\/(?!oauth2).+$/,
               handler: 'StaleWhileRevalidate',
               options: {
                 cacheableResponse: {
