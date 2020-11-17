@@ -1,7 +1,7 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import React, { Fragment, FunctionComponent, useContext, useMemo, useState } from 'react'
+import React, { Fragment, FunctionComponent, useContext, useState } from 'react'
 import styled, { css } from 'styled-components'
 import {
   fetchDetailData,
@@ -17,7 +17,12 @@ import {
   DetailResultItemType,
   PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
+import { AuthError } from '../../../../shared/services/api/errors'
+import AuthAlert from '../../../components/Alerts/AuthAlert'
+import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
+import Spacer from '../../../components/Spacer/Spacer'
+import useAuthScope from '../../../utils/useAuthScope'
 import useParam from '../../../utils/useParam'
 import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
@@ -27,11 +32,6 @@ import DetailHeading from './DetailHeading'
 import DetailInfoBox, { InfoBoxProps } from './DetailInfoBox'
 import DetailLinkList from './DetailLinkList'
 import DetailTable from './DetailTable'
-import { AuthError } from '../../../../shared/services/api/errors'
-import useAuthScope from '../../../utils/useAuthScope'
-import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
-import AuthAlert from '../../../components/Alerts/AuthAlert'
-import Spacer from '../../../components/Spacer/Spacer'
 
 interface DetailPanelProps {
   detailUrl: string
@@ -106,7 +106,8 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
   const [, setDetailUrl] = useParam(detailUrlParam)
   const { setDetailFeature } = useContext(MapContext)
   const { isUserAuthorized } = useAuthScope()
-  const promise = useMemo(async () => {
+
+  async function getDetailData() {
     const detailParams = parseDetailPath(detailUrl)
     const serviceDefinition = getServiceDefinition(`${detailParams.type}/${detailParams.subType}`)
 
@@ -141,10 +142,10 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
       showAuthAlert: !userIsAuthorized,
       authExcludedInfo: serviceDefinition.authExcludedInfo,
     }
-  }, [detailUrl])
+  }
 
   return (
-    <PromiseResult promise={promise}>
+    <PromiseResult factory={() => getDetailData()} deps={[detailUrl]}>
       {({ value }) => (
         <MapPanelContent
           title={value?.data.subTitle || 'Detailweergave'}
@@ -299,10 +300,9 @@ interface PaginatedDataProps {
 
 const PaginatedData: FunctionComponent<PaginatedDataProps> = ({ item }) => {
   const [pageSize, setPaginatedUrl] = useState(item.pageSize)
-  const promise = useMemo(() => item.getData(undefined, pageSize), [pageSize])
 
   return (
-    <PromiseResult promise={promise}>
+    <PromiseResult factory={() => item.getData(undefined, pageSize)} deps={[pageSize]}>
       {(result) => {
         if (!result.value) {
           return null

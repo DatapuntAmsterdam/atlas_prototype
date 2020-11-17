@@ -126,8 +126,8 @@ interface DatasetDetailPageParams {
 const DatasetDetailPage: FunctionComponent = () => {
   const { trackEvent } = useMatomo()
   const { id } = useParams<DatasetDetailPageParams>()
-  const datasetResult = usePromise(useMemo(() => getDatasetById(id), [id]))
-  const datasetFiltersResult = usePromise(useMemo(() => getDatasetFilters(), []))
+  const datasetResult = usePromise(() => getDatasetById(id), [id])
+  const datasetFiltersResult = usePromise(() => getDatasetFilters(), [])
   const userScopes = useSelector(getUserScopes)
   const canEdit = useMemo(() => userScopes.some((scope) => dcatdScopes.includes(scope)), [
     userScopes,

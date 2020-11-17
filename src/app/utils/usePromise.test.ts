@@ -4,7 +4,7 @@ import usePromise, { PromiseStatus } from './usePromise'
 describe('usePromise', () => {
   it('should return the pending status while the promise is in-flight', () => {
     const promise = new Promise(() => {})
-    const { result } = renderHook(() => usePromise(promise))
+    const { result } = renderHook(() => usePromise(() => promise))
 
     expect(result.current).toEqual({
       status: PromiseStatus.Pending,
@@ -14,7 +14,7 @@ describe('usePromise', () => {
   it('should return the value when the promise is resolved', async () => {
     const value = 'foo'
     const promise = Promise.resolve(value)
-    const { result, waitForNextUpdate } = renderHook(() => usePromise(promise))
+    const { result, waitForNextUpdate } = renderHook(() => usePromise(() => promise))
 
     await waitForNextUpdate()
 
@@ -27,7 +27,7 @@ describe('usePromise', () => {
   it('should return the error when the promise is rejected', async () => {
     const error = new Error('Whoopsie')
     const promise = Promise.reject(error)
-    const { result, waitForNextUpdate } = renderHook(() => usePromise(promise))
+    const { result, waitForNextUpdate } = renderHook(() => usePromise(() => promise))
 
     await waitForNextUpdate()
 
@@ -42,7 +42,9 @@ describe('usePromise', () => {
     const last = createPromiseWithCallbacks()
     let currentPromise = first.promise
 
-    const { result, rerender, waitForNextUpdate } = renderHook(() => usePromise(currentPromise))
+    const { result, rerender, waitForNextUpdate } = renderHook(() =>
+      usePromise(() => currentPromise),
+    )
 
     currentPromise = last.promise
 
@@ -64,7 +66,9 @@ describe('usePromise', () => {
     const last = createPromiseWithCallbacks()
     let currentPromise = first.promise
 
-    const { result, rerender, waitForNextUpdate } = renderHook(() => usePromise(currentPromise))
+    const { result, rerender, waitForNextUpdate } = renderHook(() =>
+      usePromise(() => currentPromise),
+    )
 
     currentPromise = last.promise
 
@@ -81,6 +85,10 @@ describe('usePromise', () => {
       status: PromiseStatus.Rejected,
       error: lastError,
     })
+  })
+
+  it('should memoize the promise based on the dependencies', async () => {
+    // TODO: Write some tests for this.
   })
 })
 

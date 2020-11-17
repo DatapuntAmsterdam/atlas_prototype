@@ -1,6 +1,6 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import LegacyLink from 'redux-first-router-link'
@@ -70,17 +70,15 @@ const PanoramaPreview: React.FC<PanoramaPreviewProps> = ({
   ...otherProps
 }) => {
   const result = usePromise(
-    useMemo(
-      () =>
-        getPanoramaThumbnail(location, {
-          width,
-          fov,
-          horizon,
-          aspect,
-          radius,
-        }),
-      [location.lat, location.lng, width, fov, horizon, aspect, radius],
-    ),
+    () =>
+      getPanoramaThumbnail(location, {
+        width,
+        fov,
+        horizon,
+        aspect,
+        radius,
+      }),
+    [location.lat, location.lng, width, fov, horizon, aspect, radius],
   )
   const legacyReference = useSelector(getDetailLocation)
 
