@@ -79,7 +79,7 @@ describe('PromiseResult', () => {
     expect(getByTestId('error-message')).toBeDefined()
   })
 
-  it('triggers a retry when the user clicks the button in the error message', () => {
+  it('increases the retry count when the user clicks the retry button', () => {
     mockedUsePromise.mockReturnValue({
       status: PromiseStatus.Rejected,
       error: new Error('Whoopsie'),
