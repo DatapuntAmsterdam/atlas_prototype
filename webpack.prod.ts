@@ -2,150 +2,144 @@ import path from 'path'
 import TerserPlugin from 'terser-webpack-plugin'
 import { merge } from 'webpack-merge'
 import { createConfig, srcPath } from './webpack.common'
-import { GenerateSW, InjectManifest } from 'workbox-webpack-plugin'
+import { GenerateSW } from 'workbox-webpack-plugin'
 
-const CHUNKS = {
-  MAP:
-    'leaflet|leaflet-draw|leaflet-rotatedmarker|leaflet.markercluster|leaflet.nontiledlayer|proj4|proj4leaflet',
-  DATAPUNT: '@datapunt',
-  AMSTERDAM: '@amsterdam',
-  STYLED: 'styled-components|polished|style-loader|css-loader|sass-loader|postcss-loader',
-  PANORAMA: 'marzipano',
-  POLYFILL: 'objectFitPolyfill|core-js|core-js-pure',
-  ANGULAR: 'angular|angular-aria|angular-sanitize|react-angular',
-  REACT:
-    'react|react-dom|redux-first-router|redux-first-router-link|redux-first-router-restore-scroll|reselect|redux|@?redux-saga|react-redux|react-helmet|prop-types',
-}
-
-const getTestRegex = (path: string) => new RegExp(`/node_modules/(${path})/`)
 const debugMode = process.env.DEBUG === 'true'
 
-export default [
-  createConfig({ legacy: false, mode: 'production' }),
-  createConfig({ legacy: true, mode: 'production' }),
-].map((config) =>
-  merge(config, {
-    bail: true,
-    resolve: {
-      alias: {
-        [path.resolve(srcPath, 'environment.ts')]: path.resolve(srcPath, 'environment.prod.ts'),
+export default [createConfig({ legacy: false, mode: 'production', singleBuild: true })].map(
+  (config) =>
+    merge(config, {
+      bail: true,
+      resolve: {
+        alias: {
+          [path.resolve(srcPath, 'environment.ts')]: path.resolve(srcPath, 'environment.prod.ts'),
+        },
       },
-    },
-    output: {
-      filename: config.name === 'legacy' ? '[name].[hash]-legacy.js' : '[name].[hash].js',
-      chunkFilename:
-        config.name === 'legacy' ? '[name].[chunkhash]-legacy.js' : '[name].[chunkhash].js',
-    },
-    devtool: 'source-map',
-    optimization: {
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: !debugMode,
-              drop_debugger: !debugMode,
+      output: {
+        filename: '[name].js',
+        chunkFilename: '[name].js',
+      },
+      devtool: 'source-map',
+      optimization: {
+        minimizer: [
+          new TerserPlugin({
+            terserOptions: {
+              compress: {
+                drop_debugger: !debugMode,
+              },
+              sourceMap: true,
             },
-            sourceMap: true,
-          },
-        }),
-      ],
-      splitChunks: {
-        chunks: 'all',
-        minSize: 30000,
-        minChunks: 1,
-        maxAsyncRequests: 5,
-        maxInitialRequests: 3,
-        name: true,
-        cacheGroups: {
-          vendor: {
-            test: new RegExp(
-              `/node_modules/(?!${[
-                CHUNKS.DATAPUNT,
-                CHUNKS.AMSTERDAM,
-                CHUNKS.POLYFILL,
-                CHUNKS.MAP,
-                CHUNKS.STYLED,
-                CHUNKS.REACT,
-                CHUNKS.PANORAMA,
-                CHUNKS.ANGULAR,
-              ].join('|')})/`,
-            ),
-            name: 'vendor',
-            chunks: 'all',
-          },
-          datapunt: {
-            test: getTestRegex(CHUNKS.DATAPUNT),
-            name: 'datapunt',
-            chunks: 'all',
-            enforce: true,
-          },
-          amsterdam: {
-            test: getTestRegex(CHUNKS.AMSTERDAM),
-            name: 'amsterdam',
-            chunks: 'all',
-            enforce: true,
-          },
-          polyfill: {
-            test: getTestRegex(CHUNKS.POLYFILL),
-            name: 'polyfill',
-            chunks: 'all',
-            enforce: true,
-          },
-          map: {
-            test: getTestRegex(CHUNKS.MAP),
-            name: 'map',
-            chunks: 'async',
-            enforce: true,
-          },
-          panorama: {
-            test: getTestRegex(CHUNKS.PANORAMA),
-            name: 'panorama',
-            chunks: 'async',
-            enforce: true,
-          },
-          styled: {
-            test: getTestRegex(CHUNKS.STYLED),
-            name: 'styled',
-            chunks: 'all',
-            enforce: true,
-          },
-          react: {
-            test: getTestRegex(CHUNKS.REACT),
-            name: 'react',
-            chunks: 'all',
-            enforce: true,
-          },
-          angular: {
-            test: getTestRegex(CHUNKS.ANGULAR),
-            name: 'angular',
-            chunks: 'async',
-            enforce: true,
-          },
-          main: {
-            chunks: 'all',
-            minChunks: 2,
-            reuseExistingChunk: true,
+          }),
+        ],
+        nodeEnv: 'production',
+        namedChunks: true,
+        namedModules: true,
+        moduleIds: 'named',
+        chunkIds: 'named',
+        runtimeChunk: false,
+        splitChunks: {
+          maxAsyncRequests: 15,
+          maxInitialRequests: 15,
+          chunks: 'async',
+          maxSize: 125000,
+          minChunks: 1,
+          name: true,
+          cacheGroups: {
+            default: false,
           },
         },
       },
-    },
-    plugins: [
-      new GenerateSW({
-        mode: 'none',
-        swDest: 'sw.js',
-        clientsClaim: true,
-        skipWaiting: true,
-        inlineWorkboxRuntime: true,
-        navigateFallbackDenylist: [
-          // Exclude any URLs whose last part seems to be a file extension
-          // as they're likely a resource and not a SPA route.
-          // URLs containing a "?" character won't be denied as they're likely
-          // a route with query params (e.g. auth callbacks).
-          new RegExp('/[^/?]+\\.[^/]+$'),
-        ],
-        exclude: [/\.map$/, /manifest$/, /\.htaccess$/, /service-worker\.js$/, /index\.html$/],
-        cleanupOutdatedCaches: true,
-      }),
-    ],
-  }),
+      plugins: [
+        new GenerateSW({
+          mode: debugMode ? 'development' : 'production',
+          swDest: 'sw.js',
+          clientsClaim: true,
+          skipWaiting: true,
+          sourcemap: true,
+          inlineWorkboxRuntime: false,
+          exclude: [
+            // Don't pre-cache any font files or images; we need a more fine-grained caching strategy (see below in runtimeCaching)
+            /.+\.(?:woff|woff2|eot|ttf)$/,
+            /.+\.(?:png|jpg|jpeg|svg|webp)$/,
+            /.*\.(?:html|map|txt|htaccess)$/,
+            /manifest$/,
+          ],
+          cleanupOutdatedCaches: true,
+          runtimeCaching: [
+            {
+              // All responses from the static assets server
+              // Can be cache for a longer period of time, because of the nature of those assets
+              urlPattern: /.+static\.amsterdam\.nl\/.+$/,
+              handler: 'CacheFirst',
+              options: {
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+                cacheName: 'static',
+                expiration: {
+                  maxAgeSeconds: 60 * 60 * 12, // 12 hours
+                },
+              },
+            },
+            {
+              // Exclude all requests to the tracking script
+              urlPattern: /.+analytics\.data\.amsterdam\.nl\/(?!matomo\.php).+$/,
+              handler: 'CacheFirst',
+              options: {
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+                cacheName: 'analytics',
+                expiration: {
+                  maxAgeSeconds: 60 * 60 * 4, // 4 hours
+                },
+              },
+            },
+            {
+              // All images coming from the CMS since they have `cache-control: no-cache` headers and have relatively large file sizes
+              urlPattern: /.+cms\.data\.amsterdam\.nl\/[^.]+\.(?:png|jpg|jpeg|svg)$/,
+              handler: 'CacheFirst',
+              options: {
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+                cacheName: 'images',
+                expiration: {
+                  maxEntries: 50,
+                  maxAgeSeconds: 60 * 60 * 2, // 2 hours
+                },
+              },
+            },
+            {
+              // All responses from the CMS, apart from the notification endpoint
+              urlPattern: /.+cms\.data\.amsterdam.nl\/jsonapi\/node\/(?!notification).+$/,
+              handler: 'StaleWhileRevalidate',
+              options: {
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+                cacheName: 'cms',
+                expiration: {
+                  maxAgeSeconds: 60 * 60 * 2, // 2 hours
+                },
+              },
+            },
+            {
+              // Every call to the API, except oAuth2
+              urlPattern: /.+api\.data\.amsterdam\.nl\/(?!oauth2).+$/,
+              handler: 'StaleWhileRevalidate',
+              options: {
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+                cacheName: 'api',
+                expiration: {
+                  maxAgeSeconds: 60 * 60 * 1, // 1 hours
+                },
+              },
+            },
+          ],
+        }),
+      ],
+    }),
 )

@@ -16,7 +16,7 @@ export default [createConfig({ legacy: false, singleBuild: true, mode: 'developm
         compress: true,
         watchContentBase: true,
         hot: true,
-        port: 3001,
+        port: 3000,
         https: true,
         proxy: {
           '/dcatd_admin': {

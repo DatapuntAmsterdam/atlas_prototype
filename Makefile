@@ -6,6 +6,8 @@
 
 # globals which can be overriden by setting make variables on the CLI
 DEBUG ?= false
+VERSION ?= v1.0.0
+GIT_COMMIT ?= ""
 
 _MAKEFILE_BUILTIN_VARIABLES := .DEFAULT_GOAL CURDIR MAKEFLAGS MAKEFILE_LIST SHELL
 
@@ -25,7 +27,7 @@ help: ## show this help screen
 info: ## dump Makefile variables to screen
 	@echo -e $(_MAKEFILE_VARIABLES)
 
-build: ## build Docker Compose images
+build: ## build Docker Compose images. Usage: make DEBUG=false build
 	docker-compose build --build-arg DEBUG=${DEBUG}
 
 start: ## start single Docker Compose service

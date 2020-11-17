@@ -8,15 +8,6 @@ import App from './App'
 import resolveRedirects from './redirects'
 import './sentry'
 
-if ('serviceWorker' in navigator) {
-  window.navigator.serviceWorker.getRegistrations().then((registrations) => {
-    // eslint-disable-next-line prefer-const,no-restricted-syntax
-    for (let registration of registrations) {
-      registration.unregister()
-    }
-  })
-}
-
 // If there are no redirects for the current url, render the application
 resolveRedirects().then((hasToRedirect) => {
   if (!hasToRedirect) {
