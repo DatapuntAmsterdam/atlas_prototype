@@ -45,7 +45,9 @@ export default function usePromise<T = any>(factory: PromiseFactoryFn<T>, deps?:
   })
 
   useEffect(() => {
-    setResult({ status: PromiseStatus.Pending })
+    if (result.status !== PromiseStatus.Pending) {
+      setResult({ status: PromiseStatus.Pending })
+    }
 
     let ignoreResult = false
 

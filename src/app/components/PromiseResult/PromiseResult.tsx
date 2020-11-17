@@ -15,16 +15,16 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
   top: 50%;
 `
 
-export interface PageTemplateProps<T> {
+export interface PromiseResultProps<T> {
   factory: PromiseFactoryFn<T>
   deps?: DependencyList
   errorMessage?: string
   children: (result: PromiseFulfilledResult<T>) => ReactElement | null
 }
 
-const PromiseResult: <T>(props: PageTemplateProps<T>) => ReactElement | null = ({
+const PromiseResult: <T>(props: PromiseResultProps<T>) => ReactElement | null = ({
   factory,
-  deps,
+  deps = [],
   errorMessage,
   children,
 }) => {
@@ -36,15 +36,16 @@ const PromiseResult: <T>(props: PageTemplateProps<T>) => ReactElement | null = (
   }
 
   if (result.status === PromiseStatus.Pending) {
-    return <StyledLoadingSpinner />
+    return <StyledLoadingSpinner data-testid="loading-spinner" />
   }
 
   if (result.error instanceof AuthError && result.error.code === 401) {
-    return <AuthAlert excludedResults={result.error.message} />
+    return <AuthAlert data-testid="auth-alert" excludedResults={result.error.message} />
   }
 
   return (
     <ErrorMessage
+      data-testid="error-message"
       message={errorMessage ?? 'Er is een fout opgetreden bij het laden van dit blok'}
       buttonLabel="Probeer opnieuw"
       buttonOnClick={() => setRetryCount(retryCount + 1)}
