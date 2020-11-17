@@ -1,0 +1,17 @@
+{
+  "panelType": "Bekendmaking",
+  "panelHeading": "",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Datum": "",
+        "Categorie": "",
+        "Onderwerp": "",
+        "Beschrijving": "",
+        "Meer informatie": ""
+      }
+    }
+  ],
+  "linkLists": []
+}

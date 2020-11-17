@@ -324,23 +324,22 @@ describe('Check if all map layers are visible when selected', () => {
     )
     cy.checkMapLayer('Explosieven - Gevrijwaarde gebieden', MAP_LAYERS.checkboxOExplosievenGG, 7)
     cy.checkMapLayer('Explosieven - Verdachte gebieden', MAP_LAYERS.checkboxOExplosievenVG, 8)
-    cy.checkMapLayer('Gemeentelijke beperkingen (WKPB)', MAP_LAYERS.checkboxOWKPB, 17)
-    cy.checkMapLayer('LPG-stations - Risicozones', MAP_LAYERS.checkboxOLPGStations, 19)
-    cy.checkMapLayer('LPG-tanks - Risicozones', MAP_LAYERS.checkboxOLPGTanks, 22)
-    cy.checkMapLayer('LPG-vulpunten - Risicozones', MAP_LAYERS.checkboxOLPGVulpunten, 25)
-    cy.checkMapLayer('LPG-afleverzuilen - Risicozones', MAP_LAYERS.checkboxOLPGAfleverzuilen, 27)
-    cy.checkMapLayer('Explosieven - Inslagen', MAP_LAYERS.checkboxOExplosieven, 28)
-    cy.checkMapLayer('Grondmonsters', MAP_LAYERS.checkboxOGrondmonsters, 29)
-    cy.checkMapLayer('Grondmonsters asbest', MAP_LAYERS.checkboxOGrondmonstersA, 30)
-    cy.checkMapLayer('Grondwatermonsters', MAP_LAYERS.checkboxOGrondwatermonsters, 31)
-    cy.checkMapLayer('Meetbouten - Zaksnelheid', MAP_LAYERS.checkboxOMeetboutenZaksnelheid, 32)
-    cy.checkMapLayer('Meetbouten - Status', MAP_LAYERS.checkboxOMeetboutenStatus, 33)
+    cy.checkMapLayer('LPG-stations - Risicozones', MAP_LAYERS.checkboxOLPGStations, 10)
+    cy.checkMapLayer('LPG-tanks - Risicozones', MAP_LAYERS.checkboxOLPGTanks, 13)
+    cy.checkMapLayer('LPG-vulpunten - Risicozones', MAP_LAYERS.checkboxOLPGVulpunten, 16)
+    cy.checkMapLayer('LPG-afleverzuilen - Risicozones', MAP_LAYERS.checkboxOLPGAfleverzuilen, 18)
+    cy.checkMapLayer('Explosieven - Inslagen', MAP_LAYERS.checkboxOExplosieven, 19)
+    cy.checkMapLayer('Grondmonsters', MAP_LAYERS.checkboxOGrondmonsters, 20)
+    cy.checkMapLayer('Grondmonsters asbest', MAP_LAYERS.checkboxOGrondmonstersA, 21)
+    cy.checkMapLayer('Grondwatermonsters', MAP_LAYERS.checkboxOGrondwatermonsters, 22)
+    cy.checkMapLayer('Meetbouten - Zaksnelheid', MAP_LAYERS.checkboxOMeetboutenZaksnelheid, 23)
+    cy.checkMapLayer('Meetbouten - Status', MAP_LAYERS.checkboxOMeetboutenStatus, 24)
     cy.checkMapLayer(
       'Meetbouten - Referentiepunten',
       MAP_LAYERS.checkboxOMeetboutenReferentiepunten,
-      34,
+      25,
     )
-    cy.checkMapLayer('Verzinkbare palen', MAP_LAYERS.checkboxOVerzinkbarePalen, 35)
+    cy.checkMapLayer('Verzinkbare palen', MAP_LAYERS.checkboxOVerzinkbarePalen, 26)
 
     cy.get(MAP_LAYERS.checkboxOndergrond).uncheck({ force: true }).should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
@@ -474,6 +473,50 @@ describe('Check if all map layers are visible when selected', () => {
     )
 
     cy.get(MAP_LAYERS.checkboxBelastingen).uncheck({ force: true }).should('not.be.checked')
+    cy.get(MAP.imageLayer).should('not.exist')
+  })
+})
+describe('Check map layers logged in', () => {
+  beforeEach(() => {
+    cy.server()
+    cy.hidePopup()
+  })
+  before(() => {
+    cy.login('EMPLOYEE')
+  })
+
+  after(() => {
+    cy.logout()
+  })
+  it('Should allow an employee to view map layers "Vestigingen"', () => {
+    cy.visit('/data/?modus=kaart&legenda=true')
+    cy.checkMapLayerCategory('Vestigingen')
+    cy.get(MAP.legendNotification).should('not.contain', 'Zichtbaar na inloggen')
+    cy.checkMapLayer('Bouw', MAP_LAYERS.checkboxVestigingBouw, 1)
+    cy.checkMapLayer('Cultuur, sport, recreatie', MAP_LAYERS.checkboxVestigingCultuur, 2)
+    cy.checkMapLayer(
+      'Financiële dienstv., verhuur van (on)roerend goed',
+      MAP_LAYERS.checkboxVestigingFinance,
+      3,
+    )
+    cy.checkMapLayer('Handel, vervoer, opslag', MAP_LAYERS.checkboxVestigingHandel, 4)
+    cy.checkMapLayer('Horeca', MAP_LAYERS.checkboxVestigingHoreca, 5)
+    cy.checkMapLayer('Informatie, telecommunicatie', MAP_LAYERS.checkboxVestigingIt, 6)
+    cy.checkMapLayer('Landbouw', MAP_LAYERS.checkboxVestigingLandbouw, 7)
+    cy.checkMapLayer('Overheid, onderwijs, zorg', MAP_LAYERS.checkboxVestigingOverheid, 8)
+    cy.checkMapLayer(
+      'Persoonlijke dienstverlening',
+      MAP_LAYERS.checkboxVestigingPersDiensverlening,
+      9,
+    )
+    cy.checkMapLayer('Productie, installatie, reparatie', MAP_LAYERS.checkboxVestigingProductie, 10)
+    cy.checkMapLayer(
+      'Zakelijke dienstverlening',
+      MAP_LAYERS.checkboxVestigingZakDienstverlening,
+      11,
+    )
+    cy.checkMapLayer('Overige', MAP_LAYERS.checkboxVestigingOverige, 12)
+    cy.get(MAP_LAYERS.checkboxVestigingen).uncheck({ force: true }).should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
   })
 })

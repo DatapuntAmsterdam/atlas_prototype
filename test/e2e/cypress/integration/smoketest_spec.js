@@ -21,7 +21,7 @@ describe('Smoketest', () => {
 
     it('Should show the details of an address', () => {
       cy.server()
-      cy.route('/typeahead?q=dam+1').as('getResults')
+      cy.route('/typeahead?q=dam+1*').as('getResults')
       cy.route('POST', '/cms_search/graphql/').as('graphql')
       cy.route('/jsonapi/node/list/*').as('jsonapi')
       cy.route('/bag/v1.1/pand/*').as('getPand')
@@ -191,7 +191,7 @@ describe('Smoketest', () => {
       cy.route(
         '/dataselectie/brk/?page=1&dataset=ves&shape=[]&buurtcombinatie_naam=Burgwallen-Oude+Zijde',
       ).as('getBRK2')
-      cy.route('/typeahead?q=dam+1').as('getResults')
+      cy.route('/typeahead?q=dam+1*').as('getResults')
       cy.route('/gebieden/buurt/?buurtcombinatie=3630012052036*').as('getBuurtCombinatie')
 
       // Search for an address
@@ -246,7 +246,7 @@ describe('Smoketest', () => {
     })
     it('Should open a dataset', () => {
       cy.server()
-      cy.route('/typeahead?q=oost').as('getResults')
+      cy.route('/typeahead?q=oost*').as('getResults')
       cy.route('POST', '/cms_search/graphql/').as('graphql')
       cy.route('/jsonapi/node/list/*').as('jsonapi')
       cy.route('/dcatd/datasets/*').as('getDataset')
@@ -287,7 +287,7 @@ describe('Smoketest', () => {
     })
     it('Should open a publication', () => {
       cy.server()
-      cy.route('/typeahead?q=oost').as('getResults')
+      cy.route('/typeahead?q=oost*').as('getResults')
       cy.route('/jsonapi/node/publication/*').as('getPublication')
       cy.route('POST', '/cms_search/graphql/').as('graphql')
 
@@ -318,7 +318,7 @@ describe('Smoketest', () => {
     })
     it('Should go back to previous pages', () => {
       cy.server()
-      cy.route('/typeahead?q=oost').as('getResults')
+      cy.route('/typeahead?q=oost*').as('getResults')
       cy.route('/dcatd/datasets/*').as('getDataset')
 
       // Go Back to all previous pages

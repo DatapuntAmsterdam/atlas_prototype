@@ -90,9 +90,11 @@ export const DETAIL_PANEL = {
   definitionList: '[data-testid="detail-definition-list"]',
   definitionListDescription: '[class*="DefinitionListDescription"]',
   definitionListTerm: '[class*="DefinitionListTerm"]',
+  linkList: '[data-testid="detail-linklist"]',
   panelTypeTitle: '[class*=DataDetailPage__DetailType]',
   panelSubject: '[class*="DetailPanel__Heading"] h1',
   panoramaPreview: '[class*="PanoramaPreview__PreviewContainer"]',
+  subHeader: '[data-testid="data-detail-subheading"]',
 }
 
 export const DRAWING = {

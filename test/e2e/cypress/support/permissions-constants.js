@@ -40,7 +40,7 @@ const values = {
   standplaatsVestigingName: 'RH-Infra',
   parkeervakId: '121403487278',
   type: 'Type',
-  vestigingName: 'Havom B',
+  vestigingName: 'Havom B.V.',
   vestigingen: 'Vestigingen',
   vestigingenHoreca: 'Vestigingen - Horeca',
   zakelijkeRechten: 'Zakelijke rechten',

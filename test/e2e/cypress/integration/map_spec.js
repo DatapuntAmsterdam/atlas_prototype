@@ -50,7 +50,7 @@ describe('map module', () => {
       cy.defineAddressDetailRoutes()
 
       // Use regular expression to match spaces
-      cy.route('/typeahead?q=dam+1').as('getTypeaheadResults')
+      cy.route('/typeahead?q=dam+1*').as('getTypeaheadResults')
 
       // ensure the viewport is always the same in this test, so the clicks can be aligned properly
       cy.viewport(1000, 660)
@@ -129,7 +129,7 @@ describe('map module', () => {
     it('should add a layer to the map', () => {
       cy.server()
       cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/typeahead?q=spuistraat+59a').as('getTypeaheadResults')
+      cy.route('/typeahead?q=spuistraat+59a*').as('getTypeaheadResults')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
       cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
       cy.hidePopup()
@@ -162,17 +162,6 @@ describe('map module', () => {
       cy.contains('Kadastrale eigenaren').should('be.visible')
       cy.contains('Kadastrale erfpachtuitgevers').should('be.visible')
       cy.contains('Gemeentelijk eigendom').should('be.visible')
-      cy.get(MAP_LAYERS.checkboxOZGemeentelijkeBeperkingen).check()
-
-      cy.get(MAP.zoomInAlert)
-        .scrollIntoView()
-        .should(
-          'contain',
-          'Een of meerdere geselecteerde kaartlagen zijn nog niet zichtbaar. Zoom in op de kaart om deze te zien.',
-        )
-        .and('be.visible')
-
-      cy.get(MAP_LAYERS.checkboxOZGemeentelijkeBeperkingen).uncheck()
       cy.contains('Panden ouder dan 1960').should('be.visible')
       cy.contains('Panden naar bouwjaar').should('be.visible')
 

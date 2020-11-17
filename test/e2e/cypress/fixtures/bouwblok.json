@@ -1,0 +1,24 @@
+{
+  "panelType": "Bouwblok",
+  "panelHeading": "RG71",
+  "definitionLists": [
+    {
+      "subheading": "Ligt in",
+      "items": {
+        "Stadsdeel": "Noord (N)",
+        "Wijk": "Banne Buiksloot (70)",
+        "Buurt": "Banne Zuidoost (N70b)"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Panden",
+      "items": ["0363100012239463", "0363100012239470"]
+    },
+    {
+      "subheading": "Meetbouten",
+      "items": []
+    }
+  ]
+}

@@ -142,7 +142,7 @@ describe('datasets module', () => {
 
     it('should show only datasets after filtering', () => {
       cy.server()
-      cy.route(`typeahead?q=vergunningen`).as('typeaheadResults')
+      cy.route(`typeahead?q=vergunningen*`).as('typeaheadResults')
       cy.route('/dcatd/datasets/*').as('getDataset')
       cy.get(SEARCH.input).trigger('focus')
       cy.get(SEARCH.input).type('Vergunningen')

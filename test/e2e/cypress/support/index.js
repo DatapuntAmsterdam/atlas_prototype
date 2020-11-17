@@ -14,6 +14,7 @@
 // ***********************************************************
 
 import './authentication-commands'
+import './detail-panel-commands'
 import './hide-popup'
 import './homepage-commands'
 import './map-commands'

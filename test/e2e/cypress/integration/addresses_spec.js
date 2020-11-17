@@ -196,7 +196,7 @@ describe('addresses module', () => {
 describe('user should be able to open more addresses', () => {
   it('should show the addresses', () => {
     cy.server()
-    cy.route('/typeahead?q=dam+20').as('getResults')
+    cy.route('/typeahead?q=dam+20*').as('getResults')
     cy.route('POST', '/cms_search/graphql/').as('graphql')
     cy.route('/jsonapi/node/list/*').as('jsonapi')
     cy.route('/bag/v1.1/pand/*').as('getPand')
@@ -220,7 +220,7 @@ describe('open address', () => {
     cy.server()
     cy.defineGeoSearchRoutes()
     cy.defineAddressDetailRoutes()
-    cy.route('typeahead?q=ad+windighof+2').as('getResults')
+    cy.route('typeahead?q=ad+windighof+2*').as('getResults')
 
     // ensure the viewport is always the same in this test, so the clicks can be aligned properly
     cy.viewport(1000, 660)
