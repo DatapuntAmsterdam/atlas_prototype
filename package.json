@@ -8,6 +8,7 @@
   },
   "version": "3.20.1",
   "scripts": {
+    "prebuild": "rimraf ./dist",
     "build": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config ./webpack.prod.ts",
     "build-storybook": "build-storybook -c .storybook -o .sb",
     "clean": "npm run clean:dirs",
