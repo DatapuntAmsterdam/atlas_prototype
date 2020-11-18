@@ -243,7 +243,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   datum_inslag?: string | null
   bron?: string | null
   intekening?: string | null
-  nouwkeurig?: string | null
+  nauwkeurig?: string | null
   onderzoeksgebied?: string | null
   opdrachtnemer?: string | null
   opdrachtgever?: string | null

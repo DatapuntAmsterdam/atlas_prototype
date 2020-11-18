@@ -1028,7 +1028,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Soort handeling', description: result.type as string },
             { term: 'Bron', description: result.bron },
             { term: 'Intekening', description: result.intekening },
-            { term: 'Nouwkeurigheid', description: result.nouwkeurig },
+            { term: 'Nauwkeurigheid', description: result.nauwkeurig },
             { term: 'Opmerkingen', description: result.opmerkingen },
             {
               term: 'Oorlogsincidentrapport',
