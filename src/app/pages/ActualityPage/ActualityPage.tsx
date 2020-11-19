@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useMemo, useState } from 'react'
 import { Column, Container, Heading, Row } from '@amsterdam/asc-ui'
-import { getMetadata, Metadata } from '../../../api/metadata'
-import PromiseResult from '../../components/PromiseResult/PromiseResult'
+import React, { FunctionComponent } from 'react'
+import { getMetadata } from '../../../api/metadata'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
+import PromiseResult from '../../components/PromiseResult/PromiseResult'
 
 const ActualityPage: FunctionComponent = () => (
   <ContentContainer>
@@ -20,11 +20,8 @@ const ActualityPage: FunctionComponent = () => (
 )
 
 function renderContents() {
-  const [retryCount, setRetryCount] = useState(0)
-  const promise = useMemo(() => getMetadata(), [retryCount])
-
   return (
-    <PromiseResult<Metadata[]> promise={promise} onRetry={() => setRetryCount(retryCount + 1)}>
+    <PromiseResult factory={() => getMetadata()}>
       {({ value }) => (
         <table className="c-table">
           <thead>

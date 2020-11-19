@@ -1,7 +1,7 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
@@ -12,16 +12,16 @@ import mapSearch, {
 } from '../../../../map/services/map-search/map-search'
 import { getUser } from '../../../../shared/ducks/user/user'
 import formatNumber from '../../../../shared/services/number-formatter/number-formatter'
+import { getDetailPageData } from '../../../../store/redux-first-router/actions'
 import AuthAlert from '../../../components/Alerts/AuthAlert'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
 import ShowMore from '../../../components/ShowMore'
 import useParam from '../../../utils/useParam'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
+import buildDetailUrl from '../detail/buildDetailUrl'
 import { locationParam } from '../query-params'
 import { Overlay } from '../types'
 import PanoramaPreview from './PanoramaPreview'
-import buildDetailUrl from '../detail/buildDetailUrl'
-import { getDetailPageData } from '../../../../store/redux-first-router/actions'
 
 const RESULT_LIMIT = 10
 
@@ -85,17 +85,15 @@ const MapSearchResults: React.FC<MapSearchPanelProps> = ({ currentOverlay, locat
   const user = useSelector(getUser)
   const [, setLocation] = useParam(locationParam)
   const result = usePromise(
-    useMemo(
-      () =>
-        mapSearch(
-          {
-            latitude: location.lat,
-            longitude: location.lng,
-          },
-          user,
-        ),
-      [location.lat, location.lng, user],
-    ),
+    () =>
+      mapSearch(
+        {
+          latitude: location.lat,
+          longitude: location.lng,
+        },
+        user,
+      ),
+    [location.lat, location.lng, user],
   )
 
   return (

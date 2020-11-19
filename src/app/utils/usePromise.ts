@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { DependencyList, useEffect, useMemo, useState } from 'react'
 
 export enum PromiseStatus {
   Pending = 'pending',
@@ -25,26 +25,29 @@ export interface PromiseRejectedResult {
   error: any
 }
 
+export type PromiseFactoryFn<T> = () => Promise<T>
+
 /**
- * Takes a promise and returns it's resolved or rejected value. While the promise is in flight an intermediate value is returned which can be used for loading states.
- *
- * When passing in a promise make sure that the instance is cached using `useMemo`, for example:
+ * Takes a function that creates a promise and returns its resolved or rejected value together with the status of the promise.
+ * When passing in a promise make sure that the dependencies are passed as well:
  *
  * ```ts
- * const result = usePromise(
- *   useMemo(() => fetchUser(userId), [userId]),
- * )
+ * const result = usePromise(() => fetchUser(userId), [userId])
  * ```
  *
- * @param promise The promise of which the value will be retrieved.
+ * @param factory The function that creates the promise that will be used.
+ * @param deps The dependencies of the factory function.
  */
-export default function usePromise<T = any>(promise: Promise<T>) {
+export default function usePromise<T = any>(factory: PromiseFactoryFn<T>, deps?: DependencyList) {
+  const promise = useMemo(factory, deps)
   const [result, setResult] = useState<PromiseResult<T>>({
     status: PromiseStatus.Pending,
   })
 
   useEffect(() => {
-    setResult({ status: PromiseStatus.Pending })
+    if (result.status !== PromiseStatus.Pending) {
+      setResult({ status: PromiseStatus.Pending })
+    }
 
     let ignoreResult = false
 

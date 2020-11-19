@@ -52,24 +52,30 @@
       {
         "id": 1,
         "order": 2,
-        "title": "Twitter",
-        "href": "https://twitter.com/AmsterdamNL"
+        "title": "Werkenbij",
+        "href": "https://www.amsterdam.nl/bestuur-organisatie/werkenbij/"
       },
       {
         "id": 2,
         "order": 3,
-        "title": "Facebook",
-        "href": "https://www.facebook.com/gemeenteamsterdam"
+        "title": "Twitter",
+        "href": "https://twitter.com/AmsterdamNL"
       },
       {
         "id": 3,
         "order": 4,
-        "title": "LinkedIn",
-        "href": "https://www.linkedin.com/company/gemeente-amsterdam"
+        "title": "Facebook",
+        "href": "https://www.facebook.com/gemeenteamsterdam"
       },
       {
         "id": 4,
         "order": 5,
+        "title": "LinkedIn",
+        "href": "https://www.linkedin.com/company/gemeente-amsterdam"
+      },
+      {
+        "id": 5,
+        "order": 6,
         "title": "GitHub",
         "href": "https://github.com/Amsterdam"
       }

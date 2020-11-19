@@ -147,6 +147,22 @@ describe('Api service', () => {
       )
     })
 
+    it('should append query string to request URL with search params', async () => {
+      expect(global.fetch).not.toHaveBeenCalled()
+
+      const searchParams = {
+        foo: 'bar',
+        qux: 'zork',
+      }
+      const url = 'https://www.domain2.com?filter=a&page=1'
+      await fetchProxy(url, { searchParams })
+
+      expect(global.fetch).toHaveBeenCalledWith(
+        expect.stringContaining('filter=a&page=1&foo=bar&qux=zork'),
+        expect.objectContaining({ headers: expect.anything() }),
+      )
+    })
+
     it('should append auth headers to request', async () => {
       expect(global.fetch).not.toHaveBeenCalled()
 

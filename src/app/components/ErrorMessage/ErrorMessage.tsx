@@ -1,5 +1,5 @@
 import { breakpoint, Button, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import React, { FunctionComponent, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 
 const ErrorMessageStyle = styled.div`
@@ -42,7 +42,7 @@ export const ErrorBackgroundCSS = css`
   }
 `
 
-type ErrorMessageProps = {
+export interface ErrorMessageProps {
   message: string
   buttonOnClick: () => void
   buttonLabel: string
@@ -50,14 +50,15 @@ type ErrorMessageProps = {
   absolute?: boolean
 }
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({
+const ErrorMessage: FunctionComponent<ErrorMessageProps & HTMLAttributes<HTMLDivElement>> = ({
   message,
   buttonLabel,
   buttonOnClick,
   buttonIcon,
   absolute = false,
+  ...otherProps
 }) => (
-  <ErrorMessageStyle absolute={absolute}>
+  <ErrorMessageStyle absolute={absolute} {...otherProps}>
     <Paragraph>{message}</Paragraph>
     <Button
       type="button"
