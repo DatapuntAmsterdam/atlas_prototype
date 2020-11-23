@@ -43,7 +43,7 @@
     "core-js": "3.7.0",
     "custom-event-polyfill": "^1.0.7",
     "escape-string-regexp": "^4.0.0",
-    "file-saver": "^2.0.2",
+    "file-saver": "^2.0.5",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
     "history": "4.10.1",
