@@ -1,7 +1,6 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
-import HtmlWebpackMultiBuildPlugin from 'html-webpack-multi-build-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
@@ -35,19 +34,6 @@ const modernModules = [
 ].map(modulePath)
 
 export interface CreateConfigOptions {
-  /**
-   * If enabled a build optimized for legacy browsers with ES5 code and various polyfills will be created,
-   * otherwise a more modern build using ES2015 syntax will be used with less polyfills.
-   *
-   * @default false
-   */
-  legacy?: boolean
-  /**
-   * If only a single build is needed, e.g. only building a single variant during development to speed up the build.
-   *
-   * @default false
-   */
-  singleBuild?: boolean
   /**
    * If enabled all TypeScript code will be type-checked in the compilation process.
    *
@@ -90,7 +76,7 @@ const svgoConfig = {
 
 export function createConfig(additionalOptions: CreateConfigOptions): Configuration {
   const options: Required<CreateConfigOptions> = {
-    ...{ legacy: false, singleBuild: false, checkTypes: true, mode: 'none' },
+    ...{ checkTypes: true, mode: 'none' },
     ...additionalOptions,
   }
 
@@ -99,10 +85,9 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
 
   return {
     mode: options.mode,
-    name: options.legacy ? 'legacy' : 'modern',
-    entry: options.legacy ? './src/index-legacy.ts' : './src/index.ts',
+    entry: './src/index.ts',
     output: {
-      filename: options.legacy ? '[name]-legacy.js' : '[name].js',
+      filename: '[name].js',
       path: distPath,
       publicPath: '/',
     },
@@ -122,15 +107,8 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
                 [
                   '@babel/preset-env',
                   {
-                    modules: false,
-                    ...(!options.legacy
-                      ? {
-                          useBuiltIns: 'usage',
-                          corejs: 3,
-                        }
-                      : null),
                     targets: {
-                      esmodules: !options.legacy,
+                      esmodules: true,
                     },
                   },
                 ],
@@ -278,7 +256,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         chunkFilename: isProd ? '[name].[contenthash].css' : '[name].css',
       }),
       new HtmlWebpackPlugin({
-        inject: options.singleBuild,
+        inject: true,
         template: 'index.ejs',
         lang: 'nl',
         title: 'Data en informatie - Amsterdam',
@@ -299,19 +277,23 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
               useShortDoctype: true,
             }
           : false,
+        attributes: {
+          module: true,
+        },
       }),
-      ...(!options.singleBuild ? [new HtmlWebpackMultiBuildPlugin()] : []),
-      ...(options.checkTypes ? [
-        new ForkTsCheckerWebpackPlugin({
-          typescript: {
-            memoryLimit: 4096,
-            diagnosticOptions: {
-              semantic: true,
-              syntactic: true,
-            },
-          },
-        }),
-      ] : []),
+      ...(options.checkTypes
+        ? [
+            new ForkTsCheckerWebpackPlugin({
+              typescript: {
+                memoryLimit: 4096,
+                diagnosticOptions: {
+                  semantic: true,
+                  syntactic: true,
+                },
+              },
+            }),
+          ]
+        : []),
     ],
   }
 }
