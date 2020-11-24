@@ -233,7 +233,7 @@ describe('Homepage module', () => {
 
         cy.get(HOMEPAGE.footerBlock).find('h3').contains('Volg de gemeente').should('exist')
         cy.get(HOMEPAGE.footerBlock).find('[title="Nieuwsbrief OIS"]').should('exist')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Werkenbij"]').should('exist')
+        cy.get(HOMEPAGE.footerBlock).find('[title="Vacatures"]').should('exist')
         cy.get(HOMEPAGE.footerBlock).find('[title="Twitter"]').should('exist')
         cy.get(HOMEPAGE.footerBlock).find('[title="Facebook"]').should('exist')
         cy.get(HOMEPAGE.footerBlock).find('[title="LinkedIn"]').should('exist')
