@@ -209,7 +209,7 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     }
     try {
       if (id) {
-        setLoadingIds([...loadingIdsRef.current, id])
+        setLoadingIds([...(loadingIdsRef.current ?? []), id])
       }
 
       const params = {
@@ -241,7 +241,7 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     (results: DataSelection[]) => {
       const ids = results.map(({ id }) => id)
       const newDataSelection = [
-        ...dataSelectionRef?.current?.filter(({ id: dataId }) => !ids.includes(dataId)),
+        ...(dataSelectionRef?.current?.filter(({ id: dataId }) => !ids.includes(dataId)) ?? []),
         ...results,
       ].sort((a, b) => a.order - b.order)
       setDataSelectionState(newDataSelection)
@@ -253,7 +253,8 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     (results: MapVisualization[]) => {
       const ids = results.map(({ id }) => id)
       const newMapVisualization = [
-        ...mapVisualizationRef?.current?.filter(({ id: markerId }) => !ids.includes(markerId)),
+        ...(mapVisualizationRef?.current?.filter(({ id: markerId }) => !ids.includes(markerId)) ??
+          []),
         ...results,
       ]
       setMapVisualizationState(newMapVisualization)
