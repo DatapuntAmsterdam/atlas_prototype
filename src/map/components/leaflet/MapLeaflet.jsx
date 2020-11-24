@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { GeoJSON, Map, ScaleControl, TileLayer, ZoomControl } from 'react-leaflet'
 import ReactResizeDetector from 'react-resize-detector'
-import isIE from '../../../app/utils/isIE'
 import {
   dataSelectionType,
   DEFAULT_LAT,
@@ -32,11 +31,6 @@ import locationIcon from './services/location-icon'
 import markerConfig from './services/marker-config.constant'
 import { panoramaOrientationIcon, panoramaPersonIcon } from './services/panorama-icon'
 import searchIcon from './services/search-icon'
-
-if (isIE) {
-  // This solves inconsistency in the leaflet draw for IE11
-  window.L.Browser.touch = false
-}
 
 const visibleToOpacity = (isVisible) => (isVisible ? 100 : 0)
 

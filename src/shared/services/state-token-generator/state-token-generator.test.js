@@ -43,15 +43,6 @@ describe('The state token generator service', () => {
     global.msCrypto = undefined
   })
 
-  it('uses the msCrypto library when crypto is not available (IE11)', () => {
-    global.msCrypto = global.crypto
-    global.crypto = undefined
-    const stateToken = stateTokenGenerator()
-
-    expect(global.btoa).toHaveBeenCalledWith(byteString)
-    expect(stateToken).toBe(asciiString)
-  })
-
   it('returns an empty string when the crypto library is not available', () => {
     global.crypto = undefined
     const stateToken = stateTokenGenerator()

@@ -40,13 +40,6 @@ $clear-button-margin: 3px;
       font-weight: $normal-weight;
     }
 
-    // sass-lint:disable no-vendor-prefixes no-css-comments
-    &:-ms-input-placeholder {
-      /* IE11 */
-      color: $secondary-gray60;
-      font-weight: $normal-weight;
-    }
-
     &::-ms-input-placeholder {
       /* Edge */
       // cannot change font attributes in edge here, so we have a lighter text color

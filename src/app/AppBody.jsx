@@ -1,9 +1,8 @@
-import { Alert, Link, Paragraph } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React, { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
-import { Link as RouterLink, generatePath, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 import { IDS } from '../shared/config/config'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
@@ -13,7 +12,6 @@ import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 import PAGES from './pages'
 import { mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
-import isIE from './utils/isIE'
 
 const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
 const ActualityPage = React.lazy(() =>
@@ -51,17 +49,8 @@ const SearchPage = React.lazy(() =>
 )
 
 // The Container from @amsterdam/asc-ui isnt used here as the margins added do not match the ones in the design
-// Tabindex is IE11 fix for skipnavigation focus
-const AppContainer = styled.main.attrs({ tabIndex: -1 })`
+const AppContainer = styled.main`
   flex-grow: 1;
-  min-height: 50vh; // IE11: Makes sure the loading indicator is displayed in the Container
-`
-
-const StyledAlert = styled(Alert)`
-  /* Ensure outline is visible when element is in focus */
-  &:focus {
-    z-index: 999;
-  }
 `
 
 const StyledLoadingSpinner = styled(LoadingSpinner)`
@@ -85,25 +74,6 @@ const AppBody = ({ visibilityError, bodyClasses, hasGrid, currentPage, embedPrev
         <>
           <AppContainer id={IDS.main} className="main-container">
             <NotificationAlert />
-            {isIE && (
-              <StyledAlert level="info">
-                <Paragraph>
-                  <strong>Let op: </strong>Let op: deze website ondersteunt Internet Explorer niet
-                  langer. We raden je aan een andere browser te gebruiken.
-                </Paragraph>{' '}
-                <Link
-                  as={RouterLink}
-                  to={generatePath(routing.articleDetail.path, {
-                    slug: 'internet-explorer-binnenkort-niet-meer-ondersteund',
-                    id: '11206c96-91d6-4f6a-9666-68e577797865',
-                  })}
-                  inList
-                  darkBackground
-                >
-                  Klik voor meer uitleg.
-                </Link>
-              </StyledAlert>
-            )}
             <Suspense fallback={<StyledLoadingSpinner />}>
               <Switch>
                 <Route exact path="/" component={HomePage} />
