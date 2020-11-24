@@ -277,9 +277,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
               useShortDoctype: true,
             }
           : false,
-        attributes: {
-          module: true,
-        },
       }),
       ...(options.checkTypes
         ? [
