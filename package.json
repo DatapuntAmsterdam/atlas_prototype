@@ -93,6 +93,7 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/react-hooks": "3.4.2",
+    "@turf/turf": "^5.1.6",
     "@types/body-scroll-lock": "^2.6.1",
     "@types/classnames": "^2.2.11",
     "@types/cssnano": "^4.0.0",
