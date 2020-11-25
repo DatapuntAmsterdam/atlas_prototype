@@ -96,7 +96,7 @@
     "@storybook/storybook-deployer": "^2.8.7",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.0",
+    "@testing-library/react": "^11.2.2",
     "@testing-library/react-hooks": "3.4.2",
     "@types/body-scroll-lock": "^2.6.1",
     "@types/classnames": "^2.2.11",
