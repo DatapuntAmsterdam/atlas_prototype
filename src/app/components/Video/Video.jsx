@@ -18,10 +18,12 @@ class Video extends React.Component {
     if (prevProps.play !== play) {
       if (play) {
         this.playPromise = videoPlayer.play()
-      } else {
+      } else if (this.playPromise !== undefined) {
         this.playPromise.then(() => {
           videoPlayer.pause()
         })
+      } else {
+        videoPlayer.pause()
       }
     }
 

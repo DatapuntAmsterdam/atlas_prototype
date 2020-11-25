@@ -82,6 +82,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.8",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.5",
@@ -139,6 +142,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^5.3.0",
     "copy-webpack-plugin": "^6.3.2",
+    "core-js": "^3.7.0",
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.1",
     "cssnano": "^4.1.10",
