@@ -62,7 +62,7 @@
     "marzipano": "^0.9.1",
     "objectFitPolyfill": "2.3.0",
     "openseadragon": "2.4.2",
-    "proj4": "2.6.2",
+    "proj4": "2.6.3",
     "proj4leaflet": "1.0.2",
     "prop-types": "15.7.2",
     "react": "^17.0.1",
