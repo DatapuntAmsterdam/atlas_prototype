@@ -40,7 +40,7 @@
     "@turf/turf": "^5.1.6",
     "body-scroll-lock": "^3.1.5",
     "classnames": "2.2.6",
-    "core-js": "3.7.0",
+    "core-js": "3.8.0",
     "custom-event-polyfill": "^1.0.7",
     "escape-string-regexp": "^4.0.0",
     "file-saver": "^2.0.5",
