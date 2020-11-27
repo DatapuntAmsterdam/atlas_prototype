@@ -48,7 +48,7 @@ const EditorialPage = ({
 
   const canonical = href && `${environment.ROOT}${href.substr(1)}`
 
-  const ogImage = image && getImageFromCms(image, 600, 300)
+  const ogImage = typeof image === 'string' && getImageFromCms(image, 600, 300)
 
   return (
     <Container>

@@ -40,7 +40,7 @@ describe('IIIFThumbnail', () => {
     ;(fetch as jest.Mock).mockReturnValueOnce(
       Promise.resolve({
         ok: false,
-        blob: () => Promise.resolve(new Blob('image')),
+        blob: () => Promise.resolve(new Blob()),
       }),
     )
     const { findByTestId } = render(<IIIFThumbnail src="" title="foo" />)

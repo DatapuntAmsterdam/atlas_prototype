@@ -51,7 +51,7 @@ describe('ConstructionFileDetail', () => {
     expect(queryByTestId('oloLiaanNumber')).not.toBeInTheDocument()
 
     // eslint-disable-next-line camelcase
-    const olo_liaan_nummer = 'Foo bar'
+    const olo_liaan_nummer = 1
 
     rerender(
       withAppContext(<ConstructionFileDetail {...{ ...bouwdossierFixture, olo_liaan_nummer }} />),
@@ -83,7 +83,7 @@ describe('ConstructionFileDetail', () => {
     })
 
     // eslint-disable-next-line camelcase
-    const olo_liaan_nummer = 'Zork'
+    const olo_liaan_nummer = 1
 
     rerender(
       withAppContext(<ConstructionFileDetail {...{ ...bouwdossierFixture, olo_liaan_nummer }} />),

@@ -7,12 +7,14 @@ import CheckboxFilter from './CheckboxFilter'
 describe('CheckboxFilter', () => {
   beforeEach(cleanup)
 
-  const defaultProps = {
+  const defaultProps: FilterProps = {
     type: 'test',
+    label: 'Test',
     options: [],
     totalCount: 999,
     hideCount: true,
     selection: [],
+    onSelectionChange: () => {},
   }
 
   const options: FilterOption[] = [
@@ -22,7 +24,7 @@ describe('CheckboxFilter', () => {
   ]
 
   it('should render a list of options without selection', () => {
-    const props: FilterProps = { ...defaultProps, options, onSelectionChange: () => {} }
+    const props: FilterProps = { ...defaultProps, options }
     const { getByLabelText } = render(<CheckboxFilter {...props} />)
 
     const firstNode = getByLabelText('First') as HTMLInputElement
@@ -40,7 +42,7 @@ describe('CheckboxFilter', () => {
 
   it('should render a list of options with selection', () => {
     const selection = ['second']
-    const props: FilterProps = { ...defaultProps, options, selection, onSelectionChange: () => {} }
+    const props: FilterProps = { ...defaultProps, options, selection }
     const { getByLabelText } = render(<CheckboxFilter {...props} />)
     const secondNode = getByLabelText('Second') as HTMLInputElement
 
