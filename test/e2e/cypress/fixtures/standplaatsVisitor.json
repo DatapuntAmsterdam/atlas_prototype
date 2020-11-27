@@ -1,0 +1,45 @@
+{
+  "panelType": "Adres",
+  "panelHeading": "Rollemanstraat 8",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Naam openbare ruimte": "Rollemanstraat",
+        "Huisnummer": "8",
+        "Huisletter": "",
+        "Huisnummertoevoeging": "",
+        "Postcode": "1033WN",
+        "Woonplaats": "Amsterdam",
+        "Type adres": "Hoofdadres"
+      }
+    },
+    {
+      "subheading": "Ligt in",
+      "items": {
+        "Stadsdeel": "Noord (N)",
+        "Wijk": "Oostzanerwerf (66)",
+        "Buurt": "Circus/Kermisbuurt (N66g)",
+        "Gebiedsgerichtwerken-gebied": "Noord-West (DX17)"
+      }
+    },
+    {
+      "subheading": "Standplaats",
+      "items": {
+        "Status": "Plaats aangewezen",
+        "Indicatie geconstateerd": "Nee",
+        "Aanduiding in onderzoek": "Nee"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Vestigingen",
+      "items": []
+    },
+    {
+      "subheading": "Monumenten",
+      "items": []
+    }
+  ]
+}

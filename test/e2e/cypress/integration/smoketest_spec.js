@@ -1,14 +1,13 @@
 import {
   ADDRESS_PAGE,
-  DATA_DETAIL,
   DATA_SEARCH,
   DATA_SETS,
+  DETAIL_PANEL,
   HEADER_MENU,
   HEADINGS,
   HOMEPAGE,
   MAP,
   PANORAMA,
-  SEARCH,
   TABLES,
 } from '../support/selectors'
 
@@ -30,7 +29,7 @@ describe('Smoketest', () => {
       cy.visit('/')
 
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
-      cy.get(SEARCH.input).focus().type('Dam 1{enter}')
+      cy.get(DATA_SEARCH.input).focus().type('Dam 1{enter}')
 
       cy.wait('@getResults')
       cy.wait(['@graphql', '@graphql'])
@@ -49,7 +48,7 @@ describe('Smoketest', () => {
       cy.waitForAdressDetail()
       cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
       cy.get(ADDRESS_PAGE.resultsPanel)
-        .get(DATA_DETAIL.heading)
+        .get(DETAIL_PANEL.heading)
         .contains('Dam 1')
         .and('have.css', 'font-style')
         .and('match', /normal/)
@@ -59,7 +58,7 @@ describe('Smoketest', () => {
 
       // Maximize Map
       cy.get(MAP.mapMaximize).click()
-      cy.get(ADDRESS_PAGE.resultsPanel).should('not.be.visible')
+      cy.get(ADDRESS_PAGE.resultsPanel).should('not.exist')
       cy.get(MAP.mapDetailResultPanel, { timeout: 30000 }).should('be.visible')
 
       // Check address data
@@ -149,22 +148,22 @@ describe('Smoketest', () => {
       ).should('be.visible')
       cy.get(HEADINGS.dataSelectionHeading).should('contain', 'Vestigingen')
       cy.get(DATA_SEARCH.linklogin).should('be.visible')
-      cy.get(TABLES.tableValue).should('not.be.visible')
+      cy.get(TABLES.tableValue).should('not.exist')
       cy.contains('Kaart weergeven').click()
       cy.contains(
         'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.',
       ).should('be.visible')
       cy.get(DATA_SEARCH.linklogin).should('be.visible')
-      cy.get(TABLES.tableValue).should('not.be.visible')
+      cy.get(TABLES.tableValue).should('not.exist')
       cy.get(ADDRESS_PAGE.tabKadastraleObjecten, { timeout: 30000 })
         .contains('Kadastrale objecten')
         .click({ force: true })
       cy.url('contains', '/data/brk/kadastrale-objecten/')
-      cy.get(TABLES.tableValue).should('not.be.visible')
+      cy.get(TABLES.tableValue).should('not.exist')
       cy.contains('Tabel weergeven').click()
       cy.get(HEADINGS.dataSelectionHeading).should('contain', 'Kadastrale objecten')
       cy.get(DATA_SEARCH.linklogin).should('be.visible')
-      cy.get(TABLES.tableValue).should('not.be.visible')
+      cy.get(TABLES.tableValue).should('not.exist')
     })
   })
   describe('User is logged in', () => {
@@ -196,7 +195,7 @@ describe('Smoketest', () => {
 
       // Search for an address
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
-      cy.get(SEARCH.input).focus().type('Dam 1')
+      cy.get(DATA_SEARCH.input).focus().type('Dam 1')
       cy.wait('@getResults')
       cy.get(
         '[href*="/data/bag/verblijfsobject/id0363010003761571/?modus=gesplitst&term=Dam+1"]',
@@ -214,7 +213,7 @@ describe('Smoketest', () => {
       cy.wait('@getHrData')
       cy.contains(
         'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om maatschappelijke activiteiten en vestigingen te bekijken.',
-      ).should('not.be.visible')
+      ).should('not.exist')
       cy.get(TABLES.tableValue, { timeout: 40000 }).should('be.visible')
       cy.contains('Kaart weergeven').click()
       cy.url('contains', '/data/hr/vestigingen/')
@@ -253,7 +252,7 @@ describe('Smoketest', () => {
       cy.visit('/')
 
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
-      cy.get(SEARCH.input).focus().type('Oost{enter}')
+      cy.get(DATA_SEARCH.input).focus().type('Oost{enter}')
 
       cy.wait('@getResults')
       cy.wait(['@graphql', '@graphql'])
@@ -292,7 +291,7 @@ describe('Smoketest', () => {
       cy.route('POST', '/cms_search/graphql/').as('graphql')
 
       // Search keyword Oost, results contain only datasets
-      cy.get(SEARCH.input).focus().clear().type('Oost{enter}')
+      cy.get(DATA_SEARCH.input).focus().clear().type('Oost{enter}')
       cy.wait('@getResults')
 
       // Filter publications

@@ -1,5 +1,6 @@
 import {
-  DATA_DETAIL,
+  DETAIL_PANEL,
+  DATA_SEARCH,
   DATA_SELECTION_TABLE,
   HOMEPAGE,
   LINKS,
@@ -20,25 +21,46 @@ describe('parcel-ownership (eigendommen) module', () => {
   describe('not authenticated', () => {
     beforeEach(() => {
       cy.hidePopup()
-      cy.visit(LINKS.kadastraleObjecten)
     })
 
     describe('user should not be able to view the kadaster data', () => {
       it('should show a notification that the user must authenticate', () => {
+        cy.visit(LINKS.kadastraleObjecten)
         cy.contains(
           'Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met zakelijk rechthebbenden te bekijken.',
         )
+        cy.get(TABLES.tableValue).should('not.exist')
       })
 
-      it('should not show the table with results', () => {
-        cy.get(TABLES.tableValue).should('not.be.visible')
+      it('should not show kadastrale subjecten in autosuggest', () => {
+        cy.server()
+        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.visit('/')
+
+        cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker')
+
+        cy.wait('@getResults')
+        cy.get(DATA_SEARCH.autoSuggestTip).should('exist').and('be.visible')
+        cy.get(DATA_SEARCH.autoSuggestHeader).should('not.contain', 'Kadastrale subjecten')
+      })
+      it('should not show kadastrale subjecten in results', () => {
+        cy.server()
+        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.visit('/')
+
+        cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
+
+        cy.wait('@getResults')
+        cy.contains('Kadastrale subjecten (').should('not.exist')
+        cy.contains('Aafje Cornelia Bakker').should('not.exist')
+        cy.contains('Bakker & Toledo Holding B.V.').should('not.exist')
       })
     })
   })
 
-  describe('authenticated', () => {
+  describe('authenticated EMPLOYEE_PLUS', () => {
     before(() => {
-      cy.login()
+      cy.login('EMPLOYEE_PLUS')
     })
 
     after(() => {
@@ -79,7 +101,7 @@ describe('parcel-ownership (eigendommen) module', () => {
 
         cy.wait('@getBrkObject')
         cy.wait('@getBrkObjectExpand')
-        cy.get(DATA_DETAIL.main).should('exist').and('be.visible')
+        cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
       })
     })
 
@@ -113,6 +135,87 @@ describe('parcel-ownership (eigendommen) module', () => {
         // the cursor should be rendered inside the leaflet map
         cy.get(MAP.mapSelectedObject).should('exist').and('be.visible')
       })
+    })
+    describe('Autosuggest and search results', () => {
+      it('Should show "Kadastrale subjecten" for medewerker plus in the autosuggest', () => {
+        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.visit('/')
+
+        cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
+
+        cy.wait('@getResults')
+        cy.get(DATA_SEARCH.autoSuggestDropdown).get('h4').invoke('width').should('be.gt', 0)
+        cy.get(DATA_SEARCH.autoSuggestTip).should('be.visible')
+        cy.get(DATA_SEARCH.autoSuggestDropdown)
+          .contains('Kadastrale subjecten')
+          .scrollIntoView()
+          .should('be.visible')
+        cy.get(DATA_SEARCH.autoSuggestDropdown)
+          .contains('Aafje Cornelia Bakker')
+          .should('be.visible')
+        cy.get(DATA_SEARCH.autoSuggestDropdownMoreResults).contains('Kadastrale subjecten').click()
+        cy.contains("Data met 'bakker' (").should('be.visible')
+        cy.get(DATA_SEARCH.searchResultsCategory)
+          .eq(0)
+          .should('contain', 'Kadastrale subjecten (')
+          .and('be.visible')
+      })
+      it('Should show "Kadastrale subjecten" and "Maatschappelijke activiteiten in the search results', () => {
+        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.visit('/')
+
+        cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
+
+        cy.wait('@getResults')
+        cy.contains('Maatschappelijke activiteiten (').should('be.visible')
+        cy.contains('Kadastrale subjecten (').should('be.visible')
+        cy.contains('Aafje Cornelia Bakker').should('be.visible')
+      })
+    })
+  })
+  describe('authenticated EMPLOYEE', () => {
+    before(() => {
+      cy.login('EMPLOYEE')
+    })
+
+    after(() => {
+      cy.logout()
+    })
+    it('Should show "Kadastrale subjecten" for medewerker in the autosuggest', () => {
+      cy.server()
+      cy.route('/typeahead?q=bakker*').as('getResults')
+      cy.visit('/')
+
+      cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
+
+      cy.wait('@getResults')
+      cy.get(DATA_SEARCH.autoSuggestDropdown).get('h4').invoke('width').should('be.gt', 0)
+      cy.get(DATA_SEARCH.autoSuggestTip).should('be.visible')
+      cy.get(DATA_SEARCH.autoSuggestDropdown)
+        .contains('Kadastrale subjecten')
+        .scrollIntoView()
+        .should('be.visible')
+      cy.get(DATA_SEARCH.autoSuggestDropdown)
+        .contains(' & Toledo Holding B.V.')
+        .should('be.visible')
+      cy.get(DATA_SEARCH.autoSuggestDropdownMoreResults).contains('Kadastrale subjecten').click()
+      cy.contains("Data met 'bakker' (").should('be.visible')
+      cy.get(DATA_SEARCH.searchResultsCategory)
+        .eq(0)
+        .should('contain', 'Kadastrale subjecten (')
+        .and('be.visible')
+    })
+    it('Should show "Kadastrale subjecten" and "Maatschappelijke activiteiten in the search results', () => {
+      cy.server()
+      cy.route('/typeahead?q=bakker*').as('getResults')
+      cy.visit('/')
+
+      cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
+
+      cy.wait('@getResults')
+      cy.contains('Maatschappelijke activiteiten (').should('be.visible')
+      cy.contains('Kadastrale subjecten (').should('be.visible')
+      cy.contains('Bakker & Toledo Holding B.V.').should('be.visible')
     })
   })
 })

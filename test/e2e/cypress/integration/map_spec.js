@@ -3,7 +3,7 @@ import { routing } from '../../../../src/app/routes'
 import {
   ADDRESS_PAGE,
   COMPONENTS,
-  DATA_DETAIL,
+  DETAIL_PANEL,
   DATA_SEARCH,
   HOMEPAGE,
   MAP,
@@ -94,8 +94,8 @@ describe('map module', () => {
 
       cy.waitForAdressDetail()
 
-      cy.get(DATA_DETAIL.heading).contains('Beursplein 15')
-      cy.get(DATA_DETAIL.main).get('dl').contains('1012JW')
+      cy.get(DETAIL_PANEL.heading).contains('Beursplein 15')
+      cy.get(DETAIL_PANEL.main).get('dl').contains('1012JW')
       cy.wait('@getPanorama')
       cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
     })
@@ -141,14 +141,14 @@ describe('map module', () => {
       cy.get(MAP.mapContainer).should('be.visible')
 
       // Legend and checkboxes are not visible
-      cy.get(MAP.mapLegend).should('not.be.visible')
-      cy.contains('Kadastrale perceelsgrenzen').should('not.be.visible')
-      cy.contains('Kadastrale eigenaren').should('not.be.visible')
-      cy.contains('Kadastrale erfpachtuitgevers').should('not.be.visible')
-      cy.contains('Gemeentelijk eigendom').should('not.be.visible')
-      cy.get(MAP.zoomInAlert).should('not.be.visible')
-      cy.contains('Panden ouder dan 1960').should('not.be.visible')
-      cy.contains('Panden naar bouwjaar').should('not.be.visible')
+      cy.get(MAP.mapLegend).should('not.exist')
+      cy.contains('Kadastrale perceelsgrenzen').should('not.exist')
+      cy.contains('Kadastrale eigenaren').should('not.exist')
+      cy.contains('Kadastrale erfpachtuitgevers').should('not.exist')
+      cy.contains('Gemeentelijk eigendom').should('not.exist')
+      cy.get(MAP.zoomInAlert).should('not.exist')
+      cy.contains('Panden ouder dan 1960').should('not.exist')
+      cy.contains('Panden naar bouwjaar').should('not.exist')
 
       cy.get(MAP.mapPanelHandle)
         .find(MAP.mapLegendLabel)
@@ -166,10 +166,10 @@ describe('map module', () => {
       cy.contains('Panden naar bouwjaar').should('be.visible')
 
       // Checkboxes related to Kadastrale perceelsgrenzen are not visible
-      cy.get(MAP_LAYERS.checkboxOZKKPBurgerlijkeGemeente).should('not.be.visible')
-      cy.get(MAP_LAYERS.checkboxOZKKPKadastraleGemeente).should('not.be.visible')
-      cy.get(MAP_LAYERS.checkboxOZKKPKadastraleSectie).should('not.be.visible')
-      cy.get(MAP_LAYERS.checkboxOZKKPKadastraalObject).should('not.be.visible')
+      cy.get(MAP_LAYERS.checkboxOZKKPBurgerlijkeGemeente).should('not.exist')
+      cy.get(MAP_LAYERS.checkboxOZKKPKadastraleGemeente).should('not.exist')
+      cy.get(MAP_LAYERS.checkboxOZKKPKadastraleSectie).should('not.exist')
+      cy.get(MAP_LAYERS.checkboxOZKKPKadastraalObject).should('not.exist')
 
       cy.get(MAP.mapZoomIn).click()
       cy.get(MAP.mapOverlayPane).children().should('not.exist')
@@ -202,7 +202,7 @@ describe('map module', () => {
       cy.get(MAP.imageLayer).eq(1).should('have.attr', 'style', 'opacity: 0; visibility: visible;')
       cy.get(MAP.imageLayer).eq(2).should('have.attr', 'style', 'opacity: 0; visibility: visible;')
 
-      cy.get(MAP.iconMapMarker).should('not.be.visible')
+      cy.get(MAP.iconMapMarker).should('not.exist')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().type('Spuistraat 59A')
 
@@ -325,7 +325,7 @@ describe('map module', () => {
       cy.get(MAP.mapLegendItems).should('have.length', 12)
 
       // No message to first login
-      cy.get(MAP.legendNotification).should('not.be.visible')
+      cy.get(MAP.legendNotification).should('not.exist')
     })
   })
 })

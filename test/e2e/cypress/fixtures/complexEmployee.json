@@ -1,0 +1,20 @@
+{
+  "panelType": "Complex",
+  "panelHeading": "Hortus Botanicus",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Nummer": "518271",
+        "Naam": "Hortus Botanicus",
+        "Beschrijving": "In verschillende fasen tot stand gekomen complex van de HORTUS BOTANICUS"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Monumenten",
+      "items": ["Zaadkoepel", "Hortulanuswoning"]
+    }
+  ]
+}

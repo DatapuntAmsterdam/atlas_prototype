@@ -1,0 +1,26 @@
+{
+  "panelType": "Gemeentelijk eigendom",
+  "panelHeading": "President Allendelaan 3",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Bouwjaar": "2006",
+        "Aantal verhuurde eenheden": "1",
+        "Monumentstatus": "Geen monument",
+        "Status": "In beheer"
+      }
+    },
+    {
+      "subheading": "President Allendelaan 3",
+      "items": {
+        "Verhuurde eenheid": "President Allendelaan 3",
+        "Gebruiksdoel": "bijeenkomstfunctie",
+        "Monumentstatus": "Geen monument",
+        "Status": "In beheer",
+        "Contractueel gebruik": "3521 - Zwembad/Sauna"
+      }
+    }
+  ],
+  "linkLists": []
+}

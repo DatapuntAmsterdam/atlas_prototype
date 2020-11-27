@@ -1,4 +1,4 @@
-import { DATA_DETAIL, DATA_SEARCH, MAP, SEARCH } from '../support/selectors'
+import { DETAIL_PANEL, DATA_SEARCH, MAP } from '../support/selectors'
 
 describe('Search data', () => {
   describe('Autosuggest', () => {
@@ -31,7 +31,7 @@ describe('Search data', () => {
           cy.wait('@graphql')
           cy.wait('@jsonapi')
 
-          cy.get(DATA_DETAIL.heading).contains(firstValue).should('exist').and('be.visible')
+          cy.get(DETAIL_PANEL.heading).contains(firstValue).should('exist').and('be.visible')
         })
     })
     it('Should be able to navigate through the autosuggest results with arrow keys', () => {
@@ -40,7 +40,7 @@ describe('Search data', () => {
         delay: 60,
       })
       cy.get(DATA_SEARCH.autosuggestDropdownItemActive).should('contain', 'Panoramabeelden')
-      cy.get(SEARCH.input).should('have.value', 'Panoramabeelden')
+      cy.get(DATA_SEARCH.input).should('have.value', 'Panoramabeelden')
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}')
       cy.get(DATA_SEARCH.autosuggestDropdownItemActive).contains('Cameratoezichtgebieden')
     })
@@ -69,12 +69,12 @@ describe('Search data', () => {
       cy.hidePopup()
 
       cy.visit('/')
-      cy.get(SEARCH.input).trigger('focus')
+      cy.get(DATA_SEARCH.input).trigger('focus')
     })
 
     it('Should submit the search and give results', () => {
-      cy.get(SEARCH.input).type('Park')
-      cy.get(SEARCH.form).submit()
+      cy.get(DATA_SEARCH.input).type('Park')
+      cy.get(DATA_SEARCH.form).submit()
 
       cy.wait(['@graphql', '@graphql'])
       cy.wait('@jsonapi')
@@ -83,7 +83,7 @@ describe('Search data', () => {
     })
 
     it('Should submit the search and give no results', () => {
-      cy.get(SEARCH.input).type('NORESULTS')
+      cy.get(DATA_SEARCH.input).type('NORESULTS')
       cy.get(DATA_SEARCH.autoSuggest).submit()
       cy.wait(['@graphql', '@graphql'])
       cy.wait('@jsonapi')
@@ -100,13 +100,13 @@ describe('Search data', () => {
       cy.hidePopup()
 
       cy.visit('/')
-      cy.get(SEARCH.input).trigger('focus')
+      cy.get(DATA_SEARCH.input).trigger('focus')
     })
 
     it('Should show all results', () => {
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
-      cy.get(SEARCH.input).type('Amsterdam')
-      cy.get(SEARCH.form).submit()
+      cy.get(DATA_SEARCH.input).type('Amsterdam')
+      cy.get(DATA_SEARCH.form).submit()
 
       cy.wait(['@graphql', '@graphql'])
       cy.wait('@jsonapi')

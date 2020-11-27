@@ -1,6 +1,6 @@
 import {
   COMPONENTS,
-  DATA_DETAIL,
+  DETAIL_PANEL,
   DATA_SEARCH,
   HOMEPAGE,
   MAP,
@@ -34,13 +34,13 @@ describe('print module', () => {
     cy.wait('@getMeeting')
     cy.wait('@getPanoThumbnail')
     cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
-    cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('10581111')
+    cy.get(DETAIL_PANEL.heading).should('exist').and('be.visible').contains('10581111')
     cy.get(PRINT_BUTTON).first().should('exist').click()
     cy.get(PRINT.headerTitle).should('exist').and('be.visible')
     cy.get(PRINT.buttonClosePrint).click()
     cy.get(PRINT.headerTitle).should('not.exist')
     cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
-    cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('10581111')
+    cy.get(DETAIL_PANEL.heading).should('exist').and('be.visible').contains('10581111')
   })
   it('Should click on a map to open meetbout information and print the information', () => {
     cy.route('POST', '/cms_search/graphql/').as('graphql')
@@ -65,12 +65,12 @@ describe('print module', () => {
     cy.wait('@getResults')
     cy.wait('@getMeeting')
     cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
-    cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('10581112')
+    cy.get(DETAIL_PANEL.heading).should('exist').and('be.visible').contains('10581112')
     cy.get(PRINT_BUTTON).first().should('exist').click()
     cy.get(PRINT.headerTitle).should('exist').and('be.visible')
     cy.get(PRINT.buttonClosePrint).click()
     cy.get(PRINT.headerTitle).should('not.exist')
     cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
-    cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('10581112')
+    cy.get(DETAIL_PANEL.heading).should('exist').and('be.visible').contains('10581112')
   })
 })

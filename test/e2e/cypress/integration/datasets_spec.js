@@ -1,4 +1,4 @@
-import { DATA_SETS, DATA_SEARCH, SEARCH } from '../support/selectors'
+import { DATA_SETS, DATA_SEARCH } from '../support/selectors'
 
 describe('datasets module', () => {
   describe('user should be able to navigate to the datasets catalogus from the homepage', () => {
@@ -122,7 +122,7 @@ describe('datasets module', () => {
 
     it('should open the datasets results', () => {
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
-      cy.get(SEARCH.input).type('Park')
+      cy.get(DATA_SEARCH.input).type('Park')
       cy.get(DATA_SEARCH.autoSuggest).submit()
       cy.url().should('include', '/zoek/?term=Park')
       cy.wait(['@graphql', '@graphql'])
@@ -132,8 +132,8 @@ describe('datasets module', () => {
     })
 
     it('should not open the datasets results because there are no results', () => {
-      cy.get(SEARCH.input).trigger('focus')
-      cy.get(SEARCH.input).type('NORESULTS')
+      cy.get(DATA_SEARCH.input).trigger('focus')
+      cy.get(DATA_SEARCH.input).type('NORESULTS')
       cy.get(DATA_SEARCH.autoSuggest).submit()
       cy.url().should('include', '/zoek/?term=NORESULTS')
       cy.wait(['@graphql', '@graphql'])
@@ -144,8 +144,8 @@ describe('datasets module', () => {
       cy.server()
       cy.route(`typeahead?q=vergunningen*`).as('typeaheadResults')
       cy.route('/dcatd/datasets/*').as('getDataset')
-      cy.get(SEARCH.input).trigger('focus')
-      cy.get(SEARCH.input).type('Vergunningen')
+      cy.get(DATA_SEARCH.input).trigger('focus')
+      cy.get(DATA_SEARCH.input).type('Vergunningen')
       cy.wait('@typeaheadResults')
       cy.wait(500)
       cy.get(DATA_SEARCH.autoSuggest).click()
@@ -169,7 +169,7 @@ describe('datasets module', () => {
       cy.get(DATA_SETS.datasetItem).should('be.visible')
 
       cy.get(DATA_SEARCH.searchBarFilter).select('Datasets')
-      cy.get(SEARCH.input).clear().type('Vergunningen{enter}')
+      cy.get(DATA_SEARCH.input).clear().type('Vergunningen{enter}')
 
       cy.contains("Datasets met 'Vergunningen' (").should('be.visible')
       cy.should('not.contain', "Alle zoekresultaten met 'Vergunningen'")
@@ -320,8 +320,8 @@ describe('datasets module', () => {
 
       cy.contains('Datasets (')
 
-      cy.get(SEARCH.input).trigger('focus')
-      cy.get(SEARCH.input).type('leeuw')
+      cy.get(DATA_SEARCH.input).trigger('focus')
+      cy.get(DATA_SEARCH.input).type('leeuw')
       cy.get(DATA_SEARCH.autoSuggest).submit()
       cy.url().should('include', '/zoek/?term=leeuw')
       cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam')

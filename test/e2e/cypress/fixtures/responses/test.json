@@ -1,0 +1,23 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://acc.api.data.amsterdam.nl/vsd/bekendmakingen/4115/",
+      "title": "Aanvraag splitsingsvergunning Koninginneweg 13"
+    }
+  },
+  "_display": "Aanvraag splitsingsvergunning Koninginneweg 13",
+  "ogc_fid": 4115,
+  "wkb_geometry": {"type": "Point", "coordinates": [119610, 485463]},
+  "id": "bekendmakingen_punt.fid-35b41870_17605fa4554_-2397",
+  "oid_": 2532719,
+  "categorie": "wonen",
+  "onderwerp": "splitsingsvergunning",
+  "titel": "Aanvraag splitsingsvergunning Koninginneweg 13",
+  "beschrijving": "Koninginneweg 13, 1071HZ: voor het splitsen van het recht op het gebouw in twee ...",
+  "url": "https://bekendmakingen.amsterdam.nl/bekendmakingen/stadsdeel-zuid/2020/week-45/aanvragen/virtuele-map-1/aanvraag-0/",
+  "postcodehuisnummer": "",
+  "plaats": "",
+  "straat": "",
+  "datum": "2020-11-04T23:00:00Z",
+  "overheid": "Amsterdam"
+}
