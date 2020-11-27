@@ -382,7 +382,7 @@ describe('employee permissions', () => {
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
     })
-    it.only('2. Should show a "bekendmaking"', () => {
+    it('2. Should show a "bekendmaking"', () => {
       // Skipped because data is not stable. Solution is to use fixture data.
       cy.intercept('/vsd/bekendmakingen/4115/', { fixture: 'responses/test.json' })
       // cy.route('/vsd/bekendmakingen/4115/').as('getBekendmaking')

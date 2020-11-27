@@ -81,7 +81,7 @@ describe('Search results', () => {
     it("Should search: 'Centraal stomerij' and first autosuggestitem and searchresult are: 'Centraal Stomerij - Overtoom 79 H'", () => {
       cy.searchAndCheck('Centraal stomerij', 'Centraal Stomerij - Overtoom 79 H')
     })
-    it.only("Should search: '67743293' and first autosuggestitem and searchresult are: 'Vlaamsche Friethuis'", () => {
+    it("Should search: '67743293' and first autosuggestitem and searchresult are: 'Vlaamsche Friethuis'", () => {
       cy.searchAndCheck('67743293', 'Vlaamsche Friethuis')
     })
   })
@@ -189,7 +189,7 @@ describe('Search results', () => {
       cy.checkAutoSuggestFirstofCategory('Toerisme', 'Artikelen', 'Toerisme onder druk?')
       cy.checkFirstInSearchResults('Dossiers', 'Toerisme', DATA_SEARCH.searchResultsEditorialCard)
     })
-    it.only("Should search: 'Drugs' in category 'Artikelen' and check autosuggest: 'Drugsoverlast Zuidoost daalt' and search result: 'Gezondheid Amsterdam' ", () => {
+    it("Should search: 'Drugs' in category 'Artikelen' and check autosuggest: 'Drugsoverlast Zuidoost daalt' and search result: 'Gezondheid Amsterdam' ", () => {
       cy.checkAutoSuggestFirstofCategory('Drugs', 'Artikelen', 'Drugsoverlast Zuidoost daalt')
       cy.checkFirstInSearchResults(
         'Datasets',
