@@ -9,4 +9,4 @@ export default {
   ],
 }
 
-export const DefaultState = () => <OrganizationBlock hasMargin />
+export const DefaultState = () => <OrganizationBlock />

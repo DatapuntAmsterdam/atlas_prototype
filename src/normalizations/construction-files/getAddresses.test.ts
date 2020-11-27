@@ -61,7 +61,7 @@ describe('getAddresses', () => {
     it('should have huisnummer_tot', () => {
       const adres = cloneDeep(adressen[0])
       adres.verblijfsobjecten_label = []
-      const huisnummerTot = 'Zork'
+      const huisnummerTot = 20
       adres.huisnummer_tot = huisnummerTot
 
       expect(formatAddress(adres)).toEqual(

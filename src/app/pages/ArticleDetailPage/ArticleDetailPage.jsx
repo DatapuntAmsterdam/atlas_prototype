@@ -158,7 +158,9 @@ const ArticleDetailPage = () => {
     related,
   } = results || {}
 
-  const image = useMemo(() => getImageFromCms(coverImage, 1200, 600), [coverImage])
+  const image = useMemo(() => (coverImage ? getImageFromCms(coverImage, 1200, 600) : null), [
+    coverImage,
+  ])
 
   const { trackEvent } = useMatomo()
 

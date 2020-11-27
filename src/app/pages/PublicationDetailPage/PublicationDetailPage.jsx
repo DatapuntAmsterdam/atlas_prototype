@@ -79,7 +79,7 @@ const PublicationDetailPage = () => {
 
                 <Column span={{ small: 1, medium: 4, big: 3, large: 6, xLarge: 6 }}>
                   <DocumentCover
-                    imageSrc={getImageFromCms(coverImage, 600, 0, 'fit')}
+                    imageSrc={coverImage ? getImageFromCms(coverImage, 600, 0, 'fit') : null}
                     description={`Download PDF (${fileSize})`}
                     loading={downloadLoading}
                     title={title}

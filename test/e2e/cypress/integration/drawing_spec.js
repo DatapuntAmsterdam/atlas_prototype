@@ -26,15 +26,15 @@ describe('Drawing', () => {
         .siblings()
         .find(DRAWING.dropdownResultsSelectedValue)
         .should('have.text', 'Adressen')
-      cy.get(DRAWING.linkDrawresult).should('have.length', 20)
+      cy.get(DRAWING.linkDrawresult).should('be.visible')
       cy.get(DRAWING.linkDrawresult).first().should('have.text', 'Barndesteeg 1 A')
       cy.get(DRAWING.clusterSymbol).should('be.visible').and('have.length', 4)
 
       // Close drawtool
       cy.get(DRAWING.buttonDrawTool).first().click()
-      cy.get(DRAWING.clusterSymbol).should('not.be.visible')
-      cy.get(DRAWING.polygon).should('not.be.visible')
-      cy.get(DRAWING.linkDrawresult).should('not.be.visible')
+      cy.get(DRAWING.clusterSymbol).should('not.exist')
+      cy.get(DRAWING.polygon).should('not.exist')
+      cy.get(DRAWING.linkDrawresult).should('not.exist')
 
       cy.get(DRAWING.buttonDrawTool).click()
       cy.wait('@getBagShape')
@@ -55,8 +55,8 @@ describe('Drawing', () => {
       cy.get(DRAWING.buttonRemove).click()
       cy.get(DRAWING.polygon).should('have.length', 1).and('be.visible')
       cy.get(DRAWING.buttonDrawTool).first().click()
-      cy.get(DRAWING.clusterSymbol).should('not.be.visible')
-      cy.get(DRAWING.linkDrawresult).should('not.be.visible')
+      cy.get(DRAWING.clusterSymbol).should('not.exist')
+      cy.get(DRAWING.linkDrawresult).should('not.exist')
 
       // Delete second polygon
       cy.get(DRAWING.buttonDrawTool).click()
@@ -64,8 +64,8 @@ describe('Drawing', () => {
       cy.get(DRAWING.buttonRemove).click()
       cy.get(DRAWING.polygon).should('have.length', 1).and('be.visible')
       cy.get(DRAWING.buttonDrawTool).first().click()
-      cy.get(DRAWING.clusterSymbol).should('not.be.visible')
-      cy.get(DRAWING.linkDrawresult).should('not.be.visible')
+      cy.get(DRAWING.clusterSymbol).should('not.exist')
+      cy.get(DRAWING.linkDrawresult).should('not.exist')
     })
     it('Should draw multiple lines on the map and delete one', () => {
       cy.get(MAP.mapContainer).should('exist').and('be.visible')
@@ -79,7 +79,7 @@ describe('Drawing', () => {
       cy.get(DRAWING.polygon).should('have.css', 'stroke', 'rgb(0, 160, 60)')
 
       cy.get(DRAWING.buttonDrawTool).first().click()
-      cy.get(DRAWING.polygon).should('not.be.visible')
+      cy.get(DRAWING.polygon).should('not.exist')
 
       cy.get(DRAWING.buttonDrawTool).click()
       cy.get(DRAWING.polygon).should('be.visible')
@@ -126,7 +126,7 @@ describe('Drawing', () => {
       cy.get(DRAWING.dropdownResults).select('Vestigingen')
       cy.wait('@getHrGeoloaction')
       cy.wait('@getHrShape')
-      cy.get(DRAWING.linkDrawresult).should('have.length', 20)
+      cy.get(DRAWING.linkDrawresult).should('be.visible')
       cy.contains('"Old Bridge" Souvenierwinkel')
       cy.get(DRAWING.clusterSymbol).should('be.visible').and('have.length', 3)
     })
@@ -152,7 +152,7 @@ describe('Drawing', () => {
       cy.get(DRAWING.dropdownResults).select('Kadastrale objecten')
       cy.wait('@getBrkShape')
       cy.wait('@getBrkGeoloaction')
-      cy.get(DRAWING.linkDrawresult).should('have.length', 20)
+      cy.get(DRAWING.linkDrawresult).should('be.visible')
       cy.contains('ASD04 F 06476 G 0000')
     })
   })

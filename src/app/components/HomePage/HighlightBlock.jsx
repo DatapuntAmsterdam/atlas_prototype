@@ -98,7 +98,11 @@ const HighlightBlock = () => {
               showError={error}
               {...(results && results[0])}
               teaserImage={
-                results && results[0] && getImageFromCms(results[0].teaserImage, 900, 900)
+                (results &&
+                  results[0] &&
+                  results[0].teaserImage &&
+                  getImageFromCms(results[0].teaserImage, 900, 900)) ||
+                null
               }
               styleAs="h2"
             />
@@ -113,7 +117,9 @@ const HighlightBlock = () => {
                       loading={loading}
                       showError={error}
                       {...result}
-                      teaserImage={getImageFromCms(result.teaserImage, 500, 500)}
+                      teaserImage={
+                        result.teaserImage ? getImageFromCms(result.teaserImage, 500, 500) : null
+                      }
                     />
                   ))
               : null}

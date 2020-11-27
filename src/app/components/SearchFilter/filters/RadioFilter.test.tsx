@@ -7,12 +7,14 @@ import RadioFilter from './RadioFilter'
 describe('RadioFilter', () => {
   beforeEach(cleanup)
 
-  const defaultProps = {
+  const defaultProps: FilterProps = {
     type: 'test',
+    label: 'Test',
     options: [],
     totalCount: 999,
     hideCount: true,
     selection: [],
+    onSelectionChange: () => {},
   }
 
   const options: FilterOption[] = [
@@ -22,8 +24,7 @@ describe('RadioFilter', () => {
   ]
 
   it('should render an option to disable the filter and select it by default', () => {
-    const props: FilterProps = { ...defaultProps, onSelectionChange: () => {} }
-    const { getByLabelText } = render(<RadioFilter {...props} />)
+    const { getByLabelText } = render(<RadioFilter {...defaultProps} />)
 
     const node = getByLabelText('Alles') as HTMLInputElement
 
@@ -34,7 +35,7 @@ describe('RadioFilter', () => {
   })
 
   it('should render a list of options without selection', () => {
-    const props: FilterProps = { ...defaultProps, options, onSelectionChange: () => {} }
+    const props: FilterProps = { ...defaultProps, options }
     const { getByLabelText } = render(<RadioFilter {...props} />)
 
     const firstNode = getByLabelText('First') as HTMLInputElement
@@ -52,7 +53,7 @@ describe('RadioFilter', () => {
 
   it('should render a list of options with selection', () => {
     const selection = ['second']
-    const props: FilterProps = { ...defaultProps, options, selection, onSelectionChange: () => {} }
+    const props: FilterProps = { ...defaultProps, options, selection }
     const { getByLabelText } = render(<RadioFilter {...props} />)
     const secondNode = getByLabelText('Second') as HTMLInputElement
 

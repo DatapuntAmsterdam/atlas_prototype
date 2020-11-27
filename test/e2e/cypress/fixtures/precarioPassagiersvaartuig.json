@@ -1,0 +1,16 @@
+{
+  "panelType": "Precario passagiersvaartuig",
+  "panelHeading": "Tariefgebied 1",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Categorie": "Passagiersvaartuigen (tarief exclusief omzetbelasting)",
+        "Jaar": "2020",
+        "Gebied": "Tariefgebied 1",
+        "Tarief per jaar per m2": "€ 35,-"
+      }
+    }
+  ],
+  "linkLists": []
+}

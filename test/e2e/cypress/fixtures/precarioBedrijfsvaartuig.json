@@ -1,0 +1,16 @@
+{
+  "panelType": "Precario bedrijfsvaartuig",
+  "panelHeading": "Tariefgebied A",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Categorie": "Bedrijfsvaartuig en stationerende vaartuigen (tarief exclusief omzetbelasting)",
+        "Jaar": "2020",
+        "Stadsdeel": "Noord, Oost, Centrum, Zuid, West, Nieuw-West en Westpoort",
+        "Tarief per jaar per m2": "€ 11,-"
+      }
+    }
+  ],
+  "linkLists": []
+}

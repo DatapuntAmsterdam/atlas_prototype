@@ -1,0 +1,17 @@
+{
+  "panelType": "Bouwstroompunt",
+  "panelHeading": "C-1017CT-01",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Capaciteit": "3 x 250 A",
+        "Beheerorganisatie": "Stichting Exploitatie Evenementenstroom",
+        "Contactgegevens": "office@exploitatie-evenementenstroom.nl",
+        "Licentie benodigd": "Ja",
+        "Adresgegevens": "Utrechtsestraat 11, Amsterdam"
+      }
+    }
+  ],
+  "linkLists": []
+}

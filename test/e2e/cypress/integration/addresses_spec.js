@@ -2,13 +2,12 @@ import { getCountFromHeader } from '../support/helper-functions'
 import {
   ADDRESS_PAGE,
   COMPONENTS,
-  DATA_DETAIL,
+  DETAIL_PANEL,
   DATA_SEARCH,
   DATA_SELECTION_TABLE,
   GEO_SEARCH,
   HEADINGS,
   MAP,
-  SEARCH,
   TABLES,
 } from '../support/selectors'
 
@@ -91,7 +90,7 @@ describe('addresses module', () => {
 
               cy.waitForAdressDetail()
 
-              cy.get(DATA_DETAIL.main).should('exist').and('be.visible')
+              cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
               cy.get('dt').contains(selectedGroup).should('exist').and('be.visible')
               cy.get('dt')
                 .contains(selectedGroup)
@@ -114,7 +113,7 @@ describe('addresses module', () => {
               // click on the firstItem to open address preview panel
               cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click()
               // the detail view should exist
-              cy.get(DATA_DETAIL.main).should('exist').and('be.visible')
+              cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
               // the map view maximize button should exist
               cy.get(ADDRESS_PAGE.buttonMaximizeMap).should('exist')
               // click on the maximize button to open the map view
@@ -205,7 +204,7 @@ describe('user should be able to open more addresses', () => {
     cy.visit('/')
 
     cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
-    cy.get(SEARCH.input).focus().type('Dam 20{enter}')
+    cy.get(DATA_SEARCH.input).focus().type('Dam 20{enter}')
     cy.wait(['@graphql', '@graphql'])
     cy.wait('@jsonapi')
     cy.contains('Adressen (').click()
@@ -235,7 +234,7 @@ describe('open address', () => {
     // Rendering after this request takes some time on server
     cy.wait(500)
     cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
-    cy.get(ADDRESS_PAGE.resultsPanel).get(DATA_DETAIL.heading).contains('Ad Windighof 2')
+    cy.get(ADDRESS_PAGE.resultsPanel).get(DETAIL_PANEL.heading).contains('Ad Windighof 2')
     cy.get(ADDRESS_PAGE.resultsPanel).get('dl').contains('1087HE')
 
     cy.wait('@getPanorama')

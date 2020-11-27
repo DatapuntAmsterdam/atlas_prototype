@@ -41,7 +41,7 @@ Cypress.Commands.add('checkTopography', () => {
 
 Cypress.Commands.add('checkMapLayerCategory', (category) => {
   cy.get(MAP.mapContainer).should('be.visible')
-  cy.get(MAP.mapLegend).should('not.be.visible')
+  cy.get(MAP.mapLegend).should('not.exist')
   cy.get(MAP.mapPanelHandle)
     .find(MAP.mapLegendLabel)
     .contains(category)

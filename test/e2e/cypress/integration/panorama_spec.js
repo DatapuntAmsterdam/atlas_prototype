@@ -1,7 +1,7 @@
 import {
   ADDRESS_PAGE,
   COMPONENTS,
-  DATA_DETAIL,
+  DETAIL_PANEL,
   DATA_SEARCH,
   HOMEPAGE,
   MAP,
@@ -30,7 +30,7 @@ describe('panorama module', () => {
 
   describe('user should be able to navigate to the panorama from the homepage', () => {
     it('should open the panorama viewer', () => {
-      cy.get(PANORAMA.homepage).should('not.be.visible')
+      cy.get(PANORAMA.homepage).should('not.exist')
       cy.get(PANORAMA.panorama).should('exist').and('be.visible')
     })
   })
@@ -114,7 +114,7 @@ describe('panorama module', () => {
       cy.wait('@getOpenbareRuimte')
       cy.wait('@getPanoThumbnail')
       cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
-      cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('Leidsegracht')
+      cy.get(DETAIL_PANEL.heading).should('exist').and('be.visible').contains('Leidsegracht')
       cy.get(`${COMPONENTS.panoramaPreview} a`).click()
 
       cy.wait('@getResults')

@@ -1,15 +1,15 @@
 {
-  "panelType": "Adres (standplaats)",
-  "panelHeading": "Rollemanstraat 8",
+  "panelType": "Adres",
+  "panelHeading": "Zwanenburgwal 44",
   "definitionLists": [
     {
       "subheading": "",
       "items": {
-        "Naam openbare ruimte": "Rollemanstraat",
-        "Huisnummer": "8",
+        "Naam openbare ruimte": "Zwanenburgwal",
+        "Huisnummer": "44",
         "Huisletter": "",
         "Huisnummertoevoeging": "",
-        "Postcode": "1033WN",
+        "Postcode": "1011JD",
         "Woonplaats": "Amsterdam",
         "Type adres": "Hoofdadres"
       }
@@ -17,14 +17,14 @@
     {
       "subheading": "Ligt in",
       "items": {
-        "Stadsdeel": "Noord (N)",
-        "Wijk": "Oostzanerwerf (66)",
-        "Buurt": "Circus/Kermisbuurt (N66g)",
-        "Gebiedsgerichtwerken-gebied": "Noord-West (DX17)"
+        "Stadsdeel": "Centrum (A)",
+        "Wijk": "Nieuwmarkt/Lastage (04)",
+        "Buurt": "Zuiderkerkbuurt (A04h)",
+        "Gebiedsgerichtwerken-gebied": "Centrum-Oost (DX02)"
       }
     },
     {
-      "subheading": "Standplaats",
+      "subheading": "Ligplaats",
       "items": {
         "Status": "Plaats aangewezen",
         "Indicatie geconstateerd": "Nee",
@@ -35,10 +35,6 @@
   "linkLists": [
     {
       "subheading": "Vestigingen",
-      "items": ["RH-Infra"]
-    },
-    {
-      "subheading": "Monumenten",
       "items": []
     }
   ]

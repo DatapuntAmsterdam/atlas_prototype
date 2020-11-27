@@ -1,0 +1,22 @@
+{
+  "panelType": "Fietspaaltje",
+  "panelHeading": "CE-0150-2019",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Type": "uitneembaar",
+        "Aantal": "2",
+        "Noodzaak": "nodig tegen sluipverkeer",
+        "Uiterlijk": "rood/wit",
+        "Omschrijving": "paaltje(s) ong. 75cm hoog",
+        "Ruimte": "Te smal: minder dan 1,6m",
+        "Markering": "markering ontbreekt",
+        "Soort weg": "duidelijk voetgebied, (bijna)geen gefiets",
+        "Status": "nu paaltje(s)",
+        "Zichtbaarheid": "licht en reflectie OK"
+      }
+    }
+  ],
+  "linkLists": []
+}
