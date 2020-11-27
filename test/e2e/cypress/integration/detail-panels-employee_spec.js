@@ -353,7 +353,6 @@ describe('employee permissions', () => {
 
       cy.checkInfoBoxes(['Monumenten', 'Complexen', 'Panden', 'Adressen'])
     })
-
     it('2. Should show a "monumenten complex"', () => {
       cy.route('/monumenten/complexen/*').as('getComplex')
       cy.route('/monumenten/monumenten/?complex_id=*').as('getMonumenten')
@@ -384,13 +383,12 @@ describe('employee permissions', () => {
     })
     it('2. Should show a "bekendmaking"', () => {
       // Skipped because data is not stable. Solution is to use fixture data.
-      cy.intercept('/vsd/bekendmakingen/4115/', { fixture: 'responses/test.json' })
-      // cy.route('/vsd/bekendmakingen/4115/').as('getBekendmaking')
+      cy.route('/vsd/bekendmakingen/4115/').as('getBekendmaking')
       cy.route('/panorama/thumbnail?*').as('getPanorama')
 
       cy.visit('data/vsd/bekendmakingen/id4115/')
 
-      // cy.wait('@getBekendmaking')
+      cy.wait('@getBekendmaking')
       cy.wait('@getPanorama')
 
       cy.checkListItems('../fixtures/bekendmaking.json')
