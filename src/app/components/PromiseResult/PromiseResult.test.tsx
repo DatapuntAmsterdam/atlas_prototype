@@ -108,7 +108,11 @@ describe('PromiseResult', () => {
     mockedAuthAlert.mockImplementation(({ 'data-testid': testId }) => <div data-testid={testId} />)
 
     const factory = () => Promise.resolve(null)
-    const { getByTestId } = render(<PromiseResult factory={factory}>{() => null}</PromiseResult>)
+    const { getByTestId } = render(
+      <ThemeProvider>
+        <PromiseResult factory={factory}>{() => null}</PromiseResult>
+      </ThemeProvider>,
+    )
 
     expect(getByTestId('auth-alert')).toBeDefined()
   })
