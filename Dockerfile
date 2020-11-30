@@ -22,8 +22,7 @@ RUN npm run generate:sitemap
 
 COPY modules /app/modules
 
-COPY .babelrc \
-    .browserslistrc \
+COPY .browserslistrc \
     index.ejs \
     webpack.* \
     tsconfig.* \
