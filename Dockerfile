@@ -44,10 +44,12 @@ RUN echo "`date`" > ./dist/version.txt
 ################################
 FROM nginx:1.19-alpine
 
+ARG ENVIRONMENT=prod
+
 COPY scripts/startup.sh /usr/local/bin/startup.sh
 RUN chmod +x /usr/local/bin/startup.sh
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.${ENVIRONMENT}.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/
 COPY --from=build-deps /app/dist /usr/share/nginx/html
 
