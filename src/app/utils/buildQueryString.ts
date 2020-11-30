@@ -1,10 +1,13 @@
 import encodeParam from './encodeParam'
 import { UrlParam } from './useParam'
 
-export default function buildQueryString<T>(params: [UrlParam<T>, T][]) {
+export default function buildQueryString<T>(
+  paramsToAdd?: [UrlParam<T>, T][],
+  paramsToEmit?: Array<UrlParam<any>>,
+) {
   const searchParams = new URLSearchParams(window.location.search)
 
-  params.forEach(([param, value]) => {
+  paramsToAdd?.forEach(([param, value]) => {
     const newValue = encodeParam(param, value)
 
     if (newValue) {
@@ -12,6 +15,10 @@ export default function buildQueryString<T>(params: [UrlParam<T>, T][]) {
     } else {
       searchParams.delete(param.name)
     }
+  })
+
+  paramsToEmit?.forEach((param) => {
+    searchParams.delete(param.name)
   })
 
   // We don't want the order to change, so always sort them before updating the URL

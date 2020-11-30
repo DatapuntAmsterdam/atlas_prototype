@@ -1,21 +1,23 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useMemo } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import LegacyLink from 'redux-first-router-link'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 import {
   FetchPanoramaOptions,
   getPanoramaThumbnail,
   PanoramaThumbnail,
 } from '../../../../api/panorama/thumbnail'
 import { PANORAMA_CONFIG } from '../../../../panorama/services/panorama-api/panorama-api'
-import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
-import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
 import buildQueryString from '../../../utils/buildQueryString'
 import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
-import { locationParam, panoParam } from '../query-params'
+import { locationParam, mapLayersParam, panoParam, zoomParam } from '../query-params'
+import useParam from '../../../utils/useParam'
+import { PANO_LAYERS } from '../../../components/PanoramaViewer/PanoramaViewer'
+import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
+import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral
@@ -69,6 +71,14 @@ const PanoramaPreview: React.FC<PanoramaPreviewProps> = ({
   radius,
   ...otherProps
 }) => {
+  const [activeLayers] = useParam(mapLayersParam)
+  const activeLayersWithoutPano = useMemo(
+    () => activeLayers.filter((id) => !PANO_LAYERS.includes(id)),
+    [],
+  )
+
+  const newLayers = [...activeLayersWithoutPano, ...PANO_LAYERS]
+
   const result = usePromise(
     () =>
       getPanoramaThumbnail(location, {
@@ -78,20 +88,21 @@ const PanoramaPreview: React.FC<PanoramaPreviewProps> = ({
         aspect,
         radius,
       }),
-    [location.lat, location.lng, width, fov, horizon, aspect, radius],
+    [location],
   )
   const legacyReference = useSelector(getDetailLocation)
 
   return (
     <PreviewContainer {...otherProps} data-testid="panorama-preview">
-      {renderResult(result, location, legacyReference)}
+      {renderResult(result, newLayers, location, legacyReference)}
     </PreviewContainer>
   )
 }
 
 function renderResult(
   result: PromiseResult<PanoramaThumbnail | null>,
-  location: LatLngLiteral | null,
+  newLayers: string[],
+  location: LatLngLiteral,
   legacyReference: any,
 ) {
   if (result.status === PromiseStatus.Pending) {
@@ -105,25 +116,36 @@ function renderResult(
   if (!result.value) {
     return <PreviewMessage>Geen panoramabeeld beschikbaar.</PreviewMessage>
   }
-  const panoramaUrl = buildQueryString<any>([
-    [panoParam, { heading: result.value.heading, pitch: 0, fov: PANORAMA_CONFIG.DEFAULT_FOV }],
-    [locationParam, location],
-  ])
-  const link =
-    window.location.pathname === '/kaart' || window.location.pathname === '/kaart/'
-      ? `${window.location.pathname}?${panoramaUrl}`
-      : toPanoramaAndPreserveQuery(result?.value?.id, result?.value?.heading, legacyReference)
 
-  const linkComponent =
-    window.location.pathname === '/kaart' || window.location.pathname === '/kaart/'
-      ? RouterLink
-      : LegacyLink
+  const to = window.location.pathname.includes('kaart')
+    ? {
+        pathname: window.location.pathname,
+        search: result?.value?.heading
+          ? buildQueryString<any>([
+              [
+                panoParam,
+                {
+                  heading: result?.value?.heading,
+                  pitch: 0,
+                  fov: PANORAMA_CONFIG.DEFAULT_FOV,
+                },
+              ],
+              [locationParam, location],
+              // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
+              [mapLayersParam, newLayers],
+              [zoomParam, 11],
+            ])
+          : '',
+      }
+    : toPanoramaAndPreserveQuery(result?.value?.id, result?.value?.heading, legacyReference)
+  const linkComponent = window.location.pathname.includes('kaart') ? RouterLink : LegacyLink
+
   return (
     <>
       <PreviewImage src={result.value.url} alt="Voorvertoning van panoramabeeld" />
       {/*
       // @ts-ignore */}
-      <PreviewLink forwardedAs={linkComponent} to={link} inList>
+      <PreviewLink forwardedAs={linkComponent} to={to} inList>
         Bekijk panoramabeeld
       </PreviewLink>
     </>

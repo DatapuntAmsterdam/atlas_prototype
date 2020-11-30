@@ -1,17 +1,24 @@
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import MAP_CONFIG from '../map.config'
+import { MapLayer } from '../index'
 
-const generateParams = (layer, location, zoom) => ({
+type Location = { latitude: number; longitude: number }
+
+type Feature = {
+  properties: MapLayer
+}
+
+const generateParams = (layer: MapLayer, location: Location, zoom: number) => ({
   ...layer.detailParams,
-  lat: location.latitude,
-  lon: location.longitude,
+  lat: location.latitude.toString(),
+  lon: location.longitude.toString(),
   radius: layer.detailIsShape
-    ? 0
-    : Math.round(2 ** (MAP_CONFIG.BASE_LAYER_OPTIONS.maxZoom - zoom) / 2),
+    ? '0'
+    : Math.round(2 ** (MAP_CONFIG.BASE_LAYER_OPTIONS.maxZoom - zoom) / 2).toString(),
 })
 
-export const sortResults = (results) =>
+export const sortResults = (results: MapLayer[]) =>
   results.sort((a, b) => {
     if (a.detailIsShape && b.detailIsShape) {
       return a.distance - b.distance
@@ -25,13 +32,22 @@ export const sortResults = (results) =>
     return 1
   })
 
-const retrieveLayers = (detailItems, detailIsShape) =>
-  detailItems.map((item) => ({
-    detailIsShape,
-    ...item.properties,
-  }))
+const retrieveLayers = (detailItems: Feature[], detailIsShape?: boolean): MapLayer[] =>
+  detailItems.map((item) => {
+    const [type, subType] = item.properties.type.split('/')
+    return {
+      detailIsShape,
+      ...item.properties,
+      type,
+      subType,
+    }
+  })
 
-export default async function fetchNearestDetail(location, layers, zoom) {
+export default async function fetchNearestDetail(
+  location: Location,
+  layers: MapLayer[],
+  zoom: number,
+) {
   const results = sortResults(
     (
       await Promise.all(

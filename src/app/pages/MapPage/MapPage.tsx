@@ -12,7 +12,7 @@ import MapContext from './MapContext'
 import MapControls from './MapControls'
 import MapMarkers from './MapMarkers'
 import MapPanelContent from './MapPanelContent'
-import { centerParam, mapLayersParam, panoParam, zoomParam } from './query-params'
+import { centerParam, panoParam, zoomParam } from './query-params'
 import { Overlay, SnapPoint } from './types'
 
 const MapView = styled.div`
@@ -53,24 +53,14 @@ export const MAP_PANEL_SNAP_POSITIONS: PositionPerSnapPoint = {
 
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
-// Todo: get ID's from request
-const PANO_LAYERS = [
-  'pano-pano2020bi',
-  'pano-pano2019bi',
-  'pano-pano2018bi',
-  'pano-pano2017bi',
-  'pano-pano2016bi',
-]
-
 const MapPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [currentOverlay, setCurrentOverlay] = useState(Overlay.None)
   const { showDrawTool, panoFullScreen } = useContext(MapContext)
-  const [mapInstance, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
+  const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
   const [zoom, setZoom] = useParam(zoomParam)
   const [pano] = useParam(panoParam)
-  const [activeLayers, setActiveLayers] = useParam(mapLayersParam)
   // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
 
@@ -83,18 +73,6 @@ const MapPage: React.FC = () => {
       mapInstanceRef.current.invalidateSize()
     }
   }, [panoFullScreen, pano, mapInstanceRef])
-
-  // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
-  useEffect(() => {
-    const activeLayersWithoutPano = activeLayers.filter((id) => !PANO_LAYERS.includes(id))
-    if (panoActive && mapInstance) {
-      mapInstance.setZoom(11)
-
-      setActiveLayers([...activeLayersWithoutPano, ...PANO_LAYERS])
-    } else {
-      setActiveLayers([...activeLayersWithoutPano])
-    }
-  }, [panoActive, setActiveLayers, mapInstance])
 
   return (
     <MapView>
@@ -136,19 +114,19 @@ const MapPage: React.FC = () => {
             {panoActive && <PanoramaViewer />}
             <MapMarkers panoActive={panoActive} />
             {!panoFullScreen ? (
-              <MapPanelContent {...{ setCurrentOverlay, currentOverlay }} />
-            ) : null}
-            {!panoFullScreen ? (
-              <MapControls
-                {...{
-                  setCurrentOverlay,
-                  currentOverlay,
-                  showDesktopVariant,
-                  isLoading,
-                  showDrawTool,
-                  panoActive,
-                }}
-              />
+              <>
+                <MapControls
+                  {...{
+                    setCurrentOverlay,
+                    currentOverlay,
+                    showDesktopVariant,
+                    isLoading,
+                    showDrawTool,
+                    panoActive,
+                  }}
+                />
+                <MapPanelContent {...{ setCurrentOverlay, currentOverlay }} />
+              </>
             ) : null}
           </MapPanelProvider>
         </DataSelectionProvider>

@@ -16,7 +16,7 @@ const useMarzipano = (
   const [currentMarzipanoView, setCurrentMarzipanoView] = useState<Pano | null>(null)
 
   const updateOrientation = () => {
-    if (marzipanoViewerRef.current) {
+    if (!marzipanoViewerRef.current) {
       return
     }
 

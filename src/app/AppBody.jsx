@@ -3,7 +3,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React, { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
-import { Link as RouterLink, generatePath, Route, Switch } from 'react-router-dom'
+import { generatePath, Link as RouterLink, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 import { IDS } from '../shared/config/config'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
@@ -11,7 +11,6 @@ import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import { FeedbackModal } from './components/Modal'
 import NotificationAlert from './components/NotificationAlert/NotificationAlert'
-import PAGES from './pages'
 import { mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
 import isIE from './utils/isIE'
 
@@ -69,7 +68,7 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
   top: 200px;
 `
 
-const AppBody = ({ visibilityError, bodyClasses, hasGrid, currentPage, embedPreviewMode }) => {
+const AppBody = ({ visibilityError, bodyClasses, hasGrid, embedPreviewMode }) => {
   const { enableLinkTracking } = useMatomo()
   enableLinkTracking()
 
@@ -130,43 +129,56 @@ const AppBody = ({ visibilityError, bodyClasses, hasGrid, currentPage, embedPrev
       ) : (
         <>
           <Suspense fallback={<StyledLoadingSpinner />}>
-            {currentPage === PAGES.MAP ? (
-              <MapContainer />
-            ) : (
-              <>
-                <Helmet>
-                  {/* The viewport must be reset for "old" pages that don't incorporate the grid.
+            <Switch>
+              <Route
+                path={[
+                  routing.data_TEMP.path,
+                  routing.dataSearchGeo_TEMP.path,
+                  routing.dataDetail_TEMP.path,
+                  routing.panorama_TEMP.path,
+                  routing.addresses_TEMP.path,
+                  routing.establishments_TEMP.path,
+                  routing.cadastralObjects_TEMP.path,
+                ]}
+              >
+                <MapContainer />
+              </Route>
+              <Route>
+                <>
+                  <Helmet>
+                    {/* The viewport must be reset for "old" pages that don't incorporate the grid.
         1024 is an arbirtrary number as the browser doesn't actually care about the exact number,
         but only needs to know it's significantly bigger than the actual viewport */}
-                  <meta name="viewport" content="width=1024, user-scalable=yes" />
-                </Helmet>
-                <div className={`c-dashboard__body ${bodyClasses}`}>
-                  <NotificationAlert />
-                  {visibilityError && <ErrorAlert />}
-                  {embedPreviewMode ? (
-                    <EmbedIframeComponent />
-                  ) : (
-                    <div className="u-grid u-full-height u-overflow--y-auto">
-                      <div className="u-row u-full-height">
-                        <Switch>
-                          <Route
-                            path={routing.constructionFile.path}
-                            exact
-                            component={ConstructionFilesPage}
-                          />
-                          <Route
-                            path={routing.datasetDetail.path}
-                            exact
-                            component={DatasetDetailPage}
-                          />
-                          <Route path={mapSplitPagePaths} component={MapSplitPage} />
-                        </Switch>
+                    <meta name="viewport" content="width=1024, user-scalable=yes" />
+                  </Helmet>
+                  <div className={`c-dashboard__body ${bodyClasses}`}>
+                    <NotificationAlert />
+                    {visibilityError && <ErrorAlert />}
+                    {embedPreviewMode ? (
+                      <EmbedIframeComponent />
+                    ) : (
+                      <div className="u-grid u-full-height u-overflow--y-auto">
+                        <div className="u-row u-full-height">
+                          <Switch>
+                            <Route
+                              path={routing.constructionFile.path}
+                              exact
+                              component={ConstructionFilesPage}
+                            />
+                            <Route
+                              path={routing.datasetDetail.path}
+                              exact
+                              component={DatasetDetailPage}
+                            />
+                            <Route path={mapSplitPagePaths} component={MapSplitPage} />
+                          </Switch>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              </>
-            )}
+                    )}
+                  </div>
+                </>
+              </Route>
+            </Switch>
             <FeedbackModal id="feedbackModal" />
           </Suspense>
         </>
@@ -179,7 +191,6 @@ AppBody.propTypes = {
   visibilityError: PropTypes.bool.isRequired,
   bodyClasses: PropTypes.string.isRequired,
   hasGrid: PropTypes.bool.isRequired,
-  currentPage: PropTypes.string.isRequired,
   embedPreviewMode: PropTypes.bool.isRequired,
 }
 

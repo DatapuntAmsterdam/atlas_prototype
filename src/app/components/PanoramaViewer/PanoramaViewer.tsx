@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { loadScene } from '../../../panorama/services/marzipano/marzipano'
 import {
@@ -8,6 +9,7 @@ import {
 } from '../../../panorama/services/panorama-api/panorama-api'
 import {
   locationParam,
+  mapLayersParam,
   panoFullScreenParam,
   panoParam,
   panoTagParam,
@@ -15,6 +17,7 @@ import {
 import useMarzipano from '../../utils/useMarzipano'
 import useParam from '../../utils/useParam'
 import PanoramaViewerControls from './PanoramaViewerControls'
+import buildQueryString from '../../utils/buildQueryString'
 
 const MarzipanoView = styled.div`
   height: 100%;
@@ -28,6 +31,15 @@ const PanoramaStyle = styled.div<{ panoFullScreen: boolean }>`
   order: -1; // Put the PanoramaViewer above the Map
 `
 
+// Todo: get ID's from request
+export const PANO_LAYERS = [
+  'pano-pano2020bi',
+  'pano-pano2019bi',
+  'pano-pano2018bi',
+  'pano-pano2017bi',
+  'pano-pano2016bi',
+]
+
 const PanoramaViewer: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null)
   const [panoImageDate, setPanoImageDate] = useState<string>()
@@ -35,7 +47,9 @@ const PanoramaViewer: React.FC = () => {
   const [panoTag, setPanoTag] = useParam(panoTagParam)
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
   const [location, setLocation] = useParam(locationParam)
+  const [activeLayers] = useParam(mapLayersParam)
   const { marzipanoViewer, currentMarzipanoView } = useMarzipano(ref)
+  const history = useHistory()
 
   const onClickHotspot = useCallback(
     async (id: string) => {
@@ -99,10 +113,19 @@ const PanoramaViewer: React.FC = () => {
     }
   }, [marzipanoViewer, location, panoTag])
 
+  const activeLayersWithoutPano = useMemo(
+    () => activeLayers.filter((id) => !PANO_LAYERS.includes(id)),
+    [],
+  )
+
   const onClose = useCallback(() => {
-    setPano(null)
-    setPanoFullScreen(false)
-    setPanoTag(null)
+    history.push({
+      pathname: window.location.pathname,
+      search: buildQueryString<any>(
+        [[mapLayersParam, activeLayersWithoutPano]],
+        [panoParam, panoTagParam, panoFullScreenParam],
+      ),
+    })
   }, [setPano, setPanoTag, setPanoFullScreen])
 
   return (

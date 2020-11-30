@@ -15,7 +15,8 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import L, { LatLng, LatLngExpression } from 'leaflet'
+import L, { LatLng, LatLngExpression, LatLngTuple } from 'leaflet'
+import { useHistory } from 'react-router-dom'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import RouterLink from 'redux-first-router-link'
@@ -29,6 +30,9 @@ import config, { AuthScope, DataSelectionType } from '../config'
 import MapContext from '../MapContext'
 import { Overlay } from '../types'
 import DataSelectionContext from './DataSelectionContext'
+import { routing } from '../../../routes'
+import buildQueryString from '../../../utils/buildQueryString'
+import { polygonsParam, polylinesParam } from '../query-params'
 
 const ResultLink = styled(RouterLink)`
   width: 100%;
@@ -67,6 +71,7 @@ const AccordionContent = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 `
 const StyledAccordion = styled(Accordion)`
   margin-top: ${themeSpacing(2)};
@@ -106,7 +111,7 @@ type Props = {
 
 const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
   const [delayedLoadingIds, setDelayedLoadingIds] = useState<string[]>([])
-  const [highlightMarker, setHighlightMarker] = useState<LatLng | null>(null)
+  const [highlightMarker, setHighlightMarker] = useState<LatLngTuple | null>(null)
   const {
     dataSelection,
     mapVisualizations: mapVisualization,
@@ -120,6 +125,7 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
   const { setShowDrawTool } = useContext(MapContext)
   const userScopes = useSelector(getUserScopes)
   const { trackEvent } = useMatomo()
+  const history = useHistory()
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const memoHighlightMaker = useMemo<LatLngExpression>(() => highlightMarker || [0, 0], [
     highlightMarker,
@@ -208,6 +214,10 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
       stackOrder={currentOverlay === Overlay.Results ? 2 : 1}
       onClose={() => {
         setShowDrawTool(false)
+        history.push({
+          pathname: routing.dataSearchGeo_TEMP.path,
+          search: buildQueryString(undefined, [polylinesParam, polygonsParam]),
+        })
       }}
     >
       <GlobalStyle />

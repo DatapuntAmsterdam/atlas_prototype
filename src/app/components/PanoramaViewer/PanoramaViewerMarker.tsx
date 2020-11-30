@@ -28,7 +28,7 @@ const PanoramaViewerMarker: React.FC<MarkerProps> = ({ location, setLocation }) 
   useMapCenterToMarker(location)
 
   useMapEvents({
-    click: ({ latlng }) => setLocation(latlng),
+    click: ({ latlng }) => setLocation && setLocation(latlng),
   })
 
   useEffect(() => {

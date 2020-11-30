@@ -196,7 +196,6 @@ const App = ({
                 hasGrid: hasMaxWidth,
                 visibilityError,
                 bodyClasses,
-                currentPage,
                 embedPreviewMode,
               }}
             />

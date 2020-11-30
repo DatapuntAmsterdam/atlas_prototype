@@ -81,14 +81,15 @@ describe('fetchNearestDetail', () => {
       }),
     )
 
-    const result = await fetchNearestDetail('location', [{}], 1)
+    const result = await fetchNearestDetail({ latitude: 1, longitude: 2 }, [{}], 1)
     expect(result).toEqual({
       detailIsShape: undefined,
       distance: 0,
       display: 'ASD03 E 09114 G 0000',
       uri: 'https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11440911470000/',
       id: 'NL.KAD.OnroerendeZaak.11440911470000',
-      type: 'kadaster/kadastraal_object',
+      subType: 'kadastraal_object',
+      type: 'kadaster',
     })
   })
 })

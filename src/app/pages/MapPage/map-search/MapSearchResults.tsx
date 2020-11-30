@@ -1,6 +1,5 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { LatLngLiteral } from 'leaflet'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
@@ -77,26 +76,27 @@ const StyledPanoramaPreview = styled(PanoramaPreview)`
 const EXCLUDED_RESULTS = 'vestigingen'
 
 export interface MapSearchPanelProps {
-  location: LatLngLiteral
   currentOverlay: Overlay
 }
 
-const MapSearchResults: React.FC<MapSearchPanelProps> = ({ currentOverlay, location }) => {
+const MapSearchResults: React.FC<MapSearchPanelProps> = ({ currentOverlay }) => {
   const user = useSelector(getUser)
-  const [, setLocation] = useParam(locationParam)
+  const [location, setLocation] = useParam(locationParam)
   const result = usePromise(
     () =>
-      mapSearch(
-        {
-          latitude: location.lat,
-          longitude: location.lng,
-        },
-        user,
-      ),
-    [location.lat, location.lng, user],
+      location
+        ? mapSearch(
+            {
+              latitude: location.lat,
+              longitude: location.lng,
+            },
+            user,
+          )
+        : Promise.reject(),
+    [location, user],
   )
 
-  return (
+  return location ? (
     <MapPanelContent
       title="Resultaten"
       animate
@@ -114,7 +114,7 @@ const MapSearchResults: React.FC<MapSearchPanelProps> = ({ currentOverlay, locat
         <StyledAuthAlert excludedResults={EXCLUDED_RESULTS} />
       )}
     </MapPanelContent>
-  )
+  ) : null
 }
 
 function renderResult(result: PromiseResult<MapSearchResponse>) {
