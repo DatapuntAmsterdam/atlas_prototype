@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import styled from 'styled-components'
+import React, { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { loadScene } from '../../../panorama/services/marzipano/marzipano'
 import {
@@ -14,10 +14,10 @@ import {
   panoParam,
   panoTagParam,
 } from '../../pages/MapPage/query-params'
+import buildQueryString from '../../utils/buildQueryString'
 import useMarzipano from '../../utils/useMarzipano'
 import useParam from '../../utils/useParam'
 import PanoramaViewerControls from './PanoramaViewerControls'
-import buildQueryString from '../../utils/buildQueryString'
 
 const MarzipanoView = styled.div`
   height: 100%;
@@ -40,7 +40,7 @@ export const PANO_LAYERS = [
   'pano-pano2016bi',
 ]
 
-const PanoramaViewer: React.FC = () => {
+const PanoramaViewer: FunctionComponent = () => {
   const ref = useRef<HTMLDivElement>(null)
   const [panoImageDate, setPanoImageDate] = useState<string>()
   const [pano, setPano] = useParam(panoParam)
@@ -121,7 +121,7 @@ const PanoramaViewer: React.FC = () => {
   const onClose = useCallback(() => {
     history.push({
       pathname: window.location.pathname,
-      search: buildQueryString<any>(
+      search: buildQueryString(
         [[mapLayersParam, activeLayersWithoutPano]],
         [panoParam, panoTagParam, panoFullScreenParam],
       ),
@@ -131,7 +131,11 @@ const PanoramaViewer: React.FC = () => {
   return (
     <PanoramaStyle panoFullScreen={panoFullScreen}>
       <MarzipanoView ref={ref} />
-      <PanoramaViewerControls {...{ onClose, panoImageDate, panoFullScreen }} />
+      <PanoramaViewerControls
+        panoImageDate={panoImageDate}
+        panoFullScreen={panoFullScreen}
+        onClose={onClose}
+      />
     </PanoramaStyle>
   )
 }
