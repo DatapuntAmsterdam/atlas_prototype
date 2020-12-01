@@ -1,13 +1,11 @@
+import { Feature, Geometry } from 'geojson'
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import { MapLayer, MapLayerType } from '../index'
 import MAP_CONFIG from '../map.config'
 
+// TODO: Replace this type with the 'LatLng' type from Leaflet.
 type Location = { latitude: number; longitude: number }
-
-type Feature = {
-  properties: MapLayer
-}
 
 const generateParams = (layer: MapLayer, location: Location, zoom: number) => ({
   ...layer.detailParams,
@@ -32,7 +30,10 @@ export const sortResults = (results: MapLayer[]) =>
     return 1
   })
 
-const retrieveLayers = (detailItems: Feature[], detailIsShape?: boolean): MapLayer[] =>
+const retrieveLayers = (
+  detailItems: Feature<Geometry, MapLayer>[],
+  detailIsShape?: boolean,
+): MapLayer[] =>
   detailItems.map((item) => {
     const [type, subType] = item.properties.type.split('/')
 
