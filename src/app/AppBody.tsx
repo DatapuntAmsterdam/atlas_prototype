@@ -1,7 +1,6 @@
 import { Alert, Link, Paragraph } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import PropTypes from 'prop-types'
-import React, { Suspense } from 'react'
+import React, { FunctionComponent, lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { generatePath, Link as RouterLink, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
@@ -14,39 +13,39 @@ import NotificationAlert from './components/NotificationAlert/NotificationAlert'
 import { mapSearchPagePaths, mapSplitPagePaths, routing } from './routes'
 import isIE from './utils/isIE'
 
-const HomePage = React.lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
-const ActualityPage = React.lazy(() =>
-  import(/* webpackChunkName: "ActualityPage" */ './pages/ActualityPage'),
+const HomePage = lazy(() => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'))
+const ActualityPage = lazy(
+  () => import(/* webpackChunkName: "ActualityPage" */ './pages/ActualityPage'),
 )
-const DatasetDetailPage = React.lazy(() =>
-  import(/* webpackChunkName: "DatasetDetailPage" */ './pages/DatasetDetailPage'),
+const DatasetDetailPage = lazy(
+  () => import(/* webpackChunkName: "DatasetDetailPage" */ './pages/DatasetDetailPage'),
 )
-const ConstructionFilesPage = React.lazy(() =>
-  import(/* webpackChunkName: "ConstructionFilesPage" */ './pages/ConstructionFilesPage'),
+const ConstructionFilesPage = lazy(
+  () => import(/* webpackChunkName: "ConstructionFilesPage" */ './pages/ConstructionFilesPage'),
 )
-const ArticleDetailPage = React.lazy(() =>
-  import(/* webpackChunkName: "ArticleDetailPage" */ './pages/ArticleDetailPage'),
+const ArticleDetailPage = lazy(
+  () => import(/* webpackChunkName: "ArticleDetailPage" */ './pages/ArticleDetailPage'),
 )
-const PublicationDetailPage = React.lazy(() =>
-  import(/* webpackChunkName: "PublicationDetailPage" */ './pages/PublicationDetailPage'),
+const PublicationDetailPage = lazy(
+  () => import(/* webpackChunkName: "PublicationDetailPage" */ './pages/PublicationDetailPage'),
 )
-const SpecialDetailPage = React.lazy(() =>
-  import(/* webpackChunkName: "SpecialDetailPage" */ './pages/SpecialDetailPage'),
+const SpecialDetailPage = lazy(
+  () => import(/* webpackChunkName: "SpecialDetailPage" */ './pages/SpecialDetailPage'),
 )
-const CollectionDetailPage = React.lazy(() =>
-  import(/* webpackChunkName: "CollectionDetailPage" */ './pages/CollectionDetailPage'),
+const CollectionDetailPage = lazy(
+  () => import(/* webpackChunkName: "CollectionDetailPage" */ './pages/CollectionDetailPage'),
 )
-const MapSplitPage = React.lazy(() =>
-  import(/* webpackChunkName: "MapSplitPage" */ './pages/MapSplitPage'),
+const MapSplitPage = lazy(
+  () => import(/* webpackChunkName: "MapSplitPage" */ './pages/MapSplitPage'),
 )
-const MapContainer = React.lazy(() =>
-  import(/* webpackChunkName: "MapContainer" */ './pages/MapPage/MapContainer'),
+const MapContainer = lazy(
+  () => import(/* webpackChunkName: "MapContainer" */ './pages/MapPage/MapContainer'),
 )
-const NotFoundPage = React.lazy(() =>
-  import(/* webpackChunkName: "NotFoundPage" */ './pages/NotFoundPage'),
+const NotFoundPage = lazy(
+  () => import(/* webpackChunkName: "NotFoundPage" */ './pages/NotFoundPage'),
 )
-const SearchPage = React.lazy(() =>
-  import(/* webpackChunkName: "SearchPage" */ './pages/SearchPage/index'),
+const SearchPage = lazy(
+  () => import(/* webpackChunkName: "SearchPage" */ './pages/SearchPage/index'),
 )
 
 // The Container from @amsterdam/asc-ui isnt used here as the margins added do not match the ones in the design
@@ -68,7 +67,19 @@ const StyledLoadingSpinner = styled(LoadingSpinner)`
   top: 200px;
 `
 
-const AppBody = ({ visibilityError, bodyClasses, hasGrid, embedPreviewMode }) => {
+export interface AppBodyProps {
+  visibilityError: boolean
+  bodyClasses: string
+  hasGrid: boolean
+  embedPreviewMode: boolean
+}
+
+const AppBody: FunctionComponent<AppBodyProps> = ({
+  visibilityError,
+  bodyClasses,
+  hasGrid,
+  embedPreviewMode,
+}) => {
   const { enableLinkTracking } = useMatomo()
   enableLinkTracking()
 
@@ -185,13 +196,6 @@ const AppBody = ({ visibilityError, bodyClasses, hasGrid, embedPreviewMode }) =>
       )}
     </>
   )
-}
-
-AppBody.propTypes = {
-  visibilityError: PropTypes.bool.isRequired,
-  bodyClasses: PropTypes.string.isRequired,
-  hasGrid: PropTypes.bool.isRequired,
-  embedPreviewMode: PropTypes.bool.isRequired,
 }
 
 export default AppBody
