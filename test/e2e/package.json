@@ -6,7 +6,7 @@
     "url": "git+https://github.com/Amsterdam/atlas.git"
   },
   "engines": {
-    "node": "^12"
+    "node": "^14"
   },
   "author": "Gemeente Amsterdam",
   "license": "MPL-2.0",
