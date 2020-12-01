@@ -1,7 +1,7 @@
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
+import { MapLayer, MapLayerType } from '../index'
 import MAP_CONFIG from '../map.config'
-import { MapLayer } from '../index'
 
 type Location = { latitude: number; longitude: number }
 
@@ -35,10 +35,11 @@ export const sortResults = (results: MapLayer[]) =>
 const retrieveLayers = (detailItems: Feature[], detailIsShape?: boolean): MapLayer[] =>
   detailItems.map((item) => {
     const [type, subType] = item.properties.type.split('/')
+
     return {
       detailIsShape,
       ...item.properties,
-      type,
+      type: type as MapLayerType,
       subType,
     }
   })

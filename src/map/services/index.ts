@@ -7,7 +7,7 @@ export interface MapLayer {
   __typename: 'MapLayer'
   id: string
   title: string
-  type: MapLayerType | string
+  type: MapLayerType
   noDetail: boolean
   minZoom: number
   subType?: string
