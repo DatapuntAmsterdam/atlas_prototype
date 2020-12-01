@@ -9,8 +9,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { MatomoProvider } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import {
@@ -21,6 +20,7 @@ import {
   Provider as GraphQLProvider,
 } from 'urql'
 import environment from '../environment'
+import { RootState } from '../reducers/root'
 import { IDS } from '../shared/config/config'
 import { hasGlobalError } from '../shared/ducks/error/error-message'
 import {
@@ -76,7 +76,18 @@ const graphQLClient = createClient({
   requestPolicy: 'cache-first',
 })
 
-function AppWrapper({ children, hasMaxWidth, currentPage, isFullHeight }) {
+interface AppWrapperProps {
+  hasMaxWidth: boolean
+  isFullHeight: boolean
+  currentPage: string
+}
+
+const AppWrapper: FunctionComponent<AppWrapperProps> = ({
+  children,
+  hasMaxWidth,
+  isFullHeight,
+  currentPage,
+}) => {
   const rootClasses = classNames({
     'c-dashboard--max-width': hasMaxWidth,
     'c-dashboard--full-height': isFullHeight,
@@ -97,7 +108,20 @@ function AppWrapper({ children, hasMaxWidth, currentPage, isFullHeight }) {
   )
 }
 
-const App = ({
+interface AppProps {
+  isFullHeight: boolean
+  currentPage: string
+  visibilityError: boolean
+  embedMode: boolean
+  homePage: boolean
+  printMode: boolean
+  printOrEmbedMode: boolean
+  printModeLandscape: boolean
+  embedPreviewMode: boolean
+  overflowScroll: boolean
+}
+
+const App: FunctionComponent<AppProps> = ({
   isFullHeight,
   visibilityError,
   homePage,
@@ -160,7 +184,12 @@ const App = ({
       <GlobalStyle />
       <MatomoProvider value={matomoInstance}>
         <GraphQLProvider value={graphQLClient}>
-          <AppWrapper {...{ currentPage, isFullHeight, hasMaxWidth }}>
+          <AppWrapper
+            currentPage={currentPage}
+            isFullHeight={isFullHeight}
+            hasMaxWidth={hasMaxWidth}
+          >
+            {/* @ts-ignore */}
             <SkipNavigationLink
               variant="primary"
               title="Direct naar: inhoud"
@@ -173,11 +202,12 @@ const App = ({
               variant="primary"
               title="Direct naar: zoeken"
               onClick={() => {
-                document.getElementById(IDS.searchbar).focus()
+                document.getElementById(IDS.searchbar)?.focus()
               }}
             >
               Direct naar: zoeken
             </SkipNavigationLink>
+            {/* @ts-ignore */}
             <SkipNavigationLink
               variant="primary"
               title="Direct naar: footer"
@@ -211,20 +241,7 @@ App.defaultProps = {
   visibilityError: false,
 }
 
-App.propTypes = {
-  isFullHeight: PropTypes.bool,
-  currentPage: PropTypes.string.isRequired,
-  visibilityError: PropTypes.bool, // vm.visibility.error
-  embedMode: PropTypes.bool.isRequired,
-  homePage: PropTypes.bool.isRequired,
-  printMode: PropTypes.bool.isRequired,
-  printOrEmbedMode: PropTypes.bool.isRequired,
-  printModeLandscape: PropTypes.bool.isRequired,
-  embedPreviewMode: PropTypes.bool.isRequired,
-  overflowScroll: PropTypes.bool.isRequired,
-}
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   currentPage: getPage(state),
   embedMode: isEmbedded(state),
   homePage: isHomepage(state),
