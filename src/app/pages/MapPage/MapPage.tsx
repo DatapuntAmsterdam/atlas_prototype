@@ -2,7 +2,7 @@ import { constants, Map as MapComponent, MapPanelProvider, useStateRef } from '@
 import { PositionPerSnapPoint } from '@amsterdam/arm-core/es/components/MapPanel/constants'
 import { hooks } from '@amsterdam/asc-ui'
 import L from 'leaflet'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { FunctionComponent, useCallback, useContext, useEffect, useState } from 'react'
 import styled, { createGlobalStyle, css } from 'styled-components'
 import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'
@@ -53,10 +53,10 @@ export const MAP_PANEL_SNAP_POSITIONS: PositionPerSnapPoint = {
 
 const { DEFAULT_AMSTERDAM_MAPS_OPTIONS } = constants
 
-const MapPage: React.FC = () => {
+const MapPage: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [currentOverlay, setCurrentOverlay] = useState(Overlay.None)
-  const { showDrawTool, panoFullScreen } = useContext(MapContext)
+  const { panoFullScreen } = useContext(MapContext)
   const [, setMapInstance, mapInstanceRef] = useStateRef<L.Map | null>(null)
   const [center, setCenter] = useParam(centerParam)
   const [zoom, setZoom] = useParam(zoomParam)
@@ -76,7 +76,7 @@ const MapPage: React.FC = () => {
 
   return (
     <MapView>
-      <GlobalStyle {...{ panoActive, panoFullScreen }} />
+      <GlobalStyle panoActive={panoActive} panoFullScreen={panoFullScreen} />
       <MapComponent
         setInstance={setMapInstance}
         options={{
@@ -116,16 +116,16 @@ const MapPage: React.FC = () => {
             {!panoFullScreen ? (
               <>
                 <MapControls
-                  {...{
-                    setCurrentOverlay,
-                    currentOverlay,
-                    showDesktopVariant,
-                    isLoading,
-                    showDrawTool,
-                    panoActive,
-                  }}
+                  setCurrentOverlay={setCurrentOverlay}
+                  currentOverlay={currentOverlay}
+                  showDesktopVariant={showDesktopVariant}
+                  isLoading={isLoading}
+                  panoActive={panoActive}
                 />
-                <MapPanelContent {...{ setCurrentOverlay, currentOverlay }} />
+                <MapPanelContent
+                  currentOverlay={currentOverlay}
+                  setCurrentOverlay={setCurrentOverlay}
+                />
               </>
             ) : null}
           </MapPanelProvider>
