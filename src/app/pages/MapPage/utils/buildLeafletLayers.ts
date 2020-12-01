@@ -25,7 +25,7 @@ const generateOverlay = (layer: MapLayer, token: string) => {
 
   const overlay: Overlay = {
     id: layer.id,
-    type: layer.type as 'tms' | 'wms',
+    type: layer.type,
     params,
     url,
     layer,
