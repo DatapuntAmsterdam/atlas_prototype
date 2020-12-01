@@ -27,16 +27,16 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 
     <% if (htmlWebpackPlugin.files.favicon) { %>
-    <link href="<%= htmlWebpackPlugin.files.favicon %>" rel="shortcut icon">
+      <link href="<%= htmlWebpackPlugin.files.favicon %>" rel="shortcut icon">
     <% } %>
 
     <% for (let key in htmlWebpackPlugin.files.css) { %>
-    <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet">
+      <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet">
     <% } %>
 
     <% for (let item of htmlWebpackPlugin.options.styles) { %>
-    <link rel="preload" href="<%= item %>" as="style">
-    <link rel="stylesheet" href="<%= item %>">
+      <link rel="preload" href="<%= item %>" as="style">
+      <link rel="stylesheet" href="<%= item %>">
     <% } %>
 
     <style>
@@ -82,20 +82,20 @@
     </script>
 
     <% for (let item of htmlWebpackPlugin.options.scripts) { %>
-    <script src="<%= item %>"></script>
+      <script src="<%= item %>"></script>
     <% } %>
 
     <% if (!htmlWebpackPlugin.options.skipEnvJSON) { %>
-    <script id="environment" type="application/json">
-          {
-            "DEPLOY_ENV": "${DEPLOY_ENV}",
-            "IIIF_ROOT": "${IIIF_ROOT}",
-            "API_ROOT": "${API_ROOT}",
-            "GRAPHQL_ENDPOINT": "${GRAPHQL_ENDPOINT}",
-            "ROOT": "${ROOT}",
-            "CMS_ROOT": "${CMS_ROOT}"
-          }
-        </script>
+      <script id="environment" type="application/json">
+        {
+          "DEPLOY_ENV": "${DEPLOY_ENV}",
+          "IIIF_ROOT": "${IIIF_ROOT}",
+          "API_ROOT": "${API_ROOT}",
+          "GRAPHQL_ENDPOINT": "${GRAPHQL_ENDPOINT}",
+          "ROOT": "${ROOT}",
+          "CMS_ROOT": "${CMS_ROOT}"
+        }
+      </script>
     <% } %>
   </body>
 </html>
