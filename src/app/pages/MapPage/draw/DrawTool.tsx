@@ -16,7 +16,7 @@ import { PolyDrawing, polygonsParam, polylinesParam } from '../query-params'
 import { Overlay, SnapPoint } from '../types'
 import DataSelectionContext from './DataSelectionContext'
 import { routing } from '../../../routes'
-import buildQueryString from '../../../utils/buildQueryString'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -81,6 +81,7 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
     mapVisualizations: mapVisualization,
     removeDataSelection,
   } = useContext(DataSelectionContext)
+  const { buildQueryString } = useBuildQueryString()
 
   const [polygons, setPolygons] = useParam(polygonsParam)
   const [polylines, setPolylines] = useParam(polylinesParam)

@@ -63,7 +63,6 @@ const MapPage: FunctionComponent = () => {
   const [pano] = useParam(panoParam)
   // TODO: Import 'useMatchMedia' directly once this issue has been resolved: https://github.com/Amsterdam/amsterdam-styled-components/issues/1120
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
-
   const panoActive = !!pano
 
   // This is necessary to call, because we resize the map dynamically

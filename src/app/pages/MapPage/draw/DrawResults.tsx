@@ -31,7 +31,7 @@ import MapContext from '../MapContext'
 import { Overlay } from '../types'
 import DataSelectionContext from './DataSelectionContext'
 import { routing } from '../../../routes'
-import buildQueryString from '../../../utils/buildQueryString'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 import { polygonsParam, polylinesParam } from '../query-params'
 
 const ResultLink = styled(RouterLink)`
@@ -130,6 +130,7 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
   const memoHighlightMaker = useMemo<LatLngExpression>(() => highlightMarker || [0, 0], [
     highlightMarker,
   ])
+  const { buildQueryString } = useBuildQueryString()
 
   // Effect to delay the loading states, this is to prevent the results block to collapse and re-open in a short time
   useEffect(() => {

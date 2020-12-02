@@ -7,14 +7,21 @@ exports[`MapSearchResults rendering should filter external monumenten on pand re
   <header
     className="
           map-search-results__header
-          map-search-results__header--no-pano
+          map-search-results__header--pano
         "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-search-results__header-container"
       >
@@ -118,14 +125,21 @@ exports[`MapSearchResults rendering should render empty results 1`] = `
   <header
     className="
           map-search-results__header
-          map-search-results__header--no-pano
+          map-search-results__header--pano
         "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-search-results__header-container"
       >
@@ -177,14 +191,21 @@ exports[`MapSearchResults rendering should render results 1`] = `
   <header
     className="
           map-search-results__header
-          map-search-results__header--no-pano
+          map-search-results__header--pano
         "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-search-results__header-container"
       >
@@ -280,14 +301,21 @@ exports[`MapSearchResults rendering should update results 1`] = `
   <header
     className="
           map-search-results__header
-          map-search-results__header--no-pano
+          map-search-results__header--pano
         "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-search-results__header-container"
       >
@@ -374,14 +402,21 @@ exports[`MapSearchResults rendering should update results 2`] = `
   <header
     className="
           map-search-results__header
-          map-search-results__header--no-pano
+          map-search-results__header--pano
         "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-search-results__header-container"
       >

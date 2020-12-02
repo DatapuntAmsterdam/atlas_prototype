@@ -41,6 +41,7 @@ const PanoramaViewerControls: React.FC<Props> = ({ children, onClose, panoImageD
             size={44}
             iconSize={25}
             onClick={onClose}
+            data-testid="panoramaViewerCloseButton"
             icon={<Close />}
           />
           <ResizeButton
@@ -49,6 +50,7 @@ const PanoramaViewerControls: React.FC<Props> = ({ children, onClose, panoImageD
             title="Volledig scherm"
             size={44}
             iconSize={40}
+            data-testid="panoramaViewerFullscreenButton"
             onClick={() => {
               setPanoFullScreen(!panoFullScreen)
             }}

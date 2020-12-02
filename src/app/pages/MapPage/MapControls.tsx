@@ -74,7 +74,12 @@ const MapControls: FunctionComponent<MapControlsProps> = ({
           topRight={
             !panoActive && (
               <>
-                <DrawToolOpenButton onClick={() => setShowDrawTool(true)} />
+                {!showDrawTool && (
+                  <DrawToolOpenButton
+                    data-testid="drawtoolOpenButton"
+                    onClick={() => setShowDrawTool(true)}
+                  />
+                )}
                 {showDrawTool && <DrawTool setCurrentOverlay={setCurrentOverlay} />}
               </>
             )
@@ -102,6 +107,7 @@ const MapControls: FunctionComponent<MapControlsProps> = ({
               <>
                 {!showDrawTool && (
                   <DrawToolOpenButton
+                    data-testid="drawtoolOpenButton"
                     onClick={() => {
                       setShowDrawTool(true)
                     }}

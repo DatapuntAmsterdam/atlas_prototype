@@ -5,7 +5,7 @@ import { routing } from '../../../routes'
  * @param urlPart
  */
 const buildDetailUrl = ({ type, subtype, id }: { type: string; subtype: string; id: string }) => {
-  // Todo: AfterBeta: this can be removed
+  // Todo: AfterBeta: this statement can be removed
   const route = window.location.pathname.includes('kaart')
     ? routing.dataDetail_TEMP.path
     : routing.dataDetail.path

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { loadScene } from '../../../panorama/services/marzipano/marzipano'
@@ -14,7 +14,7 @@ import {
   panoParam,
   panoTagParam,
 } from '../../pages/MapPage/query-params'
-import buildQueryString from '../../utils/buildQueryString'
+import useBuildQueryString from '../../utils/useBuildQueryString'
 import useMarzipano from '../../utils/useMarzipano'
 import useParam from '../../utils/useParam'
 import PanoramaViewerControls from './PanoramaViewerControls'
@@ -49,7 +49,9 @@ const PanoramaViewer: FunctionComponent = () => {
   const [location, setLocation] = useParam(locationParam)
   const [activeLayers] = useParam(mapLayersParam)
   const { marzipanoViewer, currentMarzipanoView } = useMarzipano(ref)
+  const browserLocation = useLocation()
   const history = useHistory()
+  const { buildQueryString } = useBuildQueryString()
 
   const onClickHotspot = useCallback(
     async (id: string) => {
@@ -120,7 +122,7 @@ const PanoramaViewer: FunctionComponent = () => {
 
   const onClose = useCallback(() => {
     history.push({
-      pathname: window.location.pathname,
+      pathname: browserLocation.pathname,
       search: buildQueryString(
         [[mapLayersParam, activeLayersWithoutPano]],
         [panoParam, panoTagParam, panoFullScreenParam],

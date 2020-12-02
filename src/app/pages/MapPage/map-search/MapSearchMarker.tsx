@@ -10,11 +10,12 @@ import { MarkerProps } from '../MapMarkers'
 import { locationParam } from '../query-params'
 import { SnapPoint } from '../types'
 import { routing } from '../../../routes'
-import buildQueryString from '../../../utils/buildQueryString'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 
 const MapSearchMarker: React.FC<MarkerProps> = ({ location }) => {
   const { legendLeafletLayers } = useContext(MapContext)
   const history = useHistory()
+  const { buildQueryString } = useBuildQueryString()
 
   useMapCenterToMarker(location)
 
@@ -33,9 +34,10 @@ const MapSearchMarker: React.FC<MarkerProps> = ({ location }) => {
       .filter((overlay) => !!overlay.layer.detailUrl)
       .map((overlay) => overlay.layer)
 
-    const nearestDetail = layers
-      ? await fetchNearestDetail({ latitude: e.latlng.lat, longitude: e.latlng.lng }, layers, 8)
-      : null
+    const nearestDetail =
+      layers.length > 0
+        ? await fetchNearestDetail({ latitude: e.latlng.lat, longitude: e.latlng.lng }, layers, 8)
+        : null
 
     if (nearestDetail) {
       const { type, subType, id } = nearestDetail

@@ -32,7 +32,7 @@ import DetailTable from './DetailTable'
 import useAuthScope from '../../../utils/useAuthScope'
 import Spacer from '../../../components/Spacer/Spacer'
 import { routing } from '../../../routes'
-import buildQueryString from '../../../utils/buildQueryString'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 import { panoParam } from '../query-params'
 
 const Message = styled(Paragraph)`
@@ -111,10 +111,10 @@ const DetailPanel: FunctionComponent = () => {
   const { isUserAuthorized } = useAuthScope()
   const { type, subtype: subType, id } = useParams<DataDetailPageParams>()
   const history = useHistory()
+  const { buildQueryString } = useBuildQueryString()
 
   async function getDetailData() {
     const serviceDefinition = getServiceDefinition(`${type}/${subType}`)
-
     // Todo: Redirect to 404?
     if (!serviceDefinition) {
       return Promise.resolve(null)
@@ -157,18 +157,20 @@ const DetailPanel: FunctionComponent = () => {
   return (
     <PromiseResult factory={() => getDetailData()} deps={[]}>
       {({ value }) => (
-        <MapPanelContent
-          title={value?.data.subTitle || 'Detailweergave'}
-          subTitle={value?.data.title || ''}
-          onClose={() => {
-            history.push({
-              pathname: routing.dataSearchGeo.path,
-              search: buildQueryString([[panoParam, null]]),
-            })
-          }}
-        >
-          <RenderDetails details={value} />
-        </MapPanelContent>
+        <>
+          <MapPanelContent
+            title={value?.data.subTitle || 'Detailweergave'}
+            subTitle={value?.data.title || ''}
+            onClose={() => {
+              history.push({
+                pathname: routing.dataSearchGeo.path,
+                search: buildQueryString([[panoParam, null]]),
+              })
+            }}
+          >
+            <RenderDetails details={value} />
+          </MapPanelContent>
+        </>
       )}
     </PromiseResult>
   )

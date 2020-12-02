@@ -7,7 +7,7 @@ import { PANORAMA_CONFIG } from '../../panorama/services/panorama-api/panorama-a
 import { toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../store/redux-first-router/selectors'
 import { locationParam, panoParam } from '../pages/MapPage/query-params'
-import buildQueryString from './buildQueryString'
+import useBuildQueryString from './useBuildQueryString'
 import usePromise, { PromiseStatus } from './usePromise'
 
 const useGetLegacyPanoramaPreview = (
@@ -33,6 +33,7 @@ const useGetLegacyPanoramaPreview = (
         : Promise.reject(),
     [location],
   )
+  const { buildQueryString } = useBuildQueryString()
 
   if (panoramaResult.status !== PromiseStatus.Fulfilled) {
     return {
