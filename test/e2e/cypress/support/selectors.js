@@ -29,7 +29,7 @@ export const ADDRESS_PAGE = {
 }
 
 export const COMPONENTS = {
-  panoramaPreview: '[data-testid="panorama-preview"]',
+  panoramaPreview: '[data-testid="panoramaPreview"]',
   shareBar: '[data-testid="sharebar"]',
 }
 

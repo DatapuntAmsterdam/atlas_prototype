@@ -31,7 +31,6 @@ const PanoramaStyle = styled.div<{ panoFullScreen: boolean }>`
   order: -1; // Put the PanoramaViewer above the Map
 `
 
-// Todo: get ID's from request
 export const PANO_LAYERS = [
   'pano-pano2020bi',
   'pano-pano2019bi',
@@ -117,7 +116,7 @@ const PanoramaViewer: FunctionComponent = () => {
 
   const activeLayersWithoutPano = useMemo(
     () => activeLayers.filter((id) => !PANO_LAYERS.includes(id)),
-    [],
+    [activeLayers],
   )
 
   const onClose = useCallback(() => {

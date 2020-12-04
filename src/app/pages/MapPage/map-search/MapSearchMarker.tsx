@@ -24,14 +24,14 @@ const MapSearchMarker: React.FC<MarkerProps> = ({ location }) => {
   const legendLeafletLayersRef = useRef<Overlay[]>(legendLeafletLayers)
 
   useEffect(() => {
-    if (legendLeafletLayers && legendLeafletLayersRef) {
+    if (legendLeafletLayers) {
       legendLeafletLayersRef.current = legendLeafletLayers
     }
   }, [legendLeafletLayers])
 
   async function handleMapClick(e: LeafletMouseEvent) {
     const layers = legendLeafletLayersRef.current
-      .filter((overlay) => !!overlay.layer.detailUrl)
+      .filter((overlay) => overlay.layer.detailUrl)
       .map((overlay) => overlay.layer)
 
     const nearestDetail =

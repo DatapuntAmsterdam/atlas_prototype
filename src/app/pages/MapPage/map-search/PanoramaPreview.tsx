@@ -1,18 +1,14 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
 import React, { FunctionComponent, useMemo } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import LegacyLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import {
-  FetchPanoramaOptions,
-  getPanoramaThumbnail,
-  PanoramaThumbnail,
-} from '../../../../api/panorama/thumbnail'
+import { FetchPanoramaOptions, getPanoramaThumbnail } from '../../../../api/panorama/thumbnail'
 import { PANORAMA_CONFIG } from '../../../../panorama/services/panorama-api/panorama-api'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
-import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
+import usePromise, { PromiseStatus } from '../../../utils/usePromise'
 import { locationParam, mapLayersParam, panoParam, zoomParam } from '../query-params'
 import useParam from '../../../utils/useParam'
 import { PANO_LAYERS } from '../../../components/PanoramaViewer/PanoramaViewer'
@@ -59,20 +55,41 @@ const PreviewMessage = styled.div`
   background-color: ${themeColor('tint', 'level3')};
 `
 
-type ResultProps = {
-  result: PromiseResult<PanoramaThumbnail | null>
-  location: LatLngLiteral
-}
-
-const Result: FunctionComponent<ResultProps> = ({ result, location }) => {
+// TODO: Link to panorama detail panel
+// TODO: Wait for image to load and decode to prevent flickering.
+// TODO: AfterBeta: Remove legacy link
+const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
+  location,
+  width,
+  fov,
+  horizon,
+  aspect,
+  radius,
+  ...otherProps
+}) => {
   const [activeLayers] = useParam(mapLayersParam)
+  const browserLocation = useLocation()
 
   const activeLayersWithoutPano = useMemo(
     () => activeLayers.filter((id) => !PANO_LAYERS.includes(id)),
     [],
   )
 
-  const newLayers = [...activeLayersWithoutPano, ...PANO_LAYERS]
+  const result = usePromise(
+    () =>
+      getPanoramaThumbnail(location, {
+        width,
+        fov,
+        horizon,
+        aspect,
+        radius,
+      }),
+    [location],
+  )
+
+  const newLayers = useMemo(() => [...activeLayersWithoutPano, ...PANO_LAYERS], [
+    activeLayersWithoutPano,
+  ])
   const legacyReference = useSelector(getDetailLocation)
   const { buildQueryString } = useBuildQueryString()
   if (result.status === PromiseStatus.Pending) {
@@ -87,68 +104,35 @@ const Result: FunctionComponent<ResultProps> = ({ result, location }) => {
     return <PreviewMessage>Geen panoramabeeld beschikbaar.</PreviewMessage>
   }
 
-  const to = window.location.pathname.includes('kaart')
+  const to = browserLocation.pathname.includes('kaart')
     ? {
-        pathname: window.location.pathname,
-        search: result?.value?.heading
-          ? buildQueryString<any>([
-              [
-                panoParam,
-                {
-                  heading: result?.value?.heading,
-                  pitch: 0,
-                  fov: PANORAMA_CONFIG.DEFAULT_FOV,
-                },
-              ],
-              [locationParam, location],
-              // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
-              [mapLayersParam, newLayers],
-              [zoomParam, 11],
-            ])
-          : '',
+        pathname: browserLocation.pathname,
+        search: buildQueryString<any>([
+          [
+            panoParam,
+            {
+              heading: result?.value?.heading || 0,
+              pitch: 0,
+              fov: PANORAMA_CONFIG.DEFAULT_FOV,
+            },
+          ],
+          [locationParam, location],
+          // Zoom to level 11 when opening the PanoramaViewer, to show the panorama map layers
+          [mapLayersParam, newLayers],
+          [zoomParam, 11],
+        ]),
       }
     : toPanoramaAndPreserveQuery(result?.value?.id, result?.value?.heading, legacyReference)
-  const linkComponent = window.location.pathname.includes('kaart') ? RouterLink : LegacyLink
+  const linkComponent = browserLocation.pathname.includes('kaart') ? RouterLink : LegacyLink
 
   return (
-    <>
+    <PreviewContainer {...otherProps} data-testid="panoramaPreview">
       <PreviewImage src={result.value.url} alt="Voorvertoning van panoramabeeld" />
       {/*
       // @ts-ignore */}
       <PreviewLink forwardedAs={linkComponent} to={to} inList>
         Bekijk panoramabeeld
       </PreviewLink>
-    </>
-  )
-}
-
-// TODO: Link to panorama detail panel
-// TODO: Wait for image to load and decode to prevent flickering.
-// TODO: AfterBeta: Remove legacy link
-const PanoramaPreview: React.FC<PanoramaPreviewProps> = ({
-  location,
-  width,
-  fov,
-  horizon,
-  aspect,
-  radius,
-  ...otherProps
-}) => {
-  const result = usePromise(
-    () =>
-      getPanoramaThumbnail(location, {
-        width,
-        fov,
-        horizon,
-        aspect,
-        radius,
-      }),
-    [location],
-  )
-
-  return (
-    <PreviewContainer {...otherProps} data-testid="panorama-preview">
-      <Result {...{ result, location }} />
     </PreviewContainer>
   )
 }
