@@ -35,15 +35,10 @@ const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {
     const newParams = buildParamQuery(urlParam, newValue)
 
     if (location.pathname !== window.location.pathname) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        "There's a mismatch between window.location and the location from the useLocation hook from react-router. This sometimes happens when calling the 'setValue' inside a non-react event-handler that is not updated. Please be sure the component is updated via react-router",
-        'Tried to update parameter with key: "',
-        urlParam.name,
-        '"',
+      throw new Error(
+        `There's a mismatch between window.location and the location from the useLocation hook from react-router. This sometimes happens when calling the 'setValue' inside a non-react event-handler that is not updated. Please be sure the component is updated via react-router.
+        Tried to update parameter with key: "${urlParam.name}"`,
       )
-
-      return undefined
     }
     return history[method]({ ...location, search: newParams.toString() })
   }, [])

@@ -1,3 +1,4 @@
+import { LatLngLiteral } from 'leaflet'
 import { FeatureCollection, Geometry } from 'geojson'
 import environment from '../../../environment'
 import { UserState } from '../../../shared/ducks/user/user'
@@ -124,6 +125,7 @@ export const fetchRelatedForUser = (user: UserState) => (
 
 export interface MapSearchResponse {
   errors: boolean
+  location: LatLngLiteral
   results: MapSearchCategory[]
 }
 
@@ -145,11 +147,15 @@ export interface MapSearchResult {
 }
 
 export default function mapSearch(
-  location: { latitude: number; longitude: number },
   user: UserState,
+  location: LatLngLiteral | null,
 ): Promise<MapSearchResponse> {
   const errorType = 'error'
   const allRequests: Promise<any>[] = []
+
+  if (!location) {
+    return Promise.reject(Error('No location given'))
+  }
 
   endpoints.forEach((endpoint) => {
     const isInScope = !endpoint.authScope || user.scopes.includes(endpoint.authScope)
@@ -160,8 +166,8 @@ export default function mapSearch(
 
     const searchParams = new URLSearchParams({
       ...endpoint.params,
-      lat: location.latitude.toString(),
-      lon: location.longitude.toString(),
+      lat: location.lat.toString(),
+      lon: location.lng.toString(),
       radius: (endpoint.radius ?? 0).toString(),
     })
 
@@ -194,6 +200,7 @@ export default function mapSearch(
       results: createMapSearchResultsModel(
         results.filter((result) => result && result.type !== errorType),
       ),
+      location,
       errors: results.some((result) => result && result.type === errorType),
     }))
 }
