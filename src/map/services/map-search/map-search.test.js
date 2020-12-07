@@ -34,7 +34,6 @@ describe('mapSearch service', () => {
       )
 
       const data = await search(
-        { latitude: 1, longitude: 0 },
         {
           authenticated: false,
           accessToken: '',
@@ -42,6 +41,7 @@ describe('mapSearch service', () => {
           name: '',
           error: false,
         },
+        { lat: 1, lng: 0 },
       )
 
       expect(data.results).toEqual([
@@ -81,7 +81,6 @@ describe('mapSearch service', () => {
       })
 
       const data = await search(
-        { latitude: 1, longitude: 0 },
         {
           authenticated: false,
           accessToken: '',
@@ -89,6 +88,7 @@ describe('mapSearch service', () => {
           name: '',
           error: false,
         },
+        { lat: 1, lng: 0 },
       )
 
       expect(data.results).toEqual([
@@ -112,7 +112,7 @@ describe('mapSearch service', () => {
     })
 
     it('should return results based on user scope', async () => {
-      const data = await search({ latitude: 1, longitude: 0 }, {})
+      const data = await search({}, { lat: 1, lng: 0 })
 
       expect(data.results[0].results.length).toBe(14) // !!!!IMPORTANT: UPDATE WITH +1 WHEN ADDING NEW GEOSEARCH
     })
