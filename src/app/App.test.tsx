@@ -16,6 +16,8 @@ jest.mock('./components/Header', () => () => <div data-testid="header" />)
 jest.mock('../map/components/legend/MapLegend')
 jest.mock('./utils/useParam')
 
+jest.mock('./components/Modal/ErrorModal', () => () => null)
+
 const mockStore = configureMockStore()
 const initialState = {
   ui: {
