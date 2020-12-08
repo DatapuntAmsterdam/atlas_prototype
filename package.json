@@ -30,7 +30,7 @@
     "@amsterdam/arm-core": "^0.4.0",
     "@amsterdam/arm-draw": "^0.4.0",
     "@amsterdam/arm-nontiled": "^0.4.0",
-    "@amsterdam/asc-assets": "^0.26.1",
+    "@amsterdam/asc-assets": "^0.26.2",
     "@amsterdam/asc-ui": "^0.26.1",
     "@amsterdam/react-maps": "^0.10.0",
     "@babel/runtime": "^7.12.5",
