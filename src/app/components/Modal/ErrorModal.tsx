@@ -74,7 +74,7 @@ const ErrorModal: FunctionComponent<Props> = ({ openErrorModal, setOpenErrorModa
             </Link>
           </ListItem>
         </List>
-        <Paragraph>Excuus voor het ongemak.</Paragraph>
+        <Paragraph>Excuses voor het ongemak.</Paragraph>
       </ModalBlock>
     </Modal>
   )
