@@ -50,7 +50,7 @@
     "isomorphic-fetch": "3.0.0",
     "json-api-normalize": "1.1.5",
     "leaflet": "1.7.1",
-    "leaflet-draw": "1.0.4",
+    "leaflet-draw": "1.0.0",
     "leaflet-rotatedmarker": "0.2.0",
     "leaflet.markercluster": "1.4.1",
     "leaflet.nontiledlayer": "1.0.8",
