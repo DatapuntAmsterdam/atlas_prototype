@@ -1,0 +1,28 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/test/e2e"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: d3
+    versions:
+    - ">= 0"
+  - dependency-name: imports-loader
+    versions:
+    - ">= 0"
+  - dependency-name: leaflet-draw
+    versions:
+    - ">= 0"
+  - dependency-name: react-leaflet
+    versions:
+    - ">= 0"
+  - dependency-name: redux-saga
+    versions:
+    - ">= 0"
