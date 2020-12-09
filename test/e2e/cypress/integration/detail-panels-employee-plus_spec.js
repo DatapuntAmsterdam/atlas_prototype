@@ -193,7 +193,9 @@ describe('employee permissions', () => {
         'getMaatschappelijkeActiviteit',
       )
       cy.intercept('**/handelsregister/persoon/*').as('getPersoon')
-      cy.intercept('**/handelsregister/vestiging/?maatschappelijke_activiteit=*').as('getVestigingen')
+      cy.intercept('**/handelsregister/vestiging/?maatschappelijke_activiteit=*').as(
+        'getVestigingen',
+      )
       cy.intercept('**/handelsregister/functievervulling/?heeft_aansprakelijke=*').as(
         'getFunctievervullingen',
       )

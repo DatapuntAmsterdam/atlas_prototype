@@ -2,7 +2,9 @@ import { DATA_SEARCH, HOMEPAGE } from './selectors'
 
 Cypress.Commands.add('checkAutoSuggestFirstOfAll', (searchTerm, result) => {
   cy.intercept('POST', '/cms_search/graphql/').as('postGraphql')
-  cy.intercept(`**/typeahead?q=${searchTerm.replace(/\s+/g, '+').toLowerCase()}*`).as('getTypeAhead')
+  cy.intercept(`**/typeahead?q=${searchTerm.replace(/\s+/g, '+').toLowerCase()}*`).as(
+    'getTypeAhead',
+  )
   cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
   cy.get(DATA_SEARCH.autoSuggest).type(searchTerm, { delay: 80 })
   cy.wait('@getTypeAhead')
@@ -14,7 +16,9 @@ Cypress.Commands.add('checkAutoSuggestFirstOfAll', (searchTerm, result) => {
 
 Cypress.Commands.add('checkAutoSuggestFirstofCategory', (searchTerm, category, result) => {
   cy.intercept('POST', '/cms_search/graphql/').as('postGraphql')
-  cy.intercept(`**/typeahead?q=${searchTerm.replace(/\s+/g, '+').toLowerCase()}*`).as('getTypeAhead')
+  cy.intercept(`**/typeahead?q=${searchTerm.replace(/\s+/g, '+').toLowerCase()}*`).as(
+    'getTypeAhead',
+  )
   cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
   cy.get(DATA_SEARCH.autoSuggest).type(searchTerm, { delay: 80 })
   cy.wait('@getTypeAhead')
