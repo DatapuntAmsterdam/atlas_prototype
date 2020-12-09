@@ -473,7 +473,6 @@ describe('Check if all map layers are visible when selected', () => {
 })
 describe('Check map layers logged in', () => {
   beforeEach(() => {
-    cy.server()
     cy.hidePopup()
   })
   before(() => {

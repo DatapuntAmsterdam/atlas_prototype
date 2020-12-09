@@ -15,9 +15,8 @@ const { VIEW, VIEW_CENTER } = PARAMETERS
 describe('map module', () => {
   describe('user should be able to navigate to the map from the homepage', () => {
     it('should open the map', () => {
-      cy.server()
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()
       cy.visit('/')
 
@@ -45,12 +44,11 @@ describe('map module', () => {
   describe('user should be able to interact with the map', () => {
     it('should show results based on the interaction with the map', () => {
       const svgMapPath = '/assets/images/map/'
-      cy.server()
       cy.defineGeoSearchRoutes()
       cy.defineAddressDetailRoutes()
 
       // Use regular expression to match spaces
-      cy.route('/typeahead?q=dam+1*').as('getTypeaheadResults')
+      cy.intercept('**/typeahead?q=dam+1*').as('getTypeaheadResults')
 
       // ensure the viewport is always the same in this test, so the clicks can be aligned properly
       cy.viewport(1000, 660)
@@ -103,7 +101,6 @@ describe('map module', () => {
 
   describe('user should be able to use the map', () => {
     it('should render the leaflet map', () => {
-      cy.server()
       cy.hidePopup()
       cy.visit(`/${routing.data.path}?${VIEW}=kaart`)
       cy.get(ADDRESS_PAGE.mapContainer).should('be.visible')
@@ -112,7 +109,6 @@ describe('map module', () => {
     })
 
     it('should add a map-layer to the leaflet map', () => {
-      cy.server()
       cy.hidePopup()
       cy.visit(`/${routing.data.path}?${VIEW_CENTER}=52.3731081%2C4.8932945&${VIEW}=kaart`)
       // the map-panel should have the class collapsed by default
@@ -127,16 +123,12 @@ describe('map module', () => {
       cy.get(MAP.mapOverlayPane).find('canvas').should('exist')
     })
     it('should add a layer to the map', () => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/typeahead?q=spuistraat+59a*').as('getTypeaheadResults')
-      cy.route('/panorama/thumbnail?*').as('getPanorama')
-      cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
+      cy.intercept('**/typeahead?q=spuistraat+59a*').as('getTypeaheadResults')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()
-      cy.wait('@graphql')
-      cy.wait('@graphql')
       cy.url().should('include', '/data/?modus=kaart&legenda=true')
       cy.get(MAP.mapContainer).should('be.visible')
 
@@ -222,7 +214,6 @@ describe('map module', () => {
 
   describe('user should be able to open the map panel when collapsed', () => {
     it('should open the map panel component', () => {
-      cy.server()
       cy.hidePopup()
       cy.visit(`/${routing.data.path}?${VIEW}=kaart`)
 
@@ -236,13 +227,9 @@ describe('map module', () => {
 
   describe('Should see less when not logged in', () => {
     it('should see no layers vestigingen on the map if not logged in', () => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()
-      cy.wait('@graphql')
-      cy.wait('@graphql')
       cy.url().should('include', '/data/?modus=kaart&legenda=true')
       cy.get(MAP.mapContainer).should('be.visible')
 
@@ -284,8 +271,7 @@ describe('map module', () => {
       cy.logout()
     })
     it('Should see vestigingen on the map', () => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()

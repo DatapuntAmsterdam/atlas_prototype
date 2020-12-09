@@ -1,7 +1,6 @@
 describe('popup', () => {
   it('should be able to close when popped up', () => {
-    cy.server()
-    cy.route('/sockjs-node/info?t=*').as('notification')
+    cy.intercept('**/sockjs-node/info?t=*').as('notification')
     cy.visit('/')
     cy.wait('@notification')
     cy.wait(500)
