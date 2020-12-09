@@ -1,0 +1,13 @@
+{
+  "panelType": "Uitzondering parkeervergunninggebied",
+  "panelHeading": "OW20_U10",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Omschrijving": "Uw parkeervergunning geldt niet van ma t/m za 10.00 tot 18.00 uur."
+      }
+    }
+  ],
+  "linkLists": []
+}

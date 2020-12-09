@@ -1,9 +1,10 @@
-import { DATA_SEARCH, HOMEPAGE, SEARCH } from './selectors'
+import { DATA_SEARCH, HOMEPAGE } from './selectors'
 
 Cypress.Commands.add('checkAutoSuggestFirstOfAll', (searchTerm, result) => {
-  cy.server()
-  cy.route('POST', '/cms_search/graphql/').as('postGraphql')
-  cy.route(`/typeahead?q=${searchTerm.replace(/\s+/g, '+').toLowerCase()}*`).as('getTypeAhead')
+  cy.intercept('POST', '/cms_search/graphql/').as('postGraphql')
+  cy.intercept(`**/typeahead?q=${searchTerm.replace(/\s+/g, '+').toLowerCase()}*`).as(
+    'getTypeAhead',
+  )
   cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
   cy.get(DATA_SEARCH.autoSuggest).type(searchTerm, { delay: 80 })
   cy.wait('@getTypeAhead')
@@ -14,9 +15,10 @@ Cypress.Commands.add('checkAutoSuggestFirstOfAll', (searchTerm, result) => {
 })
 
 Cypress.Commands.add('checkAutoSuggestFirstofCategory', (searchTerm, category, result) => {
-  cy.server()
-  cy.route('POST', '/cms_search/graphql/').as('postGraphql')
-  cy.route(`/typeahead?q=${searchTerm.replace(/\s+/g, '+').toLowerCase()}*`).as('getTypeAhead')
+  cy.intercept('POST', '/cms_search/graphql/').as('postGraphql')
+  cy.intercept(`**/typeahead?q=${searchTerm.replace(/\s+/g, '+').toLowerCase()}*`).as(
+    'getTypeAhead',
+  )
   cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
   cy.get(DATA_SEARCH.autoSuggest).type(searchTerm, { delay: 80 })
   cy.wait('@getTypeAhead')
@@ -55,8 +57,8 @@ Cypress.Commands.add('searchInCategoryAndCheckFirst', (searchTerm, category, res
 
 Cypress.Commands.add('searchWithFilter', (category, searchTerm) => {
   cy.get(DATA_SEARCH.searchBarFilter).select(category)
-  cy.get(SEARCH.input).type(searchTerm)
-  cy.get(SEARCH.form).submit()
+  cy.get(DATA_SEARCH.input).type(searchTerm)
+  cy.get(DATA_SEARCH.form).submit()
   cy.wait(['@graphql', '@graphql'])
   cy.wait('@jsonapi')
   cy.contains(`${category} met '${searchTerm}' (`)

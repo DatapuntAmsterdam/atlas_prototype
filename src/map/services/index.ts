@@ -10,6 +10,7 @@ export interface MapLayer {
   type: MapLayerType
   noDetail: boolean
   minZoom: number
+  subType?: string
   layers?: string[]
   url?: string
   params?: string
@@ -23,6 +24,7 @@ export interface MapLayer {
   bounds: [number[]]
   authScope?: string
   category?: string
+  distance: number
   legendItems?: MapLayerLegendItem[]
   meta: Meta
   href: string

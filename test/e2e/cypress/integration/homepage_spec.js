@@ -10,14 +10,8 @@ describe('Homepage module', () => {
         } else {
           cy.viewport(size)
         }
-        cy.server()
-        cy.route('/jsonapi/node/list/**').as('jsonapi')
-        cy.route('POST', '/cms_search/graphql/').as('graphql')
         cy.hidePopup()
         cy.visit('/')
-        cy.wait('@jsonapi')
-        cy.wait('@jsonapi')
-        cy.wait('@graphql')
       })
       it('Should check all header information', () => {
         cy.get(HEADER.root).should('be.visible')
@@ -40,7 +34,7 @@ describe('Homepage module', () => {
 
         cy.checkMenuLink(menuSelector, 'Onderdelen', 'Kaart', '/data/?modus=kaart&legenda=true')
 
-        // Cannot use checkMenuLink function for Panoramanbeelden. Targeting menu-item based on title is not possibel, there is a &shy character in the selector
+        // Cannot use checkMenuLink function for Panoramanbeelden. Targeting menu-item based on title is not possibla, there is a &shy character in the selector
         cy.get(menuSelector).click({ force: true })
         cy.get(menuSelector).contains('Onderdelen').click({ force: true })
         cy.get(menuSelector).find('[href*="data/panorama/"]').click({ force: true })
@@ -48,7 +42,6 @@ describe('Homepage module', () => {
         cy.go('back')
 
         cy.visit('/')
-        cy.wait('@graphql')
         cy.checkMenuLink(menuSelector, 'Onderdelen', 'Tabellen', '/artikelen/artikel/tabellen/')
         cy.checkMenuLink(
           menuSelector,
@@ -96,6 +89,7 @@ describe('Homepage module', () => {
         cy.contains('Bekijk overzicht').click()
         cy.url().should('include', '/artikelen/zoek/')
         cy.go('back')
+        cy.get(HOMEPAGE.highlightBlock).scrollIntoView().and('be.visible')
       })
       it('Should check all links in navigation block', () => {
         cy.get(HOMEPAGE.navigationBlock).scrollIntoView().and('be.visible')
@@ -233,7 +227,7 @@ describe('Homepage module', () => {
 
         cy.get(HOMEPAGE.footerBlock).find('h3').contains('Volg de gemeente').should('exist')
         cy.get(HOMEPAGE.footerBlock).find('[title="Nieuwsbrief OIS"]').should('exist')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Werkenbij"]').should('exist')
+        cy.get(HOMEPAGE.footerBlock).find('[title="Vacatures"]').should('exist')
         cy.get(HOMEPAGE.footerBlock).find('[title="Twitter"]').should('exist')
         cy.get(HOMEPAGE.footerBlock).find('[title="Facebook"]').should('exist')
         cy.get(HOMEPAGE.footerBlock).find('[title="LinkedIn"]').should('exist')

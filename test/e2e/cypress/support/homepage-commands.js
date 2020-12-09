@@ -1,4 +1,4 @@
-import { HEADER, HOMEPAGE, SEARCH } from './selectors'
+import { DATA_SEARCH, HEADER, HOMEPAGE } from './selectors'
 
 Cypress.Commands.add('checkLogo', (size) => {
   cy.log(size)
@@ -13,10 +13,10 @@ Cypress.Commands.add('checkSearchbar', (size) => {
   cy.log(size)
   if (size.match(/iphone-.*/)) {
     cy.get(HOMEPAGE.buttonSearchMobile).should('be.visible').click()
-    cy.get(SEARCH.input).should('be.visible')
+    cy.get(DATA_SEARCH.input).should('be.visible')
     cy.get(HOMEPAGE.buttonSearchMobileClose).click()
   } else {
-    cy.get(SEARCH.input).should('be.visible')
+    cy.get(DATA_SEARCH.input).should('be.visible')
     cy.get(HOMEPAGE.buttonSearch).should('be.visible')
   }
 })

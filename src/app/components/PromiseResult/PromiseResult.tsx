@@ -1,6 +1,5 @@
 import React, { DependencyList, ReactElement, useState } from 'react'
 import styled from 'styled-components'
-import { AuthError } from '../../../shared/services/api/errors'
 import usePromise, {
   PromiseFactoryFn,
   PromiseFulfilledResult,
@@ -39,7 +38,7 @@ const PromiseResult: <T>(props: PromiseResultProps<T>) => ReactElement | null = 
     return <StyledLoadingSpinner data-testid="loading-spinner" />
   }
 
-  if (result.error instanceof AuthError && result.error.code === 401) {
+  if (result.error.code === 401) {
     return <AuthAlert data-testid="auth-alert" excludedResults={result.error.message} />
   }
 

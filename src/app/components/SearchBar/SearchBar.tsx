@@ -8,7 +8,7 @@ import {
   showAboveBackDrop,
   styles,
 } from '@amsterdam/asc-ui'
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { IDS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
@@ -51,7 +51,7 @@ const StyledSearchBar = styled(SearchBarComponent)`
   width: 100%;
 `
 
-type SearchBarProps = React.InputHTMLAttributes<HTMLInputElement> & {
+export interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
   expanded: boolean
   value: string
   onClear: () => void

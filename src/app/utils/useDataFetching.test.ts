@@ -8,7 +8,8 @@ jest.mock('../../shared/services/api/api', () => ({
 
 jest.useFakeTimers()
 
-let mockUseDataFetching
+let mockUseDataFetching: ReturnType<typeof useDataFetching>
+
 describe('useDataFetching', () => {
   beforeEach(() => {
     testHook(() => {

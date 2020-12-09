@@ -1,12 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
-const Wrapper = styled.div`
-  width: 100%; // Fix for IE11
-`
-
-/* istanbul ignore next */ const SplitScreen = ({ leftComponent, rightComponent, printMode }) => (
+const SplitScreen = ({ leftComponent, rightComponent, printMode }) => (
   <div className="c-dashboard__column-holder">
     <div
       className={`
@@ -27,8 +22,7 @@ const Wrapper = styled.div`
         qa-dashboard__column--right
       `}
     >
-      {/* Quickfix: extra div to make sure layout doesn't break due to legacy css mess */}
-      <Wrapper>{rightComponent}</Wrapper>
+      <div>{rightComponent}</div>
     </div>
   </div>
 )

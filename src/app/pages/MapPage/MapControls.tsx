@@ -1,10 +1,12 @@
 import { MapPanelContext, MapPanelLegendButton, Zoom } from '@amsterdam/arm-core'
 import { Overlay } from '@amsterdam/arm-core/lib/components/MapPanel/constants'
 import { Spinner, ViewerContainer as ViewerContainerComponent } from '@amsterdam/asc-ui'
-import React, { useContext } from 'react'
+import React, { FunctionComponent, useContext } from 'react'
+import { DrawToolOpenButton } from '@amsterdam/arm-draw'
 import styled, { css } from 'styled-components'
 import BaseLayerToggle from './controls/BaseLayerToggle'
 import DrawTool from './draw/DrawTool'
+import MapContext from './MapContext'
 
 type StyledViewerContainerProps = {
   left?: string
@@ -28,7 +30,7 @@ const StyledViewerContainer = styled(ViewerContainerComponent).attrs<StyledViewe
     `}
 `
 
-type Props = {
+export interface MapControlsProps {
   currentOverlay: Overlay
   setCurrentOverlay: (overlay: Overlay) => void
   showDesktopVariant: boolean
@@ -40,7 +42,7 @@ const BottomLeftHolder = styled.div`
   display: flex;
 `
 
-const MapControls: React.FC<Props> = ({
+const MapControls: FunctionComponent<MapControlsProps> = ({
   currentOverlay,
   setCurrentOverlay,
   showDesktopVariant,
@@ -48,6 +50,7 @@ const MapControls: React.FC<Props> = ({
   panoActive,
   ...otherProps
 }) => {
+  const { showDrawTool, setShowDrawTool } = useContext(MapContext)
   const { drawerPosition, draggable } = useContext(MapPanelContext)
   const height = parseInt(drawerPosition, 10) < window.innerHeight / 2 ? '50%' : drawerPosition
 
@@ -68,7 +71,19 @@ const MapControls: React.FC<Props> = ({
           bottomLeft={
             <MapPanelLegendButton {...{ showDesktopVariant, currentOverlay, setCurrentOverlay }} />
           }
-          topRight={!panoActive && <DrawTool setCurrentOverlay={setCurrentOverlay} />}
+          topRight={
+            !panoActive && (
+              <>
+                {!showDrawTool && (
+                  <DrawToolOpenButton
+                    data-testid="drawtoolOpenButton"
+                    onClick={() => setShowDrawTool(true)}
+                  />
+                )}
+                {showDrawTool && <DrawTool setCurrentOverlay={setCurrentOverlay} />}
+              </>
+            )
+          }
         />
       ) : (
         <StyledViewerContainer
@@ -87,7 +102,21 @@ const MapControls: React.FC<Props> = ({
               <BaseLayerToggle />
             </BottomLeftHolder>
           }
-          topRight={!panoActive && <DrawTool setCurrentOverlay={setCurrentOverlay} />}
+          topRight={
+            !panoActive && (
+              <>
+                {!showDrawTool && (
+                  <DrawToolOpenButton
+                    data-testid="drawtoolOpenButton"
+                    onClick={() => {
+                      setShowDrawTool(true)
+                    }}
+                  />
+                )}
+                {showDrawTool && <DrawTool setCurrentOverlay={setCurrentOverlay} />}
+              </>
+            )
+          }
         />
       )}
     </>

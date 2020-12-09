@@ -6,139 +6,135 @@ import { GenerateSW } from 'workbox-webpack-plugin'
 
 const debugMode = process.env.DEBUG === 'true'
 
-export default [createConfig({ legacy: false, mode: 'production', singleBuild: true })].map(
-  (config) =>
-    merge(config, {
-      bail: true,
-      resolve: {
-        alias: {
-          [path.resolve(srcPath, 'environment.ts')]: path.resolve(srcPath, 'environment.prod.ts'),
+export default merge(createConfig({ mode: 'production' }), {
+  bail: true,
+  resolve: {
+    alias: {
+      [path.resolve(srcPath, 'environment.ts')]: path.resolve(srcPath, 'environment.prod.ts'),
+    },
+  },
+  output: {
+    filename: '[name].js',
+    chunkFilename: '[name].js',
+  },
+  devtool: 'source-map',
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_debugger: !debugMode,
+          },
+          sourceMap: true,
         },
+      }),
+    ],
+    namedChunks: true,
+    namedModules: true,
+    moduleIds: 'named',
+    chunkIds: 'named',
+    runtimeChunk: false,
+    splitChunks: {
+      maxInitialRequests: 20,
+      chunks: 'async',
+      maxSize: 125000,
+      minChunks: 1,
+      name: true,
+      cacheGroups: {
+        default: false,
       },
-      output: {
-        filename: '[name].js',
-        chunkFilename: '[name].js',
-      },
-      devtool: 'source-map',
-      optimization: {
-        minimizer: [
-          new TerserPlugin({
-            terserOptions: {
-              compress: {
-                drop_debugger: !debugMode,
-              },
-              sourceMap: true,
+    },
+  },
+  plugins: [
+    new GenerateSW({
+      mode: debugMode ? 'development' : 'production',
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      sourcemap: true,
+      inlineWorkboxRuntime: false,
+      exclude: [
+        // Don't pre-cache any font files or images; we need a more fine-grained caching strategy (see below in runtimeCaching)
+        /.+\.(?:woff|woff2|eot|ttf)$/,
+        /.+\.(?:png|jpg|jpeg|svg|webp)$/,
+        /.*\.(?:html|map|txt|htaccess)$/,
+        /manifest$/,
+      ],
+      cleanupOutdatedCaches: true,
+      runtimeCaching: [
+        {
+          // All responses from the static assets server
+          // Can be cache for a longer period of time, because of the nature of those assets
+          urlPattern: /static\.amsterdam\.nl\/.+$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
             },
-          }),
-        ],
-        nodeEnv: 'production',
-        namedChunks: true,
-        namedModules: true,
-        moduleIds: 'named',
-        chunkIds: 'named',
-        runtimeChunk: false,
-        splitChunks: {
-          maxInitialRequests: 20,
-          chunks: 'async',
-          maxSize: 125000,
-          minChunks: 1,
-          name: true,
-          cacheGroups: {
-            default: false,
+            cacheName: 'static',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 12, // 12 hours
+            },
           },
         },
-      },
-      plugins: [
-        new GenerateSW({
-          mode: debugMode ? 'development' : 'production',
-          swDest: 'sw.js',
-          clientsClaim: true,
-          skipWaiting: true,
-          sourcemap: true,
-          inlineWorkboxRuntime: false,
-          exclude: [
-            // Don't pre-cache any font files or images; we need a more fine-grained caching strategy (see below in runtimeCaching)
-            /.+\.(?:woff|woff2|eot|ttf)$/,
-            /.+\.(?:png|jpg|jpeg|svg|webp)$/,
-            /.*\.(?:html|map|txt|htaccess)$/,
-            /manifest$/,
-          ],
-          cleanupOutdatedCaches: true,
-          runtimeCaching: [
-            {
-              // All responses from the static assets server
-              // Can be cache for a longer period of time, because of the nature of those assets
-              urlPattern: /static\.amsterdam\.nl\/.+$/,
-              handler: 'CacheFirst',
-              options: {
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-                cacheName: 'static',
-                expiration: {
-                  maxAgeSeconds: 60 * 60 * 12, // 12 hours
-                },
-              },
+        {
+          // Exclude all requests to the tracking script
+          urlPattern: /analytics\.data\.amsterdam\.nl\/(?!matomo\.php).+$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
             },
-            {
-              // Exclude all requests to the tracking script
-              urlPattern: /analytics\.data\.amsterdam\.nl\/(?!matomo\.php).+$/,
-              handler: 'CacheFirst',
-              options: {
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-                cacheName: 'analytics',
-                expiration: {
-                  maxAgeSeconds: 60 * 60 * 4, // 4 hours
-                },
-              },
+            cacheName: 'analytics',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 4, // 4 hours
             },
-            {
-              // All images coming from the CMS since they have `cache-control: no-cache` headers and have relatively large file sizes
-              urlPattern: /cms\.data\.amsterdam\.nl\/[^.]+\.(png|jpg|jpeg|svg)$/,
-              handler: 'CacheFirst',
-              options: {
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-                cacheName: 'images',
-                expiration: {
-                  maxEntries: 50,
-                  maxAgeSeconds: 60 * 60 * 2, // 2 hours
-                },
-              },
+          },
+        },
+        {
+          // All images coming from the CMS since they have `cache-control: no-cache` headers and have relatively large file sizes
+          urlPattern: /cms\.data\.amsterdam\.nl\/[^.]+\.(png|jpg|jpeg|svg)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
             },
-            {
-              // All responses from the CMS, apart from the notification endpoint
-              urlPattern: /cms\.data\.amsterdam.nl\/jsonapi\/node\/(?!notification).+$/,
-              handler: 'StaleWhileRevalidate',
-              options: {
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-                cacheName: 'cms',
-                expiration: {
-                  maxAgeSeconds: 60 * 60 * 2, // 2 hours
-                },
-              },
+            cacheName: 'images',
+            expiration: {
+              maxEntries: 50,
+              maxAgeSeconds: 60 * 60 * 2, // 2 hours
             },
-            {
-              // Every call to the API, except oAuth2
-              urlPattern: /api\.data\.amsterdam\.nl\/(?!oauth2).+$/,
-              handler: 'StaleWhileRevalidate',
-              options: {
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-                cacheName: 'api',
-                expiration: {
-                  maxAgeSeconds: 60 * 60 * 1, // 1 hours
-                },
-              },
+          },
+        },
+        {
+          // All responses from the CMS, apart from the notification endpoint
+          urlPattern: /cms\.data\.amsterdam.nl\/jsonapi\/node\/(?!notification).+$/,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
             },
-          ],
-        }),
+            cacheName: 'cms',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 2, // 2 hours
+            },
+          },
+        },
+        {
+          // Every call to the API, except oAuth2
+          urlPattern: /api\.data\.amsterdam\.nl\/(?!oauth2).+$/,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+            cacheName: 'api',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 1, // 1 hours
+            },
+          },
+        },
       ],
     }),
-)
+  ],
+})

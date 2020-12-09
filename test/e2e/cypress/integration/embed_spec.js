@@ -6,8 +6,7 @@ const { VIEW, LAYERS, LEGEND, EMBED_PREVIEW } = PARAMETERS
 
 describe('embed module', () => {
   beforeEach(() => {
-    cy.server()
-    cy.route('POST', '/cms_search/graphql/').as('graphql')
+    cy.intercept('POST', '/cms_search/graphql/').as('graphql')
     cy.hidePopup()
   })
 

@@ -8,12 +8,15 @@ import {
 import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
 import L, { LatLng, LatLngLiteral, Polygon } from 'leaflet'
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import useParam from '../../../utils/useParam'
 import MapContext from '../MapContext'
 import { PolyDrawing, polygonsParam, polylinesParam } from '../query-params'
 import { Overlay, SnapPoint } from '../types'
 import DataSelectionContext from './DataSelectionContext'
+import { routing } from '../../../routes'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -28,8 +31,10 @@ function getTotalDistance(latLngs: LatLng[]) {
   )
 }
 
+const getLayerCoordinates = (layer: ExtendedLayer) => layer.getLatLngs().flat(2)
+
 function getDistanceLabel(layer: ExtendedLayer) {
-  const latLngs = layer.getLatLngs().flat(2)
+  const latLngs = getLayerCoordinates(layer)
   const distance = getTotalDistance(latLngs)
   const label =
     distance >= 1000
@@ -68,7 +73,7 @@ export interface DrawToolProps {
 
 const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
   const { setPositionFromSnapPoint } = useContext(MapPanelContext)
-  const { showDrawTool, setShowDrawTool } = useContext(MapContext)
+  const { setShowDrawTool } = useContext(MapContext)
   const {
     fetchData,
     fetchMapVisualization,
@@ -76,14 +81,20 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
     mapVisualizations: mapVisualization,
     removeDataSelection,
   } = useContext(DataSelectionContext)
+  const { buildQueryString } = useBuildQueryString()
 
   const [polygons, setPolygons] = useParam(polygonsParam)
   const [polylines, setPolylines] = useParam(polylinesParam)
+  const history = useHistory()
 
-  const [initialDrawnItems, setInitialDrawnItems] = useState([
-    ...polygons.map((drawing) => createPolyLayer(drawing)),
-    ...polylines.map((drawing) => createPolyLayer(drawing, true)),
-  ])
+  const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
+
+  // We needs refs here for leaflet event handlers
+  const polygonsRef = useRef(polygons)
+  polygonsRef.current = polygons
+
+  const polylinesRef = useRef(polylines)
+  polylinesRef.current = polylines
 
   const mapInstance = useMapInstance()
   const drawnItemsGroup = useMemo(() => new L.FeatureGroup(), [])
@@ -108,30 +119,64 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
     }
   }, [])
 
+  const updateShapes = (shape: { polygons?: PolyDrawing[]; polylines?: PolyDrawing[] }) => {
+    window.localStorage.setItem('polygons', JSON.stringify(shape.polygons))
+    window.localStorage.setItem('polylines', JSON.stringify(shape.polylines))
+
+    const pushReplace = !polygons.length && shape.polygons?.length ? 'push' : 'replace'
+
+    // If user removes all the drawings, close the drawtool
+    if (!shape.polygons?.length && !shape.polylines?.length) {
+      setShowDrawTool(false)
+    }
+
+    if (!shape.polygons?.length) {
+      history.push({
+        pathname: routing.dataSearchGeo_TEMP.path,
+        search: buildQueryString(undefined, [polygonsParam]),
+      })
+    } else {
+      history[pushReplace]({
+        pathname: routing.addresses_TEMP.path,
+        search: buildQueryString<any>([
+          [polygonsParam, shape.polygons],
+          [polylinesParam, shape.polylines],
+        ]),
+      })
+    }
+  }
+
+  const addOrEditShape = (layer: ExtendedLayer) => {
+    updateShapes({
+      polygons:
+        layer instanceof Polygon
+          ? [
+              ...polygonsRef.current.filter(({ id }) => id !== layer.id),
+              { id: layer.id, polygon: getLayerCoordinates(layer) },
+            ]
+          : polygonsRef.current,
+      polylines:
+        layer instanceof Polygon
+          ? polylinesRef.current
+          : [
+              ...polylinesRef.current.filter(({ id }) => id !== layer.id),
+              { id: layer.id, polygon: getLayerCoordinates(layer) },
+            ],
+    })
+  }
+
   /**
    * Add tooltip, update the URL param and fetch the results
    * @param e
    */
-  const editVertex = useCallback(
+  const editShape = useCallback(
     async (e: L.DrawEvents.EditVertex) => {
       const layer = e.poly as ExtendedLayer
 
       const distanceText = getDistanceLabel(layer)
       bindDistanceAndAreaToTooltip(layer, distanceText)
 
-      const setPolys = layer instanceof Polygon ? setPolygons : setPolylines
-
-      setPolys(
-        (polys) =>
-          polys.map((poly) => {
-            if (poly.id !== layer.id) {
-              return poly
-            }
-
-            return { ...poly, polygon: layer.getLatLngs().flat(2) }
-          }),
-        'replace',
-      )
+      addOrEditShape(layer)
 
       await getDrawingData(layer, distanceText)
     },
@@ -158,10 +203,16 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
         return
       }
 
-      // Delete or reset the drawing geometries
-      deletedLayers.forEach((layer) => {
-        const setPolys = layer instanceof Polygon ? setPolygons : setPolylines
-        setPolys((polys) => polys.filter(({ id }) => !deletedLayersIds.includes(id)), 'replace')
+      const newPolygons = polygonsRef.current.filter(
+        (layer) => !deletedLayersIds.includes(layer.id),
+      )
+      const newPolylines = polylinesRef.current.filter(
+        (layer) => !deletedLayersIds.includes(layer.id),
+      )
+
+      updateShapes({
+        polygons: newPolygons,
+        polylines: newPolylines,
       })
     },
     [mapVisualization, setPolygons, setPolylines],
@@ -173,12 +224,7 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
       await getDrawingData(layer, distanceText)
       bindDistanceAndAreaToTooltip(layer, distanceText)
 
-      const setPolys = layer instanceof Polygon ? setPolygons : setPolylines
-
-      setPolys((polys) => [
-        ...polys.filter(({ id }) => id !== layer.id),
-        { id: layer.id, polygon: layer.getLatLngs().flat(2) },
-      ])
+      addOrEditShape(layer)
     },
     [getDrawingData, setPolygons, setPolylines],
   )
@@ -192,12 +238,25 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
   }, [drawnItemsGroup])
 
   useEffect(() => {
+    const savedPolygonsRaw = window.localStorage.getItem('polygons')
+    const savedPolylinesRaw = window.localStorage.getItem('polylines')
+    const savedPolygons: PolyDrawing[] = savedPolygonsRaw ? JSON.parse(savedPolygonsRaw) : []
+    const savedPolylines: PolyDrawing[] = savedPolylinesRaw ? JSON.parse(savedPolylinesRaw) : []
+
+    setPolylines(savedPolylines)
+    setPolygons(savedPolygons)
+
+    setInitialDrawnItems([
+      ...savedPolygons.map((drawing) => createPolyLayer(drawing)),
+      ...savedPolylines.map((drawing) => createPolyLayer(drawing, true)),
+    ])
+
     fitToBounds()
 
-    mapInstance.on(L.Draw.Event.EDITVERTEX as any, editVertex as any)
+    mapInstance.on(L.Draw.Event.EDITVERTEX as any, editShape as any)
 
     return () => {
-      mapInstance.off(L.Draw.Event.EDITVERTEX as any, editVertex as any)
+      mapInstance.off(L.Draw.Event.EDITVERTEX as any, editShape as any)
     }
   }, [])
 
@@ -207,72 +266,19 @@ const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
     }
   }, [dataSelection])
 
-  // TODO: Move all these effects here to ARM DrawTool (needs a refactor to accept existing drawings)
-  useEffect(() => {
-    if (showDrawTool) {
-      // polygons can be null, while there are polygons set and showDrawTool is set to true, so wait one tick here
-      setTimeout(() => {
-        window.localStorage.setItem('polygons', JSON.stringify(polygons))
-        window.localStorage.setItem('polylines', JSON.stringify(polylines))
-      }, 0)
-    }
-  }, [polygons, polylines, showDrawTool])
-
-  /**
-   * When opening the drawtool, get possible existing drawings from localStorage,
-   * then update the URL query
-   * then manually create the layers and update the initialDrawnItems state
-   * finally get fetch the data
-   *
-   * TODO: Obviously this is far from ideal. This logic should be moved to the ARM draw package
-   */
-  useEffect(() => {
-    if (showDrawTool) {
-      const savedPolygonsRaw = window.localStorage.getItem('polygons')
-      const savedPolylinesRaw = window.localStorage.getItem('polylines')
-      const savedPolygons: PolyDrawing[] = savedPolygonsRaw ? JSON.parse(savedPolygonsRaw) : []
-      const savedPolylines: PolyDrawing[] = savedPolylinesRaw ? JSON.parse(savedPolylinesRaw) : []
-
-      setPolygons(savedPolygons)
-      setPolylines(savedPolylines)
-
-      const initialLayers = [
-        ...savedPolylines.map((drawing: PolyDrawing) => createPolyLayer(drawing, true)),
-        ...savedPolygons.map((drawing: PolyDrawing) => createPolyLayer(drawing)),
-      ]
-
-      setInitialDrawnItems(initialLayers)
-
-      initialLayers.forEach((layer) => getDrawingData(layer, getDistanceLabel(layer)))
-    } else {
-      setPolygons(null)
-      setPolylines(null)
-      drawnItemsGroup.clearLayers()
-    }
-  }, [showDrawTool])
-
-  useEffect(() => {
-    if (!polylines.length && !polygons.length) {
-      setShowDrawTool(false)
-    } else {
-      setShowDrawTool(true)
-    }
-  }, [polylines, polygons])
-
-  useEffect(() => {
-    initialDrawnItems.forEach((layer) => {
-      const distanceText = getDistanceLabel(layer)
-      bindDistanceAndAreaToTooltip(layer, distanceText)
-    })
-  }, [initialDrawnItems])
-
   return (
     <DrawToolComponent
       onDrawEnd={handleOnDrawEnd}
       onDelete={onDeleteDrawing}
-      isOpen={showDrawTool}
-      onToggle={setShowDrawTool}
-      drawnItems={initialDrawnItems && initialDrawnItems}
+      isOpen
+      onClose={() => {
+        setShowDrawTool(false)
+        history.push({
+          pathname: routing.dataSearchGeo_TEMP.path,
+          search: buildQueryString(undefined, [polylinesParam, polygonsParam]),
+        })
+      }}
+      drawnItems={initialDrawnItems.length ? initialDrawnItems : []}
       onDrawStart={() => {
         setCurrentOverlay(Overlay.Results)
       }}

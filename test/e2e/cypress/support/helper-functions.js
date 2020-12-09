@@ -13,3 +13,6 @@ export {
   // eslint-disable-next-line import/prefer-default-export
   getCountFromHeader,
 }
+
+// eslint-disable-next-line no-unused-vars
+Cypress.on('uncaught:exception', (err, runnable) => false)

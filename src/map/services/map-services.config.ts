@@ -515,7 +515,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       const { nummeraanduidingData } = result
       return {
         notifications,
-        title: 'Adres (ligplaats)',
+        title: 'Adres',
         subTitle: result._display,
         infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
@@ -594,7 +594,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       const { verblijfsobjectData } = result
       return {
         notifications,
-        title: 'Adres (nummeraanduiding)',
+        title: 'Adres',
         subTitle: result._display,
         infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
@@ -670,7 +670,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       const { nummeraanduidingData } = result
       return {
         notifications,
-        title: 'Adres (verblijfsobject)',
+        title: 'Adres',
         subTitle: result._display,
         infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
@@ -787,15 +787,6 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.NUMMERAANDUIDING, result?._adressen?.href, {
             displayFormatter: typeAddressDisplayFormatter,
           }),
-          {
-            type: DetailResultItemType.Table,
-            title: 'Afvalcontainers',
-            headings: [
-              { title: 'Type', key: 'fractieOmschrijving' },
-              { title: 'Loopafstand (Meter)', key: 'loopafstand' },
-            ],
-            values: result.garbageContainers as any,
-          },
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
             `${environment.API_ROOT}handelsregister/vestiging/?pand=${result.pandidentificatie}`,
@@ -836,7 +827,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
 
       return {
         notifications,
-        title: 'Adres (standplaats)',
+        title: 'Adres',
         subTitle: result._display,
         infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [

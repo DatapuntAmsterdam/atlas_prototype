@@ -2,7 +2,7 @@ import { Marker } from '@amsterdam/arm-core'
 import { useMapEvents } from '@amsterdam/react-maps'
 import { Icon, Marker as LeafletMarker } from 'leaflet'
 import 'leaflet-rotatedmarker'
-import React, { useEffect, useState } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { MarkerProps } from '../../pages/MapPage/MapMarkers'
 import { panoParam } from '../../pages/MapPage/query-params'
 import useMapCenterToMarker from '../../utils/useMapCenterToMarker'
@@ -20,7 +20,7 @@ const pawnIcon = new Icon({
   iconAnchor: [9, 22],
 })
 
-const PanoramaViewerMarker: React.FC<MarkerProps> = ({ location, setLocation }) => {
+const PanoramaViewerMarker: FunctionComponent<MarkerProps> = ({ location, setLocation }) => {
   const [orientationMarker, setOrientationMarker] = useState<LeafletMarker>()
   const [pano] = useParam(panoParam)
 
@@ -28,7 +28,7 @@ const PanoramaViewerMarker: React.FC<MarkerProps> = ({ location, setLocation }) 
   useMapCenterToMarker(location)
 
   useMapEvents({
-    click: ({ latlng }) => setLocation(latlng),
+    click: ({ latlng }) => setLocation && setLocation(latlng),
   })
 
   useEffect(() => {

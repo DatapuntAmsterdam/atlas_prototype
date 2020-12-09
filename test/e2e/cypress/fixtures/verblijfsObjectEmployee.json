@@ -1,0 +1,74 @@
+{
+  "panelType": "Adres",
+  "panelHeading": "Nes 98",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Naam openbare ruimte": "Nes",
+        "Huisnummer": "98",
+        "Huisletter": "",
+        "Huisnummertoevoeging": "",
+        "Postcode": "1012KE",
+        "Woonplaats": "Amsterdam",
+        "Type adres": "Hoofdadres"
+      }
+    },
+    {
+      "subheading": "Ligt in",
+      "items": {
+        "Stadsdeel": "Centrum (A)",
+        "Wijk": "Burgwallen-Oude Zijde (00)",
+        "Buurt": "Nes e.o. (A00d)",
+        "Gebiedsgerichtwerken-gebied": "Centrum-West (DX01)",
+        "Bouwblok": "YA35"
+      }
+    },
+    {
+      "subheading": "Verblijfsobject",
+      "items": {
+        "Gebruiksdoel": "woonfunctie",
+        "Gebruiksdoel woonfunctie": "",
+        "Gebruiksdoel gezondheidszorgfunctie": "",
+        "Aantal eenheden complex": "",
+        "Status": "Verblijfsobject in gebruik",
+        "Indicatie geconstateerd": "Nee",
+        "Aanduiding in onderzoek": "Nee",
+        "Oppervlakte": "129 m²",
+        "Aantal kamers": "3",
+        "Verdieping toegang": "0",
+        "Toegang": "",
+        "Aantal bouwlagen": "3",
+        "Hoogste bouwlaag": "",
+        "Laagste bouwlaag": "",
+        "Reden opvoer": "",
+        "Eigendomsverhouding": "Huur",
+        "Coördinaten": "121370.00, 487047.00 (52.3702714, 4.8933988)"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Adressen",
+      "items": ["Nes 98"]
+    },
+    {
+      "subheading": "Panden",
+      "items": ["0363100012168526"]
+    },
+    {
+      "subheading": "Vestigingen",
+      "items": ["Cuisine De La Fuente"]
+    },
+    {
+      "subheading": "Kadastrale objecten",
+      "items": ["ASD05 G 08575 A 0001", "ASD05 G 08575 A 0002"]
+    },
+    {"subheading": "Monumenten",
+      "items": ["Rokin 85 H"]
+    },
+    {"subheading": "Bouw- en omgevingsdossiers",
+      "items": ["SA76078 2003 verbouwing"]
+    }
+  ]
+}

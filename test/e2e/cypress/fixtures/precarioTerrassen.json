@@ -1,0 +1,19 @@
+{
+  "panelType": "Precario terras",
+  "panelHeading": "Tariefgebied A (hoog)",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Categorie": "Terrassen",
+        "Jaar": "2020",
+        "Stadsdeel": "Centrum",
+        "Gebied": "Tariefgebied A (hoog)",
+        "Overdekt terras per jaar per m2": "€ 219,-",
+        "Onverdekt terras per zomerseizoen per m2": "€ 107,-",
+        "Onoverdekt terras per winterseizoen per m2": "€ 32,-"
+      }
+    }
+  ],
+  "linkLists": []
+}

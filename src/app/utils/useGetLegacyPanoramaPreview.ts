@@ -1,19 +1,20 @@
 import { LatLngLiteral } from 'leaflet'
 import { useSelector } from 'react-redux'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import LegacyLink from 'redux-first-router-link'
 import { getPanoramaThumbnail } from '../../api/panorama/thumbnail'
 import { PANORAMA_CONFIG } from '../../panorama/services/panorama-api/panorama-api'
 import { toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions'
 import { getDetailLocation } from '../../store/redux-first-router/selectors'
 import { locationParam, panoParam } from '../pages/MapPage/query-params'
-import buildQueryString from './buildQueryString'
+import useBuildQueryString from './useBuildQueryString'
 import usePromise, { PromiseStatus } from './usePromise'
 
 const useGetLegacyPanoramaPreview = (
   location: (LatLngLiteral & { latitude: number; longitude: number }) | null,
 ) => {
   const legacyReference = useSelector(getDetailLocation)
+  const browserLocation = useLocation()
   const panoramaResult = usePromise(
     () =>
       location
@@ -33,6 +34,7 @@ const useGetLegacyPanoramaPreview = (
         : Promise.reject(),
     [location],
   )
+  const { buildQueryString } = useBuildQueryString()
 
   if (panoramaResult.status !== PromiseStatus.Fulfilled) {
     return {
@@ -53,8 +55,8 @@ const useGetLegacyPanoramaPreview = (
     [locationParam, location],
   ])
   const link =
-    window.location.pathname === '/kaart' || window.location.pathname === '/kaart/'
-      ? `${window.location.pathname}?${panoramaLink}`
+    browserLocation.pathname === '/kaart' || browserLocation.pathname === '/kaart/'
+      ? `${browserLocation.pathname}?${panoramaLink}`
       : toPanoramaAndPreserveQuery(
           panoramaResult?.value?.id,
           panoramaResult?.value?.heading,
@@ -62,7 +64,7 @@ const useGetLegacyPanoramaPreview = (
         )
 
   const linkComponent =
-    window.location.pathname === '/kaart' || window.location.pathname === '/kaart/'
+    browserLocation.pathname === '/kaart' || browserLocation.pathname === '/kaart/'
       ? RouterLink
       : LegacyLink
 

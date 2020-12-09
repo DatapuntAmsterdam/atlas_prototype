@@ -11,10 +11,17 @@ exports[`MapDetailResultWrapper should not render empty panoUrl 1`] = `
     "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to=""
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-detail-result__header-container"
       >
@@ -75,10 +82,17 @@ exports[`MapDetailResultWrapper should not render empty sub title 1`] = `
     "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to=""
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-detail-result__header-container"
       >
@@ -134,10 +148,17 @@ exports[`MapDetailResultWrapper should not render missing children 1`] = `
     "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to=""
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-detail-result__header-container"
       >
@@ -185,10 +206,17 @@ exports[`MapDetailResultWrapper should not render missing sub title 1`] = `
     "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to=""
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-detail-result__header-container"
       >
@@ -244,10 +272,17 @@ exports[`MapDetailResultWrapper should render everything 1`] = `
     "
   >
     <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to=""
+      as={null}
+      title="Panoramabeeld tonen"
+      to="/link"
     >
+      <img
+        alt="Panoramabeeld"
+        className="map-detail-result__header-pano"
+        height="292"
+        src="/foo"
+        width="438"
+      />
       <div
         className="map-detail-result__header-container"
       >

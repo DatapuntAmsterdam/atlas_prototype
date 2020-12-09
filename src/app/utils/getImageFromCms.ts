@@ -1,4 +1,5 @@
 import environment from '../../environment'
+import joinUrl from './joinUrl'
 
 export type Resize = 'fit' | 'fill' | 'crop' | 'force'
 export type Gravity =
@@ -13,9 +14,9 @@ export type Gravity =
   | 'ce'
   | 'sm'
   | 'fp:%x:%y'
+
 export type Extension = 'jpg' | 'png' | 'webp' | 'gif' | 'ico' | 'heic' | 'tiff'
 
-const isString = (any: any) => typeof any === 'string'
 /**
  *
  * Generate the url from imgproxy. For more info check: https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_basic.md
@@ -34,16 +35,20 @@ const getImageFromCms = (
   height: number,
   resize: Resize = 'fill',
   gravity: Gravity = 'sm',
-  enlarge: number = 0,
-  extension: Extension | false = isString(src) && (src.split('.').pop() as Extension),
+  enlarge = 0,
 ) => {
-  if (isString(src)) {
-    return `${environment.CMS_ROOT}assets/${resize}/${width}/${height}/${gravity}/${enlarge}/${btoa(
-      src,
-    )}.${extension}`
-  }
+  const extension = src.split('.').pop()
 
-  return undefined
+  return joinUrl([
+    environment.CMS_ROOT,
+    'assets',
+    resize,
+    width.toString(),
+    height.toString(),
+    gravity,
+    enlarge.toString(),
+    `${btoa(src)}.${extension}`,
+  ])
 }
 
 export default getImageFromCms

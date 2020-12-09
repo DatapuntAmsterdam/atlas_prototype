@@ -77,7 +77,11 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
       let subType = ''
 
       if (suggestion.type === CmsType.Special) {
-        ;[, subType] = suggestion.label.match(/\(([^()]*)\)$/)
+        const match = suggestion.label.match(/\(([^()]*)\)$/)
+
+        if (match) {
+          ;[, subType] = match
+        }
       }
 
       return {

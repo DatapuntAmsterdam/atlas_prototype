@@ -21,13 +21,8 @@ describe('Check if all map layers are visible when selected', () => {
       16,
     )
     cy.checkMapLayer('Gemeentelijk eigendom', MAP_LAYERS.checkboxOZGemeentelijkEigendom, 18)
-    cy.checkMapLayer(
-      'Gemeentelijke beperkingen (WKPB)',
-      MAP_LAYERS.checkboxOZGemeentelijkeBeperkingen,
-      27,
-    )
-    cy.checkMapLayer('Panden ouder dan 1960', MAP_LAYERS.checkboxOZPandenOuderDan1960, 28)
-    cy.checkMapLayer('Panden naar bouwjaar', MAP_LAYERS.checkboxOZPandenNaarBouwjaar, 29)
+    cy.checkMapLayer('Panden ouder dan 1960', MAP_LAYERS.checkboxOZPandenOuderDan1960, 19)
+    cy.checkMapLayer('Panden naar bouwjaar', MAP_LAYERS.checkboxOZPandenNaarBouwjaar, 20)
 
     cy.get(MAP_LAYERS.checkboxOnroerendeZaken).uncheck({ force: true }).should('not.be.checked')
     cy.get(MAP.imageLayer).should('not.exist')
@@ -478,7 +473,6 @@ describe('Check if all map layers are visible when selected', () => {
 })
 describe('Check map layers logged in', () => {
   beforeEach(() => {
-    cy.server()
     cy.hidePopup()
   })
   before(() => {
@@ -491,7 +485,7 @@ describe('Check map layers logged in', () => {
   it('Should allow an employee to view map layers "Vestigingen"', () => {
     cy.visit('/data/?modus=kaart&legenda=true')
     cy.checkMapLayerCategory('Vestigingen')
-    cy.get(MAP.legendNotification).should('not.contain', 'Zichtbaar na inloggen')
+    cy.get(MAP.legendNotification).should('not.exist')
     cy.checkMapLayer('Bouw', MAP_LAYERS.checkboxVestigingBouw, 1)
     cy.checkMapLayer('Cultuur, sport, recreatie', MAP_LAYERS.checkboxVestigingCultuur, 2)
     cy.checkMapLayer(

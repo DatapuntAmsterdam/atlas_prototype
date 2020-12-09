@@ -34,7 +34,13 @@ const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {
     const newValue = value ? encodeParam(urlParam, value) : null
     const newParams = buildParamQuery(urlParam, newValue)
 
-    history[method]({ ...location, search: newParams.toString() })
+    if (location.pathname !== window.location.pathname) {
+      throw new Error(
+        `There's a mismatch between window.location and the location from the useLocation hook from react-router. This sometimes happens when calling the 'setValue' inside a non-react event-handler that is not updated. Please be sure the component is updated via react-router.
+        Tried to update parameter with key: "${urlParam.name}"`,
+      )
+    }
+    return history[method]({ ...location, search: newParams.toString() })
   }, [])
 
   return [state, setValue]

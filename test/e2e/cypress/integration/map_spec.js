@@ -3,7 +3,7 @@ import { routing } from '../../../../src/app/routes'
 import {
   ADDRESS_PAGE,
   COMPONENTS,
-  DATA_DETAIL,
+  DETAIL_PANEL,
   DATA_SEARCH,
   HOMEPAGE,
   MAP,
@@ -15,9 +15,8 @@ const { VIEW, VIEW_CENTER } = PARAMETERS
 describe('map module', () => {
   describe('user should be able to navigate to the map from the homepage', () => {
     it('should open the map', () => {
-      cy.server()
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()
       cy.visit('/')
 
@@ -45,12 +44,11 @@ describe('map module', () => {
   describe('user should be able to interact with the map', () => {
     it('should show results based on the interaction with the map', () => {
       const svgMapPath = '/assets/images/map/'
-      cy.server()
       cy.defineGeoSearchRoutes()
       cy.defineAddressDetailRoutes()
 
       // Use regular expression to match spaces
-      cy.route('/typeahead?q=dam+1*').as('getTypeaheadResults')
+      cy.intercept('**/typeahead?q=dam+1*').as('getTypeaheadResults')
 
       // ensure the viewport is always the same in this test, so the clicks can be aligned properly
       cy.viewport(1000, 660)
@@ -94,8 +92,8 @@ describe('map module', () => {
 
       cy.waitForAdressDetail()
 
-      cy.get(DATA_DETAIL.heading).contains('Beursplein 15')
-      cy.get(DATA_DETAIL.main).get('dl').contains('1012JW')
+      cy.get(DETAIL_PANEL.heading).contains('Beursplein 15')
+      cy.get(DETAIL_PANEL.main).get('dl').contains('1012JW')
       cy.wait('@getPanorama')
       cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
     })
@@ -103,7 +101,6 @@ describe('map module', () => {
 
   describe('user should be able to use the map', () => {
     it('should render the leaflet map', () => {
-      cy.server()
       cy.hidePopup()
       cy.visit(`/${routing.data.path}?${VIEW}=kaart`)
       cy.get(ADDRESS_PAGE.mapContainer).should('be.visible')
@@ -112,7 +109,6 @@ describe('map module', () => {
     })
 
     it('should add a map-layer to the leaflet map', () => {
-      cy.server()
       cy.hidePopup()
       cy.visit(`/${routing.data.path}?${VIEW_CENTER}=52.3731081%2C4.8932945&${VIEW}=kaart`)
       // the map-panel should have the class collapsed by default
@@ -127,28 +123,24 @@ describe('map module', () => {
       cy.get(MAP.mapOverlayPane).find('canvas').should('exist')
     })
     it('should add a layer to the map', () => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/typeahead?q=spuistraat+59a*').as('getTypeaheadResults')
-      cy.route('/panorama/thumbnail?*').as('getPanorama')
-      cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
+      cy.intercept('**/typeahead?q=spuistraat+59a*').as('getTypeaheadResults')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()
-      cy.wait('@graphql')
-      cy.wait('@graphql')
       cy.url().should('include', '/data/?modus=kaart&legenda=true')
       cy.get(MAP.mapContainer).should('be.visible')
 
       // Legend and checkboxes are not visible
-      cy.get(MAP.mapLegend).should('not.be.visible')
-      cy.contains('Kadastrale perceelsgrenzen').should('not.be.visible')
-      cy.contains('Kadastrale eigenaren').should('not.be.visible')
-      cy.contains('Kadastrale erfpachtuitgevers').should('not.be.visible')
-      cy.contains('Gemeentelijk eigendom').should('not.be.visible')
-      cy.get(MAP.zoomInAlert).should('not.be.visible')
-      cy.contains('Panden ouder dan 1960').should('not.be.visible')
-      cy.contains('Panden naar bouwjaar').should('not.be.visible')
+      cy.get(MAP.mapLegend).should('not.exist')
+      cy.contains('Kadastrale perceelsgrenzen').should('not.exist')
+      cy.contains('Kadastrale eigenaren').should('not.exist')
+      cy.contains('Kadastrale erfpachtuitgevers').should('not.exist')
+      cy.contains('Gemeentelijk eigendom').should('not.exist')
+      cy.get(MAP.zoomInAlert).should('not.exist')
+      cy.contains('Panden ouder dan 1960').should('not.exist')
+      cy.contains('Panden naar bouwjaar').should('not.exist')
 
       cy.get(MAP.mapPanelHandle)
         .find(MAP.mapLegendLabel)
@@ -166,10 +158,10 @@ describe('map module', () => {
       cy.contains('Panden naar bouwjaar').should('be.visible')
 
       // Checkboxes related to Kadastrale perceelsgrenzen are not visible
-      cy.get(MAP_LAYERS.checkboxOZKKPBurgerlijkeGemeente).should('not.be.visible')
-      cy.get(MAP_LAYERS.checkboxOZKKPKadastraleGemeente).should('not.be.visible')
-      cy.get(MAP_LAYERS.checkboxOZKKPKadastraleSectie).should('not.be.visible')
-      cy.get(MAP_LAYERS.checkboxOZKKPKadastraalObject).should('not.be.visible')
+      cy.get(MAP_LAYERS.checkboxOZKKPBurgerlijkeGemeente).should('not.exist')
+      cy.get(MAP_LAYERS.checkboxOZKKPKadastraleGemeente).should('not.exist')
+      cy.get(MAP_LAYERS.checkboxOZKKPKadastraleSectie).should('not.exist')
+      cy.get(MAP_LAYERS.checkboxOZKKPKadastraalObject).should('not.exist')
 
       cy.get(MAP.mapZoomIn).click()
       cy.get(MAP.mapOverlayPane).children().should('not.exist')
@@ -202,7 +194,7 @@ describe('map module', () => {
       cy.get(MAP.imageLayer).eq(1).should('have.attr', 'style', 'opacity: 0; visibility: visible;')
       cy.get(MAP.imageLayer).eq(2).should('have.attr', 'style', 'opacity: 0; visibility: visible;')
 
-      cy.get(MAP.iconMapMarker).should('not.be.visible')
+      cy.get(MAP.iconMapMarker).should('not.exist')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().type('Spuistraat 59A')
 
@@ -222,7 +214,6 @@ describe('map module', () => {
 
   describe('user should be able to open the map panel when collapsed', () => {
     it('should open the map panel component', () => {
-      cy.server()
       cy.hidePopup()
       cy.visit(`/${routing.data.path}?${VIEW}=kaart`)
 
@@ -236,13 +227,9 @@ describe('map module', () => {
 
   describe('Should see less when not logged in', () => {
     it('should see no layers vestigingen on the map if not logged in', () => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()
-      cy.wait('@graphql')
-      cy.wait('@graphql')
       cy.url().should('include', '/data/?modus=kaart&legenda=true')
       cy.get(MAP.mapContainer).should('be.visible')
 
@@ -284,8 +271,7 @@ describe('map module', () => {
       cy.logout()
     })
     it('Should see vestigingen on the map', () => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()
       cy.visit(`/`)
       cy.get(HOMEPAGE.navigationBlockKaart).click()
@@ -325,7 +311,7 @@ describe('map module', () => {
       cy.get(MAP.mapLegendItems).should('have.length', 12)
 
       // No message to first login
-      cy.get(MAP.legendNotification).should('not.be.visible')
+      cy.get(MAP.legendNotification).should('not.exist')
     })
   })
 })

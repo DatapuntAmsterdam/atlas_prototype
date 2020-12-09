@@ -1,7 +1,7 @@
 import {
   ADDRESS_PAGE,
   COMPONENTS,
-  DATA_DETAIL,
+  DETAIL_PANEL,
   DATA_SEARCH,
   HOMEPAGE,
   MAP,
@@ -11,13 +11,12 @@ import {
 
 describe('panorama module', () => {
   beforeEach(() => {
-    cy.server()
-    cy.route('/panorama/panoramas/*/adjacencies/?newest_in_range=true&tags=mission-bi').as(
+    cy.intercept('**/panorama/panoramas/*/adjacencies/?newest_in_range=true&tags=mission-bi').as(
       'getResults',
     )
 
-    cy.route('POST', '/cms_search/graphql/').as('graphql')
-    cy.route('/jsonapi/node/list/**').as('jsonapi')
+    cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+    cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
     cy.hidePopup()
     cy.visit('/')
     cy.wait('@jsonapi')
@@ -30,7 +29,7 @@ describe('panorama module', () => {
 
   describe('user should be able to navigate to the panorama from the homepage', () => {
     it('should open the panorama viewer', () => {
-      cy.get(PANORAMA.homepage).should('not.be.visible')
+      cy.get(PANORAMA.homepage).should('not.exist')
       cy.get(PANORAMA.panorama).should('exist').and('be.visible')
     })
   })
@@ -100,9 +99,9 @@ describe('panorama module', () => {
       let newUrl
 
       cy.defineGeoSearchRoutes()
-      cy.route('/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
-      cy.route('/panorama/thumbnail?*').as('getPanoThumbnail')
-      cy.route('/typeahead?q=leidsegracht*').as('getSuggestions')
+      cy.intercept('**/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanoThumbnail')
+      cy.intercept('**/typeahead?q=leidsegracht*').as('getSuggestions')
 
       cy.viewport(1000, 660)
       cy.get(PANORAMA.markerPane).find('img').should('exist').and('be.visible')
@@ -114,7 +113,7 @@ describe('panorama module', () => {
       cy.wait('@getOpenbareRuimte')
       cy.wait('@getPanoThumbnail')
       cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
-      cy.get(DATA_DETAIL.heading).should('exist').and('be.visible').contains('Leidsegracht')
+      cy.get(DETAIL_PANEL.heading).should('exist').and('be.visible').contains('Leidsegracht')
       cy.get(`${COMPONENTS.panoramaPreview} a`).click()
 
       cy.wait('@getResults')

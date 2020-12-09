@@ -1,13 +1,12 @@
-import { DATA_DETAIL, DATA_SEARCH, MAP, SEARCH } from '../support/selectors'
+import { DETAIL_PANEL, DATA_SEARCH, MAP } from '../support/selectors'
 
 describe('Search data', () => {
   describe('Autosuggest', () => {
     beforeEach(() => {
-      cy.server()
-      cy.route('/typeahead?q=dam*').as('getResults')
-      cy.route('/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/typeahead?q=dam*').as('getResults')
+      cy.intercept('**/bag/v1.1/openbareruimte/**').as('getOpenbareRuimte')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()
       cy.visit('/')
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
@@ -31,7 +30,7 @@ describe('Search data', () => {
           cy.wait('@graphql')
           cy.wait('@jsonapi')
 
-          cy.get(DATA_DETAIL.heading).contains(firstValue).should('exist').and('be.visible')
+          cy.get(DETAIL_PANEL.heading).contains(firstValue).should('exist').and('be.visible')
         })
     })
     it('Should be able to navigate through the autosuggest results with arrow keys', () => {
@@ -40,7 +39,7 @@ describe('Search data', () => {
         delay: 60,
       })
       cy.get(DATA_SEARCH.autosuggestDropdownItemActive).should('contain', 'Panoramabeelden')
-      cy.get(SEARCH.input).should('have.value', 'Panoramabeelden')
+      cy.get(DATA_SEARCH.input).should('have.value', 'Panoramabeelden')
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}')
       cy.get(DATA_SEARCH.autosuggestDropdownItemActive).contains('Cameratoezichtgebieden')
     })
@@ -63,18 +62,17 @@ describe('Search data', () => {
   })
   describe('User should be able to search', () => {
     beforeEach(() => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/jsonapi/node/list/*').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
       cy.hidePopup()
 
       cy.visit('/')
-      cy.get(SEARCH.input).trigger('focus')
+      cy.get(DATA_SEARCH.input).trigger('focus')
     })
 
     it('Should submit the search and give results', () => {
-      cy.get(SEARCH.input).type('Park')
-      cy.get(SEARCH.form).submit()
+      cy.get(DATA_SEARCH.input).type('Park')
+      cy.get(DATA_SEARCH.form).submit()
 
       cy.wait(['@graphql', '@graphql'])
       cy.wait('@jsonapi')
@@ -83,7 +81,7 @@ describe('Search data', () => {
     })
 
     it('Should submit the search and give no results', () => {
-      cy.get(SEARCH.input).type('NORESULTS')
+      cy.get(DATA_SEARCH.input).type('NORESULTS')
       cy.get(DATA_SEARCH.autoSuggest).submit()
       cy.wait(['@graphql', '@graphql'])
       cy.wait('@jsonapi')
@@ -94,19 +92,18 @@ describe('Search data', () => {
   })
   describe('Filter on search results', () => {
     beforeEach(() => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/jsonapi/node/list/*').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
       cy.hidePopup()
 
       cy.visit('/')
-      cy.get(SEARCH.input).trigger('focus')
+      cy.get(DATA_SEARCH.input).trigger('focus')
     })
 
     it('Should show all results', () => {
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
-      cy.get(SEARCH.input).type('Amsterdam')
-      cy.get(SEARCH.form).submit()
+      cy.get(DATA_SEARCH.input).type('Amsterdam')
+      cy.get(DATA_SEARCH.form).submit()
 
       cy.wait(['@graphql', '@graphql'])
       cy.wait('@jsonapi')
@@ -157,7 +154,6 @@ describe('Search data', () => {
   })
   describe('Data search with employee permissions', () => {
     beforeEach(() => {
-      cy.server()
       cy.hidePopup()
     })
     before(() => {
@@ -169,11 +165,11 @@ describe('Search data', () => {
     })
     it('Should show an employee all information in a Geo search', () => {
       cy.defineGeoSearchRoutes()
-      cy.route('/bag/v1.1/pand/*').as('getPand')
-      cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
-      cy.route('/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
-      cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen')
-      cy.route('/panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/bag/v1.1/pand/**').as('getPand')
+      cy.intercept('**/monumenten/monumenten/?betreft_pand=**').as('getMonumenten')
+      cy.intercept('**/bag/v1.1/nummeraanduiding/?pand=**').as('getNummeraanduidingen')
+      cy.intercept('**/handelsregister/vestiging/?pand=**').as('getVestigingen')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
 
       cy.visit('data/geozoek?locatie=52.3736166%2C4.8943521')
 

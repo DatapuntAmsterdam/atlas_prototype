@@ -1,4 +1,4 @@
-import { ascDefaultTheme, breakpoint, Theme, themeColor } from '@amsterdam/asc-ui'
+import { ascDefaultTheme, breakpoint, Theme } from '@amsterdam/asc-ui'
 import styled, { css } from 'styled-components'
 
 const GAP = ascDefaultTheme.spacing * 6
@@ -15,42 +15,6 @@ type TileGridItemProps = {
 }
 
 export const TileGridItem = styled.div<TileGridItemProps>`
-  // Begin IE11 rules
-  display: flex;
-  flex-shrink: 0;
-  flex-basis: calc(100%);
-  position: relative;
-
-  & > * {
-    border: ${GAP}px solid ${themeColor('tint', 'level1')};
-    border-top: none;
-  }
-
-  &:nth-of-type(1n) > * {
-    border-left: none;
-  }
-
-  &:nth-of-type(1) > * {
-    border-right: none;
-  }
-
-  @media screen and ${breakpoint('min-width', 'tabletS')} {
-    flex-basis: calc(50%);
-  }
-
-  @media screen and ${breakpoint('min-width', 'laptop')} {
-    flex-basis: calc(100% / 4);
-
-    &:nth-of-type(2n) > * {
-      border-right: ${GAP}px solid white;
-    }
-
-    &:nth-of-type(5) > * {
-      border-right: 0;
-    }
-  }
-
-  // End IE11 rules
   min-height: 250px;
 
   @supports (display: grid) {

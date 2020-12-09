@@ -3,8 +3,7 @@ import { UrlParam } from './useParam'
 
 function encodeParam<T>(urlParam: UrlParam<T>, value: T) {
   const encodedValue = value && urlParam.encode(value)
-  const newValue = isEqual(urlParam.defaultValue, value) ? null : encodedValue
-  return newValue
+  return isEqual(urlParam.defaultValue, value) ? null : encodedValue
 }
 
 export default encodeParam

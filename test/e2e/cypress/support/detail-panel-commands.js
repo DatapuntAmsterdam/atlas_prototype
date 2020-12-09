@@ -1,8 +1,8 @@
-import { DATA_DETAIL, DETAIL_PANEL } from './selectors'
+import { DETAIL_PANEL } from './selectors'
 
 Cypress.Commands.add('checkTermAndDefinition', (definitionlistNumber, listTerm, value) => {
   if (value) {
-    cy.get(DETAIL_PANEL.definitionList)
+    cy.get('[class*=DefinitionList__DefinitionList]')
       .eq(definitionlistNumber)
       .within(() => {
         cy.get('[class*="DefinitionListTerm"]')
@@ -13,11 +13,13 @@ Cypress.Commands.add('checkTermAndDefinition', (definitionlistNumber, listTerm, 
           .should('be.visible')
       })
   } else {
-    cy.get(DETAIL_PANEL.definitionList)
+    cy.get('[class*=DefinitionList__DefinitionList]')
       .eq(definitionlistNumber)
       .within(() => {
         cy.get('[class*="DefinitionListTerm"]')
           .contains(new RegExp(`^${listTerm}$`, 'g'))
+          .siblings(DETAIL_PANEL.definitionListDescription)
+          .should('have.text', '')
           .scrollIntoView()
           .should('be.visible')
       })
@@ -29,7 +31,7 @@ Cypress.Commands.add('checkInfoBoxes', (arrayTerms) => {
     cy.get(DETAIL_PANEL.buttonInfo).eq(i).click()
     cy.contains(`Uitleg over ${term}`).should('be.visible')
     cy.get('[class*="DetailInfoBox"]').find(DETAIL_PANEL.buttonClose).eq(0).click()
-    cy.contains(`Uitleg over ${term}`).should('not.be.visible')
+    cy.contains(`Uitleg over ${term}`).should('not.exist')
   })
 })
 
@@ -60,7 +62,7 @@ Cypress.Commands.add('checkLinkItems', (fixturePath) => {
       // eslint-disable-next-line no-unused-vars
       Object.entries(valueA.items).forEach(([keyB, valueB]) => {
         // Check if key-value pair is visible in the UI
-        cy.get(DATA_DETAIL.linkList).should('contain', valueB)
+        cy.get(DETAIL_PANEL.linkList).should('contain', valueB)
       })
     })
   })
