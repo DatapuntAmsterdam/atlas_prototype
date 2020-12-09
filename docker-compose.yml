@@ -4,6 +4,8 @@ services:
   atlas:
     build:
       context: .
+      args:
+        - ENVIRONMENT=dev
 
     ports:
       - "3000:80"

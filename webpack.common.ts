@@ -110,6 +110,8 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
                     targets: {
                       esmodules: true,
                     },
+                    useBuiltIns: 'usage',
+                    corejs: 3,
                   },
                 ],
                 '@babel/preset-react',
@@ -256,7 +258,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         chunkFilename: isProd ? '[name].[contenthash].css' : '[name].css',
       }),
       new HtmlWebpackPlugin({
-        inject: true,
         template: 'index.ejs',
         lang: 'nl',
         title: 'Data en informatie - Amsterdam',

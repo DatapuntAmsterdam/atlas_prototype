@@ -15,6 +15,7 @@
 
 import './authentication-commands'
 import './detail-panel-commands'
+import './helper-functions'
 import './hide-popup'
 import './homepage-commands'
 import './map-commands'

@@ -1,0 +1,15 @@
+{
+  "panelType": "Reclamebelastingtarief",
+  "panelHeading": "Tariefgebied B",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Tarief per": "1 januari 2020",
+        "Website": "https://www.amsterdam.nl/belastingen-heffingen/ondernemers/reclamebelasting/",
+        "Tarieven": "https://www.amsterdam.nl/veelgevraagd/?productid=%7b9de274dc-5c5c-4e5d-a8a3-12b91b5ab250%7d#case_%7BBD8074C6-B2BA-4326-8577-DC80C711E318%7D"
+      }
+    }
+  ],
+  "linkLists": []
+}

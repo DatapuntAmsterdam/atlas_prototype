@@ -38,7 +38,16 @@ export function* fetchMapSearchResults() {
       const results = replaceBuurtcombinatie(geoSearchResults)
       yield put(fetchMapSearchResultsSuccessList(results, getNrOfSearchResults(geoSearchResults)))
 
-      const { results: resultsPanel, errors } = yield call(search, location, user)
+      const { results: resultsPanel, errors } = yield call(
+        search,
+        user,
+        location
+          ? {
+              lat: location.latitude,
+              lng: location.longitude,
+            }
+          : null,
+      )
       yield put(
         fetchMapSearchResultsSuccessPanel(resultsPanel, getNumberOfResultsPanel(resultsPanel)),
       )

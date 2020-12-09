@@ -1,35 +1,36 @@
+export const ALERTS = {
+  COMPLEXEN:
+    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: beschrijving.',
+  GENERAL:
+    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden.',
+  KADASTRAAL_OBJECT:
+    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: Kadastrale objecten.',
+  KADASTRAAL_OBJECT_ITEMS:
+    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: koopsom, koopjaar en cultuur (on)bebouwd; zakelijke rechten en aantekeningen.',
+  KADASTRAAL_SUBJECT:
+    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: kadastrale subjecten. Om ook zakelijke rechten van natuurlijke personen te bekijken, moet je als medewerker bovendien speciale bevoegdheden hebben.',
+  MONUMENTEN:
+    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: type, architect en opdrachtgever, bouwjaar, oorspronkelijke functie, beschrijving en redengevende omschrijving.',
+  VESTIGINGEN:
+    'Medewerkers/ketenpartners van Gemeente Amsterdam kunnen inloggen om meer te informatie te vinden over: Vestigingen.',
+}
+
 export const ADDRESS_PAGE = {
-  buttonOpenMap: '.c-toggle-view-button.qa-dp-link',
   buttonMaximizeMap: 'button.icon-button__right',
   buttonShowMore: '.map-search-results__button',
   dataSelection: '.c-data-selection',
-  detailPage: '.c-detail',
   iconCluster: '.o-highlight-cluster',
   iconMapMarker: '.leaflet-marker-icon',
   linkTable: '[class*="DetailLinkList__LinkList"]',
   mapContainer: '.qa-map-container',
-  notification: '.notification__content',
-  panoramaThumbnail: 'img.c-panorama-thumbnail--img',
   resultsList: 'ul.o-list',
-  resultsListItem: '.qa-list-item-link',
   resultsPanel: '.qa-dashboard__column--right',
-  resultsPanelTitle: '.qa-title',
-  tab: '.o-tabs__tab',
   tabKadastraleObjecten: '#tab-brk',
 }
 
 export const COMPONENTS = {
-  panoramaPreview: '[data-testid="panorama-preview"]',
-  authAlert: '[data-testid="auth-alert"]',
+  panoramaPreview: '[data-testid="panoramaPreview"]',
   shareBar: '[data-testid="sharebar"]',
-}
-
-export const DATA_DETAIL = {
-  main: '[data-testid="data-detail"]',
-  heading: '[data-testid="data-detail-heading"]',
-  subHeading: '[data-testid="data-detail-subheading"]',
-  definitionList: '[data-testid="detail-definition-list"]',
-  linkList: '[data-testid="detail-linklist"]',
 }
 
 export const DATA_SEARCH = {
@@ -38,27 +39,19 @@ export const DATA_SEARCH = {
   autoSuggestDropdown: '.auto-suggest__dropdown',
   autoSuggestDropDownItem: '.auto-suggest__dropdown-item',
   autosuggestDropdownItemActive: '.auto-suggest__dropdown-item--active',
-  autosuggestDropdownItemInActive: '.auto-suggest__dropdown-item--inactive',
-  autoSuggestDropdownCategories: '.auto-suggest__dropdown-category li',
-  autoSuggestDropdownHighlighted: '.auto-suggest__dropdown__highlight',
+  autoSuggestDropdownMoreResults: '[class*=auto-suggest__dropdown-item--more-results]',
   autoSuggestInput: '#auto-suggest__input',
   autoSuggestHeader: 'h4.qa-auto-suggest-header',
   autoSuggestTip: '.auto-suggest__tip',
   buttonFilteren: '[class*=SearchPageResults__FilterButton]',
-  headerTitle: '.o-header__title',
+  form: '[data-test=search-form]',
   headerSubTitle: '.o-header__subtitle',
   infoNotification: '.notification--info',
-  keyValueList: '.c-key-value-list',
+  input: '[data-test=search-input]',
   linklogin: '[data-testid="link"]',
-  listItem: 'li',
-  mapLayersCategory: '.map-layers__category',
   mapDetailResultHeaderSubTitle: '.map-detail-result__header-subtitle',
-  mapDetailResultItem: '.map-detail-result__item',
-  natuurlijkPersoon: 'dl.qa-natuurlijk-persoon',
-  nietNatuurlijkPersoon: 'dl.qa-niet-natuurlijk-persoon',
   scrollWrapper: '.scroll-wrapper',
   searchBarFilter: '[data-testid="SearchBarFilter"]',
-  searchHeader: '.qa-search-header',
   searchResultsGrid: '[data-testid="geosearch-page"]',
   searchResultsCategory: '[class*=SearchHeading__StyledHeading]',
   searchResultsDatasetCard: '[class*=DatasetCard__StyledHeading]',
@@ -66,8 +59,6 @@ export const DATA_SEARCH = {
   searchResultsLink: '[class*=LinkStyle__LinkContent]',
   searchResultsParagraphLink: '[class*="StyledParagraphLink"]',
   sortDropdown: '[data-testid="sort-select"]',
-  warningPanel: '.c-panel',
-  warningPanelAngular: '.c-panel--warning',
 }
 
 export const DATA_SELECTION_TABLE = {
@@ -87,27 +78,34 @@ export const DATA_SETS = {
 export const DETAIL_PANEL = {
   buttonClose: '[aria-label="Sluiten"]',
   buttonInfo: '[data-testid="detail-infobox"]',
+  constructionFileAddresses: '[data-testid="constructionFileAddresses"]',
+  constructionFileSubheading: '[class*=ConstructionFileDetail__SubHeading]',
   definitionList: '[data-testid="detail-definition-list"]',
   definitionListDescription: '[class*="DefinitionListDescription"]',
   definitionListTerm: '[class*="DefinitionListTerm"]',
+  documentsHeader: '[data-testid="DocumentsHeading"]',
+  heading: '[data-testid="data-detail-heading"]',
   linkList: '[data-testid="detail-linklist"]',
+  main: '[data-testid="data-detail"]',
   panelTypeTitle: '[class*=DataDetailPage__DetailType]',
   panelSubject: '[class*="DetailPanel__Heading"] h1',
   panoramaPreview: '[class*="PanoramaPreview__PreviewContainer"]',
   subHeader: '[data-testid="data-detail-subheading"]',
+  table: '[data-testid="detail-table"]',
 }
 
 export const DRAWING = {
-  buttonDrawingOn: '.toggle-drawing__icon',
-  labelDrawing: '.toggle-drawing__label',
+  buttonDraw: '[class*="DrawToolControls__DrawToolPanel"] > [class*="DrawToolButton"]',
+  buttonDrawTool: '[data-testid="drawtoolOpenButton"]',
+  buttonCloseDrawTool: '[class*="DrawToolControls__ToolButton"]',
+  buttonRemove: '[class*="DrawToolControls__RemoveButton"]',
   clusterIcon: '.o-highlight-cluster',
-  mapPolygon: '.c-map__leaflet-drawn-polygon',
-  buttonDrawTool: '[class*="DrawToolBare__DrawToolButton"]',
-  buttonRemove: '[class*="DrawToolBare__RemoveButton"]',
   clusterSymbol: '[class*="clustergroup"]',
   dropdownResults: '[data-testid="sort-select"]',
   dropdownResultsSelectedValue: '[data-testid="selectedValue"]',
+  labelDrawing: '.toggle-drawing__label',
   linkDrawresult: '[class*="DrawResults__ResultLink"]',
+  mapPolygon: '.c-map__leaflet-drawn-polygon',
   panelDrawTool: '[class*="DrawToolBare__DrawToolPanel"]',
   polygon: '[class="leaflet-interactive"]',
   tooltip: '[class*=leaflet-tooltip-bottom]',
@@ -191,9 +189,7 @@ export const MAP = {
   embedButton: '[data-test=embed-button]',
   iconMapMarker: '.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive',
   imageLayer: '.leaflet-overlay-pane > .leaflet-image-layer',
-  legendItem: '.map-legend__title',
   legendNotification: '.map-legend__notification',
-  legendToggleItem: '.map-layers__toggle-title',
   mapContainer: '.leaflet-container',
   mapDetailPanoramaHeader: '.map-detail-result__header-pano',
   mapDetailPanoramaHeaderImage: 'img.map-detail-result__header-pano',
@@ -230,6 +226,9 @@ export const MAP_LAYERS = {
   checkboxAfvalPlastic: '#afvlc-wlopls',
   checkboxAfvalTextiel: '#afvlc-wlotxtl',
   checkboxAfvalGFE: '#afvlc-wlokca',
+  checkboxAfvalBrood: '#afvlc-wlobrood',
+  checkboxAfvalPMD: '#afvlc-wlopmd',
+  checkboxAfvalGrof: '#afvlc-wlogrof',
   checkboxBelastingen: '[aria-label="Belastingen"]',
   checkboxBelastingenPrecWoonschepen: '#bel-precarw',
   checkboxBelastingenPrecBedrijfsvaartuigen: '#bel-precarbv',
@@ -447,28 +446,18 @@ export const PANORAMA = {
   statusBarCoordinates: '.c-panorama-status-bar__coordinates',
   panorama: '.c-panorama',
 }
+
 export const PRINT = {
   buttonClosePrint: '.c-print-header__close',
   headerTitle: 'h1.c-print-header__title',
-  printLink: '.qa-share-bar > div > button:nth(4) ',
-}
-
-export const SEARCH = {
-  form: '[data-test=search-form]',
-  input: '[data-test=search-input]',
 }
 
 export const TABLES = {
   activeFilterItem: '.c-data-selection-active-filters__listitem',
-  activeFilterRemove: '.c-data-selection-active-filters--remove-filter',
-  detailTitle: 'h2.o-header__title',
   filterCategories: '.c-data-selection-available-filters__category',
   filterItem: '.c-data-selection-available-filters__item',
   filterLabel: '.qa-option-label',
   filterPanel: '.qa-available-filters',
-  kadasterLink: '[href*="/data/brk/kadastrale-objecten"]',
   tableValue: '.qa-table-value',
   warningPanel: '.c-panel__paragraph',
-  vestigingLink: '.qa-table-link',
-  zakelijkRecht: '.qa-kadastraal-subject-recht',
 }

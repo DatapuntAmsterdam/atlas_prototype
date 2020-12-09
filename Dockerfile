@@ -1,7 +1,7 @@
 ################################
 # Base
 ################################
-FROM node:12 AS build-deps
+FROM node:14 AS build-deps
 LABEL maintainer="datapunt@amsterdam.nl"
 
 WORKDIR /app
@@ -22,8 +22,7 @@ RUN npm run generate:sitemap
 
 COPY modules /app/modules
 
-COPY .babelrc \
-    .browserslistrc \
+COPY .browserslistrc \
     index.ejs \
     webpack.* \
     tsconfig.* \
@@ -44,11 +43,15 @@ RUN echo "`date`" > ./dist/version.txt
 ################################
 FROM nginx:1.19-alpine
 
+ARG ENVIRONMENT=prod
+
 COPY scripts/startup.sh /usr/local/bin/startup.sh
 RUN chmod +x /usr/local/bin/startup.sh
 
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.csp.${ENVIRONMENT}.conf /etc/nginx/conf.d/csp.conf
 COPY default.conf /etc/nginx/conf.d/
+
 COPY --from=build-deps /app/dist /usr/share/nginx/html
 
 CMD ["/usr/local/bin/startup.sh"]

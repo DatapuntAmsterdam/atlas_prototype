@@ -8,7 +8,7 @@ import { locationParam } from './query-params'
 
 export interface MarkerProps {
   location: LatLngLiteral | null
-  setLocation: (location: LatLngLiteral | null) => void
+  setLocation?: (location: LatLngLiteral) => void
 }
 
 export interface MapMarkersProps {
@@ -21,9 +21,7 @@ const MapMarkers: React.FC<MapMarkersProps> = ({ panoActive }) => {
 
   return (
     <>
-      {!panoActive && !showDrawTool && (
-        <MapSearchMarker location={location} setLocation={setLocation} />
-      )}
+      {!panoActive && !showDrawTool && <MapSearchMarker location={location} />}
       {panoActive && <PanoramaViewerMarker location={location} setLocation={setLocation} />}
     </>
   )

@@ -7,12 +7,14 @@ import SelectFilter from './SelectFilter'
 describe('SelectFilter', () => {
   beforeEach(cleanup)
 
-  const defaultProps = {
+  const defaultProps: FilterProps = {
     type: 'test',
+    label: 'Test',
     options: [],
     totalCount: 999,
     hideCount: true,
     selection: [],
+    onSelectionChange: () => {},
   }
 
   const options: FilterOption[] = [
@@ -22,8 +24,7 @@ describe('SelectFilter', () => {
   ]
 
   it('should render an option to disable the filter and select it by default', () => {
-    const props: FilterProps = { ...defaultProps, onSelectionChange: () => {} }
-    const { getAllByText } = render(<SelectFilter {...props} />)
+    const { getAllByText } = render(<SelectFilter {...defaultProps} />)
     const node = getAllByText('Alles')[0] as HTMLOptionElement
 
     expect(node.tagName).toEqual('OPTION')
@@ -32,7 +33,7 @@ describe('SelectFilter', () => {
   })
 
   it('should render a list of options without selection', () => {
-    const props: FilterProps = { ...defaultProps, options, onSelectionChange: () => {} }
+    const props: FilterProps = { ...defaultProps, options }
     const { getAllByText } = render(<SelectFilter {...props} />)
 
     const firstNode = getAllByText('First')[0] as HTMLOptionElement
@@ -49,7 +50,7 @@ describe('SelectFilter', () => {
 
   it('should render a list of options with selection', () => {
     const selection = ['second']
-    const props: FilterProps = { ...defaultProps, options, selection, onSelectionChange: () => {} }
+    const props: FilterProps = { ...defaultProps, options, selection }
     const { getAllByText } = render(<SelectFilter {...props} />)
     const secondNode = getAllByText('Second')[0] as HTMLOptionElement
 

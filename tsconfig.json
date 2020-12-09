@@ -2,6 +2,10 @@
   "include": [
     "./src/**/*"
   ],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ],
   "compilerOptions": {
     "strict": true,
     "jsx": "react",

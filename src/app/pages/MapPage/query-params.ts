@@ -131,13 +131,6 @@ export const baseLayerParam: UrlParam<BaseLayer> = {
   encode: (value) => value,
 }
 
-export const detailUrlParam: UrlParam<string | null> = {
-  name: 'detailUrl',
-  defaultValue: null,
-  decode: (value) => value,
-  encode: (value) => value,
-}
-
 export const panoParam: UrlParam<Pano | null> = {
   name: 'pano',
   defaultValue: null,
