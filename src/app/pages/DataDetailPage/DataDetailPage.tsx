@@ -2,11 +2,10 @@ import { Container, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import React, { FunctionComponent } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { DetailInfo } from '../../../map/types/details'
 import PromiseResult from '../../components/PromiseResult/PromiseResult'
 import ShareBar from '../../components/ShareBar/ShareBar'
 import DetailInfoBox from '../MapPage/detail/DetailInfoBox'
-import { HeadingWrapper, RenderDetails } from '../MapPage/detail/DetailPanel'
+import { DataDetailPageParams, HeadingWrapper, RenderDetails } from '../MapPage/detail/DetailPanel'
 import useDataDetail from './useDataDetail'
 
 const DetailWrapper = styled(Container)`
@@ -21,12 +20,6 @@ const DetailType = styled.strong`
   color: ${themeColor('secondary')};
   font-size: 21px;
 `
-
-// TODO: 'subType' should be replaced with the 'subType' property on 'DetailInfo'
-// This should happen when the old Angular and Redux Router code has been deleted.
-interface DataDetailPageParams extends Omit<DetailInfo, 'subType'> {
-  subtype: string
-}
 
 const DataDetailPage: FunctionComponent = () => {
   const getDetailData = useDataDetail()

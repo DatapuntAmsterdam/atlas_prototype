@@ -1,4 +1,4 @@
-import { Container, themeColor } from '@amsterdam/asc-ui'
+import { Alert, Container, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -15,6 +15,10 @@ const BodyStyle = styled.div`
   background-color: ${themeColor('level', 'level1')}
   position: relative;
   width: 100%;
+`
+
+const StyledAlert = styled(Alert)`
+  margin-top: ${themeSpacing(2)};
 `
 
 const EditorialPage = ({
@@ -71,6 +75,10 @@ const EditorialPage = ({
         {ogImage && <meta name="twitter:image" content={ogImage} />}
       </Helmet>
       <BodyStyle>
+        <StyledAlert level="error">
+          Er is een storing waardoor niet alle publicaties, afbeeldingen, video&apos;s en overige
+          bestanden beschikbaar zijn. Onze excuses, wij werken aan een oplossing.
+        </StyledAlert>
         {loading && <LoadingSpinner />}
         {children}
       </BodyStyle>

@@ -52,6 +52,7 @@ export type MapVisualization = MapVisualizationGeoJSON | MapVisualizationMarkers
 export type DataSelectionResult = Array<{
   id: string
   name: string
+  marker?: Marker
 }>
 
 export type DataSelectionResponse = {

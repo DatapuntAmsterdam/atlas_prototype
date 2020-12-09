@@ -11,7 +11,11 @@ jest.mock('redux-first-router-link', () => ({
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(() => []),
 }))
-
+jest.mock('../../../app/utils/useGetLegacyPanoramaPreview', () => () => ({
+  panoramaUrl: '/foo',
+  link: '/link',
+  linkComponent: null,
+}))
 describe('MapDetailResultWrapper', () => {
   it('should render everything', () => {
     const clickHandler = jest.fn()

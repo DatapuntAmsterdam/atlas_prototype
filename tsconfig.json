@@ -3,7 +3,8 @@
     "./src/**/*"
   ],
   "exclude": [
-    "**/*.test.ts"
+    "**/*.test.ts",
+    "**/*.test.tsx"
   ],
   "compilerOptions": {
     "strict": true,

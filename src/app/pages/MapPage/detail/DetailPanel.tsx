@@ -1,16 +1,17 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import React, { Fragment, FunctionComponent, useContext, useState } from 'react'
+import React, { Fragment, FunctionComponent, useContext, useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import {
   fetchDetailData,
   getServiceDefinition,
   MapDetails,
-  parseDetailPath,
   toMapDetails,
 } from '../../../../map/services/map'
 import {
+  DetailInfo,
   DetailResultItem,
   DetailResultItemGroupedItems,
   DetailResultItemPaginatedData,
@@ -21,21 +22,18 @@ import { AuthError } from '../../../../shared/services/api/errors'
 import AuthAlert from '../../../components/Alerts/AuthAlert'
 import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
-import Spacer from '../../../components/Spacer/Spacer'
-import useAuthScope from '../../../utils/useAuthScope'
-import useParam from '../../../utils/useParam'
 import PanoramaPreview, { PreviewContainer } from '../map-search/PanoramaPreview'
 import MapContext from '../MapContext'
-import { detailUrlParam } from '../query-params'
 import DetailDefinitionList from './DetailDefinitionList'
 import DetailHeading from './DetailHeading'
 import DetailInfoBox, { InfoBoxProps } from './DetailInfoBox'
 import DetailLinkList from './DetailLinkList'
 import DetailTable from './DetailTable'
-
-interface DetailPanelProps {
-  detailUrl: string
-}
+import useAuthScope from '../../../utils/useAuthScope'
+import Spacer from '../../../components/Spacer/Spacer'
+import { routing } from '../../../routes'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
+import { panoParam } from '../query-params'
 
 const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
@@ -102,15 +100,21 @@ type LegacyLayout = {
   legacyLayout?: boolean
 }
 
-const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
-  const [, setDetailUrl] = useParam(detailUrlParam)
+// TODO: 'subType' should be replaced with the 'subType' property on 'DetailInfo'
+// This should happen when the old Angular and Redux Router code has been deleted.
+export interface DataDetailPageParams extends Omit<DetailInfo, 'subType'> {
+  subtype: string
+}
+
+const DetailPanel: FunctionComponent = () => {
   const { setDetailFeature } = useContext(MapContext)
   const { isUserAuthorized } = useAuthScope()
+  const { type, subtype: subType, id } = useParams<DataDetailPageParams>()
+  const history = useHistory()
+  const { buildQueryString } = useBuildQueryString()
 
   async function getDetailData() {
-    const detailParams = parseDetailPath(detailUrl)
-    const serviceDefinition = getServiceDefinition(`${detailParams.type}/${detailParams.subType}`)
-
+    const serviceDefinition = getServiceDefinition(`${type}/${subType}`)
     // Todo: Redirect to 404?
     if (!serviceDefinition) {
       return Promise.resolve(null)
@@ -123,12 +127,12 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
       return Promise.reject(error)
     }
 
-    const data = await fetchDetailData(serviceDefinition, detailParams.id as string)
-    const details = await toMapDetails(serviceDefinition, data, detailParams)
+    const data = await fetchDetailData(serviceDefinition, id as string)
+    const details = await toMapDetails(serviceDefinition, data, { id, type, subType })
 
     if (details.geometry) {
       setDetailFeature({
-        id: detailParams.id,
+        id,
         type: 'Feature',
         geometry: details.geometry,
         properties: null,
@@ -144,16 +148,29 @@ const DetailPanel: FunctionComponent<DetailPanelProps> = ({ detailUrl }) => {
     }
   }
 
+  useEffect(() => {
+    return () => {
+      setDetailFeature(null)
+    }
+  }, [])
+
   return (
-    <PromiseResult factory={() => getDetailData()} deps={[detailUrl]}>
+    <PromiseResult factory={() => getDetailData()} deps={[]}>
       {({ value }) => (
-        <MapPanelContent
-          title={value?.data.subTitle || 'Detailweergave'}
-          subTitle={value?.data.title || ''}
-          onClose={() => setDetailUrl(null)}
-        >
-          <RenderDetails details={value} />
-        </MapPanelContent>
+        <>
+          <MapPanelContent
+            title={value?.data.subTitle || 'Detailweergave'}
+            subTitle={value?.data.title || ''}
+            onClose={() => {
+              history.push({
+                pathname: routing.dataSearchGeo.path,
+                search: buildQueryString([[panoParam, null]]),
+              })
+            }}
+          >
+            <RenderDetails details={value} />
+          </MapPanelContent>
+        </>
       )}
     </PromiseResult>
   )

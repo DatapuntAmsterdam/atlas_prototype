@@ -1,7 +1,11 @@
+import { mocked } from 'ts-jest/utils'
+import { MapLayer } from '..'
 import { fetchWithToken } from '../../../shared/services/api/api'
 import fetchNearestDetail, { sortResults } from './nearest-detail'
 
 jest.mock('../../../shared/services/api/api')
+
+const mockedFetchWithToken = mocked(fetchWithToken)
 
 describe('fetchNearestDetail', () => {
   it('should sortResults the results on distance and detailIsShape', () => {
@@ -27,7 +31,7 @@ describe('fetchNearestDetail', () => {
           detailIsShape: true,
           distance: 9,
         },
-      ]),
+      ] as MapLayer[]),
     ).toEqual([
       {
         detailIsShape: undefined,
@@ -52,8 +56,8 @@ describe('fetchNearestDetail', () => {
     ])
   })
 
-  it('should sadsa', async () => {
-    fetchWithToken.mockImplementation(() =>
+  it('should fetch the nearest detail', async () => {
+    mockedFetchWithToken.mockImplementation(() =>
       Promise.resolve({
         features: [
           {
@@ -81,14 +85,16 @@ describe('fetchNearestDetail', () => {
       }),
     )
 
-    const result = await fetchNearestDetail('location', [{}], 1)
+    const result = await fetchNearestDetail({ latitude: 1, longitude: 2 }, [{} as MapLayer], 1)
+
     expect(result).toEqual({
       detailIsShape: undefined,
       distance: 0,
       display: 'ASD03 E 09114 G 0000',
       uri: 'https://acc.api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11440911470000/',
       id: 'NL.KAD.OnroerendeZaak.11440911470000',
-      type: 'kadaster/kadastraal_object',
+      subType: 'kadastraal_object',
+      type: 'kadaster',
     })
   })
 })

@@ -23,7 +23,11 @@ export interface Route {
   useHooks?: boolean
 }
 
-export const routing: { [key: string]: Route } = {
+function typeHelper<K extends PropertyKey>(obj: Record<K, Route>): Record<K, Route> {
+  return obj
+}
+
+export const routing = typeHelper({
   home: {
     title: 'Home',
     path: '/',
@@ -175,13 +179,51 @@ export const routing: { [key: string]: Route } = {
     type: `${ROUTER_NAMESPACE}/${PAGES.MAP_SEARCH}`,
     page: PAGES.MAP_SEARCH,
   },
-  map: {
-    title: 'Kaart',
+  //  Todo: AfterBeta remove these
+
+  data_TEMP: {
+    title: 'Data',
     path: `/${MAIN_PATHS.MAP}/`,
-    type: `${ROUTER_NAMESPACE}/${PAGES.MAP}`,
-    page: PAGES.MAP,
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATA}_TEMP`,
+    page: PAGES.DATA,
   },
-}
+  dataSearchGeo_TEMP: {
+    title: 'Data zoekresultaten op locatie',
+    path: `/${MAIN_PATHS.MAP}/geozoek/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_SEARCH_GEO}_TEMP`,
+    page: PAGES.DATA_SEARCH_GEO,
+  },
+  dataDetail_TEMP: {
+    title: 'Data detail',
+    path: `/${MAIN_PATHS.MAP}/:type/:subtype/:id/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.DATA_DETAIL}_TEMP`,
+    page: PAGES.DATA_DETAIL,
+  },
+  panorama_TEMP: {
+    title: 'Panoramabeeld',
+    path: `/${MAIN_PATHS.MAP}/panorama/:id/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.PANORAMA}_TEMP`,
+    page: PAGES.PANORAMA,
+  },
+  addresses_TEMP: {
+    title: 'Adressen',
+    path: `/${MAIN_PATHS.MAP}/bag/adressen/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ADDRESSES}_TEMP`,
+    page: PAGES.ADDRESSES,
+  },
+  establishments_TEMP: {
+    title: 'Vestigingen',
+    path: `/${MAIN_PATHS.MAP}/hr/vestigingen/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.ESTABLISHMENTS}_TEMP`,
+    page: PAGES.ESTABLISHMENTS,
+  },
+  cadastralObjects_TEMP: {
+    title: 'Kadastrale objecten',
+    path: `/${MAIN_PATHS.MAP}/brk/kadastrale-objecten/`,
+    type: `${ROUTER_NAMESPACE}/${PAGES.CADASTRAL_OBJECTS}_TEMP`,
+    page: PAGES.CADASTRAL_OBJECTS,
+  },
+})
 
 /**
  * We need to check if the route paths have a trailing slash
