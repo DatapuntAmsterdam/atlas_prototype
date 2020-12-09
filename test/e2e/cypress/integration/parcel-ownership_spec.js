@@ -33,8 +33,7 @@ describe('parcel-ownership (eigendommen) module', () => {
       })
 
       it('should not show kadastrale subjecten in autosuggest', () => {
-        cy.server()
-        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.intercept('**/typeahead?q=bakker*').as('getResults')
         cy.visit('/')
 
         cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker')
@@ -44,8 +43,7 @@ describe('parcel-ownership (eigendommen) module', () => {
         cy.get(DATA_SEARCH.autoSuggestHeader).should('not.contain', 'Kadastrale subjecten')
       })
       it('should not show kadastrale subjecten in results', () => {
-        cy.server()
-        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.intercept('**/typeahead?q=bakker*').as('getResults')
         cy.visit('/')
 
         cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
@@ -68,12 +66,11 @@ describe('parcel-ownership (eigendommen) module', () => {
     })
 
     beforeEach(() => {
-      cy.server()
       cy.hidePopup()
-      cy.route('/dataselectie/brk/geolocation/*').as('getDataselectieBrk')
-      cy.route('/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
-      cy.route('/brk/object-expand/*').as('getBrkObjectExpand')
-      cy.route('/brk/object/*').as('getBrkObject')
+      cy.intercept('**/dataselectie/brk/geolocation/*').as('getDataselectieBrk')
+      cy.intercept('**/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
+      cy.intercept('**/brk/object-expand/*').as('getBrkObjectExpand')
+      cy.intercept('**/brk/object/*').as('getBrkObject')
     })
 
     describe('user should be able to view the eigendommen', () => {
@@ -138,7 +135,7 @@ describe('parcel-ownership (eigendommen) module', () => {
     })
     describe('Autosuggest and search results', () => {
       it('Should show "Kadastrale subjecten" for medewerker plus in the autosuggest', () => {
-        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.intercept('**/typeahead?q=bakker*').as('getResults')
         cy.visit('/')
 
         cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
@@ -161,7 +158,7 @@ describe('parcel-ownership (eigendommen) module', () => {
           .and('be.visible')
       })
       it('Should show "Kadastrale subjecten" and "Maatschappelijke activiteiten in the search results', () => {
-        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.intercept('**/typeahead?q=bakker*').as('getResults')
         cy.visit('/')
 
         cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
@@ -182,8 +179,7 @@ describe('parcel-ownership (eigendommen) module', () => {
       cy.logout()
     })
     it('Should show "Kadastrale subjecten" for medewerker in the autosuggest', () => {
-      cy.server()
-      cy.route('/typeahead?q=bakker*').as('getResults')
+      cy.intercept('**/typeahead?q=bakker*').as('getResults')
       cy.visit('/')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
@@ -206,8 +202,7 @@ describe('parcel-ownership (eigendommen) module', () => {
         .and('be.visible')
     })
     it('Should show "Kadastrale subjecten" and "Maatschappelijke activiteiten in the search results', () => {
-      cy.server()
-      cy.route('/typeahead?q=bakker*').as('getResults')
+      cy.intercept('**/typeahead?q=bakker*').as('getResults')
       cy.visit('/')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')

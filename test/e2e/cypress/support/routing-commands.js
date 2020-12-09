@@ -1,41 +1,41 @@
 Cypress.Commands.add('defineGeoSearchRoutes', () => {
-  cy.route('/geosearch/bag/*').as('getGeoSearchBag')
-  cy.route('/geosearch/bekendmakingen/*').as('getGeoSearchBekendmakingen')
-  cy.route('/geosearch/biz/*').as('getGeoSearchBiz')
-  cy.route('/geosearch/bominslag/*').as('getGeoSearchBominslag')
-  cy.route('/geosearch/evenementen/*').as('getGeoSearchEvenementen')
-  cy.route('/geosearch/monumenten/*').as('getGeoSearchMonumenten')
-  cy.route('/geosearch/munitie/*').as('getGeoSearchMunitie')
-  cy.route('/geosearch/nap/*').as('getGeoSearchNap')
-  cy.route('/geosearch/oplaadpunten/*').as('getGeoSearchOplaadpunten')
-  cy.route('/geosearch/reclamebelasting/*').as('getGeoSearchReclamebelasting')
-  cy.route('/geosearch/winkgeb/*').as('getGeoSearchWinkelgebied')
+  cy.intercept('**/geosearch/bag/*').as('getGeoSearchBag')
+  cy.intercept('**/geosearch/bekendmakingen/*').as('getGeoSearchBekendmakingen')
+  cy.intercept('**/geosearch/biz/*').as('getGeoSearchBiz')
+  cy.intercept('**/geosearch/bominslag/*').as('getGeoSearchBominslag')
+  cy.intercept('**/geosearch/evenementen/*').as('getGeoSearchEvenementen')
+  cy.intercept('**/geosearch/monumenten/*').as('getGeoSearchMonumenten')
+  cy.intercept('**/geosearch/munitie/*').as('getGeoSearchMunitie')
+  cy.intercept('**/geosearch/nap/*').as('getGeoSearchNap')
+  cy.intercept('**/geosearch/oplaadpunten/*').as('getGeoSearchOplaadpunten')
+  cy.intercept('**/geosearch/reclamebelasting/*').as('getGeoSearchReclamebelasting')
+  cy.intercept('**/geosearch/winkgeb/*').as('getGeoSearchWinkelgebied')
 })
 
 Cypress.Commands.add('defineAddressDetailRoutes', () => {
-  cy.route('/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
-  cy.route('/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
-  cy.route('/bag/v1.1/pand/?verblijfsobjecten__id=*').as('getPanden')
-  cy.route('/brk/object/?verblijfsobjecten__id=*').as('getObject')
-  cy.route('/panorama/thumbnail?*').as('getPanorama')
-  cy.route('/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen')
-  cy.route('/monumenten/monumenten/*').as('getMonument')
-  cy.route('*/bouwdossier/*').as('getBouwdossier')
+  cy.intercept('**/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
+  cy.intercept('**/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
+  cy.intercept('**/bag/v1.1/pand/?verblijfsobjecten__id=*').as('getPanden')
+  cy.intercept('**/brk/object/?verblijfsobjecten__id=*').as('getObject')
+  cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
+  cy.intercept('**/monumenten/situeringen/?betreft_nummeraanduiding=*').as('getSitueringen')
+  cy.intercept('**/monumenten/monumenten/*').as('getMonument')
+  cy.intercept('**/bouwdossier/*').as('getBouwdossier')
 })
 
 Cypress.Commands.add('defineSearchRoutes', () => {
-  cy.route('/atlas/search/adres/?q=*').as('getSearchAddressResults')
-  cy.route('/atlas/search/gebied/?q=*').as('getSearchGebiedResults')
-  cy.route('/atlas/search/kadastraalobject/?q=*').as('getSearchKadastraalObjectResults')
-  cy.route('/atlas/search/kadastraalsubject/?q=*').as('getSearchKadastraalSubjectResults')
-  cy.route('/atlas/search/openbareruimte/?q=*').as('getSearchOpenbareRuimteResults')
-  cy.route('/dcatd/datasets*').as('getSearchCatalogueResults')
-  cy.route('/handelsregister/search/maatschappelijkeactiviteit/?q=*').as(
+  cy.intercept('**/atlas/search/adres/?q=*').as('getSearchAddressResults')
+  cy.intercept('**/atlas/search/gebied/?q=*').as('getSearchGebiedResults')
+  cy.intercept('**/atlas/search/kadastraalobject/?q=*').as('getSearchKadastraalObjectResults')
+  cy.intercept('**/atlas/search/kadastraalsubject/?q=*').as('getSearchKadastraalSubjectResults')
+  cy.intercept('**/atlas/search/openbareruimte/?q=*').as('getSearchOpenbareRuimteResults')
+  cy.intercept('**/dcatd/datasets*').as('getSearchCatalogueResults')
+  cy.intercept('**/handelsregister/search/maatschappelijkeactiviteit/?q=*').as(
     'getSearchMaatschappelijkeActiviteitResults',
   )
-  cy.route('/handelsregister/search/vestiging/?q=*').as('getSearchVestigingResults')
-  cy.route('/meetbouten/search/?q=*').as('getSearchMeetboutenResults')
-  cy.route('/monumenten/search/?q=*').as('getSearchMonumentsResults')
+  cy.intercept('**/handelsregister/search/vestiging/?q=*').as('getSearchVestigingResults')
+  cy.intercept('**/meetbouten/search/?q=*').as('getSearchMeetboutenResults')
+  cy.intercept('**/monumenten/search/?q=*').as('getSearchMonumentsResults')
 })
 
 Cypress.Commands.add('waitForGeoSearch', () => {
@@ -76,4 +76,13 @@ Cypress.Commands.add('waitForSearch', (type = 'EMPLOYEE_PLUS') => {
     cy.wait('@getSearchMaatschappelijkeActiviteitResults')
     cy.wait('@getSearchVestigingResults')
   }
+})
+Cypress.Commands.add('stubResponse', (url, fixture) => {
+  cy.intercept(url, {
+    headers: {
+      'access-control-allow-origin': window.location.origin,
+      'Access-Control-Allow-Credentials': 'true',
+    },
+    fixture: `${fixture}`,
+  })
 })

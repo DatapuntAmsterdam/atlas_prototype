@@ -4,9 +4,8 @@ describe('datasets module', () => {
   describe('user should be able to navigate to the datasets catalogus from the homepage', () => {
     beforeEach(() => {
       cy.viewport('macbook-15')
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
       cy.hidePopup()
 
       cy.visit('/')
@@ -29,7 +28,7 @@ describe('datasets module', () => {
     })
 
     it('should open a dataset', () => {
-      cy.route('/dcatd/datasets/*').as('getDataset')
+      cy.intercept('**/dcatd/datasets/**').as('getDataset')
       // click on the link to go to the datasets without a specified catalogus theme
       cy.get('[data-test=navigation-block] > [href="/datasets/zoek/"]').should('be.visible').click()
 
@@ -111,9 +110,8 @@ describe('datasets module', () => {
 
   describe('user should be able to search and see results', () => {
     beforeEach(() => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
       cy.hidePopup()
 
       cy.visit('/')
@@ -141,9 +139,8 @@ describe('datasets module', () => {
     })
 
     it('should show only datasets after filtering', () => {
-      cy.server()
-      cy.route(`typeahead?q=vergunningen*`).as('typeaheadResults')
-      cy.route('/dcatd/datasets/*').as('getDataset')
+      cy.intercept('**typeahead?q=vergunningen**').as('typeaheadResults')
+      cy.intercept('**/dcatd/datasets/**').as('getDataset')
       cy.get(DATA_SEARCH.input).trigger('focus')
       cy.get(DATA_SEARCH.input).type('Vergunningen')
       cy.wait('@typeaheadResults')
@@ -178,7 +175,6 @@ describe('datasets module', () => {
 
   describe.skip('Create, change and delete a dataset', () => {
     beforeEach(() => {
-      cy.server()
       cy.hidePopup()
     })
 
@@ -191,12 +187,11 @@ describe('datasets module', () => {
     })
 
     it('Should edit a dataset', () => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
-      cy.route('/dcatd/openapi').as('getOpenapi')
-      cy.route('/dcatd/datasets/*').as('getDataset')
-      cy.route('PUT', '/dcatd/datasets/*').as('putDataset')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('/dcatd/openapi').as('getOpenapi')
+      cy.intercept('**/dcatd/datasets/**').as('getDataset')
+      cy.intercept('PUT', '**/dcatd/datasets/**').as('putDataset')
       // click on the link to go to the datasets without a specified catalogus theme
       cy.get('[data-test=navigation-block] > [href="/datasets/zoek/"]').should('be.visible').click()
 
@@ -266,9 +261,8 @@ describe('datasets module', () => {
       cy.contains('Gemeente Amsterdam, Onderzoek, Informatie en Statistiek')
     })
     it('Should create a new dataset', () => {
-      cy.server()
-      cy.route('/dcatd/datasets').as('getDatasets')
-      cy.route('POST', '/dcatd/datasets').as('postDataset')
+      cy.intercept('/dcatd/datasets').as('getDatasets')
+      cy.intercept('POST', '/dcatd/datasets').as('postDataset')
       cy.visit('/dcatd_admin#/datasets')
       cy.wait('@getDatasets')
 
@@ -327,11 +321,10 @@ describe('datasets module', () => {
       cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam')
     })
     it('Should delete a dataset', () => {
-      cy.server()
-      cy.route('/dcatd/datasets').as('getDatasets')
-      cy.route('POST', '/dcatd/datasets/*').as('postDataset')
-      cy.route('/dcatd/openapi').as('getOpenapi')
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('/dcatd/datasets').as('getDatasets')
+      cy.intercept('POST', '**/dcatd/datasets/**').as('postDataset')
+      cy.intercept('/dcatd/openapi').as('getOpenapi')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
       cy.visit('/dcatd_admin#/datasets')
       cy.wait('@getDatasets')
       cy.contains('Stand van de leeuwenpopulatie in het wallengebied van Amsterdam').click()

@@ -1,7 +1,6 @@
 describe('redirects', () => {
   beforeEach(() => {
-    cy.server()
-    cy.route('/jsonapi/node/special/*').as('getSpecial')
+    cy.intercept('**/jsonapi/node/special/*').as('getSpecial')
   })
   it('should open the corona monitor', () => {
     cy.visit('/coronamonitor')

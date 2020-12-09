@@ -11,13 +11,12 @@ import {
 
 describe('panorama module', () => {
   beforeEach(() => {
-    cy.server()
-    cy.route('/panorama/panoramas/*/adjacencies/?newest_in_range=true&tags=mission-bi').as(
+    cy.intercept('**/panorama/panoramas/*/adjacencies/?newest_in_range=true&tags=mission-bi').as(
       'getResults',
     )
 
-    cy.route('POST', '/cms_search/graphql/').as('graphql')
-    cy.route('/jsonapi/node/list/**').as('jsonapi')
+    cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+    cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
     cy.hidePopup()
     cy.visit('/')
     cy.wait('@jsonapi')
@@ -100,9 +99,9 @@ describe('panorama module', () => {
       let newUrl
 
       cy.defineGeoSearchRoutes()
-      cy.route('/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
-      cy.route('/panorama/thumbnail?*').as('getPanoThumbnail')
-      cy.route('/typeahead?q=leidsegracht*').as('getSuggestions')
+      cy.intercept('**/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanoThumbnail')
+      cy.intercept('**/typeahead?q=leidsegracht*').as('getSuggestions')
 
       cy.viewport(1000, 660)
       cy.get(PANORAMA.markerPane).find('img').should('exist').and('be.visible')

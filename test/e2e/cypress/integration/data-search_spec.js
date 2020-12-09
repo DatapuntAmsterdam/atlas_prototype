@@ -3,11 +3,10 @@ import { DETAIL_PANEL, DATA_SEARCH, MAP } from '../support/selectors'
 describe('Search data', () => {
   describe('Autosuggest', () => {
     beforeEach(() => {
-      cy.server()
-      cy.route('/typeahead?q=dam*').as('getResults')
-      cy.route('/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/typeahead?q=dam*').as('getResults')
+      cy.intercept('**/bag/v1.1/openbareruimte/**').as('getOpenbareRuimte')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()
       cy.visit('/')
       cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
@@ -63,9 +62,8 @@ describe('Search data', () => {
   })
   describe('User should be able to search', () => {
     beforeEach(() => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/jsonapi/node/list/*').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
       cy.hidePopup()
 
       cy.visit('/')
@@ -94,9 +92,8 @@ describe('Search data', () => {
   })
   describe('Filter on search results', () => {
     beforeEach(() => {
-      cy.server()
-      cy.route('POST', '/cms_search/graphql/').as('graphql')
-      cy.route('/jsonapi/node/list/*').as('jsonapi')
+      cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
       cy.hidePopup()
 
       cy.visit('/')
@@ -157,7 +154,6 @@ describe('Search data', () => {
   })
   describe('Data search with employee permissions', () => {
     beforeEach(() => {
-      cy.server()
       cy.hidePopup()
     })
     before(() => {
@@ -169,11 +165,11 @@ describe('Search data', () => {
     })
     it('Should show an employee all information in a Geo search', () => {
       cy.defineGeoSearchRoutes()
-      cy.route('/bag/v1.1/pand/*').as('getPand')
-      cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
-      cy.route('/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
-      cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen')
-      cy.route('/panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/bag/v1.1/pand/**').as('getPand')
+      cy.intercept('**/monumenten/monumenten/?betreft_pand=**').as('getMonumenten')
+      cy.intercept('**/bag/v1.1/nummeraanduiding/?pand=**').as('getNummeraanduidingen')
+      cy.intercept('**/handelsregister/vestiging/?pand=**').as('getVestigingen')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
 
       cy.visit('data/geozoek?locatie=52.3736166%2C4.8943521')
 

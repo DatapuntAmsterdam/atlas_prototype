@@ -95,16 +95,17 @@ export const DETAIL_PANEL = {
 }
 
 export const DRAWING = {
-  buttonDrawingOn: '.toggle-drawing__icon',
-  labelDrawing: '.toggle-drawing__label',
+  buttonDraw: '[class*="DrawToolControls__DrawToolPanel"] > [class*="DrawToolButton"]',
+  buttonDrawTool: '[data-testid="drawtoolOpenButton"]',
+  buttonCloseDrawTool: '[class*="DrawToolControls__ToolButton"]',
+  buttonRemove: '[class*="DrawToolControls__RemoveButton"]',
   clusterIcon: '.o-highlight-cluster',
-  mapPolygon: '.c-map__leaflet-drawn-polygon',
-  buttonDrawTool: '[class*="DrawToolBare__DrawToolButton"]',
-  buttonRemove: '[class*="DrawToolBare__RemoveButton"]',
   clusterSymbol: '[class*="clustergroup"]',
   dropdownResults: '[data-testid="sort-select"]',
   dropdownResultsSelectedValue: '[data-testid="selectedValue"]',
+  labelDrawing: '.toggle-drawing__label',
   linkDrawresult: '[class*="DrawResults__ResultLink"]',
+  mapPolygon: '.c-map__leaflet-drawn-polygon',
   panelDrawTool: '[class*="DrawToolBare__DrawToolPanel"]',
   polygon: '[class="leaflet-interactive"]',
   tooltip: '[class*=leaflet-tooltip-bottom]',

@@ -13,8 +13,7 @@ import {
 
 describe('addresses module', () => {
   beforeEach(() => {
-    cy.server()
-    cy.route('/dataselectie/bag/*').as('getResults')
+    cy.intercept('**/dataselectie/bag/**').as('getResults')
 
     cy.hidePopup()
 
@@ -152,7 +151,7 @@ describe('addresses module', () => {
 
   describe('user should be be able to filter on an area', () => {
     it('should show the addresses and map when selected', () => {
-      cy.route('/dataselectie/bag/geolocation/*').as('getGeoResults')
+      cy.intercept('**/dataselectie/bag/geolocation/**').as('getGeoResults')
 
       let totalCount
 
@@ -194,11 +193,10 @@ describe('addresses module', () => {
 
 describe('user should be able to open more addresses', () => {
   it('should show the addresses', () => {
-    cy.server()
-    cy.route('/typeahead?q=dam+20*').as('getResults')
-    cy.route('POST', '/cms_search/graphql/').as('graphql')
-    cy.route('/jsonapi/node/list/*').as('jsonapi')
-    cy.route('/bag/v1.1/pand/*').as('getPand')
+    cy.intercept('**/typeahead?q=dam+20**').as('getResults')
+    cy.intercept('POST', '/cms_search/graphql/').as('graphql')
+    cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
+    cy.intercept('**/bag/v1.1/pand/**').as('getPand')
     cy.defineGeoSearchRoutes()
     cy.defineAddressDetailRoutes()
     cy.visit('/')
@@ -216,10 +214,9 @@ describe('user should be able to open more addresses', () => {
 })
 describe('open address', () => {
   it('should open the address detail panel', () => {
-    cy.server()
     cy.defineGeoSearchRoutes()
     cy.defineAddressDetailRoutes()
-    cy.route('typeahead?q=ad+windighof+2*').as('getResults')
+    cy.intercept('typeahead?q=ad+windighof+2*').as('getResults')
 
     // ensure the viewport is always the same in this test, so the clicks can be aligned properly
     cy.viewport(1000, 660)

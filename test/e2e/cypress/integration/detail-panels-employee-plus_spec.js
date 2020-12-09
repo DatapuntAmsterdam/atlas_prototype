@@ -2,7 +2,6 @@ import { DETAIL_PANEL, MAP } from '../support/selectors'
 
 describe('employee permissions', () => {
   beforeEach(() => {
-    cy.server()
     cy.hidePopup()
   })
   before(() => {
@@ -14,7 +13,7 @@ describe('employee permissions', () => {
   })
   describe('BRK detail panels', () => {
     it('1. Should show a "natural person" with "Zakelijke rechten"', () => {
-      cy.route('/brk/subject/*').as('getSubject')
+      cy.intercept('**/brk/subject/*').as('getSubject')
       cy.visit('data/brk/subject/idNL.KAD.Persoon.171720901')
 
       cy.wait('@getSubject')
@@ -28,7 +27,7 @@ describe('employee permissions', () => {
     })
 
     it('2. Should show a "non-natural subject" with "Zakelijke rechten"', () => {
-      cy.route('/brk/subject/*').as('getSubject')
+      cy.intercept('**/brk/subject/*').as('getSubject')
       cy.visit('data/brk/subject/idNL.KAD.Persoon.423186718')
 
       cy.wait('@getSubject')
@@ -39,10 +38,10 @@ describe('employee permissions', () => {
     })
 
     it('3. Should show a "kadastraal object"', () => {
-      cy.route('/brk/object/*').as('getObject')
-      cy.route('/brk/object-expand/*').as('getObjectExpand')
-      cy.route('/bag/v1.1/nummeraanduiding/?kadastraalobject=*').as('getNummeraanduidingen')
-      cy.route('/panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/brk/object/*').as('getObject')
+      cy.intercept('**/brk/object-expand/*').as('getObjectExpand')
+      cy.intercept('**/bag/v1.1/nummeraanduiding/?kadastraalobject=*').as('getNummeraanduidingen')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
       cy.visit('data/brk/object/idNL.KAD.OnroerendeZaak.11460666170000')
 
       cy.wait('@getObject')
@@ -96,11 +95,11 @@ describe('employee permissions', () => {
         .should('be.visible')
     })
     it('2. Should show a "pand"', () => {
-      cy.route('/bag/v1.1/pand/*').as('getPand')
-      cy.route('/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
-      cy.route('/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
-      cy.route('/handelsregister/vestiging/?pand=*').as('getVestigingen')
-      cy.route('panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/bag/v1.1/pand/*').as('getPand')
+      cy.intercept('**/monumenten/monumenten/?betreft_pand=*').as('getMonumenten')
+      cy.intercept('**/bag/v1.1/nummeraanduiding/?pand=*').as('getNummeraanduidingen')
+      cy.intercept('**/handelsregister/vestiging/?pand=*').as('getVestigingen')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
 
       cy.visit('data/bag/pand/id0363100012168052')
 
@@ -117,10 +116,10 @@ describe('employee permissions', () => {
       cy.checkInfoBoxes(['Pand', 'Adressen', 'Vestigingen', 'Monumenten'])
     })
     it('3. Should show a "ligplaats"', () => {
-      cy.route('/bag/v1.1/ligplaats/*').as('getLigplaats')
-      cy.route('/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
-      cy.route('/panorama/thumbnail?*').as('getPanorama')
-      cy.route('/handelsregister/vestiging/?*').as('getVestigingen')
+      cy.intercept('**/bag/v1.1/ligplaats/*').as('getLigplaats')
+      cy.intercept('**/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/handelsregister/vestiging/?*').as('getVestigingen')
 
       cy.visit('data/bag/ligplaats/id0363020000881621')
 
@@ -137,10 +136,10 @@ describe('employee permissions', () => {
     })
 
     it('4. Should show a "standplaats"', () => {
-      cy.route('/bag/v1.1/standplaats/*').as('getStandplaats')
-      cy.route('/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
-      cy.route('/handelsregister/vestiging/?nummeraanduiding=*').as('getVestigingen')
-      cy.route('/panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/bag/v1.1/standplaats/*').as('getStandplaats')
+      cy.intercept('**/bag/v1.1/nummeraanduiding/*').as('getNummeraanduiding')
+      cy.intercept('**/handelsregister/vestiging/?nummeraanduiding=*').as('getVestigingen')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
 
       cy.visit('data/bag/standplaats/id0363030000930866')
 
@@ -156,8 +155,8 @@ describe('employee permissions', () => {
       cy.checkInfoBoxes(['Adressen', 'Standplaatsen', 'Vestigingen', 'Monumenten'])
     })
     it('5. Should show a "woonplaats"', () => {
-      cy.route('bag/v1.1/woonplaats/*').as('getWoonplaats')
-      cy.route('/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
+      cy.intercept('**/bag/v1.1/woonplaats/*').as('getWoonplaats')
+      cy.intercept('**/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
       cy.visit('data/bag/woonplaats/id3594/?zoom=7')
       cy.wait('@getWoonplaats')
       cy.wait('@getOpenbareRuimte')
@@ -170,8 +169,10 @@ describe('employee permissions', () => {
   })
   describe('Handelsregister detail panels', () => {
     it('1. Should show a "vestiging"', () => {
-      cy.route('/handelsregister/vestiging/*').as('getVestiging')
-      cy.route('/handelsregister/maatschappelijkeactiviteit/*').as('getMaatschappelijkeActiviteit')
+      cy.intercept('**/handelsregister/vestiging/*').as('getVestiging')
+      cy.intercept('**/handelsregister/maatschappelijkeactiviteit/*').as(
+        'getMaatschappelijkeActiviteit',
+      )
 
       cy.visit('data/handelsregister/vestiging/id000003579875/?modus=gesplitst')
       cy.wait('@getVestiging')
@@ -188,10 +189,14 @@ describe('employee permissions', () => {
     })
 
     it('2. Should show a "maatschappelijke activiteit"', () => {
-      cy.route('/handelsregister/maatschappelijkeactiviteit/*').as('getMaatschappelijkeActiviteit')
-      cy.route('/handelsregister/persoon/*').as('getPersoon')
-      cy.route('/handelsregister/vestiging/?maatschappelijke_activiteit=*').as('getVestigingen')
-      cy.route('/handelsregister/functievervulling/?heeft_aansprakelijke=*').as(
+      cy.intercept('**/handelsregister/maatschappelijkeactiviteit/*').as(
+        'getMaatschappelijkeActiviteit',
+      )
+      cy.intercept('**/handelsregister/persoon/*').as('getPersoon')
+      cy.intercept('**/handelsregister/vestiging/?maatschappelijke_activiteit=*').as(
+        'getVestigingen',
+      )
+      cy.intercept('**/handelsregister/functievervulling/?heeft_aansprakelijke=*').as(
         'getFunctievervullingen',
       )
 
@@ -209,9 +214,9 @@ describe('employee permissions', () => {
   })
   describe('Monumenten en complexen detail panels', () => {
     it('1. Should show a "monument"', () => {
-      cy.route('/monumenten/monumenten/*').as('getMonument')
-      cy.route('/monumenten/situeringen/?monument_id=*').as('getSitueringen')
-      cy.route('/panorama/thumbnail?*').as('getPanorama')
+      cy.intercept('**/monumenten/monumenten/*').as('getMonument')
+      cy.intercept('**/monumenten/situeringen/?monument_id=*').as('getSitueringen')
+      cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
 
       cy.visit('data/monumenten/monumenten/id3cf53160-d8bf-4447-93ba-1eb03a35cfe4/')
 
@@ -227,8 +232,8 @@ describe('employee permissions', () => {
     })
 
     it('2. Should show a "monumenten complex"', () => {
-      cy.route('/monumenten/complexen/*').as('getComplex')
-      cy.route('/monumenten/monumenten/?complex_id=*').as('getMonumenten')
+      cy.intercept('**/monumenten/complexen/*').as('getComplex')
+      cy.intercept('**/monumenten/monumenten/?complex_id=*').as('getMonumenten')
 
       cy.visit('data/monumenten/complexen/id182a9861-4052-4127-8300-6450cd75b6a5')
 

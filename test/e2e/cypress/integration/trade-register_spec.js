@@ -3,8 +3,7 @@ import { DATA_SEARCH, DATA_SELECTION_TABLE, DETAIL_PANEL, HOMEPAGE } from '../su
 describe('trade-register (vestigingen) module', () => {
   describe('user should be able to navigate to the trade-register from the homepage', () => {
     beforeEach(() => {
-      cy.server()
-      cy.route('/jsonapi/node/list/**').as('jsonapi')
+      cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
       cy.hidePopup()
       cy.visit('/')
     })
@@ -30,8 +29,7 @@ describe('trade-register (vestigingen) module', () => {
       })
 
       it('should not show vestiginen and maatschappelijke activiteiten in the autosuggest', () => {
-        cy.server()
-        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.intercept('**/typeahead?q=bakker*').as('getResults')
         cy.visit('/')
 
         cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker')
@@ -45,8 +43,7 @@ describe('trade-register (vestigingen) module', () => {
         })
       })
       it('should not show "Vestigingen" in the results', () => {
-        cy.server()
-        cy.route('/typeahead?q=bakker*').as('getResults')
+        cy.intercept('**/typeahead?q=bakker*').as('getResults')
         cy.visit('/')
 
         cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
@@ -68,13 +65,12 @@ describe('trade-register (vestigingen) module', () => {
     })
 
     beforeEach(() => {
-      cy.server()
       cy.hidePopup()
     })
 
     it('should open the trade register detail view', () => {
-      cy.route('/dataselectie/hr/*').as('getResults')
-      cy.route('/handelsregister/vestiging/*').as('getVestiging')
+      cy.intercept('**/dataselectie/hr/*').as('getResults')
+      cy.intercept('**/handelsregister/vestiging/*').as('getVestiging')
       cy.visit('/data/hr/vestigingen/?modus=volledig')
       cy.wait('@getResults')
       cy.get(DATA_SELECTION_TABLE.table).should('exist').and('be.visible')
@@ -84,7 +80,7 @@ describe('trade-register (vestigingen) module', () => {
       cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
     })
     it('should show "Vestigingen" in the autocomplete', () => {
-      cy.route('/typeahead?q=bakker*').as('getResults')
+      cy.intercept('**/typeahead?q=bakker*').as('getResults')
       cy.visit('/')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
@@ -96,7 +92,7 @@ describe('trade-register (vestigingen) module', () => {
       cy.get(DATA_SEARCH.autoSuggestDropdown).contains('F. Bakkeren').should('be.visible')
     })
     it('should show "Vestigingen" in the search results', () => {
-      cy.route('/typeahead?q=bakker*').as('getResults')
+      cy.intercept('**/typeahead?q=bakker*').as('getResults')
       cy.visit('/')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
@@ -116,12 +112,11 @@ describe('trade-register (vestigingen) module', () => {
     })
 
     beforeEach(() => {
-      cy.server()
       cy.hidePopup()
     })
     it('should open the trade register detail view', () => {
-      cy.route('/dataselectie/hr/*').as('getResults')
-      cy.route('/handelsregister/vestiging/*').as('getVestiging')
+      cy.intercept('**/dataselectie/hr/*').as('getResults')
+      cy.intercept('**/handelsregister/vestiging/*').as('getVestiging')
       cy.visit('/data/hr/vestigingen/?modus=volledig')
       cy.wait('@getResults')
       cy.get(DATA_SEARCH.infoNotification).should('not.exist')
@@ -131,7 +126,7 @@ describe('trade-register (vestigingen) module', () => {
       cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
     })
     it('should show "Vestigingen" in the autocomplete', () => {
-      cy.route('/typeahead?q=bakker*').as('getResults')
+      cy.intercept('**/typeahead?q=bakker*').as('getResults')
       cy.visit('/')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().click().type('bakker')
@@ -143,7 +138,7 @@ describe('trade-register (vestigingen) module', () => {
       cy.get(DATA_SEARCH.autoSuggestDropdown).contains('F. Bakkeren').should('be.visible')
     })
     it('should show "Vestigingen" in the search results', () => {
-      cy.route('/typeahead?q=bakker*').as('getResults')
+      cy.intercept('**/typeahead?q=bakker*').as('getResults')
       cy.visit('/')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
