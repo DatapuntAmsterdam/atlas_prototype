@@ -93,7 +93,7 @@ export default merge(createConfig({ mode: 'production' }), {
         },
         {
           // All images coming from the CMS since they have `cache-control: no-cache` headers and have relatively large file sizes
-          urlPattern: /cms\.data\.amsterdam\.nl\/[^.]+\.(png|jpg|jpeg|svg)$/,
+          urlPattern: /(cms\.data\.amsterdam.nl|localhost)\/[^.]+\.(png|jpg|jpeg|svg)$/,
           handler: 'CacheFirst',
           options: {
             cacheableResponse: {
@@ -108,8 +108,8 @@ export default merge(createConfig({ mode: 'production' }), {
         },
         {
           // All responses from the CMS, apart from the notification endpoint
-          urlPattern: /cms\.data\.amsterdam.nl\/jsonapi\/node\/(?!notification).+$/,
-          handler: 'StaleWhileRevalidate',
+          urlPattern: /(cms\.data\.amsterdam.nl|localhost)\/jsonapi\/node\/(?!notification).+$/,
+          handler: 'CacheFirst',
           options: {
             cacheableResponse: {
               statuses: [0, 200],
