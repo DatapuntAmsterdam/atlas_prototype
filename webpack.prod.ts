@@ -32,16 +32,5 @@ export default merge(createConfig({ mode: 'production' }), {
     namedModules: true,
     moduleIds: 'named',
     chunkIds: 'named',
-    runtimeChunk: false,
-    splitChunks: {
-      maxInitialRequests: 20,
-      chunks: 'async',
-      maxSize: 125000,
-      minChunks: 1,
-      name: true,
-      cacheGroups: {
-        default: false,
-      },
-    },
   },
 })
