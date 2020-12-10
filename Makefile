@@ -4,9 +4,6 @@
 # PHONY prevents filenames being used as targets
 .PHONY: help info rebuild status start stop logs restart build shell
 
-# globals which can be overriden by setting make variables on the CLI
-DEBUG ?= false
-
 _MAKEFILE_BUILTIN_VARIABLES := .DEFAULT_GOAL CURDIR MAKEFLAGS MAKEFILE_LIST SHELL
 
 _MAKEFILE_VARIABLES := $(foreach make_variable, $(sort $(.VARIABLES)),\
@@ -26,7 +23,7 @@ info: ## dump Makefile variables to screen
 	@echo -e $(_MAKEFILE_VARIABLES)
 
 build: ## build Docker Compose images
-	docker-compose build --build-arg DEBUG=${DEBUG}
+	docker-compose build
 
 start: ## start single Docker Compose service
 	docker-compose up --remove-orphans
