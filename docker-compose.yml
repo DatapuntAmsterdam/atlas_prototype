@@ -6,6 +6,7 @@ services:
       context: .
       args:
         - ENVIRONMENT=dev
+        - DEBUG=true
 
     ports:
       - "3000:80"
