@@ -76,8 +76,8 @@ const EditorialPage = ({
       </Helmet>
       <BodyStyle>
         <StyledAlert level="error">
-          Er is een storing waardoor niet alle publicaties, afbeeldingen, video&apos;s en overige
-          bestanden beschikbaar zijn. Onze excuses, wij werken aan een oplossing.
+          Er is een storing waardoor niet alle publicaties, afbeeldingen en overige bestanden
+          beschikbaar zijn. Onze excuses, wij werken aan een oplossing.
         </StyledAlert>
         {loading && <LoadingSpinner />}
         {children}
