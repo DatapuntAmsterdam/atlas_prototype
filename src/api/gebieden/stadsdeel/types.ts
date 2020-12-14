@@ -1,4 +1,5 @@
-import { APIReference, Geometrie, Links } from '../../types'
+import { Geometry } from 'geojson'
+import { SmallAPIReference, Links } from '../../types'
 
 export interface Gemeente {
   _display: string
@@ -23,9 +24,9 @@ export interface Stadsdeel {
   naam: string
   gemeente: Gemeente
   bbox: number[]
-  geometrie: Geometrie
-  buurten: APIReference
-  buurtcombinaties: APIReference
-  gebiedsgerichtwerken: APIReference
+  geometrie: Geometry
+  buurten: SmallAPIReference
+  buurtcombinaties: SmallAPIReference
+  gebiedsgerichtwerken: SmallAPIReference
   dataset: string
 }
