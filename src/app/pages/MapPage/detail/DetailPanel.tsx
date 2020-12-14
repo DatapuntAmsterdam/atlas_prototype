@@ -18,7 +18,7 @@ import {
   DetailResultItemType,
   PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
-import { AuthError } from '../../../../shared/services/api/errors'
+import { AuthError } from '../../../../shared/services/api/customError'
 import AuthAlert from '../../../components/Alerts/AuthAlert'
 import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'

@@ -22,7 +22,7 @@ export interface PromiseFulfilledResult<T> {
 
 export interface PromiseRejectedResult {
   status: PromiseStatus.Rejected
-  error: any
+  error: Error
 }
 
 export type PromiseFactoryFn<T> = () => Promise<T>

@@ -6,7 +6,7 @@ import { fetchDetailData, getServiceDefinition } from '../../../map/services/map
 import mapFetch from '../../../map/services/map-fetch/map-fetch'
 import { clearMapDetail, showDetail } from '../../../shared/ducks/detail/actions'
 import { getViewMode, setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
-import { AuthError, NotFoundError } from '../../../shared/services/api/errors'
+import { AuthError, NotFoundError } from '../../../shared/services/api/customError'
 import getGeometry from '../../../shared/services/geometry/geometry'
 import { routing } from '../../routes'
 import useAuthScope from '../../utils/useAuthScope'

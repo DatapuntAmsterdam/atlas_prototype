@@ -40,12 +40,12 @@ export interface DcatDistribution {
   'ams:resourceType'?: string
   'ams:serviceType': string
   'dc:identifier'?: string
-  'dcat:accessUrl': string
+  'dcat:accessURL': string
   'dcat:byteSize'?: number
   'dcat:mediaType'?: string
   'dcat:description'?: string
   'dcat:modified'?: string
-  'dcat:title': string
+  'dct:title': string
   'foaf:isPrimaryTopicOf': DcatPrimaryTopic
 }
 

@@ -8,6 +8,7 @@ import usePromise, {
 import AuthAlert from '../Alerts/AuthAlert'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import { AuthError } from '../../../shared/services/api/customError'
 
 const StyledLoadingSpinner = styled(LoadingSpinner)`
   position: absolute;
@@ -18,6 +19,7 @@ export interface PromiseResultProps<T> {
   factory: PromiseFactoryFn<T>
   deps?: DependencyList
   errorMessage?: string
+  onError?: (e: Error) => void
   children: (result: PromiseFulfilledResult<T>) => ReactElement | null
 }
 
@@ -25,6 +27,7 @@ const PromiseResult: <T>(props: PromiseResultProps<T>) => ReactElement | null = 
   factory,
   deps = [],
   errorMessage,
+  onError,
   children,
 }) => {
   const [retryCount, setRetryCount] = useState(0)
@@ -38,8 +41,12 @@ const PromiseResult: <T>(props: PromiseResultProps<T>) => ReactElement | null = 
     return <StyledLoadingSpinner data-testid="loading-spinner" />
   }
 
-  if (result.error.code === 401) {
+  if (result.error instanceof AuthError) {
     return <AuthAlert data-testid="auth-alert" excludedResults={result.error.message} />
+  }
+
+  if (onError) {
+    onError(result.error)
   }
 
   return (
