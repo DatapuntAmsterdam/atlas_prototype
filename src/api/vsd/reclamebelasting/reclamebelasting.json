@@ -1,0 +1,40 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/vsd/reclamebelasting/2/",
+      "title": "Tariefgebied B"
+    }
+  },
+  "_display": "Tariefgebied B",
+  "ogc_fid": 2,
+  "wkb_geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          117942.33144818404,
+          487638.0183405844
+        ],
+        [
+          118006.47643157293,
+          487882.2701747403
+        ],
+        [
+          118010.01351523705,
+          487895.73871314677
+        ],
+        [
+          118016.389888952,
+          487920.01872528566
+        ],
+        [
+          118021.954,
+          487941.4489999994
+        ]
+      ]
+    ]
+  },
+  "tarief": "Tariefgebied B",
+  "website": "https://www.amsterdam.nl/belastingen-heffingen/ondernemers/reclamebelasting/",
+  "tarieven": "https://www.amsterdam.nl/veelgevraagd/?productid=%7b9de274dc-5c5c-4e5d-a8a3-12b91b5ab250%7d#case_%7BBD8074C6-B2BA-4326-8577-DC80C711E318%7D"
+}

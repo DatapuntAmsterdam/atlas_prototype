@@ -1,0 +1,42 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/vsd/biz/11/",
+      "title": "Dam"
+    }
+  },
+  "_display": "Dam",
+  "id": 11,
+  "naam": "Dam",
+  "biz_type": "gebruikers/eigenaren",
+  "heffingsgrondslag": "heffing op basis van waardeklassen",
+  "website": "http://www.damamsterdam.nl",
+  "heffing": null,
+  "heffing_valuta_code": "EUR",
+  "heffing_display": null,
+  "bijdrageplichtigen": 68,
+  "verordening": "https://decentrale.regelgeving.overheid.nl/cvdr/xhtmloutput/Historie/Amsterdam/613336/CVDR613336_1.html",
+  "geometrie": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          121180.69022697565,
+          487377.8614373656
+        ],
+        [
+          121198.44684328964,
+          487421.3084772836
+        ],
+        [
+          121202.72695219665,
+          487433.3295484126
+        ],
+        [
+          121207.69288433665,
+          487451.79262944456
+        ]
+      ]
+    ]
+  }
+}

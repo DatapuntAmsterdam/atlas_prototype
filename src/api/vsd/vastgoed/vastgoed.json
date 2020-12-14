@@ -1,0 +1,64 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/vsd/vastgoed/1122/",
+      "title": "President Allendelaan 3"
+    }
+  },
+  "_display": "President Allendelaan 3",
+  "vhe_id": "1122",
+  "object_id": "1129",
+  "status": "In beheer",
+  "portefeuille": "Gemeentelijk Vastgoed",
+  "grex": "Geen GREX",
+  "object_type": "Gebouw (HB)",
+  "object_naam": "Marnixplein 1",
+  "vhe_adres": "President Allendelaan 3",
+  "object_eigendomsstatus": "volle eigendom",
+  "vhe_eigendomsstatus": "volle eigendom",
+  "bouwjaar": 2006,
+  "oppervlakte": 4305,
+  "huurtype": "3521 - Zwembad/Sauna",
+  "bag_pand_id": "0363100012169393",
+  "monumentstatus": null,
+  "bag_pand_geometrie": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          120362.4636,
+          487907.409
+        ],
+        [
+          120363.7596,
+          487910.5906
+        ],
+        [
+          120363.923,
+          487910.6095
+        ],
+        [
+          120364.0839,
+          487910.6439
+        ],
+        [
+          120364.2408,
+          487910.6934
+        ],
+        [
+          120364.3923,
+          487910.7576
+        ]
+      ]
+    ]
+  },
+  "bag_verblijfsobject_id": "0363010001008664",
+  "bag_verblijfsobject_geometrie": {
+    "type": "Point",
+    "coordinates": [
+      116175,
+      487057
+    ]
+  },
+  "bag_verblijfsobject_gebruiksdoelen": "bijeenkomstfunctie"
+}
