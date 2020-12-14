@@ -4,6 +4,7 @@ import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterd
 import React, { Fragment, FunctionComponent, useContext, useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
+import { useSelector } from 'react-redux'
 import {
   fetchDetailData,
   getServiceDefinition,
@@ -34,6 +35,7 @@ import Spacer from '../../../components/Spacer/Spacer'
 import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
 import { panoParam } from '../query-params'
+import { getUser } from '../../../../shared/ducks/user/user'
 
 const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
@@ -343,6 +345,8 @@ export interface RenderDetailsProps extends LegacyLayout {
 }
 
 export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyLayout }) => {
+  const user = useSelector(getUser)
+
   if (!details) {
     // Todo: redirect to 404?
     return <Message>Geen detailweergave beschikbaar.</Message>
@@ -350,9 +354,14 @@ export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, 
   return (
     <Wrapper legacyLayout={legacyLayout} data-testid="data-detail">
       {details.showAuthAlert && <StyledAuthAlert excludedResults={details.authExcludedInfo} />}
-      {details.location && !details.data.noPanorama && (
-        <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
-      )}
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {details.location && !details.data.noPanorama ? (
+        user.authenticated ? (
+          <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
+        ) : (
+          <AuthAlert excludedResults="Panoramabeelden" />
+        )
+      ) : null}
       <Spacer />
       {details.data.notifications?.map((notification) => (
         <Fragment key={notification.id}>

@@ -79,16 +79,21 @@ const LocationSearch: FunctionComponent = () => {
             >{`Geen details beschikbaar van: ${layerWarning}`}</StyledAlert>
           )}
 
-          {!!numberOfResults && (
-            <PanoramaPreview
-              location={{
-                lat: location.latitude,
-                lng: location.longitude,
-              }}
-              width={438}
-              radius={180}
-            />
-          )}
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {numberOfResults ? (
+            user.authenticated ? (
+              <PanoramaPreview
+                location={{
+                  lat: location.latitude,
+                  lng: location.longitude,
+                }}
+                width={438}
+                radius={180}
+              />
+            ) : (
+              <AuthAlert excludedResults="Panoramabeelden" />
+            )
+          ) : null}
 
           {numberOfResults ? (
             <LocationSearchResults {...{ searchResults }} />

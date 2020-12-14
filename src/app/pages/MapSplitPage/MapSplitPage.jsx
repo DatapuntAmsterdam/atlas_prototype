@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors'
 import { toDetailFromEndpoint as endpointActionCreator } from '../../../store/redux-first-router/actions'
@@ -16,6 +16,8 @@ import {
 } from '../../../shared/ducks/ui/ui'
 import { getPage } from '../../../store/redux-first-router/selectors'
 import PAGES from '../../pages'
+import { getUser } from '../../../shared/ducks/user/user'
+import AuthAlert from '../../components/Alerts/AuthAlert'
 
 const DataDetailPage = React.lazy(() =>
   import(/* webpackChunkName: "DataDetailPage" */ '../DataDetailPage/DataDetailPage'),
@@ -47,6 +49,7 @@ if (typeof window !== 'undefined') {
 }) => {
   let mapProps = {}
   let Component = null
+  const user = useSelector(getUser)
 
   switch (currentPage) {
     case PAGES.DATA_DETAIL:
@@ -65,7 +68,11 @@ if (typeof window !== 'undefined') {
       break
 
     case PAGES.PANORAMA:
-      Component = <PanoramaContainer isFullscreen={viewMode === VIEW_MODE.FULL} />
+      Component = user.authenticated ? (
+        <PanoramaContainer isFullscreen={viewMode === VIEW_MODE.FULL} />
+      ) : (
+        <AuthAlert excludedResults="Panoramabeelden" />
+      )
       mapProps = {
         isFullscreen: true,
         toggleFullscreen: () => setViewMode(VIEW_MODE.SPLIT),
