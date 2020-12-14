@@ -13,7 +13,7 @@ export interface SmallAPIReference {
 
 export interface APIReference {
   _links: Links
-  _display: string
+  _display?: string
   code?: string
   naam?: string
   dataset?: string

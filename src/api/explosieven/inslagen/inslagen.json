@@ -1,0 +1,27 @@
+{
+  "_display": "RAP_400930_02",
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/milieuthemas/explosieven/inslagen/494/?format=json"
+    }
+  },
+  "id": 494,
+  "bron": "Stadsarchief Amsterdam, Bommeldingen 40-45",
+  "oorlogsinc": "RAP_400930_",
+  "kenmerk": "RAP_400930_02",
+  "type": "Bominslag",
+  "opmerkingen": "",
+  "nauwkeurig": "",
+  "datum": null,
+  "datum_inslag": "1940-09-30",
+  "pdf": "https://files.data.amsterdam.nl/bommenkaart/RAP_400930_.pdf",
+  "intekening": "Locatieomschrijving",
+  "geometrie": {
+    "type": "Point",
+    "coordinates": [
+      122084.448800005,
+      487294.158500005
+    ]
+  },
+  "dataset": "bommenkaart"
+}

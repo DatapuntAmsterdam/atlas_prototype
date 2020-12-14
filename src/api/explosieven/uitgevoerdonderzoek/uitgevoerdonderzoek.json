@@ -1,0 +1,46 @@
+{
+  "_display": "RO-140021 v1",
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/milieuthemas/explosieven/uitgevoerdonderzoek/97/?format=json"
+    }
+  },
+  "id": 97,
+  "kenmerk": "RO-140021 v1",
+  "type": "Vooronderzoek",
+  "opdrachtnemer": "REASeuro",
+  "verdacht_gebied": "Gedeeltelijk",
+  "onderzoeksgebied": "Haarlemmerweg N200",
+  "opdrachtgever": "Waternet",
+  "datum": "2014-03-14",
+  "geometrie": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            111463.5119,
+            490691.553100009
+          ],
+          [
+            119009.443700001,
+            490755.053200003
+          ],
+          [
+            119020.027,
+            487188.462700006
+          ],
+          [
+            111579.928800005,
+            487177.879400007
+          ],
+          [
+            111463.5119,
+            490691.553100009
+          ]
+        ]
+      ]
+    ]
+  },
+  "dataset": "bommenkaart"
+}
