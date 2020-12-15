@@ -1,0 +1,29 @@
+name: Cypress
+
+on:
+  schedule:
+    # Run every day at midnight (default branch will be used here)
+    - cron: '0 0 * * *'
+  push:
+    branches: [master]
+  pull_request:
+    # TODO: Remove 'develop' before merging this PR
+    branches: [master, develop]
+
+jobs:
+  cypress:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Start application server
+        run: docker-compose up -d
+
+      - name: Run Cypress
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: test/e2e
+
