@@ -1,50 +1,62 @@
 {
   "_links": {
     "self": {
-      "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957781/?format=json"
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030000930866/?format=json"
     }
   },
-  "_display": "Dwergplanetenbaan 34",
-  "standplaatsidentificatie": "0363030011957781",
-  "landelijk_id": "0363030011957781",
-  "date_modified": "2020-12-13T23:26:17.317868Z",
-  "document_mutatie": "2016-02-15",
-  "document_nummer": "SN01988717",
-  "begin_geldigheid": "2016-02-15",
+  "_display": "Rollemanstraat 8",
+  "standplaatsidentificatie": "0363030000930866",
+  "landelijk_id": "0363030000930866",
+  "date_modified": "2020-12-15T23:25:19.667412Z",
+  "document_mutatie": "2010-09-09",
+  "document_nummer": "GV00000407",
+  "begin_geldigheid": "2010-09-09",
   "einde_geldigheid": null,
   "status": "Plaats aangewezen",
   "bron": null,
   "indicatie_geconstateerd": false,
   "aanduiding_in_onderzoek": false,
   "bbox": [
-    120162.699,
-    492491.538,
-    120185.34,
-    492512.827
+    120934.554,
+    492057.434,
+    120948.921,
+    492078.17
   ],
   "geometrie": {
     "type": "Polygon",
     "coordinates": [
       [
         [
-          120178.193,
-          492491.538
+          120944.437,
+          492078.17
         ],
         [
-          120185.34,
-          492500.579
+          120934.554,
+          492075.756
         ],
         [
-          120169.846,
-          492512.827
+          120937.923,
+          492061.96
         ],
         [
-          120162.699,
-          492503.786
+          120938.589,
+          492059.095
         ],
         [
-          120178.193,
-          492491.538
+          120938.736,
+          492058
+        ],
+        [
+          120938.94,
+          492057.434
+        ],
+        [
+          120948.921,
+          492059.814
+        ],
+        [
+          120944.437,
+          492078.17
         ]
       ]
     ]
@@ -52,28 +64,28 @@
   "hoofdadres": {
     "_links": {
       "self": {
-        "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200012107554/?format=json"
+        "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000410162/?format=json"
       }
     },
-    "_display": "Dwergplanetenbaan 34",
-    "landelijk_id": "0363200012107554",
+    "_display": "Rollemanstraat 8",
+    "landelijk_id": "0363200000410162",
     "type_adres": "Hoofdadres",
     "vbo_status": "Plaats aangewezen",
     "dataset": "bag"
   },
   "adressen": {
     "count": 1,
-    "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json&standplaats=0363030011957781"
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json&standplaats=0363030000930866"
   },
   "buurt": {
     "_links": {
       "self": {
-        "href": "https://api.data.amsterdam.nl/gebieden/buurt/03630000000660/?format=json"
+        "href": "https://api.data.amsterdam.nl/gebieden/buurt/03630023753981/?format=json"
       }
     },
-    "_display": "Oostzanerdijk (N66b)",
-    "code": "66b",
-    "naam": "Oostzanerdijk",
+    "_display": "Circus/Kermisbuurt (N66g)",
+    "code": "66g",
+    "naam": "Circus/Kermisbuurt",
     "dataset": "gebieden"
   },
   "_buurtcombinatie": {

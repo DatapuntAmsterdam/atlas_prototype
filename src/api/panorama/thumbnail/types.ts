@@ -1,8 +1,9 @@
+/* eslint-disable camelcase */
 export interface PanoramaThumbnail {
   /**
    * The identifier of the associated panorama.
    */
-  id: string
+  pano_id: string
   heading: number
   /**
    * URL to the image preview.

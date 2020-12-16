@@ -151,6 +151,7 @@ export const extractIdEndpoint = (endpoint) => {
 export const getDetailPageData = (endpoint) => {
   // TODO: Add endpoint mapping when new router is introduced
   let matches = endpoint
+    .split('?')[0] // Remove query
     .replace('bag/v1.1/', 'bag/') // Clean URL if this is using the new BAG v1.1 API
     .replace('iiif-metadata/', 'bouwdossiers/') // Clean URL if this is using the new IIIF Metadata API
   // eslint-disable-next-line no-useless-escape
@@ -180,22 +181,6 @@ export const toConstructionFilesFromEndpoint = (endpoint) => {
 
 export const toDatasetSearch = toSearchOfType(routing.datasetSearch.type)
 export const toSearch = toSearchOfType(routing.search.type)
-
-export const toDataSuggestion = (payload, view) => {
-  const { type, subtype, id } = getDetailPageData(payload.endpoint)
-  const tracking = {
-    category: payload.category,
-    event: 'auto-suggest',
-    query: payload.typedQuery,
-  }
-  return toDataDetail(
-    [id, type, subtype],
-    {
-      [PARAMETERS.VIEW]: view,
-    },
-    tracking,
-  )
-}
 
 export const toDatasetDetail = (payload) => ({
   type: routing.datasetDetail.type,

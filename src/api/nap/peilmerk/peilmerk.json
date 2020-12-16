@@ -1,0 +1,25 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480011/?format=json"
+    }
+  },
+  "_display": "10480011 Koninklijk Paleis zijde Damplein in de vierde pijler rechts van de ingang (trappen)",
+  "peilmerkidentificatie": "10480011",
+  "hoogte_nap": "3.6242",
+  "jaar": 2017,
+  "merk": "ronde bout met opschrift NAP (0)",
+  "omschrijving": "Koninklijk Paleis zijde Damplein in de vierde pijler rechts van de ingang (trappen)",
+  "windrichting": "O",
+  "x_muurvlak": "126",
+  "y_muurvlak": "66",
+  "rws_nummer": "25G0386",
+  "geometrie": {
+    "type": "Point",
+    "coordinates": [
+      121260,
+      487370
+    ]
+  },
+  "dataset": "nap"
+}

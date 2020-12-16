@@ -15,7 +15,7 @@ export interface Root extends APIReference {
   laagste_bouwlaag: any
   pandnaam: any
   ligging: string
-  type_woonobject: string
+  type_woonobject: string | null
   verblijfsobjecten: SmallAPIReference
   _adressen: SmallAPIReference
   _monumenten: SmallAPIReference

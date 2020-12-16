@@ -1,4 +1,6 @@
-import fixture from './fietspaaltjes.json'
+import * as fixture from './fietspaaltjes.json'
 import { Root as Fietspaaltjes } from './types'
 
-export default fixture as Fietspaaltjes
+const typedJson: Fietspaaltjes = <any>fixture
+
+export default typedJson

@@ -1,0 +1,11 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350000370000/"
+    }
+  },
+  "_display": "ACD00 A 00003 G 0000",
+  "id": "NL.KAD.OnroerendeZaak.25350000370000",
+  "aanduiding": "ACD00 A 00003 G 0000",
+  "dataset": "brk"
+}

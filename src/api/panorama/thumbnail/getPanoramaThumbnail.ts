@@ -92,7 +92,9 @@ export async function getPanoramaThumbnail(
   return transformResponse(response)
 }
 
-function transformResponse(response: RawResponse): PanoramaThumbnail | null {
+function transformResponse(
+  response: RawResponse,
+): (Omit<PanoramaThumbnail, 'pano_id'> & { id: string }) | null {
   // Because of a bug in the API empty responses are returned as an empty array.
   if (response instanceof Array) {
     return null

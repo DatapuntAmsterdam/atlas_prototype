@@ -1,4 +1,4 @@
-import { getNummeraanduidingByAddress } from '../../api/v1/bag/nummeraanduiding'
+import { getNummeraanduidingByAddress } from '../../api/bag/v1/nummeraanduiding'
 
 /**
  * Get a verblijfsobject id from a URL or search string

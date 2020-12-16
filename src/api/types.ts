@@ -1,9 +1,13 @@
 /* eslint-disable camelcase */
 export interface Links {
-  self: {
-    href: string
-    title?: string
-  }
+  self: Link
+  next?: Link
+  previous?: Link
+}
+
+interface Link {
+  href: string | null
+  title?: string
 }
 
 export interface SmallAPIReference {

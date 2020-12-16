@@ -1,0 +1,109 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://acc.api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006110/?format=json"
+    }
+  },
+  "_display": "Eerste Anjeliersdwarsstraat 1-H",
+  "nummeraanduidingidentificatie": "0363200000006110",
+  "date_modified": "2020-12-16T00:01:17.385896Z",
+  "document_mutatie": "1005-01-01",
+  "document_nummer": "GV00000402",
+  "begin_geldigheid": "1005-01-01",
+  "einde_geldigheid": null,
+  "status": "Naamgeving uitgegeven",
+  "bron": null,
+  "adres": "Eerste Anjeliersdwarsstraat 1-H",
+  "postcode": "1015NR",
+  "huisnummer": 1,
+  "huisletter": "",
+  "huisnummer_toevoeging": "H",
+  "type": "Verblijfsobject",
+  "openbare_ruimte": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000002529/?format=json"
+      }
+    },
+    "_display": "Eerste Anjeliersdwarsstraat",
+    "landelijk_id": "0363300000002529",
+    "dataset": "bag"
+  },
+  "type_adres": "Hoofdadres",
+  "ligplaats": null,
+  "standplaats": null,
+  "verblijfsobject": "https://acc.api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000543292/?format=json",
+  "buurt": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/buurt/03630023753961/?format=json"
+      }
+    },
+    "_display": "Anjeliersbuurt Zuid (A06l)",
+    "code": "06l",
+    "naam": "Anjeliersbuurt Zuid",
+    "dataset": "gebieden"
+  },
+  "buurtcombinatie": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052037/?format=json"
+      }
+    },
+    "_display": "Jordaan (06)",
+    "naam": "Jordaan",
+    "vollcode": "A06",
+    "dataset": "gebieden"
+  },
+  "gebiedsgerichtwerken": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX01/?format=json"
+      }
+    },
+    "_display": "Centrum-West (DX01)",
+    "code": "DX01",
+    "naam": "Centrum-West",
+    "dataset": "gebieden"
+  },
+  "grootstedelijkgebied": null,
+  "stadsdeel": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/?format=json"
+      }
+    },
+    "_display": "Centrum (A)",
+    "code": "A",
+    "naam": "Centrum",
+    "dataset": "gebieden"
+  },
+  "woonplaats": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/bag/v1.1/woonplaats/3594/?format=json"
+      }
+    },
+    "_display": "Amsterdam",
+    "landelijk_id": "3594",
+    "dataset": "bag"
+  },
+  "bouwblok": {
+    "_links": {
+      "self": {
+        "href": "https://acc.api.data.amsterdam.nl/gebieden/bouwblok/03630012100756/?format=json"
+      }
+    },
+    "_display": "YJ29",
+    "id": "03630012100756",
+    "dataset": "gebieden"
+  },
+  "_geometrie": {
+    "type": "Point",
+    "coordinates": [
+      120700,
+      487936
+    ]
+  },
+  "dataset": "bag"
+}
