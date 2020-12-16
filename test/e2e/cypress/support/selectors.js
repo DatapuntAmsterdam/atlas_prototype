@@ -445,6 +445,8 @@ export const PANORAMA = {
   markerPane: '.leaflet-marker-pane',
   statusBarCoordinates: '.c-panorama-status-bar__coordinates',
   panorama: '.c-panorama',
+  panoramaMenu: '.panorama-menu',
+  panoramaToggle: '[data-testid="toggle"]',
 }
 
 export const PRINT = {

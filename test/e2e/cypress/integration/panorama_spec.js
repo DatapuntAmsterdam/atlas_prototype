@@ -90,6 +90,13 @@ describe('panorama module', () => {
           cy.get(PANORAMA.statusBarCoordinates).first().contains(coordinates).should('not.exist')
         })
     })
+    it('should select older pano', () => {
+      cy.get(PANORAMA.panoramaMenu).should('not.exist')
+      cy.get(PANORAMA.panoramaToggle).first().click()
+      cy.get(PANORAMA.panoramaMenu).find('[aria-hidden="false"]').should('exist')
+      cy.get(PANORAMA.panoramaMenu).find('ul > li').eq(2).click()
+      cy.get(PANORAMA.panoramaMenu).find('[aria-hidden="true"]').should('exist')
+    })
   })
 
   describe('user should be able to interact with the panorama', () => {
