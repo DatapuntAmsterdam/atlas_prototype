@@ -1,7 +1,10 @@
 import { Download } from '@amsterdam/asc-assets'
 import { breakpoint, Button, Image, Spinner, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import getImageFromCms from '../../utils/getImageFromCms'
+
+const defaultPublicationImage = '/sites/default/files/images/default-plaatje-publicatie-OIS.jpg'
 
 const DocumentCoverStyle = styled.div`
   display: flex;
@@ -41,19 +44,33 @@ const StyledButton = styled(Button)`
 StyledButton.displayName = 'StyledButton'
 StyledImage.displayName = 'StyledImage'
 
-const DocumentCover = ({ imageSrc, onClick, title, description, loading, ...otherProps }) => (
-  <DocumentCoverStyle {...otherProps}>
-    <DocumentCoverContentStyle>
-      <StyledImage src={imageSrc} alt={title} />
-      <StyledButton
-        variant="primary"
-        onClick={onClick}
-        iconLeft={loading ? <Spinner /> : <Download />}
-      >
-        {description}
-      </StyledButton>
-    </DocumentCoverContentStyle>
-  </DocumentCoverStyle>
-)
+const DocumentCover = ({ imageSrc, onClick, title, description, loading, ...otherProps }) => {
+  const [hasErrored, setHasErrored] = useState(false)
+  const [imageFromCMS, setImageFromCMS] = useState(imageSrc)
+
+  const handleError = () => {
+    setHasErrored(true)
+    setImageFromCMS(getImageFromCms(defaultPublicationImage, 600, 0, 'fit'))
+  }
+
+  return (
+    <DocumentCoverStyle {...otherProps}>
+      <DocumentCoverContentStyle>
+        <StyledImage
+          src={imageFromCMS}
+          alt={title}
+          onError={!hasErrored ? handleError : undefined}
+        />
+        <StyledButton
+          variant="primary"
+          onClick={onClick}
+          iconLeft={loading ? <Spinner /> : <Download />}
+        >
+          {description}
+        </StyledButton>
+      </DocumentCoverContentStyle>
+    </DocumentCoverStyle>
+  )
+}
 
 export default DocumentCover
