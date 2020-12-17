@@ -1,6 +1,6 @@
 import { Download } from '@amsterdam/asc-assets'
 import { breakpoint, Button, Image, Spinner, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React, { useState } from 'react'
+import React, { FunctionComponent, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import getImageFromCms from '../../utils/getImageFromCms'
 
@@ -40,31 +40,48 @@ const StyledButton = styled(Button)`
   justify-content: center;
 `
 
-// StyledButton.displayName === 'Styled(Component)' since Button is wrapped around forwardRef, so let's set set the displayName manually so we can target it in tests
-StyledButton.displayName = 'StyledButton'
-StyledImage.displayName = 'StyledImage'
+export interface DocumentCoverProps {
+  imageSrc: string
+  title: string
+  description: string
+  loading: boolean
+  onClick: () => void
+}
 
-const DocumentCover = ({ imageSrc, onClick, title, description, loading, ...otherProps }) => {
-  const [hasErrored, setHasErrored] = useState(false)
-  const [imageFromCMS, setImageFromCMS] = useState(imageSrc)
-
-  const handleError = () => {
-    setHasErrored(true)
-    setImageFromCMS(getImageFromCms(defaultPublicationImage, 600, 0, 'fit'))
-  }
+const DocumentCover: FunctionComponent<DocumentCoverProps> = ({
+  imageSrc,
+  title,
+  description,
+  loading,
+  onClick,
+  ...otherProps
+}) => {
+  const [didError, setDidError] = useState(false)
+  const actualSrc = useMemo(
+    () => (didError ? getImageFromCms(defaultPublicationImage, 600, 0, 'fit') : imageSrc),
+    [didError],
+  )
 
   return (
     <DocumentCoverStyle {...otherProps}>
       <DocumentCoverContentStyle>
         <StyledImage
-          src={imageFromCMS}
+          data-testid="image"
+          src={actualSrc}
           alt={title}
-          onError={!hasErrored ? handleError : undefined}
+          onError={!didError ? () => setDidError(true) : undefined}
         />
         <StyledButton
+          data-testid="button"
           variant="primary"
           onClick={onClick}
-          iconLeft={loading ? <Spinner /> : <Download />}
+          iconLeft={
+            loading ? (
+              <Spinner data-testid="loading-spinner" />
+            ) : (
+              <Download data-testid="download-icon" />
+            )
+          }
         >
           {description}
         </StyledButton>
