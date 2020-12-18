@@ -3,6 +3,7 @@ import React, { FunctionComponent } from 'react'
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import DocumentCover, { DocumentCoverProps } from './DocumentCover'
 import '@testing-library/jest-dom/extend-expect'
+import getImageFromCms from '../../utils/getImageFromCms'
 
 describe('DocumentCover', () => {
   const wrapper: FunctionComponent = ({ children }) => <ThemeProvider>{children}</ThemeProvider>
@@ -46,5 +47,24 @@ describe('DocumentCover', () => {
     button = getByTestId('button')
 
     expect(within(button).getByTestId('loading-spinner')).toBeDefined()
+  })
+
+  it('should display the default cover image if cover image link is broken', () => {
+    const { getByTestId } = render(<DocumentCover {...props} />, { wrapper })
+    const image = getByTestId('image')
+
+    expect(image).toHaveAttribute('src', props.imageSrc)
+
+    fireEvent(image, new Event('error'))
+
+    expect(image).toHaveAttribute(
+      'src',
+      getImageFromCms(
+        '/sites/default/files/images/default-plaatje-publicatie-OIS.jpg',
+        600,
+        0,
+        'fit',
+      ),
+    )
   })
 })
