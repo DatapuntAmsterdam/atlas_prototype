@@ -31,7 +31,7 @@
     "@amsterdam/arm-draw": "^0.4.1-alpha.125",
     "@amsterdam/arm-nontiled": "^0.4.0",
     "@amsterdam/asc-assets": "^0.26.2",
-    "@amsterdam/asc-ui": "^0.26.1",
+    "@amsterdam/asc-ui": "^0.27.0",
     "@amsterdam/react-maps": "^0.10.0",
     "@babel/runtime-corejs3": "^7.12.5",
     "@datapunt/matomo-tracker-js": "0.3.1",
