@@ -109,7 +109,7 @@
     "@types/lodash.defer": "^4.1.6",
     "@types/lodash.isequal": "^4.5.5",
     "@types/marked": "^1.2.1",
-    "@types/mini-css-extract-plugin": "^1.2.1",
+    "@types/mini-css-extract-plugin": "^1.2.2",
     "@types/node": "^14.14.14",
     "@types/openseadragon": "^2.4.5",
     "@types/proj4": "^2.5.0",
