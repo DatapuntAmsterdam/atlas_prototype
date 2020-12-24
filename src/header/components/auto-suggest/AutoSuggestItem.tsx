@@ -1,7 +1,7 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import escapeStringRegexp from 'escape-string-regexp'
 import { LocationDescriptorObject } from 'history'
-import React, { useMemo } from 'react'
+import { FunctionComponent, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { generatePath, Link } from 'react-router-dom'
 import SearchType from '../../../app/pages/SearchPage/constants'
@@ -22,7 +22,7 @@ export interface AutoSuggestItemProps {
   label: string
 }
 
-const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
+const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   content,
   suggestion,
   highlightValue,

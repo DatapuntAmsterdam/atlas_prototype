@@ -1,5 +1,5 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { FunctionComponent, lazy, Suspense } from 'react'
+import { FunctionComponent, lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'

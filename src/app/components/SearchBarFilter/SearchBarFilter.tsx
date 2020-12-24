@@ -1,5 +1,5 @@
 import { Label, Select, srOnlyStyle } from '@amsterdam/asc-ui'
-import React, { useEffect } from 'react'
+import { useEffect, FunctionComponent, ChangeEvent } from 'react'
 import styled from 'styled-components'
 import { SearchCategory } from '../../../header/components/auto-suggest/AutoSuggest'
 import SEARCH_PAGE_CONFIG from '../../pages/SearchPage/config'
@@ -31,8 +31,8 @@ type Props = {
 
 export const LOCAL_STORAGE_KEY = 'search_filters'
 
-const SearchBarFilter: React.FC<Props> = ({ value, setValue }) => {
-  function onSetSearchCategory(e: React.ChangeEvent<HTMLSelectElement>) {
+const SearchBarFilter: FunctionComponent<Props> = ({ value, setValue }) => {
+  function onSetSearchCategory(e: ChangeEvent<HTMLSelectElement>) {
     e.preventDefault()
     e.stopPropagation()
 

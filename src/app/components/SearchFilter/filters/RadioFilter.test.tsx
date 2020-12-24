@@ -1,5 +1,4 @@
 import { cleanup, fireEvent, render } from '@testing-library/react'
-import React from 'react'
 import { FilterOption } from '../../../models/filter'
 import { FilterProps } from '../models'
 import RadioFilter from './RadioFilter'

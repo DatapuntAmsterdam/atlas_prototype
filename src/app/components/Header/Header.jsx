@@ -7,7 +7,6 @@ import {
 } from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
 import styled, { css } from 'styled-components'
 import HeaderSearch from '../../../header/components/HeaderSearch'
 import EmbedHeader from './EmbedHeader'

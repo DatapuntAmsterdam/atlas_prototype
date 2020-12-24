@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setPage } from '../../../shared/ducks/data-selection/actions'
 

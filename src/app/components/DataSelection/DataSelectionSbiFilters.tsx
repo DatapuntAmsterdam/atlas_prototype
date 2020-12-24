@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react'
+import { FunctionComponent, useCallback, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addFilter, removeFilter } from '../../../shared/ducks/filters/filters'
 import { ActiveFilter, Filter } from './DataSelectionFilters'

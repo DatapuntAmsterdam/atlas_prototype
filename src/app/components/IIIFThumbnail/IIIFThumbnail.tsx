@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia, Image, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import getState from '../../../shared/services/redux/get-state'
 
@@ -24,13 +24,13 @@ const StyledCardContent = styled(CardContent)`
 `
 
 const IIIFThumbnail = ({ src, title }: Thumbnail) => {
-  const [localImage, setLocalImage] = React.useState('')
-  const [loading, setLoading] = React.useState(true)
-  const [error, setError] = React.useState(false)
+  const [localImage, setLocalImage] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   const { accessToken } = getState().user
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchImage() {
       await fetch(src, {
         headers: {

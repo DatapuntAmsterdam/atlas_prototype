@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { mount, shallow } from 'enzyme'
-import React from 'react'
 import { mocked } from 'ts-jest/utils'
 import { cmsConfig } from '../../../shared/config/config'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'

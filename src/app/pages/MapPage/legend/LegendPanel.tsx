@@ -1,5 +1,5 @@
 import { MapPanelContent, MapPanelContentProps } from '@amsterdam/arm-core'
-import React, { useContext, useMemo } from 'react'
+import { FunctionComponent, useContext, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import MapPanel from '../../../../map/containers/panel/MapPanel'
@@ -34,7 +34,7 @@ const StyledMapPanelContent = styled(MapPanelContent)`
 
 export interface LegendPanelProps extends Omit<MapPanelContentProps, 'title'> {}
 
-const LegendPanel: React.FC<LegendPanelProps> = ({ ...otherProps }) => {
+const LegendPanel: FunctionComponent<LegendPanelProps> = ({ ...otherProps }) => {
   const { panelLayers } = useContext(MapContext)
   const user = useSelector(getUser)
   const [zoomLevel] = useParam(zoomParam)

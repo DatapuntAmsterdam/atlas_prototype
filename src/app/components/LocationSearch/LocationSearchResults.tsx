@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { Alert, Heading, Paragraph, themeColor, themeSpacing, Button } from '@amsterdam/asc-ui'
 import { Enlarge } from '@amsterdam/asc-assets'
-import React, { Fragment, FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'

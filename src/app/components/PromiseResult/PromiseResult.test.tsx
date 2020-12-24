@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
 import { mocked } from 'ts-jest/utils'
 import { AuthError } from '../../../shared/services/api/customError'
 import usePromise, { PromiseFulfilledResult, PromiseStatus } from '../../utils/usePromise'

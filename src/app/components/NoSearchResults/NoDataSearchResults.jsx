@@ -1,5 +1,4 @@
 import { Heading, Link, Paragraph } from '@amsterdam/asc-ui'
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import RouterLink from 'redux-first-router-link'
 import { authenticateRequest } from '../../../shared/ducks/user/user'

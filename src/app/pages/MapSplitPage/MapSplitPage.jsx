@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import { lazy } from 'react'
 import { connect, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors'
@@ -18,15 +18,15 @@ import PanoAlert from '../../components/PanoAlert/PanoAlert'
 import SplitScreen from '../../components/SplitScreen/SplitScreen'
 import PAGES from '../../pages'
 
-const DataDetailPage = React.lazy(() =>
+const DataDetailPage = lazy(() =>
   import(/* webpackChunkName: "DataDetailPage" */ '../DataDetailPage/DataDetailPage'),
 )
-const LocationSearch = React.lazy(() =>
+const LocationSearch = lazy(() =>
   import(
     /* webpackChunkName: "LocationSearchContainer" */ '../../components/LocationSearch/LocationSearch'
   ),
 )
-const PanoramaContainer = React.lazy(() =>
+const PanoramaContainer = lazy(() =>
   import(
     /* webpackChunkName: "PanoramaContainer" */ '../../../panorama/containers/PanoramaContainer'
   ),

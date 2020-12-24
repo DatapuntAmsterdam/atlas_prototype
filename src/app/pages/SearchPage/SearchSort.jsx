@@ -1,6 +1,5 @@
 import { breakpoint, Label, Select, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { setPage, setSort } from './SearchPageDucks'

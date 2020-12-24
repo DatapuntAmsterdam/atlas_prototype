@@ -1,5 +1,4 @@
 // NOTE!!! Testing both container and component.
-import React from 'react'
 import configureMockStore from 'redux-mock-store'
 import { shallow } from 'enzyme'
 

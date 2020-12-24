@@ -1,6 +1,6 @@
 import { Alert, Heading, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { FunctionComponent, lazy, useEffect, useState } from 'react'
+import { FunctionComponent, lazy, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'

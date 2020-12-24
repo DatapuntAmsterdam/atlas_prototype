@@ -1,6 +1,6 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import React, { FunctionComponent, useMemo } from 'react'
+import { FunctionComponent, useMemo } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import LegacyLink from 'redux-first-router-link'
 import styled from 'styled-components'

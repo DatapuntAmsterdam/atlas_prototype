@@ -1,5 +1,5 @@
 import { breakpoint, CardContainer, Column, Row, styles, themeColor } from '@amsterdam/asc-ui'
-import React from 'react'
+import { useEffect } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import useFromCMS from '../../utils/useFromCMS'
@@ -34,7 +34,7 @@ const CardRow = styled.div`
 const EditorialBlock = ({ title, list, showMoreProps = {}, showContentType = false }) => {
   const { results, fetchData, loading, error } = useFromCMS(list)
 
-  React.useEffect(() => {
+  useEffect(() => {
     ;(async () => {
       await fetchData()
     })()

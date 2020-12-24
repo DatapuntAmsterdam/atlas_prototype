@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from '@amsterdam/asc-assets'
 import { Button, Icon, svgFill, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React, { Children, useState } from 'react'
+import { Children, useState, FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 const ShowMoreButton = styled(Button)`
@@ -19,7 +19,7 @@ export interface ShowMoreProps {
   limit: number
 }
 
-const ShowMore: React.FC<ShowMoreProps> = ({ children, limit }) => {
+const ShowMore: FunctionComponent<ShowMoreProps> = ({ children, limit }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const toggleExpanded = () => setIsExpanded((value) => !value)
   const transformedChildren = Children.toArray(children)

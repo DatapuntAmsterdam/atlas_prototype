@@ -1,6 +1,6 @@
 import { Email, Facebook, Linkedin, Print, Twitter } from '@amsterdam/asc-assets'
 import { ShareButton, themeSpacing } from '@amsterdam/asc-ui'
-import React, { useCallback } from 'react'
+import { useCallback, FunctionComponent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import { hasPrintMode, isPrintMode, sharePage, showPrintMode } from '../../../shared/ducks/ui/ui'
@@ -24,7 +24,7 @@ const ShareBarContainer = styled.div<Props>`
   }
 `
 
-const ShareBar: React.FC<Props> = ({ hideInPrintMode, ...otherProps }) => {
+const ShareBar: FunctionComponent<Props> = ({ hideInPrintMode, ...otherProps }) => {
   const dispatch = useDispatch()
 
   const handlePageShare = useCallback(

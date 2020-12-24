@@ -1,5 +1,4 @@
 import { breakpoint, Link, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'

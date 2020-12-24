@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { List } from '@amsterdam/asc-ui'
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions'

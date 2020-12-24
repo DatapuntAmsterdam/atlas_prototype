@@ -2,7 +2,7 @@
 import { useStateRef } from '@amsterdam/arm-core'
 import { Feature } from 'geojson'
 import { LatLng, LatLngTuple } from 'leaflet'
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { getUserScopes } from '../../../../shared/ducks/user/user'
@@ -187,7 +187,7 @@ async function getData(
   }
 }
 
-const DataSelectionProvider: React.FC = ({ children }) => {
+const DataSelectionProvider: FunctionComponent = ({ children }) => {
   const [mapVisualization, setMapVisualizationState, mapVisualizationRef] = useStateRef<
     MapVisualization[]
   >([])

@@ -1,5 +1,5 @@
 import { FilterOption } from '@amsterdam/asc-ui'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'urql'
 import isDefined from '../../../shared/services/is-defined'

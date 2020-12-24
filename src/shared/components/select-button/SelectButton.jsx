@@ -1,7 +1,7 @@
-import React from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class SelectButton extends React.Component {
+class SelectButton extends Component {
   static getSelected(props) {
     return (
       props.options.find((option) => option.value === props.value) ||

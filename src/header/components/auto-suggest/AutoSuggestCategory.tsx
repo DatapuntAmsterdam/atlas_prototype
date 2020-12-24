@@ -1,5 +1,5 @@
 import { LocationDescriptorObject } from 'history'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import PARAMETERS from '../../../store/parameters'
@@ -12,7 +12,7 @@ export interface AutoSuggestCategoryProps {
   inputValue: string
 }
 
-const AutoSuggestCategory: React.FC<AutoSuggestCategoryProps> = ({
+const AutoSuggestCategory: FunctionComponent<AutoSuggestCategoryProps> = ({
   category,
   highlightValue,
   inputValue,

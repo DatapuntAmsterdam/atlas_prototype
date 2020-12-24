@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Map as ContextMenu } from '../../app/components/ContextMenu'
@@ -32,7 +32,7 @@ import {
   loadScene,
 } from '../services/marzipano/marzipano'
 
-class PanoramaContainer extends React.Component {
+class PanoramaContainer extends Component {
   constructor(props) {
     super(props)
     this.toggleFullscreen = this.toggleFullscreen.bind(this)

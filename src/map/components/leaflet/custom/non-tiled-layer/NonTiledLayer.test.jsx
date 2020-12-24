@@ -1,4 +1,3 @@
-import React from 'react'
 import L from 'leaflet'
 import { shallow } from 'enzyme'
 import NonTiledLayer from './NonTiledLayer'

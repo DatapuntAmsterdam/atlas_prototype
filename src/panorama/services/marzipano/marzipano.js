@@ -1,5 +1,4 @@
 import Marzipano from 'marzipano'
-import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { PANORAMA_CONFIG } from '../panorama-api/panorama-api'
 import {

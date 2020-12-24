@@ -1,5 +1,5 @@
 import { themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconMap } from '../../../../shared/assets/icons/data/IconMap.svg'
 import { ReactComponent as IconMapLayers } from '../../../../shared/assets/icons/IconMapLayers.svg'
@@ -24,7 +24,7 @@ enum MapType {
   Collection = 'map-collection',
 }
 
-const MapSearchResults: React.FC<MapSearchResultsProps> = ({
+const MapSearchResults: FunctionComponent<MapSearchResultsProps> = ({
   query,
   results,
   label,
@@ -77,7 +77,7 @@ interface SearchResultsProps {
   totalCount: number
   withPagination: boolean
   icon: JSX.Element
-  resultsComponent: React.FC<{ results: any[] }>
+  resultsComponent: FunctionComponent<{ results: any[] }>
   isOverviewPage: boolean
 }
 
@@ -86,7 +86,7 @@ const Spacer = styled.div<{ large?: boolean }>`
   margin-bottom: ${({ large }) => (large ? themeSpacing(18) : themeSpacing(6))};
 `
 
-const SearchResults: React.FC<SearchResultsProps> = ({
+const SearchResults: FunctionComponent<SearchResultsProps> = ({
   type,
   results,
   label,

@@ -1,5 +1,4 @@
 import { breakpoint, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 import NavigationCard from './NavigationCard'
 import navigationLinks from './services/navigationLinks'

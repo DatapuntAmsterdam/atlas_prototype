@@ -1,5 +1,5 @@
 import { Container, Row } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import CollectionTileGrid from '../../pages/CollectionDetailPage/CollectionTileGrid'
 import { CMSResultItem } from '../../utils/useFromCMS'
 
@@ -17,7 +17,7 @@ type StoryProps = {
   items: CMSResultItem[]
 }
 
-const Default: React.FC<StoryProps> = ({ items }) => {
+const Default: FunctionComponent<StoryProps> = ({ items }) => {
   return (
     <Container>
       <Row>

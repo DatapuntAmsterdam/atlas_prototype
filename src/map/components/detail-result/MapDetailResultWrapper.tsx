@@ -1,6 +1,6 @@
 import { Heading, Link, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
@@ -26,7 +26,7 @@ const Header = styled.header`
   margin: 0 ${themeSpacing(3)};
 `
 
-const MapDetailResultWrapper: React.FC<MapDetailResultWrapperProps> = ({
+const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = ({
   children,
   subTitle,
   title,

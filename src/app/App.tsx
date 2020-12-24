@@ -9,7 +9,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { MatomoProvider } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import {

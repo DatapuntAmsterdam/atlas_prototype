@@ -10,7 +10,7 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
 import getImageFromCms from '../../utils/getImageFromCms'
@@ -78,7 +78,7 @@ const ContentType = styled(Paragraph)`
   line-height: 16px;
 `
 
-const EditorialBlockCard: React.FC<
+const EditorialBlockCard: FunctionComponent<
   CMSResultItem &
     StyledCardProps & {
       loading?: boolean

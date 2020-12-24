@@ -1,6 +1,6 @@
 import { Alert, Heading, hooks, Link } from '@amsterdam/asc-ui'
 import { Feature } from 'geojson'
-import React, { FunctionComponent, useEffect, useMemo, useReducer, useState } from 'react'
+import { FunctionComponent, useEffect, useMemo, useReducer, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import {

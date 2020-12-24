@@ -6,7 +6,6 @@ import {
   Row,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 import { cmsConfig } from '../../shared/config/config'
 import { toCollectionSearch } from '../../store/redux-first-router/actions'

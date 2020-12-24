@@ -1,4 +1,3 @@
-import React from 'react'
 import AboutBlock from '../AboutBlock'
 
 export default {

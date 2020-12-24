@@ -1,5 +1,4 @@
 import { Button, svgFill, themeColor } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const StyledButton = styled(Button)`

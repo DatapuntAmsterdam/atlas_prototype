@@ -8,7 +8,15 @@ import {
 import { ascDefaultTheme, themeColor } from '@amsterdam/asc-ui'
 import { useMapInstance } from '@amsterdam/react-maps'
 import L, { LatLng, LatLngLiteral, Polygon } from 'leaflet'
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  FunctionComponent,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { useHistory } from 'react-router-dom'
 import useParam from '../../../utils/useParam'
 import MapContext from '../MapContext'
@@ -71,7 +79,7 @@ export interface DrawToolProps {
   setCurrentOverlay: (overlay: Overlay) => void
 }
 
-const DrawTool: React.FC<DrawToolProps> = ({ setCurrentOverlay }) => {
+const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
   const { setPositionFromSnapPoint } = useContext(MapPanelContext)
   const { setShowDrawTool } = useContext(MapContext)
   const {

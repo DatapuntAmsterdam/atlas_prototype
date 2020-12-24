@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import setIframeSize from '../../../shared/services/set-iframe-size/setIframeSize'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
@@ -14,9 +14,9 @@ const IFrameContainer = styled.div`
 `
 
 const IFrame = ({ contentLink, title }) => {
-  const [iframeLoading, setIframeLoading] = React.useState(true)
-  const [iframeHeight, setIframeHeight] = React.useState(0)
-  const iframeRef = React.useRef(null)
+  const [iframeLoading, setIframeLoading] = useState(true)
+  const [iframeHeight, setIframeHeight] = useState(0)
+  const iframeRef = useRef(null)
 
   const handleResize = () => {
     setIframeSize(setIframeHeight)
@@ -29,13 +29,13 @@ const IFrame = ({ contentLink, title }) => {
     handleResize(setIframeHeight)
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (iframeRef.current) {
       iframeRef.current.height = `${iframeHeight}px`
     }

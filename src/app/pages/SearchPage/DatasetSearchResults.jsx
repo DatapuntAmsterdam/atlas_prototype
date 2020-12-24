@@ -1,6 +1,5 @@
 import { Enlarge } from '@amsterdam/asc-assets'
 import { themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 import { dcatdScopes } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'

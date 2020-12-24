@@ -1,7 +1,7 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import React, { Fragment, FunctionComponent, useContext, useEffect, useState } from 'react'
+import { Fragment, FunctionComponent, useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import RouterLink, { To } from 'redux-first-router-link'
 import { Link, ListItem } from '@amsterdam/asc-ui'
 import styled from 'styled-components'

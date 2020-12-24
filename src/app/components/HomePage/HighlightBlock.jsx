@@ -1,5 +1,5 @@
 import { breakpoint, styles, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { useEffect } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { cmsConfig } from '../../../shared/config/config'
@@ -74,7 +74,7 @@ const ImageCardWrapperSmall = styled.div`
 const HighlightBlock = () => {
   const { results, fetchData, loading, error } = useFromCMS(cmsConfig.HOME_HIGHLIGHT)
 
-  React.useEffect(() => {
+  useEffect(() => {
     ;(async () => {
       await fetchData()
     })()

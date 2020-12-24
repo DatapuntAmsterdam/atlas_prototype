@@ -3,7 +3,7 @@ import 'leaflet-draw'
 import 'leaflet-rotatedmarker'
 import 'leaflet.markercluster'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { Component } from 'react'
 import { GeoJSON, Map, ScaleControl, TileLayer, ZoomControl } from 'react-leaflet'
 import ReactResizeDetector from 'react-resize-detector'
 import {
@@ -52,7 +52,7 @@ const ICONS = {
 }
 
 // Todo: AfterBeta: can be removed
-class MapLeaflet extends React.Component {
+class MapLeaflet extends Component {
   constructor(props) {
     super(props)
     this.onZoomEnd = this.onZoomEnd.bind(this)

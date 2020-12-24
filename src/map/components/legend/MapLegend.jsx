@@ -11,7 +11,7 @@ import {
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import queryString from 'querystring'
-import React, { useEffect, useMemo, useState } from 'react'
+import { createRef, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import LoginLink from '../../../app/components/Links/LoginLink/LoginLink'
@@ -95,7 +95,7 @@ const MapLegend = ({
   onRemoveLayers,
   onAddLayers,
 }) => {
-  const ref = React.createRef()
+  const ref = createRef()
   const { trackEvent } = useMatomo()
   const isPrintOrEmbedView = useSelector(isPrintOrEmbedMode)
 

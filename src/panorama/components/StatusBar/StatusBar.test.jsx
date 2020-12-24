@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme'
-import React from 'react'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system/crs-converter'
 import StatusBar from './StatusBar'
 

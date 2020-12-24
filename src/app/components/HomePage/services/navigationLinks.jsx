@@ -1,6 +1,5 @@
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
-import React from 'react'
 import environment from '../../../../environment'
 import { NAVIGATION_LINKS } from '../../../../shared/config/config'
 import {

@@ -1,6 +1,6 @@
 import { themeSpacing } from '@amsterdam/asc-ui'
 import { GraphQLFormattedError } from 'graphql'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import AuthAlert from '../../components/Alerts/AuthAlert'
 import DataCard, { DataList } from '../../components/DataCard'
@@ -41,7 +41,7 @@ export interface DataSearchResultsProps {
   withPagination: boolean
 }
 
-const DataSearchResults: React.FC<DataSearchResultsProps> = ({
+const DataSearchResults: FunctionComponent<DataSearchResultsProps> = ({
   query,
   results,
   errors,

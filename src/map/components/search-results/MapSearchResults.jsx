@@ -1,6 +1,5 @@
 import { Alert, Heading, Link, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'

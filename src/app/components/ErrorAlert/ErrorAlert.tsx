@@ -1,5 +1,5 @@
 import { Alert, Paragraph } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getMessage } from '../../../shared/ducks/error/error-message'
@@ -12,7 +12,7 @@ const StyledAlert = styled(Alert)`
   }
 `
 
-const ErrorAlert: React.FC = () => {
+const ErrorAlert: FunctionComponent = () => {
   const message: string = useSelector(getMessage)
   const printMode = useSelector(isPrintMode)
 

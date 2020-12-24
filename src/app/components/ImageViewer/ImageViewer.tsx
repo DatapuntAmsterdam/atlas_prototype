@@ -3,7 +3,7 @@ import { Close, Download, Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Button, themeColor } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import OpenSeadragon, { Viewer } from 'openseadragon'
-import React from 'react'
+import { createRef, FunctionComponent, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import getState from '../../../shared/services/redux/get-state'
 import useDownload from '../../utils/useDownload'
@@ -34,17 +34,17 @@ type ImageViewerProps = {
   printMode: boolean
 }
 
-const ImageViewer: React.FC<ImageViewerProps> = ({
+const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   handleResetFile,
   fileName,
   fileUrl,
   title,
   printMode,
 }) => {
-  const viewerRef = React.createRef<HTMLDivElement>()
-  const [viewerInstance, setViewerInstance] = React.useState<Viewer | null>(null)
-  const [loading, setLoading] = React.useState(true)
-  const [error, setError] = React.useState(false)
+  const viewerRef = createRef<HTMLDivElement>()
+  const [viewerInstance, setViewerInstance] = useState<Viewer | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
   const [downloadLoading, downloadFile] = useDownload()
   const { trackEvent } = useMatomo()
 
@@ -53,7 +53,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
   const fileExtension = fileName.split('.').pop()
   const isImage = !!fileExtension?.toLowerCase().match(/(jpg|jpeg|png|gif)/)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const viewer = OpenSeadragon({
       element: viewerRef.current || undefined,
       preserveViewport: true,

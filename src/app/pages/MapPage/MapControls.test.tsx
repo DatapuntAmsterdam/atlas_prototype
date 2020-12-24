@@ -1,4 +1,3 @@
-import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import MapControls from './MapControls'
 import withMapContext from '../../utils/withMapContext'

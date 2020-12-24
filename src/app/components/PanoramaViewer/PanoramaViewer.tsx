@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'

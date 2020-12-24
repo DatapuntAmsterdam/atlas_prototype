@@ -1,4 +1,4 @@
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { DetailResultItemTable } from '../../../../map/types/details'
 import { Table, TableData, TableHeader, TableRow } from '../../../components/Table'
@@ -12,7 +12,7 @@ export interface DetailTableProps {
   item: DetailResultItemTable
 }
 
-const DetailTable: React.FC<DetailTableProps> = ({ item }) => (
+const DetailTable: FunctionComponent<DetailTableProps> = ({ item }) => (
   <TableWrapper data-testid="detail-table">
     <Table>
       <TableRow header>

@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme'
-import React from 'react'
 import { dcatdScopes } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
 import { modificationDateFilter } from '../../components/Filters/Filters'

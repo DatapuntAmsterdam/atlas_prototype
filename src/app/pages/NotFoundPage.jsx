@@ -1,5 +1,4 @@
 import { Link, Paragraph } from '@amsterdam/asc-ui'
-import React from 'react'
 import ContentPage from './ContentPage'
 
 const NotFoundPage = () => (

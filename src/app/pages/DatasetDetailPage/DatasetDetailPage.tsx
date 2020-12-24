@@ -12,7 +12,7 @@ import {
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import marked from 'marked'
-import React, { FunctionComponent, useMemo } from 'react'
+import { FunctionComponent, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'

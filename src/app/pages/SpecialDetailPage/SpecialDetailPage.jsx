@@ -1,5 +1,5 @@
 import { Column, Row } from '@amsterdam/asc-ui'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { SpecialType } from '../../../shared/config/cms.config'
 import { cmsConfig } from '../../../shared/config/config'

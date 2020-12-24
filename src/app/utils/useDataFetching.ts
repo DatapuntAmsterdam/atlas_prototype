@@ -1,10 +1,10 @@
-import React from 'react'
+import { useState } from 'react'
 import { fetchWithToken } from '../../shared/services/api/api'
 
 function useDataFetching<T = any>() {
-  const [results, setResults] = React.useState<T | null>(null)
-  const [errorMessage, setErrorMessage] = React.useState(false)
-  const [loading, setLoading] = React.useState(false)
+  const [results, setResults] = useState<T | null>(null)
+  const [errorMessage, setErrorMessage] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   async function fetchData(endpoint: string) {
     setLoading(true)

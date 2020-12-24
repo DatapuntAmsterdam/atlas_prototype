@@ -1,4 +1,3 @@
-import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 import fetch from 'jest-fetch-mock'
 import withMapContext from '../../../utils/withMapContext'

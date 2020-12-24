@@ -1,7 +1,6 @@
 import { ChevronDown, Ellipsis, Embed, Print } from '@amsterdam/asc-assets'
 import { ContextMenu as ContextMenuComponent, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {

@@ -9,7 +9,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import environment from '../../../environment'

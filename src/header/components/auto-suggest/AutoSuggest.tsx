@@ -1,5 +1,5 @@
 import { Button, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
-import React, { forwardRef, useMemo } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'

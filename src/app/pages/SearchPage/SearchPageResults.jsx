@@ -10,7 +10,7 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import PARAMETERS from '../../../store/parameters'

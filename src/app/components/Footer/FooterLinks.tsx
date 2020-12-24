@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { Link, List, ListItem } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import environment from '../../../environment'
@@ -26,7 +26,7 @@ const Button = styled.button`
   background-color: transparent;
 `
 
-const FooterLinks: React.FC<{ links: FooterLink[] }> = ({ children, links }) => (
+const FooterLinks: FunctionComponent<{ links: FooterLink[] }> = ({ children, links }) => (
   <List>
     {links &&
       links.map(({ title, id, href, onClick, slug }) => {

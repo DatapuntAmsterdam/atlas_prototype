@@ -4,11 +4,13 @@
   ],
   "exclude": [
     "**/*.test.ts",
-    "**/*.test.tsx"
+    "**/*.test.tsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx"
   ],
   "compilerOptions": {
     "strict": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowJs": true,
     "esModuleInterop": true,
     "downlevelIteration": true,

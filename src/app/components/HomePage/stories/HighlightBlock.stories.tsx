@@ -1,5 +1,4 @@
 import { Column, Row } from '@amsterdam/asc-ui'
-import React from 'react'
 import HighlightBlock from '../HighlightBlock'
 
 export default {

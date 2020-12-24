@@ -1,5 +1,5 @@
 import { fireEvent, render, within } from '@testing-library/react'
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import DocumentCover, { DocumentCoverProps } from './DocumentCover'
 import '@testing-library/jest-dom/extend-expect'

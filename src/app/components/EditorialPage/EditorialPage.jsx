@@ -1,7 +1,7 @@
 import { Alert, Container, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import environment from '../../../environment'
@@ -35,14 +35,14 @@ const EditorialPage = ({
   const { setDocumentTitle } = useDocumentTitle()
   const { trackPageView } = useMatomo()
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (documentTitle) {
       setDocumentTitle(documentTitle)
       trackPageView({ documentTitle })
     }
   }, [documentTitle])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (error) {
       window.location.replace(routing.niet_gevonden.path)
     }

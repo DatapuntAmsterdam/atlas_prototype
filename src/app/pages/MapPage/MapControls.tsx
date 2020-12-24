@@ -1,7 +1,7 @@
 import { MapPanelContext, MapPanelLegendButton, Zoom } from '@amsterdam/arm-core'
 import { Overlay } from '@amsterdam/arm-core/lib/components/MapPanel/constants'
 import { Spinner, ViewerContainer as ViewerContainerComponent } from '@amsterdam/asc-ui'
-import React, { FunctionComponent, useContext } from 'react'
+import { FunctionComponent, useContext } from 'react'
 import { DrawToolOpenButton } from '@amsterdam/arm-draw'
 import styled, { css } from 'styled-components'
 import BaseLayerToggle from './controls/BaseLayerToggle'

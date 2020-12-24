@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import MapDetailResult from '../../components/detail-result/MapDetailResult'

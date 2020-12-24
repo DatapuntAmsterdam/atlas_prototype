@@ -1,7 +1,6 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import React from 'react'
 import CONSTANTS from '../../../shared/config/constants'
 import ModalBlock from './ModalBlock'
 import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'

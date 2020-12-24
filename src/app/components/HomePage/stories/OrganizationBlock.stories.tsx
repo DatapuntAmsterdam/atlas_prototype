@@ -1,4 +1,3 @@
-import React from 'react'
 import OrganizationBlock from '../OrganizationBlock'
 
 export default {

@@ -20,7 +20,7 @@ import {
   Typography,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { useEffect, useMemo } from 'react'
+import { Fragment, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import environment from '../../../environment'
@@ -213,7 +213,7 @@ const ArticleDetailPage = () => {
                                 field_accordion_intro: accordionIntro,
                                 field_accordion_label: accordionLabel,
                               }) => (
-                                <React.Fragment key={`${accordionTitle}_${accordionLabel}`}>
+                                <Fragment key={`${accordionTitle}_${accordionLabel}`}>
                                   {accordionTitle && (
                                     <StyledAccordionHeading forwardedAs="h3">
                                       {accordionTitle}
@@ -227,7 +227,7 @@ const ArticleDetailPage = () => {
                                       <CustomHTMLBlock body={accordionContent.processed} />
                                     </StyledAccordion>
                                   )}
-                                </React.Fragment>
+                                </Fragment>
                               ),
                             )}
                           </AccordionWrapper>

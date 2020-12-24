@@ -9,7 +9,7 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
+import { Fragment } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
@@ -88,7 +88,7 @@ const DataCard = ({ type, label, count, results, ...otherProps }) => (
       <ParagraphWrapper>
         <StyledParagraph>
           {results?.map(({ id, endpoint, label: itemLabel }, index) => (
-            <React.Fragment key={id}>
+            <Fragment key={id}>
               <StyledParagraphLink
                 to={toDetailFromEndpoint(endpoint, VIEW_MODE.SPLIT)}
                 forwardedAs={RouterLink}
@@ -96,7 +96,7 @@ const DataCard = ({ type, label, count, results, ...otherProps }) => (
                 {itemLabel}
               </StyledParagraphLink>
               {index !== results.length - 1 ? `, ` : ''}
-            </React.Fragment>
+            </Fragment>
           ))}
         </StyledParagraph>
       </ParagraphWrapper>

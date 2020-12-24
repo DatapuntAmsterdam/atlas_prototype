@@ -1,5 +1,5 @@
 import { Alert, Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import {

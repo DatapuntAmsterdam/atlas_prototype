@@ -1,4 +1,3 @@
-import React from 'react'
 import EditorialBlock from '../EditorialBlock'
 import { cmsConfig } from '../../../../shared/config/config'
 

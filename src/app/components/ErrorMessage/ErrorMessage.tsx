@@ -1,5 +1,5 @@
 import { breakpoint, Button, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React, { FunctionComponent, HTMLAttributes } from 'react'
+import { FunctionComponent, HTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 
 const ErrorMessageStyle = styled.div`

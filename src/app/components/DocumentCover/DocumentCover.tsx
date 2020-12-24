@@ -1,6 +1,6 @@
 import { Download } from '@amsterdam/asc-assets'
 import { breakpoint, Button, Image, Spinner, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React, { FunctionComponent, useMemo, useState } from 'react'
+import { FunctionComponent, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import getImageFromCms from '../../utils/getImageFromCms'
 

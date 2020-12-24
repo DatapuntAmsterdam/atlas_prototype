@@ -1,4 +1,4 @@
-import React, { DependencyList, ReactElement, useState } from 'react'
+import { DependencyList, ReactElement, useState } from 'react'
 import styled from 'styled-components'
 import usePromise, {
   PromiseFactoryFn,
