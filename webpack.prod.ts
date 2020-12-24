@@ -11,15 +11,14 @@ export default merge(createConfig({ mode: 'production' }), {
     },
   },
   output: {
-    filename: '[name].[hash].js',
-    chunkFilename: '[name].[chunkhash].js',
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js',
   },
   devtool: 'source-map',
   optimization: {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          sourceMap: true,
           compress: {
             // Do not drop debugger statements, we might want to run a production build locally for testing.
             // Linting rules will ensure this never actually happens with true production images.
@@ -28,9 +27,17 @@ export default merge(createConfig({ mode: 'production' }), {
         },
       }),
     ],
-    namedChunks: true,
-    namedModules: true,
-    moduleIds: 'named',
-    chunkIds: 'named',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+    runtimeChunk: 'single',
+    moduleIds: 'deterministic',
+    chunkIds: 'deterministic',
   },
 })

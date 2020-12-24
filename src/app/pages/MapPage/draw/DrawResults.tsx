@@ -134,16 +134,16 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
 
   // Effect to delay the loading states, this is to prevent the results block to collapse and re-open in a short time
   useEffect(() => {
-    let timeOutId: number
+    let timeoutId: number
     if (loadingIds.length) {
-      timeOutId = setTimeout(() => {
+      timeoutId = window.setTimeout(() => {
         setDelayedLoadingIds(loadingIds)
       }, 400)
     } else {
       setDelayedLoadingIds([])
     }
     return () => {
-      clearTimeout(timeOutId)
+      window.clearTimeout(timeoutId)
     }
   }, [loadingIds, setDelayedLoadingIds])
 

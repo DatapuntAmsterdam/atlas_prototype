@@ -59,6 +59,7 @@ const PanoramaViewerMenu: React.FC = () => {
   }
 
   return (
+    // @ts-ignore
     <StyledContextMenu
       arrowIcon={<ChevronDown />}
       icon={
