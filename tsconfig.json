@@ -4,9 +4,7 @@
   ],
   "exclude": [
     "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.stories.ts",
-    "**/*.stories.tsx"
+    "**/*.test.tsx"
   ],
   "compilerOptions": {
     "strict": true,

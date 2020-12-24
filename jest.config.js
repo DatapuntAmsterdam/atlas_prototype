@@ -28,7 +28,7 @@ module.exports = {
       '<rootDir>/test/file-mock.js',
     '\\.(svg)$': '<rootDir>/test/file-svg-mock.js',
   },
-  setupFiles: ['dotenv/config', 'raf/polyfill', './test/setup-jest.js'],
+  setupFiles: ['raf/polyfill', './test/setup-jest.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   setupFilesAfterEnv: ['./test/mocks.js'],
   testURL: 'http://localhost:3000/',
