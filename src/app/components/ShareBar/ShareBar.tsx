@@ -31,7 +31,7 @@ const ShareBar: FunctionComponent<Props> = ({ hideInPrintMode, ...otherProps }) 
     (target) => {
       dispatch(sharePage(target))
 
-      const link = getShareUrl(target, window)
+      const link = getShareUrl(target)
       if (link) {
         window.open(link.url, link.target)
       }

@@ -33,7 +33,7 @@ const socialItems = (openSharePage) => {
   const handlePageShare = (target) => {
     openSharePage(target)
 
-    const link = getShareUrl(target, window)
+    const link = getShareUrl(target)
     window.open(link.url, link.target)
   }
 
