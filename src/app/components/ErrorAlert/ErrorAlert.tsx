@@ -13,7 +13,7 @@ const StyledAlert = styled(Alert)`
 `
 
 const ErrorAlert: FunctionComponent = () => {
-  const message: string = useSelector(getMessage)
+  const message = useSelector(getMessage)
   const printMode = useSelector(isPrintMode)
 
   return !printMode ? (

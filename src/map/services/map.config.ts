@@ -1,5 +1,5 @@
 import BOUNDING_BOX from './bounding-box.constant'
-import { ENVIRONMENTS } from '../../shared/environment'
+import { Environment } from '../../shared/environment'
 import environment from '../../environment'
 
 const BOUNDS = [BOUNDING_BOX.COORDINATES.southWest, BOUNDING_BOX.COORDINATES.northEast]
@@ -46,19 +46,19 @@ const defaultConfig = {
 }
 
 const environmentConfig = {
-  [ENVIRONMENTS.PRODUCTION]: {
+  [Environment.Production]: {
     BASE_LAYER_OPTIONS: {
       subdomains: ['t1', 't2', 't3', 't4'],
     },
     OVERLAY_ROOT: 'https://map.data.amsterdam.nl',
   },
-  [ENVIRONMENTS.ACCEPTANCE]: {
+  [Environment.Acceptance]: {
     BASE_LAYER_OPTIONS: {
       subdomains: ['acc.t1', 'acc.t2', 'acc.t3', 'acc.t4'],
     },
     OVERLAY_ROOT: 'https://acc.map.data.amsterdam.nl',
   },
-  [ENVIRONMENTS.DEVELOPMENT]: {
+  [Environment.Development]: {
     BASE_LAYER_OPTIONS: {
       subdomains: ['acc.t1', 'acc.t2', 'acc.t3', 'acc.t4'],
     },

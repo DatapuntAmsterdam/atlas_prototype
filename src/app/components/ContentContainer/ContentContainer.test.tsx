@@ -1,8 +1,8 @@
-import { shallow } from 'enzyme'
+import { shallow, ShallowWrapper } from 'enzyme'
 import ContentContainer from './ContentContainer'
 
 describe('ContentContainer', () => {
-  let component
+  let component: ShallowWrapper
 
   beforeEach(() => {
     component = shallow(

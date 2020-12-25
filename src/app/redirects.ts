@@ -1,14 +1,20 @@
-import PARAMETERS from '../store/parameters'
-import { routing, MAIN_PATHS } from './routes'
-import { CONTENT_REDIRECT_LINKS, SHORTLINKS } from '../shared/config/config'
-import matomoInstance from './matomo'
-import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
 import environment from '../environment'
+import { CONTENT_REDIRECT_LINKS, SHORTLINKS } from '../shared/config/config'
+import PARAMETERS from '../store/parameters'
+import matomoInstance from './matomo'
+import { MAIN_PATHS, routing } from './routes'
+import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
 
 const { VIEW, VIEW_CENTER, LAYERS, LEGEND, ZOOM, EMBED } = PARAMETERS
 
+interface Redirect {
+  from: string
+  to: string
+  load?: (search: string) => Promise<string>
+}
+
 // This are the known broken legacy links
-export const legacyRoutes = [
+export const legacyRoutes: Redirect[] = [
   // https://www.parool.nl/amsterdam/kaart-met-onontplofte-bommen-in-amsterdam-nu-openbaar~a4539314/
   {
     from:
@@ -83,7 +89,8 @@ export const legacyRoutes = [
     to: `${routing.data.path}?${VIEW}=kaart`,
   },
 ]
-export const shortUrls = [
+
+export const shortUrls: Redirect[] = [
   {
     from: '/themakaart/taxi/',
     to: `${routing.data.path}?${VIEW}=kaart&${LAYERS}=themtaxi-bgt%3A1|themtaxi-tar%3A1|themtaxi-pvrts%3A1|themtaxi-mzt%3A1|themtaxi-oovtig%3A1|themtaxi-vezips%3A1|themtaxi-slpnb%3A1|themtaxi-slpb%3A1|themtaxi-nlpnb%3A1|themtaxi-nlpb%3A1&${LEGEND}=true`,
@@ -136,7 +143,7 @@ export const shortUrls = [
   },
 ]
 
-export const articleUrls = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({
+export const articleUrls: Redirect[] = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({
   from: item.from,
   to: routing.articleDetail.path
     .replace(':slug', item.to.slug)
@@ -152,12 +159,12 @@ const overviewPaths = [
   MAIN_PATHS.DATA,
 ]
 
-export const overviewUrls = overviewPaths.map((pathName) => ({
+export const overviewUrls: Redirect[] = overviewPaths.map((pathName) => ({
   from: `/${pathName}/`,
   to: `/${pathName}/zoek/`,
 }))
 
-export const webHooks = [
+export const webHooks: Redirect[] = [
   {
     from: `/adres/zoek/${window.location.search}`,
     to: `/data/bag/verblijfsobject/`,
@@ -180,7 +187,9 @@ export default async function resolveRedirects() {
   // Retrieve the data needed for the webhook
   // When migrating to a SSR or static application an actual implementation of webhooks can be created
   if (webHooks.includes(matchingRedirect)) {
-    const dataId = await matchingRedirect.load(window.location.search)
+    const dataId = matchingRedirect.load
+      ? await matchingRedirect.load(window.location.search)
+      : null
 
     if (dataId) {
       const redirectTo = `${matchingRedirect.to}${dataId}/`
@@ -215,6 +224,6 @@ export default async function resolveRedirects() {
   return true
 }
 
-function normalizePath(path) {
+function normalizePath(path: string) {
   return path.endsWith('/') ? path.slice(0, -1) : path
 }

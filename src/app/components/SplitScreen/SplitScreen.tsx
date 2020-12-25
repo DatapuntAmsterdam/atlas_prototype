@@ -1,6 +1,16 @@
-import PropTypes from 'prop-types'
+import { FunctionComponent, ReactNode } from 'react'
 
-const SplitScreen = ({ leftComponent, rightComponent, printMode }) => (
+export interface SplitScreenProps {
+  leftComponent: ReactNode
+  rightComponent: ReactNode
+  printMode: boolean
+}
+
+const SplitScreen: FunctionComponent<SplitScreenProps> = ({
+  leftComponent,
+  rightComponent,
+  printMode,
+}) => (
   <div className="c-dashboard__column-holder">
     <div
       className={`
@@ -25,11 +35,5 @@ const SplitScreen = ({ leftComponent, rightComponent, printMode }) => (
     </div>
   </div>
 )
-
-SplitScreen.propTypes = {
-  leftComponent: PropTypes.node.isRequired,
-  rightComponent: PropTypes.node.isRequired,
-  printMode: PropTypes.bool.isRequired,
-}
 
 export default SplitScreen

@@ -15,6 +15,7 @@ const CardWrapper = styled.div<{ compact: boolean }>`
   margin-bottom: ${({ compact }) => (compact ? themeSpacing(2) : themeSpacing(8))};
 `
 
+// TODO: Generate these types from the GraphQL API.
 interface DataResult {
   endpoint: string
   id: string

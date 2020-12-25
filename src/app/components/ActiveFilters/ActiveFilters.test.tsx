@@ -1,12 +1,11 @@
 import { shallow } from 'enzyme'
 import ActiveFilters from './ActiveFilters'
 
-// Todo: add more tests
 describe('ActiveFilters', () => {
   it('should render', () => {
     const component = shallow(
       <ActiveFilters
-        filters={[{ label: 'Stadsdeel', slug: 'stadsdeel_naam', options: 'Centrum' }]}
+        filters={[{ label: 'Stadsdeel', slug: 'stadsdeel_naam', option: 'Centrum' }]}
         removeFilter={() => {}}
       />,
     )
@@ -17,7 +16,7 @@ describe('ActiveFilters', () => {
     const removeFilter = jest.fn()
     const component = shallow(
       <ActiveFilters
-        filters={[{ label: 'Stadsdeel', slug: 'stadsdeel_naam', options: 'Centrum' }]}
+        filters={[{ label: 'Stadsdeel', slug: 'stadsdeel_naam', option: 'Centrum' }]}
         removeFilter={removeFilter}
       />,
     )

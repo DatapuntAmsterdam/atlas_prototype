@@ -6,10 +6,10 @@ import {
   FETCH_MARKERS_FAILURE,
 } from '../../ducks/data-selection/constants'
 import { FETCH_DETAIL_FAILURE } from '../../ducks/detail/constants'
-import { ERROR_TYPES, setGlobalError } from '../../ducks/error/error-message'
+import { ErrorType, setGlobalError } from '../../ducks/error/error-message'
 
 export function* setErrorsEffect() {
-  yield put(setGlobalError(ERROR_TYPES.GENERAL_ERROR))
+  yield put(setGlobalError(ErrorType.General))
 }
 
 /**

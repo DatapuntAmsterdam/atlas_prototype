@@ -1,17 +1,16 @@
 import MatomoTracker from '@datapunt/matomo-tracker-js'
-
-import { ENVIRONMENTS } from '../shared/environment'
+import { Environment } from '../shared/environment'
 import environment from '../environment'
 
 const MATOMO_CONFIG = {
   BASE_URL: 'https://analytics.data.amsterdam.nl/',
-  [ENVIRONMENTS.PRODUCTION]: {
+  [Environment.Production]: {
     SITE_ID: 1,
   },
-  [ENVIRONMENTS.ACCEPTANCE]: {
+  [Environment.Acceptance]: {
     SITE_ID: 3,
   },
-  [ENVIRONMENTS.DEVELOPMENT]: {
+  [Environment.Development]: {
     SITE_ID: 3,
   },
 }

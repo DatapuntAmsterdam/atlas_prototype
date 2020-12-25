@@ -1,5 +1,5 @@
 import { breakpoint, themeSpacing } from '@amsterdam/asc-ui'
-import PropTypes from 'prop-types'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 const StyledContainer = styled.div`
@@ -14,17 +14,16 @@ const StyledContainer = styled.div`
   }
 `
 
-const ContentContainer = ({ children, className }) => (
+export interface ContentContainerProps {
+  className?: string
+}
+
+const ContentContainer: FunctionComponent<ContentContainerProps> = ({ children, className }) => (
   <StyledContainer className={className}>{children}</StyledContainer>
 )
 
 ContentContainer.defaultProps = {
   className: 'content-container',
-}
-
-ContentContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
 }
 
 export default ContentContainer

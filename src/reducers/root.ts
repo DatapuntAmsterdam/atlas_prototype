@@ -10,7 +10,7 @@ import PanoramaReducer, { PANORAMA } from '../panorama/ducks/reducer'
 import DataSearchReducer, { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer'
 import DataSelectionReducer, { DATA_SELECTION } from '../shared/ducks/data-selection/reducer'
 import DetailReducer, { DETAIL } from '../shared/ducks/detail/reducer'
-import ErrorMessageReducer, { REDUCER_KEY as ERROR } from '../shared/ducks/error/error-message'
+import errorMessageReducer, { REDUCER_KEY as ERROR } from '../shared/ducks/error/error-message'
 import FilesReducer, { FILES_REDUCER } from '../shared/ducks/files/reducer'
 import FiltersReducer, { REDUCER_KEY as FILTER } from '../shared/ducks/filters/filters'
 import SelectionReducer, { REDUCER_KEY as SELECTION } from '../shared/ducks/selection/selection'
@@ -27,7 +27,7 @@ const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => 
 
   // Use combine reducer for new reducers
   const newRootReducer = combineReducers({
-    [ERROR]: ErrorMessageReducer,
+    [ERROR]: errorMessageReducer,
     [FILTER]: FiltersReducer,
     [MAP]: MapReducer,
     mapDetail: MapDetailReducer,

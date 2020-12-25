@@ -14,6 +14,7 @@ exports[`ActiveFilters should render 1`] = `
       <span>
         Stadsdeel
         :
+        Centrum
       </span>
       <button
         className="c-data-selection-active-filters--remove-filter o-btn"

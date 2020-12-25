@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { ReactComponent as IconBuilding } from '../../../shared/assets/icons/data/IconBuilding.svg'
 import { ReactComponent as IconChurch } from '../../../shared/assets/icons/data/IconChurch.svg'
 import { ReactComponent as IconConstruction } from '../../../shared/assets/icons/data/IconConstruction.svg'
@@ -26,5 +27,12 @@ const ICONS = {
   bouwdossiers: <IconConstruction />,
 }
 
-const DataIcon = ({ type }) => (ICONS[type] ? ICONS[type] : <></>)
+export type DataIconType = keyof typeof ICONS
+
+export interface DataIconProps {
+  type: DataIconType
+}
+
+const DataIcon: FunctionComponent<DataIconProps> = ({ type }) => ICONS[type]
+
 export default DataIcon

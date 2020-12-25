@@ -1,4 +1,5 @@
 import { Button, svgFill, themeColor } from '@amsterdam/asc-ui'
+import { FunctionComponent, ReactNode } from 'react'
 import styled from 'styled-components'
 
 const StyledButton = styled(Button)`
@@ -15,7 +16,20 @@ const StyledButton = styled(Button)`
   }
 `
 
-const ActionButton = ({ fetching, onClick, iconLeft, label, ...otherProps }) => (
+export interface ActionButtonProps {
+  fetching: boolean
+  iconLeft: ReactNode
+  label: string
+  onClick: () => void
+}
+
+const ActionButton: FunctionComponent<ActionButtonProps> = ({
+  fetching,
+  iconLeft,
+  label,
+  onClick,
+  ...otherProps
+}) => (
   <StyledButton
     disabled={fetching}
     variant="primaryInverted"

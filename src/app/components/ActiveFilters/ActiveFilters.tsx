@@ -1,6 +1,18 @@
-import PropTypes from 'prop-types'
+import { FunctionComponent } from 'react'
 
-const ActiveFilters = ({ removeFilter, filters }) =>
+// TODO: Replace this interface with one that is shared with other components.
+interface Filter {
+  slug: string
+  label: string
+  option: string
+}
+
+export interface ActiveFiltersProps {
+  removeFilter: (slug: string) => void
+  filters: Filter[]
+}
+
+const ActiveFilters: FunctionComponent<ActiveFiltersProps> = ({ removeFilter, filters }) =>
   filters && filters.length ? (
     <div className="qa-active-filters c-data-selection-active-filters">
       <ul className="c-data-selection-active-filters__list">
@@ -22,13 +34,6 @@ const ActiveFilters = ({ removeFilter, filters }) =>
         ))}
       </ul>
     </div>
-  ) : (
-    ''
-  )
-
-ActiveFilters.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.object).isRequired,
-  removeFilter: PropTypes.func.isRequired,
-}
+  ) : null
 
 export default ActiveFilters

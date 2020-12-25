@@ -1,6 +1,15 @@
-import PropTypes from 'prop-types'
+import { FunctionComponent, ReactNode } from 'react'
 
-const ViewerControls = ({
+export interface ViewerControls {
+  topLeftComponent?: ReactNode
+  bottomLeftComponent?: ReactNode
+  topRightComponent?: ReactNode
+  bottomRightComponent?: ReactNode
+  className?: string
+  metaData?: string[]
+}
+
+const ViewerControls: FunctionComponent<ViewerControls> = ({
   topLeftComponent,
   bottomLeftComponent,
   topRightComponent,
@@ -32,15 +41,6 @@ const ViewerControls = ({
     </div>
   </div>
 )
-
-ViewerControls.propTypes = {
-  topLeftComponent: PropTypes.node,
-  bottomLeftComponent: PropTypes.node,
-  topRightComponent: PropTypes.node,
-  bottomRightComponent: PropTypes.node,
-  className: PropTypes.string,
-  metaData: PropTypes.arrayOf(PropTypes.string),
-}
 
 ViewerControls.defaultProps = {
   topLeftComponent: null,
