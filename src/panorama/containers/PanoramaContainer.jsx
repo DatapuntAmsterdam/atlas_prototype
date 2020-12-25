@@ -10,7 +10,7 @@ import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullsc
 import { getMapDetail } from '../../map/ducks/detail/actions'
 import { getMapOverlays } from '../../map/ducks/map/selectors'
 import { pageTypeToEndpoint } from '../../map/services/map-detail/map-detail'
-import { isPrintMode, isPrintOrEmbedMode, setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui'
+import { isPrintMode, isPrintOrEmbedMode, setViewMode, ViewMode } from '../../shared/ducks/ui/ui'
 import PanoramaToggle from '../components/PanoramaToggle/PanoramaToggle'
 import StatusBar from '../components/StatusBar/StatusBar'
 import {
@@ -113,10 +113,10 @@ class PanoramaContainer extends Component {
     const { isFullscreen, setView } = this.props
 
     if (isFullscreen) {
-      return setView(VIEW_MODE.SPLIT, 'beeld-verkleinen')
+      return setView(ViewMode.Split, 'beeld-verkleinen')
     }
 
-    return setView(VIEW_MODE.FULL, 'beeld-vergroten')
+    return setView(ViewMode.Full, 'beeld-vergroten')
   }
 
   render() {

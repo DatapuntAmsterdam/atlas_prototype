@@ -3,12 +3,18 @@ export function typedAction<T extends string, P extends any>(
   type: T,
   payload: P,
 ): { type: T; payload: P }
+export function typedAction<T extends string, P extends any, M extends any>(
+  type: T,
+  payload: P,
+  meta: M,
+): { type: T; payload: P; meta: M }
 
 /**
  * Creates a Redux action that is properly typed so it's payload can be inferred based on it's action type.
  *
  * @param type The type of the action.
  * @param payload The payload of the action.
+ * @param meta The metadata of the action.
  * @example
  * ```typescript
  * const SET_VALUE = 'SET_VALUE'
@@ -36,6 +42,6 @@ export function typedAction<T extends string, P extends any>(
  * }
  * ```
  */
-export function typedAction(type: string, payload?: any) {
-  return { type, payload }
+export function typedAction(type: string, payload?: any, meta?: any) {
+  return { type, payload, meta }
 }

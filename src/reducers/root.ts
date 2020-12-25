@@ -14,7 +14,7 @@ import errorMessageReducer, { REDUCER_KEY as ERROR } from '../shared/ducks/error
 import FilesReducer, { FILES_REDUCER } from '../shared/ducks/files/reducer'
 import FiltersReducer, { REDUCER_KEY as FILTER } from '../shared/ducks/filters/filters'
 import SelectionReducer, { REDUCER_KEY as SELECTION } from '../shared/ducks/selection/selection'
-import UiReducer, { UI } from '../shared/ducks/ui/ui'
+import uiReducer, { REDUCER_KEY as UI } from '../shared/ducks/ui/ui'
 import UserReducer, { REDUCER_KEY as USER } from '../shared/ducks/user/user'
 import { LOCATION } from '../store/redux-first-router/constants'
 
@@ -32,7 +32,7 @@ const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => 
     [MAP]: MapReducer,
     mapDetail: MapDetailReducer,
     [PANORAMA]: PanoramaReducer,
-    [UI]: UiReducer,
+    [UI]: uiReducer,
     [USER]: UserReducer,
     mapLayers,
     [LOCATION]: routeReducer,

@@ -1,6 +1,6 @@
 import { MATOMO_CONSTANTS } from '../../../app/matomo'
 import PAGES from '../../../app/pages'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { ViewMode } from '../../../shared/ducks/ui/ui'
 import PARAMETERS from '../../parameters'
 import { routing, ROUTER_NAMESPACE } from '../../../app/routes'
 
@@ -45,7 +45,7 @@ describe('trackEvents', () => {
     })
 
     it('should return data for when the map is the view mode', () => {
-      const payload = { state: { ui: { viewMode: VIEW_MODE.MAP } } }
+      const payload = { state: { ui: { viewMode: ViewMode.Map } } }
 
       expect(dataDetailTrackingFunc(payload)).toEqual([
         MATOMO_CONSTANTS.TRACK_EVENT,
@@ -57,9 +57,9 @@ describe('trackEvents', () => {
 
     it('should return data for when split is the view mode', () => {
       const payload = {
-        state: { ui: { viewMode: VIEW_MODE.SPLIT } },
+        state: { ui: { viewMode: ViewMode.Split } },
         isFirstAction: false,
-        query: { [PARAMETERS.VIEW]: VIEW_MODE.MAP },
+        query: { [PARAMETERS.VIEW]: ViewMode.Map },
       }
 
       expect(dataDetailTrackingFunc(payload)).toEqual([
@@ -77,7 +77,7 @@ describe('trackEvents', () => {
     it('should return data for when page is a panoramo page', () => {
       const payload = {
         state: {
-          ui: { viewMode: VIEW_MODE.SPLIT },
+          ui: { viewMode: ViewMode.Split },
           location: { type: `${ROUTER_NAMESPACE}/${PAGES.PANORAMA}` },
         },
       }

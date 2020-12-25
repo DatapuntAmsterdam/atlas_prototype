@@ -8,12 +8,18 @@ jest.mock('../../../shared/ducks/ui/ui')
 
 describe('ShareBar', () => {
   const store = configureMockStore()()
-  const sharePageMock = jest
-    .spyOn(ui, 'sharePage')
-    .mockImplementation(() => ({ type: 'action', meta: { tracking: true } }))
-  const showPrintModeMock = jest
-    .spyOn(ui, 'showPrintMode')
-    .mockImplementation(() => ({ type: 'action', meta: { tracking: true } }))
+
+  const sharePageMock = jest.spyOn(ui, 'sharePage').mockImplementation(() => ({
+    type: ui.SHARE_PAGE,
+    payload: undefined,
+    meta: { tracking: true },
+  }))
+
+  const showPrintModeMock = jest.spyOn(ui, 'showPrintMode').mockImplementation(() => ({
+    type: ui.SHOW_PRINT,
+    payload: undefined,
+    meta: { tracking: true },
+  }))
 
   beforeEach(() => {
     global.window.open = jest.fn()
@@ -30,12 +36,13 @@ describe('ShareBar', () => {
     )
 
     const buttons = queryAllByRole('button')
-    const actions = ['facebook', 'twitter', 'linkedin', 'email']
-    expect(buttons.length).toBe(4)
-    buttons.forEach((button, index) => {
+
+    buttons.forEach((button) => {
       fireEvent.click(button)
-      expect(sharePageMock).toHaveBeenCalledWith(actions[index])
     })
+
+    expect(buttons.length).toBe(4)
+    expect(sharePageMock).toHaveBeenCalledTimes(4)
   })
 
   it('should only render the print button when in print mode', () => {

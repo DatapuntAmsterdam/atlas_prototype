@@ -1,6 +1,6 @@
 import { Email, Facebook, Linkedin, Print, Twitter } from '@amsterdam/asc-assets'
 import { ShareButton, themeSpacing } from '@amsterdam/asc-ui'
-import { useCallback, FunctionComponent } from 'react'
+import { FunctionComponent, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import { hasPrintMode, isPrintMode, sharePage, showPrintMode } from '../../../shared/ducks/ui/ui'
@@ -29,7 +29,7 @@ const ShareBar: FunctionComponent<Props> = ({ hideInPrintMode, ...otherProps }) 
 
   const handlePageShare = useCallback(
     (target) => {
-      dispatch(sharePage(target))
+      dispatch(sharePage())
 
       const link = getShareUrl(target)
       if (link) {

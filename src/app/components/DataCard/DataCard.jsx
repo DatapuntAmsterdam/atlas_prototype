@@ -12,7 +12,7 @@ import {
 import { Fragment } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { ViewMode } from '../../../shared/ducks/ui/ui'
 import { toDataSearchType, toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
 import formatCount from '../../utils/formatCount'
 import DataIcon from './DataIcon'
@@ -90,7 +90,7 @@ const DataCard = ({ type, label, count, results, ...otherProps }) => (
           {results?.map(({ id, endpoint, label: itemLabel }, index) => (
             <Fragment key={id}>
               <StyledParagraphLink
-                to={toDetailFromEndpoint(endpoint, VIEW_MODE.SPLIT)}
+                to={toDetailFromEndpoint(endpoint, ViewMode.Split)}
                 forwardedAs={RouterLink}
               >
                 {itemLabel}

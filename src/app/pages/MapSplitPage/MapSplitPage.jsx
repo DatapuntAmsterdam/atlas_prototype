@@ -8,7 +8,7 @@ import {
   getViewMode,
   isPrintMode,
   setViewMode as setViewModeAction,
-  VIEW_MODE,
+  ViewMode,
 } from '../../../shared/ducks/ui/ui'
 import { getUser } from '../../../shared/ducks/user/user'
 import { toDetailFromEndpoint as endpointActionCreator } from '../../../store/redux-first-router/actions'
@@ -68,13 +68,13 @@ if (typeof window !== 'undefined') {
 
     case PAGES.PANORAMA:
       Component = user.authenticated ? (
-        <PanoramaContainer isFullscreen={viewMode === VIEW_MODE.FULL} />
+        <PanoramaContainer isFullscreen={viewMode === ViewMode.Full} />
       ) : (
         <PanoAlert />
       )
       mapProps = {
         isFullscreen: true,
-        toggleFullscreen: () => setViewMode(VIEW_MODE.SPLIT),
+        toggleFullscreen: () => setViewMode(ViewMode.Split),
       }
 
       break
@@ -92,7 +92,7 @@ if (typeof window !== 'undefined') {
     case PAGES.CADASTRAL_OBJECTS:
       Component = <DataSelection />
       mapProps = {
-        toggleFullscreen: () => setViewMode(VIEW_MODE.SPLIT),
+        toggleFullscreen: () => setViewMode(ViewMode.Split),
       }
 
       break
@@ -103,22 +103,19 @@ if (typeof window !== 'undefined') {
       }
   }
 
-  if (viewMode === VIEW_MODE.MAP) {
+  if (viewMode === ViewMode.Map) {
     return <MapComponent {...mapProps} />
   }
   if (Component) {
-    if (viewMode === VIEW_MODE.FULL) {
+    if (viewMode === ViewMode.Full) {
       return Component
     }
 
-    if (viewMode === VIEW_MODE.SPLIT) {
+    if (viewMode === ViewMode.Split) {
       return (
         <SplitScreen
           leftComponent={
-            <MapComponent
-              isFullscreen={false}
-              toggleFullscreen={() => setViewMode(VIEW_MODE.MAP)}
-            />
+            <MapComponent isFullscreen={false} toggleFullscreen={() => setViewMode(ViewMode.Map)} />
           }
           rightComponent={Component}
           printMode={printMode}

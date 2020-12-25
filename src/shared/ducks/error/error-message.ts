@@ -52,7 +52,7 @@ export default function errorMessageReducer(
   }
 }
 
-const getErrorState = (state: RootState) => state.error
+const getErrorState = (state: RootState) => state[REDUCER_KEY]
 
 export const ERROR_MESSAGES = {
   [ErrorType.General]:

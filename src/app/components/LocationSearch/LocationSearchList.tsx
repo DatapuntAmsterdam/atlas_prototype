@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { List } from '@amsterdam/asc-ui'
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
 import LocationSearchListItem, { Result } from './LocationSearchListItem'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { ViewMode } from '../../../shared/ducks/ui/ui'
 
 const StyledList = styled(List)`
   margin-bottom: 0;
@@ -21,7 +21,7 @@ const LocationSearchList: FunctionComponent<Props> = ({ categoryResults, limit }
   const results: Result[] =
     categoryResults?.results?.map((result) => ({
       ...result,
-      linkTo: toDetailFromEndpoint(result.endpoint, VIEW_MODE.SPLIT),
+      linkTo: toDetailFromEndpoint(result.endpoint, ViewMode.Split),
     })) ?? []
   return (
     <StyledList>

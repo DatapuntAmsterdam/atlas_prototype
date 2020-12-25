@@ -8,7 +8,7 @@ import SearchType from '../../../app/pages/SearchPage/constants'
 import { routing } from '../../../app/routes'
 import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
-import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { getViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
 import PARAMETERS from '../../../store/parameters'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
@@ -98,7 +98,7 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
       return {
         pathname: routing.data.path,
         search: new URLSearchParams({
-          [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+          [PARAMETERS.VIEW]: ViewMode.Map,
           [PARAMETERS.QUERY]: `${inputValue}`,
           [PARAMETERS.LEGEND]: 'true',
           [PARAMETERS.LAYERS]: searchParams.get(PARAMETERS.LAYERS) || '',

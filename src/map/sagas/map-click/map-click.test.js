@@ -3,7 +3,7 @@ import { composeProviders } from 'redux-saga-test-plan/providers'
 import { getImageDataByLocation } from '../../../panorama/services/panorama-api/panorama-api'
 import { requestNearestDetails } from '../../../shared/ducks/data-search/actions'
 import { getSelectionType, SELECTION_TYPE } from '../../../shared/ducks/selection/selection'
-import { getViewMode, isEmbedded, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { getViewMode, isEmbedded, ViewMode } from '../../../shared/ducks/ui/ui'
 import { getPage } from '../../../store/redux-first-router/selectors'
 import { SET_MAP_CLICK_LOCATION } from '../../ducks/map/constants'
 import { getMapZoom } from '../../ducks/map/selectors'
@@ -127,7 +127,7 @@ describe('switchClickAction', () => {
           location: payload.location,
           layers: [...mockMapLayers],
           zoom: 8,
-          view: VIEW_MODE.SPLIT,
+          view: ViewMode.Split,
         }),
       )
       .run()
