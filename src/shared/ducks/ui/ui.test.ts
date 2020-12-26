@@ -25,7 +25,7 @@ import uiReducer, {
 } from './ui'
 
 describe('uiReducer', () => {
-  let state
+  let state: UiState
 
   beforeEach(() => {
     state = initialState
@@ -339,13 +339,20 @@ describe('UI selectors', () => {
   })
 
   describe('isPrintModeLandscape selector', () => {
-    let mockParameters
+    let mockParameters = {
+      printMode: true,
+      panoPageActive: false,
+      mapPageActive: false,
+      fileName: '',
+      viewMode: ViewMode.Map,
+    }
 
     beforeEach(() => {
       mockParameters = {
         printMode: true,
         panoPageActive: false,
         mapPageActive: false,
+        fileName: '',
         viewMode: ViewMode.Map,
       }
     })
@@ -356,7 +363,7 @@ describe('UI selectors', () => {
         mockParameters.printMode,
         mockParameters.panoPageActive,
         mockParameters.mapPageActive,
-        '',
+        mockParameters.fileName,
         mockParameters.viewMode,
       )
       expect(selected).toEqual(false)
@@ -367,7 +374,7 @@ describe('UI selectors', () => {
         mockParameters.printMode,
         mockParameters.panoPageActive,
         mockParameters.mapPageActive,
-        '',
+        mockParameters.fileName,
         mockParameters.viewMode,
       )
       expect(selected).toEqual(true)

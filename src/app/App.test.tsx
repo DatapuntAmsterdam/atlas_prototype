@@ -39,6 +39,11 @@ const initialState = {
   location: {
     type: `${ROUTER_NAMESPACE}/${PAGES.DATA}`,
   },
+  files: {
+    fileName: '',
+    fileUrl: '',
+    type: 'default',
+  },
 }
 const store = mockStore(initialState)
 

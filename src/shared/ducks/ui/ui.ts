@@ -10,7 +10,7 @@ import {
   isHomepage,
   isPanoPage,
 } from '../../../store/redux-first-router/selectors'
-import { getFileName } from '../files/selectors'
+import { getFileName } from '../files/files'
 
 export const REDUCER_KEY = 'ui'
 
@@ -66,7 +66,7 @@ export const initialState: UiState = {
 }
 
 export default function uiReducer(state = initialState, action: UiAction): UiState {
-  const enrichedState = {
+  const enrichedState: UiState = {
     ...state,
     ...paramsRegistry.getStateFromQueries(REDUCER_KEY, action),
   }

@@ -34,8 +34,9 @@ import { getDataSelectionPage, getGeometryFilter } from '../shared/ducks/data-se
 import {
   initialState as filesInitialState,
   REDUCER_KEY as FILES,
-} from '../shared/ducks/files/constants'
-import { getFileName, getFileUrl } from '../shared/ducks/files/selectors'
+  getFileName,
+  getFileUrl,
+} from '../shared/ducks/files/files'
 import {
   getFiltersWithoutShape,
   initialState as filterInitialState,
