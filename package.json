@@ -53,7 +53,7 @@
     "lodash.defer": "^4.1.0",
     "lodash.isequal": "^4.5.0",
     "marked": "^1.2.5",
-    "marzipano": "^0.9.1",
+    "marzipano": "^0.10.1",
     "openseadragon": "2.4.2",
     "proj4": "2.6.3",
     "proj4leaflet": "1.0.2",
