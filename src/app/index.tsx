@@ -1,6 +1,8 @@
+import { History } from 'history'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
+import { AnyAction, Store } from 'redux'
 import environment from '../environment'
 import configureStore from '../store/store'
 import App from './App'
@@ -25,7 +27,7 @@ resolveRedirects().then((hasToRedirect) => {
   }
 })
 
-function renderApp(store, history) {
+function renderApp(store: Store<any, AnyAction>, history: History) {
   // eslint-disable-next-line no-console
   console.log(
     `Dataportaal: version: ${process.env.VERSION}, deploy env: ${environment.DEPLOY_ENV}${

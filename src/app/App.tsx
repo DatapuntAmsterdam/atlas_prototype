@@ -10,7 +10,7 @@ import {
 import { MatomoProvider } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import {
   cacheExchange,
@@ -20,7 +20,6 @@ import {
   Provider as GraphQLProvider,
 } from 'urql'
 import environment from '../environment'
-import { RootState } from '../reducers/root'
 import { IDS } from '../shared/config/config'
 import { hasGlobalError } from '../shared/ducks/error/error-message'
 import {
@@ -78,19 +77,12 @@ const graphQLClient = createClient({
 
 interface AppWrapperProps {
   hasMaxWidth: boolean
-  isFullHeight: boolean
   currentPage: string
 }
 
-const AppWrapper: FunctionComponent<AppWrapperProps> = ({
-  children,
-  hasMaxWidth,
-  isFullHeight,
-  currentPage,
-}) => {
+const AppWrapper: FunctionComponent<AppWrapperProps> = ({ children, hasMaxWidth, currentPage }) => {
   const rootClasses = classNames({
     'c-dashboard--max-width': hasMaxWidth,
-    'c-dashboard--full-height': isFullHeight,
   })
 
   // Todo: don't use page types, this will be used
@@ -108,31 +100,17 @@ const AppWrapper: FunctionComponent<AppWrapperProps> = ({
   )
 }
 
-interface AppProps {
-  isFullHeight: boolean
-  currentPage: string
-  visibilityError: boolean
-  embedMode: boolean
-  homePage: boolean
-  printMode: boolean
-  printOrEmbedMode: boolean
-  printModeLandscape: boolean
-  embedPreviewMode: boolean
-  overflowScroll: boolean
-}
+const App: FunctionComponent = () => {
+  const currentPage = useSelector(getPage)
+  const embedMode = useSelector(isEmbedded)
+  const homePage = useSelector(isHomepage)
+  const printMode = useSelector(isPrintMode)
+  const printModeLandscape = useSelector(isPrintModeLandscape)
+  const embedPreviewMode = useSelector(isEmbedPreview)
+  const overflowScroll = useSelector(hasOverflowScroll)
+  const printOrEmbedMode = useSelector(isPrintOrEmbedMode)
+  const visibilityError = useSelector(hasGlobalError)
 
-const App: FunctionComponent<AppProps> = ({
-  isFullHeight,
-  visibilityError,
-  homePage,
-  currentPage,
-  embedMode,
-  printMode,
-  embedPreviewMode,
-  overflowScroll,
-  printModeLandscape,
-  printOrEmbedMode,
-}) => {
   // Todo: match with react-router paths
   const hasMaxWidth =
     homePage ||
@@ -184,11 +162,7 @@ const App: FunctionComponent<AppProps> = ({
       <GlobalStyle />
       <MatomoProvider value={matomoInstance}>
         <GraphQLProvider value={graphQLClient}>
-          <AppWrapper
-            currentPage={currentPage}
-            isFullHeight={isFullHeight}
-            hasMaxWidth={hasMaxWidth}
-          >
+          <AppWrapper currentPage={currentPage} hasMaxWidth={hasMaxWidth}>
             {/* @ts-ignore */}
             <SkipNavigationLink
               variant="primary"
@@ -236,23 +210,4 @@ const App: FunctionComponent<AppProps> = ({
   )
 }
 
-App.defaultProps = {
-  isFullHeight: false,
-  visibilityError: false,
-}
-
-const mapStateToProps = (state: RootState) => ({
-  currentPage: getPage(state),
-  embedMode: isEmbedded(state),
-  homePage: isHomepage(state),
-  printMode: isPrintMode(state),
-  printModeLandscape: isPrintModeLandscape(state),
-  embedPreviewMode: isEmbedPreview(state),
-  overflowScroll: hasOverflowScroll(state),
-  printOrEmbedMode: isPrintOrEmbedMode(state),
-  visibilityError: hasGlobalError(state),
-})
-
-const AppContainer = connect(mapStateToProps, null)(App)
-
-export default AppContainer
+export default App
