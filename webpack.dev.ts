@@ -2,6 +2,11 @@ import { merge } from 'webpack-merge'
 import { createConfig, distPath } from './webpack.common'
 
 export default merge(createConfig({ mode: 'development' }), {
+  // Workaround needed to enable HMR during development.
+  // This should be fixed automatically when webpack-dev-server v4 is used.
+  // More information: https://github.com/webpack/webpack-dev-server/issues/2758#issuecomment-710086019
+  // TODO: Remove this workaround after upgrading.
+  target: 'web',
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: {
