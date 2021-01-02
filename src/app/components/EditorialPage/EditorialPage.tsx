@@ -1,8 +1,8 @@
 import { Alert, Container, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
 import environment from '../../../environment'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
@@ -12,7 +12,7 @@ import useDocumentTitle from '../../utils/useDocumentTitle'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const BodyStyle = styled.div`
-  background-color: ${themeColor('level', 'level1')}
+  background-color: ${themeColor('tint', 'level1')};
   position: relative;
   width: 100%;
 `
@@ -21,7 +21,18 @@ const StyledAlert = styled(Alert)`
   margin-top: ${themeSpacing(2)};
 `
 
-const EditorialPage = ({
+export interface EditorialPageProps {
+  documentTitle?: string
+  loading: boolean
+  linkAction?: To
+  description?: string
+  image?: string
+  title?: string
+  lang?: string
+  error: boolean
+}
+
+const EditorialPage: FunctionComponent<EditorialPageProps> = ({
   children,
   documentTitle,
   loading,
@@ -84,18 +95,6 @@ const EditorialPage = ({
       </BodyStyle>
     </Container>
   )
-}
-
-EditorialPage.defaultProps = {
-  documentTitle: '',
-  loading: false,
-  linkAction: null,
-}
-
-EditorialPage.propTypes = {
-  documentTitle: PropTypes.string,
-  linkAction: PropTypes.shape({}),
-  loading: PropTypes.bool,
 }
 
 export default EditorialPage
