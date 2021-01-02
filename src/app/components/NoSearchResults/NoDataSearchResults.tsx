@@ -1,14 +1,10 @@
 import { Heading, Link, Paragraph } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
-import RouterLink from 'redux-first-router-link'
+import { Link as RouterLink } from 'react-router-dom'
 import { authenticateRequest } from '../../../shared/ducks/user/user'
 import { login } from '../../../shared/services/auth/auth'
-import {
-  toAdresses,
-  toCadastralObjects,
-  toEstablishments,
-} from '../../../store/redux-first-router/actions'
+import { toAddresses, toCadastralObjects, toEstablishments } from '../../links'
 import { StyledList, StyledListItem } from './NoSearchResults'
 import { formatNoResultsMessage } from './utils'
 
@@ -43,7 +39,7 @@ const NoDataSearchResults: FunctionComponent<NoDataSearchResultsProps> = ({
         </StyledListItem>
         <StyledListItem>
           Blader (en filter) door de{' '}
-          <Link variant="inline" as={RouterLink} to={toAdresses()}>
+          <Link variant="inline" as={RouterLink} to={toAddresses()}>
             adressentabel
           </Link>
           .

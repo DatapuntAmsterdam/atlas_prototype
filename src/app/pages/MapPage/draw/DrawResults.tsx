@@ -16,7 +16,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import L, { LatLng, LatLngExpression, LatLngTuple } from 'leaflet'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link as ReactRouterLink } from 'react-router-dom'
 import {
   Fragment,
   FunctionComponent,
@@ -99,7 +99,7 @@ const StyledLabel = styled(Label)`
   }
 `
 
-const TableRouterLink = styled(RouterLink)`
+const TableRouterLink = styled(ReactRouterLink)`
   flex-shrink: 0;
 `
 
@@ -249,14 +249,14 @@ const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
 
         {showDesktopVariant ? (
           <>
-            {/* @ts-ignore */}
             <Button
               as={TableRouterLink}
               variant="primaryInverted"
               title="Resultaten in tabel weergeven"
               type="button"
               iconLeft={<Table />}
-              {...({ to: config[type].toTableAction } as any)}
+              /* @ts-ignore */
+              to={config[type].toTable}
             >
               Tabel weergeven
             </Button>
@@ -271,7 +271,8 @@ const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
               size={40}
               icon={<Table />}
               iconSize={25}
-              {...({ to: config[type].toTableAction } as any)}
+              /* @ts-ignore */
+              to={config[type].toTable}
             />
           </>
         )}

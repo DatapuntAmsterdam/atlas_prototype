@@ -169,16 +169,6 @@ export const toDetailFromEndpoint = (endpoint, view) => {
   })
 }
 
-export const toConstructionFilesFromEndpoint = (endpoint) => {
-  const { id } = getDetailPageData(endpoint)
-  return {
-    type: routing.constructionFile.type,
-    payload: {
-      id,
-    },
-  }
-}
-
 export const toDatasetSearch = toSearchOfType(routing.datasetSearch.type)
 export const toSearch = toSearchOfType(routing.search.type)
 
@@ -190,33 +180,6 @@ export const toDatasetDetail = (payload) => ({
     tracking: {
       event: 'auto-suggest',
       query: payload.typedQuery,
-    },
-  },
-})
-
-export const toAdresses = () => ({
-  type: routing.addresses.type,
-  meta: {
-    query: {
-      [PARAMETERS.VIEW]: ViewMode.Full,
-    },
-  },
-})
-
-export const toCadastralObjects = () => ({
-  type: routing.cadastralObjects.type,
-  meta: {
-    query: {
-      [PARAMETERS.VIEW]: ViewMode.Full,
-    },
-  },
-})
-
-export const toEstablishments = () => ({
-  type: routing.establishments.type,
-  meta: {
-    query: {
-      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })
@@ -254,18 +217,6 @@ export const toCollectionDetail = (id, slug = '') => ({
   },
 })
 
-export const toConstructionFileViewer = (id, fileName, fileUrl) => ({
-  type: routing.constructionFile.type,
-  payload: {
-    id,
-  },
-  meta: {
-    query: {
-      [PARAMETERS.FILE]: fileName,
-      [PARAMETERS.FILE_URL]: fileUrl,
-    },
-  },
-})
 export const toDatasetPage = (dataset) => ({
   type: DATASET_ROUTE_MAPPER[dataset],
 })
