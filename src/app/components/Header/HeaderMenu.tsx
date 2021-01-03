@@ -8,18 +8,21 @@ import {
   themeColor,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { ComponentProps, FunctionComponent, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import environment from '../../../environment'
 import { HEADER_LINKS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
+import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
+import { login, logout } from '../../../shared/services/auth/auth'
 import truncateString from '../../../shared/services/truncateString/truncateString'
 import { toArticleDetail } from '../../../store/redux-first-router/actions'
 import navigationLinks from '../HomePage/services/navigationLinks'
+import { openFeedbackForm } from '../Modal/FeedbackModal'
 
-const StyledMenuInline = styled(MenuInline)`
+const StyledMenuInline = styled(MenuInline)<{ tall: boolean }>`
   background-color: ${({ tall, theme }) =>
     tall ? themeColor('tint', 'level2')({ theme }) : themeColor('tint', 'level1')({ theme })};
 `
@@ -35,17 +38,39 @@ const components = {
 }
 
 function dropFocus() {
-  document.activeElement?.blur()
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur()
+  }
 }
 
-const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) => {
+export interface HeaderMenuProps {
+  type: keyof typeof components
+}
+
+const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof StyledMenuInline>> = ({
+  type,
+  ...otherProps
+}) => {
+  const dispatch = useDispatch()
+  const user = useSelector(getUser)
   const [menuOpen, setMenuOpen] = useState(false)
   const { trackEvent } = useMatomo()
   const Menu = components[type]
 
+  function handleLogin() {
+    dispatch(authenticateRequest('inloggen'))
+    login()
+  }
+
+  function handleLogout() {
+    dispatch(authenticateRequest('uitloggen'))
+    logout()
+  }
+
   return (
+    /* @ts-ignore */
     <Menu
-      {...props}
+      {...otherProps}
       open={menuOpen}
       hasBackDrop
       onExpand={setMenuOpen}
@@ -58,14 +83,14 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
               trackEvent({
                 category: 'navigation',
                 action: 'main-menu',
-                name: title,
+                name: title ?? undefined,
               })
               dropFocus()
             }}
             as={RouterLink}
             iconLeft={<ChevronRight />}
             key={id}
-            title={title}
+            /* @ts-ignore */
             to={to}
           >
             {title}
@@ -90,7 +115,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
                   }}
                   as={RouterLink}
                   iconLeft={<ChevronRight />}
-                  title={title}
+                  /* @ts-ignore */
                   to={toArticleDetail(linkId, slug)}
                 >
                   {title}
@@ -109,7 +134,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
               name: 'Feedback',
             })
             await setMenuOpen(false)
-            showFeedbackForm()
+            openFeedbackForm()
             dropFocus()
           }}
         >
@@ -129,6 +154,7 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
               dropFocus()
             }}
             title={HEADER_LINKS.HELP.title}
+            /* @ts-ignore */
             to={toArticleDetail(
               HEADER_LINKS.HELP.id[environment.DEPLOY_ENV],
               HEADER_LINKS.HELP.slug,
@@ -142,8 +168,8 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
         <MenuItem>
           <MenuButton
             type="button"
-            onClick={(e) => {
-              login(e)
+            onClick={() => {
+              handleLogin()
               trackEvent({
                 category: 'navigation',
                 action: 'main-menu',
@@ -160,8 +186,8 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
           <MenuItem>
             <MenuButton
               type="button"
-              onClick={(e) => {
-                logout(e)
+              onClick={() => {
+                handleLogout()
                 trackEvent({
                   category: 'navigation',
                   action: 'main-menu',
@@ -178,14 +204,6 @@ const HeaderMenu = ({ type, login, logout, user, showFeedbackForm, ...props }) =
       )}
     </Menu>
   )
-}
-
-HeaderMenu.propTypes = {
-  login: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
-  showFeedbackForm: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
-  user: PropTypes.shape({}).isRequired,
 }
 
 export default HeaderMenu
