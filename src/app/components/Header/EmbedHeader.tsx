@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FunctionComponent, MouseEvent as ReactMouseEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import { hideEmbedPreview } from '../../../shared/ducks/ui/ui'
 
-/* istanbul ignore next */
-const EmbedHeader = ({ closeAction }) => {
+const EmbedHeader: FunctionComponent = () => {
+  const dispatch = useDispatch()
   const [embedLink, setEmbedLink] = useState('')
   const [iframe, setIframe] = useState('')
 
@@ -11,7 +13,7 @@ const EmbedHeader = ({ closeAction }) => {
     // Now we need to check the URL of the iFrame, as this can change
     const iframeObject = document.getElementById('atlas-iframe-map')
     const setUrlFromIframe = () => {
-      if (iframeObject) {
+      if (iframeObject instanceof HTMLIFrameElement && iframeObject.contentWindow) {
         const {
           location: { href },
         } = iframeObject.contentWindow
@@ -29,7 +31,11 @@ const EmbedHeader = ({ closeAction }) => {
     }
   }, [])
 
-  const selectField = (event) => event.target.select()
+  const selectField = (event: ReactMouseEvent<HTMLInputElement>) => {
+    if (event.target instanceof HTMLInputElement) {
+      event.target.select()
+    }
+  }
 
   return (
     <div className="u-grid">
@@ -39,7 +45,11 @@ const EmbedHeader = ({ closeAction }) => {
         </div>
         <div className="u-col-sm--9">
           <nav>
-            <button type="button" onClick={closeAction} className="c-embed-header__close" />
+            <button
+              type="button"
+              onClick={() => dispatch(hideEmbedPreview())}
+              className="c-embed-header__close"
+            />
           </nav>
         </div>
       </div>
