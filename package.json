@@ -107,7 +107,7 @@
     "@types/proj4": "^2.5.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
-    "@types/react-redux": "^7.1.12",
+    "@types/react-redux": "^7.1.15",
     "@types/react-router-dom": "^5.1.6",
     "@types/redux-first-router-link": "^1.4.4",
     "@types/redux-mock-store": "^1.0.2",
@@ -184,7 +184,7 @@
     "webpack": "^5.11.1",
     "webpack-bundle-analyzer": "^4.2.0",
     "webpack-cli": "^4.3.0",
-    "webpack-dev-server": "3.11.0",
+    "webpack-dev-server": "3.11.1",
     "webpack-merge": "^5.7.3"
   },
   "engines": {
