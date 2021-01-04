@@ -31,9 +31,6 @@ COPY .browserslistrc \
 
 COPY src ./src
 
-ARG DEBUG=false
-ENV DEBUG ${DEBUG}
-
 RUN npm run build
 
 RUN echo "`date`" > ./dist/version.txt

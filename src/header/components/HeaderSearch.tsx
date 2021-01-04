@@ -1,5 +1,5 @@
 import { srOnlyStyle } from '@amsterdam/asc-ui'
-import React, { useCallback, useRef, useState } from 'react'
+import { FunctionComponent, useCallback, useRef, useState } from 'react'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import SearchBar from '../../app/components/SearchBar'
@@ -22,7 +22,7 @@ const StyledLegend = styled.legend`
 
 const ACTIVE_ITEM_CLASS = 'auto-suggest__dropdown-item--active'
 
-const HeaderSearch: React.FC = () => {
+const HeaderSearch: FunctionComponent = () => {
   const history = useHistory()
 
   const [searchQuery, setSearchQuery] = useParam(searchQueryParam)

@@ -1,5 +1,5 @@
 import { Link, perceivedLoading, themeSpacing } from '@amsterdam/asc-ui'
-import React, { useState } from 'react'
+import { useState, FunctionComponent } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { useQuery } from 'urql'
@@ -54,7 +54,7 @@ const ContentHolderStyle = styled.nav`
   width: 100%;
 `
 
-const ContentHolder: React.FC = ({ children }) => {
+const ContentHolder: FunctionComponent = ({ children }) => {
   const headingId = useUniqueId('themes-heading')
 
   return (
@@ -69,7 +69,7 @@ const ContentHolder: React.FC = ({ children }) => {
   )
 }
 
-const PlaceholderContent: React.FC = () => {
+const PlaceholderContent: FunctionComponent = () => {
   const [numChars] = useState(getRandomInRange(8, 16))
 
   return (
@@ -85,7 +85,7 @@ type PartialFilter = Pick<Filter, 'type'> & { options: PartialFilterOption[] }
 const THEME_TYPE = 'theme'
 const PLACEHOLDER_RANGE = [...Array(12).keys()]
 
-const ThemesBlock: React.FC = () => {
+const ThemesBlock: FunctionComponent = () => {
   const [{ fetching, error, data }, executeQuery] = useQuery<{ filters: PartialFilter[] }>({
     query: getFiltersQuery,
   })

@@ -2,7 +2,7 @@ import { constants, Map as MapComponent, MapPanelProvider, useStateRef } from '@
 import { PositionPerSnapPoint } from '@amsterdam/arm-core/es/components/MapPanel/constants'
 import { hooks } from '@amsterdam/asc-ui'
 import L from 'leaflet'
-import React, { FunctionComponent, useCallback, useContext, useEffect, useState } from 'react'
+import { FunctionComponent, useCallback, useContext, useEffect, useState } from 'react'
 import styled, { createGlobalStyle, css } from 'styled-components'
 import PanoramaViewer from '../../components/PanoramaViewer/PanoramaViewer'
 import useParam from '../../utils/useParam'

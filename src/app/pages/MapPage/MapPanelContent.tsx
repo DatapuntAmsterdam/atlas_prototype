@@ -1,6 +1,6 @@
 import { MapPanel, MapPanelDrawer } from '@amsterdam/arm-core'
 import { hooks } from '@amsterdam/asc-ui'
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect, FunctionComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import MapContext from './MapContext'
 import useParam from '../../utils/useParam'
@@ -18,7 +18,10 @@ export interface MapPanelContentProps {
   currentOverlay: Overlay
 }
 
-const MapPanelContent: React.FC<MapPanelContentProps> = ({ setCurrentOverlay, currentOverlay }) => {
+const MapPanelContent: FunctionComponent<MapPanelContentProps> = ({
+  setCurrentOverlay,
+  currentOverlay,
+}) => {
   const [location] = useParam(locationParam)
   const { showDrawTool, showDrawContent } = useContext(MapContext)
   const { dataSelection } = useContext(DataSelectionContext)

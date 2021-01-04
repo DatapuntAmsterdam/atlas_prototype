@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme'
-import React from 'react'
 import Header from './Header'
 
 // Mock the HeaderSearchContainer component as its not relevant for this test

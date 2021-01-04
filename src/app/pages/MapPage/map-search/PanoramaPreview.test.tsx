@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 import PanoramaPreview from './PanoramaPreview'
 import { getPanoramaThumbnail } from '../../../../api/panorama/thumbnail'

@@ -1,8 +1,8 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { Button } from '@amsterdam/asc-ui'
 import { Download } from '@amsterdam/asc-assets'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import { FunctionComponent } from 'react'
 import environment from '../../../environment'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import isDefined from '../../../shared/services/is-defined'
@@ -15,7 +15,7 @@ type Props = {
   activeFilters: any
 }
 
-const DataSelectionDownloadButton: React.FC<Props> = ({ dataset, activeFilters }) => {
+const DataSelectionDownloadButton: FunctionComponent<Props> = ({ dataset, activeFilters }) => {
   const geometryFilter = useSelector(getGeometryFilter)
   const { trackEvent } = useMatomo()
   const filterParams = []

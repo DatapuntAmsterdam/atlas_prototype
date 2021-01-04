@@ -1,4 +1,3 @@
-import React from 'react'
 import { shallow } from 'enzyme'
 import ConstructionFiles from './ConstructionFiles'
 import { sharePage } from '../../../../shared/ducks/ui/ui'

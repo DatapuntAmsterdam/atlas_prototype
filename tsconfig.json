@@ -8,7 +8,7 @@
   ],
   "compilerOptions": {
     "strict": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowJs": true,
     "esModuleInterop": true,
     "downlevelIteration": true,

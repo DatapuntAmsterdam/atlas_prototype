@@ -1,6 +1,6 @@
 import { breakpoint, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import React, { useMemo } from 'react'
+import { useMemo, FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import formatDate from '../../utils/formatDate'
@@ -26,7 +26,7 @@ type Props = {
   date?: string
 }
 
-const ViewerInfoBar: React.FC<Props> = ({ location, date }) => {
+const ViewerInfoBar: FunctionComponent<Props> = ({ location, date }) => {
   const { x: rdX, y: rdY } = useMemo(() => wgs84ToRd(location), [location])
   const formattedDate = useMemo(
     () =>

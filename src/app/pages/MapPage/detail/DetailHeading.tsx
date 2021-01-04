@@ -1,5 +1,5 @@
 import { Heading, themeColor } from '@amsterdam/asc-ui'
-import React, { ComponentProps } from 'react'
+import { ComponentProps, FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 const StyledHeading = styled(Heading)`
@@ -8,7 +8,10 @@ const StyledHeading = styled(Heading)`
   max-width: calc(100% - 50px); // In case there's a infobox button
 `
 
-const DetailHeading: React.FC<ComponentProps<typeof Heading>> = ({ children, ...otherProps }) => (
+const DetailHeading: FunctionComponent<ComponentProps<typeof Heading>> = ({
+  children,
+  ...otherProps
+}) => (
   <StyledHeading data-testid="data-detail-subheading" forwardedAs="h4" styleAs="h2" {...otherProps}>
     {children}
   </StyledHeading>

@@ -58,7 +58,7 @@ import {
 } from '../../../map/ducks/map/actions'
 import PARAMETERS from '../../../store/parameters'
 import drawToolConfig from '../../../map/services/draw-tool/draw-tool.config'
-import { getViewMode, SET_VIEW_MODE, VIEW_MODE } from '../../ducks/ui/ui'
+import { getViewMode, SET_VIEW_MODE, ViewMode } from '../../ducks/ui/ui'
 import PAGES from '../../../app/pages'
 import BOUNDING_BOX from '../../../map/services/bounding-box.constant'
 
@@ -159,7 +159,7 @@ function* retrieveDataSelection(action) {
     const { MAX_NUMBER_OF_CLUSTERED_MARKERS } = dataSelectionConfig.datasets[dataset]
     const filtersWithoutShape = yield select(getFiltersWithoutShape)
     const markersShouldBeFetched =
-      view !== VIEW_MODE.FULL &&
+      view !== ViewMode.Full &&
       result.numberOfRecords <= MAX_NUMBER_OF_CLUSTERED_MARKERS &&
       (shape !== '[]' || Object.keys(filtersWithoutShape).length)
     if (markersShouldBeFetched) {
@@ -181,7 +181,7 @@ function* requestDataSelectionEffect() {
 
 export function* fetchDataSelectionEffect() {
   const view = yield select(getViewMode)
-  if (view === VIEW_MODE.SPLIT) {
+  if (view === ViewMode.Split) {
     yield put(closeMapPanel())
   }
 
@@ -224,7 +224,7 @@ function* setGeometryFilters({ payload }) {
     } else {
       yield call(switchPage, {
         [PARAMETERS.GEO]: geometryFilters,
-        [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
+        [PARAMETERS.VIEW]: ViewMode.Split,
       })
     }
   }

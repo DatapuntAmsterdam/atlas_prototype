@@ -1,0 +1,24 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/vsd/evenementen/63725/",
+      "title": "Feest: PANN Glitch Amsterdam"
+    }
+  },
+  "_display": "Feest: PANN Glitch Amsterdam",
+  "id": "63725",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      121425.9844746062,
+      487835.0221922546
+    ]
+  },
+  "titel": "Feest: PANN Glitch Amsterdam",
+  "url": "https://evenementen.amsterdam.nl/evenementen/2020/11/pann-glitch/",
+  "omschrijving": "PANN Glitch! is het leukste rondreizende LHBTQI+-feest van Nederland met de beste DJ’s en een Silent Disco waar je lekker los kan gaan op de lekkerste hitjes! We toeren langs verschillende steden: van Scheveningen tot Leiden, en van Tilburg tot Amsterdam!",
+  "startdatum": "2020-11-14",
+  "starttijd": "22:00:00",
+  "einddatum": null,
+  "eindtijd": "04:00:00"
+}

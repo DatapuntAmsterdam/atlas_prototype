@@ -36,11 +36,6 @@ The `Makefile` consists of other useful commands to stop, restart and rebuild th
 make help
 ```
 
-By default, debugging information is disabled in the production build. To locally run build application and have Webpack keep both `debugger` and `console` statements, run
-```
-DEBUG=true make rebuild
-```
-
 ## Testing
 
 Jest unit test

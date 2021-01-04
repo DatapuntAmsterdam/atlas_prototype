@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
 import PropTypes from 'prop-types'
-import React from 'react'
 import styled from 'styled-components'
 import { generatePath, Link } from 'react-router-dom'
 import { getDetailPageData } from '../../../../store/redux-first-router/actions'

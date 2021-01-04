@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import categoryLabelsByType from '../../../services/map-search/category-labels-by-type'
 import MapSearchResultsItem from '../map-search-results-item/MapSearchResultsItem'
 

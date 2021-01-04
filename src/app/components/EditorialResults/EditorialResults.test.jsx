@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme'
-import React from 'react'
 import { CmsType } from '../../../shared/config/cms.config'
 import EditorialResults, { IMAGE_SIZE } from './EditorialResults'
 

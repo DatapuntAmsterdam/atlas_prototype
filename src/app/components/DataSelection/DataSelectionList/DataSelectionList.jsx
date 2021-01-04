@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
 import PropTypes from 'prop-types'
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import { toDetailFromEndpoint } from '../../../../store/redux-first-router/actions'
 import DataSelectionFormatter from '../DataSelectionFormatter/DataSelectionFormatter'

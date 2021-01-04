@@ -1,7 +1,7 @@
 import { logout, getAuthHeaders } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
-import { AuthError, NotFoundError } from './errors'
+import { AuthError, NotFoundError } from './customError'
 
 interface FetchOptions extends RequestInit {
   searchParams?: UrlParams

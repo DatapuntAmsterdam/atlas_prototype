@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { BezoekAdres, FileType, HandelsNaam, SBIOmschrijving, Tags } from './Templates'
 import {

@@ -1,6 +1,5 @@
 import { cleanup, render } from '@testing-library/react'
 import { shallow } from 'enzyme'
-import React from 'react'
 import IIIFThumbnail from './IIIFThumbnail'
 
 const mockAccessToken = 'ABC'

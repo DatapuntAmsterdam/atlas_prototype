@@ -1,7 +1,7 @@
 import { NonTiledLayer } from '@amsterdam/arm-nontiled'
 import { GeoJSON, TileLayer } from '@amsterdam/react-maps'
 import { BaseIconOptions, GeoJSONOptions, Icon, Marker } from 'leaflet'
-import React, { useContext, useMemo } from 'react'
+import { useContext, useMemo, FunctionComponent } from 'react'
 import ICON_CONFIG from '../../../map/components/leaflet/services/icon-config.constant'
 import MAP_CONFIG from '../../../map/services/map.config'
 import DrawMapVisualization from './draw/DrawMapVisualization'
@@ -27,7 +27,7 @@ const detailGeometryOptions: GeoJSONOptions = {
   },
 }
 
-const LeafletLayers: React.FC = () => {
+const LeafletLayers: FunctionComponent = () => {
   const { legendLeafletLayers, detailFeature, showDrawContent } = useContext(MapContext)
   const tmsLayers = useMemo(
     () => legendLeafletLayers.filter((overlay): overlay is TmsOverlay => overlay.type === 'tms'),

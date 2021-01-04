@@ -1,10 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import { Alert, Heading, Paragraph, themeColor, themeSpacing, Button } from '@amsterdam/asc-ui'
 import { Enlarge } from '@amsterdam/asc-assets'
-import React, { Fragment, FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { ViewMode } from '../../../shared/ducks/ui/ui'
 import LocationSearchList from './LocationSearchList'
 import { getUserScopes } from '../../../shared/ducks/user/user'
 import { getNumberOfResults } from '../../../shared/ducks/data-search/selectors'
@@ -74,7 +74,7 @@ const LocationSearchResults: FunctionComponent<Props> = ({ searchResults }) => {
                       iconLeft={<Enlarge />}
                       type="button"
                       onClick={() =>
-                        dispatch(toDetailFromEndpoint(result.more.endpoint, VIEW_MODE.SPLIT))
+                        dispatch(toDetailFromEndpoint(result.more.endpoint, ViewMode.Split))
                       }
                     >
                       {result.more.label}

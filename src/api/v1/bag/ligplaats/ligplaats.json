@@ -1,0 +1,134 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020001025520/?format=json"
+    }
+  },
+  "_display": "Nieuwe Keizersgracht 368G",
+  "ligplaatsidentificatie": "0363020001025520",
+  "date_modified": "2020-12-13T23:26:16.529667Z",
+  "document_mutatie": "2010-09-09",
+  "document_nummer": "GV00000407",
+  "begin_geldigheid": "2010-09-09",
+  "einde_geldigheid": null,
+  "status": "Plaats aangewezen",
+  "bron": null,
+  "indicatie_geconstateerd": false,
+  "aanduiding_in_onderzoek": false,
+  "bbox": [
+    122281.394,
+    486490.307,
+    122298.367,
+    486500.539
+  ],
+  "geometrie": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          122283.087,
+          486490.307
+        ],
+        [
+          122298.367,
+          486494.877
+        ],
+        [
+          122296.674,
+          486500.539
+        ],
+        [
+          122281.394,
+          486495.969
+        ],
+        [
+          122283.087,
+          486490.307
+        ]
+      ]
+    ]
+  },
+  "hoofdadres": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000513076/?format=json"
+      }
+    },
+    "_display": "Nieuwe Keizersgracht 368G",
+    "landelijk_id": "0363200000513076",
+    "type_adres": "Hoofdadres",
+    "vbo_status": "Plaats aangewezen",
+    "dataset": "bag"
+  },
+  "adressen": {
+    "count": 1,
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json&ligplaats=0363020001025520"
+  },
+  "buurt": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/buurt/03630000000516/?format=json"
+      }
+    },
+    "_display": "Weesperbuurt (A08a)",
+    "code": "08a",
+    "naam": "Weesperbuurt",
+    "dataset": "gebieden"
+  },
+  "_buurtcombinatie": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052031/?format=json"
+      }
+    },
+    "_display": "Weesperbuurt/Plantage (08)",
+    "naam": "Weesperbuurt/Plantage",
+    "vollcode": "A08",
+    "dataset": "gebieden"
+  },
+  "_stadsdeel": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/?format=json"
+      }
+    },
+    "_display": "Centrum (A)",
+    "code": "A",
+    "naam": "Centrum",
+    "dataset": "gebieden"
+  },
+  "_gebiedsgerichtwerken": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX02/?format=json"
+      }
+    },
+    "_display": "Centrum-Oost (DX02)",
+    "code": "DX02",
+    "naam": "Centrum-Oost",
+    "dataset": "gebieden"
+  },
+  "_grootstedelijkgebied": null,
+  "_gemeente": {
+    "_display": "Amsterdam",
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/brk/gemeente/Amsterdam/?format=json"
+      }
+    },
+    "naam": "Amsterdam",
+    "code": "0363",
+    "dataset": "bag"
+  },
+  "_woonplaats": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/bag/v1.1/woonplaats/3594/?format=json"
+      }
+    },
+    "_display": "Amsterdam",
+    "landelijk_id": "3594",
+    "dataset": "bag"
+  },
+  "dataset": "bag"
+}

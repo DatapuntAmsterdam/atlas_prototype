@@ -1,5 +1,5 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { memo } from 'react'
+import { memo, FunctionComponent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Filter, FilterType } from '../../models/filter'
 import { getFilterValues, setFilterValues, setPage } from '../../pages/SearchPage/SearchPageDucks'
@@ -29,7 +29,7 @@ export function getFilterComponent(filterType: FilterType) {
   }
 }
 
-const SearchFilter: React.FC<SearchFilterProps> = ({ filter, totalCount, hideCount }) => {
+const SearchFilter: FunctionComponent<SearchFilterProps> = ({ filter, totalCount, hideCount }) => {
   const { type, filterType, label, options } = filter
   const { trackEvent } = useMatomo()
   const dispatch = useDispatch()

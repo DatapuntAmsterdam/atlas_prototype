@@ -23,27 +23,25 @@ export default merge(createConfig({ mode: 'production' }), {
       new TerserPlugin({
         terserOptions: {
           compress: {
-            drop_debugger: !debugMode,
+            // Do not drop debugger statements, we might want to run a production build locally for testing.
+            // Linting rules will ensure this never actually happens with true production images.
+            drop_debugger: false,
           },
-          sourceMap: true,
         },
       }),
     ],
-    namedChunks: true,
-    namedModules: true,
-    moduleIds: 'named',
-    chunkIds: 'named',
-    runtimeChunk: false,
+    runtimeChunk: 'single',
     splitChunks: {
       maxInitialRequests: 20,
       chunks: 'async',
       maxSize: 125000,
       minChunks: 1,
-      name: true,
       cacheGroups: {
         default: false,
       },
     },
+    moduleIds: 'deterministic',
+    chunkIds: 'deterministic',
   },
   plugins: [
     new GenerateSW({

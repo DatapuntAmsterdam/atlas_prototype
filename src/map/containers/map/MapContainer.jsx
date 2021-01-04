@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { LatLngBounds } from 'leaflet'
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => ({
   showMapLink: isMapLinkVisible(state),
 })
 
-class MapContainer extends React.Component {
+class MapContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {

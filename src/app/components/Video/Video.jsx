@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 
-import React from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class Video extends React.Component {
+class Video extends Component {
   constructor(...options) {
     super(...options)
 

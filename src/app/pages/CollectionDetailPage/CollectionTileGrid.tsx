@@ -5,7 +5,7 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
+import { Fragment, FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { Tile, TileLabel } from '../../components/Tile'
 import TileGrid from '../../components/TileGrid/TileGrid'
@@ -70,7 +70,7 @@ const GRID_ITEM_TEMPLATE: Template = {
 
 const GRID_TEMPLATE: SizeOnBreakpoint = { mobileL: [1, 1], tabletM: [1, 4], laptop: [1, 5] }
 
-const CollectionTileGrid: React.FC<Props> = ({ results, loading, title, description }) => (
+const CollectionTileGrid: FunctionComponent<Props> = ({ results, loading, title, description }) => (
   <TileGrid grid={GRID_TEMPLATE}>
     <TileGridItem span={{ mobileL: [2, 2] }}>
       <Tile as="div" isLoading={loading}>
@@ -83,7 +83,7 @@ const CollectionTileGrid: React.FC<Props> = ({ results, loading, title, descript
     </TileGridItem>
     {results.map(({ id, linkProps, teaserImage, shortTitle, title: tileTitle }, i) => {
       // Only with 3 items, the first tile (the biggest) shouldn't have the compact style
-      const Provider = results.length === 3 && i === 0 ? React.Fragment : CompactThemeProvider
+      const Provider = results.length === 3 && i === 0 ? Fragment : CompactThemeProvider
       const span = GRID_ITEM_TEMPLATE[results.length][i]
 
       return (

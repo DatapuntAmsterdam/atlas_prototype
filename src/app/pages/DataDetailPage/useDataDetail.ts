@@ -5,8 +5,8 @@ import { getCurrentEndpoint } from '../../../map/ducks/detail/selectors'
 import { fetchDetailData, getServiceDefinition } from '../../../map/services/map'
 import mapFetch from '../../../map/services/map-fetch/map-fetch'
 import { clearMapDetail, showDetail } from '../../../shared/ducks/detail/actions'
-import { getViewMode, setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
-import { AuthError, NotFoundError } from '../../../shared/services/api/errors'
+import { getViewMode, setViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
+import { AuthError, NotFoundError } from '../../../shared/services/api/customError'
 import getGeometry from '../../../shared/services/geometry/geometry'
 import { routing } from '../../routes'
 import useAuthScope from '../../utils/useAuthScope'
@@ -74,9 +74,9 @@ export default function useDataDetail() {
       // When a detail doesn't have a geometry, it can only be displayed in VIEWMODE.FULL
       // Some endpoints only return a geometry when the user is authenticated e.g. authorized to view it
       if (!geometry) {
-        dispatch(setViewMode(VIEW_MODE.FULL))
-      } else if (view !== VIEW_MODE.MAP) {
-        dispatch(setViewMode(VIEW_MODE.SPLIT))
+        dispatch(setViewMode(ViewMode.Full))
+      } else if (view !== ViewMode.Map) {
+        dispatch(setViewMode(ViewMode.Split))
       }
       return {
         ...mapDetail,

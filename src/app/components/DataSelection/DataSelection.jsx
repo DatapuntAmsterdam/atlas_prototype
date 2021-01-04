@@ -12,7 +12,6 @@ import {
 } from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 import Link from 'redux-first-router-link'
@@ -23,7 +22,7 @@ import {
   getDataSelectionResult,
 } from '../../../shared/ducks/data-selection/selectors'
 import { getFilters } from '../../../shared/ducks/filters/filters'
-import { setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { setViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
 import { getUser, getUserScopes } from '../../../shared/ducks/user/user'
 import { SCOPES } from '../../../shared/services/auth/auth'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
@@ -70,15 +69,15 @@ const DataSelection = () => {
   const userScopes = useSelector(getUserScopes)
 
   // Local state
-  const showHeader = view === VIEW_MODE.SPLIT || !isLoading
-  const showFilters = view !== VIEW_MODE.SPLIT && numberOfRecords > 0
+  const showHeader = view === ViewMode.Split || !isLoading
+  const showFilters = view !== ViewMode.Split && numberOfRecords > 0
   const { MAX_AVAILABLE_PAGES, MAX_NUMBER_OF_CLUSTERED_MARKERS } = DATA_SELECTION_CONFIG.datasets[
     dataset
   ]
 
   const showMessageMaxPages = MAX_AVAILABLE_PAGES && currentPage > MAX_AVAILABLE_PAGES
   const showMessageClusteredMarkers =
-    view === VIEW_MODE.SPLIT && numberOfRecords > MAX_NUMBER_OF_CLUSTERED_MARKERS
+    view === ViewMode.Split && numberOfRecords > MAX_NUMBER_OF_CLUSTERED_MARKERS
 
   const datasetScope = DATA_SELECTION_CONFIG.datasets[dataset].AUTH_SCOPE
   const authScopeError = datasetScope ? !userScopes.includes(datasetScope) : false
@@ -92,7 +91,7 @@ const DataSelection = () => {
   const showButtons = dataset !== 'dcatd'
   const viewAng = VIEWS_TO_PARAMS[view]
   const datasetTitle = DATA_SELECTION_CONFIG.datasets[dataset].TITLE
-  const showTabs = viewAng === VIEWS_TO_PARAMS[VIEW_MODE.SPLIT]
+  const showTabs = viewAng === VIEWS_TO_PARAMS[ViewMode.Split]
   const tabs = [DATASETS.BAG, DATASETS.HR, DATASETS.BRK].map((ds) => ({
     dataset: ds,
     title: DATA_SELECTION_CONFIG.datasets[ds].TITLE_TAB,
@@ -103,7 +102,7 @@ const DataSelection = () => {
   const showNumberOfRecords =
     numberOfRecords > 0 && DATA_SELECTION_CONFIG.datasets[dataset].SHOW_NUMBER_OF_RECORDS
   const showDownloadButton =
-    viewAng !== VIEWS_TO_PARAMS[VIEW_MODE.SPLIT] &&
+    viewAng !== VIEWS_TO_PARAMS[ViewMode.Split] &&
     numberOfRecords > 0 &&
     (!config.AUTH_SCOPE || user.scopes.includes(config.AUTH_SCOPE))
   const initialTab = tabs.find(({ isActive }) => isActive)?.dataset
@@ -116,14 +115,14 @@ const DataSelection = () => {
             {showButtons && (
               <div className="u-pull--right qa-buttons">
                 <div className="u-inline-block u-margin__right--1">
-                  {viewAng === VIEWS_TO_PARAMS[VIEW_MODE.FULL] ? (
+                  {viewAng === VIEWS_TO_PARAMS[ViewMode.Full] ? (
                     <Button
                       variant="primaryInverted"
                       as={Link}
                       title="Resultaten op de kaart weergeven"
                       iconSize={21}
                       iconLeft={<Map />}
-                      to={setViewMode(VIEW_MODE.SPLIT, 'kaart-weergeven')}
+                      to={setViewMode(ViewMode.Split, 'kaart-weergeven')}
                     >
                       Kaart weergeven
                     </Button>
@@ -134,7 +133,7 @@ const DataSelection = () => {
                       title="Resultaten in tabel weergeven"
                       iconSize={21}
                       iconLeft={<Table />}
-                      to={setViewMode(VIEW_MODE.FULL, 'tabel-weergeven')}
+                      to={setViewMode(ViewMode.Full, 'tabel-weergeven')}
                     >
                       Tabel weergeven
                     </Button>
@@ -244,15 +243,15 @@ const DataSelection = () => {
 
                 {numberOfRecords > 0 ? (
                   <div>
-                    {view === VIEW_MODE.FULL && <DataSelectionTable content={data} />}
-                    {view === VIEW_MODE.SPLIT && <DataSelectionList content={data} />}
+                    {view === ViewMode.Full && <DataSelectionTable content={data} />}
+                    {view === ViewMode.Split && <DataSelectionList content={data} />}
                     <LegacyPagination
                       {...{
                         currentPage,
                         numberOfPages,
                       }}
                     />
-                    {view === VIEW_MODE.FULL && (
+                    {view === ViewMode.Full && (
                       <div className="u-row">
                         <div className="u-col-sm--12">
                           <div className="u-margin__top--4">

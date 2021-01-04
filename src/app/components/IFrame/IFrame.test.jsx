@@ -1,4 +1,3 @@
-import React from 'react'
 import { shallow } from 'enzyme'
 import IFrame from './IFrame'
 import setIframeSize from '../../../shared/services/set-iframe-size/setIframeSize'

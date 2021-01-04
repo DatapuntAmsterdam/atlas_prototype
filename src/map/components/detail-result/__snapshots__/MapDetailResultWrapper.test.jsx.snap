@@ -4,43 +4,24 @@ exports[`MapDetailResultWrapper should not render empty panoUrl 1`] = `
 <section
   className="map-detail-result"
 >
-  <header
-    className="
-      map-detail-result__header
-      map-detail-result__header--no-pano
-    "
-  >
-    <Styled(Link)
-      as={null}
-      title="Panoramabeeld tonen"
-      to="/link"
-    >
-      <img
-        alt="Panoramabeeld"
-        className="map-detail-result__header-pano"
-        height="292"
-        src="/foo"
-        width="438"
-      />
-      <div
-        className="map-detail-result__header-container"
-      >
-        <h1
-          className="map-detail-result__header-title"
-        >
-          title
-        </h1>
-        <h2
-          className="map-detail-result__header-subtitle"
-        >
-          subTitle
-        </h2>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-detail-result__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        title
+      </Heading>
+      <Heading
+        as="h2"
+        styleAs="h6"
+      >
+        subTitle
+      </Heading>
+    </styled.header>
     <ul>
       <li>
         Item 1
@@ -75,38 +56,18 @@ exports[`MapDetailResultWrapper should not render empty sub title 1`] = `
 <section
   className="map-detail-result"
 >
-  <header
-    className="
-      map-detail-result__header
-      map-detail-result__header--no-pano
-    "
-  >
-    <Styled(Link)
-      as={null}
-      title="Panoramabeeld tonen"
-      to="/link"
-    >
-      <img
-        alt="Panoramabeeld"
-        className="map-detail-result__header-pano"
-        height="292"
-        src="/foo"
-        width="438"
-      />
-      <div
-        className="map-detail-result__header-container"
-      >
-        <h1
-          className="map-detail-result__header-title"
-        >
-          title
-        </h1>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-detail-result__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        title
+      </Heading>
+    </styled.header>
     <ul>
       <li>
         Item 1
@@ -141,38 +102,18 @@ exports[`MapDetailResultWrapper should not render missing children 1`] = `
 <section
   className="map-detail-result"
 >
-  <header
-    className="
-      map-detail-result__header
-      map-detail-result__header--no-pano
-    "
-  >
-    <Styled(Link)
-      as={null}
-      title="Panoramabeeld tonen"
-      to="/link"
-    >
-      <img
-        alt="Panoramabeeld"
-        className="map-detail-result__header-pano"
-        height="292"
-        src="/foo"
-        width="438"
-      />
-      <div
-        className="map-detail-result__header-container"
-      >
-        <h1
-          className="map-detail-result__header-title"
-        >
-          title
-        </h1>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-detail-result__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        title
+      </Heading>
+    </styled.header>
     <footer
       className="map-search-results__footer"
     >
@@ -199,38 +140,18 @@ exports[`MapDetailResultWrapper should not render missing sub title 1`] = `
 <section
   className="map-detail-result"
 >
-  <header
-    className="
-      map-detail-result__header
-      map-detail-result__header--no-pano
-    "
-  >
-    <Styled(Link)
-      as={null}
-      title="Panoramabeeld tonen"
-      to="/link"
-    >
-      <img
-        alt="Panoramabeeld"
-        className="map-detail-result__header-pano"
-        height="292"
-        src="/foo"
-        width="438"
-      />
-      <div
-        className="map-detail-result__header-container"
-      >
-        <h1
-          className="map-detail-result__header-title"
-        >
-          title
-        </h1>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-detail-result__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        title
+      </Heading>
+    </styled.header>
     <ul>
       <li>
         Item 1
@@ -265,43 +186,24 @@ exports[`MapDetailResultWrapper should render everything 1`] = `
 <section
   className="map-detail-result"
 >
-  <header
-    className="
-      map-detail-result__header
-      map-detail-result__header--no-pano
-    "
-  >
-    <Styled(Link)
-      as={null}
-      title="Panoramabeeld tonen"
-      to="/link"
-    >
-      <img
-        alt="Panoramabeeld"
-        className="map-detail-result__header-pano"
-        height="292"
-        src="/foo"
-        width="438"
-      />
-      <div
-        className="map-detail-result__header-container"
-      >
-        <h1
-          className="map-detail-result__header-title"
-        >
-          title
-        </h1>
-        <h2
-          className="map-detail-result__header-subtitle"
-        >
-          subTitle
-        </h2>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-detail-result__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        title
+      </Heading>
+      <Heading
+        as="h2"
+        styleAs="h6"
+      >
+        subTitle
+      </Heading>
+    </styled.header>
     <ul>
       <li>
         Item 1

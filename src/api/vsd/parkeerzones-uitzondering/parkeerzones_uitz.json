@@ -1,0 +1,41 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/vsd/parkeerzones_uitz/23/",
+      "title": "OW20_U10"
+    }
+  },
+  "_display": "OW20_U10",
+  "ogc_fid": 23,
+  "wkb_geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          119785.124244665,
+          487112.67238129914
+        ],
+        [
+          119818.34624385055,
+          487124.6888493637
+        ],
+        [
+          119827.53530750671,
+          487121.1545941877
+        ],
+        [
+          119825.41475481441,
+          487059.6585529809
+        ]
+      ]
+    ]
+  },
+  "gebied_code": "OW20_U10",
+  "begin_datum_gebied": "2010-01-01",
+  "eind_datum_gebied": null,
+  "domein_code": "363",
+  "gebruiks_doel": "VERGUNP",
+  "gebied_naam": "Bilderdijkstraat",
+  "omschrijving": "Uw parkeervergunning geldt niet van ma t/m za 10.00 tot 18.00 uur.",
+  "show": "TRUE"
+}

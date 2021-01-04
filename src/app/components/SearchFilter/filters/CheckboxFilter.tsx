@@ -1,9 +1,9 @@
 import { Checkbox, Label } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { FilterProps } from '../models'
 import { formatOptionLabel } from '../utils'
 
-const CheckboxFilter: React.FC<FilterProps> = ({
+const CheckboxFilter: FunctionComponent<FilterProps> = ({
   type,
   options,
   hideCount,

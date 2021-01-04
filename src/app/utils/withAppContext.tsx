@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
 import { ThemeProvider } from '@amsterdam/asc-ui'

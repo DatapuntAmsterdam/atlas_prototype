@@ -1,0 +1,52 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/woonplaats/3594/?format=json"
+    }
+  },
+  "_display": "Amsterdam",
+  "woonplaatsidentificatie": "3594",
+  "date_modified": "2020-12-13T23:25:52.240648Z",
+  "document_mutatie": "2014-01-10",
+  "document_nummer": "GV00001729_AC00AC",
+  "begin_geldigheid": "2014-01-10",
+  "einde_geldigheid": null,
+  "naam": "Amsterdam",
+  "gemeente": {
+    "_display": "Amsterdam",
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/brk/gemeente/Amsterdam/?format=json"
+      }
+    },
+    "naam": "Amsterdam",
+    "code": "0363",
+    "dataset": "bag"
+  },
+  "geometrie": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            133164.494,
+            492181.711
+          ],
+          [
+            133134.952,
+            492194.636
+          ],
+          [
+            133107.918,
+            492206.968
+          ]
+        ]
+      ]
+    ]
+  },
+  "openbare_ruimtes": {
+    "count": 6352,
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/?format=json&woonplaats=3594"
+  },
+  "dataset": "bag"
+}

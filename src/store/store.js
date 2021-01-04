@@ -17,15 +17,8 @@ import setQueriesFromStateMiddleware from './middleware/setQueriesFromStateMiddl
 import paramsRegistry from './params-registry'
 import './queryParameters'
 
-const configureStore = (storybook = false, req) => {
+const configureStore = () => {
   const routesMap = routes
-
-  const ssrOptions = req
-    ? {
-        initialEntries: [req.path],
-      }
-    : {}
-
   const routingOptions = {
     querySerializer: queryString,
     restoreScroll: restoreScroll({
@@ -35,7 +28,6 @@ const configureStore = (storybook = false, req) => {
     }),
     initialDispatch: false,
     createHistory: typeof window === 'undefined' ? createMemoryHistory : createBrowserHistory,
-    ...ssrOptions,
   }
   const {
     reducer: routeReducer,
@@ -53,7 +45,7 @@ const configureStore = (storybook = false, req) => {
       : compose
   const sagaMiddleware = createSagaMiddleware()
 
-  const allMiddleware = [
+  const middleware = [
     // Todo AfterBeta remove from here
     preserveUrlParametersMiddleware,
     routeMiddleware,
@@ -64,12 +56,6 @@ const configureStore = (storybook = false, req) => {
     matomoMiddleware,
     sagaMiddleware,
   ]
-
-  let middleware = allMiddleware
-
-  if (storybook) {
-    middleware = [routeMiddleware, documentHeadMiddleware, matomoMiddleware, sagaMiddleware]
-  }
 
   const enhancer = composeEnhancers(routeEnhancer, applyMiddleware(...middleware))
   const store = createStore(rootReducer(routeReducer), undefined, enhancer)

@@ -1,0 +1,40 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/meetbouten/meetbout/10381459/?format=json"
+    }
+  },
+  "_display": "10381459 (omg. Da Costastraat 19A)",
+  "meetboutidentificatie": "10381459",
+  "buurt": "E17a",
+  "x_coordinaat": "120015.90",
+  "y_coordinaat": "487060.80",
+  "hoogte_nap": "1.8181",
+  "zakking_cumulatief": "3.0000000000000",
+  "datum": "2000-01-03",
+  "bouwblokzijde": "",
+  "eigenaar": "",
+  "beveiligd": null,
+  "stadsdeel": "E",
+  "stadsdeel_link": "https://api.data.amsterdam.nl/gebieden/stadsdeel/E",
+  "adres": "Da Costastraat 19A",
+  "locatie": "",
+  "zakkingssnelheid": "0.5000000000000",
+  "status": "actueel",
+  "bouwblok": "AD20",
+  "bouwblok_link": "https://api.data.amsterdam.nl/gebieden/bouwblok/AD20",
+  "blokeenheid": 0,
+  "rollaag": "https://api.data.amsterdam.nl/meetbouten/rollaag/54/?format=json",
+  "metingen": {
+    "count": 5,
+    "href": "https://api.data.amsterdam.nl/meetbouten/meting/?format=json?meetbout=10381459"
+  },
+  "geometrie": {
+    "type": "Point",
+    "coordinates": [
+      120015.9,
+      487060.8
+    ]
+  },
+  "dataset": "meetbouten"
+}

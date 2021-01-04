@@ -1,4 +1,3 @@
-import React from 'react'
 import { getIframeUrl } from '../../../shared/services/embed-url/embed-url'
 
 const EmbedIframeComponent = () => (

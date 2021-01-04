@@ -8,7 +8,7 @@ import {
   Row,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import environment from '../../../environment'
 import { cmsConfig } from '../../../shared/config/config'

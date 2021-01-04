@@ -114,7 +114,9 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
                     corejs: 3,
                   },
                 ],
-                '@babel/preset-react',
+                ['@babel/preset-react', {
+                  runtime: 'automatic',
+                }],
                 '@babel/preset-typescript',
               ],
               plugins: [
@@ -219,10 +221,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       ],
     },
     plugins: [
-      new CleanWebpackPlugin({
-        // Prevent multiple cleanups, since we're using multiple configs (see: https://github.com/johnagan/clean-webpack-plugin/issues/122).
-        cleanOnceBeforeBuildPatterns: [],
-      }),
+      new CleanWebpackPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           { from: './public/', to: './assets/' },
@@ -250,6 +249,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           },
         },
         styles: {
+          keepAttributes: true,
           filename: path.join(__dirname, 'src/shared/styles/config/mixins/_sprites.scss'),
         },
       }),

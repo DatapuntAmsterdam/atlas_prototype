@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import { useState, FunctionComponent } from 'react'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Column, Heading, Link, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import RouterLink from 'redux-first-router-link'
@@ -71,7 +71,7 @@ const MAX_LENGTH = 6
 
 const Gallery: FunctionComponent<GalleryProps> = ({ allFiles, id, access, ...otherProps }) => {
   const lessFiles = allFiles.slice(0, MAX_LENGTH)
-  const [files, setFiles] = React.useState(lessFiles)
+  const [files, setFiles] = useState(lessFiles)
 
   const { scopes } = getState().user
 

@@ -1,11 +1,11 @@
-import React from 'react'
+import { useState } from 'react'
 import fileSaver from 'file-saver'
 
 function useDownload(): [
   boolean,
   (url: string, options: Object, fileName?: string) => Promise<void>,
 ] {
-  const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = useState(false)
 
   async function downloadFile(url: string, options = {}, fileName = '') {
     setLoading(true)

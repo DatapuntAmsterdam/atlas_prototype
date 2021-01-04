@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { breakpoint, Column, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { CMSResultItem } from '../../utils/useFromCMS'
 import CardList from './CardList'
@@ -44,7 +44,7 @@ type Props = {
   loading: boolean
 }
 
-const CardListBlock: React.FC<Props> = ({ results, loading, ...otherProps }) => (
+const CardListBlock: FunctionComponent<Props> = ({ results, loading, ...otherProps }) => (
   <StyledRow hasMargin={false} {...otherProps}>
     <StyledOuterColumn
       span={{

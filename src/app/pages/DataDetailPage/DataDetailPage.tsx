@@ -1,5 +1,5 @@
 import { Container, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import PromiseResult from '../../components/PromiseResult/PromiseResult'

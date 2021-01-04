@@ -1,5 +1,5 @@
 import { Column, Container, Heading, Row } from '@amsterdam/asc-ui'
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { getMetadata } from '../../../api/metadata'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import PromiseResult from '../../components/PromiseResult/PromiseResult'

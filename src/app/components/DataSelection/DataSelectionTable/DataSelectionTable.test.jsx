@@ -1,4 +1,3 @@
-import React from 'react'
 import { shallow } from 'enzyme'
 import DataSelectionTable from './DataSelectionTable'
 import { getDetailPageData } from '../../../../store/redux-first-router/actions'

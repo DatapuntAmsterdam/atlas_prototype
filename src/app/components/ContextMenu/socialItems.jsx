@@ -1,6 +1,5 @@
 import { Email, FacebookPadded, Linkedin, Twitter } from '@amsterdam/asc-assets'
 import { ContextMenuItem, Icon } from '@amsterdam/asc-ui'
-import React from 'react'
 import getShareUrl from '../../../shared/services/share-url/share-url'
 
 const socialItemsArray = [
@@ -34,7 +33,7 @@ const socialItems = (openSharePage) => {
   const handlePageShare = (target) => {
     openSharePage(target)
 
-    const link = getShareUrl(target, window)
+    const link = getShareUrl(target)
     window.open(link.url, link.target)
   }
 

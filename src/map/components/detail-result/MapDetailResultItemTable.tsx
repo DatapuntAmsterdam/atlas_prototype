@@ -1,12 +1,12 @@
 import { Divider } from '@amsterdam/asc-ui'
-import React, { Fragment } from 'react'
+import { FunctionComponent, Fragment } from 'react'
 import { DetailResultItemTable } from '../../types/details'
 
 export interface MapDetailResultItemTableProps {
   item: DetailResultItemTable
 }
 
-const MapDetailResultItemTable: React.FC<MapDetailResultItemTableProps> = ({ item }) => (
+const MapDetailResultItemTable: FunctionComponent<MapDetailResultItemTableProps> = ({ item }) => (
   <>
     {item.values?.map((value, index) => (
       // eslint-disable-next-line react/no-array-index-key

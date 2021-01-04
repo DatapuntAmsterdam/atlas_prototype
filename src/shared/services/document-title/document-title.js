@@ -2,14 +2,14 @@ import { routing } from '../../../app/routes'
 import GLOSSARY from '../../../detail/services/glossary.constant'
 import PARAMETERS from '../../../store/parameters'
 import { FETCH_DETAIL_SUCCESS } from '../../ducks/detail/constants'
-import { VIEW_MODE } from '../../ducks/ui/ui'
+import { ViewMode } from '../../ducks/ui/ui'
 
 export const mapDocumentTitle = (action, defaultTitle) => {
   let pageTitle = defaultTitle
   const view = action?.meta?.query?.[PARAMETERS.VIEW] ?? ''
   const embed = action?.meta?.query?.[PARAMETERS.EMBED] ?? 'false'
 
-  if (view === VIEW_MODE.MAP) {
+  if (view === ViewMode.Map) {
     pageTitle = 'Grote kaart'
   }
   if (embed === 'true') {

@@ -1,8 +1,7 @@
 import { breakpoint, Link, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { ViewMode } from '../../../shared/ducks/ui/ui'
 import { toDataSearchType, toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
 import formatCount from '../../utils/formatCount'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
@@ -37,7 +36,7 @@ const DataList = ({ type, label, count, results, withPagination }) => (
         {results.map((location) => (
           <li key={location.id}>
             <StyledLink
-              to={toDetailFromEndpoint(location.endpoint, VIEW_MODE.SPLIT)}
+              to={toDetailFromEndpoint(location.endpoint, ViewMode.Split)}
               forwardedAs={RouterLink}
               inList
             >

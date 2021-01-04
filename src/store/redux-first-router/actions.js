@@ -1,7 +1,7 @@
 import { ROUTER_NAMESPACE, routing } from '../../app/routes'
 import { HEADER_LINKS } from '../../shared/config/config'
 import { DATASET_ROUTE_MAPPER } from '../../shared/ducks/data-selection/constants'
-import { VIEW_MODE } from '../../shared/ducks/ui/ui'
+import { ViewMode } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../parameters'
 import environment from '../../environment'
 
@@ -94,17 +94,17 @@ export const toMap = (preserve = false, forceSaga = true) => ({
     preserve,
     forceSaga,
     additionalParams: {
-      [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+      [PARAMETERS.VIEW]: ViewMode.Map,
     },
     query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+      [PARAMETERS.VIEW]: ViewMode.Map,
     },
   },
 })
 
 export const toMapWithLegendOpen = (layers) => {
   const additionalParams = {
-    [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+    [PARAMETERS.VIEW]: ViewMode.Map,
     [PARAMETERS.LEGEND]: true,
     [PARAMETERS.LAYERS]: layers,
   }
@@ -142,7 +142,7 @@ export const toPanoramaAndPreserveQuery = (
     heading,
     ...(reference.length === 3 ? { [PARAMETERS.DETAIL_REFERENCE]: reference } : {}),
     ...(pageReference ? { [PARAMETERS.PAGE_REFERENCE]: pageReference } : {}),
-    [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
+    [PARAMETERS.VIEW]: ViewMode.Split,
   })
 
 export const extractIdEndpoint = (endpoint) => {
@@ -213,7 +213,7 @@ export const toAdresses = () => ({
   type: routing.addresses.type,
   meta: {
     query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.FULL,
+      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })
@@ -222,7 +222,7 @@ export const toCadastralObjects = () => ({
   type: routing.cadastralObjects.type,
   meta: {
     query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.FULL,
+      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })
@@ -231,7 +231,7 @@ export const toEstablishments = () => ({
   type: routing.establishments.type,
   meta: {
     query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.FULL,
+      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })
@@ -289,7 +289,7 @@ export const toDatasetsTableWithFilter = (datasetType, filter) => ({
   meta: {
     additionalParams: {
       ...(filter ? { [PARAMETERS.FILTERS]: filter } : {}),
-      [PARAMETERS.VIEW]: VIEW_MODE.FULL,
+      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })

@@ -1,5 +1,4 @@
 import { cleanup, fireEvent, render } from '@testing-library/react'
-import React from 'react'
 import * as ducks from './SearchPageDucks'
 import SearchSort from './SearchSort'
 

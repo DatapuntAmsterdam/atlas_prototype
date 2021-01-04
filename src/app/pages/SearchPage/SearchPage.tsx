@@ -1,7 +1,7 @@
 import { Container, Row } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { clearAllBodyScrollLocks, enableBodyScroll } from 'body-scroll-lock'
-import React, { memo, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import { isAllResultsPage, isDataSearchPage, isMapSearchPage } from '../../pages'

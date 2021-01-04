@@ -1,4 +1,4 @@
-import React from 'react'
+import { useContext } from 'react'
 import * as reactRedux from 'react-redux'
 import { shallow } from 'enzyme'
 import useDocumentTitle from './useDocumentTitle'
@@ -23,9 +23,9 @@ describe('useDocumentTitle', () => {
   reactRedux.useSelector.mockImplementation(() => 'SOME_TYPE')
 
   beforeEach(() => {
-    realUseContext = React.useContext
+    realUseContext = useContext
     // eslint-disable-next-line no-multi-assign
-    useContextMock = React.useContext = jest.fn({
+    useContextMock = useContext = jest.fn({
       setState: jest.fn,
     })
 
@@ -47,7 +47,7 @@ describe('useDocumentTitle', () => {
   })
 
   afterEach(() => {
-    React.useContext = realUseContext
+    useContext = realUseContext
   })
 
   it('should return a default title', () => {

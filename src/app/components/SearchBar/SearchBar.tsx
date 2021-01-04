@@ -8,7 +8,7 @@ import {
   showAboveBackDrop,
   styles,
 } from '@amsterdam/asc-ui'
-import React, { InputHTMLAttributes } from 'react'
+import { FunctionComponent, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { IDS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
@@ -60,7 +60,7 @@ export interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
   searchBarFilterValue: string
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({
+const SearchBar: FunctionComponent<SearchBarProps> = ({
   expanded,
   onBlur,
   onFocus,

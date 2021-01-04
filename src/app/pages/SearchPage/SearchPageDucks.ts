@@ -2,9 +2,10 @@ import paramsRegistry from '../../../store/params-registry'
 import { typedAction } from '../../utils/typedAction'
 
 export const REDUCER_KEY = 'search'
-export const SET_SORT = 'search/SET_SORT'
-export const SET_PAGE = 'search/SET_PAGE'
-export const SET_FILTER_VALUES = 'search/SET_FILTER_VALUES'
+
+const SET_SORT = 'search/SET_SORT'
+const SET_PAGE = 'search/SET_PAGE'
+const SET_FILTER_VALUES = 'search/SET_FILTER_VALUES'
 
 export interface SearchPageState {
   activeFilters: ActiveFilter[]

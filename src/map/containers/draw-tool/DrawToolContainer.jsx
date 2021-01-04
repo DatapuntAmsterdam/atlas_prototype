@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { endDataSelection, setGeometryFilter } from '../../../shared/ducks/data-selection/actions'
@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch) =>
   )
 
 // TODO: Get all business logic out of this file, probably to Redux!
-class DrawToolContainer extends React.Component {
+class DrawToolContainer extends Component {
   constructor(props) {
     super(props)
 

@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom-global
  */
-import React from 'react'
 import { render } from '@testing-library/react'
 import MapPage from './MapPage'
 import MapContext, { initialState } from './MapContext'

@@ -12,7 +12,7 @@ import {
   Row,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { FOOTER_LINKS, IDS } from '../../../shared/config/config'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
@@ -36,7 +36,7 @@ const helpLinks: FooterLink[] = [
   },
 ].sort((a, b) => (a.order > b.order ? 1 : -1))
 
-const Footer: React.FC = () => (
+const Footer: FunctionComponent = () => (
   <CompactThemeProvider>
     <FooterComponent id={IDS.footer}>
       <FooterTop>

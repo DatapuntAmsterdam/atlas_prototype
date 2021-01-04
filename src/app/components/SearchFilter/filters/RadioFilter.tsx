@@ -1,9 +1,9 @@
 import { Label, Radio, RadioGroup } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { FilterProps } from '../models'
 import { formatAllOptionLabel, formatOptionLabel } from '../utils'
 
-const RadioFilter: React.FC<FilterProps> = ({
+const RadioFilter: FunctionComponent<FilterProps> = ({
   type,
   options,
   totalCount,

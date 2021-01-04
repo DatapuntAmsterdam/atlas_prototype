@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import formatDate from '../../../app/utils/formatDate'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system/crs-converter'
 

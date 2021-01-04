@@ -13,7 +13,7 @@ export default function stateTokenGenerator() {
   // Create an array of 16 8-bit unsigned integers
   const list = new Uint8Array(16)
   // Populate the array with random values
-  cryptoLib.getRandomValues(list)
+  window.crypto.getRandomValues(list)
 
   // Binary to Ascii (btoa) converts our (character representation
   // of) our binary data to an Ascii string

@@ -1,5 +1,4 @@
 import { Column, Heading, Link, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 import ContentContainer from '../components/ContentContainer/ContentContainer'
 import ShareBar from '../components/ShareBar/ShareBar'

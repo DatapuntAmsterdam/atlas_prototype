@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { render } from '@testing-library/react'
-import React from 'react'
 import SearchBar, { SearchBarProps } from './SearchBar'
 
 // Mock the SearchBarFilter component as it's not relevant for this test and is tested seperately

@@ -12,9 +12,6 @@ updates:
   - dependency-name: d3
     versions:
     - ">= 0"
-  - dependency-name: imports-loader
-    versions:
-    - ">= 0"
   - dependency-name: leaflet-draw
     versions:
     - ">= 0"

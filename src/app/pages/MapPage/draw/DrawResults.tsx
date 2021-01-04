@@ -17,7 +17,15 @@ import {
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import L, { LatLng, LatLngExpression, LatLngTuple } from 'leaflet'
 import { useHistory } from 'react-router-dom'
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import {
+  Fragment,
+  FunctionComponent,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { useSelector } from 'react-redux'
 import RouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
@@ -109,7 +117,7 @@ type Props = {
   currentOverlay: Overlay
 }
 
-const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
+const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
   const [delayedLoadingIds, setDelayedLoadingIds] = useState<string[]>([])
   const [highlightMarker, setHighlightMarker] = useState<LatLngTuple | null>(null)
   const {
@@ -134,16 +142,16 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
 
   // Effect to delay the loading states, this is to prevent the results block to collapse and re-open in a short time
   useEffect(() => {
-    let timeOutId: number
+    let timeoutId: number
     if (loadingIds.length) {
-      timeOutId = setTimeout(() => {
+      timeoutId = window.setTimeout(() => {
         setDelayedLoadingIds(loadingIds)
       }, 400)
     } else {
       setDelayedLoadingIds([])
     }
     return () => {
-      clearTimeout(timeOutId)
+      window.clearTimeout(timeoutId)
     }
   }, [loadingIds, setDelayedLoadingIds])
 
@@ -281,7 +289,7 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
       ) : (
         <AccordionWrapper>
           {dataSelectionWithMarkers.map(({ id, result, size, page, totalCount, mapData }, i) => (
-            <React.Fragment key={id}>
+            <Fragment key={id}>
               <StyledAccordion
                 {...(dataSelectionWithMarkers.length === 1
                   ? {
@@ -356,7 +364,7 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
                   <StyledAlert level="info">Er zijn geen resultaten</StyledAlert>
                 )}
               </StyledAccordion>
-            </React.Fragment>
+            </Fragment>
           ))}
         </AccordionWrapper>
       )}

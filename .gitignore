@@ -10,7 +10,6 @@ node_modules/
 coverage/
 coverage-legacy/
 *.iml
-src/shared/styles/config/mixins/_sprites.scss
 phantomjsdriver.log
 .vscode/
 .sb/

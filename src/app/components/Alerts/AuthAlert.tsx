@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { Alert, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import LoginLink from '../Links/LoginLink/LoginLink'

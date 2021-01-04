@@ -9,7 +9,6 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 import ShareBar from '../../../components/ShareBar/ShareBar'
 import Video from '../../../components/Video/Video'

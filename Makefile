@@ -4,9 +4,6 @@
 # PHONY prevents filenames being used as targets
 .PHONY: help info rebuild status start stop logs restart build shell
 
-# globals which can be overriden by setting make variables on the CLI
-GIT_COMMIT ?= ""
-
 _MAKEFILE_BUILTIN_VARIABLES := .DEFAULT_GOAL CURDIR MAKEFLAGS MAKEFILE_LIST SHELL
 
 _MAKEFILE_VARIABLES := $(foreach make_variable, $(sort $(.VARIABLES)),\

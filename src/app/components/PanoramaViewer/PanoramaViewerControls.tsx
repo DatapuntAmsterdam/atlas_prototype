@@ -1,7 +1,7 @@
 import { ControlButton, MapPanelContext } from '@amsterdam/arm-core'
 import { Close } from '@amsterdam/asc-assets'
 import { breakpoint, ViewerContainer } from '@amsterdam/asc-ui'
-import React, { useContext } from 'react'
+import { useContext, FunctionComponent } from 'react'
 import styled from 'styled-components'
 import MapContext from '../../pages/MapPage/MapContext'
 import { locationParam } from '../../pages/MapPage/query-params'
@@ -23,7 +23,7 @@ const ResizeButton = styled(ControlButton)`
   }
 `
 
-const PanoramaViewerControls: React.FC<Props> = ({ children, onClose, panoImageDate }) => {
+const PanoramaViewerControls: FunctionComponent<Props> = ({ children, onClose, panoImageDate }) => {
   const { drawerPosition } = useContext(MapPanelContext)
   const { panoFullScreen, setPanoFullScreen } = useContext(MapContext)
   const [location] = useParam(locationParam)

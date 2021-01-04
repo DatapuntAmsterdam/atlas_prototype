@@ -1,6 +1,6 @@
 import { ChevronDown, Download, Ellipsis, Print } from '@amsterdam/asc-assets'
 import { ContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 import { sharePage, showPrintMode } from '../../../../shared/ducks/ui/ui'
 import socialItems from '../socialItems'
@@ -12,7 +12,7 @@ type ConstructionFilesProps = {
   downloadLoading: boolean
 }
 
-const ConstructionFiles: React.FC<ConstructionFilesProps> = ({
+const ConstructionFiles: FunctionComponent<ConstructionFilesProps> = ({
   fileUrl,
   handleDownload,
   downloadLoading,

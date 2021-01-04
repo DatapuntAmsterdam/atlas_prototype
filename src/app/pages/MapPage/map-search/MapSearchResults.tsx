@@ -1,6 +1,6 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
@@ -73,7 +73,7 @@ export interface MapSearchPanelProps {
   currentOverlay: Overlay
 }
 
-const MapSearchResults: React.FC<MapSearchPanelProps> = ({ currentOverlay }) => {
+const MapSearchResults: FunctionComponent<MapSearchPanelProps> = ({ currentOverlay }) => {
   const user = useSelector(getUser)
   const [location, setLocation] = useParam(locationParam)
   const factory = () => mapSearch(user, location)

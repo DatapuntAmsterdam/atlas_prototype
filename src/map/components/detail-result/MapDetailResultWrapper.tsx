@@ -1,10 +1,12 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { Heading, Link, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import { Link } from '@amsterdam/asc-ui'
+import { FunctionComponent } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { isEmbedded } from '../../../shared/ducks/ui/ui'
+import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
 import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
+import { isEmbedded } from '../../../shared/ducks/ui/ui'
+import { getUser } from '../../../shared/ducks/user/user'
 
 export interface MapDetailResultWrapperProps {
   title: string
@@ -20,7 +22,11 @@ const StyledLink = styled(Link)`
   width: 100%;
 `
 
-const MapDetailResultWrapper: React.FC<MapDetailResultWrapperProps> = ({
+const Header = styled.header`
+  margin: 0 ${themeSpacing(3)};
+`
+
+const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = ({
   children,
   subTitle,
   title,
@@ -29,21 +35,22 @@ const MapDetailResultWrapper: React.FC<MapDetailResultWrapperProps> = ({
 }) => {
   const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location as any)
   const isEmbed = useSelector(isEmbedded)
+  const user = useSelector(getUser)
 
   return (
     <section className="map-detail-result">
-      <header
-        className={`
+      {panoramaUrl && user.authenticated ? (
+        <header
+          className={`
       map-detail-result__header
       map-detail-result__header--${!isEmbed && panoramaUrl ? 'pano' : 'no-pano'}
     `}
-      >
-        <StyledLink
-          to={link || ''}
-          as={linkComponent}
-          title={panoramaUrl ? 'Panoramabeeld tonen' : 'Geen Panoramabeeld beschikbaar'}
         >
-          {panoramaUrl && (
+          <StyledLink
+            to={link || ''}
+            as={linkComponent}
+            title={panoramaUrl ? 'Panoramabeeld tonen' : 'Geen Panoramabeeld beschikbaar'}
+          >
             <img
               alt="Panoramabeeld"
               className="map-detail-result__header-pano"
@@ -51,14 +58,26 @@ const MapDetailResultWrapper: React.FC<MapDetailResultWrapperProps> = ({
               src={panoramaUrl}
               width="438"
             />
-          )}
-          <div className="map-detail-result__header-container">
-            <h1 className="map-detail-result__header-title">{title}</h1>
-            {subTitle && <h2 className="map-detail-result__header-subtitle">{subTitle}</h2>}
-          </div>
-        </StyledLink>
-      </header>
+            <div className="map-detail-result__header-container">
+              <h1 className="map-detail-result__header-title">{title}</h1>
+              {subTitle && <h2 className="map-detail-result__header-subtitle">{subTitle}</h2>}
+            </div>
+          </StyledLink>
+        </header>
+      ) : (
+        <PanoAlert />
+      )}
       <div className="map-detail-result__scroll-wrapper">
+        {!user.authenticated && (
+          <Header>
+            <Heading styleAs="h4">{title}</Heading>
+            {subTitle && (
+              <Heading styleAs="h6" as="h2">
+                {subTitle}
+              </Heading>
+            )}
+          </Header>
+        )}
         {children}
         <footer className="map-search-results__footer">
           <button

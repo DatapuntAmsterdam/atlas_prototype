@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import LoadingSpinner from '../../../app/components/LoadingSpinner/LoadingSpinner'
-import { VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { ViewMode } from '../../../shared/ducks/ui/ui'
 import MapDetailResult from '../../components/detail-result/MapDetailResult'
 import MapSearchResults from '../../components/search-results/MapSearchResults'
 import PAGES from '../../../app/pages'
@@ -27,7 +26,7 @@ const MapPreviewPanel = ({
   const isDetailPage = currentPage === PAGES.DATA_DETAIL
 
   const openDetailEndpoint = () => openDetail(detail)
-  const onMaximize = () => onSearchMaximize(VIEW_MODE.SPLIT)
+  const onMaximize = () => onSearchMaximize(ViewMode.Split)
 
   return (
     <div className="map-preview-panel-wrapper">

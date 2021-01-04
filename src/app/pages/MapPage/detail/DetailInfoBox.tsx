@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, FunctionComponent } from 'react'
 import {
   Alert,
   Button,
@@ -27,7 +27,7 @@ export type InfoBoxProps = {
   meta?: DetailResultItemDefinitionListEntry[]
 } & Pick<Definition, 'url' | 'description' | 'plural'>
 
-const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta }) => {
+const DetailInfoBox: FunctionComponent<InfoBoxProps> = ({ plural, description, url, meta }) => {
   const [open, setOpen] = useState(false)
   return (
     <>
