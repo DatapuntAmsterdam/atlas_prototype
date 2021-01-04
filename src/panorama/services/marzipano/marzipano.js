@@ -72,7 +72,6 @@ function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler) {
 */
 export function initialize(domElement) {
   const viewer = new Marzipano.Viewer(domElement, {
-    stageType: null,
     stage: {
       preserveDrawingBuffer: true,
       width: 960,
