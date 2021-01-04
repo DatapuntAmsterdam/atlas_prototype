@@ -42,7 +42,7 @@
     "file-saver": "^2.0.5",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
-    "history": "4.10.1",
+    "history": "5.0.0",
     "json-api-normalize": "1.1.5",
     "leaflet": "1.7.1",
     "leaflet-draw": "1.0.0",
