@@ -203,15 +203,8 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           ],
         },
         {
-          test: /\.(jpg|png|svg|cur)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                outputPath: 'assets/',
-              },
-            },
-          ],
+          type: 'asset/resource',
+          test: /\.(jpg|png|cur)$/,
         },
         {
           test: /\.(graphql|gql)$/,

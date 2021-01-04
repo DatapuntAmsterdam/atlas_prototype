@@ -9,7 +9,7 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { ReactComponent as Metadata } from '../../../../shared/assets/icons/metadata.svg'
+import Metadata from '../../../../shared/assets/icons/metadata.svg'
 import DetailDefinitionList from './DetailDefinitionList'
 import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
 import { Definition } from '../../../../detail/services/glossary.constant'
