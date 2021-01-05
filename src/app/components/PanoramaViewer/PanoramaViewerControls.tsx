@@ -7,9 +7,9 @@ import MapContext from '../../pages/MapPage/MapContext'
 import { locationParam } from '../../pages/MapPage/query-params'
 import useParam from '../../utils/useParam'
 import ViewerInfoBar from '../ViewerInfoBar/ViewerInfoBar'
-import { ReactComponent as Enlarge } from './enlarge.svg'
+import Enlarge from './enlarge.svg'
 import PanoramaViewerMenu from './PanoramaViewerMenu'
-import { ReactComponent as Reduce } from './reduce.svg'
+import Reduce from './reduce.svg'
 
 type Props = {
   onClose: (boolean: boolean) => void

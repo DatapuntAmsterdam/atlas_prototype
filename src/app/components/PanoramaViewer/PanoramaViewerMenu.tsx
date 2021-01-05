@@ -6,7 +6,7 @@ import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { getStreetViewUrl } from '../../../panorama/services/panorama-api/panorama-api'
-import { ReactComponent as Clock } from '../../../shared/assets/icons/Clock.svg'
+import Clock from '../../../shared/assets/icons/Clock.svg'
 import { locationParam, panoParam, panoTagParam } from '../../pages/MapPage/query-params'
 import useParam from '../../utils/useParam'
 

@@ -2,6 +2,7 @@ import { fireEvent, render } from '@testing-library/react'
 import PanoramaViewer from './PanoramaViewer'
 
 const mockPush = jest.fn()
+
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
   ...jest.requireActual('react-router-dom'),
@@ -14,6 +15,26 @@ jest.mock('react-router-dom', () => ({
       'pano={"foo":"bar"}&panoTag=2020bi&randomParam="should-stay"&lagen=pano-pano2020bi_pano-pano2019bi',
   }),
 }))
+
+jest.mock('marzipano', () => ({
+  Viewer: (() => {
+    class FakeViewer {
+      // eslint-disable-next-line class-methods-use-this
+      addEventListener() {}
+
+      // eslint-disable-next-line class-methods-use-this
+      updateSize() {}
+
+      // eslint-disable-next-line class-methods-use-this
+      view() {
+        return null
+      }
+    }
+
+    return FakeViewer
+  })(),
+}))
+
 describe('PanoramaViewer', () => {
   it('should update (history.push) the URL by remove panorama-related parameters and layers', async () => {
     const { findByTestId } = render(<PanoramaViewer />)

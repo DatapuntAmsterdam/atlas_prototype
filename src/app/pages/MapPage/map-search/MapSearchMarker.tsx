@@ -44,7 +44,7 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ location }) => {
       history.push({
         pathname: generatePath(routing.dataDetail_TEMP.path, {
           type,
-          subtype: subType,
+          subtype: subType ?? '',
           id,
         }),
         search: window.location.search,

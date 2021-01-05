@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { addFilter as addFilterAction } from '../../../shared/ducks/filters/filters'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
-import { ReactComponent as Metadata } from '../../../shared/assets/icons/metadata.svg'
+import Metadata from '../../../shared/assets/icons/metadata.svg'
 
 export type Filter = {
   options: Array<{ id: string; label: string; count: number }>
