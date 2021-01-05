@@ -25,7 +25,7 @@ export default merge(createConfig({ mode: 'production' }), {
           compress: {
             // Do not drop debugger statements, we might want to run a production build locally for testing.
             // Linting rules will ensure this never actually happens with true production images.
-            drop_debugger: false,
+            drop_debugger: !debugMode,
           },
         },
       }),
@@ -35,10 +35,8 @@ export default merge(createConfig({ mode: 'production' }), {
       maxInitialRequests: 20,
       chunks: 'async',
       maxSize: 125000,
+      minSize: 35000,
       minChunks: 1,
-      cacheGroups: {
-        default: false,
-      },
     },
     moduleIds: 'deterministic',
     chunkIds: 'deterministic',
