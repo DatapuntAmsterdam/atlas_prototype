@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['airbnb', '../../../.eslintrc.js'],
+  extends: ['../../../.eslintrc.js'],
   env: {
     'cypress/globals': true,
   },

@@ -14,5 +14,4 @@ export {
   getCountFromHeader,
 }
 
-// eslint-disable-next-line no-unused-vars
-Cypress.on('uncaught:exception', (err, runnable) => false)
+Cypress.on('uncaught:exception', () => false)

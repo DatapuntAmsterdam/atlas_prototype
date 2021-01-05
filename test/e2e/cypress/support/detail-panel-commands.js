@@ -40,8 +40,7 @@ Cypress.Commands.add('checkListItems', (fixturePath) => {
     // Check panel type and subject of the panel
     cy.checkPanelHeader(fixturePath)
     // Check for every itemlist all key-value pairs
-    // eslint-disable-next-line no-unused-vars
-    Object.entries(json.definitionLists).forEach(([keyA, valueA], indexA) => {
+    Object.entries(json.definitionLists).forEach(([, valueA], indexA) => {
       // Check subheader of a itemlist
       cy.checkSubheader(fixturePath, indexA)
       Object.entries(valueA.items).forEach(([keyB, valueB]) => {
@@ -55,12 +54,10 @@ Cypress.Commands.add('checkListItems', (fixturePath) => {
 Cypress.Commands.add('checkLinkItems', (fixturePath) => {
   cy.fixture(fixturePath).then((json) => {
     // Check for every itemlist all key-value pairs
-    // eslint-disable-next-line no-unused-vars
-    Object.entries(json.linkLists).forEach(([keyA, valueA], indexA) => {
+    Object.entries(json.linkLists).forEach(([, valueA], indexA) => {
       // Check subheader of a itemlist
       cy.checkSubheaderLinkList(fixturePath, indexA)
-      // eslint-disable-next-line no-unused-vars
-      Object.entries(valueA.items).forEach(([keyB, valueB]) => {
+      Object.entries(valueA.items).forEach(([, valueB]) => {
         // Check if key-value pair is visible in the UI
         cy.get(DETAIL_PANEL.linkList).should('contain', valueB)
       })
