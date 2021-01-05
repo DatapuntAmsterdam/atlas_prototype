@@ -20,7 +20,7 @@ describe('getPanoramaThumbnail', () => {
     mockedFetchWithToken.mockReturnValueOnce(Promise.resolve(validResponse))
 
     await expect(getPanoramaThumbnail({ lat: 123, lng: 321 })).resolves.toEqual({
-      id: 'pano_id',
+      pano_id: 'pano_id',
       heading: 'heading',
       url: 'url',
     })
