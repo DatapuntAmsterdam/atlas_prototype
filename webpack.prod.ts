@@ -57,6 +57,66 @@ export default merge(createConfig({ mode: 'production' }), {
         /manifest$/,
       ],
       cleanupOutdatedCaches: true,
+      runtimeCaching: [
+        {
+          // All responses from the static assets server
+          // Can be cache for a longer period of time, because of the nature of those assets
+          urlPattern: /static\.amsterdam\.nl\/.+$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+            cacheName: 'static',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 12, // 12 hours
+            },
+          },
+        },
+        {
+          // Exclude all requests to the tracking script
+          urlPattern: /analytics\.data\.amsterdam\.nl\/(?!matomo\.php).+$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+            cacheName: 'analytics',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 4, // 4 hours
+            },
+          },
+        },
+        {
+          // All images coming from the CMS since they have `cache-control: no-cache` headers and have relatively large file sizes
+          urlPattern: /(cms\.data\.amsterdam.nl|localhost)\/[^.]+\.(png|jpg|jpeg|svg)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+            cacheName: 'images',
+            expiration: {
+              maxEntries: 50,
+              maxAgeSeconds: 60 * 60 * 2, // 2 hours
+            },
+          },
+        },
+        {
+          // Every call to the API, except oAuth2
+          urlPattern: /api\.data\.amsterdam\.nl\/(?!oauth2).+$/,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+            cacheName: 'api',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 1, // 1 hours
+            },
+          },
+        },
+      ],
     }),
   ],
 })
