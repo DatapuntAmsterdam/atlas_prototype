@@ -14,7 +14,7 @@ phantomjsdriver.log
 .vscode/
 .sb/
 sitemap.xml
-/test/e2e/cypress.env.json
+cypress.env.json
 yarn.lock
 .yalc/
 yalc.lock
