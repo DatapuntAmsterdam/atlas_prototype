@@ -8,7 +8,6 @@
   },
   "version": "3.22.0",
   "scripts": {
-    "prebuild": "rimraf ./dist",
     "build": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config ./webpack.prod.ts",
     "clean": "npm run clean:dirs",
     "clean:dirs": "rimraf ./node_modules ./coverage ./coverage-legacy ./dist ./build",
