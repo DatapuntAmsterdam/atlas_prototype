@@ -55,8 +55,7 @@ npm run start
 After doing this open up a new terminal and run the following commands:
 
 ```
-cd test/e2e
-npm run start
+npm run test:e2e:watch
 ```
 
 This will start the E2E test, if you want to watch for changes you can also run `npm run watch` instead.

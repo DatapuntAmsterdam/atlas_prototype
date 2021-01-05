@@ -1,6 +1,6 @@
 import { HEADER, MAP } from '../support/selectors'
-import { routing } from '../../../../src/app/routes'
-import PARAMETERS from '../../../../src/store/parameters'
+import { routing } from '../../src/app/routes'
+import PARAMETERS from '../../src/store/parameters'
 
 const { VIEW, LAYERS, LEGEND, EMBED_PREVIEW } = PARAMETERS
 

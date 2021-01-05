@@ -1,4 +1,4 @@
-import stateTokenGenerator from '../../src/state-token-generator'
+import stateTokenGenerator from '../../src/shared/services/state-token-generator'
 import { HEADER_MENU } from './selectors'
 
 const USER_TOKENS = {}

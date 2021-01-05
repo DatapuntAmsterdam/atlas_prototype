@@ -1,5 +1,5 @@
-import PARAMETERS from '../../../../src/store/parameters'
-import { routing } from '../../../../src/app/routes'
+import PARAMETERS from '../../src/store/parameters'
+import { routing } from '../../src/app/routes'
 import {
   ADDRESS_PAGE,
   COMPONENTS,
