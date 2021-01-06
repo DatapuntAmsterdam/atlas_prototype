@@ -1,0 +1,27 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/monumenten/situeringen/1/"
+    }
+  },
+  "_display": "Maritzstraat 22",
+  "identificerende_sleutel_situering": 1,
+  "situering_nummeraanduiding": "Actueel",
+  "betreft_nummeraanduiding": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000514151/"
+      }
+    },
+    "nummeraanduidingidentificatie": "0363200000514151"
+  },
+  "eerste_situering": "J",
+  "hoort_bij_monument": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/3cf53160-d8bf-4447-93ba-1eb03a35cfe4/"
+      }
+    },
+    "identificerende_sleutel_monument": "3cf53160-d8bf-4447-93ba-1eb03a35cfe4"
+  }
+}

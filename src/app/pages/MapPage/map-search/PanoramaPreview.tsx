@@ -122,7 +122,8 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
           [zoomParam, 11],
         ]),
       }
-    : toPanoramaAndPreserveQuery(result?.value?.id, result?.value?.heading, legacyReference)
+    : // eslint-disable-next-line camelcase
+      toPanoramaAndPreserveQuery(result?.value?.pano_id, result?.value?.heading, legacyReference)
   const linkComponent = browserLocation.pathname.includes('kaart') ? RouterLink : LegacyLink
 
   return (

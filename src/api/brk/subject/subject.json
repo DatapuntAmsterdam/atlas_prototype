@@ -1,0 +1,51 @@
+{
+  "_links": {
+    "self": { "href": "https://acc.api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.123456789/" }
+  },
+  "_display": "John Doe",
+  "id": "NL.KAD.Persoon.123456789",
+  "type": 0,
+  "beschikkingsbevoegdheid": null,
+  "is_natuurlijk_persoon": true,
+  "voornamen": "John",
+  "voorvoegsels": "",
+  "naam": "Doe",
+  "geslacht": { "code": "M", "omschrijving": "Man" },
+  "aanduiding_naam": { "code": "E", "omschrijving": "Eigen geslachtsnaam" },
+  "geboortedatum": "1989-07-23",
+  "geboorteplaats": "AMSTERDAM",
+  "geboorteland": null,
+  "overlijdensdatum": "",
+  "partner_voornamen": "",
+  "partner_voorvoegsels": "",
+  "partner_naam": "",
+  "land_waarnaar_vertrokken": null,
+  "rsin": null,
+  "kvknummer": null,
+  "rechtsvorm": null,
+  "statutaire_naam": null,
+  "statutaire_zetel": null,
+  "bron": 0,
+  "woonadres": {
+    "openbareruimte_naam": "Eerste Anjeliersdwarsstraat",
+    "huisnummer": 1,
+    "huisletter": "H",
+    "toevoeging": "",
+    "postcode": "1015 NR",
+    "woonplaats": "AMSTERDAM",
+    "postbus_nummer": null,
+    "postbus_postcode": null,
+    "postbus_woonplaats": null,
+    "buitenland_adres": "",
+    "buitenland_woonplaats": "",
+    "buitenland_regio": "",
+    "buitenland_naam": "",
+    "buitenland_land": null
+  },
+  "postadres": null,
+  "aantekeningen": {
+    "count": 0,
+    "href": "https://acc.api.data.amsterdam.nl/brk/aantekening/?opgelegd_door=NL.KAD.Persoon.123456789"
+  },
+  "dataset": "brk"
+}

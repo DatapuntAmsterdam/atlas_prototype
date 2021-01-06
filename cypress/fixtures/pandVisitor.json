@@ -1,0 +1,42 @@
+{
+  "panelType": "Pand",
+  "panelHeading": "0363100012168052",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Oorspronkelijk bouwjaar": "1914",
+        "Status": "Pand in gebruik",
+        "Naam": "De Bijenkorf",
+        "Type woonobject": "",
+        "Ligging": "Hoekgebouw",
+        "Aantal bouwlagen": "",
+        "Hoogste bouwlaag": "",
+        "Laagste bouwlaag": ""
+      }
+    },
+    {
+      "subheading": "Ligt in",
+      "items": {
+        "Stadsdeel": "Centrum (A)",
+        "Wijk": "Burgwallen-Oude Zijde (00)",
+        "Buurt": "Oude Kerk e.o. (A00b)",
+        "Bouwblok": "YA77"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Adressen",
+      "items": ["Dam 1", "Beursplein 2 Nevenadres"]
+    },
+    {
+      "subheading": "Vestigingen",
+      "items": []
+    },
+    {
+      "subheading": "Monumenten",
+      "items": ["De Bijenkorf"]
+    }
+  ]
+}

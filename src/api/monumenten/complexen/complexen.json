@@ -1,0 +1,15 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/monumenten/complexen/182a9861-4052-4127-8300-6450cd75b6a5/"
+    }
+  },
+  "identificerende_sleutel_complex": "182a9861-4052-4127-8300-6450cd75b6a5",
+  "monumentnummer_complex": 518271,
+  "complexnaam": "Hortus Botanicus",
+  "monumenten": {
+    "count": 9,
+    "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=182a9861-4052-4127-8300-6450cd75b6a5"
+  },
+  "_display": "Hortus Botanicus"
+}

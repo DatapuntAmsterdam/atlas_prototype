@@ -58,7 +58,8 @@ const useGetLegacyPanoramaPreview = (
     browserLocation.pathname === '/kaart' || browserLocation.pathname === '/kaart/'
       ? `${browserLocation.pathname}?${panoramaLink}`
       : toPanoramaAndPreserveQuery(
-          panoramaResult?.value?.id,
+          // eslint-disable-next-line camelcase
+          panoramaResult?.value?.pano_id,
           panoramaResult?.value?.heading,
           legacyReference,
         )

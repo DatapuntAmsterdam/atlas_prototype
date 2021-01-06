@@ -98,10 +98,5 @@ function transformResponse(response: RawResponse): PanoramaThumbnail | null {
     return null
   }
 
-  // TODO: Remove this transformation of 'pano_id' once all legacy code has been removed.
-  return {
-    id: response.pano_id,
-    heading: response.heading,
-    url: response.url,
-  }
+  return response
 }
