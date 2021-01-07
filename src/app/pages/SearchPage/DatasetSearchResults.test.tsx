@@ -1,21 +1,22 @@
-import { mocked } from 'ts-jest/utils'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { mocked } from 'ts-jest/utils'
+import { RootState } from '../../../reducers/root'
 import getState from '../../../shared/services/redux/get-state'
-import DatasetSearchResults from './DatasetSearchResults'
-import withAppContext from '../../utils/withAppContext'
-import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
 import getLoadingErrors from '../../utils/getLoadingErrors'
+import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
 import redirectToDcatd from '../../utils/redirectToDcatd'
+import withAppContext from '../../utils/withAppContext'
+import DatasetSearchResults from './DatasetSearchResults'
 
 jest.mock('../../../shared/services/redux/get-state')
 jest.mock('../../utils/getUnauthorizedLabels')
 jest.mock('../../utils/getLoadingErrors')
 jest.mock('../../utils/redirectToDcatd')
 
-const mockedGetState = mocked(getState) as jest.Mock
-const mockedGetUnauthorizedLabels = mocked(getUnauthorizedLabels) as jest.Mock
-const mockedGetLoadingErrors = mocked(getLoadingErrors) as jest.Mock
-const mockedRedirectToDcatd = mocked(redirectToDcatd) as jest.Mock
+const mockedGetState = mocked(getState)
+const mockedGetUnauthorizedLabels = mocked(getUnauthorizedLabels)
+const mockedGetLoadingErrors = mocked(getLoadingErrors)
+const mockedRedirectToDcatd = mocked(redirectToDcatd)
 
 const results = [
   {
@@ -62,9 +63,12 @@ const results = [
 
 describe('DatasetSearchResults', () => {
   beforeEach(() => {
-    mockedGetState.mockImplementation(() => ({
-      user: null,
-    }))
+    mockedGetState.mockImplementation(
+      () =>
+        (({
+          user: null,
+        } as unknown) as RootState),
+    )
 
     mockedGetUnauthorizedLabels.mockImplementation(() => [])
 
@@ -93,16 +97,19 @@ describe('DatasetSearchResults', () => {
     // no user, no button
     expect(screen.queryByTestId('actionButton')).toBeNull()
 
-    mockedGetState.mockImplementation(() => ({
-      user: {
-        accessToken: '',
-        authenticated: false,
-        error: false,
-        hasCheckedAuthentication: true,
-        name: '',
-        scopes: [],
-      },
-    }))
+    mockedGetState.mockImplementation(
+      () =>
+        (({
+          user: {
+            accessToken: '',
+            authenticated: false,
+            error: false,
+            hasCheckedAuthentication: true,
+            name: '',
+            scopes: [],
+          },
+        } as unknown) as RootState),
+    )
 
     rerender(withAppContext(<DatasetSearchResults results={results} isOverviewPage={false} />))
 
@@ -114,16 +121,19 @@ describe('DatasetSearchResults', () => {
     // no scopes, no button
     expect(screen.queryByTestId('actionButton')).toBeNull()
 
-    mockedGetState.mockImplementation(() => ({
-      user: {
-        accessToken: '',
-        authenticated: false,
-        error: false,
-        hasCheckedAuthentication: true,
-        name: '',
-        scopes: ['CAT/R'],
-      },
-    }))
+    mockedGetState.mockImplementation(
+      () =>
+        ({
+          user: {
+            accessToken: '',
+            authenticated: false,
+            error: false,
+            hasCheckedAuthentication: true,
+            name: '',
+            scopes: ['CAT/R'],
+          },
+        } as RootState),
+    )
 
     rerender(withAppContext(<DatasetSearchResults results={results} isOverviewPage />))
 
@@ -131,16 +141,19 @@ describe('DatasetSearchResults', () => {
   })
 
   it('it calls mockedredirectToDcatd when edit button is clicked', () => {
-    mockedGetState.mockImplementation(() => ({
-      user: {
-        accessToken: '',
-        authenticated: false,
-        error: false,
-        hasCheckedAuthentication: true,
-        name: '',
-        scopes: ['CAT/R'],
-      },
-    }))
+    mockedGetState.mockImplementation(
+      () =>
+        ({
+          user: {
+            accessToken: '',
+            authenticated: false,
+            error: false,
+            hasCheckedAuthentication: true,
+            name: '',
+            scopes: ['CAT/R'],
+          },
+        } as RootState),
+    )
 
     render(withAppContext(<DatasetSearchResults results={results} isOverviewPage />))
 
@@ -180,7 +193,11 @@ describe('DatasetSearchResults', () => {
 
     expect(screen.queryByTestId('errorMessage')).toBeNull()
 
-    mockedGetLoadingErrors.mockImplementation(() => ['foo', 'bar', 'baz'])
+    mockedGetLoadingErrors.mockImplementation(() => [
+      { message: 'foo' },
+      { message: 'bar' },
+      { message: 'bax' },
+    ])
 
     rerender(withAppContext(<DatasetSearchResults results={[]} />))
 
@@ -198,7 +215,11 @@ describe('DatasetSearchResults', () => {
       },
     })
 
-    mockedGetLoadingErrors.mockImplementation(() => ['foo', 'bar', 'baz'])
+    mockedGetLoadingErrors.mockImplementation(() => [
+      { message: 'foo' },
+      { message: 'bar' },
+      { message: 'bax' },
+    ])
 
     render(withAppContext(<DatasetSearchResults results={[]} />))
 
