@@ -1,6 +1,7 @@
-import { FunctionComponent } from 'react'
 import { Enlarge } from '@amsterdam/asc-assets'
 import { themeSpacing } from '@amsterdam/asc-ui'
+import { GraphQLFormattedError } from 'graphql'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { dcatdScopes } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
@@ -11,6 +12,7 @@ import DatasetCard from '../../components/DatasetCard'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { modificationDateFilter } from '../../components/Filters/Filters'
 import NoSearchResults from '../../components/NoSearchResults'
+import { ErrorExtensions } from '../../models/graphql'
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
@@ -39,11 +41,11 @@ export interface Result {
   __typename: string
 }
 
-export type DatasetSearchResultsProps = {
+export interface DatasetSearchResultsProps {
   query?: string
   label?: string
   results?: Result[]
-  errors?: any
+  errors?: GraphQLFormattedError<ErrorExtensions>[]
   isOverviewPage?: boolean
 }
 
@@ -60,7 +62,7 @@ const DatasetSearchResults: FunctionComponent<DatasetSearchResultsProps> = ({
       ? getState().user.scopes.some((scope) => dcatdScopes.includes(scope))
       : false
 
-  const matchingErrors: any = getErrorsForPath(errors, ['datasetSearch'])
+  const matchingErrors = getErrorsForPath(errors, ['datasetSearch'])
   const hasLoadingError = getLoadingErrors(matchingErrors).length > 0
 
   // Get all the labels of the type that the user has no access to
