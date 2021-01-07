@@ -76,6 +76,7 @@ describe('DatasetSearchResults', () => {
     render(withAppContext(<DatasetSearchResults />))
 
     expect(screen.queryAllByTestId('DatasetCard')).toHaveLength(0)
+    expect(screen.getByTestId('noSearchResults')).toBeInTheDocument()
   })
 
   it('shows a list of card components', () => {

@@ -66,9 +66,7 @@ const DatasetSearchResults: FunctionComponent<DatasetSearchResultsProps> = ({
   // Get all the labels of the type that the user has no access to
   const unauthorizedLabels = getUnauthorizedLabels(matchingErrors)
 
-  if (!results) return null
-
-  if (results.length > 0) {
+  if (results && results.length > 0) {
     return (
       <DatasetCardContainer>
         {canEdit && (
