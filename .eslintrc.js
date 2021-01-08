@@ -53,7 +53,6 @@ module.exports = {
       'error',
       {
         allow: [
-          '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__',
           '_bijzondere_rechts_toestand',
           '_grootstedelijkgebied',
           '_display',
