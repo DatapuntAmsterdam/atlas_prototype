@@ -1,7 +1,8 @@
-import { createBrowserHistory, createMemoryHistory } from 'history'
+import { createBrowserHistory, createMemoryHistory, History } from 'history'
 import queryString from 'querystring'
-import { applyMiddleware, compose, createStore } from 'redux'
-import { connectRoutes } from 'redux-first-router'
+import { applyMiddleware, createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { connectRoutes, Options as RoutingOptions } from 'redux-first-router'
 import restoreScroll from 'redux-first-router-restore-scroll'
 import createSagaMiddleware from 'redux-saga'
 import routes from '../app/routes'
@@ -19,7 +20,7 @@ import './queryParameters'
 
 const configureStore = () => {
   const routesMap = routes
-  const routingOptions = {
+  const routingOptions: RoutingOptions = {
     querySerializer: queryString,
     restoreScroll: restoreScroll({
       shouldUpdateScroll: (prev, locationState) => {
@@ -29,26 +30,18 @@ const configureStore = () => {
     initialDispatch: false,
     createHistory: typeof window === 'undefined' ? createMemoryHistory : createBrowserHistory,
   }
-  const {
-    reducer: routeReducer,
-    middleware: routeMiddleware,
-    enhancer: routeEnhancer,
-    initialDispatch: initialRouteDispatch,
-    history,
-  } = connectRoutes(routesMap, routingOptions)
+
+  const routeConnector = connectRoutes(routesMap, routingOptions)
+  const { history } = (routeConnector as unknown) as { history: History }
 
   paramsRegistry.history = history
 
-  const composeEnhancers =
-    typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      : compose
   const sagaMiddleware = createSagaMiddleware()
 
   const middleware = [
     // Todo AfterBeta remove from here
     preserveUrlParametersMiddleware,
-    routeMiddleware,
+    routeConnector.middleware,
     urlParamsMiddleware,
     setQueriesFromStateMiddleware,
     // Until here
@@ -57,8 +50,8 @@ const configureStore = () => {
     sagaMiddleware,
   ]
 
-  const enhancer = composeEnhancers(routeEnhancer, applyMiddleware(...middleware))
-  const store = createStore(rootReducer(routeReducer), undefined, enhancer)
+  const enhancer = composeWithDevTools(routeConnector.enhancer, applyMiddleware(...middleware))
+  const store = createStore(rootReducer(routeConnector.reducer), undefined, enhancer)
 
   if (typeof window !== 'undefined') {
     window.reduxStore = store
@@ -78,7 +71,7 @@ const configureStore = () => {
     window.location.href = returnPath
   }
 
-  initialRouteDispatch()
+  routeConnector.initialDispatch?.()
   store.dispatch(authenticateReload())
 
   return { store, history }

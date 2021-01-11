@@ -30,7 +30,7 @@ const NoSearchResults: FunctionComponent<NoSearchResultsProps> = ({
   to = false,
 }) => (
   <>
-    <Paragraph>{formatNoResultsMessage(query, label)}</Paragraph>
+    <Paragraph data-testid="noSearchResults">{formatNoResultsMessage(query, label)}</Paragraph>
     <Heading as="h3">Zoeksuggesties</Heading>
     <StyledList>
       <StyledListItem>Maak de zoekcriteria eventueel minder specifiek.</StyledListItem>
