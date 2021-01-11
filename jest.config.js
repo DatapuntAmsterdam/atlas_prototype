@@ -31,6 +31,8 @@ module.exports = {
   setupFiles: ['raf/polyfill', './test/setup-jest.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   setupFilesAfterEnv: ['./test/mocks.js'],
+  // will be uncommented once the base branch is ready for merge
+  // setupFilesAfterEnv: ['./test/mocks.js', './test/setup-env.js'],
   testURL: 'http://localhost:3000/',
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/modules/', '/node_modules/', '/test/'],

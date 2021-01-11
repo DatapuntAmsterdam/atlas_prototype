@@ -1,0 +1,108 @@
+[
+  {
+    "label": "Straatnamen",
+    "content": [
+      { "_display": "Dam", "uri": "bag/v1.1/openbareruimte/0363300000003186/" },
+      { "_display": "Damloperspad", "uri": "bag/v1.1/openbareruimte/0363300000001038/" }
+    ],
+    "total_results": 6
+  },
+  {
+    "label": "Openbare ruimtes",
+    "content": [
+      { "_display": "Damrak (water)", "uri": "bag/v1.1/openbareruimte/0363300011950697/" }
+    ],
+    "total_results": 1
+  },
+  {
+    "label": "Panden",
+    "content": [{ "_display": "Paleis op de Dam", "uri": "bag/v1.1/pand/0363100012167579/" }],
+    "total_results": 1
+  },
+  {
+    "label": "Monumenten",
+    "content": [
+      {
+        "_display": "Dam 10",
+        "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/"
+      },
+      { "_display": "Dam 11", "uri": "monumenten/monumenten/97a6f1c7-1ddc-4107-988a-f91fe47ba46a/" }
+    ],
+    "total_results": 45
+  },
+  {
+    "label": "Kaartlagen",
+    "content": [
+      {
+        "_display": "Cameratoezichtgebieden",
+        "type": "map-layer",
+        "uri": "/data/?modus=kaart&lagen=veilov-oovctg%3A1&legenda=true"
+      },
+      {
+        "_display": "Reclamebelastingtarieven",
+        "type": "map-layer",
+        "uri": "/data/?modus=kaart&lagen=wnklgeb-tariffA%3A1%7Cwnklgeb-tariffB%3A1%7Cwnklgeb-tariffC%3A1&legenda=true"
+      }
+    ],
+    "total_results": 15
+  },
+  {
+    "label": "Kaartcollecties",
+    "content": [
+      {
+        "_display": "Bodemkwaliteit",
+        "type": "map-collection",
+        "uri": "/data/?modus=kaart&lagen=bdmkw-mbgm%3A1%7Cbdmkw-mbgwm%3A1%7Cbdmkw-mbaig%3A1%7Cbdmkw-bros%3A1&legenda=true"
+      },
+      {
+        "_display": "Panoramabeelden",
+        "type": "map-collection",
+        "uri": "/data/?modus=kaart&lagen=pano-pano2020bi%3A1%7Cpano-pano2019bi%3A1%7Cpano-pano2018bi%3A1%7Cpano-pano2017bi%3A1%7Cpano-pano2016bi%3A1%7Cpano-pano2020woz%3A1%7Cpano-pano2019woz%3A1%7Cpano-pano2018woz%3A1%7Cpano-pano2017woz%3A1&legenda=true"
+      }
+    ],
+    "total_results": 2
+  },
+  {
+    "label": "Specials",
+    "content": [
+      {
+        "_display": "8 miljoen Amsterdamse taxiritten per jaar (animatie)",
+        "uri": "http://cms.service.consul:8128/jsonapi/node/special/46f2bd59-21c0-460c-8d29-997c781be462",
+        "type": "special"
+      },
+      {
+        "_display": "Meer auto's maar minder per Amsterdammer (animatie)",
+        "uri": "http://cms.service.consul:8128/jsonapi/node/special/abd23d13-2ce9-4dd6-9c1e-a196caeec7de",
+        "type": "special"
+      }
+    ],
+    "total_results": 21
+  },
+  {
+    "label": "Artikelen",
+    "content": [
+      {
+        "_display": "Acceptatie van LHBT\u2019ers in Amsterdam",
+        "uri": "http://cms.service.consul:8128/jsonapi/node/article/8860a1b8-4831-4c79-9783-df1a5f95f8dc",
+        "type": "article"
+      },
+      {
+        "_display": "Twee derde van de Amsterdamse middelbare scholieren heeft een \u2018succesvolle schoolloopbaan\u2019",
+        "uri": "http://cms.service.consul:8128/jsonapi/node/article/51c78bdf-44b7-4eed-9468-646cbb40ee96",
+        "type": "article"
+      }
+    ],
+    "total_results": 499
+  },
+  {
+    "label": "Publicaties",
+    "content": [
+      {
+        "_display": "Presentatie familie van dam ois symposium van data naar informatie",
+        "uri": "http://cms.service.consul:8128/jsonapi/node/publication/dbaef06c-d764-41e7-b5e6-be74fbc039e3",
+        "type": "publication"
+      }
+    ],
+    "total_results": 558
+  }
+]
