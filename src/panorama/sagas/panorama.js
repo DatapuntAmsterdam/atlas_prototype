@@ -11,7 +11,7 @@ import { closeMapPanel, toggleMapOverlay, mapClear } from '../../map/ducks/map/a
 import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api'
 import { toDataDetail, toGeoSearch, toPanorama } from '../../store/redux-first-router/actions'
 import { getLocationPayload } from '../../store/redux-first-router/selectors'
-import { getViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui'
+import { getViewMode, ViewMode } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../../store/parameters'
 import { getMapOverlays, getMapCenter } from '../../map/ducks/map/selectors'
 import {
@@ -26,7 +26,7 @@ import {
 
 export function* fetchFetchPanoramaEffect(action) {
   const view = yield select(getViewMode)
-  if (view === VIEW_MODE.FULL || view === VIEW_MODE.SPLIT) {
+  if (view === ViewMode.Full || view === ViewMode.Split) {
     yield put(closeMapPanel())
   }
   yield put(fetchPanoramaRequest(action.payload))
@@ -108,7 +108,7 @@ export function* doClosePanorama() {
     yield put(
       toDataDetail(detailReference, {
         [PARAMETERS.LAYERS]: overlays,
-        [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
+        [PARAMETERS.VIEW]: ViewMode.Split,
       }),
     )
   } else if (typeof PAGE_REF_MAPPING[pageReference] === 'function') {
@@ -117,7 +117,7 @@ export function* doClosePanorama() {
     yield put(
       toGeoSearch({
         [PARAMETERS.LOCATION]: panoramaLocation,
-        [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
+        [PARAMETERS.VIEW]: ViewMode.Split,
         [PARAMETERS.LAYERS]: overlays,
       }),
     )

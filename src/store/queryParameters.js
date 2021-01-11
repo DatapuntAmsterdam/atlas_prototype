@@ -34,8 +34,9 @@ import { getDataSelectionPage, getGeometryFilter } from '../shared/ducks/data-se
 import {
   initialState as filesInitialState,
   REDUCER_KEY as FILES,
-} from '../shared/ducks/files/constants'
-import { getFileName, getFileUrl } from '../shared/ducks/files/selectors'
+  getFileName,
+  getFileUrl,
+} from '../shared/ducks/files/files'
 import {
   getFiltersWithoutShape,
   initialState as filterInitialState,
@@ -43,12 +44,12 @@ import {
 } from '../shared/ducks/filters/filters'
 import {
   getViewMode,
-  initialState as UIInitialState,
+  initialState as uiInitialState,
   isEmbedded,
   isEmbedPreview,
   isMapLinkVisible,
   isPrintMode,
-  UI,
+  REDUCER_KEY as UI,
 } from '../shared/ducks/ui/ui'
 import {
   normalizeCoordinate,
@@ -149,7 +150,7 @@ export default paramsRegistry
   .addParameter(PARAMETERS.VIEW, (routes) => {
     routes.add(routesWithMapActive, UI, 'viewMode', {
       selector: getViewMode,
-      defaultValue: UIInitialState.viewMode,
+      defaultValue: uiInitialState.viewMode,
     })
   })
   .addParameter(PARAMETERS.CATEGORY, (routes) => {
@@ -330,13 +331,13 @@ export default paramsRegistry
   })
   .addParameter(PARAMETERS.EMBED_PREVIEW, (routes) => {
     routes.add(routesWithMapActive, UI, 'isEmbedPreview', {
-      defaultValue: UIInitialState.isEmbedPreview,
+      defaultValue: uiInitialState.isEmbedPreview,
       selector: isEmbedPreview,
     })
   })
   .addParameter(PARAMETERS.EMBED, (routes) => {
     routes.add(routesWithMapActive, UI, 'isEmbed', {
-      defaultValue: UIInitialState.isEmbed,
+      defaultValue: uiInitialState.isEmbed,
       selector: isEmbedded,
     })
   })
@@ -351,7 +352,7 @@ export default paramsRegistry
       UI,
       'isPrintMode',
       {
-        defaultValue: UIInitialState.isPrintMode,
+        defaultValue: uiInitialState.isPrintMode,
         selector: isPrintMode,
       },
     )
@@ -453,7 +454,7 @@ export default paramsRegistry
       UI,
       'isMapLinkVisible',
       {
-        defaultValue: UIInitialState.isMapLinkVisible,
+        defaultValue: uiInitialState.isMapLinkVisible,
         selector: isMapLinkVisible,
       },
       true,

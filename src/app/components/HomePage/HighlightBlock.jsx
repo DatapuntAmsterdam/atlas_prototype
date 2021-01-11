@@ -1,5 +1,5 @@
 import { breakpoint, styles, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { useEffect } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { cmsConfig } from '../../../shared/config/config'
@@ -74,7 +74,7 @@ const ImageCardWrapperSmall = styled.div`
 const HighlightBlock = () => {
   const { results, fetchData, loading, error } = useFromCMS(cmsConfig.HOME_HIGHLIGHT)
 
-  React.useEffect(() => {
+  useEffect(() => {
     ;(async () => {
       await fetchData()
     })()
@@ -98,7 +98,11 @@ const HighlightBlock = () => {
               showError={error}
               {...(results && results[0])}
               teaserImage={
-                results && results[0] && getImageFromCms(results[0].teaserImage, 900, 900)
+                (results &&
+                  results[0] &&
+                  results[0].teaserImage &&
+                  getImageFromCms(results[0].teaserImage, 900, 900)) ||
+                null
               }
               styleAs="h2"
             />
@@ -113,7 +117,9 @@ const HighlightBlock = () => {
                       loading={loading}
                       showError={error}
                       {...result}
-                      teaserImage={getImageFromCms(result.teaserImage, 500, 500)}
+                      teaserImage={
+                        result.teaserImage ? getImageFromCms(result.teaserImage, 500, 500) : null
+                      }
                     />
                   ))
               : null}

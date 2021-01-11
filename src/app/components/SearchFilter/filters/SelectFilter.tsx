@@ -1,5 +1,5 @@
 import { Label, Select } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { FilterProps } from '../models'
 import { formatAllOptionLabel, formatOptionLabel } from '../utils'
@@ -11,7 +11,7 @@ const StyledLabel = styled(Label)`
   color: transparent;
 `
 
-const SelectFilter: React.FC<FilterProps> = ({
+const SelectFilter: FunctionComponent<FilterProps> = ({
   type,
   label,
   options,

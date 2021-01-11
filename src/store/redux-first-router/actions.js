@@ -1,7 +1,7 @@
 import { ROUTER_NAMESPACE, routing } from '../../app/routes'
 import { HEADER_LINKS } from '../../shared/config/config'
 import { DATASET_ROUTE_MAPPER } from '../../shared/ducks/data-selection/constants'
-import { VIEW_MODE } from '../../shared/ducks/ui/ui'
+import { ViewMode } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../parameters'
 import environment from '../../environment'
 
@@ -94,17 +94,17 @@ export const toMap = (preserve = false, forceSaga = true) => ({
     preserve,
     forceSaga,
     additionalParams: {
-      [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+      [PARAMETERS.VIEW]: ViewMode.Map,
     },
     query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+      [PARAMETERS.VIEW]: ViewMode.Map,
     },
   },
 })
 
 export const toMapWithLegendOpen = (layers) => {
   const additionalParams = {
-    [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+    [PARAMETERS.VIEW]: ViewMode.Map,
     [PARAMETERS.LEGEND]: true,
     [PARAMETERS.LAYERS]: layers,
   }
@@ -142,7 +142,7 @@ export const toPanoramaAndPreserveQuery = (
     heading,
     ...(reference.length === 3 ? { [PARAMETERS.DETAIL_REFERENCE]: reference } : {}),
     ...(pageReference ? { [PARAMETERS.PAGE_REFERENCE]: pageReference } : {}),
-    [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
+    [PARAMETERS.VIEW]: ViewMode.Split,
   })
 
 export const extractIdEndpoint = (endpoint) => {
@@ -151,6 +151,7 @@ export const extractIdEndpoint = (endpoint) => {
 export const getDetailPageData = (endpoint) => {
   // TODO: Add endpoint mapping when new router is introduced
   let matches = endpoint
+    .split('?')[0] // Remove query
     .replace('bag/v1.1/', 'bag/') // Clean URL if this is using the new BAG v1.1 API
     .replace('iiif-metadata/', 'bouwdossiers/') // Clean URL if this is using the new IIIF Metadata API
   // eslint-disable-next-line no-useless-escape
@@ -181,22 +182,6 @@ export const toConstructionFilesFromEndpoint = (endpoint) => {
 export const toDatasetSearch = toSearchOfType(routing.datasetSearch.type)
 export const toSearch = toSearchOfType(routing.search.type)
 
-export const toDataSuggestion = (payload, view) => {
-  const { type, subtype, id } = getDetailPageData(payload.endpoint)
-  const tracking = {
-    category: payload.category,
-    event: 'auto-suggest',
-    query: payload.typedQuery,
-  }
-  return toDataDetail(
-    [id, type, subtype],
-    {
-      [PARAMETERS.VIEW]: view,
-    },
-    tracking,
-  )
-}
-
 export const toDatasetDetail = (payload) => ({
   type: routing.datasetDetail.type,
   payload,
@@ -213,7 +198,7 @@ export const toAdresses = () => ({
   type: routing.addresses.type,
   meta: {
     query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.FULL,
+      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })
@@ -222,7 +207,7 @@ export const toCadastralObjects = () => ({
   type: routing.cadastralObjects.type,
   meta: {
     query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.FULL,
+      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })
@@ -231,7 +216,7 @@ export const toEstablishments = () => ({
   type: routing.establishments.type,
   meta: {
     query: {
-      [PARAMETERS.VIEW]: VIEW_MODE.FULL,
+      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })
@@ -289,7 +274,7 @@ export const toDatasetsTableWithFilter = (datasetType, filter) => ({
   meta: {
     additionalParams: {
       ...(filter ? { [PARAMETERS.FILTERS]: filter } : {}),
-      [PARAMETERS.VIEW]: VIEW_MODE.FULL,
+      [PARAMETERS.VIEW]: ViewMode.Full,
     },
   },
 })

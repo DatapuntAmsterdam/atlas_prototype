@@ -1,31 +1,32 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import { lazy } from 'react'
+import { connect, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors'
-import { toDetailFromEndpoint as endpointActionCreator } from '../../../store/redux-first-router/actions'
-import SplitScreen from '../../components/SplitScreen/SplitScreen'
-import DataSelection from '../../components/DataSelection/DataSelection'
 import { getSelectionType } from '../../../shared/ducks/selection/selection'
 import {
   getViewMode,
   isPrintMode,
   setViewMode as setViewModeAction,
-  VIEW_MODE,
+  ViewMode,
 } from '../../../shared/ducks/ui/ui'
+import { getUser } from '../../../shared/ducks/user/user'
+import { toDetailFromEndpoint as endpointActionCreator } from '../../../store/redux-first-router/actions'
 import { getPage } from '../../../store/redux-first-router/selectors'
+import DataSelection from '../../components/DataSelection/DataSelection'
+import PanoAlert from '../../components/PanoAlert/PanoAlert'
+import SplitScreen from '../../components/SplitScreen/SplitScreen'
 import PAGES from '../../pages'
 
-const DataDetailPage = React.lazy(() =>
+const DataDetailPage = lazy(() =>
   import(/* webpackChunkName: "DataDetailPage" */ '../DataDetailPage/DataDetailPage'),
 )
-const LocationSearch = React.lazy(() =>
+const LocationSearch = lazy(() =>
   import(
     /* webpackChunkName: "LocationSearchContainer" */ '../../components/LocationSearch/LocationSearch'
   ),
 )
-const PanoramaContainer = React.lazy(() =>
+const PanoramaContainer = lazy(() =>
   import(
     /* webpackChunkName: "PanoramaContainer" */ '../../../panorama/containers/PanoramaContainer'
   ),
@@ -47,6 +48,7 @@ if (typeof window !== 'undefined') {
 }) => {
   let mapProps = {}
   let Component = null
+  const user = useSelector(getUser)
 
   switch (currentPage) {
     case PAGES.DATA_DETAIL:
@@ -65,10 +67,14 @@ if (typeof window !== 'undefined') {
       break
 
     case PAGES.PANORAMA:
-      Component = <PanoramaContainer isFullscreen={viewMode === VIEW_MODE.FULL} />
+      Component = user.authenticated ? (
+        <PanoramaContainer isFullscreen={viewMode === ViewMode.Full} />
+      ) : (
+        <PanoAlert />
+      )
       mapProps = {
         isFullscreen: true,
-        toggleFullscreen: () => setViewMode(VIEW_MODE.SPLIT),
+        toggleFullscreen: () => setViewMode(ViewMode.Split),
       }
 
       break
@@ -86,7 +92,7 @@ if (typeof window !== 'undefined') {
     case PAGES.CADASTRAL_OBJECTS:
       Component = <DataSelection />
       mapProps = {
-        toggleFullscreen: () => setViewMode(VIEW_MODE.SPLIT),
+        toggleFullscreen: () => setViewMode(ViewMode.Split),
       }
 
       break
@@ -97,22 +103,19 @@ if (typeof window !== 'undefined') {
       }
   }
 
-  if (viewMode === VIEW_MODE.MAP) {
+  if (viewMode === ViewMode.Map) {
     return <MapComponent {...mapProps} />
   }
   if (Component) {
-    if (viewMode === VIEW_MODE.FULL) {
+    if (viewMode === ViewMode.Full) {
       return Component
     }
 
-    if (viewMode === VIEW_MODE.SPLIT) {
+    if (viewMode === ViewMode.Split) {
       return (
         <SplitScreen
           leftComponent={
-            <MapComponent
-              isFullscreen={false}
-              toggleFullscreen={() => setViewMode(VIEW_MODE.MAP)}
-            />
+            <MapComponent isFullscreen={false} toggleFullscreen={() => setViewMode(ViewMode.Map)} />
           }
           rightComponent={Component}
           printMode={printMode}

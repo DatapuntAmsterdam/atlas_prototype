@@ -1,5 +1,5 @@
 import { CardContainer } from '@amsterdam/asc-ui'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'

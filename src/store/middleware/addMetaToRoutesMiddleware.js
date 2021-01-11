@@ -3,6 +3,9 @@ import paramsRegistry from '../params-registry'
 let nrOfRoutesDispatched = 0
 
 const addMetaToRoutesMiddleware = ({ getState }) => (next) => (action) => {
+  if (window.location.pathname.includes('kaart')) {
+    return next(action)
+  }
   if (paramsRegistry.isRouterType(action)) {
     if (getState().location.type !== action.type || action?.meta?.location?.kind === 'pop') {
       nrOfRoutesDispatched = 0

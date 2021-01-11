@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle,camelcase */
 import { LatLngLiteral } from 'leaflet'
-import NotificationLevel from '../../app/models/notification'
 import config, { DataSelectionType } from '../../app/pages/MapPage/config'
 import getListFromApi from '../../app/pages/MapPage/detail/getListFromApi'
 import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
@@ -501,7 +500,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 1,
           value: 'Indicatie geconstateerd',
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
@@ -509,14 +508,14 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 2,
           value: 'In onderzoek',
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
       const { nummeraanduidingData } = result
       return {
         notifications,
-        title: 'Adres (ligplaats)',
+        title: 'Adres',
         subTitle: result._display,
         infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
@@ -564,7 +563,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 1,
           value: `Status: ${result.verblijfsobject?.status}`,
-          level: NotificationLevel.Attention,
+          level: 'info',
         })
       }
 
@@ -572,7 +571,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 2,
           value: 'Dit is een nevenadres',
-          level: NotificationLevel.Attention,
+          level: 'info',
         })
       }
 
@@ -580,7 +579,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 3,
           value: 'Indicatie geconstateerd',
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
@@ -588,14 +587,14 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 4,
           value: 'In onderzoek',
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
       const { verblijfsobjectData } = result
       return {
         notifications,
-        title: 'Adres (nummeraanduiding)',
+        title: 'Adres',
         subTitle: result._display,
         infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
@@ -640,7 +639,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 1,
           value: result.status,
-          level: NotificationLevel.Attention,
+          level: 'info',
         })
       }
 
@@ -648,7 +647,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 2,
           value: 'Dit is een nevenadres',
-          level: NotificationLevel.Attention,
+          level: 'info',
         })
       }
 
@@ -656,7 +655,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 3,
           value: 'Indicatie geconstateerd',
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
@@ -664,14 +663,14 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 4,
           value: 'In onderzoek',
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
       const { nummeraanduidingData } = result
       return {
         notifications,
-        title: 'Adres (verblijfsobject)',
+        title: 'Adres',
         subTitle: result._display,
         infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
@@ -755,7 +754,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 1,
           value: result.status,
-          level: NotificationLevel.Attention,
+          level: 'info',
         })
       }
 
@@ -812,7 +811,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 1,
           value: 'Indicatie geconstateerd',
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
@@ -820,7 +819,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications.push({
           id: 2,
           value: 'In onderzoek',
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
@@ -828,7 +827,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
 
       return {
         notifications,
-        title: 'Adres (standplaats)',
+        title: 'Adres',
         subTitle: result._display,
         infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
         items: [
@@ -1020,7 +1019,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             { term: 'Soort handeling', description: result.type as string },
             { term: 'Bron', description: result.bron },
             { term: 'Intekening', description: result.intekening },
-            { term: 'Nouwkeurigheid', description: result.nouwkeurig },
+            { term: 'Nauwkeurigheid', description: result.nauwkeurig },
             { term: 'Opmerkingen', description: result.opmerkingen },
             {
               term: 'Oorlogsincidentrapport',
@@ -1803,7 +1802,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             result.bijzondereRechtstoestand && result.bijzondereRechtstoestand.title
               ? result.bijzondereRechtstoestand.title
               : false,
-          level: NotificationLevel.Error,
+          level: 'error',
         })
       }
 
@@ -1915,7 +1914,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           id: 1,
           value:
             'De grenzen van dit winkelgebied zijn indicatief. Er kunnen geen rechten aan worden ontleend.',
-          level: NotificationLevel.Attention,
+          level: 'info',
         },
       ],
       items: [

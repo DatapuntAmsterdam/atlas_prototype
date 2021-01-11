@@ -1,5 +1,5 @@
 import { Card, CardContent, Heading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { CMSResultItem } from '../../utils/useFromCMS'
 import EditorialCard from '../EditorialCard'
@@ -33,7 +33,7 @@ type CardListProps = {
   loading: boolean
 }
 
-const CardList: React.FC<CardListProps> = ({ title, loading, results }) => (
+const CardList: FunctionComponent<CardListProps> = ({ title, loading, results }) => (
   <StyledCard isLoading={loading}>
     <StyledCardContent>
       {/* @ts-ignore */}

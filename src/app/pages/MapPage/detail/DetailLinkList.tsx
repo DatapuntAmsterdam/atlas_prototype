@@ -1,6 +1,6 @@
 import { Link as AscLink, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { HTMLAttributes } from 'react'
+import { FunctionComponent, HTMLAttributes } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { DetailResultItemLinkList, Link } from '../../../../map/types/details'
@@ -18,7 +18,7 @@ export interface DetailLinkListProps extends HTMLAttributes<HTMLDivElement> {
   item: DetailResultItemLinkList
 }
 
-const DetailLinkList: React.FC<DetailLinkListProps> = ({ item, ...otherProps }) => {
+const DetailLinkList: FunctionComponent<DetailLinkListProps> = ({ item, ...otherProps }) => {
   const { trackEvent } = useMatomo()
 
   function trackClick(link: Link) {

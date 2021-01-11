@@ -1,4 +1,3 @@
-import React from 'react'
 import { shallow } from 'enzyme/build'
 import configureMockStore from 'redux-mock-store'
 import { sharePage, showEmbedPreview, showPrintMode } from '../../../../shared/ducks/ui/ui'

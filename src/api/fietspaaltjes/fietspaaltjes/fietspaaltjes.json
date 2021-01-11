@@ -1,0 +1,56 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/fietspaaltjes/fietspaaltjes/CE-0150-2019/?format=json",
+      "title": "CE-0150-2019"
+    }
+  },
+  "schema": "https://schemas.data.amsterdam.nl/datasets/fietspaaltjes/fietspaaltjes#fietspaaltjes",
+  "at": "4, bij Amstel 178(2019 voetgangers gebied)",
+  "id": "CE-0150-2019",
+  "area": "Amsterdam-Centrum",
+  "type": [
+    "uitneembaar"
+  ],
+  "count": 2,
+  "ruimte": [
+    "Te smal: minder dan 1,6m"
+  ],
+  "street": "Wagenstraat",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      121777.2265991029,
+      486649.2881042263
+    ]
+  },
+  "noodzaak": [
+    "nodig tegen sluipverkeer"
+  ],
+  "soortWeg": [
+    "duidelijk voetgebied, (bijna)geen gefiets"
+  ],
+  "markering": [
+    "markering ontbreekt"
+  ],
+  "uiterlijk": [
+    "rood/wit"
+  ],
+  "score2013": null,
+  "veiligheid": [
+    "vrij moeilijke locatie"
+  ],
+  "paaltjesWeg": [
+    "nu paaltje(s)"
+  ],
+  "soortPaaltje": [
+    "paaltje(s) ong. 75cm hoog"
+  ],
+  "scoreCurrent": "matig",
+  "zichtInDonker": [
+    "licht en reflectie OK"
+  ],
+  "beschadigingen": [
+    "Versleten of te weinig markering"
+  ]
+}

@@ -22,7 +22,7 @@ import { waitForAuthentication } from '../user/user'
 import { SELECTION_TYPE, setSelection } from '../../ducks/selection/selection'
 import { isMapPage } from '../../ducks/ui/ui'
 import PAGES from '../../../app/pages'
-import { ERROR_TYPES, setGlobalError } from '../../ducks/error/error-message'
+import { ErrorType, setGlobalError } from '../../ducks/error/error-message'
 
 // Todo: DP-6390
 export function* fetchMapSearchResults() {
@@ -38,13 +38,22 @@ export function* fetchMapSearchResults() {
       const results = replaceBuurtcombinatie(geoSearchResults)
       yield put(fetchMapSearchResultsSuccessList(results, getNrOfSearchResults(geoSearchResults)))
 
-      const { results: resultsPanel, errors } = yield call(search, location, user)
+      const { results: resultsPanel, errors } = yield call(
+        search,
+        user,
+        location
+          ? {
+              lat: location.latitude,
+              lng: location.longitude,
+            }
+          : null,
+      )
       yield put(
         fetchMapSearchResultsSuccessPanel(resultsPanel, getNumberOfResultsPanel(resultsPanel)),
       )
 
       if (errors) {
-        yield put(setGlobalError(ERROR_TYPES.GENERAL_ERROR))
+        yield put(setGlobalError(ErrorType.General))
       }
     }
   } catch (error) {

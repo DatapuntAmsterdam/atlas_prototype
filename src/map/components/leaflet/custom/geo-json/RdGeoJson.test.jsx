@@ -1,4 +1,3 @@
-import React from 'react'
 import { shallow } from 'enzyme'
 import leafletModule from 'leaflet'
 import RdGeoJson from './RdGeoJson'

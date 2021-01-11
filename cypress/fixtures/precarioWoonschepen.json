@@ -1,0 +1,16 @@
+{
+  "panelType": "Precario woonschip",
+  "panelHeading": "Tariefgebied A",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Categorie": "Woonschepen, vlotten en aanhorigheden",
+        "Jaar": "2020",
+        "Stadsdeel": "Centrum, oost, West en Zuid",
+        "Tarief per jaar per m2": "€ 11,-"
+      }
+    }
+  ],
+  "linkLists": []
+}

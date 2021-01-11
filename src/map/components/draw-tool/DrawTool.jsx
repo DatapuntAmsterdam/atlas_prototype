@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import drawToolConfig from '../../services/draw-tool/draw-tool.config'
 import ToggleDrawing from '../toggle-drawing/ToggleDrawingContainer'

@@ -1,5 +1,4 @@
 import { cleanup, fireEvent, render } from '@testing-library/react'
-import * as React from 'react'
 import * as reactRedux from 'react-redux'
 import { Filter, FilterOption, FilterType } from '../../models/filter'
 import * as ducks from '../../pages/SearchPage/SearchPageDucks'

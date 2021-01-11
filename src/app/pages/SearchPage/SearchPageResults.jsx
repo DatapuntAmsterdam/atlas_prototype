@@ -10,11 +10,10 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import PARAMETERS from '../../../store/parameters'
-import NotificationLevel from '../../models/notification'
 import PAGES from '../../pages'
 import formatCount from '../../utils/formatCount'
 import SEARCH_PAGE_CONFIG, { EDITORIAL_SEARCH_PAGES } from './config'
@@ -177,7 +176,7 @@ const SearchPageResults = ({
           )}
           {pageInfo && pageInfo.hasLimitedResults && !pageInfo.hasNextPage && (
             <>
-              <StyledAlert level={NotificationLevel.Attention} dismissible>
+              <StyledAlert level="info" dismissible>
                 <Paragraph>
                   Er zijn meer resultaten, om technische redenen kunnen alleen de eerste 10 pagina’s
                   worden getoond.

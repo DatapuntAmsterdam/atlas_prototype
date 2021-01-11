@@ -3,10 +3,9 @@ import 'leaflet-draw'
 import 'leaflet-rotatedmarker'
 import 'leaflet.markercluster'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { Component } from 'react'
 import { GeoJSON, Map, ScaleControl, TileLayer, ZoomControl } from 'react-leaflet'
 import ReactResizeDetector from 'react-resize-detector'
-import isIE from '../../../app/utils/isIE'
 import {
   dataSelectionType,
   DEFAULT_LAT,
@@ -33,11 +32,6 @@ import markerConfig from './services/marker-config.constant'
 import { panoramaOrientationIcon, panoramaPersonIcon } from './services/panorama-icon'
 import searchIcon from './services/search-icon'
 
-if (isIE) {
-  // This solves inconsistency in the leaflet draw for IE11
-  window.L.Browser.touch = false
-}
-
 const visibleToOpacity = (isVisible) => (isVisible ? 100 : 0)
 
 const convertBounds = (map) => {
@@ -58,7 +52,7 @@ const ICONS = {
 }
 
 // Todo: AfterBeta: can be removed
-class MapLeaflet extends React.Component {
+class MapLeaflet extends Component {
   constructor(props) {
     super(props)
     this.onZoomEnd = this.onZoomEnd.bind(this)
@@ -87,6 +81,35 @@ class MapLeaflet extends React.Component {
         this.checkIfActiveElementNeedsUpdate(this.activeElement)
       }
     }
+  }
+
+  handleResize() {
+    const { onResizeEnd } = this.props
+    this.MapElement.invalidateSize()
+    onResizeEnd({
+      boundingBox: convertBounds(this.MapElement),
+    })
+    if (this.activeElement) {
+      this.fitActiveElement(getBounds(this.activeElement))
+    }
+  }
+
+  handleLoading(layer) {
+    const { _leaflet_id: leafletId } = layer
+
+    this.setState((state) => ({
+      pendingLayers: !state.pendingLayers.includes(leafletId)
+        ? [...state.pendingLayers, leafletId]
+        : state.pendingLayers,
+    }))
+  }
+
+  handleLoaded(layer) {
+    const { _leaflet_id: leafletId } = layer
+
+    this.setState((state) => ({
+      pendingLayers: state.pendingLayers.filter((layerId) => layerId !== leafletId),
+    }))
   }
 
   onZoomEnd(event) {
@@ -120,17 +143,6 @@ class MapLeaflet extends React.Component {
 
   onClusterGroupBounds(bounds) {
     this.fitActiveElement(bounds)
-  }
-
-  handleResize() {
-    const { onResizeEnd } = this.props
-    this.MapElement.invalidateSize()
-    onResizeEnd({
-      boundingBox: convertBounds(this.MapElement),
-    })
-    if (this.activeElement) {
-      this.fitActiveElement(getBounds(this.activeElement))
-    }
   }
 
   checkIfActiveElementNeedsUpdate(element) {
@@ -180,24 +192,6 @@ class MapLeaflet extends React.Component {
         this.MapElement.panInsideBounds(bounds)
       }
     }
-  }
-
-  handleLoading(layer) {
-    const { _leaflet_id: leafletId } = layer
-
-    this.setState((state) => ({
-      pendingLayers: !state.pendingLayers.includes(leafletId)
-        ? [...state.pendingLayers, leafletId]
-        : state.pendingLayers,
-    }))
-  }
-
-  handleLoaded(layer) {
-    const { _leaflet_id: leafletId } = layer
-
-    this.setState((state) => ({
-      pendingLayers: state.pendingLayers.filter((layerId) => layerId !== leafletId),
-    }))
   }
 
   render() {

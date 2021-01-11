@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
   hasPrintMode,
-  hideEmbedMode,
+  hideEmbedPreview,
   hidePrintMode,
   isMapActive,
 } from '../../../shared/ducks/ui/ui'
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       hidePrintMode,
-      hideEmbedMode,
+      hideEmbedPreview,
     },
     dispatch,
   )

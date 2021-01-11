@@ -1,4 +1,3 @@
-import React from 'react'
 import { shallow } from 'enzyme'
 
 import MapSearchResults from './MapSearchResults'
@@ -10,9 +9,14 @@ jest.mock('redux-first-router-link', () => ({
 }))
 
 jest.mock('../../../shared/services/coordinate-reference-system')
-
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(() => []),
+}))
+
+jest.mock('../../../app/utils/useGetLegacyPanoramaPreview', () => () => ({
+  panoramaUrl: '/foo',
+  link: '/link',
+  linkComponent: null,
 }))
 
 describe('MapSearchResults', () => {

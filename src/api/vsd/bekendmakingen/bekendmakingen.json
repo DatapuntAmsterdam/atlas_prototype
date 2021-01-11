@@ -1,0 +1,29 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/vsd/bekendmakingen/4115/",
+      "title": "Aanvraag omgevingsvergunning Rapenburgerstraat 89-4 1011VL Amsterdam"
+    }
+  },
+  "_display": "Aanvraag omgevingsvergunning Rapenburgerstraat 89-4 1011VL Amsterdam",
+  "ogc_fid": 4115,
+  "wkb_geometry": {
+    "type": "Point",
+    "coordinates": [
+      122358.000091748,
+      486897.000461374
+    ]
+  },
+  "id": "bekendmakingen_punt.fid-35b41870_1765d94f87f_-63a7",
+  "oid_": 2542237,
+  "categorie": "wonen",
+  "onderwerp": "omgevingsvergunning",
+  "titel": "Aanvraag omgevingsvergunning Rapenburgerstraat 89-4 1011VL Amsterdam",
+  "beschrijving": "realiseren van een dakterras aan de achtergevel op de vierde verdieping ten behoeve van de woonfunctie",
+  "url": "https://zoek.officielebekendmakingen.nl/gmb-2020-297564.html",
+  "postcodehuisnummer": "",
+  "plaats": "",
+  "straat": "",
+  "datum": "2020-11-12T23:00:00Z",
+  "overheid": "Amsterdam"
+}

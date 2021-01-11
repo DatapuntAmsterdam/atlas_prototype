@@ -1,17 +1,16 @@
 import { Alert, Heading, Paragraph, Row, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { FunctionComponent, lazy, useEffect, useState, useMemo } from 'react'
+import { FunctionComponent, lazy, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { resetFile } from '../../../shared/ducks/files/actions'
-import { getFileName, getFileUrl } from '../../../shared/ducks/files/selectors'
+import { Bouwdossier, getBouwdossierById } from '../../../api/iiif-metadata/bouwdossier'
+import { getFileName, getFileUrl, resetFile } from '../../../shared/ducks/files/files'
 import { isPrintMode } from '../../../shared/ducks/ui/ui'
 import ConstructionFileDetail from '../../components/ConstructionFileDetail/ConstructionFileDetail'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import usePromise, { PromiseStatus } from '../../utils/usePromise'
-import { getBouwdossierById, Bouwdossier } from '../../../api/iiif-metadata/bouwdossier'
 
 const ImageViewer = lazy(
   () => import(/* webpackChunkName: "ImageViewer" */ '../../components/ImageViewer/ImageViewer'),
@@ -46,9 +45,7 @@ const ConstructionFilesPage: FunctionComponent = () => {
   const fileUrl: string = useSelector(getFileUrl)
   const printMode: boolean = useSelector(isPrintMode)
 
-  const bouwdossierResult = usePromise(
-    useMemo(() => getBouwdossierById(id.replace('id', '')), [id]),
-  )
+  const bouwdossierResult = usePromise(() => getBouwdossierById(id.replace('id', '')), [id])
   const { titel: title } = results || {}
 
   useEffect(() => {

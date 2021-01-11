@@ -1,0 +1,44 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/monumenten/monumenten/022797ed-89ac-4597-b789-0818c585d7f6/"
+    }
+  },
+  "identificerende_sleutel_monument": "022797ed-89ac-4597-b789-0818c585d7f6",
+  "monumentnummer": 518276,
+  "monumentnaam": "Zaadkoepel",
+  "monumentstatus": "Rijksmonument",
+  "monument_aanwijzingsdatum": "2001-07-13",
+  "betreft_pand": [
+    {
+      "pandidentificatie": "0363100012170497",
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012170497/"
+        }
+      }
+    }
+  ],
+  "_display": "Zaadkoepel",
+  "heeft_als_grondslag_beperking": null,
+  "heeft_situeringen": {
+    "count": 2,
+    "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=022797ed-89ac-4597-b789-0818c585d7f6"
+  },
+  "monumentcoordinaten": {
+    "type": "Point",
+    "coordinates": [
+      122415,
+      486689
+    ]
+  },
+  "ligt_in_complex": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/monumenten/complexen/182a9861-4052-4127-8300-6450cd75b6a5/"
+      }
+    },
+    "identificerende_sleutel_complex": "182a9861-4052-4127-8300-6450cd75b6a5"
+  },
+  "in_onderzoek": "N"
+}

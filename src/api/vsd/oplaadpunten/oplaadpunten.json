@@ -1,0 +1,38 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/vsd/oplaadpunten/4422/",
+      "title": "Vattenfall NL - Noordermarkt 21"
+    }
+  },
+  "_display": "Vattenfall NL - Noordermarkt 21",
+  "id": 4422,
+  "cs_external_id": "b1e1f492-d5f6-11e9-8d03-42010a840003",
+  "wkb_geometry": {
+    "type": "Point",
+    "coordinates": [
+      120913.57403734773,
+      488126.27183307096
+    ]
+  },
+  "street": "Noordermarkt",
+  "housenumber": "21",
+  "housnumberext": null,
+  "postalcode": "1015MZ",
+  "district": null,
+  "countryiso": "NLD",
+  "region": null,
+  "city": "Amsterdam",
+  "provider": "Vattenfall NL",
+  "restrictionsremark": null,
+  "charging_point": 2,
+  "status": "Available",
+  "connector_type": "IEC_62196_T2",
+  "vehicle_type": "",
+  "charging_capability": "11.04",
+  "identification_type": "TYPE_2",
+  "last_update": "2020-11-04T04:09:11.047107Z",
+  "last_status_update": "2020-12-14T15:54:12.045614Z",
+  "charging_cap_max": 11.04,
+  "name": "Vattenfall NL - Noordermarkt 21"
+}

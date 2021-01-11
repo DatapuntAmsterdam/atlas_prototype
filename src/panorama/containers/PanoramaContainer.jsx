@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Map as ContextMenu } from '../../app/components/ContextMenu'
@@ -10,7 +10,7 @@ import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullsc
 import { getMapDetail } from '../../map/ducks/detail/actions'
 import { getMapOverlays } from '../../map/ducks/map/selectors'
 import { pageTypeToEndpoint } from '../../map/services/map-detail/map-detail'
-import { isPrintMode, isPrintOrEmbedMode, setViewMode, VIEW_MODE } from '../../shared/ducks/ui/ui'
+import { isPrintMode, isPrintOrEmbedMode, setViewMode, ViewMode } from '../../shared/ducks/ui/ui'
 import PanoramaToggle from '../components/PanoramaToggle/PanoramaToggle'
 import StatusBar from '../components/StatusBar/StatusBar'
 import {
@@ -32,7 +32,7 @@ import {
   loadScene,
 } from '../services/marzipano/marzipano'
 
-class PanoramaContainer extends React.Component {
+class PanoramaContainer extends Component {
   constructor(props) {
     super(props)
     this.toggleFullscreen = this.toggleFullscreen.bind(this)
@@ -113,10 +113,10 @@ class PanoramaContainer extends React.Component {
     const { isFullscreen, setView } = this.props
 
     if (isFullscreen) {
-      return setView(VIEW_MODE.SPLIT, 'beeld-verkleinen')
+      return setView(ViewMode.Split, 'beeld-verkleinen')
     }
 
-    return setView(VIEW_MODE.FULL, 'beeld-vergroten')
+    return setView(ViewMode.Full, 'beeld-vergroten')
   }
 
   render() {

@@ -1,5 +1,4 @@
 import Marzipano from 'marzipano'
-import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { PANORAMA_CONFIG } from '../panorama-api/panorama-api'
 import {
@@ -73,7 +72,6 @@ function createHotspotTemplate(viewer, scene, view, hotspot, onClickHandler) {
 */
 export function initialize(domElement) {
   const viewer = new Marzipano.Viewer(domElement, {
-    stageType: null,
     stage: {
       preserveDrawingBuffer: true,
       width: 960,

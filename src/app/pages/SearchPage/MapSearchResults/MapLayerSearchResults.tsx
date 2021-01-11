@@ -1,5 +1,5 @@
 import { Link, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 const StyledLink = styled(Link)`
@@ -15,7 +15,7 @@ export interface MapLayerSearchResultsProps {
   results: any[]
 }
 
-const MapLayerSearchResults: React.FC<MapLayerSearchResultsProps> = ({ results }) => {
+const MapLayerSearchResults: FunctionComponent<MapLayerSearchResultsProps> = ({ results }) => {
   return (
     <ul>
       {results.map((result) => (

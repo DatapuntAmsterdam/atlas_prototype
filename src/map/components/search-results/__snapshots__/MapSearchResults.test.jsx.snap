@@ -4,36 +4,24 @@ exports[`MapSearchResults rendering should filter external monumenten on pand re
 <section
   className="map-search-results"
 >
-  <header
-    className="
-          map-search-results__header
-          map-search-results__header--no-pano
-        "
-  >
-    <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
-    >
-      <div
-        className="map-search-results__header-container"
-      >
-        <h1
-          className="map-search-results__header-title"
-        >
-          Resultaten
-        </h1>
-        <h2
-          className="map-search-results__header-subtitle"
-        >
-          locatie 1.12, 654.32
-        </h2>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-search-results__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        Resultaten
+      </Heading>
+      <Heading
+        as="h2"
+        styleAs="h6"
+      >
+        locatie 1.12, 654.32
+      </Heading>
+    </styled.header>
     <ul
       className="map-search-results__list"
     >
@@ -115,36 +103,24 @@ exports[`MapSearchResults rendering should render empty results 1`] = `
 <section
   className="map-search-results"
 >
-  <header
-    className="
-          map-search-results__header
-          map-search-results__header--no-pano
-        "
-  >
-    <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
-    >
-      <div
-        className="map-search-results__header-container"
-      >
-        <h1
-          className="map-search-results__header-title"
-        >
-          Resultaten
-        </h1>
-        <h2
-          className="map-search-results__header-subtitle"
-        >
-          locatie 1.12, 654.32
-        </h2>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-search-results__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        Resultaten
+      </Heading>
+      <Heading
+        as="h2"
+        styleAs="h6"
+      >
+        locatie 1.12, 654.32
+      </Heading>
+    </styled.header>
     <ul
       className="map-search-results__list"
     />
@@ -174,36 +150,24 @@ exports[`MapSearchResults rendering should render results 1`] = `
 <section
   className="map-search-results"
 >
-  <header
-    className="
-          map-search-results__header
-          map-search-results__header--no-pano
-        "
-  >
-    <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
-    >
-      <div
-        className="map-search-results__header-container"
-      >
-        <h1
-          className="map-search-results__header-title"
-        >
-          Resultaten
-        </h1>
-        <h2
-          className="map-search-results__header-subtitle"
-        >
-          locatie 1.12, 654.32
-        </h2>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-search-results__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        Resultaten
+      </Heading>
+      <Heading
+        as="h2"
+        styleAs="h6"
+      >
+        locatie 1.12, 654.32
+      </Heading>
+    </styled.header>
     <ul
       className="map-search-results__list"
     >
@@ -211,7 +175,7 @@ exports[`MapSearchResults rendering should render results 1`] = `
         <Alert
           compact={true}
           dismissible={true}
-          level="attention"
+          level="info"
         >
           Geen details beschikbaar van: Layer 1, Layer 2
         </Alert>
@@ -277,36 +241,24 @@ exports[`MapSearchResults rendering should update results 1`] = `
 <section
   className="map-search-results"
 >
-  <header
-    className="
-          map-search-results__header
-          map-search-results__header--no-pano
-        "
-  >
-    <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
-    >
-      <div
-        className="map-search-results__header-container"
-      >
-        <h1
-          className="map-search-results__header-title"
-        >
-          Resultaten
-        </h1>
-        <h2
-          className="map-search-results__header-subtitle"
-        >
-          locatie 1.12, 654.32
-        </h2>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-search-results__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        Resultaten
+      </Heading>
+      <Heading
+        as="h2"
+        styleAs="h6"
+      >
+        locatie 1.12, 654.32
+      </Heading>
+    </styled.header>
     <ul
       className="map-search-results__list"
     >
@@ -371,36 +323,24 @@ exports[`MapSearchResults rendering should update results 2`] = `
 <section
   className="map-search-results"
 >
-  <header
-    className="
-          map-search-results__header
-          map-search-results__header--no-pano
-        "
-  >
-    <Styled(Link)
-      as="div"
-      title="Geen Panoramabeeld beschikbaar"
-      to={null}
-    >
-      <div
-        className="map-search-results__header-container"
-      >
-        <h1
-          className="map-search-results__header-title"
-        >
-          Resultaten
-        </h1>
-        <h2
-          className="map-search-results__header-subtitle"
-        >
-          locatie 1.12, 654.32
-        </h2>
-      </div>
-    </Styled(Link)>
-  </header>
+  <PanoAlert />
   <div
     className="map-search-results__scroll-wrapper"
   >
+    <styled.header>
+      <Heading
+        as="h1"
+        styleAs="h4"
+      >
+        Resultaten
+      </Heading>
+      <Heading
+        as="h2"
+        styleAs="h6"
+      >
+        locatie 1.12, 654.32
+      </Heading>
+    </styled.header>
     <ul
       className="map-search-results__list"
     >
@@ -408,7 +348,7 @@ exports[`MapSearchResults rendering should update results 2`] = `
         <Alert
           compact={true}
           dismissible={true}
-          level="attention"
+          level="info"
         >
           Geen details beschikbaar van: Layer 3
         </Alert>

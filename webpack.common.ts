@@ -1,7 +1,6 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
-import HtmlWebpackMultiBuildPlugin from 'html-webpack-multi-build-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
@@ -35,19 +34,6 @@ const modernModules = [
 ].map(modulePath)
 
 export interface CreateConfigOptions {
-  /**
-   * If enabled a build optimized for legacy browsers with ES5 code and various polyfills will be created,
-   * otherwise a more modern build using ES2015 syntax will be used with less polyfills.
-   *
-   * @default false
-   */
-  legacy?: boolean
-  /**
-   * If only a single build is needed, e.g. only building a single variant during development to speed up the build.
-   *
-   * @default false
-   */
-  singleBuild?: boolean
   /**
    * If enabled all TypeScript code will be type-checked in the compilation process.
    *
@@ -90,7 +76,7 @@ const svgoConfig = {
 
 export function createConfig(additionalOptions: CreateConfigOptions): Configuration {
   const options: Required<CreateConfigOptions> = {
-    ...{ legacy: false, singleBuild: false, checkTypes: true, mode: 'none' },
+    ...{ checkTypes: true, mode: 'none' },
     ...additionalOptions,
   }
 
@@ -99,10 +85,9 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
 
   return {
     mode: options.mode,
-    name: options.legacy ? 'legacy' : 'modern',
-    entry: options.legacy ? './src/index-legacy.ts' : './src/index.ts',
+    entry: './src/index.ts',
     output: {
-      filename: options.legacy ? '[name]-legacy.js' : '[name].js',
+      filename: '[name].js',
       path: distPath,
       publicPath: '/',
     },
@@ -122,19 +107,19 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
                 [
                   '@babel/preset-env',
                   {
-                    modules: false,
-                    ...(!options.legacy
-                      ? {
-                          useBuiltIns: 'usage',
-                          corejs: 3,
-                        }
-                      : null),
                     targets: {
-                      esmodules: !options.legacy,
+                      esmodules: true,
                     },
+                    useBuiltIns: 'usage',
+                    corejs: 3,
                   },
                 ],
-                '@babel/preset-react',
+                [
+                  '@babel/preset-react',
+                  {
+                    runtime: 'automatic',
+                  },
+                ],
                 '@babel/preset-typescript',
               ],
               plugins: [
@@ -163,9 +148,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
               ? 'style-loader'
               : {
                   loader: MiniCssExtractPlugin.loader,
-                  options: {
-                    hmr: isDev,
-                  },
                 },
             {
               loader: 'css-loader',
@@ -180,9 +162,11 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
                 sourceMap: true,
                 postcssOptions: {
                   plugins: [
+                    // eslint-disable-next-line global-require
                     require('autoprefixer'),
                     ...(isProd
                       ? [
+                          // eslint-disable-next-line global-require
                           require('cssnano')({
                             preset: [
                               'default',
@@ -224,15 +208,8 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           ],
         },
         {
-          test: /\.(jpg|png|svg|cur)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                outputPath: 'assets/',
-              },
-            },
-          ],
+          type: 'asset/resource',
+          test: /\.(jpg|png|cur)$/,
         },
         {
           test: /\.(graphql|gql)$/,
@@ -242,10 +219,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       ],
     },
     plugins: [
-      new CleanWebpackPlugin({
-        // Prevent multiple cleanups, since we're using multiple configs (see: https://github.com/johnagan/clean-webpack-plugin/issues/122).
-        cleanOnceBeforeBuildPatterns: [],
-      }),
+      new CleanWebpackPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           { from: './public/', to: './assets/' },
@@ -259,6 +233,7 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
         ],
       }),
       new DefinePlugin({
+        // eslint-disable-next-line global-require
         'process.env.VERSION': JSON.stringify(require('./package.json').version),
         'process.env.GIT_COMMIT': process.env.GIT_COMMIT,
       }),
@@ -273,16 +248,15 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
           },
         },
         styles: {
+          keepAttributes: true,
           filename: path.join(__dirname, 'src/shared/styles/config/mixins/_sprites.scss'),
         },
       }),
       new MiniCssExtractPlugin({
-        esModule: true,
         filename: isProd ? '[name].[contenthash].css' : '[name].css',
         chunkFilename: isProd ? '[name].[contenthash].css' : '[name].css',
       }),
       new HtmlWebpackPlugin({
-        inject: options.singleBuild,
         template: 'index.ejs',
         lang: 'nl',
         title: 'Data en informatie - Amsterdam',
@@ -304,7 +278,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
             }
           : false,
       }),
-      ...(!options.singleBuild ? [new HtmlWebpackMultiBuildPlugin()] : []),
       ...(options.checkTypes
         ? [
             new ForkTsCheckerWebpackPlugin({

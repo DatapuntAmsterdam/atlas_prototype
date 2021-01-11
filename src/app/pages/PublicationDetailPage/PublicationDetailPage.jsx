@@ -6,18 +6,12 @@ import {
   Heading,
   Paragraph,
   Row,
-  List,
-  ListItem,
-  Link,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React, { useEffect } from 'react'
-import { useParams, Link as RouterLink } from 'react-router-dom'
-import { generatePath } from 'react-router'
-import { routing } from '../../routes'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import environment from '../../../environment'
 import { cmsConfig } from '../../../shared/config/config'
-import { routingKey } from '../../../shared/config/cms.config'
 import { toPublicationDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DocumentCover from '../../components/DocumentCover/DocumentCover'
@@ -49,7 +43,6 @@ const PublicationDetailPage = () => {
     field_intro: intro,
     field_language: lang,
     slug,
-    related,
   } = results || {}
 
   const documentTitle = title && `Publicatie: ${title}`
@@ -86,7 +79,7 @@ const PublicationDetailPage = () => {
 
                 <Column span={{ small: 1, medium: 4, big: 3, large: 6, xLarge: 6 }}>
                   <DocumentCover
-                    imageSrc={getImageFromCms(coverImage, 600, 0, 'fit')}
+                    imageSrc={coverImage ? getImageFromCms(coverImage, 600, 0, 'fit') : null}
                     description={`Download PDF (${fileSize})`}
                     loading={downloadLoading}
                     title={title}
@@ -104,24 +97,6 @@ const PublicationDetailPage = () => {
                   <EditorialContent>
                     {intro && <Paragraph strong dangerouslySetInnerHTML={{ __html: intro }} />}
                     {body && <CustomHTMLBlock body={body} />}
-                    {related?.length ? (
-                      <List>
-                        {related.map(({ id: linkId, title: linkTitle, type, to }) => (
-                          <ListItem key={linkId}>
-                            <Link
-                              as={RouterLink}
-                              to={generatePath(routing[routingKey[type]].path, {
-                                slug: to.payload.slug,
-                                id: to.payload.id,
-                              })}
-                              inList
-                            >
-                              {linkTitle}
-                            </Link>
-                          </ListItem>
-                        ))}
-                      </List>
-                    ) : null}
                   </EditorialContent>
                 </Column>
               </Column>

@@ -1,5 +1,3 @@
-import React from 'react'
-
 const FOCUSABLE_ELEMENTS = [
   // Extend to your needs
   'a[href]:not([disabled])',

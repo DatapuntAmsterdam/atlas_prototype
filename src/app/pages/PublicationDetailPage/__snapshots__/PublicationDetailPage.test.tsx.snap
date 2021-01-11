@@ -12,7 +12,6 @@ exports[`PublicationDetailPage should render the publication when there are resu
       "type": "atlasRouter/PUBLICATION_DETAIL",
     }
   }
-  loading={false}
 >
   <Column
     debug={false}
@@ -118,6 +117,7 @@ exports[`PublicationDetailPage should render the publication when there are resu
           >
             <DocumentCover
               description="Download PDF (file size)"
+              imageSrc={null}
               loading={false}
               onClick={[Function]}
               title="This is a title"

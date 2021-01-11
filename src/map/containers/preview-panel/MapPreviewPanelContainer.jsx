@@ -10,7 +10,7 @@ import { getDetailLocation, getPage } from '../../../store/redux-first-router/se
 
 import { selectNotClickableVisibleMapLayers } from '../../ducks/panel-layers/map-panel-layers'
 import { selectLatestMapDetail } from '../../ducks/detail/selectors'
-import { isEmbedded, isEmbedPreview, setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { isEmbedded, isEmbedPreview, setViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
 import { getDetail } from '../../../shared/ducks/detail/selectors'
 import MapPreviewPanel from './MapPreviewPanel'
 import { getLocationId } from '../../ducks/map/selectors'
@@ -51,11 +51,11 @@ const mapDispatchToProps = (dispatch) => ({
     },
     dispatch,
   ),
-  openPreviewDetail: (detail) => dispatch(toDetailFromEndpoint(detail, VIEW_MODE.MAP)),
+  openPreviewDetail: (detail) => dispatch(toDetailFromEndpoint(detail, ViewMode.Map)),
   openDetail: ({ id, type, subtype }) =>
     dispatch(
       toDataDetail([id, type, subtype], {
-        [PARAMETERS.VIEW]: VIEW_MODE.SPLIT,
+        [PARAMETERS.VIEW]: ViewMode.Split,
         [PARAMETERS.LEGEND]: false,
       }),
     ),

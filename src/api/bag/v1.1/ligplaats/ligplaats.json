@@ -1,0 +1,170 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000881621/?format=json"
+    }
+  },
+  "_display": "Zwanenburgwal 44",
+  "ligplaatsidentificatie": "0363020000881621",
+  "date_modified": "2020-12-15T23:25:18.999820Z",
+  "document_mutatie": "2010-09-09",
+  "document_nummer": "GV00000407",
+  "begin_geldigheid": "2010-09-09",
+  "einde_geldigheid": null,
+  "status": "Plaats aangewezen",
+  "bron": null,
+  "indicatie_geconstateerd": false,
+  "aanduiding_in_onderzoek": false,
+  "bbox": [
+    121788.9,
+    486883.364,
+    121804.182,
+    486903.796
+  ],
+  "geometrie": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          121799.051,
+          486900.667
+        ],
+        [
+          121788.9,
+          486885.781
+        ],
+        [
+          121792.445,
+          486883.364
+        ],
+        [
+          121802.596,
+          486898.25
+        ],
+        [
+          121803.484,
+          486899.826
+        ],
+        [
+          121804.039,
+          486901.181
+        ],
+        [
+          121804.182,
+          486901.81
+        ],
+        [
+          121804.054,
+          486903.099
+        ],
+        [
+          121803.687,
+          486903.658
+        ],
+        [
+          121803.033,
+          486903.796
+        ],
+        [
+          121801.786,
+          486903.444
+        ],
+        [
+          121801.253,
+          486903.081
+        ],
+        [
+          121800.194,
+          486902.069
+        ],
+        [
+          121799.051,
+          486900.667
+        ]
+      ]
+    ]
+  },
+  "hoofdadres": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000393481/?format=json"
+      }
+    },
+    "_display": "Zwanenburgwal 44",
+    "landelijk_id": "0363200000393481",
+    "type_adres": "Hoofdadres",
+    "vbo_status": "Plaats aangewezen",
+    "dataset": "bag"
+  },
+  "adressen": {
+    "count": 1,
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json&ligplaats=0363020000881621"
+  },
+  "buurt": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/buurt/03630000000428/?format=json"
+      }
+    },
+    "_display": "Zuiderkerkbuurt (A04h)",
+    "code": "04h",
+    "naam": "Zuiderkerkbuurt",
+    "dataset": "gebieden"
+  },
+  "_buurtcombinatie": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052033/?format=json"
+      }
+    },
+    "_display": "Nieuwmarkt/Lastage (04)",
+    "naam": "Nieuwmarkt/Lastage",
+    "vollcode": "A04",
+    "dataset": "gebieden"
+  },
+  "_stadsdeel": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/?format=json"
+      }
+    },
+    "_display": "Centrum (A)",
+    "code": "A",
+    "naam": "Centrum",
+    "dataset": "gebieden"
+  },
+  "_gebiedsgerichtwerken": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX02/?format=json"
+      }
+    },
+    "_display": "Centrum-Oost (DX02)",
+    "code": "DX02",
+    "naam": "Centrum-Oost",
+    "dataset": "gebieden"
+  },
+  "_grootstedelijkgebied": null,
+  "_gemeente": {
+    "_display": "Amsterdam",
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/brk/gemeente/Amsterdam/?format=json"
+      }
+    },
+    "naam": "Amsterdam",
+    "code": "0363",
+    "dataset": "bag"
+  },
+  "_woonplaats": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/bag/v1.1/woonplaats/3594/?format=json"
+      }
+    },
+    "_display": "Amsterdam",
+    "landelijk_id": "3594",
+    "dataset": "bag"
+  },
+  "dataset": "bag"
+}

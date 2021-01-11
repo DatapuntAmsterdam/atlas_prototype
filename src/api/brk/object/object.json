@@ -1,0 +1,119 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.11460666170000/?format=json"
+    }
+  },
+  "_display": "ASD05 G 06661 G 0000",
+  "id": "NL.KAD.OnroerendeZaak.11460666170000",
+  "aanduiding": "ASD05 G 06661 G 0000",
+  "kadastrale_gemeente": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/brk/kadastrale-gemeente/ASD05/?format=json"
+      }
+    },
+    "_display": "ASD05",
+    "naam": "Amsterdam",
+    "gemeente": {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/gemeente/Amsterdam/?format=json"
+        }
+      },
+      "_display": "Amsterdam",
+      "gemeente": "Amsterdam",
+      "dataset": "brk"
+    },
+    "dataset": "brk"
+  },
+  "sectie": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/brk/kadastrale-sectie/ASD05G/?format=json"
+      }
+    },
+    "_display": "ASD05G",
+    "sectie": "G",
+    "dataset": "brk"
+  },
+  "objectnummer": "6661",
+  "indexletter": "G",
+  "indexnummer": 0,
+  "soort_grootte": {
+    "code": "1",
+    "omschrijving": "Vastgesteld"
+  },
+  "grootte": "376",
+  "meer_objecten": false,
+  "register9_tekst": "",
+  "status_code": "B",
+  "toestandsdatum": "2019-10-11",
+  "voorlopige_kadastrale_grens": false,
+  "in_onderzoek": "",
+  "geometrie": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            121370.762,
+            487034.023
+          ],
+          [
+            121372.481,
+            487044.481
+          ],
+          [
+            121336.607,
+            487047.967
+          ],
+          [
+            121334.636,
+            487037.675
+          ],
+          [
+            121353.193,
+            487035.798
+          ],
+          [
+            121352.994,
+            487033.829
+          ],
+          [
+            121360.557,
+            487033.064
+          ],
+          [
+            121363.498,
+            487032.767
+          ],
+          [
+            121363.697,
+            487034.736
+          ],
+          [
+            121370.762,
+            487034.023
+          ]
+        ]
+      ]
+    ]
+  },
+  "ontstaan_uit": {
+    "count": 0,
+    "href": "https://api.data.amsterdam.nl/brk/object/?format=json&a_percelen__id=NL.KAD.OnroerendeZaak.11460666170000"
+  },
+  "betrokken_bij": {
+    "count": 38,
+    "href": "https://api.data.amsterdam.nl/brk/object/?format=json&g_percelen__id=NL.KAD.OnroerendeZaak.11460666170000"
+  },
+  "verblijfsobjecten": {
+    "count": 7,
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/?format=json&kadastrale_objecten__id=NL.KAD.OnroerendeZaak.11460666170000"
+  },
+  "_adressen": {
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json&kadastraalobject=NL.KAD.OnroerendeZaak.11460666170000"
+  },
+  "dataset": "brk"
+}

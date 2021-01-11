@@ -11,7 +11,7 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { CmsType, SpecialType } from '../../../shared/config/cms.config'
 import getContentTypeLabel from '../../utils/getContentTypeLabel'
@@ -66,7 +66,7 @@ const StyledCardMedia = styled(CardMedia)<CardMediaProps>`
   `}
 `
 
-const CustomCardMedia: React.FC<CardMediaProps> = ({
+const CustomCardMedia: FunctionComponent<CardMediaProps> = ({
   highlighted,
   image,
   imageDimensions,
@@ -214,7 +214,7 @@ interface EditorialCardProps {
   highlighted?: boolean
 }
 
-const EditorialCard: React.FC<EditorialCardProps> = ({
+const EditorialCard: FunctionComponent<EditorialCardProps> = ({
   title,
   description,
   type,

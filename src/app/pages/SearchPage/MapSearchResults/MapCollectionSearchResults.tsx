@@ -10,7 +10,7 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React, { useCallback, useState } from 'react'
+import { FunctionComponent, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import environment from '../../../../environment'
 
@@ -100,7 +100,9 @@ export interface MapCollectionSearchResultsProps {
 
 const MAX_ITEMS = 4
 
-const MapCollectionSearchResults: React.FC<MapCollectionSearchResultsProps> = ({ results }) => (
+const MapCollectionSearchResults: FunctionComponent<MapCollectionSearchResultsProps> = ({
+  results,
+}) => (
   <CardContainer>
     {results.map((result) => (
       <MapCollectionCard key={result.id} result={result} />
@@ -112,7 +114,7 @@ interface MapCollectionCardProps {
   result: any
 }
 
-const MapCollectionCard: React.FC<MapCollectionCardProps> = ({ result }) => {
+const MapCollectionCard: FunctionComponent<MapCollectionCardProps> = ({ result }) => {
   const [expanded, setExpanded] = useState(false)
   const visibleLayers = result.mapLayers.slice(0, MAX_ITEMS)
   const hiddenLayers = result.mapLayers.slice(MAX_ITEMS)

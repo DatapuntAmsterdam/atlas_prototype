@@ -1,7 +1,7 @@
 import { logout, getAuthHeaders } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
-import { AuthError, NotFoundError } from './errors'
+import { AuthError, NotFoundError } from './customError'
 
 interface FetchOptions extends RequestInit {
   searchParams?: UrlParams
@@ -80,7 +80,7 @@ export const createUrlWithToken = (url: string, token: string) => {
 }
 
 export const fetchProxy = <T = any>(url: string, init: FetchOptions = {}): Promise<T> => {
-  const { headers, searchParams, ...otherOptions } = init
+  const { headers, searchParams = {}, ...otherOptions } = init
   const requestHeaders = new Headers(headers)
   const authHeaders = Object.entries(getAuthHeaders())
 
@@ -95,8 +95,13 @@ export const fetchProxy = <T = any>(url: string, init: FetchOptions = {}): Promi
 
   const fullUrl = new URL(url)
   const params = new URLSearchParams(searchParams)
+  const paramsInUrl = fullUrl.searchParams
 
-  fullUrl.search = params.toString()
+  params.forEach((value, key) => {
+    paramsInUrl.set(key, value)
+  })
+
+  fullUrl.search = paramsInUrl.toString()
 
   return fetch(fullUrl.toString(), options)
     .then((response) => handleErrors(response))

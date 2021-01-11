@@ -1,16 +1,21 @@
-import { Alert, Link } from '@amsterdam/asc-ui'
-import styled from 'styled-components'
+import { Alert, Heading, Link, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import React from 'react'
-import NotificationLevel from '../../../app/models/notification'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
+import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
+import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
+import { getUser } from '../../../shared/ducks/user/user'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
-import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
 
 const StyledLink = styled(Link)`
   padding: 0;
   height: 100%;
   width: 100%;
+`
+
+const Header = styled.header`
+  margin: 0 ${themeSpacing(3)};
 `
 
 const MapSearchResults = ({
@@ -23,6 +28,7 @@ const MapSearchResults = ({
   onMaximize,
 }) => {
   const rdCoordinates = wgs84ToRd(location)
+  const user = useSelector(getUser)
 
   const limitResults = (categories) =>
     categories.map((category) => ({
@@ -36,18 +42,18 @@ const MapSearchResults = ({
 
   return (
     <section className="map-search-results">
-      <header
-        className={`
+      {panoramaUrl && user.authenticated ? (
+        <header
+          className={`
           map-search-results__header
           map-search-results__header--${panoramaUrl ? 'pano' : 'no-pano'}
         `}
-      >
-        <StyledLink
-          to={link}
-          as={linkComponent}
-          title={panoramaUrl ? 'Panoramabeeld tonen' : 'Geen Panoramabeeld beschikbaar'}
         >
-          {panoramaUrl && (
+          <StyledLink
+            to={link}
+            as={linkComponent}
+            title={panoramaUrl ? 'Panoramabeeld tonen' : 'Geen Panoramabeeld beschikbaar'}
+          >
             <img
               alt="Panoramabeeld"
               className="map-detail-result__header-pano"
@@ -55,21 +61,32 @@ const MapSearchResults = ({
               src={panoramaUrl}
               width="438"
             />
-          )}
-          <div className="map-search-results__header-container">
-            <h1 className="map-search-results__header-title">Resultaten</h1>
-            <h2 className="map-search-results__header-subtitle">
-              {`locatie ${rdCoordinates.x.toFixed(2)}, ${rdCoordinates.y.toFixed(2)}`}
-            </h2>
-          </div>
-        </StyledLink>
-      </header>
+            <div className="map-search-results__header-container">
+              <h1 className="map-search-results__header-title">Resultaten</h1>
+              <h2 className="map-search-results__header-subtitle">
+                {`locatie ${rdCoordinates.x.toFixed(2)}, ${rdCoordinates.y.toFixed(2)}`}
+              </h2>
+            </div>
+          </StyledLink>
+        </header>
+      ) : (
+        <PanoAlert />
+      )}
+
       <div className="map-search-results__scroll-wrapper">
+        {!user.authenticated && (
+          <Header>
+            <Heading styleAs="h4">Resultaten</Heading>
+            <Heading styleAs="h6" as="h2">
+              {`locatie ${rdCoordinates.x.toFixed(2)}, ${rdCoordinates.y.toFixed(2)}`}
+            </Heading>
+          </Header>
+        )}
         <ul className="map-search-results__list">
           {missingLayers && (
             <li>
               <Alert
-                level={NotificationLevel.Attention}
+                level="info"
                 dismissible
                 compact
               >{`Geen details beschikbaar van: ${missingLayers}`}</Alert>

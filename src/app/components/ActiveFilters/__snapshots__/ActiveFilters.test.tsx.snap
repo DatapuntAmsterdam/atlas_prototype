@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActiveFilters should render 1`] = `
+<div
+  className="qa-active-filters c-data-selection-active-filters"
+>
+  <ul
+    className="c-data-selection-active-filters__list"
+  >
+    <li
+      className="c-data-selection-active-filters__listitem"
+      key="stadsdeel_naam"
+    >
+      <span>
+        Stadsdeel
+        :
+        Centrum
+      </span>
+      <button
+        className="c-data-selection-active-filters--remove-filter o-btn"
+        onClick={[Function]}
+        title="Filter verwijderen"
+        type="button"
+      >
+        <span
+          className="u-sr-only"
+        >
+          Filter verwijderen
+        </span>
+      </button>
+    </li>
+  </ul>
+</div>
+`;

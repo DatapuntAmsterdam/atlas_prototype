@@ -1,10 +1,10 @@
 import { ChevronDown, ExternalLink } from '@amsterdam/asc-assets'
 import { ContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ReactComponent as Clock } from '../../../shared/assets/icons/Clock.svg'
+import Clock from '../../../shared/assets/icons/Clock.svg'
 import { fetchPanoramaRequestExternal, setPanoramaTags } from '../../ducks/actions'
 import { PANO_LABELS } from '../../ducks/constants'
 import { getStreetViewUrl } from '../../services/panorama-api/panorama-api'
@@ -16,9 +16,9 @@ const PanoramaToggle = ({
   openPanoramaTags,
   openPanoramaExternal,
 }) => {
-  const [showMenu, showMenuToggle] = React.useState(null)
+  const [showMenu, showMenuToggle] = useState(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     showMenuToggle(null)
   }, [currentLabel])
 

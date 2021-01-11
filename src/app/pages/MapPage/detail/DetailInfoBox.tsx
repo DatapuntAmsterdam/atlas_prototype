@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, FunctionComponent } from 'react'
 import {
   Alert,
   Button,
@@ -9,7 +9,7 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { ReactComponent as Metadata } from '../../../../shared/assets/icons/metadata.svg'
+import Metadata from '../../../../shared/assets/icons/metadata.svg'
 import DetailDefinitionList from './DetailDefinitionList'
 import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
 import { Definition } from '../../../../detail/services/glossary.constant'
@@ -27,7 +27,7 @@ export type InfoBoxProps = {
   meta?: DetailResultItemDefinitionListEntry[]
 } & Pick<Definition, 'url' | 'description' | 'plural'>
 
-const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta }) => {
+const DetailInfoBox: FunctionComponent<InfoBoxProps> = ({ plural, description, url, meta }) => {
   const [open, setOpen] = useState(false)
   return (
     <>
@@ -42,7 +42,7 @@ const DetailInfoBox: React.FC<InfoBoxProps> = ({ plural, description, url, meta 
         icon={<Metadata />}
       />
       {open && (
-        <StyledAlert dismissible onDismiss={() => setOpen(false)} level="normal">
+        <StyledAlert dismissible onDismiss={() => setOpen(false)} level="neutral">
           <Heading styleAs="h3" as="h6">
             Uitleg over {plural}
           </Heading>

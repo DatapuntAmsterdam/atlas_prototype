@@ -10,7 +10,7 @@ import {
   themeSpacing,
   TopBar,
 } from '@amsterdam/asc-ui'
-import React, { ReactElement } from 'react'
+import { FunctionComponent, ReactElement } from 'react'
 import styled from 'styled-components'
 import CONSTANTS from '../../../shared/config/constants'
 import PageFilterBox from '../../components/PageFilterBox/PageFilterBox'
@@ -88,7 +88,7 @@ const StyledTopBar = styled(TopBar)`
   border-bottom: 2px solid ${themeColor('tint', 'level3')};
 `
 
-const SearchPageFilters: React.FC<SearchPageFiltersProps> = ({
+const SearchPageFilters: FunctionComponent<SearchPageFiltersProps> = ({
   filters,
   totalCount,
   hideCount,

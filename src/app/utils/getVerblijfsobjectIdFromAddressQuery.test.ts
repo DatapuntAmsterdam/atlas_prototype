@@ -1,11 +1,11 @@
 import { mocked } from 'ts-jest/utils'
 import getVerblijfsobjectIdFromAddressQuery from './getVerblijfsobjectIdFromAddressQuery'
-import { getNummeraanduidingByAddress } from '../../api/v1/bag/nummeraanduiding'
+import { getNummeraanduidingByAddress } from '../../api/bag/v1/nummeraanduiding'
 
 jest.mock('../../shared/services/query-string-parser/query-string-parser')
 jest.mock('../../shared/services/api/api')
-jest.mock('../../api/v1/bag/nummeraanduiding', () => ({
-  ...jest.requireActual('../../api/v1/bag/nummeraanduiding'),
+jest.mock('../../api/bag/v1/nummeraanduiding', () => ({
+  ...(jest.requireActual('../../api/bag/v1/nummeraanduiding') as any),
   getNummeraanduidingByAddress: jest.fn(),
 }))
 

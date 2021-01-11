@@ -7,7 +7,6 @@ import {
 } from '@amsterdam/asc-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
 import styled, { css } from 'styled-components'
 import HeaderSearch from '../../../header/components/HeaderSearch'
 import EmbedHeader from './EmbedHeader'
@@ -59,7 +58,7 @@ const Header = ({
   embedPreviewMode,
   hasMaxWidth,
   hidePrintMode,
-  hideEmbedMode,
+  hideEmbedPreview,
 }) => {
   if (!printOrEmbedMode) {
     return (
@@ -102,7 +101,7 @@ const Header = ({
       >
         <div className={classNames({ 'o-max-width__inner': hasMaxWidth })}>
           {printMode && <PrintHeader closeAction={hidePrintMode} />}
-          {embedPreviewMode && <EmbedHeader closeAction={hideEmbedMode} />}
+          {embedPreviewMode && <EmbedHeader closeAction={hideEmbedPreview} />}
         </div>
       </div>
     </div>

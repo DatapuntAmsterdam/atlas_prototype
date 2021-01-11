@@ -38,13 +38,16 @@ describe('draw-tool service', () => {
     addClassMock = jest.fn()
     enableTextSelectionMock = jest.fn()
     drawPolygonMock = jest.fn()
-    editToolbarMock = () => ({
-      getModeHandlers: () => [
-        {
-          handler: {},
-        },
-      ],
-    })
+    editToolbarMock = class EditToolbar {
+      // eslint-disable-next-line class-methods-use-this
+      getModeHandlers() {
+        return [
+          {
+            handler: {},
+          },
+        ]
+      }
+    }
     featureGroupMock = jest.fn()
     geodesicAreaMock = jest.fn()
     readableAreaMock = jest.fn()
@@ -140,7 +143,6 @@ describe('draw-tool service', () => {
       })
       expect(featureGroupMock).toHaveBeenCalledTimes(1)
       expect(drawPolygonMock).toHaveBeenCalledTimes(1)
-      expect(editToolbarMock().getModeHandlers()[0].handler).toEqual({})
       expect(leafletMap.addLayer).toHaveBeenCalledTimes(1)
 
       // total of all draw events + 1 map click event + 1 layeradd event

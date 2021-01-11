@@ -1,40 +1,31 @@
-import { useCallback, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { fetchDetailData, getServiceDefinition } from '../../../map/services/map'
-import { clearMapDetail, showDetail } from '../../../shared/ducks/detail/actions'
 import { fetchMapDetailSuccess } from '../../../map/ducks/detail/actions'
-import getGeometry from '../../../shared/services/geometry/geometry'
-import { getViewMode, setViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
 import { getCurrentEndpoint } from '../../../map/ducks/detail/selectors'
-import { AuthError, NotFoundError } from '../../../shared/services/api/errors'
+import { fetchDetailData, getServiceDefinition } from '../../../map/services/map'
 import mapFetch from '../../../map/services/map-fetch/map-fetch'
-import useAuthScope from '../../utils/useAuthScope'
+import { clearMapDetail, showDetail } from '../../../shared/ducks/detail/actions'
+import { getViewMode, setViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
+import { AuthError, NotFoundError } from '../../../shared/services/api/customError'
+import getGeometry from '../../../shared/services/geometry/geometry'
 import { routing } from '../../routes'
+import useAuthScope from '../../utils/useAuthScope'
 
 // Todo: AfterBeta: can be removed
-const useDataDetail = <T = any>(
-  id: string,
-  subType: string,
-  type: string,
-): {
-  result: Promise<T>
-  onRetry: () => void
-} => {
+export default function useDataDetail() {
   const dispatch = useDispatch()
   const history = useHistory()
-  const [retryCount, setRetryCount] = useState(0)
 
   const view = useSelector(getViewMode)
   const currentEndpoint = useSelector(getCurrentEndpoint)
 
-  const onRetry = useCallback(() => {
-    setRetryCount((currentCount) => currentCount + 1)
-  }, [setRetryCount])
-
   const { isUserAuthorized } = useAuthScope()
 
-  const result = useMemo(async () => {
+  return async function getDetailData<T = any>(
+    id: string,
+    subType: string,
+    type: string,
+  ): Promise<T> {
     try {
       const serviceDefinition = getServiceDefinition(`${type}/${subType}`)
       const userIsAuthorized = isUserAuthorized(serviceDefinition?.authScopes)
@@ -83,9 +74,9 @@ const useDataDetail = <T = any>(
       // When a detail doesn't have a geometry, it can only be displayed in VIEWMODE.FULL
       // Some endpoints only return a geometry when the user is authenticated e.g. authorized to view it
       if (!geometry) {
-        dispatch(setViewMode(VIEW_MODE.FULL))
-      } else if (view !== VIEW_MODE.MAP) {
-        dispatch(setViewMode(VIEW_MODE.SPLIT))
+        dispatch(setViewMode(ViewMode.Full))
+      } else if (view !== ViewMode.Map) {
+        dispatch(setViewMode(ViewMode.Split))
       }
       return {
         ...mapDetail,
@@ -95,12 +86,5 @@ const useDataDetail = <T = any>(
     } catch (e) {
       return Promise.reject(e)
     }
-  }, [type, subType, id, retryCount])
-
-  return {
-    result,
-    onRetry,
   }
 }
-
-export default useDataDetail

@@ -18,7 +18,7 @@ function getOptions(propertyType: any): DatasetFilterOption[] {
   })
 }
 
-function toDatasetFilters(data: any) {
+export function toDatasetFilters(data: any) {
   const dcatDocProperties = data.components.schemas['dcat-dataset'].properties
   const themaProperties = dcatDocProperties['dcat:theme'].items
   const distributionProperties = dcatDocProperties['dcat:distribution'].items.properties

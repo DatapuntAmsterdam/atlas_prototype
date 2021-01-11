@@ -1,0 +1,27 @@
+{
+  "panelType": "Maatschappelijke activiteit",
+  "panelHeading": "Havom B.V.",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Handelsnaam": "Havom B.V.",
+        "KvK-nummer": "01029509",
+        "Postadres": "",
+        "Bezoekadres": "",
+        "Datum aanvang": "22-12-1983",
+        "Soort bijzondere rechtstoestand": ""
+      }
+    },
+    {
+      "subheading": "Functievervullingen",
+      "items": {}
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Vestigingen",
+      "items": ["Havom B.V."]
+    }
+  ]
+}

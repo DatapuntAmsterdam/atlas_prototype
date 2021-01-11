@@ -1,6 +1,5 @@
 import { ChevronUp, Info } from '@amsterdam/asc-assets'
 import { Alert, Icon, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 import MapLegend from '../../components/legend/MapLegend'
 import MapPanelHandle from '../../components/panel-handle/MapPanelHandle'
@@ -93,7 +92,7 @@ const MapPanel = ({
             />
           )}
           {someLayersRequireZoom && (
-            <ZoomInAlert level="attention">
+            <ZoomInAlert level="info">
               <ZoomInAlertContent>
                 <Icon>
                   <Info />

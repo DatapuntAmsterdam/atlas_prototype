@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react'
+import { FunctionComponent, ReactElement } from 'react'
 import AuthScope from '../../../shared/services/api/authScope'
 import useAuthScope from '../../utils/useAuthScope'
 import AuthAlert, { AuthAlertProps } from '../Alerts/AuthAlert'

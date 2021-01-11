@@ -1,27 +1,24 @@
 import { MapPanelContent } from '@amsterdam/arm-core'
 import { Heading, Link, Paragraph, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import { LatLngLiteral } from 'leaflet'
-import React, { useMemo } from 'react'
+import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import mapSearch, {
   MapSearchCategory,
-  MapSearchResponse,
   MapSearchResult,
 } from '../../../../map/services/map-search/map-search'
 import { getUser } from '../../../../shared/ducks/user/user'
 import formatNumber from '../../../../shared/services/number-formatter/number-formatter'
+import { getDetailPageData } from '../../../../store/redux-first-router/actions'
 import AuthAlert from '../../../components/Alerts/AuthAlert'
-import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
+import PromiseResult from '../../../components/PromiseResult/PromiseResult'
 import ShowMore from '../../../components/ShowMore'
 import useParam from '../../../utils/useParam'
-import usePromise, { PromiseResult, PromiseStatus } from '../../../utils/usePromise'
+import buildDetailUrl from '../detail/buildDetailUrl'
 import { locationParam } from '../query-params'
 import { Overlay } from '../types'
 import PanoramaPreview from './PanoramaPreview'
-import buildDetailUrl from '../detail/buildDetailUrl'
-import { getDetailPageData } from '../../../../store/redux-first-router/actions'
 
 const RESULT_LIMIT = 10
 
@@ -54,10 +51,6 @@ const SubCategoryBlock = styled.div`
   border-bottom: 1px solid ${themeColor('tint', 'level4')};
 `
 
-const StyledLoadingSpinner = styled(LoadingSpinner)`
-  margin: ${themeSpacing(4)} 0;
-`
-
 const Message = styled(Paragraph)`
   margin: ${themeSpacing(4)} 0;
 `
@@ -77,26 +70,13 @@ const StyledPanoramaPreview = styled(PanoramaPreview)`
 const EXCLUDED_RESULTS = 'vestigingen'
 
 export interface MapSearchPanelProps {
-  location: LatLngLiteral
   currentOverlay: Overlay
 }
 
-const MapSearchResults: React.FC<MapSearchPanelProps> = ({ currentOverlay, location }) => {
+const MapSearchResults: FunctionComponent<MapSearchPanelProps> = ({ currentOverlay }) => {
   const user = useSelector(getUser)
-  const [, setLocation] = useParam(locationParam)
-  const result = usePromise(
-    useMemo(
-      () =>
-        mapSearch(
-          {
-            latitude: location.lat,
-            longitude: location.lng,
-          },
-          user,
-        ),
-      [location.lat, location.lng, user],
-    ),
-  )
+  const [location, setLocation] = useParam(locationParam)
+  const factory = () => mapSearch(user, location)
 
   return (
     <MapPanelContent
@@ -107,46 +87,41 @@ const MapSearchResults: React.FC<MapSearchPanelProps> = ({ currentOverlay, locat
         setLocation(null)
       }}
     >
-      <CoordinatesText>
-        <strong>Locatie:</strong> {location.lat}, {location.lng}
-      </CoordinatesText>
-      <StyledPanoramaPreview location={location} radius={180} aspect={2.5} />
-      {renderResult(result)}
-      {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
-        <StyledAuthAlert excludedResults={EXCLUDED_RESULTS} />
-      )}
+      <PromiseResult
+        factory={factory}
+        deps={[location, user]}
+        errorMessage="Er is een fout opgetreden bij het laden van dit blok. Zorg dat er een locatie is opgegeven door op de kaart te klikken"
+      >
+        {({ value }) => (
+          <>
+            <CoordinatesText>
+              <strong>Locatie:</strong> {value.location.lat}, {value.location.lng}
+            </CoordinatesText>
+            <StyledPanoramaPreview location={value.location} radius={180} aspect={2.5} />
+            {value.results.length === 0 ? (
+              <Message>Geen resultaten gevonden.</Message>
+            ) : (
+              value.results.map((category) => (
+                <CategoryBlock key={category.type}>
+                  <CategoryHeading as="h2">{formatCategoryTitle(category)}</CategoryHeading>
+                  {renderResultItems(category.results)}
+                  {category.subCategories.map((subCategory) => (
+                    <SubCategoryBlock key={category.type + subCategory.type}>
+                      <CategoryHeading as="h3">{formatCategoryTitle(subCategory)}</CategoryHeading>
+                      {renderResultItems(subCategory.results)}
+                    </SubCategoryBlock>
+                  ))}
+                </CategoryBlock>
+              ))
+            )}
+            {(!user.scopes.includes('HR/R') || !user.scopes.includes('BRK/RS')) && (
+              <StyledAuthAlert excludedResults={EXCLUDED_RESULTS} />
+            )}
+          </>
+        )}
+      </PromiseResult>
     </MapPanelContent>
   )
-}
-
-function renderResult(result: PromiseResult<MapSearchResponse>) {
-  switch (result.status) {
-    case PromiseStatus.Fulfilled:
-      return renderResponse(result.value)
-    case PromiseStatus.Rejected:
-      return <Message>Resultaten konden niet geladen worden.</Message>
-    default:
-      return <StyledLoadingSpinner />
-  }
-}
-
-function renderResponse({ results }: MapSearchResponse) {
-  if (results.length === 0) {
-    return <Message>Geen resultaten gevonden.</Message>
-  }
-
-  return results.map((category) => (
-    <CategoryBlock key={category.type}>
-      <CategoryHeading as="h2">{formatCategoryTitle(category)}</CategoryHeading>
-      {renderResultItems(category.results)}
-      {category.subCategories.map((subCategory) => (
-        <SubCategoryBlock key={category.type + subCategory.type}>
-          <CategoryHeading as="h3">{formatCategoryTitle(subCategory)}</CategoryHeading>
-          {renderResultItems(subCategory.results)}
-        </SubCategoryBlock>
-      ))}
-    </CategoryBlock>
-  ))
 }
 
 function renderResultItems(results: MapSearchResult[]) {

@@ -1,10 +1,10 @@
-import React from 'react'
+import { FunctionComponent } from 'react'
 
 export interface IconProps {
   icon: string
 }
 
-const Icon: React.FC<IconProps> = ({ icon }) => (
+const Icon: FunctionComponent<IconProps> = ({ icon }) => (
   <span
     className={`
       rc-icon

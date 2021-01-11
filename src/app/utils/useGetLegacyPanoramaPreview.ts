@@ -1,41 +1,40 @@
-import { useSelector } from 'react-redux'
-import { useMemo } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import LegacyLink from 'redux-first-router-link'
 import { LatLngLiteral } from 'leaflet'
-import { getDetailLocation } from '../../store/redux-first-router/selectors'
-import usePromise, { PromiseStatus } from './usePromise'
+import { useSelector } from 'react-redux'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
+import LegacyLink from 'redux-first-router-link'
 import { getPanoramaThumbnail } from '../../api/panorama/thumbnail'
-import buildQueryString from './buildQueryString'
-import { locationParam, panoParam } from '../pages/MapPage/query-params'
 import { PANORAMA_CONFIG } from '../../panorama/services/panorama-api/panorama-api'
 import { toPanoramaAndPreserveQuery } from '../../store/redux-first-router/actions'
+import { getDetailLocation } from '../../store/redux-first-router/selectors'
+import { locationParam, panoParam } from '../pages/MapPage/query-params'
+import useBuildQueryString from './useBuildQueryString'
+import usePromise, { PromiseStatus } from './usePromise'
 
 const useGetLegacyPanoramaPreview = (
   location: (LatLngLiteral & { latitude: number; longitude: number }) | null,
 ) => {
   const legacyReference = useSelector(getDetailLocation)
+  const browserLocation = useLocation()
   const panoramaResult = usePromise(
-    useMemo(
-      () =>
-        location
-          ? getPanoramaThumbnail(
-              {
-                lat: location.lat || location.latitude,
-                lng: location.lng || location.longitude,
-              },
-              {
-                width: 400,
-                fov: 90,
-                horizon: 0.4,
-                aspect: 1.4,
-                radius: 180,
-              },
-            )
-          : Promise.reject(),
-      [location],
-    ),
+    () =>
+      location
+        ? getPanoramaThumbnail(
+            {
+              lat: location.lat || location.latitude,
+              lng: location.lng || location.longitude,
+            },
+            {
+              width: 400,
+              fov: 90,
+              horizon: 0.4,
+              aspect: 1.4,
+              radius: 180,
+            },
+          )
+        : Promise.reject(),
+    [location],
   )
+  const { buildQueryString } = useBuildQueryString()
 
   if (panoramaResult.status !== PromiseStatus.Fulfilled) {
     return {
@@ -56,16 +55,17 @@ const useGetLegacyPanoramaPreview = (
     [locationParam, location],
   ])
   const link =
-    window.location.pathname === '/kaart' || window.location.pathname === '/kaart/'
-      ? `${window.location.pathname}?${panoramaLink}`
+    browserLocation.pathname === '/kaart' || browserLocation.pathname === '/kaart/'
+      ? `${browserLocation.pathname}?${panoramaLink}`
       : toPanoramaAndPreserveQuery(
-          panoramaResult?.value?.id,
+          // eslint-disable-next-line camelcase
+          panoramaResult?.value?.pano_id,
           panoramaResult?.value?.heading,
           legacyReference,
         )
 
   const linkComponent =
-    window.location.pathname === '/kaart' || window.location.pathname === '/kaart/'
+    browserLocation.pathname === '/kaart' || browserLocation.pathname === '/kaart/'
       ? RouterLink
       : LegacyLink
 

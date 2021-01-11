@@ -2,11 +2,11 @@ import { ControlButton } from '@amsterdam/arm-core'
 import { Checkmark, ChevronDown, ExternalLink } from '@amsterdam/asc-assets'
 import { ContextMenu, ContextMenuItem, Icon, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { PANO_LABELS } from '../../../panorama/ducks/constants'
 import { getStreetViewUrl } from '../../../panorama/services/panorama-api/panorama-api'
-import { ReactComponent as Clock } from '../../../shared/assets/icons/Clock.svg'
+import Clock from '../../../shared/assets/icons/Clock.svg'
 import { locationParam, panoParam, panoTagParam } from '../../pages/MapPage/query-params'
 import useParam from '../../utils/useParam'
 
@@ -40,7 +40,7 @@ const ContextMenuButton = styled(ControlButton)`
   height: 44px; // To match the other buttons
 `
 
-const PanoramaViewerMenu: React.FC = () => {
+const PanoramaViewerMenu: FunctionComponent = () => {
   const [location] = useParam(locationParam)
   const [pano] = useParam(panoParam)
   const [panoTag, setPanoTag] = useParam(panoTagParam)
@@ -59,6 +59,7 @@ const PanoramaViewerMenu: React.FC = () => {
   }
 
   return (
+    // @ts-ignore
     <StyledContextMenu
       arrowIcon={<ChevronDown />}
       icon={

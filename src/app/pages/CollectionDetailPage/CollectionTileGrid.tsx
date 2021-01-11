@@ -5,16 +5,12 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
+import { Fragment, FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { Tile, TileLabel } from '../../components/Tile'
 import TileGrid from '../../components/TileGrid/TileGrid'
 import { SizeOnBreakpoint, TileGridItem } from '../../components/TileGrid/TileGridStyle'
 import { CMSResultItem } from '../../utils/useFromCMS'
-
-const FullColumnTileGridItem = styled(TileGridItem)`
-  flex-basis: 100% !important; // IE11
-`
 
 const StyledHeading = styled(Heading)`
   color: ${themeColor('tint', 'level1')};
@@ -74,9 +70,9 @@ const GRID_ITEM_TEMPLATE: Template = {
 
 const GRID_TEMPLATE: SizeOnBreakpoint = { mobileL: [1, 1], tabletM: [1, 4], laptop: [1, 5] }
 
-const CollectionTileGrid: React.FC<Props> = ({ results, loading, title, description }) => (
+const CollectionTileGrid: FunctionComponent<Props> = ({ results, loading, title, description }) => (
   <TileGrid grid={GRID_TEMPLATE}>
-    <FullColumnTileGridItem span={{ mobileL: [2, 2] }}>
+    <TileGridItem span={{ mobileL: [2, 2] }}>
       <Tile as="div" isLoading={loading}>
         <Heading forwardedAs="strong" styleAs="h1">
           Dossier
@@ -84,10 +80,10 @@ const CollectionTileGrid: React.FC<Props> = ({ results, loading, title, descript
         <StyledHeading forwardedAs="h1">{title}</StyledHeading>
         {description && <Paragraph strong dangerouslySetInnerHTML={{ __html: description }} />}
       </Tile>
-    </FullColumnTileGridItem>
+    </TileGridItem>
     {results.map(({ id, linkProps, teaserImage, shortTitle, title: tileTitle }, i) => {
       // Only with 3 items, the first tile (the biggest) shouldn't have the compact style
-      const Provider = results.length === 3 && i === 0 ? React.Fragment : CompactThemeProvider
+      const Provider = results.length === 3 && i === 0 ? Fragment : CompactThemeProvider
       const span = GRID_ITEM_TEMPLATE[results.length][i]
 
       return (

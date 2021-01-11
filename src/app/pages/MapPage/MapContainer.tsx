@@ -1,6 +1,6 @@
 import { Alert, Heading, hooks, Link } from '@amsterdam/asc-ui'
 import { Feature } from 'geojson'
-import React, { useEffect, useMemo, useReducer, useState } from 'react'
+import { FunctionComponent, useEffect, useMemo, useReducer, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import {
@@ -12,7 +12,7 @@ import {
 import { getUser } from '../../../shared/ducks/user/user'
 import { toMap } from '../../../store/redux-first-router/actions'
 import useParam from '../../utils/useParam'
-import MapContext, { initialState, MapContextProps, MapState } from './MapContext'
+import MapContext, { initialState, MapState } from './MapContext'
 import MapPage from './MapPage'
 import { mapLayersParam, panoFullScreenParam, polygonsParam, polylinesParam } from './query-params'
 import buildLeafletLayers from './utils/buildLeafletLayers'
@@ -44,7 +44,7 @@ const reducer = (state: MapState, action: Action): MapState => {
   }
 }
 
-const MapContainer: React.FC<MapContextProps> = ({ children }) => {
+const MapContainer: FunctionComponent = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [activeMapLayers] = useParam(mapLayersParam)
   const [polylines] = useParam(polylinesParam)
@@ -106,7 +106,7 @@ const MapContainer: React.FC<MapContextProps> = ({ children }) => {
         setPanoFullScreen,
       }}
     >
-      <Alert level="attention" dismissible>
+      <Alert level="info" dismissible>
         <Heading as="h3">Let op: Deze nieuwe interactieve kaart is nog in aanbouw.</Heading>
         <Link darkBackground to={toMap()} as={RouterLink} inList>
           Naar de oude kaart

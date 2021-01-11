@@ -15,7 +15,6 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 

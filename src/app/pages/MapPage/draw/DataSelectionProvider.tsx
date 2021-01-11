@@ -2,7 +2,7 @@
 import { useStateRef } from '@amsterdam/arm-core'
 import { Feature } from 'geojson'
 import { LatLng, LatLngTuple } from 'leaflet'
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { getUserScopes } from '../../../../shared/ducks/user/user'
@@ -52,6 +52,7 @@ export type MapVisualization = MapVisualizationGeoJSON | MapVisualizationMarkers
 export type DataSelectionResult = Array<{
   id: string
   name: string
+  marker?: Marker
 }>
 
 export type DataSelectionResponse = {
@@ -186,7 +187,7 @@ async function getData(
   }
 }
 
-const DataSelectionProvider: React.FC = ({ children }) => {
+const DataSelectionProvider: FunctionComponent = ({ children }) => {
   const [mapVisualization, setMapVisualizationState, mapVisualizationRef] = useStateRef<
     MapVisualization[]
   >([])
@@ -209,7 +210,7 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     }
     try {
       if (id) {
-        setLoadingIds([...loadingIdsRef.current, id])
+        setLoadingIds([...(loadingIdsRef.current ?? []), id])
       }
 
       const params = {
@@ -241,7 +242,7 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     (results: DataSelection[]) => {
       const ids = results.map(({ id }) => id)
       const newDataSelection = [
-        ...dataSelectionRef?.current?.filter(({ id: dataId }) => !ids.includes(dataId)),
+        ...(dataSelectionRef?.current?.filter(({ id: dataId }) => !ids.includes(dataId)) ?? []),
         ...results,
       ].sort((a, b) => a.order - b.order)
       setDataSelectionState(newDataSelection)
@@ -253,7 +254,8 @@ const DataSelectionProvider: React.FC = ({ children }) => {
     (results: MapVisualization[]) => {
       const ids = results.map(({ id }) => id)
       const newMapVisualization = [
-        ...mapVisualizationRef?.current?.filter(({ id: markerId }) => !ids.includes(markerId)),
+        ...(mapVisualizationRef?.current?.filter(({ id: markerId }) => !ids.includes(markerId)) ??
+          []),
         ...results,
       ]
       setMapVisualizationState(newMapVisualization)

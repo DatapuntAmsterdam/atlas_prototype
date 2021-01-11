@@ -1,0 +1,18 @@
+{
+  "panelType": "Oplaadpunt",
+  "panelHeading": "NewMotion - Leeuwendalersweg 23",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Adres": "Leeuwendalersweg 23, Amsterdam",
+        "Aantal": "2",
+        "Soort": "Gewoon laadpunt",
+        "Capaciteit": "3.68",
+        "Connectortype": "IEC_62196_T2",
+        "Status": "beschikbaar"
+      }
+    }
+  ],
+  "linkLists": []
+}

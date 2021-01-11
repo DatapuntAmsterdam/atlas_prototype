@@ -29,7 +29,7 @@ import {
   SHARE_PAGE,
   SHOW_EMBED_PREVIEW,
   SHOW_PRINT,
-  VIEW_MODE,
+  ViewMode,
 } from '../../../shared/ducks/ui/ui'
 import {
   AUTHENTICATE_USER_REQUEST,
@@ -65,7 +65,7 @@ const trackEvents = {
 
     const viewMode = getViewMode(state)
 
-    if (viewMode === VIEW_MODE.MAP && query?.[PARAMETERS.VIEW] === undefined) {
+    if (viewMode === ViewMode.Map && query?.[PARAMETERS.VIEW] === undefined) {
       return [
         MATOMO_CONSTANTS.TRACK_EVENT,
         'navigation', // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP
@@ -76,8 +76,8 @@ const trackEvents = {
 
     if (
       !isFirstAction &&
-      viewMode === VIEW_MODE.SPLIT &&
-      query?.[PARAMETERS.VIEW] === VIEW_MODE.MAP
+      viewMode === ViewMode.Split &&
+      query?.[PARAMETERS.VIEW] === ViewMode.Map
     ) {
       return [
         MATOMO_CONSTANTS.TRACK_EVENT,
@@ -124,14 +124,14 @@ const trackEvents = {
         return [
           MATOMO_CONSTANTS.TRACK_EVENT,
           TRACK_ACTION_NAVIGATION, // NAVIGATION -> CLICK TOGGLE FULLSCREEN FROM MAP Or SPLITSCREEN
-          `georesultaten-${viewMode === VIEW_MODE.MAP ? 'volledig-weergeven' : 'kaart-vergroten'}`,
+          `georesultaten-${viewMode === ViewMode.Map ? 'volledig-weergeven' : 'kaart-vergroten'}`,
           null,
         ]
 
       case PAGES.PANORAMA: {
         let view = tracking
         if (typeof tracking === 'boolean') {
-          view = viewMode === VIEW_MODE.MAP ? 'kaart-verkleinen' : 'kaart-vergroten'
+          view = viewMode === ViewMode.Map ? 'kaart-verkleinen' : 'kaart-vergroten'
         }
         return [MATOMO_CONSTANTS.TRACK_EVENT, TRACK_ACTION_NAVIGATION, `panorama-${view}`, null]
       }
@@ -141,7 +141,7 @@ const trackEvents = {
       case PAGES.CADASTRAL_OBJECTS: {
         let view = tracking
         if (typeof tracking === 'boolean') {
-          view = viewMode === VIEW_MODE.MAP ? 'kaart-verkleinen' : 'kaart-vergroten'
+          view = viewMode === ViewMode.Map ? 'kaart-verkleinen' : 'kaart-vergroten'
         }
         return [MATOMO_CONSTANTS.TRACK_EVENT, TRACK_ACTION_NAVIGATION, `dataselectie-${view}`, null]
       }
@@ -150,7 +150,7 @@ const trackEvents = {
         return [
           MATOMO_CONSTANTS.TRACK_EVENT,
           TRACK_ACTION_NAVIGATION,
-          `detail-${viewMode === VIEW_MODE.MAP ? 'volledig-weergeven' : 'kaart-vergroten'}`,
+          `detail-${viewMode === ViewMode.Map ? 'volledig-weergeven' : 'kaart-vergroten'}`,
           null,
         ]
     }

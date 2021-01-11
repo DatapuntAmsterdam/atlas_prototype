@@ -1,14 +1,14 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import escapeStringRegexp from 'escape-string-regexp'
 import { LocationDescriptorObject } from 'history'
-import React, { useMemo } from 'react'
+import { FunctionComponent, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { generatePath, Link } from 'react-router-dom'
 import SearchType from '../../../app/pages/SearchPage/constants'
 import { routing } from '../../../app/routes'
 import toSlug from '../../../app/utils/toSlug'
 import { CmsType } from '../../../shared/config/cms.config'
-import { getViewMode, VIEW_MODE } from '../../../shared/ducks/ui/ui'
+import { getViewMode, ViewMode } from '../../../shared/ducks/ui/ui'
 import PARAMETERS from '../../../store/parameters'
 import { decodeLayers } from '../../../store/queryParameters'
 import { extractIdEndpoint, getDetailPageData } from '../../../store/redux-first-router/actions'
@@ -22,7 +22,7 @@ export interface AutoSuggestItemProps {
   label: string
 }
 
-const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
+const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   content,
   suggestion,
   highlightValue,
@@ -77,7 +77,11 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
       let subType = ''
 
       if (suggestion.type === CmsType.Special) {
-        ;[, subType] = suggestion.label.match(/\(([^()]*)\)$/)
+        const match = suggestion.label.match(/\(([^()]*)\)$/)
+
+        if (match) {
+          ;[, subType] = match
+        }
       }
 
       return {
@@ -94,7 +98,7 @@ const AutoSuggestItem: React.FC<AutoSuggestItemProps> = ({
       return {
         pathname: routing.data.path,
         search: new URLSearchParams({
-          [PARAMETERS.VIEW]: VIEW_MODE.MAP,
+          [PARAMETERS.VIEW]: ViewMode.Map,
           [PARAMETERS.QUERY]: `${inputValue}`,
           [PARAMETERS.LEGEND]: 'true',
           [PARAMETERS.LAYERS]: searchParams.get(PARAMETERS.LAYERS) || '',

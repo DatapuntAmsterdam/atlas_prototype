@@ -1,6 +1,5 @@
 import { cleanup, render } from '@testing-library/react'
 import { shallow } from 'enzyme'
-import React from 'react'
 import IIIFThumbnail from './IIIFThumbnail'
 
 const mockAccessToken = 'ABC'
@@ -40,7 +39,7 @@ describe('IIIFThumbnail', () => {
     ;(fetch as jest.Mock).mockReturnValueOnce(
       Promise.resolve({
         ok: false,
-        blob: () => Promise.resolve(new Blob('image')),
+        blob: () => Promise.resolve(new Blob()),
       }),
     )
     const { findByTestId } = render(<IIIFThumbnail src="" title="foo" />)

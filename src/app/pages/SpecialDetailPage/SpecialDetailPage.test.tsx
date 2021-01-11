@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme'
-import React from 'react'
 import { mocked } from 'ts-jest/utils'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'

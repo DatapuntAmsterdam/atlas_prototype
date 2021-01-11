@@ -1,0 +1,384 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "meta": { "links": { "self": { "href": "http://jsonapi.org/format/1.0/" } } }
+  },
+  "data": {
+    "type": "node--article",
+    "id": "b6a0b6fd-3c71-4f26-a39e-55a2c3d67405",
+    "links": {
+      "self": {
+        "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405?resourceVersion=id%3A4371"
+      }
+    },
+    "attributes": {
+      "drupal_internal__nid": 4371,
+      "drupal_internal__vid": 4371,
+      "langcode": "en",
+      "revision_timestamp": "2020-11-18T11:21:36+00:00",
+      "revision_log": null,
+      "status": true,
+      "title": "Winkelleegstand neemt toe in Amsterdamse winkelgebieden",
+      "created": "2020-11-18T11:16:38+00:00",
+      "changed": "2020-11-18T12:07:02+00:00",
+      "promote": false,
+      "sticky": false,
+      "default_langcode": true,
+      "revision_translation_affected": true,
+      "path": { "alias": "", "pid": null, "langcode": "en" },
+      "body": {
+        "value": "\u003Cp\u003E\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003EDeze informatie is terug te vinden in het dashboard\u003Cem\u003E \u003C/em\u003E\u003Ca href=\u0022https://data.amsterdam.nl/specials/dashboard/dashboard-winkelgebieden/123c7cb8-f759-4bbb-a292-68366f54885b/\u0022\u003E\u003Cspan\u003Ealles over winkelgebieden\u003C/span\u003E\u003C/a\u003E\u003Cem\u003E.\u003C/em\u003E In dit dashboard is zo veel mogelijk data gebundeld over de meer dan honderd winkelgebieden die Amsterdam telt. Zo blijkt bijvoorbeeld dat het aantal horecazaken in de Ferdinand Bolstraat is toegenomen terwijl hier het aantal mode- en kledingzaken de afgelopen 10 jaar is afgenomen. \u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003C/p\u003E\u0026#13;\n\u0026#13;\n\u003Cp\u003E\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003EIn het dashboard is ook informatie opgenomen over de\u003Cem\u003E \u003C/em\u003Ekoopkrachtbinding in het stadsdeel waar de winkelgebieden in liggen. \u003C/span\u003E\u003C/span\u003E\u003C/span\u003EZo valt te lezen dat het aandeel Centrumbewoners dat in het eigen stadsdeel besteedt tussen 2018 en begin 2020 (voordat de\u00a0\u003Cem\u003Elockdown\u00a0\u003C/em\u003Einging) stabiel is gebleven ondanks de toegenomen aankopen van producten via internet.\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003E Andere stadsdelen hebben juist hun koopkrachtbinding zien afnemen in deze periode.\u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003C/p\u003E\u0026#13;\n\u0026#13;\n\u003Cp\u003E\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003EVerder is in het dashboard achtergrondinformatie over de winkelgebieden terug te vinden, waaronder websites van Bedrijfsinvesteringszones (BIZ) en bijvoorbeeld e-mailadressen en contactgegevens van winkelstraatmanagers. \u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003C/p\u003E\u0026#13;\n\u0026#13;\n\u003Cp\u003E\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003EHet dashboard is te bereiken via het \u003Ca href=\u0022https://data.amsterdam.nl/dossiers/dossier/dossier-detailhandel/d5d551d6-14aa-41da-a3c2-de9825655d2b/\u0022\u003Ed\u003Cspan\u003Eossier Detailhandel\u003C/span\u003E\u003C/a\u003E. In dit dossier zijn links te vinden naar publicaties (waaronder de Monitor Detailhandel 2020), datasets en tabellen rondom het thema detailhandel.\u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003C/p\u003E\u0026#13;\n",
+        "format": "basic_html",
+        "processed": "\u003Cp\u003E\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003EDeze informatie is terug te vinden in het dashboard\u003Cem\u003E \u003C/em\u003E\u003Ca href=\u0022https://data.amsterdam.nl/specials/dashboard/dashboard-winkelgebieden/123c7cb8-f759-4bbb-a292-68366f54885b/\u0022\u003E\u003Cspan\u003Ealles over winkelgebieden\u003C/span\u003E\u003C/a\u003E\u003Cem\u003E.\u003C/em\u003E In dit dashboard is zo veel mogelijk data gebundeld over de meer dan honderd winkelgebieden die Amsterdam telt. Zo blijkt bijvoorbeeld dat het aantal horecazaken in de Ferdinand Bolstraat is toegenomen terwijl hier het aantal mode- en kledingzaken de afgelopen 10 jaar is afgenomen. \u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003C/p\u003E\n\n\u003Cp\u003E\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003EIn het dashboard is ook informatie opgenomen over de\u003Cem\u003E \u003C/em\u003Ekoopkrachtbinding in het stadsdeel waar de winkelgebieden in liggen. \u003C/span\u003E\u003C/span\u003E\u003C/span\u003EZo valt te lezen dat het aandeel Centrumbewoners dat in het eigen stadsdeel besteedt tussen 2018 en begin 2020 (voordat de\u00a0\u003Cem\u003Elockdown\u00a0\u003C/em\u003Einging) stabiel is gebleven ondanks de toegenomen aankopen van producten via internet.\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003E Andere stadsdelen hebben juist hun koopkrachtbinding zien afnemen in deze periode.\u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003C/p\u003E\n\n\u003Cp\u003E\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003EVerder is in het dashboard achtergrondinformatie over de winkelgebieden terug te vinden, waaronder websites van Bedrijfsinvesteringszones (BIZ) en bijvoorbeeld e-mailadressen en contactgegevens van winkelstraatmanagers. \u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003C/p\u003E\n\n\u003Cp\u003E\u003Cspan\u003E\u003Cspan\u003E\u003Cspan\u003EHet dashboard is te bereiken via het \u003Ca href=\u0022https://data.amsterdam.nl/dossiers/dossier/dossier-detailhandel/d5d551d6-14aa-41da-a3c2-de9825655d2b/\u0022\u003Ed\u003Cspan\u003Eossier Detailhandel\u003C/span\u003E\u003C/a\u003E. In dit dossier zijn links te vinden naar publicaties (waaronder de Monitor Detailhandel 2020), datasets en tabellen rondom het thema detailhandel.\u003C/span\u003E\u003C/span\u003E\u003C/span\u003E\u003C/p\u003E",
+        "summary": ""
+      },
+      "field_byline": "OIS",
+      "field_intro": "De winkelleegstand in de Amsterdamse winkelgebieden is in 2020 toegenomen. Zo staat in de Amsterdamse Poort 16% van het aantal winkelunits leeg. Maar ook in de Kalverstraat, waar jarenlang vrijwel geen leegstand was, blijft in 2020 5% van de winkelruimte onbenut. Dit blijkt uit data van Locatus over winkels en winkelgebieden in Amsterdam. ",
+      "field_language": "nl",
+      "field_links": [
+        {
+          "uri": "https://data.amsterdam.nl/specials/dashboard/dashboard-winkelgebieden/123c7cb8-f759-4bbb-a292-68366f54885b/",
+          "title": "Dashboard: Alles over Amsterdamse winkelgebieden",
+          "options": []
+        },
+        {
+          "uri": "https://data.amsterdam.nl/dossiers/dossier/dossier-detailhandel/d5d551d6-14aa-41da-a3c2-de9825655d2b/",
+          "title": "Dossier Detailhandel",
+          "options": []
+        }
+      ],
+      "field_publication_date": "2020-11-18T13:00:00+01:00",
+      "field_short_title": null,
+      "field_slug": "winkelleegstand-neemt-toe-in-amsterdamse-winkelgebieden",
+      "field_teaser": "De winkelleegstand in de Amsterdamse winkelgebieden is in 2020 toegenomen. Zo staat in de Amsterdamse Poort 16% van het aantal winkelunits leeg. Maar ook in de Kalverstraat, waar jarenlang vrijwel geen leegstand was, blijft in 2020 5% van de winkelruimte onbenut.",
+      "field_type": "content"
+    },
+    "relationships": {
+      "node_type": {
+        "data": { "type": "node_type--node_type", "id": "2d3a1aa7-a3dd-4a5a-b476-6044f5955f02" },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/node_type?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/node_type?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "revision_uid": {
+        "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/revision_uid?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/revision_uid?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "uid": {
+        "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/uid?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/uid?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "feeds_item": {
+        "data": null,
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/feeds_item?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/feeds_item?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "field_accordions": {
+        "data": [
+          {
+            "type": "paragraph--accordion",
+            "id": "b401b609-73fc-4cb4-83fc-23115e3f60a7",
+            "meta": { "target_revision_id": 136 }
+          }
+        ],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/field_accordions?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/field_accordions?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "field_cover_image": {
+        "data": { "type": "media--image", "id": "54888e86-ef52-46e1-9a7d-fb9f97e239ff" },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/field_cover_image?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/field_cover_image?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "field_downloads": {
+        "data": [],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/field_downloads?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/field_downloads?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "field_related": {
+        "data": [],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/field_related?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/field_related?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "field_tags": {
+        "data": [],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/field_tags?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/field_tags?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "field_teaser_image": {
+        "data": { "type": "media--image", "id": "89bf7076-6b7e-4d3c-abb5-65b9b3a1fad9" },
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/field_teaser_image?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/field_teaser_image?resourceVersion=id%3A4371"
+          }
+        }
+      },
+      "field_themes": {
+        "data": [{ "type": "taxonomy_term--themes", "id": "7983b0fd-bbe4-4e0f-b3b4-458529a215b6" }],
+        "links": {
+          "related": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/field_themes?resourceVersion=id%3A4371"
+          },
+          "self": {
+            "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405/relationships/field_themes?resourceVersion=id%3A4371"
+          }
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "paragraph--accordion",
+      "id": "b401b609-73fc-4cb4-83fc-23115e3f60a7",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/paragraph/accordion/b401b609-73fc-4cb4-83fc-23115e3f60a7"
+        }
+      },
+      "attributes": {
+        "drupal_internal__id": 136,
+        "drupal_internal__revision_id": 136,
+        "langcode": "en",
+        "status": true,
+        "created": "2020-11-18T11:21:36+00:00",
+        "parent_id": "4371",
+        "parent_type": "node",
+        "parent_field_name": "field_accordions",
+        "behavior_settings": "Array",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "field_accordion_content": null,
+        "field_accordion_intro": null,
+        "field_accordion_label": null,
+        "field_accordion_title": null
+      },
+      "relationships": {
+        "paragraph_type": {
+          "data": {
+            "type": "paragraphs_type--paragraphs_type",
+            "id": "04fd50ee-dc1e-4094-b0cd-156b9f2bc6e7"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/paragraph/accordion/b401b609-73fc-4cb4-83fc-23115e3f60a7/paragraph_type"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/paragraph/accordion/b401b609-73fc-4cb4-83fc-23115e3f60a7/relationships/paragraph_type"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "media--image",
+      "id": "54888e86-ef52-46e1-9a7d-fb9f97e239ff",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff?resourceVersion=id%3A9451"
+        }
+      },
+      "attributes": {
+        "drupal_internal__mid": 9451,
+        "drupal_internal__vid": 9451,
+        "langcode": "en",
+        "revision_created": "2020-11-18T11:44:29+00:00",
+        "revision_log_message": null,
+        "status": true,
+        "name": "cover-artikel-winkelleegstand-neemt-toe-30007-170413_winkels-oostpoort_marjolijn_pokorny-0576.jpg",
+        "created": "2020-11-18T11:44:17+00:00",
+        "changed": "2020-11-18T11:44:17+00:00",
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": { "alias": "", "pid": null, "langcode": "en" },
+        "field_credit": null
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "566d1ca3-25d0-4d66-ac13-65a0651c973f"
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/bundle?resourceVersion=id%3A9451"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/relationships/bundle?resourceVersion=id%3A9451"
+            }
+          }
+        },
+        "revision_user": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/revision_user?resourceVersion=id%3A9451"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/relationships/revision_user?resourceVersion=id%3A9451"
+            }
+          }
+        },
+        "uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/uid?resourceVersion=id%3A9451"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/relationships/uid?resourceVersion=id%3A9451"
+            }
+          }
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "f9c54088-1f5e-46b8-aae7-e4b22639e1cc",
+            "meta": {
+              "alt": "Cover artikel winkelleegstand neemt toe",
+              "title": "",
+              "width": 1280,
+              "height": 570
+            }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/thumbnail?resourceVersion=id%3A9451"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/relationships/thumbnail?resourceVersion=id%3A9451"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": null,
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/feeds_item?resourceVersion=id%3A9451"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/relationships/feeds_item?resourceVersion=id%3A9451"
+            }
+          }
+        },
+        "field_media_image": {
+          "data": {
+            "type": "file--file",
+            "id": "f9c54088-1f5e-46b8-aae7-e4b22639e1cc",
+            "meta": {
+              "alt": "Cover artikel winkelleegstand neemt toe",
+              "title": "",
+              "width": 1280,
+              "height": 570
+            }
+          },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/field_media_image?resourceVersion=id%3A9451"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/media/image/54888e86-ef52-46e1-9a7d-fb9f97e239ff/relationships/field_media_image?resourceVersion=id%3A9451"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "f9c54088-1f5e-46b8-aae7-e4b22639e1cc",
+      "links": {
+        "self": {
+          "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/f9c54088-1f5e-46b8-aae7-e4b22639e1cc"
+        }
+      },
+      "attributes": {
+        "drupal_internal__fid": 5156,
+        "langcode": "en",
+        "filename": "cover-artikel-winkelleegstand-neemt-toe-30007-170413_winkels-oostpoort_marjolijn_pokorny-0576.jpg",
+        "uri": {
+          "value": "public://images/cover-artikel-winkelleegstand-neemt-toe-30007-170413_winkels-oostpoort_marjolijn_pokorny-0576.jpg",
+          "url": "/sites/default/files/images/cover-artikel-winkelleegstand-neemt-toe-30007-170413_winkels-oostpoort_marjolijn_pokorny-0576.jpg"
+        },
+        "filemime": "image/jpeg",
+        "filesize": 425927,
+        "status": true,
+        "created": "2020-11-18T11:44:17+00:00",
+        "changed": "2020-11-18T11:44:29+00:00"
+      },
+      "relationships": {
+        "uid": {
+          "data": { "type": "user--user", "id": "3fde2192-a760-4852-841d-cba2c133d947" },
+          "links": {
+            "related": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/f9c54088-1f5e-46b8-aae7-e4b22639e1cc/uid"
+            },
+            "self": {
+              "href": "http://cms.data.amsterdam.nl/jsonapi/file/file/f9c54088-1f5e-46b8-aae7-e4b22639e1cc/relationships/uid"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": {
+      "href": "http://cms.data.amsterdam.nl/jsonapi/node/article/b6a0b6fd-3c71-4f26-a39e-55a2c3d67405?include=field_accordions%2Cfield_cover_image.field_media_image%2Cfield_related.field_teaser_image.field_media_image%2Cfield_downloads.field_file.field_media_file"
+    }
+  }
+}

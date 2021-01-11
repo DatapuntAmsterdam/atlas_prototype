@@ -15,8 +15,17 @@ import {
   themeSpacing,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import L, { LatLng, LatLngExpression } from 'leaflet'
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import L, { LatLng, LatLngExpression, LatLngTuple } from 'leaflet'
+import { useHistory } from 'react-router-dom'
+import {
+  Fragment,
+  FunctionComponent,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { useSelector } from 'react-redux'
 import RouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
@@ -24,12 +33,14 @@ import { getUserScopes } from '../../../../shared/ducks/user/user'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage'
 import LoginLink from '../../../components/Links/LoginLink/LoginLink'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
-import NotificationLevel from '../../../models/notification'
 import formatCount from '../../../utils/formatCount'
 import config, { AuthScope, DataSelectionType } from '../config'
 import MapContext from '../MapContext'
 import { Overlay } from '../types'
 import DataSelectionContext from './DataSelectionContext'
+import { routing } from '../../../routes'
+import useBuildQueryString from '../../../utils/useBuildQueryString'
+import { polygonsParam, polylinesParam } from '../query-params'
 
 const ResultLink = styled(RouterLink)`
   width: 100%;
@@ -68,6 +79,7 @@ const AccordionContent = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 `
 const StyledAccordion = styled(Accordion)`
   margin-top: ${themeSpacing(2)};
@@ -105,9 +117,9 @@ type Props = {
   currentOverlay: Overlay
 }
 
-const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
+const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
   const [delayedLoadingIds, setDelayedLoadingIds] = useState<string[]>([])
-  const [highlightMarker, setHighlightMarker] = useState<LatLng | null>(null)
+  const [highlightMarker, setHighlightMarker] = useState<LatLngTuple | null>(null)
   const {
     dataSelection,
     mapVisualizations: mapVisualization,
@@ -121,23 +133,25 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
   const { setShowDrawTool } = useContext(MapContext)
   const userScopes = useSelector(getUserScopes)
   const { trackEvent } = useMatomo()
+  const history = useHistory()
   const [showDesktopVariant] = hooks.useMatchMedia({ minBreakpoint: 'tabletM' })
   const memoHighlightMaker = useMemo<LatLngExpression>(() => highlightMarker || [0, 0], [
     highlightMarker,
   ])
+  const { buildQueryString } = useBuildQueryString()
 
   // Effect to delay the loading states, this is to prevent the results block to collapse and re-open in a short time
   useEffect(() => {
-    let timeOutId: number
+    let timeoutId: number
     if (loadingIds.length) {
-      timeOutId = setTimeout(() => {
+      timeoutId = window.setTimeout(() => {
         setDelayedLoadingIds(loadingIds)
       }, 400)
     } else {
       setDelayedLoadingIds([])
     }
     return () => {
-      clearTimeout(timeOutId)
+      window.clearTimeout(timeoutId)
     }
   }, [loadingIds, setDelayedLoadingIds])
 
@@ -209,6 +223,10 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
       stackOrder={currentOverlay === Overlay.Results ? 2 : 1}
       onClose={() => {
         setShowDrawTool(false)
+        history.push({
+          pathname: routing.dataSearchGeo_TEMP.path,
+          search: buildQueryString(undefined, [polylinesParam, polygonsParam]),
+        })
       }}
     >
       <GlobalStyle />
@@ -259,7 +277,7 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
         )}
       </Wrapper>
       {forbidden ? (
-        <StyledAlert level={NotificationLevel.Attention} dismissible>
+        <StyledAlert level="info" dismissible>
           <Paragraph>
             {userScopes.includes(AuthScope.BRK)
               ? `Medewerkers met speciale bevoegdheden kunnen inloggen om kadastrale objecten met
@@ -271,7 +289,7 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
       ) : (
         <AccordionWrapper>
           {dataSelectionWithMarkers.map(({ id, result, size, page, totalCount, mapData }, i) => (
-            <React.Fragment key={id}>
+            <Fragment key={id}>
               <StyledAccordion
                 {...(dataSelectionWithMarkers.length === 1
                   ? {
@@ -343,12 +361,10 @@ const DrawResults: React.FC<Props> = ({ currentOverlay }) => {
                   )}
                 </AccordionContent>
                 {totalCount === 0 && (
-                  <StyledAlert level={NotificationLevel.Attention}>
-                    Er zijn geen resultaten
-                  </StyledAlert>
+                  <StyledAlert level="info">Er zijn geen resultaten</StyledAlert>
                 )}
               </StyledAccordion>
-            </React.Fragment>
+            </Fragment>
           ))}
         </AccordionWrapper>
       )}

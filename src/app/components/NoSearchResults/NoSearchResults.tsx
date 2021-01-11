@@ -1,5 +1,5 @@
 import { Heading, Link, List, Paragraph, themeSpacing, Typography } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import RouterLink, { To } from 'redux-first-router-link'
 import styled from 'styled-components'
 import { formatNoResultsMessage } from './utils'
@@ -14,7 +14,7 @@ const StyledTypgraphy = styled(Typography)`
   margin-bottom: 0;
 `
 
-const StyledListItem: React.FC = ({ children }) => (
+const StyledListItem: FunctionComponent = ({ children }) => (
   <StyledTypgraphy forwardedAs="li">{children}</StyledTypgraphy>
 )
 
@@ -24,9 +24,13 @@ export interface NoSearchResultsProps {
   to?: To
 }
 
-const NoSearchResults: React.FC<NoSearchResultsProps> = ({ query, label = '', to = false }) => (
+const NoSearchResults: FunctionComponent<NoSearchResultsProps> = ({
+  query,
+  label = '',
+  to = false,
+}) => (
   <>
-    <Paragraph>{formatNoResultsMessage(query, label)}</Paragraph>
+    <Paragraph data-testid="noSearchResults">{formatNoResultsMessage(query, label)}</Paragraph>
     <Heading as="h3">Zoeksuggesties</Heading>
     <StyledList>
       <StyledListItem>Maak de zoekcriteria eventueel minder specifiek.</StyledListItem>

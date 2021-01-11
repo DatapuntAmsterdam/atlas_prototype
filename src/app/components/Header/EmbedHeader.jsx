@@ -1,11 +1,11 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 
 /* istanbul ignore next */
 const EmbedHeader = ({ closeAction }) => {
-  const [embedLink, setEmbedLink] = React.useState('')
-  const [iframe, setIframe] = React.useState('')
+  const [embedLink, setEmbedLink] = useState('')
+  const [iframe, setIframe] = useState('')
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Todo: figure out a better way to embed a map
     // (e.g. by only sharing locations / results instead of just any state of the map)
     // Now we need to check the URL of the iFrame, as this can change

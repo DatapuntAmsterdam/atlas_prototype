@@ -6,7 +6,7 @@ import {
   FETCH_MARKERS_FAILURE,
 } from '../../ducks/data-selection/constants'
 import { FETCH_DETAIL_FAILURE } from '../../ducks/detail/constants'
-import { ERROR_TYPES, setGlobalError } from '../../ducks/error/error-message'
+import { ErrorType, setGlobalError } from '../../ducks/error/error-message'
 import watchErrors, { excludeUnauthorizedErrorEffect, setErrorsEffect } from './error'
 
 describe('watchErrors', () => {
@@ -49,6 +49,6 @@ describe('excludeUnauthorizedErrorEffect', () => {
 
 describe('setErrorsEffect', () => {
   it('should dispatch the global error', () => {
-    testSaga(setErrorsEffect).next().put(setGlobalError(ERROR_TYPES.GENERAL_ERROR)).next().isDone()
+    testSaga(setErrorsEffect).next().put(setGlobalError(ErrorType.General)).next().isDone()
   })
 })

@@ -1,4 +1,4 @@
-import { ENVIRONMENTS } from '../environment'
+import { Environment } from '../environment'
 import environment from '../../environment'
 
 const { HOMEPAGE: HOMEPAGE_LINKS } = require('./content-links.json')
@@ -66,7 +66,7 @@ const cmsConfig = {
   },
   PUBLICATION: {
     endpoint: (id: string) =>
-      `${environment.CMS_ROOT}jsonapi/node/publication/${id}?include=field_cover_image.field_media_image,field_file.field_media_file,field_related.field_teaser_image.field_media_image`,
+      `${environment.CMS_ROOT}jsonapi/node/publication/${id}?include=field_cover_image.field_media_image,field_file.field_media_file`,
     fields: [
       'field_file.field_media_file.uri',
       'field_file_size',
@@ -75,18 +75,6 @@ const cmsConfig = {
       'field_publication_year',
       'field_publication_month',
       'field_publication_day',
-      'field_related.id',
-      'field_related.title',
-      'field_related.field_intro',
-      'field_related.field_byline',
-      'field_related.field_publication_date',
-      'field_related.field_teaser_image.field_media_image.uri',
-      'field_related.field_cover_image.field_media_image.uri',
-      'field_related.field_special_type',
-      'field_related.field_short_title',
-      'field_related.field_teaser',
-      'field_related.field_type',
-      'field_related.type',
       ...SHARED_FIELDS,
     ],
   },
@@ -143,7 +131,7 @@ const cmsConfig = {
   HOME_SPECIALS: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.SPECIALS.id[environment.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.SPECIALS.id[environment.DEPLOY_ENV || Environment.Production]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',
@@ -161,7 +149,7 @@ const cmsConfig = {
   HOME_COLLECTIONS: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.COLLECTIONS.id[environment.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.COLLECTIONS.id[environment.DEPLOY_ENV || Environment.Production]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',
@@ -176,7 +164,7 @@ const cmsConfig = {
   HOME_ORGANIZATION: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ORGANIZATION.id[environment.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.ORGANIZATION.id[environment.DEPLOY_ENV || Environment.Production]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -191,7 +179,7 @@ const cmsConfig = {
   HOME_ABOUT: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ABOUT.id[environment.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.ABOUT.id[environment.DEPLOY_ENV || Environment.Production]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -205,7 +193,7 @@ const cmsConfig = {
   HOME_ABOUT_DATA: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ABOUT_DATA.id[environment.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.ABOUT_DATA.id[environment.DEPLOY_ENV || Environment.Production]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -219,7 +207,7 @@ const cmsConfig = {
   HOME_HIGHLIGHT: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.HIGHLIGHT.id[environment.DEPLOY_ENV || ENVIRONMENTS.PRODUCTION]
+        HOMEPAGE_LINKS.HIGHLIGHT.id[environment.DEPLOY_ENV || Environment.Production]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',

@@ -16,7 +16,7 @@ const useMarzipano = (
   const [currentMarzipanoView, setCurrentMarzipanoView] = useState<Pano | null>(null)
 
   const updateOrientation = () => {
-    if (marzipanoViewerRef.current) {
+    if (!marzipanoViewerRef.current) {
       return
     }
 
@@ -38,8 +38,6 @@ const useMarzipano = (
     }
 
     const viewer = new Marzipano.Viewer(ref.current, {
-      // Set a stage type that is supported in the test environment
-      stageType: process.env.NODE_ENV === 'test' ? 'css' : 'webgl',
       stage: {
         preserveDrawingBuffer: true,
         width: 960,

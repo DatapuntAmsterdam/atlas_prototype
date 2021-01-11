@@ -1,5 +1,4 @@
 import { Card, CardContainer, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 import SearchHeading from '../../components/SearchHeading/SearchHeading'
 import SEARCH_PAGE_CONFIG from './config'

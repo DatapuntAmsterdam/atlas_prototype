@@ -1,55 +1,54 @@
-# Build
-FROM node:12 AS build-deps
+################################
+# Base
+################################
+FROM node:14 AS build-deps
 LABEL maintainer="datapunt@amsterdam.nl"
 
 WORKDIR /app
 
-COPY package.json package-lock.json .env.* /app/
-COPY sitemap-generator /app/sitemap-generator
-COPY public /app/public
+COPY sitemap-generator ./sitemap-generator
 
+COPY public ./public
 
-# Install all NPM dependencies, and:
-#  * Changing git URL because network is blocking git protocol...
+COPY package.json package-lock.json ./
+
 RUN git config --global url."https://".insteadOf git:// && \
-    git config --global url."https://github.com/".insteadOf git@github.com: && \
-    #    npm config set registry https://nexus.data.amsterdam.nl/repository/npm-group/ && \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    npm --production=false \
-    --unsafe-perm \
-    --verbose \
-    ci
+    git config --global url."https://github.com/".insteadOf git@github.com:
+
+RUN npm ci && \
+    npm cache clean --force
 
 RUN npm run generate:sitemap
 
-# Build dependencies
-COPY src /app/src
 COPY modules /app/modules
-COPY .babelrc \
-    .eslintrc.js \
-    .eslintignore \
-    .prettierrc \
-    .prettierignore \
+
+COPY .browserslistrc \
     index.ejs \
     webpack.* \
-    tsconfig.json \
-    tsconfig.webpack.json \
+    tsconfig.* \
     favicon.png \
-    /app/
+    ./
+
+COPY src ./src
 
 RUN npm run build
-RUN echo "build= `date`" > /app/dist/version.txt
 
-# Test dependencies
-COPY jest.config.js \
-    /app/
-COPY test /app/test
+RUN echo "`date`" > ./dist/version.txt
 
-# Web server image
+################################
+# Deploy
+################################
 FROM nginx:1.19-alpine
-COPY scripts/startup.sh /app/startup.sh
+
+ARG ENVIRONMENT=prod
+
+COPY scripts/startup.sh /usr/local/bin/startup.sh
+RUN chmod +x /usr/local/bin/startup.sh
+
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.csp.${ENVIRONMENT}.conf /etc/nginx/conf.d/csp.conf
 COPY default.conf /etc/nginx/conf.d/
+
 COPY --from=build-deps /app/dist /usr/share/nginx/html
 
-CMD sh /app/startup.sh
+CMD ["/usr/local/bin/startup.sh"]

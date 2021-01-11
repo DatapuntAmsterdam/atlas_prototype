@@ -1,7 +1,6 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Link, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import React from 'react'
 import RouterLink from 'redux-first-router-link'
 import CONSTANTS from '../../../shared/config/constants'
 import { toHelpPage } from '../../../store/redux-first-router/actions'

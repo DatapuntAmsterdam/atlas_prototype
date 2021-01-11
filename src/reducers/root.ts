@@ -10,11 +10,11 @@ import PanoramaReducer, { PANORAMA } from '../panorama/ducks/reducer'
 import DataSearchReducer, { DATA_SEARCH_REDUCER } from '../shared/ducks/data-search/reducer'
 import DataSelectionReducer, { DATA_SELECTION } from '../shared/ducks/data-selection/reducer'
 import DetailReducer, { DETAIL } from '../shared/ducks/detail/reducer'
-import ErrorMessageReducer, { REDUCER_KEY as ERROR } from '../shared/ducks/error/error-message'
-import FilesReducer, { FILES_REDUCER } from '../shared/ducks/files/reducer'
+import errorMessageReducer, { REDUCER_KEY as ERROR } from '../shared/ducks/error/error-message'
+import filesReducer, { REDUCER_KEY as FILES } from '../shared/ducks/files/files'
 import FiltersReducer, { REDUCER_KEY as FILTER } from '../shared/ducks/filters/filters'
 import SelectionReducer, { REDUCER_KEY as SELECTION } from '../shared/ducks/selection/selection'
-import UiReducer, { UI } from '../shared/ducks/ui/ui'
+import uiReducer, { REDUCER_KEY as UI } from '../shared/ducks/ui/ui'
 import UserReducer, { REDUCER_KEY as USER } from '../shared/ducks/user/user'
 import { LOCATION } from '../store/redux-first-router/constants'
 
@@ -27,12 +27,12 @@ const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => 
 
   // Use combine reducer for new reducers
   const newRootReducer = combineReducers({
-    [ERROR]: ErrorMessageReducer,
+    [ERROR]: errorMessageReducer,
     [FILTER]: FiltersReducer,
     [MAP]: MapReducer,
     mapDetail: MapDetailReducer,
     [PANORAMA]: PanoramaReducer,
-    [UI]: UiReducer,
+    [UI]: uiReducer,
     [USER]: UserReducer,
     mapLayers,
     [LOCATION]: routeReducer,
@@ -40,7 +40,7 @@ const rootReducer = (routeReducer: any) => (oldState: any = {}, action: any) => 
     [DATA_SEARCH_REDUCER]: DataSearchReducer,
     [SELECTION]: SelectionReducer,
     [DATA_SELECTION]: DataSelectionReducer,
-    [FILES_REDUCER]: FilesReducer,
+    [FILES]: filesReducer,
     [SEARCH]: SearchPageReducer,
   })
 

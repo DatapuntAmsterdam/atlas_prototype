@@ -1,8 +1,8 @@
 import { Alert, Heading, Link } from '@amsterdam/asc-ui'
-import React from 'react'
 import styled from 'styled-components'
 import { LocationDescriptor } from 'history'
 import { Link as RouterLink, useParams } from 'react-router-dom'
+import { FunctionComponent } from 'react'
 import {
   DetailInfo,
   DetailResultItem,
@@ -21,17 +21,22 @@ export interface MapDetailResultProps {
 }
 
 // Todo: AfterBeta can be removed
-const MapDetailResult: React.FC<MapDetailResultProps> = ({ onMaximize }) => {
+const MapDetailResult: FunctionComponent<MapDetailResultProps> = ({ onMaximize }) => {
+  // Todo: need to trigger this to dispatch certain redux actions (Legacy)
+  const getDetailData = useDataDetail()
   const { id: rawId, subtype: subType, type } = useParams<DetailInfo & { subtype: string }>()
+
   if (!rawId || !subType || !type) {
     return null
   }
+
   const id = rawId.includes('id') ? rawId.substr(2) : rawId
 
-  // Todo: need to trigger this to dispatch certain redux actions (Legacy)
-  const { result: promise } = useDataDetail<MapDetails>(id, subType, type)
   return (
-    <PromiseResult promise={promise}>
+    <PromiseResult
+      factory={() => getDetailData<MapDetails>(id, subType, type)}
+      deps={[id, subType, type]}
+    >
       {({ value }) => (
         <MapDetailResultWrapper
           location={value.location}

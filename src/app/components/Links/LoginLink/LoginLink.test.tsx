@@ -1,5 +1,4 @@
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
 import { mocked } from 'ts-jest/utils'
 import { login } from '../../../../shared/services/auth/auth'
 import LoginLink from './LoginLink'

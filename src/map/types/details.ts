@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
+import { AlertLevel } from '@amsterdam/asc-ui'
 import { Position } from 'geojson'
 import { LocationDescriptor } from 'history'
 import { ReactNode } from 'react'
-import NotificationLevel from '../../app/models/notification'
 import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import AuthScope from '../../shared/services/api/authScope'
 
@@ -19,7 +19,7 @@ export interface DetailResult {
 export interface DetailResultNotification {
   value: string | ReactNode
   id: string | number
-  level: NotificationLevel
+  level: AlertLevel
   canClose?: boolean
 }
 
@@ -243,7 +243,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   datum_inslag?: string | null
   bron?: string | null
   intekening?: string | null
-  nouwkeurig?: string | null
+  nauwkeurig?: string | null
   onderzoeksgebied?: string | null
   opdrachtnemer?: string | null
   opdrachtgever?: string | null

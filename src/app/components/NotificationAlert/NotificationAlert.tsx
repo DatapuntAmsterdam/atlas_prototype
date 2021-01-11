@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { Alert } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import environment from '../../../environment'
@@ -23,12 +23,12 @@ const StyledAlert = styled(Alert)`
   }
 `
 
-const NotificationAlert: React.FC = () => {
+const NotificationAlert: FunctionComponent = () => {
   const hide = useSelector(isEmbedded)
   const { fetchData, results } = useDataFetching()
   const printMode = useSelector(isPrintMode)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (printMode) {
       return
     }
@@ -48,7 +48,7 @@ const NotificationAlert: React.FC = () => {
         <StyledAlert
           dismissible
           heading={field_notification_title}
-          level={field_notification_type || 'attention'}
+          level={field_notification_type || 'info'}
           onDismiss={() => createCookie(COOKIE_NAME, '8')}
         >
           <Content dangerouslySetInnerHTML={{ __html: body.value }} />

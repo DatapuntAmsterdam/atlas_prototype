@@ -1,5 +1,5 @@
 import { breakpoint, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 type Props = {
@@ -32,7 +32,7 @@ const DefinitionListDescription = styled.dd`
   width: 70%;
 `
 
-const DefinitionListItem: React.FC<Props> = ({ term, children, ...otherProps }) => (
+const DefinitionListItem: FunctionComponent<Props> = ({ term, children, ...otherProps }) => (
   <DefinitionListItemWrapper {...otherProps}>
     <DefinitionListTerm>{term}</DefinitionListTerm>
     <DefinitionListDescription>{children}</DefinitionListDescription>

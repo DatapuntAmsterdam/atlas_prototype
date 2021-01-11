@@ -2,19 +2,19 @@ import { renderHook } from '@testing-library/react-hooks'
 import usePromise, { PromiseStatus } from './usePromise'
 
 describe('usePromise', () => {
-  it('should return the pending status while the promise is in-flight', () => {
+  it('returns the pending status while the promise is in-flight', () => {
     const promise = new Promise(() => {})
-    const { result } = renderHook(() => usePromise(promise))
+    const { result } = renderHook(() => usePromise(() => promise))
 
     expect(result.current).toEqual({
       status: PromiseStatus.Pending,
     })
   })
 
-  it('should return the value when the promise is resolved', async () => {
+  it('returns the value when the promise is resolved', async () => {
     const value = 'foo'
     const promise = Promise.resolve(value)
-    const { result, waitForNextUpdate } = renderHook(() => usePromise(promise))
+    const { result, waitForNextUpdate } = renderHook(() => usePromise(() => promise))
 
     await waitForNextUpdate()
 
@@ -24,10 +24,10 @@ describe('usePromise', () => {
     })
   })
 
-  it('should return the error when the promise is rejected', async () => {
+  it('returns the error when the promise is rejected', async () => {
     const error = new Error('Whoopsie')
     const promise = Promise.reject(error)
-    const { result, waitForNextUpdate } = renderHook(() => usePromise(promise))
+    const { result, waitForNextUpdate } = renderHook(() => usePromise(() => promise))
 
     await waitForNextUpdate()
 
@@ -37,12 +37,14 @@ describe('usePromise', () => {
     })
   })
 
-  it('should ignore resolved values of preceding promises', async () => {
+  it('ignores resolved values of preceding promises', async () => {
     const first = createPromiseWithCallbacks()
     const last = createPromiseWithCallbacks()
     let currentPromise = first.promise
 
-    const { result, rerender, waitForNextUpdate } = renderHook(() => usePromise(currentPromise))
+    const { result, rerender, waitForNextUpdate } = renderHook(() =>
+      usePromise(() => currentPromise),
+    )
 
     currentPromise = last.promise
 
@@ -59,12 +61,14 @@ describe('usePromise', () => {
     })
   })
 
-  it('should ignore rejected values of preceding promises', async () => {
+  it('ignores rejected values of preceding promises', async () => {
     const first = createPromiseWithCallbacks()
     const last = createPromiseWithCallbacks()
     let currentPromise = first.promise
 
-    const { result, rerender, waitForNextUpdate } = renderHook(() => usePromise(currentPromise))
+    const { result, rerender, waitForNextUpdate } = renderHook(() =>
+      usePromise(() => currentPromise),
+    )
 
     currentPromise = last.promise
 
@@ -82,6 +86,37 @@ describe('usePromise', () => {
       error: lastError,
     })
   })
+
+  it('memoizes the promise based on the dependencies', async () => {
+    let currentCount = 0
+    let retryCount = 0
+
+    async function nextNumber() {
+      // eslint-disable-next-line no-plusplus
+      return currentCount++
+    }
+
+    const { result, rerender, waitForNextUpdate } = renderHook(() =>
+      usePromise(() => nextNumber(), [retryCount]),
+    )
+
+    rerender()
+    await waitForNextUpdate()
+
+    expect(result.current).toEqual({
+      status: PromiseStatus.Fulfilled,
+      value: 0,
+    })
+
+    retryCount = 1
+    rerender()
+    await waitForNextUpdate()
+
+    expect(result.current).toEqual({
+      status: PromiseStatus.Fulfilled,
+      value: 1,
+    })
+  })
 })
 
 function createPromiseWithCallbacks() {
@@ -95,7 +130,9 @@ function createPromiseWithCallbacks() {
 
   return {
     promise,
+    // @ts-ignore
     resolve,
+    // @ts-ignore
     reject,
   }
 }

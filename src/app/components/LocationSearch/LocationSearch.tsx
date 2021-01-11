@@ -1,12 +1,7 @@
 import { Alert, Container, Heading, themeSpacing } from '@amsterdam/asc-ui'
-import React, { FunctionComponent } from 'react'
-import styled from 'styled-components'
+import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
-import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
-import NotificationLevel from '../../models/notification'
-import AuthAlert from '../Alerts/AuthAlert'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import ShareBar from '../ShareBar/ShareBar'
+import styled from 'styled-components'
 import {
   getDataSearchError,
   getDataSearchLocation,
@@ -15,9 +10,14 @@ import {
   isSearchLoading,
 } from '../../../shared/ducks/data-search/selectors'
 import { getUser } from '../../../shared/ducks/user/user'
-import LocationSearchResults from './LocationSearchResults'
 import AuthScope from '../../../shared/services/api/authScope'
+import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import PanoramaPreview, { PreviewContainer } from '../../pages/MapPage/map-search/PanoramaPreview'
+import AuthAlert from '../Alerts/AuthAlert'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import PanoAlert from '../PanoAlert/PanoAlert'
+import ShareBar from '../ShareBar/ShareBar'
+import LocationSearchResults from './LocationSearchResults'
 
 const EXCLUDED_RESULTS = 'vestigingen'
 
@@ -75,21 +75,26 @@ const LocationSearch: FunctionComponent = () => {
           </HeadingWrapper>
           {layerWarning && (
             <StyledAlert
-              level={NotificationLevel.Attention}
+              level="info"
               dismissible
             >{`Geen details beschikbaar van: ${layerWarning}`}</StyledAlert>
           )}
 
-          {!!numberOfResults && (
-            <PanoramaPreview
-              location={{
-                lat: location.latitude,
-                lng: location.longitude,
-              }}
-              width={438}
-              radius={180}
-            />
-          )}
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {numberOfResults ? (
+            user.authenticated ? (
+              <PanoramaPreview
+                location={{
+                  lat: location.latitude,
+                  lng: location.longitude,
+                }}
+                width={438}
+                radius={180}
+              />
+            ) : (
+              <PanoAlert />
+            )
+          ) : null}
 
           {numberOfResults ? (
             <LocationSearchResults {...{ searchResults }} />

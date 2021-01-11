@@ -1,15 +1,13 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { render } from '@testing-library/react'
-import React from 'react'
-import SearchBar from './SearchBar'
+import SearchBar, { SearchBarProps } from './SearchBar'
 
 // Mock the SearchBarFilter component as it's not relevant for this test and is tested seperately
 jest.mock('../SearchBarFilter', () => () => <div />)
 
 describe('SearchBar', () => {
-  const props = {
+  const props: SearchBarProps = {
     expanded: false,
-    searchBarProps: {},
     placeholder: 'Zoek',
     onBlur: jest.fn(),
     onFocus: jest.fn(),
@@ -17,6 +15,8 @@ describe('SearchBar', () => {
     onClear: jest.fn(),
     onKeyDown: jest.fn(),
     value: 'foo',
+    setSearchBarFilterValue: () => {},
+    searchBarFilterValue: '',
   }
 
   beforeAll(() => {

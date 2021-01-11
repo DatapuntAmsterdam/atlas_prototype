@@ -12,7 +12,7 @@ import {
   Row,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { FOOTER_LINKS, IDS } from '../../../shared/config/config'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
@@ -36,10 +36,9 @@ const helpLinks: FooterLink[] = [
   },
 ].sort((a, b) => (a.order > b.order ? 1 : -1))
 
-const Footer: React.FC = () => (
+const Footer: FunctionComponent = () => (
   <CompactThemeProvider>
-    {/* Tabindex is IE11 fix for skipnavigation focus */}
-    <FooterComponent id={IDS.footer} tabIndex={-1}>
+    <FooterComponent id={IDS.footer}>
       <FooterTop>
         <Row>
           <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>

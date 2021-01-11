@@ -1,5 +1,5 @@
 import { LocationDescriptorObject } from 'history'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import SEARCH_PAGE_CONFIG from '../../../app/pages/SearchPage/config'
 import PARAMETERS from '../../../store/parameters'
@@ -12,13 +12,15 @@ export interface AutoSuggestCategoryProps {
   inputValue: string
 }
 
-const AutoSuggestCategory: React.FC<AutoSuggestCategoryProps> = ({
+const AutoSuggestCategory: FunctionComponent<AutoSuggestCategoryProps> = ({
   category,
   highlightValue,
   inputValue,
 }) => {
   const { type, label, content, totalResults } = category
-  const subType = (type === 'data' && label.toLowerCase()) || undefined
+  // Todo: Make sure we get a type back from typeahead instead of transforming the label
+  // These types should also match the types in cms_search
+  const subType = (type === 'data' && label.replace(' ', '_').toLowerCase()) || undefined
   const moreResultsLink =
     totalResults > content.length ? getMoreResultsLink(type, inputValue, subType) : null
 

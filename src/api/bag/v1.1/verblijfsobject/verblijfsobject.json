@@ -1,0 +1,156 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000665114/?format=json"
+    }
+  },
+  "_display": "Herengracht 502",
+  "verblijfsobjectidentificatie": "0363010000665114",
+  "date_modified": "2020-12-13T23:29:54.845598Z",
+  "document_mutatie": "2013-04-10",
+  "document_nummer": "GV00001695_AC00AC",
+  "begin_geldigheid": "2013-04-10",
+  "einde_geldigheid": null,
+  "status": "Verblijfsobject in gebruik",
+  "bron": null,
+  "bbox": [
+    121369,
+    486445,
+    121369,
+    486445
+  ],
+  "geometrie": {
+    "type": "Point",
+    "coordinates": [
+      121369,
+      486445
+    ]
+  },
+  "oppervlakte": 1526,
+  "verdieping_toegang": 0,
+  "bouwlagen": 6,
+  "hoogste_bouwlaag": 4,
+  "laagste_bouwlaag": -1,
+  "aantal_kamers": 6,
+  "reden_afvoer": "",
+  "reden_opvoer": "Correctie opvoer",
+  "eigendomsverhouding": "",
+  "gebruik": "",
+  "toegang": [
+    "Begane grond"
+  ],
+  "hoofdadres": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000127132/?format=json"
+      }
+    },
+    "_display": "Herengracht 502",
+    "landelijk_id": "0363200000127132",
+    "type_adres": "Hoofdadres",
+    "vbo_status": "Verblijfsobject in gebruik",
+    "dataset": "bag"
+  },
+  "adressen": {
+    "count": 1,
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json&verblijfsobject=0363010000665114"
+  },
+  "buurt": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/buurt/03630000000099/?format=json"
+      }
+    },
+    "_display": "Van Loonbuurt (A03c)",
+    "code": "03c",
+    "naam": "Van Loonbuurt",
+    "dataset": "gebieden"
+  },
+  "panden": {
+    "count": 1,
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/?format=json&verblijfsobjecten__id=0363010000665114"
+  },
+  "kadastrale_objecten": {
+    "count": 1,
+    "href": "https://api.data.amsterdam.nl/brk/object/?format=json&verblijfsobjecten__id=0363010000665114"
+  },
+  "rechten": {
+    "count": 1,
+    "href": "https://api.data.amsterdam.nl/brk/zakelijk-recht/?format=json&verblijfsobjecten__id=0363010000665114"
+  },
+  "bouwblok": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100702/?format=json"
+      }
+    },
+    "_display": "YF22",
+    "id": "03630012100702",
+    "dataset": "gebieden"
+  },
+  "indicatie_geconstateerd": false,
+  "aanduiding_in_onderzoek": false,
+  "gebruiksdoel": [
+    "woonfunctie",
+    "kantoorfunctie"
+  ],
+  "gebruiksdoel_woonfunctie": null,
+  "gebruiksdoel_gezondheidszorgfunctie": null,
+  "aantal_eenheden_complex": null,
+  "_buurtcombinatie": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052034/?format=json"
+      }
+    },
+    "_display": "Grachtengordel-Zuid (03)",
+    "naam": "Grachtengordel-Zuid",
+    "vollcode": "A03",
+    "dataset": "gebieden"
+  },
+  "_stadsdeel": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/?format=json"
+      }
+    },
+    "_display": "Centrum (A)",
+    "code": "A",
+    "naam": "Centrum",
+    "dataset": "gebieden"
+  },
+  "_gebiedsgerichtwerken": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX02/?format=json"
+      }
+    },
+    "_display": "Centrum-Oost (DX02)",
+    "code": "DX02",
+    "naam": "Centrum-Oost",
+    "dataset": "gebieden"
+  },
+  "_grootstedelijkgebied": null,
+  "_gemeente": {
+    "_display": "Amsterdam",
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/brk/gemeente/Amsterdam/?format=json"
+      }
+    },
+    "naam": "Amsterdam",
+    "code": "0363",
+    "dataset": "bag"
+  },
+  "_woonplaats": {
+    "_links": {
+      "self": {
+        "href": "https://api.data.amsterdam.nl/bag/v1.1/woonplaats/3594/?format=json"
+      }
+    },
+    "_display": "Amsterdam",
+    "landelijk_id": "3594",
+    "dataset": "bag"
+  },
+  "dataset": "bag"
+}

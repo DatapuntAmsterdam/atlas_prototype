@@ -1,5 +1,4 @@
 import { cleanup, render } from '@testing-library/react'
-import * as React from 'react'
 import SearchBarFilter from './SearchBarFilter'
 import useParam from '../../utils/useParam'
 
@@ -23,7 +22,7 @@ describe('SearchFilter', () => {
   beforeEach(cleanup)
 
   it('should render a select with the filter options', () => {
-    const { getAllByText } = render(<SearchBarFilter />)
+    const { getAllByText } = render(<SearchBarFilter value="" setValue={() => {}} />)
 
     const selectNode = getAllByText('Article label')
     expect(selectNode[0].tagName).toBe('OPTION')

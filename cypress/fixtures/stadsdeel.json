@@ -1,0 +1,39 @@
+{
+  "panelType": "Stadsdeel",
+  "panelHeading": "Noord (N)",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Code": "N",
+        "Gemeente": "Amsterdam"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Wijken",
+      "items": ["Volewijck (60)", "Tuindorp Oostzaan (65)"]
+    },
+    {
+      "subheading": "Gebiedsgerichtwerken-gebieden",
+      "items": ["Noord-Oost (DX19)", "Oud-Noord (DX18)"]
+    },
+    {
+      "subheading": "Adressen",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Vestigingen",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Kadastrale objecten",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Feiten en cijfers over deze buurt",
+      "items": ["Ga naar Gebied in beeld"]
+    }
+  ]
+}

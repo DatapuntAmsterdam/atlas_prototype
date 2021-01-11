@@ -1,5 +1,5 @@
 import { routing } from '../../../app/routes'
-import { VIEW_MODE } from '../ui/ui'
+import { ViewMode } from '../ui/ui'
 
 export const REDUCER_KEY = 'dataSelection'
 export const FETCH_DATA_SELECTION_REQUEST = `${REDUCER_KEY}/FETCH_DATA_SELECTION_REQUEST`
@@ -26,9 +26,9 @@ export const ROUTE_DATASET_MAPPER = {
 }
 
 export const VIEWS_TO_PARAMS = {
-  [VIEW_MODE.SPLIT]: 'LIST',
-  [VIEW_MODE.MAP]: 'MAP',
-  [VIEW_MODE.FULL]: 'TABLE',
+  [ViewMode.Split]: 'LIST',
+  [ViewMode.Map]: 'MAP',
+  [ViewMode.Full]: 'TABLE',
 }
 
 export const DATASETS = {

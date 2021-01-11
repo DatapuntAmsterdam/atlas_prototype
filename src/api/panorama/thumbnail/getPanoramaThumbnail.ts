@@ -2,7 +2,7 @@ import { LatLngLiteral } from 'leaflet'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import { fetchProxy } from '../../../shared/services/api/api'
-import { FormattedPanoramaThumbnail, PanoramaThumbnail } from './types'
+import { PanoramaThumbnail } from './types'
 
 export interface FetchPanoramaOptions {
   /**
@@ -78,22 +78,17 @@ export async function getPanoramaThumbnail(
 
   const response = await fetchProxy<PanoramaThumbnail>(
     joinUrl([environment.API_ROOT, 'panorama/thumbnail']),
-    { params: searchParams },
+    { searchParams },
   )
 
   return transformResponse(response)
 }
 
-function transformResponse(response: PanoramaThumbnail): FormattedPanoramaThumbnail | null {
-  // Because of a bug in the API empty responses are returned as an empty array.
+function transformResponse(response: PanoramaThumbnail): PanoramaThumbnail | null {
+  // Because of a bug in the API, empty responses are returned as an empty array.
   if (response instanceof Array) {
     return null
   }
 
-  // TODO: Remove this transformation of 'pano_id' once all legacy code has been removed.
-  return {
-    id: response.pano_id,
-    heading: response.heading,
-    url: response.url,
-  }
+  return response
 }

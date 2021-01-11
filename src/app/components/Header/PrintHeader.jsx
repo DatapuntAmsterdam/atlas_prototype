@@ -1,5 +1,3 @@
-import React from 'react'
-
 const PrintHeader = ({ closeAction }) => (
   <div className="u-grid">
     <div className="u-row">

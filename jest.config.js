@@ -1,4 +1,5 @@
 module.exports = {
+  preset: 'ts-jest/presets/js-with-ts',
   displayName: 'unit',
   rootDir: './',
   collectCoverageFrom: [
@@ -14,10 +15,10 @@ module.exports = {
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      statements: 55,
-      branches: 41,
-      functions: 48,
-      lines: 55,
+      statements: 59,
+      branches: 35,
+      functions: 50,
+      lines: 60,
     },
   },
   coverageReporters: process.env.CI ? ['text'] : ['lcov'],
@@ -27,7 +28,7 @@ module.exports = {
       '<rootDir>/test/file-mock.js',
     '\\.(svg)$': '<rootDir>/test/file-svg-mock.js',
   },
-  setupFiles: ['dotenv/config', 'raf/polyfill', './test/setup-jest.js'],
+  setupFiles: ['raf/polyfill', './test/setup-jest.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   setupFilesAfterEnv: ['./test/mocks.js', './test/setup-env.js'],
   testURL: 'http://localhost:3000/',

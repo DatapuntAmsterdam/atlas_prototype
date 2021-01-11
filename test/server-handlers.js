@@ -6,7 +6,9 @@ import { isAuthenticated } from '../src/shared/services/auth/auth'
 const typeaheadUrl = joinUrl([environment.API_ROOT, 'typeahead'])
 const iiifMetadataUrl = joinUrl([environment.API_ROOT, 'iiif-metadata/bouwdossier', ':id'])
 const dcatDatasetsUrl = joinUrl([environment.API_ROOT, 'dcatd/datasets', ':id'])
+const dcatDatasetFiltersUrl = joinUrl([environment.API_ROOT, 'dcatd/openapi'])
 const panoramaThumbnailUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail', '?:q'])
+const stadsdeelUrl = joinUrl([environment.API_ROOT, 'gebieden/stadsdeel'])
 
 const handlers = [
   rest.get(typeaheadUrl, async (req, res, ctx) => {
@@ -29,10 +31,22 @@ const handlers = [
     return res(ctx.json(datasetsFixture))
   }),
 
+  rest.get(dcatDatasetFiltersUrl, async (req, res, ctx) => {
+    const datasetFiltersFixture = require('../src/api/dcatd/openapi/fixture').default
+
+    return res(ctx.json(datasetFiltersFixture))
+  }),
+
   rest.get(panoramaThumbnailUrl, async (req, res, ctx) => {
     const panoramaThumbnailFixture = require('../src/api/panorama/thumbnail/fixture').default
 
     return res(ctx.json(panoramaThumbnailFixture))
+  }),
+
+  rest.get(stadsdeelUrl, async (req, res, ctx) => {
+    const stadsdeelFixture = require('../src/api/gebieden/stadsdeel/fixture').default
+
+    return res(ctx.json(stadsdeelFixture))
   }),
 ]
 

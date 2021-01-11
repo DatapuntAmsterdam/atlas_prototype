@@ -1,0 +1,22 @@
+{
+  "panelType": "Verdacht gebied",
+  "panelHeading": "VGA_401016B01",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Hoofdgroep": "Afwerpmunitie",
+        "Subsoort": "Brisantbom(men)",
+        "Kaliber": "250 lbs, 500 lbs (Brits)",
+        "Aantallen": "Enkelen (mogelijke blindgangers)",
+        "Verschijning": "Afgeworpen",
+        "Afbakening": "Solitaire krater",
+        "Horizontaal": "50 meter (exc. Cartografische onnauwkeurigheid)",
+        "Cartografie": "5 meter",
+        "Opmerkingen": "solitaire krater 50 meter + 5 meter georeferentie-afwijking",
+        "Oorlogshandelingsrapport": "RAP_401016B.pdf"
+      }
+    }
+  ],
+  "linkLists": []
+}

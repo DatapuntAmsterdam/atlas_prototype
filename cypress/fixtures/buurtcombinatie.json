@@ -1,0 +1,40 @@
+{
+  "panelType": "Wijk",
+  "panelHeading": "Burgwallen-Oude Zijde (00)",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Code": "00"
+      }
+    },
+    {
+      "subheading": "Ligt in",
+      "items": {
+        "Stadsdeel": "Centrum (A)"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Buurten",
+      "items": ["BG-terrein e.o. (A00e)", "Kop Zeedijk (A00a)"]
+    },
+    {
+      "subheading": "Adressen",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Vestigingen",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Kadastrale objecten",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Feiten en cijfers over deze buurt",
+      "items": ["Ga naar Gebied in beeld"]
+    }
+  ]
+}

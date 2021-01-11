@@ -1,5 +1,5 @@
 import { Heading, Icon, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import React from 'react'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 const Divider = styled.div`
@@ -33,7 +33,7 @@ interface SearchHeadingProps {
   icon: JSX.Element
 }
 
-const SearchHeading: React.FC<SearchHeadingProps> = ({ label, icon }) => (
+const SearchHeading: FunctionComponent<SearchHeadingProps> = ({ label, icon }) => (
   <>
     <Divider />
     <StyledHeading forwardedAs="h2">

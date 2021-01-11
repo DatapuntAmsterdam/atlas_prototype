@@ -1,0 +1,41 @@
+{
+  "panelType": "Buurt",
+  "panelHeading": "Nieuwmarkt (A04e)",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Volledige code": "A04e"
+      }
+    },
+    {
+      "subheading": "Ligt in",
+      "items": {
+        "Stadsdeel": "Centrum (A)",
+        "Wijk": "Nieuwmarkt/Lastage (04)"
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Bouwblokken",
+      "items": ["YA75", "YD19"]
+    },
+    {
+      "subheading": "Adressen",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Vestigingen",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Kadastrale objecten",
+      "items": ["In tabel weergeven"]
+    },
+    {
+      "subheading": "Feiten en cijfers over deze buurt",
+      "items": ["In tabel weergeven"]
+    }
+  ]
+}

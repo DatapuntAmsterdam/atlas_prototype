@@ -1,8 +1,17 @@
-.env
-.git
-.sass-cache
-build
-node_modules/
-coverage/
-coverage-legacy/
-dist/
+## Ignore everything by default
+*
+
+
+## Allow specific files and folders
+!.*rc
+!*.conf
+!favicon.png
+!index.ejs
+!modules/
+!package*
+!public/
+!scripts/
+!sitemap-generator/
+!src/
+!tsconfig.*
+!webpack.*

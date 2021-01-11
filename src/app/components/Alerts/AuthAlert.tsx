@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { Alert, Heading, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import NotificationLevel from '../../models/notification'
 import LoginLink from '../Links/LoginLink/LoginLink'
 
 export interface AuthAlertProps {
@@ -30,12 +29,7 @@ const AuthAlert: FunctionComponent<AuthAlertProps> = ({
   hideHeader,
   ...otherProps
 }) => (
-  <StyledAlert
-    level={NotificationLevel.Attention}
-    dismissible
-    {...otherProps}
-    data-testid="auth-alert"
-  >
+  <StyledAlert level="info" dismissible {...otherProps} data-testid="auth-alert">
     {!hideHeader && <Heading forwardedAs="h3">Meer resultaten na inloggen</Heading>}
     <Paragraph>
       {specialAuthLevel

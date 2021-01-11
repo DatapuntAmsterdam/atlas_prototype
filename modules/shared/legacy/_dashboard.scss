@@ -67,15 +67,3 @@ html:not(.is-print-mode) {
 .c-dashboard--max-width {
   background-color: $secondary-gray10;
 }
-
-.c-dashboard--full-height {
-  overflow: hidden;
-
-  .c-dashboard__body {
-    overflow-y: hidden;
-  }
-
-  .c-dashboard__column {
-    overflow-y: auto;
-  }
-}

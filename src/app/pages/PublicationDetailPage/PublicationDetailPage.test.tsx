@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { mount, shallow } from 'enzyme'
-import React from 'react'
 import { mocked } from 'ts-jest/utils'
 import { cmsConfig } from '../../../shared/config/config'
 import linkAttributesFromAction from '../../../shared/services/link-attributes-from-action/linkAttributesFromAction'
@@ -9,7 +8,7 @@ import DocumentCover from '../../components/DocumentCover/DocumentCover'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import useDocumentTitle from '../../utils/useDocumentTitle'
 import useDownload from '../../utils/useDownload'
-import useFromCMS from '../../utils/useFromCMS'
+import useFromCMS, { CMSConfig } from '../../utils/useFromCMS'
 import PublicationDetailPage from './PublicationDetailPage'
 
 jest.mock('../../../shared/services/link-attributes-from-action/linkAttributesFromAction')
@@ -101,7 +100,7 @@ describe('PublicationDetailPage', () => {
       </ThemeProvider>,
     )
 
-    expect(mockedUseFromCMS).toHaveBeenCalledWith(cmsConfig.PUBLICATION, 'foo')
+    expect(mockedUseFromCMS).toHaveBeenCalledWith(cmsConfig.PUBLICATION as CMSConfig, 'foo')
     expect(fetchDataMock).toHaveBeenCalled()
   })
 

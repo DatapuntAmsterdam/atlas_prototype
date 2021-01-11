@@ -24,6 +24,18 @@ npm start
 
 Then, open the application in your browser at [localhost:3000](http://localhost:3000/).
 
+### Docker
+
+The `docker-compose.yml` file contains environment variable declarations that are required for the application to run in production mode. The production environment can be set up locally by running
+```
+make start
+```
+
+The `Makefile` consists of other useful commands to stop, restart and rebuild the application. To see all commands, run
+```
+make help
+```
+
 ## Testing
 
 Jest unit test
@@ -40,13 +52,10 @@ In order to E2E test the application make sure you have a development server run
 npm run start
 ```
 
-> Note: Due to a missing polyfill for the Fetch API you will have to run your build with `legacy` set to `true` in the build config.
-
 After doing this open up a new terminal and run the following commands:
 
 ```
-cd test/e2e
-npm run start
+npm run test:e2e:watch
 ```
 
 This will start the E2E test, if you want to watch for changes you can also run `npm run watch` instead.
@@ -54,10 +63,7 @@ This will start the E2E test, if you want to watch for changes you can also run 
 ### Analyzing a production bundle
 
 ```bash
-# Analyze the modern browser bundle (ES2015+)
-npm run analyze:modern
-# Analyze the legacy browser bundle (ES5)
-npm run analyze:legacy
+npm run analyze
 ```
 
 ### Deploying to a demo server

@@ -1,15 +1,15 @@
 import { ControlButton, MapPanelContext } from '@amsterdam/arm-core'
 import { Close } from '@amsterdam/asc-assets'
 import { breakpoint, ViewerContainer } from '@amsterdam/asc-ui'
-import React, { useContext } from 'react'
+import { useContext, FunctionComponent } from 'react'
 import styled from 'styled-components'
 import MapContext from '../../pages/MapPage/MapContext'
 import { locationParam } from '../../pages/MapPage/query-params'
 import useParam from '../../utils/useParam'
 import ViewerInfoBar from '../ViewerInfoBar/ViewerInfoBar'
-import { ReactComponent as Enlarge } from './enlarge.svg'
+import Enlarge from './enlarge.svg'
 import PanoramaViewerMenu from './PanoramaViewerMenu'
-import { ReactComponent as Reduce } from './reduce.svg'
+import Reduce from './reduce.svg'
 
 type Props = {
   onClose: (boolean: boolean) => void
@@ -23,7 +23,7 @@ const ResizeButton = styled(ControlButton)`
   }
 `
 
-const PanoramaViewerControls: React.FC<Props> = ({ children, onClose, panoImageDate }) => {
+const PanoramaViewerControls: FunctionComponent<Props> = ({ children, onClose, panoImageDate }) => {
   const { drawerPosition } = useContext(MapPanelContext)
   const { panoFullScreen, setPanoFullScreen } = useContext(MapContext)
   const [location] = useParam(locationParam)
@@ -41,6 +41,7 @@ const PanoramaViewerControls: React.FC<Props> = ({ children, onClose, panoImageD
             size={44}
             iconSize={25}
             onClick={onClose}
+            data-testid="panoramaViewerCloseButton"
             icon={<Close />}
           />
           <ResizeButton
@@ -49,6 +50,7 @@ const PanoramaViewerControls: React.FC<Props> = ({ children, onClose, panoImageD
             title="Volledig scherm"
             size={44}
             iconSize={40}
+            data-testid="panoramaViewerFullscreenButton"
             onClick={() => {
               setPanoFullScreen(!panoFullScreen)
             }}

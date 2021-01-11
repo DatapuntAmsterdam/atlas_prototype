@@ -6,7 +6,7 @@ import fetchNearestDetail from '../../services/nearest-detail/nearest-detail'
 import { REQUEST_NEAREST_DETAILS } from '../../../shared/ducks/data-search/constants'
 import { goToGeoSearch } from '../map-click/map-click'
 
-import { VIEW_MODE, getViewMode } from '../../../shared/ducks/ui/ui'
+import { ViewMode, getViewMode } from '../../../shared/ducks/ui/ui'
 
 jest.mock('../../../shared/ducks/ui/ui')
 
@@ -37,7 +37,7 @@ describe('fetchNearestDetails', () => {
   }
 
   it('should call fetchNearestDetails and dispatch the correct actions if uri is returned', () => {
-    getViewMode.mockReturnValueOnce(VIEW_MODE.MAP)
+    getViewMode.mockReturnValueOnce(ViewMode.Map)
     return expectSaga(fetchNearestDetails, action)
       .provide({
         call(effect, next) {

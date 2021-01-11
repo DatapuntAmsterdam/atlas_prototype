@@ -1,0 +1,44 @@
+{
+  "panelType": "Kadastraal object",
+  "panelHeading": "ASD05 G 06661 G 0000",
+  "definitionLists": [
+    {
+      "subheading": "",
+      "items": {
+        "Kadastrale gemeentecode": "ASD05",
+        "Sectie": "G",
+        "Objectnummer": "6661",
+        "Indexletter": "G",
+        "Indexnummer": "0",
+        "Kadastrale gemeente": "Amsterdam",
+        "Gemeente": "Amsterdam",
+        "Grootte": "376.00 m²",
+        "Koopsom": "998316",
+        "Koopjaar": "1994",
+        "Cultuur bebouwd": "Wonen met bedrijvigheid",
+        "Cultuur onbebouwd": ""
+      }
+    }
+  ],
+  "linkLists": [
+    {
+      "subheading": "Zakelijke rechten",
+      "items": ["Vereniging Van Eigenaars"]
+    },
+    {
+      "subheading": "Aantekeningen",
+      "items": []
+    },
+    {
+      "subheading": "Ontstaan uit",
+      "items": []
+    },
+    {
+      "subheading": "Betrokken bij",
+      "items": ["ASD05 G 08369 A 0001", "ASD05 G 08369 A 0002"]
+    },
+    {"subheading": "Adressen",
+      "items": ["Nes 100B", "Rokin 87A"]
+    }
+  ]
+}

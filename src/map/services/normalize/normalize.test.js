@@ -1,4 +1,3 @@
-import NotificationLevel from '../../../app/models/notification'
 import formatDate from '../../../app/utils/formatDate'
 import {
   adressenPand,
@@ -19,7 +18,10 @@ import {
   vastgoed,
   winkelgebied,
   YEAR_UNKNOWN,
+  meetboutTable,
 } from './normalize'
+
+import meetbouwMetingFixture from '../../../api/meetbouten/meting/fixture'
 
 jest.mock('../../../app/utils/formatDate')
 jest.mock('../../../shared/services/api/api')
@@ -180,7 +182,7 @@ describe('normalize', () => {
       output = adressenPand(input)
 
       expect(output).toMatchObject({
-        statusLevel: NotificationLevel.Attention,
+        statusLevel: 'info',
         year: input.oorspronkelijk_bouwjaar,
       })
 
@@ -191,7 +193,7 @@ describe('normalize', () => {
       output = adressenPand(input)
 
       expect(output).toMatchObject({
-        statusLevel: false,
+        statusLevel: undefined,
         year: 'onbekend',
       })
     })
@@ -215,7 +217,7 @@ describe('normalize', () => {
       output = adressenVerblijfsobject(input)
 
       expect(output).toMatchObject({
-        statusLevel: NotificationLevel.Error,
+        statusLevel: 'error',
         isNevenadres: false,
         typeAdres: input.hoofdadres.type_adres,
         size: 'onbekend',
@@ -232,7 +234,7 @@ describe('normalize', () => {
       output = adressenVerblijfsobject(input)
 
       expect(output).toMatchObject({
-        statusLevel: false,
+        statusLevel: undefined,
         isNevenadres: true,
         typeAdres: 'Nevenadres',
         size: `${mockedLocaleString} m²`, // mocked
@@ -680,6 +682,20 @@ ${input.gebruiksdoel[1]}`,
       expect(output).toMatchObject({
         regimes: [{ tijdstip: '00:00 - 12:00', dagen: [] }],
       })
+    })
+  })
+
+  describe('meetboutTable', () => {
+    it('returns converted floating point values', () => {
+      const metingData = meetbouwMetingFixture.results
+      const output = expect.arrayContaining([
+        expect.objectContaining({
+          zakking: expect.stringContaining('+'),
+          zakking_cumulatief: expect.stringContaining('+'),
+          zakkingssnelheid: expect.stringContaining('+'),
+        }),
+      ])
+      expect(meetboutTable(metingData)).toEqual(output)
     })
   })
 })
