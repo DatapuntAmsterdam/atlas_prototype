@@ -24,7 +24,6 @@ export default merge(createConfig({ mode: 'production' }), {
         terserOptions: {
           compress: {
             // Do not drop debugger statements, we might want to run a production build locally for testing.
-            // Linting rules will ensure this never actually happens with true production images.
             drop_debugger: !debugMode,
           },
         },
