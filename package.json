@@ -88,7 +88,7 @@
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.3",
-    "@testing-library/react-hooks": "4.0.0",
+    "@testing-library/react-hooks": "4.0.1",
     "@types/body-scroll-lock": "^2.6.1",
     "@types/classnames": "^2.2.11",
     "@types/cssnano": "^4.0.0",
