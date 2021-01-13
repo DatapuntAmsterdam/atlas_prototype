@@ -7,7 +7,11 @@
  * @param {string} text The header title.
  * @return {number} The number from the header title.
  */
-const getCountFromHeader = (text) => parseInt(text.match(/\(([0-9.,]*)\)/)[1].replace('.', ''), 10)
+const getCountFromHeader = (text: string): number => {
+  const match = text.match(/\(([0-9.,]*)\)/)
+  const countStr = match ? match[1].replace('.', '') : null
+  return countStr ? parseInt(countStr, 10) : 0
+}
 
 export {
   // eslint-disable-next-line import/prefer-default-export

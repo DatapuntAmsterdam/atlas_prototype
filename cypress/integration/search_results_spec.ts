@@ -168,12 +168,7 @@ describe('Search results', () => {
       cy.visit('/')
     })
     it("Should search: 'Toerisme' in category 'Datasets' and check autosuggest: 'Toerisme in Amsterdam' and search result: 'Toerisme'", () => {
-      cy.checkAutoSuggestFirstofCategory(
-        'Toerisme',
-        'Datasets',
-        'Toerisme in Amsterdam',
-        'Toerisme',
-      )
+      cy.checkAutoSuggestFirstofCategory('Toerisme', 'Datasets', 'Toerisme in Amsterdam')
       cy.checkFirstInSearchResults('Dossiers', 'Toerisme', DATA_SEARCH.searchResultsEditorialCard)
     })
     // Skipped becasue we need to improve autosuggest and search options first.

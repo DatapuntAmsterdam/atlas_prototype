@@ -1,10 +1,20 @@
 import stateTokenGenerator from '../../src/shared/services/state-token-generator'
 import { HEADER_MENU } from './selectors'
 
+declare global {
+  // eslint-disable-next-line no-redeclare
+  namespace Cypress {
+    interface Chainable<Subject> {
+      login(type?: string): void
+      logout(): void
+    }
+  }
+}
+
 const USER_TOKENS = {}
 
 Cypress.Commands.add('login', (type = 'EMPLOYEE_PLUS') => {
-  const baseUrl = Cypress.config('baseUrl')
+  const baseUrl = Cypress.config('baseUrl') as string
 
   if (USER_TOKENS[type]) {
     cy.log('access token available, using that one')

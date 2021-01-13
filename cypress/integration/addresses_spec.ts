@@ -37,9 +37,9 @@ describe('addresses module', () => {
         .first()
         .then((group) => {
           // get the innerText of the nested h2
-          const category = group[0].children[0].innerText
+          const category = (group[0].children[0] as HTMLElement).innerText
           // get the innerText of the first nested li
-          const selectedFilter = group[0].children[1].children[0].innerText
+          const selectedFilter = (group[0].children[1].children[0] as HTMLElement).innerText
           // click the filter that contains the selectedFilter variable
           cy.get(TABLES.filterItem).find(TABLES.filterLabel).contains(selectedFilter).click()
 
@@ -153,7 +153,7 @@ describe('addresses module', () => {
     it('should show the addresses and map when selected', () => {
       cy.intercept('**/dataselectie/bag/geolocation/**').as('getGeoResults')
 
-      let totalCount
+      let totalCount: number
 
       // Get the number in the title before filtering
       cy.get(HEADINGS.dataSelectionHeading).then((title) => {

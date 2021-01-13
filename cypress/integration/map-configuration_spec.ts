@@ -1,11 +1,15 @@
-const mapLayers = []
+// Todo: move test to cms_search repo
+const mapLayers: any[] = []
 
 // Get all the maplayer names from the atlas configuration that should be hosted on map server
+// @ts-ignore
 const mapLayersNames = mapLayers
   .map((mapLayer) => {
     const layers = mapLayer.layers && !mapLayer.external ? mapLayer.layers : []
+    // @ts-ignore
     const legendItemLayers = mapLayers.legendItems
-      ? mapLayers.legendItems.map((legendItemLayer) => legendItemLayer.layers)
+      ? // @ts-ignore
+        mapLayers.legendItems.map((legendItemLayer) => legendItemLayer.layers)
       : []
 
     return [...layers, ...legendItemLayers]
@@ -33,8 +37,8 @@ describe('map configuration', () => {
     getMapServerLayers()
       .then((mapfiles) => [
         // get all the layer names and file_name e.g. all the possible map layer names
-        ...mapfiles.map((mapfile) => mapfile.layers).flat(),
-        ...mapfiles.map((mapfile) => ({ name: mapfile.file_name })),
+        ...mapfiles.map((mapfile: any) => mapfile.layers).flat(),
+        ...mapfiles.map((mapfile: any) => ({ name: mapfile.file_name })),
       ])
       .then((layers) => layers.map((layer) => layer.name)) // creates and array of all the map layer names on the mapserver
       .then((layerNames) => {

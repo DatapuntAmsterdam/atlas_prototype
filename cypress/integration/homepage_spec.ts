@@ -1,7 +1,7 @@
 import { HEADER, HEADER_MENU, HOMEPAGE } from '../support/selectors'
 
 describe('Homepage module', () => {
-  const sizes = ['iphone-x', 'ipad-2', 'macbook-15']
+  const sizes: Cypress.ViewportPreset[] = ['iphone-x', 'ipad-2', 'macbook-15']
   sizes.forEach((size) => {
     describe(`Homepage checks, resolution is: ${size}`, () => {
       beforeEach(() => {

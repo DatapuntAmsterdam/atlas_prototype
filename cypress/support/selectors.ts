@@ -89,7 +89,7 @@ export const DETAIL_PANEL = {
   main: '[data-testid="data-detail"]',
   panelTypeTitle: '[class*=DataDetailPage__DetailType]',
   panelSubject: '[class*="DetailPanel__Heading"] h1',
-  panoramaPreview: '[class*="PanoramaPreview__PreviewContainer"]',
+  panoramaPreview: '[data-testid="panoramaPreview"]',
   subHeader: '[data-testid="data-detail-subheading"]',
   table: '[data-testid="detail-table"]',
 }

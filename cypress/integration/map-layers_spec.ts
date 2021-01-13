@@ -119,18 +119,10 @@ describe('Check if all map layers are visible when selected', () => {
     cy.contains('1943 (1:2500, Dienst der Publieke Werken)').should('be.visible')
     cy.contains('1985 (1:1000, Dienst der Publieke Werken)').should('be.visible')
     cy.get(MAP_LAYERS.checkboxHK1909).check({ force: true }).should('be.checked')
-    cy.url('contains', '**hist-pw1909%3A1&legenda=true')
     cy.get(MAP_LAYERS.checkboxHK19431000).check({ force: true }).should('be.checked')
-    cy.url('contains', '**hist-pw1909%3A1%7Chist-pw1943%3A1&legenda=true')
     cy.get(MAP_LAYERS.checkboxHK194325000).check({ force: true }).should('be.checked')
-    cy.url('contains', '**hist-pw1909%3A1%7Chist-pw1943%3A1%7Chist-pw1943-2500%3A1&legenda=true')
     cy.get(MAP_LAYERS.checkboxHK1985).check({ force: true }).should('be.checked')
-    cy.url(
-      'contains',
-      '**hist-pw1909%3A1%7Chist-pw1943%3A1%7Chist-pw1943-2500%3A1%7Chist-pw1985%3A1&legenda=true',
-    )
     cy.get(MAP_LAYERS.checkboxHistorischeKaarten).uncheck({ force: true }).should('not.be.checked')
-    cy.url('contains', '/data/?modus=kaart&legenda=true')
   })
   it('Should check OV-net layers', () => {
     cy.checkMapLayerCategory('OV-net')

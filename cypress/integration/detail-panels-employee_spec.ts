@@ -677,8 +677,7 @@ describe('employee permissions', () => {
         .and('be.visible')
 
       cy.fixture('../fixtures/bouwdossier.json').then((json) => {
-        Object.entries(json.definitionLists[0].items).forEach(([keyA, valueA], indexA) => {
-          cy.log(indexA)
+        Object.entries(json.definitionLists[0].items).forEach(([keyA, valueA]: any) => {
           cy.checkTermAndDefinition(0, keyA, valueA)
         })
       })

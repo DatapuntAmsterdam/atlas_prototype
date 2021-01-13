@@ -1,5 +1,18 @@
 import { MAP } from './selectors'
 
+declare global {
+  // eslint-disable-next-line no-redeclare
+  namespace Cypress {
+    interface Chainable<Subject> {
+      checkAerialPhotos(): void
+      checkTopography(): void
+      checkMapLayerCategory(category: string): void
+      checkMapLayer(layerName: string, checkboxId: string, amountOfLayers: number): void
+      checkAllLayers(): void
+    }
+  }
+}
+
 Cypress.Commands.add('checkAerialPhotos', () => {
   const aerial = [
     'Luchtfoto 2020',
@@ -39,7 +52,7 @@ Cypress.Commands.add('checkTopography', () => {
     })
 })
 
-Cypress.Commands.add('checkMapLayerCategory', (category) => {
+Cypress.Commands.add('checkMapLayerCategory', (category: string) => {
   cy.get(MAP.mapContainer).should('be.visible')
   cy.get(MAP.mapLegend).should('not.exist')
   cy.get(MAP.mapPanelHandle)
@@ -51,18 +64,21 @@ Cypress.Commands.add('checkMapLayerCategory', (category) => {
   cy.get(MAP.imageLayer).should('not.exist')
 })
 
-Cypress.Commands.add('checkMapLayer', (layerName, checkboxId, amountOfLayers) => {
-  cy.get(MAP.mapLegendLayer)
-    .find(MAP.mapLegendLabel)
-    .contains(layerName)
-    .scrollIntoView()
-    .should('be.visible')
-    .siblings(MAP.mapLegendCheckbox)
-    .find(checkboxId)
-    .check({ force: true })
-    .should('be.checked')
-  cy.get(MAP.imageLayer).should('exist').and('have.length', amountOfLayers)
-})
+Cypress.Commands.add(
+  'checkMapLayer',
+  (layerName: string, checkboxId: string, amountOfLayers: number) => {
+    cy.get(MAP.mapLegendLayer)
+      .find(MAP.mapLegendLabel)
+      .contains(layerName)
+      .scrollIntoView()
+      .should('be.visible')
+      .siblings(MAP.mapLegendCheckbox)
+      .find(checkboxId)
+      .check({ force: true })
+      .should('be.checked')
+    cy.get(MAP.imageLayer).should('exist').and('have.length', amountOfLayers)
+  },
+)
 
 Cypress.Commands.add('checkAllLayers', () => {
   // eslint-disable-next-line no-async-promise-executor
@@ -89,8 +105,8 @@ Cypress.Commands.add('checkAllLayers', () => {
 
     const { results: allLayers } = allLayersResponse.data.mapLayerSearch
     const result = await allLayers
-      .filter(({ url }) => url && url.startsWith('/'))
-      .map(({ url, layers, id }) => {
+      .filter(({ url }: any) => url && url.startsWith('/'))
+      .map(({ url, layers, id }: any) => {
         const query = {
           service: 'WMS',
           request: 'GetMap',
