@@ -1,16 +1,10 @@
-import 'isomorphic-fetch'
-import Enzyme, { mount, render, shallow } from 'enzyme'
+import Enzyme from 'enzyme'
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
-import * as L from 'leaflet'
+import 'leaflet'
 import 'leaflet-draw'
+import 'raf/polyfill'
+import 'jest-localstorage-mock'
+import 'isomorphic-fetch'
 
-// React 16 Enzyme adapter
+// React 17 Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() })
-
-// Make Enzyme functions available in all test files without importing
-global.shallow = shallow
-global.render = render
-global.mount = mount
-
-// add leaflet
-global.L = L
