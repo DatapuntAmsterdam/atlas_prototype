@@ -17,6 +17,7 @@ export default merge(createConfig({ mode: 'development' }), {
     disableHostCheck: true,
     contentBase: distPath,
     compress: true,
+    watchContentBase: true,
     hot: true,
     port: 3000,
     proxy: {
