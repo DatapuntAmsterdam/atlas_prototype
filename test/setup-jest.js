@@ -1,7 +1,7 @@
-/* eslint-disable no-console */
+import 'isomorphic-fetch'
 import Enzyme, { mount, render, shallow } from 'enzyme'
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
-import 'leaflet'
+import * as L from 'leaflet'
 import 'leaflet-draw'
 
 // React 16 Enzyme adapter
@@ -14,6 +14,3 @@ global.mount = mount
 
 // add leaflet
 global.L = L
-
-// Mock the window.fetch function
-global.fetch = require('jest-fetch-mock')

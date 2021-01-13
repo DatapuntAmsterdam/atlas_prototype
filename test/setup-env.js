@@ -8,6 +8,5 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 
 afterAll(() => {
-  global.unsetAuthentication()
   server.close()
 })
