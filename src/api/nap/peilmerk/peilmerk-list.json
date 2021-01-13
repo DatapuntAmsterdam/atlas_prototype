@@ -1,0 +1,266 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/nap/peilmerk/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/nap/peilmerk/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 1023,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10180001/?format=json"
+        }
+      },
+      "_display": "10180001 W-vleugelmuur van het Z-bruggehoofd over de Erasmusgracht in de Hoofdweg (x = vanaf zerk; y = onder deksteen)",
+      "id": "10180001",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10180002/?format=json"
+        }
+      },
+      "_display": "10180002 Jan van Galenstraat 279 (op de hoogte van de raamdorpel)",
+      "id": "10180002",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10180003/?format=json"
+        }
+      },
+      "_display": "10180003 Mercatorplein 34 (x = van de dag van de poort)",
+      "id": "10180003",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10180005/?format=json"
+        }
+      },
+      "_display": "10180005 Jan Evertsenstraat 155 gevel Orteliuskade (x = onder de voeg van de sierplaat)",
+      "id": "10180005",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10180010/?format=json"
+        }
+      },
+      "_display": "10180010 Op de hoek van de James Rosskade en de Jan van Galenstraat aan de no-zijde van fietserstunnel",
+      "id": "10180010",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10180015/?format=json"
+        }
+      },
+      "_display": "10180015 Jan van Galenstraat NO-vleugel N-viadukt(134P) over RW A10",
+      "id": "10180015",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10180016/?format=json"
+        }
+      },
+      "_display": "10180016 Viaduct A10 over de Erasmusgracht",
+      "id": "10180016",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10280001/?format=json"
+        }
+      },
+      "_display": "10280001 Walmuur tegenover Kostverlorenkade 21 (x = vanaf rechtstand N-vleugel van O-landhoofd van de brug in de Clerqstraat)",
+      "id": "10280001",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10280002/?format=json"
+        }
+      },
+      "_display": "10280002 Tweede Kostverlorenkade 5",
+      "id": "10280002",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10280004/?format=json"
+        }
+      },
+      "_display": "10280004 Admiraal de Ruijterweg 78",
+      "id": "10280004",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10280005/?format=json"
+        }
+      },
+      "_display": "10280005 Restaurant Adm. de Ruyterweg hoek Jan van Galenstraat",
+      "id": "10280005",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10380001/?format=json"
+        }
+      },
+      "_display": "10380001 Rozengracht 238 (Brandweerpost)",
+      "id": "10380001",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10380002/?format=json"
+        }
+      },
+      "_display": "10380002 Jan van Galenstraat 12 (Gebouw Dienst van het Marktwezen)",
+      "id": "10380002",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10380004/?format=json"
+        }
+      },
+      "_display": "10380004 Lauriergracht 116 (Jeugdhotel \"De Laurier\" ;y = boven betonplint)",
+      "id": "10380004",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480003/?format=json"
+        }
+      },
+      "_display": "10480003 Prinsengracht 279 (Westerkerkstoren)",
+      "id": "10480003",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480004/?format=json"
+        }
+      },
+      "_display": "10480004 Prinsengracht 437 (Gemeentelijk kledingmagazijn)",
+      "id": "10480004",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480005/?format=json"
+        }
+      },
+      "_display": "10480005 Spuistraat 239A (y = boven plint)",
+      "id": "10480005",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480006/?format=json"
+        }
+      },
+      "_display": "10480006 Nieuwezijds Voorburgwal 147 (\"Koninklijk Paleis\" inspringend gedeelte)",
+      "id": "10480006",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480007/?format=json"
+        }
+      },
+      "_display": "10480007 Enge Lombardsteeg 4 gevel Oudezijds Voorburgwal (\"Bank van Lening no 1\")",
+      "id": "10480007",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480009/?format=json"
+        }
+      },
+      "_display": "10480009 Spuistraat 94",
+      "id": "10480009",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480010/?format=json"
+        }
+      },
+      "_display": "10480010 Koninklijk Paleis in de Mozes en Aaronstraat",
+      "id": "10480010",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10480011/?format=json"
+        }
+      },
+      "_display": "10480011 Koninklijk Paleis zijde Damplein in de vierde pijler rechts van de ingang (trappen)",
+      "id": "10480011",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10580001/?format=json"
+        }
+      },
+      "_display": "10580001 Damrak 387 (Toren \"Beursgebouw\")",
+      "id": "10580001",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10580002/?format=json"
+        }
+      },
+      "_display": "10580002 Oudekerksplein 15 \"Oudekerkstoren\" rechts van de pilaster rechts van de ingang (x = pilaster  y = zandstenen plint).",
+      "id": "10580002",
+      "dataset": "nap"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/nap/peilmerk/10580005/?format=json"
+        }
+      },
+      "_display": "10580005 Walmuur Geldersekade rechts van aanlegsteiger",
+      "id": "10580005",
+      "dataset": "nap"
+    }
+  ]
+}

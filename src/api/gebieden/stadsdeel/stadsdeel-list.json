@@ -1,0 +1,104 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/?format=json"
+    },
+    "next": {
+      "href": null
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 8,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630000000016/?format=json"
+        }
+      },
+      "_display": "Zuidoost (T)",
+      "code": "T",
+      "naam": "Zuidoost",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630000000018/?format=json"
+        }
+      },
+      "_display": "Centrum (A)",
+      "code": "A",
+      "naam": "Centrum",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630000000019/?format=json"
+        }
+      },
+      "_display": "Noord (N)",
+      "code": "N",
+      "naam": "Noord",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630000000020/?format=json"
+        }
+      },
+      "_display": "Westpoort (B)",
+      "code": "B",
+      "naam": "Westpoort",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630011872036/?format=json"
+        }
+      },
+      "_display": "West (E)",
+      "code": "E",
+      "naam": "West",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630011872037/?format=json"
+        }
+      },
+      "_display": "Nieuw-West (F)",
+      "code": "F",
+      "naam": "Nieuw-West",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630011872038/?format=json"
+        }
+      },
+      "_display": "Zuid (K)",
+      "code": "K",
+      "naam": "Zuid",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/stadsdeel/03630011872039/?format=json"
+        }
+      },
+      "_display": "Oost (M)",
+      "code": "M",
+      "naam": "Oost",
+      "dataset": "gebieden"
+    }
+  ]
+}

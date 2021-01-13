@@ -1,0 +1,51 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000005904/?format=json"
+    }
+  },
+  "_display": "'s-Gravelandse Veer",
+  "openbare_ruimte_identificatie": "0363300000005904",
+  "date_modified": "2021-01-10T23:27:11.401817Z",
+  "document_mutatie": "2014-01-10",
+  "document_nummer": "GV00001729_AC00AC",
+  "begin_geldigheid": "2014-01-10",
+  "einde_geldigheid": null,
+  "status": "Naamgeving uitgegeven",
+  "bron": null,
+  "geometrie": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [121625.766, 486768.333],
+          [121619.504, 486771.865],
+          [121554.15, 486765.874],
+          [121551.55, 486752.418],
+          [121552.112, 486752.533],
+          [121579.083, 486753.857],
+          [121622.326, 486759.29],
+          [121625.766, 486768.333]
+        ]
+      ]
+    ]
+  },
+  "type": "Weg",
+  "naam": "'s-Gravelandse Veer",
+  "omschrijving": "De kade was vroeger de ligplaats van de beurtschepen naar dit Gooise dorp, waar een aantal Amsterdamse regentenfamilies hun buitenverblijf had. Vóór 1913 heette de kade Binnen-Amstel.",
+  "naam_24_posities": "'s Gravelandseveer",
+  "woonplaats": {
+    "_links": {
+      "self": { "href": "https://api.data.amsterdam.nl/bag/v1.1/woonplaats/3594/?format=json" }
+    },
+    "_display": "Amsterdam",
+    "landelijk_id": "3594",
+    "dataset": "bag"
+  },
+  "adressen": {
+    "count": 31,
+    "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json&openbare_ruimte=0363300000005904"
+  },
+  "bbox": [121551.55, 486752.418, 121625.766, 486771.865],
+  "dataset": "bag"
+}

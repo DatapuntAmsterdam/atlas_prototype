@@ -1,0 +1,341 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 526452,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802188/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 1",
+      "landelijk_id": "0363010000802188",
+      "id": "0363010000802188",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802189/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 2",
+      "landelijk_id": "0363010000802189",
+      "id": "0363010000802189",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010002001894/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 3",
+      "landelijk_id": "0363010002001894",
+      "id": "0363010002001894",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802192/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 5-1",
+      "landelijk_id": "0363010000802192",
+      "id": "0363010000802192",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802193/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 5-2",
+      "landelijk_id": "0363010000802193",
+      "id": "0363010000802193",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802194/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 5-3",
+      "landelijk_id": "0363010000802194",
+      "id": "0363010000802194",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802191/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 5-H",
+      "landelijk_id": "0363010000802191",
+      "id": "0363010000802191",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802196/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 6-1",
+      "landelijk_id": "0363010000802196",
+      "id": "0363010000802196",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802197/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 6-2",
+      "landelijk_id": "0363010000802197",
+      "id": "0363010000802197",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802198/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 6-3",
+      "landelijk_id": "0363010000802198",
+      "id": "0363010000802198",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802195/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 6-H",
+      "landelijk_id": "0363010000802195",
+      "id": "0363010000802195",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802200/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 7-2",
+      "landelijk_id": "0363010000802200",
+      "id": "0363010000802200",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000968606/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 7-3",
+      "landelijk_id": "0363010000968606",
+      "id": "0363010000968606",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000968607/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 7-4",
+      "landelijk_id": "0363010000968607",
+      "id": "0363010000968607",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000976634/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 7-5",
+      "landelijk_id": "0363010000976634",
+      "id": "0363010000976634",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010003695388/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 7-H",
+      "landelijk_id": "0363010003695388",
+      "id": "0363010003695388",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802202/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 8-1",
+      "landelijk_id": "0363010000802202",
+      "id": "0363010000802202",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802203/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 8-2",
+      "landelijk_id": "0363010000802203",
+      "id": "0363010000802203",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000992432/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 8-3",
+      "landelijk_id": "0363010000992432",
+      "id": "0363010000992432",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802201/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 8-H",
+      "landelijk_id": "0363010000802201",
+      "id": "0363010000802201",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802206/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 9-1",
+      "landelijk_id": "0363010000802206",
+      "id": "0363010000802206",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802207/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 9-2",
+      "landelijk_id": "0363010000802207",
+      "id": "0363010000802207",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000943440/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 9-H",
+      "landelijk_id": "0363010000943440",
+      "id": "0363010000943440",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802209/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 10-1",
+      "landelijk_id": "0363010000802209",
+      "id": "0363010000802209",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/verblijfsobject/0363010000802210/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer 10-2",
+      "landelijk_id": "0363010000802210",
+      "id": "0363010000802210",
+      "status": "Verblijfsobject in gebruik",
+      "hoofdadres": true,
+      "dataset": "bag"
+    }
+  ]
+}

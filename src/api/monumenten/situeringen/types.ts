@@ -1,21 +1,27 @@
 /* eslint-disable camelcase */
 import { APIReference, Links } from '../../types'
 
-export interface Root extends APIReference {
+export interface Single extends APIReference {
   _display: string
   identificerende_sleutel_situering: number
   situering_nummeraanduiding: string
-  betreft_nummeraanduiding: BetreftNummeraanduiding
+  betreft_nummeraanduiding: {
+    _links: Links
+    nummeraanduidingidentificatie: string
+  }
   eerste_situering: string
-  hoort_bij_monument: HoortBijMonument
+  hoort_bij_monument: {
+    _links: Links
+    identificerende_sleutel_monument: string
+  }
 }
 
-export interface HoortBijMonument {
+interface ListResult extends Single {
   _links: Links
-  identificerende_sleutel_monument: string
 }
 
-export interface BetreftNummeraanduiding {
+export interface List {
   _links: Links
-  nummeraanduidingidentificatie: string
+  count: number
+  results: ListResult[]
 }

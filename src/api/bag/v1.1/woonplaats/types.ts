@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import { Geometry } from 'geojson'
-import { APIReference, SmallAPIReference } from '../../../types'
+import { APIReference, Links, SmallAPIReference } from '../../../types'
 
-export interface Root extends APIReference {
+export interface Single extends APIReference {
   woonplaatsidentificatie: string
   date_modified: string
   document_mutatie: string
@@ -14,4 +14,10 @@ export interface Root extends APIReference {
   geometrie: Geometry
   openbare_ruimtes: SmallAPIReference
   dataset: string
+}
+
+export interface List {
+  _links: Links
+  count: number
+  results: Pick<APIReference, '_links' | '_display' | 'landelijk_id' | 'dataset'>[]
 }

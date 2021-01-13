@@ -1,0 +1,266 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 9153,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012096976/?format=json"
+        }
+      },
+      "_display": "AA01",
+      "id": "03630012096976",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012097147/?format=json"
+        }
+      },
+      "_display": "AA02",
+      "id": "03630012097147",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100707/?format=json"
+        }
+      },
+      "_display": "AA03",
+      "id": "03630012100707",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012095672/?format=json"
+        }
+      },
+      "_display": "AA04",
+      "id": "03630012095672",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100625/?format=json"
+        }
+      },
+      "_display": "AA05",
+      "id": "03630012100625",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100532/?format=json"
+        }
+      },
+      "_display": "AA06",
+      "id": "03630012100532",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100536/?format=json"
+        }
+      },
+      "_display": "AA07",
+      "id": "03630012100536",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012095952/?format=json"
+        }
+      },
+      "_display": "AA08",
+      "id": "03630012095952",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012096595/?format=json"
+        }
+      },
+      "_display": "AA09",
+      "id": "03630012096595",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012097154/?format=json"
+        }
+      },
+      "_display": "AA10",
+      "id": "03630012097154",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012096964/?format=json"
+        }
+      },
+      "_display": "AA11",
+      "id": "03630012096964",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012097144/?format=json"
+        }
+      },
+      "_display": "AA13",
+      "id": "03630012097144",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100538/?format=json"
+        }
+      },
+      "_display": "AA14",
+      "id": "03630012100538",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012097141/?format=json"
+        }
+      },
+      "_display": "AA15",
+      "id": "03630012097141",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100946/?format=json"
+        }
+      },
+      "_display": "AA16",
+      "id": "03630012100946",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012096721/?format=json"
+        }
+      },
+      "_display": "AA18",
+      "id": "03630012096721",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100320/?format=json"
+        }
+      },
+      "_display": "AA21",
+      "id": "03630012100320",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012097048/?format=json"
+        }
+      },
+      "_display": "AA22",
+      "id": "03630012097048",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100653/?format=json"
+        }
+      },
+      "_display": "AA23",
+      "id": "03630012100653",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100656/?format=json"
+        }
+      },
+      "_display": "AA24",
+      "id": "03630012100656",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100655/?format=json"
+        }
+      },
+      "_display": "AA25",
+      "id": "03630012100655",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012099020/?format=json"
+        }
+      },
+      "_display": "AA26",
+      "id": "03630012099020",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100324/?format=json"
+        }
+      },
+      "_display": "AA27",
+      "id": "03630012100324",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012100537/?format=json"
+        }
+      },
+      "_display": "AA29",
+      "id": "03630012100537",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/bouwblok/03630012097050/?format=json"
+        }
+      },
+      "_display": "AA31",
+      "id": "03630012097050",
+      "dataset": "gebieden"
+    }
+  ]
+}

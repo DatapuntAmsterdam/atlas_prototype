@@ -1,0 +1,46 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/brk/subject/"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/brk/subject/?page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 353568,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.123456789/"
+        }
+      },
+      "_display": "John Doe",
+      "naam": "Doe",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.123456789/"
+        }
+      },
+      "_display": "John Doe",
+      "naam": "Doe",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/subject/NL.KAD.Persoon.123456789/"
+        }
+      },
+      "_display": "John Doe",
+      "naam": "Doe",
+      "dataset": "brk"
+    }
+  ]
+}

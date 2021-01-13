@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash.clonedeep'
-import bouwdossierFixture from '../../api/iiif-metadata/bouwdossier/fixture'
+import { singleFixture as bouwdossierFixture } from '../../api/iiif-metadata/bouwdossier'
 
 import getAddresses, { formatAddress } from './getAddresses'
 

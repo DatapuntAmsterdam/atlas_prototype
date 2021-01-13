@@ -1,0 +1,116 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 184153,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061164/?format=json"
+        }
+      },
+      "_display": "0363100012061164",
+      "landelijk_id": "0363100012061164",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061165/?format=json"
+        }
+      },
+      "_display": "0363100012061165",
+      "landelijk_id": "0363100012061165",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061166/?format=json"
+        }
+      },
+      "_display": "0363100012061166",
+      "landelijk_id": "0363100012061166",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061167/?format=json"
+        }
+      },
+      "_display": "0363100012061167",
+      "landelijk_id": "0363100012061167",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061168/?format=json"
+        }
+      },
+      "_display": "0363100012061168",
+      "landelijk_id": "0363100012061168",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061169/?format=json"
+        }
+      },
+      "_display": "0363100012061169",
+      "landelijk_id": "0363100012061169",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061170/?format=json"
+        }
+      },
+      "_display": "0363100012061170",
+      "landelijk_id": "0363100012061170",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061171/?format=json"
+        }
+      },
+      "_display": "0363100012061171",
+      "landelijk_id": "0363100012061171",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061172/?format=json"
+        }
+      },
+      "_display": "0363100012061172",
+      "landelijk_id": "0363100012061172",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012061173/?format=json"
+        }
+      },
+      "_display": "0363100012061173",
+      "landelijk_id": "0363100012061173",
+      "dataset": "bag"
+    }
+  ]
+}

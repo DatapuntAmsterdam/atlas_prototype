@@ -1,0 +1,36 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/gebieden/unesco/?format=json"
+    },
+    "next": {
+      "href": null
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 2,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/unesco/bufferzone/?format=json"
+        }
+      },
+      "_display": "Bufferzone",
+      "naam": "Bufferzone",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/unesco/kernzone/?format=json"
+        }
+      },
+      "_display": "Kernzone",
+      "naam": "Kernzone",
+      "dataset": "gebieden"
+    }
+  ]
+}

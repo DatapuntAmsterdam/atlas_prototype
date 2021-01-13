@@ -1,4 +1,5 @@
 import { APIReference } from './types'
+import environment from '../environment'
 
 const getListResultFixture = (
   results: APIReference[],
@@ -26,20 +27,23 @@ const getListResultFixture = (
 
 const getListFixture = (
   result: APIReference,
-  selfHref: string,
+  path: string,
   count: number,
-  nextHref: string,
-  prevHref: string,
-) => ({
-  listNoResults: getListResultFixture([result], selfHref),
-  listResult: getListResultFixture([result], selfHref, 1),
-  listResultPagination: getListResultFixture(
-    Array(count).fill(result),
-    selfHref,
-    count,
-    nextHref,
-    prevHref,
-  ),
-})
+  nextHref?: string,
+  prevHref?: string,
+) => {
+  const selfHref = `${environment.API_ROOT}${path}`
+  return {
+    listNoResults: getListResultFixture([result], selfHref),
+    listResult: getListResultFixture([result], selfHref, 1),
+    listResultPagination: getListResultFixture(
+      Array(count).fill(result),
+      selfHref,
+      count,
+      nextHref,
+      prevHref,
+    ),
+  }
+}
 
 export default getListFixture

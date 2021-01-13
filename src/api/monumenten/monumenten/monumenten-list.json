@@ -1,0 +1,4435 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 9441,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/000e8f55-1d82-4d94-8f1f-5ca11b4d28cf/"
+        }
+      },
+      "identificerende_sleutel_monument": "000e8f55-1d82-4d94-8f1f-5ca11b4d28cf",
+      "monumentnummer": 6372,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012168495",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168495/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012168494",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168494/"
+            }
+          }
+        }
+      ],
+      "_display": "Tweede Weteringdwarsstraat 71 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=000e8f55-1d82-4d94-8f1f-5ca11b4d28cf"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121177,
+          486052
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0010fec2-597b-4f66-a213-2ba10074ea62/"
+        }
+      },
+      "identificerende_sleutel_monument": "0010fec2-597b-4f66-a213-2ba10074ea62",
+      "monumentnummer": 4098,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012180139",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012180139/"
+            }
+          }
+        }
+      ],
+      "_display": "Pieter Jacobszstraat 19 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0010fec2-597b-4f66-a213-2ba10074ea62"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121459,
+          487210
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00175311-f4f1-495d-a7ce-5255734f2c32/"
+        }
+      },
+      "identificerende_sleutel_monument": "00175311-f4f1-495d-a7ce-5255734f2c32",
+      "monumentnummer": 5247,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012175032",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012175032/"
+            }
+          }
+        }
+      ],
+      "_display": "Singel 423",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00175311-f4f1-495d-a7ce-5255734f2c32"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121102,
+          486781
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0028a887-d29e-4b81-9671-9689c723a71b/"
+        }
+      },
+      "identificerende_sleutel_monument": "0028a887-d29e-4b81-9671-9689c723a71b",
+      "monumentnummer": 206027,
+      "monumentnaam": null,
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2005-06-07",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012181586",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012181586/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012181595",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012181595/"
+            }
+          }
+        }
+      ],
+      "_display": "Oostenburgervoorstraat 59 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 9,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0028a887-d29e-4b81-9671-9689c723a71b"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          123426,
+          486994
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/002cc848-788f-4baf-bc68-f6466dc5c728/"
+        }
+      },
+      "identificerende_sleutel_monument": "002cc848-788f-4baf-bc68-f6466dc5c728",
+      "monumentnummer": 3360,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012172228",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172228/"
+            }
+          }
+        }
+      ],
+      "_display": "Leidsegracht 28",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=002cc848-788f-4baf-bc68-f6466dc5c728"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120812,
+          486714
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/002f0eda-daa3-43d3-96a2-e55c93f297b1/"
+        }
+      },
+      "identificerende_sleutel_monument": "002f0eda-daa3-43d3-96a2-e55c93f297b1",
+      "monumentnummer": 5644,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012175924",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012175924/"
+            }
+          }
+        }
+      ],
+      "_display": "Spuistraat 126 B",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=002f0eda-daa3-43d3-96a2-e55c93f297b1"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121144,
+          487498
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0030c53f-4f42-4d90-81d4-1408418d647d/"
+        }
+      },
+      "identificerende_sleutel_monument": "0030c53f-4f42-4d90-81d4-1408418d647d",
+      "monumentnummer": 214022,
+      "monumentnaam": null,
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2007-03-13",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012169163",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012169163/"
+            }
+          }
+        }
+      ],
+      "_display": "Alexanderkade 64",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0030c53f-4f42-4d90-81d4-1408418d647d"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          123297,
+          486371
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0034e8ac-126b-4c02-91a3-070fd7ad646e/"
+        }
+      },
+      "identificerende_sleutel_monument": "0034e8ac-126b-4c02-91a3-070fd7ad646e",
+      "monumentnummer": 5694,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012171119",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012171119/"
+            }
+          }
+        }
+      ],
+      "_display": "Stromarkt 11",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0034e8ac-126b-4c02-91a3-070fd7ad646e"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121445,
+          487973
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0037078e-b859-4855-b0e3-c31648cd4491/"
+        }
+      },
+      "identificerende_sleutel_monument": "0037078e-b859-4855-b0e3-c31648cd4491",
+      "monumentnummer": 19,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012171845",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012171845/"
+            }
+          }
+        }
+      ],
+      "_display": "Oudezijds Achterburgwal 65 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0037078e-b859-4855-b0e3-c31648cd4491"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121744,
+          487361
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0037ad5f-e5a9-426b-8768-f9fb9e5ce3f2/"
+        }
+      },
+      "identificerende_sleutel_monument": "0037ad5f-e5a9-426b-8768-f9fb9e5ce3f2",
+      "monumentnummer": 222243,
+      "monumentnaam": null,
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2013-04-16",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012134882",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012134882/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012107886",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012107886/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012084587",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012084587/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012097217",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012097217/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012081891",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012081891/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012106154",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012106154/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012114687",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012114687/"
+            }
+          }
+        }
+      ],
+      "_display": "Vrijheidslaan 80 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 30,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0037ad5f-e5a9-426b-8768-f9fb9e5ce3f2"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122204,
+          484419
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/003e85f1-13bf-4d92-abea-7856fadbd725/"
+        }
+      },
+      "identificerende_sleutel_monument": "003e85f1-13bf-4d92-abea-7856fadbd725",
+      "monumentnummer": 2987,
+      "monumentnaam": "Kloveniersburgwal 57 (voorheen)",
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012178220",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178220/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012178216",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178216/"
+            }
+          }
+        }
+      ],
+      "_display": "Kloveniersburgwal 57 (voorheen)",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 8,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=003e85f1-13bf-4d92-abea-7856fadbd725"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121718.97,
+          487044.16
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/004299d8-c521-4f05-ad25-2b32945d782a/"
+        }
+      },
+      "identificerende_sleutel_monument": "004299d8-c521-4f05-ad25-2b32945d782a",
+      "monumentnummer": 878,
+      "monumentnaam": "Gemeenlandshuis",
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012155481",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012155481/"
+            }
+          }
+        }
+      ],
+      "_display": "Gemeenlandshuis",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=004299d8-c521-4f05-ad25-2b32945d782a"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          126334,
+          486014
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0061d748-98c0-4343-b427-b587c0c7bb46/"
+        }
+      },
+      "identificerende_sleutel_monument": "0061d748-98c0-4343-b427-b587c0c7bb46",
+      "monumentnummer": 1093,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012169282",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012169282/"
+            }
+          }
+        }
+      ],
+      "_display": "Entrepotdok 93",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0061d748-98c0-4343-b427-b587c0c7bb46"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          123166,
+          486662
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00686691-b6df-4656-a99d-6f928da7993a/"
+        }
+      },
+      "identificerende_sleutel_monument": "00686691-b6df-4656-a99d-6f928da7993a",
+      "monumentnummer": 222092,
+      "monumentnaam": null,
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2013-08-13",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012068485",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012068485/"
+            }
+          }
+        }
+      ],
+      "_display": "Van Eeghenstraat 114",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 9,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00686691-b6df-4656-a99d-6f928da7993a"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          119674,
+          485532
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/006dc568-9951-431f-b9e8-12608c9883cc/"
+        }
+      },
+      "identificerende_sleutel_monument": "006dc568-9951-431f-b9e8-12608c9883cc",
+      "monumentnummer": 5318,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012175926",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012175926/"
+            }
+          }
+        }
+      ],
+      "_display": "Singel 182 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=006dc568-9951-431f-b9e8-12608c9883cc"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121073,
+          487536
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/006de9cc-7c17-490b-91c3-932c5ad4589b/"
+        }
+      },
+      "identificerende_sleutel_monument": "006de9cc-7c17-490b-91c3-932c5ad4589b",
+      "monumentnummer": 5911,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012180361",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012180361/"
+            }
+          }
+        }
+      ],
+      "_display": "Nieuwezijds Voorburgwal 25",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=006de9cc-7c17-490b-91c3-932c5ad4589b"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121487,
+          487773
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/007ce883-de2a-406d-8c7c-0c92afe3cb41/"
+        }
+      },
+      "identificerende_sleutel_monument": "007ce883-de2a-406d-8c7c-0c92afe3cb41",
+      "monumentnummer": 505755,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "1996-05-24",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012233591",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012233591/"
+            }
+          }
+        }
+      ],
+      "_display": "Teniersstraat 8",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=007ce883-de2a-406d-8c7c-0c92afe3cb41"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120777,
+          485526
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00840129-7bc5-454d-b053-5eba719e4642/"
+        }
+      },
+      "identificerende_sleutel_monument": "00840129-7bc5-454d-b053-5eba719e4642",
+      "monumentnummer": 527829,
+      "monumentnaam": "Apollohal",
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2004-08-16",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012148632",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012148632/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012134507",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012134507/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012078842",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012078842/"
+            }
+          }
+        }
+      ],
+      "_display": "Apollohal",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00840129-7bc5-454d-b053-5eba719e4642"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120729,
+          484626
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00870938-1c02-4ef7-b165-a219ff30d96c/"
+        }
+      },
+      "identificerende_sleutel_monument": "00870938-1c02-4ef7-b165-a219ff30d96c",
+      "monumentnummer": 1964,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012179848",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012179848/"
+            }
+          }
+        }
+      ],
+      "_display": "Herenmarkt 16 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00870938-1c02-4ef7-b165-a219ff30d96c"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121236,
+          488116
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00937bda-4e36-42ca-9160-7413d1a03514/"
+        }
+      },
+      "identificerende_sleutel_monument": "00937bda-4e36-42ca-9160-7413d1a03514",
+      "monumentnummer": 6526,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012182380",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012182380/"
+            }
+          }
+        }
+      ],
+      "_display": "Zeedijk 81 C",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00937bda-4e36-42ca-9160-7413d1a03514"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121869,
+          487511
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/009ab856-be5e-43e7-81ba-b3f9d457c442/"
+        }
+      },
+      "identificerende_sleutel_monument": "009ab856-be5e-43e7-81ba-b3f9d457c442",
+      "monumentnummer": 524825,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2001-12-17",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012159806",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012159806/"
+            }
+          }
+        }
+      ],
+      "_display": "Bilderdijkkade 62 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=009ab856-be5e-43e7-81ba-b3f9d457c442"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          119785,
+          486700
+        ]
+      },
+      "ligt_in_complex": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/complexen/8587221a-c384-4fc2-ba73-e5f3fc867e47/"
+          }
+        },
+        "identificerende_sleutel_complex": "8587221a-c384-4fc2-ba73-e5f3fc867e47"
+      },
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00bab0cd-7250-4515-a6f5-b9d745bbf2ec/"
+        }
+      },
+      "identificerende_sleutel_monument": "00bab0cd-7250-4515-a6f5-b9d745bbf2ec",
+      "monumentnummer": 222101,
+      "monumentnaam": null,
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2011-11-22",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012165842",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012165842/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012162111",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012162111/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012167227",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012167227/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012161781",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012161781/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012158997",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012158997/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012156201",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012156201/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012161540",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012161540/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012154308",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012154308/"
+            }
+          }
+        }
+      ],
+      "_display": "Lutmastraat 258 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 23,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00bab0cd-7250-4515-a6f5-b9d745bbf2ec"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122316,
+          485027
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00d9b2d4-c2da-4e42-b93c-3399bb524de7/"
+        }
+      },
+      "identificerende_sleutel_monument": "00d9b2d4-c2da-4e42-b93c-3399bb524de7",
+      "monumentnummer": 5480,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012175459",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012175459/"
+            }
+          }
+        }
+      ],
+      "_display": "Sint Nicolaasstraat 64",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00d9b2d4-c2da-4e42-b93c-3399bb524de7"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121308,
+          487561
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00de5c46-570c-4074-ac1d-d3f4ba2a4f1e/"
+        }
+      },
+      "identificerende_sleutel_monument": "00de5c46-570c-4074-ac1d-d3f4ba2a4f1e",
+      "monumentnummer": 201036,
+      "monumentnaam": null,
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2004-03-16",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012169212",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012169212/"
+            }
+          }
+        }
+      ],
+      "_display": "Utrechtsestraat 18 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00de5c46-570c-4074-ac1d-d3f4ba2a4f1e"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121651,
+          486497
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00e02a2b-0eac-4aea-8976-592b3a7b96e4/"
+        }
+      },
+      "identificerende_sleutel_monument": "00e02a2b-0eac-4aea-8976-592b3a7b96e4",
+      "monumentnummer": 201016,
+      "monumentnaam": null,
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2004-03-16",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012179546",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012179546/"
+            }
+          }
+        }
+      ],
+      "_display": "Gebed Zonder End 4",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 5,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00e02a2b-0eac-4aea-8976-592b3a7b96e4"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121386,
+          486979
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00e3caab-ab90-4629-95ac-33320a60265c/"
+        }
+      },
+      "identificerende_sleutel_monument": "00e3caab-ab90-4629-95ac-33320a60265c",
+      "monumentnummer": 3430,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012172454",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172454/"
+            }
+          }
+        }
+      ],
+      "_display": "Leidsestraat 62 2",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00e3caab-ab90-4629-95ac-33320a60265c"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120820,
+          486525
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00efb433-737d-4af6-9b92-59a490b36f46/"
+        }
+      },
+      "identificerende_sleutel_monument": "00efb433-737d-4af6-9b92-59a490b36f46",
+      "monumentnummer": 5479,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012179562",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012179562/"
+            }
+          }
+        }
+      ],
+      "_display": "Sint Nicolaasstraat 38 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00efb433-737d-4af6-9b92-59a490b36f46"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121333,
+          487568
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/00f8e186-d7e4-4794-9d7c-74e17d52f942/"
+        }
+      },
+      "identificerende_sleutel_monument": "00f8e186-d7e4-4794-9d7c-74e17d52f942",
+      "monumentnummer": 4746,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012180316",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012180316/"
+            }
+          }
+        }
+      ],
+      "_display": "Pijlsteeg 31",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=00f8e186-d7e4-4794-9d7c-74e17d52f942"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121498,
+          487273
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/010682a8-b550-4c9e-a9c6-56cb031d7ed9/"
+        }
+      },
+      "identificerende_sleutel_monument": "010682a8-b550-4c9e-a9c6-56cb031d7ed9",
+      "monumentnummer": 2945,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012178077",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178077/"
+            }
+          }
+        }
+      ],
+      "_display": "Kerkstraat 376 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=010682a8-b550-4c9e-a9c6-56cb031d7ed9"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121822,
+          486244
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/010ceb73-8a67-4c09-97d5-3a7b9bbc69f3/"
+        }
+      },
+      "identificerende_sleutel_monument": "010ceb73-8a67-4c09-97d5-3a7b9bbc69f3",
+      "monumentnummer": 523293,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2001-09-13",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012083992",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012083992/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012126771",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012126771/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012089333",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012089333/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012120090",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012120090/"
+            }
+          }
+        }
+      ],
+      "_display": "Oostelijke Handelskade 36 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 12,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=010ceb73-8a67-4c09-97d5-3a7b9bbc69f3"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          124254,
+          487458
+        ]
+      },
+      "ligt_in_complex": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/complexen/5b3bc1b3-6786-416f-bb90-63d8c48b3cfe/"
+          }
+        },
+        "identificerende_sleutel_complex": "5b3bc1b3-6786-416f-bb90-63d8c48b3cfe"
+      },
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/010ff11a-3f84-4a46-a2e8-a3e68bf8ce5b/"
+        }
+      },
+      "identificerende_sleutel_monument": "010ff11a-3f84-4a46-a2e8-a3e68bf8ce5b",
+      "monumentnummer": 337633,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "1990-09-07",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012161595",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012161595/"
+            }
+          }
+        }
+      ],
+      "_display": "Gosschalklaan 8",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=010ff11a-3f84-4a46-a2e8-a3e68bf8ce5b"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          119819,
+          488863
+        ]
+      },
+      "ligt_in_complex": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/complexen/bf7c48dd-a07b-424c-aad8-434f77fb8d48/"
+          }
+        },
+        "identificerende_sleutel_complex": "bf7c48dd-a07b-424c-aad8-434f77fb8d48"
+      },
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0113a7e7-4d11-4c14-a20c-9780535cdd77/"
+        }
+      },
+      "identificerende_sleutel_monument": "0113a7e7-4d11-4c14-a20c-9780535cdd77",
+      "monumentnummer": 863,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012178315",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178315/"
+            }
+          }
+        }
+      ],
+      "_display": "Damrak 41",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0113a7e7-4d11-4c14-a20c-9780535cdd77"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121560,
+          487657
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01157d24-2cd7-40cc-8e36-a3946b657fab/"
+        }
+      },
+      "identificerende_sleutel_monument": "01157d24-2cd7-40cc-8e36-a3946b657fab",
+      "monumentnummer": 201012,
+      "monumentnaam": null,
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2004-03-16",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012179535",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012179535/"
+            }
+          }
+        }
+      ],
+      "_display": "Nes 120 1",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01157d24-2cd7-40cc-8e36-a3946b657fab"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121357,
+          486978
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0118c0cd-041d-4ea2-8899-cf33a79a3c10/"
+        }
+      },
+      "identificerende_sleutel_monument": "0118c0cd-041d-4ea2-8899-cf33a79a3c10",
+      "monumentnummer": 3349,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012169508",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012169508/"
+            }
+          }
+        }
+      ],
+      "_display": "Leidsegracht 2",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0118c0cd-041d-4ea2-8899-cf33a79a3c10"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120877,
+          486751
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/011d83fa-c21b-4e41-8a5d-c90c886c0db7/"
+        }
+      },
+      "identificerende_sleutel_monument": "011d83fa-c21b-4e41-8a5d-c90c886c0db7",
+      "monumentnummer": 6277,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012165093",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012165093/"
+            }
+          }
+        }
+      ],
+      "_display": "Warmoesstraat 16",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=011d83fa-c21b-4e41-8a5d-c90c886c0db7"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121758,
+          487689
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01218563-ba1a-43ba-af10-26944c98d565/"
+        }
+      },
+      "identificerende_sleutel_monument": "01218563-ba1a-43ba-af10-26944c98d565",
+      "monumentnummer": 203,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012178951",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178951/"
+            }
+          }
+        }
+      ],
+      "_display": "Amstel 108",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 5,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01218563-ba1a-43ba-af10-26944c98d565"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121617,
+          486677
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/012fb35b-f634-4d1c-8376-79a698f5c0b1/"
+        }
+      },
+      "identificerende_sleutel_monument": "012fb35b-f634-4d1c-8376-79a698f5c0b1",
+      "monumentnummer": 518490,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2001-07-13",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012168532",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168532/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012253948",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012253948/"
+            }
+          }
+        }
+      ],
+      "_display": "Nes 11",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=012fb35b-f634-4d1c-8376-79a698f5c0b1"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121407,
+          487259
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/013121a0-4a4c-47bf-b8cb-fedc1bf3db1b/"
+        }
+      },
+      "identificerende_sleutel_monument": "013121a0-4a4c-47bf-b8cb-fedc1bf3db1b",
+      "monumentnummer": 2952,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012182808",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012182808/"
+            }
+          }
+        }
+      ],
+      "_display": "Kerkstraat 414",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=013121a0-4a4c-47bf-b8cb-fedc1bf3db1b"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121901,
+          486267
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01390000-9699-41b4-9056-2bb569a20850/"
+        }
+      },
+      "identificerende_sleutel_monument": "01390000-9699-41b4-9056-2bb569a20850",
+      "monumentnummer": 861,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012178318",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178318/"
+            }
+          }
+        }
+      ],
+      "_display": "Damrak 36",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01390000-9699-41b4-9056-2bb569a20850"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121575,
+          487674
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/013c5466-266c-4b0e-b1bd-f8d06261bf2b/"
+        }
+      },
+      "identificerende_sleutel_monument": "013c5466-266c-4b0e-b1bd-f8d06261bf2b",
+      "monumentnummer": 492059,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "1996-01-22",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012236549",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012236549/"
+            }
+          }
+        }
+      ],
+      "_display": "Zandpad 5",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=013c5466-266c-4b0e-b1bd-f8d06261bf2b"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120332.42,
+          486041.19
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0155289a-8369-43e0-9d2d-c5b11c3d203a/"
+        }
+      },
+      "identificerende_sleutel_monument": "0155289a-8369-43e0-9d2d-c5b11c3d203a",
+      "monumentnummer": 1050,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012164981",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012164981/"
+            }
+          }
+        }
+      ],
+      "_display": "Entrepotdok 25",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0155289a-8369-43e0-9d2d-c5b11c3d203a"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122728,
+          486913
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01554a75-ce61-4933-b311-a63305a36f24/"
+        }
+      },
+      "identificerende_sleutel_monument": "01554a75-ce61-4933-b311-a63305a36f24",
+      "monumentnummer": 5587,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012175828",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012175828/"
+            }
+          }
+        }
+      ],
+      "_display": "Spuistraat 97 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01554a75-ce61-4933-b311-a63305a36f24"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121219,
+          487569
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/015a4ffc-edb8-4150-9e07-ecc0995bb82f/"
+        }
+      },
+      "identificerende_sleutel_monument": "015a4ffc-edb8-4150-9e07-ecc0995bb82f",
+      "monumentnummer": 505131,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "1996-05-24",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012103484",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012103484/"
+            }
+          }
+        }
+      ],
+      "_display": "Johannes Vermeerstraat 39 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 8,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=015a4ffc-edb8-4150-9e07-ecc0995bb82f"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120736,
+          485510
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/015a9106-bdef-420a-9890-91a61098afcc/"
+        }
+      },
+      "identificerende_sleutel_monument": "015a9106-bdef-420a-9890-91a61098afcc",
+      "monumentnummer": 200809,
+      "monumentnaam": "Weesperzijde 4 en 5",
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2017-02-07",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012163000",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012163000/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012166759",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012166759/"
+            }
+          }
+        }
+      ],
+      "_display": "Weesperzijde 4 en 5",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=015a9106-bdef-420a-9890-91a61098afcc"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122235,
+          485754
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0169c5e6-c052-4135-8179-d62e63af795c/"
+        }
+      },
+      "identificerende_sleutel_monument": "0169c5e6-c052-4135-8179-d62e63af795c",
+      "monumentnummer": 526967,
+      "monumentnaam": "Grafmonument S.N. Sablairolles",
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2003-10-31",
+      "betreft_pand": [],
+      "_display": "Grafmonument S.N. Sablairolles",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0169c5e6-c052-4135-8179-d62e63af795c"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          124439,
+          484292
+        ]
+      },
+      "ligt_in_complex": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/complexen/6a5cf07c-6d1b-4b46-a9f3-3b4cafcba2de/"
+          }
+        },
+        "identificerende_sleutel_complex": "6a5cf07c-6d1b-4b46-a9f3-3b4cafcba2de"
+      },
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/016a90c7-c4ca-49ae-b2e6-4906e4964ff9/"
+        }
+      },
+      "identificerende_sleutel_monument": "016a90c7-c4ca-49ae-b2e6-4906e4964ff9",
+      "monumentnummer": 200846,
+      "monumentnaam": "P.C. Hoofthuis",
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2015-10-13",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012165429",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012165429/"
+            }
+          }
+        }
+      ],
+      "_display": "P.C. Hoofthuis",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=016a90c7-c4ca-49ae-b2e6-4906e4964ff9"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121130,
+          487475
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/017d951c-4492-450f-a916-0936daaa5e54/"
+        }
+      },
+      "identificerende_sleutel_monument": "017d951c-4492-450f-a916-0936daaa5e54",
+      "monumentnummer": 5812,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012182677",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012182677/"
+            }
+          }
+        }
+      ],
+      "_display": "Utrechtsedwarsstraat 80 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=017d951c-4492-450f-a916-0936daaa5e54"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121783,
+          486067
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/017e8d6c-b2e9-41f9-9365-1dd89398d9be/"
+        }
+      },
+      "identificerende_sleutel_monument": "017e8d6c-b2e9-41f9-9365-1dd89398d9be",
+      "monumentnummer": 1153,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012182409",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012182409/"
+            }
+          }
+        }
+      ],
+      "_display": "Geldersekade 105 C",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=017e8d6c-b2e9-41f9-9365-1dd89398d9be"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121920,
+          487407
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01a039fd-f3ce-49d3-98c1-112a86e70b47/"
+        }
+      },
+      "identificerende_sleutel_monument": "01a039fd-f3ce-49d3-98c1-112a86e70b47",
+      "monumentnummer": 270,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012178617",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178617/"
+            }
+          }
+        }
+      ],
+      "_display": "Amstelveld 7 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01a039fd-f3ce-49d3-98c1-112a86e70b47"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121685,
+          486189
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01a25c09-4b63-43ec-bfcc-3da79a6d8e13/"
+        }
+      },
+      "identificerende_sleutel_monument": "01a25c09-4b63-43ec-bfcc-3da79a6d8e13",
+      "monumentnummer": 139,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012182557",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012182557/"
+            }
+          }
+        }
+      ],
+      "_display": "Achtergracht 25",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01a25c09-4b63-43ec-bfcc-3da79a6d8e13"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121926,
+          486072
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01a6cb44-7565-476b-bbe8-c7da21b9dd2a/"
+        }
+      },
+      "identificerende_sleutel_monument": "01a6cb44-7565-476b-bbe8-c7da21b9dd2a",
+      "monumentnummer": 1,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012177986",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012177986/"
+            }
+          }
+        }
+      ],
+      "_display": "Oudezijds Achterburgwal 19",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01a6cb44-7565-476b-bbe8-c7da21b9dd2a"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121821,
+          487476
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01ae611b-9cd7-4a65-8fb4-6ddc9138163e/"
+        }
+      },
+      "identificerende_sleutel_monument": "01ae611b-9cd7-4a65-8fb4-6ddc9138163e",
+      "monumentnummer": 200503,
+      "monumentnaam": "Poortgebouw Asterdorp",
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2004-02-10",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012126313",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012126313/"
+            }
+          }
+        }
+      ],
+      "_display": "Poortgebouw Asterdorp",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01ae611b-9cd7-4a65-8fb4-6ddc9138163e"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122109,
+          489525
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01aeffbf-13e2-4984-ba8b-abd8955678d2/"
+        }
+      },
+      "identificerende_sleutel_monument": "01aeffbf-13e2-4984-ba8b-abd8955678d2",
+      "monumentnummer": 6719,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012163574",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012163574/"
+            }
+          }
+        }
+      ],
+      "_display": "Nieuwendammerdijk 359",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01aeffbf-13e2-4984-ba8b-abd8955678d2"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          124689,
+          489298
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01b8e19d-1b15-4214-ad98-623eddf22774/"
+        }
+      },
+      "identificerende_sleutel_monument": "01b8e19d-1b15-4214-ad98-623eddf22774",
+      "monumentnummer": 6490,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012167596",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012167596/"
+            }
+          }
+        }
+      ],
+      "_display": "Zandhoek 7",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01b8e19d-1b15-4214-ad98-623eddf22774"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121147,
+          488987
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01badba7-75fe-4ba4-bc73-a2ce192f92ca/"
+        }
+      },
+      "identificerende_sleutel_monument": "01badba7-75fe-4ba4-bc73-a2ce192f92ca",
+      "monumentnummer": 6771,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012160669",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012160669/"
+            }
+          }
+        }
+      ],
+      "_display": "Spaarndammerdijk 663",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01badba7-75fe-4ba4-bc73-a2ce192f92ca"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          118177,
+          488946
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01bde134-ddcf-4991-8b12-841f1e7a5805/"
+        }
+      },
+      "identificerende_sleutel_monument": "01bde134-ddcf-4991-8b12-841f1e7a5805",
+      "monumentnummer": 2098,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012169723",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012169723/"
+            }
+          }
+        }
+      ],
+      "_display": "Tussen Kadijken 13",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01bde134-ddcf-4991-8b12-841f1e7a5805"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122803,
+          486946
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01c3eb95-c9dc-49db-b438-79d8445fbb08/"
+        }
+      },
+      "identificerende_sleutel_monument": "01c3eb95-c9dc-49db-b438-79d8445fbb08",
+      "monumentnummer": 4452,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012168452",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168452/"
+            }
+          }
+        }
+      ],
+      "_display": "Prinsengracht 993 HV",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01c3eb95-c9dc-49db-b438-79d8445fbb08"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121379,
+          486143
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01c82ad8-6487-4801-a8ee-5558b9b7663b/"
+        }
+      },
+      "identificerende_sleutel_monument": "01c82ad8-6487-4801-a8ee-5558b9b7663b",
+      "monumentnummer": 1574,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012167628",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012167628/"
+            }
+          }
+        }
+      ],
+      "_display": "Herengracht 221",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01c82ad8-6487-4801-a8ee-5558b9b7663b"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120972,
+          487349
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01ca8d40-30d0-44eb-8bab-b641a465e451/"
+        }
+      },
+      "identificerende_sleutel_monument": "01ca8d40-30d0-44eb-8bab-b641a465e451",
+      "monumentnummer": 4324,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012173596",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012173596/"
+            }
+          }
+        }
+      ],
+      "_display": "Prinsengracht 357 B",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01ca8d40-30d0-44eb-8bab-b641a465e451"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120680.25175282,
+          487243.61284539
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01cfd212-7896-45d5-8d99-82c62149ac42/"
+        }
+      },
+      "identificerende_sleutel_monument": "01cfd212-7896-45d5-8d99-82c62149ac42",
+      "monumentnummer": 6561,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012178000",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178000/"
+            }
+          }
+        }
+      ],
+      "_display": "Zeedijk 90",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01cfd212-7896-45d5-8d99-82c62149ac42"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121844,
+          487482
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01d1500e-43ec-4658-a36c-c916010fe236/"
+        }
+      },
+      "identificerende_sleutel_monument": "01d1500e-43ec-4658-a36c-c916010fe236",
+      "monumentnummer": 5739,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012175923",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012175923/"
+            }
+          }
+        }
+      ],
+      "_display": "Torensteeg 3 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01d1500e-43ec-4658-a36c-c916010fe236"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121137,
+          487512
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01d4d3c6-bc49-4ec2-8089-ed6b5ab3e8ad/"
+        }
+      },
+      "identificerende_sleutel_monument": "01d4d3c6-bc49-4ec2-8089-ed6b5ab3e8ad",
+      "monumentnummer": 4922,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012180131",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012180131/"
+            }
+          }
+        }
+      ],
+      "_display": "Reguliersgracht 28 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01d4d3c6-bc49-4ec2-8089-ed6b5ab3e8ad"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121518,
+          486342
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01d4fae8-5585-4975-abe8-4bc1fb60afff/"
+        }
+      },
+      "identificerende_sleutel_monument": "01d4fae8-5585-4975-abe8-4bc1fb60afff",
+      "monumentnummer": 460,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012170451",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012170451/"
+            }
+          }
+        }
+      ],
+      "_display": "Binnenkant 25 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01d4fae8-5585-4975-abe8-4bc1fb60afff"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122139,
+          487400
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01e1bdfc-1012-4f47-b354-34cda4a06a48/"
+        }
+      },
+      "identificerende_sleutel_monument": "01e1bdfc-1012-4f47-b354-34cda4a06a48",
+      "monumentnummer": 6393,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012175549",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012175549/"
+            }
+          }
+        }
+      ],
+      "_display": "Derde Weteringdwarsstraat 27",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01e1bdfc-1012-4f47-b354-34cda4a06a48"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121157,
+          486023
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01e22ce1-d399-47f4-835e-80a28f3e0e4e/"
+        }
+      },
+      "identificerende_sleutel_monument": "01e22ce1-d399-47f4-835e-80a28f3e0e4e",
+      "monumentnummer": 1577,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012177514",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012177514/"
+            }
+          }
+        }
+      ],
+      "_display": "Herengracht 231",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01e22ce1-d399-47f4-835e-80a28f3e0e4e"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120969,
+          487321
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01eb7ef8-c8a7-4eb0-a801-986737928476/"
+        }
+      },
+      "identificerende_sleutel_monument": "01eb7ef8-c8a7-4eb0-a801-986737928476",
+      "monumentnummer": 5815,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012182338",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012182338/"
+            }
+          }
+        }
+      ],
+      "_display": "Utrechtsedwarsstraat 108",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01eb7ef8-c8a7-4eb0-a801-986737928476"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121841,
+          486085
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01ec27a1-6f3b-47c5-a1ac-47907d6b5807/"
+        }
+      },
+      "identificerende_sleutel_monument": "01ec27a1-6f3b-47c5-a1ac-47907d6b5807",
+      "monumentnummer": 52,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012178640",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012178640/"
+            }
+          }
+        }
+      ],
+      "_display": "Walenpleintje 163",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01ec27a1-6f3b-47c5-a1ac-47907d6b5807"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121612,
+          487132
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01f3656e-16f4-45a6-8d3d-6b03b246b0bc/"
+        }
+      },
+      "identificerende_sleutel_monument": "01f3656e-16f4-45a6-8d3d-6b03b246b0bc",
+      "monumentnummer": 5182,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012180343",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012180343/"
+            }
+          }
+        }
+      ],
+      "_display": "Singel 121 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01f3656e-16f4-45a6-8d3d-6b03b246b0bc"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121193,
+          487614
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01fa2a44-9aae-4249-be2a-f97da35de2e3/"
+        }
+      },
+      "identificerende_sleutel_monument": "01fa2a44-9aae-4249-be2a-f97da35de2e3",
+      "monumentnummer": 518317,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2001-09-27",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012172468",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172468/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012168626",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168626/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012172466",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172466/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012172467",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172467/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012172469",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172469/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012172514",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172514/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012168668",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168668/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012172470",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172470/"
+            }
+          }
+        }
+      ],
+      "_display": "Goudsbloemstraat 125 HA",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 60,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01fa2a44-9aae-4249-be2a-f97da35de2e3"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120682,
+          488188
+        ]
+      },
+      "ligt_in_complex": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/complexen/ae7b5dfa-c64d-48f8-9299-176075611db6/"
+          }
+        },
+        "identificerende_sleutel_complex": "ae7b5dfa-c64d-48f8-9299-176075611db6"
+      },
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/01ffe640-4f24-4f0c-91f2-df52ce2912cb/"
+        }
+      },
+      "identificerende_sleutel_monument": "01ffe640-4f24-4f0c-91f2-df52ce2912cb",
+      "monumentnummer": 2557,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012169382",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012169382/"
+            }
+          }
+        }
+      ],
+      "_display": "Keizersgracht 268",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=01ffe640-4f24-4f0c-91f2-df52ce2912cb"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120756,
+          487180
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0202afc6-81e6-4e0d-ace5-faea4560fc4e/"
+        }
+      },
+      "identificerende_sleutel_monument": "0202afc6-81e6-4e0d-ace5-faea4560fc4e",
+      "monumentnummer": 3552,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012176371",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012176371/"
+            }
+          }
+        }
+      ],
+      "_display": "Lindengracht 12 2",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0202afc6-81e6-4e0d-ace5-faea4560fc4e"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120929,
+          488210
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0208b9c4-eeaf-484d-a95a-2725c92e45b4/"
+        }
+      },
+      "identificerende_sleutel_monument": "0208b9c4-eeaf-484d-a95a-2725c92e45b4",
+      "monumentnummer": 6086,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012168525",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168525/"
+            }
+          }
+        }
+      ],
+      "_display": "Oudezijds Voorburgwal 217 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 11,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0208b9c4-eeaf-484d-a95a-2725c92e45b4"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121475,
+          487055
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/020cbdc4-2b7d-45d8-95cb-5241f0ca4f35/"
+        }
+      },
+      "identificerende_sleutel_monument": "020cbdc4-2b7d-45d8-95cb-5241f0ca4f35",
+      "monumentnummer": 526007,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2005-01-24",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012182542",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012182542/"
+            }
+          }
+        }
+      ],
+      "_display": "Zeedijk 30 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=020cbdc4-2b7d-45d8-95cb-5241f0ca4f35"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121886,
+          487618
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0210ff10-ecca-494e-9dd5-ee250a5ef2c3/"
+        }
+      },
+      "identificerende_sleutel_monument": "0210ff10-ecca-494e-9dd5-ee250a5ef2c3",
+      "monumentnummer": 5070,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012174286",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174286/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012168975",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168975/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174357",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174357/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174283",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174283/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174278",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174278/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174281",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174281/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174287",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174287/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174360",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174360/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174279",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174279/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174280",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174280/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012174282",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174282/"
+            }
+          }
+        }
+      ],
+      "_display": "Rozengracht 147 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 30,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0210ff10-ecca-494e-9dd5-ee250a5ef2c3"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120327,
+          487308
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02180857-5e58-491e-b101-e4c71005cc2f/"
+        }
+      },
+      "identificerende_sleutel_monument": "02180857-5e58-491e-b101-e4c71005cc2f",
+      "monumentnummer": 2570,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012169206",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012169206/"
+            }
+          }
+        }
+      ],
+      "_display": "Keizersgracht 294 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02180857-5e58-491e-b101-e4c71005cc2f"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120755,
+          487116
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/021b8b34-5b89-4582-bd34-57fe6fc443ce/"
+        }
+      },
+      "identificerende_sleutel_monument": "021b8b34-5b89-4582-bd34-57fe6fc443ce",
+      "monumentnummer": 206003,
+      "monumentnaam": "GLO De Ruiterschool nr. 7",
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2005-06-07",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012170712",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012170712/"
+            }
+          }
+        }
+      ],
+      "_display": "GLO De Ruiterschool nr. 7",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 17,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=021b8b34-5b89-4582-bd34-57fe6fc443ce"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          123941,
+          487010
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/021d8d51-77a8-4480-8dd4-4c03cf5f7e11/"
+        }
+      },
+      "identificerende_sleutel_monument": "021d8d51-77a8-4480-8dd4-4c03cf5f7e11",
+      "monumentnummer": 224041,
+      "monumentnaam": "Zusterhuis WG",
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2009-04-14",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012072625",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012072625/"
+            }
+          }
+        }
+      ],
+      "_display": "Zusterhuis WG",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 36,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=021d8d51-77a8-4480-8dd4-4c03cf5f7e11"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          119718,
+          486156
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/021ff97d-b815-4387-9bc1-9c89dcc7b1dc/"
+        }
+      },
+      "identificerende_sleutel_monument": "021ff97d-b815-4387-9bc1-9c89dcc7b1dc",
+      "monumentnummer": 508388,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "1997-10-15",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012090361",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012090361/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012140011",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012140011/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012221159",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012221159/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012221160",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012221160/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012154800",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012154800/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012133210",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012133210/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012081543",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012081543/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012064711",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012064711/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012133572",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012133572/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012140655",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012140655/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012221161",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012221161/"
+            }
+          }
+        }
+      ],
+      "_display": "Monnikendammerplantsoen 29",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 8,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=021ff97d-b815-4387-9bc1-9c89dcc7b1dc"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          125262,
+          489221
+        ]
+      },
+      "ligt_in_complex": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/complexen/6b925704-f533-463b-b3e6-c89194e5922c/"
+          }
+        },
+        "identificerende_sleutel_complex": "6b925704-f533-463b-b3e6-c89194e5922c"
+      },
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/022797ed-89ac-4597-b789-0818c585d7f6/"
+        }
+      },
+      "identificerende_sleutel_monument": "022797ed-89ac-4597-b789-0818c585d7f6",
+      "monumentnummer": 518276,
+      "monumentnaam": "Zaadkoepel",
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2001-07-13",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012170497",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012170497/"
+            }
+          }
+        }
+      ],
+      "_display": "Zaadkoepel",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=022797ed-89ac-4597-b789-0818c585d7f6"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122415,
+          486689
+        ]
+      },
+      "ligt_in_complex": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/complexen/182a9861-4052-4127-8300-6450cd75b6a5/"
+          }
+        },
+        "identificerende_sleutel_complex": "182a9861-4052-4127-8300-6450cd75b6a5"
+      },
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0236c99a-c004-490b-8e1a-ce6b72881c6b/"
+        }
+      },
+      "identificerende_sleutel_monument": "0236c99a-c004-490b-8e1a-ce6b72881c6b",
+      "monumentnummer": 3271,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012172197",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172197/"
+            }
+          }
+        }
+      ],
+      "_display": "Korte Leidsedwarsstraat 159 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0236c99a-c004-490b-8e1a-ce6b72881c6b"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120821,
+          486224
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/023bdc4b-934d-486a-abf7-14f2f3e48b22/"
+        }
+      },
+      "identificerende_sleutel_monument": "023bdc4b-934d-486a-abf7-14f2f3e48b22",
+      "monumentnummer": 3041,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012177866",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012177866/"
+            }
+          }
+        }
+      ],
+      "_display": "Rusland 26",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=023bdc4b-934d-486a-abf7-14f2f3e48b22"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121584,
+          487011
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0242e542-333f-4f55-9406-d6e51be8e2a7/"
+        }
+      },
+      "identificerende_sleutel_monument": "0242e542-333f-4f55-9406-d6e51be8e2a7",
+      "monumentnummer": 3192,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012174901",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012174901/"
+            }
+          }
+        }
+      ],
+      "_display": "Tweede Laurierdwarsstraat 8",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0242e542-333f-4f55-9406-d6e51be8e2a7"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120378,
+          487257
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/025c59d2-4adc-4fd6-93bc-9f199da120e0/"
+        }
+      },
+      "identificerende_sleutel_monument": "025c59d2-4adc-4fd6-93bc-9f199da120e0",
+      "monumentnummer": 2386,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012176758",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012176758/"
+            }
+          }
+        }
+      ],
+      "_display": "Keizersgracht 579 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 18,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=025c59d2-4adc-4fd6-93bc-9f199da120e0"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121222,
+          486379
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0264cb74-7287-463c-8a5e-75d760114fc7/"
+        }
+      },
+      "identificerende_sleutel_monument": "0264cb74-7287-463c-8a5e-75d760114fc7",
+      "monumentnummer": 3325,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012172226",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012172226/"
+            }
+          }
+        }
+      ],
+      "_display": "Leidsegracht 23",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0264cb74-7287-463c-8a5e-75d760114fc7"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120834,
+          486680
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/026b7d15-73bc-40f7-8d24-fc0c4887e56f/"
+        }
+      },
+      "identificerende_sleutel_monument": "026b7d15-73bc-40f7-8d24-fc0c4887e56f",
+      "monumentnummer": 1936,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012170554",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012170554/"
+            }
+          }
+        }
+      ],
+      "_display": "Nieuwe Herengracht 111 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 9,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=026b7d15-73bc-40f7-8d24-fc0c4887e56f"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          122358,
+          486819
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/026d5db3-38a2-44a7-923a-aa985b8c6a56/"
+        }
+      },
+      "identificerende_sleutel_monument": "026d5db3-38a2-44a7-923a-aa985b8c6a56",
+      "monumentnummer": 505630,
+      "monumentnaam": "Huize Lydia",
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "1996-05-24",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012119530",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012119530/"
+            }
+          }
+        }
+      ],
+      "_display": "Huize Lydia",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 23,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=026d5db3-38a2-44a7-923a-aa985b8c6a56"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120528,
+          485127
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0275245e-737f-4b8d-80ea-209a39d59af1/"
+        }
+      },
+      "identificerende_sleutel_monument": "0275245e-737f-4b8d-80ea-209a39d59af1",
+      "monumentnummer": 4207,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012176909",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012176909/"
+            }
+          }
+        }
+      ],
+      "_display": "Prinseneiland 17",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0275245e-737f-4b8d-80ea-209a39d59af1"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120995,
+          488807
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/0276b602-9b83-4227-a554-71921d787e95/"
+        }
+      },
+      "identificerende_sleutel_monument": "0276b602-9b83-4227-a554-71921d787e95",
+      "monumentnummer": 524824,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": "2001-12-17",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012236693",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012236693/"
+            }
+          }
+        }
+      ],
+      "_display": "Tollensstraat 62",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=0276b602-9b83-4227-a554-71921d787e95"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          119711,
+          486667
+        ]
+      },
+      "ligt_in_complex": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/complexen/8587221a-c384-4fc2-ba73-e5f3fc867e47/"
+          }
+        },
+        "identificerende_sleutel_complex": "8587221a-c384-4fc2-ba73-e5f3fc867e47"
+      },
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/027ecf0a-d538-4a7b-93b5-e23d400592a8/"
+        }
+      },
+      "identificerende_sleutel_monument": "027ecf0a-d538-4a7b-93b5-e23d400592a8",
+      "monumentnummer": 2008,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012171210",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012171210/"
+            }
+          }
+        }
+      ],
+      "_display": "Oude Hoogstraat 12 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=027ecf0a-d538-4a7b-93b5-e23d400592a8"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121638,
+          487158
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/029affeb-edf5-4e5a-869c-1c8f12c36870/"
+        }
+      },
+      "identificerende_sleutel_monument": "029affeb-edf5-4e5a-869c-1c8f12c36870",
+      "monumentnummer": 37649,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012124112",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012124112/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012089753",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012089753/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012120422",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012120422/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012145939",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012145939/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012107934",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012107934/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012075169",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012075169/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012095993",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012095993/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012119870",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012119870/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012102466",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012102466/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012130799",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012130799/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012126562",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012126562/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012074434",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012074434/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012112193",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012112193/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012106639",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012106639/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012092850",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012092850/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012075728",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012075728/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012111500",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012111500/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012141111",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012141111/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012123576",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012123576/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012076951",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012076951/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012114046",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012114046/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012120054",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012120054/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012127647",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012127647/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012068818",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012068818/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012095943",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012095943/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012107664",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012107664/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012063697",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012063697/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012091419",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012091419/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012083116",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012083116/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012095887",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012095887/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012133396",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012133396/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012130351",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012130351/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012150654",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012150654/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012111031",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012111031/"
+            }
+          }
+        }
+      ],
+      "_display": "Burgemeester Tellegenstraat 60",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 175,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=029affeb-edf5-4e5a-869c-1c8f12c36870"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121671,
+          484811
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/029e29a1-3757-4e2c-8d99-f2017a75b1cf/"
+        }
+      },
+      "identificerende_sleutel_monument": "029e29a1-3757-4e2c-8d99-f2017a75b1cf",
+      "monumentnummer": 223005,
+      "monumentnaam": "Schoolkinderbad",
+      "monumentstatus": "Gemeentelijk monument",
+      "monument_aanwijzingsdatum": "2008-11-18",
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012123270",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012123270/"
+            }
+          }
+        }
+      ],
+      "_display": "Schoolkinderbad",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=029e29a1-3757-4e2c-8d99-f2017a75b1cf"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120002,
+          487585
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02a136c1-5811-45a6-895f-da6291700510/"
+        }
+      },
+      "identificerende_sleutel_monument": "02a136c1-5811-45a6-895f-da6291700510",
+      "monumentnummer": 1322,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012171353",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012171353/"
+            }
+          }
+        }
+      ],
+      "_display": "Haarlemmerdijk 147",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02a136c1-5811-45a6-895f-da6291700510"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120807,
+          488557
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02a2f446-e92d-48b3-8599-75d82e40fadc/"
+        }
+      },
+      "identificerende_sleutel_monument": "02a2f446-e92d-48b3-8599-75d82e40fadc",
+      "monumentnummer": 358,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012175516",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012175516/"
+            }
+          }
+        }
+      ],
+      "_display": "Begijnhof 19",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02a2f446-e92d-48b3-8599-75d82e40fadc"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121141,
+          486997
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02a50b47-8d12-49e5-9665-13aa6ac043e7/"
+        }
+      },
+      "identificerende_sleutel_monument": "02a50b47-8d12-49e5-9665-13aa6ac043e7",
+      "monumentnummer": 6059,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012165015",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012165015/"
+            }
+          }
+        }
+      ],
+      "_display": "Oudezijds Voorburgwal 111 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 7,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02a50b47-8d12-49e5-9665-13aa6ac043e7"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121676,
+          487368
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02ad21cd-af1b-42e9-97c9-3c18709c92b8/"
+        }
+      },
+      "identificerende_sleutel_monument": "02ad21cd-af1b-42e9-97c9-3c18709c92b8",
+      "monumentnummer": 982,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012168085",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168085/"
+            }
+          }
+        }
+      ],
+      "_display": "Egelantiersgracht 211",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02ad21cd-af1b-42e9-97c9-3c18709c92b8"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120354,
+          487597
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02b78604-672d-443d-9dc5-2ceb8c7a4fdb/"
+        }
+      },
+      "identificerende_sleutel_monument": "02b78604-672d-443d-9dc5-2ceb8c7a4fdb",
+      "monumentnummer": 5571,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012171029",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012171029/"
+            }
+          }
+        },
+        {
+          "pandidentificatie": "0363100012179286",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012179286/"
+            }
+          }
+        }
+      ],
+      "_display": "Betreden via Nieuwezijds Voorburgwal 66 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02b78604-672d-443d-9dc5-2ceb8c7a4fdb"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121349.57731308,
+          487726.62416904
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02c4ce8a-d65e-4473-9555-922cbdf79d52/"
+        }
+      },
+      "identificerende_sleutel_monument": "02c4ce8a-d65e-4473-9555-922cbdf79d52",
+      "monumentnummer": 538,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012167952",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012167952/"
+            }
+          }
+        }
+      ],
+      "_display": "Bloemgracht 121 H",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 5,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02c4ce8a-d65e-4473-9555-922cbdf79d52"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120378,
+          487478
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02c7175c-b6da-409d-9543-4a11f5c99668/"
+        }
+      },
+      "identificerende_sleutel_monument": "02c7175c-b6da-409d-9543-4a11f5c99668",
+      "monumentnummer": 2847,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012176154",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012176154/"
+            }
+          }
+        }
+      ],
+      "_display": "Kerkstraat 191",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02c7175c-b6da-409d-9543-4a11f5c99668"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121145,
+          486270
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02cb3a5f-4a58-40e7-b07f-d28457e47af6/"
+        }
+      },
+      "identificerende_sleutel_monument": "02cb3a5f-4a58-40e7-b07f-d28457e47af6",
+      "monumentnummer": 3593,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012168860",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012168860/"
+            }
+          }
+        }
+      ],
+      "_display": "Looiersgracht 23 A",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02cb3a5f-4a58-40e7-b07f-d28457e47af6"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          120553,
+          486838
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/monumenten/02cf8e1d-393b-4742-a765-4377dd979be7/"
+        }
+      },
+      "identificerende_sleutel_monument": "02cf8e1d-393b-4742-a765-4377dd979be7",
+      "monumentnummer": 3748,
+      "monumentnaam": null,
+      "monumentstatus": "Rijksmonument",
+      "monument_aanwijzingsdatum": null,
+      "betreft_pand": [
+        {
+          "pandidentificatie": "0363100012179082",
+          "_links": {
+            "self": {
+              "href": "https://api.data.amsterdam.nl/bag/v1.1/pand/0363100012179082/"
+            }
+          }
+        }
+      ],
+      "_display": "Nieuwendijk 5 B 1",
+      "heeft_als_grondslag_beperking": null,
+      "heeft_situeringen": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?monument_id=02cf8e1d-393b-4742-a765-4377dd979be7"
+      },
+      "monumentcoordinaten": {
+        "type": "Point",
+        "coordinates": [
+          121478,
+          487995
+        ]
+      },
+      "ligt_in_complex": null,
+      "in_onderzoek": "N"
+    }
+  ]
+}

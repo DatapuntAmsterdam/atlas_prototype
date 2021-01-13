@@ -1,7 +1,7 @@
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'
-import { Bouwdossier } from './types'
+import { Single as Bouwdossier } from './types'
 
 /**
  * Retrieve iiif-metadata about bouwdossiers

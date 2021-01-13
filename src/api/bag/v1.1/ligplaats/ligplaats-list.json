@@ -1,0 +1,266 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 2905,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000544489/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 872",
+      "landelijk_id": "0363020000544489",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000544490/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 873",
+      "landelijk_id": "0363020000544490",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000544491/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 874",
+      "landelijk_id": "0363020000544491",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000544492/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 875",
+      "landelijk_id": "0363020000544492",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000549114/?format=json"
+        }
+      },
+      "_display": "P. Hans Frankfurthersingel 11A",
+      "landelijk_id": "0363020000549114",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000566642/?format=json"
+        }
+      },
+      "_display": "Van Diemenkade 14",
+      "landelijk_id": "0363020000566642",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000577572/?format=json"
+        }
+      },
+      "_display": "Zuideinde 387A",
+      "landelijk_id": "0363020000577572",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000577573/?format=json"
+        }
+      },
+      "_display": "Zuideinde 387B",
+      "landelijk_id": "0363020000577573",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000585947/?format=json"
+        }
+      },
+      "_display": "Zuideinde 387C",
+      "landelijk_id": "0363020000585947",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000585948/?format=json"
+        }
+      },
+      "_display": "Zuideinde 387D",
+      "landelijk_id": "0363020000585948",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000585949/?format=json"
+        }
+      },
+      "_display": "Zuideinde 387E",
+      "landelijk_id": "0363020000585949",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000585950/?format=json"
+        }
+      },
+      "_display": "Zuideinde 387F",
+      "landelijk_id": "0363020000585950",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000585969/?format=json"
+        }
+      },
+      "_display": "Zuideinde 387G",
+      "landelijk_id": "0363020000585969",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000585970/?format=json"
+        }
+      },
+      "_display": "Zuideinde 387H",
+      "landelijk_id": "0363020000585970",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000592207/?format=json"
+        }
+      },
+      "_display": "P. Hans Frankfurthersingel 17",
+      "landelijk_id": "0363020000592207",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000592208/?format=json"
+        }
+      },
+      "_display": "P. Hans Frankfurthersingel 19",
+      "landelijk_id": "0363020000592208",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000597811/?format=json"
+        }
+      },
+      "_display": "Buikslotermeerdijk 51",
+      "landelijk_id": "0363020000597811",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000633397/?format=json"
+        }
+      },
+      "_display": "P. Hans Frankfurthersingel 21",
+      "landelijk_id": "0363020000633397",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000655646/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 801",
+      "landelijk_id": "0363020000655646",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000655647/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 802",
+      "landelijk_id": "0363020000655647",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000655648/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 803",
+      "landelijk_id": "0363020000655648",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000655764/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 804",
+      "landelijk_id": "0363020000655764",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000655765/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 805",
+      "landelijk_id": "0363020000655765",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000655767/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 807",
+      "landelijk_id": "0363020000655767",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/ligplaats/0363020000655768/?format=json"
+        }
+      },
+      "_display": "Amsteldijk 808",
+      "landelijk_id": "0363020000655768",
+      "dataset": "bag"
+    }
+  ]
+}

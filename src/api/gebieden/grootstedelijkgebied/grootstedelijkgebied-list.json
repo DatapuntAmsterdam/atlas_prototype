@@ -1,0 +1,291 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 73,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/a10-oost_gsp/?format=json"
+        }
+      },
+      "_display": "A10 Oost",
+      "naam": "A10 Oost",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/a10-oost_od/?format=json"
+        }
+      },
+      "_display": "A10 Oost",
+      "naam": "A10 Oost",
+      "gsg_type": "OD",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/amc_gsp/?format=json"
+        }
+      },
+      "_display": "AMC",
+      "naam": "AMC",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/amc_od/?format=json"
+        }
+      },
+      "_display": "AMC",
+      "naam": "AMC",
+      "gsg_type": "OD",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/azc_gsp/?format=json"
+        }
+      },
+      "_display": "AZC",
+      "naam": "AZC",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/azc_od/?format=json"
+        }
+      },
+      "_display": "AZC",
+      "naam": "AZC",
+      "gsg_type": "OD",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/aanlanding-pontjes_od/?format=json"
+        }
+      },
+      "_display": "Aanlanding pontjes",
+      "naam": "Aanlanding pontjes",
+      "gsg_type": "OD",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/aanlanding-pontjes_gsp/?format=json"
+        }
+      },
+      "_display": "Aanlanding pontjes",
+      "naam": "Aanlanding pontjes",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/amstel-iii_gsp/?format=json"
+        }
+      },
+      "_display": "Amstel III",
+      "naam": "Amstel III",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/amsteloever_gsp/?format=json"
+        }
+      },
+      "_display": "Amsteloever",
+      "naam": "Amsteloever",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/amstelstatio-eo_gsp/?format=json"
+        }
+      },
+      "_display": "Amstelstatio eo",
+      "naam": "Amstelstatio eo",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/arenapoort-oost_gsp/?format=json"
+        }
+      },
+      "_display": "ArenApoort oost",
+      "naam": "ArenApoort oost",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/buiksloterham_gsp/?format=json"
+        }
+      },
+      "_display": "Buiksloterham",
+      "naam": "Buiksloterham",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/can_gsp/?format=json"
+        }
+      },
+      "_display": "CAN",
+      "naam": "CAN",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/de-adelaar_gsp/?format=json"
+        }
+      },
+      "_display": "De Adelaar",
+      "naam": "De Adelaar",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/de-boelelaan-midden_od/?format=json"
+        }
+      },
+      "_display": "De Boelelaan midden",
+      "naam": "De Boelelaan midden",
+      "gsg_type": "OD",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/de-boelelaan-midden_gsp/?format=json"
+        }
+      },
+      "_display": "De Boelelaan midden",
+      "naam": "De Boelelaan midden",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/de-bongerd_gsp/?format=json"
+        }
+      },
+      "_display": "De Bongerd",
+      "naam": "De Bongerd",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/foodcenter-amsterdam_gsp/?format=json"
+        }
+      },
+      "_display": "Foodcenter Amsterdam",
+      "naam": "Foodcenter Amsterdam",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/gaasperdammerweg_od/?format=json"
+        }
+      },
+      "_display": "Gaasperdammerweg",
+      "naam": "Gaasperdammerweg",
+      "gsg_type": "OD",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/gaasperdammerweg_gsp/?format=json"
+        }
+      },
+      "_display": "Gaasperdammerweg",
+      "naam": "Gaasperdammerweg",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/getz_od/?format=json"
+        }
+      },
+      "_display": "Getz",
+      "naam": "Getz",
+      "gsg_type": "OD",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/getz_gsp/?format=json"
+        }
+      },
+      "_display": "Getz",
+      "naam": "Getz",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/haarlemmerweg-n200_od/?format=json"
+        }
+      },
+      "_display": "Haarlemmerweg N200",
+      "naam": "Haarlemmerweg N200",
+      "gsg_type": "OD",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/grootstedelijkgebied/haarlemmerweg-n200_gsp/?format=json"
+        }
+      },
+      "_display": "Haarlemmerweg N200",
+      "naam": "Haarlemmerweg N200",
+      "gsg_type": "GSP",
+      "dataset": "gebieden"
+    }
+  ]
+}

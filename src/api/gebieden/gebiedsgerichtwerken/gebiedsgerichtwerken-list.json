@@ -1,0 +1,258 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/?format=json"
+    },
+    "next": {
+      "href": null
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 22,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX20/?format=json"
+        }
+      },
+      "_display": "Bijlmer-Centrum, Amstel III (DX20)",
+      "code": "DX20",
+      "naam": "Bijlmer-Centrum, Amstel III",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX21/?format=json"
+        }
+      },
+      "_display": "Bijlmer-Oost (DX21)",
+      "code": "DX21",
+      "naam": "Bijlmer-Oost",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX04/?format=json"
+        }
+      },
+      "_display": "Bos en Lommer (DX04)",
+      "code": "DX04",
+      "naam": "Bos en Lommer",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX11/?format=json"
+        }
+      },
+      "_display": "Buitenveldert, Zuidas (DX11)",
+      "code": "DX11",
+      "naam": "Buitenveldert, Zuidas",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX02/?format=json"
+        }
+      },
+      "_display": "Centrum-Oost (DX02)",
+      "code": "DX02",
+      "naam": "Centrum-Oost",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX01/?format=json"
+        }
+      },
+      "_display": "Centrum-West (DX01)",
+      "code": "DX01",
+      "naam": "Centrum-West",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX08/?format=json"
+        }
+      },
+      "_display": "De Aker, Sloten, Nieuw-Sloten (DX08)",
+      "code": "DX08",
+      "naam": "De Aker, Sloten, Nieuw-Sloten",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX12/?format=json"
+        }
+      },
+      "_display": "De Pijp, Rivierenbuurt (DX12)",
+      "code": "DX12",
+      "naam": "De Pijp, Rivierenbuurt",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX22/?format=json"
+        }
+      },
+      "_display": "Gaasperdam, Driemond (DX22)",
+      "code": "DX22",
+      "naam": "Gaasperdam, Driemond",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX06/?format=json"
+        }
+      },
+      "_display": "Geuzenveld, Slotermeer, Sloterdijken (DX06)",
+      "code": "DX06",
+      "naam": "Geuzenveld, Slotermeer, Sloterdijken",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX16/?format=json"
+        }
+      },
+      "_display": "IJburg, Zeeburgereiland (DX16)",
+      "code": "DX16",
+      "naam": "IJburg, Zeeburgereiland",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX14/?format=json"
+        }
+      },
+      "_display": "Indische Buurt, Oostelijk Havengebied (DX14)",
+      "code": "DX14",
+      "naam": "Indische Buurt, Oostelijk Havengebied",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX19/?format=json"
+        }
+      },
+      "_display": "Noord-Oost (DX19)",
+      "code": "DX19",
+      "naam": "Noord-Oost",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX17/?format=json"
+        }
+      },
+      "_display": "Noord-West (DX17)",
+      "code": "DX17",
+      "naam": "Noord-West",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX07/?format=json"
+        }
+      },
+      "_display": "Osdorp (DX07)",
+      "code": "DX07",
+      "naam": "Osdorp",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX18/?format=json"
+        }
+      },
+      "_display": "Oud-Noord (DX18)",
+      "code": "DX18",
+      "naam": "Oud-Noord",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX13/?format=json"
+        }
+      },
+      "_display": "Oud-Oost (DX13)",
+      "code": "DX13",
+      "naam": "Oud-Oost",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX05/?format=json"
+        }
+      },
+      "_display": "Oud-West, De Baarsjes (DX05)",
+      "code": "DX05",
+      "naam": "Oud-West, De Baarsjes",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX10/?format=json"
+        }
+      },
+      "_display": "Oud-Zuid (DX10)",
+      "code": "DX10",
+      "naam": "Oud-Zuid",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX09/?format=json"
+        }
+      },
+      "_display": "Slotervaart (DX09)",
+      "code": "DX09",
+      "naam": "Slotervaart",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX15/?format=json"
+        }
+      },
+      "_display": "Watergraafsmeer (DX15)",
+      "code": "DX15",
+      "naam": "Watergraafsmeer",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/gebiedsgerichtwerken/DX03/?format=json"
+        }
+      },
+      "_display": "Westerpark (DX03)",
+      "code": "DX03",
+      "naam": "Westerpark",
+      "dataset": "gebieden"
+    }
+  ]
+}

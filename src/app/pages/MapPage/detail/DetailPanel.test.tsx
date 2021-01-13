@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react'
 import fetch from 'jest-fetch-mock'
 import withMapContext from '../../../utils/withMapContext'
 import DetailPanel from './DetailPanel'
-import stadsdeelResponse from '../../../../api/gebieden/stadsdeel/fixture'
+import { singleFixture as stadsdeelResponse } from '../../../../api/gebieden/stadsdeel'
 import environment from '../../../../environment'
 import { routing } from '../../../routes'
 

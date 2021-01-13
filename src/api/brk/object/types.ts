@@ -2,7 +2,7 @@
 import { Geometry } from 'geojson'
 import { APIReference, Links, SmallAPIReference } from '../../types'
 
-export interface Root extends APIReference {
+export interface Single extends APIReference {
   id: string
   aanduiding: string
   kadastrale_gemeente: APIReference
@@ -36,4 +36,12 @@ interface Sectie {
   _display: string
   sectie: string
   dataset: string
+}
+
+export interface List {
+  _links: Links
+  count: number
+  results: Array<
+    Pick<APIReference, '_links' | '_display' | 'landelijk_id' | 'dataset'> & { aanduiding: string }
+  >
 }

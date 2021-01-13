@@ -1,0 +1,291 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/brk/object/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/brk/object/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 618243,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350000370000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00003 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350000370000",
+      "aanduiding": "ACD00 A 00003 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350000470000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00004 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350000470000",
+      "aanduiding": "ACD00 A 00004 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350000570000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00005 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350000570000",
+      "aanduiding": "ACD00 A 00005 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350000670000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00006 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350000670000",
+      "aanduiding": "ACD00 A 00006 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350000770000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00007 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350000770000",
+      "aanduiding": "ACD00 A 00007 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350000870000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00008 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350000870000",
+      "aanduiding": "ACD00 A 00008 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350000970000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00009 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350000970000",
+      "aanduiding": "ACD00 A 00009 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350001070000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00010 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350001070000",
+      "aanduiding": "ACD00 A 00010 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350002870000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00028 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350002870000",
+      "aanduiding": "ACD00 A 00028 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350002970000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00029 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350002970000",
+      "aanduiding": "ACD00 A 00029 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350003070000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00030 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350003070000",
+      "aanduiding": "ACD00 A 00030 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350003170000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00031 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350003170000",
+      "aanduiding": "ACD00 A 00031 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350003270000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00032 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350003270000",
+      "aanduiding": "ACD00 A 00032 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350003370000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00033 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350003370000",
+      "aanduiding": "ACD00 A 00033 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350003470000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00034 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350003470000",
+      "aanduiding": "ACD00 A 00034 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350003770000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00037 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350003770000",
+      "aanduiding": "ACD00 A 00037 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350003870000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00038 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350003870000",
+      "aanduiding": "ACD00 A 00038 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350003970000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00039 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350003970000",
+      "aanduiding": "ACD00 A 00039 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350004070000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00040 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350004070000",
+      "aanduiding": "ACD00 A 00040 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350004170000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00041 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350004170000",
+      "aanduiding": "ACD00 A 00041 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350004270000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00042 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350004270000",
+      "aanduiding": "ACD00 A 00042 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350004470000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00044 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350004470000",
+      "aanduiding": "ACD00 A 00044 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350004670000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00046 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350004670000",
+      "aanduiding": "ACD00 A 00046 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350006370000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00063 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350006370000",
+      "aanduiding": "ACD00 A 00063 G 0000",
+      "dataset": "brk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/brk/object/NL.KAD.OnroerendeZaak.25350006470000/?format=json"
+        }
+      },
+      "_display": "ACD00 A 00064 G 0000",
+      "id": "NL.KAD.OnroerendeZaak.25350006470000",
+      "aanduiding": "ACD00 A 00064 G 0000",
+      "dataset": "brk"
+    }
+  ]
+}

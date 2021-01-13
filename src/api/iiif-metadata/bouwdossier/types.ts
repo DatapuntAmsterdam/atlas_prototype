@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+import { Links } from '../../types'
+
 export type BouwdossierStatus = 'Aanvraag' | 'Behandeling'
 export type BouwdossierAccess = 'RESTRICTED' | 'PUBLIC'
 
@@ -31,7 +33,7 @@ export type Adres = {
   verblijfsobjecten: string[]
 }
 
-export type Bouwdossier = {
+export type Single = {
   access: BouwdossierAccess
   activiteiten: string[]
   adressen: Adres[]
@@ -43,4 +45,15 @@ export type Bouwdossier = {
   olo_liaan_nummer?: number | null
   stadsdeel: string
   titel: string
+}
+
+interface ListResult extends Single {
+  _display: string
+  _links: Links
+}
+
+export interface List {
+  _links: Links
+  count: number
+  results: ListResult[]
 }

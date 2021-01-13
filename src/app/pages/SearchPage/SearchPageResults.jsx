@@ -187,7 +187,7 @@ const SearchPageResults = ({
               </StyledAlert>
             </>
           )}
-          {pageInfo && results.length > 0 && (
+          {pageInfo && results?.length > 0 && (
             // TODO: Check if the CompactPager component is structured correctly..
             <StyledCompactPager
               page={page}

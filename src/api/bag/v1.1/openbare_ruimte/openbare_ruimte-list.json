@@ -1,0 +1,266 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 6352,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000005904/?format=json"
+        }
+      },
+      "_display": "'s-Gravelandse Veer",
+      "landelijk_id": "0363300000005904",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000001778/?format=json"
+        }
+      },
+      "_display": "'s-Gravendijkdreef",
+      "landelijk_id": "0363300000001778",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000004442/?format=json"
+        }
+      },
+      "_display": "'s-Gravenhekje",
+      "landelijk_id": "0363300000004442",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000004443/?format=json"
+        }
+      },
+      "_display": "'s-Gravesandeplein",
+      "landelijk_id": "0363300000004443",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000004444/?format=json"
+        }
+      },
+      "_display": "'s-Gravesandestraat",
+      "landelijk_id": "0363300000004444",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000005409/?format=json"
+        }
+      },
+      "_display": "'t Hol",
+      "landelijk_id": "0363300000005409",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000001877/?format=json"
+        }
+      },
+      "_display": "'t Kleine Loopveld",
+      "landelijk_id": "0363300000001877",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300011950220/?format=json"
+        }
+      },
+      "_display": "'t Kleine Loopveld",
+      "landelijk_id": "0363300011950220",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000005071/?format=json"
+        }
+      },
+      "_display": "'t Nopeind",
+      "landelijk_id": "0363300000005071",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000005072/?format=json"
+        }
+      },
+      "_display": "'t Voorwerf",
+      "landelijk_id": "0363300000005072",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000002456/?format=json"
+        }
+      },
+      "_display": "1e Glanshof",
+      "landelijk_id": "0363300000002456",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000006088/?format=json"
+        }
+      },
+      "_display": "1e Kekerstraat",
+      "landelijk_id": "0363300000006088",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000002454/?format=json"
+        }
+      },
+      "_display": "2e Glanshof",
+      "landelijk_id": "0363300000002454",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000006089/?format=json"
+        }
+      },
+      "_display": "2e Kekerstraat",
+      "landelijk_id": "0363300000006089",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000006090/?format=json"
+        }
+      },
+      "_display": "3e Kekerstraat",
+      "landelijk_id": "0363300000006090",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300011951221/?format=json"
+        }
+      },
+      "_display": "A. Eversplein",
+      "landelijk_id": "0363300011951221",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300001988925/?format=json"
+        }
+      },
+      "_display": "A. Moenstraat",
+      "landelijk_id": "0363300001988925",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000002024/?format=json"
+        }
+      },
+      "_display": "A. Reitsmakade",
+      "landelijk_id": "0363300000002024",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000001467/?format=json"
+        }
+      },
+      "_display": "A.A. de Lannoy-Willemsstraat",
+      "landelijk_id": "0363300000001467",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000002619/?format=json"
+        }
+      },
+      "_display": "A.A.H. Struijckenkade",
+      "landelijk_id": "0363300000002619",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000001638/?format=json"
+        }
+      },
+      "_display": "A.J. Koejemansstraat",
+      "landelijk_id": "0363300000001638",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000001133/?format=json"
+        }
+      },
+      "_display": "A.J. Krophollerstraat",
+      "landelijk_id": "0363300000001133",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000002620/?format=json"
+        }
+      },
+      "_display": "A.M. de Jongstraat",
+      "landelijk_id": "0363300000002620",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300000005801/?format=json"
+        }
+      },
+      "_display": "A.S. Onderwijzerhof",
+      "landelijk_id": "0363300000005801",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/openbareruimte/0363300011951589/?format=json"
+        }
+      },
+      "_display": "AMCPadspoorbrug",
+      "landelijk_id": "0363300011951589",
+      "dataset": "bag"
+    }
+  ]
+}
