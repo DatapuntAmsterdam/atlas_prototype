@@ -28,15 +28,12 @@
   "linkLists": [
     {
       "subheading": "Adressen",
-      "items": ["Dam 1", "Beursplein 2 Nevenadres"]
+      "items": ["Eerste Anjeliersdwarsstraat 1-H"]
     },
     {
       "subheading": "Vestigingen",
       "items": []
     },
-    {
-      "subheading": "Monumenten",
-      "items": ["De Bijenkorf"]
-    }
+    { "subheading": "Monumenten", "items": ["Zaadkoepel"] }
   ]
 }

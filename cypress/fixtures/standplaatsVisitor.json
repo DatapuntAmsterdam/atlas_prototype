@@ -5,11 +5,11 @@
     {
       "subheading": "",
       "items": {
-        "Naam openbare ruimte": "Rollemanstraat",
-        "Huisnummer": "8",
+        "Naam openbare ruimte": "Eerste Anjeliersdwarsstraat",
+        "Huisnummer": "1",
         "Huisletter": "",
-        "Huisnummertoevoeging": "",
-        "Postcode": "1033WN",
+        "Huisnummertoevoeging": "H",
+        "Postcode": "1015NR",
         "Woonplaats": "Amsterdam",
         "Type adres": "Hoofdadres"
       }
@@ -17,10 +17,11 @@
     {
       "subheading": "Ligt in",
       "items": {
-        "Stadsdeel": "Noord (N)",
-        "Wijk": "Oostzanerwerf (66)",
-        "Buurt": "Circus/Kermisbuurt (N66g)",
-        "Gebiedsgerichtwerken-gebied": "Noord-West (DX17)"
+        "Stadsdeel": "Centrum (A)",
+        "Wijk": "Jordaan (06)",
+        "Buurt": "Anjeliersbuurt Zuid (A06l)",
+        "Gebiedsgerichtwerken-gebied": "Centrum-West (DX01)",
+        "Bouwblok": "YJ29"
       }
     },
     {
