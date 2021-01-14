@@ -85,15 +85,15 @@ describe('datasets module', () => {
 
       cy.contains('Datasets (')
       cy.wait(500)
+      let countDatasets = 0
       // Count amount of Datasets
       cy.get('h1')
         .contains('Datasets')
         .then(($datasetsText) => {
           const datasetsNumber = $datasetsText.text().match(/\d+/)?.[0]
           if (datasetsNumber) {
-            cy.log(datasetsNumber)
+            countDatasets += parseInt(datasetsNumber, 10)
           }
-          Cypress.env('countDatasets', datasetsNumber)
         })
 
       cy.get(`#${CSS.escape('theme-theme:bestuur')}`).check({ force: true })
@@ -104,14 +104,7 @@ describe('datasets module', () => {
         .contains('Datasets')
         .then(($datasetsText) => {
           const datasetsNumber = $datasetsText.text().match(/\d+/)?.[0]
-          if (datasetsNumber) {
-            cy.log(datasetsNumber)
-            expect(parseInt(datasetsNumber, 10)).lessThan(
-              parseInt(Cypress.env('countDatasets'), 10),
-            )
-          } else {
-            throw new Error('Could not retrieve the number of datasets!')
-          }
+          expect(parseInt(datasetsNumber || '0', 10)).lessThan(countDatasets)
         })
     })
   })
