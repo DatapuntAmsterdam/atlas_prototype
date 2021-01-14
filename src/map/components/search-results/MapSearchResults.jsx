@@ -1,4 +1,4 @@
-import { Alert, Button, Heading, Link, themeSpacing } from '@amsterdam/asc-ui'
+import { Alert, Button, Heading, Link, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -17,6 +17,14 @@ const StyledLink = styled(Link)`
 
 const Header = styled.header`
   margin: 0 ${themeSpacing(3)};
+`
+
+const StyledButton = styled(Button)`
+  background-color: ${themeColor('tint', 'level1')};
+
+  svg path {
+    fill: ${themeColor('primary')};
+  }
 `
 
 const MapSearchResults = ({
@@ -104,7 +112,7 @@ const MapSearchResults = ({
         </ul>
         {!isEmbed && (
           <footer className="map-search-results__footer">
-            <Button
+            <StyledButton
               type="button"
               onClick={onMaximize}
               title="Volledig weergeven"
@@ -112,7 +120,7 @@ const MapSearchResults = ({
               iconSize={21}
             >
               Volledig weergeven
-            </Button>
+            </StyledButton>
           </footer>
         )}
       </div>

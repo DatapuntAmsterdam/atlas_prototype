@@ -1,4 +1,4 @@
-import { Heading, Button, Link, themeSpacing } from '@amsterdam/asc-ui'
+import { Heading, Button, Link, themeSpacing, themeColor } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
 import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
@@ -25,6 +25,13 @@ const StyledLink = styled(Link)`
 
 const Header = styled.header`
   margin: 0 ${themeSpacing(3)};
+`
+
+const StyledButton = styled(Button)`
+  background-color: ${themeColor('tint', 'level1')};
+  svg path {
+    fill: ${themeColor('primary')};
+  }
 `
 
 const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = ({
@@ -81,7 +88,7 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
         )}
         {children}
         <footer className="map-search-results__footer">
-          <Button
+          <StyledButton
             type="button"
             onClick={onMaximize}
             title="Volledig weergeven"
@@ -89,7 +96,7 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
             iconSize={21}
           >
             Volledig weergeven
-          </Button>
+          </StyledButton>
         </footer>
       </div>
     </section>

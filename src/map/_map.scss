@@ -4,8 +4,6 @@ $map-preview-panel-bottom: 16px + 34px + 2px + 34px + 10px;
 
 @import 'components/detail-result/map-detail-result';
 @import 'components/legend/map-legend';
-@import 'components/map-embed-button/embed-button';
-@import 'components/panel-handle/map-panel-handle';
 @import 'components/search-results/map-search-results';
 @import 'components/type/map-type';
 @import 'components/leaflet/map-leaflet';
@@ -13,7 +11,6 @@ $map-preview-panel-bottom: 16px + 34px + 2px + 34px + 10px;
 @import 'components/draw-tool/draw-tool';
 @import 'components/shape-summary/shape-summary';
 @import 'components/points-available/points-available';
-@import 'components/toggle-drawing/toggle-drawing';
 @import 'containers/panel/map-panel';
 @import 'containers/preview-panel/map-preview-panel';
 @import '~leaflet/dist/leaflet.css';

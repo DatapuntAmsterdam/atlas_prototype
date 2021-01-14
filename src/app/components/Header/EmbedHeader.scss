@@ -7,20 +7,6 @@ $embed-header-padding-icon: 4px;
     @include font-size($xl-header-font);
   }
 
-  &__close {
-    @include icon-button('icon-clear', $primary-dark, $primary-dark);
-
-    background-color: $primary-light;
-    position: absolute;
-    right: -($embed-header-padding - $embed-header-padding-icon);
-    top: -($embed-header-padding - $embed-header-padding-icon);
-
-    &:hover,
-    &:focus {
-      background-color: $secondary-gray20;
-    }
-  }
-
   &-form__input {
     appearance: none;
     background-color: $primary-light;

@@ -1,13 +1,25 @@
 import { FunctionComponent, useCallback, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
+import { Button, Link, themeSpacing } from '@amsterdam/asc-ui'
 import { addFilter, removeFilter } from '../../../shared/ducks/filters/filters'
 import { ActiveFilter, Filter } from './DataSelectionFilters'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
+import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 
 type Props = {
   availableFilters: Filter[]
   activeFilters: ActiveFilter
 }
+
+const StyledLink = styled(Link)`
+  background-color: transparent;
+  text-align: left;
+`
+
+const ShowMoreButton = styled(Button)`
+  margin-top: ${themeSpacing(2)};
+`
 
 // Note, this component has been migrated from legacy angularJS code
 // Todo: this can be removed when we implement the new interactive table
@@ -113,11 +125,12 @@ const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, a
               .slice(0, isExpanded ? currentFilter.options.length : showMoreThreshold)
               .map((option) => (
                 <li className={`c-sbi-filter__item c-sbi-filter__item--${option.slug}`}>
-                  <button
+                  <StyledLink
+                    inList
                     type="button"
-                    className="c-sbi-filter__button o-btn o-btn--link o-btn--inline-block"
+                    forwardedAs="button"
                     onClick={() => clickFilter(option.id)}
-                    title="{{option.label}}"
+                    title={option.label}
                   >
                     <span
                       className={`c-sbi-filter__item-label ${
@@ -126,23 +139,22 @@ const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, a
                     >
                       <span className="qa-option-label">{option.label}</span>
                     </span>
-                  </button>
+                  </StyledLink>
                 </li>
               ))}
           </ul>
           {showExpandButton() && (
             <div className="c-sbi-filter__show-more">
-              <button
+              <ShowMoreButton
                 type="button"
-                className="
-                            c-sbi-filter__show-more-button
-                            c-show-more
-                            c-show-more--gray
-                            qa-show-more-button"
                 onClick={expandFilter}
+                variant="textButton"
+                className="qa-show-more-button"
+                iconSize={14}
+                iconLeft={<Enlarge />}
               >
                 Toon meer
-              </button>
+              </ShowMoreButton>
             </div>
           )}
 
@@ -153,13 +165,16 @@ const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, a
                   ...nog {nrHiddenOptions.toLocaleString(DEFAULT_LOCALE)} waarden
                 </div>
               )}
-              <button
+              <ShowMoreButton
                 type="button"
-                className="c-show-more c-show-more--less c-show-more--gray qa-show-more-button"
+                className="qa-show-more-button"
                 onClick={implodeFilter}
+                variant="textButton"
+                iconSize={14}
+                iconLeft={<Minimise />}
               >
                 Toon minder
-              </button>
+              </ShowMoreButton>
             </div>
           )}
         </div>

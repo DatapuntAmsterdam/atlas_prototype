@@ -1,14 +1,20 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { ControlButton } from '@amsterdam/arm-core'
-import { themeSpacing } from '@amsterdam/asc-ui'
+import { useSelector } from 'react-redux'
+import { themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import Measure from '../../../shared/assets/icons/icon-measure.svg'
+import { isEmbedded, isEmbedPreview, isPrintMode } from '../../../shared/ducks/ui/ui'
 
 const StyledControlButton = styled(ControlButton)`
   position: absolute;
   left: ${themeSpacing(2)};
   top: ${themeSpacing(2)};
   z-index: 1;
+
+  svg path {
+    fill: ${themeColor('tint', 'level7')};
+  }
 `
 
 const ToggleDrawing = ({
@@ -21,6 +27,10 @@ const ToggleDrawing = ({
   shapeDistance,
 }) => {
   const expanded = !!(isEnabled || shapeMarkers > 1)
+  const printMode = useSelector(isPrintMode)
+  const embedMode = useSelector(isEmbedded)
+  const embedPreviewMode = useSelector(isEmbedPreview)
+
   let label = 'Begin'
   let clickEvent = onStart
 
@@ -34,6 +44,10 @@ const ToggleDrawing = ({
     }
   }
 
+  if (printMode || embedMode || embedPreviewMode) {
+    return null
+  }
+
   return (
     <>
       {expanded ? (
@@ -43,7 +57,7 @@ const ToggleDrawing = ({
           iconLeft={<Measure />}
           iconSize={28}
           onClick={clickEvent}
-          className="qa-toggle-fullscreen"
+          data-testid="drawToolButton"
         >
           <span className="toggle-drawing__label">{label}</span>
         </StyledControlButton>
@@ -55,7 +69,7 @@ const ToggleDrawing = ({
           iconSize={28}
           size={40}
           onClick={clickEvent}
-          className="qa-toggle-fullscreen"
+          data-testid="drawToolButton"
         />
       )}
     </>

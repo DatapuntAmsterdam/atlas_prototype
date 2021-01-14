@@ -31,7 +31,7 @@ const SplitScreen: FunctionComponent<SplitScreenProps> = ({
         qa-dashboard__column--right
       `}
     >
-      <div>{rightComponent}</div>
+      <div style={{ width: '100%' }}>{rightComponent}</div>
     </div>
   </div>
 )

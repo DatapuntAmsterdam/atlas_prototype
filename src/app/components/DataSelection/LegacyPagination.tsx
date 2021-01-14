@@ -83,11 +83,7 @@ const LegacyPagination: FunctionComponent<Props> = ({ numberOfPages, currentPage
             size={4}
             maxLength={4}
           />
-          <PaginationButton
-            type="submit"
-            className="c-data-selection-pagination__button"
-            title="Ga naar ingevoerde pagina"
-          >
+          <PaginationButton type="submit" title="Ga naar ingevoerde pagina">
             Ga
             <span className="u-sr-only">Ga naar ingevoerde pagina</span>
           </PaginationButton>

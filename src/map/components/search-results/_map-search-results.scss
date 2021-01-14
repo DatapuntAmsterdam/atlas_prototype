@@ -90,6 +90,8 @@ $icon-height: 24px;
 
   &__footer {
     padding: 24px;
+    display: flex;
+    justify-content: center;
   }
 
   .is-print-mode & {
