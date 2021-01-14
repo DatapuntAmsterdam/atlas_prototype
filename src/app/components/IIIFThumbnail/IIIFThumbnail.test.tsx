@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from '@testing-library/react'
 import { shallow } from 'enzyme'
-import * as path from 'path'
-import * as fs from 'fs'
+import path from 'path'
+import fs from 'fs'
 import IIIFThumbnail from './IIIFThumbnail'
 import { server, rest } from '../../../../test/server'
 
