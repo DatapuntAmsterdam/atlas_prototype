@@ -6,10 +6,10 @@ import joinUrl from '../src/app/utils/joinUrl'
 import { isAuthenticated } from '../src/shared/services/auth/auth'
 
 const typeaheadUrl = joinUrl([environment.API_ROOT, 'typeahead'])
-// const iiifMetadataUrl = joinUrl([environment.API_ROOT, 'iiif-metadata/bouwdossier', ':id'])
+const iiifMetadataUrl = joinUrl([environment.API_ROOT, 'iiif-metadata/bouwdossier', ':id'])
 const dcatDatasetsUrl = joinUrl([environment.API_ROOT, 'dcatd/datasets', ':id'])
 const dcatDatasetFiltersUrl = joinUrl([environment.API_ROOT, 'dcatd/openapi'])
-// const panoramaThumbnailUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail', '?:q'])
+const panoramaThumbnailUrl = joinUrl([environment.API_ROOT, 'panorama/thumbnail', '?:q'])
 const stadsdeelUrl = joinUrl([environment.API_ROOT, 'gebieden/stadsdeel'])
 
 const handlers = [
@@ -21,11 +21,11 @@ const handlers = [
     return res(ctx.json(fixture))
   }),
 
-  // rest.get(iiifMetadataUrl, async (req, res, ctx) => {
-  //   const bouwdossierFixture = require('../src/api/iiif-metadata/bouwdossier/fixture').default
+  rest.get(iiifMetadataUrl, async (req, res, ctx) => {
+    const bouwdossierFixture = require('../src/api/iiif-metadata/bouwdossier/fixture').default
 
-  //   return res(ctx.json(bouwdossierFixture))
-  // }),
+    return res(ctx.json(bouwdossierFixture))
+  }),
 
   rest.get(dcatDatasetsUrl, async (req, res, ctx) => {
     const datasetsFixture = require('../src/api/dcatd/datasets/fixture').default
@@ -39,11 +39,11 @@ const handlers = [
     return res(ctx.json(datasetFiltersFixture))
   }),
 
-  // rest.get(panoramaThumbnailUrl, async (req, res, ctx) => {
-  //   const panoramaThumbnailFixture = require('../src/api/panorama/thumbnail/fixture').default
+  rest.get(panoramaThumbnailUrl, async (req, res, ctx) => {
+    const panoramaThumbnailFixture = require('../src/api/panorama/thumbnail/fixture').default
 
-  //   return res(ctx.json(panoramaThumbnailFixture))
-  // }),
+    return res(ctx.json(panoramaThumbnailFixture))
+  }),
 
   rest.get(stadsdeelUrl, async (req, res, ctx) => {
     const stadsdeelFixture = require('../src/api/gebieden/stadsdeel/fixture').default
