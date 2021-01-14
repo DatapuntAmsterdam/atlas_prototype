@@ -4,7 +4,6 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
-import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin'
 import { Configuration, DefinePlugin } from 'webpack'
 
 /**
@@ -230,21 +229,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       new DefinePlugin({
         'process.env.VERSION': JSON.stringify(require('./package.json').version),
         'process.env.GIT_COMMIT': process.env.GIT_COMMIT,
-      }),
-      new SVGSpritemapPlugin(['src/shared/assets/icons/**/*.svg'], {
-        output: {
-          filename: 'sprite.svg',
-          chunk: {
-            name: 'sprite',
-          },
-          svgo: {
-            plugins: Object.entries(svgoConfig).map(([key, value]) => ({ [key]: value })),
-          },
-        },
-        styles: {
-          keepAttributes: true,
-          filename: path.join(__dirname, 'src/shared/styles/config/mixins/_sprites.scss'),
-        },
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',

@@ -59,35 +59,6 @@ $clear-button-margin: 3px;
     }
   }
 
-  &__clear {
-    @include icon-sprite('icon-clear', $primary-dark, $primary-contrast);
-    cursor: pointer;
-    height: $button-size - 1px;
-    outline: none;
-    position: absolute;
-    right: $clear-button-margin;
-    top: $clear-button-margin;
-    width: $button-size - 1px;
-  }
-
-  &__submit {
-    @include font-size($s-font);
-    @include icon-sprite('icon-search', $primary-light, $primary-light, $button-size);
-    background-color: $primary-contrast;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    float: left;
-    height: $site-header-search-form-height;
-    margin-left: $base-whitespace * 0.5;
-    width: $site-header-search-form-height;
-
-    &:hover,
-    &:focus {
-      background-color: $primary-contrast-hover;
-      background-size: $button-size;
-    }
-  }
-
   &__tip {
     @include font-size($xs-font);
     color: $secondary-gray60;

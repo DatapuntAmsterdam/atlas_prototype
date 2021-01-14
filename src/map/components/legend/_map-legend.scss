@@ -108,10 +108,6 @@ $icon-height: 24px;
     @extend %__toggle; // sass-lint:disable-line placeholder-name-format
     margin-left: 10px;
 
-    &--remove {
-      @include icon-sprite('icon-cross', $secondary-gray60, $primary-dark, $icon-height);
-    }
-
     &:hover,
     &:focus {
       background-color: $secondary-gray20;

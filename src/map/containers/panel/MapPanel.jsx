@@ -5,6 +5,7 @@ import MapLegend from '../../components/legend/MapLegend'
 import MapPanelHandle from '../../components/panel-handle/MapPanelHandle'
 import MapType from '../../components/type/MapType'
 import { isAuthorised } from '../../utils/map-layer'
+import MapLayers from '../../../shared/assets/icons/icon-map-layers.svg'
 
 const ZoomInAlert = styled(Alert)`
   width: calc(100% - ${themeSpacing(6)});
@@ -63,7 +64,7 @@ const MapPanel = ({
           onClick={onMapPanelToggle}
           title={isMapPanelVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen'}
         >
-          <span className="map-panel__heading-icon" />
+          <MapLayers />
           <h2 className="map-panel__heading-title" aria-hidden="true">
             Kaartlagen
           </h2>

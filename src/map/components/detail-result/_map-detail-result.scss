@@ -170,39 +170,6 @@ $icon-height: 24px;
     padding: 24px;
   }
 
-  &__button {
-    align-items: center;
-    background-color: $primary-light;
-    border: 1px solid $secondary-gray20;
-    border-radius: 0;
-    color: $secondary-gray60;
-    display: flex;
-    font-weight: $bold-weight;
-    justify-content: center;
-    margin: auto;
-    padding: 6px 16px 6px 8px;
-    width: auto;
-
-    &:hover {
-      background-color: $primary-contrast;
-      color: $primary-light;
-
-      &--maximize {
-        @include icon-sprite('icon-maximize', $primary-dark, $primary-dark, $icon-height);
-      }
-    }
-
-    &-icon {
-      height: $icon-height;
-      margin-right: 5px;
-      width: $icon-height;
-
-      &--maximize {
-        @include icon-sprite('icon-maximize', $secondary-gray60, $primary-dark, $icon-height);
-      }
-    }
-  }
-
   .is-print-mode & {
     &__header {
       // There is no pano in print mode

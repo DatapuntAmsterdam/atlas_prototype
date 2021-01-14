@@ -157,30 +157,6 @@ $icon-height: 24px;
   top: 0;
 }
 
-.o-btn--close {
-  @extend %btn-close;
-  @include icon-sprite('icon-clear', $primary-light, $primary-dark, $icon-height);
-  height: $icon-height;
-  position: absolute;
-  right: 4px;
-  top: 4px;
-  width: $icon-height;
-
-  &:hover,
-  &:focus {
-    background-color: $secondary-gray20;
-  }
-
-  &--info {
-    @include icon-sprite('icon-clear', $primary-dark, $primary-dark, $icon-height);
-
-    &:hover,
-    &:focus {
-      background-color: $secondary-gray20;
-    }
-  }
-}
-
 .s-btn--nested {
   margin-bottom: $base-whitespace !important;
   margin-top: $base-whitespace !important;

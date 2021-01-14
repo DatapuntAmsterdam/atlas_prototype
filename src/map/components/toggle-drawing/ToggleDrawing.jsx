@@ -1,4 +1,15 @@
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { ControlButton } from '@amsterdam/arm-core'
+import { themeSpacing } from '@amsterdam/asc-ui'
+import Measure from '../../../shared/assets/icons/icon-measure.svg'
+
+const StyledControlButton = styled(ControlButton)`
+  position: absolute;
+  left: ${themeSpacing(2)};
+  top: ${themeSpacing(2)};
+  z-index: 1;
+`
 
 const ToggleDrawing = ({
   isEnabled,
@@ -24,18 +35,30 @@ const ToggleDrawing = ({
   }
 
   return (
-    <button
-      type="button"
-      className={`
-      toggle-drawing
-      ${expanded ? 'toggle-drawing--expanded' : 'toggle-drawing--collapsed'}
-    `}
-      onClick={clickEvent}
-      title={`${label} meten en intekenen`}
-    >
-      <span className="toggle-drawing__icon" />
-      {expanded && <span className="toggle-drawing__label">{label}</span>}
-    </button>
+    <>
+      {expanded ? (
+        <StyledControlButton
+          variant="blank"
+          title={`${label} meten en intekenen`}
+          iconLeft={<Measure />}
+          iconSize={28}
+          onClick={clickEvent}
+          className="qa-toggle-fullscreen"
+        >
+          <span className="toggle-drawing__label">{label}</span>
+        </StyledControlButton>
+      ) : (
+        <StyledControlButton
+          title={`${label} meten en intekenen`}
+          icon={<Measure />}
+          variant="blank"
+          iconSize={28}
+          size={40}
+          onClick={clickEvent}
+          className="qa-toggle-fullscreen"
+        />
+      )}
+    </>
   )
 }
 

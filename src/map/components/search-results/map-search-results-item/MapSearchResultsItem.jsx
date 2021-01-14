@@ -1,4 +1,13 @@
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { ChevronRight } from '@amsterdam/asc-assets'
+import { Icon, themeColor } from '@amsterdam/asc-ui'
+
+const StyledIcon = styled(Icon)`
+  svg path {
+    fill: ${themeColor('tint', 'level5')};
+  }
+`
 
 const MapSearchResultsItem = ({ label, onClick, statusLabel }) => (
   <li className="map-search-results-item">
@@ -16,7 +25,9 @@ const MapSearchResultsItem = ({ label, onClick, statusLabel }) => (
           ''
         )}
       </section>
-      <span className="map-search-results-item__arrow" />
+      <StyledIcon size={12}>
+        <ChevronRight />
+      </StyledIcon>
     </button>
   </li>
 )

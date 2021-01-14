@@ -1,6 +1,8 @@
 import { Heading } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import { SelectButton } from '../../../shared/components/select-button'
+import Topography from '../../../shared/assets/icons/icon-topography.svg'
+import Aerial from '../../../shared/assets/icons/icon-aerial.svg'
 
 function hasLayer(activeBaseLayer, baseLayers) {
   return (
@@ -16,7 +18,7 @@ const MapType = ({ activeBaseLayer, baseLayers, onBaseLayerToggle }) => (
     <SelectButton
       className="map-type__select map-type__select--topography"
       handleChange={onBaseLayerToggle}
-      icon={<span className="icon icon--topography" />}
+      icon={<Topography />}
       isDisabled={!hasLayer(activeBaseLayer, baseLayers.topography)}
       name="topography"
       options={baseLayers.topography}
@@ -26,7 +28,7 @@ const MapType = ({ activeBaseLayer, baseLayers, onBaseLayerToggle }) => (
     <SelectButton
       className="map-type__select map-type__select--aerial"
       handleChange={onBaseLayerToggle}
-      icon={<span className="icon icon--aerial" />}
+      icon={<Aerial />}
       isDisabled={!hasLayer(activeBaseLayer, baseLayers.aerial)}
       name="aerial"
       options={baseLayers.aerial}

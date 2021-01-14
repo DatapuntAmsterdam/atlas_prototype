@@ -32,7 +32,6 @@
     }
 
     &--icon-collapse {
-      @include icon-sprite('icon-arrow-down', $secondary-gray60, $primary-dark, $handle-height);
       background-color: $secondary-gray5;
 
       &:hover,

@@ -40,12 +40,6 @@
       }
     }
 
-    &-icon {
-      @include icon-sprite('icon-map-layers', $secondary-gray60, $primary-dark, $handle-height);
-      height: $handle-height;
-      width: $handle-height;
-    }
-
     &:after {
       content: '';
       display: block;
@@ -108,10 +102,6 @@
     &:focus {
       .map-panel__heading-title {
         color: $primary-dark;
-      }
-
-      .map-panel__heading-icon {
-        @include icon-sprite('icon-map-layers', $primary-dark, $primary-dark, $handle-height);
       }
 
       svg {
