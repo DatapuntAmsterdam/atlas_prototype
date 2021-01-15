@@ -1,6 +1,6 @@
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import { fetchWithToken } from '../api/api'
+import { fetchProxy } from '../api/api'
 
 export interface DatasetFilterOption {
   id: string
@@ -46,6 +46,6 @@ export function toDatasetFilters(data: any) {
 }
 
 export default async function getDatasetFilters() {
-  const data = await fetchWithToken(joinUrl([environment.API_ROOT, 'dcatd/openapi']))
+  const data = await fetchProxy(joinUrl([environment.API_ROOT, 'dcatd/openapi']))
   return toDatasetFilters(data)
 }

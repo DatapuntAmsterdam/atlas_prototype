@@ -6,11 +6,6 @@ import redirectToDcatd, {
 
 describe('redirectToDcatd', () => {
   beforeEach(() => {
-    Object.defineProperty(window, 'sessionStorage', {
-      value: {
-        setItem: jest.fn(),
-      },
-    })
     Object.defineProperty(window, 'location', {
       value: {
         assign: jest.fn(),
