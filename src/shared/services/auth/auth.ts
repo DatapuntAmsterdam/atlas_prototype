@@ -262,13 +262,11 @@ function restoreAccessToken() {
     const now = Math.floor(new Date().getTime() / 1000)
 
     if (!parsedToken || parsedToken.expiresAt <= now) {
-      // tokenData = null
       logout()
       return false
     }
-
-    // tokenData = parsedToken
   }
+
   return true
 }
 
