@@ -8,15 +8,3 @@ import 'isomorphic-fetch'
 
 // React 17 Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() })
-
-declare global {
-  namespace JSDOM {
-    interface Global {
-      unsetAuthentication: () => void
-      setInvalidAuthentication: () => void
-      setExpiredAuthentication: () => void
-      setValidAuthentication: () => void
-      setAuthenticationWithToken: (token: string) => void
-    }
-  }
-}

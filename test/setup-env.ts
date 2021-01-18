@@ -1,5 +1,17 @@
 import { server } from './server'
 
+declare global {
+  namespace JSDOM {
+    interface Global {
+      unsetAuthentication: () => void
+      setInvalidAuthentication: () => void
+      setExpiredAuthentication: () => void
+      setValidAuthentication: () => void
+      setAuthenticationWithToken: (token: string) => void
+    }
+  }
+}
+
 beforeAll(() => server.listen())
 
 // if you need to add a handler after calling setupServer for some specific test
