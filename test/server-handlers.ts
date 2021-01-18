@@ -22,31 +22,31 @@ const handlers = [
   }),
 
   rest.get(iiifMetadataUrl, async (req, res, ctx) => {
-    const bouwdossierFixture = require('../src/api/iiif-metadata/bouwdossier/fixture').default
+    const bouwdossierFixture = require('../src/api/iiif-metadata/bouwdossier').singleFixture
 
     return res(ctx.json(bouwdossierFixture))
   }),
 
   rest.get(dcatDatasetsUrl, async (req, res, ctx) => {
-    const datasetsFixture = require('../src/api/dcatd/datasets/fixture').default
+    const datasetsFixture = require('../src/api/dcatd/datasets').singleFixture
 
     return res(ctx.json(datasetsFixture))
   }),
 
   rest.get(dcatDatasetFiltersUrl, async (req, res, ctx) => {
-    const datasetFiltersFixture = require('../src/api/dcatd/openapi/fixture').default
+    const datasetFiltersFixture = require('../src/api/dcatd/openapi').default
 
     return res(ctx.json(datasetFiltersFixture))
   }),
 
   rest.get(panoramaThumbnailUrl, async (req, res, ctx) => {
-    const panoramaThumbnailFixture = require('../src/api/panorama/thumbnail/fixture').default
+    const panoramaThumbnailFixture = require('../src/api/panorama/thumbnail').singleFixture
 
     return res(ctx.json(panoramaThumbnailFixture))
   }),
 
   rest.get(stadsdeelUrl, async (req, res, ctx) => {
-    const stadsdeelFixture = require('../src/api/gebieden/stadsdeel/fixture').default
+    const stadsdeelFixture = require('../src/api/gebieden/stadsdeel').singleFixture
 
     return res(ctx.json(stadsdeelFixture))
   }),
