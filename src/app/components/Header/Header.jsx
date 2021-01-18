@@ -38,6 +38,12 @@ const HeaderWrapper = styled.section`
 `
 
 const StyledHeader = styled(HeaderComponent)`
+  h1,
+  nav {
+    position: relative;
+    z-index: 1;
+  }
+
   ${styles.HeaderNavigationStyle} {
     // This must be added to the @amsterdam/asc-ui project https://github.com/Amsterdam/amsterdam-styled-components/issues/165
     @media screen and ${breakpoint('min-width', 'desktop')} {
