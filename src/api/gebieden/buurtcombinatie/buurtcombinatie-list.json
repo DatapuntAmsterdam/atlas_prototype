@@ -1,0 +1,291 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 99,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052036/?format=json"
+        }
+      },
+      "_display": "Burgwallen-Oude Zijde (00)",
+      "naam": "Burgwallen-Oude Zijde",
+      "vollcode": "A00",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052035/?format=json"
+        }
+      },
+      "_display": "Burgwallen-Nieuwe Zijde (01)",
+      "naam": "Burgwallen-Nieuwe Zijde",
+      "vollcode": "A01",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052028/?format=json"
+        }
+      },
+      "_display": "Grachtengordel-West (02)",
+      "naam": "Grachtengordel-West",
+      "vollcode": "A02",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052034/?format=json"
+        }
+      },
+      "_display": "Grachtengordel-Zuid (03)",
+      "naam": "Grachtengordel-Zuid",
+      "vollcode": "A03",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052033/?format=json"
+        }
+      },
+      "_display": "Nieuwmarkt/Lastage (04)",
+      "naam": "Nieuwmarkt/Lastage",
+      "vollcode": "A04",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052029/?format=json"
+        }
+      },
+      "_display": "Haarlemmerbuurt (05)",
+      "naam": "Haarlemmerbuurt",
+      "vollcode": "A05",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052037/?format=json"
+        }
+      },
+      "_display": "Jordaan (06)",
+      "naam": "Jordaan",
+      "vollcode": "A06",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052032/?format=json"
+        }
+      },
+      "_display": "De Weteringschans (07)",
+      "naam": "De Weteringschans",
+      "vollcode": "A07",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052031/?format=json"
+        }
+      },
+      "_display": "Weesperbuurt/Plantage (08)",
+      "naam": "Weesperbuurt/Plantage",
+      "vollcode": "A08",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052030/?format=json"
+        }
+      },
+      "_display": "Oostelijke Eilanden/Kadijken (09)",
+      "naam": "Oostelijke Eilanden/Kadijken",
+      "vollcode": "A09",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052013/?format=json"
+        }
+      },
+      "_display": "Westelijk Havengebied (10)",
+      "naam": "Westelijk Havengebied",
+      "vollcode": "B10",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052012/?format=json"
+        }
+      },
+      "_display": "Bedrijventerrein Sloterdijk (11)",
+      "naam": "Bedrijventerrein Sloterdijk",
+      "vollcode": "F11",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052093/?format=json"
+        }
+      },
+      "_display": "Houthavens (12)",
+      "naam": "Houthavens",
+      "vollcode": "E12",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052094/?format=json"
+        }
+      },
+      "_display": "Spaarndammer- en Zeeheldenbuurt (13)",
+      "naam": "Spaarndammer- en Zeeheldenbuurt",
+      "vollcode": "E13",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052018/?format=json"
+        }
+      },
+      "_display": "Staatsliedenbuurt (14)",
+      "naam": "Staatsliedenbuurt",
+      "vollcode": "E14",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052017/?format=json"
+        }
+      },
+      "_display": "Centrale Markt (15)",
+      "naam": "Centrale Markt",
+      "vollcode": "E15",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052016/?format=json"
+        }
+      },
+      "_display": "Frederik Hendrikbuurt (16)",
+      "naam": "Frederik Hendrikbuurt",
+      "vollcode": "E16",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052050/?format=json"
+        }
+      },
+      "_display": "Da Costabuurt (17)",
+      "naam": "Da Costabuurt",
+      "vollcode": "E17",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052049/?format=json"
+        }
+      },
+      "_display": "Kinkerbuurt (18)",
+      "naam": "Kinkerbuurt",
+      "vollcode": "E18",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052047/?format=json"
+        }
+      },
+      "_display": "Van Lennepbuurt (19)",
+      "naam": "Van Lennepbuurt",
+      "vollcode": "E19",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052051/?format=json"
+        }
+      },
+      "_display": "Helmersbuurt (20)",
+      "naam": "Helmersbuurt",
+      "vollcode": "E20",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052048/?format=json"
+        }
+      },
+      "_display": "Overtoomse Sluis (21)",
+      "naam": "Overtoomse Sluis",
+      "vollcode": "E21",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052052/?format=json"
+        }
+      },
+      "_display": "Vondelbuurt (22)",
+      "naam": "Vondelbuurt",
+      "vollcode": "E22",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630023753948/?format=json"
+        }
+      },
+      "_display": "Zuidas (23)",
+      "naam": "Zuidas",
+      "vollcode": "K23",
+      "dataset": "gebieden"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/gebieden/buurtcombinatie/3630012052085/?format=json"
+        }
+      },
+      "_display": "Oude Pijp (24)",
+      "naam": "Oude Pijp",
+      "vollcode": "K24",
+      "dataset": "gebieden"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { Geometry } from 'geojson'
-import { SmallAPIReference, Links } from '../../types'
+import { SmallAPIReference, Links, APIReference } from '../../types'
 
 export interface Gemeente {
   _display: string
@@ -9,7 +9,7 @@ export interface Gemeente {
   dataset: string
 }
 
-export interface Stadsdeel {
+export interface Single {
   _links: Links
   _display: string
   stadsdeelidentificatie: string
@@ -29,4 +29,10 @@ export interface Stadsdeel {
   buurtcombinaties: SmallAPIReference
   gebiedsgerichtwerken: SmallAPIReference
   dataset: string
+}
+
+export interface List {
+  _links: Links
+  count: number
+  results: Pick<APIReference, '_links' | '_display' | 'code' | 'naam' | 'dataset'>[]
 }

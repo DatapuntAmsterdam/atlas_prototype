@@ -1,0 +1,266 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 332,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957761/?format=json"
+        }
+      },
+      "_display": "Admiraal De Ruijterweg 36M",
+      "landelijk_id": "0363030011957761",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957812/?format=json"
+        }
+      },
+      "_display": "Amstelveenseweg 216K",
+      "landelijk_id": "0363030011957812",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957739/?format=json"
+        }
+      },
+      "_display": "Beethovenstraat 287",
+      "landelijk_id": "0363030011957739",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030000911195/?format=json"
+        }
+      },
+      "_display": "Brentanostraat 11",
+      "landelijk_id": "0363030000911195",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030000911197/?format=json"
+        }
+      },
+      "_display": "Brentanostraat 13",
+      "landelijk_id": "0363030000911197",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030000911203/?format=json"
+        }
+      },
+      "_display": "Brentanostraat 19",
+      "landelijk_id": "0363030000911203",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030000911205/?format=json"
+        }
+      },
+      "_display": "Brentanostraat 21",
+      "landelijk_id": "0363030000911205",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030000911209/?format=json"
+        }
+      },
+      "_display": "Brentanostraat 25",
+      "landelijk_id": "0363030000911209",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030000911215/?format=json"
+        }
+      },
+      "_display": "Brentanostraat 31",
+      "landelijk_id": "0363030000911215",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957807/?format=json"
+        }
+      },
+      "_display": "Buikslotermeerdijk 95",
+      "landelijk_id": "0363030011957807",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957750/?format=json"
+        }
+      },
+      "_display": "Buikslotermeerplein 1000",
+      "landelijk_id": "0363030011957750",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957718/?format=json"
+        }
+      },
+      "_display": "C. van Eesterenlaan 299",
+      "landelijk_id": "0363030011957718",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957806/?format=json"
+        }
+      },
+      "_display": "Coenhavenweg 28",
+      "landelijk_id": "0363030011957806",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957803/?format=json"
+        }
+      },
+      "_display": "Concertgebouwplein 1K",
+      "landelijk_id": "0363030011957803",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957817/?format=json"
+        }
+      },
+      "_display": "Cornelis Troostplein 25",
+      "landelijk_id": "0363030011957817",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957692/?format=json"
+        }
+      },
+      "_display": "De Boelelaan 900",
+      "landelijk_id": "0363030011957692",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957712/?format=json"
+        }
+      },
+      "_display": "De Clercqstraat 77S",
+      "landelijk_id": "0363030011957712",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957716/?format=json"
+        }
+      },
+      "_display": "Derde Kostverlorenkade 45",
+      "landelijk_id": "0363030011957716",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957758/?format=json"
+        }
+      },
+      "_display": "Diemerparklaan 13A",
+      "landelijk_id": "0363030011957758",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957691/?format=json"
+        }
+      },
+      "_display": "Diemerzeedijk 76N",
+      "landelijk_id": "0363030011957691",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030011957693/?format=json"
+        }
+      },
+      "_display": "Diemerzeedijk 76P",
+      "landelijk_id": "0363030011957693",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030001003698/?format=json"
+        }
+      },
+      "_display": "Dilbeekpad 1",
+      "landelijk_id": "0363030001003698",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030001003699/?format=json"
+        }
+      },
+      "_display": "Dilbeekpad 3",
+      "landelijk_id": "0363030001003699",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030001003700/?format=json"
+        }
+      },
+      "_display": "Dilbeekpad 5",
+      "landelijk_id": "0363030001003700",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/standplaats/0363030001003701/?format=json"
+        }
+      },
+      "_display": "Dilbeekpad 7",
+      "landelijk_id": "0363030001003701",
+      "dataset": "bag"
+    }
+  ]
+}

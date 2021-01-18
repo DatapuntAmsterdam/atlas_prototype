@@ -1,6 +1,6 @@
 import { render, within } from '@testing-library/react'
 
-import bouwdossierFixture from '../../../api/iiif-metadata/bouwdossier/fixture'
+import { singleFixture as bouwdossierFixture } from '../../../api/iiif-metadata/bouwdossier'
 import withAppContext from '../../utils/withAppContext'
 
 import ConstructionFileDetail from './ConstructionFileDetail'

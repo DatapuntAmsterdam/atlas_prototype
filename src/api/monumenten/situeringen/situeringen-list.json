@@ -1,0 +1,2716 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/monumenten/situeringen/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 61539,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/1/"
+        }
+      },
+      "_display": "Maritzstraat 22",
+      "identificerende_sleutel_situering": 1,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000514151/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000514151"
+      },
+      "eerste_situering": "J",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/55d301fb-6cec-4fd4-817a-042a107fd380/"
+          }
+        },
+        "identificerende_sleutel_monument": "55d301fb-6cec-4fd4-817a-042a107fd380"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/2/"
+        }
+      },
+      "_display": "Laing's Nekstraat 50 H",
+      "identificerende_sleutel_situering": 2,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177978/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177978"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/3/"
+        }
+      },
+      "_display": "Laing's Nekstraat 40 H",
+      "identificerende_sleutel_situering": 3,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177955/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177955"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/4/"
+        }
+      },
+      "_display": "Laing's Nekstraat 42 1",
+      "identificerende_sleutel_situering": 4,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177963/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177963"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/5/"
+        }
+      },
+      "_display": "Laing's Nekstraat 50 2",
+      "identificerende_sleutel_situering": 5,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177980/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177980"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/6/"
+        }
+      },
+      "_display": "Laing's Nekstraat 52 1",
+      "identificerende_sleutel_situering": 6,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177985/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177985"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/7/"
+        }
+      },
+      "_display": "Laing's Nekstraat 48 H",
+      "identificerende_sleutel_situering": 7,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177972/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177972"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/8/"
+        }
+      },
+      "_display": "Laing's Nekstraat 48 1",
+      "identificerende_sleutel_situering": 8,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177973/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177973"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/9/"
+        }
+      },
+      "_display": "Laing's Nekstraat 38 2",
+      "identificerende_sleutel_situering": 9,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177949/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177949"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/10/"
+        }
+      },
+      "_display": "Laing's Nekstraat 50 3",
+      "identificerende_sleutel_situering": 10,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177981/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177981"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/11/"
+        }
+      },
+      "_display": "Laing's Nekstraat 40 1",
+      "identificerende_sleutel_situering": 11,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177956/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177956"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/12/"
+        }
+      },
+      "_display": "Laing's Nekstraat 40 2",
+      "identificerende_sleutel_situering": 12,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177957/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177957"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/13/"
+        }
+      },
+      "_display": "Laing's Nekstraat 36 2",
+      "identificerende_sleutel_situering": 13,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177941/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177941"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/14/"
+        }
+      },
+      "_display": "Laing's Nekstraat 52 H",
+      "identificerende_sleutel_situering": 14,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177984/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177984"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/15/"
+        }
+      },
+      "_display": "Laing's Nekstraat 36 3",
+      "identificerende_sleutel_situering": 15,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177942/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177942"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/16/"
+        }
+      },
+      "_display": "Laing's Nekstraat 36 H",
+      "identificerende_sleutel_situering": 16,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177939/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177939"
+      },
+      "eerste_situering": "J",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/17/"
+        }
+      },
+      "_display": "Laing's Nekstraat 48 2",
+      "identificerende_sleutel_situering": 17,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177974/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177974"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/18/"
+        }
+      },
+      "_display": "Laing's Nekstraat 42 2",
+      "identificerende_sleutel_situering": 18,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177964/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177964"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/19/"
+        }
+      },
+      "_display": "Laing's Nekstraat 36 1",
+      "identificerende_sleutel_situering": 19,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177940/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177940"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/20/"
+        }
+      },
+      "_display": "Laing's Nekstraat 40 3",
+      "identificerende_sleutel_situering": 20,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177958/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177958"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/21/"
+        }
+      },
+      "_display": "Laing's Nekstraat 38 1",
+      "identificerende_sleutel_situering": 21,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177948/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177948"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/22/"
+        }
+      },
+      "_display": "Laing's Nekstraat 50 1",
+      "identificerende_sleutel_situering": 22,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177979/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177979"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/23/"
+        }
+      },
+      "_display": "Laing's Nekstraat 52 2",
+      "identificerende_sleutel_situering": 23,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177986/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177986"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/24/"
+        }
+      },
+      "_display": "Laing's Nekstraat 48 3",
+      "identificerende_sleutel_situering": 24,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177975/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177975"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/25/"
+        }
+      },
+      "_display": "Laing's Nekstraat 38 H",
+      "identificerende_sleutel_situering": 25,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177947/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177947"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/26/"
+        }
+      },
+      "_display": "Laing's Nekstraat 42 3",
+      "identificerende_sleutel_situering": 26,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177965/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177965"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/27/"
+        }
+      },
+      "_display": "Laing's Nekstraat 38 3",
+      "identificerende_sleutel_situering": 27,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177950/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177950"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/28/"
+        }
+      },
+      "_display": "Laing's Nekstraat 52 3",
+      "identificerende_sleutel_situering": 28,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000177987/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000177987"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/d5cc6402-d211-4981-b965-08a559837218/"
+          }
+        },
+        "identificerende_sleutel_monument": "d5cc6402-d211-4981-b965-08a559837218"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/29/"
+        }
+      },
+      "_display": "Danie Theronstraat 2",
+      "identificerende_sleutel_situering": 29,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000077033/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000077033"
+      },
+      "eerste_situering": "J",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/2c9cd83c-12f9-4bb7-b6e4-0c4a8fa35442/"
+          }
+        },
+        "identificerende_sleutel_monument": "2c9cd83c-12f9-4bb7-b6e4-0c4a8fa35442"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/30/"
+        }
+      },
+      "_display": "Mariëndaal 13",
+      "identificerende_sleutel_situering": 30,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000196222/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000196222"
+      },
+      "eerste_situering": "J",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/376f0dd9-3708-4b92-a942-12dc9d531c9d/"
+          }
+        },
+        "identificerende_sleutel_monument": "376f0dd9-3708-4b92-a942-12dc9d531c9d"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/31/"
+        }
+      },
+      "_display": "Columbusstraat 19",
+      "identificerende_sleutel_situering": 31,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069256/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069256"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/32/"
+        }
+      },
+      "_display": "Columbusplein 37 3",
+      "identificerende_sleutel_situering": 32,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069099/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069099"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/33/"
+        }
+      },
+      "_display": "Columbusplein 209",
+      "identificerende_sleutel_situering": 33,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069197/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069197"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/34/"
+        }
+      },
+      "_display": "Columbusstraat 63",
+      "identificerende_sleutel_situering": 34,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069278/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069278"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/35/"
+        }
+      },
+      "_display": "Columbusplein 9 3",
+      "identificerende_sleutel_situering": 35,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069002/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069002"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/36/"
+        }
+      },
+      "_display": "Davisstraat 25 3",
+      "identificerende_sleutel_situering": 36,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078250/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078250"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/37/"
+        }
+      },
+      "_display": "Columbusstraat 4 3",
+      "identificerende_sleutel_situering": 37,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069224/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069224"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/38/"
+        }
+      },
+      "_display": "Columbusstraat 15",
+      "identificerende_sleutel_situering": 38,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069250/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069250"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/39/"
+        }
+      },
+      "_display": "Davisstraat 21 1",
+      "identificerende_sleutel_situering": 39,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078234/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078234"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/40/"
+        }
+      },
+      "_display": "Postjesweg 96 C",
+      "identificerende_sleutel_situering": 40,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240439/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240439"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/41/"
+        }
+      },
+      "_display": "Marco Polostraat 14 1",
+      "identificerende_sleutel_situering": 41,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195220/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195220"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/42/"
+        }
+      },
+      "_display": "Postjesweg 66 2",
+      "identificerende_sleutel_situering": 42,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240339/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240339"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/43/"
+        }
+      },
+      "_display": "Admiralengracht 27 3",
+      "identificerende_sleutel_situering": 43,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000023680/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000023680"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/44/"
+        }
+      },
+      "_display": "Postjesweg 38 3",
+      "identificerende_sleutel_situering": 44,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240277/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240277"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/45/"
+        }
+      },
+      "_display": "Columbusplein 231",
+      "identificerende_sleutel_situering": 45,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069208/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069208"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/46/"
+        }
+      },
+      "_display": "Davisstraat 19",
+      "identificerende_sleutel_situering": 46,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078231/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078231"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/47/"
+        }
+      },
+      "_display": "Columbusplein 171",
+      "identificerende_sleutel_situering": 47,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069178/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069178"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/48/"
+        }
+      },
+      "_display": "Marco Polostraat 11 3",
+      "identificerende_sleutel_situering": 48,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195210/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195210"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/49/"
+        }
+      },
+      "_display": "Davisstraat 23 3",
+      "identificerende_sleutel_situering": 49,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078243/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078243"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/50/"
+        }
+      },
+      "_display": "Admiralengracht 17 1",
+      "identificerende_sleutel_situering": 50,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000023638/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000023638"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/51/"
+        }
+      },
+      "_display": "Hudsonstraat 28 D",
+      "identificerende_sleutel_situering": 51,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136248/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136248"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/52/"
+        }
+      },
+      "_display": "Columbusplein 31 2",
+      "identificerende_sleutel_situering": 52,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069078/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069078"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/53/"
+        }
+      },
+      "_display": "Columbusstraat 16 H",
+      "identificerende_sleutel_situering": 53,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069251/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069251"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/54/"
+        }
+      },
+      "_display": "Marco Polostraat 11 H",
+      "identificerende_sleutel_situering": 54,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195207/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195207"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/55/"
+        }
+      },
+      "_display": "Hudsonstraat 16 A",
+      "identificerende_sleutel_situering": 55,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136197/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136197"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/56/"
+        }
+      },
+      "_display": "Marco Polostraat 21 1",
+      "identificerende_sleutel_situering": 56,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195248/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195248"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/57/"
+        }
+      },
+      "_display": "Davisstraat 123",
+      "identificerende_sleutel_situering": 57,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078315/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078315"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/58/"
+        }
+      },
+      "_display": "Hudsonstraat 12 D",
+      "identificerende_sleutel_situering": 58,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136184/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136184"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/59/"
+        }
+      },
+      "_display": "Postjesweg 28 H",
+      "identificerende_sleutel_situering": 59,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240253/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240253"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/60/"
+        }
+      },
+      "_display": "Columbusplein 35 2",
+      "identificerende_sleutel_situering": 60,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069090/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069090"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/61/"
+        }
+      },
+      "_display": "Columbusstraat 4 1",
+      "identificerende_sleutel_situering": 61,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069222/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069222"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/62/"
+        }
+      },
+      "_display": "Admiralengracht 11 H",
+      "identificerende_sleutel_situering": 62,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000023613/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000023613"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/63/"
+        }
+      },
+      "_display": "Marco Polostraat 24 H",
+      "identificerende_sleutel_situering": 63,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195259/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195259"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/64/"
+        }
+      },
+      "_display": "Columbusplein 167",
+      "identificerende_sleutel_situering": 64,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069176/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069176"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/65/"
+        }
+      },
+      "_display": "Postjesweg 80",
+      "identificerende_sleutel_situering": 65,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240384/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240384"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/66/"
+        }
+      },
+      "_display": "Columbusplein 21 1",
+      "identificerende_sleutel_situering": 66,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069040/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069040"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/67/"
+        }
+      },
+      "_display": "Marco Polostraat 27 2",
+      "identificerende_sleutel_situering": 67,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195273/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195273"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/68/"
+        }
+      },
+      "_display": "Marco Polostraat 7 H",
+      "identificerende_sleutel_situering": 68,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195191/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195191"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/69/"
+        }
+      },
+      "_display": "Davisstraat 107",
+      "identificerende_sleutel_situering": 69,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078307/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078307"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/70/"
+        }
+      },
+      "_display": "Columbusstraat 10 H",
+      "identificerende_sleutel_situering": 70,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069236/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069236"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/71/"
+        }
+      },
+      "_display": "Davisstraat 27 2",
+      "identificerende_sleutel_situering": 71,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078256/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078256"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/72/"
+        }
+      },
+      "_display": "Columbusplein 183",
+      "identificerende_sleutel_situering": 72,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069184/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069184"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/73/"
+        }
+      },
+      "_display": "Columbusplein 195",
+      "identificerende_sleutel_situering": 73,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069190/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069190"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/74/"
+        }
+      },
+      "_display": "Columbusstraat 21",
+      "identificerende_sleutel_situering": 74,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069257/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069257"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/75/"
+        }
+      },
+      "_display": "Postjesweg 54 2",
+      "identificerende_sleutel_situering": 75,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240312/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240312"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/76/"
+        }
+      },
+      "_display": "Marco Polostraat 10 H",
+      "identificerende_sleutel_situering": 76,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195203/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195203"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/77/"
+        }
+      },
+      "_display": "Columbusplein 17 H",
+      "identificerende_sleutel_situering": 77,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069027/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069027"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/78/"
+        }
+      },
+      "_display": "Hudsonstraat 4 C",
+      "identificerende_sleutel_situering": 78,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136151/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136151"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/79/"
+        }
+      },
+      "_display": "Davisstraat 95",
+      "identificerende_sleutel_situering": 79,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078301/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078301"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/80/"
+        }
+      },
+      "_display": "Columbusplein 29 2",
+      "identificerende_sleutel_situering": 80,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069073/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069073"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/81/"
+        }
+      },
+      "_display": "Postjesweg 28 1",
+      "identificerende_sleutel_situering": 81,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240254/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240254"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/82/"
+        }
+      },
+      "_display": "Admiralengracht 25 H",
+      "identificerende_sleutel_situering": 82,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000023669/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000023669"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/83/"
+        }
+      },
+      "_display": "Marco Polostraat 22 1",
+      "identificerende_sleutel_situering": 83,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195252/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195252"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/84/"
+        }
+      },
+      "_display": "Hudsonstraat 34 D",
+      "identificerende_sleutel_situering": 84,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136272/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136272"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/85/"
+        }
+      },
+      "_display": "Hudsonstraat 24 A",
+      "identificerende_sleutel_situering": 85,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136229/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136229"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/86/"
+        }
+      },
+      "_display": "Hudsonstraat 24 D",
+      "identificerende_sleutel_situering": 86,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136232/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136232"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/87/"
+        }
+      },
+      "_display": "Hudsonstraat 18 A",
+      "identificerende_sleutel_situering": 87,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136205/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136205"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/88/"
+        }
+      },
+      "_display": "Columbusplein 33 1",
+      "identificerende_sleutel_situering": 88,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069084/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069084"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/89/"
+        }
+      },
+      "_display": "Columbusplein 207",
+      "identificerende_sleutel_situering": 89,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069196/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069196"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/90/"
+        }
+      },
+      "_display": "Postjesweg 40 H",
+      "identificerende_sleutel_situering": 90,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240279/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240279"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/91/"
+        }
+      },
+      "_display": "Admiralengracht 15 2",
+      "identificerende_sleutel_situering": 91,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000023631/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000023631"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/92/"
+        }
+      },
+      "_display": "Admiralengracht 17 3",
+      "identificerende_sleutel_situering": 92,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000023640/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000023640"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/93/"
+        }
+      },
+      "_display": "Hudsonstraat 26 B",
+      "identificerende_sleutel_situering": 93,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000136238/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000136238"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/94/"
+        }
+      },
+      "_display": "Marco Polostraat 29 2",
+      "identificerende_sleutel_situering": 94,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195280/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195280"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/95/"
+        }
+      },
+      "_display": "Marco Polostraat 19 H",
+      "identificerende_sleutel_situering": 95,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195239/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195239"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/96/"
+        }
+      },
+      "_display": "Postjesweg 84",
+      "identificerende_sleutel_situering": 96,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240399/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240399"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/97/"
+        }
+      },
+      "_display": "Postjesweg 94 A",
+      "identificerende_sleutel_situering": 97,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000240430/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000240430"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/98/"
+        }
+      },
+      "_display": "Davisstraat 21 2",
+      "identificerende_sleutel_situering": 98,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000078235/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000078235"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/99/"
+        }
+      },
+      "_display": "Marco Polostraat 24 3",
+      "identificerende_sleutel_situering": 99,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000195262/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000195262"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/situeringen/100/"
+        }
+      },
+      "_display": "Columbusplein 173",
+      "identificerende_sleutel_situering": 100,
+      "situering_nummeraanduiding": "Actueel",
+      "betreft_nummeraanduiding": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000069179/"
+          }
+        },
+        "nummeraanduidingidentificatie": "0363200000069179"
+      },
+      "eerste_situering": "N",
+      "hoort_bij_monument": {
+        "_links": {
+          "self": {
+            "href": "https://api.data.amsterdam.nl/monumenten/monumenten/932cedff-6bf8-4907-a50f-1831828db318/"
+          }
+        },
+        "identificerende_sleutel_monument": "932cedff-6bf8-4907-a50f-1831828db318"
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import { APIReference, SmallAPIReference } from '../../types'
+import { APIReference, Links, SmallAPIReference } from '../../types'
 
-export interface Root extends APIReference {
+export interface Single extends APIReference {
   id: string
   type: number
   beschikkingsbevoegdheid: any
@@ -50,4 +50,10 @@ interface Woonadres {
   buitenland_regio: string
   buitenland_naam: string
   buitenland_land: any
+}
+
+export interface List {
+  _links: Links
+  count: number
+  results: Pick<APIReference, '_links' | '_display' | 'naam' | 'dataset'>[]
 }

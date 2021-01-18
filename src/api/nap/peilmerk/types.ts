@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import { Geometry } from 'geojson'
-import { APIReference } from '../../types'
+import { APIReference, Links } from '../../types'
 
-export interface Root extends APIReference {
+export interface Single extends APIReference {
   peilmerkidentificatie: string
   hoogte_nap: string
   jaar: number
@@ -13,4 +13,14 @@ export interface Root extends APIReference {
   y_muurvlak: string
   rws_nummer: string
   geometrie: Geometry
+}
+
+export interface List {
+  _links: Links
+  count: number
+  results: Array<
+    Pick<APIReference, '_links' | '_display' | 'dataset'> & {
+      id: string
+    }
+  >
 }

@@ -1,0 +1,1516 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/monumenten/complexen/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/monumenten/complexen/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 107,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/b0cff642-220b-48c0-a693-01e32e04b3c3/"
+        }
+      },
+      "identificerende_sleutel_complex": "b0cff642-220b-48c0-a693-01e32e04b3c3",
+      "monumentnummer_complex": null,
+      "complexnaam": "Portugese Israelietische Synagoge",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=b0cff642-220b-48c0-a693-01e32e04b3c3"
+      },
+      "_display": "Portugese Israelietische Synagoge"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/9d278d0d-c5c0-4c8d-9f4e-081d7706b42e/"
+        }
+      },
+      "identificerende_sleutel_complex": "9d278d0d-c5c0-4c8d-9f4e-081d7706b42e",
+      "monumentnummer_complex": 518301,
+      "complexnaam": "Binnengasthuiscomplex",
+      "monumenten": {
+        "count": 10,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=9d278d0d-c5c0-4c8d-9f4e-081d7706b42e"
+      },
+      "_display": "Binnengasthuiscomplex"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/c3f2f2ca-6c0a-4059-8a96-c6ca57a277a4/"
+        }
+      },
+      "identificerende_sleutel_complex": "c3f2f2ca-6c0a-4059-8a96-c6ca57a277a4",
+      "monumentnummer_complex": 408840,
+      "complexnaam": "Houtzaagmolencomplex De Otter",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=c3f2f2ca-6c0a-4059-8a96-c6ca57a277a4"
+      },
+      "_display": "Houtzaagmolencomplex De Otter"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/498278ff-434e-4d53-a295-9709f2b8e153/"
+        }
+      },
+      "identificerende_sleutel_complex": "498278ff-434e-4d53-a295-9709f2b8e153",
+      "monumentnummer_complex": 518277,
+      "complexnaam": "Artis",
+      "monumenten": {
+        "count": 26,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=498278ff-434e-4d53-a295-9709f2b8e153"
+      },
+      "_display": "Artis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/182a9861-4052-4127-8300-6450cd75b6a5/"
+        }
+      },
+      "identificerende_sleutel_complex": "182a9861-4052-4127-8300-6450cd75b6a5",
+      "monumentnummer_complex": 518271,
+      "complexnaam": "Hortus Botanicus",
+      "monumenten": {
+        "count": 9,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=182a9861-4052-4127-8300-6450cd75b6a5"
+      },
+      "_display": "Hortus Botanicus"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/f62d7ebf-3c1a-48b6-8697-acd9e9786375/"
+        }
+      },
+      "identificerende_sleutel_complex": "f62d7ebf-3c1a-48b6-8697-acd9e9786375",
+      "monumentnummer_complex": 530420,
+      "complexnaam": "Rijksmuseumcomplex",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=f62d7ebf-3c1a-48b6-8697-acd9e9786375"
+      },
+      "_display": "Rijksmuseumcomplex"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/a57580f6-ed79-457f-a5f0-d546bfa4416a/"
+        }
+      },
+      "identificerende_sleutel_complex": "a57580f6-ed79-457f-a5f0-d546bfa4416a",
+      "monumentnummer_complex": null,
+      "complexnaam": "Oostergasfabriek",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=a57580f6-ed79-457f-a5f0-d546bfa4416a"
+      },
+      "_display": "Oostergasfabriek"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/2d691f09-7533-4fa1-985f-46a8cef57791/"
+        }
+      },
+      "identificerende_sleutel_complex": "2d691f09-7533-4fa1-985f-46a8cef57791",
+      "monumentnummer_complex": 200552,
+      "complexnaam": "Waterbouwkundig werk Amsteldijk",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=2d691f09-7533-4fa1-985f-46a8cef57791"
+      },
+      "_display": "Waterbouwkundig werk Amsteldijk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/39220f04-f751-4466-9aa5-0472b62c5829/"
+        }
+      },
+      "identificerende_sleutel_complex": "39220f04-f751-4466-9aa5-0472b62c5829",
+      "monumentnummer_complex": 200573,
+      "complexnaam": "Slotervaart en bruggen",
+      "monumenten": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=39220f04-f751-4466-9aa5-0472b62c5829"
+      },
+      "_display": "Slotervaart en bruggen"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/11aac56f-0676-4173-9697-1222868e5a57/"
+        }
+      },
+      "identificerende_sleutel_complex": "11aac56f-0676-4173-9697-1222868e5a57",
+      "monumentnummer_complex": 200912,
+      "complexnaam": "Nassaukade 112-115",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=11aac56f-0676-4173-9697-1222868e5a57"
+      },
+      "_display": "Nassaukade 112-115"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/7ad4dc6f-898c-43c8-8b6e-c473ae3aab01/"
+        }
+      },
+      "identificerende_sleutel_complex": "7ad4dc6f-898c-43c8-8b6e-c473ae3aab01",
+      "monumentnummer_complex": 200913,
+      "complexnaam": "Woningb.compl. Leliman",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=7ad4dc6f-898c-43c8-8b6e-c473ae3aab01"
+      },
+      "_display": "Woningb.compl. Leliman"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/41406eab-ca5c-4969-b4cb-671ca3da8db4/"
+        }
+      },
+      "identificerende_sleutel_complex": "41406eab-ca5c-4969-b4cb-671ca3da8db4",
+      "monumentnummer_complex": null,
+      "complexnaam": "Oud Katholieke schuilkerk Johannes en Willibrordus",
+      "monumenten": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=41406eab-ca5c-4969-b4cb-671ca3da8db4"
+      },
+      "_display": "Oud Katholieke schuilkerk Johannes en Willibrordus"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/78cd9b68-c743-4b2d-95ca-a401c5fd609a/"
+        }
+      },
+      "identificerende_sleutel_complex": "78cd9b68-c743-4b2d-95ca-a401c5fd609a",
+      "monumentnummer_complex": 200800,
+      "complexnaam": "Veemarktterrein",
+      "monumenten": {
+        "count": 14,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=78cd9b68-c743-4b2d-95ca-a401c5fd609a"
+      },
+      "_display": "Veemarktterrein"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/dba2f055-df96-4cc2-9626-cc6a5eb08b6c/"
+        }
+      },
+      "identificerende_sleutel_complex": "dba2f055-df96-4cc2-9626-cc6a5eb08b6c",
+      "monumentnummer_complex": 227001,
+      "complexnaam": "Surinameplein",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=dba2f055-df96-4cc2-9626-cc6a5eb08b6c"
+      },
+      "_display": "Surinameplein"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/b56ee226-03c0-4fab-b2cf-fcfa729b2fe7/"
+        }
+      },
+      "identificerende_sleutel_complex": "b56ee226-03c0-4fab-b2cf-fcfa729b2fe7",
+      "monumentnummer_complex": 200918,
+      "complexnaam": null,
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=b56ee226-03c0-4fab-b2cf-fcfa729b2fe7"
+      },
+      "_display": "200918"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/03ec2e54-85f2-4166-a116-c4e740134591/"
+        }
+      },
+      "identificerende_sleutel_complex": "03ec2e54-85f2-4166-a116-c4e740134591",
+      "monumentnummer_complex": null,
+      "complexnaam": "Nicolaaslyceum",
+      "monumenten": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=03ec2e54-85f2-4166-a116-c4e740134591"
+      },
+      "_display": "Nicolaaslyceum"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/c003381a-6e59-4e25-9fd3-c710d5d5e6aa/"
+        }
+      },
+      "identificerende_sleutel_complex": "c003381a-6e59-4e25-9fd3-c710d5d5e6aa",
+      "monumentnummer_complex": 223024,
+      "complexnaam": "Sint Barbara",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=c003381a-6e59-4e25-9fd3-c710d5d5e6aa"
+      },
+      "_display": "Sint Barbara"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/63eda469-a888-4f64-ace1-c4a53d9eb130/"
+        }
+      },
+      "identificerende_sleutel_complex": "63eda469-a888-4f64-ace1-c4a53d9eb130",
+      "monumentnummer_complex": 226002,
+      "complexnaam": "Keesmanblokken",
+      "monumenten": {
+        "count": 1,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=63eda469-a888-4f64-ace1-c4a53d9eb130"
+      },
+      "_display": "Keesmanblokken"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/d0171df5-35b8-46d1-9881-baafda11d12e/"
+        }
+      },
+      "identificerende_sleutel_complex": "d0171df5-35b8-46d1-9881-baafda11d12e",
+      "monumentnummer_complex": 504631,
+      "complexnaam": "Villa met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=d0171df5-35b8-46d1-9881-baafda11d12e"
+      },
+      "_display": "Villa met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/e21511c4-3187-4a55-bbe9-651de86269fe/"
+        }
+      },
+      "identificerende_sleutel_complex": "e21511c4-3187-4a55-bbe9-651de86269fe",
+      "monumentnummer_complex": 335305,
+      "complexnaam": "Betondorp Brink e.o.",
+      "monumenten": {
+        "count": 11,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=e21511c4-3187-4a55-bbe9-651de86269fe"
+      },
+      "_display": "Betondorp Brink e.o."
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/bf7c48dd-a07b-424c-aad8-434f77fb8d48/"
+        }
+      },
+      "identificerende_sleutel_complex": "bf7c48dd-a07b-424c-aad8-434f77fb8d48",
+      "monumentnummer_complex": 337499,
+      "complexnaam": "Westergasfabriek",
+      "monumenten": {
+        "count": 18,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=bf7c48dd-a07b-424c-aad8-434f77fb8d48"
+      },
+      "_display": "Westergasfabriek"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/b2aaa47b-0e18-40d1-953e-e44777e40d53/"
+        }
+      },
+      "identificerende_sleutel_complex": "b2aaa47b-0e18-40d1-953e-e44777e40d53",
+      "monumentnummer_complex": 422277,
+      "complexnaam": "Buitenplaats Frankendael",
+      "monumenten": {
+        "count": 9,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=b2aaa47b-0e18-40d1-953e-e44777e40d53"
+      },
+      "_display": "Buitenplaats Frankendael"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/e04da658-978c-4b68-89aa-81a5752f8237/"
+        }
+      },
+      "identificerende_sleutel_complex": "e04da658-978c-4b68-89aa-81a5752f8237",
+      "monumentnummer_complex": 450236,
+      "complexnaam": "Woonhuis met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=e04da658-978c-4b68-89aa-81a5752f8237"
+      },
+      "_display": "Woonhuis met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/504b9d83-ca9c-4931-87c6-3ee448091969/"
+        }
+      },
+      "identificerende_sleutel_complex": "504b9d83-ca9c-4931-87c6-3ee448091969",
+      "monumentnummer_complex": 451647,
+      "complexnaam": "Olympisch Stadion",
+      "monumenten": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=504b9d83-ca9c-4931-87c6-3ee448091969"
+      },
+      "_display": "Olympisch Stadion"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/c4cbc2b3-3509-4950-962c-985f1c7b72fb/"
+        }
+      },
+      "identificerende_sleutel_complex": "c4cbc2b3-3509-4950-962c-985f1c7b72fb",
+      "monumentnummer_complex": 491876,
+      "complexnaam": "De Zeven Landen",
+      "monumenten": {
+        "count": 7,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=c4cbc2b3-3509-4950-962c-985f1c7b72fb"
+      },
+      "_display": "De Zeven Landen"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/02471642-99c3-4415-978a-ae3292b5ad78/"
+        }
+      },
+      "identificerende_sleutel_complex": "02471642-99c3-4415-978a-ae3292b5ad78",
+      "monumentnummer_complex": 491931,
+      "complexnaam": "Zandpad - Tuingebouwcomplex",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=02471642-99c3-4415-978a-ae3292b5ad78"
+      },
+      "_display": "Zandpad - Tuingebouwcomplex"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/90ab1bcb-903a-4bc3-a5d0-a69edd4eae60/"
+        }
+      },
+      "identificerende_sleutel_complex": "90ab1bcb-903a-4bc3-a5d0-a69edd4eae60",
+      "monumentnummer_complex": 491948,
+      "complexnaam": "Villa Betty",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=90ab1bcb-903a-4bc3-a5d0-a69edd4eae60"
+      },
+      "_display": "Villa Betty"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/e5d77086-460f-4833-a295-950eefb14e53/"
+        }
+      },
+      "identificerende_sleutel_complex": "e5d77086-460f-4833-a295-950eefb14e53",
+      "monumentnummer_complex": 530812,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=e5d77086-460f-4833-a295-950eefb14e53"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/a7238cf9-961d-47b5-83a0-d0732ab59628/"
+        }
+      },
+      "identificerende_sleutel_complex": "a7238cf9-961d-47b5-83a0-d0732ab59628",
+      "monumentnummer_complex": 491981,
+      "complexnaam": "Tramcomplex Stadhouderskade 1",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=a7238cf9-961d-47b5-83a0-d0732ab59628"
+      },
+      "_display": "Tramcomplex Stadhouderskade 1"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/93318a34-b8eb-4041-8cd6-cf91aa6abcb7/"
+        }
+      },
+      "identificerende_sleutel_complex": "93318a34-b8eb-4041-8cd6-cf91aa6abcb7",
+      "monumentnummer_complex": 497972,
+      "complexnaam": "Kropholler St. Rosa, St. Rita",
+      "monumenten": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=93318a34-b8eb-4041-8cd6-cf91aa6abcb7"
+      },
+      "_display": "Kropholler St. Rosa, St. Rita"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/c451dca0-d82f-47b1-879f-37873cd5cfbe/"
+        }
+      },
+      "identificerende_sleutel_complex": "c451dca0-d82f-47b1-879f-37873cd5cfbe",
+      "monumentnummer_complex": 498622,
+      "complexnaam": "BOAS",
+      "monumenten": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=c451dca0-d82f-47b1-879f-37873cd5cfbe"
+      },
+      "_display": "BOAS"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/8c7cfd5a-c560-4a23-852a-40882fe742db/"
+        }
+      },
+      "identificerende_sleutel_complex": "8c7cfd5a-c560-4a23-852a-40882fe742db",
+      "monumentnummer_complex": 504586,
+      "complexnaam": "Villa met garage",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=8c7cfd5a-c560-4a23-852a-40882fe742db"
+      },
+      "_display": "Villa met garage"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/61fc9720-b198-4d82-a54d-679fd2f737ba/"
+        }
+      },
+      "identificerende_sleutel_complex": "61fc9720-b198-4d82-a54d-679fd2f737ba",
+      "monumentnummer_complex": 504616,
+      "complexnaam": "Villa met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=61fc9720-b198-4d82-a54d-679fd2f737ba"
+      },
+      "_display": "Villa met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/7f05b129-2af7-45b3-94d7-25073550e832/"
+        }
+      },
+      "identificerende_sleutel_complex": "7f05b129-2af7-45b3-94d7-25073550e832",
+      "monumentnummer_complex": 530813,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=7f05b129-2af7-45b3-94d7-25073550e832"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/8c413803-c15e-494e-94ee-760d882ccc16/"
+        }
+      },
+      "identificerende_sleutel_complex": "8c413803-c15e-494e-94ee-760d882ccc16",
+      "monumentnummer_complex": 530814,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=8c413803-c15e-494e-94ee-760d882ccc16"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/e485bdc5-d2ec-4ceb-8f3f-6689c3d7ba62/"
+        }
+      },
+      "identificerende_sleutel_complex": "e485bdc5-d2ec-4ceb-8f3f-6689c3d7ba62",
+      "monumentnummer_complex": 504647,
+      "complexnaam": "Amsterdams Lyceum",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=e485bdc5-d2ec-4ceb-8f3f-6689c3d7ba62"
+      },
+      "_display": "Amsterdams Lyceum"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/89b0562d-36ef-4af5-8060-6c1f92f9bc01/"
+        }
+      },
+      "identificerende_sleutel_complex": "89b0562d-36ef-4af5-8060-6c1f92f9bc01",
+      "monumentnummer_complex": 504664,
+      "complexnaam": "Tramremise Amstelveenseweg",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=89b0562d-36ef-4af5-8060-6c1f92f9bc01"
+      },
+      "_display": "Tramremise Amstelveenseweg"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/4c2bd19a-ce4f-4fe2-903d-376abd126596/"
+        }
+      },
+      "identificerende_sleutel_complex": "4c2bd19a-ce4f-4fe2-903d-376abd126596",
+      "monumentnummer_complex": 504680,
+      "complexnaam": "Kerk met pastorie en sacristie met 'leerlingkamer'",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=4c2bd19a-ce4f-4fe2-903d-376abd126596"
+      },
+      "_display": "Kerk met pastorie en sacristie met 'leerlingkamer'"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/7a53c5d7-9858-4e8f-8101-c5d9cf45c660/"
+        }
+      },
+      "identificerende_sleutel_complex": "7a53c5d7-9858-4e8f-8101-c5d9cf45c660",
+      "monumentnummer_complex": 504701,
+      "complexnaam": "Villa, boothuis met tuinhuis en garage",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=7a53c5d7-9858-4e8f-8101-c5d9cf45c660"
+      },
+      "_display": "Villa, boothuis met tuinhuis en garage"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/1d5cd1dc-efdc-4dec-99fc-73645e93d88e/"
+        }
+      },
+      "identificerende_sleutel_complex": "1d5cd1dc-efdc-4dec-99fc-73645e93d88e",
+      "monumentnummer_complex": 504733,
+      "complexnaam": "Vondelpark",
+      "monumenten": {
+        "count": 15,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=1d5cd1dc-efdc-4dec-99fc-73645e93d88e"
+      },
+      "_display": "Vondelpark"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/ceffaaa4-4350-477d-b39b-3e73a9e65c06/"
+        }
+      },
+      "identificerende_sleutel_complex": "ceffaaa4-4350-477d-b39b-3e73a9e65c06",
+      "monumentnummer_complex": 504905,
+      "complexnaam": "Woningb.compl. Amstelveensewg eo",
+      "monumenten": {
+        "count": 7,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=ceffaaa4-4350-477d-b39b-3e73a9e65c06"
+      },
+      "_display": "Woningb.compl. Amstelveensewg eo"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/85b107e4-e0d4-4e9f-88bb-989431a85b78/"
+        }
+      },
+      "identificerende_sleutel_complex": "85b107e4-e0d4-4e9f-88bb-989431a85b78",
+      "monumentnummer_complex": 505111,
+      "complexnaam": "Geschakelde woningen",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=85b107e4-e0d4-4e9f-88bb-989431a85b78"
+      },
+      "_display": "Geschakelde woningen"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/fb23bba1-c7de-483a-957f-0213fbb698ee/"
+        }
+      },
+      "identificerende_sleutel_complex": "fb23bba1-c7de-483a-957f-0213fbb698ee",
+      "monumentnummer_complex": 505161,
+      "complexnaam": "Winkelwoonhuizen",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=fb23bba1-c7de-483a-957f-0213fbb698ee"
+      },
+      "_display": "Winkelwoonhuizen"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/949910df-ca37-4943-baab-191b327305f5/"
+        }
+      },
+      "identificerende_sleutel_complex": "949910df-ca37-4943-baab-191b327305f5",
+      "monumentnummer_complex": 508377,
+      "complexnaam": "Castorplein",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=949910df-ca37-4943-baab-191b327305f5"
+      },
+      "_display": "Castorplein"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/6b925704-f533-463b-b3e6-c89194e5922c/"
+        }
+      },
+      "identificerende_sleutel_complex": "6b925704-f533-463b-b3e6-c89194e5922c",
+      "monumentnummer_complex": 508382,
+      "complexnaam": "Monnikendammerplantsoen",
+      "monumenten": {
+        "count": 7,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=6b925704-f533-463b-b3e6-c89194e5922c"
+      },
+      "_display": "Monnikendammerplantsoen"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/4ae9780b-d78f-4560-b151-b57e8238e86b/"
+        }
+      },
+      "identificerende_sleutel_complex": "4ae9780b-d78f-4560-b151-b57e8238e86b",
+      "monumentnummer_complex": 508390,
+      "complexnaam": "Purmerplein / Boeyingacomplex",
+      "monumenten": {
+        "count": 42,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=4ae9780b-d78f-4560-b151-b57e8238e86b"
+      },
+      "_display": "Purmerplein / Boeyingacomplex"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/c2da87a5-b467-4f82-b259-4a31acf7bd54/"
+        }
+      },
+      "identificerende_sleutel_complex": "c2da87a5-b467-4f82-b259-4a31acf7bd54",
+      "monumentnummer_complex": 508532,
+      "complexnaam": "Sint Augustinuskerk",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=c2da87a5-b467-4f82-b259-4a31acf7bd54"
+      },
+      "_display": "Sint Augustinuskerk"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/10ece116-b250-4d2b-ab9d-63833793f01d/"
+        }
+      },
+      "identificerende_sleutel_complex": "10ece116-b250-4d2b-ab9d-63833793f01d",
+      "monumentnummer_complex": 513943,
+      "complexnaam": "Paardentramremise",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=10ece116-b250-4d2b-ab9d-63833793f01d"
+      },
+      "_display": "Paardentramremise"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/a35c2b15-ad62-4393-94de-dd3da0fd7452/"
+        }
+      },
+      "identificerende_sleutel_complex": "a35c2b15-ad62-4393-94de-dd3da0fd7452",
+      "monumentnummer_complex": 530815,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=a35c2b15-ad62-4393-94de-dd3da0fd7452"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/1b56be15-002c-4c4a-b8d4-b3d432670180/"
+        }
+      },
+      "identificerende_sleutel_complex": "1b56be15-002c-4c4a-b8d4-b3d432670180",
+      "monumentnummer_complex": 512945,
+      "complexnaam": "Montessorischool Albrecht Dürerstr",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=1b56be15-002c-4c4a-b8d4-b3d432670180"
+      },
+      "_display": "Montessorischool Albrecht Dürerstr"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/1f9ae2c5-f391-4f90-ac73-ffca76ba790e/"
+        }
+      },
+      "identificerende_sleutel_complex": "1f9ae2c5-f391-4f90-ac73-ffca76ba790e",
+      "monumentnummer_complex": 515153,
+      "complexnaam": "Amstelrust",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=1f9ae2c5-f391-4f90-ac73-ffca76ba790e"
+      },
+      "_display": "Amstelrust"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/dc1f5252-338e-497a-90a0-98064cc23fce/"
+        }
+      },
+      "identificerende_sleutel_complex": "dc1f5252-338e-497a-90a0-98064cc23fce",
+      "monumentnummer_complex": 518263,
+      "complexnaam": "Openbare Handelsschool",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=dc1f5252-338e-497a-90a0-98064cc23fce"
+      },
+      "_display": "Openbare Handelsschool"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/a4d44c04-1dc8-4df2-b45b-d4a2fb61376b/"
+        }
+      },
+      "identificerende_sleutel_complex": "a4d44c04-1dc8-4df2-b45b-d4a2fb61376b",
+      "monumentnummer_complex": 518267,
+      "complexnaam": "Stadsvillacomplex Plantage Lepellaan 6",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=a4d44c04-1dc8-4df2-b45b-d4a2fb61376b"
+      },
+      "_display": "Stadsvillacomplex Plantage Lepellaan 6"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/624d0182-48d9-400f-b3f1-bb008e4b002d/"
+        }
+      },
+      "identificerende_sleutel_complex": "624d0182-48d9-400f-b3f1-bb008e4b002d",
+      "monumentnummer_complex": 518298,
+      "complexnaam": "De Utrecht",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=624d0182-48d9-400f-b3f1-bb008e4b002d"
+      },
+      "_display": "De Utrecht"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/8ee865e0-3411-4824-a373-f1edf38b4846/"
+        }
+      },
+      "identificerende_sleutel_complex": "8ee865e0-3411-4824-a373-f1edf38b4846",
+      "monumentnummer_complex": 518311,
+      "complexnaam": "Krasnapolsky",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=8ee865e0-3411-4824-a373-f1edf38b4846"
+      },
+      "_display": "Krasnapolsky"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/ae7b5dfa-c64d-48f8-9299-176075611db6/"
+        }
+      },
+      "identificerende_sleutel_complex": "ae7b5dfa-c64d-48f8-9299-176075611db6",
+      "monumentnummer_complex": 518315,
+      "complexnaam": "Jordaancomplex Goudsbloemstr/Lindengracht",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=ae7b5dfa-c64d-48f8-9299-176075611db6"
+      },
+      "_display": "Jordaancomplex Goudsbloemstr/Lindengracht"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/537e6789-00d2-43e0-bbf2-a38634171b34/"
+        }
+      },
+      "identificerende_sleutel_complex": "537e6789-00d2-43e0-bbf2-a38634171b34",
+      "monumentnummer_complex": 518318,
+      "complexnaam": "Bouwblok \"Vereeniging Salerno\"",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=537e6789-00d2-43e0-bbf2-a38634171b34"
+      },
+      "_display": "Bouwblok \"Vereeniging Salerno\""
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/5b3bc1b3-6786-416f-bb90-63d8c48b3cfe/"
+        }
+      },
+      "identificerende_sleutel_complex": "5b3bc1b3-6786-416f-bb90-63d8c48b3cfe",
+      "monumentnummer_complex": 523288,
+      "complexnaam": "Lloyd Complex",
+      "monumenten": {
+        "count": 6,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=5b3bc1b3-6786-416f-bb90-63d8c48b3cfe"
+      },
+      "_display": "Lloyd Complex"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/175831ca-26c0-4d00-9437-edb7dcea7f68/"
+        }
+      },
+      "identificerende_sleutel_complex": "175831ca-26c0-4d00-9437-edb7dcea7f68",
+      "monumentnummer_complex": 523295,
+      "complexnaam": "Woningb.compl. De Arbeiderswoning Berlageblokken",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=175831ca-26c0-4d00-9437-edb7dcea7f68"
+      },
+      "_display": "Woningb.compl. De Arbeiderswoning Berlageblokken"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/f4d093ba-c6d6-4ca4-a557-de75dba4c250/"
+        }
+      },
+      "identificerende_sleutel_complex": "f4d093ba-c6d6-4ca4-a557-de75dba4c250",
+      "monumentnummer_complex": 530816,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=f4d093ba-c6d6-4ca4-a557-de75dba4c250"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/0f594370-cbb4-44e6-a3c8-5e0160fe6323/"
+        }
+      },
+      "identificerende_sleutel_complex": "0f594370-cbb4-44e6-a3c8-5e0160fe6323",
+      "monumentnummer_complex": 530817,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=0f594370-cbb4-44e6-a3c8-5e0160fe6323"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/8becc39b-e433-499d-953e-4b681f194fd5/"
+        }
+      },
+      "identificerende_sleutel_complex": "8becc39b-e433-499d-953e-4b681f194fd5",
+      "monumentnummer_complex": 523302,
+      "complexnaam": "Gerardus Majella",
+      "monumenten": {
+        "count": 7,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=8becc39b-e433-499d-953e-4b681f194fd5"
+      },
+      "_display": "Gerardus Majella"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/afddbc2b-09fa-4d7a-99a1-fcdc01892340/"
+        }
+      },
+      "identificerende_sleutel_complex": "afddbc2b-09fa-4d7a-99a1-fcdc01892340",
+      "monumentnummer_complex": 524813,
+      "complexnaam": "Wilhelmina Gasthuis",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=afddbc2b-09fa-4d7a-99a1-fcdc01892340"
+      },
+      "_display": "Wilhelmina Gasthuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/8587221a-c384-4fc2-ba73-e5f3fc867e47/"
+        }
+      },
+      "identificerende_sleutel_complex": "8587221a-c384-4fc2-ba73-e5f3fc867e47",
+      "monumentnummer_complex": 524818,
+      "complexnaam": "Westelijke Tramremise",
+      "monumenten": {
+        "count": 8,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=8587221a-c384-4fc2-ba73-e5f3fc867e47"
+      },
+      "_display": "Westelijke Tramremise"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/c52f1c27-e321-4aaf-9b01-100792742dca/"
+        }
+      },
+      "identificerende_sleutel_complex": "c52f1c27-e321-4aaf-9b01-100792742dca",
+      "monumentnummer_complex": 524827,
+      "complexnaam": "Tetterode",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=c52f1c27-e321-4aaf-9b01-100792742dca"
+      },
+      "_display": "Tetterode"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/9a10542d-c59e-495d-8ada-a89bcee564cb/"
+        }
+      },
+      "identificerende_sleutel_complex": "9a10542d-c59e-495d-8ada-a89bcee564cb",
+      "monumentnummer_complex": 525062,
+      "complexnaam": "Luthers Diaconiehuis",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=9a10542d-c59e-495d-8ada-a89bcee564cb"
+      },
+      "_display": "Luthers Diaconiehuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/a931d9ad-3a3a-4894-8334-44adcf174a42/"
+        }
+      },
+      "identificerende_sleutel_complex": "a931d9ad-3a3a-4894-8334-44adcf174a42",
+      "monumentnummer_complex": 530818,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=a931d9ad-3a3a-4894-8334-44adcf174a42"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/f3227829-608b-49d8-98f1-f40f45db6d0b/"
+        }
+      },
+      "identificerende_sleutel_complex": "f3227829-608b-49d8-98f1-f40f45db6d0b",
+      "monumentnummer_complex": 530819,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=f3227829-608b-49d8-98f1-f40f45db6d0b"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/5de1ead4-02b9-4b9d-b300-f83bb3bdbd21/"
+        }
+      },
+      "identificerende_sleutel_complex": "5de1ead4-02b9-4b9d-b300-f83bb3bdbd21",
+      "monumentnummer_complex": 530820,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=5de1ead4-02b9-4b9d-b300-f83bb3bdbd21"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/6ae6d2cc-6f4a-4b0b-a29d-a997fb44cda1/"
+        }
+      },
+      "identificerende_sleutel_complex": "6ae6d2cc-6f4a-4b0b-a29d-a997fb44cda1",
+      "monumentnummer_complex": 526712,
+      "complexnaam": "Pompstation Gemeentewaterleidingen",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=6ae6d2cc-6f4a-4b0b-a29d-a997fb44cda1"
+      },
+      "_display": "Pompstation Gemeentewaterleidingen"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/a21a948e-a4ee-4637-8354-e343706df28d/"
+        }
+      },
+      "identificerende_sleutel_complex": "a21a948e-a4ee-4637-8354-e343706df28d",
+      "monumentnummer_complex": 526716,
+      "complexnaam": "Woningb.compl. Zaanhof (Walenkamp)",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=a21a948e-a4ee-4637-8354-e343706df28d"
+      },
+      "_display": "Woningb.compl. Zaanhof (Walenkamp)"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/a5af75ca-5812-4848-aeb4-2c1adbfefc55/"
+        }
+      },
+      "identificerende_sleutel_complex": "a5af75ca-5812-4848-aeb4-2c1adbfefc55",
+      "monumentnummer_complex": 526720,
+      "complexnaam": "Woningb.compl. K.P.C.. de Bazel",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=a5af75ca-5812-4848-aeb4-2c1adbfefc55"
+      },
+      "_display": "Woningb.compl. K.P.C.. de Bazel"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/89aed46a-0acc-426e-a679-26fdd2976630/"
+        }
+      },
+      "identificerende_sleutel_complex": "89aed46a-0acc-426e-a679-26fdd2976630",
+      "monumentnummer_complex": 526725,
+      "complexnaam": "Woningb.compl. Berlage en van Epen",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=89aed46a-0acc-426e-a679-26fdd2976630"
+      },
+      "_display": "Woningb.compl. Berlage en van Epen"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/bdd12196-bd76-4287-9b05-8ce5002e985c/"
+        }
+      },
+      "identificerende_sleutel_complex": "bdd12196-bd76-4287-9b05-8ce5002e985c",
+      "monumentnummer_complex": 526729,
+      "complexnaam": "Woningb.compl. Kuipers en Ingwersen",
+      "monumenten": {
+        "count": 5,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=bdd12196-bd76-4287-9b05-8ce5002e985c"
+      },
+      "_display": "Woningb.compl. Kuipers en Ingwersen"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/dbad1bc7-5997-4acd-bc83-23071b8f1573/"
+        }
+      },
+      "identificerende_sleutel_complex": "dbad1bc7-5997-4acd-bc83-23071b8f1573",
+      "monumentnummer_complex": 526735,
+      "complexnaam": "Schutsluis Haarlemmervaart",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=dbad1bc7-5997-4acd-bc83-23071b8f1573"
+      },
+      "_display": "Schutsluis Haarlemmervaart"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/6a5d3481-abcd-4b0e-b2ac-97c0eedec534/"
+        }
+      },
+      "identificerende_sleutel_complex": "6a5d3481-abcd-4b0e-b2ac-97c0eedec534",
+      "monumentnummer_complex": 524815,
+      "complexnaam": "Chirurgiegebouw",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=6a5d3481-abcd-4b0e-b2ac-97c0eedec534"
+      },
+      "_display": "Chirurgiegebouw"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/dc4339e5-1b33-4273-ae44-5cf59c3731f2/"
+        }
+      },
+      "identificerende_sleutel_complex": "dc4339e5-1b33-4273-ae44-5cf59c3731f2",
+      "monumentnummer_complex": 526941,
+      "complexnaam": "St. Elisabethgesticht",
+      "monumenten": {
+        "count": 5,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=dc4339e5-1b33-4273-ae44-5cf59c3731f2"
+      },
+      "_display": "St. Elisabethgesticht"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/a81c1ee4-df9f-47a1-9c32-d635f4e3ebee/"
+        }
+      },
+      "identificerende_sleutel_complex": "a81c1ee4-df9f-47a1-9c32-d635f4e3ebee",
+      "monumentnummer_complex": 526947,
+      "complexnaam": "Zuidergasfabriek",
+      "monumenten": {
+        "count": 9,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=a81c1ee4-df9f-47a1-9c32-d635f4e3ebee"
+      },
+      "_display": "Zuidergasfabriek"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/6a5cf07c-6d1b-4b46-a9f3-3b4cafcba2de/"
+        }
+      },
+      "identificerende_sleutel_complex": "6a5cf07c-6d1b-4b46-a9f3-3b4cafcba2de",
+      "monumentnummer_complex": 526957,
+      "complexnaam": "De Nieuwe Ooster",
+      "monumenten": {
+        "count": 24,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=6a5cf07c-6d1b-4b46-a9f3-3b4cafcba2de"
+      },
+      "_display": "De Nieuwe Ooster"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/b5d8cd1c-7eca-4835-9c69-2b0ebbb322f4/"
+        }
+      },
+      "identificerende_sleutel_complex": "b5d8cd1c-7eca-4835-9c69-2b0ebbb322f4",
+      "monumentnummer_complex": 527134,
+      "complexnaam": "Mercatorplein",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=b5d8cd1c-7eca-4835-9c69-2b0ebbb322f4"
+      },
+      "_display": "Mercatorplein"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/dc0e2de2-ed59-4d87-9602-30a3fa2023a9/"
+        }
+      },
+      "identificerende_sleutel_complex": "dc0e2de2-ed59-4d87-9602-30a3fa2023a9",
+      "monumentnummer_complex": 527767,
+      "complexnaam": "School Roelof Hartstraat",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=dc0e2de2-ed59-4d87-9602-30a3fa2023a9"
+      },
+      "_display": "School Roelof Hartstraat"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/8463497e-35a5-48ae-9e92-3070a4daa70b/"
+        }
+      },
+      "identificerende_sleutel_complex": "8463497e-35a5-48ae-9e92-3070a4daa70b",
+      "monumentnummer_complex": 527772,
+      "complexnaam": "HBS Gerrit vd Veenstraat",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=8463497e-35a5-48ae-9e92-3070a4daa70b"
+      },
+      "_display": "HBS Gerrit vd Veenstraat"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/cdb708e8-be2b-470b-818f-7f11302593fc/"
+        }
+      },
+      "identificerende_sleutel_complex": "cdb708e8-be2b-470b-818f-7f11302593fc",
+      "monumentnummer_complex": 527775,
+      "complexnaam": "Etagewoningen Minervalaan I",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=cdb708e8-be2b-470b-818f-7f11302593fc"
+      },
+      "_display": "Etagewoningen Minervalaan I"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/e4a51e18-0cd8-4530-8d44-c02035de7f41/"
+        }
+      },
+      "identificerende_sleutel_complex": "e4a51e18-0cd8-4530-8d44-c02035de7f41",
+      "monumentnummer_complex": 527778,
+      "complexnaam": "Etagewoningen Minervalaan II",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=e4a51e18-0cd8-4530-8d44-c02035de7f41"
+      },
+      "_display": "Etagewoningen Minervalaan II"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/3842ebc9-94d4-4f35-8d29-92b41c87fb47/"
+        }
+      },
+      "identificerende_sleutel_complex": "3842ebc9-94d4-4f35-8d29-92b41c87fb47",
+      "monumentnummer_complex": 527783,
+      "complexnaam": "De Kinderbrug",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=3842ebc9-94d4-4f35-8d29-92b41c87fb47"
+      },
+      "_display": "De Kinderbrug"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/acbc09a7-174e-416d-a6c9-4f43e84e5476/"
+        }
+      },
+      "identificerende_sleutel_complex": "acbc09a7-174e-416d-a6c9-4f43e84e5476",
+      "monumentnummer_complex": 527788,
+      "complexnaam": "Etagewoningen Minervalaan III",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=acbc09a7-174e-416d-a6c9-4f43e84e5476"
+      },
+      "_display": "Etagewoningen Minervalaan III"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/243cb7ed-e8d5-47ea-a5b0-504ee8f5e5be/"
+        }
+      },
+      "identificerende_sleutel_complex": "243cb7ed-e8d5-47ea-a5b0-504ee8f5e5be",
+      "monumentnummer_complex": 527791,
+      "complexnaam": "Openluchtschool Stadionkade",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=243cb7ed-e8d5-47ea-a5b0-504ee8f5e5be"
+      },
+      "_display": "Openluchtschool Stadionkade"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/52e8d0e9-ab43-4424-ab4d-d98a971f5457/"
+        }
+      },
+      "identificerende_sleutel_complex": "52e8d0e9-ab43-4424-ab4d-d98a971f5457",
+      "monumentnummer_complex": 527796,
+      "complexnaam": "Schoolgebouwcomplex P.L.Takstraat",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=52e8d0e9-ab43-4424-ab4d-d98a971f5457"
+      },
+      "_display": "Schoolgebouwcomplex P.L.Takstraat"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/1d27d01e-e18e-47c2-8d2a-47a6e5dbed8b/"
+        }
+      },
+      "identificerende_sleutel_complex": "1d27d01e-e18e-47c2-8d2a-47a6e5dbed8b",
+      "monumentnummer_complex": 527799,
+      "complexnaam": "Diamantslijperij Asscher",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=1d27d01e-e18e-47c2-8d2a-47a6e5dbed8b"
+      },
+      "_display": "Diamantslijperij Asscher"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/0ae3301b-92a0-4668-be6f-64050ba9094d/"
+        }
+      },
+      "identificerende_sleutel_complex": "0ae3301b-92a0-4668-be6f-64050ba9094d",
+      "monumentnummer_complex": 527803,
+      "complexnaam": "Coöperatiehof",
+      "monumenten": {
+        "count": 4,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=0ae3301b-92a0-4668-be6f-64050ba9094d"
+      },
+      "_display": "Coöperatiehof"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/ed7f3793-f51f-4755-a8e8-28235bdc67b2/"
+        }
+      },
+      "identificerende_sleutel_complex": "ed7f3793-f51f-4755-a8e8-28235bdc67b2",
+      "monumentnummer_complex": 527808,
+      "complexnaam": "Heineken Brouwerij",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=ed7f3793-f51f-4755-a8e8-28235bdc67b2"
+      },
+      "_display": "Heineken Brouwerij"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/56aeedb1-83fb-47cc-af9f-e944f5b29c38/"
+        }
+      },
+      "identificerende_sleutel_complex": "56aeedb1-83fb-47cc-af9f-e944f5b29c38",
+      "monumentnummer_complex": 527812,
+      "complexnaam": "Harmoniehof",
+      "monumenten": {
+        "count": 11,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=56aeedb1-83fb-47cc-af9f-e944f5b29c38"
+      },
+      "_display": "Harmoniehof"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/91efaf96-a6dc-4e75-8153-91298e1ec928/"
+        }
+      },
+      "identificerende_sleutel_complex": "91efaf96-a6dc-4e75-8153-91298e1ec928",
+      "monumentnummer_complex": 527824,
+      "complexnaam": "Luchtvaartlaboratorium",
+      "monumenten": {
+        "count": 2,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=91efaf96-a6dc-4e75-8153-91298e1ec928"
+      },
+      "_display": "Luchtvaartlaboratorium"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/3c08ffee-2529-4c87-8840-482cf0ada3b8/"
+        }
+      },
+      "identificerende_sleutel_complex": "3c08ffee-2529-4c87-8840-482cf0ada3b8",
+      "monumentnummer_complex": 528250,
+      "complexnaam": "NDSM-werf",
+      "monumenten": {
+        "count": 5,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=3c08ffee-2529-4c87-8840-482cf0ada3b8"
+      },
+      "_display": "NDSM-werf"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/ce59de3d-9ee6-4779-8b7c-525edd63f9cb/"
+        }
+      },
+      "identificerende_sleutel_complex": "ce59de3d-9ee6-4779-8b7c-525edd63f9cb",
+      "monumentnummer_complex": 528268,
+      "complexnaam": "Jeruzalem",
+      "monumenten": {
+        "count": 14,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=ce59de3d-9ee6-4779-8b7c-525edd63f9cb"
+      },
+      "_display": "Jeruzalem"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/88627c6d-342e-416f-85dc-dda14ed14840/"
+        }
+      },
+      "identificerende_sleutel_complex": "88627c6d-342e-416f-85dc-dda14ed14840",
+      "monumentnummer_complex": 528403,
+      "complexnaam": "Woningb.compl. Lutmastr/Diamantstr",
+      "monumenten": {
+        "count": 5,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=88627c6d-342e-416f-85dc-dda14ed14840"
+      },
+      "_display": "Woningb.compl. Lutmastr/Diamantstr"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/c1479724-faa5-4f0f-93dd-be67c9accafe/"
+        }
+      },
+      "identificerende_sleutel_complex": "c1479724-faa5-4f0f-93dd-be67c9accafe",
+      "monumentnummer_complex": 529823,
+      "complexnaam": "Pakhuizen Entrepotdok",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=c1479724-faa5-4f0f-93dd-be67c9accafe"
+      },
+      "_display": "Pakhuizen Entrepotdok"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/ad25acdb-769c-434b-b77c-7cb086ff55c7/"
+        }
+      },
+      "identificerende_sleutel_complex": "ad25acdb-769c-434b-b77c-7cb086ff55c7",
+      "monumentnummer_complex": 530056,
+      "complexnaam": "Begraafplaats Zorgvlied",
+      "monumenten": {
+        "count": 12,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=ad25acdb-769c-434b-b77c-7cb086ff55c7"
+      },
+      "_display": "Begraafplaats Zorgvlied"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/593e1aae-15fd-465b-ab27-303862aa4932/"
+        }
+      },
+      "identificerende_sleutel_complex": "593e1aae-15fd-465b-ab27-303862aa4932",
+      "monumentnummer_complex": 530811,
+      "complexnaam": "Pand met tuinhuis",
+      "monumenten": {
+        "count": 0,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=593e1aae-15fd-465b-ab27-303862aa4932"
+      },
+      "_display": "Pand met tuinhuis"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/monumenten/complexen/f7ea8885-21b5-43fc-ac42-ebeb4aeb6981/"
+        }
+      },
+      "identificerende_sleutel_complex": "f7ea8885-21b5-43fc-ac42-ebeb4aeb6981",
+      "monumentnummer_complex": 531067,
+      "complexnaam": "LTS Patrimonium",
+      "monumenten": {
+        "count": 3,
+        "href": "https://api.data.amsterdam.nl/monumenten/monumenten/?complex_id=f7ea8885-21b5-43fc-ac42-ebeb4aeb6981"
+      },
+      "_display": "LTS Patrimonium"
+    }
+  ]
+}

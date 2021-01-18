@@ -1,0 +1,316 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json"
+    },
+    "next": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/?format=json&page=2"
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 531911,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006110/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 1-H",
+      "landelijk_id": "0363200000006110",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006111/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 1-1",
+      "landelijk_id": "0363200000006111",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006112/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 1-2",
+      "landelijk_id": "0363200000006112",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006114/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 3-1",
+      "landelijk_id": "0363200000006114",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006115/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 3-2",
+      "landelijk_id": "0363200000006115",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006119/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 5-1",
+      "landelijk_id": "0363200000006119",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006120/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 5-2",
+      "landelijk_id": "0363200000006120",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006123/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 7-1",
+      "landelijk_id": "0363200000006123",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006124/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 7-2",
+      "landelijk_id": "0363200000006124",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006127/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 18-H",
+      "landelijk_id": "0363200000006127",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006128/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 18-2",
+      "landelijk_id": "0363200000006128",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006129/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 25",
+      "landelijk_id": "0363200000006129",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006130/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 26",
+      "landelijk_id": "0363200000006130",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006131/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 27",
+      "landelijk_id": "0363200000006131",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006132/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 28",
+      "landelijk_id": "0363200000006132",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006133/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 29",
+      "landelijk_id": "0363200000006133",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006134/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 30",
+      "landelijk_id": "0363200000006134",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006135/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 31",
+      "landelijk_id": "0363200000006135",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006136/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 32",
+      "landelijk_id": "0363200000006136",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006137/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 33",
+      "landelijk_id": "0363200000006137",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006138/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 34",
+      "landelijk_id": "0363200000006138",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006139/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 35",
+      "landelijk_id": "0363200000006139",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006140/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 36",
+      "landelijk_id": "0363200000006140",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006141/?format=json"
+        }
+      },
+      "_display": "Eerste Anjeliersdwarsstraat 37",
+      "landelijk_id": "0363200000006141",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/nummeraanduiding/0363200000006142/?format=json"
+        }
+      },
+      "_display": "Eerste Atjehstraat 1A",
+      "landelijk_id": "0363200000006142",
+      "type_adres": "Hoofdadres",
+      "vbo_status": "Verblijfsobject in gebruik",
+      "dataset": "bag"
+    }
+  ]
+}

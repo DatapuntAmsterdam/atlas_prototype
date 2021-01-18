@@ -1,0 +1,26 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/bag/v1.1/woonplaats/?format=json"
+    },
+    "next": {
+      "href": null
+    },
+    "previous": {
+      "href": null
+    }
+  },
+  "count": 1,
+  "results": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.data.amsterdam.nl/bag/v1.1/woonplaats/3594/?format=json"
+        }
+      },
+      "_display": "Amsterdam",
+      "landelijk_id": "3594",
+      "dataset": "bag"
+    }
+  ]
+}
