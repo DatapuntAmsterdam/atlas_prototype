@@ -161,7 +161,7 @@ function getAccessTokenFromParams(params: { [key: string]: string }) {
 
   // The state param must be exactly the same as the state token we
   // have saved in the session (to prevent CSRF)
-  const stateTokenValid = Boolean(params.state && params.state === stateToken)
+  const stateTokenValid = params?.state === stateToken
 
   // It is a callback when all authorization parameters are defined
   // in the params the fastest check is not to check if all
