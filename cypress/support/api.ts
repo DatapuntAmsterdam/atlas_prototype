@@ -1,96 +1,11 @@
-import {
-  ligplaats,
-  nummeraanduiding,
-  standplaats,
-  woonplaats,
-  verblijfsobject,
-  pand,
-  openbareRuimte,
-} from '../../src/api/bag'
-import { monumenten, complexen, situeringen } from '../../src/api/monumenten'
-import { object, subject, objectExpand } from '../../src/api/brk'
-import { bouwdossier } from '../../src/api/iiif-metadata'
-
-const apiHostname = `^https?://([a-z0-9]+[.])*api.data.amsterdam.nl/`
-export const constructApiURLRegex = (path: string) => new RegExp(`${apiHostname}${path}`, 'i')
-
-type ApiConfig = {
-  selector: string
-  singleFixture: any
-  listFixture?: any
-  path: string
-  fixtureId: string
-}
-
-function typeHelper<K extends PropertyKey>(obj: Record<K, ApiConfig>): Record<K, ApiConfig> {
-  return obj
-}
-
-const api = typeHelper({
-  ligplaats: {
-    selector: 'Ligplaats',
-    ...ligplaats,
-  },
-  nummeraanduiding: {
-    selector: 'Nummeraanduiding',
-    ...nummeraanduiding,
-  },
-  standplaats: {
-    selector: 'Standplaats',
-    ...standplaats,
-  },
-  woonplaats: {
-    selector: 'Woonplaats',
-    ...woonplaats,
-  },
-  verblijfsobject: {
-    selector: 'Verblijfsobject',
-    ...verblijfsobject,
-  },
-  pand: {
-    selector: 'Pand',
-    ...pand,
-  },
-  openbareRuimte: {
-    selector: 'OpenbareRuimte',
-    ...openbareRuimte,
-  },
-  monumenten: {
-    selector: 'Monumenten',
-    ...monumenten,
-  },
-  complexen: {
-    selector: 'Complexen',
-    ...complexen,
-  },
-  situeringen: {
-    selector: 'Situeringen',
-    ...situeringen,
-  },
-  object: {
-    selector: 'Object',
-    ...object,
-  },
-  objectExpand: {
-    selector: 'ObjectExpand',
-    ...objectExpand,
-  },
-  subject: {
-    selector: 'Subject',
-    ...subject,
-  },
-  bouwdossier: {
-    selector: 'Bouwdossier',
-    ...bouwdossier,
-  },
-})
+import api from '../../src/api'
 
 type Intercepts = [Cypress.HttpMethod, RegExp, object, string][]
 
 type Fixture = {
   single: string
   any: string
-  many?: string
+  list?: string
   path: string
   singleFixture?: object
   listFixture?: object
@@ -102,12 +17,22 @@ type APIFixtures = Record<keyof typeof api, Fixture>
 
 type FixtureKey = keyof typeof api
 
+const API_HOSTNAME = `^https?://([a-z0-9]+[.])*api.data.amsterdam.nl/`
+
+export const constructApiURLRegex = (path: string) => new RegExp(`${API_HOSTNAME}${path}`, 'i')
+
 export const fixtureKeys = Object.keys(api) as FixtureKey[]
 
+/**
+ * We have 3 type of selectors:
+ * single: matches exactly with the fixture ID and returns a single result fixture
+ * any: matches any ID and returns a single result fixture.
+ * list: matches everything after the url and returns a list result fixture
+ */
 export const apiFixtures = Object.entries(api).reduce<APIFixtures>((acc, [key, value]) => {
   const singleAlias = `getSingle${value.selector}`
   const anyAlias = `getAny${value.selector}`
-  const manyAlias = `getMany${value.selector}`
+  const listAlias = `getList${value.selector}`
   const intercepts: Intercepts = [
     [
       'GET',
@@ -116,7 +41,7 @@ export const apiFixtures = Object.entries(api).reduce<APIFixtures>((acc, [key, v
       singleAlias,
     ],
     ['GET', constructApiURLRegex(`${value.path}([a-z0-9])`), value.singleFixture, anyAlias],
-    ['GET', constructApiURLRegex(`${value.path}(.*)`), value.listFixture, manyAlias],
+    ['GET', constructApiURLRegex(`${value.path}(.*)`), value.listFixture, listAlias],
   ]
   return {
     ...acc,
@@ -124,7 +49,7 @@ export const apiFixtures = Object.entries(api).reduce<APIFixtures>((acc, [key, v
       intercepts,
       single: `@${singleAlias}`,
       any: `@${anyAlias}`,
-      many: value.listFixture ? `@${manyAlias}` : undefined,
+      list: value.listFixture ? `@${listAlias}` : undefined,
       path: value.path,
       singleFixture: value.singleFixture,
       listFixture: value.listFixture,

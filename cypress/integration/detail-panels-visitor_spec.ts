@@ -116,8 +116,8 @@ describe('employee permissions', () => {
 
       cy.wait(apiFixtures.pand.single)
       cy.wait(`@${customIntercepts.getMonumentByPand}`)
-      if (apiFixtures.nummeraanduiding.many) {
-        cy.wait(apiFixtures.nummeraanduiding.many)
+      if (apiFixtures.nummeraanduiding.list) {
+        cy.wait(apiFixtures.nummeraanduiding.list)
       }
 
       cy.checkListItems('../fixtures/pandVisitor.json')
@@ -152,8 +152,8 @@ describe('employee permissions', () => {
     it('5. Should show a "woonplaats"', () => {
       cy.visit('data/bag/woonplaats/id3594/?zoom=7')
       cy.wait(apiFixtures.woonplaats.single)
-      if (apiFixtures.openbareRuimte.many) {
-        cy.wait(apiFixtures.openbareRuimte.many)
+      if (apiFixtures.openbareRuimte.list) {
+        cy.wait(apiFixtures.openbareRuimte.list)
       }
 
       cy.checkListItems('../fixtures/woonplaats.json')
