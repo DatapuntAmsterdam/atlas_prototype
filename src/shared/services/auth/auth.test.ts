@@ -1,5 +1,12 @@
 import nodeCrypto from 'crypto'
 import {
+  setAuthenticationWithToken,
+  setExpiredAuthentication,
+  setInvalidAuthentication,
+  setValidAuthentication,
+  unsetAuthentication,
+} from '../../../../test/auth-driver'
+import {
   getAuthHeaders,
   getName,
   getReturnPath,
@@ -76,7 +83,7 @@ describe('The auth service', () => {
 
       describe('receiving a successful callback from the auth service', () => {
         beforeEach(() => {
-          global.setValidAuthentication()
+          setValidAuthentication()
         })
 
         it('throws an error when the state token received does not match the one saved', () => {
@@ -101,7 +108,7 @@ describe('The auth service', () => {
         })
 
         it('Deletes the sessionStorage when token is expired', () => {
-          global.setExpiredAuthentication()
+          setExpiredAuthentication()
 
           initAuth()
 
@@ -128,7 +135,7 @@ describe('The auth service', () => {
 
     describe('Retrieving the return path', () => {
       it('returns the return path after initialized with a successful callback', () => {
-        global.setValidAuthentication()
+        setValidAuthentication()
 
         const returnPath = 'http://localhost:3000/some-page'
         window.location.href = returnPath
@@ -164,21 +171,21 @@ describe('The auth service', () => {
 
     describe('getAuthHeaders', () => {
       it('returns an object without headers for invalid or missing tokens', () => {
-        global.unsetAuthentication()
+        unsetAuthentication()
 
         expect(Object.keys(getAuthHeaders())).toHaveLength(0)
 
-        global.setInvalidAuthentication()
+        setInvalidAuthentication()
 
         expect(Object.keys(getAuthHeaders())).toHaveLength(0)
 
-        global.setExpiredAuthentication()
+        setExpiredAuthentication()
 
         expect(Object.keys(getAuthHeaders())).toHaveLength(0)
       })
 
       it('returns the headers', () => {
-        global.setValidAuthentication()
+        setValidAuthentication()
 
         expect(Object.keys(getAuthHeaders())).toEqual(['Authorization'])
       })
@@ -186,26 +193,26 @@ describe('The auth service', () => {
 
     describe('getScopes', () => {
       it('returns an empty value for an missing token', () => {
-        global.unsetAuthentication()
+        unsetAuthentication()
 
         expect(getScopes()).toEqual([])
       })
 
       it('returns an empty value for an invalid token', () => {
-        global.setInvalidAuthentication()
+        setInvalidAuthentication()
 
         expect(getScopes()).toEqual([])
       })
 
       it('returns an empty value for an unparseable token', () => {
         const unparseableToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-        global.setAuthenticationWithToken(unparseableToken)
+        setAuthenticationWithToken(unparseableToken)
 
         expect(getScopes()).toEqual([])
       })
 
       it('returns the scopes', () => {
-        global.setAuthenticationWithToken(token)
+        setAuthenticationWithToken(token)
 
         expect(getScopes()).toEqual(['foo', 'bar', 'baz'])
       })
@@ -213,26 +220,26 @@ describe('The auth service', () => {
 
     describe('getName', () => {
       it('returns an empty value for an missing token', () => {
-        global.unsetAuthentication()
+        unsetAuthentication()
 
         expect(getName()).toEqual('')
       })
 
       it('returns an empty value for an invalid token', () => {
-        global.setInvalidAuthentication()
+        setInvalidAuthentication()
 
         expect(getName()).toEqual('')
       })
 
       it('returns an empty value for an unparseable token', () => {
         const unparseableToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-        global.setAuthenticationWithToken(unparseableToken)
+        setAuthenticationWithToken(unparseableToken)
 
         expect(getName()).toEqual('')
       })
 
       it('returns the name', () => {
-        global.setAuthenticationWithToken(token)
+        setAuthenticationWithToken(token)
 
         expect(getName()).toEqual('Henk')
       })
@@ -240,26 +247,26 @@ describe('The auth service', () => {
 
     describe('isAuthenticated', () => {
       it('returns false for expired token', () => {
-        global.setExpiredAuthentication()
+        setExpiredAuthentication()
 
         expect(isAuthenticated()).toEqual(false)
       })
 
       it('returns false for invalid token', () => {
-        global.setInvalidAuthentication()
+        setInvalidAuthentication()
 
         expect(isAuthenticated()).toEqual(false)
       })
 
       it('returns false for an unparseable token', () => {
         const unparseableToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-        global.setAuthenticationWithToken(unparseableToken)
+        setAuthenticationWithToken(unparseableToken)
 
         expect(isAuthenticated()).toEqual(false)
       })
 
       it('returns true for valid token', () => {
-        global.setValidAuthentication()
+        setValidAuthentication()
 
         expect(isAuthenticated()).toEqual(true)
       })
