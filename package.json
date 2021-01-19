@@ -13,6 +13,7 @@
     "clean:dirs": "rimraf ./node_modules ./coverage ./coverage-legacy ./dist ./build",
     "deploy:demo": "./scripts/deploy-demo.sh",
     "generate:sitemap": "node ./sitemap-generator/index.js",
+    "generate:api-index": "ts-node ./scripts/generate-api-index.ts",
     "lint": "npm run lint:js",
     "lint:js": "eslint --format=node_modules/eslint-formatter-pretty src cypress --ext js,jsx,ts,tsx",
     "start": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack.dev.ts",
@@ -196,7 +197,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "npm run generate:api-index || lint-staged",
       "post-merge": "./scripts/post-merge.sh"
     }
   },

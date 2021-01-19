@@ -1,7 +1,7 @@
 import joinUrl from '../../../../app/utils/joinUrl'
 import environment from '../../../../environment'
 import { fetchWithoutToken } from '../../../../shared/services/api/api'
-import { Root as Nummeraanduiding } from './types'
+import { List } from './types'
 
 /**
  * Retrieve nummeraanduiding
@@ -15,7 +15,7 @@ import { Root as Nummeraanduiding } from './types'
 export const getNummeraanduidingByAddress = (
   queryParams: string,
   receiveFields?: string,
-): Promise<Nummeraanduiding | null> => {
+): Promise<List | null> => {
   const paramsString = queryParams.substr(queryParams.indexOf('?'))
   const searchParams = new URLSearchParams(paramsString)
 
