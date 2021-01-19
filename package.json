@@ -197,7 +197,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "git diff src/api | grep -e '--' >/dev/null && npm run generate:api-index || lint-staged",
+      "pre-commit": "git diff src/api | grep -e '--' >/dev/null && npm run generate:api-index && lint-staged",
       "post-merge": "./scripts/post-merge.sh"
     }
   },

@@ -41,7 +41,6 @@ import * as reclamebelasting from './vsd/reclamebelasting'
 import * as vastgoed from './vsd/vastgoed'
 
 type ApiConfig = {
-  selector: string
   singleFixture: any
   listFixture?: any
   path: string | null
@@ -53,169 +52,47 @@ function typeHelper<K extends PropertyKey>(obj: Record<K, ApiConfig>): Record<K,
 }
 
 const api = typeHelper({
-  nummeraanduidingV1: {
-    selector: 'nummeraanduidingV1',
-    ...nummeraanduidingV1,
-  },
-  ligplaats: {
-    selector: 'ligplaats',
-    ...ligplaats,
-  },
-  nummeraanduiding: {
-    selector: 'nummeraanduiding',
-    ...nummeraanduiding,
-  },
-  openbareRuimte: {
-    selector: 'openbareRuimte',
-    ...openbareRuimte,
-  },
-  pand: {
-    selector: 'pand',
-    ...pand,
-  },
-  standplaats: {
-    selector: 'standplaats',
-    ...standplaats,
-  },
-  verblijfsobject: {
-    selector: 'verblijfsobject',
-    ...verblijfsobject,
-  },
-  woonplaats: {
-    selector: 'woonplaats',
-    ...woonplaats,
-  },
-  object: {
-    selector: 'object',
-    ...object,
-  },
-  objectExpand: {
-    selector: 'objectExpand',
-    ...objectExpand,
-  },
-  subject: {
-    selector: 'subject',
-    ...subject,
-  },
-  datasets: {
-    selector: 'datasets',
-    ...datasets,
-  },
-  openapi: {
-    selector: 'openapi',
-    ...openapi,
-  },
-  gevrijwaardgebied: {
-    selector: 'gevrijwaardgebied',
-    ...gevrijwaardgebied,
-  },
-  inslagen: {
-    selector: 'inslagen',
-    ...inslagen,
-  },
-  uitgevoerdonderzoek: {
-    selector: 'uitgevoerdonderzoek',
-    ...uitgevoerdonderzoek,
-  },
-  verdachtgebied: {
-    selector: 'verdachtgebied',
-    ...verdachtgebied,
-  },
-  fietspaaltjes: {
-    selector: 'fietspaaltjes',
-    ...fietspaaltjes,
-  },
-  bouwblok: {
-    selector: 'bouwblok',
-    ...bouwblok,
-  },
-  buurtcombinatie: {
-    selector: 'buurtcombinatie',
-    ...buurtcombinatie,
-  },
-  gebiedsgerichtwerken: {
-    selector: 'gebiedsgerichtwerken',
-    ...gebiedsgerichtwerken,
-  },
-  grootstedelijkgebied: {
-    selector: 'grootstedelijkgebied',
-    ...grootstedelijkgebied,
-  },
-  stadsdeel: {
-    selector: 'stadsdeel',
-    ...stadsdeel,
-  },
-  unesco: {
-    selector: 'unesco',
-    ...unesco,
-  },
-  projecten: {
-    selector: 'projecten',
-    ...projecten,
-  },
-  bouwdossier: {
-    selector: 'bouwdossier',
-    ...bouwdossier,
-  },
-  meetbout: {
-    selector: 'meetbout',
-    ...meetbout,
-  },
-  meting: {
-    selector: 'meting',
-    ...meting,
-  },
-  metadata: {
-    selector: 'metadata',
-    ...metadata,
-  },
-  complexen: {
-    selector: 'complexen',
-    ...complexen,
-  },
-  monumenten: {
-    selector: 'monumenten',
-    ...monumenten,
-  },
-  situeringen: {
-    selector: 'situeringen',
-    ...situeringen,
-  },
-  peilmerk: {
-    selector: 'peilmerk',
-    ...peilmerk,
-  },
-  thumbnail: {
-    selector: 'thumbnail',
-    ...thumbnail,
-  },
-  bekendmakingen: {
-    selector: 'bekendmakingen',
-    ...bekendmakingen,
-  },
-  biz: {
-    selector: 'biz',
-    ...biz,
-  },
-  evenementen: {
-    selector: 'evenementen',
-    ...evenementen,
-  },
-  oplaadpunten: {
-    selector: 'oplaadpunten',
-    ...oplaadpunten,
-  },
-  parkeerzonesUitzondering: {
-    selector: 'parkeerzonesUitzondering',
-    ...parkeerzonesUitzondering,
-  },
-  reclamebelasting: {
-    selector: 'reclamebelasting',
-    ...reclamebelasting,
-  },
-  vastgoed: {
-    selector: 'vastgoed',
-    ...vastgoed,
-  },
+  nummeraanduidingV1,
+  ligplaats,
+  nummeraanduiding,
+  openbareRuimte,
+  pand,
+  standplaats,
+  verblijfsobject,
+  woonplaats,
+  object,
+  objectExpand,
+  subject,
+  datasets,
+  openapi,
+  gevrijwaardgebied,
+  inslagen,
+  uitgevoerdonderzoek,
+  verdachtgebied,
+  fietspaaltjes,
+  bouwblok,
+  buurtcombinatie,
+  gebiedsgerichtwerken,
+  grootstedelijkgebied,
+  stadsdeel,
+  unesco,
+  projecten,
+  bouwdossier,
+  meetbout,
+  meting,
+  metadata,
+  complexen,
+  monumenten,
+  situeringen,
+  peilmerk,
+  thumbnail,
+  bekendmakingen,
+  biz,
+  evenementen,
+  oplaadpunten,
+  parkeerzonesUitzondering,
+  reclamebelasting,
+  vastgoed,
 })
+
 export default api
