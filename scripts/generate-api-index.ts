@@ -16,14 +16,16 @@ type DirectoryResult = {
 const API_PATH = './src/api/'
 const FILE = `${API_PATH}index.ts`
 
-function camelize(str?: string) {
-  return str
-    ? str
-        .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
-          return index === 0 ? word.toLowerCase() : word.toUpperCase()
-        })
-        .replace(/\s+/g, '')
-    : null
+function camelize(input?: string) {
+  if (!input) {
+    return null
+  }
+
+  return input
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) =>
+      index === 0 ? word.toLowerCase() : word.toUpperCase(),
+    )
+    .replace(/\s+/g, '')
 }
 
 function getFiles(path: string): Array<DirectoryResult | FileResult> {
