@@ -94,5 +94,4 @@ const api = typeHelper({
   reclamebelasting,
   vastgoed,
 })
-
 export default api

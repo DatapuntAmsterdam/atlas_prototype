@@ -1,6 +1,6 @@
 import fetch from 'jest-fetch-mock'
-import datasetResponse from './index'
-import openApi from '../openapi'
+import { singleFixture as datasetResponse } from './index'
+import { singleFixture as openApi } from '../openapi'
 import getDatasetData from './getDatasetData'
 
 describe('getDatasetData', () => {
