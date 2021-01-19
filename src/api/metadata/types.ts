@@ -1,7 +1,7 @@
 export interface Metadata {
   id: string
   title: string
-  group: number
+  group: number | string
   /* eslint-disable camelcase */
   update_frequency: string
   data_modified_date: string

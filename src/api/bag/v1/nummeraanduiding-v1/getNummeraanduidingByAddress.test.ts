@@ -2,7 +2,7 @@ import { mocked } from 'ts-jest/utils'
 import joinUrl from '../../../../app/utils/joinUrl'
 import environment from '../../../../environment'
 import { fetchWithoutToken } from '../../../../shared/services/api/api'
-import nummeraanduidingFixture, { verblijfsobjectFieldFixture } from './fixture'
+import { listFixture, verblijfsobjectFieldFixture } from './index'
 
 import { getNummeraanduidingByAddress } from './getNummeraanduidingByAddress'
 
@@ -26,13 +26,11 @@ describe('getNummeraanduidingByAddress', () => {
   })
 
   it('makes a request and returns the response', async () => {
-    mockedFetchWithoutToken.mockReturnValueOnce(Promise.resolve(nummeraanduidingFixture))
+    mockedFetchWithoutToken.mockReturnValueOnce(Promise.resolve(listFixture))
 
     const queryParams = '?postcode=1016XX&huisnummer=0001'
 
-    await expect(getNummeraanduidingByAddress(queryParams)).resolves.toEqual(
-      nummeraanduidingFixture,
-    )
+    await expect(getNummeraanduidingByAddress(queryParams)).resolves.toEqual(listFixture)
 
     expect(mockedFetchWithoutToken).toHaveBeenCalledWith(
       expect.stringContaining(joinUrl([environment.API_ROOT, 'v1/bag/nummeraanduiding'])),

@@ -1,45 +1,23 @@
 {
   "_links": {
     "self": {
-      "href": "https://acc.api.data.amsterdam.nl/meetbouten/meting/?meetbout=10481371&page_size=10"
-    },
-    "next": { "href": null },
-    "previous": { "href": null }
-  },
-  "count": 3,
-  "results": [
-    {
-      "_links": { "self": { "href": "https://acc.api.data.amsterdam.nl/meetbouten/meting/3361/" } },
-      "_display": "3361",
-      "id": "3361",
-      "datum": "2001-12-04",
-      "zakking": "0.0000000000000",
-      "hoogte_nap": "2.4482",
-      "zakkingssnelheid": "0.0000000000000",
-      "zakking_cumulatief": "0.0000000000000",
-      "dataset": "meetbouten"
-    },
-    {
-      "_links": { "self": { "href": "https://acc.api.data.amsterdam.nl/meetbouten/meting/3362/" } },
-      "_display": "3362",
-      "id": "3362",
-      "datum": "2003-12-01",
-      "zakking": "1.9000000000000",
-      "hoogte_nap": "2.4463",
-      "zakkingssnelheid": "1.0000000000000",
-      "zakking_cumulatief": "1.9000000000000",
-      "dataset": "meetbouten"
-    },
-    {
-      "_links": { "self": { "href": "https://acc.api.data.amsterdam.nl/meetbouten/meting/3363/" } },
-      "_display": "3363",
-      "id": "3363",
-      "datum": "2005-04-11",
-      "zakking": "2.1000000000000",
-      "hoogte_nap": "2.4442",
-      "zakkingssnelheid": "1.2000000000000",
-      "zakking_cumulatief": "4.0000000000000",
-      "dataset": "meetbouten"
+      "href": "https://api.data.amsterdam.nl/meetbouten/meting/3361/?format=json"
     }
-  ]
+  },
+  "_display": "3361",
+  "metingidentificatie": "3361",
+  "datum": "2001-12-04",
+  "type": "nulmeting",
+  "hoogte_nap": "2.4482",
+  "zakking": "0.0000000000000",
+  "meetbout": "https://api.data.amsterdam.nl/meetbouten/meetbout/10481371/?format=json",
+  "zakkingssnelheid": "0.0000000000000",
+  "zakking_cumulatief": "0.0000000000000",
+  "onderneming": "Fugro",
+  "aantal_dagen": null,
+  "referentiepunt": {
+    "count": 1,
+    "href": "https://api.data.amsterdam.nl/meetbouten/referentiepunt/?format=json?metingen__id=3361"
+  },
+  "dataset": "meetbouten"
 }

@@ -1,4 +1,8 @@
-import fixture from './meting.json'
-import { Root as MeetboutMeting } from './types'
+import fixtureSingle from './meting.json'
+import fixtureList from './meting-list.json'
+import { List, Single } from './types'
 
-export default fixture as MeetboutMeting
+export const singleFixture = fixtureSingle as Single
+export const listFixture = fixtureList as List
+export const path = 'meetbouten/meting/'
+export const fixtureId = '10381459'

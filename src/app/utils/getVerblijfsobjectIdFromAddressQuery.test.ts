@@ -1,6 +1,6 @@
 import { mocked } from 'ts-jest/utils'
 import getVerblijfsobjectIdFromAddressQuery from './getVerblijfsobjectIdFromAddressQuery'
-import { getNummeraanduidingByAddress } from '../../api/bag/v1/nummeraanduiding'
+import { getNummeraanduidingByAddress } from '../../api/bag/v1/nummeraanduiding-v1'
 
 jest.mock('../../shared/services/query-string-parser/query-string-parser')
 jest.mock('../../shared/services/api/api')
