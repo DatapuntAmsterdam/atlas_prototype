@@ -1,3 +1,4 @@
+import { setValidAuthentication } from '../../../../test/auth-driver'
 import typeaheadFixture from '../../../api/typeahead/typeahead.json'
 import typeaheadAuthFixture from '../../../api/typeahead/typeahead_auth.json'
 import autoSuggestSearch, { sortResponse, SORT_ORDER } from './auto-suggest'
@@ -10,7 +11,7 @@ describe('The auto-suggest service', () => {
   })
 
   it('returns authenticated data', async () => {
-    global.setValidAuthentication()
+    setValidAuthentication()
 
     const suggestions = await autoSuggestSearch({ query: 'linnae' })
 
