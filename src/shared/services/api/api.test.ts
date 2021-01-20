@@ -1,4 +1,4 @@
-import { server, rest } from '../../../../test/server'
+import { server, rest, MockedRequest } from '../../../../test/server'
 import * as auth from '../auth/auth'
 import { createUrlWithToken, fetchProxy, fetchWithToken } from './api'
 
@@ -10,12 +10,10 @@ const mockResponse = {
   data: 'hello',
 }
 
-let request: any
+let request: MockedRequest
 
 describe('Api service', () => {
   beforeEach(() => {
-    request = null
-
     server.use(
       rest.get(/localhost/, async (req, res, ctx) => {
         request = req
