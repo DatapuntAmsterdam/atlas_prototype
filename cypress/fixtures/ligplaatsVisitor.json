@@ -5,11 +5,11 @@
     {
       "subheading": "",
       "items": {
-        "Naam openbare ruimte": "Zwanenburgwal",
-        "Huisnummer": "44",
+        "Naam openbare ruimte": "Eerste Anjeliersdwarsstraat",
+        "Huisnummer": "1",
         "Huisletter": "",
-        "Huisnummertoevoeging": "",
-        "Postcode": "1011JD",
+        "Huisnummertoevoeging": "H",
+        "Postcode": "1015NR",
         "Woonplaats": "Amsterdam",
         "Type adres": "Hoofdadres"
       }
@@ -18,9 +18,10 @@
       "subheading": "Ligt in",
       "items": {
         "Stadsdeel": "Centrum (A)",
-        "Wijk": "Nieuwmarkt/Lastage (04)",
-        "Buurt": "Zuiderkerkbuurt (A04h)",
-        "Gebiedsgerichtwerken-gebied": "Centrum-Oost (DX02)"
+        "Wijk": "Jordaan (06)",
+        "Buurt": "Anjeliersbuurt Zuid (A06l)",
+        "Gebiedsgerichtwerken-gebied": "Centrum-West (DX01)",
+        "Bouwblok": "YJ29"
       }
     },
     {

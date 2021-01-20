@@ -1,9 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-// import fetch from 'jest-fetch-mock'
 import withMapContext from '../../../utils/withMapContext'
 import DetailPanel from './DetailPanel'
-// import stadsdeelResponse from '../../../../api/gebieden/stadsdeel/fixture'
-// import environment from '../../../../environment'
 import { routing } from '../../../routes'
 
 const pushMock = jest.fn()
@@ -26,10 +23,6 @@ jest.mock('react-router-dom', () => ({
 // tests need to be (re)written for this (quite complex) component
 describe.skip('DetailPanel', () => {
   it('should navigate back to geoSearch page, without pano parameter, when closing the panel', async () => {
-    // fetch.mockIf(`${environment.API_ROOT}gebieden/stadsdeel/124/`, () =>
-    //   Promise.resolve(JSON.stringify(stadsdeelResponse)),
-    // )
-
     render(withMapContext(<DetailPanel />))
 
     const button = await screen.findByTitle('Sluit')

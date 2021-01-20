@@ -192,7 +192,11 @@ const App: FunctionComponent = () => {
             </SkipNavigationLink>
             {!embedMode && (
               <Header
-                {...{ homePage, hasMaxWidth, printMode, embedPreviewMode, printOrEmbedMode }}
+                homePage={homePage}
+                hasMaxWidth={hasMaxWidth}
+                printMode={printMode}
+                embedPreviewMode={embedPreviewMode}
+                printOrEmbedMode={printOrEmbedMode}
               />
             )}
             <AppBody

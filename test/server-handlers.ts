@@ -34,7 +34,7 @@ const handlers = [
   }),
 
   rest.get(dcatDatasetFiltersUrl, async (req, res, ctx) => {
-    const datasetFiltersFixture = require('../src/api/dcatd/openapi').default
+    const datasetFiltersFixture = require('../src/api/dcatd/openapi').singleFixture
 
     return res(ctx.json(datasetFiltersFixture))
   }),

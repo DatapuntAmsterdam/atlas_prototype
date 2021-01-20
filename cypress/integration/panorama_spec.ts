@@ -103,7 +103,7 @@ describe('panorama module', () => {
     it('should remember the state when closing the pano, and update to search results when clicked in map', () => {
       const panoUrl =
         '/data/panorama/TMX7316010203-001675_pano_0000_005373/?center=52.366303%2C4.8835141&detail-ref=0363300000004153%2Cbag%2Copenbareruimte&heading=-33.99999999999992&lagen=pano-pano2016bi%3A1%7Cpano-pano2017bi%3A1%7Cpano-pano2018bi%3A1%7Cpano-pano2019bi%3A1%7Cpano-pano2020bi%3A1&locatie=52.3663030317001%2C4.88351414921202&reference=03630000004153%2Cbag%2Copenbareruimte'
-      let newUrl
+      let newUrl: string
 
       cy.defineGeoSearchRoutes()
       cy.intercept('**/bag/v1.1/openbareruimte/*').as('getOpenbareRuimte')
@@ -126,7 +126,7 @@ describe('panorama module', () => {
       cy.wait('@getResults')
 
       let largestButtonSize = 0
-      let largestButton
+      let largestButton: JQuery<HTMLElement>
       cy.get('.qa-hotspot-rotation')
         .each((button) => {
           // get largest (e.g. closest by) navigation button
@@ -140,7 +140,7 @@ describe('panorama module', () => {
             })
         })
         .then(() => {
-          largestButton.click()
+          largestButton.trigger('click')
         })
 
       cy.wait('@getResults')

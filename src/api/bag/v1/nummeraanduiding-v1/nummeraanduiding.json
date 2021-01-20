@@ -1,0 +1,34 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/v1/bag/nummeraanduiding/0363200000006110/?_format=json",
+      "title": "0363200000006110"
+    }
+  },
+  "schema": "https://schemas.data.amsterdam.nl/datasets/bag/bag#nummeraanduiding",
+  "id": "0363200000006110",
+  "bronId": null,
+  "bron": null,
+  "type": "01",
+  "status": "Naamgeving uitgegeven",
+  "postcode": "1015NR",
+  "ligplaatsId": null,
+  "ligplaats": null,
+  "typeAdres": "Hoofdadres",
+  "vervallen": null,
+  "huisletter": "",
+  "huisnummer": 1,
+  "landelijkId": "0363200000006110",
+  "standplaatsId": null,
+  "standplaats": null,
+  "dateModified": "2021-01-19T00:37:47.461932",
+  "documentNummer": "GV00000402",
+  "openbareRuimteId": "0363300000002529",
+  "openbareRuimte": "https://api.data.amsterdam.nl/v1/bag/openbareruimte/0363300000002529/?_format=json",
+  "beginGeldigheid": "1005-01-01",
+  "documentMutatie": "1005-01-01",
+  "eindeGeldigheid": null,
+  "verblijfsobjectId": "0363010000543292",
+  "verblijfsobject": "https://api.data.amsterdam.nl/v1/bag/verblijfsobject/0363010000543292/?_format=json",
+  "huisnummerToevoeging": "H"
+}

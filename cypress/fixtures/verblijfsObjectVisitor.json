@@ -1,15 +1,15 @@
 {
   "panelType": "Adres",
-  "panelHeading": "Nes 98",
+  "panelHeading": "Herengracht 502",
   "definitionLists": [
     {
       "subheading": "",
       "items": {
-        "Naam openbare ruimte": "Nes",
-        "Huisnummer": "98",
+        "Naam openbare ruimte": "Eerste Anjeliersdwarsstraat",
+        "Huisnummer": "1",
         "Huisletter": "",
-        "Huisnummertoevoeging": "",
-        "Postcode": "1012KE",
+        "Huisnummertoevoeging": "H",
+        "Postcode": "1015NR",
         "Woonplaats": "Amsterdam",
         "Type adres": "Hoofdadres"
       }
@@ -18,43 +18,43 @@
       "subheading": "Ligt in",
       "items": {
         "Stadsdeel": "Centrum (A)",
-        "Wijk": "Burgwallen-Oude Zijde (00)",
-        "Buurt": "Nes e.o. (A00d)",
+        "Wijk": "Jordaan (06)",
+        "Buurt": "Anjeliersbuurt Zuid (A06l)",
         "Gebiedsgerichtwerken-gebied": "Centrum-West (DX01)",
-        "Bouwblok": "YA35"
+        "Bouwblok": "YJ29"
       }
     },
     {
       "subheading": "Verblijfsobject",
       "items": {
-        "Gebruiksdoel": "woonfunctie",
+        "Gebruiksdoel": "woonfunctie, kantoorfunctie",
         "Gebruiksdoel woonfunctie": "",
         "Gebruiksdoel gezondheidszorgfunctie": "",
         "Aantal eenheden complex": "",
         "Status": "Verblijfsobject in gebruik",
         "Indicatie geconstateerd": "Nee",
         "Aanduiding in onderzoek": "Nee",
-        "Oppervlakte": "129 m²",
-        "Aantal kamers": "3",
+        "Oppervlakte": "1.526 m²",
+        "Aantal kamers": "6",
         "Verdieping toegang": "0",
-        "Toegang": "",
-        "Aantal bouwlagen": "3",
-        "Hoogste bouwlaag": "",
-        "Laagste bouwlaag": "",
-        "Reden opvoer": "",
-        "Eigendomsverhouding": "Huur",
-        "Coördinaten": "121370.00, 487047.00 (52.3702714, 4.8933988)"
+        "Toegang": "Begane grond",
+        "Aantal bouwlagen": "6",
+        "Hoogste bouwlaag": "4",
+        "Laagste bouwlaag": "-1",
+        "Reden opvoer": "Correctie opvoer",
+        "Eigendomsverhouding": "",
+        "Coördinaten": "121369.00, 486445.00 (52.3648610, 4.8934443)"
       }
     }
   ],
   "linkLists": [
     {
       "subheading": "Adressen",
-      "items": ["Nes 98"]
+      "items": ["Eerste Anjeliersdwarsstraat 1-H"]
     },
     {
       "subheading": "Panden",
-      "items": ["0363100012168526"]
+      "items": ["0363100012061164"]
     },
     {
       "subheading": "Vestigingen",
@@ -62,13 +62,9 @@
     },
     {
       "subheading": "Kadastrale objecten",
-      "items": ["ASD05 G 08575 A 0001", "ASD05 G 08575 A 0002"]
+      "items": ["ACD00 A 00003 G 0000"]
     },
-    {"subheading": "Monumenten",
-      "items": ["Rokin 85 H"]
-    },
-    {"subheading": "Bouw- en omgevingsdossiers",
-      "items": ["SA76078 2003 verbouwing"]
-    }
+    { "subheading": "Monumenten", "items": ["Ambtswoning van de burgemeester"] },
+    { "subheading": "Bouw- en omgevingsdossiers", "items": ["SA3 2003 verbouwing"] }
   ]
 }

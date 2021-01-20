@@ -1,6 +1,6 @@
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import { fetchWithToken } from '../../../shared/services/api/api'
+import { fetchProxy } from '../../../shared/services/api/api'
 import { DcatDataset } from './types'
 
 /**
@@ -10,5 +10,5 @@ import { DcatDataset } from './types'
  */
 // eslint-disable-next-line import/prefer-default-export
 export async function getDatasetById(id: string) {
-  return fetchWithToken<DcatDataset>(joinUrl([environment.API_ROOT, 'dcatd/datasets', id]))
+  return fetchProxy<DcatDataset>(joinUrl([environment.API_ROOT, 'dcatd/datasets', id]))
 }

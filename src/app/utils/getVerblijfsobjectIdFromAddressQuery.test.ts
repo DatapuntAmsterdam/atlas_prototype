@@ -1,11 +1,11 @@
 import { mocked } from 'ts-jest/utils'
 import getVerblijfsobjectIdFromAddressQuery from './getVerblijfsobjectIdFromAddressQuery'
-import { getNummeraanduidingByAddress } from '../../api/bag/v1/nummeraanduiding'
+import { getNummeraanduidingByAddress } from '../../api/bag/v1/nummeraanduiding-v1'
 
 jest.mock('../../shared/services/query-string-parser/query-string-parser')
 jest.mock('../../shared/services/api/api')
-jest.mock('../../api/bag/v1/nummeraanduiding', () => ({
-  ...(jest.requireActual('../../api/bag/v1/nummeraanduiding') as any),
+jest.mock('../../api/bag/v1/nummeraanduiding-v1', () => ({
+  ...(jest.requireActual('../../api/bag/v1/nummeraanduiding-v1') as any),
   getNummeraanduidingByAddress: jest.fn(),
 }))
 
@@ -29,6 +29,11 @@ describe('getVerblijfsobjectIdFromAddressQuery', () => {
     const responseWithMoreThanOneResult = {
       page: { totalElements: 2, number: 1, size: 20, totalPages: 1 },
       _embedded: { nummeraanduiding: [] },
+      _links: {
+        self: {
+          href: '',
+        },
+      },
     }
     mockedGetNummeraanduidingByAddress.mockReturnValueOnce(
       Promise.resolve(responseWithMoreThanOneResult),
@@ -39,6 +44,11 @@ describe('getVerblijfsobjectIdFromAddressQuery', () => {
     const responseWithZeroResults = {
       page: { totalElements: 0, number: 1, size: 20, totalPages: 1 },
       _embedded: { nummeraanduiding: [] },
+      _links: {
+        self: {
+          href: '',
+        },
+      },
     }
     mockedGetNummeraanduidingByAddress.mockReturnValueOnce(Promise.resolve(responseWithZeroResults))
 
@@ -50,6 +60,11 @@ describe('getVerblijfsobjectIdFromAddressQuery', () => {
     const response = {
       page: { totalElements: 1, number: 1, size: 20, totalPages: 1 },
       _embedded: { nummeraanduiding: [{ verblijfsobjectId }] },
+      _links: {
+        self: {
+          href: '',
+        },
+      },
     }
     mockedGetNummeraanduidingByAddress.mockReturnValueOnce(Promise.resolve(response))
 

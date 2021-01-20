@@ -21,7 +21,7 @@ import {
   meetboutTable,
 } from './normalize'
 
-import meetbouwMetingFixture from '../../../api/meetbouten/meting'
+import { listFixture as meetbouwMetingFixture } from '../../../api/meetbouten/meting'
 
 jest.mock('../../../app/utils/formatDate')
 jest.mock('../../../shared/services/api/api')
