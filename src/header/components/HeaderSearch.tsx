@@ -95,20 +95,15 @@ const HeaderSearch: FunctionComponent = () => {
       if (selectedElement) {
         document.querySelector<HTMLAnchorElement>(`.${ACTIVE_ITEM_CLASS}`)?.click()
       } else {
-        const queryString = {
-          term: inputValue.trim(),
-        }
-        const query = new URLSearchParams(
-          Object.entries(queryString).reduce(
-            (acc, [key, value]) => (value ? { ...acc, [key]: value } : acc),
-            {},
-          ),
-        )
         const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
           ({ type: configType }) => searchBarFilterValue === configType,
         )
+
         if (actionType) {
-          history.push({ pathname: actionType.path, search: query ? `?${query}` : '' })
+          history.push({
+            pathname: actionType.path,
+            search: new URLSearchParams({ term: inputValue.trim() }).toString(),
+          })
         }
       }
 
