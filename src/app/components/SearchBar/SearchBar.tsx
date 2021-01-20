@@ -8,8 +8,8 @@ import {
   showAboveBackDrop,
   styles,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent, InputHTMLAttributes } from 'react'
-import styled from 'styled-components'
+import { FunctionComponent, InputHTMLAttributes, useState, useCallback } from 'react'
+import styled, { css } from 'styled-components'
 import { IDS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
@@ -20,7 +20,13 @@ const Z_INDEX_OFFSET = 2 // Set a custom offset
 const StyledSearchBarToggle = styled(SearchBarToggle)`
   z-index: 23;
   position: absolute;
-  left: 0;
+
+  ${({ searchIsVisible }: { searchIsVisible: boolean }) =>
+    searchIsVisible &&
+    css`
+      left: 0;
+    `}
+
   right: 0;
   top: 0;
 
@@ -72,6 +78,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
   setSearchBarFilterValue,
   searchBarFilterValue,
 }) => {
+  const [searchIsVisible, setSearchVisible] = useState(false)
   const searchBarProps = {
     onBlur,
     onFocus,
@@ -89,6 +96,10 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
     id: IDS.searchbar,
     'data-test': 'search-input',
     placeholder: placeHolder,
+  }
+
+  const toggleWidth = (isOpen: boolean): void => {
+    setSearchVisible(isOpen)
   }
 
   return (
@@ -125,8 +136,10 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
         searchBarProps={searchBarProps}
         aria-haspopup="true"
         aria-expanded={expanded}
+        searchIsVisible={searchIsVisible}
         hasBackDrop
         label={placeHolder}
+        onOpen={toggleWidth}
       >
         {children}
       </StyledSearchBarToggle>
