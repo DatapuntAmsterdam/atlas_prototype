@@ -1,8 +1,52 @@
-import { HEADER, HEADER_MENU, HOMEPAGE } from '../support/selectors'
+import { HEADER, HEADER_MENU, HOMEPAGE, DATA_SEARCH } from '../support/selectors'
 
 describe('Homepage module', () => {
   const sizes: Cypress.ViewportPreset[] = ['iphone-x', 'ipad-2', 'macbook-15']
   sizes.forEach((size) => {
+    describe(`Header navigation ${size}`, () => {
+      beforeEach(() => {
+        cy.viewport(size)
+        cy.visit('/')
+      })
+
+      it('Has the right link text', () => {
+        cy.get(HEADER.root).should('be.visible')
+        cy.get(HEADER.logoAmsterdamTitle).should('contain', 'Data en informatie').and('be.visible')
+        cy.get(HEADER.headerTitle).should('contain', 'Data en informatie').and('be.visible')
+        cy.get(HEADER_MENU.rootDefault).should('exist')
+
+        if (size === 'macbook-15') {
+          cy.get(HEADER.logoAmsterdamTall).should('be.visible')
+        } else {
+          cy.get(HEADER.logoAmsterdamShort).should('be.visible')
+        }
+
+        if (size === 'iphone-x') {
+          cy.get(HOMEPAGE.buttonSearchMobile).should('be.visible').click()
+          cy.get(DATA_SEARCH.input).should('be.visible')
+          cy.get(HOMEPAGE.buttonSearchMobileClose).click()
+        } else {
+          cy.get(DATA_SEARCH.input).should('be.visible')
+          cy.get(HOMEPAGE.buttonSearch).should('be.visible')
+        }
+      })
+
+      it('has clickable links', () => {
+        // assert that links in the header are clickable and will load the homepage
+        cy.get(`${HEADER.root} h1 > a`).each((element: JQuery<HTMLElement>, index: number) => {
+          cy.visit('/datasets/zoek/')
+
+          cy.get(HEADER.root).should('be.visible')
+
+          cy.get(`${HEADER.root} h1 > a`).eq(index).click()
+
+          cy.get(HEADER.root).should('be.visible')
+
+          cy.url().should('not.include', '/datasets/zoek/')
+        })
+      })
+    })
+
     describe(`Homepage checks, resolution is: ${size}`, () => {
       beforeEach(() => {
         if (Cypress._.isArray(size)) {
@@ -12,14 +56,6 @@ describe('Homepage module', () => {
         }
         cy.hidePopup()
         cy.visit('/')
-      })
-      it('Should check all header information', () => {
-        cy.get(HEADER.root).should('be.visible')
-        cy.checkLogo(size)
-        cy.get(HEADER.logoAmsterdamTitle).should('contain', 'Data en informatie').and('be.visible')
-        cy.get(HEADER.headerTitle).should('contain', 'Data en informatie').and('be.visible')
-        cy.get(HEADER_MENU.rootDefault).should('exist')
-        cy.checkSearchbar(size)
       })
       it('Should check all menu items', () => {
         let menuSelector
