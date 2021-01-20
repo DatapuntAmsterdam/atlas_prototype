@@ -1,9 +1,9 @@
 import { ROUTER_NAMESPACE, routing } from '../../app/routes'
-import { HEADER_LINKS } from '../../shared/config/config'
 import { DATASET_ROUTE_MAPPER } from '../../shared/ducks/data-selection/constants'
 import { ViewMode } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../parameters'
 import environment from '../../environment'
+import { HEADER_LINK_HELP } from '../../shared/config/content-links'
 
 export const preserveQuery = (action, additionalParams = null) => ({
   ...action,
@@ -283,7 +283,7 @@ export const toNotFoundPage = () => ({
 })
 
 export const toHelpPage = () =>
-  toArticleDetail(HEADER_LINKS.HELP.id[environment.DEPLOY_ENV], HEADER_LINKS.HELP.slug)
+  toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)
 
 export const toPublicationSearch = toSearchOfType(routing.publicationSearch.type)
 export const toArticleSearch = toSearchOfType(routing.articleSearch.type)

@@ -1,7 +1,10 @@
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
 import environment from '../../../../environment'
-import { NAVIGATION_LINKS } from '../../../../shared/config/config'
+import {
+  NAVIGATION_LINK_DATA_IN_TABLES,
+  NAVIGATION_LINK_DATA_SERVICES,
+} from '../../../../shared/config/content-links'
 import {
   toArticleDetail,
   toArticleSearch,
@@ -23,7 +26,7 @@ const navigationLinks = [
     id: 0,
     to: toMapWithLegendOpen(),
     CardIcon: () => (
-      <Icon square size={48}>
+      <Icon size={48}>
         <Map />
       </Icon>
     ),
@@ -44,30 +47,30 @@ const navigationLinks = [
   {
     id: 4,
     to: toArticleDetail(
-      NAVIGATION_LINKS.DATA_IN_TABLES.id[environment.DEPLOY_ENV],
-      NAVIGATION_LINKS.DATA_IN_TABLES.slug,
+      NAVIGATION_LINK_DATA_IN_TABLES.id[environment.DEPLOY_ENV],
+      NAVIGATION_LINK_DATA_IN_TABLES.slug,
     ),
     CardIcon: () => (
       <Icon size={42}>
         <Table />
       </Icon>
     ),
-    title: NAVIGATION_LINKS.DATA_IN_TABLES.title,
-    description: NAVIGATION_LINKS.DATA_IN_TABLES.description,
+    title: NAVIGATION_LINK_DATA_IN_TABLES.title,
+    description: NAVIGATION_LINK_DATA_IN_TABLES.description,
   },
   {
     id: 5,
     to: toArticleDetail(
-      NAVIGATION_LINKS.DATA_SERVICES.id[environment.DEPLOY_ENV],
-      NAVIGATION_LINKS.DATA_SERVICES.slug,
+      NAVIGATION_LINK_DATA_SERVICES.id[environment.DEPLOY_ENV],
+      NAVIGATION_LINK_DATA_SERVICES.slug,
     ),
     CardIcon: () => (
       <Icon size={48}>
         <Api />
       </Icon>
     ),
-    title: NAVIGATION_LINKS.DATA_SERVICES.title,
-    description: NAVIGATION_LINKS.DATA_SERVICES.description,
+    title: NAVIGATION_LINK_DATA_SERVICES.title,
+    description: NAVIGATION_LINK_DATA_SERVICES.description,
   },
   {
     id: 6,

@@ -10,9 +10,6 @@ const MATOMO_CONFIG = {
   [Environment.Acceptance]: {
     SITE_ID: 3,
   },
-  [Environment.Development]: {
-    SITE_ID: 3,
-  },
 }
 
 export const MATOMO_CONSTANTS = {

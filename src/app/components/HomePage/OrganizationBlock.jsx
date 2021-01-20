@@ -10,7 +10,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import { cmsConfig } from '../../../shared/config/config'
+import cmsConfig from '../../../shared/config/cms.config'
 import useFromCMS from '../../utils/useFromCMS'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import OrganizationCard from './OrganizationCard'

@@ -1,5 +1,6 @@
+import { generatePath } from 'react-router-dom'
 import environment from '../environment'
-import { CONTENT_REDIRECT_LINKS, SHORTLINKS } from '../shared/config/config'
+import { REDIRECTS_ARTICLES, SHORTLINKS } from '../shared/config/content-links'
 import PARAMETERS from '../store/parameters'
 import matomoInstance from './matomo'
 import { MAIN_PATHS, routing } from './routes'
@@ -143,11 +144,12 @@ export const shortUrls: Redirect[] = [
   },
 ]
 
-export const articleUrls: Redirect[] = CONTENT_REDIRECT_LINKS.ARTICLES.map((item) => ({
+export const articleUrls: Redirect[] = REDIRECTS_ARTICLES.map((item) => ({
   from: item.from,
-  to: routing.articleDetail.path
-    .replace(':slug', item.to.slug)
-    .replace(':id', item.to.id[environment.DEPLOY_ENV]),
+  to: generatePath(routing.articleDetail.path, {
+    slug: item.to.slug,
+    id: item.to.id[environment.DEPLOY_ENV],
+  }),
 }))
 
 const overviewPaths = [

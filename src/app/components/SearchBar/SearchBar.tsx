@@ -10,7 +10,6 @@ import {
 } from '@amsterdam/asc-ui'
 import { FunctionComponent, InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { IDS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
 
@@ -60,6 +59,8 @@ export interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
   searchBarFilterValue: string
 }
 
+export const SEARCH_BAR_INPUT_ID = 'auto-suggest__input'
+
 const SearchBar: FunctionComponent<SearchBarProps> = ({
   expanded,
   onBlur,
@@ -86,7 +87,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
     autoCapitalize: 'off',
     autoComplete: 'off',
     autoCorrect: 'off',
-    id: IDS.searchbar,
+    id: SEARCH_BAR_INPUT_ID,
     'data-test': 'search-input',
     placeholder: placeHolder,
   }
