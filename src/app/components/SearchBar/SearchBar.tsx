@@ -17,11 +17,11 @@ import SearchBarFilter from '../SearchBarFilter'
 const Z_INDEX_OFFSET = 2 // Set a custom offset
 
 // TODO: Fix z-index issue with overlay in ASC eventually
-const StyledSearchBarToggle = styled(SearchBarToggle)`
+const StyledSearchBarToggle = styled(SearchBarToggle)<{ searchIsVisible: boolean }>`
   z-index: 23;
   position: absolute;
 
-  ${({ searchIsVisible }: { searchIsVisible: boolean }) =>
+  ${({ searchIsVisible }) =>
     searchIsVisible &&
     css`
       left: 0;
@@ -98,7 +98,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
     placeholder: placeHolder,
   }
 
-  const toggleWidth = (isOpen: boolean): void => {
+  const toggleWidth = (isOpen: boolean) => {
     setSearchVisible(isOpen)
   }
 
