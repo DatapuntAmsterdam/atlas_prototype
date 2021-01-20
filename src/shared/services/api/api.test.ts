@@ -118,11 +118,9 @@ describe('Api service', () => {
 
   describe('fetchProxy', () => {
     const mockedProxyResponse = { foo: 'bar' }
-    let proxyRequest: any
+    let proxyRequest: MockedRequest
 
     beforeEach(() => {
-      proxyRequest = null
-
       server.use(
         rest.get(/domain/, async (req, res, ctx) => {
           proxyRequest = req
