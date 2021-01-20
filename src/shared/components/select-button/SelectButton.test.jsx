@@ -118,21 +118,6 @@ describe('SelectButton', () => {
 })
 
 describe('rendering', () => {
-  it('should render with default value', () => {
-    const isDisabled = false
-
-    const wrapper = shallow(
-      <SelectButton
-        className="someclass"
-        icon={<span className="icon icon--topography" />}
-        isDisabled={isDisabled}
-        name="topography"
-        options={options}
-      />,
-    )
-    expect(wrapper).toMatchSnapshot()
-  })
-
   it('should render with preselected value then make the select button disabled', () => {
     const wrapper = shallow(
       <SelectButton
@@ -148,12 +133,5 @@ describe('rendering', () => {
 
     wrapper.setProps({ isDisabled: true })
     expect(wrapper.find('.select-button.select-button--disabled').exists()).toBe(true)
-  })
-
-  it('should render with no options', () => {
-    const wrapper = shallow(
-      <SelectButton icon={<span className="icon icon--topography" />} name="topography" />,
-    )
-    expect(wrapper).toMatchSnapshot()
   })
 })

@@ -4,6 +4,10 @@ import PropTypes from 'prop-types'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from 'styled-components'
+import { ControlButton } from '@amsterdam/arm-core'
+import { themeSpacing } from '@amsterdam/asc-ui'
+import { Close } from '@amsterdam/asc-assets'
 import { Map as ContextMenu } from '../../app/components/ContextMenu'
 import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullscreen'
 import { getMapDetail } from '../../map/ducks/detail/actions'
@@ -30,10 +34,6 @@ import {
   initialize,
   loadScene,
 } from '../services/marzipano/marzipano'
-import styled from 'styled-components'
-import { ControlButton } from '@amsterdam/arm-core'
-import { themeSpacing } from '@amsterdam/asc-ui'
-import { Close } from '@amsterdam/asc-assets'
 
 const StyledControlButton = styled(ControlButton)`
   position: absolute;

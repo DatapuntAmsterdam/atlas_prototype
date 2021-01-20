@@ -12,7 +12,7 @@ export interface ToggleFullscreenProps {
   onToggleFullscreen: () => void
 }
 
-const StyledControlButton = styled(ControlButton)`
+export const StyledControlButton = styled(ControlButton)`
   position: absolute;
 
   top: ${themeSpacing(2)};

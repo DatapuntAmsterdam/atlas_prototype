@@ -8,7 +8,7 @@ import { ExternalLink } from '@amsterdam/asc-assets'
 import { getEmbedButtonLink } from '../../../shared/services/embed-url/embed-url'
 import { toggleEmbedButtonAction } from '../../ducks/map/actions'
 
-const StyledControlButton = styled(ControlButton)`
+export const StyledControlButton = styled(ControlButton)`
   position: absolute;
   right: ${themeSpacing(2)};
   top: ${themeSpacing(2)};

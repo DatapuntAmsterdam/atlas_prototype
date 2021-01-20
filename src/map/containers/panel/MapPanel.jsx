@@ -23,7 +23,6 @@ const ZoomInAlertContent = styled.div`
 const MapPanel = ({
   activeBaseLayer,
   onBaseLayerToggle,
-  onMapPanelHandleToggle,
   onMapPanelToggle,
   onLayerToggle = () => {},
   onLayerVisibilityToggle = () => {},

@@ -2,10 +2,10 @@ import { FunctionComponent, useCallback, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Button, Link, themeSpacing } from '@amsterdam/asc-ui'
+import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { addFilter, removeFilter } from '../../../shared/ducks/filters/filters'
 import { ActiveFilter, Filter } from './DataSelectionFilters'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
-import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 
 type Props = {
   availableFilters: Filter[]

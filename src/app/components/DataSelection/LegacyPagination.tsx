@@ -98,7 +98,6 @@ const LegacyPagination: FunctionComponent<Props> = ({ numberOfPages, currentPage
             iconSize={21}
             iconRight={<Next />}
             disabled={isLastPage}
-
             onClick={() => dispatch(setPage(isLastPage ? null : currentPage + 1))}
           >
             Volgende

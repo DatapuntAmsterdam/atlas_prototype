@@ -24,7 +24,11 @@ const ActiveFilters: FunctionComponent<ActiveFiltersProps> = ({ removeFilter, fi
     <StyledUl>
       {filters.map(({ slug, label, option }) => (
         <li key={slug}>
-          <FilterTag type="button" title="Filter verwijderen" onClick={() => removeFilter(slug)}>
+          <FilterTag
+            type="button"
+            title={`Filter verwijderen: ${label}: ${option}`}
+            onClick={() => removeFilter(slug)}
+          >
             {label}: {option}
           </FilterTag>
         </li>

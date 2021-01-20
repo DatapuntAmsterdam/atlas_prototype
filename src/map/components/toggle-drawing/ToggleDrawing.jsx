@@ -6,7 +6,7 @@ import { themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import Measure from '../../../shared/assets/icons/icon-measure.svg'
 import { isEmbedded, isEmbedPreview, isPrintMode } from '../../../shared/ducks/ui/ui'
 
-const StyledControlButton = styled(ControlButton)`
+export const StyledControlButton = styled(ControlButton)`
   position: absolute;
   left: ${themeSpacing(2)};
   top: ${themeSpacing(2)};

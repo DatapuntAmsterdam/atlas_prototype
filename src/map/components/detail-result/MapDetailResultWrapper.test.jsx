@@ -20,13 +20,13 @@ describe('MapDetailResultWrapper', () => {
     const clickHandler = jest.fn()
     const wrapper = shallow(
       <MapDetailResultWrapper title="title" subTitle="subTitle" onMaximize={clickHandler}>
-        <ul>
+        <ul id="childrenUl">
           <li>Item 1</li>
           <li>Item 2</li>
         </ul>
       </MapDetailResultWrapper>,
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('#childrenUl').length).not.toBe(0)
   })
 
   it('should not render empty panoUrl', () => {
@@ -39,10 +39,10 @@ describe('MapDetailResultWrapper', () => {
         </ul>
       </MapDetailResultWrapper>,
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('map-detail-result__header').length).toBe(0)
   })
 
-  it('should not render empty sub title', () => {
+  it('should not render empty subTitle', () => {
     const clickHandler = jest.fn()
     const wrapper = shallow(
       <MapDetailResultWrapper title="title" subTitle="" onMaximize={clickHandler}>
@@ -52,10 +52,10 @@ describe('MapDetailResultWrapper', () => {
         </ul>
       </MapDetailResultWrapper>,
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('.map-detail-result__header-subtitle').length).toBe(0)
   })
 
-  it('should not render missing sub title', () => {
+  it('should not render missing subTitle', () => {
     const clickHandler = jest.fn()
     const wrapper = shallow(
       <MapDetailResultWrapper title="title" onMaximize={clickHandler}>
@@ -65,12 +65,6 @@ describe('MapDetailResultWrapper', () => {
         </ul>
       </MapDetailResultWrapper>,
     )
-    expect(wrapper).toMatchSnapshot()
-  })
-
-  it('should not render missing children', () => {
-    const clickHandler = jest.fn()
-    const wrapper = shallow(<MapDetailResultWrapper title="title" onMaximize={clickHandler} />)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('.map-detail-result__header-subtitle').length).toBe(0)
   })
 })

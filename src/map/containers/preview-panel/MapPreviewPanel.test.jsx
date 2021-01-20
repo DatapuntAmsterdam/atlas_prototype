@@ -1,6 +1,7 @@
 // NOTE!!! Testing both container and component.
 import configureMockStore from 'redux-mock-store'
 import { shallow } from 'enzyme'
+import { Button } from '@amsterdam/asc-ui'
 
 import MapPreviewPanelContainer from './MapPreviewPanelContainer'
 import {
@@ -113,7 +114,7 @@ describe('MapPreviewPanelContainer', () => {
     const wrapper = shallow(<MapPreviewPanelContainer store={store} />)
       .dive()
       .dive()
-    wrapper.find('.map-preview-panel__button').at(0).simulate('click')
+    wrapper.find(Button).at(0).simulate('click')
 
     // TODO: refactor, add expectations
   })
@@ -124,7 +125,7 @@ describe('MapPreviewPanelContainer', () => {
     const wrapper = shallow(<MapPreviewPanelContainer store={store} />)
       .dive()
       .dive()
-    wrapper.find('.map-preview-panel__button').at(1).simulate('click')
+    wrapper.find(Button).at(1).simulate('click')
 
     expect(store.dispatch).toHaveBeenCalledWith(toMapAndPreserveQuery())
   })

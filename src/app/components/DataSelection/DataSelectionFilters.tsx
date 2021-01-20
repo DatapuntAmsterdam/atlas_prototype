@@ -2,11 +2,11 @@ import { FunctionComponent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Heading, Link, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
+import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { addFilter as addFilterAction } from '../../../shared/ducks/filters/filters'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
 import Metadata from '../../../shared/assets/icons/metadata.svg'
-import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 
 export type Filter = {
   options: Array<{ id: string; label: string; count: number }>

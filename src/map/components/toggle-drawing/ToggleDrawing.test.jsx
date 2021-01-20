@@ -1,6 +1,11 @@
 import { shallow } from 'enzyme'
 
-import ToggleDrawing from './ToggleDrawing'
+import ToggleDrawing, { StyledControlButton } from './ToggleDrawing'
+
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: jest.fn(),
+}))
 
 describe('ToggleDrawing', () => {
   let wrapper
@@ -25,7 +30,7 @@ describe('ToggleDrawing', () => {
     setupComponent('0,3 m', true, 3, {
       onEnd: mockFn,
     })
-    wrapper.find('button').at(0).simulate('click')
+    wrapper.find(StyledControlButton).at(0).simulate('click')
     expect(mockFn).toHaveBeenCalled()
   })
 
@@ -34,7 +39,7 @@ describe('ToggleDrawing', () => {
     setupComponent('0,0 m', true, 0, {
       onCancel: mockFn,
     })
-    wrapper.find('button').at(0).simulate('click')
+    wrapper.find(StyledControlButton).at(0).simulate('click')
     expect(mockFn).toHaveBeenCalled()
   })
 
@@ -43,7 +48,7 @@ describe('ToggleDrawing', () => {
     setupComponent('0,3 m', false, 3, {
       onReset: mockFn,
     })
-    wrapper.find('button').at(0).simulate('click')
+    wrapper.find(StyledControlButton).at(0).simulate('click')
     expect(mockFn).toHaveBeenCalled()
   })
 
@@ -52,22 +57,7 @@ describe('ToggleDrawing', () => {
     setupComponent('', false, 0, {
       onStart: mockFn,
     })
-    wrapper.find('button').at(0).simulate('click')
+    wrapper.find(StyledControlButton).simulate('click')
     expect(mockFn).toHaveBeenCalled()
-  })
-
-  it('should render with drawing mode none and no markers', () => {
-    setupComponent('', false, 0)
-    expect(wrapper).toMatchSnapshot()
-  })
-
-  it('should render with drawing mode none and 3 markers showing "Opnieuw tekenen"', () => {
-    setupComponent('', false, 3)
-    expect(wrapper).toMatchSnapshot()
-  })
-
-  it('should render with drawing mode draw and 3 markers showing "Eindig tekenen"', () => {
-    setupComponent('', true, 3)
-    expect(wrapper).toMatchSnapshot()
   })
 })

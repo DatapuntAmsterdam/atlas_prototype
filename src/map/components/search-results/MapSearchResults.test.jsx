@@ -58,7 +58,7 @@ describe('MapSearchResults', () => {
           results={[]}
         />,
       )
-      expect(wrapper).toMatchSnapshot()
+      expect(wrapper.find('MapSearchResultsCategory').length).toBe(0)
     })
 
     it('should render results', () => {
@@ -98,128 +98,7 @@ describe('MapSearchResults', () => {
           results={results}
         />,
       )
-      expect(wrapper).toMatchSnapshot()
-    })
-
-    it('should filter external monumenten on pand results', () => {
-      const count = 3
-      const location = {
-        latitude: 15.999,
-        longitude: 329.123,
-      }
-      const clickHandler = jest.fn()
-      const results = [
-        {
-          label: 'label',
-          categoryLabel: 'category',
-          uri: 'result-uri-1',
-          type: 'bag/pand',
-          results: [],
-          subCategories: [],
-        },
-        {
-          label: 'label',
-          categoryLabel: 'category',
-          uri: 'result-uri-2',
-          type: 'foo',
-          results: [],
-          subCategories: [],
-        },
-        {
-          label: 'label',
-          categoryLabel: 'category',
-          uri: 'result-uri-3',
-          type: 'monumenten/monument',
-          results: [],
-          subCategories: [],
-        },
-      ]
-      const wrapper = shallow(
-        <MapSearchResults
-          isEmbed={false}
-          count={count}
-          location={location}
-          onItemClick={clickHandler}
-          onMaximize={clickHandler}
-          results={results}
-        />,
-      )
-      expect(wrapper).toMatchSnapshot()
-    })
-
-    it('should update results', () => {
-      const count = 2
-      const location = {
-        latitude: 15.999,
-        longitude: 329.123,
-      }
-      const clickHandler = jest.fn()
-      const results = [
-        {
-          label: 'label',
-          categoryLabel: 'category',
-          uri: 'result-uri-1',
-          type: 'bag/pand',
-          results: [],
-          subCategories: [],
-        },
-        {
-          label: 'label',
-          categoryLabel: 'category',
-          uri: 'result-uri-2',
-          type: 'bag/pand',
-          results: [],
-          subCategories: [],
-        },
-      ]
-      const wrapper = shallow(
-        <MapSearchResults
-          isEmbed={false}
-          count={count}
-          location={location}
-          onItemClick={clickHandler}
-          onMaximize={clickHandler}
-          results={results}
-        />,
-      )
-      expect(wrapper).toMatchSnapshot()
-
-      wrapper.setProps({
-        count: 3,
-        location: {
-          latitude: 1,
-          longitude: 0,
-        },
-        panoUrl: 'other-pano-url',
-        missingLayers: 'Layer 3',
-        results: [
-          {
-            label: 'label',
-            categoryLabel: 'category',
-            uri: 'result-uri-1',
-            type: 'bag/pand',
-            results: [],
-            subCategories: [],
-          },
-          {
-            label: 'label',
-            categoryLabel: 'category',
-            uri: 'result-uri-2',
-            type: 'bag/pand',
-            results: [],
-            subCategories: [],
-          },
-          {
-            label: 'label',
-            categoryLabel: 'category',
-            uri: 'result-uri-3',
-            type: 'bag/pand',
-            results: [],
-            subCategories: [],
-          },
-        ],
-      })
-      expect(wrapper).toMatchSnapshot()
+      expect(wrapper.find('MapSearchResultsCategory').length).not.toBe(0)
     })
   })
 })
