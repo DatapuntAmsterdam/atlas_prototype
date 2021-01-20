@@ -38,10 +38,11 @@ const HeaderWrapper = styled.section`
 `
 
 const StyledHeader = styled(HeaderComponent)`
-  h1,
-  nav {
-    position: relative;
-    z-index: 1;
+  a {
+    /* Making sure the anchors in the header have a decent clickable area size */
+    display: flex;
+    height: 100%;
+    align-items: center;
   }
 
   ${styles.HeaderNavigationStyle} {
