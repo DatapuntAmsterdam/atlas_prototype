@@ -8,7 +8,7 @@ import {
   showAboveBackDrop,
   styles,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent, InputHTMLAttributes, useState, useCallback } from 'react'
+import { FunctionComponent, InputHTMLAttributes, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { IDS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
