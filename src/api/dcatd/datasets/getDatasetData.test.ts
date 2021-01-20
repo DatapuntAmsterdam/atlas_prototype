@@ -1,15 +1,6 @@
-import fetch from 'jest-fetch-mock'
-import datasetResponse from './index'
-import openApi from '../openapi'
 import getDatasetData from './getDatasetData'
 
 describe('getDatasetData', () => {
-  beforeEach(() => {
-    fetch.mockResponses(
-      [JSON.stringify(datasetResponse), { status: 200 }], // /dcatd/datasets/123
-      [JSON.stringify(openApi), { status: 200 }], // /dcatd/openapi
-    )
-  })
   it('should return data of dataset, filters and resources', async () => {
     const { dataset, filters, resources } = await getDatasetData('123')
 

@@ -1,4 +1,6 @@
-import fixture from './uitgevoerdonderzoek.json'
+import fixtureSingle from './uitgevoerdonderzoek.json'
 import { Root as Uitgevoerdonderzoek } from './types'
 
-export default fixture as Uitgevoerdonderzoek
+export const singleFixture = fixtureSingle as Uitgevoerdonderzoek
+export const path = 'milieuthemas/explosieven/uitgevoerdonderzoek/'
+export const fixtureId = '97'

@@ -29,13 +29,13 @@ exports[`Header should render the main header 1`] = `
     navigation={
       <React.Fragment>
         <Unknown />
-        <Memo(Connect(HeaderMenu))
+        <HeaderMenu
           data-test="header-menu-default"
           showAt="laptopM"
           tall={false}
           type="default"
         />
-        <Memo(Connect(HeaderMenu))
+        <HeaderMenu
           align="right"
           data-test="header-menu-mobile"
           hideAt="laptopM"

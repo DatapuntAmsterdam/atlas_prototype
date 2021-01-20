@@ -6,11 +6,11 @@ import {
   styles,
 } from '@amsterdam/asc-ui'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
+import { FunctionComponent } from 'react'
 import styled, { css } from 'styled-components'
 import HeaderSearch from '../../../header/components/HeaderSearch'
 import EmbedHeader from './EmbedHeader'
-import HeaderMenuContainer from './HeaderMenuContainer'
+import HeaderMenu from './HeaderMenu'
 import PrintHeader from './PrintHeader'
 
 const stickyStyle = css`
@@ -18,15 +18,15 @@ const stickyStyle = css`
   top: 0;
 `
 
-const HeaderWrapper = styled.section`
-  width: 100%;
+interface HeaderWrapperProps {
+  isHomePage: boolean
+}
 
+const HeaderWrapper = styled.section<HeaderWrapperProps>`
+  width: 100%;
   // As position: sticky isn't supported on IE, this is needed to have position the header on top of the other content
   position: relative;
 
-  ${showAboveBackDrop(true)}
-
-  // Add position: sticky for supported browsers
   ${({ isHomePage }) =>
     isHomePage
       ? css`
@@ -35,6 +35,8 @@ const HeaderWrapper = styled.section`
           }
         `
       : stickyStyle}
+
+  ${showAboveBackDrop(true) as any}
 `
 
 const StyledHeader = styled(HeaderComponent)`
@@ -58,14 +60,20 @@ const StyledHeader = styled(HeaderComponent)`
   }
 `
 
-const Header = ({
+export interface HeaderProps {
+  homePage: boolean
+  hasMaxWidth: boolean
+  printMode: boolean
+  embedPreviewMode: boolean
+  printOrEmbedMode: boolean
+}
+
+const Header: FunctionComponent<HeaderProps> = ({
   homePage,
   printOrEmbedMode,
   printMode,
   embedPreviewMode,
   hasMaxWidth,
-  hidePrintMode,
-  hideEmbedPreview,
 }) => {
   if (!printOrEmbedMode) {
     return (
@@ -80,13 +88,13 @@ const Header = ({
           navigation={
             <>
               <HeaderSearch />
-              <HeaderMenuContainer
+              <HeaderMenu
                 type="default"
                 data-test="header-menu-default"
                 tall={homePage}
                 showAt="laptopM"
               />
-              <HeaderMenuContainer
+              <HeaderMenu
                 type="mobile"
                 align="right"
                 data-test="header-menu-mobile"
@@ -107,20 +115,12 @@ const Header = ({
         })}`}
       >
         <div className={classNames({ 'o-max-width__inner': hasMaxWidth })}>
-          {printMode && <PrintHeader closeAction={hidePrintMode} />}
-          {embedPreviewMode && <EmbedHeader closeAction={hideEmbedPreview} />}
+          {printMode && <PrintHeader />}
+          {embedPreviewMode && <EmbedHeader />}
         </div>
       </div>
     </div>
   )
-}
-
-Header.propTypes = {
-  homePage: PropTypes.bool.isRequired,
-  hasMaxWidth: PropTypes.bool.isRequired,
-  printMode: PropTypes.bool.isRequired,
-  embedPreviewMode: PropTypes.bool.isRequired,
-  printOrEmbedMode: PropTypes.bool.isRequired,
 }
 
 export default Header

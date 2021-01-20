@@ -2,7 +2,7 @@ import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import queryStringParser from '../query-string-parser/query-string-parser'
 import stateTokenGenerator from '../state-token-generator/state-token-generator'
-import parseAccessToken, { ParsedToken } from './parseAccessToken'
+import parseAccessToken from './parseAccessToken'
 
 // A map of the error keys, that the OAuth2 authorization service can
 // return, to a full description
@@ -96,7 +96,6 @@ export const STATE_TOKEN = 'stateToken'
 export const ACCESS_TOKEN = 'accessToken'
 
 let returnPath = ''
-let tokenData: ParsedToken | null = null
 
 /**
  * Finishes an error from the OAuth2 authorization service.
@@ -106,6 +105,7 @@ let tokenData: ParsedToken | null = null
  * service.
  */
 function handleError(code: string, description: string) {
+  /* istanbul ignore else */
   if (typeof window !== 'undefined') {
     sessionStorage.removeItem(STATE_TOKEN)
 
@@ -127,8 +127,10 @@ function handleError(code: string, description: string) {
  * service.
  */
 function catchError() {
+  /* istanbul ignore else */
   if (typeof window !== 'undefined') {
     const params = queryStringParser(window.location.search)
+
     if (params && params.error) {
       handleError(params.error, params.error_description)
     }
@@ -146,7 +148,12 @@ function catchError() {
  * null otherwise.
  */
 function getAccessTokenFromParams(params: { [key: string]: string }) {
-  if (!params || typeof window === 'undefined') {
+  /* istanbul ignore next */
+  if (typeof window === 'undefined') {
+    return null
+  }
+
+  if (!params) {
     return null
   }
 
@@ -154,7 +161,7 @@ function getAccessTokenFromParams(params: { [key: string]: string }) {
 
   // The state param must be exactly the same as the state token we
   // have saved in the session (to prevent CSRF)
-  const stateTokenValid = params.state && params.state === stateToken
+  const stateTokenValid = params?.state === stateToken
 
   // It is a callback when all authorization parameters are defined
   // in the params the fastest check is not to check if all
@@ -175,13 +182,15 @@ function getAccessTokenFromParams(params: { [key: string]: string }) {
  * Gets the access token and return path, and clears the session storage.
  */
 function handleCallback() {
+  /* istanbul ignore next */
   if (typeof window === 'undefined') {
     return
   }
+
   const params = queryStringParser(window.location.hash.substring(1)) // Remove # from hash string
   const accessToken = getAccessTokenFromParams(params)
+
   if (accessToken) {
-    tokenData = parseAccessToken(accessToken)
     sessionStorage.setItem(ACCESS_TOKEN, accessToken)
     returnPath = sessionStorage.getItem(RETURN_PATH) ?? ''
     sessionStorage.removeItem(RETURN_PATH)
@@ -198,6 +207,7 @@ function handleCallback() {
  * @returns {string} The access token.
  */
 export function getAccessToken() {
+  /* istanbul ignore next */
   if (typeof window === 'undefined') {
     return ''
   }
@@ -246,18 +256,17 @@ export function logout() {
  */
 function restoreAccessToken() {
   const accessToken = getAccessToken()
+
   if (accessToken) {
     const parsedToken = parseAccessToken(accessToken)
     const now = Math.floor(new Date().getTime() / 1000)
 
     if (!parsedToken || parsedToken.expiresAt <= now) {
-      tokenData = null
       logout()
       return false
     }
-
-    tokenData = parsedToken
   }
+
   return true
 }
 
@@ -271,6 +280,7 @@ function restoreAccessToken() {
  */
 export function initAuth() {
   returnPath = ''
+
   if (restoreAccessToken()) {
     // Restore acces token from session storage
     catchError() // Catch any error from the OAuth2 authorization service
@@ -289,11 +299,23 @@ export function getReturnPath() {
 }
 
 export function getScopes() {
-  return tokenData?.scopes ?? []
+  const accessToken = getAccessToken()
+
+  if (!accessToken) return []
+
+  const decoded = parseAccessToken(accessToken)
+
+  return decoded?.scopes || []
 }
 
 export function getName() {
-  return tokenData?.name ?? ''
+  const accessToken = getAccessToken()
+
+  if (!accessToken) return ''
+
+  const decoded = parseAccessToken(accessToken)
+
+  return decoded?.name || ''
 }
 
 /**

@@ -1,4 +1,4 @@
-import fetchMock from 'jest-fetch-mock'
+import { server, rest, MockedRequest } from '../../../../test/server'
 import * as auth from '../auth/auth'
 import { createUrlWithToken, fetchProxy, fetchWithToken } from './api'
 
@@ -6,21 +6,28 @@ jest.mock('../auth/auth', () => jest.requireActual('../auth/auth'))
 
 const getAuthHeadersSpy = jest.spyOn(auth, 'getAuthHeaders').mockImplementation(() => ({}))
 
+const mockResponse = {
+  data: 'hello',
+}
+
+let request: MockedRequest
+
 describe('Api service', () => {
-  beforeEach(fetchMock.resetMocks)
+  beforeEach(() => {
+    server.use(
+      rest.get(/localhost/, async (req, res, ctx) => {
+        request = req
+        return res(ctx.status(200), ctx.json(mockResponse))
+      }),
+    )
+  })
 
   afterEach(() => {
     getAuthHeadersSpy.mockReset()
   })
 
   describe('fetchWithToken', () => {
-    const response = {
-      data: 'hello',
-    }
-
     it('should return the response from fetch', async () => {
-      fetchMock.mockResponseOnce(JSON.stringify(response))
-
       const result = await fetchWithToken(
         'http://localhost/',
         {
@@ -33,11 +40,15 @@ describe('Api service', () => {
         '',
       )
 
-      expect(result).toEqual(response)
+      expect(result).toEqual(mockResponse)
     })
 
     it('should not return the response from fetch when service is unavailable', async () => {
-      fetchMock.mockResponseOnce(JSON.stringify(response), { status: 503 })
+      server.use(
+        rest.get(/localhost/, async (req, res, ctx) => {
+          return res(ctx.status(503))
+        }),
+      )
 
       return expect(
         fetchWithToken(
@@ -55,8 +66,6 @@ describe('Api service', () => {
     })
 
     it('should pass a signal: true to fetch options and add the token to the header', async () => {
-      fetchMock.mockResponseOnce(JSON.stringify(response))
-
       const controller = new AbortController()
       const { signal } = controller
 
@@ -72,17 +81,10 @@ describe('Api service', () => {
         'token12345',
       )
 
-      const options = fetchMock.mock.calls[0][1]
-
-      expect(options?.signal).toBeDefined()
-      expect(options?.headers instanceof Headers && options.headers.get('Authorization')).toEqual(
-        'Bearer token12345',
-      )
+      expect(request.headers.get('authorization')).toEqual('Bearer token12345')
     })
 
     it('should pass custom headers along', async () => {
-      fetchMock.mockResponseOnce(JSON.stringify(response))
-
       const headers = new Headers({
         Test: 'foo',
       })
@@ -96,9 +98,7 @@ describe('Api service', () => {
         'token12345',
       )
 
-      const options = fetchMock.mock.calls[0][1]
-
-      expect(options?.headers instanceof Headers && options.headers.get('Test')).toEqual('foo')
+      expect(request.headers.get('test')).toEqual('foo')
     })
   })
 
@@ -117,28 +117,28 @@ describe('Api service', () => {
   })
 
   describe('fetchProxy', () => {
+    const mockedProxyResponse = { foo: 'bar' }
+    let proxyRequest: MockedRequest
+
     beforeEach(() => {
-      fetchMock.resetMocks()
-      fetchMock.mockResponse(JSON.stringify({ foo: 'bar' }))
+      server.use(
+        rest.get(/domain/, async (req, res, ctx) => {
+          proxyRequest = req
+          return res(ctx.status(200), ctx.json(mockedProxyResponse))
+        }),
+      )
       getAuthHeadersSpy.mockImplementation(() => ({ Authorization: 'Bearer something' }))
     })
 
     it('should perform request', async () => {
-      expect(fetchMock).not.toHaveBeenCalled()
-
       const url = 'https://www.domain.com/'
       const response = await fetchProxy(url)
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        url,
-        expect.objectContaining({ headers: expect.anything() }),
-      )
-      expect(response).toEqual({ foo: 'bar' })
+      expect(proxyRequest.url.toString()).toEqual(url)
+      expect(response).toEqual(mockedProxyResponse)
     })
 
     it('should append query string to request URL', async () => {
-      expect(fetchMock).not.toHaveBeenCalled()
-
       const searchParams = {
         foo: 'bar',
         qux: 'zork',
@@ -146,15 +146,10 @@ describe('Api service', () => {
       const url = 'https://www.domain2.com/'
       await fetchProxy(url, { searchParams })
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.stringContaining('foo=bar&qux=zork'),
-        expect.objectContaining({ headers: expect.anything() }),
-      )
+      expect(proxyRequest.url.toString()).toEqual(expect.stringContaining('foo=bar&qux=zork'))
     })
 
     it('should append query string to request URL with search params', async () => {
-      expect(global.fetch).not.toHaveBeenCalled()
-
       const searchParams = {
         foo: 'bar',
         qux: 'zork',
@@ -162,32 +157,20 @@ describe('Api service', () => {
       const url = 'https://www.domain2.com?filter=a&page=1'
       await fetchProxy(url, { searchParams })
 
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(proxyRequest.url.toString()).toEqual(
         expect.stringContaining('filter=a&page=1&foo=bar&qux=zork'),
-        expect.objectContaining({ headers: expect.anything() }),
       )
     })
 
     it('should append auth headers to request', async () => {
-      expect(fetchMock).not.toHaveBeenCalled()
-
       const url = 'https://www.domain3.com/'
       const rawHeaders = {
         'Content-Type': 'application/json',
       }
       await fetchProxy(url, { headers: rawHeaders })
 
-      const headers = new Headers({ ...rawHeaders, Authorization: 'Bearer something' })
-      const options = fetchMock.mock.calls[0][1]
-      const requestHeader = [
-        ...(options?.headers instanceof Headers ? options.headers.entries() : []),
-      ]
-
-      expect([...headers.entries()]).toEqual(requestHeader)
-      expect(fetchMock).toHaveBeenCalledWith(
-        url,
-        expect.objectContaining({ headers: expect.anything() }),
-      )
+      expect(proxyRequest.headers.get('Content-Type')).toEqual('application/json')
+      expect(proxyRequest.headers.has('authorization')).toBeTruthy()
     })
   })
 })

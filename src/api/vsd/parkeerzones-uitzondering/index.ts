@@ -1,4 +1,6 @@
-import fixture from './parkeerzones_uitz.json'
+import fixtureSingle from './parkeerzones_uitz.json'
 import { Root as Parkeerzones } from './types'
 
-export default fixture as Parkeerzones
+export const singleFixture = fixtureSingle as Parkeerzones
+export const path = 'vsd/parkeerzones_uitz/'
+export const fixtureId = '23'

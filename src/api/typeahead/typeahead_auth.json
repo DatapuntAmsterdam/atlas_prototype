@@ -1,0 +1,119 @@
+[
+  {
+    "label": "Straatnamen",
+    "content": [
+      { "_display": "Dam", "uri": "bag/v1.1/openbareruimte/0363300000003186/" },
+      { "_display": "Damloperspad", "uri": "bag/v1.1/openbareruimte/0363300000001038/" }
+    ],
+    "total_results": 6
+  },
+  {
+    "label": "Openbare ruimtes",
+    "content": [
+      { "_display": "Damrak (water)", "uri": "bag/v1.1/openbareruimte/0363300011950697/" }
+    ],
+    "total_results": 1
+  },
+  {
+    "label": "Panden",
+    "content": [{ "_display": "Paleis op de Dam", "uri": "bag/v1.1/pand/0363100012167579/" }],
+    "total_results": 1
+  },
+  {
+    "label": "Vestigingen",
+    "content": [
+      {
+        "_display": "Daman - Limmenstraat 126\n1024MK Amsterdam",
+        "uri": "handelsregister/vestiging/000040627381/"
+      },
+      {
+        "_display": "Van Dam's Haardoliehandel - Blasiusstraat 107 H",
+        "uri": "handelsregister/vestiging/000001461559/"
+      }
+    ],
+    "total_results": 425
+  },
+  {
+    "label": "Maatschappelijke activiteiten",
+    "content": [
+      {
+        "_display": "Stefano Damaggio",
+        "uri": "handelsregister/maatschappelijkeactiviteit/72618418/"
+      },
+      { "_display": "DamBorg B.V.", "uri": "handelsregister/maatschappelijkeactiviteit/73566799/" }
+    ],
+    "total_results": 848
+  },
+  {
+    "label": "Kadastrale subjecten",
+    "content": [
+      {
+        "_display": "'Vereniging Van Eigenaars Tweede Oosterparkstraat 213 Te Amster-Dam\"",
+        "uri": "brk/subject/NL.KAD.Persoon.172115414/"
+      }
+    ],
+    "total_results": 15
+  },
+  {
+    "label": "Monumenten",
+    "content": [
+      { "_display": "Dam 10", "uri": "monumenten/monumenten/aa3f9081-2ac4-49ea-95d2-0aad7aecd883/" }
+    ],
+    "total_results": 45
+  },
+  {
+    "label": "Kaartlagen",
+    "content": [
+      {
+        "_display": "Cameratoezichtgebieden",
+        "type": "map-layer",
+        "uri": "/data/?modus=kaart&lagen=veilov-oovctg%3A1&legenda=true"
+      }
+    ],
+    "total_results": 15
+  },
+  {
+    "label": "Kaartcollecties",
+    "content": [
+      {
+        "_display": "Bodemkwaliteit",
+        "type": "map-collection",
+        "uri": "/data/?modus=kaart&lagen=bdmkw-mbgm%3A1%7Cbdmkw-mbgwm%3A1%7Cbdmkw-mbaig%3A1%7Cbdmkw-bros%3A1&legenda=true"
+      }
+    ],
+    "total_results": 2
+  },
+  {
+    "label": "Specials",
+    "content": [
+      {
+        "_display": "8 miljoen Amsterdamse taxiritten per jaar (animatie)",
+        "uri": "http://cms.service.consul:8128/jsonapi/node/special/46f2bd59-21c0-460c-8d29-997c781be462",
+        "type": "special"
+      }
+    ],
+    "total_results": 21
+  },
+  {
+    "label": "Artikelen",
+    "content": [
+      {
+        "_display": "Acceptatie van LHBT\u2019ers in Amsterdam",
+        "uri": "http://cms.service.consul:8128/jsonapi/node/article/8860a1b8-4831-4c79-9783-df1a5f95f8dc",
+        "type": "article"
+      }
+    ],
+    "total_results": 499
+  },
+  {
+    "label": "Publicaties",
+    "content": [
+      {
+        "_display": "Presentatie familie van dam ois symposium van data naar informatie",
+        "uri": "http://cms.service.consul:8128/jsonapi/node/publication/dbaef06c-d764-41e7-b5e6-be74fbc039e3",
+        "type": "publication"
+      }
+    ],
+    "total_results": 558
+  }
+]

@@ -1,4 +1,7 @@
-export interface Root {
+/* eslint-disable camelcase */
+import { Links, SmallAPIReference } from '../../types'
+
+export interface List {
   count: number
   results: Meting[]
 }
@@ -9,10 +12,19 @@ export interface Meting {
   id: string
   datum: string
   zakking: string | null
-  // eslint-disable-next-line camelcase
   hoogte_nap: string | null
   zakkingssnelheid: string | null
-  // eslint-disable-next-line camelcase
   zakking_cumulatief: string | null
   dataset: string
+}
+
+export interface Single extends Meting {
+  _links: Links
+  _display: string
+  metingidentificatie: string
+  type: string
+  meetbout: string
+  onderneming: string
+  aantal_dagen: any
+  referentiepunt: SmallAPIReference
 }

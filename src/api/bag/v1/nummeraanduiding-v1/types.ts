@@ -1,5 +1,8 @@
-export type Root = {
+import { Links } from '../../../types'
+
+export type List = {
   _embedded: Embedded
+  _links: Links
   page: Page
 }
 

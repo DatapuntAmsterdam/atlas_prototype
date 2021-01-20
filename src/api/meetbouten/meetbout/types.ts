@@ -2,7 +2,7 @@
 import { Geometry } from 'geojson'
 import { APIReference, SmallAPIReference } from '../../types'
 
-export interface Root extends APIReference {
+export interface Single extends APIReference {
   meetboutidentificatie: string
   buurt: string
   x_coordinaat: string
