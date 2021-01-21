@@ -233,7 +233,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       }),
       new DefinePlugin({
         'process.env.VERSION': JSON.stringify(require('./package.json').version),
-        'process.env.GIT_COMMIT': process.env.GIT_COMMIT,
       }),
       new SVGSpritemapPlugin(['src/shared/assets/icons/**/*.svg'], {
         output: {
