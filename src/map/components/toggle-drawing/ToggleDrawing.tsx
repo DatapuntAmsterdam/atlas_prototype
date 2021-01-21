@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { ControlButton } from '@amsterdam/arm-core'
 import { useSelector } from 'react-redux'
+import { AnyAction } from 'redux'
 import { themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import Measure from '../../../shared/assets/icons/icon-measure.svg'
 import { isEmbedded, isEmbedPreview, isPrintMode } from '../../../shared/ducks/ui/ui'
@@ -17,7 +18,17 @@ export const StyledControlButton = styled(ControlButton)`
   }
 `
 
-const ToggleDrawing = ({
+export type Props = {
+  onEnd: () => AnyAction
+  onStart: () => AnyAction
+  onCancel: () => AnyAction
+  onReset: () => AnyAction
+  isEnabled: boolean
+  shapeDistance: string
+  shapeMarkers: number
+}
+
+const ToggleDrawing: FunctionComponent<Props> = ({
   isEnabled,
   shapeMarkers,
   onReset,
@@ -26,7 +37,7 @@ const ToggleDrawing = ({
   onCancel,
   shapeDistance,
 }) => {
-  const expanded = !!(isEnabled || shapeMarkers > 1)
+  const expanded = isEnabled || shapeMarkers > 1
   const printMode = useSelector(isPrintMode)
   const embedMode = useSelector(isEmbedded)
   const embedPreviewMode = useSelector(isEmbedPreview)
@@ -53,7 +64,7 @@ const ToggleDrawing = ({
       {expanded ? (
         <StyledControlButton
           variant="blank"
-          title={`${label} meten en intekenen`}
+          aria-label={`${label} meten en intekenen`}
           iconLeft={<Measure />}
           iconSize={28}
           onClick={clickEvent}
@@ -63,7 +74,7 @@ const ToggleDrawing = ({
         </StyledControlButton>
       ) : (
         <StyledControlButton
-          title={`${label} meten en intekenen`}
+          aria-label={`${label} meten en intekenen`}
           icon={<Measure />}
           variant="blank"
           iconSize={28}
@@ -74,16 +85,6 @@ const ToggleDrawing = ({
       )}
     </>
   )
-}
-
-ToggleDrawing.propTypes = {
-  onEnd: PropTypes.func.isRequired,
-  onStart: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
-  isEnabled: PropTypes.bool.isRequired,
-  shapeDistance: PropTypes.string.isRequired,
-  shapeMarkers: PropTypes.number.isRequired,
 }
 
 export default ToggleDrawing

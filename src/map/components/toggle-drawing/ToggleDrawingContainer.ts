@@ -1,4 +1,4 @@
-import { bindActionCreators } from 'redux'
+import { bindActionCreators, Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { getShapeDistanceTxt, isDrawingEnabled, getShapeMarkers } from '../../ducks/map/selectors'
 import {
@@ -8,14 +8,15 @@ import {
   startDrawing,
 } from '../../../shared/ducks/data-selection/actions'
 import ToggleDrawing from './ToggleDrawing'
+import { RootState } from '../../../reducers/root'
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   isEnabled: isDrawingEnabled(state),
   shapeMarkers: getShapeMarkers(state),
   shapeDistance: getShapeDistanceTxt(state),
 })
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       onStart: startDrawing,
