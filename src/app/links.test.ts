@@ -3,7 +3,7 @@ import { toAddresses, toCadastralObjects, toConstructionFile, toEstablishments }
 import { routing } from './routes'
 
 describe('toConstructionFile', () => {
-  it('creates a link', () => {
+  it('creates a location descriptor', () => {
     const id = '123456'
 
     expect(toConstructionFile(id, 'file.ext', 'http://foo.bar')).toEqual({
@@ -14,7 +14,7 @@ describe('toConstructionFile', () => {
 })
 
 describe('toAddresses', () => {
-  it('creates a link', () => {
+  it('creates a location descriptor', () => {
     expect(toAddresses()).toEqual({
       pathname: routing.addresses.path,
       search: 'modus=volledig',
@@ -23,7 +23,7 @@ describe('toAddresses', () => {
 })
 
 describe('toCadastralObjects', () => {
-  it('creates a link', () => {
+  it('creates a location descriptor', () => {
     expect(toCadastralObjects()).toEqual({
       pathname: routing.cadastralObjects.path,
       search: 'modus=volledig',
@@ -32,7 +32,7 @@ describe('toCadastralObjects', () => {
 })
 
 describe('toEstablishments', () => {
-  it('creates a link', () => {
+  it('creates a location descriptor', () => {
     expect(toEstablishments()).toEqual({
       pathname: routing.establishments.path,
       search: 'modus=volledig',
