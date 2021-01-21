@@ -86,34 +86,33 @@ const HeaderSearch: FunctionComponent = () => {
     }
   }
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const onFormSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      e.stopPropagation()
 
-    // If a suggestion is selected use that one, otherwise submit the form
-    if (selectedElement) {
-      document.querySelector<HTMLAnchorElement>(`.${ACTIVE_ITEM_CLASS}`)?.click()
-    } else {
-      const queryString = {
-        term: inputValue.trim(),
-      }
-      const query = new URLSearchParams(
-        Object.entries(queryString).reduce(
-          (acc, [key, value]) => (value ? { ...acc, [key]: value } : acc),
-          {},
-        ),
-      )
-      const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
-        ({ type: configType }) => searchBarFilterValue === configType,
-      )
-      if (actionType) {
-        history.push({ pathname: actionType.path, search: query ? `?${query}` : '' })
-      }
-    }
+      // If a suggestion is selected use that one, otherwise submit the form
+      if (selectedElement) {
+        document.querySelector<HTMLAnchorElement>(`.${ACTIVE_ITEM_CLASS}`)?.click()
+      } else {
+        const actionType = Object.values(SEARCH_PAGE_CONFIG).find(
+          ({ type: configType }) => searchBarFilterValue === configType,
+        )
 
-    // @ts-ignore
-    document.activeElement?.blur()
-  }
+        if (actionType) {
+          history.push({
+            pathname: actionType.path,
+            search: new URLSearchParams({ term: inputValue.trim() }).toString(),
+          })
+        }
+      }
+
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement?.blur()
+      }
+    },
+    [inputValue, selectedElement, searchBarFilterValue],
+  )
 
   const onBlur = () => {
     // Arbitrary 200 ms timeout here, needed since onBlur is triggered before the user can actually click on a link
