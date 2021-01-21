@@ -124,7 +124,10 @@ const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, a
             {[...currentFilter.options]
               .slice(0, isExpanded ? currentFilter.options.length : showMoreThreshold)
               .map((option) => (
-                <li className={`c-sbi-filter__item c-sbi-filter__item--${option.slug}`}>
+                <li
+                  key={option.slug}
+                  className={`c-sbi-filter__item c-sbi-filter__item--${option.slug}`}
+                >
                   <StyledLink
                     inList
                     type="button"

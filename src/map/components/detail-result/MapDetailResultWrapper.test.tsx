@@ -39,7 +39,7 @@ describe('MapDetailResultWrapper', () => {
         </ul>
       </MapDetailResultWrapper>,
     )
-    expect(wrapper.find('map-detail-result__header').length).toBe(0)
+    expect(wrapper.find('.map-detail-result__header').length).toBe(0)
   })
 
   it('should not render empty subTitle', () => {

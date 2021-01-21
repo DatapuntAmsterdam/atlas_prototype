@@ -112,13 +112,7 @@ const MapSearchResults = ({
         </ul>
         {!isEmbed && (
           <footer className="map-search-results__footer">
-            <StyledButton
-              type="button"
-              onClick={onMaximize}
-              title="Volledig weergeven"
-              iconLeft={<Maximize />}
-              iconSize={21}
-            >
+            <StyledButton type="button" onClick={onMaximize} iconLeft={<Maximize />} iconSize={21}>
               Volledig weergeven
             </StyledButton>
           </footer>

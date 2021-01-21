@@ -130,7 +130,6 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                       size={28}
                       iconSize={18}
                       icon={<Metadata />}
-                      title="Uitleg tonen"
                       href={filter.info_url}
                       rel="noreferrer noopener"
                       target="_blank"
@@ -147,7 +146,7 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                       isExpandedFilter(filter.slug) ? filter.options.length : showMoreThreshold,
                     )
                     .map((option) => (
-                      <li className="c-data-selection-available-filters__item">
+                      <li key={option.id} className="c-data-selection-available-filters__item">
                         <StyledLink
                           inList
                           type="button"

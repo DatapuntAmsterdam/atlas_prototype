@@ -17,7 +17,7 @@ const ShapeSummary: FunctionComponent<Props> = ({ shapeDistanceTxt, onClearDrawi
     </span>
 
     <Button
-      title="Lijn verwijderen"
+      aria-label="Lijn verwijderen"
       type="button"
       size={24}
       variant="blank"

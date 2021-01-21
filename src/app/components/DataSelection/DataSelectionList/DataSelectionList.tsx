@@ -34,9 +34,8 @@ export const toDetailPage = (endpoint: string): LocationDescriptor => {
 const DataSelectionList: FunctionComponent<Props> = ({ content }) => {
   return (
     <ul>
-      {content.body.map((row, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <StyledListItem key={`${index}/${row.detailEndpoint}`}>
+      {content.body.map((row) => (
+        <StyledListItem key={row.content[0]}>
           <Link as={RouterLink} to={toDetailPage(row.detailEndpoint)} inList>
             {/*
             // @ts-ignore */}

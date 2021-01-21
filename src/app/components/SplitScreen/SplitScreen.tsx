@@ -1,10 +1,15 @@
 import { FunctionComponent, ReactNode } from 'react'
+import styled from 'styled-components'
 
 export interface SplitScreenProps {
   leftComponent: ReactNode
   rightComponent: ReactNode
   printMode: boolean
 }
+
+const Right = styled.div`
+  width: 100%;
+`
 
 const SplitScreen: FunctionComponent<SplitScreenProps> = ({
   leftComponent,
@@ -31,7 +36,7 @@ const SplitScreen: FunctionComponent<SplitScreenProps> = ({
         qa-dashboard__column--right
       `}
     >
-      <div style={{ width: '100%' }}>{rightComponent}</div>
+      <Right>{rightComponent}</Right>
     </div>
   </div>
 )

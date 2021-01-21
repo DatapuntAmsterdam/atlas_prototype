@@ -26,7 +26,7 @@ const ActiveFilters: FunctionComponent<ActiveFiltersProps> = ({ removeFilter, fi
         <li key={slug}>
           <FilterTag
             type="button"
-            title={`Filter verwijderen: ${label}: ${option}`}
+            aria-label={`Filter verwijderen: ${label}: ${option}`}
             onClick={() => removeFilter(slug)}
           >
             {label}: {option}
