@@ -35,7 +35,7 @@ const ToggleFullscreen: FunctionComponent<ToggleFullscreenProps> = ({
 }) => (
   <StyledControlButton
     variant="blank"
-    title={isFullscreen ? `${title} verkleinen` : `${title} vergroten`}
+    aria-label={isFullscreen ? `${title} verkleinen` : `${title} vergroten`}
     icon={isFullscreen ? <Minimize /> : <Maximize />}
     iconSize={28}
     size={40}

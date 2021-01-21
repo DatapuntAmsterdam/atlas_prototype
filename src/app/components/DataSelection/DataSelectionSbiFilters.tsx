@@ -133,7 +133,6 @@ const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, a
                     type="button"
                     forwardedAs="button"
                     onClick={() => clickFilter(option.id)}
-                    title={option.label}
                   >
                     <span
                       className={`c-sbi-filter__item-label ${

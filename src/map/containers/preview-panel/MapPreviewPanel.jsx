@@ -38,7 +38,7 @@ const MapPreviewPanel = ({
           <Button
             type="button"
             variant="blank"
-            title="Volledige weergave tonen"
+            aria-label="Volledige weergave tonen"
             size={28}
             icon={<MaximizeIcon />}
             iconSize={24}
@@ -47,7 +47,7 @@ const MapPreviewPanel = ({
           <Button
             type="button"
             variant="blank"
-            title="Sluiten"
+            aria-label="Sluiten"
             size={28}
             icon={<Close />}
             iconSize={15}

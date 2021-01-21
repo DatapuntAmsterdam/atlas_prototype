@@ -29,7 +29,7 @@ const MapEmbedButton = ({ toggleEmbedButton }) => (
       toggleEmbedButton()
       setTimeout(() => window.open(getEmbedButtonLink(), '_blank'), 300)
     }}
-    title="Naar interactieve kaart"
+    aria-label="Naar interactieve kaart"
     data-test="embed-button"
     iconLeft={<ExternalLink />}
   >

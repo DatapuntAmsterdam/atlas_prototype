@@ -150,14 +150,14 @@ class PanoramaContainer extends Component {
 
         <ToggleFullscreen
           isFullscreen={isFullscreen}
-          title="Panoramabeeld"
+          aria-label="Panoramabeeld"
           onToggleFullscreen={this.toggleFullscreen}
           alignLeft
         />
 
         <StyledControlButton
           onClick={onClose}
-          title="Panoramabeeld sluiten"
+          aria-label="Panoramabeeld sluiten"
           icon={<Close />}
           variant="blank"
           iconSize={20}
