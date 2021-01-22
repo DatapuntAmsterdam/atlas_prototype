@@ -14,8 +14,10 @@ import {
   themeColor,
   themeSpacing,
 } from '@amsterdam/asc-ui'
-import PropTypes from 'prop-types'
-import RouterLink from 'redux-first-router-link'
+import { LocationDescriptorObject } from 'history'
+import { FunctionComponent } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import ReduxRouterLink, { To } from 'redux-first-router-link'
 import styled from 'styled-components'
 
 const StyledHeading = styled(Heading)`
@@ -47,7 +49,7 @@ const StyledLink = styled(Link)`
       text-decoration: underline;}
 
     ${styles.IconStyle} {
-      ${svgFill(themeColor('main', 'secondary'))};
+      ${svgFill(themeColor('secondary', 'main'))};
     }
   }
 
@@ -85,8 +87,24 @@ const StyledParagraph = styled(Paragraph)`
   overflow: hidden; // make sure the text doesn't falls outside this Paragraph
 `
 
-const NavigationCard = ({ CardIcon, to, title, description }) => (
-  <StyledLink forwardedAs={RouterLink} variant="blank" to={to}>
+export interface NavigationCardProps {
+  CardIcon: () => JSX.Element
+  title: string
+  description: string
+  to: To | LocationDescriptorObject
+}
+
+const NavigationCard: FunctionComponent<NavigationCardProps> = ({
+  CardIcon,
+  to,
+  title,
+  description,
+}) => (
+  <StyledLink
+    forwardedAs={typeof to === 'object' && 'pathname' in to ? RouterLink : ReduxRouterLink}
+    variant="blank"
+    to={to}
+  >
     <StyledCard horizontal>
       <StyledCardMedia backgroundColor="level2">
         <CardIcon />
@@ -105,12 +123,5 @@ const NavigationCard = ({ CardIcon, to, title, description }) => (
     </StyledCard>
   </StyledLink>
 )
-
-NavigationCard.propTypes = {
-  CardIcon: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  to: PropTypes.shape({}).isRequired,
-}
 
 export default NavigationCard

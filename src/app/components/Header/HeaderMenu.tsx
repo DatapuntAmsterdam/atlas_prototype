@@ -12,6 +12,7 @@ import { ComponentProps, FunctionComponent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
+import ReduxRouterLink from 'redux-first-router-link'
 import environment from '../../../environment'
 import CONSTANTS from '../../../shared/config/constants'
 import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/content-links'
@@ -87,7 +88,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
               })
               dropFocus()
             }}
-            as={RouterLink}
+            as={typeof to === 'object' && 'pathname' in to ? RouterLink : ReduxRouterLink}
             iconLeft={<ChevronRight />}
             key={id}
             /* @ts-ignore */
