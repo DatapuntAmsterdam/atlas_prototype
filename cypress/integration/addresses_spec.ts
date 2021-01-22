@@ -1,7 +1,6 @@
 import { getCountFromHeader } from '../support/helper-functions'
 import {
   ADDRESS_PAGE,
-  // COMPONENTS,
   DETAIL_PANEL,
   DATA_SEARCH,
   DATA_SELECTION_TABLE,
