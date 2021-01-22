@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
 import RouterLink from 'redux-first-router-link'
+import { toArticleDetail } from '../../app/links'
 import formatDate from '../../app/utils/formatDate'
 import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
 import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
 import {
-  toArticleDetail,
   toCollectionDetail,
   toPublicationDetail,
   toSpecialDetail,

@@ -1,7 +1,8 @@
 import { Heading, Link, List, Paragraph, themeSpacing, Typography } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
-import RouterLink, { To } from 'redux-first-router-link'
+import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
+import pickLinkComponent from '../../utils/pickLinkComponent'
 import { formatNoResultsMessage } from './utils'
 
 const StyledList = styled(List)`
@@ -24,11 +25,7 @@ export interface NoSearchResultsProps {
   to?: To
 }
 
-const NoSearchResults: FunctionComponent<NoSearchResultsProps> = ({
-  query,
-  label = '',
-  to = false,
-}) => (
+const NoSearchResults: FunctionComponent<NoSearchResultsProps> = ({ query, label = '', to }) => (
   <>
     <Paragraph data-testid="noSearchResults">{formatNoResultsMessage(query, label)}</Paragraph>
     <Heading as="h3">Zoeksuggesties</Heading>
@@ -37,7 +34,7 @@ const NoSearchResults: FunctionComponent<NoSearchResultsProps> = ({
       {to && (
         <StyledListItem>
           Of bekijk de lijst{' '}
-          <Link as={RouterLink} to={to} title={label} variant="inline">
+          <Link as={pickLinkComponent(to)} to={to} title={label} variant="inline">
             {label}
           </Link>{' '}
           en filter vervolgens op thema.

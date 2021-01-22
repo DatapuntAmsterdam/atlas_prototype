@@ -16,9 +16,9 @@ import {
 } from '@amsterdam/asc-ui'
 import { LocationDescriptorObject } from 'history'
 import { FunctionComponent } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import ReduxRouterLink, { To } from 'redux-first-router-link'
+import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
+import pickLinkComponent from '../../utils/pickLinkComponent'
 
 const StyledHeading = styled(Heading)`
   margin-bottom: 0;
@@ -100,11 +100,7 @@ const NavigationCard: FunctionComponent<NavigationCardProps> = ({
   title,
   description,
 }) => (
-  <StyledLink
-    forwardedAs={typeof to === 'object' && 'pathname' in to ? RouterLink : ReduxRouterLink}
-    variant="blank"
-    to={to}
-  >
+  <StyledLink forwardedAs={pickLinkComponent(to)} variant="blank" to={to}>
     <StyledCard horizontal>
       <StyledCardMedia backgroundColor="level2">
         <CardIcon />

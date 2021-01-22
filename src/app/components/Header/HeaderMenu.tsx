@@ -12,7 +12,6 @@ import { ComponentProps, FunctionComponent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import ReduxRouterLink from 'redux-first-router-link'
 import environment from '../../../environment'
 import CONSTANTS from '../../../shared/config/constants'
 import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/content-links'
@@ -20,6 +19,7 @@ import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
 import { login, logout } from '../../../shared/services/auth/auth'
 import truncateString from '../../../shared/services/truncateString/truncateString'
 import { toArticleDetail } from '../../links'
+import pickLinkComponent from '../../utils/pickLinkComponent'
 import navigationLinks from '../HomePage/services/navigationLinks'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
 
@@ -88,7 +88,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
               })
               dropFocus()
             }}
-            as={typeof to === 'object' && 'pathname' in to ? RouterLink : ReduxRouterLink}
+            as={pickLinkComponent(to)}
             iconLeft={<ChevronRight />}
             key={id}
             /* @ts-ignore */

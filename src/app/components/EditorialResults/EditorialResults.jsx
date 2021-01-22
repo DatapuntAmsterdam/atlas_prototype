@@ -1,8 +1,6 @@
 import { CardContainer } from '@amsterdam/asc-ui'
 import { memo } from 'react'
-import ReduxRouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
-import { Link as RouterLink } from 'react-router-dom'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
@@ -14,6 +12,7 @@ import {
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
+import pickLinkComponent from '../../utils/pickLinkComponent'
 import AuthAlert from '../Alerts/AuthAlert'
 import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
@@ -82,10 +81,7 @@ const EditorialResults = ({
 
               return (
                 <EditorialCard
-                  // TODO: Remove this check once all links are based on React Router.
-                  forwardedAs={
-                    typeof to === 'object' && 'pathname' in to ? RouterLink : ReduxRouterLink
-                  }
+                  forwardedAs={pickLinkComponent(to)}
                   type={type}
                   specialType={specialType}
                   key={id}
