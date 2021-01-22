@@ -1,5 +1,6 @@
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
+import { LocationDescriptorObject } from 'history'
 import { To } from 'redux-first-router-link'
 import environment from '../../../../environment'
 import {
@@ -7,7 +8,6 @@ import {
   NAVIGATION_LINK_DATA_SERVICES,
 } from '../../../../shared/config/content-links'
 import {
-  toArticleDetail,
   toArticleSearch,
   toCollectionSearch,
   toDatasetSearch,
@@ -17,11 +17,12 @@ import {
   toPublicationSearch,
   toSpecialSearch,
 } from '../../../../store/redux-first-router/actions'
+import { toArticleDetail } from '../../../links'
 import { routing as routes } from '../../../routes'
 
 export interface NavigationLink {
   id: number
-  to: To
+  to: To | LocationDescriptorObject
   CardIcon?: () => JSX.Element
   title: string
   description?: string
