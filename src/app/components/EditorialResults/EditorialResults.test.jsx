@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme'
-import { generatePath } from 'react-router-dom'
 import { CmsType } from '../../../shared/config/cms.config'
 import { toArticleDetail } from '../../links'
 import EditorialResults, { IMAGE_SIZE } from './EditorialResults'
