@@ -1,4 +1,5 @@
 import { Heading, Link, List, Paragraph, themeSpacing, Typography } from '@amsterdam/asc-ui'
+import { LocationDescriptorObject } from 'history'
 import { FunctionComponent } from 'react'
 import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
@@ -22,7 +23,7 @@ const StyledListItem: FunctionComponent = ({ children }) => (
 export interface NoSearchResultsProps {
   query: string
   label?: string
-  to?: To
+  to?: To | LocationDescriptorObject
 }
 
 const NoSearchResults: FunctionComponent<NoSearchResultsProps> = ({ query, label = '', to }) => (

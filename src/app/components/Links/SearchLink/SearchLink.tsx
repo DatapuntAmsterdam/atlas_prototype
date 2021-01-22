@@ -1,9 +1,9 @@
 import { Link, styles, svgFill, themeColor } from '@amsterdam/asc-ui'
 import { LocationDescriptorObject } from 'history'
 import { FunctionComponent } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
 import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
+import pickLinkComponent from '../../../utils/pickLinkComponent'
 
 const StyledLink = styled(Link)`
   color: ${themeColor('primary')};
@@ -22,7 +22,7 @@ export interface SearchLinkProps {
 }
 
 const SearchLink: FunctionComponent<SearchLinkProps> = ({ to, label, title = '' }) => (
-  <StyledLink inList forwardedAs={RouterLink} to={to} title={title || label}>
+  <StyledLink inList forwardedAs={pickLinkComponent(to)} to={to} title={title || label}>
     {label}
   </StyledLink>
 )

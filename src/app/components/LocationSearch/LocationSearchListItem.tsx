@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { Link, ListItem } from '@amsterdam/asc-ui'
+import { LocationDescriptorObject } from 'history'
 import { FunctionComponent } from 'react'
 import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
@@ -17,7 +18,7 @@ export type Result = {
   type_adres?: string
   vbo_status?: string
   endpoint?: string
-  linkTo: To
+  linkTo: To | LocationDescriptorObject
 }
 
 const showSubtype = (categorySlug?: unknown, result?: Result) =>

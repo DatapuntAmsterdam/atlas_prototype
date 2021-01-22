@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import RouterLink from 'redux-first-router-link'
 import { toArticleDetail } from '../../app/links'
 import formatDate from '../../app/utils/formatDate'
+import pickLinkComponent from '../../app/utils/pickLinkComponent'
 import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
 import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
@@ -62,7 +62,7 @@ const normalizeObject = (data) => {
 
   // By default use the internal router, fallback on a div if there's no link.
   // If there's an externalUrl set, override the linkProps.
-  let linkProps = to ? { to, forwardedAs: RouterLink } : { forwardedAs: 'div' }
+  let linkProps = to ? { to, forwardedAs: pickLinkComponent(to) } : { forwardedAs: 'div' }
   const externalUrl = field_link?.uri ? cleanupDrupalUri(field_link?.uri) : null
 
   linkProps = externalUrl ? { href: externalUrl, forwardedAs: 'a' } : linkProps
