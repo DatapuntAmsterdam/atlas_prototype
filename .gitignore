@@ -18,3 +18,4 @@ cypress.env.json
 yarn.lock
 .yalc/
 yalc.lock
+cypress/screenshots
