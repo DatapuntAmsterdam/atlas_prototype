@@ -1,7 +1,8 @@
 import { CardContainer } from '@amsterdam/asc-ui'
 import { memo } from 'react'
-import RouterLink from 'redux-first-router-link'
+import ReduxRouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
@@ -81,7 +82,10 @@ const EditorialResults = ({
 
               return (
                 <EditorialCard
-                  forwardedAs={RouterLink}
+                  // TODO: Remove this check once all links are based on React Router.
+                  forwardedAs={
+                    typeof to === 'object' && 'pathname' in to ? RouterLink : ReduxRouterLink
+                  }
                   type={type}
                   specialType={specialType}
                   key={id}
