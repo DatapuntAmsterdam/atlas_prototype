@@ -2,7 +2,7 @@ import { Alert, CustomHTMLBlock, Link, ShowMoreShowLess } from '@amsterdam/asc-u
 import { FunctionComponent } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { LocationDescriptor } from 'history'
+import { LocationDescriptorObject } from 'history'
 import { DetailResultItemDefinitionList } from '../../../../map/types/details'
 import DefinitionList, { DefinitionListItem } from '../../../components/DefinitionList'
 
@@ -31,7 +31,7 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
 
 function renderDescription(
   description?: string | null,
-  href?: LocationDescriptor | null,
+  href?: LocationDescriptorObject | null,
   to?: string | { pathname: string; search?: string },
 ) {
   if (href) {

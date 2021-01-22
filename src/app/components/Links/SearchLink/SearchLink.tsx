@@ -1,5 +1,5 @@
 import { Link, styles, svgFill, themeColor } from '@amsterdam/asc-ui'
-import { LocationDescriptor } from 'history'
+import { LocationDescriptorObject } from 'history'
 import { FunctionComponent } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { To } from 'redux-first-router-link'
@@ -16,7 +16,7 @@ const StyledLink = styled(Link)`
 
 export interface SearchLinkProps {
   // TODO: Drop redux-first-router type once no longer in use.
-  to: LocationDescriptor | To
+  to: LocationDescriptorObject | To
   label: string
   title?: string
 }

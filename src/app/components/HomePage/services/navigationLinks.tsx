@@ -1,5 +1,6 @@
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
+import { To } from 'redux-first-router-link'
 import environment from '../../../../environment'
 import {
   NAVIGATION_LINK_DATA_IN_TABLES,
@@ -17,11 +18,18 @@ import {
   toSpecialSearch,
 } from '../../../../store/redux-first-router/actions'
 import { routing as routes } from '../../../routes'
-import decodeHTML from '../../../utils/decodeHTML'
+
+export interface NavigationLink {
+  id: number
+  to: To
+  CardIcon?: () => JSX.Element
+  title: string
+  description?: string
+}
 
 // The id's also represent the order in which they are displayed in the NavigationBlock on the homepage
 // The order of how the items are placed in the array, is the order for the Menu
-const navigationLinks = [
+const navigationLinks: NavigationLink[] = [
   {
     id: 0,
     to: toMapWithLegendOpen(),
@@ -41,7 +49,8 @@ const navigationLinks = [
         <Pano />
       </Icon>
     ),
-    title: decodeHTML('Panorama&shy;beelden'),
+    // This text includes a soft hyphen to break words correctly, which might not show up in your editor.
+    title: 'Panorama­beelden',
     description: 'Kijk 360 graden in het rond',
   },
   {
@@ -107,7 +116,8 @@ const navigationLinks = [
       </Icon>
     ),
     title: routes.publicationSearch.title,
-    description: decodeHTML('Download factsheets en onderzoeks&shy;rapporten'),
+    // This text includes a soft hyphen to break words correctly, which might not show up in your editor.
+    description: 'Download factsheets en onderzoeks­rapporten',
   },
   {
     id: 8,

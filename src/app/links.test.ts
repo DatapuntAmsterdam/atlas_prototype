@@ -1,5 +1,11 @@
 import { generatePath } from 'react-router-dom'
-import { toAddresses, toCadastralObjects, toConstructionFile, toEstablishments } from './links'
+import {
+  toAddresses,
+  toArticleDetail,
+  toCadastralObjects,
+  toConstructionFile,
+  toEstablishments,
+} from './links'
 import { routing } from './routes'
 
 describe('toAddresses', () => {
@@ -7,6 +13,17 @@ describe('toAddresses', () => {
     expect(toAddresses()).toEqual({
       pathname: routing.addresses.path,
       search: 'modus=volledig',
+    })
+  })
+})
+
+describe('toArticleDetail', () => {
+  const id = '123456'
+  const slug = 'hello-world'
+
+  it('creates a location descriptor', () => {
+    expect(toArticleDetail(id, slug)).toEqual({
+      pathname: generatePath(routing.articleDetail.path, { id, slug }),
     })
   })
 })

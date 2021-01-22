@@ -1,10 +1,10 @@
-import { LocationDescriptor } from 'history'
+import { LocationDescriptorObject } from 'history'
 import { generatePath } from 'react-router-dom'
 import { ViewMode } from '../shared/ducks/ui/ui'
 import parameters from '../store/parameters'
 import { routing } from './routes'
 
-export const toAddresses = (): LocationDescriptor => {
+export const toAddresses = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
     [parameters.VIEW]: ViewMode.Full,
   })
@@ -15,7 +15,11 @@ export const toAddresses = (): LocationDescriptor => {
   }
 }
 
-export const toCadastralObjects = (): LocationDescriptor => {
+export const toArticleDetail = (id: string, slug: string): LocationDescriptorObject => ({
+  pathname: generatePath(routing.articleDetail.path, { id, slug }),
+})
+
+export const toCadastralObjects = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
     [parameters.VIEW]: ViewMode.Full,
   })
@@ -30,7 +34,7 @@ export const toConstructionFile = (
   id: string,
   fileName: string,
   fileUrl: string,
-): LocationDescriptor => {
+): LocationDescriptorObject => {
   const pathname = generatePath(routing.constructionFile.path, { id })
   const searchParams = new URLSearchParams({
     [parameters.FILE]: fileName,
@@ -40,7 +44,7 @@ export const toConstructionFile = (
   return { pathname, search: searchParams.toString() }
 }
 
-export const toEstablishments = (): LocationDescriptor => {
+export const toEstablishments = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
     [parameters.VIEW]: ViewMode.Full,
   })

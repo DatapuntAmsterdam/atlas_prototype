@@ -1,6 +1,6 @@
 import { Alert, Heading, Link } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { LocationDescriptor } from 'history'
+import { LocationDescriptorObject } from 'history'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import { FunctionComponent } from 'react'
 import {
@@ -107,7 +107,7 @@ function renderDefinitionListItem(item: DetailResultItemDefinitionList, index: n
 
 function renderDescription(
   description?: string | null,
-  href?: LocationDescriptor | null,
+  href?: LocationDescriptorObject | null,
   to?: string | { pathname: string; search?: string },
 ) {
   if (href) {

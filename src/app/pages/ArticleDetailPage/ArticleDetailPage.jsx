@@ -29,12 +29,12 @@ import useNormalizedCMSResults, {
   EDITORIAL_FIELD_TYPE_VALUES,
 } from '../../../normalizations/cms/useNormalizedCMSResults'
 import cmsConfig from '../../../shared/config/cms.config'
-import { toArticleDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import EditorialResults from '../../components/EditorialResults'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import ShareBar from '../../components/ShareBar/ShareBar'
+import { toArticleDetail } from '../../links'
 import getImageFromCms from '../../utils/getImageFromCms'
 import useDownload from '../../utils/useDownload'
 import useFromCMS from '../../utils/useFromCMS'
@@ -165,7 +165,7 @@ const ArticleDetailPage = () => {
   const { trackEvent } = useMatomo()
 
   const documentTitle = title && `Artikel: ${title}`
-  const linkAction = useMemo(() => slug && toArticleDetail(id, slug), [slug, id])
+  const link = useMemo(() => (slug ? toArticleDetail(id, slug) : null), [slug, id])
 
   const normalizedDownloads = useMemo(() => normalizeDownloadsObject(downloads), [downloads])
 
@@ -173,7 +173,12 @@ const ArticleDetailPage = () => {
 
   return (
     <EditorialPage
-      {...{ documentTitle, loading, linkAction, title, lang, error }}
+      documentTitle={documentTitle}
+      loading={loading}
+      link={link}
+      title={title}
+      lang={lang}
+      error={error}
       image={coverImage}
       description={intro}
     >
