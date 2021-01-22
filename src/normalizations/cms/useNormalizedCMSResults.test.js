@@ -1,3 +1,4 @@
+import { toArticleDetail } from '../../app/links'
 import formatDate from '../../app/utils/formatDate'
 import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
@@ -76,12 +77,7 @@ describe('useNormalizedCMSResults', () => {
         type: CmsType.Article,
       }),
     ).toMatchObject({
-      to: {
-        payload: {
-          id: input.uuid,
-          slug,
-        },
-      },
+      to: toArticleDetail(input.uuid, slug),
     })
   })
 

@@ -13,6 +13,7 @@ jest.mock('../../utils/useDocumentTitle')
 jest.mock('@datapunt/matomo-tracker-react')
 jest.mock('react-router-dom', () => ({
   useParams: () => ({ id: 'foo' }),
+  useHistory: () => ({ createHref: () => '' }),
 }))
 
 const mockedUseFromCMS = mocked(useFromCMS, true)

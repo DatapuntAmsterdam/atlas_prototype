@@ -1,5 +1,7 @@
 import { shallow } from 'enzyme'
+import { generatePath } from 'react-router-dom'
 import { CmsType } from '../../../shared/config/cms.config'
+import { toArticleDetail } from '../../links'
 import EditorialResults, { IMAGE_SIZE } from './EditorialResults'
 
 describe('EditorialResults', () => {
@@ -57,12 +59,7 @@ describe('EditorialResults', () => {
       specialType: result.specialType,
       title: result.label,
       type: result.type,
-      to: {
-        payload: {
-          id: result.id,
-          slug: result.slug,
-        },
-      },
+      to: toArticleDetail(result.id, result.slug),
     })
   })
 

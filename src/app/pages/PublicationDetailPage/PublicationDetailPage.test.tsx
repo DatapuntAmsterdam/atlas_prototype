@@ -19,6 +19,7 @@ jest.mock('@datapunt/matomo-tracker-react')
 
 jest.mock('react-router-dom', () => ({
   useParams: () => ({ id: 'foo' }),
+  useHistory: () => ({ createHref: () => '' }),
 }))
 
 const mockedLinkAttributesFromAction = mocked(linkAttributesFromAction, true)
