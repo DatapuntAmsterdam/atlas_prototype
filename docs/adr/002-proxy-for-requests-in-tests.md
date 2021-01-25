@@ -16,7 +16,7 @@ Neither type of test makes use of a standardized collection of data fixtures. Th
 
 To ensure that both integration and unit tests can be run without having to rely on a network connection present, data fixtures should be used for all requests that query an API endpoint and expect a specific data structure to be provided. Those data fixtures should be stored in the application's code base and should be accessible to both types of tests.
 
-To prevent having to set and endpoint's output per test suite or test case, a request proxy should be configured that catches all requests and returns a data fixture for those requests. This way, all requests are configured in a central location and the same data is returned for a specific request. This proxy should serve both integration and unit tests.
+To prevent having to set an endpoint's output per test suite or test case, a request proxy should be configured that catches all requests and returns a data fixture for those requests. This way, all requests are configured in a central location and the same data is returned for a specific request. This proxy should serve both integration and unit tests.
 
 The data fixtures must resemble the exact output of the API endpoints that are used in the application.
 
