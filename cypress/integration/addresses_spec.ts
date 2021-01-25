@@ -1,7 +1,6 @@
 import { getCountFromHeader } from '../support/helper-functions'
 import {
   ADDRESS_PAGE,
-  COMPONENTS,
   DETAIL_PANEL,
   DATA_SEARCH,
   DATA_SELECTION_TABLE,
@@ -74,6 +73,7 @@ describe('addresses module', () => {
     beforeEach(() => {
       cy.defineAddressDetailRoutes()
     })
+
     it('should open the detail view with the correct address', () => {
       cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`)
         .first()
@@ -90,16 +90,24 @@ describe('addresses module', () => {
               cy.waitForAdressDetail()
 
               cy.get(DETAIL_PANEL.main).should('exist').and('be.visible')
-              cy.get('dt').contains(selectedGroup).should('exist').and('be.visible')
+
               cy.get('dt')
                 .contains(selectedGroup)
+                .should('exist')
+                // element can be hidden from view in the detail panel
+                .scrollIntoView()
+                .and('be.visible')
+
+              cy.get('dt')
                 .siblings('dd')
+                .first()
                 .contains(selectedValue)
                 .should('exist')
                 .and('be.visible')
             })
         })
     })
+
     it('should close the detail view and open the map view with the correct address', () => {
       cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`)
         .first()
@@ -107,8 +115,7 @@ describe('addresses module', () => {
           cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`)
             .first()
             .find(`${DATA_SELECTION_TABLE.cell}:nth-child(1)`)
-            .then((firstValue) => {
-              const selectedValue = firstValue[0].innerText.trim()
+            .then(() => {
               // click on the firstItem to open address preview panel
               cy.get(`${DATA_SELECTION_TABLE.body} ${DATA_SELECTION_TABLE.row}`).first().click()
               // the detail view should exist
@@ -123,11 +130,10 @@ describe('addresses module', () => {
 
               // the preview panel should exist
               cy.get(MAP.mapPreviewPanel).should('exist').and('be.visible')
-              // the preview panel has the right title
-              cy.get(DATA_SEARCH.mapDetailResultHeaderSubTitle)
-                .contains(selectedValue)
-                .should('exist')
-                .and('be.visible')
+
+              // panorama login requirement alert is shown
+              cy.get('[data-testid="panoAlert"]').should('exist').and('be.visible')
+
               // the show more button should exist and be visible
               cy.get(ADDRESS_PAGE.buttonShowMore).should('exist').scrollIntoView().and('be.visible')
             })
@@ -234,8 +240,8 @@ describe('open address', () => {
     cy.get(ADDRESS_PAGE.resultsPanel).get(DETAIL_PANEL.heading).contains('Ad Windighof 2')
     cy.get(ADDRESS_PAGE.resultsPanel).get('dl').contains('1087HE')
 
-    cy.wait('@getPanorama')
-    cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
+    // cy.wait('@getPanorama')
+    // cy.get(COMPONENTS.panoramaPreview).should('exist').and('be.visible')
 
     cy.get(MAP.mapZoomIn).click()
     cy.get(MAP.mapZoomIn).click()
