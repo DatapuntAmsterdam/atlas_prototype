@@ -37,7 +37,7 @@
     "@datapunt/matomo-tracker-js": "0.3.1",
     "@datapunt/matomo-tracker-react": "0.3.1",
     "@sentry/browser": "5.30.0",
-    "@turf/turf": "^6.2.0",
+    "@turf/turf": "^6.3.0",
     "body-scroll-lock": "^3.1.5",
     "classnames": "2.2.6",
     "core-js": "^3.8.3",
