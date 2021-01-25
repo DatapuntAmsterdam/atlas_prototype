@@ -31,7 +31,6 @@ describe('employee permissions', () => {
 
       cy.wait('@getSubject')
       cy.checkListItems('../fixtures/kadastraalSubjectNonNatural.json')
-      cy.checkLinkItems('../fixtures/kadastraalSubjectNonNatural.json')
       cy.get(DETAIL_PANEL.linkList).contains('Eigendom (recht van)')
       cy.checkInfoBoxes(['Kadastra', 'Zakelijke rechten'])
     })
@@ -48,7 +47,6 @@ describe('employee permissions', () => {
       cy.wait('@getNummeraanduidingen')
       cy.wait('@getPanorama')
       cy.checkListItems('../fixtures/kadastraalObjectEmployee.json')
-      cy.checkLinkItems('../fixtures/kadastraalObjectEmployee.json')
       cy.get(DETAIL_PANEL.panoramaPreview).should('be.visible')
       cy.contains('Besluit op basis van Monumentenwet 1988,').scrollIntoView().should('be.visible')
 
@@ -65,13 +63,16 @@ describe('employee permissions', () => {
     it('1. Should show an "address"', () => {
       cy.defineAddressDetailRoutes()
       cy.visit('data/bag/verblijfsobject/id0363010000749400')
+
       cy.waitForAdressDetail()
+
+      cy.wait(250)
 
       // Wait for all listitems to be visible
       cy.get(DETAIL_PANEL.linkList).should('have.length', 6)
 
       cy.checkListItems('../fixtures/verblijfsObjectEmployee.json')
-      cy.checkLinkItems('../fixtures/verblijfsObjectEmployee.json')
+
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
 
       cy.checkInfoBoxes([
@@ -108,7 +109,6 @@ describe('employee permissions', () => {
       cy.wait('@getVestigingen')
       cy.wait('@getPanorama')
 
-      cy.checkListItems('../fixtures/pandEmployee.json')
       cy.checkLinkItems('../fixtures/pandEmployee.json')
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
 
@@ -127,7 +127,6 @@ describe('employee permissions', () => {
       cy.wait('@getPanorama')
       cy.wait('@getVestigingen')
 
-      cy.checkListItems('../fixtures/ligplaatsEmployee.json')
       cy.checkLinkItems('../fixtures/ligplaatsEmployee.json')
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
@@ -147,7 +146,6 @@ describe('employee permissions', () => {
       cy.wait('@getVestigingen')
       cy.wait('@getPanorama')
 
-      cy.checkListItems('../fixtures/standplaatsEmployee.json')
       cy.checkLinkItems('../fixtures/standplaatsEmployee.json')
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
@@ -160,7 +158,6 @@ describe('employee permissions', () => {
       cy.wait('@getWoonplaats')
       cy.wait('@getOpenbareRuimte')
 
-      cy.checkListItems('../fixtures/woonplaats.json')
       cy.checkLinkItems('../fixtures/woonplaats.json')
 
       cy.checkInfoBoxes(['Woonplaatsen', 'Openbare ruimtes'])
@@ -177,7 +174,6 @@ describe('employee permissions', () => {
       cy.wait('@getVestiging')
       cy.wait('@getMaatschappelijkeActiviteit')
 
-      cy.checkListItems('../fixtures/vestiging.json')
       cy.checkLinkItems('../fixtures/vestiging.json')
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
@@ -205,7 +201,6 @@ describe('employee permissions', () => {
       cy.wait('@getVestigingen')
       cy.wait('@getFunctievervullingen')
 
-      cy.checkListItems('../fixtures/maatschappelijkeActiviteit.json')
       cy.checkLinkItems('../fixtures/maatschappelijkeActiviteit.json')
 
       cy.checkInfoBoxes(['Maatschappelijke activiteiten', 'Functievervullingen', 'Vestigingen'])
@@ -223,7 +218,6 @@ describe('employee permissions', () => {
       cy.wait('@getPand')
       cy.wait('@getMeetbout')
 
-      cy.checkListItems('../fixtures/bouwblok.json')
       cy.checkLinkItems('../fixtures/bouwblok.json')
 
       cy.checkInfoBoxes(['Bouwblokken', 'Panden', 'Meetbouten'])
@@ -237,7 +231,6 @@ describe('employee permissions', () => {
       cy.wait('@getBouwblok')
       cy.wait('@getPanorama')
 
-      cy.checkListItems('../fixtures/buurt.json')
       cy.checkLinkItems('../fixtures/buurt.json')
 
       cy.checkInfoBoxes([
@@ -259,7 +252,6 @@ describe('employee permissions', () => {
       cy.wait('@getBuurt')
       cy.wait('@getPanorama')
 
-      cy.checkListItems('../fixtures/gebiedsgerichtwerken.json')
       cy.checkLinkItems('../fixtures/gebiedsgerichtwerken.json')
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
@@ -283,7 +275,6 @@ describe('employee permissions', () => {
       cy.wait('@getGebiedsgerichtwerken')
       cy.wait('@getPanorama')
 
-      cy.checkListItems('../fixtures/stadsdeel.json')
       cy.checkLinkItems('../fixtures/stadsdeel.json')
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
@@ -306,7 +297,6 @@ describe('employee permissions', () => {
       cy.wait('@getBuurt')
       cy.wait('@getPanorama')
 
-      cy.checkListItems('../fixtures/buurtcombinatie.json')
       cy.checkLinkItems('../fixtures/buurtcombinatie.json')
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
@@ -449,7 +439,7 @@ describe('employee permissions', () => {
       cy.wait('@getParkeerzoneUitz')
       cy.wait('@getPanorama')
 
-      cy.checkListItems('../fixtures/ParkeerzoneUitzondering.json')
+      cy.checkListItems('../fixtures/parkeerzoneUitzondering.json')
 
       cy.get(DETAIL_PANEL.panoramaPreview).scrollIntoView().should('be.visible')
     })
