@@ -40,6 +40,7 @@ describe('Search data', () => {
       })
       cy.get(DATA_SEARCH.autosuggestDropdownItemActive).should('contain', 'Panoramabeelden')
       cy.get(DATA_SEARCH.input).should('have.value', 'Panoramabeelden')
+      cy.wait(500)
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}')
       cy.get(DATA_SEARCH.autosuggestDropdownItemActive).contains('Cameratoezichtgebieden')
     })
@@ -152,10 +153,12 @@ describe('Search data', () => {
       cy.get(DATA_SEARCH.autoSuggestHeader).should('have.length', 1).and('have.text', 'Artikelen')
     })
   })
+
   describe('Data search with employee permissions', () => {
     beforeEach(() => {
       cy.hidePopup()
     })
+
     before(() => {
       cy.login('EMPLOYEE')
     })
@@ -163,6 +166,7 @@ describe('Search data', () => {
     after(() => {
       cy.logout()
     })
+
     it('Should show an employee all information in a Geo search', () => {
       cy.defineGeoSearchRoutes()
       cy.intercept('**/bag/v1.1/pand/**').as('getPand')
@@ -178,7 +182,7 @@ describe('Search data', () => {
       cy.wait('@getMonumenten')
       cy.wait('@getNummeraanduidingen')
       cy.wait('@getVestigingen')
-      cy.wait('@getPanorama')
+      // cy.wait('@getPanorama')
 
       cy.get(DATA_SEARCH.infoNotification).should('not.exist')
       cy.get('h2').contains('Vestigingen').should('be.visible')
