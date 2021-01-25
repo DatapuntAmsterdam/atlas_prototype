@@ -1,9 +1,9 @@
 import { Close } from '@amsterdam/asc-assets'
 import { Button, Divider, Heading, Link, Modal, Paragraph, TopBar } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import RouterLink from 'redux-first-router-link'
+import { Link as RouterLink } from 'react-router-dom'
 import CONSTANTS from '../../../shared/config/constants'
-import { toHelpPage } from '../../../store/redux-first-router/actions'
+import { toHelpPage } from '../../links'
 import ModalBlock from './ModalBlock'
 import withModalBehaviour, { propTypes as modalPropTypes } from './withModalBehaviour'
 

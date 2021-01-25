@@ -18,7 +18,7 @@ import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/con
 import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
 import { login, logout } from '../../../shared/services/auth/auth'
 import truncateString from '../../../shared/services/truncateString/truncateString'
-import { toArticleDetail } from '../../links'
+import { toArticleDetail, toHelpPage } from '../../links'
 import pickLinkComponent from '../../utils/pickLinkComponent'
 import navigationLinks from '../HomePage/services/navigationLinks'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
@@ -154,7 +154,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
           }}
           title={HEADER_LINK_HELP.title}
           /* @ts-ignore */
-          to={toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)}
+          to={toHelpPage()}
         >
           {HEADER_LINK_HELP.title}
         </MenuButton>

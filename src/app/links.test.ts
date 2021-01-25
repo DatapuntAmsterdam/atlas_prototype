@@ -1,10 +1,13 @@
 import { generatePath } from 'react-router-dom'
+import environment from '../environment'
+import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import {
   toAddresses,
   toArticleDetail,
   toCadastralObjects,
   toConstructionFile,
   toEstablishments,
+  toHelpPage,
 } from './links'
 import { routing } from './routes'
 
@@ -53,6 +56,17 @@ describe('toEstablishments', () => {
     expect(toEstablishments()).toEqual({
       pathname: routing.establishments.path,
       search: 'modus=volledig',
+    })
+  })
+})
+
+describe('toHelpPage', () => {
+  it('creates a location descriptor', () => {
+    const id = HEADER_LINK_HELP.id[environment.DEPLOY_ENV]
+    const { slug } = HEADER_LINK_HELP
+
+    expect(toHelpPage()).toEqual({
+      pathname: generatePath(routing.articleDetail.path, { id, slug }),
     })
   })
 })

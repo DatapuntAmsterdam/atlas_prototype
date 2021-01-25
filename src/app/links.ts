@@ -1,5 +1,7 @@
 import { LocationDescriptorObject } from 'history'
 import { generatePath } from 'react-router-dom'
+import environment from '../environment'
+import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import { ViewMode } from '../shared/ducks/ui/ui'
 import parameters from '../store/parameters'
 import { routing } from './routes'
@@ -54,3 +56,6 @@ export const toEstablishments = (): LocationDescriptorObject => {
     search: searchParams.toString(),
   }
 }
+
+export const toHelpPage = () =>
+  toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)
