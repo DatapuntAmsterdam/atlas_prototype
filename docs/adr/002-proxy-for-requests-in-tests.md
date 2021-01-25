@@ -18,7 +18,7 @@ To ensure that both integration and unit tests can be run without having to rely
 
 To prevent having to set an endpoint's output per test suite or test case, a request proxy should be configured that catches all requests and returns a data fixture for those requests. This way, all requests are configured in a central location and the same data is returned for a specific request. This proxy should serve both integration and unit tests.
 
-The data fixtures must resemble the exact output of the API endpoints that are used in the application.
+The data fixtures must resemble the exact output of the API endpoints that are used in the application. Ideally, fixture data and corresponding types are generated from the source API, but that is not yet possible.
 
 ## Consequences
 
@@ -28,4 +28,4 @@ Benefits:
 - storing data fixtures locally allows for typed data which will limit the number of errors in components that consume the data
 
 Downsides:
-- API output has to be captured and stored, which can be a lot of work
+- API output has to be captured and stored, which can be a lot of work. Also, exceptions in data output might be missed and lead to incorrect types.
