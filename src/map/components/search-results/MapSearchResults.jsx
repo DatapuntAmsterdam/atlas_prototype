@@ -8,6 +8,7 @@ import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
 import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
 import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
+import useCheckPanoramaPermission from '../../../app/utils/useCheckPanoramaPermission'
 
 const StyledLink = styled(Link)`
   padding: 0;
@@ -48,10 +49,11 @@ const MapSearchResults = ({
     }))
 
   const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location)
+  const { isForbidden, showComponent } = useCheckPanoramaPermission()
 
   return (
     <section className="map-search-results">
-      {panoramaUrl && user.authenticated ? (
+      {showComponent && panoramaUrl && !isForbidden ? (
         <header
           className={`
           map-search-results__header
@@ -79,7 +81,7 @@ const MapSearchResults = ({
           </StyledLink>
         </header>
       ) : (
-        <PanoAlert />
+        showComponent && isForbidden && <PanoAlert />
       )}
 
       <div className="map-search-results__scroll-wrapper">

@@ -23,6 +23,7 @@ import {
   SET_PANORAMA_LOCATION,
   SET_PANORAMA_TAGS,
 } from '../ducks/constants'
+import { ForbiddenError } from '../../shared/services/api/customError'
 
 export function* fetchFetchPanoramaEffect(action) {
   const view = yield select(getViewMode)
@@ -59,7 +60,9 @@ export function* handlePanoramaRequest(fn, input, tags) {
     }
     yield put(fetchPanoramaSuccess({ ...panoramaData, tags }))
   } catch (error) {
-    yield put(fetchPanoramaError(error))
+    if (!(error instanceof ForbiddenError)) {
+      yield put(fetchPanoramaError(error))
+    }
   }
 }
 

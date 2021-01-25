@@ -2,7 +2,6 @@ import { MapPanelContent } from '@amsterdam/arm-core'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Button, List, ListItem, Paragraph, themeSpacing } from '@amsterdam/asc-ui'
 import { Fragment, FunctionComponent, useContext, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import {
@@ -19,11 +18,9 @@ import {
   DetailResultItemType,
   PaginatedData as PaginatedDataType,
 } from '../../../../map/types/details'
-import { getUser } from '../../../../shared/ducks/user/user'
 import { AuthError } from '../../../../shared/services/api/customError'
 import AuthAlert from '../../../components/Alerts/AuthAlert'
 import AuthenticationWrapper from '../../../components/AuthenticationWrapper/AuthenticationWrapper'
-import PanoAlert from '../../../components/PanoAlert/PanoAlert'
 import PromiseResult from '../../../components/PromiseResult/PromiseResult'
 import Spacer from '../../../components/Spacer/Spacer'
 import { routing } from '../../../routes'
@@ -346,8 +343,6 @@ export interface RenderDetailsProps extends LegacyLayout {
 }
 
 export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, legacyLayout }) => {
-  const user = useSelector(getUser)
-
   if (!details) {
     // Todo: redirect to 404?
     return <Message>Geen detailweergave beschikbaar.</Message>
@@ -357,11 +352,7 @@ export const RenderDetails: FunctionComponent<RenderDetailsProps> = ({ details, 
       {details.showAuthAlert && <StyledAuthAlert excludedResults={details.authExcludedInfo} />}
       {/* eslint-disable-next-line no-nested-ternary */}
       {details.location && !details.data.noPanorama ? (
-        user.authenticated ? (
-          <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
-        ) : (
-          <PanoAlert />
-        )
+        <PanoramaPreview location={details.location} radius={180} aspect={2.5} />
       ) : null}
       <Spacer />
       {details.data.notifications?.map((notification) => (

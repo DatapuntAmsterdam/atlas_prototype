@@ -8,6 +8,7 @@ import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanorama
 import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
 import { isEmbedded } from '../../../shared/ducks/ui/ui'
 import { getUser } from '../../../shared/ducks/user/user'
+import useCheckPanoramaPermission from '../../../app/utils/useCheckPanoramaPermission'
 
 export interface MapDetailResultWrapperProps {
   title: string
@@ -44,10 +45,11 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
   const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location as any)
   const isEmbed = useSelector(isEmbedded)
   const user = useSelector(getUser)
+  const { isForbidden, showComponent } = useCheckPanoramaPermission()
 
   return (
     <section className="map-detail-result">
-      {panoramaUrl && user.authenticated ? (
+      {showComponent && panoramaUrl && !isForbidden ? (
         <header
           className={`
       map-detail-result__header
@@ -73,7 +75,7 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
           </StyledLink>
         </header>
       ) : (
-        <PanoAlert />
+        showComponent && isForbidden && <PanoAlert />
       )}
       <div className="map-detail-result__scroll-wrapper">
         {!user.authenticated && (
