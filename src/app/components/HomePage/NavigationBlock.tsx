@@ -54,9 +54,12 @@ const NavigationBlock: FunctionComponent = () => (
   <StyledCardContainer data-test="navigation-block">
     {navigationLinks
       .filter(
-        (link): link is NavigationLink & { description: string; CardIcon: () => JSX.Element } =>
+        (
+          link,
+        ): link is NavigationLink & Required<Pick<NavigationLink, 'CardIcon' | 'description'>> =>
+          // Only the ones with a description and icon
           !!link.description && !!link.CardIcon,
-      ) // only the ones with a description
+      )
       .sort((a, b) => a.id - b.id) // sort on id
       .map((linkProps) => (
         <NavigationCard
