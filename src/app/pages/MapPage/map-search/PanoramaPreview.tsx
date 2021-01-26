@@ -102,7 +102,7 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
     if (result.error instanceof ForbiddenError) {
       return <PanoAlert />
     }
-    return <PreviewMessage>Kon panoramabeeld niet laden.</PreviewMessage>
+    return <PreviewMessage>Kan panoramabeeld niet laden.</PreviewMessage>
   }
 
   if (!result.value) {

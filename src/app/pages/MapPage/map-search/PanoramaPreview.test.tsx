@@ -1,7 +1,10 @@
+import { rest } from 'msw'
 import { render, waitFor } from '@testing-library/react'
 import PanoramaPreview from './PanoramaPreview'
-import { getPanoramaThumbnail } from '../../../../api/panorama/thumbnail'
 import withAppContext from '../../../utils/withAppContext'
+import joinUrl from '../../../utils/joinUrl'
+import environment from '../../../../environment'
+import { server } from '../../../../../test/server'
 
 jest.mock('react-router-dom', () => ({
   // @ts-ignore
@@ -12,13 +15,7 @@ jest.mock('react-router-dom', () => ({
   }),
 }))
 
-jest.mock('../../../../api/panorama/thumbnail')
-
 describe('PanoramaPreview', () => {
-  beforeEach(() => {
-    // @ts-ignore
-    getPanoramaThumbnail.mockImplementation(() => Promise.resolve({ url: 'example.com' }))
-  })
   it('should build a link including current parameters, panorama parameters and layers for panorama', async () => {
     const { container } = render(withAppContext(<PanoramaPreview location={{ lat: 1, lng: 2 }} />))
     await waitFor(() => {
@@ -29,5 +26,24 @@ describe('PanoramaPreview', () => {
       expect(params.get('lagen')).toContain('pano')
       expect(params.get('pano')).toBeDefined()
     })
+  })
+
+  it('should render PanoAlert when API responses with a 403 Forbidden', async () => {
+    const panoramaThumbnailUrl = joinUrl([
+      environment.API_ROOT,
+      'panorama/thumbnail/',
+      '?lat=1&lon=2',
+    ])
+    server.use(
+      rest.get(panoramaThumbnailUrl, async (req, res, ctx) => {
+        return res(ctx.status(403))
+      }),
+    )
+    const { findByTestId } = render(
+      withAppContext(<PanoramaPreview location={{ lat: 1, lng: 2 }} />),
+    )
+
+    const panoAlert = await findByTestId('panoAlert')
+    expect(panoAlert).toBeDefined()
   })
 })

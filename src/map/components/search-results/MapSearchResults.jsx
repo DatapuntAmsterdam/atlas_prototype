@@ -8,7 +8,9 @@ import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
 import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
 import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
-import useCheckPanoramaPermission from '../../../app/utils/useCheckPanoramaPermission'
+import usePromise from '../../../app/utils/usePromise'
+import { fetchProxy } from '../../../shared/services/api/api'
+import { ForbiddenError } from '../../../shared/services/api/customError'
 
 const StyledLink = styled(Link)`
   padding: 0;
@@ -49,11 +51,14 @@ const MapSearchResults = ({
     }))
 
   const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location)
-  const { isForbidden, showComponent } = useCheckPanoramaPermission()
+  const result = usePromise(
+    () => fetchProxy('https://acc.api.data.amsterdam.nl/brk/?format=json'),
+    [],
+  )
 
   return (
     <section className="map-search-results">
-      {showComponent && panoramaUrl && !isForbidden ? (
+      {panoramaUrl && result.status === 'fulfilled' ? (
         <header
           className={`
           map-search-results__header
@@ -81,7 +86,7 @@ const MapSearchResults = ({
           </StyledLink>
         </header>
       ) : (
-        showComponent && isForbidden && <PanoAlert />
+        result.status === 'rejected' && result.error instanceof ForbiddenError && <PanoAlert />
       )}
 
       <div className="map-search-results__scroll-wrapper">

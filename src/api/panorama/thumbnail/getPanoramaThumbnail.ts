@@ -1,7 +1,7 @@
 import { LatLngLiteral } from 'leaflet'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
-import { fetchWithToken } from '../../../shared/services/api/api'
+import { fetchProxy } from '../../../shared/services/api/api'
 import { PanoramaThumbnail } from './types'
 
 export interface FetchPanoramaOptions {
@@ -52,9 +52,10 @@ type RawResponse =
 /**
  * Retrieve the panorama closest to the provided location.
  *
- * @param location The latitude and longitude of the location to find the preview at.
  *
  * API documentation: https://api.data.amsterdam.nl/panorama/thumbnail/
+ * @param location The latitude and longitude of the location to find the preview at.
+ * @param options Argument to pass options to the API
  */
 export async function getPanoramaThumbnail(
   location: LatLngLiteral,
@@ -85,7 +86,7 @@ export async function getPanoramaThumbnail(
     searchParams.set('radius', options?.radius.toString())
   }
 
-  const response = await fetchWithToken<RawResponse>(
+  const response = await fetchProxy<RawResponse>(
     `${joinUrl([environment.API_ROOT, 'panorama/thumbnail'])}?${searchParams.toString()}`,
   )
 

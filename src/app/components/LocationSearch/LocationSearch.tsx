@@ -79,7 +79,6 @@ const LocationSearch: FunctionComponent = () => {
             >{`Geen details beschikbaar van: ${layerWarning}`}</StyledAlert>
           )}
 
-          {/* eslint-disable-next-line no-nested-ternary */}
           {numberOfResults && (
             <PanoramaPreview
               location={{

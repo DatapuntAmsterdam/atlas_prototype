@@ -8,6 +8,5 @@ if (process.env.NODE_ENV === 'production') {
   init({
     dsn: 'https://43045d79c42e4eb7a9bdf8e22fff0d9b@sentry.data.amsterdam.nl/29',
     environment: deployEnv,
-    ignoreErrors: [new RegExp(`401 Unauthorized|403 Forbidden`, 'mi')],
   })
 }
