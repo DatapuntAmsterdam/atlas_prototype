@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { AlertLevel } from '@amsterdam/asc-ui'
 import { Position } from 'geojson'
-import { LocationDescriptorObject } from 'history'
+import { LocationDescriptor, LocationDescriptorObject } from 'history'
 import { ReactNode } from 'react'
 import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import AuthScope from '../../shared/services/api/authScope'
@@ -123,8 +123,8 @@ export interface DetailResultItemImage extends DefaultDetailResultItem {
 export interface DetailResultItemDefinitionListEntry {
   term: string
   description?: string | null
-  href?: LocationDescriptorObject | null
-  to?: LocationDescriptorObject | string
+  href?: string | null
+  to?: string | LocationDescriptor
   alert?: string
 }
 
