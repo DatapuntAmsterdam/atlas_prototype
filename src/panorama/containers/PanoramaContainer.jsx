@@ -90,6 +90,29 @@ class PanoramaContainer extends Component {
     this.panoramaViewer.removeEventListener('viewChange', this.updateOrientationDebounced)
   }
 
+  onClose() {
+    const { detailReference, pageReference, panoramaLocation } = this.props
+    // Filter out the panorama layers, as they should be closed
+    const overlays = this.overlays?.filter(({ id }) => !id.startsWith('pano'))
+
+    if (Array.isArray(detailReference) && detailReference.length) {
+      // eslint-disable-next-line react/destructuring-assignment
+      this.props.toDataDetail(detailReference, {
+        [PARAMETERS.LAYERS]: overlays,
+        [PARAMETERS.VIEW]: ViewMode.Split,
+      })
+    } else if (pageReference === 'home') {
+      window.location.assign(createPath(toHome()))
+    } else {
+      // eslint-disable-next-line react/destructuring-assignment
+      this.props.toGeoSearch({
+        [PARAMETERS.LOCATION]: panoramaLocation,
+        [PARAMETERS.VIEW]: ViewMode.Split,
+        [PARAMETERS.LAYERS]: overlays,
+      })
+    }
+  }
+
   loadPanoramaScene() {
     const { panoramaState } = this.props
     const { heading: currentHeading, location, targetLocation } = panoramaState
@@ -129,27 +152,6 @@ class PanoramaContainer extends Component {
     }
 
     return setView(ViewMode.Full, 'beeld-vergroten')
-  }
-
-  onClose() {
-    const { detailReference, pageReference, panoramaLocation } = this.props
-    // Filter out the panorama layers, as they should be closed
-    const overlays = this.overlays?.filter(({ id }) => !id.startsWith('pano'))
-
-    if (Array.isArray(detailReference) && detailReference.length) {
-      this.props.toDataDetail(detailReference, {
-        [PARAMETERS.LAYERS]: overlays,
-        [PARAMETERS.VIEW]: ViewMode.Split,
-      })
-    } else if (pageReference === 'home') {
-      window.location.assign(createPath(toHome()))
-    } else {
-      this.props.toGeoSearch({
-        [PARAMETERS.LOCATION]: panoramaLocation,
-        [PARAMETERS.VIEW]: ViewMode.Split,
-        [PARAMETERS.LAYERS]: overlays,
-      })
-    }
   }
 
   render() {
