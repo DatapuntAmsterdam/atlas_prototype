@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react'
-import styled from 'styled-components'
 import { ControlButton } from '@amsterdam/arm-core'
-import { useSelector } from 'react-redux'
-import { AnyAction } from 'redux'
 import { themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import { FunctionComponent } from 'react'
+import { useSelector } from 'react-redux'
+import { Action } from 'redux'
+import styled from 'styled-components'
 import Measure from '../../../shared/assets/icons/icon-measure.svg'
 import { isEmbedded, isEmbedPreview, isPrintMode } from '../../../shared/ducks/ui/ui'
 
@@ -18,17 +18,17 @@ export const StyledControlButton = styled(ControlButton)`
   }
 `
 
-export type Props = {
-  onEnd: () => AnyAction
-  onStart: () => AnyAction
-  onCancel: () => AnyAction
-  onReset: () => AnyAction
+export interface ToggleDrawingProps {
+  onEnd: () => Action
+  onStart: () => Action
+  onCancel: () => Action
+  onReset: () => Action
   isEnabled: boolean
   shapeDistance: string
   shapeMarkers: number
 }
 
-const ToggleDrawing: FunctionComponent<Props> = ({
+const ToggleDrawing: FunctionComponent<ToggleDrawingProps> = ({
   isEnabled,
   shapeMarkers,
   onReset,
@@ -59,31 +59,27 @@ const ToggleDrawing: FunctionComponent<Props> = ({
     return null
   }
 
-  return (
-    <>
-      {expanded ? (
-        <StyledControlButton
-          variant="blank"
-          aria-label={`${label} meten en intekenen`}
-          iconLeft={<Measure />}
-          iconSize={28}
-          onClick={clickEvent}
-          data-testid="drawToolButton"
-        >
-          <span className="toggle-drawing__label">{label}</span>
-        </StyledControlButton>
-      ) : (
-        <StyledControlButton
-          aria-label={`${label} meten en intekenen`}
-          icon={<Measure />}
-          variant="blank"
-          iconSize={28}
-          size={40}
-          onClick={clickEvent}
-          data-testid="drawToolButton"
-        />
-      )}
-    </>
+  return expanded ? (
+    <StyledControlButton
+      variant="blank"
+      aria-label={`${label} meten en intekenen`}
+      iconLeft={<Measure />}
+      iconSize={28}
+      onClick={clickEvent}
+      data-testid="drawToolButton"
+    >
+      <span className="toggle-drawing__label">{label}</span>
+    </StyledControlButton>
+  ) : (
+    <StyledControlButton
+      aria-label={`${label} meten en intekenen`}
+      icon={<Measure />}
+      variant="blank"
+      iconSize={28}
+      size={40}
+      onClick={clickEvent}
+      data-testid="drawToolButton"
+    />
   )
 }
 

@@ -7,7 +7,19 @@ import { getDetailPageData } from '../../../../store/redux-first-router/actions'
 import DataSelectionFormatter from '../DataSelectionFormatter/DataSelectionFormatter'
 import { routing } from '../../../routes'
 
-type Props = {
+const StyledListItem = styled.li`
+  margin-bottom: ${themeSpacing(2)};
+`
+
+export const toDetailPage = (endpoint: string): LocationDescriptor => {
+  const { type, subtype, id } = getDetailPageData(endpoint)
+  return {
+    pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
+  }
+}
+
+// TODO: Accurately determine the types in this interface.
+export interface DataSelectionListProps {
   content: {
     head: []
     body: [
@@ -20,18 +32,7 @@ type Props = {
   }
 }
 
-const StyledListItem = styled.li`
-  margin-bottom: ${themeSpacing(2)};
-`
-
-export const toDetailPage = (endpoint: string): LocationDescriptor => {
-  const { type, subtype, id } = getDetailPageData(endpoint)
-  return {
-    pathname: generatePath(routing.dataDetail.path, { type, subtype, id }),
-  }
-}
-
-const DataSelectionList: FunctionComponent<Props> = ({ content }) => {
+const DataSelectionList: FunctionComponent<DataSelectionListProps> = ({ content }) => {
   return (
     <ul>
       {content.body.map((row) => (
