@@ -50,8 +50,7 @@ const navigationLinks: NavigationLink[] = [
         <Pano />
       </Icon>
     ),
-    // This text includes a soft hyphen to break words correctly, which might not show up in your editor.
-    title: 'Panorama­beelden',
+    title: 'Panoramabeelden',
     description: 'Kijk 360 graden in het rond',
   },
   {
@@ -117,8 +116,7 @@ const navigationLinks: NavigationLink[] = [
       </Icon>
     ),
     title: routes.publicationSearch.title,
-    // This text includes a soft hyphen to break words correctly, which might not show up in your editor.
-    description: 'Download factsheets en onderzoeks­rapporten',
+    description: 'Download factsheets en onderzoeksrapporten',
   },
   {
     id: 8,
