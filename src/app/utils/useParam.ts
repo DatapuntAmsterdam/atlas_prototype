@@ -9,8 +9,8 @@ type SetValueFn<T> = (value: T | null | SetValueCallback<T>, method?: 'push' | '
 export interface UrlParam<T> {
   name: string
   defaultValue: T
-  encode: (value: T) => string | null
   decode: (value: string) => T
+  encode: (value: T) => string | null
 }
 
 const useParam = <T>(urlParam: UrlParam<T>): [T, SetValueFn<T>] => {

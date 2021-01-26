@@ -40,7 +40,7 @@ import { Overlay } from '../types'
 import DataSelectionContext from './DataSelectionContext'
 import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
-import { polygonsParam, polylinesParam } from '../query-params'
+import { polygonParam, polylineParam } from '../query-params'
 
 const ResultLink = styled(ReduxRouterLink)`
   width: 100%;
@@ -225,7 +225,7 @@ const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
         setShowDrawTool(false)
         history.push({
           pathname: routing.dataSearchGeo_TEMP.path,
-          search: buildQueryString(undefined, [polylinesParam, polygonsParam]),
+          search: buildQueryString(undefined, [polylineParam, polygonParam]),
         })
       }}
     >

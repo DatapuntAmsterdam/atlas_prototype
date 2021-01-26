@@ -20,11 +20,14 @@ import {
 import { useHistory } from 'react-router-dom'
 import useParam from '../../../utils/useParam'
 import MapContext from '../MapContext'
-import { PolyDrawing, polygonsParam, polylinesParam } from '../query-params'
+import { PolyDrawing, polygonParam, polylineParam } from '../query-params'
 import { Overlay, SnapPoint } from '../types'
 import DataSelectionContext from './DataSelectionContext'
 import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
+
+const POLYGON_STORAGE_KEY = 'polygon'
+const POLYLINE_STORAGE_KEY = 'polyline'
 
 function getTotalDistance(latLngs: LatLng[]) {
   return latLngs.reduce(
@@ -91,18 +94,18 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
   } = useContext(DataSelectionContext)
   const { buildQueryString } = useBuildQueryString()
 
-  const [polygons, setPolygons] = useParam(polygonsParam)
-  const [polylines, setPolylines] = useParam(polylinesParam)
+  const [polygon, setPolygon] = useParam(polygonParam)
+  const [polyline, setPolyline] = useParam(polylineParam)
   const history = useHistory()
 
   const [initialDrawnItems, setInitialDrawnItems] = useState<ExtendedLayer[]>([])
 
   // We needs refs here for leaflet event handlers
-  const polygonsRef = useRef(polygons)
-  polygonsRef.current = polygons
+  const polygonRef = useRef(polygon)
+  polygonRef.current = polygon
 
-  const polylinesRef = useRef(polylines)
-  polylinesRef.current = polylines
+  const polylineRef = useRef(polyline)
+  polylineRef.current = polyline
 
   const mapInstance = useMapInstance()
   const drawnItemsGroup = useMemo(() => new L.FeatureGroup(), [])
@@ -127,49 +130,47 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
     }
   }, [])
 
-  const updateShapes = (shape: { polygons?: PolyDrawing[]; polylines?: PolyDrawing[] }) => {
-    window.localStorage.setItem('polygons', JSON.stringify(shape.polygons))
-    window.localStorage.setItem('polylines', JSON.stringify(shape.polylines))
+  const updateShapes = (shape: { polygon: PolyDrawing | null; polyline: PolyDrawing | null }) => {
+    window.localStorage.setItem(POLYGON_STORAGE_KEY, JSON.stringify(shape.polygon))
+    window.localStorage.setItem(POLYLINE_STORAGE_KEY, JSON.stringify(shape.polyline))
 
-    const pushReplace = !polygons.length && shape.polygons?.length ? 'push' : 'replace'
+    const pushReplace = !polygon && shape.polygon ? 'push' : 'replace'
 
     // If user removes all the drawings, close the drawtool
-    if (!shape.polygons?.length && !shape.polylines?.length) {
+    if (!shape.polygon && !shape.polyline) {
       setShowDrawTool(false)
     }
 
-    if (!shape.polygons?.length) {
+    if (!shape.polygon) {
       history.push({
         pathname: routing.dataSearchGeo_TEMP.path,
-        search: buildQueryString(undefined, [polygonsParam]),
+        search: buildQueryString(undefined, [polygonParam]),
       })
     } else {
       history[pushReplace]({
         pathname: routing.addresses_TEMP.path,
         search: buildQueryString<any>([
-          [polygonsParam, shape.polygons],
-          [polylinesParam, shape.polylines],
+          [polygonParam, shape.polygon],
+          [polylineParam, shape.polyline],
         ]),
       })
     }
   }
 
   const addOrEditShape = (layer: ExtendedLayer) => {
+    const updatedPolygon =
+      layer instanceof Polygon
+        ? { id: layer.id, polygon: getLayerCoordinates(layer) }
+        : polygonRef.current
+
+    const updatedPolyline =
+      layer instanceof Polygon
+        ? polylineRef.current
+        : { id: layer.id, polygon: getLayerCoordinates(layer) }
+
     updateShapes({
-      polygons:
-        layer instanceof Polygon
-          ? [
-              ...polygonsRef.current.filter(({ id }) => id !== layer.id),
-              { id: layer.id, polygon: getLayerCoordinates(layer) },
-            ]
-          : polygonsRef.current,
-      polylines:
-        layer instanceof Polygon
-          ? polylinesRef.current
-          : [
-              ...polylinesRef.current.filter(({ id }) => id !== layer.id),
-              { id: layer.id, polygon: getLayerCoordinates(layer) },
-            ],
+      polygon: updatedPolygon,
+      polyline: updatedPolyline,
     })
   }
 
@@ -211,19 +212,22 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
         return
       }
 
-      const newPolygons = polygonsRef.current.filter(
-        (layer) => !deletedLayersIds.includes(layer.id),
-      )
-      const newPolylines = polylinesRef.current.filter(
-        (layer) => !deletedLayersIds.includes(layer.id),
-      )
+      const newPolygon =
+        polygonRef.current?.id && deletedLayersIds.includes(polygonRef.current.id)
+          ? null
+          : polygonRef.current
+
+      const newPolyline =
+        polylineRef.current?.id && deletedLayersIds.includes(polylineRef.current.id)
+          ? null
+          : polylineRef.current
 
       updateShapes({
-        polygons: newPolygons,
-        polylines: newPolylines,
+        polygon: newPolygon,
+        polyline: newPolyline,
       })
     },
-    [mapVisualization, setPolygons, setPolylines],
+    [mapVisualization, setPolygon, setPolyline],
   )
 
   const handleOnDrawEnd = useCallback(
@@ -234,7 +238,7 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
 
       addOrEditShape(layer)
     },
-    [getDrawingData, setPolygons, setPolylines],
+    [getDrawingData, setPolygon, setPolyline],
   )
 
   const fitToBounds = useCallback(() => {
@@ -246,17 +250,17 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
   }, [drawnItemsGroup])
 
   useEffect(() => {
-    const savedPolygonsRaw = window.localStorage.getItem('polygons')
-    const savedPolylinesRaw = window.localStorage.getItem('polylines')
-    const savedPolygons: PolyDrawing[] = savedPolygonsRaw ? JSON.parse(savedPolygonsRaw) : []
-    const savedPolylines: PolyDrawing[] = savedPolylinesRaw ? JSON.parse(savedPolylinesRaw) : []
+    const savedPolygonRaw = window.localStorage.getItem(POLYGON_STORAGE_KEY)
+    const savedPolylineRaw = window.localStorage.getItem(POLYLINE_STORAGE_KEY)
+    const savedPolygon = savedPolygonRaw ? (JSON.parse(savedPolygonRaw) as PolyDrawing) : null
+    const savedPolyline = savedPolylineRaw ? (JSON.parse(savedPolylineRaw) as PolyDrawing) : null
 
-    setPolylines(savedPolylines)
-    setPolygons(savedPolygons)
+    setPolyline(savedPolyline)
+    setPolygon(savedPolygon)
 
     setInitialDrawnItems([
-      ...savedPolygons.map((drawing) => createPolyLayer(drawing)),
-      ...savedPolylines.map((drawing) => createPolyLayer(drawing, true)),
+      ...(savedPolygon ? [createPolyLayer(savedPolygon)] : []),
+      ...(savedPolyline ? [createPolyLayer(savedPolyline, true)] : []),
     ])
 
     fitToBounds()
@@ -283,7 +287,7 @@ const DrawTool: FunctionComponent<DrawToolProps> = ({ setCurrentOverlay }) => {
         setShowDrawTool(false)
         history.push({
           pathname: routing.dataSearchGeo_TEMP.path,
-          search: buildQueryString(undefined, [polylinesParam, polygonsParam]),
+          search: buildQueryString(undefined, [polylineParam, polygonParam]),
         })
       }}
       drawnItems={initialDrawnItems.length ? initialDrawnItems : []}

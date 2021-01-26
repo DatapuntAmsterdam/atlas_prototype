@@ -30,11 +30,6 @@ export type BaseLayer =
   | 'lf2004'
   | 'lf2003'
 
-export interface PolyDrawing {
-  id: string
-  polygon: LatLngLiteral[]
-}
-
 export interface MapLayer {
   id: string
   isVisible: boolean
@@ -86,28 +81,6 @@ export const locationParam: UrlParam<LatLngLiteral | null> = {
   defaultValue: null,
   decode: decodeLatLngLiteral,
   encode: (value) => (value ? encodeLatLngLiteral(value) : null),
-}
-
-function encodePolyDrawing(value: PolyDrawing[]) {
-  return value.length > 0 ? JSON.stringify(value) : null
-}
-
-function decodePolyDrawing(value: string) {
-  return JSON.parse(value)
-}
-
-export const polygonsParam: UrlParam<PolyDrawing[]> = {
-  name: 'polygonen',
-  defaultValue: [],
-  decode: decodePolyDrawing,
-  encode: encodePolyDrawing,
-}
-
-export const polylinesParam: UrlParam<PolyDrawing[]> = {
-  name: 'meten',
-  defaultValue: [],
-  decode: decodePolyDrawing,
-  encode: encodePolyDrawing,
 }
 
 export const mapLayersParam: UrlParam<string[]> = {
@@ -164,6 +137,73 @@ export const panoTagParam: UrlParam<string> = {
     return panoTagParam.defaultValue
   },
   encode: (value) => value,
+}
+
+export interface PolyDrawing {
+  id: string
+  polygon: LatLngLiteral[]
+}
+
+export const polygonParam: UrlParam<PolyDrawing | null> = {
+  name: 'geo',
+  defaultValue: null,
+  decode: decodePolyDrawing,
+  encode: (value) => (value ? encodePolyDrawing(value) : null),
+}
+
+export const polylineParam: UrlParam<PolyDrawing | null> = {
+  name: 'meten',
+  defaultValue: null,
+  decode: decodePolyDrawing,
+  encode: (value) => (value ? encodePolyDrawing(value) : null),
+}
+
+interface RawPolyDrawing {
+  id: string
+  polygon: LatLngTuple[]
+}
+
+interface RawPolyDrawingLegacy {
+  description: string
+  markers: string
+}
+
+function decodePolyDrawing(value: string): PolyDrawing {
+  const parsedValue: RawPolyDrawing | RawPolyDrawingLegacy = JSON.parse(value)
+
+  if ('markers' in parsedValue) {
+    return decodeLegacyPolyDrawing(parsedValue)
+  }
+
+  return {
+    id: parsedValue.id,
+    polygon: parsedValue.polygon.map(([lat, lng]) => ({ lat, lng })),
+  }
+}
+
+function encodePolyDrawing(value: PolyDrawing) {
+  const encodedValue: RawPolyDrawing = {
+    id: value.id,
+    polygon: value.polygon.map(({ lat, lng }) => [lat, lng]),
+  }
+
+  return JSON.stringify(encodedValue)
+}
+
+function decodeLegacyPolyDrawing(value: RawPolyDrawingLegacy): PolyDrawing {
+  // We need a consistent ID when decoding legacy parameters.
+  // Since no ID exists we'll base it on the Base64 of the description.
+  const id = btoa(value.description)
+  const polygon: LatLngLiteral[] = value.markers.split('|').map((coordinate) => {
+    const [lat, lng] = coordinate.split(':').map(parseFloat)
+
+    return { lat, lng }
+  })
+
+  return {
+    id,
+    polygon,
+  }
 }
 
 export const panoFullScreenParam: UrlParam<boolean> = {
