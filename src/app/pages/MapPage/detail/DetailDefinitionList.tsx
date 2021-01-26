@@ -32,7 +32,7 @@ const DetailDefinitionList: FunctionComponent<Pick<DetailResultItemDefinitionLis
 function renderDescription(
   description?: string | null,
   href?: LocationDescriptorObject | null,
-  to?: string | { pathname: string; search?: string },
+  to?: string | LocationDescriptorObject,
 ) {
   if (href) {
     return (
