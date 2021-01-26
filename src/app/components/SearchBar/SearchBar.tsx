@@ -8,19 +8,24 @@ import {
   showAboveBackDrop,
   styles,
 } from '@amsterdam/asc-ui'
-import { FunctionComponent, InputHTMLAttributes } from 'react'
-import styled from 'styled-components'
-import { IDS } from '../../../shared/config/config'
+import { FunctionComponent, InputHTMLAttributes, useState } from 'react'
+import styled, { css } from 'styled-components'
 import CONSTANTS from '../../../shared/config/constants'
 import SearchBarFilter from '../SearchBarFilter'
 
 const Z_INDEX_OFFSET = 2 // Set a custom offset
 
 // TODO: Fix z-index issue with overlay in ASC eventually
-const StyledSearchBarToggle = styled(SearchBarToggle)`
+const StyledSearchBarToggle = styled(SearchBarToggle)<{ searchIsVisible: boolean }>`
   z-index: 23;
   position: absolute;
-  left: 0;
+
+  ${({ searchIsVisible }) =>
+    searchIsVisible &&
+    css`
+      left: 0;
+    `}
+
   right: 0;
   top: 0;
 
@@ -60,6 +65,8 @@ export interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
   searchBarFilterValue: string
 }
 
+export const SEARCH_BAR_INPUT_ID = 'auto-suggest__input'
+
 const SearchBar: FunctionComponent<SearchBarProps> = ({
   expanded,
   onBlur,
@@ -72,6 +79,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
   setSearchBarFilterValue,
   searchBarFilterValue,
 }) => {
+  const [searchIsVisible, setSearchVisible] = useState(false)
   const searchBarProps = {
     onBlur,
     onFocus,
@@ -86,9 +94,13 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
     autoCapitalize: 'off',
     autoComplete: 'off',
     autoCorrect: 'off',
-    id: IDS.searchbar,
+    id: SEARCH_BAR_INPUT_ID,
     'data-test': 'search-input',
     placeholder: placeHolder,
+  }
+
+  const toggleWidth = (isOpen: boolean) => {
+    setSearchVisible(isOpen)
   }
 
   return (
@@ -125,8 +137,10 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
         searchBarProps={searchBarProps}
         aria-haspopup="true"
         aria-expanded={expanded}
+        searchIsVisible={searchIsVisible}
         hasBackDrop
         label={placeHolder}
+        onOpen={toggleWidth}
       >
         {children}
       </StyledSearchBarToggle>

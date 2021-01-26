@@ -40,6 +40,13 @@ const HeaderWrapper = styled.section<HeaderWrapperProps>`
 `
 
 const StyledHeader = styled(HeaderComponent)`
+  a {
+    /* Making sure the anchors in the header have a decent clickable area size */
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
   ${styles.HeaderNavigationStyle} {
     // This must be added to the @amsterdam/asc-ui project https://github.com/Amsterdam/amsterdam-styled-components/issues/165
     @media screen and ${breakpoint('min-width', 'desktop')} {

@@ -16,7 +16,7 @@ import {
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import L, { LatLng, LatLngExpression, LatLngTuple } from 'leaflet'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link as RouterLink } from 'react-router-dom'
 import {
   Fragment,
   FunctionComponent,
@@ -27,7 +27,7 @@ import {
   useState,
 } from 'react'
 import { useSelector } from 'react-redux'
-import RouterLink from 'redux-first-router-link'
+import ReduxRouterLink from 'redux-first-router-link'
 import styled, { createGlobalStyle } from 'styled-components'
 import { getUserScopes } from '../../../../shared/ducks/user/user'
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage'
@@ -42,7 +42,7 @@ import { routing } from '../../../routes'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
 import { polygonsParam, polylinesParam } from '../query-params'
 
-const ResultLink = styled(RouterLink)`
+const ResultLink = styled(ReduxRouterLink)`
   width: 100%;
   margin-bottom: ${themeSpacing(2)};
 `
@@ -249,14 +249,14 @@ const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
 
         {showDesktopVariant ? (
           <>
-            {/* @ts-ignore */}
             <Button
               as={TableRouterLink}
               variant="primaryInverted"
               title="Resultaten in tabel weergeven"
               type="button"
               iconLeft={<Table />}
-              {...({ to: config[type].toTableAction } as any)}
+              /* @ts-ignore */
+              to={config[type].toTable}
             >
               Tabel weergeven
             </Button>
@@ -271,7 +271,8 @@ const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
               size={40}
               icon={<Table />}
               iconSize={25}
-              {...({ to: config[type].toTableAction } as any)}
+              /* @ts-ignore */
+              to={config[type].toTable}
             />
           </>
         )}

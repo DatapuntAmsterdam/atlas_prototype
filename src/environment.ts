@@ -1,5 +1,5 @@
 const environment = {
-  DEPLOY_ENV: 'development',
+  DEPLOY_ENV: 'acceptance',
   IIIF_ROOT: 'https://acc.images.data.amsterdam.nl/',
   API_ROOT: 'https://acc.api.data.amsterdam.nl/',
   CMS_ROOT: 'https://acc.cms.data.amsterdam.nl/',

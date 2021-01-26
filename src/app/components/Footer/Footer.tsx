@@ -14,11 +14,16 @@ import {
 } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { FOOTER_LINKS, IDS } from '../../../shared/config/config'
+import {
+  FOOTER_LINKS_COLOFON,
+  FOOTER_LINKS_HELP,
+  FOOTER_LINKS_SOCIAL,
+  FOOTER_LINK_PRIVACY,
+} from '../../../shared/config/content-links'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
-import FooterLinks, { FooterLink } from './FooterLinks'
+import FooterLinks from './FooterLinks'
 
-const StyledLink = styled(Link)`
+const PrivacyLink = styled(Link)`
   margin-bottom: ${themeSpacing(3)};
 `
 
@@ -26,29 +31,25 @@ const StyledParagraph = styled(Paragraph)`
   margin-bottom: ${themeSpacing(5)};
 `
 
-const helpLinks: FooterLink[] = [
-  ...FOOTER_LINKS.HELP,
-  {
-    order: 3,
-    title: 'Feedback geven',
-    id: 'feedback_3',
-    onClick: openFeedbackForm,
-  },
-].sort((a, b) => (a.order > b.order ? 1 : -1))
+const Button = styled.button`
+  background-color: transparent;
+`
+
+export const FOOTER_ID = 'footer'
 
 const Footer: FunctionComponent = () => (
   <CompactThemeProvider>
-    <FooterComponent id={IDS.footer}>
+    <FooterComponent id={FOOTER_ID}>
       <FooterTop>
         <Row>
           <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
             <FooterSection title="Colofon">
-              {FOOTER_LINKS && <FooterLinks links={FOOTER_LINKS.COLOFON} />}
+              <FooterLinks links={FOOTER_LINKS_COLOFON} />
             </FooterSection>
           </Column>
           <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
             <FooterSection title="Volg de gemeente">
-              {FOOTER_LINKS && <FooterLinks links={FOOTER_LINKS.SOCIAL} />}
+              <FooterLinks links={FOOTER_LINKS_SOCIAL} />
             </FooterSection>
           </Column>
           <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
@@ -57,7 +58,13 @@ const Footer: FunctionComponent = () => (
                 Heeft u een vraag en kunt u het antwoord niet vinden op deze website? Of heeft u
                 bevindingen? Neem dan contact met ons op.
               </StyledParagraph>
-              {FOOTER_LINKS && <FooterLinks links={helpLinks} />}
+              <FooterLinks links={FOOTER_LINKS_HELP}>
+                <ListItem>
+                  <Link darkBackground type="button" as={Button} inList onClick={openFeedbackForm}>
+                    Feedback geven
+                  </Link>
+                </ListItem>
+              </FooterLinks>
             </FooterSection>
           </Column>
         </Row>
@@ -65,9 +72,9 @@ const Footer: FunctionComponent = () => (
       <FooterBottom>
         <List>
           <ListItem>
-            <StyledLink inList {...FOOTER_LINKS.PRIVACY}>
-              {FOOTER_LINKS.PRIVACY.title}
-            </StyledLink>
+            <PrivacyLink href={FOOTER_LINK_PRIVACY.href} inList>
+              {FOOTER_LINK_PRIVACY.title}
+            </PrivacyLink>
           </ListItem>
         </List>
       </FooterBottom>

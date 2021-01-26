@@ -1,69 +1,43 @@
-/* eslint-disable no-nested-ternary */
 import { Link, List, ListItem } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
-import RouterLink from 'redux-first-router-link'
-import styled from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 import environment from '../../../environment'
-import { toArticleDetail } from '../../../store/redux-first-router/actions'
+import { ContentLink } from '../../../shared/config/content-links'
+import { toArticleDetail } from '../../links'
 
-export type FooterLink = {
-  title: string
-  id:
-    | string
-    | number
-    | {
-        development: string
-        acceptance: string
-        production: string
-      }
-  href?: string
-  slug?: string
-  order: number
-  onClick?: (e: React.MouseEvent) => void
+export interface FooterLinksProps {
+  links: ContentLink[]
 }
 
-const Button = styled.button`
-  background-color: transparent;
-`
-
-const FooterLinks: FunctionComponent<{ links: FooterLink[] }> = ({ children, links }) => (
+const FooterLinks: FunctionComponent<FooterLinksProps> = ({ children, links }) => (
   <List>
-    {links &&
-      links.map(({ title, id, href, onClick, slug }) => {
-        const linkId = !href ? id[environment.DEPLOY_ENV] || id : id
-
+    {links.map((link) => {
+      if ('href' in link) {
         return (
-          <ListItem key={linkId}>
-            {!href && !onClick ? (
-              <Link
-                darkBackground
-                as={RouterLink}
-                title={title}
-                to={toArticleDetail(linkId, slug)}
-                inList
-              >
-                {title}
-              </Link>
-            ) : onClick ? (
-              <Link darkBackground type="button" as={Button} title={title} inList onClick={onClick}>
-                Feedback geven
-              </Link>
-            ) : (
-              <Link
-                darkBackground
-                key={linkId}
-                title={title}
-                href={href}
-                rel="external noopener noreferrer"
-                target="_blank"
-                inList
-              >
-                {title}
-              </Link>
-            )}
+          <ListItem key={link.href}>
+            <Link
+              darkBackground
+              href={link.href}
+              rel="external noopener noreferrer"
+              target="_blank"
+              inList
+            >
+              {link.title}
+            </Link>
           </ListItem>
         )
-      })}
+      }
+
+      const linkId: string = link.id[environment.DEPLOY_ENV]
+
+      return (
+        <ListItem key={linkId}>
+          <Link darkBackground as={RouterLink} to={toArticleDetail(linkId, link.slug)} inList>
+            {link.title}
+          </Link>
+        </ListItem>
+      )
+    })}
     {children}
   </List>
 )

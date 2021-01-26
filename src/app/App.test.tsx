@@ -8,8 +8,9 @@ import { ROUTER_NAMESPACE } from './routes'
 import PAGES from './pages'
 import useParam from './utils/useParam'
 
-// Mock the Header component because of it's complex dependencies (like using .query files that jest cannot handle)
+// Mock some components because of it's complex dependencies (like using .query files that jest cannot handle)
 jest.mock('./components/Header', () => () => <div data-testid="header" />)
+jest.mock('./components/SearchBar/SearchBar', () => () => <div data-testid="search-bar" />)
 
 // For some reason we get styled-components console warnings when MapLegend is rendered ("The component styled.div with the id of "sc-xxxxx" has been created dynamically.")
 jest.mock('../map/components/legend/MapLegend')

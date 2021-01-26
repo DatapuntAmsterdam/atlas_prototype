@@ -131,7 +131,7 @@ const ThemesBlock: FunctionComponent = () => {
               <StyledLink
                 forwardedAs={RouterLink}
                 inList
-                {...({ to: toSearch({ [PARAMETERS.FILTERS]: filters }) } as any)}
+                to={toSearch({ [PARAMETERS.FILTERS]: filters })}
               >
                 {option.label}
               </StyledLink>

@@ -1,7 +1,8 @@
 import { breakpoint, themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import NavigationCard from './NavigationCard'
-import navigationLinks from './services/navigationLinks'
+import navigationLinks, { NavigationLink } from './services/navigationLinks'
 
 const StyledCardContainer = styled.div`
   position: relative;
@@ -49,13 +50,25 @@ const StyledCardContainer = styled.div`
   }
 `
 
-const NavigationBlock = () => (
+const NavigationBlock: FunctionComponent = () => (
   <StyledCardContainer data-test="navigation-block">
     {navigationLinks
-      .filter(({ description }) => description) // only the ones with a description
-      .sort(({ id: idA }, { id: idB }) => idA - idB) // sort on id
+      .filter(
+        (
+          link,
+        ): link is NavigationLink & Required<Pick<NavigationLink, 'CardIcon' | 'description'>> =>
+          // Only the ones with a description and icon
+          !!link.description && !!link.CardIcon,
+      )
+      .sort((a, b) => a.id - b.id) // sort on id
       .map((linkProps) => (
-        <NavigationCard key={linkProps.id} {...linkProps} />
+        <NavigationCard
+          key={linkProps.id}
+          to={linkProps.to}
+          CardIcon={linkProps.CardIcon}
+          title={linkProps.title}
+          description={linkProps.description}
+        />
       ))}
   </StyledCardContainer>
 )

@@ -10,15 +10,16 @@ import {
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ComponentProps, FunctionComponent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import RouterLink from 'redux-first-router-link'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import environment from '../../../environment'
-import { HEADER_LINKS } from '../../../shared/config/config'
 import CONSTANTS from '../../../shared/config/constants'
+import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/content-links'
 import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
 import { login, logout } from '../../../shared/services/auth/auth'
 import truncateString from '../../../shared/services/truncateString/truncateString'
-import { toArticleDetail } from '../../../store/redux-first-router/actions'
+import { toArticleDetail, toHelpPage } from '../../links'
+import pickLinkComponent from '../../utils/pickLinkComponent'
 import navigationLinks from '../HomePage/services/navigationLinks'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
 
@@ -87,7 +88,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
               })
               dropFocus()
             }}
-            as={RouterLink}
+            as={pickLinkComponent(to)}
             iconLeft={<ChevronRight />}
             key={id}
             /* @ts-ignore */
@@ -98,31 +99,30 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
         ))}
       </MenuFlyOut>
       <MenuFlyOut label="Over OIS">
-        {HEADER_LINKS &&
-          HEADER_LINKS.ABOUT.map(({ title, id, slug }) => {
-            const linkId = id[environment.DEPLOY_ENV]
+        {HEADER_LINKS_ABOUT.map(({ title, id, slug }) => {
+          const linkId: string = id[environment.DEPLOY_ENV]
 
-            return (
-              <MenuItem key={linkId}>
-                <MenuButton
-                  onClick={() => {
-                    trackEvent({
-                      category: 'navigation',
-                      action: 'main-menu',
-                      name: title,
-                    })
-                    dropFocus()
-                  }}
-                  as={RouterLink}
-                  iconLeft={<ChevronRight />}
-                  /* @ts-ignore */
-                  to={toArticleDetail(linkId, slug)}
-                >
-                  {title}
-                </MenuButton>
-              </MenuItem>
-            )
-          })}
+          return (
+            <MenuItem key={linkId}>
+              <MenuButton
+                onClick={() => {
+                  trackEvent({
+                    category: 'navigation',
+                    action: 'main-menu',
+                    name: title,
+                  })
+                  dropFocus()
+                }}
+                as={RouterLink}
+                iconLeft={<ChevronRight />}
+                /* @ts-ignore */
+                to={toArticleDetail(linkId, slug)}
+              >
+                {title}
+              </MenuButton>
+            </MenuItem>
+          )
+        })}
       </MenuFlyOut>
       <MenuItem>
         <MenuButton
@@ -141,29 +141,24 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
           Feedback
         </MenuButton>
       </MenuItem>
-      {HEADER_LINKS && (
-        <MenuItem>
-          <MenuButton
-            as={RouterLink}
-            onClick={() => {
-              trackEvent({
-                category: 'navigation',
-                action: 'main-menu',
-                name: HEADER_LINKS.HELP.title,
-              })
-              dropFocus()
-            }}
-            title={HEADER_LINKS.HELP.title}
-            /* @ts-ignore */
-            to={toArticleDetail(
-              HEADER_LINKS.HELP.id[environment.DEPLOY_ENV],
-              HEADER_LINKS.HELP.slug,
-            )}
-          >
-            {HEADER_LINKS.HELP.title}
-          </MenuButton>
-        </MenuItem>
-      )}
+      <MenuItem>
+        <MenuButton
+          as={RouterLink}
+          onClick={() => {
+            trackEvent({
+              category: 'navigation',
+              action: 'main-menu',
+              name: HEADER_LINK_HELP.title,
+            })
+            dropFocus()
+          }}
+          title={HEADER_LINK_HELP.title}
+          /* @ts-ignore */
+          to={toHelpPage()}
+        >
+          {HEADER_LINK_HELP.title}
+        </MenuButton>
+      </MenuItem>
       {!user.authenticated ? (
         <MenuItem>
           <MenuButton

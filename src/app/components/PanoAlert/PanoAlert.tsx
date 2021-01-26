@@ -8,7 +8,7 @@ const StyledAlert = styled(Alert)`
 `
 
 const PanoAlert: FunctionComponent = () => (
-  <StyledAlert level="info" dismissible>
+  <StyledAlert level="info" dismissible data-testid="panoAlert">
     <Heading forwardedAs="h3">Meer resultaten na inloggen</Heading>
     <Paragraph>
       Momenteel werken we aan het verbeteren van de onherkenbaarheid van personen in de

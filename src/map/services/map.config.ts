@@ -58,12 +58,6 @@ const environmentConfig = {
     },
     OVERLAY_ROOT: 'https://acc.map.data.amsterdam.nl',
   },
-  [Environment.Development]: {
-    BASE_LAYER_OPTIONS: {
-      subdomains: ['acc.t1', 'acc.t2', 'acc.t3', 'acc.t4'],
-    },
-    OVERLAY_ROOT: 'https://acc.map.data.amsterdam.nl',
-  },
 }
 
 const MAP_CONFIG = {

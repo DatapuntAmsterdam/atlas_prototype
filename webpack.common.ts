@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -113,9 +114,12 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
                     corejs: 3,
                   },
                 ],
-                ['@babel/preset-react', {
-                  runtime: 'automatic',
-                }],
+                [
+                  '@babel/preset-react',
+                  {
+                    runtime: 'automatic',
+                  },
+                ],
                 '@babel/preset-typescript',
               ],
               plugins: [
@@ -228,7 +232,6 @@ export function createConfig(additionalOptions: CreateConfigOptions): Configurat
       }),
       new DefinePlugin({
         'process.env.VERSION': JSON.stringify(require('./package.json').version),
-        'process.env.GIT_COMMIT': process.env.GIT_COMMIT,
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',

@@ -1,6 +1,5 @@
 import { CardContainer } from '@amsterdam/asc-ui'
 import { memo } from 'react'
-import RouterLink from 'redux-first-router-link'
 import styled from 'styled-components'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'
 import { CmsType } from '../../../shared/config/cms.config'
@@ -13,6 +12,7 @@ import {
 import getErrorsForPath from '../../utils/getErrorsForPath'
 import getLoadingErrors from '../../utils/getLoadingErrors'
 import getUnauthorizedLabels from '../../utils/getUnauthorizedLabels'
+import pickLinkComponent from '../../utils/pickLinkComponent'
 import AuthAlert from '../Alerts/AuthAlert'
 import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
@@ -81,7 +81,7 @@ const EditorialResults = ({
 
               return (
                 <EditorialCard
-                  forwardedAs={RouterLink}
+                  forwardedAs={pickLinkComponent(to)}
                   type={type}
                   specialType={specialType}
                   key={id}

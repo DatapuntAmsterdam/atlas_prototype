@@ -1,10 +1,6 @@
 import environment from '../../../environment'
-import {
-  toAdresses,
-  toCadastralObjects,
-  toDetailFromEndpoint,
-  toEstablishments,
-} from '../../../store/redux-first-router/actions'
+import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
+import { toAddresses, toCadastralObjects, toEstablishments } from '../../links'
 import { routing } from '../../routes'
 
 // Because we use these types as id's in option values (select), we need to convert them to strings
@@ -30,7 +26,7 @@ export default {
     authScope: AuthScope.None,
     title: 'Adressen',
     path: routing.addresses.path,
-    toTableAction: toAdresses(),
+    toTable: toAddresses(),
     toDetailAction: (id: string) =>
       toDetailFromEndpoint(`${environment.API_ROOT}bag/nummeraanduiding/${id}`),
     endpointData: `${environment.API_ROOT}dataselectie/bag/`,
@@ -40,7 +36,7 @@ export default {
     authScope: AuthScope.HR,
     title: 'Vestigingen',
     path: routing.establishments.path,
-    toTableAction: toEstablishments(),
+    toTable: toEstablishments(),
     toDetailAction: (id: string) =>
       toDetailFromEndpoint(`${environment.API_ROOT}handelsregister/vestiging/${id}`),
     endpointData: `${environment.API_ROOT}dataselectie/hr/`,
@@ -50,7 +46,7 @@ export default {
     authScope: AuthScope.BRK,
     title: 'Kadastrale objecten',
     path: routing.cadastralObjects.path,
-    toTableAction: toCadastralObjects(),
+    toTable: toCadastralObjects(),
     toDetailAction: (id: string) => toDetailFromEndpoint(`${environment.API_ROOT}brk/object/${id}`),
     endpointData: `${environment.API_ROOT}dataselectie/brk/kot/`,
     endpointMapVisualization: `${environment.API_ROOT}dataselectie/brk/geolocation/`,

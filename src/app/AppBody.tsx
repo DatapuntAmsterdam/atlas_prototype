@@ -3,7 +3,6 @@ import { FunctionComponent, lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import { IDS } from '../shared/config/config'
 import EmbedIframeComponent from './components/EmbedIframe/EmbedIframe'
 import ErrorAlert from './components/ErrorAlert/ErrorAlert'
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
@@ -63,6 +62,8 @@ export interface AppBodyProps {
   embedPreviewMode: boolean
 }
 
+export const APP_CONTAINER_ID = 'main'
+
 const AppBody: FunctionComponent<AppBodyProps> = ({
   visibilityError,
   bodyClasses,
@@ -82,7 +83,7 @@ const AppBody: FunctionComponent<AppBodyProps> = ({
       </Helmet>
       {hasGrid ? (
         <>
-          <AppContainer id={IDS.main} className="main-container">
+          <AppContainer id={APP_CONTAINER_ID} className="main-container">
             <NotificationAlert />
             <Suspense fallback={<StyledLoadingSpinner />}>
               <Switch>

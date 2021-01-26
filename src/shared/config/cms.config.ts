@@ -1,7 +1,6 @@
-import { Environment } from '../environment'
 import environment from '../../environment'
-
-const { HOMEPAGE: HOMEPAGE_LINKS } = require('./content-links.json')
+import { Environment } from '../environment'
+import { HOMEPAGE_LINKS } from './content-links'
 
 const SHARED_FIELDS = ['field_intro', 'field_cover_image.field_media_image.uri', 'field_language']
 

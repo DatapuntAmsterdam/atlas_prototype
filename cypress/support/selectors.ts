@@ -72,7 +72,7 @@ export const DATA_SELECTION_TABLE = {
 
 export const DATA_SETS = {
   datasetItem: '.resources-type__content-item',
-  dataSetLink: '[data-test=DatasetCard]',
+  dataSetLink: '[data-testid=datasetCard]',
 }
 
 export const DETAIL_PANEL = {

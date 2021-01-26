@@ -1,8 +1,8 @@
 import path from 'path'
 import TerserPlugin from 'terser-webpack-plugin'
 import { merge } from 'webpack-merge'
-import { createConfig, srcPath } from './webpack.common'
 import { GenerateSW } from 'workbox-webpack-plugin'
+import { createConfig, srcPath } from './webpack.common'
 
 const debugMode = process.env.DEBUG === 'true'
 

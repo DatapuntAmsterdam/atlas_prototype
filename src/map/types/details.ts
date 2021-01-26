@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { AlertLevel } from '@amsterdam/asc-ui'
 import { Position } from 'geojson'
-import { LocationDescriptor } from 'history'
+import { LocationDescriptorObject } from 'history'
 import { ReactNode } from 'react'
 import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import AuthScope from '../../shared/services/api/authScope'
@@ -69,7 +69,7 @@ export interface DetailInfo {
 export interface InternalLink {
   title?: string | null
   // TODO: when types are fixed in @types/react-router-dom, use Pick<LinkProps> instead
-  to: LocationDescriptor
+  to: LocationDescriptorObject
 }
 
 export type Link = ExternalLink | InternalLink
@@ -123,7 +123,7 @@ export interface DetailResultItemImage extends DefaultDetailResultItem {
 export interface DetailResultItemDefinitionListEntry {
   term: string
   description?: string | null
-  href?: LocationDescriptor | null
+  href?: LocationDescriptorObject | null
   to?: string | { pathname: string; search?: string }
   alert?: string
 }

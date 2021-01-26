@@ -29,7 +29,7 @@ const CoordinatesText = styled.span`
 
 const CategoryHeading = styled(Heading)`
   margin-bottom: ${themeSpacing(2)};
-  color: ${themeColor('secondary', 'main')};
+  color: ${themeColor('secondary')};
 `
 
 const ResultLink = styled(Link)`

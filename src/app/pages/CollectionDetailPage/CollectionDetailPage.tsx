@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import { Link, Row, themeSpacing } from '@amsterdam/asc-ui'
-import { useEffect, FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { cmsConfig } from '../../../shared/config/config'
+import cmsConfig from '../../../shared/config/cms.config'
 import CardListBlock, { CMSCollectionList } from '../../components/CardList/CardListBlock'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'

@@ -1,13 +1,13 @@
-import { useState, FunctionComponent } from 'react'
 import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { Alert, Column, Heading, Link, Row, themeColor, themeSpacing } from '@amsterdam/asc-ui'
-import RouterLink from 'redux-first-router-link'
+import { FunctionComponent, useState } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
+import { Bestand, BouwdossierAccess } from '../../../api/iiif-metadata/bouwdossier'
 import { SCOPES } from '../../../shared/services/auth/auth'
 import getState from '../../../shared/services/redux/get-state'
-import { toConstructionFileViewer } from '../../../store/redux-first-router/actions'
+import { toConstructionFile } from '../../links'
 import ActionButton from '../ActionButton/ActionButton'
-import { Bestand, BouwdossierAccess } from '../../../api/iiif-metadata/bouwdossier'
 import IIIFThumbnail from '../IIIFThumbnail/IIIFThumbnail'
 
 const StyledAlert = styled(Alert)`
@@ -114,7 +114,7 @@ const Gallery: FunctionComponent<GalleryProps> = ({ allFiles, id, access, ...oth
                   // @ts-ignore */}
                   <StyledLink
                     forwardedAs={disabled ? 'span' : RouterLink}
-                    to={toConstructionFileViewer(id, fileName, fileUrl)}
+                    to={toConstructionFile(id, fileName, fileUrl)}
                     title={fileName}
                     disabled={disabled}
                   >

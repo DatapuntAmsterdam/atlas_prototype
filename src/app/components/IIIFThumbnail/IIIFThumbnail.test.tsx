@@ -1,6 +1,9 @@
-import { cleanup, render } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import { shallow } from 'enzyme'
+import path from 'path'
+import fs from 'fs'
 import IIIFThumbnail from './IIIFThumbnail'
+import { server, rest } from '../../../../test/server'
 
 const mockAccessToken = 'ABC'
 const mockImageUrl = 'this.a.image.url'
@@ -36,41 +39,50 @@ describe('IIIFThumbnail', () => {
   })
 
   it("should set the not found image when the src can't be fetched", async () => {
-    ;(fetch as jest.Mock).mockReturnValueOnce(
-      Promise.resolve({
-        ok: false,
-        blob: () => Promise.resolve(new Blob()),
+    server.use(
+      rest.get(/localhost/, async (req, res, ctx) => {
+        return res(ctx.status(404))
       }),
     )
-    const { findByTestId } = render(<IIIFThumbnail src="" title="foo" />)
 
-    const image = (await findByTestId('Image')) as HTMLImageElement
+    render(<IIIFThumbnail src="http://localhost/" title="foo" />)
+
+    const image = (await screen.findByTestId('Image')) as HTMLImageElement
 
     // Fetch returns ok = false, so render not found image
     expect(image.src).toContain('not_found_thumbnail.jpg')
   })
 
   it('should call the fetch method with the user token and display the image', async () => {
-    const mockFetch = (fetch as jest.Mock).mockReturnValueOnce(
-      Promise.resolve({
-        ok: true,
-        blob: () => Promise.resolve({}),
+    let request: any
+
+    server.use(
+      rest.get(/localhost/, async (req, res, ctx) => {
+        const imageBuffer = fs.readFileSync(path.resolve(__dirname, './blob.jpg'))
+        request = req
+
+        return res(
+          ctx.set('Content-Length', imageBuffer.byteLength.toString()),
+          ctx.set('Content-Type', 'image/jpeg'),
+          // Respond with the "ArrayBuffer".
+          ctx.body(imageBuffer),
+        )
       }),
     )
-    const src = 'this.a.endpoint'
 
-    const { findByTestId } = render(<IIIFThumbnail src={src} title="foo" />)
+    const src = 'http://localhost/this.is.an.endpoint'
+
+    render(<IIIFThumbnail src={src} title="foo" />)
+
+    await screen.findByTestId('Image')
 
     // Calls fetch with the src and headers
-    expect(mockFetch).toHaveBeenCalledWith(src, {
-      headers: { authorization: `Bearer ${mockAccessToken}` },
-    })
+    expect(request.headers.get('authorization')).toEqual(`Bearer ${mockAccessToken}`)
 
-    const image = (await findByTestId('Image')) as HTMLImageElement
+    const image = (await screen.findByTestId('Image')) as HTMLImageElement
 
     // Response.ok is true, so construct the image url using the blob
     expect(mockCreateObjectURL).toHaveBeenCalled()
-
     expect(image.src).toContain(mockImageUrl)
   })
 })

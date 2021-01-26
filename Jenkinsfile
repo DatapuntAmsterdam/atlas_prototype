@@ -5,7 +5,6 @@ pipeline {
   }
 
   environment {
-    COMMIT_HASH = GIT_COMMIT.substring(0, 8)
     PROJECT_PREFIX = "${BRANCH_NAME}_${COMMIT_HASH}_${BUILD_NUMBER}_"
 
     IMAGE_FRONTEND_BASE = 'docker-registry.data.amsterdam.nl/atlas/app'

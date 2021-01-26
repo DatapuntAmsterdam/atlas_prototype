@@ -20,7 +20,6 @@ import {
   Provider as GraphQLProvider,
 } from 'urql'
 import environment from '../environment'
-import { IDS } from '../shared/config/config'
 import { hasGlobalError } from '../shared/ducks/error/error-message'
 import {
   hasOverflowScroll,
@@ -32,9 +31,10 @@ import {
 } from '../shared/ducks/ui/ui'
 import getState from '../shared/services/redux/get-state'
 import { getPage, isHomepage } from '../store/redux-first-router/selectors'
-import AppBody from './AppBody'
-import Footer from './components/Footer/Footer'
+import AppBody, { APP_CONTAINER_ID } from './AppBody'
+import Footer, { FOOTER_ID } from './components/Footer/Footer'
 import Header from './components/Header'
+import { SEARCH_BAR_INPUT_ID } from './components/SearchBar/SearchBar'
 import matomoInstance from './matomo'
 import { isContentPage, isEditorialDetailPage, isSearchPage } from './pages'
 import { routing } from './routes'
@@ -168,7 +168,7 @@ const App: FunctionComponent = () => {
               variant="primary"
               title="Direct naar: inhoud"
               forwardedAs="a"
-              href={`#${IDS.main}`}
+              href={`#${APP_CONTAINER_ID}`}
             >
               Direct naar: inhoud
             </SkipNavigationLink>
@@ -176,7 +176,7 @@ const App: FunctionComponent = () => {
               variant="primary"
               title="Direct naar: zoeken"
               onClick={() => {
-                document.getElementById(IDS.searchbar)?.focus()
+                document.getElementById(SEARCH_BAR_INPUT_ID)?.focus()
               }}
             >
               Direct naar: zoeken
@@ -186,7 +186,7 @@ const App: FunctionComponent = () => {
               variant="primary"
               title="Direct naar: footer"
               forwardedAs="a"
-              href={`#${IDS.footer}`}
+              href={`#${FOOTER_ID}`}
             >
               Direct naar: footer
             </SkipNavigationLink>
