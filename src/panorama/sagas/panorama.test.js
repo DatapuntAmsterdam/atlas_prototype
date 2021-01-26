@@ -1,24 +1,14 @@
-import { expectSaga, testSaga } from 'redux-saga-test-plan'
+import { testSaga } from 'redux-saga-test-plan'
 import { takeLatest } from 'redux-saga/effects'
-import {
-  doClosePanorama,
-  fetchFetchPanoramaEffect,
-  fetchPanoramaById,
-  fetchPanoramaByLocation,
-  fetchPanoramaByTags,
-  handlePanoramaRequest,
-  watchClosePanorama,
-  watchFetchPanorama,
-} from './panorama'
-import { fetchPanoramaRequest } from '../ducks/actions'
-import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api'
-import { TOGGLE_MAP_OVERLAY, MAP_CLEAR } from '../../map/ducks/map/constants'
+import { routing } from '../../app/routes'
 import { closeMapPanel } from '../../map/ducks/map/actions'
-import { toMap } from '../../store/redux-first-router/actions'
-import { getLocationPayload } from '../../store/redux-first-router/selectors'
+import { MAP_CLEAR, TOGGLE_MAP_OVERLAY } from '../../map/ducks/map/constants'
 import { getMapCenter } from '../../map/ducks/map/selectors'
+import { getViewMode, ViewMode } from '../../shared/ducks/ui/ui'
+import { ForbiddenError } from '../../shared/services/api/customError'
+import { getLocationPayload } from '../../store/redux-first-router/selectors'
+import { fetchPanoramaRequest } from '../ducks/actions'
 import {
-  CLOSE_PANORAMA,
   FETCH_PANORAMA_ERROR,
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST,
@@ -26,10 +16,16 @@ import {
   SET_PANORAMA_LOCATION,
   SET_PANORAMA_TAGS,
 } from '../ducks/constants'
-import { getPanoramaLocation, getPanoramaTags, getLabelObjectByTags } from '../ducks/selectors'
-import { getViewMode, ViewMode } from '../../shared/ducks/ui/ui'
-import { routing } from '../../app/routes'
-import { ForbiddenError } from '../../shared/services/api/customError'
+import { getLabelObjectByTags, getPanoramaLocation, getPanoramaTags } from '../ducks/selectors'
+import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api'
+import {
+  fetchFetchPanoramaEffect,
+  fetchPanoramaById,
+  fetchPanoramaByLocation,
+  fetchPanoramaByTags,
+  handlePanoramaRequest,
+  watchFetchPanorama,
+} from './panorama'
 
 jest.mock('../ducks/selectors')
 
@@ -62,29 +58,6 @@ describe('watchFetchPanorama', () => {
       ])
       .next(action)
       .isDone()
-  })
-})
-
-describe('watchClosePanorama', () => {
-  const action = { type: CLOSE_PANORAMA }
-
-  it(`should watch ${CLOSE_PANORAMA} and call closePanorama`, () => {
-    testSaga(watchClosePanorama)
-      .next()
-      .takeLatestEffect(CLOSE_PANORAMA, doClosePanorama)
-      .next(action)
-      .isDone()
-  })
-
-  // Skipped as this test failes randomly. Need to be fixed https://datapunt.atlassian.net/browse/DP-7282
-  it.skip('should call doClosePanorama and dispatch the correct action', () => {
-    expectSaga(doClosePanorama)
-      .provide({
-        call(effect) {
-          return effect.fn === toMap()
-        },
-      })
-      .run()
   })
 })
 

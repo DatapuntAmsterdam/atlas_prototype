@@ -1,29 +1,21 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects'
+import { closeMapPanel, mapClear, toggleMapOverlay } from '../../map/ducks/map/actions'
+import { getMapCenter } from '../../map/ducks/map/selectors'
+import { getViewMode, ViewMode } from '../../shared/ducks/ui/ui'
+import { ForbiddenError } from '../../shared/services/api/customError'
+import PARAMETERS from '../../store/parameters'
+import { toPanorama } from '../../store/redux-first-router/actions'
+import { getLocationPayload } from '../../store/redux-first-router/selectors'
 import { fetchPanoramaError, fetchPanoramaRequest, fetchPanoramaSuccess } from '../ducks/actions'
 import {
-  getDetailReference,
-  getPageReference,
-  getPanoramaLocation,
-  getPanoramaTags,
-  getLabelObjectByTags,
-} from '../ducks/selectors'
-import { closeMapPanel, toggleMapOverlay, mapClear } from '../../map/ducks/map/actions'
-import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api'
-import { toDataDetail, toGeoSearch, toPanorama } from '../../store/redux-first-router/actions'
-import { getLocationPayload } from '../../store/redux-first-router/selectors'
-import { getViewMode, ViewMode } from '../../shared/ducks/ui/ui'
-import PARAMETERS from '../../store/parameters'
-import { getMapOverlays, getMapCenter } from '../../map/ducks/map/selectors'
-import {
-  initialState,
-  CLOSE_PANORAMA,
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST,
-  PAGE_REF_MAPPING,
+  initialState,
   SET_PANORAMA_LOCATION,
   SET_PANORAMA_TAGS,
 } from '../ducks/constants'
-import { ForbiddenError } from '../../shared/services/api/customError'
+import { getLabelObjectByTags, getPanoramaLocation, getPanoramaTags } from '../ducks/selectors'
+import { getImageDataById, getImageDataByLocation } from '../services/panorama-api/panorama-api'
 
 export function* fetchFetchPanoramaEffect(action) {
   const view = yield select(getViewMode)
@@ -87,46 +79,4 @@ export function* watchFetchPanorama() {
     takeLatest([SET_PANORAMA_LOCATION], fetchPanoramaByLocation),
     takeLatest([SET_PANORAMA_TAGS], fetchPanoramaByTags),
   ])
-}
-
-/**
- * We have two types of 'references': detail and page
- * detailReference will contain the detail id of the page, and so will navigate to one if set
- * pageReference is mapped to an action that will be dispatched if set (and so will navigate to a
- * page.
- * By default, the panorama always has a location, so if pageReference or detailReference are not
- * set, do a geosearch based on th panorama's location
- * @returns {IterableIterator<*>}
- */
-export function* doClosePanorama() {
-  const detailReference = yield select(getDetailReference)
-  const pageReference = yield select(getPageReference)
-  const panoramaLocation = yield select(getPanoramaLocation)
-  let overlays = yield select(getMapOverlays)
-
-  // Filter out the panorama layers, as they should be closed
-  overlays = overlays?.filter(({ id }) => !id.startsWith('pano'))
-
-  if (Array.isArray(detailReference) && detailReference.length) {
-    yield put(
-      toDataDetail(detailReference, {
-        [PARAMETERS.LAYERS]: overlays,
-        [PARAMETERS.VIEW]: ViewMode.Split,
-      }),
-    )
-  } else if (typeof PAGE_REF_MAPPING[pageReference] === 'function') {
-    yield put(PAGE_REF_MAPPING[pageReference]())
-  } else {
-    yield put(
-      toGeoSearch({
-        [PARAMETERS.LOCATION]: panoramaLocation,
-        [PARAMETERS.VIEW]: ViewMode.Split,
-        [PARAMETERS.LAYERS]: overlays,
-      }),
-    )
-  }
-}
-
-export function* watchClosePanorama() {
-  yield takeLatest(CLOSE_PANORAMA, doClosePanorama)
 }

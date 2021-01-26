@@ -59,3 +59,7 @@ export const toEstablishments = (): LocationDescriptorObject => {
 
 export const toHelpPage = () =>
   toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)
+
+export const toHome = (): LocationDescriptorObject => ({
+  pathname: routing.home.path,
+})

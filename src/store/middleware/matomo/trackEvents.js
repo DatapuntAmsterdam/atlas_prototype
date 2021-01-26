@@ -14,7 +14,6 @@ import {
 } from '../../../map/ducks/map/constants'
 import { getShapeMarkers } from '../../../map/ducks/map/selectors'
 import {
-  CLOSE_PANORAMA,
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST_EXTERNAL,
   SET_PANORAMA_TAGS,
@@ -98,8 +97,6 @@ const trackEvents = {
 
     return []
   },
-  // NAVIGATION -> CLICK CLOSE FROM PANORAMA
-  [CLOSE_PANORAMA]: () => [MATOMO_CONSTANTS.TRACK_EVENT, 'navigation', 'panorama-verlaten', null],
   // NAVIGATION -> CLOSE PRINT VIEW
   [HIDE_PRINT]: () => [MATOMO_CONSTANTS.TRACK_EVENT, 'navigation', 'printversie-verlaten', null],
   // NAVIGATION -> CLOSE EMBED VIEW

@@ -8,6 +8,7 @@ import {
   toConstructionFile,
   toEstablishments,
   toHelpPage,
+  toHome,
 } from './links'
 import { routing } from './routes'
 
@@ -67,6 +68,14 @@ describe('toHelpPage', () => {
 
     expect(toHelpPage()).toEqual({
       pathname: generatePath(routing.articleDetail.path, { id, slug }),
+    })
+  })
+})
+
+describe('toHome', () => {
+  it('creates a location descriptor', () => {
+    expect(toHome()).toEqual({
+      pathname: routing.home.path,
     })
   })
 })
