@@ -24,40 +24,38 @@ export interface DataSelectionListProps {
   }
 }
 
-const DataSelectionList: FunctionComponent<DataSelectionListProps> = ({ content }) => {
-  return (
-    <ul>
-      {content.body.map((row) => (
-        <StyledListItem key={row.content[0]}>
-          <Link as={RouterLink} to={buildDetailUrl(getDetailPageData(row.detailEndpoint))} inList>
-            {/*
-            // @ts-ignore */}
-            <DataSelectionFormatter
-              // @ts-ignore
-              variables={row.content[0]}
-              formatter={content.formatters[0]}
-              useInline
-            />
-          </Link>
+const DataSelectionList: FunctionComponent<DataSelectionListProps> = ({ content }) => (
+  <ul>
+    {content.body.map((row) => (
+      <StyledListItem key={row.content[0]}>
+        <Link as={RouterLink} to={buildDetailUrl(getDetailPageData(row.detailEndpoint))} inList>
+          {/*
+          // @ts-ignore */}
+          <DataSelectionFormatter
+            // @ts-ignore
+            variables={row.content[0]}
+            formatter={content.formatters[0]}
+            useInline
+          />
+        </Link>
 
-          {row.content.map(
-            (variables, i) =>
-              i !== 0 && (
+        {row.content.map(
+          (variables, i) =>
+            i !== 0 && (
+              // @ts-ignore
+              <DataSelectionFormatter
+                // eslint-disable-next-line react/no-array-index-key
+                key={i}
                 // @ts-ignore
-                <DataSelectionFormatter
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={i}
-                  // @ts-ignore
-                  variables={variables}
-                  formatter={content.formatters[i]}
-                  useInline
-                />
-              ),
-          )}
-        </StyledListItem>
-      ))}
-    </ul>
-  )
-}
+                variables={variables}
+                formatter={content.formatters[i]}
+                useInline
+              />
+            ),
+        )}
+      </StyledListItem>
+    ))}
+  </ul>
+)
 
 export default DataSelectionList
