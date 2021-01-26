@@ -8,15 +8,15 @@ import {
   Row,
 } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import environment from '../../../environment'
 import cmsConfig from '../../../shared/config/cms.config'
-import { toPublicationDetail } from '../../../store/redux-first-router/actions'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import DocumentCover from '../../components/DocumentCover/DocumentCover'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
 import ShareBar from '../../components/ShareBar/ShareBar'
+import { toPublicationDetail } from '../../links'
 import getImageFromCms from '../../utils/getImageFromCms'
 import useDownload from '../../utils/useDownload'
 import useFromCMS from '../../utils/useFromCMS'
@@ -46,10 +46,19 @@ const PublicationDetailPage = () => {
   } = results || {}
 
   const documentTitle = title && `Publicatie: ${title}`
-  const linkAction = toPublicationDetail(id, slug)
+  const link = useMemo(() => (slug ? toPublicationDetail(id, slug) : null), [slug, id])
 
   return (
-    <EditorialPage {...{ documentTitle, loading, linkAction, lang, error }} description={intro}>
+    <EditorialPage
+      documentTitle={documentTitle}
+      loading={loading}
+      link={link}
+      title={title}
+      lang={lang}
+      error={error}
+      image={coverImage}
+      description={intro}
+    >
       {!loading && (
         <Column wrap="true" span={{ small: 1, medium: 4, big: 6, large: 12, xLarge: 12 }}>
           <ContentContainer>

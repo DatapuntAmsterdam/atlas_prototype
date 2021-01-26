@@ -8,6 +8,7 @@ import {
   toConstructionFile,
   toEstablishments,
   toHelpPage,
+  toPublicationDetail,
 } from './links'
 import { routing } from './routes'
 
@@ -67,6 +68,17 @@ describe('toHelpPage', () => {
 
     expect(toHelpPage()).toEqual({
       pathname: generatePath(routing.articleDetail.path, { id, slug }),
+    })
+  })
+})
+
+describe('toPublicationDetail', () => {
+  const id = '123456'
+  const slug = 'hello-world'
+
+  it('creates a location descriptor', () => {
+    expect(toPublicationDetail(id, slug)).toEqual({
+      pathname: generatePath(routing.publicationDetail.path, { id, slug }),
     })
   })
 })

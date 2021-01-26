@@ -182,14 +182,6 @@ export const toDatasetDetail = (payload) => ({
   },
 })
 
-export const toPublicationDetail = (id, slug = '') => ({
-  type: routing.publicationDetail.type,
-  payload: {
-    id,
-    slug,
-  },
-})
-
 export const toSpecialDetail = (id, type = '', slug = '') => ({
   type: routing.specialDetail.type,
   payload: {
