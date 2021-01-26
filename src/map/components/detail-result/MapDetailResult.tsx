@@ -1,6 +1,6 @@
 import { Alert, Heading, Link } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
-import { LocationDescriptor, LocationDescriptorObject } from 'history'
+import { LocationDescriptor } from 'history'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import { FunctionComponent } from 'react'
 import {
