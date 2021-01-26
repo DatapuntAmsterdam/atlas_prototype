@@ -8,7 +8,7 @@
   ],
   "compilerOptions": {
     "strict": true,
-    "target": "ES2020",
+    "target": "es2020",
     "module": "es2020",
     "moduleResolution": "node",
     "jsx": "react-jsx",

@@ -1,6 +1,6 @@
 import { Heading, Button, Link, themeSpacing, themeColor } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
-import { FunctionComponent, ReactNode } from 'react'
+import { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
@@ -17,7 +17,6 @@ export interface MapDetailResultWrapperProps {
   location?: LatLngLiteral
   subTitle?: string | null
   onMaximize: () => void
-  children: ReactNode
 }
 
 const StyledLink = styled(Link)`
@@ -49,6 +48,7 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
   const user = useSelector(getUser)
 
   const result = usePromise(
+    // A small response that will only be available on gov. network
     () => fetchProxy('https://acc.api.data.amsterdam.nl/brk/?format=json'),
     [],
   )

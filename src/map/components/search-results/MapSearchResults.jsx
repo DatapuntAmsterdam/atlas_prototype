@@ -52,6 +52,7 @@ const MapSearchResults = ({
 
   const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location)
   const result = usePromise(
+    // A small response that will only be available on gov. network
     () => fetchProxy('https://acc.api.data.amsterdam.nl/brk/?format=json'),
     [],
   )
