@@ -1,5 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme'
-import ToggleDrawing, { Props, StyledControlButton } from './ToggleDrawing'
+import ToggleDrawing, { ToggleDrawingProps, StyledControlButton } from './ToggleDrawing'
 
 jest.mock('react-redux', () => ({
   // @ts-ignore
@@ -14,7 +14,7 @@ describe('ToggleDrawing', () => {
     shapeDistanceTxt: string,
     drawingEnabled: boolean,
     numberOfMarkers: number,
-    overrides: Partial<Props>,
+    overrides: Partial<ToggleDrawingProps>,
   ) => {
     const mockFn = () => ({ type: 'someaction' })
     wrapper = shallow(
