@@ -94,7 +94,8 @@ class PanoramaContainer extends Component {
   onClose() {
     const { detailReference, pageReference, panoramaLocation, history, matomo } = this.props
     // Filter out the panorama layers, as they should be closed
-    const overlays = this.overlays?.filter(({ id }) => !id.startsWith('pano'))
+    // eslint-disable-next-line react/destructuring-assignment
+    const overlays = this.props.overlays?.filter(({ id }) => !id.startsWith('pano'))
 
     if (Array.isArray(detailReference) && detailReference.length) {
       // eslint-disable-next-line react/destructuring-assignment
