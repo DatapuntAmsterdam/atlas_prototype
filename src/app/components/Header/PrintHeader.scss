@@ -11,31 +11,5 @@ $print-header-padding-icon: 4px;
     &__print {
       float: right;
     }
-
-    &__close {
-      @include icon-button('icon-clear', $primary-dark, $primary-dark);
-
-      background-color: $primary-light;
-      position: absolute;
-      right: -($print-header-padding - $print-header-padding-icon);
-      top: -($print-header-padding - $print-header-padding-icon);
-
-      &:hover,
-      &:focus {
-        background-color: $secondary-gray20;
-      }
-    }
-  }
-
-  &-button {
-    @include header-button('print', 24px, right);
-
-    height: 26px;
-    padding: 0 2px 0 5px;
-
-    &::before {
-      margin-left: 2px;
-      margin-right: 0;
-    }
   }
 }

@@ -10,11 +10,9 @@
 
 @import 'components/button';
 @import 'components/header';
-@import 'components/link';
 @import 'components/list';
 @import 'components/list-bulleted';
 @import 'components/paragraph';
-@import 'components/show-more';
 @import 'components/table';
 @import 'components/tabs';
 @import 'components/tag';
@@ -38,18 +36,15 @@
 
 @import '../../app/app';
 @import '../../map/map';
-@import '../../shared/components/notification/_notification';
 @import '../../shared/components/select-button/_select-button';
 @import '../../header/components/auto-suggest/auto-suggest';
 @import '../../app/components/ContextMenu/Map/Map';
 @import '../../app/components/Video/Video';
-@import '../../app/components/Icon/Icon';
 @import '../../app/components/EmbedIframe/embedIframe';
 @import '../../app/components/Header/EmbedHeader';
 @import '../../app/components/Header/PrintHeader';
 @import '../../app/components/IconButton/IconButton';
 @import '../../app/components/ImageViewer/ImageViewer';
-@import '../../app/components/Modal/InfoModal';
 @import '../../app/components/ViewerControls/ViewerControls';
 @import '../../app/components/DataSelection/DataSelectionTable/DataSelectionTable';
 @import '../../panorama/components/PanoramaToggle/PanoramaToggle';

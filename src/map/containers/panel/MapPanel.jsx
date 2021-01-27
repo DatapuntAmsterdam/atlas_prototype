@@ -2,9 +2,9 @@ import { ChevronUp, Info } from '@amsterdam/asc-assets'
 import { Alert, Icon, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
 import MapLegend from '../../components/legend/MapLegend'
-import MapPanelHandle from '../../components/panel-handle/MapPanelHandle'
 import MapType from '../../components/type/MapType'
 import { isAuthorised } from '../../utils/map-layer'
+import MapLayers from '../../../shared/assets/icons/icon-map-layers.svg'
 
 const ZoomInAlert = styled(Alert)`
   width: calc(100% - ${themeSpacing(6)});
@@ -23,7 +23,6 @@ const ZoomInAlertContent = styled.div`
 const MapPanel = ({
   activeBaseLayer,
   onBaseLayerToggle,
-  onMapPanelHandleToggle,
   onMapPanelToggle,
   onLayerToggle = () => {},
   onLayerVisibilityToggle = () => {},
@@ -63,7 +62,7 @@ const MapPanel = ({
           onClick={onMapPanelToggle}
           title={isMapPanelVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen'}
         >
-          <span className="map-panel__heading-icon" />
+          <MapLayers />
           <h2 className="map-panel__heading-title" aria-hidden="true">
             Kaartlagen
           </h2>
@@ -78,46 +77,39 @@ const MapPanel = ({
         </button>
       </div>
       <div className="scroll-wrapper">
-        <MapPanelHandle
-          {...{
-            isMapPanelHandleVisible: true, // TODO: find out if we actually need these (and from where its used)
-            onMapPanelHandleToggle,
-          }}
-        >
-          {mapBaseLayers?.aerial?.length && mapBaseLayers?.topography?.length && (
-            <MapType
-              activeBaseLayer={activeBaseLayer}
-              baseLayers={mapBaseLayers}
-              onBaseLayerToggle={onBaseLayerToggle}
-            />
-          )}
-          {someLayersRequireZoom && (
-            <ZoomInAlert level="info">
-              <ZoomInAlertContent>
-                <Icon>
-                  <Info />
-                </Icon>
-                Een of meerdere geselecteerde kaartlagen zijn nog niet zichtbaar. Zoom in op de
-                kaart om deze te zien.
-              </ZoomInAlertContent>
-            </ZoomInAlert>
-          )}
-          {panelLayers.map(({ id, mapLayers, title }) => (
-            <MapLegend
-              onAddLayers={onAddLayers}
-              onRemoveLayers={onRemoveLayers}
-              key={id}
-              activeMapLayers={mapLayers}
-              onLayerToggle={onLayerToggle}
-              onLayerVisibilityToggle={onLayerVisibilityToggle}
-              overlays={overlays}
-              user={user}
-              title={title}
-              zoomLevel={zoomLevel}
-              printMode={printMode}
-            />
-          ))}
-        </MapPanelHandle>
+        {mapBaseLayers?.aerial?.length && mapBaseLayers?.topography?.length && (
+          <MapType
+            activeBaseLayer={activeBaseLayer}
+            baseLayers={mapBaseLayers}
+            onBaseLayerToggle={onBaseLayerToggle}
+          />
+        )}
+        {someLayersRequireZoom && (
+          <ZoomInAlert level="info">
+            <ZoomInAlertContent>
+              <Icon>
+                <Info />
+              </Icon>
+              Een of meerdere geselecteerde kaartlagen zijn nog niet zichtbaar. Zoom in op de kaart
+              om deze te zien.
+            </ZoomInAlertContent>
+          </ZoomInAlert>
+        )}
+        {panelLayers.map(({ id, mapLayers, title }) => (
+          <MapLegend
+            onAddLayers={onAddLayers}
+            onRemoveLayers={onRemoveLayers}
+            key={id}
+            activeMapLayers={mapLayers}
+            onLayerToggle={onLayerToggle}
+            onLayerVisibilityToggle={onLayerVisibilityToggle}
+            overlays={overlays}
+            user={user}
+            title={title}
+            zoomLevel={zoomLevel}
+            printMode={printMode}
+          />
+        ))}
       </div>
     </div>
   )

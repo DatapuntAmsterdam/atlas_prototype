@@ -41,43 +41,21 @@ $handle-height: 24px;
     position: absolute;
     right: 0;
     width: 32px;
-
-    &:hover,
-    &:focus {
-      .select-button__icon-collapse {
-        // sass-lint:disable nesting-depth
-        @include icon-sprite('icon-arrow-up', $primary-dark, $primary-dark, $handle-height - 2px);
-      }
-
-      .select-button__icon-expand {
-        // sass-lint:disable nesting-depth
-        @include icon-sprite('icon-arrow-down', $primary-dark, $primary-dark, $handle-height - 2px);
-      }
-    }
   }
 
   &__icon {
     display: block;
     height: $handle-height - 2px;
     width: $handle-height - 2px;
+  }
 
-    &-collapse {
-      @include icon-sprite('icon-arrow-up', $secondary-gray60, $primary-dark, $handle-height - 2px);
-    }
-
-    &-expand {
-      @include icon-sprite(
-        'icon-arrow-down',
-        $secondary-gray60,
-        $primary-dark,
-        $handle-height - 2px
-      );
-    }
+  svg {
+    pointer-events: none;
   }
 
   &--enabled {
-    .select-button__icon-expand {
-      @include icon-sprite('icon-arrow-down', $primary-dark, $primary-dark, $handle-height - 2px);
+    svg path {
+      fill: $black;
     }
   }
 
@@ -163,6 +141,10 @@ $handle-height: 24px;
     &:hover,
     &:focus {
       background-color: $secondary-gray4;
+
+      svg path {
+        fill: $black;
+      }
     }
   }
 }

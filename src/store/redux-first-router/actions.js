@@ -2,8 +2,6 @@ import { ROUTER_NAMESPACE, routing } from '../../app/routes'
 import { DATASET_ROUTE_MAPPER } from '../../shared/ducks/data-selection/constants'
 import { ViewMode } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../parameters'
-import environment from '../../environment'
-import { HEADER_LINK_HELP } from '../../shared/config/content-links'
 
 export const preserveQuery = (action, additionalParams = null) => ({
   ...action,
@@ -184,22 +182,6 @@ export const toDatasetDetail = (payload) => ({
   },
 })
 
-export const toArticleDetail = (id, slug = '') => ({
-  type: routing.articleDetail.type,
-  payload: {
-    id,
-    slug,
-  },
-})
-
-export const toPublicationDetail = (id, slug = '') => ({
-  type: routing.publicationDetail.type,
-  payload: {
-    id,
-    slug,
-  },
-})
-
 export const toSpecialDetail = (id, type = '', slug = '') => ({
   type: routing.specialDetail.type,
   payload: {
@@ -232,9 +214,6 @@ export const toDatasetsTableWithFilter = (datasetType, filter) => ({
 export const toNotFoundPage = () => ({
   type: routing.niet_gevonden.type,
 })
-
-export const toHelpPage = () =>
-  toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)
 
 export const toPublicationSearch = toSearchOfType(routing.publicationSearch.type)
 export const toArticleSearch = toSearchOfType(routing.articleSearch.type)

@@ -1,9 +1,9 @@
 import { Link, List, ListItem } from '@amsterdam/asc-ui'
 import { FunctionComponent } from 'react'
-import RouterLink from 'redux-first-router-link'
+import { Link as RouterLink } from 'react-router-dom'
 import environment from '../../../environment'
 import { ContentLink } from '../../../shared/config/content-links'
-import { toArticleDetail } from '../../../store/redux-first-router/actions'
+import { toArticleDetail } from '../../links'
 
 export interface FooterLinksProps {
   links: ContentLink[]

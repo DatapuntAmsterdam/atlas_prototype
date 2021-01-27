@@ -1,7 +1,6 @@
 // resources, resources-item and the styles/** are copyied form dcatd_admin and should be integrated in atlas
 @import './resources';
 @import './resources-item';
-@import './datasets-themes';
 
 .resources {
   margin-right: -2 * $base-whitespace;
@@ -66,7 +65,6 @@
       }
 
       &-arrow {
-        @include sprite('link-arrow');
         display: block;
         width: 24px;
         height: 24px;
@@ -118,28 +116,6 @@
   }
 
   .o-header__subtitle {
-    .o-header__button.catalog__button--wijzigen {
-      // sass-lint:disable-line force-element-nesting
-      @include icon-button-text-right('edit', '', 'white');
-
-      height: auto;
-      padding: 5px 8px;
-      border: 1px solid $secondary-gray20;
-      color: $secondary-gray60;
-
-      &::before {
-        width: 12px;
-        height: 12px;
-      }
-
-      &:hover {
-        border-color: $primary-contrast;
-        background-color: $primary-contrast;
-        color: $primary-light;
-        text-decoration: none;
-      }
-    }
-
     .o-header__button.c-stelselpedia__button {
       // sass-lint:disable-line force-element-nesting
       width: 32px;

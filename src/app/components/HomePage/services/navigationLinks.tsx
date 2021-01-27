@@ -1,14 +1,13 @@
-import { ReactElement } from 'react'
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
 import { LocationDescriptorObject } from 'history'
+import { To } from 'redux-first-router-link'
 import environment from '../../../../environment'
 import {
   NAVIGATION_LINK_DATA_IN_TABLES,
   NAVIGATION_LINK_DATA_SERVICES,
 } from '../../../../shared/config/content-links'
 import {
-  toArticleDetail,
   toArticleSearch,
   toCollectionSearch,
   toDatasetSearch,
@@ -18,20 +17,21 @@ import {
   toPublicationSearch,
   toSpecialSearch,
 } from '../../../../store/redux-first-router/actions'
+import { toArticleDetail } from '../../../links'
 import { routing as routes } from '../../../routes'
 
-export type NavigationLink = {
-  CardIcon?: ReactElement
-  description?: string
+export interface NavigationLink {
   id: number
-  testId: string
+  to: To | LocationDescriptorObject
+  CardIcon?: () => JSX.Element
+  testId?: string
   title: string
-  to: LocationDescriptorObject
+  description?: string
 }
 
 // The id's also represent the order in which they are displayed in the NavigationBlock on the homepage
 // The order of how the items are placed in the array, is the order for the Menu
-const navigationLinks = [
+const navigationLinks: NavigationLink[] = [
   {
     id: 0,
     to: toMapWithLegendOpen(),

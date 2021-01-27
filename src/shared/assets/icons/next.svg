@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
     <g fill="none" fill-rule="evenodd">
-        <path var:fill.fill="#fff" d="M15 10.252L10.748 6 8 8.748 12.252 13 8 17.252 10.748 20 15 15.748 17.748 13z"/>
+        <path d="M15 10.252L10.748 6 8 8.748 12.252 13 8 17.252 10.748 20 15 15.748 17.748 13z"/>
     </g>
 </svg>

@@ -10,7 +10,7 @@ import {
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ComponentProps, FunctionComponent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import RouterLink from 'redux-first-router-link'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
 import environment from '../../../environment'
 import CONSTANTS from '../../../shared/config/constants'
@@ -18,7 +18,8 @@ import { HEADER_LINKS_ABOUT, HEADER_LINK_HELP } from '../../../shared/config/con
 import { authenticateRequest, getUser } from '../../../shared/ducks/user/user'
 import { login, logout } from '../../../shared/services/auth/auth'
 import truncateString from '../../../shared/services/truncateString/truncateString'
-import { toArticleDetail } from '../../../store/redux-first-router/actions'
+import { toArticleDetail, toHelpPage } from '../../links'
+import pickLinkComponent from '../../utils/pickLinkComponent'
 import navigationLinks from '../HomePage/services/navigationLinks'
 import { openFeedbackForm } from '../Modal/FeedbackModal'
 
@@ -87,7 +88,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
               })
               dropFocus()
             }}
-            as={RouterLink}
+            as={pickLinkComponent(to)}
             iconLeft={<ChevronRight />}
             key={id}
             /* @ts-ignore */
@@ -156,7 +157,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
           }}
           data-testid={HEADER_LINK_HELP.testId}
           /* @ts-ignore */
-          to={toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)}
+          to={toHelpPage()}
         >
           {HEADER_LINK_HELP.title}
         </MenuButton>

@@ -1,7 +1,7 @@
 import { logout, getAuthHeaders } from '../auth/auth'
 import getState from '../redux/get-state'
 import SHARED_CONFIG from '../shared-config/shared-config'
-import { AuthError, NotFoundError } from './customError'
+import { AuthError, ForbiddenError, NotFoundError } from './customError'
 
 interface FetchOptions extends RequestInit {
   searchParams?: UrlParams
@@ -21,6 +21,10 @@ const handleErrors = (response: Response, reloadOnUnauthorized = false) => {
 
   if (response.status === 401) {
     throw new AuthError(response.status, '')
+  }
+
+  if (response.status === 403) {
+    throw new ForbiddenError(response.status, '')
   }
 
   if (response.status === 404) {

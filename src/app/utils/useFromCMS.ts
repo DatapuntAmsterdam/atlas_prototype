@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { LocationDescriptorObject } from 'history'
 import { useState } from 'react'
 import { To } from 'redux-first-router-link'
 import useNormalizedCMSResults from '../../normalizations/cms/useNormalizedCMSResults'
@@ -20,7 +21,7 @@ export type CMSResultItem = {
   shortTitle?: string
   teaser: string
   linkProps?: {
-    to?: To
+    to?: To | LocationDescriptorObject
     forwardedAs?: never
     title: string
     href?: string

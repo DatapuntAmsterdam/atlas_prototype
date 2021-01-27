@@ -1,4 +1,6 @@
 import { FunctionComponent } from 'react'
+import { FilterTag } from '@amsterdam/asc-ui'
+import styled from 'styled-components'
 
 // TODO: Replace this interface with one that is shared with other components.
 interface Filter {
@@ -12,28 +14,26 @@ export interface ActiveFiltersProps {
   filters: Filter[]
 }
 
+const StyledUl = styled.ul`
+  display: flex;
+  list-style: none;
+`
+
 const ActiveFilters: FunctionComponent<ActiveFiltersProps> = ({ removeFilter, filters }) =>
   filters && filters.length ? (
-    <div className="qa-active-filters c-data-selection-active-filters">
-      <ul className="c-data-selection-active-filters__list">
-        {filters.map(({ slug, label, option }) => (
-          <li key={slug} className="c-data-selection-active-filters__listitem">
-            <span>
-              {label}:{option}
-            </span>
-
-            <button
-              type="button"
-              onClick={() => removeFilter(slug)}
-              className="c-data-selection-active-filters--remove-filter o-btn"
-              title="Filter verwijderen"
-            >
-              <span className="u-sr-only">Filter verwijderen</span>
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <StyledUl>
+      {filters.map(({ slug, label, option }) => (
+        <li key={slug}>
+          <FilterTag
+            type="button"
+            aria-label={`Filter verwijderen: ${label}: ${option}`}
+            onClick={() => removeFilter(slug)}
+          >
+            {label}: {option}
+          </FilterTag>
+        </li>
+      ))}
+    </StyledUl>
   ) : null
 
 export default ActiveFilters

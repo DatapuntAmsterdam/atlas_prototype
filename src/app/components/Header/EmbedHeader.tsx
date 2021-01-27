@@ -1,6 +1,15 @@
 import { useState, useEffect, FunctionComponent, MouseEvent as ReactMouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
+import { Close } from '@amsterdam/asc-assets'
+import styled from 'styled-components'
+import { Button } from '@amsterdam/asc-ui'
 import { hideEmbedPreview } from '../../../shared/ducks/ui/ui'
+
+const CloseButton = styled(Button)`
+  position: absolute;
+  right: -42px;
+  top: -42px;
+`
 
 const EmbedHeader: FunctionComponent = () => {
   const dispatch = useDispatch()
@@ -45,10 +54,14 @@ const EmbedHeader: FunctionComponent = () => {
         </div>
         <div className="u-col-sm--9">
           <nav>
-            <button
+            <CloseButton
               type="button"
+              variant="blank"
+              title="Sluiten"
+              size={28}
+              icon={<Close />}
+              iconSize={15}
               onClick={() => dispatch(hideEmbedPreview())}
-              className="c-embed-header__close"
             />
           </nav>
         </div>

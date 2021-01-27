@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { lazy } from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getDetailEndpoint } from '../../../shared/ducks/detail/selectors'
 import { getSelectionType } from '../../../shared/ducks/selection/selection'
@@ -10,11 +10,9 @@ import {
   setViewMode as setViewModeAction,
   ViewMode,
 } from '../../../shared/ducks/ui/ui'
-import { getUser } from '../../../shared/ducks/user/user'
 import { toDetailFromEndpoint as endpointActionCreator } from '../../../store/redux-first-router/actions'
 import { getPage } from '../../../store/redux-first-router/selectors'
 import DataSelection from '../../components/DataSelection/DataSelection'
-import PanoAlert from '../../components/PanoAlert/PanoAlert'
 import SplitScreen from '../../components/SplitScreen/SplitScreen'
 import PAGES from '../../pages'
 
@@ -26,10 +24,8 @@ const LocationSearch = lazy(() =>
     /* webpackChunkName: "LocationSearchContainer" */ '../../components/LocationSearch/LocationSearch'
   ),
 )
-const PanoramaContainer = lazy(() =>
-  import(
-    /* webpackChunkName: "PanoramaContainer" */ '../../../panorama/containers/PanoramaContainer'
-  ),
+const PanoramaWrapper = lazy(() =>
+  import(/* webpackChunkName: "PanoramaWrapper" */ '../../../panorama/containers/PanoramaWrapper'),
 ) // TODO: refactor, test
 
 let MapComponent = () => null
@@ -48,7 +44,6 @@ if (typeof window !== 'undefined') {
 }) => {
   let mapProps = {}
   let Component = null
-  const user = useSelector(getUser)
 
   switch (currentPage) {
     case PAGES.DATA_DETAIL:
@@ -66,18 +61,15 @@ if (typeof window !== 'undefined') {
 
       break
 
-    case PAGES.PANORAMA:
-      Component = user.authenticated ? (
-        <PanoramaContainer isFullscreen={viewMode === ViewMode.Full} />
-      ) : (
-        <PanoAlert />
-      )
+    case PAGES.PANORAMA: {
+      Component = <PanoramaWrapper isFullscreen={viewMode === ViewMode.Full} />
       mapProps = {
         isFullscreen: true,
         toggleFullscreen: () => setViewMode(ViewMode.Split),
       }
 
       break
+    }
 
     case PAGES.DATA_SEARCH_GEO:
       Component = <LocationSearch />

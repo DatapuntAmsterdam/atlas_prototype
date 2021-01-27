@@ -1,10 +1,12 @@
-import { LocationDescriptor } from 'history'
+import { LocationDescriptorObject } from 'history'
 import { generatePath } from 'react-router-dom'
+import environment from '../environment'
+import { HEADER_LINK_HELP } from '../shared/config/content-links'
 import { ViewMode } from '../shared/ducks/ui/ui'
 import parameters from '../store/parameters'
 import { routing } from './routes'
 
-export const toAddresses = (): LocationDescriptor => {
+export const toAddresses = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
     [parameters.VIEW]: ViewMode.Full,
   })
@@ -15,7 +17,11 @@ export const toAddresses = (): LocationDescriptor => {
   }
 }
 
-export const toCadastralObjects = (): LocationDescriptor => {
+export const toArticleDetail = (id: string, slug: string): LocationDescriptorObject => ({
+  pathname: generatePath(routing.articleDetail.path, { id, slug }),
+})
+
+export const toCadastralObjects = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
     [parameters.VIEW]: ViewMode.Full,
   })
@@ -30,7 +36,7 @@ export const toConstructionFile = (
   id: string,
   fileName: string,
   fileUrl: string,
-): LocationDescriptor => {
+): LocationDescriptorObject => {
   const pathname = generatePath(routing.constructionFile.path, { id })
   const searchParams = new URLSearchParams({
     [parameters.FILE]: fileName,
@@ -40,7 +46,7 @@ export const toConstructionFile = (
   return { pathname, search: searchParams.toString() }
 }
 
-export const toEstablishments = (): LocationDescriptor => {
+export const toEstablishments = (): LocationDescriptorObject => {
   const searchParams = new URLSearchParams({
     [parameters.VIEW]: ViewMode.Full,
   })
@@ -50,3 +56,10 @@ export const toEstablishments = (): LocationDescriptor => {
     search: searchParams.toString(),
   }
 }
+
+export const toHelpPage = () =>
+  toArticleDetail(HEADER_LINK_HELP.id[environment.DEPLOY_ENV], HEADER_LINK_HELP.slug)
+
+export const toPublicationDetail = (id: string, slug: string): LocationDescriptorObject => ({
+  pathname: generatePath(routing.publicationDetail.path, { id, slug }),
+})

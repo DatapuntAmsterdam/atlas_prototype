@@ -13,3 +13,10 @@ export class NotFoundError extends Error {
     this.message = message
   }
 }
+
+export class ForbiddenError extends Error {
+  constructor(public code: number, public message: string, public title?: string) {
+    super(`HTTP-Code: ${code}`)
+    this.message = message
+  }
+}

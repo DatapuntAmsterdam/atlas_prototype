@@ -1,5 +1,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
+import Down from '../../assets/icons/icon-arrow-down.svg'
+import Up from '../../assets/icons/icon-arrow-up.svg'
 
 class SelectButton extends Component {
   static getSelected(props) {
@@ -121,15 +123,13 @@ class SelectButton extends Component {
           <div className="select-button__label">{label}</div>
         </button>
 
-        <button type="button" className="select-button__icon-wrapper" onClick={this.handleToggle}>
-          <span
-            className={`
-            select-button__icon
-            select-button__icon-${isExpanded ? 'collapse' : 'expand'}
-          `}
-          >
-            <span className="u-sr-only">{isExpanded ? 'Inklappen' : 'Uitklappen'}</span>
-          </span>
+        <button
+          type="button"
+          className="select-button__icon-wrapper"
+          title={isExpanded ? 'Inklappen' : 'Uitklappen'}
+          onClick={this.handleToggle}
+        >
+          {isExpanded ? <Up /> : <Down />}
         </button>
 
         <ul className="select-button__drop-down">

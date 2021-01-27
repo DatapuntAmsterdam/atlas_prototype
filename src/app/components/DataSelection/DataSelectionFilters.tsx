@@ -1,7 +1,8 @@
 import { FunctionComponent, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Button, Heading, Link, themeColor } from '@amsterdam/asc-ui'
+import { Button, Heading, Link, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import styled from 'styled-components'
+import { Enlarge, Minimise } from '@amsterdam/asc-assets'
 import { addFilter as addFilterAction } from '../../../shared/ducks/filters/filters'
 import DATA_SELECTION_CONFIG from '../../../shared/services/data-selection/data-selection-config'
 import { DEFAULT_LOCALE } from '../../../shared/config/locale.config'
@@ -31,10 +32,19 @@ const StyledHeading = styled(Heading)`
   display: flex;
   justify-content: space-between;
   color: ${themeColor('tint', 'level7')};
+  margin-bottom: ${themeSpacing(2)};
 `
 
 const InfoButton = styled(Button)`
   border: 1px solid ${themeColor('tint', 'level4')};
+`
+
+const StyledLink = styled(Link)`
+  background-color: transparent;
+  text-align: left;
+`
+const ShowMoreButton = styled(Button)`
+  margin-top: ${themeSpacing(2)};
 `
 
 // Note, this component has been migrated from legacy angularJS code
@@ -120,7 +130,6 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                       size={28}
                       iconSize={18}
                       icon={<Metadata />}
-                      title="Uitleg tonen"
                       href={filter.info_url}
                       rel="noreferrer noopener"
                       target="_blank"
@@ -137,13 +146,11 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                       isExpandedFilter(filter.slug) ? filter.options.length : showMoreThreshold,
                     )
                     .map((option) => (
-                      <li className="c-data-selection-available-filters__item">
-                        <button
+                      <li key={option.id} className="c-data-selection-available-filters__item">
+                        <StyledLink
+                          inList
                           type="button"
-                          className={`o-btn o-btn--link o-btn--inline-block ${
-                            !option.label &&
-                            'c-data-selection-available-filters__item-label--empty-value'
-                          }`}
+                          forwardedAs="button"
                           onClick={() =>
                             dispatch(
                               addFilterAction({
@@ -156,24 +163,23 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                             <span className="qa-option-label">{option.label || '(geen)'}</span>
                             {showOptionCounts && <span>({option.count})</span>}
                           </span>
-                        </button>
+                        </StyledLink>
                       </li>
                     ))}
                 </ul>
 
                 {canExpandImplode(filter.slug) && showExpandButton(filter.slug) && (
                   <div className="c-data-selection-available-filters__show-more">
-                    <button
+                    <ShowMoreButton
                       type="button"
-                      className="
-                        c-data-selection-available-filters__show-more-button
-                        c-show-more
-                        c-show-more--gray
-                        qa-show-more-button"
                       onClick={() => expandFilter(filter.slug)}
+                      className="qa-show-more-button"
+                      variant="textButton"
+                      iconSize={14}
+                      iconLeft={<Enlarge />}
                     >
                       Toon meer
-                    </button>
+                    </ShowMoreButton>
                   </div>
                 )}
 
@@ -184,13 +190,16 @@ const DataSelectionFilters: FunctionComponent<Props> = ({
                         ...nog {nrHiddenOptions(filter).toLocaleString(DEFAULT_LOCALE)} waarden
                       </div>
                     )}
-                    <button
+                    <ShowMoreButton
                       type="button"
-                      className="c-show-more c-show-more--less c-show-more--gray qa-show-more-button"
+                      className="qa-show-more-button"
                       onClick={() => implodeFilter(filter.slug)}
+                      variant="textButton"
+                      iconSize={14}
+                      iconLeft={<Minimise />}
                     >
                       Toon minder
-                    </button>
+                    </ShowMoreButton>
                   </div>
                 )}
               </div>

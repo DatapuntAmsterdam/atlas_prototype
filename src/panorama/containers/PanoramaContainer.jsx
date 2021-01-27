@@ -4,8 +4,11 @@ import PropTypes from 'prop-types'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from 'styled-components'
+import { ControlButton } from '@amsterdam/arm-core'
+import { themeSpacing } from '@amsterdam/asc-ui'
+import { Close } from '@amsterdam/asc-assets'
 import { Map as ContextMenu } from '../../app/components/ContextMenu'
-import IconButton from '../../app/components/IconButton/IconButton'
 import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullscreen'
 import { getMapDetail } from '../../map/ducks/detail/actions'
 import { getMapOverlays } from '../../map/ducks/map/selectors'
@@ -31,6 +34,13 @@ import {
   initialize,
   loadScene,
 } from '../services/marzipano/marzipano'
+
+const StyledControlButton = styled(ControlButton)`
+  position: absolute;
+  right: ${themeSpacing(2)};
+  top: ${themeSpacing(2)};
+  z-index: 1;
+`
 
 class PanoramaContainer extends Component {
   constructor(props) {
@@ -140,12 +150,19 @@ class PanoramaContainer extends Component {
 
         <ToggleFullscreen
           isFullscreen={isFullscreen}
-          title="Panoramabeeld"
+          aria-label="Panoramabeeld"
           onToggleFullscreen={this.toggleFullscreen}
           alignLeft
         />
 
-        <IconButton onClick={onClose} title="Panoramabeeld sluiten" icon="cross" />
+        <StyledControlButton
+          onClick={onClose}
+          aria-label="Panoramabeeld sluiten"
+          icon={<Close />}
+          variant="blank"
+          iconSize={20}
+          size={40}
+        />
         <div className="c-map__controls c-map__controls--bottom-left">
           {!printMode && panoramaState.location && (
             <PanoramaToggle

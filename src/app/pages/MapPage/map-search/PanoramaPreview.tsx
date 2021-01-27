@@ -1,19 +1,21 @@
 import { Link, perceivedLoading, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { LatLngLiteral } from 'leaflet'
 import { FunctionComponent, useMemo } from 'react'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
-import LegacyLink from 'redux-first-router-link'
-import styled from 'styled-components'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import styled from 'styled-components'
 import { FetchPanoramaOptions, getPanoramaThumbnail } from '../../../../api/panorama/thumbnail'
 import { PANORAMA_CONFIG } from '../../../../panorama/services/panorama-api/panorama-api'
+import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
+import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
+import { PANO_LAYERS } from '../../../components/PanoramaViewer/PanoramaViewer'
+import pickLinkComponent from '../../../utils/pickLinkComponent'
 import useBuildQueryString from '../../../utils/useBuildQueryString'
 import usePromise, { PromiseStatus } from '../../../utils/usePromise'
 import { locationParam, mapLayersParam, panoParam, zoomParam } from '../query-params'
 import useParam from '../../../utils/useParam'
-import { PANO_LAYERS } from '../../../components/PanoramaViewer/PanoramaViewer'
-import { toPanoramaAndPreserveQuery } from '../../../../store/redux-first-router/actions'
-import { getDetailLocation } from '../../../../store/redux-first-router/selectors'
+import { ForbiddenError } from '../../../../shared/services/api/customError'
+import PanoAlert from '../../../components/PanoAlert/PanoAlert'
 
 export interface PanoramaPreviewProps extends FetchPanoramaOptions {
   location: LatLngLiteral
@@ -97,7 +99,10 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
   }
 
   if (result.status === PromiseStatus.Rejected) {
-    return <PreviewMessage>Kon panoramabeeld niet laden.</PreviewMessage>
+    if (result.error instanceof ForbiddenError) {
+      return <PanoAlert />
+    }
+    return <PreviewMessage>Kan panoramabeeld niet laden.</PreviewMessage>
   }
 
   if (!result.value) {
@@ -124,14 +129,13 @@ const PanoramaPreview: FunctionComponent<PanoramaPreviewProps> = ({
       }
     : // eslint-disable-next-line camelcase
       toPanoramaAndPreserveQuery(result?.value?.pano_id, result?.value?.heading, legacyReference)
-  const linkComponent = browserLocation.pathname.includes('kaart') ? RouterLink : LegacyLink
 
   return (
     <PreviewContainer {...otherProps} data-testid="panoramaPreview">
       <PreviewImage src={result.value.url} alt="Voorvertoning van panoramabeeld" />
       {/*
       // @ts-ignore */}
-      <PreviewLink forwardedAs={linkComponent} to={to} inList>
+      <PreviewLink forwardedAs={pickLinkComponent(to)} to={to} inList>
         Bekijk panoramabeeld
       </PreviewLink>
     </PreviewContainer>

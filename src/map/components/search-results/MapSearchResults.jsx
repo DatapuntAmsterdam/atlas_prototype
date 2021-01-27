@@ -1,12 +1,16 @@
-import { Alert, Heading, Link, themeSpacing } from '@amsterdam/asc-ui'
+import { Alert, Button, Heading, Link, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import PanoAlert from '../../../app/components/PanoAlert/PanoAlert'
-import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
 import { getUser } from '../../../shared/ducks/user/user'
 import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import MapSearchResultsCategory from './map-search-results-category/MapSearchResultsCategory'
+import useGetLegacyPanoramaPreview from '../../../app/utils/useGetLegacyPanoramaPreview'
+import Maximize from '../../../shared/assets/icons/icon-maximize.svg'
+import usePromise from '../../../app/utils/usePromise'
+import { fetchProxy } from '../../../shared/services/api/api'
+import { ForbiddenError } from '../../../shared/services/api/customError'
 
 const StyledLink = styled(Link)`
   padding: 0;
@@ -16,6 +20,14 @@ const StyledLink = styled(Link)`
 
 const Header = styled.header`
   margin: 0 ${themeSpacing(3)};
+`
+
+const StyledButton = styled(Button)`
+  background-color: ${themeColor('tint', 'level1')};
+
+  svg path {
+    fill: ${themeColor('primary')};
+  }
 `
 
 const MapSearchResults = ({
@@ -39,10 +51,15 @@ const MapSearchResults = ({
     }))
 
   const { panoramaUrl, link, linkComponent } = useGetLegacyPanoramaPreview(location)
+  const result = usePromise(
+    // A small response that will only be available on gov. network
+    () => fetchProxy('https://acc.api.data.amsterdam.nl/brk/?format=json'),
+    [],
+  )
 
   return (
     <section className="map-search-results">
-      {panoramaUrl && user.authenticated ? (
+      {panoramaUrl && result.status === 'fulfilled' ? (
         <header
           className={`
           map-search-results__header
@@ -70,7 +87,7 @@ const MapSearchResults = ({
           </StyledLink>
         </header>
       ) : (
-        <PanoAlert />
+        result.status === 'rejected' && result.error instanceof ForbiddenError && <PanoAlert />
       )}
 
       <div className="map-search-results__scroll-wrapper">
@@ -103,20 +120,9 @@ const MapSearchResults = ({
         </ul>
         {!isEmbed && (
           <footer className="map-search-results__footer">
-            <button
-              type="button"
-              className="map-search-results__button"
-              onClick={onMaximize}
-              title="Volledig weergeven"
-            >
-              <span
-                className={`
-                    map-search-results__button-icon
-                    map-search-results__button-icon--maximize
-                  `}
-              />
+            <StyledButton type="button" onClick={onMaximize} iconLeft={<Maximize />} iconSize={21}>
               Volledig weergeven
-            </button>
+            </StyledButton>
           </footer>
         )}
       </div>

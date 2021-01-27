@@ -18,9 +18,9 @@
   }
 
   & > div > button {
-    border: 1px solid $secondary-gray20;
-    box-shadow: 2px 2px 0 0 $secondary-gray40;
-    height: 34px;
+    border: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    height: 40px;
     padding: 0 4px;
     z-index: 10;
 
@@ -41,7 +41,6 @@
     &:active,
     &:focus {
       background-color: $secondary-gray20;
-      border: 1px solid $primary-dark;
       outline: 0;
 
       svg {

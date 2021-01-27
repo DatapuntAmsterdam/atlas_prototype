@@ -1,9 +1,11 @@
 /* eslint-disable camelcase */
-import { FunctionComponent } from 'react'
-import RouterLink, { To } from 'redux-first-router-link'
 import { Link, ListItem } from '@amsterdam/asc-ui'
+import { LocationDescriptorObject } from 'history'
+import { FunctionComponent } from 'react'
+import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
 import { NORMAL_VBO_STATUSSES } from '../../../map/services/map-search/status-labels'
+import pickLinkComponent from '../../utils/pickLinkComponent'
 
 const ExtraInfo = styled.span`
   font-weight: 400;
@@ -16,7 +18,7 @@ export type Result = {
   type_adres?: string
   vbo_status?: string
   endpoint?: string
-  linkTo?: To
+  linkTo: To | LocationDescriptorObject
 }
 
 const showSubtype = (categorySlug?: unknown, result?: Result) =>
@@ -53,7 +55,7 @@ type Props = {
 
 const LocationSearchListItem: FunctionComponent<Props> = ({ result, category }) => (
   <ListItem data-testid="geosearch-listitem">
-    <Link as={RouterLink} inList to={result.linkTo}>
+    <Link as={pickLinkComponent(result.linkTo)} inList to={result.linkTo}>
       {result.label}
       <ExtraInfo>{getExtraInfo(result)}</ExtraInfo>
 

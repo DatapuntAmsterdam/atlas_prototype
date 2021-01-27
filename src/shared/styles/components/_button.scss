@@ -1,39 +1,5 @@
 $icon-height: 24px;
 
-@mixin header-button($name, $icon-size: 12px, $icon-position: left) {
-  @extend %icon--border-hover;
-  @include icon-label-right($name, $primary-light, $secondary-gray20);
-
-  height: 32px;
-  margin-left: 0.5 * $base-whitespace;
-  padding: 4px 8px;
-
-  &::before {
-    @include icon($name, $secondary-gray60);
-    float: $icon-position;
-    height: $icon-size;
-    width: $icon-size;
-  }
-
-  span {
-    color: $secondary-gray60;
-  }
-
-  &:hover,
-  &:focus {
-    &::before {
-      @include icon($name, $primary-dark);
-      background-color: $secondary-gray20;
-      height: $icon-size;
-      width: $icon-size;
-    }
-
-    span {
-      color: $primary-dark;
-    }
-  }
-}
-
 .o-btn {
   /*
   @name Button w/ link styling
@@ -46,42 +12,6 @@ $icon-height: 24px;
   text-align: left;
 }
 
-.o-btn--link {
-  @extend %link--arrow;
-}
-
-.o-btn--link--inverse {
-  @extend %link--arrow;
-
-  color: $primary-light;
-
-  &::before {
-    @include icon-button('link-arrow', $primary-light);
-    height: $icon-size;
-    width: $icon-size;
-  }
-
-  &:hover,
-  &:visited,
-  &:active,
-  &:focus {
-    color: $primary-light;
-  }
-
-  &:hover,
-  &:focus {
-    &::before {
-      @include icon-button('link-arrow', $primary-light);
-      height: $icon-size;
-      width: $icon-size;
-    }
-  }
-}
-
-.o-btn--plus {
-  @extend %link--plus;
-}
-
 .o-btn--contrast {
   color: $primary-contrast;
 
@@ -89,14 +19,6 @@ $icon-height: 24px;
   &:focus {
     color: $secondary-gray60;
   }
-}
-
-.o-btn--block {
-  @include icon-button-text-left('forward', 'gray');
-}
-
-.o-btn--inverted-block {
-  @include icon-button-text-left('forward', 'gray-inverted');
 }
 
 %o-btn {
@@ -114,71 +36,10 @@ $icon-height: 24px;
   width: 100%;
 }
 
-.o-btn--transparent {
-  @extend %o-btn;
-  background-color: transparent;
-  height: $base-whitespace * 5;
-  line-height: $base-whitespace * 5;
-}
-
-.o-btn--white {
-  @extend %o-btn;
-}
-
-.o-btn--white__label {
-  @extend %link--arrow;
-
-  line-height: $base-whitespace * 4;
-  padding-left: $base-whitespace;
-  width: 100%;
-}
-
-.o-btn--white__label-right {
-  @extend %link--arrow;
-
-  line-height: $base-whitespace * 4;
-  padding-left: calc(#{$base-whitespace - 6px});
-  padding-right: $base-whitespace;
-  width: 100%;
-
-  &::after {
-    float: right;
-    margin: 7px 16px;
-  }
-
-  &::before {
-    display: none;
-  }
-}
-
 %btn-close {
   position: absolute;
   right: 0;
   top: 0;
-}
-
-.o-btn--close {
-  @extend %btn-close;
-  @include icon-sprite('icon-clear', $primary-light, $primary-dark, $icon-height);
-  height: $icon-height;
-  position: absolute;
-  right: 4px;
-  top: 4px;
-  width: $icon-height;
-
-  &:hover,
-  &:focus {
-    background-color: $secondary-gray20;
-  }
-
-  &--info {
-    @include icon-sprite('icon-clear', $primary-dark, $primary-dark, $icon-height);
-
-    &:hover,
-    &:focus {
-      background-color: $secondary-gray20;
-    }
-  }
 }
 
 .s-btn--nested {

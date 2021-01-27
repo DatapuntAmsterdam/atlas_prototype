@@ -48,22 +48,6 @@ describe('PanoramaContainer', () => {
     store.dispatch.mockClear()
   })
 
-  it('should render everything', () => {
-    const wrapper = shallow(<PanoramaContainer {...props} store={store} />)
-      .dive()
-      .dive()
-
-    expect(wrapper).toMatchSnapshot()
-  })
-
-  it('should render StatusBar when panoramaState is complete', () => {
-    const wrapper = shallow(<PanoramaContainer {...props} store={store} />)
-      .dive()
-      .dive()
-
-    expect(wrapper).toMatchSnapshot()
-  })
-
   it('should load new scene when panorama image information changes', () => {
     getOrientation.mockReturnValue({ heading: 999, pitch: 10, fov: 80 })
     const wrapper = shallow(<PanoramaContainer {...props} store={store} />)

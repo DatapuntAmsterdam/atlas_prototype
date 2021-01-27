@@ -34,25 +34,6 @@
   }
 }
 
-.c-data-selection-pagination__button {
-  @extend %icon--border-hover;
-  @include icon-label-left('forward', '', '');
-
-  padding-right: $base-whitespace;
-  color: $secondary-gray60;
-  vertical-align: middle;
-
-  /* Display button without icon */
-  &::before {
-    display: none;
-  }
-
-  &:hover,
-  &:focus {
-    color: $primary-dark;
-  }
-}
-
 .c-data-selection-pagination__backward {
   position: absolute;
   left: 0;
@@ -71,90 +52,4 @@
   position: absolute;
   right: 0;
   z-index: 2;
-}
-
-.c-data-selection-pagination-link--first {
-  @extend %icon--border-hover;
-  @include icon-label-right('first', '', '');
-  margin-right: $base-whitespace;
-
-  &::before {
-    @include icon('first', $secondary-gray60);
-  }
-
-  &:hover,
-  &:focus {
-    &::before {
-      @include icon('first', $primary-dark);
-      background-color: $secondary-gray20;
-    }
-
-    .c-data-selection-pagination-link-label {
-      color: $primary-dark;
-    }
-  }
-}
-
-.c-data-selection-pagination-link--last {
-  @extend %icon--border-hover;
-  @include icon-label-left('last', '', '');
-  margin-left: $base-whitespace;
-
-  &::before {
-    @include icon('last', $secondary-gray60);
-  }
-
-  &:hover,
-  &:focus {
-    &::before {
-      @include icon('last', $primary-dark);
-      background-color: $secondary-gray20;
-    }
-
-    .c-data-selection-pagination-link-label {
-      color: $primary-dark;
-    }
-  }
-}
-
-.c-data-selection-pagination-link--previous {
-  @extend %icon--border-hover;
-  @include icon-label-right('previous', '', '');
-
-  &::before {
-    @include icon('previous', $secondary-gray60);
-  }
-
-  &:hover,
-  &:focus {
-    &::before {
-      @include icon('previous', $primary-dark);
-      background-color: $secondary-gray20;
-    }
-
-    .c-data-selection-pagination-link-label {
-      color: $primary-dark;
-    }
-  }
-}
-
-.c-data-selection-pagination-link--next {
-  @extend %icon--border-hover;
-  @include icon-label-left('next', '', '');
-
-  &::before {
-    @include icon('next', $secondary-gray60);
-  }
-
-  &:hover,
-  &:focus {
-    &::before {
-      @include icon('next', $primary-dark);
-      background-color: $secondary-gray20;
-    }
-
-    .c-data-selection-pagination-link-label {
-      color: $primary-dark;
-    }
-  }
 }

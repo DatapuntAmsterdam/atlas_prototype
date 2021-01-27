@@ -3,8 +3,7 @@ $button-height: 24px;
 
 .map-preview-panel {
   background-color: $secondary-gray5;
-  border: solid 1px $secondary-gray20;
-  box-shadow: 2px 2px 0 0 $secondary-gray40;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
@@ -41,24 +40,6 @@ $button-height: 24px;
     margin-left: 4px;
     width: $button-height;
 
-    &:hover,
-    &:focus {
-      .map-preview-panel__button-icon--close {
-        //sass-lint:disable-line nesting-depth
-        @include icon-sprite('icon-clear', $primary-dark, $primary-dark, $button-height);
-      }
-
-      .map-preview-panel__button-icon--maximize {
-        //sass-lint:disable-line nesting-depth
-        @include icon-sprite('icon-maximize', $primary-dark, $primary-dark, $button-height);
-      }
-
-      .map-preview-panel__button-icon--plus {
-        //sass-lint:disable-line nesting-depth
-        @include icon-sprite('icon-plus', $primary-contrast, $primary-contrast, $button-height);
-      }
-    }
-
     &--show-all {
       align-items: center;
       display: flex;
@@ -79,27 +60,6 @@ $button-height: 24px;
         color: $secondary-gray60;
         font-size: $xs-font-size;
         font-weight: $bold-weight;
-      }
-    }
-
-    &-icon {
-      display: block;
-      height: $button-height;
-      width: $button-height;
-
-      &--close {
-        @include icon-sprite('icon-clear', $secondary-gray60, $primary-dark, $button-height);
-        background-color: $primary-light;
-      }
-
-      &--maximize {
-        @include icon-sprite('icon-maximize', $secondary-gray60, $primary-dark, $button-height);
-        background-color: $primary-light;
-      }
-
-      &--plus {
-        @include icon-sprite('icon-plus', $secondary-gray60, $primary-dark, $button-height);
-        background-color: $primary-light;
       }
     }
   }

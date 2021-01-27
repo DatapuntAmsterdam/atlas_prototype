@@ -1,6 +1,7 @@
 import { server, rest, MockedRequest } from '../../../../test/server'
 import * as auth from '../auth/auth'
 import { createUrlWithToken, fetchProxy, fetchWithToken } from './api'
+import { AuthError, ForbiddenError, NotFoundError } from './customError'
 
 jest.mock('../auth/auth', () => jest.requireActual('../auth/auth'))
 
@@ -122,6 +123,18 @@ describe('Api service', () => {
 
     beforeEach(() => {
       server.use(
+        rest.get(/404/, async (req, res, ctx) => {
+          return res(ctx.status(404))
+        }),
+
+        rest.get(/403/, async (req, res, ctx) => {
+          return res(ctx.status(403))
+        }),
+
+        rest.get(/401/, async (req, res, ctx) => {
+          return res(ctx.status(401))
+        }),
+
         rest.get(/domain/, async (req, res, ctx) => {
           proxyRequest = req
           return res(ctx.status(200), ctx.json(mockedProxyResponse))
@@ -171,6 +184,29 @@ describe('Api service', () => {
 
       expect(proxyRequest.headers.get('Content-Type')).toEqual('application/json')
       expect(proxyRequest.headers.has('authorization')).toBeTruthy()
+    })
+
+    it('should throw a ForbiddenError if response has status 403', async () => {
+      const url = 'https://www.domain.com/403'
+
+      expect(async () => {
+        await fetchProxy(url)
+      }).rejects.toThrow(ForbiddenError)
+    })
+    it('should throw a AuthError if response has status 401', async () => {
+      const url = 'https://www.domain.com/401'
+
+      expect(async () => {
+        await fetchProxy(url)
+      }).rejects.toThrow(AuthError)
+    })
+
+    it('should throw a NotFoundError if response has status 404', async () => {
+      const url = 'https://www.domain.com/404'
+
+      expect(async () => {
+        await fetchProxy(url)
+      }).rejects.toThrow(NotFoundError)
     })
   })
 })

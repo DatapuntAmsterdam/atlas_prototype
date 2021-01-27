@@ -3,7 +3,9 @@ import escapeStringRegexp from 'escape-string-regexp'
 import { LocationDescriptorObject } from 'history'
 import { FunctionComponent, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { generatePath, Link } from 'react-router-dom'
+import { generatePath, Link as RouterLink } from 'react-router-dom'
+import { Link, themeSpacing } from '@amsterdam/asc-ui'
+import styled from 'styled-components'
 import SearchType from '../../../app/pages/SearchPage/constants'
 import { routing } from '../../../app/routes'
 import toSlug from '../../../app/utils/toSlug'
@@ -21,6 +23,11 @@ export interface AutoSuggestItemProps {
   inputValue?: string
   label: string
 }
+
+const StyledLink = styled(Link)`
+  font-weight: inherit;
+  margin-left: ${themeSpacing(1)};
+`
 
 const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
   content,
@@ -127,7 +134,9 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
 
   return (
     <li>
-      <Link
+      <StyledLink
+        forwardedAs={RouterLink}
+        inList
         className="auto-suggest__dropdown-item"
         onClick={() => {
           trackEvent({
@@ -138,16 +147,13 @@ const AutoSuggestItem: FunctionComponent<AutoSuggestItemProps> = ({
         }}
         to={to}
       >
-        <div>
-          <span className="icon" />
-          <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: htmlContent,
-            }}
-          />
-        </div>
-      </Link>
+        <div
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: htmlContent,
+          }}
+        />
+      </StyledLink>
     </li>
   )
 }

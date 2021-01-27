@@ -1,7 +1,9 @@
 import { Alert, Container, themeColor, themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { FunctionComponent, useEffect } from 'react'
+import { LocationDescriptorObject } from 'history'
+import { FunctionComponent, useEffect, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
+import { useHistory } from 'react-router-dom'
 import { To } from 'redux-first-router-link'
 import styled from 'styled-components'
 import environment from '../../../environment'
@@ -24,7 +26,9 @@ const StyledAlert = styled(Alert)`
 export interface EditorialPageProps {
   documentTitle?: string
   loading: boolean
+  // TODO: Remove 'linkAction' when it is no longer used.
   linkAction?: To
+  link?: LocationDescriptorObject
   description?: string
   image?: string
   title?: string
@@ -36,6 +40,7 @@ const EditorialPage: FunctionComponent<EditorialPageProps> = ({
   children,
   documentTitle,
   loading,
+  link,
   linkAction,
   description,
   image,
@@ -43,6 +48,7 @@ const EditorialPage: FunctionComponent<EditorialPageProps> = ({
   lang,
   error,
 }) => {
+  const history = useHistory()
   const { setDocumentTitle } = useDocumentTitle()
   const { trackPageView } = useMatomo()
 
@@ -59,22 +65,31 @@ const EditorialPage: FunctionComponent<EditorialPageProps> = ({
     }
   }, [error])
 
-  const href = linkAction && linkAttributesFromAction(linkAction).href
+  const path = useMemo(() => {
+    if (link) {
+      return history.createHref(link)
+    }
 
-  const canonical = href && `${environment.ROOT}${href.substr(1)}`
+    if (linkAction) {
+      return linkAttributesFromAction(linkAction).href as string
+    }
 
+    return null
+  }, [link, linkAction])
+
+  const canonicalUrl = path ? `${environment.ROOT}${path.substr(1)}` : null
   const ogImage = typeof image === 'string' && getImageFromCms(image, 600, 300)
 
   return (
     <Container>
       <Helmet>
         <html lang={lang || 'nl'} />
-        {canonical && <link rel="canonical" href={canonical} />}
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
         {description && <meta name="description" content={description} />}
 
         {title && <meta name="og:title" content={title} />}
         {ogImage && <meta name="og:image" content={ogImage} />}
-        {canonical && <meta name="og:url" content={canonical} />}
+        {canonicalUrl && <meta name="og:url" content={canonicalUrl} />}
         {description && <meta name="og:description" content={description} />}
         {ogImage && <meta property="og:image:width" content="600" />}
         {ogImage && <meta property="og:image:height" content="300" />}

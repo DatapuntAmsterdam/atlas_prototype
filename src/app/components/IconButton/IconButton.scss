@@ -30,16 +30,4 @@ $icon-height: 24px;
   height: $icon-height;
   padding: 4px;
   width: $icon-height;
-
-  &--maximize {
-    @include icon-sprite('icon-maximize', $secondary-gray60, $primary-dark, $icon-height);
-  }
-
-  &--minimize {
-    @include icon-sprite('icon-minimize', $secondary-gray60, $primary-dark, $icon-height);
-  }
-
-  &--cross {
-    @include icon-sprite('icon-cross', $secondary-gray60, $primary-dark, 30px);
-  }
 }

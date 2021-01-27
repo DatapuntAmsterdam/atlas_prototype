@@ -44,41 +44,16 @@ $icon-height: 20px;
   display: block;
   height: $icon-height;
   width: $icon-height;
-
-  &--topography {
-    @include icon-sprite('icon-topography', $secondary-gray60, $primary-dark, $icon-height);
-  }
-
-  &--aerial {
-    @include icon-sprite('icon-aerial', $secondary-gray60, $primary-dark, $icon-height);
-  }
 }
 
-.select-button--enabled {
-  .icon {
-    &--topography {
-      @include icon-sprite('icon-topography', $primary-dark, $primary-dark, $icon-height);
-    }
-
-    &--aerial {
-      @include icon-sprite('icon-aerial', $primary-dark, $primary-dark, $icon-height);
-    }
+.select-button:not(.enabled) {
+  svg {
+    fill: $secondary-gray60;
   }
 }
 
 .select-button__wrapper {
   background-color: $primary-light;
-
-  &:hover,
-  &:focus {
-    .icon--topography {
-      @include icon-sprite('icon-topography', $primary-dark, $primary-dark, $icon-height);
-    }
-
-    .icon--aerial {
-      @include icon-sprite('icon-aerial', $primary-dark, $primary-dark, $icon-height);
-    }
-  }
 }
 
 .select-button__icon-wrapper {

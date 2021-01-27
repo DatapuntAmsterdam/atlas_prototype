@@ -1,24 +1,40 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import { ControlButton } from '@amsterdam/arm-core'
+import styled from 'styled-components'
+import { themeColor, themeSpacing } from '@amsterdam/asc-ui'
+import { ExternalLink } from '@amsterdam/asc-assets'
 import { getEmbedButtonLink } from '../../../shared/services/embed-url/embed-url'
 import { toggleEmbedButtonAction } from '../../ducks/map/actions'
 
+export const StyledControlButton = styled(ControlButton)`
+  position: absolute;
+  right: ${themeSpacing(2)};
+  top: ${themeSpacing(2)};
+  z-index: 1;
+
+  svg path {
+    fill: ${themeColor('tint', 'level7')};
+  }
+`
+
 const MapEmbedButton = ({ toggleEmbedButton }) => (
-  <button
+  <StyledControlButton
+    variant="blank"
+    iconSize={18}
     type="button"
     onClick={(e) => {
       e.preventDefault()
       toggleEmbedButton()
       setTimeout(() => window.open(getEmbedButtonLink(), '_blank'), 300)
     }}
-    title="Naar interactieve kaart"
-    className="c-embed-button"
+    aria-label="Naar interactieve kaart"
     data-test="embed-button"
+    iconLeft={<ExternalLink />}
   >
-    <span className="c-embed-button__icon c-embed-button__icon--maximize" />
-    <span className="c-embed-button__label">data.amsterdam.nl</span>
-  </button>
+    data.amsterdam.nl
+  </StyledControlButton>
 )
 
 const mapDispatchToProps = (dispatch) =>

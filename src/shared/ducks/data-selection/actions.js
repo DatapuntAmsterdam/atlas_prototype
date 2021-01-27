@@ -48,9 +48,8 @@ export const setGeometryFilter = (payload) => ({
     tracking: true,
   },
 })
-export const resetDrawing = (payload = false) => ({
+export const resetDrawing = () => ({
   type: RESET_DATA_SELECTION,
-  payload,
 })
 export const cancelDrawing = () => ({
   type: CANCEL_DATA_SELECTION,

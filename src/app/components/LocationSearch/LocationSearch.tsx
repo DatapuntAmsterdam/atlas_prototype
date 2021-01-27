@@ -15,7 +15,6 @@ import { wgs84ToRd } from '../../../shared/services/coordinate-reference-system'
 import PanoramaPreview, { PreviewContainer } from '../../pages/MapPage/map-search/PanoramaPreview'
 import AuthAlert from '../Alerts/AuthAlert'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import PanoAlert from '../PanoAlert/PanoAlert'
 import ShareBar from '../ShareBar/ShareBar'
 import LocationSearchResults from './LocationSearchResults'
 
@@ -80,21 +79,16 @@ const LocationSearch: FunctionComponent = () => {
             >{`Geen details beschikbaar van: ${layerWarning}`}</StyledAlert>
           )}
 
-          {/* eslint-disable-next-line no-nested-ternary */}
-          {numberOfResults ? (
-            user.authenticated ? (
-              <PanoramaPreview
-                location={{
-                  lat: location.latitude,
-                  lng: location.longitude,
-                }}
-                width={438}
-                radius={180}
-              />
-            ) : (
-              <PanoAlert />
-            )
-          ) : null}
+          {numberOfResults && (
+            <PanoramaPreview
+              location={{
+                lat: location.latitude,
+                lng: location.longitude,
+              }}
+              width={438}
+              radius={180}
+            />
+          )}
 
           {numberOfResults ? (
             <LocationSearchResults {...{ searchResults }} />

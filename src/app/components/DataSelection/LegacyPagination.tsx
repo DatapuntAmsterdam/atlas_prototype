@@ -1,11 +1,23 @@
 import { FunctionComponent, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
+import { Button, themeSpacing } from '@amsterdam/asc-ui'
 import { setPage } from '../../../shared/ducks/data-selection/actions'
+import First from '../../../shared/assets/icons/first.svg'
+import Previous from '../../../shared/assets/icons/previous.svg'
+import Next from '../../../shared/assets/icons/next.svg'
+import Last from '../../../shared/assets/icons/last.svg'
 
 type Props = {
   numberOfPages: number
   currentPage: number
 }
+
+const PaginationButton = styled(Button)`
+  &:last-of-type {
+    margin-left: ${themeSpacing(1)};
+  }
+`
 
 // Todo: replace with pagination component
 const LegacyPagination: FunctionComponent<Props> = ({ numberOfPages, currentPage: curPage }) => {
@@ -34,22 +46,26 @@ const LegacyPagination: FunctionComponent<Props> = ({ numberOfPages, currentPage
 
       <div className="c-data-selection-pagination__controls">
         <div className="c-data-selection-pagination__backward">
-          <button
+          <PaginationButton
             type="button"
-            className="c-data-selection-pagination-link--first"
             disabled={isFirstPage}
+            variant="primaryInverted"
+            iconSize={21}
+            iconLeft={<First />}
             onClick={() => dispatch(setPage(1))}
           >
             Eerste
-          </button>
-          <button
+          </PaginationButton>
+          <PaginationButton
             type="button"
-            className="c-data-selection-pagination-link--previous"
+            variant="primaryInverted"
+            iconSize={21}
+            iconLeft={<Previous />}
             disabled={isFirstPage}
             onClick={() => dispatch(setPage(isFirstPage ? null : currentPage - 1))}
           >
             Vorige
-          </button>
+          </PaginationButton>
         </div>
         <form className="c-data-selection-pagination__go" onSubmit={(e) => goToPage(e)}>
           <span className="u-margin__right--1 c-data-selection-pagination-link-text">
@@ -67,35 +83,35 @@ const LegacyPagination: FunctionComponent<Props> = ({ numberOfPages, currentPage
             size={4}
             maxLength={4}
           />
-          <button
-            type="submit"
-            className="c-data-selection-pagination__button"
-            title="Ga naar ingevoerde pagina"
-          >
+          <PaginationButton type="submit" title="Ga naar ingevoerde pagina">
             Ga
             <span className="u-sr-only">Ga naar ingevoerde pagina</span>
-          </button>
+          </PaginationButton>
           <span className="u-margin__left--1 c-data-selection-pagination-link-text">
             van {numberOfPages}
           </span>
         </form>
         <div className="c-data-selection-pagination__forward">
-          <button
+          <PaginationButton
             type="button"
-            className="c-data-selection-pagination-link--next"
+            variant="primaryInverted"
+            iconSize={21}
+            iconRight={<Next />}
             disabled={isLastPage}
             onClick={() => dispatch(setPage(isLastPage ? null : currentPage + 1))}
           >
             Volgende
-          </button>
-          <button
+          </PaginationButton>
+          <PaginationButton
             type="button"
-            className="c-data-selection-pagination-link--last"
+            variant="primaryInverted"
+            iconSize={21}
+            iconRight={<Last />}
             disabled={isLastPage}
             onClick={() => dispatch(setPage(numberOfPages))}
           >
             Laatste
-          </button>
+          </PaginationButton>
         </div>
       </div>
     </div>
