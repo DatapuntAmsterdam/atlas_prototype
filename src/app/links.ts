@@ -63,3 +63,7 @@ export const toHelpPage = () =>
 export const toHome = (): LocationDescriptorObject => ({
   pathname: routing.home.path,
 })
+
+export const toPublicationDetail = (id: string, slug: string): LocationDescriptorObject => ({
+  pathname: generatePath(routing.publicationDetail.path, { id, slug }),
+})

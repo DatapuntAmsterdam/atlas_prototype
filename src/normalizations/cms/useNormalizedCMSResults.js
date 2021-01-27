@@ -1,15 +1,11 @@
 /* eslint-disable camelcase */
-import { toArticleDetail } from '../../app/links'
+import { toArticleDetail, toPublicationDetail } from '../../app/links'
 import formatDate from '../../app/utils/formatDate'
 import pickLinkComponent from '../../app/utils/pickLinkComponent'
 import toSlug from '../../app/utils/toSlug'
 import { CmsType } from '../../shared/config/cms.config'
 import { reformatJSONApiResults } from '../../shared/services/cms/cms-json-api-normalizer'
-import {
-  toCollectionDetail,
-  toPublicationDetail,
-  toSpecialDetail,
-} from '../../store/redux-first-router/actions'
+import { toCollectionDetail, toSpecialDetail } from '../../store/redux-first-router/actions'
 
 export const EDITORIAL_DETAIL_ACTIONS = {
   [CmsType.Article]: toArticleDetail,

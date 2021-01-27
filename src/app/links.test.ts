@@ -9,6 +9,7 @@ import {
   toEstablishments,
   toHelpPage,
   toHome,
+  toPublicationDetail,
 } from './links'
 import { routing } from './routes'
 
@@ -76,6 +77,17 @@ describe('toHome', () => {
   it('creates a location descriptor', () => {
     expect(toHome()).toEqual({
       pathname: routing.home.path,
+    })
+  })
+})
+
+describe('toPublicationDetail', () => {
+  const id = '123456'
+  const slug = 'hello-world'
+
+  it('creates a location descriptor', () => {
+    expect(toPublicationDetail(id, slug)).toEqual({
+      pathname: generatePath(routing.publicationDetail.path, { id, slug }),
     })
   })
 })

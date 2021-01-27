@@ -105,13 +105,6 @@ describe('PublicationDetailPage', () => {
     expect(fetchDataMock).toHaveBeenCalled()
   })
 
-  it('should render the publication when there are results', () => {
-    mockedUseFromCMS.mockImplementation(() => mockData as any)
-    const component = shallow(<PublicationDetailPage />)
-
-    expect(component).toMatchSnapshot()
-  })
-
   it('should call the useDownload hook when user tries to download publication', () => {
     mockedUseFromCMS.mockImplementation(() => mockData as any)
     const component = shallow(<PublicationDetailPage />)
