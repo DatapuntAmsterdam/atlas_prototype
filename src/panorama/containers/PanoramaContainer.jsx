@@ -3,11 +3,11 @@ import { Close } from '@amsterdam/asc-assets'
 import { themeSpacing } from '@amsterdam/asc-ui'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
-import { createPath } from 'history'
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
 import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 import { Map as ContextMenu } from '../../app/components/ContextMenu'
@@ -92,7 +92,7 @@ class PanoramaContainer extends Component {
   }
 
   onClose() {
-    const { detailReference, pageReference, panoramaLocation, matomo } = this.props
+    const { detailReference, pageReference, panoramaLocation, history, matomo } = this.props
     // Filter out the panorama layers, as they should be closed
     const overlays = this.overlays?.filter(({ id }) => !id.startsWith('pano'))
 
@@ -103,7 +103,7 @@ class PanoramaContainer extends Component {
         [PARAMETERS.VIEW]: ViewMode.Split,
       })
     } else if (pageReference === 'home') {
-      window.location.assign(createPath(toHome()))
+      history.push(toHome())
     } else {
       // eslint-disable-next-line react/destructuring-assignment
       this.props.toGeoSearch({
@@ -263,13 +263,15 @@ PanoramaContainer.propTypes = {
   setOrientation: PropTypes.func.isRequired,
   fetchMapDetail: PropTypes.func.isRequired,
   fetchPanoramaById: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
   matomo: PropTypes.shape({}).isRequired,
 }
 
-const withMatomo = (component) => (props) => {
+const withHooks = (component) => (props) => {
+  const history = useHistory()
   const matomo = useMatomo()
 
-  return createElement(component, { matomo, ...props })
+  return createElement(component, { history, matomo, ...props })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withMatomo(PanoramaContainer))
+export default connect(mapStateToProps, mapDispatchToProps)(withHooks(PanoramaContainer))
