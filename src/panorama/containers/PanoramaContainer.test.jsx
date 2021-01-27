@@ -1,6 +1,9 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { shallow } from 'enzyme'
+import { createMemoryHistory } from 'history'
+import { Router } from 'react-router'
 import configureMockStore from 'redux-mock-store'
+import { toHome } from '../../app/links'
 import { getMapOverlays } from '../../map/ducks/map/selectors'
 import { setViewMode, ViewMode } from '../../shared/ducks/ui/ui'
 import PARAMETERS from '../../store/parameters'
@@ -9,6 +12,7 @@ import { fetchPanoramaHotspotRequest } from '../ducks/actions'
 import {
   getDetailReference,
   getLabelObjectByTags,
+  getPageReference,
   getPanorama,
   getPanoramaLocation,
   getPanoramaTags,
@@ -30,19 +34,21 @@ describe('PanoramaContainer', () => {
     detailReference: [],
   }
 
-  getPanorama.mockImplementation(() => ({
+  getPanorama.mockReturnValue({
     id: 'ABC',
     heading: 999,
     image: 'ABC_IMAGE.jpg',
     date: '2012-12-12T00:00:00.000Z',
     location: [1, 2],
-  }))
-  getLabelObjectByTags.mockImplementation(() => ({ label: 'Meest recent' }))
-  getPanoramaTags.mockImplementation(() => ['mission-bi'])
-  setViewMode.mockImplementation(() => ({ type: 'some type' }))
-  getDetailReference.mockImplementation(() => [])
-  getMapOverlays.mockImplementation(() => [])
-  getPanoramaLocation.mockImplementation(() => [])
+  })
+
+  getLabelObjectByTags.mockReturnValue({ label: 'Meest recent' })
+  getPanoramaTags.mockReturnValue(['mission-bi'])
+  setViewMode.mockReturnValue({ type: 'some type' })
+  getDetailReference.mockReturnValue([])
+  getPageReference.mockReturnValue(null)
+  getMapOverlays.mockReturnValue([])
+  getPanoramaLocation.mockReturnValue([])
   useMatomo.mockReturnValue({ trackEvent: jest.fn() })
 
   beforeEach(() => {
@@ -119,6 +125,27 @@ describe('PanoramaContainer', () => {
         [PARAMETERS.VIEW]: ViewMode.Split,
       }),
     )
+  })
+
+  it('closes the panorama and navigates back to the home route', () => {
+    getPageReference.mockReturnValueOnce('home')
+
+    const history = createMemoryHistory()
+    const wrapper = shallow(
+      <Router history={history}>
+        <PanoramaContainer {...props} store={store} />
+      </Router>,
+    )
+      .dive()
+      .dive()
+      .dive()
+      .dive()
+      .dive()
+      .dive()
+
+    wrapper.find('[aria-label="Panoramabeeld sluiten"]').simulate('click')
+
+    expect(history.location).toEqual(toHome())
   })
 
   it('closes the panorama and navigates back to the geosearch route', () => {
