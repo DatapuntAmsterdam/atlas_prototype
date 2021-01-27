@@ -53,6 +53,7 @@ describe('PanoramaContainer', () => {
     const wrapper = shallow(<PanoramaContainer {...props} store={store} />)
       .dive()
       .dive()
+      .dive()
 
     wrapper.instance().hotspotClickHandler('XYZ')
     expect(store.dispatch).toHaveBeenCalledWith(fetchPanoramaHotspotRequest({ id: 'XYZ' }))
@@ -61,6 +62,7 @@ describe('PanoramaContainer', () => {
   it('should toggle size of panorama image', () => {
     jest.spyOn(store, 'dispatch')
     const wrapper = shallow(<PanoramaContainer {...props} store={store} />)
+      .dive()
       .dive()
       .dive()
 
@@ -78,6 +80,7 @@ describe('PanoramaContainer', () => {
   it('should load new scene when panorama image information changes', () => {
     loadScene.mockImplementation()
     const wrapper = shallow(<PanoramaContainer {...props} store={store} />)
+      .dive()
       .dive()
       .dive()
 
