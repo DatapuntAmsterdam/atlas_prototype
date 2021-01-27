@@ -1,11 +1,12 @@
 import { ControlButton } from '@amsterdam/arm-core'
 import { Close } from '@amsterdam/asc-assets'
 import { themeSpacing } from '@amsterdam/asc-ui'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import { createPath } from 'history'
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
-import { Component } from 'react'
+import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
@@ -91,7 +92,7 @@ class PanoramaContainer extends Component {
   }
 
   onClose() {
-    const { detailReference, pageReference, panoramaLocation } = this.props
+    const { detailReference, pageReference, panoramaLocation, matomo } = this.props
     // Filter out the panorama layers, as they should be closed
     const overlays = this.overlays?.filter(({ id }) => !id.startsWith('pano'))
 
@@ -111,6 +112,12 @@ class PanoramaContainer extends Component {
         [PARAMETERS.LAYERS]: overlays,
       })
     }
+
+    matomo.trackEvent({
+      category: 'navigation',
+      action: 'panorama-verlaten',
+      name: null,
+    })
   }
 
   loadPanoramaScene() {
@@ -256,6 +263,13 @@ PanoramaContainer.propTypes = {
   setOrientation: PropTypes.func.isRequired,
   fetchMapDetail: PropTypes.func.isRequired,
   fetchPanoramaById: PropTypes.func.isRequired,
+  matomo: PropTypes.shape({}).isRequired,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PanoramaContainer)
+const withMatomo = (component) => (props) => {
+  const matomo = useMatomo()
+
+  return createElement(component, { matomo, ...props })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withMatomo(PanoramaContainer))
