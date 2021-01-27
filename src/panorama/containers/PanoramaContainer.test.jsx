@@ -18,7 +18,6 @@ import PanoramaContainer from './PanoramaContainer'
 
 jest.mock('@datapunt/matomo-tracker-react')
 jest.mock('../../map/ducks/map/selectors')
-jest.mock('../../map/ducks/map/selectors')
 jest.mock('../services/marzipano/marzipano')
 jest.mock('../ducks/selectors')
 jest.mock('../../shared/ducks/ui/ui')
