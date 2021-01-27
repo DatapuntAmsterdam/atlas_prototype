@@ -1,4 +1,10 @@
 import { HEADER, HEADER_MENU, HOMEPAGE, DATA_SEARCH } from '../support/selectors'
+import {
+  FOOTER_LINKS_COLOFON,
+  FOOTER_LINKS_SOCIAL,
+  FOOTER_LINKS_HELP,
+  FOOTER_LINK_PRIVACY,
+} from '../../src/shared/config/content-links'
 
 describe('Homepage module', () => {
   const sizes: Cypress.ViewportPreset[] = ['iphone-x', 'ipad-2', 'macbook-15']
@@ -7,6 +13,7 @@ describe('Homepage module', () => {
       beforeEach(() => {
         cy.viewport(size)
         cy.visit('/')
+        cy.hidePopup()
       })
 
       it('Has the right link text', () => {
@@ -21,7 +28,7 @@ describe('Homepage module', () => {
           cy.get(HEADER.logoAmsterdamShort).should('be.visible')
         }
 
-        if (size === 'iphone-x') {
+        if (size !== 'macbook-15') {
           cy.get(HOMEPAGE.buttonSearchMobile).should('be.visible').click()
           cy.get(DATA_SEARCH.input).should('be.visible')
           cy.get(HOMEPAGE.buttonSearchMobileClose).click()
@@ -49,76 +56,140 @@ describe('Homepage module', () => {
 
     describe(`Homepage checks, resolution is: ${size}`, () => {
       beforeEach(() => {
-        if (Cypress._.isArray(size)) {
-          cy.viewport(size[0], size[1])
-        } else {
-          cy.viewport(size)
-        }
+        cy.viewport(size)
+        cy.visit('/')
         cy.hidePopup()
-        cy.visit('/')
       })
+
       it('Should check all menu items', () => {
-        let menuSelector
+        const menuSelector: string =
+          size === 'macbook-15' ? HOMEPAGE.menuDefault : HOMEPAGE.menuMobile
 
-        if (size === 'macbook-15') {
-          menuSelector = HOMEPAGE.menuDefault
-        } else {
-          menuSelector = HOMEPAGE.menuMobile
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'Kaart',
+          href: '/data/?modus=kaart&legenda=true',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'Tabellen',
+          href: '/artikelen/artikel/tabellen/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'DataServices',
+          href: '/artikelen/artikel/services/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'Dossiers',
+          href: '/dossiers/zoek/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'Specials',
+          href: '/specials/zoek/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'Kaarten',
+          href: '/kaarten/zoek/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'Datasets',
+          href: '/datasets/zoek/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'Publicaties',
+          href: '/publicaties/zoek/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Onderdelen',
+          testId: 'Artikelen',
+          href: '/artikelen/zoek/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Over OIS',
+          testId: 'OverOIS',
+          href: '/artikelen/artikel/over-ois/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Over OIS',
+          testId: 'OverOnderzoek',
+          href: '/artikelen/artikel/onderzoek-door-ois/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Over OIS',
+          testId: 'OverDatabeleid',
+          href: '/artikelen/artikel/amsterdam-en-data/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Over OIS',
+          testId: 'OverBronnen',
+          href: '/artikelen/artikel/bronnen/',
+        })
+
+        cy.checkMenuLink({
+          menuSelector,
+          menu: 'Over OIS',
+          testId: 'OverContact',
+          href: '/artikelen/artikel/contact/',
+        })
+
+        cy.get('[aria-labelledby="feedback"]').should('not.exist')
+
+        if (menuSelector === HOMEPAGE.menuMobile) {
+          cy.get(menuSelector).click()
         }
-        cy.get(menuSelector).should('be.visible')
-        cy.get(menuSelector).should('contain', 'Onderdelen')
 
-        cy.checkMenuLink(menuSelector, 'Onderdelen', 'Kaart', '/data/?modus=kaart&legenda=true')
+        cy.get(menuSelector).contains('Feedback').click()
 
-        // Cannot use checkMenuLink function for Panoramanbeelden. Targeting menu-item based on title is not possibla, there is a &shy character in the selector
-        cy.get(menuSelector).click({ force: true })
-        cy.get(menuSelector).contains('Onderdelen').click({ force: true })
-        cy.get(menuSelector).find('[href*="data/panorama/"]').click({ force: true })
-        cy.url().should('include', 'data/panorama/')
-        cy.go('back')
+        cy.get('[aria-labelledby="feedback"]').should('exist').and('be.visible')
+        cy.get('[aria-labelledby="feedback"]').find('button[title="Sluit"]').click()
+        cy.get('[aria-labelledby="feedback"]').should('not.exist')
 
-        cy.visit('/')
-        cy.checkMenuLink(menuSelector, 'Onderdelen', 'Tabellen', '/artikelen/artikel/tabellen/')
-        cy.checkMenuLink(
-          menuSelector,
-          'Onderdelen',
-          'Data services',
-          '/artikelen/artikel/services/',
-        )
-        cy.checkMenuLink(menuSelector, 'Onderdelen', 'Dossiers', '/dossiers/zoek/')
-        cy.checkMenuLink(menuSelector, 'Onderdelen', 'Specials', '/specials/zoek/')
-        cy.checkMenuLink(menuSelector, 'Onderdelen', 'Kaarten', '/kaarten/zoek/')
-        cy.checkMenuLink(menuSelector, 'Onderdelen', 'Datasets', '/datasets/zoek/')
-        cy.checkMenuLink(menuSelector, 'Onderdelen', 'Publicaties', '/publicaties/zoek/')
-        cy.checkMenuLink(menuSelector, 'Onderdelen', 'Artikelen', '/artikelen/zoek/')
-        cy.checkMenuLink(
-          menuSelector,
-          'Over OIS',
-          'Onderzoek, Informatie en Statistiek',
-          '/artikelen/artikel/over-ois/',
-        )
-        cy.checkMenuLink(
-          menuSelector,
-          'Over OIS',
-          'Onderzoek',
-          '/artikelen/artikel/onderzoek-door-ois/',
-        )
-        cy.checkMenuLink(
-          menuSelector,
-          'Over OIS',
-          'Databeleid',
-          '/artikelen/artikel/amsterdam-en-data/',
-        )
-        cy.checkMenuLink(menuSelector, 'Over OIS', 'Bronnen', '/artikelen/artikel/bronnen/')
-        cy.checkMenuLink(menuSelector, 'Over OIS', 'Contact', '/artikelen/artikel/contact/')
-        cy.get(menuSelector).contains('Feedback').click({ force: true })
-        cy.get('[class*="ModalStyle__ModalFocus"]').should('be.visible')
-        cy.get('[title="Sluit"]').click()
-        cy.get(menuSelector).contains('Help').click({ force: true })
+        if (menuSelector === HOMEPAGE.menuMobile) {
+          cy.get(menuSelector).click()
+        }
+
+        cy.get(menuSelector).contains('Help').click()
         cy.url().should('include', '/artikelen/artikel/help/')
         cy.go('back')
+
+        if (menuSelector === HOMEPAGE.menuMobile) {
+          cy.get(menuSelector).click()
+        }
+
         cy.get(menuSelector).contains('Inloggen')
       })
+
       it('Should check the highlight block', () => {
         cy.get(HOMEPAGE.highlightBlock).scrollIntoView().and('be.visible')
         cy.get(HOMEPAGE.highlightCard).should('have.length', '3')
@@ -127,6 +198,7 @@ describe('Homepage module', () => {
         cy.go('back')
         cy.get(HOMEPAGE.highlightBlock).scrollIntoView().and('be.visible')
       })
+
       it('Should check all links in navigation block', () => {
         cy.get(HOMEPAGE.navigationBlock).scrollIntoView().and('be.visible')
         cy.checkNavigationBlock(HOMEPAGE.navigationBlockKaart, '/data/?modus=kaart&legenda=true')
@@ -139,17 +211,19 @@ describe('Homepage module', () => {
           '/artikelen/artikel/services/',
         )
       })
+
       it('Should check dossiers block', () => {
         cy.get(HOMEPAGE.specialBlock).contains('Dossiers').scrollIntoView().and('be.visible')
         // Dossiers block contains 4 links
         cy.get(HOMEPAGE.specialBlock)
           .eq(0)
           .find('[class*=ColumnStyle] > a')
-          .should('have.length', '4')
+          .should('have.length', 4)
         cy.contains('Overzicht alle dossiers').should('be.visible').click()
         cy.url().should('include', '/dossiers/zoek/')
         cy.go('back')
       })
+
       it("Should check all links in theme's block", () => {
         cy.get(HOMEPAGE.themesBlock).contains('Zoek op thema').scrollIntoView().should('be.visible')
         cy.checkTheme('Bestuur', '/zoek/?filters=theme%3Btheme%3Abestuur')
@@ -186,6 +260,7 @@ describe('Homepage module', () => {
           .find('[class*=ColumnStyle] > a')
           .should('have.length', '3')
       })
+
       it('Should check organisation block', () => {
         cy.get(HOMEPAGE.organizationBlock).scrollIntoView().and('be.visible')
         cy.get(HOMEPAGE.organizationCardHeading).contains('Over OIS')
@@ -199,6 +274,7 @@ describe('Homepage module', () => {
         cy.get(HOMEPAGE.organizationCardHeading).contains('Panels en enquêtes')
         cy.get(HOMEPAGE.organizationCardHeading).contains('Publicaties')
       })
+
       it('Should check about block', () => {
         cy.get(HOMEPAGE.aboutBlock).scrollIntoView().and('be.visible')
         cy.get(`${HOMEPAGE.aboutBlock} h2`).eq(0).should('have.text', 'Over data')
@@ -231,6 +307,7 @@ describe('Homepage module', () => {
         cy.url().should('include', '/artikelen/artikel/veelgestelde-vragen/')
         cy.go('back')
       })
+
       it('Should check share bar', () => {
         cy.get(HOMEPAGE.shareBar).should('be.visible')
         cy.get(HOMEPAGE.shareButtonFacebook).should('be.visible')
@@ -238,61 +315,71 @@ describe('Homepage module', () => {
         cy.get(HOMEPAGE.shareButtonLinkedIn).should('be.visible')
         cy.get(HOMEPAGE.shareButtonMail).should('be.visible')
       })
+
       it('Should check the footer', () => {
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('h3').contains('Colofon')
-        cy.get(HOMEPAGE.footerBlock)
-          .eq(0)
-          .find('[title="Databeleid"]')
-          .first()
-          .click({ force: true })
-        cy.url().should('include', '/artikelen/artikel/amsterdam-en-data/')
-        cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Bronnen"]').first().click({ force: true })
-        cy.url().should('include', '/artikelen/artikel/bronnen/')
-        cy.go('back')
-        cy.get(HOMEPAGE.footerBlock)
-          .eq(0)
-          .find('[title="Over deze site"]')
-          .first()
-          .click({ force: true })
-        cy.url().should('include', '/artikelen/artikel/over-deze-site/')
-        cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).eq(0).find('[title="Over OIS"]').first().click({ force: true })
-        cy.url().should('include', '/artikelen/artikel/over-ois/')
-        cy.go('back')
+        const deployEnv = Cypress.env('DEPLOY_ENV')
 
-        cy.get(HOMEPAGE.footerBlock).find('h3').contains('Volg de gemeente').should('exist')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Nieuwsbrief OIS"]').should('exist')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Vacatures"]').should('exist')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Twitter"]').should('exist')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Facebook"]').should('exist')
-        cy.get(HOMEPAGE.footerBlock).find('[title="LinkedIn"]').should('exist')
-        cy.get(HOMEPAGE.footerBlock).find('[title="GitHub"]').should('exist')
+        const footerSections = {
+          Colofon: FOOTER_LINKS_COLOFON,
+          FollowUs: FOOTER_LINKS_SOCIAL,
+          Questions: FOOTER_LINKS_HELP,
+        }
+        const headers = {
+          Colofon: 'Colofon',
+          FollowUs: 'Volg de gemeente',
+          Questions: 'Vragen',
+        }
 
-        cy.get(HOMEPAGE.footerBlock).find('h3').contains('Vragen')
-        cy.get(HOMEPAGE.footerBlock)
-          .find('[title="Veelgestelde vragen"]')
-          .first()
-          .click({ force: true })
-        cy.url().should('include', '/artikelen/artikel/veelgestelde-vragen/')
-        cy.go('back')
-        cy.get(HOMEPAGE.footerBlock)
-          .find('[title="Contact opnemen"]')
-          .first()
-          .click({ force: true })
-        cy.url().should('include', '/artikelen/artikel/contact/')
-        cy.go('back')
-        cy.get(HOMEPAGE.footerBlock).find('[title="Feedback geven"]').first().click({ force: true })
-        cy.get('[class*="ModalStyle__ModalFocus"]').should('be.visible')
-        cy.get('[title="Sluit"]').click()
-        cy.get(HOMEPAGE.footerBlock).find('[title="Uitleg gebruik"]').first().click({ force: true })
-        cy.url().should('include', '/artikelen/artikel/wat-kun-je-hier/')
-        cy.go('back')
+        Object.entries(footerSections).forEach(([section, links]) => {
+          cy.get(`[data-testid="footer${section}"]`)
+            .find('h3')
+            .contains(headers[section])
+            .scrollIntoView()
 
-        // cy.get('[title="Privacy en cookies"]').should('be.visible')
-        cy.get('[class*="FooterBottom__FooterBottom"]')
-          .find('a')
-          .should('have.attr', 'href', 'https://www.amsterdam.nl/privacy/')
+          // on smaller screens, column contents are collapsed and need to be opened before they can be interacted with
+          cy.get(`[data-testid="footer${section}"]`).then((sectionElement) => {
+            // not all screen sizes have collapsed content; checking first
+            if (!sectionElement.find('[aria-hidden]').length) return
+
+            cy.wrap(sectionElement)
+              .find('[aria-hidden]')
+              .should('have.attr', 'aria-hidden', 'true')
+              .and('not.be.visible')
+
+            cy.wrap(sectionElement).find('[aria-hidden]').parent().find('h3').click()
+
+            // giving the UI the opportunity to update itself
+            cy.wait(150)
+
+            cy.wrap(sectionElement)
+              .find('[aria-hidden]')
+              .should('have.attr', 'aria-hidden', 'false')
+              .and('be.visible')
+          })
+
+          // @ts-ignore
+          links.forEach(({ testId, id, href }) => {
+            cy.get(`[data-testid="footer${section}"]`)
+              .find(`[data-testid="footerLink${testId}"]`)
+              .then((element) => {
+                if (id) {
+                  cy.wrap(element).click()
+                  cy.url().should('include', id[deployEnv])
+
+                  cy.go('back')
+                } else if (href) {
+                  // not testing links that open content in a new window; just verifying that they intend to do that
+                  cy.wrap(element)
+                    .should('have.attr', 'target', '_blank')
+                    .and('have.attr', 'href', href)
+                    .and('be.visible')
+                }
+              })
+          })
+        })
+
+        cy.get(`[data-testid="${FOOTER_LINK_PRIVACY.testId}"]`)
+          .should('have.attr', 'href', FOOTER_LINK_PRIVACY.href)
           .and('be.visible')
       })
     })

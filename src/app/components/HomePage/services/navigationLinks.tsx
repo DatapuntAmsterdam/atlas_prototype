@@ -1,5 +1,7 @@
+import { ReactElement } from 'react'
 import { Api, Data, DocumentText, Map, Pano, Table } from '@amsterdam/asc-assets'
 import { Icon } from '@amsterdam/asc-ui'
+import { LocationDescriptorObject } from 'history'
 import environment from '../../../../environment'
 import {
   NAVIGATION_LINK_DATA_IN_TABLES,
@@ -17,7 +19,15 @@ import {
   toSpecialSearch,
 } from '../../../../store/redux-first-router/actions'
 import { routing as routes } from '../../../routes'
-import decodeHTML from '../../../utils/decodeHTML'
+
+export type NavigationLink = {
+  CardIcon?: ReactElement
+  description?: string
+  id: number
+  testId: string
+  title: string
+  to: LocationDescriptorObject
+}
 
 // The id's also represent the order in which they are displayed in the NavigationBlock on the homepage
 // The order of how the items are placed in the array, is the order for the Menu
@@ -30,6 +40,7 @@ const navigationLinks = [
         <Map />
       </Icon>
     ),
+    testId: 'Kaart',
     title: 'Kaart',
     description: 'Zoek en bekijk data op de kaart',
   },
@@ -41,7 +52,8 @@ const navigationLinks = [
         <Pano />
       </Icon>
     ),
-    title: decodeHTML('Panorama&shy;beelden'),
+    testId: 'Panoramabeelden',
+    title: 'Panoramabeelden',
     description: 'Kijk 360 graden in het rond',
   },
   {
@@ -55,6 +67,7 @@ const navigationLinks = [
         <Table />
       </Icon>
     ),
+    testId: NAVIGATION_LINK_DATA_IN_TABLES.testId,
     title: NAVIGATION_LINK_DATA_IN_TABLES.title,
     description: NAVIGATION_LINK_DATA_IN_TABLES.description,
   },
@@ -69,22 +82,26 @@ const navigationLinks = [
         <Api />
       </Icon>
     ),
+    testId: NAVIGATION_LINK_DATA_SERVICES.testId,
     title: NAVIGATION_LINK_DATA_SERVICES.title,
     description: NAVIGATION_LINK_DATA_SERVICES.description,
   },
   {
     id: 6,
     to: toCollectionSearch(null, false, false, false),
+    testId: routes.collectionSearch.title,
     title: routes.collectionSearch.title,
   },
   {
     id: 7,
     to: toSpecialSearch(null, false, false, false),
+    testId: routes.specialSearch.title,
     title: routes.specialSearch.title,
   },
   {
     id: 9,
     to: toMapSearch(null, false, false, false),
+    testId: routes.mapSearch.title,
     title: routes.mapSearch.title,
   },
   {
@@ -95,6 +112,7 @@ const navigationLinks = [
         <Data />
       </Icon>
     ),
+    testId: routes.datasetSearch.title,
     title: routes.datasetSearch.title,
     description: 'Zoek en download databestanden',
   },
@@ -106,12 +124,14 @@ const navigationLinks = [
         <DocumentText />
       </Icon>
     ),
+    testId: routes.publicationSearch.title,
     title: routes.publicationSearch.title,
-    description: decodeHTML('Download factsheets en onderzoeks&shy;rapporten'),
+    description: 'Download factsheets en onderzoeksrapporten',
   },
   {
     id: 8,
     to: toArticleSearch(null, false, false, false),
+    testId: routes.articleSearch.title,
     title: routes.articleSearch.title,
   },
 ]
