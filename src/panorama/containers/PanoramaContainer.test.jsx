@@ -1,5 +1,5 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router'
 import configureMockStore from 'redux-mock-store'
@@ -25,6 +25,15 @@ jest.mock('../../map/ducks/map/selectors')
 jest.mock('../services/marzipano/marzipano')
 jest.mock('../ducks/selectors')
 jest.mock('../../shared/ducks/ui/ui')
+
+jest.mock('../components/PanoramaToggle/PanoramaToggle', () => ({
+  __esModule: true,
+  default: () => <div />,
+}))
+
+jest.mock('../../app/components/ContextMenu', () => ({
+  Map: () => <div />,
+}))
 
 describe('PanoramaContainer', () => {
   const initialState = {}
@@ -131,21 +140,15 @@ describe('PanoramaContainer', () => {
     getPageReference.mockReturnValueOnce('home')
 
     const history = createMemoryHistory()
-    const wrapper = shallow(
+    const wrapper = mount(
       <Router history={history}>
         <PanoramaContainer {...props} store={store} />
       </Router>,
     )
-      .dive()
-      .dive()
-      .dive()
-      .dive()
-      .dive()
-      .dive()
 
-    wrapper.find('[aria-label="Panoramabeeld sluiten"]').simulate('click')
+    wrapper.find('[aria-label="Panoramabeeld sluiten"]').first().simulate('click')
 
-    expect(history.location).toEqual(toHome())
+    expect(history.createHref(history.location)).toEqual(history.createHref(toHome()))
   })
 
   it('closes the panorama and navigates back to the geosearch route', () => {
