@@ -124,7 +124,7 @@ describe('map module', () => {
       cy.get(MAP.mapOverlayPane).find('canvas').should('exist')
     })
 
-    it.only('should add a layer to the map', () => {
+    it('should add a layer to the map', () => {
       cy.intercept('**/typeahead?q=spuistraat+59a*').as('getTypeaheadResults')
       cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
       cy.intercept('**/bag/v1.1/verblijfsobject/*').as('getVerblijfsobject')
