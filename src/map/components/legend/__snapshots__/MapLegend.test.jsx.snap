@@ -3,17 +3,23 @@
 exports[`MapLegend should render the component 1`] = `
 <Fragment>
   <styled.div
+    data-testid="mapLegendLayerButtonPanoramabeelden2021"
     isOpen={false}
     onClick={[Function]}
   >
     <styled.div>
       <Styled(Component)
+        aria-label="Panoramabeelden 2021"
         checked={false}
         className="checkbox"
         indeterminate={true}
+        name="Panoramabeelden 2021"
         onChange={[Function]}
       />
-      <Styled(Styled(Label)) />
+      <Styled(Styled(Label))
+        key="Panoramabeelden 2021"
+        label="Panoramabeelden 2021"
+      />
     </styled.div>
     <styled.span
       size={15}
