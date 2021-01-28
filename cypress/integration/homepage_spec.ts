@@ -28,7 +28,7 @@ describe('Homepage module', () => {
           cy.get(HEADER.logoAmsterdamShort).should('be.visible')
         }
 
-        if (size !== 'macbook-15') {
+        if (size === 'iphone-x') {
           cy.get(HOMEPAGE.buttonSearchMobile).should('be.visible').click()
           cy.get(DATA_SEARCH.input).should('be.visible')
           cy.get(HOMEPAGE.buttonSearchMobileClose).click()
