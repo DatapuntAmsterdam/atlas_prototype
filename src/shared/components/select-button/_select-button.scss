@@ -49,7 +49,6 @@ $handle-height: 24px;
     width: $handle-height - 2px;
   }
 
-
   svg {
     pointer-events: none;
   }
@@ -138,7 +137,6 @@ $handle-height: 24px;
     margin: 0;
     outline: none;
     padding: 7px 10px 7px 40px;
-
 
     &:hover,
     &:focus {

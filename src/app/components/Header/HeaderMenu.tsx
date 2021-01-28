@@ -78,7 +78,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
       backdropOpacity={CONSTANTS.BACKDROP_OPACITY}
     >
       <MenuFlyOut label="Onderdelen">
-        {navigationLinks.map(({ id, title, to }) => (
+        {navigationLinks.map(({ id, title, to, testId }) => (
           <MenuButton
             onClick={() => {
               trackEvent({
@@ -93,13 +93,14 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
             key={id}
             /* @ts-ignore */
             to={to}
+            data-testid={testId}
           >
             {title}
           </MenuButton>
         ))}
       </MenuFlyOut>
       <MenuFlyOut label="Over OIS">
-        {HEADER_LINKS_ABOUT.map(({ title, id, slug }) => {
+        {HEADER_LINKS_ABOUT.map(({ title, id, slug, testId }) => {
           const linkId: string = id[environment.DEPLOY_ENV]
 
           return (
@@ -117,6 +118,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
                 iconLeft={<ChevronRight />}
                 /* @ts-ignore */
                 to={toArticleDetail(linkId, slug)}
+                data-testid={testId}
               >
                 {title}
               </MenuButton>
@@ -137,6 +139,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
             openFeedbackForm()
             dropFocus()
           }}
+          data-testid="headerMenuLinkFeedback"
         >
           Feedback
         </MenuButton>
@@ -152,7 +155,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
             })
             dropFocus()
           }}
-          title={HEADER_LINK_HELP.title}
+          data-testid={HEADER_LINK_HELP.testId}
           /* @ts-ignore */
           to={toHelpPage()}
         >
@@ -172,6 +175,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
               })
               dropFocus()
             }}
+            data-testid="headerMenuLinkLogin"
           >
             Inloggen
           </MenuButton>
@@ -191,6 +195,7 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
                 dropFocus()
               }}
               iconLeft={<ChevronRight />}
+              data-testid="headerMenuLinkLogout"
             >
               Uitloggen
             </MenuButton>

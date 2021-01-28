@@ -42,17 +42,29 @@ const Footer: FunctionComponent = () => (
     <FooterComponent id={FOOTER_ID}>
       <FooterTop>
         <Row>
-          <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
+          <Column
+            wrap
+            span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}
+            data-testid="footerColofon"
+          >
             <FooterSection title="Colofon">
               <FooterLinks links={FOOTER_LINKS_COLOFON} />
             </FooterSection>
           </Column>
-          <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
+          <Column
+            wrap
+            span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}
+            data-testid="footerFollowUs"
+          >
             <FooterSection title="Volg de gemeente">
               <FooterLinks links={FOOTER_LINKS_SOCIAL} />
             </FooterSection>
           </Column>
-          <Column wrap span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}>
+          <Column
+            wrap
+            span={{ small: 1, medium: 2, big: 2, large: 4, xLarge: 4 }}
+            data-testid="footerQuestions"
+          >
             <FooterSection title="Vragen">
               <StyledParagraph>
                 Heeft u een vraag en kunt u het antwoord niet vinden op deze website? Of heeft u
@@ -72,7 +84,11 @@ const Footer: FunctionComponent = () => (
       <FooterBottom>
         <List>
           <ListItem>
-            <PrivacyLink href={FOOTER_LINK_PRIVACY.href} inList>
+            <PrivacyLink
+              data-testid={FOOTER_LINK_PRIVACY.testId}
+              href={FOOTER_LINK_PRIVACY.href}
+              inList
+            >
               {FOOTER_LINK_PRIVACY.title}
             </PrivacyLink>
           </ListItem>

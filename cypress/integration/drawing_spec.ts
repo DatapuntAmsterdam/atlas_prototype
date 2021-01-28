@@ -1,6 +1,7 @@
 import { DRAWING, MAP } from '../support/selectors'
 
-describe('Drawing', () => {
+// Skipping the execution of this test suite since the implementation of the drawing tool will change
+describe.skip('Drawing', () => {
   describe('User should draw on the map not logged in', () => {
     beforeEach(() => {
       cy.hidePopup()
@@ -25,6 +26,7 @@ describe('Drawing', () => {
         .siblings()
         .find(DRAWING.dropdownResultsSelectedValue)
         .should('contain', 'Adressen')
+
       cy.get(DRAWING.linkDrawresult).should('be.visible')
       cy.get(DRAWING.linkDrawresult).first().should('have.text', 'Barndesteeg 1 A')
       cy.get(DRAWING.clusterSymbol).should('be.visible').and('have.length', 4)
@@ -53,6 +55,7 @@ describe('Drawing', () => {
       cy.get(DRAWING.buttonRemove).click()
       cy.get(DRAWING.polygon).should('have.length', 1).and('be.visible')
       cy.get(DRAWING.buttonCloseDrawTool).click()
+
       cy.get(DRAWING.linkDrawresult).should('not.exist')
 
       // Delete second polygon
@@ -61,6 +64,7 @@ describe('Drawing', () => {
       cy.get(DRAWING.buttonRemove).click()
       cy.get(DRAWING.polygon).should('have.length', 1).and('be.visible')
       cy.get(DRAWING.buttonCloseDrawTool).click()
+
       cy.get(DRAWING.linkDrawresult).should('not.exist')
     })
     it('Should draw multiple lines on the map and delete one', () => {

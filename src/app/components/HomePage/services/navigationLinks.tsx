@@ -24,6 +24,7 @@ export interface NavigationLink {
   id: number
   to: To | LocationDescriptorObject
   CardIcon?: () => JSX.Element
+  testId?: string
   title: string
   description?: string
 }
@@ -39,6 +40,7 @@ const navigationLinks: NavigationLink[] = [
         <Map />
       </Icon>
     ),
+    testId: 'Kaart',
     title: 'Kaart',
     description: 'Zoek en bekijk data op de kaart',
   },
@@ -50,6 +52,7 @@ const navigationLinks: NavigationLink[] = [
         <Pano />
       </Icon>
     ),
+    testId: 'Panoramabeelden',
     title: 'Panoramabeelden',
     description: 'Kijk 360 graden in het rond',
   },
@@ -64,6 +67,7 @@ const navigationLinks: NavigationLink[] = [
         <Table />
       </Icon>
     ),
+    testId: NAVIGATION_LINK_DATA_IN_TABLES.testId,
     title: NAVIGATION_LINK_DATA_IN_TABLES.title,
     description: NAVIGATION_LINK_DATA_IN_TABLES.description,
   },
@@ -78,22 +82,26 @@ const navigationLinks: NavigationLink[] = [
         <Api />
       </Icon>
     ),
+    testId: NAVIGATION_LINK_DATA_SERVICES.testId,
     title: NAVIGATION_LINK_DATA_SERVICES.title,
     description: NAVIGATION_LINK_DATA_SERVICES.description,
   },
   {
     id: 6,
     to: toCollectionSearch(null, false, false, false),
+    testId: routes.collectionSearch.title,
     title: routes.collectionSearch.title,
   },
   {
     id: 7,
     to: toSpecialSearch(null, false, false, false),
+    testId: routes.specialSearch.title,
     title: routes.specialSearch.title,
   },
   {
     id: 9,
     to: toMapSearch(null, false, false, false),
+    testId: routes.mapSearch.title,
     title: routes.mapSearch.title,
   },
   {
@@ -104,6 +112,7 @@ const navigationLinks: NavigationLink[] = [
         <Data />
       </Icon>
     ),
+    testId: routes.datasetSearch.title,
     title: routes.datasetSearch.title,
     description: 'Zoek en download databestanden',
   },
@@ -115,12 +124,14 @@ const navigationLinks: NavigationLink[] = [
         <DocumentText />
       </Icon>
     ),
+    testId: routes.publicationSearch.title,
     title: routes.publicationSearch.title,
     description: 'Download factsheets en onderzoeksrapporten',
   },
   {
     id: 8,
     to: toArticleSearch(null, false, false, false),
+    testId: routes.articleSearch.title,
     title: routes.articleSearch.title,
   },
 ]

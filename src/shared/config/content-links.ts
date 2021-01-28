@@ -1,4 +1,5 @@
 export interface ContentLinkBase {
+  testId?: string
   title: string
   description?: string
 }
@@ -28,6 +29,7 @@ export interface ContentRedirect {
 
 export const FOOTER_LINKS_COLOFON: ContentLinkArticle[] = [
   {
+    testId: 'Databeleid',
     title: 'Databeleid',
     id: {
       acceptance: '29160257-dd4b-4349-a5df-d6f7715615ed',
@@ -36,6 +38,7 @@ export const FOOTER_LINKS_COLOFON: ContentLinkArticle[] = [
     slug: 'amsterdam-en-data',
   },
   {
+    testId: 'Bronnen',
     title: 'Bronnen',
     id: {
       acceptance: 'e3bd02bc-ce8a-4ff3-8d2c-4d5138ef0115',
@@ -44,6 +47,7 @@ export const FOOTER_LINKS_COLOFON: ContentLinkArticle[] = [
     slug: 'bronnen',
   },
   {
+    testId: 'OverDezeSite',
     title: 'Over deze site',
     id: {
       acceptance: '6b474539-32fb-4a1c-929a-bbfefadadc08',
@@ -52,6 +56,7 @@ export const FOOTER_LINKS_COLOFON: ContentLinkArticle[] = [
     slug: 'over-deze-site',
   },
   {
+    testId: 'OverOIS',
     title: 'Over OIS',
     id: {
       acceptance: '4dba60f2-7161-4fd8-81e9-03eddb52d259',
@@ -63,28 +68,34 @@ export const FOOTER_LINKS_COLOFON: ContentLinkArticle[] = [
 
 export const FOOTER_LINKS_SOCIAL: ContentLinkHref[] = [
   {
+    testId: 'SocialNieuwsbriefOIS',
     title: 'Nieuwsbrief OIS',
     href:
       'https://www.amsterdam.nl/nieuwsbrieven/bestuur-organisatie/dienstverlening/nieuwsbrief-data/nieuwsbrief-data/',
   },
   {
+    testId: 'SocialVacatures',
     title: 'Vacatures',
     href:
       'https://www.amsterdam.nl/bestuur-organisatie/werkenbij/externe/?zoeken=true&zoeken_term=&selectie_zoeken_op_maanden=AllYears&zoek_clustered_keywords_cluster=3669_3670_3671_3672_3673_3674_3675_3676_3677_3678_3679_3717_3681_3682_3683_3684_3685_3686_3688&zoek_clustered_keywords=3717&zoek_clustered_keywords_cluster=3662_3664_3665_3666_3667_3668_3715&zoek_clustered_keywords_cluster=3689_3690_3692_3693',
   },
   {
+    testId: 'SocialTwitter',
     title: 'Twitter',
     href: 'https://twitter.com/AmsterdamNL',
   },
   {
+    testId: 'SocialFacebook',
     title: 'Facebook',
     href: 'https://www.facebook.com/gemeenteamsterdam',
   },
   {
+    testId: 'SocialLinkedIn',
     title: 'LinkedIn',
     href: 'https://www.linkedin.com/company/gemeente-amsterdam',
   },
   {
+    testId: 'SocialGitHub',
     title: 'GitHub',
     href: 'https://github.com/Amsterdam',
   },
@@ -92,6 +103,7 @@ export const FOOTER_LINKS_SOCIAL: ContentLinkHref[] = [
 
 export const FOOTER_LINKS_HELP: ContentLinkArticle[] = [
   {
+    testId: 'HelpFAQ',
     title: 'Veelgestelde vragen',
     id: {
       acceptance: 'a939afed-ff98-4db1-a927-fe6c9bac1ae6',
@@ -100,6 +112,7 @@ export const FOOTER_LINKS_HELP: ContentLinkArticle[] = [
     slug: 'veelgestelde-vragen',
   },
   {
+    testId: 'HelpContact',
     title: 'Contact opnemen',
     id: {
       acceptance: 'aadfea20-7308-4caf-9126-a900f9e6df1f',
@@ -108,6 +121,7 @@ export const FOOTER_LINKS_HELP: ContentLinkArticle[] = [
     slug: 'contact',
   },
   {
+    testId: 'HelpUitlegGebruik',
     title: 'Uitleg gebruik',
     id: {
       acceptance: '5a962d67-ae2d-41b5-9c1a-263591eb5b0c',
@@ -118,12 +132,14 @@ export const FOOTER_LINKS_HELP: ContentLinkArticle[] = [
 ]
 
 export const FOOTER_LINK_PRIVACY: ContentLinkHref = {
+  testId: 'PrivacyCookies',
   title: 'Privacy en cookies',
   href: 'https://www.amsterdam.nl/privacy/',
 }
 
 export const HEADER_LINKS_ABOUT: ContentLinkArticle[] = [
   {
+    testId: 'OverOIS',
     title: 'Onderzoek, Informatie en Statistiek',
     id: {
       acceptance: '4dba60f2-7161-4fd8-81e9-03eddb52d259',
@@ -132,6 +148,7 @@ export const HEADER_LINKS_ABOUT: ContentLinkArticle[] = [
     slug: 'over-ois',
   },
   {
+    testId: 'OverOnderzoek',
     title: 'Onderzoek',
     id: {
       acceptance: 'bd25761c-ca8c-4587-bdd8-6f77bd8bd7e3',
@@ -140,6 +157,7 @@ export const HEADER_LINKS_ABOUT: ContentLinkArticle[] = [
     slug: 'onderzoek-door-ois',
   },
   {
+    testId: 'OverDatabeleid',
     title: 'Databeleid',
     id: {
       acceptance: '29160257-dd4b-4349-a5df-d6f7715615ed',
@@ -148,6 +166,7 @@ export const HEADER_LINKS_ABOUT: ContentLinkArticle[] = [
     slug: 'amsterdam-en-data',
   },
   {
+    testId: 'OverBronnen',
     title: 'Bronnen',
     id: {
       acceptance: 'e3bd02bc-ce8a-4ff3-8d2c-4d5138ef0115',
@@ -156,6 +175,7 @@ export const HEADER_LINKS_ABOUT: ContentLinkArticle[] = [
     slug: 'bronnen',
   },
   {
+    testId: 'OverContact',
     title: 'Contact',
     id: {
       acceptance: 'aadfea20-7308-4caf-9126-a900f9e6df1f',
@@ -166,6 +186,7 @@ export const HEADER_LINKS_ABOUT: ContentLinkArticle[] = [
 ]
 
 export const HEADER_LINK_HELP: ContentLinkArticle = {
+  testId: 'HelpHelp',
   title: 'Help',
   id: {
     acceptance: '4e5af47c-a67f-4cbc-be3c-7a0f410a45d6',
@@ -175,6 +196,7 @@ export const HEADER_LINK_HELP: ContentLinkArticle = {
 }
 
 export const NAVIGATION_LINK_DATA_IN_TABLES: ContentLinkArticle = {
+  testId: 'Tabellen',
   title: 'Tabellen',
   description: 'Selecteer data en sla op als spreadsheet',
   id: {
@@ -185,6 +207,7 @@ export const NAVIGATION_LINK_DATA_IN_TABLES: ContentLinkArticle = {
 }
 
 export const NAVIGATION_LINK_DATA_SERVICES: ContentLinkArticle = {
+  testId: 'DataServices',
   title: 'Data services',
   description: 'Alles over het koppelen van data via APIs',
   id: {
