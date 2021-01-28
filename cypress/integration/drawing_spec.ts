@@ -56,8 +56,6 @@ describe.skip('Drawing', () => {
       cy.get(DRAWING.polygon).should('have.length', 1).and('be.visible')
       cy.get(DRAWING.buttonCloseDrawTool).click()
 
-      cy.pause()
-
       cy.get(DRAWING.linkDrawresult).should('not.exist')
 
       // Delete second polygon
@@ -66,8 +64,6 @@ describe.skip('Drawing', () => {
       cy.get(DRAWING.buttonRemove).click()
       cy.get(DRAWING.polygon).should('have.length', 1).and('be.visible')
       cy.get(DRAWING.buttonCloseDrawTool).click()
-
-      cy.pause()
 
       cy.get(DRAWING.linkDrawresult).should('not.exist')
     })
