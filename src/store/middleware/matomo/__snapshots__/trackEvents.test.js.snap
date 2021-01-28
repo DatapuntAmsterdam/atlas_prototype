@@ -13,7 +13,6 @@ Object {
   "header/CLOSE_MODAL": [Function],
   "header/REPORT_FEEDBACK_REQUEST": [Function],
   "header/REPORT_PROBLEM_REQUEST": [Function],
-  "panorama/CLOSE_PANORAMA": [Function],
   "panorama/FETCH_PANORAMA_HOTSPOT_REQUEST": [Function],
   "panorama/FETCH_PANORAMA_REQUEST_EXTERNAL": [Function],
   "panorama/FETCH_PANORAMA_REQUEST_TOGGLE": [Function],

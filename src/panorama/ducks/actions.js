@@ -1,6 +1,5 @@
 // Actions creators
 import {
-  CLOSE_PANORAMA,
   FETCH_PANORAMA_ERROR,
   FETCH_PANORAMA_HOTSPOT_REQUEST,
   FETCH_PANORAMA_REQUEST,
@@ -54,12 +53,6 @@ export const fetchPanoramaError = (error) => ({
   payload: error,
 })
 
-export const closePanorama = () => ({
-  type: CLOSE_PANORAMA,
-  meta: {
-    tracking: true,
-  },
-})
 export const setPanoramaLocation = (payload) => ({
   type: SET_PANORAMA_LOCATION,
   payload,

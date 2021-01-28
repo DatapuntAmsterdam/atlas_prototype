@@ -55,10 +55,6 @@ export const toDataDetail = (detailReference, additionalParams = null, tracking 
   )
 }
 
-export const toHome = () => ({
-  type: routing.home.type,
-})
-
 export const toGeoSearch = (additionalParams) =>
   preserveQuery(
     {

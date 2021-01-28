@@ -1,29 +1,31 @@
+import { ControlButton } from '@amsterdam/arm-core'
+import { Close } from '@amsterdam/asc-assets'
+import { themeSpacing } from '@amsterdam/asc-ui'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import classNames from 'classnames'
 import debounce from 'lodash.debounce'
 import PropTypes from 'prop-types'
-import { Component } from 'react'
+import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
-import { ControlButton } from '@amsterdam/arm-core'
-import { themeSpacing } from '@amsterdam/asc-ui'
-import { Close } from '@amsterdam/asc-assets'
 import { Map as ContextMenu } from '../../app/components/ContextMenu'
 import ToggleFullscreen from '../../app/components/ToggleFullscreen/ToggleFullscreen'
+import { toHome } from '../../app/links'
 import { getMapDetail } from '../../map/ducks/detail/actions'
 import { getMapOverlays } from '../../map/ducks/map/selectors'
 import { pageTypeToEndpoint } from '../../map/services/map-detail/map-detail'
 import { isPrintMode, isPrintOrEmbedMode, setViewMode, ViewMode } from '../../shared/ducks/ui/ui'
+import PARAMETERS from '../../store/parameters'
+import { toDataDetail, toGeoSearch } from '../../store/redux-first-router/actions'
 import PanoramaToggle from '../components/PanoramaToggle/PanoramaToggle'
 import StatusBar from '../components/StatusBar/StatusBar'
-import {
-  closePanorama,
-  fetchPanoramaHotspotRequest,
-  setPanoramaOrientation,
-} from '../ducks/actions'
+import { fetchPanoramaHotspotRequest, setPanoramaOrientation } from '../ducks/actions'
 import {
   getDetailReference,
   getLabelObjectByTags,
+  getPageReference,
   getPanorama,
   getPanoramaLocation,
   getPanoramaTags,
@@ -49,6 +51,7 @@ class PanoramaContainer extends Component {
     this.updateOrientation = this.updateOrientation.bind(this)
     this.hotspotClickHandler = this.hotspotClickHandler.bind(this)
     this.loadPanoramaScene = this.loadPanoramaScene.bind(this)
+    this.onClose = this.onClose.bind(this)
 
     this.updateOrientationDebounced = debounce(this.updateOrientation, 300, {
       leading: true,
@@ -86,6 +89,36 @@ class PanoramaContainer extends Component {
 
   componentWillUnmount() {
     this.panoramaViewer.removeEventListener('viewChange', this.updateOrientationDebounced)
+  }
+
+  onClose() {
+    const { detailReference, pageReference, panoramaLocation, history, matomo } = this.props
+    // Filter out the panorama layers, as they should be closed
+    // eslint-disable-next-line react/destructuring-assignment
+    const overlays = this.props.overlays?.filter(({ id }) => !id.startsWith('pano'))
+
+    if (Array.isArray(detailReference) && detailReference.length) {
+      // eslint-disable-next-line react/destructuring-assignment
+      this.props.toDataDetail(detailReference, {
+        [PARAMETERS.LAYERS]: overlays,
+        [PARAMETERS.VIEW]: ViewMode.Split,
+      })
+    } else if (pageReference === 'home') {
+      history.push(toHome())
+    } else {
+      // eslint-disable-next-line react/destructuring-assignment
+      this.props.toGeoSearch({
+        [PARAMETERS.LOCATION]: panoramaLocation,
+        [PARAMETERS.VIEW]: ViewMode.Split,
+        [PARAMETERS.LAYERS]: overlays,
+      })
+    }
+
+    matomo.trackEvent({
+      category: 'navigation',
+      action: 'panorama-verlaten',
+      name: null,
+    })
   }
 
   loadPanoramaScene() {
@@ -130,7 +163,7 @@ class PanoramaContainer extends Component {
   }
 
   render() {
-    const { isFullscreen, printOrEmbedMode, printMode, panoramaState, onClose, tags } = this.props
+    const { isFullscreen, printOrEmbedMode, printMode, panoramaState, tags } = this.props
     return (
       <div
         className={classNames({
@@ -156,7 +189,7 @@ class PanoramaContainer extends Component {
         />
 
         <StyledControlButton
-          onClick={onClose}
+          onClick={this.onClose}
           aria-label="Panoramabeeld sluiten"
           icon={<Close />}
           variant="blank"
@@ -194,7 +227,7 @@ const mapStateToProps = (state) => ({
   panoramaState: getPanorama(state),
   tags: getPanoramaTags(state),
   detailReference: getDetailReference(state),
-  pageReference: getDetailReference(state),
+  pageReference: getPageReference(state),
   panoramaLocation: getPanoramaLocation(state),
   overlays: getMapOverlays(state),
   printOrEmbedMode: isPrintOrEmbedMode(state),
@@ -208,7 +241,8 @@ const mapDispatchToProps = (dispatch) => ({
       setView: setViewMode,
       fetchPanoramaById: fetchPanoramaHotspotRequest,
       fetchMapDetail: getMapDetail,
-      onClose: closePanorama,
+      toDataDetail,
+      toGeoSearch,
     },
     dispatch,
   ),
@@ -224,13 +258,21 @@ PanoramaContainer.propTypes = {
   isFullscreen: PropTypes.bool.isRequired,
   printOrEmbedMode: PropTypes.bool,
   printMode: PropTypes.bool,
-  onClose: PropTypes.func.isRequired,
   setView: PropTypes.func.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   detailReference: PropTypes.arrayOf(PropTypes.string).isRequired,
   setOrientation: PropTypes.func.isRequired,
   fetchMapDetail: PropTypes.func.isRequired,
   fetchPanoramaById: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  matomo: PropTypes.shape({}).isRequired,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PanoramaContainer)
+const withHooks = (component) => (props) => {
+  const history = useHistory()
+  const matomo = useMatomo()
+
+  return createElement(component, { history, matomo, ...props })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withHooks(PanoramaContainer))

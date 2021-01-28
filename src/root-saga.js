@@ -4,7 +4,7 @@ import watchMapClick from './map/sagas/map-click'
 import watchFetchMapLayers from './map/sagas/map-layers'
 import watchFetchMapPanelLayers from './map/sagas/map-panel-layers'
 import watchFetchNearestDetails from './map/sagas/nearest-details'
-import { watchClosePanorama, watchFetchPanorama } from './panorama/sagas/panorama'
+import { watchFetchPanorama } from './panorama/sagas/panorama'
 import watchDataSearch from './shared/sagas/data-search/data-search'
 import watchFetchDataSelection from './shared/sagas/data-selection/data-selection'
 import watchErrors from './shared/sagas/error/error'
@@ -18,7 +18,6 @@ export default function* rootSaga() {
     fork(watchFetchMapLayers),
     fork(watchFetchMapPanelLayers),
     fork(watchFetchPanorama),
-    fork(watchClosePanorama),
     fork(watchMapClick),
     fork(watchFetchNearestDetails),
     fork(watchAuthenticationRequest),

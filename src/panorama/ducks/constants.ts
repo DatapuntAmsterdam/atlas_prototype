@@ -1,12 +1,9 @@
-import { toHome } from '../../store/redux-first-router/actions'
-
 export const REDUCER_KEY = 'panorama'
 export const FETCH_PANORAMA_REQUEST = `${REDUCER_KEY}/FETCH_PANORAMA_REQUEST`
 export const FETCH_PANORAMA_SUCCESS = `${REDUCER_KEY}/FETCH_PANORAMA_SUCCESS`
 export const FETCH_PANORAMA_ERROR = `${REDUCER_KEY}/FETCH_PANORAMA_ERROR`
 export const SET_PANORAMA_ORIENTATION = `${REDUCER_KEY}/SET_PANORAMA_ORIENTATION`
 export const SET_PANORAMA_LOCATION = `${REDUCER_KEY}/SET_PANORAMA_LOCATION`
-export const CLOSE_PANORAMA = `${REDUCER_KEY}/CLOSE_PANORAMA`
 export const FETCH_PANORAMA_HOTSPOT_REQUEST = `${REDUCER_KEY}/FETCH_PANORAMA_HOTSPOT_REQUEST`
 export const SET_PANORAMA_TAGS = `${REDUCER_KEY}/FETCH_PANORAMA_REQUEST_TOGGLE`
 export const FETCH_PANORAMA_REQUEST_EXTERNAL = `${REDUCER_KEY}/FETCH_PANORAMA_REQUEST_EXTERNAL`
@@ -129,12 +126,4 @@ export const initialState = {
   isLoading: true,
   detailReference: [],
   pageReference: '',
-}
-
-export const PAGE_REFS = {
-  HOME: 'home',
-}
-
-export const PAGE_REF_MAPPING = {
-  [PAGE_REFS.HOME]: toHome,
 }

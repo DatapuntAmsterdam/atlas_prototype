@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/Amsterdam/atlas.git"
   },
-  "version": "3.22.0",
+  "version": "3.22.2",
   "scripts": {
     "build": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack --config ./webpack.prod.ts",
     "clean": "npm run clean:dirs",
