@@ -8,6 +8,7 @@ jest.mock('react-redux', () => ({
 
 describe('MapLegend', () => {
   const props = {
+    title: 'Panoramabeelden 2021',
     zoomLevel: 2,
     overlays: [
       {
