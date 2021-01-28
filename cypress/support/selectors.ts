@@ -178,7 +178,7 @@ export const LINKS = {
 }
 
 export const MAP = {
-  buttonEnlarge: '[data-testid="mapPreviewMaximize"]',
+  buttonEnlarge: '[data-testid="showFullDetails"]',
   contextMenu: '[data-test=context-menu]',
   contextMenuItemEmbed: '[data-test=context-menu-embed]',
   buttonDropDownLuchtfoto: '.map-type__select--aerial > .select-button__icon-wrapper',

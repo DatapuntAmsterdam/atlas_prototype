@@ -41,6 +41,7 @@ describe('map module', () => {
       cy.url().should('include', 'data/?modus=kaart&achtergrond=lf2018&legenda=true')
     })
   })
+
   describe('user should be able to interact with the map', () => {
     it('should show results based on the interaction with the map', () => {
       const svgMapPath = '/assets/images/map/'
@@ -87,7 +88,7 @@ describe('map module', () => {
 
       // click on the button inside the panel balloon thingy, and expect the large right column to
       // become visible
-      cy.get(MAP.buttonEnlarge).click()
+      cy.get(MAP.buttonEnlarge).should('exist').scrollIntoView().click()
       cy.get(ADDRESS_PAGE.resultsPanel).should('be.visible')
 
       cy.waitForAdressDetail()
@@ -122,6 +123,7 @@ describe('map module', () => {
       cy.get(MAP.mapOverlayPane).children().should('exist')
       cy.get(MAP.mapOverlayPane).find('canvas').should('exist')
     })
+
     it('should add a layer to the map', () => {
       cy.intercept('**/typeahead?q=spuistraat+59a*').as('getTypeaheadResults')
       cy.intercept('**/panorama/thumbnail?*').as('getPanorama')
@@ -142,8 +144,7 @@ describe('map module', () => {
       cy.contains('Panden ouder dan 1960').should('not.exist')
       cy.contains('Panden naar bouwjaar').should('not.exist')
 
-      cy.get(MAP.mapPanelHandle)
-        .find(MAP.mapLegendLabel)
+      cy.get('[data-testid="mapLegendLayerButtonOnroerendeZaken"]')
         .contains('Onroerende zaken')
         .parents(MAP.mapLegendItemButton)
         .click('right')
@@ -262,6 +263,7 @@ describe('map module', () => {
         .and('have.length', 12)
     })
   })
+
   describe('Should see more when logged in', () => {
     before(() => {
       cy.login()
@@ -270,6 +272,7 @@ describe('map module', () => {
     after(() => {
       cy.logout()
     })
+
     it('Should see vestigingen on the map', () => {
       cy.intercept('POST', '/cms_search/graphql/').as('graphql')
       cy.hidePopup()

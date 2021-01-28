@@ -95,7 +95,13 @@ const MapDetailResultWrapper: FunctionComponent<MapDetailResultWrapperProps> = (
         )}
         {children}
         <footer className="map-search-results__footer">
-          <StyledButton type="button" onClick={onMaximize} iconLeft={<Maximize />} iconSize={21}>
+          <StyledButton
+            data-testid="showFullDetails"
+            type="button"
+            onClick={onMaximize}
+            iconLeft={<Maximize />}
+            iconSize={21}
+          >
             Volledig weergeven
           </StyledButton>
         </footer>

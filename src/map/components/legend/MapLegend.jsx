@@ -98,6 +98,10 @@ const MapLegend = ({
   const ref = createRef()
   const { trackEvent } = useMatomo()
   const isPrintOrEmbedView = useSelector(isPrintOrEmbedMode)
+  const testId = title
+    .split(' ')
+    .map((word) => `${word.charAt(0).toUpperCase()}${word.substring(1)}`)
+    .join('')
 
   function trackLayerEnabled(mapLayer) {
     // Sanitize the collection title to use it as action
@@ -244,7 +248,12 @@ const MapLegend = ({
     <>
       {(!isPrintOrEmbedView ||
         (isPrintOrEmbedView && mapLayers.some(({ isEmbedded }) => isEmbedded))) && ( // Also display the collection title when maplayer is embedded
-        <LayerButton ref={ref} onClick={() => setOpen(!isOpen)} isOpen={isOpen}>
+        <LayerButton
+          data-testid={`mapLegendLayerButton${testId}`}
+          ref={ref}
+          onClick={() => setOpen(!isOpen)}
+          isOpen={isOpen}
+        >
           <TitleWrapper>
             {!isPrintOrEmbedView ? (
               <StyledCheckbox
