@@ -39,6 +39,7 @@ const MapPreviewPanel = ({
             type="button"
             variant="blank"
             aria-label="Volledige weergave tonen"
+            data-testid="mapPreviewMaximize"
             size={28}
             icon={<MaximizeIcon />}
             iconSize={24}

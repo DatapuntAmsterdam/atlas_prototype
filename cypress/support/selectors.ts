@@ -178,7 +178,7 @@ export const LINKS = {
 }
 
 export const MAP = {
-  buttonEnlarge: 'button.map-preview-panel__button[title="Volledige weergave tonen"]',
+  buttonEnlarge: '[data-testid="mapPreviewMaximize"]',
   contextMenu: '[data-test=context-menu]',
   contextMenuItemEmbed: '[data-test=context-menu-embed]',
   buttonDropDownLuchtfoto: '.map-type__select--aerial > .select-button__icon-wrapper',
@@ -203,7 +203,7 @@ export const MAP = {
   mapMaximize: '.rc-icon-button',
   mapOverlayPane: '.leaflet-overlay-pane',
   mapPanel: '.map-panel',
-  mapPanelHandle: '.map-panel-handle',
+  mapPanelHandle: '[data-testid="mapPanel"]',
   mapPanelBackground: '.map-type',
   mapPanelBackgroundLabel: '.map-type [class*=HeadingStyle]',
   mapPreviewPanel: '.map-preview-panel',

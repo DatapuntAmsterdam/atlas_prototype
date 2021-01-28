@@ -43,6 +43,7 @@ const MapPanel = ({
 
   return (
     <div
+      data-testid="mapPanel"
       aria-label={
         isMapPanelVisible
           ? 'Kaartlagen legenda, Kaartlagen verbergen'
