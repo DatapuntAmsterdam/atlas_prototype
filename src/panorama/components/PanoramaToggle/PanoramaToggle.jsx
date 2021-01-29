@@ -1,7 +1,7 @@
 import { ChevronDown, ExternalLink } from '@amsterdam/asc-assets'
 import { ContextMenu, ContextMenuItem, Icon } from '@amsterdam/asc-ui'
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Clock from '../../../shared/assets/icons/Clock.svg'
@@ -22,13 +22,13 @@ const PanoramaToggle = ({
     showMenuToggle(null)
   }, [currentLabel])
 
-  const handleOpenPanoramaExternal = () => {
+  const handleOpenPanoramaExternal = useCallback(() => {
     const url = getStreetViewUrl(location, heading)
 
     openPanoramaExternal()
     showMenuToggle(false)
     window.open(url, '_blank')
-  }
+  }, [location, heading])
 
   const handleSetPanoramaTags = (tags) => {
     openPanoramaTags(tags)

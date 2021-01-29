@@ -1,8 +1,8 @@
 {
   "baseUrl": "http://localhost:3000",
-  "defaultCommandTimeout": 10000,
+  "defaultCommandTimeout": 3000,
   "projectId": "k3sms4",
-  "requestTimeout": 15000,
+  "requestTimeout": 3000,
   "retries": {
     "runMode": 1,
     "openMode": 0

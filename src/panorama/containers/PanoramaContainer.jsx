@@ -170,6 +170,7 @@ class PanoramaContainer extends Component {
           'c-panorama': true,
           'u-page-break-before': !isFullscreen,
         })}
+        data-testid="panoramaContainer"
       >
         <div
           ref={
@@ -183,9 +184,9 @@ class PanoramaContainer extends Component {
 
         <ToggleFullscreen
           isFullscreen={isFullscreen}
-          aria-label="Panoramabeeld"
           onToggleFullscreen={this.toggleFullscreen}
           alignLeft
+          title="Panoramabeeld"
         />
 
         <StyledControlButton

@@ -10,6 +10,10 @@ import {
 } from '../support/selectors'
 
 describe('panorama module', () => {
+  before(() => {
+    cy.hidePopup()
+  })
+
   beforeEach(() => {
     cy.intercept('**/panorama/panoramas/*/adjacencies/?newest_in_range=true&tags=mission-bi').as(
       'getResults',
@@ -17,21 +21,7 @@ describe('panorama module', () => {
 
     cy.intercept('POST', '/cms_search/graphql/').as('graphql')
     cy.intercept('**/jsonapi/node/list/**').as('jsonapi')
-    cy.hidePopup()
-    cy.visit('/')
-    cy.wait('@jsonapi')
-    cy.get(HOMEPAGE.navigationBlockPanorama)
-    cy.get(PANORAMA.panorama).should('not.exist')
-    cy.get(HOMEPAGE.navigationBlockPanorama).click()
-    cy.wait('@getResults')
-    cy.wait('@jsonapi')
-  })
-
-  describe('user should be able to navigate to the panorama from the homepage', () => {
-    it('should open the panorama viewer', () => {
-      cy.get(PANORAMA.homepage).should('not.exist')
-      cy.get(PANORAMA.panorama).should('exist').and('be.visible')
-    })
+    cy.visit('/data/panorama/TMX7316010203-001187_pano_0000_001517')
   })
 
   describe('user should be able to use the panorama viewer', () => {
@@ -43,10 +33,11 @@ describe('panorama module', () => {
 
           cy.get(PANORAMA.statusBarCoordinates).first().contains(coordinates).should('exist')
 
-          // the click the first hotspot
-          cy.get('.qa-hotspot-button:visible').first().click({ force: true })
+          // click the first hotspot
+          cy.get('.qa-hotspot-button').first().click()
 
           cy.wait('@getResults')
+
           // the coordinates should be different
           cy.get(PANORAMA.statusBarCoordinates)
             .first()
@@ -90,8 +81,8 @@ describe('panorama module', () => {
           cy.get(PANORAMA.statusBarCoordinates).first().contains(coordinates).should('not.exist')
         })
     })
+
     it('should select older pano', () => {
-      cy.get(PANORAMA.panoramaMenu).should('not.exist')
       cy.get(PANORAMA.panoramaToggle).first().click()
       cy.get(PANORAMA.panoramaMenu).find('[aria-hidden="false"]').should('exist')
       cy.get(PANORAMA.panoramaMenu).find('ul > li').eq(2).click()
@@ -99,7 +90,7 @@ describe('panorama module', () => {
     })
   })
 
-  describe('user should be able to interact with the panorama', () => {
+  describe.skip('user should be able to interact with the panorama', () => {
     it('should remember the state when closing the pano, and update to search results when clicked in map', () => {
       const panoUrl =
         '/data/panorama/TMX7316010203-001675_pano_0000_005373/?center=52.366303%2C4.8835141&detail-ref=0363300000004153%2Cbag%2Copenbareruimte&heading=-33.99999999999992&lagen=pano-pano2016bi%3A1%7Cpano-pano2017bi%3A1%7Cpano-pano2018bi%3A1%7Cpano-pano2019bi%3A1%7Cpano-pano2020bi%3A1&locatie=52.3663030317001%2C4.88351414921202&reference=03630000004153%2Cbag%2Copenbareruimte'
@@ -129,12 +120,14 @@ describe('panorama module', () => {
       let largestButton: JQuery<HTMLElement>
       cy.get('.qa-hotspot-rotation')
         .each((button) => {
-          // get largest (e.g. closest by) navigation button
+          // get largest (i.e. closest by) navigation button
           cy.wrap(button)
             .should('have.css', 'width')
-            .then((width) => {
-              if (parseInt(width.replace('px', ''), 10) > largestButtonSize) {
-                largestButtonSize = parseInt(width.replace('px', ''), 10)
+            // @ts-ignore
+            .then((width: string) => {
+              const btnWidth = parseInt(width, 10)
+              if (btnWidth > largestButtonSize) {
+                largestButtonSize = btnWidth
                 largestButton = button
               }
             })
@@ -150,12 +143,9 @@ describe('panorama module', () => {
         expect(newUrl).not.to.equal(panoUrl)
       })
 
-      cy.get(ADDRESS_PAGE.buttonMaximizeMap).should('exist')
-      // click on the maximize button to open the map view
-      cy.wait(1000)
-      cy.get(ADDRESS_PAGE.buttonMaximizeMap).last().click()
+      cy.get(ADDRESS_PAGE.buttonMaximizeMap).should('exist').click()
 
-      cy.wait('@getPanoThumbnail')
+      // cy.wait('@getPanoThumbnail')
 
       cy.get(COMPONENTS.panoramaPreview, { timeout: 10000 }).should('exist').and('be.visible')
       cy.get(`${COMPONENTS.panoramaPreview} a`).click()
