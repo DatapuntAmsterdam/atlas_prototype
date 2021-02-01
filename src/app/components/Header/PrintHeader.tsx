@@ -15,10 +15,12 @@ const PrintHeader: FunctionComponent = () => {
   const dispatch = useDispatch()
 
   return (
-    <div className="u-grid">
+    <div data-testid="printHeader" className="u-grid">
       <div className="u-row">
         <div className="u-col-sm--3">
-          <h1 className="c-print-header__title">Printversie</h1>
+          <h1 data-testid="printHeaderTitle" className="c-print-header__title">
+            Printversie
+          </h1>
         </div>
         <div className="u-col-sm--9">
           <nav>
@@ -33,6 +35,7 @@ const PrintHeader: FunctionComponent = () => {
               </Button>
             </div>
             <CloseButton
+              data-testid="printHeaderClose"
               type="button"
               variant="blank"
               title="Sluiten"

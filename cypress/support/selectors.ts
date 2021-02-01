@@ -450,8 +450,8 @@ export const PANORAMA = {
 }
 
 export const PRINT = {
-  buttonClosePrint: '.c-print-header__close',
-  headerTitle: 'h1.c-print-header__title',
+  buttonClosePrint: '[data-testid="printHeaderClose"]',
+  headerTitle: '[data-testid="printHeaderTitle"]',
 }
 
 export const TABLES = {
