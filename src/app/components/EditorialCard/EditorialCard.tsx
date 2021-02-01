@@ -213,6 +213,8 @@ interface EditorialCardProps
 }
 
 export const EDITORIAL_CARD_TEST_ID = 'editorialCard'
+export const EDITORIAL_CARD_CONTENT_TYPE_TEST_ID = 'contentType'
+export const EDITORIAL_CARD_META_TEXT_TEST_ID = 'metaText'
 
 const EditorialCard: FunctionComponent<EditorialCardProps> = ({
   title,
@@ -240,7 +242,9 @@ const EditorialCard: FunctionComponent<EditorialCardProps> = ({
         <StyledCardContent highlighted={highlighted}>
           {showContentType && contentTypeLabel && (
             <div>
-              <ContentType data-testid="contentType">{contentTypeLabel}</ContentType>
+              <ContentType data-testid={EDITORIAL_CARD_CONTENT_TYPE_TEST_ID}>
+                {contentTypeLabel}
+              </ContentType>
             </div>
           )}
 
@@ -259,7 +263,7 @@ const EditorialCard: FunctionComponent<EditorialCardProps> = ({
           )}
 
           {date && (
-            <MetaText as="time" data-testid="metaText" dateTime={date}>
+            <MetaText as="time" data-testid={EDITORIAL_CARD_META_TEXT_TEST_ID} dateTime={date}>
               {specialType === SpecialType.Dashboard || specialType === SpecialType.Story
                 ? `Laatst gewijzigd: ${date}`
                 : date}
