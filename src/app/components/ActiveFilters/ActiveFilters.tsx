@@ -20,14 +20,15 @@ const StyledUl = styled.ul`
 `
 
 const ActiveFilters: FunctionComponent<ActiveFiltersProps> = ({ removeFilter, filters }) =>
-  filters && filters.length ? (
-    <StyledUl>
+  filters.length ? (
+    <StyledUl data-testid="activeFilters">
       {filters.map(({ slug, label, option }) => (
         <li key={slug}>
           <FilterTag
             type="button"
             aria-label={`Filter verwijderen: ${label}: ${option}`}
             onClick={() => removeFilter(slug)}
+            data-testid="activeFiltersItem"
           >
             {label}: {option}
           </FilterTag>
