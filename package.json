@@ -183,7 +183,7 @@
     "sass": "^1.32.5",
     "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",
-    "ts-jest": "^26.4.4",
+    "ts-jest": "^26.5.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3",
     "webpack": "^5.17.0",
