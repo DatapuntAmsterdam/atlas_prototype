@@ -8,7 +8,7 @@ module.exports = {
     '!**/*.config.js',
     '!**/*.{integration}.test.{js,jsx}',
     '!**/*.mock.js',
-    '!**/index.js',
+    '!**/index.ts',
     '!src/*.js',
     '!src/.*.js',
   ],

@@ -14,21 +14,29 @@ export type CMSConfig = {
 
 // More fields should be added to this type when other CMS content pages are migrated to TypeScript
 export type CMSResultItem = {
-  id: string
-  type: CmsType
-  specialType?: SpecialType
-  title: string
-  shortTitle?: string
-  teaser: string
   linkProps?: {
     to?: To | LocationDescriptorObject
     forwardedAs?: never
     title: string
     href?: string
   }
-  teaserImage?: string
-  coverImage?: string
   to?: To
+  id: string | null
+  label: string | null
+  type: CmsType | null
+  date: string | null
+  slug: string | null
+  intro: string | null
+  teaser: string | null
+  dateLocale: string
+  teaserImage: string | null
+  coverImage: string | null
+  specialType: SpecialType | null
+  title?: string | null
+  shortTitle?: string | null
+  link: {
+    uri: string | null
+  } | null
 }
 
 export type CMSResults<T> = {

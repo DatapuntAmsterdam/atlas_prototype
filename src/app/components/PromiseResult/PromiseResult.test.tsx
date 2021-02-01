@@ -5,6 +5,7 @@ import { AuthError } from '../../../shared/services/api/customError'
 import usePromise, { PromiseFulfilledResult, PromiseStatus } from '../../utils/usePromise'
 import AuthAlert from '../Alerts/AuthAlert'
 import PromiseResult from './PromiseResult'
+import { LOADING_SPINNER_TEST_ID } from '../LoadingSpinner/LoadingSpinner'
 
 jest.mock('../Alerts/AuthAlert')
 jest.mock('../../utils/usePromise')
@@ -59,7 +60,7 @@ describe('PromiseResult', () => {
     const factory = () => Promise.resolve(null)
     const { getByTestId } = render(<PromiseResult factory={factory}>{() => null}</PromiseResult>)
 
-    expect(getByTestId('loading-spinner')).toBeDefined()
+    expect(getByTestId(LOADING_SPINNER_TEST_ID)).toBeDefined()
   })
 
   it('renders an error message when the result is rejected', () => {

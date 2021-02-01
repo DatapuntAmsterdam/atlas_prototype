@@ -1,6 +1,6 @@
 import { CmsType, SpecialType } from '../../shared/config/cms.config'
 
-export default function getContentTypeLabel(type: CmsType, specialType?: SpecialType) {
+export default function getContentTypeLabel(type: CmsType, specialType?: SpecialType | null) {
   // specialType is always a "translated" value that can be used as label directly
   if (specialType) {
     return specialType

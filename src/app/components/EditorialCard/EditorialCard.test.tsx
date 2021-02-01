@@ -37,7 +37,7 @@ describe('EditorialCard', () => {
   it("should display a placeholder when there's no cover image", () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { image: unusedImage, ...mockDataItems } = mockDataItem
-    const { container } = render(<EditorialCard {...mockDataItems} />)
+    const { container } = render(<EditorialCard image={null} {...mockDataItems} />)
 
     const image = container.querySelector('img')
 

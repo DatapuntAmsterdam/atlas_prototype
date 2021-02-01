@@ -38,7 +38,7 @@ const PromiseResult: <T>(props: PromiseResultProps<T>) => ReactElement | null = 
   }
 
   if (result.status === PromiseStatus.Pending) {
-    return <StyledLoadingSpinner data-testid="loading-spinner" />
+    return <StyledLoadingSpinner />
   }
 
   if (result.error instanceof AuthError) {

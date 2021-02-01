@@ -56,7 +56,7 @@ const CardList: FunctionComponent<CardListProps> = ({ title, loading, results })
               {...linkProps}
               key={id}
               type={type}
-              specialType={specialType || undefined}
+              specialType={specialType}
               title={shortTitle || cardTitle}
               image={teaserImage || coverImage}
               imageDimensions={[44, 44]}

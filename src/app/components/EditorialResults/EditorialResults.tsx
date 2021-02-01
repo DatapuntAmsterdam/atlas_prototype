@@ -1,5 +1,6 @@
 import { CardContainer } from '@amsterdam/asc-ui'
-import { memo } from 'react'
+import { GraphQLFormattedError } from 'graphql'
+import { FunctionComponent, memo } from 'react'
 import styled from 'styled-components'
 import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'
 import { CmsType } from '../../../shared/config/cms.config'
@@ -18,6 +19,7 @@ import EditorialCard from '../EditorialCard'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import NoSearchResults from '../NoSearchResults'
+import { CMSResultItem } from '../../utils/useFromCMS'
 
 const EDITORIAL_OVERVIEW_ACTIONS = {
   [CmsType.Article]: toArticleSearch,
@@ -32,7 +34,18 @@ const EditorialCardContainer = styled(CardContainer)`
   padding: 0;
 `
 
-const EditorialResults = ({
+type EditorialResultsProps = {
+  query: string
+  results: CMSResultItem[]
+  loading: boolean
+  label: string
+  errors: GraphQLFormattedError<any>[]
+  className?: string
+  isOverviewPage: boolean
+  type: CmsType
+}
+
+const EditorialResults: FunctionComponent<EditorialResultsProps> = ({
   query,
   results,
   errors,
@@ -49,12 +62,14 @@ const EditorialResults = ({
   const unauthorizedLabels = getUnauthorizedLabels(matchingErrors)
 
   return (
+    // @ts-ignore
     <EditorialCardContainer className={className}>
       {loading ? (
         <LoadingSpinner />
       ) : (
         <>
           {!hasLoadingError &&
+            results &&
             results.length > 0 &&
             results.map((result) => {
               const {
@@ -71,16 +86,21 @@ const EditorialResults = ({
                 type,
               } = result
 
+              // Since it's possible that a result might not have a slug, we have to skip that one
+              if (!slug || !type) {
+                return null
+              }
               // The type SPECIALS has a different url structure
               const to = specialType
                 ? EDITORIAL_DETAIL_ACTIONS[type](id, specialType, slug)
                 : EDITORIAL_DETAIL_ACTIONS[type](id, slug)
 
-              const showContentType = (isOverviewPage && specialType) || !!specialType
+              const showContentType = !!(isOverviewPage && specialType) || !!specialType
               const highlighted = isOverviewPage && type === CmsType.Collection
 
               return (
                 <EditorialCard
+                  // @ts-ignore
                   forwardedAs={pickLinkComponent(to)}
                   type={type}
                   specialType={specialType}
@@ -92,14 +112,14 @@ const EditorialResults = ({
                   ]}
                   to={to}
                   title={shortTitle || title || cardLabel}
-                  description={teaser}
+                  teaser={teaser}
                   date={dateLocale}
                   showContentType={showContentType}
                   highlighted={highlighted}
                 />
               )
             })}
-          {!hasLoadingError && results.length === 0 && (
+          {!hasLoadingError && results?.length === 0 && (
             <NoSearchResults
               query={query}
               label={label}
