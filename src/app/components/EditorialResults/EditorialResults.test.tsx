@@ -1,30 +1,20 @@
 import { fireEvent, render } from '@testing-library/react'
-import { CmsType, SpecialType } from '../../../shared/config/cms.config'
+import { CmsType } from '../../../shared/config/cms.config'
 import EditorialResults from './EditorialResults'
 import { CMSResultItem } from '../../utils/useFromCMS'
 import { LOADING_SPINNER_TEST_ID } from '../LoadingSpinner/LoadingSpinner'
 import withAppContext from '../../utils/withAppContext'
-import {
-  EDITORIAL_CARD_CONTENT_TYPE_TEST_ID,
-  EDITORIAL_CARD_TEST_ID,
-} from '../EditorialCard/EditorialCard'
 import {
   ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID,
   ERROR_MESSAGE_TEST_ID,
 } from '../ErrorMessage/ErrorMessage'
 
 describe('EditorialResults', () => {
-  const { location } = window
-
-  beforeAll(() => {
-    // @ts-ignore
-    delete window.location
-    // @ts-ignore
-    window.location = { reload: jest.fn() }
-  })
-
-  afterAll(() => {
-    window.location = location
+  Object.defineProperty(window, 'location', {
+    value: {
+      ...window.location,
+      reload: jest.fn(),
+    },
   })
 
   const result: CMSResultItem = {
@@ -73,13 +63,13 @@ describe('EditorialResults', () => {
       withAppContext(<EditorialResults {...props} results={[]} />),
     )
 
-    expect(queryAllByTestId('editorialCard')).toEqual([])
+    expect(queryAllByTestId('editorialCard')).toHaveLength(0)
 
     // Should render two cards
     rerender(
       withAppContext(<EditorialResults {...props} results={[result, { ...result, id: '2' }]} />),
     )
-    expect(queryAllByTestId('editorialCard').length).toBe(2)
+    expect(queryAllByTestId('editorialCard')).toHaveLength(2)
   })
 
   // This test could probably be deleted if all files concerning the Editorial part of the app are fully typed.
@@ -143,117 +133,8 @@ describe('EditorialResults', () => {
     const { getByTestId } = render(withAppContext(<EditorialResults {...props} />))
 
     expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
+    expect(window.location.reload).not.toHaveBeenCalled()
     fireEvent.click(getByTestId(ERROR_MESSAGE_RELOAD_BUTTON_TEST_ID))
     expect(window.location.reload).toHaveBeenCalled()
-  })
-
-  describe('passing the right props to EditorialCard', () => {
-    const defaultProps = {
-      query: '',
-      label: 'Label',
-      loading: false,
-      isOverviewPage: false,
-      errors: [],
-    }
-
-    it('should show the right fields for Article results', () => {
-      const props = {
-        ...defaultProps,
-        type: CmsType.Article,
-        results: [result],
-      }
-      const { queryByTestId } = render(withAppContext(<EditorialResults {...props} />))
-
-      // It should not show the content field
-      expect(queryByTestId(EDITORIAL_CARD_CONTENT_TYPE_TEST_ID)).toBeNull()
-
-      // It should not pass highlight: true to EditorialCard
-      const style = window.getComputedStyle(
-        queryByTestId(EDITORIAL_CARD_TEST_ID)?.childNodes[0] as Element,
-      )
-      expect(style.paddingTop).toBe('')
-
-      // It should build the right URL
-      expect(queryByTestId(EDITORIAL_CARD_TEST_ID)?.closest('a')).toHaveAttribute(
-        'href',
-        '/artikelen/artikel/slug/1/',
-      )
-    })
-
-    it('should show the right fields for Publication results', () => {
-      const props = {
-        ...defaultProps,
-        type: CmsType.Publication,
-        results: [{ ...result, type: CmsType.Publication }],
-      }
-
-      const { queryByTestId } = render(withAppContext(<EditorialResults {...props} />))
-
-      // It should not show the content field
-      expect(queryByTestId(EDITORIAL_CARD_CONTENT_TYPE_TEST_ID)).toBeNull()
-
-      // It should not pass highlight: true to EditorialCard
-      const style = window.getComputedStyle(
-        queryByTestId(EDITORIAL_CARD_TEST_ID)?.childNodes[0] as Element,
-      )
-      expect(style.paddingTop).toBe('')
-
-      // It should build the right URL
-      expect(queryByTestId(EDITORIAL_CARD_TEST_ID)?.closest('a')).toHaveAttribute(
-        'href',
-        '/publicaties/publicatie/slug/1/',
-      )
-    })
-
-    it('should show the right fields for Special results', () => {
-      const props = {
-        ...defaultProps,
-        type: CmsType.Special,
-        results: [{ ...result, specialType: SpecialType.Animation, type: CmsType.Special }],
-      }
-
-      const { queryByTestId } = render(withAppContext(<EditorialResults {...props} />))
-
-      // It should not show the content field
-      expect(queryByTestId(EDITORIAL_CARD_CONTENT_TYPE_TEST_ID)).toHaveTextContent('animatie')
-
-      // It should not pass highlight: true to EditorialCard
-      const style = window.getComputedStyle(
-        queryByTestId(EDITORIAL_CARD_TEST_ID)?.childNodes[0] as Element,
-      )
-      expect(style.paddingTop).toBe('')
-
-      // It should build the right URL
-      expect(queryByTestId(EDITORIAL_CARD_TEST_ID)?.closest('a')).toHaveAttribute(
-        'href',
-        '/specials/animatie/slug/1/',
-      )
-    })
-
-    it('should show the right fields for Collection results', () => {
-      const props = {
-        ...defaultProps,
-        type: CmsType.Collection,
-        isOverviewPage: true,
-        results: [{ ...result, type: CmsType.Collection }],
-      }
-
-      const { queryByTestId } = render(withAppContext(<EditorialResults {...props} />))
-
-      // It should not show the content field
-      expect(queryByTestId(EDITORIAL_CARD_CONTENT_TYPE_TEST_ID)).toBeNull()
-
-      // It should pass highlight: true to EditorialCard
-      const style = window.getComputedStyle(
-        queryByTestId(EDITORIAL_CARD_TEST_ID)?.childNodes[0] as Element,
-      )
-      expect(style.paddingTop).toBe('8px')
-
-      // It should build the right URL
-      expect(queryByTestId(EDITORIAL_CARD_TEST_ID)?.closest('a')).toHaveAttribute(
-        'href',
-        '/dossiers/dossier/slug/1/',
-      )
-    })
   })
 })

@@ -27,6 +27,12 @@ describe('EditorialCard', () => {
     expect(image?.getAttribute('src')).toBe('image.jpg')
   })
 
+  it('should not render when type is null', () => {
+    const { container } = render(<EditorialCard {...mockDataItem} type={null} />)
+
+    expect(container.firstChild).toBeNull()
+  })
+
   it('should display the correct title', () => {
     const { container } = render(<EditorialCard {...mockDataItem} />)
 
