@@ -20,7 +20,7 @@ const StyledUl = styled.ul`
 `
 
 const ActiveFilters: FunctionComponent<ActiveFiltersProps> = ({ removeFilter, filters }) =>
-  filters && filters.length ? (
+  filters.length ? (
     <StyledUl data-testid="activeFilters">
       {filters.map(({ slug, label, option }) => (
         <li key={slug}>
