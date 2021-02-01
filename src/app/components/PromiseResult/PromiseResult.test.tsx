@@ -6,6 +6,7 @@ import usePromise, { PromiseFulfilledResult, PromiseStatus } from '../../utils/u
 import AuthAlert from '../Alerts/AuthAlert'
 import PromiseResult from './PromiseResult'
 import { LOADING_SPINNER_TEST_ID } from '../LoadingSpinner/LoadingSpinner'
+import { ERROR_MESSAGE_TEST_ID } from '../ErrorMessage/ErrorMessage'
 
 jest.mock('../Alerts/AuthAlert')
 jest.mock('../../utils/usePromise')
@@ -76,7 +77,7 @@ describe('PromiseResult', () => {
       </ThemeProvider>,
     )
 
-    expect(getByTestId('error-message')).toBeDefined()
+    expect(getByTestId(ERROR_MESSAGE_TEST_ID)).toBeDefined()
   })
 
   it('increases the retry count when the user clicks the retry button', () => {
