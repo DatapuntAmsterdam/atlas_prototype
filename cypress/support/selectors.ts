@@ -455,7 +455,7 @@ export const PRINT = {
 }
 
 export const TABLES = {
-  activeFilterItem: '.c-data-selection-active-filters__listitem',
+  activeFilters: '[data-testid="activeFilters"]',
   filterCategories: '.c-data-selection-available-filters__category',
   filterItem: '.c-data-selection-available-filters__item',
   filterLabel: '.qa-option-label',

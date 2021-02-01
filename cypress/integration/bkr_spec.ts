@@ -8,9 +8,9 @@ import {
   TABLES,
 } from '../support/selectors'
 
-describe('parcel-ownership (eigendommen) module', () => {
-  describe('user should be able to navigate to the parcel-ownership from the homepage', () => {
-    it('should check if the link to parcel-ownership page is visible', () => {
+describe('Kadastrale objecten/subjecten', () => {
+  describe('user should be able to navigate to kadastrale objecten from the homepage', () => {
+    it('should check if the link to kadastrale objecten page is visible', () => {
       cy.hidePopup()
       cy.visit('/')
       cy.get(HOMEPAGE.navigationBlockTabellen).click()
@@ -42,6 +42,7 @@ describe('parcel-ownership (eigendommen) module', () => {
         cy.get(DATA_SEARCH.autoSuggestTip).should('exist').and('be.visible')
         cy.get(DATA_SEARCH.autoSuggestHeader).should('not.contain', 'Kadastrale subjecten')
       })
+
       it('should not show kadastrale subjecten in results', () => {
         cy.intercept('**/typeahead?q=bakker*').as('getResults')
         cy.visit('/')
@@ -73,7 +74,7 @@ describe('parcel-ownership (eigendommen) module', () => {
       cy.intercept('**/brk/object/*').as('getBrkObject')
     })
 
-    describe('user should be able to view the eigendommen', () => {
+    describe('user should be able to view the kadastrale objecten', () => {
       beforeEach(() => {
         cy.visit(LINKS.kadastraleObjecten)
         cy.wait('@getDataselectieBrk')
@@ -88,7 +89,7 @@ describe('parcel-ownership (eigendommen) module', () => {
       })
     })
 
-    describe('user should be able to navigate to the eigendommen detail view', () => {
+    describe('user should be able to navigate to the kadastrale objecten detail view', () => {
       it('should open the correct detail view', () => {
         cy.visit(`/data/brk/kadastrale-objecten?center=52.371897%2C4.8933155&filters=%7B"stadsdeel_naam"
         %3A"Centrum"%2C"buurt_naam"%3A"Amstelveldbuurt"%7D&zoom=8`)
@@ -108,20 +109,23 @@ describe('parcel-ownership (eigendommen) module', () => {
         cy.wait('@getDataselectieBrk')
 
         cy.contains('Tabel weergeven').click()
+
         const selectedFilter = 'Afrikahaven'
-        cy.get(TABLES.filterItem).find(TABLES.filterLabel).contains(selectedFilter).should('exist')
 
-        cy.get(TABLES.filterItem).find(TABLES.filterLabel).contains(selectedFilter).click()
+        cy.get(TABLES.filterItem)
+          .find(TABLES.filterLabel)
+          .contains(selectedFilter)
+          .should('exist')
+          .click()
 
-        cy.get(TABLES.activeFilterItem)
-          .find('span')
+        cy.get('[data-testid="activeFiltersItem"]')
           .contains(selectedFilter)
           .should('exist')
           .and('be.visible')
       })
     })
 
-    describe('user should be able to view a parcel in the leaflet map', () => {
+    describe('user should be able to view a kadastraal object in the leaflet map', () => {
       it('should open the detail view with a leaflet map and a cursor', () => {
         cy.visit('/data/brk/object/idNL.KAD.OnroerendeZaak.11430433270000?legenda=false&zoom=13')
 
@@ -133,6 +137,7 @@ describe('parcel-ownership (eigendommen) module', () => {
         cy.get(MAP.mapSelectedObject).should('exist').and('be.visible')
       })
     })
+
     describe('Autosuggest and search results', () => {
       it('Should show "Kadastrale subjecten" for medewerker plus in the autosuggest', () => {
         cy.intercept('**/typeahead?q=bakker*').as('getResults')
@@ -157,19 +162,20 @@ describe('parcel-ownership (eigendommen) module', () => {
           .should('contain', 'Kadastrale subjecten (')
           .and('be.visible')
       })
-      it('Should show "Kadastrale subjecten" and "Maatschappelijke activiteiten in the search results', () => {
+
+      it('Should show "Kadastrale subjecten" in the search results', () => {
         cy.intercept('**/typeahead?q=bakker*').as('getResults')
         cy.visit('/')
 
         cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
 
         cy.wait('@getResults')
-        cy.contains('Maatschappelijke activiteiten (').should('be.visible')
         cy.contains('Kadastrale subjecten (').should('be.visible')
         cy.contains('Aafje Cornelia Bakker').should('be.visible')
       })
     })
   })
+
   describe('authenticated EMPLOYEE', () => {
     before(() => {
       cy.login('EMPLOYEE')
@@ -178,6 +184,7 @@ describe('parcel-ownership (eigendommen) module', () => {
     after(() => {
       cy.logout()
     })
+
     it('Should show "Kadastrale subjecten" for medewerker in the autosuggest', () => {
       cy.intercept('**/typeahead?q=bakker*').as('getResults')
       cy.visit('/')
@@ -201,14 +208,14 @@ describe('parcel-ownership (eigendommen) module', () => {
         .should('contain', 'Kadastrale subjecten (')
         .and('be.visible')
     })
-    it('Should show "Kadastrale subjecten" and "Maatschappelijke activiteiten in the search results', () => {
+
+    it('Should show "Kadastrale subjecten" in the search results', () => {
       cy.intercept('**/typeahead?q=bakker*').as('getResults')
       cy.visit('/')
 
       cy.get(DATA_SEARCH.autoSuggestInput).focus().type('bakker{enter}')
 
       cy.wait('@getResults')
-      cy.contains('Maatschappelijke activiteiten (').should('be.visible')
       cy.contains('Kadastrale subjecten (').should('be.visible')
       cy.contains('Bakker & Toledo Holding B.V.').should('be.visible')
     })
