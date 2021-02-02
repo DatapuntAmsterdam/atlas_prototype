@@ -361,5 +361,11 @@ export const SHORTLINKS = {
         production: 'e6d25646-a296-4af9-8081-9fe454db2b02',
       },
     },
+    FAQ: {
+      id: {
+        acceptance: 'a939afed-ff98-4db1-a927-fe6c9bac1ae6',
+        production: 'e42a6157-6499-48db-95b6-cb271f7999f7',
+      },
+    },
   },
 }

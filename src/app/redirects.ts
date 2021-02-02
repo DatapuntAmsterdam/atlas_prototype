@@ -142,6 +142,12 @@ export const shortUrls: Redirect[] = [
       SHORTLINKS.COLLECTIONS.CORONA.id[environment.DEPLOY_ENV]
     }`,
   },
+  {
+    from: '/veelgestelde-vragen/',
+    to: `/artikelen/artikel/veelgestelde-vragen/${
+      SHORTLINKS.COLLECTIONS.FAQ.id[environment.DEPLOY_ENV]
+    }`,
+  },
 ]
 
 export const articleUrls: Redirect[] = REDIRECTS_ARTICLES.map((item) => ({
