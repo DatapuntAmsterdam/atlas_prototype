@@ -147,18 +147,15 @@ export const panoTagParam: UrlParam<string> = {
     // handle legacy value from old URLs
     const possibleLegacyValue = value.split(',')
     if (possibleLegacyValue.length > 1) {
-      const transformedValue = possibleLegacyValue.reduce((acc, legacyValue) => {
+      result = possibleLegacyValue.reduce((acc, legacyValue) => {
         const part = legacyValue.split('-')[1]
         return `${acc}${part}`
       }, 'pano')
-
-      const correctValue = PANO_LABELS.some(({ id }) => id === transformedValue)
-
-      // If value is not found or not correct, fall back to default value
-      result = correctValue ? transformedValue : panoTagParam.defaultValue
     }
+    const correctValue = PANO_LABELS.some(({ id }) => id === result)
 
-    return result
+    // If value is not found or not correct, fall back to default value
+    return correctValue ? result : panoTagParam.defaultValue
   },
   encode: (value) => value,
 }
