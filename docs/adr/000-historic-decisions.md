@@ -37,6 +37,10 @@ To be able to have the output of the proxy API also contain matches from the CMS
 
 Each change in the content in the CMS will update the Elasticsearch index. There will be no more than a couple of thousand records in the database for the foreseeable future.
 
+The communication, with the introduction of the Elasticsearch index, will roughly look like this:
+
+<img src="./service_relationships.png" alt="Service relationship diagram">
+
 ----
 
 <sup>1</sup> At the time of writing
