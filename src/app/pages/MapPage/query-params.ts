@@ -139,9 +139,27 @@ export const panoParam: UrlParam<Pano | null> = {
 }
 
 export const panoTagParam: UrlParam<string> = {
-  name: 'panoTag',
+  name: 'tags',
   defaultValue: PANO_LABELS[0].id,
-  decode: (value) => value,
+  decode: (value) => {
+    let result = value
+
+    // handle legacy value from old URLs
+    const possibleLegacyValue = value.split(',')
+    if (possibleLegacyValue.length > 1) {
+      const transformedValue = possibleLegacyValue.reduce((acc, legacyValue) => {
+        const part = legacyValue.split('-')[1]
+        return `${acc}${part}`
+      }, 'pano')
+
+      const correctValue = PANO_LABELS.some(({ id }) => id === transformedValue)
+
+      // If value is not found or not correct, fall back to default value
+      result = correctValue ? transformedValue : panoTagParam.defaultValue
+    }
+
+    return result
+  },
   encode: (value) => value,
 }
 
