@@ -12,7 +12,7 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => ({
     pathname: 'some-url/',
     search:
-      'pano={"foo":"bar"}&panoTag=2020bi&randomParam="should-stay"&lagen=pano-pano2020bi_pano-pano2019bi',
+      'pano={"foo":"bar"}&tags=panobi&randomParam="should-stay"&lagen=pano-pano2020bi_pano-pano2019bi',
   }),
 }))
 
