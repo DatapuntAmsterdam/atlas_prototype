@@ -1,6 +1,7 @@
 import {
   Accordion,
   AccordionWrapper,
+  Alert,
   Article,
   breakpoint,
   Column,
@@ -117,6 +118,10 @@ const StyledAccordion = styled(Accordion)`
   margin-top: ${themeSpacing(2)};
 `
 
+const StyledAlert = styled(Alert)`
+  margin-top: ${themeSpacing(2)};
+`
+
 const StyledLink = styled(Link)`
   & > * {
     pointer-events: none;
@@ -182,6 +187,10 @@ const ArticleDetailPage = () => {
       image={coverImage}
       description={intro}
     >
+      <StyledAlert level="error">
+        Er is een storing waardoor niet alle publicaties, afbeeldingen en overige bestanden
+        beschikbaar zijn. Onze excuses, wij werken aan een oplossing.
+      </StyledAlert>
       {!loading && (
         <StyledRow>
           <StyledContentContainer hasImage={!!image}>
