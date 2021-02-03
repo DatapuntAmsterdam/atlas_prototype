@@ -142,20 +142,26 @@ export const panoTagParam: UrlParam<string> = {
   name: 'tags',
   defaultValue: PANO_LABELS[0].id,
   decode: (value) => {
-    let result = value
+    // Attempt to find the entry with a matching id.
+    const matched = PANO_LABELS.find(({ id }) => id === value)
 
-    // handle legacy value from old URLs
-    const possibleLegacyValue = value.split(',')
-    if (possibleLegacyValue.length > 1) {
-      result = possibleLegacyValue.reduce((acc, legacyValue) => {
-        const part = legacyValue.split('-')[1]
-        return `${acc}${part}`
-      }, 'pano')
+    if (matched) {
+      return matched.id
     }
-    const correctValue = PANO_LABELS.some(({ id }) => id === result)
 
-    // If value is not found or not correct, fall back to default value
-    return correctValue ? result : panoTagParam.defaultValue
+    // If no matching id was found, handle legacy values which are based on a collection of tags
+    // and find the matching label definition.
+    const legacyTags = value.split(',')
+    const legacyMatched = PANO_LABELS.find(({ tags }) =>
+      legacyTags.every((tag) => tags.includes(tag)),
+    )
+
+    if (legacyMatched) {
+      return legacyMatched.id
+    }
+
+    // If value is not found or not correct, fall back to default value.
+    return panoTagParam.defaultValue
   },
   encode: (value) => value,
 }
