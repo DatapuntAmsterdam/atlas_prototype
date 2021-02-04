@@ -104,6 +104,7 @@ export const endpointTypes = {
   vestiging: 'handelsregister/vestiging/',
   winkelgebied: 'vsd/winkgeb',
   woonplaats: 'bag/v1.1/woonplaats',
+  woningbouwplannenGebiedBouwblokWoningen: 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
 }
 
 export interface ServiceDefinition extends DetailAuthentication {
@@ -2359,6 +2360,44 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
           entries: [
             { term: 'Titel', description: result.title },
             { term: 'Categorie', description: result.categorie },
+          ],
+        },
+      ],
+    }),
+  },
+  [endpointTypes.woningbouwplannenGebiedBouwblokWoningen]: {
+    type: 'woningbouwplannen/gebied_bouwblok_woningen',
+    endpoint: 'v1/woningbouwplannen/gebied_bouwblok_woningen',
+    mapDetail: (result) => ({
+      title: 'Gebied, bouwblok en woningen',
+      items: [
+        {
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            {
+              term: 'Identificatie bouwblok',
+              description: result.id,
+            },
+            {
+              term: 'Volgnummer',
+              description: result.volgnummer,
+            },
+            {
+              term: 'Identificatie ligt in buurt',
+              description: result.ligtinGbdBrtIdentificatie,
+            },
+            {
+              term: 'Volgnummer ligt in buurt',
+              description: result.ligtinGbdBrtVolgnummer,
+            },
+            {
+              term: 'Aantal woningen',
+              description: result.aantalWoningen,
+            },
+            {
+              term: 'Aantal verblijfsobjecten',
+              description: result.aantalVerblijfsobjecten,
+            },
           ],
         },
       ],

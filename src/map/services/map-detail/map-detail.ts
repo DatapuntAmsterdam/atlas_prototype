@@ -28,6 +28,7 @@ export const pageEndpointTypeMapping = {
   'covid_19/alcoholverkoopverbod/': 'v1/covid_19/alcoholverkoopverbod/',
   'covid_19/mondmaskerverplichting/': 'v1/covid_19/mondmaskerverplichting/',
   'covid_19/gebiedsverbod/': 'v1/covid_19/gebiedsverbod/',
+  'woningbouwplannen/gebied_bouwblok_woningen/': 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
 }
 
 export const pageTypeToEndpoint = (type: string, subtype: string, id: string) => {
