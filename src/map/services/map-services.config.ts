@@ -105,6 +105,7 @@ export const endpointTypes = {
   winkelgebied: 'vsd/winkgeb',
   woonplaats: 'bag/v1.1/woonplaats',
   woningbouwplannenGebiedBouwblokWoningen: 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
+  woningbouwplannenBagPandSloopStatus: 'v1/woningbouwplannen/bag_pand_sloop_status/',
 }
 
 export interface ServiceDefinition extends DetailAuthentication {
@@ -2397,6 +2398,28 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Aantal verblijfsobjecten',
               description: result.aantalVerblijfsobjecten,
+            },
+          ],
+        },
+      ],
+    }),
+  },
+  [endpointTypes.woningbouwplannenBagPandSloopStatus]: {
+    type: 'woningbouwplannen/bag_pand_sloop_status',
+    endpoint: 'v1/woningbouwplannen/bag_pand_sloop_status',
+    mapDetail: (result) => ({
+      title: 'BAG pand en sloopstatus',
+      items: [
+        {
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            {
+              term: 'Identificatie',
+              description: result.id,
+            },
+            {
+              term: 'Status',
+              description: result.status,
             },
           ],
         },
