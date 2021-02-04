@@ -106,6 +106,7 @@ export const endpointTypes = {
   woonplaats: 'bag/v1.1/woonplaats',
   woningbouwplannenGebiedBouwblokWoningen: 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
   woningbouwplannenBagPandSloopStatus: 'v1/woningbouwplannen/bag_pand_sloop_status/',
+  woningbouwplannenStrategischeRuimtes: 'v1/woningbouwplannen/strategischeruimtes/',
 }
 
 export interface ServiceDefinition extends DetailAuthentication {
@@ -2420,6 +2421,64 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Status',
               description: result.status,
+            },
+          ],
+        },
+      ],
+    }),
+  },
+  [endpointTypes.woningbouwplannenStrategischeRuimtes]: {
+    type: 'woningbouwplannen/strategischeruimtes',
+    endpoint: 'v1/woningbouwplannen/strategischeruimtes',
+    mapDetail: (result) => ({
+      title: 'Strategische ruimtes',
+      items: [
+        {
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            {
+              term: 'Identificatie',
+              description: result.id,
+            },
+            {
+              term: 'Projectnaam',
+              description: result.projectnaam,
+            },
+            {
+              term: 'Cluster ID',
+              description: result.clusterId,
+            },
+            {
+              term: 'Clusternaam',
+              description: result.clusternaam,
+            },
+            {
+              term: 'Typologie',
+              description: result.typologie,
+            },
+            {
+              term: 'Ingreep',
+              description: result.ingreep,
+            },
+            {
+              term: 'Hoofd groenstructuur geraakt?',
+              description: result.raaktHoofdGroenstructuur,
+            },
+            {
+              term: 'Gebied ID',
+              description: result.gebiedId,
+            },
+            {
+              term: 'Gebiedsnaam',
+              description: result.gebiednaam,
+            },
+            {
+              term: 'Totaal aantal woningen',
+              description: result.totaalAantalWoningen,
+            },
+            {
+              term: 'Verschil Tussen huidig en na realisatie plan',
+              description: result.verschilTotaalPlanHuidig,
             },
           ],
         },

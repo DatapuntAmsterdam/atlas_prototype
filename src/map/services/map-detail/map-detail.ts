@@ -30,6 +30,7 @@ export const pageEndpointTypeMapping = {
   'covid_19/gebiedsverbod/': 'v1/covid_19/gebiedsverbod/',
   'woningbouwplannen/gebied_bouwblok_woningen/': 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
   'woningbouwplannen/bag_pand_sloop_status/': 'v1/woningbouwplannen/bag_pand_sloop_status/',
+  'woningbouwplannen/strategischeruimtes/': 'v1/woningbouwplannen/strategischeruimtes/',
 }
 
 export const pageTypeToEndpoint = (type: string, subtype: string, id: string) => {

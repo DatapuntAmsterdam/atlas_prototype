@@ -330,6 +330,16 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   connector_type?: string | null
   currentStatus?: string | null
   id?: string | null
+  clusterId?: string | null
+  clusternaam?: string | null
+  typologie?: string | null
+  ingreep?: string | null
+  raaktHoofdGroenstructuur?: string | null
+  gebiedId?: string | null
+  gebiednaam?: string | null
+  totaalAantalWoningen?: string | null
+  verschilTotaalPlanHuidig?: string | null
+  projectnaam?: string | null
   volgnummer?: string | null
   ligtinGbdBrtIdentificatie?: string | null
   ligtinGbdBrtVolgnummer?: string | null
