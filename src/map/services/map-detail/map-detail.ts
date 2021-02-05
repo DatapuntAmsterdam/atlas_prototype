@@ -31,6 +31,7 @@ export const pageEndpointTypeMapping = {
   'woningbouwplannen/gebied_bouwblok_woningen/': 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
   'woningbouwplannen/bag_pand_sloop_status/': 'v1/woningbouwplannen/bag_pand_sloop_status/',
   'woningbouwplannen/strategischeruimtes/': 'v1/woningbouwplannen/strategischeruimtes/',
+  'woningbouwplannen/woningbouwplan/': 'v1/woningbouwplannen/woningbouwplan/',
 }
 
 export const pageTypeToEndpoint = (type: string, subtype: string, id: string) => {

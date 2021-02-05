@@ -339,6 +339,21 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   gebiednaam?: string | null
   totaalAantalWoningen?: string | null
   verschilTotaalPlanHuidig?: string | null
+  projectId?: string | null
+  projectfase?: string | null
+  startBouw?: string | null
+  aantalWoningenSocialeHuur?: string | null
+  aantalWoningenMiddeldureHuur?: string | null
+  aantalWoningenDureHuurOfKoop?: string | null
+  aantalWoningenDureHuur?: string | null
+  aantalWoningenKoop?: string | null
+  aantalWoningenNaderTeBepalen?: string | null
+  aantalWoningenMetOnzelfstandigeWoningen?: string | null
+  gebiedcode?: string | null
+  projectgebied?: string | null
+  plaberum?: string | null
+  aantalWoningenTotaal?: string | null
+  aantalWoningenHuidig?: string | null
   projectnaam?: string | null
   volgnummer?: string | null
   ligtinGbdBrtIdentificatie?: string | null

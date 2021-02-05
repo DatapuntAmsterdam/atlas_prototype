@@ -104,6 +104,7 @@ export const endpointTypes = {
   vestiging: 'handelsregister/vestiging/',
   winkelgebied: 'vsd/winkgeb',
   woonplaats: 'bag/v1.1/woonplaats',
+  woningbouwplannen: 'v1/woningbouwplannen/woningbouwplan/',
   woningbouwplannenGebiedBouwblokWoningen: 'v1/woningbouwplannen/gebied_bouwblok_woningen/',
   woningbouwplannenBagPandSloopStatus: 'v1/woningbouwplannen/bag_pand_sloop_status/',
   woningbouwplannenStrategischeRuimtes: 'v1/woningbouwplannen/strategischeruimtes/',
@@ -2421,6 +2422,96 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               term: 'Status',
               description: result.status,
+            },
+          ],
+        },
+      ],
+    }),
+  },
+  [endpointTypes.woningbouwplannen]: {
+    type: 'woningbouwplannen/woningbouwplan',
+    endpoint: 'v1/woningbouwplannen/woningbouwplan',
+    mapDetail: (result) => ({
+      title: 'Woningbouwplannen',
+      items: [
+        {
+          type: DetailResultItemType.DefinitionList,
+          entries: [
+            {
+              term: 'Identificatie',
+              description: result.id,
+            },
+            {
+              term: 'Projectnaam',
+              description: result.projectnaam,
+            },
+            {
+              term: 'Project id',
+              description: result.projectId,
+            },
+            {
+              term: 'Projectfase',
+              description: result.projectfase,
+            },
+            {
+              term: 'Datum start bouw',
+              description: result.startBouw,
+            },
+            {
+              term: 'Aantal woningen sociale huur',
+              description: result.aantalWoningenSocialeHuur,
+            },
+            {
+              term: 'Aantal woningen middeldure huur',
+              description: result.aantalWoningenMiddeldureHuur,
+            },
+            {
+              term: 'Aantal woningen dure huur of koop',
+              description: result.aantalWoningenDureHuurOfKoop,
+            },
+            {
+              term: 'Aantal woningen dure huur',
+              description: result.aantalWoningenDureHuur,
+            },
+            {
+              term: 'Aantal woningen koop',
+              description: result.aantalWoningenKoop,
+            },
+            {
+              term: 'Aantal woningen nader te bepalen',
+              description: result.aantalWoningenNaderTeBepalen,
+            },
+            {
+              term: 'Aantal woningen met onzelfstandige woningen',
+              description: result.aantalWoningenMetOnzelfstandigeWoningen,
+            },
+            {
+              term: 'Gebiedscode',
+              description: result.gebiedcode,
+            },
+            {
+              term: 'Gebied',
+              description: result.gebied,
+            },
+            {
+              term: 'Projectgebied',
+              description: result.projectgebied,
+            },
+            {
+              term: 'Plaberum (Plan- en besluitvormingsproces ruimtelijke maatregelen)',
+              description: result.plaberum,
+            },
+            {
+              term: 'Totaal aantal woningen',
+              description: result.aantalWoningenTotaal,
+            },
+            {
+              term: 'Totaal aantal woningen huidig',
+              description: result.aantalWoningenHuidig,
+            },
+            {
+              term: 'Verschil Tussen huidig en na realisatie plan',
+              description: result.verschilTotaalPlanHuidig,
             },
           ],
         },
