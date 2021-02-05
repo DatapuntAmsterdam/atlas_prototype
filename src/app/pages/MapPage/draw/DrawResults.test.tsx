@@ -9,8 +9,7 @@ jest.mock('react-router-dom', () => ({
   // @ts-ignore
   ...jest.requireActual('react-router-dom'),
   useLocation: () => ({
-    search:
-      '?polygonen={"shouldBe": "removed"}&meten={"shouldAlsoBe": "removed"}&thisOne="should_not"',
+    search: '?geo={"shouldBe": "removed"}&meten={"shouldAlsoBe": "removed"}&thisOne="should_not"',
   }),
   useHistory: () => ({
     push: pushMock,
