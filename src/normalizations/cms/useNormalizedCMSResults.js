@@ -20,11 +20,50 @@ export const EDITORIAL_FIELD_TYPE_VALUES = {
 }
 
 // Drupal JSONapi encodes `&` in URLs, which React can't handle https://github.com/facebook/react/issues/6873#issuecomment-227906893
-function cleanupDrupalUri(uri) {
-  return uri.replace(/&amp;/g, '&')
+const cleanupDrupalUri = (uri) => uri.replace(/&amp;/g, '&')
+
+export const getLocaleFormattedDate = ({
+  field_publication_date,
+  field_publication_day,
+  field_publication_year,
+  field_publication_month,
+} = {}) => {
+  const year = parseInt(field_publication_year, 10)
+  const yearIsValidNumber = Number.isNaN(year) === false
+  const hasPossibleValidDate = field_publication_date?.length > 0 || yearIsValidNumber
+
+  if (!hasPossibleValidDate) {
+    return {
+      localeDate: '',
+      localeDateFormatted: '',
+    }
+  }
+
+  if (field_publication_date) {
+    return {
+      localeDate: field_publication_date,
+      localeDateFormatted: formatDate(new Date(field_publication_date.replace(' ', 'T'))),
+    }
+  }
+
+  const day = parseInt(field_publication_day, 10)
+  const monthIndex = parseInt(field_publication_month, 10)
+
+  const dateParts = [
+    year,
+    !Number.isNaN(monthIndex) && monthIndex - 1,
+    !Number.isNaN(day) && day,
+  ].filter(Boolean)
+
+  const localeDate = new Date(Date.UTC(...dateParts))
+
+  return {
+    localeDate,
+    localeDateFormatted: formatDate(localeDate, false),
+  }
 }
 
-const normalizeObject = (data) => {
+export const normalizeObject = (data) => {
   const {
     uuid,
     title,
@@ -35,9 +74,6 @@ const normalizeObject = (data) => {
     field_teaser,
     intro,
     field_special_type,
-    field_publication_date,
-    field_publication_year,
-    field_publication_month,
     field_file,
     media_image_url,
     field_link,
@@ -64,26 +100,7 @@ const normalizeObject = (data) => {
   linkProps = externalUrl ? { href: externalUrl, forwardedAs: 'a' } : linkProps
   linkProps = { ...linkProps, title } // Add the title attribute by default
 
-  let localeDate = field_publication_date
-
-  let localeDateFormatted =
-    field_publication_date && formatDate(new Date(field_publication_date.replace(' ', 'T')))
-  /**
-   * Sometimes we don't get a field_publication_date, but only a field_publication_year and / or field_publication_month
-   * Then we need to convert it to a locale date that only shows the year or year and month
-   */
-  if (!field_publication_date && (field_publication_year || field_publication_month)) {
-    // Month (undefined or a string) - 1, check https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/UTC
-    const monthNumber = parseInt(field_publication_month, 10)
-    const month = monthNumber > 0 ? monthNumber - 1 : 0
-    localeDate = new Date(Date.UTC(field_publication_year, month, 1, 0, 0, 0))
-    localeDateFormatted = formatDate(
-      localeDate,
-      false,
-      !!field_publication_month,
-      !!field_publication_year,
-    )
-  }
+  const { localeDate, localeDateFormatted } = getLocaleFormattedDate(otherFields)
 
   const imageIsVertical = type === CmsType.Publication
 
