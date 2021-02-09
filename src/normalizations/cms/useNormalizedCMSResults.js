@@ -63,6 +63,29 @@ export const getLocaleFormattedDate = ({
   }
 }
 
+export const getLinkProps = ({ type, uuid, field_link, field_special_type, title }, slug) => {
+  let to = {}
+
+  if (EDITORIAL_DETAIL_ACTIONS[type]) {
+    if (type === CmsType.Special) {
+      to = EDITORIAL_DETAIL_ACTIONS[type](uuid, field_special_type, slug)
+    } else {
+      to = EDITORIAL_DETAIL_ACTIONS[type](uuid, slug)
+    }
+  }
+
+  let linkProps = { to, forwardedAs: pickLinkComponent(to) }
+  const externalUrl = field_link?.uri ? cleanupDrupalUri(field_link?.uri) : null
+
+  linkProps = externalUrl ? { href: externalUrl, forwardedAs: 'a' } : linkProps
+  linkProps = { ...linkProps, title } // Add the title attribute by default
+
+  return {
+    linkProps,
+    to,
+  }
+}
+
 export const normalizeObject = (data) => {
   const {
     uuid,
@@ -76,7 +99,6 @@ export const normalizeObject = (data) => {
     field_special_type,
     field_file,
     media_image_url,
-    field_link,
     field_links,
     field_related,
     ...otherFields
@@ -84,32 +106,17 @@ export const normalizeObject = (data) => {
 
   const slug = toSlug(title)
 
-  // The type SPECIALS has a different url structure
-  // eslint-disable-next-line no-nested-ternary
-  const to = EDITORIAL_DETAIL_ACTIONS[type]
-    ? type === CmsType.Special
-      ? EDITORIAL_DETAIL_ACTIONS[type](uuid, field_special_type, slug)
-      : EDITORIAL_DETAIL_ACTIONS[type](uuid, slug)
-    : {}
-
-  // By default use the internal router, fallback on a div if there's no link.
-  // If there's an externalUrl set, override the linkProps.
-  let linkProps = to ? { to, forwardedAs: pickLinkComponent(to) } : { forwardedAs: 'div' }
-  const externalUrl = field_link?.uri ? cleanupDrupalUri(field_link?.uri) : null
-
-  linkProps = externalUrl ? { href: externalUrl, forwardedAs: 'a' } : linkProps
-  linkProps = { ...linkProps, title } // Add the title attribute by default
-
+  const { linkProps, to } = getLinkProps(data, slug)
   const { localeDate, localeDateFormatted } = getLocaleFormattedDate(otherFields)
 
-  const imageIsVertical = type === CmsType.Publication
+  const isPublicationType = type === CmsType.Publication
 
   const teaserImage = teaser_url && teaser_url
   const coverImage = media_image_url && media_image_url
 
   // Construct the file url when the type is PUBLICATION
   let fileUrl
-  if (type === CmsType.Publication) {
+  if (isPublicationType) {
     const { url } = field_file ? field_file.field_media_file.uri : {}
     fileUrl = url
   }
@@ -134,7 +141,7 @@ export const normalizeObject = (data) => {
     body: body && body.value,
     teaserImage,
     coverImage,
-    imageIsVertical,
+    imageIsVertical: isPublicationType,
     shortTitle: short_title,
     teaser: field_teaser,
     intro,

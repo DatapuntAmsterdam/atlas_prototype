@@ -1,9 +1,17 @@
 import { toArticleDetail } from '../../app/links'
+import { toSpecialDetail } from '../../store/redux-first-router/actions'
 import { CmsType } from '../../shared/config/cms.config'
 import useNormalizedCMSResults, {
+  getLinkProps,
   getLocaleFormattedDate,
   normalizeObject,
 } from './useNormalizedCMSResults'
+
+jest.mock('../../app/links')
+jest.mock('../../store/redux-first-router/actions')
+
+toArticleDetail.mockImplementation(() => 'to-article')
+toSpecialDetail.mockImplementation(() => 'to-special')
 
 describe('useNormalizedCMSResults', () => {
   describe('getLocaleFormattedDate', () => {
@@ -87,45 +95,98 @@ describe('useNormalizedCMSResults', () => {
     /* eslint-enable camelcase */
   })
 
+  const input = {
+    uuid: 'id',
+    title: 'title',
+    type: 'foo',
+    body: {
+      value: 'body',
+    },
+    teaser_url: 'teaser_url',
+    media_image_url: 'media_image_url',
+
+    short_title: 'short_title',
+    field_teaser: 'field_teaser',
+    intro: 'intro',
+    field_special_type: 'field_special_type',
+    field_publication_date: '',
+  }
+
+  const output = {
+    key: input.uuid,
+    id: input.uuid,
+    title: input.title,
+    type: input.type,
+    body: input.body.value,
+    teaserImage: input.teaser_url,
+    coverImage: input.media_image_url,
+    imageIsVertical: false,
+    shortTitle: input.short_title,
+    teaser: input.field_teaser,
+    intro: input.intro,
+    specialType: input.field_special_type,
+    fileUrl: undefined,
+    localeDate: '',
+    localeDateFormatted: '',
+    slug: input.title,
+    to: {},
+    related: [],
+  }
+
+  describe('getLinkProps', () => {
+    it('sets the "to" prop', () => {
+      expect(
+        getLinkProps(
+          {
+            ...input,
+            type: CmsType.Article,
+          },
+          input.title,
+        ),
+      ).toMatchObject({
+        to: 'to-article',
+      })
+    })
+
+    it('sets the "to" prop for type special', () => {
+      // eslint-disable-next-line camelcase
+      const field_special_type = 'foo'
+      expect(
+        getLinkProps(
+          {
+            ...input,
+            type: CmsType.Special,
+            field_special_type,
+          },
+          input.title,
+        ),
+      ).toMatchObject({
+        to: 'to-special',
+      })
+    })
+
+    it('sets the "linkProps" prop', () => {
+      const href = 'href'
+      expect(
+        getLinkProps(
+          {
+            ...input,
+            field_link: {
+              uri: href,
+            },
+          },
+          input.title,
+        ),
+      ).toMatchObject({
+        linkProps: {
+          forwardedAs: 'a',
+          href,
+        },
+      })
+    })
+  })
+
   describe('normalizeObject', () => {
-    const input = {
-      uuid: 'id',
-      title: 'title',
-      type: 'foo',
-      body: {
-        value: 'body',
-      },
-      teaser_url: 'teaser_url',
-      media_image_url: 'media_image_url',
-
-      short_title: 'short_title',
-      field_teaser: 'field_teaser',
-      intro: 'intro',
-      field_special_type: 'field_special_type',
-      field_publication_date: '',
-    }
-
-    const output = {
-      key: input.uuid,
-      id: input.uuid,
-      title: input.title,
-      type: input.type,
-      body: input.body.value,
-      teaserImage: input.teaser_url,
-      coverImage: input.media_image_url,
-      imageIsVertical: false,
-      shortTitle: input.short_title,
-      teaser: input.field_teaser,
-      intro: input.intro,
-      specialType: input.field_special_type,
-      fileUrl: undefined,
-      localeDate: '',
-      localeDateFormatted: '',
-      slug: input.title,
-      to: {},
-      related: [],
-    }
-
     it('normalizes the data to use in the application', () => {
       expect(normalizeObject(input)).toMatchObject(output)
     })
@@ -140,34 +201,6 @@ describe('useNormalizedCMSResults', () => {
       ).toMatchObject({
         imageIsVertical: true,
         fileUrl: 'url',
-      })
-    })
-
-    it('sets the "to" prop', () => {
-      expect(
-        normalizeObject({
-          ...input,
-          type: CmsType.Article,
-        }),
-      ).toMatchObject({
-        to: toArticleDetail(input.uuid, output.slug),
-      })
-    })
-
-    it('sets the link props', () => {
-      const href = 'href'
-      expect(
-        normalizeObject({
-          ...input,
-          field_link: {
-            uri: href,
-          },
-        }),
-      ).toMatchObject({
-        linkProps: {
-          forwardedAs: 'a',
-          href,
-        },
       })
     })
 
@@ -198,6 +231,7 @@ describe('useNormalizedCMSResults', () => {
     })
 
     it('sets the links prop', () => {
+      // eslint-disable-next-line camelcase
       const field_links = [
         { uri: 'http://example.com?foo=bar&amp;baz=qux', title: 'Test', options: [] },
         { uri: 'internal:/test/', title: 'Test 2', options: [] },
