@@ -1,18 +1,18 @@
-/* eslint-disable no-console */
-const buildXML = require('./buildXML')
+/* eslint-disable no-console,@typescript-eslint/no-var-requires */
 const fs = require('fs')
 const path = require('path')
+const buildXML = require('./buildXML')
 
 const src = path.join(__dirname, '../public/static')
 
 buildXML()
   .then((result) => {
-    fs.writeFile(path.join(src, 'sitemap.xml'), result, function (err) {
+    fs.writeFile(path.join(src, 'sitemap.xml'), result, (err) => {
       if (err) {
         return console.log(err)
       }
 
-      console.log('The file was saved!')
+      return console.log('The file was saved!')
     })
   })
   .catch((e) => {

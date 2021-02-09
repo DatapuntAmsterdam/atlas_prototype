@@ -1,8 +1,9 @@
 import { MAP } from './selectors'
 
 declare global {
-  // eslint-disable-next-line no-redeclare
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       checkAerialPhotos(): void
       checkTopography(): void
@@ -51,7 +52,7 @@ Cypress.Commands.add('checkTopography', () => {
     })
 })
 
-Cypress.Commands.add('checkMapLayerCategory', (category, categoryTestId) => {
+Cypress.Commands.add('checkMapLayerCategory', (category: string, categoryTestId?: string) => {
   cy.get(MAP.mapContainer).should('be.visible')
   cy.get(MAP.mapLegend).should('not.exist')
 

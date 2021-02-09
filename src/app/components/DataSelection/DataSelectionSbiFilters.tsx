@@ -136,7 +136,7 @@ const DataSelectionSbiFilters: FunctionComponent<Props> = ({ availableFilters, a
                   >
                     <span
                       className={`c-sbi-filter__item-label ${
-                        !option.label && 'c-sbi-filter__item-label--empty-value'
+                        !option.label ? 'c-sbi-filter__item-label--empty-value' : ''
                       }`}
                     >
                       <span className="qa-option-label">{option.label}</span>

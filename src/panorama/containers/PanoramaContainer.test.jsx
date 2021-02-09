@@ -1,7 +1,7 @@
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { mount, shallow } from 'enzyme'
 import { createMemoryHistory } from 'history'
-import { Router } from 'react-router'
+import { Router } from 'react-router-dom'
 import configureMockStore from 'redux-mock-store'
 import { toHome } from '../../app/links'
 import { getMapOverlays } from '../../map/ducks/map/selectors'

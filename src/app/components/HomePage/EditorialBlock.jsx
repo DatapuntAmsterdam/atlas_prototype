@@ -35,9 +35,7 @@ const EditorialBlock = ({ title, list, showMoreProps = {}, showContentType = fal
   const { results, fetchData, loading, error } = useFromCMS(list)
 
   useEffect(() => {
-    ;(async () => {
-      await fetchData()
-    })()
+    fetchData()
   }, [])
 
   const specials =

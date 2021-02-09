@@ -77,6 +77,7 @@ const NoDataSearchResults: FunctionComponent<NoDataSearchResultsProps> = ({
       {!!unauthorized && (
         <Paragraph>
           Medewerkers/ketenpartners van Gemeente Amsterdam kunnen{' '}
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link variant="inline" as="button" onClick={handleLogin}>
             inloggen
           </Link>{' '}

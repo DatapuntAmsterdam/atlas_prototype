@@ -13,7 +13,7 @@ import MapLayerSearchResults from './MapLayerSearchResults'
 
 export interface MapSearchResultsProps {
   query: string
-  results: any[]
+  results: Array<{ count: number; label: string; type: MapType; results: any[] }>
   label: string
   withPagination: boolean
   isOverviewPage: boolean
@@ -24,55 +24,9 @@ enum MapType {
   Collection = 'map-collection',
 }
 
-const MapSearchResults: FunctionComponent<MapSearchResultsProps> = ({
-  query,
-  results,
-  label,
-  withPagination,
-  isOverviewPage,
-}) => {
-  // Get the total count for all data types
-  const totalCount = results.reduce((acc, cur) => acc + cur.count, 0)
-  const mapLayerData = results.find(({ type }) => type === MapType.Layer)
-  const mapCollectionData = results.find(({ type }) => type === MapType.Collection)
-
-  return totalCount > 0 ? (
-    <>
-      {mapLayerData && (
-        <SearchResults
-          type={MapType.Layer}
-          results={mapLayerData.results}
-          label={mapLayerData.label}
-          totalCount={mapLayerData.count}
-          withPagination={withPagination}
-          icon={<IconMap />}
-          resultsComponent={MapLayerSearchResults}
-          isOverviewPage={isOverviewPage}
-        />
-      )}
-      {mapCollectionData && (
-        <SearchResults
-          type={MapType.Collection}
-          results={mapCollectionData.results}
-          label={mapCollectionData.label}
-          totalCount={mapCollectionData.count}
-          withPagination={withPagination}
-          icon={<IconMapLayers />}
-          resultsComponent={MapCollectionSearchResults}
-          isOverviewPage={isOverviewPage}
-        />
-      )}
-    </>
-  ) : (
-    <NoSearchResults query={query} label={label} to={toMapSearch(null, false, false, false)} />
-  )
-}
-
-export default MapSearchResults
-
 interface SearchResultsProps {
   type: MapType
-  results: any
+  results: any[]
   label: string
   totalCount: number
   withPagination: boolean
@@ -116,3 +70,49 @@ const SearchResults: FunctionComponent<SearchResultsProps> = ({
     null
   )
 }
+
+const MapSearchResults: FunctionComponent<MapSearchResultsProps> = ({
+  query,
+  results,
+  label,
+  withPagination,
+  isOverviewPage,
+}) => {
+  // Get the total count for all data types
+  const totalCount = results.reduce((acc: number, cur) => acc + cur.count, 0)
+  const mapLayerData = results.find(({ type }) => type === MapType.Layer)
+  const mapCollectionData = results.find(({ type }) => type === MapType.Collection)
+
+  return totalCount > 0 ? (
+    <>
+      {mapLayerData && (
+        <SearchResults
+          type={MapType.Layer}
+          results={mapLayerData.results}
+          label={mapLayerData.label}
+          totalCount={mapLayerData.count}
+          withPagination={withPagination}
+          icon={<IconMap />}
+          resultsComponent={MapLayerSearchResults}
+          isOverviewPage={isOverviewPage}
+        />
+      )}
+      {mapCollectionData && (
+        <SearchResults
+          type={MapType.Collection}
+          results={mapCollectionData.results}
+          label={mapCollectionData.label}
+          totalCount={mapCollectionData.count}
+          withPagination={withPagination}
+          icon={<IconMapLayers />}
+          resultsComponent={MapCollectionSearchResults}
+          isOverviewPage={isOverviewPage}
+        />
+      )}
+    </>
+  ) : (
+    <NoSearchResults query={query} label={label} to={toMapSearch(null, false, false, false)} />
+  )
+}
+
+export default MapSearchResults

@@ -58,9 +58,9 @@ const MapSearchMarker: FunctionComponent<MarkerProps> = ({ location }) => {
   }
 
   useMapEvents({
-    click: (event) => {
+    click: async (event) => {
       setPositionFromSnapPoint(SnapPoint.Halfway)
-      handleMapClick(event)
+      await handleMapClick(event)
     },
   })
 

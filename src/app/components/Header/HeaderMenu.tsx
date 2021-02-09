@@ -129,13 +129,13 @@ const HeaderMenu: FunctionComponent<HeaderMenuProps & ComponentProps<typeof Styl
       <MenuItem>
         <MenuButton
           type="button"
-          onClick={async () => {
+          onClick={() => {
             trackEvent({
               category: 'navigation',
               action: 'main-menu',
               name: 'Feedback',
             })
-            await setMenuOpen(false)
+            setMenuOpen(false)
             openFeedbackForm()
             dropFocus()
           }}

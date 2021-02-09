@@ -16,9 +16,8 @@ import marked from 'marked'
 import { FunctionComponent, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { useHistory } from 'react-router'
 import { DcatTemporal } from '../../../api/dcatd/datasets'
 import { getUserScopes } from '../../../shared/ducks/user/user'
 import { dcatdScopes } from '../../../shared/services/auth/auth'
@@ -33,8 +32,8 @@ import PromiseResult from '../../components/PromiseResult/PromiseResult'
 import { routing } from '../../routes'
 import { NotFoundError } from '../../../shared/services/api/customError'
 
-function kebabCase(input?: string) {
-  return input?.toLowerCase().replace(/[: ][ ]*/g, '-')
+function kebabCase(input?: string): string {
+  return input?.toLowerCase().replace(/[: ][ ]*/g, '-') ?? ''
 }
 
 /**
@@ -165,7 +164,7 @@ const DatasetDetailPage: FunctionComponent = () => {
                               variant="primaryInverted"
                               type="button"
                               iconLeft={<DocumentEdit />}
-                              onClick={() => redirectToDcatd(dataset['dct:identifier'])}
+                              onClick={() => redirectToDcatd(dataset['dct:identifier'] as string)}
                             >
                               Wijzigen
                             </Button>

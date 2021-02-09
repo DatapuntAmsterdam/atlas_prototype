@@ -2,6 +2,7 @@ import { DocumentNode, GraphQLFormattedError } from 'graphql'
 import { useQuery } from 'urql'
 import { ErrorExtensions } from '../../models/graphql'
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 const usePagination = (query: DocumentNode, variables: Object, resolver: string | string[]) => {
   const [result] = useQuery({
     query,
@@ -15,7 +16,7 @@ const usePagination = (query: DocumentNode, variables: Object, resolver: string 
     data && !Array.isArray(resolver) && data[resolver] ? data[resolver] : {}
 
   if (data && Array.isArray(resolver)) {
-    const allCounts = resolver.map((key) => data[key] && data[key].totalCount)
+    const allCounts: number[] = resolver.map((key) => data[key] && data[key].totalCount)
 
     totalCount = allCounts.reduce((acc, cur) => acc + cur)
     filters = data.filters ? data.filters : []

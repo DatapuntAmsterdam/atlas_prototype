@@ -53,6 +53,7 @@ class PanoramaContainer extends Component {
     this.loadPanoramaScene = this.loadPanoramaScene.bind(this)
     this.onClose = this.onClose.bind(this)
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     this.updateOrientationDebounced = debounce(this.updateOrientation, 300, {
       leading: true,
       trailing: true,
@@ -131,6 +132,7 @@ class PanoramaContainer extends Component {
     if (panoramaState.image) {
       loadScene(
         this.panoramaViewer,
+        // eslint-disable-next-line @typescript-eslint/unbound-method
         this.hotspotClickHandler,
         panoramaState.image,
         heading,
@@ -173,23 +175,22 @@ class PanoramaContainer extends Component {
         data-testid="panoramaContainer"
       >
         <div
-          ref={
-            // eslint-disable-next-line
-            (el) => (this.panoramaRef = el)
-          }
-          role="button"
+          // eslint-disable-next-line no-return-assign
+          ref={(el) => (this.panoramaRef = el)}
           tabIndex="-1"
           className="c-panorama__marzipano js-marzipano-viewer"
         />
 
         <ToggleFullscreen
           isFullscreen={isFullscreen}
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           onToggleFullscreen={this.toggleFullscreen}
           alignLeft
           title="Panoramabeeld"
         />
 
         <StyledControlButton
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           onClick={this.onClose}
           aria-label="Panoramabeeld sluiten"
           icon={<Close />}

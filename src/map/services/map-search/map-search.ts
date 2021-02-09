@@ -109,7 +109,9 @@ export const fetchRelatedForUser = (user: UserState) => (
           results.map((result) => ({
             ...result,
             properties: {
+              // eslint-disable-next-line no-underscore-dangle
               uri: result._links.self.href,
+              // eslint-disable-next-line no-underscore-dangle
               display: result._display,
               type: resource.type,
               parent: relatableFeature.properties.type,

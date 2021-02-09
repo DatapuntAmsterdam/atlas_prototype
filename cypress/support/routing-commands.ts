@@ -1,8 +1,9 @@
 export {} // indicate that this is a module
 
 declare global {
-  // eslint-disable-next-line no-redeclare
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       defineGeoSearchRoutes(): void
       defineAddressDetailRoutes(): void

@@ -92,27 +92,18 @@ const StyledIcon = styled(Icon)`
   margin-left: ${themeSpacing(1)};
   fill: ${themeColor('primary', 'main')};
 `
-
-export interface MapCollectionSearchResultsProps {
-  // TODO: Properly type the results
-  results: any[]
+interface MapCollectionCardProps {
+  result: {
+    title: string
+    href: string
+    mapLayers: Array<{ id: string; title: string }>
+    meta: {
+      thumbnail: string
+    }
+  }
 }
 
 const MAX_ITEMS = 4
-
-const MapCollectionSearchResults: FunctionComponent<MapCollectionSearchResultsProps> = ({
-  results,
-}) => (
-  <CardContainer>
-    {results.map((result) => (
-      <MapCollectionCard key={result.id} result={result} />
-    ))}
-  </CardContainer>
-)
-
-interface MapCollectionCardProps {
-  result: any
-}
 
 const MapCollectionCard: FunctionComponent<MapCollectionCardProps> = ({ result }) => {
   const [expanded, setExpanded] = useState(false)
@@ -125,7 +116,7 @@ const MapCollectionCard: FunctionComponent<MapCollectionCardProps> = ({ result }
     <CardWrapper>
       <StyledCard>
         <CardHeader href={result.href}>
-          <CardImage src={environment.CMS_ROOT + result.meta.thumbnail} alt="" />
+          <CardImage src={`${environment.CMS_ROOT}${result.meta.thumbnail}`} alt={result.title} />
           <CardHeadingContainer>
             <CardHeaderIcon inline size={16}>
               <MapLayers />
@@ -164,5 +155,20 @@ const MapCollectionCard: FunctionComponent<MapCollectionCardProps> = ({ result }
     </CardWrapper>
   )
 }
+
+export interface MapCollectionSearchResultsProps {
+  // TODO: Properly type the results
+  results: any[]
+}
+
+const MapCollectionSearchResults: FunctionComponent<MapCollectionSearchResultsProps> = ({
+  results,
+}) => (
+  <CardContainer>
+    {results.map((result) => (
+      <MapCollectionCard key={result.id} result={result} />
+    ))}
+  </CardContainer>
+)
 
 export default MapCollectionSearchResults

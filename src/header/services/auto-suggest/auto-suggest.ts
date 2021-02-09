@@ -1,4 +1,4 @@
-import SearchType from '../../../app/pages/SearchPage/constants'
+import { SearchType } from '../../../app/pages/SearchPage/constants'
 import joinUrl from '../../../app/utils/joinUrl'
 import environment from '../../../environment'
 import { CmsType } from '../../../shared/config/cms.config'
@@ -82,9 +82,11 @@ function formatResponse(
       return {
         category: item.label,
         index: indexInTotal,
+        // eslint-disable-next-line no-underscore-dangle
         label: content._display,
         uri: content.uri,
         type: item.type,
+        // eslint-disable-next-line no-underscore-dangle
         subType: (item.type === 'data' && content._display.toLowerCase()) || undefined,
       }
     }),

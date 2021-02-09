@@ -30,7 +30,7 @@ const AutoSuggestCategory: FunctionComponent<AutoSuggestCategoryProps> = ({
       <ul>
         {content.map((suggestion) => (
           <AutoSuggestItem
-            key={suggestion.label + suggestion.index}
+            key={`${suggestion.label}${suggestion.index}`}
             suggestion={suggestion}
             content={suggestion.label}
             highlightValue={highlightValue}

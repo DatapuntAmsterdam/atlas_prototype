@@ -3,6 +3,7 @@ import SEARCH_CONFIG from './search-config'
 import isObject from '../is-object'
 
 function formatLabel(item) {
+  // eslint-disable-next-line no-underscore-dangle
   let label = item._display
 
   if (item.type === 'gebied') {
@@ -31,6 +32,7 @@ export function formatLinks(slug, links) {
       label: formatLabel(item),
       type_adres: item.type_adres,
       vbo_status: Array.isArray(item.vbo_status) ? item.vbo_status[0] : item.vbo_status,
+      // eslint-disable-next-line no-underscore-dangle
       endpoint: item._links.self.href,
       subtype,
       subtypeLabel,
@@ -55,7 +57,9 @@ export function formatCategory(slug, endpointSearchResults) {
     specialAuthScope: endpointConfig.specialAuthScope || null,
     next:
       (isObject(endpointSearchResults) &&
+        // eslint-disable-next-line no-underscore-dangle
         endpointSearchResults._links &&
+        // eslint-disable-next-line no-underscore-dangle
         endpointSearchResults._links.next.href) ||
       null,
   }

@@ -10,7 +10,9 @@ interface DecodedToken {
 
 function decodeToken(token: string): DecodedToken | null {
   try {
-    return JSON.parse(window.atob(token.split('.')[1].replace('-', '+').replace('_', '/')))
+    return JSON.parse(
+      window.atob(token.split('.')[1].replace('-', '+').replace('_', '/')),
+    ) as DecodedToken
   } catch {
     return null
   }

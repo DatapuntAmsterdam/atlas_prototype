@@ -34,12 +34,14 @@ describe('Search data', () => {
         })
     })
     it('Should be able to navigate through the autosuggest results with arrow keys', () => {
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(1000)
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}{downarrow}{downarrow}{downarrow}', {
         delay: 60,
       })
       cy.get(DATA_SEARCH.autosuggestDropdownItemActive).should('contain', 'Panoramabeelden')
       cy.get(DATA_SEARCH.input).should('have.value', 'Panoramabeelden')
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(500)
       cy.get(DATA_SEARCH.autoSuggestInput).type('{downarrow}')
       cy.get(DATA_SEARCH.autosuggestDropdownItemActive).contains('Cameratoezichtgebieden')

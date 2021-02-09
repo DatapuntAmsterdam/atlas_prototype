@@ -1,10 +1,13 @@
-/* eslint-disable camelcase */
 import { AlertLevel } from '@amsterdam/asc-ui'
 import { Position } from 'geojson'
 import { LocationDescriptor, LocationDescriptorObject } from 'history'
 import { ReactNode } from 'react'
-import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import AuthScope from '../../shared/services/api/authScope'
+import { Definition } from '../../detail/services/glossary.constant'
+
+export type InfoBoxProps = {
+  meta?: DetailResultItemDefinitionListEntry[]
+} & Pick<Definition, 'url' | 'description' | 'plural'>
 
 // TODO: Revisit the type information here once the map services have been made type safe (also come up with shorter names).
 export interface DetailResult {
@@ -144,7 +147,7 @@ interface ApiDescription {
   omschrijving?: string
 }
 
-interface ApiLink {
+export interface ApiLink {
   href: string | null
 }
 
@@ -179,7 +182,23 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
     self?: ApiLink
   } | null
   buurt?: string | null
+  eigenaar?: string | null
+  oppervlakte?: string | null
+  datering?: string | null
+  hoort_bij_monument?: { _links: { self: ApiLink } } | null
+  dossiernr?: string | null
+  dossier_type?: string | null
+  type_adres?: string | null
+  situering_nummeraanduiding?: string | null
+  vbo_status?: string | { status: string | null } | null
+  gebruiksdoel?: string[] | null
+  betreft_nummeraanduiding?: {
+    _links?: {
+      self?: ApiLink
+    }
+  } | null
   _buurt?: string | null
+  object_href?: string | null
   buurtcombinatie?: string | null
   _buurtcombinatie?: string | null
   _stadsdeel?: string | null
@@ -194,7 +213,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   gebruik?: string | null
   aantal_kamers?: string | null
   verdieping_toegang?: string | null
-  toegang?: string | null
+  toegang?: string[] | null
   reden_opvoer?: string | null
   eigendomsverhouding?: string | null
   verblijfsobject?: {
@@ -361,7 +380,7 @@ export interface PotentialApiResult extends ApiDescription, ApiLink, ApiDisplay 
   aantalWoningen?: string | null
   aantalVerblijfsobjecten?: string | null
   straatnaam?: string | null
-  regimes?: string | null
+  regimes?: DetailResultItemTableValue[] | null
   gebied_omschrijving?: string | null
   construction_year?: string | null
   monumental_status?: string | null

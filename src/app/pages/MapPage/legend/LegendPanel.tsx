@@ -32,7 +32,7 @@ const StyledMapPanelContent = styled(MapPanelContent)`
   }
 `
 
-export interface LegendPanelProps extends Omit<MapPanelContentProps, 'title'> {}
+export type LegendPanelProps = Omit<MapPanelContentProps, 'title'>
 
 const LegendPanel: FunctionComponent<LegendPanelProps> = ({ ...otherProps }) => {
   const { panelLayers } = useContext(MapContext)

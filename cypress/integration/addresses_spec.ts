@@ -53,18 +53,20 @@ describe('addresses module', () => {
             .and('be.visible')
 
           // get the position of the category in the th's of the table
-          cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`).each((th, index) => {
-            // if the position is equal to the category
-            if (th[0].innerText === category) {
-              // get al the content the td's with the same position as the categoryGroup they all
-              // should contain the same value as the `selectedFilter`
-              cy.get(DATA_SELECTION_TABLE.row)
-                .find(`${DATA_SELECTION_TABLE.cell}:nth-child(${index + 1})`)
-                .contains(selectedFilter)
-                .should('exist')
-                .and('be.visible')
-            }
-          })
+          cy.get(`${DATA_SELECTION_TABLE.head} ${DATA_SELECTION_TABLE.cell}`).each(
+            (th, index: number) => {
+              // if the position is equal to the category
+              if (th[0].innerText === category) {
+                // get al the content the td's with the same position as the categoryGroup they all
+                // should contain the same value as the `selectedFilter`
+                cy.get(DATA_SELECTION_TABLE.row)
+                  .find(`${DATA_SELECTION_TABLE.cell}:nth-child(${index + 1})`)
+                  .contains(selectedFilter)
+                  .should('exist')
+                  .and('be.visible')
+              }
+            },
+          )
         })
     })
   })
@@ -235,6 +237,7 @@ describe('open address', () => {
     cy.wait('@getVerblijfsobject')
 
     // Rendering after this request takes some time on server
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(500)
     cy.get(ADDRESS_PAGE.resultsPanel).should('exist').and('be.visible')
     cy.get(ADDRESS_PAGE.resultsPanel).get(DETAIL_PANEL.heading).contains('Ad Windighof 2')

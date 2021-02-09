@@ -1,8 +1,9 @@
 import { DATA_SEARCH, HOMEPAGE } from './selectors'
 
 declare global {
-  // eslint-disable-next-line no-redeclare
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       checkAutoSuggestFirstOfAll(searchTerm: string, result: string): void
       checkAutoSuggestFirstofCategory(searchTerm: string, category: string, result: string): void
@@ -28,6 +29,7 @@ Cypress.Commands.add('checkAutoSuggestFirstOfAll', (searchTerm: string, result: 
   cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
   cy.get(DATA_SEARCH.autoSuggest).type(searchTerm, { delay: 80 })
   cy.wait('@getTypeAhead')
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(500)
   cy.get(DATA_SEARCH.autoSuggestDropDownItem).first().should('have.text', result)
   cy.get(HOMEPAGE.buttonSearch).click()
@@ -44,6 +46,7 @@ Cypress.Commands.add(
     cy.get(DATA_SEARCH.searchBarFilter).select('Alle zoekresultaten')
     cy.get(DATA_SEARCH.autoSuggest).type(searchTerm, { delay: 80 })
     cy.wait('@getTypeAhead')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(500)
     cy.get(DATA_SEARCH.autoSuggest).click()
     cy.get(DATA_SEARCH.autoSuggestCategory)
@@ -84,7 +87,7 @@ Cypress.Commands.add(
   },
 )
 
-Cypress.Commands.add('searchWithFilter', (category, searchTerm) => {
+Cypress.Commands.add('searchWithFilter', (category: string, searchTerm: string) => {
   cy.get(DATA_SEARCH.searchBarFilter).select(category)
   cy.get(DATA_SEARCH.input).type(searchTerm)
   cy.get(DATA_SEARCH.form).submit()

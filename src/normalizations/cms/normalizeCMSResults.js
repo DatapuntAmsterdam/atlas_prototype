@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { toArticleDetail, toPublicationDetail } from '../../app/links'
 import formatDate from '../../app/utils/formatDate'
 import pickLinkComponent from '../../app/utils/pickLinkComponent'
@@ -166,9 +166,11 @@ const normalizeCMSResults = (data) => {
     const dataArray = data.results || data
 
     // Return different format when the data include links to other endpoints
+    // eslint-disable-next-line no-underscore-dangle
     return data._links
       ? {
           data: dataArray.map((dataItem) => normalizeObject(dataItem)),
+          // eslint-disable-next-line no-underscore-dangle
           links: data._links,
         }
       : dataArray.map((dataItem) => normalizeObject(dataItem))

@@ -1,8 +1,9 @@
 import { DETAIL_PANEL } from './selectors'
 
 declare global {
-  // eslint-disable-next-line no-redeclare
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       checkTermAndDefinition(
         definitionlistNumber: number,
@@ -61,7 +62,7 @@ Cypress.Commands.add(
 )
 
 Cypress.Commands.add('checkInfoBoxes', (arrayTerms: string[]) => {
-  cy.wrap(arrayTerms).each((term, i) => {
+  cy.wrap(arrayTerms).each((term: string, i) => {
     cy.get(DETAIL_PANEL.buttonInfo).eq(i).click()
     cy.contains(`Uitleg over ${term}`).should('be.visible')
     cy.get('[class*="DetailInfoBox"]').find(DETAIL_PANEL.buttonClose).eq(0).click()

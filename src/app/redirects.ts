@@ -5,6 +5,7 @@ import PARAMETERS from '../store/parameters'
 import matomoInstance from './matomo'
 import { MAIN_PATHS, routing } from './routes'
 import getVerblijfsobjectIdFromAddressQuery from './utils/getVerblijfsobjectIdFromAddressQuery'
+import { Environment } from '../shared/environment'
 
 const { VIEW, VIEW_CENTER, LAYERS, LEGEND, ZOOM, EMBED } = PARAMETERS
 
@@ -119,33 +120,37 @@ export const shortUrls: Redirect[] = [
   {
     from: '/dossier/economie/',
     to: `/dossiers/dossier/corona-en-de-economie/${
-      SHORTLINKS.COLLECTIONS.ECONOMY.id[environment.DEPLOY_ENV]
+      SHORTLINKS.COLLECTIONS.ECONOMY.id[environment.DEPLOY_ENV as Environment]
     }`,
   },
   {
     from: '/dossier/toerisme/',
-    to: `/dossiers/dossier/toerisme/${SHORTLINKS.COLLECTIONS.TOURISM.id[environment.DEPLOY_ENV]}`,
+    to: `/dossiers/dossier/toerisme/${
+      SHORTLINKS.COLLECTIONS.TOURISM.id[environment.DEPLOY_ENV as Environment]
+    }`,
   },
   {
     from: '/dossier/wonen/',
-    to: `/dossiers/dossier/wonen/${SHORTLINKS.COLLECTIONS.HOUSING.id[environment.DEPLOY_ENV]}`,
+    to: `/dossiers/dossier/wonen/${
+      SHORTLINKS.COLLECTIONS.HOUSING.id[environment.DEPLOY_ENV as Environment]
+    }`,
   },
   {
     from: '/schoolloopbanen/',
     to: `/specials/dashboard/dashboard-schoolloopbanen/${
-      SHORTLINKS.COLLECTIONS.EDUCATION.id[environment.DEPLOY_ENV]
+      SHORTLINKS.COLLECTIONS.EDUCATION.id[environment.DEPLOY_ENV as Environment]
     }`,
   },
   {
     from: '/coronamonitor/',
     to: `/specials/dashboard/dashboard-corona/${
-      SHORTLINKS.COLLECTIONS.CORONA.id[environment.DEPLOY_ENV]
+      SHORTLINKS.COLLECTIONS.CORONA.id[environment.DEPLOY_ENV as Environment]
     }`,
   },
   {
     from: '/veelgestelde-vragen/',
     to: `/artikelen/artikel/veelgestelde-vragen/${
-      SHORTLINKS.COLLECTIONS.FAQ.id[environment.DEPLOY_ENV]
+      SHORTLINKS.COLLECTIONS.FAQ.id[environment.DEPLOY_ENV as Environment]
     }`,
   },
 ]

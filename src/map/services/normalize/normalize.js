@@ -138,22 +138,26 @@ export const adressenVerblijfsobject = (result) => {
 export const addNummeraanduiding = async (result) => {
   return {
     ...result,
+    // eslint-disable-next-line no-underscore-dangle
     nummeraanduidingData: await fetchWithToken(result?.hoofdadres._links.self.href),
   }
 }
 
 export const kadastraalObject = async (result) => {
   const brk = await fetchWithToken(
+    // eslint-disable-next-line no-underscore-dangle
     result?._links?.self?.href?.replace('brk/object', 'brk/object-expand'),
   )
   const additionalFields = {
     size: result.grootte || result.grootte === 0 ? formatSquareMetre(result.grootte) : '',
     cadastralName: result.kadastrale_gemeente ? result.kadastrale_gemeente.naam : false,
+    // eslint-disable-next-line no-underscore-dangle
     name: result.kadastrale_gemeente ? result.kadastrale_gemeente.gemeente._display : false,
     brkData: {
       ...brk,
       rechten: brk?.rechten?.map((recht) => ({
         ...recht.kadastraal_subject,
+        // eslint-disable-next-line no-underscore-dangle
         _display: recht?._display,
       })),
     },
@@ -212,12 +216,14 @@ export const societalActivities = (result) => {
   const additionalFields = {
     activities: (result.activiteiten || []).map((activity) => activity),
     bijzondereRechtstoestand: {
+      /* eslint-disable no-underscore-dangle */
       ...(result._bijzondere_rechts_toestand || {}),
       surseanceVanBetaling:
         (result._bijzondere_rechts_toestand &&
           result._bijzondere_rechts_toestand.status === 'Voorlopig') ||
         (result._bijzondere_rechts_toestand &&
           result._bijzondere_rechts_toestand.status === 'Definitief'),
+      /* eslint-enable no-underscore-dangle */
     },
   }
 

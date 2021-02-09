@@ -79,6 +79,7 @@ const imageData = (response) => {
     image: {
       baseurl: panorama.cubic_img_baseurl,
       pattern: panorama.cubic_img_pattern,
+      // eslint-disable-next-line no-underscore-dangle
       preview: panorama._links.cubic_img_preview.href,
     },
   }
@@ -87,6 +88,7 @@ const imageData = (response) => {
 function fetchPanorama(url) {
   const promise = new Promise((resolve, reject) => {
     fetchWithToken(url)
+      // eslint-disable-next-line no-underscore-dangle
       .then((json) => json._embedded.adjacencies)
       .then((data) => {
         resolve(imageData(data))
@@ -120,16 +122,20 @@ export function getImageDataByLocation(location, tags) {
 
   const promise = new Promise((resolve, reject) => {
     fetchWithToken(`${getLocationUrl}&${standardRadius}&${newestInRange}&${limitResults}`)
+      // eslint-disable-next-line no-underscore-dangle
       .then((json) => json._embedded.panoramas[0])
       .then((data) => {
         if (data) {
           // we found a pano nearby go to it
+          // eslint-disable-next-line no-underscore-dangle
           resolve(getAdjacencies(data._links.adjacencies.href, adjacenciesParams))
         } else {
           // there is no pano nearby search with a large radius and go to it
           resolve(
             fetchWithToken(`${getLocationUrl}&${largeRadius}&${limitResults}`)
+              // eslint-disable-next-line no-underscore-dangle
               .then((json) => json._embedded.panoramas[0])
+              // eslint-disable-next-line no-underscore-dangle
               .then((_data) => getAdjacencies(_data._links.adjacencies.href, adjacenciesParams)),
           )
         }

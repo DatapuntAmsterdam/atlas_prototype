@@ -27,7 +27,6 @@ export type Extension = 'jpg' | 'png' | 'webp' | 'gif' | 'ico' | 'heic' | 'tiff'
  * @param resize
  * @param gravity
  * @param enlarge
- * @param extension
  */
 const getImageFromCms = (
   src: string,
@@ -38,6 +37,12 @@ const getImageFromCms = (
   enlarge = 0,
 ) => {
   const extension = src.split('.').pop()
+
+  if (!extension) {
+    // eslint-disable-next-line no-console
+    console.warn('Could not get extension from file passed to getImageFromCms')
+    return ''
+  }
 
   return joinUrl([
     environment.CMS_ROOT,

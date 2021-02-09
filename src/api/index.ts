@@ -43,7 +43,7 @@ import * as vastgoed from './vsd/vastgoed'
 type ApiConfig = {
   singleFixture: any
   listFixture?: any
-  path: string | null
+  path: string
   fixtureId: string | null
 }
 

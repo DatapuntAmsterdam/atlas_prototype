@@ -55,8 +55,10 @@ class SelectButton extends Component {
     const { isExpanded } = this.state
     // Attach/remove event handler
     if (!isExpanded) {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       document.addEventListener('click', this.handleOutsideClick, false)
     } else {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       document.removeEventListener('click', this.handleOutsideClick, false)
     }
 
@@ -118,6 +120,7 @@ class SelectButton extends Component {
           this.node = node
         }}
       >
+        {/* eslint-disable-next-line @typescript-eslint/unbound-method */}
         <button type="button" className="select-button__wrapper" onClick={this.handleClick}>
           {icon && <span className="select-button__custom-icon">{icon}</span>}
           <div className="select-button__label">{label}</div>
@@ -127,6 +130,7 @@ class SelectButton extends Component {
           type="button"
           className="select-button__icon-wrapper"
           title={isExpanded ? 'Inklappen' : 'Uitklappen'}
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           onClick={this.handleToggle}
         >
           {isExpanded ? <Up /> : <Down />}
@@ -144,6 +148,7 @@ class SelectButton extends Component {
               <button
                 type="button"
                 className="select-button__drop-down-button"
+                // eslint-disable-next-line @typescript-eslint/unbound-method
                 onClick={this.handleClickChild}
                 value={option.value}
               >

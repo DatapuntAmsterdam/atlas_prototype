@@ -23,7 +23,7 @@ export function getMarkers(config, activeFilters, zoomLevel, boundingBox) {
     }),
   }
   return boundingBox
-    ? fetchWithToken(environment.API_ROOT + config.ENDPOINT_MARKERS, params).then((data) => ({
+    ? fetchWithToken(`${environment.API_ROOT}${config.ENDPOINT_MARKERS}`, params).then((data) => ({
         geoJsons: [
           data.eigenpercelen && {
             geoJson: data.eigenpercelen,

@@ -197,20 +197,23 @@ const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
     (id: string, page?: number) => {
       const selection = dataSelectionWithMarkers.find(({ id: dataId }) => id === dataId)
       if (selection) {
-        ;(async () => {
-          await fetchData(
-            selection.mapData?.layer?.getLatLngs() as LatLng[][],
-            selection.mapData?.layer?.id,
-            {
-              size: selection.size,
-              page: page || selection.page,
-            },
-            {
-              layer: selection.mapData?.layer,
-              distanceText: selection.mapData?.distanceText || '',
-            },
-          )
-        })()
+        fetchData(
+          selection.mapData?.layer?.getLatLngs() as LatLng[][],
+          selection.mapData?.layer?.id,
+          {
+            size: selection.size,
+            page: page || selection.page,
+          },
+          {
+            layer: selection.mapData?.layer,
+            distanceText: selection.mapData?.distanceText || '',
+          },
+        )
+          .then(() => {})
+          .catch((error: string) => {
+            // eslint-disable-next-line no-console
+            console.error(`DrawResults: could not retrieve dataSelection with markers: ${error}`)
+          })
       }
     },
     [dataSelection],
@@ -297,7 +300,7 @@ const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
                       isOpen: true,
                     }
                   : {})}
-                title={`Selectie ${i + 1}: ${mapData?.distanceText}`}
+                title={`Selectie ${i + 1}: ${mapData?.distanceText ?? ''}`}
                 onMouseEnter={() => {
                   if (mapData?.layer) {
                     mapData.layer.setStyle({
@@ -341,8 +344,8 @@ const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
                           page={page}
                           pageSize={size}
                           collectionSize={totalCount}
-                          onPageChange={async (pageNumber) => {
-                            await handleFetchData(mapData?.layer?.id, pageNumber)
+                          onPageChange={(pageNumber) => {
+                            handleFetchData(mapData?.layer?.id, pageNumber)
                           }}
                         />
                       )}

@@ -2,8 +2,9 @@ import stateTokenGenerator from '../../src/shared/services/state-token-generator
 import { HEADER_MENU } from './selectors'
 
 declare global {
-  // eslint-disable-next-line no-redeclare
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       login(type?: string): void
       logout(): void
@@ -65,6 +66,7 @@ Cypress.Commands.add('login', (type = 'EMPLOYEE_PLUS') => {
       .then((response) =>
         cy.request({
           method: 'POST',
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           url: `${Cypress.env('API_ROOT')}/auth/idp/${response.body.match(/action="(.*?)"/).pop()}`,
           form: true,
           body: {

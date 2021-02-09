@@ -163,11 +163,13 @@ class LeafletContainer extends Component {
             showMapLink,
           }}
           markers={showMarker ? markers : []}
+          /* eslint-disable @typescript-eslint/unbound-method */
           onClick={this.handleClick}
           onDragEnd={this.handlePan}
           onZoomEnd={this.handleZoom}
           onResizeEnd={this.handleResize}
           ref={this.setMapLeaflet}
+          /* eslint-enable @typescript-eslint/unbound-method */
         />
       )
     )

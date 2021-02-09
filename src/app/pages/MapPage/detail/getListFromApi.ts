@@ -51,7 +51,9 @@ const getListFromApi = (
   return {
     data: results,
     count: response.count,
+    // eslint-disable-next-line no-underscore-dangle
     previous: response._links?.previous?.href || null,
+    // eslint-disable-next-line no-underscore-dangle
     next: response._links?.next?.href || null,
   }
 }

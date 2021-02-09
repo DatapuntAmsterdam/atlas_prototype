@@ -56,6 +56,7 @@ class DrawToolContainer extends Component {
     this.getMarkers = this.getMarkers.bind(this)
 
     const { initialize: initializeProp, leafletInstance } = this.props
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     initializeProp(leafletInstance, this.onFinishShape, this.onDrawingMode, this.onUpdateShape)
 
     this.setPolygon()

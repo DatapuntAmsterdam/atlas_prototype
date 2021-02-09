@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fetch = require('isomorphic-fetch')
 
 const API_ENDPOINT = 'https://api.data.amsterdam.nl/cms_search/graphql/'

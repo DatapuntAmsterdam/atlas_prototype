@@ -27,7 +27,7 @@ export const routingKey = {
 
 const cmsConfig = {
   ARTICLE: {
-    endpoint: (id?: string) =>
+    endpoint: (id: string) =>
       `${environment.CMS_ROOT}jsonapi/node/article/${id}?include=field_accordions,field_cover_image.field_media_image,field_related.field_teaser_image.field_media_image,field_downloads.field_file.field_media_file`,
     fields: [
       'field_downloads',
@@ -96,7 +96,7 @@ const cmsConfig = {
     endpoint: () => `${environment.API_ROOT}cms_search/search/special`,
   },
   CMS_COLLECTION_DETAIL: {
-    endpoint: (id?: string) =>
+    endpoint: (id: string) =>
       `${environment.CMS_ROOT}jsonapi/node/list/${id}?fields[node--collection]=title,field_intro,field_slug,field_link,field_blocks,field_blocks.field_content,field_items&include=field_blocks,field_blocks.field_content,field_items,field_items.field_teaser_image.field_media_image,field_blocks.field_content.field_teaser_image.field_media_image,field_blocks.field_content.field_cover_image.field_media_image`,
     fields: [
       'title',
@@ -130,7 +130,9 @@ const cmsConfig = {
   HOME_SPECIALS: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.SPECIALS.id[environment.DEPLOY_ENV || Environment.Production]
+        HOMEPAGE_LINKS.SPECIALS.id[
+          (environment.DEPLOY_ENV as Environment) || Environment.Production
+        ]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',
@@ -148,7 +150,9 @@ const cmsConfig = {
   HOME_COLLECTIONS: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.COLLECTIONS.id[environment.DEPLOY_ENV || Environment.Production]
+        HOMEPAGE_LINKS.COLLECTIONS.id[
+          (environment.DEPLOY_ENV as Environment) || Environment.Production
+        ]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',
@@ -163,7 +167,9 @@ const cmsConfig = {
   HOME_ORGANIZATION: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ORGANIZATION.id[environment.DEPLOY_ENV || Environment.Production]
+        HOMEPAGE_LINKS.ORGANIZATION.id[
+          (environment.DEPLOY_ENV as Environment) || Environment.Production
+        ]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -178,7 +184,7 @@ const cmsConfig = {
   HOME_ABOUT: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ABOUT.id[environment.DEPLOY_ENV || Environment.Production]
+        HOMEPAGE_LINKS.ABOUT.id[(environment.DEPLOY_ENV as Environment) || Environment.Production]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -192,7 +198,9 @@ const cmsConfig = {
   HOME_ABOUT_DATA: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.ABOUT_DATA.id[environment.DEPLOY_ENV || Environment.Production]
+        HOMEPAGE_LINKS.ABOUT_DATA.id[
+          (environment.DEPLOY_ENV as Environment) || Environment.Production
+        ]
       }?include=field_items&sort=-created`,
     fields: [
       'field_items.id',
@@ -206,7 +214,9 @@ const cmsConfig = {
   HOME_HIGHLIGHT: {
     endpoint: () =>
       `${environment.CMS_ROOT}jsonapi/node/list/${
-        HOMEPAGE_LINKS.HIGHLIGHT.id[environment.DEPLOY_ENV || Environment.Production]
+        HOMEPAGE_LINKS.HIGHLIGHT.id[
+          (environment.DEPLOY_ENV as Environment) || Environment.Production
+        ]
       }?include=field_items.field_teaser_image.field_media_image&sort=-created`,
     fields: [
       'field_items.id',

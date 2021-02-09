@@ -53,9 +53,9 @@ const LocationSearch: FunctionComponent = () => {
   const isLoading = useSelector(isSearchLoading)
   const user = useSelector(getUser)
   const searchResults = useSelector(getMapListResults)
-  const numberOfResults = useSelector(getNumberOfResults)
-  const location = useSelector(getDataSearchLocation)
-  const layerWarning = useSelector(getDataSearchError)
+  const numberOfResults: number = useSelector(getNumberOfResults)
+  const location: { latitude: number; longitude: number } = useSelector(getDataSearchLocation)
+  const layerWarning: string = useSelector(getDataSearchError)
   const { x: rdX, y: rdY } = wgs84ToRd(location)
   return (
     <LocationSearchWrapper data-testid="geosearch-page">

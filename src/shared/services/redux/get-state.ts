@@ -14,6 +14,7 @@ const getState = () => {
     // Unfortunately some components / services cannot use the useStore hook
     return window.reduxStore?.getState()
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const store = useStore<RootState>()
   return store.getState()
 }

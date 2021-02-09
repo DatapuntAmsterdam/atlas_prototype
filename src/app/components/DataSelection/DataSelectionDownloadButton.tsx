@@ -10,8 +10,14 @@ import { encodeQueryParams } from '../../../shared/services/query-string-parser/
 import { getAccessToken } from '../../../shared/services/auth/auth'
 import { getGeometryFilter } from '../../../shared/ducks/data-selection/selectors'
 
+enum DatasetType {
+  Bag = 'bag',
+  Brk = 'brk',
+  Hr = 'hr',
+}
+
 type Props = {
-  dataset: any
+  dataset: DatasetType
   activeFilters: any
 }
 
@@ -19,7 +25,7 @@ const DataSelectionDownloadButton: FunctionComponent<Props> = ({ dataset, active
   const geometryFilter = useSelector(getGeometryFilter)
   const { trackEvent } = useMatomo()
   const filterParams = []
-  let url = environment.API_ROOT + DATA_SELECTION_CONFIG.datasets[dataset].ENDPOINT_EXPORT
+  let url = `${environment.API_ROOT}${DATA_SELECTION_CONFIG.datasets[dataset].ENDPOINT_EXPORT}`
 
   DATA_SELECTION_CONFIG.datasets[dataset].FILTERS.forEach((filter: { slug: string }) => {
     if (typeof activeFilters[filter.slug] === 'string') {
@@ -34,7 +40,7 @@ const DataSelectionDownloadButton: FunctionComponent<Props> = ({ dataset, active
     )
   }
 
-  if (DATA_SELECTION_CONFIG.datasets[dataset].ENDPOINT_EXPORT_PARAM) {
+  if (dataset === DatasetType.Hr) {
     filterParams.push(DATA_SELECTION_CONFIG.datasets[dataset].ENDPOINT_EXPORT_PARAM)
   }
 

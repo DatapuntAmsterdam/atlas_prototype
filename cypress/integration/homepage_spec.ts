@@ -9,7 +9,7 @@ import {
 describe('Homepage module', () => {
   const sizes: Cypress.ViewportPreset[] = ['iphone-x', 'ipad-2', 'macbook-15']
   sizes.forEach((size) => {
-    describe(`Header navigation ${size}`, () => {
+    describe(`Header navigation ${size as string}`, () => {
       beforeEach(() => {
         cy.viewport(size)
         cy.visit('/')
@@ -54,7 +54,7 @@ describe('Homepage module', () => {
       })
     })
 
-    describe(`Homepage checks, resolution is: ${size}`, () => {
+    describe(`Homepage checks, resolution is: ${size as string}`, () => {
       beforeEach(() => {
         cy.viewport(size)
         cy.visit('/')
@@ -349,6 +349,7 @@ describe('Homepage module', () => {
             cy.wrap(sectionElement).find('[aria-hidden]').parent().find('h3').click()
 
             // giving the UI the opportunity to update itself
+            // eslint-disable-next-line cypress/no-unnecessary-waiting
             cy.wait(150)
 
             cy.wrap(sectionElement)
@@ -360,7 +361,7 @@ describe('Homepage module', () => {
           // @ts-ignore
           links.forEach(({ testId, id, href }) => {
             cy.get(`[data-testid="footer${section}"]`)
-              .find(`[data-testid="footerLink${testId}"]`)
+              .find(`[data-testid="footerLink${testId as string}"]`)
               .then((element) => {
                 if (id) {
                   cy.wrap(element).click()
@@ -378,7 +379,7 @@ describe('Homepage module', () => {
           })
         })
 
-        cy.get(`[data-testid="${FOOTER_LINK_PRIVACY.testId}"]`)
+        cy.get(`[data-testid="${FOOTER_LINK_PRIVACY.testId as string}"]`)
           .should('have.attr', 'href', FOOTER_LINK_PRIVACY.href)
           .and('be.visible')
       })

@@ -72,10 +72,13 @@ describe('Smoketest', () => {
 
       // Zoom in and click on building
       cy.get(MAP.mapZoomIn).click({ force: true })
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(700)
       cy.get(MAP.mapZoomIn).click({ force: true })
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(700)
       cy.get(MAP.mapZoomIn).click({ force: true })
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(700)
       cy.get(MAP.mapContainer).click(1139, 424)
       cy.waitForGeoSearch()

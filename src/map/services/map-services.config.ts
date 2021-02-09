@@ -1,9 +1,8 @@
-/* eslint-disable no-underscore-dangle,camelcase */
+/* eslint-disable no-underscore-dangle,camelcase,@typescript-eslint/restrict-template-expressions */
 import { LatLngLiteral } from 'leaflet'
 import config, { DataSelectionType } from '../../app/pages/MapPage/config'
 import getListFromApi from '../../app/pages/MapPage/detail/getListFromApi'
 import buildDetailUrl from '../../app/pages/MapPage/detail/buildDetailUrl'
-import { InfoBoxProps } from '../../app/pages/MapPage/detail/DetailInfoBox'
 import formatDate from '../../app/utils/formatDate'
 import getFileName from '../../app/utils/getFileName'
 import GLOSSARY, { Definition } from '../../detail/services/glossary.constant'
@@ -24,6 +23,7 @@ import {
   DetailResultItemType,
   DetailResultNotification,
   ExtraApiResults,
+  InfoBoxProps,
   PotentialApiResult,
 } from '../types/details'
 import adressenNummeraanduiding from './adressen-nummeraanduiding/adressen-nummeraanduiding'
@@ -53,6 +53,8 @@ import {
 import vestiging from './vestiging/vestiging'
 import getRdAndWgs84Coordinates from '../../shared/services/coordinate-reference-system/getRdAndWgs84Coordinates'
 import AuthScope from '../../shared/services/api/authScope'
+import { Root as Vastgoed } from '../../api/vsd/vastgoed/types'
+import { Wsg84Coordinate } from '../../shared/services/coordinate-reference-system/crs-converter'
 
 export const endpointTypes = {
   adressenLigplaats: 'bag/v1.1/ligplaats/',
@@ -114,16 +116,16 @@ export interface ServiceDefinition extends DetailAuthentication {
   type: string
   endpoint: string
   definition?: Definition
-  normalization?: (result: any) => any | Promise<any>
+  normalization?: (result: PotentialApiResult) => any | Promise<any>
   mapDetail: (
     result: PotentialApiResult & ExtraApiResults,
     detailInfo: DetailInfo,
-    location?: LatLngLiteral,
+    location?: LatLngLiteral | Wsg84Coordinate | null,
   ) => DetailResult | Promise<DetailResult>
 }
 
 function buildMetaData(
-  result: any,
+  result: PotentialApiResult,
   metadata?: Array<keyof typeof GLOSSARY.META>,
 ): DetailResultItemDefinitionListEntry[] {
   if (!metadata) {
@@ -148,19 +150,19 @@ const getInfoBox = ({ description, url, plural }: Omit<InfoBoxProps, 'meta'>): I
 
 const getLinkListBlock = (
   definition: Definition,
-  result?: any,
-  displayFormatter?: (data: any) => string,
+  result?: PotentialApiResult[] | null,
+  displayFormatter?: (data: PotentialApiResult) => string | null | undefined,
 ): DetailResultItemLinkList => ({
   title: definition.plural,
   type: DetailResultItemType.LinkList,
-  links: result?.map((res: any) => ({
-    to: buildDetailUrl(getDetailPageData(res._links.self.href)),
+  links: result?.map((res) => ({
+    to: buildDetailUrl(getDetailPageData(res._links?.self?.href)),
     title: displayFormatter ? displayFormatter(res) : res._display,
   })),
   infoBox: getInfoBox(definition),
 })
 
-const typeAddressDisplayFormatter = (result: any) => {
+const typeAddressDisplayFormatter = (result: PotentialApiResult) => {
   let extraInfo = ''
   if (result.type_adres && result.type_adres !== 'Hoofdadres') {
     extraInfo = `${result?.type_adres} `
@@ -181,9 +183,11 @@ const typeAddressDisplayFormatter = (result: any) => {
     result.vbo_status &&
     result.vbo_status !== 'Verblijfsobject in gebruik (niet ingemeten)' &&
     result.vbo_status !== 'Verblijfsobject in gebruik' &&
-    result.vbo_status.status !== 'Verbouwing verblijfsobject'
+    // @ts-ignore
+    result.vbo_status?.status !== 'Verbouwing verblijfsobject'
   ) {
-    extraInfo = `${extraInfo}(${result?.vbo_status.toLowerCase()})`
+    // @ts-ignore
+    extraInfo = `${extraInfo}(${result?.vbo_status?.toLowerCase()})`
   }
 
   return result.type_adres !== 'Hoofdadres' ? `${result._display} ${extraInfo}` : result._display
@@ -195,8 +199,8 @@ const getPaginatedListBlock = (
   settings?: {
     gridArea?: string
     pageSize?: number
-    displayFormatter?: (data: any) => string
-    normalize?: (data: any[]) => any[] | Promise<any>
+    displayFormatter?: (data: PotentialApiResult) => string | undefined
+    normalize?: (data: PotentialApiResult[]) => any[] | Promise<any>
   } & DetailAuthentication,
 ): DetailResultItemPaginatedData => ({
   type: DetailResultItemType.PaginatedData,
@@ -361,7 +365,7 @@ const getConstructionFileList = (detailInfo: DetailInfo) =>
     `${environment.API_ROOT}iiif-metadata/bouwdossier/?${detailInfo.subType}=${detailInfo.id}`,
     {
       pageSize: 25,
-      displayFormatter: ({ stadsdeel, dossiernr, datering, dossier_type }: any) =>
+      displayFormatter: ({ stadsdeel, dossiernr, datering, dossier_type }) =>
         `${stadsdeel}${dossiernr} ${
           datering
             ? new Date(datering).toLocaleDateString(DEFAULT_LOCALE, {
@@ -369,16 +373,17 @@ const getConstructionFileList = (detailInfo: DetailInfo) =>
               })
             : ''
         } ${dossier_type}`,
+      // @ts-ignore
       normalize: (data) => data.sort((a, b) => (a.datering < b.datering ? 1 : -1)),
     },
   )
 
-const getMainMetaBlock = (result: any, definition: Definition): InfoBoxProps => ({
+const getMainMetaBlock = (result: PotentialApiResult, definition: Definition): InfoBoxProps => ({
   ...getInfoBox(definition),
   meta: buildMetaData(result, definition.meta),
 })
 
-const getCovidBlock = (result: any): DetailResult => ({
+const getCovidBlock = (result: PotentialApiResult): DetailResult => ({
   title: 'COVID-19 Maatregelen',
   subTitle: result.naam,
   noPanorama: true,
@@ -408,7 +413,7 @@ const getCovidBlock = (result: any): DetailResult => ({
   ],
 })
 
-const getVerblijfsObjectBlock = (result: any): DetailResultItemDefinitionList => ({
+const getVerblijfsObjectBlock = (result: PotentialApiResult): DetailResultItemDefinitionList => ({
   type: DetailResultItemType.DefinitionList,
   title: GLOSSARY.DEFINITIONS.VERBLIJFSOBJECT.singular,
   infoBox: getMainMetaBlock(result, GLOSSARY.DEFINITIONS.VERBLIJFSOBJECT),
@@ -450,7 +455,8 @@ const getVerblijfsObjectBlock = (result: any): DetailResultItemDefinitionList =>
       description:
         result.oppervlakte === '1'
           ? 'onbekend'
-          : `${result.oppervlakte.toLocaleString(DEFAULT_LOCALE)} m²`,
+          : // @ts-ignore
+            `${result.oppervlakte?.toLocaleString(DEFAULT_LOCALE)} m²`,
     },
     {
       term: 'Aantal kamers',
@@ -462,7 +468,7 @@ const getVerblijfsObjectBlock = (result: any): DetailResultItemDefinitionList =>
     },
     {
       term: 'Toegang',
-      description: result.toegang.join(', '),
+      description: result.toegang?.join(', '),
     },
     {
       term: 'Aantal bouwlagen',
@@ -486,7 +492,9 @@ const getVerblijfsObjectBlock = (result: any): DetailResultItemDefinitionList =>
     },
     {
       term: 'Coördinaten',
-      description: getRdAndWgs84Coordinates(result.geometrie.coordinates, 'RD'),
+      description: result.geometrie?.coordinates
+        ? getRdAndWgs84Coordinates(result.geometrie?.coordinates, 'RD')
+        : '',
     },
   ],
 })
@@ -521,7 +529,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications,
         title: 'Adres',
         subTitle: result._display,
-        infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
+        infoBox: nummeraanduidingData
+          ? getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING)
+          : undefined,
         items: [
           getBagDefinitionList(nummeraanduidingData),
           getLocationDefinitionListBlock(nummeraanduidingData, '2 / 1 / 3 / 1'),
@@ -604,7 +614,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         items: [
           getBagDefinitionList(result),
           getLocationDefinitionListBlock(result, '2 / 1 / 3 / 1'),
-          getVerblijfsObjectBlock(verblijfsobjectData),
+          verblijfsobjectData ? getVerblijfsObjectBlock(verblijfsobjectData) : null,
           getPaginatedListBlock(GLOSSARY.DEFINITIONS.PAND, verblijfsobjectData?.panden?.href),
           getPaginatedListBlock(
             GLOSSARY.DEFINITIONS.VESTIGING,
@@ -676,7 +686,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications,
         title: 'Adres',
         subTitle: result._display,
-        infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
+        infoBox: nummeraanduidingData
+          ? getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING)
+          : undefined,
         items: [
           getBagDefinitionList(nummeraanduidingData),
           getLocationDefinitionListBlock(nummeraanduidingData, '2 / 1 / 3 / 1'),
@@ -703,10 +715,10 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
             {
               // This is pretty terrible, but if a result has the key 'hoort_bij_monument', it should fetch data
               // that is linked to that and show that in the frontend instead.
-              normalize: async (resultToNormalize: any) =>
+              normalize: async (resultToNormalize) =>
                 Promise.all(
-                  resultToNormalize?.map(async (res: any) =>
-                    res?.hoort_bij_monument
+                  resultToNormalize?.map(async (res) =>
+                    res?.hoort_bij_monument?._links?.self?.href
                       ? fetchWithToken(res?.hoort_bij_monument?._links?.self?.href)
                       : res,
                   ),
@@ -833,7 +845,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         notifications,
         title: 'Adres',
         subTitle: result._display,
-        infoBox: getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING),
+        infoBox: nummeraanduidingData
+          ? getMainMetaBlock(nummeraanduidingData, GLOSSARY.DEFINITIONS.NUMMERAANDUIDING)
+          : undefined,
         items: [
           getBagDefinitionList(nummeraanduidingData),
           getLocationDefinitionListBlock(nummeraanduidingData, '2 / 1 / 3 / 1'),
@@ -1385,6 +1399,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               },
             ],
           },
+          // @ts-ignore
           getLinkListBlock(GLOSSARY.DEFINITIONS.ZAKELIJK_RECHT, brkData?.rechten),
           {
             type: DetailResultItemType.BulletList,
@@ -1393,7 +1408,9 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
               opgelegd_door ? `${_display}, opgelegd door: ${opgelegd_door._display}` : _display,
             ),
           },
+          // @ts-ignore
           getLinkListBlock(GLOSSARY.DEFINITIONS.ONTSTAAN_UIT, brkData?.ontstaan_uit),
+          // @ts-ignore
           getLinkListBlock(GLOSSARY.DEFINITIONS.BETROKKEN_BIJ, brkData?.betrokken_bij),
           /**
            There is no _adressen.count variable. But this check is still valid, because:
@@ -1563,11 +1580,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         ),
         getLinkListBlock(
           GLOSSARY.DEFINITIONS.PAND,
+          // @ts-ignore
           result.betreft_pand,
-          (res: any) => res.pandidentificatie,
+          (res: PotentialApiResult) => res.pandidentificatie,
         ),
         getPaginatedListBlock(GLOSSARY.DEFINITIONS.ADRES, result.heeft_situeringen?.href, {
-          normalize: (data: any[]) =>
+          normalize: (data) =>
             data.map((object) => ({
               ...object,
               _links: object?.betreft_nummeraanduiding?._links,
@@ -1680,7 +1698,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
                 { title: 'Opmerking', key: 'opmerking' },
                 { title: 'Begindatum', key: 'beginDatum' },
               ],
-              values: result.regimes as any,
+              values: result.regimes,
             }
           : undefined,
       ],
@@ -1730,6 +1748,12 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
       // Technically we should really have some kind of model in the API to hold these collections so we can identify them with a single identifier.
       // Really more of a task for the API team to figure this one out...
 
+      const serviceDefinition = getServiceDefinition('vsd/vastgoed')
+
+      if (!serviceDefinition || !location || !('lat' in location)) {
+        throw new Error('Unable to retrieve service definition for "vastgoed" details.')
+      }
+
       const { features } = await fetchWithToken(
         `${environment.API_ROOT}geosearch/vastgoed/?${new URLSearchParams({
           ...(location ? { lat: location.lat.toString(), lon: location.lng.toString() } : {}),
@@ -1738,20 +1762,14 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
         }).toString()}`,
       )
 
-      const serviceDefinition = getServiceDefinition('vsd/vastgoed')
-
-      if (!serviceDefinition) {
-        throw new Error('Unable to retrieve service defintition for vastgoed details.')
-      }
-
       const units = await Promise.all(
         features.map(
           async ({ properties }: { properties: { id: string } }) =>
-            (await fetchDetailData(serviceDefinition, properties.id)).data,
+            (await fetchDetailData(serviceDefinition, properties.id)).data as PotentialApiResult,
         ),
       )
 
-      const additionalItems: DetailResultItem[] = units.map((unit: any) => ({
+      const additionalItems: DetailResultItem[] = (units as Vastgoed[]).map((unit) => ({
         type: DetailResultItemType.DefinitionList,
         title: unit._display,
         entries: [
@@ -1827,8 +1845,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
                 term: 'KvK-nummer',
                 description:
                   result.maatschappelijke_activiteit &&
-                  // @ts-ignore
-                  result.maatschappelijke_activiteit.match(/([^/]*)\/*$/)[1],
+                  /([^/]*)\/*$/.exec(result.maatschappelijke_activiteit)?.[1],
               },
               {
                 term: 'Vestigingsnummer',
@@ -1944,7 +1961,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     authScopeRequired: true,
     authExcludedInfo: `kadastrale subjecten. Om ook zakelijke rechten van natuurlijke personen te bekijken, moet je als medewerker bovendien speciale bevoegdheden hebben`,
     mapDetail: (result) => {
-      const zakelijkRechtNormalizer = (res: { object_href?: string }[]) =>
+      const zakelijkRechtNormalizer = (res: PotentialApiResult[]) =>
         res?.map((obj) => ({
           ...obj,
           _links: {
@@ -2114,7 +2131,7 @@ const servicesByEndpointType: { [type: string]: ServiceDefinition } = {
     definition: GLOSSARY.DEFINITIONS.MAATSCHAPPELIJKEACTIVITEIT,
     authScopes: [AuthScope.HrR],
     authScopeRequired: true,
-    normalization: async (data) => {
+    normalization: async (data: PotentialApiResult) => {
       if (data.eigenaar) {
         const extraData = await fetchWithToken(data.eigenaar)
         const functieVervullingUrl = extraData?.heeft_aansprakelijke?.href
@@ -2589,17 +2606,4 @@ const serviceDefinitions = Object.values(servicesByEndpointType)
 
 export function getServiceDefinitions() {
   return serviceDefinitions
-}
-
-export const genericDetailTypes = getServiceDefinitions()
-  .map((service) => service.type as string)
-  .filter((type) => !!type)
-
-export function isGenericTemplate(templateUrl?: string) {
-  if (!templateUrl) {
-    return templateUrl
-  }
-
-  // @ts-ignore
-  return genericDetailTypes.some((type) => templateUrl.includes(type))
 }

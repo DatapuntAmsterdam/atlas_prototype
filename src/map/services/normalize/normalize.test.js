@@ -324,6 +324,7 @@ ${input.gebruiksdoel[1]}`,
 
       expect(output).toMatchObject({
         cadastralName: input.kadastrale_gemeente.naam,
+        // eslint-disable-next-line no-underscore-dangle
         name: input.kadastrale_gemeente.gemeente._display,
       })
 
@@ -514,6 +515,7 @@ ${input.gebruiksdoel[1]}`,
 
       expect(output).toMatchObject({
         bijzondereRechtstoestand: {
+          // eslint-disable-next-line no-underscore-dangle
           ...input._bijzondere_rechts_toestand,
           surseanceVanBetaling: true,
         },

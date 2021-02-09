@@ -12,8 +12,10 @@ import { getAccessToken } from '../../../shared/services/auth/auth'
 
 export interface DetailResponse {
   data: any
+  geometrie?: Geometry
   geometry?: Geometry
   location?: LatLngLiteral
+  _display?: LatLngLiteral
 }
 
 /**

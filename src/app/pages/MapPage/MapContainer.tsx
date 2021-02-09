@@ -87,8 +87,12 @@ const MapContainer: FunctionComponent = ({ children }) => {
   }
 
   useEffect(() => {
-    getPanelLayers()
-    getMapLayers()
+    Promise.all([getPanelLayers, getMapLayers])
+      .then(() => {})
+      .catch((error: string) => {
+        // eslint-disable-next-line no-console
+        console.error(`MapContainer: problem fetching panel and map layers: ${error}`)
+      })
   }, [])
 
   return (

@@ -46,6 +46,7 @@ export const detailDocumentTitleWithName = (action) => {
   const dataSetId = action?.payload?.data?.editDatasetId ?? null
 
   if (dataSetId !== null && title.indexOf(':') === -1) {
+    // eslint-disable-next-line no-underscore-dangle
     title = `${title}: ${action.payload.data._display}`
   }
 

@@ -17,7 +17,8 @@ const getVerblijfsobjectIdFromAddressQuery = async (locationSearch: string): Pro
 
   if (totalElements !== 1) return ''
 
-  return `id${data.nummeraanduiding[0].verblijfsobjectId}`
+  const { verblijfsobjectId } = data.nummeraanduiding[0]
+  return verblijfsobjectId ? `id${verblijfsobjectId}` : ''
 }
 
 export default getVerblijfsobjectIdFromAddressQuery

@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode } from 'react'
 
-export interface ViewerControls {
+interface ViewerControlsProps {
   topLeftComponent?: ReactNode
   bottomLeftComponent?: ReactNode
   topRightComponent?: ReactNode
@@ -9,7 +9,7 @@ export interface ViewerControls {
   metaData?: string[]
 }
 
-const ViewerControls: FunctionComponent<ViewerControls> = ({
+const ViewerControls: FunctionComponent<ViewerControlsProps> = ({
   topLeftComponent,
   bottomLeftComponent,
   topRightComponent,
@@ -17,7 +17,7 @@ const ViewerControls: FunctionComponent<ViewerControls> = ({
   metaData,
   className,
 }) => (
-  <div className={`viewer-controls ${className}`}>
+  <div className={`viewer-controls ${className ?? ''}`}>
     <div className="viewer-controls-item viewer-controls-item--top-left">{topLeftComponent}</div>
     <div className="viewer-controls-item viewer-controls-item--top-right">{topRightComponent}</div>
     <div className="viewer-controls-item viewer-controls-item--bottom-left">

@@ -37,98 +37,119 @@ function getRelatedObjects(geosearchResults, user) {
     if (plaatsEndpoint && user.scopes.includes('HR/R')) {
       // Only fetching 'vestigingen' for a standplaats/ligplaats, so
       // we check for employee status here already
-      fetchWithToken(plaatsEndpoint).then((plaats) => {
-        const vestigingenUri = `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${plaats.hoofdadres.landelijk_id}`
+      fetchWithToken(plaatsEndpoint)
+        .then((plaats) => {
+          const vestigingenUri = `${environment.API_ROOT}handelsregister/vestiging/?nummeraanduiding=${plaats.hoofdadres.landelijk_id}`
 
-        fetchWithToken(vestigingenUri).then((vestigingen) => {
-          const formatted =
-            vestigingen && vestigingen.count ? formatCategory('vestiging', vestigingen) : null
-          const labelLigplaats = plaats.ligplaatsidentificatie ? ' binnen deze ligplaats' : null
-          const labelStandplaats = plaats.standplaatsidentificatie
-            ? ' binnen deze standplaats'
-            : null
-          const label = labelLigplaats || labelStandplaats || ''
-
-          const extended = formatted
-            ? {
-                ...formatted,
-                more: {
-                  label: `Bekijk alle ${formatted.count} vestigingen ${label}`,
-                  endpoint: plaats._links.self.href,
-                },
-              }
-            : null
-          const geosearchResultsCopy = [...geosearchResults]
-
-          if (extended) {
-            // Splice modifies the existing Array, we don't want our input to change hence the copy
-            geosearchResultsCopy.splice(plaatsCategoryIndex + 1, 0, extended)
-          }
-
-          resolve(geosearchResultsCopy)
-        })
-      })
-    } else if (pandEndpoint) {
-      // pand matched, remove monumenten from top results
-      geosearchResults = geosearchResults.filter((item) => item.slug !== 'monument')
-      fetchWithToken(pandEndpoint).then((pand) => {
-        const vestigingenUri = `handelsregister/vestiging/?pand=${pand.pandidentificatie}`
-
-        const requests = [
-          fetchWithToken(pand._adressen.href).then((objecten) => {
-            // In verblijfsobjecten the status field is really a vbo_status field
-            // Rename this field to allow for tranparant processing of the search results
-            objecten.results.forEach((result) => {
-              result.vbo_status = result.vbo_status || result.status
-            })
-            const formatted = objecten && objecten.count ? formatCategory('adres', objecten) : null
-            const extended = formatted
-              ? {
-                  ...formatted,
-                  more: {
-                    label: `Bekijk alle ${formatted.count} adressen binnen dit pand`,
-                    endpoint: pand._links.self.href,
-                  },
-                }
-              : null
-            return extended
-          }),
-          fetchWithToken(pand._monumenten.href).then((objecten) =>
-            objecten && objecten.count ? formatCategory('monument', objecten) : null,
-          ),
-        ]
-
-        if (user.scopes.includes('HR/R')) {
-          requests.push(
-            fetchWithToken(`${environment.API_ROOT}${vestigingenUri}`).then((vestigingen) => {
+          fetchWithToken(vestigingenUri)
+            .then((vestigingen) => {
               const formatted =
                 vestigingen && vestigingen.count ? formatCategory('vestiging', vestigingen) : null
+              const labelLigplaats = plaats.ligplaatsidentificatie ? ' binnen deze ligplaats' : null
+              const labelStandplaats = plaats.standplaatsidentificatie
+                ? ' binnen deze standplaats'
+                : null
+              const label = labelLigplaats || labelStandplaats || ''
+
               const extended = formatted
                 ? {
                     ...formatted,
-                    authScope: formatted.authScope,
                     more: {
-                      label: `Bekijk alle ${formatted.count} vestigingen binnen dit pand`,
+                      label: `Bekijk alle ${formatted.count} vestigingen ${label}`,
+                      endpoint: plaats._links.self.href,
+                    },
+                  }
+                : null
+              const geosearchResultsCopy = [...geosearchResults]
+
+              if (extended) {
+                // Splice modifies the existing Array, we don't want our input to change hence the copy
+                geosearchResultsCopy.splice(plaatsCategoryIndex + 1, 0, extended)
+              }
+
+              resolve(geosearchResultsCopy)
+            })
+            .catch((error) => {
+              // eslint-disable-next-line no-console
+              console.error(`Failed to fetch geosearch for "vestigingen": ${error}`)
+            })
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error(`Failed to fetch geosearch for "plaats": ${error}`)
+        })
+    } else if (pandEndpoint) {
+      // pand matched, remove monumenten from top results
+      geosearchResults = geosearchResults.filter((item) => item.slug !== 'monument')
+      fetchWithToken(pandEndpoint)
+        .then((pand) => {
+          const vestigingenUri = `handelsregister/vestiging/?pand=${pand.pandidentificatie}`
+
+          const requests = [
+            fetchWithToken(pand._adressen.href).then((objecten) => {
+              // In verblijfsobjecten the status field is really a vbo_status field
+              // Rename this field to allow for tranparant processing of the search results
+              objecten.results.forEach((result) => {
+                result.vbo_status = result.vbo_status || result.status
+              })
+              const formatted =
+                objecten && objecten.count ? formatCategory('adres', objecten) : null
+              const extended = formatted
+                ? {
+                    ...formatted,
+                    more: {
+                      label: `Bekijk alle ${formatted.count} adressen binnen dit pand`,
                       endpoint: pand._links.self.href,
                     },
                   }
                 : null
               return extended
             }),
-          )
-        }
+            fetchWithToken(pand._monumenten.href).then((objecten) =>
+              objecten && objecten.count ? formatCategory('monument', objecten) : null,
+            ),
+          ]
 
-        Promise.all(requests).then((results) => {
-          const geosearchResultsCopy = [...geosearchResults]
-          const filteredResults = results.filter((result) => result)
-
-          if (filteredResults.length) {
-            geosearchResultsCopy[pandCategoryIndex].subResults = filteredResults
+          if (user.scopes.includes('HR/R')) {
+            requests.push(
+              fetchWithToken(`${environment.API_ROOT}${vestigingenUri}`).then((vestigingen) => {
+                const formatted =
+                  vestigingen && vestigingen.count ? formatCategory('vestiging', vestigingen) : null
+                const extended = formatted
+                  ? {
+                      ...formatted,
+                      authScope: formatted.authScope,
+                      more: {
+                        label: `Bekijk alle ${formatted.count} vestigingen binnen dit pand`,
+                        endpoint: pand._links.self.href,
+                      },
+                    }
+                  : null
+                return extended
+              }),
+            )
           }
 
-          resolve(geosearchResultsCopy)
+          Promise.all(requests)
+            .then((results) => {
+              const geosearchResultsCopy = [...geosearchResults]
+              const filteredResults = results.filter((result) => result)
+
+              if (filteredResults.length) {
+                geosearchResultsCopy[pandCategoryIndex].subResults = filteredResults
+              }
+
+              resolve(geosearchResultsCopy)
+            })
+            .catch((error) => {
+              // eslint-disable-next-line no-console
+              console.error(`Failed to fetch geosearch results: ${error}`)
+            })
         })
-      })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error(`Failed to fetch geosearch for "pand": ${error}`)
+        })
     } else {
       resolve(geosearchResults)
     }

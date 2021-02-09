@@ -21,7 +21,7 @@ const FooterLinks: FunctionComponent<FooterLinksProps> = ({ children, links }) =
               rel="external noopener noreferrer"
               target="_blank"
               inList
-              data-testid={`footerLink${link.testId}`}
+              data-testid={`footerLink${link.testId ?? ''}`}
             >
               {link.title}
             </Link>
@@ -38,7 +38,7 @@ const FooterLinks: FunctionComponent<FooterLinksProps> = ({ children, links }) =
             as={RouterLink}
             to={toArticleDetail(linkId, link.slug)}
             inList
-            data-testid={`footerLink${link.testId}`}
+            data-testid={`footerLink${link.testId ?? ''}`}
           >
             {link.title}
           </Link>

@@ -88,11 +88,13 @@ const ConstructionFileDetail: FunctionComponent<Bouwdossier> = ({
         ) => (
           <div data-testid={`constructionDocuments-${index}`} key={barcode}>
             <ContentBlock>
-              <SubHeading
-                hasMarginBottom={false}
-                forwardedAs="h3"
-                data-testid="DocumentsHeading"
-              >{`${documentTitle} (${files.length})`}</SubHeading>
+              {documentTitle ? (
+                <SubHeading
+                  hasMarginBottom={false}
+                  forwardedAs="h3"
+                  data-testid="DocumentsHeading"
+                >{`${documentTitle} (${files.length})`}</SubHeading>
+              ) : null}
             </ContentBlock>
             {oloLiaanNumber && (
               <StyledDefinitionList data-testid="oloLiaanNumberDocumentDescription">

@@ -85,7 +85,11 @@ describe('fetchNearestDetail', () => {
       }),
     )
 
-    const result = await fetchNearestDetail({ latitude: 1, longitude: 2 }, [{} as MapLayer], 1)
+    const result = await fetchNearestDetail(
+      { latitude: 1, longitude: 2 },
+      [{ detailUrl: 'some/url' } as MapLayer],
+      1,
+    )
 
     expect(result).toEqual({
       detailIsShape: undefined,

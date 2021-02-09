@@ -5,7 +5,8 @@ import { getNummeraanduidingByAddress } from '../../api/bag/v1/nummeraanduiding-
 jest.mock('../../shared/services/query-string-parser/query-string-parser')
 jest.mock('../../shared/services/api/api')
 jest.mock('../../api/bag/v1/nummeraanduiding-v1', () => ({
-  ...(jest.requireActual('../../api/bag/v1/nummeraanduiding-v1') as any),
+  // @ts-ignore
+  ...jest.requireActual('../../api/bag/v1/nummeraanduiding-v1'),
   getNummeraanduidingByAddress: jest.fn(),
 }))
 

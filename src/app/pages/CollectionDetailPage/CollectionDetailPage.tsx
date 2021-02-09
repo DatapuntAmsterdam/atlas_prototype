@@ -8,7 +8,7 @@ import CardListBlock, { CMSCollectionList } from '../../components/CardList/Card
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import useDocumentTitle from '../../utils/useDocumentTitle'
-import useFromCMS, { CMSResultItem } from '../../utils/useFromCMS'
+import useFromCMS, { CMSConfig, CMSResultItem } from '../../utils/useFromCMS'
 import CollectionTileGrid from './CollectionTileGrid'
 
 const StyledRow = styled(Row)`
@@ -39,7 +39,7 @@ const CollectionDetailPage: FunctionComponent = () => {
   const { id } = useParams<CollectionDetailPageParams>()
   const { setDocumentTitle } = useDocumentTitle()
   const { results, fetchData, loading, error } = useFromCMS<CollectionResult>(
-    cmsConfig.CMS_COLLECTION_DETAIL,
+    cmsConfig.CMS_COLLECTION_DETAIL as CMSConfig,
     id,
   )
 
@@ -78,7 +78,8 @@ const CollectionDetailPage: FunctionComponent = () => {
           <StyledCardListBlock {...{ results: listResults, loading }} />
           {results?.field_link?.uri && (
             <Link inList href={results?.field_link?.uri} title={results?.field_link?.title}>
-              {results?.field_link?.title || `Meer over ${results?.title}`}
+              {results?.field_link?.title ??
+                (results?.title ? `Meer over ${results?.title}` : 'Lees meer')}
             </Link>
           )}
         </Row>

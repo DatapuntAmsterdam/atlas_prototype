@@ -27,6 +27,7 @@ describe('print module', () => {
     cy.intercept('**/panorama/thumbnail?*').as('getPanoThumbnail')
     cy.get(DATA_SEARCH.autoSuggestInput).type('10581111')
     cy.wait('@getTypeAhead')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(500)
     cy.get(DATA_SEARCH.autoSuggest).contains('10581111').click()
     cy.wait('@getResults')

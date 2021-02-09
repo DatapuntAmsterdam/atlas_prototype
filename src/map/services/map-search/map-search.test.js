@@ -181,7 +181,9 @@ describe('mapSearch service', () => {
         {
           ...vestigingResult,
           properties: {
+            // eslint-disable-next-line no-underscore-dangle
             uri: vestigingResult._links.self.href,
+            // eslint-disable-next-line no-underscore-dangle
             display: vestigingResult._display,
             type: 'vestiging',
             parent: 'bag/standplaats',
@@ -220,7 +222,9 @@ describe('mapSearch service', () => {
         {
           ...vestigingResult,
           properties: {
+            // eslint-disable-next-line no-underscore-dangle
             uri: vestigingResult._links.self.href,
+            // eslint-disable-next-line no-underscore-dangle
             display: vestigingResult._display,
             type: 'vestiging',
             parent: 'bag/ligplaats',

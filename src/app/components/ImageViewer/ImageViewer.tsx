@@ -95,8 +95,8 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     if (viewerInstance) viewerInstance.viewport.zoomTo(newZoomLevel)
   }
 
-  const handleDownload = async (imageUrl: string, size: string) => {
-    await downloadFile(
+  const handleDownload = (imageUrl: string, size: string) => {
+    downloadFile(
       imageUrl,
       {
         method: 'get',

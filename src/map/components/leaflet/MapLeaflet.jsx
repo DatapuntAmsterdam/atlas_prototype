@@ -37,7 +37,9 @@ const visibleToOpacity = (isVisible) => (isVisible ? 100 : 0)
 const convertBounds = (map) => {
   const leafletBounds = map.getBounds()
   return {
+    // eslint-disable-next-line no-underscore-dangle
     northEast: [leafletBounds._northEast.lat, leafletBounds._northEast.lng],
+    // eslint-disable-next-line no-underscore-dangle
     southWest: [leafletBounds._southWest.lat, leafletBounds._southWest.lng],
   }
 }
@@ -234,13 +236,19 @@ class MapLeaflet extends Component {
           right: '0',
           top: '0',
         }}
+        // eslint-disable-next-line @typescript-eslint/unbound-method
         onResize={this.handleResize}
       >
         <Map
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           ref={this.setMapElement}
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           onZoomEnd={this.onZoomEnd}
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           onClick={this.onClick}
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           onDragEnd={this.onDragEnd}
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           onDraw={this.draw}
           center={center}
           zoom={zoom}
@@ -290,6 +298,7 @@ class MapLeaflet extends Component {
               animate={false}
               maxClusterRadius={50}
               chunkedLoading
+              // eslint-disable-next-line @typescript-eslint/unbound-method
               getMarkerGroupBounds={this.onClusterGroupBounds}
               ref={this.setActiveElement}
               disableClusteringAtZoom={baseLayer.baseLayerOptions.maxZoom}

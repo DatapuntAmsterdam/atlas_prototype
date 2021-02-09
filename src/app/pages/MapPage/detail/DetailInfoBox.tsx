@@ -11,8 +11,7 @@ import {
 import styled from 'styled-components'
 import Metadata from '../../../../shared/assets/icons/metadata.svg'
 import DetailDefinitionList from './DetailDefinitionList'
-import { DetailResultItemDefinitionListEntry } from '../../../../map/types/details'
-import { Definition } from '../../../../detail/services/glossary.constant'
+import { InfoBoxProps } from '../../../../map/types/details'
 import Spacer from '../../../components/Spacer/Spacer'
 
 const StyledAlert = styled(Alert)`
@@ -22,10 +21,6 @@ const StyledAlert = styled(Alert)`
 const StyledButton = styled(Button)`
   border: 1px solid ${themeColor('tint', 'level3')};
 `
-
-export type InfoBoxProps = {
-  meta?: DetailResultItemDefinitionListEntry[]
-} & Pick<Definition, 'url' | 'description' | 'plural'>
 
 const DetailInfoBox: FunctionComponent<InfoBoxProps> = ({ plural, description, url, meta }) => {
   const [open, setOpen] = useState(false)

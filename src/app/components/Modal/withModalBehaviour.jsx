@@ -23,6 +23,7 @@ function withModalBehaviour(WrappedComponent) {
     // Hack to open the modal from other libraries than React (now used by angular)
     componentDidMount() {
       const { id, open } = this.props
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       window.addEventListener(`openForm_${id}`, this.handleOpen)
 
       if (open) {
@@ -39,6 +40,7 @@ function withModalBehaviour(WrappedComponent) {
 
     componentWillUnmount() {
       const { id } = this.props
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       window.removeEventListener(`openForm_${id}`, this.handleOpen)
     }
 
@@ -54,6 +56,7 @@ function withModalBehaviour(WrappedComponent) {
 
     render() {
       const { open } = this.state
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       return <WrappedComponent {...this.props} handleClose={this.handleClose} open={open} />
     }
   }

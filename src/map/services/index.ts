@@ -1,5 +1,6 @@
 import environment from '../../environment'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const mapBaseLayers = require('../../../public/static/map/map-base-layers.config.json')
 
 // TODO: Generate these types from the GraphQL schema.

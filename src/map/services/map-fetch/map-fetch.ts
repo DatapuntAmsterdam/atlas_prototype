@@ -1,10 +1,13 @@
-import { rdToWgs84 } from '../../../shared/services/coordinate-reference-system/crs-converter'
+import { LatLngLiteral } from 'leaflet'
+import { rdToWgs84 } from '../../../shared/services/coordinate-reference-system'
 import getCenter from '../../../shared/services/geo-json/geo-json'
 import { ServiceDefinition } from '../map-services.config'
 import { DetailInfo } from '../../types/details'
+import { DetailResponse } from '../map'
+import { Wsg84Coordinate } from '../../../shared/services/coordinate-reference-system/crs-converter'
 
 export default async function mapFetch(
-  result: any,
+  result: DetailResponse,
   detailInfo: DetailInfo,
   serviceDefinition: ServiceDefinition,
 ) {
@@ -14,13 +17,15 @@ export default async function mapFetch(
   const geometry = result.geometrie ?? result.geometry ?? normalizedResult?.geometry ?? null
   const geometryCenter = geometry && getCenter(geometry)
   const wgs84Center = geometryCenter ? rdToWgs84(geometryCenter) : null
-  let location = result?.location ?? wgs84Center ?? null
+  let location: LatLngLiteral | Wsg84Coordinate | null = result?.location ?? wgs84Center ?? null
 
   // Some methods do not accept a standard LatLngLiteral, so we need to spread this over.
   if (location) {
     location = {
       ...location,
+      // @ts-ignore
       lat: location.latitude ?? location.lat,
+      // @ts-ignore
       lng: location.longitude ?? location.lng,
     }
   }
@@ -33,6 +38,7 @@ export default async function mapFetch(
 
   return {
     data: details,
+    // eslint-disable-next-line no-underscore-dangle
     label: result._display,
     // "label" may be overwritten by the result or normalizedData, but the location and geometry are constructed above
     geometrie: geometry,

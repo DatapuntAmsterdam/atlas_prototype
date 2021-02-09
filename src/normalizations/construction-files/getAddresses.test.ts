@@ -51,11 +51,11 @@ describe('getAddresses', () => {
       const adres = cloneDeep(adressen[0])
       adres.verblijfsobjecten_label = []
 
-      expect(formatAddress(adres)).toEqual(`${adres.straat} ${adres.huisnummer_van}`)
+      expect(formatAddress(adres)).toEqual(`${adres.straat} ${adres.huisnummer_van ?? ''}`)
 
       adres.huisnummer_tot = undefined
 
-      expect(formatAddress(adres)).toEqual(`${adres.straat} ${adres.huisnummer_van}`)
+      expect(formatAddress(adres)).toEqual(`${adres.straat} ${adres.huisnummer_van ?? ''}`)
     })
 
     it('should have huisnummer_tot', () => {
@@ -65,7 +65,7 @@ describe('getAddresses', () => {
       adres.huisnummer_tot = huisnummerTot
 
       expect(formatAddress(adres)).toEqual(
-        `${adres.straat} ${adres.huisnummer_van}-${huisnummerTot}`,
+        `${adres.straat} ${adres.huisnummer_van as number}-${huisnummerTot}`,
       )
     })
 

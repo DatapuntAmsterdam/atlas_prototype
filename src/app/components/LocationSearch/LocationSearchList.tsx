@@ -4,16 +4,29 @@ import { List } from '@amsterdam/asc-ui'
 import { toDetailFromEndpoint } from '../../../store/redux-first-router/actions'
 import LocationSearchListItem, { Result } from './LocationSearchListItem'
 import { ViewMode } from '../../../shared/ducks/ui/ui'
+import AuthScope from '../../../shared/services/api/authScope'
 
 const StyledList = styled(List)`
   margin-bottom: 0;
 `
 
-type Props = {
-  categoryResults?: {
-    slug?: unknown
-    results: Result[]
+export type CategoryResult = {
+  count: number
+  authScope: AuthScope
+  warning?: string
+  singular: string
+  plural: string
+  slug?: unknown
+  more?: {
+    endpoint: string
+    label: string
   }
+  subResults?: Array<CategoryResult>
+  results: Result[]
+}
+
+type Props = {
+  categoryResults?: CategoryResult
   limit: number
 }
 

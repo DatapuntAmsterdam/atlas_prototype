@@ -66,6 +66,7 @@ describe('employee permissions', () => {
 
       cy.waitForAdressDetail()
 
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(250)
 
       // Wait for all listitems to be visible

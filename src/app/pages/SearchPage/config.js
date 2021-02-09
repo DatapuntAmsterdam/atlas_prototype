@@ -24,12 +24,9 @@ import {
   specialSearchQuery,
 } from './documents.graphql'
 import MapSearchResults from './MapSearchResults'
-import SearchType from './constants'
+import { SearchType } from './constants'
 
-export const MAX_RESULTS = 50
 export const DEFAULT_LIMIT = 10
-
-export const DATA_FILTERS = 'dataTypes'
 
 // This object is used to define the sort order of the search page
 const SEARCH_TYPES_CONFIG = {

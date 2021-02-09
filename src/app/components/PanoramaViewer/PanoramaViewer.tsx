@@ -104,12 +104,19 @@ const PanoramaViewer: FunctionComponent = () => {
   // Fetch image when the location changes
   useEffect(() => {
     if (marzipanoViewer && location && pano) {
-      ;(async () => {
-        const res = await getImageDataByLocation(
+      ;(() => {
+        // @ts-ignore
+        getImageDataByLocation(
           [location.lat, location.lng],
-          PANO_LABELS.find(({ id }) => id === panoTag)?.tags,
+          PANO_LABELS.find(({ id }) => id === panoTag)?.tags || [],
         )
-        fetchPanoramaImage(res)
+          .then((res) => {
+            fetchPanoramaImage(res)
+          })
+          .catch(() => {
+            // eslint-disable-next-line no-console
+            console.error('PanoramaViewer: Could not retrieve image data from location')
+          })
       })()
     }
   }, [marzipanoViewer, location, panoTag])

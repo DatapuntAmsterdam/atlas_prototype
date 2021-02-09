@@ -35,7 +35,8 @@ export const pageEndpointTypeMapping = {
 }
 
 export const pageTypeToEndpoint = (type: string, subtype: string, id: string) => {
-  const endpointType = pageEndpointTypeMapping[`${type}/${subtype}/`] || `${type}/${subtype}/`
+  const endpointType: keyof typeof pageEndpointTypeMapping =
+    pageEndpointTypeMapping[`${type}/${subtype}/`] || `${type}/${subtype}/`
   return `${environment.API_ROOT}${endpointType}${id}/`
 }
 

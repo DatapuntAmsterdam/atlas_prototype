@@ -70,7 +70,7 @@ export const fetchWithToken = <T = any>(
 
   return fetch(fullUrl, options)
     .then((response) => handleErrors(response, reloadOnUnauthorized))
-    .then((response) => response.json())
+    .then((response) => response.json()) as Promise<T>
 }
 
 export const createUrlWithToken = (url: string, token: string) => {
@@ -109,5 +109,5 @@ export const fetchProxy = <T = any>(url: string, init: FetchOptions = {}): Promi
 
   return fetch(fullUrl.toString(), options)
     .then((response) => handleErrors(response))
-    .then((response) => response.json())
+    .then((response) => response.json()) as Promise<T>
 }

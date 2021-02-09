@@ -39,7 +39,7 @@ describe('useFromCMS', () => {
     },
   }
 
-  it('should have correct initial values', async () => {
+  it('should have correct initial values', () => {
     const { result } = renderHook(() => useFromCMS(mockCMSconfig.TEST, id))
 
     expect(result.current.loading).toBe(true)

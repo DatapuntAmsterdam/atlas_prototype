@@ -22,6 +22,7 @@ const getDetailEndpoint = (config, rawDataRow) =>
 const formatData = (config, rawData) =>
   rawData.map((rawDataRow) => {
     const newDataRow = { ...rawDataRow }
+    // eslint-disable-next-line no-underscore-dangle
     newDataRow._links = {
       self: {
         href: getDetailEndpoint(config, newDataRow),

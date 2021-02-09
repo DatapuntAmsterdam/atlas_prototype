@@ -73,6 +73,7 @@ class MapContainer extends Component {
         {/* as it will reset the map's state */}
         <div className={`c-map c-map--drawing-mode-${drawMode} qa-map-container`}>
           <LeafletContainer
+            // eslint-disable-next-line @typescript-eslint/unbound-method
             getLeafletInstance={this.setLeafletInstance}
             showMapLink={showMapLink}
           />

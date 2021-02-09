@@ -48,9 +48,7 @@ const OrganizationBlock = () => {
   const { results, fetchData, loading, error } = useFromCMS(cmsConfig.HOME_ORGANIZATION)
 
   useEffect(() => {
-    ;(async () => {
-      await fetchData()
-    })()
+    fetchData()
   }, [])
 
   return (
