@@ -51,9 +51,9 @@ export const getLocaleFormattedDate = ({
 
   const dateParts = [
     year,
-    !Number.isNaN(monthIndex) && monthIndex - 1,
+    !Number.isNaN(monthIndex) && Math.max(0, monthIndex - 1),
     !Number.isNaN(day) && day,
-  ].filter(Boolean)
+  ].filter(Number.isFinite)
 
   const localeDate = new Date(Date.UTC(...dateParts))
 

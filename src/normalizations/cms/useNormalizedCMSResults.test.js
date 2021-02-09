@@ -92,6 +92,26 @@ describe('useNormalizedCMSResults', () => {
         `${field_publication_day}-${field_publication_month}-${field_publication_year}`,
       )
     })
+
+    it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day 1', () => {
+      const field_publication_year = 2020
+      const field_publication_month = 1
+      const field_publication_day = 1
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
+        field_publication_year,
+        field_publication_month,
+        field_publication_day,
+      })
+
+      expect(localeDate).toEqual(
+        new Date(
+          Date.UTC(field_publication_year, field_publication_month - 1, field_publication_day),
+        ),
+      )
+      expect(localeDateFormatted).toEqual(
+        `${field_publication_day}-${field_publication_month}-${field_publication_year}`,
+      )
+    })
     /* eslint-enable camelcase */
   })
 
