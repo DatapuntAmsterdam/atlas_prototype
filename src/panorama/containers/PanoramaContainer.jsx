@@ -175,8 +175,9 @@ class PanoramaContainer extends Component {
         data-testid="panoramaContainer"
       >
         <div
-          // eslint-disable-next-line no-return-assign
-          ref={(el) => (this.panoramaRef = el)}
+          ref={(el) => {
+            this.panoramaRef = el
+          }}
           tabIndex="-1"
           className="c-panorama__marzipano js-marzipano-viewer"
         />

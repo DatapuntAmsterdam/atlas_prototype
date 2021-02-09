@@ -116,7 +116,8 @@ const MapCollectionCard: FunctionComponent<MapCollectionCardProps> = ({ result }
     <CardWrapper>
       <StyledCard>
         <CardHeader href={result.href}>
-          <CardImage src={`${environment.CMS_ROOT}${result.meta.thumbnail}`} alt={result.title} />
+          {/* Empty alt text necessary so screen-readers know this can be ignored, as it's already wrapped in a link with a heading */}
+          <CardImage src={`${environment.CMS_ROOT}${result.meta.thumbnail}`} alt="" />
           <CardHeadingContainer>
             <CardHeaderIcon inline size={16}>
               <MapLayers />

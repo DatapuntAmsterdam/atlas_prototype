@@ -1,9 +1,18 @@
 import { DocumentNode, GraphQLFormattedError } from 'graphql'
 import { useQuery } from 'urql'
 import { ErrorExtensions } from '../../models/graphql'
+import { ActiveFilter } from './SearchPageDucks'
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-const usePagination = (query: DocumentNode, variables: Object, resolver: string | string[]) => {
+type Variables = {
+  q: string
+  page: number | null
+  sort?: { field: string; order: string }
+  limit: number | null
+  withPagination: boolean
+  filters: ActiveFilter[]
+}
+
+const usePagination = (query: DocumentNode, variables: Variables, resolver: string | string[]) => {
   const [result] = useQuery({
     query,
     variables,

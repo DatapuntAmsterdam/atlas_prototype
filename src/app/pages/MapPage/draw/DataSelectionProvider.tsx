@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { useStateRef } from '@amsterdam/arm-core'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { LatLng, LatLngTuple } from 'leaflet'
 import { useCallback, useEffect, useState, FunctionComponent } from 'react'
@@ -71,6 +71,7 @@ async function getMapVisualization(
   type: DataSelectionType,
 ): Promise<MapVisualization> {
   const searchParams = new URLSearchParams(params)
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { object_list: data, eigenpercelen, niet_eigenpercelen, extent } = await fetchWithToken(
     `${config[type].endpointMapVisualization}?${searchParams.toString()}`,
   )

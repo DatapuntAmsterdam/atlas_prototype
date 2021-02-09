@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { TileLayerOptions, WMSOptions } from 'leaflet'
 import { createContext } from 'react'

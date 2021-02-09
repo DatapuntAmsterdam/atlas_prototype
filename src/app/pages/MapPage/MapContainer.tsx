@@ -1,4 +1,5 @@
 import { Alert, Heading, hooks, Link } from '@amsterdam/asc-ui'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature } from 'geojson'
 import { FunctionComponent, useEffect, useMemo, useReducer, useState } from 'react'
 import { useSelector } from 'react-redux'

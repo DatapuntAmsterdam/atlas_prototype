@@ -1,4 +1,5 @@
 import { AlertLevel } from '@amsterdam/asc-ui'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Position } from 'geojson'
 import { LocationDescriptor, LocationDescriptorObject } from 'history'
 import { ReactNode } from 'react'

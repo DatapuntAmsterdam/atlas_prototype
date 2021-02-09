@@ -37,10 +37,7 @@ const NotificationAlert: FunctionComponent = () => {
     ;(() => {
       fetchData(endpoint)
         .then(() => {})
-        .catch((error: string) => {
-          // eslint-disable-next-line no-console
-          console.error(`NotificationAlert: could not fetch notifications: ${error}`)
-        })
+        .catch(() => {})
     })()
   }, [])
 

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Geometry } from 'geojson'
 import { SmallAPIReference, Links, APIReference } from '../../types'
 

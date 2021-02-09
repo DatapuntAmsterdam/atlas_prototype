@@ -28,7 +28,7 @@ module.exports = {
   },
   rules: {
     'import/no-cycle': 'off',
-    'import/no-extraneous-dependencies': 'off',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-console': 'error',
 
     '@typescript-eslint/explicit-module-boundary-types': 'off',

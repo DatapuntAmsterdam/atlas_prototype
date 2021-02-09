@@ -1,9 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": [
-    "**/*",
-    "**/.eslintrc.js"
-  ],
-  // explicitly override exclude with nothing, so it will lint test files
+  "include": ["**/*", "**/.eslintrc.js"],
+  "_comment": "explicitly override exclude with nothing, so it will lint test files",
   "exclude": []
 }

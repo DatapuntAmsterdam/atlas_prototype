@@ -113,10 +113,7 @@ const PanoramaViewer: FunctionComponent = () => {
           .then((res) => {
             fetchPanoramaImage(res)
           })
-          .catch(() => {
-            // eslint-disable-next-line no-console
-            console.error('PanoramaViewer: Could not retrieve image data from location')
-          })
+          .catch(() => {})
       })()
     }
   }, [marzipanoViewer, location, panoTag])

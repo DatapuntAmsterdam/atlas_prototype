@@ -1,4 +1,5 @@
 import { LatLngBoundsLiteral } from 'leaflet'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { GeoJSON, Position } from 'geojson'
 
 function getCoordinates(

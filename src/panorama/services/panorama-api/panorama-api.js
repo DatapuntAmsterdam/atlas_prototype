@@ -75,7 +75,7 @@ const imageData = (response) => {
           year: adjacency.mission_year,
         }))
       : [],
-    location: [center.x, center.y],
+    location: [center?.x || 0, center?.y || 0],
     image: {
       baseurl: panorama.cubic_img_baseurl,
       pattern: panorama.cubic_img_pattern,
@@ -86,7 +86,7 @@ const imageData = (response) => {
 }
 
 function fetchPanorama(url) {
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetchWithToken(url)
       // eslint-disable-next-line no-underscore-dangle
       .then((json) => json._embedded.adjacencies)
@@ -95,8 +95,6 @@ function fetchPanorama(url) {
       })
       .catch((error) => reject(error))
   })
-
-  return promise
 }
 
 function getAdjacencies(url, params) {
@@ -120,7 +118,7 @@ export function getImageDataByLocation(location, tags) {
   const getLocationUrl = `${environment.API_ROOT}${prefix}/?${locationRange}${tagsQuery}`
   const limitResults = 'limit_results=1'
 
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetchWithToken(`${getLocationUrl}&${standardRadius}&${newestInRange}&${limitResults}`)
       // eslint-disable-next-line no-underscore-dangle
       .then((json) => json._embedded.panoramas[0])
@@ -142,8 +140,6 @@ export function getImageDataByLocation(location, tags) {
       })
       .catch((error) => reject(error))
   })
-
-  return promise
 }
 
 export function getImageDataById(id, tags) {

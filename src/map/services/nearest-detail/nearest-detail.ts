@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Feature, Geometry } from 'geojson'
 import environment from '../../../environment'
 import { fetchWithToken } from '../../../shared/services/api/api'

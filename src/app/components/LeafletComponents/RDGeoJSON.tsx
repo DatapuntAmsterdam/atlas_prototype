@@ -1,4 +1,5 @@
 import { RDGeoJSON as RDGeoJSONComponent } from '@amsterdam/arm-core'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Geometry } from 'geojson'
 import { FunctionComponent } from 'react'
 
