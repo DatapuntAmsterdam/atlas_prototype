@@ -42,7 +42,7 @@ export const getLocaleFormattedDate = ({
   if (field_publication_date) {
     return {
       localeDate: field_publication_date,
-      localeDateFormatted: formatDate(new Date(field_publication_date.replace(' ', 'T'))),
+      localeDateFormatted: formatDate(new Date(field_publication_date)),
     }
   }
 
