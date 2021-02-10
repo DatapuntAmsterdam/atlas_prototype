@@ -48,11 +48,13 @@ export const getLocaleFormattedDate = ({
 
   const day = parseInt(field_publication_day, 10)
   const monthIndex = parseInt(field_publication_month, 10)
+  const monthIsValidNumber = Number.isNaN(monthIndex) === false
+  const dayIsValidNumber = Number.isNaN(day) === false
 
   const dateParts = [
     year,
-    !Number.isNaN(monthIndex) && Math.max(0, monthIndex - 1),
-    !Number.isNaN(day) && day,
+    monthIsValidNumber && Math.max(0, monthIndex - 1),
+    dayIsValidNumber && day,
   ].filter(Number.isFinite)
 
   const localeDate = new Date(Date.UTC(...dateParts))
