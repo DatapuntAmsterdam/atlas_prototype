@@ -102,6 +102,22 @@ const FeedbackModalComponent = ({
         Probleem melden
       </Button>
     </ModalBlock>
+    <Divider gutter />
+    <ModalBlock>
+      <Heading as="h4">Verzoek nieuwe data of functionaliteiten</Heading>
+      <Paragraph>
+        Heb je een verzoek voor bijvoorbeeld een nieuwe dataset, kaartlaag of een verbetering van de
+        site? We horen het graag.
+      </Paragraph>
+      <Button
+        as="a"
+        title="Probleem melden"
+        variant="primary"
+        href="https://formulier.amsterdam.nl/thema/datapunt/verzoek-nieuwe-data-functionaliteit/"
+      >
+        Nieuw verzoek
+      </Button>
+    </ModalBlock>
     <Divider transparent />
     <ModalBlock>
       <Link variant="inline" to={toHelpPage()} onClick={handleClose} as={RouterLink}>
