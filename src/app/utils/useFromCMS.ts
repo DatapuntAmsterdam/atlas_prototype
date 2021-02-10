@@ -91,10 +91,11 @@ function useFromCMS<T = CMSResultItem[]>(
         }
 
         setResults(result)
-        setLoading(false)
       })
       .catch(() => {
         setError(true)
+      })
+      .finally(() => {
         setLoading(false)
       })
 
