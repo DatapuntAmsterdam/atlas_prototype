@@ -34,6 +34,8 @@ type ImageViewerProps = {
   printMode: boolean
 }
 
+export const IMAGE_VIEWER_TEST_ID = 'imageViewer'
+
 const ImageViewer: FunctionComponent<ImageViewerProps> = ({
   handleResetFile,
   fileName,
@@ -127,7 +129,11 @@ const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
   return (
     <>
-      <ImageViewerContainer ref={viewerRef} printMode={printMode} />
+      <ImageViewerContainer
+        ref={viewerRef}
+        printMode={printMode}
+        data-testid={IMAGE_VIEWER_TEST_ID}
+      />
 
       {!loading && !error ? (
         <ViewerControls

@@ -74,25 +74,26 @@ function useFromCMS<T = CMSResultItem[]>(
           result = cmsJsonApiNormalizer(data, fields)
         }
 
-      // Todo: Need to refactor this when we really know what types and fields to expect from the CMS
-      // This if-statement is an "exeption" for the CollectionDetail pages.
-      if (result.field_blocks && result.field_items) {
-        result = {
-          ...result,
-          // @ts-ignore
-          field_blocks: result.field_blocks.map(({ field_content, ...otherFields }) => ({
-            ...otherFields,
-            field_content: normalizeCMSResults(field_content),
-          })),
-          field_items: normalizeCMSResults(result.field_items),
+        // Todo: Need to refactor this when we really know what types and fields to expect from the CMS
+        // This if-statement is an "exeption" for the CollectionDetail pages.
+        if (result.field_blocks && result.field_items) {
+          result = {
+            ...result,
+            // @ts-ignore
+            field_blocks: result.field_blocks.map(({ field_content, ...otherFields }) => ({
+              ...otherFields,
+              field_content: normalizeCMSResults(field_content),
+            })),
+            field_items: normalizeCMSResults(result.field_items),
+          }
+        } else {
+          result = normalizeCMSResults(result)
         }
-      } else {
-        result = normalizeCMSResults(result)
-      }
-      setResults(result)
-    } catch (e) {
-      setError(true)
-    }
+        setResults(result)
+      })
+      .catch(() => {
+        setError(true)
+      })
 
     setLoading(false)
     return results

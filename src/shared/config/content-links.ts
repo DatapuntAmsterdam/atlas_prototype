@@ -1,5 +1,5 @@
 export interface ContentLinkBase {
-  testId?: string
+  testId: string
   title: string
   description?: string
 }

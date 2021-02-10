@@ -24,7 +24,7 @@ export interface NavigationLink {
   id: number
   to: To | LocationDescriptorObject
   CardIcon?: () => JSX.Element
-  testId?: string
+  testId: string
   title: string
   description?: string
 }

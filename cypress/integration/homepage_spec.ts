@@ -379,7 +379,7 @@ describe('Homepage module', () => {
           })
         })
 
-        cy.get(`[data-testid="${FOOTER_LINK_PRIVACY.testId as string}"]`)
+        cy.get(`[data-testid="${FOOTER_LINK_PRIVACY.testId}"]`)
           .should('have.attr', 'href', FOOTER_LINK_PRIVACY.href)
           .and('be.visible')
       })
