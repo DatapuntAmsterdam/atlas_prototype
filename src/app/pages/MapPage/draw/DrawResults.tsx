@@ -7,6 +7,7 @@ import {
   breakpoint,
   Button,
   CompactPager,
+  Heading,
   hooks,
   Label,
   Link,
@@ -74,18 +75,8 @@ const StyledCompactPager = styled(CompactPager)`
   width: 100%;
 `
 
-const AccordionContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-`
-const StyledAccordion = styled(Accordion)`
-  margin-top: ${themeSpacing(2)};
-  & + * {
-    margin-bottom: ${themeSpacing(5)};
-  }
+const ResultsHeading = styled(Heading)`
+  margin: ${themeSpacing(2)} 0;
 `
 
 const Wrapper = styled.div`
@@ -294,80 +285,55 @@ const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) =>
         <AccordionWrapper>
           {dataSelectionWithMarkers.map(({ id, result, size, page, totalCount, mapData }, i) => (
             <Fragment key={id}>
-              <StyledAccordion
-                {...(dataSelectionWithMarkers.length === 1
-                  ? {
-                      isOpen: true,
-                    }
-                  : {})}
-                title={`Selectie ${i + 1}: ${mapData?.distanceText ?? ''}`}
-                onMouseEnter={() => {
-                  if (mapData?.layer) {
-                    mapData.layer.setStyle({
-                      weight: 6,
-                      fillOpacity: 0.7,
-                    })
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (mapData?.layer) {
-                    mapData.layer.setStyle({
-                      weight: 4,
-                      fillOpacity: 0.4,
-                    })
-                  }
-                }}
-              >
-                <AccordionContent>
-                  {!delayedLoadingIds.includes(id) && !errorIds.includes(id) && (
-                    <>
-                      {result.map(({ id: locationId, name: locationName, marker }) => (
-                        <Link
-                          to={config[type].toDetailAction(locationId)}
-                          as={ResultLink}
-                          inList
-                          key={locationId}
-                          onMouseEnter={() => {
-                            if (marker) {
-                              setHighlightMarker(marker.latLng)
-                            }
-                          }}
-                          onMouseLeave={() => {
-                            setHighlightMarker(null)
-                          }}
-                        >
-                          {locationName}
-                        </Link>
-                      ))}
-                      {totalCount > size && (
-                        <StyledCompactPager
-                          page={page}
-                          pageSize={size}
-                          collectionSize={totalCount}
-                          onPageChange={(pageNumber) => {
-                            handleFetchData(mapData?.layer?.id, pageNumber)
-                          }}
-                        />
-                      )}
-                    </>
-                  )}
-                  {delayedLoadingIds.includes(id) && !errorIds.includes(id) && (
-                    <LoadingSpinner size={30} />
-                  )}
-                  {!delayedLoadingIds.length && errorIds.includes(id) && (
-                    <ErrorMessage
-                      message="Er is een fout opgetreden bij het laden van dit blok."
-                      buttonLabel="Probeer opnieuw"
-                      buttonOnClick={() => {
-                        handleFetchData(mapData?.layer?.id)
+              {/* @ts-ignore */}
+              <ResultsHeading as="h5" styleAs="h3">
+                Locatie: ingetekend ({mapData?.distanceText ?? ''})
+              </ResultsHeading>
+              {!delayedLoadingIds.includes(id) && !errorIds.includes(id) && (
+                <>
+                  {result.map(({ id: locationId, name: locationName, marker }) => (
+                    <Link
+                      to={config[type].toDetailAction(locationId)}
+                      as={ResultLink}
+                      inList
+                      key={locationId}
+                      onMouseEnter={() => {
+                        if (marker) {
+                          setHighlightMarker(marker.latLng)
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        setHighlightMarker(null)
+                      }}
+                    >
+                      {locationName}
+                    </Link>
+                  ))}
+                  {totalCount > size && (
+                    <StyledCompactPager
+                      page={page}
+                      pageSize={size}
+                      collectionSize={totalCount}
+                      onPageChange={(pageNumber) => {
+                        handleFetchData(mapData?.layer?.id, pageNumber)
                       }}
                     />
                   )}
-                </AccordionContent>
-                {totalCount === 0 && (
-                  <StyledAlert level="info">Er zijn geen resultaten</StyledAlert>
-                )}
-              </StyledAccordion>
+                </>
+              )}
+              {delayedLoadingIds.includes(id) && !errorIds.includes(id) && (
+                <LoadingSpinner size={30} />
+              )}
+              {!delayedLoadingIds.length && errorIds.includes(id) && (
+                <ErrorMessage
+                  message="Er is een fout opgetreden bij het laden van dit blok."
+                  buttonLabel="Probeer opnieuw"
+                  buttonOnClick={() => {
+                    handleFetchData(mapData?.layer?.id)
+                  }}
+                />
+              )}
+              {totalCount === 0 && <StyledAlert level="info">Er zijn geen resultaten</StyledAlert>}
             </Fragment>
           ))}
         </AccordionWrapper>
