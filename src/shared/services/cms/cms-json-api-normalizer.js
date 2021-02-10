@@ -4,7 +4,7 @@ import normalize from 'json-api-normalize'
 export const getType = (type) => type && type.replace('node--', '')
 
 function getNormalizedItem(item, extraData = {}) {
-  // Make sure the correct fields have data here to be used by useNormalizedCMSResults()
+  // Make sure the correct fields have data here to be used by normalizeCMSResults()
   return {
     ...extraData,
     ...item,

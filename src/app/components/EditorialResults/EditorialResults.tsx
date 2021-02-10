@@ -2,7 +2,7 @@ import { CardContainer } from '@amsterdam/asc-ui'
 import { GraphQLFormattedError } from 'graphql'
 import { FunctionComponent, memo } from 'react'
 import styled from 'styled-components'
-import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/useNormalizedCMSResults'
+import { EDITORIAL_DETAIL_ACTIONS } from '../../../normalizations/cms/normalizeCMSResults'
 import { CmsType } from '../../../shared/config/cms.config'
 import {
   toArticleSearch,

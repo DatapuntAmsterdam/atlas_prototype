@@ -1,11 +1,11 @@
 import { toArticleDetail } from '../../app/links'
 import { toSpecialDetail } from '../../store/redux-first-router/actions'
 import { CmsType } from '../../shared/config/cms.config'
-import useNormalizedCMSResults, {
+import normalizeCMSResults, {
   getLinkProps,
   getLocaleFormattedDate,
   normalizeObject,
-} from './useNormalizedCMSResults'
+} from './normalizeCMSResults'
 
 jest.mock('../../app/links')
 jest.mock('../../store/redux-first-router/actions')
@@ -13,7 +13,7 @@ jest.mock('../../store/redux-first-router/actions')
 toArticleDetail.mockImplementation(() => 'to-article')
 toSpecialDetail.mockImplementation(() => 'to-special')
 
-describe('useNormalizedCMSResults', () => {
+describe('normalizeCMSResults', () => {
   describe('getLocaleFormattedDate', () => {
     /* eslint-disable camelcase */
     it('returns an object with empty values', () => {
@@ -272,17 +272,17 @@ describe('useNormalizedCMSResults', () => {
     })
 
     it('normalizes the data when it is an array', () => {
-      expect(useNormalizedCMSResults([input])).toMatchObject([output])
+      expect(normalizeCMSResults([input])).toMatchObject([output])
 
-      expect(useNormalizedCMSResults({ results: [input] })).toMatchObject([output])
+      expect(normalizeCMSResults({ results: [input] })).toMatchObject([output])
     })
 
     it('normalizes the data when it is NOT an array', () => {
-      expect(useNormalizedCMSResults(input)).toMatchObject(output)
+      expect(normalizeCMSResults(input)).toMatchObject(output)
     })
 
     it('normalizes the data when it is an array with links to other data', () => {
-      expect(useNormalizedCMSResults({ results: [{ ...input }], _links: [] })).toMatchObject({
+      expect(normalizeCMSResults({ results: [{ ...input }], _links: [] })).toMatchObject({
         data: [output],
         links: [],
       })

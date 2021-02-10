@@ -2,7 +2,7 @@
 import { LocationDescriptorObject } from 'history'
 import { useState } from 'react'
 import { To } from 'redux-first-router-link'
-import useNormalizedCMSResults from '../../normalizations/cms/useNormalizedCMSResults'
+import normalizeCMSResults from '../../normalizations/cms/normalizeCMSResults'
 import { CmsType, SpecialType } from '../../shared/config/cms.config'
 import { fetchWithToken } from '../../shared/services/api/api'
 import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
@@ -81,12 +81,12 @@ function useFromCMS<T = CMSResultItem[]>(
           // @ts-ignore
           field_blocks: result.field_blocks.map(({ field_content, ...otherFields }) => ({
             ...otherFields,
-            field_content: useNormalizedCMSResults(field_content),
+            field_content: normalizeCMSResults(field_content),
           })),
-          field_items: useNormalizedCMSResults(result.field_items),
+          field_items: normalizeCMSResults(result.field_items),
         }
       } else {
-        result = useNormalizedCMSResults(result)
+        result = normalizeCMSResults(result)
       }
       setResults(result)
     } catch (e) {

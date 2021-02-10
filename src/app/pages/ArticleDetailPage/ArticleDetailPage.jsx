@@ -26,9 +26,9 @@ import { useParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import environment from '../../../environment'
 import normalizeDownloadsObject from '../../../normalizations/cms/normalizeDownloadFiles'
-import useNormalizedCMSResults, {
+import normalizeCMSResults, {
   EDITORIAL_FIELD_TYPE_VALUES,
-} from '../../../normalizations/cms/useNormalizedCMSResults'
+} from '../../../normalizations/cms/normalizeCMSResults'
 import cmsConfig from '../../../shared/config/cms.config'
 import ContentContainer from '../../components/ContentContainer/ContentContainer'
 import EditorialPage from '../../components/EditorialPage/EditorialPage'
@@ -251,7 +251,7 @@ const ArticleDetailPage = () => {
                             <Divider />
                             <StyledEditorialResults
                               headingLevel="h2"
-                              results={useNormalizedCMSResults(related)}
+                              results={normalizeCMSResults(related)}
                               errors={[]}
                               title="Verder lezen"
                             />

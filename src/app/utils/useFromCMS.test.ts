@@ -1,18 +1,18 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { mocked } from 'ts-jest/utils'
-import useNormalizedCMSResults from '../../normalizations/cms/useNormalizedCMSResults'
+import normalizeCMSResults from '../../normalizations/cms/normalizeCMSResults'
 import { fetchWithToken } from '../../shared/services/api/api'
 import cmsJsonApiNormalizer from '../../shared/services/cms/cms-json-api-normalizer'
 import useFromCMS from './useFromCMS'
 
 jest.mock('../../shared/services/api/api')
 jest.mock('../../shared/services/cms/cms-json-api-normalizer')
-jest.mock('../../normalizations/cms/useNormalizedCMSResults')
+jest.mock('../../normalizations/cms/normalizeCMSResults')
 jest.useFakeTimers()
 
 const mockedFetchWithToken = mocked(fetchWithToken, true)
 const mockedCmsJsonApiNormalizer = mocked(cmsJsonApiNormalizer, true)
-const mockedUseNormalizedCMSResults = mocked(useNormalizedCMSResults, true)
+const mockedNormalizeCMSResults = mocked(normalizeCMSResults, true)
 
 describe('useFromCMS', () => {
   const id = '3'
@@ -24,7 +24,7 @@ describe('useFromCMS', () => {
   beforeEach(() => {
     mockedFetchWithToken.mockReturnValueOnce(Promise.resolve(mockData))
     mockedCmsJsonApiNormalizer.mockReturnValueOnce(Promise.resolve(mockData))
-    mockedUseNormalizedCMSResults.mockReturnValueOnce(mockData)
+    mockedNormalizeCMSResults.mockReturnValueOnce(mockData)
   })
 
   afterEach(() => {
@@ -60,7 +60,7 @@ describe('useFromCMS', () => {
     await waitForNextUpdate()
 
     // handle the normalization
-    expect(mockedUseNormalizedCMSResults).toHaveBeenCalled()
+    expect(mockedNormalizeCMSResults).toHaveBeenCalled()
 
     expect(result.current.loading).toBe(false)
     expect(result.current.results).toEqual(mockData)

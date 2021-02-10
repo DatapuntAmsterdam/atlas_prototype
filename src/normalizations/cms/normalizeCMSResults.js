@@ -160,7 +160,7 @@ export const normalizeObject = (data) => {
   }
 }
 
-const useNormalizedCMSResults = (data) => {
+const normalizeCMSResults = (data) => {
   // The data can be in the form of an array when used on the homepage or an overview page
   if (data.results || (data && data.length)) {
     const dataArray = data.results || data
@@ -178,4 +178,4 @@ const useNormalizedCMSResults = (data) => {
   return normalizeObject(data)
 }
 
-export default useNormalizedCMSResults
+export default normalizeCMSResults
