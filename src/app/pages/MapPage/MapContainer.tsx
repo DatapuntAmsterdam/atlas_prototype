@@ -50,7 +50,7 @@ const MapContainer: FunctionComponent = ({ children }) => {
   const [activeMapLayers] = useParam(mapLayersParam)
   const [polyline] = useParam(polylineParam)
   const [polygon] = useParam(polygonParam)
-  const showDrawContent = !!polyline && !!polygon
+  const showDrawContent = !!(polyline || polygon)
   const [showDrawTool, setShowDrawTool] = useState(showDrawContent)
   const [panoFullScreen, setPanoFullScreen] = useParam(panoFullScreenParam)
   const [isMobile] = hooks.useMatchMedia({ maxBreakpoint: 'tabletM' })

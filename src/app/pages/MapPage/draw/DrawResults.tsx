@@ -113,11 +113,11 @@ const StyledSelect = styled(Select)`
   }
 `
 
-type Props = {
+export interface DrawResultsProps {
   currentOverlay: Overlay
 }
 
-const DrawResults: FunctionComponent<Props> = ({ currentOverlay }) => {
+const DrawResults: FunctionComponent<DrawResultsProps> = ({ currentOverlay }) => {
   const [delayedLoadingIds, setDelayedLoadingIds] = useState<string[]>([])
   const [highlightMarker, setHighlightMarker] = useState<LatLngTuple | null>(null)
   const {

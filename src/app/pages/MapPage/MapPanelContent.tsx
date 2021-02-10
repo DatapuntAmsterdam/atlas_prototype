@@ -61,20 +61,10 @@ const MapPanelContent: FunctionComponent<MapPanelContentProps> = ({
           ]}
           exact
         >
-          <DrawResults
-            {...{
-              currentOverlay,
-            }}
-          />
+          <DrawResults currentOverlay={currentOverlay} />
         </Route>
       </Switch>
-      {showDrawContent && dataSelection.length && (
-        <DrawResults
-          {...{
-            currentOverlay,
-          }}
-        />
-      )}
+      {showDrawContent && dataSelection.length && <DrawResults currentOverlay={currentOverlay} />}
       <LegendPanel />
     </MapPanelOrDrawer>
   )
