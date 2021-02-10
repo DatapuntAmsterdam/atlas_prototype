@@ -69,7 +69,6 @@ const FeedbackModalComponent = ({
       </Paragraph>
       <Button
         as="a"
-        title="Onjuistheid terugmelden"
         variant="primary"
         onClick={reportFeedbackAction}
         href={getMailtoLink(
@@ -90,7 +89,6 @@ const FeedbackModalComponent = ({
       </Paragraph>
       <Button
         as="a"
-        title="Probleem melden"
         variant="primary"
         onClick={reportProblemAction}
         href={getMailtoLink(
@@ -111,7 +109,6 @@ const FeedbackModalComponent = ({
       </Paragraph>
       <Button
         as="a"
-        title="Probleem melden"
         variant="primary"
         href="https://formulier.amsterdam.nl/thema/datapunt/verzoek-nieuwe-data-functionaliteit/"
       >
