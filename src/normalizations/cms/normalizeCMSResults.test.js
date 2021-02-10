@@ -1,20 +1,130 @@
 import { toArticleDetail } from '../../app/links'
-import formatDate from '../../app/utils/formatDate'
-import toSlug from '../../app/utils/toSlug'
+import { toSpecialDetail } from '../../store/redux-first-router/actions'
 import { CmsType } from '../../shared/config/cms.config'
-import normalizeCMSResults from './normalizeCMSResults'
+import normalizeCMSResults, {
+  getLinkProps,
+  getLocaleFormattedDate,
+  normalizeObject,
+} from './normalizeCMSResults'
 
-jest.mock('../../app/utils/toSlug')
-jest.mock('../../app/utils/formatDate')
+jest.mock('../../app/links')
+jest.mock('../../store/redux-first-router/actions')
+
+toArticleDetail.mockImplementation(() => 'to-article')
+toSpecialDetail.mockImplementation(() => 'to-special')
 
 describe('normalizeCMSResults', () => {
-  const slug = 'this-is-a-slug'
-  const formattedDate = 'pretty date'
+  describe('getLocaleFormattedDate', () => {
+    /* eslint-disable camelcase */
+    it('returns an object with empty values', () => {
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate()
 
-  beforeEach(() => {
-    toSlug.mockImplementation(() => slug)
-    formatDate.mockImplementation(() => formattedDate)
+      expect(localeDate).toEqual('')
+      expect(localeDateFormatted).toEqual('')
+    })
+
+    it('returns an object with empty values from an empty options object', () => {
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate({})
+
+      expect(localeDate).toEqual('')
+      expect(localeDateFormatted).toEqual('')
+    })
+
+    it('returns an object with empty values when options do not contain a possible valid date', () => {
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
+        field_publication_year: 'foobar',
+      })
+
+      expect(localeDate).toEqual('')
+      expect(localeDateFormatted).toEqual('')
+    })
+
+    it('returns an object with dates from field_publication_date', () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_date = '2020-12-02T16:00:00+01:00'
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
+        field_publication_date,
+      })
+
+      expect(localeDate).toEqual(field_publication_date)
+      expect(localeDateFormatted).toEqual('2 december 2020')
+    })
+
+    it('returns an object with dates from field_publication_year', () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_year = '2020'
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
+        field_publication_year,
+      })
+
+      expect(localeDate).toEqual(new Date(Date.UTC(field_publication_year)))
+      expect(localeDateFormatted).toEqual(`1-1-${field_publication_year}`)
+    })
+
+    it('returns an object with dates from field_publication_year and field_publication_month', () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_year = '2020'
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_month = 12
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
+        field_publication_year,
+        field_publication_month,
+      })
+
+      expect(localeDate).toEqual(
+        new Date(Date.UTC(field_publication_year, field_publication_month - 1)),
+      )
+      expect(localeDateFormatted).toEqual(`1-${field_publication_month}-${field_publication_year}`)
+    })
+
+    it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day', () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_year = 2020
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_month = 10
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_day = 31
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
+        field_publication_year,
+        field_publication_month,
+        field_publication_day,
+      })
+
+      expect(localeDate).toEqual(
+        new Date(
+          Date.UTC(field_publication_year, field_publication_month - 1, field_publication_day),
+        ),
+      )
+      expect(localeDateFormatted).toEqual(
+        `${field_publication_day}-${field_publication_month}-${field_publication_year}`,
+      )
+    })
+
+    it('returns an object with dates from field_publication_year, field_publication_month and field_publication_day 1', () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_year = 2020
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_month = 1
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const field_publication_day = 1
+      const { localeDate, localeDateFormatted } = getLocaleFormattedDate({
+        field_publication_year,
+        field_publication_month,
+        field_publication_day,
+      })
+
+      expect(localeDate).toEqual(
+        new Date(
+          Date.UTC(field_publication_year, field_publication_month - 1, field_publication_day),
+        ),
+      )
+      expect(localeDateFormatted).toEqual(
+        `${field_publication_day}-${field_publication_month}-${field_publication_year}`,
+      )
+    })
+    /* eslint-enable camelcase */
   })
+
   const input = {
     uuid: 'id',
     title: 'title',
@@ -29,7 +139,7 @@ describe('normalizeCMSResults', () => {
     field_teaser: 'field_teaser',
     intro: 'intro',
     field_special_type: 'field_special_type',
-    field_publication_date: '2012-12-12',
+    field_publication_date: '',
   }
 
   const output = {
@@ -46,103 +156,146 @@ describe('normalizeCMSResults', () => {
     intro: input.intro,
     specialType: input.field_special_type,
     fileUrl: undefined,
-    localeDate: input.field_publication_date,
-    localeDateFormatted: formattedDate,
-    slug,
+    localeDate: '',
+    localeDateFormatted: '',
+    slug: input.title,
     to: {},
     related: [],
   }
 
-  it('should normalize the data to use in the application', () => {
-    expect(normalizeCMSResults(input)).toMatchObject(output)
-  })
-
-  it('should have a vertical image and file url for publications', () => {
-    expect(
-      normalizeCMSResults({
-        ...input,
-        type: CmsType.Publication,
-        field_file: { field_media_file: { uri: { url: 'url' } } },
-      }),
-    ).toMatchObject({
-      imageIsVertical: true,
-      fileUrl: 'url',
+  describe('getLinkProps', () => {
+    it('sets the "to" prop', () => {
+      expect(
+        getLinkProps(
+          {
+            ...input,
+            type: CmsType.Article,
+          },
+          input.title,
+        ),
+      ).toMatchObject({
+        to: 'to-article',
+      })
     })
-  })
 
-  it('should set the "to" prop', () => {
-    expect(
-      normalizeCMSResults({
-        ...input,
-        type: CmsType.Article,
-      }),
-    ).toMatchObject({
-      to: toArticleDetail(input.uuid, slug),
+    it('sets the "to" prop for type special', () => {
+      // eslint-disable-next-line camelcase,@typescript-eslint/naming-convention
+      const field_special_type = 'foo'
+      expect(
+        getLinkProps(
+          {
+            ...input,
+            type: CmsType.Special,
+            field_special_type,
+          },
+          input.title,
+        ),
+      ).toMatchObject({
+        to: 'to-special',
+      })
     })
-  })
 
-  it('should set the link props', () => {
-    const href = 'href'
-    expect(
-      normalizeCMSResults({
-        ...input,
-        field_link: {
-          uri: href,
+    it('sets the "linkProps" prop', () => {
+      const href = 'href'
+      expect(
+        getLinkProps(
+          {
+            ...input,
+            field_link: {
+              uri: href,
+            },
+          },
+          input.title,
+        ),
+      ).toMatchObject({
+        linkProps: {
+          forwardedAs: 'a',
+          href,
         },
-      }),
-    ).toMatchObject({
-      linkProps: {
-        forwardedAs: 'a',
-        href,
-      },
+      })
     })
   })
 
-  it('should set the "related" prop', () => {
-    const related = {
-      id: 'id',
-      teaserImage: 'teaserImage',
-      shortTitle: 'shortTitle',
-    }
-
-    expect(
-      normalizeCMSResults({
-        ...input,
-        field_related: [{ ...input, ...related }],
-      }),
-    ).toMatchObject({
-      related: [
-        {
-          ...output,
-          id: related.id,
-          intro: undefined,
-          key: related.id,
-          shortTitle: related.shortTitle,
-          teaserImage: related.teaserImage,
-        },
-      ],
+  describe('normalizeObject', () => {
+    it('normalizes the data to use in the application', () => {
+      expect(normalizeObject(input)).toMatchObject(output)
     })
-  })
 
-  it('should normalize the data when it`s an array', () => {
-    expect(normalizeCMSResults([input])).toMatchObject([output])
-
-    expect(normalizeCMSResults({ results: [input] })).toMatchObject([output])
-  })
-
-  it('should normalize the data when it`s an array with links to other data', () => {
-    expect(normalizeCMSResults({ results: [{ ...input }], _links: [] })).toMatchObject({
-      data: [output],
-      links: [],
+    it('has a vertical image and file url for publications', () => {
+      expect(
+        normalizeObject({
+          ...input,
+          type: CmsType.Publication,
+          field_file: { field_media_file: { uri: { url: 'url' } } },
+        }),
+      ).toMatchObject({
+        imageIsVertical: true,
+        fileUrl: 'url',
+      })
     })
-  })
 
-  it("should set the date if field_publication_date isn't set", () => {
-    const newInput = { ...input, field_publication_year: '2012', field_publication_month: '1' }
-    delete newInput.field_publication_date
-    expect(normalizeCMSResults({ results: [newInput], _links: [] })).toMatchObject({
-      data: [{ ...output, localeDate: new Date(Date.UTC(2012, 0, 1, 0, 0, 0)) }],
-      links: [],
+    it('sets the "related" prop', () => {
+      const related = {
+        id: 'id',
+        teaserImage: 'teaserImage',
+        shortTitle: 'shortTitle',
+      }
+
+      expect(
+        normalizeObject({
+          ...input,
+          field_related: [{ ...input, ...related }],
+        }),
+      ).toMatchObject({
+        related: [
+          {
+            ...output,
+            id: related.id,
+            intro: undefined,
+            key: related.id,
+            shortTitle: related.shortTitle,
+            teaserImage: related.teaserImage,
+          },
+        ],
+      })
+    })
+
+    it('sets the links prop', () => {
+      // eslint-disable-next-line camelcase,@typescript-eslint/naming-convention
+      const field_links = [
+        { uri: 'http://example.com?foo=bar&amp;baz=qux', title: 'Test', options: [] },
+        { uri: 'internal:/test/', title: 'Test 2', options: [] },
+        { uri: 'entity:node/8', title: 'Foo', options: [] },
+      ]
+      expect(
+        normalizeObject({
+          ...input,
+          field_links,
+        }),
+      ).toMatchObject({
+        links: [
+          { uri: 'http://example.com?foo=bar&baz=qux', title: 'Test', options: [] },
+          { uri: 'internal:/test/', title: 'Test 2', options: [] },
+          { uri: 'entity:node/8', title: 'Foo', options: [] },
+        ],
+      })
+    })
+
+    it('normalizes the data when it is an array', () => {
+      expect(normalizeCMSResults([input])).toMatchObject([output])
+
+      expect(normalizeCMSResults({ results: [input] })).toMatchObject([output])
+    })
+
+    it('normalizes the data when it is NOT an array', () => {
+      expect(normalizeCMSResults(input)).toMatchObject(output)
+    })
+
+    it('normalizes the data when it is an array with links to other data', () => {
+      expect(normalizeCMSResults({ results: [{ ...input }], _links: [] })).toMatchObject({
+        data: [output],
+        links: [],
+      })
     })
   })
 })
