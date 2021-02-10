@@ -22,10 +22,11 @@ const FEEDBACK_BODY = (location) => `Onjuistheid terugmelden voor de pagina: ${l
   documenten in de bijlage toe (bijvoorbeeld: een bouwtekening, koopakte, et cetera).
   `
 
-const PROBLEM_RECIPIENT = 'datapunt@amsterdam.nl'
-const PROBLEM_SUBJECT = 'Probleem melden of suggestie voor data.amsterdam.nl'
-const PROBLEM_BODY = (location) => `Probleem melden voor de pagina: ${location}\n
+const QUESTION_RECIPIENT = 'datapunt@amsterdam.nl'
+const QUESTION_SUBJECT = 'Probleem melden of suggestie voor data.amsterdam.nl'
+const QUESTION_BODY = (location) => `
   Beschrijf zo volledig mogelijk waar je tegenaan loopt:
+  - Om welke pagina gaat het? (bijvoorbeeld: ${location})
   - Om welk onderdeel van de pagina gaat het?
   - Wat zie je op het scherm als je een probleem ondervindt?
   - Heb je een suggestie hoe het anders zou kunnen?
@@ -62,7 +63,7 @@ const FeedbackModalComponent = ({
     </TopBar>
     <Divider />
     <ModalBlock>
-      <Heading as="h4">Onjuiste of ontbrekende gegevens?</Heading>
+      <Heading as="h4">Onjuistheid terugmelden</Heading>
       <Paragraph>
         We horen graag welke gegevens onjuist zijn of ontbreken. Voor medewerkers van de gemeente is
         dit &lsquo;terugmelden&lsquo; overigens verplicht.
@@ -82,26 +83,6 @@ const FeedbackModalComponent = ({
     </ModalBlock>
     <Divider gutter />
     <ModalBlock>
-      <Heading as="h4">Probleem of suggestie?</Heading>
-      <Paragraph>
-        Als iets op deze pagina niet goed werkt, onduidelijk is of vragen oproept, geef het aan ons
-        door.
-      </Paragraph>
-      <Button
-        as="a"
-        variant="primary"
-        onClick={reportProblemAction}
-        href={getMailtoLink(
-          PROBLEM_RECIPIENT,
-          PROBLEM_SUBJECT,
-          PROBLEM_BODY(typeof window !== 'undefined' ? window.location.href : ''),
-        )}
-      >
-        Probleem melden
-      </Button>
-    </ModalBlock>
-    <Divider gutter />
-    <ModalBlock>
       <Heading as="h4">Verzoek nieuwe data of functionaliteiten</Heading>
       <Paragraph>
         Heb je een verzoek voor bijvoorbeeld een nieuwe dataset, kaartlaag of een verbetering van de
@@ -113,6 +94,26 @@ const FeedbackModalComponent = ({
         href="https://formulier.amsterdam.nl/thema/datapunt/verzoek-nieuwe-data-functionaliteit/"
       >
         Nieuw verzoek
+      </Button>
+    </ModalBlock>
+    <Divider gutter />
+    <ModalBlock>
+      <Heading as="h4">Overige vragen</Heading>
+      <Paragraph>
+        Als iets op deze pagina niet goed werkt, onduidelijk is of vragen oproept, geef het aan ons
+        door.
+      </Paragraph>
+      <Button
+        as="a"
+        variant="primary"
+        onClick={reportProblemAction}
+        href={getMailtoLink(
+          QUESTION_RECIPIENT,
+          QUESTION_SUBJECT,
+          QUESTION_BODY(typeof window !== 'undefined' ? window.location.href : ''),
+        )}
+      >
+        Vraag indienen
       </Button>
     </ModalBlock>
     <Divider transparent />
